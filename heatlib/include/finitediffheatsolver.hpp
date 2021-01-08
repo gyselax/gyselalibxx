@@ -4,10 +4,13 @@
 #include <configuration.hpp>
 #include <timestep.hpp>
 
+/** An implementation of TimeStep that implement a heat equation solver through
+ * the finite difference method on a Cartesian grid.
+ */
 class FinitediffHeatSolver:
 	public TimeStep
 {
-	// The time-step to use
+	/// The time-step to use
 	double m_delta_t;
 
 public:

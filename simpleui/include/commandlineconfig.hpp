@@ -3,6 +3,9 @@
 // library headers
 #include <configuration.hpp>
 
+/** An implementation of Configuration that simply takes its parameter as a list
+ * of values on the command-line.
+ */
 class CommandLineConfig:
 		public Configuration
 {

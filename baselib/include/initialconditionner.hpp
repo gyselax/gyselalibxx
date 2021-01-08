@@ -3,6 +3,8 @@
 // local headers
 #include "distributed2dfield.hpp"
 
+/** An interface to set the initial and boundary conditions of the simulation
+ */
 class InitialConditionner
 {
 public:

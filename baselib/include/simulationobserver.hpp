@@ -3,6 +3,8 @@
 // local headers
 #include "distributed2dfield.hpp"
 
+/** An interface for any class interested in observing a Simulation.
+ */
 class SimulationObserver
 {
 public:

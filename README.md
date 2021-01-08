@@ -18,6 +18,9 @@ The sub-libraries are:
 * `simpleui`: a very simplistic user-interface taking all parameters from the
   command-line and printing the result on the console.
 
+Online documentation is available at
+[https://jbigot.github.io/Projet-GLCS-2020-2021/](https://jbigot.github.io/Projet-GLCS-2020-2021/).
+  
 ## Usage
 
 Compilation:

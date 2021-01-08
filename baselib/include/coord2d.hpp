@@ -1,5 +1,8 @@
 #pragma once
 
+// standard C++ library headers
+#include <array>
+
 /// The dimension identifiers
 enum Dimension2D : int { DY = 0, DX = 1 };
 

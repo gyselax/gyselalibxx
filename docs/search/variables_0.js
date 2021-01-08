@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['m_5fcomm_112',['m_comm',['../classCartesianDistribution2D.html#a243ec91481c67232d825204c5766f699',1,'CartesianDistribution2D::m_comm()'],['../classSimulation.html#add504848203ca01904ebd8e058817e44',1,'Simulation::m_comm()']]],
+  ['m_5fconfig_113',['m_config',['../classSimulation.html#a15ed85c3504fae3aac4ae9e670aa7261',1,'Simulation']]],
+  ['m_5fdata_114',['m_data',['../classDistributed2DField.html#ae88f31f1e245af2aa4a3ff7ccb654d5c',1,'Distributed2DField']]],
+  ['m_5fdelta_5fspace_115',['m_delta_space',['../classDistributed2DField.html#a3a770a91c3ab53d4ac0cee31935dff4a',1,'Distributed2DField::m_delta_space()'],['../classCommandLineConfig.html#a2a8b52b634ce71dbdf6e7a7f9d806ce1',1,'CommandLineConfig::m_delta_space()']]],
+  ['m_5fdelta_5ft_116',['m_delta_t',['../classFinitediffHeatSolver.html#a4bd95f5e06fd7791c1277b79f7da7a44',1,'FinitediffHeatSolver::m_delta_t()'],['../classCommandLineConfig.html#aea0d70e045e1326350f085e8f1155269',1,'CommandLineConfig::m_delta_t()']]],
+  ['m_5fdist_5fextents_117',['m_dist_extents',['../classCommandLineConfig.html#a293105e51b665c2587fad684391368f5',1,'CommandLineConfig']]],
+  ['m_5fdistribution_118',['m_distribution',['../classDistributed2DField.html#af8829ab06074d070c77aa450d81bb3ca',1,'Distributed2DField']]],
+  ['m_5ffull_5fview_119',['m_full_view',['../classDistributed2DField.html#af85a80010400a2b9115d19549aa1ad17',1,'Distributed2DField']]],
+  ['m_5fghost_5fcol_120',['m_ghost_col',['../classDistributed2DField.html#a3dc647f29a893198ddb231924d8fb6bb',1,'Distributed2DField']]],
+  ['m_5fghost_5frow_121',['m_ghost_row',['../classDistributed2DField.html#a3c9e23105052cb97366cc7d9fa5d6d86',1,'Distributed2DField']]],
+  ['m_5fghost_5fviews_122',['m_ghost_views',['../classDistributed2DField.html#ac16e2a210b08d767823eaec15ac1e50e',1,'Distributed2DField']]],
+  ['m_5fglobal_5fshape_123',['m_global_shape',['../classCommandLineConfig.html#a4cf1969a4d115a3303e96e91685d8779',1,'CommandLineConfig']]],
+  ['m_5finit_124',['m_init',['../classSimulation.html#a44d87f27ab519ea1f1236321e84c1f89',1,'Simulation']]],
+  ['m_5fnb_5fiter_125',['m_nb_iter',['../classCommandLineConfig.html#af6e9bb2f5b099ecac328fe737c7d0b1a',1,'CommandLineConfig']]],
+  ['m_5fnoghost_5fview_126',['m_noghost_view',['../classDistributed2DField.html#ae82da0a6eef535a3eb0b5b08ba427713',1,'Distributed2DField']]],
+  ['m_5fobservers_127',['m_observers',['../classSimulation.html#a79b8b3da6b3879a32eef075169c13083',1,'Simulation']]],
+  ['m_5ftime_128',['m_time',['../classDistributed2DField.html#a9087ec9779af8e38d01dd1828439037f',1,'Distributed2DField']]],
+  ['m_5ftime_5fstep_129',['m_time_step',['../classSimulation.html#a5d66b9b3a881ff043cfc78fc501201b1',1,'Simulation']]]
+];

@@ -10,6 +10,17 @@
 #include "simulationobserver.hpp"
 #include "timestep.hpp"
 
+/** The main simulation class that implements time-stepping.
+ * 
+ * The simulation is executed with the run() function.
+ * The class relies on external services to provide most of its behaviour.
+ * A Configuration instance provide the user-specified parameters, a 
+ * InitialConditionner instance provides the initial and boundary conditions
+ * while a TimeStep instance implements the operator to apply at each time-step.
+ * 
+ * The simulation is observable by SimulationObserver instances thanks to the
+ * observe() and unobserve() functions.
+ */
 class Simulation
 {
 private:

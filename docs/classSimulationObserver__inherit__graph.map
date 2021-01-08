@@ -1,0 +1,4 @@
+<map id="SimulationObserver" name="SimulationObserver">
+<area shape="rect" id="node1" title="An interface for any class interested in observing a Simulation." alt="" coords="5,5,141,32"/>
+<area shape="rect" id="node2" href="$classScreenPrinter.html" title="An implementation of SimulationObserver that prints the simulation data to screen." alt="" coords="23,80,124,107"/>
+</map>

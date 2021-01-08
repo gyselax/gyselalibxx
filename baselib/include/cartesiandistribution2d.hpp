@@ -6,6 +6,20 @@
 // local headers
 #include "coord2d.hpp"
 
+/** Description of a 2D Cartesian data distribution.
+ * 
+ * A CartesianDistribution2D represents the organization of a set of processes
+ * on a Cartesian grid. Each process has a coordinate in this grid that can be
+ * accessed with the coord() function. The total number of process in each
+ * dimension is provided by the extents() function.
+ * 
+ * The underlying MPI communicator is provided by the communicator() function
+ * and its size as well as the rank of the local process are available through
+ * the size() and rank() functions.
+ * 
+ * The rank of the neighbouring processes can be accessed with the
+ * neighbour_rank() function.
+ */
 class CartesianDistribution2D
 {
 	/// the number of dimensions of this distribution
@@ -54,6 +68,7 @@ public:
 	MPI_Comm communicator() { return m_comm; }
 
 	/** Accesses the rank of the neighbour process in a given direction
+	 * @param direction the direction of the neighbour
 	 * @return the rank of the neighbour process in a given direction
 	 */
 	int neighbour_rank( Direction2D direction );

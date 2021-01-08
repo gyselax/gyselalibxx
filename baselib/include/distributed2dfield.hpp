@@ -14,6 +14,28 @@
 #include "coord2d.hpp"
 #include "cartesiandistribution2d.hpp"
 
+/** A 2D field of double distributed over a Cartesian grid.
+ * 
+ * A Distributed2DField represents a 2D field of double distributed in blocks
+ * over a Cartesian grid described by the CartesianDistribution2D exposed by
+ * the distribution() function.
+ * Each local block features ghost zones that can be synchronized using the
+ * sync_ghosts() function.
+ * 
+ * The field offer multiple "view":
+ * - full_view() is a coordinate system that includes the ghosts, the point at
+ *   coordinate (0,0) is in the bottom left of the ghost corner and the
+ *   View::extents() includes all ghosts,
+ * - noghost_view() is a coordinate system that excludes the ghosts, the point
+ *   at coordinate (0,0) is in the bottom left corner of the local block and the
+ *   View::extents() excludes all ghosts,
+ * - ghost_view() offers a view inside each of the ghost: LEFT, RIGHT, UP and
+ *   DOWN.
+ * 
+ * The distance between two grid points can be accessed through the delta()
+ * function and the time-coordinate of the field can be set and accessed using
+ * the time() function.
+ */
 class Distributed2DField
 {
 public:
@@ -35,13 +57,16 @@ private:
 	/// The coordinate in the time dimension for this data
 	double m_time;
 
-	/// The distance between 2 grid points in m
+	/// The distance between 2 grid points in metre
 	std::array<double, 2> m_delta_space;
 
+	/// The view of the data including ghosts
 	View m_full_view;
 
+	/// The view of the data excluding ghosts
 	View m_noghost_view;
 
+	/// The views of the data in each of the ghosts
 	std::array<View, 4> m_ghost_views;
 
 	/// the MPI types to send/receive a column of ghost
@@ -51,7 +76,7 @@ private:
 	MPI_Datatype m_ghost_row;
 
 public:
-	/** Constructs a new DistributedArray
+	/** Constructs a new Distributed2DField
 	 * @param comm the MPI communicator over which the array will be distributed
 	 * @param dist_shape the shape of the array distribution, i.e. the number of processes in each dimension
 	 * @pre dist_shape[Dim::Y] * dist_shape[Dim::Y] must be equal to MPI_Comm_size(comm)
@@ -59,28 +84,36 @@ public:
 	 * @pre shape[Dim::Y] must be a multiple of dist[Dim::Y]
 	 * @pre shape[Dim::X] must be a multiple of dist[Dim::X]
 	 * @param ghost_sizes the size of the ghosts in each dimension
+	 * @param delta_space the distance between 2 grid points in metre
 	 */
 	Distributed2DField( MPI_Comm comm, Shape2D dist_shape, Shape2D global_shape, Shape2D ghost_sizes, std::array<double, 2> delta_space );
 
-	/** Constructs a new DistributedArray by copy
+	/** Constructs a new Distributed2DField by copy
+	 * @param other the Distributed2DField to copy
 	 */
-	Distributed2DField( const Distributed2DField& ) = default;
+	Distributed2DField( const Distributed2DField& other ) = default;
 
-	/** Constructs a new DistributedArray by move
+	/** Constructs a new Distributed2DField by move
+	 * @param other the Distributed2DField to move
 	 */
-	Distributed2DField( Distributed2DField&& ) = default;
+	Distributed2DField( Distributed2DField&& other ) = default;
 
 	/** Copy-assigns a new value to this field
+	 * @param other the Distributed2DField to copy
+	 * @return *this
 	 */
-	Distributed2DField& operator=( const Distributed2DField& ) = default;
+	Distributed2DField& operator=( const Distributed2DField& other ) = default;
 
 	/** Move-assigns a new value to this field
+	 * @param other the Distributed2DField to move
+	 * @return *this
 	 */
-	Distributed2DField& operator=( Distributed2DField&& ) = default;
+	Distributed2DField& operator=( Distributed2DField&& other ) = default;
 
 	/** Swaps this field with another
+	 * @param other the Distributed2DField to swap with this one
 	 */
-	void swap( Distributed2DField& );
+	void swap( Distributed2DField& other );
 
 	/** Provide a modifiable view of the data including ghosts
 	 * @return a modifiable view of the data including ghosts
@@ -144,12 +177,16 @@ public:
 
 	/** Accesses a modifiable view of a ghost
 	 * @param id the identifier of the ghost to view
+	 * @param yy the coordinate in Dim Y
+	 * @param xx the coordinate in Dim X
 	 * @return a modifiable view of a ghost
 	 */
 	double& ghost_view( Direction2D id, int yy, int xx ) { return ghost_view( id )( yy, xx ); }
 
 	/** Accesses a constant view of a ghost
 	 * @param id the identifier of the ghost to view
+	 * @param yy the coordinate in Dim Y
+	 * @param xx the coordinate in Dim X
 	 * @return a constant view of a ghost
 	 */
 	double ghost_view( Direction2D id, int yy, int xx ) const { return ghost_view( id )( yy, xx ); }

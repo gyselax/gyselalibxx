@@ -3,6 +3,10 @@
 // local headers
 #include "distributed2dfield.hpp"
 
+/** An interface providing access to the user-defined configuration.
+ * 
+ * Each configuration option is accessible through its own member function.
+ */
 class Configuration
 {
 public:

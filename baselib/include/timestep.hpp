@@ -3,6 +3,9 @@
 // local headers
 #include "distributed2dfield.hpp"
 
+/** An interface for a class that implements the operator applied at each and
+ * every time-step of the Simulation.
+ */
 class TimeStep
 {
 public:
