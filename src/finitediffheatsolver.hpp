@@ -20,7 +20,7 @@ public:
 	FinitediffHeatSolver( const Configuration& config );
 
 	// see overridden function
-	void iter( const Distributed2DField& cur, Distributed2DField& next ) const override;
+	void operator() ( const Data2D& cur, Data2D& next ) const;
 
 	// see overridden function
 	Shape2D required_ghosts() const override { return {1, 1}; }

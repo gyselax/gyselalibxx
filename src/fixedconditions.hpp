@@ -13,6 +13,6 @@ class FixedConditions:
 	public InitialConditionner
 {
 	// see overridden function
-	virtual void initial_condition( Distributed2DField& data ) const override;
+	virtual void initial_condition( Data2D& data ) const override;
 
 };

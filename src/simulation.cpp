@@ -12,10 +12,10 @@ Simulation::Simulation( MPI_Comm comm, const Configuration& config, const TimeSt
 void Simulation::run() const
 {
 	// allocate data for the current iteration
-	Distributed2DField current( m_comm, m_config.dist_extents(), m_config.global_shape(), m_time_step.required_ghosts(), m_config.delta_space() );
+	Data2D current( m_comm, m_config.dist_extents(), m_config.global_shape(), m_time_step.required_ghosts(), m_config.delta_space() );
 
 	// allocate data for the next iteration
-	Distributed2DField next( m_comm, m_config.dist_extents(), m_config.global_shape(), m_time_step.required_ghosts(), m_config.delta_space() );
+	Data2D next( m_comm, m_config.dist_extents(), m_config.global_shape(), m_time_step.required_ghosts(), m_config.delta_space() );
 
 	// initialize data at t=0
 	m_init.initial_condition( current );

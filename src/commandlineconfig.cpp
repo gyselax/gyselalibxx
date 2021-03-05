@@ -18,11 +18,11 @@ CommandLineConfig::CommandLineConfig( const int argc, const char* const argv[] )
 	}
 
 	m_nb_iter = stoi(argv[1]);
-	m_global_shape[DY] = stoi(argv[2]);
+	m_global_shape[DVX] = stoi(argv[2]);
 	m_global_shape[DX] = stoi(argv[3]);
-	m_dist_extents[DY] = stoi(argv[4]);
+	m_dist_extents[DVX] = stoi(argv[4]);
 	m_dist_extents[DX] = stoi(argv[5]);
 	m_delta_t = stod(argv[6]);
-	m_delta_space[DY] = stod(argv[7]);
+	m_delta_space[DVX] = stod(argv[7]);
 	m_delta_space[DX] = stod(argv[8]);
 }
