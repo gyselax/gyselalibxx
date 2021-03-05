@@ -1,4 +1,0 @@
-<map id="InitialConditionner" name="InitialConditionner">
-<area shape="rect" id="node1" title="An interface to set the initial and boundary conditions of the simulation." alt="" coords="5,5,132,32"/>
-<area shape="rect" id="node2" href="$classFixedConditions.html" title="An implementation of InitialConditionner that simply sets predefined initial and Dirichlet boundary c..." alt="" coords="11,80,127,107"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="Configuration" name="Configuration">
-<area shape="rect" id="node1" title="An interface providing access to the user&#45;defined configuration." alt="" coords="28,5,127,32"/>
-<area shape="rect" id="node2" href="$classCommandLineConfig.html" title="An implementation of Configuration that simply takes its parameter as a list of values on the command..." alt="" coords="5,80,149,107"/>
-</map>

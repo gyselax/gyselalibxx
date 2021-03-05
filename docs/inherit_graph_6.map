@@ -1,4 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classTimeStep.html" title="An interface for a class that implements the operator applied at each and every time&#45;step of the Simu..." alt="" coords="5,5,84,32"/>
-<area shape="rect" id="node2" href="$classFinitediffHeatSolver.html" title="An implementation of TimeStep that implement a heat equation solver through the finite difference met..." alt="" coords="132,5,269,32"/>
-</map>
