@@ -50,4 +50,5 @@ void DataND<N>::swap( DataND& other )
 	*this = std::move( tmp );
 }
 
+template class DataND<1>;
 template class DataND<2>;

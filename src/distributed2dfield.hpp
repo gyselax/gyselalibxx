@@ -111,7 +111,7 @@ public:
 	/** Access the distance between consecutive points in metre
 	 * @return the distance between consecutive points in metre
 	 */
-	std::array<double, 2> delta_space() const { return m_delta_space; }
+	std::array<double, N> delta_space() const { return m_delta_space; }
 
 	/** Access the distance between consecutive points in metre in a given dimension
 	 * @param dim the dimension to consider
@@ -126,4 +126,5 @@ public:
 
 };
 
+extern template class DataND<1>;
 extern template class DataND<2>;
