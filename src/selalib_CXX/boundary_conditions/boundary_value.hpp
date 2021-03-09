@@ -1,7 +1,6 @@
 #pragma once
 
-class BoundaryValue
-{
-    public:
-        virtual double operator()(double x) const = 0;
+class BoundaryValue {
+public:
+    virtual double operator()(double x) const = 0;
 };

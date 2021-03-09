@@ -4,27 +4,26 @@
 #include <tuple>
 
 template <class T, class D>
-class Size
-{
+class Size {
     T m_value;
 
 public:
-    inline Size(T value): m_value(value) {}
+    inline Size(T value)
+        : m_value(value)
+    {
+    }
 
-    inline Size& operator= (T value) {
+    inline Size& operator=(T value)
+    {
         m_value = value;
         return *this;
     }
 
-    inline operator T() const {
-        return m_value;
-    }
-
+    inline operator T() const { return m_value; }
 };
 
-template<class T, class D>
-class Coordinate
-{
+template <class T, class D>
+class Coordinate {
 public:
     using Diff = T;
 
@@ -32,23 +31,23 @@ private:
     Diff m_value;
 
 public:
-    inline Coordinate(Diff value): m_value(value) {}
+    inline Coordinate(Diff value)
+        : m_value(value)
+    {
+    }
 
-    inline Coordinate& operator= (Diff value) {
+    inline Coordinate& operator=(Diff value)
+    {
         m_value = value;
         return *this;
     }
 
-    inline operator Diff() const {
-        return m_value;
-    }
-
+    inline operator Diff() const { return m_value; }
 };
 
-template<class C>
+template <class C>
 /// A semi-open interval [lbound, ubound)
-class Interval
-{
+class Interval {
 public:
     using Coordinate = C;
 
@@ -58,50 +57,47 @@ private:
     std::array<Coordinate, 2> m_bounds;
 
 public:
-    inline Interval(std::array<Coordinate, 2> value): m_bounds(value) {}
+    inline Interval(std::array<Coordinate, 2> value)
+        : m_bounds(value)
+    {
+    }
 
-    inline Interval(Coordinate lbound, Coordinate ubound): m_bounds{lbound, ubound} {}
+    inline Interval(Coordinate lbound, Coordinate ubound)
+        : m_bounds { lbound, ubound }
+    {
+    }
 
-    inline Interval& operator= (std::array<Coordinate, 2> value) {
+    inline Interval& operator=(std::array<Coordinate, 2> value)
+    {
         m_bounds = value;
         return *this;
     }
 
-    inline operator std::array<Coordinate, 2>() const {
-        return m_bounds;
-    }
+    inline operator std::array<Coordinate, 2>() const { return m_bounds; }
 
-    inline Coordinate lbound() const {
-        return m_bounds[0];
-    }
+    inline Coordinate lbound() const { return m_bounds[0]; }
 
-    inline Interval& lbound(Coordinate lb) {
+    inline Interval& lbound(Coordinate lb)
+    {
         m_bounds[0] = lb;
         return *this;
     }
 
-    inline Coordinate ubound() const {
-        return m_bounds[1];
-    }
+    inline Coordinate ubound() const { return m_bounds[1]; }
 
-    inline Interval& ubound(Coordinate ub) {
+    inline Interval& ubound(Coordinate ub)
+    {
         m_bounds[1] = ub;
         return *this;
     }
 
-    inline Diff size() const {
-        return m_bounds[1];
-    }
+    inline Diff size() const { return m_bounds[1]; }
 
-    inline Diff& size() {
-        return m_bounds[1];
-    }
-
+    inline Diff& size() { return m_bounds[1]; }
 };
 
-template<class... D>
-class RealDomain
-{
+template <class... D>
+class RealDomain {
 public:
     using Diff = std::tuple<Size<double, D>...>;
 
@@ -121,12 +117,10 @@ private:
     Diff m_size;
 
 public:
-
 };
 
-template<class... D>
-class DiscreteDomain
-{
+template <class... D>
+class DiscreteDomain {
 public:
     using RealDomain = RealDomain<D...>;
 
@@ -144,19 +138,21 @@ private:
     static std::array<double, sizeof...(D)> s_step;
 
 public:
-
 };
 
-template<class RD>
+template <class RD>
 struct RealDomainToDiscrete;
 
-template<class ...D>
-struct RealDomainToDiscrete<RealDomain<D...>> { using type = DiscreteDomain<D...>; };
+template <class... D>
+struct RealDomainToDiscrete<RealDomain<D...>> {
+    using type = DiscreteDomain<D...>;
+};
 
+class DX {
+};
 
-class DX {};
-
-class DVX {};
+class DVX {
+};
 
 using RealPhaseDomain = RealDomain<DX, DVX>;
 

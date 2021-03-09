@@ -1,25 +1,26 @@
 #include <mpi.h>
 
-#include "distributedfield.hpp"
 #include "advection1d.hpp"
 #include "bsplines_uniform.h"
+#include "distributedfield.hpp"
 #include "spline_interpolator_1d.h"
 
-int main( int argc, char* argv[] )
+int main(int argc, char* argv[])
 {
-	// initialize the MPI library
-	MPI_Init( &argc, &argv );
+    // initialize the MPI library
+    MPI_Init(&argc, &argv);
 
-	   FieldND<2> f2d({1,1}, MPI_COMM_WORLD, Dimension::DX, {1.,1.});
+    FieldND<2> f2d({ 1, 1 }, MPI_COMM_WORLD, Dimension::DX, { 1., 1. });
 
-	   FieldND<1> ex({1}, MPI_COMM_WORLD, Dimension::DX, {1.});
+    FieldND<1> ex({ 1 }, MPI_COMM_WORLD, Dimension::DX, { 1. });
 
     int degree(3);
     bool periodic(false);
     double xmin(0.0), xmax(1.0);
     int ncells(10);
     BSplines_uniform bspl(degree, periodic, xmin, xmax, ncells);
-    Spline_interpolator_1D spl_interp(bspl, BoundaryCondition::sll_p_greville, BoundaryCondition::sll_p_greville);
+    Spline_interpolator_1D spl_interp(
+        bspl, BoundaryCondition::sll_p_greville, BoundaryCondition::sll_p_greville);
 
     NullBoundaryValue bv;
 
@@ -27,8 +28,8 @@ int main( int argc, char* argv[] )
 
     Advection1D adv(bspl, spl_interp, dt, bv, bv);
 
-	// finalize MPI
-	MPI_Finalize();
+    // finalize MPI
+    MPI_Finalize();
 
-	return 0;
+    return 0;
 }
