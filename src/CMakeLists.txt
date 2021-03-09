@@ -4,7 +4,7 @@ add_subdirectory(selalib_CXX)
 
 add_executable(voicexx
 	advection1d.cpp
-	distributed2dfield.cpp
+	distributedfield.cpp
 	simpleheat.cpp
 )
 target_include_directories(voicexx PRIVATE

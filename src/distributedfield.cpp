@@ -1,7 +1,7 @@
 #include <cassert>
 
 // the implemented class (last)
-#include "distributed2dfield.hpp"
+#include "distributedfield.hpp"
 
 using std::array;
 using std::move;
@@ -14,7 +14,7 @@ using std::experimental::mdspan;
 using std::experimental::subspan;
 
 template<int N>
-DataND<N>::DataND ( Shape<N> global_shape, MPI_Comm comm, Dimension distributed_dim, std::array<double, N> delta )
+FieldND<N>::FieldND ( Shape<N> global_shape, MPI_Comm comm, Dimension distributed_dim, std::array<double, N> delta )
 	: m_distribution( comm )
 	, m_distributed_dim(distributed_dim)
 	, m_raw_data( 0 )
@@ -43,12 +43,12 @@ DataND<N>::DataND ( Shape<N> global_shape, MPI_Comm comm, Dimension distributed_
 }
 
 template<int N>
-void DataND<N>::swap( DataND& other )
+void FieldND<N>::swap( FieldND& other )
 {
-	DataND<N> tmp = std::move( other );
+	   FieldND<N> tmp = std::move( other );
 	other = std::move( *this );
 	*this = std::move( tmp );
 }
 
-template class DataND<1>;
-template class DataND<2>;
+template class FieldND<1>;
+template class FieldND<2>;

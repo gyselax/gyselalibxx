@@ -16,7 +16,7 @@ public:
 	* @param cur  the current value (t) of the local data block
 	* @param next the next value (t+delta_t) of the local data block
 	*/
-	virtual void iter( const Data2D& cur, Data2D& next ) const = 0;
+	virtual void operator()( const Data2D& cur, Data2D& next ) const = 0;
 	
 	/** Access the required ghost size to support this solver (size of the stencil)
 	 * @return the required ghost size to support this solver (size of the stencil)
@@ -24,3 +24,4 @@ public:
 	virtual Shape2D required_ghosts() const = 0;
 	
 };
+

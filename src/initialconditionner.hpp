@@ -1,7 +1,7 @@
 #pragma once
 
 // local headers
-#include "distributed2dfield.hpp"
+#include "distributedfield.hpp"
 
 /** An interface to set the initial and boundary conditions of the simulation
  */

@@ -14,7 +14,7 @@
 #include "coord2d.hpp"
 
 template < int N >
-class DataND
+class FieldND
 {
 public:
 	/// A type for a 2D view of the memory
@@ -45,34 +45,34 @@ private:
 	View m_data;
 
 public:
-	DataND ( Shape<N> global_shape, MPI_Comm comm, Dimension distributed_dim, std::array<double, N> delta );
+	FieldND ( Shape<N> global_shape, MPI_Comm comm, Dimension distributed_dim, std::array<double, N> delta );
 
 	/** Constructs a new Distributed2DField by copy
 	 * @param other the Distributed2DField to copy
 	 */
-	DataND ( const DataND& other ) = default;
+	FieldND ( const FieldND& other ) = default;
 
 	/** Constructs a new Distributed2DField by move
 	 * @param other the Distributed2DField to move
 	 */
-	DataND ( DataND&& other ) = default;
+	FieldND ( FieldND&& other ) = default;
 
 	/** Copy-assigns a new value to this field
 	 * @param other the Distributed2DField to copy
 	 * @return *this
 	 */
-	DataND& operator=( const DataND& other ) = default;
+	   FieldND& operator=( const FieldND& other ) = default;
 
 	/** Move-assigns a new value to this field
 	 * @param other the Distributed2DField to move
 	 * @return *this
 	 */
-	DataND& operator=( DataND&& other ) = default;
+	   FieldND& operator=( FieldND&& other ) = default;
 
 	/** Swaps this field with another
 	 * @param other the Distributed2DField to swap with this one
 	 */
-	void swap( DataND& other );
+	void swap( FieldND& other );
 
 	/** Provide a modifiable view of the data including ghosts
 	 * @return a modifiable view of the data including ghosts
@@ -126,5 +126,7 @@ public:
 
 };
 
-extern template class DataND<1>;
-extern template class DataND<2>;
+extern template class FieldND<1>;
+using Field1D = FieldND<1>;
+extern template class FieldND<2>;
+using Field2D = FieldND<2>;
