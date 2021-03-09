@@ -19,7 +19,7 @@ int main( int argc, char* argv[] )
     double xmin(0.0), xmax(1.0);
     int ncells(10);
     BSplines_uniform bspl(degree, periodic, xmin, xmax, ncells);
-    Spline_interpolator_1D spl_interp(&bspl, BoundaryCondition::sll_p_greville, BoundaryCondition::sll_p_greville);
+    Spline_interpolator_1D spl_interp(bspl, BoundaryCondition::sll_p_greville, BoundaryCondition::sll_p_greville);
 
     double dt(0.1);
 

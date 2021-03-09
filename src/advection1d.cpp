@@ -25,7 +25,7 @@ void Advection1D::step(View& current_values, View&& velocity) const
     std::vector<double> new_points_ptr(x.extent(0));
     View new_points(new_points_ptr.data(), x.extent(0));
 
-    Spline_1D spline(&m_bspl);
+    Spline_1D spline(m_bspl);
     m_spline_interpolator.compute_interpolant(spline, current_values);
 
     double xmin = m_bspl.xmin;
