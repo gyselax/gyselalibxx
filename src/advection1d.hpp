@@ -11,19 +11,16 @@ using View = std::experimental::basic_mdspan<
 class Advection1D {
 public:
     Advection1D(const BSplines& bspl,
-        const Spline_interpolator_1D& spl_interp,
-        double dt);
+        const Spline_interpolator_1D& spl_interp);
     Advection1D(const BSplines& bspl,
         const Spline_interpolator_1D& spl_interp,
-        double dt,
         const BoundaryValue& bc_left,
         const BoundaryValue& bc_right);
-    void operator()(View& current_values, View&& velocity) const;
+    void operator()(View& current_values, View&& velocity, double dt) const;
 
 private:
     const BSplines& m_bspl;
     const Spline_interpolator_1D& m_spline_interpolator;
-    double dt;
     const BoundaryValue& m_bc_left;
     const BoundaryValue& m_bc_right;
 };

@@ -9,8 +9,8 @@
 class Spline_1D {
 public:
     Spline_1D(const BSplines& bspl,
-        const BoundaryValue& left_bc = NullBoundaryValue(),
-        const BoundaryValue& right_bc = NullBoundaryValue());
+        const BoundaryValue& left_bc = NullBoundaryValue::value,
+        const BoundaryValue& right_bc = NullBoundaryValue::value);
     ~Spline_1D() = default;
     bool belongs_to_space(const BSplines& bspline) const;
     double eval(double x) const;

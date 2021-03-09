@@ -22,11 +22,11 @@ int main(int argc, char* argv[])
     Spline_interpolator_1D spl_interp(
         bspl, BoundaryCondition::sll_p_greville, BoundaryCondition::sll_p_greville);
 
-    NullBoundaryValue bv;
+    NullBoundaryValue& bv = NullBoundaryValue::value;
 
     double dt(0.1);
 
-    Advection1D adv(bspl, spl_interp, dt, bv, bv);
+    Advection1D adv(bspl, spl_interp, bv, bv);
 
     // finalize MPI
     MPI_Finalize();

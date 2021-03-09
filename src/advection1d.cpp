@@ -6,31 +6,27 @@
 #include "selalib_CXX/splines/spline_1d.h"
 
 Advection1D::Advection1D(const BSplines& bspl,
-    const Spline_interpolator_1D& spl_interp,
-    double dt)
+    const Spline_interpolator_1D& spl_interp)
     : m_bspl(bspl)
     , m_spline_interpolator(spl_interp)
-    , dt(dt)
-    , m_bc_left(NullBoundaryValue())
-    , m_bc_right(NullBoundaryValue())
+    , m_bc_left(NullBoundaryValue::value)
+    , m_bc_right(NullBoundaryValue::value)
 {
     assert(bspl.periodic);
 }
 
 Advection1D::Advection1D(const BSplines& bspl,
     const Spline_interpolator_1D& spl_interp,
-    double dt,
     const BoundaryValue& bc_left,
     const BoundaryValue& bc_right)
     : m_bspl(bspl)
     , m_spline_interpolator(spl_interp)
-    , dt(dt)
     , m_bc_left(bc_left)
     , m_bc_right(bc_right)
 {
 }
 
-void Advection1D::operator()(View& current_values, View&& velocity) const
+void Advection1D::operator()(View& current_values, View&& velocity, double dt) const
 {
     View x = m_spline_interpolator.get_interp_points();
     assert(current_values.extent(0) == x.extent(0));

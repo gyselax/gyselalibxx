@@ -13,5 +13,6 @@ target_include_directories(voicexx PRIVATE
 target_link_libraries(voicexx PRIVATE
 		MPI::MPI_CXX
 		std::mdspan
-		cxx_splines
+		selalib::cxx_splines
+		selalib::boundary_conditions
 )

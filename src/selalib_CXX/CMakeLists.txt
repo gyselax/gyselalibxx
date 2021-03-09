@@ -1,8 +1,4 @@
-ADD_SUBDIRECTORY( matrix )
-ADD_SUBDIRECTORY( splines )
-
-# Parallelization tools
-IF( MPI_ENABLED )
-   SET(CMAKE_Fortran_COMPILER ${MPI_Fortran_COMPILER})
-   #   ADD_SUBDIRECTORY( parallelization )
-ENDIF( MPI_ENABLED )
+add_subdirectory(boundary_conditions)
+add_subdirectory(math_tools/)
+add_subdirectory( matrix )
+add_subdirectory( splines )

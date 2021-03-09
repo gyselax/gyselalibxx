@@ -23,15 +23,20 @@ public:
         double xmin,
         double xmax,
         int ncells);
+
     const int degree;
-    const bool periodic;
     const bool uniform;
     const bool radial;
-    const int ncells;
     const int nbasis;
+
+    /// real space
+    const bool periodic;
     const double xmin;
     const double xmax;
     const double length;
+
+    /// discretization
+    const int ncells;
 
 protected:
     BSplines(int degree,
