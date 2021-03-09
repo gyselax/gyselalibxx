@@ -29,14 +29,14 @@ public:
     const bool radial;
     const int nbasis;
 
-    /// real space
+    /// discretization (bspline specific)
+    const int ncells;
+
+    /// real space: TODO replace by RealDomain1D
     const bool periodic;
     const double xmin;
     const double xmax;
     const double length;
-
-    /// discretization
-    const int ncells;
 
 protected:
     BSplines(int degree,

@@ -10,9 +10,9 @@ int main(int argc, char* argv[])
     // initialize the MPI library
     MPI_Init(&argc, &argv);
 
-    FieldND<2> f2d({ 1, 1 }, MPI_COMM_WORLD, Dimension::DX, { 1., 1. });
+    Field2D f2d;
 
-    FieldND<1> ex({ 1 }, MPI_COMM_WORLD, Dimension::DX, { 1. });
+    Field2D ex;
 
     int degree(3);
     bool periodic(false);

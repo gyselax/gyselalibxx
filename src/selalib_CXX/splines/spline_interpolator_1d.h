@@ -42,13 +42,17 @@ private:
     void build_matrix_system();
 
     const BSplines& bspl;
+	
+	// bspline stuff: TODO move
     const bool odd; // bspl.degree % 2 == 1
     const int offset; // bspl.periodic ? bspl.degree / 2 : 0
     const double dx; // average cell size for normalization of derivatives
 
-    // boundary conditions
+    // mesh info: TODO use Mesh
     std::unique_ptr<double[]> interp_pts_ptr;
     mdspan_1d interp_pts;
+	
+	// interpolator specific
     std::unique_ptr<Matrix> matrix;
 
     // hand-made inheritance

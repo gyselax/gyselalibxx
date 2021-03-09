@@ -3,6 +3,8 @@
 // standard C++ library headers
 #include <array>
 
+constexpr int NDIM = 2;
+
 /// The dimension identifiers
 enum Dimension : int {
     DVX = 0,
