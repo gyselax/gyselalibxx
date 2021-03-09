@@ -9,13 +9,13 @@
  * @param[in]  bc_xmin  boundary conditions at x1_min and x2_min
  * @param[in]  bc_xmax  boundary conditions at x1_max and x2_max
  ******************************************************************************/
-Spline_interpolator_2D::Spline_interpolator_2D(std::array<BSplines*,2> bspl,
+Spline_interpolator_2D::Spline_interpolator_2D(std::array<std::unique_ptr<const BSplines>,2> bspl,
         std::array<BoundaryCondition,2> xmin_bc,
         std::array<BoundaryCondition,2> xmax_bc)
-    : bspl(bspl),
-    interp_1d( { Spline_interpolator_1D(bspl[0], xmin_bc[0], xmax_bc[0]),
-                 Spline_interpolator_1D(bspl[1], xmin_bc[1], xmax_bc[1]) } ),
-    spline_1d( { Spline_1D(bspl[0]), Spline_1D(bspl[1]) } ),
+    : bspl(std::move(bspl)),
+    interp_1d( { Spline_interpolator_1D(*bspl[0], xmin_bc[0], xmax_bc[0]),
+                 Spline_interpolator_1D(*bspl[1], xmin_bc[1], xmax_bc[1]) } ),
+    spline_1d( { Spline_1D(*bspl[0]), Spline_1D(*bspl[1]) } ),
     xmin_bc(xmin_bc), xmax_bc(xmax_bc),
     nbc_xmin( { interp_1d[0].nbc_xmin, interp_1d[1].nbc_xmin } ),
     nbc_xmax( { interp_1d[0].nbc_xmax, interp_1d[1].nbc_xmax } )
@@ -218,7 +218,7 @@ void Spline_interpolator_2D::compute_interpolant_boundary_done(Spline_2D const& 
 {
     assert( vals.extent(0) == (bspl[0]->nbasis - nbc_xmin[0] - nbc_xmax[0]) );
     assert( vals.extent(1) == (bspl[1]->nbasis - nbc_xmin[1] - nbc_xmax[1]) );
-    assert( spline.belongs_to_space( bspl[0], bspl[1] ) );
+    assert( spline.belongs_to_space( *bspl[0], *bspl[1] ) );
 
     int dim_0_size = (bspl[0]->nbasis - nbc_xmin[0] - nbc_xmax[0]);
     int dim_1_size = (bspl[1]->nbasis - nbc_xmin[1] - nbc_xmax[1]);
@@ -232,7 +232,7 @@ void Spline_interpolator_2D::compute_interpolant_boundary_done(Spline_2D const& 
         }
     }
 
-    std::array<Spline_1D,2> spline_1d({Spline_1D(bspl[0]), Spline_1D(bspl[1])});
+    std::array<Spline_1D,2> spline_1d({Spline_1D(*bspl[0]), Spline_1D(*bspl[1])});
     double t_storage_ptr[spline.bcoef.extent(0)*spline.bcoef.extent(1)];
     mdspan_2d t_storage(t_storage_ptr, spline.bcoef.extent(1),spline.bcoef.extent(0));
     // Cycle over x1 position (or order of x1-derivative at boundary)
@@ -316,95 +316,3 @@ void Spline_interpolator_2D::compute_interpolant_boundary_done(Spline_2D const& 
     }
 
 }
-
-
-/******************************************************************************
- *                       Fortran accessor functions                           *
- ******************************************************************************/
-
-Spline_interpolator_2D* new_spline_interpolator_2d(BSplines* bspl_1,
-        BoundaryCondition xmin_bc_1, BoundaryCondition xmax_bc_1,
-        BSplines* bspl_2, BoundaryCondition xmin_bc_2, BoundaryCondition xmax_bc_2)
-{
-    return new Spline_interpolator_2D({ bspl_2, bspl_1}, {xmin_bc_2, xmin_bc_1},
-                                                         {xmax_bc_2, xmax_bc_1});
-}
-
-void free_spline_interpolator_2d(Spline_interpolator_2D* spl_interp)
-{
-    delete spl_interp;
-}
-
-void compute_num_cells_2d(int degree_1, BoundaryCondition xmin_1, BoundaryCondition xmax_1, int nipts_1,
-        int degree_2, BoundaryCondition xmin_2, BoundaryCondition xmax_2, int nipts_2,
-        int* ncell_1, int* ncell_2)
-{
-    std::array<int,2> ncells = Spline_interpolator_2D::compute_num_cells(
-            {degree_2, degree_1},
-            {xmin_2  ,   xmin_1},
-            {xmax_2  ,   xmax_1},
-            {nipts_2 ,  nipts_1});
-    *ncell_2 = ncells[0];
-    *ncell_1 = ncells[1];
-}
-
-void compute_interpolant_2d(const Spline_interpolator_2D* spl_interp, Spline_2D* spline,
-        double* vals_ptr, int nvals_1, int nvals_2,
-        double* derivs_x1_min_ptr,  int n_derivs_x1_min_1,  int n_derivs_x1_min_2,
-        double* derivs_x1_max_ptr,  int n_derivs_x1_max_1,  int n_derivs_x1_max_2,
-        double* derivs_x2_min_ptr,  int n_derivs_x2_min_1,  int n_derivs_x2_min_2,
-        double* derivs_x2_max_ptr,  int n_derivs_x2_max_1,  int n_derivs_x2_max_2,
-        double* mixed_derivs_a_ptr, int n_mixed_derivs_a_1, int n_mixed_derivs_a_2,
-        double* mixed_derivs_b_ptr, int n_mixed_derivs_b_1, int n_mixed_derivs_b_2,
-        double* mixed_derivs_c_ptr, int n_mixed_derivs_c_1, int n_mixed_derivs_c_2,
-        double* mixed_derivs_d_ptr, int n_mixed_derivs_d_1, int n_mixed_derivs_d_2)
-{
-    Boundary_data_2d bd;
-    mdspan_2d derivs_x2_min(  derivs_x1_min_ptr,  n_derivs_x1_min_2,  n_derivs_x1_min_1 );
-    mdspan_2d derivs_x2_max(  derivs_x1_max_ptr,  n_derivs_x1_max_2,  n_derivs_x1_max_1 );
-    mdspan_2d derivs_x1_min(  derivs_x2_min_ptr,  n_derivs_x2_min_2,  n_derivs_x2_min_1 );
-    mdspan_2d derivs_x1_max(  derivs_x2_max_ptr,  n_derivs_x2_max_2,  n_derivs_x2_max_1 );
-    mdspan_2d mixed_derivs_a( mixed_derivs_a_ptr, n_mixed_derivs_a_2, n_mixed_derivs_a_1 );
-    mdspan_2d mixed_derivs_c( mixed_derivs_b_ptr, n_mixed_derivs_b_2, n_mixed_derivs_b_1 );
-    mdspan_2d mixed_derivs_b( mixed_derivs_c_ptr, n_mixed_derivs_c_2, n_mixed_derivs_c_1 );
-    mdspan_2d mixed_derivs_d( mixed_derivs_d_ptr, n_mixed_derivs_d_2, n_mixed_derivs_d_1 );
-    
-    if (n_derivs_x1_min_1 > 0  && n_derivs_x1_min_2 > 0)  bd.derivs_x2_min  = &derivs_x2_min;
-    if (n_derivs_x1_max_1 > 0  && n_derivs_x1_max_2 > 0)  bd.derivs_x2_max  = &derivs_x2_max;
-    if (n_derivs_x2_min_1 > 0  && n_derivs_x2_min_2 > 0)  bd.derivs_x1_min  = &derivs_x1_min;
-    if (n_derivs_x2_max_1 > 0  && n_derivs_x2_max_2 > 0)  bd.derivs_x1_max  = &derivs_x1_max;
-    if (n_mixed_derivs_a_1 > 0 && n_mixed_derivs_a_2 > 0) bd.mixed_derivs_a = &mixed_derivs_a;
-    if (n_mixed_derivs_b_1 > 0 && n_mixed_derivs_b_2 > 0) bd.mixed_derivs_c = &mixed_derivs_c;
-    if (n_mixed_derivs_c_1 > 0 && n_mixed_derivs_c_2 > 0) bd.mixed_derivs_b = &mixed_derivs_b;
-    if (n_mixed_derivs_d_1 > 0 && n_mixed_derivs_d_2 > 0) bd.mixed_derivs_d = &mixed_derivs_d;
-
-    mdspan_2d vals(vals_ptr, nvals_2, nvals_1);
-
-    spl_interp->compute_interpolant(*spline, vals, bd);
-}
-
-void get_interp_points_2d(Spline_interpolator_2D* spl_interp, double* interp_points_1, int npts_1,
-        double* interp_points_2, int npts_2)
-{
-    std::array<const mdspan_1d,2> interp_pts (spl_interp->get_interp_points());
-    //TODO: Fix assert
-    assert(npts_2 == interp_pts[0].extent(0));
-    assert(npts_1 == interp_pts[1].extent(0));
-    for (int i(0); i<interp_pts[0].extent(0); ++i)
-    {
-        interp_points_2[i] = interp_pts[0][i];
-    }
-    for (int i(0); i<interp_pts[1].extent(0); ++i)
-    {
-        interp_points_1[i] = interp_pts[1][i];
-    }
-}
-
-void get_n_interp_points_2d(Spline_interpolator_2D* spl_interp, int* npts_1, int* npts_2)
-{
-    std::array<const mdspan_1d,2> interp_pts (spl_interp->get_interp_points());
-    // Swap order for fortran
-    *npts_1 = interp_pts[1].extent(0);
-    *npts_2 = interp_pts[0].extent(0);
-}
-

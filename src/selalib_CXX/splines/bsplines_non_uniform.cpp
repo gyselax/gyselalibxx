@@ -277,7 +277,7 @@ int BSplines_non_uniform::find_cell(double x) const
     return icell;
 }
 
-void BSplines_non_uniform::integrate(mdspan_1d& int_vals) const
+void BSplines_non_uniform::integrals(mdspan_1d& int_vals) const
 {
     assert(int_vals.extent(0) == nbasis + degree * periodic);
 

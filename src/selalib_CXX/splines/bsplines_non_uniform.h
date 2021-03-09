@@ -9,7 +9,7 @@ class BSplines_non_uniform: public BSplines
         virtual void eval_basis(double x, mdspan_1d& values, int& jmin) const override;
         virtual void eval_deriv(double x, mdspan_1d& derivs, int& jmin) const override;
         virtual void eval_basis_and_n_derivs(double x, int n, mdspan_2d& derivs, int& jmin) const override;
-        virtual void integrate(mdspan_1d& int_vals) const override;
+        virtual void integrals(mdspan_1d& int_vals) const override;
 
         virtual double get_knot(int break_idx) const {
             // TODO: assert break_idx >= 1 - degree

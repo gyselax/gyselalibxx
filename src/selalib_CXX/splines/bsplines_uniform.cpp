@@ -201,7 +201,7 @@ void BSplines_uniform::get_icell_and_offset(double x, int& icell, double& offset
     }
 }
 
-void BSplines_uniform::integrate(mdspan_1d& int_vals) const
+void BSplines_uniform::integrals(mdspan_1d& int_vals) const
 {
     assert(int_vals.extent(0) == nbasis + degree * periodic);
     for (int i(degree); i < nbasis - degree; ++i)
