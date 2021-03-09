@@ -22,6 +22,7 @@ class BSplines
         const int nbasis;
         const double xmin;
         const double xmax;
+        const double length;
     protected:
         BSplines(int degree, bool periodic, bool uniform, int ncells, int nbasis, double xmin, double xmax, bool radial);
 };

@@ -21,10 +21,11 @@ int main( int argc, char* argv[] )
     BSplines_uniform bspl(degree, periodic, xmin, xmax, ncells);
     Spline_interpolator_1D spl_interp(bspl, BoundaryCondition::sll_p_greville, BoundaryCondition::sll_p_greville);
 
+    NullBoundaryValue bv;
+
     double dt(0.1);
 
-    Advection1D adv(bspl, spl_interp, dt,
-                [](double x) { return 0.0; }, [](double x) { return 0.0; });
+    Advection1D adv(bspl, spl_interp, dt, bv, bv);
 
 	// finalize MPI
 	MPI_Finalize();

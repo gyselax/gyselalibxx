@@ -1,5 +1,6 @@
 #pragma once
-#include "selalib_CXX/splines/spline_interpolator_1d.h"
+#include "null_boundary_value.hpp"
+#include "spline_interpolator_1d.h"
 
 // TODO: Move
 /// A type for a 1D view of the memory
@@ -10,14 +11,16 @@ class Advection1D
 {
     public:
         Advection1D(const BSplines& bspl, const Spline_interpolator_1D& spl_interp,
+                    double dt);
+        Advection1D(const BSplines& bspl, const Spline_interpolator_1D& spl_interp,
                     double dt,
-                    double (*bc_left)(double) = nullptr,
-                    double (*bc_right)(double) = nullptr);
+                    const BoundaryValue& bc_left,
+                    const BoundaryValue& bc_right);
         void step(View& current_values, View&& velocity) const;
     private:
         const BSplines& m_bspl;
         const Spline_interpolator_1D& m_spline_interpolator;
-        double (*m_bc_left)(double);
-        double (*m_bc_right)(double);
         double dt;
+        const BoundaryValue& m_bc_left;
+        const BoundaryValue& m_bc_right;
 };
