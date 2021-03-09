@@ -9,14 +9,13 @@ class Matrix_PDS_Tridiag: public Matrix {
      * */
     public:
         Matrix_PDS_Tridiag(int n);
-        virtual ~Matrix_PDS_Tridiag();
         virtual double get_element(int i, int j) const override;
         virtual void set_element(int i, int j, double a_ij) override;
     protected:
         virtual int factorize_method() override;
         virtual int solve_inplace_method(const char transpose, double* b, int nrows, int ncols) const override;
-        double* d; //diagonal
-        double* l; // lower diagonal
+        std::unique_ptr<double[]> d; //diagonal
+        std::unique_ptr<double[]> l; // lower diagonal
 };
 
 #endif // MATRIX_SYMMETRIC_BANDED_H

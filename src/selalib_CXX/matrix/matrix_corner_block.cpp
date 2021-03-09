@@ -3,38 +3,27 @@
 #include <string.h>
 
 Matrix_Corner_Block::Matrix_Corner_Block(int n, int k, std::unique_ptr<Matrix> q)
-    : Matrix(n), k(k), nb(n-k), Abm_1_gamma_ptr(new double[k*nb]),
-    q_block(std::move(q)), delta(k), Abm_1_gamma(Abm_1_gamma_ptr, k, nb)
+    : Matrix(n), k(k), nb(n-k), Abm_1_gamma_ptr(std::make_unique<double[]>(k*nb)),
+    lambda_ptr(std::make_unique<double[]>(k*nb)),q_block(std::move(q)), delta(k),
+    Abm_1_gamma(Abm_1_gamma_ptr.get(), k, nb), lambda(lambda_ptr.get(), nb, k)
 {
     assert( n  > 0 );
     assert( k >= 0 );
     assert( k <= n );
-    allocate_lambda();
-    memset(Abm_1_gamma_ptr, 0, sizeof(double)*k*nb);
+    memset(lambda_ptr.get(), 0, sizeof(double)*k*nb);
+    memset(Abm_1_gamma_ptr.get(), 0, sizeof(double)*k*nb);
 }
 
-Matrix_Corner_Block::Matrix_Corner_Block(int n, int k, std::unique_ptr<Matrix> q, bool is_virtual)
-    : Matrix(n), k(k), nb(n-k), Abm_1_gamma_ptr(new double[k*nb]),
-    q_block(std::move(q)), delta(k), Abm_1_gamma(Abm_1_gamma_ptr, k, nb)
+Matrix_Corner_Block::Matrix_Corner_Block(int n, int k, std::unique_ptr<Matrix> q, int lambda_size)
+    : Matrix(n), k(k), nb(n-k), Abm_1_gamma_ptr(std::make_unique<double[]>(k*nb)),
+    lambda_ptr(std::make_unique<double[]>(lambda_size)),q_block(std::move(q)), delta(k),
+    Abm_1_gamma(Abm_1_gamma_ptr.get(), k, nb), lambda(lambda_ptr.get(), nb, k)
 {
     assert( n  > 0 );
     assert( k >= 0 );
     assert( k <= n );
-    memset(Abm_1_gamma_ptr, 0, sizeof(double)*k*nb);
-}
-
-void Matrix_Corner_Block::allocate_lambda()
-{
-    lambda_ptr = new double[k*nb];
-    memset(lambda_ptr, 0, sizeof(double)*k*nb);
-    lambda = new mdspan_2d(lambda_ptr, nb, k);
-}
-
-Matrix_Corner_Block::~Matrix_Corner_Block()
-{
-    delete[] Abm_1_gamma_ptr;
-    delete[] lambda_ptr;
-    delete lambda;
+    memset(lambda_ptr.get(), 0, sizeof(double)*lambda_size);
+    memset(Abm_1_gamma_ptr.get(), 0, sizeof(double)*k*nb);
 }
 
 double Matrix_Corner_Block::get_element(int i, int j) const
@@ -57,7 +46,7 @@ double Matrix_Corner_Block::get_element(int i, int j) const
     }
     else
     {
-        return (*lambda)(i, j-nb);
+        return lambda(i, j-nb);
     }
 }
 
@@ -81,7 +70,7 @@ void Matrix_Corner_Block::set_element(int i, int j, double a_ij)
     }
     else
     {
-        (*lambda)(i,j-nb) = a_ij;
+        lambda(i,j-nb) = a_ij;
     }
 }
 
@@ -92,7 +81,7 @@ void Matrix_Corner_Block::calculate_delta_to_factorize()
         // Upper diagonals in lambda
         for (int l(0); l<nb; ++l)
         {
-            double lambda_il = (*lambda)(l,i);
+            double lambda_il = lambda(l,i);
             for (int j(0); j < k; ++j)
             {
                 double new_val(delta.get_element(j,i)-lambda_il*Abm_1_gamma(j,l));
@@ -116,10 +105,10 @@ void Matrix_Corner_Block::solve_lambda_section(mdspan_1d& u, mdspan_1d const& v)
 {
     for (int i(0); i< k; ++i)
     {
-        // Upper diagonals in (*lambda)
+        // Upper diagonals in lambda
         for (int j(0); j<nb; ++j)
         {
-            v(i) -= (*lambda)(j,i)*u(j);
+            v(i) -= lambda(j,i)*u(j);
         }
     }
 }
@@ -127,12 +116,12 @@ void Matrix_Corner_Block::solve_lambda_section(mdspan_2d& u, mdspan_2d const& v)
 {
     for (int i(0); i< k; ++i)
     {
-        // Upper diagonals in (*lambda)
+        // Upper diagonals in lambda
         for (int j(0); j<nb; ++j)
         {
             for (int col(0); col < v.extent(1); ++col)
             {
-                v(i,col) -= (*lambda)(j,i)*u(j,col);
+                v(i,col) -= lambda(j,i)*u(j,col);
             }
         }
     }
@@ -145,7 +134,7 @@ void Matrix_Corner_Block::solve_lambda_section_transpose(mdspan_1d& u, mdspan_1d
         // Upper diagonals in (*lambda)
         for (int j(0); j<nb; ++j)
         {
-            u(j) -= (*lambda)(j,i)*v(i);
+            u(j) -= lambda(j,i)*v(i);
         }
     }
 }

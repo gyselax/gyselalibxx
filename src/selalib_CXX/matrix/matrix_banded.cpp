@@ -15,8 +15,8 @@ Matrix_Banded::Matrix_Banded(int n, int kl, int ku)
     assert( ku >= 0 );
     assert( kl <= n );
     assert( ku <= n );
-    ipiv = new int[n];
-    q = new double[c*n];
+    ipiv = std::make_unique<int[]>(n);
+    q = std::make_unique<double[]>(c*n);
 
     /*
     * Given the linear system A*x=b, we assume that A is a square (n by n)
@@ -31,12 +31,6 @@ Matrix_Banded::Matrix_Banded(int n, int kl, int ku)
     {
         q[i] = 0.0;
     }
-}
-
-Matrix_Banded::~Matrix_Banded()
-{
-    delete[] q;
-    delete[] ipiv;
 }
 
 double Matrix_Banded::get_element(int i, int j) const
@@ -67,7 +61,7 @@ void Matrix_Banded::set_element(int i, int j, double a_ij)
 int Matrix_Banded::factorize_method()
 {
     int info;
-    dgbtrf_( &n, &n, &kl, &ku, q, &c, ipiv, &info);
+    dgbtrf_( &n, &n, &kl, &ku, q.get(), &c, ipiv.get(), &info);
     return info;
 }
 
@@ -75,6 +69,6 @@ int Matrix_Banded::solve_inplace_method(const char transpose, double* b, int nro
 {
     int info;
 
-    dgbtrs_(&transpose, &n, &kl, &ku, &ncols, q, &c, ipiv, b, &nrows, &info);
+    dgbtrs_(&transpose, &n, &kl, &ku, &ncols, q.get(), &c, ipiv.get(), b, &nrows, &info);
     return info;
 }

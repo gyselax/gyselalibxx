@@ -9,18 +9,12 @@ Matrix_Dense::Matrix_Dense(int n)
     : Matrix(n)
 {
     assert( n > 0 );
-    ipiv = new int[n];
-    a = new double[n*n];
+    ipiv = std::make_unique<int[]>(n);
+    a = std::make_unique<double[]>(n*n);
     for ( int i(0); i < n*n; ++i)
     {
         a[i] = 0;
     }
-}
-
-Matrix_Dense::~Matrix_Dense()
-{
-    delete[] ipiv;
-    delete[] a;
 }
 
 void Matrix_Dense::set_element(int i, int j, double aij)
@@ -38,7 +32,7 @@ double Matrix_Dense::get_element(int i, int j) const
 int Matrix_Dense::factorize_method()
 {
     int info;
-    dgetrf_(&n, &n, a, &n, ipiv, &info);
+    dgetrf_(&n, &n, a.get(), &n, ipiv.get(), &info);
     return info;
 }
 
@@ -46,6 +40,6 @@ int Matrix_Dense::solve_inplace_method(const char transpose, double* b, int nrow
 {
     int info;
 
-    dgetrs_(&transpose, &n, &ncols, a, &n, ipiv, b, &nrows, &info);
+    dgetrs_(&transpose, &n, &ncols, a.get(), &n, ipiv.get(), b, &nrows, &info);
     return info;
 }

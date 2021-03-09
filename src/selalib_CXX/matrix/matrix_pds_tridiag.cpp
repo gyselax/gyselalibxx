@@ -7,16 +7,10 @@ extern "C" int dpttrs_(const int *n, const int* nrhs,
         double *d, double *e, double *b, const int *ldb, int *info);
 
 Matrix_PDS_Tridiag::Matrix_PDS_Tridiag(int n)
-    : Matrix(n), d(new double[n]), l(new double[n-1])
+    : Matrix(n), d(std::make_unique<double[]>(n)), l(std::make_unique<double[]>(n-1))
 {
-    memset(d, 0, n*sizeof(double));
-    memset(l, 0, (n-1)*sizeof(double));
-}
-
-Matrix_PDS_Tridiag::~Matrix_PDS_Tridiag()
-{
-    delete[] d;
-    delete[] l;
+    memset(d.get(), 0, n*sizeof(double));
+    memset(l.get(), 0, (n-1)*sizeof(double));
 }
 
 double Matrix_PDS_Tridiag::get_element(int i, int j) const
@@ -64,13 +58,13 @@ void Matrix_PDS_Tridiag::set_element(int i, int j, double a_ij)
 int Matrix_PDS_Tridiag::factorize_method()
 {
     int info;
-    dpttrf_( &n, d, l, &info);
+    dpttrf_( &n, d.get(), l.get(), &info);
     return info;
 }
 
 int Matrix_PDS_Tridiag::solve_inplace_method(const char transpose, double* b, int nrows, int ncols) const
 {
     int info;
-    dpttrs_( &n, &ncols, d, l, b, &nrows, &info);
+    dpttrs_( &n, &ncols, d.get(), l.get(), b, &nrows, &info);
     return info;
 }

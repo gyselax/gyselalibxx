@@ -60,23 +60,23 @@ void Matrix::factorize()
     }
 }
 
-Matrix* Matrix::make_new_banded(int n, int kl, int ku, bool pds)
+std::unique_ptr<Matrix> Matrix::make_new_banded(int n, int kl, int ku, bool pds)
 {
     if (kl == ku && kl == 1 && pds)
     {
-        return new Matrix_PDS_Tridiag(n);
+        return std::make_unique<Matrix_PDS_Tridiag>(n);
     }
     else if (2*kl+1+ku >= n)
     {
-        return new Matrix_Dense(n);
+        return std::make_unique<Matrix_Dense>(n);
     }
     else
     {
-        return new Matrix_Banded(n, kl, ku);
+        return std::make_unique<Matrix_Banded>(n, kl, ku);
     }
 }
 
-Matrix* Matrix::make_new_periodic_banded(int n, int kl, int ku, bool pds)
+std::unique_ptr<Matrix> Matrix::make_new_periodic_banded(int n, int kl, int ku, bool pds)
 {
     int border_size(max(kl,ku));
     int banded_size(n-border_size);
@@ -87,16 +87,16 @@ Matrix* Matrix::make_new_periodic_banded(int n, int kl, int ku, bool pds)
     }
     else if (border_size*n+border_size*(border_size+1)+(2*kl+1+ku)*banded_size>=n*n)
     {
-        return new Matrix_Dense(n);
+        return std::make_unique<Matrix_Dense>(n);
     }
     else
     {
         block_mat = std::make_unique<Matrix_Banded>(banded_size, kl, ku);
     }
-    return new Matrix_Periodic_Banded(n, kl, ku, std::move(block_mat));
+    return std::make_unique<Matrix_Periodic_Banded>(n, kl, ku, std::move(block_mat));
 }
 
-Matrix* Matrix::make_new_block_with_banded_region(int n, int kl, int ku, bool pds, int block1_size, int block2_size)
+std::unique_ptr<Matrix> Matrix::make_new_block_with_banded_region(int n, int kl, int ku, bool pds, int block1_size, int block2_size)
 {
     int banded_size(n-block1_size-block2_size);
     std::unique_ptr<Matrix> block_mat;
@@ -106,7 +106,7 @@ Matrix* Matrix::make_new_block_with_banded_region(int n, int kl, int ku, bool pd
     }
     else if (2*kl+1+ku >= banded_size)
     {
-        return new Matrix_Dense(n);
+        return std::make_unique<Matrix_Dense>(n);
     }
     else
     {
@@ -114,11 +114,11 @@ Matrix* Matrix::make_new_block_with_banded_region(int n, int kl, int ku, bool pd
     }
     if (block2_size==0)
     {
-        return new Matrix_Corner_Block(n, block1_size, std::move(block_mat));
+        return std::make_unique<Matrix_Corner_Block>(n, block1_size, std::move(block_mat));
     }
     else
     {
-        return new Matrix_Center_Block(n, block1_size, block2_size, std::move(block_mat));
+        return std::make_unique<Matrix_Center_Block>(n, block1_size, block2_size, std::move(block_mat));
     }
 }
 
