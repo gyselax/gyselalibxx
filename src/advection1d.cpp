@@ -19,7 +19,7 @@ Advection1D::Advection1D(const BSplines& bspl, const Spline_interpolator_1D& spl
       m_bc_left(bc_left), m_bc_right(bc_right)
 {}
 
-void Advection1D::step(View& current_values, View&& velocity) const
+void Advection1D::operator()(View& current_values, View&& velocity) const
 {
     View x = m_spline_interpolator.get_interp_points();
     assert(current_values.extent(0) == x.extent(0));

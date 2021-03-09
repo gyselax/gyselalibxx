@@ -1,6 +1,6 @@
 #include <mpi.h>
 
-#include "distributed2dfield.hpp"
+#include "distributedfield.hpp"
 #include "advection1d.hpp"
 #include "bsplines_uniform.h"
 #include "spline_interpolator_1d.h"

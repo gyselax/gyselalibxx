@@ -5,7 +5,7 @@
 
 // local headers
 #include "configuration.hpp"
-#include "distributed2dfield.hpp"
+#include "distributedfield.hpp"
 #include "initialconditionner.hpp"
 #include "simulationobserver.hpp"
 #include "timestep.hpp"

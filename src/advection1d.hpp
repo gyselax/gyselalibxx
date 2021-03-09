@@ -16,7 +16,7 @@ class Advection1D
                     double dt,
                     const BoundaryValue& bc_left,
                     const BoundaryValue& bc_right);
-        void step(View& current_values, View&& velocity) const;
+        void operator()(View& current_values, View&& velocity) const;
     private:
         const BSplines& m_bspl;
         const Spline_interpolator_1D& m_spline_interpolator;

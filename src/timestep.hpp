@@ -1,7 +1,7 @@
 #pragma once
 
 // local headers
-#include "distributed2dfield.hpp"
+#include "distributedfield.hpp"
 
 /** An interface for a class that implements the operator applied at each and
  * every time-step of the Simulation.

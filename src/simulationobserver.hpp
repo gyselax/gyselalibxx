@@ -1,7 +1,7 @@
 #pragma once
 
 // local headers
-#include "distributed2dfield.hpp"
+#include "distributedfield.hpp"
 
 /** An interface for any class interested in observing a Simulation.
  */
