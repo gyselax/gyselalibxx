@@ -1,18 +1,28 @@
 cmake_minimum_required(VERSION 3.15)
 
-add_subdirectory(selalib_CXX)
+add_subdirectory(array_tools)
+add_subdirectory(boundary_conditions)
+add_subdirectory(geometry)
+add_subdirectory(math_tools)
+add_subdirectory(matrix)
+add_subdirectory(mesh)
+add_subdirectory(splines)
+add_subdirectory(vlasov)
 
 add_executable(voicexx
-	advection1d.cpp
-	distributedfield.cpp
-	simpleheat.cpp
+	predcorr.cpp
+	voicexx.cpp
 )
-target_include_directories(voicexx PRIVATE
-	"${CMAKE_CURRENT_SOURCE_DIR}"
+
+target_include_directories(voicexx
+	PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )
-target_link_libraries(voicexx PRIVATE
-		MPI::MPI_CXX
-		std::mdspan
-		selalib::cxx_splines
-		selalib::boundary_conditions
+
+target_link_libraries(voicexx
+	PUBLIC
+		vcx::array_tools
+		sll::boundary_conditions
+		vcx::mesh
+		sll::splines
+		vcx::vlasov
 )

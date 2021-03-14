@@ -4,7 +4,6 @@ project(voicexx CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(MPI REQUIRED COMPONENTS CXX)
 find_package(LAPACK REQUIRED COMPONENTS CXX)
 add_subdirectory("vendor/mdspan/" "mdspan" EXCLUDE_FROM_ALL)
 

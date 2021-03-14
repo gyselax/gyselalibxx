@@ -1,0 +1,143 @@
+---
+Language:                                       Cpp
+AccessModifierOffset:                           -4
+AlignAfterOpenBracket:                          AlwaysBreak
+AlignConsecutiveMacros:                         false
+AlignConsecutiveAssignments:                    false
+AlignConsecutiveBitFields:                      false
+AlignConsecutiveDeclarations:                   false
+AlignEscapedNewlines:                           Right
+AlignOperands:                                  AlignAfterOperator
+AlignTrailingComments:                          false
+AllowAllArgumentsOnNextLine:                    false
+AllowAllConstructorInitializersOnNextLine:      false
+AllowAllParametersOfDeclarationOnNextLine:      false
+AllowShortEnumsOnASingleLine:                   true
+AllowShortBlocksOnASingleLine:                  Empty
+AllowShortCaseLabelsOnASingleLine:              false
+AllowShortFunctionsOnASingleLine:               Empty
+AllowShortLambdasOnASingleLine:                 All
+AllowShortIfStatementsOnASingleLine:            Never
+AllowShortLoopsOnASingleLine:                   false
+AlwaysBreakAfterDefinitionReturnType:           None
+AlwaysBreakAfterReturnType:                     None
+AlwaysBreakBeforeMultilineStrings:              false
+AlwaysBreakTemplateDeclarations:                Yes
+BinPackArguments:                               false
+BinPackParameters:                              false
+BraceWrapping:                                  
+  AfterCaseLabel:                               false
+  AfterClass:                                   true
+  AfterControlStatement:                        Never
+  AfterEnum:                                    false
+  AfterFunction:                                true
+  AfterNamespace:                               false
+  AfterObjCDeclaration:                         false
+  AfterStruct:                                  false
+  AfterUnion:                                   false
+  AfterExternBlock:                             false
+  BeforeCatch:                                  false
+  BeforeElse:                                   false
+  BeforeLambdaBody:                             false
+  BeforeWhile:                                  false
+  IndentBraces:                                 false
+  SplitEmptyFunction:                           true
+  SplitEmptyRecord:                             true
+  SplitEmptyNamespace:                          true
+BreakAfterJavaFieldAnnotations:                 false
+BreakBeforeBinaryOperators:                     All
+BreakBeforeBraces:                              Custom
+BreakBeforeInheritanceComma:                    true
+BreakBeforeTernaryOperators:                    true
+BreakConstructorInitializers:                   BeforeComma
+BreakConstructorInitializersBeforeComma:        true
+BreakInheritanceList:                           BeforeComma
+BreakStringLiterals:                            true
+ColumnLimit:                                    100
+CommentPragmas:                                 '^ IWYU pragma:'
+CompactNamespaces:                              false
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ConstructorInitializerIndentWidth:              4
+ContinuationIndentWidth:                        8
+Cpp11BracedListStyle:                           true
+DeriveLineEnding:                               true
+DerivePointerAlignment:                         false
+DisableFormat:                                  false
+ExperimentalAutoDetectBinPacking:               false
+FixNamespaceComments:                           true
+IncludeBlocks:                                  Regroup
+IncludeCategories:
+  - Regex:           '^[<"]mpi\.h[">]'
+    Priority:        -100
+    SortPriority:    -100
+  - Regex:           '^<[^./]*>$'
+    Priority:        -80
+    SortPriority:    -80
+  - Regex:           '^<.*\.h[^.]*>$'
+    Priority:        -60
+    SortPriority:    -60
+  - Regex:           '^"[^/]*/.*"$'
+    Priority:        -40
+    SortPriority:    -40
+  - Regex:           '^".*"$'
+    Priority:        -20
+    SortPriority:    -20
+IncludeIsMainRegex:                             '^$'
+IncludeIsMainSourceRegex:                       ''
+IndentCaseLabels:                               false
+IndentCaseBlocks:                               false
+IndentExternBlock:                              NoIndent
+IndentGotoLabels:                               false
+IndentPPDirectives:                             None
+IndentWidth:                                    4
+IndentWrappedFunctionNames:                     false
+JavaScriptQuotes:                               Leave
+JavaScriptWrapImports:                          true
+KeepEmptyLinesAtTheStartOfBlocks:               false
+MacroBlockBegin:                                ''
+MacroBlockEnd:                                  ''
+MaxEmptyLinesToKeep:                            3
+NamespaceIndentation:                           None
+ObjCBinPackProtocolList:                        Auto
+ObjCBlockIndentWidth:                           4
+ObjCBreakBeforeNestedBlockParam:                true
+ObjCSpaceAfterProperty:                         true
+ObjCSpaceBeforeProtocolList:                    true
+PenaltyBreakAssignment:                         2
+PenaltyBreakBeforeFirstCallParameter:           100000
+PenaltyBreakComment:                            2000000
+PenaltyBreakFirstLessLess:                      100000
+PenaltyBreakString:                             100000
+PenaltyBreakTemplateDeclaration:                1
+PenaltyExcessCharacter:                         1000000
+PenaltyReturnTypeOnItsOwnLine:                  100000
+PointerAlignment:                               Left
+ReflowComments:                                 false
+SortIncludes:                                   true
+SortUsingDeclarations:                          true
+SpaceAfterCStyleCast:                           false
+SpaceAfterLogicalNot:                           false
+SpaceAfterTemplateKeyword:                      true
+SpaceBeforeAssignmentOperators:                 true
+SpaceBeforeCpp11BracedList:                     true
+SpaceBeforeCtorInitializerColon:                true
+SpaceBeforeInheritanceColon:                    true
+SpaceBeforeParens:                              ControlStatements
+SpaceBeforeRangeBasedForLoopColon:              true
+SpaceInEmptyBlock:                              true
+SpaceInEmptyParentheses:                        false
+SpacesBeforeTrailingComments:                   1
+SpacesInAngles:                                 false
+SpacesInConditionalStatement:                   false
+SpacesInContainerLiterals:                      true
+SpacesInCStyleCastParentheses:                  false
+SpacesInParentheses:                            false
+SpacesInSquareBrackets:                         false
+SpaceBeforeSquareBrackets:                      false
+Standard:                                       Latest
+StatementMacros:                                []
+TabWidth:                                       4
+UseCRLF:                                        false
+UseTab:                                         Never
+WhitespaceSensitiveMacros:                      []
+...
