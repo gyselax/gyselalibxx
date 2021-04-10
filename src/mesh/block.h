@@ -157,21 +157,35 @@ public:
         return m_raw.is_strided();
     }
 
-    constexpr index_type stride(size_t r) const;
-
-
+    constexpr index_type stride(size_t r) const
+    {
+        return m_raw.stride();
+    }
 
     /** Swaps this field with another
      * @param other the BlockND to swap with this one
      */
-    void swap(BlockViewND& other);
+    void swap(BlockViewND& other)
+    {
+        BlockViewND tmp = std::move(other);
+        other = std::move(*this);
+        *this = std::move(tmp);
+    }
+
+    /** Provide access to the domain on which this field block is defined
+     * @return the domain on which this field block is defined
+     */
+    constexpr MDomain domain(size_t dim) const noexcept
+    {
+        return MDomain(m_mesh[dim], 0, m_raw.extent(dim));
+    }
 
     /** Provide access to the domain on which this field block is defined
      * @return the domain on which this field block is defined
      */
     constexpr MDomainND<NDIMS> domain() const noexcept
     {
-        return MDomainND<NDIMS> {m_mesh, MCoordND<NDIMS> {}, m_raw.extents()};
+        return FullDom<std::make_index_sequence<NDIMS>>::eval(*this);
     }
 
     /** Provide a modifiable view of the data
@@ -201,6 +215,19 @@ protected:
     BlockViewND(MeshND<NDIMS> mesh, RawView raw_view) : m_raw(raw_view), m_mesh(mesh) { }
 
     static const BlockViewND make_const(const Domain& domain, const RawView raw_view);
+
+private:
+    template <class>
+    struct FullDom;
+    template <size_t... IDXS>
+    struct FullDom<std::index_sequence<IDXS...>>
+    {
+        static MDomainND<sizeof...(IDXS)> eval(
+                const BlockViewND<sizeof...(IDXS), ElementType, CONTIGUOUS>& self)
+        {
+            return MDomainND<sizeof...(IDXS)> {self.domain(IDXS)...};
+        }
+    };
 };
 
 using DBlockView1D = BlockViewND<1, double>;
@@ -244,8 +271,12 @@ public:
 public:
     /** Construct a BlockND on a domain with uninitialized values
      */
-    BlockND(const Domain& domain)
-        : BlockView(domain.mesh(), RawView(new double[domain.size()], domain.extents()))
+    BlockND(const MDomainND<NDIMS>& domain)
+        : BlockView(
+                array_apply([](const MDomain& d) { return Mesher(d.mesh()); }, domain),
+                RawView(new double[domain.size()],
+                        ExtentsND<NDIMS>(
+                                array_apply([](const MDomain& d) { return d.size(); }, domain))))
     {
     }
 

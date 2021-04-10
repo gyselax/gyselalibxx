@@ -13,7 +13,8 @@ template <class S>
 struct ExtentNDBuilder;
 
 template <std::size_t... S>
-struct ExtentNDBuilder<std::index_sequence<S...>> {
+struct ExtentNDBuilder<std::index_sequence<S...>>
+{
     using type = std::experimental::extents<dynamic_extent<S>...>;
 };
 
@@ -34,12 +35,14 @@ template <int N, typename LayoutPolicy, typename = std::enable_if<(N >= 0)>>
 struct LayoutAddND;
 
 template <typename LayoutPolicy>
-struct LayoutAddND<0, LayoutPolicy> {
+struct LayoutAddND<0, LayoutPolicy>
+{
     using type = LayoutPolicy;
 };
 
 template <int N, ptrdiff_t... Strides>
-struct LayoutAddND<N, std::experimental::layout_stride<Strides...>, std::enable_if<(N > 0)>> {
+struct LayoutAddND<N, std::experimental::layout_stride<Strides...>, std::enable_if<(N > 0)>>
+{
     using type = typename LayoutAddND<
             N - 1,
             std::experimental::layout_stride<std::experimental::dynamic_extent, Strides...>>::type;
@@ -61,12 +64,14 @@ template <int N, class ElementType, bool CONTIGUOUS = true>
 struct ViewNDMaker;
 
 template <int N, class ElementType>
-struct ViewNDMaker<N, ElementType, true> {
+struct ViewNDMaker<N, ElementType, true>
+{
     using type = std::experimental::basic_mdspan<ElementType, ExtentsND<N>>;
 };
 
 template <int N, class ElementType>
-struct ViewNDMaker<N, ElementType, false> {
+struct ViewNDMaker<N, ElementType, false>
+{
     using type = std::experimental::basic_mdspan<ElementType, ExtentsND<N>, NCLayoutND<N>>;
 };
 

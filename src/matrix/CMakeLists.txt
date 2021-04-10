@@ -1,4 +1,4 @@
-add_library( cxx_spline_matrix STATIC
+add_library(cxx_spline_matrix STATIC
   matrix.cpp
   matrix_dense.cpp
   matrix_banded.cpp
@@ -6,13 +6,13 @@ add_library( cxx_spline_matrix STATIC
   matrix_center_block.cpp
   matrix_periodic_banded.cpp
   matrix_pds_tridiag.cpp
-  )
+ )
 target_include_directories(cxx_spline_matrix
     PUBLIC
         "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-target_link_libraries( cxx_spline_matrix
+target_link_libraries(cxx_spline_matrix
   PUBLIC
     std::mdspan
     sll::math_tools

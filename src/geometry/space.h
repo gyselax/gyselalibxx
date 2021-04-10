@@ -2,30 +2,46 @@
 
 #include <array>
 
-namespace Dim {
+namespace detail {
 
-struct X {
-    static constexpr bool PERIODIC = true;
+template <class>
+struct ArrayApplyer;
+template <size_t... IDXS>
+struct ArrayApplyer<std::index_sequence<IDXS...>>
+{
+    static constexpr size_t NB_ELEM = sizeof...(IDXS);
+
+    template <typename Functor, typename Element>
+    static std::array<std::invoke_result_t<Functor, const Element&>, NB_ELEM> array_apply(
+            Functor&& func,
+            const std::array<Element, NB_ELEM>& params)
+    {
+        return std::array<std::invoke_result_t<Functor, const Element&>, NB_ELEM> {
+                std::forward<Functor>(func)(params[IDXS])...};
+    }
 };
 
-struct VX {
-    static constexpr bool PERIODIC = false;
-};
+} // namespace detail
 
-struct Time {
-    static constexpr bool PERIODIC = false;
-};
+template <typename Functor, typename Element, size_t NB_ELEM>
+std::array<std::invoke_result_t<Functor, const Element&>, NB_ELEM> array_apply(
+        Functor&& func,
+        const std::array<Element, NB_ELEM>& params)
+{
+    return detail::ArrayApplyer<
+            std::make_index_sequence<NB_ELEM>>::array_apply(std::forward<Functor>(func), params);
+}
 
-} // namespace Dim
-
-struct RSpace;
+using RCoord = double;
 
 template <int NDIMS>
-using RCoordND = std::array<double, NDIMS>;
+using RCoordND = std::array<RCoord, NDIMS>;
 
 using RCoord1D = RCoordND<1>;
 
 using RCoord2D = RCoordND<2>;
+
+using RCoord3D = RCoordND<3>;
 
 class RDimension
 {
@@ -41,19 +57,18 @@ public:
     RCoord1D normalize(RCoord1D) const;
 };
 
-template <int NDIMS>
-struct RDomainND {
-    const RCoordND<NDIMS> start;
+struct RDomain
+{
+    RCoord start;
 
-    const RCoordND<NDIMS> end;
-
-    constexpr RDomainND(RCoordND<NDIMS> start, RCoordND<NDIMS> end) noexcept
-        : start(start)
-        , end(end)
-    {
-    }
+    RCoord end;
 };
+
+template <int NDIMS>
+using RDomainND = std::array<RDomain, NDIMS>;
 
 using RDomain1D = RDomainND<1>;
 
 using RDomain2D = RDomainND<2>;
+
+using RDomain3D = RDomainND<3>;

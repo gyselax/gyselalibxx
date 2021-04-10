@@ -5,7 +5,8 @@
 #include "spline_2d.h"
 #include "spline_interpolator_1d.h"
 
-struct Boundary_data_2d {
+struct Boundary_data_2d
+{
     mdspan_2d* derivs_x1_min = nullptr;
     mdspan_2d* derivs_x1_max = nullptr;
     mdspan_2d* derivs_x2_min = nullptr;

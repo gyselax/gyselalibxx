@@ -1,15 +1,21 @@
 #include <vector>
 
 #include "bsplines_uniform.h"
+#include "efieldsolver.h"
 #include "mesh.h"
 #include "predcorr.h"
 #include "space.h"
-#include "vlasov.h"
+#include "vlasovsolver.h"
 
 int main()
 {
-    // a 2D geometry,
-    RDomain2D geometry = {{0, 100}, {0, 100}};
+    // The mesh, d_x=.01, d_v=.2, d_t=.1
+    Mesh3D mesh = {Mesher(0, .01), Mesher(-10, .2), Mesher(0, .1)};
+
+    // The meshed domain
+    MDomain3D dom3d
+            = {MDomain(mesh[0], 0, 100), MDomain(mesh[1], 0, 100), MDomain(mesh[3], 0, 1000)};
+
 
     const BSplines_uniform bsplines_x = {3, true, 4, 5, 6};
 
@@ -29,19 +35,13 @@ int main()
 
     const Advection1D advection_v = {bsplines_vx, interp_vx};
 
-    const Vlasov vlasov {advection_x, advection_v};
+    const VlasovSolver vlasov {advection_x, advection_v};
 
-    const EfieldSolver* pefield = nullptr;
+    const EfieldSolver efield;
 
-    const PredCorr predcorr = {vlasov, *pefield};
+    const PredCorr predcorr(vlasov, efield, {dom3d[3]});
 
-    Mesh2D mesh {Mesher {0, 1}, Mesher {0, 1}};
+    DBlock2D fdistribu({dom3d[0], dom3d[1]});
 
-    MDomain2D dom2d(mesh, {0, 0}, ExtentsND<2> {10, 10});
-
-    DBlock2D fdistribu = {dom2d};
-
-    Mesh1D time_mesh {Mesher {0, .1}};
-
-    predcorr(fdistribu, MDomain1D {time_mesh, {0}, Extents1D {100}});
+    predcorr(fdistribu, 1);
 }

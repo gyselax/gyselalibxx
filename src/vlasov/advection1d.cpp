@@ -28,7 +28,7 @@ Advection1D::Advection1D(
 {
 }
 
-void Advection1D::operator()(DBlockView2D& fdistribu, double dt) const
+void Advection1D::operator()(DBlockView2D& fdistribu, double mass_ratio, double dt) const
 {
     View1D<double> x = m_spline_interpolator.get_interp_points();
     unique_ptr<double[]> new_points_ptr = make_unique<double[]>(x.extent(0));
@@ -38,17 +38,19 @@ void Advection1D::operator()(DBlockView2D& fdistribu, double dt) const
     View1D<double> current_values(current_values_ptr.get(), x.extent(0));
 
     Spline_1D spline(m_bspl, m_bc_left, m_bc_right);
-    for (size_t vi = 0; vi < fdistribu.extent(1); ++vi) {
-        double velocity = fdistribu.domain().mesh()[1]({vi})[0];
+    for (size_t vii = 0; vii < fdistribu.extent(1); ++vii) {
+        const double dx = mass_ratio * dt * fdistribu.domain(1).mesh()({vii})[0];
 
-        auto current_values_nc = subspan(fdistribu.raw_view(), all, vi);
+        // copy the line in a contiguous array
+        const auto current_values_nc = subspan(fdistribu.raw_view(), all, vii);
         for (size_t ii = 0; ii < current_values_nc.extent(0); ++ii) {
             current_values[ii] = current_values_nc[ii];
         }
 
         m_spline_interpolator.compute_interpolant(spline, current_values);
-        for (size_t i = 0; i < current_values.extent(0); ++i) {
-            new_points[i] = x[i] - velocity * dt;
+        // splitting in x direction
+        for (size_t xii = 0; xii < current_values.extent(0); ++xii) {
+            new_points[xii] = x[xii] - dx;
         }
         spline.eval_array(new_points, current_values);
     }

@@ -1,4 +1,4 @@
-add_library( splines STATIC
+add_library(splines STATIC
 	bsplines.cpp
 	bsplines_uniform.cpp
 	bsplines_non_uniform.cpp
@@ -12,7 +12,7 @@ target_include_directories(splines
 		"${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-target_link_libraries( splines
+target_link_libraries(splines
 	PUBLIC
 		std::mdspan
 		sll::math_tools

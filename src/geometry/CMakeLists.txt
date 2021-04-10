@@ -1,6 +1,6 @@
 add_library(geometry INTERFACE)
 
-target_include_directories( geometry
+target_include_directories(geometry
     INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
