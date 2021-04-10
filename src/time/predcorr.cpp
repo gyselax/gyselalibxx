@@ -16,7 +16,7 @@ void PredCorr::operator()(DBlock2D& fdistribu, double mass_ratio) const
     // a 2D block of the same size as fdistribu
     DBlock2D fdistribu_half_t(fdistribu.domain());
 
-    for (size_t iter = m_time[0].begin(); iter < m_time[0].end(); ++iter) {
+    for (size_t iter = 0; iter < m_time[0].size(); ++iter) {
         // copy fdistribu
         fdistribu_half_t = fdistribu;
 

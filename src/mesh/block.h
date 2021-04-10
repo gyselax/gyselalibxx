@@ -7,6 +7,21 @@
 
 #include "mesh.h"
 
+class BlockBase
+{
+public:
+    class AllDim
+    {
+        constexpr AllDim() noexcept = default;
+
+    public:
+        constexpr AllDim(const AllDim&) noexcept = default;
+        constexpr AllDim(AllDim&&) noexcept = default;
+        friend class BlockBase;
+    };
+
+    static constexpr AllDim ALL_DIM = AllDim();
+};
 
 template <int NDIMS, class ElementType>
 class BlockND;
@@ -46,6 +61,7 @@ private:
     /// The raw view of the data
     RawView m_raw;
 
+    /// The mesh on which this block is defined
     MeshND<NDIMS> m_mesh;
 
 public:
@@ -177,7 +193,7 @@ public:
      */
     constexpr MDomain domain(size_t dim) const noexcept
     {
-        return MDomain(m_mesh[dim], 0, m_raw.extent(dim));
+        return MDomain(m_mesh[dim], m_raw.extent(dim));
     }
 
     /** Provide access to the domain on which this field block is defined
@@ -204,6 +220,14 @@ public:
         return m_raw;
     }
 
+    /** Slice out some dimensions of
+     */
+    template <size_t... dims>
+    const BlockViewND<sizeof...(dims), ElementType, false> slice() const
+    {
+        return m_raw;
+    }
+
     /** Duplicate the data of this view
      * @return a copy of the data of this view
      */
@@ -221,6 +245,18 @@ private:
     struct FullDom;
     template <size_t... IDXS>
     struct FullDom<std::index_sequence<IDXS...>>
+    {
+        static MDomainND<sizeof...(IDXS)> eval(
+                const BlockViewND<sizeof...(IDXS), ElementType, CONTIGUOUS>& self)
+        {
+            return MDomainND<sizeof...(IDXS)> {self.domain(IDXS)...};
+        }
+    };
+
+    template <class>
+    struct Slicer;
+    template <size_t... IDXS>
+    struct Slicer<std::index_sequence<IDXS...>>
     {
         static MDomainND<sizeof...(IDXS)> eval(
                 const BlockViewND<sizeof...(IDXS), ElementType, CONTIGUOUS>& self)
@@ -273,7 +309,7 @@ public:
      */
     BlockND(const MDomainND<NDIMS>& domain)
         : BlockView(
-                array_apply([](const MDomain& d) { return Mesher(d.mesh()); }, domain),
+                array_apply([](const MDomain& d) { return Mesh(d.mesh()); }, domain),
                 RawView(new double[domain.size()],
                         ExtentsND<NDIMS>(
                                 array_apply([](const MDomain& d) { return d.size(); }, domain))))

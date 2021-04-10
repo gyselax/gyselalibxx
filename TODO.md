@@ -10,3 +10,7 @@
 * add easy classes to hold set of values (coords typically)
 * make moving from 1-elem array to scalar easy for coords & co.
 * make applying member func on array easy for coords & co.
+* support itering over domains
+* support exposing sub-views from Block
+* Let blocks start at non-zero origin
+* Handle periodic dimensions

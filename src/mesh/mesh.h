@@ -19,7 +19,7 @@ using MCoord2D = MCoordND<2>;
 
 using MCoord3D = MCoordND<3>;
 
-class Mesher
+class Mesh
 {
     /// origin
     RCoord m_origin;
@@ -28,7 +28,7 @@ class Mesher
     double m_step;
 
 public:
-    constexpr Mesher(RCoord origin, double step) noexcept : m_origin(origin), m_step(step) { }
+    constexpr Mesh(RCoord origin, double step) noexcept : m_origin(origin), m_step(step) { }
 
     constexpr double origin() const noexcept
     {
@@ -55,7 +55,7 @@ public:
 };
 
 template <int NDIMS>
-using MeshND = std::array<Mesher, NDIMS>;
+using MeshND = std::array<Mesh, NDIMS>;
 
 using Mesh1D = MeshND<1>;
 
@@ -69,23 +69,14 @@ public:
     using index_type = ptrdiff_t;
 
 private:
-    Mesher m_mesh;
-
-    MCoord m_begin;
+    Mesh m_mesh;
 
     ptrdiff_t m_size;
 
 public:
-    /** Constructs a new NDomainND on the provided mesh.
-     * 
-     * The domain includes begin but excludes end
+    /** Constructs a new ::MDomainND on the provided mesh.
      */
-    constexpr MDomain(Mesher mesh, MCoord begin, ptrdiff_t size) noexcept
-        : m_mesh(mesh)
-        , m_begin(begin)
-        , m_size(size)
-    {
-    }
+    constexpr MDomain(Mesh mesh, ptrdiff_t size) noexcept : m_mesh(mesh), m_size(size) { }
 
     constexpr MDomain(const MDomain&) noexcept = default;
 
@@ -95,7 +86,7 @@ public:
 
     constexpr MDomain& operator=(MDomain&&) noexcept = default;
 
-    constexpr const Mesher& mesh() const noexcept
+    constexpr const Mesh& mesh() const noexcept
     {
         return m_mesh;
     }
@@ -103,18 +94,8 @@ public:
     constexpr void rcoords(View1D<RCoord1D> coords) const noexcept
     {
         for (size_t ii = 0; ii < coords.extent(0); ++ii) {
-            coords[ii] = mesh()({begin() + ii});
+            coords[ii] = mesh()({ii});
         }
-    }
-
-    constexpr MCoord begin() const noexcept
-    {
-        return m_begin;
-    }
-
-    constexpr MCoord end() const noexcept
-    {
-        return begin() + size();
     }
 
     constexpr ptrdiff_t size() const noexcept
