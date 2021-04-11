@@ -15,6 +15,11 @@ add_executable(voicexx
 	voicexx.cpp
 )
 
+target_compile_features(voicexx
+	PUBLIC
+		cxx_std_17
+)
+
 target_include_directories(voicexx
 	PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )

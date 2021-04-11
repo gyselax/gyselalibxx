@@ -143,7 +143,7 @@ void Spline_1D::eval_array_deriv_loop(mdspan_1d const& x, mdspan_1d& y) const
     }
 }
 
-void Spline_1D::eval_array(mdspan_1d const& x, mdspan_1d& y) const
+void Spline_1D::eval_array(mdspan_1d const x, mdspan_1d y) const
 {
     if (bspl.uniform) {
         if (bspl.periodic) {
@@ -160,7 +160,7 @@ void Spline_1D::eval_array(mdspan_1d const& x, mdspan_1d& y) const
     }
 }
 
-void Spline_1D::eval_array_deriv(mdspan_1d const& x, mdspan_1d& y) const
+void Spline_1D::eval_array_deriv(mdspan_1d const x, mdspan_1d y) const
 {
     if (bspl.uniform)
         eval_array_deriv_loop<BSplines_uniform>(x, y);

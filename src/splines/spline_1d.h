@@ -17,8 +17,8 @@ public:
     bool belongs_to_space(const BSplines& bspline) const;
     double eval(double x) const;
     double eval_deriv(double x) const;
-    void eval_array(mdspan_1d const& x, mdspan_1d& y) const;
-    void eval_array_deriv(mdspan_1d const& x, mdspan_1d& y) const;
+    void eval_array(mdspan_1d const x, mdspan_1d y) const;
+    void eval_array_deriv(mdspan_1d const x, mdspan_1d y) const;
     double integrate() const;
 
 private:
