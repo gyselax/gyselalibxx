@@ -40,6 +40,8 @@ public:
 
     /// values of the function
     DBlock2D fdistribu() const;
+
+    //Boundary_conditions
 };
 
 class Maxwellian

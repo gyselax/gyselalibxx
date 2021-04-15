@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <span>
 #include <type_traits>
 #include <vector>
 

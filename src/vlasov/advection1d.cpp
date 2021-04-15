@@ -31,7 +31,7 @@ Advection1D::Advection1D(
 void Advection1D::operator()(DBlockView2D& fdistribu, double mass_ratio, double dt) const
 {
     // This should be replaced by something like Seq<RCoord1D>
-    View1D<double> x = m_spline_interpolator.get_interp_points();
+    View1D<double> x = m_spline_interpolator.get_interp_points(); //TODO: mesh/mdomain
     unique_ptr<double[]> new_points_ptr = make_unique<double[]>(x.extent(0));
     View1D<double> new_points(new_points_ptr.get(), x.extent(0));
 
