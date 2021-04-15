@@ -11,15 +11,6 @@ add_subdirectory(splines)
 add_subdirectory(time)
 add_subdirectory(vlasov)
 
-add_executable(tst
-	tst.cpp
-)
-
-target_compile_features(tst
-	PUBLIC
-		cxx_std_17
-)
-
 add_executable(voicexx
 	voicexx.cpp
 )
