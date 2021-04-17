@@ -9,12 +9,11 @@
 
 int main()
 {
-    // The mesh, d_x=.01, d_v=.2, d_t=.1
+    // The mesh dx:0.01, dv:0.2, dt:.1
     Mesh3D mesh = {Mesh(0, .01), Mesh(-10, .2), Mesh(0, .1)};
 
-    // The meshed domain
+    // The meshed domain x:[0,1) v:[-10,10) t:[0,100)
     MDomain3D dom3d = {MDomain(mesh[0], 100), MDomain(mesh[1], 100), MDomain(mesh[3], 1000)};
-
 
     const BSplines_uniform bsplines_x = {3, true, 4, 5, 6};
 
