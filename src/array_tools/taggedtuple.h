@@ -7,37 +7,50 @@ class TaggedTuple;
 
 namespace detail {
 
-template <class QueryTag, class ElementType, class... TagsTail>
+/** Maps types to size_t
+ */
+template <class...>
+struct TypeSeq;
+
+template <class...>
 struct SMapImpl;
 
-}
-
-template <class QueryTag, class ElementType, class... Tags>
-inline constexpr const ElementType& get(const TaggedTuple<ElementType, Tags...>& map) noexcept
+template <class QueryTag, class... TagsTail>
+struct SMapImpl<QueryTag, TypeSeq<QueryTag, TagsTail...>>
 {
-    return detail::SMapImpl<QueryTag, ElementType, Tags...>::call(map);
-}
-
-template <class QueryTag, class ElementType, class... Tags>
-inline constexpr ElementType& get(TaggedTuple<ElementType, Tags...>& map) noexcept
-{
-    return detail::SMapImpl<QueryTag, ElementType, Tags...>::call(map);
-}
-
-template <class ElementType>
-class TaggedTuple<ElementType>
-{
+    static inline constexpr size_t get()
+    {
+        return 0;
+    }
 };
 
-template <class ElementType, class TagsHead, class... TagsTail>
-class TaggedTuple<ElementType, TagsHead, TagsTail...> : public TaggedTuple<ElementType, TagsTail...>
+template <class QueryTag, class TagsHead, class... TagsTail>
+struct SMapImpl<QueryTag, TypeSeq<TagsHead, TagsTail...>>
 {
-public:
-    using Parent = TaggedTuple<ElementType, TagsTail...>;
+    static inline constexpr size_t get()
+    {
+        return 1 + SMapImpl<QueryTag, TypeSeq<TagsTail...>>::get();
+    }
+};
 
-private:
-    ElementType m_value;
+template <class QueryTag, class... Tags>
+static inline constexpr size_t rank_of()
+{
+    return SMapImpl<QueryTag, Tags...>::get();
+}
 
+template <class QueryTag, class... Tags>
+static inline constexpr size_t rank_of()
+{
+    return SMapImpl<QueryTag, Tags...>::get();
+}
+
+} // namespace detail
+
+
+template <class ElementType, class... Tags>
+class TaggedTuple : public std::array<ElementType, sizeof...(Tags)>
+{
 public:
     constexpr TaggedTuple() noexcept = default;
 
@@ -55,45 +68,15 @@ public:
     {
     }
 
-    inline constexpr ElementType& get() noexcept
+    template <class QueryTag>
+    inline constexpr auto get() noexcept
     {
-        return m_value;
+        return this->operator[](detail::rank_of<QueryTag, Tags...>());
     }
 
-    inline constexpr const ElementType& get() const noexcept
+    template <class QueryTag>
+    inline constexpr auto get() const noexcept
     {
-        return m_value;
+        return this->operator[](detail::rank_of<QueryTag, Tags...>());
     }
 };
-
-namespace detail {
-
-template <class QueryTag, class ElementType, class... TagsTail>
-struct SMapImpl<QueryTag, ElementType, QueryTag, TagsTail...>
-{
-    static inline constexpr const ElementType& call(
-            const TaggedTuple<ElementType, QueryTag, TagsTail...>& map)
-    {
-        return map.get();
-    }
-    static inline constexpr ElementType& call(TaggedTuple<ElementType, QueryTag, TagsTail...>& map)
-    {
-        return map.get();
-    }
-};
-
-template <class QueryTag, class ElementType, class TagsHead, class... TagsTail>
-struct SMapImpl<QueryTag, ElementType, TagsHead, TagsTail...>
-{
-    static inline constexpr const ElementType& call(
-            const TaggedTuple<ElementType, TagsHead, TagsTail...>& map)
-    {
-        return SMapImpl<QueryTag, ElementType, TagsTail...>::call(map);
-    }
-    static inline constexpr ElementType& call(TaggedTuple<ElementType, TagsHead, TagsTail...>& map)
-    {
-        return SMapImpl<QueryTag, ElementType, TagsTail...>::call(map);
-    }
-};
-
-} // namespace detail
