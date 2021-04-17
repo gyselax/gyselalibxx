@@ -15,5 +15,3 @@ using MCoord1D = MCoordND<1>;
 using MCoord2D = MCoordND<2>;
 
 using MCoord3D = MCoordND<3>;
-
-
