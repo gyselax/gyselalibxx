@@ -1,17 +1,17 @@
 #pragma once
 
-#include <array>
 #include <cstddef>
 
-#include "taggedtuple.h"
+#include "dim.h"
+#include "taggedarray.h"
 
-using MCoordElement = ptrdiff_t;
+using MCoordElement = std::size_t;
 
-template <int NDIMS>
-using MCoordND = std::array<MCoordElement, NDIMS>;
+template <class... Tags>
+using MCoord = TaggedArray<MCoordElement, Tags...>;
 
-using MCoord1D = MCoordND<1>;
+using MCoordX = MCoord<Dim::X>;
 
-using MCoord2D = MCoordND<2>;
+using MCoordVx = MCoord<Dim::Vx>;
 
-using MCoord3D = MCoordND<3>;
+using MCoordXVx = MCoord<Dim::X, Dim::Vx>;

@@ -2,17 +2,17 @@
 
 namespace Dim {
 
-stuct X
+struct X
 {
     static constexpr bool PERIODIC = true;
 };
 
-stuct VX
+struct Vx
 {
     static constexpr bool PERIODIC = false;
 };
 
-stuct T
+struct T
 {
     static constexpr bool PERIODIC = false;
 };
