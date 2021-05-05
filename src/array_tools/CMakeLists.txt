@@ -7,7 +7,6 @@ target_include_directories(array_tools
 target_link_libraries(array_tools
 	INTERFACE
 		std::mdspan
-		std::mdarray
 )
 
 add_library(vcx::array_tools ALIAS array_tools)

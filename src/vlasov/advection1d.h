@@ -16,7 +16,7 @@ public:
             const BoundaryValue& bc_left,
             const BoundaryValue& bc_right);
 
-    void operator()(DBlockView2D& fdistribu, double mass_ratio, double dt) const;
+    void operator()(DBlockViewXVx& fdistribu, double mass_ratio, double dt) const;
 
 private:
     const BSplines& m_bspl;

@@ -5,5 +5,5 @@
 class EfieldSolver : public IEfieldSolver
 {
 public:
-    void operator()(DBlock1D ex, const DBlock2D fdistribu) const override;
+    void operator() ( DBlockViewX& ex, const DBlockViewXVx& fdistribu ) const override;
 };

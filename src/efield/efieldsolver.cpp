@@ -1,6 +1,6 @@
 #include "efieldsolver.h"
 
-void EfieldSolver::operator()(DBlock1D ex, const DBlock2D fdistribu) const
+void EfieldSolver::operator() ( DBlockViewX& ex, const DBlockViewXVx& fdistribu ) const
 {
     //TODO
 }

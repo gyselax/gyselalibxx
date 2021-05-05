@@ -90,12 +90,18 @@ public:
 
     constexpr inline TaggedArray& operator=(const ElementType& e) noexcept
     {
+        static_assert(
+                sizeof...(Tags) == 1,
+                "Implicit conversion is only possible for size 1 TaggedTuples");
         m_values = e;
         return *this;
     }
 
     constexpr inline TaggedArray& operator=(ElementType&& e) noexcept
     {
+        static_assert(
+                sizeof...(Tags) == 1,
+                "Implicit conversion is only possible for size 1 TaggedTuples");
         m_values = std::move(e);
         return *this;
     }
