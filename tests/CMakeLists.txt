@@ -26,9 +26,14 @@ target_compile_features(test_splines
 		cxx_std_17
 )
 
+target_include_directories(test_splines
+	PUBLIC
+		"${CMAKE_CURRENT_SOURCE_DIR}"
+)
+
 target_link_libraries(test_splines
 	PUBLIC
-		vcx::array_tools
+                sll::boundary_conditions
 )
 
 add_test(NAME test_splines COMMAND test_splines)
