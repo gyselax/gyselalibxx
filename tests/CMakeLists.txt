@@ -15,3 +15,20 @@ target_link_libraries(tst
 )
 
 add_test(NAME tst COMMAND tst)
+
+
+add_executable(test_splines
+	test_splines.cpp
+)
+
+target_compile_features(test_splines
+	PUBLIC
+		cxx_std_17
+)
+
+target_link_libraries(test_splines
+	PUBLIC
+		vcx::array_tools
+)
+
+add_test(NAME test_splines COMMAND test_splines)
