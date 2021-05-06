@@ -34,6 +34,7 @@ target_include_directories(test_splines
 target_link_libraries(test_splines
 	PUBLIC
                 sll::boundary_conditions
+                sll::splines
 )
 
 add_test(NAME test_splines COMMAND test_splines)

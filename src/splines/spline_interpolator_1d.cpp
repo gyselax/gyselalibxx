@@ -7,19 +7,19 @@
 
 #include "spline_interpolator_1d.h"
 
-std::array<BoundaryCondition, 3> Spline_interpolator_1D::allowed_bcs
-        = {BoundaryCondition::sll_p_periodic,
-           BoundaryCondition::sll_p_hermite,
-           BoundaryCondition::sll_p_greville};
+std::array<BoundCond, 3> Spline_interpolator_1D::allowed_bcs
+        = {BoundCond::PERIODIC,
+             BoundCond::HERMITE,
+            BoundCond::GREVILLE};
 
 Spline_interpolator_1D::Spline_interpolator_1D(
         const BSplines& bspl,
-        BoundaryCondition xmin_bc,
-        BoundaryCondition xmax_bc)
+        BoundCond xmin_bc,
+        BoundCond xmax_bc)
     : xmin_bc(xmin_bc)
     , xmax_bc(xmax_bc)
-    , nbc_xmin(xmin_bc == BoundaryCondition::sll_p_hermite ? bspl.degree / 2 : 0)
-    , nbc_xmax(xmax_bc == BoundaryCondition::sll_p_hermite ? bspl.degree / 2 : 0)
+    , nbc_xmin(xmin_bc == BoundCond::HERMITE ? bspl.degree / 2 : 0)
+    , nbc_xmax(xmax_bc == BoundCond::HERMITE ? bspl.degree / 2 : 0)
     , bspl(bspl)
     , odd(bspl.degree % 2)
     , offset(bspl.periodic ? bspl.degree / 2 : 0)
@@ -45,8 +45,8 @@ inline void Spline_interpolator_1D::constructor_sanity_checks()
     assert(xmin_bc == allowed_bcs[0] || xmin_bc == allowed_bcs[1] || xmin_bc == allowed_bcs[2]);
     assert(xmax_bc == allowed_bcs[0] || xmax_bc == allowed_bcs[1] || xmax_bc == allowed_bcs[2]);
     if (bspl.periodic) {
-        assert(xmin_bc == BoundaryCondition::sll_p_periodic);
-        assert(xmax_bc == BoundaryCondition::sll_p_periodic);
+        assert(xmin_bc == BoundCond::PERIODIC);
+        assert(xmax_bc == BoundCond::PERIODIC);
     }
 
     assert(not bspl.radial);
@@ -92,15 +92,15 @@ void Spline_interpolator_1D::compute_interpolant(
     if (bspl.degree == 1)
         return compute_interpolant_degree1(spline, vals);
 
-    assert((xmin_bc == BoundaryCondition::sll_p_hermite)
+    assert((xmin_bc == BoundCond::HERMITE)
            != (derivs_xmin == nullptr || derivs_xmin->extent(0) == 0));
-    assert((xmax_bc == BoundaryCondition::sll_p_hermite)
+    assert((xmax_bc == BoundCond::HERMITE)
            != (derivs_xmax == nullptr || derivs_xmax->extent(0) == 0));
 
     // Hermite boundary conditions at xmin, if any
     // NOTE: For consistency with the linear system, the i-th derivative
     //       provided by the user must be multiplied by dx^i
-    if (xmin_bc == BoundaryCondition::sll_p_hermite) {
+    if (xmin_bc == BoundCond::HERMITE) {
         for (int i(nbc_xmin); i > 0; --i) {
             spline.bcoef(nbc_xmin - i) = (*derivs_xmin)(i - 1) * ipow(dx, i + odd - 1);
         }
@@ -116,7 +116,7 @@ void Spline_interpolator_1D::compute_interpolant(
     // Hermite boundary conditions at xmax, if any
     // NOTE: For consistency with the linear system, the i-th derivative
     //       provided by the user must be multiplied by dx^i
-    if (xmax_bc == BoundaryCondition::sll_p_hermite) {
+    if (xmax_bc == BoundCond::HERMITE) {
         for (int i(0); i < nbc_xmax; ++i) {
             spline.bcoef(bspl.nbasis - nbc_xmax + i) = (*derivs_xmax)(i)*ipow(dx, i + odd);
         }
@@ -125,7 +125,7 @@ void Spline_interpolator_1D::compute_interpolant(
     mdspan_1d bcoef_section(spline.bcoef_ptr.get() + offset, bspl.nbasis);
     matrix->solve_inplace(bcoef_section);
 
-    if (xmin_bc == BoundaryCondition::sll_p_periodic and offset != 0) {
+    if (xmin_bc == BoundCond::PERIODIC and offset != 0) {
         for (int i(0); i < offset; ++i) {
             spline.bcoef(i) = spline.bcoef(bspl.nbasis + i);
         }
@@ -146,7 +146,7 @@ void Spline_interpolator_1D::compute_interpolation_points_uniform()
     interp_pts_ptr = std::make_unique<double[]>(n_interp_pts);
     interp_pts = mdspan_1d(interp_pts_ptr.get(), n_interp_pts);
 
-    if (xmin_bc == BoundaryCondition::sll_p_periodic) {
+    if (xmin_bc == BoundCond::PERIODIC) {
         double shift(odd == 0 ? 0.5 : 0.0);
         for (int i(0); i < n_interp_pts; ++i) {
             interp_pts(i) = bspl.xmin + (i + shift) * dx;
@@ -159,9 +159,9 @@ void Spline_interpolator_1D::compute_interpolation_points_uniform()
         // Additional knots near x=xmin
         int n_to_fill_min(bspl.degree - nbc_xmin - 1);
         for (; i < n_to_fill_min; ++i) {
-            if (xmin_bc == BoundaryCondition::sll_p_greville)
+            if (xmin_bc == BoundCond::GREVILLE)
                 iknots[i] = 0;
-            if (xmin_bc == BoundaryCondition::sll_p_hermite)
+            if (xmin_bc == BoundCond::HERMITE)
                 iknots[i] = -n_to_fill_min + i;
         }
 
@@ -172,9 +172,9 @@ void Spline_interpolator_1D::compute_interpolation_points_uniform()
 
         // Additional knots near x=xmax
         for (int j(1); i < n_iknots; ++i, ++j) {
-            if (xmax_bc == BoundaryCondition::sll_p_greville)
+            if (xmax_bc == BoundCond::GREVILLE)
                 iknots[i] = bspl.ncells;
-            if (xmax_bc == BoundaryCondition::sll_p_hermite)
+            if (xmax_bc == BoundCond::HERMITE)
                 iknots[i] = bspl.ncells + j;
         }
 
@@ -203,7 +203,7 @@ void Spline_interpolator_1D::compute_interpolation_points_non_uniform()
     int n_temp_knots(n_interp_pts - 1 + bspl_nu.degree);
     double temp_knots[n_temp_knots];
 
-    if (xmin_bc == BoundaryCondition::sll_p_periodic) {
+    if (xmin_bc == BoundCond::PERIODIC) {
         for (int i(0); i < n_interp_pts - 1 + bspl_nu.degree; ++i) {
             temp_knots[i] = bspl_nu.get_knot(1 - bspl_nu.degree + offset + i);
         }
@@ -215,9 +215,9 @@ void Spline_interpolator_1D::compute_interpolation_points_non_uniform()
         for (; i < n_start_pts; ++i) {
             // As xmin_bc is a const variable the compiler should optimize
             // for(if..else..) to if(for..)else(for...)
-            if (xmin_bc == BoundaryCondition::sll_p_greville)
+            if (xmin_bc == BoundCond::GREVILLE)
                 temp_knots[i] = bspl_nu.get_knot(0);
-            if (xmin_bc == BoundaryCondition::sll_p_hermite)
+            if (xmin_bc == BoundCond::HERMITE)
                 temp_knots[i] = 2.0 * bspl_nu.get_knot(0) - bspl_nu.get_knot(n_start_pts - i);
         }
 
@@ -228,9 +228,9 @@ void Spline_interpolator_1D::compute_interpolation_points_non_uniform()
 
         // Initialise knots relevant to the xmax boundary condition
         for (int j(0); i < n_temp_knots; ++i, ++j) {
-            if (xmax_bc == BoundaryCondition::sll_p_greville)
+            if (xmax_bc == BoundCond::GREVILLE)
                 temp_knots[i] = bspl_nu.get_knot(bspl_nu.ncells);
-            if (xmax_bc == BoundaryCondition::sll_p_hermite)
+            if (xmax_bc == BoundCond::HERMITE)
                 temp_knots[i] = 2.0 * bspl_nu.get_knot(bspl_nu.ncells)
                               - bspl_nu.get_knot(bspl_nu.ncells - 1 - j);
         }
@@ -243,7 +243,7 @@ void Spline_interpolator_1D::compute_interpolation_points_non_uniform()
     }
 
     // Periodic case: apply periodic BCs to interpolation points
-    if (xmin_bc == BoundaryCondition::sll_p_periodic) {
+    if (xmin_bc == BoundCond::PERIODIC) {
         double zone_width(bspl.xmax - bspl.xmin);
         for (int i(0); i < n_interp_pts; ++i) {
             interp_pts(i) = modulo(interp_pts(i) - nbc_xmin, zone_width) + bspl.xmin;
@@ -266,26 +266,26 @@ void Spline_interpolator_1D::compute_block_sizes_uniform(
         int& upper_block_size) const
 {
     switch (xmin_bc) {
-    case BoundaryCondition::sll_p_periodic:
+    case BoundCond::PERIODIC:
         upper_block_size = (bspl.degree) / 2;
         break;
-    case BoundaryCondition::sll_p_hermite:
+    case BoundCond::HERMITE:
         upper_block_size = nbc_xmin;
         break;
-    case BoundaryCondition::sll_p_greville:
+    case BoundCond::GREVILLE:
         upper_block_size = bspl.degree - 1;
         break;
     default:
         break; // TODO: throw error
     }
     switch (xmax_bc) {
-    case BoundaryCondition::sll_p_periodic:
+    case BoundCond::PERIODIC:
         lower_block_size = (bspl.degree) / 2;
         break;
-    case BoundaryCondition::sll_p_hermite:
+    case BoundCond::HERMITE:
         lower_block_size = nbc_xmax;
         break;
-    case BoundaryCondition::sll_p_greville:
+    case BoundCond::GREVILLE:
         lower_block_size = bspl.degree - 1;
         break;
     default:
@@ -300,26 +300,26 @@ void Spline_interpolator_1D::compute_block_sizes_non_uniform(
         int& upper_block_size) const
 {
     switch (xmin_bc) {
-    case BoundaryCondition::sll_p_periodic:
+    case BoundCond::PERIODIC:
         upper_block_size = (bspl.degree + 1) / 2;
         break;
-    case BoundaryCondition::sll_p_hermite:
+    case BoundCond::HERMITE:
         upper_block_size = nbc_xmin + 1;
         break;
-    case BoundaryCondition::sll_p_greville:
+    case BoundCond::GREVILLE:
         upper_block_size = bspl.degree - 1;
         break;
     default:
         break; // TODO: throw error
     }
     switch (xmax_bc) {
-    case BoundaryCondition::sll_p_periodic:
+    case BoundCond::PERIODIC:
         lower_block_size = (bspl.degree + 1) / 2;
         break;
-    case BoundaryCondition::sll_p_hermite:
+    case BoundCond::HERMITE:
         lower_block_size = nbc_xmax + 1;
         break;
-    case BoundaryCondition::sll_p_greville:
+    case BoundCond::GREVILLE:
         lower_block_size = bspl.degree - 1;
         break;
     default:
@@ -346,7 +346,7 @@ void Spline_interpolator_1D::allocate_matrix(int lower_block_size, int upper_blo
         upper_band_width = (bspl.degree + 1) / 2;
     }
 
-    if (xmin_bc == BoundaryCondition::sll_p_periodic) {
+    if (xmin_bc == BoundCond::PERIODIC) {
         matrix = Matrix::make_new_periodic_banded(
                 bspl.nbasis,
                 upper_band_width,
@@ -374,7 +374,7 @@ void Spline_interpolator_1D::build_matrix_system()
     int jmin;
 
     // Hermite boundary conditions at xmin, if any
-    if (xmin_bc == BoundaryCondition::sll_p_hermite) {
+    if (xmin_bc == BoundCond::HERMITE) {
         double derivs_ptr[(bspl.degree / 2 + 1) * (bspl.degree + 1)];
         mdspan_2d derivs(derivs_ptr, bspl.degree + 1, bspl.degree / 2 + 1);
         bspl.eval_basis_and_n_derivs(bspl.xmin, nbc_xmin, derivs, jmin);
@@ -408,7 +408,7 @@ void Spline_interpolator_1D::build_matrix_system()
     }
 
     // Hermite boundary conditions at xmax, if any
-    if (xmax_bc == BoundaryCondition::sll_p_hermite) {
+    if (xmax_bc == BoundCond::HERMITE) {
         double derivs_ptr[(bspl.degree / 2 + 1) * (bspl.degree + 1)];
         mdspan_2d derivs(derivs_ptr, bspl.degree + 1, bspl.degree / 2 + 1);
 
@@ -439,31 +439,31 @@ void Spline_interpolator_1D::build_matrix_system()
 
 int Spline_interpolator_1D::compute_num_cells(
         int degree,
-        BoundaryCondition xmin_bc,
-        BoundaryCondition xmax_bc,
+        BoundCond xmin_bc,
+        BoundCond xmax_bc,
         int nipts)
 {
     assert(degree > 0);
     // TODO: xmin in allowed_bcs
     // TODO: xmax in allowed_bcs
 
-    if ((xmin_bc == BoundaryCondition::sll_p_periodic)
-        != (xmax_bc == BoundaryCondition::sll_p_periodic)) {
+    if ((xmin_bc == BoundCond::PERIODIC)
+        != (xmax_bc == BoundCond::PERIODIC)) {
         std::cerr << "Incompatible BCs" << std::endl;
         // TODO: raise error
         return -1;
     }
 
-    if (xmin_bc == BoundaryCondition::sll_p_periodic) {
+    if (xmin_bc == BoundCond::PERIODIC) {
         return nipts;
     } else {
         int nbc_xmin, nbc_xmax;
-        if (xmin_bc == BoundaryCondition::sll_p_hermite)
+        if (xmin_bc == BoundCond::HERMITE)
             nbc_xmin = degree / 2;
         else
             nbc_xmin = 0;
 
-        if (xmax_bc == BoundaryCondition::sll_p_hermite)
+        if (xmax_bc == BoundCond::HERMITE)
             nbc_xmax = degree / 2;
         else
             nbc_xmax = 0;
