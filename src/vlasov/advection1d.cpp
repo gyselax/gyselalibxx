@@ -34,7 +34,7 @@ DBlockViewXVx& Advection1D::operator()(DBlockViewXVx& fdistribu, double mass_rat
     assert(get_domain<Dim::X>(fdistribu) == m_spline_interpolator.domain());
 
     const MDomainX& x_dom = get_domain<Dim::X>(fdistribu);
-    const MDomainX& v_dom = get_domain<Dim::Vx>(fdistribu);
+    const MDomainVx& v_dom = get_domain<Dim::Vx>(fdistribu);
 
     // pre-allocate some memory to prevent allocation later in loop
     BlockX<RCoordX> feet_coords = allocate_bloc<RCoordX>(x_dom);
