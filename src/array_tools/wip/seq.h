@@ -85,9 +85,7 @@ public:
         range_initialize(init.begin(), init.end());
     }
 
-    constexpr inline Seq& operator=(const Seq& other) noexcept {
-		
-	}
+    constexpr inline Seq& operator=(const Seq& other) noexcept { }
 
     constexpr inline Seq& operator=(Seq&& other) noexcept;
 

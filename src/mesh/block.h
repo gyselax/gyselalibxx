@@ -14,12 +14,12 @@ class Block;
 template <class, class, bool = true>
 class BlockView;
 
-template<class... Tags, class ElementType, bool CONTIGUOUS>
-class BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS >
+template <class... Tags, class ElementType, bool CONTIGUOUS>
+class BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>
 {
 public:
     /// ND memory view
-    using RawView = ViewND<sizeof... ( Tags ), ElementType, CONTIGUOUS>;
+    using RawView = ViewND<sizeof...(Tags), ElementType, CONTIGUOUS>;
 
     using MDomain_ = MDomain<Tags...>;
 
@@ -47,7 +47,7 @@ public:
 
     using reference = typename RawView::reference;
 
-    template <int ONDIMS, class OElementType, bool OCONTIGUOUS>
+    template <class, class, bool>
     friend class BlockView;
 
 private:
@@ -61,34 +61,34 @@ public:
     /** Constructs a new Block by copy
      * @param other the Block to copy
      */
-    inline constexpr BlockView ( const BlockView& other ) noexcept = default;
+    inline constexpr BlockView(const BlockView& other) noexcept = default;
 
     /** Constructs a new Block by move
      * @param other the Block to move
      */
-    inline constexpr BlockView ( BlockView&& other ) noexcept = default;
+    inline constexpr BlockView(BlockView&& other) noexcept = default;
 
     /** Copy-assigns a new value to this field
      * @param other the Block to copy
      * @return *this
      */
-    inline constexpr BlockView& operator= ( const BlockView& other ) noexcept = default;
+    inline constexpr BlockView& operator=(const BlockView& other) noexcept = default;
 
     /** Move-assigns a new value to this field
      * @param other the Block to move
      * @return *this
      */
-    inline constexpr BlockView& operator= ( BlockView&& other ) noexcept = default;
+    inline constexpr BlockView& operator=(BlockView&& other) noexcept = default;
 
     template <class... IndexType>
-    inline constexpr reference operator() ( IndexType... indices ) const noexcept
+    inline constexpr reference operator()(IndexType... indices) const noexcept
     {
-        return m_raw ( indices... );
+        return m_raw(indices...);
     }
 
-    inline constexpr reference operator() ( const MCoord_& indices ) const noexcept
+    inline constexpr reference operator()(const MCoord_& indices) const noexcept
     {
-        return m_raw ( indices );
+        return m_raw(indices);
     }
 
     inline accessor_type accessor() const
@@ -106,19 +106,14 @@ public:
         return extents_type::rank_dynamic();
     }
 
-    static inline constexpr index_type static_extent ( size_t r ) noexcept
+    static inline constexpr index_type static_extent(size_t r) noexcept
     {
-        return extents_type::static_extent ( r );
+        return extents_type::static_extent(r);
     }
 
     inline constexpr extents_type extents() const noexcept
     {
         return m_raw.extents();
-    }
-
-    inline constexpr index_type extent ( size_t r ) const noexcept
-    {
-        return extents().extent ( r );
     }
 
     inline constexpr index_type size() const noexcept
@@ -166,7 +161,7 @@ public:
         return m_raw.is_strided();
     }
 
-    inline constexpr index_type stride ( size_t r ) const
+    inline constexpr index_type stride(size_t r) const
     {
         return m_raw.stride();
     }
@@ -174,30 +169,46 @@ public:
     /** Swaps this field with another
      * @param other the Block to swap with this one
      */
-    inline constexpr void swap ( BlockView& other )
+    inline constexpr void swap(BlockView& other)
     {
-        BlockView tmp = std::move ( other );
-        other = std::move ( *this );
-        *this = std::move ( tmp );
+        BlockView tmp = std::move(other);
+        other = std::move(*this);
+        *this = std::move(tmp);
     }
 
-//TODO
-//     /** Provide access to the domain on which this field block is defined
-//      * @return the domain on which this field block is defined
-//      */
-//     inline constexpr MDomain domain ( size_t dim ) const noexcept
-//     {
-//         return MDomain ( m_mesh[dim], m_raw.extent ( dim ) );
-//     }
+    //TODO
+    //     /** Provide access to the domain on which this field block is defined
+    //      * @return the domain on which this field block is defined
+    //      */
+    //     inline constexpr MDomain domain ( size_t dim ) const noexcept
+    //     {
+    //         return MDomain ( m_mesh[dim], m_raw.extent ( dim ) );
+    //     }
 
-//TODO
-//     /** Provide access to the domain on which this field block is defined
-//      * @return the domain on which this field block is defined
-//      */
-//     inline constexpr MDomain_ domain() const noexcept
-//     {
-//         return FullDom<std::make_index_sequence<NDIMS>>::eval ( *this );
-//     }
+    /** Provide access to the mesh on which this field block is defined
+     * @return the mesh on which this field block is defined
+     */
+    inline constexpr Mesh mesh() const noexcept
+    {
+        return m_mesh;
+    }
+
+    /** Provide access to the domain on which this field block is defined
+     * @return the domain on which this field block is defined
+     */
+    inline constexpr MDomain_ domain() const noexcept
+    {
+        return MDomain_(mesh(), mcoord_end(raw_view().extents()));
+    }
+
+    /** Provide access to the domain on which this field block is defined
+     * @return the domain on which this field block is defined
+     */
+    template <class... OTags>
+    inline constexpr MDomain<OTags...> domain() const noexcept
+    {
+        return MDomain<OTags...>(MDomain_(mesh(), mcoord_end(raw_view().extents())));
+    }
 
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
@@ -215,49 +226,54 @@ public:
         return m_raw;
     }
 
-//TODO
-//     /** Slice out some dimensions
-//      */
-//     template <class... OTags>
-//     inline constexpr auto slice ( MDomain<OTags...> ) const
-//     {
-//         constexpr size_t RESULT_DIM = ( ( std::is_integral_v<SliceSpecs> ? 0 : 1 ) + ... + 0 );
-//         auto&& new_view
-//             = std::experimental::subspan ( raw_view(), std::forward<SliceSpecs> ( slices )... );
-//         auto&& new_mesh = submesh ( m_mesh, std::forward<SliceSpecs> ( slices )... );
-//         return BlockView<
-//                RESULT_DIM,
-//                ElementType,
-//                new_view.is_always_contiguous() > ( new_mesh, new_view );
-//     }
+    template <class>
+    struct Slicer;
 
-// TODO:
-//     /** Duplicate the data of this view
-//      * @return a copy of the data of this view
-//      */
-//     inline constexpr Block<NDIMS, ElementType> duplicate() const
-//     {
-//         return Block<NDIMS, ElementType> ( *this );
-//     }
+    template <class... STags>
+    struct Slicer<RegularMesh<STags...>>
+    {
+        template <class... SliceSpecs>
+        static inline constexpr auto mesh_for(
+                const RegularMesh<STags...>& mesh,
+                std::experimental::all_type,
+                SliceSpecs... slices)
+        {
+        }
+
+        template <class... SliceSpecs>
+        static inline constexpr auto mesh_for(
+                const RegularMesh<STags...>& mesh,
+                SliceSpecs... slices)
+        {
+        }
+    };
+
+
+
+    /** Slice out some dimensions
+     */
+    template <class... SliceSpecs>
+    inline constexpr auto slice(SliceSpecs... slices) const
+    {
+        auto view = subspan(raw_view(), slices...);
+        auto mesh = submesh(m_mesh, slices...);
+        return (BlockView(mesh, view));
+    }
+
+    /** Duplicate the data of this view
+     * @return a copy of the data of this view
+     */
+    inline constexpr Block<MDomain<Tags...>, ElementType> duplicate() const
+    {
+        Block<MDomain<Tags...>, ElementType> result(this->domain());
+        deepcopy(result, *this);
+        return result;
+    }
 
 protected:
-//     inline constexpr BlockView ( MeshND<NDIMS> mesh, RawView raw_view )
-//         : m_raw ( raw_view )
-//         , m_mesh ( mesh )
-//     {
-//     }
-
-private:
-//     template <class>
-//     struct FullDom;
-//     template <size_t... IDXS>
-//     struct FullDom<std::index_sequence<IDXS...>> {
-//         static MDomainND<sizeof... ( IDXS ) > eval (
-//             const BlockView<sizeof... ( IDXS ), ElementType, CONTIGUOUS>& self )
-//         {
-//             return MDomainND<sizeof... ( IDXS ) > {self.domain ( IDXS )...};
-//         }
-//     };
+    inline constexpr BlockView(const Mesh& mesh, RawView raw_view) : m_raw(raw_view), m_mesh(mesh)
+    {
+    }
 };
 
 using DBlockViewX = BlockView<MDomain<Dim::X>, double>;
@@ -266,34 +282,40 @@ using DBlockViewVx = BlockView<MDomain<Dim::Vx>, double>;
 
 using DBlockViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double>;
 
-
-// template <int NDIMS, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS, class... Indices>
-// inline BlockView<NDIMS, ElementType, CONTIGUOUS>& copy (
-//     BlockView<NDIMS, ElementType, CONTIGUOUS>& to,
-//     BlockView<NDIMS, ElementType, OCONTIGUOUS> const& from,
-//     Indices... idxs ) noexcept
-// {
-//     assert ( to.extents() == from.extents() );
-//     if constexpr ( sizeof... ( Indices ) == to.rank() ) {
-//         to ( idxs... ) = from ( idxs... );
-//     } else {
-//         for ( size_t ii = 0; ii < to.extent ( sizeof... ( Indices ) ); ++ii ) {
-//             copy ( to, from, idxs..., ii );
-//         }
-//     }
-//     return to;
-// }
+template <class... Tags, class View>
+RegularMDomain<Tags...> get_domain(const View& v)
+{
+    return v.template domain<Tags...>();
+}
 
 
-template<class... Tags, class ElementType>
-class Block<MDomain<Tags...>, ElementType>
+template <class... Tags, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS, class... Indices>
+inline BlockView<Tags..., ElementType, CONTIGUOUS>& deepcopy(
+        BlockView<Tags..., ElementType, CONTIGUOUS>& to,
+        BlockView<Tags..., ElementType, OCONTIGUOUS> const& from,
+        Indices... idxs) noexcept
+{
+    assert(to.extents() == from.extents());
+    if constexpr (sizeof...(Indices) == to.rank()) {
+        to(idxs...) = from(idxs...);
+    } else {
+        for (size_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
+            copy(to, from, idxs..., ii);
+        }
+    }
+    return to;
+}
+
+
+template <class... Tags, class ElementType>
+class Block<MDomain<Tags...>, ElementType> : public BlockView<MDomain<Tags...>, ElementType>
 {
 public:
     /// ND view on this block
     using BlockView_ = BlockView<MDomain<Tags...>, ElementType>;
 
     /// ND memory view
-    using RawView = ViewND<sizeof... ( Tags ), ElementType>;
+    using RawView = ViewND<sizeof...(Tags), ElementType>;
 
     using MDomain_ = MDomain<Tags...>;
 
@@ -322,43 +344,28 @@ public:
     using reference = typename BlockView_::reference;
 
 public:
-// TODO:
-//     /** Construct a Block on a domain with uninitialized values
-//      */
-//     inline constexpr Block ( const MDomain_& domain )
-//         : BlockView (
-//               array_apply ( [] ( const MDomain& d )
-//     {
-//         return Mesh ( d.mesh() );
-//     }, domain ),
-//     RawView ( new double[domain.size()],
-//               ExtentsND<NDIMS> (
-//                   array_apply ( [] ( const MDomain& d )
-//     {
-//         return d.size();
-//     }, domain ) ) ) )
-//     {
-//     }
+    /** Construct a Block on a domain with uninitialized values
+     */
+    template <class... OTags>
+    explicit inline constexpr Block(const MDomain<OTags...>& domain)
+        : BlockView_(
+                domain,
+                RawView(new double[domain.size()],
+                        ExtentsND<sizeof...(Tags)>(domain.template extent<Tags>()...)))
+    {
+    }
 
     /** Constructs a new Block by copy
+     * 
+     * This is deleted, one should use deepcopy
      * @param other the Block to copy
      */
-    inline constexpr Block ( const Block& other ) = default;
+    inline constexpr Block(const Block& other) = delete;
 
     /** Constructs a new Block by move
      * @param other the Block to move
      */
-    inline constexpr Block ( Block&& other ) = default;
-
-    /** Constructs a new Block by copy from a view
-     * @param the view to copy
-     */
-    template<class... OTags, class OElementType>
-    inline constexpr Block ( Block<MDomain<OTags...>, OElementType>&& other )
-        : Block ( other.domain() )
-    {
-        *this = other;
-    }
+    inline constexpr Block(Block&& other) = default;
 
     inline ~Block()
     {
@@ -369,38 +376,47 @@ public:
      * @param other the Block to copy
      * @return *this
      */
-    inline constexpr Block& operator= ( const Block& other ) = default;
+    inline constexpr Block& operator=(const Block& other) = default;
 
     /** Move-assigns a new value to this field
      * @param other the Block to move
      * @return *this
      */
-    inline constexpr Block& operator= ( Block&& other ) = default;
+    inline constexpr Block& operator=(Block&& other) = default;
 
     /** Copy-assigns a new value to this field
      * @param other the Block to copy
      * @return *this
      */
-    template<class... OTags, class OElementType>
-    inline Block& operator= ( Block<MDomain<OTags...>, OElementType>&& other )
+    template <class... OTags, class OElementType>
+    inline Block& operator=(Block<MDomain<OTags...>, OElementType>&& other)
     {
-        copy ( *this, other );
+        copy(*this, other);
         return *this;
     }
 
     /** Swaps this field with another
      * @param other the Block to swap with this one
      */
-    inline constexpr void swap ( Block& other )
+    inline constexpr void swap(Block& other)
     {
-        Block tmp = std::move ( other );
-        other = std::move ( *this );
-        *this = std::move ( tmp );
+        Block tmp = std::move(other);
+        other = std::move(*this);
+        *this = std::move(tmp);
     }
 };
 
-using DBlockX = Block<MDomain<Dim::X>, double>;
+template <class ElementType>
+using BlockX = Block<MDomain<Dim::X>, ElementType>;
 
-using DBlockVx = Block<MDomain<Dim::Vx>, double>;
+using DBlockX = BlockX<double>;
 
-using DBlockXVx = Block<MDomain<Dim::X, Dim::Vx>, double>;
+template <class ElementType>
+using BlockVx = Block<MDomain<Dim::Vx>, ElementType>;
+
+using DBlockVx = BlockVx<double>;
+
+template <class ElementType>
+using BlockXVx = Block<MDomain<Dim::X, Dim::Vx>, ElementType>;
+
+using DBlockXVx = BlockXVx<double>;

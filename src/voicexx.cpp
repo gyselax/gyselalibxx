@@ -2,9 +2,7 @@
 
 #include "bsplines_uniform.h"
 #include "efieldsolver.h"
-#include "mesh.h"
 #include "predcorr.h"
-#include "space.h"
 #include "vlasovsolver.h"
 
 int main()

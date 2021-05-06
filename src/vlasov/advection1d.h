@@ -19,7 +19,7 @@ public:
     void operator()(DBlockViewXVx& fdistribu, double mass_ratio, double dt) const;
 
 private:
-    const BSplines& m_bspl;
+    const BSplines& m_x_spline_basis;
 
     const Spline_interpolator_1D& m_spline_interpolator;
 

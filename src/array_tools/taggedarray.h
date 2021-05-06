@@ -122,6 +122,16 @@ public:
         return m_values[0];
     }
 
+    constexpr inline ElementType& operator[](size_t pos)
+    {
+        return m_values[pos];
+    }
+    
+    constexpr inline const ElementType& operator[](size_t pos) const
+    {
+        return m_values[pos];
+    }
+
     template <class QueryTag>
     inline constexpr auto get() noexcept
     {
@@ -148,3 +158,4 @@ inline constexpr auto get(TaggedArray<ElementType, Tags...>& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
 }
+

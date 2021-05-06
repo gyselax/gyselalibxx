@@ -1,5 +1,6 @@
 #include <cassert>
 #include <cmath>
+#include <vector>
 
 #include "advection1d.h"
 #include "spline_1d.h"
@@ -7,48 +8,60 @@
 using namespace std;
 using namespace std::experimental;
 
-Advection1D::Advection1D ( const BSplines& bspl, const Spline_interpolator_1D& spl_interp )
-    : m_bspl ( bspl )
-    , m_spline_interpolator ( spl_interp )
-    , m_bc_left ( NullBoundaryValue::value )
-    , m_bc_right ( NullBoundaryValue::value )
+Advection1D::Advection1D(const BSplines& bspl, const Spline_interpolator_1D& spl_interp)
+    : m_x_spline_basis(bspl)
+    , m_spline_interpolator(spl_interp)
+    , m_bc_left(NullBoundaryValue::value)
+    , m_bc_right(NullBoundaryValue::value)
 {
-    assert ( bspl.periodic );
+    assert(bspl.periodic);
 }
 
-Advection1D::Advection1D (
-    const BSplines& bspl,
-    const Spline_interpolator_1D& spl_interp,
-    const BoundaryValue& bc_left,
-    const BoundaryValue& bc_right )
-    : m_bspl ( bspl )
-    , m_spline_interpolator ( spl_interp )
-    , m_bc_left ( bc_left )
-    , m_bc_right ( bc_right )
+Advection1D::Advection1D(
+        const BSplines& bspl,
+        const Spline_interpolator_1D& spl_interp,
+        const BoundaryValue& bc_left,
+        const BoundaryValue& bc_right)
+    : m_x_spline_basis(bspl)
+    , m_spline_interpolator(spl_interp)
+    , m_bc_left(bc_left)
+    , m_bc_right(bc_right)
 {
 }
 
-void Advection1D::operator() ( DBlockViewXVx& fdistribu, double mass_ratio, double dt ) const
+DBlockViewXVx& Advection1D::operator()(DBlockViewXVx& fdistribu, double mass_ratio, double dt) const
 {
-    // This should be replaced by something like Seq<RCoord1D>
-    View1D<double> x = m_spline_interpolator.get_interp_points(); //TODO: mesh/mdomain
-    unique_ptr<double[]> new_points_ptr = make_unique<double[]> ( x.extent ( 0 ) );
-    View1D<double> new_points ( new_points_ptr.get(), x.extent ( 0 ) );
+    assert(get_domain<Dim::X>(fdistribu) == m_spline_interpolator.domain());
 
-    DBlockX current_values ( {fdistribu.domain ( 0 ) } );
+    const MDomainX& x_dom = get_domain<Dim::X>(fdistribu);
+    const MDomainX& v_dom = get_domain<Dim::Vx>(fdistribu);
 
-    Spline_1D spline ( m_bspl, m_bc_left, m_bc_right );
-    for ( size_t vii = 0; vii < fdistribu.extent ( 1 ); ++vii ) {
-        const double dx = mass_ratio * dt * fdistribu.domain ( 1 ).mesh() ( {vii} ) [0];
+    // pre-allocate some memory to prevent allocation later in loop
+    BlockX<RCoordX> feet_coords = allocate_bloc<RCoordX>(x_dom);
+    DBlockX contiguous_slice = allocate_dbloc(x_dom);
+    SplineX spline = allocate_spline(m_x_spline_basis);
 
-        // copy the line in a contiguous array
-        current_values = fdistribu.slice ( all, vii );
+    for (MCoordVx vii : v_dom) {
+        // compute the displacement
+        const double dx = mass_ratio * dt * v_dom.to_real(vii);
 
-        m_spline_interpolator.compute_interpolant ( spline, current_values.raw_view() );
-        // splitting in x direction
-        for ( size_t xii = 0; xii < current_values.extent ( 0 ); ++xii ) {
-            new_points[xii] = x[xii] - dx;
+        // compute the coordinates of the feet
+        for (MCoordX xii : x_dom) {
+            feet_coords(xii) = x_dom.to_real(xii) - dx;
         }
-        spline.eval_array ( new_points, current_values.raw_view() );
+        
+        // copy the slice in contiguous memory
+        deepcopy(contiguous_slice, fdistribu.slice(vii));
+
+        // build a spline representation of the data
+        m_spline_interpolator(spline, contiguous_slice);
+
+        // evaluate the function at the feet using the spline
+        spline.eval_at(contiguous_slice, feet_coords);
+
+        // copy back
+        deepcopy(fdistribu.slice(vii), contiguous_slice);
     }
+    
+    return fdistribu;
 }
