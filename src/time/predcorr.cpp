@@ -1,6 +1,6 @@
 #include "predcorr.h"
 
-PredCorr::PredCorr(const IVlasovSolver2& vlasov, const IEfieldSolver2& efield, const MDomain<Dim::T>& time)
+PredCorr::PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, const MDomain1D& time)
     : m_vlasov(vlasov)
     , m_efield(efield)
     , m_time(time)
@@ -8,30 +8,28 @@ PredCorr::PredCorr(const IVlasovSolver2& vlasov, const IEfieldSolver2& efield, c
 }
 
 
-DBlockViewXVx& PredCorr::operator()(DBlockViewXVx& fdistribu, double mass_ratio) const
+void PredCorr::operator()(DBlock2D& fdistribu, double mass_ratio) const
 {
     // ex only depends on DX
-    DBlockX ex(fdistribu.domain<Dim::X>());
+    DBlock1D ex(MDomain1D {fdistribu.domain(0)});
 
     // a 2D block of the same size as fdistribu
-    DBlockXVx fdistribu_half_t(fdistribu.domain());
+    DBlock2D fdistribu_half_t(fdistribu.domain());
 
-    for (auto&& iter : m_time) {
+    for (size_t iter = 0; iter < m_time[0].size(); ++iter) {
         // copy fdistribu
-        deepcopy(fdistribu_half_t, fdistribu);
+        fdistribu_half_t = fdistribu;
 
         // predictor
-        m_vlasov(fdistribu_half_t, mass_ratio, m_time.step() / 2);
+        m_vlasov(fdistribu_half_t, mass_ratio, m_time[0].mesh().step() / 2);
 
         // computation of Ex(tn+1/2)
         m_efield(ex, fdistribu_half_t);
 
         // correction on a dt
-        m_vlasov(fdistribu, mass_ratio, m_time.step());
+        m_vlasov(fdistribu, mass_ratio, m_time[0].mesh().step());
 
         // computation of Ex(tn+1)
         m_efield(ex, fdistribu);
     }
-    
-    return fdistribu;
 }

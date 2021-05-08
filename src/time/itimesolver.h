@@ -1,11 +1,11 @@
 #pragma once
 
-#include "blockview.h"
+#include "block.h"
 
 class ITimeSolver
 {
 public:
     virtual ~ITimeSolver() = default;
 
-    virtual DBlockViewXVx& operator()(DBlockViewXVx& data, double mass_ratio) const = 0;
+    virtual void operator()(DBlock2D& data, double mass_ratio) const = 0;
 };
