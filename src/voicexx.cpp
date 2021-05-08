@@ -34,7 +34,7 @@ int main()
 
     const Advection1D advection_v = {bsplines_vx, interp_vx};
 
-    const VlasovSolver vlasov {advection_x, advection_v};
+    const SplitVlasovSolver vlasov {advection_x, advection_v};
 
     const EfieldSolver efield;
 

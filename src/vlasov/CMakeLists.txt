@@ -1,4 +1,5 @@
 add_library(vlasov STATIC
+	splitvlasovsolver.cpp
 	vlasovsolver.cpp
 )
 

@@ -2,7 +2,7 @@
 
 #include "nullefieldsolver.h"
 #include "predcorr.h"
-#include "vlasovsolver.h"
+#include "splitvlasovsolver.h"
 
 int main()
 {

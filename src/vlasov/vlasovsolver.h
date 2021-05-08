@@ -1,17 +1,17 @@
 #pragma once
 
-#include "iadvectionx.h"
-#include "blockview.h"
+#include "advection1d.h"
+#include "block.h"
 #include "ivlasovsolver.h"
 
 class VlasovSolver : public IVlasovSolver
 {
-    const IAdvectionX& m_advec_x;
+    const Advection1D& m_advec_x;
 
-    const IAdvectionX& m_advec_vx;
+    const Advection1D& m_advec_vx;
 
 public:
-    VlasovSolver(const IAdvectionX& advec_x, const IAdvectionX& m_advec_vx);
+    VlasovSolver(const Advection1D& advec_x, const Advection1D& m_advec_vx);
 
-    DBlockViewXVx& operator()(DBlockViewXVx& fdistribu, double mass_ratio, double dt) const override;
+    void operator()(DBlock2D& cur, double mass_ratio, double dt) const override;
 };

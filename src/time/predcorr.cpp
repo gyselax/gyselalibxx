@@ -1,6 +1,6 @@
 #include "predcorr.h"
 
-PredCorr::PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver2& efield, const MDomain<Dim::T>& time)
+PredCorr::PredCorr(const IVlasovSolver2& vlasov, const IEfieldSolver2& efield, const MDomain<Dim::T>& time)
     : m_vlasov(vlasov)
     , m_efield(efield)
     , m_time(time)

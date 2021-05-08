@@ -3,5 +3,5 @@
 class IVlasovSolver
 {
 public:
-    virtual DBlockViewXVx& operator()(DBlockViewXVx& fdistribu, double mass_ratio, double dt) const = 0;
+    virtual void operator()(DBlock2D& cur, double mass_ratio, double dt) const = 0;
 };

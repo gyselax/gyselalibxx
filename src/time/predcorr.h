@@ -2,18 +2,18 @@
 
 #include "iefieldsolver2.h"
 #include "itimesolver.h"
-#include "ivlasovsolver.h"
+#include "ivlasovsolver2.h"
 
 class PredCorr : public ITimeSolver
 {
-    const IVlasovSolver& m_vlasov;
+    const IVlasovSolver2& m_vlasov;
 
     const IEfieldSolver2& m_efield;
 
     const MDomain<Dim::T>& m_time;
 
 public:
-    PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver2& efield, const MDomain<Dim::T>& time);
+    PredCorr(const IVlasovSolver2& vlasov, const IEfieldSolver2& efield, const MDomain<Dim::T>& time);
 
     DBlockViewXVx& operator()(DBlockViewXVx& data, double mass_ratio) const override;
 };
