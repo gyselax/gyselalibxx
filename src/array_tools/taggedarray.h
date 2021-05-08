@@ -53,19 +53,19 @@ public:
 
     template <class... Params>
     inline constexpr TaggedArray(Params... params) noexcept
-        : m_values {std::forward<Params>(params)...}
+        : m_values {std::forward<ElementType>(params)...}
     {
     }
 
-    template <class... OTags>
-    inline constexpr TaggedArray(const TaggedArray<OTags...>& other) noexcept
-        : m_values(other.template get<OTags>()...)
+    template <class OElementType, class... OTags>
+    inline constexpr TaggedArray(const TaggedArray<OElementType, OTags...>& other) noexcept
+        : m_values(get<OTags>(other)...)
     {
     }
 
-    template <class... OTags>
-    inline constexpr TaggedArray(TaggedArray<OTags...>&& other) noexcept
-        : m_values(other.template get<OTags>()...)
+    template <class OElementType, class... OTags>
+    inline constexpr TaggedArray(TaggedArray<OElementType, OTags...>&& other) noexcept
+        : m_values(std::move(get<OTags>(other))...)
     {
     }
 

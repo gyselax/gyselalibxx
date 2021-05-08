@@ -49,7 +49,7 @@ DBlockViewXVx& Advection1D::operator()(DBlockViewXVx& fdistribu, double mass_rat
         for (MCoordX xii : x_dom) {
             feet_coords(xii) = x_dom.to_real(xii) - dx;
         }
-        
+
         // copy the slice in contiguous memory
         deepcopy(contiguous_slice, fdistribu.slice(vii));
 
@@ -62,6 +62,6 @@ DBlockViewXVx& Advection1D::operator()(DBlockViewXVx& fdistribu, double mass_rat
         // copy back
         deepcopy(fdistribu.slice(vii), contiguous_slice);
     }
-    
+
     return fdistribu;
 }

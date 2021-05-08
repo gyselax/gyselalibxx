@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ranges>
 #include <cstddef>
 #include <utility>
 
@@ -9,6 +10,8 @@
 #include <experimental/mdspan>
 
 using MCoordElement = std::size_t;
+
+using MLengthElement = std::ptrdiff_t;
 
 template <class... Tags>
 using MCoord = TaggedArray<MCoordElement, Tags...>;

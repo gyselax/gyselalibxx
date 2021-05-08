@@ -1,17 +1,17 @@
 cmake_minimum_required(VERSION 3.15)
 
-add_executable(tst
-	tst.cpp
-)
+include(GoogleTest)
 
-target_compile_features(tst
-	PUBLIC
-		cxx_std_17
+add_executable(unit_tests
+	block_test.cpp
+	mdomain_test.cpp
+	taggedarray_test.cpp
 )
-
-target_link_libraries(tst
+target_compile_features(unit_tests PUBLIC cxx_std_17)
+target_link_libraries(unit_tests
 	PUBLIC
+		GTest::gtest_main
 		vcx::array_tools
+		vcx::mesh
 )
-
-add_test(NAME tst COMMAND tst)
+gtest_discover_tests(unit_tests)

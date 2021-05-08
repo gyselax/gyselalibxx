@@ -54,6 +54,28 @@ public:
         return m_step;
     }
 
+    friend constexpr bool operator==(const RegularMesh& xx, const RegularMesh& yy)
+    {
+        return (&xx == &yy) || (xx.m_origin == yy.m_origin && xx.m_step == yy.m_step);
+    }
+
+    friend constexpr bool operator!=(const RegularMesh& xx, const RegularMesh& yy)
+    {
+        return (&xx != &yy) && (xx.m_origin != yy.m_origin || xx.m_step != yy.m_step);
+    }
+
+    template <class... OTags>
+    friend constexpr bool operator==(const RegularMesh& xx, const RegularMesh<OTags...>& yy)
+    {
+        return false;
+    }
+
+    template <class... OTags>
+    friend constexpr bool operator!=(const RegularMesh& xx, const RegularMesh<OTags...>& yy)
+    {
+        return false;
+    }
+
     inline constexpr RCoord_ rcoord(const MCoord_ icoord) const noexcept
     {
         return {origin() + icoord * m_step};
@@ -74,9 +96,14 @@ public:
 namespace detail {
 
 template <class... SelectedTags, class TagsHead, class... TagsQueue, class SliceSpec>
-inline constexpr auto append_if_all(RegularMesh<SelectedTags...>, RegularMesh<TagsHead>, SliceSpec ) noexcept
+inline constexpr auto append_if_all(
+        RegularMesh<SelectedTags...>,
+        RegularMesh<TagsHead>,
+        SliceSpec) noexcept
 {
-	static_assert(std::is_integral_v<SliceSpec> || std::is_same_v<std::experimental::all_type, SliceSpec> );
+    static_assert(
+            std::is_integral_v<
+                    SliceSpec> || std::is_same_v<std::experimental::all_type, SliceSpec>);
     if constexpr (std::is_integral_v<SliceSpec>) {
         return RegularMesh<SelectedTags...>();
     } else {
@@ -86,15 +113,21 @@ inline constexpr auto append_if_all(RegularMesh<SelectedTags...>, RegularMesh<Ta
 
 
 template <class TagsHead, class... TagsQueue, class SliceSpecsHead, class... SliceSpecsQueue>
-inline constexpr auto select_tags(RegularMesh<TagsHead, TagsQueue...>, SliceSpecsHead h, SliceSpecsQueue... q) noexcept
+inline constexpr auto select_tags(
+        RegularMesh<TagsHead, TagsQueue...>,
+        SliceSpecsHead h,
+        SliceSpecsQueue... q) noexcept
 {
-	return append_if_all(select_tags(RegularMesh<TagsQueue...>(), q...), RegularMesh<TagsHead>(), h );
+    return append_if_all(
+            select_tags(RegularMesh<TagsQueue...>(), q...),
+            RegularMesh<TagsHead>(),
+            h);
 }
 
 template <class Tag, class SliceSpec>
 inline constexpr auto select_tags(RegularMesh<Tag> m, SliceSpec s) noexcept
 {
-	return append_if_all(RegularMesh<>(RCoord<>(), RLength<>()), m, s );
+    return append_if_all(RegularMesh<>(RCoord<>(), RLength<>()), m, s);
 }
 
 } // namespace detail
@@ -102,7 +135,7 @@ inline constexpr auto select_tags(RegularMesh<Tag> m, SliceSpec s) noexcept
 template <class... Tags, class... SliceSpecs>
 inline constexpr auto submesh(const RegularMesh<Tags...>& mesh, SliceSpecs... slices) noexcept
 {
-	using ReturnType = decltype(detail::select_tags(mesh, std::forward<SliceSpecs>(slices)...));
+    using ReturnType = decltype(detail::select_tags(mesh, std::forward<SliceSpecs>(slices)...));
     return ReturnType(mesh);
 }
 
@@ -119,103 +152,294 @@ public:
 
     using Mesh = RegularMesh_;
 
+    struct Iterator
+    {
+    public:
+        using iterator_category = std::random_access_iterator_tag;
+
+        using value_type = MCoordElement;
+
+        using difference_type = MLengthElement;
+
+        Iterator() = default;
+
+        constexpr explicit Iterator(MCoordElement __value) : _M_value(__value) { }
+
+        constexpr MCoordElement operator*() const noexcept
+        {
+            return _M_value;
+        }
+
+        constexpr Iterator& operator++()
+        {
+            ++_M_value;
+            return *this;
+        }
+
+        constexpr Iterator operator++(int)
+        {
+            auto __tmp = *this;
+            ++*this;
+            return __tmp;
+        }
+
+        constexpr Iterator& operator--()
+        {
+            --_M_value;
+            return *this;
+        }
+
+        constexpr Iterator operator--(int)
+        {
+            auto __tmp = *this;
+            --*this;
+            return __tmp;
+        }
+
+        constexpr Iterator& operator+=(difference_type __n)
+        {
+            if (__n >= difference_type(0))
+                _M_value += static_cast<MCoordElement>(__n);
+            else
+                _M_value -= static_cast<MCoordElement>(-__n);
+            return *this;
+        }
+
+        constexpr Iterator& operator-=(difference_type __n)
+        {
+            if (__n >= difference_type(0))
+                _M_value -= static_cast<MCoordElement>(__n);
+            else
+                _M_value += static_cast<MCoordElement>(-__n);
+            return *this;
+        }
+
+        constexpr MCoordElement operator[](difference_type __n) const
+        {
+            return MCoordElement(_M_value + __n);
+        }
+
+        friend constexpr bool operator==(const Iterator& xx, const Iterator& yy)
+        {
+            return xx._M_value == yy._M_value;
+        }
+
+        friend constexpr bool operator!=(const Iterator& xx, const Iterator& yy)
+        {
+            return xx._M_value != yy._M_value;
+        }
+
+        friend constexpr bool operator<(const Iterator& xx, const Iterator& yy)
+        {
+            return xx._M_value < yy._M_value;
+        }
+
+        friend constexpr bool operator>(const Iterator& xx, const Iterator& yy)
+        {
+            return yy < xx;
+        }
+
+        friend constexpr bool operator<=(const Iterator& xx, const Iterator& yy)
+        {
+            return !(yy < xx);
+        }
+
+        friend constexpr bool operator>=(const Iterator& xx, const Iterator& yy)
+        {
+            return !(xx < yy);
+        }
+
+        friend constexpr Iterator operator+(Iterator __i, difference_type __n)
+        {
+            return __i += __n;
+        }
+
+        friend constexpr Iterator operator+(difference_type __n, Iterator __i)
+        {
+            return __i += __n;
+        }
+
+        friend constexpr Iterator operator-(Iterator __i, difference_type __n)
+        {
+            return __i -= __n;
+        }
+
+        friend constexpr difference_type operator-(const Iterator& xx, const Iterator& yy)
+        {
+            return (yy._M_value > xx._M_value)
+                         ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
+                         : (xx._M_value - yy._M_value);
+        }
+
+    private:
+        MCoordElement _M_value = MCoordElement();
+    };
+
 private:
     /// step size
-    MCoord_ m_begin;
+    MCoord_ m_lbound;
 
     /// step size
-    MCoord_ m_end;
+    MCoord_ m_ubound;
 
 public:
-    inline constexpr RegularMDomain(RegularMesh_ mesh, RCoord_ begin, RCoord_ end) noexcept
-        : RegularMesh_(std::move(mesh))
-        , m_begin(std::move(begin))
-        , m_end(std::move(end))
-    {
-    }
-
-    inline constexpr RegularMDomain(RegularMesh_ mesh, RCoord_ end) noexcept
-        : RegularMesh_(std::move(mesh))
-        , m_begin(0)
-        , m_end(std::move(end))
-    {
-    }
-
-    inline constexpr RegularMDomain(
-            RCoord_ origin,
-            double step,
-            RCoord_ begin,
-            RCoord_ end) noexcept
-        : RegularMesh_(std::move(origin), step)
-        , m_begin(std::move(begin))
-        , m_end(std::move(end))
-    {
-    }
-
-    inline constexpr RegularMDomain(RCoord_ origin, double step, RCoord_ end) noexcept
-        : RegularMesh_(std::move(origin), step)
-        , m_begin(0)
-        , m_end(std::move(end))
-    {
-    }
-
     template <class... OTags>
     inline constexpr RegularMDomain(const RegularMDomain<OTags...>& other) noexcept
         : RegularMesh_(other)
-        , m_begin(other.m_begin)
-        , m_end(other.m_end)
+        , m_lbound(other.m_begin)
+        , m_ubound(other.m_end)
     {
     }
 
     template <class... OTags>
     inline constexpr RegularMDomain(RegularMDomain<OTags...>&& other) noexcept
         : RegularMesh_(std::move(other))
-        , m_begin(std::move(other.m_begin))
-        , m_end(std::move(other.m_end))
+        , m_lbound(std::move(other.m_begin))
+        , m_ubound(std::move(other.m_end))
     {
     }
 
-    inline constexpr MCoord_& begin() noexcept
+    inline constexpr RegularMDomain(RegularMesh_ mesh, MCoord_ ubound) noexcept
+        : RegularMesh_(std::move(mesh))
+        , m_lbound(0)
+        , m_ubound(std::move(ubound))
     {
-        return m_begin;
     }
 
-    inline constexpr const MCoord_& begin() const noexcept
+    inline constexpr RegularMDomain(RegularMesh_ mesh, MCoord_ lbound, MCoord_ ubound) noexcept
+        : RegularMesh_(std::move(mesh))
+        , m_lbound(std::move(lbound))
+        , m_ubound(std::move(ubound))
     {
-        return m_begin;
     }
 
-    inline constexpr const MCoord_& cbegin() const noexcept
+    inline constexpr RegularMDomain(RCoord_ origin, double step, RCoord_ ubound) noexcept
+        : RegularMesh_(std::move(origin), step)
+        , m_lbound(0)
+        , m_ubound(std::move(ubound))
     {
-        return m_begin;
     }
 
-    inline constexpr MCoord_& end() noexcept
+    inline constexpr RegularMDomain(
+            RCoord_ origin,
+            double step,
+            MCoord_ lbound,
+            MCoord_ ubound) noexcept
+        : RegularMesh_(std::move(origin), step)
+        , m_lbound(std::move(lbound))
+        , m_ubound(std::move(ubound))
     {
-        return m_end;
     }
 
-    inline constexpr const MCoord_& end() const noexcept
+    friend constexpr bool operator==(const RegularMDomain& xx, const RegularMDomain& yy)
     {
-        return m_end;
+        return (&xx == &yy)
+            || (static_cast<RegularMesh_>(xx) == static_cast<RegularMesh_>(yy)
+                && xx.m_lbound == yy.m_lbound && xx.m_ubound == yy.m_ubound);
     }
 
-    inline constexpr const MCoord_& cend() const noexcept
+    friend constexpr bool operator!=(const RegularMDomain& xx, const RegularMDomain& yy)
     {
-        return m_end;
+        return (&xx != &yy)
+            && (static_cast<RegularMesh_>(xx) != static_cast<RegularMesh_>(yy)
+                        && xx.m_lbound != yy.m_lbound
+                || xx.m_ubound != yy.m_ubound);
+    }
+
+    template <class... OTags>
+    friend constexpr bool operator==(const RegularMDomain& xx, const RegularMDomain<OTags...>& yy)
+    {
+        return false;
+    }
+
+    template <class... OTags>
+    friend constexpr bool operator!=(const RegularMDomain& xx, const RegularMDomain<OTags...>& yy)
+    {
+        return false;
+    }
+
+    inline constexpr MCoord_& lbound() noexcept
+    {
+        return m_lbound;
+    }
+
+    inline constexpr const MCoord_& lbound() const noexcept
+    {
+        return m_lbound;
+    }
+
+    inline constexpr MCoord_& ubound() noexcept
+    {
+        return m_ubound;
+    }
+
+    inline constexpr const MCoord_& ubound() const noexcept
+    {
+        return m_ubound;
     }
 
     template <class QueryTag>
-    inline constexpr size_t extent() const noexcept
+    inline constexpr ptrdiff_t extent() const noexcept
     {
-        return get<QueryTag>(m_end) - get<QueryTag>(m_begin);
+        return get<QueryTag>(m_ubound) - get<QueryTag>(static_cast<MCoord_>(m_lbound));
     }
 
-    inline constexpr size_t size() const noexcept
+    inline constexpr ptrdiff_t size() const noexcept
     {
         return ((extent<Tags>()) * ...);
     }
+
+    inline constexpr bool empty() const noexcept
+    {
+        return size() == 0;
+    }
+
+    constexpr explicit operator bool()
+    {
+        return !empty();
+    }
+
+    constexpr Iterator begin() const noexcept
+    {
+        static_assert(sizeof...(Tags) == 1);
+        return Iterator {static_cast<MCoord_>(m_lbound)};
+    }
+
+    constexpr Iterator cbegin() const noexcept
+    {
+        static_assert(sizeof...(Tags) == 1);
+        return begin();
+    }
+
+    constexpr Iterator end() const noexcept
+    {
+        static_assert(sizeof...(Tags) == 1);
+        return Iterator {static_cast<MCoord_>(m_ubound)};
+    }
+
+    constexpr Iterator cend() const noexcept
+    {
+        static_assert(sizeof...(Tags) == 1);
+        return end();
+    }
+
+    constexpr decltype(auto) back()
+    {
+        assert(!empty());
+        return *(--end());
+    }
+
+    constexpr decltype(auto) operator[](ptrdiff_t __n)
+    {
+        return begin()[__n];
+    }
+
+    constexpr decltype(auto) operator[](ptrdiff_t __n) const
+    {
+        return begin()[__n];
+    }
 };
+
 
 
 /* For now MDomain is just an alias to RegularMDomain, in the long run, we should use a tuple-based
