@@ -246,7 +246,11 @@ public:
     }
 
 protected:
-    inline constexpr BlockViewND(MeshND<NDIMS> mesh, RawView raw_view) : m_raw(raw_view), m_mesh(mesh) { }
+    inline constexpr BlockViewND(MeshND<NDIMS> mesh, RawView raw_view)
+        : m_raw(raw_view)
+        , m_mesh(mesh)
+    {
+    }
 
 private:
     template <class>
@@ -390,7 +394,3 @@ public:
 using DBlock1D = BlockND<1, double>;
 
 using DBlock2D = BlockND<2, double>;
-
-
-
-

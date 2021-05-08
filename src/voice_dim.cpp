@@ -4,6 +4,4 @@
 #include "predcorr2.h"
 #include "splitvlasovsolver.h"
 
-int main()
-{
-}
+int main() { }

@@ -1,6 +1,9 @@
 #include "predcorr2.h"
 
-PredCorr2::PredCorr2(const IVlasovSolver2& vlasov, const IEfieldSolver2& efield, const MDomain<Dim::T>& time)
+PredCorr2::PredCorr2(
+        const IVlasovSolver2& vlasov,
+        const IEfieldSolver2& efield,
+        const MDomain<Dim::T>& time)
     : m_vlasov(vlasov)
     , m_efield(efield)
     , m_time(time)
@@ -32,6 +35,6 @@ DBlockViewXVx& PredCorr2::operator()(DBlockViewXVx& fdistribu, double mass_ratio
         // computation of Ex(tn+1)
         m_efield(ex, fdistribu);
     }
-    
+
     return fdistribu;
 }

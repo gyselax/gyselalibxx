@@ -20,15 +20,9 @@ int main()
 
     const BSplines_uniform bsplines_vx = {3, true, 4, 5, 6};
 
-    const Spline_interpolator_1D interp_x(
-            bsplines_x,
-              BoundCond::PERIODIC,
-              BoundCond::PERIODIC);
+    const Spline_interpolator_1D interp_x(bsplines_x, BoundCond::PERIODIC, BoundCond::PERIODIC);
 
-    const Spline_interpolator_1D interp_vx(
-            bsplines_vx,
-              BoundCond::GREVILLE,
-              BoundCond::GREVILLE);
+    const Spline_interpolator_1D interp_vx(bsplines_vx, BoundCond::GREVILLE, BoundCond::GREVILLE);
 
     const Advection1D advection_x = {bsplines_x, interp_x};
 

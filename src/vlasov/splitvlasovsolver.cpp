@@ -7,7 +7,8 @@ SplitVlasovSolver::SplitVlasovSolver(const IAdvectionX& advec_x, const IAdvectio
 }
 
 
-DBlockViewXVx& SplitVlasovSolver::operator()(DBlockViewXVx& fdistribu, double mass_ratio, double dt) const
+DBlockViewXVx& SplitVlasovSolver::operator()(DBlockViewXVx& fdistribu, double mass_ratio, double dt)
+        const
 {
     m_advec_x(fdistribu, mass_ratio, dt / 2);
     m_advec_vx(fdistribu, mass_ratio, dt);

@@ -298,13 +298,13 @@ inline BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& deepcopy(
 {
     assert(to.extents() == from.extents());
     //TODO !
-//     if constexpr (sizeof...(Indices) == to.rank()) {
-//         to(idxs...) = from(idxs...);
-//     } else {
-//         for (size_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
-//             copy(to, from, idxs..., ii);
-//         }
-//     }
+    //     if constexpr (sizeof...(Indices) == to.rank()) {
+    //         to(idxs...) = from(idxs...);
+    //     } else {
+    //         for (size_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
+    //             copy(to, from, idxs..., ii);
+    //         }
+    //     }
     return to;
 }
 
