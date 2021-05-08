@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "block.h"
+#include "blockview.h"
 
 TEST(DBlockX, Constructor)
 {

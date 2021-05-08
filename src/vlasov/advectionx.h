@@ -1,16 +1,16 @@
 #pragma once
 
-#include "block.h"
+#include "blockview.h"
 #include "boundary_value.h"
 #include "iadvectionx.h"
 #include "spline_interpolator_1d.h"
 
-class Advection1D : public IAdvectionX
+class AdvectionX : public IAdvectionX
 {
 public:
-    Advection1D(const BSplines& bspl, const Spline_interpolator_1D& spl_interp);
+    AdvectionX(const BSplines& bspl, const Spline_interpolator_1D& spl_interp);
 
-    Advection1D(
+    AdvectionX(
             const BSplines& bspl,
             const Spline_interpolator_1D& spl_interp,
             const BoundaryValue& bc_left,

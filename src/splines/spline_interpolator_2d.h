@@ -22,8 +22,8 @@ class Spline_interpolator_2D
 public:
     Spline_interpolator_2D(
             std::array<std::unique_ptr<const BSplines>, 2> bspl,
-            std::array<BoundaryCondition, 2> xmin_bc,
-            std::array<BoundaryCondition, 2> xmax_bc);
+            std::array<BoundCond, 2> xmin_bc,
+            std::array<BoundCond, 2> xmax_bc);
 
     ~Spline_interpolator_2D() { }
 
@@ -38,8 +38,8 @@ public:
 
     static std::array<int, 2> compute_num_cells(
             std::array<int, 2> degree,
-            std::array<BoundaryCondition, 2> xmin,
-            std::array<BoundaryCondition, 2> xmax,
+            std::array<BoundCond, 2> xmin,
+            std::array<BoundCond, 2> xmax,
             std::array<int, 2> nipts);
 
 private:
@@ -51,8 +51,8 @@ private:
     std::array<Spline_1D, 2> spline_1d;
 
 public:
-    const std::array<BoundaryCondition, 2> xmin_bc;
-    const std::array<BoundaryCondition, 2> xmax_bc;
+    const std::array<BoundCond, 2> xmin_bc;
+    const std::array<BoundCond, 2> xmax_bc;
     const std::array<int, 2> nbc_xmin;
     const std::array<int, 2> nbc_xmax;
 };

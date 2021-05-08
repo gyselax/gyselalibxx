@@ -13,10 +13,7 @@
 class Spline_interpolator_1D
 {
 public:
-    Spline_interpolator_1D(
-            const BSplines& bspl,
-            BoundaryCondition xmin_bc,
-            BoundaryCondition xmax_bc);
+    Spline_interpolator_1D(const BSplines& bspl, BoundCond xmin_bc, BoundCond xmax_bc);
 
     const mdspan_1d& get_interp_points() const;
 
@@ -26,15 +23,11 @@ public:
             const mdspan_1d* derivs_xmin = nullptr,
             const mdspan_1d* derivs_xmax = nullptr) const;
 
-    static int compute_num_cells(
-            int degree,
-            BoundaryCondition xmin,
-            BoundaryCondition xmax,
-            int nipts);
+    static int compute_num_cells(int degree, BoundCond xmin, BoundCond xmax, int nipts);
 
-    const BoundaryCondition xmin_bc;
+    const BoundCond xmin_bc;
 
-    const BoundaryCondition xmax_bc;
+    const BoundCond xmax_bc;
 
     const int nbc_xmin;
 
@@ -66,7 +59,7 @@ private:
     std::unique_ptr<Matrix> matrix;
 
     // hand-made inheritance
-    static std::array<BoundaryCondition, 3> allowed_bcs;
+    static std::array<BoundCond, 3> allowed_bcs;
 };
 
 #endif // SPLINE_INTERPOLATORS_1D_H

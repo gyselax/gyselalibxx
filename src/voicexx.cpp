@@ -2,16 +2,19 @@
 
 #include "bsplines_uniform.h"
 #include "efieldsolver.h"
+#include "mesh.h"
 #include "predcorr.h"
+#include "space.h"
 #include "vlasovsolver.h"
 
 int main()
 {
-    // The mesh dx:0.01, dv:0.2, dt:.1
+    // The mesh, d_x=.01, d_v=.2, d_t=.1
     Mesh3D mesh = {Mesh(0, .01), Mesh(-10, .2), Mesh(0, .1)};
 
-    // The meshed domain x:[0,1) v:[-10,10) t:[0,100)
+    // The meshed domain
     MDomain3D dom3d = {MDomain(mesh[0], 100), MDomain(mesh[1], 100), MDomain(mesh[3], 1000)};
+
 
     const BSplines_uniform bsplines_x = {3, true, 4, 5, 6};
 
@@ -19,13 +22,13 @@ int main()
 
     const Spline_interpolator_1D interp_x(
             bsplines_x,
-            BoundaryCondition::sll_p_periodic,
-            BoundaryCondition::sll_p_periodic);
+              BoundCond::PERIODIC,
+              BoundCond::PERIODIC);
 
     const Spline_interpolator_1D interp_vx(
             bsplines_vx,
-            BoundaryCondition::sll_p_greville,
-            BoundaryCondition::sll_p_greville);
+              BoundCond::GREVILLE,
+              BoundCond::GREVILLE);
 
     const Advection1D advection_x = {bsplines_x, interp_x};
 

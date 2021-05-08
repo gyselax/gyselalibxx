@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <memory>
 #include <type_traits>
 #include <vector>
@@ -177,37 +178,37 @@ public:
     }
 
     //TODO
-    //     /** Provide access to the domain on which this field block is defined
-    //      * @return the domain on which this field block is defined
+    //     /** Provide access to the domain on which this block is defined
+    //      * @return the domain on which this block is defined
     //      */
     //     inline constexpr MDomain domain ( size_t dim ) const noexcept
     //     {
     //         return MDomain ( m_mesh[dim], m_raw.extent ( dim ) );
     //     }
 
-    /** Provide access to the mesh on which this field block is defined
-     * @return the mesh on which this field block is defined
+    /** Provide access to the mesh on which this block is defined
+     * @return the mesh on which this block is defined
      */
     inline constexpr Mesh mesh() const noexcept
     {
         return m_mesh;
     }
 
-    /** Provide access to the domain on which this field block is defined
-     * @return the domain on which this field block is defined
+    /** Provide access to the domain on which this block is defined
+     * @return the domain on which this block is defined
      */
     inline constexpr MDomain_ domain() const noexcept
     {
-        return MDomain_(mesh(), mcoord_end(raw_view().extents()));
+        return MDomain_(mesh(), mcoord_end<Tags...>(raw_view().extents()));
     }
 
-    /** Provide access to the domain on which this field block is defined
-     * @return the domain on which this field block is defined
+    /** Provide access to the domain on which this block is defined
+     * @return the domain on which this block is defined
      */
     template <class... OTags>
     inline constexpr MDomain<OTags...> domain() const noexcept
     {
-        return MDomain<OTags...>(MDomain_(mesh(), mcoord_end(raw_view().extents())));
+        return MDomain<OTags...>(domain());
     }
 
     /** Provide a modifiable view of the data
@@ -290,19 +291,20 @@ RegularMDomain<Tags...> get_domain(const View& v)
 
 
 template <class... Tags, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS, class... Indices>
-inline BlockView<Tags..., ElementType, CONTIGUOUS>& deepcopy(
-        BlockView<Tags..., ElementType, CONTIGUOUS>& to,
-        BlockView<Tags..., ElementType, OCONTIGUOUS> const& from,
+inline BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& deepcopy(
+        BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& to,
+        BlockView<MDomain<Tags...>, ElementType, OCONTIGUOUS> const& from,
         Indices... idxs) noexcept
 {
     assert(to.extents() == from.extents());
-    if constexpr (sizeof...(Indices) == to.rank()) {
-        to(idxs...) = from(idxs...);
-    } else {
-        for (size_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
-            copy(to, from, idxs..., ii);
-        }
-    }
+    //TODO !
+//     if constexpr (sizeof...(Indices) == to.rank()) {
+//         to(idxs...) = from(idxs...);
+//     } else {
+//         for (size_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
+//             copy(to, from, idxs..., ii);
+//         }
+//     }
     return to;
 }
 

@@ -1,5 +1,4 @@
 add_library(vlasov STATIC
-	advection1d.cpp
 	vlasovsolver.cpp
 )
 

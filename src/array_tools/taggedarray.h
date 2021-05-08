@@ -39,6 +39,19 @@ struct RankIn<TypeSeq<QueryTags...>, TypeSeq<Tags...>>
 } // namespace detail
 
 
+template <class QueryTag, class ElementType, class... Tags>
+inline constexpr ElementType const& get(TaggedArray<ElementType, Tags...> const& tuple) noexcept
+{
+    return tuple.template get<QueryTag>();
+}
+
+template <class QueryTag, class ElementType, class... Tags>
+inline constexpr ElementType& get(TaggedArray<ElementType, Tags...>& tuple) noexcept
+{
+    return tuple.template get<QueryTag>();
+}
+
+
 template <class ElementType, class... Tags>
 class TaggedArray
 {
@@ -59,13 +72,13 @@ public:
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedArray(const TaggedArray<OElementType, OTags...>& other) noexcept
-        : m_values(get<OTags>(other)...)
+        : m_values {get<Tags>(other)...}
     {
     }
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedArray(TaggedArray<OElementType, OTags...>&& other) noexcept
-        : m_values(std::move(get<OTags>(other))...)
+        : m_values {std::forward<OElementType>(::get<Tags>(other))...}
     {
     }
 
@@ -126,36 +139,23 @@ public:
     {
         return m_values[pos];
     }
-    
+
     constexpr inline const ElementType& operator[](size_t pos) const
     {
         return m_values[pos];
     }
 
     template <class QueryTag>
-    inline constexpr auto get() noexcept
+    inline constexpr ElementType& get() noexcept
     {
         using namespace detail;
         return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
     }
 
     template <class QueryTag>
-    inline constexpr auto get() const noexcept
+    inline constexpr ElementType const& get() const noexcept
     {
         using namespace detail;
         return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
     }
 };
-
-template <class QueryTag, class ElementType, class... Tags>
-inline constexpr auto get(const TaggedArray<ElementType, Tags...>& tuple) noexcept
-{
-    return tuple.template get<QueryTag>();
-}
-
-template <class QueryTag, class ElementType, class... Tags>
-inline constexpr auto get(TaggedArray<ElementType, Tags...>& tuple) noexcept
-{
-    return tuple.template get<QueryTag>();
-}
-

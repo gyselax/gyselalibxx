@@ -1,5 +1,5 @@
 add_library(efield STATIC
-	efieldsolver.cpp
+	nullefieldsolver.cpp
 )
 
 target_compile_features(efield

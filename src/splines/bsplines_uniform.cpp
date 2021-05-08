@@ -21,6 +21,11 @@ BSplines_uniform::BSplines_uniform(int degree, bool periodic, double xmin, doubl
     dx = (xmax - xmin) / ncells;
 }
 
+BSplines* BSplines::new_bsplines(int degree, bool periodic, double xmin, double xmax, int ncells)
+{
+    return new BSplines_uniform(degree, periodic, xmin, xmax, ncells);
+}
+
 BSplines_uniform::~BSplines_uniform() { }
 
 void BSplines_uniform::eval_basis(double x, mdspan_1d& values, int& jmin, int deg) const

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "iefieldsolver.h"
+#include "iefieldsolver2.h"
 #include "itimesolver.h"
 #include "ivlasovsolver.h"
 
@@ -8,12 +8,12 @@ class PredCorr : public ITimeSolver
 {
     const IVlasovSolver& m_vlasov;
 
-    const IEfieldSolver& m_efield;
+    const IEfieldSolver2& m_efield;
 
-    const MDomain1D& m_time;
+    const MDomain<Dim::T>& m_time;
 
 public:
-    PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, const MDomain1D& time);
+    PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver2& efield, const MDomain<Dim::T>& time);
 
-    void operator()(DBlock2D& data, double mass_ratio) const override;
+    DBlockViewXVx& operator()(DBlockViewXVx& data, double mass_ratio) const override;
 };

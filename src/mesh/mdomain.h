@@ -152,6 +152,9 @@ public:
 
     using Mesh = RegularMesh_;
 
+    template <class...>
+    friend class RegularMDomain;
+
     struct Iterator
     {
     public:
@@ -286,16 +289,16 @@ public:
     template <class... OTags>
     inline constexpr RegularMDomain(const RegularMDomain<OTags...>& other) noexcept
         : RegularMesh_(other)
-        , m_lbound(other.m_begin)
-        , m_ubound(other.m_end)
+        , m_lbound(other.m_lbound)
+        , m_ubound(other.m_ubound)
     {
     }
 
     template <class... OTags>
     inline constexpr RegularMDomain(RegularMDomain<OTags...>&& other) noexcept
         : RegularMesh_(std::move(other))
-        , m_lbound(std::move(other.m_begin))
-        , m_ubound(std::move(other.m_end))
+        , m_lbound(std::move(other.m_lbound))
+        , m_ubound(std::move(other.m_ubound))
     {
     }
 

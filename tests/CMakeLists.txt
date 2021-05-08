@@ -2,10 +2,19 @@ cmake_minimum_required(VERSION 3.15)
 
 include(GoogleTest)
 
+add_executable(spline_test
+	splines.cpp
+)
+target_compile_features(spline_test PUBLIC cxx_std_17)
+target_link_libraries(spline_test
+	PUBLIC
+		sll::splines
+)
+
 add_executable(unit_tests
-	block_test.cpp
-	mdomain_test.cpp
-	taggedarray_test.cpp
+	blockview.cpp
+	mdomain.cpp
+	taggedarray.cpp
 )
 target_compile_features(unit_tests PUBLIC cxx_std_17)
 target_link_libraries(unit_tests

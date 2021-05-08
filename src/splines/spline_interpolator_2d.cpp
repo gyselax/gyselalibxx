@@ -12,8 +12,8 @@
  ******************************************************************************/
 Spline_interpolator_2D::Spline_interpolator_2D(
         std::array<std::unique_ptr<const BSplines>, 2> bspl,
-        std::array<BoundaryCondition, 2> xmin_bc,
-        std::array<BoundaryCondition, 2> xmax_bc)
+        std::array<BoundCond, 2> xmin_bc,
+        std::array<BoundCond, 2> xmax_bc)
     : bspl(std::move(bspl))
     , interp_1d(
               {Spline_interpolator_1D(*bspl[0], xmin_bc[0], xmax_bc[0]),
@@ -51,8 +51,8 @@ std::array<const mdspan_1d, 2> Spline_interpolator_2D::get_interp_points() const
  ******************************************************************************/
 std::array<int, 2> Spline_interpolator_2D::compute_num_cells(
         std::array<int, 2> degree,
-        std::array<BoundaryCondition, 2> xmin,
-        std::array<BoundaryCondition, 2> xmax,
+        std::array<BoundCond, 2> xmin,
+        std::array<BoundCond, 2> xmax,
         std::array<int, 2> nipts)
 {
     int n0(Spline_interpolator_1D::compute_num_cells(degree[0], xmin[0], xmax[0], nipts[0]));
@@ -184,10 +184,10 @@ void Spline_interpolator_2D::compute_interpolant(
 void Spline_interpolator_2D::compute_interpolant(Spline_2D const& spline, mdspan_2d const& vals)
         const
 {
-    assert(xmin_bc[0] != BoundaryCondition::sll_p_hermite);
-    assert(xmax_bc[0] != BoundaryCondition::sll_p_hermite);
-    assert(xmin_bc[1] != BoundaryCondition::sll_p_hermite);
-    assert(xmax_bc[1] != BoundaryCondition::sll_p_hermite);
+    assert(xmin_bc[0] != BoundCond::HERMITE);
+    assert(xmax_bc[0] != BoundCond::HERMITE);
+    assert(xmin_bc[1] != BoundCond::HERMITE);
+    assert(xmax_bc[1] != BoundCond::HERMITE);
     compute_interpolant_boundary_done(spline, vals);
 }
 
@@ -273,14 +273,14 @@ void Spline_interpolator_2D::compute_interpolant_boundary_done(
             }
         }
     }
-    if (xmin_bc[1] == BoundaryCondition::sll_p_periodic) {
+    if (xmin_bc[1] == BoundCond::PERIODIC) {
         for (int i(0); i < spline.bcoef.extent(0); ++i) {
             for (int j(0); j < bspl[1]->degree; ++j) {
                 spline.bcoef(i, j + bspl[1]->nbasis) = spline.bcoef(i, j);
             }
         }
     }
-    if (xmin_bc[0] == BoundaryCondition::sll_p_periodic) {
+    if (xmin_bc[0] == BoundCond::PERIODIC) {
         for (int i(0); i < bspl[0]->degree; ++i) {
             for (int j(0); j < spline.bcoef.extent(1); ++j) {
                 spline.bcoef(i + bspl[0]->nbasis, j) = spline.bcoef(i, j);
