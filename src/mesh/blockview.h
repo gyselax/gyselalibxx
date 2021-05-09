@@ -177,15 +177,6 @@ public:
         *this = std::move(tmp);
     }
 
-    //TODO
-    //     /** Provide access to the domain on which this block is defined
-    //      * @return the domain on which this block is defined
-    //      */
-    //     inline constexpr MDomain domain ( size_t dim ) const noexcept
-    //     {
-    //         return MDomain ( m_mesh[dim], m_raw.extent ( dim ) );
-    //     }
-
     /** Provide access to the mesh on which this block is defined
      * @return the mesh on which this block is defined
      */

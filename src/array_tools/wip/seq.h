@@ -85,7 +85,7 @@ public:
         range_initialize(init.begin(), init.end());
     }
 
-    constexpr inline Seq& operator=(const Seq& other) noexcept { }
+    constexpr inline Seq& operator=(const Seq& other) noexcept {}
 
     constexpr inline Seq& operator=(Seq&& other) noexcept;
 
@@ -158,7 +158,7 @@ public:
         return m_size;
     }
 
-    constexpr inline void shrink_to_fit() { }
+    constexpr inline void shrink_to_fit() {}
 
     constexpr void swap(Seq& other) noexcept
     {

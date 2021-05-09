@@ -28,7 +28,7 @@ class Mesh
     double m_step;
 
 public:
-    inline constexpr Mesh(RCoord origin, double step) noexcept : m_origin(origin), m_step(step) { }
+    inline constexpr Mesh(RCoord origin, double step) noexcept : m_origin(origin), m_step(step) {}
 
     inline constexpr double origin() const noexcept
     {
@@ -140,7 +140,7 @@ public:
     /** Constructs a new ::MDomainND on the provided mesh.
      */
 
-    inline constexpr MDomain(Mesh mesh, ptrdiff_t size) noexcept : m_mesh(mesh), m_size(size) { }
+    inline constexpr MDomain(Mesh mesh, ptrdiff_t size) noexcept : m_mesh(mesh), m_size(size) {}
 
 
     inline constexpr MDomain(const MDomain&) noexcept = default;

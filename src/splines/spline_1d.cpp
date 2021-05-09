@@ -43,16 +43,22 @@ template <
 double Spline_1D::eval_intern(double x, const T& bspl, mdspan_1d& vals) const
 {
     if constexpr (periodic) {
-        if (x < bspl.xmin || x > bspl.xmax) [[unlikely]] {
-            x -= std::floor((x - bspl.xmin) / bspl.length) * bspl.length;
-        }
+        if (x < bspl.xmin || x > bspl.xmax)
+            [[unlikely]]
+            {
+                x -= std::floor((x - bspl.xmin) / bspl.length) * bspl.length;
+            }
     } else {
-        if (x < bspl.xmin) [[unlikely]] {
-            return left_bc(x);
-        }
-        if (x > bspl.xmax) [[unlikely]] {
-            return right_bc(x);
-        }
+        if (x < bspl.xmin)
+            [[unlikely]]
+            {
+                return left_bc(x);
+            }
+        if (x > bspl.xmax)
+            [[unlikely]]
+            {
+                return right_bc(x);
+            }
     }
     return eval_intern_no_bcs<T>(x, bspl, vals);
 }

@@ -230,7 +230,7 @@ void Spline_interpolator_1D::compute_interpolation_points_non_uniform()
                 temp_knots[i] = bspl_nu.get_knot(bspl_nu.ncells);
             if (xmax_bc == BoundCond::HERMITE)
                 temp_knots[i] = 2.0 * bspl_nu.get_knot(bspl_nu.ncells)
-                              - bspl_nu.get_knot(bspl_nu.ncells - 1 - j);
+                                - bspl_nu.get_knot(bspl_nu.ncells - 1 - j);
         }
     }
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstddef>
-#include <ranges>
 #include <utility>
 
 #include "dim.h"
@@ -28,13 +27,12 @@ namespace detail {
 template <class, class>
 struct ExtentToMCoord;
 
-template <class... Tags, ptrdiff_t... Extents>
-struct ExtentToMCoord<MCoord<Tags...>, std::experimental::extents<Extents...>>
+template <class... Tags, std::size_t... Ints>
+struct ExtentToMCoord<MCoord<Tags...>, std::index_sequence<Ints...>>
 {
-    template <std::size_t... Ints>
+    template <ptrdiff_t... Extents>
     static inline constexpr MCoord<Tags...> mcoord(
-            const std::experimental::extents<Extents...>& extent,
-            std::index_sequence_for<Tags...> = {}) noexcept
+            const std::experimental::extents<Extents...>& extent) noexcept
     {
         return MCoord<Tags...>(extent.extent(Ints)...);
     }
@@ -45,5 +43,6 @@ struct ExtentToMCoord<MCoord<Tags...>, std::experimental::extents<Extents...>>
 template <class... Tags, class Extents>
 inline constexpr MCoord<Tags...> mcoord_end(Extents extent) noexcept
 {
-    return detail::ExtentToMCoord<MCoord<Tags...>, Extents>::mcoord(extent);
+    return detail::ExtentToMCoord<MCoord<Tags...>, std::index_sequence_for<Tags...>>::mcoord(
+            extent);
 }

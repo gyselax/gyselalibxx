@@ -25,7 +25,7 @@ public:
             std::array<BoundCond, 2> xmin_bc,
             std::array<BoundCond, 2> xmax_bc);
 
-    ~Spline_interpolator_2D() { }
+    ~Spline_interpolator_2D() {}
 
     std::array<const mdspan_1d, 2> get_interp_points() const;
 

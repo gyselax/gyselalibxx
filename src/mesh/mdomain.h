@@ -24,12 +24,6 @@ private:
     friend class RegularMesh;
 
 public:
-    inline constexpr RegularMesh(RCoord_ origin, RLength_ step) noexcept
-        : m_origin(origin)
-        , m_step(step)
-    {
-    }
-
     template <class... OTags>
     inline constexpr RegularMesh(const RegularMesh<OTags...>& other) noexcept
         : m_origin(other.m_origin)
@@ -41,6 +35,13 @@ public:
     inline constexpr RegularMesh(RegularMesh<OTags...>&& other) noexcept
         : m_origin(std::move(other.m_origin))
         , m_step(std::move(other.m_step))
+    {
+    }
+
+    template <class OriginType, class StepType>
+    inline constexpr RegularMesh(OriginType&& origin, StepType&& step) noexcept
+        : m_origin(std::forward<OriginType>(origin))
+        , m_step(std::forward<StepType>(step))
     {
     }
 
@@ -91,6 +92,17 @@ public:
         return sizeof...(Tags);
     }
 };
+
+template <class... Tags>
+using Mesh = RegularMesh<Tags...>;
+
+using MeshT = Mesh<Dim::T>;
+
+using MeshX = Mesh<Dim::X>;
+
+using MeshVx = Mesh<Dim::Vx>;
+
+using MeshXVx = Mesh<Dim::X, Dim::Vx>;
 
 
 namespace detail {
@@ -166,7 +178,7 @@ public:
 
         Iterator() = default;
 
-        constexpr explicit Iterator(MCoordElement __value) : _M_value(__value) { }
+        constexpr explicit Iterator(MCoordElement __value) : _M_value(__value) {}
 
         constexpr MCoordElement operator*() const noexcept
         {
@@ -270,8 +282,8 @@ public:
         friend constexpr difference_type operator-(const Iterator& xx, const Iterator& yy)
         {
             return (yy._M_value > xx._M_value)
-                         ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
-                         : (xx._M_value - yy._M_value);
+                           ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
+                           : (xx._M_value - yy._M_value);
         }
 
     private:
@@ -302,51 +314,47 @@ public:
     {
     }
 
-    inline constexpr RegularMDomain(RegularMesh_ mesh, MCoord_ ubound) noexcept
-        : RegularMesh_(std::move(mesh))
+    template <class MeshType, class UboundType>
+    inline constexpr RegularMDomain(MeshType&& mesh, UboundType&& ubound) noexcept
+        : RegularMesh_(std::forward<MeshType>(mesh))
         , m_lbound(0)
-        , m_ubound(std::move(ubound))
+        , m_ubound(std::forward<UboundType>(ubound))
     {
     }
 
-    inline constexpr RegularMDomain(RegularMesh_ mesh, MCoord_ lbound, MCoord_ ubound) noexcept
-        : RegularMesh_(std::move(mesh))
-        , m_lbound(std::move(lbound))
-        , m_ubound(std::move(ubound))
-    {
-    }
-
-    inline constexpr RegularMDomain(RCoord_ origin, double step, RCoord_ ubound) noexcept
-        : RegularMesh_(std::move(origin), step)
-        , m_lbound(0)
-        , m_ubound(std::move(ubound))
-    {
-    }
-
+    template <class MeshType, class LboundType, class UboundType>
     inline constexpr RegularMDomain(
-            RCoord_ origin,
-            double step,
-            MCoord_ lbound,
-            MCoord_ ubound) noexcept
-        : RegularMesh_(std::move(origin), step)
-        , m_lbound(std::move(lbound))
-        , m_ubound(std::move(ubound))
+            MeshType&& mesh,
+            LboundType&& lbound,
+            UboundType&& ubound) noexcept
+        : RegularMesh_(std::forward<MeshType>(mesh))
+        , m_lbound(std::forward<LboundType>(lbound))
+        , m_ubound(std::forward<UboundType>(ubound))
+    {
+    }
+
+    template <class OriginType, class StepType, class LboundType, class UboundType>
+    inline constexpr RegularMDomain(
+            OriginType&& origin,
+            StepType&& step,
+            LboundType&& lbound,
+            UboundType&& ubound) noexcept
+        : RegularMesh_(std::forward<OriginType>(origin), std::forward<StepType>(step))
+        , m_lbound(std::forward<LboundType>(lbound))
+        , m_ubound(std::forward<UboundType>(ubound))
     {
     }
 
     friend constexpr bool operator==(const RegularMDomain& xx, const RegularMDomain& yy)
     {
         return (&xx == &yy)
-            || (static_cast<RegularMesh_>(xx) == static_cast<RegularMesh_>(yy)
-                && xx.m_lbound == yy.m_lbound && xx.m_ubound == yy.m_ubound);
+               || (static_cast<RegularMesh_>(xx) == static_cast<RegularMesh_>(yy)
+                   && xx.m_lbound == yy.m_lbound && xx.m_ubound == yy.m_ubound);
     }
 
     friend constexpr bool operator!=(const RegularMDomain& xx, const RegularMDomain& yy)
     {
-        return (&xx != &yy)
-            && (static_cast<RegularMesh_>(xx) != static_cast<RegularMesh_>(yy)
-                        && xx.m_lbound != yy.m_lbound
-                || xx.m_ubound != yy.m_ubound);
+        return !operator==(xx, yy);
     }
 
     template <class... OTags>
@@ -443,13 +451,21 @@ public:
     }
 };
 
-
+template <class... Tags>
+std::ostream& operator<<(std::ostream& out, RegularMDomain<Tags...> const& dom)
+{
+    out << "RegularMDomain( origin=" << dom.origin() << ", unitvec=" << dom.step() << ", lower_bound=" << dom.lbound() << ", upper_bound(excluded)="
+        << dom.ubound() << " )";
+    return out;
+}
 
 /* For now MDomain is just an alias to RegularMDomain, in the long run, we should use a tuple-based
  * solutions to have different types in each dimension
  */
 template <class... Tags>
 using MDomain = RegularMDomain<Tags...>;
+
+using MDomainT = MDomain<Dim::T>;
 
 using MDomainX = MDomain<Dim::X>;
 

@@ -4,16 +4,16 @@ AccessModifierOffset:                           -4
 AlignAfterOpenBracket:                          AlwaysBreak
 AlignConsecutiveMacros:                         false
 AlignConsecutiveAssignments:                    false
-AlignConsecutiveBitFields:                      false
+#   AlignConsecutiveBitFields:                      false # !!!requires clang 11
 AlignConsecutiveDeclarations:                   false
 AlignEscapedNewlines:                           Right
-AlignOperands:                                  AlignAfterOperator
+AlignOperands:                                  true # AlignAfterOperator !!!requires clang 11
 AlignTrailingComments:                          false
 AllowAllArgumentsOnNextLine:                    false
 AllowAllConstructorInitializersOnNextLine:      false
 AllowAllParametersOfDeclarationOnNextLine:      false
-AllowShortEnumsOnASingleLine:                   true
-AllowShortBlocksOnASingleLine:                  Empty
+#   AllowShortEnumsOnASingleLine:                   true # !!!requires clang 11
+#   AllowShortBlocksOnASingleLine:                  Empty # !!!requires clang 10
 AllowShortCaseLabelsOnASingleLine:              false
 AllowShortFunctionsOnASingleLine:               Empty
 AllowShortLambdasOnASingleLine:                 All
@@ -28,7 +28,7 @@ BinPackParameters:                              false
 BraceWrapping:                                  
   AfterCaseLabel:                               false
   AfterClass:                                   true
-  AfterControlStatement:                        Never
+  AfterControlStatement:                        false # Never !!!requires clang 10
   AfterEnum:                                    false
   AfterFunction:                                true
   AfterNamespace:                               false
@@ -38,8 +38,8 @@ BraceWrapping:
   AfterExternBlock:                             false
   BeforeCatch:                                  false
   BeforeElse:                                   false
-  BeforeLambdaBody:                             false
-  BeforeWhile:                                  false
+#     BeforeLambdaBody:                             false # !!!requires clang 11
+#     BeforeWhile:                                  false # !!!requires clang 11
   IndentBraces:                                 false
   SplitEmptyFunction:                           true
   SplitEmptyRecord:                             true
@@ -60,7 +60,7 @@ ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ConstructorInitializerIndentWidth:              4
 ContinuationIndentWidth:                        8
 Cpp11BracedListStyle:                           true
-DeriveLineEnding:                               true
+#   DeriveLineEnding:                               true # !!!requires clang 10
 DerivePointerAlignment:                         false
 DisableFormat:                                  false
 ExperimentalAutoDetectBinPacking:               false
@@ -69,25 +69,25 @@ IncludeBlocks:                                  Regroup
 IncludeCategories:
   - Regex:           '^[<"]mpi\.h[">]'
     Priority:        -100
-    SortPriority:    -100
+#       SortPriority:    -100                  # !!!requires clang 10
   - Regex:           '^<[^./]*>$'
     Priority:        -80
-    SortPriority:    -80
+#       SortPriority:    -80                   # !!!requires clang 10
   - Regex:           '^<.*\.h[^.]*>$'
     Priority:        -60
-    SortPriority:    -60
+#       SortPriority:    -60                   # !!!requires clang 10
   - Regex:           '^"[^/]*/.*"$'
     Priority:        -40
-    SortPriority:    -40
+#       SortPriority:    -40                   # !!!requires clang 10
   - Regex:           '^".*"$'
     Priority:        -20
-    SortPriority:    -20
+#       SortPriority:    -20                   # !!!requires clang 10
 IncludeIsMainRegex:                             '^$'
-IncludeIsMainSourceRegex:                       ''
+#    IncludeIsMainSourceRegex:                       '' # !!!requires clang 10
 IndentCaseLabels:                               false
-IndentCaseBlocks:                               false
-IndentExternBlock:                              NoIndent
-IndentGotoLabels:                               false
+#    IndentCaseBlocks:                               false # !!!requires clang 10
+#    IndentExternBlock:                              NoIndent # !!!requires clang 11
+#    IndentGotoLabels:                               false # !!!requires clang 10
 IndentPPDirectives:                             None
 IndentWidth:                                    4
 IndentWrappedFunctionNames:                     false
@@ -98,11 +98,6 @@ MacroBlockBegin:                                ''
 MacroBlockEnd:                                  ''
 MaxEmptyLinesToKeep:                            3
 NamespaceIndentation:                           None
-ObjCBinPackProtocolList:                        Auto
-ObjCBlockIndentWidth:                           4
-ObjCBreakBeforeNestedBlockParam:                true
-ObjCSpaceAfterProperty:                         true
-ObjCSpaceBeforeProtocolList:                    true
 PenaltyBreakAssignment:                         2
 PenaltyBreakBeforeFirstCallParameter:           100000
 PenaltyBreakComment:                            2000000
@@ -124,20 +119,19 @@ SpaceBeforeCtorInitializerColon:                true
 SpaceBeforeInheritanceColon:                    true
 SpaceBeforeParens:                              ControlStatements
 SpaceBeforeRangeBasedForLoopColon:              true
-SpaceInEmptyBlock:                              true
+#   SpaceInEmptyBlock:                              false # !!!requires clang 10
 SpaceInEmptyParentheses:                        false
 SpacesBeforeTrailingComments:                   1
 SpacesInAngles:                                 false
-SpacesInConditionalStatement:                   false
+#   SpacesInConditionalStatement:                   false # !!!requires clang 10
 SpacesInContainerLiterals:                      true
 SpacesInCStyleCastParentheses:                  false
 SpacesInParentheses:                            false
 SpacesInSquareBrackets:                         false
-SpaceBeforeSquareBrackets:                      false
-Standard:                                       Latest
+#   SpaceBeforeSquareBrackets:                      false # !!!requires clang 10
+Standard:                                       Cpp11 # c++17 !!!requires clang 10
 StatementMacros:                                []
 TabWidth:                                       4
-UseCRLF:                                        false
+#   UseCRLF:                                        false # !!!requires clang 10
 UseTab:                                         Never
-WhitespaceSensitiveMacros:                      []
 ...

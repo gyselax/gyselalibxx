@@ -8,7 +8,7 @@
 class Matrix
 {
 public:
-    Matrix(int mat_size) : n(mat_size) { }
+    Matrix(int mat_size) : n(mat_size) {}
     virtual ~Matrix() = default;
     virtual double get_element(int i, int j) const = 0;
     virtual void set_element(int i, int j, double aij) = 0;

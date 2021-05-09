@@ -6,17 +6,14 @@
 
 class PredCorr2 : public ITimeSolver2
 {
-    const IVlasovSolver2& m_vlasov;
+    IVlasovSolver2 const& m_vlasov;
 
-    const IEfieldSolver2& m_efield;
+    IEfieldSolver2 const& m_efield;
 
-    const MDomain<Dim::T>& m_time;
+    RLengthT const m_dt;
 
 public:
-    PredCorr2(
-            const IVlasovSolver2& vlasov,
-            const IEfieldSolver2& efield,
-            const MDomain<Dim::T>& time);
+    PredCorr2(const IVlasovSolver2& vlasov, const IEfieldSolver2& efield, RLengthT dt);
 
-    DBlockViewXVx& operator()(DBlockViewXVx& data, double mass_ratio) const override;
+    DBlockViewXVx& operator()(DBlockViewXVx& data, double mass_ratio, int steps) const override;
 };

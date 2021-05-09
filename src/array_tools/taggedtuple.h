@@ -110,7 +110,7 @@ public:
         return *this;
     }
 
-    constexpr inline operator const std::tuple_element<0, std::tuple<ElementTypes...>>&()
+    constexpr inline operator const std::tuple_element<0, std::tuple<ElementTypes...>> &()
             const noexcept
     {
         static_assert(
@@ -119,7 +119,7 @@ public:
         return std::get<0>(m_values);
     }
 
-    constexpr inline operator std::tuple_element<0, std::tuple<ElementTypes...>>&() noexcept
+    constexpr inline operator std::tuple_element<0, std::tuple<ElementTypes...>> &() noexcept
     {
         static_assert(
                 sizeof...(Tags) == 1,

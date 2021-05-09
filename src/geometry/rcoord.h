@@ -8,6 +8,8 @@ using RCoordElement = double;
 template <class... Tags>
 using RCoord = TaggedArray<RCoordElement, Tags...>;
 
+using RCoordT = RCoord<Dim::T>;
+
 using RCoordX = RCoord<Dim::X>;
 
 using RCoordVx = RCoord<Dim::Vx>;
@@ -20,6 +22,8 @@ using RLengthElement = double;
 
 template <class... Tags>
 using RLength = TaggedArray<RLengthElement, Tags...>;
+
+using RLengthT = RLength<Dim::T>;
 
 using RLengthX = RLength<Dim::X>;
 

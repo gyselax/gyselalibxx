@@ -5,7 +5,5 @@
 class ITimeSolver2
 {
 public:
-    virtual ~ITimeSolver2() = default;
-
-    virtual DBlockViewXVx& operator()(DBlockViewXVx& data, double mass_ratio) const = 0;
+    virtual DBlockViewXVx& operator()(DBlockViewXVx& data, double mass_ratio, int steps) const = 0;
 };

@@ -14,6 +14,7 @@ target_link_libraries(spline_test
 add_executable(unit_tests
 	blockview.cpp
 	mdomain.cpp
+	mcoord.cpp
 	taggedarray.cpp
 )
 target_compile_features(unit_tests PUBLIC cxx_std_17)

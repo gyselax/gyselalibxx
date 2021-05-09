@@ -1,0 +1,12 @@
+all_tests:
+  only: [ main, merge_requests ]
+  stage: test
+  needs: []
+  image: jbigot/voicexx_env
+  script: |
+    find src '(' -name '*.h' -o -name '*.cpp' ')' -exec clang-format -n -Werror '{}' '+'
+    mkdir build
+    cd build
+    cmake ..
+    make -j 2 VERBOSE=1
+    ctest --output-on-failure --timeout 5

@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstddef>
+#include <ostream>
 #include <utility>
 
 template <class, class...>
@@ -159,3 +160,56 @@ public:
         return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
     }
 };
+
+namespace detail {
+
+template <class... Tags>
+struct TaggedArrayPrinter;
+
+template <class TagsHead, class TagsNext, class... TagsTail>
+struct TaggedArrayPrinter<TagsHead, TagsNext, TagsTail...>
+{
+    template <class ElementType, class... OTags>
+    static std::ostream& print_content(
+            std::ostream& out,
+            TaggedArray<ElementType, OTags...> const& arr)
+    {
+        out << arr.template get<TagsHead>();
+        return TaggedArrayPrinter<TagsNext, TagsTail...>::print_content(out, arr);
+    }
+};
+
+template <class Tag>
+struct TaggedArrayPrinter<Tag>
+{
+    template <class ElementType, class... OTags>
+    static std::ostream& print_content(
+            std::ostream& out,
+            TaggedArray<ElementType, OTags...> const& arr)
+    {
+        out << arr.template get<Tag>();
+        return out;
+    }
+};
+
+template <>
+struct TaggedArrayPrinter<>
+{
+    template <class ElementType, class... OTags>
+    static std::ostream& print_content(
+            std::ostream& out,
+            TaggedArray<ElementType, OTags...> const& arr)
+    {
+        return out;
+    }
+};
+} // namespace detail
+
+template <class ElementType, class... Tags>
+std::ostream& operator<<(std::ostream& out, TaggedArray<ElementType, Tags...> const& arr)
+{
+    out << "(";
+    detail::TaggedArrayPrinter<Tags...>::print_content(out, arr);
+    out << ")";
+    return out;
+}

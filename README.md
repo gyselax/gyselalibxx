@@ -11,6 +11,11 @@ cmake ..
 make
 ```
 
+to run the tests:
+```
+ctest --output-on-failure
+```
+
 ## Dependencies
 
 * cmake-3.15+
