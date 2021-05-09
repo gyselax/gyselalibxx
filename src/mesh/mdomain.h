@@ -454,8 +454,8 @@ public:
 template <class... Tags>
 std::ostream& operator<<(std::ostream& out, RegularMDomain<Tags...> const& dom)
 {
-    out << "RegularMDomain( origin=" << dom.origin() << ", unitvec=" << dom.step() << ", lower_bound=" << dom.lbound() << ", upper_bound(excluded)="
-        << dom.ubound() << " )";
+    out << "RegularMDomain( origin=" << dom.origin() << ", unitvec=" << dom.step()
+        << ", lower_bound=" << dom.lbound() << ", upper_bound(excluded)=" << dom.ubound() << " )";
     return out;
 }
 
