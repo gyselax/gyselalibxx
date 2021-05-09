@@ -7,5 +7,5 @@
 	branch = master
 [submodule "vendor/mdarray"]
 	path = vendor/mdarray
-	usrl = git@github.com:jbigot/mdarray.git
+	url = git@github.com:jbigot/mdarray.git
 	branch = master
