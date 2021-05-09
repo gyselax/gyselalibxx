@@ -3,6 +3,8 @@ all_tests:
   stage: test
   needs: []
   image: jbigot/voicexx_env
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
   script: |
     find src '(' -name '*.h' -o -name '*.cpp' ')' -exec clang-format -n -Werror '{}' '+'
     mkdir build
