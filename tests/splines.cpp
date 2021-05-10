@@ -5,10 +5,10 @@
 #include <vector>
 
 #include <gtest/gtest.h>
-#include <spline_interpolator_1d.h>
 
 #include "boundary_conditions.h"
 #include "bsplines.h"
+#include "spline_interpolator_1d.h"
 
 using namespace std;
 using namespace std::experimental;
@@ -145,20 +145,20 @@ void cos_splines_test(
     max_norm_error_diff = 0.;
 
     vector<double> eval_pts_data(eval_pts.extent(0));
-    for (double pts : eval_pts_data){
+    for (double pts : eval_pts_data) {
         // Check eval function
         double spline_value = spline.eval(pts);
 
         // Compute error
-        double error = spline_value - eval_cos(pts,coeffs);
-        max_norm_error = fmax(max_norm_error,abs(error));
+        double error = spline_value - eval_cos(pts, coeffs);
+        max_norm_error = fmax(max_norm_error, abs(error));
 
         // Check eval_deriv function
         double spline_deriv_value = spline.eval_deriv(pts);
 
         // Compute error
         double error_deriv = spline_deriv_value - eval_cos(pts, coeffs, 1);
-        max_norm_error_diff = fmax(max_norm_error_diff,abs(error_deriv));
+        max_norm_error_diff = fmax(max_norm_error_diff, abs(error_deriv));
     }
     /*        
     do i = lbound(eval_pts,1), ubound(eval_pts,1)
@@ -178,7 +178,7 @@ void cos_splines_test(
           max_norm_error_diff = max( max_norm_error_diff, abs( error ) )
       end do
       */
-      /* TODO
+    /* TODO
       max_norm_error_int = abs( spline1d_integrate( spline ) )
 
       !*** array deallocation ***
