@@ -27,4 +27,3 @@ TEST(DBlockX, get_domainX)
     DBlockX block(dom);
     ASSERT_EQ(dom, get_domain<Dim::X>(block));
 }
-

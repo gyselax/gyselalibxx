@@ -66,7 +66,7 @@ public:
     constexpr TaggedArray(TaggedArray&&) noexcept = default;
 
     template <class... Params>
-    inline constexpr TaggedArray(Params... params) noexcept
+    inline constexpr TaggedArray(Params&&... params) noexcept
         : m_values {std::forward<ElementType>(params)...}
     {
     }

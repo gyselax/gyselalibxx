@@ -240,15 +240,14 @@ public:
         }
     };
 
-
-
     /** Slice out some dimensions
+     * @param slices the coordinates to 
      */
     template <class... SliceSpecs>
-    inline constexpr auto slice(SliceSpecs... slices) const
+    inline constexpr auto slice(SliceSpecs&&... slices) const
     {
-        auto view = subspan(raw_view(), slices...);
-        auto mesh = submesh(m_mesh, slices...);
+        auto view = subspan(raw_view(), std::forward<SliceSpecs>(slices)...);
+        auto mesh = submesh(m_mesh, std::forward<SliceSpecs>(slices)...);
         return (BlockView(mesh, view));
     }
 

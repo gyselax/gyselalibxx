@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 
+#include <gtest/gtest.h>
 #include <spline_interpolator_1d.h>
 
 #include "boundary_conditions.h"
@@ -188,7 +189,7 @@ void cos_splines_test(
 }
 
 
-int main()
+TEST(Splines, test)
 {
     //const int ncells;
     //const int bc_xmin, bc_xmax;
@@ -198,8 +199,6 @@ int main()
     constexpr int N = 22;
 
     constexpr double h = (xN - x0) / N;
-
-    cout << "h=" << h << endl;
 
     // coordinate array initialization
     std::vector<double> eval_pts(N);
@@ -213,10 +212,4 @@ int main()
     //View1D<double> myview(eval_pts.data(), eval_pts.size());
 
     //max_norm_profile = 1.0
-    //
-    //write(*,*)
-    //write(*,'(a)') '---------------------------------------------------------------------------'
-    //write(*,'(a)') ' TEST: convergence analysis on cos profile (with absolute error bound)     '
-    //write(*,'(a)') '---------------------------------------------------------------------------'
-    //write(*,*)
 }

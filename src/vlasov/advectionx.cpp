@@ -37,9 +37,9 @@ DBlockViewXVx& AdvectionX::operator()(DBlockViewXVx& fdistribu, double mass_rati
     const MDomainVx& v_dom = get_domain<Dim::Vx>(fdistribu);
 
     // pre-allocate some memory to prevent allocation later in loop
-    BlockX<RCoordX> feet_coords = allocate_bloc<RCoordX>(x_dom);
-    DBlockX contiguous_slice = allocate_dbloc(x_dom);
-    SplineX spline = allocate_spline(m_x_spline_basis);
+    BlockX<RCoordX> feet_coords(x_dom);
+    DBlockX contiguous_slice(x_dom);
+    SplineX spline(m_x_spline_basis);
 
     for (MCoordVx vii : v_dom) {
         // compute the displacement

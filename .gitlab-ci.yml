@@ -12,4 +12,4 @@ all_tests:
     make -j 2 VERBOSE=1
     ctest --output-on-failure --timeout 5
     cd ..
-    find src '(' -name '*.h' -o -name '*.cpp' ')' -exec clang-format -n -Werror '{}' '+' && echo "Identation is Ok!"
+    find src tests '(' -name '*.h' -o -name '*.cpp' ')' -exec clang-format -n -Werror '{}' '+' && echo "Identation is Ok!"

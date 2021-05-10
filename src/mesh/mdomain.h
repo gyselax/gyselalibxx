@@ -45,16 +45,6 @@ public:
     {
     }
 
-    inline constexpr RCoord_ origin() const noexcept
-    {
-        return m_origin;
-    }
-
-    inline constexpr RLength_ step() const noexcept
-    {
-        return m_step;
-    }
-
     friend constexpr bool operator==(const RegularMesh& xx, const RegularMesh& yy)
     {
         return (&xx == &yy) || (xx.m_origin == yy.m_origin && xx.m_step == yy.m_step);
@@ -77,21 +67,32 @@ public:
         return false;
     }
 
-    inline constexpr RCoord_ rcoord(const MCoord_ icoord) const noexcept
-    {
-        return {origin() + icoord * m_step};
-    }
-
-    inline constexpr RCoord_ operator()(const MCoord_ icoord) const noexcept
-    {
-        return rcoord(icoord);
-    }
-
     static inline constexpr size_t rank() noexcept
     {
         return sizeof...(Tags);
     }
+
+    inline constexpr RCoord_ origin() const noexcept
+    {
+        return m_origin;
+    }
+
+    inline constexpr RLength_ step() const noexcept
+    {
+        return m_step;
+    }
+
+    inline constexpr RCoord_ to_real(const MCoord_ icoord) const noexcept
+    {
+        return {origin() + icoord * m_step};
+    }
 };
+
+template <class... Tags>
+std::ostream& operator<<(std::ostream& out, RegularMesh<Tags...> const& dom)
+{
+    return out << "RegularMesh( origin=" << dom.origin() << ", unitvec=" << dom.step() << " )";
+}
 
 template <class... Tags>
 using Mesh = RegularMesh<Tags...>;
