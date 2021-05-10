@@ -102,48 +102,65 @@ void cos_splines_test(
 
     vector<double> yvals_data(N);
     View1D<double> yvals(yvals_data.data(), yvals_data.size());
-    //eval_cos(yvals, xgrid, coeffs);
-    //
-    //// computation of rhs'(0) and rhs'(n)
-    //// -> deriv_rhs(0) = rhs'(n) and deriv_rhs(1) = rhs'(0)
-    //int const shift = 1 - (degree % 2); // shift = 1 for even order, 0 for odd order
-    //
-    //if (bc_xmin == BoundCond::HERMITE) {
-    //    vector<double> Sderiv_lhs_data(degree / 2);
-    //    View1D<double> Sderiv_lhs(Sderiv_lhs_data.data(), Sderiv_lhs_data.size());
-    //    for (int i = 1; i <= degree / 2; ++i) {
-    //        Sderiv_lhs(i - 1) = eval_cos(x0, coeffs, i - shift);
-    //    }
-    //    if (bc_xmax == BoundCond::HERMITE) {
-    //        vector<double> Sderiv_rhs_data(degree / 2);
-    //        View1D<double> Sderiv_rhs(Sderiv_rhs_data.data(), Sderiv_rhs_data.size());
-    //
-    //        for (int i = 1; i <= degree / 2; ++i) {
-    //            Sderiv_rhs(i - 1) = eval_cos(xN, coeffs, i - shift);
-    //        }
-    //
-    //        spline_interpolator.compute_interpolant(spline, yvals, &Sderiv_lhs, &Sderiv_rhs);
-    //    } else {
-    //        spline_interpolator.compute_interpolant(spline, yvals, &Sderiv_lhs);
-    //    }
-    //} else {
-    //    if (bc_xmax == BoundCond::HERMITE) {
-    //        vector<double> Sderiv_rhs_data(degree / 2);
-    //        View1D<double> Sderiv_rhs(Sderiv_rhs_data.data(), Sderiv_rhs_data.size());
-    //        for (int i = 1; i <= degree / 2; ++i) {
-    //            Sderiv_rhs(i - 1) = eval_cos(xN, coeffs, i - shift);
-    //        }
-    //        spline_interpolator.compute_interpolant(spline, yvals, nullptr, &Sderiv_rhs);
-    //
-    //    } else {
-    //        spline_interpolator.compute_interpolant(spline, yvals);
-    //    }
-    //}
+    eval_cos(yvals, xgrid, coeffs);
 
-    /* TODO
-      max_norm_error = 0.0_F64
-      max_norm_error_diff = 0.0_F64
-      do i = lbound(eval_pts,1), ubound(eval_pts,1)
+    // computation of rhs'(0) and rhs'(n)
+    // -> deriv_rhs(0) = rhs'(n) and deriv_rhs(1) = rhs'(0)
+    int const shift = 1 - (degree % 2); // shift = 1 for even order, 0 for odd order
+
+    if (bc_xmin == BoundCond::HERMITE) {
+        vector<double> Sderiv_lhs_data(degree / 2);
+        View1D<double> Sderiv_lhs(Sderiv_lhs_data.data(), Sderiv_lhs_data.size());
+        for (int i = 1; i <= degree / 2; ++i) {
+            Sderiv_lhs(i - 1) = eval_cos(x0, coeffs, i - shift);
+        }
+        if (bc_xmax == BoundCond::HERMITE) {
+            vector<double> Sderiv_rhs_data(degree / 2);
+            View1D<double> Sderiv_rhs(Sderiv_rhs_data.data(), Sderiv_rhs_data.size());
+
+            for (int i = 1; i <= degree / 2; ++i) {
+                Sderiv_rhs(i - 1) = eval_cos(xN, coeffs, i - shift);
+            }
+
+            spline_interpolator.compute_interpolant(spline, yvals, &Sderiv_lhs, &Sderiv_rhs);
+        } else {
+            spline_interpolator.compute_interpolant(spline, yvals, &Sderiv_lhs);
+        }
+    } else {
+        if (bc_xmax == BoundCond::HERMITE) {
+            vector<double> Sderiv_rhs_data(degree / 2);
+            View1D<double> Sderiv_rhs(Sderiv_rhs_data.data(), Sderiv_rhs_data.size());
+            for (int i = 1; i <= degree / 2; ++i) {
+                Sderiv_rhs(i - 1) = eval_cos(xN, coeffs, i - shift);
+            }
+            spline_interpolator.compute_interpolant(spline, yvals, nullptr, &Sderiv_rhs);
+
+        } else {
+            spline_interpolator.compute_interpolant(spline, yvals);
+        }
+    }
+
+    max_norm_error = 0.;
+    max_norm_error_diff = 0.;
+
+    vector<double> eval_pts_data(eval_pts.extent(0));
+    for (double pts : eval_pts_data){
+        // Check eval function
+        double spline_value = spline.eval(pts);
+
+        // Compute error
+        double error = spline_value - eval_cos(pts,coeffs);
+        max_norm_error = fmax(max_norm_error,abs(error));
+
+        // Check eval_deriv function
+        double spline_deriv_value = spline.eval_deriv(pts);
+
+        // Compute error
+        double error_deriv = spline_deriv_value - eval_cos(pts, coeffs, 1);
+        max_norm_error_diff = fmax(max_norm_error_diff,abs(error_deriv));
+    }
+    /*        
+    do i = lbound(eval_pts,1), ubound(eval_pts,1)
           !*** Check eval function ***
           spline_value = spline1d_eval( spline, eval_pts(i) )
 
@@ -159,7 +176,8 @@ void cos_splines_test(
           error = spline_value - eval_cos(eval_pts(i), coeffs, 1)
           max_norm_error_diff = max( max_norm_error_diff, abs( error ) )
       end do
-
+      */
+      /* TODO
       max_norm_error_int = abs( spline1d_integrate( spline ) )
 
       !*** array deallocation ***
