@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <cmath>
 
 #include "view.h"
@@ -54,14 +55,6 @@ inline double ipow(double a, int i)
     return r;
 }
 
-template <typename T>
-inline T min(T a, T b)
-{
-    return (a < b) ? a : b;
-}
+using std::max;
 
-template <typename T>
-inline T max(T a, T b)
-{
-    return (a > b) ? a : b;
-}
+using std::min;

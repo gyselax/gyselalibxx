@@ -1,7 +1,6 @@
 #include <array>
 #include <cassert>
 #include <cmath>
-#include <iostream>
 #include <vector>
 
 #include <gtest/gtest.h>
@@ -12,10 +11,6 @@
 
 using namespace std;
 using namespace std::experimental;
-
-//BoundaryCondition::sll_p_periodic;
-constexpr BoundCond BC_GREVILLE = BoundCond::GREVILLE;
-//constexpr int BC_HERMITE  = BoundaryCondition::sll_p_hermite;
 
 constexpr double TWO_PI = 2. * M_PI;
 
@@ -144,21 +139,20 @@ void cos_splines_test(
     max_norm_error = 0.;
     max_norm_error_diff = 0.;
 
-    vector<double> eval_pts_data(eval_pts.extent(0));
-    for (double pts : eval_pts_data) {
+    for (int i = 0; i < eval_pts.extent(0); ++i) {
         // Check eval function
-        double spline_value = spline.eval(pts);
+        double const spline_value = spline.eval(eval_pts[i]);
 
         // Compute error
-        double error = spline_value - eval_cos(pts, coeffs);
-        max_norm_error = fmax(max_norm_error, abs(error));
+        double const error = spline_value - eval_cos(eval_pts[i], coeffs);
+        max_norm_error = max(max_norm_error, abs(error));
 
         // Check eval_deriv function
-        double spline_deriv_value = spline.eval_deriv(pts);
+        double const spline_deriv_value = spline.eval_deriv(eval_pts[i]);
 
         // Compute error
-        double error_deriv = spline_deriv_value - eval_cos(pts, coeffs, 1);
-        max_norm_error_diff = fmax(max_norm_error_diff, abs(error_deriv));
+        double const error_deriv = spline_deriv_value - eval_cos(eval_pts[i], coeffs, 1);
+        max_norm_error_diff = max(max_norm_error_diff, abs(error_deriv));
     }
     /*        
     do i = lbound(eval_pts,1), ubound(eval_pts,1)
@@ -206,9 +200,6 @@ TEST(Splines, test)
         eval_pts[i] = x0 + i * h;
     }
 
-    for (double pts : eval_pts) {
-        cout << pts << endl;
-    }
     //View1D<double> myview(eval_pts.data(), eval_pts.size());
 
     //max_norm_profile = 1.0
