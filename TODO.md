@@ -15,6 +15,5 @@
 * support exposing sub-views from Block
 * Let blocks start at non-zero origin
 * Handle periodic dimensions
-* Replace use of constants 0, 1, ... to identify dimensions by named constants
 * Add singleton to each dimension
 * Add versions taking singleton as parameter to operators

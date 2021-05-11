@@ -82,9 +82,9 @@ public:
     inline constexpr BlockView& operator=(BlockView&& other) noexcept = default;
 
     template <class... IndexType>
-    inline constexpr reference operator()(IndexType... indices) const noexcept
+    inline constexpr reference operator()(IndexType&&... indices) const noexcept
     {
-        return m_raw(indices...);
+        return m_raw(std::forward<IndexType>(indices)...);
     }
 
     inline constexpr reference operator()(const MCoord_& indices) const noexcept

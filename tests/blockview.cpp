@@ -2,42 +2,46 @@
 
 #include "blockview.h"
 
-MDomainX dom(0., 10., 0, 2);
+class DBlockXTest : public ::testing::Test
+{
+protected:
+    MDomainX dom = MDomainX(0., 10., 0, 2);
+};
 
-TEST(DBlockX, Constructor)
+
+
+TEST_F(DBlockXTest, constructor)
 {
     DBlockX block(dom);
 }
 
-TEST(DBlockX, domain)
+TEST_F(DBlockXTest, domain)
 {
     DBlockX block(dom);
     ASSERT_EQ(dom, block.domain());
 }
 
-TEST(DBlockX, domainX)
+TEST_F(DBlockXTest, domainX)
 {
     DBlockX block(dom);
     ASSERT_EQ(dom, block.domain<Dim::X>());
 }
 
-TEST(DBlockX, get_domainX)
+TEST_F(DBlockXTest, get_domainX)
 {
-    MDomainX dom(0., 10., 0, 2);
     DBlockX block(dom);
     ASSERT_EQ(dom, get_domain<Dim::X>(block));
 }
 
-// Future test
-// TEST(DBlockX, access)
-// {
-//     DBlockX block(dom);
-//     for (auto&& ii : block.domain()) {
-//         ASSERT_EQ(block(ii), block(std::array {ii}));
-//     }
-// }
+TEST_F(DBlockXTest, access)
+{
+    DBlockX block(dom);
+    for (auto&& ii : block.domain()) {
+        ASSERT_EQ(block(ii), block(std::array {ii}));
+    }
+}
 
-TEST(DBlockX, deepcopy)
+TEST_F(DBlockXTest, deepcopy)
 {
     constexpr auto NB_ITER = 10;
     DBlockX block(MDomainX(0., 10., 0, NB_ITER));
