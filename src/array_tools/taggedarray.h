@@ -120,6 +120,18 @@ public:
         return *this;
     }
 
+    /// Returns a reference to the underlying `std::array`
+    constexpr inline std::array<ElementType, sizeof...(Tags)>& array() noexcept
+    {
+        return m_values;
+    }
+
+    /// Returns a const reference to the underlying `std::array`
+    constexpr inline const std::array<ElementType, sizeof...(Tags)>& array() const noexcept
+    {
+        return m_values;
+    }
+
     constexpr inline operator const ElementType&() const noexcept
     {
         static_assert(

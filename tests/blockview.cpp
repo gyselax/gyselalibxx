@@ -28,6 +28,15 @@ TEST(DBlockX, get_domainX)
     ASSERT_EQ(dom, get_domain<Dim::X>(block));
 }
 
+// Future test
+// TEST(DBlockX, access)
+// {
+//     DBlockX block(dom);
+//     for (auto&& ii : block.domain()) {
+//         ASSERT_EQ(block(ii), block(std::array {ii}));
+//     }
+// }
+
 TEST(DBlockX, deepcopy)
 {
     constexpr auto NB_ITER = 10;

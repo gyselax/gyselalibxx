@@ -89,7 +89,7 @@ public:
 
     inline constexpr reference operator()(const MCoord_& indices) const noexcept
     {
-        return m_raw(indices);
+        return m_raw(indices.array());
     }
 
     inline accessor_type accessor() const
