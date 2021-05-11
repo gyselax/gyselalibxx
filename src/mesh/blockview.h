@@ -15,6 +15,8 @@ class Block;
 template <class, class, bool = true>
 class BlockView;
 
+
+
 template <class... Tags, class ElementType, bool CONTIGUOUS>
 class BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>
 {
@@ -245,6 +247,16 @@ public:
         }
     };
 
+private:
+    template <bool O_CONTIGUOUS, class OElementType, class... OTags>
+    static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
+            RegularMesh<OTags...> const& mesh,
+            ViewND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view)
+    {
+        return BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS>(mesh, raw_view);
+    }
+
+public:
     /** Slice out some dimensions
      * @param slices the coordinates to 
      */
@@ -253,7 +265,7 @@ public:
     {
         auto view = subspan(raw_view(), std::forward<SliceSpecs>(slices)...);
         auto mesh = submesh(m_mesh, std::forward<SliceSpecs>(slices)...);
-        return (BlockView(mesh, view));
+        return make_view<::is_contiguous<decltype(view)>, ElementType>(mesh, view);
     }
 
     /** Duplicate the data of this view
@@ -278,8 +290,9 @@ using DBlockViewVx = BlockView<MDomain<Dim::Vx>, double>;
 
 using DBlockViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double>;
 
-template <class... Tags, class View>
-RegularMDomain<Tags...> get_domain(const View& v)
+template <class... QueryTags, class... Tags, class ElementType, bool CONTIGUOUS>
+RegularMDomain<QueryTags...> get_domain(
+        const BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& v)
 {
     return v.template domain<Tags...>();
 }

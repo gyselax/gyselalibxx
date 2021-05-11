@@ -90,3 +90,31 @@ template <class ElementType, bool CONTIGUOUS = true>
 using View2D = ViewND<2, ElementType, CONTIGUOUS>;
 
 using mdspan_2d = View2D<double>;
+
+
+template <class>
+struct IsContiguous;
+template <ptrdiff_t S>
+struct IsContiguous<std::experimental::layout_stride<S>>
+{
+    static constexpr bool val = (S == 1);
+};
+template <ptrdiff_t SH, ptrdiff_t SN, ptrdiff_t... ST>
+struct IsContiguous<std::experimental::layout_stride<SH, SN, ST...>>
+{
+    static constexpr bool val = IsContiguous<std::experimental::layout_stride<SN, ST...>>::val;
+};
+template <>
+struct IsContiguous<std::experimental::layout_right>
+{
+    static constexpr bool val = true;
+};
+template <class ElementType, class Extents, class LayoutPolicy, class AccessorPolicy>
+struct IsContiguous<
+        std::experimental::basic_mdspan<ElementType, Extents, LayoutPolicy, AccessorPolicy>>
+{
+    static constexpr bool val = IsContiguous<LayoutPolicy>::val;
+};
+
+template <class C>
+constexpr bool is_contiguous = IsContiguous<C>::val;
