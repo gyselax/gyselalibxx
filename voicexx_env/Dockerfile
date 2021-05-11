@@ -1,4 +1,4 @@
-FROM ubuntu:focal as prebuild
+FROM ubuntu:focal
 
 COPY bash_run /bin/
 ENV BASH_ENV=/etc/profile
@@ -19,12 +19,12 @@ RUN chmod +x /bin/bash_run \
  && apt-get autoremove -y \
  && apt-get clean -y \
  && apt-get autoclean -y \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* \
+ && useradd -m -U default \
+ && mkdir /data
 
-ENV HOME /home/default
-RUN useradd -d ${HOME} -m -u 1001 -U default
 USER 1001
-WORKDIR ${HOME}
+WORKDIR /data
 
 ENTRYPOINT ["/bin/bash_run"]
 CMD ["/bin/bash", "-li"]

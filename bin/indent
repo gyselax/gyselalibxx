@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd "$(dirname "$0")"
+cd ..
+
+docker run -v "$(pwd):/data" -u "$(id -u):$(id -g)" -ti jbigot/voicexx_env find src tests '(' -name '*.h' -o -name '*.cpp' ')' -exec clang-format -i '{}' '+'

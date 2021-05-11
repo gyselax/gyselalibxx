@@ -6,6 +6,7 @@
     guess)
 
 ## TODO
+* handle const views
 * add info about sliced out dimensions to Block
 * add easy classes to hold set of values (coords typically) Seq<...>
 * make moving from 1-elem array to scalar easy for coords & co.

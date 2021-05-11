@@ -117,6 +117,11 @@ public:
         return m_raw.extents();
     }
 
+    inline constexpr index_type extent(size_t dim) const noexcept
+    {
+        return m_raw.extent(dim);
+    }
+
     inline constexpr index_type size() const noexcept
     {
         return m_raw.size();
@@ -280,21 +285,39 @@ RegularMDomain<Tags...> get_domain(const View& v)
 }
 
 
-template <class... Tags, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS, class... Indices>
+namespace detail {
+template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor, class... Indices>
+inline void for_each_impl(
+        const BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& to,
+        Functor&& f,
+        Indices&&... idxs) noexcept
+{
+    if constexpr (
+            sizeof...(Indices) == BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>::rank()) {
+        f(std::forward<Indices>(idxs)...);
+    } else {
+        for (ptrdiff_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
+            for_each_impl(to, std::forward<Functor>(f), std::forward<Indices...>(idxs)..., ii);
+        }
+    }
+}
+} // namespace detail
+
+template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor>
+inline void for_each(
+        const BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& to,
+        Functor&& f) noexcept
+{
+    detail::for_each_impl(to, std::forward<Functor>(f));
+}
+
+template <class... Tags, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS>
 inline BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& deepcopy(
         BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& to,
-        BlockView<MDomain<Tags...>, ElementType, OCONTIGUOUS> const& from,
-        Indices... idxs) noexcept
+        BlockView<MDomain<Tags...>, ElementType, OCONTIGUOUS> const& from) noexcept
 {
     assert(to.extents() == from.extents());
-    //TODO !
-    //     if constexpr (sizeof...(Indices) == to.rank()) {
-    //         to(idxs...) = from(idxs...);
-    //     } else {
-    //         for (size_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
-    //             copy(to, from, idxs..., ii);
-    //         }
-    //     }
+    for_each(to, [&to, &from](auto... idxs) { to(idxs...) = from(idxs...); });
     return to;
 }
 
