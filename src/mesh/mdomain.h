@@ -108,39 +108,46 @@ using MeshXVx = Mesh<Dim::X, Dim::Vx>;
 
 namespace detail {
 
-template <class... SelectedTags, class TagsHead, class... TagsQueue, class SliceSpec>
+template <
+        class... SelectedTags,
+        class TagsHead,
+        class... TagsQueue,
+        class... AllTags,
+        class SliceSpec>
 inline constexpr auto append_if_all(
         RegularMesh<SelectedTags...>,
         RegularMesh<TagsHead>,
+        RegularMesh<AllTags...> m,
         SliceSpec) noexcept
 {
     static_assert(
             std::is_integral_v<
                     SliceSpec> || std::is_same_v<std::experimental::all_type, SliceSpec>);
     if constexpr (std::is_integral_v<SliceSpec>) {
-        return RegularMesh<SelectedTags...>();
+        return RegularMesh<SelectedTags...>(m);
     } else {
-        return RegularMesh<TagsHead, SelectedTags...>();
+        //TODO: s+h
+        return RegularMesh<TagsHead, SelectedTags...>(m);
     }
 }
 
 
 template <class TagsHead, class... TagsQueue, class SliceSpecsHead, class... SliceSpecsQueue>
 inline constexpr auto select_tags(
-        RegularMesh<TagsHead, TagsQueue...>,
-        SliceSpecsHead h,
-        SliceSpecsQueue... q) noexcept
+        RegularMesh<TagsHead, TagsQueue...> m,
+        SliceSpecsHead&& h,
+        SliceSpecsQueue&&... q) noexcept
 {
-    return append_if_all(
-            select_tags(RegularMesh<TagsQueue...>(), q...),
-            RegularMesh<TagsHead>(),
-            h);
-}
-
-template <class Tag, class SliceSpec>
-inline constexpr auto select_tags(RegularMesh<Tag> m, SliceSpec s) noexcept
-{
-    return append_if_all(RegularMesh<>(RCoord<>(), RLength<>()), m, s);
+    static_assert(sizeof...(TagsQueue) == sizeof...(SliceSpecsQueue));
+    if constexpr (sizeof...(TagsQueue) > 0) {
+        return append_if_all(
+                select_tags(RegularMesh<TagsQueue...>(m), q...),
+                RegularMesh<TagsHead>(m),
+                m,
+                h);
+    } else {
+        return append_if_all(RegularMesh<>(RCoord<>(), RLength<>()), m, m, h);
+    }
 }
 
 } // namespace detail

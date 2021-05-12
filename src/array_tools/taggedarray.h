@@ -73,7 +73,7 @@ public:
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedArray(const TaggedArray<OElementType, OTags...>& other) noexcept
-        : m_values {get<Tags>(other)...}
+        : m_values {(::get<Tags>(other))...}
     {
     }
 
