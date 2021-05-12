@@ -162,6 +162,7 @@ void cos_splines_test(
 
 constexpr array<BoundCond, 3> available_bc
         = {BoundCond::PERIODIC, BoundCond::HERMITE, BoundCond::GREVILLE};
+//TODO : Add missing test conditions NEUMANN and HERMITE_LAGRANGE
 
 class SplinesTest : public testing::TestWithParam<std::tuple<int, BoundCond, BoundCond>>
 {
@@ -193,40 +194,6 @@ TEST_P(SplinesTest, test)
     constexpr double tol = 1e-12;
     constexpr double max_norm_profile = 1.0;
 
-    //cout << endl;
-    //cout << "---------------------------------------------------------------------- " << endl;
-    //cout << " TEST: evaluate spline at interpolation points (error should be zero) " << endl;
-    //cout << " --------------------------------------------------------------------- " << endl;
-    //cout << endl;
-
-    // Print constant parameters
-    //cout << " Relative error tolerance for f    : tol      = " << tol << endl;
-    //cout << " Number of points in grid: N = " << N << endl;
-    //cout << " Number of evaluation points : " << N << endl;
-    //cout << endl;
-    //cout << " Input:" << endl;
-    //cout << "   . bcmin = boundary conditions at x=xmin [H|L] " << endl;
-    //cout << "   . bcmax = boundary conditions at x=xmax [H|L] " << endl;
-    //cout << endl;
-    //cout << " Output:" << endl;
-    //cout << "   .  err     = relative max-norm of error on f " << endl;
-    //cout << "   .  passed  = 'OK' if all errors <= tol, 'FAIL' otherwise " << endl;
-    //cout << endl;
-    //cout << " Boundary conditions: " << endl;
-    //cout << "   .  P = Periodic " << endl;
-    //cout << "   .  N = Neumann " << endl;
-    //cout << "   .  H = Hermite " << endl;
-    //cout << "   .  L = Hermite-Lagrange " << endl;
-    //cout << endl;
-
-    // Print table header
-    //cout << "degree  "
-    //     << "bcmin  "
-    //     << "bcmax  "
-    //     << "err  "
-    //     << "passed" << endl;
-
-    //TODO : Add missing test conditions NEUMANN and HERMITE_LAGRANGE
 
     array<double, 2> coeffs_data = {1., 0.};
     View1D<double> coeffs(coeffs_data.data(), coeffs_data.size());
