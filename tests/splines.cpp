@@ -234,8 +234,6 @@ TEST(Splines, test)
          << "err  "
          << "passed" << endl;
 
-    bool passed = true;
-
     //TODO : Add missing test conditions NEUMANN and HERMITE_LAGRANGE
     constexpr BoundCond available_bc[3]
             = {BoundCond::PERIODIC, BoundCond::HERMITE, BoundCond::GREVILLE};
@@ -293,16 +291,9 @@ TEST(Splines, test)
                 cout << "d=" << degree << " bc_xmin=" << bc_to_char(bc_xmin)
                      << " bc_xmax=" << bc_to_char(bc_xmax) << " error=" << max_norm_error
                      << " success =" << success_to_string(success) << endl;
-
-                passed = (passed and success);
+                EXPECT_LE(max_norm_error, tol);
             }
         }
-    }
-
-    if (passed) {
-        SUCCEED();
-    } else {
-        FAIL();
     }
 
     //// coordinate array initialization
