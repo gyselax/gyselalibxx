@@ -18,6 +18,46 @@ struct ExtentNDBuilder<std::index_sequence<S...>>
     using type = std::experimental::extents<dynamic_extent<S>...>;
 };
 
+
+template <class ElementType>
+struct accessor
+{
+    using offset_policy = accessor;
+    using element_type = std::remove_cv_t<ElementType>;
+    using reference = ElementType&;
+    using pointer = ElementType*;
+
+    MDSPAN_TEMPLATE_REQUIRES(
+            class OtherElementType,
+            /* requires */ (_MDSPAN_TRAIT(std::is_convertible, OtherElementType, ElementType)))
+    MDSPAN_INLINE_FUNCTION
+    constexpr accessor(accessor<OtherElementType>&&) noexcept {}
+
+    MDSPAN_TEMPLATE_REQUIRES(
+            class OtherElementType,
+            /* requires */ (_MDSPAN_TRAIT(std::is_convertible, OtherElementType, ElementType)))
+    MDSPAN_INLINE_FUNCTION
+    constexpr accessor(const accessor<OtherElementType>&) noexcept {}
+
+    MDSPAN_INLINE_FUNCTION
+    constexpr pointer offset(pointer p, ptrdiff_t i) const noexcept
+    {
+        return p + i;
+    }
+
+    MDSPAN_FORCE_INLINE_FUNCTION
+    constexpr reference access(pointer p, ptrdiff_t i) const noexcept
+    {
+        return p[i];
+    }
+
+    MDSPAN_INLINE_FUNCTION
+    constexpr pointer decay(pointer p) const noexcept
+    {
+        return p;
+    }
+};
+
 } // namespace detail
 
 
@@ -66,7 +106,7 @@ struct ViewNDMaker;
 template <int N, class ElementType>
 struct ViewNDMaker<N, ElementType, true>
 {
-    using type = std::experimental::basic_mdspan<ElementType, ExtentsND<N>>;
+    using type = std::experimental::basic_mdspan<ElementType, ExtentsND<N>, std::experimental::layout_right>;
 };
 
 template <int N, class ElementType>
