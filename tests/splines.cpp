@@ -122,7 +122,7 @@ void cos_splines_test(
         deriv_r = &Sderiv_rhs;
     }
     spline_interpolator.compute_interpolant(spline, yvals, deriv_l, deriv_r);
-    
+
     max_norm_error = 0.;
     max_norm_error_diff = 0.;
 
