@@ -193,17 +193,17 @@ TEST_P(SplinesTest, test)
     constexpr double tol = 1e-12;
     constexpr double max_norm_profile = 1.0;
 
-    cout << endl;
-    cout << "---------------------------------------------------------------------- " << endl;
-    cout << " TEST: evaluate spline at interpolation points (error should be zero) " << endl;
-    cout << " --------------------------------------------------------------------- " << endl;
-    cout << endl;
+    //cout << endl;
+    //cout << "---------------------------------------------------------------------- " << endl;
+    //cout << " TEST: evaluate spline at interpolation points (error should be zero) " << endl;
+    //cout << " --------------------------------------------------------------------- " << endl;
+    //cout << endl;
 
     // Print constant parameters
-    cout << " Relative error tolerance for f    : tol      = " << tol << endl;
-    cout << " Number of points in grid: N = " << N << endl;
-    cout << " Number of evaluation points : " << N << endl;
-    cout << endl;
+    //cout << " Relative error tolerance for f    : tol      = " << tol << endl;
+    //cout << " Number of points in grid: N = " << N << endl;
+    //cout << " Number of evaluation points : " << N << endl;
+    //cout << endl;
     //cout << " Input:" << endl;
     //cout << "   . bcmin = boundary conditions at x=xmin [H|L] " << endl;
     //cout << "   . bcmax = boundary conditions at x=xmax [H|L] " << endl;
@@ -273,7 +273,11 @@ TEST_P(SplinesTest, test)
 
     // Calculate relative error norms from absolute ones
     max_norm_error = max_norm_error / max_norm_profile;
-    EXPECT_LE(max_norm_error, tol);
+    EXPECT_LE(max_norm_error, tol)
+            << "While evaluating spline at interpolation points (error should be zero) \n"
+            << "With \n"
+            << " * Number of points in grid: N = " << N << "\n"
+            << " * Number of evaluation points : " << N << "\n";
 
     //// coordinate array initialization
     //std::vector<double> eval_pts(N);
