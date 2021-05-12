@@ -286,7 +286,7 @@ TEST_P(SplinesTest, test)
 
     // Calculate relative error norms from absolute ones
     max_norm_error = max_norm_error / max_norm_profile;
-    EXPECT_GT(max_norm_error, tol);
+    EXPECT_LE(max_norm_error, tol);
 
     //// coordinate array initialization
     //std::vector<double> eval_pts(N);
