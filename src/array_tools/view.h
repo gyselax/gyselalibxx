@@ -191,18 +191,19 @@ template <
         class Layout,
         class Accessor,
         std::size_t I0,
+        std::size_t I1,
         std::size_t... Is>
 std::ostream& stream_impl(
         std::ostream& os,
         std::experimental::basic_mdspan<ElementType, Extents, Layout, Accessor> const& s,
-        std::index_sequence<I0, Is...>)
+        std::index_sequence<I0, I1, Is...>)
 {
     constexpr std::array<std::experimental::all_type, sizeof...(Is)> slices {};
     os << '[';
     for (ptrdiff_t i0 = 0; i0 < s.extent(I0); ++i0) {
         stream_impl(
                 os,
-                std::experimental::subspan(s, i0, slices[Is]...),
+                std::experimental::subspan(s, i0, slices[I1], slices[Is]...),
                 std::make_index_sequence<Extents::rank() - 1>());
     }
     os << ']';
