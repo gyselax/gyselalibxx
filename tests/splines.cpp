@@ -1,6 +1,7 @@
 #include <array>
 #include <cassert>
 #include <cmath>
+#include <string>
 #include <vector>
 
 #include <gtest/gtest.h>
@@ -34,11 +35,10 @@ void cos_splines_test(
         int const N,
         double const x0,
         double const xN,
-        int const bc_xmin,
-        int const bc_xmax,
+        BoundCond const bc_xmin,
+        BoundCond const bc_xmax,
         View1D<double> const& coeffs,
         mdspan_1d const& eval_pts_input = {});
-
 
 static inline double eval_cos(double const x, View1D<double> const& coeffs, int const derivative)
 {
@@ -102,8 +102,7 @@ void cos_splines_test(
 
     // computation of rhs'(0) and rhs'(n)
     // -> deriv_rhs(0) = rhs'(n) and deriv_rhs(1) = rhs'(0)
-    int const shift 
-    = 1 - (degree % 2); // shift = 1 for even order, 0 for odd order
+    int const shift = 1 - (degree % 2); // shift = 1 for even order, 0 for odd order
 
     if (bc_xmin == BoundCond::HERMITE) {
         vector<double> Sderiv_lhs_data(degree / 2);
@@ -175,6 +174,18 @@ const char bc_to_char(BoundCond const bc)
 }
 
 
+const string success_to_string(bool const& success)
+{
+    string str;
+    if (success) {
+        str = "OK"; // OK
+    } else {
+        str = "FAIL"; // FAIL
+    }
+    return str;
+};
+
+
 //--------------------------------------
 // TESTS
 //--------------------------------------
@@ -223,7 +234,7 @@ TEST(Splines, test)
          << "err  "
          << "passed" << endl;
 
-    const bool passed = true;
+    bool passed = true;
 
     //TODO : Add missing test conditions NEUMANN and HERMITE_LAGRANGE
     constexpr BoundCond available_bc[3]
@@ -233,11 +244,11 @@ TEST(Splines, test)
     double max_norm_error;
     double max_norm_error_diff;
     double max_norm_error_int;
-    vector<double> coeffs_data={1., 0.};
-    View1D<double> coeffs(coeffs_data.data(),coeffs_data.size());
+    vector<double> coeffs_data = {1., 0.};
+    View1D<double> coeffs(coeffs_data.data(), coeffs_data.size());
+    bool success;
 
-    for (int degree = 1; degree < 4; ++degree) {
-    //for (int degree = 1; degree < 9; ++degree) {
+    for (int degree = 1; degree < 9; ++degree) {
         cout << "degree = " << degree << endl;
         for (BoundCond bc_xmin : available_bc) {
             for (BoundCond bc_xmax : available_bc) {
@@ -278,33 +289,26 @@ TEST(Splines, test)
 
                 // Calculate relative error norms from absolute ones
                 max_norm_error = max_norm_error / max_norm_profile;
+                success = (max_norm_error <= tol);
                 cout << "d=" << degree << " bc_xmin=" << bc_to_char(bc_xmin)
-                     << " bc_xmax=" << bc_to_char(bc_xmax) << " error=" << max_norm_error << endl;
+                     << " bc_xmax=" << bc_to_char(bc_xmax) << " error=" << max_norm_error
+                     << " success =" << success_to_string(success) << endl;
 
-                /*      
-          ! Check tolerances
-          success               = (max_norm_error      <= tol     )
-
-          ! Print test report to terminal on a single line
-          write(*,'(i6)'     , advance='no') degree
-          write(*,'(2a6)'    , advance='no') bc_to_char( bc_xmin ), bc_to_char( bc_xmax )
-          write(*,'(3es10.1)', advance='no') max_norm_error
-          write(*,'(a8)') trim( success_to_string( success ))
-
-          passed = passed .and. success
-*/
+                passed = (passed and success);
             }
         }
     }
 
-    // coordinate array initialization
-    std::vector<double> eval_pts(N);
-    for (int ii = 0; ii < eval_pts.size(); ++ii) {
-        eval_pts[ii] = x0 + ii * h;
-        //cout << "eval_pts=" << ii << ": " << eval_pts[ii] << endl;
+    if (passed) {
+        SUCCEED();
+    } else {
+        FAIL();
     }
 
-    //View1D<double> myview(eval_pts.data(), eval_pts.size());
-
-    //max_norm_profile = 1.0
+    //// coordinate array initialization
+    //std::vector<double> eval_pts(N);
+    //for (int ii = 0; ii < eval_pts.size(); ++ii) {
+    //    eval_pts[ii] = x0 + ii * h;
+    //    //cout << "eval_pts=" << ii << ": " << eval_pts[ii] << endl;
+    //}
 }
