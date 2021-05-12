@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <sstream>
 
 #include "view.h"
 
@@ -21,4 +22,21 @@ TEST(View1DTest, Constructor)
     View1D<double const> ccxcv_(cxcv);
     View1D<double const> ccx2cv(ccx2.data(), ccx2.size());
     View1D<double const> ccx2cv_(ccx2cv);
+}
+
+TEST(View3DTest, stream)
+{
+    std::array<int, 8> data;
+    ViewND<3, int> sdata(data.data(), 2, 2, 2);
+    sdata(0, 0, 0) = 0;
+    sdata(0, 0, 1) = 1;
+    sdata(0, 1, 0) = 2;
+    sdata(0, 1, 1) = 3;
+    sdata(1, 0, 0) = 4;
+    sdata(1, 0, 1) = 5;
+    sdata(1, 1, 0) = 6;
+    sdata(1, 1, 1) = 7;
+    ostringstream oss;
+    oss << sdata;
+    EXPECT_EQ(oss.str(), "[[[0,1][2,3]][[4,5][6,7]]]");
 }

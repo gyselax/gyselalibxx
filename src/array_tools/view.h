@@ -1,5 +1,7 @@
 #pragma once
 
+#include <array>
+#include <ostream>
 #include <utility>
 
 #include <experimental/mdspan>
@@ -166,3 +168,54 @@ struct IsContiguous<
 
 template <class C>
 constexpr bool is_contiguous = IsContiguous<C>::val;
+
+namespace details
+{
+
+template <class ElementType, class Extents, class Layout, class Accessor, std::size_t I0>
+std::ostream& stream_impl(
+        std::ostream& os,
+        std::experimental::basic_mdspan<ElementType, Extents, Layout, Accessor> const& s,
+        std::index_sequence<I0>)
+{
+    os << '[';
+    for (ptrdiff_t i0 = 0; i0 < s.extent(I0) - 1; ++i0) {
+        os << s(i0) << ',';
+    }
+    os << s(s.extent(I0) - 1) << ']';
+}
+
+template <
+        class ElementType,
+        class Extents,
+        class Layout,
+        class Accessor,
+        std::size_t I0,
+        std::size_t... Is>
+std::ostream& stream_impl(
+        std::ostream& os,
+        std::experimental::basic_mdspan<ElementType, Extents, Layout, Accessor> const& s,
+        std::index_sequence<I0, Is...>)
+{
+    constexpr std::array<std::experimental::all_type, sizeof...(Is)> slices {};
+    os << '[';
+    for (ptrdiff_t i0 = 0; i0 < s.extent(I0); ++i0) {
+        stream_impl(
+                os,
+                std::experimental::subspan(s, i0, slices[Is]...),
+                std::make_index_sequence<Extents::rank() - 1>());
+    }
+    os << ']';
+}
+
+} // namespace details
+
+/// Convenient function to dump a basic_mdspan, it recursively prints all dimensions.
+/// Disclaimer: use with caution for large arrays
+template <class ElementType, class Extents, class Layout, class Accessor>
+std::ostream& operator<<(
+        std::ostream& os,
+        std::experimental::basic_mdspan<ElementType, Extents, Layout, Accessor> const& s)
+{
+    return details::stream_impl(os, s, std::make_index_sequence<Extents::rank()>());
+}
