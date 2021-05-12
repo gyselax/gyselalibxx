@@ -8,6 +8,7 @@ add_executable(unit_tests
 	mcoord.cpp
 	taggedarray.cpp
 	splines.cpp
+	view.cpp
 )
 target_compile_features(unit_tests PUBLIC cxx_std_17)
 target_link_libraries(unit_tests
