@@ -13,8 +13,8 @@ TEST(View1DTest, Constructor)
     std::array<double const, 10> const ccx2 = {0};
     View1D<double> xv(x.data(), x.size());
     View1D<double> xv_(xv);
-//     View1D<double const> xcv(xv);
-//     View1D<double const> xcv_(xcv);
+    View1D<double const> xcv(xv);
+    View1D<double const> xcv_(xcv);
     View1D<double const> cxcv(cx.data(), cx.size());
     View1D<double const> cxcv_(cxcv);
     View1D<double const> ccxcv(ccx.data(), ccx.size());

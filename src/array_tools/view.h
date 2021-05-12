@@ -27,6 +27,9 @@ struct accessor
     using reference = ElementType&;
     using pointer = ElementType*;
 
+    MDSPAN_INLINE_FUNCTION
+    constexpr accessor() noexcept = default;
+
     MDSPAN_TEMPLATE_REQUIRES(
             class OtherElementType,
             /* requires */ (_MDSPAN_TRAIT(std::is_convertible, OtherElementType, ElementType)))
@@ -106,13 +109,13 @@ struct ViewNDMaker;
 template <int N, class ElementType>
 struct ViewNDMaker<N, ElementType, true>
 {
-    using type = std::experimental::basic_mdspan<ElementType, ExtentsND<N>, std::experimental::layout_right>;
+    using type = std::experimental::basic_mdspan<ElementType, ExtentsND<N>, std::experimental::layout_right, detail::accessor<ElementType>>;
 };
 
 template <int N, class ElementType>
 struct ViewNDMaker<N, ElementType, false>
 {
-    using type = std::experimental::basic_mdspan<ElementType, ExtentsND<N>, NCLayoutND<N>>;
+    using type = std::experimental::basic_mdspan<ElementType, ExtentsND<N>, NCLayoutND<N>, detail::accessor<ElementType>>;
 };
 
 } // namespace detail
