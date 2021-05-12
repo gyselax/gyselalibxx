@@ -159,37 +159,36 @@ void cos_splines_test(
 }
 
 
-const char bc_to_char(BoundCond const bc)
+const BoundCond char_to_bc(char bc)
 {
     switch (bc) {
-    case (BoundCond::PERIODIC):
-        return 'P';
-    case (BoundCond::HERMITE):
-        return 'H';
-    case (BoundCond::GREVILLE):
-        return 'G';
-    default:
-        return '?';
+        case 'P': return BoundCond::PERIODIC;
+        case 'H': return BoundCond::HERMITE;
+        case 'G': return BoundCond::GREVILLE;
     }
+    assert(false);
+    return BoundCond::GREVILLE;
 }
 
+constexpr char available_bc[3] = {'P','H','G'};
 
-const string success_to_string(bool const& success)
-{
-    string str;
-    if (success) {
-        str = "OK"; // OK
-    } else {
-        str = "FAIL"; // FAIL
-    }
-    return str;
+class SplinesTest :
+    public testing::TestWithParam<std::tuple<int,char,char>> {
+  // You can implement all the usual fixture class members here.
+  // To access the test parameter, call GetParam() from class
+  // TestWithParam<T>.
 };
 
+INSTANTIATE_TEST_SUITE_P(SplinesAtPoints,
+        SplinesTest,
+        testing::Combine(testing::Range(1,9),
+            testing::ValuesIn(available_bc),
+            testing::ValuesIn(available_bc)));
 
 //--------------------------------------
 // TESTS
 //--------------------------------------
-TEST(Splines, test)
+TEST_P(SplinesTest, test)
 {
     //const int ncells;
     //const int bc_xmin, bc_xmax;
@@ -212,31 +211,29 @@ TEST(Splines, test)
     cout << " Number of points in grid: N = " << N << endl;
     cout << " Number of evaluation points : " << N << endl;
     cout << endl;
-    cout << " Input:" << endl;
-    cout << "   . bcmin = boundary conditions at x=xmin [H|L] " << endl;
-    cout << "   . bcmax = boundary conditions at x=xmax [H|L] " << endl;
-    cout << endl;
-    cout << " Output:" << endl;
-    cout << "   .  err     = relative max-norm of error on f " << endl;
-    cout << "   .  passed  = 'OK' if all errors <= tol, 'FAIL' otherwise " << endl;
-    cout << endl;
-    cout << " Boundary conditions: " << endl;
-    cout << "   .  P = Periodic " << endl;
-    cout << "   .  N = Neumann " << endl;
-    cout << "   .  H = Hermite " << endl;
-    cout << "   .  L = Hermite-Lagrange " << endl;
-    cout << endl;
+    //cout << " Input:" << endl;
+    //cout << "   . bcmin = boundary conditions at x=xmin [H|L] " << endl;
+    //cout << "   . bcmax = boundary conditions at x=xmax [H|L] " << endl;
+    //cout << endl;
+    //cout << " Output:" << endl;
+    //cout << "   .  err     = relative max-norm of error on f " << endl;
+    //cout << "   .  passed  = 'OK' if all errors <= tol, 'FAIL' otherwise " << endl;
+    //cout << endl;
+    //cout << " Boundary conditions: " << endl;
+    //cout << "   .  P = Periodic " << endl;
+    //cout << "   .  N = Neumann " << endl;
+    //cout << "   .  H = Hermite " << endl;
+    //cout << "   .  L = Hermite-Lagrange " << endl;
+    //cout << endl;
 
     // Print table header
-    cout << "degree  "
-         << "bcmin  "
-         << "bcmax  "
-         << "err  "
-         << "passed" << endl;
+    //cout << "degree  "
+    //     << "bcmin  "
+    //     << "bcmax  "
+    //     << "err  "
+    //     << "passed" << endl;
 
     //TODO : Add missing test conditions NEUMANN and HERMITE_LAGRANGE
-    constexpr BoundCond available_bc[3]
-            = {BoundCond::PERIODIC, BoundCond::HERMITE, BoundCond::GREVILLE};
 
     double h;
     double max_norm_error;
@@ -246,55 +243,50 @@ TEST(Splines, test)
     View1D<double> coeffs(coeffs_data.data(), coeffs_data.size());
     bool success;
 
-    for (int degree = 1; degree < 9; ++degree) {
-        cout << "degree = " << degree << endl;
-        for (BoundCond bc_xmin : available_bc) {
-            for (BoundCond bc_xmax : available_bc) {
-                if (bc_xmin != bc_xmax
-                    and (bc_xmin == BoundCond::PERIODIC or bc_xmax == BoundCond::PERIODIC)) {
-                    continue;
-                }
+    std::tuple<int,char,char> args = GetParam();
 
-                //if (degree != 3
-                //    and (bc_xmin == BoundCond::HERMITE_LAGRANGE
-                //         or bc_xmax == BoundCond::HERMITE_LAGRANGE)) {
-                //    continue;
-                //}
+    int degree(std::get<0>(args));
+    BoundCond bc_xmin(char_to_bc(std::get<1>(args)));
+    BoundCond bc_xmax(char_to_bc(std::get<2>(args)));
 
-                //if ((degree > 3 or degree == 2)
-                //    and (bc_xmin == BoundCond::NEUMANN or bc_xmax == BoundCond::NEUMANN)) {
-                //    continue;
-                //}
-
-                if (bc_xmin == BoundCond::PERIODIC) {
-                    h = (xN - x0) / N;
-                } else {
-                    h = (xN - x0) / (N - 1);
-                }
-
-                cos_splines_test(
-                        max_norm_error,
-                        max_norm_error_diff,
-                        max_norm_error_int,
-                        degree,
-                        h,
-                        N,
-                        x0,
-                        xN,
-                        bc_xmin,
-                        bc_xmax,
-                        coeffs);
-
-                // Calculate relative error norms from absolute ones
-                max_norm_error = max_norm_error / max_norm_profile;
-                success = (max_norm_error <= tol);
-                cout << "d=" << degree << " bc_xmin=" << bc_to_char(bc_xmin)
-                     << " bc_xmax=" << bc_to_char(bc_xmax) << " error=" << max_norm_error
-                     << " success =" << success_to_string(success) << endl;
-                EXPECT_LE(max_norm_error, tol);
-            }
-        }
+    if (bc_xmin != bc_xmax
+        and (bc_xmin == BoundCond::PERIODIC or bc_xmax == BoundCond::PERIODIC)) {
+        return;
     }
+
+    //if (degree != 3
+    //    and (bc_xmin == BoundCond::HERMITE_LAGRANGE
+    //         or bc_xmax == BoundCond::HERMITE_LAGRANGE)) {
+    //    continue;
+    //}
+
+    //if ((degree > 3 or degree == 2)
+    //    and (bc_xmin == BoundCond::NEUMANN or bc_xmax == BoundCond::NEUMANN)) {
+    //    continue;
+    //}
+
+    if (bc_xmin == BoundCond::PERIODIC) {
+        h = (xN - x0) / N;
+    } else {
+        h = (xN - x0) / (N - 1);
+    }
+
+    cos_splines_test(
+            max_norm_error,
+            max_norm_error_diff,
+            max_norm_error_int,
+            degree,
+            h,
+            N,
+            x0,
+            xN,
+            bc_xmin,
+            bc_xmax,
+            coeffs);
+
+    // Calculate relative error norms from absolute ones
+    max_norm_error = max_norm_error / max_norm_profile;
+    EXPECT_GT(max_norm_error, tol);
 
     //// coordinate array initialization
     //std::vector<double> eval_pts(N);
