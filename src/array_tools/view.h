@@ -109,13 +109,18 @@ struct ViewNDMaker;
 template <int N, class ElementType>
 struct ViewNDMaker<N, ElementType, true>
 {
-    using type = std::experimental::basic_mdspan<ElementType, ExtentsND<N>, std::experimental::layout_right, detail::accessor<ElementType>>;
+    using type = std::experimental::basic_mdspan<
+            ElementType,
+            ExtentsND<N>,
+            std::experimental::layout_right,
+            detail::accessor<ElementType>>;
 };
 
 template <int N, class ElementType>
 struct ViewNDMaker<N, ElementType, false>
 {
-    using type = std::experimental::basic_mdspan<ElementType, ExtentsND<N>, NCLayoutND<N>, detail::accessor<ElementType>>;
+    using type = std::experimental::
+            basic_mdspan<ElementType, ExtentsND<N>, NCLayoutND<N>, detail::accessor<ElementType>>;
 };
 
 } // namespace detail
