@@ -102,40 +102,27 @@ void cos_splines_test(
 
     // computation of rhs'(0) and rhs'(n)
     // -> deriv_rhs(0) = rhs'(n) and deriv_rhs(1) = rhs'(0)
-    int const shift = 1 - (degree % 2); // shift = 1 for even order, 0 for odd order
-
+    int const shift = (degree % 2); // shift = 0 for even order, -1 for odd order
+    vector<double> Sderiv_lhs_data(degree / 2);
+    View1D<double> Sderiv_lhs(Sderiv_lhs_data.data(), Sderiv_lhs_data.size());
+    vector<double> Sderiv_rhs_data(degree / 2);
+    View1D<double> Sderiv_rhs(Sderiv_rhs_data.data(), Sderiv_rhs_data.size());
+    View1D<double>* deriv_l(nullptr);
+    View1D<double>* deriv_r(nullptr);
     if (bc_xmin == BoundCond::HERMITE) {
-        vector<double> Sderiv_lhs_data(degree / 2);
-        View1D<double> Sderiv_lhs(Sderiv_lhs_data.data(), Sderiv_lhs_data.size());
-        for (int ii = 1; ii <= degree / 2; ++ii) {
-            Sderiv_lhs(ii - 1) = eval_cos(x0, coeffs, ii - shift);
+        for (int ii = 0; ii < degree / 2; ++ii) {
+            Sderiv_lhs(ii) = eval_cos(x0, coeffs, ii - shift);
         }
-        if (bc_xmax == BoundCond::HERMITE) {
-            vector<double> Sderiv_rhs_data(degree / 2);
-            View1D<double> Sderiv_rhs(Sderiv_rhs_data.data(), Sderiv_rhs_data.size());
-
-            for (int ii = 1; ii <= degree / 2; ++ii) {
-                Sderiv_rhs(ii - 1) = eval_cos(xN, coeffs, ii - shift);
-            }
-
-            spline_interpolator.compute_interpolant(spline, yvals, &Sderiv_lhs, &Sderiv_rhs);
-        } else {
-            spline_interpolator.compute_interpolant(spline, yvals, &Sderiv_lhs);
-        }
-    } else {
-        if (bc_xmax == BoundCond::HERMITE) {
-            vector<double> Sderiv_rhs_data(degree / 2);
-            View1D<double> Sderiv_rhs(Sderiv_rhs_data.data(), Sderiv_rhs_data.size());
-            for (int i = 1; i <= degree / 2; ++i) {
-                Sderiv_rhs(i - 1) = eval_cos(xN, coeffs, i - shift);
-            }
-            spline_interpolator.compute_interpolant(spline, yvals, nullptr, &Sderiv_rhs);
-
-        } else {
-            spline_interpolator.compute_interpolant(spline, yvals);
-        }
+        deriv_l = &Sderiv_lhs;
     }
-
+    if (bc_xmax == BoundCond::HERMITE) {
+        for (int ii = 0; ii < degree / 2; ++ii) {
+            Sderiv_rhs(ii) = eval_cos(x0, coeffs, ii - shift);
+        }
+        deriv_r = &Sderiv_rhs;
+    }
+    spline_interpolator.compute_interpolant(spline, yvals, deriv_l, deriv_r);
+    
     max_norm_error = 0.;
     max_norm_error_diff = 0.;
 
