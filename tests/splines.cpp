@@ -159,31 +159,24 @@ void cos_splines_test(
 }
 
 
-const BoundCond char_to_bc(char bc)
+
+constexpr array<BoundCond, 3> available_bc
+        = {BoundCond::PERIODIC, BoundCond::HERMITE, BoundCond::GREVILLE};
+
+class SplinesTest : public testing::TestWithParam<std::tuple<int, BoundCond, BoundCond>>
 {
-    switch (bc) {
-        case 'P': return BoundCond::PERIODIC;
-        case 'H': return BoundCond::HERMITE;
-        case 'G': return BoundCond::GREVILLE;
-    }
-    assert(false);
-    return BoundCond::GREVILLE;
-}
-
-constexpr char available_bc[3] = {'P','H','G'};
-
-class SplinesTest :
-    public testing::TestWithParam<std::tuple<int,char,char>> {
-  // You can implement all the usual fixture class members here.
-  // To access the test parameter, call GetParam() from class
-  // TestWithParam<T>.
+    // You can implement all the usual fixture class members here.
+    // To access the test parameter, call GetParam() from class
+    // TestWithParam<T>.
 };
 
-INSTANTIATE_TEST_SUITE_P(SplinesAtPoints,
+INSTANTIATE_TEST_SUITE_P(
+        SplinesAtPoints,
         SplinesTest,
-        testing::Combine(testing::Range(1,9),
-            testing::ValuesIn(available_bc),
-            testing::ValuesIn(available_bc)));
+        testing::Combine(
+                testing::Range(1, 9),
+                testing::ValuesIn(available_bc),
+                testing::ValuesIn(available_bc)));
 
 //--------------------------------------
 // TESTS
@@ -235,22 +228,12 @@ TEST_P(SplinesTest, test)
 
     //TODO : Add missing test conditions NEUMANN and HERMITE_LAGRANGE
 
-    double h;
-    double max_norm_error;
-    double max_norm_error_diff;
-    double max_norm_error_int;
-    vector<double> coeffs_data = {1., 0.};
+    array<double, 2> coeffs_data = {1., 0.};
     View1D<double> coeffs(coeffs_data.data(), coeffs_data.size());
-    bool success;
 
-    std::tuple<int,char,char> args = GetParam();
+    auto const [degree, bc_xmin, bc_xmax] = GetParam();
 
-    int degree(std::get<0>(args));
-    BoundCond bc_xmin(char_to_bc(std::get<1>(args)));
-    BoundCond bc_xmax(char_to_bc(std::get<2>(args)));
-
-    if (bc_xmin != bc_xmax
-        and (bc_xmin == BoundCond::PERIODIC or bc_xmax == BoundCond::PERIODIC)) {
+    if (bc_xmin != bc_xmax and (bc_xmin == BoundCond::PERIODIC or bc_xmax == BoundCond::PERIODIC)) {
         return;
     }
 
@@ -265,12 +248,16 @@ TEST_P(SplinesTest, test)
     //    continue;
     //}
 
+    double h;
     if (bc_xmin == BoundCond::PERIODIC) {
         h = (xN - x0) / N;
     } else {
         h = (xN - x0) / (N - 1);
     }
 
+    double max_norm_error;
+    double max_norm_error_diff;
+    double max_norm_error_int;
     cos_splines_test(
             max_norm_error,
             max_norm_error_diff,
