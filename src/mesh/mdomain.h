@@ -82,9 +82,10 @@ public:
         return m_step;
     }
 
-    inline constexpr RCoord_ to_real(const MCoord_ icoord) const noexcept
+    template <class... OTags>
+    inline constexpr RCoord<OTags...> to_real(const MCoord<OTags...> icoord) const noexcept
     {
-        return RCoord_((::get<Tags>(origin()) + ::get<Tags>(icoord) * ::get<Tags>(m_step))...);
+        return RCoord_((::get<OTags>(origin()) + ::get<OTags>(icoord) * ::get<OTags>(m_step))...);
     }
 };
 
@@ -339,6 +340,7 @@ public:
         , m_lbound(std::forward<LboundType>(lbound))
         , m_ubound(std::forward<UboundType>(ubound))
     {
+        assert((m_lbound == MCoord_ {0ul}) && "non null lbound is not supported yet");
     }
 
     template <class OriginType, class StepType, class LboundType, class UboundType>
@@ -351,6 +353,7 @@ public:
         , m_lbound(std::forward<LboundType>(lbound))
         , m_ubound(std::forward<UboundType>(ubound))
     {
+        assert((m_lbound == MCoord_ {0ul}) && "non null lbound is not supported yet");
     }
 
     friend constexpr bool operator==(const RegularMDomain& xx, const RegularMDomain& yy)
@@ -387,6 +390,23 @@ public:
         return m_lbound;
     }
 
+    template <class... OTags>
+    inline constexpr MCoord<OTags...> lbound() const noexcept
+    {
+        return lbound();
+    }
+
+    inline constexpr RCoord_ rmin() const noexcept
+    {
+        return this->to_real(lbound());
+    }
+
+    template <class... OTags>
+    inline constexpr RCoord<OTags...> rmin() const noexcept
+    {
+        return this->to_real(lbound<OTags...>());
+    }
+
     inline constexpr MCoord_& ubound() noexcept
     {
         return m_ubound;
@@ -395,6 +415,23 @@ public:
     inline constexpr const MCoord_& ubound() const noexcept
     {
         return m_ubound;
+    }
+
+    template <class... OTags>
+    inline constexpr MCoord<OTags...> ubound() const noexcept
+    {
+        return ubound();
+    }
+
+    inline constexpr RCoord_ rmax() const noexcept
+    {
+        return this->to_real(ubound());
+    }
+
+    template <class... OTags>
+    inline constexpr RCoord<OTags...> rmax() const noexcept
+    {
+        return this->to_real(ubound<OTags...>());
     }
 
     template <class QueryTag>

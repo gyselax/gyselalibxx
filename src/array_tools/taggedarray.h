@@ -115,7 +115,7 @@ public:
 
     template <class... Params>
     inline constexpr TaggedArray(Params&&... params) noexcept
-        : m_values {static_cast<ElementType>(std::forward<Params>(params))...}
+        : m_values {std::forward<Params>(params)...}
     {
     }
 
@@ -127,7 +127,7 @@ public:
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedArray(TaggedArray<OElementType, OTags...>&& other) noexcept
-        : m_values {std::forward<OElementType>(::get<Tags>(other))...}
+        : m_values {std::move(::get<Tags>(other))...}
     {
     }
 
@@ -166,6 +166,32 @@ public:
                 "Implicit conversion is only possible for size 1 TaggedTuples");
         m_values = std::move(e);
         return *this;
+    }
+
+    constexpr inline bool operator==(const ElementType& other) const noexcept
+    {
+        static_assert(
+                sizeof...(Tags) == 1,
+                "Implicit conversion is only possible for size 1 TaggedTuples");
+        return m_values[0] == other;
+    }
+
+    constexpr inline bool operator!=(const ElementType& other) const noexcept
+    {
+        static_assert(
+                sizeof...(Tags) == 1,
+                "Implicit conversion is only possible for size 1 TaggedTuples");
+        return m_values[0] != other;
+    }
+
+    constexpr inline bool operator==(const TaggedArray& other) const noexcept
+    {
+        return m_values == other.m_values;
+    }
+
+    constexpr inline bool operator!=(const TaggedArray& other) const noexcept
+    {
+        return m_values != other.m_values;
     }
 
     /// Returns a reference to the underlying `std::array`
@@ -210,6 +236,9 @@ public:
     inline constexpr ElementType& get() noexcept
     {
         using namespace detail;
+        static_assert(
+                RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::present,
+                "requested Tag absent from TaggedArray");
         return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
     }
 
