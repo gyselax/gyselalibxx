@@ -6,14 +6,8 @@
     guess)
 
 ## TODO
-* handle const views
 * add info about sliced out dimensions to Block
-* add easy classes to hold set of values (coords typically) Seq<...>
-* make moving from 1-elem array to scalar easy for coords & co.
-* make applying member func on array easy for coords & co.
-* support itering over domains
-* support exposing sub-views from Block
 * Let blocks start at non-zero origin
 * Handle periodic dimensions
-* Add singleton to each dimension
-* Add versions taking singleton as parameter to operators
+* Add singleton for each dimension
+* Add versions taking singleton as parameter for auto deduction to template operators

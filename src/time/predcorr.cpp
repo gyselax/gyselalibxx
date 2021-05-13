@@ -1,6 +1,6 @@
 #include "predcorr.h"
 
-PredCorr2::PredCorr2(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLengthT dt)
+PredCorr::PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLengthT dt)
     : m_vlasov(vlasov)
     , m_efield(efield)
     , m_dt(dt)
@@ -8,7 +8,7 @@ PredCorr2::PredCorr2(const IVlasovSolver& vlasov, const IEfieldSolver& efield, R
 }
 
 
-DBlockViewXVx& PredCorr2::operator()(DBlockViewXVx& fdistribu, double mass_ratio, int steps) const
+DBlockViewXVx PredCorr::operator()(DBlockViewXVx fdistribu, double mass_ratio, int steps) const
 {
     // ex only depends on DX
     DBlockX ex(fdistribu.domain<Dim::X>());

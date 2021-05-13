@@ -1,9 +1,12 @@
-* We use C++17
-
 # C++ Features
+* We use C++17
 * We don't use raw pointers
 * We don't use plain C arrays
 * we try not to use macros
+* The `auto` keyword should be used for types as `auto&&` and only in one of the following cases:
+  - in iterations either in range based for or to refer to iterators
+  - to store objects that can not be typed otherwise (e.g. lambdas)
+  - to store the result of an expression specifically specifying the type of the generated value
 
 # Parameter passing
 * We take out/inout-parameters (those we modify) first
@@ -17,15 +20,18 @@
   - otherwise, we take a ref: `Type&`
 
 # Naming
-* type names are CamelCase
-* constant & macros use CAPS_NAME
-* function and variables use snake_case
+* type names *must* use CamelCase
+* constant & macro names *must* be ALL_CAPS
+* function and variables names *must* use snake_case
+* non-static member variables names *should* begin with an `m_` prefix
+* static member variables names *should* begin with an `s_` prefix
 * we don't use single letter variables
 * we don't rely on case to distinguish between variables
 * we name variables with expressive English names (e.g. temperature)
 * we don't use variable name conventions from math/physics (u)
 
 # Style
+* We *must* apply the style specified by the `.clang-format` file using clang-format 10
 * In a class
   - we put all member types first (public, then protected, then private),
   - then all member variables (public, then protected, then private),

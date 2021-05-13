@@ -4,7 +4,7 @@
 #include "itimesolver.h"
 #include "ivlasovsolver.h"
 
-class PredCorr2 : public ITimeSolver
+class PredCorr : public ITimeSolver
 {
     IVlasovSolver const& m_vlasov;
 
@@ -13,7 +13,7 @@ class PredCorr2 : public ITimeSolver
     RLengthT const m_dt;
 
 public:
-    PredCorr2(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLengthT dt);
+    PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLengthT dt);
 
-    DBlockViewXVx& operator()(DBlockViewXVx& data, double mass_ratio, int steps) const override;
+    DBlockViewXVx operator()(DBlockViewXVx data, double mass_ratio, int steps) const override;
 };

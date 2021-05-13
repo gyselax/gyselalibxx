@@ -30,7 +30,7 @@ SplitVlasovSolver const vlasov {advection_x, advection_v};
 
 NullEfieldSolver const efield;
 
-PredCorr2 const predcorr(vlasov, efield, 1.);
+PredCorr const predcorr(vlasov, efield, 1.);
 
 int main()
 {

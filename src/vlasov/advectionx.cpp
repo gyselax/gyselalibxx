@@ -29,7 +29,7 @@ AdvectionX::AdvectionX(
 {
 }
 
-DBlockViewXVx& AdvectionX::operator()(DBlockViewXVx& fdistribu, double mass_ratio, double dt) const
+DBlockViewXVx AdvectionX::operator()(DBlockViewXVx fdistribu, double mass_ratio, double dt) const
 {
     //TODO: spline on mesh
     //assert(get_domain<Dim::X>(fdistribu) == m_spline_interpolator.domain());

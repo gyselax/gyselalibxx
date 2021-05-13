@@ -5,5 +5,5 @@
 class NullEfieldSolver : public IEfieldSolver
 {
 public:
-    DBlockViewX& operator()(DBlockViewX& ex, const DBlockViewXVx& fdistribu) const override;
+    DBlockViewX operator()(DBlockViewX ex, DBlockCViewXVx fdistribu) const override;
 };

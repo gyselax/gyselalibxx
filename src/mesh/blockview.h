@@ -19,6 +19,24 @@ static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
         RegularMesh<OTags...> const& mesh,
         ViewND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view);
 
+namespace detail {
+template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor, class... Indices>
+inline void for_each_impl(
+        const BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& to,
+        Functor&& f,
+        Indices&&... idxs) noexcept
+{
+    if constexpr (
+            sizeof...(Indices) == BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>::rank()) {
+        f(std::forward<Indices>(idxs)...);
+    } else {
+        for (ptrdiff_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
+            for_each_impl(to, std::forward<Functor>(f), std::forward<Indices...>(idxs)..., ii);
+        }
+    }
+}
+} // namespace detail
+
 template <class... Tags, class ElementType, bool CONTIGUOUS>
 class BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>
 {
@@ -130,6 +148,26 @@ public:
      * @param other the BlockView to move
      */
     inline constexpr BlockView(BlockView&& other) noexcept = default;
+
+    /** Constructs a new BlockView by copy of a block, yields a new view to the same data
+     * @param other the BlockView to move
+     */
+    template <class OElementType>
+    inline constexpr BlockView(const Block<MDomain_, OElementType>& other) noexcept
+        : m_raw(other.raw_view())
+        , m_mesh(other.mesh())
+    {
+    }
+
+    /** Constructs a new BlockView by copy of a block, yields a new view to the same data
+     * @param other the BlockView to move
+     */
+    template <class OElementType>
+    inline constexpr BlockView(const BlockView<MDomain_, OElementType, CONTIGUOUS>& other) noexcept
+        : m_raw(other.raw_view())
+        , m_mesh(other.mesh())
+    {
+    }
 
     /** Constructs a new BlockView from scratch
      * @param mesh the mesh that sustains the view
@@ -312,22 +350,12 @@ public:
         return Slicer<std::remove_cv_t<std::remove_reference_t<SliceSpecs>>...>::
                 slice(*this, std::forward<SliceSpecs>(slices)...);
     }
-
-    /** Duplicate the data of this view
-     * @return a copy of the data of this view
-     */
-    inline constexpr Block<MDomain<Tags...>, ElementType> duplicate() const
-    {
-        Block<MDomain<Tags...>, ElementType> result(this->domain());
-        deepcopy(result, *this);
-        return result;
-    }
 };
 
-
-/** Constructs a new BlockView from scratch
- * @param mesh the mesh that sustains the view
- * @param raw_view the raw view to the data
+/** Construct a new BlockView from scratch
+ * @param[in] mesh      the mesh that sustains the view
+ * @param[in] raw_view  the raw view to the data
+ * @return the newly constructed view
  */
 template <bool O_CONTIGUOUS, class OElementType, class... OTags>
 static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
@@ -337,6 +365,11 @@ static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
     return BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS>(mesh, raw_view);
 }
 
+/** Access the domain (or subdomain) of a view
+ * @param[out] view  the view whose domain to iterate
+ * @param[in]  f     a functor taking the list of indices as parameter
+ * @return the domain of view in the queried dimensions
+ */
 template <class... QueryTags, class... Tags, class ElementType, bool CONTIGUOUS>
 RegularMDomain<QueryTags...> get_domain(
         const BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& v)
@@ -344,38 +377,11 @@ RegularMDomain<QueryTags...> get_domain(
     return v.template domain<Tags...>();
 }
 
-namespace detail {
-template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor, class... Indices>
-inline void for_each_impl(
-        const BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& to,
-        Functor&& f,
-        Indices&&... idxs) noexcept
-{
-    if constexpr (
-            sizeof...(Indices) == BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>::rank()) {
-        f(std::forward<Indices>(idxs)...);
-    } else {
-        for (ptrdiff_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
-            for_each_impl(to, std::forward<Functor>(f), std::forward<Indices...>(idxs)..., ii);
-        }
-    }
-}
-} // namespace detail
-
-template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor>
-inline void for_each(
-        const BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& to,
-        Functor&& f) noexcept
-{
-    detail::for_each_impl(to, std::forward<Functor>(f));
-}
-
-using DBlockViewX = BlockView<MDomain<Dim::X>, double>;
-
-using DBlockViewVx = BlockView<MDomain<Dim::Vx>, double>;
-
-using DBlockViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double>;
-
+/** Copy the content of a view into another
+ * @param[out] to    the view in which to copy
+ * @param[in]  from  the view from which to copy
+ * @return to
+ */
 template <class... Tags, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS>
 inline BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(
         BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS> to,
@@ -385,6 +391,30 @@ inline BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(
     for_each(to, [&to, &from](auto... idxs) { to(idxs...) = from(idxs...); });
     return to;
 }
+
+/** iterates over the domain of a view
+ * @param[in] view  the view whose domain to iterate
+ * @param[in] f     a functor taking the list of indices as parameter
+ */
+template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor>
+inline void for_each(
+        const BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& view,
+        Functor&& f) noexcept
+{
+    detail::for_each_impl(view, std::forward<Functor>(f));
+}
+
+using DBlockViewX = BlockView<MDomain<Dim::X>, double>;
+
+using DBlockViewVx = BlockView<MDomain<Dim::Vx>, double>;
+
+using DBlockViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double>;
+
+using DBlockCViewX = BlockView<MDomain<Dim::X>, double const>;
+
+using DBlockCViewVx = BlockView<MDomain<Dim::Vx>, double const>;
+
+using DBlockCViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double const>;
 
 
 template <class... Tags, class ElementType>
@@ -422,6 +452,9 @@ public:
     using pointer = typename BlockView_::pointer;
 
     using reference = typename BlockView_::reference;
+
+    template <class, class, bool>
+    friend class BlockView;
 
 public:
     /** Construct a Block on a domain with uninitialized values
