@@ -84,7 +84,7 @@ public:
 
     inline constexpr RCoord_ to_real(const MCoord_ icoord) const noexcept
     {
-        return {origin() + icoord * m_step};
+        return RCoord_((::get<Tags>(origin()) + ::get<Tags>(icoord) * ::get<Tags>(m_step))...);
     }
 };
 
