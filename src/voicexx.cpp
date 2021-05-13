@@ -1,10 +1,11 @@
 #include <vector>
 
-#include "advectionx.h"
 #include "bsplines_uniform.h"
+#include "nulladvectionvx.h"
 #include "nullefieldsolver.h"
 #include "predcorr.h"
 #include "spline_interpolator_1d.h"
+#include "splineadvectionx.h"
 #include "splitvlasovsolver.h"
 
 // The meshed domain:
@@ -22,11 +23,11 @@ Spline_interpolator_1D const interp_x(bsplines_x, BoundCond::PERIODIC, BoundCond
 
 Spline_interpolator_1D const interp_vx(bsplines_vx, BoundCond::GREVILLE, BoundCond::GREVILLE);
 
-AdvectionX const advection_x = {bsplines_x, interp_x};
+SplineAdvectionX const advection_x(bsplines_x, interp_x);
 
-AdvectionX const advection_v = {bsplines_vx, interp_vx};
+NullAdvectionVx const advection_vx;
 
-SplitVlasovSolver const vlasov {advection_x, advection_v};
+SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
 NullEfieldSolver const efield;
 

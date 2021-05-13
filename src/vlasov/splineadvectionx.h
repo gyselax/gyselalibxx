@@ -5,7 +5,7 @@
 #include "iadvectionx.h"
 #include "spline_interpolator_1d.h"
 
-class AdvectionX : public IAdvectionX
+class SplineAdvectionX : public IAdvectionX
 {
 private:
     const BSplines& m_x_spline_basis;
@@ -17,9 +17,9 @@ private:
     const BoundaryValue& m_bc_right;
 
 public:
-    AdvectionX(const BSplines& bspl, const Spline_interpolator_1D& spl_interp);
+    SplineAdvectionX(const BSplines& bspl, const Spline_interpolator_1D& spl_interp);
 
-    AdvectionX(
+    SplineAdvectionX(
             const BSplines& bspl,
             const Spline_interpolator_1D& spl_interp,
             const BoundaryValue& bc_left,

@@ -1,6 +1,6 @@
 #include "splitvlasovsolver.h"
 
-SplitVlasovSolver::SplitVlasovSolver(const IAdvectionX& advec_x, const IAdvectionX& m_advec_vx)
+SplitVlasovSolver::SplitVlasovSolver(const IAdvectionX& advec_x, const IAdvectionVx& m_advec_vx)
     : m_advec_x(advec_x)
     , m_advec_vx(m_advec_vx)
 {

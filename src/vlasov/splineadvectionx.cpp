@@ -2,13 +2,13 @@
 #include <cmath>
 #include <vector>
 
-#include "advectionx.h"
 #include "spline_1d.h"
+#include "splineadvectionx.h"
 
 using namespace std;
 using namespace std::experimental;
 
-AdvectionX::AdvectionX(const BSplines& bspl, const Spline_interpolator_1D& spl_interp)
+SplineAdvectionX::SplineAdvectionX(const BSplines& bspl, const Spline_interpolator_1D& spl_interp)
     : m_x_spline_basis(bspl)
     , m_spline_interpolator(spl_interp)
     , m_bc_left(NullBoundaryValue::value)
@@ -17,7 +17,7 @@ AdvectionX::AdvectionX(const BSplines& bspl, const Spline_interpolator_1D& spl_i
     assert(bspl.periodic);
 }
 
-AdvectionX::AdvectionX(
+SplineAdvectionX::SplineAdvectionX(
         const BSplines& bspl,
         const Spline_interpolator_1D& spl_interp,
         const BoundaryValue& bc_left,
@@ -29,7 +29,8 @@ AdvectionX::AdvectionX(
 {
 }
 
-DBlockViewXVx AdvectionX::operator()(DBlockViewXVx fdistribu, double mass_ratio, double dt) const
+DBlockViewXVx SplineAdvectionX::operator()(DBlockViewXVx fdistribu, double mass_ratio, double dt)
+        const
 {
     //TODO: spline on mesh
     //assert(get_domain<Dim::X>(fdistribu) == m_spline_interpolator.domain());
