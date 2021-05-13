@@ -11,11 +11,13 @@
 template <class, class>
 class Block;
 
-
 template <class, class, bool = true>
 class BlockView;
 
-
+template <bool O_CONTIGUOUS, class OElementType, class... OTags>
+static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
+        RegularMesh<OTags...> const& mesh,
+        ViewND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view);
 
 template <class... Tags, class ElementType, bool CONTIGUOUS>
 class BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>
@@ -61,24 +63,32 @@ private:
     Mesh m_mesh;
 
 public:
-    /** Constructs a new Block by copy
-     * @param other the Block to copy
+    /** Constructs a new BlockView by copy, yields a new view to the same data
+     * @param other the BlockView to copy
      */
     inline constexpr BlockView(const BlockView& other) noexcept = default;
 
-    /** Constructs a new Block by move
-     * @param other the Block to move
+    /** Constructs a new BlockView by move
+     * @param other the BlockView to move
      */
     inline constexpr BlockView(BlockView&& other) noexcept = default;
 
-    /** Copy-assigns a new value to this field
-     * @param other the Block to copy
+    /** Constructs a new BlockView from scratch
+     * @param mesh the mesh that sustains the view
+     * @param raw_view the raw view to the data
+     */
+    inline constexpr BlockView(const Mesh& mesh, RawView raw_view) : m_raw(raw_view), m_mesh(mesh)
+    {
+    }
+
+    /** Copy-assigns a new value to this BlockView, yields a new view to the same data
+     * @param other the BlockView to copy
      * @return *this
      */
     inline constexpr BlockView& operator=(const BlockView& other) noexcept = default;
 
-    /** Move-assigns a new value to this field
-     * @param other the Block to move
+    /** Move-assigns a new value to this BlockView
+     * @param other the BlockView to move
      * @return *this
      */
     inline constexpr BlockView& operator=(BlockView&& other) noexcept = default;
@@ -248,14 +258,6 @@ public:
     };
 
 private:
-    template <bool O_CONTIGUOUS, class OElementType, class... OTags>
-    static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
-            RegularMesh<OTags...> const& mesh,
-            ViewND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view)
-    {
-        return BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS>(mesh, raw_view);
-    }
-
 public:
     /** Slice out some dimensions
      * @param slices the coordinates to 
@@ -279,10 +281,20 @@ public:
     }
 
 protected:
-    inline constexpr BlockView(const Mesh& mesh, RawView raw_view) : m_raw(raw_view), m_mesh(mesh)
-    {
-    }
 };
+
+
+/** Constructs a new BlockView from scratch
+ * @param mesh the mesh that sustains the view
+ * @param raw_view the raw view to the data
+ */
+template <bool O_CONTIGUOUS, class OElementType, class... OTags>
+static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
+        RegularMesh<OTags...> const& mesh,
+        ViewND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view)
+{
+    return BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS>(mesh, raw_view);
+}
 
 using DBlockViewX = BlockView<MDomain<Dim::X>, double>;
 
@@ -325,8 +337,8 @@ inline void for_each(
 }
 
 template <class... Tags, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS>
-inline BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& deepcopy(
-        BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& to,
+inline BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(
+        BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS> to,
         BlockView<MDomain<Tags...>, ElementType, OCONTIGUOUS> const& from) noexcept
 {
     assert(to.extents() == from.extents());
@@ -378,7 +390,7 @@ public:
     explicit inline constexpr Block(const MDomain<OTags...>& domain)
         : BlockView_(
                 domain,
-                RawView(new double[domain.size()],
+                RawView(new value_type[domain.size()],
                         ExtentsND<sizeof...(Tags)>(domain.template extent<Tags>()...)))
     {
     }

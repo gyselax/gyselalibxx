@@ -1,11 +1,9 @@
 #pragma once
 
-#include "block.h"
+#include "blockview.h"
 
 class IEfieldSolver
 {
 public:
-    virtual ~IEfieldSolver() = default;
-
-    virtual void operator()(DBlock1D ex, const DBlock2D fdistribu) const = 0;
+    virtual DBlockViewX& operator()(DBlockViewX& ex, const DBlockViewXVx& fdistribu) const = 0;
 };

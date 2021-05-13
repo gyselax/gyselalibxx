@@ -1,40 +1,40 @@
 #include <vector>
 
+#include "advectionx.h"
 #include "bsplines_uniform.h"
-#include "efieldsolver.h"
-#include "mesh.h"
+#include "nullefieldsolver.h"
 #include "predcorr.h"
-#include "space.h"
-#include "vlasovsolver.h"
+#include "spline_interpolator_1d.h"
+#include "splitvlasovsolver.h"
+
+// The meshed domain:
+// * origin: (0,0)
+// * unit vector: (1,1)
+// * domain-start: (0,0)
+// * domain-bound: (100, 100)
+MDomainXVx const dom2d(RCoordXVx(0., 0.), RCoordXVx(1., 1.), MCoordXVx(0, 0), MCoordXVx(100, 100));
+
+BSplines_uniform const bsplines_x = {3, true, 4, 5, 6};
+
+BSplines_uniform const bsplines_vx = {3, true, 4, 5, 6};
+
+Spline_interpolator_1D const interp_x(bsplines_x, BoundCond::PERIODIC, BoundCond::PERIODIC);
+
+Spline_interpolator_1D const interp_vx(bsplines_vx, BoundCond::GREVILLE, BoundCond::GREVILLE);
+
+AdvectionX const advection_x = {bsplines_x, interp_x};
+
+AdvectionX const advection_v = {bsplines_vx, interp_vx};
+
+SplitVlasovSolver const vlasov {advection_x, advection_v};
+
+NullEfieldSolver const efield;
+
+PredCorr2 const predcorr(vlasov, efield, 1.);
 
 int main()
 {
-    // The mesh, d_x=.01, d_v=.2, d_t=.1
-    Mesh3D mesh = {Mesh(0, .01), Mesh(-10, .2), Mesh(0, .1)};
+    DBlockXVx fdistribu(dom2d);
 
-    // The meshed domain
-    MDomain3D dom3d = {MDomain(mesh[0], 100), MDomain(mesh[1], 100), MDomain(mesh[3], 1000)};
-
-
-    const BSplines_uniform bsplines_x = {3, true, 4, 5, 6};
-
-    const BSplines_uniform bsplines_vx = {3, true, 4, 5, 6};
-
-    const Spline_interpolator_1D interp_x(bsplines_x, BoundCond::PERIODIC, BoundCond::PERIODIC);
-
-    const Spline_interpolator_1D interp_vx(bsplines_vx, BoundCond::GREVILLE, BoundCond::GREVILLE);
-
-    const Advection1D advection_x = {bsplines_x, interp_x};
-
-    const Advection1D advection_v = {bsplines_vx, interp_vx};
-
-    const VlasovSolver vlasov {advection_x, advection_v};
-
-    const EfieldSolver efield;
-
-    const PredCorr predcorr(vlasov, efield, {dom3d[3]});
-
-    DBlock2D fdistribu({dom3d[0], dom3d[1]});
-
-    predcorr(fdistribu, 1);
+    predcorr(fdistribu, 1, 100);
 }

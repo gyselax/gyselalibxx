@@ -2,9 +2,9 @@
 
 #include "blockview.h"
 #include "iadvectionx.h"
-#include "ivlasovsolver2.h"
+#include "ivlasovsolver.h"
 
-class SplitVlasovSolver : public IVlasovSolver2
+class SplitVlasovSolver : public IVlasovSolver
 {
     const IAdvectionX& m_advec_x;
 

@@ -1,7 +1,6 @@
 add_library(vlasov STATIC
+	advectionx.cpp
 	splitvlasovsolver.cpp
-	vlasovsolver.cpp
-	advection1d.cpp
 )
 
 target_compile_features(vlasov

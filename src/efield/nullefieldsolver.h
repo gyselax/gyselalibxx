@@ -1,8 +1,8 @@
 #pragma once
 
-#include "iefieldsolver2.h"
+#include "iefieldsolver.h"
 
-class NullEfieldSolver : public IEfieldSolver2
+class NullEfieldSolver : public IEfieldSolver
 {
 public:
     DBlockViewX& operator()(DBlockViewX& ex, const DBlockViewXVx& fdistribu) const override;

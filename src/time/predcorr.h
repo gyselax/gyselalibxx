@@ -4,16 +4,16 @@
 #include "itimesolver.h"
 #include "ivlasovsolver.h"
 
-class PredCorr : public ITimeSolver
+class PredCorr2 : public ITimeSolver
 {
-    const IVlasovSolver& m_vlasov;
+    IVlasovSolver const& m_vlasov;
 
-    const IEfieldSolver& m_efield;
+    IEfieldSolver const& m_efield;
 
-    const MDomain1D& m_time;
+    RLengthT const m_dt;
 
 public:
-    PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, const MDomain1D& time);
+    PredCorr2(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLengthT dt);
 
-    void operator()(DBlock2D& data, double mass_ratio) const override;
+    DBlockViewXVx& operator()(DBlockViewXVx& data, double mass_ratio, int steps) const override;
 };

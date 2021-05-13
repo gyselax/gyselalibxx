@@ -1,6 +1,5 @@
 add_library(time STATIC
 	predcorr.cpp
-	predcorr2.cpp
 )
 
 target_compile_features(time
