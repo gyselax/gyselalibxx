@@ -20,6 +20,22 @@
 * type names are CamelCase
 * constant & macros use CAPS_NAME
 * function and variables use snake_case
+* we don't use single letter variables
+* we don't rely on case to distinguish between variables
+* we name variables with expressive English names (e.g. temperature)
+* we don't use variable name conventions from math/physics (u)
 
 # Style
-* we use post-const (yoda-const): `int const` rather than `const int`
+* In a class
+  - we put all member types first (public, then protected, then private),
+  - then all member variables (public, then protected, then private),
+  - then all static member functions (public, then protected, then private),
+  - then all non-static member functions (public, then protected, then private),
+    * the constructors first
+    * then the destructor
+    * then the various operators
+    * then the accessors
+    * then the more complex functions
+* We comment our code with Doxygen
+* We use at @keywords in Doxygen
+* we use east-const (yoda-const): `int const` rather than `const int`

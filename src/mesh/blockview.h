@@ -56,6 +56,64 @@ public:
     friend class BlockView;
 
 private:
+    template <class QTag, class... CTags>
+    static auto get_slicer_for(const MCoord<CTags...>& c)
+    {
+        if constexpr (has_tag_v<QTag, MCoord<CTags...>>) {
+            return c.template get<QTag>();
+        } else {
+            return std::experimental::all;
+        }
+    }
+
+    template <class... SliceSpecs>
+    struct Slicer
+    {
+        template <class... OSliceSpecs>
+        static inline constexpr auto slice(const BlockView& block, OSliceSpecs&&... slices)
+        {
+            auto view = subspan(block.raw_view(), std::forward<OSliceSpecs>(slices)...);
+            auto mesh = submesh(block.mesh(), std::forward<OSliceSpecs>(slices)...);
+            return make_view<::is_contiguous<decltype(view)>, ElementType>(mesh, view);
+        }
+    };
+
+    template <class... STags>
+    struct Slicer<MCoord<STags...>>
+    {
+        static inline constexpr auto slice(const BlockView& block, const MCoord<STags...>& slices)
+        {
+            return Slicer<MCoord<STags...>, MDomain_>::slice(block, std::move(slices));
+        }
+    };
+
+    template <class... STags>
+    struct Slicer<MCoord<STags...>, MDomain<>>
+    {
+        template <class... SliceSpecs>
+        static inline constexpr auto slice(
+                const BlockView& block,
+                const MCoord<STags...>&,
+                SliceSpecs&&... oslices)
+        {
+            return Slicer<SliceSpecs...>::slice(block, oslices...);
+        }
+    };
+
+    template <class... STags, class OTag0, class... OTags>
+    struct Slicer<MCoord<STags...>, MDomain<OTag0, OTags...>>
+    {
+        template <class... SliceSpecs>
+        static inline constexpr auto slice(
+                const BlockView& block,
+                const MCoord<STags...>& slices,
+                SliceSpecs&&... oslices)
+        {
+            return Slicer<MCoord<STags...>, MDomain<OTags...>>::
+                    slice(block, slices, oslices..., get_slicer_for<OTag0>(slices));
+        }
+    };
+
     /// The raw view of the data
     RawView m_raw;
 
@@ -92,6 +150,16 @@ public:
      * @return *this
      */
     inline constexpr BlockView& operator=(BlockView&& other) noexcept = default;
+
+    /** Slice out some dimensions
+     * @param slices the coordinates to 
+     */
+    template <class SliceSpec>
+    inline constexpr auto operator[](SliceSpec&& slice) const
+    {
+        return Slicer<std::remove_cv_t<std::remove_reference_t<SliceSpec>>>::
+                slice(*this, std::forward<SliceSpec>(slice));
+    }
 
     template <class... IndexType>
     inline constexpr reference operator()(IndexType&&... indices) const noexcept
@@ -235,39 +303,14 @@ public:
         return m_raw;
     }
 
-    template <class>
-    struct Slicer;
-
-    template <class... STags>
-    struct Slicer<RegularMesh<STags...>>
-    {
-        template <class... SliceSpecs>
-        static inline constexpr auto mesh_for(
-                const RegularMesh<STags...>& mesh,
-                std::experimental::all_type,
-                SliceSpecs... slices)
-        {
-        }
-
-        template <class... SliceSpecs>
-        static inline constexpr auto mesh_for(
-                const RegularMesh<STags...>& mesh,
-                SliceSpecs... slices)
-        {
-        }
-    };
-
-private:
-public:
     /** Slice out some dimensions
      * @param slices the coordinates to 
      */
     template <class... SliceSpecs>
     inline constexpr auto slice(SliceSpecs&&... slices) const
     {
-        auto view = subspan(raw_view(), std::forward<SliceSpecs>(slices)...);
-        auto mesh = submesh(m_mesh, std::forward<SliceSpecs>(slices)...);
-        return make_view<::is_contiguous<decltype(view)>, ElementType>(mesh, view);
+        return Slicer<std::remove_cv_t<std::remove_reference_t<SliceSpecs>>...>::
+                slice(*this, std::forward<SliceSpecs>(slices)...);
     }
 
     /** Duplicate the data of this view
@@ -279,8 +322,6 @@ public:
         deepcopy(result, *this);
         return result;
     }
-
-protected:
 };
 
 
@@ -296,19 +337,12 @@ static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
     return BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS>(mesh, raw_view);
 }
 
-using DBlockViewX = BlockView<MDomain<Dim::X>, double>;
-
-using DBlockViewVx = BlockView<MDomain<Dim::Vx>, double>;
-
-using DBlockViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double>;
-
 template <class... QueryTags, class... Tags, class ElementType, bool CONTIGUOUS>
 RegularMDomain<QueryTags...> get_domain(
         const BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& v)
 {
     return v.template domain<Tags...>();
 }
-
 
 namespace detail {
 template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor, class... Indices>
@@ -335,6 +369,12 @@ inline void for_each(
 {
     detail::for_each_impl(to, std::forward<Functor>(f));
 }
+
+using DBlockViewX = BlockView<MDomain<Dim::X>, double>;
+
+using DBlockViewVx = BlockView<MDomain<Dim::Vx>, double>;
+
+using DBlockViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double>;
 
 template <class... Tags, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS>
 inline BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(

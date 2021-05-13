@@ -9,7 +9,6 @@ template <class, class...>
 class TaggedArray;
 
 namespace detail {
-
 template <class...>
 struct TypeSeq;
 
@@ -19,15 +18,26 @@ struct SingleType;
 template <class...>
 struct RankIn;
 
+template <class... Tags>
+struct TaggedArrayPrinter;
+
+template <class QueryTag>
+struct RankIn<SingleType<QueryTag>, TypeSeq<>>
+{
+    static constexpr bool present = false;
+};
+
 template <class QueryTag, class... TagsTail>
 struct RankIn<SingleType<QueryTag>, TypeSeq<QueryTag, TagsTail...>>
 {
+    static constexpr bool present = true;
     static constexpr std::size_t val = 0;
 };
 
 template <class QueryTag, class TagsHead, class... TagsTail>
 struct RankIn<SingleType<QueryTag>, TypeSeq<TagsHead, TagsTail...>>
 {
+    static constexpr bool present = RankIn<SingleType<QueryTag>, TypeSeq<TagsTail...>>::present;
     static constexpr std::size_t val = 1 + RankIn<SingleType<QueryTag>, TypeSeq<TagsTail...>>::val;
 };
 
@@ -35,6 +45,44 @@ template <class... QueryTags, class... Tags>
 struct RankIn<TypeSeq<QueryTags...>, TypeSeq<Tags...>>
 {
     using ValSeq = std::index_sequence<RankIn<QueryTags, TypeSeq<Tags...>>::val...>;
+};
+
+template <class TagsHead, class TagsNext, class... TagsTail>
+struct TaggedArrayPrinter<TagsHead, TagsNext, TagsTail...>
+{
+    template <class ElementType, class... OTags>
+    static std::ostream& print_content(
+            std::ostream& out,
+            TaggedArray<ElementType, OTags...> const& arr)
+    {
+        out << arr.template get<TagsHead>();
+        return TaggedArrayPrinter<TagsNext, TagsTail...>::print_content(out, arr);
+    }
+};
+
+template <class Tag>
+struct TaggedArrayPrinter<Tag>
+{
+    template <class ElementType, class... OTags>
+    static std::ostream& print_content(
+            std::ostream& out,
+            TaggedArray<ElementType, OTags...> const& arr)
+    {
+        out << arr.template get<Tag>();
+        return out;
+    }
+};
+
+template <>
+struct TaggedArrayPrinter<>
+{
+    template <class ElementType, class... OTags>
+    static std::ostream& print_content(
+            std::ostream& out,
+            TaggedArray<ElementType, OTags...> const& arr)
+    {
+        return out;
+    }
 };
 
 } // namespace detail
@@ -173,49 +221,20 @@ public:
     }
 };
 
-namespace detail {
+template <class, class>
+constexpr bool has_tag_v = false;
 
-template <class... Tags>
-struct TaggedArrayPrinter;
+template <class QueryTag, class ElementType, class... Tags>
+constexpr bool has_tag_v<QueryTag, TaggedArray<ElementType, Tags...>> = detail::
+        RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::present;
 
-template <class TagsHead, class TagsNext, class... TagsTail>
-struct TaggedArrayPrinter<TagsHead, TagsNext, TagsTail...>
-{
-    template <class ElementType, class... OTags>
-    static std::ostream& print_content(
-            std::ostream& out,
-            TaggedArray<ElementType, OTags...> const& arr)
-    {
-        out << arr.template get<TagsHead>();
-        return TaggedArrayPrinter<TagsNext, TagsTail...>::print_content(out, arr);
-    }
-};
+template <class, class>
+constexpr size_t tag_rank_v = -1;
 
-template <class Tag>
-struct TaggedArrayPrinter<Tag>
-{
-    template <class ElementType, class... OTags>
-    static std::ostream& print_content(
-            std::ostream& out,
-            TaggedArray<ElementType, OTags...> const& arr)
-    {
-        out << arr.template get<Tag>();
-        return out;
-    }
-};
+template <class QueryTag, class ElementType, class... Tags>
+constexpr bool tag_rank_v<QueryTag, TaggedArray<ElementType, Tags...>> = detail::
+        RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
 
-template <>
-struct TaggedArrayPrinter<>
-{
-    template <class ElementType, class... OTags>
-    static std::ostream& print_content(
-            std::ostream& out,
-            TaggedArray<ElementType, OTags...> const& arr)
-    {
-        return out;
-    }
-};
-} // namespace detail
 
 template <class ElementType, class... Tags>
 std::ostream& operator<<(std::ostream& out, TaggedArray<ElementType, Tags...> const& arr)

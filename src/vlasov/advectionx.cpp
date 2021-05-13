@@ -31,17 +31,20 @@ AdvectionX::AdvectionX(
 
 DBlockViewXVx& AdvectionX::operator()(DBlockViewXVx& fdistribu, double mass_ratio, double dt) const
 {
-    //TODO:     assert(get_domain<Dim::X>(fdistribu) == m_spline_interpolator.domain());
+    //TODO: spline on mesh
+    //assert(get_domain<Dim::X>(fdistribu) == m_spline_interpolator.domain());
 
     const MDomainX& x_dom = get_domain<Dim::X>(fdistribu);
     const MDomainVx& v_dom = get_domain<Dim::Vx>(fdistribu);
 
     // pre-allocate some memory to prevent allocation later in loop
-    //TODO:     BlockX<RCoordX> feet_coords(x_dom);
+    //TODO: spline on mesh
     DBlockX feet_coords(x_dom);
+    //BlockX<RCoordX> feet_coords(x_dom);
     DBlockX contiguous_slice(x_dom);
-    //TODO:     SplineX spline(m_x_spline_basis);
+    //TODO: spline on mesh
     Spline_1D spline(m_x_spline_basis);
+    //SplineX spline(m_x_spline_basis);
 
     for (MCoordVx vii : v_dom) {
         // compute the displacement
@@ -53,20 +56,20 @@ DBlockViewXVx& AdvectionX::operator()(DBlockViewXVx& fdistribu, double mass_rati
         }
 
         // copy the slice in contiguous memory
-        //TODO:         deepcopy(contiguous_slice, fdistribu.slice(vii));
-        deepcopy(contiguous_slice, fdistribu.slice(all, vii.get<Dim::Vx>()));
+        deepcopy(contiguous_slice, fdistribu[vii]);
 
         // build a spline representation of the data
-        //TODO:         m_spline_interpolator(spline, contiguous_slice);
+        //TODO: spline on mesh
         m_spline_interpolator.compute_interpolant(spline, contiguous_slice.raw_view());
+        //m_spline_interpolator(spline, contiguous_slice);
 
         // evaluate the function at the feet using the spline
+        //TODO: spline on mesh
         spline.eval_array(feet_coords.raw_view(), contiguous_slice.raw_view());
-        //TODO:         spline.eval_at(contiguous_slice, feet_coords);
+        //spline.eval_at(contiguous_slice, feet_coords);
 
         // copy back
-        //TODO:         deepcopy(fdistribu.slice(vii), contiguous_slice);
-        deepcopy(fdistribu.slice(all, vii.get<Dim::Vx>()), contiguous_slice);
+        deepcopy(fdistribu[vii], contiguous_slice);
     }
 
     return fdistribu;
