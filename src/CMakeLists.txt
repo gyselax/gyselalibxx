@@ -24,4 +24,4 @@ target_link_libraries(voice_dim
 		sll::splines
 		vcx::time
 		vcx::vlasov
-)
+                FFTW::Double)

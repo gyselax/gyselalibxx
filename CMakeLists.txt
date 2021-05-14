@@ -16,6 +16,12 @@ include(CTest)
 ## Look for a pre-installed lapack
 find_package(LAPACK REQUIRED COMPONENTS CXX)
 
+## Lokk for FFTW
+SET (CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/findFFTW ${CMAKE_MODULE_PATH} )
+find_package(FFTW REQUIRED COMPONENTS DOUBLE_LIB)
+SET(CMAKE_CXX_FLAGS "-lm -lfftw3")
+SET(CMAKE_C_FLAGS   "-lm -lfftw3")
+
 ## Look for googletest in `vendor/`, we use it to write unit tests
 option(INSTALL_GTEST "Enable installation of googletest." OFF)
 add_subdirectory("vendor/googletest/" "googletest")
