@@ -115,7 +115,7 @@ public:
 
     template <class... Params>
     inline constexpr TaggedArray(Params&&... params) noexcept
-        : m_values {std::forward<Params>(params)...}
+        : m_values {static_cast<ElementType>(std::forward<Params>(params))...}
     {
     }
 
