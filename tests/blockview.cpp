@@ -8,7 +8,7 @@ using namespace std::experimental;
 class DBlockXTest : public ::testing::Test
 {
 protected:
-    MeshX mesh = MeshX(0, 1);
+    MeshX mesh = MeshX(0.0, 1.0);
     MDomainX dom = MDomainX(mesh, 0, 100);
 };
 
@@ -60,7 +60,7 @@ TEST_F(DBlockXTest, deepcopy)
 class DBlockXVxTest : public ::testing::Test
 {
 protected:
-    MeshXVx mesh = MeshXVx(RCoordXVx(0, 0), RCoordXVx(1, 1));
+    MeshXVx mesh = MeshXVx(RCoordXVx(0.0, 0.0), RCoordXVx(1.0, 1.0));
     MDomainXVx dom = MDomainXVx(mesh, MCoordXVx(0, 0), MCoordXVx(100, 100));
 };
 
