@@ -100,6 +100,18 @@ inline constexpr ElementType& get(TaggedArray<ElementType, Tags...>& tuple) noex
     return tuple.template get<QueryTag>();
 }
 
+template <class... QueryTags, class ElementType, class... Tags>
+inline constexpr TaggedArray<QueryTags...> select(
+        TaggedArray<ElementType, Tags...> const& arr) noexcept
+{
+    return TaggedArray<QueryTags...>(arr);
+}
+
+template <class... QueryTags, class ElementType, class... Tags>
+inline constexpr TaggedArray<QueryTags...> select(TaggedArray<ElementType, Tags...>&& arr) noexcept
+{
+    return TaggedArray<QueryTags...>(std::move(arr));
+}
 
 template <class ElementType, class... Tags>
 class TaggedArray
