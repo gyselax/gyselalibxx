@@ -232,11 +232,4 @@ TEST_P(SplinesTest, test)
             << "With \n"
             << " * Number of points in grid: N = " << N << "\n"
             << " * Number of evaluation points : " << N << "\n";
-
-    //// coordinate array initialization
-    //std::vector<double> eval_pts(N);
-    //for (int ii = 0; ii < eval_pts.size(); ++ii) {
-    //    eval_pts[ii] = x0 + ii * h;
-    //    //cout << "eval_pts=" << ii << ": " << eval_pts[ii] << endl;
-    //}
 }
