@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 add_subdirectory(array_tools)
 add_subdirectory(boundary_conditions)
 add_subdirectory(efield)
+add_subdirectory(fft)
 add_subdirectory(geometry)
 add_subdirectory(math_tools)
 add_subdirectory(matrix)
@@ -20,7 +21,8 @@ target_link_libraries(voice_dim
 		vcx::array_tools
 		sll::boundary_conditions
 		vcx::efield
-                vcx::mesh
+                vcx::fft
+		vcx::mesh
 		sll::splines
 		vcx::time
 		vcx::vlasov
