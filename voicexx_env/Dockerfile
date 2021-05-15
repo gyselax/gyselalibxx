@@ -15,6 +15,7 @@ RUN chmod +x /bin/bash_run \
     clang-format \
     cmake \
     git \
+    libfftw3-dev \
     liblapack-dev \
  && apt-get autoremove -y \
  && apt-get clean -y \
