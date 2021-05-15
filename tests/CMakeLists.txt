@@ -9,7 +9,7 @@ add_executable(unit_tests
 	taggedarray.cpp
 	splines.cpp
 	view.cpp
-        fft.cpp
+    fft.cpp
 )
 target_compile_features(unit_tests PUBLIC cxx_std_17)
 target_link_libraries(unit_tests
@@ -18,6 +18,6 @@ target_link_libraries(unit_tests
 		sll::splines
 		vcx::array_tools
 		vcx::mesh
-                FFTW::Double
+		FFTW::Double
 )
 gtest_discover_tests(unit_tests)
