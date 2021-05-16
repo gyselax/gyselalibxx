@@ -21,8 +21,7 @@ void compute_mesh(vector<double>& mesh1d, double const xmin, double const xmax, 
 
 double compute_f(const double xpts)
 {
-    //return cos(8. * M_PI * xpts);
-    return cos(xpts);
+    return cos(4. * xpts);
 }
 
 void compute_f(vector<double>& fx, vector<double> mesh1d)
@@ -35,8 +34,7 @@ void compute_f(vector<double>& fx, vector<double> mesh1d)
 
 double compute_deriv_f(const double xpts)
 {
-    //return -8. * M_PI * sin(8. * M_PI * xpts);
-    return -sin(xpts);
+    return -4. * sin(4. * xpts);
 }
 
 void compute_deriv_f(vector<double>& dfx_dx, vector<double> mesh1d)
@@ -240,9 +238,9 @@ TEST(FFT, fft1d_deriv)
     FFT_1D inv_fft1d(Nx, FFTW_BACKWARD);
     double kx_mode;
     constexpr complex I(0., 1.);
-    double dx = mesh1d[1]-mesh1d[0];
+    double dx = mesh1d[1] - mesh1d[0];
     for (int ii = 0; ii < complx_values.size(); ++ii) {
-        kx_mode = inv_fft1d.get_kx_mode(ii,dx);
+        kx_mode = inv_fft1d.get_kx_mode(ii, dx);
         complx_values[ii].real(fft_fx[ii][0]);
         complx_values[ii].imag(fft_fx[ii][1]);
         complx_values[ii] = I * kx_mode * complx_values[ii];
@@ -258,7 +256,7 @@ TEST(FFT, fft1d_deriv)
     }
 
     // Check if iFFT(FFT(fx)) = fx
-    constexpr double tol = 1e-14;
+    constexpr double tol = 1e-12;
     double max_error = 0.;
     for (int ii = 0; ii < dfx_dx.size(); ++ii) {
         max_error = max(max_error, abs(dfx_dx[ii] - dfx_dx_byfft[ii]));
