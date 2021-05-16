@@ -48,10 +48,10 @@ fftw_complex& FFT_1D::get_fourier_values(int const normalised)
     fftw_execute(this->plan);
     if (normalised == 1) {
         const int Nx = get_Npoints();
-        const double inv_Nx = 1./Nx;
+        const double inv_Nx = 1. / Nx;
         for (int ii = 0; ii < Nx; ++ii) {
-            fourier_values[ii][0] = fourier_values[ii][0]*inv_Nx;
-            fourier_values[ii][1] = fourier_values[ii][1]*inv_Nx;
+            fourier_values[ii][0] = fourier_values[ii][0] * inv_Nx;
+            fourier_values[ii][1] = fourier_values[ii][1] * inv_Nx;
         }
     }
     return this->fourier_values[0];
@@ -62,8 +62,8 @@ const double FFT_1D::get_freq(int const ix)
     return this->freqs[ix];
 }
 
-const double FFT_1D::get_kx_mode(int const ix,double const dx)
+const double FFT_1D::get_kx_mode(int const ix, double const dx)
 {
     // 2*pi*freq/dx
-    return 2*M_PI*get_freq(ix)/dx;
+    return 2 * M_PI * get_freq(ix) / dx;
 }

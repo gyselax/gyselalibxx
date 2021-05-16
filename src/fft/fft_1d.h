@@ -33,12 +33,12 @@ public:
     void set_values(DComplexVector& in_values);
     const fftw_complex& get_value(int const ival);
     fftw_complex& get_values();
-    fftw_complex& get_fourier_values(int const normalised=0);
+    fftw_complex& get_fourier_values(int const normalised = 0);
     const double get_freq(int const ix);
-    const double get_kx_mode(int const ix,const double dx);
+    const double get_kx_mode(int const ix, const double dx);
 
 private:
-    void set_freqs_(const double dspace=1.)
+    void set_freqs_(const double dspace = 1.)
     /*-----------------------------------------------------------------------------
     !> Return the Discrete Fourier Transform sample frequencies.
     !> 
@@ -59,12 +59,12 @@ private:
     !>     Sample spacing (inverse of the sampling rate). Defaults to 1.
     !-----------------------------------------------------------------------------*/
     {
-        const double inv_Nd = 1./(Npoints*dspace);
+        const double inv_Nd = 1. / (Npoints * dspace);
         for (int ii = 0; ii <= Npoints / 2; ++ii) {
             freqs[ii] = (ii)*inv_Nd;
         }
         for (int ii = Npoints / 2 + 1; ii < Npoints; ++ii) {
-            freqs[ii] = (ii - Npoints)*inv_Nd;
+            freqs[ii] = (ii - Npoints) * inv_Nd;
         }
     }
 
