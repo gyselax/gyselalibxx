@@ -31,7 +31,7 @@ SplineAdvectionX::SplineAdvectionX(
 {
 }
 
-DBlockViewXVx SplineAdvectionX::operator()(DBlockViewXVx fdistribu, double mass_ratio, double dt)
+DBlockSpanXVx SplineAdvectionX::operator()(DBlockSpanXVx fdistribu, double mass_ratio, double dt)
         const
 {
     //TODO: spline on mesh

@@ -10,7 +10,7 @@ PredCorr::PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLe
 }
 
 
-DBlockViewXVx PredCorr::operator()(DBlockViewXVx fdistribu, double mass_ratio, int steps) const
+DBlockSpanXVx PredCorr::operator()(DBlockSpanXVx fdistribu, double mass_ratio, int steps) const
 {
     // ex only depends on DX
     DBlockX ex(fdistribu.domain<Dim::X>());

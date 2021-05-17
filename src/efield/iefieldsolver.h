@@ -5,5 +5,5 @@
 class IEfieldSolver
 {
 public:
-    virtual DBlockViewX operator()(DBlockViewX ex, DBlockCViewXVx fdistribu) const = 0;
+    virtual DBlockSpanX operator()(DBlockSpanX ex, DBlockViewXVx fdistribu) const = 0;
 };

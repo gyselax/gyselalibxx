@@ -5,5 +5,5 @@
 class NullAdvectionVx : public IAdvectionVx
 {
 public:
-    DBlockViewXVx operator()(DBlockViewXVx fdistribu, double mass_ratio, double dt) const override;
+    DBlockSpanXVx operator()(DBlockSpanXVx fdistribu, double mass_ratio, double dt) const override;
 };

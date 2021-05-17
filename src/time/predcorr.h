@@ -15,5 +15,5 @@ class PredCorr : public ITimeSolver
 public:
     PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLengthT dt);
 
-    DBlockViewXVx operator()(DBlockViewXVx data, double mass_ratio, int steps) const override;
+    DBlockSpanXVx operator()(DBlockSpanXVx data, double mass_ratio, int steps) const override;
 };

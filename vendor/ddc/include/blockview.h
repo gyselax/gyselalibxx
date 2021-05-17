@@ -404,14 +404,14 @@ inline void for_each(
     detail::for_each_impl(view, std::forward<Functor>(f));
 }
 
-using DBlockViewX = BlockView<MDomain<Dim::X>, double>;
+using DBlockSpanX = BlockView<MDomain<Dim::X>, double>;
 
-using DBlockViewVx = BlockView<MDomain<Dim::Vx>, double>;
+using DBlockSpanVx = BlockView<MDomain<Dim::Vx>, double>;
 
-using DBlockViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double>;
+using DBlockSpanXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double>;
 
-using DBlockCViewX = BlockView<MDomain<Dim::X>, double const>;
+using DBlockViewX = BlockView<MDomain<Dim::X>, double const>;
 
-using DBlockCViewVx = BlockView<MDomain<Dim::Vx>, double const>;
+using DBlockViewVx = BlockView<MDomain<Dim::Vx>, double const>;
 
-using DBlockCViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double const>;
+using DBlockViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double const>;
