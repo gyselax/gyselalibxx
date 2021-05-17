@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 include(GoogleTest)
 
 add_executable(ddc_tests
-	blockview.cpp
+	block.cpp
 	mdomain.cpp
 	mcoord.cpp
 	taggedarray.cpp

@@ -2,6 +2,8 @@
 #include <cmath>
 #include <vector>
 
+#include <block.h>
+
 #include "spline_1d.h"
 #include "splineadvectionx.h"
 

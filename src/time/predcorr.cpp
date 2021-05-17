@@ -1,3 +1,5 @@
+#include <block.h>
+
 #include "predcorr.h"
 
 PredCorr::PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLengthT dt)

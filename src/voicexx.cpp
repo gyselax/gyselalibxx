@@ -1,5 +1,7 @@
 #include <vector>
 
+#include <block.h>
+
 #include "bsplines_uniform.h"
 #include "nulladvectionvx.h"
 #include "nullefieldsolver.h"
