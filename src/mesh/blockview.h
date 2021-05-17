@@ -463,7 +463,7 @@ public:
     explicit inline constexpr Block(const MDomain<OTags...>& domain)
         : BlockView_(
                 domain,
-                RawView(new value_type[domain.size()],
+                RawView(new (std::align_val_t(64)) value_type[domain.size()],
                         ExtentsND<sizeof...(Tags)>(domain.template extent<Tags>()...)))
     {
     }
