@@ -32,6 +32,8 @@
 
 # Style
 * We *must* apply the style specified by the `.clang-format` file using clang-format 10
+* we *must not* use numerical values in the code except to initialize a named constexpr documenting
+  the semantic of the value
 * In a class
   - we put all member types first (public, then protected, then private),
   - then all member variables (public, then protected, then private),

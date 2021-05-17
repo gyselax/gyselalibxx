@@ -13,7 +13,7 @@ target_include_directories(efield
 
 target_link_libraries(efield
 	PUBLIC
-		vcx::mesh
+		ddc::ddc
 )
 
 add_library(vcx::efield ALIAS efield)

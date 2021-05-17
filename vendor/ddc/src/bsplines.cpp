@@ -12,8 +12,8 @@ BSplines::BSplines(
         double xmax,
         bool radial)
     : degree(degree)
-    , periodic(periodic)
     , uniform(uniform)
+    , periodic(periodic)
     , radial(radial)
     , ncells(ncells)
     , nbasis(nbasis)

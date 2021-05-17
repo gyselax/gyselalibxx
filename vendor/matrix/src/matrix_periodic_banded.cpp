@@ -1,9 +1,13 @@
+#include <algorithm>
 #include <cassert>
-
-#include <string.h> // for memset
+#include <cmath>
+#include <cstring> // for memset
 
 #include "matrix_banded.h"
 #include "matrix_periodic_banded.h"
+
+using std::max;
+using std::min;
 
 Matrix_Periodic_Banded::Matrix_Periodic_Banded(int n, int kl, int ku, std::unique_ptr<Matrix> q)
     : Matrix_Corner_Block(n, max(kl, ku), std::move(q), max(kl, ku) * (max(kl, ku) + 1))

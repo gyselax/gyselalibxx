@@ -15,9 +15,8 @@ target_include_directories(vlasov
 
 target_link_libraries(vlasov
 	PUBLIC
-		vcx::array_tools
+		ddc::ddc
 		sll::splines
-		vcx::mesh
 )
 
 add_library(vcx::vlasov ALIAS vlasov)

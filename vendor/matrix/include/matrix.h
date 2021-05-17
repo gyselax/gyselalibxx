@@ -1,9 +1,9 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#pragma once
+
 #include <memory>
 #include <string>
 
-#include <math_tools.h>
+#include <view.h>
 
 class Matrix
 {
@@ -38,5 +38,3 @@ protected:
 };
 
 std::ostream& operator<<(std::ostream& o, const Matrix& m);
-
-#endif // MATRIX_H

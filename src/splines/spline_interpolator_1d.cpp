@@ -1,6 +1,7 @@
 #include <cassert>
 #include <iostream>
 
+#include <math_tools.h>
 #include <matrix_banded.h>
 #include <matrix_dense.h>
 #include <matrix_periodic_banded.h>

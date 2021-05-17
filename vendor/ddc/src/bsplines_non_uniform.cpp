@@ -46,7 +46,6 @@ BSplines_non_uniform::~BSplines_non_uniform()
     delete[] knots;
 }
 
-
 BSplines* BSplines::new_bsplines(int degree, bool periodic, std::vector<double> const& breaks)
 {
     return new BSplines_non_uniform(degree, periodic, breaks);

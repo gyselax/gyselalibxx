@@ -2,7 +2,7 @@
 #define BSPLINES_H
 #include <vector>
 
-#include <math_tools.h>
+#include "view.h"
 
 class BSplines
 {
@@ -23,9 +23,8 @@ public:
     const bool radial;
     const int nbasis;
 
-    /// discretization (bspline specific)
+    /// TODO: take all that from a Mesh object
     const int ncells;
-
     const bool periodic;
     const double xmin;
     const double xmax;

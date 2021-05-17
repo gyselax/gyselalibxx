@@ -13,7 +13,7 @@ target_include_directories(time
 
 target_link_libraries(time
 	PUBLIC
-		vcx::mesh
+		ddc::ddc
 		vcx::efield
 		vcx::vlasov
 )

@@ -1,6 +1,11 @@
+#include <algorithm>
 #include <cassert>
+#include <cmath>
 
 #include "matrix_banded.h"
+
+using std::max;
+using std::min;
 
 extern "C" int dgbtrf_(
         const int* m,

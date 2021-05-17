@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <cmath>
 
-#include "view.h"
+#include <experimental/mdspan>
 
 template <typename T>
 inline T sum(T* array, int size)
@@ -15,18 +15,31 @@ inline T sum(T* array, int size)
     return val;
 }
 
-inline double sum(mdspan_1d const& array)
+template <class ElementType, class LayoutPolicy, class AccessorPolicy, ptrdiff_t Ext>
+inline ElementType sum(std::experimental::basic_mdspan<
+                       ElementType,
+                       std::experimental::extents<Ext>,
+                       LayoutPolicy,
+                       AccessorPolicy> const& array)
 {
-    double val(0.0);
+    ElementType val(0.0);
     for (int i(0); i < array.extent(0); ++i) {
         val += array[i];
     }
     return val;
 }
 
-inline double sum(mdspan_1d const& array, int start, int end)
+template <class ElementType, class LayoutPolicy, class AccessorPolicy, ptrdiff_t Ext>
+inline ElementType sum(
+        std::experimental::basic_mdspan<
+                ElementType,
+                std::experimental::extents<Ext>,
+                LayoutPolicy,
+                AccessorPolicy> const& array,
+        int start,
+        int end)
 {
-    double val(0.0);
+    ElementType val(0.0);
     for (int i(start); i < end; ++i) {
         val += array[i];
     }

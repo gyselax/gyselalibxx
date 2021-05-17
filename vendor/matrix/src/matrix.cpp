@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cassert>
 #include <iomanip>
 #include <iostream>
@@ -10,6 +11,9 @@
 #include "matrix_dense.h"
 #include "matrix_pds_tridiag.h"
 #include "matrix_periodic_banded.h"
+
+using std::max;
+using std::min;
 
 void Matrix::solve_inplace(mdspan_1d& b) const
 {

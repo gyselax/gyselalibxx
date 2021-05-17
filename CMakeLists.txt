@@ -35,6 +35,15 @@ add_subdirectory("vendor/mdspan/" "mdspan")
 set(MDARRAY_CXX_STANDARD 17 CACHE STRING "Override the default CXX_STANDARD to compile with." FORCE)
 add_subdirectory("vendor/mdarray/" "mdarray")
 
+## Look for selalib's matrix in `vendor/`
+add_subdirectory("vendor/matrix/" "matrix")
+
+## Look for mdspan_wrapper in `vendor/`
+add_subdirectory("vendor/mdspan_wrapper/" "mdspan_wrapper")
+
+## Look for the Domain DeComposition library (ddc) in `vendor/`
+add_subdirectory("vendor/ddc/" "ddc")
+
 
 # Our project code
 

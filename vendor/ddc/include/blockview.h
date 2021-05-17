@@ -16,7 +16,7 @@ class BlockView;
 
 template <bool O_CONTIGUOUS, class OElementType, class... OTags>
 static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
-        RegularMesh<OTags...> const& mesh,
+        UniformMesh<OTags...> const& mesh,
         ViewND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view);
 
 namespace detail {
@@ -359,7 +359,7 @@ public:
  */
 template <bool O_CONTIGUOUS, class OElementType, class... OTags>
 static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
-        RegularMesh<OTags...> const& mesh,
+        UniformMesh<OTags...> const& mesh,
         ViewND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view)
 {
     return BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS>(mesh, raw_view);
