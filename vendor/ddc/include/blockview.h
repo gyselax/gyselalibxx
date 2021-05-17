@@ -415,4 +415,3 @@ using DBlockCViewX = BlockView<MDomain<Dim::X>, double const>;
 using DBlockCViewVx = BlockView<MDomain<Dim::Vx>, double const>;
 
 using DBlockCViewXVx = BlockView<MDomain<Dim::X, Dim::Vx>, double const>;
-
