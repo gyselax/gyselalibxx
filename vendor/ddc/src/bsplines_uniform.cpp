@@ -28,7 +28,7 @@ BSplines* BSplines::new_bsplines(int degree, bool periodic, double xmin, double 
 
 BSplines_uniform::~BSplines_uniform() {}
 
-void BSplines_uniform::eval_basis(double x, mdspan_1d& values, int& jmin, int deg) const
+void BSplines_uniform::eval_basis(double x, DSpan1D& values, int& jmin, int deg) const
 {
     assert(values.extent(0) == deg + 1);
 
@@ -53,7 +53,7 @@ void BSplines_uniform::eval_basis(double x, mdspan_1d& values, int& jmin, int de
     }
 }
 
-void BSplines_uniform::eval_deriv(double x, mdspan_1d& derivs, int& jmin) const
+void BSplines_uniform::eval_deriv(double x, DSpan1D& derivs, int& jmin) const
 {
     assert(derivs.extent(0) == degree + 1);
 
@@ -90,10 +90,10 @@ void BSplines_uniform::eval_deriv(double x, mdspan_1d& derivs, int& jmin) const
     derivs(degree) = bj;
 }
 
-void BSplines_uniform::eval_basis_and_n_derivs(double x, int n, mdspan_2d& derivs, int& jmin) const
+void BSplines_uniform::eval_basis_and_n_derivs(double x, int n, DSpan2D& derivs, int& jmin) const
 {
     double ndu_ptr[(degree + 1) * (degree + 1)];
-    mdspan_2d ndu(ndu_ptr, degree + 1, degree + 1);
+    DSpan2D ndu(ndu_ptr, degree + 1, degree + 1);
     double a_ptr[2 * (degree + 1)];
     std::experimental::mdspan<double, std::experimental::dynamic_extent, 2> a(a_ptr, degree + 1);
     double offset;
@@ -189,7 +189,7 @@ void BSplines_uniform::get_icell_and_offset(double x, int& icell, double& offset
     }
 }
 
-void BSplines_uniform::integrals(mdspan_1d& int_vals) const
+void BSplines_uniform::integrals(DSpan1D& int_vals) const
 {
     assert(int_vals.extent(0) == nbasis + degree * periodic);
     for (int i(degree); i < nbasis - degree; ++i) {
@@ -206,7 +206,7 @@ void BSplines_uniform::integrals(mdspan_1d& int_vals) const
     } else {
         int jmin(0);
         double edge_vals_ptr[degree + 2];
-        mdspan_1d edge_vals(edge_vals_ptr, degree + 2);
+        DSpan1D edge_vals(edge_vals_ptr, degree + 2);
 
         eval_basis(xmin, edge_vals, jmin, degree + 1);
 

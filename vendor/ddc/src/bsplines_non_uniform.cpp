@@ -51,7 +51,7 @@ BSplines* BSplines::new_bsplines(int degree, bool periodic, std::vector<double> 
     return new BSplines_non_uniform(degree, periodic, breaks);
 }
 
-void BSplines_non_uniform::eval_basis(double x, mdspan_1d& values, int& jmin) const
+void BSplines_non_uniform::eval_basis(double x, DSpan1D& values, int& jmin) const
 {
     double left[degree];
     double right[degree];
@@ -87,7 +87,7 @@ void BSplines_non_uniform::eval_basis(double x, mdspan_1d& values, int& jmin) co
     }
 }
 
-void BSplines_non_uniform::eval_deriv(double x, mdspan_1d& derivs, int& jmin) const
+void BSplines_non_uniform::eval_deriv(double x, DSpan1D& derivs, int& jmin) const
 {
     double left[degree];
     double right[degree];
@@ -141,7 +141,7 @@ void BSplines_non_uniform::eval_deriv(double x, mdspan_1d& derivs, int& jmin) co
     }
     derivs(degree) = saved;
 }
-void BSplines_non_uniform::eval_basis_and_n_derivs(double x, int n, mdspan_2d& derivs, int& jmin)
+void BSplines_non_uniform::eval_basis_and_n_derivs(double x, int n, DSpan2D& derivs, int& jmin)
         const
 {
     double left[degree];
@@ -151,7 +151,7 @@ void BSplines_non_uniform::eval_basis_and_n_derivs(double x, int n, mdspan_2d& d
     std::experimental::mdspan<double, std::experimental::dynamic_extent, 2> a(a_ptr, degree + 1);
 
     double ndu_ptr[(degree + 1) * (degree + 1)];
-    mdspan_2d ndu(ndu_ptr, degree + 1, degree + 1);
+    DSpan2D ndu(ndu_ptr, degree + 1, degree + 1);
 
     assert(x >= xmin);
     assert(x <= xmax);
@@ -266,7 +266,7 @@ int BSplines_non_uniform::find_cell(double x) const
     return icell;
 }
 
-void BSplines_non_uniform::integrals(mdspan_1d& int_vals) const
+void BSplines_non_uniform::integrals(DSpan1D& int_vals) const
 {
     assert(int_vals.extent(0) == nbasis + degree * periodic);
 

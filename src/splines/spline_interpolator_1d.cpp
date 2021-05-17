@@ -55,7 +55,7 @@ inline void Spline_interpolator_1D::constructor_sanity_checks()
 
 //-------------------------------------------------------------------------------------------------
 
-const mdspan_1d& Spline_interpolator_1D::get_interp_points() const
+const DSpan1D& Spline_interpolator_1D::get_interp_points() const
 {
     return interp_pts;
 }
@@ -65,7 +65,7 @@ const mdspan_1d& Spline_interpolator_1D::get_interp_points() const
  *                         Compute interpolant functions *
  ************************************************************************************/
 
-void Spline_interpolator_1D::compute_interpolant_degree1(Spline_1D& spline, const mdspan_1d& vals)
+void Spline_interpolator_1D::compute_interpolant_degree1(Spline_1D& spline, const DSpan1D& vals)
         const
 {
     for (int i(0); i < bspl.nbasis; ++i) {
@@ -81,9 +81,9 @@ void Spline_interpolator_1D::compute_interpolant_degree1(Spline_1D& spline, cons
 
 void Spline_interpolator_1D::compute_interpolant(
         Spline_1D& spline,
-        const mdspan_1d& vals,
-        const mdspan_1d* derivs_xmin,
-        const mdspan_1d* derivs_xmax) const
+        const DSpan1D& vals,
+        const DSpan1D* derivs_xmin,
+        const DSpan1D* derivs_xmax) const
 {
     assert(vals.extent(0) == bspl.nbasis - nbc_xmin - nbc_xmax);
     assert(spline.belongs_to_space(bspl));
@@ -121,7 +121,7 @@ void Spline_interpolator_1D::compute_interpolant(
         }
     }
 
-    mdspan_1d bcoef_section(spline.bcoef_ptr.get() + offset, bspl.nbasis);
+    DSpan1D bcoef_section(spline.bcoef_ptr.get() + offset, bspl.nbasis);
     matrix->solve_inplace(bcoef_section);
 
     if (xmin_bc == BoundCond::PERIODIC and offset != 0) {
@@ -143,7 +143,7 @@ void Spline_interpolator_1D::compute_interpolation_points_uniform()
 {
     int n_interp_pts = bspl.nbasis - nbc_xmin - nbc_xmax;
     interp_pts_ptr = std::make_unique<double[]>(n_interp_pts);
-    interp_pts = mdspan_1d(interp_pts_ptr.get(), n_interp_pts);
+    interp_pts = DSpan1D(interp_pts_ptr.get(), n_interp_pts);
 
     if (xmin_bc == BoundCond::PERIODIC) {
         double shift(odd == 0 ? 0.5 : 0.0);
@@ -197,7 +197,7 @@ void Spline_interpolator_1D::compute_interpolation_points_non_uniform()
     const BSplines_non_uniform& bspl_nu = static_cast<const BSplines_non_uniform&>(bspl);
     int n_interp_pts = bspl_nu.nbasis - nbc_xmin - nbc_xmax;
     interp_pts_ptr = std::make_unique<double[]>(n_interp_pts);
-    interp_pts = mdspan_1d(interp_pts_ptr.get(), n_interp_pts);
+    interp_pts = DSpan1D(interp_pts_ptr.get(), n_interp_pts);
 
     int n_temp_knots(n_interp_pts - 1 + bspl_nu.degree);
     double temp_knots[n_temp_knots];
@@ -375,7 +375,7 @@ void Spline_interpolator_1D::build_matrix_system()
     // Hermite boundary conditions at xmin, if any
     if (xmin_bc == BoundCond::HERMITE) {
         double derivs_ptr[(bspl.degree / 2 + 1) * (bspl.degree + 1)];
-        mdspan_2d derivs(derivs_ptr, bspl.degree + 1, bspl.degree / 2 + 1);
+        DSpan2D derivs(derivs_ptr, bspl.degree + 1, bspl.degree / 2 + 1);
         bspl.eval_basis_and_n_derivs(bspl.xmin, nbc_xmin, derivs, jmin);
 
         // In order to improve the condition number of the matrix, we normalize
@@ -397,7 +397,7 @@ void Spline_interpolator_1D::build_matrix_system()
 
     // Interpolation points
     double values_ptr[bspl.degree + 1];
-    mdspan_1d values(values_ptr, bspl.degree + 1);
+    DSpan1D values(values_ptr, bspl.degree + 1);
     for (int i(0); i < bspl.nbasis - nbc_xmin - nbc_xmax; ++i) {
         bspl.eval_basis(interp_pts(i), values, jmin);
         for (int s(0); s < bspl.degree + 1; ++s) {
@@ -409,7 +409,7 @@ void Spline_interpolator_1D::build_matrix_system()
     // Hermite boundary conditions at xmax, if any
     if (xmax_bc == BoundCond::HERMITE) {
         double derivs_ptr[(bspl.degree / 2 + 1) * (bspl.degree + 1)];
-        mdspan_2d derivs(derivs_ptr, bspl.degree + 1, bspl.degree / 2 + 1);
+        DSpan2D derivs(derivs_ptr, bspl.degree + 1, bspl.degree / 2 + 1);
 
         bspl.eval_basis_and_n_derivs(bspl.xmax, nbc_xmax, derivs, jmin);
 

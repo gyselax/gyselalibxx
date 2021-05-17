@@ -15,7 +15,7 @@
 using std::max;
 using std::min;
 
-void Matrix::solve_inplace(mdspan_1d& b) const
+void Matrix::solve_inplace(DSpan1D& b) const
 {
     assert(b.extent(0) == n);
     int info = solve_inplace_method('N', b.data(), b.extent(0), 1);
@@ -26,7 +26,7 @@ void Matrix::solve_inplace(mdspan_1d& b) const
     }
 }
 
-void Matrix::solve_transpose_inplace(mdspan_1d& b) const
+void Matrix::solve_transpose_inplace(DSpan1D& b) const
 {
     assert(b.extent(0) == n);
     int info = solve_inplace_method('T', b.data(), b.extent(0), 1);
@@ -37,7 +37,7 @@ void Matrix::solve_transpose_inplace(mdspan_1d& b) const
     }
 }
 
-void Matrix::solve_inplace_matrix(mdspan_2d& bx) const
+void Matrix::solve_inplace_matrix(DSpan2D& bx) const
 {
     assert(bx.extent(1) == n);
     int info = solve_inplace_method('N', bx.data(), bx.extent(1), bx.extent(0));

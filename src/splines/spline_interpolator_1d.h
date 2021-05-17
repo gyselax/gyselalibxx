@@ -15,13 +15,13 @@ class Spline_interpolator_1D
 public:
     Spline_interpolator_1D(const BSplines& bspl, BoundCond xmin_bc, BoundCond xmax_bc);
 
-    const mdspan_1d& get_interp_points() const;
+    const DSpan1D& get_interp_points() const;
 
     void compute_interpolant(
             Spline_1D& spline,
-            const mdspan_1d& vals,
-            const mdspan_1d* derivs_xmin = nullptr,
-            const mdspan_1d* derivs_xmax = nullptr) const;
+            const DSpan1D& vals,
+            const DSpan1D* derivs_xmin = nullptr,
+            const DSpan1D* derivs_xmax = nullptr) const;
 
     static int compute_num_cells(int degree, BoundCond xmin, BoundCond xmax, int nipts);
 
@@ -41,7 +41,7 @@ private:
 
     void constructor_sanity_checks();
     void allocate_matrix(int kl, int ku);
-    void compute_interpolant_degree1(Spline_1D& spline, const mdspan_1d& vals) const;
+    void compute_interpolant_degree1(Spline_1D& spline, const DSpan1D& vals) const;
     void build_matrix_system();
 
     const BSplines& bspl;
@@ -53,7 +53,7 @@ private:
 
     // mesh info: TODO use Mesh
     std::unique_ptr<double[]> interp_pts_ptr;
-    mdspan_1d interp_pts;
+    DSpan1D interp_pts;
 
     // interpolator specific
     std::unique_ptr<Matrix> matrix;

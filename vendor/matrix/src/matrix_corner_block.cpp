@@ -98,7 +98,7 @@ void Matrix_Corner_Block::factorize()
     delta.factorize();
 }
 
-void Matrix_Corner_Block::solve_lambda_section(mdspan_1d& u, mdspan_1d const& v) const
+void Matrix_Corner_Block::solve_lambda_section(DSpan1D& u, DSpan1D const& v) const
 {
     for (int i(0); i < k; ++i) {
         // Upper diagonals in lambda
@@ -107,7 +107,7 @@ void Matrix_Corner_Block::solve_lambda_section(mdspan_1d& u, mdspan_1d const& v)
         }
     }
 }
-void Matrix_Corner_Block::solve_lambda_section(mdspan_2d& u, mdspan_2d const& v) const
+void Matrix_Corner_Block::solve_lambda_section(DSpan2D& u, DSpan2D const& v) const
 {
     for (int i(0); i < k; ++i) {
         // Upper diagonals in lambda
@@ -119,7 +119,7 @@ void Matrix_Corner_Block::solve_lambda_section(mdspan_2d& u, mdspan_2d const& v)
     }
 }
 
-void Matrix_Corner_Block::solve_lambda_section_transpose(mdspan_1d& u, mdspan_1d const& v) const
+void Matrix_Corner_Block::solve_lambda_section_transpose(DSpan1D& u, DSpan1D const& v) const
 {
     for (int i(0); i < k; ++i) {
         // Upper diagonals in (*lambda)
@@ -129,11 +129,11 @@ void Matrix_Corner_Block::solve_lambda_section_transpose(mdspan_1d& u, mdspan_1d
     }
 }
 
-void Matrix_Corner_Block::solve_inplace(mdspan_1d& bx) const
+void Matrix_Corner_Block::solve_inplace(DSpan1D& bx) const
 {
     assert(bx.extent(0) == n);
-    mdspan_1d u(bx.data(), nb);
-    mdspan_1d v(bx.data() + nb, k);
+    DSpan1D u(bx.data(), nb);
+    DSpan1D v(bx.data() + nb, k);
 
     q_block->solve_inplace(u);
 
@@ -150,11 +150,11 @@ void Matrix_Corner_Block::solve_inplace(mdspan_1d& bx) const
     }
 }
 
-void Matrix_Corner_Block::solve_transpose_inplace(mdspan_1d& bx) const
+void Matrix_Corner_Block::solve_transpose_inplace(DSpan1D& bx) const
 {
     assert(bx.extent(0) == n);
-    mdspan_1d u(bx.data(), nb);
-    mdspan_1d v(bx.data() + nb, k);
+    DSpan1D u(bx.data(), nb);
+    DSpan1D v(bx.data() + nb, k);
 
     delta.solve_inplace(v);
 
@@ -171,11 +171,11 @@ void Matrix_Corner_Block::solve_transpose_inplace(mdspan_1d& bx) const
     }
 }
 
-void Matrix_Corner_Block::solve_inplace_matrix(mdspan_2d& bx) const
+void Matrix_Corner_Block::solve_inplace_matrix(DSpan2D& bx) const
 {
     assert(bx.extent(0) == n);
-    mdspan_2d u(bx.data(), nb, bx.extent(1));
-    mdspan_2d v(bx.data() + nb * bx.extent(1), k, bx.extent(1));
+    DSpan2D u(bx.data(), nb, bx.extent(1));
+    DSpan2D v(bx.data() + nb * bx.extent(1), k, bx.extent(1));
 
     q_block->solve_inplace_matrix(u);
 

@@ -13,10 +13,10 @@ public:
     double eval(const double x1, const double x2) const;
     template <bool deriv1, bool deriv2>
     double eval_deriv(const double x1, const double x2) const;
-    void eval_array(mdspan_2d const& x1, mdspan_2d const& x2, mdspan_2d& y) const;
+    void eval_array(DSpan2D const& x1, DSpan2D const& x2, DSpan2D& y) const;
     template <bool deriv1, bool deriv2>
-    void eval_array_deriv(mdspan_2d const& x1, mdspan_2d const& x2, mdspan_2d& y) const;
-    void integrate_dim(mdspan_1d& y, const int dim) const;
+    void eval_array_deriv(DSpan2D const& x1, DSpan2D const& x2, DSpan2D& y) const;
+    void integrate_dim(DSpan1D& y, const int dim) const;
     double integrate() const;
 
 private:
@@ -32,16 +32,16 @@ private:
             double x2,
             const T1& bspl1,
             const T2& bspl2,
-            mdspan_1d& vals1,
-            mdspan_1d& vals2) const;
+            DSpan1D& vals1,
+            DSpan1D& vals2) const;
     template <
             class T1,
             typename std::enable_if<std::is_base_of<BSplines, T1>::value>::type* = nullptr,
             class T2,
             typename std::enable_if<std::is_base_of<BSplines, T2>::value>::type* = nullptr>
-    void eval_array_loop(mdspan_2d const& x1, mdspan_2d const& x2, mdspan_2d& y) const;
+    void eval_array_loop(DSpan2D const& x1, DSpan2D const& x2, DSpan2D& y) const;
     std::unique_ptr<double[]> bcoef_ptr;
-    mdspan_2d bcoef;
+    DSpan2D bcoef;
     const BSplines& bspl1;
     const BSplines& bspl2;
     friend class Spline_interpolator_2D;

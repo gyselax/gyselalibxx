@@ -32,7 +32,7 @@ Spline_interpolator_2D::Spline_interpolator_2D(
  * @param[out] tau1  x1 coordinates of interpolation points
  * @param[out] tau2  x2 coordinates of interpolation points
  ******************************************************************************/
-std::array<const mdspan_1d, 2> Spline_interpolator_2D::get_interp_points() const
+std::array<const DSpan1D, 2> Spline_interpolator_2D::get_interp_points() const
 {
     return {interp_1d[0].get_interp_points(), interp_1d[1].get_interp_points()};
 }
@@ -74,7 +74,7 @@ std::array<int, 2> Spline_interpolator_2D::compute_num_cells(
  ******************************************************************************/
 void Spline_interpolator_2D::compute_interpolant(
         Spline_2D const& spline,
-        mdspan_2d const& vals,
+        DSpan2D const& vals,
         Boundary_data_2d boundary_data) const
 {
     int dim_0_size = (bspl[0]->nbasis - nbc_xmin[0] - nbc_xmax[0]);
@@ -181,8 +181,7 @@ void Spline_interpolator_2D::compute_interpolant(
  * @param[in]    gtau           function values of interpolation points
  * @param[in]    boundary_data  (optional) structure with boundary conditions
  ******************************************************************************/
-void Spline_interpolator_2D::compute_interpolant(Spline_2D const& spline, mdspan_2d const& vals)
-        const
+void Spline_interpolator_2D::compute_interpolant(Spline_2D const& spline, DSpan2D const& vals) const
 {
     assert(xmin_bc[0] != BoundCond::HERMITE);
     assert(xmax_bc[0] != BoundCond::HERMITE);
@@ -205,7 +204,7 @@ void Spline_interpolator_2D::compute_interpolant(Spline_2D const& spline, mdspan
  ******************************************************************************/
 void Spline_interpolator_2D::compute_interpolant_boundary_done(
         Spline_2D const& spline,
-        mdspan_2d const& vals) const
+        DSpan2D const& vals) const
 {
     assert(vals.extent(0) == (bspl[0]->nbasis - nbc_xmin[0] - nbc_xmax[0]));
     assert(vals.extent(1) == (bspl[1]->nbasis - nbc_xmin[1] - nbc_xmax[1]));
@@ -223,15 +222,15 @@ void Spline_interpolator_2D::compute_interpolant_boundary_done(
 
     std::array<Spline_1D, 2> spline_1d({Spline_1D(*bspl[0]), Spline_1D(*bspl[1])});
     double t_storage_ptr[spline.bcoef.extent(0) * spline.bcoef.extent(1)];
-    mdspan_2d t_storage(t_storage_ptr, spline.bcoef.extent(1), spline.bcoef.extent(0));
+    DSpan2D t_storage(t_storage_ptr, spline.bcoef.extent(1), spline.bcoef.extent(0));
     // Cycle over x1 position (or order of x1-derivative at boundary)
     // and interpolate f along x2 direction. Store coefficients in bcoef
     {
         int i(0);
         for (; i < bspl[0]->nbasis; ++i) {
-            mdspan_1d values(&spline.bcoef(i, nbc_xmin[1]), dim_1_size);
-            mdspan_1d derivs_xmin(&spline.bcoef(i, 0), nbc_xmin[1]);
-            mdspan_1d derivs_xmax(&spline.bcoef(i, bspl[1]->nbasis - nbc_xmax[1]), nbc_xmax[1]);
+            DSpan1D values(&spline.bcoef(i, nbc_xmin[1]), dim_1_size);
+            DSpan1D derivs_xmin(&spline.bcoef(i, 0), nbc_xmin[1]);
+            DSpan1D derivs_xmax(&spline.bcoef(i, bspl[1]->nbasis - nbc_xmax[1]), nbc_xmax[1]);
             interp_1d[1].compute_interpolant(spline_1d[1], values, &derivs_xmin, &derivs_xmax);
 
             int j(0);
@@ -254,9 +253,9 @@ void Spline_interpolator_2D::compute_interpolant_boundary_done(
     {
         int j(0);
         for (; j < bspl[1]->nbasis; ++j) {
-            mdspan_1d values(&t_storage(j, nbc_xmin[0]), dim_0_size);
-            mdspan_1d derivs_xmin(&t_storage(j, 0), nbc_xmin[0]);
-            mdspan_1d derivs_xmax(&t_storage(j, bspl[0]->nbasis - nbc_xmax[0]), nbc_xmax[0]);
+            DSpan1D values(&t_storage(j, nbc_xmin[0]), dim_0_size);
+            DSpan1D derivs_xmin(&t_storage(j, 0), nbc_xmin[0]);
+            DSpan1D derivs_xmax(&t_storage(j, bspl[0]->nbasis - nbc_xmax[0]), nbc_xmax[0]);
             interp_1d[0].compute_interpolant(spline_1d[0], values, &derivs_xmin, &derivs_xmax);
 
             int i(0);

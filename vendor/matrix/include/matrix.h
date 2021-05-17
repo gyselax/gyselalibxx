@@ -13,9 +13,9 @@ public:
     virtual double get_element(int i, int j) const = 0;
     virtual void set_element(int i, int j, double aij) = 0;
     virtual void factorize();
-    virtual void solve_inplace(mdspan_1d& b) const;
-    virtual void solve_transpose_inplace(mdspan_1d& b) const;
-    virtual void solve_inplace_matrix(mdspan_2d& bx) const;
+    virtual void solve_inplace(DSpan1D& b) const;
+    virtual void solve_transpose_inplace(DSpan1D& b) const;
+    virtual void solve_inplace_matrix(DSpan2D& bx) const;
     int get_size() const
     {
         return n;

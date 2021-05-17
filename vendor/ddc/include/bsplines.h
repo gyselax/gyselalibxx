@@ -12,10 +12,10 @@ public:
 
     virtual ~BSplines() = default;
 
-    virtual void eval_basis(double x, mdspan_1d& values, int& jmin) const = 0;
-    virtual void eval_deriv(double x, mdspan_1d& derivs, int& jmin) const = 0;
-    virtual void eval_basis_and_n_derivs(double x, int n, mdspan_2d& derivs, int& jmin) const = 0;
-    virtual void integrals(mdspan_1d& int_vals) const = 0;
+    virtual void eval_basis(double x, DSpan1D& values, int& jmin) const = 0;
+    virtual void eval_deriv(double x, DSpan1D& derivs, int& jmin) const = 0;
+    virtual void eval_basis_and_n_derivs(double x, int n, DSpan2D& derivs, int& jmin) const = 0;
+    virtual void integrals(DSpan1D& int_vals) const = 0;
     virtual double get_knot(int idx) const = 0;
 
     const int degree;

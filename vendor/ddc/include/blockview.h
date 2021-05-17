@@ -17,7 +17,7 @@ class BlockView;
 template <bool O_CONTIGUOUS, class OElementType, class... OTags>
 static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
         UniformMesh<OTags...> const& mesh,
-        ViewND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view);
+        SpanND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view);
 
 namespace detail {
 template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor, class... Indices>
@@ -42,7 +42,7 @@ class BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>
 {
 public:
     /// ND memory view
-    using RawView = ViewND<sizeof...(Tags), ElementType, CONTIGUOUS>;
+    using RawView = SpanND<sizeof...(Tags), ElementType, CONTIGUOUS>;
 
     using MDomain_ = MDomain<Tags...>;
 
@@ -92,7 +92,7 @@ private:
         {
             auto view = subspan(block.raw_view(), std::forward<OSliceSpecs>(slices)...);
             auto mesh = submesh(block.mesh(), std::forward<OSliceSpecs>(slices)...);
-            return make_view<::is_contiguous<decltype(view)>, ElementType>(mesh, view);
+            return make_view<::is_contiguous_v<decltype(view)>, ElementType>(mesh, view);
         }
     };
 
@@ -360,7 +360,7 @@ public:
 template <bool O_CONTIGUOUS, class OElementType, class... OTags>
 static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
         UniformMesh<OTags...> const& mesh,
-        ViewND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view)
+        SpanND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view)
 {
     return BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS>(mesh, raw_view);
 }

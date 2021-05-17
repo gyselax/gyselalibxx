@@ -63,19 +63,6 @@ struct accessor
     }
 };
 
-} // namespace detail
-
-
-template <size_t N>
-using ExtentsND = typename detail::ExtentNDBuilder<std::make_index_sequence<N>>::type;
-
-using Extents1D = ExtentsND<1>;
-
-using Extents2D = ExtentsND<2>;
-
-
-namespace detail {
-
 template <int N, typename LayoutPolicy, typename = std::enable_if<(N >= 0)>>
 struct LayoutAddND;
 
@@ -93,17 +80,14 @@ struct LayoutAddND<N, std::experimental::layout_stride<Strides...>, std::enable_
             std::experimental::layout_stride<std::experimental::dynamic_extent, Strides...>>::type;
 };
 
-} // namespace detail
-
-
-template <int N>
-using LayoutND = typename detail::LayoutAddND<N - 1, std::experimental::layout_stride<1>>::type;
+template <size_t N>
+using ExtentsND = typename ExtentNDBuilder<std::make_index_sequence<N>>::type;
 
 template <int N>
-using NCLayoutND = typename detail::LayoutAddND<N, std::experimental::layout_stride<>>::type;
+using LayoutND = typename LayoutAddND<N - 1, std::experimental::layout_stride<1>>::type;
 
-
-namespace detail {
+template <int N>
+using NCLayoutND = typename LayoutAddND<N, std::experimental::layout_stride<>>::type;
 
 template <int N, class ElementType, bool CONTIGUOUS = true>
 struct ViewNDMaker;
@@ -115,61 +99,15 @@ struct ViewNDMaker<N, ElementType, true>
             ElementType,
             ExtentsND<N>,
             std::experimental::layout_right,
-            detail::accessor<ElementType>>;
+            accessor<ElementType>>;
 };
 
 template <int N, class ElementType>
 struct ViewNDMaker<N, ElementType, false>
 {
     using type = std::experimental::
-            basic_mdspan<ElementType, ExtentsND<N>, NCLayoutND<N>, detail::accessor<ElementType>>;
+            basic_mdspan<ElementType, ExtentsND<N>, NCLayoutND<N>, accessor<ElementType>>;
 };
-
-} // namespace detail
-
-
-template <int N, class ElementType, bool CONTIGUOUS = true>
-using ViewND = typename detail::ViewNDMaker<N, ElementType, CONTIGUOUS>::type;
-
-template <class ElementType, bool CONTIGUOUS = true>
-using View1D = ViewND<1, ElementType, CONTIGUOUS>;
-
-using mdspan_1d = View1D<double>;
-
-template <class ElementType, bool CONTIGUOUS = true>
-using View2D = ViewND<2, ElementType, CONTIGUOUS>;
-
-using mdspan_2d = View2D<double>;
-
-
-template <class>
-struct IsContiguous;
-template <ptrdiff_t S>
-struct IsContiguous<std::experimental::layout_stride<S>>
-{
-    static constexpr bool val = (S == 1);
-};
-template <ptrdiff_t SH, ptrdiff_t SN, ptrdiff_t... ST>
-struct IsContiguous<std::experimental::layout_stride<SH, SN, ST...>>
-{
-    static constexpr bool val = IsContiguous<std::experimental::layout_stride<SN, ST...>>::val;
-};
-template <>
-struct IsContiguous<std::experimental::layout_right>
-{
-    static constexpr bool val = true;
-};
-template <class ElementType, class Extents, class LayoutPolicy, class AccessorPolicy>
-struct IsContiguous<
-        std::experimental::basic_mdspan<ElementType, Extents, LayoutPolicy, AccessorPolicy>>
-{
-    static constexpr bool val = IsContiguous<LayoutPolicy>::val;
-};
-
-template <class C>
-constexpr bool is_contiguous = IsContiguous<C>::val;
-
-namespace details {
 
 /// Note: We use the comma operator to fill the input parameters
 ///
@@ -207,7 +145,71 @@ std::ostream& stream_impl(
     return os;
 }
 
-} // namespace details
+
+template <class>
+struct IsContiguous;
+template <ptrdiff_t S>
+struct IsContiguous<std::experimental::layout_stride<S>>
+{
+    static constexpr bool val = (S == 1);
+};
+template <ptrdiff_t SH, ptrdiff_t SN, ptrdiff_t... ST>
+struct IsContiguous<std::experimental::layout_stride<SH, SN, ST...>>
+{
+    static constexpr bool val = IsContiguous<std::experimental::layout_stride<SN, ST...>>::val;
+};
+template <>
+struct IsContiguous<std::experimental::layout_right>
+{
+    static constexpr bool val = true;
+};
+template <class ElementType, class Extents, class LayoutPolicy, class AccessorPolicy>
+struct IsContiguous<
+        std::experimental::basic_mdspan<ElementType, Extents, LayoutPolicy, AccessorPolicy>>
+{
+    static constexpr bool val = IsContiguous<LayoutPolicy>::val;
+};
+
+} // namespace detail
+
+
+template <size_t N>
+using ExtentsND = detail::ExtentsND<N>;
+
+template <int N>
+using LayoutND = detail::LayoutND<N>;
+
+template <int N>
+using NCLayoutND = detail::NCLayoutND<N>;
+
+template <int N, class ElementType, bool CONTIGUOUS = true>
+using SpanND = typename detail::ViewNDMaker<N, ElementType, CONTIGUOUS>::type;
+
+template <int N, class ElementType, bool CONTIGUOUS = true>
+using ViewND = typename detail::ViewNDMaker<N, ElementType const, CONTIGUOUS>::type;
+
+template <class ElementType, bool CONTIGUOUS = true>
+using Span1D = SpanND<1, ElementType, CONTIGUOUS>;
+
+template <class ElementType, bool CONTIGUOUS = true>
+using Span2D = SpanND<2, ElementType, CONTIGUOUS>;
+
+template <class ElementType, bool CONTIGUOUS = true>
+using View1D = ViewND<1, ElementType, CONTIGUOUS>;
+
+template <class ElementType, bool CONTIGUOUS = true>
+using View2D = ViewND<2, ElementType, CONTIGUOUS>;
+
+using DSpan1D = Span1D<double>;
+
+using DSpan2D = Span2D<double>;
+
+using DView1D = View1D<double>;
+
+using DView2D = View2D<double>;
+
+template <class C>
+constexpr bool is_contiguous_v = detail::IsContiguous<C>::val;
 
 /// Convenient function to dump a basic_mdspan, it recursively prints all dimensions.
 /// Disclaimer: use with caution for large arrays
@@ -216,5 +218,5 @@ std::ostream& operator<<(
         std::ostream& os,
         std::experimental::basic_mdspan<ElementType, Extents, Layout, Accessor> const& s)
 {
-    return details::stream_impl(os, s, std::make_index_sequence<Extents::rank()>());
+    return detail::stream_impl(os, s, std::make_index_sequence<Extents::rank()>());
 }

@@ -13,9 +13,9 @@ public:
 
 protected:
     virtual void calculate_delta_to_factorize() override;
-    virtual void solve_lambda_section(mdspan_1d& v, mdspan_1d const& u) const override;
-    virtual void solve_lambda_section(mdspan_2d& v, mdspan_2d const& u) const override;
-    virtual void solve_lambda_section_transpose(mdspan_1d& v, mdspan_1d const& u) const override;
+    virtual void solve_lambda_section(DSpan1D& v, DSpan1D const& u) const override;
+    virtual void solve_lambda_section(DSpan2D& v, DSpan2D const& u) const override;
+    virtual void solve_lambda_section_transpose(DSpan1D& v, DSpan1D const& u) const override;
     const int kl; // no. of subdiagonals
     const int ku; // no. of superdiagonals
 };

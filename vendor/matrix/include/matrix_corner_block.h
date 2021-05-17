@@ -12,16 +12,16 @@ public:
     virtual double get_element(int i, int j) const override;
     virtual void set_element(int i, int j, double a_ij) override;
     virtual void factorize() override;
-    virtual void solve_inplace(mdspan_1d& bx) const override;
-    virtual void solve_transpose_inplace(mdspan_1d& bx) const override;
-    virtual void solve_inplace_matrix(mdspan_2d& bx) const override;
+    virtual void solve_inplace(DSpan1D& bx) const override;
+    virtual void solve_transpose_inplace(DSpan1D& bx) const override;
+    virtual void solve_inplace_matrix(DSpan2D& bx) const override;
 
 protected:
     Matrix_Corner_Block(int n, int k, std::unique_ptr<Matrix> q, int lambda_size);
     virtual void calculate_delta_to_factorize();
-    virtual void solve_lambda_section(mdspan_1d& v, mdspan_1d const& u) const;
-    virtual void solve_lambda_section(mdspan_2d& v, mdspan_2d const& u) const;
-    virtual void solve_lambda_section_transpose(mdspan_1d& v, mdspan_1d const& u) const;
+    virtual void solve_lambda_section(DSpan1D& v, DSpan1D const& u) const;
+    virtual void solve_lambda_section(DSpan2D& v, DSpan2D const& u) const;
+    virtual void solve_lambda_section_transpose(DSpan1D& v, DSpan1D const& u) const;
     const int k; // small block size
     const int nb; // main block matrix size
     std::unique_ptr<double[]> Abm_1_gamma_ptr;
@@ -34,8 +34,8 @@ protected:
     //-------------------------------------
     std::unique_ptr<Matrix> q_block;
     Matrix_Dense delta;
-    mdspan_2d Abm_1_gamma;
-    mdspan_2d lambda;
+    DSpan2D Abm_1_gamma;
+    DSpan2D lambda;
 
 private:
     virtual int factorize_method() override

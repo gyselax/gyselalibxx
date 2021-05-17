@@ -30,8 +30,8 @@ double Spline_2D::eval_intern(
         double x2,
         const T1& bspl1,
         const T2& bspl2,
-        mdspan_1d& vals1,
-        mdspan_1d& vals2) const
+        DSpan1D& vals1,
+        DSpan1D& vals2) const
 {
     int jmin1, jmin2;
 
@@ -65,8 +65,8 @@ double Spline_2D::eval_deriv(const double x1, const double x2) const
 {
     double values1[bspl1.degree + 1];
     double values2[bspl2.degree + 1];
-    mdspan_1d vals1(values1, bspl1.degree + 1);
-    mdspan_1d vals2(values2, bspl2.degree + 1);
+    DSpan1D vals1(values1, bspl1.degree + 1);
+    DSpan1D vals2(values2, bspl2.degree + 1);
 
     if (bspl1.uniform) {
         if (bspl2.uniform) {
@@ -107,7 +107,7 @@ double Spline_2D::eval_deriv(const double x1, const double x2) const
     }
 }
 
-void Spline_2D::eval_array(mdspan_2d const& x1, mdspan_2d const& x2, mdspan_2d& y) const
+void Spline_2D::eval_array(DSpan2D const& x1, DSpan2D const& x2, DSpan2D& y) const
 {
     assert(x1.extent(0) == y.extent(0));
     assert(x1.extent(1) == y.extent(1));
@@ -126,12 +126,12 @@ template <
         typename std::enable_if<std::is_base_of<BSplines, T1>::value>::type* = nullptr,
         class T2,
         typename std::enable_if<std::is_base_of<BSplines, T2>::value>::type* = nullptr>
-void Spline_2D::eval_array_loop(mdspan_2d const& x1, mdspan_2d const& x2, mdspan_2d& y) const
+void Spline_2D::eval_array_loop(DSpan2D const& x1, DSpan2D const& x2, DSpan2D& y) const
 {
     double values1[bspl1.degree + 1];
     double values2[bspl2.degree + 1];
-    mdspan_1d vals1(values1, bspl1.degree + 1);
-    mdspan_1d vals2(values2, bspl2.degree + 1);
+    DSpan1D vals1(values1, bspl1.degree + 1);
+    DSpan1D vals2(values2, bspl2.degree + 1);
 
     int jmin1, jmin2;
 
@@ -150,7 +150,7 @@ void Spline_2D::eval_array_loop(mdspan_2d const& x1, mdspan_2d const& x2, mdspan
 }
 
 template <bool deriv1, bool deriv2>
-void Spline_2D::eval_array_deriv(mdspan_2d const& x1, mdspan_2d const& x2, mdspan_2d& y) const
+void Spline_2D::eval_array_deriv(DSpan2D const& x1, DSpan2D const& x2, DSpan2D& y) const
 {
     assert(x1.extent(0) == y.extent(0));
     assert(x1.extent(1) == y.extent(1));
@@ -164,7 +164,7 @@ void Spline_2D::eval_array_deriv(mdspan_2d const& x1, mdspan_2d const& x2, mdspa
     }
 }
 
-void Spline_2D::integrate_dim(mdspan_1d& y, const int dim) const
+void Spline_2D::integrate_dim(DSpan1D& y, const int dim) const
 {
     assert(dim >= 0 and dim < 2);
     assert(y.extent(0) == bcoef.extent(1 - dim));
@@ -172,7 +172,7 @@ void Spline_2D::integrate_dim(mdspan_1d& y, const int dim) const
     const BSplines& bspline((dim == 0) ? bspl1 : bspl2);
 
     double values[bcoef.extent(dim)];
-    mdspan_1d vals(values, bcoef.extent(dim));
+    DSpan1D vals(values, bcoef.extent(dim));
 
     bspline.integrals(vals);
 
@@ -196,12 +196,12 @@ void Spline_2D::integrate_dim(mdspan_1d& y, const int dim) const
 double Spline_2D::integrate() const
 {
     double int_values[bcoef.extent(0)];
-    mdspan_1d int_vals(int_values, bcoef.extent(0));
+    DSpan1D int_vals(int_values, bcoef.extent(0));
 
     integrate_dim(int_vals, 1);
 
     double values[bcoef.extent(0)];
-    mdspan_1d vals(values, bcoef.extent(0));
+    DSpan1D vals(values, bcoef.extent(0));
 
     bspl1.integrals(vals);
 

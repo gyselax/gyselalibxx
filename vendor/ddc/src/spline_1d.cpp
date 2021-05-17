@@ -24,7 +24,7 @@ bool Spline_1D::belongs_to_space(const BSplines& bspline) const
 }
 
 template <class T, typename std::enable_if<std::is_base_of<BSplines, T>::value>::type* = nullptr>
-double Spline_1D::eval_intern_no_bcs(double x, const T& bspl, mdspan_1d& vals) const
+double Spline_1D::eval_intern_no_bcs(double x, const T& bspl, DSpan1D& vals) const
 {
     int jmin;
 
@@ -41,7 +41,7 @@ template <
         class T,
         bool periodic,
         typename std::enable_if<std::is_base_of<BSplines, T>::value>::type* = nullptr>
-double Spline_1D::eval_intern(double x, const T& bspl, mdspan_1d& vals) const
+double Spline_1D::eval_intern(double x, const T& bspl, DSpan1D& vals) const
 {
     if constexpr (periodic) {
         if (x < bspl.xmin || x > bspl.xmax)
@@ -65,7 +65,7 @@ double Spline_1D::eval_intern(double x, const T& bspl, mdspan_1d& vals) const
 }
 
 template <class T, typename std::enable_if<std::is_base_of<BSplines, T>::value>::type* = nullptr>
-double Spline_1D::eval_deriv_intern(double x, const T& bspl, mdspan_1d& vals) const
+double Spline_1D::eval_deriv_intern(double x, const T& bspl, DSpan1D& vals) const
 {
     int jmin;
 
@@ -81,7 +81,7 @@ double Spline_1D::eval_deriv_intern(double x, const T& bspl, mdspan_1d& vals) co
 double Spline_1D::eval(double x) const
 {
     double values[bspl.degree + 1];
-    mdspan_1d vals(values, bspl.degree + 1);
+    DSpan1D vals(values, bspl.degree + 1);
 
     if (bspl.uniform) {
         if (bspl.periodic) {
@@ -109,7 +109,7 @@ double Spline_1D::eval(double x) const
 double Spline_1D::eval_deriv(double x) const
 {
     double values[bspl.degree + 1];
-    mdspan_1d vals(values, bspl.degree + 1);
+    DSpan1D vals(values, bspl.degree + 1);
 
     if (bspl.uniform)
         return eval_deriv_intern<
@@ -123,13 +123,13 @@ template <
         class T,
         bool periodic,
         typename std::enable_if<std::is_base_of<BSplines, T>::value>::type* = nullptr>
-void Spline_1D::eval_array_loop(mdspan_1d const& x, mdspan_1d& y) const
+void Spline_1D::eval_array_loop(DSpan1D const& x, DSpan1D& y) const
 {
     const T& l_bspl = static_cast<const T&>(bspl);
 
     assert(x.extent(0) == y.extent(0));
     double values[l_bspl.degree + 1];
-    mdspan_1d vals(values, l_bspl.degree + 1);
+    DSpan1D vals(values, l_bspl.degree + 1);
 
     for (int i(0); i < x.extent(0); ++i) {
         y(i) = eval_intern<T, periodic>(x(i), l_bspl, vals);
@@ -137,20 +137,20 @@ void Spline_1D::eval_array_loop(mdspan_1d const& x, mdspan_1d& y) const
 }
 
 template <class T, typename std::enable_if<std::is_base_of<BSplines, T>::value>::type* = nullptr>
-void Spline_1D::eval_array_deriv_loop(mdspan_1d const& x, mdspan_1d& y) const
+void Spline_1D::eval_array_deriv_loop(DSpan1D const& x, DSpan1D& y) const
 {
     const T& l_bspl = static_cast<const T&>(bspl);
 
     assert(x.extent(0) == y.extent(0));
     double values[l_bspl.degree + 1];
-    mdspan_1d vals(values, l_bspl.degree + 1);
+    DSpan1D vals(values, l_bspl.degree + 1);
 
     for (int i(0); i < x.extent(0); ++i) {
         y(i) = eval_deriv_intern<T>(x(i), l_bspl, vals);
     }
 }
 
-void Spline_1D::eval_array(mdspan_1d const x, mdspan_1d y) const
+void Spline_1D::eval_array(DSpan1D const x, DSpan1D y) const
 {
     if (bspl.uniform) {
         if (bspl.periodic) {
@@ -167,7 +167,7 @@ void Spline_1D::eval_array(mdspan_1d const x, mdspan_1d y) const
     }
 }
 
-void Spline_1D::eval_array_deriv(mdspan_1d const x, mdspan_1d y) const
+void Spline_1D::eval_array_deriv(DSpan1D const x, DSpan1D y) const
 {
     if (bspl.uniform)
         eval_array_deriv_loop<BSplines_uniform>(x, y);
@@ -178,7 +178,7 @@ void Spline_1D::eval_array_deriv(mdspan_1d const x, mdspan_1d y) const
 double Spline_1D::integrate() const
 {
     double values[bcoef.extent(0)];
-    mdspan_1d vals(values, bcoef.extent(0));
+    DSpan1D vals(values, bcoef.extent(0));
 
     bspl.integrals(vals);
 

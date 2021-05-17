@@ -93,7 +93,7 @@ void Matrix_Periodic_Banded::calculate_delta_to_factorize()
     }
 }
 
-void Matrix_Periodic_Banded::solve_lambda_section(mdspan_1d& u, mdspan_1d const& v) const
+void Matrix_Periodic_Banded::solve_lambda_section(DSpan1D& u, DSpan1D const& v) const
 {
     for (int i(0); i < k; ++i) {
         // Upper diagonals in lambda
@@ -107,7 +107,7 @@ void Matrix_Periodic_Banded::solve_lambda_section(mdspan_1d& u, mdspan_1d const&
     }
 }
 
-void Matrix_Periodic_Banded::solve_lambda_section(mdspan_2d& u, mdspan_2d const& v) const
+void Matrix_Periodic_Banded::solve_lambda_section(DSpan2D& u, DSpan2D const& v) const
 {
     for (int i(0); i < k; ++i) {
         // Upper diagonals in lambda
@@ -125,7 +125,7 @@ void Matrix_Periodic_Banded::solve_lambda_section(mdspan_2d& u, mdspan_2d const&
     }
 }
 
-void Matrix_Periodic_Banded::solve_lambda_section_transpose(mdspan_1d& u, mdspan_1d const& v) const
+void Matrix_Periodic_Banded::solve_lambda_section_transpose(DSpan1D& u, DSpan1D const& v) const
 {
     for (int i(0); i < k; ++i) {
         // Upper diagonals in lambda

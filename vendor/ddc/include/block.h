@@ -10,7 +10,7 @@ public:
     using BlockView_ = BlockView<MDomain<Tags...>, ElementType>;
 
     /// ND memory view
-    using RawView = ViewND<sizeof...(Tags), ElementType>;
+    using RawView = SpanND<sizeof...(Tags), ElementType>;
 
     using MDomain_ = MDomain<Tags...>;
 
