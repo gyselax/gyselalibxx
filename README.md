@@ -20,42 +20,13 @@ ctest --output-on-failure
 
 * cmake-3.15+
 * a c++-17 compiler:
-  * gcc-9 should work
+  * gcc-9+ should work
+* Lapack
+* FFTW-3
+* mdspan (embedded)
+* googletest (embedded)
 
 # Architecture
-
-Voice++ is designed using an imperative architecture with:
-* data classes with no to minimal behaviour and no polymorphism,
-* operation classes with no state.
-
-## Data classes
-
-### `array_tools`
-
-A simple wrapper around std::experimental::basic_mdspan to ensure better type
-replacability by always using layout_stride (no layout_left or layout_right).
-
-### `math_tools`
-
-Simple tensor manipulation on top of `array_tools`.
-
-### `matrix`
-
-Various in-house sparse matrix tools.
-
-### `geometry`
-
-Description of the geometry (real domain).
-
-### `mesh`
-
-Discretization of the real domain into a discrete domain (mesh) with the
-possibility to associate values to points of this mesh.
-
-### `splines` & `boundary_conditions`
-
-Another possible discretization based on a spline representation instead of a
-mesh.
 
 ## Operation classes
 
@@ -76,6 +47,10 @@ Each implementation class should take `const` references to the used operations
 interfaces as parameters of the constructor and store them so as to call them in
 the `operator()` implementation.
 
+### `splines` & `boundary_conditions`
+
+Spline interpolation (mesh to spline) & evaluation (spline to mesh)
+
 ### `time`
 
 Time iteration, including main time loop & predictor-corrector.
@@ -87,3 +62,5 @@ Vlasov solver including splitting & advections.
 ### `efield`
 
 TODO field solver.
+
+

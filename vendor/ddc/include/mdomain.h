@@ -5,20 +5,18 @@
 #include "uniformmesh.h"
 
 
-template <class... Tags>
-class RegularMDomain : public UniformMesh<Tags...>
+template <class Mesh>
+class MDomainImpl
 {
 public:
-    using RegularMesh_ = UniformMesh<Tags...>;
+    using Mesh_ = Mesh;
 
-    using RCoord_ = RCoord<Tags...>;
+    using RCoord_ = typename Mesh::RCoord_;
 
-    using MCoord_ = MCoord<Tags...>;
+    using MCoord_ = typename Mesh::MCoord_;
 
-    using Mesh = RegularMesh_;
-
-    template <class...>
-    friend class RegularMDomain;
+    template <class>
+    friend class MDomainImpl;
 
     struct Iterator
     {
@@ -144,6 +142,9 @@ public:
     };
 
 private:
+    /// The mesh on which this domain is defined
+    Mesh_ m_mesh;
+
     /// step size
     MCoord_ m_lbound;
 
@@ -151,36 +152,33 @@ private:
     MCoord_ m_ubound;
 
 public:
-    template <class... OTags>
-    inline constexpr RegularMDomain(const RegularMDomain<OTags...>& other) noexcept
-        : RegularMesh_(other)
+    template <class OMesh>
+    inline constexpr MDomainImpl(const MDomainImpl<OMesh>& other) noexcept
+        : m_mesh(other.m_mesh)
         , m_lbound(other.m_lbound)
         , m_ubound(other.m_ubound)
     {
     }
 
-    template <class... OTags>
-    inline constexpr RegularMDomain(RegularMDomain<OTags...>&& other) noexcept
-        : RegularMesh_(std::move(other))
+    template <class OMesh>
+    inline constexpr MDomainImpl(MDomainImpl<OMesh>&& other) noexcept
+        : m_mesh(std::move(other.m_mesh))
         , m_lbound(std::move(other.m_lbound))
         , m_ubound(std::move(other.m_ubound))
     {
     }
 
     template <class MeshType, class UboundType>
-    inline constexpr RegularMDomain(MeshType&& mesh, UboundType&& ubound) noexcept
-        : RegularMesh_(std::forward<MeshType>(mesh))
+    inline constexpr MDomainImpl(MeshType&& mesh, UboundType&& ubound) noexcept
+        : m_mesh(std::forward<MeshType>(mesh))
         , m_lbound(0)
         , m_ubound(std::forward<UboundType>(ubound))
     {
     }
 
     template <class MeshType, class LboundType, class UboundType>
-    inline constexpr RegularMDomain(
-            MeshType&& mesh,
-            LboundType&& lbound,
-            UboundType&& ubound) noexcept
-        : RegularMesh_(std::forward<MeshType>(mesh))
+    inline constexpr MDomainImpl(MeshType&& mesh, LboundType&& lbound, UboundType&& ubound) noexcept
+        : m_mesh(std::forward<MeshType>(mesh))
         , m_lbound(std::forward<LboundType>(lbound))
         , m_ubound(std::forward<UboundType>(ubound))
     {
@@ -188,40 +186,50 @@ public:
     }
 
     template <class OriginType, class StepType, class LboundType, class UboundType>
-    inline constexpr RegularMDomain(
+    inline constexpr MDomainImpl(
             OriginType&& origin,
             StepType&& step,
             LboundType&& lbound,
             UboundType&& ubound) noexcept
-        : RegularMesh_(std::forward<OriginType>(origin), std::forward<StepType>(step))
+        : m_mesh(std::forward<OriginType>(origin), std::forward<StepType>(step))
         , m_lbound(std::forward<LboundType>(lbound))
         , m_ubound(std::forward<UboundType>(ubound))
     {
         assert((m_lbound == MCoord_ {0ul}) && "non null lbound is not supported yet");
     }
 
-    friend constexpr bool operator==(const RegularMDomain& xx, const RegularMDomain& yy)
+    friend constexpr bool operator==(const MDomainImpl& xx, const MDomainImpl& yy)
     {
         return (&xx == &yy)
-               || (static_cast<RegularMesh_>(xx) == static_cast<RegularMesh_>(yy)
-                   && xx.m_lbound == yy.m_lbound && xx.m_ubound == yy.m_ubound);
+               || (xx.mesh() == yy.mesh() && xx.m_lbound == yy.m_lbound
+                   && xx.m_ubound == yy.m_ubound);
     }
 
-    friend constexpr bool operator!=(const RegularMDomain& xx, const RegularMDomain& yy)
+    friend constexpr bool operator!=(const MDomainImpl& xx, const MDomainImpl& yy)
     {
         return !operator==(xx, yy);
     }
 
     template <class... OTags>
-    friend constexpr bool operator==(const RegularMDomain& xx, const RegularMDomain<OTags...>& yy)
+    friend constexpr bool operator==(const MDomainImpl& xx, const MDomainImpl<OTags...>& yy)
     {
         return false;
     }
 
     template <class... OTags>
-    friend constexpr bool operator!=(const RegularMDomain& xx, const RegularMDomain<OTags...>& yy)
+    friend constexpr bool operator!=(const MDomainImpl& xx, const MDomainImpl<OTags...>& yy)
     {
         return false;
+    }
+
+    inline constexpr Mesh_ const& mesh() const noexcept
+    {
+        return m_mesh;
+    }
+
+    inline constexpr Mesh_& mesh() noexcept
+    {
+        return m_mesh;
     }
 
     inline constexpr MCoord_& lbound() noexcept
@@ -242,13 +250,13 @@ public:
 
     inline constexpr RCoord_ rmin() const noexcept
     {
-        return this->to_real(lbound());
+        return mesh().to_real(lbound());
     }
 
     template <class... OTags>
     inline constexpr RCoord<OTags...> rmin() const noexcept
     {
-        return this->to_real(lbound<OTags...>());
+        return mesh().to_real(lbound<OTags...>());
     }
 
     inline constexpr MCoord_& ubound() noexcept
@@ -269,13 +277,13 @@ public:
 
     inline constexpr RCoord_ rmax() const noexcept
     {
-        return this->to_real(ubound());
+        return mesh().to_real(ubound());
     }
 
     template <class... OTags>
     inline constexpr RCoord<OTags...> rmax() const noexcept
     {
-        return this->to_real(ubound<OTags...>());
+        return mesh().to_real(ubound<OTags...>());
     }
 
     template <class QueryTag>
@@ -286,7 +294,7 @@ public:
 
     inline constexpr ptrdiff_t size() const noexcept
     {
-        return ((extent<Tags>()) * ...);
+        return size(std::make_index_sequence<Mesh_::rank()>());
     }
 
     inline constexpr bool empty() const noexcept
@@ -301,25 +309,25 @@ public:
 
     constexpr Iterator begin() const noexcept
     {
-        static_assert(sizeof...(Tags) == 1);
+        static_assert(Mesh_::rank() == 1);
         return Iterator {static_cast<MCoord_>(m_lbound)};
     }
 
     constexpr Iterator cbegin() const noexcept
     {
-        static_assert(sizeof...(Tags) == 1);
+        static_assert(Mesh_::rank() == 1);
         return begin();
     }
 
     constexpr Iterator end() const noexcept
     {
-        static_assert(sizeof...(Tags) == 1);
+        static_assert(Mesh_::rank() == 1);
         return Iterator {static_cast<MCoord_>(m_ubound)};
     }
 
     constexpr Iterator cend() const noexcept
     {
-        static_assert(sizeof...(Tags) == 1);
+        static_assert(Mesh_::rank() == 1);
         return end();
     }
 
@@ -338,26 +346,37 @@ public:
     {
         return begin()[__n];
     }
+
+private:
+    template <size_t... Idxs>
+    inline constexpr ptrdiff_t size(std::index_sequence<Idxs...>) const noexcept
+    {
+        return ((m_ubound[Idxs] - m_lbound[Idxs]) * ...);
+    }
 };
 
-template <class... Tags>
-std::ostream& operator<<(std::ostream& out, RegularMDomain<Tags...> const& dom)
+template <class Mesh>
+std::ostream& operator<<(std::ostream& out, MDomainImpl<Mesh> const& dom)
 {
-    out << "RegularMDomain( origin=" << dom.origin() << ", unitvec=" << dom.step()
+    out << "MDomain( origin=" << dom.mesh().origin() << ", unitvec=" << dom.mesh().step()
         << ", lower_bound=" << dom.lbound() << ", upper_bound(excluded)=" << dom.ubound() << " )";
     return out;
 }
 
-/* For now MDomain is just an alias to RegularMDomain, in the long run, we should use a tuple-based
+/* For now MDomain is just an alias to MDomain, in the long run, we should use a tuple-based
  * solutions to have different types in each dimension
  */
 template <class... Tags>
-using MDomain = RegularMDomain<Tags...>;
+using MDomain = MDomainImpl<UniformMesh<Tags...>>;
 
-using MDomainT = MDomain<Dim::T>;
+template <class... Tags>
+using RegularMDomain = MDomainImpl<UniformMesh<Tags...>>;
 
-using MDomainX = MDomain<Dim::X>;
+template <class... Tags>
+using UniformMDomain = MDomainImpl<UniformMesh<Tags...>>;
 
-using MDomainVx = MDomain<Dim::Vx>;
+using MDomainX = UniformMDomain<Dim::X>;
 
-using MDomainXVx = MDomain<Dim::X, Dim::Vx>;
+using MDomainVx = UniformMDomain<Dim::Vx>;
+
+using MDomainXVx = UniformMDomain<Dim::X, Dim::Vx>;

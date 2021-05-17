@@ -46,7 +46,7 @@ public:
 
     using MDomain_ = MDomain<Tags...>;
 
-    using Mesh = typename MDomain_::Mesh;
+    using Mesh = typename MDomain_::Mesh_;
 
     using MCoord_ = typename MDomain_::MCoord_;
 

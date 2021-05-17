@@ -1,3 +1,5 @@
+#pragma once
+
 #include "blockview.h"
 
 template <class... Tags, class ElementType>
@@ -12,7 +14,7 @@ public:
 
     using MDomain_ = MDomain<Tags...>;
 
-    using Mesh = typename MDomain_::Mesh;
+    using Mesh = typename MDomain_::Mesh_;
 
     using MCoord_ = typename MDomain_::MCoord_;
 
@@ -45,7 +47,7 @@ public:
     template <class... OTags>
     explicit inline constexpr Block(const MDomain<OTags...>& domain)
         : BlockView_(
-                domain,
+                domain.mesh(),
                 RawView(new (std::align_val_t(64)) value_type[domain.size()],
                         ExtentsND<sizeof...(Tags)>(domain.template extent<Tags>()...)))
     {

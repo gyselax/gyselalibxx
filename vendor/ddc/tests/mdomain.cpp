@@ -32,7 +32,7 @@ TEST(MDomain, rmax)
                   RCoordXVx(2., 2.),
                   MCoordXVx(0ul, 0ul),
                   MCoordXVx(100ul, 100ul));
-    EXPECT_EQ(dom2d.to_real(dom2d.ubound()).get<Dim::X>(), 200.);
+    EXPECT_EQ(dom2d.mesh().to_real(dom2d.ubound()).get<Dim::X>(), 200.);
     EXPECT_EQ(dom2d.rmax().get<Dim::X>(), 200.);
     EXPECT_EQ(dom2d.rmax<Dim::X>(), 200.);
 }

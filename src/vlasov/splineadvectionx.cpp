@@ -51,11 +51,11 @@ DBlockViewXVx SplineAdvectionX::operator()(DBlockViewXVx fdistribu, double mass_
 
     for (MCoordVx vii : v_dom) {
         // compute the displacement
-        const double dx = mass_ratio * dt * v_dom.to_real(vii);
+        const double dx = mass_ratio * dt * v_dom.mesh().to_real(vii);
 
         // compute the coordinates of the feet
         for (MCoordX xii : x_dom) {
-            feet_coords(xii) = RCoordX(x_dom.to_real(xii) - dx);
+            feet_coords(xii) = RCoordX(x_dom.mesh().to_real(xii) - dx);
         }
 
         // copy the slice in contiguous memory
