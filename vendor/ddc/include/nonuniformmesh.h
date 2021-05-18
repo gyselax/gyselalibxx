@@ -165,7 +165,7 @@ public:
     }
 
     inline constexpr NonUniformMesh(View1D<const RCoord_> points, MCoord_ lbound)
-        : m_points(&points[0], &points[points.extent(0)])
+        : m_points(points.data(), points.data() + points.extent(0))
         , m_lbound(lbound)
     {
     }
