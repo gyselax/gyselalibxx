@@ -20,9 +20,12 @@ TEST(MDomain, ubound)
             dom2d(RCoordXVx(0., 0.),
                   RCoordXVx(2., 2.),
                   MCoordXVx(0ul, 0ul),
-                  MCoordXVx(100ul, 100ul));
+                  MCoordXVx(100ul, 200ul));
     EXPECT_EQ(dom2d.ubound().get<Dim::X>(), 100ul);
     EXPECT_EQ(dom2d.ubound<Dim::X>(), 100ul);
+
+    EXPECT_EQ(dom2d.ubound().get<Dim::Vx>(), 200ul);
+    EXPECT_EQ(dom2d.ubound<Dim::Vx>(), 200ul);
 }
 
 TEST(MDomain, rmax)
@@ -31,8 +34,12 @@ TEST(MDomain, rmax)
             dom2d(RCoordXVx(0., 0.),
                   RCoordXVx(2., 2.),
                   MCoordXVx(0ul, 0ul),
-                  MCoordXVx(100ul, 100ul));
+                  MCoordXVx(100ul, 200ul));
     EXPECT_EQ(dom2d.mesh().to_real(dom2d.ubound()).get<Dim::X>(), 200.);
     EXPECT_EQ(dom2d.rmax().get<Dim::X>(), 200.);
     EXPECT_EQ(dom2d.rmax<Dim::X>(), 200.);
+
+    EXPECT_EQ(dom2d.mesh().to_real(dom2d.ubound()).get<Dim::Vx>(), 400.);
+    EXPECT_EQ(dom2d.rmax().get<Dim::Vx>(), 400.);
+    EXPECT_EQ(dom2d.rmax<Dim::Vx>(), 400.);
 }

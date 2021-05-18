@@ -85,7 +85,7 @@ public:
     template <class... OTags>
     inline constexpr RCoord<OTags...> to_real(const MCoord<OTags...> icoord) const noexcept
     {
-        return RCoord_((::get<OTags>(origin()) + ::get<OTags>(icoord) * ::get<OTags>(m_step))...);
+        return RCoord<OTags...>((::get<OTags>(origin()) + ::get<OTags>(icoord) * ::get<OTags>(m_step))...);
     }
 };
 
