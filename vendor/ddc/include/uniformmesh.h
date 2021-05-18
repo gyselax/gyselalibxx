@@ -38,10 +38,9 @@ public:
     {
     }
 
-    template <class OriginType, class StepType>
-    inline constexpr UniformMesh(OriginType&& origin, StepType&& step) noexcept
-        : m_origin(std::forward<OriginType>(origin))
-        , m_step(std::forward<StepType>(step))
+    inline constexpr UniformMesh(RCoord_ origin, RCoord_ step) noexcept
+        : m_origin(std::move(origin))
+        , m_step(std::move(step))
     {
     }
 

@@ -20,6 +20,9 @@ public:
 
     struct Iterator
     {
+    private:
+        MCoordElement _M_value = MCoordElement();
+
     public:
         using iterator_category = std::random_access_iterator_tag;
 
@@ -136,9 +139,6 @@ public:
                            ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
                            : (xx._M_value - yy._M_value);
         }
-
-    private:
-        MCoordElement _M_value = MCoordElement();
     };
 
 private:
@@ -182,20 +182,24 @@ public:
         , m_lbound(std::forward<LboundType>(lbound))
         , m_ubound(std::forward<UboundType>(ubound))
     {
-        assert((m_lbound == MCoord_ {0ul}) && "non null lbound is not supported yet");
+        //         cannot assert in constexpr :/
+        //         assert((m_lbound == MCoord_ {0ul}) && "non null lbound is not supported yet");
     }
 
     template <class OriginType, class StepType, class LboundType, class UboundType>
     inline constexpr MDomainImpl(
-            OriginType&& origin,
-            StepType&& step,
+            OriginType&& rmin,
+            StepType&& rmax,
             LboundType&& lbound,
             UboundType&& ubound) noexcept
-        : m_mesh(std::forward<OriginType>(origin), std::forward<StepType>(step))
+        : m_mesh(
+                rmin + lbound * (rmin - rmax) / (ubound - lbound),
+                ((rmax - rmin) / (ubound - lbound)))
         , m_lbound(std::forward<LboundType>(lbound))
         , m_ubound(std::forward<UboundType>(ubound))
     {
-        assert((m_lbound == MCoord_ {0ul}) && "non null lbound is not supported yet");
+        //         cannot assert in constexpr :/
+        //         assert((m_lbound == MCoord_ {0ul}) && "non null lbound is not supported yet");
     }
 
     friend constexpr bool operator==(const MDomainImpl& xx, const MDomainImpl& yy)
@@ -363,17 +367,20 @@ std::ostream& operator<<(std::ostream& out, MDomainImpl<Mesh> const& dom)
     return out;
 }
 
-/* For now MDomain is just an alias to MDomain, in the long run, we should use a tuple-based
+template <class... Tags>
+using UniformMDomain = MDomainImpl<UniformMesh<Tags...>>;
+
+using UniformMDomainX = UniformMDomain<Dim::X>;
+
+using UniformMDomainVx = UniformMDomain<Dim::Vx>;
+
+using UniformMDomainXVx = UniformMDomain<Dim::X, Dim::Vx>;
+
+/* For now MDomain is just an alias to UniformMDomain, in the long run, we should use a tuple-based
  * solutions to have different types in each dimension
  */
 template <class... Tags>
 using MDomain = MDomainImpl<UniformMesh<Tags...>>;
-
-template <class... Tags>
-using RegularMDomain = MDomainImpl<UniformMesh<Tags...>>;
-
-template <class... Tags>
-using UniformMDomain = MDomainImpl<UniformMesh<Tags...>>;
 
 using MDomainX = UniformMDomain<Dim::X>;
 

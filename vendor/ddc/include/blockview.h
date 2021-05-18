@@ -371,7 +371,7 @@ static BlockView<MDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
  * @return the domain of view in the queried dimensions
  */
 template <class... QueryTags, class... Tags, class ElementType, bool CONTIGUOUS>
-RegularMDomain<QueryTags...> get_domain(
+UniformMDomain<QueryTags...> get_domain(
         const BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS>& v)
 {
     return v.template domain<Tags...>();

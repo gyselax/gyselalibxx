@@ -15,7 +15,7 @@
 // * unit vector: (1,1)
 // * domain-start: (0,0)
 // * domain-bound: (100, 100)
-MDomainXVx const dom2d(RCoordXVx(0., 0.), RCoordXVx(1., 1.), MCoordXVx(0, 0), MCoordXVx(100, 100));
+MDomainXVx const dom2d(RCoordXVx(0, 0), RCoordXVx(100, 100), MCoordXVx(0, 0), MCoordXVx(100, 100));
 
 BSplines_uniform const bsplines_x = {3, true, 4, 5, 6};
 

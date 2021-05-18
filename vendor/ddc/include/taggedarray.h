@@ -55,7 +55,7 @@ struct TaggedArrayPrinter<TagsHead, TagsNext, TagsTail...>
             std::ostream& out,
             TaggedArray<ElementType, OTags...> const& arr)
     {
-        out << arr.template get<TagsHead>();
+        out << arr.template get<TagsHead>() << ", ";
         return TaggedArrayPrinter<TagsNext, TagsTail...>::print_content(out, arr);
     }
 };
@@ -85,6 +85,161 @@ struct TaggedArrayPrinter<>
     }
 };
 
+template <class... C>
+static inline constexpr void force_eval(C&&...)
+{
+}
+
+template <class>
+class TaggedArrayImpl;
+
+template <class ElementType, class... Tags>
+class TaggedArrayImpl<TaggedArray<ElementType, Tags...>>
+{
+protected:
+    std::array<ElementType, sizeof...(Tags)> m_values;
+
+public:
+    inline constexpr TaggedArrayImpl() noexcept = default;
+
+    inline constexpr TaggedArrayImpl(TaggedArrayImpl const&) noexcept = default;
+
+    inline constexpr TaggedArrayImpl(TaggedArrayImpl&&) noexcept = default;
+
+    template <class OElementType, class... OTags>
+    inline constexpr TaggedArrayImpl(TaggedArray<OElementType, OTags...> const& other) noexcept
+        : m_values {(other.template get<Tags>())...}
+    {
+    }
+
+    template <class OElementType, class... OTags>
+    inline constexpr TaggedArrayImpl(TaggedArray<OElementType, OTags...>&& other) noexcept
+        : m_values {std::move(other.template get<Tags>())...}
+    {
+    }
+
+    template <
+            class... Params,
+            typename ::std::enable_if<((std::is_convertible_v<Params, ElementType>)&&...), int>::
+                    type
+            = 0>
+    inline constexpr TaggedArrayImpl(Params&&... params) noexcept
+        : m_values {static_cast<ElementType>(std::forward<Params>(params))...}
+    {
+    }
+
+    constexpr inline TaggedArrayImpl& operator=(const TaggedArrayImpl& other) noexcept = default;
+
+    constexpr inline TaggedArrayImpl& operator=(TaggedArrayImpl&& other) noexcept = default;
+
+    template <class... OTags>
+    constexpr inline TaggedArrayImpl& operator=(
+            const TaggedArray<ElementType, OTags...>& other) noexcept
+    {
+        m_values = other.m_values;
+        return *this;
+    }
+
+    template <class... OTags>
+    constexpr inline TaggedArrayImpl& operator=(TaggedArray<ElementType, OTags...>&& other) noexcept
+    {
+        m_values = std::move(other.m_values);
+        return *this;
+    }
+
+    constexpr inline bool operator==(const TaggedArrayImpl& other) const noexcept
+    {
+        return m_values == other.m_values;
+    }
+
+    constexpr inline bool operator!=(const TaggedArrayImpl& other) const noexcept
+    {
+        return m_values != other.m_values;
+    }
+
+    /// Returns a reference to the underlying `std::array`
+    constexpr inline std::array<ElementType, sizeof...(Tags)>& array() noexcept
+    {
+        return m_values;
+    }
+
+    /// Returns a const reference to the underlying `std::array`
+    constexpr inline const std::array<ElementType, sizeof...(Tags)>& array() const noexcept
+    {
+        return m_values;
+    }
+
+    constexpr inline ElementType& operator[](size_t pos)
+    {
+        return m_values[pos];
+    }
+
+    constexpr inline const ElementType& operator[](size_t pos) const
+    {
+        return m_values[pos];
+    }
+
+    template <class QueryTag>
+    inline constexpr ElementType& get() noexcept
+    {
+        using namespace detail;
+        static_assert(
+                RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::present,
+                "requested Tag absent from TaggedArrayImpl");
+        return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
+    }
+
+    template <class QueryTag>
+    inline constexpr ElementType const& get() const noexcept
+    {
+        using namespace detail;
+        return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
+    }
+};
+
+template <class>
+class SingleTagArrayImpl;
+
+template <class ElementType, class Tag>
+class SingleTagArrayImpl<TaggedArray<ElementType, Tag>>
+    : public TaggedArrayImpl<TaggedArray<ElementType, Tag>>
+{
+public:
+    inline TaggedArray<ElementType, Tag>& operator=(const ElementType& e) noexcept
+    {
+        this->m_values = e;
+        return *this;
+    }
+
+    inline TaggedArray<ElementType, Tag>& operator=(ElementType&& e) noexcept
+    {
+        this->m_values = std::move(e);
+        return *this;
+    }
+
+    constexpr inline bool operator==(const ElementType& other) const noexcept
+    {
+        return this->m_values[0] == other;
+    }
+
+    constexpr inline bool operator!=(const ElementType& other) const noexcept
+    {
+        return this->m_values[0] != other;
+    }
+
+
+    constexpr inline operator const ElementType&() const noexcept
+    {
+        return this->m_values[0];
+    }
+
+    constexpr inline operator ElementType&() noexcept
+    {
+        return this->m_values[0];
+    }
+};
+
+
 } // namespace detail
 
 
@@ -113,161 +268,117 @@ inline constexpr TaggedArray<QueryTags...> select(TaggedArray<ElementType, Tags.
     return TaggedArray<QueryTags...>(std::move(arr));
 }
 
-template <class ElementType, class... Tags>
-class TaggedArray
+template <class ElementType, class Tag0, class Tag1, class... Tags>
+class TaggedArray<ElementType, Tag0, Tag1, Tags...>
+    : public detail::TaggedArrayImpl<TaggedArray<ElementType, Tag0, Tag1, Tags...>>
 {
-    std::array<ElementType, sizeof...(Tags)> m_values;
+    using Super = detail::TaggedArrayImpl<TaggedArray<ElementType, Tag0, Tag1, Tags...>>;
 
 public:
-    constexpr TaggedArray() noexcept = default;
+    inline constexpr TaggedArray() noexcept = default;
 
-    constexpr TaggedArray(const TaggedArray&) noexcept = default;
+    inline constexpr TaggedArray(TaggedArray const&) noexcept = default;
 
-    constexpr TaggedArray(TaggedArray&&) noexcept = default;
-
-    template <class... Params>
-    inline constexpr TaggedArray(Params&&... params) noexcept
-        : m_values {static_cast<ElementType>(std::forward<Params>(params))...}
-    {
-    }
+    inline constexpr TaggedArray(TaggedArray&&) noexcept = default;
 
     template <class OElementType, class... OTags>
-    inline constexpr TaggedArray(const TaggedArray<OElementType, OTags...>& other) noexcept
-        : m_values {(::get<Tags>(other))...}
+    inline constexpr TaggedArray(TaggedArray<OElementType, OTags...> const& other) noexcept
+        : Super {(::get<Tags>(other))...}
     {
     }
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedArray(TaggedArray<OElementType, OTags...>&& other) noexcept
-        : m_values {std::move(::get<Tags>(other))...}
+        : Super {std::move(::get<Tags>(other))...}
     {
     }
 
-    constexpr inline TaggedArray& operator=(const TaggedArray& other) noexcept = default;
-
-    constexpr inline TaggedArray& operator=(TaggedArray&& other) noexcept = default;
-
-    template <class... OTags>
-    constexpr inline TaggedArray& operator=(
-            const TaggedArray<ElementType, OTags...>& other) noexcept
+    template <
+            class... Params,
+            typename ::std::enable_if<((std::is_convertible_v<Params, ElementType>)&&...), int>::
+                    type
+            = 0>
+    inline constexpr TaggedArray(Params&&... params) noexcept
+        : Super {static_cast<ElementType>(std::forward<Params>(params))...}
     {
-        m_values = other.m_values;
-        return *this;
-    }
-
-    template <class... OTags>
-    constexpr inline TaggedArray& operator=(TaggedArray<ElementType, OTags...>&& other) noexcept
-    {
-        m_values = std::move(other.m_values);
-        return *this;
-    }
-
-    constexpr inline TaggedArray& operator=(const ElementType& e) noexcept
-    {
-        static_assert(
-                sizeof...(Tags) == 1,
-                "Implicit conversion is only possible for size 1 TaggedTuples");
-        m_values = e;
-        return *this;
-    }
-
-    constexpr inline TaggedArray& operator=(ElementType&& e) noexcept
-    {
-        static_assert(
-                sizeof...(Tags) == 1,
-                "Implicit conversion is only possible for size 1 TaggedTuples");
-        m_values = std::move(e);
-        return *this;
-    }
-
-    constexpr inline bool operator==(const ElementType& other) const noexcept
-    {
-        static_assert(
-                sizeof...(Tags) == 1,
-                "Implicit conversion is only possible for size 1 TaggedTuples");
-        return m_values[0] == other;
-    }
-
-    constexpr inline bool operator!=(const ElementType& other) const noexcept
-    {
-        static_assert(
-                sizeof...(Tags) == 1,
-                "Implicit conversion is only possible for size 1 TaggedTuples");
-        return m_values[0] != other;
-    }
-
-    constexpr inline bool operator==(const TaggedArray& other) const noexcept
-    {
-        return m_values == other.m_values;
-    }
-
-    constexpr inline bool operator!=(const TaggedArray& other) const noexcept
-    {
-        return m_values != other.m_values;
-    }
-
-    /// Returns a reference to the underlying `std::array`
-    constexpr inline std::array<ElementType, sizeof...(Tags)>& array() noexcept
-    {
-        return m_values;
-    }
-
-    /// Returns a const reference to the underlying `std::array`
-    constexpr inline const std::array<ElementType, sizeof...(Tags)>& array() const noexcept
-    {
-        return m_values;
-    }
-
-    constexpr inline operator const ElementType&() const noexcept
-    {
-        static_assert(
-                sizeof...(Tags) == 1,
-                "Implicit conversion is only possible for size 1 TaggedArrays");
-        return m_values[0];
-    }
-
-    constexpr inline operator ElementType&() noexcept
-    {
-        static_assert(
-                sizeof...(Tags) == 1,
-                "Implicit conversion is only possible for size 1 TaggedArrays");
-        return m_values[0];
-    }
-
-    constexpr inline ElementType& operator[](size_t pos)
-    {
-        return m_values[pos];
-    }
-
-    constexpr inline const ElementType& operator[](size_t pos) const
-    {
-        return m_values[pos];
-    }
-
-    template <class QueryTag>
-    inline constexpr ElementType& get() noexcept
-    {
-        using namespace detail;
-        static_assert(
-                RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::present,
-                "requested Tag absent from TaggedArray");
-        return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
-    }
-
-    template <class QueryTag>
-    inline constexpr ElementType const& get() const noexcept
-    {
-        using namespace detail;
-        return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
     }
 };
 
-template <class, class>
-constexpr bool has_tag_v = false;
+template <class ElementType, class Tag>
+class TaggedArray<ElementType, Tag>
+    : public detail::SingleTagArrayImpl<TaggedArray<ElementType, Tag>>
+{
+    using Super = detail::SingleTagArrayImpl<TaggedArray<ElementType, Tag>>;
 
-template <class QueryTag, class ElementType, class... Tags>
-constexpr bool has_tag_v<QueryTag, TaggedArray<ElementType, Tags...>> = detail::
-        RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::present;
+public:
+    inline constexpr TaggedArray() noexcept = default;
+
+    inline constexpr TaggedArray(TaggedArray const&) noexcept = default;
+
+    inline constexpr TaggedArray(TaggedArray&&) noexcept = default;
+
+    template <
+            class OElementType,
+            class... OTags,
+            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
+    inline constexpr TaggedArray(TaggedArray<OElementType, OTags...> const& other) noexcept
+        : Super {(::get<Tag>(other))}
+    {
+    }
+
+    template <
+            class OElementType,
+            class... OTags,
+            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
+    inline constexpr TaggedArray(TaggedArray<OElementType, OTags...>&& other) noexcept
+        : Super {std::move(::get<Tag>(other))}
+    {
+    }
+
+    template <
+            class OElementType,
+            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
+    inline constexpr TaggedArray(OElementType&& param) noexcept
+        : Super {static_cast<ElementType>(std::forward<OElementType>(param))}
+    {
+    }
+};
+
+template <class ElementType>
+class TaggedArray<ElementType> : public detail::TaggedArrayImpl<TaggedArray<ElementType>>
+{
+    using Super = detail::SingleTagArrayImpl<TaggedArray<ElementType>>;
+
+public:
+    inline constexpr TaggedArray() noexcept = default;
+
+    inline constexpr TaggedArray(TaggedArray const&) noexcept = default;
+
+    inline constexpr TaggedArray(TaggedArray&&) noexcept = default;
+
+    template <
+            class OElementType,
+            class... OTags,
+            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
+    inline constexpr TaggedArray(TaggedArray<OElementType, OTags...> const&) noexcept
+    {
+    }
+
+    template <
+            class OElementType,
+            class... OTags,
+            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
+    inline constexpr TaggedArray(TaggedArray<OElementType, OTags...>&&) noexcept
+    {
+    }
+
+    template <
+            class OElementType,
+            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
+    inline constexpr TaggedArray(OElementType&& param) noexcept
+    {
+    }
+};
 
 template <class, class>
 constexpr size_t tag_rank_v = -1;
@@ -275,6 +386,121 @@ constexpr size_t tag_rank_v = -1;
 template <class QueryTag, class ElementType, class... Tags>
 constexpr bool tag_rank_v<QueryTag, TaggedArray<ElementType, Tags...>> = detail::
         RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
+
+template <class, class>
+constexpr bool in_tags_v = false;
+
+template <class QueryTag, class ElementType, class... Tags>
+constexpr bool in_tags_v<QueryTag, TaggedArray<ElementType, Tags...>> = detail::
+        RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::present;
+
+template <class, class>
+constexpr bool contains_tags_v = false;
+
+template <class ElementType, class OElementType, class... Tags, class... OTags>
+constexpr bool contains_tags_v<
+        TaggedArray<ElementType, Tags...>,
+        TaggedArray<
+                OElementType,
+                OTags...>> = ((detail::RankIn<detail::SingleType<Tags>, detail::TypeSeq<OTags...>>::present) && ...);
+
+template <class A, class B>
+constexpr bool same_tags_v = contains_tags_v<A, B>&& contains_tags_v<B, A>;
+
+template <class A, class B>
+constexpr bool has_tag_v = in_tags_v<A, B>;
+
+template <class ElementType, class OElementType, class... Tags, class... OTags>
+constexpr inline TaggedArray<ElementType, Tags...>& operator+=(
+        TaggedArray<ElementType, Tags...>& self,
+        TaggedArray<OElementType, OTags...> const& other)
+{
+    static_assert(
+            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    detail::force_eval(self.template get<Tags>() += other.template get<Tags>()...);
+    return self;
+}
+
+template <class ElementType, class OElementType, class... Tags, class... OTags>
+constexpr inline auto operator+(
+        TaggedArray<ElementType, Tags...> const& one,
+        TaggedArray<OElementType, OTags...> const& other)
+{
+    static_assert(
+            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    using RElementType
+            = decltype(std::declval<ElementType const>() + std::declval<OElementType const>());
+    return TaggedArray<RElementType, Tags...>(get<Tags>(one) + get<Tags>(other)...);
+}
+
+template <class ElementType, class OElementType, class... Tags, class... OTags>
+constexpr inline TaggedArray<ElementType, Tags...>& operator-=(
+        TaggedArray<ElementType, Tags...>& self,
+        TaggedArray<OElementType, OTags...> const& other)
+{
+    static_assert(
+            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    detail::force_eval(self.template get<Tags>() -= other.template get<Tags>()...);
+    return self;
+}
+
+template <class ElementType, class OElementType, class... Tags, class... OTags>
+constexpr inline auto operator-(
+        TaggedArray<ElementType, Tags...> const& one,
+        TaggedArray<OElementType, OTags...> const& other)
+{
+    static_assert(
+            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    using RElementType
+            = decltype(std::declval<ElementType const>() - std::declval<OElementType const>());
+    return TaggedArray<RElementType, Tags...>(get<Tags>(one) - get<Tags>(other)...);
+}
+
+template <class ElementType, class OElementType, class... Tags, class... OTags>
+constexpr inline TaggedArray<ElementType, Tags...>& operator*=(
+        TaggedArray<ElementType, Tags...>& self,
+        TaggedArray<OElementType, OTags...> const& other)
+{
+    static_assert(
+            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    detail::force_eval(self.template get<Tags>() *= other.template get<Tags>()...);
+    return self;
+}
+
+template <class ElementType, class OElementType, class... Tags, class... OTags>
+constexpr inline auto operator*(
+        TaggedArray<ElementType, Tags...> const& one,
+        TaggedArray<OElementType, OTags...> const& other)
+{
+    static_assert(
+            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    using RElementType
+            = decltype(std::declval<ElementType const>() * std::declval<OElementType const>());
+    return TaggedArray<RElementType, Tags...>(get<Tags>(one) * get<Tags>(other)...);
+}
+
+template <class ElementType, class OElementType, class... Tags, class... OTags>
+constexpr inline TaggedArray<ElementType, Tags...>& operator/=(
+        TaggedArray<ElementType, Tags...>& self,
+        TaggedArray<OElementType, OTags...> const& other)
+{
+    static_assert(
+            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    detail::force_eval(self.template get<Tags>() /= other.template get<Tags>()...);
+    return self;
+}
+
+template <class ElementType, class OElementType, class... Tags, class... OTags>
+constexpr inline auto operator/(
+        TaggedArray<ElementType, Tags...> const& one,
+        TaggedArray<OElementType, OTags...> const& other)
+{
+    static_assert(
+            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    using RElementType
+            = decltype(std::declval<ElementType const>() / std::declval<OElementType const>());
+    return TaggedArray<RElementType, Tags...>(get<Tags>(one) / get<Tags>(other)...);
+}
 
 
 template <class ElementType, class... Tags>
