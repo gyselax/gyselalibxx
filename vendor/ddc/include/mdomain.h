@@ -145,10 +145,8 @@ private:
     /// The mesh on which this domain is defined
     Mesh_ m_mesh;
 
-    /// step size
     MCoord_ m_lbound;
 
-    /// step size
     MCoord_ m_ubound;
 
 public:

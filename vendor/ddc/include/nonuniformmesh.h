@@ -1,57 +1,9 @@
 #pragma once
 
-#include <view.h>
+#include <vector>
 
 #include "mcoord.h"
 #include "rcoord.h"
-
-template <class... Tags>
-class NonUniformMesh;
-
-namespace detail {
-
-template <
-        class... SelectedTags,
-        class TagsHead,
-        class... TagsQueue,
-        class... AllTags,
-        class SliceSpec>
-inline constexpr auto append_if_all(
-        NonUniformMesh<SelectedTags...>,
-        NonUniformMesh<TagsHead>,
-        NonUniformMesh<AllTags...> m,
-        SliceSpec) noexcept
-{
-    static_assert(
-            std::is_integral_v<
-                    SliceSpec> || std::is_same_v<std::experimental::all_type, SliceSpec>);
-    if constexpr (std::is_integral_v<SliceSpec>) {
-        return NonUniformMesh<SelectedTags...>(m);
-    } else {
-        return NonUniformMesh<TagsHead, SelectedTags...>(m);
-    }
-}
-
-
-template <class TagsHead, class... TagsQueue, class SliceSpecsHead, class... SliceSpecsQueue>
-inline constexpr auto select_tags(
-        NonUniformMesh<TagsHead, TagsQueue...> m,
-        SliceSpecsHead&& h,
-        SliceSpecsQueue&&... q) noexcept
-{
-    static_assert(sizeof...(TagsQueue) == sizeof...(SliceSpecsQueue));
-    if constexpr (sizeof...(TagsQueue) > 0) {
-        return append_if_all(
-                select_tags(NonUniformMesh<TagsQueue...>(m), q...),
-                NonUniformMesh<TagsHead>(m),
-                m,
-                h);
-    } else {
-        return append_if_all(NonUniformMesh<>(RCoord<>(), RLength<>()), m, m, h);
-    }
-}
-
-} // namespace detail
 
 template <class Tag>
 class NonUniformMesh
@@ -63,37 +15,141 @@ public:
 
     using MCoord_ = MCoord<Tag>;
 
+    struct Iterator
+    {
+    private:
+        MCoordElement _M_value = MCoordElement();
+
+    public:
+        using iterator_category = std::random_access_iterator_tag;
+
+        using value_type = MCoordElement;
+
+        using difference_type = MLengthElement;
+
+        Iterator() = default;
+
+        constexpr explicit Iterator(MCoordElement __value) : _M_value(__value) {}
+
+        constexpr MCoordElement operator*() const noexcept
+        {
+            return _M_value;
+        }
+
+        constexpr Iterator& operator++()
+        {
+            ++_M_value;
+            return *this;
+        }
+
+        constexpr Iterator operator++(int)
+        {
+            auto __tmp = *this;
+            ++*this;
+            return __tmp;
+        }
+
+        constexpr Iterator& operator--()
+        {
+            --_M_value;
+            return *this;
+        }
+
+        constexpr Iterator operator--(int)
+        {
+            auto __tmp = *this;
+            --*this;
+            return __tmp;
+        }
+
+        constexpr Iterator& operator+=(difference_type __n)
+        {
+            if (__n >= difference_type(0))
+                _M_value += static_cast<MCoordElement>(__n);
+            else
+                _M_value -= static_cast<MCoordElement>(-__n);
+            return *this;
+        }
+
+        constexpr Iterator& operator-=(difference_type __n)
+        {
+            if (__n >= difference_type(0))
+                _M_value -= static_cast<MCoordElement>(__n);
+            else
+                _M_value += static_cast<MCoordElement>(-__n);
+            return *this;
+        }
+
+        constexpr MCoordElement operator[](difference_type __n) const
+        {
+            return MCoordElement(_M_value + __n);
+        }
+
+        friend constexpr bool operator==(const Iterator& xx, const Iterator& yy)
+        {
+            return xx._M_value == yy._M_value;
+        }
+
+        friend constexpr bool operator!=(const Iterator& xx, const Iterator& yy)
+        {
+            return xx._M_value != yy._M_value;
+        }
+
+        friend constexpr bool operator<(const Iterator& xx, const Iterator& yy)
+        {
+            return xx._M_value < yy._M_value;
+        }
+
+        friend constexpr bool operator>(const Iterator& xx, const Iterator& yy)
+        {
+            return yy < xx;
+        }
+
+        friend constexpr bool operator<=(const Iterator& xx, const Iterator& yy)
+        {
+            return !(yy < xx);
+        }
+
+        friend constexpr bool operator>=(const Iterator& xx, const Iterator& yy)
+        {
+            return !(xx < yy);
+        }
+
+        friend constexpr Iterator operator+(Iterator __i, difference_type __n)
+        {
+            return __i += __n;
+        }
+
+        friend constexpr Iterator operator+(difference_type __n, Iterator __i)
+        {
+            return __i += __n;
+        }
+
+        friend constexpr Iterator operator-(Iterator __i, difference_type __n)
+        {
+            return __i -= __n;
+        }
+
+        friend constexpr difference_type operator-(const Iterator& xx, const Iterator& yy)
+        {
+            return (yy._M_value > xx._M_value)
+                           ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
+                           : (xx._M_value - yy._M_value);
+        }
+    };
+
 private:
-    /// origin
-    TaggedArray<RCoord_> m_origin;
+    /// mesh points
+    std::vector<RCoord_> m_points;
 
-    /// step size
-    RLength_ m_step;
-
-    template <class>
-    friend class NonUniformMesh;
+    MCoord_ m_lbound;
 
 public:
-    template <class... OTags>
-    inline constexpr NonUniformMesh(const NonUniformMesh<OTags...>& other) noexcept
-        : m_origin(other.m_origin)
-        , m_step(other.m_step)
-    {
-    }
+    inline constexpr NonUniformMesh(NonUniformMesh const& other) noexcept = default;
 
-    template <class... OTags>
-    inline constexpr NonUniformMesh(NonUniformMesh<OTags...>&& other) noexcept
-        : m_origin(std::move(other.m_origin))
-        , m_step(std::move(other.m_step))
-    {
-    }
+    inline constexpr NonUniformMesh(NonUniformMesh const&& other) noexcept = default;
 
-    template <class OriginType, class StepType>
-    inline constexpr NonUniformMesh(OriginType&& origin, StepType&& step) noexcept
-        : m_origin(std::forward<OriginType>(origin))
-        , m_step(std::forward<StepType>(step))
-    {
-    }
+    //TODO: add a constructor taking the mesh points
 
     friend constexpr bool operator==(const NonUniformMesh& xx, const NonUniformMesh& yy)
     {
@@ -103,6 +159,43 @@ public:
     friend constexpr bool operator!=(const NonUniformMesh& xx, const NonUniformMesh& yy)
     {
         return (&xx != &yy) && (xx.m_origin != yy.m_origin || xx.m_step != yy.m_step);
+    }
+
+    template <class OTag>
+    friend constexpr bool operator==(const NonUniformMesh& xx, const NonUniformMesh<OTag>& yy)
+    {
+        return false;
+    }
+
+    template <class OTag>
+    friend constexpr bool operator!=(const NonUniformMesh& xx, const NonUniformMesh<OTag>& yy)
+    {
+        return false;
+    }
+
+    static inline constexpr size_t rank() noexcept
+    {
+        return 1;
+    }
+
+    inline constexpr MCoord_ extents() noexcept
+    {
+        return m_points.size();
+    }
+
+    inline constexpr RCoord_ to_real(MCoord_ const icoord) const noexcept
+    {
+        return m_points[icoord];
+    }
+
+    friend constexpr bool operator==(const NonUniformMesh& xx, const NonUniformMesh& yy)
+    {
+        return xx.m_lbound == yy.m_lbound && xx.m_points == yy.m_points;
+    }
+
+    friend constexpr bool operator!=(const NonUniformMesh& xx, const NonUniformMesh& yy)
+    {
+        return !operator==(xx, yy);
     }
 
     template <class... OTags>
@@ -117,46 +210,137 @@ public:
         return false;
     }
 
-    static inline constexpr size_t rank() noexcept
+    inline constexpr NonUniformMesh const& mesh() const noexcept
     {
-        return sizeof...(Tags);
+        return *this;
     }
 
-    inline constexpr RCoord_ origin() const noexcept
+    inline constexpr NonUniformMesh& mesh() noexcept
     {
-        return m_origin;
+        return *this;
     }
 
-    inline constexpr RLength_ step() const noexcept
+    inline constexpr MCoord_& lbound() noexcept
     {
-        return m_step;
+        return m_lbound;
+    }
+
+    inline constexpr const MCoord_& lbound() const noexcept
+    {
+        return m_lbound;
     }
 
     template <class... OTags>
-    inline constexpr RCoord<OTags...> to_real(const MCoord<OTags...> icoord) const noexcept
+    inline constexpr MCoord<OTags...> lbound() const noexcept
     {
-        return RCoord_((::get<OTags>(origin()) + ::get<OTags>(icoord) * ::get<OTags>(m_step))...);
+        return lbound();
+    }
+
+    inline constexpr RCoord_ rmin() const noexcept
+    {
+        return mesh().to_real(lbound());
+    }
+
+    template <class... OTags>
+    inline constexpr RCoord<OTags...> rmin() const noexcept
+    {
+        return mesh().to_real(lbound<OTags...>());
+    }
+
+    inline constexpr MCoord_& ubound() noexcept
+    {
+        return lbound() + m_points.size();
+    }
+
+    inline constexpr const MCoord_& ubound() const noexcept
+    {
+        return lbound() + m_points.size();
+    }
+
+    template <class... OTags>
+    inline constexpr MCoord<OTags...> ubound() const noexcept
+    {
+        return ubound();
+    }
+
+    inline constexpr RCoord_ rmax() const noexcept
+    {
+        return mesh().to_real(ubound());
+    }
+
+    template <class... OTags>
+    inline constexpr RCoord<OTags...> rmax() const noexcept
+    {
+        return mesh().to_real(ubound<OTags...>());
+    }
+
+    template <class QueryTag>
+    inline constexpr ptrdiff_t extent() const noexcept
+    {
+        return m_points.size();
+    }
+
+    inline constexpr ptrdiff_t size() const noexcept
+    {
+        return m_points.size();
+    }
+
+    inline constexpr bool empty() const noexcept
+    {
+        return size() == 0;
+    }
+
+    constexpr explicit operator bool()
+    {
+        return !empty();
+    }
+
+    constexpr Iterator begin() const noexcept
+    {
+        return Iterator(lbound());
+    }
+
+    constexpr Iterator cbegin() const noexcept
+    {
+        return begin();
+    }
+
+    constexpr Iterator end() const noexcept
+    {
+        return Iterator(ubound());
+    }
+
+    constexpr Iterator cend() const noexcept
+    {
+        return end();
+    }
+
+    constexpr decltype(auto) back()
+    {
+        assert(!empty());
+        return *(--end());
+    }
+
+    constexpr decltype(auto) operator[](ptrdiff_t __n)
+    {
+        return begin()[__n];
+    }
+
+    constexpr decltype(auto) operator[](ptrdiff_t __n) const
+    {
+        return begin()[__n];
     }
 };
 
-template <class... Tags>
-std::ostream& operator<<(std::ostream& out, NonUniformMesh<Tags...> const& dom)
+template <class Tag>
+std::ostream& operator<<(std::ostream& out, NonUniformMesh<Tag> const& dom)
 {
-    return out << "NonUniformMesh( origin=" << dom.origin() << ", unitvec=" << dom.step() << " )";
+    return out << "NonUniformMesh(  )";
 }
 
-template <class... Tags, class... SliceSpecs>
-inline constexpr auto submesh(const NonUniformMesh<Tags...>& mesh, SliceSpecs... slices) noexcept
+template <class Tag, class SliceSpec>
+inline constexpr auto submesh(const NonUniformMesh<Tag>& mesh, SliceSpec slices) noexcept
 {
     using ReturnType = decltype(detail::select_tags(mesh, std::forward<SliceSpecs>(slices)...));
     return ReturnType(mesh);
 }
-
-template <class... Tags>
-using Mesh = NonUniformMesh<Tags...>;
-
-using MeshX = Mesh<Dim::X>;
-
-using MeshVx = Mesh<Dim::Vx>;
-
-using MeshXVx = Mesh<Dim::X, Dim::Vx>;
