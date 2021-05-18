@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include <view.h>
+
 #include "mcoord.h"
 #include "rcoord.h"
 
@@ -149,7 +151,31 @@ public:
 
     inline constexpr NonUniformMesh(NonUniformMesh const&& other) noexcept = default;
 
-    //TODO: add a constructor taking the mesh points
+    inline constexpr NonUniformMesh(std::vector<RCoord_>&& points, MCoord_ lbound)
+        : m_points(std::move(points))
+        , m_lbound(lbound)
+    {
+    }
+
+    template <class InputIterable>
+    inline constexpr NonUniformMesh(InputIterable const& points, MCoord_ lbound)
+        : m_points(points.begin(), points.end())
+        , m_lbound(lbound)
+    {
+    }
+
+    inline constexpr NonUniformMesh(View1D<const RCoord_> points, MCoord_ lbound)
+        : m_points(&points[0], &points[points.extent(0)])
+        , m_lbound(lbound)
+    {
+    }
+
+    template <class InputIt>
+    inline constexpr NonUniformMesh(InputIt points_begin, InputIt points_end, MCoord_ lbound)
+        : m_points(points_begin, points_end)
+        , m_lbound(lbound)
+    {
+    }
 
     friend constexpr bool operator==(const NonUniformMesh& xx, const NonUniformMesh& yy)
     {
@@ -336,11 +362,4 @@ template <class Tag>
 std::ostream& operator<<(std::ostream& out, NonUniformMesh<Tag> const& dom)
 {
     return out << "NonUniformMesh(  )";
-}
-
-template <class Tag, class SliceSpec>
-inline constexpr auto submesh(const NonUniformMesh<Tag>& mesh, SliceSpec slices) noexcept
-{
-    using ReturnType = decltype(detail::select_tags(mesh, std::forward<SliceSpecs>(slices)...));
-    return ReturnType(mesh);
 }

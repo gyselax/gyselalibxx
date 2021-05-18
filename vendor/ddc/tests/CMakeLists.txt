@@ -6,6 +6,7 @@ add_executable(ddc_tests
 	block.cpp
 	mdomain.cpp
 	mcoord.cpp
+	nonuniformmesh.cpp
 	taggedarray.cpp
 	view.cpp
 )
