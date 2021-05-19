@@ -8,8 +8,8 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 
 # Configuration
 
-## We use C++17 all around, force it!
-set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "" FORCE)
+## We use C++17 all around!
+set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
 
 # Our dependencies
@@ -23,16 +23,18 @@ find_package(LAPACK REQUIRED COMPONENTS CXX)
 ## Lokk for FFTW
 find_package(FFTW REQUIRED COMPONENTS DOUBLE_LIB)
 
-## Look for googletest in `vendor/`, we use it to write unit tests
-option(INSTALL_GTEST "Enable installation of googletest." OFF)
-add_subdirectory("vendor/googletest/" "googletest")
+## if tests are enabled, look for googletest in `vendor/`, we use it to write unit tests
+if("${BUILD_TESTING}")
+    option(INSTALL_GTEST "Enable installation of googletest." OFF)
+    add_subdirectory("vendor/googletest/" "googletest")
+endif()
 
 ## Look for mdspan in `vendor/`
-set(MDSPAN_CXX_STANDARD 17 CACHE STRING "Override the default CXX_STANDARD to compile with" FORCE)
+set(MDSPAN_CXX_STANDARD "${CMAKE_CXX_STANDARD}" CACHE STRING "Override the default CXX_STANDARD to compile with" FORCE)
 add_subdirectory("vendor/mdspan/" "mdspan")
 
 ## Look for mdarray in `vendor/`
-set(MDARRAY_CXX_STANDARD 17 CACHE STRING "Override the default CXX_STANDARD to compile with." FORCE)
+set(MDARRAY_CXX_STANDARD "${CMAKE_CXX_STANDARD}" CACHE STRING "Override the default CXX_STANDARD to compile with." FORCE)
 add_subdirectory("vendor/mdarray/" "mdarray")
 
 ## Look for selalib's matrix in `vendor/`
