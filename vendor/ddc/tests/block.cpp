@@ -82,6 +82,32 @@ TEST_F(DBlockXVxTest, deepcopy)
     }
 }
 
+TEST_F(DBlockXVxTest, reordering)
+{
+    using MDomainVxX = MDomain<Dim::Vx, Dim::X>;
+    using MeshVxX = Mesh<Dim::Vx, Dim::X>;
+    using RCoordVxX = RCoord<Dim::Vx, Dim::X>;
+    using MCoordVxX = MCoord<Dim::Vx, Dim::X>;
+
+    DBlockXVx block(dom);
+    for (auto&& ii : block.domain<Dim::X>()) {
+        for (auto&& jj : block.domain<Dim::Vx>()) {
+            block(ii, jj) = 1. * ii + .001 * jj;
+        }
+    }
+
+    MeshVxX mesh_reordered = MeshVxX(RCoordVxX(0.0, 0.0), RCoordVxX(1.0, 1.0));
+    MDomainVxX dom_reordered = MDomainVxX(mesh_reordered, MCoordVxX(0, 0), MCoordVxX(100, 100));
+    Block<MDomain<Dim::Vx, Dim::X>, double> block_reordered(dom_reordered);
+    deepcopy(block_reordered, block);
+    for (auto&& ii : block.domain<Dim::X>()) {
+        for (auto&& jj : block.domain<Dim::Vx>()) {
+            // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
+            ASSERT_EQ(block_reordered(jj, ii), block(ii, jj));
+        }
+    }
+}
+
 TEST_F(DBlockXVxTest, slice)
 {
     DBlockXVx block(dom);

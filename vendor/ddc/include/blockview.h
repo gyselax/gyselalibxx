@@ -36,6 +36,22 @@ inline void for_each_impl(
         }
     }
 }
+template <class MCoord_>
+struct sequential_for_impl
+{
+    template <class Extents, class Functor, class... Indices>
+    inline void operator()(const Extents& extents, Functor&& f, Indices&&... idxs) const noexcept
+    {
+        if constexpr (sizeof...(Indices) == Extents::rank()) {
+            f(MCoord_(std::forward<Indices>(idxs)...));
+        } // namespace detail
+        else {
+            for (ptrdiff_t ii = 0; ii < extents.extent(sizeof...(Indices)); ++ii) {
+                (*this)(extents, std::forward<Functor>(f), std::forward<Indices>(idxs)..., ii);
+            }
+        }
+    }
+};
 } // namespace detail
 
 template <class... Tags, class ElementType, bool CONTIGUOUS>
@@ -210,6 +226,12 @@ public:
     inline constexpr reference operator()(IndexType&&... indices) const noexcept
     {
         return m_raw(std::forward<IndexType>(indices)...);
+    }
+
+    template <class... OTags>
+    inline constexpr reference operator()(const MCoord<OTags...>& indices) const noexcept
+    {
+        return m_raw(MCoord_(indices).array());
     }
 
     inline constexpr reference operator()(const MCoord_& indices) const noexcept
@@ -396,6 +418,30 @@ inline BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(
 {
     assert(to.extents() == from.extents());
     for_each(to, [&to, &from](auto... idxs) { to(idxs...) = from(idxs...); });
+    return to;
+}
+
+/** Copy the content of a view into another
+ * @param[out] to    the view in which to copy
+ * @param[in]  from  the view from which to copy
+ * @return to
+ */
+template <
+        class... Tags,
+        class... OTags,
+        class ElementType,
+        class OElementType,
+        bool CONTIGUOUS,
+        bool OCONTIGUOUS>
+inline BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(
+        BlockView<MDomain<Tags...>, ElementType, CONTIGUOUS> to,
+        BlockView<MDomain<OTags...>, OElementType, OCONTIGUOUS> const& from) noexcept
+{
+    static_assert(std::is_convertible_v<ElementType, OElementType>, "Not convertible");
+    using MCoord_ = typename MDomain<Tags...>::MCoord_;
+    assert(to.extents() == from.extents());
+    constexpr auto sequential_for = detail::sequential_for_impl<MCoord_>();
+    sequential_for(to.extents(), [&to, &from](const auto& domain) { to(domain) = from(domain); });
     return to;
 }
 
