@@ -193,6 +193,9 @@ public:
     inline constexpr ElementType const& get() const noexcept
     {
         using namespace detail;
+        static_assert(
+                RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::present,
+                "requested Tag absent from TaggedArrayImpl");
         return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
     }
 };
@@ -283,13 +286,13 @@ public:
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedArray(TaggedArray<OElementType, OTags...> const& other) noexcept
-        : Super {(::get<Tags>(other))...}
+        : Super {::get<Tag0>(other), ::get<Tag1>(other), ::get<Tags>(other)...}
     {
     }
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedArray(TaggedArray<OElementType, OTags...>&& other) noexcept
-        : Super {std::move(::get<Tags>(other))...}
+        : Super {std::move(::get<Tag0>), std::move(::get<Tag1>), std::move(::get<Tags>(other))...}
     {
     }
 
