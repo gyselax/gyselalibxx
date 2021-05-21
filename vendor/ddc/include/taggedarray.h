@@ -384,7 +384,7 @@ template <class, class>
 constexpr size_t tag_rank_v = -1;
 
 template <class QueryTag, class ElementType, class... Tags>
-constexpr bool tag_rank_v<QueryTag, TaggedArray<ElementType, Tags...>> = detail::
+constexpr std::size_t tag_rank_v<QueryTag, TaggedArray<ElementType, Tags...>> = detail::
         RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
 
 template <class, class>
