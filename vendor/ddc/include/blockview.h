@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "mdomain.h"
+#include "taggedarray.h"
 #include "view.h"
 
 template <class, class>
@@ -188,6 +189,12 @@ public:
      * @return *this
      */
     inline constexpr BlockView& operator=(BlockView&& other) noexcept = default;
+
+    template <class QueryTag>
+    static constexpr std::size_t tag_rank()
+    {
+        return detail::RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
+    }
 
     /** Slice out some dimensions
      * @param slices the coordinates to 

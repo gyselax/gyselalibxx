@@ -122,3 +122,10 @@ TEST_F(DBlockXVxTest, view)
         }
     }
 }
+
+TEST_F(DBlockXVxTest, tag_rank)
+{
+    DBlockXVx block(dom);
+    ASSERT_EQ(block.tag_rank<Dim::X>(), 0);
+    ASSERT_EQ(block.tag_rank<Dim::Vx>(), 1);
+}
