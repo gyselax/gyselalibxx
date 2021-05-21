@@ -345,7 +345,7 @@ public:
      * @param slices the coordinates to 
      */
     template <class... SliceSpecs>
-    inline constexpr auto slice(SliceSpecs&&... slices) const
+    inline constexpr auto subblockview(SliceSpecs&&... slices) const
     {
         return Slicer<std::remove_cv_t<std::remove_reference_t<SliceSpecs>>...>::
                 slice(*this, std::forward<SliceSpecs>(slices)...);

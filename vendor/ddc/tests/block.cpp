@@ -93,12 +93,12 @@ TEST_F(DBlockXVxTest, slice)
     {
         const DBlockXVx& constref_block = block;
         constexpr auto SLICE_VAL = 1;
-        auto&& block_x = constref_block.slice(all, SLICE_VAL);
+        auto&& block_x = constref_block.subblockview(all, SLICE_VAL);
         for (auto&& ii : constref_block.domain<Dim::X>()) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
             ASSERT_EQ(block_x(ii), constref_block(ii, SLICE_VAL));
         }
-        auto&& block_v = constref_block.slice(SLICE_VAL, all);
+        auto&& block_v = constref_block.subblockview(SLICE_VAL, all);
         for (auto&& ii : constref_block.domain<Dim::Vx>()) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
             ASSERT_EQ(block_v(ii), constref_block(SLICE_VAL, ii));
