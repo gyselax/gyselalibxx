@@ -294,7 +294,7 @@ public:
 
     inline constexpr index_type stride(size_t r) const
     {
-        return m_raw.stride();
+        return m_raw.stride(r);
     }
 
     /** Swaps this field with another
