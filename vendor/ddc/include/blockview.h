@@ -73,7 +73,7 @@ public:
     template <class, class, bool>
     friend class BlockView;
 
-private:
+protected:
     template <class QTag, class... CTags>
     static auto get_slicer_for(const MCoord<CTags...>& c)
     {

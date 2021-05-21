@@ -90,15 +90,18 @@ TEST_F(DBlockXVxTest, slice)
             block(ii, jj) = 1. * ii + .001 * jj;
         }
     }
-    constexpr auto SLICE_VAL = 1;
-    auto&& block_x = block.slice(all, SLICE_VAL);
-    for (auto&& ii : block.domain<Dim::X>()) {
-        // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
-        ASSERT_EQ(block_x(ii), block(ii, SLICE_VAL));
-    }
-    auto&& block_v = block.slice(SLICE_VAL, all);
-    for (auto&& ii : block.domain<Dim::Vx>()) {
-        // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
-        ASSERT_EQ(block_v(ii), block(SLICE_VAL, ii));
+    {
+        const DBlockXVx& constref_block = block;
+        constexpr auto SLICE_VAL = 1;
+        auto&& block_x = constref_block.slice(all, SLICE_VAL);
+        for (auto&& ii : constref_block.domain<Dim::X>()) {
+            // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
+            ASSERT_EQ(block_x(ii), constref_block(ii, SLICE_VAL));
+        }
+        auto&& block_v = constref_block.slice(SLICE_VAL, all);
+        for (auto&& ii : constref_block.domain<Dim::Vx>()) {
+            // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
+            ASSERT_EQ(block_v(ii), constref_block(SLICE_VAL, ii));
+        }
     }
 }

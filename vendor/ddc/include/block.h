@@ -102,6 +102,28 @@ public:
         other = std::move(*this);
         *this = std::move(tmp);
     }
+
+    template <class... IndexType>
+    inline constexpr ElementType const& operator()(IndexType&&... indices) const noexcept
+    {
+        return this->m_raw(std::forward<IndexType>(indices)...);
+    }
+
+    template <class... IndexType>
+    inline constexpr ElementType& operator()(IndexType&&... indices) noexcept
+    {
+        return this->m_raw(std::forward<IndexType>(indices)...);
+    }
+
+    inline constexpr ElementType const& operator()(const MCoord_& indices) const noexcept
+    {
+        return this->m_raw(indices.array());
+    }
+
+    inline constexpr ElementType& operator()(const MCoord_& indices) noexcept
+    {
+        return this->m_raw(indices.array());
+    }
 };
 
 template <class ElementType>
