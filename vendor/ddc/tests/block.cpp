@@ -105,3 +105,20 @@ TEST_F(DBlockXVxTest, slice)
         }
     }
 }
+
+TEST_F(DBlockXVxTest, view)
+{
+    DBlockXVx block(dom);
+    for (auto&& ii : block.domain<Dim::X>()) {
+        for (auto&& jj : block.domain<Dim::Vx>()) {
+            block(ii, jj) = 1. * ii + .001 * jj;
+        }
+    }
+    auto cview = block.cview();
+    for (auto&& ii : block.domain<Dim::X>()) {
+        for (auto&& jj : block.domain<Dim::Vx>()) {
+            // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
+            ASSERT_EQ(cview(ii, jj), block(ii, jj));
+        }
+    }
+}

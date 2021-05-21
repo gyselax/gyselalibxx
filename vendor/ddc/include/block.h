@@ -9,6 +9,8 @@ public:
     /// ND view on this block
     using BlockView_ = BlockView<MDomain<Tags...>, ElementType>;
 
+    using BlockSpan_ = BlockView<MDomain<Tags...>, const ElementType>;
+
     /// ND memory view
     using RawView = SpanND<sizeof...(Tags), ElementType>;
 
@@ -123,6 +125,26 @@ public:
     inline constexpr ElementType& operator()(const MCoord_& indices) noexcept
     {
         return this->m_raw(indices.array());
+    }
+
+    inline constexpr BlockView<MDomain<Tags...>, const ElementType> cview() const
+    {
+        return *this;
+    }
+
+    inline constexpr BlockView<MDomain<Tags...>, const ElementType> cview()
+    {
+        return *this;
+    }
+
+    inline constexpr BlockView<MDomain<Tags...>, const ElementType> view() const
+    {
+        return *this;
+    }
+
+    inline constexpr BlockView<MDomain<Tags...>, ElementType> view()
+    {
+        return *this;
     }
 };
 
