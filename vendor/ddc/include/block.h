@@ -24,8 +24,6 @@ public:
 
     using layout_type = typename BlockView_::layout_type;
 
-    using accessor_type = typename BlockView_::accessor_type;
-
     using mapping_type = typename BlockView_::mapping_type;
 
     using element_type = typename BlockView_::element_type;
