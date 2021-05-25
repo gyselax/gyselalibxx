@@ -143,6 +143,8 @@ void cos_splines_test(
     }
 
     max_norm_error_int = spline.integrate();
+
+    delete bspline;
 }
 
 
