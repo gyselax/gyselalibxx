@@ -67,7 +67,7 @@ public:
 
     inline ~Block()
     {
-        delete[] this->raw_view().data();
+        operator delete(this->raw_view().data(), std::align_val_t(64));
     }
 
     /** Copy-assigns a new value to this field
