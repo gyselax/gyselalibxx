@@ -11,6 +11,8 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 ## We use C++17 all around!
 set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
+# List of options
+option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
 
 # Our dependencies
 
@@ -27,6 +29,11 @@ find_package(FFTW REQUIRED COMPONENTS DOUBLE_LIB)
 if("${BUILD_TESTING}")
     option(INSTALL_GTEST "Enable installation of googletest." OFF)
     add_subdirectory("vendor/googletest/" "googletest")
+endif()
+
+## Must come after googletest
+if(${BUILD_BENCHMARKS})
+    add_subdirectory("vendor/benchmark/" "benchmark")
 endif()
 
 ## Look for mdspan in `vendor/`

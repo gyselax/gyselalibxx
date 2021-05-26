@@ -27,3 +27,7 @@ target_link_libraries(ddc
 add_library(ddc::ddc ALIAS ddc)
 
 add_subdirectory(tests/)
+
+if(${BUILD_BENCHMARKS})
+    add_subdirectory(benchmarks)
+endif()

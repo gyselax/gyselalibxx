@@ -9,3 +9,6 @@
 	path = vendor/mdarray
 	url = https://github.com/jbigot/mdarray.git
 	branch = master
+[submodule "vendor/benchmark"]
+	path = vendor/benchmark
+	url = https://github.com/google/benchmark.git
