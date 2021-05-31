@@ -149,7 +149,7 @@ private:
 public:
     inline constexpr NonUniformMesh(NonUniformMesh const& other) = default;
 
-    inline constexpr NonUniformMesh(NonUniformMesh const&& other) = default;
+    inline constexpr NonUniformMesh(NonUniformMesh&& other) = default;
 
     inline constexpr NonUniformMesh(std::vector<RCoord_>&& points, MCoord_ lbound)
         : m_points(std::move(points))
