@@ -251,12 +251,7 @@ public:
         return mesh().to_real(lbound<OTags...>());
     }
 
-    inline constexpr MCoord_& ubound() noexcept
-    {
-        return lbound() + m_points.size();
-    }
-
-    inline constexpr const MCoord_& ubound() const noexcept
+    inline constexpr MCoord_ ubound() const noexcept
     {
         return lbound() + m_points.size();
     }
