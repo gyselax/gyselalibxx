@@ -177,28 +177,6 @@ public:
     {
     }
 
-    friend constexpr bool operator==(const NonUniformMesh& xx, const NonUniformMesh& yy)
-    {
-        return (&xx == &yy) || (xx.m_origin == yy.m_origin && xx.m_step == yy.m_step);
-    }
-
-    friend constexpr bool operator!=(const NonUniformMesh& xx, const NonUniformMesh& yy)
-    {
-        return (&xx != &yy) && (xx.m_origin != yy.m_origin || xx.m_step != yy.m_step);
-    }
-
-    template <class OTag>
-    friend constexpr bool operator==(const NonUniformMesh& xx, const NonUniformMesh<OTag>& yy)
-    {
-        return false;
-    }
-
-    template <class OTag>
-    friend constexpr bool operator!=(const NonUniformMesh& xx, const NonUniformMesh<OTag>& yy)
-    {
-        return false;
-    }
-
     static inline constexpr size_t rank() noexcept
     {
         return 1;
