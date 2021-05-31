@@ -159,12 +159,12 @@ public:
     /** Constructs a new BlockView by copy, yields a new view to the same data
      * @param other the BlockView to copy
      */
-    inline constexpr BlockView(const BlockView& other) noexcept = default;
+    inline constexpr BlockView(const BlockView& other) = default;
 
     /** Constructs a new BlockView by move
      * @param other the BlockView to move
      */
-    inline constexpr BlockView(BlockView&& other) noexcept = default;
+    inline constexpr BlockView(BlockView&& other) = default;
 
     /** Constructs a new BlockView by copy of a block, yields a new view to the same data
      * @param other the BlockView to move
@@ -198,13 +198,13 @@ public:
      * @param other the BlockView to copy
      * @return *this
      */
-    inline constexpr BlockView& operator=(const BlockView& other) noexcept = default;
+    inline constexpr BlockView& operator=(const BlockView& other) = default;
 
     /** Move-assigns a new value to this BlockView
      * @param other the BlockView to move
      * @return *this
      */
-    inline constexpr BlockView& operator=(BlockView&& other) noexcept = default;
+    inline constexpr BlockView& operator=(BlockView&& other) = default;
 
     template <class QueryTag>
     static constexpr std::size_t tag_rank()

@@ -46,11 +46,11 @@ class TaggedTuple<TypeSeq<ElementTypes...>, TypeSeq<Tags...>>
     std::tuple<ElementTypes...> m_values;
 
 public:
-    constexpr TaggedTuple() noexcept = default;
+    constexpr TaggedTuple() = default;
 
-    constexpr TaggedTuple(const TaggedTuple&) noexcept = default;
+    constexpr TaggedTuple(const TaggedTuple&) = default;
 
-    constexpr TaggedTuple(TaggedTuple&&) noexcept = default;
+    constexpr TaggedTuple(TaggedTuple&&) = default;
 
     template <class... Params>
     inline constexpr TaggedTuple(Params... params) noexcept
@@ -70,9 +70,9 @@ public:
     {
     }
 
-    constexpr inline TaggedTuple& operator=(const TaggedTuple& other) noexcept = default;
+    constexpr inline TaggedTuple& operator=(const TaggedTuple& other) = default;
 
-    constexpr inline TaggedTuple& operator=(TaggedTuple&& other) noexcept = default;
+    constexpr inline TaggedTuple& operator=(TaggedTuple&& other) = default;
 
     template <class... OElementTypes, class... OTags>
     constexpr inline TaggedTuple& operator=(

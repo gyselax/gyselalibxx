@@ -100,11 +100,11 @@ protected:
     std::array<ElementType, sizeof...(Tags)> m_values;
 
 public:
-    inline constexpr TaggedArrayImpl() noexcept = default;
+    inline constexpr TaggedArrayImpl() = default;
 
-    inline constexpr TaggedArrayImpl(TaggedArrayImpl const&) noexcept = default;
+    inline constexpr TaggedArrayImpl(TaggedArrayImpl const&) = default;
 
-    inline constexpr TaggedArrayImpl(TaggedArrayImpl&&) noexcept = default;
+    inline constexpr TaggedArrayImpl(TaggedArrayImpl&&) = default;
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedArrayImpl(TaggedArray<OElementType, OTags...> const& other) noexcept
@@ -128,9 +128,9 @@ public:
     {
     }
 
-    constexpr inline TaggedArrayImpl& operator=(const TaggedArrayImpl& other) noexcept = default;
+    constexpr inline TaggedArrayImpl& operator=(const TaggedArrayImpl& other) = default;
 
-    constexpr inline TaggedArrayImpl& operator=(TaggedArrayImpl&& other) noexcept = default;
+    constexpr inline TaggedArrayImpl& operator=(TaggedArrayImpl&& other) = default;
 
     template <class... OTags>
     constexpr inline TaggedArrayImpl& operator=(
@@ -278,11 +278,11 @@ class TaggedArray<ElementType, Tag0, Tag1, Tags...>
     using Super = detail::TaggedArrayImpl<TaggedArray<ElementType, Tag0, Tag1, Tags...>>;
 
 public:
-    inline constexpr TaggedArray() noexcept = default;
+    inline constexpr TaggedArray() = default;
 
-    inline constexpr TaggedArray(TaggedArray const&) noexcept = default;
+    inline constexpr TaggedArray(TaggedArray const&) = default;
 
-    inline constexpr TaggedArray(TaggedArray&&) noexcept = default;
+    inline constexpr TaggedArray(TaggedArray&&) = default;
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedArray(TaggedArray<OElementType, OTags...> const& other) noexcept
@@ -314,11 +314,11 @@ class TaggedArray<ElementType, Tag>
     using Super = detail::SingleTagArrayImpl<TaggedArray<ElementType, Tag>>;
 
 public:
-    inline constexpr TaggedArray() noexcept = default;
+    inline constexpr TaggedArray() = default;
 
-    inline constexpr TaggedArray(TaggedArray const&) noexcept = default;
+    inline constexpr TaggedArray(TaggedArray const&) = default;
 
-    inline constexpr TaggedArray(TaggedArray&&) noexcept = default;
+    inline constexpr TaggedArray(TaggedArray&&) = default;
 
     template <
             class OElementType,
@@ -353,11 +353,11 @@ class TaggedArray<ElementType> : public detail::TaggedArrayImpl<TaggedArray<Elem
     using Super = detail::SingleTagArrayImpl<TaggedArray<ElementType>>;
 
 public:
-    inline constexpr TaggedArray() noexcept = default;
+    inline constexpr TaggedArray() = default;
 
-    inline constexpr TaggedArray(TaggedArray const&) noexcept = default;
+    inline constexpr TaggedArray(TaggedArray const&) = default;
 
-    inline constexpr TaggedArray(TaggedArray&&) noexcept = default;
+    inline constexpr TaggedArray(TaggedArray&&) = default;
 
     template <
             class OElementType,
