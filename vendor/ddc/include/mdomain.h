@@ -234,6 +234,11 @@ public:
         return m_mesh;
     }
 
+    inline constexpr RCoord_ to_real(MCoord_ const& icoord) const noexcept
+    {
+        return m_mesh.to_real(icoord);
+    }
+
     inline constexpr MCoord_& lbound() noexcept
     {
         return m_lbound;

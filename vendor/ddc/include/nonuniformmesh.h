@@ -187,7 +187,7 @@ public:
         return m_points.size();
     }
 
-    inline constexpr RCoord_ to_real(MCoord_ const icoord) const noexcept
+    inline constexpr RCoord_ to_real(MCoord_ const& icoord) const noexcept
     {
         return m_points[icoord];
     }
