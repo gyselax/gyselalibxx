@@ -1,6 +1,6 @@
 add_library(splines STATIC
-	spline_interpolator_1d.cpp
-	spline_interpolator_2d.cpp
+	spline_builder_1d.cpp
+	spline_builder_2d.cpp
 )
 
 target_compile_features(splines

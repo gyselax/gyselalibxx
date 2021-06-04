@@ -1,190 +1,185 @@
 #include <cassert>
 #include <cmath>
+#include <memory>
 #include <type_traits>
 
 #include "bsplines_non_uniform.h"
 #include "bsplines_uniform.h"
 #include "spline_1d.h"
 
-Spline_1D::Spline_1D(
+Spline1D::Spline1D(
         const BSplines& bspl,
         const BoundaryValue& left_bc,
         const BoundaryValue& right_bc)
-    : bcoef_ptr(new double[bspl.degree + bspl.ncells])
-    , bcoef(bcoef_ptr.get(), bspl.degree + bspl.ncells)
-    , bspl(bspl)
-    , left_bc(left_bc)
-    , right_bc(right_bc)
+    : m_bcoef_ptr(std::make_unique<double[]>(bspl.degree() + bspl.ncells()))
+    , m_bcoef(m_bcoef_ptr.get(), bspl.degree() + bspl.ncells())
+    , m_bspl(bspl)
+    , m_left_bc(left_bc)
+    , m_right_bc(right_bc)
 {
 }
 
-bool Spline_1D::belongs_to_space(const BSplines& bspline) const
+bool Spline1D::belongs_to_space(const BSplines& bspline) const
 {
-    return &bspl == &bspline;
+    return &m_bspl == &bspline;
 }
 
-template <class T, typename std::enable_if<std::is_base_of<BSplines, T>::value>::type* = nullptr>
-double Spline_1D::eval_intern_no_bcs(double x, const T& bspl, DSpan1D& vals) const
+template <class T, std::enable_if_t<std::is_base_of_v<BSplines, T>>*>
+double Spline1D::eval_intern_no_bcs(double x, const T& bspl, DSpan1D& vals) const
 {
     int jmin;
 
     bspl.eval_basis(x, vals, jmin);
 
     double y = 0.0;
-    for (int i(0); i < bspl.degree + 1; ++i) {
-        y += bcoef(jmin + i) * vals(i);
+    for (int i(0); i < bspl.degree() + 1; ++i) {
+        y += m_bcoef(jmin + i) * vals(i);
     }
     return y;
 }
 
-template <
-        class T,
-        bool periodic,
-        typename std::enable_if<std::is_base_of<BSplines, T>::value>::type* = nullptr>
-double Spline_1D::eval_intern(double x, const T& bspl, DSpan1D& vals) const
+template <class T, bool periodic, std::enable_if_t<std::is_base_of_v<BSplines, T>>*>
+double Spline1D::eval_intern(double x, const T& bspl, DSpan1D& vals) const
 {
     if constexpr (periodic) {
-        if (x < bspl.xmin || x > bspl.xmax)
+        if (x < bspl.xmin() || x > bspl.xmax())
             [[unlikely]]
             {
-                x -= std::floor((x - bspl.xmin) / bspl.length) * bspl.length;
+                x -= std::floor((x - bspl.xmin()) / bspl.length()) * bspl.length();
             }
     } else {
-        if (x < bspl.xmin)
+        if (x < bspl.xmin())
             [[unlikely]]
             {
-                return left_bc(x);
+                return m_left_bc(x);
             }
-        if (x > bspl.xmax)
+        if (x > bspl.xmax())
             [[unlikely]]
             {
-                return right_bc(x);
+                return m_right_bc(x);
             }
     }
     return eval_intern_no_bcs<T>(x, bspl, vals);
 }
 
-template <class T, typename std::enable_if<std::is_base_of<BSplines, T>::value>::type* = nullptr>
-double Spline_1D::eval_deriv_intern(double x, const T& bspl, DSpan1D& vals) const
+template <class T, std::enable_if_t<std::is_base_of_v<BSplines, T>>*>
+double Spline1D::eval_deriv_intern(double x, const T& bspl, DSpan1D& vals) const
 {
     int jmin;
 
     bspl.eval_deriv(x, vals, jmin);
 
     double y = 0.0;
-    for (int i(0); i < bspl.degree + 1; ++i) {
-        y += bcoef(jmin + i) * vals(i);
+    for (int i(0); i < bspl.degree() + 1; ++i) {
+        y += m_bcoef(jmin + i) * vals(i);
     }
     return y;
 }
 
-double Spline_1D::eval(double x) const
+double Spline1D::eval(double x) const
 {
-    double values[bspl.degree + 1];
-    DSpan1D vals(values, bspl.degree + 1);
+    std::vector<double> values(m_bspl.degree() + 1);
+    DSpan1D vals(values.data(), values.size());
 
-    if (bspl.uniform) {
-        if (bspl.periodic) {
+    if (m_bspl.is_uniform()) {
+        if (m_bspl.is_periodic()) {
             return eval_intern<
-                    BSplines_uniform,
-                    true>(x, static_cast<const BSplines_uniform&>(bspl), vals);
+                    UniformBSplines,
+                    true>(x, static_cast<const UniformBSplines&>(m_bspl), vals);
         } else {
             return eval_intern<
-                    BSplines_uniform,
-                    false>(x, static_cast<const BSplines_uniform&>(bspl), vals);
+                    UniformBSplines,
+                    false>(x, static_cast<const UniformBSplines&>(m_bspl), vals);
         }
     } else {
-        if (bspl.periodic) {
+        if (m_bspl.is_periodic()) {
             return eval_intern<
-                    BSplines_non_uniform,
-                    true>(x, static_cast<const BSplines_non_uniform&>(bspl), vals);
+                    NonUniformBSplines,
+                    true>(x, static_cast<const NonUniformBSplines&>(m_bspl), vals);
         } else {
             return eval_intern<
-                    BSplines_non_uniform,
-                    false>(x, static_cast<const BSplines_non_uniform&>(bspl), vals);
+                    NonUniformBSplines,
+                    false>(x, static_cast<const NonUniformBSplines&>(m_bspl), vals);
         }
     }
 }
 
-double Spline_1D::eval_deriv(double x) const
+double Spline1D::eval_deriv(double x) const
 {
-    double values[bspl.degree + 1];
-    DSpan1D vals(values, bspl.degree + 1);
+    std::vector<double> values(m_bspl.degree() + 1);
+    DSpan1D vals(values.data(), values.size());
 
-    if (bspl.uniform)
+    if (m_bspl.is_uniform())
         return eval_deriv_intern<
-                BSplines_uniform>(x, static_cast<const BSplines_uniform&>(bspl), vals);
+                UniformBSplines>(x, static_cast<const UniformBSplines&>(m_bspl), vals);
     else
         return eval_deriv_intern<
-                BSplines_non_uniform>(x, static_cast<const BSplines_non_uniform&>(bspl), vals);
+                NonUniformBSplines>(x, static_cast<const NonUniformBSplines&>(m_bspl), vals);
 }
 
-template <
-        class T,
-        bool periodic,
-        typename std::enable_if<std::is_base_of<BSplines, T>::value>::type* = nullptr>
-void Spline_1D::eval_array_loop(DSpan1D const& x, DSpan1D& y) const
+template <class T, bool periodic, std::enable_if_t<std::is_base_of_v<BSplines, T>>*>
+void Spline1D::eval_array_loop(DSpan1D const& x, DSpan1D& y) const
 {
-    const T& l_bspl = static_cast<const T&>(bspl);
+    const T& l_bspl = static_cast<const T&>(m_bspl);
 
     assert(x.extent(0) == y.extent(0));
-    double values[l_bspl.degree + 1];
-    DSpan1D vals(values, l_bspl.degree + 1);
+    std::vector<double> values(l_bspl.degree() + 1);
+    DSpan1D vals(values.data(), values.size());
 
     for (int i(0); i < x.extent(0); ++i) {
         y(i) = eval_intern<T, periodic>(x(i), l_bspl, vals);
     }
 }
 
-template <class T, typename std::enable_if<std::is_base_of<BSplines, T>::value>::type* = nullptr>
-void Spline_1D::eval_array_deriv_loop(DSpan1D const& x, DSpan1D& y) const
+template <class T, std::enable_if_t<std::is_base_of_v<BSplines, T>>*>
+void Spline1D::eval_array_deriv_loop(DSpan1D const& x, DSpan1D& y) const
 {
-    const T& l_bspl = static_cast<const T&>(bspl);
+    const T& l_bspl = static_cast<const T&>(m_bspl);
 
     assert(x.extent(0) == y.extent(0));
-    double values[l_bspl.degree + 1];
-    DSpan1D vals(values, l_bspl.degree + 1);
+    std::vector<double> values(l_bspl.degree() + 1);
+    DSpan1D vals(values.data(), values.size());
 
     for (int i(0); i < x.extent(0); ++i) {
         y(i) = eval_deriv_intern<T>(x(i), l_bspl, vals);
     }
 }
 
-void Spline_1D::eval_array(DSpan1D const x, DSpan1D y) const
+void Spline1D::eval_array(DSpan1D const x, DSpan1D y) const
 {
-    if (bspl.uniform) {
-        if (bspl.periodic) {
-            return eval_array_loop<BSplines_uniform, true>(x, y);
+    if (m_bspl.is_uniform()) {
+        if (m_bspl.is_periodic()) {
+            return eval_array_loop<UniformBSplines, true>(x, y);
         } else {
-            return eval_array_loop<BSplines_uniform, false>(x, y);
+            return eval_array_loop<UniformBSplines, false>(x, y);
         }
     } else {
-        if (bspl.periodic) {
-            return eval_array_loop<BSplines_non_uniform, true>(x, y);
+        if (m_bspl.is_periodic()) {
+            return eval_array_loop<NonUniformBSplines, true>(x, y);
         } else {
-            return eval_array_loop<BSplines_non_uniform, false>(x, y);
+            return eval_array_loop<NonUniformBSplines, false>(x, y);
         }
     }
 }
 
-void Spline_1D::eval_array_deriv(DSpan1D const x, DSpan1D y) const
+void Spline1D::eval_array_deriv(DSpan1D const x, DSpan1D y) const
 {
-    if (bspl.uniform)
-        eval_array_deriv_loop<BSplines_uniform>(x, y);
+    if (m_bspl.is_uniform())
+        eval_array_deriv_loop<UniformBSplines>(x, y);
     else
-        eval_array_deriv_loop<BSplines_non_uniform>(x, y);
+        eval_array_deriv_loop<NonUniformBSplines>(x, y);
 }
 
-double Spline_1D::integrate() const
+double Spline1D::integrate() const
 {
-    double values[bcoef.extent(0)];
-    DSpan1D vals(values, bcoef.extent(0));
+    std::vector<double> values(m_bcoef.extent(0));
+    DSpan1D vals(values.data(), values.size());
 
-    bspl.integrals(vals);
+    m_bspl.integrals(vals);
 
     double y = 0.0;
-    for (int i(0); i < bcoef.extent(0); ++i) {
-        y += bcoef(i) * vals(i);
+    for (int i(0); i < m_bcoef.extent(0); ++i) {
+        y += m_bcoef(i) * vals(i);
     }
     return y;
 }

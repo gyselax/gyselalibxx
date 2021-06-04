@@ -8,7 +8,8 @@
 
 #include "boundary_conditions.h"
 #include "bsplines.h"
-#include "spline_interpolator_1d.h"
+#include "bsplines_uniform.h"
+#include "spline_builder_1d.h"
 
 using namespace std;
 using namespace std::experimental;
@@ -75,18 +76,18 @@ void cos_splines_test(
         DSpan1D const& eval_pts_input)
 {
     // Create B-splines (uniform or non-uniform depending on input)
-    BSplines* bspline = BSplines::new_bsplines(
+    std::shared_ptr<BSplines> bspline = std::make_shared<UniformBSplines>(
             degree,
             (bc_xmin == BoundCond::PERIODIC),
             x0,
             xN,
-            Spline_interpolator_1D::compute_num_cells(degree, bc_xmin, bc_xmax, N));
+            SplineBuilder1D::compute_num_cells(degree, bc_xmin, bc_xmax, N));
 
     // Initialize 1D spline
-    Spline_1D spline(*bspline);
+    Spline1D spline(*bspline);
 
     // Initialize 1D spline interpolator
-    Spline_interpolator_1D spline_interpolator(*bspline, bc_xmin, bc_xmax);
+    SplineBuilder1D spline_interpolator(*bspline, bc_xmin, bc_xmax);
 
     DSpan1D const xgrid = spline_interpolator.get_interp_points();
     DSpan1D eval_pts;
@@ -117,7 +118,7 @@ void cos_splines_test(
     }
     if (bc_xmax == BoundCond::HERMITE) {
         for (int ii = 0; ii < degree / 2; ++ii) {
-            Sderiv_rhs(ii) = eval_cos(x0, coeffs, ii - shift);
+            Sderiv_rhs(ii) = eval_cos(xN, coeffs, ii - shift);
         }
         deriv_r = &Sderiv_rhs;
     }
@@ -143,8 +144,6 @@ void cos_splines_test(
     }
 
     max_norm_error_int = spline.integrate();
-
-    delete bspline;
 }
 
 

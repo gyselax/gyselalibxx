@@ -214,6 +214,16 @@ public:
         return false;
     }
 
+    std::vector<double> points() const noexcept
+    {
+        std::vector<double> points;
+        points.reserve(m_points.size());
+        for (RCoord_ point : m_points) {
+            points.push_back(point);
+        }
+        return points;
+    }
+
     inline constexpr NonUniformMesh const& mesh() const noexcept
     {
         return *this;

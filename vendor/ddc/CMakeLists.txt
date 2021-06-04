@@ -22,6 +22,7 @@ target_include_directories(ddc
 target_link_libraries(ddc
 	PUBLIC
 		mdspan_wrapper::mdsw
+                sll::matrix
 )
 
 add_library(ddc::ddc ALIAS ddc)

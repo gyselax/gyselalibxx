@@ -1,11 +1,38 @@
 #pragma once
 
-#include "bsplines.h"
+#include <memory>
+#include <vector>
 
-class BSplines_non_uniform : public BSplines
+#include "bsplines.h"
+#include "mdomain.h"
+#include "nonuniformmesh.h"
+
+class NonUniformBSplines : public BSplines
 {
+private:
+    std::unique_ptr<double[]> m_knots;
+
+    int m_npoints;
+
 public:
-    BSplines_non_uniform(int degree, bool periodic, std::vector<double> breaks);
+    NonUniformBSplines() = delete;
+    template <class Tag>
+    NonUniformBSplines(int degree, const MDomainImpl<NonUniformMesh<Tag>>& dom)
+        : NonUniformBSplines(degree, Tag::PERIODIC, dom.mesh().points())
+    {
+    }
+    NonUniformBSplines(int degree, bool periodic, const std::vector<double>& breaks);
+    NonUniformBSplines(const NonUniformBSplines& x) = delete;
+    NonUniformBSplines(NonUniformBSplines&& x) = delete;
+    virtual ~NonUniformBSplines() = default;
+    NonUniformBSplines& operator=(const NonUniformBSplines& x) = delete;
+    NonUniformBSplines& operator=(NonUniformBSplines&& x) = delete;
+
+    int npoints() const noexcept
+    {
+        return m_npoints;
+    }
+
     virtual void eval_basis(double x, DSpan1D& values, int& jmin) const override;
     virtual void eval_deriv(double x, DSpan1D& derivs, int& jmin) const override;
     virtual void eval_basis_and_n_derivs(double x, int n, DSpan2D& derivs, int& jmin)
@@ -16,21 +43,18 @@ public:
     {
         // TODO: assert break_idx >= 1 - degree
         // TODO: assert break_idx <= npoints + degree
-        return knots[break_idx + degree];
+        return m_knots[break_idx + m_degree];
     }
-    ~BSplines_non_uniform();
 
-protected:
+    bool is_uniform() const override;
+
+private:
     int find_cell(double x) const;
 
     inline double& get_knot(int break_idx)
     {
         // TODO: assert break_idx >= 1 - degree
         // TODO: assert break_idx <= npoints + degree
-        return knots[break_idx + degree];
+        return m_knots[break_idx + m_degree];
     }
-
-    double* knots;
-    int npoints;
-    friend class Spline_interpolator_1D;
 };

@@ -3,25 +3,25 @@
 #include "blockview.h"
 #include "boundary_value.h"
 #include "iadvectionx.h"
-#include "spline_interpolator_1d.h"
+#include "spline_builder_1d.h"
 
 class SplineAdvectionX : public IAdvectionX
 {
 private:
     const BSplines& m_x_spline_basis;
 
-    const Spline_interpolator_1D& m_spline_interpolator;
+    const SplineBuilder1D& m_spline_interpolator;
 
     const BoundaryValue& m_bc_left;
 
     const BoundaryValue& m_bc_right;
 
 public:
-    SplineAdvectionX(const BSplines& bspl, const Spline_interpolator_1D& spl_interp);
+    SplineAdvectionX(const BSplines& bspl, const SplineBuilder1D& spl_interp);
 
     SplineAdvectionX(
             const BSplines& bspl,
-            const Spline_interpolator_1D& spl_interp,
+            const SplineBuilder1D& spl_interp,
             const BoundaryValue& bc_left,
             const BoundaryValue& bc_right);
 
