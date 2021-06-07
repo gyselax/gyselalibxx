@@ -13,6 +13,14 @@
 #include "mdomain.h"
 #include "null_boundary_value.h"
 
+struct DimX
+{
+    static constexpr bool PERIODIC = true;
+};
+using UniformMDomainX = UniformMDomain<DimX>;
+using RCoordX = RCoord<DimX>;
+using MCoordX = MCoord<DimX>;
+
 class PolynomialEvaluator
 {
 private:
@@ -135,14 +143,14 @@ namespace experimental {
 
 TEST(SplineBuilder, Constructor)
 {
-    UniformMesh<Dim::X> const mesh(RCoordX(0.), RCoordX(0.02));
+    UniformMesh<DimX> const mesh(RCoordX(0.), RCoordX(0.02));
     UniformMDomainX const dom(mesh, MCoordX(101));
 
     std::integral_constant<std::size_t, 2> constexpr spline_degree;
     auto&& bsplines = bsplines_helper(dom, spline_degree);
 
-    BoundCond left_bc = Dim::X::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
-    BoundCond right_bc = Dim::X::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
+    BoundCond left_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
+    BoundCond right_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
     SplineBuilder spline_builder(bsplines, left_bc, right_bc);
     auto&& interpolation_domain = spline_builder.interpolation_domain();
 }
@@ -150,15 +158,15 @@ TEST(SplineBuilder, Constructor)
 TEST(SplineBuilder, BuildSpline)
 {
     int constexpr degree = 10;
-    using NonUniformMeshX = NonUniformMesh<Dim::X>;
-    using UniformMeshX = UniformMesh<Dim::X>;
-    using UniformBSplinesX2 = UniformBSplines<Dim::X, degree>;
+    using NonUniformMeshX = NonUniformMesh<DimX>;
+    using UniformMeshX = UniformMesh<DimX>;
+    using UniformBSplinesX2 = UniformBSplines<DimX, degree>;
     using BlockSplineX2 = Block<UniformBSplinesX2, double>;
     using NonUniformDomainX = MDomainImpl<NonUniformMeshX>;
     using BlockNonUniformX = Block<NonUniformDomainX, double>;
 
-    BoundCond constexpr left_bc = Dim::X::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
-    BoundCond constexpr right_bc = Dim::X::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
+    BoundCond constexpr left_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
+    BoundCond constexpr right_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
     RCoordX constexpr x0 = 0.;
     RCoordX constexpr xN = 1.;
     MCoordX constexpr ncells = 100;

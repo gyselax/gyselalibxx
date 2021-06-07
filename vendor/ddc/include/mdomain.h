@@ -372,21 +372,3 @@ std::ostream& operator<<(std::ostream& out, MDomainImpl<Mesh> const& dom)
 
 template <class... Tags>
 using UniformMDomain = MDomainImpl<UniformMesh<Tags...>>;
-
-using UniformMDomainX = UniformMDomain<Dim::X>;
-
-using UniformMDomainVx = UniformMDomain<Dim::Vx>;
-
-using UniformMDomainXVx = UniformMDomain<Dim::X, Dim::Vx>;
-
-/* For now MDomain is just an alias to UniformMDomain, in the long run, we should use a tuple-based
- * solutions to have different types in each dimension
- */
-template <class... Tags>
-using MDomain = MDomainImpl<UniformMesh<Tags...>>;
-
-using MDomainX = UniformMDomain<Dim::X>;
-
-using MDomainVx = UniformMDomain<Dim::Vx>;
-
-using MDomainXVx = UniformMDomain<Dim::X, Dim::Vx>;

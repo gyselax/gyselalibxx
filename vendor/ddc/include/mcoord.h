@@ -3,7 +3,6 @@
 #include <cstddef>
 #include <utility>
 
-#include "dim.h"
 #include "taggedarray.h"
 
 #include <experimental/mdspan>
@@ -14,12 +13,6 @@ using MLengthElement = std::ptrdiff_t;
 
 template <class... Tags>
 using MCoord = TaggedArray<MCoordElement, Tags...>;
-
-using MCoordX = MCoord<Dim::X>;
-
-using MCoordVx = MCoord<Dim::Vx>;
-
-using MCoordXVx = MCoord<Dim::X, Dim::Vx>;
 
 
 namespace detail {

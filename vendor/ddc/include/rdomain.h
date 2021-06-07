@@ -9,9 +9,3 @@ struct RDomain
 
     RCoord<Tags...> end;
 };
-
-using RDomainX = RDomain<Dim::X>;
-
-using RDomainVx = RDomain<Dim::Vx>;
-
-using RDomainXVx = RDomain<Dim::X, Dim::Vx>;

@@ -17,6 +17,7 @@ target_link_libraries(vlasov
 	PUBLIC
 		ddc::ddc
 		sll::splines
+		vcx::geometry
 )
 
 add_library(vcx::vlasov ALIAS vlasov)

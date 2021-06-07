@@ -146,12 +146,3 @@ inline constexpr auto submesh(const UniformMesh<Tags...>& mesh, SliceSpecs... sl
     using ReturnType = decltype(detail::select_tags(mesh, std::forward<SliceSpecs>(slices)...));
     return ReturnType(mesh);
 }
-
-template <class... Tags>
-using Mesh = UniformMesh<Tags...>;
-
-using MeshX = Mesh<Dim::X>;
-
-using MeshVx = Mesh<Dim::Vx>;
-
-using MeshXVx = Mesh<Dim::X, Dim::Vx>;

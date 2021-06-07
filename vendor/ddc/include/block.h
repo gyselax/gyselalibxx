@@ -3,18 +3,19 @@
 #include "blockview.h"
 
 template <class... Tags, class ElementType>
-class Block<MDomain<Tags...>, ElementType> : public BlockView<MDomain<Tags...>, ElementType>
+class Block<UniformMDomain<Tags...>, ElementType>
+    : public BlockView<UniformMDomain<Tags...>, ElementType>
 {
 public:
     /// ND view on this block
-    using BlockView_ = BlockView<MDomain<Tags...>, ElementType>;
+    using BlockView_ = BlockView<UniformMDomain<Tags...>, ElementType>;
 
-    using BlockSpan_ = BlockView<MDomain<Tags...>, const ElementType>;
+    using BlockSpan_ = BlockView<UniformMDomain<Tags...>, const ElementType>;
 
     /// ND memory view
     using RawView = SpanND<sizeof...(Tags), ElementType>;
 
-    using MDomain_ = MDomain<Tags...>;
+    using MDomain_ = UniformMDomain<Tags...>;
 
     using Mesh = typename MDomain_::Mesh_;
 
@@ -45,7 +46,7 @@ public:
     /** Construct a Block on a domain with uninitialized values
      */
     template <class... OTags>
-    explicit inline constexpr Block(const MDomain<OTags...>& domain)
+    explicit inline constexpr Block(const UniformMDomain<OTags...>& domain)
         : BlockView_(
                 domain.mesh(),
                 RawView(new (std::align_val_t(64)) value_type[domain.size()],
@@ -89,7 +90,7 @@ public:
      * @return *this
      */
     template <class... OTags, class OElementType>
-    inline Block& operator=(Block<MDomain<OTags...>, OElementType>&& other)
+    inline Block& operator=(Block<UniformMDomain<OTags...>, OElementType>&& other)
     {
         copy(*this, other);
         return *this;
@@ -127,38 +128,23 @@ public:
         return this->m_raw(indices.array());
     }
 
-    inline constexpr BlockView<MDomain<Tags...>, const ElementType> cview() const
+    inline constexpr BlockView<UniformMDomain<Tags...>, const ElementType> cview() const
     {
         return *this;
     }
 
-    inline constexpr BlockView<MDomain<Tags...>, const ElementType> cview()
+    inline constexpr BlockView<UniformMDomain<Tags...>, const ElementType> cview()
     {
         return *this;
     }
 
-    inline constexpr BlockView<MDomain<Tags...>, const ElementType> view() const
+    inline constexpr BlockView<UniformMDomain<Tags...>, const ElementType> view() const
     {
         return *this;
     }
 
-    inline constexpr BlockView<MDomain<Tags...>, ElementType> view()
+    inline constexpr BlockView<UniformMDomain<Tags...>, ElementType> view()
     {
         return *this;
     }
 };
-
-template <class ElementType>
-using BlockX = Block<MDomain<Dim::X>, ElementType>;
-
-using DBlockX = BlockX<double>;
-
-template <class ElementType>
-using BlockVx = Block<MDomain<Dim::Vx>, ElementType>;
-
-using DBlockVx = BlockVx<double>;
-
-template <class ElementType>
-using BlockXVx = Block<MDomain<Dim::X, Dim::Vx>, ElementType>;
-
-using DBlockXVx = BlockXVx<double>;

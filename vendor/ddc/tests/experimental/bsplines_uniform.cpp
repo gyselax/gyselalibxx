@@ -8,18 +8,26 @@
 #include "bsplines_uniform.h"
 #include "mdomain.h"
 
+struct DimX
+{
+    static constexpr bool PERIODIC = true;
+};
+using UniformMDomainX = UniformMDomain<DimX>;
+using RCoordX = RCoord<DimX>;
+using MCoordX = MCoord<DimX>;
+
 namespace experimental {
 
 TEST(BSplinesUniform, Constructor)
 {
-    UniformMesh<Dim::X> const mesh(RCoordX(0.), RCoordX(0.02));
+    UniformMesh<DimX> const mesh(RCoordX(0.), RCoordX(0.02));
     UniformMDomainX const dom(mesh, MCoordX(101));
 
     std::integral_constant<std::size_t, 2> constexpr spline_degree;
     auto&& bsplines = bsplines_helper(dom, spline_degree);
 
     EXPECT_EQ(bsplines.degree(), spline_degree.value);
-    EXPECT_EQ(bsplines.is_periodic(), Dim::X::PERIODIC);
+    EXPECT_EQ(bsplines.is_periodic(), DimX::PERIODIC);
     EXPECT_EQ(bsplines.rmin(), 0.);
     EXPECT_EQ(bsplines.rmax(), 2.);
     EXPECT_EQ(bsplines.npoints(), 101);
@@ -30,7 +38,7 @@ TEST(BSplinesUniform, Constructor)
 
 TEST(BSplinesUniform, Comparison)
 {
-    UniformMesh<Dim::X> const mesh(RCoordX(0.), RCoordX(0.02));
+    UniformMesh<DimX> const mesh(RCoordX(0.), RCoordX(0.02));
     UniformMDomainX const dom(mesh, MCoordX(101));
 
     std::integral_constant<std::size_t, 2> constexpr spline_degree;

@@ -14,6 +14,7 @@ target_include_directories(efield
 target_link_libraries(efield
 	PUBLIC
 		ddc::ddc
+		vcx::geometry
 )
 
 add_library(vcx::efield ALIAS efield)

@@ -2,6 +2,17 @@
 
 #include "mdomain.h"
 
+class DimX;
+class DimVx;
+using RCoordX = RCoord<DimX>;
+using MCoordX = MCoord<DimX>;
+using MeshX = UniformMesh<DimX>;
+using MDomainX = UniformMDomain<DimX>;
+using MeshXVx = UniformMesh<DimX, DimVx>;
+using RCoordXVx = RCoord<DimX, DimVx>;
+using MCoordXVx = MCoord<DimX, DimVx>;
+using MDomainXVx = UniformMDomain<DimX, DimVx>;
+
 TEST(MDomainXTest, Constructor)
 {
     constexpr RCoordX origin(1);
@@ -49,11 +60,11 @@ TEST(MDomainXVxTest, Constructor)
 TEST(MDomainXVxTest, ubound)
 {
     MDomainXVx const dom2d(RCoordXVx(0, 0), RCoordXVx(2, 2), MCoordXVx(0, 0), MCoordXVx(100, 200));
-    EXPECT_EQ(dom2d.ubound().get<Dim::X>(), 100ul);
-    EXPECT_EQ(dom2d.ubound<Dim::X>(), 100ul);
+    EXPECT_EQ(dom2d.ubound().get<DimX>(), 100ul);
+    EXPECT_EQ(dom2d.ubound<DimX>(), 100ul);
 
-    EXPECT_EQ(dom2d.ubound().get<Dim::Vx>(), 200ul);
-    EXPECT_EQ(dom2d.ubound<Dim::Vx>(), 200ul);
+    EXPECT_EQ(dom2d.ubound().get<DimVx>(), 200ul);
+    EXPECT_EQ(dom2d.ubound<DimVx>(), 200ul);
 }
 
 TEST(MDomainXVxTest, rmax)
@@ -63,13 +74,13 @@ TEST(MDomainXVxTest, rmax)
                   RCoordXVx(200., 400.),
                   MCoordXVx(0ul, 0ul),
                   MCoordXVx(100ul, 200ul));
-    EXPECT_EQ(dom2d.mesh().to_real(dom2d.ubound()).get<Dim::X>(), 200.);
-    EXPECT_EQ(dom2d.rmax().get<Dim::X>(), 200.);
-    EXPECT_EQ(dom2d.rmax<Dim::X>(), 200.);
+    EXPECT_EQ(dom2d.mesh().to_real(dom2d.ubound()).get<DimX>(), 200.);
+    EXPECT_EQ(dom2d.rmax().get<DimX>(), 200.);
+    EXPECT_EQ(dom2d.rmax<DimX>(), 200.);
 
-    EXPECT_EQ(dom2d.mesh().to_real(dom2d.ubound()).get<Dim::Vx>(), 400.);
-    EXPECT_EQ(dom2d.rmax().get<Dim::Vx>(), 400.);
-    EXPECT_EQ(dom2d.rmax<Dim::Vx>(), 400.);
+    EXPECT_EQ(dom2d.mesh().to_real(dom2d.ubound()).get<DimVx>(), 400.);
+    EXPECT_EQ(dom2d.rmax().get<DimVx>(), 400.);
+    EXPECT_EQ(dom2d.rmax<DimVx>(), 400.);
 }
 
 TEST(MDomainXTest, RangeFor)

@@ -3,8 +3,10 @@
 #include "mdomain.h"
 #include "nonuniformmesh.h"
 
-using NonUniformMeshX = NonUniformMesh<Dim::X>;
-using NonUniformDomainX = MDomain<NonUniformMeshX>;
+class DimX;
+using NonUniformMeshX = NonUniformMesh<DimX>;
+using NonUniformDomainX = MDomainImpl<NonUniformMeshX>;
+using MCoordX = MCoord<DimX>;
 
 TEST(NonUniformDomainXTest, Constructor)
 {

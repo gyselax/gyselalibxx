@@ -1,6 +1,7 @@
 #pragma once
 
 #include "blockview.h"
+#include "geometry.h"
 
 class IAdvectionVx
 {

@@ -10,7 +10,13 @@
 #include "mdomain.h"
 #include "nonuniformmesh.h"
 
-using NonUniformMeshX = NonUniformMesh<Dim::X>;
+struct DimX
+{
+    static constexpr bool PERIODIC = true;
+};
+using NonUniformMeshX = NonUniformMesh<DimX>;
+using RCoordX = RCoord<DimX>;
+using MCoordX = MCoord<DimX>;
 
 namespace experimental {
 
@@ -24,7 +30,7 @@ TEST(BSplinesNonUniform, Constructor)
     auto&& bsplines = bsplines_helper(dom, spline_degree);
 
     EXPECT_EQ(bsplines.degree(), spline_degree.value);
-    EXPECT_EQ(bsplines.is_periodic(), Dim::X::PERIODIC);
+    EXPECT_EQ(bsplines.is_periodic(), DimX::PERIODIC);
     EXPECT_EQ(bsplines.rmin(), 0.);
     EXPECT_EQ(bsplines.rmax(), 2.);
     EXPECT_EQ(bsplines.npoints(), 5);
