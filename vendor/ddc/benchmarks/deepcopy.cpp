@@ -5,6 +5,37 @@
 
 #include "blockview.h"
 
+class DimX;
+class DimVx;
+
+using MeshX = UniformMesh<DimX>;
+using MDomainX = UniformMDomain<DimX>;
+using DBlockX = Block<MDomainX, double>;
+using DBlockSpanX = BlockView<MDomainX, double>;
+using MCoordX = MCoord<DimX>;
+using RCoordX = RCoord<DimX>;
+
+using MeshVx = UniformMesh<DimVx>;
+using MDomainVx = UniformMDomain<DimVx>;
+using DBlockVx = Block<MDomainVx, double>;
+using DBlockSpanVx = BlockView<MDomainVx, double>;
+using MCoordVx = MCoord<DimVx>;
+using RCoordVx = RCoord<DimVx>;
+
+using MeshXVx = UniformMesh<DimX, DimVx>;
+using MDomainXVx = UniformMDomain<DimX, DimVx>;
+using DBlockXVx = Block<MDomainXVx, double>;
+using DBlockSpanXVx = BlockView<MDomainXVx, double>;
+using MCoordXVx = MCoord<DimX, DimVx>;
+using RCoordXVx = RCoord<DimX, DimVx>;
+
+using MeshVxX = UniformMesh<DimVx, DimX>;
+using MDomainVxX = UniformMDomain<DimVx, DimX>;
+using DBlockVxX = Block<MDomainVxX, double>;
+using DBlockSpanVxX = BlockView<MDomainVxX, double>;
+using MCoordVxX = MCoord<DimVx, DimX>;
+using RCoordVxX = RCoord<DimVx, DimX>;
+
 static void memcpy_1d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0), 0.0);
