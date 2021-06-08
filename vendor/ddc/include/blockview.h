@@ -438,7 +438,7 @@ inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(
         BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> to,
         BlockView<UniformMDomain<OTags...>, OElementType, OCONTIGUOUS> const& from) noexcept
 {
-    static_assert(std::is_convertible_v<ElementType, OElementType>, "Not convertible");
+    static_assert(std::is_convertible_v<OElementType, ElementType>, "Not convertible");
     using MCoord_ = typename UniformMDomain<Tags...>::MCoord_;
     assert(to.extents() == from.extents());
     constexpr auto sequential_for = detail::sequential_for_impl<MCoord_>();
