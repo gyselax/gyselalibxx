@@ -6,7 +6,12 @@
 #include <fftw3.h>
 #include <gtest/gtest.h>
 
+#include "block.h"
 #include "fft_1d.h"
+#include "fftw.h"
+#include "geometry.h"
+#include "ifftw.h"
+#include "mdomain.h"
 
 using namespace std;
 
@@ -264,4 +269,66 @@ TEST(FFT, fft1d_deriv)
     EXPECT_LE(max_error, tol) << "While evaluating dfx_dx by FFT \n"
                               << " -> Tolerance= " << tol << "\n"
                               << " -> Max_error= " << max_error << endl;
+}
+
+TEST(FFT, Constructor)
+{
+    using RCoordFx = RCoord<Dim::Fx>;
+    using MCoordFx = MCoord<Dim::Fx>;
+    using UniformMDomainFx = UniformMDomain<Dim::Fx>;
+
+    UniformMDomainX domx(RCoordX(0.), RCoordX(2. * M_PI), MCoordX(0), MCoordX(32));
+    UniformMDomainFx domfx(RCoordFx(0.), RCoordFx(1.0/domx.mesh().step()), MCoordFx(0), MCoordFx(domx.size()));
+    BlockX<std::complex<double>> values(domx);
+    for (std::size_t i = 0; i < domx.size(); ++i) {
+        values(i) = compute_f(domx.to_real(i));
+    }
+
+    Block<UniformMDomainFx, std::complex<double>> fourier_values(domfx);
+    FftwFourierTransform<Dim::X> fft;
+    fft(fourier_values, values);
+
+    BlockX<std::complex<double>> ifft_fft_values(domx);
+    FftwInverseFourierTransform<Dim::X> ifft;
+    ifft(ifft_fft_values, fourier_values);
+
+    for (std::size_t ii = 0; ii < domx.size(); ++ii) {
+        ifft_fft_values(ii) /= domx.size();
+    }
+
+    double max_error = 0.;
+    for (int ii = 0; ii < domx.size(); ++ii) {
+        max_error = std::fmax(max_error, std::abs(values(ii) - ifft_fft_values(ii)));
+    }
+
+    constexpr double tol = 1e-15;
+    EXPECT_LE(max_error, tol) << "While evaluating iFFT(FFT(f))=f \n"
+                              << " -> Tolerance= " << tol << "\n"
+                              << " -> Max_error=" << max_error << endl;
+}
+
+TEST(FFT, Simple)
+{
+    using Fx = Fourier<Dim::X>;
+    using RCoordFx = RCoord<Fx>;
+    using MCoordFx = MCoord<Fx>;
+    using UniformMDomainFx = UniformMDomain<Fx>;
+
+    UniformMDomainX domx(RCoordX(0.), RCoordX(2.), MCoordX(0), MCoordX(101));
+    UniformMDomainFx domfx(RCoordFx(0.), RCoordFx(1.0/domx.mesh().step()), MCoordFx(0), MCoordFx(domx.size()));
+
+    BlockX<std::complex<double>> values(domx);
+    for (std::size_t i = 0; i < domx.size(); ++i) {
+        values(i) = compute_f(domx.to_real(i));
+    }
+
+    Block<UniformMDomainFx, std::complex<double>> fourier_values(domfx);
+    FftwFourierTransform<Dim::X> fft;
+    fft(fourier_values, values);
+
+    std::vector<double> freq = fft.ifftshift(domfx);
+    std::cout << freq.size() << std::endl;
+    for (auto i = 0; i < domfx.size(); ++i) {
+        std::cout << domfx.to_real(i) << ' ' << std::abs(fourier_values(i)) << ' ' << freq[i] << std::endl;
+    }
 }

@@ -1,5 +1,6 @@
 add_library(efield STATIC
 	nullefieldsolver.cpp
+        efieldfftsolver.cpp
 )
 
 target_compile_features(efield
@@ -14,6 +15,7 @@ target_include_directories(efield
 target_link_libraries(efield
 	PUBLIC
 		ddc::ddc
+                vcx::fft
 		vcx::geometry
 )
 

@@ -3,7 +3,7 @@ add_library(fft STATIC
 )
 
 target_compile_features(fft
-	INTERFACE
+	PUBLIC
 		cxx_std_17
 )
 
@@ -12,10 +12,11 @@ target_include_directories(fft
 		"${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-#target_link_libraries(fft
-#	INTERFACE
-#		vcx::array_tools
-#		vcx::geometry
-#)
+target_link_libraries(fft
+	PUBLIC
+		ddc::ddc
+                vcx::geometry
+)
+
 
 add_library(vcx::fft ALIAS fft)

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <complex>
-#include <iostream>
 #include <vector>
 
 #include <fftw3.h>

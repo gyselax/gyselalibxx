@@ -1,6 +1,14 @@
 #pragma once
 
 #include <block.h>
+#include <experimental/bsplines.h>
+
+template <class Tag>
+struct Fourier
+{
+    using base_tag_type = Tag;
+    static constexpr bool PERIODIC = Tag::PERIODIC;
+};
 
 namespace Dim {
 
@@ -19,6 +27,10 @@ struct T
     static constexpr bool PERIODIC = false;
 };
 
+using Fx = Fourier<X>;
+
+using Fvx = Fourier<Vx>;
+
 } // namespace Dim
 
 using RCoordT = RCoord<Dim::T>;
@@ -28,6 +40,8 @@ using RCoordX = RCoord<Dim::X>;
 using RCoordVx = RCoord<Dim::Vx>;
 
 using RCoordXVx = RCoord<Dim::X, Dim::Vx>;
+
+using RCoordFx = RCoord<Dim::Fx>;
 
 using RLengthT = RLength<Dim::T>;
 
@@ -55,6 +69,8 @@ using MCoordVx = MCoord<Dim::Vx>;
 
 using MCoordXVx = MCoord<Dim::X, Dim::Vx>;
 
+using MCoordFx = MCoord<Dim::Fx>;
+
 using UniformMDomainX = UniformMDomain<Dim::X>;
 
 using UniformMDomainVx = UniformMDomain<Dim::Vx>;
@@ -66,6 +82,10 @@ using MDomainX = UniformMDomain<Dim::X>;
 using MDomainVx = UniformMDomain<Dim::Vx>;
 
 using MDomainXVx = UniformMDomain<Dim::X, Dim::Vx>;
+
+using MDomainFx = UniformMDomain<Dim::Fx>;
+
+using BSplinesX = experimental::BSplines<MDomainX, 4>;
 
 using DBlockSpanX = BlockView<MDomainX, double>;
 
