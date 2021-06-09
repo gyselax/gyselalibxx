@@ -278,7 +278,11 @@ TEST(FFT, Constructor)
     using UniformMDomainFx = UniformMDomain<Dim::Fx>;
 
     UniformMDomainX domx(RCoordX(0.), RCoordX(2. * M_PI), MCoordX(0), MCoordX(32));
-    UniformMDomainFx domfx(RCoordFx(0.), RCoordFx(1.0/domx.mesh().step()), MCoordFx(0), MCoordFx(domx.size()));
+    UniformMDomainFx
+            domfx(RCoordFx(0.),
+                  RCoordFx(1.0 / domx.mesh().step()),
+                  MCoordFx(0),
+                  MCoordFx(domx.size()));
     BlockX<std::complex<double>> values(domx);
     for (std::size_t i = 0; i < domx.size(); ++i) {
         values(i) = compute_f(domx.to_real(i));
@@ -315,7 +319,11 @@ TEST(FFT, Simple)
     using UniformMDomainFx = UniformMDomain<Fx>;
 
     UniformMDomainX domx(RCoordX(0.), RCoordX(2.), MCoordX(0), MCoordX(101));
-    UniformMDomainFx domfx(RCoordFx(0.), RCoordFx(1.0/domx.mesh().step()), MCoordFx(0), MCoordFx(domx.size()));
+    UniformMDomainFx
+            domfx(RCoordFx(0.),
+                  RCoordFx(1.0 / domx.mesh().step()),
+                  MCoordFx(0),
+                  MCoordFx(domx.size()));
 
     BlockX<std::complex<double>> values(domx);
     for (std::size_t i = 0; i < domx.size(); ++i) {
@@ -329,6 +337,7 @@ TEST(FFT, Simple)
     std::vector<double> freq = fft.ifftshift(domfx);
     std::cout << freq.size() << std::endl;
     for (auto i = 0; i < domfx.size(); ++i) {
-        std::cout << domfx.to_real(i) << ' ' << std::abs(fourier_values(i)) << ' ' << freq[i] << std::endl;
+        std::cout << domfx.to_real(i) << ' ' << std::abs(fourier_values(i)) << ' ' << freq[i]
+                  << std::endl;
     }
 }

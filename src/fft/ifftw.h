@@ -1,7 +1,5 @@
 #pragma once
 
-#include "ifft.h"
-
 #include <array>
 #include <complex>
 #include <type_traits>
@@ -10,6 +8,8 @@
 #include <fftw3.h>
 #include <geometry.h>
 #include <mdomain.h>
+
+#include "ifft.h"
 
 template <class... Tags>
 class FftwInverseFourierTransform : public IInverseFourierTransform<Tags...>
