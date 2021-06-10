@@ -179,7 +179,7 @@ void SplineBuilder<BSplines>::compute_interpolant_degree1(
     for (int i(0); i < m_bsplines.nbasis(); ++i) {
         spline(i) = vals(i);
     }
-    if constexpr (m_bsplines.is_periodic()) {
+    if constexpr (bsplines_type::is_periodic()) {
         spline(m_bsplines.nbasis()) = spline(0);
     }
 }
