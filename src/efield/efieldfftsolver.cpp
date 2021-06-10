@@ -40,19 +40,19 @@ static void compute_rho(DBlockSpanX const& rho, DBlockViewXVx const& fdistribu)
     }
 }
 
-static void compute_phi(DBlockSpanX const& ex, DBlockViewX const& phi)
+static void compute_phi(DBlockSpanX const& ex, DBlockViewX const& phi_x)
 {
     using namespace experimental;
-    // TODO: solve the conflict of meshes, the problem comes from the SplineBuilder
-    BSplinesX bsplines(phi.domain());
-    SplineBuilder builder(bsplines, BoundCond::PERIODIC, BoundCond::PERIODIC);
+    auto&& dom_x = phi_x.domain();
+    BSplinesX bsplines(dom_x);
+    SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> builder(bsplines);
     Block<BSplinesX, double> coef(bsplines);
-    // builder(coef, phi_x, nullptr, nullptr);
+    builder(coef, phi_x, nullptr, nullptr);
 
-    // SplineEvaluator evaluator(coef, NullBoundaryValue::value, NullBoundaryValue::value);
-    // for (MCoordX ix : dom_x) {
-    //     ex(ix) = -evaluator.deriv(dom_x.to_real(ix));
-    // }
+    SplineEvaluator evaluator(coef, NullBoundaryValue::value, NullBoundaryValue::value);
+    for (MCoordX ix : dom_x) {
+        ex(ix) = -evaluator.deriv(dom_x.to_real(ix));
+    }
 }
 
 // 1- Inner solvers sall be passed in the constructor

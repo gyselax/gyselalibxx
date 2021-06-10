@@ -10,6 +10,7 @@
 #include "experimental/spline_evaluator.hpp"
 
 #include "block_nonuniform.h"
+#include "block.h"
 #include "mdomain.h"
 #include "null_boundary_value.h"
 
@@ -143,20 +144,22 @@ namespace experimental {
 
 TEST(SplineBuilder, Constructor)
 {
+    using BSplinesX = BSplines<UniformMDomainX, 2>;
+
     UniformMesh<DimX> const mesh(RCoordX(0.), RCoordX(0.02));
     UniformMDomainX const dom(mesh, MCoordX(101));
 
     std::integral_constant<std::size_t, 2> constexpr spline_degree;
     auto&& bsplines = make_bsplines(dom, spline_degree);
 
-    BoundCond left_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
-    BoundCond right_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
-    SplineBuilder spline_builder(bsplines, left_bc, right_bc);
+    SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> spline_builder(bsplines);
     auto&& interpolation_domain = spline_builder.interpolation_domain();
 }
 
 TEST(SplineBuilder, BuildSpline)
 {
+    BoundCond constexpr left_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
+    BoundCond constexpr right_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
     int constexpr degree = 10;
     using NonUniformMeshX = NonUniformMesh<DimX>;
     using UniformMeshX = UniformMesh<DimX>;
@@ -164,9 +167,8 @@ TEST(SplineBuilder, BuildSpline)
     using BlockSplineX2 = Block<UniformBSplinesX2, double>;
     using NonUniformDomainX = MDomainImpl<NonUniformMeshX>;
     using BlockNonUniformX = Block<NonUniformDomainX, double>;
+    using BlockUniformX = Block<UniformMDomainX, double>;
 
-    BoundCond constexpr left_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
-    BoundCond constexpr right_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
     RCoordX constexpr x0 = 0.;
     RCoordX constexpr xN = 1.;
     MCoordX constexpr ncells = 100;
@@ -183,11 +185,11 @@ TEST(SplineBuilder, BuildSpline)
     BlockSplineX2 coef(bsplines);
 
     // 3. Create a SplineBuilder over BSplines using some boundary conditions
-    SplineBuilder spline_builder(bsplines, left_bc, right_bc);
-    NonUniformDomainX const& interpolation_domain = spline_builder.interpolation_domain();
+    SplineBuilder<UniformBSplinesX2, left_bc, right_bc> spline_builder(bsplines);
+    UniformMDomainX const& interpolation_domain = spline_builder.interpolation_domain();
 
     // 4. Allocate and fill a block over the interpolation domain
-    BlockNonUniformX yvals(interpolation_domain);
+    BlockUniformX yvals(interpolation_domain);
     CosineEvaluator cosine_evaluator;
     cosine_evaluator(yvals);
 
@@ -211,10 +213,10 @@ TEST(SplineBuilder, BuildSpline)
     // 6. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
     SplineEvaluator spline(coef, NullBoundaryValue::value, NullBoundaryValue::value);
 
-    BlockNonUniformX spline_eval(interpolation_domain);
+    BlockUniformX spline_eval(interpolation_domain);
     spline(spline_eval);
 
-    BlockNonUniformX spline_eval_deriv(interpolation_domain);
+    BlockUniformX spline_eval_deriv(interpolation_domain);
     spline.deriv(spline_eval_deriv);
 
     // 7. Checking errors

@@ -72,10 +72,9 @@ public:
         DSpan1D vals(values.data(), values.size());
 
         auto const& domain = block_mesh.domain();
-        auto const& mesh = domain.mesh();
 
         for (std::size_t i = 0; i < domain.size(); ++i) {
-            block_mesh(i) = eval(mesh.to_real(domain[i]), vals);
+            block_mesh(i) = eval(domain.to_real(i), vals);
         }
     }
 
