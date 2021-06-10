@@ -27,7 +27,7 @@ TEST(BSplinesNonUniform, Constructor)
     MDomainImpl<NonUniformMeshX> const dom(mesh, MCoordX(5));
 
     std::integral_constant<std::size_t, 2> constexpr spline_degree;
-    auto&& bsplines = bsplines_helper(dom, spline_degree);
+    auto&& bsplines = make_bsplines(dom, spline_degree);
 
     EXPECT_EQ(bsplines.degree(), spline_degree.value);
     EXPECT_EQ(bsplines.is_periodic(), DimX::PERIODIC);
@@ -46,7 +46,7 @@ TEST(BSplinesNonUniform, Comparison)
     MDomainImpl<NonUniformMeshX> const dom(mesh, MCoordX(5));
 
     std::integral_constant<std::size_t, 2> constexpr spline_degree;
-    auto&& bsplines = experimental::bsplines_helper(dom, spline_degree);
+    auto&& bsplines = experimental::make_bsplines(dom, spline_degree);
 
     NonUniformBSplines old_bsplines(spline_degree.value, dom);
 

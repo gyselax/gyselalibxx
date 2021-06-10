@@ -8,18 +8,12 @@ namespace experimental {
 template <class Domain, std::size_t D>
 class BSplines;
 
-// Helper for template deduction
-struct BSplinesHelper
+template <class Domain, std::size_t D>
+constexpr BSplines<Domain, D> make_bsplines(
+        const Domain& domain,
+        std::integral_constant<std::size_t, D>) noexcept
 {
-    template <class Domain, std::size_t D>
-    constexpr BSplines<Domain, D> operator()(
-            const Domain& domain,
-            std::integral_constant<std::size_t, D>) const noexcept
-    {
-        return BSplines<Domain, D>(domain);
-    }
-};
-
-inline constexpr BSplinesHelper bsplines_helper;
+    return BSplines<Domain, D>(domain);
+}
 
 } // namespace experimental

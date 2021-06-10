@@ -147,7 +147,7 @@ TEST(SplineBuilder, Constructor)
     UniformMDomainX const dom(mesh, MCoordX(101));
 
     std::integral_constant<std::size_t, 2> constexpr spline_degree;
-    auto&& bsplines = bsplines_helper(dom, spline_degree);
+    auto&& bsplines = make_bsplines(dom, spline_degree);
 
     BoundCond left_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
     BoundCond right_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
