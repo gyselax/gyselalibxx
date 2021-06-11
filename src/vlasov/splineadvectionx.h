@@ -8,20 +8,22 @@
 class SplineAdvectionX : public IAdvectionX
 {
 private:
-    const BSplines& m_x_spline_basis;
+    const deprecated::BSplines& m_x_spline_basis;
 
-    const SplineBuilder1D& m_spline_interpolator;
+    const deprecated::SplineBuilder1D& m_spline_interpolator;
 
     const BoundaryValue& m_bc_left;
 
     const BoundaryValue& m_bc_right;
 
 public:
-    SplineAdvectionX(const BSplines& bspl, const SplineBuilder1D& spl_interp);
+    SplineAdvectionX(
+            const deprecated::BSplines& bspl,
+            const deprecated::SplineBuilder1D& spl_interp);
 
     SplineAdvectionX(
-            const BSplines& bspl,
-            const SplineBuilder1D& spl_interp,
+            const deprecated::BSplines& bspl,
+            const deprecated::SplineBuilder1D& spl_interp,
             const BoundaryValue& bc_left,
             const BoundaryValue& bc_right);
 

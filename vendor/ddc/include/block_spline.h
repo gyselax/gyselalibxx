@@ -5,19 +5,19 @@
 #include "mdomain.h"
 
 template <class Tag, std::size_t D, class ElementType>
-class Block<experimental::UniformBSplines<Tag, D>, ElementType>
-    : public BlockView<experimental::UniformBSplines<Tag, D>, ElementType>
+class Block<UniformBSplines<Tag, D>, ElementType>
+    : public BlockView<UniformBSplines<Tag, D>, ElementType>
 {
 public:
     /// ND view on this block
-    using block_view_type = BlockView<experimental::UniformBSplines<Tag, D>, ElementType>;
+    using block_view_type = BlockView<UniformBSplines<Tag, D>, ElementType>;
 
-    using block_span_type = BlockView<experimental::UniformBSplines<Tag, D>, ElementType const>;
+    using block_span_type = BlockView<UniformBSplines<Tag, D>, ElementType const>;
 
     /// ND memory view
     using raw_view_type = SpanND<1, ElementType>;
 
-    using bsplines_type = experimental::UniformBSplines<Tag, D>;
+    using bsplines_type = UniformBSplines<Tag, D>;
 
     using mcoord_type = typename bsplines_type::mcoord_type;
 
@@ -42,7 +42,7 @@ public:
 public:
     /** Construct a Block on a domain with uninitialized values
      */
-    explicit inline constexpr Block(experimental::UniformBSplines<Tag, D> const& bsplines)
+    explicit inline constexpr Block(UniformBSplines<Tag, D> const& bsplines)
         : block_view_type(
                 bsplines,
                 raw_view_type(

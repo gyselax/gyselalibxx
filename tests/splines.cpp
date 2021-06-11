@@ -6,13 +6,15 @@
 
 #include <gtest/gtest.h>
 
+#include "deprecated/bsplines.h"
+#include "deprecated/bsplines_uniform.h"
+
 #include "boundary_conditions.h"
-#include "bsplines.h"
-#include "bsplines_uniform.h"
 #include "spline_builder_1d.h"
 
 using namespace std;
 using namespace std::experimental;
+using namespace deprecated;
 
 constexpr double TWO_PI = 2. * M_PI;
 

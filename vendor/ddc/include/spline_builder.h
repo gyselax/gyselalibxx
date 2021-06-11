@@ -14,8 +14,6 @@
 #include "nonuniformmesh.h"
 #include "uniformmesh.h"
 
-namespace experimental {
-
 enum class BoundCond {
     // Periodic boundary condition u(1)=u(n)
     PERIODIC,
@@ -571,5 +569,3 @@ int SplineBuilder<BSplines, BcXmin, BcXmax>::compute_num_cells(
         return nipts + nbc_xmin + nbc_xmax - degree;
     }
 }
-
-} // namespace experimental

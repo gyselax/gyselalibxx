@@ -4,14 +4,13 @@
 
 #include <gtest/gtest.h>
 
-#include "experimental/block_spline.h"
-#include "experimental/bsplines_uniform.h"
-#include "experimental/spline_builder.hpp"
-#include "experimental/spline_evaluator.hpp"
-
 #include "block.h"
+#include "block_spline.h"
+#include "bsplines_uniform.h"
 #include "mdomain.h"
 #include "null_boundary_value.h"
+#include "spline_builder.h"
+#include "spline_evaluator.h"
 
 struct DimX
 {
@@ -139,8 +138,6 @@ private:
     }
 };
 
-namespace experimental {
-
 TEST(SplineBuilder, Constructor)
 {
     using BSplinesX = BSplines<UniformMDomainX, 2>;
@@ -234,5 +231,3 @@ TEST(SplineBuilder, BuildSpline)
     }
     EXPECT_LE(max_norm_error, 1.0e-12);
 }
-
-} // namespace experimental

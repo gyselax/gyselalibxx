@@ -6,6 +6,8 @@
 
 #include "bsplines.h"
 
+namespace deprecated {
+
 class Spline2D
 {
 private:
@@ -68,3 +70,5 @@ private:
             std::enable_if_t<std::is_base_of_v<BSplines, T2>>* = nullptr>
     void eval_array_loop(DSpan2D const& x1, DSpan2D const& x2, DSpan2D& y) const;
 };
+
+} // namespace deprecated

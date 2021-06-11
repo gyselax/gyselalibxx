@@ -1,4 +1,6 @@
-#include "bsplines.h"
+#include "deprecated/bsplines.h"
+
+namespace deprecated {
 
 BSplines::BSplines(
         int degree,
@@ -18,3 +20,5 @@ BSplines::BSplines(
     , m_length(xmax - xmin)
 {
 }
+
+} // namespace deprecated

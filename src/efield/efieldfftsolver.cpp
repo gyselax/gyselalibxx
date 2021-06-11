@@ -1,17 +1,16 @@
 #include <iostream>
 
-#include "experimental/block_spline.h"
-#include "experimental/blockview_spline.h"
-#include "experimental/spline_builder.hpp"
-#include "experimental/spline_evaluator.hpp"
-
 #include "block.h"
+#include "block_spline.h"
 #include "blockview.h"
+#include "blockview_spline.h"
 #include "deepcopy.h"
 #include "efieldfftsolver.h"
 #include "fftw.h"
 #include "geometry.h"
 #include "null_boundary_value.h"
+#include "spline_builder.h"
+#include "spline_evaluator.h"
 
 constexpr bool two_species = false;
 constexpr bool froz_e = false;
@@ -43,7 +42,6 @@ static void compute_rho(DBlockSpanX const& rho, DBlockViewXVx const& fdistribu)
 
 static void compute_phi(DBlockSpanX const& ex, DBlockViewX const& phi_x)
 {
-    using namespace experimental;
     auto&& dom_x = phi_x.domain();
     BSplinesX bsplines(dom_x);
     SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> builder(bsplines);

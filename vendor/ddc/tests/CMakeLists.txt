@@ -4,11 +4,11 @@ include(GoogleTest)
 
 add_executable(ddc_tests
 	block.cpp
-        bsplines_non_uniform.cpp
+        deprecated/bsplines_non_uniform.cpp
+        deprecated/bsplines_uniform.cpp
         bsplines_uniform.cpp
-        experimental/bsplines_uniform.cpp
-        experimental/bsplines_non_uniform.cpp
-        experimental/spline_builder.cpp
+        bsplines_non_uniform.cpp
+        spline_builder.cpp
 	mdomain.cpp
 	mcoord.cpp
 	nonuniformmesh.cpp

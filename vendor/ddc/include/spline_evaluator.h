@@ -7,8 +7,6 @@
 #include "boundary_value.h"
 #include "bsplines.h"
 
-namespace experimental {
-
 template <class BlockSplineType>
 class SplineEvaluator
 {
@@ -138,5 +136,3 @@ private:
         return y;
     }
 };
-
-} // namespace experimental

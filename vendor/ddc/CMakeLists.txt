@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.15)
 
 add_library(ddc STATIC
-	src/bsplines.cpp
-	src/bsplines_uniform.cpp
-	src/bsplines_non_uniform.cpp
+	src/deprecated/bsplines.cpp
+	src/deprecated/bsplines_uniform.cpp
+	src/deprecated/bsplines_non_uniform.cpp
+	src/deprecated/spline_1d.cpp
+	src/deprecated/spline_2d.cpp
 	src/null_boundary_value.cpp
-	src/spline_1d.cpp
-	src/spline_2d.cpp
 )
 
 target_compile_features(ddc

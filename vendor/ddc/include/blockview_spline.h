@@ -4,13 +4,13 @@
 #include "bsplines_uniform.h"
 
 template <class Tag, std::size_t D, class ElementType, bool CONTIGUOUS>
-class BlockView<experimental::UniformBSplines<Tag, D>, ElementType, CONTIGUOUS>
+class BlockView<UniformBSplines<Tag, D>, ElementType, CONTIGUOUS>
 {
 public:
     /// ND memory view
     using raw_view_type = SpanND<1, ElementType, CONTIGUOUS>;
 
-    using bsplines_type = experimental::UniformBSplines<Tag, D>;
+    using bsplines_type = UniformBSplines<Tag, D>;
 
     using mcoord_type = typename bsplines_type::mcoord_type;
 

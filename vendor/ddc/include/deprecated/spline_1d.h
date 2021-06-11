@@ -8,6 +8,8 @@
 #include "bsplines.h"
 #include "null_boundary_value.h"
 
+namespace deprecated {
+
 class Spline1D
 {
 private:
@@ -69,3 +71,5 @@ private:
     template <class T, std::enable_if_t<std::is_base_of_v<BSplines, T>>* = nullptr>
     void eval_array_deriv_loop(DSpan1D const& x, DSpan1D& y) const;
 };
+
+} // namespace deprecated

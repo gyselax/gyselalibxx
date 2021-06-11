@@ -4,6 +4,8 @@
 
 #include "spline_builder_2d.h"
 
+namespace deprecated {
+
 /******************************************************************************
  * @brief      Initialize a 2D tensor product spline interpolator object
  * @param[out] self     2D tensor product spline interpolator
@@ -288,3 +290,5 @@ void SplineBuilder2D::compute_interpolant_boundary_done(Spline2D const& spline, 
         }
     }
 }
+
+} // namespace deprecated

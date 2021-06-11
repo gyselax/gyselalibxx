@@ -6,8 +6,10 @@
 #include <boundary_conditions.h>
 #include <matrix.h>
 
-#include "bsplines.h"
-#include "spline_1d.h"
+#include "deprecated/bsplines.h"
+#include "deprecated/spline_1d.h"
+
+namespace deprecated {
 
 class SplineBuilder1D
 {
@@ -88,3 +90,5 @@ private:
     void compute_interpolant_degree1(Spline1D& spline, const DSpan1D& vals) const;
     void build_matrix_system();
 };
+
+} // namespace deprecated

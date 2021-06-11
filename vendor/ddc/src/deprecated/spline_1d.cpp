@@ -3,9 +3,11 @@
 #include <memory>
 #include <type_traits>
 
-#include "bsplines_non_uniform.h"
-#include "bsplines_uniform.h"
-#include "spline_1d.h"
+#include "deprecated/bsplines_non_uniform.h"
+#include "deprecated/bsplines_uniform.h"
+#include "deprecated/spline_1d.h"
+
+namespace deprecated {
 
 Spline1D::Spline1D(
         const BSplines& bspl,
@@ -183,3 +185,5 @@ double Spline1D::integrate() const
     }
     return y;
 }
+
+} // namespace deprecated

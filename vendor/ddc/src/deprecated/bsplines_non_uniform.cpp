@@ -2,9 +2,11 @@
 #include <memory>
 #include <vector>
 
-#include "bsplines_non_uniform.h"
+#include "deprecated/bsplines_non_uniform.h"
 
 namespace stdex = std::experimental;
+
+namespace deprecated {
 
 NonUniformBSplines::NonUniformBSplines(int degree, bool periodic, const std::vector<double>& breaks)
     : BSplines(
@@ -280,3 +282,6 @@ bool NonUniformBSplines::is_uniform() const
 {
     return false;
 }
+
+
+} // namespace deprecated

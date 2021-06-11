@@ -5,13 +5,16 @@
 #include <block.h>
 #include <deepcopy.h>
 
-#include "spline_1d.h"
+#include "deprecated/spline_1d.h"
+
 #include "splineadvectionx.h"
 
 using namespace std;
 using namespace std::experimental;
 
-SplineAdvectionX::SplineAdvectionX(const BSplines& bspl, const SplineBuilder1D& spl_interp)
+SplineAdvectionX::SplineAdvectionX(
+        const deprecated::BSplines& bspl,
+        const deprecated::SplineBuilder1D& spl_interp)
     : m_x_spline_basis(bspl)
     , m_spline_interpolator(spl_interp)
     , m_bc_left(NullBoundaryValue::value)
@@ -21,8 +24,8 @@ SplineAdvectionX::SplineAdvectionX(const BSplines& bspl, const SplineBuilder1D& 
 }
 
 SplineAdvectionX::SplineAdvectionX(
-        const BSplines& bspl,
-        const SplineBuilder1D& spl_interp,
+        const deprecated::BSplines& bspl,
+        const deprecated::SplineBuilder1D& spl_interp,
         const BoundaryValue& bc_left,
         const BoundaryValue& bc_right)
     : m_x_spline_basis(bspl)
@@ -47,7 +50,7 @@ DBlockSpanXVx SplineAdvectionX::operator()(DBlockSpanXVx fdistribu, double mass_
     //BlockX<RCoordX> feet_coords(x_dom);
     DBlockX contiguous_slice(x_dom);
     //TODO: spline on mesh
-    Spline1D spline(m_x_spline_basis);
+    deprecated::Spline1D spline(m_x_spline_basis);
     //SplineX spline(m_x_spline_basis);
 
     for (MCoordVx vii : v_dom) {

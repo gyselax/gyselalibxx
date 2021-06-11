@@ -2,9 +2,11 @@
 #include <iostream>
 #include <memory>
 
-#include "bsplines_non_uniform.h"
-#include "bsplines_uniform.h"
-#include "spline_2d.h"
+#include "deprecated/bsplines_non_uniform.h"
+#include "deprecated/bsplines_uniform.h"
+#include "deprecated/spline_2d.h"
+
+namespace deprecated {
 
 Spline2D::Spline2D(const BSplines& bspl1, const BSplines& bspl2)
     : m_bcoef_ptr(std::make_unique<double[]>(
@@ -213,3 +215,5 @@ double Spline2D::integrate() const
     }
     return y;
 }
+
+} // namespace deprecated

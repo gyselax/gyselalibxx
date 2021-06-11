@@ -3,8 +3,11 @@
 #include <array>
 #include <memory>
 
-#include "spline_2d.h"
+#include "deprecated/spline_2d.h"
+
 #include "spline_builder_1d.h"
+
+namespace deprecated {
 
 struct Boundary_data_2d
 {
@@ -82,3 +85,5 @@ public:
 private:
     void compute_interpolant_boundary_done(Spline2D const& spline, DSpan2D const& vals) const;
 };
+
+} // namespace deprecated

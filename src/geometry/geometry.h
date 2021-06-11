@@ -1,7 +1,7 @@
 #pragma once
 
 #include <block.h>
-#include <experimental/bsplines.h>
+#include <bsplines.h>
 
 template <class Tag>
 struct Fourier
@@ -85,7 +85,7 @@ using MDomainXVx = UniformMDomain<Dim::X, Dim::Vx>;
 
 using MDomainFx = UniformMDomain<Dim::Fx>;
 
-using BSplinesX = experimental::BSplines<MDomainX, 4>;
+using BSplinesX = BSplines<MDomainX, 4>;
 
 using DBlockSpanX = BlockView<MDomainX, double>;
 

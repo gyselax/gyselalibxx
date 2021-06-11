@@ -2,7 +2,8 @@
 
 #include <block.h>
 
-#include "bsplines_uniform.h"
+#include "deprecated/bsplines_uniform.h"
+
 #include "nulladvectionvx.h"
 #include "nullefieldsolver.h"
 #include "predcorr.h"
@@ -17,13 +18,13 @@
 // * domain-bound: (100, 100)
 MDomainXVx const dom2d(RCoordXVx(0, 0), RCoordXVx(100, 100), MCoordXVx(0, 0), MCoordXVx(100, 100));
 
-UniformBSplines const bsplines_x = {3, true, 4, 5, 6};
+deprecated::UniformBSplines const bsplines_x = {3, true, 4, 5, 6};
 
-UniformBSplines const bsplines_vx = {3, true, 4, 5, 6};
+deprecated::UniformBSplines const bsplines_vx = {3, true, 4, 5, 6};
 
-SplineBuilder1D const interp_x(bsplines_x, BoundCond::PERIODIC, BoundCond::PERIODIC);
+deprecated::SplineBuilder1D const interp_x(bsplines_x, BoundCond::PERIODIC, BoundCond::PERIODIC);
 
-SplineBuilder1D const interp_vx(bsplines_vx, BoundCond::GREVILLE, BoundCond::GREVILLE);
+deprecated::SplineBuilder1D const interp_vx(bsplines_vx, BoundCond::GREVILLE, BoundCond::GREVILLE);
 
 SplineAdvectionX const advection_x(bsplines_x, interp_x);
 

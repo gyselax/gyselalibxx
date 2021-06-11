@@ -1,10 +1,13 @@
 #include <cassert>
 #include <vector>
 
-#include "bsplines_uniform.h"
+#include "deprecated/bsplines_uniform.h"
+
 #include "math_tools.h"
 
 namespace stdex = std::experimental;
+
+namespace deprecated {
 
 UniformBSplines::UniformBSplines(int degree, bool periodic, double xmin, double xmax, int ncells)
     : BSplines(degree, periodic, ncells, periodic ? ncells : ncells + degree, xmin, xmax, false)
@@ -213,3 +216,5 @@ bool UniformBSplines::is_uniform() const
 {
     return true;
 }
+
+} // namespace deprecated

@@ -8,10 +8,13 @@
 #include <matrix_dense.h>
 #include <matrix_periodic_banded.h>
 
-#include "bsplines.h"
-#include "bsplines_non_uniform.h"
-#include "bsplines_uniform.h"
+#include "deprecated/bsplines.h"
+#include "deprecated/bsplines_non_uniform.h"
+#include "deprecated/bsplines_uniform.h"
+
 #include "spline_builder_1d.h"
+
+namespace deprecated {
 
 std::array<BoundCond, 3> SplineBuilder1D::allowed_bcs
         = {BoundCond::PERIODIC, BoundCond::HERMITE, BoundCond::GREVILLE};
@@ -466,3 +469,5 @@ int SplineBuilder1D::compute_num_cells(int degree, BoundCond xmin_bc, BoundCond 
         return nipts + nbc_xmin + nbc_xmax - degree;
     }
 }
+
+} // namespace deprecated
