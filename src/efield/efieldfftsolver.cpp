@@ -19,6 +19,8 @@ template <bool frozen>
 static double compute_dens(DBlockViewVx const& fdistribu)
 {
     if constexpr (frozen) {
+        return 1.;
+    } else {
         auto&& dom_vx = get_domain<Dim::Vx>(fdistribu);
         double const dv = dom_vx.mesh().step();
         double rho = 0.;
@@ -26,8 +28,6 @@ static double compute_dens(DBlockViewVx const& fdistribu)
             rho += fdistribu(ivx) * dv;
         }
         return rho;
-    } else {
-        return 1.;
     }
 }
 
