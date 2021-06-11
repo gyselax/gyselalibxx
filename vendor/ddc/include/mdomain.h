@@ -3,7 +3,7 @@
 #include "mcoord.h"
 #include "rcoord.h"
 #include "uniformmesh.h"
-
+#include "view.h"
 
 template <class Mesh>
 class MDomainImpl
@@ -299,6 +299,11 @@ public:
         return get<QueryTag>(m_ubound) - get<QueryTag>(static_cast<MCoord_>(m_lbound));
     }
 
+    inline constexpr ExtentsND<Mesh::rank()> extents() const noexcept
+    {
+        return extents(std::make_index_sequence<Mesh::rank()>());
+    }
+
     inline constexpr ptrdiff_t size() const noexcept
     {
         return size(std::make_index_sequence<Mesh_::rank()>());
@@ -359,6 +364,12 @@ private:
     inline constexpr ptrdiff_t size(std::index_sequence<Idxs...>) const noexcept
     {
         return ((m_ubound[Idxs] - m_lbound[Idxs]) * ...);
+    }
+
+    template <size_t... Idxs>
+    inline constexpr ExtentsND<sizeof...(Idxs)> extents(std::index_sequence<Idxs...>) const noexcept
+    {
+        return ExtentsND<sizeof...(Idxs)>((m_ubound[Idxs] - m_lbound[Idxs])...);
     }
 };
 

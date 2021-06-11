@@ -3,6 +3,7 @@
 #include <vector>
 
 #include <block.h>
+#include <deepcopy.h>
 
 #include "spline_1d.h"
 #include "splineadvectionx.h"

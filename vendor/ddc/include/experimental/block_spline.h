@@ -46,9 +46,8 @@ public:
         : block_view_type(
                 bsplines,
                 raw_view_type(
-                        new (std::align_val_t(64))
-                                value_type[bsplines.degree() + bsplines.ncells()],
-                        ExtentsND<1>(bsplines.degree() + bsplines.ncells())))
+                        new (std::align_val_t(64)) value_type[bsplines.size()],
+                        ExtentsND<1>(bsplines.size())))
     {
     }
 

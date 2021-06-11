@@ -20,22 +20,29 @@ namespace detail {
 template <class, class>
 struct ExtentToMCoord;
 
-template <class... Tags, std::size_t... Ints>
-struct ExtentToMCoord<MCoord<Tags...>, std::index_sequence<Ints...>>
+template <class MCoordType, std::size_t... Ints>
+struct ExtentToMCoord<MCoordType, std::index_sequence<Ints...>>
 {
+    static_assert(MCoordType::size() == sizeof...(Ints));
+
     template <ptrdiff_t... Extents>
-    static inline constexpr MCoord<Tags...> mcoord(
+    static inline constexpr MCoordType mcoord(
             const std::experimental::extents<Extents...>& extent) noexcept
     {
-        return MCoord<Tags...>(extent.extent(Ints)...);
+        return MCoordType(extent.extent(Ints)...);
     }
 };
 
 } // namespace detail
 
+template <class MCoordType>
+struct ExtentToMCoordEnd
+    : detail::ExtentToMCoord<MCoordType, std::make_index_sequence<MCoordType::size()>>
+{
+};
+
 template <class... Tags, class Extents>
 inline constexpr MCoord<Tags...> mcoord_end(Extents extent) noexcept
 {
-    return detail::ExtentToMCoord<MCoord<Tags...>, std::index_sequence_for<Tags...>>::mcoord(
-            extent);
+    return ExtentToMCoordEnd<MCoord<Tags...>>::mcoord(extent);
 }

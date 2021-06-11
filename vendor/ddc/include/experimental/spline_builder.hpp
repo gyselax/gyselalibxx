@@ -7,8 +7,8 @@
 #include <math_tools.h>
 #include <matrix.h>
 
-#include "block_nonuniform.h"
-#include "blockview_nonuniform.h"
+#include "block.h"
+#include "blockview.h"
 #include "blockview_spline.h"
 #include "mdomain.h"
 #include "nonuniformmesh.h"

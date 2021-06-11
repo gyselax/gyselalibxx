@@ -2,6 +2,7 @@
 
 #include "mcoord.h"
 #include "rcoord.h"
+#include "taggedarray.h"
 
 template <class... Tags>
 class UniformMesh
@@ -12,6 +13,19 @@ public:
     using RLength_ = RLength<Tags...>;
 
     using MCoord_ = MCoord<Tags...>;
+
+    // The two Mesh and Mesh_ need better names to avoid ambiguity
+    using Mesh_ = UniformMesh<Tags...>;
+
+    template <class... OTags>
+    using Mesh = UniformMesh<OTags...>;
+
+public:
+    template <class QueryTag>
+    static constexpr std::size_t tag_rank()
+    {
+        return detail::RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
+    }
 
 private:
     /// origin

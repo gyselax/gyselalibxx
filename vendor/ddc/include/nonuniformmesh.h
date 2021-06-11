@@ -17,6 +17,12 @@ public:
 
     using MCoord_ = MCoord<Tag>;
 
+    // The two Mesh and Mesh_ need better names to avoid ambiguity
+    using Mesh_ = NonUniformMesh<Tag>;
+
+    template <class OTag>
+    using Mesh = NonUniformMesh<OTag>;
+
     struct Iterator
     {
     private:

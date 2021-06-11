@@ -7,6 +7,7 @@
 
 #include "block.h"
 #include "blockview.h"
+#include "deepcopy.h"
 #include "efieldfftsolver.h"
 #include "fftw.h"
 #include "geometry.h"

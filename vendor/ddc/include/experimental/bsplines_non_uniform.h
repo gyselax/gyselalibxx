@@ -101,6 +101,11 @@ public:
         return rmax() - rmin();
     }
 
+    std::size_t size() const noexcept
+    {
+        return degree() + ncells();
+    }
+
     std::size_t npoints() const noexcept
     {
         return m_domain.size();

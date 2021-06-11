@@ -15,56 +15,21 @@ class Block;
 template <class, class, bool = true>
 class BlockView;
 
-template <bool O_CONTIGUOUS, class OElementType, class... OTags>
-static BlockView<UniformMDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
-        UniformMesh<OTags...> const& mesh,
-        SpanND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view);
+template <class OElementType, bool O_CONTIGUOUS, class Mesh>
+static BlockView<MDomainImpl<Mesh>, OElementType, O_CONTIGUOUS> make_view(
+        Mesh const& mesh,
+        SpanND<Mesh::rank(), OElementType, O_CONTIGUOUS> const& raw_view);
 
-namespace detail {
-template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor, class... Indices>
-inline void for_each_impl(
-        const BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS>& to,
-        Functor&& f,
-        Indices&&... idxs) noexcept
-{
-    if constexpr (
-            sizeof...(Indices)
-            == BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS>::rank()) {
-        f(std::forward<Indices>(idxs)...);
-    } else {
-        for (ptrdiff_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
-            for_each_impl(to, std::forward<Functor>(f), std::forward<Indices...>(idxs)..., ii);
-        }
-    }
-}
-template <class MCoord_>
-struct sequential_for_impl
-{
-    template <class Extents, class Functor, class... Indices>
-    inline void operator()(const Extents& extents, Functor&& f, Indices&&... idxs) const noexcept
-    {
-        if constexpr (sizeof...(Indices) == Extents::rank()) {
-            f(MCoord_(std::forward<Indices>(idxs)...));
-        } // namespace detail
-        else {
-            for (ptrdiff_t ii = 0; ii < extents.extent(sizeof...(Indices)); ++ii) {
-                (*this)(extents, std::forward<Functor>(f), std::forward<Indices>(idxs)..., ii);
-            }
-        }
-    }
-};
-} // namespace detail
-
-template <class... Tags, class ElementType, bool CONTIGUOUS>
-class BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS>
+template <class Mesh, class ElementType, bool CONTIGUOUS>
+class BlockView<MDomainImpl<Mesh>, ElementType, CONTIGUOUS>
 {
 public:
     /// ND memory view
-    using RawView = SpanND<sizeof...(Tags), ElementType, CONTIGUOUS>;
+    using RawView = SpanND<Mesh::rank(), ElementType, CONTIGUOUS>;
 
-    using MDomain_ = UniformMDomain<Tags...>;
+    using MDomain_ = MDomainImpl<Mesh>;
 
-    using Mesh = typename MDomain_::Mesh_;
+    using Mesh_ = Mesh;
 
     using MCoord_ = typename MDomain_::MCoord_;
 
@@ -110,7 +75,7 @@ protected:
         {
             auto view = subspan(block.raw_view(), std::forward<OSliceSpecs>(slices)...);
             auto mesh = submesh(block.mesh(), std::forward<OSliceSpecs>(slices)...);
-            return make_view<::is_contiguous_v<decltype(view)>, ElementType>(mesh, view);
+            return make_view<ElementType, ::is_contiguous_v<decltype(view)>>(mesh, view);
         }
     };
 
@@ -124,7 +89,7 @@ protected:
     };
 
     template <class... STags>
-    struct Slicer<MCoord<STags...>, UniformMDomain<>>
+    struct Slicer<MCoord<STags...>, MDomainImpl<typename Mesh::template Mesh<>>>
     {
         template <class... SliceSpecs>
         static inline constexpr auto slice(
@@ -137,7 +102,7 @@ protected:
     };
 
     template <class... STags, class OTag0, class... OTags>
-    struct Slicer<MCoord<STags...>, UniformMDomain<OTag0, OTags...>>
+    struct Slicer<MCoord<STags...>, MDomainImpl<typename Mesh::template Mesh<OTag0, OTags...>>>
     {
         template <class... SliceSpecs>
         static inline constexpr auto slice(
@@ -145,7 +110,7 @@ protected:
                 const MCoord<STags...>& slices,
                 SliceSpecs&&... oslices)
         {
-            return Slicer<MCoord<STags...>, UniformMDomain<OTags...>>::
+            return Slicer<MCoord<STags...>, MDomainImpl<typename Mesh::template Mesh<OTags...>>>::
                     slice(block, slices, oslices..., get_slicer_for<OTag0>(slices));
         }
     };
@@ -210,7 +175,7 @@ public:
     template <class QueryTag>
     static constexpr std::size_t tag_rank()
     {
-        return detail::RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
+        return Mesh::template tag_rank<QueryTag>();
     }
 
     /** Slice out some dimensions
@@ -343,16 +308,16 @@ public:
      */
     inline constexpr MDomain_ domain() const noexcept
     {
-        return MDomain_(mesh(), mcoord_end<Tags...>(raw_view().extents()));
+        return MDomain_(mesh(), ExtentToMCoordEnd<MCoord_>::mcoord(raw_view().extents()));
     }
 
     /** Provide access to the domain on which this block is defined
      * @return the domain on which this block is defined
      */
     template <class... OTags>
-    inline constexpr UniformMDomain<OTags...> domain() const noexcept
+    inline constexpr MDomainImpl<typename Mesh::template Mesh<OTags...>> domain() const noexcept
     {
-        return UniformMDomain<OTags...>(domain());
+        return MDomainImpl<typename Mesh::template Mesh<OTags...>>(domain());
     }
 
     /** Provide a modifiable view of the data
@@ -387,12 +352,12 @@ public:
  * @param[in] raw_view  the raw view to the data
  * @return the newly constructed view
  */
-template <bool O_CONTIGUOUS, class OElementType, class... OTags>
-static BlockView<UniformMDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view(
-        UniformMesh<OTags...> const& mesh,
-        SpanND<sizeof...(OTags), OElementType, O_CONTIGUOUS> const& raw_view)
+template <class OElementType, bool O_CONTIGUOUS, class Mesh>
+static BlockView<MDomainImpl<Mesh>, OElementType, O_CONTIGUOUS> make_view(
+        Mesh const& mesh,
+        SpanND<Mesh::rank(), OElementType, O_CONTIGUOUS> const& raw_view)
 {
-    return BlockView<UniformMDomain<OTags...>, OElementType, O_CONTIGUOUS>(mesh, raw_view);
+    return BlockView<MDomainImpl<Mesh>, OElementType, O_CONTIGUOUS>(mesh, raw_view);
 }
 
 /** Access the domain (or subdomain) of a view
@@ -400,60 +365,9 @@ static BlockView<UniformMDomain<OTags...>, OElementType, O_CONTIGUOUS> make_view
  * @param[in]  f     a functor taking the list of indices as parameter
  * @return the domain of view in the queried dimensions
  */
-template <class... QueryTags, class... Tags, class ElementType, bool CONTIGUOUS>
-UniformMDomain<QueryTags...> get_domain(
-        const BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS>& v)
+template <class... QueryTags, class Mesh, class ElementType, bool CONTIGUOUS>
+MDomainImpl<typename Mesh::template Mesh<QueryTags...>> get_domain(
+        const BlockView<MDomainImpl<Mesh>, ElementType, CONTIGUOUS>& v)
 {
-    return v.template domain<Tags...>();
-}
-
-/** Copy the content of a view into another
- * @param[out] to    the view in which to copy
- * @param[in]  from  the view from which to copy
- * @return to
- */
-template <class... Tags, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS>
-inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(
-        BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> to,
-        BlockView<UniformMDomain<Tags...>, ElementType, OCONTIGUOUS> const& from) noexcept
-{
-    assert(to.extents() == from.extents());
-    for_each(to, [&to, &from](auto... idxs) { to(idxs...) = from(idxs...); });
-    return to;
-}
-
-/** Copy the content of a view into another
- * @param[out] to    the view in which to copy
- * @param[in]  from  the view from which to copy
- * @return to
- */
-template <
-        class... Tags,
-        class... OTags,
-        class ElementType,
-        class OElementType,
-        bool CONTIGUOUS,
-        bool OCONTIGUOUS>
-inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(
-        BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> to,
-        BlockView<UniformMDomain<OTags...>, OElementType, OCONTIGUOUS> const& from) noexcept
-{
-    static_assert(std::is_convertible_v<OElementType, ElementType>, "Not convertible");
-    using MCoord_ = typename UniformMDomain<Tags...>::MCoord_;
-    assert(to.extents() == from.extents());
-    constexpr auto sequential_for = detail::sequential_for_impl<MCoord_>();
-    sequential_for(to.extents(), [&to, &from](const auto& domain) { to(domain) = from(domain); });
-    return to;
-}
-
-/** iterates over the domain of a view
- * @param[in] view  the view whose domain to iterate
- * @param[in] f     a functor taking the list of indices as parameter
- */
-template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor>
-inline void for_each(
-        const BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS>& view,
-        Functor&& f) noexcept
-{
-    detail::for_each_impl(view, std::forward<Functor>(f));
+    return v.template domain<QueryTags...>();
 }

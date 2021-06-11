@@ -2,22 +2,24 @@
 
 #include "blockview.h"
 
-template <class... Tags, class ElementType>
-class Block<UniformMDomain<Tags...>, ElementType>
-    : public BlockView<UniformMDomain<Tags...>, ElementType>
+template <class, class>
+class Block;
+
+template <class Mesh, class ElementType>
+class Block<MDomainImpl<Mesh>, ElementType> : public BlockView<MDomainImpl<Mesh>, ElementType>
 {
 public:
     /// ND view on this block
-    using BlockView_ = BlockView<UniformMDomain<Tags...>, ElementType>;
+    using BlockView_ = BlockView<MDomainImpl<Mesh>, ElementType>;
 
-    using BlockSpan_ = BlockView<UniformMDomain<Tags...>, const ElementType>;
+    using BlockSpan_ = BlockView<MDomainImpl<Mesh>, ElementType const>;
 
     /// ND memory view
-    using RawView = SpanND<sizeof...(Tags), ElementType>;
+    using RawView = typename BlockView_::RawView;
 
-    using MDomain_ = UniformMDomain<Tags...>;
+    using MDomain_ = typename BlockView_::MDomain_;
 
-    using Mesh = typename MDomain_::Mesh_;
+    using Mesh_ = Mesh;
 
     using MCoord_ = typename MDomain_::MCoord_;
 
@@ -45,12 +47,10 @@ public:
 public:
     /** Construct a Block on a domain with uninitialized values
      */
-    template <class... OTags>
-    explicit inline constexpr Block(const UniformMDomain<OTags...>& domain)
+    explicit inline constexpr Block(const MDomain_& domain)
         : BlockView_(
                 domain.mesh(),
-                RawView(new (std::align_val_t(64)) value_type[domain.size()],
-                        ExtentsND<sizeof...(Tags)>(domain.template extent<Tags>()...)))
+                RawView(new (std::align_val_t(64)) value_type[domain.size()], domain.extents()))
     {
     }
 
@@ -89,8 +89,8 @@ public:
      * @param other the Block to copy
      * @return *this
      */
-    template <class... OTags, class OElementType>
-    inline Block& operator=(Block<UniformMDomain<OTags...>, OElementType>&& other)
+    template <class OMesh, class OElementType>
+    inline Block& operator=(Block<MDomainImpl<OMesh>, OElementType>&& other)
     {
         copy(*this, other);
         return *this;
@@ -128,22 +128,22 @@ public:
         return this->m_raw(indices.array());
     }
 
-    inline constexpr BlockView<UniformMDomain<Tags...>, const ElementType> cview() const
+    inline constexpr BlockView_ cview() const
     {
         return *this;
     }
 
-    inline constexpr BlockView<UniformMDomain<Tags...>, const ElementType> cview()
+    inline constexpr BlockView_ cview()
     {
         return *this;
     }
 
-    inline constexpr BlockView<UniformMDomain<Tags...>, const ElementType> view() const
+    inline constexpr BlockView_ view() const
     {
         return *this;
     }
 
-    inline constexpr BlockView<UniformMDomain<Tags...>, ElementType> view()
+    inline constexpr BlockSpan_ view()
     {
         return *this;
     }

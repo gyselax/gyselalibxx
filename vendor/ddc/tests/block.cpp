@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "block.h"
+#include "deepcopy.h"
 
 using namespace std;
 using namespace std::experimental;

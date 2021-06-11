@@ -100,6 +100,12 @@ protected:
     std::array<ElementType, sizeof...(Tags)> m_values;
 
 public:
+    static constexpr std::size_t size() noexcept
+    {
+        return sizeof...(Tags);
+    }
+
+public:
     inline constexpr TaggedArrayImpl() = default;
 
     inline constexpr TaggedArrayImpl(TaggedArrayImpl const&) = default;

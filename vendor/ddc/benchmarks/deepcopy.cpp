@@ -4,6 +4,7 @@
 #include <benchmark/benchmark.h>
 
 #include "blockview.h"
+#include "deepcopy.h"
 
 class DimX;
 class DimVx;

@@ -1,4 +1,5 @@
 #include <block.h>
+#include <deepcopy.h>
 
 #include "predcorr.h"
 
