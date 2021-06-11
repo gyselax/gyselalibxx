@@ -6,10 +6,14 @@
 
 class EfieldFftSolver : public IEfieldSolver
 {
-    IFourierTransform<Dim::X> const& m_fft = FftwFourierTransform<Dim::X>();
+    IFourierTransform<Dim::X> const& m_fft;
 
-    IInverseFourierTransform<Dim::X> const& m_ifft = FftwInverseFourierTransform<Dim::X>();
+    IInverseFourierTransform<Dim::X> const& m_ifft;
 
 public:
+    EfieldFftSolver(
+            IFourierTransform<Dim::X> const& fft,
+            IInverseFourierTransform<Dim::X> const& ifft);
+
     DBlockSpanX operator()(DBlockSpanX ex, DBlockViewXVx fdistribu) const override;
 };

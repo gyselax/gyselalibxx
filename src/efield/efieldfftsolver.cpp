@@ -55,6 +55,14 @@ static void compute_phi(DBlockSpanX const& ex, DBlockViewX const& phi_x)
     }
 }
 
+EfieldFftSolver::EfieldFftSolver(
+        IFourierTransform<Dim::X> const& fft,
+        IInverseFourierTransform<Dim::X> const& ifft)
+    : m_fft(fft)
+    , m_ifft(ifft)
+{
+}
+
 // 1- Inner solvers sall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
 DBlockSpanX EfieldFftSolver::operator()(DBlockSpanX ex, DBlockViewXVx fdistribu) const
