@@ -9,8 +9,8 @@
 #include "experimental/spline_builder.hpp"
 #include "experimental/spline_evaluator.hpp"
 
-#include "block_nonuniform.h"
 #include "block.h"
+#include "block_nonuniform.h"
 #include "mdomain.h"
 #include "null_boundary_value.h"
 
