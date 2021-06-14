@@ -12,35 +12,27 @@
 #include "spline_builder.h"
 #include "spline_evaluator.h"
 
-constexpr bool two_species = false;
-constexpr bool froz_e = false;
-
-template <bool frozen>
 static double compute_dens(DBlockViewVx const& fdistribu)
 {
-    if constexpr (frozen) {
-        return 1.;
-    } else {
-        auto&& dom_vx = get_domain<Dim::Vx>(fdistribu);
-        double const dv = dom_vx.mesh().step();
-        double rho = 0.;
-        for (MCoordVx ivx : dom_vx) {
-            rho += fdistribu(ivx) * dv;
-        }
-        return rho;
+    auto&& dom_vx = get_domain<Dim::Vx>(fdistribu);
+    double const dv = dom_vx.mesh().step();
+    double rho = 0.;
+    for (MCoordVx ivx : dom_vx) {
+        rho += fdistribu(ivx) * dv;
     }
+    return rho;
 }
 
 static void compute_rho(DBlockSpanX const& rho, DBlockViewXVx const& fdistribu)
 {
     for (MCoordX ix : rho.domain()) {
-        double const dens_elec = compute_dens<froz_e>(fdistribu[ix]);
+        double const dens_elec = compute_dens(fdistribu[ix]);
         double const dens_ion = 1.;
         rho(ix) = (dens_ion - dens_elec);
     }
 }
 
-static void compute_phi(DBlockSpanX const& ex, DBlockViewX const& phi_x)
+static void compute_efield(DBlockSpanX const& ex, DBlockViewX const& phi_x)
 {
     auto&& dom_x = phi_x.domain();
     BSplinesX bsplines(dom_x);
@@ -78,23 +70,14 @@ DBlockSpanX EfieldFftSolver::operator()(DBlockSpanX ex, DBlockViewXVx fdistribu)
     deepcopy(complex_rho, rho);
 
     // Build a mesh in the fourier space, for N points
-    // Minimal freq: 0
-    // Step freq: 1/Lx
-    // Maximal freq: (N-1)/Lx = 1/dx
-    MDomainFx
-            dom_fx(RCoordFx(0.),
-                   RCoordFx(1.0 / dom_x.mesh().step()),
-                   MCoordFx(0),
-                   MCoordFx(dom_x.size()));
-    // Perform the 1D FFT in of the RHS and store it in complex_phi_fx.
+    MDomainFx const dom_fx = m_fft.compute_fourier_domain(dom_x);
     Block<MDomainFx, std::complex<double>> complex_phi_fx(dom_fx);
     m_fft(complex_phi_fx, complex_rho);
 
     // Solve Poisson's equation -d^2 Phi/dx^2 = rho in the Fourier space.
-    std::vector<double> frequencies = m_fft.ifftshift(dom_fx);
     complex_phi_fx(0) = 0.;
-    for (std::size_t ifreq = 1; ifreq < frequencies.size(); ++ifreq) {
-        double const kx = 2. * M_PI * frequencies[ifreq];
+    for (std::size_t ifreq = 1; ifreq < dom_fx.size(); ++ifreq) {
+        double const kx = 2. * M_PI * dom_fx.to_real(ifreq);
         complex_phi_fx(ifreq) /= kx * kx;
     }
 
@@ -109,7 +92,7 @@ DBlockSpanX EfieldFftSolver::operator()(DBlockSpanX ex, DBlockViewXVx fdistribu)
         phi_x(ix) = std::real(complex_phi_x(ix));
     }
 
-    compute_phi(ex, phi_x);
+    compute_efield(ex, phi_x);
 
     return ex;
 }

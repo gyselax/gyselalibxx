@@ -2,6 +2,8 @@
 
 #include <block.h>
 #include <bsplines.h>
+#include <nonuniformmesh.h>
+#include <uniformmesh.h>
 
 template <class Tag>
 struct Fourier
@@ -83,7 +85,7 @@ using MDomainVx = UniformMDomain<Dim::Vx>;
 
 using MDomainXVx = UniformMDomain<Dim::X, Dim::Vx>;
 
-using MDomainFx = UniformMDomain<Dim::Fx>;
+using MDomainFx = MDomainImpl<NonUniformMesh<Dim::Fx>>;
 
 using BSplinesX = BSplines<MDomainX, 4>;
 

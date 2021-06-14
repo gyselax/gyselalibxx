@@ -8,6 +8,7 @@
 #include <fftw3.h>
 #include <geometry.h>
 #include <mdomain.h>
+#include <nonuniformmesh.h>
 
 #include "ifft.h"
 
@@ -29,8 +30,8 @@ public:
 
     void operator()(
             BlockView<UniformMDomain<Tags...>, std::complex<double>> const& out_values,
-            BlockView<UniformMDomain<Fourier<Tags>...>, std::complex<double>> const& in_values)
-            const noexcept override
+            BlockView<MDomainImpl<NonUniformMesh<Fourier<Tags>...>>, std::complex<double>> const&
+                    in_values) const noexcept override
     {
         // shall be right layout
         std::array<int, out_values.rank()> n;

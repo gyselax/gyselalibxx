@@ -8,6 +8,7 @@
 #include <fftw3.h>
 #include <geometry.h>
 #include <mdomain.h>
+#include <nonuniformmesh.h>
 
 #include "fft.h"
 
@@ -27,21 +28,24 @@ public:
 
     FftwFourierTransform& operator=(FftwFourierTransform&& x) = default;
 
-    std::vector<double> ifftshift(
-            UniformMDomain<Fourier<Tags>...> const& dom_fx) const noexcept override
+    MDomainImpl<NonUniformMesh<Fourier<Tags>...>> compute_fourier_domain(
+            UniformMDomain<Tags...> const& dom_x) const noexcept override
     {
-        std::vector<double> freqs(dom_fx.size());
-        for (std::size_t ii = 0; ii <= dom_fx.size() / 2; ++ii) {
-            freqs[ii] = dom_fx.to_real(ii);
+        std::vector<double> freqs(dom_x.size());
+        double const inv_Nd = 1. / (dom_x.size() * dom_x.mesh().step());
+        for (std::size_t ii = 0; ii <= dom_x.size() / 2; ++ii) {
+            freqs[ii] = ii * inv_Nd;
         }
-        for (std::size_t ii = dom_fx.size() / 2 + 1; ii < dom_fx.size(); ++ii) {
-            freqs[ii] = dom_fx.to_real(ii) - dom_fx.rmax();
+        for (std::size_t ii = dom_x.size() / 2 + 1; ii < dom_x.size(); ++ii) {
+            freqs[ii] = -((dom_x.size() - ii) * inv_Nd);
         }
-        return freqs;
+        NonUniformMesh<Fourier<Tags>...> mesh_fx(freqs, 0);
+        return MDomainImpl<NonUniformMesh<Fourier<Tags>...>>(mesh_fx, freqs.size());
     }
 
     void operator()(
-            BlockView<UniformMDomain<Fourier<Tags>...>, std::complex<double>> const& out_values,
+            BlockView<MDomainImpl<NonUniformMesh<Fourier<Tags>...>>, std::complex<double>> const&
+                    out_values,
             BlockView<UniformMDomain<Tags...>, std::complex<double>> const& in_values)
             const noexcept override
     {

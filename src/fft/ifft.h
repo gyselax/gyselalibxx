@@ -5,6 +5,7 @@
 #include <blockview.h>
 #include <geometry.h>
 #include <mdomain.h>
+#include <nonuniformmesh.h>
 
 template <class... Tags>
 class IInverseFourierTransform
@@ -24,6 +25,6 @@ public:
 
     virtual void operator()(
             BlockView<UniformMDomain<Tags...>, std::complex<double>> const& out_values,
-            BlockView<UniformMDomain<Fourier<Tags>...>, std::complex<double>> const& in_values)
-            const noexcept = 0;
+            BlockView<MDomainImpl<NonUniformMesh<Fourier<Tags>...>>, std::complex<double>> const&
+                    in_values) const noexcept = 0;
 };

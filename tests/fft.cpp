@@ -273,23 +273,16 @@ TEST(FFT, fft1d_deriv)
 
 TEST(FFT, Constructor)
 {
-    using RCoordFx = RCoord<Dim::Fx>;
-    using MCoordFx = MCoord<Dim::Fx>;
-    using UniformMDomainFx = UniformMDomain<Dim::Fx>;
+    FftwFourierTransform<Dim::X> fft;
 
     UniformMDomainX domx(RCoordX(0.), RCoordX(2. * M_PI), MCoordX(0), MCoordX(32));
-    UniformMDomainFx
-            domfx(RCoordFx(0.),
-                  RCoordFx(1.0 / domx.mesh().step()),
-                  MCoordFx(0),
-                  MCoordFx(domx.size()));
+    MDomainFx domfx = fft.compute_fourier_domain(domx);
     BlockX<std::complex<double>> values(domx);
     for (std::size_t i = 0; i < domx.size(); ++i) {
         values(i) = compute_f(domx.to_real(i));
     }
 
-    Block<UniformMDomainFx, std::complex<double>> fourier_values(domfx);
-    FftwFourierTransform<Dim::X> fft;
+    Block<MDomainFx, std::complex<double>> fourier_values(domfx);
     fft(fourier_values, values);
 
     BlockX<std::complex<double>> ifft_fft_values(domx);
@@ -313,31 +306,21 @@ TEST(FFT, Constructor)
 
 TEST(FFT, Simple)
 {
-    using Fx = Fourier<Dim::X>;
-    using RCoordFx = RCoord<Fx>;
-    using MCoordFx = MCoord<Fx>;
-    using UniformMDomainFx = UniformMDomain<Fx>;
+    FftwFourierTransform<Dim::X> fft;
 
-    UniformMDomainX domx(RCoordX(0.), RCoordX(2.), MCoordX(0), MCoordX(101));
-    UniformMDomainFx
-            domfx(RCoordFx(0.),
-                  RCoordFx(1.0 / domx.mesh().step()),
-                  MCoordFx(0),
-                  MCoordFx(domx.size()));
+    UniformMDomainX domx(RCoordX(0.), RCoordX(3.0), MCoordX(0), MCoordX(57));
+    MDomainFx domfx = fft.compute_fourier_domain(domx);
 
     BlockX<std::complex<double>> values(domx);
     for (std::size_t i = 0; i < domx.size(); ++i) {
-        values(i) = compute_f(domx.to_real(i));
+        values(i) = std::cos(4.0 * M_PI * domx.to_real(i));
     }
 
-    Block<UniformMDomainFx, std::complex<double>> fourier_values(domfx);
-    FftwFourierTransform<Dim::X> fft;
+    Block<MDomainFx, std::complex<double>> fourier_values(domfx);
     fft(fourier_values, values);
 
-    std::vector<double> freq = fft.ifftshift(domfx);
-    std::cout << freq.size() << std::endl;
+    std::cout << domfx.size() << std::endl;
     for (auto i = 0; i < domfx.size(); ++i) {
-        std::cout << domfx.to_real(i) << ' ' << std::abs(fourier_values(i)) << ' ' << freq[i]
-                  << std::endl;
+        std::cout << domfx.to_real(i) << ' ' << std::abs(fourier_values(i)) << ' ' << std::endl;
     }
 }
