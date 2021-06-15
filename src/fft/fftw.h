@@ -49,6 +49,11 @@ public:
             BlockView<UniformMDomain<Tags...>, std::complex<double>> const& in_values)
             const noexcept override
     {
+        assert(in_values.is_contiguous());
+        assert(in_values.is_unique());
+        assert(out_values.is_contiguous());
+        assert(out_values.is_unique());
+
         // shall be right layout
         std::array<int, out_values.rank()> n;
         for (std::size_t r = 0; r < out_values.rank(); ++r) {

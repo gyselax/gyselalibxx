@@ -271,7 +271,49 @@ TEST(FFT, fft1d_deriv)
                               << " -> Max_error= " << max_error << endl;
 }
 
-TEST(FFT, Constructor)
+TEST(FFT, DomainEven)
+{
+    FftwFourierTransform<Dim::X> fft;
+
+    constexpr std::size_t N = 10;
+
+    UniformMDomainX domx(RCoordX(0.), RCoordX(20.), MCoordX(0), MCoordX(N));
+    MDomainFx domfx = fft.compute_fourier_domain(domx);
+
+    //   f = [0, 1, ...,   n/2, -n/2+1, ..., -1] / (d*n)   if n is even
+    std::array<double, N> expected_freqs {0., 1., 2., 3., 4., 5., -4., -3., -2., -1.};
+    for (auto& f : expected_freqs) {
+        f /= domx.size() * domx.mesh().step();
+    }
+
+    constexpr double tol = 2.e-16;
+    for (std::size_t i = 0; i < domfx.size(); ++i) {
+        EXPECT_LT(std::fabs(domfx.to_real(i) - expected_freqs[i]), tol);
+    }
+}
+
+TEST(FFT, DomainOdd)
+{
+    FftwFourierTransform<Dim::X> fft;
+
+    constexpr std::size_t N = 9;
+
+    UniformMDomainX domx(RCoordX(0.), RCoordX(20.), MCoordX(0), MCoordX(N));
+    MDomainFx domfx = fft.compute_fourier_domain(domx);
+
+    //   f = [0, 1, ..., (n-1)/2, -n/2, ..., -1] / (d*n)   if n is odd
+    std::array<double, N> expected_freqs {0., 1., 2., 3., 4., -4., -3., -2., -1.};
+    for (auto& f : expected_freqs) {
+        f /= domx.size() * domx.mesh().step();
+    }
+
+    constexpr double tol = 2.e-16;
+    for (std::size_t i = 0; i < domfx.size(); ++i) {
+        EXPECT_LT(std::fabs(domfx.to_real(i) - expected_freqs[i]), tol);
+    }
+}
+
+TEST(FFT, Identity)
 {
     FftwFourierTransform<Dim::X> fft;
 
@@ -304,23 +346,32 @@ TEST(FFT, Constructor)
                               << " -> Max_error=" << max_error << endl;
 }
 
+// A pure sinusoidal signal of frequency f sampled on a domain of length 2 * T.
+// The frequency spectrum should have only two peaks, the first one being located at the second
+// position.
 TEST(FFT, Simple)
 {
     FftwFourierTransform<Dim::X> fft;
 
-    UniformMDomainX domx(RCoordX(0.), RCoordX(3.0), MCoordX(0), MCoordX(57));
+    constexpr double T = 5.3;
+    constexpr double f = 1.0 / T;
+    constexpr std::size_t M = 2;
+
+    UniformMDomainX domx(RCoordX(0.), RCoordX(M * T), MCoordX(0), MCoordX(50));
     MDomainFx domfx = fft.compute_fourier_domain(domx);
 
     BlockX<std::complex<double>> values(domx);
     for (std::size_t i = 0; i < domx.size(); ++i) {
-        values(i) = std::cos(4.0 * M_PI * domx.to_real(i));
+        values(i) = std::cos(2. * M_PI * f * domx.to_real(i));
     }
 
     Block<MDomainFx, std::complex<double>> fourier_values(domfx);
     fft(fourier_values, values);
 
-    std::cout << domfx.size() << std::endl;
-    for (auto i = 0; i < domfx.size(); ++i) {
-        std::cout << domfx.to_real(i) << ' ' << std::abs(fourier_values(i)) << ' ' << std::endl;
+    constexpr double tol = 1.0e-13;
+    for (std::size_t i = 0; i < domfx.size(); ++i) {
+        if ((i != M) && (i != domfx.size() - M)) {
+            EXPECT_LE(std::fabs(fourier_values(i)), tol);
+        }
     }
 }
