@@ -30,8 +30,8 @@ public:
 
     void operator()(
             BlockView<UniformMDomain<Tags...>, std::complex<double>> const& out_values,
-            BlockView<MDomainImpl<NonUniformMesh<Fourier<Tags>...>>, std::complex<double>> const&
-                    in_values) const noexcept override
+            BlockView<NonUniformMDomain<Fourier<Tags>...>, std::complex<double>> const& in_values)
+            const noexcept override
     {
         assert(in_values.is_contiguous());
         assert(in_values.is_unique());

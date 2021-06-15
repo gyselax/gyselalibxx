@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mcoord.h"
+#include "nonuniformmesh.h"
 #include "rcoord.h"
 #include "uniformmesh.h"
 #include "view.h"
@@ -383,3 +384,6 @@ std::ostream& operator<<(std::ostream& out, MDomainImpl<Mesh> const& dom)
 
 template <class... Tags>
 using UniformMDomain = MDomainImpl<UniformMesh<Tags...>>;
+
+template <class... Tag>
+using NonUniformMDomain = MDomainImpl<NonUniformMesh<Tag...>>;

@@ -85,7 +85,7 @@ using MDomainVx = UniformMDomain<Dim::Vx>;
 
 using MDomainXVx = UniformMDomain<Dim::X, Dim::Vx>;
 
-using MDomainFx = MDomainImpl<NonUniformMesh<Dim::Fx>>;
+using MDomainFx = NonUniformMDomain<Dim::Fx>;
 
 using BSplinesX = BSplines<MDomainX, 4>;
 

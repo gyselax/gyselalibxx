@@ -28,7 +28,7 @@ public:
 
     FftwFourierTransform& operator=(FftwFourierTransform&& x) = default;
 
-    MDomainImpl<NonUniformMesh<Fourier<Tags>...>> compute_fourier_domain(
+    NonUniformMDomain<Fourier<Tags>...> compute_fourier_domain(
             UniformMDomain<Tags...> const& dom_x) const noexcept override
     {
         std::vector<double> freqs(dom_x.size());
@@ -40,12 +40,11 @@ public:
             freqs[ii] = -((dom_x.size() - ii) * inv_Nd);
         }
         NonUniformMesh<Fourier<Tags>...> mesh_fx(freqs, 0);
-        return MDomainImpl<NonUniformMesh<Fourier<Tags>...>>(mesh_fx, freqs.size());
+        return NonUniformMDomain<Fourier<Tags>...>(mesh_fx, freqs.size());
     }
 
     void operator()(
-            BlockView<MDomainImpl<NonUniformMesh<Fourier<Tags>...>>, std::complex<double>> const&
-                    out_values,
+            BlockView<NonUniformMDomain<Fourier<Tags>...>, std::complex<double>> const& out_values,
             BlockView<UniformMDomain<Tags...>, std::complex<double>> const& in_values)
             const noexcept override
     {

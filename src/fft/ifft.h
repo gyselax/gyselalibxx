@@ -25,6 +25,6 @@ public:
 
     virtual void operator()(
             BlockView<UniformMDomain<Tags...>, std::complex<double>> const& out_values,
-            BlockView<MDomainImpl<NonUniformMesh<Fourier<Tags>...>>, std::complex<double>> const&
-                    in_values) const noexcept = 0;
+            BlockView<NonUniformMDomain<Fourier<Tags>...>, std::complex<double>> const& in_values)
+            const noexcept = 0;
 };
