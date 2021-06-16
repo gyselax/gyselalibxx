@@ -11,3 +11,5 @@
 * Handle periodic dimensions
 * Add singleton for each dimension
 * Add versions taking singleton as parameter for auto deduction to template operators
+* Create a tensor product of meshes
+* Create a tensor product of mdomain
