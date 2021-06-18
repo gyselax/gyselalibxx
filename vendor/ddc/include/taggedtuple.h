@@ -9,10 +9,22 @@
 template <class, class>
 class TaggedTuple;
 
+template <class QueryTag, class... ElementTypes, class... Tags>
+constexpr std::size_t tag_rank_v<
+        QueryTag,
+        TaggedTuple<detail::TypeSeq<ElementTypes...>, detail::TypeSeq<Tags...>>> = detail::
+        RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
+
 template <class... ElementTypes, class... Tags>
 class TaggedTuple<detail::TypeSeq<ElementTypes...>, detail::TypeSeq<Tags...>>
 {
     std::tuple<ElementTypes...> m_values;
+
+public:
+    static constexpr std::size_t size() noexcept
+    {
+        return sizeof...(Tags);
+    }
 
 public:
     constexpr TaggedTuple() = default;
@@ -62,9 +74,7 @@ public:
     constexpr inline TaggedTuple& operator=(
             std::tuple_element<0, std::tuple<ElementTypes...>> const& e) noexcept
     {
-        static_assert(
-                sizeof...(Tags) == 1,
-                "Implicit conversion is only possible for size 1 TaggedTuples");
+        static_assert(size() == 1, "Implicit conversion is only possible for size 1 TaggedTuples");
         std::get<0>(m_values) = e;
         return *this;
     }
@@ -72,9 +82,7 @@ public:
     constexpr inline TaggedTuple& operator=(
             std::tuple_element<0, std::tuple<ElementTypes...>>&& e) noexcept
     {
-        static_assert(
-                sizeof...(Tags) == 1,
-                "Implicit conversion is only possible for size 1 TaggedTuples");
+        static_assert(size() == 1, "Implicit conversion is only possible for size 1 TaggedTuples");
         std::get<0>(m_values) = std::move(e);
         return *this;
     }
@@ -82,43 +90,37 @@ public:
     constexpr inline operator std::tuple_element<0, std::tuple<ElementTypes...>> const &()
             const noexcept
     {
-        static_assert(
-                sizeof...(Tags) == 1,
-                "Implicit conversion is only possible for size 1 TaggedTuples");
+        static_assert(size() == 1, "Implicit conversion is only possible for size 1 TaggedTuples");
         return std::get<0>(m_values);
     }
 
     constexpr inline operator std::tuple_element<0, std::tuple<ElementTypes...>>&() noexcept
     {
-        static_assert(
-                sizeof...(Tags) == 1,
-                "Implicit conversion is only possible for size 1 TaggedTuples");
+        static_assert(size() == 1, "Implicit conversion is only possible for size 1 TaggedTuples");
         return std::get<0>(m_values);
     }
 
     template <class QueryTag>
     inline constexpr auto& get() noexcept
     {
-        using namespace detail;
-        return std::get<RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val>(m_values);
+        return std::get<tag_rank_v<QueryTag, TaggedTuple>>(m_values);
     }
 
     template <class QueryTag>
     inline constexpr auto const& get() const noexcept
     {
-        using namespace detail;
-        return std::get<RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val>(m_values);
+        return std::get<tag_rank_v<QueryTag, TaggedTuple>>(m_values);
     }
 };
 
-template <class QueryTag, class ElementType, class T>
-inline constexpr auto const& get(TaggedTuple<ElementType, T> const& tuple) noexcept
+template <class QueryTag, class ElementSeq, class TagSeq>
+inline constexpr auto const& get(TaggedTuple<ElementSeq, TagSeq> const& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
 }
 
-template <class QueryTag, class ElementType, class T>
-inline constexpr auto& get(TaggedTuple<ElementType, T>& tuple) noexcept
+template <class QueryTag, class ElementSeq, class TagSeq>
+inline constexpr auto& get(TaggedTuple<ElementSeq, TagSeq>& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
 }
