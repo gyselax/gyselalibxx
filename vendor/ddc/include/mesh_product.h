@@ -8,7 +8,7 @@ template <class... Meshes>
 class MeshProduct
 {
 private:
-    static_assert((... && (Meshes::rank() == 1)), "Only meshes of rank 1 allowed");
+    static_assert((... && (Meshes::rank() <= 1)), "Only meshes of rank <= 1 are allowed");
 
     TaggedTuple<detail::TypeSeq<Meshes...>, detail::TypeSeq<typename Meshes::Tag_...>> m_meshes;
 

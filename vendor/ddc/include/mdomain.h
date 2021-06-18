@@ -360,6 +360,12 @@ public:
         return begin()[__n];
     }
 
+    template <class... SliceSpecs>
+    constexpr auto subdomain(SliceSpecs&&... slicespecs) const
+    {
+        return MDomainImpl();
+    }
+
 private:
     template <size_t... Idxs>
     inline constexpr ptrdiff_t size(std::index_sequence<Idxs...>) const noexcept
@@ -373,6 +379,16 @@ private:
         return ExtentsND<sizeof...(Idxs)>((m_ubound[Idxs] - m_lbound[Idxs])...);
     }
 };
+
+template <class QTag, class... CTags>
+auto get_slicer_for(const MCoord<CTags...>& c)
+{
+    if constexpr (has_tag_v<QTag, MCoord<CTags...>>) {
+        return c.template get<QTag>();
+    } else {
+        return std::experimental::all;
+    }
+}
 
 template <class Mesh>
 std::ostream& operator<<(std::ostream& out, MDomainImpl<Mesh> const& dom)

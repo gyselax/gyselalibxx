@@ -14,6 +14,7 @@ add_executable(ddc_tests
 	mcoord.cpp
 	nonuniformmesh.cpp
         nonuniformdomain.cpp
+        single_mesh.cpp
 	taggedarray.cpp
 	view.cpp
 )
