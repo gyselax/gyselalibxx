@@ -13,6 +13,11 @@ private:
     TaggedTuple<detail::TypeSeq<Meshes...>, detail::TypeSeq<typename Meshes::Tag_...>> m_meshes;
 
 public:
+    using RCoord_ = RCoord<typename Meshes::Tag_...>;
+
+    using MCoord_ = MCoord<typename Meshes::Tag_...>;
+
+public:
     static constexpr std::size_t rank() noexcept
     {
         return (0 + ... + Meshes::rank());
