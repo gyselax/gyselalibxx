@@ -94,7 +94,7 @@ public:
         return std::get<0>(m_values);
     }
 
-    constexpr inline operator std::tuple_element<0, std::tuple<ElementTypes...>>&() noexcept
+    constexpr inline operator std::tuple_element<0, std::tuple<ElementTypes...>> &() noexcept
     {
         static_assert(size() == 1, "Implicit conversion is only possible for size 1 TaggedTuples");
         return std::get<0>(m_values);
