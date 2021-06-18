@@ -17,6 +17,8 @@ public:
 
     using MCoord_ = MCoord<Tag>;
 
+    using Tag_ = Tag;
+
     // The two Mesh and Mesh_ need better names to avoid ambiguity
     using Mesh_ = NonUniformMesh<Tag>;
 

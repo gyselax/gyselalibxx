@@ -9,6 +9,7 @@ add_executable(ddc_tests
         bsplines_uniform.cpp
         bsplines_non_uniform.cpp
         spline_builder.cpp
+        mesh_product.cpp
 	mdomain.cpp
 	mcoord.cpp
 	nonuniformmesh.cpp
