@@ -95,32 +95,32 @@ public:
             return MCoordElement(_M_value + __n);
         }
 
-        friend constexpr bool operator==(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator==(Iterator const& xx, Iterator const& yy)
         {
             return xx._M_value == yy._M_value;
         }
 
-        friend constexpr bool operator!=(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator!=(Iterator const& xx, Iterator const& yy)
         {
             return xx._M_value != yy._M_value;
         }
 
-        friend constexpr bool operator<(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator<(Iterator const& xx, Iterator const& yy)
         {
             return xx._M_value < yy._M_value;
         }
 
-        friend constexpr bool operator>(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator>(Iterator const& xx, Iterator const& yy)
         {
             return yy < xx;
         }
 
-        friend constexpr bool operator<=(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator<=(Iterator const& xx, Iterator const& yy)
         {
             return !(yy < xx);
         }
 
-        friend constexpr bool operator>=(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator>=(Iterator const& xx, Iterator const& yy)
         {
             return !(xx < yy);
         }
@@ -140,7 +140,7 @@ public:
             return __i -= __n;
         }
 
-        friend constexpr difference_type operator-(const Iterator& xx, const Iterator& yy)
+        friend constexpr difference_type operator-(Iterator const& xx, Iterator const& yy)
         {
             return (yy._M_value > xx._M_value)
                            ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
@@ -190,34 +190,29 @@ public:
         return 1;
     }
 
-    inline constexpr mcoord_type extents() noexcept
-    {
-        return m_points.size();
-    }
-
     inline constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
         return m_points[icoord];
     }
 
-    friend constexpr bool operator==(const NonUniformMesh& xx, const NonUniformMesh& yy)
+    friend constexpr bool operator==(NonUniformMesh const& xx, NonUniformMesh const& yy)
     {
         return xx.m_lbound == yy.m_lbound && xx.m_points == yy.m_points;
     }
 
-    friend constexpr bool operator!=(const NonUniformMesh& xx, const NonUniformMesh& yy)
+    friend constexpr bool operator!=(NonUniformMesh const& xx, NonUniformMesh const& yy)
     {
         return !operator==(xx, yy);
     }
 
-    template <class... OTags>
-    friend constexpr bool operator==(const NonUniformMesh& xx, const NonUniformMesh<OTags...>& yy)
+    template <class OTag>
+    friend constexpr bool operator==(NonUniformMesh const& xx, NonUniformMesh<OTag> const& yy)
     {
         return false;
     }
 
-    template <class... OTags>
-    friend constexpr bool operator!=(const NonUniformMesh& xx, const NonUniformMesh<OTags...>& yy)
+    template <class OTag>
+    friend constexpr bool operator!=(NonUniformMesh const& xx, NonUniformMesh<OTag> const& yy)
     {
         return false;
     }
@@ -237,25 +232,9 @@ public:
         return *this;
     }
 
-    inline constexpr NonUniformMesh& mesh() noexcept
-    {
-        return *this;
-    }
-
-    inline constexpr mcoord_type& lbound() noexcept
+    inline constexpr mcoord_type lbound() const noexcept
     {
         return m_lbound;
-    }
-
-    inline constexpr const mcoord_type& lbound() const noexcept
-    {
-        return m_lbound;
-    }
-
-    template <class... OTags>
-    inline constexpr MCoord<OTags...> lbound() const noexcept
-    {
-        return lbound();
     }
 
     inline constexpr rcoord_type rmin() const noexcept
@@ -263,38 +242,14 @@ public:
         return mesh().to_real(lbound());
     }
 
-    template <class... OTags>
-    inline constexpr RCoord<OTags...> rmin() const noexcept
-    {
-        return mesh().to_real(lbound<OTags...>());
-    }
-
     inline constexpr mcoord_type ubound() const noexcept
     {
         return lbound() + m_points.size();
     }
 
-    template <class... OTags>
-    inline constexpr MCoord<OTags...> ubound() const noexcept
-    {
-        return ubound();
-    }
-
     inline constexpr rcoord_type rmax() const noexcept
     {
         return mesh().to_real(ubound());
-    }
-
-    template <class... OTags>
-    inline constexpr RCoord<OTags...> rmax() const noexcept
-    {
-        return mesh().to_real(ubound<OTags...>());
-    }
-
-    template <class QueryTag>
-    inline constexpr std::size_t extent() const noexcept
-    {
-        return m_points.size();
     }
 
     inline constexpr std::size_t size() const noexcept
