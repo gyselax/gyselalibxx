@@ -13,22 +13,22 @@ inline void for_each_impl(
             sizeof...(Indices) == BlockView<MDomainImpl<Mesh>, ElementType, CONTIGUOUS>::rank()) {
         f(std::forward<Indices>(idxs)...);
     } else {
-        for (ptrdiff_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
-            for_each_impl(to, std::forward<Functor>(f), std::forward<Indices...>(idxs)..., ii);
+        for (std::size_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
+            for_each_impl(to, std::forward<Functor>(f), std::forward<Indices>(idxs)..., ii);
         }
     }
 }
-template <class MCoord_>
+template <class MCoord>
 struct sequential_for_impl
 {
     template <class Extents, class Functor, class... Indices>
     inline void operator()(const Extents& extents, Functor&& f, Indices&&... idxs) const noexcept
     {
         if constexpr (sizeof...(Indices) == Extents::rank()) {
-            f(MCoord_(std::forward<Indices>(idxs)...));
+            f(MCoord(std::forward<Indices>(idxs)...));
         } // namespace detail
         else {
-            for (ptrdiff_t ii = 0; ii < extents.extent(sizeof...(Indices)); ++ii) {
+            for (std::size_t ii = 0; ii < extents.extent(sizeof...(Indices)); ++ii) {
                 (*this)(extents, std::forward<Functor>(f), std::forward<Indices>(idxs)..., ii);
             }
         }
