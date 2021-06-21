@@ -11,13 +11,13 @@ template <class Tag>
 class NonUniformMesh
 {
 public:
-    using RCoord_ = RCoord<Tag>;
+    using rcoord_type = RCoord<Tag>;
 
-    using RLength_ = RLength<Tag>;
+    using rlength_type = RLength<Tag>;
 
-    using MCoord_ = MCoord<Tag>;
+    using mcoord_type = MCoord<Tag>;
 
-    using Tag_ = Tag;
+    using tag_type = Tag;
 
     // The two Mesh and Mesh_ need better names to avoid ambiguity
     using Mesh_ = NonUniformMesh<Tag>;
@@ -150,36 +150,36 @@ public:
 
 private:
     /// mesh points
-    std::vector<RCoord_> m_points;
+    std::vector<rcoord_type> m_points;
 
-    MCoord_ m_lbound;
+    mcoord_type m_lbound;
 
 public:
     inline constexpr NonUniformMesh(NonUniformMesh const& other) = default;
 
     inline constexpr NonUniformMesh(NonUniformMesh&& other) = default;
 
-    inline constexpr NonUniformMesh(std::vector<RCoord_>&& points, MCoord_ lbound)
+    inline constexpr NonUniformMesh(std::vector<rcoord_type>&& points, mcoord_type lbound)
         : m_points(std::move(points))
         , m_lbound(lbound)
     {
     }
 
     template <class InputIterable>
-    inline constexpr NonUniformMesh(InputIterable const& points, MCoord_ lbound)
+    inline constexpr NonUniformMesh(InputIterable const& points, mcoord_type lbound)
         : m_points(points.begin(), points.end())
         , m_lbound(lbound)
     {
     }
 
-    inline constexpr NonUniformMesh(View1D<const RCoord_> points, MCoord_ lbound)
+    inline constexpr NonUniformMesh(View1D<const rcoord_type> points, mcoord_type lbound)
         : m_points(points.data(), points.data() + points.extent(0))
         , m_lbound(lbound)
     {
     }
 
     template <class InputIt>
-    inline constexpr NonUniformMesh(InputIt points_begin, InputIt points_end, MCoord_ lbound)
+    inline constexpr NonUniformMesh(InputIt points_begin, InputIt points_end, mcoord_type lbound)
         : m_points(points_begin, points_end)
         , m_lbound(lbound)
     {
@@ -190,12 +190,12 @@ public:
         return 1;
     }
 
-    inline constexpr MCoord_ extents() noexcept
+    inline constexpr mcoord_type extents() noexcept
     {
         return m_points.size();
     }
 
-    inline constexpr RCoord_ to_real(MCoord_ const& icoord) const noexcept
+    inline constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
         return m_points[icoord];
     }
@@ -226,7 +226,7 @@ public:
     {
         std::vector<double> points;
         points.reserve(m_points.size());
-        for (RCoord_ point : m_points) {
+        for (rcoord_type point : m_points) {
             points.push_back(point);
         }
         return points;
@@ -242,12 +242,12 @@ public:
         return *this;
     }
 
-    inline constexpr MCoord_& lbound() noexcept
+    inline constexpr mcoord_type& lbound() noexcept
     {
         return m_lbound;
     }
 
-    inline constexpr const MCoord_& lbound() const noexcept
+    inline constexpr const mcoord_type& lbound() const noexcept
     {
         return m_lbound;
     }
@@ -258,7 +258,7 @@ public:
         return lbound();
     }
 
-    inline constexpr RCoord_ rmin() const noexcept
+    inline constexpr rcoord_type rmin() const noexcept
     {
         return mesh().to_real(lbound());
     }
@@ -269,7 +269,7 @@ public:
         return mesh().to_real(lbound<OTags...>());
     }
 
-    inline constexpr MCoord_ ubound() const noexcept
+    inline constexpr mcoord_type ubound() const noexcept
     {
         return lbound() + m_points.size();
     }
@@ -280,7 +280,7 @@ public:
         return ubound();
     }
 
-    inline constexpr RCoord_ rmax() const noexcept
+    inline constexpr rcoord_type rmax() const noexcept
     {
         return mesh().to_real(ubound());
     }

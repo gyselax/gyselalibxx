@@ -25,33 +25,33 @@ class BlockView<MDomainImpl<Mesh>, ElementType, CONTIGUOUS>
 {
 public:
     /// ND memory view
-    using RawView = SpanND<Mesh::rank(), ElementType, CONTIGUOUS>;
+    using raw_view_type = SpanND<Mesh::rank(), ElementType, CONTIGUOUS>;
 
-    using MDomain_ = MDomainImpl<Mesh>;
+    using mdomain_type = MDomainImpl<Mesh>;
 
-    using Mesh_ = Mesh;
+    using mesh_type = Mesh;
 
-    using MCoord_ = typename MDomain_::MCoord_;
+    using mcoord_type = typename mdomain_type::mcoord_type;
 
-    using extents_type = typename RawView::extents_type;
+    using extents_type = typename raw_view_type::extents_type;
 
-    using layout_type = typename RawView::layout_type;
+    using layout_type = typename raw_view_type::layout_type;
 
-    using accessor_type = typename RawView::accessor_type;
+    using accessor_type = typename raw_view_type::accessor_type;
 
-    using mapping_type = typename RawView::mapping_type;
+    using mapping_type = typename raw_view_type::mapping_type;
 
-    using element_type = typename RawView::element_type;
+    using element_type = typename raw_view_type::element_type;
 
-    using value_type = typename RawView::value_type;
+    using value_type = typename raw_view_type::value_type;
 
-    using index_type = typename RawView::index_type;
+    using index_type = typename raw_view_type::index_type;
 
-    using difference_type = typename RawView::difference_type;
+    using difference_type = typename raw_view_type::difference_type;
 
-    using pointer = typename RawView::pointer;
+    using pointer = typename raw_view_type::pointer;
 
-    using reference = typename RawView::reference;
+    using reference = typename raw_view_type::reference;
 
     template <class, class, bool>
     friend class BlockView;
@@ -75,7 +75,7 @@ protected:
         {
             auto view = subspan(block.raw_view(), std::forward<OSliceSpecs>(slices)...);
             auto mesh = submesh(block.mesh(), std::forward<OSliceSpecs>(slices)...);
-            return make_view<ElementType, ::is_contiguous_v<decltype(view)>>(mesh, view);
+            return make_view<element_type, ::is_contiguous_v<decltype(view)>>(mesh, view);
         }
     };
 
@@ -84,7 +84,7 @@ protected:
     {
         static inline constexpr auto slice(const BlockView& block, const MCoord<STags...>& slices)
         {
-            return Slicer<MCoord<STags...>, MDomain_>::slice(block, std::move(slices));
+            return Slicer<MCoord<STags...>, mdomain_type>::slice(block, std::move(slices));
         }
     };
 
@@ -116,7 +116,7 @@ protected:
     };
 
     /// The raw view of the data
-    RawView m_raw;
+    raw_view_type m_raw;
 
     /// The mesh on which this block is defined
     Mesh m_mesh;
@@ -136,7 +136,7 @@ public:
      * @param other the BlockView to move
      */
     template <class OElementType>
-    inline constexpr BlockView(const Block<MDomain_, OElementType>& other) noexcept
+    inline constexpr BlockView(const Block<mdomain_type, OElementType>& other) noexcept
         : m_raw(other.raw_view())
         , m_mesh(other.mesh())
     {
@@ -146,7 +146,8 @@ public:
      * @param other the BlockView to move
      */
     template <class OElementType>
-    inline constexpr BlockView(const BlockView<MDomain_, OElementType, CONTIGUOUS>& other) noexcept
+    inline constexpr BlockView(
+            const BlockView<mdomain_type, OElementType, CONTIGUOUS>& other) noexcept
         : m_raw(other.raw_view())
         , m_mesh(other.mesh())
     {
@@ -156,7 +157,9 @@ public:
      * @param mesh the mesh that sustains the view
      * @param raw_view the raw view to the data
      */
-    inline constexpr BlockView(const Mesh& mesh, RawView raw_view) : m_raw(raw_view), m_mesh(mesh)
+    inline constexpr BlockView(const Mesh& mesh, raw_view_type raw_view)
+        : m_raw(raw_view)
+        , m_mesh(mesh)
     {
     }
 
@@ -197,10 +200,10 @@ public:
     template <class... OTags>
     inline constexpr reference operator()(const MCoord<OTags...>& indices) const noexcept
     {
-        return m_raw(MCoord_(indices).array());
+        return m_raw(mcoord_type(indices).array());
     }
 
-    inline constexpr reference operator()(const MCoord_& indices) const noexcept
+    inline constexpr reference operator()(const mcoord_type& indices) const noexcept
     {
         return m_raw(indices.array());
     }
@@ -306,9 +309,9 @@ public:
     /** Provide access to the domain on which this block is defined
      * @return the domain on which this block is defined
      */
-    inline constexpr MDomain_ domain() const noexcept
+    inline constexpr mdomain_type domain() const noexcept
     {
-        return MDomain_(mesh(), ExtentToMCoordEnd<MCoord_>::mcoord(raw_view().extents()));
+        return mdomain_type(mesh(), ExtentToMCoordEnd<mcoord_type>::mcoord(raw_view().extents()));
     }
 
     /** Provide access to the domain on which this block is defined
@@ -323,7 +326,7 @@ public:
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
      */
-    inline constexpr RawView raw_view()
+    inline constexpr raw_view_type raw_view()
     {
         return m_raw;
     }
@@ -331,7 +334,7 @@ public:
     /** Provide a constant view of the data
      * @return a constant view of the data
      */
-    inline constexpr const RawView raw_view() const
+    inline constexpr const raw_view_type raw_view() const
     {
         return m_raw;
     }

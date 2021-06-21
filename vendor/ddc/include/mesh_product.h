@@ -16,12 +16,12 @@ class MeshProduct
 private:
     static_assert((... && (Meshes::rank() <= 1)), "Only meshes of rank <= 1 are allowed");
 
-    TaggedTuple<detail::TypeSeq<Meshes...>, detail::TypeSeq<typename Meshes::Tag_...>> m_meshes;
+    TaggedTuple<detail::TypeSeq<Meshes...>, detail::TypeSeq<typename Meshes::tag_type...>> m_meshes;
 
 public:
-    using RCoord_ = RCoord<typename Meshes::Tag_...>;
+    using rcoord_type = RCoord<typename Meshes::tag_type...>;
 
-    using MCoord_ = MCoord<typename Meshes::Tag_...>;
+    using mcoord_type = MCoord<typename Meshes::tag_type...>;
 
 public:
     static constexpr std::size_t rank() noexcept
@@ -90,7 +90,7 @@ struct SubmeshImpl<MeshProduct<Meshes...>>
     {
         static_assert(sizeof...(Meshes) == sizeof...(Slicespecs));
         return MeshProduct(submesh_rank_1(
-                mesh.template get<typename Meshes::Tag_>(),
+                mesh.template get<typename Meshes::tag_type>(),
                 std::forward<Slicespecs>(slicespecs))...);
     }
 };

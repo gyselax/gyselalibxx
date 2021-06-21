@@ -10,36 +10,36 @@ class Block<MDomainImpl<Mesh>, ElementType> : public BlockView<MDomainImpl<Mesh>
 {
 public:
     /// ND view on this block
-    using BlockView_ = BlockView<MDomainImpl<Mesh>, ElementType>;
+    using block_view_type = BlockView<MDomainImpl<Mesh>, ElementType>;
 
-    using BlockSpan_ = BlockView<MDomainImpl<Mesh>, ElementType const>;
+    using block_span_type = BlockView<MDomainImpl<Mesh>, ElementType const>;
 
     /// ND memory view
-    using RawView = typename BlockView_::RawView;
+    using raw_view_type = typename block_view_type::raw_view_type;
 
-    using MDomain_ = typename BlockView_::MDomain_;
+    using mdomain_type = typename block_view_type::mdomain_type;
 
-    using Mesh_ = Mesh;
+    using mesh_type = Mesh;
 
-    using MCoord_ = typename MDomain_::MCoord_;
+    using mcoord_type = typename mdomain_type::mcoord_type;
 
-    using extents_type = typename BlockView_::extents_type;
+    using extents_type = typename block_view_type::extents_type;
 
-    using layout_type = typename BlockView_::layout_type;
+    using layout_type = typename block_view_type::layout_type;
 
-    using mapping_type = typename BlockView_::mapping_type;
+    using mapping_type = typename block_view_type::mapping_type;
 
-    using element_type = typename BlockView_::element_type;
+    using element_type = typename block_view_type::element_type;
 
-    using value_type = typename BlockView_::value_type;
+    using value_type = typename block_view_type::value_type;
 
-    using index_type = typename BlockView_::index_type;
+    using index_type = typename block_view_type::index_type;
 
-    using difference_type = typename BlockView_::difference_type;
+    using difference_type = typename block_view_type::difference_type;
 
-    using pointer = typename BlockView_::pointer;
+    using pointer = typename block_view_type::pointer;
 
-    using reference = typename BlockView_::reference;
+    using reference = typename block_view_type::reference;
 
     template <class, class, bool>
     friend class BlockView;
@@ -47,10 +47,12 @@ public:
 public:
     /** Construct a Block on a domain with uninitialized values
      */
-    explicit inline constexpr Block(const MDomain_& domain)
-        : BlockView_(
+    explicit inline constexpr Block(const mdomain_type& domain)
+        : block_view_type(
                 domain.mesh(),
-                RawView(new (std::align_val_t(64)) value_type[domain.size()], domain.extents()))
+                raw_view_type(
+                        new (std::align_val_t(64)) value_type[domain.size()],
+                        domain.extents()))
     {
     }
 
@@ -107,43 +109,43 @@ public:
     }
 
     template <class... IndexType>
-    inline constexpr ElementType const& operator()(IndexType&&... indices) const noexcept
+    inline constexpr element_type const& operator()(IndexType&&... indices) const noexcept
     {
         return this->m_raw(std::forward<IndexType>(indices)...);
     }
 
     template <class... IndexType>
-    inline constexpr ElementType& operator()(IndexType&&... indices) noexcept
+    inline constexpr element_type& operator()(IndexType&&... indices) noexcept
     {
         return this->m_raw(std::forward<IndexType>(indices)...);
     }
 
-    inline constexpr ElementType const& operator()(const MCoord_& indices) const noexcept
+    inline constexpr element_type const& operator()(const mcoord_type& indices) const noexcept
     {
         return this->m_raw(indices.array());
     }
 
-    inline constexpr ElementType& operator()(const MCoord_& indices) noexcept
+    inline constexpr element_type& operator()(const mcoord_type& indices) noexcept
     {
         return this->m_raw(indices.array());
     }
 
-    inline constexpr BlockView_ cview() const
+    inline constexpr block_view_type cview() const
     {
         return *this;
     }
 
-    inline constexpr BlockView_ cview()
+    inline constexpr block_view_type cview()
     {
         return *this;
     }
 
-    inline constexpr BlockView_ view() const
+    inline constexpr block_view_type view() const
     {
         return *this;
     }
 
-    inline constexpr BlockSpan_ view()
+    inline constexpr block_span_type view()
     {
         return *this;
     }

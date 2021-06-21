@@ -10,11 +10,11 @@ template <class Mesh>
 class MDomainImpl
 {
 public:
-    using Mesh_ = Mesh;
+    using mesh_type = Mesh;
 
-    using RCoord_ = typename Mesh::RCoord_;
+    using rcoord_type = typename Mesh::rcoord_type;
 
-    using MCoord_ = typename Mesh::MCoord_;
+    using mcoord_type = typename Mesh::mcoord_type;
 
     template <class>
     friend class MDomainImpl;
@@ -144,11 +144,11 @@ public:
 
 private:
     /// The mesh on which this domain is defined
-    Mesh_ m_mesh;
+    mesh_type m_mesh;
 
-    MCoord_ m_lbound;
+    mcoord_type m_lbound;
 
-    MCoord_ m_ubound;
+    mcoord_type m_ubound;
 
 public:
     template <class OMesh>
@@ -182,7 +182,7 @@ public:
         , m_ubound(std::forward<UboundType>(ubound))
     {
         //         cannot assert in constexpr :/
-        //         assert((m_lbound == MCoord_ {0ul}) && "non null lbound is not supported yet");
+        //         assert((m_lbound == mcoord_type {0ul}) && "non null lbound is not supported yet");
     }
 
     template <class OriginType, class StepType, class LboundType, class UboundType>
@@ -198,7 +198,7 @@ public:
         , m_ubound(std::forward<UboundType>(ubound))
     {
         //         cannot assert in constexpr :/
-        //         assert((m_lbound == MCoord_ {0ul}) && "non null lbound is not supported yet");
+        //         assert((m_lbound == mcoord_type {0ul}) && "non null lbound is not supported yet");
     }
 
     friend constexpr bool operator==(MDomainImpl const& xx, MDomainImpl const& yy)
@@ -225,27 +225,27 @@ public:
         return false;
     }
 
-    inline constexpr Mesh_ const& mesh() const noexcept
+    inline constexpr mesh_type const& mesh() const noexcept
     {
         return m_mesh;
     }
 
-    inline constexpr Mesh_& mesh() noexcept
+    inline constexpr mesh_type& mesh() noexcept
     {
         return m_mesh;
     }
 
-    inline constexpr RCoord_ to_real(MCoord_ const& icoord) const noexcept
+    inline constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
         return m_mesh.to_real(icoord);
     }
 
-    inline constexpr MCoord_& lbound() noexcept
+    inline constexpr mcoord_type& lbound() noexcept
     {
         return m_lbound;
     }
 
-    inline constexpr const MCoord_& lbound() const noexcept
+    inline constexpr const mcoord_type& lbound() const noexcept
     {
         return m_lbound;
     }
@@ -256,7 +256,7 @@ public:
         return lbound();
     }
 
-    inline constexpr RCoord_ rmin() const noexcept
+    inline constexpr rcoord_type rmin() const noexcept
     {
         return mesh().to_real(lbound());
     }
@@ -267,12 +267,12 @@ public:
         return mesh().to_real(lbound<OTags...>());
     }
 
-    inline constexpr MCoord_& ubound() noexcept
+    inline constexpr mcoord_type& ubound() noexcept
     {
         return m_ubound;
     }
 
-    inline constexpr const MCoord_& ubound() const noexcept
+    inline constexpr const mcoord_type& ubound() const noexcept
     {
         return m_ubound;
     }
@@ -283,7 +283,7 @@ public:
         return ubound();
     }
 
-    inline constexpr RCoord_ rmax() const noexcept
+    inline constexpr rcoord_type rmax() const noexcept
     {
         return mesh().to_real(ubound());
     }
@@ -297,7 +297,7 @@ public:
     template <class QueryTag>
     inline constexpr std::size_t extent() const noexcept
     {
-        return get<QueryTag>(m_ubound) - get<QueryTag>(static_cast<MCoord_>(m_lbound));
+        return get<QueryTag>(m_ubound) - get<QueryTag>(static_cast<mcoord_type>(m_lbound));
     }
 
     inline constexpr ExtentsND<Mesh::rank()> extents() const noexcept
@@ -307,7 +307,7 @@ public:
 
     inline constexpr std::size_t size() const noexcept
     {
-        return size(std::make_index_sequence<Mesh_::rank()>());
+        return size(std::make_index_sequence<mesh_type::rank()>());
     }
 
     inline constexpr bool empty() const noexcept
@@ -322,25 +322,25 @@ public:
 
     constexpr Iterator begin() const noexcept
     {
-        static_assert(Mesh_::rank() == 1);
-        return Iterator {static_cast<MCoord_>(m_lbound)};
+        static_assert(mesh_type::rank() == 1);
+        return Iterator {static_cast<mcoord_type>(m_lbound)};
     }
 
     constexpr Iterator cbegin() const noexcept
     {
-        static_assert(Mesh_::rank() == 1);
+        static_assert(mesh_type::rank() == 1);
         return begin();
     }
 
     constexpr Iterator end() const noexcept
     {
-        static_assert(Mesh_::rank() == 1);
-        return Iterator {static_cast<MCoord_>(m_ubound)};
+        static_assert(mesh_type::rank() == 1);
+        return Iterator {static_cast<mcoord_type>(m_ubound)};
     }
 
     constexpr Iterator cend() const noexcept
     {
-        static_assert(Mesh_::rank() == 1);
+        static_assert(mesh_type::rank() == 1);
         return end();
     }
 

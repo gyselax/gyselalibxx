@@ -14,8 +14,8 @@ using MeshX = UniformMesh<DimX>;
 using MeshVx = NonUniformMesh<DimVx>;
 
 using MeshXVx = MeshProduct<MeshX, MeshVx>;
-using MCoordXVx = MeshXVx::MCoord_;
-using RCoordXVx = MeshXVx::RCoord_;
+using MCoordXVx = MeshXVx::mcoord_type;
+using RCoordXVx = MeshXVx::rcoord_type;
 
 TEST(MeshProduct, constructor)
 {

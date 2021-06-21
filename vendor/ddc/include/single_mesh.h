@@ -11,22 +11,22 @@ template <class Tag>
 class SingleMesh
 {
 public:
-    using RCoord_ = RCoord<Tag>;
+    using rcoord_type = RCoord<Tag>;
 
-    using MCoord_ = MCoord<Tag>;
+    using mcoord_type = MCoord<Tag>;
 
-    using Tag_ = Tag;
+    using tag_type = Tag;
 
 private:
     /// origin
-    RCoord_ m_point;
+    rcoord_type m_point;
 
 public:
     inline constexpr SingleMesh(SingleMesh const& other) noexcept : m_point(other.m_point) {}
 
     inline constexpr SingleMesh(SingleMesh&& other) noexcept : m_point(std::move(other.m_point)) {}
 
-    inline constexpr SingleMesh(RCoord_ origin) noexcept : m_point(std::move(origin)) {}
+    inline constexpr SingleMesh(rcoord_type origin) noexcept : m_point(std::move(origin)) {}
 
     friend constexpr bool operator==(SingleMesh const& xx, SingleMesh const& yy)
     {
@@ -55,7 +55,7 @@ public:
         return 0;
     }
 
-    inline constexpr RCoord_ origin() const noexcept
+    inline constexpr rcoord_type origin() const noexcept
     {
         return m_point;
     }
@@ -65,9 +65,9 @@ public:
         return 1;
     }
 
-    inline constexpr RCoord_ to_real(const MCoord_ icoord) const noexcept
+    inline constexpr rcoord_type to_real(const mcoord_type icoord) const noexcept
     {
-        assert(icoord == MCoord_(0));
+        assert(icoord == mcoord_type(0));
         return m_point;
     }
 };

@@ -8,14 +8,14 @@ template <class... Tags>
 class UniformMesh
 {
 public:
-    using RCoord_ = RCoord<Tags...>;
+    using rcoord_type = RCoord<Tags...>;
 
-    using RLength_ = RLength<Tags...>;
+    using rlength_type = RLength<Tags...>;
 
-    using MCoord_ = MCoord<Tags...>;
+    using mcoord_type = MCoord<Tags...>;
 
     // temporary workaround in case the parameter pack Tags... is empty
-    using Tag_ = std::tuple_element_t<
+    using tag_type = std::tuple_element_t<
             0,
             std::conditional_t<sizeof...(Tags) == 0, std::tuple<void>, std::tuple<Tags...>>>;
 
@@ -34,10 +34,10 @@ public:
 
 private:
     /// origin
-    RCoord_ m_origin;
+    rcoord_type m_origin;
 
     /// step size
-    RLength_ m_step;
+    rlength_type m_step;
 
     template <class...>
     friend class UniformMesh;
@@ -57,7 +57,7 @@ public:
     {
     }
 
-    inline constexpr UniformMesh(RCoord_ origin, RCoord_ step) noexcept
+    inline constexpr UniformMesh(rcoord_type origin, rcoord_type step) noexcept
         : m_origin(std::move(origin))
         , m_step(std::move(step))
     {
@@ -90,19 +90,19 @@ public:
         return sizeof...(Tags);
     }
 
-    inline constexpr RCoord_ origin() const noexcept
+    inline constexpr rcoord_type origin() const noexcept
     {
         return m_origin;
     }
 
-    inline constexpr RLength_ step() const noexcept
+    inline constexpr rlength_type step() const noexcept
     {
         return m_step;
     }
 
-    inline constexpr RCoord_ to_real(const MCoord_& icoord) const noexcept
+    inline constexpr rcoord_type to_real(const mcoord_type& icoord) const noexcept
     {
-        return RCoord_((::get<Tags>(origin()) + ::get<Tags>(icoord) * ::get<Tags>(m_step))...);
+        return rcoord_type((::get<Tags>(origin()) + ::get<Tags>(icoord) * ::get<Tags>(m_step))...);
     }
 
     template <class... OTags>
