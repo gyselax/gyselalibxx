@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "product_mesh.h"
 #include "non_uniform_mesh.h"
+#include "product_mesh.h"
 #include "uniform_mesh.h"
 
 class DimX;
