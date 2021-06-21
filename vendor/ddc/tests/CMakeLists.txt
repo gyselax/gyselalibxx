@@ -12,7 +12,7 @@ add_executable(ddc_tests
         product_mesh.cpp
 	mdomain.cpp
 	mcoord.cpp
-	nonuniformmesh.cpp
+	non_uniform_mesh.cpp
         nonuniformdomain.cpp
         single_mesh.cpp
 	taggedarray.cpp
