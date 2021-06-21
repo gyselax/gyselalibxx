@@ -89,32 +89,32 @@ public:
             return MCoordElement(_M_value + __n);
         }
 
-        friend constexpr bool operator==(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator==(Iterator const& xx, Iterator const& yy)
         {
             return xx._M_value == yy._M_value;
         }
 
-        friend constexpr bool operator!=(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator!=(Iterator const& xx, Iterator const& yy)
         {
             return xx._M_value != yy._M_value;
         }
 
-        friend constexpr bool operator<(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator<(Iterator const& xx, Iterator const& yy)
         {
             return xx._M_value < yy._M_value;
         }
 
-        friend constexpr bool operator>(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator>(Iterator const& xx, Iterator const& yy)
         {
             return yy < xx;
         }
 
-        friend constexpr bool operator<=(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator<=(Iterator const& xx, Iterator const& yy)
         {
             return !(yy < xx);
         }
 
-        friend constexpr bool operator>=(const Iterator& xx, const Iterator& yy)
+        friend constexpr bool operator>=(Iterator const& xx, Iterator const& yy)
         {
             return !(xx < yy);
         }
@@ -134,7 +134,7 @@ public:
             return __i -= __n;
         }
 
-        friend constexpr difference_type operator-(const Iterator& xx, const Iterator& yy)
+        friend constexpr difference_type operator-(Iterator const& xx, Iterator const& yy)
         {
             return (yy._M_value > xx._M_value)
                            ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
@@ -152,7 +152,7 @@ private:
 
 public:
     template <class OMesh>
-    inline constexpr MDomainImpl(const MDomainImpl<OMesh>& other) noexcept
+    inline constexpr MDomainImpl(MDomainImpl<OMesh> const& other) noexcept
         : m_mesh(other.m_mesh)
         , m_lbound(other.m_lbound)
         , m_ubound(other.m_ubound)
@@ -201,26 +201,26 @@ public:
         //         assert((m_lbound == MCoord_ {0ul}) && "non null lbound is not supported yet");
     }
 
-    friend constexpr bool operator==(const MDomainImpl& xx, const MDomainImpl& yy)
+    friend constexpr bool operator==(MDomainImpl const& xx, MDomainImpl const& yy)
     {
         return (&xx == &yy)
                || (xx.mesh() == yy.mesh() && xx.m_lbound == yy.m_lbound
                    && xx.m_ubound == yy.m_ubound);
     }
 
-    friend constexpr bool operator!=(const MDomainImpl& xx, const MDomainImpl& yy)
+    friend constexpr bool operator!=(MDomainImpl const& xx, MDomainImpl const& yy)
     {
         return !operator==(xx, yy);
     }
 
-    template <class... OTags>
-    friend constexpr bool operator==(const MDomainImpl& xx, const MDomainImpl<OTags...>& yy)
+    template <class OMesh>
+    friend constexpr bool operator==(MDomainImpl const& xx, const MDomainImpl<OMesh>& yy)
     {
         return false;
     }
 
-    template <class... OTags>
-    friend constexpr bool operator!=(const MDomainImpl& xx, const MDomainImpl<OTags...>& yy)
+    template <class OMesh>
+    friend constexpr bool operator!=(MDomainImpl const& xx, const MDomainImpl<OMesh>& yy)
     {
         return false;
     }
@@ -295,7 +295,7 @@ public:
     }
 
     template <class QueryTag>
-    inline constexpr ptrdiff_t extent() const noexcept
+    inline constexpr std::size_t extent() const noexcept
     {
         return get<QueryTag>(m_ubound) - get<QueryTag>(static_cast<MCoord_>(m_lbound));
     }
@@ -305,7 +305,7 @@ public:
         return extents(std::make_index_sequence<Mesh::rank()>());
     }
 
-    inline constexpr ptrdiff_t size() const noexcept
+    inline constexpr std::size_t size() const noexcept
     {
         return size(std::make_index_sequence<Mesh_::rank()>());
     }
@@ -350,25 +350,19 @@ public:
         return *(--end());
     }
 
-    constexpr decltype(auto) operator[](ptrdiff_t __n)
+    constexpr decltype(auto) operator[](std::size_t __n)
     {
         return begin()[__n];
     }
 
-    constexpr decltype(auto) operator[](ptrdiff_t __n) const
+    constexpr decltype(auto) operator[](std::size_t __n) const
     {
         return begin()[__n];
-    }
-
-    template <class... SliceSpecs>
-    constexpr auto subdomain(SliceSpecs&&... slicespecs) const
-    {
-        return MDomainImpl();
     }
 
 private:
     template <size_t... Idxs>
-    inline constexpr ptrdiff_t size(std::index_sequence<Idxs...>) const noexcept
+    inline constexpr std::size_t size(std::index_sequence<Idxs...>) const noexcept
     {
         return ((m_ubound[Idxs] - m_lbound[Idxs]) * ...);
     }
@@ -381,7 +375,7 @@ private:
 };
 
 template <class QTag, class... CTags>
-auto get_slicer_for(const MCoord<CTags...>& c)
+auto get_slicer_for(MCoord<CTags...> const& c)
 {
     if constexpr (has_tag_v<QTag, MCoord<CTags...>>) {
         return c.template get<QTag>();
