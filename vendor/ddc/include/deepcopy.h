@@ -19,7 +19,7 @@ inline void for_each_impl(
     }
 }
 template <class MCoord>
-struct sequential_for_impl
+struct SequentialForImpl
 {
     template <class Extents, class Functor, class... Indices>
     inline void operator()(const Extents& extents, Functor&& f, Indices&&... idxs) const noexcept
@@ -42,8 +42,8 @@ struct sequential_for_impl
  * @return to
  */
 template <class... Tags, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS>
-inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(
-        BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> to,
+inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> const& deepcopy(
+        BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> const& to,
         BlockView<UniformMDomain<Tags...>, ElementType, OCONTIGUOUS> const& from) noexcept
 {
     assert(to.extents() == from.extents());
@@ -63,15 +63,15 @@ template <
         class OElementType,
         bool CONTIGUOUS,
         bool OCONTIGUOUS>
-inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> deepcopy(
-        BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> to,
+inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> const& deepcopy(
+        BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> const& to,
         BlockView<UniformMDomain<OTags...>, OElementType, OCONTIGUOUS> const& from) noexcept
 {
     static_assert(std::is_convertible_v<OElementType, ElementType>, "Not convertible");
-    using MCoord_ = typename UniformMDomain<Tags...>::mcoord_type;
+    using mcoord_type = typename UniformMDomain<Tags...>::mcoord_type;
     assert(to.extents() == from.extents());
-    constexpr auto sequential_for = detail::sequential_for_impl<MCoord_>();
-    sequential_for(to.extents(), [&to, &from](const auto& domain) { to(domain) = from(domain); });
+    constexpr auto sequential_for = detail::SequentialForImpl<mcoord_type>();
+    sequential_for(to.extents(), [&to, &from](auto const& mcoord) { to(mcoord) = from(mcoord); });
     return to;
 }
 
