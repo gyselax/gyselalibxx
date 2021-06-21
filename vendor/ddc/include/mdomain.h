@@ -1,9 +1,9 @@
 #pragma once
 
 #include "mcoord.h"
-#include "nonuniformmesh.h"
+#include "non_uniform_mesh.h"
 #include "rcoord.h"
-#include "uniformmesh.h"
+#include "uniform_mesh.h"
 #include "view.h"
 
 template <class Mesh>

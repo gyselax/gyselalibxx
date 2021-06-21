@@ -6,7 +6,7 @@
 
 #include "bsplines.h"
 #include "mdomain.h"
-#include "nonuniformmesh.h"
+#include "non_uniform_mesh.h"
 #include "rdomain.h"
 #include "view.h"
 

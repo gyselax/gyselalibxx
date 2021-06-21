@@ -6,7 +6,7 @@
 #include <blockview.h>
 #include <geometry.h>
 #include <mdomain.h>
-#include <nonuniformmesh.h>
+#include <non_uniform_mesh.h>
 
 template <class... Tags>
 class IFourierTransform

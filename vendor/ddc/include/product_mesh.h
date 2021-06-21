@@ -11,7 +11,7 @@ template <class Mesh>
 struct SubmeshImpl;
 
 template <class... Meshes>
-class MeshProduct
+class ProductMesh
 {
 private:
     static_assert((... && (Meshes::rank() <= 1)), "Only meshes of rank <= 1 are allowed");
@@ -30,19 +30,19 @@ public:
     }
 
 public:
-    constexpr MeshProduct(Meshes const&... meshes) : m_meshes(meshes...) {}
+    constexpr ProductMesh(Meshes const&... meshes) : m_meshes(meshes...) {}
 
-    constexpr MeshProduct(Meshes&&... meshes) : m_meshes(std::move(meshes)...) {}
+    constexpr ProductMesh(Meshes&&... meshes) : m_meshes(std::move(meshes)...) {}
 
-    MeshProduct(MeshProduct const& x) = default;
+    ProductMesh(ProductMesh const& x) = default;
 
-    MeshProduct(MeshProduct&& x) = default;
+    ProductMesh(ProductMesh&& x) = default;
 
-    ~MeshProduct() = default;
+    ~ProductMesh() = default;
 
-    MeshProduct& operator=(MeshProduct const& x) = default;
+    ProductMesh& operator=(ProductMesh const& x) = default;
 
-    MeshProduct& operator=(MeshProduct&& x) = default;
+    ProductMesh& operator=(ProductMesh&& x) = default;
 
     template <class Tag>
     auto const& get() const noexcept
@@ -66,12 +66,12 @@ public:
     template <class... Slicespecs>
     auto submesh(Slicespecs&&... slicespecs) const noexcept
     {
-        return SubmeshImpl<MeshProduct>::submesh(*this, std::forward<Slicespecs>(slicespecs)...);
+        return SubmeshImpl<ProductMesh>::submesh(*this, std::forward<Slicespecs>(slicespecs)...);
     }
 };
 
 template <class... Meshes>
-struct SubmeshImpl<MeshProduct<Meshes...>>
+struct SubmeshImpl<ProductMesh<Meshes...>>
 {
     template <class Mesh, class Slicespec>
     static auto submesh_rank_1(Mesh const& mesh, Slicespec&& slicespec)
@@ -86,10 +86,10 @@ struct SubmeshImpl<MeshProduct<Meshes...>>
     }
 
     template <class... Slicespecs>
-    static auto submesh(MeshProduct<Meshes...> const& mesh, Slicespecs&&... slicespecs)
+    static auto submesh(ProductMesh<Meshes...> const& mesh, Slicespecs&&... slicespecs)
     {
         static_assert(sizeof...(Meshes) == sizeof...(Slicespecs));
-        return MeshProduct(submesh_rank_1(
+        return ProductMesh(submesh_rank_1(
                 mesh.template get<typename Meshes::tag_type>(),
                 std::forward<Slicespecs>(slicespecs))...);
     }

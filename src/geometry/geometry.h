@@ -2,8 +2,8 @@
 
 #include <block.h>
 #include <bsplines.h>
-#include <nonuniformmesh.h>
-#include <uniformmesh.h>
+#include <non_uniform_mesh.h>
+#include <uniform_mesh.h>
 
 template <class Tag>
 struct Fourier

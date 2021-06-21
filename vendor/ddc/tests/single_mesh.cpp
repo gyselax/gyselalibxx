@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
-#include "mesh_product.h"
-#include "nonuniformmesh.h"
+#include "non_uniform_mesh.h"
+#include "product_mesh.h"
 #include "single_mesh.h"
-#include "uniformmesh.h"
+#include "uniform_mesh.h"
 
 class DimX;
 class DimVx;
@@ -14,7 +14,7 @@ using MCoordVx = MCoord<DimVx>;
 using MeshX = SingleMesh<DimX>;
 using MeshVx = NonUniformMesh<DimVx>;
 
-using MeshXVx = MeshProduct<MeshX, MeshVx>;
+using MeshXVx = ProductMesh<MeshX, MeshVx>;
 using MCoordXVx = MeshXVx::mcoord_type;
 using RCoordXVx = MeshXVx::rcoord_type;
 
@@ -39,6 +39,6 @@ TEST(SingleMesh, product)
     std::array points_vx {-1., 0., 2., 4.};
     MeshVx mesh_vx(points_vx, points_vx.size());
 
-    MeshProduct mesh_x_vx(mesh_x, mesh_vx);
+    ProductMesh mesh_x_vx(mesh_x, mesh_vx);
     EXPECT_EQ(MeshXVx::rank(), MeshX::rank() + MeshVx::rank());
 }

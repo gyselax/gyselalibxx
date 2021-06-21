@@ -8,7 +8,7 @@
 
 #include "bsplines_non_uniform.h"
 #include "mdomain.h"
-#include "nonuniformmesh.h"
+#include "non_uniform_mesh.h"
 
 struct DimX
 {

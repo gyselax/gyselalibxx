@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "mdomain.h"
-#include "nonuniformmesh.h"
+#include "non_uniform_mesh.h"
 
 class DimX;
 using NonUniformMeshX = NonUniformMesh<DimX>;

@@ -5,7 +5,7 @@
 
 #include "bsplines.h"
 #include "mdomain.h"
-#include "nonuniformmesh.h"
+#include "non_uniform_mesh.h"
 
 namespace deprecated {
 

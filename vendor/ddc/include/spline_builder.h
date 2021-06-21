@@ -11,8 +11,8 @@
 #include "blockview.h"
 #include "blockview_spline.h"
 #include "mdomain.h"
-#include "nonuniformmesh.h"
-#include "uniformmesh.h"
+#include "non_uniform_mesh.h"
+#include "uniform_mesh.h"
 
 enum class BoundCond {
     // Periodic boundary condition u(1)=u(n)

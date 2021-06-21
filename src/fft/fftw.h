@@ -8,7 +8,7 @@
 #include <fftw3.h>
 #include <geometry.h>
 #include <mdomain.h>
-#include <nonuniformmesh.h>
+#include <non_uniform_mesh.h>
 
 #include "fft.h"
 
