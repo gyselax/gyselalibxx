@@ -44,7 +44,7 @@ TEST(BSplinesNonUniform, Comparison)
     std::integral_constant<std::size_t, 2> constexpr spline_degree;
     auto&& bsplines = make_bsplines(dom, spline_degree);
 
-    deprecated::NonUniformBSplines old_bsplines(spline_degree.value, dom);
+    deprecated::NonUniformBSplines old_bsplines(spline_degree.value, DimX::PERIODIC, breaks);
 
     EXPECT_EQ(bsplines.degree(), old_bsplines.degree());
     EXPECT_EQ(bsplines.is_radial(), old_bsplines.radial());

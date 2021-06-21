@@ -17,7 +17,7 @@ TEST(BSplinesNonUniform, Constructor)
 
     NonUniformMeshX mesh(breaks, MCoordX(0));
     MDomainImpl<NonUniformMeshX> const dom(mesh, MCoordX(5));
-    NonUniformBSplines bsplines(2, dom);
+    NonUniformBSplines bsplines(2, DimX::PERIODIC, breaks);
     EXPECT_EQ(bsplines.degree(), 2);
     EXPECT_EQ(bsplines.is_periodic(), DimX::PERIODIC);
     EXPECT_EQ(bsplines.xmin(), 0.);

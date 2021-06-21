@@ -18,11 +18,6 @@ private:
 
 public:
     NonUniformBSplines() = delete;
-    template <class Tag>
-    NonUniformBSplines(int degree, const MDomainImpl<NonUniformMesh<Tag>>& dom)
-        : NonUniformBSplines(degree, Tag::PERIODIC, dom.mesh().points())
-    {
-    }
     NonUniformBSplines(int degree, bool periodic, const std::vector<double>& breaks);
     NonUniformBSplines(const NonUniformBSplines& x) = delete;
     NonUniformBSplines(NonUniformBSplines&& x) = delete;
