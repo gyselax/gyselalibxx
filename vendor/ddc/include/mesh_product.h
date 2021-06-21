@@ -1,8 +1,14 @@
 #pragma once
 
+#include <type_traits>
+
 #include "mcoord.h"
 #include "rcoord.h"
+#include "single_mesh.h"
 #include "taggedtuple.h"
+
+template < class Mesh >
+struct SubmeshImpl;
 
 template <class... Meshes>
 class MeshProduct
@@ -55,5 +61,36 @@ public:
     {
         return RCoord<QueryTags...>(
                 ::get<QueryTags>(m_meshes).to_real(::get<QueryTags>(mcoord))...);
+    }
+
+    template <class... Slicespecs>
+    auto submesh(Slicespecs&&... slicespecs) const noexcept
+    {
+        return SubmeshImpl<MeshProduct>::submesh(*this, std::forward<Slicespecs>(slicespecs)...);
+    }
+};
+
+template <class... Meshes>
+struct SubmeshImpl<MeshProduct<Meshes...>>
+{
+    template <class Mesh, class Slicespec>
+    static auto submesh_rank_1(Mesh const& mesh, Slicespec&& slicespec)
+    {
+        static_assert(Mesh::rank() <= 1);
+        using slicespec_type = std::remove_cv_t<std::remove_reference_t<Slicespec>>;
+        if constexpr (std::is_same_v<slicespec_type, std::experimental::all_type>) {
+            return mesh;
+        } else if constexpr (std::is_integral_v<slicespec_type>) {
+            return SingleMesh(mesh.to_real(slicespec));
+        }
+    }
+
+    template <class... Slicespecs>
+    static auto submesh(MeshProduct<Meshes...> const& mesh, Slicespecs&&... slicespecs)
+    {
+        static_assert(sizeof...(Meshes) == sizeof...(Slicespecs));
+        return MeshProduct(submesh_rank_1(
+                mesh.template get<typename Meshes::Tag_>(),
+                std::forward<Slicespecs>(slicespecs))...);
     }
 };

@@ -28,6 +28,19 @@ TEST(MeshProduct, constructor)
     EXPECT_EQ(MeshXVx::rank(), MeshX::rank() + MeshVx::rank());
 }
 
+TEST(MeshProduct, submesh)
+{
+    MeshX mesh_x(2., 0.1);
+
+    std::array points_vx {-1., 0., 2., 4.};
+    MeshVx mesh_vx(points_vx, points_vx.size());
+
+    MeshProduct mesh_x_vx(mesh_x, mesh_vx);
+    auto&& submesh = mesh_x_vx.submesh(2, std::experimental::all);
+    EXPECT_EQ(1, submesh.rank());
+    EXPECT_EQ(RCoordXVx(2.2, 0.), submesh.to_real(MCoordXVx(0, 1)));
+}
+
 TEST(MeshProduct, to_real)
 {
     MeshX mesh_x(0., 0.1);
