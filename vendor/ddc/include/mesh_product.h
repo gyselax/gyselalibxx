@@ -7,7 +7,7 @@
 #include "single_mesh.h"
 #include "taggedtuple.h"
 
-template < class Mesh >
+template <class Mesh>
 struct SubmeshImpl;
 
 template <class... Meshes>
