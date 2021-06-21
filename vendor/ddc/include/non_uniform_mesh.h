@@ -292,12 +292,12 @@ public:
     }
 
     template <class QueryTag>
-    inline constexpr ptrdiff_t extent() const noexcept
+    inline constexpr std::size_t extent() const noexcept
     {
         return m_points.size();
     }
 
-    inline constexpr ptrdiff_t size() const noexcept
+    inline constexpr std::size_t size() const noexcept
     {
         return m_points.size();
     }
@@ -338,12 +338,12 @@ public:
         return *(--end());
     }
 
-    constexpr decltype(auto) operator[](ptrdiff_t __n)
+    constexpr decltype(auto) operator[](std::size_t __n)
     {
         return begin()[__n];
     }
 
-    constexpr decltype(auto) operator[](ptrdiff_t __n) const
+    constexpr decltype(auto) operator[](std::size_t __n) const
     {
         return begin()[__n];
     }
