@@ -10,7 +10,7 @@ using RCoordX = RCoord<DimX>;
 using MCoordX = MCoord<DimX>;
 using RCoordVx = RCoord<DimVx>;
 using MCoordVx = MCoord<DimVx>;
-using MeshX = NonUniformMesh<DimX>;
+using MeshX = UniformMesh<DimX>;
 using MeshVx = NonUniformMesh<DimVx>;
 
 using MeshXVx = MeshProduct<MeshX, MeshVx>;
@@ -19,8 +19,7 @@ using RCoordXVx = MeshXVx::RCoord_;
 
 TEST(MeshProduct, constructor)
 {
-    std::array points_x {0., 1., 2.};
-    MeshX mesh_x(points_x, points_x.size());
+    MeshX mesh_x(2., 0.1);
 
     std::array points_vx {-1., 0., 2., 4.};
     MeshVx mesh_vx(points_vx, points_vx.size());
@@ -31,18 +30,17 @@ TEST(MeshProduct, constructor)
 
 TEST(MeshProduct, to_real)
 {
-    std::array points_x {0., 1., 2.};
-    MeshX mesh_x(points_x, points_x.size());
+    MeshX mesh_x(0., 0.1);
 
     std::array points_vx {-1., 0., 2., 4.};
     MeshVx mesh_vx(points_vx, points_vx.size());
 
     MeshProduct mesh_x_vx(mesh_x, mesh_vx);
 
-    for (std::size_t ix = 0; ix < points_x.size(); ++ix) {
+    for (std::size_t ix = 0; ix < 5; ++ix) {
         for (std::size_t ivx = 0; ivx < points_vx.size(); ++ivx) {
             EXPECT_EQ(
-                    RCoordXVx(points_x[ix], points_vx[ivx]),
+                    RCoordXVx(mesh_x.to_real(ix), points_vx[ivx]),
                     mesh_x_vx.to_real(MCoordXVx(ix, ivx)));
         }
     }

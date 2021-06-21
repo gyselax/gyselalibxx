@@ -14,6 +14,11 @@ public:
 
     using MCoord_ = MCoord<Tags...>;
 
+    // temporary workaround in case the parameter pack Tags... is empty
+    using Tag_ = std::tuple_element_t<
+            0,
+            std::conditional_t<sizeof...(Tags) == 0, std::tuple<void>, std::tuple<Tags...>>>;
+
     // The two Mesh and Mesh_ need better names to avoid ambiguity
     using Mesh_ = UniformMesh<Tags...>;
 
@@ -95,8 +100,13 @@ public:
         return m_step;
     }
 
+    inline constexpr RCoord_ to_real(const MCoord_& icoord) const noexcept
+    {
+        return RCoord_((::get<Tags>(origin()) + ::get<Tags>(icoord) * ::get<Tags>(m_step))...);
+    }
+
     template <class... OTags>
-    inline constexpr RCoord<OTags...> to_real(const MCoord<OTags...> icoord) const noexcept
+    inline constexpr RCoord<OTags...> to_real(const MCoord<OTags...>& icoord) const noexcept
     {
         return RCoord<OTags...>(
                 (::get<OTags>(origin()) + ::get<OTags>(icoord) * ::get<OTags>(m_step))...);
