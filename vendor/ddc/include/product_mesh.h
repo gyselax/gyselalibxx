@@ -13,15 +13,20 @@ struct SubmeshImpl;
 template <class... Meshes>
 class ProductMesh
 {
+    template <class Mesh>
+    using tag_t = typename Mesh::tag_type;
+
 private:
+    static_assert(sizeof...(Meshes) > 0, "At least 1 mesh must be provided");
+
     static_assert((... && (Meshes::rank() <= 1)), "Only meshes of rank <= 1 are allowed");
 
-    TaggedTuple<detail::TypeSeq<Meshes...>, detail::TypeSeq<typename Meshes::tag_type...>> m_meshes;
+    TaggedTuple<detail::TypeSeq<Meshes...>, detail::TypeSeq<tag_t<Meshes>...>> m_meshes;
 
 public:
-    using rcoord_type = RCoord<typename Meshes::tag_type...>;
+    using rcoord_type = RCoord<tag_t<Meshes>...>;
 
-    using mcoord_type = MCoord<typename Meshes::tag_type...>;
+    using mcoord_type = MCoord<tag_t<Meshes>...>;
 
 public:
     static constexpr std::size_t rank() noexcept
@@ -30,9 +35,23 @@ public:
     }
 
 public:
+    ProductMesh() = delete;
+
     constexpr ProductMesh(Meshes const&... meshes) : m_meshes(meshes...) {}
 
     constexpr ProductMesh(Meshes&&... meshes) : m_meshes(std::move(meshes)...) {}
+
+    template <class... OMeshes>
+    constexpr ProductMesh(ProductMesh<OMeshes...> const& mesh)
+        : m_meshes(mesh.template get<tag_t<Meshes>>()...)
+    {
+    }
+
+    template <class... OMeshes>
+    constexpr ProductMesh(ProductMesh<OMeshes...>&& mesh)
+        : m_meshes(std::move(mesh.template get<tag_t<Meshes>>())...)
+    {
+    }
 
     ProductMesh(ProductMesh const& x) = default;
 
@@ -67,6 +86,16 @@ public:
     auto submesh(Slicespecs&&... slicespecs) const noexcept
     {
         return SubmeshImpl<ProductMesh>::submesh(*this, std::forward<Slicespecs>(slicespecs)...);
+    }
+
+    friend constexpr bool operator==(ProductMesh const& lhs, ProductMesh const& rhs)
+    {
+        return (... && (::get<tag_t<Meshes>>(lhs.m_meshes) == ::get<tag_t<Meshes>>(rhs.m_meshes)));
+    }
+
+    friend constexpr bool operator!=(ProductMesh const& lhs, ProductMesh const& rhs)
+    {
+        return !(lhs == rhs);
     }
 };
 
