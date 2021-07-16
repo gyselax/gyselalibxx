@@ -50,7 +50,7 @@ TEST_F(ProductMDomainTest, rmin_rmax)
 
 TEST_F(ProductMDomainTest, subdomain)
 {
-    auto subdomain = domain_x_vx.subdomain(1, std::experimental::all);
+    auto subdomain = domain_x_vx.subdomain(1, std::experimental::full_extent);
     EXPECT_EQ(
             subdomain,
             ProductMDomain(ProductMesh(mesh_vx), MCoord<MeshVx>(0), MCoord<MeshVx>(3)));

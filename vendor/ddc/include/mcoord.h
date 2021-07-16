@@ -25,7 +25,7 @@ struct ExtentToMCoord<MCoordType, std::index_sequence<Ints...>>
 {
     static_assert(MCoordType::size() == sizeof...(Ints));
 
-    template <ptrdiff_t... Extents>
+    template <std::size_t... Extents>
     static inline constexpr MCoordType mcoord(
             const std::experimental::extents<Extents...>& extent) noexcept
     {

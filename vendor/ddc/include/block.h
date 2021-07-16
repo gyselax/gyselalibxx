@@ -34,7 +34,7 @@ public:
 
     using value_type = typename block_view_type::value_type;
 
-    using index_type = typename block_view_type::index_type;
+    using size_type = typename block_view_type::size_type;
 
     using difference_type = typename block_view_type::difference_type;
 
@@ -53,7 +53,7 @@ public:
                 domain,
                 raw_view_type(
                         new (std::align_val_t(64)) value_type[domain.size()],
-                        ExtentsND<sizeof...(Meshes)>(::get<Meshes>(domain).size()...)))
+                        ::get<Meshes>(domain).size()...))
     {
     }
 

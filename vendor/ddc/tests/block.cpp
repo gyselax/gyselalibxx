@@ -152,17 +152,28 @@ TEST_F(DBlockXVxTest, slice)
     {
         const DBlockXVx& constref_block = block;
         constexpr auto SLICE_VAL = 1;
-        auto&& block_x = constref_block.subblockview(all, SLICE_VAL);
+        auto&& block_x = constref_block.subblockview(full_extent, SLICE_VAL);
         ASSERT_EQ(block_x.extent(0), block.extent(0));
         for (auto&& ii : constref_block.domain<MeshX>()) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
             ASSERT_EQ(block_x(ii), constref_block(ii, SLICE_VAL));
         }
-        auto&& block_v = constref_block.subblockview(SLICE_VAL, all);
+
+        auto&& block_v = constref_block.subblockview(SLICE_VAL, full_extent);
         ASSERT_EQ(block_v.extent(0), block.extent(1));
         for (auto&& ii : constref_block.domain<MeshVx>()) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
             ASSERT_EQ(block_v(ii), constref_block(SLICE_VAL, ii));
+        }
+
+        auto&& subblock = constref_block.subblockview(std::pair(10, 5), full_extent);
+        ASSERT_EQ(subblock.extent(0), 5);
+        ASSERT_EQ(subblock.extent(1), get<MeshVx>(block.domain()).size());
+        for (auto&& ii : subblock.domain<MeshX>()) {
+            for (auto&& jj : subblock.domain<MeshVx>()) {
+                // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
+                ASSERT_EQ(subblock(ii, jj), constref_block(10 + ii, jj));
+            }
         }
     }
 }

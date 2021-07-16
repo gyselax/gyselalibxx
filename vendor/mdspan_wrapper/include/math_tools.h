@@ -15,8 +15,8 @@ inline T sum(T* array, int size)
     return val;
 }
 
-template <class ElementType, class LayoutPolicy, class AccessorPolicy, ptrdiff_t Ext>
-inline ElementType sum(std::experimental::basic_mdspan<
+template <class ElementType, class LayoutPolicy, class AccessorPolicy, std::size_t Ext>
+inline ElementType sum(std::experimental::mdspan<
                        ElementType,
                        std::experimental::extents<Ext>,
                        LayoutPolicy,
@@ -29,9 +29,9 @@ inline ElementType sum(std::experimental::basic_mdspan<
     return val;
 }
 
-template <class ElementType, class LayoutPolicy, class AccessorPolicy, ptrdiff_t Ext>
+template <class ElementType, class LayoutPolicy, class AccessorPolicy, std::size_t Ext>
 inline ElementType sum(
-        std::experimental::basic_mdspan<
+        std::experimental::mdspan<
                 ElementType,
                 std::experimental::extents<Ext>,
                 LayoutPolicy,

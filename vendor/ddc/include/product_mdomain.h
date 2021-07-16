@@ -52,7 +52,7 @@ struct SliceSpecToMesh<
     static_assert(
             std::is_convertible_v<
                     HeadInitialSliceSpec,
-                    std::size_t> || std::is_convertible_v<HeadInitialSliceSpec, std::pair<std::size_t, std::size_t>> || std::is_convertible_v<HeadInitialSliceSpec, std::experimental::all_type>);
+                    std::size_t> || std::is_convertible_v<HeadInitialSliceSpec, std::pair<std::size_t, std::size_t>> || std::is_convertible_v<HeadInitialSliceSpec, std::experimental::full_extent_t>);
 };
 
 } // namespace detail
@@ -215,7 +215,7 @@ private:
     template <class Mesh, class SliceSpecs>
     constexpr MDomain<Mesh> subdomain_1(MDomain<Mesh> const& domain, SliceSpecs&& slice_specs) const
     {
-        if constexpr (std::is_convertible_v<SliceSpecs, std::experimental::all_type>) {
+        if constexpr (std::is_convertible_v<SliceSpecs, std::experimental::full_extent_t>) {
             return domain;
         } else if constexpr (std::is_convertible_v<
                                      SliceSpecs,

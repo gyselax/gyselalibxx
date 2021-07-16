@@ -89,7 +89,7 @@ void UniformBSplines::eval_basis_and_n_derivs(double x, int n, DSpan2D& derivs, 
     std::vector<double> ndu_ptr((m_degree + 1) * (m_degree + 1));
     DSpan2D ndu(ndu_ptr.data(), m_degree + 1, m_degree + 1);
     std::vector<double> a_ptr(2 * (m_degree + 1));
-    stdex::mdspan<double, stdex::dynamic_extent, 2> a(a_ptr.data(), m_degree + 1);
+    stdex::mdspan<double, stdex::extents<stdex::dynamic_extent, 2>> a(a_ptr.data(), m_degree + 1);
     double offset;
 
     // 1. Compute cell index 'icell' and x_offset

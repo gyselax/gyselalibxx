@@ -52,7 +52,7 @@ public:
 
     using value_type = typename raw_view_type::value_type;
 
-    using index_type = typename raw_view_type::index_type;
+    using size_type = typename raw_view_type::size_type;
 
     using difference_type = typename raw_view_type::difference_type;
 
@@ -66,7 +66,7 @@ public:
 protected:
     /// This adaptor transforms the spec from `(start, count)` to `[begin, end[`
     template <class SliceSpec>
-    static SliceSpec slice_spec_adaptor(SliceSpec&& slice_spec)
+    static SliceSpec slice_spec_adaptor(SliceSpec const& slice_spec)
     {
         if constexpr (std::is_convertible_v<SliceSpec, std::pair<std::size_t, std::size_t>>) {
             return std::pair(slice_spec.first, slice_spec.first + slice_spec.second);
@@ -81,7 +81,7 @@ protected:
         if constexpr (has_tag_v<QueryMesh, MCoord<OMeshes...>>) {
             return c.template get<QueryMesh>();
         } else {
-            return std::experimental::all;
+            return std::experimental::full_extent;
         }
     }
 
@@ -182,7 +182,7 @@ public:
         return extents_type::rank_dynamic();
     }
 
-    static inline constexpr index_type static_extent(size_t r) noexcept
+    static inline constexpr size_type static_extent(size_t r) noexcept
     {
         return extents_type::static_extent(r);
     }
@@ -192,17 +192,17 @@ public:
         return m_raw.extents();
     }
 
-    inline constexpr index_type extent(size_t dim) const noexcept
+    inline constexpr size_type extent(size_t dim) const noexcept
     {
         return m_raw.extent(dim);
     }
 
-    inline constexpr index_type size() const noexcept
+    inline constexpr size_type size() const noexcept
     {
         return m_raw.size();
     }
 
-    inline constexpr index_type unique_size() const noexcept
+    inline constexpr size_type unique_size() const noexcept
     {
         return m_raw.unique_size();
     }
@@ -242,7 +242,7 @@ public:
         return m_raw.is_strided();
     }
 
-    inline constexpr index_type stride(size_t r) const
+    inline constexpr size_type stride(size_t r) const
     {
         return m_raw.stride(r);
     }
@@ -297,7 +297,7 @@ public:
     inline constexpr auto subblockview(SliceSpecs&&... slices) const
     {
         static_assert(sizeof...(SliceSpecs) == sizeof...(Meshes));
-        auto subview = std::experimental::subspan(m_raw, slice_spec_adaptor(slices)...);
+        auto subview = std::experimental::submdspan(m_raw, slice_spec_adaptor(slices)...);
         return ::BlockView(m_domain.subdomain(slices...), subview);
     }
 };
@@ -305,7 +305,8 @@ public:
 template <class... Meshes, class ElementType, class Extents, class LayoutPolicy>
 BlockView(
         ProductMDomain<Meshes...> domain,
-        std::experimental::
-                basic_mdspan<ElementType, Extents, LayoutPolicy, detail::accessor<ElementType>>
-                        raw_view)
-        -> BlockView<ProductMDomain<Meshes...>, ElementType, is_contiguous_v<LayoutPolicy>>;
+        std::experimental::mdspan<ElementType, Extents, LayoutPolicy> raw_view)
+        -> BlockView<
+                ProductMDomain<Meshes...>,
+                ElementType,
+                std::is_same_v<LayoutPolicy, std::experimental::layout_right>>;

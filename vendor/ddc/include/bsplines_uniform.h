@@ -211,8 +211,7 @@ void BSplines<UniformMesh<Tag>, D>::eval_basis_and_n_derivs(
     std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
     DSpan2D ndu(ndu_ptr.data(), degree() + 1, degree() + 1);
     std::array<double, 2 * (degree() + 1)> a_ptr;
-    std::experimental::mdspan<double, std::experimental::dynamic_extent, 2>
-            a(a_ptr.data(), degree() + 1);
+    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, 2>> a(a_ptr.data());
     double offset;
 
     // 1. Compute cell index 'icell' and x_offset
