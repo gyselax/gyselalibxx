@@ -2,10 +2,14 @@
 #include <cmath>
 #include <memory>
 #include <type_traits>
+#include <vector>
 
+#include "deprecated/bsplines.h"
 #include "deprecated/bsplines_non_uniform.h"
 #include "deprecated/bsplines_uniform.h"
 #include "deprecated/spline_1d.h"
+
+#include "boundary_value.h"
 
 namespace deprecated {
 

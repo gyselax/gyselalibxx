@@ -1,6 +1,17 @@
+#include <memory>
+
 #include <gtest/gtest.h>
 
+#include "gtest/gtest_pred_impl.h"
+
 #include "taggedarray.h"
+
+namespace detail {
+template <class...>
+struct TypeSeq;
+template <class>
+struct SingleType;
+} // namespace detail
 
 TEST(TagRank, Rank)
 {

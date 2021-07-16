@@ -1,9 +1,10 @@
 #pragma once
 
-#include "blockview.h"
-#include "iadvectionvx.h"
-#include "iadvectionx.h"
+#include "geometry.h"
 #include "ivlasovsolver.h"
+
+class IAdvectionVx;
+class IAdvectionX;
 
 class SplitVlasovSolver : public IVlasovSolver
 {

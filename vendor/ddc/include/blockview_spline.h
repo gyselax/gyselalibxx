@@ -1,16 +1,16 @@
 #pragma once
 
 #include "blockview.h"
-#include "bsplines_uniform.h"
+#include "bsplines.h"
 
-template <class Tag, std::size_t D, class ElementType, bool CONTIGUOUS>
-class BlockView<UniformBSplines<Tag, D>, ElementType, CONTIGUOUS>
+template <class Mesh, std::size_t D, class ElementType, bool CONTIGUOUS>
+class BlockView<BSplines<Mesh, D>, ElementType, CONTIGUOUS>
 {
 public:
     /// ND memory view
     using raw_view_type = SpanND<1, ElementType, CONTIGUOUS>;
 
-    using bsplines_type = UniformBSplines<Tag, D>;
+    using bsplines_type = BSplines<Mesh, D>;
 
     using mcoord_type = typename bsplines_type::mcoord_type;
 
@@ -39,7 +39,7 @@ protected:
     raw_view_type m_raw;
 
     /// The mesh on which this block is defined
-    bsplines_type m_bsplines;
+    bsplines_type const& m_bsplines;
 
 public:
     /** Constructs a new BlockView by copy, yields a new view to the same data
@@ -85,12 +85,9 @@ public:
      */
     inline constexpr BlockView& operator=(BlockView&& other) = default;
 
-    static constexpr std::size_t tag_rank()
-    {
-        return 0;
-    }
-
-    template <class... IndexType>
+    template <
+            class... IndexType,
+            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
     inline constexpr reference operator()(IndexType&&... indices) const noexcept
     {
         return m_raw(std::forward<IndexType>(indices)...);

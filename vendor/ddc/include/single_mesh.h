@@ -1,21 +1,22 @@
 #pragma once
 
 #include "mcoord.h"
+#include "mesh.h"
 #include "rcoord.h"
 #include "taggedarray.h"
 
 /// Experimental concept representing a mesh with a single point.  The
 /// main purpose is when taking a subdomain in a multidimensional
 /// mesh in order to loose track of the real position.
-template <class Tag>
-class SingleMesh
+template <class RDim>
+class SingleMesh : public Mesh
 {
 public:
-    using rcoord_type = RCoord<Tag>;
+    using rcoord_type = RCoord<RDim>;
 
-    using mcoord_type = MCoord<Tag>;
+    using mcoord_type = MCoord<SingleMesh>;
 
-    using tag_type = Tag;
+    using rdim_type = RDim;
 
 private:
     /// origin

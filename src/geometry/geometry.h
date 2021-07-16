@@ -2,6 +2,7 @@
 
 #include <block.h>
 #include <bsplines.h>
+#include <bsplines_uniform.h>
 #include <non_uniform_mesh.h>
 #include <uniform_mesh.h>
 
@@ -63,31 +64,33 @@ using MeshX = UniformMesh<Dim::X>;
 
 using MeshVx = UniformMesh<Dim::Vx>;
 
-using MeshXVx = UniformMesh<Dim::X, Dim::Vx>;
+using MeshFx = NonUniformMesh<Dim::Fx>;
 
-using MCoordX = MCoord<Dim::X>;
+using MeshXVx = ProductMesh<MeshX, MeshVx>;
 
-using MCoordVx = MCoord<Dim::Vx>;
+using MCoordX = MCoord<MeshX>;
 
-using MCoordXVx = MCoord<Dim::X, Dim::Vx>;
+using MCoordVx = MCoord<MeshVx>;
 
-using MCoordFx = MCoord<Dim::Fx>;
+using MCoordXVx = MCoord<MeshX, MeshVx>;
 
-using UniformMDomainX = UniformMDomain<Dim::X>;
+using MCoordFx = MCoord<MeshFx>;
 
-using UniformMDomainVx = UniformMDomain<Dim::Vx>;
+using UniformMDomainX = ProductMDomain<MeshX>;
 
-using UniformMDomainXVx = UniformMDomain<Dim::X, Dim::Vx>;
+using UniformMDomainVx = ProductMDomain<MeshVx>;
 
-using MDomainX = UniformMDomain<Dim::X>;
+using UniformMDomainXVx = ProductMDomain<MeshX, MeshVx>;
 
-using MDomainVx = UniformMDomain<Dim::Vx>;
+using MDomainX = UniformMDomainX;
 
-using MDomainXVx = UniformMDomain<Dim::X, Dim::Vx>;
+using MDomainVx = UniformMDomainVx;
 
-using MDomainFx = NonUniformMDomain<Dim::Fx>;
+using MDomainXVx = UniformMDomainXVx;
 
-using BSplinesX = BSplines<MDomainX, 4>;
+using MDomainFx = ProductMDomain<MeshFx>;
+
+using BSplinesX = BSplines<MeshX, 4>;
 
 using DBlockSpanX = BlockView<MDomainX, double>;
 
@@ -102,16 +105,16 @@ using DBlockViewVx = BlockView<MDomainVx, double const>;
 using DBlockViewXVx = BlockView<MDomainXVx, double const>;
 
 template <class ElementType>
-using BlockX = Block<UniformMDomain<Dim::X>, ElementType>;
+using BlockX = Block<UniformMDomainX, ElementType>;
 
 using DBlockX = BlockX<double>;
 
 template <class ElementType>
-using BlockVx = Block<UniformMDomain<Dim::Vx>, ElementType>;
+using BlockVx = Block<UniformMDomainVx, ElementType>;
 
 using DBlockVx = BlockVx<double>;
 
 template <class ElementType>
-using BlockXVx = Block<UniformMDomain<Dim::X, Dim::Vx>, ElementType>;
+using BlockXVx = Block<UniformMDomainXVx, ElementType>;
 
 using DBlockXVx = BlockXVx<double>;

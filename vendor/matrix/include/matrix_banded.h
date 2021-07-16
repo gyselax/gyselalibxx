@@ -1,5 +1,7 @@
 #ifndef MATRIX_BANDED_H
 #define MATRIX_BANDED_H
+#include <memory>
+
 #include "matrix.h"
 
 class Matrix_Banded : public Matrix

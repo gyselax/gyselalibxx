@@ -1,30 +1,42 @@
-#include <cstdint>
-#include <type_traits>
+#include <iosfwd>
+#include <utility>
+#include <vector>
 
 #include <gtest/gtest.h>
 
 #include "deprecated/bsplines_uniform.h"
+#include "gtest/gtest_pred_impl.h"
 
 #include "bsplines_uniform.h"
+#include "mcoord.h"
 #include "mdomain.h"
+#include "rcoord.h"
+#include "uniform_mesh.h"
+#include "view.h"
+
+#include <experimental/mdspan>
 
 struct DimX
 {
     static constexpr bool PERIODIC = true;
 };
-using UniformMDomainX = UniformMDomain<DimX>;
+using MeshX = UniformMesh<DimX>;
 using RCoordX = RCoord<DimX>;
-using MCoordX = MCoord<DimX>;
+using MCoordX = MCoord<MeshX>;
 
-TEST(BSplinesUniform, Constructor)
+class BSplinesUniformTest : public ::testing::Test
 {
-    UniformMesh<DimX> const mesh(RCoordX(0.), RCoordX(0.02));
-    UniformMDomainX const dom(mesh, MCoordX(101));
+protected:
+    static constexpr std::size_t spline_degree = 2;
+    std::size_t npoints = 101;
+    MeshX const mesh_x = MeshX(RCoordX(0.), RCoordX(2.), npoints);
+    MDomain<MeshX> const dom_x = MDomain(mesh_x, MCoordX(npoints - 1));
+    BSplines<MeshX, spline_degree> const bsplines = BSplines<MeshX, 2>(dom_x);
+};
 
-    std::integral_constant<std::size_t, 2> constexpr spline_degree;
-    auto&& bsplines = make_bsplines(dom, spline_degree);
-
-    EXPECT_EQ(bsplines.degree(), spline_degree.value);
+TEST_F(BSplinesUniformTest, constructor)
+{
+    EXPECT_EQ(bsplines.degree(), spline_degree);
     EXPECT_EQ(bsplines.is_periodic(), DimX::PERIODIC);
     EXPECT_EQ(bsplines.rmin(), 0.);
     EXPECT_EQ(bsplines.rmax(), 2.);
@@ -32,15 +44,14 @@ TEST(BSplinesUniform, Constructor)
     EXPECT_EQ(bsplines.ncells(), 100);
 }
 
-TEST(BSplinesUniform, Comparison)
+TEST_F(BSplinesUniformTest, comparison)
 {
-    UniformMesh<DimX> const mesh(RCoordX(0.), RCoordX(0.02));
-    UniformMDomainX const dom(mesh, MCoordX(101));
-
-    std::integral_constant<std::size_t, 2> constexpr spline_degree;
-    auto&& bsplines = make_bsplines(dom, spline_degree);
-
-    deprecated::UniformBSplines old_bsplines(spline_degree.value, dom);
+    deprecated::UniformBSplines old_bsplines(
+            spline_degree,
+            DimX::PERIODIC,
+            dom_x.rmin(),
+            dom_x.rmax(),
+            dom_x.size() - 1);
 
     EXPECT_EQ(bsplines.degree(), old_bsplines.degree());
     EXPECT_EQ(bsplines.is_radial(), old_bsplines.radial());

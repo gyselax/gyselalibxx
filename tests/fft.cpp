@@ -12,6 +12,7 @@
 #include "geometry.h"
 #include "ifftw.h"
 #include "mdomain.h"
+#include "product_mdomain.h"
 
 using namespace std;
 
@@ -277,18 +278,20 @@ TEST(FFT, DomainEven)
 
     constexpr std::size_t N = 10;
 
-    UniformMDomainX domx(RCoordX(0.), RCoordX(20.), MCoordX(0), MCoordX(N));
-    MDomainFx domfx = fft.compute_fourier_domain(domx);
+    MeshX mesh_x(RCoordX(0.), RCoordX(20. / N));
+    ProductMesh mesh_prod(mesh_x);
+    ProductMDomain domx(mesh_prod, MCoordX(0), MCoordX(N - 1));
+    auto meshfx = fft.compute_fourier_domain(domx);
 
     //   f = [0, 1, ...,   n/2, -n/2+1, ..., -1] / (d*n)   if n is even
     std::array<double, N> expected_freqs {0., 1., 2., 3., 4., 5., -4., -3., -2., -1.};
     for (auto& f : expected_freqs) {
-        f /= domx.size() * domx.mesh().step();
+        f /= domx.size() * get<MeshX>(domx.mesh()).step();
     }
 
     constexpr double tol = 2.e-16;
-    for (std::size_t i = 0; i < domfx.size(); ++i) {
-        EXPECT_LT(std::fabs(domfx.to_real(i) - expected_freqs[i]), tol);
+    for (std::size_t i = 0; i < meshfx.size(); ++i) {
+        EXPECT_LT(std::fabs(meshfx.to_real(i) - expected_freqs[i]), tol);
     }
 }
 
@@ -298,18 +301,20 @@ TEST(FFT, DomainOdd)
 
     constexpr std::size_t N = 9;
 
-    UniformMDomainX domx(RCoordX(0.), RCoordX(20.), MCoordX(0), MCoordX(N));
-    MDomainFx domfx = fft.compute_fourier_domain(domx);
+    MeshX mesh_x(RCoordX(0.), RCoordX(20. / N));
+    ProductMesh mesh_prod(mesh_x);
+    ProductMDomain domx(mesh_prod, MCoordX(0), MCoordX(N - 1));
+    auto meshfx = fft.compute_fourier_domain(domx);
 
     //   f = [0, 1, ..., (n-1)/2, -n/2, ..., -1] / (d*n)   if n is odd
     std::array<double, N> expected_freqs {0., 1., 2., 3., 4., -4., -3., -2., -1.};
     for (auto& f : expected_freqs) {
-        f /= domx.size() * domx.mesh().step();
+        f /= domx.size() * get<MeshX>(domx.mesh()).step();
     }
 
     constexpr double tol = 2.e-16;
-    for (std::size_t i = 0; i < domfx.size(); ++i) {
-        EXPECT_LT(std::fabs(domfx.to_real(i) - expected_freqs[i]), tol);
+    for (std::size_t i = 0; i < meshfx.size(); ++i) {
+        EXPECT_LT(std::fabs(meshfx.to_real(i) - expected_freqs[i]), tol);
     }
 }
 
@@ -317,9 +322,17 @@ TEST(FFT, Identity)
 {
     FftwFourierTransform<Dim::X> fft;
 
-    UniformMDomainX domx(RCoordX(0.), RCoordX(2. * M_PI), MCoordX(0), MCoordX(32));
-    MDomainFx domfx = fft.compute_fourier_domain(domx);
+    constexpr std::size_t N = 32;
+
+    MeshX mesh_x(RCoordX(0.), RCoordX((2. * M_PI) / N));
+    ProductMesh mesh_prod(mesh_x);
+    ProductMDomain domx(mesh_prod, MCoordX(0), MCoordX(N - 1));
+    auto meshfx = fft.compute_fourier_domain(domx);
+    ProductMesh mesh_prod_fx(meshfx);
+    ProductMDomain domfx(mesh_prod_fx, MCoord<MeshFx>(meshfx.size() - 1));
+
     BlockX<std::complex<double>> values(domx);
+    std::cout << domx.size() << std::endl;
     for (std::size_t i = 0; i < domx.size(); ++i) {
         values(i) = compute_f(domx.to_real(i));
     }
@@ -356,9 +369,14 @@ TEST(FFT, Simple)
     constexpr double T = 5.3;
     constexpr double f = 1.0 / T;
     constexpr std::size_t M = 2;
+    constexpr std::size_t N = 50;
 
-    UniformMDomainX domx(RCoordX(0.), RCoordX(M * T), MCoordX(0), MCoordX(50));
-    MDomainFx domfx = fft.compute_fourier_domain(domx);
+    MeshX mesh_x(RCoordX(0.), RCoordX(M * T / N));
+    ProductMesh mesh_prod(mesh_x);
+    ProductMDomain domx(mesh_prod, MCoordX(0), MCoordX(N - 1));
+    MeshFx meshfx = fft.compute_fourier_domain(domx);
+    ProductMesh mesh_prod_fx(meshfx);
+    ProductMDomain domfx(mesh_prod_fx, MCoord<MeshFx>(meshfx.size() - 1));
 
     BlockX<std::complex<double>> values(domx);
     for (std::size_t i = 0; i < domx.size(); ++i) {

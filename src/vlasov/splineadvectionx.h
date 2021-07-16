@@ -1,9 +1,13 @@
 #pragma once
 
-#include "blockview.h"
-#include "boundary_value.h"
+#include "geometry.h"
 #include "iadvectionx.h"
-#include "spline_builder_1d.h"
+
+class BoundaryValue;
+namespace deprecated {
+class BSplines;
+class SplineBuilder1D;
+} // namespace deprecated
 
 class SplineAdvectionX : public IAdvectionX
 {

@@ -3,11 +3,14 @@
 #include <array>
 #include <memory>
 
-#include "deprecated/spline_2d.h"
-
-#include "spline_builder_1d.h"
+#include "boundary_conditions.h"
+#include "view.h"
 
 namespace deprecated {
+class BSplines;
+class Spline1D;
+class Spline2D;
+class SplineBuilder1D;
 
 struct Boundary_data_2d
 {

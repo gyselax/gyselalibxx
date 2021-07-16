@@ -1,8 +1,9 @@
 #pragma once
 
-#include "fftw.h"
+#include "fft.h"
+#include "geometry.h"
 #include "iefieldsolver.h"
-#include "ifftw.h"
+#include "ifft.h"
 
 class EfieldFftSolver : public IEfieldSolver
 {

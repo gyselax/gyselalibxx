@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <iostream>
 #include <memory>
+#include <utility>
 
 #include "matrix.h"
 #include "matrix_banded.h"
@@ -11,6 +12,7 @@
 #include "matrix_dense.h"
 #include "matrix_pds_tridiag.h"
 #include "matrix_periodic_banded.h"
+#include "view.h"
 
 using std::max;
 using std::min;

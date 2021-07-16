@@ -1,8 +1,10 @@
 #pragma once
 
-#include "iefieldsolver.h"
+#include "geometry.h"
 #include "itimesolver.h"
-#include "ivlasovsolver.h"
+
+class IEfieldSolver;
+class IVlasovSolver;
 
 class PredCorr : public ITimeSolver
 {

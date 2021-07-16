@@ -3,14 +3,15 @@
 #include "blockview.h"
 
 namespace detail {
-template <class Mesh, class ElementType, bool CONTIGUOUS, class Functor, class... Indices>
+template <class... Meshes, class ElementType, bool CONTIGUOUS, class Functor, class... Indices>
 inline void for_each_impl(
-        const BlockView<MDomainImpl<Mesh>, ElementType, CONTIGUOUS>& to,
+        const BlockView<ProductMDomain<Meshes...>, ElementType, CONTIGUOUS>& to,
         Functor&& f,
         Indices&&... idxs) noexcept
 {
     if constexpr (
-            sizeof...(Indices) == BlockView<MDomainImpl<Mesh>, ElementType, CONTIGUOUS>::rank()) {
+            sizeof...(Indices)
+            == BlockView<ProductMDomain<Meshes...>, ElementType, CONTIGUOUS>::rank()) {
         f(std::forward<Indices>(idxs)...);
     } else {
         for (std::size_t ii = 0; ii < to.extent(sizeof...(Indices)); ++ii) {
@@ -41,10 +42,10 @@ struct SequentialForImpl
  * @param[in]  from  the view from which to copy
  * @return to
  */
-template <class... Tags, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS>
-inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> const& deepcopy(
-        BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> const& to,
-        BlockView<UniformMDomain<Tags...>, ElementType, OCONTIGUOUS> const& from) noexcept
+template <class... Meshes, class ElementType, bool CONTIGUOUS, bool OCONTIGUOUS>
+inline BlockView<ProductMDomain<Meshes...>, ElementType, CONTIGUOUS> const& deepcopy(
+        BlockView<ProductMDomain<Meshes...>, ElementType, CONTIGUOUS> const& to,
+        BlockView<ProductMDomain<Meshes...>, ElementType, OCONTIGUOUS> const& from) noexcept
 {
     assert(to.extents() == from.extents());
     for_each(to, [&to, &from](auto... idxs) { to(idxs...) = from(idxs...); });
@@ -57,18 +58,18 @@ inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> const& deepco
  * @return to
  */
 template <
-        class... Tags,
-        class... OTags,
+        class... Meshes,
+        class... OMeshes,
         class ElementType,
         class OElementType,
         bool CONTIGUOUS,
         bool OCONTIGUOUS>
-inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> const& deepcopy(
-        BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> const& to,
-        BlockView<UniformMDomain<OTags...>, OElementType, OCONTIGUOUS> const& from) noexcept
+inline BlockView<ProductMDomain<Meshes...>, ElementType, CONTIGUOUS> const& deepcopy(
+        BlockView<ProductMDomain<Meshes...>, ElementType, CONTIGUOUS> const& to,
+        BlockView<ProductMDomain<OMeshes...>, OElementType, OCONTIGUOUS> const& from) noexcept
 {
     static_assert(std::is_convertible_v<OElementType, ElementType>, "Not convertible");
-    using mcoord_type = typename UniformMDomain<Tags...>::mcoord_type;
+    using mcoord_type = typename ProductMDomain<Meshes...>::mcoord_type;
     assert(to.extents() == from.extents());
     constexpr auto sequential_for = detail::SequentialForImpl<mcoord_type>();
     sequential_for(to.extents(), [&to, &from](auto const& mcoord) { to(mcoord) = from(mcoord); });
@@ -79,9 +80,9 @@ inline BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS> const& deepco
  * @param[in] view  the view whose domain to iterate
  * @param[in] f     a functor taking the list of indices as parameter
  */
-template <class... Tags, class ElementType, bool CONTIGUOUS, class Functor>
+template <class... Meshes, class ElementType, bool CONTIGUOUS, class Functor>
 inline void for_each(
-        const BlockView<UniformMDomain<Tags...>, ElementType, CONTIGUOUS>& view,
+        const BlockView<ProductMDomain<Meshes...>, ElementType, CONTIGUOUS>& view,
         Functor&& f) noexcept
 {
     detail::for_each_impl(view, std::forward<Functor>(f));

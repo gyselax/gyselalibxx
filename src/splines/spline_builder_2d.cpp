@@ -1,8 +1,16 @@
 #include <array>
 #include <cassert>
 #include <memory>
+#include <utility>
 
+#include "deprecated/bsplines.h"
+#include "deprecated/spline_1d.h"
+#include "deprecated/spline_2d.h"
+
+#include "spline_builder_1d.h"
 #include "spline_builder_2d.h"
+
+#include <experimental/mdspan>
 
 namespace deprecated {
 

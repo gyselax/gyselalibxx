@@ -5,21 +5,22 @@
 template <class, class>
 class Block;
 
-template <class Mesh, class ElementType>
-class Block<MDomainImpl<Mesh>, ElementType> : public BlockView<MDomainImpl<Mesh>, ElementType>
+template <class... Meshes, class ElementType>
+class Block<ProductMDomain<Meshes...>, ElementType>
+    : public BlockView<ProductMDomain<Meshes...>, ElementType>
 {
 public:
     /// ND view on this block
-    using block_view_type = BlockView<MDomainImpl<Mesh>, ElementType>;
+    using block_view_type = BlockView<ProductMDomain<Meshes...>, ElementType>;
 
-    using block_span_type = BlockView<MDomainImpl<Mesh>, ElementType const>;
+    using block_span_type = BlockView<ProductMDomain<Meshes...>, ElementType const>;
 
     /// ND memory view
     using raw_view_type = typename block_view_type::raw_view_type;
 
     using mdomain_type = typename block_view_type::mdomain_type;
 
-    using mesh_type = Mesh;
+    using mesh_type = ProductMesh<Meshes...>;
 
     using mcoord_type = typename mdomain_type::mcoord_type;
 
@@ -47,12 +48,12 @@ public:
 public:
     /** Construct a Block on a domain with uninitialized values
      */
-    explicit inline constexpr Block(const mdomain_type& domain)
+    explicit inline constexpr Block(mdomain_type const& domain)
         : block_view_type(
-                domain.mesh(),
+                domain,
                 raw_view_type(
                         new (std::align_val_t(64)) value_type[domain.size()],
-                        domain.extents()))
+                        ExtentsND<sizeof...(Meshes)>(::get<Meshes>(domain).size()...)))
     {
     }
 
@@ -61,7 +62,7 @@ public:
      * This is deleted, one should use deepcopy
      * @param other the Block to copy
      */
-    inline constexpr Block(const Block& other) = delete;
+    inline constexpr Block(Block const& other) = delete;
 
     /** Constructs a new Block by move
      * @param other the Block to move
@@ -79,7 +80,7 @@ public:
      * @param other the Block to copy
      * @return *this
      */
-    inline constexpr Block& operator=(const Block& other) = default;
+    inline constexpr Block& operator=(Block const& other) = default;
 
     /** Move-assigns a new value to this field
      * @param other the Block to move
@@ -91,8 +92,8 @@ public:
      * @param other the Block to copy
      * @return *this
      */
-    template <class OMesh, class OElementType>
-    inline Block& operator=(Block<MDomainImpl<OMesh>, OElementType>&& other)
+    template <class... OMeshes, class OElementType>
+    inline Block& operator=(Block<ProductMDomain<OMeshes...>, OElementType>&& other)
     {
         copy(*this, other);
         return *this;
@@ -108,24 +109,28 @@ public:
         *this = std::move(tmp);
     }
 
-    template <class... IndexType>
+    template <
+            class... IndexType,
+            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
     inline constexpr element_type const& operator()(IndexType&&... indices) const noexcept
     {
         return this->m_raw(std::forward<IndexType>(indices)...);
     }
 
-    template <class... IndexType>
+    template <
+            class... IndexType,
+            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
     inline constexpr element_type& operator()(IndexType&&... indices) noexcept
     {
         return this->m_raw(std::forward<IndexType>(indices)...);
     }
 
-    inline constexpr element_type const& operator()(const mcoord_type& indices) const noexcept
+    inline constexpr element_type const& operator()(mcoord_type const& indices) const noexcept
     {
         return this->m_raw(indices.array());
     }
 
-    inline constexpr element_type& operator()(const mcoord_type& indices) noexcept
+    inline constexpr element_type& operator()(mcoord_type const& indices) noexcept
     {
         return this->m_raw(indices.array());
     }

@@ -1,24 +1,41 @@
+#include <algorithm>
 #include <array>
-#include <cstdint>
-#include <type_traits>
+#include <iosfwd>
+#include <vector>
 
 #include <gtest/gtest.h>
+#include <math.h>
+
+#include "gtest/gtest_pred_impl.h"
 
 #include "block.h"
 #include "block_spline.h"
 #include "bsplines_uniform.h"
+#include "mcoord.h"
 #include "mdomain.h"
+#include "non_uniform_mesh.h"
 #include "null_boundary_value.h"
+#include "product_mdomain.h"
+#include "product_mesh.h"
+#include "rcoord.h"
 #include "spline_builder.h"
 #include "spline_evaluator.h"
+#include "taggedarray.h"
+#include "uniform_mesh.h"
+#include "view.h"
+
+#include <experimental/mdspan>
+
+// template <class, class, bool = true>
+// class BlockView;
 
 struct DimX
 {
     static constexpr bool PERIODIC = true;
 };
-using UniformMDomainX = UniformMDomain<DimX>;
+using MeshX = UniformMesh<DimX>;
 using RCoordX = RCoord<DimX>;
-using MCoordX = MCoord<DimX>;
+using MCoordX = MCoord<MeshX>;
 
 class PolynomialEvaluator
 {
@@ -110,8 +127,8 @@ public:
     {
         auto const& domain = block_mesh.domain();
 
-        for (std::size_t i = 0; i < domain.size(); ++i) {
-            block_mesh(i) = eval(domain.to_real(domain[i]), 0);
+        for (auto&& icoord : domain) {
+            block_mesh(icoord) = eval(domain.to_real(icoord), 0);
         }
     }
 
@@ -125,8 +142,8 @@ public:
     {
         auto const& domain = block_mesh.domain();
 
-        for (std::size_t i = 0; i < domain.size(); ++i) {
-            block_mesh(i) = eval(domain.to_real(domain[i]), derivative);
+        for (auto&& icoord : domain) {
+            block_mesh(icoord) = eval(domain.to_real(icoord), 0);
         }
     }
 
@@ -140,13 +157,13 @@ private:
 
 TEST(SplineBuilder, Constructor)
 {
-    using BSplinesX = BSplines<UniformMDomainX, 2>;
+    using BSplinesX = BSplines<MeshX, 2>;
 
-    UniformMesh<DimX> const mesh(RCoordX(0.), RCoordX(0.02));
-    UniformMDomainX const dom(mesh, MCoordX(101));
+    MeshX const mesh(RCoordX(0.), RCoordX(0.02));
+    ProductMesh mesh_prod(mesh);
+    ProductMDomain const dom(mesh_prod, MCoordX(100));
 
-    std::integral_constant<std::size_t, 2> constexpr spline_degree;
-    auto&& bsplines = make_bsplines(dom, spline_degree);
+    auto&& bsplines = BSplinesX(dom);
 
     SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> spline_builder(bsplines);
     auto&& interpolation_domain = spline_builder.interpolation_domain();
@@ -161,19 +178,20 @@ TEST(SplineBuilder, BuildSpline)
     using UniformMeshX = UniformMesh<DimX>;
     using UniformBSplinesX2 = UniformBSplines<DimX, degree>;
     using BlockSplineX2 = Block<UniformBSplinesX2, double>;
-    using NonUniformDomainX = MDomainImpl<NonUniformMeshX>;
-    using BlockNonUniformX = Block<NonUniformDomainX, double>;
-    using BlockUniformX = Block<UniformMDomainX, double>;
+    using NonUniformDomainX = ProductMDomain<NonUniformMeshX>;
+    using BlockNonUniformX = Block<ProductMDomain<NonUniformMeshX>, double>;
+    using BlockUniformX = Block<ProductMDomain<MeshX>, double>;
 
     RCoordX constexpr x0 = 0.;
     RCoordX constexpr xN = 1.;
-    MCoordX constexpr ncells = 100;
-    MCoordX constexpr origin = 0;
+    std::size_t constexpr ncells = 100;
     MCoordX constexpr npoints = ncells + 1;
     RCoordX constexpr dx = (xN - x0) / ncells;
 
     // 1. Create BSplines
-    UniformMDomainX const dom(x0, xN + dx, origin, npoints);
+    MeshX mesh(x0, xN, npoints);
+    ProductMesh mesh_prod(mesh);
+    ProductMDomain const dom(mesh_prod, npoints);
     UniformBSplinesX2 bsplines(dom);
 
     // 2. Create a Spline represented by a block over BSplines
@@ -182,7 +200,7 @@ TEST(SplineBuilder, BuildSpline)
 
     // 3. Create a SplineBuilder over BSplines using some boundary conditions
     SplineBuilder<UniformBSplinesX2, left_bc, right_bc> spline_builder(bsplines);
-    UniformMDomainX const& interpolation_domain = spline_builder.interpolation_domain();
+    auto const& interpolation_domain = spline_builder.interpolation_domain();
 
     // 4. Allocate and fill a block over the interpolation domain
     BlockUniformX yvals(interpolation_domain);
@@ -219,7 +237,7 @@ TEST(SplineBuilder, BuildSpline)
     double max_norm_error = 0.;
     double max_norm_error_diff = 0.;
     for (std::size_t i = 0; i < interpolation_domain.size(); ++i) {
-        auto&& x = interpolation_domain.to_real(interpolation_domain[i]);
+        auto&& x = interpolation_domain.to_real(i);
 
         // Compute error
         double const error = spline_eval(i) - yvals(i);

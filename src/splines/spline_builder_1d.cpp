@@ -4,15 +4,16 @@
 #include <memory>
 
 #include <math_tools.h>
-#include <matrix_banded.h>
-#include <matrix_dense.h>
-#include <matrix_periodic_banded.h>
 
 #include "deprecated/bsplines.h"
 #include "deprecated/bsplines_non_uniform.h"
-#include "deprecated/bsplines_uniform.h"
+#include "deprecated/spline_1d.h"
 
+#include "boundary_conditions.h"
+#include "matrix.h"
 #include "spline_builder_1d.h"
+
+#include <experimental/mdspan>
 
 namespace deprecated {
 

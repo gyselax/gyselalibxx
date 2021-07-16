@@ -24,7 +24,7 @@ public:
     IInverseFourierTransform& operator=(IInverseFourierTransform&& x) = default;
 
     virtual void operator()(
-            BlockView<UniformMDomain<Tags...>, std::complex<double>> const& out_values,
-            BlockView<NonUniformMDomain<Fourier<Tags>...>, std::complex<double>> const& in_values)
-            const noexcept = 0;
+            BlockView<ProductMDomain<UniformMesh<Tags>...>, std::complex<double>> const& out_values,
+            BlockView<ProductMDomain<NonUniformMesh<Fourier<Tags>>...>, std::complex<double>> const&
+                    in_values) const noexcept = 0;
 };

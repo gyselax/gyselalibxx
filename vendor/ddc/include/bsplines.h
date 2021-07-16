@@ -3,13 +3,13 @@
 #include <cstdint>
 #include <type_traits>
 
-template <class Domain, std::size_t D>
+template <class Mesh, std::size_t D>
 class BSplines;
 
 template <class Domain, std::size_t D>
-constexpr BSplines<Domain, D> make_bsplines(
-        const Domain& domain,
+constexpr BSplines<typename Domain::mesh_type, D> make_bsplines_new(
+        Domain const& domain,
         std::integral_constant<std::size_t, D>) noexcept
 {
-    return BSplines<Domain, D>(domain);
+    return BSplines<typename Domain::mesh_type, D>(domain);
 }

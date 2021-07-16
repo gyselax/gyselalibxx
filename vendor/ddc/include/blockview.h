@@ -6,6 +6,8 @@
 #include <vector>
 
 #include "mdomain.h"
+#include "product_mdomain.h"
+#include "product_mesh.h"
 #include "taggedarray.h"
 #include "view.h"
 
@@ -15,21 +17,26 @@ class Block;
 template <class, class, bool = true>
 class BlockView;
 
-template <class OElementType, bool O_CONTIGUOUS, class Mesh>
-static BlockView<MDomainImpl<Mesh>, OElementType, O_CONTIGUOUS> make_view(
-        Mesh const& mesh,
-        SpanND<Mesh::rank(), OElementType, O_CONTIGUOUS> const& raw_view);
+/** Access the domain (or subdomain) of a view
+ * @param[in]  view      the view whose domain to iterate
+ * @return the domain of view in the queried dimensions
+ */
+template <class... QueryMeshes, class BlockType>
+auto get_domain(BlockType const& block) noexcept
+{
+    return block.template domain<QueryMeshes...>();
+}
 
-template <class Mesh, class ElementType, bool CONTIGUOUS>
-class BlockView<MDomainImpl<Mesh>, ElementType, CONTIGUOUS>
+template <class... Meshes, class ElementType, bool CONTIGUOUS>
+class BlockView<ProductMDomain<Meshes...>, ElementType, CONTIGUOUS>
 {
 public:
+    using mdomain_type = ProductMDomain<Meshes...>;
+
+    using mesh_type = ProductMesh<Meshes...>;
+
     /// ND memory view
-    using raw_view_type = SpanND<Mesh::rank(), ElementType, CONTIGUOUS>;
-
-    using mdomain_type = MDomainImpl<Mesh>;
-
-    using mesh_type = Mesh;
+    using raw_view_type = SpanND<mesh_type::rank(), ElementType, CONTIGUOUS>;
 
     using mcoord_type = typename mdomain_type::mcoord_type;
 
@@ -57,75 +64,38 @@ public:
     friend class BlockView;
 
 protected:
-    template <class QTag, class... CTags>
-    static auto get_slicer_for(const MCoord<CTags...>& c)
+    /// This adaptor transforms the spec from `(start, count)` to `[begin, end[`
+    template <class SliceSpec>
+    static SliceSpec slice_spec_adaptor(SliceSpec&& slice_spec)
     {
-        if constexpr (has_tag_v<QTag, MCoord<CTags...>>) {
-            return c.template get<QTag>();
+        if constexpr (std::is_convertible_v<SliceSpec, std::pair<std::size_t, std::size_t>>) {
+            return std::pair(slice_spec.first, slice_spec.first + slice_spec.second);
+        } else {
+            return slice_spec;
+        }
+    }
+
+    template <class QueryMesh, class... OMeshes>
+    static auto get_slicer_for(MCoord<OMeshes...> const& c)
+    {
+        if constexpr (has_tag_v<QueryMesh, MCoord<OMeshes...>>) {
+            return c.template get<QueryMesh>();
         } else {
             return std::experimental::all;
         }
     }
 
-    template <class... SliceSpecs>
-    struct Slicer
-    {
-        template <class... OSliceSpecs>
-        static inline constexpr auto slice(const BlockView& block, OSliceSpecs&&... slices)
-        {
-            auto view = subspan(block.raw_view(), std::forward<OSliceSpecs>(slices)...);
-            auto mesh = submesh(block.mesh(), std::forward<OSliceSpecs>(slices)...);
-            return make_view<element_type, ::is_contiguous_v<decltype(view)>>(mesh, view);
-        }
-    };
-
-    template <class... STags>
-    struct Slicer<MCoord<STags...>>
-    {
-        static inline constexpr auto slice(const BlockView& block, const MCoord<STags...>& slices)
-        {
-            return Slicer<MCoord<STags...>, mdomain_type>::slice(block, std::move(slices));
-        }
-    };
-
-    template <class... STags>
-    struct Slicer<MCoord<STags...>, MDomainImpl<typename Mesh::template Mesh<>>>
-    {
-        template <class... SliceSpecs>
-        static inline constexpr auto slice(
-                const BlockView& block,
-                const MCoord<STags...>&,
-                SliceSpecs&&... oslices)
-        {
-            return Slicer<SliceSpecs...>::slice(block, oslices...);
-        }
-    };
-
-    template <class... STags, class OTag0, class... OTags>
-    struct Slicer<MCoord<STags...>, MDomainImpl<typename Mesh::template Mesh<OTag0, OTags...>>>
-    {
-        template <class... SliceSpecs>
-        static inline constexpr auto slice(
-                const BlockView& block,
-                const MCoord<STags...>& slices,
-                SliceSpecs&&... oslices)
-        {
-            return Slicer<MCoord<STags...>, MDomainImpl<typename Mesh::template Mesh<OTags...>>>::
-                    slice(block, slices, oslices..., get_slicer_for<OTag0>(slices));
-        }
-    };
-
     /// The raw view of the data
     raw_view_type m_raw;
 
     /// The mesh on which this block is defined
-    Mesh m_mesh;
+    mdomain_type m_domain;
 
 public:
     /** Constructs a new BlockView by copy, yields a new view to the same data
      * @param other the BlockView to copy
      */
-    inline constexpr BlockView(const BlockView& other) = default;
+    inline constexpr BlockView(BlockView const& other) = default;
 
     /** Constructs a new BlockView by move
      * @param other the BlockView to move
@@ -136,9 +106,9 @@ public:
      * @param other the BlockView to move
      */
     template <class OElementType>
-    inline constexpr BlockView(const Block<mdomain_type, OElementType>& other) noexcept
+    inline constexpr BlockView(Block<mdomain_type, OElementType> const& other) noexcept
         : m_raw(other.raw_view())
-        , m_mesh(other.mesh())
+        , m_domain(other.domain())
     {
     }
 
@@ -147,19 +117,19 @@ public:
      */
     template <class OElementType>
     inline constexpr BlockView(
-            const BlockView<mdomain_type, OElementType, CONTIGUOUS>& other) noexcept
+            BlockView<mdomain_type, OElementType, CONTIGUOUS> const& other) noexcept
         : m_raw(other.raw_view())
-        , m_mesh(other.mesh())
+        , m_domain(other.domain())
     {
     }
 
     /** Constructs a new BlockView from scratch
-     * @param mesh the mesh that sustains the view
+     * @param domain the domain that sustains the view
      * @param raw_view the raw view to the data
      */
-    inline constexpr BlockView(const Mesh& mesh, raw_view_type raw_view)
+    inline constexpr BlockView(mdomain_type domain, raw_view_type raw_view)
         : m_raw(raw_view)
-        , m_mesh(mesh)
+        , m_domain(domain)
     {
     }
 
@@ -167,7 +137,7 @@ public:
      * @param other the BlockView to copy
      * @return *this
      */
-    inline constexpr BlockView& operator=(const BlockView& other) = default;
+    inline constexpr BlockView& operator=(BlockView const& other) = default;
 
     /** Move-assigns a new value to this BlockView
      * @param other the BlockView to move
@@ -175,35 +145,24 @@ public:
      */
     inline constexpr BlockView& operator=(BlockView&& other) = default;
 
-    template <class QueryTag>
-    static constexpr std::size_t tag_rank()
-    {
-        return Mesh::template tag_rank<QueryTag>();
-    }
-
     /** Slice out some dimensions
      * @param slices the coordinates to 
      */
-    template <class SliceSpec>
-    inline constexpr auto operator[](SliceSpec&& slice) const
+    template <class... QueryMeshes>
+    inline constexpr auto operator[](MCoord<QueryMeshes...> mcoord) const
     {
-        return Slicer<std::remove_cv_t<std::remove_reference_t<SliceSpec>>>::
-                slice(*this, std::forward<SliceSpec>(slice));
+        return this->subblockview(get_slicer_for<Meshes>(mcoord)...);
     }
 
-    template <class... IndexType>
+    template <
+            class... IndexType,
+            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
     inline constexpr reference operator()(IndexType&&... indices) const noexcept
     {
         return m_raw(std::forward<IndexType>(indices)...);
     }
 
-    template <class... OTags>
-    inline constexpr reference operator()(const MCoord<OTags...>& indices) const noexcept
-    {
-        return m_raw(mcoord_type(indices).array());
-    }
-
-    inline constexpr reference operator()(const mcoord_type& indices) const noexcept
+    inline constexpr reference operator()(mcoord_type const& indices) const noexcept
     {
         return m_raw(indices.array());
     }
@@ -301,9 +260,9 @@ public:
     /** Provide access to the mesh on which this block is defined
      * @return the mesh on which this block is defined
      */
-    inline constexpr Mesh mesh() const noexcept
+    inline constexpr mesh_type const& mesh() const noexcept
     {
-        return m_mesh;
+        return m_domain.mesh();
     }
 
     /** Provide access to the domain on which this block is defined
@@ -311,30 +270,22 @@ public:
      */
     inline constexpr mdomain_type domain() const noexcept
     {
-        return mdomain_type(mesh(), ExtentToMCoordEnd<mcoord_type>::mcoord(raw_view().extents()));
+        return m_domain;
     }
 
     /** Provide access to the domain on which this block is defined
      * @return the domain on which this block is defined
      */
-    template <class... OTags>
-    inline constexpr MDomainImpl<typename Mesh::template Mesh<OTags...>> domain() const noexcept
+    template <class... QueryMeshes>
+    inline constexpr ProductMDomain<QueryMeshes...> domain() const noexcept
     {
-        return MDomainImpl<typename Mesh::template Mesh<OTags...>>(domain());
+        return select<QueryMeshes...>(domain());
     }
 
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
      */
-    inline constexpr raw_view_type raw_view()
-    {
-        return m_raw;
-    }
-
-    /** Provide a constant view of the data
-     * @return a constant view of the data
-     */
-    inline constexpr const raw_view_type raw_view() const
+    inline constexpr raw_view_type raw_view() const
     {
         return m_raw;
     }
@@ -345,32 +296,16 @@ public:
     template <class... SliceSpecs>
     inline constexpr auto subblockview(SliceSpecs&&... slices) const
     {
-        return Slicer<std::remove_cv_t<std::remove_reference_t<SliceSpecs>>...>::
-                slice(*this, std::forward<SliceSpecs>(slices)...);
+        static_assert(sizeof...(SliceSpecs) == sizeof...(Meshes));
+        auto subview = std::experimental::subspan(m_raw, slice_spec_adaptor(slices)...);
+        return ::BlockView(m_domain.subdomain(slices...), subview);
     }
 };
 
-/** Construct a new BlockView from scratch
- * @param[in] mesh      the mesh that sustains the view
- * @param[in] raw_view  the raw view to the data
- * @return the newly constructed view
- */
-template <class OElementType, bool O_CONTIGUOUS, class Mesh>
-static BlockView<MDomainImpl<Mesh>, OElementType, O_CONTIGUOUS> make_view(
-        Mesh const& mesh,
-        SpanND<Mesh::rank(), OElementType, O_CONTIGUOUS> const& raw_view)
-{
-    return BlockView<MDomainImpl<Mesh>, OElementType, O_CONTIGUOUS>(mesh, raw_view);
-}
-
-/** Access the domain (or subdomain) of a view
- * @param[out] view  the view whose domain to iterate
- * @param[in]  f     a functor taking the list of indices as parameter
- * @return the domain of view in the queried dimensions
- */
-template <class... QueryTags, class Mesh, class ElementType, bool CONTIGUOUS>
-MDomainImpl<typename Mesh::template Mesh<QueryTags...>> get_domain(
-        const BlockView<MDomainImpl<Mesh>, ElementType, CONTIGUOUS>& v)
-{
-    return v.template domain<QueryTags...>();
-}
+template <class... Meshes, class ElementType, class Extents, class LayoutPolicy>
+BlockView(
+        ProductMDomain<Meshes...> domain,
+        std::experimental::
+                basic_mdspan<ElementType, Extents, LayoutPolicy, detail::accessor<ElementType>>
+                        raw_view)
+        -> BlockView<ProductMDomain<Meshes...>, ElementType, is_contiguous_v<LayoutPolicy>>;

@@ -3,30 +3,29 @@
 #include <type_traits>
 
 #include "mcoord.h"
+#include "mesh.h"
 #include "rcoord.h"
-#include "single_mesh.h"
 #include "taggedtuple.h"
-
-template <class Mesh>
-struct SubmeshImpl;
 
 template <class... Meshes>
 class ProductMesh
 {
     template <class Mesh>
-    using tag_t = typename Mesh::tag_type;
+    using rdim_t = typename Mesh::rdim_type;
 
 private:
+    static_assert((... && is_mesh_v<Meshes>), "A template parameter is not a mesh");
+
     static_assert(sizeof...(Meshes) > 0, "At least 1 mesh must be provided");
 
     static_assert((... && (Meshes::rank() <= 1)), "Only meshes of rank <= 1 are allowed");
 
-    TaggedTuple<detail::TypeSeq<Meshes...>, detail::TypeSeq<tag_t<Meshes>...>> m_meshes;
+    TaggedTuple<detail::TypeSeq<Meshes const&...>, detail::TypeSeq<Meshes...>> m_meshes;
 
 public:
-    using rcoord_type = RCoord<tag_t<Meshes>...>;
+    using rcoord_type = RCoord<rdim_t<Meshes>...>;
 
-    using mcoord_type = MCoord<tag_t<Meshes>...>;
+    using mcoord_type = MCoord<Meshes...>;
 
 public:
     static constexpr std::size_t rank() noexcept
@@ -35,23 +34,21 @@ public:
     }
 
 public:
-    ProductMesh() = delete;
+    ProductMesh() = default;
 
-    constexpr ProductMesh(Meshes const&... meshes) : m_meshes(meshes...) {}
+    constexpr explicit ProductMesh(Meshes const&... meshes) : m_meshes(meshes...) {}
 
-    constexpr ProductMesh(Meshes&&... meshes) : m_meshes(std::move(meshes)...) {}
+    // template <class... OMeshes>
+    // constexpr ProductMesh(ProductMesh<OMeshes...> const& mesh)
+    //     : m_meshes(mesh.template get<Meshes>()...)
+    // {
+    // }
 
-    template <class... OMeshes>
-    constexpr ProductMesh(ProductMesh<OMeshes...> const& mesh)
-        : m_meshes(mesh.template get<tag_t<Meshes>>()...)
-    {
-    }
-
-    template <class... OMeshes>
-    constexpr ProductMesh(ProductMesh<OMeshes...>&& mesh)
-        : m_meshes(std::move(mesh.template get<tag_t<Meshes>>())...)
-    {
-    }
+    // template <class... OMeshes>
+    // constexpr ProductMesh(ProductMesh<OMeshes...>&& mesh)
+    //     : m_meshes(std::move(mesh.template get<Meshes>())...)
+    // {
+    // }
 
     ProductMesh(ProductMesh const& x) = default;
 
@@ -63,63 +60,83 @@ public:
 
     ProductMesh& operator=(ProductMesh&& x) = default;
 
-    template <class Tag>
+    template <
+            std::size_t N = sizeof...(Meshes),
+            class Mesh0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<Meshes...>>>>
+    constexpr operator Mesh0 const &() const
+    {
+        return ::get<Mesh0>(m_meshes);
+    }
+
+    template <
+            std::size_t N = sizeof...(Meshes),
+            class Mesh0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<Meshes...>>>>
+    constexpr operator Mesh0&()
+    {
+        return ::get<Mesh0>(m_meshes);
+    }
+
+    template <class Mesh>
     auto const& get() const noexcept
     {
-        return ::get<Tag>(m_meshes);
+        return ::get<Mesh>(m_meshes);
     }
 
-    template <class Tag>
+    template <class Mesh>
     auto& get() noexcept
     {
-        return ::get<Tag>(m_meshes);
+        return ::get<Mesh>(m_meshes);
     }
 
-    template <class... QueryTags>
-    RCoord<QueryTags...> to_real(MCoord<QueryTags...> const& mcoord) const noexcept
+    template <class Mesh>
+    friend auto const& get(ProductMesh const& pmesh) noexcept
     {
-        return RCoord<QueryTags...>(
-                ::get<QueryTags>(m_meshes).to_real(::get<QueryTags>(mcoord))...);
+        return pmesh.get<Mesh>();
     }
 
-    template <class... Slicespecs>
-    auto submesh(Slicespecs&&... slicespecs) const noexcept
+    template <class Mesh>
+    friend auto& get(ProductMesh& pmesh) noexcept
     {
-        return SubmeshImpl<ProductMesh>::submesh(*this, std::forward<Slicespecs>(slicespecs)...);
+        return pmesh.get<Mesh>();
+    }
+
+    template <class... QueryMeshes>
+    RCoord<rdim_t<QueryMeshes>...> to_real(MCoord<QueryMeshes...> const& mcoord) const noexcept
+    {
+        return RCoord<rdim_t<QueryMeshes>...>(
+                ::get<QueryMeshes>(m_meshes).to_real(::get<QueryMeshes>(mcoord))...);
     }
 
     friend constexpr bool operator==(ProductMesh const& lhs, ProductMesh const& rhs)
     {
-        return (... && (::get<tag_t<Meshes>>(lhs.m_meshes) == ::get<tag_t<Meshes>>(rhs.m_meshes)));
+        return (... && (::get<Meshes>(lhs.m_meshes) == ::get<Meshes>(rhs.m_meshes)));
     }
 
+#if __cplusplus <= 201703L
+    // Shall not be necessary anymore in C++20
+    // `a!=b` shall be translated by the compiler to `!(a==b)`
     friend constexpr bool operator!=(ProductMesh const& lhs, ProductMesh const& rhs)
     {
         return !(lhs == rhs);
     }
+#endif
 };
 
-template <class... Meshes>
-struct SubmeshImpl<ProductMesh<Meshes...>>
+
+template <class QueryMesh, class... Meshes>
+constexpr auto const& get(ProductMesh<Meshes...> const& mesh)
 {
-    template <class Mesh, class Slicespec>
-    static auto submesh_rank_1(Mesh const& mesh, Slicespec&& slicespec)
-    {
-        static_assert(Mesh::rank() <= 1);
-        using slicespec_type = std::remove_cv_t<std::remove_reference_t<Slicespec>>;
-        if constexpr (std::is_same_v<slicespec_type, std::experimental::all_type>) {
-            return mesh;
-        } else if constexpr (std::is_integral_v<slicespec_type>) {
-            return SingleMesh(mesh.to_real(slicespec));
-        }
-    }
+    return mesh.template get<QueryMesh>();
+}
 
-    template <class... Slicespecs>
-    static auto submesh(ProductMesh<Meshes...> const& mesh, Slicespecs&&... slicespecs)
-    {
-        static_assert(sizeof...(Meshes) == sizeof...(Slicespecs));
-        return ProductMesh(submesh_rank_1(
-                mesh.template get<typename Meshes::tag_type>(),
-                std::forward<Slicespecs>(slicespecs))...);
-    }
-};
+template <class QueryMesh, class... Meshes>
+constexpr auto& get(ProductMesh<Meshes...>& mesh)
+{
+    return mesh.template get<QueryMesh>();
+}
+
+template <class... QueryMeshes, class... Meshes>
+constexpr ProductMesh<QueryMeshes...> select(ProductMesh<Meshes...> const& mesh)
+{
+    return ProductMesh(::get<QueryMeshes>(mesh)...);
+}

@@ -1,15 +1,23 @@
+#include <array>
+#include <iosfwd>
+#include <memory>
+
 #include <gtest/gtest.h>
 
+#include "gtest/gtest_pred_impl.h"
+
+#include "mcoord.h"
 #include "non_uniform_mesh.h"
 #include "product_mesh.h"
+#include "rcoord.h"
+#include "taggedarray.h"
 #include "uniform_mesh.h"
 
 class DimX;
 class DimVx;
+
 using RCoordX = RCoord<DimX>;
-using MCoordX = MCoord<DimX>;
 using RCoordVx = RCoord<DimVx>;
-using MCoordVx = MCoord<DimVx>;
 using MeshX = UniformMesh<DimX>;
 using MeshVx = NonUniformMesh<DimVx>;
 
@@ -17,39 +25,44 @@ using MeshXVx = ProductMesh<MeshX, MeshVx>;
 using MCoordXVx = MeshXVx::mcoord_type;
 using RCoordXVx = MeshXVx::rcoord_type;
 
-TEST(MeshProduct, constructor)
+class ProductMeshTest : public ::testing::Test
 {
-    MeshX mesh_x(2., 0.1);
+protected:
+    MeshX mesh_x = MeshX(2., 0.1);
+    std::array<double, 4> points_vx {-1., 0., 2., 4.};
+    MeshVx mesh_vx = MeshVx(points_vx);
+    ProductMesh<MeshX, MeshVx> mesh_x_vx = ProductMesh(mesh_x, mesh_vx);
+};
 
-    std::array points_vx {-1., 0., 2., 4.};
-    MeshVx mesh_vx(points_vx, points_vx.size());
-
-    ProductMesh mesh_x_vx(mesh_x, mesh_vx);
+TEST_F(ProductMeshTest, constructor)
+{
     EXPECT_EQ(MeshXVx::rank(), MeshX::rank() + MeshVx::rank());
+    EXPECT_EQ(mesh_x_vx.to_real(MCoord<MeshX, MeshVx>(0, 0)), RCoordXVx(2., -1.));
 }
 
-TEST(MeshProduct, submesh)
+TEST_F(ProductMeshTest, accessor)
 {
-    MeshX mesh_x(2., 0.1);
-
-    std::array points_vx {-1., 0., 2., 4.};
-    MeshVx mesh_vx(points_vx, points_vx.size());
-
-    ProductMesh mesh_x_vx(mesh_x, mesh_vx);
-    auto&& submesh = mesh_x_vx.submesh(2, std::experimental::all);
-    EXPECT_EQ(1, submesh.rank());
-    EXPECT_EQ(RCoordXVx(2.2, 0.), submesh.to_real(MCoordXVx(0, 1)));
+    EXPECT_EQ(mesh_x_vx.get<MeshX>(), mesh_x);
 }
 
-TEST(MeshProduct, to_real)
+TEST_F(ProductMeshTest, submesh)
 {
-    MeshX mesh_x(0., 0.1);
+    auto&& selection = select<MeshVx>(mesh_x_vx);
+    EXPECT_EQ(1, selection.rank());
+    EXPECT_EQ(RCoordVx(0.), selection.to_real(MCoord<MeshVx>(1)));
+}
 
-    std::array points_vx {-1., 0., 2., 4.};
-    MeshVx mesh_vx(points_vx, points_vx.size());
+TEST_F(ProductMeshTest, conversion)
+{
+    constexpr static MeshX mesh_x(2., 0.1);
+    constexpr ProductMesh product_mesh_x(mesh_x);
+    MeshX const& mesh_x_ref = product_mesh_x;
+    double step = mesh_x_ref.step();
+    EXPECT_EQ(0.1, step);
+}
 
-    ProductMesh mesh_x_vx(mesh_x, mesh_vx);
-
+TEST_F(ProductMeshTest, to_real)
+{
     for (std::size_t ix = 0; ix < 5; ++ix) {
         for (std::size_t ivx = 0; ivx < points_vx.size(); ++ivx) {
             EXPECT_EQ(

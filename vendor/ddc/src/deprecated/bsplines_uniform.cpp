@@ -1,9 +1,12 @@
 #include <cassert>
 #include <vector>
 
+#include "deprecated/bsplines.h"
 #include "deprecated/bsplines_uniform.h"
 
 #include "math_tools.h"
+
+#include <experimental/mdspan>
 
 namespace stdex = std::experimental;
 

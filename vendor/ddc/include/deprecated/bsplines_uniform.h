@@ -1,7 +1,7 @@
 #pragma once
 
 #include "bsplines.h"
-#include "mdomain.h"
+#include "view.h"
 
 namespace deprecated {
 
@@ -14,16 +14,6 @@ private:
 
 public:
     UniformBSplines() = delete;
-    template <class Tag>
-    UniformBSplines(int degree, const MDomainImpl<UniformMesh<Tag>>& dom)
-        : UniformBSplines(
-                degree,
-                Tag::PERIODIC,
-                dom.rmin(),
-                dom.rmax() - dom.mesh().step(),
-                dom.size() - 1)
-    {
-    }
     UniformBSplines(int degree, bool periodic, double xmin, double xmax, int ncells);
     UniformBSplines(const UniformBSplines& x) = delete;
     UniformBSplines(UniformBSplines&& x) = delete;

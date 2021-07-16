@@ -1,6 +1,9 @@
 #ifndef MATRIX_PDS_BANDED_H
 #define MATRIX_PDS_BANDED_H
-#include "matrix_banded.h"
+
+#include <memory>
+
+#include "matrix.h"
 
 class Matrix_PDS_Tridiag : public Matrix
 {

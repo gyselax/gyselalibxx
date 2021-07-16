@@ -10,31 +10,31 @@ class DimX;
 class DimVx;
 
 using MeshX = UniformMesh<DimX>;
-using MDomainX = UniformMDomain<DimX>;
+using MDomainX = ProductMDomain<MeshX>;
 using DBlockX = Block<MDomainX, double>;
 using DBlockSpanX = BlockView<MDomainX, double>;
-using MCoordX = MCoord<DimX>;
+using MCoordX = MCoord<MeshX>;
 using RCoordX = RCoord<DimX>;
 
 using MeshVx = UniformMesh<DimVx>;
-using MDomainVx = UniformMDomain<DimVx>;
+using MDomainVx = ProductMDomain<MeshVx>;
 using DBlockVx = Block<MDomainVx, double>;
 using DBlockSpanVx = BlockView<MDomainVx, double>;
-using MCoordVx = MCoord<DimVx>;
+using MCoordVx = MCoord<MeshVx>;
 using RCoordVx = RCoord<DimVx>;
 
-using MeshXVx = UniformMesh<DimX, DimVx>;
-using MDomainXVx = UniformMDomain<DimX, DimVx>;
+using MeshXVx = ProductMesh<MeshX, MeshVx>;
+using MDomainXVx = ProductMDomain<MeshX, MeshVx>;
 using DBlockXVx = Block<MDomainXVx, double>;
 using DBlockSpanXVx = BlockView<MDomainXVx, double>;
-using MCoordXVx = MCoord<DimX, DimVx>;
+using MCoordXVx = MCoord<MeshX, MeshVx>;
 using RCoordXVx = RCoord<DimX, DimVx>;
 
-using MeshVxX = UniformMesh<DimVx, DimX>;
-using MDomainVxX = UniformMDomain<DimVx, DimX>;
+using MeshVxX = ProductMesh<MeshVx, MeshX>;
+using MDomainVxX = ProductMDomain<MeshVx, MeshX>;
 using DBlockVxX = Block<MDomainVxX, double>;
 using DBlockSpanVxX = BlockView<MDomainVxX, double>;
-using MCoordVxX = MCoord<DimVx, DimX>;
+using MCoordVxX = MCoord<MeshVx, MeshX>;
 using RCoordVxX = RCoord<DimVx, DimX>;
 
 static void memcpy_1d(benchmark::State& state)
@@ -51,9 +51,11 @@ static void deepcopy_1d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0), 0.0);
     std::vector<double> dst_data(state.range(0), -1.0);
-    MDomainVx const dom(RCoordVx(0.), RCoordVx(2.), MCoordVx(0), MCoordVx(state.range(0)));
-    DBlockSpanVx src(dom.mesh(), DSpan1D(src_data.data(), state.range(0)));
-    DBlockSpanVx dst(dom.mesh(), DSpan1D(dst_data.data(), state.range(0)));
+    MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(0));
+    ProductMesh mesh(mesh_vx);
+    MDomainVx const dom(mesh, MCoordVx(state.range(0)));
+    DBlockSpanVx src(dom, DSpan1D(src_data.data(), state.range(0)));
+    DBlockSpanVx dst(dom, DSpan1D(dst_data.data(), state.range(0)));
     for (auto _ : state) {
         deepcopy(dst, src);
     }
@@ -81,13 +83,12 @@ static void deepcopy_2d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0) * state.range(1), 0.0);
     std::vector<double> dst_data(state.range(0) * state.range(1), -1.0);
-    MDomainXVx const
-            dom(RCoordXVx(0., 0.),
-                RCoordXVx(2., 2.),
-                MCoordXVx(0, 0),
-                MCoordXVx(state.range(0), state.range(1)));
-    DBlockSpanXVx src(dom.mesh(), DSpan2D(src_data.data(), state.range(0), state.range(1)));
-    DBlockSpanXVx dst(dom.mesh(), DSpan2D(dst_data.data(), state.range(0), state.range(1)));
+    MeshX mesh_x(RCoordX(0.), RCoordX(2.), state.range(0));
+    MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(1));
+    ProductMesh mesh(mesh_x, mesh_vx);
+    MDomainXVx const dom(mesh, MCoordXVx(state.range(0), state.range(1)));
+    DBlockSpanXVx src(dom, DSpan2D(src_data.data(), state.range(0), state.range(1)));
+    DBlockSpanXVx dst(dom, DSpan2D(dst_data.data(), state.range(0), state.range(1)));
     for (auto _ : state) {
         deepcopy(dst, src);
     }
@@ -100,13 +101,12 @@ static void deepcopy_subblock_2d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0) * state.range(1), 0.0);
     std::vector<double> dst_data(state.range(0) * state.range(1), -1.0);
-    MDomainXVx const
-            dom(RCoordXVx(0., 0.),
-                RCoordXVx(2., 2.),
-                MCoordXVx(0, 0),
-                MCoordXVx(state.range(0), state.range(1)));
-    DBlockSpanXVx src(dom.mesh(), DSpan2D(src_data.data(), state.range(0), state.range(1)));
-    DBlockSpanXVx dst(dom.mesh(), DSpan2D(dst_data.data(), state.range(0), state.range(1)));
+    MeshX mesh_x(RCoordX(0.), RCoordX(2.), state.range(0));
+    MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(1));
+    ProductMesh mesh(mesh_x, mesh_vx);
+    MDomainXVx const dom(mesh, MCoordXVx(state.range(0), state.range(1)));
+    DBlockSpanXVx src(dom, DSpan2D(src_data.data(), state.range(0), state.range(1)));
+    DBlockSpanXVx dst(dom, DSpan2D(dst_data.data(), state.range(0), state.range(1)));
     for (auto _ : state) {
         for (std::size_t i = 0; i < src.extent(0); ++i) {
             auto&& dst_i = dst.subblockview(i, std::experimental::all);

@@ -1,22 +1,26 @@
 #pragma once
 
+#include <array>
 #include <cassert>
 #include <memory>
-#include <vector>
 
 #include "bsplines.h"
 #include "math_tools.h"
 #include "mdomain.h"
+#include "product_mdomain.h"
+#include "uniform_mesh.h"
 #include "view.h"
 
 /// UniformMesh specialization of BSplines
 template <class Tag, std::size_t D>
-class BSplines<MDomainImpl<UniformMesh<Tag>>, D>
+class BSplines<UniformMesh<Tag>, D>
 {
     static_assert(D > 0, "Parameter `D` must be positive");
 
 private:
-    using domain_type = MDomainImpl<UniformMesh<Tag>>;
+    using mesh_type = UniformMesh<Tag>;
+
+    using domain_type = ProductMDomain<mesh_type>;
 
 public:
     using tag_type = Tag;
@@ -25,7 +29,7 @@ public:
 
     using rlength_type = RLength<Tag>;
 
-    using mcoord_type = MCoord<Tag>;
+    using mcoord_type = MCoord<BSplines>;
 
 public:
     static constexpr std::size_t degree() noexcept
@@ -49,12 +53,18 @@ public:
     }
 
 private:
-    domain_type const& m_domain;
+    mesh_type m_mesh;
+
+    MDomain<mesh_type> m_domain;
 
 public:
     BSplines() = default;
 
-    explicit BSplines(domain_type const& domain) : m_domain(domain) {}
+    explicit BSplines(domain_type const& domain)
+        : m_mesh(get<mesh_type>(domain).mesh())
+        , m_domain(m_mesh, domain.lbound(), domain.ubound())
+    {
+    }
 
     BSplines(BSplines const& x) = default;
 
@@ -89,7 +99,7 @@ public:
 
     double rmax() const noexcept
     {
-        return m_domain.rmax() - m_domain.mesh().step();
+        return m_domain.rmax();
     }
 
     double length() const noexcept
@@ -128,11 +138,7 @@ private:
 };
 
 template <class Tag, std::size_t D>
-void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::eval_basis(
-        double x,
-        DSpan1D& values,
-        int& jmin,
-        int deg) const
+void BSplines<UniformMesh<Tag>, D>::eval_basis(double x, DSpan1D& values, int& jmin, int deg) const
 {
     assert(values.extent(0) == deg + 1);
 
@@ -158,8 +164,7 @@ void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::eval_basis(
 }
 
 template <class Tag, std::size_t D>
-void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::eval_deriv(double x, DSpan1D& derivs, int& jmin)
-        const
+void BSplines<UniformMesh<Tag>, D>::eval_deriv(double x, DSpan1D& derivs, int& jmin) const
 {
     assert(derivs.extent(0) == degree() + 1);
 
@@ -197,15 +202,15 @@ void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::eval_deriv(double x, DSpan1D& d
 }
 
 template <class Tag, std::size_t D>
-void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::eval_basis_and_n_derivs(
+void BSplines<UniformMesh<Tag>, D>::eval_basis_and_n_derivs(
         double x,
         int n,
         DSpan2D& derivs,
         int& jmin) const
 {
-    std::vector<double> ndu_ptr((degree() + 1) * (degree() + 1));
+    std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
     DSpan2D ndu(ndu_ptr.data(), degree() + 1, degree() + 1);
-    std::vector<double> a_ptr(2 * (degree() + 1));
+    std::array<double, 2 * (degree() + 1)> a_ptr;
     std::experimental::mdspan<double, std::experimental::dynamic_extent, 2>
             a(a_ptr.data(), degree() + 1);
     double offset;
@@ -278,10 +283,7 @@ void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::eval_basis_and_n_derivs(
 }
 
 template <class Tag, std::size_t D>
-void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::get_icell_and_offset(
-        double x,
-        int& icell,
-        double& offset) const
+void BSplines<UniformMesh<Tag>, D>::get_icell_and_offset(double x, int& icell, double& offset) const
 {
     assert(x >= rmin());
     assert(x <= rmax());
@@ -308,7 +310,7 @@ void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::get_icell_and_offset(
 }
 
 template <class Tag, std::size_t D>
-void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::integrals(DSpan1D& int_vals) const
+void BSplines<UniformMesh<Tag>, D>::integrals(DSpan1D& int_vals) const
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
     for (int i(degree()); i < nbasis() - degree(); ++i) {
@@ -324,7 +326,7 @@ void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::integrals(DSpan1D& int_vals) co
         }
     } else {
         int jmin(0);
-        std::vector<double> edge_vals_ptr(degree() + 2);
+        std::array<double, degree() + 2> edge_vals_ptr;
         DSpan1D edge_vals(edge_vals_ptr.data(), degree() + 2);
 
         eval_basis(rmin(), edge_vals, jmin, degree() + 1);
@@ -341,4 +343,4 @@ void BSplines<MDomainImpl<UniformMesh<Tag>>, D>::integrals(DSpan1D& int_vals) co
 }
 
 template <class Tag, std::size_t D>
-using UniformBSplines = BSplines<MDomainImpl<UniformMesh<Tag>>, D>;
+using UniformBSplines = BSplines<UniformMesh<Tag>, D>;

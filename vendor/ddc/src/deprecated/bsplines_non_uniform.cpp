@@ -2,7 +2,10 @@
 #include <memory>
 #include <vector>
 
+#include "deprecated/bsplines.h"
 #include "deprecated/bsplines_non_uniform.h"
+
+#include <experimental/mdspan>
 
 namespace stdex = std::experimental;
 

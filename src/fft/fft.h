@@ -24,11 +24,12 @@ public:
 
     IFourierTransform& operator=(IFourierTransform&& x) = default;
 
-    virtual NonUniformMDomain<Fourier<Tags>...> compute_fourier_domain(
-            UniformMDomain<Tags...> const& dom_x) const noexcept = 0;
+    virtual NonUniformMesh<Fourier<Tags...>> compute_fourier_domain(
+            ProductMDomain<UniformMesh<Tags>...> const& dom_x) const noexcept = 0;
 
     virtual void operator()(
-            BlockView<NonUniformMDomain<Fourier<Tags>...>, std::complex<double>> const& out_values,
-            BlockView<UniformMDomain<Tags...>, std::complex<double>> const& in_values)
+            BlockView<ProductMDomain<NonUniformMesh<Fourier<Tags>>...>, std::complex<double>> const&
+                    out_values,
+            BlockView<ProductMDomain<UniformMesh<Tags>...>, std::complex<double>> const& in_values)
             const noexcept = 0;
 };

@@ -1,7 +1,6 @@
 #ifndef MATRIX_DENSE_H
 #define MATRIX_DENSE_H
-#include <string>
-#include <vector>
+#include <memory>
 
 #include "matrix.h"
 

@@ -34,20 +34,24 @@ public:
     constexpr TaggedTuple(TaggedTuple&&) = default;
 
     template <class... Params>
-    inline constexpr TaggedTuple(Params&&... params) noexcept
+    explicit inline constexpr TaggedTuple(Params&&... params) noexcept
         : m_values(std::forward<Params>(params)...)
     {
     }
 
-    template <class... OTags>
-    inline constexpr TaggedTuple(TaggedTuple<OTags...> const& other) noexcept
-        : m_values(other.template get<OTags>()...)
+    template <class... OElementTypes, class... OTags>
+    inline constexpr TaggedTuple(
+            TaggedTuple<detail::TypeSeq<OElementTypes...>, detail::TypeSeq<OTags...>> const&
+                    other) noexcept
+        : m_values(other.template get<Tags>()...)
     {
     }
 
-    template <class... OTags>
-    inline constexpr TaggedTuple(TaggedTuple<OTags...>&& other) noexcept
-        : m_values(std::move(other.template get<OTags>())...)
+    template <class... OElementTypes, class... OTags>
+    inline constexpr TaggedTuple(
+            TaggedTuple<detail::TypeSeq<OElementTypes...>, detail::TypeSeq<OTags...>>&&
+                    other) noexcept
+        : m_values(std::move(other.template get<Tags>())...)
     {
     }
 
@@ -123,4 +127,12 @@ template <class QueryTag, class ElementSeq, class TagSeq>
 inline constexpr auto& get(TaggedTuple<ElementSeq, TagSeq>& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
+}
+
+template <class... Tags, class... ElementTypes>
+TaggedTuple<detail::TypeSeq<ElementTypes...>, detail::TypeSeq<Tags...>> make_tagged_tuple(
+        ElementTypes&&... elements)
+{
+    return TaggedTuple<detail::TypeSeq<ElementTypes...>, detail::TypeSeq<Tags...>>(
+            std::forward<ElementTypes>(elements)...);
 }

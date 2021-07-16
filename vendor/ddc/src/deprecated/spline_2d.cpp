@@ -1,10 +1,13 @@
 #include <cassert>
-#include <iostream>
 #include <memory>
+#include <vector>
 
+#include "deprecated/bsplines.h"
 #include "deprecated/bsplines_non_uniform.h"
 #include "deprecated/bsplines_uniform.h"
 #include "deprecated/spline_2d.h"
+
+#include <experimental/mdspan>
 
 namespace deprecated {
 

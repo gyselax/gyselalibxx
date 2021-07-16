@@ -1,9 +1,7 @@
-#include <vector>
-
-#include <block.h>
-
 #include "deprecated/bsplines_uniform.h"
 
+#include "boundary_conditions.h"
+#include "geometry.h"
 #include "nulladvectionvx.h"
 #include "nullefieldsolver.h"
 #include "predcorr.h"
@@ -16,7 +14,13 @@
 // * unit vector: (1,1)
 // * domain-start: (0,0)
 // * domain-bound: (100, 100)
-MDomainXVx const dom2d(RCoordXVx(0, 0), RCoordXVx(100, 100), MCoordXVx(0, 0), MCoordXVx(100, 100));
+MeshX const mesh_x(RCoordX(0.), RCoordX(1.));
+
+MeshVx const mesh_vx(RCoordVx(0.), RCoordVx(1.));
+
+MeshXVx const mesh_x_vx(mesh_x, mesh_vx);
+
+MDomainXVx const dom2d(mesh_x_vx, MCoordXVx(0, 0), MCoordXVx(100, 100));
 
 deprecated::UniformBSplines const bsplines_x = {3, true, 4, 5, 6};
 

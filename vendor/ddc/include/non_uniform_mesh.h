@@ -1,301 +1,144 @@
 #pragma once
 
+#include <cassert>
 #include <vector>
 
-#include <view.h>
-
 #include "mcoord.h"
+#include "mesh.h"
 #include "rcoord.h"
+#include "taggedarray.h"
 
-template <class Tag>
-class NonUniformMesh
+/// `NonUniformMesh` models a non-uniform discretization of the `RDim` segment \f$[a, b]\f$.
+template <class RDim>
+class NonUniformMesh : public Mesh
 {
 public:
-    using rcoord_type = RCoord<Tag>;
+    using rcoord_type = RCoord<RDim>;
 
-    using rlength_type = RLength<Tag>;
+    using rlength_type = RLength<RDim>;
 
-    using mcoord_type = MCoord<Tag>;
+    using mcoord_type = MCoord<NonUniformMesh>;
 
-    using tag_type = Tag;
-
-    // The two Mesh and Mesh_ need better names to avoid ambiguity
-    using Mesh_ = NonUniformMesh<Tag>;
-
-    template <class OTag>
-    using Mesh = NonUniformMesh<OTag>;
-
-    struct Iterator
-    {
-    private:
-        MCoordElement _M_value = MCoordElement();
-
-    public:
-        using iterator_category = std::random_access_iterator_tag;
-
-        using value_type = MCoordElement;
-
-        using difference_type = MLengthElement;
-
-        Iterator() = default;
-
-        constexpr explicit Iterator(MCoordElement __value) : _M_value(__value) {}
-
-        constexpr MCoordElement operator*() const noexcept
-        {
-            return _M_value;
-        }
-
-        constexpr Iterator& operator++()
-        {
-            ++_M_value;
-            return *this;
-        }
-
-        constexpr Iterator operator++(int)
-        {
-            auto __tmp = *this;
-            ++*this;
-            return __tmp;
-        }
-
-        constexpr Iterator& operator--()
-        {
-            --_M_value;
-            return *this;
-        }
-
-        constexpr Iterator operator--(int)
-        {
-            auto __tmp = *this;
-            --*this;
-            return __tmp;
-        }
-
-        constexpr Iterator& operator+=(difference_type __n)
-        {
-            if (__n >= difference_type(0))
-                _M_value += static_cast<MCoordElement>(__n);
-            else
-                _M_value -= static_cast<MCoordElement>(-__n);
-            return *this;
-        }
-
-        constexpr Iterator& operator-=(difference_type __n)
-        {
-            if (__n >= difference_type(0))
-                _M_value -= static_cast<MCoordElement>(__n);
-            else
-                _M_value += static_cast<MCoordElement>(-__n);
-            return *this;
-        }
-
-        constexpr MCoordElement operator[](difference_type __n) const
-        {
-            return MCoordElement(_M_value + __n);
-        }
-
-        friend constexpr bool operator==(Iterator const& xx, Iterator const& yy)
-        {
-            return xx._M_value == yy._M_value;
-        }
-
-        friend constexpr bool operator!=(Iterator const& xx, Iterator const& yy)
-        {
-            return xx._M_value != yy._M_value;
-        }
-
-        friend constexpr bool operator<(Iterator const& xx, Iterator const& yy)
-        {
-            return xx._M_value < yy._M_value;
-        }
-
-        friend constexpr bool operator>(Iterator const& xx, Iterator const& yy)
-        {
-            return yy < xx;
-        }
-
-        friend constexpr bool operator<=(Iterator const& xx, Iterator const& yy)
-        {
-            return !(yy < xx);
-        }
-
-        friend constexpr bool operator>=(Iterator const& xx, Iterator const& yy)
-        {
-            return !(xx < yy);
-        }
-
-        friend constexpr Iterator operator+(Iterator __i, difference_type __n)
-        {
-            return __i += __n;
-        }
-
-        friend constexpr Iterator operator+(difference_type __n, Iterator __i)
-        {
-            return __i += __n;
-        }
-
-        friend constexpr Iterator operator-(Iterator __i, difference_type __n)
-        {
-            return __i -= __n;
-        }
-
-        friend constexpr difference_type operator-(Iterator const& xx, Iterator const& yy)
-        {
-            return (yy._M_value > xx._M_value)
-                           ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
-                           : (xx._M_value - yy._M_value);
-        }
-    };
-
-private:
-    /// mesh points
-    std::vector<rcoord_type> m_points;
-
-    mcoord_type m_lbound;
+    using rdim_type = RDim;
 
 public:
-    inline constexpr NonUniformMesh(NonUniformMesh const& other) = default;
-
-    inline constexpr NonUniformMesh(NonUniformMesh&& other) = default;
-
-    inline constexpr NonUniformMesh(std::vector<rcoord_type>&& points, mcoord_type lbound)
-        : m_points(std::move(points))
-        , m_lbound(lbound)
-    {
-    }
-
-    template <class InputIterable>
-    inline constexpr NonUniformMesh(InputIterable const& points, mcoord_type lbound)
-        : m_points(points.begin(), points.end())
-        , m_lbound(lbound)
-    {
-    }
-
-    inline constexpr NonUniformMesh(View1D<const rcoord_type> points, mcoord_type lbound)
-        : m_points(points.data(), points.data() + points.extent(0))
-        , m_lbound(lbound)
-    {
-    }
-
-    template <class InputIt>
-    inline constexpr NonUniformMesh(InputIt points_begin, InputIt points_end, mcoord_type lbound)
-        : m_points(points_begin, points_end)
-        , m_lbound(lbound)
-    {
-    }
-
-    static inline constexpr size_t rank() noexcept
+    static constexpr std::size_t rank()
     {
         return 1;
     }
 
-    inline constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
+private:
+    std::vector<double> m_points;
+
+public:
+    NonUniformMesh() = default;
+
+    /// @brief Construct a `NonUniformMesh` using a brace-list, i.e. `NonUniformMesh mesh({0., 1.})`
+    explicit NonUniformMesh(std::initializer_list<rcoord_type> points)
+        : m_points(points.begin(), points.end())
     {
-        return m_points[icoord];
     }
 
-    friend constexpr bool operator==(NonUniformMesh const& xx, NonUniformMesh const& yy)
+    /// @brief Construct a `NonUniformMesh` using a C++20 "common range".
+    template <class InputRange>
+    inline constexpr NonUniformMesh(InputRange&& points) : m_points(points.begin(), points.end())
     {
-        return xx.m_lbound == yy.m_lbound && xx.m_points == yy.m_points;
     }
 
-    friend constexpr bool operator!=(NonUniformMesh const& xx, NonUniformMesh const& yy)
+    /// @brief Construct a `NonUniformMesh` using a pair of iterators.
+    template <class InputIt>
+    inline constexpr NonUniformMesh(InputIt points_begin, InputIt points_end)
+        : m_points(points_begin, points_end)
     {
-        return !operator==(xx, yy);
     }
 
-    template <class OTag>
-    friend constexpr bool operator==(NonUniformMesh const& xx, NonUniformMesh<OTag> const& yy)
+    NonUniformMesh(NonUniformMesh const& x) = default;
+
+    NonUniformMesh(NonUniformMesh&& x) = default;
+
+    ~NonUniformMesh() = default;
+
+    NonUniformMesh& operator=(NonUniformMesh const& x) = default;
+
+    NonUniformMesh& operator=(NonUniformMesh&& x) = default;
+
+    constexpr bool operator==(NonUniformMesh const& other) const
+    {
+        return m_points == other.m_points;
+    }
+
+    template <class ORDim>
+    constexpr bool operator==(NonUniformMesh<ORDim> const& other) const
     {
         return false;
     }
 
-    template <class OTag>
-    friend constexpr bool operator!=(NonUniformMesh const& xx, NonUniformMesh<OTag> const& yy)
+#if __cplusplus <= 201703L
+    // Shall not be necessary anymore in C++20
+    // `a!=b` shall be translated by the compiler to `!(a==b)`
+    constexpr bool operator!=(NonUniformMesh const& other) const
     {
-        return false;
+        return !(*this == other);
     }
 
-    inline constexpr NonUniformMesh const& mesh() const noexcept
+    template <class ORDim>
+    constexpr bool operator!=(NonUniformMesh<ORDim> const& other) const
     {
-        return *this;
+        return !(*this == other);
     }
+#endif
 
-    inline constexpr mcoord_type lbound() const noexcept
-    {
-        return m_lbound;
-    }
-
-    inline constexpr rcoord_type rmin() const noexcept
-    {
-        return mesh().to_real(lbound());
-    }
-
-    inline constexpr mcoord_type ubound() const noexcept
-    {
-        return lbound() + m_points.size();
-    }
-
-    inline constexpr rcoord_type rmax() const noexcept
-    {
-        return mesh().to_real(ubound());
-    }
-
-    inline constexpr std::size_t size() const noexcept
+    constexpr std::size_t size() const
     {
         return m_points.size();
     }
 
-    inline constexpr bool empty() const noexcept
+    /// @brief Lower bound index of the mesh
+    constexpr mcoord_type lbound() const noexcept
     {
-        return size() == 0;
+        return 0;
     }
 
-    constexpr explicit operator bool()
+    /// @brief Upper bound index of the mesh
+    constexpr mcoord_type ubound() const noexcept
     {
-        return !empty();
+        return m_points.size() - 1;
     }
 
-    constexpr Iterator begin() const noexcept
+    /// @brief Convert a mesh index into a position in `RDim`
+    constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
-        return Iterator(lbound());
+        assert(icoord >= lbound());
+        assert(icoord <= ubound());
+        return m_points[static_cast<std::size_t>(icoord)];
     }
 
-    constexpr Iterator cbegin() const noexcept
+    /// @brief Position of the lower bound in `RDim`
+    constexpr rcoord_type rmin() const noexcept
     {
-        return begin();
+        return m_points.front();
     }
 
-    constexpr Iterator end() const noexcept
+    /// @brief Position of the upper bound in `RDim`
+    constexpr rcoord_type rmax() const noexcept
     {
-        return Iterator(ubound());
+        return m_points.back();
     }
 
-    constexpr Iterator cend() const noexcept
+    /// @brief Length of `RDim`
+    constexpr rcoord_type rlength() const
     {
-        return end();
-    }
-
-    constexpr decltype(auto) back()
-    {
-        assert(!empty());
-        return *(--end());
-    }
-
-    constexpr decltype(auto) operator[](std::size_t __n)
-    {
-        return begin()[__n];
-    }
-
-    constexpr decltype(auto) operator[](std::size_t __n) const
-    {
-        return begin()[__n];
+        return m_points.back() - m_points.front();
     }
 };
 
-template <class Tag>
-std::ostream& operator<<(std::ostream& out, NonUniformMesh<Tag> const& dom)
+template <class RDim>
+std::ostream& operator<<(std::ostream& out, NonUniformMesh<RDim> const& mesh)
 {
-    return out << "NonUniformMesh(  )";
+    out << "NonUniformMesh( ";
+    if (mesh.size() > 0) {
+        out << mesh.rmin() << "..." << mesh.rmax();
+    }
+    out << " )";
+    return out;
 }

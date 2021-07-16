@@ -1,21 +1,35 @@
+#include <complex>
 #include <iostream>
+#include <utility>
+
+#include <assert.h>
+#include <math.h>
 
 #include "block.h"
 #include "block_spline.h"
 #include "blockview.h"
-#include "blockview_spline.h"
+#include "bsplines_uniform.h"
 #include "deepcopy.h"
 #include "efieldfftsolver.h"
-#include "fftw.h"
 #include "geometry.h"
+#include "mcoord.h"
+#include "mdomain.h"
+#include "non_uniform_mesh.h"
 #include "null_boundary_value.h"
+#include "product_mdomain.h"
+#include "product_mesh.h"
+#include "rcoord.h"
 #include "spline_builder.h"
 #include "spline_evaluator.h"
+#include "taggedarray.h"
+#include "uniform_mesh.h"
+
+#include <experimental/mdspan>
 
 static double compute_dens(DBlockViewVx const& fdistribu)
 {
-    auto&& dom_vx = get_domain<Dim::Vx>(fdistribu);
-    double const dv = dom_vx.mesh().step();
+    auto&& dom_vx = get_domain<MeshVx>(fdistribu);
+    double const dv = get<MeshVx>(dom_vx.mesh()).step();
     double rho = 0.;
     for (MCoordVx ivx : dom_vx) {
         rho += fdistribu(ivx) * dv;
@@ -35,7 +49,7 @@ static void compute_rho(DBlockSpanX const& rho, DBlockViewXVx const& fdistribu)
 static void compute_efield(DBlockSpanX const& ex, DBlockViewX const& phi_x)
 {
     auto&& dom_x = phi_x.domain();
-    BSplinesX bsplines(dom_x);
+    BSplinesX bsplines(dom_x.get<MeshX>());
     SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> builder(bsplines);
     Block<BSplinesX, double> coef(bsplines);
     builder(coef, phi_x, nullptr, nullptr);
@@ -58,7 +72,7 @@ EfieldFftSolver::EfieldFftSolver(
 // 2- Should it take an array of distribution functions ?
 DBlockSpanX EfieldFftSolver::operator()(DBlockSpanX ex, DBlockViewXVx fdistribu) const
 {
-    assert(ex.domain() == get_domain<Dim::X>(fdistribu));
+    assert(ex.domain() == get_domain<MeshX>(fdistribu));
     UniformMDomainX dom_x = ex.domain();
 
     // Compute the RHS of the Poisson equation.
@@ -70,8 +84,10 @@ DBlockSpanX EfieldFftSolver::operator()(DBlockSpanX ex, DBlockViewXVx fdistribu)
     deepcopy(complex_rho, rho);
 
     // Build a mesh in the fourier space, for N points
-    MDomainFx const dom_fx = m_fft.compute_fourier_domain(dom_x);
-    Block<MDomainFx, std::complex<double>> complex_phi_fx(dom_fx);
+    MeshFx const dom_fx = m_fft.compute_fourier_domain(dom_x);
+    auto&& dom_fx_prod_version = ProductMesh(dom_fx);
+    Block<MDomainFx, std::complex<double>> complex_phi_fx(
+            ProductMDomain(dom_fx_prod_version, MCoord<MeshFx>(dom_fx.size())));
     m_fft(complex_phi_fx, complex_rho);
 
     // Solve Poisson's equation -d^2 Phi/dx^2 = rho in the Fourier space.

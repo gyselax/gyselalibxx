@@ -1,12 +1,13 @@
 #pragma once
 
-#include <cstdint>
+#include <iosfwd>
 #include <memory>
 #include <type_traits>
 
-#include "bsplines.h"
+#include "view.h"
 
 namespace deprecated {
+class BSplines;
 
 class Spline2D
 {

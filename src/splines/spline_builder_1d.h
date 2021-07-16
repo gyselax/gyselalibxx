@@ -6,10 +6,11 @@
 #include <boundary_conditions.h>
 #include <matrix.h>
 
-#include "deprecated/bsplines.h"
-#include "deprecated/spline_1d.h"
+#include "view.h"
 
 namespace deprecated {
+class BSplines;
+class Spline1D;
 
 class SplineBuilder1D
 {

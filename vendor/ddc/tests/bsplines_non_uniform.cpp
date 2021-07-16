@@ -1,33 +1,44 @@
-#include <cstdint>
-#include <type_traits>
+#include <iosfwd>
 #include <vector>
 
 #include <gtest/gtest.h>
 
 #include "deprecated/bsplines_non_uniform.h"
+#include "gtest/gtest_pred_impl.h"
 
 #include "bsplines_non_uniform.h"
-#include "mdomain.h"
+#include "mcoord.h"
 #include "non_uniform_mesh.h"
+#include "product_mdomain.h"
+#include "product_mesh.h"
+#include "rcoord.h"
+#include "taggedarray.h"
+#include "view.h"
+
+#include <experimental/mdspan>
 
 struct DimX
 {
     static constexpr bool PERIODIC = true;
 };
-using NonUniformMeshX = NonUniformMesh<DimX>;
+using MeshX = NonUniformMesh<DimX>;
 using RCoordX = RCoord<DimX>;
-using MCoordX = MCoord<DimX>;
+using MCoordX = MCoord<MeshX>;
 
-TEST(BSplinesNonUniform, Constructor)
+class BSplinesNonUniformTest : public ::testing::Test
 {
-    std::vector<double> const breaks({0.0, 0.5, 1.0, 1.5, 2.0});
-    NonUniformMeshX const mesh(breaks, MCoordX(0));
-    MDomainImpl<NonUniformMeshX> const dom(mesh, MCoordX(5));
+protected:
+    static constexpr std::size_t spline_degree = 2;
+    std::vector<double> const breaks {0.0, 0.5, 1.0, 1.5, 2.0};
+    MeshX const mesh_x = MeshX(breaks);
+    ProductMesh<MeshX> mesh = ProductMesh<MeshX>(mesh_x);
+    ProductMDomain<MeshX> const dom = ProductMDomain(mesh, MCoordX(mesh_x.size() - 1));
+    BSplines<MeshX, spline_degree> const bsplines = BSplines<MeshX, 2>(dom);
+};
 
-    std::integral_constant<std::size_t, 2> constexpr spline_degree;
-    auto&& bsplines = make_bsplines(dom, spline_degree);
-
-    EXPECT_EQ(bsplines.degree(), spline_degree.value);
+TEST_F(BSplinesNonUniformTest, constructor)
+{
+    EXPECT_EQ(bsplines.degree(), spline_degree);
     EXPECT_EQ(bsplines.is_periodic(), DimX::PERIODIC);
     EXPECT_EQ(bsplines.rmin(), 0.);
     EXPECT_EQ(bsplines.rmax(), 2.);
@@ -35,16 +46,9 @@ TEST(BSplinesNonUniform, Constructor)
     EXPECT_EQ(bsplines.ncells(), 4);
 }
 
-TEST(BSplinesNonUniform, Comparison)
+TEST_F(BSplinesNonUniformTest, comparison)
 {
-    std::vector<double> const breaks({0.0, 0.5, 1.0, 1.5, 2.0});
-    NonUniformMeshX const mesh(breaks, MCoordX(0));
-    MDomainImpl<NonUniformMeshX> const dom(mesh, MCoordX(5));
-
-    std::integral_constant<std::size_t, 2> constexpr spline_degree;
-    auto&& bsplines = make_bsplines(dom, spline_degree);
-
-    deprecated::NonUniformBSplines old_bsplines(spline_degree.value, DimX::PERIODIC, breaks);
+    deprecated::NonUniformBSplines old_bsplines(spline_degree, DimX::PERIODIC, breaks);
 
     EXPECT_EQ(bsplines.degree(), old_bsplines.degree());
     EXPECT_EQ(bsplines.is_radial(), old_bsplines.radial());

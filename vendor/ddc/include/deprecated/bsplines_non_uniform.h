@@ -4,8 +4,7 @@
 #include <vector>
 
 #include "bsplines.h"
-#include "mdomain.h"
-#include "non_uniform_mesh.h"
+#include "view.h"
 
 namespace deprecated {
 

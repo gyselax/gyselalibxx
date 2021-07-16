@@ -1,8 +1,11 @@
 #ifndef MATRIX_PERIODIC_BANDED_H
 #define MATRIX_PERIODIC_BANDED_H
-#include "matrix.h"
+#include <memory>
+
 #include "matrix_corner_block.h"
-#include "matrix_dense.h"
+#include "view.h"
+
+class Matrix;
 
 class Matrix_Periodic_Banded : public Matrix_Corner_Block
 {

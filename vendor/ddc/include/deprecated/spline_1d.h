@@ -1,14 +1,18 @@
 #pragma once
 
-#include <cstdint>
+#include <iosfwd>
 #include <memory>
 #include <type_traits>
 
-#include "boundary_value.h"
-#include "bsplines.h"
 #include "null_boundary_value.h"
+#include "view.h"
+
+#include <experimental/mdspan>
+
+class BoundaryValue;
 
 namespace deprecated {
+class BSplines;
 
 class Spline1D
 {

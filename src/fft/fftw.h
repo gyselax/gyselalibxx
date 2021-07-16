@@ -28,24 +28,24 @@ public:
 
     FftwFourierTransform& operator=(FftwFourierTransform&& x) = default;
 
-    NonUniformMDomain<Fourier<Tags>...> compute_fourier_domain(
-            UniformMDomain<Tags...> const& dom_x) const noexcept override
+    NonUniformMesh<Fourier<Tags...>> compute_fourier_domain(
+            ProductMDomain<UniformMesh<Tags>...> const& dom_x) const noexcept override
     {
         std::vector<double> freqs(dom_x.size());
-        double const inv_Nd = 1. / (dom_x.size() * dom_x.mesh().step());
+        double const inv_Nd = 1. / (dom_x.size() * get<UniformMesh<Tags>...>(dom_x.mesh()).step());
         for (std::size_t ii = 0; ii <= dom_x.size() / 2; ++ii) {
             freqs[ii] = ii * inv_Nd;
         }
         for (std::size_t ii = dom_x.size() / 2 + 1; ii < dom_x.size(); ++ii) {
             freqs[ii] = -((dom_x.size() - ii) * inv_Nd);
         }
-        NonUniformMesh<Fourier<Tags>...> mesh_fx(freqs, 0);
-        return NonUniformMDomain<Fourier<Tags>...>(mesh_fx, freqs.size());
+        return NonUniformMesh<Fourier<Tags>...>(freqs);
     }
 
     void operator()(
-            BlockView<NonUniformMDomain<Fourier<Tags>...>, std::complex<double>> const& out_values,
-            BlockView<UniformMDomain<Tags...>, std::complex<double>> const& in_values)
+            BlockView<ProductMDomain<NonUniformMesh<Fourier<Tags>>...>, std::complex<double>> const&
+                    out_values,
+            BlockView<ProductMDomain<UniformMesh<Tags>...>, std::complex<double>> const& in_values)
             const noexcept override
     {
         assert(in_values.is_contiguous());

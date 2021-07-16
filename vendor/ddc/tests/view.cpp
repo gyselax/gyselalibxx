@@ -1,8 +1,14 @@
+#include <array>
+#include <memory>
 #include <sstream>
 
 #include <gtest/gtest.h>
 
+#include "gtest/gtest_pred_impl.h"
+
 #include "view.h"
+
+#include <experimental/mdspan>
 
 using namespace std;
 using namespace std::experimental;

@@ -1,229 +1,91 @@
 #pragma once
 
 #include "mcoord.h"
+#include "mesh.h"
 #include "non_uniform_mesh.h"
+#include "product_mesh.h"
 #include "rcoord.h"
 #include "uniform_mesh.h"
 #include "view.h"
 
 template <class Mesh>
-class MDomainImpl
+class MDomain
 {
+    static_assert(is_mesh_v<Mesh>, "A mesh is required");
+
 public:
     using mesh_type = Mesh;
 
-    using rcoord_type = typename Mesh::rcoord_type;
+    using rcoord_type = RCoord<typename Mesh::rdim_type>;
 
-    using mcoord_type = typename Mesh::mcoord_type;
+    using mcoord_type = MCoord<Mesh>;
 
-    template <class>
-    friend class MDomainImpl;
-
-    struct Iterator
-    {
-    private:
-        MCoordElement _M_value = MCoordElement();
-
-    public:
-        using iterator_category = std::random_access_iterator_tag;
-
-        using value_type = MCoordElement;
-
-        using difference_type = MLengthElement;
-
-        Iterator() = default;
-
-        constexpr explicit Iterator(MCoordElement __value) : _M_value(__value) {}
-
-        constexpr MCoordElement operator*() const noexcept
-        {
-            return _M_value;
-        }
-
-        constexpr Iterator& operator++()
-        {
-            ++_M_value;
-            return *this;
-        }
-
-        constexpr Iterator operator++(int)
-        {
-            auto __tmp = *this;
-            ++*this;
-            return __tmp;
-        }
-
-        constexpr Iterator& operator--()
-        {
-            --_M_value;
-            return *this;
-        }
-
-        constexpr Iterator operator--(int)
-        {
-            auto __tmp = *this;
-            --*this;
-            return __tmp;
-        }
-
-        constexpr Iterator& operator+=(difference_type __n)
-        {
-            if (__n >= difference_type(0))
-                _M_value += static_cast<MCoordElement>(__n);
-            else
-                _M_value -= static_cast<MCoordElement>(-__n);
-            return *this;
-        }
-
-        constexpr Iterator& operator-=(difference_type __n)
-        {
-            if (__n >= difference_type(0))
-                _M_value -= static_cast<MCoordElement>(__n);
-            else
-                _M_value += static_cast<MCoordElement>(-__n);
-            return *this;
-        }
-
-        constexpr MCoordElement operator[](difference_type __n) const
-        {
-            return MCoordElement(_M_value + __n);
-        }
-
-        friend constexpr bool operator==(Iterator const& xx, Iterator const& yy)
-        {
-            return xx._M_value == yy._M_value;
-        }
-
-        friend constexpr bool operator!=(Iterator const& xx, Iterator const& yy)
-        {
-            return xx._M_value != yy._M_value;
-        }
-
-        friend constexpr bool operator<(Iterator const& xx, Iterator const& yy)
-        {
-            return xx._M_value < yy._M_value;
-        }
-
-        friend constexpr bool operator>(Iterator const& xx, Iterator const& yy)
-        {
-            return yy < xx;
-        }
-
-        friend constexpr bool operator<=(Iterator const& xx, Iterator const& yy)
-        {
-            return !(yy < xx);
-        }
-
-        friend constexpr bool operator>=(Iterator const& xx, Iterator const& yy)
-        {
-            return !(xx < yy);
-        }
-
-        friend constexpr Iterator operator+(Iterator __i, difference_type __n)
-        {
-            return __i += __n;
-        }
-
-        friend constexpr Iterator operator+(difference_type __n, Iterator __i)
-        {
-            return __i += __n;
-        }
-
-        friend constexpr Iterator operator-(Iterator __i, difference_type __n)
-        {
-            return __i -= __n;
-        }
-
-        friend constexpr difference_type operator-(Iterator const& xx, Iterator const& yy)
-        {
-            return (yy._M_value > xx._M_value)
-                           ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
-                           : (xx._M_value - yy._M_value);
-        }
-    };
+    struct Iterator;
 
 private:
     /// The mesh on which this domain is defined
-    mesh_type m_mesh;
+    mesh_type const& m_mesh;
 
     mcoord_type m_lbound;
 
     mcoord_type m_ubound;
 
 public:
-    template <class OMesh>
-    inline constexpr MDomainImpl(MDomainImpl<OMesh> const& other) noexcept
-        : m_mesh(other.m_mesh)
-        , m_lbound(other.m_lbound)
-        , m_ubound(other.m_ubound)
-    {
-    }
+    MDomain() = default;
 
-    template <class OMesh>
-    inline constexpr MDomainImpl(MDomainImpl<OMesh>&& other) noexcept
-        : m_mesh(std::move(other.m_mesh))
-        , m_lbound(std::move(other.m_lbound))
-        , m_ubound(std::move(other.m_ubound))
-    {
-    }
-
-    template <class MeshType, class UboundType>
-    inline constexpr MDomainImpl(MeshType&& mesh, UboundType&& ubound) noexcept
-        : m_mesh(std::forward<MeshType>(mesh))
+    template <class UboundType>
+    inline constexpr MDomain(Mesh const& mesh, UboundType&& ubound) noexcept
+        : m_mesh(mesh)
         , m_lbound(0)
         , m_ubound(std::forward<UboundType>(ubound))
     {
     }
 
-    template <class MeshType, class LboundType, class UboundType>
-    inline constexpr MDomainImpl(MeshType&& mesh, LboundType&& lbound, UboundType&& ubound) noexcept
-        : m_mesh(std::forward<MeshType>(mesh))
-        , m_lbound(std::forward<LboundType>(lbound))
+    template <class LBoundType, class UboundType>
+    inline constexpr MDomain(Mesh const& mesh, LBoundType&& lbound, UboundType&& ubound) noexcept
+        : m_mesh(mesh)
+        , m_lbound(std::forward<LBoundType>(lbound))
         , m_ubound(std::forward<UboundType>(ubound))
     {
-        //         cannot assert in constexpr :/
-        //         assert((m_lbound == mcoord_type {0ul}) && "non null lbound is not supported yet");
     }
 
-    template <class OriginType, class StepType, class LboundType, class UboundType>
-    inline constexpr MDomainImpl(
-            OriginType&& rmin,
-            StepType&& rmax,
-            LboundType&& lbound,
-            UboundType&& ubound) noexcept
-        : m_mesh(
-                rmin + lbound * (rmin - rmax) / (ubound - lbound),
-                ((rmax - rmin) / (ubound - lbound)))
-        , m_lbound(std::forward<LboundType>(lbound))
-        , m_ubound(std::forward<UboundType>(ubound))
-    {
-        //         cannot assert in constexpr :/
-        //         assert((m_lbound == mcoord_type {0ul}) && "non null lbound is not supported yet");
-    }
+    MDomain(MDomain const& x) = default;
 
-    friend constexpr bool operator==(MDomainImpl const& xx, MDomainImpl const& yy)
+    MDomain(MDomain&& x) = default;
+
+    ~MDomain() = default;
+
+    MDomain& operator=(MDomain const& x) = default;
+
+    MDomain& operator=(MDomain&& x) = default;
+
+    friend constexpr bool operator==(MDomain const& xx, MDomain const& yy)
     {
         return (&xx == &yy)
                || (xx.mesh() == yy.mesh() && xx.m_lbound == yy.m_lbound
                    && xx.m_ubound == yy.m_ubound);
     }
 
-    friend constexpr bool operator!=(MDomainImpl const& xx, MDomainImpl const& yy)
+    template <class OMesh>
+    friend constexpr bool operator==(MDomain const& xx, const MDomain<OMesh>& yy)
+    {
+        return false;
+    }
+
+#if __cplusplus <= 201703L
+    // Shall not be necessary anymore in C++20
+    // `a!=b` shall be translated by the compiler to `!(a==b)`
+    friend constexpr bool operator!=(MDomain const& xx, MDomain const& yy)
     {
         return !operator==(xx, yy);
     }
 
     template <class OMesh>
-    friend constexpr bool operator==(MDomainImpl const& xx, const MDomainImpl<OMesh>& yy)
+    friend constexpr bool operator!=(MDomain const& xx, const MDomain<OMesh>& yy)
     {
         return false;
     }
-
-    template <class OMesh>
-    friend constexpr bool operator!=(MDomainImpl const& xx, const MDomainImpl<OMesh>& yy)
-    {
-        return false;
-    }
+#endif
 
     inline constexpr mesh_type const& mesh() const noexcept
     {
@@ -235,25 +97,24 @@ public:
         return m_mesh;
     }
 
+    inline constexpr mcoord_type lbound() const noexcept
+    {
+        return m_lbound;
+    }
+
+    inline constexpr mcoord_type ubound() const noexcept
+    {
+        return m_ubound;
+    }
+
+    inline constexpr std::size_t size() const noexcept
+    {
+        return m_ubound + 1 - m_lbound;
+    }
+
     inline constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
         return m_mesh.to_real(icoord);
-    }
-
-    inline constexpr mcoord_type& lbound() noexcept
-    {
-        return m_lbound;
-    }
-
-    inline constexpr const mcoord_type& lbound() const noexcept
-    {
-        return m_lbound;
-    }
-
-    template <class... OTags>
-    inline constexpr MCoord<OTags...> lbound() const noexcept
-    {
-        return lbound();
     }
 
     inline constexpr rcoord_type rmin() const noexcept
@@ -261,53 +122,16 @@ public:
         return mesh().to_real(lbound());
     }
 
-    template <class... OTags>
-    inline constexpr RCoord<OTags...> rmin() const noexcept
-    {
-        return mesh().to_real(lbound<OTags...>());
-    }
-
-    inline constexpr mcoord_type& ubound() noexcept
-    {
-        return m_ubound;
-    }
-
-    inline constexpr const mcoord_type& ubound() const noexcept
-    {
-        return m_ubound;
-    }
-
-    template <class... OTags>
-    inline constexpr MCoord<OTags...> ubound() const noexcept
-    {
-        return ubound();
-    }
-
     inline constexpr rcoord_type rmax() const noexcept
     {
         return mesh().to_real(ubound());
     }
 
-    template <class... OTags>
-    inline constexpr RCoord<OTags...> rmax() const noexcept
+    inline constexpr auto subdomain(mcoord_type offset, mcoord_type count) const noexcept
     {
-        return mesh().to_real(ubound<OTags...>());
-    }
-
-    template <class QueryTag>
-    inline constexpr std::size_t extent() const noexcept
-    {
-        return get<QueryTag>(m_ubound) - get<QueryTag>(static_cast<mcoord_type>(m_lbound));
-    }
-
-    inline constexpr ExtentsND<Mesh::rank()> extents() const noexcept
-    {
-        return extents(std::make_index_sequence<Mesh::rank()>());
-    }
-
-    inline constexpr std::size_t size() const noexcept
-    {
-        return size(std::make_index_sequence<mesh_type::rank()>());
+        assert(count > 0);
+        assert(offset + count <= size());
+        return MDomain(m_mesh, m_lbound + offset, m_lbound + offset + count - 1);
     }
 
     inline constexpr bool empty() const noexcept
@@ -322,25 +146,21 @@ public:
 
     constexpr Iterator begin() const noexcept
     {
-        static_assert(mesh_type::rank() == 1);
-        return Iterator {static_cast<mcoord_type>(m_lbound)};
+        return Iterator {0};
     }
 
     constexpr Iterator cbegin() const noexcept
     {
-        static_assert(mesh_type::rank() == 1);
         return begin();
     }
 
     constexpr Iterator end() const noexcept
     {
-        static_assert(mesh_type::rank() == 1);
-        return Iterator {static_cast<mcoord_type>(m_ubound)};
+        return Iterator {size()};
     }
 
     constexpr Iterator cend() const noexcept
     {
-        static_assert(mesh_type::rank() == 1);
         return end();
     }
 
@@ -359,41 +179,128 @@ public:
     {
         return begin()[__n];
     }
-
-private:
-    template <size_t... Idxs>
-    inline constexpr std::size_t size(std::index_sequence<Idxs...>) const noexcept
-    {
-        return ((m_ubound[Idxs] - m_lbound[Idxs]) * ...);
-    }
-
-    template <size_t... Idxs>
-    inline constexpr ExtentsND<sizeof...(Idxs)> extents(std::index_sequence<Idxs...>) const noexcept
-    {
-        return ExtentsND<sizeof...(Idxs)>((m_ubound[Idxs] - m_lbound[Idxs])...);
-    }
 };
 
-template <class QTag, class... CTags>
-auto get_slicer_for(MCoord<CTags...> const& c)
-{
-    if constexpr (has_tag_v<QTag, MCoord<CTags...>>) {
-        return c.template get<QTag>();
-    } else {
-        return std::experimental::all;
-    }
-}
-
 template <class Mesh>
-std::ostream& operator<<(std::ostream& out, MDomainImpl<Mesh> const& dom)
+struct MDomain<Mesh>::Iterator
 {
-    out << "MDomain( origin=" << dom.mesh().origin() << ", unitvec=" << dom.mesh().step()
-        << ", lower_bound=" << dom.lbound() << ", upper_bound(excluded)=" << dom.ubound() << " )";
-    return out;
-}
+private:
+    MCoordElement _M_value = MCoordElement();
 
-template <class... Tags>
-using UniformMDomain = MDomainImpl<UniformMesh<Tags...>>;
+public:
+    using iterator_category = std::random_access_iterator_tag;
 
-template <class... Tag>
-using NonUniformMDomain = MDomainImpl<NonUniformMesh<Tag...>>;
+    using value_type = MCoordElement;
+
+    using difference_type = MLengthElement;
+
+    Iterator() = default;
+
+    constexpr explicit Iterator(MCoordElement __value) : _M_value(__value) {}
+
+    constexpr MCoordElement operator*() const noexcept
+    {
+        return _M_value;
+    }
+
+    constexpr Iterator& operator++()
+    {
+        ++_M_value;
+        return *this;
+    }
+
+    constexpr Iterator operator++(int)
+    {
+        auto __tmp = *this;
+        ++*this;
+        return __tmp;
+    }
+
+    constexpr Iterator& operator--()
+    {
+        --_M_value;
+        return *this;
+    }
+
+    constexpr Iterator operator--(int)
+    {
+        auto __tmp = *this;
+        --*this;
+        return __tmp;
+    }
+
+    constexpr Iterator& operator+=(difference_type __n)
+    {
+        if (__n >= difference_type(0))
+            _M_value += static_cast<MCoordElement>(__n);
+        else
+            _M_value -= static_cast<MCoordElement>(-__n);
+        return *this;
+    }
+
+    constexpr Iterator& operator-=(difference_type __n)
+    {
+        if (__n >= difference_type(0))
+            _M_value -= static_cast<MCoordElement>(__n);
+        else
+            _M_value += static_cast<MCoordElement>(-__n);
+        return *this;
+    }
+
+    constexpr MCoordElement operator[](difference_type __n) const
+    {
+        return MCoordElement(_M_value + __n);
+    }
+
+    friend constexpr bool operator==(Iterator const& xx, Iterator const& yy)
+    {
+        return xx._M_value == yy._M_value;
+    }
+
+    friend constexpr bool operator!=(Iterator const& xx, Iterator const& yy)
+    {
+        return xx._M_value != yy._M_value;
+    }
+
+    friend constexpr bool operator<(Iterator const& xx, Iterator const& yy)
+    {
+        return xx._M_value < yy._M_value;
+    }
+
+    friend constexpr bool operator>(Iterator const& xx, Iterator const& yy)
+    {
+        return yy < xx;
+    }
+
+    friend constexpr bool operator<=(Iterator const& xx, Iterator const& yy)
+    {
+        return !(yy < xx);
+    }
+
+    friend constexpr bool operator>=(Iterator const& xx, Iterator const& yy)
+    {
+        return !(xx < yy);
+    }
+
+    friend constexpr Iterator operator+(Iterator __i, difference_type __n)
+    {
+        return __i += __n;
+    }
+
+    friend constexpr Iterator operator+(difference_type __n, Iterator __i)
+    {
+        return __i += __n;
+    }
+
+    friend constexpr Iterator operator-(Iterator __i, difference_type __n)
+    {
+        return __i -= __n;
+    }
+
+    friend constexpr difference_type operator-(Iterator const& xx, Iterator const& yy)
+    {
+        return (yy._M_value > xx._M_value)
+                       ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
+                       : (xx._M_value - yy._M_value);
+    }
+};

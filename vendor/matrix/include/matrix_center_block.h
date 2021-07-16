@@ -1,6 +1,11 @@
 #ifndef MATRIX_CENTER_BLOCK_H
 #define MATRIX_CENTER_BLOCK_H
+#include <memory>
+
 #include "matrix_corner_block.h"
+#include "view.h"
+
+class Matrix;
 
 class Matrix_Center_Block : public Matrix_Corner_Block
 {

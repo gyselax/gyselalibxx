@@ -2,10 +2,10 @@
 
 #include "rcoord.h"
 
-template <class... Tags>
+template <class... RDim>
 struct RDomain
 {
-    RCoord<Tags...> start;
+    RCoord<RDim...> start;
 
-    RCoord<Tags...> end;
+    RCoord<RDim...> end;
 };

@@ -1,172 +1,122 @@
 #pragma once
 
+#include <cassert>
+
 #include "mcoord.h"
+#include "mesh.h"
 #include "rcoord.h"
 #include "taggedarray.h"
 
-template <class... Tags>
-class UniformMesh
+/// @class UniformMesh
+/// @brief models a uniform discretization of the `RDim` half-line \f$[O, +\infty[\f$.
+template <class RDim>
+class UniformMesh : public Mesh
 {
 public:
-    using rcoord_type = RCoord<Tags...>;
+    using rcoord_type = RCoord<RDim>;
 
-    using rlength_type = RLength<Tags...>;
+    using rlength_type = RLength<RDim>;
 
-    using mcoord_type = MCoord<Tags...>;
+    using mcoord_type = MCoord<UniformMesh>;
 
-    // temporary workaround in case the parameter pack Tags... is empty
-    using tag_type = std::tuple_element_t<
-            0,
-            std::conditional_t<sizeof...(Tags) == 0, std::tuple<void>, std::tuple<Tags...>>>;
-
-    // The two Mesh and Mesh_ need better names to avoid ambiguity
-    using Mesh_ = UniformMesh<Tags...>;
-
-    template <class... OTags>
-    using Mesh = UniformMesh<OTags...>;
+    using rdim_type = RDim;
 
 public:
-    template <class QueryTag>
-    static constexpr std::size_t tag_rank()
+    static constexpr std::size_t rank()
     {
-        return detail::RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
+        return 1;
     }
 
 private:
-    /// origin
-    rcoord_type m_origin;
+    double m_origin = 0.;
 
-    /// step size
-    rlength_type m_step;
-
-    template <class...>
-    friend class UniformMesh;
+    double m_step = 1.;
 
 public:
-    template <class... OTags>
-    inline constexpr UniformMesh(const UniformMesh<OTags...>& other) noexcept
-        : m_origin(other.m_origin)
-        , m_step(other.m_step)
+    UniformMesh() = default;
+
+    /// @brief Construct a `UniformMesh` from a point and a spacing step.
+    constexpr UniformMesh(rcoord_type origin, rcoord_type step) : m_origin(origin), m_step(step) {}
+
+    /// @brief Construct a `UniformMesh` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
+    constexpr UniformMesh(rcoord_type a, rcoord_type b, std::size_t n)
+        : m_origin(a)
+        , m_step((b - a) / (n - 1))
     {
+        assert(a < b);
+        assert(n > 1);
     }
 
-    template <class... OTags>
-    inline constexpr UniformMesh(UniformMesh<OTags...>&& other) noexcept
-        : m_origin(std::move(other.m_origin))
-        , m_step(std::move(other.m_step))
+    UniformMesh(UniformMesh const& x) = default;
+
+    UniformMesh(UniformMesh&& x) = default;
+
+    ~UniformMesh() = default;
+
+    UniformMesh& operator=(UniformMesh const& x) = default;
+
+    UniformMesh& operator=(UniformMesh&& x) = default;
+
+    constexpr bool operator==(UniformMesh const& other) const
     {
+        return m_origin == other.m_origin && m_step == other.m_step;
     }
 
-    inline constexpr UniformMesh(rcoord_type origin, rcoord_type step) noexcept
-        : m_origin(std::move(origin))
-        , m_step(std::move(step))
-    {
-    }
-
-    friend constexpr bool operator==(const UniformMesh& xx, const UniformMesh& yy)
-    {
-        return (&xx == &yy) || (xx.m_origin == yy.m_origin && xx.m_step == yy.m_step);
-    }
-
-    friend constexpr bool operator!=(const UniformMesh& xx, const UniformMesh& yy)
-    {
-        return (&xx != &yy) && (xx.m_origin != yy.m_origin || xx.m_step != yy.m_step);
-    }
-
-    template <class... OTags>
-    friend constexpr bool operator==(const UniformMesh& xx, const UniformMesh<OTags...>& yy)
-    {
-        return false;
-    }
-
-    template <class... OTags>
-    friend constexpr bool operator!=(const UniformMesh& xx, const UniformMesh<OTags...>& yy)
+    template <class ORDim>
+    constexpr bool operator==(UniformMesh<ORDim> const& other) const
     {
         return false;
     }
 
-    static inline constexpr size_t rank() noexcept
+#if __cplusplus <= 201703L
+    // Shall not be necessary anymore in C++20
+    // `a!=b` shall be translated by the compiler to `!(a==b)`
+    constexpr bool operator!=(UniformMesh const& other) const
     {
-        return sizeof...(Tags);
+        return !(*this == other);
     }
 
-    inline constexpr rcoord_type origin() const noexcept
+    template <class ORDim>
+    constexpr bool operator!=(UniformMesh<ORDim> const& other) const
+    {
+        return !(*this == other);
+    }
+#endif
+
+    /// @brief Lower bound index of the mesh
+    constexpr mcoord_type lbound() const noexcept
+    {
+        return 0;
+    }
+
+    /// @brief Lower bound index of the mesh
+    constexpr rcoord_type origin() const noexcept
     {
         return m_origin;
     }
 
-    inline constexpr rlength_type step() const noexcept
+    /// @brief Spacing step of the mesh
+    constexpr rcoord_type step() const
     {
         return m_step;
     }
 
-    inline constexpr rcoord_type to_real(const mcoord_type& icoord) const noexcept
+    /// @brief Convert a mesh index into a position in `RDim`
+    constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
-        return rcoord_type((::get<Tags>(origin()) + ::get<Tags>(icoord) * ::get<Tags>(m_step))...);
+        assert(icoord >= lbound());
+        return m_origin + icoord * m_step;
     }
 
-    template <class... OTags>
-    inline constexpr RCoord<OTags...> to_real(const MCoord<OTags...>& icoord) const noexcept
+    /// @brief Position of the lower bound in `RDim`
+    constexpr rcoord_type rmin() const noexcept
     {
-        return RCoord<OTags...>(
-                (::get<OTags>(origin()) + ::get<OTags>(icoord) * ::get<OTags>(m_step))...);
+        return m_origin;
     }
 };
 
-namespace detail {
-
-template <
-        class... SelectedTags,
-        class TagsHead,
-        class... TagsQueue,
-        class... AllTags,
-        class SliceSpec>
-inline constexpr auto append_if_all(
-        UniformMesh<SelectedTags...>,
-        UniformMesh<TagsHead>,
-        UniformMesh<AllTags...> m,
-        SliceSpec) noexcept
+template <class RDim>
+std::ostream& operator<<(std::ostream& out, UniformMesh<RDim> const& mesh)
 {
-    static_assert(
-            std::is_integral_v<
-                    SliceSpec> || std::is_same_v<std::experimental::all_type, SliceSpec>);
-    if constexpr (std::is_integral_v<SliceSpec>) {
-        return UniformMesh<SelectedTags...>(m);
-    } else {
-        return UniformMesh<TagsHead, SelectedTags...>(m);
-    }
-}
-
-
-template <class TagsHead, class... TagsQueue, class SliceSpecsHead, class... SliceSpecsQueue>
-inline constexpr auto select_tags(
-        UniformMesh<TagsHead, TagsQueue...> m,
-        SliceSpecsHead&& h,
-        SliceSpecsQueue&&... q) noexcept
-{
-    static_assert(sizeof...(TagsQueue) == sizeof...(SliceSpecsQueue));
-    if constexpr (sizeof...(TagsQueue) > 0) {
-        return append_if_all(
-                select_tags(UniformMesh<TagsQueue...>(m), q...),
-                UniformMesh<TagsHead>(m),
-                m,
-                h);
-    } else {
-        return append_if_all(UniformMesh<>(RCoord<>(), RLength<>()), m, m, h);
-    }
-}
-
-} // namespace detail
-
-template <class... Tags>
-std::ostream& operator<<(std::ostream& out, UniformMesh<Tags...> const& dom)
-{
-    return out << "UniformMesh( origin=" << dom.origin() << ", unitvec=" << dom.step() << " )";
-}
-
-template <class... Tags, class... SliceSpecs>
-inline constexpr auto submesh(const UniformMesh<Tags...>& mesh, SliceSpecs... slices) noexcept
-{
-    using ReturnType = decltype(detail::select_tags(mesh, std::forward<SliceSpecs>(slices)...));
-    return ReturnType(mesh);
+    return out << "UniformMesh( origin=" << mesh.origin() << ", unitvec=" << mesh.step() << " )";
 }

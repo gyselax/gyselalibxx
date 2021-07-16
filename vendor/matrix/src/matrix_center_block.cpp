@@ -1,5 +1,8 @@
+#include <utility>
+
 #include <string.h> //for memcpy
 
+#include "matrix.h"
 #include "matrix_center_block.h"
 
 Matrix_Center_Block::Matrix_Center_Block(

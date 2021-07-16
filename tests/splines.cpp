@@ -1,16 +1,25 @@
+#include <algorithm>
 #include <array>
 #include <cassert>
 #include <cmath>
-#include <string>
+#include <iosfwd>
+#include <memory>
+#include <tuple>
 #include <vector>
 
 #include <gtest/gtest.h>
+#include <stdlib.h>
 
 #include "deprecated/bsplines.h"
 #include "deprecated/bsplines_uniform.h"
+#include "deprecated/spline_1d.h"
+#include "gtest/gtest_pred_impl.h"
 
 #include "boundary_conditions.h"
 #include "spline_builder_1d.h"
+#include "view.h"
+
+#include <experimental/mdspan>
 
 using namespace std;
 using namespace std::experimental;

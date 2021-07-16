@@ -1,13 +1,25 @@
 #include <cassert>
-#include <cmath>
-#include <vector>
+#include <iosfwd>
 
-#include <block.h>
 #include <deepcopy.h>
 
+#include "deprecated/bsplines.h"
 #include "deprecated/spline_1d.h"
 
+#include "blockview.h"
+#include "mcoord.h"
+#include "mdomain.h"
+#include "null_boundary_value.h"
+#include "product_mdomain.h"
+#include "product_mesh.h"
+#include "rcoord.h"
+#include "spline_builder_1d.h"
 #include "splineadvectionx.h"
+#include "taggedarray.h"
+
+#include <experimental/mdspan>
+
+class BoundaryValue;
 
 using namespace std;
 using namespace std::experimental;
@@ -41,8 +53,8 @@ DBlockSpanXVx SplineAdvectionX::operator()(DBlockSpanXVx fdistribu, double mass_
     //TODO: spline on mesh
     //assert(get_domain<Dim::X>(fdistribu) == m_spline_interpolator.domain());
 
-    const MDomainX& x_dom = get_domain<Dim::X>(fdistribu);
-    const MDomainVx& v_dom = get_domain<Dim::Vx>(fdistribu);
+    const MDomainX& x_dom = get_domain<MeshX>(fdistribu);
+    const MDomainVx& v_dom = get_domain<MeshVx>(fdistribu);
 
     // pre-allocate some memory to prevent allocation later in loop
     //TODO: spline on mesh

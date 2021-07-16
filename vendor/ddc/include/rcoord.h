@@ -4,10 +4,10 @@
 
 using RCoordElement = double;
 
-template <class... Tags>
-using RCoord = TaggedArray<RCoordElement, Tags...>;
+template <class... RDim>
+using RCoord = TaggedArray<RCoordElement, RDim...>;
 
 using RLengthElement = double;
 
-template <class... Tags>
-using RLength = TaggedArray<RLengthElement, Tags...>;
+template <class... RDim>
+using RLength = TaggedArray<RLengthElement, RDim...>;

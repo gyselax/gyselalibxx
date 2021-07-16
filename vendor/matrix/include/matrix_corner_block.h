@@ -4,6 +4,7 @@
 
 #include "matrix.h"
 #include "matrix_dense.h"
+#include "view.h"
 
 class Matrix_Corner_Block : public Matrix
 {

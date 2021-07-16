@@ -1,8 +1,16 @@
-#include <gmock/gmock.h>
+#include <memory>
+
+#include <gmock/gmock-actions.h>
+#include <gmock/gmock-function-mocker.h>
+#include <gmock/gmock-spec-builders.h>
 #include <gtest/gtest.h>
 
-#include "block.h"
+#include "gtest/gtest_pred_impl.h"
+
 #include "blockview.h"
+#include "geometry.h"
+#include "iadvectionvx.h"
+#include "iadvectionx.h"
 #include "splitvlasovsolver.h"
 
 class MockAdvectionX : public IAdvectionX
@@ -37,7 +45,10 @@ using namespace ::testing;
 
 TEST(SplitVlasovSolver, ordering)
 {
-    MDomainXVx const dom(RCoordXVx(0., 0.), RCoordXVx(2., 2.), MCoordXVx(0, 0), MCoordXVx(1, 1));
+    MeshX mesh_x(RCoordX(0.), RCoordX(2.));
+    MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.));
+    ProductMesh mesh_x_vx(mesh_x, mesh_vx);
+    MDomainXVx const dom(mesh_x_vx, MCoordXVx(0, 0), MCoordXVx(0, 0));
     DBlockXVx const fdistribu(dom);
     DBlockSpanXVx const fdistribu_s(fdistribu);
     double const mass_ratio = 1.;

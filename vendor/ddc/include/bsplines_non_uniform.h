@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <cassert>
 #include <memory>
 #include <vector>
@@ -7,17 +8,19 @@
 #include "bsplines.h"
 #include "mdomain.h"
 #include "non_uniform_mesh.h"
-#include "rdomain.h"
+#include "product_mdomain.h"
 #include "view.h"
 
 /// NonUniformMesh specialization of BSplines
 template <class Tag, std::size_t D>
-class BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>
+class BSplines<NonUniformMesh<Tag>, D>
 {
     static_assert(D > 0, "Parameter `D` must be positive");
 
 private:
-    using domain_type = MDomainImpl<NonUniformMesh<Tag>>;
+    using mesh_type = NonUniformMesh<Tag>;
+
+    using domain_type = ProductMDomain<mesh_type>;
 
 public:
     using tag_type = Tag;
@@ -26,7 +29,7 @@ public:
 
     using rlength_type = RLength<Tag>;
 
-    using mcoord_type = MCoord<Tag>;
+    using mcoord_type = MCoord<BSplines>;
 
 public:
     static constexpr std::size_t degree() noexcept
@@ -50,7 +53,9 @@ public:
     }
 
 private:
-    domain_type const& m_domain;
+    mesh_type m_mesh;
+
+    MDomain<mesh_type> m_domain;
 
     std::vector<double> m_knots;
 
@@ -91,7 +96,7 @@ public:
 
     double rmax() const noexcept
     {
-        return m_domain.mesh().to_real(m_domain.ubound() - 1);
+        return m_domain.rmax();
     }
 
     double length() const noexcept
@@ -131,42 +136,40 @@ private:
 };
 
 template <class Tag, std::size_t D>
-BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::BSplines(domain_type const& domain)
-    : m_domain(domain)
-    , m_knots(domain.size() + 2 * degree())
+BSplines<NonUniformMesh<Tag>, D>::BSplines(domain_type const& domain)
+    : m_mesh(get<mesh_type>(domain).mesh())
+    , m_domain(m_mesh, domain.lbound(), domain.ubound())
+    , m_knots(m_domain.size() + 2 * degree())
 {
     assert(ncells() > 0);
     assert(rmin() < rmax());
     assert(npoints() == ncells() + 1);
 
-    auto&& mesh = domain.mesh();
-
     for (int i(0); i < npoints(); ++i) {
-        get_knot(i) = mesh.to_real(domain[i]);
+        get_knot(i) = m_mesh.to_real(m_domain[i]);
     }
 
     // Fill out the extra nodes
     if constexpr (is_periodic()) {
-        double period = mesh.to_real(domain[npoints() - 1]) - mesh.to_real(domain[0]);
+        double period = m_mesh.to_real(m_domain[npoints() - 1]) - m_mesh.to_real(m_domain[0]);
         for (int i(1); i < degree() + 1; ++i) {
-            get_knot(-i) = mesh.to_real(domain[npoints() - 1 - i]) - period;
-            get_knot(npoints() - 1 + i) = mesh.to_real(domain[i]) + period;
+            get_knot(-i) = m_mesh.to_real(m_domain[npoints() - 1 - i]) - period;
+            get_knot(npoints() - 1 + i) = m_mesh.to_real(m_domain[i]) + period;
         }
     } else // open
     {
         for (int i(1); i < degree() + 1; ++i) {
-            get_knot(-i) = mesh.to_real(domain[0]);
-            get_knot(npoints() - 1 + i) = mesh.to_real(domain[npoints() - 1]);
+            get_knot(-i) = m_mesh.to_real(m_domain[0]);
+            get_knot(npoints() - 1 + i) = m_mesh.to_real(m_domain[npoints() - 1]);
         }
     }
 }
 
 template <class Tag, std::size_t D>
-void BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::eval_basis(double x, DSpan1D& values, int& jmin)
-        const
+void BSplines<NonUniformMesh<Tag>, D>::eval_basis(double x, DSpan1D& values, int& jmin) const
 {
-    std::vector<double> left(degree());
-    std::vector<double> right(degree());
+    std::array<double, degree()> left;
+    std::array<double, degree()> right;
 
     assert(x >= rmin());
     assert(x <= rmax());
@@ -200,11 +203,10 @@ void BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::eval_basis(double x, DSpan1D
 }
 
 template <class Tag, std::size_t D>
-void BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::eval_deriv(double x, DSpan1D& derivs, int& jmin)
-        const
+void BSplines<NonUniformMesh<Tag>, D>::eval_deriv(double x, DSpan1D& derivs, int& jmin) const
 {
-    std::vector<double> left(degree());
-    std::vector<double> right(degree());
+    std::array<double, degree()> left;
+    std::array<double, degree()> right;
 
     assert(x >= rmin());
     assert(x <= rmax());
@@ -258,20 +260,20 @@ void BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::eval_deriv(double x, DSpan1D
 }
 
 template <class Tag, std::size_t D>
-void BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::eval_basis_and_n_derivs(
+void BSplines<NonUniformMesh<Tag>, D>::eval_basis_and_n_derivs(
         double x,
         int n,
         DSpan2D& derivs,
         int& jmin) const
 {
-    std::vector<double> left(degree());
-    std::vector<double> right(degree());
+    std::array<double, degree()> left;
+    std::array<double, degree()> right;
 
-    std::vector<double> a_ptr(2 * (degree() + 1));
+    std::array<double, 2 * (degree() + 1)> a_ptr;
     std::experimental::mdspan<double, std::experimental::dynamic_extent, 2>
             a(a_ptr.data(), degree() + 1);
 
-    std::vector<double> ndu_ptr((degree() + 1) * (degree() + 1));
+    std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
     DSpan2D ndu(ndu_ptr.data(), degree() + 1, degree() + 1);
 
     assert(x >= rmin());
@@ -362,7 +364,7 @@ void BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::eval_basis_and_n_derivs(
 }
 
 template <class Tag, std::size_t D>
-int BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::find_cell(double x) const
+int BSplines<NonUniformMesh<Tag>, D>::find_cell(double x) const
 {
     if (x > rmax())
         return -1;
@@ -389,7 +391,7 @@ int BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::find_cell(double x) const
 }
 
 template <class Tag, std::size_t D>
-void BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::integrals(DSpan1D& int_vals) const
+void BSplines<NonUniformMesh<Tag>, D>::integrals(DSpan1D& int_vals) const
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
 
@@ -407,4 +409,4 @@ void BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>::integrals(DSpan1D& int_vals)
 }
 
 template <class Tag, std::size_t D>
-using NonUniformBSplines = BSplines<MDomainImpl<NonUniformMesh<Tag>>, D>;
+using NonUniformBSplines = BSplines<NonUniformMesh<Tag>, D>;

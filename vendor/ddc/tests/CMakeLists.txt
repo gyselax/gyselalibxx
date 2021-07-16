@@ -4,16 +4,15 @@ include(GoogleTest)
 
 add_executable(ddc_tests
 	block.cpp
-        deprecated/bsplines_non_uniform.cpp
-        deprecated/bsplines_uniform.cpp
         bsplines_uniform.cpp
         bsplines_non_uniform.cpp
         spline_builder.cpp
-        product_mesh.cpp
 	mdomain.cpp
 	mcoord.cpp
+        product_mdomain.cpp
+        product_mesh.cpp
 	non_uniform_mesh.cpp
-        nonuniformdomain.cpp
+	uniform_mesh.cpp
         single_mesh.cpp
 	taggedarray.cpp
 	view.cpp

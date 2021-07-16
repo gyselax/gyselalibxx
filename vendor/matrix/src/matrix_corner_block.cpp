@@ -1,8 +1,11 @@
 #include <cassert>
+#include <utility>
 
 #include <string.h>
 
 #include "matrix_corner_block.h"
+
+#include <experimental/mdspan>
 
 Matrix_Corner_Block::Matrix_Corner_Block(int n, int k, std::unique_ptr<Matrix> q)
     : Matrix(n)

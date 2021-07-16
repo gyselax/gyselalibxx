@@ -53,10 +53,12 @@ public:
     using bsplines_type = BSplines;
 
     // No need to check boundary conditions, it shall fail if it periodic with non-periodic boundary conditions
-    using interpolation_domain_type = std::conditional_t<
+    using interpolation_mesh_type = std::conditional_t<
             BSplines::is_uniform() && BSplines::is_periodic(),
-            MDomainImpl<UniformMesh<tag_type>>,
-            MDomainImpl<NonUniformMesh<tag_type>>>;
+            UniformMesh<tag_type>,
+            NonUniformMesh<tag_type>>;
+
+    using interpolation_domain_type = ProductMDomain<interpolation_mesh_type>;
 
 private:
     static constexpr bool s_odd = BSplines::degree() % 2;
@@ -71,6 +73,8 @@ public:
     static int compute_num_cells(int degree, BoundCond xmin, BoundCond xmax, int nipts);
 
 private:
+    std::unique_ptr<interpolation_mesh_type> m_interpolation_mesh;
+
     std::unique_ptr<interpolation_domain_type> m_interpolation_domain;
 
     bsplines_type const& m_bsplines;
@@ -192,7 +196,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
         spline(i) = 0.0;
     }
 
-    for (int i(0); i < m_interpolation_domain->template extent<tag_type>(); ++i) {
+    for (int i(0); i < m_interpolation_domain->extents(); ++i) {
         spline(s_nbc_xmin + i + s_offset) = vals(i);
     }
 
@@ -230,9 +234,11 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
 
     if constexpr (BcXmin == BoundCond::PERIODIC) {
         double const shift(!s_odd ? 0.5 : 0.0);
-        UniformMesh<tag_type> mesh(m_bsplines.rmin() + shift * m_dx, m_dx);
-        m_interpolation_domain
-                = std::make_unique<interpolation_domain_type>(mesh, MCoord<tag_type>(n_interp_pts));
+        m_interpolation_mesh
+                = std::make_unique<interpolation_mesh_type>(m_bsplines.rmin() + shift * m_dx, m_dx);
+        m_interpolation_domain = std::make_unique<interpolation_domain_type>(
+                ProductMesh(*m_interpolation_mesh),
+                MCoord<UniformMesh<tag_type>>(n_interp_pts - 1));
     } else {
         std::vector<double> interp_pts(n_interp_pts);
 
@@ -272,9 +278,10 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
             interp_pts[0] = m_bsplines.rmin();
             interp_pts[n_interp_pts - 1] = m_bsplines.rmax();
         }
-        NonUniformMesh<tag_type> mesh(interp_pts, MCoord<tag_type>(0));
-        m_interpolation_domain = std::make_unique<
-                interpolation_domain_type>(mesh, MCoord<tag_type>(interp_pts.size()));
+        m_interpolation_mesh = std::make_unique<interpolation_mesh_type>(interp_pts);
+        m_interpolation_domain = std::make_unique<interpolation_domain_type>(
+                ProductMesh(*m_interpolation_mesh),
+                MCoord<NonUniformMesh<tag_type>>(interp_pts.size()));
     }
 }
 
@@ -343,9 +350,10 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
         }
     }
 
-    NonUniformMesh<tag_type> mesh(interp_pts, MCoord<tag_type>(0));
-    m_interpolation_domain = std::make_unique<
-            interpolation_domain_type>(mesh, MCoord<tag_type>(interp_pts.size()));
+    m_interpolation_mesh = std::make_unique<interpolation_mesh_type>(interp_pts);
+    m_interpolation_domain = std::make_unique<interpolation_domain_type>(
+            ProductMesh(*m_interpolation_mesh),
+            MCoord<NonUniformMesh<tag_type>>(interp_pts.size()));
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -1,23 +1,22 @@
 #pragma once
 
 #include "blockview.h"
-#include "bsplines_uniform.h"
+#include "bsplines.h"
 #include "mdomain.h"
 
-template <class Tag, std::size_t D, class ElementType>
-class Block<UniformBSplines<Tag, D>, ElementType>
-    : public BlockView<UniformBSplines<Tag, D>, ElementType>
+template <class Mesh, std::size_t D, class ElementType>
+class Block<BSplines<Mesh, D>, ElementType> : public BlockView<BSplines<Mesh, D>, ElementType>
 {
 public:
     /// ND view on this block
-    using block_view_type = BlockView<UniformBSplines<Tag, D>, ElementType>;
+    using block_view_type = BlockView<BSplines<Mesh, D>, ElementType>;
 
-    using block_span_type = BlockView<UniformBSplines<Tag, D>, ElementType const>;
+    using block_span_type = BlockView<BSplines<Mesh, D>, ElementType const>;
 
     /// ND memory view
     using raw_view_type = SpanND<1, ElementType>;
 
-    using bsplines_type = UniformBSplines<Tag, D>;
+    using bsplines_type = BSplines<Mesh, D>;
 
     using mcoord_type = typename bsplines_type::mcoord_type;
 
@@ -42,7 +41,7 @@ public:
 public:
     /** Construct a Block on a domain with uninitialized values
      */
-    explicit inline constexpr Block(UniformBSplines<Tag, D> const& bsplines)
+    explicit inline constexpr Block(BSplines<Mesh, D> const& bsplines)
         : block_view_type(
                 bsplines,
                 raw_view_type(
@@ -97,13 +96,17 @@ public:
         return this->m_bsplines;
     }
 
-    template <class... IndexType>
+    template <
+            class... IndexType,
+            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
     inline constexpr ElementType const& operator()(IndexType&&... indices) const noexcept
     {
         return this->m_raw(std::forward<IndexType>(indices)...);
     }
 
-    template <class... IndexType>
+    template <
+            class... IndexType,
+            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
     inline constexpr ElementType& operator()(IndexType&&... indices) noexcept
     {
         return this->m_raw(std::forward<IndexType>(indices)...);

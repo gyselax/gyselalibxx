@@ -265,16 +265,17 @@ inline constexpr ElementType& get(TaggedArray<ElementType, Tags...>& tuple) noex
 }
 
 template <class... QueryTags, class ElementType, class... Tags>
-inline constexpr TaggedArray<QueryTags...> select(
+inline constexpr TaggedArray<ElementType, QueryTags...> select(
         TaggedArray<ElementType, Tags...> const& arr) noexcept
 {
-    return TaggedArray<QueryTags...>(arr);
+    return TaggedArray<ElementType, QueryTags...>(arr);
 }
 
 template <class... QueryTags, class ElementType, class... Tags>
-inline constexpr TaggedArray<QueryTags...> select(TaggedArray<ElementType, Tags...>&& arr) noexcept
+inline constexpr TaggedArray<ElementType, QueryTags...> select(
+        TaggedArray<ElementType, Tags...>&& arr) noexcept
 {
-    return TaggedArray<QueryTags...>(std::move(arr));
+    return TaggedArray<ElementType, QueryTags...>(std::move(arr));
 }
 
 template <class ElementType, class Tag0, class Tag1, class... Tags>
@@ -298,7 +299,10 @@ public:
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedArray(TaggedArray<OElementType, OTags...>&& other) noexcept
-        : Super {std::move(::get<Tag0>), std::move(::get<Tag1>), std::move(::get<Tags>(other))...}
+        : Super {
+                std::move(::get<Tag0>(other)),
+                std::move(::get<Tag1>(other)),
+                std::move(::get<Tags>(other))...}
     {
     }
 
@@ -311,6 +315,10 @@ public:
         : Super {static_cast<ElementType>(std::forward<Params>(params))...}
     {
     }
+
+    inline constexpr TaggedArray& operator=(TaggedArray const&) = default;
+
+    inline constexpr TaggedArray& operator=(TaggedArray&&) = default;
 };
 
 template <class ElementType, class Tag>

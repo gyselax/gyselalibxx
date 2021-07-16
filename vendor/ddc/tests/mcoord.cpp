@@ -1,6 +1,12 @@
+#include <iosfwd>
+#include <memory>
+
 #include <gtest/gtest.h>
 
+#include "gtest/gtest_pred_impl.h"
+
 #include "mcoord.h"
+#include "taggedarray.h"
 
 #include <experimental/mdspan>
 

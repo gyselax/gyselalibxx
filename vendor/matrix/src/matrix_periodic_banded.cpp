@@ -1,10 +1,13 @@
 #include <algorithm>
 #include <cassert>
 #include <cmath>
-#include <cstring> // for memset
+#include <utility>
 
-#include "matrix_banded.h"
+#include "matrix.h"
+#include "matrix_dense.h"
 #include "matrix_periodic_banded.h"
+
+#include <experimental/mdspan>
 
 using std::max;
 using std::min;

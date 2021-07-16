@@ -1,3 +1,5 @@
+#include "iadvectionvx.h"
+#include "iadvectionx.h"
 #include "splitvlasovsolver.h"
 
 SplitVlasovSolver::SplitVlasovSolver(const IAdvectionX& advec_x, const IAdvectionVx& m_advec_vx)
