@@ -78,7 +78,7 @@ protected:
     template <class QueryMesh, class... OMeshes>
     static auto get_slicer_for(MCoord<OMeshes...> const& c)
     {
-        if constexpr (has_tag_v<QueryMesh, MCoord<OMeshes...>>) {
+        if constexpr (in_tags_v<QueryMesh, detail::TypeSeq<OMeshes...>>) {
             return c.template get<QueryMesh>();
         } else {
             return std::experimental::full_extent;

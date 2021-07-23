@@ -6,21 +6,6 @@
 
 #include "taggedarray.h"
 
-namespace detail {
-template <class...>
-struct TypeSeq;
-template <class>
-struct SingleType;
-} // namespace detail
-
-TEST(TagRank, Rank)
-{
-    using namespace detail;
-    ASSERT_EQ((RankIn<SingleType<int>, TypeSeq<int, double, float>>::val), 0);
-    ASSERT_EQ((RankIn<SingleType<double>, TypeSeq<int, double, float>>::val), 1);
-    ASSERT_EQ((RankIn<SingleType<float>, TypeSeq<int, double, float>>::val), 2);
-}
-
 TEST(TaggedArray, Constructor)
 {
     TaggedArray<int, double, float> map(1, 2);

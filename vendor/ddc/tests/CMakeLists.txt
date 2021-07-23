@@ -15,6 +15,7 @@ add_executable(ddc_tests
 	uniform_mesh.cpp
         single_mesh.cpp
 	taggedarray.cpp
+        type_seq.cpp
 	view.cpp
 )
 target_compile_features(ddc_tests PUBLIC cxx_std_17)

@@ -5,47 +5,15 @@
 #include <ostream>
 #include <utility>
 
+#include "type_seq.h"
+
 template <class, class...>
 class TaggedArray;
 
 namespace detail {
-template <class...>
-struct TypeSeq;
-
-template <class>
-struct SingleType;
-
-template <class...>
-struct RankIn;
 
 template <class... Tags>
 struct TaggedArrayPrinter;
-
-template <class QueryTag>
-struct RankIn<SingleType<QueryTag>, TypeSeq<>>
-{
-    static constexpr bool present = false;
-};
-
-template <class QueryTag, class... TagsTail>
-struct RankIn<SingleType<QueryTag>, TypeSeq<QueryTag, TagsTail...>>
-{
-    static constexpr bool present = true;
-    static constexpr std::size_t val = 0;
-};
-
-template <class QueryTag, class TagsHead, class... TagsTail>
-struct RankIn<SingleType<QueryTag>, TypeSeq<TagsHead, TagsTail...>>
-{
-    static constexpr bool present = RankIn<SingleType<QueryTag>, TypeSeq<TagsTail...>>::present;
-    static constexpr std::size_t val = 1 + RankIn<SingleType<QueryTag>, TypeSeq<TagsTail...>>::val;
-};
-
-template <class... QueryTags, class... Tags>
-struct RankIn<TypeSeq<QueryTags...>, TypeSeq<Tags...>>
-{
-    using ValSeq = std::index_sequence<RankIn<QueryTags, TypeSeq<Tags...>>::val...>;
-};
 
 template <class TagsHead, class TagsNext, class... TagsTail>
 struct TaggedArrayPrinter<TagsHead, TagsNext, TagsTail...>
@@ -190,9 +158,9 @@ public:
     {
         using namespace detail;
         static_assert(
-                RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::present,
+                in_tags_v<QueryTag, TypeSeq<Tags...>>,
                 "requested Tag absent from TaggedArrayImpl");
-        return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
+        return m_values[type_seq_rank_v<QueryTag, TypeSeq<Tags...>>];
     }
 
     template <class QueryTag>
@@ -200,9 +168,9 @@ public:
     {
         using namespace detail;
         static_assert(
-                RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::present,
+                in_tags_v<QueryTag, TypeSeq<Tags...>>,
                 "requested Tag absent from TaggedArrayImpl");
-        return m_values[RankIn<SingleType<QueryTag>, TypeSeq<Tags...>>::val];
+        return m_values[type_seq_rank_v<QueryTag, TypeSeq<Tags...>>];
     }
 };
 
@@ -397,43 +365,12 @@ public:
     }
 };
 
-template <class, class>
-constexpr size_t tag_rank_v = -1;
-
-template <class QueryTag, class ElementType, class... Tags>
-constexpr std::size_t tag_rank_v<QueryTag, TaggedArray<ElementType, Tags...>> = detail::
-        RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
-
-template <class, class>
-constexpr bool in_tags_v = false;
-
-template <class QueryTag, class ElementType, class... Tags>
-constexpr bool in_tags_v<QueryTag, TaggedArray<ElementType, Tags...>> = detail::
-        RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::present;
-
-template <class, class>
-constexpr bool contains_tags_v = false;
-
-template <class ElementType, class OElementType, class... Tags, class... OTags>
-constexpr bool contains_tags_v<
-        TaggedArray<ElementType, Tags...>,
-        TaggedArray<
-                OElementType,
-                OTags...>> = ((detail::RankIn<detail::SingleType<Tags>, detail::TypeSeq<OTags...>>::present) && ...);
-
-template <class A, class B>
-constexpr bool same_tags_v = contains_tags_v<A, B>&& contains_tags_v<B, A>;
-
-template <class A, class B>
-constexpr bool has_tag_v = in_tags_v<A, B>;
-
 template <class ElementType, class OElementType, class... Tags, class... OTags>
 constexpr inline TaggedArray<ElementType, Tags...>& operator+=(
         TaggedArray<ElementType, Tags...>& self,
         TaggedArray<OElementType, OTags...> const& other)
 {
-    static_assert(
-            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     detail::force_eval(self.template get<Tags>() += other.template get<Tags>()...);
     return self;
 }
@@ -443,8 +380,7 @@ constexpr inline auto operator+(
         TaggedArray<ElementType, Tags...> const& one,
         TaggedArray<OElementType, OTags...> const& other)
 {
-    static_assert(
-            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     using RElementType
             = decltype(std::declval<ElementType const>() + std::declval<OElementType const>());
     return TaggedArray<RElementType, Tags...>(get<Tags>(one) + get<Tags>(other)...);
@@ -455,8 +391,7 @@ constexpr inline TaggedArray<ElementType, Tags...>& operator-=(
         TaggedArray<ElementType, Tags...>& self,
         TaggedArray<OElementType, OTags...> const& other)
 {
-    static_assert(
-            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     detail::force_eval(self.template get<Tags>() -= other.template get<Tags>()...);
     return self;
 }
@@ -466,8 +401,7 @@ constexpr inline auto operator-(
         TaggedArray<ElementType, Tags...> const& one,
         TaggedArray<OElementType, OTags...> const& other)
 {
-    static_assert(
-            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     using RElementType
             = decltype(std::declval<ElementType const>() - std::declval<OElementType const>());
     return TaggedArray<RElementType, Tags...>(get<Tags>(one) - get<Tags>(other)...);
@@ -478,8 +412,7 @@ constexpr inline TaggedArray<ElementType, Tags...>& operator*=(
         TaggedArray<ElementType, Tags...>& self,
         TaggedArray<OElementType, OTags...> const& other)
 {
-    static_assert(
-            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     detail::force_eval(self.template get<Tags>() *= other.template get<Tags>()...);
     return self;
 }
@@ -489,8 +422,7 @@ constexpr inline auto operator*(
         TaggedArray<ElementType, Tags...> const& one,
         TaggedArray<OElementType, OTags...> const& other)
 {
-    static_assert(
-            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     using RElementType
             = decltype(std::declval<ElementType const>() * std::declval<OElementType const>());
     return TaggedArray<RElementType, Tags...>(get<Tags>(one) * get<Tags>(other)...);
@@ -501,8 +433,7 @@ constexpr inline TaggedArray<ElementType, Tags...>& operator/=(
         TaggedArray<ElementType, Tags...>& self,
         TaggedArray<OElementType, OTags...> const& other)
 {
-    static_assert(
-            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     detail::force_eval(self.template get<Tags>() /= other.template get<Tags>()...);
     return self;
 }
@@ -512,8 +443,7 @@ constexpr inline auto operator/(
         TaggedArray<ElementType, Tags...> const& one,
         TaggedArray<OElementType, OTags...> const& other)
 {
-    static_assert(
-            same_tags_v<TaggedArray<ElementType, Tags...>, TaggedArray<OElementType, OTags...>>);
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     using RElementType
             = decltype(std::declval<ElementType const>() / std::declval<OElementType const>());
     return TaggedArray<RElementType, Tags...>(get<Tags>(one) / get<Tags>(other)...);

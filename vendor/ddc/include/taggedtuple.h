@@ -4,16 +4,10 @@
 #include <tuple>
 #include <utility>
 
-#include "taggedarray.h"
+#include "type_seq.h"
 
 template <class, class>
 class TaggedTuple;
-
-template <class QueryTag, class... ElementTypes, class... Tags>
-constexpr std::size_t tag_rank_v<
-        QueryTag,
-        TaggedTuple<detail::TypeSeq<ElementTypes...>, detail::TypeSeq<Tags...>>> = detail::
-        RankIn<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
 
 template <class... ElementTypes, class... Tags>
 class TaggedTuple<detail::TypeSeq<ElementTypes...>, detail::TypeSeq<Tags...>>
@@ -107,13 +101,13 @@ public:
     template <class QueryTag>
     inline constexpr auto& get() noexcept
     {
-        return std::get<tag_rank_v<QueryTag, TaggedTuple>>(m_values);
+        return std::get<type_seq_rank_v<QueryTag, detail::TypeSeq<Tags...>>>(m_values);
     }
 
     template <class QueryTag>
     inline constexpr auto const& get() const noexcept
     {
-        return std::get<tag_rank_v<QueryTag, TaggedTuple>>(m_values);
+        return std::get<type_seq_rank_v<QueryTag, detail::TypeSeq<Tags...>>>(m_values);
     }
 };
 
