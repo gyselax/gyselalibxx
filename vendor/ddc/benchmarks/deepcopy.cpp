@@ -109,8 +109,8 @@ static void deepcopy_subblock_2d(benchmark::State& state)
     DBlockSpanXVx dst(dom, DSpan2D(dst_data.data(), state.range(0), state.range(1)));
     for (auto _ : state) {
         for (std::size_t i = 0; i < src.extent(0); ++i) {
-            auto&& dst_i = dst.subblockview(i, std::experimental::all);
-            auto&& src_i = src.subblockview(i, std::experimental::all);
+            auto&& dst_i = dst.subblockview(i, std::experimental::full_extent);
+            auto&& src_i = src.subblockview(i, std::experimental::full_extent);
             deepcopy(dst_i, src_i);
         }
     }
