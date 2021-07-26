@@ -127,13 +127,6 @@ public:
         return mesh().to_real(ubound());
     }
 
-    inline constexpr auto subdomain(mcoord_type offset, mcoord_type count) const noexcept
-    {
-        assert(count > 0);
-        assert(offset + count <= size());
-        return MDomain(m_mesh, m_lbound + offset, m_lbound + offset + count - 1);
-    }
-
     inline constexpr bool empty() const noexcept
     {
         return size() == 0;

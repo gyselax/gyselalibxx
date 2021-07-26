@@ -46,23 +46,6 @@ TEST_F(MDomainXTest, Constructor)
     EXPECT_EQ(dom_a.ubound(), ubound);
 }
 
-TEST_F(MDomainXTest, subdomain)
-{
-    EXPECT_EQ(dom.lbound(), 0ul);
-    EXPECT_EQ(dom.ubound(), 100ul);
-    EXPECT_EQ(dom.size(), npoints);
-
-    MDomain const subdomain1 = dom.subdomain(10ul, 91ul);
-    EXPECT_EQ(subdomain1.lbound(), 10ul);
-    EXPECT_EQ(subdomain1.ubound(), 100ul);
-    EXPECT_EQ(subdomain1.size(), 91ul);
-
-    MDomain const subdomain2 = subdomain1.subdomain(10ul, 2ul);
-    EXPECT_EQ(subdomain2.lbound(), 20ul);
-    EXPECT_EQ(subdomain2.ubound(), 21ul);
-    EXPECT_EQ(subdomain2.size(), 2ul);
-}
-
 TEST_F(MDomainXTest, ubound)
 {
     EXPECT_EQ(dom.ubound().get<MeshX>(), 100ul);

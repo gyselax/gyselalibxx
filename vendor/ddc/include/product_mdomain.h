@@ -25,24 +25,6 @@ class ProductMDomain
 
     static_assert((... && (Meshes::rank() == 1)), "Only rank 1 meshes are allowed.");
 
-    template <class QueryMeshesSeq>
-    struct Slicer;
-
-    template <class... QueryMeshes>
-    struct Slicer<detail::TypeSeq<QueryMeshes...>>
-    {
-        static constexpr auto slice(ProductMDomain<Meshes...> const& slice_spec)
-        {
-            return ::ProductMDomain(
-                    ProductMesh<QueryMeshes...>(
-                            std::get<domain_t<QueryMeshes>>(slice_spec.m_domains).mesh()...),
-                    MCoord<QueryMeshes...>(
-                            std::get<domain_t<QueryMeshes>>(slice_spec.m_domains).lbound()...),
-                    MCoord<QueryMeshes...>(
-                            std::get<domain_t<QueryMeshes>>(slice_spec.m_domains).ubound()...));
-        }
-    };
-
 public:
     using rcoord_type = RCoord<rdim_t<Meshes>...>;
 
