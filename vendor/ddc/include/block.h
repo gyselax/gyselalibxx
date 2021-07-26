@@ -109,20 +109,17 @@ public:
         *this = std::move(tmp);
     }
 
-    template <
-            class... IndexType,
-            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
-    inline constexpr element_type const& operator()(IndexType&&... indices) const noexcept
+    template <class... OMeshes>
+    inline constexpr element_type const& operator()(
+            MCoord<OMeshes> const&... mcoords) const noexcept
     {
-        return this->m_raw(std::forward<IndexType>(indices)...);
+        return this->m_raw(take_first<Meshes>(mcoords...)...);
     }
 
-    template <
-            class... IndexType,
-            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
-    inline constexpr element_type& operator()(IndexType&&... indices) noexcept
+    template <class... OMeshes>
+    inline constexpr element_type& operator()(MCoord<OMeshes> const&... mcoords) noexcept
     {
-        return this->m_raw(std::forward<IndexType>(indices)...);
+        return this->m_raw(take_first<Meshes>(mcoords...)...);
     }
 
     inline constexpr element_type const& operator()(mcoord_type const& indices) const noexcept

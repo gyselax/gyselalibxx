@@ -185,27 +185,27 @@ template <class Mesh>
 struct MDomain<Mesh>::Iterator
 {
 private:
-    MCoordElement _M_value = MCoordElement();
+    typename Mesh::mcoord_type m_value = typename Mesh::mcoord_type();
 
 public:
     using iterator_category = std::random_access_iterator_tag;
 
-    using value_type = MCoordElement;
+    using value_type = typename Mesh::mcoord_type;
 
     using difference_type = MLengthElement;
 
     Iterator() = default;
 
-    constexpr explicit Iterator(MCoordElement __value) : _M_value(__value) {}
+    constexpr explicit Iterator(typename Mesh::mcoord_type __value) : m_value(__value) {}
 
-    constexpr MCoordElement operator*() const noexcept
+    constexpr typename Mesh::mcoord_type operator*() const noexcept
     {
-        return _M_value;
+        return m_value;
     }
 
     constexpr Iterator& operator++()
     {
-        ++_M_value;
+        ++m_value;
         return *this;
     }
 
@@ -218,7 +218,7 @@ public:
 
     constexpr Iterator& operator--()
     {
-        --_M_value;
+        --m_value;
         return *this;
     }
 
@@ -232,39 +232,39 @@ public:
     constexpr Iterator& operator+=(difference_type __n)
     {
         if (__n >= difference_type(0))
-            _M_value += static_cast<MCoordElement>(__n);
+            m_value += static_cast<MCoordElement>(__n);
         else
-            _M_value -= static_cast<MCoordElement>(-__n);
+            m_value -= static_cast<MCoordElement>(-__n);
         return *this;
     }
 
     constexpr Iterator& operator-=(difference_type __n)
     {
         if (__n >= difference_type(0))
-            _M_value -= static_cast<MCoordElement>(__n);
+            m_value -= static_cast<MCoordElement>(__n);
         else
-            _M_value += static_cast<MCoordElement>(-__n);
+            m_value += static_cast<MCoordElement>(-__n);
         return *this;
     }
 
     constexpr MCoordElement operator[](difference_type __n) const
     {
-        return MCoordElement(_M_value + __n);
+        return MCoordElement(m_value + __n);
     }
 
     friend constexpr bool operator==(Iterator const& xx, Iterator const& yy)
     {
-        return xx._M_value == yy._M_value;
+        return xx.m_value == yy.m_value;
     }
 
     friend constexpr bool operator!=(Iterator const& xx, Iterator const& yy)
     {
-        return xx._M_value != yy._M_value;
+        return xx.m_value != yy.m_value;
     }
 
     friend constexpr bool operator<(Iterator const& xx, Iterator const& yy)
     {
-        return xx._M_value < yy._M_value;
+        return xx.m_value < yy.m_value;
     }
 
     friend constexpr bool operator>(Iterator const& xx, Iterator const& yy)
@@ -299,8 +299,7 @@ public:
 
     friend constexpr difference_type operator-(Iterator const& xx, Iterator const& yy)
     {
-        return (yy._M_value > xx._M_value)
-                       ? (-static_cast<difference_type>(yy._M_value - xx._M_value))
-                       : (xx._M_value - yy._M_value);
+        return (yy.m_value > xx.m_value) ? (-static_cast<difference_type>(yy.m_value - xx.m_value))
+                                         : (xx.m_value - yy.m_value);
     }
 };

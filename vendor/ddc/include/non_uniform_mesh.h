@@ -6,7 +6,6 @@
 #include "mcoord.h"
 #include "mesh.h"
 #include "rcoord.h"
-#include "taggedarray.h"
 
 /// `NonUniformMesh` models a non-uniform discretization of the `RDim` segment \f$[a, b]\f$.
 template <class RDim>

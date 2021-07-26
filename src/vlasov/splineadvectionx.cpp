@@ -15,7 +15,6 @@
 #include "rcoord.h"
 #include "spline_builder_1d.h"
 #include "splineadvectionx.h"
-#include "taggedarray.h"
 
 #include <experimental/mdspan>
 

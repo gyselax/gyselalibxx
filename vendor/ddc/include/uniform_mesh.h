@@ -5,7 +5,6 @@
 #include "mcoord.h"
 #include "mesh.h"
 #include "rcoord.h"
-#include "taggedarray.h"
 
 /// @class UniformMesh
 /// @brief models a uniform discretization of the `RDim` half-line \f$[O, +\infty[\f$.

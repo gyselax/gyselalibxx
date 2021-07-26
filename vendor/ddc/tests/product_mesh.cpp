@@ -10,7 +10,6 @@
 #include "non_uniform_mesh.h"
 #include "product_mesh.h"
 #include "rcoord.h"
-#include "taggedarray.h"
 #include "uniform_mesh.h"
 
 class DimX;

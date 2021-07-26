@@ -8,7 +8,6 @@
 #include "mdomain.h"
 #include "product_mdomain.h"
 #include "product_mesh.h"
-#include "taggedarray.h"
 #include "view.h"
 
 template <class, class>
@@ -154,12 +153,10 @@ public:
         return this->subblockview(get_slicer_for<Meshes>(mcoord)...);
     }
 
-    template <
-            class... IndexType,
-            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
-    inline constexpr reference operator()(IndexType&&... indices) const noexcept
+    template <class... OMeshes>
+    inline constexpr reference operator()(MCoord<OMeshes> const&... mcoords) const noexcept
     {
-        return m_raw(std::forward<IndexType>(indices)...);
+        return m_raw(take_first<Meshes>(mcoords...)...);
     }
 
     inline constexpr reference operator()(mcoord_type const& indices) const noexcept

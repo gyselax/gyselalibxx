@@ -1,13 +1,13 @@
 #pragma once
 
-#include "taggedarray.h"
+#include "taggedvector.h"
 
 using RCoordElement = double;
 
 template <class... RDim>
-using RCoord = TaggedArray<RCoordElement, RDim...>;
+using RCoord = TaggedVector<RCoordElement, RDim...>;
 
 using RLengthElement = double;
 
 template <class... RDim>
-using RLength = TaggedArray<RLengthElement, RDim...>;
+using RLength = TaggedVector<RLengthElement, RDim...>;

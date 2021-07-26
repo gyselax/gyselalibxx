@@ -12,7 +12,6 @@
 #include "product_mdomain.h"
 #include "product_mesh.h"
 #include "rcoord.h"
-#include "taggedarray.h"
 #include "view.h"
 
 #include <experimental/mdspan>

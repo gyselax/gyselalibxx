@@ -48,7 +48,9 @@ inline BlockView<ProductMDomain<Meshes...>, ElementType, CONTIGUOUS> const& deep
         BlockView<ProductMDomain<Meshes...>, ElementType, OCONTIGUOUS> const& from) noexcept
 {
     assert(to.extents() == from.extents());
-    for_each(to, [&to, &from](auto... idxs) { to(idxs...) = from(idxs...); });
+    auto raw_to = to.raw_view();
+    auto raw_from = from.raw_view();
+    for_each(to, [&raw_to, &raw_from](auto... idxs) { raw_to(idxs...) = raw_from(idxs...); });
     return to;
 }
 

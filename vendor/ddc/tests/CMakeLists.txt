@@ -14,7 +14,7 @@ add_executable(ddc_tests
 	non_uniform_mesh.cpp
 	uniform_mesh.cpp
         single_mesh.cpp
-	taggedarray.cpp
+	taggedvector.cpp
         type_seq.cpp
 	view.cpp
 )

@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <utility>
 
-#include "taggedarray.h"
+#include "taggedvector.h"
 
 #include <experimental/mdspan>
 
@@ -12,7 +12,7 @@ using MCoordElement = std::size_t;
 using MLengthElement = std::ptrdiff_t;
 
 template <class... Tags>
-using MCoord = TaggedArray<MCoordElement, Tags...>;
+using MCoord = TaggedVector<MCoordElement, Tags...>;
 
 
 namespace detail {

@@ -14,7 +14,6 @@
 #include "product_mdomain.h"
 #include "product_mesh.h"
 #include "rcoord.h"
-#include "taggedarray.h"
 #include "uniform_mesh.h"
 
 #include <experimental/mdspan>
@@ -156,14 +155,14 @@ TEST_F(DBlockXVxTest, slice)
         ASSERT_EQ(block_x.extent(0), block.extent(0));
         for (auto&& ii : constref_block.domain<MeshX>()) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
-            ASSERT_EQ(block_x(ii), constref_block(ii, SLICE_VAL));
+            ASSERT_EQ(block_x(ii), constref_block(ii, MCoord<MeshVx>(SLICE_VAL)));
         }
 
         auto&& block_v = constref_block.subblockview(SLICE_VAL, full_extent);
         ASSERT_EQ(block_v.extent(0), block.extent(1));
         for (auto&& ii : constref_block.domain<MeshVx>()) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
-            ASSERT_EQ(block_v(ii), constref_block(SLICE_VAL, ii));
+            ASSERT_EQ(block_v(ii), constref_block(MCoord<MeshX>(SLICE_VAL), ii));
         }
 
         auto&& subblock = constref_block.subblockview(std::pair(10, 5), full_extent);
@@ -172,7 +171,7 @@ TEST_F(DBlockXVxTest, slice)
         for (auto&& ii : subblock.domain<MeshX>()) {
             for (auto&& jj : subblock.domain<MeshVx>()) {
                 // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
-                ASSERT_EQ(subblock(ii, jj), constref_block(10 + ii, jj));
+                ASSERT_EQ(subblock(ii, jj), constref_block(MCoord<MeshX>(10) + ii, jj));
             }
         }
     }
@@ -191,6 +190,21 @@ TEST_F(DBlockXVxTest, view)
         for (auto&& jj : block.domain<MeshVx>()) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
             ASSERT_EQ(cview(ii, jj), block(ii, jj));
+        }
+    }
+}
+
+TEST_F(DBlockXVxTest, automatic_reordering)
+{
+    DBlockXVx block(dom);
+    for (auto&& ii : block.domain<MeshX>()) {
+        for (auto&& jj : block.domain<MeshVx>()) {
+            block(ii, jj) = 1. * ii + .001 * jj;
+        }
+    }
+    for (auto&& ii : block.domain<MeshX>()) {
+        for (auto&& jj : block.domain<MeshVx>()) {
+            ASSERT_EQ(block(jj, ii), block(ii, jj));
         }
     }
 }

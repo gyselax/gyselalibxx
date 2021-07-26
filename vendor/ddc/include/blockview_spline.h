@@ -85,17 +85,9 @@ public:
      */
     inline constexpr BlockView& operator=(BlockView&& other) = default;
 
-    template <
-            class... IndexType,
-            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
-    inline constexpr reference operator()(IndexType&&... indices) const noexcept
-    {
-        return m_raw(std::forward<IndexType>(indices)...);
-    }
-
     inline constexpr reference operator()(const mcoord_type& indices) const noexcept
     {
-        return m_raw(indices.array());
+        return m_raw(indices);
     }
 
     inline accessor_type accessor() const

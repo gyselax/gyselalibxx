@@ -9,7 +9,6 @@
 #include "mcoord.h"
 #include "mdomain.h"
 #include "rcoord.h"
-#include "taggedarray.h"
 #include "uniform_mesh.h"
 
 class DimX;

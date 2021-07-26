@@ -96,30 +96,14 @@ public:
         return this->m_bsplines;
     }
 
-    template <
-            class... IndexType,
-            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
-    inline constexpr ElementType const& operator()(IndexType&&... indices) const noexcept
-    {
-        return this->m_raw(std::forward<IndexType>(indices)...);
-    }
-
-    template <
-            class... IndexType,
-            std::enable_if_t<(... && std::is_convertible_v<IndexType, std::size_t>), int> = 0>
-    inline constexpr ElementType& operator()(IndexType&&... indices) noexcept
-    {
-        return this->m_raw(std::forward<IndexType>(indices)...);
-    }
-
     inline constexpr ElementType const& operator()(const mcoord_type& indices) const noexcept
     {
-        return this->m_raw(indices.array());
+        return this->m_raw(indices);
     }
 
     inline constexpr ElementType& operator()(const mcoord_type& indices) noexcept
     {
-        return this->m_raw(indices.array());
+        return this->m_raw(indices);
     }
 
     inline constexpr block_span_type cview() const

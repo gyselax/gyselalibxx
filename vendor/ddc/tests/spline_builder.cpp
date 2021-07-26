@@ -20,7 +20,6 @@
 #include "rcoord.h"
 #include "spline_builder.h"
 #include "spline_evaluator.h"
-#include "taggedarray.h"
 #include "uniform_mesh.h"
 #include "view.h"
 
