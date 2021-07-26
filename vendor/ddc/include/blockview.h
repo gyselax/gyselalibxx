@@ -163,7 +163,7 @@ public:
     inline constexpr auto operator[](ProductMDomain<QueryMeshes...> const& odomain) const
     {
         auto subview = std::experimental::submdspan(m_raw, get_slicer_for<Meshes>(odomain)...);
-        return ::BlockView(m_domain.intersect_with(odomain), subview);
+        return ::BlockView(m_domain.restrict(odomain), subview);
     }
 
     template <class... OMeshes>

@@ -134,8 +134,10 @@ public:
     }
 
     template <class... OMeshes>
-    constexpr auto intersect_with(ProductMDomain<OMeshes...> const& odomain) const
+    constexpr auto restrict(ProductMDomain<OMeshes...> const& odomain) const
     {
+        assert(((get<OMeshes>().lbound() <= odomain.template get<OMeshes>().lbound()) && ...));
+        assert(((get<OMeshes>().ubound() >= odomain.template get<OMeshes>().ubound()) && ...));
         return ProductMDomain(get_slicer_for<Meshes>(odomain)...);
     }
 
