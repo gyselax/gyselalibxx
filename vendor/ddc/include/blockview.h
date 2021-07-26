@@ -63,22 +63,22 @@ public:
     friend class BlockView;
 
 protected:
-    /// This adaptor transforms the spec from `(start, count)` to `[begin, end[`
-    template <class SliceSpec>
-    static SliceSpec slice_spec_adaptor(SliceSpec const& slice_spec)
-    {
-        if constexpr (std::is_convertible_v<SliceSpec, std::pair<std::size_t, std::size_t>>) {
-            return std::pair(slice_spec.first, slice_spec.first + slice_spec.second);
-        } else {
-            return slice_spec;
-        }
-    }
-
     template <class QueryMesh, class... OMeshes>
     static auto get_slicer_for(MCoord<OMeshes...> const& c)
     {
         if constexpr (in_tags_v<QueryMesh, detail::TypeSeq<OMeshes...>>) {
-            return c.template get<QueryMesh>();
+            return get<QueryMesh>(c);
+        } else {
+            return std::experimental::full_extent;
+        }
+    }
+
+    template <class QueryMesh, class... OMeshes>
+    static auto get_slicer_for(ProductMDomain<OMeshes...> const& c)
+    {
+        if constexpr (in_tags_v<QueryMesh, detail::TypeSeq<OMeshes...>>) {
+            return std::
+                    pair<std::size_t, std::size_t>(lbound<QueryMesh>(c), ubound<QueryMesh>(c) + 1);
         } else {
             return std::experimental::full_extent;
         }
@@ -145,12 +145,25 @@ public:
     inline constexpr BlockView& operator=(BlockView&& other) = default;
 
     /** Slice out some dimensions
-     * @param slices the coordinates to 
+     * @param slices the coordinates to
      */
     template <class... QueryMeshes>
-    inline constexpr auto operator[](MCoord<QueryMeshes...> mcoord) const
+    inline constexpr auto operator[](MCoord<QueryMeshes...> const& slice_spec) const
     {
-        return this->subblockview(get_slicer_for<Meshes>(mcoord)...);
+        auto subview = std::experimental::submdspan(m_raw, get_slicer_for<Meshes>(slice_spec)...);
+        using detail::TypeSeq;
+        using selected_meshes = type_seq_remove_t<TypeSeq<Meshes...>, TypeSeq<QueryMeshes...>>;
+        return ::BlockView(select_by_type_seq<selected_meshes>(m_domain), subview);
+    }
+
+    /** Slice out some dimensions
+     * @param slices the coordinates to
+     */
+    template <class... QueryMeshes>
+    inline constexpr auto operator[](ProductMDomain<QueryMeshes...> const& odomain) const
+    {
+        auto subview = std::experimental::submdspan(m_raw, get_slicer_for<Meshes>(odomain)...);
+        return ::BlockView(m_domain.intersect_with(odomain), subview);
     }
 
     template <class... OMeshes>
@@ -285,17 +298,6 @@ public:
     inline constexpr raw_view_type raw_view() const
     {
         return m_raw;
-    }
-
-    /** Slice out some dimensions
-     * @param slices the coordinates to 
-     */
-    template <class... SliceSpecs>
-    inline constexpr auto subblockview(SliceSpecs&&... slices) const
-    {
-        static_assert(sizeof...(SliceSpecs) == sizeof...(Meshes));
-        auto subview = std::experimental::submdspan(m_raw, slice_spec_adaptor(slices)...);
-        return ::BlockView(m_domain.subdomain(slices...), subview);
     }
 };
 

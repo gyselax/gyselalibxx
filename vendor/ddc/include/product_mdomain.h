@@ -9,53 +9,8 @@
 #include "rcoord.h"
 #include "taggedtuple.h"
 
-namespace detail {
-
-template <
-        class InitialSliceSpecSeq,
-        class InitialMeshSeq,
-        class FinalSliceSpecSeq = TypeSeq<>,
-        class FinalMeshSeq = TypeSeq<>>
-struct SliceSpecToMesh;
-
-template <class... FinalSliceSpecs, class... FinalMeshes>
-struct SliceSpecToMesh<TypeSeq<>, TypeSeq<>, TypeSeq<FinalSliceSpecs...>, TypeSeq<FinalMeshes...>>
-{
-    using type = TaggedTuple<TypeSeq<FinalSliceSpecs...>, TypeSeq<FinalMeshes...>>;
-};
-
-template <
-        class HeadInitialSliceSpec,
-        class... TailInitialSliceSpecs,
-        class HeadInitialMesh,
-        class... TailInitialMeshes,
-        class... FinalSliceSpecs,
-        class... FinalMeshes>
-struct SliceSpecToMesh<
-        TypeSeq<HeadInitialSliceSpec, TailInitialSliceSpecs...>,
-        TypeSeq<HeadInitialMesh, TailInitialMeshes...>,
-        TypeSeq<FinalSliceSpecs...>,
-        TypeSeq<FinalMeshes...>>
-    : std::conditional_t<
-              std::is_convertible_v<HeadInitialSliceSpec, std::size_t>,
-              SliceSpecToMesh<
-                      TypeSeq<TailInitialSliceSpecs...>,
-                      TypeSeq<TailInitialMeshes...>,
-                      TypeSeq<FinalSliceSpecs...>,
-                      TypeSeq<FinalMeshes...>>,
-              SliceSpecToMesh<
-                      TypeSeq<TailInitialSliceSpecs...>,
-                      TypeSeq<TailInitialMeshes...>,
-                      TypeSeq<FinalSliceSpecs..., HeadInitialSliceSpec>,
-                      TypeSeq<FinalMeshes..., HeadInitialMesh>>>
-{
-    static_assert(
-            std::is_convertible_v<
-                    HeadInitialSliceSpec,
-                    std::size_t> || std::is_convertible_v<HeadInitialSliceSpec, std::pair<std::size_t, std::size_t>> || std::is_convertible_v<HeadInitialSliceSpec, std::experimental::full_extent_t>);
-};
-
-} // namespace detail
+template <class... Meshes>
+class ProductMDomain;
 
 template <class... Meshes>
 class ProductMDomain
@@ -69,6 +24,24 @@ class ProductMDomain
     static_assert((... && is_mesh_v<Meshes>), "A template parameter is not a mesh");
 
     static_assert((... && (Meshes::rank() == 1)), "Only rank 1 meshes are allowed.");
+
+    template <class QueryMeshesSeq>
+    struct Slicer;
+
+    template <class... QueryMeshes>
+    struct Slicer<detail::TypeSeq<QueryMeshes...>>
+    {
+        static constexpr auto slice(ProductMDomain<Meshes...> const& slice_spec)
+        {
+            return ::ProductMDomain(
+                    ProductMesh<QueryMeshes...>(
+                            std::get<domain_t<QueryMeshes>>(slice_spec.m_domains).mesh()...),
+                    MCoord<QueryMeshes...>(
+                            std::get<domain_t<QueryMeshes>>(slice_spec.m_domains).lbound()...),
+                    MCoord<QueryMeshes...>(
+                            std::get<domain_t<QueryMeshes>>(slice_spec.m_domains).ubound()...));
+        }
+    };
 
 public:
     using rcoord_type = RCoord<rdim_t<Meshes>...>;
@@ -178,14 +151,10 @@ public:
         return rcoord_type(std::get<domain_t<Meshes>>(m_domains).rmax()...);
     }
 
-    template <class... SliceSpecs>
-    constexpr auto subdomain(SliceSpecs const&... slice_specs) const
+    template <class... OMeshes>
+    constexpr auto intersect_with(ProductMDomain<OMeshes...> const& odomain) const
     {
-        static_assert(sizeof...(SliceSpecs) == rank());
-        return subdomain_impl(typename detail::SliceSpecToMesh<
-                              detail::TypeSeq<SliceSpecs...>,
-                              detail::TypeSeq<Meshes...>>::
-                                      type(make_tagged_tuple<Meshes...>(slice_specs...)));
+        return ProductMDomain(get_slicer_for<Meshes>(odomain)...);
     }
 
     template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
@@ -201,26 +170,13 @@ public:
     }
 
 private:
-    template <class... SelectedSliceSpecs, class... SelectedMeshes>
-    constexpr ProductMDomain<SelectedMeshes...> subdomain_impl(
-            TaggedTuple<
-                    detail::TypeSeq<SelectedSliceSpecs...>,
-                    detail::TypeSeq<SelectedMeshes...>> const& slice_seq) const
+    template <class QueryMesh, class... OMeshes>
+    auto get_slicer_for(ProductMDomain<OMeshes...> const& c) const
     {
-        return ProductMDomain<SelectedMeshes...>(subdomain_1(
-                std::get<domain_t<SelectedMeshes>>(m_domains),
-                ::get<SelectedMeshes>(slice_seq))...);
-    }
-
-    template <class Mesh, class SliceSpecs>
-    constexpr MDomain<Mesh> subdomain_1(MDomain<Mesh> const& domain, SliceSpecs&& slice_specs) const
-    {
-        if constexpr (std::is_convertible_v<SliceSpecs, std::experimental::full_extent_t>) {
-            return domain;
-        } else if constexpr (std::is_convertible_v<
-                                     SliceSpecs,
-                                     std::pair<std::size_t, std::size_t>>) {
-            return domain.subdomain(slice_specs.first, slice_specs.second);
+        if constexpr (in_tags_v<QueryMesh, detail::TypeSeq<OMeshes...>>) {
+            return c.template get<QueryMesh>();
+        } else {
+            return get<QueryMesh>();
         }
     }
 };
@@ -282,4 +238,27 @@ template <class... QueryMeshes, class... Meshes>
 RCoord<QueryMeshes...> rmax(ProductMDomain<Meshes...> const& domain) noexcept
 {
     return RCoord<QueryMeshes...>(get<QueryMeshes>(domain).rmax()...);
+}
+
+namespace detail {
+
+template <class QueryMeshesSeq>
+struct Selection;
+
+template <class... QueryMeshes>
+struct Selection<detail::TypeSeq<QueryMeshes...>>
+{
+    template <class Domain>
+    static constexpr auto select(Domain const& domain)
+    {
+        return ::select<QueryMeshes...>(domain);
+    }
+};
+
+} // namespace detail
+
+template <class QueryMeshesSeq, class... Meshes>
+constexpr auto select_by_type_seq(ProductMDomain<Meshes...> const& domain)
+{
+    return detail::Selection<QueryMeshesSeq>::select(domain);
 }
