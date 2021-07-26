@@ -5,6 +5,7 @@ include(GoogleTest)
 add_executable(unit_tests
 	splines.cpp
 	fft.cpp
+        pdi.cpp
         splitvlasovsolver.cpp
 )
 target_compile_features(unit_tests PUBLIC cxx_std_17)
@@ -17,5 +18,7 @@ target_link_libraries(unit_tests
                 vcx::vlasov
                 GTest::gmock
                 GTest::gmock_main
+                paraconf::paraconf
+                PDI::pdi
 )
 gtest_discover_tests(unit_tests)

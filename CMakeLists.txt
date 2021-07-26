@@ -22,8 +22,12 @@ include(CTest)
 ## Look for a pre-installed lapack
 find_package(LAPACK REQUIRED COMPONENTS CXX)
 
-## Lokk for FFTW
+## Look for FFTW
 find_package(FFTW REQUIRED COMPONENTS DOUBLE_LIB)
+
+find_package(paraconf REQUIRED COMPONENTS C)
+
+find_package(PDI REQUIRED COMPONENTS C)
 
 ## if tests are enabled, look for googletest in `vendor/`, we use it to write unit tests
 if("${BUILD_TESTING}")

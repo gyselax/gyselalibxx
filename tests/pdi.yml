@@ -1,0 +1,12 @@
+metadata:
+  fdistribu_extents: { type: array, subtype: int64, size: 2 }
+data:
+  fdistribu:
+    type: array
+    subtype: double
+    size: [ '$fdistribu_extents[0]', '$fdistribu_extents[1]' ]
+plugins:
+  decl_hdf5:
+    - file: fdistribu.h5
+      write: [ fdistribu ]
+  trace: ~
