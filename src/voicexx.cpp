@@ -1,3 +1,7 @@
+#include <cstdlib>
+
+#include <paraconf.h>
+
 #include "deprecated/bsplines_uniform.h"
 
 #include "boundary_conditions.h"
@@ -9,40 +13,62 @@
 #include "splineadvectionx.h"
 #include "splitvlasovsolver.h"
 
-// The meshed domain:
-// * origin: (0,0)
-// * unit vector: (1,1)
-// * domain-start: (0,0)
-// * domain-bound: (100, 100)
-MeshX const mesh_x(RCoordX(0.), RCoordX(1.));
+static constexpr std::size_t spline_degree = 3;
 
-MeshVx const mesh_vx(RCoordVx(0.), RCoordVx(1.));
-
-MeshXVx const mesh_x_vx(mesh_x, mesh_vx);
-
-MDomainXVx const dom2d(mesh_x_vx, MCoordXVx(0, 0), MCoordXVx(100, 100));
-
-deprecated::UniformBSplines const bsplines_x = {3, true, 4, 5, 6};
-
-deprecated::UniformBSplines const bsplines_vx = {3, true, 4, 5, 6};
-
-deprecated::SplineBuilder1D const interp_x(bsplines_x, BoundCond::PERIODIC, BoundCond::PERIODIC);
-
-deprecated::SplineBuilder1D const interp_vx(bsplines_vx, BoundCond::GREVILLE, BoundCond::GREVILLE);
-
-SplineAdvectionX const advection_x(bsplines_x, interp_x);
-
-NullAdvectionVx const advection_vx;
-
-SplitVlasovSolver const vlasov(advection_x, advection_vx);
-
-NullEfieldSolver const efield;
-
-PredCorr const predcorr(vlasov, efield, 1.);
-
-int main()
+int main(int argc, char** argv)
 {
+    PC_tree_t conf;
+    if (argc > 1) {
+        conf = PC_parse_path(argv[1]);
+    } else {
+        return EXIT_SUCCESS;
+    }
+
+    double x_min;
+    PC_double(PC_get(conf, ".MeshX.min"), &x_min);
+    double x_max;
+    PC_double(PC_get(conf, ".MeshX.max"), &x_max);
+    long x_size;
+    PC_int(PC_get(conf, ".MeshX.size"), &x_size);
+
+    double vx_min;
+    PC_double(PC_get(conf, ".MeshVx.min"), &vx_min);
+    double vx_max;
+    PC_double(PC_get(conf, ".MeshVx.max"), &vx_max);
+    long vx_size;
+    PC_int(PC_get(conf, ".MeshVx.size"), &vx_size);
+
+    MeshX const mesh_x((RCoordX(x_min)), RCoordX(x_max));
+
+    MeshVx const mesh_vx((RCoordVx(vx_min)), RCoordVx(vx_max));
+
+    MeshXVx const mesh_x_vx(mesh_x, mesh_vx);
+
+    MDomainXVx const dom2d(mesh_x_vx, MCoordXVx(x_size, vx_size));
+
+    deprecated::UniformBSplines const bsplines_x(spline_degree, true, x_min, x_max, x_size);
+
+    deprecated::UniformBSplines const bsplines_vx(spline_degree, true, vx_min, vx_max, vx_size);
+
+    deprecated::SplineBuilder1D const
+            interp_x(bsplines_x, BoundCond::PERIODIC, BoundCond::PERIODIC);
+
+    deprecated::SplineBuilder1D const
+            interp_vx(bsplines_vx, BoundCond::PERIODIC, BoundCond::PERIODIC);
+
+    SplineAdvectionX const advection_x(bsplines_x, interp_x);
+
+    NullAdvectionVx const advection_vx;
+
+    SplitVlasovSolver const vlasov(advection_x, advection_vx);
+
+    NullEfieldSolver const efield;
+
+    PredCorr const predcorr(vlasov, efield, 1.);
+
     DBlockXVx fdistribu(dom2d);
 
     predcorr(fdistribu, 1, 100);
+
+    return EXIT_SUCCESS;
 }
