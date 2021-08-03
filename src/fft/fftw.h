@@ -55,15 +55,15 @@ public:
 
         // shall be right layout
         std::array<int, ProductMDomain<NonUniformMesh<Fourier<Tags>>...>::rank()> n;
-        for (std::size_t r = 0; r < out_values.rank(); ++r) {
-            n[r] = out_values.extent(r);
-        }
+        ((n[type_seq_rank_v<Tags, detail::TypeSeq<Tags...>>]
+          = out_values.template extent<NonUniformMesh<Fourier<Tags>>>()),
+         ...);
 
         fftw_plan plan = fftw_plan_dft(
                 n.size(),
                 n.data(),
-                reinterpret_cast<fftw_complex*>(in_values.raw_view().data()),
-                reinterpret_cast<fftw_complex*>(out_values.raw_view().data()),
+                reinterpret_cast<fftw_complex*>(in_values.data()),
+                reinterpret_cast<fftw_complex*>(out_values.data()),
                 FFTW_FORWARD,
                 FFTW_ESTIMATE);
         fftw_execute(plan);

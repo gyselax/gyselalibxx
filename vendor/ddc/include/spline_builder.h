@@ -173,7 +173,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
         DSpan1D const* derivs_xmin,
         DSpan1D const* derivs_xmax) const
 {
-    assert(vals.extent(0) == m_bsplines.nbasis() - s_nbc_xmin - s_nbc_xmax);
+    assert(vals.template extent<interpolation_mesh_type>()
+           == m_bsplines.nbasis() - s_nbc_xmin - s_nbc_xmax);
     // assert(spline.belongs_to_space(m_bsplines));
     // TODO: LOG Errors
     if constexpr (bsplines_type::degree() == 1)

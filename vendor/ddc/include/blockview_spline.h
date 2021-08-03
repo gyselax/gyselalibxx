@@ -3,12 +3,12 @@
 #include "blockview.h"
 #include "bsplines.h"
 
-template <class Mesh, std::size_t D, class ElementType, bool CONTIGUOUS>
-class BlockView<BSplines<Mesh, D>, ElementType, CONTIGUOUS>
+template <class Mesh, std::size_t D, class ElementType>
+class BlockView<BSplines<Mesh, D>, ElementType, std::experimental::layout_stride>
 {
 public:
     /// ND memory view
-    using raw_view_type = SpanND<1, ElementType, CONTIGUOUS>;
+    using raw_view_type = SpanND<1, ElementType, true>;
 
     using bsplines_type = BSplines<Mesh, D>;
 
@@ -57,7 +57,8 @@ public:
      */
     template <class OElementType>
     inline constexpr BlockView(
-            BlockView<bsplines_type, OElementType, CONTIGUOUS> const& other) noexcept
+            BlockView<bsplines_type, OElementType, std::experimental::layout_stride> const&
+                    other) noexcept
         : m_raw(other.raw_view())
         , m_bsplines(other.bsplines())
     {

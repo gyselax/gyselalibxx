@@ -13,7 +13,10 @@
 template <class, class>
 class Block;
 
-template <class, class, bool = true>
+template <
+        class SupportType,
+        class ElementType,
+        class LayoutPolicy = std::experimental::layout_stride>
 class BlockView;
 
 /** Access the domain (or subdomain) of a view
@@ -26,16 +29,24 @@ auto get_domain(BlockType const& block) noexcept
     return block.template domain<QueryMeshes...>();
 }
 
-template <class... Meshes, class ElementType, bool CONTIGUOUS>
-class BlockView<ProductMDomain<Meshes...>, ElementType, CONTIGUOUS>
+template <class... Meshes, class ElementType>
+class BlockView<ProductMDomain<Meshes...>, ElementType, std::experimental::layout_stride>
 {
+    using underlying_raw_view_type = std::experimental::mdspan<
+            ElementType,
+            std::experimental::dextents<sizeof...(Meshes)>,
+            std::experimental::layout_right>;
+
 public:
     using mdomain_type = ProductMDomain<Meshes...>;
 
     using mesh_type = ProductMesh<Meshes...>;
 
     /// ND memory view
-    using raw_view_type = SpanND<mesh_type::rank(), ElementType, CONTIGUOUS>;
+    using raw_view_type = std::experimental::mdspan<
+            ElementType,
+            std::experimental::dextents<mesh_type::rank()>,
+            std::experimental::layout_stride>;
 
     using mcoord_type = typename mdomain_type::mcoord_type;
 
@@ -59,7 +70,7 @@ public:
 
     using reference = typename raw_view_type::reference;
 
-    template <class, class, bool>
+    template <class, class, class>
     friend class BlockView;
 
 protected:
@@ -77,8 +88,7 @@ protected:
     static auto get_slicer_for(ProductMDomain<OMeshes...> const& c)
     {
         if constexpr (in_tags_v<QueryMesh, detail::TypeSeq<OMeshes...>>) {
-            return std::
-                    pair<std::size_t, std::size_t>(lbound<QueryMesh>(c), ubound<QueryMesh>(c) + 1);
+            return std::pair<std::size_t, std::size_t>(0, back<QueryMesh>(c) + 1);
         } else {
             return std::experimental::full_extent;
         }
@@ -106,7 +116,7 @@ public:
      */
     template <class OElementType>
     inline constexpr BlockView(Block<mdomain_type, OElementType> const& other) noexcept
-        : m_raw(other.raw_view())
+        : m_raw(other.m_raw)
         , m_domain(other.domain())
     {
     }
@@ -116,8 +126,9 @@ public:
      */
     template <class OElementType>
     inline constexpr BlockView(
-            BlockView<mdomain_type, OElementType, CONTIGUOUS> const& other) noexcept
-        : m_raw(other.raw_view())
+            BlockView<mdomain_type, OElementType, std::experimental::layout_stride> const&
+                    other) noexcept
+        : m_raw(other.m_raw)
         , m_domain(other.domain())
     {
     }
@@ -130,6 +141,20 @@ public:
         : m_raw(raw_view)
         , m_domain(domain)
     {
+    }
+
+    inline constexpr BlockView(mdomain_type domain, ElementType* ptr) : m_raw(), m_domain(domain)
+    {
+        namespace stdex = std::experimental;
+        stdex::dextents<mesh_type::rank()> extents_r(::extents<Meshes>(m_domain)...);
+        stdex::layout_right::mapping mapping_r(extents_r);
+
+        stdex::dextents<mesh_type::rank()> extents_s(
+                (front<Meshes>(m_domain) + ::extents<Meshes>(m_domain))...);
+        std::array<std::size_t, mesh_type::rank()> strides_s {
+                mapping_r.stride(type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)...};
+        stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
+        m_raw = raw_view_type(ptr - mapping_s(front<Meshes>(domain)...), mapping_s);
     }
 
     /** Copy-assigns a new value to this BlockView, yields a new view to the same data
@@ -170,12 +195,26 @@ public:
     inline constexpr reference operator()(
             TaggedVector<std::size_t, OMeshes> const&... mcoords) const noexcept
     {
+        assert(((mcoords >= front<OMeshes>(m_domain)) && ...));
         return m_raw(take_first<Meshes>(mcoords...)...);
     }
 
     inline constexpr reference operator()(mcoord_type const& indices) const noexcept
     {
+        assert(((get<Meshes>(indices) >= front<Meshes>(m_domain)) && ...));
         return m_raw(indices.array());
+    }
+
+    template <class QueryMesh>
+    inline constexpr std::size_t ibegin() const noexcept
+    {
+        return front<QueryMesh>(m_domain);
+    }
+
+    template <class QueryMesh>
+    inline constexpr std::size_t iend() const noexcept
+    {
+        return back<QueryMesh>(m_domain) + 1;
     }
 
     inline accessor_type accessor() const
@@ -193,44 +232,48 @@ public:
         return extents_type::rank_dynamic();
     }
 
-    static inline constexpr size_type static_extent(size_t r) noexcept
+    // static inline constexpr size_type static_extent(size_t r) noexcept
+    // {
+    //     return extents_type::static_extent(r);
+    // }
+
+    inline constexpr mcoord_type extents() const noexcept
     {
-        return extents_type::static_extent(r);
+        return mcoord_type(
+                (m_raw.extent(type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)
+                 - front<Meshes>(m_domain))...);
     }
 
-    inline constexpr extents_type extents() const noexcept
+    template <class QueryMesh>
+    inline constexpr size_type extent() const noexcept
     {
-        return m_raw.extents();
-    }
-
-    inline constexpr size_type extent(size_t dim) const noexcept
-    {
-        return m_raw.extent(dim);
+        return m_raw.extent(type_seq_rank_v<QueryMesh, detail::TypeSeq<Meshes...>>)
+               - front<QueryMesh>(m_domain);
     }
 
     inline constexpr size_type size() const noexcept
     {
-        return m_raw.size();
+        return raw_view_without_offset().size();
     }
 
     inline constexpr size_type unique_size() const noexcept
     {
-        return m_raw.unique_size();
+        return raw_view_without_offset().size();
     }
 
     static inline constexpr bool is_always_unique() noexcept
     {
-        return mapping_type::is_always_unique();
+        return underlying_raw_view_type::mapping_type::is_always_unique();
     }
 
     static inline constexpr bool is_always_contiguous() noexcept
     {
-        return mapping_type::is_always_contiguous();
+        return underlying_raw_view_type::mapping_type::is_always_contiguous();
     }
 
     static inline constexpr bool is_always_strided() noexcept
     {
-        return mapping_type::is_always_strided();
+        return underlying_raw_view_type::mapping_type::is_always_strided();
     }
 
     inline constexpr mapping_type mapping() const noexcept
@@ -240,22 +283,23 @@ public:
 
     inline constexpr bool is_unique() const noexcept
     {
-        return m_raw.is_unique();
+        return raw_view_without_offset().is_unique();
     }
 
     inline constexpr bool is_contiguous() const noexcept
     {
-        return m_raw.is_contiguous();
+        return raw_view_without_offset().is_contiguous();
     }
 
     inline constexpr bool is_strided() const noexcept
     {
-        return m_raw.is_strided();
+        return raw_view_without_offset().is_strided();
     }
 
-    inline constexpr size_type stride(size_t r) const
+    template <class QueryMesh>
+    inline constexpr auto stride() const
     {
-        return m_raw.stride(r);
+        return m_raw.stride(type_seq_rank_v<QueryMesh, detail::TypeSeq<Meshes...>>);
     }
 
     /** Swaps this field with another
@@ -293,6 +337,20 @@ public:
         return select<QueryMeshes...>(domain());
     }
 
+    inline constexpr ElementType* data() const
+    {
+        namespace stdex = std::experimental;
+        stdex::dextents<mesh_type::rank()> extents_r(::extents<Meshes>(m_domain)...);
+        stdex::layout_right::mapping mapping_r(extents_r);
+
+        stdex::dextents<mesh_type::rank()> extents_s(
+                (front<Meshes>(m_domain) + ::extents<Meshes>(m_domain))...);
+        std::array<std::size_t, mesh_type::rank()> strides_s {
+                mapping_r.stride(type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)...};
+        stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
+        return m_raw.data() + mapping_s(front<Meshes>(m_domain)...);
+    }
+
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
      */
@@ -300,13 +358,18 @@ public:
     {
         return m_raw;
     }
+
+    /** Provide a modifiable view of the data
+     * @return a modifiable view of the data
+     */
+    inline constexpr underlying_raw_view_type raw_view_without_offset() const
+    {
+        return underlying_raw_view_type(data(), ::extents<Meshes>(m_domain)...);
+    }
 };
 
-template <class... Meshes, class ElementType, class Extents, class LayoutPolicy>
+template <class... Meshes, class ElementType, class Extents, class Layout>
 BlockView(
         ProductMDomain<Meshes...> domain,
-        std::experimental::mdspan<ElementType, Extents, LayoutPolicy> raw_view)
-        -> BlockView<
-                ProductMDomain<Meshes...>,
-                ElementType,
-                std::is_same_v<LayoutPolicy, std::experimental::layout_right>>;
+        std::experimental::mdspan<ElementType, Extents, Layout> raw_view)
+        -> BlockView<ProductMDomain<Meshes...>, ElementType, std::experimental::layout_stride>;

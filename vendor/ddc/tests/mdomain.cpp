@@ -42,19 +42,19 @@ TEST_F(MDomainXTest, Constructor)
     EXPECT_EQ(dom_a, dom_d);
     EXPECT_EQ(dom_a.rmin(), rmin);
     EXPECT_EQ(dom_a.rmax(), rmax);
-    EXPECT_EQ(dom_a.lbound(), lbound);
-    EXPECT_EQ(dom_a.ubound(), ubound);
+    EXPECT_EQ(dom_a.front(), lbound);
+    EXPECT_EQ(dom_a.back(), ubound);
 }
 
 TEST_F(MDomainXTest, ubound)
 {
-    EXPECT_EQ(dom.ubound().get<MeshX>(), 100ul);
-    EXPECT_EQ(dom.ubound(), 100ul);
+    EXPECT_EQ(dom.back().get<MeshX>(), 100ul);
+    EXPECT_EQ(dom.back(), 100ul);
 }
 
 TEST_F(MDomainXTest, rmax)
 {
-    EXPECT_EQ(dom.mesh().to_real(get<MeshX>(dom.ubound())).get<DimX>(), 1.);
+    EXPECT_EQ(dom.mesh().to_real(get<MeshX>(dom.back())).get<DimX>(), 1.);
     EXPECT_EQ(dom.rmax().get<DimX>(), 1.);
     EXPECT_EQ(dom.rmax(), 1.);
 }

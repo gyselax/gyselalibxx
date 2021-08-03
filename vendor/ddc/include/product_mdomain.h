@@ -108,14 +108,14 @@ public:
         return mcoord_type(std::get<domain_t<Meshes>>(m_domains).size()...);
     }
 
-    constexpr mcoord_type lbound() const noexcept
+    constexpr mcoord_type front() const noexcept
     {
-        return mcoord_type(std::get<domain_t<Meshes>>(m_domains).lbound()...);
+        return mcoord_type(std::get<domain_t<Meshes>>(m_domains).front()...);
     }
 
-    constexpr mcoord_type ubound() const noexcept
+    constexpr mcoord_type back() const noexcept
     {
-        return mcoord_type(std::get<domain_t<Meshes>>(m_domains).ubound()...);
+        return mcoord_type(std::get<domain_t<Meshes>>(m_domains).back()...);
     }
 
     rcoord_type to_real(mcoord_type const& icoord) const noexcept
@@ -136,8 +136,8 @@ public:
     template <class... OMeshes>
     constexpr auto restrict(ProductMDomain<OMeshes...> const& odomain) const
     {
-        assert(((get<OMeshes>().lbound() <= odomain.template get<OMeshes>().lbound()) && ...));
-        assert(((get<OMeshes>().ubound() >= odomain.template get<OMeshes>().ubound()) && ...));
+        assert(((get<OMeshes>().front() <= odomain.template get<OMeshes>().front()) && ...));
+        assert(((get<OMeshes>().back() >= odomain.template get<OMeshes>().back()) && ...));
         return ProductMDomain(get_slicer_for<Meshes>(odomain)...);
     }
 
@@ -182,8 +182,8 @@ constexpr auto select(ProductMDomain<Meshes...> const& domain)
 {
     return ProductMDomain(
             select<QueryMeshes...>(domain.mesh()),
-            select<QueryMeshes...>(domain.lbound()),
-            select<QueryMeshes...>(domain.ubound()));
+            select<QueryMeshes...>(domain.front()),
+            select<QueryMeshes...>(domain.back()));
 }
 
 template <class... QueryMeshes, class... Meshes>
@@ -193,15 +193,15 @@ constexpr MCoord<QueryMeshes...> extents(ProductMDomain<Meshes...> const& domain
 }
 
 template <class... QueryMeshes, class... Meshes>
-constexpr MCoord<QueryMeshes...> lbound(ProductMDomain<Meshes...> const& domain) noexcept
+constexpr MCoord<QueryMeshes...> front(ProductMDomain<Meshes...> const& domain) noexcept
 {
-    return MCoord<QueryMeshes...>(get<QueryMeshes>(domain).lbound()...);
+    return MCoord<QueryMeshes...>(get<QueryMeshes>(domain).front()...);
 }
 
 template <class... QueryMeshes, class... Meshes>
-constexpr MCoord<QueryMeshes...> ubound(ProductMDomain<Meshes...> const& domain) noexcept
+constexpr MCoord<QueryMeshes...> back(ProductMDomain<Meshes...> const& domain) noexcept
 {
-    return MCoord<QueryMeshes...>(get<QueryMeshes>(domain).ubound()...);
+    return MCoord<QueryMeshes...>(get<QueryMeshes>(domain).back()...);
 }
 
 template <class... QueryMeshes, class... Meshes>

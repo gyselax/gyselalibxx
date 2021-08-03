@@ -97,12 +97,12 @@ public:
         return m_mesh;
     }
 
-    inline constexpr mcoord_type lbound() const noexcept
+    inline constexpr mcoord_type front() const noexcept
     {
         return m_lbound;
     }
 
-    inline constexpr mcoord_type ubound() const noexcept
+    inline constexpr mcoord_type back() const noexcept
     {
         return m_ubound;
     }
@@ -119,12 +119,12 @@ public:
 
     inline constexpr rcoord_type rmin() const noexcept
     {
-        return mesh().to_real(lbound());
+        return mesh().to_real(front());
     }
 
     inline constexpr rcoord_type rmax() const noexcept
     {
-        return mesh().to_real(ubound());
+        return mesh().to_real(back());
     }
 
     inline constexpr bool empty() const noexcept
@@ -139,7 +139,7 @@ public:
 
     constexpr Iterator begin() const noexcept
     {
-        return Iterator {0};
+        return Iterator {front()};
     }
 
     constexpr Iterator cbegin() const noexcept
@@ -149,7 +149,7 @@ public:
 
     constexpr Iterator end() const noexcept
     {
-        return Iterator {size()};
+        return Iterator {back() + 1};
     }
 
     constexpr Iterator cend() const noexcept

@@ -62,7 +62,7 @@ public:
 
     explicit BSplines(domain_type const& domain)
         : m_mesh(get<mesh_type>(domain).mesh())
-        , m_domain(m_mesh, domain.lbound(), domain.ubound())
+        , m_domain(m_mesh, domain.front(), domain.back())
     {
     }
 

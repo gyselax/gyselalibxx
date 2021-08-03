@@ -36,8 +36,8 @@ protected:
 TEST_F(ProductMDomainTest, constructor)
 {
     EXPECT_EQ(domain_x_vx.extents(), (MCoord<MeshX, MeshVx>(11, 4)));
-    EXPECT_EQ(domain_x_vx.lbound(), (MCoord<MeshX, MeshVx>(0, 0)));
-    EXPECT_EQ(domain_x_vx.ubound(), (MCoord<MeshX, MeshVx>(10, 3)));
+    EXPECT_EQ(domain_x_vx.front(), (MCoord<MeshX, MeshVx>(0, 0)));
+    EXPECT_EQ(domain_x_vx.back(), (MCoord<MeshX, MeshVx>(10, 3)));
     EXPECT_EQ(domain_x_vx.size(), 11 * 4);
 }
 

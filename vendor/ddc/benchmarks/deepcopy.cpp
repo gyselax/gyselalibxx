@@ -54,8 +54,8 @@ static void deepcopy_1d(benchmark::State& state)
     MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(0));
     ProductMesh mesh(mesh_vx);
     MDomainVx const dom(mesh, MCoordVx(state.range(0)));
-    DBlockSpanVx src(dom, DSpan1D(src_data.data(), state.range(0)));
-    DBlockSpanVx dst(dom, DSpan1D(dst_data.data(), state.range(0)));
+    DBlockSpanVx src(dom, src_data.data());
+    DBlockSpanVx dst(dom, dst_data.data());
     for (auto _ : state) {
         deepcopy(dst, src);
     }
@@ -86,9 +86,9 @@ static void deepcopy_2d(benchmark::State& state)
     MeshX mesh_x(RCoordX(0.), RCoordX(2.), state.range(0));
     MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(1));
     ProductMesh mesh(mesh_x, mesh_vx);
-    MDomainXVx const dom(mesh, MCoordXVx(state.range(0), state.range(1)));
-    DBlockSpanXVx src(dom, DSpan2D(src_data.data(), state.range(0), state.range(1)));
-    DBlockSpanXVx dst(dom, DSpan2D(dst_data.data(), state.range(0), state.range(1)));
+    MDomainXVx const dom(mesh, MCoordXVx(state.range(0) - 1, state.range(1) - 1));
+    DBlockSpanXVx src(dom, src_data.data());
+    DBlockSpanXVx dst(dom, dst_data.data());
     for (auto _ : state) {
         deepcopy(dst, src);
     }
@@ -104,9 +104,9 @@ static void deepcopy_subblock_2d(benchmark::State& state)
     MeshX mesh_x(RCoordX(0.), RCoordX(2.), state.range(0));
     MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(1));
     ProductMesh mesh(mesh_x, mesh_vx);
-    MDomainXVx const dom(mesh, MCoordXVx(state.range(0), state.range(1)));
-    DBlockSpanXVx src(dom, DSpan2D(src_data.data(), state.range(0), state.range(1)));
-    DBlockSpanXVx dst(dom, DSpan2D(dst_data.data(), state.range(0), state.range(1)));
+    MDomainXVx const dom(mesh, MCoordXVx(state.range(0) - 1, state.range(1) - 1));
+    DBlockSpanXVx src(dom, src_data.data());
+    DBlockSpanXVx dst(dom, dst_data.data());
     for (auto _ : state) {
         for (MCoordX i : get<MeshX>(dom)) {
             auto&& dst_i = dst[i];

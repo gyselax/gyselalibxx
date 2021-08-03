@@ -42,18 +42,14 @@ public:
 
     using reference = typename block_view_type::reference;
 
-    template <class, class, bool>
+    template <class, class, class>
     friend class BlockView;
 
 public:
     /** Construct a Block on a domain with uninitialized values
      */
     explicit inline constexpr Block(mdomain_type const& domain)
-        : block_view_type(
-                domain,
-                raw_view_type(
-                        new (std::align_val_t(64)) value_type[domain.size()],
-                        ::get<Meshes>(domain).size()...))
+        : block_view_type(domain, new (std::align_val_t(64)) value_type[domain.size()])
     {
     }
 
@@ -71,8 +67,8 @@ public:
 
     inline ~Block()
     {
-        if (this->raw_view().data()) {
-            operator delete(this->raw_view().data(), std::align_val_t(64));
+        if (this->m_raw.data()) {
+            operator delete(this->data(), std::align_val_t(64));
         }
     }
 
@@ -120,16 +116,19 @@ public:
     inline constexpr element_type& operator()(
             TaggedVector<std::size_t, OMeshes> const&... mcoords) noexcept
     {
+        assert(((mcoords >= front<OMeshes>(this->m_domain)) && ...));
         return this->m_raw(take_first<Meshes>(mcoords...)...);
     }
 
     inline constexpr element_type const& operator()(mcoord_type const& indices) const noexcept
     {
+        assert(((get<Meshes>(indices) >= front<Meshes>(this->m_domain)) && ...));
         return this->m_raw(indices.array());
     }
 
     inline constexpr element_type& operator()(mcoord_type const& indices) noexcept
     {
+        assert(((get<Meshes>(indices) >= front<Meshes>(this->m_domain)) && ...));
         return this->m_raw(indices.array());
     }
 

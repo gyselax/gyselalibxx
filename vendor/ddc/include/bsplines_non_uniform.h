@@ -138,7 +138,7 @@ private:
 template <class Tag, std::size_t D>
 BSplines<NonUniformMesh<Tag>, D>::BSplines(domain_type const& domain)
     : m_mesh(get<mesh_type>(domain).mesh())
-    , m_domain(m_mesh, domain.lbound(), domain.ubound())
+    , m_domain(m_mesh, domain.front(), domain.back())
     , m_knots(m_domain.size() + 2 * degree())
 {
     assert(ncells() > 0);
