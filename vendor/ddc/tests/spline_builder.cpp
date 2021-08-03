@@ -6,8 +6,6 @@
 #include <gtest/gtest.h>
 #include <math.h>
 
-#include "gtest/gtest_pred_impl.h"
-
 #include "block.h"
 #include "block_spline.h"
 #include "bsplines_uniform.h"
@@ -20,10 +18,14 @@
 #include "rcoord.h"
 #include "spline_builder.h"
 #include "spline_evaluator.h"
+#include "taggedvector.h"
 #include "uniform_mesh.h"
 #include "view.h"
 
 #include <experimental/mdspan>
+
+template <class SupportType, class ElementType, class LayoutPolicy>
+class BlockView;
 
 // template <class, class, bool = true>
 // class BlockView;

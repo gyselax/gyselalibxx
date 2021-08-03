@@ -1,0 +1,13 @@
+[
+  # experimental/mdspan headers
+  { include: ["@\"experimental/__p0009_bits/.*.hpp\"", private, "<experimental/mdspan>", public ] },
+  { include: ["<experimental/__p0009_bits/.*.hpp>", private, "<experimental/mdspan>", public ] },
+
+  # gtest headers
+  { include: ["@\"gtest/gtest-.*.h\"", private, "\"gtest/gtest.h\"", public ] },
+  { include: ["@<gtest/gtest-.*.h>", private, "<gtest/gtest.h>", public ] },
+
+  # gtest headers
+  { include: ["@\"gmock/gmock-.*.h\"", private, "\"gmock/gmock.h\"", public ] },
+  { include: ["@<gmock/gmock-.*.h>", private, "<gmock/gmock.h>", public ] }
+]

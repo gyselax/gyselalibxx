@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iosfwd>
 
 #include <paraconf.h>
 

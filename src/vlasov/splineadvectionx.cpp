@@ -7,7 +7,6 @@
 #include "deprecated/spline_1d.h"
 
 #include "blockview.h"
-#include "mcoord.h"
 #include "mdomain.h"
 #include "null_boundary_value.h"
 #include "product_mdomain.h"
@@ -15,6 +14,7 @@
 #include "rcoord.h"
 #include "spline_builder_1d.h"
 #include "splineadvectionx.h"
+#include "taggedvector.h"
 
 #include <experimental/mdspan>
 

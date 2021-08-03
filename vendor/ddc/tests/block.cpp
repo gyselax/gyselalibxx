@@ -1,10 +1,7 @@
 #include <iosfwd>
 #include <memory>
-#include <utility>
 
 #include <gtest/gtest.h>
-
-#include "gtest/gtest_pred_impl.h"
 
 #include "block.h"
 #include "blockview.h"
@@ -14,6 +11,7 @@
 #include "product_mdomain.h"
 #include "product_mesh.h"
 #include "rcoord.h"
+#include "taggedvector.h"
 #include "uniform_mesh.h"
 
 #include <experimental/mdspan>

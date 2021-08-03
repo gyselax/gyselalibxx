@@ -4,11 +4,10 @@
 
 #include <gtest/gtest.h>
 
-#include "gtest/gtest_pred_impl.h"
-
 #include "mcoord.h"
 #include "mdomain.h"
 #include "rcoord.h"
+#include "taggedvector.h"
 #include "uniform_mesh.h"
 
 class DimX;

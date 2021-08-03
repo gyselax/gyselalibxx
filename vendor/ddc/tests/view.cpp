@@ -4,8 +4,6 @@
 
 #include <gtest/gtest.h>
 
-#include "gtest/gtest_pred_impl.h"
-
 #include "view.h"
 
 #include <experimental/mdspan>

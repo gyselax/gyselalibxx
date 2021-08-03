@@ -5,12 +5,12 @@
 #include <gtest/gtest.h>
 
 #include "deprecated/bsplines_uniform.h"
-#include "gtest/gtest_pred_impl.h"
 
 #include "bsplines_uniform.h"
 #include "mcoord.h"
 #include "mdomain.h"
 #include "rcoord.h"
+#include "taggedvector.h"
 #include "uniform_mesh.h"
 #include "view.h"
 

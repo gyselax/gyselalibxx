@@ -1,3 +1,6 @@
+#include <memory>
+#include <type_traits>
+
 #include <gtest/gtest.h>
 
 #include "type_seq.h"

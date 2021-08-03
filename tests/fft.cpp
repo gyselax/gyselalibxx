@@ -1,18 +1,30 @@
+#include <algorithm>
+#include <array>
 #include <cassert>
 #include <cmath>
 #include <complex> //This library is declared before fftw3.h
+#include <iostream>
+#include <memory>
 #include <vector>
 
+#include <ext/alloc_traits.h>
 #include <fftw3.h>
 #include <gtest/gtest.h>
+#include <stdlib.h>
 
 #include "block.h"
 #include "fft_1d.h"
 #include "fftw.h"
 #include "geometry.h"
 #include "ifftw.h"
-#include "mdomain.h"
+#include "math_tools.h"
+#include "mcoord.h"
+#include "non_uniform_mesh.h"
 #include "product_mdomain.h"
+#include "product_mesh.h"
+#include "rcoord.h"
+#include "taggedvector.h"
+#include "uniform_mesh.h"
 
 using namespace std;
 

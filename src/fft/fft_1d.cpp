@@ -1,9 +1,9 @@
 #include <cassert>
+#include <cmath>
 #include <complex> //This library is declared before fftw3.h
 #include <iostream>
 
 #include <fftw3.h>
-#include <math.h>
 
 #include "fft_1d.h"
 

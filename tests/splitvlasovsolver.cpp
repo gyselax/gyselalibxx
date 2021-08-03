@@ -1,13 +1,8 @@
 #include <memory>
 
-#include <gmock/gmock-actions.h>
-#include <gmock/gmock-function-mocker.h>
-#include <gmock/gmock-spec-builders.h>
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "gtest/gtest_pred_impl.h"
-
-#include "blockview.h"
 #include "geometry.h"
 #include "iadvectionvx.h"
 #include "iadvectionx.h"

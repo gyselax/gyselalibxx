@@ -1,6 +1,12 @@
+#include <array>
+#include <vector>
+
 #include <gtest/gtest.h>
 
+#include "mcoord.h"
 #include "non_uniform_mesh.h"
+#include "rcoord.h"
+#include "taggedvector.h"
 
 struct DimX;
 

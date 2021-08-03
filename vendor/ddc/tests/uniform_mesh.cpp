@@ -2,8 +2,6 @@
 
 #include <gtest/gtest.h>
 
-#include "gtest/gtest_pred_impl.h"
-
 #include "mcoord.h"
 #include "rcoord.h"
 #include "uniform_mesh.h"

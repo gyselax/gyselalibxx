@@ -1,11 +1,15 @@
-#include <iostream>
+#include <array>
+#include <string>
 #include <string_view>
 
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "block.h"
 #include "geometry.h"
+#include "mcoord.h"
+#include "mdomain.h"
+#include "product_mdomain.h"
+#include "taggedvector.h"
 
 void expose_to_pdi(std::string const& name, DBlockSpanXVx b)
 {

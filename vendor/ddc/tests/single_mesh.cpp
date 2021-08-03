@@ -3,8 +3,6 @@
 
 #include <gtest/gtest.h>
 
-#include "gtest/gtest_pred_impl.h"
-
 #include "mcoord.h"
 #include "non_uniform_mesh.h"
 #include "product_mesh.h"

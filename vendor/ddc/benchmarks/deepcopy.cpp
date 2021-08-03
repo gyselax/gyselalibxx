@@ -1,10 +1,20 @@
+#include <algorithm>
+#include <cstdint>
 #include <cstring>
+#include <iosfwd>
 #include <vector>
 
 #include <benchmark/benchmark.h>
 
 #include "blockview.h"
 #include "deepcopy.h"
+#include "mcoord.h"
+#include "mdomain.h"
+#include "product_mdomain.h"
+#include "product_mesh.h"
+#include "rcoord.h"
+#include "taggedvector.h"
+#include "uniform_mesh.h"
 
 class DimX;
 class DimVx;
