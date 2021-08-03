@@ -47,7 +47,8 @@ std::ostream& stream_impl(
         for (std::size_t i0 = 0; i0 < s.extent(I0); ++i0) {
             stream_impl(
                     os,
-                    std::experimental::submdspan(s, i0, (Is, std::experimental::full_extent)...),
+                    std::experimental::
+                            submdspan(s, i0, ((void)Is, std::experimental::full_extent)...),
                     std::make_index_sequence<sizeof...(Is)>());
         }
         os << ']';
