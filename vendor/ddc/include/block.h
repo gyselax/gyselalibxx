@@ -111,13 +111,14 @@ public:
 
     template <class... OMeshes>
     inline constexpr element_type const& operator()(
-            MCoord<OMeshes> const&... mcoords) const noexcept
+            TaggedVector<std::size_t, OMeshes> const&... mcoords) const noexcept
     {
         return this->m_raw(take_first<Meshes>(mcoords...)...);
     }
 
     template <class... OMeshes>
-    inline constexpr element_type& operator()(MCoord<OMeshes> const&... mcoords) noexcept
+    inline constexpr element_type& operator()(
+            TaggedVector<std::size_t, OMeshes> const&... mcoords) noexcept
     {
         return this->m_raw(take_first<Meshes>(mcoords...)...);
     }

@@ -167,7 +167,8 @@ public:
     }
 
     template <class... OMeshes>
-    inline constexpr reference operator()(MCoord<OMeshes> const&... mcoords) const noexcept
+    inline constexpr reference operator()(
+            TaggedVector<std::size_t, OMeshes> const&... mcoords) const noexcept
     {
         return m_raw(take_first<Meshes>(mcoords...)...);
     }

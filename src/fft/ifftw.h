@@ -39,7 +39,7 @@ public:
         assert(out_values.is_unique());
 
         // shall be right layout
-        std::array<int, out_values.rank()> n;
+        std::array<int, ProductMDomain<UniformMesh<Tags>...>::rank()> n;
         for (std::size_t r = 0; r < out_values.rank(); ++r) {
             n[r] = out_values.extent(r);
         }
