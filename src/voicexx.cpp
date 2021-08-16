@@ -25,6 +25,15 @@ int main(int argc, char** argv)
         return EXIT_SUCCESS;
     }
 
+    long steps;
+    PC_int(PC_get(conf, ".steps"), &steps);
+
+    double time_step;
+    PC_double(PC_get(conf, ".time_step"), &time_step);
+
+    double mass_ratio;
+    PC_double(PC_get(conf, ".mass_ratio"), &mass_ratio);
+
     double x_min;
     PC_double(PC_get(conf, ".MeshX.min"), &x_min);
     double x_max;
@@ -65,11 +74,11 @@ int main(int argc, char** argv)
 
     NullEfieldSolver const efield;
 
-    PredCorr const predcorr(vlasov, efield, 1.);
+    PredCorr const predcorr(vlasov, efield, time_step);
 
     DBlockXVx fdistribu(dom2d);
 
-    predcorr(fdistribu, 1, 100);
+    predcorr(fdistribu, mass_ratio, steps);
 
     return EXIT_SUCCESS;
 }
