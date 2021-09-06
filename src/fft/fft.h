@@ -28,8 +28,12 @@ public:
             ProductMDomain<UniformMesh<Tags>...> const& dom_x) const noexcept = 0;
 
     virtual void operator()(
-            BlockView<ProductMDomain<NonUniformMesh<Fourier<Tags>>...>, std::complex<double>> const&
-                    out_values,
-            BlockView<ProductMDomain<UniformMesh<Tags>...>, std::complex<double>> const& in_values)
-            const noexcept = 0;
+            BlockView<
+                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
+                    std::complex<double>,
+                    std::experimental::layout_right> const& out_values,
+            BlockView<
+                    ProductMDomain<UniformMesh<Tags>...>,
+                    std::complex<double>,
+                    std::experimental::layout_right> const& in_values) const noexcept = 0;
 };

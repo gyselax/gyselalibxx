@@ -1,5 +1,6 @@
 #include <iosfwd>
 #include <memory>
+#include <type_traits>
 
 #include <gtest/gtest.h>
 
@@ -146,10 +147,16 @@ TEST_F(DBlockXVxTest, slice)
             block(ii, jj) = 1. * ii + .001 * jj;
         }
     }
+    ASSERT_TRUE((std::is_same_v<
+                 std::decay_t<decltype(block)>::layout_type,
+                 std::experimental::layout_right>));
     {
         const DBlockXVx& constref_block = block;
         constexpr auto SLICE_VAL = 1;
         auto&& block_x = constref_block[MCoord<MeshVx>(SLICE_VAL)];
+        ASSERT_TRUE((std::is_same_v<
+                     std::decay_t<decltype(block_x)>::layout_type,
+                     std::experimental::layout_stride>));
         ASSERT_EQ(block_x.extent<MeshX>(), block.extent<MeshX>());
         for (auto&& ii : constref_block.domain<MeshX>()) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
@@ -157,6 +164,9 @@ TEST_F(DBlockXVxTest, slice)
         }
 
         auto&& block_v = constref_block[MCoord<MeshX>(SLICE_VAL)];
+        ASSERT_TRUE((std::is_same_v<
+                     std::decay_t<decltype(block_v)>::layout_type,
+                     std::experimental::layout_right>));
         ASSERT_EQ(block_v.extent<MeshVx>(), block.extent<MeshVx>());
         for (auto&& ii : constref_block.domain<MeshVx>()) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
@@ -164,6 +174,9 @@ TEST_F(DBlockXVxTest, slice)
         }
 
         auto&& subblock = constref_block[ProductMDomain<MeshX>(ProductMesh(mesh_x), 10, 14)];
+        // ASSERT_TRUE((std::is_same_v<
+        //              std::decay_t<decltype(subblock)>::layout_type,
+        //              std::experimental::layout_right>));
         ASSERT_EQ(subblock.extent<MeshX>(), 5);
         ASSERT_EQ(subblock.extent<MeshVx>(), get<MeshVx>(block.domain()).size());
         for (auto&& ii : subblock.domain<MeshX>()) {
@@ -229,6 +242,55 @@ TEST_F(NonZeroDBlockXVxTest, view)
         for (auto jj = block.ibegin<MeshVx>(); jj < block.iend<MeshVx>(); ++jj) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
             ASSERT_EQ(cview(ii, jj), block(MCoordXVx(ii, jj)));
+        }
+    }
+}
+
+TEST_F(NonZeroDBlockXVxTest, slice)
+{
+    DBlockXVx block(dom);
+    for (auto&& ii : block.domain<MeshX>()) {
+        for (auto&& jj : block.domain<MeshVx>()) {
+            block(ii, jj) = 1. * ii + .001 * jj;
+        }
+    }
+    ASSERT_TRUE((std::is_same_v<
+                 std::decay_t<decltype(block)>::layout_type,
+                 std::experimental::layout_right>));
+    {
+        const DBlockXVx& constref_block = block;
+        constexpr auto SLICE_VAL = 1;
+        auto&& block_x = constref_block[MCoord<MeshVx>(SLICE_VAL)];
+        ASSERT_TRUE((std::is_same_v<
+                     std::decay_t<decltype(block_x)>::layout_type,
+                     std::experimental::layout_stride>));
+        ASSERT_EQ(block_x.extent<MeshX>(), block.extent<MeshX>());
+        for (auto&& ii : constref_block.domain<MeshX>()) {
+            // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
+            ASSERT_EQ(block_x(ii), constref_block(ii, MCoord<MeshVx>(SLICE_VAL)));
+        }
+
+        auto&& block_v = constref_block[MCoord<MeshX>(SLICE_VAL)];
+        ASSERT_TRUE((std::is_same_v<
+                     std::decay_t<decltype(block_v)>::layout_type,
+                     std::experimental::layout_right>));
+        ASSERT_EQ(block_v.extent<MeshVx>(), block.extent<MeshVx>());
+        for (auto&& ii : constref_block.domain<MeshVx>()) {
+            // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
+            ASSERT_EQ(block_v(ii), constref_block(MCoord<MeshX>(SLICE_VAL), ii));
+        }
+
+        auto&& subblock = constref_block[ProductMDomain<MeshX>(ProductMesh(mesh_x), 110, 150)];
+        // ASSERT_TRUE((std::is_same_v<
+        //              std::decay_t<decltype(subblock)>::layout_type,
+        //              std::experimental::layout_right>));
+        ASSERT_EQ(subblock.extent<MeshX>(), 41);
+        ASSERT_EQ(subblock.extent<MeshVx>(), get<MeshVx>(block.domain()).size());
+        for (auto&& ii : subblock.domain<MeshX>()) {
+            for (auto&& jj : subblock.domain<MeshVx>()) {
+                // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
+                ASSERT_EQ(subblock(ii, jj), constref_block(ii, jj));
+            }
         }
     }
 }

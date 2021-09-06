@@ -78,14 +78,11 @@ DBlockSpanXVx SplineAdvectionX::operator()(DBlockSpanXVx fdistribu, double mass_
 
         // build a spline representation of the data
         //TODO: spline on mesh
-        m_spline_interpolator
-                .compute_interpolant(spline, contiguous_slice.raw_view_without_offset());
+        m_spline_interpolator.compute_interpolant(spline, contiguous_slice.allocation_view());
 
         // evaluate the function at the feet using the spline
         //TODO: spline on mesh
-        spline.eval_array(
-                feet_coords.raw_view_without_offset(),
-                contiguous_slice.raw_view_without_offset());
+        spline.eval_array(feet_coords.allocation_view(), contiguous_slice.allocation_view());
 
         // copy back
         deepcopy(fdistribu[vii], contiguous_slice);

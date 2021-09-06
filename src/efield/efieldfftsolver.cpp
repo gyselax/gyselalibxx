@@ -35,8 +35,10 @@ static double compute_dens(DBlockViewVx const& fdistribu)
 
 static void compute_rho(DBlockSpanX const& rho, DBlockViewXVx const& fdistribu)
 {
+    DBlockVx contiguous_slice(fdistribu.domain<MeshVx>());
     for (MCoordX ix : rho.domain()) {
-        double const dens_elec = compute_dens(fdistribu[ix]);
+        deepcopy(contiguous_slice, fdistribu[ix]);
+        double const dens_elec = compute_dens(contiguous_slice);
         double const dens_ion = 1.;
         rho(ix) = (dens_ion - dens_elec);
     }

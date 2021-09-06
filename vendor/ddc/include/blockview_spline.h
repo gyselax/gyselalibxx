@@ -4,7 +4,7 @@
 #include "bsplines.h"
 
 template <class Mesh, std::size_t D, class ElementType>
-class BlockView<BSplines<Mesh, D>, ElementType, std::experimental::layout_stride>
+class BlockView<BSplines<Mesh, D>, ElementType>
 {
 public:
     /// ND memory view
@@ -56,9 +56,7 @@ public:
      * @param other the BlockView to move
      */
     template <class OElementType>
-    inline constexpr BlockView(
-            BlockView<bsplines_type, OElementType, std::experimental::layout_stride> const&
-                    other) noexcept
+    inline constexpr BlockView(BlockView<bsplines_type, OElementType> const& other) noexcept
         : m_raw(other.raw_view())
         , m_bsplines(other.bsplines())
     {

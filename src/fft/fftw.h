@@ -43,21 +43,23 @@ public:
     }
 
     void operator()(
-            BlockView<ProductMDomain<NonUniformMesh<Fourier<Tags>>...>, std::complex<double>> const&
-                    out_values,
-            BlockView<ProductMDomain<UniformMesh<Tags>...>, std::complex<double>> const& in_values)
-            const noexcept override
+            BlockView<
+                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
+                    std::complex<double>,
+                    std::experimental::layout_right> const& out_values,
+            BlockView<
+                    ProductMDomain<UniformMesh<Tags>...>,
+                    std::complex<double>,
+                    std::experimental::layout_right> const& in_values) const noexcept override
     {
-        assert(in_values.is_contiguous());
-        assert(in_values.is_unique());
-        assert(out_values.is_contiguous());
-        assert(out_values.is_unique());
+        assert(in_values.extents().array() == out_values.extents().array());
 
-        // shall be right layout
-        std::array<int, ProductMDomain<NonUniformMesh<Fourier<Tags>>...>::rank()> n;
-        ((n[type_seq_rank_v<Tags, detail::TypeSeq<Tags...>>]
-          = out_values.template extent<NonUniformMesh<Fourier<Tags>>>()),
-         ...);
+        // It needs to be of type 'int'
+        auto extents = out_values.extents();
+        std::array<int, sizeof...(Tags)> n;
+        for (std::size_t i = 0; i < extents.size(); ++i) {
+            n[i] = extents[i];
+        }
 
         fftw_plan plan = fftw_plan_dft(
                 n.size(),
