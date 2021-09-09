@@ -48,9 +48,9 @@ int main(int argc, char** argv)
     long vx_size;
     PC_int(PC_get(conf, ".MeshVx.size"), &vx_size);
 
-    MeshX const mesh_x((RCoordX(x_min)), RCoordX(x_max));
+    MeshX const mesh_x((RCoordX(x_min)), RCoordX(x_max), x_size + 1);
 
-    MeshVx const mesh_vx((RCoordVx(vx_min)), RCoordVx(vx_max));
+    MeshVx const mesh_vx((RCoordVx(vx_min)), RCoordVx(vx_max), vx_size + 1);
 
     MeshXVx const mesh_x_vx(mesh_x, mesh_vx);
 
