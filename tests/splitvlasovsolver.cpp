@@ -3,6 +3,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include "blockview.h"
 #include "geometry.h"
 #include "iadvectionvx.h"
 #include "iadvectionx.h"

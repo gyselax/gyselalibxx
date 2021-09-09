@@ -4,30 +4,24 @@
 #include "iadvectionx.h"
 
 class BoundaryValue;
-namespace deprecated {
-class BSplines;
-class SplineBuilder1D;
-} // namespace deprecated
 
 class SplineAdvectionX : public IAdvectionX
 {
 private:
-    const deprecated::BSplines& m_x_spline_basis;
+    const BSplinesX& m_x_spline_basis;
 
-    const deprecated::SplineBuilder1D& m_spline_interpolator;
+    const SplineXBuilder& m_spline_x_builder;
 
     const BoundaryValue& m_bc_left;
 
     const BoundaryValue& m_bc_right;
 
 public:
-    SplineAdvectionX(
-            const deprecated::BSplines& bspl,
-            const deprecated::SplineBuilder1D& spl_interp);
+    SplineAdvectionX(const BSplinesX& bspl, const SplineXBuilder& spl_interp);
 
     SplineAdvectionX(
-            const deprecated::BSplines& bspl,
-            const deprecated::SplineBuilder1D& spl_interp,
+            const BSplinesX& bspl,
+            const SplineXBuilder& spl_interp,
             const BoundaryValue& bc_left,
             const BoundaryValue& bc_right);
 

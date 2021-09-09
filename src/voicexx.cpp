@@ -1,20 +1,16 @@
 #include <cstdlib>
-#include <iosfwd>
 
 #include <paraconf.h>
 
-#include "deprecated/bsplines_uniform.h"
-
-#include "boundary_conditions.h"
 #include "geometry.h"
+#include "mcoord.h"
 #include "nulladvectionvx.h"
 #include "nullefieldsolver.h"
 #include "predcorr.h"
-#include "spline_builder_1d.h"
+#include "product_mdomain.h"
+#include "product_mesh.h"
 #include "splineadvectionx.h"
 #include "splitvlasovsolver.h"
-
-static constexpr std::size_t spline_degree = 3;
 
 int main(int argc, char** argv)
 {
@@ -48,25 +44,23 @@ int main(int argc, char** argv)
     long vx_size;
     PC_int(PC_get(conf, ".MeshVx.size"), &vx_size);
 
-    MeshX const mesh_x((RCoordX(x_min)), RCoordX(x_max), x_size + 1);
+    KnotsX const knots_x((RCoordX(x_min)), RCoordX(x_max), x_size);
 
-    MeshVx const mesh_vx((RCoordVx(vx_min)), RCoordVx(vx_max), vx_size + 1);
+    MDomainX dom_knots_x((ProductMesh<KnotsX>(knots_x)), MCoord<KnotsX>(x_size - 1));
 
-    MeshXVx const mesh_x_vx(mesh_x, mesh_vx);
+    BSplinesX bsplines_x(dom_knots_x);
 
-    MDomainXVx const dom2d(mesh_x_vx, MCoordXVx(x_size, vx_size));
+    SplineXBuilder builder_x(bsplines_x);
 
-    deprecated::UniformBSplines const bsplines_x(spline_degree, true, x_min, x_max, x_size);
+    MeshVx const mesh_vx((RCoordVx(vx_min)), RCoordVx(vx_max), vx_size);
 
-    deprecated::UniformBSplines const bsplines_vx(spline_degree, true, vx_min, vx_max, vx_size);
+    MeshXVx const mesh_x_vx(builder_x.interpolation_domain().mesh().get<MeshX>(), mesh_vx);
 
-    deprecated::SplineBuilder1D const
-            interp_x(bsplines_x, BoundCond::PERIODIC, BoundCond::PERIODIC);
+    MDomainXVx const
+            dom2d(mesh_x_vx,
+                  MCoordXVx(builder_x.interpolation_domain().extents() - 1, vx_size - 1));
 
-    deprecated::SplineBuilder1D const
-            interp_vx(bsplines_vx, BoundCond::PERIODIC, BoundCond::PERIODIC);
-
-    SplineAdvectionX const advection_x(bsplines_x, interp_x);
+    SplineAdvectionX const advection_x(bsplines_x, builder_x);
 
     NullAdvectionVx const advection_vx;
 

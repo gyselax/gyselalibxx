@@ -12,8 +12,9 @@ target_compile_features(unit_tests PUBLIC cxx_std_17)
 target_link_libraries(unit_tests
 	PUBLIC
 		GTest::gtest_main
-		sll::splines
+		sll::deprecated::splines
 		FFTW::Double
+                vcx::deprecated::fft
                 vcx::fft
                 vcx::vlasov
                 GTest::gmock

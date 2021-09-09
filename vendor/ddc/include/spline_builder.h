@@ -42,8 +42,10 @@ template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 class SplineBuilder
 {
     static_assert(
-            BSplines::is_periodic()
-            == ((BcXmin == BoundCond::PERIODIC) == (BcXmax == BoundCond::PERIODIC)));
+            (BSplines::is_periodic() && (BcXmin == BoundCond::PERIODIC)
+             && (BcXmax == BoundCond::PERIODIC))
+            || (!BSplines::is_periodic() && (BcXmin != BoundCond::PERIODIC)
+                && (BcXmax != BoundCond::PERIODIC)));
     static_assert(!BSplines::is_radial());
 
 private:
@@ -68,9 +70,6 @@ private:
     static constexpr int s_nbc_xmin = BcXmin == BoundCond::HERMITE ? BSplines::degree() / 2 : 0;
 
     static constexpr int s_nbc_xmax = BcXmin == BoundCond::HERMITE ? BSplines::degree() / 2 : 0;
-
-public:
-    static int compute_num_cells(int degree, BoundCond xmin, BoundCond xmax, int nipts);
 
 private:
     std::unique_ptr<interpolation_mesh_type> m_interpolation_mesh;
@@ -536,45 +535,5 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
                 matrix->set_element(i0 + i, j0 + j, derivs(i + 1, j + s_odd));
             }
         }
-    }
-}
-
-//-------------------------------------------------------------------------------------------------
-/************************************************************************************
- *                                 Static functions *
- ************************************************************************************/
-
-template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
-int SplineBuilder<BSplines, BcXmin, BcXmax>::compute_num_cells(
-        int degree,
-        BoundCond xmin_bc,
-        BoundCond xmax_bc,
-        int nipts)
-{
-    assert(degree > 0);
-    // TODO: xmin in allowed_bcs
-    // TODO: xmax in allowed_bcs
-
-    if constexpr ((BcXmin == BoundCond::PERIODIC) != (BcXmax == BoundCond::PERIODIC)) {
-        std::cerr << "Incompatible BCs" << std::endl;
-        // TODO: raise error
-        return -1;
-    }
-
-    if constexpr (BcXmin == BoundCond::PERIODIC) {
-        return nipts;
-    } else {
-        int nbc_xmin, nbc_xmax;
-        if constexpr (BcXmin == BoundCond::HERMITE)
-            nbc_xmin = degree / 2;
-        else
-            nbc_xmin = 0;
-
-        if constexpr (BcXmax == BoundCond::HERMITE)
-            nbc_xmax = degree / 2;
-        else
-            nbc_xmax = 0;
-
-        return nipts + nbc_xmin + nbc_xmax - degree;
     }
 }

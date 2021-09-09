@@ -2,8 +2,10 @@
 
 #include <block.h>
 #include <bsplines.h>
+#include <bsplines_non_uniform.h>
 #include <bsplines_uniform.h>
 #include <non_uniform_mesh.h>
+#include <spline_builder.h>
 #include <uniform_mesh.h>
 
 template <class Tag>
@@ -60,7 +62,13 @@ using RLengthXVx = RLength<Dim::X, Dim::Vx>;
 //
 // using RDomainXVx = RDomain<Dim::X, Dim::Vx>;
 
-using MeshX = UniformMesh<Dim::X>;
+using KnotsX = UniformMesh<Dim::X>;
+
+using BSplinesX = BSplines<KnotsX, 4>;
+
+using SplineXBuilder = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+
+using MeshX = typename SplineXBuilder::interpolation_mesh_type;
 
 using MeshVx = UniformMesh<Dim::Vx>;
 
@@ -89,8 +97,6 @@ using MDomainVx = UniformMDomainVx;
 using MDomainXVx = UniformMDomainXVx;
 
 using MDomainFx = ProductMDomain<MeshFx>;
-
-using BSplinesX = BSplines<MeshX, 4>;
 
 using DBlockSpanX = BlockView<MDomainX, double>;
 

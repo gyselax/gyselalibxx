@@ -1,10 +1,9 @@
 #include <cassert>
 #include <iosfwd>
 
+#include <block_spline.h>
 #include <deepcopy.h>
-
-#include "deprecated/bsplines.h"
-#include "deprecated/spline_1d.h"
+#include <spline_evaluator.h>
 
 #include "blockview.h"
 #include "mdomain.h"
@@ -12,7 +11,6 @@
 #include "product_mdomain.h"
 #include "product_mesh.h"
 #include "rcoord.h"
-#include "spline_builder_1d.h"
 #include "splineadvectionx.h"
 #include "taggedvector.h"
 
@@ -23,11 +21,9 @@ class BoundaryValue;
 using namespace std;
 using namespace std::experimental;
 
-SplineAdvectionX::SplineAdvectionX(
-        const deprecated::BSplines& bspl,
-        const deprecated::SplineBuilder1D& spl_interp)
+SplineAdvectionX::SplineAdvectionX(const BSplinesX& bspl, const SplineXBuilder& spl_interp)
     : m_x_spline_basis(bspl)
-    , m_spline_interpolator(spl_interp)
+    , m_spline_x_builder(spl_interp)
     , m_bc_left(NullBoundaryValue::value)
     , m_bc_right(NullBoundaryValue::value)
 {
@@ -35,12 +31,12 @@ SplineAdvectionX::SplineAdvectionX(
 }
 
 SplineAdvectionX::SplineAdvectionX(
-        const deprecated::BSplines& bspl,
-        const deprecated::SplineBuilder1D& spl_interp,
+        const BSplinesX& bspl,
+        const SplineXBuilder& spl_interp,
         const BoundaryValue& bc_left,
         const BoundaryValue& bc_right)
     : m_x_spline_basis(bspl)
-    , m_spline_interpolator(spl_interp)
+    , m_spline_x_builder(spl_interp)
     , m_bc_left(bc_left)
     , m_bc_right(bc_right)
 {
@@ -49,20 +45,18 @@ SplineAdvectionX::SplineAdvectionX(
 DBlockSpanXVx SplineAdvectionX::operator()(DBlockSpanXVx fdistribu, double mass_ratio, double dt)
         const
 {
-    //TODO: spline on mesh
-    //assert(get_domain<Dim::X>(fdistribu) == m_spline_interpolator.domain());
+    assert(get_domain<MeshX>(fdistribu) == m_spline_x_builder.interpolation_domain());
 
     const MDomainX& x_dom = get_domain<MeshX>(fdistribu);
     const MDomainVx& v_dom = get_domain<MeshVx>(fdistribu);
 
     // pre-allocate some memory to prevent allocation later in loop
-    //TODO: spline on mesh
     DBlockX feet_coords(x_dom);
     //BlockX<RCoordX> feet_coords(x_dom);
     DBlockX contiguous_slice(x_dom);
-    //TODO: spline on mesh
-    deprecated::Spline1D spline(m_x_spline_basis);
-    //SplineX spline(m_x_spline_basis);
+
+    Block<BSplinesX, double> spline(m_x_spline_basis);
+    SplineEvaluator spline_evaluator(spline, m_bc_left, m_bc_right);
 
     for (MCoordVx vii : v_dom) {
         // compute the displacement
@@ -77,12 +71,10 @@ DBlockSpanXVx SplineAdvectionX::operator()(DBlockSpanXVx fdistribu, double mass_
         deepcopy(contiguous_slice, fdistribu[vii]);
 
         // build a spline representation of the data
-        //TODO: spline on mesh
-        m_spline_interpolator.compute_interpolant(spline, contiguous_slice.allocation_view());
+        m_spline_x_builder(spline, contiguous_slice);
 
         // evaluate the function at the feet using the spline
-        //TODO: spline on mesh
-        spline.eval_array(feet_coords.allocation_view(), contiguous_slice.allocation_view());
+        spline_evaluator(contiguous_slice);
 
         // copy back
         deepcopy(fdistribu[vii], contiguous_slice);

@@ -19,4 +19,4 @@ target_link_libraries(splines
 		sll::matrix
 )
 
-add_library(sll::splines ALIAS splines)
+add_library(sll::deprecated::splines ALIAS splines)
