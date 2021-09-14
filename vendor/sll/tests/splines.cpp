@@ -7,6 +7,8 @@
 #include <tuple>
 #include <vector>
 
+#include <experimental/mdspan>
+
 #include <sll/deprecated/boundary_conditions.h>
 #include <sll/deprecated/bsplines.h>
 #include <sll/deprecated/bsplines_uniform.h>
@@ -14,7 +16,6 @@
 #include <sll/deprecated/spline_builder_1d.h>
 #include <sll/view.h>
 
-#include <experimental/mdspan>
 #include <gtest/gtest.h>
 
 #include <stdlib.h>

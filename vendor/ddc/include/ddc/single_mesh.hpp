@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ddc/mcoord.h"
-#include "ddc/mesh.h"
-#include "ddc/rcoord.h"
+#include "ddc/mcoord.hpp"
+#include "ddc/mesh.hpp"
+#include "ddc/rcoord.hpp"
 
 /// Experimental concept representing a mesh with a single point.  The
 /// main purpose is when taking a subdomain in a multidimensional

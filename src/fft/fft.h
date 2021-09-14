@@ -3,9 +3,9 @@
 #include <complex>
 #include <vector>
 
-#include <ddc/block_span.h>
-#include <ddc/mdomain.h>
-#include <ddc/non_uniform_mesh.h>
+#include <ddc/BlockSpan>
+#include <ddc/MDomain>
+#include <ddc/NonUniformMesh>
 
 #include <geometry.h>
 

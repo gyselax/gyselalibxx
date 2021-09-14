@@ -2,10 +2,10 @@
 
 #include <type_traits>
 
-#include "ddc/mcoord.h"
-#include "ddc/mesh.h"
-#include "ddc/rcoord.h"
-#include "ddc/taggedtuple.h"
+#include "ddc/mcoord.hpp"
+#include "ddc/mesh.hpp"
+#include "ddc/rcoord.hpp"
+#include "ddc/taggedtuple.hpp"
 
 template <class... Meshes>
 class ProductMesh

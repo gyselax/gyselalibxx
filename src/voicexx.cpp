@@ -1,8 +1,8 @@
 #include <cstdlib>
 
-#include <ddc/mcoord.h>
-#include <ddc/product_mdomain.h>
-#include <ddc/product_mesh.h>
+#include <ddc/MCoord>
+#include <ddc/ProductMDomain>
+#include <ddc/ProductMesh>
 
 #include <paraconf.h>
 

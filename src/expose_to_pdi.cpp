@@ -1,7 +1,7 @@
 #include <array>
 
-#include <ddc/mcoord.h>
-#include <ddc/product_mdomain.h>
+#include <ddc/MCoord>
+#include <ddc/ProductMDomain>
 
 #include <pdi.h>
 

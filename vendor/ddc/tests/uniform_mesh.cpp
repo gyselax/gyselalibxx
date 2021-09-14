@@ -1,8 +1,8 @@
 #include <memory>
 
-#include <ddc/mcoord.h>
-#include <ddc/rcoord.h>
-#include <ddc/uniform_mesh.h>
+#include <ddc/MCoord>
+#include <ddc/RCoord>
+#include <ddc/UniformMesh>
 
 #include <gtest/gtest.h>
 

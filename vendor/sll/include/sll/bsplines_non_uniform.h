@@ -5,9 +5,9 @@
 #include <memory>
 #include <vector>
 
-#include <ddc/mdomain.h>
-#include <ddc/non_uniform_mesh.h>
-#include <ddc/product_mdomain.h>
+#include <ddc/MDomain>
+#include <ddc/NonUniformMesh>
+#include <ddc/ProductMDomain>
 
 #include "sll/bsplines.h"
 

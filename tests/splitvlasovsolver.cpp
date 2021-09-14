@@ -1,6 +1,6 @@
 #include <memory>
 
-#include <ddc/block_span.h>
+#include <ddc/BlockSpan>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

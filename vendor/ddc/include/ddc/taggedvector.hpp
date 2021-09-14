@@ -5,7 +5,7 @@
 #include <ostream>
 #include <utility>
 
-#include "ddc/type_seq.h"
+#include "ddc/type_seq.hpp"
 
 template <class, class...>
 class TaggedVector;

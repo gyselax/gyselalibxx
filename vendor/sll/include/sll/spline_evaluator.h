@@ -3,7 +3,7 @@
 #include <array>
 #include <cmath>
 
-#include <ddc/block_span.h>
+#include <ddc/BlockSpan>
 
 #include "sll/boundary_value.h"
 #include "sll/bsplines.h"

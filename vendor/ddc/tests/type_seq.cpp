@@ -1,7 +1,7 @@
 #include <memory>
 #include <type_traits>
 
-#include <ddc/type_seq.h>
+#include <ddc/type_seq.hpp>
 
 #include <gtest/gtest.h>
 

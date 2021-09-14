@@ -2,9 +2,9 @@
 
 #include <cassert>
 
-#include "ddc/mcoord.h"
-#include "ddc/mesh.h"
-#include "ddc/rcoord.h"
+#include "ddc/mcoord.hpp"
+#include "ddc/mesh.hpp"
+#include "ddc/rcoord.hpp"
 
 /// @class UniformMesh
 /// @brief models a uniform discretization of the `RDim` half-line \f$[O, +\infty[\f$.

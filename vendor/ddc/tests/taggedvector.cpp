@@ -1,6 +1,6 @@
 #include <memory>
 
-#include <ddc/taggedvector.h>
+#include <ddc/TaggedVector>
 
 #include <gtest/gtest.h>
 

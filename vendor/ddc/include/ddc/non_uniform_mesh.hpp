@@ -3,9 +3,9 @@
 #include <cassert>
 #include <vector>
 
-#include "ddc/mcoord.h"
-#include "ddc/mesh.h"
-#include "ddc/rcoord.h"
+#include "ddc/mcoord.hpp"
+#include "ddc/mesh.hpp"
+#include "ddc/rcoord.hpp"
 
 /// `NonUniformMesh` models a non-uniform discretization of the `RDim` segment \f$[a, b]\f$.
 template <class RDim>

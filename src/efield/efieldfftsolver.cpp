@@ -3,17 +3,16 @@
 #include <complex>
 #include <iostream>
 
-#include <ddc/block.h>
-#include <ddc/block_span.h>
-#include <ddc/deepcopy.h>
-#include <ddc/mcoord.h>
-#include <ddc/mdomain.h>
-#include <ddc/non_uniform_mesh.h>
-#include <ddc/product_mdomain.h>
-#include <ddc/product_mesh.h>
-#include <ddc/rcoord.h>
-#include <ddc/taggedvector.h>
-#include <ddc/uniform_mesh.h>
+#include <ddc/Block>
+#include <ddc/BlockSpan>
+#include <ddc/MCoord>
+#include <ddc/MDomain>
+#include <ddc/NonUniformMesh>
+#include <ddc/ProductMDomain>
+#include <ddc/ProductMesh>
+#include <ddc/RCoord>
+#include <ddc/TaggedVector>
+#include <ddc/UniformMesh>
 
 #include <sll/block_spline.h>
 #include <sll/bsplines_uniform.h>

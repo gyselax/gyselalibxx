@@ -1,8 +1,8 @@
 #pragma once
 
-#include <ddc/block.h>
-#include <ddc/non_uniform_mesh.h>
-#include <ddc/uniform_mesh.h>
+#include <ddc/Block>
+#include <ddc/NonUniformMesh>
+#include <ddc/UniformMesh>
 
 #include <sll/bsplines.h>
 #include <sll/bsplines_non_uniform.h>

@@ -1,17 +1,20 @@
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <iosfwd>
 #include <vector>
 
-#include <ddc/block.h>
-#include <ddc/mcoord.h>
-#include <ddc/mdomain.h>
-#include <ddc/non_uniform_mesh.h>
-#include <ddc/product_mdomain.h>
-#include <ddc/product_mesh.h>
-#include <ddc/rcoord.h>
-#include <ddc/taggedvector.h>
-#include <ddc/uniform_mesh.h>
+#include <experimental/mdspan>
+
+#include <ddc/Block>
+#include <ddc/MCoord>
+#include <ddc/MDomain>
+#include <ddc/NonUniformMesh>
+#include <ddc/ProductMDomain>
+#include <ddc/ProductMesh>
+#include <ddc/RCoord>
+#include <ddc/TaggedVector>
+#include <ddc/UniformMesh>
 
 #include <sll/block_spline.h>
 #include <sll/bsplines_uniform.h>
@@ -20,16 +23,7 @@
 #include <sll/spline_evaluator.h>
 #include <sll/view.h>
 
-#include <experimental/mdspan>
 #include <gtest/gtest.h>
-
-#include <math.h>
-
-template <class SupportType, class ElementType, class LayoutPolicy>
-class BlockView;
-
-// template <class, class, bool = true>
-// class BlockView;
 
 struct DimX
 {

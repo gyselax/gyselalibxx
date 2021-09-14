@@ -7,14 +7,14 @@
 #include <memory>
 #include <vector>
 
-#include <ddc/block.h>
-#include <ddc/mcoord.h>
-#include <ddc/non_uniform_mesh.h>
-#include <ddc/product_mdomain.h>
-#include <ddc/product_mesh.h>
-#include <ddc/rcoord.h>
-#include <ddc/taggedvector.h>
-#include <ddc/uniform_mesh.h>
+#include <ddc/Block>
+#include <ddc/MCoord>
+#include <ddc/NonUniformMesh>
+#include <ddc/ProductMDomain>
+#include <ddc/ProductMesh>
+#include <ddc/RCoord>
+#include <ddc/TaggedVector>
+#include <ddc/UniformMesh>
 
 #include <sll/math_tools.h>
 

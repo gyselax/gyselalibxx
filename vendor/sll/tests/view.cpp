@@ -2,9 +2,10 @@
 #include <memory>
 #include <sstream>
 
+#include <experimental/mdspan>
+
 #include <sll/view.h>
 
-#include <experimental/mdspan>
 #include <gtest/gtest.h>
 
 using namespace std;

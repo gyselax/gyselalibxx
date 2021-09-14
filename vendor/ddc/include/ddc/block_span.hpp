@@ -5,9 +5,9 @@
 #include <type_traits>
 #include <vector>
 
-#include "ddc/mdomain.h"
-#include "ddc/product_mdomain.h"
-#include "ddc/product_mesh.h"
+#include "ddc/mdomain.hpp"
+#include "ddc/product_mdomain.hpp"
+#include "ddc/product_mesh.hpp"
 
 template <class, class>
 class Block;
@@ -28,8 +28,8 @@ auto get_domain(BlockType const& block) noexcept
     return block.template domain<QueryMeshes...>();
 }
 
-template <class... Meshes, class ElementType, class LayoutStridedLayoutPolicy>
-class BlockSpan<ProductMDomain<Meshes...>, ElementType, LayoutStridedLayoutPolicy>
+template <class... Meshes, class ElementType, class LayoutStridedPolicy>
+class BlockSpan<ProductMDomain<Meshes...>, ElementType, LayoutStridedPolicy>
 {
 public:
     using mesh_type = ProductMesh<Meshes...>;
@@ -44,11 +44,11 @@ protected:
 public:
     using mdomain_type = ProductMDomain<Meshes...>;
 
-    /// The dereferenceable part of the co-domain but with indexing starting at 0
+    /// The dereferenceable part of the co-domain but with a different domain, starting at 0
     using allocation_mdspan_type = std::experimental::mdspan<
             ElementType,
             std::experimental::dextents<mesh_type::rank()>,
-            LayoutStridedLayoutPolicy>;
+            LayoutStridedPolicy>;
 
     using mcoord_type = typename mdomain_type::mcoord_type;
 
@@ -375,7 +375,7 @@ public:
     {
         mapping_type m;
         extents_type extents_s(::extents<Meshes>(m_domain)...);
-        if constexpr (std::is_same_v<LayoutStridedLayoutPolicy, std::experimental::layout_stride>) {
+        if constexpr (std::is_same_v<LayoutStridedPolicy, std::experimental::layout_stride>) {
             m = mapping_type(extents_s, m_raw.mapping().strides());
         } else {
             m = mapping_type(extents_s);
@@ -389,3 +389,6 @@ BlockSpan(
         ProductMDomain<Meshes...> domain,
         std::experimental::mdspan<ElementType, Extents, StridedLayout> allocation_view)
         -> BlockSpan<ProductMDomain<Meshes...>, ElementType, StridedLayout>;
+
+template <class Mesh, class ElementType, class LayoutStridedPolicy>
+using BlockView = BlockSpan<Mesh, ElementType const, LayoutStridedPolicy>;

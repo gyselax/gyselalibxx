@@ -1,18 +1,19 @@
 #include <iosfwd>
 #include <vector>
 
-#include <ddc/mcoord.h>
-#include <ddc/non_uniform_mesh.h>
-#include <ddc/product_mdomain.h>
-#include <ddc/product_mesh.h>
-#include <ddc/rcoord.h>
-#include <ddc/taggedvector.h>
+#include <experimental/mdspan>
+
+#include <ddc/MCoord>
+#include <ddc/NonUniformMesh>
+#include <ddc/ProductMDomain>
+#include <ddc/ProductMesh>
+#include <ddc/RCoord>
+#include <ddc/TaggedVector>
 
 #include <sll/bsplines_non_uniform.h>
 #include <sll/deprecated/bsplines_non_uniform.h>
 #include <sll/view.h>
 
-#include <experimental/mdspan>
 #include <gtest/gtest.h>
 
 struct DimX

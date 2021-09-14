@@ -4,9 +4,9 @@
 #include <cassert>
 #include <memory>
 
-#include <ddc/mdomain.h>
-#include <ddc/product_mdomain.h>
-#include <ddc/uniform_mesh.h>
+#include <ddc/MDomain>
+#include <ddc/ProductMDomain>
+#include <ddc/UniformMesh>
 
 #include "sll/bsplines.h"
 #include "sll/math_tools.h"

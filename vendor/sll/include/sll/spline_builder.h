@@ -4,11 +4,11 @@
 #include <memory>
 #include <vector>
 
-#include <ddc/block.h>
-#include <ddc/block_span.h>
-#include <ddc/mdomain.h>
-#include <ddc/non_uniform_mesh.h>
-#include <ddc/uniform_mesh.h>
+#include <ddc/Block>
+#include <ddc/BlockSpan>
+#include <ddc/MDomain>
+#include <ddc/NonUniformMesh>
+#include <ddc/UniformMesh>
 
 #include "sll/block_span_spline.h"
 #include "sll/math_tools.h"

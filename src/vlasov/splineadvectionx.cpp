@@ -1,19 +1,18 @@
 #include <cassert>
 #include <iosfwd>
 
-#include <ddc/block_span.h>
-#include <ddc/deepcopy.h>
-#include <ddc/mdomain.h>
-#include <ddc/product_mdomain.h>
-#include <ddc/product_mesh.h>
-#include <ddc/rcoord.h>
-#include <ddc/taggedvector.h>
+#include <experimental/mdspan>
+
+#include <ddc/BlockSpan>
+#include <ddc/MDomain>
+#include <ddc/ProductMDomain>
+#include <ddc/ProductMesh>
+#include <ddc/RCoord>
+#include <ddc/TaggedVector>
 
 #include <sll/block_spline.h>
 #include <sll/null_boundary_value.h>
 #include <sll/spline_evaluator.h>
-
-#include <experimental/mdspan>
 
 #include "splineadvectionx.h"
 

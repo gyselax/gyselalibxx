@@ -2,17 +2,18 @@
 #include <utility>
 #include <vector>
 
-#include <ddc/mcoord.h>
-#include <ddc/mdomain.h>
-#include <ddc/rcoord.h>
-#include <ddc/taggedvector.h>
-#include <ddc/uniform_mesh.h>
+#include <experimental/mdspan>
+
+#include <ddc/MCoord>
+#include <ddc/MDomain>
+#include <ddc/RCoord>
+#include <ddc/TaggedVector>
+#include <ddc/UniformMesh>
 
 #include <sll/bsplines_uniform.h>
 #include <sll/deprecated/bsplines_uniform.h>
 #include <sll/view.h>
 
-#include <experimental/mdspan>
 #include <gtest/gtest.h>
 
 struct DimX

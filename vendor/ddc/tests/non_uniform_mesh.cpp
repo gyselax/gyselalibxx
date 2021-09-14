@@ -1,10 +1,10 @@
 #include <array>
 #include <vector>
 
-#include <ddc/mcoord.h>
-#include <ddc/non_uniform_mesh.h>
-#include <ddc/rcoord.h>
-#include <ddc/taggedvector.h>
+#include <ddc/MCoord>
+#include <ddc/NonUniformMesh>
+#include <ddc/RCoord>
+#include <ddc/TaggedVector>
 
 #include <gtest/gtest.h>
 

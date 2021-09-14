@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ddc/rcoord.h"
+#include "ddc/rcoord.hpp"
 
 template <class... RDim>
 struct RDomain

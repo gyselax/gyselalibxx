@@ -2,11 +2,11 @@
 #include <memory>
 #include <utility>
 
-#include <ddc/mcoord.h>
-#include <ddc/mdomain.h>
-#include <ddc/rcoord.h>
-#include <ddc/taggedvector.h>
-#include <ddc/uniform_mesh.h>
+#include <ddc/MCoord>
+#include <ddc/MDomain>
+#include <ddc/RCoord>
+#include <ddc/TaggedVector>
+#include <ddc/UniformMesh>
 
 #include <gtest/gtest.h>
 

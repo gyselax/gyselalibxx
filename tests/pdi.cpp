@@ -2,10 +2,10 @@
 #include <string>
 #include <string_view>
 
-#include <ddc/mcoord.h>
-#include <ddc/mdomain.h>
-#include <ddc/product_mdomain.h>
-#include <ddc/taggedvector.h>
+#include <ddc/MCoord>
+#include <ddc/MDomain>
+#include <ddc/ProductMDomain>
+#include <ddc/TaggedVector>
 
 #include <paraconf.h>
 #include <pdi.h>

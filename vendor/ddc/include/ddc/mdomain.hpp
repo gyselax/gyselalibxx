@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ddc/mcoord.h"
-#include "ddc/mesh.h"
-#include "ddc/non_uniform_mesh.h"
-#include "ddc/product_mesh.h"
-#include "ddc/rcoord.h"
-#include "ddc/uniform_mesh.h"
+#include "ddc/mcoord.hpp"
+#include "ddc/mesh.hpp"
+#include "ddc/non_uniform_mesh.hpp"
+#include "ddc/product_mesh.hpp"
+#include "ddc/rcoord.hpp"
+#include "ddc/uniform_mesh.hpp"
 
 template <class Mesh>
 class MDomain

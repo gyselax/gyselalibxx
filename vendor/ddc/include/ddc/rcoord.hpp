@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ddc/taggedvector.h"
+#include "ddc/taggedvector.hpp"
 
 using RCoordElement = double;
 

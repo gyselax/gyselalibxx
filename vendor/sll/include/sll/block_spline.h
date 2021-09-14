@@ -1,7 +1,7 @@
 #pragma once
 
-#include <ddc/block_span.h>
-#include <ddc/mdomain.h>
+#include <ddc/BlockSpan>
+#include <ddc/MDomain>
 
 #include "sll/bsplines.h"
 

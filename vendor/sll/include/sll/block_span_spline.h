@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ddc/block_span.h>
+#include <ddc/BlockSpan>
 
 #include "sll/bsplines.h"
 

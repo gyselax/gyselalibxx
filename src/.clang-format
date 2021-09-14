@@ -69,10 +69,13 @@ IncludeBlocks:                                  Regroup
 IncludeCategories:
   # MPI must come first, before std headers
   - Regex:           '^[<"]mpi\.h[">]'
-    Priority:        -160
+    Priority:        -180
 #       SortPriority:    -100                  # !!!requires clang 10
   # std (extensionless, directoryless) headers
   - Regex:           '^<[^./]*>$'
+    Priority:        -160
+  # std::experimental (extensionless) headers
+  - Regex:           '^<experimental/[^./]*>$'
     Priority:        -140
   # ddc headers
   - Regex:           '^<ddc/.*>$'

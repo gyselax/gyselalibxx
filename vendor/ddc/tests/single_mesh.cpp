@@ -1,11 +1,11 @@
 #include <memory>
 #include <utility>
 
-#include <ddc/mcoord.h>
-#include <ddc/non_uniform_mesh.h>
-#include <ddc/product_mesh.h>
-#include <ddc/rcoord.h>
-#include <ddc/single_mesh.h>
+#include <ddc/MCoord>
+#include <ddc/NonUniformMesh>
+#include <ddc/ProductMesh>
+#include <ddc/RCoord>
+#include <ddc/SingleMesh>
 
 #include <gtest/gtest.h>
 

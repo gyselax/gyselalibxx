@@ -1,7 +1,7 @@
-#include <ddc/deepcopy.h>
-#include <ddc/mdomain.h>
-#include <ddc/product_mdomain.h>
-#include <ddc/taggedvector.h>
+#include <ddc/BlockSpan>
+#include <ddc/MDomain>
+#include <ddc/ProductMDomain>
+#include <ddc/TaggedVector>
 
 #include <iefieldsolver.h>
 #include <ivlasovsolver.h>
