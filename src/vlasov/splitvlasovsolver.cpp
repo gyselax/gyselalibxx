@@ -9,8 +9,7 @@ SplitVlasovSolver::SplitVlasovSolver(const IAdvectionX& advec_x, const IAdvectio
 }
 
 
-DBlockSpanXVx SplitVlasovSolver::operator()(DBlockSpanXVx fdistribu, double mass_ratio, double dt)
-        const
+DSpanXVx SplitVlasovSolver::operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const
 {
     m_advec_x(fdistribu, mass_ratio, dt / 2);
     m_advec_vx(fdistribu, mass_ratio, dt);

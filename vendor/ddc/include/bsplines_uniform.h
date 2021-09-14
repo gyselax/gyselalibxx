@@ -9,7 +9,6 @@
 #include "mdomain.h"
 #include "product_mdomain.h"
 #include "uniform_mesh.h"
-#include "view.h"
 
 /// UniformMesh specialization of BSplines
 template <class Tag, std::size_t D>
@@ -76,16 +75,27 @@ public:
 
     BSplines& operator=(BSplines&& x) = default;
 
-    void eval_basis(double x, DSpan1D& values, int& jmin) const
+    void eval_basis(
+            double x,
+            std::experimental::mdspan<double, std::experimental::dextents<1>>& values,
+            int& jmin) const
     {
         return eval_basis(x, values, jmin, degree());
     }
 
-    void eval_deriv(double x, DSpan1D& derivs, int& jmin) const;
+    void eval_deriv(
+            double x,
+            std::experimental::mdspan<double, std::experimental::dextents<1>>& derivs,
+            int& jmin) const;
 
-    void eval_basis_and_n_derivs(double x, int n, DSpan2D& derivs, int& jmin) const;
+    void eval_basis_and_n_derivs(
+            double x,
+            int n,
+            std::experimental::mdspan<double, std::experimental::dextents<2>>& derivs,
+            int& jmin) const;
 
-    void integrals(DSpan1D& int_vals) const;
+    void integrals(
+            std::experimental::mdspan<double, std::experimental::dextents<1>>& int_vals) const;
 
     double get_knot(int idx) const noexcept
     {
@@ -133,12 +143,20 @@ private:
         return 1.0 / m_domain.mesh().step();
     }
 
-    void eval_basis(double x, DSpan1D& values, int& jmin, int degree) const;
+    void eval_basis(
+            double x,
+            std::experimental::mdspan<double, std::experimental::dextents<1>>& values,
+            int& jmin,
+            int degree) const;
     void get_icell_and_offset(double x, int& icell, double& offset) const;
 };
 
 template <class Tag, std::size_t D>
-void BSplines<UniformMesh<Tag>, D>::eval_basis(double x, DSpan1D& values, int& jmin, int deg) const
+void BSplines<UniformMesh<Tag>, D>::eval_basis(
+        double x,
+        std::experimental::mdspan<double, std::experimental::dextents<1>>& values,
+        int& jmin,
+        int deg) const
 {
     assert(values.extent(0) == deg + 1);
 
@@ -164,7 +182,10 @@ void BSplines<UniformMesh<Tag>, D>::eval_basis(double x, DSpan1D& values, int& j
 }
 
 template <class Tag, std::size_t D>
-void BSplines<UniformMesh<Tag>, D>::eval_deriv(double x, DSpan1D& derivs, int& jmin) const
+void BSplines<UniformMesh<Tag>, D>::eval_deriv(
+        double x,
+        std::experimental::mdspan<double, std::experimental::dextents<1>>& derivs,
+        int& jmin) const
 {
     assert(derivs.extent(0) == degree() + 1);
 
@@ -205,11 +226,12 @@ template <class Tag, std::size_t D>
 void BSplines<UniformMesh<Tag>, D>::eval_basis_and_n_derivs(
         double x,
         int n,
-        DSpan2D& derivs,
+        std::experimental::mdspan<double, std::experimental::dextents<2>>& derivs,
         int& jmin) const
 {
     std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
-    DSpan2D ndu(ndu_ptr.data(), degree() + 1, degree() + 1);
+    std::experimental::mdspan<double, std::experimental::dextents<2>>
+            ndu(ndu_ptr.data(), degree() + 1, degree() + 1);
     std::array<double, 2 * (degree() + 1)> a_ptr;
     std::experimental::mdspan<double, std::experimental::extents<degree() + 1, 2>> a(a_ptr.data());
     double offset;
@@ -309,7 +331,8 @@ void BSplines<UniformMesh<Tag>, D>::get_icell_and_offset(double x, int& icell, d
 }
 
 template <class Tag, std::size_t D>
-void BSplines<UniformMesh<Tag>, D>::integrals(DSpan1D& int_vals) const
+void BSplines<UniformMesh<Tag>, D>::integrals(
+        std::experimental::mdspan<double, std::experimental::dextents<1>>& int_vals) const
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
     for (int i(degree()); i < nbasis() - degree(); ++i) {
@@ -326,7 +349,8 @@ void BSplines<UniformMesh<Tag>, D>::integrals(DSpan1D& int_vals) const
     } else {
         int jmin(0);
         std::array<double, degree() + 2> edge_vals_ptr;
-        DSpan1D edge_vals(edge_vals_ptr.data(), degree() + 2);
+        std::experimental::mdspan<double, std::experimental::dextents<1>>
+                edge_vals(edge_vals_ptr.data(), degree() + 2);
 
         eval_basis(rmin(), edge_vals, jmin, degree() + 1);
 

@@ -3,7 +3,7 @@
 #include <complex>
 #include <vector>
 
-#include <blockview.h>
+#include <block_span.h>
 #include <geometry.h>
 #include <mdomain.h>
 #include <non_uniform_mesh.h>
@@ -28,11 +28,11 @@ public:
             ProductMDomain<UniformMesh<Tags>...> const& dom_x) const noexcept = 0;
 
     virtual void operator()(
-            BlockView<
+            BlockSpan<
                     ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
                     std::complex<double>,
                     std::experimental::layout_right> const& out_values,
-            BlockView<
+            BlockSpan<
                     ProductMDomain<UniformMesh<Tags>...>,
                     std::complex<double>,
                     std::experimental::layout_right> const& in_values) const noexcept = 0;

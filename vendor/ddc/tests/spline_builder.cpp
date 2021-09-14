@@ -54,7 +54,7 @@ public:
     }
 
     template <class Domain>
-    void operator()(BlockView<Domain, double>& block_mesh) const
+    void operator()(BlockSpan<Domain, double>& block_mesh) const
     {
         auto const& domain = block_mesh.domain();
 
@@ -69,7 +69,7 @@ public:
     }
 
     template <class Domain>
-    void deriv(BlockView<Domain, double>& block_mesh, int const derivative) const
+    void deriv(BlockSpan<Domain, double>& block_mesh, int const derivative) const
     {
         auto const& domain = block_mesh.domain();
 
@@ -124,7 +124,7 @@ public:
     }
 
     template <class Domain>
-    void operator()(BlockView<Domain, double>& block_mesh) const
+    void operator()(BlockSpan<Domain, double>& block_mesh) const
     {
         auto const& domain = block_mesh.domain();
 
@@ -139,7 +139,7 @@ public:
     }
 
     template <class Domain>
-    void deriv(BlockView<Domain, double>& block_mesh, int const derivative) const
+    void deriv(BlockSpan<Domain, double>& block_mesh, int const derivative) const
     {
         auto const& domain = block_mesh.domain();
 

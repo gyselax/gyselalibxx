@@ -25,5 +25,5 @@ public:
             const BoundaryValue& bc_left,
             const BoundaryValue& bc_right);
 
-    DBlockSpanXVx operator()(DBlockSpanXVx fdistribu, double mass_ratio, double dt) const override;
+    DSpanXVx operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const override;
 };

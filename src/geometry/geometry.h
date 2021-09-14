@@ -56,12 +56,6 @@ using RLengthVx = RLength<Dim::Vx>;
 
 using RLengthXVx = RLength<Dim::X, Dim::Vx>;
 
-// using RDomainX = RDomain<Dim::X>;
-//
-// using RDomainVx = RDomain<Dim::Vx>;
-//
-// using RDomainXVx = RDomain<Dim::X, Dim::Vx>;
-
 using KnotsX = UniformMesh<Dim::X>;
 
 using BSplinesX = BSplines<KnotsX, 4>;
@@ -98,29 +92,47 @@ using MDomainXVx = UniformMDomainXVx;
 
 using MDomainFx = ProductMDomain<MeshFx>;
 
-using DBlockSpanX = BlockView<MDomainX, double>;
+template <class ElementType>
+using SpanX = BlockSpan<MDomainX, ElementType>;
 
-using DBlockSpanVx = BlockView<MDomainVx, double>;
-
-using DBlockSpanXVx = BlockView<MDomainXVx, double>;
-
-using DBlockViewX = BlockView<MDomainX, double const>;
-
-using DBlockViewVx = BlockView<MDomainVx, double const>;
-
-using DBlockViewXVx = BlockView<MDomainXVx, double const>;
+using DSpanX = SpanX<double>;
 
 template <class ElementType>
-using BlockX = Block<UniformMDomainX, ElementType>;
+using SpanVx = BlockSpan<MDomainVx, ElementType>;
+
+using DSpanVx = SpanVx<double>;
+
+template <class ElementType>
+using SpanXVx = BlockSpan<MDomainXVx, ElementType>;
+
+using DSpanXVx = SpanXVx<double>;
+
+template <class ElementType>
+using ViewX = BlockSpan<MDomainX, ElementType const>;
+
+using DViewX = ViewX<double>;
+
+template <class ElementType>
+using ViewVx = BlockSpan<MDomainVx, ElementType const>;
+
+using DViewVx = ViewVx<double>;
+
+template <class ElementType>
+using ViewXVx = BlockSpan<MDomainXVx, ElementType const>;
+
+using DViewXVx = ViewXVx<double>;
+
+template <class ElementType>
+using BlockX = Block<MDomainX, ElementType>;
 
 using DBlockX = BlockX<double>;
 
 template <class ElementType>
-using BlockVx = Block<UniformMDomainVx, ElementType>;
+using BlockVx = Block<MDomainVx, ElementType>;
 
 using DBlockVx = BlockVx<double>;
 
 template <class ElementType>
-using BlockXVx = Block<UniformMDomainXVx, ElementType>;
+using BlockXVx = Block<MDomainXVx, ElementType>;
 
 using DBlockXVx = BlockXVx<double>;

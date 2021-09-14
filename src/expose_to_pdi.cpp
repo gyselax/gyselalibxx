@@ -6,7 +6,7 @@
 #include "mcoord.h"
 #include "product_mdomain.h"
 
-void expose_to_pdi(std::string const& name, DBlockSpanXVx b)
+void expose_to_pdi(std::string const& name, DSpanXVx b)
 {
     auto dom = b.domain();
     auto extents = dom.extents().array();

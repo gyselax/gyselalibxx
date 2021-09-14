@@ -1,10 +1,9 @@
 #pragma once
 
-#include "blockview.h"
+#include "block_span.h"
 
 class IVlasovSolver
 {
 public:
-    virtual DBlockSpanXVx operator()(DBlockSpanXVx fdistribu, double mass_ratio, double dt)
-            const = 0;
+    virtual DSpanXVx operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const = 0;
 };

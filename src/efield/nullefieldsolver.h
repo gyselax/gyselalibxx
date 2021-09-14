@@ -6,5 +6,5 @@
 class NullEfieldSolver : public IEfieldSolver
 {
 public:
-    DBlockSpanX operator()(DBlockSpanX ex, DBlockViewXVx fdistribu) const override;
+    DSpanX operator()(DSpanX ex, DViewXVx fdistribu) const override;
 };

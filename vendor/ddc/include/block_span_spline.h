@@ -1,14 +1,14 @@
 #pragma once
 
-#include "blockview.h"
+#include "block_span.h"
 #include "bsplines.h"
 
 template <class Mesh, std::size_t D, class ElementType>
-class BlockView<BSplines<Mesh, D>, ElementType>
+class BlockSpan<BSplines<Mesh, D>, ElementType>
 {
 public:
     /// ND memory view
-    using raw_view_type = SpanND<1, ElementType, true>;
+    using raw_view_type = std::experimental::mdspan<ElementType, std::experimental::dextents<1>>;
 
     using bsplines_type = BSplines<Mesh, D>;
 
@@ -42,47 +42,47 @@ protected:
     bsplines_type const& m_bsplines;
 
 public:
-    /** Constructs a new BlockView by copy, yields a new view to the same data
-     * @param other the BlockView to copy
+    /** Constructs a new BlockSpan by copy, yields a new view to the same data
+     * @param other the BlockSpan to copy
      */
-    inline constexpr BlockView(const BlockView& other) = default;
+    inline constexpr BlockSpan(const BlockSpan& other) = default;
 
-    /** Constructs a new BlockView by move
-     * @param other the BlockView to move
+    /** Constructs a new BlockSpan by move
+     * @param other the BlockSpan to move
      */
-    inline constexpr BlockView(BlockView&& other) = default;
+    inline constexpr BlockSpan(BlockSpan&& other) = default;
 
-    /** Constructs a new BlockView by copy of a block, yields a new view to the same data
-     * @param other the BlockView to move
+    /** Constructs a new BlockSpan by copy of a block, yields a new view to the same data
+     * @param other the BlockSpan to move
      */
     template <class OElementType>
-    inline constexpr BlockView(BlockView<bsplines_type, OElementType> const& other) noexcept
+    inline constexpr BlockSpan(BlockSpan<bsplines_type, OElementType> const& other) noexcept
         : m_raw(other.raw_view())
         , m_bsplines(other.bsplines())
     {
     }
 
-    /** Constructs a new BlockView from scratch
+    /** Constructs a new BlockSpan from scratch
      * @param bsplines the bsplines that sustains the view
      * @param raw_view the raw view to the data
      */
-    inline constexpr BlockView(bsplines_type const& bsplines, raw_view_type raw_view)
+    inline constexpr BlockSpan(bsplines_type const& bsplines, raw_view_type raw_view)
         : m_raw(raw_view)
         , m_bsplines(bsplines)
     {
     }
 
-    /** Copy-assigns a new value to this BlockView, yields a new view to the same data
-     * @param other the BlockView to copy
+    /** Copy-assigns a new value to this BlockSpan, yields a new view to the same data
+     * @param other the BlockSpan to copy
      * @return *this
      */
-    inline constexpr BlockView& operator=(const BlockView& other) = default;
+    inline constexpr BlockSpan& operator=(const BlockSpan& other) = default;
 
-    /** Move-assigns a new value to this BlockView
-     * @param other the BlockView to move
+    /** Move-assigns a new value to this BlockSpan
+     * @param other the BlockSpan to move
      * @return *this
      */
-    inline constexpr BlockView& operator=(BlockView&& other) = default;
+    inline constexpr BlockSpan& operator=(BlockSpan&& other) = default;
 
     inline constexpr reference operator()(const mcoord_type& indices) const noexcept
     {
@@ -172,9 +172,9 @@ public:
     /** Swaps this field with another
      * @param other the Block to swap with this one
      */
-    inline constexpr void swap(BlockView& other)
+    inline constexpr void swap(BlockSpan& other)
     {
-        BlockView tmp = std::move(other);
+        BlockSpan tmp = std::move(other);
         other = std::move(*this);
         *this = std::move(tmp);
     }

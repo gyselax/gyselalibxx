@@ -16,5 +16,5 @@ public:
             IFourierTransform<Dim::X> const& fft,
             IInverseFourierTransform<Dim::X> const& ifft);
 
-    DBlockSpanX operator()(DBlockSpanX ex, DBlockViewXVx fdistribu) const override;
+    DSpanX operator()(DSpanX ex, DViewXVx fdistribu) const override;
 };

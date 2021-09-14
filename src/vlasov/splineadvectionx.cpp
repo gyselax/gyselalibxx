@@ -5,7 +5,7 @@
 #include <deepcopy.h>
 #include <spline_evaluator.h>
 
-#include "blockview.h"
+#include "block_span.h"
 #include "mdomain.h"
 #include "null_boundary_value.h"
 #include "product_mdomain.h"
@@ -42,8 +42,7 @@ SplineAdvectionX::SplineAdvectionX(
 {
 }
 
-DBlockSpanXVx SplineAdvectionX::operator()(DBlockSpanXVx fdistribu, double mass_ratio, double dt)
-        const
+DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const
 {
     assert(get_domain<MeshX>(fdistribu) == m_spline_x_builder.interpolation_domain());
 

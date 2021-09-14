@@ -1,10 +1,10 @@
 #pragma once
 
-#include "blockview.h"
+#include "block_span.h"
 #include "geometry.h"
 
 class IEfieldSolver
 {
 public:
-    virtual DBlockSpanX operator()(DBlockSpanX ex, DBlockViewXVx fdistribu) const = 0;
+    virtual DSpanX operator()(DSpanX ex, DViewXVx fdistribu) const = 0;
 };

@@ -3,7 +3,7 @@
 #include <array>
 #include <cmath>
 
-#include "blockview.h"
+#include "block_span.h"
 #include "boundary_value.h"
 #include "bsplines.h"
 
@@ -58,16 +58,18 @@ public:
     double operator()(double x) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        DSpan1D vals(values.data(), values.size());
+        std::experimental::mdspan<double, std::experimental::dextents<1>>
+                vals(values.data(), values.size());
 
         return eval(x, vals);
     }
 
     template <class Domain>
-    void operator()(BlockView<Domain, double>& block_mesh) const
+    void operator()(BlockSpan<Domain, double>& block_mesh) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        DSpan1D vals(values.data(), values.size());
+        std::experimental::mdspan<double, std::experimental::dextents<1>>
+                vals(values.data(), values.size());
 
         auto const& domain = block_mesh.domain();
 
@@ -79,16 +81,18 @@ public:
     double deriv(double x) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        DSpan1D vals(values.data(), values.size());
+        std::experimental::mdspan<double, std::experimental::dextents<1>>
+                vals(values.data(), values.size());
 
         return eval_no_bc(x, vals, eval_deriv_type());
     }
 
     template <class Domain>
-    void deriv(BlockView<Domain, double>& block_mesh) const
+    void deriv(BlockSpan<Domain, double>& block_mesh) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        DSpan1D vals(values.data(), values.size());
+        std::experimental::mdspan<double, std::experimental::dextents<1>>
+                vals(values.data(), values.size());
 
         auto const& domain = block_mesh.domain();
 
@@ -98,7 +102,8 @@ public:
     }
 
 private:
-    double eval(double x, DSpan1D& vals) const
+    double eval(double x, std::experimental::mdspan<double, std::experimental::dextents<1>>& vals)
+            const
     {
         if constexpr (bsplines_type::is_periodic()) {
             if (x < m_spline.bsplines().rmin() || x > m_spline.bsplines().rmax()) {
@@ -117,7 +122,10 @@ private:
     }
 
     template <class EvalType>
-    double eval_no_bc(double x, DSpan1D& vals, EvalType) const
+    double eval_no_bc(
+            double x,
+            std::experimental::mdspan<double, std::experimental::dextents<1>>& vals,
+            EvalType) const
     {
         static_assert(
                 std::is_same_v<EvalType, eval_type> || std::is_same_v<EvalType, eval_deriv_type>);

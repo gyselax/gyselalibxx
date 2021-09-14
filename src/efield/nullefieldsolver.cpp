@@ -1,6 +1,6 @@
 #include "nullefieldsolver.h"
 
-DBlockSpanX NullEfieldSolver::operator()(DBlockSpanX ex, DBlockViewXVx fdistribu) const
+DSpanX NullEfieldSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
 {
     //TODO
     return ex;

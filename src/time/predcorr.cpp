@@ -15,7 +15,7 @@ PredCorr::PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLe
 }
 
 
-DBlockSpanXVx PredCorr::operator()(DBlockSpanXVx fdistribu, double mass_ratio, int steps) const
+DSpanXVx PredCorr::operator()(DSpanXVx fdistribu, double mass_ratio, int steps) const
 {
     // ex only depends on DX
     DBlockX ex(fdistribu.domain<MeshX>());

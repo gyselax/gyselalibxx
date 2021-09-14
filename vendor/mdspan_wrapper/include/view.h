@@ -84,31 +84,31 @@ std::ostream& stream_impl(
 } // namespace detail
 
 
-template <std::size_t N, class ElementType, bool CONTIGUOUS = true>
-using SpanND = typename detail::ViewNDMaker<N, ElementType, CONTIGUOUS>::type;
+template <std::size_t N, class ElementType>
+using SpanND = std::experimental::mdspan<ElementType, std::experimental::dextents<N>>;
+//
+// template <std::size_t N, class ElementType, bool CONTIGUOUS = true>
+// using ViewND = typename detail::ViewNDMaker<N, ElementType const, CONTIGUOUS>::type;
+//
+template <class ElementType>
+using Span1D = SpanND<1, ElementType>;
 
-template <std::size_t N, class ElementType, bool CONTIGUOUS = true>
-using ViewND = typename detail::ViewNDMaker<N, ElementType const, CONTIGUOUS>::type;
-
-template <class ElementType, bool CONTIGUOUS = true>
-using Span1D = SpanND<1, ElementType, CONTIGUOUS>;
-
-template <class ElementType, bool CONTIGUOUS = true>
-using Span2D = SpanND<2, ElementType, CONTIGUOUS>;
-
-template <class ElementType, bool CONTIGUOUS = true>
-using View1D = ViewND<1, ElementType, CONTIGUOUS>;
-
-template <class ElementType, bool CONTIGUOUS = true>
-using View2D = ViewND<2, ElementType, CONTIGUOUS>;
-
+template <class ElementType>
+using Span2D = SpanND<2, ElementType>;
+//
+// template <class ElementType>
+// using View1D = ViewND<1, ElementType>;
+//
+// template <class ElementType>
+// using View2D = ViewND<2, ElementType>;
+//
 using DSpan1D = Span1D<double>;
 
 using DSpan2D = Span2D<double>;
-
-using DView1D = View1D<double>;
-
-using DView2D = View2D<double>;
+//
+// using DView1D = View1D<double>;
+//
+// using DView2D = View2D<double>;
 
 // template <class C>
 // constexpr bool is_contiguous_v = detail::IsContiguous<C>::val;

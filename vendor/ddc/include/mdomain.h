@@ -6,7 +6,6 @@
 #include "product_mesh.h"
 #include "rcoord.h"
 #include "uniform_mesh.h"
-#include "view.h"
 
 template <class Mesh>
 class MDomain

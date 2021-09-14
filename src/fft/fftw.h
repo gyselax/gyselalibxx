@@ -4,7 +4,7 @@
 #include <complex>
 #include <type_traits>
 
-#include <blockview.h>
+#include <block_span.h>
 #include <fftw3.h>
 #include <geometry.h>
 #include <mdomain.h>
@@ -43,11 +43,11 @@ public:
     }
 
     void operator()(
-            BlockView<
+            BlockSpan<
                     ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
                     std::complex<double>,
                     std::experimental::layout_right> const& out_values,
-            BlockView<
+            BlockSpan<
                     ProductMDomain<UniformMesh<Tags>...>,
                     std::complex<double>,
                     std::experimental::layout_right> const& in_values) const noexcept override

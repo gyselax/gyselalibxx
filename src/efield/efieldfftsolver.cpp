@@ -4,8 +4,8 @@
 #include <iostream>
 
 #include "block.h"
+#include "block_span.h"
 #include "block_spline.h"
-#include "blockview.h"
 #include "bsplines_uniform.h"
 #include "deepcopy.h"
 #include "efieldfftsolver.h"
@@ -22,7 +22,7 @@
 #include "taggedvector.h"
 #include "uniform_mesh.h"
 
-static double compute_dens(DBlockViewVx const& fdistribu)
+static double compute_dens(DViewVx const& fdistribu)
 {
     auto&& dom_vx = get_domain<MeshVx>(fdistribu);
     double const dv = get<MeshVx>(dom_vx.mesh()).step();
@@ -33,7 +33,7 @@ static double compute_dens(DBlockViewVx const& fdistribu)
     return rho;
 }
 
-static void compute_rho(DBlockSpanX const& rho, DBlockViewXVx const& fdistribu)
+static void compute_rho(DSpanX const& rho, DViewXVx const& fdistribu)
 {
     DBlockVx contiguous_slice(fdistribu.domain<MeshVx>());
     for (MCoordX ix : rho.domain()) {
@@ -44,7 +44,7 @@ static void compute_rho(DBlockSpanX const& rho, DBlockViewXVx const& fdistribu)
     }
 }
 
-static void compute_efield(DBlockSpanX const& ex, DBlockViewX const& phi_x)
+static void compute_efield(DSpanX const& ex, DViewX const& phi_x)
 {
     auto&& dom_x = phi_x.domain();
     BSplinesX bsplines(dom_x.get<MeshX>());
@@ -68,7 +68,7 @@ EfieldFftSolver::EfieldFftSolver(
 
 // 1- Inner solvers sall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
-DBlockSpanX EfieldFftSolver::operator()(DBlockSpanX ex, DBlockViewXVx fdistribu) const
+DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
 {
     assert(ex.domain() == get_domain<MeshX>(fdistribu));
     UniformMDomainX dom_x = ex.domain();

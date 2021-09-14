@@ -3,7 +3,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "blockview.h"
+#include "block_span.h"
 #include "geometry.h"
 #include "iadvectionvx.h"
 #include "iadvectionx.h"
@@ -12,12 +12,8 @@
 class MockAdvectionX : public IAdvectionX
 {
 public:
-    MOCK_METHOD(
-            DBlockSpanXVx,
-            CallOp,
-            (DBlockSpanXVx fdistribu, double mass_ratio, double dt),
-            (const));
-    DBlockSpanXVx operator()(DBlockSpanXVx fdistribu, double mass_ratio, double dt) const override
+    MOCK_METHOD(DSpanXVx, CallOp, (DSpanXVx fdistribu, double mass_ratio, double dt), (const));
+    DSpanXVx operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const override
     {
         return this->CallOp(fdistribu, mass_ratio, dt);
     }
@@ -26,12 +22,8 @@ public:
 class MockAdvectionVx : public IAdvectionVx
 {
 public:
-    MOCK_METHOD(
-            DBlockSpanXVx,
-            CallOp,
-            (DBlockSpanXVx fdistribu, double mass_ratio, double dt),
-            (const));
-    DBlockSpanXVx operator()(DBlockSpanXVx fdistribu, double mass_ratio, double dt) const override
+    MOCK_METHOD(DSpanXVx, CallOp, (DSpanXVx fdistribu, double mass_ratio, double dt), (const));
+    DSpanXVx operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const override
     {
         return this->CallOp(fdistribu, mass_ratio, dt);
     }
@@ -46,7 +38,7 @@ TEST(SplitVlasovSolver, ordering)
     ProductMesh mesh_x_vx(mesh_x, mesh_vx);
     MDomainXVx const dom(mesh_x_vx, MCoordXVx(0, 0), MCoordXVx(0, 0));
     DBlockXVx const fdistribu(dom);
-    DBlockSpanXVx const fdistribu_s(fdistribu);
+    DSpanXVx const fdistribu_s(fdistribu);
     double const mass_ratio = 1.;
     double const dt = 0.;
 

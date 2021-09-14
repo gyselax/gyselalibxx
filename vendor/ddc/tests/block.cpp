@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 
 #include "block.h"
-#include "blockview.h"
+#include "block_span.h"
 #include "deepcopy.h"
 #include "mcoord.h"
 #include "mdomain.h"

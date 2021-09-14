@@ -1,55 +1,58 @@
 #pragma once
 
-#include "blockview.h"
+#include "block_span.h"
 
 template <class, class>
 class Block;
 
 template <class... Meshes, class ElementType>
 class Block<ProductMDomain<Meshes...>, ElementType>
-    : public BlockView<ProductMDomain<Meshes...>, ElementType>
+    : public BlockSpan<ProductMDomain<Meshes...>, ElementType>
 {
 public:
-    /// ND view on this block
-    using block_view_type = BlockView<ProductMDomain<Meshes...>, ElementType>;
+    /// type of a span of this full block
+    using block_span_type = BlockSpan<ProductMDomain<Meshes...>, ElementType>;
 
-    using block_span_type = BlockView<ProductMDomain<Meshes...>, ElementType const>;
-
+protected:
     /// ND memory view
-    using raw_view_type = typename block_view_type::raw_view_type;
+    using raw_mdspan_type = typename block_span_type::raw_mdspan_type;
 
-    using mdomain_type = typename block_view_type::mdomain_type;
+public:
+    /// type of a view of this full block
+    using block_view_type = BlockSpan<ProductMDomain<Meshes...>, ElementType const>;
+
+    /// The dereferenceable part of the co-domain but with indexing starting at 0
+    using allocation_mdspan_type = typename block_span_type::allocation_mdspan_type;
+
+    using mdomain_type = typename block_span_type::mdomain_type;
 
     using mesh_type = ProductMesh<Meshes...>;
 
     using mcoord_type = typename mdomain_type::mcoord_type;
 
-    using extents_type = typename block_view_type::extents_type;
+    using extents_type = typename block_span_type::extents_type;
 
-    using layout_type = typename block_view_type::layout_type;
+    using layout_type = typename block_span_type::layout_type;
 
-    using mapping_type = typename block_view_type::mapping_type;
+    using mapping_type = typename block_span_type::mapping_type;
 
-    using element_type = typename block_view_type::element_type;
+    using element_type = typename block_span_type::element_type;
 
-    using value_type = typename block_view_type::value_type;
+    using value_type = typename block_span_type::value_type;
 
-    using size_type = typename block_view_type::size_type;
+    using size_type = typename block_span_type::size_type;
 
-    using difference_type = typename block_view_type::difference_type;
+    using difference_type = typename block_span_type::difference_type;
 
-    using pointer = typename block_view_type::pointer;
+    using pointer = typename block_span_type::pointer;
 
-    using reference = typename block_view_type::reference;
-
-    template <class, class, class>
-    friend class BlockView;
+    using reference = typename block_span_type::reference;
 
 public:
     /** Construct a Block on a domain with uninitialized values
      */
     explicit inline constexpr Block(mdomain_type const& domain)
-        : block_view_type(domain, new (std::align_val_t(64)) value_type[domain.size()])
+        : block_span_type(domain, new (std::align_val_t(64)) value_type[domain.size()])
     {
     }
 
@@ -133,11 +136,6 @@ public:
     }
 
     inline constexpr block_view_type cview() const
-    {
-        return *this;
-    }
-
-    inline constexpr block_view_type cview()
     {
         return *this;
     }

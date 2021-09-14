@@ -1,20 +1,20 @@
 #pragma once
 
-#include "blockview.h"
+#include "block_span.h"
 #include "bsplines.h"
 #include "mdomain.h"
 
 template <class Mesh, std::size_t D, class ElementType>
-class Block<BSplines<Mesh, D>, ElementType> : public BlockView<BSplines<Mesh, D>, ElementType>
+class Block<BSplines<Mesh, D>, ElementType> : public BlockSpan<BSplines<Mesh, D>, ElementType>
 {
 public:
     /// ND view on this block
-    using block_view_type = BlockView<BSplines<Mesh, D>, ElementType>;
+    using block_view_type = BlockSpan<BSplines<Mesh, D>, ElementType>;
 
-    using block_span_type = BlockView<BSplines<Mesh, D>, ElementType const>;
+    using block_span_type = BlockSpan<BSplines<Mesh, D>, ElementType const>;
 
     /// ND memory view
-    using raw_view_type = SpanND<1, ElementType>;
+    using raw_view_type = std::experimental::mdspan<ElementType, std::experimental::dextents<1>>;
 
     using bsplines_type = BSplines<Mesh, D>;
 

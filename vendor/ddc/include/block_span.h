@@ -8,7 +8,6 @@
 #include "mdomain.h"
 #include "product_mdomain.h"
 #include "product_mesh.h"
-#include "view.h"
 
 template <class, class>
 class Block;
@@ -17,7 +16,7 @@ template <
         class SupportType,
         class ElementType,
         class LayoutStridedPolicy = std::experimental::layout_right>
-class BlockView;
+class BlockSpan;
 
 /** Access the domain (or subdomain) of a view
  * @param[in]  view      the view whose domain to iterate
@@ -30,48 +29,51 @@ auto get_domain(BlockType const& block) noexcept
 }
 
 template <class... Meshes, class ElementType, class LayoutStridedLayoutPolicy>
-class BlockView<ProductMDomain<Meshes...>, ElementType, LayoutStridedLayoutPolicy>
+class BlockSpan<ProductMDomain<Meshes...>, ElementType, LayoutStridedLayoutPolicy>
 {
 public:
-    using mdomain_type = ProductMDomain<Meshes...>;
-
     using mesh_type = ProductMesh<Meshes...>;
 
-    /// ND memory view
-    using raw_view_type = std::experimental::mdspan<
+protected:
+    /// the raw mdspan underlying this, with the same indexing (0 might no be dereferenceable)
+    using raw_mdspan_type = std::experimental::mdspan<
             ElementType,
             std::experimental::dextents<mesh_type::rank()>,
             std::experimental::layout_stride>;
 
-    using allocation_view_type = std::experimental::mdspan<
+public:
+    using mdomain_type = ProductMDomain<Meshes...>;
+
+    /// The dereferenceable part of the co-domain but with indexing starting at 0
+    using allocation_mdspan_type = std::experimental::mdspan<
             ElementType,
             std::experimental::dextents<mesh_type::rank()>,
             LayoutStridedLayoutPolicy>;
 
     using mcoord_type = typename mdomain_type::mcoord_type;
 
-    using extents_type = typename allocation_view_type::extents_type;
+    using extents_type = typename allocation_mdspan_type::extents_type;
 
-    using layout_type = typename allocation_view_type::layout_type;
+    using layout_type = typename allocation_mdspan_type::layout_type;
 
-    using accessor_type = typename allocation_view_type::accessor_type;
+    using accessor_type = typename allocation_mdspan_type::accessor_type;
 
-    using mapping_type = typename allocation_view_type::mapping_type;
+    using mapping_type = typename allocation_mdspan_type::mapping_type;
 
-    using element_type = typename allocation_view_type::element_type;
+    using element_type = typename allocation_mdspan_type::element_type;
 
-    using value_type = typename allocation_view_type::value_type;
+    using value_type = typename allocation_mdspan_type::value_type;
 
-    using size_type = typename allocation_view_type::size_type;
+    using size_type = typename allocation_mdspan_type::size_type;
 
-    using difference_type = typename allocation_view_type::difference_type;
+    using difference_type = typename allocation_mdspan_type::difference_type;
 
-    using pointer = typename allocation_view_type::pointer;
+    using pointer = typename allocation_mdspan_type::pointer;
 
-    using reference = typename allocation_view_type::reference;
+    using reference = typename allocation_mdspan_type::reference;
 
     template <class, class, class>
-    friend class BlockView;
+    friend class BlockSpan;
 
     static_assert(mapping_type::is_always_strided());
 
@@ -99,48 +101,48 @@ protected:
     }
 
     /// The raw view of the data
-    raw_view_type m_raw;
+    raw_mdspan_type m_raw;
 
     /// The mesh on which this block is defined
     mdomain_type m_domain;
 
 public:
-    /** Constructs a new BlockView by copy, yields a new view to the same data
-     * @param other the BlockView to copy
+    /** Constructs a new BlockSpan by copy, yields a new view to the same data
+     * @param other the BlockSpan to copy
      */
-    inline constexpr BlockView(BlockView const& other) = default;
+    inline constexpr BlockSpan(BlockSpan const& other) = default;
 
-    /** Constructs a new BlockView by move
-     * @param other the BlockView to move
+    /** Constructs a new BlockSpan by move
+     * @param other the BlockSpan to move
      */
-    inline constexpr BlockView(BlockView&& other) = default;
+    inline constexpr BlockSpan(BlockSpan&& other) = default;
 
-    /** Constructs a new BlockView by copy of a block, yields a new view to the same data
-     * @param other the BlockView to move
+    /** Constructs a new BlockSpan by copy of a block, yields a new view to the same data
+     * @param other the BlockSpan to move
      */
     template <class OElementType>
-    inline constexpr BlockView(Block<mdomain_type, OElementType> const& other) noexcept
+    inline constexpr BlockSpan(Block<mdomain_type, OElementType> const& other) noexcept
         : m_raw(other.m_raw)
         , m_domain(other.domain())
     {
     }
 
-    /** Constructs a new BlockView by copy of a block, yields a new view to the same data
-     * @param other the BlockView to move
+    /** Constructs a new BlockSpan by copy of a block, yields a new view to the same data
+     * @param other the BlockSpan to move
      */
     template <class OElementType>
-    inline constexpr BlockView(
-            BlockView<mdomain_type, OElementType, layout_type> const& other) noexcept
+    inline constexpr BlockSpan(
+            BlockSpan<mdomain_type, OElementType, layout_type> const& other) noexcept
         : m_raw(other.m_raw)
         , m_domain(other.domain())
     {
     }
 
-    /** Constructs a new BlockView from scratch
+    /** Constructs a new BlockSpan from scratch
      * @param domain the domain that sustains the view
      * @param allocation_view the allocation view to the data
      */
-    inline constexpr BlockView(mdomain_type domain, allocation_view_type allocation_view)
+    inline constexpr BlockSpan(mdomain_type domain, allocation_mdspan_type allocation_view)
         : m_raw()
         , m_domain(domain)
     {
@@ -149,7 +151,7 @@ public:
         std::array<std::size_t, mesh_type::rank()> strides_s {allocation_view.mapping().stride(
                 type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)...};
         stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
-        m_raw = raw_view_type(
+        m_raw = raw_mdspan_type(
                 allocation_view.data() - mapping_s(front<Meshes>(domain)...),
                 mapping_s);
     }
@@ -157,7 +159,7 @@ public:
     template <
             class Mapping = mapping_type,
             std::enable_if_t<std::is_constructible_v<Mapping, extents_type>, int> = 0>
-    inline constexpr BlockView(mdomain_type domain, ElementType* ptr) : m_raw()
+    inline constexpr BlockSpan(mdomain_type domain, ElementType* ptr) : m_raw()
                                                                       , m_domain(domain)
     {
         namespace stdex = std::experimental;
@@ -168,20 +170,20 @@ public:
         std::array<std::size_t, mesh_type::rank()> strides_s {
                 mapping_r.stride(type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)...};
         stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
-        m_raw = raw_view_type(ptr - mapping_s(front<Meshes>(domain)...), mapping_s);
+        m_raw = raw_mdspan_type(ptr - mapping_s(front<Meshes>(domain)...), mapping_s);
     }
 
-    /** Copy-assigns a new value to this BlockView, yields a new view to the same data
-     * @param other the BlockView to copy
+    /** Copy-assigns a new value to this BlockSpan, yields a new view to the same data
+     * @param other the BlockSpan to copy
      * @return *this
      */
-    inline constexpr BlockView& operator=(BlockView const& other) = default;
+    inline constexpr BlockSpan& operator=(BlockSpan const& other) = default;
 
-    /** Move-assigns a new value to this BlockView
-     * @param other the BlockView to move
+    /** Move-assigns a new value to this BlockSpan
+     * @param other the BlockSpan to move
      * @return *this
      */
-    inline constexpr BlockView& operator=(BlockView&& other) = default;
+    inline constexpr BlockSpan& operator=(BlockSpan&& other) = default;
 
     /** Slice out some dimensions
      * @param slices the coordinates to
@@ -193,7 +195,7 @@ public:
                 submdspan(allocation_view(), get_slicer_for<Meshes>(slice_spec)...);
         using detail::TypeSeq;
         using selected_meshes = type_seq_remove_t<TypeSeq<Meshes...>, TypeSeq<QueryMeshes...>>;
-        return ::BlockView(select_by_type_seq<selected_meshes>(m_domain), subview);
+        return ::BlockSpan(select_by_type_seq<selected_meshes>(m_domain), subview);
     }
 
     /** Slice out some dimensions
@@ -204,7 +206,7 @@ public:
     {
         auto subview = std::experimental::
                 submdspan(allocation_view(), get_slicer_for<Meshes>(odomain)...);
-        return ::BlockView(m_domain.restrict(odomain), subview);
+        return ::BlockSpan(m_domain.restrict(odomain), subview);
     }
 
     template <class... OMeshes>
@@ -321,9 +323,9 @@ public:
     /** Swaps this field with another
      * @param other the Block to swap with this one
      */
-    inline constexpr void swap(BlockView& other)
+    inline constexpr void swap(BlockSpan& other)
     {
-        BlockView tmp = std::move(other);
+        BlockSpan tmp = std::move(other);
         other = std::move(*this);
         *this = std::move(tmp);
     }
@@ -361,7 +363,7 @@ public:
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
      */
-    inline constexpr raw_view_type raw_view() const
+    inline constexpr raw_mdspan_type raw_view() const
     {
         return m_raw;
     }
@@ -369,7 +371,7 @@ public:
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
      */
-    inline constexpr allocation_view_type allocation_view() const
+    inline constexpr allocation_mdspan_type allocation_view() const
     {
         mapping_type m;
         extents_type extents_s(::extents<Meshes>(m_domain)...);
@@ -378,12 +380,12 @@ public:
         } else {
             m = mapping_type(extents_s);
         }
-        return allocation_view_type(data(), m);
+        return allocation_mdspan_type(data(), m);
     }
 };
 
 template <class... Meshes, class ElementType, class Extents, class StridedLayout>
-BlockView(
+BlockSpan(
         ProductMDomain<Meshes...> domain,
         std::experimental::mdspan<ElementType, Extents, StridedLayout> allocation_view)
-        -> BlockView<ProductMDomain<Meshes...>, ElementType, StridedLayout>;
+        -> BlockSpan<ProductMDomain<Meshes...>, ElementType, StridedLayout>;

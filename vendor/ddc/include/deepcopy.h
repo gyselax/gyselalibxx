@@ -1,17 +1,17 @@
 #pragma once
 
-#include "blockview.h"
+#include "block_span.h"
 
 namespace detail {
 template <class... Meshes, class ElementType, class Layout, class Functor, class... MCoords>
 inline void for_each_impl(
-        const BlockView<ProductMDomain<Meshes...>, ElementType, Layout>& to,
+        const BlockSpan<ProductMDomain<Meshes...>, ElementType, Layout>& to,
         Functor&& f,
         MCoords&&... mcoords) noexcept
 {
     if constexpr (
             sizeof...(MCoords)
-            == BlockView<ProductMDomain<Meshes...>, ElementType, Layout>::rank()) {
+            == BlockSpan<ProductMDomain<Meshes...>, ElementType, Layout>::rank()) {
         f(std::forward<MCoords>(mcoords)...);
     } else {
         using CurrentMesh = type_seq_element_t<sizeof...(MCoords), detail::TypeSeq<Meshes...>>;
@@ -34,9 +34,9 @@ template <
         class OElementType,
         class Layout,
         class OLayout>
-inline BlockView<ProductMDomain<Meshes...>, ElementType, Layout> const& deepcopy(
-        BlockView<ProductMDomain<Meshes...>, ElementType, Layout> const& to,
-        BlockView<ProductMDomain<OMeshes...>, OElementType, OLayout> const& from) noexcept
+inline BlockSpan<ProductMDomain<Meshes...>, ElementType, Layout> const& deepcopy(
+        BlockSpan<ProductMDomain<Meshes...>, ElementType, Layout> const& to,
+        BlockSpan<ProductMDomain<OMeshes...>, OElementType, OLayout> const& from) noexcept
 {
     static_assert(std::is_convertible_v<OElementType, ElementType>, "Not convertible");
     assert(to.domain().front() == from.domain().front());
@@ -51,7 +51,7 @@ inline BlockView<ProductMDomain<Meshes...>, ElementType, Layout> const& deepcopy
  */
 template <class... Meshes, class ElementType, class Layout, class Functor>
 inline void for_each(
-        const BlockView<ProductMDomain<Meshes...>, ElementType, Layout>& view,
+        const BlockSpan<ProductMDomain<Meshes...>, ElementType, Layout>& view,
         Functor&& f) noexcept
 {
     detail::for_each_impl(view, std::forward<Functor>(f));
