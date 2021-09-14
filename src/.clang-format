@@ -67,21 +67,31 @@ ExperimentalAutoDetectBinPacking:               false
 FixNamespaceComments:                           true
 IncludeBlocks:                                  Regroup
 IncludeCategories:
+  # MPI must come first, before std headers
   - Regex:           '^[<"]mpi\.h[">]'
-    Priority:        -100
+    Priority:        -160
 #       SortPriority:    -100                  # !!!requires clang 10
+  # std (extensionless, directoryless) headers
   - Regex:           '^<[^./]*>$'
+    Priority:        -140
+  # ddc headers
+  - Regex:           '^<ddc/.*>$'
+    Priority:        -120
+  # sll headers
+  - Regex:           '^<sll/.*>$'
+    Priority:        -100
+  # other library headers (with subdirectory)
+  - Regex:           '^<.*/.*>$'
     Priority:        -80
-#       SortPriority:    -80                   # !!!requires clang 10
+  # library headers (with extension)
   - Regex:           '^<.*\.h[^.]*>$'
     Priority:        -60
-#       SortPriority:    -60                   # !!!requires clang 10
-  - Regex:           '^"[^/]*/.*"$'
+  # local headers (with subdirectory)
+  - Regex:           '^".*/.*"$'
     Priority:        -40
-#       SortPriority:    -40                   # !!!requires clang 10
+  # local headers
   - Regex:           '^".*"$'
     Priority:        -20
-#       SortPriority:    -20                   # !!!requires clang 10
 IncludeIsMainRegex:                             '^$'
 #    IncludeIsMainSourceRegex:                       '' # !!!requires clang 10
 IndentCaseLabels:                               false

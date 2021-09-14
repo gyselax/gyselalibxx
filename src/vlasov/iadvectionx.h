@@ -1,7 +1,8 @@
 #pragma once
 
-#include "block_span.h"
-#include "geometry.h"
+#include <ddc/block_span.h>
+
+#include <geometry.h>
 
 class IAdvectionX
 {

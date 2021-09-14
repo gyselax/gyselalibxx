@@ -1,6 +1,7 @@
 #pragma once
 
-#include "geometry.h"
+#include <geometry.h>
+
 #include "itimesolver.h"
 
 class IEfieldSolver;

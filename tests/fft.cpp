@@ -7,24 +7,27 @@
 #include <memory>
 #include <vector>
 
+#include <ddc/block.h>
+#include <ddc/mcoord.h>
+#include <ddc/non_uniform_mesh.h>
+#include <ddc/product_mdomain.h>
+#include <ddc/product_mesh.h>
+#include <ddc/rcoord.h>
+#include <ddc/taggedvector.h>
+#include <ddc/uniform_mesh.h>
+
+#include <sll/math_tools.h>
+
 #include <ext/alloc_traits.h>
-#include <fftw3.h>
 #include <gtest/gtest.h>
+
+#include <fftw3.h>
 #include <stdlib.h>
 
-#include "block.h"
 #include "fft_1d.h"
 #include "fftw.h"
 #include "geometry.h"
 #include "ifftw.h"
-#include "math_tools.h"
-#include "mcoord.h"
-#include "non_uniform_mesh.h"
-#include "product_mdomain.h"
-#include "product_mesh.h"
-#include "rcoord.h"
-#include "taggedvector.h"
-#include "uniform_mesh.h"
 
 using namespace std;
 

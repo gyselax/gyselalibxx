@@ -8,8 +8,8 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 
 # Configuration
 
-## We use C++17 all around!
-set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
+## We use C++20 all around!
+set(CMAKE_CXX_STANDARD 20 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
 # List of options
 option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
@@ -44,18 +44,11 @@ endif()
 set(MDSPAN_CXX_STANDARD "${CMAKE_CXX_STANDARD}" CACHE STRING "Override the default CXX_STANDARD to compile with" FORCE)
 add_subdirectory("vendor/mdspan/" "mdspan")
 
-## Look for mdarray in `vendor/`
-set(MDARRAY_CXX_STANDARD "${CMAKE_CXX_STANDARD}" CACHE STRING "Override the default CXX_STANDARD to compile with." FORCE)
-add_subdirectory("vendor/mdarray/" "mdarray")
-
-## Look for selalib's matrix in `vendor/`
-add_subdirectory("vendor/matrix/" "matrix")
-
-## Look for mdspan_wrapper in `vendor/`
-add_subdirectory("vendor/mdspan_wrapper/" "mdspan_wrapper")
-
 ## Look for the Domain DeComposition library (ddc) in `vendor/`
 add_subdirectory("vendor/ddc/" "ddc")
+
+## Look for selalib's splines in `vendor/`
+add_subdirectory("vendor/sll/" "sll")
 
 
 # Our project code
@@ -63,7 +56,7 @@ add_subdirectory("vendor/ddc/" "ddc")
 ## The main code in `src/`
 add_subdirectory(src)
 
-## if tests are enabled, tests in `tests/`
+## if tests are enabled, build the tests in `tests/`
 if("${BUILD_TESTING}")
     add_subdirectory(tests/)
 endif()

@@ -4,11 +4,12 @@
 #include <complex>
 #include <type_traits>
 
-#include <block_span.h>
+#include <ddc/block_span.h>
+#include <ddc/mdomain.h>
+#include <ddc/non_uniform_mesh.h>
+
 #include <fftw3.h>
 #include <geometry.h>
-#include <mdomain.h>
-#include <non_uniform_mesh.h>
 
 #include "ifft.h"
 

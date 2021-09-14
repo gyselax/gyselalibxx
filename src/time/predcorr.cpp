@@ -1,11 +1,12 @@
-#include <deepcopy.h>
+#include <ddc/deepcopy.h>
+#include <ddc/mdomain.h>
+#include <ddc/product_mdomain.h>
+#include <ddc/taggedvector.h>
 
-#include "iefieldsolver.h"
-#include "ivlasovsolver.h"
-#include "mdomain.h"
+#include <iefieldsolver.h>
+#include <ivlasovsolver.h>
+
 #include "predcorr.h"
-#include "product_mdomain.h"
-#include "taggedvector.h"
 
 PredCorr::PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLengthT dt)
     : m_vlasov(vlasov)

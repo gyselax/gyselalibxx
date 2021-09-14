@@ -1,10 +1,11 @@
 #include <array>
 
+#include <ddc/mcoord.h>
+#include <ddc/product_mdomain.h>
+
 #include <pdi.h>
 
 #include "expose_to_pdi.h"
-#include "mcoord.h"
-#include "product_mdomain.h"
 
 void expose_to_pdi(std::string const& name, DSpanXVx b)
 {

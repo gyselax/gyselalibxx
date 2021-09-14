@@ -1,12 +1,13 @@
 #pragma once
 
-#include <block.h>
-#include <bsplines.h>
-#include <bsplines_non_uniform.h>
-#include <bsplines_uniform.h>
-#include <non_uniform_mesh.h>
-#include <spline_builder.h>
-#include <uniform_mesh.h>
+#include <ddc/block.h>
+#include <ddc/non_uniform_mesh.h>
+#include <ddc/uniform_mesh.h>
+
+#include <sll/bsplines.h>
+#include <sll/bsplines_non_uniform.h>
+#include <sll/bsplines_uniform.h>
+#include <sll/spline_builder.h>
 
 template <class Tag>
 struct Fourier

@@ -1,13 +1,13 @@
 #include <memory>
 #include <utility>
 
-#include <gtest/gtest.h>
+#include <ddc/mcoord.h>
+#include <ddc/non_uniform_mesh.h>
+#include <ddc/product_mesh.h>
+#include <ddc/rcoord.h>
+#include <ddc/single_mesh.h>
 
-#include "mcoord.h"
-#include "non_uniform_mesh.h"
-#include "product_mesh.h"
-#include "rcoord.h"
-#include "single_mesh.h"
+#include <gtest/gtest.h>
 
 class DimX;
 class DimVx;

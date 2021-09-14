@@ -1,12 +1,11 @@
 #include <iosfwd>
 #include <memory>
 
-#include <gtest/gtest.h>
-
-#include "mcoord.h"
-#include "taggedvector.h"
+#include <ddc/mcoord.h>
+#include <ddc/taggedvector.h>
 
 #include <experimental/mdspan>
+#include <gtest/gtest.h>
 
 using namespace std;
 using namespace std::experimental;

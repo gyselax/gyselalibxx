@@ -1,14 +1,15 @@
 #include <cstdlib>
 
+#include <ddc/mcoord.h>
+#include <ddc/product_mdomain.h>
+#include <ddc/product_mesh.h>
+
 #include <paraconf.h>
 
 #include "geometry.h"
-#include "mcoord.h"
 #include "nulladvectionvx.h"
 #include "nullefieldsolver.h"
 #include "predcorr.h"
-#include "product_mdomain.h"
-#include "product_mesh.h"
 #include "splineadvectionx.h"
 #include "splitvlasovsolver.h"
 

@@ -1,10 +1,10 @@
 #include <memory>
 
-#include <gtest/gtest.h>
+#include <ddc/mcoord.h>
+#include <ddc/rcoord.h>
+#include <ddc/uniform_mesh.h>
 
-#include "mcoord.h"
-#include "rcoord.h"
-#include "uniform_mesh.h"
+#include <gtest/gtest.h>
 
 struct DimX;
 

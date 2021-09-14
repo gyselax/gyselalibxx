@@ -1,34 +1,33 @@
 cmake_minimum_required(VERSION 3.15)
+project(ddc CXX)
 
-add_library(ddc STATIC
-	src/deprecated/bsplines.cpp
-	src/deprecated/bsplines_uniform.cpp
-	src/deprecated/bsplines_non_uniform.cpp
-	src/deprecated/spline_1d.cpp
-	src/deprecated/spline_2d.cpp
-	src/null_boundary_value.cpp
-)
+# List of options
+option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
 
-target_compile_features(ddc
-	PUBLIC
-		cxx_std_17
-)
+# Our dependencies
 
+## Use CTest for running tests
+include(CTest)
+
+# Our project
+
+## The library itself
+add_library(ddc INTERFACE)
+target_compile_features(ddc INTERFACE cxx_std_20)
 target_include_directories(ddc
-	PUBLIC
+	INTERFACE
 		"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
 )
-
 target_link_libraries(ddc
-	PUBLIC
-		mdspan_wrapper::mdsw
-                sll::matrix
-)
-
+	INTERFACE std::mdspan)
 add_library(ddc::ddc ALIAS ddc)
 
-add_subdirectory(tests/)
+## if tests are enabled, build the tests in `tests/`
+if("${BUILD_TESTING}")
+    add_subdirectory(tests/)
+endif()
 
-if(${BUILD_BENCHMARKS})
-    add_subdirectory(benchmarks)
+## if benchmarks are enabled, build the benchmarks in `benchmarks/`
+if("${BUILD_BENCHMARKS}")
+    add_subdirectory(benchmarks/)
 endif()

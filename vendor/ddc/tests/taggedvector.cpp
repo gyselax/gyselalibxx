@@ -1,8 +1,8 @@
 #include <memory>
 
-#include <gtest/gtest.h>
+#include <ddc/taggedvector.h>
 
-#include "taggedvector.h"
+#include <gtest/gtest.h>
 
 TEST(TaggedVector, Constructor)
 {

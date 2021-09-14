@@ -1,6 +1,6 @@
 #pragma once
 
-#include "block_span.h"
+#include <ddc/block_span.h>
 
 class IVlasovSolver
 {

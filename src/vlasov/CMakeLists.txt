@@ -16,6 +16,7 @@ target_include_directories(vlasov
 target_link_libraries(vlasov
 	PUBLIC
 		ddc::ddc
+		sll::splines
 		vcx::geometry
 )
 

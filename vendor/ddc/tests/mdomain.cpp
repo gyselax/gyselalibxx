@@ -2,13 +2,13 @@
 #include <memory>
 #include <utility>
 
-#include <gtest/gtest.h>
+#include <ddc/mcoord.h>
+#include <ddc/mdomain.h>
+#include <ddc/rcoord.h>
+#include <ddc/taggedvector.h>
+#include <ddc/uniform_mesh.h>
 
-#include "mcoord.h"
-#include "mdomain.h"
-#include "rcoord.h"
-#include "taggedvector.h"
-#include "uniform_mesh.h"
+#include <gtest/gtest.h>
 
 class DimX;
 

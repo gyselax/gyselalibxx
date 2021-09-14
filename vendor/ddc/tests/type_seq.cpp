@@ -1,9 +1,9 @@
 #include <memory>
 #include <type_traits>
 
-#include <gtest/gtest.h>
+#include <ddc/type_seq.h>
 
-#include "type_seq.h"
+#include <gtest/gtest.h>
 
 using namespace detail;
 

@@ -2,20 +2,19 @@
 #include <memory>
 #include <type_traits>
 
-#include <gtest/gtest.h>
-
-#include "block.h"
-#include "block_span.h"
-#include "deepcopy.h"
-#include "mcoord.h"
-#include "mdomain.h"
-#include "product_mdomain.h"
-#include "product_mesh.h"
-#include "rcoord.h"
-#include "taggedvector.h"
-#include "uniform_mesh.h"
+#include <ddc/block.h>
+#include <ddc/block_span.h>
+#include <ddc/deepcopy.h>
+#include <ddc/mcoord.h>
+#include <ddc/mdomain.h>
+#include <ddc/product_mdomain.h>
+#include <ddc/product_mesh.h>
+#include <ddc/rcoord.h>
+#include <ddc/taggedvector.h>
+#include <ddc/uniform_mesh.h>
 
 #include <experimental/mdspan>
+#include <gtest/gtest.h>
 
 using namespace std;
 using namespace std::experimental;

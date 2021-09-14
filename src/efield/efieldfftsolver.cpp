@@ -3,24 +3,27 @@
 #include <complex>
 #include <iostream>
 
-#include "block.h"
-#include "block_span.h"
-#include "block_spline.h"
-#include "bsplines_uniform.h"
-#include "deepcopy.h"
+#include <ddc/block.h>
+#include <ddc/block_span.h>
+#include <ddc/deepcopy.h>
+#include <ddc/mcoord.h>
+#include <ddc/mdomain.h>
+#include <ddc/non_uniform_mesh.h>
+#include <ddc/product_mdomain.h>
+#include <ddc/product_mesh.h>
+#include <ddc/rcoord.h>
+#include <ddc/taggedvector.h>
+#include <ddc/uniform_mesh.h>
+
+#include <sll/block_spline.h>
+#include <sll/bsplines_uniform.h>
+#include <sll/null_boundary_value.h>
+#include <sll/spline_builder.h>
+#include <sll/spline_evaluator.h>
+
+#include <geometry.h>
+
 #include "efieldfftsolver.h"
-#include "geometry.h"
-#include "mcoord.h"
-#include "mdomain.h"
-#include "non_uniform_mesh.h"
-#include "null_boundary_value.h"
-#include "product_mdomain.h"
-#include "product_mesh.h"
-#include "rcoord.h"
-#include "spline_builder.h"
-#include "spline_evaluator.h"
-#include "taggedvector.h"
-#include "uniform_mesh.h"
 
 static double compute_dens(DViewVx const& fdistribu)
 {

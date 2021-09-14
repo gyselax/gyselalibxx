@@ -1,9 +1,10 @@
 #include <memory>
 
+#include <ddc/block_span.h>
+
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "block_span.h"
 #include "geometry.h"
 #include "iadvectionvx.h"
 #include "iadvectionx.h"

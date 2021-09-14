@@ -1,15 +1,15 @@
 #include <iosfwd>
 #include <memory>
 
-#include <gtest/gtest.h>
+#include <ddc/mcoord.h>
+#include <ddc/non_uniform_mesh.h>
+#include <ddc/product_mdomain.h>
+#include <ddc/product_mesh.h>
+#include <ddc/rcoord.h>
+#include <ddc/taggedvector.h>
+#include <ddc/uniform_mesh.h>
 
-#include "mcoord.h"
-#include "non_uniform_mesh.h"
-#include "product_mdomain.h"
-#include "product_mesh.h"
-#include "rcoord.h"
-#include "taggedvector.h"
-#include "uniform_mesh.h"
+#include <gtest/gtest.h>
 
 class DimX;
 class DimVx;

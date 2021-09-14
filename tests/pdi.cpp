@@ -2,14 +2,15 @@
 #include <string>
 #include <string_view>
 
+#include <ddc/mcoord.h>
+#include <ddc/mdomain.h>
+#include <ddc/product_mdomain.h>
+#include <ddc/taggedvector.h>
+
 #include <paraconf.h>
 #include <pdi.h>
 
 #include "geometry.h"
-#include "mcoord.h"
-#include "mdomain.h"
-#include "product_mdomain.h"
-#include "taggedvector.h"
 
 void expose_to_pdi(std::string const& name, DViewXVx b)
 {
