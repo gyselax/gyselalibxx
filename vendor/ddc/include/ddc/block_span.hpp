@@ -390,5 +390,8 @@ BlockSpan(
         std::experimental::mdspan<ElementType, Extents, StridedLayout> allocation_view)
         -> BlockSpan<ProductMDomain<Meshes...>, ElementType, StridedLayout>;
 
-template <class Mesh, class ElementType, class LayoutStridedPolicy>
-using BlockView = BlockSpan<Mesh, ElementType const, LayoutStridedPolicy>;
+template <
+        class SupportType,
+        class ElementType,
+        class LayoutStridedPolicy = std::experimental::layout_right>
+using BlockView = BlockSpan<SupportType, ElementType const, LayoutStridedPolicy>;

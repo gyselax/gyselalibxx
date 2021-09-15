@@ -21,7 +21,7 @@ add_library(splines STATIC
 	src/matrix_pds_tridiag.cpp
 	src/null_boundary_value.cpp
 )
-target_compile_features(splines PUBLIC cxx_std_20)
+target_compile_features(splines PUBLIC cxx_std_17)
 target_include_directories(splines
 	PUBLIC
 		"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"

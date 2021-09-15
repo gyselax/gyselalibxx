@@ -15,36 +15,34 @@
 
 #include <benchmark/benchmark.h>
 
-#include "blockview.h"
-
 class DimX;
 class DimVx;
 
 using MeshX = UniformMesh<DimX>;
 using MDomainX = ProductMDomain<MeshX>;
 using DBlockX = Block<MDomainX, double>;
-using DBlockSpanX = BlockView<MDomainX, double>;
+using DBlockSpanX = BlockSpan<MDomainX, double>;
 using MCoordX = MCoord<MeshX>;
 using RCoordX = RCoord<DimX>;
 
 using MeshVx = UniformMesh<DimVx>;
 using MDomainVx = ProductMDomain<MeshVx>;
 using DBlockVx = Block<MDomainVx, double>;
-using DBlockSpanVx = BlockView<MDomainVx, double>;
+using DBlockSpanVx = BlockSpan<MDomainVx, double>;
 using MCoordVx = MCoord<MeshVx>;
 using RCoordVx = RCoord<DimVx>;
 
 using MeshXVx = ProductMesh<MeshX, MeshVx>;
 using MDomainXVx = ProductMDomain<MeshX, MeshVx>;
 using DBlockXVx = Block<MDomainXVx, double>;
-using DBlockSpanXVx = BlockView<MDomainXVx, double>;
+using DBlockSpanXVx = BlockSpan<MDomainXVx, double>;
 using MCoordXVx = MCoord<MeshX, MeshVx>;
 using RCoordXVx = RCoord<DimX, DimVx>;
 
 using MeshVxX = ProductMesh<MeshVx, MeshX>;
 using MDomainVxX = ProductMDomain<MeshVx, MeshX>;
 using DBlockVxX = Block<MDomainVxX, double>;
-using DBlockSpanVxX = BlockView<MDomainVxX, double>;
+using DBlockSpanVxX = BlockSpan<MDomainVxX, double>;
 using MCoordVxX = MCoord<MeshVx, MeshX>;
 using RCoordVxX = RCoord<DimVx, DimX>;
 

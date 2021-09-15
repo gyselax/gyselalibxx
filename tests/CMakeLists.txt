@@ -11,13 +11,13 @@ target_compile_features(unit_tests PUBLIC cxx_std_17)
 target_link_libraries(unit_tests
 	PUBLIC
 		GTest::gtest_main
+		GTest::gmock
+		GTest::gmock_main
 		FFTW::Double
+		paraconf::paraconf
+		ddc::PDI
 		vcx::deprecated::fft
 		vcx::fft
 		vcx::vlasov
-		GTest::gmock
-		GTest::gmock_main
-		paraconf::paraconf
-		PDI::pdi
 )
 gtest_discover_tests(unit_tests)

@@ -8,8 +8,8 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 
 # Configuration
 
-## We use C++20 all around!
-set(CMAKE_CXX_STANDARD 20 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
+## We use C++17 all around!
+set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
 # List of options
 option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
