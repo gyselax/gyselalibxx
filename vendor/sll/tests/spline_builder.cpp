@@ -155,14 +155,10 @@ TEST(SplineBuilder, Constructor)
 {
     using BSplinesX = BSplines<MeshX, 2>;
 
-    MeshX const mesh(RCoordX(0.), RCoordX(0.02));
-    ProductMesh mesh_prod(mesh);
-    ProductMDomain const dom(mesh_prod, MCoordX(100));
-
-    auto&& bsplines = BSplinesX(dom);
+    auto&& bsplines = BSplinesX(RCoordX(0.), RCoordX(0.02), 100);
 
     SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> spline_builder(bsplines);
-    auto&& interpolation_domain = spline_builder.interpolation_domain();
+    spline_builder.interpolation_domain();
 }
 
 TEST(SplineBuilder, BuildSpline)
@@ -170,25 +166,22 @@ TEST(SplineBuilder, BuildSpline)
     BoundCond constexpr left_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
     BoundCond constexpr right_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
     int constexpr degree = 10;
-    using NonUniformMeshX = NonUniformMesh<DimX>;
-    using UniformMeshX = UniformMesh<DimX>;
+    //     using NonUniformMeshX = NonUniformMesh<DimX>;
+    //     using UniformMeshX = UniformMesh<DimX>;
     using UniformBSplinesX2 = UniformBSplines<DimX, degree>;
     using BlockSplineX2 = Block<UniformBSplinesX2, double>;
-    using NonUniformDomainX = ProductMDomain<NonUniformMeshX>;
-    using BlockNonUniformX = Block<ProductMDomain<NonUniformMeshX>, double>;
+    //     using NonUniformDomainX = ProductMDomain<NonUniformMeshX>;
+    //     using BlockNonUniformX = Block<ProductMDomain<NonUniformMeshX>, double>;
     using BlockUniformX = Block<ProductMDomain<MeshX>, double>;
 
     RCoordX constexpr x0 = 0.;
     RCoordX constexpr xN = 1.;
     std::size_t constexpr ncells = 100;
     MCoordX constexpr npoints = ncells + 1;
-    RCoordX constexpr dx = (xN - x0) / ncells;
+    //     RCoordX constexpr dx = (xN - x0) / ncells;
 
     // 1. Create BSplines
-    MeshX mesh(x0, xN, npoints);
-    ProductMesh mesh_prod(mesh);
-    ProductMDomain const dom(mesh_prod, npoints);
-    UniformBSplinesX2 bsplines(dom);
+    UniformBSplinesX2 bsplines(x0, xN, npoints);
 
     // 2. Create a Spline represented by a block over BSplines
     // The block is filled with garbage data, we need to initialize it

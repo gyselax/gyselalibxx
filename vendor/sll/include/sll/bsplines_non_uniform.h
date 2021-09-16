@@ -53,16 +53,26 @@ public:
     }
 
 private:
-    mesh_type m_mesh;
-
-    MDomain<mesh_type> m_domain;
-
-    std::vector<double> m_knots;
+    std::vector<rcoord_type> m_knots;
 
 public:
     BSplines() = default;
 
-    explicit BSplines(domain_type const& domain);
+    /// @brief Construct a `BSplines` using a brace-list, i.e. `BSplines bsplines({0., 1.})`
+    explicit BSplines(std::initializer_list<rcoord_type> knots)
+        : BSplines(knots.begin(), knots.end())
+    {
+    }
+
+    /// @brief Construct a `BSplines` using a C++20 "common range".
+    template <class InputRange>
+    inline constexpr BSplines(InputRange&& knots) : BSplines(knots.begin(), knots.end())
+    {
+    }
+
+    /// @brief Construct a `BSplines` using a pair of iterators.
+    template <class RandomIt>
+    inline constexpr BSplines(RandomIt knots_begin, RandomIt knots_end);
 
     BSplines(BSplines const& x) = default;
 
@@ -100,14 +110,14 @@ public:
         return m_knots[break_idx + degree()];
     }
 
-    double rmin() const noexcept
+    rcoord_type rmin() const noexcept
     {
-        return m_domain.rmin();
+        return get_knot(0);
     }
 
-    double rmax() const noexcept
+    rcoord_type rmax() const noexcept
     {
-        return m_domain.rmax();
+        return get_knot(ncells());
     }
 
     double length() const noexcept
@@ -122,7 +132,7 @@ public:
 
     std::size_t npoints() const noexcept
     {
-        return m_domain.size();
+        return m_knots.size() - 2 * degree();
     }
 
     std::size_t nbasis() const noexcept
@@ -132,7 +142,7 @@ public:
 
     std::size_t ncells() const noexcept
     {
-        return m_domain.size() - 1;
+        return npoints() - 1;
     }
 
 private:
@@ -147,31 +157,34 @@ private:
 };
 
 template <class Tag, std::size_t D>
-BSplines<NonUniformMesh<Tag>, D>::BSplines(domain_type const& domain)
-    : m_mesh(get<mesh_type>(domain).mesh())
-    , m_domain(m_mesh, domain.front(), domain.back())
-    , m_knots(m_domain.size() + 2 * degree())
+template <class RandomIt>
+inline constexpr BSplines<NonUniformMesh<Tag>, D>::BSplines(
+        RandomIt knots_begin,
+        RandomIt knots_end)
+    : m_knots((knots_end - knots_begin) + 2 * degree())
 {
     assert(ncells() > 0);
-    assert(rmin() < rmax());
-    assert(npoints() == ncells() + 1);
 
-    for (int i(0); i < npoints(); ++i) {
-        get_knot(i) = m_mesh.to_real(m_domain[i]);
+    // Fill the provided knots
+    int ii = 0;
+    for (auto&& it = knots_begin; it < knots_end; ++it) {
+        get_knot(ii) = *it;
+        ++ii;
     }
+    assert(rmin() < rmax());
 
-    // Fill out the extra nodes
+    // Fill out the extra knots
     if constexpr (is_periodic()) {
-        double period = m_mesh.to_real(m_domain[npoints() - 1]) - m_mesh.to_real(m_domain[0]);
+        double period = rmax() - rmin();
         for (int i(1); i < degree() + 1; ++i) {
-            get_knot(-i) = m_mesh.to_real(m_domain[npoints() - 1 - i]) - period;
-            get_knot(npoints() - 1 + i) = m_mesh.to_real(m_domain[i]) + period;
+            get_knot(-i) = get_knot(ncells() - i) - period;
+            get_knot(ncells() + i) = get_knot(i) + period;
         }
     } else // open
     {
         for (int i(1); i < degree() + 1; ++i) {
-            get_knot(-i) = m_mesh.to_real(m_domain[0]);
-            get_knot(npoints() - 1 + i) = m_mesh.to_real(m_domain[npoints() - 1]);
+            get_knot(-i) = rmin();
+            get_knot(npoints() - 1 + i) = rmax();
         }
     }
 }

@@ -12,7 +12,7 @@ enum class BoundCond {
     GREVILLE,
 };
 
-static std::ostream& operator<<(std::ostream& out, BoundCond bc)
+static inline std::ostream& operator<<(std::ostream& out, BoundCond bc)
 {
     switch (bc) {
     case BoundCond::PERIODIC:

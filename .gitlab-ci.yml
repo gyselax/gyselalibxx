@@ -6,9 +6,10 @@ all_tests:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
+    rm -rf build || true
     mkdir build
     cd build
-    cmake ..
+    cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON ..
     make -j 2 VERBOSE=1
     ctest --output-on-failure --timeout 5
     cd ..

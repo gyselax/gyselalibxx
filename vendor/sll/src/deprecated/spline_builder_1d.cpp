@@ -19,15 +19,15 @@ std::array<BoundCond, 3> SplineBuilder1D::allowed_bcs
         = {BoundCond::PERIODIC, BoundCond::HERMITE, BoundCond::GREVILLE};
 
 SplineBuilder1D::SplineBuilder1D(const BSplines& bspl, BoundCond xmin_bc, BoundCond xmax_bc)
-    : m_xmin_bc(xmin_bc)
-    , m_xmax_bc(xmax_bc)
-    , m_nbc_xmin(xmin_bc == BoundCond::HERMITE ? bspl.degree() / 2 : 0)
-    , m_nbc_xmax(xmax_bc == BoundCond::HERMITE ? bspl.degree() / 2 : 0)
-    , bspl(bspl)
+    : bspl(bspl)
     , odd(bspl.degree() % 2)
     , offset(bspl.is_periodic() ? bspl.degree() / 2 : 0)
     , dx((bspl.xmax() - bspl.xmin()) / bspl.ncells())
     , matrix(nullptr)
+    , m_xmin_bc(xmin_bc)
+    , m_xmax_bc(xmax_bc)
+    , m_nbc_xmin(xmin_bc == BoundCond::HERMITE ? bspl.degree() / 2 : 0)
+    , m_nbc_xmax(xmax_bc == BoundCond::HERMITE ? bspl.degree() / 2 : 0)
 {
     int lower_block_size, upper_block_size;
     constructor_sanity_checks();

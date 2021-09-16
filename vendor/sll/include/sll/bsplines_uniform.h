@@ -11,7 +11,9 @@
 #include "sll/bsplines.h"
 #include "sll/math_tools.h"
 
-/// UniformMesh specialization of BSplines
+template <class Tag, std::size_t D>
+using UniformBSplines = BSplines<UniformMesh<Tag>, D>;
+
 template <class Tag, std::size_t D>
 class BSplines<UniformMesh<Tag>, D>
 {
@@ -54,15 +56,20 @@ public:
 
 private:
     mesh_type m_mesh;
-
     MDomain<mesh_type> m_domain;
 
 public:
     BSplines() = default;
 
-    explicit BSplines(domain_type const& domain)
-        : m_mesh(get<mesh_type>(domain).mesh())
-        , m_domain(m_mesh, domain.front(), domain.back())
+    /** Constructs a BSpline basis with n equidistant knots over \f$[a, b]\f$
+     * 
+     * @param rmin    the real coordinate of the first knot
+     * @param rmax    the real coordinate of the last knot
+     * @param n_knots the number of knots
+     */
+    explicit BSplines(rcoord_type rmin, rcoord_type rmax, std::size_t n_knots)
+        : m_mesh(rmin, rmax, n_knots)
+        , m_domain(m_mesh, 0, n_knots - 1)
     {
     }
 
@@ -365,6 +372,3 @@ void BSplines<UniformMesh<Tag>, D>::integrals(
         }
     }
 }
-
-template <class Tag, std::size_t D>
-using UniformBSplines = BSplines<UniformMesh<Tag>, D>;

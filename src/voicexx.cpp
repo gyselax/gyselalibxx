@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iostream>
 
 #include <ddc/MCoord>
 #include <ddc/ProductMDomain>
@@ -13,13 +14,17 @@
 #include "splineadvectionx.h"
 #include "splitvlasovsolver.h"
 
+using std::cerr;
+using std::endl;
+
 int main(int argc, char** argv)
 {
     PC_tree_t conf;
     if (argc > 1) {
         conf = PC_parse_path(argv[1]);
     } else {
-        return EXIT_SUCCESS;
+        cerr << "usage: " << argv[0] << " <config_file.yml>" << endl;
+        return EXIT_FAILURE;
     }
 
     long steps;
@@ -31,29 +36,43 @@ int main(int argc, char** argv)
     double mass_ratio;
     PC_double(PC_get(conf, ".mass_ratio"), &mass_ratio);
 
-    double x_min;
-    PC_double(PC_get(conf, ".MeshX.min"), &x_min);
-    double x_max;
-    PC_double(PC_get(conf, ".MeshX.max"), &x_max);
-    long x_size;
-    PC_int(PC_get(conf, ".MeshX.size"), &x_size);
+    RCoordX x_min = [&]() {
+        double x_min;
+        PC_double(PC_get(conf, ".MeshX.min"), &x_min);
+        return x_min;
+    }();
+    RCoordX x_max = [&]() {
+        double x_max;
+        PC_double(PC_get(conf, ".MeshX.max"), &x_max);
+        return x_max;
+    }();
+    MLengthElement x_size = [&]() {
+        long x_size;
+        PC_int(PC_get(conf, ".MeshX.size"), &x_size);
+        return x_size;
+    }();
 
-    double vx_min;
-    PC_double(PC_get(conf, ".MeshVx.min"), &vx_min);
-    double vx_max;
-    PC_double(PC_get(conf, ".MeshVx.max"), &vx_max);
-    long vx_size;
-    PC_int(PC_get(conf, ".MeshVx.size"), &vx_size);
+    RCoordVx vx_min = [&]() {
+        double vx_min;
+        PC_double(PC_get(conf, ".MeshVx.min"), &vx_min);
+        return vx_min;
+    }();
+    RCoordVx vx_max = [&]() {
+        double vx_max;
+        PC_double(PC_get(conf, ".MeshVx.max"), &vx_max);
+        return vx_max;
+    }();
+    MLengthElement vx_size = [&]() {
+        double vx_size;
+        PC_double(PC_get(conf, ".MeshVx.size"), &vx_size);
+        return vx_size;
+    }();
 
-    KnotsX const knots_x((RCoordX(x_min)), RCoordX(x_max), x_size);
-
-    MDomainX dom_knots_x((ProductMesh<KnotsX>(knots_x)), MCoord<KnotsX>(x_size - 1));
-
-    BSplinesX bsplines_x(dom_knots_x);
+    BSplinesX bsplines_x(x_min, x_max, x_size);
 
     SplineXBuilder builder_x(bsplines_x);
 
-    MeshVx const mesh_vx((RCoordVx(vx_min)), RCoordVx(vx_max), vx_size);
+    MeshVx const mesh_vx(vx_min, vx_max, vx_size);
 
     MeshXVx const mesh_x_vx(builder_x.interpolation_domain().mesh().get<MeshX>(), mesh_vx);
 

@@ -28,31 +28,26 @@ class BSplinesUniformTest : public ::testing::Test
 {
 protected:
     static constexpr std::size_t spline_degree = 2;
-    std::size_t npoints = 101;
-    MeshX const mesh_x = MeshX(RCoordX(0.), RCoordX(2.), npoints);
-    MDomain<MeshX> const dom_x = MDomain(mesh_x, MCoordX(npoints - 1));
-    BSplines<MeshX, spline_degree> const bsplines = BSplines<MeshX, 2>(dom_x);
+    static constexpr std::size_t npoints = 101;
+    static constexpr RCoordX xmin = 0.;
+    static constexpr RCoordX xmax = 2.;
+    BSplines<MeshX, spline_degree> const bsplines {xmin, xmax, npoints};
+    deprecated::UniformBSplines const
+            old_bsplines {spline_degree, DimX::PERIODIC, xmin, xmax, npoints - 1};
 };
 
 TEST_F(BSplinesUniformTest, constructor)
 {
     EXPECT_EQ(bsplines.degree(), spline_degree);
     EXPECT_EQ(bsplines.is_periodic(), DimX::PERIODIC);
-    EXPECT_EQ(bsplines.rmin(), 0.);
-    EXPECT_EQ(bsplines.rmax(), 2.);
-    EXPECT_EQ(bsplines.npoints(), 101);
-    EXPECT_EQ(bsplines.ncells(), 100);
+    EXPECT_EQ(bsplines.rmin(), xmin);
+    EXPECT_EQ(bsplines.rmax(), xmax);
+    EXPECT_EQ(bsplines.npoints(), npoints);
+    EXPECT_EQ(bsplines.ncells(), npoints - 1);
 }
 
 TEST_F(BSplinesUniformTest, comparison)
 {
-    deprecated::UniformBSplines old_bsplines(
-            spline_degree,
-            DimX::PERIODIC,
-            dom_x.rmin(),
-            dom_x.rmax(),
-            dom_x.size() - 1);
-
     EXPECT_EQ(bsplines.degree(), old_bsplines.degree());
     EXPECT_EQ(bsplines.is_radial(), old_bsplines.radial());
     EXPECT_EQ(bsplines.is_periodic(), old_bsplines.is_periodic());

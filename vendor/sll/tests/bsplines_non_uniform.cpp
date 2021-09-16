@@ -29,10 +29,8 @@ class BSplinesNonUniformTest : public ::testing::Test
 protected:
     static constexpr std::size_t spline_degree = 2;
     std::vector<double> const breaks {0.0, 0.5, 1.0, 1.5, 2.0};
-    MeshX const mesh_x = MeshX(breaks);
-    ProductMesh<MeshX> mesh = ProductMesh<MeshX>(mesh_x);
-    ProductMDomain<MeshX> const dom = ProductMDomain(mesh, MCoordX(mesh_x.size() - 1));
-    BSplines<MeshX, spline_degree> const bsplines = BSplines<MeshX, 2>(dom);
+    BSplines<MeshX, spline_degree> const bsplines {breaks};
+    deprecated::NonUniformBSplines old_bsplines {spline_degree, DimX::PERIODIC, breaks};
 };
 
 TEST_F(BSplinesNonUniformTest, constructor)
@@ -47,8 +45,6 @@ TEST_F(BSplinesNonUniformTest, constructor)
 
 TEST_F(BSplinesNonUniformTest, comparison)
 {
-    deprecated::NonUniformBSplines old_bsplines(spline_degree, DimX::PERIODIC, breaks);
-
     EXPECT_EQ(bsplines.degree(), old_bsplines.degree());
     EXPECT_EQ(bsplines.is_radial(), old_bsplines.radial());
     EXPECT_EQ(bsplines.is_periodic(), old_bsplines.is_periodic());
