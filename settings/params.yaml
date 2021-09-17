@@ -1,5 +1,5 @@
 steps: 10
-time_step: 1.
+time_step: 0.0001
 mass_ratio: 1.
 
 MeshX:
@@ -10,4 +10,4 @@ MeshX:
 MeshVx:
   min: -1.0
   max: +1.0
-  size: 100
+  size: 50

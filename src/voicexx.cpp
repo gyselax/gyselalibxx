@@ -1,31 +1,53 @@
+#include <cmath>
 #include <cstdlib>
+#include <filesystem>
 #include <iostream>
 
 #include <ddc/MCoord>
 #include <ddc/ProductMDomain>
 #include <ddc/ProductMesh>
+#include <ddc/pdi.hpp>
 
 #include <paraconf.h>
+#include <pdi.h>
 
 #include "geometry.h"
 #include "nulladvectionvx.h"
 #include "nullefieldsolver.h"
+#include "pdi_out.yml.h"
 #include "predcorr.h"
 #include "splineadvectionx.h"
 #include "splitvlasovsolver.h"
 
 using std::cerr;
+using std::cout;
 using std::endl;
+using std::exp;
+namespace fs = std::filesystem;
+
+void gaussian_initialization(DSpanXVx fdistribu)
+{
+    auto gridx = fdistribu.domain<MeshX>();
+    auto gridvx = fdistribu.domain<MeshVx>();
+    for (MCoordX ix : gridx) {
+        for (MCoordVx iv : gridvx) {
+            const RCoordVx v = gridvx.mesh().to_real(iv);
+            fdistribu(ix, iv) = exp(-v * v / 2.);
+        }
+    }
+}
 
 int main(int argc, char** argv)
 {
     PC_tree_t conf;
     if (argc > 1) {
-        conf = PC_parse_path(argv[1]);
+        conf = PC_parse_path(fs::path(argv[1]).c_str());
     } else {
         cerr << "usage: " << argv[0] << " <config_file.yml>" << endl;
         return EXIT_FAILURE;
     }
+
+    // Reading config
 
     long steps;
     PC_int(PC_get(conf, ".steps"), &steps);
@@ -68,9 +90,13 @@ int main(int argc, char** argv)
         return vx_size;
     }();
 
-    BSplinesX bsplines_x(x_min, x_max, x_size);
+    PDI_init(PC_parse_string(PDI_CFG));
 
-    SplineXBuilder builder_x(bsplines_x);
+    // Creating mesh & supports
+
+    BSplinesX const bsplines_x(x_min, x_max, x_size + 1);
+
+    SplineXBuilder const builder_x(bsplines_x);
 
     MeshVx const mesh_vx(vx_min, vx_max, vx_size);
 
@@ -79,6 +105,8 @@ int main(int argc, char** argv)
     MDomainXVx const
             dom2d(mesh_x_vx,
                   MCoordXVx(builder_x.interpolation_domain().extents() - 1, vx_size - 1));
+
+    // Creating operators
 
     SplineAdvectionX const advection_x(bsplines_x, builder_x);
 
@@ -90,9 +118,32 @@ int main(int argc, char** argv)
 
     PredCorr const predcorr(vlasov, efield, time_step);
 
+    // Creating data and initialization
+
     DBlockXVx fdistribu(dom2d);
+    gaussian_initialization(fdistribu);
+
+    BlockX<RCoordX> meshX_coord(fdistribu.domain<MeshX>());
+    auto gridx = fdistribu.domain<MeshX>();
+    for (MCoordX ix : gridx) {
+        meshX_coord(ix) = gridx.mesh().to_real(ix);
+    }
+    BlockVx<RCoordVx> meshVx_coord(fdistribu.domain<MeshVx>());
+    auto gridvx = fdistribu.domain<MeshVx>();
+    for (MCoordVx ivx : gridvx) {
+        meshVx_coord(ivx) = gridvx.mesh().to_real(ivx);
+    }
+
+    // Starting the code
+
+    PDI_expose("Nx", &x_size, PDI_OUT);
+    PDI_expose("Nvx", &vx_size, PDI_OUT);
+    expose_to_pdi("MeshX", meshX_coord);
+    expose_to_pdi("MeshVx", meshVx_coord);
 
     predcorr(fdistribu, mass_ratio, steps);
+
+    PDI_finalize();
 
     return EXIT_SUCCESS;
 }
