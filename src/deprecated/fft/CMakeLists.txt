@@ -14,8 +14,8 @@ target_include_directories(deprecated_fft
 
 target_link_libraries(deprecated_fft
 	PUBLIC
-		ddc::ddc
-                vcx::geometry
+		DDC::DDC
+		vcx::geometry
 )
 
 

@@ -13,8 +13,8 @@ add_executable(voicexx
 target_compile_features(voicexx PUBLIC cxx_std_17)
 target_link_libraries(voicexx
 	PUBLIC
-		ddc::ddc
-		ddc::PDI
+		DDC::DDC
+		DDC::PDI
 		vcx::fft
 		vcx::efield
 		vcx::time

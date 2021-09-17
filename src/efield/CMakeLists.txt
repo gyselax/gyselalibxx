@@ -14,7 +14,7 @@ target_include_directories(efield
 
 target_link_libraries(efield
 	PUBLIC
-		ddc::ddc
+		DDC::DDC
 		sll::splines
 		vcx::fft
 		vcx::geometry

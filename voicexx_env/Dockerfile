@@ -21,6 +21,7 @@ RUN chmod +x /bin/bash_run \
     build-essential \
     clang-format \
     cmake \
+    doxygen \
     pkg-config \
     cmake-data \
     git \

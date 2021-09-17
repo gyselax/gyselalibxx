@@ -13,7 +13,7 @@ target_include_directories(fft
 
 target_link_libraries(fft
 	INTERFACE
-		ddc::ddc
+		DDC::DDC
                 vcx::geometry
 )
 

@@ -1,0 +1,1670 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:%20400,300,300italic,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:%20400,300,300italic,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:%20400,300,300italic,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:%20400,300,300italic,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext');
+
+
+
+/**********
+ * Config
+ **********/
+
+:root
+{
+	--defaultfont: 'Roboto', sans-serif;
+	--titlefont: 'Roboto Condensed', sans-serif;
+	--quotefont: 'Roboto Slab', serif;
+	--monofont: 'Roboto Mono', monospace;
+	
+	
+	--site-black:  #555;
+	--site-white:  #fcfcfc;
+	--site-dblue:  #374f7f;
+	--site-lblue:  #3b83c3;
+	--site-hblue:  #F7F8FB;
+	
+	--sola-base03:  #002b36;
+	--sola-base02:  #073642;
+	--sola-base01:  #586e75;
+	--sola-base00:  #657b83;
+	--sola-base0:   #839496;
+	--sola-base1:   #93a1a1;
+	--sola-base2:   #eee8d5;
+	--sola-base3:   #fdf6e3;
+	
+	--sola-yellow:  #b58900;
+	--sola-orange:  #cb4b16;
+	--sola-red:     #dc322f;
+	--sola-magenta: #d33682;
+	--sola-violet:  #6c71c4;
+	--sola-blue:    #268bd2;
+	--sola-cyan:    #2aa198;
+	--sola-green:   #859900;
+	
+	--lsit-bg:     var(--site-white);
+	--lsit-bg-hl:  var(--site-hblue);
+	--lsit-fg:     var(--site-black);
+	--lsit-fg-hl:  var(--site-lblue);
+	--lsit-fg-ul:  var(--site-dblue);
+	
+	--dsit-bg:     var(--site-dblue);
+	--dsit-bg-hl:  var(--site-lblue);
+	--dsit-fg:     white;
+	--dsit-fg-hl:  white;
+	
+	--lsol-bg:     var(--sola-base3);
+	--lsol-fg:     var(--sola-base00);
+	--lsol-bg-hl:  var(--sola-base2);
+	--lsol-fg-hl:  var(--sola-base01);
+	--lsol-fg-ul:  var(--sola-base1);
+	
+	--dsol-fg-hl:  var(--sola-base1);
+	--dsol-fg:     var(--sola-base0);
+	--dsol-fg-ul:  var(--sola-base01);
+	--dsol-bg-hl:  var(--sola-base02);
+	--dsol-bg:     var(--sola-base03);
+	
+	
+	--vspace: .5rem;
+}
+
+
+
+/**********
+ * html5doctor.com Reset Stylesheet
+ * v1.6.1
+ * Last Updated: 2010-09-17
+ * Author: Richard Clark - http: //richclarkdesign.com 
+ * Twitter: @rich_clark
+ **********/
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+body
+{
+	line-height: 1;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section
+{ 
+	display: block;
+}
+
+nav ul
+{
+	list-style: none;
+}
+
+blockquote,
+q
+{
+	quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after
+{
+	content: '';
+	content: none;
+}
+
+a
+{
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+ins
+{
+	text-decoration: none;
+}
+
+mark
+{
+	font-style: italic;
+	font-weight: bold;
+}
+
+del
+{
+	text-decoration: line-through;
+}
+
+abbr[title],
+dfn[title]
+{
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+
+table
+{
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+hr
+{
+	display: block;
+	height: 1px;
+	border: 0;   
+	border-top: 1px solid var(--lsit-fg);
+	margin: 1em 0;
+	padding: 0;
+}
+
+input,
+select
+{
+	vertical-align: middle;
+}
+
+
+
+/***********
+ * Other reset stuff
+ ***********/
+
+/* Always force a scrollbar in non-IE */
+html
+{
+	overflow-y: scroll;
+}
+
+/* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
+a:hover,
+a:active
+{
+	outline: none;
+}
+
+ul,
+ol
+{
+	margin-left: 2em;
+}
+
+ol
+{
+	list-style-type: decimal;
+}
+
+nav ul,
+nav li
+{
+	margin: 0;
+	list-style: none;
+	list-style-image: none;
+}
+
+small
+{
+	font-size: 85%;
+}
+
+strong,
+th
+{
+	font-weight: bold;
+}
+
+td
+{
+	vertical-align: top;
+}
+
+/* Set sub, sup without affecting line-height: gist.github.com/413930 */
+sub,
+sup
+{
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+}
+
+sup
+{
+	top: -0.5em;
+}
+
+sub
+{
+	bottom: -0.25em;
+}
+
+/* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+pre
+{
+	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	padding: 15px;
+}
+
+/* www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/ */
+textarea
+{
+	overflow: auto;
+}
+
+/* Align checkboxes, radios, text inputs with their label by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
+
+input[type="radio"]
+{
+	vertical-align: text-bottom;
+}
+
+input[type="checkbox"]
+{
+	vertical-align: bottom;
+}
+
+/* Hand cursor on clickable input elements */
+
+label,
+input[type="button"],
+input[type="submit"],
+input[type="image"],
+button
+{
+	cursor: pointer;
+}
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button,
+input,
+select,
+textarea
+{
+	margin: 0;
+}
+
+input:invalid,
+textarea:invalid
+{
+	border-radius: 1px;
+	-moz-box-shadow: 0px 0px 5px red;
+	-webkit-box-shadow: 0px 0px 5px red;
+	box-shadow: 0px 0px 5px red;
+}
+
+/* Make buttons play nice in IE: www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+button
+{
+	width: auto;
+	overflow: visible;
+}
+
+/* easy sizing */
+*
+{
+ 	box-sizing: border-box;
+}
+
+
+
+/**********
+ * text styles
+ **********/
+
+html
+{
+	font-family: var(--defaultfont);
+	font-size: 12pt;
+	color: var(--lsit-fg);
+}
+
+body,
+p,
+li
+{
+	line-height: 1.25rem;
+}
+
+a,
+a:active,
+a:visited
+{
+	color: var(--lsit-fg-ul);
+	font-weight: normal;
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+img
+{
+	border: none;
+}
+
+
+
+/**********
+ * block styles
+ **********/
+
+p,
+pre,
+table,
+div.fragment
+{
+	margin-top: var(--vspace);
+	margin-bottom: var(--vspace);
+	text-align: justify;
+	text-indent: .5rem;
+}
+
+ul,
+ol,
+dl
+{
+	margin-top: 0;
+}
+
+.center
+{
+	text-align: center;
+}
+
+
+
+/**********
+ * list styles
+ **********/
+
+li,
+dd
+{
+	margin-top: .25rem;
+	margin-bottom: .25rem;
+}
+
+dd
+{
+	margin-left: 2rem;
+}
+
+
+
+/**********
+ * table styles
+ **********/
+
+td,
+th
+{
+	padding: .5rem;
+	border: 1px solid black;
+}
+
+th
+{
+	background-color: var(--dsol-bg);
+	color: var(--dsol-fg-hl);
+	font-size: 110%;
+}
+
+dt
+{
+	font-weight: bold;
+}
+
+td.tiny
+{
+	font-size: 75%;
+}
+
+
+
+/**********
+ * title styles
+ **********/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title
+{
+	margin-top: calc(3 * var(--vspace));
+	margin-bottom: calc(2 * var(--vspace));
+	padding: 0 .5rem .5rem .5rem;
+	border-bottom: 1px solid black;
+	font-family: var(--titlefont);
+	font-weight: 500;
+}
+
+.title
+{
+	margin-top: calc(2 * var(--vspace));
+	line-height: 2.5rem;
+	font-size: 2.5rem;
+	font-weight: 700;
+}
+
+h1,
+h2.groupheader
+{
+	margin-left: .5rem;
+	margin-right: .5rem;
+	line-height: 2rem;
+	font-size: 2rem;
+}
+
+h2
+{
+	margin-left: 2.5rem;
+	margin-right: .5rem;
+	line-height: 1.5rem;
+    font-size: 1.5rem;
+}
+
+h3
+{
+	margin-left: 4.5rem;
+	margin-right: .5rem;
+	line-height: 1.25rem;
+    font-size: 1.25rem;
+}
+
+
+
+/**********
+ * Code style
+ **********/
+
+pre,
+tt,
+code,
+kbd,
+samp
+{
+	margin: .1rem;
+	padding: 0 .1rem;
+	border: 1px solid var(--lsol-bg-hl);
+	border-radius: 3px;
+	background-color: var(--lsol-bg);
+	line-height: 90%;
+	font-family: var(--monofont);
+	font-size: 92%;
+	color: var(--lsol-fg);
+}
+
+.fragment
+{
+	margin: .5rem .25rem;
+	padding: .5rem .75rem;
+	border: 1px solid var(--dsol-bg-hl);
+	border-radius: 5px;
+	background-color: var(--dsol-bg);
+	word-wrap: break-word;
+	line-height: 125%;
+	font-family: var(--monofont);
+	font-size:  1rem;
+	color: var(--dsol-fg-hl);
+}
+
+
+
+/**********
+ * Quote style
+ **********/
+
+blockquote
+{
+	margin: calc(.5 * var(--vspace)) 0 calc(.5 * var(--vspace)) .2rem;
+	padding: calc(.025 * var(--vspace)) 0 calc(.025 * var(--vspace)) .8rem;
+	border-left: 2px solid lightgrey;
+	font-family: var(--quotefont);
+	font-size: .95rem;
+	font-style: italic;
+}
+
+
+
+/**********
+ * Directory style
+ **********/
+
+div.directory
+{
+	width: 100%;
+	margin: .5rem 0px;
+}
+
+.directory .levels
+{
+	width: 100%;
+	white-space: nowrap;
+	text-align: right;
+	font-size: .8rem;
+}
+
+.directory .levels span
+{
+	cursor: pointer;
+	padding: 0 .2rem;
+	color: var(--lsit-fg-ul);
+}
+
+.directory table
+{
+	border-collapse: collapse;
+	border-top: 1px solid var(--lsit-fg-ul);
+	border-bottom: 1px solid var(--lsit-fg-ul);
+}
+
+.directory tr.even
+{
+	background-color: var(--lsit-bg-hl);
+}
+
+.directory td
+{
+	margin: 0;
+	padding: .2rem .5rem;
+	vertical-align: top;
+	border: none;
+}
+
+.directory td.entry
+{
+	white-space: nowrap;
+	padding-left: 0;
+}
+
+.icona
+{
+	display: inline-block;
+	margin: 0 .25rem;
+}
+
+.icon
+{
+	display: inline-block;
+	padding: .1rem;
+	background-color: var(--lsol-bg-hl);
+	border: 1px solid var(--lsol-bg);
+	border-radius: .3rem;
+	line-height: .8rem;
+	text-align: center;
+	white-space: nowrap;
+	font-family: var(--monofont);
+	font-size: .8rem;
+	font-weight: 800;
+	color: var(--sola-blue);
+}
+
+.directory td.desc
+{
+	width: 100%;
+	border-left: 1px solid rgba(0,0,0,0.05);
+}
+
+
+
+/**********
+ * Member decl style
+ **********/
+
+.memberdecls a.el
+{
+	color: var(--sola-blue);
+}
+
+.memberdecls tr
+{
+	display: inline;
+	padding: 0;
+}
+
+.memberdecls table,
+.memberdecls table tbody,
+.memberdecls tr.heading,
+.memberdecls tr.heading td
+{
+	display: contents;
+}
+
+.mdescLeft,
+.memItemLeft,
+.memTemplItemLeft,
+.mdescRight,
+.memItemRight,
+.memTemplItemRight,
+.memTemplParams,
+.memSeparator,
+.memberdecls .inherit_header td
+{
+	display: inline;
+	padding: 0 .1rem;
+	border: none;
+	vertical-align: baseline;
+	text-align: left;
+}
+
+.memItemLeft,
+.memItemRight,
+.memTemplItemRight,
+.memTemplParams
+{
+	padding: .1rem 0;
+	background-color: var(--lsol-bg);
+	font-family: var(--monofont);
+	font-size: 92%;
+	line-height: 150%;
+	color: var(--lsol-fg);
+	vertical-align: baseline;
+}
+
+.memTemplParams,
+.memItemLeft
+{
+	padding-left: .5rem;
+}
+
+.memItemRight
+{
+	padding-right: .5rem;
+}
+
+.memItemRight a.el:first-of-type
+{
+	font-weight: bolder;
+}
+
+.mdescRight
+{
+	display: block;
+	padding-left: 2rem;
+	margin: .5rem 0 .5rem 0;
+}
+
+.memTemplItemLeft,
+.mdescLeft
+{
+	display: none;
+}
+
+.memSeparator
+{
+	display: block;
+	height: .5rem;
+	line-height: 0;
+}
+
+.memSeparator + tr
+{
+	display: list-item;
+}
+
+.memberdecls tr.inherit_header
+{
+	display: block;
+	margin-bottom: .5rem;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-weight: bold;
+	color: gray;
+}
+
+.memberdecls tr.inherit
+{
+	display: none;
+}
+
+
+
+/**********
+ * Detailed desc style
+ **********/
+
+.textblock h3:first-child
+{
+	display: none;
+}
+
+
+
+/**********
+ * Member doc style
+ **********/
+
+.memtitle
+{
+	display: none;
+}
+
+.memitem
+{
+	margin-bottom: var(--vspace);
+	border-radius: 0 1rem 0 0;
+}
+
+.memitem a.el
+{
+	color: inherit;
+	font-weight: bolder;
+}
+
+.memproto
+{
+	padding: .5rem 1rem;
+	background-color: var(--dsol-bg);
+	border-top: 1px solid var(--lsol-bg-hl);
+	border-right: 1px solid var(--lsol-bg-hl);
+	border-left: 1px solid var(--lsol-bg-hl);
+	border-radius: 4px 1rem 0 0;
+	color: var(--dsol-fg);
+}
+
+.memtemplate
+{
+	font-size: 92%;
+	font-weight: normal;
+}
+
+table.mlabels
+{
+	margin: 0;
+	padding: 0;
+}
+
+table.mlabels td
+{
+	padding: 0;
+	border: none;
+	vertical-align: top;
+}
+
+td.mlabels-left
+{
+	width: 100%;
+}
+
+span.mlabels
+{
+	display: inline-block;
+	float: right;
+	margin: 0 0 0 1rem;
+	padding: 0;
+}
+
+span.mlabel
+{
+	margin-left: 1rem;
+	padding: .2rem .3rem;
+	background-color: var(--dsol-bg-hl);
+	border:1px solid var(--dsol-fg-ul);
+	border-radius: .5rem;
+	white-space: nowrap;
+	font-family: var(--monofont);
+	font-size: .75rem;
+	color: var(--dsol-fg-hl);
+}
+
+table.memname
+{
+	margin: 0;
+	padding: 0;
+	font-family: var(--monofont);
+	font-size: 92%;
+}
+
+table.memname td
+{
+	padding: 0 .05rem;
+	border: none;
+	vertical-align: top;
+}
+
+.memdoc
+{
+	margin: 0;
+	padding: 0 1rem;
+	background-color: var(--lsol-bg);
+	border-right: 1px solid var(--lsol-bg-hl);
+	border-bottom: 1px solid var(--lsol-bg-hl);
+	border-left: 1px solid var(--lsol-bg-hl);
+	color: var(--lsol-fg);
+}
+
+.memdoc p,
+.memdoc pre,
+.memdoc ol,
+.memdoc ul,
+.memdoc dd,
+.memdoc table
+{
+	margin-top: .25rem;
+	margin-bottom: .25rem;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.memdoc > dl > dd > table
+{
+	margin: 0;
+	padding: 0;
+}
+
+.memdoc > dl > dd > table td
+{
+	padding: 0 .1rem;
+	border: none;
+}
+
+table.params
+{
+	margin: 0;
+	padding: 0;
+}
+
+table.params td
+{
+	padding: 0 .1rem;
+	vertical-align: top;
+	border: none;
+}
+
+.paramtype
+{
+	color: var(--sola-blue);
+}
+
+.paramkey
+{
+	text-align: right;
+	color: var(--lsol-fg-ul);
+}
+
+.paramdir
+{
+	text-align: right;
+	color: var(--lsol-fg-ul);
+}
+
+.paramname
+{
+	color: var(--sola-red);
+	font-style: italic;
+}
+
+.exception .paramname
+{
+	color: var(--sola-blue);
+	font-style: inherit;
+}
+
+.paramname code
+{
+	color: var(--sola-yellow);
+	background-color: inherit;
+	border: none;
+	font-style: italic;
+}
+
+dl.note
+{
+	border-left: .6rem solid;
+	padding-left: .6rem;
+	border-color: var(--sola-violet);
+}
+
+dl.warning,
+dl.attention
+{
+	border-left: .6rem solid;
+	padding-left: .6rem;
+}
+
+dl.warning
+{
+	border-color: var(--sola-red);
+}
+
+dl.attention
+{
+	border-color: var(--sola-yellow);
+}
+
+dl.pre,
+dl.post,
+dl.invariant
+{
+	border-left: .6rem solid;
+	padding-left: .6rem;
+	border-color: var(--sola-green);
+}
+
+dl.deprecated
+{
+	border-left: .6rem solid;
+	padding-left: .6rem;
+	border-color: var(--sola-yellow);
+}
+
+dl.todo
+{
+	border-left: .6rem solid;
+	padding-left: .6rem;
+	border-color: var(--sola-cyan);
+}
+
+dl.test
+{
+	border-left: .6rem solid;
+	padding-left: .6rem;
+	border-color: var(--sola-blue);
+}
+
+dl.bug
+{
+	border-left: .6rem solid;
+	padding-left: .6rem;
+	border-color: var(--sola-red);
+}
+
+
+
+/**********
+ * Field list style
+ **********/
+
+.fieldtable td,
+.fieldtable th
+{
+	padding: .25rem;
+	border: none;
+	vertical-align: top;
+	background-color: var(--lsol-bg);
+	color: var(--lsol-fg);
+}
+
+.fieldtable td
+{
+	border-bottom: 1px solid var(--lsol-bg-hl);
+}
+
+.fieldtable td:first-child
+{
+	padding-left: 2rem;
+}
+
+.fieldtable th
+{
+	text-align: left;
+}
+
+.fieldtable td.fieldtype,
+.fieldtable td.fieldname
+{
+	white-space: nowrap;
+	font-family: var(--monofont);
+	font-size: 92%;
+}
+
+.fieldtable td.fielddoc p:last-child
+{
+	margin-bottom: 0;
+}
+
+.fieldtable tr:last-child td
+{
+	border-bottom: none;
+}
+
+
+
+/**********
+ * Page structure
+ **********/
+
+body
+{
+	width: 67rem;
+	margin: 0 auto;
+	padding: 0;
+	background-color: var(--lsit-bg);
+}
+
+body > div:first-of-type
+{
+	display: contents;
+}
+
+#titlearea
+{
+	height: 6rem;
+	width: 67rem;
+	padding: .5rem 0;
+	margin: 0;
+}
+
+#tabs
+{
+	display: block;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	width: 67rem;
+	padding: 0;
+	margin: 0;
+	z-index: 100;
+}
+
+a[id]
+{
+	display: block;
+	padding-top: 1.5rem;
+	margin-top: -1.5rem;
+}
+
+#side-nav
+{
+	display: block;
+	float: right;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	height: calc(100vh - 5rem);
+	width: 15rem;
+	margin: calc(-1.5rem - 2px) 0 0 0;
+	padding: calc(1.5rem + 2px) 0 0 0;
+}
+
+#doc-content
+{
+	max-width: 52rem;
+	padding: 0;
+	margin: 0 15rem 0 0;
+}
+
+@media (max-width: 68rem)
+{
+	body
+	{
+		width: 100%;
+		margin: 0;
+	}
+
+	#titlearea
+	{
+		width: 100%;
+	}
+
+	#tabs
+	{
+		width: 100%;
+	}
+
+	#side-nav
+	{
+		position: static;
+		float: none;
+		width: 100%;
+		height: auto;
+		max-width: 52rem;
+		margin: 0 auto;
+		padding: 0;
+	}
+
+	#doc-content
+	{
+		max-width: 52rem;
+		margin: 0 auto;
+	}
+}
+
+
+
+/**********
+ * Top structure
+ **********/
+
+#projectlogo
+{
+	display: inline-block;
+	float: left;
+	height: 5rem;
+	width: 5rem;
+	margin: 0;
+	padding: 0;
+}
+
+#projectlogo a
+{
+	display: block;
+	height: 5rem;
+	width: 5rem;
+	margin: 0;
+	padding: 0;
+}
+
+#projectlogo img
+{
+	height: 5rem;
+	width: 5rem;
+	margin: 0;
+	padding: .1rem;
+}
+
+#projectname
+{
+	display: block;
+	height: 2.75rem;
+	margin: 0 0 0 6rem;
+	padding: .5rem 0 0 0;
+	border: none;
+	line-height: 2.5rem;
+	font-size: 2.5rem;
+	font-family: var(--defaultfont);
+	letter-spacing: .1rem;
+	font-weight: 900;
+	color: var(--lsit-fg-ul);
+}
+
+#projectnumber
+{
+	font-style: italic;
+	font-weight: 300;
+	font-size: 1.2rem;
+	color: var(--lsit-fg-ul);
+	letter-spacing: normal;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#projectbrief
+{
+	display: block;
+	height: 2.25rem;
+	margin: 0 0 0 6rem;
+	padding: .5rem 0 .5rem 0;
+	border: none;
+	line-height: 1.5rem;
+	font-size: 1.5rem;
+	font-family: var(--defaultfont);
+	font-weight: 600;
+	color: var(--lsit-fg-hl);
+}
+
+#projectbrief .acronym
+{
+	color: var(--lsit-fg-ul);
+	font-weight: 900;
+	letter-spacing: .1rem;
+	text-transform: uppercase;
+}
+
+@media screen and (max-width: 25rem)
+{
+	#projectbrief
+	{
+		display: none;
+	}
+
+	#projectnumber
+	{
+		display: block;
+	}
+}
+
+
+/**********
+ * Tabs structure
+ **********/
+
+#tabs ul
+{
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+	background-color: var(--dsit-bg);
+	border-top: 1px solid var(--dsit-bg);
+	border-left: 1px solid var(--dsit-bg);
+	line-height: 0;
+	vertical-align: baseline;
+	font-size: 0;
+}
+
+#tabs li
+{
+	display: block;
+	float: left;
+	margin: 0;
+	padding: 0;
+	height: 1.5rem;
+	border-right: 1px solid var(--dsit-bg);
+	border-bottom: 1px solid var(--dsit-bg);
+	background-color: var(--dsit-bg-hl);
+}
+
+#tabs li:hover
+{
+	background-color: var(--dsit-bg);
+}
+
+#tabs li a
+{
+	padding: .3rem 1rem;
+	line-height: 1.5rem;
+	font-family: var(--defaultfont);
+	letter-spacing: .02rem;
+	font-weight: bold;
+	font-size: .8rem;
+	color: var(--dsit-fg);
+}
+
+#tabs li:hover a
+{
+	text-decoration: none;
+}
+
+#gitlab-ribbon a
+{
+	transition: 0.5s;
+}
+
+@media screen and (min-width: 40rem)
+{
+	#tabs #gitlab-ribbon
+	{
+		position: fixed;
+		width: 0;
+		height: 0;
+		display: block;
+		top: 0;
+		right: 0;
+		overflow: hidden;
+		z-index: 9999;
+		float: none;
+		border: 0 none transparent;
+		background-color: transparent;
+		overflow: visible;
+	}
+	
+	#tabs #gitlab-ribbon:hover
+	{
+		background-color: transparent;
+	}
+	
+	#tabs #gitlab-ribbon a
+	{
+		z-index: 9999;
+		letter-spacing: normal;
+		background: var(--site-lblue);
+		color: var(--site-white);
+		text-decoratio
+		height: 18rem;n: none;
+		font-family: arial,sans-serif;
+		text-align: center;
+		font-weight: bold;
+		padding: 5px 1.5rem;
+		font-size: 1rem;
+		line-height: 2rem;
+		width: 14rem;
+		position: absolute;
+		top: .5rem;
+		right: 0;
+		box-shadow: 4px 4px 10px rgba(0,0,0,0.8);
+	}
+
+	#tabs #gitlab-ribbon a:hover
+	{
+		background: var(--site-dblue);
+		color: var(--site-white);
+	}
+
+	#tabs #gitlab-ribbon a::before, #gitlab-ribbon a::after
+	{
+		content:"";
+		width: 100%;
+		display: block;
+		position: absolute;
+		top: 1px;
+		left: 0;
+		height: 1px;
+		background: #eee;
+	}
+
+	#tabs #gitlab-ribbon a::after
+	{
+		bottom: 1px;
+		top: auto;
+	}
+}
+
+@media screen and (min-width: 74rem)
+{
+	#tabs #gitlab-ribbon
+	{
+		position: fixed;
+		width: 0;
+		height: 0;
+		display: block;
+		top: 0;
+		right: 0;
+		overflow: hidden;
+		z-index: 9999;
+	}
+	
+	#tabs #gitlab-ribbon a
+	{
+		position: fixed;
+		top: 2.4rem;
+		right: -3.1rem;
+		transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		-o-transform: rotate(45deg);
+		box-shadow: 4px 4px 10px rgba(0,0,0,0.8);
+	}
+}
+
+
+
+/**********
+ * Navigation tree structure
+ **********/
+
+#nav-tree
+{
+	padding-top: .2rem;
+	height: 100%;
+	overflow: auto;
+}
+
+#nav-tree-contents
+{
+	margin-top: .5rem;
+	white-space: nowrap;
+}
+
+#nav-tree ul
+{
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+
+#nav-tree li
+{
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+#nav-tree .selected,
+#nav-tree .item:hover
+{
+	background-color: var(--dsit-bg-hl);
+}
+
+#nav-tree a
+{
+	font-size: .5rem;
+	font:style: var(--monofont);
+	color: var(--lsit-fg-ul);
+	text-decoration: none;
+}
+
+#nav-tree .selected a,
+#nav-tree .item:hover a,
+#nav-tree .selected .arrow,
+#nav-tree .item:hover .arrow
+{
+	color: var(--dsit-fg-hl);
+}
+
+#nav-tree .arrow
+{
+	display: inline-block;
+	margin-right: 8px;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	font-style: var(--monofont);
+	font-size: 21px;
+	color: var(--lsit-fg-ul);
+}
+
+#nav-sync
+{
+	display: none;
+}
+
+#splitbar
+{
+	display: none;
+}
+
+@media print
+{
+	#nav-tree
+	{
+		display: none;
+	}
+}
+
+
+
+/**********
+ * Content structure
+ **********/
+
+div.header
+{
+	margin: 0 1rem;
+}
+
+div.summary
+{
+	display: none;
+}
+
+div.contents
+{
+	margin: 0 1rem;
+}
+
+
+
+/**********
+ * Code file page
+ **********/
+
+div.line
+{
+	min-height: 11pt;
+	text-wrap: unrestricted;
+	white-space: -moz-pre-wrap; 
+	white-space: -pre-wrap;     
+	white-space: -o-pre-wrap;   
+	white-space: pre-wrap;      
+	word-wrap: break-word;      
+	text-indent: -5rem;
+	padding-left: 5rem;
+	padding-bottom: 0;
+	margin: 0;
+}
+
+span.lineno
+{
+	padding-right: 4px;
+	text-align: right;
+	white-space: pre;
+	color: var(--dsol-fg-ul);
+}
+
+.ttc
+{
+	display: none;
+}
+
+.image
+{
+	text-align: center;
+}
+
+
+
+/**********
+ * Syntax highlighting
+ **********/
+
+.preprocessor,
+.comment,
+.line,
+a.line,
+a.line:hover,
+a.line:active,
+a.line:visited
+{
+	color:  var(--dsol-fg-ul);
+	text-decoration: none;
+}
+.code,
+a.code,
+a.code:hover,
+a.code:active,
+a.code:visited
+{
+	color:  var(--sola-cyan);
+}
+.keyword,
+.keywordtype,
+.keywordflow
+{
+	color:  var(--sola-blue);
+}
+.stringliteral
+{
+	color:  var(--sola-yellow);
+}
+
+
+
+/**********
+ * Hacks
+ **********/
+
+div.image img[src="tictac_net.jpg"]{ 
+    max-width:300px; 
+}
+div.image img[src="bundle_net.jpg"]{ 
+    max-width:400px; 
+}
+div.image img[src="fluid_net.jpg"]{ 
+    max-width:700px; 
+}
+div.image img[src="primes_net.jpg"]{ 
+    max-width:700px; 
+}

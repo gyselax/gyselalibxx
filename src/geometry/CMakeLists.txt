@@ -6,7 +6,7 @@ target_include_directories(geometry
 		"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries(geometry INTERFACE
-	ddc::ddc
+	DDC::DDC
 	sll::splines
 )
 add_library(vcx::geometry ALIAS geometry)

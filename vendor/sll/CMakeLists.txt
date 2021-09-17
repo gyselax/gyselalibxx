@@ -28,7 +28,7 @@ target_include_directories(splines
 )
 target_link_libraries(splines
 	PUBLIC
-		ddc::ddc
+		DDC::DDC
 	PRIVATE
 		${LAPACK_LIBRARIES}
 )

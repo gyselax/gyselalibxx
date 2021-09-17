@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 cmake_minimum_required(VERSION 3.15)
 
 include(GoogleTest)
@@ -18,6 +19,6 @@ target_compile_features(ddc_tests PUBLIC cxx_std_17)
 target_link_libraries(ddc_tests
 	PUBLIC
 		GTest::gtest_main
-		ddc::ddc
+		DDC::DDC
 )
 gtest_discover_tests(ddc_tests)

@@ -15,7 +15,7 @@ target_link_libraries(unit_tests
 		GTest::gmock_main
 		FFTW::Double
 		paraconf::paraconf
-		ddc::PDI
+		DDC::PDI
 		vcx::deprecated::fft
 		vcx::fft
 		vcx::vlasov
