@@ -102,13 +102,13 @@ public:
     {
     }
 
-    constexpr inline TaggedVectorImpl& operator=(const TaggedVectorImpl& other) = default;
+    constexpr inline TaggedVectorImpl& operator=(TaggedVectorImpl const& other) = default;
 
     constexpr inline TaggedVectorImpl& operator=(TaggedVectorImpl&& other) = default;
 
     template <class... OTags>
     constexpr inline TaggedVectorImpl& operator=(
-            const TaggedVector<ElementType, OTags...>& other) noexcept
+            TaggedVector<ElementType, OTags...> const& other) noexcept
     {
         m_values = other.m_values;
         return *this;
@@ -122,12 +122,12 @@ public:
         return *this;
     }
 
-    constexpr inline bool operator==(const TaggedVectorImpl& other) const noexcept
+    constexpr inline bool operator==(TaggedVectorImpl const& other) const noexcept
     {
         return m_values == other.m_values;
     }
 
-    constexpr inline bool operator!=(const TaggedVectorImpl& other) const noexcept
+    constexpr inline bool operator!=(TaggedVectorImpl const& other) const noexcept
     {
         return m_values != other.m_values;
     }
@@ -139,7 +139,7 @@ public:
     }
 
     /// Returns a const reference to the underlying `std::array`
-    constexpr inline const std::array<ElementType, sizeof...(Tags)>& array() const noexcept
+    constexpr inline std::array<ElementType, sizeof...(Tags)> const& array() const noexcept
     {
         return m_values;
     }
@@ -149,7 +149,7 @@ public:
         return m_values[pos];
     }
 
-    constexpr inline const ElementType& operator[](size_t pos) const
+    constexpr inline ElementType const& operator[](size_t pos) const
     {
         return m_values[pos];
     }
@@ -183,7 +183,7 @@ class SingleTagArrayImpl<TaggedVector<ElementType, Tag>>
     : public TaggedVectorImpl<TaggedVector<ElementType, Tag>>
 {
 public:
-    inline TaggedVector<ElementType, Tag>& operator=(const ElementType& e) noexcept
+    inline TaggedVector<ElementType, Tag>& operator=(ElementType const& e) noexcept
     {
         this->m_values = e;
         return *this;
@@ -195,18 +195,18 @@ public:
         return *this;
     }
 
-    constexpr inline bool operator==(const ElementType& other) const noexcept
+    constexpr inline bool operator==(ElementType const& other) const noexcept
     {
         return this->m_values[0] == other;
     }
 
-    constexpr inline bool operator!=(const ElementType& other) const noexcept
+    constexpr inline bool operator!=(ElementType const& other) const noexcept
     {
         return this->m_values[0] != other;
     }
 
 
-    constexpr inline operator const ElementType&() const noexcept
+    constexpr inline operator ElementType const&() const noexcept
     {
         return this->m_values[0];
     }
@@ -297,9 +297,22 @@ public:
     {
     }
 
-    inline constexpr TaggedVector& operator=(TaggedVector const&) = default;
+    constexpr inline TaggedVector& operator=(TaggedVector const& other) = default;
 
-    inline constexpr TaggedVector& operator=(TaggedVector&&) = default;
+    constexpr inline TaggedVector& operator=(TaggedVector&& other) = default;
+
+    template <class... OTags>
+    constexpr inline TaggedVector& operator=(
+            TaggedVector<ElementType, OTags...> const& other) noexcept
+    {
+        return Super::operator=(other);
+    }
+
+    template <class... OTags>
+    constexpr inline TaggedVector& operator=(TaggedVector<ElementType, OTags...>&& other) noexcept
+    {
+        return Super::operator=(std::move(other));
+    }
 };
 
 template <class ElementType, class Tag>
@@ -340,6 +353,23 @@ public:
         : Super {static_cast<ElementType>(std::forward<OElementType>(param))}
     {
     }
+
+    constexpr inline TaggedVector& operator=(TaggedVector const& other) = default;
+
+    constexpr inline TaggedVector& operator=(TaggedVector&& other) = default;
+
+    template <class... OTags>
+    constexpr inline TaggedVector& operator=(
+            TaggedVector<ElementType, OTags...> const& other) noexcept
+    {
+        return Super::operator=(other);
+    }
+
+    template <class... OTags>
+    constexpr inline TaggedVector& operator=(TaggedVector<ElementType, OTags...>&& other) noexcept
+    {
+        return Super::operator=(std::move(other));
+    }
 };
 
 template <class ElementType>
@@ -375,6 +405,23 @@ public:
             typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
     inline constexpr TaggedVector(OElementType&& param) noexcept
     {
+    }
+
+    constexpr inline TaggedVector& operator=(TaggedVector const& other) = default;
+
+    constexpr inline TaggedVector& operator=(TaggedVector&& other) = default;
+
+    template <class... OTags>
+    constexpr inline TaggedVector& operator=(
+            TaggedVector<ElementType, OTags...> const& other) noexcept
+    {
+        return Super::operator=(other);
+    }
+
+    template <class... OTags>
+    constexpr inline TaggedVector& operator=(TaggedVector<ElementType, OTags...>&& other) noexcept
+    {
+        return Super::operator=(std::move(other));
     }
 };
 
