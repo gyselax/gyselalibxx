@@ -37,6 +37,7 @@ endif()
 
 ## Must come after googletest
 if(${BUILD_BENCHMARKS})
+    option(BENCHMARK_ENABLE_TESTING "Enable testing of the benchmark library." OFF)
     add_subdirectory("vendor/benchmark/" "benchmark")
 endif()
 
