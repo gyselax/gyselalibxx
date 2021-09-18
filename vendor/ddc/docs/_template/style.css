@@ -19,27 +19,27 @@
 	
 	--site-black:  #555;
 	--site-white:  #fcfcfc;
-	--site-dblue:  #374f7f;
-	--site-lblue:  #3b83c3;
-	--site-hblue:  #F7F8FB;
+	--site-dblue:  #377f4f;
+	--site-lblue:  #3bc383;
+	--site-hblue:  #F7FBF8;
 	
-	--sola-base03:  #002b36;
-	--sola-base02:  #073642;
-	--sola-base01:  #586e75;
-	--sola-base00:  #657b83;
-	--sola-base0:   #839496;
+	--sola-base03:  #00362b;
+	--sola-base02:  #074236;
+	--sola-base01:  #58756e;
+	--sola-base00:  #65837b;
+	--sola-base0:   #839694;
 	--sola-base1:   #93a1a1;
-	--sola-base2:   #eee8d5;
-	--sola-base3:   #fdf6e3;
+	--sola-base2:   #eed5e8;
+	--sola-base3:   #fdef63;
 	
-	--sola-yellow:  #b58900;
-	--sola-orange:  #cb4b16;
-	--sola-red:     #dc322f;
-	--sola-magenta: #d33682;
-	--sola-violet:  #6c71c4;
-	--sola-blue:    #268bd2;
-	--sola-cyan:    #2aa198;
-	--sola-green:   #859900;
+	--sola-yellow:  #b50089;
+	--sola-orange:  #cb14b6;
+	--sola-red:     #dc2f32;
+	--sola-magenta: #d38236;
+	--sola-violet:  #6cc471;
+	--sola-blue:    #26d28b;
+	--sola-cyan:    #2a98a1;
+	--sola-green:   #850099;
 	
 	--lsit-bg:     var(--site-white);
 	--lsit-bg-hl:  var(--site-hblue);
