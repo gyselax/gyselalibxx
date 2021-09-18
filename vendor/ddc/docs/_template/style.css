@@ -1296,6 +1296,7 @@ a[id]
 	font-weight: 900;
 	letter-spacing: .1rem;
 	text-transform: uppercase;
+    font-size: 85%;
 }
 
 @media screen and (max-width: 25rem)
