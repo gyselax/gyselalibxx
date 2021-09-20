@@ -31,7 +31,7 @@ void gaussian_initialization(DSpanXVx fdistribu)
     auto gridvx = fdistribu.domain<MeshVx>();
     for (MCoordX ix : gridx) {
         for (MCoordVx iv : gridvx) {
-            const RCoordVx v = gridvx.mesh().to_real(iv);
+            const RCoordVx v = gridvx.to_real(iv);
             fdistribu(ix, iv) = exp(-v * v / 2.);
         }
     }
@@ -124,14 +124,14 @@ int main(int argc, char** argv)
     gaussian_initialization(fdistribu);
 
     BlockX<RCoordX> meshX_coord(fdistribu.domain<MeshX>());
-    auto gridx = fdistribu.domain<MeshX>();
+    MDomainX gridx = fdistribu.domain<MeshX>();
     for (MCoordX ix : gridx) {
-        meshX_coord(ix) = gridx.mesh().to_real(ix);
+        meshX_coord(ix) = gridx.to_real(ix);
     }
     BlockVx<RCoordVx> meshVx_coord(fdistribu.domain<MeshVx>());
-    auto gridvx = fdistribu.domain<MeshVx>();
+    MDomainVx gridvx = fdistribu.domain<MeshVx>();
     for (MCoordVx ivx : gridvx) {
-        meshVx_coord(ivx) = gridvx.mesh().to_real(ivx);
+        meshVx_coord(ivx) = gridvx.to_real(ivx);
     }
 
     // Starting the code
