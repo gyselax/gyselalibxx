@@ -7,10 +7,18 @@
 
 #include "ddc/taggedvector.hpp"
 
+/** A MCoordElement is a scalar that represents the coordinate of a mesh point in one mesh axis.
+ */
 using MCoordElement = std::size_t;
 
+/** A MLengthElement is a scalar that represents the difference between two coordinates.
+ */
 using MLengthElement = std::ptrdiff_t;
 
+/** A MCoord is a coordinate (a vector) in the mesh.
+ * 
+ * Each coordinate is tagged by its associated dimension.
+ */
 template <class... Tags>
 using MCoord = TaggedVector<MCoordElement, Tags...>;
 
