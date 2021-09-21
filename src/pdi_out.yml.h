@@ -29,7 +29,7 @@ data:
 plugins:
   decl_hdf5:
     - file: 'VOICEXX_${iter:04}.h5'
-      on_event: iter
+      on_event: [iteration, last_iteration]
       collision_policy: replace_and_warn
       write: [iter, Nx, Nvx, MeshX, MeshVx, fdistribu, ex ]
   trace: ~
