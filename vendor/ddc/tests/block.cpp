@@ -30,18 +30,18 @@ using RCoordX = MeshX::rcoord_type;
 using MeshVx = UniformMesh<DimVx>;
 using RCoordVx = MeshVx::rcoord_type;
 using MDomainX = ProductMDomain<MeshX>;
-using DBlockX = Block<MDomainX, double>;
+using DBlockX = Block<double, MDomainX>;
 using MeshXVx = ProductMesh<MeshX, MeshVx>;
 using RCoordXVx = RCoord<DimX, DimVx>;
 using MCoordXVx = MCoord<MeshX, MeshVx>;
 using MLengthXVx = MLength<MeshX, MeshVx>;
 using MDomainXVx = ProductMDomain<MeshX, MeshVx>;
-using DBlockXVx = Block<MDomainXVx, double>;
+using DBlockXVx = Block<double, MDomainXVx>;
 using MeshVxX = ProductMesh<MeshVx, MeshX>;
 using RCoordVxX = RCoord<DimVx, DimX>;
 using MCoordVxX = MCoord<MeshVx, MeshX>;
 using MDomainVxX = ProductMDomain<MeshVx, MeshX>;
-using DBlockVxX = Block<MDomainVxX, double>;
+using DBlockVxX = Block<double, MDomainVxX>;
 
 class DBlockXTest : public ::testing::Test
 {

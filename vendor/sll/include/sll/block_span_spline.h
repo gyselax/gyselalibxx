@@ -4,8 +4,8 @@
 
 #include "sll/bsplines.h"
 
-template <class Mesh, std::size_t D, class ElementType>
-class BlockSpan<BSplines<Mesh, D>, ElementType>
+template <class ElementType, class Mesh, std::size_t D>
+class BlockSpan<ElementType, BSplines<Mesh, D>>
 {
 public:
     /// ND memory view
@@ -57,7 +57,7 @@ public:
      * @param other the BlockSpan to move
      */
     template <class OElementType>
-    inline constexpr BlockSpan(BlockSpan<bsplines_type, OElementType> const& other) noexcept
+    inline constexpr BlockSpan(BlockSpan<OElementType, bsplines_type> const& other) noexcept
         : m_raw(other.raw_view())
         , m_bsplines(other.bsplines())
     {

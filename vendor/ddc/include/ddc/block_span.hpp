@@ -13,8 +13,8 @@ template <class, class>
 class Block;
 
 template <
-        class SupportType,
         class ElementType,
+        class SupportType,
         class LayoutStridedPolicy = std::experimental::layout_right>
 class BlockSpan;
 
@@ -28,8 +28,8 @@ auto get_domain(BlockType const& block) noexcept
     return block.template domain<QueryMeshes...>();
 }
 
-template <class... Meshes, class ElementType, class LayoutStridedPolicy>
-class BlockSpan<ProductMDomain<Meshes...>, ElementType, LayoutStridedPolicy>
+template <class ElementType, class... Meshes, class LayoutStridedPolicy>
+class BlockSpan<ElementType, ProductMDomain<Meshes...>, LayoutStridedPolicy>
 {
 public:
     using mesh_type = ProductMesh<Meshes...>;
@@ -132,7 +132,7 @@ public:
      */
     template <class OElementType>
     inline constexpr BlockSpan(
-            BlockSpan<mdomain_type, OElementType, layout_type> const& other) noexcept
+            BlockSpan<OElementType, mdomain_type, layout_type> const& other) noexcept
         : m_raw(other.m_raw)
         , m_domain(other.domain())
     {
@@ -384,14 +384,14 @@ public:
     }
 };
 
-template <class... Meshes, class ElementType, class Extents, class StridedLayout>
+template <class ElementType, class... Meshes, class Extents, class StridedLayout>
 BlockSpan(
         ProductMDomain<Meshes...> domain,
         std::experimental::mdspan<ElementType, Extents, StridedLayout> allocation_view)
-        -> BlockSpan<ProductMDomain<Meshes...>, ElementType, StridedLayout>;
+        -> BlockSpan<ElementType, ProductMDomain<Meshes...>, StridedLayout>;
 
 template <
-        class SupportType,
         class ElementType,
+        class SupportType,
         class LayoutStridedPolicy = std::experimental::layout_right>
-using BlockView = BlockSpan<SupportType, ElementType const, LayoutStridedPolicy>;
+using BlockView = BlockSpan<ElementType const, SupportType, LayoutStridedPolicy>;

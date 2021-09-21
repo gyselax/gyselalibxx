@@ -66,7 +66,7 @@ public:
     }
 
     template <class Domain>
-    void operator()(BlockSpan<Domain, double>& block_mesh) const
+    void operator()(BlockSpan<double, Domain>& block_mesh) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
@@ -89,7 +89,7 @@ public:
     }
 
     template <class Domain>
-    void deriv(BlockSpan<Domain, double>& block_mesh) const
+    void deriv(BlockSpan<double, Domain>& block_mesh) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>

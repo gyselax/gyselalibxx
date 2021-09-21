@@ -45,12 +45,12 @@ public:
 
     void operator()(
             BlockSpan<
-                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
                     std::complex<double>,
+                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
                     std::experimental::layout_right> const& out_values,
             BlockSpan<
-                    ProductMDomain<UniformMesh<Tags>...>,
                     std::complex<double>,
+                    ProductMDomain<UniformMesh<Tags>...>,
                     std::experimental::layout_right> const& in_values) const noexcept override
     {
         assert(in_values.extents().array() == out_values.extents().array());

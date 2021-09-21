@@ -352,7 +352,7 @@ TEST(FFT, Identity)
         values(i) = compute_f(domx.to_real(i));
     }
 
-    Block<MDomainFx, std::complex<double>> fourier_values(domfx);
+    Block<std::complex<double>, MDomainFx> fourier_values(domfx);
     fft(fourier_values, values);
 
     BlockX<std::complex<double>> ifft_fft_values(domx);
@@ -398,7 +398,7 @@ TEST(FFT, Simple)
         values(i) = std::cos(2. * M_PI * f * domx.to_real(i));
     }
 
-    Block<MDomainFx, std::complex<double>> fourier_values(domfx);
+    Block<std::complex<double>, MDomainFx> fourier_values(domfx);
     fft(fourier_values, values);
 
     constexpr double tol = 1.0e-13;

@@ -54,7 +54,7 @@ DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double mass_ratio, dou
     //BlockX<RCoordX> feet_coords(x_dom);
     DBlockX contiguous_slice(x_dom);
 
-    Block<BSplinesX, double> spline(m_x_spline_basis);
+    Block<double, BSplinesX> spline(m_x_spline_basis);
     SplineEvaluator spline_evaluator(spline, m_bc_left, m_bc_right);
 
     for (MCoordVx vii : v_dom) {

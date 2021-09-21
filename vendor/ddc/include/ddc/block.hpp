@@ -5,13 +5,13 @@
 template <class, class>
 class Block;
 
-template <class... Meshes, class ElementType>
-class Block<ProductMDomain<Meshes...>, ElementType>
-    : public BlockSpan<ProductMDomain<Meshes...>, ElementType>
+template <class ElementType, class... Meshes>
+class Block<ElementType, ProductMDomain<Meshes...>>
+    : public BlockSpan<ElementType, ProductMDomain<Meshes...>>
 {
 public:
     /// type of a span of this full block
-    using block_span_type = BlockSpan<ProductMDomain<Meshes...>, ElementType>;
+    using block_span_type = BlockSpan<ElementType, ProductMDomain<Meshes...>>;
 
 protected:
     /// ND memory view
@@ -19,7 +19,7 @@ protected:
 
 public:
     /// type of a view of this full block
-    using block_view_type = BlockSpan<ProductMDomain<Meshes...>, ElementType const>;
+    using block_view_type = BlockSpan<ElementType const, ProductMDomain<Meshes...>>;
 
     /// The dereferenceable part of the co-domain but with indexing starting at 0
     using allocation_mdspan_type = typename block_span_type::allocation_mdspan_type;
@@ -91,8 +91,8 @@ public:
      * @param other the Block to copy
      * @return *this
      */
-    template <class... OMeshes, class OElementType>
-    inline Block& operator=(Block<ProductMDomain<OMeshes...>, OElementType>&& other)
+    template <class OElementType, class... OMeshes>
+    inline Block& operator=(Block<OElementType, ProductMDomain<OMeshes...>>&& other)
     {
         copy(*this, other);
         return *this;

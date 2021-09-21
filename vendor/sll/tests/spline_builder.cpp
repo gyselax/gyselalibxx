@@ -49,7 +49,7 @@ public:
     }
 
     template <class Domain>
-    void operator()(BlockSpan<Domain, double>& block_mesh) const
+    void operator()(BlockSpan<double, Domain>& block_mesh) const
     {
         auto const& domain = block_mesh.domain();
 
@@ -64,7 +64,7 @@ public:
     }
 
     template <class Domain>
-    void deriv(BlockSpan<Domain, double>& block_mesh, int const derivative) const
+    void deriv(BlockSpan<double, Domain>& block_mesh, int const derivative) const
     {
         auto const& domain = block_mesh.domain();
 
@@ -119,7 +119,7 @@ public:
     }
 
     template <class Domain>
-    void operator()(BlockSpan<Domain, double>& block_mesh) const
+    void operator()(BlockSpan<double, Domain>& block_mesh) const
     {
         auto const& domain = block_mesh.domain();
 
@@ -134,7 +134,7 @@ public:
     }
 
     template <class Domain>
-    void deriv(BlockSpan<Domain, double>& block_mesh, int const derivative) const
+    void deriv(BlockSpan<double, Domain>& block_mesh, int const derivative) const
     {
         auto const& domain = block_mesh.domain();
 
@@ -169,10 +169,10 @@ TEST(SplineBuilder, BuildSpline)
     //     using NonUniformMeshX = NonUniformMesh<DimX>;
     //     using UniformMeshX = UniformMesh<DimX>;
     using UniformBSplinesX2 = UniformBSplines<DimX, degree>;
-    using BlockSplineX2 = Block<UniformBSplinesX2, double>;
+    using BlockSplineX2 = Block<double, UniformBSplinesX2>;
     //     using NonUniformDomainX = ProductMDomain<NonUniformMeshX>;
-    //     using BlockNonUniformX = Block<ProductMDomain<NonUniformMeshX>, double>;
-    using BlockUniformX = Block<ProductMDomain<MeshX>, double>;
+    //     using BlockNonUniformX = Block<double, ProductMDomain<NonUniformMeshX>>;
+    using BlockUniformX = Block<double, ProductMDomain<MeshX>>;
 
     RCoordX constexpr x0 = 0.;
     RCoordX constexpr xN = 1.;

@@ -5,14 +5,14 @@
 
 #include "sll/bsplines.h"
 
-template <class Mesh, std::size_t D, class ElementType>
-class Block<BSplines<Mesh, D>, ElementType> : public BlockSpan<BSplines<Mesh, D>, ElementType>
+template <class ElementType, class Mesh, std::size_t D>
+class Block<ElementType, BSplines<Mesh, D>> : public BlockSpan<ElementType, BSplines<Mesh, D>>
 {
 public:
     /// ND view on this block
-    using block_view_type = BlockSpan<BSplines<Mesh, D>, ElementType>;
+    using block_view_type = BlockSpan<ElementType, BSplines<Mesh, D>>;
 
-    using block_span_type = BlockSpan<BSplines<Mesh, D>, ElementType const>;
+    using block_span_type = BlockSpan<ElementType const, BSplines<Mesh, D>>;
 
     /// ND memory view
     using raw_view_type = std::experimental::mdspan<ElementType, std::experimental::dextents<1>>;

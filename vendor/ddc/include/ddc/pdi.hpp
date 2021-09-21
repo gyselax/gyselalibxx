@@ -10,21 +10,21 @@
 template <class ElementType>
 static constexpr PDI_inout_t default_access_v = std::is_const_v<ElementType> ? PDI_OUT : PDI_INOUT;
 
-template <class SupportType, class ElementType, class LayoutStridedPolicy>
+template <class ElementType, class SupportType, class LayoutStridedPolicy>
 static constexpr PDI_inout_t default_access_v<BlockSpan<
-        SupportType,
         ElementType,
+        SupportType,
         LayoutStridedPolicy> const&> = default_access_v<ElementType>;
 
 template <class ElementType>
 static constexpr bool is_blockspan_v = false;
 
-template <class SupportType, class ElementType, class LayoutStridedPolicy>
+template <class ElementType, class SupportType, class LayoutStridedPolicy>
 static constexpr bool
-        is_blockspan_v<BlockSpan<SupportType, ElementType, LayoutStridedPolicy>> = true;
+        is_blockspan_v<BlockSpan<ElementType, SupportType, LayoutStridedPolicy>> = true;
 
-template <class SupportType, class ElementType>
-static constexpr bool is_blockspan_v<Block<SupportType, ElementType>> = true;
+template <class ElementType, class SupportType>
+static constexpr bool is_blockspan_v<Block<ElementType, SupportType>> = true;
 
 class PdiEvent
 {
@@ -35,10 +35,10 @@ class PdiEvent
 public:
     PdiEvent(std::string const& event_name) : m_event(event_name) {}
 
-    template <PDI_inout_t access, class SupportType, class ElementType, class LayoutStridedPolicy>
+    template <PDI_inout_t access, class ElementType, class SupportType, class LayoutStridedPolicy>
     PdiEvent& with(
             std::string const& name,
-            BlockSpan<SupportType, ElementType, LayoutStridedPolicy> const& data)
+            BlockSpan<ElementType, SupportType, LayoutStridedPolicy> const& data)
     {
         static_assert(
                 !(access & PDI_IN) || !std::is_const_v<ElementType>,
@@ -71,10 +71,10 @@ public:
         return *this;
     }
 
-    template <class SupportType, class ElementType, class LayoutStridedPolicy>
+    template <class ElementType, class SupportType, class LayoutStridedPolicy>
     PdiEvent& with(
             std::string const& name,
-            BlockSpan<SupportType, ElementType, LayoutStridedPolicy> const& data)
+            BlockSpan<ElementType, SupportType, LayoutStridedPolicy> const& data)
     {
         return with<default_access_v<ElementType>>(name, data);
     }

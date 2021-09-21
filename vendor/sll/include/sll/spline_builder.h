@@ -99,8 +99,8 @@ public:
     SplineBuilder& operator=(SplineBuilder&& x) = default;
 
     void operator()(
-            BlockSpan<bsplines_type, double>& spline,
-            BlockSpan<interpolation_domain_type, double const> const& vals,
+            BlockSpan<double, bsplines_type>& spline,
+            BlockSpan<double const, interpolation_domain_type> const& vals,
             DSpan1D const* derivs_xmin = nullptr,
             DSpan1D const* derivs_xmax = nullptr) const;
 
@@ -121,8 +121,8 @@ private:
     void allocate_matrix(int kl, int ku);
 
     void compute_interpolant_degree1(
-            BlockSpan<bsplines_type, double>& spline,
-            BlockSpan<interpolation_domain_type, double> const& vals) const;
+            BlockSpan<double, bsplines_type>& spline,
+            BlockSpan<double, interpolation_domain_type> const& vals) const;
 
     void build_matrix_system();
 };
@@ -152,8 +152,8 @@ SplineBuilder<BSplines, BcXmin, BcXmax>::SplineBuilder(BSplines const& bsplines)
 
 template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolant_degree1(
-        BlockSpan<bsplines_type, double>& spline,
-        BlockSpan<interpolation_domain_type, double> const& vals) const
+        BlockSpan<double, bsplines_type>& spline,
+        BlockSpan<double, interpolation_domain_type> const& vals) const
 {
     for (int i(0); i < m_bsplines.nbasis(); ++i) {
         spline(i) = vals(i);
@@ -167,8 +167,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolant_degree1(
 
 template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
-        BlockSpan<bsplines_type, double>& spline,
-        BlockSpan<interpolation_domain_type, double const> const& vals,
+        BlockSpan<double, bsplines_type>& spline,
+        BlockSpan<double const, interpolation_domain_type> const& vals,
         DSpan1D const* derivs_xmin,
         DSpan1D const* derivs_xmax) const
 {

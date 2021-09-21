@@ -102,46 +102,46 @@ using MDomainXVx = UniformMDomainXVx;
 using MDomainFx = ProductMDomain<MeshFx>;
 
 template <class ElementType>
-using SpanX = BlockSpan<MDomainX, ElementType>;
+using SpanX = BlockSpan<ElementType, MDomainX>;
 
 using DSpanX = SpanX<double>;
 
 template <class ElementType>
-using SpanVx = BlockSpan<MDomainVx, ElementType>;
+using SpanVx = BlockSpan<ElementType, MDomainVx>;
 
 using DSpanVx = SpanVx<double>;
 
 template <class ElementType>
-using SpanXVx = BlockSpan<MDomainXVx, ElementType>;
+using SpanXVx = BlockSpan<ElementType, MDomainXVx>;
 
 using DSpanXVx = SpanXVx<double>;
 
 template <class ElementType>
-using ViewX = BlockSpan<MDomainX, ElementType const>;
+using ViewX = BlockSpan<ElementType const, MDomainX>;
 
 using DViewX = ViewX<double>;
 
 template <class ElementType>
-using ViewVx = BlockSpan<MDomainVx, ElementType const>;
+using ViewVx = BlockSpan<ElementType const, MDomainVx>;
 
 using DViewVx = ViewVx<double>;
 
 template <class ElementType>
-using ViewXVx = BlockSpan<MDomainXVx, ElementType const>;
+using ViewXVx = BlockSpan<ElementType const, MDomainXVx>;
 
 using DViewXVx = ViewXVx<double>;
 
 template <class ElementType>
-using BlockX = Block<MDomainX, ElementType>;
+using BlockX = Block<ElementType, MDomainX>;
 
 using DBlockX = BlockX<double>;
 
 template <class ElementType>
-using BlockVx = Block<MDomainVx, ElementType>;
+using BlockVx = Block<ElementType, MDomainVx>;
 
 using DBlockVx = BlockVx<double>;
 
 template <class ElementType>
-using BlockXVx = Block<MDomainXVx, ElementType>;
+using BlockXVx = Block<ElementType, MDomainXVx>;
 
 using DBlockXVx = BlockXVx<double>;

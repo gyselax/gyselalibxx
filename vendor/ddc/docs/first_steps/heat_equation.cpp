@@ -55,8 +55,8 @@ int main(int argc, char** argv)
 
     // Allocate data located at each point of `domain_xy` (including ghost region)
     //! [memory allocation]
-    Block<ProductMDomain<MeshX, MeshY>, double> T_in(domain_xy);
-    Block<ProductMDomain<MeshX, MeshY>, double> T_out(domain_xy);
+    Block<double, ProductMDomain<MeshX, MeshY>> T_in(domain_xy);
+    Block<double, ProductMDomain<MeshX, MeshY>> T_out(domain_xy);
     //! [memory allocation]
 
     //! [subdomains]

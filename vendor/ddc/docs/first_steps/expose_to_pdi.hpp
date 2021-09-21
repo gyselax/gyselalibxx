@@ -32,7 +32,7 @@ plugins:
 template <class SupportType, class ElementType>
 void my_expose_to_pdi(
         std::string const& name,
-        Block<SupportType, ElementType> const& data,
+        Block<ElementType, SupportType> const& data,
         SupportType const& subdomain,
         PDI_inout_t access = default_access_v<ElementType>)
 {
