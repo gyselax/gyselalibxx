@@ -34,7 +34,7 @@ void expose_to_pdi(
             &rank,
             PDI_OUT,
             (name + "_extents").c_str(),
-            const_cast<size_t*>(extents.data()),
+            const_cast<MLengthElement*>(extents.data()),
             PDI_OUT,
             name.c_str(),
             data.data(),

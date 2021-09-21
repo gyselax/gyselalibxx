@@ -14,6 +14,9 @@ using MLengthElement = std::ptrdiff_t;
 template <class... Tags>
 using MCoord = TaggedVector<MCoordElement, Tags...>;
 
+template <class... Tags>
+using MLength = TaggedVector<MLengthElement, Tags...>;
+
 
 namespace detail {
 

@@ -30,6 +30,8 @@ public:
 
     using mcoord_type = MCoord<Meshes...>;
 
+    using mlength_type = MLength<Meshes...>;
+
 private:
     std::tuple<domain_t<Meshes>...> m_domains;
 
@@ -43,17 +45,26 @@ public:
 
     constexpr ProductMDomain(domain_t<Meshes> const&... domains) : m_domains(domains...) {}
 
-    constexpr ProductMDomain(ProductMesh<Meshes...> const& mesh, mcoord_type const& ubound)
-        : m_domains(domain_t<Meshes>(::get<Meshes>(mesh), 0, ::get<Meshes>(ubound))...)
+    /** Construct a ProductMDomain starting from (0, ..., 0) with size points.
+     * @param mesh
+     * @param size the number of points in each direction
+     */
+    constexpr ProductMDomain(ProductMesh<Meshes...> const& mesh, mlength_type const& size)
+        : m_domains(domain_t<Meshes>(::get<Meshes>(mesh), 0, ::get<Meshes>(size))...)
     {
     }
 
+    /** Construct a ProductMDomain starting from lbound with size points.
+     * @param mesh
+     * @param lbound the lower bound in each direction
+     * @param size the number of points in each direction
+     */
     constexpr ProductMDomain(
             ProductMesh<Meshes...> const& mesh,
             mcoord_type const& lbound,
-            mcoord_type const& ubound)
+            mlength_type const& size)
         : m_domains(domain_t<
-                    Meshes>(::get<Meshes>(mesh), ::get<Meshes>(lbound), ::get<Meshes>(ubound))...)
+                    Meshes>(::get<Meshes>(mesh), ::get<Meshes>(lbound), ::get<Meshes>(size))...)
     {
     }
 
@@ -103,7 +114,7 @@ public:
         return std::get<domain_t<QueryMesh>>(m_domains);
     }
 
-    constexpr mcoord_type extents() const noexcept
+    constexpr mlength_type extents() const noexcept
     {
         return mcoord_type(std::get<domain_t<Meshes>>(m_domains).size()...);
     }
@@ -183,7 +194,7 @@ constexpr auto select(ProductMDomain<Meshes...> const& domain)
     return ProductMDomain(
             select<QueryMeshes...>(domain.mesh()),
             select<QueryMeshes...>(domain.front()),
-            select<QueryMeshes...>(domain.back()));
+            select<QueryMeshes...>(domain.extents()));
 }
 
 template <class... QueryMeshes, class... Meshes>

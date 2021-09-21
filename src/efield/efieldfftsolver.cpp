@@ -87,7 +87,7 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
     MeshFx const dom_fx = m_fft.compute_fourier_domain(dom_x);
     auto&& dom_fx_prod_version = ProductMesh(dom_fx);
     Block<MDomainFx, std::complex<double>> complex_phi_fx(
-            ProductMDomain(dom_fx_prod_version, MCoord<MeshFx>(dom_fx.size())));
+            ProductMDomain(dom_fx_prod_version, MLength<MeshFx>(dom_fx.size())));
     m_fft(complex_phi_fx, complex_rho);
 
     // Solve Poisson's equation -d^2 Phi/dx^2 = rho in the Fourier space.

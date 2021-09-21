@@ -15,6 +15,7 @@ class DimX;
 
 using MeshX = UniformMesh<DimX>;
 using MCoordX = MCoord<MeshX>;
+using MLengthX = MLength<MeshX>;
 
 using RCoordX = RCoord<DimX>;
 
@@ -23,20 +24,21 @@ class MDomainXTest : public ::testing::Test
 protected:
     std::size_t npoints = 101;
     MeshX mesh_x = MeshX(0., 1., npoints);
-    MDomain<MeshX> const dom = MDomain(mesh_x, npoints - 1);
+    MDomain<MeshX> const dom = MDomain(mesh_x, MLengthX(npoints));
 };
 
 TEST_F(MDomainXTest, Constructor)
 {
     constexpr RCoordX origin(1);
     constexpr RCoordX unit_vec(3);
+    constexpr MCoordX npoints(11);
     constexpr MCoordX lbound(0);
     constexpr MCoordX ubound(10);
     constexpr RCoordX rmin = origin;
     constexpr RCoordX rmax = rmin + unit_vec * (double)(ubound - lbound);
     constexpr static MeshX mesh(origin, unit_vec);
-    constexpr MDomain dom_a(mesh, ubound);
-    constexpr MDomain dom_b(mesh, lbound, ubound);
+    constexpr MDomain dom_a(mesh, MLengthX(npoints));
+    constexpr MDomain dom_b(mesh, MCoordX(lbound), MLengthX(npoints));
     constexpr MDomain dom_d(dom_a);
     EXPECT_EQ(dom_a, dom_b);
     EXPECT_EQ(dom_a, dom_d);

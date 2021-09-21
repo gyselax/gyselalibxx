@@ -295,7 +295,7 @@ TEST(FFT, DomainEven)
 
     MeshX mesh_x(RCoordX(0.), RCoordX(20. / N));
     ProductMesh mesh_prod(mesh_x);
-    ProductMDomain domx(mesh_prod, MCoordX(0), MCoordX(N - 1));
+    ProductMDomain domx(mesh_prod, MCoordX(0), MLengthX(N));
     auto meshfx = fft.compute_fourier_domain(domx);
 
     //   f = [0, 1, ...,   n/2, -n/2+1, ..., -1] / (d*n)   if n is even
@@ -318,7 +318,7 @@ TEST(FFT, DomainOdd)
 
     MeshX mesh_x(RCoordX(0.), RCoordX(20. / N));
     ProductMesh mesh_prod(mesh_x);
-    ProductMDomain domx(mesh_prod, MCoordX(0), MCoordX(N - 1));
+    ProductMDomain domx(mesh_prod, MCoordX(0), MLengthX(N));
     auto meshfx = fft.compute_fourier_domain(domx);
 
     //   f = [0, 1, ..., (n-1)/2, -n/2, ..., -1] / (d*n)   if n is odd
@@ -341,10 +341,10 @@ TEST(FFT, Identity)
 
     MeshX mesh_x(RCoordX(0.), RCoordX((2. * M_PI) / N));
     ProductMesh mesh_prod(mesh_x);
-    ProductMDomain domx(mesh_prod, MCoordX(0), MCoordX(N - 1));
+    ProductMDomain domx(mesh_prod, MCoordX(0), MLengthX(N));
     auto meshfx = fft.compute_fourier_domain(domx);
     ProductMesh mesh_prod_fx(meshfx);
-    ProductMDomain domfx(mesh_prod_fx, MCoord<MeshFx>(meshfx.size() - 1));
+    ProductMDomain domfx(mesh_prod_fx, MLengthFx(meshfx.size()));
 
     BlockX<std::complex<double>> values(domx);
     std::cout << domx.size() << std::endl;
@@ -388,10 +388,10 @@ TEST(FFT, Simple)
 
     MeshX mesh_x(RCoordX(0.), RCoordX(M * T / N));
     ProductMesh mesh_prod(mesh_x);
-    ProductMDomain domx(mesh_prod, MCoordX(0), MCoordX(N - 1));
+    ProductMDomain domx(mesh_prod, MCoordX(0), MLengthX(N));
     MeshFx meshfx = fft.compute_fourier_domain(domx);
     ProductMesh mesh_prod_fx(meshfx);
-    ProductMDomain domfx(mesh_prod_fx, MCoord<MeshFx>(meshfx.size() - 1));
+    ProductMDomain domfx(mesh_prod_fx, MLengthFx(meshfx.size()));
 
     BlockX<std::complex<double>> values(domx);
     for (std::size_t i = 0; i < domx.size(); ++i) {

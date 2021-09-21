@@ -69,7 +69,7 @@ public:
      */
     explicit BSplines(rcoord_type rmin, rcoord_type rmax, std::size_t n_knots)
         : m_mesh(rmin, rmax, n_knots)
-        , m_domain(m_mesh, 0, n_knots - 1)
+        , m_domain(m_mesh, 0, n_knots)
     {
     }
 

@@ -238,7 +238,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
                 = std::make_unique<interpolation_mesh_type>(m_bsplines.rmin() + shift * m_dx, m_dx);
         m_interpolation_domain = std::make_unique<interpolation_domain_type>(
                 ProductMesh(*m_interpolation_mesh),
-                MCoord<UniformMesh<tag_type>>(n_interp_pts - 1));
+                MCoord<UniformMesh<tag_type>>(n_interp_pts));
     } else {
         std::vector<double> interp_pts(n_interp_pts);
 

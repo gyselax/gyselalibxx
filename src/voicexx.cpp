@@ -68,7 +68,7 @@ int main(int argc, char** argv)
         PC_double(PC_get(conf, ".MeshX.max"), &x_max);
         return x_max;
     }();
-    MLengthElement x_size = [&]() {
+    MLengthX x_size = [&]() {
         long x_size;
         PC_int(PC_get(conf, ".MeshX.size"), &x_size);
         return x_size;
@@ -84,7 +84,7 @@ int main(int argc, char** argv)
         PC_double(PC_get(conf, ".MeshVx.max"), &vx_max);
         return vx_max;
     }();
-    MLengthElement vx_size = [&]() {
+    MLengthVx vx_size = [&]() {
         double vx_size;
         PC_double(PC_get(conf, ".MeshVx.size"), &vx_size);
         return vx_size;
@@ -103,8 +103,7 @@ int main(int argc, char** argv)
     MeshXVx const mesh_x_vx(builder_x.interpolation_domain().mesh().get<MeshX>(), mesh_vx);
 
     MDomainXVx const
-            dom2d(mesh_x_vx,
-                  MCoordXVx(builder_x.interpolation_domain().extents() - 1, vx_size - 1));
+            dom2d(mesh_x_vx, MCoordXVx(builder_x.interpolation_domain().extents(), vx_size));
 
     // Creating operators
 

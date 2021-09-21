@@ -24,6 +24,8 @@ class DimX;
 class DimVx;
 
 using MeshX = UniformMesh<DimX>;
+using MCoordX = MCoord<MeshX>;
+using MLengthX = MLength<MeshX>;
 using RCoordX = MeshX::rcoord_type;
 using MeshVx = UniformMesh<DimVx>;
 using RCoordVx = MeshVx::rcoord_type;
@@ -32,6 +34,7 @@ using DBlockX = Block<MDomainX, double>;
 using MeshXVx = ProductMesh<MeshX, MeshVx>;
 using RCoordXVx = RCoord<DimX, DimVx>;
 using MCoordXVx = MCoord<MeshX, MeshVx>;
+using MLengthXVx = MLength<MeshX, MeshVx>;
 using MDomainXVx = ProductMDomain<MeshX, MeshVx>;
 using DBlockXVx = Block<MDomainXVx, double>;
 using MeshVxX = ProductMesh<MeshVx, MeshX>;
@@ -44,7 +47,7 @@ class DBlockXTest : public ::testing::Test
 {
 protected:
     MeshX mesh = MeshX(0.0, 1.0);
-    MDomainX dom = MDomainX(ProductMesh(mesh), 10, 100);
+    MDomainX dom = MDomainX(ProductMesh(mesh), MCoordX(10), MLengthX(91));
 };
 
 TEST_F(DBlockXTest, constructor)
@@ -98,7 +101,7 @@ protected:
     MeshX mesh_x = MeshX(0.0, 1.0);
     MeshVx mesh_vx = MeshVx(0.0, 1.0);
     MeshXVx mesh = MeshXVx(mesh_x, mesh_vx);
-    MDomainXVx dom = MDomainXVx(mesh, MCoordXVx(0, 0), MCoordXVx(100, 100));
+    MDomainXVx dom = MDomainXVx(mesh, MCoordXVx(0, 0), MLengthXVx(101, 101));
 };
 
 TEST_F(DBlockXVxTest, deepcopy)
@@ -173,7 +176,7 @@ TEST_F(DBlockXVxTest, slice)
             ASSERT_EQ(block_v(ii), constref_block(MCoord<MeshX>(SLICE_VAL), ii));
         }
 
-        auto&& subblock = constref_block[ProductMDomain<MeshX>(ProductMesh(mesh_x), 10, 14)];
+        auto&& subblock = constref_block[ProductMDomain<MeshX>(ProductMesh(mesh_x), 10, 5)];
         // ASSERT_TRUE((std::is_same_v<
         //              std::decay_t<decltype(subblock)>::layout_type,
         //              std::experimental::layout_right>));
@@ -226,7 +229,7 @@ protected:
     MeshX mesh_x = MeshX(0.0, 1.0);
     MeshVx mesh_vx = MeshVx(0.0, 1.0);
     MeshXVx mesh = MeshXVx(mesh_x, mesh_vx);
-    MDomainXVx dom = MDomainXVx(mesh, MCoordXVx(100, 100), MCoordXVx(200, 200));
+    MDomainXVx dom = MDomainXVx(mesh, MCoordXVx(100, 100), MCoordXVx(101, 101));
 };
 
 TEST_F(NonZeroDBlockXVxTest, view)
@@ -280,7 +283,7 @@ TEST_F(NonZeroDBlockXVxTest, slice)
             ASSERT_EQ(block_v(ii), constref_block(MCoord<MeshX>(SLICE_VAL), ii));
         }
 
-        auto&& subblock = constref_block[ProductMDomain<MeshX>(ProductMesh(mesh_x), 110, 150)];
+        auto&& subblock = constref_block[ProductMDomain<MeshX>(ProductMesh(mesh_x), 110, 41)];
         // ASSERT_TRUE((std::is_same_v<
         //              std::decay_t<decltype(subblock)>::layout_type,
         //              std::experimental::layout_right>));

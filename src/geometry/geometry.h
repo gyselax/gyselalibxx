@@ -79,6 +79,14 @@ using MCoordXVx = MCoord<MeshX, MeshVx>;
 
 using MCoordFx = MCoord<MeshFx>;
 
+using MLengthX = MLength<MeshX>;
+
+using MLengthVx = MLength<MeshVx>;
+
+using MLengthXVx = MLength<MeshX, MeshVx>;
+
+using MLengthFx = MLength<MeshFx>;
+
 using UniformMDomainX = ProductMDomain<MeshX>;
 
 using UniformMDomainVx = ProductMDomain<MeshVx>;

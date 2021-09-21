@@ -82,7 +82,7 @@ public:
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedVectorImpl(TaggedVector<OElementType, OTags...> const& other) noexcept
-        : m_values {(other.template get<Tags>())...}
+        : m_values {(static_cast<ElementType>(other.template get<Tags>()))...}
     {
     }
 

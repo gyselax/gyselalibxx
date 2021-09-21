@@ -19,6 +19,8 @@ public:
 
     using mcoord_type = MCoord<Mesh>;
 
+    using mlength_type = MLength<Mesh>;
+
     struct Iterator;
 
 private:
@@ -32,19 +34,29 @@ private:
 public:
     MDomain() = default;
 
-    template <class UboundType>
-    inline constexpr MDomain(Mesh const& mesh, UboundType&& ubound) noexcept
+    /** Construct a MDomain starting from 0 with size points.
+     * @param mesh
+     * @param size the number of points
+     */
+    inline constexpr MDomain(Mesh const& mesh, mlength_type const& size) noexcept
         : m_mesh(mesh)
         , m_lbound(0)
-        , m_ubound(std::forward<UboundType>(ubound))
+        , m_ubound(size - 1)
     {
     }
 
-    template <class LBoundType, class UboundType>
-    inline constexpr MDomain(Mesh const& mesh, LBoundType&& lbound, UboundType&& ubound) noexcept
+    /** Construct a MDomain starting from lbound with size points.
+     * @param mesh
+     * @param lbound the lower bound
+     * @param size the number of points
+     */
+    inline constexpr MDomain(
+            Mesh const& mesh,
+            mcoord_type const& lbound,
+            mlength_type const& size) noexcept
         : m_mesh(mesh)
-        , m_lbound(std::forward<LBoundType>(lbound))
-        , m_ubound(std::forward<UboundType>(ubound))
+        , m_lbound(lbound)
+        , m_ubound(m_lbound + size - 1)
     {
     }
 
