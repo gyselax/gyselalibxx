@@ -49,6 +49,9 @@ set(DOXYGEN_IMAGE_PATH
 		"${CMAKE_CURRENT_SOURCE_DIR}/images")
 doxygen_add_docs(doxygen_doc
 		"${CMAKE_CURRENT_SOURCE_DIR}/About.md"
+                "${CMAKE_CURRENT_SOURCE_DIR}/FirstSteps.md"
 		"${DDC_SOURCE_DIR}/include/ddc/")
 message("Looking in ${DDC_SOURCE_DIR}/include/ddc/")
 add_dependencies(doc doxygen_doc)
+
+add_subdirectory(first_steps)
