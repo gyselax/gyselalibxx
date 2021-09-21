@@ -135,8 +135,8 @@ int main(int argc, char** argv)
 
     // Starting the code
 
-    PDI_expose("Nx", &x_size, PDI_OUT);
-    PDI_expose("Nvx", &vx_size, PDI_OUT);
+    expose_to_pdi("Nx", x_size);
+    expose_to_pdi("Nvx", vx_size);
     expose_to_pdi("MeshX", meshX_coord);
     expose_to_pdi("MeshVx", meshVx_coord);
 

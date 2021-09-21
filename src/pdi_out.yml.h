@@ -29,12 +29,8 @@ data:
 plugins:
   decl_hdf5:
     - file: 'VOICEXX_${iter:04}.h5'
-      on_event: fdistribu
+      on_event: iter
       collision_policy: replace_and_warn
-      write: [iter, Nx, Nvx, MeshX, MeshVx, fdistribu ]
-    - file: 'VOICEXX_${iter:04}.h5'
-      on_event: ex
-      collision_policy: write_into
-      write: [ex]
+      write: [iter, Nx, Nvx, MeshX, MeshVx, fdistribu, ex ]
   trace: ~
 )PDI_CFG";

@@ -34,7 +34,7 @@ void my_expose_to_pdi(
         std::string const& name,
         Block<SupportType, ElementType> const& data,
         SupportType const& subdomain,
-        PDI_inout_t access = default_access<ElementType>())
+        PDI_inout_t access = default_access_v<ElementType>)
 {
     auto extents = data.extents().array();
     auto subextents = subdomain.extents().array();

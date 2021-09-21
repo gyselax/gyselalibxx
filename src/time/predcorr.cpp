@@ -27,9 +27,7 @@ DSpanXVx PredCorr::operator()(DSpanXVx fdistribu, double mass_ratio, int steps) 
 
     int iter = 0;
     for (; iter < steps; ++iter) {
-        PDI_expose("iter", &iter, PDI_OUT);
-        expose_to_pdi("fdistribu", fdistribu);
-        expose_to_pdi("ex", ex);
+        PdiEvent("iter").with("iter", iter).and_with("fdistribu", fdistribu).and_with("ex", ex);
 
         // copy fdistribu
         deepcopy(fdistribu_half_t, fdistribu);
@@ -47,9 +45,7 @@ DSpanXVx PredCorr::operator()(DSpanXVx fdistribu, double mass_ratio, int steps) 
         m_efield(ex, fdistribu);
     }
 
-    PDI_expose("iter", &iter, PDI_OUT);
-    expose_to_pdi("fdistribu", fdistribu);
-    expose_to_pdi("ex", ex);
+    PdiEvent("iter").with("iter", iter).and_with("fdistribu", fdistribu).and_with("ex", ex);
 
     return fdistribu;
 }
