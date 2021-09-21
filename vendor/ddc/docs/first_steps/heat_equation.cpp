@@ -1,10 +1,9 @@
 #include <ddc/Block>
 #include <ddc/MCoord>
+#include <ddc/PdiEvent>
 #include <ddc/ProductMDomain>
 #include <ddc/ProductMesh>
 #include <ddc/UniformMesh>
-
-#include "expose_to_pdi.hpp"
 
 // Name of the axis
 struct X;
@@ -18,6 +17,29 @@ static int nx = 100;
 static int ny = 200;
 static int gw = 1;
 static double k = 0.1;
+
+constexpr char const* const PDI_CFG = R"PDI_CFG(
+metadata:
+  ghostwidth: int
+  iter : int
+
+data:
+  temperature_extents: { type: array, subtype: int64, size: 2 }
+  temperature:
+    type: array
+    subtype: double
+    size: [ '$temperature_extents[0]', '$temperature_extents[1]' ]
+    start: [ '$ghostwidth', '$ghostwidth' ]
+    subsize: [ '$temperature_extents[0]-2*$ghostwidth', '$temperature_extents[1]-2*$ghostwidth' ]
+
+plugins:
+  decl_hdf5:
+    - file: 'temperature_${iter:04}.h5'
+      on_event: temperature
+      collision_policy: replace_and_warn
+      write: [temperature]
+  trace: ~
+)PDI_CFG";
 
 int main(int argc, char** argv)
 {
@@ -87,6 +109,7 @@ int main(int argc, char** argv)
 
     PC_tree_t conf;
     PDI_init(PC_parse_string(PDI_CFG));
+    PDI_expose("ghostwidth", &gw, PDI_OUT);
 
     const double dt = 0.49 / (1.0 / (dx * dx) + 1.0 / (dy * dy));
     const double Cx = k * dt / (dx * dx);
@@ -94,8 +117,7 @@ int main(int argc, char** argv)
     std::size_t iter = 0;
     for (; iter < nt; ++iter) {
         //! [io/pdi]
-        PDI_expose("iter", &iter, PDI_OUT);
-        my_expose_to_pdi("temperature", T_in, temperature_inner.domain());
+        PdiEvent("temperature").with("iter", iter).with("temperature", T_in);
         //! [io/pdi]
 
         //! [numerical scheme]
@@ -123,8 +145,7 @@ int main(int argc, char** argv)
         deepcopy(T_in, T_out);
     }
 
-    PDI_expose("iter", &iter, PDI_OUT);
-    my_expose_to_pdi("temperature", T_in, temperature_inner.domain());
+    PdiEvent("temperature").with("iter", iter).and_with("temperature", T_in);
 
     PDI_finalize();
 
