@@ -1,25 +1,26 @@
-# First steps: the heat equation
+\page first_steps First steps: the heat equation
 
-## Definition of a mesh
+
+# Definition of a mesh
 
 \snippet first_steps/heat_equation.cpp mesh
 
-## Domain of interest
+# Domain of interest
 
 \snippet first_steps/heat_equation.cpp domain
 
-## Memory allocation
+# Memory allocation
 
 \snippet first_steps/heat_equation.cpp memory allocation
 
-## Subdomains
+# Subdomains
 
 \snippet first_steps/heat_equation.cpp subdomains
 
-## Numerical scheme
+# Numerical scheme
 
 \snippet first_steps/heat_equation.cpp numerical scheme
 
-## IO
+# IO
 
 \snippet first_steps/heat_equation.cpp io/pdi
