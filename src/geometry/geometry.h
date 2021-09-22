@@ -49,14 +49,6 @@ using RCoordXVx = RCoord<Dim::X, Dim::Vx>;
 
 using RCoordFx = RCoord<Dim::Fx>;
 
-using RLengthT = RLength<Dim::T>;
-
-using RLengthX = RLength<Dim::X>;
-
-using RLengthVx = RLength<Dim::Vx>;
-
-using RLengthXVx = RLength<Dim::X, Dim::Vx>;
-
 using KnotsX = UniformMesh<Dim::X>;
 
 using BSplinesX = BSplines<KnotsX, 4>;

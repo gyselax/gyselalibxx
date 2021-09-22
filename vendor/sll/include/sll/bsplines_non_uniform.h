@@ -27,8 +27,6 @@ public:
 
     using rcoord_type = RCoord<Tag>;
 
-    using rlength_type = RLength<Tag>;
-
     using mcoord_type = MCoord<BSplines>;
 
 public:

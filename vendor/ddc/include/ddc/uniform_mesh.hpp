@@ -14,8 +14,6 @@ class UniformMesh : public Mesh
 public:
     using rcoord_type = RCoord<RDim>;
 
-    using rlength_type = RLength<RDim>;
-
     using mcoord_type = MCoord<UniformMesh>;
 
     using rdim_type = RDim;

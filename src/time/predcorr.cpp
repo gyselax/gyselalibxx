@@ -9,7 +9,7 @@
 
 #include "predcorr.h"
 
-PredCorr::PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLengthT dt)
+PredCorr::PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, double dt)
     : m_vlasov(vlasov)
     , m_efield(efield)
     , m_dt(dt)

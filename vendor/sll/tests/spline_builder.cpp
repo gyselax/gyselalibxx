@@ -178,7 +178,6 @@ TEST(SplineBuilder, BuildSpline)
     RCoordX constexpr xN = 1.;
     std::size_t constexpr ncells = 100;
     MCoordX constexpr npoints = ncells + 1;
-    //     RCoordX constexpr dx = (xN - x0) / ncells;
 
     // 1. Create BSplines
     UniformBSplinesX2 bsplines(x0, xN, npoints);

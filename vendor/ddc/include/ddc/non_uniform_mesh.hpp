@@ -14,8 +14,6 @@ class NonUniformMesh : public Mesh
 public:
     using rcoord_type = RCoord<RDim>;
 
-    using rlength_type = RLength<RDim>;
-
     using mcoord_type = MCoord<NonUniformMesh>;
 
     using rdim_type = RDim;

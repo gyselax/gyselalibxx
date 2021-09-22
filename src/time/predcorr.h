@@ -13,10 +13,10 @@ class PredCorr : public ITimeSolver
 
     IEfieldSolver const& m_efield;
 
-    RLengthT const m_dt;
+    double const m_dt;
 
 public:
-    PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, RLengthT dt);
+    PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, double dt);
 
     DSpanXVx operator()(DSpanXVx data, double mass_ratio, int steps) const override;
 };
