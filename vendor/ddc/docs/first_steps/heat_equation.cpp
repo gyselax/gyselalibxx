@@ -45,19 +45,19 @@ int main(int argc, char** argv)
 {
     //! [mesh]
     // Origin on X
-    RCoord<MeshX> min_x(-1.);
+    RCoord<X> min_x(-1.);
 
     // Sampling step on X
-    RLength<X> dx(0.02);
+    RCoord<X> dx(0.02);
 
     // Actual mesh on X
     MeshX mesh_x(min_x, dx);
 
     // Origin on Y
-    RCoord<MeshY> min_y(-1.);
+    RCoord<Y> min_y(-1.);
 
     // Sampling step on Y
-    RLength<Y> dy(0.01);
+    RCoord<Y> dy(0.01);
 
     // Actual mesh on Y
     MeshY mesh_y(min_y, dy);
