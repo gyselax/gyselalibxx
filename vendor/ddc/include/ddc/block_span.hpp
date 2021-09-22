@@ -211,7 +211,7 @@ public:
 
     template <class... OMeshes>
     inline constexpr reference operator()(
-            TaggedVector<std::size_t, OMeshes> const&... mcoords) const noexcept
+            TaggedVector<MCoordElement, OMeshes> const&... mcoords) const noexcept
     {
         assert(((mcoords >= front<OMeshes>(m_domain)) && ...));
         return m_raw(take_first<Meshes>(mcoords...)...);
