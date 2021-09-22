@@ -134,7 +134,7 @@ std::ostream& operator<<(std::ostream& out, NonUniformMesh<RDim> const& mesh)
 {
     out << "NonUniformMesh( ";
     if (mesh.size() > 0) {
-        out << mesh.rmin() << "..." << mesh.rmax();
+        out << mesh.rmin() << ", ..., " << mesh.rmax();
     }
     out << " )";
     return out;

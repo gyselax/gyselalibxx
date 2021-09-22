@@ -125,5 +125,5 @@ public:
 template <class RDim>
 std::ostream& operator<<(std::ostream& out, UniformMesh<RDim> const& mesh)
 {
-    return out << "UniformMesh( origin=" << mesh.origin() << ", unitvec=" << mesh.step() << " )";
+    return out << "UniformMesh( origin=" << mesh.origin() << ", step=" << mesh.step() << " )";
 }
