@@ -54,6 +54,7 @@ public:
 
 private:
     mesh_type m_mesh;
+    // In the periodic case, it contains twice the periodic point!!!
     MDomain<mesh_type> m_domain;
 
 public:
@@ -65,9 +66,9 @@ public:
      * @param rmax    the real coordinate of the last knot
      * @param n_knots the number of knots
      */
-    explicit BSplines(rcoord_type rmin, rcoord_type rmax, std::size_t n_knots)
-        : m_mesh(rmin, rmax, n_knots)
-        , m_domain(m_mesh, 0, n_knots)
+    explicit BSplines(rcoord_type rmin, rcoord_type rmax, std::size_t ncells)
+        : m_mesh(rmin, rmax, ncells + 1) // Compute correct step, independent of periodicity
+        , m_domain(m_mesh, 0, ncells + 1) // Create a mesh including the eventual periodic point
     {
     }
 
@@ -126,11 +127,6 @@ public:
     std::size_t size() const noexcept
     {
         return degree() + ncells();
-    }
-
-    std::size_t npoints() const noexcept
-    {
-        return m_domain.size();
     }
 
     std::size_t nbasis() const noexcept

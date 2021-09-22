@@ -28,12 +28,12 @@ class BSplinesUniformTest : public ::testing::Test
 {
 protected:
     static constexpr std::size_t spline_degree = 2;
-    static constexpr std::size_t npoints = 101;
+    static constexpr std::size_t ncells = 100;
     static constexpr RCoordX xmin = 0.;
     static constexpr RCoordX xmax = 2.;
-    BSplines<MeshX, spline_degree> const bsplines {xmin, xmax, npoints};
+    BSplines<MeshX, spline_degree> const bsplines {xmin, xmax, ncells};
     deprecated::UniformBSplines const
-            old_bsplines {spline_degree, DimX::PERIODIC, xmin, xmax, npoints - 1};
+            old_bsplines {spline_degree, DimX::PERIODIC, xmin, xmax, ncells};
 };
 
 TEST_F(BSplinesUniformTest, constructor)
@@ -42,8 +42,7 @@ TEST_F(BSplinesUniformTest, constructor)
     EXPECT_EQ(bsplines.is_periodic(), DimX::PERIODIC);
     EXPECT_EQ(bsplines.rmin(), xmin);
     EXPECT_EQ(bsplines.rmax(), xmax);
-    EXPECT_EQ(bsplines.npoints(), npoints);
-    EXPECT_EQ(bsplines.ncells(), npoints - 1);
+    EXPECT_EQ(bsplines.ncells(), ncells);
 }
 
 TEST_F(BSplinesUniformTest, comparison)

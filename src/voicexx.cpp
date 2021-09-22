@@ -94,7 +94,7 @@ int main(int argc, char** argv)
 
     // Creating mesh & supports
 
-    BSplinesX const bsplines_x(x_min, x_max, x_size + 1);
+    BSplinesX const bsplines_x(x_min, x_max, x_size);
 
     SplineXBuilder const builder_x(bsplines_x);
 
