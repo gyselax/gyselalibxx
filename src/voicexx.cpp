@@ -28,9 +28,9 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
-    PC_tree_t conf;
+    PC_tree_t conf_voicexx;
     if (argc > 1) {
-        conf = PC_parse_path(fs::path(argv[1]).c_str());
+        conf_voicexx = PC_parse_path(fs::path(argv[1]).c_str());
     } else {
         cerr << "usage: " << argv[0] << " <config_file.yml>" << endl;
         return EXIT_FAILURE;
@@ -40,56 +40,58 @@ int main(int argc, char** argv)
     // --> Mesh
     RCoordX x_min = [&]() {
         double x_min;
-        PC_double(PC_get(conf, ".Mesh.x_min"), &x_min);
+        PC_double(PC_get(conf_voicexx, ".Mesh.x_min"), &x_min);
         return x_min;
     }();
     RCoordX x_max = [&]() {
         double x_max;
-        PC_double(PC_get(conf, ".Mesh.x_max"), &x_max);
+        PC_double(PC_get(conf_voicexx, ".Mesh.x_max"), &x_max);
         return x_max;
     }();
     MLengthX x_size = [&]() {
         long x_size;
-        PC_int(PC_get(conf, ".Mesh.x_size"), &x_size);
+        PC_int(PC_get(conf_voicexx, ".Mesh.x_size"), &x_size);
         return x_size;
     }();
     RCoordVx vx_min = [&]() {
         double vx_min;
-        PC_double(PC_get(conf, ".Mesh.vx_min"), &vx_min);
+        PC_double(PC_get(conf_voicexx, ".Mesh.vx_min"), &vx_min);
         return vx_min;
     }();
     RCoordVx vx_max = [&]() {
         double vx_max;
-        PC_double(PC_get(conf, ".Mesh.vx_max"), &vx_max);
+        PC_double(PC_get(conf_voicexx, ".Mesh.vx_max"), &vx_max);
         return vx_max;
     }();
     MLengthVx vx_size = [&]() {
         double vx_size;
-        PC_double(PC_get(conf, ".Mesh.vx_size"), &vx_size);
+        PC_double(PC_get(conf_voicexx, ".Mesh.vx_size"), &vx_size);
         return vx_size;
     }();
     // --> Equilibrium
     long ion_charge;
-    PC_int(PC_get(conf, ".Equilibrium.ion_charge"), &ion_charge);
+    PC_int(PC_get(conf_voicexx, ".Equilibrium.ion_charge"), &ion_charge);
     double ion_mass;
-    PC_double(PC_get(conf, ".Equilibrium.ion_mass"), &ion_mass);
+    PC_double(PC_get(conf_voicexx, ".Equilibrium.ion_mass"), &ion_mass);
     double ion_density_eq;
-    PC_double(PC_get(conf, ".Equilibrium.ion_density_eq"), &ion_density_eq);
+    PC_double(PC_get(conf_voicexx, ".Equilibrium.ion_density_eq"), &ion_density_eq);
     double ion_temperature_eq;
-    PC_double(PC_get(conf, ".Equilibrium.ion_temperature_eq"), &ion_temperature_eq);
+    PC_double(PC_get(conf_voicexx, ".Equilibrium.ion_temperature_eq"), &ion_temperature_eq);
     double ion_mean_velocity_eq;
-    PC_double(PC_get(conf, ".Equilibrium.ion_mean_velocity_eq"), &ion_mean_velocity_eq);
+    PC_double(PC_get(conf_voicexx, ".Equilibrium.ion_mean_velocity_eq"), &ion_mean_velocity_eq);
     long electron_charge;
-    PC_int(PC_get(conf, ".Equilibrium.electron_charge"), &electron_charge);
+    PC_int(PC_get(conf_voicexx, ".Equilibrium.electron_charge"), &electron_charge);
     double electron_mass;
-    PC_double(PC_get(conf, ".Equilibrium.electron_mass"), &electron_mass);
+    PC_double(PC_get(conf_voicexx, ".Equilibrium.electron_mass"), &electron_mass);
 
     double deltat;
-    PC_double(PC_get(conf, ".Algorithm.deltat"), &deltat);
+    PC_double(PC_get(conf_voicexx, ".Algorithm.deltat"), &deltat);
     long nbiter;
-    PC_int(PC_get(conf, ".Algorithm.nbiter"), &nbiter);
+    PC_int(PC_get(conf_voicexx, ".Algorithm.nbiter"), &nbiter);
 
-    PDI_init(PC_parse_string(PDI_CFG));
+    PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
+
+    PDI_init(conf_pdi);
 
     // Creating mesh & supports
 
@@ -161,7 +163,11 @@ int main(int argc, char** argv)
 
     predcorr(fion, electron_mass, nbiter);
 
+    PC_tree_destroy(&conf_pdi);
+
     PDI_finalize();
+
+    PC_tree_destroy(&conf_voicexx);
 
     return EXIT_SUCCESS;
 }
