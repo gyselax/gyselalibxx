@@ -22,52 +22,44 @@ using RCoordX = RCoord<DimX>;
 class MDomainXTest : public ::testing::Test
 {
 protected:
-    std::size_t npoints = 101;
-    MeshX mesh_x = MeshX(0., 1., npoints);
-    MDomain<MeshX> const dom = MDomain(mesh_x, MLengthX(npoints));
+    MeshX mesh_x = MeshX(RCoordX(0.), RCoordX(0.01));
+    MCoordX lbound_x = 50;
+    MLengthX size_x = 51;
+    MDomain<MeshX> const dom = MDomain(mesh_x, lbound_x, size_x);
+    RCoordX min_x = 0.5;
+    RCoordX max_x = 1.;
+    MCoordX ubound_x = 100;
 };
 
 TEST_F(MDomainXTest, Constructor)
 {
-    constexpr RCoordX origin(1);
-    constexpr RCoordX unit_vec(3);
-    constexpr MCoordX npoints(11);
-    constexpr MCoordX lbound(0);
-    constexpr MCoordX ubound(10);
-    constexpr RCoordX rmin = origin;
-    constexpr RCoordX rmax = rmin + unit_vec * (double)(ubound - lbound);
-    constexpr static MeshX mesh(origin, unit_vec);
-    constexpr MDomain dom_a(mesh, MLengthX(npoints));
-    constexpr MDomain dom_b(mesh, MCoordX(lbound), MLengthX(npoints));
-    constexpr MDomain dom_d(dom_a);
-    EXPECT_EQ(dom_a, dom_b);
-    EXPECT_EQ(dom_a, dom_d);
-    EXPECT_EQ(dom_a.rmin(), rmin);
-    EXPECT_EQ(dom_a.rmax(), rmax);
-    EXPECT_EQ(dom_a.front(), lbound);
-    EXPECT_EQ(dom_a.back(), ubound);
+    EXPECT_EQ(dom.mesh(), mesh_x);
+    EXPECT_EQ(dom.size(), size_x);
+    EXPECT_EQ(dom.empty(), false);
+    EXPECT_EQ(dom[0], lbound_x);
+    EXPECT_EQ(dom.front(), lbound_x);
+    EXPECT_EQ(dom.back(), ubound_x);
+    EXPECT_EQ(dom.rmin(), min_x);
+    EXPECT_EQ(dom.rmax(), max_x);
 }
 
-TEST_F(MDomainXTest, ubound)
+TEST_F(MDomainXTest, Empty)
 {
-    EXPECT_EQ(dom.back().get<MeshX>(), 100ul);
-    EXPECT_EQ(dom.back(), 100ul);
-}
-
-TEST_F(MDomainXTest, rmax)
-{
-    EXPECT_EQ(dom.mesh().to_real(get<MeshX>(dom.back())).get<DimX>(), 1.);
-    EXPECT_EQ(dom.rmax().get<DimX>(), 1.);
-    EXPECT_EQ(dom.rmax(), 1.);
+    MLengthX size_x(0);
+    MDomain const empty_domain(mesh_x, lbound_x, size_x);
+    EXPECT_EQ(empty_domain.mesh(), mesh_x);
+    EXPECT_EQ(empty_domain.size(), size_x);
+    EXPECT_EQ(empty_domain.empty(), true);
+    EXPECT_EQ(empty_domain[0], lbound_x);
 }
 
 TEST_F(MDomainXTest, RangeFor)
 {
-    std::size_t ii = 0;
-    for (auto&& x : dom) {
-        ASSERT_LE(0, x);
-        EXPECT_EQ(x, ii);
-        ASSERT_LT(x, npoints);
-        ++ii;
+    MCoordX ii = lbound_x;
+    for (MCoordX ix : dom) {
+        ASSERT_LE(lbound_x, ix);
+        EXPECT_EQ(ix, ii);
+        ASSERT_LE(ix, ubound_x);
+        ++ii.get<MeshX>();
     }
 }
