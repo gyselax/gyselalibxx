@@ -15,7 +15,7 @@ public:
 
 protected:
     /// ND memory view
-    using raw_mdspan_type = typename block_span_type::raw_mdspan_type;
+    using internal_mdspan_type = typename block_span_type::internal_mdspan_type;
 
 public:
     /// type of a view of this full block
@@ -70,7 +70,7 @@ public:
 
     inline ~Block()
     {
-        if (this->m_raw.data()) {
+        if (this->m_internal_mdspan.data()) {
             operator delete(this->data(), std::align_val_t(64));
         }
     }
@@ -112,7 +112,7 @@ public:
     inline constexpr element_type const& operator()(
             TaggedVector<std::size_t, OMeshes> const&... mcoords) const noexcept
     {
-        return this->m_raw(take_first<Meshes>(mcoords...)...);
+        return this->m_internal_mdspan(take_first<Meshes>(mcoords...)...);
     }
 
     template <class... OMeshes>
@@ -120,19 +120,19 @@ public:
             TaggedVector<std::size_t, OMeshes> const&... mcoords) noexcept
     {
         assert(((mcoords >= front<OMeshes>(this->m_domain)) && ...));
-        return this->m_raw(take_first<Meshes>(mcoords...)...);
+        return this->m_internal_mdspan(take_first<Meshes>(mcoords...)...);
     }
 
     inline constexpr element_type const& operator()(mcoord_type const& indices) const noexcept
     {
         assert(((get<Meshes>(indices) >= front<Meshes>(this->m_domain)) && ...));
-        return this->m_raw(indices.array());
+        return this->m_internal_mdspan(indices.array());
     }
 
     inline constexpr element_type& operator()(mcoord_type const& indices) noexcept
     {
         assert(((get<Meshes>(indices) >= front<Meshes>(this->m_domain)) && ...));
-        return this->m_raw(indices.array());
+        return this->m_internal_mdspan(indices.array());
     }
 
     inline constexpr block_view_type cview() const

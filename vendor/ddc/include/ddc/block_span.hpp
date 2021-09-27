@@ -36,7 +36,7 @@ public:
 
 protected:
     /// the raw mdspan underlying this, with the same indexing (0 might no be dereferenceable)
-    using raw_mdspan_type = std::experimental::mdspan<
+    using internal_mdspan_type = std::experimental::mdspan<
             ElementType,
             std::experimental::dextents<mesh_type::rank()>,
             std::experimental::layout_stride>;
@@ -101,7 +101,7 @@ protected:
     }
 
     /// The raw view of the data
-    raw_mdspan_type m_raw;
+    internal_mdspan_type m_internal_mdspan;
 
     /// The mesh on which this block is defined
     mdomain_type m_domain;
@@ -122,7 +122,7 @@ public:
      */
     template <class OElementType>
     inline constexpr BlockSpan(Block<mdomain_type, OElementType> const& other) noexcept
-        : m_raw(other.m_raw)
+        : m_internal_mdspan(other.m_internal_mdspan)
         , m_domain(other.domain())
     {
     }
@@ -133,7 +133,7 @@ public:
     template <class OElementType>
     inline constexpr BlockSpan(
             BlockSpan<OElementType, mdomain_type, layout_type> const& other) noexcept
-        : m_raw(other.m_raw)
+        : m_internal_mdspan(other.m_internal_mdspan)
         , m_domain(other.domain())
     {
     }
@@ -143,7 +143,7 @@ public:
      * @param allocation_view the allocation view to the data
      */
     inline constexpr BlockSpan(mdomain_type domain, allocation_mdspan_type allocation_view)
-        : m_raw()
+        : m_internal_mdspan()
         , m_domain(domain)
     {
         namespace stdex = std::experimental;
@@ -151,7 +151,7 @@ public:
         std::array<std::size_t, mesh_type::rank()> strides_s {allocation_view.mapping().stride(
                 type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)...};
         stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
-        m_raw = raw_mdspan_type(
+        m_internal_mdspan = internal_mdspan_type(
                 allocation_view.data() - mapping_s(front<Meshes>(domain)...),
                 mapping_s);
     }
@@ -159,8 +159,9 @@ public:
     template <
             class Mapping = mapping_type,
             std::enable_if_t<std::is_constructible_v<Mapping, extents_type>, int> = 0>
-    inline constexpr BlockSpan(mdomain_type domain, ElementType* ptr) : m_raw()
-                                                                      , m_domain(domain)
+    inline constexpr BlockSpan(mdomain_type domain, ElementType* ptr)
+        : m_internal_mdspan()
+        , m_domain(domain)
     {
         namespace stdex = std::experimental;
         extents_type extents_r(::extents<Meshes>(m_domain)...);
@@ -170,7 +171,8 @@ public:
         std::array<std::size_t, mesh_type::rank()> strides_s {
                 mapping_r.stride(type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)...};
         stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
-        m_raw = raw_mdspan_type(ptr - mapping_s(front<Meshes>(domain)...), mapping_s);
+        m_internal_mdspan
+                = internal_mdspan_type(ptr - mapping_s(front<Meshes>(domain)...), mapping_s);
     }
 
     /** Copy-assigns a new value to this BlockSpan, yields a new view to the same data
@@ -192,7 +194,7 @@ public:
     inline constexpr auto operator[](MCoord<QueryMeshes...> const& slice_spec) const
     {
         auto subview = std::experimental::
-                submdspan(allocation_view(), get_slicer_for<Meshes>(slice_spec)...);
+                submdspan(allocation_mdspan(), get_slicer_for<Meshes>(slice_spec)...);
         using detail::TypeSeq;
         using selected_meshes = type_seq_remove_t<TypeSeq<Meshes...>, TypeSeq<QueryMeshes...>>;
         return ::BlockSpan(select_by_type_seq<selected_meshes>(m_domain), subview);
@@ -205,7 +207,7 @@ public:
     inline constexpr auto operator[](ProductMDomain<QueryMeshes...> const& odomain) const
     {
         auto subview = std::experimental::
-                submdspan(allocation_view(), get_slicer_for<Meshes>(odomain)...);
+                submdspan(allocation_mdspan(), get_slicer_for<Meshes>(odomain)...);
         return ::BlockSpan(m_domain.restrict(odomain), subview);
     }
 
@@ -214,13 +216,13 @@ public:
             TaggedVector<MCoordElement, OMeshes> const&... mcoords) const noexcept
     {
         assert(((mcoords >= front<OMeshes>(m_domain)) && ...));
-        return m_raw(take_first<Meshes>(mcoords...)...);
+        return m_internal_mdspan(take_first<Meshes>(mcoords...)...);
     }
 
     inline constexpr reference operator()(mcoord_type const& indices) const noexcept
     {
         assert(((get<Meshes>(indices) >= front<Meshes>(m_domain)) && ...));
-        return m_raw(indices.array());
+        return m_internal_mdspan(indices.array());
     }
 
     template <class QueryMesh>
@@ -237,7 +239,7 @@ public:
 
     inline accessor_type accessor() const
     {
-        return m_raw.accessor();
+        return m_internal_mdspan.accessor();
     }
 
     static inline constexpr int rank() noexcept
@@ -258,25 +260,25 @@ public:
     inline constexpr mcoord_type extents() const noexcept
     {
         return mcoord_type(
-                (m_raw.extent(type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)
+                (m_internal_mdspan.extent(type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)
                  - front<Meshes>(m_domain))...);
     }
 
     template <class QueryMesh>
     inline constexpr size_type extent() const noexcept
     {
-        return m_raw.extent(type_seq_rank_v<QueryMesh, detail::TypeSeq<Meshes...>>)
+        return m_internal_mdspan.extent(type_seq_rank_v<QueryMesh, detail::TypeSeq<Meshes...>>)
                - front<QueryMesh>(m_domain);
     }
 
     inline constexpr size_type size() const noexcept
     {
-        return allocation_view().size();
+        return allocation_mdspan().size();
     }
 
     inline constexpr size_type unique_size() const noexcept
     {
-        return allocation_view().unique_size();
+        return allocation_mdspan().unique_size();
     }
 
     static inline constexpr bool is_always_unique() noexcept
@@ -296,28 +298,28 @@ public:
 
     inline constexpr mapping_type mapping() const noexcept
     {
-        return allocation_view().mapping();
+        return allocation_mdspan().mapping();
     }
 
     inline constexpr bool is_unique() const noexcept
     {
-        return allocation_view().is_unique();
+        return allocation_mdspan().is_unique();
     }
 
     inline constexpr bool is_contiguous() const noexcept
     {
-        return allocation_view().is_contiguous();
+        return allocation_mdspan().is_contiguous();
     }
 
     inline constexpr bool is_strided() const noexcept
     {
-        return allocation_view().is_strided();
+        return allocation_mdspan().is_strided();
     }
 
     template <class QueryMesh>
     inline constexpr auto stride() const
     {
-        return m_raw.stride(type_seq_rank_v<QueryMesh, detail::TypeSeq<Meshes...>>);
+        return m_internal_mdspan.stride(type_seq_rank_v<QueryMesh, detail::TypeSeq<Meshes...>>);
     }
 
     /** Swaps this field with another
@@ -357,26 +359,26 @@ public:
 
     inline constexpr ElementType* data() const
     {
-        return &m_raw(front<Meshes>(m_domain)...);
+        return &m_internal_mdspan(front<Meshes>(m_domain)...);
     }
 
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
      */
-    inline constexpr raw_mdspan_type raw_view() const
+    inline constexpr internal_mdspan_type internal_view() const
     {
-        return m_raw;
+        return m_internal_mdspan;
     }
 
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
      */
-    inline constexpr allocation_mdspan_type allocation_view() const
+    inline constexpr allocation_mdspan_type allocation_mdspan() const
     {
         mapping_type m;
         extents_type extents_s(::extents<Meshes>(m_domain)...);
         if constexpr (std::is_same_v<LayoutStridedPolicy, std::experimental::layout_stride>) {
-            m = mapping_type(extents_s, m_raw.mapping().strides());
+            m = mapping_type(extents_s, m_internal_mdspan.mapping().strides());
         } else {
             m = mapping_type(extents_s);
         }
