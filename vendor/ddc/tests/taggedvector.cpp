@@ -27,6 +27,15 @@ TEST(TaggedVector, ConstAccessor)
     ASSERT_EQ(get<float>(cmap), 2);
 }
 
+TEST(TaggedVector, AccessorSingleElement)
+{
+    TaggedVector<int, double> map(1);
+
+    ASSERT_EQ(map.get<double>(), 1);
+    ASSERT_EQ(get<double>(map), 1);
+    ASSERT_EQ(map.value(), 1);
+}
+
 TEST(TaggedVector, Transpose)
 {
     TaggedVector<int, int, double, float> coord {0, 1, 2};

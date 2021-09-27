@@ -37,7 +37,10 @@ public:
      * @param origin the real coordinate of mesh coordinate 0
      * @param step   the real distance between two points of mesh distance 1
      */
-    constexpr UniformMesh(rcoord_type origin, rcoord_type step) : m_origin(origin), m_step(step) {}
+    constexpr UniformMesh(rcoord_type origin, rcoord_type step) : m_origin(origin), m_step(step)
+    {
+        assert(step > 0);
+    }
 
     /** @brief Construct a `UniformMesh` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
      * 
@@ -49,7 +52,6 @@ public:
         : m_origin(a)
         , m_step((b - a) / (n - 1))
     {
-        assert(n>=2);
         assert(a < b);
         assert(n > 1);
     }

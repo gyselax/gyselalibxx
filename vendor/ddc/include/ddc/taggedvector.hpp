@@ -10,61 +10,46 @@
 template <class, class...>
 class TaggedVector;
 
-namespace detail {
-
-template <class... Tags>
-struct TaggedVectorPrinter;
-
-template <class TagsHead, class TagsNext, class... TagsTail>
-struct TaggedVectorPrinter<TagsHead, TagsNext, TagsTail...>
+template <class QueryTag, class ElementType, class HeadTag, class... TailTags>
+TaggedVector<ElementType, QueryTag> const& take_first(
+        TaggedVector<ElementType, HeadTag> const& head,
+        TaggedVector<ElementType, TailTags> const&... tags)
 {
-    template <class ElementType, class... OTags>
-    static std::ostream& print_content(
-            std::ostream& out,
-            TaggedVector<ElementType, OTags...> const& arr)
-    {
-        out << arr.template get<TagsHead>() << ", ";
-        return TaggedVectorPrinter<TagsNext, TagsTail...>::print_content(out, arr);
+    if constexpr (std::is_same_v<QueryTag, HeadTag>) {
+        return head;
+    } else {
+        return take_first<QueryTag>(tags...);
     }
-};
-
-template <class Tag>
-struct TaggedVectorPrinter<Tag>
-{
-    template <class ElementType, class... OTags>
-    static std::ostream& print_content(
-            std::ostream& out,
-            TaggedVector<ElementType, OTags...> const& arr)
-    {
-        out << arr.template get<Tag>();
-        return out;
-    }
-};
-
-template <>
-struct TaggedVectorPrinter<>
-{
-    template <class ElementType, class... OTags>
-    static std::ostream& print_content(
-            std::ostream& out,
-            TaggedVector<ElementType, OTags...> const& arr)
-    {
-        return out;
-    }
-};
-
-template <class... C>
-static inline constexpr void force_eval(C&&...)
-{
 }
 
-template <class>
-class TaggedVectorImpl;
+template <class T>
+class SingleTagBehavior
+{
+};
+
+template <class ElementType, class Tag>
+class SingleTagBehavior<TaggedVector<ElementType, Tag>>
+{
+public:
+    constexpr inline operator ElementType const &() const noexcept
+    {
+        return static_cast<TaggedVector<ElementType, Tag> const*>(this)->m_values[0];
+    }
+
+    constexpr inline operator ElementType&() noexcept
+    {
+        return static_cast<TaggedVector<ElementType, Tag>*>(this)->m_values[0];
+    }
+};
 
 template <class ElementType, class... Tags>
-class TaggedVectorImpl<TaggedVector<ElementType, Tags...>>
+class TaggedVector : public SingleTagBehavior<TaggedVector<ElementType, Tags...>>
 {
-protected:
+    friend class SingleTagBehavior<TaggedVector<ElementType, Tags...>>;
+
+    using tags_seq = detail::TypeSeq<Tags...>;
+
+private:
     std::array<ElementType, sizeof...(Tags)> m_values;
 
 public:
@@ -74,40 +59,38 @@ public:
     }
 
 public:
-    inline constexpr TaggedVectorImpl() = default;
+    inline constexpr TaggedVector() = default;
 
-    inline constexpr TaggedVectorImpl(TaggedVectorImpl const&) = default;
+    inline constexpr TaggedVector(TaggedVector const&) = default;
 
-    inline constexpr TaggedVectorImpl(TaggedVectorImpl&&) = default;
+    inline constexpr TaggedVector(TaggedVector&&) = default;
+
+    // template <class... OTags>
+    // inline constexpr TaggedVector(TaggedVector<ElementType, OTags> const&... other) noexcept
+    //     : m_values {take_first<Tags>(other).value()...}
+    // {
+    // }
 
     template <class OElementType, class... OTags>
-    inline constexpr TaggedVectorImpl(TaggedVector<OElementType, OTags...> const& other) noexcept
+    inline constexpr TaggedVector(TaggedVector<OElementType, OTags...> const& other) noexcept
         : m_values {(static_cast<ElementType>(other.template get<Tags>()))...}
-    {
-    }
-
-    template <class OElementType, class... OTags>
-    inline constexpr TaggedVectorImpl(TaggedVector<OElementType, OTags...>&& other) noexcept
-        : m_values {std::move(other.template get<Tags>())...}
     {
     }
 
     template <
             class... Params,
-            typename ::std::enable_if<((std::is_convertible_v<Params, ElementType>)&&...), int>::
-                    type
-            = 0>
-    inline constexpr TaggedVectorImpl(Params&&... params) noexcept
-        : m_values {static_cast<ElementType>(std::forward<Params>(params))...}
+            class = std::enable_if_t<((std::is_convertible_v<Params, ElementType>)&&...)>>
+    inline constexpr TaggedVector(Params const&... params) noexcept
+        : m_values {static_cast<ElementType>(params)...}
     {
     }
 
-    constexpr inline TaggedVectorImpl& operator=(TaggedVectorImpl const& other) = default;
+    constexpr inline TaggedVector& operator=(TaggedVector const& other) = default;
 
-    constexpr inline TaggedVectorImpl& operator=(TaggedVectorImpl&& other) = default;
+    constexpr inline TaggedVector& operator=(TaggedVector&& other) = default;
 
     template <class... OTags>
-    constexpr inline TaggedVectorImpl& operator=(
+    constexpr inline TaggedVector& operator=(
             TaggedVector<ElementType, OTags...> const& other) noexcept
     {
         m_values = other.m_values;
@@ -115,21 +98,10 @@ public:
     }
 
     template <class... OTags>
-    constexpr inline TaggedVectorImpl& operator=(
-            TaggedVector<ElementType, OTags...>&& other) noexcept
+    constexpr inline TaggedVector& operator=(TaggedVector<ElementType, OTags...>&& other) noexcept
     {
         m_values = std::move(other.m_values);
         return *this;
-    }
-
-    constexpr inline bool operator==(TaggedVectorImpl const& other) const noexcept
-    {
-        return m_values == other.m_values;
-    }
-
-    constexpr inline bool operator!=(TaggedVectorImpl const& other) const noexcept
-    {
-        return m_values != other.m_values;
     }
 
     /// Returns a reference to the underlying `std::array`
@@ -154,72 +126,64 @@ public:
         return m_values[pos];
     }
 
+    template <class OElementType, class... OTags>
+    constexpr inline bool operator==(TaggedVector<OElementType, OTags...> const& rhs) const noexcept
+    {
+        return ((m_values[type_seq_rank_v<Tags, tags_seq>] == rhs.template get<Tags>()) && ...);
+    }
+
+    template <class OElementType, class... OTags>
+    constexpr inline bool operator!=(TaggedVector<OElementType, OTags...> const& rhs) const noexcept
+    {
+        return !(*this == rhs);
+    }
+
     template <class QueryTag>
     inline constexpr ElementType& get() noexcept
     {
         using namespace detail;
-        static_assert(
-                in_tags_v<QueryTag, TypeSeq<Tags...>>,
-                "requested Tag absent from TaggedVectorImpl");
-        return m_values[type_seq_rank_v<QueryTag, TypeSeq<Tags...>>];
+        static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from TaggedVector");
+        return m_values[type_seq_rank_v<QueryTag, tags_seq>];
     }
 
     template <class QueryTag>
     inline constexpr ElementType const& get() const noexcept
     {
         using namespace detail;
-        static_assert(
-                in_tags_v<QueryTag, TypeSeq<Tags...>>,
-                "requested Tag absent from TaggedVectorImpl");
-        return m_values[type_seq_rank_v<QueryTag, TypeSeq<Tags...>>];
+        static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from TaggedVector");
+        return m_values[type_seq_rank_v<QueryTag, tags_seq>];
     }
-};
 
-template <class>
-class SingleTagArrayImpl;
-
-template <class ElementType, class Tag>
-class SingleTagArrayImpl<TaggedVector<ElementType, Tag>>
-    : public TaggedVectorImpl<TaggedVector<ElementType, Tag>>
-{
-public:
-    inline TaggedVector<ElementType, Tag>& operator=(ElementType const& e) noexcept
+    template <std::size_t N = sizeof...(Tags)>
+    constexpr inline std::enable_if_t<N == 1, ElementType const&> value() const noexcept
     {
-        this->m_values = e;
+        return m_values[0];
+    }
+
+    template <class OElementType, class... OTags>
+    constexpr inline TaggedVector& operator+=(TaggedVector<OElementType, OTags...> const& rhs)
+    {
+        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
+        ((m_values[type_seq_rank_v<Tags, tags_seq>] += rhs.template get<Tags>()), ...);
         return *this;
     }
 
-    inline TaggedVector<ElementType, Tag>& operator=(ElementType&& e) noexcept
+    template <class OElementType, class... OTags>
+    constexpr inline TaggedVector& operator-=(TaggedVector<OElementType, OTags...> const& rhs)
     {
-        this->m_values = std::move(e);
+        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
+        ((m_values[type_seq_rank_v<Tags, tags_seq>] -= rhs.template get<Tags>()), ...);
         return *this;
     }
 
-    constexpr inline bool operator==(ElementType const& other) const noexcept
+    template <class OElementType, class... OTags>
+    constexpr inline TaggedVector& operator*=(TaggedVector<OElementType, OTags...> const& rhs)
     {
-        return this->m_values[0] == other;
-    }
-
-    constexpr inline bool operator!=(ElementType const& other) const noexcept
-    {
-        return this->m_values[0] != other;
-    }
-
-
-    constexpr inline operator ElementType const&() const noexcept
-    {
-        return this->m_values[0];
-    }
-
-    constexpr inline operator ElementType&() noexcept
-    {
-        return this->m_values[0];
+        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
+        ((m_values[type_seq_rank_v<Tags, tags_seq>] *= rhs.template get<Tags>()), ...);
+        return *this;
     }
 };
-
-
-} // namespace detail
-
 
 template <class QueryTag, class ElementType, class... Tags>
 inline constexpr ElementType const& get(TaggedVector<ElementType, Tags...> const& tuple) noexcept
@@ -233,16 +197,34 @@ inline constexpr ElementType& get(TaggedVector<ElementType, Tags...>& tuple) noe
     return tuple.template get<QueryTag>();
 }
 
-template <class QueryTag, class ElementType, class HeadTag, class... TailTags>
-TaggedVector<ElementType, QueryTag> const& take_first(
-        TaggedVector<ElementType, HeadTag> const& head,
-        TaggedVector<ElementType, TailTags> const&... tags)
+template <class ElementType, class... Tags, class OElementType, class... OTags>
+constexpr inline auto operator+(
+        TaggedVector<ElementType, Tags...> const& lhs,
+        TaggedVector<OElementType, OTags...> const& rhs)
 {
-    if constexpr (std::is_same_v<QueryTag, HeadTag>) {
-        return head;
-    } else {
-        return take_first<QueryTag>(tags...);
-    }
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
+    using RElementType = decltype(std::declval<ElementType>() + std::declval<OElementType>());
+    return TaggedVector<RElementType, Tags...>((get<Tags>(lhs) + get<Tags>(rhs))...);
+}
+
+template <class ElementType, class... Tags, class OElementType, class... OTags>
+constexpr inline auto operator-(
+        TaggedVector<ElementType, Tags...> const& lhs,
+        TaggedVector<OElementType, OTags...> const& rhs)
+{
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
+    using RElementType = decltype(std::declval<ElementType>() - std::declval<OElementType>());
+    return TaggedVector<RElementType, Tags...>((get<Tags>(lhs) - get<Tags>(rhs))...);
+}
+
+template <class ElementType, class... Tags, class OElementType, class... OTags>
+constexpr inline auto operator*(
+        TaggedVector<ElementType, Tags...> const& lhs,
+        TaggedVector<OElementType, OTags...> const& rhs)
+{
+    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
+    using RElementType = decltype(std::declval<ElementType>() * std::declval<OElementType>());
+    return TaggedVector<RElementType, Tags...>((get<Tags>(lhs) * get<Tags>(rhs))...);
 }
 
 template <class... QueryTags, class ElementType, class... Tags>
@@ -259,262 +241,19 @@ inline constexpr TaggedVector<ElementType, QueryTags...> select(
     return TaggedVector<ElementType, QueryTags...>(std::move(arr));
 }
 
-template <class ElementType, class Tag0, class Tag1, class... Tags>
-class TaggedVector<ElementType, Tag0, Tag1, Tags...>
-    : public detail::TaggedVectorImpl<TaggedVector<ElementType, Tag0, Tag1, Tags...>>
-{
-    using Super = detail::TaggedVectorImpl<TaggedVector<ElementType, Tag0, Tag1, Tags...>>;
-
-public:
-    inline constexpr TaggedVector() = default;
-
-    inline constexpr TaggedVector(TaggedVector const&) = default;
-
-    inline constexpr TaggedVector(TaggedVector&&) = default;
-
-    template <class OElementType, class... OTags>
-    inline constexpr TaggedVector(TaggedVector<OElementType, OTags...> const& other) noexcept
-        : Super {::get<Tag0>(other), ::get<Tag1>(other), ::get<Tags>(other)...}
-    {
-    }
-
-    template <class OElementType, class... OTags>
-    inline constexpr TaggedVector(TaggedVector<OElementType, OTags...>&& other) noexcept
-        : Super {
-                std::move(::get<Tag0>(other)),
-                std::move(::get<Tag1>(other)),
-                std::move(::get<Tags>(other))...}
-    {
-    }
-
-    template <
-            class... Params,
-            typename ::std::enable_if<((std::is_convertible_v<Params, ElementType>)&&...), int>::
-                    type
-            = 0>
-    inline constexpr TaggedVector(Params&&... params) noexcept
-        : Super {static_cast<ElementType>(std::forward<Params>(params))...}
-    {
-    }
-
-    constexpr inline TaggedVector& operator=(TaggedVector const& other) = default;
-
-    constexpr inline TaggedVector& operator=(TaggedVector&& other) = default;
-
-    template <class... OTags>
-    constexpr inline TaggedVector& operator=(
-            TaggedVector<ElementType, OTags...> const& other) noexcept
-    {
-        return Super::operator=(other);
-    }
-
-    template <class... OTags>
-    constexpr inline TaggedVector& operator=(TaggedVector<ElementType, OTags...>&& other) noexcept
-    {
-        return Super::operator=(std::move(other));
-    }
-};
-
-template <class ElementType, class Tag>
-class TaggedVector<ElementType, Tag>
-    : public detail::SingleTagArrayImpl<TaggedVector<ElementType, Tag>>
-{
-    using Super = detail::SingleTagArrayImpl<TaggedVector<ElementType, Tag>>;
-
-public:
-    inline constexpr TaggedVector() = default;
-
-    inline constexpr TaggedVector(TaggedVector const&) = default;
-
-    inline constexpr TaggedVector(TaggedVector&&) = default;
-
-    template <
-            class OElementType,
-            class... OTags,
-            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
-    inline constexpr TaggedVector(TaggedVector<OElementType, OTags...> const& other) noexcept
-        : Super {(::get<Tag>(other))}
-    {
-    }
-
-    template <
-            class OElementType,
-            class... OTags,
-            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
-    inline constexpr TaggedVector(TaggedVector<OElementType, OTags...>&& other) noexcept
-        : Super {std::move(::get<Tag>(other))}
-    {
-    }
-
-    template <
-            class OElementType,
-            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
-    inline constexpr TaggedVector(OElementType&& param) noexcept
-        : Super {static_cast<ElementType>(std::forward<OElementType>(param))}
-    {
-    }
-
-    constexpr inline TaggedVector& operator=(TaggedVector const& other) = default;
-
-    constexpr inline TaggedVector& operator=(TaggedVector&& other) = default;
-
-    template <class... OTags>
-    constexpr inline TaggedVector& operator=(
-            TaggedVector<ElementType, OTags...> const& other) noexcept
-    {
-        return Super::operator=(other);
-    }
-
-    template <class... OTags>
-    constexpr inline TaggedVector& operator=(TaggedVector<ElementType, OTags...>&& other) noexcept
-    {
-        return Super::operator=(std::move(other));
-    }
-};
-
 template <class ElementType>
-class TaggedVector<ElementType> : public detail::TaggedVectorImpl<TaggedVector<ElementType>>
+std::ostream& operator<<(std::ostream& out, TaggedVector<ElementType> const& arr)
 {
-    using Super = detail::SingleTagArrayImpl<TaggedVector<ElementType>>;
-
-public:
-    inline constexpr TaggedVector() = default;
-
-    inline constexpr TaggedVector(TaggedVector const&) = default;
-
-    inline constexpr TaggedVector(TaggedVector&&) = default;
-
-    template <
-            class OElementType,
-            class... OTags,
-            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
-    inline constexpr TaggedVector(TaggedVector<OElementType, OTags...> const&) noexcept
-    {
-    }
-
-    template <
-            class OElementType,
-            class... OTags,
-            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
-    inline constexpr TaggedVector(TaggedVector<OElementType, OTags...>&&) noexcept
-    {
-    }
-
-    template <
-            class OElementType,
-            typename ::std::enable_if_t<std::is_convertible_v<OElementType, ElementType>, int> = 0>
-    inline constexpr TaggedVector(OElementType&& param) noexcept
-    {
-    }
-
-    constexpr inline TaggedVector& operator=(TaggedVector const& other) = default;
-
-    constexpr inline TaggedVector& operator=(TaggedVector&& other) = default;
-
-    template <class... OTags>
-    constexpr inline TaggedVector& operator=(
-            TaggedVector<ElementType, OTags...> const& other) noexcept
-    {
-        return Super::operator=(other);
-    }
-
-    template <class... OTags>
-    constexpr inline TaggedVector& operator=(TaggedVector<ElementType, OTags...>&& other) noexcept
-    {
-        return Super::operator=(std::move(other));
-    }
-};
-
-template <class ElementType, class OElementType, class... Tags, class... OTags>
-constexpr inline TaggedVector<ElementType, Tags...>& operator+=(
-        TaggedVector<ElementType, Tags...>& self,
-        TaggedVector<OElementType, OTags...> const& other)
-{
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    detail::force_eval(self.template get<Tags>() += other.template get<Tags>()...);
-    return self;
+    out << "()";
+    return out;
 }
 
-template <class ElementType, class OElementType, class... Tags, class... OTags>
-constexpr inline auto operator+(
-        TaggedVector<ElementType, Tags...> const& one,
-        TaggedVector<OElementType, OTags...> const& other)
-{
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    using RElementType
-            = decltype(std::declval<ElementType const>() + std::declval<OElementType const>());
-    return TaggedVector<RElementType, Tags...>(get<Tags>(one) + get<Tags>(other)...);
-}
-
-template <class ElementType, class OElementType, class... Tags, class... OTags>
-constexpr inline TaggedVector<ElementType, Tags...>& operator-=(
-        TaggedVector<ElementType, Tags...>& self,
-        TaggedVector<OElementType, OTags...> const& other)
-{
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    detail::force_eval(self.template get<Tags>() -= other.template get<Tags>()...);
-    return self;
-}
-
-template <class ElementType, class OElementType, class... Tags, class... OTags>
-constexpr inline auto operator-(
-        TaggedVector<ElementType, Tags...> const& one,
-        TaggedVector<OElementType, OTags...> const& other)
-{
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    using RElementType
-            = decltype(std::declval<ElementType const>() - std::declval<OElementType const>());
-    return TaggedVector<RElementType, Tags...>(get<Tags>(one) - get<Tags>(other)...);
-}
-
-template <class ElementType, class OElementType, class... Tags, class... OTags>
-constexpr inline TaggedVector<ElementType, Tags...>& operator*=(
-        TaggedVector<ElementType, Tags...>& self,
-        TaggedVector<OElementType, OTags...> const& other)
-{
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    detail::force_eval(self.template get<Tags>() *= other.template get<Tags>()...);
-    return self;
-}
-
-template <class ElementType, class OElementType, class... Tags, class... OTags>
-constexpr inline auto operator*(
-        TaggedVector<ElementType, Tags...> const& one,
-        TaggedVector<OElementType, OTags...> const& other)
-{
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    using RElementType
-            = decltype(std::declval<ElementType const>() * std::declval<OElementType const>());
-    return TaggedVector<RElementType, Tags...>(get<Tags>(one) * get<Tags>(other)...);
-}
-
-template <class ElementType, class OElementType, class... Tags, class... OTags>
-constexpr inline TaggedVector<ElementType, Tags...>& operator/=(
-        TaggedVector<ElementType, Tags...>& self,
-        TaggedVector<OElementType, OTags...> const& other)
-{
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    detail::force_eval(self.template get<Tags>() /= other.template get<Tags>()...);
-    return self;
-}
-
-template <class ElementType, class OElementType, class... Tags, class... OTags>
-constexpr inline auto operator/(
-        TaggedVector<ElementType, Tags...> const& one,
-        TaggedVector<OElementType, OTags...> const& other)
-{
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    using RElementType
-            = decltype(std::declval<ElementType const>() / std::declval<OElementType const>());
-    return TaggedVector<RElementType, Tags...>(get<Tags>(one) / get<Tags>(other)...);
-}
-
-
-template <class ElementType, class... Tags>
-std::ostream& operator<<(std::ostream& out, TaggedVector<ElementType, Tags...> const& arr)
+template <class ElementType, class Head, class... Tags>
+std::ostream& operator<<(std::ostream& out, TaggedVector<ElementType, Head, Tags...> const& arr)
 {
     out << "(";
-    detail::TaggedVectorPrinter<Tags...>::print_content(out, arr);
+    out << get<Head>(arr);
+    ((out << ", " << get<Tags>(arr)), ...);
     out << ")";
     return out;
 }
