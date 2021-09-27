@@ -23,12 +23,12 @@ TaggedVector<ElementType, QueryTag> const& take_first(
 }
 
 template <class T>
-class SingleTagBehavior
+class ConversionOperators
 {
 };
 
 template <class ElementType, class Tag>
-class SingleTagBehavior<TaggedVector<ElementType, Tag>>
+class ConversionOperators<TaggedVector<ElementType, Tag>>
 {
 public:
     constexpr inline operator ElementType const &() const noexcept
@@ -43,9 +43,9 @@ public:
 };
 
 template <class ElementType, class... Tags>
-class TaggedVector : public SingleTagBehavior<TaggedVector<ElementType, Tags...>>
+class TaggedVector : public ConversionOperators<TaggedVector<ElementType, Tags...>>
 {
-    friend class SingleTagBehavior<TaggedVector<ElementType, Tags...>>;
+    friend class ConversionOperators<TaggedVector<ElementType, Tags...>>;
 
     using tags_seq = detail::TypeSeq<Tags...>;
 
