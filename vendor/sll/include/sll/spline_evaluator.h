@@ -66,16 +66,18 @@ public:
     }
 
     template <class Domain>
-    void operator()(BlockSpan<double, Domain>& block_mesh) const
+    void operator()(
+            BlockSpan<double, Domain> const& block,
+            BlockSpan<double const, Domain> const& block_feet) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
                 vals(values.data(), values.size());
 
-        auto const& domain = block_mesh.domain();
+        auto const& domain = block_feet.domain();
 
-        for (std::size_t i = 0; i < domain.size(); ++i) {
-            block_mesh(i) = eval(domain.to_real(i), vals);
+        for (auto i : domain) {
+            block(i) = eval(block_feet(i), vals);
         }
     }
 

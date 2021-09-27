@@ -73,7 +73,7 @@ DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double mass_ratio, dou
         m_spline_x_builder(spline, contiguous_slice);
 
         // evaluate the function at the feet using the spline
-        spline_evaluator(contiguous_slice);
+        spline_evaluator(contiguous_slice.view(), feet_coords.cview());
 
         // copy back
         deepcopy(fdistribu[vii], contiguous_slice);
