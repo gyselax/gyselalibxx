@@ -1,6 +1,10 @@
 #include "nulladvectionvx.h"
 
-DSpanXVx NullAdvectionVx::operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const
+DSpanXVx NullAdvectionVx::operator()(
+        DSpanXVx fdistribu,
+        DViewX efield,
+        double sqrt_me_on_mspecies,
+        double dt) const
 {
     return fdistribu;
 }

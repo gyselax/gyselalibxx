@@ -2,6 +2,7 @@
 
 #include <geometry.h>
 
+#include "fdistribu.h"
 #include "itimesolver.h"
 
 class IEfieldSolver;
@@ -18,5 +19,5 @@ class PredCorr : public ITimeSolver
 public:
     PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, double dt);
 
-    DSpanXVx operator()(DSpanXVx data, double mass_ratio, int steps) const override;
+    void operator()(DistributionFunction& fdistribu, double mass_ratio, int steps) const override;
 };

@@ -1,6 +1,7 @@
 add_library(vlasov STATIC
 	nulladvectionvx.cpp
 	splineadvectionx.cpp
+	splineadvectionvx.cpp
 	splitvlasovsolver.cpp
 )
 

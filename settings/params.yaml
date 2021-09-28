@@ -1,13 +1,22 @@
-steps: 10
-time_step: 0.0001
-mass_ratio: 1.
+Mesh:
+  x_min: 0.0
+  x_max: 12.56637061435917
+  x_size: 129
+  vx_min: -6.0
+  vx_max: +6.0
+  vx_size: 128
 
-MeshX:
-  min: 0.0
-  max: 1.0
-  size: 100
+Equilibrium:
+  ion_charge: 1
+  ion_mass: 2.
+  ion_density_eq: 1.
+  ion_temperature_eq: 1.
+  ion_mean_velocity_eq: 0.
+  electron_charge: -1
+  electron_mass: 0.0005
+  mode: 1
+  perturb_amplitude: 0.01
 
-MeshVx:
-  min: -1.0
-  max: +1.0
-  size: 50
+Algorithm:
+  deltat: 0.125
+  nbiter: 10

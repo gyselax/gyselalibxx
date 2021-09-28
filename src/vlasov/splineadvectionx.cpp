@@ -42,7 +42,8 @@ SplineAdvectionX::SplineAdvectionX(
 {
 }
 
-DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const
+DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double sqrt_me_on_mspecies, double dt)
+        const
 {
     assert(get_domain<MeshX>(fdistribu) == m_spline_x_builder.interpolation_domain());
 
@@ -59,7 +60,7 @@ DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double mass_ratio, dou
 
     for (MCoordVx vii : v_dom) {
         // compute the displacement
-        const double dx = mass_ratio * dt * v_dom.to_real(vii);
+        const double dx = sqrt_me_on_mspecies * dt * v_dom.to_real(vii);
 
         // compute the coordinates of the feet
         for (MCoordX xii : x_dom) {

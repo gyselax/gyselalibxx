@@ -15,6 +15,7 @@ target_link_libraries(time
 	PUBLIC
 		DDC::DDC
 		DDC::PDI
+		vcx::fdistribu
 		vcx::efield
 		vcx::vlasov
 )

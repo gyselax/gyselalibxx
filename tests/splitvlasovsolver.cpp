@@ -13,20 +13,29 @@
 class MockAdvectionX : public IAdvectionX
 {
 public:
-    MOCK_METHOD(DSpanXVx, CallOp, (DSpanXVx fdistribu, double mass_ratio, double dt), (const));
-    DSpanXVx operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const override
+    MOCK_METHOD(
+            DSpanXVx,
+            CallOp,
+            (DSpanXVx fdistribu, double sqrt_me_on_mspecies, double dt),
+            (const));
+    DSpanXVx operator()(DSpanXVx fdistribu, double sqrt_me_on_mspecies, double dt) const override
     {
-        return this->CallOp(fdistribu, mass_ratio, dt);
+        return this->CallOp(fdistribu, sqrt_me_on_mspecies, dt);
     }
 };
 
 class MockAdvectionVx : public IAdvectionVx
 {
 public:
-    MOCK_METHOD(DSpanXVx, CallOp, (DSpanXVx fdistribu, double mass_ratio, double dt), (const));
-    DSpanXVx operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const override
+    MOCK_METHOD(
+            DSpanXVx,
+            CallOp,
+            (DSpanXVx fdistribu, DViewX efield, double sqrt_me_on_mspecies, double dt),
+            (const));
+    DSpanXVx operator()(DSpanXVx fdistribu, DViewX efield, double sqrt_me_on_mspecies, double dt)
+            const override
     {
-        return this->CallOp(fdistribu, mass_ratio, dt);
+        return this->CallOp(fdistribu, efield, sqrt_me_on_mspecies, dt);
     }
 };
 
@@ -40,7 +49,8 @@ TEST(SplitVlasovSolver, ordering)
     MDomainXVx const dom(mesh_x_vx, MCoordXVx(0, 0), MCoordXVx(0, 0));
     DBlockXVx const fdistribu(dom);
     DSpanXVx const fdistribu_s(fdistribu);
-    double const mass_ratio = 1.;
+    DBlockX const efield(get<MeshX>(dom));
+    double const sqrt_me_on_mspecies = 1.;
     double const dt = 0.;
 
     MockAdvectionX const advec_x;
@@ -55,5 +65,5 @@ TEST(SplitVlasovSolver, ordering)
         EXPECT_CALL(advec_x, CallOp).WillOnce(Return(fdistribu_s));
     }
 
-    solver(fdistribu_s, mass_ratio, dt);
+    solver(fdistribu_s, efield, sqrt_me_on_mspecies, dt);
 }

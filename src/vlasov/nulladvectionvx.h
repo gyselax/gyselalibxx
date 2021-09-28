@@ -7,5 +7,6 @@
 class NullAdvectionVx : public IAdvectionVx
 {
 public:
-    DSpanXVx operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const override;
+    DSpanXVx operator()(DSpanXVx fdistribu, DViewX efield, double sqrt_me_on_mspecies, double dt)
+            const override;
 };

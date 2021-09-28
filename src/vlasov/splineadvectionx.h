@@ -26,5 +26,5 @@ public:
             const BoundaryValue& bc_left,
             const BoundaryValue& bc_right);
 
-    DSpanXVx operator()(DSpanXVx fdistribu, double mass_ratio, double dt) const override;
+    DSpanXVx operator()(DSpanXVx fdistribu, double sqrt_me_on_mspecies, double dt) const override;
 };

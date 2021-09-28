@@ -51,9 +51,15 @@ using RCoordFx = RCoord<Dim::Fx>;
 
 using KnotsX = UniformMesh<Dim::X>;
 
-using BSplinesX = BSplines<KnotsX, 4>;
+using BSplinesX = BSplines<KnotsX, 3>;
 
 using SplineXBuilder = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+
+using KnotsVx = UniformMesh<Dim::Vx>;
+
+using BSplinesVx = BSplines<KnotsVx, 3>;
+
+using SplineVxBuilder = SplineBuilder<BSplinesVx, BoundCond::GREVILLE, BoundCond::GREVILLE>;
 
 using MeshX = typename SplineXBuilder::interpolation_mesh_type;
 

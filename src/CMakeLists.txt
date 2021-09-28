@@ -5,6 +5,7 @@ add_subdirectory(efield)
 add_subdirectory(fft)
 add_subdirectory(geometry)
 add_subdirectory(time)
+add_subdirectory(fdistribu)
 add_subdirectory(vlasov)
 
 add_executable(voicexx
@@ -18,6 +19,7 @@ target_link_libraries(voicexx
 		vcx::fft
 		vcx::efield
 		vcx::time
+		vcx::fdistribu
 		vcx::vlasov
 		FFTW::Double
 		PDI::pdi
