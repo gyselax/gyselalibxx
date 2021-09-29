@@ -25,7 +25,7 @@ DistributionFunction::DistributionFunction(
     , density_eq(species_n_eq)
     , temperature_eq(species_T_eq)
     , mean_velocity_eq(species_u_eq)
-    , Maxw_values(domXVx.get<MeshVx>())
+    , Maxw_values(ProductMDomain(domXVx.get<MeshVx>()))
     , values(domXVx)
 {
 }

@@ -43,7 +43,7 @@ public:
 
     ProductMDomain() = default;
 
-    constexpr ProductMDomain(domain_t<Meshes> const&... domains) : m_domains(domains...) {}
+    explicit constexpr ProductMDomain(domain_t<Meshes> const&... domains) : m_domains(domains...) {}
 
     /** Construct a ProductMDomain starting from (0, ..., 0) with size points.
      * @param mesh

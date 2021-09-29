@@ -49,7 +49,7 @@ TEST(SplitVlasovSolver, ordering)
     MDomainXVx const dom(mesh_x_vx, MCoordXVx(0, 0), MCoordXVx(0, 0));
     DBlockXVx const fdistribu(dom);
     DSpanXVx const fdistribu_s(fdistribu);
-    DBlockX const efield(get<MeshX>(dom));
+    DBlockX const efield(ProductMDomain(get<MeshX>(dom)));
     double const sqrt_me_on_mspecies = 1.;
     double const dt = 0.;
 

@@ -120,7 +120,7 @@ int main(int argc, char** argv)
     PredCorr const predcorr(vlasov, efield, deltat);
 
     // Creating of mesh for output saving
-    MDomainX gridx = dom2d.get<MeshX>();
+    MDomainX gridx = MDomainX(dom2d.get<MeshX>());
     BlockX<RCoordX> meshX_coord(gridx);
     for (MCoordX ix : gridx) {
         meshX_coord(ix) = gridx.to_real(ix);
@@ -137,7 +137,7 @@ int main(int argc, char** argv)
     cout << endl;
     */
 
-    MDomainVx gridvx = dom2d.get<MeshVx>();
+    MDomainVx gridvx = MDomainVx(dom2d.get<MeshVx>());
     BlockVx<RCoordVx> meshVx_coord(gridvx);
     for (MCoordVx ivx : gridvx) {
         meshVx_coord(ivx) = gridvx.to_real(ivx);
