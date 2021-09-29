@@ -43,7 +43,18 @@ public:
 
     ProductMDomain() = default;
 
-    explicit constexpr ProductMDomain(domain_t<Meshes> const&... domains) : m_domains(domains...) {}
+    // Use SFINAE to disambiguate with the copy constructor.
+    // Note that SFINAE may be redundant because a template constructor should not be selected as a copy constructor.
+    template <std::size_t N = sizeof...(Meshes), class = std::enable_if_t<(N != 1)>>
+    explicit constexpr ProductMDomain(ProductMDomain<Meshes> const&... domains)
+        : m_domains(domains.template get<Meshes>()...)
+    {
+    }
+
+    explicit constexpr ProductMDomain(domain_t<Meshes> const&... domains)
+        : m_domains(domains...)
+    {
+    }
 
     /** Construct a ProductMDomain starting from (0, ..., 0) with size points.
      * @param mesh
