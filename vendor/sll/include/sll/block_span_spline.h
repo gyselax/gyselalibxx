@@ -183,7 +183,7 @@ public:
     /** Provide access to the bsplines on which this block is defined
      * @return the bsplines on which this block is defined
      */
-    inline constexpr bsplines_type bsplines() const noexcept
+    inline constexpr bsplines_type const& bsplines() const noexcept
     {
         return m_bsplines;
     }

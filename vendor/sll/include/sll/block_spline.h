@@ -92,11 +92,6 @@ public:
         *this = std::move(tmp);
     }
 
-    bsplines_type const& bsplines() const noexcept
-    {
-        return this->m_bsplines;
-    }
-
     inline constexpr ElementType const& operator()(const mcoord_type& indices) const noexcept
     {
         return this->m_raw(indices);

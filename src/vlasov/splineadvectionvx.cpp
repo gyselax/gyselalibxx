@@ -22,12 +22,8 @@ using namespace std;
 using namespace std::experimental;
 
 SplineAdvectionVx::SplineAdvectionVx(const BSplinesVx& bspl, const SplineVxBuilder& spl_interp)
-    : m_vx_spline_basis(bspl)
-    , m_spline_vx_builder(spl_interp)
-    , m_bc_left(NullBoundaryValue::value)
-    , m_bc_right(NullBoundaryValue::value)
+    : SplineAdvectionVx(bspl, spl_interp, NullBoundaryValue::value, NullBoundaryValue::value)
 {
-    assert(bspl.is_periodic());
 }
 
 SplineAdvectionVx::SplineAdvectionVx(
@@ -37,8 +33,7 @@ SplineAdvectionVx::SplineAdvectionVx(
         const BoundaryValue& bc_right)
     : m_vx_spline_basis(bspl)
     , m_spline_vx_builder(spl_interp)
-    , m_bc_left(bc_left)
-    , m_bc_right(bc_right)
+    , m_spline_vx_evaluator(bspl, bc_left, bc_right)
 {
 }
 
@@ -60,8 +55,7 @@ DSpanXVx SplineAdvectionVx::operator()(
     Block<double, SplineVxBuilder::interpolation_domain_type> interpolated_fdistribu(
             m_spline_vx_builder.interpolation_domain());
 
-    Block<double, BSplinesVx> spline(m_vx_spline_basis);
-    SplineEvaluator spline_evaluator(spline, m_bc_left, m_bc_right);
+    Block<double, BSplinesVx> spline_coef(m_vx_spline_basis);
 
     for (MCoordX xii : x_dom) {
         // compute the displacement
@@ -75,10 +69,10 @@ DSpanXVx SplineAdvectionVx::operator()(
         // some_interpolation(interpolated_fdistribu, fdistribu[xii]);
 
         // build a spline representation of the data
-        m_spline_vx_builder(spline, interpolated_fdistribu);
+        m_spline_vx_builder(spline_coef, interpolated_fdistribu);
 
         // evaluate the function at the feet using the spline
-        spline_evaluator(fdistribu[xii], feet_coords.cview());
+        m_spline_vx_evaluator(fdistribu[xii], feet_coords.cview(), spline_coef.cview());
     }
 
     return fdistribu;

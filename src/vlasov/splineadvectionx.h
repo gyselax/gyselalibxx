@@ -1,5 +1,7 @@
 #pragma once
 
+#include <sll/spline_evaluator.h>
+
 #include <geometry.h>
 
 #include "iadvectionx.h"
@@ -13,9 +15,7 @@ private:
 
     const SplineXBuilder& m_spline_x_builder;
 
-    const BoundaryValue& m_bc_left;
-
-    const BoundaryValue& m_bc_right;
+    SplineEvaluator<BSplinesX> m_spline_x_evaluator;
 
 public:
     SplineAdvectionX(const BSplinesX& bspl, const SplineXBuilder& spl_interp);

@@ -51,12 +51,12 @@ static void compute_efield(DSpanX const& ex, DViewX const& phi_x)
     auto&& dom_x = phi_x.domain();
     BSplinesX bsplines(dom_x.rmin(), dom_x.rmax(), dom_x.size());
     SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> builder(bsplines);
-    Block<double, BSplinesX> coef(bsplines);
-    builder(coef, phi_x, nullptr, nullptr);
+    Block<double, BSplinesX> spline_coef(bsplines);
+    builder(spline_coef, phi_x, nullptr, nullptr);
 
-    SplineEvaluator evaluator(coef, NullBoundaryValue::value, NullBoundaryValue::value);
+    SplineEvaluator evaluator(bsplines, NullBoundaryValue::value, NullBoundaryValue::value);
     for (MCoordX ix : dom_x) {
-        ex(ix) = -evaluator.deriv(dom_x.to_real(ix));
+        ex(ix) = -evaluator.deriv(dom_x.to_real(ix), spline_coef.cview());
     }
 }
 

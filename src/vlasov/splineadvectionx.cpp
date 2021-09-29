@@ -22,12 +22,8 @@ using namespace std;
 using namespace std::experimental;
 
 SplineAdvectionX::SplineAdvectionX(const BSplinesX& bspl, const SplineXBuilder& spl_interp)
-    : m_x_spline_basis(bspl)
-    , m_spline_x_builder(spl_interp)
-    , m_bc_left(NullBoundaryValue::value)
-    , m_bc_right(NullBoundaryValue::value)
+    : SplineAdvectionX(bspl, spl_interp, NullBoundaryValue::value, NullBoundaryValue::value)
 {
-    assert(bspl.is_periodic());
 }
 
 SplineAdvectionX::SplineAdvectionX(
@@ -37,9 +33,9 @@ SplineAdvectionX::SplineAdvectionX(
         const BoundaryValue& bc_right)
     : m_x_spline_basis(bspl)
     , m_spline_x_builder(spl_interp)
-    , m_bc_left(bc_left)
-    , m_bc_right(bc_right)
+    , m_spline_x_evaluator(bspl, bc_left, bc_right)
 {
+    assert(bspl.is_periodic());
 }
 
 DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double sqrt_me_on_mspecies, double dt)
@@ -55,8 +51,7 @@ DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double sqrt_me_on_mspe
     //BlockX<RCoordX> feet_coords(x_dom);
     DBlockX contiguous_slice(x_dom);
 
-    Block<double, BSplinesX> spline(m_x_spline_basis);
-    SplineEvaluator spline_evaluator(spline, m_bc_left, m_bc_right);
+    Block<double, BSplinesX> spline_coef(m_x_spline_basis);
 
     for (MCoordVx vii : v_dom) {
         // compute the displacement
@@ -71,10 +66,10 @@ DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double sqrt_me_on_mspe
         deepcopy(contiguous_slice, fdistribu[vii]);
 
         // build a spline representation of the data
-        m_spline_x_builder(spline, contiguous_slice);
+        m_spline_x_builder(spline_coef, contiguous_slice);
 
         // evaluate the function at the feet using the spline
-        spline_evaluator(contiguous_slice.view(), feet_coords.cview());
+        m_spline_x_evaluator(contiguous_slice.view(), feet_coords.cview(), spline_coef.cview());
 
         // copy back
         deepcopy(fdistribu[vii], contiguous_slice);

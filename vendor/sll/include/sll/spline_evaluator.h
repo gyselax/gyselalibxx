@@ -8,7 +8,7 @@
 #include "sll/boundary_value.h"
 #include "sll/bsplines.h"
 
-template <class BlockSplineType>
+template <class BSplinesType>
 class SplineEvaluator
 {
 private:
@@ -22,12 +22,10 @@ private:
     };
 
 public:
-    using spline_type = BlockSplineType;
-
-    using bsplines_type = typename spline_type::bsplines_type;
+    using bsplines_type = BSplinesType;
 
 private:
-    spline_type const& m_spline;
+    bsplines_type const& m_bsplines;
 
     BoundaryValue const& m_left_bc;
 
@@ -37,10 +35,10 @@ public:
     SplineEvaluator() = delete;
 
     explicit SplineEvaluator(
-            BlockSplineType const& spline,
+            BSplinesType const& bsplines,
             BoundaryValue const& left_bc,
             BoundaryValue const& right_bc)
-        : m_spline(spline)
+        : m_bsplines(bsplines)
         , m_left_bc(left_bc)
         , m_right_bc(right_bc)
     {
@@ -56,77 +54,83 @@ public:
 
     SplineEvaluator& operator=(SplineEvaluator&& x) = default;
 
-    double operator()(double x) const
+    double operator()(double coord_eval, BlockSpan<double const, BSplinesType> const& spline_coef)
+            const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
                 vals(values.data(), values.size());
 
-        return eval(x, vals);
+        return eval(coord_eval, spline_coef, vals);
     }
 
     template <class Domain>
     void operator()(
-            BlockSpan<double, Domain> const& block,
-            BlockSpan<double const, Domain> const& block_feet) const
+            BlockSpan<double, Domain> const& spline_eval,
+            BlockSpan<double const, Domain> const& coords_eval,
+            BlockSpan<double const, BSplinesType> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
                 vals(values.data(), values.size());
 
-        auto const& domain = block_feet.domain();
-
-        for (auto i : domain) {
-            block(i) = eval(block_feet(i), vals);
+        for (auto i : coords_eval.domain()) {
+            spline_eval(i) = eval(coords_eval(i), spline_coef, vals);
         }
     }
 
-    double deriv(double x) const
+    double deriv(double coord_eval, BlockSpan<double const, BSplinesType> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
                 vals(values.data(), values.size());
 
-        return eval_no_bc(x, vals, eval_deriv_type());
+        return eval_no_bc(coord_eval, spline_coef, vals, eval_deriv_type());
     }
 
     template <class Domain>
-    void deriv(BlockSpan<double, Domain>& block_mesh) const
+    void deriv(
+            BlockSpan<double, Domain> const& spline_eval,
+            BlockSpan<double const, Domain> const& coords_eval,
+            BlockSpan<double const, BSplinesType> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
                 vals(values.data(), values.size());
 
-        auto const& domain = block_mesh.domain();
+        auto const& domain = spline_eval.domain();
 
-        for (std::size_t i = 0; i < domain.size(); ++i) {
-            block_mesh(i) = eval_no_bc(domain.to_real(i), vals, eval_deriv_type());
+        for (auto i : coords_eval.domain()) {
+            spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, vals, eval_deriv_type());
         }
     }
 
 private:
-    double eval(double x, std::experimental::mdspan<double, std::experimental::dextents<1>>& vals)
-            const
+    double eval(
+            double coord_eval,
+            BlockSpan<double const, BSplinesType> const& spline_coef,
+            std::experimental::mdspan<double, std::experimental::dextents<1>>& vals) const
     {
         if constexpr (bsplines_type::is_periodic()) {
-            if (x < m_spline.bsplines().rmin() || x > m_spline.bsplines().rmax()) {
-                x -= std::floor((x - m_spline.bsplines().rmin()) / m_spline.bsplines().length())
-                     * m_spline.bsplines().length();
+            if (coord_eval < m_bsplines.rmin() || coord_eval > m_bsplines.rmax()) {
+                coord_eval -= std::floor((coord_eval - m_bsplines.rmin()) / m_bsplines.length())
+                              * m_bsplines.length();
             }
         } else {
-            if (x < m_spline.bsplines().rmin()) {
-                return m_left_bc(x);
+            if (coord_eval < m_bsplines.rmin()) {
+                return m_left_bc(coord_eval);
             }
-            if (x > m_spline.bsplines().rmax()) {
-                return m_right_bc(x);
+            if (coord_eval > m_bsplines.rmax()) {
+                return m_right_bc(coord_eval);
             }
         }
-        return eval_no_bc(x, vals, eval_type());
+        return eval_no_bc(coord_eval, spline_coef, vals, eval_type());
     }
 
     template <class EvalType>
     double eval_no_bc(
-            double x,
+            double coord_eval,
+            BlockSpan<double const, BSplinesType> const& spline_coef,
             std::experimental::mdspan<double, std::experimental::dextents<1>>& vals,
             EvalType) const
     {
@@ -135,14 +139,14 @@ private:
         int jmin;
 
         if constexpr (std::is_same_v<EvalType, eval_type>) {
-            m_spline.bsplines().eval_basis(x, vals, jmin);
+            m_bsplines.eval_basis(coord_eval, vals, jmin);
         } else if constexpr (std::is_same_v<EvalType, eval_deriv_type>) {
-            m_spline.bsplines().eval_deriv(x, vals, jmin);
+            m_bsplines.eval_deriv(coord_eval, vals, jmin);
         }
 
         double y = 0.0;
-        for (int i(0); i < m_spline.bsplines().degree() + 1; ++i) {
-            y += m_spline(jmin + i) * vals(i);
+        for (int i(0); i < m_bsplines.degree() + 1; ++i) {
+            y += spline_coef(jmin + i) * vals(i);
         }
         return y;
     }

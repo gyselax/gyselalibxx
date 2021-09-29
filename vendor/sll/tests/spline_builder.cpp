@@ -213,18 +213,18 @@ TEST(SplineBuilder, BuildSpline)
     spline_builder(coef, yvals, deriv_l, deriv_r);
 
     // 6. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
-    SplineEvaluator spline(coef, NullBoundaryValue::value, NullBoundaryValue::value);
+    SplineEvaluator spline_evaluator(bsplines, NullBoundaryValue::value, NullBoundaryValue::value);
 
-    BlockUniformX block_feet(interpolation_domain);
+    BlockUniformX coords_eval(interpolation_domain);
     for (auto i : interpolation_domain) {
-        block_feet(i) = interpolation_domain.to_real(i);
+        coords_eval(i) = interpolation_domain.to_real(i);
     }
 
     BlockUniformX spline_eval(interpolation_domain);
-    spline(spline_eval.view(), block_feet.cview());
+    spline_evaluator(spline_eval.view(), coords_eval.cview(), coef.cview());
 
     BlockUniformX spline_eval_deriv(interpolation_domain);
-    spline.deriv(spline_eval_deriv);
+    spline_evaluator.deriv(spline_eval_deriv.view(), coords_eval.cview(), coef.cview());
 
     // 7. Checking errors
     double max_norm_error = 0.;
