@@ -50,7 +50,6 @@ DSpanXVx SplineAdvectionVx::operator()(
 
     // pre-allocate some memory to prevent allocation later in loop
     DBlockVx feet_coords(vx_dom);
-    //BlockVx<RCoordVx> feet_coords(x_dom);
 
     Block<double, SplineVxBuilder::interpolation_domain_type> interpolated_fdistribu(
             m_spline_vx_builder.interpolation_domain());
@@ -63,7 +62,7 @@ DSpanXVx SplineAdvectionVx::operator()(
 
         // compute the coordinates of the feet
         for (MCoordVx iv : vx_dom) {
-            feet_coords(iv) = RCoordVx(vx_dom.to_real(iv) - dvx);
+            feet_coords(iv) = vx_dom.to_real(iv) - dvx;
         }
 
         // some_interpolation(interpolated_fdistribu, fdistribu[ix]);

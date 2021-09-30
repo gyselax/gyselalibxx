@@ -48,7 +48,6 @@ DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double sqrt_me_on_mspe
 
     // pre-allocate some memory to prevent allocation later in loop
     DBlockX feet_coords(x_dom);
-    //BlockX<RCoordX> feet_coords(x_dom);
     DBlockX contiguous_slice(x_dom);
 
     Block<double, BSplinesX> spline_coef(m_x_spline_basis);
