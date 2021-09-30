@@ -216,7 +216,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
         for (int i(0); i < s_offset; ++i) {
             spline(i) = spline(m_bsplines.nbasis() + i);
         }
-        for (int i(s_offset); i < m_bsplines.degree(); ++i) {
+        for (int i(s_offset); i < bsplines_type::degree(); ++i) {
             spline(m_bsplines.nbasis() + i) = spline(i);
         }
     }
@@ -242,12 +242,12 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
     } else {
         std::vector<double> interp_pts(n_interp_pts);
 
-        int n_iknots = n_interp_pts + m_bsplines.degree() - 1;
+        int n_iknots = n_interp_pts + bsplines_type::degree() - 1;
         std::vector<int> iknots(n_iknots);
         int i(0);
 
         // Additional knots near x=xmin
-        int n_to_fill_min(m_bsplines.degree() - s_nbc_xmin - 1);
+        int n_to_fill_min(bsplines_type::degree() - s_nbc_xmin - 1);
         for (; i < n_to_fill_min; ++i) {
             if constexpr (BcXmin == BoundCond::GREVILLE)
                 iknots[i] = 0;
@@ -269,8 +269,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
         }
 
         for (int j(0); j < n_interp_pts; ++j) {
-            int isum(sum(iknots.data() + j, m_bsplines.degree()));
-            interp_pts[j] = m_bsplines.rmin() + m_dx * isum / m_bsplines.degree();
+            int isum(sum(iknots.data() + j, bsplines_type::degree()));
+            interp_pts[j] = m_bsplines.rmin() + m_dx * isum / bsplines_type::degree();
         }
 
         // Non-periodic case, odd degree: fix round-off issues
@@ -293,16 +293,16 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
     int n_interp_pts = m_bsplines.nbasis() - s_nbc_xmin - s_nbc_xmax;
     std::vector<double> interp_pts(n_interp_pts);
 
-    int n_temp_knots(n_interp_pts - 1 + m_bsplines.degree());
+    int n_temp_knots(n_interp_pts - 1 + bsplines_type::degree());
     double temp_knots[n_temp_knots];
 
     if constexpr (BcXmin == BoundCond::PERIODIC) {
-        for (int i(0); i < n_interp_pts - 1 + m_bsplines.degree(); ++i) {
-            temp_knots[i] = m_bsplines.get_knot(1 - m_bsplines.degree() + s_offset + i);
+        for (int i(0); i < n_interp_pts - 1 + bsplines_type::degree(); ++i) {
+            temp_knots[i] = m_bsplines.get_knot(1 - bsplines_type::degree() + s_offset + i);
         }
     } else {
         int i(0);
-        int n_start_pts(m_bsplines.degree() - s_nbc_xmin - 1);
+        int n_start_pts(bsplines_type::degree() - s_nbc_xmin - 1);
 
         // Initialise knots relevant to the xmin boundary condition
         for (; i < n_start_pts; ++i) {
@@ -330,9 +330,9 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
     }
 
     // Compute interpolation points using Greville-style averaging
-    double inv_deg = 1.0 / m_bsplines.degree();
+    double inv_deg = 1.0 / bsplines_type::degree();
     for (int i(0); i < n_interp_pts; ++i) {
-        interp_pts[i] = sum(temp_knots + i, m_bsplines.degree()) * inv_deg;
+        interp_pts[i] = sum(temp_knots + i, bsplines_type::degree()) * inv_deg;
     }
 
     // Periodic case: apply periodic BCs to interpolation points
@@ -368,26 +368,26 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_block_sizes_uniform(
 {
     switch (BcXmin) {
     case BoundCond::PERIODIC:
-        upper_block_size = (m_bsplines.degree()) / 2;
+        upper_block_size = (bsplines_type::degree()) / 2;
         break;
     case BoundCond::HERMITE:
         upper_block_size = s_nbc_xmin;
         break;
     case BoundCond::GREVILLE:
-        upper_block_size = m_bsplines.degree() - 1;
+        upper_block_size = bsplines_type::degree() - 1;
         break;
     default:
         break; // TODO: throw error
     }
     switch (BcXmax) {
     case BoundCond::PERIODIC:
-        lower_block_size = (m_bsplines.degree()) / 2;
+        lower_block_size = (bsplines_type::degree()) / 2;
         break;
     case BoundCond::HERMITE:
         lower_block_size = s_nbc_xmax;
         break;
     case BoundCond::GREVILLE:
-        lower_block_size = m_bsplines.degree() - 1;
+        lower_block_size = bsplines_type::degree() - 1;
         break;
     default:
         break; // TODO: throw error
@@ -403,26 +403,26 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_block_sizes_non_uniform(
 {
     switch (BcXmin) {
     case BoundCond::PERIODIC:
-        upper_block_size = (m_bsplines.degree() + 1) / 2;
+        upper_block_size = (bsplines_type::degree() + 1) / 2;
         break;
     case BoundCond::HERMITE:
         upper_block_size = s_nbc_xmin + 1;
         break;
     case BoundCond::GREVILLE:
-        upper_block_size = m_bsplines.degree() - 1;
+        upper_block_size = bsplines_type::degree() - 1;
         break;
     default:
         break; // TODO: throw error
     }
     switch (BcXmax) {
     case BoundCond::PERIODIC:
-        lower_block_size = (m_bsplines.degree() + 1) / 2;
+        lower_block_size = (bsplines_type::degree() + 1) / 2;
         break;
     case BoundCond::HERMITE:
         lower_block_size = s_nbc_xmax + 1;
         break;
     case BoundCond::GREVILLE:
-        lower_block_size = m_bsplines.degree() - 1;
+        lower_block_size = bsplines_type::degree() - 1;
         break;
     default:
         break; // TODO: throw error
@@ -445,10 +445,10 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::allocate_matrix(
         return;
 
     int upper_band_width;
-    if (m_bsplines.is_uniform()) {
-        upper_band_width = m_bsplines.degree() / 2;
+    if (bsplines_type::is_uniform()) {
+        upper_band_width = bsplines_type::degree() / 2;
     } else {
-        upper_band_width = (m_bsplines.degree() + 1) / 2;
+        upper_band_width = (bsplines_type::degree() + 1) / 2;
     }
 
     if constexpr (BcXmin == BoundCond::PERIODIC) {
@@ -456,13 +456,13 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::allocate_matrix(
                 m_bsplines.nbasis(),
                 upper_band_width,
                 upper_band_width,
-                m_bsplines.is_uniform());
+                bsplines_type::is_uniform());
     } else {
         matrix = Matrix::make_new_block_with_banded_region(
                 m_bsplines.nbasis(),
                 upper_band_width,
                 upper_band_width,
-                m_bsplines.is_uniform(),
+                bsplines_type::is_uniform(),
                 upper_block_size,
                 lower_block_size);
     }
@@ -481,21 +481,21 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
 
     // Hermite boundary conditions at xmin, if any
     if constexpr (BcXmin == BoundCond::HERMITE) {
-        double derivs_ptr[(m_bsplines.degree() / 2 + 1) * (m_bsplines.degree() + 1)];
-        DSpan2D derivs(derivs_ptr, m_bsplines.degree() + 1, m_bsplines.degree() / 2 + 1);
+        double derivs_ptr[(bsplines_type::degree() / 2 + 1) * (bsplines_type::degree() + 1)];
+        DSpan2D derivs(derivs_ptr, bsplines_type::degree() + 1, bsplines_type::degree() / 2 + 1);
         m_bsplines.eval_basis_and_n_derivs(m_bsplines.rmin(), s_nbc_xmin, derivs, jmin);
 
         // In order to improve the condition number of the matrix, we normalize
         // all derivatives by multiplying the i-th derivative by dx^i
-        for (int i(0); i < m_bsplines.degree() + 1; ++i) {
-            for (int j(1); j < m_bsplines.degree() / 2 + 1; ++j) {
+        for (int i(0); i < bsplines_type::degree() + 1; ++i) {
+            for (int j(1); j < bsplines_type::degree() / 2 + 1; ++j) {
                 derivs(i, j) *= ipow(m_dx, j);
             }
         }
 
         // iterate only to deg as last bspline is 0
         for (int j(0); j < s_nbc_xmin; ++j) {
-            for (int i(0); i < m_bsplines.degree(); ++i) {
+            for (int i(0); i < bsplines_type::degree(); ++i) {
                 // Elements are set in Fortran order as they are LAPACK input
                 matrix->set_element(i, j, derivs(i, s_nbc_xmin - j - 1 + s_odd));
             }
@@ -503,11 +503,11 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
     }
 
     // Interpolation points
-    double values_ptr[m_bsplines.degree() + 1];
-    DSpan1D values(values_ptr, m_bsplines.degree() + 1);
+    double values_ptr[bsplines_type::degree() + 1];
+    DSpan1D values(values_ptr, bsplines_type::degree() + 1);
     for (int i(0); i < m_bsplines.nbasis() - s_nbc_xmin - s_nbc_xmax; ++i) {
         m_bsplines.eval_basis(m_interpolation_domain->to_real(i), values, jmin);
-        for (int s(0); s < m_bsplines.degree() + 1; ++s) {
+        for (int s(0); s < bsplines_type::degree() + 1; ++s) {
             int j = modulo(jmin - s_offset + s, (int)m_bsplines.nbasis());
             matrix->set_element(j, i + s_nbc_xmin, values(s));
         }
@@ -515,22 +515,22 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
 
     // Hermite boundary conditions at xmax, if any
     if constexpr (BcXmax == BoundCond::HERMITE) {
-        double derivs_ptr[(m_bsplines.degree() / 2 + 1) * (m_bsplines.degree() + 1)];
-        DSpan2D derivs(derivs_ptr, m_bsplines.degree() + 1, m_bsplines.degree() / 2 + 1);
+        double derivs_ptr[(bsplines_type::degree() / 2 + 1) * (bsplines_type::degree() + 1)];
+        DSpan2D derivs(derivs_ptr, bsplines_type::degree() + 1, bsplines_type::degree() / 2 + 1);
 
         m_bsplines.eval_basis_and_n_derivs(m_bsplines.rmax(), s_nbc_xmax, derivs, jmin);
 
         // In order to improve the condition number of the matrix, we normalize
         // all derivatives by multiplying the i-th derivative by dx^i
-        for (int i(0); i < m_bsplines.degree() + 1; ++i) {
-            for (int j(1); j < m_bsplines.degree() / 2 + 1; ++j) {
+        for (int i(0); i < bsplines_type::degree() + 1; ++i) {
+            for (int j(1); j < bsplines_type::degree() / 2 + 1; ++j) {
                 derivs(i, j) *= ipow(m_dx, j);
             }
         }
 
-        int i0(m_bsplines.nbasis() - m_bsplines.degree());
+        int i0(m_bsplines.nbasis() - bsplines_type::degree());
         int j0(m_bsplines.nbasis() - s_nbc_xmax);
-        for (int i(0); i < m_bsplines.degree(); ++i) {
+        for (int i(0); i < bsplines_type::degree(); ++i) {
             for (int j(0); j < s_nbc_xmax; ++j) {
                 matrix->set_element(i0 + i, j0 + j, derivs(i + 1, j + s_odd));
             }
