@@ -46,25 +46,16 @@ static void compute_rho(DSpanX const& rho, DViewXVx const& fdistribu)
     }
 }
 
-static void compute_efield(DSpanX const& ex, DViewX const& phi_x)
-{
-    auto&& dom_x = phi_x.domain();
-    BSplinesX bsplines(dom_x.rmin(), dom_x.rmax(), dom_x.size());
-    SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> builder(bsplines);
-    Block<double, BSplinesX> spline_coef(bsplines);
-    builder(spline_coef, phi_x, nullptr, nullptr);
-
-    SplineEvaluator evaluator(bsplines, NullBoundaryValue::value, NullBoundaryValue::value);
-    for (MCoordX ix : dom_x) {
-        ex(ix) = -evaluator.deriv(dom_x.to_real(ix), spline_coef.cview());
-    }
-}
-
 EfieldFftSolver::EfieldFftSolver(
         IFourierTransform<Dim::X> const& fft,
-        IInverseFourierTransform<Dim::X> const& ifft)
+        IInverseFourierTransform<Dim::X> const& ifft,
+        BSplinesX const& bsplines_x,
+        SplineXBuilder const& spline_x_builder)
     : m_fft(fft)
     , m_ifft(ifft)
+    , m_spline_x_basis(bsplines_x)
+    , m_spline_x_builder(spline_x_builder)
+    , m_spline_x_evaluator(bsplines_x, NullBoundaryValue::value, NullBoundaryValue::value)
 {
 }
 
@@ -108,7 +99,13 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
         phi_x(ix) = std::real(complex_phi_x(ix));
     }
 
-    compute_efield(ex, phi_x);
+    // Compute the electric field E = -d Phi / dx using a spline representation
+    Block<double, BSplinesX> phi_spline_coef(m_spline_x_basis);
+    m_spline_x_builder(phi_spline_coef, phi_x);
+
+    for (MCoordX ix : dom_x) {
+        ex(ix) = -m_spline_x_evaluator.deriv(dom_x.to_real(ix), phi_spline_coef.cview());
+    }
 
     return ex;
 }
