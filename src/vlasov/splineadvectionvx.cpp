@@ -57,22 +57,22 @@ DSpanXVx SplineAdvectionVx::operator()(
 
     Block<double, BSplinesVx> spline_coef(m_vx_spline_basis);
 
-    for (MCoordX xii : x_dom) {
+    for (MCoordX ix : x_dom) {
         // compute the displacement
-        const double dvx = sqrt_me_on_mspecies * dt * efield(xii);
+        const double dvx = sqrt_me_on_mspecies * dt * efield(ix);
 
         // compute the coordinates of the feet
-        for (MCoordVx vii : vx_dom) {
-            feet_coords(vii) = RCoordVx(vx_dom.to_real(vii) - dvx);
+        for (MCoordVx iv : vx_dom) {
+            feet_coords(iv) = RCoordVx(vx_dom.to_real(iv) - dvx);
         }
 
-        // some_interpolation(interpolated_fdistribu, fdistribu[xii]);
+        // some_interpolation(interpolated_fdistribu, fdistribu[ix]);
 
         // build a spline representation of the data
         m_spline_vx_builder(spline_coef, interpolated_fdistribu);
 
         // evaluate the function at the feet using the spline
-        m_spline_vx_evaluator(fdistribu[xii], feet_coords.cview(), spline_coef.cview());
+        m_spline_vx_evaluator(fdistribu[ix], feet_coords.cview(), spline_coef.cview());
     }
 
     return fdistribu;

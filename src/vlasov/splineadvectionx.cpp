@@ -53,17 +53,17 @@ DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double sqrt_me_on_mspe
 
     Block<double, BSplinesX> spline_coef(m_x_spline_basis);
 
-    for (MCoordVx vii : v_dom) {
+    for (MCoordVx iv : v_dom) {
         // compute the displacement
-        const double dx = sqrt_me_on_mspecies * dt * v_dom.to_real(vii);
+        const double dx = sqrt_me_on_mspecies * dt * v_dom.to_real(iv);
 
         // compute the coordinates of the feet
-        for (MCoordX xii : x_dom) {
-            feet_coords(xii) = RCoordX(x_dom.to_real(xii) - dx);
+        for (MCoordX ix : x_dom) {
+            feet_coords(ix) = x_dom.to_real(ix) - dx;
         }
 
         // copy the slice in contiguous memory
-        deepcopy(contiguous_slice, fdistribu[vii]);
+        deepcopy(contiguous_slice, fdistribu[iv]);
 
         // build a spline representation of the data
         m_spline_x_builder(spline_coef, contiguous_slice);
@@ -72,7 +72,7 @@ DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double sqrt_me_on_mspe
         m_spline_x_evaluator(contiguous_slice.view(), feet_coords.cview(), spline_coef.cview());
 
         // copy back
-        deepcopy(fdistribu[vii], contiguous_slice);
+        deepcopy(fdistribu[iv], contiguous_slice);
     }
 
     return fdistribu;
