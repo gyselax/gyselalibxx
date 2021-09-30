@@ -8,6 +8,7 @@
 #include <ddc/ProductMDomain>
 #include <ddc/UniformMesh>
 
+#include "sll/bspline.h"
 #include "sll/bsplines.h"
 #include "sll/math_tools.h"
 
@@ -25,13 +26,20 @@ private:
     using domain_type = ProductMDomain<mesh_type>;
 
 public:
+    using rdim_type = BSpline<Tag>;
+
     using tag_type = Tag;
 
-    using rcoord_type = RCoord<Tag>;
+    using rcoord_type = RCoord<BSplines>;
 
     using mcoord_type = MCoord<BSplines>;
 
 public:
+    static constexpr std::size_t rank()
+    {
+        return 1;
+    }
+
     static constexpr std::size_t degree() noexcept
     {
         return D;
@@ -66,7 +74,7 @@ public:
      * @param rmax    the real coordinate of the last knot
      * @param n_knots the number of knots
      */
-    explicit BSplines(rcoord_type rmin, rcoord_type rmax, std::size_t ncells)
+    explicit BSplines(RCoord<Tag> rmin, RCoord<Tag> rmax, std::size_t ncells)
         : m_mesh(rmin, rmax, ncells + 1) // Compute correct step, independent of periodicity
         , m_domain(m_mesh, 0, ncells + 1) // Create a mesh including the eventual periodic point
     {

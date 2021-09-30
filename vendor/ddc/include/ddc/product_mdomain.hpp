@@ -21,7 +21,7 @@ class ProductMDomain
     template <class Mesh>
     using domain_t = MDomain<Mesh>;
 
-    static_assert((... && is_mesh_v<Meshes>), "A template parameter is not a mesh");
+    // static_assert((... && is_mesh_v<Meshes>), "A template parameter is not a mesh");
 
     static_assert((... && (Meshes::rank() == 1)), "Only rank 1 meshes are allowed.");
 

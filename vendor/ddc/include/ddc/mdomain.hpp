@@ -10,7 +10,7 @@
 template <class Mesh>
 class MDomain
 {
-    static_assert(is_mesh_v<Mesh>, "A mesh is required");
+    // static_assert(is_mesh_v<Mesh>, "A mesh is required");
 
 public:
     using mesh_type = Mesh;

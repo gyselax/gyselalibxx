@@ -9,6 +9,7 @@
 #include <ddc/NonUniformMesh>
 #include <ddc/ProductMDomain>
 
+#include "sll/bspline.h"
 #include "sll/bsplines.h"
 
 /// NonUniformMesh specialization of BSplines
@@ -23,13 +24,20 @@ private:
     using domain_type = ProductMDomain<mesh_type>;
 
 public:
+    using rdim_type = BSpline<Tag>;
+
     using tag_type = Tag;
 
-    using rcoord_type = RCoord<Tag>;
+    using rcoord_type = RCoord<BSplines>;
 
     using mcoord_type = MCoord<BSplines>;
 
 public:
+    static constexpr std::size_t rank()
+    {
+        return 1;
+    }
+
     static constexpr std::size_t degree() noexcept
     {
         return D;
@@ -51,13 +59,13 @@ public:
     }
 
 private:
-    std::vector<rcoord_type> m_knots;
+    std::vector<RCoord<Tag>> m_knots;
 
 public:
     BSplines() = default;
 
     /// @brief Construct a `BSplines` using a brace-list, i.e. `BSplines bsplines({0., 1.})`
-    explicit BSplines(std::initializer_list<rcoord_type> knots)
+    explicit BSplines(std::initializer_list<RCoord<Tag>> knots)
         : BSplines(knots.begin(), knots.end())
     {
     }
@@ -108,12 +116,12 @@ public:
         return m_knots[break_idx + degree()];
     }
 
-    rcoord_type rmin() const noexcept
+    RCoord<Tag> rmin() const noexcept
     {
         return get_knot(0);
     }
 
-    rcoord_type rmax() const noexcept
+    RCoord<Tag> rmax() const noexcept
     {
         return get_knot(ncells());
     }

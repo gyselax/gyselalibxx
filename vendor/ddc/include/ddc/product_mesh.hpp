@@ -14,7 +14,7 @@ class ProductMesh
     using rdim_t = typename Mesh::rdim_type;
 
 private:
-    static_assert((... && is_mesh_v<Meshes>), "A template parameter is not a mesh");
+    // static_assert((... && is_mesh_v<Meshes>), "A template parameter is not a mesh");
 
     static_assert(sizeof...(Meshes) > 0, "At least 1 mesh must be provided");
 
