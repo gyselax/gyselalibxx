@@ -79,7 +79,8 @@ public:
 
     template <
             class... Params,
-            class = std::enable_if_t<((std::is_convertible_v<Params, ElementType>)&&...)>>
+            class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
+            class = std::enable_if_t<sizeof...(Params) == sizeof...(Tags)>>
     inline constexpr TaggedVector(Params const&... params) noexcept
         : m_values {static_cast<ElementType>(params)...}
     {
