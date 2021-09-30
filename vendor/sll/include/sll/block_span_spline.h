@@ -67,7 +67,7 @@ public:
      * @param bsplines the bsplines that sustains the view
      * @param raw_view the raw view to the data
      */
-    inline constexpr BlockSpan(bsplines_type const& bsplines, raw_view_type raw_view)
+    inline constexpr BlockSpan(raw_view_type raw_view, bsplines_type const& bsplines)
         : m_raw(raw_view)
         , m_bsplines(bsplines)
     {

@@ -52,7 +52,7 @@ public:
     /** Construct a Block on a domain with uninitialized values
      */
     explicit inline constexpr Block(mdomain_type const& domain)
-        : block_span_type(domain, new (std::align_val_t(64)) value_type[domain.size()])
+        : block_span_type(new (std::align_val_t(64)) value_type[domain.size()], domain)
     {
     }
 

@@ -142,7 +142,7 @@ public:
      * @param domain the domain that sustains the view
      * @param allocation_view the allocation view to the data
      */
-    inline constexpr BlockSpan(mdomain_type domain, allocation_mdspan_type allocation_view)
+    inline constexpr BlockSpan(allocation_mdspan_type allocation_view, mdomain_type domain)
         : m_internal_mdspan()
         , m_domain(domain)
     {
@@ -159,7 +159,7 @@ public:
     template <
             class Mapping = mapping_type,
             std::enable_if_t<std::is_constructible_v<Mapping, extents_type>, int> = 0>
-    inline constexpr BlockSpan(mdomain_type domain, ElementType* ptr)
+    inline constexpr BlockSpan(ElementType* ptr, mdomain_type domain)
         : m_internal_mdspan()
         , m_domain(domain)
     {
@@ -197,7 +197,7 @@ public:
                 submdspan(allocation_mdspan(), get_slicer_for<Meshes>(slice_spec)...);
         using detail::TypeSeq;
         using selected_meshes = type_seq_remove_t<TypeSeq<Meshes...>, TypeSeq<QueryMeshes...>>;
-        return ::BlockSpan(select_by_type_seq<selected_meshes>(m_domain), subview);
+        return ::BlockSpan(subview, select_by_type_seq<selected_meshes>(m_domain));
     }
 
     /** Slice out some dimensions
@@ -208,7 +208,7 @@ public:
     {
         auto subview = std::experimental::
                 submdspan(allocation_mdspan(), get_slicer_for<Meshes>(odomain)...);
-        return ::BlockSpan(m_domain.restrict(odomain), subview);
+        return ::BlockSpan(subview, m_domain.restrict(odomain));
     }
 
     template <class... OMeshes>
@@ -388,8 +388,8 @@ public:
 
 template <class ElementType, class... Meshes, class Extents, class StridedLayout>
 BlockSpan(
-        ProductMDomain<Meshes...> domain,
-        std::experimental::mdspan<ElementType, Extents, StridedLayout> allocation_view)
+        std::experimental::mdspan<ElementType, Extents, StridedLayout> allocation_view,
+        ProductMDomain<Meshes...> domain)
         -> BlockSpan<ElementType, ProductMDomain<Meshes...>, StridedLayout>;
 
 template <

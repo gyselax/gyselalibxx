@@ -44,10 +44,10 @@ public:
      */
     explicit inline constexpr Block(BSplines<Mesh, D> const& bsplines)
         : block_view_type(
-                bsplines,
                 raw_view_type(
                         new (std::align_val_t(64)) value_type[bsplines.size()],
-                        bsplines.size()))
+                        bsplines.size()),
+                bsplines)
     {
     }
 
