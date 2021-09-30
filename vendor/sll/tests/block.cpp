@@ -11,8 +11,8 @@
 #include <ddc/UniformMesh>
 #include <ddc/block.hpp>
 
-#include <sll/bsplines_uniform.h>
 #include <sll/bsplines_non_uniform.h>
+#include <sll/bsplines_uniform.h>
 
 #include <gtest/gtest.h>
 
