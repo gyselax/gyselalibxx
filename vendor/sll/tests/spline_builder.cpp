@@ -151,7 +151,7 @@ private:
 
 TEST(SplineBuilder, Constructor)
 {
-    using BSplinesX = BSplines<MeshX, 2>;
+    using BSplinesX = UniformBSplines<DimX, 2>;
 
     auto&& bsplines = BSplinesX(RCoordX(0.), RCoordX(0.02), 100);
 

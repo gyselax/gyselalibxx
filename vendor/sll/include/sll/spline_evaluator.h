@@ -6,7 +6,6 @@
 #include <ddc/BlockSpan>
 
 #include "sll/boundary_value.h"
-#include "sll/bsplines.h"
 
 template <class BSplinesType>
 class SplineEvaluator

@@ -9,11 +9,10 @@
 #include <ddc/ProductMDomain>
 
 #include "sll/bspline.h"
-#include "sll/bsplines.h"
 
 /// NonUniformMesh specialization of BSplines
 template <class Tag, std::size_t D>
-class BSplines<NonUniformMesh<Tag>, D>
+class NonUniformBSplines
 {
     static_assert(D > 0, "Parameter `D` must be positive");
 
@@ -27,9 +26,9 @@ public:
 
     using tag_type = Tag;
 
-    using rcoord_type = RCoord<BSplines>;
+    using rcoord_type = RCoord<NonUniformBSplines>;
 
-    using mcoord_type = MCoord<BSplines>;
+    using mcoord_type = MCoord<NonUniformBSplines>;
 
 public:
     static constexpr std::size_t rank()
@@ -61,33 +60,34 @@ private:
     std::vector<RCoord<Tag>> m_knots;
 
 public:
-    BSplines() = default;
+    NonUniformBSplines() = default;
 
-    /// @brief Construct a `BSplines` using a brace-list, i.e. `BSplines bsplines({0., 1.})`
-    explicit BSplines(std::initializer_list<RCoord<Tag>> knots)
-        : BSplines(knots.begin(), knots.end())
+    /// @brief Construct a `NonUniformBSplines` using a brace-list, i.e. `NonUniformBSplines bsplines({0., 1.})`
+    explicit NonUniformBSplines(std::initializer_list<RCoord<Tag>> knots)
+        : NonUniformBSplines(knots.begin(), knots.end())
     {
     }
 
-    /// @brief Construct a `BSplines` using a C++20 "common range".
+    /// @brief Construct a `NonUniformBSplines` using a C++20 "common range".
     template <class InputRange>
-    inline constexpr BSplines(InputRange&& knots) : BSplines(knots.begin(), knots.end())
+    inline constexpr NonUniformBSplines(InputRange&& knots)
+        : NonUniformBSplines(knots.begin(), knots.end())
     {
     }
 
-    /// @brief Construct a `BSplines` using a pair of iterators.
+    /// @brief Construct a `NonUniformBSplines` using a pair of iterators.
     template <class RandomIt>
-    inline constexpr BSplines(RandomIt knots_begin, RandomIt knots_end);
+    inline constexpr NonUniformBSplines(RandomIt knots_begin, RandomIt knots_end);
 
-    BSplines(BSplines const& x) = default;
+    NonUniformBSplines(NonUniformBSplines const& x) = default;
 
-    BSplines(BSplines&& x) = default;
+    NonUniformBSplines(NonUniformBSplines&& x) = default;
 
-    ~BSplines() = default;
+    ~NonUniformBSplines() = default;
 
-    BSplines& operator=(BSplines const& x) = default;
+    NonUniformBSplines& operator=(NonUniformBSplines const& x) = default;
 
-    BSplines& operator=(BSplines&& x) = default;
+    NonUniformBSplines& operator=(NonUniformBSplines&& x) = default;
 
     void eval_basis(
             double x,
@@ -163,7 +163,7 @@ private:
 
 template <class Tag, std::size_t D>
 template <class RandomIt>
-inline constexpr BSplines<NonUniformMesh<Tag>, D>::BSplines(
+inline constexpr NonUniformBSplines<Tag, D>::NonUniformBSplines(
         RandomIt knots_begin,
         RandomIt knots_end)
     : m_knots((knots_end - knots_begin) + 2 * degree())
@@ -195,7 +195,7 @@ inline constexpr BSplines<NonUniformMesh<Tag>, D>::BSplines(
 }
 
 template <class Tag, std::size_t D>
-void BSplines<NonUniformMesh<Tag>, D>::eval_basis(
+void NonUniformBSplines<Tag, D>::eval_basis(
         double x,
         std::experimental::mdspan<double, std::experimental::dextents<1>>& values,
         int& jmin) const
@@ -235,7 +235,7 @@ void BSplines<NonUniformMesh<Tag>, D>::eval_basis(
 }
 
 template <class Tag, std::size_t D>
-void BSplines<NonUniformMesh<Tag>, D>::eval_deriv(
+void NonUniformBSplines<Tag, D>::eval_deriv(
         double x,
         std::experimental::mdspan<double, std::experimental::dextents<1>>& derivs,
         int& jmin) const
@@ -295,7 +295,7 @@ void BSplines<NonUniformMesh<Tag>, D>::eval_deriv(
 }
 
 template <class Tag, std::size_t D>
-void BSplines<NonUniformMesh<Tag>, D>::eval_basis_and_n_derivs(
+void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
         double x,
         int n,
         std::experimental::mdspan<double, std::experimental::dextents<2>>& derivs,
@@ -399,7 +399,7 @@ void BSplines<NonUniformMesh<Tag>, D>::eval_basis_and_n_derivs(
 }
 
 template <class Tag, std::size_t D>
-int BSplines<NonUniformMesh<Tag>, D>::find_cell(double x) const
+int NonUniformBSplines<Tag, D>::find_cell(double x) const
 {
     if (x > rmax())
         return -1;
@@ -426,7 +426,7 @@ int BSplines<NonUniformMesh<Tag>, D>::find_cell(double x) const
 }
 
 template <class Tag, std::size_t D>
-void BSplines<NonUniformMesh<Tag>, D>::integrals(
+void NonUniformBSplines<Tag, D>::integrals(
         std::experimental::mdspan<double, std::experimental::dextents<1>>& int_vals) const
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
@@ -443,6 +443,3 @@ void BSplines<NonUniformMesh<Tag>, D>::integrals(
         }
     }
 }
-
-template <class Tag, std::size_t D>
-using NonUniformBSplines = BSplines<NonUniformMesh<Tag>, D>;

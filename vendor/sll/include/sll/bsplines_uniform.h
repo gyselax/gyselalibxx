@@ -8,14 +8,10 @@
 #include <ddc/UniformMesh>
 
 #include "sll/bspline.h"
-#include "sll/bsplines.h"
 #include "sll/math_tools.h"
 
 template <class Tag, std::size_t D>
-using UniformBSplines = BSplines<UniformMesh<Tag>, D>;
-
-template <class Tag, std::size_t D>
-class BSplines<UniformMesh<Tag>, D>
+class UniformBSplines
 {
     static_assert(D > 0, "Parameter `D` must be positive");
 
@@ -29,9 +25,9 @@ public:
 
     using tag_type = Tag;
 
-    using rcoord_type = RCoord<BSplines>;
+    using rcoord_type = RCoord<UniformBSplines>;
 
-    using mcoord_type = MCoord<BSplines>;
+    using mcoord_type = MCoord<UniformBSplines>;
 
 public:
     static constexpr std::size_t rank()
@@ -66,7 +62,7 @@ private:
     ProductMDomain<mesh_type> m_domain;
 
 public:
-    BSplines() = default;
+    UniformBSplines() = default;
 
     /** Constructs a BSpline basis with n equidistant knots over \f$[a, b]\f$
      * 
@@ -74,21 +70,21 @@ public:
      * @param rmax    the real coordinate of the last knot
      * @param n_knots the number of knots
      */
-    explicit BSplines(RCoord<Tag> rmin, RCoord<Tag> rmax, std::size_t ncells)
+    explicit UniformBSplines(RCoord<Tag> rmin, RCoord<Tag> rmax, std::size_t ncells)
         : m_mesh(rmin, rmax, ncells + 1) // Compute correct step, independent of periodicity
         , m_domain(m_mesh, 0, ncells + 1) // Create a mesh including the eventual periodic point
     {
     }
 
-    BSplines(BSplines const& x) = default;
+    UniformBSplines(UniformBSplines const& x) = default;
 
-    BSplines(BSplines&& x) = default;
+    UniformBSplines(UniformBSplines&& x) = default;
 
-    ~BSplines() = default;
+    ~UniformBSplines() = default;
 
-    BSplines& operator=(BSplines const& x) = default;
+    UniformBSplines& operator=(UniformBSplines const& x) = default;
 
-    BSplines& operator=(BSplines&& x) = default;
+    UniformBSplines& operator=(UniformBSplines&& x) = default;
 
     void eval_basis(
             double x,
@@ -162,7 +158,7 @@ private:
 };
 
 template <class Tag, std::size_t D>
-void BSplines<UniformMesh<Tag>, D>::eval_basis(
+void UniformBSplines<Tag, D>::eval_basis(
         double x,
         std::experimental::mdspan<double, std::experimental::dextents<1>>& values,
         int& jmin,
@@ -192,7 +188,7 @@ void BSplines<UniformMesh<Tag>, D>::eval_basis(
 }
 
 template <class Tag, std::size_t D>
-void BSplines<UniformMesh<Tag>, D>::eval_deriv(
+void UniformBSplines<Tag, D>::eval_deriv(
         double x,
         std::experimental::mdspan<double, std::experimental::dextents<1>>& derivs,
         int& jmin) const
@@ -233,7 +229,7 @@ void BSplines<UniformMesh<Tag>, D>::eval_deriv(
 }
 
 template <class Tag, std::size_t D>
-void BSplines<UniformMesh<Tag>, D>::eval_basis_and_n_derivs(
+void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
         double x,
         int n,
         std::experimental::mdspan<double, std::experimental::dextents<2>>& derivs,
@@ -314,7 +310,7 @@ void BSplines<UniformMesh<Tag>, D>::eval_basis_and_n_derivs(
 }
 
 template <class Tag, std::size_t D>
-void BSplines<UniformMesh<Tag>, D>::get_icell_and_offset(double x, int& icell, double& offset) const
+void UniformBSplines<Tag, D>::get_icell_and_offset(double x, int& icell, double& offset) const
 {
     assert(x >= rmin());
     assert(x <= rmax());
@@ -341,7 +337,7 @@ void BSplines<UniformMesh<Tag>, D>::get_icell_and_offset(double x, int& icell, d
 }
 
 template <class Tag, std::size_t D>
-void BSplines<UniformMesh<Tag>, D>::integrals(
+void UniformBSplines<Tag, D>::integrals(
         std::experimental::mdspan<double, std::experimental::dextents<1>>& int_vals) const
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());

@@ -29,7 +29,7 @@ class BSplinesNonUniformTest : public ::testing::Test
 protected:
     static constexpr std::size_t spline_degree = 2;
     std::vector<double> const breaks {0.0, 0.5, 1.0, 1.5, 2.0};
-    BSplines<MeshX, spline_degree> const bsplines {breaks};
+    NonUniformBSplines<DimX, spline_degree> const bsplines {breaks};
     deprecated::NonUniformBSplines old_bsplines {spline_degree, DimX::PERIODIC, breaks};
 };
 

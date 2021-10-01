@@ -30,7 +30,7 @@ protected:
     static constexpr std::size_t ncells = 100;
     static constexpr RCoordX xmin = 0.;
     static constexpr RCoordX xmax = 2.;
-    BSplines<MeshX, spline_degree> const bsplines {xmin, xmax, ncells};
+    UniformBSplines<DimX, spline_degree> const bsplines {xmin, xmax, ncells};
     deprecated::UniformBSplines const
             old_bsplines {spline_degree, DimX::PERIODIC, xmin, xmax, ncells};
 };

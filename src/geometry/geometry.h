@@ -4,7 +4,6 @@
 #include <ddc/NonUniformMesh>
 #include <ddc/UniformMesh>
 
-#include <sll/bsplines.h>
 #include <sll/bsplines_non_uniform.h>
 #include <sll/bsplines_uniform.h>
 #include <sll/spline_builder.h>
@@ -49,17 +48,13 @@ using RCoordXVx = RCoord<Dim::X, Dim::Vx>;
 
 using RCoordFx = RCoord<Dim::Fx>;
 
-using KnotsX = UniformMesh<Dim::X>;
-
-using BSplinesX = BSplines<KnotsX, 3>;
+using BSplinesX = UniformBSplines<Dim::X, 3>;
 
 using BSDomainX = ProductMDomain<BSplinesX>;
 
 using SplineXBuilder = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>;
 
-using KnotsVx = UniformMesh<Dim::Vx>;
-
-using BSplinesVx = BSplines<KnotsVx, 3>;
+using BSplinesVx = UniformBSplines<Dim::Vx, 3>;
 
 using BSDomainVx = ProductMDomain<BSplinesVx>;
 

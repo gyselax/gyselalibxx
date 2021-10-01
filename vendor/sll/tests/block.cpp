@@ -37,10 +37,10 @@ protected:
     static constexpr std::size_t ncells = 100;
     static constexpr RCoordX xmin = 0.;
     static constexpr RCoordX xmax = 2.;
-    using BSplinesX = BSplines<MeshX, 2>;
+    using BSplinesX = UniformBSplines<DimX, 2>;
     BSplinesX const bsplinesx {xmin, xmax, ncells};
 
-    using BSplinesY = BSplines<MeshY, 4>;
+    using BSplinesY = NonUniformBSplines<DimY, 4>;
     BSplinesY const bsplinesy {RCoordY(0.1), RCoordY(0.4), RCoordY(1.0)};
 };
 
