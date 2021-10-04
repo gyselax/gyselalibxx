@@ -63,7 +63,7 @@ public:
      * @param size the number of points in each direction
      */
     constexpr ProductMDomain(Meshes const&... meshes, mlength_type const& size)
-        : m_domains(storage_t<Meshes>(::get<Meshes>(meshes), 0, ::get<Meshes>(size))...)
+        : m_domains(storage_t<Meshes>(meshes, 0, ::get<Meshes>(size))...)
     {
     }
 
