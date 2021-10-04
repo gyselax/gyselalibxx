@@ -10,7 +10,6 @@
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 
-#include <sll/block_spline.h>
 #include <sll/null_boundary_value.h>
 #include <sll/spline_evaluator.h>
 
@@ -54,7 +53,11 @@ DSpanXVx SplineAdvectionVx::operator()(
     Block<double, SplineVxBuilder::interpolation_domain_type> interpolated_fdistribu(
             m_spline_vx_builder.interpolation_domain());
 
-    Block<double, BSplinesVx> spline_coef(m_vx_spline_basis);
+    // Construct a domain over the bounded basis and allocate memory on this support
+    ProductMesh const pbsplines_vx(m_vx_spline_basis);
+    ProductMDomain const
+            dom_bsplines_vx(pbsplines_vx, MLength<BSplinesVx>(m_vx_spline_basis.size()));
+    Block<double, BSDomainVx> spline_coef(dom_bsplines_vx);
 
     for (MCoordX ix : x_dom) {
         // compute the displacement

@@ -53,11 +53,15 @@ using KnotsX = UniformMesh<Dim::X>;
 
 using BSplinesX = BSplines<KnotsX, 3>;
 
+using BSDomainX = ProductMDomain<BSplinesX>;
+
 using SplineXBuilder = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>;
 
 using KnotsVx = UniformMesh<Dim::Vx>;
 
 using BSplinesVx = BSplines<KnotsVx, 3>;
+
+using BSDomainVx = ProductMDomain<BSplinesVx>;
 
 using SplineVxBuilder = SplineBuilder<BSplinesVx, BoundCond::GREVILLE, BoundCond::GREVILLE>;
 

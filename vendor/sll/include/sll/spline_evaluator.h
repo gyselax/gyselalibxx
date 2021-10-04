@@ -54,8 +54,9 @@ public:
 
     SplineEvaluator& operator=(SplineEvaluator&& x) = default;
 
-    double operator()(double coord_eval, BlockSpan<double const, BSplinesType> const& spline_coef)
-            const
+    double operator()(
+            double coord_eval,
+            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
@@ -68,7 +69,7 @@ public:
     void operator()(
             BlockSpan<double, Domain> const& spline_eval,
             BlockSpan<double const, Domain> const& coords_eval,
-            BlockSpan<double const, BSplinesType> const& spline_coef) const
+            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
@@ -79,7 +80,9 @@ public:
         }
     }
 
-    double deriv(double coord_eval, BlockSpan<double const, BSplinesType> const& spline_coef) const
+    double deriv(
+            double coord_eval,
+            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
@@ -92,7 +95,7 @@ public:
     void deriv(
             BlockSpan<double, Domain> const& spline_eval,
             BlockSpan<double const, Domain> const& coords_eval,
-            BlockSpan<double const, BSplinesType> const& spline_coef) const
+            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
@@ -108,7 +111,7 @@ public:
 private:
     double eval(
             double coord_eval,
-            BlockSpan<double const, BSplinesType> const& spline_coef,
+            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef,
             std::experimental::mdspan<double, std::experimental::dextents<1>>& vals) const
     {
         if constexpr (bsplines_type::is_periodic()) {
@@ -130,7 +133,7 @@ private:
     template <class EvalType>
     double eval_no_bc(
             double coord_eval,
-            BlockSpan<double const, BSplinesType> const& spline_coef,
+            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef,
             std::experimental::mdspan<double, std::experimental::dextents<1>>& vals,
             EvalType) const
     {

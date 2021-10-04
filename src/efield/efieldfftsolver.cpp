@@ -14,7 +14,6 @@
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>
 
-#include <sll/block_spline.h>
 #include <sll/bsplines_uniform.h>
 #include <sll/null_boundary_value.h>
 #include <sll/spline_builder.h>
@@ -99,10 +98,13 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
         phi_x(ix) = std::real(complex_phi_x(ix));
     }
 
-    // Compute the electric field E = -d Phi / dx using a spline representation
-    Block<double, BSplinesX> phi_spline_coef(m_spline_x_basis);
+    // Construct a domain over the bounded basis and allocate memory on this support
+    ProductMesh const pbsplines_x(m_spline_x_basis);
+    ProductMDomain const dom_bsplines_x(pbsplines_x, MLength<BSplinesX>(m_spline_x_basis.size()));
+    Block<double, ProductMDomain<BSplinesX>> phi_spline_coef(dom_bsplines_x);
     m_spline_x_builder(phi_spline_coef, phi_x);
 
+    // Compute the electric field E = -d Phi / dx using a spline representation
     for (MCoordX ix : dom_x) {
         ex(ix) = -m_spline_x_evaluator.deriv(dom_x.to_real(ix), phi_spline_coef.cview());
     }

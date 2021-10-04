@@ -16,7 +16,6 @@
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>
 
-#include <sll/block_spline.h>
 #include <sll/bsplines_uniform.h>
 #include <sll/null_boundary_value.h>
 #include <sll/spline_builder.h>
@@ -168,8 +167,8 @@ TEST(SplineBuilder, BuildSpline)
     int constexpr degree = 10;
     //     using NonUniformMeshX = NonUniformMesh<DimX>;
     //     using UniformMeshX = UniformMesh<DimX>;
-    using UniformBSplinesX2 = UniformBSplines<DimX, degree>;
-    using BlockSplineX2 = Block<double, UniformBSplinesX2>;
+    using BSplinesX = UniformBSplines<DimX, degree>;
+    using BlockSplineX2 = Block<double, ProductMDomain<BSplinesX>>;
     //     using NonUniformDomainX = ProductMDomain<NonUniformMeshX>;
     //     using BlockNonUniformX = Block<double, ProductMDomain<NonUniformMeshX>>;
     using BlockUniformX = Block<double, ProductMDomain<MeshX>>;
@@ -180,14 +179,16 @@ TEST(SplineBuilder, BuildSpline)
     MCoordX constexpr npoints = ncells + 1;
 
     // 1. Create BSplines
-    UniformBSplinesX2 bsplines(x0, xN, npoints);
+    BSplinesX bsplines(x0, xN, npoints);
+    ProductMesh const pbsplines_x(bsplines);
+    ProductMDomain const dom_bsplines_x(pbsplines_x, MLength<BSplinesX>(bsplines.size()));
 
     // 2. Create a Spline represented by a block over BSplines
     // The block is filled with garbage data, we need to initialize it
-    BlockSplineX2 coef(bsplines);
+    BlockSplineX2 coef(dom_bsplines_x);
 
     // 3. Create a SplineBuilder over BSplines using some boundary conditions
-    SplineBuilder<UniformBSplinesX2, left_bc, right_bc> spline_builder(bsplines);
+    SplineBuilder<BSplinesX, left_bc, right_bc> spline_builder(bsplines);
     auto const& interpolation_domain = spline_builder.interpolation_domain();
 
     // 4. Allocate and fill a block over the interpolation domain
