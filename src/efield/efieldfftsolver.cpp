@@ -73,16 +73,15 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
     deepcopy(complex_rho, rho);
 
     // Build a mesh in the fourier space, for N points
-    MeshFx const dom_fx = m_fft.compute_fourier_domain(dom_x);
-    auto&& dom_fx_prod_version = ProductMesh(dom_fx);
-    Block<std::complex<double>, MDomainFx> complex_phi_fx(
-            ProductMDomain(dom_fx_prod_version, MLength<MeshFx>(dom_fx.size())));
+    MeshFx const mesh_fx = m_fft.compute_fourier_domain(dom_x);
+    MDomainFx const dom_fx(mesh_fx, MLength<MeshFx>(mesh_fx.size()));
+    Block<std::complex<double>, MDomainFx> complex_phi_fx(dom_fx);
     m_fft(complex_phi_fx, complex_rho);
 
     // Solve Poisson's equation -d^2 Phi/dx^2 = rho in the Fourier space.
     complex_phi_fx(0) = 0.;
-    for (std::size_t ifreq = 1; ifreq < dom_fx.size(); ++ifreq) {
-        double const kx = 2. * M_PI * dom_fx.to_real(ifreq);
+    for (std::size_t ifreq = 1; ifreq < mesh_fx.size(); ++ifreq) {
+        double const kx = 2. * M_PI * mesh_fx.to_real(ifreq);
         complex_phi_fx(ifreq) /= kx * kx;
     }
 
@@ -99,7 +98,7 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
 
     // Construct a domain over the bounded basis and allocate memory on this support
     BSDomainX const dom_bsx(m_spline_x_basis, MLength<BSplinesX>(m_spline_x_basis.size()));
-    Block<double, ProductMDomain<BSplinesX>> phi_spline_coef(dom_bsx);
+    Block<double, BSDomainX> phi_spline_coef(dom_bsx);
     m_spline_x_builder(phi_spline_coef, phi_x);
 
     // Compute the electric field E = -d Phi / dx using a spline representation
