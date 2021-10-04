@@ -107,6 +107,20 @@ public:
         }
     }
 
+    double integrate(BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef) const
+    {
+        Block<double, ProductMDomain<BSplinesType>> values(spline_coef.domain());
+        auto vals = values.allocation_mdspan();
+
+        m_bsplines.integrals(vals);
+
+        double y = 0.;
+        for (MCoord<BSplinesType> ibs : spline_coef.domain()) {
+            y += spline_coef(ibs) * values(ibs);
+        }
+        return y;
+    }
+
 private:
     double eval(
             double coord_eval,
