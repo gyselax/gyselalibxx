@@ -155,6 +155,16 @@ public:
         return m_values[type_seq_rank_v<QueryTag, tags_seq>];
     }
 
+    template <class QueryTag>
+    ElementType get_or(ElementType const& default_value) const
+    {
+        if constexpr (in_tags_v<QueryTag, tags_seq>) {
+            return m_values[type_seq_rank_v<QueryTag, tags_seq>];
+        } else {
+            return default_value;
+        }
+    }
+
     template <std::size_t N = sizeof...(Tags)>
     constexpr inline std::enable_if_t<N == 1, ElementType const&> value() const noexcept
     {
@@ -196,6 +206,14 @@ template <class QueryTag, class ElementType, class... Tags>
 inline constexpr ElementType& get(TaggedVector<ElementType, Tags...>& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
+}
+
+template <class QueryTag, class ElementType, class... Tags>
+inline constexpr ElementType get_or(
+        TaggedVector<ElementType, Tags...> const& tuple,
+        ElementType const& default_value) noexcept
+{
+    return tuple.template get_or<QueryTag>(default_value);
 }
 
 template <class ElementType, class... Tags, class OElementType, class... OTags>

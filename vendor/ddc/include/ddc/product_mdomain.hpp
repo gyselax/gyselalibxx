@@ -4,10 +4,14 @@
 #include <tuple>
 
 #include "ddc/mcoord.hpp"
-#include "ddc/mdomain.hpp"
 #include "ddc/mesh.hpp"
+#include "ddc/product_mesh.hpp"
 #include "ddc/rcoord.hpp"
 #include "ddc/taggedtuple.hpp"
+#include "ddc/type_seq.hpp"
+
+template <class Mesh>
+struct ProductMDomainIterator;
 
 template <class... Meshes>
 class ProductMDomain;
@@ -17,9 +21,6 @@ class ProductMDomain
 {
     template <class Mesh>
     using rdim_t = typename Mesh::rdim_type;
-
-    template <class Mesh>
-    using storage_t = detail::MDomain<Mesh>;
 
     // static_assert((... && is_mesh_v<Meshes>), "A template parameter is not a mesh");
 
@@ -36,11 +37,11 @@ public:
     using mlength_type = MLength<Meshes...>;
 
 private:
-    std::tuple<storage_t<Meshes>...> m_domains;
+    ProductMesh<Meshes...> m_mesh;
 
-    explicit constexpr ProductMDomain(storage_t<Meshes> const&... domains) : m_domains(domains...)
-    {
-    }
+    MCoord<Meshes...> m_lbound;
+
+    MCoord<Meshes...> m_ubound;
 
 public:
     static constexpr std::size_t rank()
@@ -54,7 +55,9 @@ public:
     // Note that SFINAE may be redundant because a template constructor should not be selected as a copy constructor.
     template <std::size_t N = sizeof...(Meshes), class = std::enable_if_t<(N != 1)>>
     explicit constexpr ProductMDomain(ProductMDomain<Meshes> const&... domains)
-        : m_domains(std::get<storage_t<Meshes>>(domains.m_domains)...)
+        : m_mesh(get<Meshes>(domains.mesh())...)
+        , m_lbound(domains.front()...)
+        , m_ubound(domains.back()...)
     {
     }
 
@@ -63,16 +66,21 @@ public:
      * @param size the number of points in each direction
      */
     constexpr ProductMDomain(Meshes const&... meshes, mlength_type const& size)
-        : m_domains(storage_t<Meshes>(meshes, 0, ::get<Meshes>(size))...)
+        : m_mesh(meshes...)
+        , m_lbound((get<Meshes>(size) - get<Meshes>(size))...) // Hack to have expansion of zero
+        , m_ubound((get<Meshes>(size) - 1)...)
     {
     }
+
 
     /** Construct a ProductMDomain starting from (0, ..., 0) with size points.
      * @param mesh the discrete space on which the domain is constructed
      * @param size the number of points in each direction
      */
     constexpr ProductMDomain(ProductMesh<Meshes...> const& mesh, mlength_type const& size)
-        : m_domains(storage_t<Meshes>(::get<Meshes>(mesh), 0, ::get<Meshes>(size))...)
+        : m_mesh(mesh)
+        , m_lbound((get<Meshes>(size) - get<Meshes>(size))...) // Hack to have expansion of zero
+        , m_ubound((get<Meshes>(size) - 1)...)
     {
     }
 
@@ -85,9 +93,12 @@ public:
             Meshes const&... meshes,
             mcoord_type const& lbound,
             mlength_type const& size)
-        : m_domains(storage_t<Meshes>(meshes, ::get<Meshes>(lbound), ::get<Meshes>(size))...)
+        : m_mesh(meshes...)
+        , m_lbound(lbound)
+        , m_ubound((get<Meshes>(lbound) + get<Meshes>(size) - 1)...)
     {
     }
+
 
     /** Construct a ProductMDomain starting from lbound with size points.
      * @param mesh the discrete space on which the domain is constructed
@@ -98,8 +109,9 @@ public:
             ProductMesh<Meshes...> const& mesh,
             mcoord_type const& lbound,
             mlength_type const& size)
-        : m_domains(storage_t<
-                    Meshes>(::get<Meshes>(mesh), ::get<Meshes>(lbound), ::get<Meshes>(size))...)
+        : m_mesh(mesh)
+        , m_lbound(lbound)
+        , m_ubound((get<Meshes>(lbound) + get<Meshes>(size) - 1)...)
     {
     }
 
@@ -115,7 +127,8 @@ public:
 
     constexpr bool operator==(ProductMDomain const& other) const
     {
-        return m_domains == other.m_domains;
+        return (((get<Meshes>(m_mesh) == get<Meshes>(other.m_mesh)) && ...)
+                && m_lbound == other.m_lbound && m_ubound == other.m_ubound);
     }
 
 #if __cplusplus <= 201703L
@@ -135,55 +148,55 @@ public:
 
     ProductMesh<Meshes...> mesh() const
     {
-        return ProductMesh<Meshes...>(std::get<storage_t<Meshes>>(m_domains).mesh()...);
+        return m_mesh;
     }
 
     std::size_t size() const
     {
-        return (1ul * ... * std::get<storage_t<Meshes>>(m_domains).size());
+        return (1ul * ... * (get<Meshes>(m_ubound) + 1 - get<Meshes>(m_lbound)));
     }
 
     constexpr mlength_type extents() const noexcept
     {
-        return mcoord_type(std::get<storage_t<Meshes>>(m_domains).size()...);
+        return mlength_type((get<Meshes>(m_ubound) + 1 - get<Meshes>(m_lbound))...);
     }
 
     constexpr mcoord_type front() const noexcept
     {
-        return mcoord_type(std::get<storage_t<Meshes>>(m_domains).front()...);
+        return m_lbound;
     }
 
     constexpr mcoord_type back() const noexcept
     {
-        return mcoord_type(std::get<storage_t<Meshes>>(m_domains).back()...);
+        return m_ubound;
     }
 
     rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
-        return rcoord_type(
-                std::get<storage_t<Meshes>>(m_domains).to_real(::get<Meshes>(icoord))...);
+        return m_mesh.to_real(icoord);
     }
 
     rcoord_type rmin() const noexcept
     {
-        return rcoord_type(std::get<storage_t<Meshes>>(m_domains).rmin()...);
+        return to_real(front());
     }
 
     rcoord_type rmax() const noexcept
     {
-        return rcoord_type(std::get<storage_t<Meshes>>(m_domains).rmax()...);
+        return to_real(back());
     }
 
     template <class... OMeshes>
     constexpr auto restrict(ProductMDomain<OMeshes...> const& odomain) const
     {
-        assert(((std::get<storage_t<OMeshes>>(m_domains).front()
-                 <= std::get<storage_t<OMeshes>>(odomain.m_domains).front())
-                && ...));
-        assert(((std::get<storage_t<OMeshes>>(m_domains).back()
-                 >= std::get<storage_t<OMeshes>>(odomain.m_domains).back())
-                && ...));
-        return ProductMDomain(get_slicer_for<Meshes>(odomain)...);
+        assert(((get<OMeshes>(m_lbound) <= get<OMeshes>(odomain.m_lbound)) && ...));
+        assert(((get<OMeshes>(m_ubound) >= get<OMeshes>(odomain.m_ubound)) && ...));
+        const MCoord<Meshes...> myextents = extents();
+        const MCoord<OMeshes...> oextents = odomain.extents();
+        return ProductMDomain(
+                m_mesh,
+                MCoord<Meshes...>((get_or<Meshes>(odomain.m_lbound, get<Meshes>(m_lbound)))...),
+                MCoord<Meshes...>((get_or<Meshes>(oextents, get<Meshes>(myextents)))...));
     }
 
     constexpr bool empty() const noexcept
@@ -196,51 +209,52 @@ public:
         return !empty();
     }
 
-    template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
+    template <
+            std::size_t N = sizeof...(Meshes),
+            class Mesh0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<Meshes...>>>>
     auto begin() const
     {
-        return std::get<I>(m_domains).begin();
+        return ProductMDomainIterator<Mesh0>(front());
     }
 
-    template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
+    template <
+            std::size_t N = sizeof...(Meshes),
+            class Mesh0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<Meshes...>>>>
     auto end() const
     {
-        return std::get<I>(m_domains).end();
+        return ProductMDomainIterator<Mesh0>(back() + 1);
     }
 
-    template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
+    template <
+            std::size_t N = sizeof...(Meshes),
+            class Mesh0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<Meshes...>>>>
     auto cbegin() const
     {
-        return std::get<I>(m_domains).begin();
+        return ProductMDomainIterator<Mesh0>(front());
     }
 
-    template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
+    template <
+            std::size_t N = sizeof...(Meshes),
+            class Mesh0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<Meshes...>>>>
     auto cend() const
     {
-        return std::get<I>(m_domains).end();
+        return ProductMDomainIterator<Mesh0>(back() + 1);
     }
 
-    template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
+    template <
+            std::size_t N = sizeof...(Meshes),
+            class = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<Meshes...>>>>
     constexpr decltype(auto) operator[](std::size_t __n)
     {
         return begin()[__n];
     }
 
-    template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
+    template <
+            std::size_t N = sizeof...(Meshes),
+            class = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<Meshes...>>>>
     constexpr decltype(auto) operator[](std::size_t __n) const
     {
         return begin()[__n];
-    }
-
-private:
-    template <class QueryMesh, class... OMeshes>
-    auto get_slicer_for(ProductMDomain<OMeshes...> const& c) const
-    {
-        if constexpr (in_tags_v<QueryMesh, detail::TypeSeq<OMeshes...>>) {
-            return std::get<storage_t<QueryMesh>>(c.m_domains);
-        } else {
-            return std::get<storage_t<QueryMesh>>(m_domains);
-        }
     }
 };
 
@@ -314,3 +328,148 @@ constexpr auto select_by_type_seq(ProductMDomain<Meshes...> const& domain)
 {
     return detail::Selection<QueryMeshesSeq>::select(domain);
 }
+
+template <class Mesh>
+struct ProductMDomainIterator
+{
+private:
+    typename Mesh::mcoord_type m_value = typename Mesh::mcoord_type();
+
+public:
+    using iterator_category = std::random_access_iterator_tag;
+
+    using value_type = typename Mesh::mcoord_type;
+
+    using difference_type = MLengthElement;
+
+    ProductMDomainIterator() = default;
+
+    constexpr explicit ProductMDomainIterator(typename Mesh::mcoord_type __value) : m_value(__value)
+    {
+    }
+
+    constexpr typename Mesh::mcoord_type operator*() const noexcept
+    {
+        return m_value;
+    }
+
+    constexpr ProductMDomainIterator& operator++()
+    {
+        ++m_value;
+        return *this;
+    }
+
+    constexpr ProductMDomainIterator operator++(int)
+    {
+        auto __tmp = *this;
+        ++*this;
+        return __tmp;
+    }
+
+    constexpr ProductMDomainIterator& operator--()
+    {
+        --m_value;
+        return *this;
+    }
+
+    constexpr ProductMDomainIterator operator--(int)
+    {
+        auto __tmp = *this;
+        --*this;
+        return __tmp;
+    }
+
+    constexpr ProductMDomainIterator& operator+=(difference_type __n)
+    {
+        if (__n >= difference_type(0))
+            m_value += static_cast<MCoordElement>(__n);
+        else
+            m_value -= static_cast<MCoordElement>(-__n);
+        return *this;
+    }
+
+    constexpr ProductMDomainIterator& operator-=(difference_type __n)
+    {
+        if (__n >= difference_type(0))
+            m_value -= static_cast<MCoordElement>(__n);
+        else
+            m_value += static_cast<MCoordElement>(-__n);
+        return *this;
+    }
+
+    constexpr MCoordElement operator[](difference_type __n) const
+    {
+        return MCoordElement(m_value + __n);
+    }
+
+    friend constexpr bool operator==(
+            ProductMDomainIterator const& xx,
+            ProductMDomainIterator const& yy)
+    {
+        return xx.m_value == yy.m_value;
+    }
+
+    friend constexpr bool operator!=(
+            ProductMDomainIterator const& xx,
+            ProductMDomainIterator const& yy)
+    {
+        return xx.m_value != yy.m_value;
+    }
+
+    friend constexpr bool operator<(
+            ProductMDomainIterator const& xx,
+            ProductMDomainIterator const& yy)
+    {
+        return xx.m_value < yy.m_value;
+    }
+
+    friend constexpr bool operator>(
+            ProductMDomainIterator const& xx,
+            ProductMDomainIterator const& yy)
+    {
+        return yy < xx;
+    }
+
+    friend constexpr bool operator<=(
+            ProductMDomainIterator const& xx,
+            ProductMDomainIterator const& yy)
+    {
+        return !(yy < xx);
+    }
+
+    friend constexpr bool operator>=(
+            ProductMDomainIterator const& xx,
+            ProductMDomainIterator const& yy)
+    {
+        return !(xx < yy);
+    }
+
+    friend constexpr ProductMDomainIterator operator+(
+            ProductMDomainIterator __i,
+            difference_type __n)
+    {
+        return __i += __n;
+    }
+
+    friend constexpr ProductMDomainIterator operator+(
+            difference_type __n,
+            ProductMDomainIterator __i)
+    {
+        return __i += __n;
+    }
+
+    friend constexpr ProductMDomainIterator operator-(
+            ProductMDomainIterator __i,
+            difference_type __n)
+    {
+        return __i -= __n;
+    }
+
+    friend constexpr difference_type operator-(
+            ProductMDomainIterator const& xx,
+            ProductMDomainIterator const& yy)
+    {
+        return (yy.m_value > xx.m_value) ? (-static_cast<difference_type>(yy.m_value - xx.m_value))
+                                         : (xx.m_value - yy.m_value);
+    }
+};

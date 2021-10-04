@@ -5,7 +5,6 @@
 #include <type_traits>
 #include <vector>
 
-#include "ddc/mdomain.hpp"
 #include "ddc/product_mdomain.hpp"
 #include "ddc/product_mesh.hpp"
 
