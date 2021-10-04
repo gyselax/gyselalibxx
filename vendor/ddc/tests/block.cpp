@@ -181,7 +181,7 @@ TEST_F(DBlockXVxTest, slice)
         //              std::decay_t<decltype(subblock)>::layout_type,
         //              std::experimental::layout_right>));
         ASSERT_EQ(subblock.extent<MeshX>(), 5);
-        ASSERT_EQ(subblock.extent<MeshVx>(), get<MeshVx>(block.domain()).size());
+        ASSERT_EQ(subblock.extent<MeshVx>(), select<MeshVx>(block.domain()).size());
         for (auto&& ii : subblock.domain<MeshX>()) {
             for (auto&& jj : subblock.domain<MeshVx>()) {
                 // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
@@ -288,7 +288,7 @@ TEST_F(NonZeroDBlockXVxTest, slice)
         //              std::decay_t<decltype(subblock)>::layout_type,
         //              std::experimental::layout_right>));
         ASSERT_EQ(subblock.extent<MeshX>(), 41);
-        ASSERT_EQ(subblock.extent<MeshVx>(), get<MeshVx>(block.domain()).size());
+        ASSERT_EQ(subblock.extent<MeshVx>(), select<MeshVx>(block.domain()).size());
         for (auto&& ii : subblock.domain<MeshX>()) {
             for (auto&& jj : subblock.domain<MeshVx>()) {
                 // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy

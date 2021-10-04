@@ -99,9 +99,9 @@ int main(int argc, char** argv)
     //! [subdomains]
 
     // Initialize the whole domain
-    for (MCoord<MeshX> ix : get<MeshX>(domain_xy)) {
+    for (MCoord<MeshX> ix : select<MeshX>(domain_xy)) {
         double x = mesh_x.to_real(ix);
-        for (MCoord<MeshY> iy : get<MeshY>(domain_xy)) {
+        for (MCoord<MeshY> iy : select<MeshY>(domain_xy)) {
             double y = mesh_y.to_real(iy);
             T_in(ix, iy) = 0.75 * ((x * x + y * y) < 0.25);
         }
@@ -128,10 +128,10 @@ int main(int argc, char** argv)
         deepcopy(temperature_g_y_right, temperature_i_y_left);
 
         // Stencil computation on inner domain `inner_xy`
-        for (MCoord<MeshX> ix : get<MeshX>(inner_xy)) {
+        for (MCoord<MeshX> ix : select<MeshX>(inner_xy)) {
             const MCoord<MeshX> ixp(ix + 1);
             const MCoord<MeshX> ixm(ix - 1);
-            for (MCoord<MeshY> iy : get<MeshY>(inner_xy)) {
+            for (MCoord<MeshY> iy : select<MeshY>(inner_xy)) {
                 const MCoord<MeshY> iyp(iy + 1);
                 const MCoord<MeshY> iym(iy - 1);
                 T_out(ix, iy) = T_in(ix, iy);

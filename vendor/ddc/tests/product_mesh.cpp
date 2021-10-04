@@ -55,7 +55,7 @@ TEST_F(ProductMeshTest, conversion)
 {
     constexpr static MeshX mesh_x(2., 0.1);
     constexpr ProductMesh product_mesh_x(mesh_x);
-    MeshX const& mesh_x_ref = product_mesh_x;
+    MeshX const& mesh_x_ref = get<MeshX>(product_mesh_x);
     double step = mesh_x_ref.step();
     EXPECT_EQ(0.1, step);
 }

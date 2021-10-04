@@ -118,7 +118,7 @@ static void deepcopy_subblock_2d(benchmark::State& state)
     DBlockSpanXVx src(src_data.data(), dom);
     DBlockSpanXVx dst(dst_data.data(), dom);
     for (auto _ : state) {
-        for (MCoordX i : get<MeshX>(dom)) {
+        for (MCoordX i : select<MeshX>(dom)) {
             auto&& dst_i = dst[i];
             auto&& src_i = src[i];
             deepcopy(dst_i, src_i);

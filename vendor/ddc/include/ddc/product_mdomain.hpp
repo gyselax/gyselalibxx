@@ -19,11 +19,14 @@ class ProductMDomain
     using rdim_t = typename Mesh::rdim_type;
 
     template <class Mesh>
-    using domain_t = MDomain<Mesh>;
+    using storage_t = MDomain<Mesh>;
 
     // static_assert((... && is_mesh_v<Meshes>), "A template parameter is not a mesh");
 
     static_assert((... && (Meshes::rank() == 1)), "Only rank 1 meshes are allowed.");
+
+    template <class...>
+    friend class ProductMDomain;
 
 public:
     using rcoord_type = RCoord<rdim_t<Meshes>...>;
@@ -33,7 +36,12 @@ public:
     using mlength_type = MLength<Meshes...>;
 
 private:
-    std::tuple<domain_t<Meshes>...> m_domains;
+    std::tuple<storage_t<Meshes>...> m_domains;
+
+    explicit constexpr ProductMDomain(storage_t<Meshes> const&... domains)
+        : m_domains(domains...)
+    {
+    }
 
 public:
     static constexpr std::size_t rank()
@@ -47,12 +55,7 @@ public:
     // Note that SFINAE may be redundant because a template constructor should not be selected as a copy constructor.
     template <std::size_t N = sizeof...(Meshes), class = std::enable_if_t<(N != 1)>>
     explicit constexpr ProductMDomain(ProductMDomain<Meshes> const&... domains)
-        : m_domains(domains.template get<Meshes>()...)
-    {
-    }
-
-    explicit constexpr ProductMDomain(domain_t<Meshes> const&... domains)
-        : m_domains(domains...)
+        : m_domains(std::get<storage_t<Meshes>>(domains.m_domains)...)
     {
     }
 
@@ -61,7 +64,7 @@ public:
      * @param size the number of points in each direction
      */
     constexpr ProductMDomain(ProductMesh<Meshes...> const& mesh, mlength_type const& size)
-        : m_domains(domain_t<Meshes>(::get<Meshes>(mesh), 0, ::get<Meshes>(size))...)
+        : m_domains(storage_t<Meshes>(::get<Meshes>(mesh), 0, ::get<Meshes>(size))...)
     {
     }
 
@@ -74,7 +77,7 @@ public:
             ProductMesh<Meshes...> const& mesh,
             mcoord_type const& lbound,
             mlength_type const& size)
-        : m_domains(domain_t<
+        : m_domains(storage_t<
                     Meshes>(::get<Meshes>(mesh), ::get<Meshes>(lbound), ::get<Meshes>(size))...)
     {
     }
@@ -105,62 +108,61 @@ public:
 
     ProductMesh<Meshes...> mesh() const
     {
-        return ProductMesh<Meshes...>(std::get<domain_t<Meshes>>(m_domains).mesh()...);
+        return ProductMesh<Meshes...>(std::get<storage_t<Meshes>>(m_domains).mesh()...);
     }
 
     std::size_t size() const
     {
-        return (1ul * ... * std::get<domain_t<Meshes>>(m_domains).size());
-    }
-
-    template <class QueryMesh>
-    constexpr auto& get()
-    {
-        return std::get<domain_t<QueryMesh>>(m_domains);
-    }
-
-    template <class QueryMesh>
-    constexpr auto const& get() const
-    {
-        return std::get<domain_t<QueryMesh>>(m_domains);
+        return (1ul * ... * std::get<storage_t<Meshes>>(m_domains).size());
     }
 
     constexpr mlength_type extents() const noexcept
     {
-        return mcoord_type(std::get<domain_t<Meshes>>(m_domains).size()...);
+        return mcoord_type(std::get<storage_t<Meshes>>(m_domains).size()...);
     }
 
     constexpr mcoord_type front() const noexcept
     {
-        return mcoord_type(std::get<domain_t<Meshes>>(m_domains).front()...);
+        return mcoord_type(std::get<storage_t<Meshes>>(m_domains).front()...);
     }
 
     constexpr mcoord_type back() const noexcept
     {
-        return mcoord_type(std::get<domain_t<Meshes>>(m_domains).back()...);
+        return mcoord_type(std::get<storage_t<Meshes>>(m_domains).back()...);
     }
 
     rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
-        return rcoord_type(std::get<domain_t<Meshes>>(m_domains).to_real(::get<Meshes>(icoord))...);
+        return rcoord_type(
+                std::get<storage_t<Meshes>>(m_domains).to_real(::get<Meshes>(icoord))...);
     }
 
     rcoord_type rmin() const noexcept
     {
-        return rcoord_type(std::get<domain_t<Meshes>>(m_domains).rmin()...);
+        return rcoord_type(std::get<storage_t<Meshes>>(m_domains).rmin()...);
     }
 
     rcoord_type rmax() const noexcept
     {
-        return rcoord_type(std::get<domain_t<Meshes>>(m_domains).rmax()...);
+        return rcoord_type(std::get<storage_t<Meshes>>(m_domains).rmax()...);
     }
 
     template <class... OMeshes>
     constexpr auto restrict(ProductMDomain<OMeshes...> const& odomain) const
     {
-        assert(((get<OMeshes>().front() <= odomain.template get<OMeshes>().front()) && ...));
-        assert(((get<OMeshes>().back() >= odomain.template get<OMeshes>().back()) && ...));
+        assert(((std::get<storage_t<OMeshes>>(m_domains).front() <= std::get<storage_t<OMeshes>>(odomain.m_domains).front()) && ...));
+        assert(((std::get<storage_t<OMeshes>>(m_domains).back() >= std::get<storage_t<OMeshes>>(odomain.m_domains).back()) && ...));
         return ProductMDomain(get_slicer_for<Meshes>(odomain)...);
+    }
+
+    constexpr bool empty() const noexcept
+    {
+        return size() == 0;
+    }
+
+    constexpr explicit operator bool()
+    {
+        return !empty();
     }
 
     template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
@@ -175,29 +177,41 @@ public:
         return std::get<I>(m_domains).end();
     }
 
+    template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
+    auto cbegin() const
+    {
+        return std::get<I>(m_domains).begin();
+    }
+
+    template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
+    auto cend() const
+    {
+        return std::get<I>(m_domains).end();
+    }
+
+    template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
+    constexpr decltype(auto) operator[](std::size_t __n)
+    {
+        return begin()[__n];
+    }
+
+    template <std::size_t N = sizeof...(Meshes), std::enable_if_t<N == 1, std::size_t> I = 0>
+    constexpr decltype(auto) operator[](std::size_t __n) const
+    {
+        return begin()[__n];
+    }
+
 private:
     template <class QueryMesh, class... OMeshes>
     auto get_slicer_for(ProductMDomain<OMeshes...> const& c) const
     {
         if constexpr (in_tags_v<QueryMesh, detail::TypeSeq<OMeshes...>>) {
-            return c.template get<QueryMesh>();
+            return std::get<storage_t<QueryMesh>>(c.m_domains);
         } else {
-            return get<QueryMesh>();
+            return std::get<storage_t<QueryMesh>>(m_domains);
         }
     }
 };
-
-template <class QueryMesh, class... Meshes>
-constexpr auto const& get(ProductMDomain<Meshes...> const& domain)
-{
-    return domain.template get<QueryMesh>();
-}
-
-template <class QueryMesh, class... Meshes>
-constexpr auto& get(ProductMDomain<Meshes...>& domain)
-{
-    return domain.template get<QueryMesh>();
-}
 
 template <class... QueryMeshes, class... Meshes>
 constexpr auto select(ProductMDomain<Meshes...> const& domain)
@@ -211,19 +225,19 @@ constexpr auto select(ProductMDomain<Meshes...> const& domain)
 template <class... QueryMeshes, class... Meshes>
 constexpr MCoord<QueryMeshes...> extents(ProductMDomain<Meshes...> const& domain) noexcept
 {
-    return MCoord<QueryMeshes...>(get<QueryMeshes>(domain).size()...);
+    return MCoord<QueryMeshes...>(select<QueryMeshes>(domain).size()...);
 }
 
 template <class... QueryMeshes, class... Meshes>
 constexpr MCoord<QueryMeshes...> front(ProductMDomain<Meshes...> const& domain) noexcept
 {
-    return MCoord<QueryMeshes...>(get<QueryMeshes>(domain).front()...);
+    return MCoord<QueryMeshes...>(select<QueryMeshes>(domain).front()...);
 }
 
 template <class... QueryMeshes, class... Meshes>
 constexpr MCoord<QueryMeshes...> back(ProductMDomain<Meshes...> const& domain) noexcept
 {
-    return MCoord<QueryMeshes...>(get<QueryMeshes>(domain).back()...);
+    return MCoord<QueryMeshes...>(select<QueryMeshes>(domain).back()...);
 }
 
 template <class... QueryMeshes, class... Meshes>
@@ -231,19 +245,19 @@ RCoord<QueryMeshes...> to_real(
         ProductMDomain<Meshes...> const& domain,
         MCoord<QueryMeshes...> const& icoord) noexcept
 {
-    return RCoord<QueryMeshes...>(get<QueryMeshes>(domain).to_real(get<QueryMeshes>(icoord))...);
+    return RCoord<QueryMeshes...>(select<QueryMeshes>(domain).to_real(select<QueryMeshes>(icoord))...);
 }
 
 template <class... QueryMeshes, class... Meshes>
 RCoord<QueryMeshes...> rmin(ProductMDomain<Meshes...> const& domain) noexcept
 {
-    return RCoord<QueryMeshes...>(get<QueryMeshes>(domain).rmin()...);
+    return RCoord<QueryMeshes...>(select<QueryMeshes>(domain).rmin()...);
 }
 
 template <class... QueryMeshes, class... Meshes>
 RCoord<QueryMeshes...> rmax(ProductMDomain<Meshes...> const& domain) noexcept
 {
-    return RCoord<QueryMeshes...>(get<QueryMeshes>(domain).rmax()...);
+    return RCoord<QueryMeshes...>(select<QueryMeshes>(domain).rmax()...);
 }
 
 namespace detail {
