@@ -363,7 +363,7 @@ public:
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
      */
-    inline constexpr internal_mdspan_type internal_view() const
+    inline constexpr internal_mdspan_type internal_mdspan() const
     {
         return m_internal_mdspan;
     }

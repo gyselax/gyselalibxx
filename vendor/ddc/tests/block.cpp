@@ -239,11 +239,11 @@ TEST_F(NonZeroDBlockXVxTest, view)
             block(ii, jj) = 1. * ii + .001 * jj;
         }
     }
-    auto cview = block.internal_view();
+    auto internal_mdspan = block.internal_mdspan();
     for (auto ii = block.ibegin<MeshX>(); ii < block.iend<MeshX>(); ++ii) {
         for (auto jj = block.ibegin<MeshVx>(); jj < block.iend<MeshVx>(); ++jj) {
             // we expect complete equality, not ASSERT_DOUBLE_EQ: these are copy
-            ASSERT_EQ(cview(ii, jj), block(MCoordXVx(ii, jj)));
+            ASSERT_EQ(internal_mdspan(ii, jj), block(MCoordXVx(ii, jj)));
         }
     }
 }
