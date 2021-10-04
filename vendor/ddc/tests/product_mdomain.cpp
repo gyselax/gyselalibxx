@@ -13,44 +13,104 @@
 #include <gtest/gtest.h>
 
 class DimX;
+using RCoordX = RCoord<DimX>;
+
 class DimVx;
+using RCoordVx = RCoord<DimVx>;
 
 using MeshX = UniformMesh<DimX>;
+using MCoordX = MCoord<MeshX>;
+using MLengthX = MLength<MeshX>;
+
+using MDomainX = ProductMDomain<MeshX>;
+
 using MeshVx = NonUniformMesh<DimVx>;
+using MCoordXVx = MCoord<MeshX, MeshVx>;
+using MLengthXVx = MLength<MeshX, MeshVx>;
 
-class ProductMDomainTest : public ::testing::Test
-{
-protected:
-    std::size_t npoints_x = 11;
-    std::size_t npoints_vx = 4;
-    MeshX mesh_x = MeshX(2., 3., npoints_x);
-    MeshVx mesh_vx = MeshVx({-1., 0., 2., 4.});
-    ProductMesh<MeshX, MeshVx> mesh_x_vx = ProductMesh(mesh_x, mesh_vx);
-    ProductMDomain<MeshX, MeshVx> domain_x_vx = ProductMDomain(
-            mesh_x_vx,
-            MCoord<MeshX, MeshVx>(0, 0),
-            MLength<MeshX, MeshVx>(npoints_x, npoints_vx));
-};
+using MDomainXVx = ProductMDomain<MeshX, MeshVx>;
 
-TEST_F(ProductMDomainTest, constructor)
+
+RCoordX constexpr origin_x = 0;
+RCoordX constexpr step_x = .01;
+MeshX constexpr mesh_x = MeshX(origin_x, step_x);
+
+MCoordX constexpr lbound_x = 50;
+MLengthX constexpr npoints_x = 51;
+MCoordX constexpr ubound_x = lbound_x + npoints_x - 1;
+
+MLengthX constexpr npoints_vx = 4;
+std::array<RCoordVx, npoints_vx> constexpr coords_vx = {-1., 0., 2., 4.};
+MCoordX constexpr lbound_vx = 0;
+MeshVx const mesh_vx = MeshVx(coords_vx);
+
+MCoordXVx constexpr lbound_x_vx = MCoord<MeshX, MeshVx> {lbound_x, lbound_vx};
+MLengthXVx constexpr npoints_x_vx = MLength<MeshX, MeshVx>(npoints_x, npoints_vx);
+MLengthXVx constexpr ubound_x_vx
+        = MLength<MeshX, MeshVx>(lbound_x + npoints_x - 1, lbound_vx + npoints_vx - 1);
+
+
+TEST(ProductMDomainTest, constructor)
 {
-    EXPECT_EQ(domain_x_vx.extents(), (MCoord<MeshX, MeshVx>(npoints_x, npoints_vx)));
-    EXPECT_EQ(domain_x_vx.front(), (MCoord<MeshX, MeshVx>(0, 0)));
-    EXPECT_EQ(domain_x_vx.back(), (MCoord<MeshX, MeshVx>(npoints_x - 1, npoints_vx - 1)));
-    EXPECT_EQ(domain_x_vx.size(), npoints_x * npoints_vx);
+    MDomainXVx const dom_x_vx = MDomainXVx(mesh_x, mesh_vx, lbound_x_vx, npoints_x_vx);
+    EXPECT_EQ(dom_x_vx.extents(), npoints_x_vx);
+    EXPECT_EQ(dom_x_vx.front(), lbound_x_vx);
+    EXPECT_EQ(dom_x_vx.back(), ubound_x_vx);
+    EXPECT_EQ(dom_x_vx.size(), npoints_x * npoints_vx);
+
+    MDomainX const dom_x = MDomainX(mesh_x, lbound_x, npoints_x);
+    EXPECT_EQ(dom_x.mesh().get<MeshX>(), mesh_x);
+    EXPECT_EQ(dom_x.size(), npoints_x);
+    EXPECT_EQ(dom_x.empty(), false);
+    EXPECT_EQ(dom_x[0], lbound_x);
+    EXPECT_EQ(dom_x.front(), lbound_x);
+    EXPECT_EQ(dom_x.back(), ubound_x);
+
+    MDomainX const empty_domain(mesh_x, lbound_x, 0);
+    EXPECT_EQ(empty_domain.mesh().get<MeshX>(), mesh_x);
+    EXPECT_EQ(empty_domain.size(), 0);
+    EXPECT_EQ(empty_domain.empty(), true);
+    EXPECT_EQ(empty_domain[0], lbound_x);
 }
 
-TEST_F(ProductMDomainTest, rmin_rmax)
+TEST(ProductMDomainTest, rmin_rmax)
 {
-    EXPECT_EQ(domain_x_vx.rmin(), (RCoord<DimX, DimVx>(2., -1.)));
-    EXPECT_EQ(domain_x_vx.rmax(), (RCoord<DimX, DimVx>(3., 4.)));
+    MDomainX const dom_x(mesh_x, lbound_x, npoints_x);
+    EXPECT_EQ(dom_x.rmin(), lbound_x.value() * step_x + origin_x);
+    EXPECT_EQ(dom_x.rmax(), ubound_x.value() * step_x + origin_x);
+
+    MDomainXVx const dom_x_vx(mesh_x, mesh_vx, lbound_x_vx, npoints_x_vx);
+    RCoord<DimX, DimVx> const rmin_vx(lbound_x.value() * step_x + origin_x, coords_vx[lbound_vx]);
+    RCoord<DimX, DimVx> const
+            rmax_vx(ubound_x.value() * step_x + origin_x, coords_vx[npoints_vx - 1]);
+    EXPECT_EQ(dom_x_vx.rmin(), rmin_vx);
+    EXPECT_EQ(dom_x_vx.rmax(), rmax_vx);
 }
 
-TEST_F(ProductMDomainTest, subdomain)
+TEST(ProductMDomainTest, subdomain)
 {
-    ProductMDomain subdomain_x(ProductMesh<MeshX>(mesh_x), MCoord<MeshX>(1), MLength<MeshX>(1));
-    auto subdomain = domain_x_vx.restrict(subdomain_x);
+    MDomainXVx const dom_x_vx = MDomainXVx(mesh_x, mesh_vx, lbound_x_vx, npoints_x_vx);
+    MCoord<MeshX> const lbound_subdomain_x = lbound_x + 1;
+    MLength<MeshX> const npoints_subdomain_x = npoints_x - 2;
+    MDomainX const subdomain_x(mesh_x, lbound_subdomain_x, npoints_subdomain_x);
+    MDomainXVx const subdomain = dom_x_vx.restrict(subdomain_x);
     EXPECT_EQ(
             subdomain,
-            ProductMDomain(mesh_x_vx, MCoord<MeshX, MeshVx>(1, 0), MLength<MeshX, MeshVx>(1, 4)));
+            MDomainXVx(
+                    mesh_x,
+                    mesh_vx,
+                    MCoord<MeshX, MeshVx>(lbound_subdomain_x, lbound_vx),
+                    MLength<MeshX, MeshVx>(npoints_subdomain_x, npoints_vx)));
+}
+
+TEST(ProductMDomainTest, RangeFor)
+{
+    MDomainX const dom = MDomainX(mesh_x, lbound_x, npoints_x);
+    MCoordX ii = lbound_x;
+    for (MCoordX ix : dom) {
+        ASSERT_LE(lbound_x, ix);
+        EXPECT_EQ(ix, ii);
+        ASSERT_LE(ix, ubound_x);
+        ++ii.get<MeshX>();
+    }
 }

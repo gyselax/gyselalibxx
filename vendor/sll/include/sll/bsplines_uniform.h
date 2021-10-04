@@ -4,7 +4,6 @@
 #include <cassert>
 #include <memory>
 
-#include <ddc/MDomain>
 #include <ddc/ProductMDomain>
 #include <ddc/UniformMesh>
 
@@ -62,8 +61,9 @@ public:
 
 private:
     mesh_type m_mesh;
+
     // In the periodic case, it contains twice the periodic point!!!
-    MDomain<mesh_type> m_domain;
+    ProductMDomain<mesh_type> m_domain;
 
 public:
     BSplines() = default;
@@ -150,7 +150,7 @@ public:
 private:
     double inv_step() const noexcept
     {
-        return 1.0 / m_domain.mesh().step();
+        return 1.0 / m_domain.mesh().template get<mesh_type>().step();
     }
 
     void eval_basis(
@@ -207,7 +207,7 @@ void BSplines<UniformMesh<Tag>, D>::eval_deriv(
     // 3. Compute derivatives of aforementioned B-splines
     //    Derivatives are normalized, hence they should be divided by dx
     double xx, temp, saved;
-    derivs(0) = 1.0 / m_domain.mesh().step();
+    derivs(0) = 1.0 / m_domain.mesh().template get<mesh_type>().step();
     for (int j(1); j < degree(); ++j) {
         xx = -offset;
         saved = 0.0;

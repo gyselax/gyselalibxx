@@ -19,7 +19,7 @@ class ProductMDomain
     using rdim_t = typename Mesh::rdim_type;
 
     template <class Mesh>
-    using storage_t = MDomain<Mesh>;
+    using storage_t = detail::MDomain<Mesh>;
 
     // static_assert((... && is_mesh_v<Meshes>), "A template parameter is not a mesh");
 
@@ -38,8 +38,7 @@ public:
 private:
     std::tuple<storage_t<Meshes>...> m_domains;
 
-    explicit constexpr ProductMDomain(storage_t<Meshes> const&... domains)
-        : m_domains(domains...)
+    explicit constexpr ProductMDomain(storage_t<Meshes> const&... domains) : m_domains(domains...)
     {
     }
 
@@ -60,7 +59,16 @@ public:
     }
 
     /** Construct a ProductMDomain starting from (0, ..., 0) with size points.
-     * @param mesh
+     * @param meshes the discrete dimensions on which the domain is constructed
+     * @param size the number of points in each direction
+     */
+    constexpr ProductMDomain(Meshes const&... meshes, mlength_type const& size)
+        : m_domains(storage_t<Meshes>(::get<Meshes>(meshes), 0, ::get<Meshes>(size))...)
+    {
+    }
+
+    /** Construct a ProductMDomain starting from (0, ..., 0) with size points.
+     * @param mesh the discrete space on which the domain is constructed
      * @param size the number of points in each direction
      */
     constexpr ProductMDomain(ProductMesh<Meshes...> const& mesh, mlength_type const& size)
@@ -69,7 +77,20 @@ public:
     }
 
     /** Construct a ProductMDomain starting from lbound with size points.
-     * @param mesh
+     * @param meshes the discrete dimensions on which the domain is constructed
+     * @param lbound the lower bound in each direction
+     * @param size the number of points in each direction
+     */
+    constexpr ProductMDomain(
+            Meshes const&... meshes,
+            mcoord_type const& lbound,
+            mlength_type const& size)
+        : m_domains(storage_t<Meshes>(meshes, ::get<Meshes>(lbound), ::get<Meshes>(size))...)
+    {
+    }
+
+    /** Construct a ProductMDomain starting from lbound with size points.
+     * @param mesh the discrete space on which the domain is constructed
      * @param lbound the lower bound in each direction
      * @param size the number of points in each direction
      */
@@ -105,6 +126,12 @@ public:
         return !(*this == other);
     }
 #endif
+
+    template <class... QueryMeshes>
+    ProductMesh<Meshes...> mesh() const
+    {
+        return select<QueryMeshes...>(mesh());
+    }
 
     ProductMesh<Meshes...> mesh() const
     {
@@ -150,8 +177,12 @@ public:
     template <class... OMeshes>
     constexpr auto restrict(ProductMDomain<OMeshes...> const& odomain) const
     {
-        assert(((std::get<storage_t<OMeshes>>(m_domains).front() <= std::get<storage_t<OMeshes>>(odomain.m_domains).front()) && ...));
-        assert(((std::get<storage_t<OMeshes>>(m_domains).back() >= std::get<storage_t<OMeshes>>(odomain.m_domains).back()) && ...));
+        assert(((std::get<storage_t<OMeshes>>(m_domains).front()
+                 <= std::get<storage_t<OMeshes>>(odomain.m_domains).front())
+                && ...));
+        assert(((std::get<storage_t<OMeshes>>(m_domains).back()
+                 >= std::get<storage_t<OMeshes>>(odomain.m_domains).back())
+                && ...));
         return ProductMDomain(get_slicer_for<Meshes>(odomain)...);
     }
 
@@ -245,7 +276,8 @@ RCoord<QueryMeshes...> to_real(
         ProductMDomain<Meshes...> const& domain,
         MCoord<QueryMeshes...> const& icoord) noexcept
 {
-    return RCoord<QueryMeshes...>(select<QueryMeshes>(domain).to_real(select<QueryMeshes>(icoord))...);
+    return RCoord<QueryMeshes...>(
+            select<QueryMeshes>(domain).to_real(select<QueryMeshes>(icoord))...);
 }
 
 template <class... QueryMeshes, class... Meshes>

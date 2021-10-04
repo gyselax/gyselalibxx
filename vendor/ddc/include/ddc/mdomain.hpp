@@ -7,6 +7,8 @@
 #include "ddc/rcoord.hpp"
 #include "ddc/uniform_mesh.hpp"
 
+namespace detail {
+
 template <class Mesh>
 class MDomain
 {
@@ -307,3 +309,5 @@ public:
                                          : (xx.m_value - yy.m_value);
     }
 };
+
+}

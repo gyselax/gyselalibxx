@@ -3,7 +3,6 @@
 #include <string_view>
 
 #include <ddc/MCoord>
-#include <ddc/MDomain>
 #include <ddc/ProductMDomain>
 #include <ddc/TaggedVector>
 #include <ddc/expose_to_pdi>

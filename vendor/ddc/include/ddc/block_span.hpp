@@ -188,7 +188,6 @@ public:
     inline constexpr BlockSpan& operator=(BlockSpan&& other) = default;
 
     /** Slice out some dimensions
-     * @param slices the coordinates to
      */
     template <class... QueryMeshes>
     inline constexpr auto operator[](MCoord<QueryMeshes...> const& slice_spec) const
@@ -201,7 +200,6 @@ public:
     }
 
     /** Slice out some dimensions
-     * @param slices the coordinates to
      */
     template <class... QueryMeshes>
     inline constexpr auto operator[](ProductMDomain<QueryMeshes...> const& odomain) const

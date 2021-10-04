@@ -4,7 +4,6 @@
 #include <experimental/mdspan>
 
 #include <ddc/BlockSpan>
-#include <ddc/MDomain>
 #include <ddc/ProductMDomain>
 #include <ddc/ProductMesh>
 #include <ddc/RCoord>

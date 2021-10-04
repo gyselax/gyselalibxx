@@ -5,7 +5,6 @@
 #include <memory>
 #include <vector>
 
-#include <ddc/MDomain>
 #include <ddc/NonUniformMesh>
 #include <ddc/ProductMDomain>
 

@@ -107,7 +107,6 @@ int main(int argc, char** argv)
         }
     }
 
-    PC_tree_t conf;
     PDI_init(PC_parse_string(PDI_CFG));
     PDI_expose("ghostwidth", &gw, PDI_OUT);
 

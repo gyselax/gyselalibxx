@@ -5,7 +5,6 @@
 #include <type_traits>
 
 #include <ddc/BlockSpan>
-#include <ddc/MDomain>
 #include <ddc/NonUniformMesh>
 
 #include <fftw3.h>

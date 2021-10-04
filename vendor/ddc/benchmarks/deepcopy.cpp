@@ -7,7 +7,6 @@
 
 #include <ddc/BlockSpan>
 #include <ddc/MCoord>
-#include <ddc/MDomain>
 #include <ddc/ProductMDomain>
 #include <ddc/ProductMesh>
 #include <ddc/RCoord>

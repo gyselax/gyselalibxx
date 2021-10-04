@@ -6,7 +6,6 @@
 #include <ddc/Block>
 #include <ddc/BlockSpan>
 #include <ddc/MCoord>
-#include <ddc/MDomain>
 #include <ddc/NonUniformMesh>
 #include <ddc/ProductMDomain>
 #include <ddc/ProductMesh>

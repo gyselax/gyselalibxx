@@ -5,7 +5,6 @@
 #include <experimental/mdspan>
 
 #include <ddc/MCoord>
-#include <ddc/MDomain>
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>

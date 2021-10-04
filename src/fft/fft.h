@@ -4,7 +4,6 @@
 #include <vector>
 
 #include <ddc/BlockSpan>
-#include <ddc/MDomain>
 #include <ddc/NonUniformMesh>
 
 #include <geometry.h>

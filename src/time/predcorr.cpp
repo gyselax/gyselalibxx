@@ -1,5 +1,4 @@
 #include <ddc/BlockSpan>
-#include <ddc/MDomain>
 #include <ddc/ProductMDomain>
 #include <ddc/TaggedVector>
 #include <ddc/pdi.hpp>
