@@ -98,9 +98,8 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
     }
 
     // Construct a domain over the bounded basis and allocate memory on this support
-    ProductMesh const pbsplines_x(m_spline_x_basis);
-    ProductMDomain const dom_bsplines_x(pbsplines_x, MLength<BSplinesX>(m_spline_x_basis.size()));
-    Block<double, ProductMDomain<BSplinesX>> phi_spline_coef(dom_bsplines_x);
+    BSDomainX const dom_bsx(m_spline_x_basis, MLength<BSplinesX>(m_spline_x_basis.size()));
+    Block<double, ProductMDomain<BSplinesX>> phi_spline_coef(dom_bsx);
     m_spline_x_builder(phi_spline_coef, phi_x);
 
     // Compute the electric field E = -d Phi / dx using a spline representation

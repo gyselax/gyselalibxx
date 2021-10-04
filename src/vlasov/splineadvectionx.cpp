@@ -49,9 +49,8 @@ DSpanXVx SplineAdvectionX::operator()(DSpanXVx fdistribu, double sqrt_me_on_mspe
     DBlockX contiguous_slice(x_dom);
 
     // Construct a domain over the bounded basis and allocate memory on this support
-    ProductMesh const pbsplines_x(m_x_spline_basis);
-    ProductMDomain const dom_bsplines_x(pbsplines_x, MLength<BSplinesX>(m_x_spline_basis.size()));
-    Block<double, BSDomainX> spline_coef(dom_bsplines_x);
+    BSDomainX const dom_bsx(m_x_spline_basis, MLength<BSplinesX>(m_x_spline_basis.size()));
+    Block<double, BSDomainX> spline_coef(dom_bsx);
 
     for (MCoordVx iv : v_dom) {
         // compute the displacement

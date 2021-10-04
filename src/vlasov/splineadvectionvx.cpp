@@ -53,10 +53,8 @@ DSpanXVx SplineAdvectionVx::operator()(
             m_spline_vx_builder.interpolation_domain());
 
     // Construct a domain over the bounded basis and allocate memory on this support
-    ProductMesh const pbsplines_vx(m_vx_spline_basis);
-    ProductMDomain const
-            dom_bsplines_vx(pbsplines_vx, MLength<BSplinesVx>(m_vx_spline_basis.size()));
-    Block<double, BSDomainVx> spline_coef(dom_bsplines_vx);
+    BSDomainVx const dom_bsvx(m_vx_spline_basis, MLength<BSplinesVx>(m_vx_spline_basis.size()));
+    Block<double, BSDomainVx> spline_coef(dom_bsvx);
 
     for (MCoordX ix : x_dom) {
         // compute the displacement
