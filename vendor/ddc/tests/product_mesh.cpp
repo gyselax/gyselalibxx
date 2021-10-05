@@ -28,7 +28,7 @@ class ProductMeshTest : public ::testing::Test
 {
 protected:
     MeshX mesh_x = MeshX(2., 0.1);
-    std::array<double, 4> points_vx {-1., 0., 2., 4.};
+    std::array<RCoordVx, 4> points_vx {-1., 0., 2., 4.};
     MeshVx mesh_vx = MeshVx(points_vx);
     MeshXVx mesh_x_vx {mesh_x, mesh_vx};
 };

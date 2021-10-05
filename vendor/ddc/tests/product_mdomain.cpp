@@ -24,6 +24,9 @@ using MLengthX = MLength<MeshX>;
 using MDomainX = ProductMDomain<MeshX>;
 
 using MeshVx = NonUniformMesh<DimVx>;
+using MCoordVx = MCoord<MeshVx>;
+using MLengthVx = MLength<MeshVx>;
+
 using MCoordXVx = MCoord<MeshX, MeshVx>;
 using MLengthXVx = MLength<MeshX, MeshVx>;
 
@@ -38,9 +41,9 @@ MCoordX constexpr lbound_x = 50;
 MLengthX constexpr npoints_x = 51;
 MCoordX constexpr ubound_x = lbound_x + npoints_x - 1;
 
-MLengthX constexpr npoints_vx = 4;
+MLengthVx constexpr npoints_vx = 4;
 std::array<RCoordVx, npoints_vx> constexpr coords_vx = {-1., 0., 2., 4.};
-MCoordX constexpr lbound_vx = 0;
+MCoordVx constexpr lbound_vx = 0;
 MeshVx const mesh_vx = MeshVx(coords_vx);
 
 MCoordXVx constexpr lbound_x_vx = MCoord<MeshX, MeshVx> {lbound_x, lbound_vx};
@@ -55,7 +58,7 @@ TEST(ProductMDomainTest, constructor)
     EXPECT_EQ(dom_x_vx.extents(), npoints_x_vx);
     EXPECT_EQ(dom_x_vx.front(), lbound_x_vx);
     EXPECT_EQ(dom_x_vx.back(), ubound_x_vx);
-    EXPECT_EQ(dom_x_vx.size(), npoints_x * npoints_vx);
+    EXPECT_EQ(dom_x_vx.size(), npoints_x.value() * npoints_vx.value());
 
     MDomainX const dom_x = MDomainX(mesh_x, lbound_x, npoints_x);
     EXPECT_EQ(dom_x.mesh<MeshX>(), mesh_x);
@@ -79,9 +82,10 @@ TEST(ProductMDomainTest, rmin_rmax)
     EXPECT_EQ(dom_x.rmax(), ubound_x.value() * step_x + origin_x);
 
     MDomainXVx const dom_x_vx(mesh_x, mesh_vx, lbound_x_vx, npoints_x_vx);
-    RCoord<DimX, DimVx> const rmin_vx(lbound_x.value() * step_x + origin_x, coords_vx[lbound_vx]);
     RCoord<DimX, DimVx> const
-            rmax_vx(ubound_x.value() * step_x + origin_x, coords_vx[npoints_vx - 1]);
+            rmin_vx(RCoordX(lbound_x.value() * step_x) + origin_x, coords_vx[lbound_vx]);
+    RCoord<DimX, DimVx> const
+            rmax_vx(RCoordX(ubound_x.value() * step_x) + origin_x, coords_vx[npoints_vx - 1]);
     EXPECT_EQ(dom_x_vx.rmin(), rmin_vx);
     EXPECT_EQ(dom_x_vx.rmax(), rmax_vx);
 }

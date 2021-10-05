@@ -10,8 +10,21 @@
 template <class, class...>
 class TaggedVector;
 
+template <class T>
+struct IsTaggedVector : std::false_type
+{
+};
+
+template <class ElementType, class... Tags>
+struct IsTaggedVector<TaggedVector<ElementType, Tags...>> : std::true_type
+{
+};
+
+template <class T>
+inline constexpr bool is_tagged_vector_v = IsTaggedVector<T>::value;
+
 template <class QueryTag, class ElementType, class HeadTag, class... TailTags>
-TaggedVector<ElementType, QueryTag> const& take_first(
+constexpr TaggedVector<ElementType, QueryTag> const& take_first(
         TaggedVector<ElementType, HeadTag> const& head,
         TaggedVector<ElementType, TailTags> const&... tags)
 {
@@ -65,11 +78,12 @@ public:
 
     inline constexpr TaggedVector(TaggedVector&&) = default;
 
-    // template <class... OTags>
-    // inline constexpr TaggedVector(TaggedVector<ElementType, OTags> const&... other) noexcept
-    //     : m_values {take_first<Tags>(other).value()...}
-    // {
-    // }
+    template <class... OTags>
+    inline constexpr TaggedVector(
+            TaggedVector<ElementType, OTags> const&... other) noexcept
+        : m_values {take_first<Tags>(other...).value()...}
+    {
+    }
 
     template <class OElementType, class... OTags>
     inline constexpr TaggedVector(TaggedVector<OElementType, OTags...> const& other) noexcept
@@ -80,6 +94,7 @@ public:
     template <
             class... Params,
             class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
+            class = std::enable_if_t<(!is_tagged_vector_v<Params> && ...)>,
             class = std::enable_if_t<sizeof...(Params) == sizeof...(Tags)>>
     inline constexpr TaggedVector(Params const&... params) noexcept
         : m_values {static_cast<ElementType>(params)...}

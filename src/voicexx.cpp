@@ -101,11 +101,10 @@ int main(int argc, char** argv)
 
     MeshVx const mesh_vx(vx_min, vx_max, vx_size);
 
-
     MDomainXVx const
             dom2d(builder_x.interpolation_domain().mesh<MeshX>(),
                   mesh_vx,
-                  MCoordXVx(builder_x.interpolation_domain().extents(), vx_size));
+                  MLengthXVx(builder_x.interpolation_domain().extents(), vx_size));
 
     // Creating operators
 
