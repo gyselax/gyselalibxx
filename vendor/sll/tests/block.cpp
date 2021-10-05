@@ -47,8 +47,7 @@ protected:
 TEST_F(BlockBSplinesUniformTest, constructor)
 {
     MLength<BSplinesX, BSplinesY> size(ncells, ncells);
-    ProductMesh<BSplinesX, BSplinesY> pbsplines(bsplinesx, bsplinesy);
-    ProductMDomain<BSplinesX, BSplinesY> dom(pbsplines, size);
+    ProductMDomain<BSplinesX, BSplinesY> dom(bsplinesx, bsplinesy, size);
 
     Block<double, ProductMDomain<BSplinesX, BSplinesY>> block(dom);
     auto view = block.view();

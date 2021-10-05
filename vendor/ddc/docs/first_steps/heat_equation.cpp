@@ -2,7 +2,6 @@
 #include <ddc/MCoord>
 #include <ddc/PdiEvent>
 #include <ddc/ProductMDomain>
-#include <ddc/ProductMesh>
 #include <ddc/UniformMesh>
 
 // Name of the axis
@@ -63,16 +62,16 @@ int main(int argc, char** argv)
     MeshY mesh_y(min_y, dy);
 
     // Two-dimensional mesh on X,Y
-    ProductMesh<MeshX, MeshY> mesh_xy(mesh_x, mesh_y);
     //! [mesh]
 
     //! [domain]
     // Take (nx+2gw) x (ny+2gw) points of `mesh_xy` starting from (0,0)
-    ProductMDomain<MeshX, MeshY> domain_xy(mesh_xy, MCoord<MeshX, MeshY>(nx + 2 * gw, ny + 2 * gw));
+    ProductMDomain<MeshX, MeshY>
+            domain_xy(mesh_x, mesh_y, MCoord<MeshX, MeshY>(nx + 2 * gw, ny + 2 * gw));
 
     // Take only the inner domain (i.e. without ghost zone)
     ProductMDomain<MeshX, MeshY>
-            inner_xy(mesh_xy, MCoord<MeshX, MeshY>(gw, gw), MCoord<MeshX, MeshY>(nx, ny));
+            inner_xy(mesh_x, mesh_y, MCoord<MeshX, MeshY>(gw, gw), MCoord<MeshX, MeshY>(nx, ny));
     //! [domain]
 
     // Allocate data located at each point of `domain_xy` (including ghost region)

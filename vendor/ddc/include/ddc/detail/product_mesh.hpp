@@ -7,6 +7,7 @@
 #include "ddc/mesh.hpp"
 #include "ddc/rcoord.hpp"
 
+namespace detail {
 template <class... Meshes>
 class ProductMesh
 {
@@ -91,4 +92,6 @@ template <class... QueryMeshes, class... Meshes>
 constexpr ProductMesh<QueryMeshes...> select(ProductMesh<Meshes...> const& mesh)
 {
     return ProductMesh(get<QueryMeshes>(mesh)...);
+}
+
 }

@@ -32,7 +32,8 @@ public:
             ProductMDomain<UniformMesh<Tags>...> const& dom_x) const noexcept override
     {
         std::vector<double> freqs(dom_x.size());
-        double const inv_Nd = 1. / (dom_x.size() * get<UniformMesh<Tags>...>(dom_x.mesh()).step());
+        double const inv_Nd
+                = 1. / (dom_x.size() * dom_x.template mesh<UniformMesh<Tags>...>().step());
         for (std::size_t ii = 0; ii <= dom_x.size() / 2; ++ii) {
             freqs[ii] = ii * inv_Nd;
         }

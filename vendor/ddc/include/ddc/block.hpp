@@ -26,8 +26,6 @@ public:
 
     using mdomain_type = typename block_span_type::mdomain_type;
 
-    using mesh_type = ProductMesh<Meshes...>;
-
     using mcoord_type = typename mdomain_type::mcoord_type;
 
     using extents_type = typename block_span_type::extents_type;

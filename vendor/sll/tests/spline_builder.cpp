@@ -10,7 +10,6 @@
 #include <ddc/MCoord>
 #include <ddc/NonUniformMesh>
 #include <ddc/ProductMDomain>
-#include <ddc/ProductMesh>
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>
@@ -179,8 +178,7 @@ TEST(SplineBuilder, BuildSpline)
 
     // 1. Create BSplines
     BSplinesX bsplines(x0, xN, npoints);
-    ProductMesh const pbsplines_x(bsplines);
-    ProductMDomain const dom_bsplines_x(pbsplines_x, MLength<BSplinesX>(bsplines.size()));
+    ProductMDomain<BSplinesX> const dom_bsplines_x(bsplines, MLength<BSplinesX>(bsplines.size()));
 
     // 2. Create a Spline represented by a block over BSplines
     // The block is filled with garbage data, we need to initialize it

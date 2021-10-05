@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "ddc/product_mdomain.hpp"
-#include "ddc/product_mesh.hpp"
+#include "ddc/detail/product_mesh.hpp"
 
 template <class, class>
 class Block;
@@ -30,14 +30,11 @@ auto get_domain(BlockType const& block) noexcept
 template <class ElementType, class... Meshes, class LayoutStridedPolicy>
 class BlockSpan<ElementType, ProductMDomain<Meshes...>, LayoutStridedPolicy>
 {
-public:
-    using mesh_type = ProductMesh<Meshes...>;
-
 protected:
     /// the raw mdspan underlying this, with the same indexing (0 might no be dereferenceable)
     using internal_mdspan_type = std::experimental::mdspan<
             ElementType,
-            std::experimental::dextents<mesh_type::rank()>,
+            std::experimental::dextents<sizeof...(Meshes)>,
             std::experimental::layout_stride>;
 
 public:
@@ -46,7 +43,7 @@ public:
     /// The dereferenceable part of the co-domain but with a different domain, starting at 0
     using allocation_mdspan_type = std::experimental::mdspan<
             ElementType,
-            std::experimental::dextents<mesh_type::rank()>,
+            std::experimental::dextents<sizeof...(Meshes)>,
             LayoutStridedPolicy>;
 
     using mcoord_type = typename mdomain_type::mcoord_type;
@@ -147,7 +144,7 @@ public:
     {
         namespace stdex = std::experimental;
         extents_type extents_s((front<Meshes>(m_domain) + ::extents<Meshes>(m_domain))...);
-        std::array<std::size_t, mesh_type::rank()> strides_s {allocation_view.mapping().stride(
+        std::array<std::size_t, sizeof...(Meshes)> strides_s {allocation_view.mapping().stride(
                 type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)...};
         stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
         m_internal_mdspan = internal_mdspan_type(
@@ -167,7 +164,7 @@ public:
         mapping_type mapping_r(extents_r);
 
         extents_type extents_s((front<Meshes>(m_domain) + ::extents<Meshes>(m_domain))...);
-        std::array<std::size_t, mesh_type::rank()> strides_s {
+        std::array<std::size_t, sizeof...(Meshes)> strides_s {
                 mapping_r.stride(type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)...};
         stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
         m_internal_mdspan
@@ -327,14 +324,6 @@ public:
         BlockSpan tmp = std::move(other);
         other = std::move(*this);
         *this = std::move(tmp);
-    }
-
-    /** Provide access to the mesh on which this block is defined
-     * @return the mesh on which this block is defined
-     */
-    inline constexpr mesh_type const& mesh() const noexcept
-    {
-        return m_domain.mesh();
     }
 
     /** Provide access to the domain on which this block is defined

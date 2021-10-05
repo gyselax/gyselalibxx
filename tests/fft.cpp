@@ -11,7 +11,6 @@
 #include <ddc/MCoord>
 #include <ddc/NonUniformMesh>
 #include <ddc/ProductMDomain>
-#include <ddc/ProductMesh>
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>
@@ -294,14 +293,13 @@ TEST(FFT, DomainEven)
     constexpr std::size_t N = 10;
 
     MeshX mesh_x(RCoordX(0.), RCoordX(20. / N));
-    ProductMesh mesh_prod(mesh_x);
-    ProductMDomain domx(mesh_prod, MCoordX(0), MLengthX(N));
+    ProductMDomain<MeshX> domx(mesh_x, MCoordX(0), MLengthX(N));
     auto meshfx = fft.compute_fourier_domain(domx);
 
     //   f = [0, 1, ...,   n/2, -n/2+1, ..., -1] / (d*n)   if n is even
     std::array<double, N> expected_freqs {0., 1., 2., 3., 4., 5., -4., -3., -2., -1.};
     for (auto& f : expected_freqs) {
-        f /= domx.size() * get<MeshX>(domx.mesh()).step();
+        f /= domx.size() * domx.mesh<MeshX>().step();
     }
 
     constexpr double tol = 2.e-16;
@@ -317,14 +315,13 @@ TEST(FFT, DomainOdd)
     constexpr std::size_t N = 9;
 
     MeshX mesh_x(RCoordX(0.), RCoordX(20. / N));
-    ProductMesh mesh_prod(mesh_x);
-    ProductMDomain domx(mesh_prod, MCoordX(0), MLengthX(N));
+    ProductMDomain<MeshX> domx(mesh_x, MCoordX(0), MLengthX(N));
     auto meshfx = fft.compute_fourier_domain(domx);
 
     //   f = [0, 1, ..., (n-1)/2, -n/2, ..., -1] / (d*n)   if n is odd
     std::array<double, N> expected_freqs {0., 1., 2., 3., 4., -4., -3., -2., -1.};
     for (auto& f : expected_freqs) {
-        f /= domx.size() * get<MeshX>(domx.mesh()).step();
+        f /= domx.size() * domx.mesh<MeshX>().step();
     }
 
     constexpr double tol = 2.e-16;
@@ -340,11 +337,9 @@ TEST(FFT, Identity)
     constexpr std::size_t N = 32;
 
     MeshX mesh_x(RCoordX(0.), RCoordX((2. * M_PI) / N));
-    ProductMesh mesh_prod(mesh_x);
-    ProductMDomain domx(mesh_prod, MCoordX(0), MLengthX(N));
+    ProductMDomain<MeshX> domx(mesh_x, MCoordX(0), MLengthX(N));
     auto meshfx = fft.compute_fourier_domain(domx);
-    ProductMesh mesh_prod_fx(meshfx);
-    ProductMDomain domfx(mesh_prod_fx, MLengthFx(meshfx.size()));
+    ProductMDomain<typeof(meshfx)> domfx(meshfx, MLengthFx(meshfx.size()));
 
     BlockX<std::complex<double>> values(domx);
     std::cout << domx.size() << std::endl;
@@ -387,11 +382,9 @@ TEST(FFT, Simple)
     constexpr std::size_t N = 50;
 
     MeshX mesh_x(RCoordX(0.), RCoordX(M * T / N));
-    ProductMesh mesh_prod(mesh_x);
-    ProductMDomain domx(mesh_prod, MCoordX(0), MLengthX(N));
+    ProductMDomain<MeshX> domx(mesh_x, MCoordX(0), MLengthX(N));
     MeshFx meshfx = fft.compute_fourier_domain(domx);
-    ProductMesh mesh_prod_fx(meshfx);
-    ProductMDomain domfx(mesh_prod_fx, MLengthFx(meshfx.size()));
+    ProductMDomain<MeshFx> domfx(meshfx, MLengthFx(meshfx.size()));
 
     BlockX<std::complex<double>> values(domx);
     for (std::size_t i = 0; i < domx.size(); ++i) {

@@ -9,7 +9,6 @@
 #include <ddc/BlockSpan>
 #include <ddc/MCoord>
 #include <ddc/ProductMDomain>
-#include <ddc/ProductMesh>
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>
@@ -30,13 +29,11 @@ using MeshVx = UniformMesh<DimVx>;
 using RCoordVx = MeshVx::rcoord_type;
 using MDomainX = ProductMDomain<MeshX>;
 using DBlockX = Block<double, MDomainX>;
-using MeshXVx = ProductMesh<MeshX, MeshVx>;
 using RCoordXVx = RCoord<DimX, DimVx>;
 using MCoordXVx = MCoord<MeshX, MeshVx>;
 using MLengthXVx = MLength<MeshX, MeshVx>;
 using MDomainXVx = ProductMDomain<MeshX, MeshVx>;
 using DBlockXVx = Block<double, MDomainXVx>;
-using MeshVxX = ProductMesh<MeshVx, MeshX>;
 using RCoordVxX = RCoord<DimVx, DimX>;
 using MCoordVxX = MCoord<MeshVx, MeshX>;
 using MDomainVxX = ProductMDomain<MeshVx, MeshX>;
@@ -46,7 +43,7 @@ class DBlockXTest : public ::testing::Test
 {
 protected:
     MeshX mesh = MeshX(0.0, 1.0);
-    MDomainX dom = MDomainX(ProductMesh(mesh), MCoordX(10), MLengthX(91));
+    MDomainX dom = MDomainX(mesh, MCoordX(10), MLengthX(91));
 };
 
 TEST_F(DBlockXTest, constructor)
@@ -99,8 +96,7 @@ class DBlockXVxTest : public ::testing::Test
 protected:
     MeshX mesh_x = MeshX(0.0, 1.0);
     MeshVx mesh_vx = MeshVx(0.0, 1.0);
-    MeshXVx mesh = MeshXVx(mesh_x, mesh_vx);
-    MDomainXVx dom = MDomainXVx(mesh, MCoordXVx(0, 0), MLengthXVx(101, 101));
+    MDomainXVx dom = MDomainXVx(mesh_x, mesh_vx, MCoordXVx(0, 0), MLengthXVx(101, 101));
 };
 
 TEST_F(DBlockXVxTest, deepcopy)
@@ -175,7 +171,7 @@ TEST_F(DBlockXVxTest, slice)
             ASSERT_EQ(block_v(ii), constref_block(MCoord<MeshX>(SLICE_VAL), ii));
         }
 
-        auto&& subblock = constref_block[ProductMDomain<MeshX>(ProductMesh(mesh_x), 10, 5)];
+        auto&& subblock = constref_block[ProductMDomain<MeshX>(mesh_x, 10, 5)];
         // ASSERT_TRUE((std::is_same_v<
         //              std::decay_t<decltype(subblock)>::layout_type,
         //              std::experimental::layout_right>));
@@ -227,8 +223,7 @@ class NonZeroDBlockXVxTest : public ::testing::Test
 protected:
     MeshX mesh_x = MeshX(0.0, 1.0);
     MeshVx mesh_vx = MeshVx(0.0, 1.0);
-    MeshXVx mesh = MeshXVx(mesh_x, mesh_vx);
-    MDomainXVx dom = MDomainXVx(mesh, MCoordXVx(100, 100), MCoordXVx(101, 101));
+    MDomainXVx dom = MDomainXVx(mesh_x, mesh_vx, MCoordXVx(100, 100), MCoordXVx(101, 101));
 };
 
 TEST_F(NonZeroDBlockXVxTest, view)
@@ -282,7 +277,7 @@ TEST_F(NonZeroDBlockXVxTest, slice)
             ASSERT_EQ(block_v(ii), constref_block(MCoord<MeshX>(SLICE_VAL), ii));
         }
 
-        auto&& subblock = constref_block[ProductMDomain<MeshX>(ProductMesh(mesh_x), 110, 41)];
+        auto&& subblock = constref_block[ProductMDomain<MeshX>(mesh_x, 110, 41)];
         // ASSERT_TRUE((std::is_same_v<
         //              std::decay_t<decltype(subblock)>::layout_type,
         //              std::experimental::layout_right>));

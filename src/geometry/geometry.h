@@ -66,7 +66,6 @@ using MeshVx = UniformMesh<Dim::Vx>;
 
 using MeshFx = NonUniformMesh<Dim::Fx>;
 
-using MeshXVx = ProductMesh<MeshX, MeshVx>;
 
 using MCoordX = MCoord<MeshX>;
 

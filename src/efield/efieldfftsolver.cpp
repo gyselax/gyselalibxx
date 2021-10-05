@@ -8,7 +8,6 @@
 #include <ddc/MCoord>
 #include <ddc/NonUniformMesh>
 #include <ddc/ProductMDomain>
-#include <ddc/ProductMesh>
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>
@@ -25,7 +24,7 @@
 static double compute_dens(DViewVx const& fdistribu)
 {
     auto&& dom_vx = get_domain<MeshVx>(fdistribu);
-    double const dv = get<MeshVx>(dom_vx.mesh()).step();
+    double const dv = dom_vx.mesh<MeshVx>().step();
     double rho = 0.;
     for (MCoordVx ivx : dom_vx) {
         rho += fdistribu(ivx) * dv;

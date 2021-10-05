@@ -6,7 +6,6 @@
 #include <ddc/MCoord>
 #include <ddc/NonUniformMesh>
 #include <ddc/ProductMDomain>
-#include <ddc/ProductMesh>
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 

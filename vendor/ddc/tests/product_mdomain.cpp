@@ -5,7 +5,6 @@
 #include <ddc/MCoord>
 #include <ddc/NonUniformMesh>
 #include <ddc/ProductMDomain>
-#include <ddc/ProductMesh>
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>
@@ -59,7 +58,7 @@ TEST(ProductMDomainTest, constructor)
     EXPECT_EQ(dom_x_vx.size(), npoints_x * npoints_vx);
 
     MDomainX const dom_x = MDomainX(mesh_x, lbound_x, npoints_x);
-    EXPECT_EQ(dom_x.mesh().get<MeshX>(), mesh_x);
+    EXPECT_EQ(dom_x.mesh<MeshX>(), mesh_x);
     EXPECT_EQ(dom_x.size(), npoints_x);
     EXPECT_EQ(dom_x.empty(), false);
     EXPECT_EQ(dom_x[0], lbound_x);
@@ -67,7 +66,7 @@ TEST(ProductMDomainTest, constructor)
     EXPECT_EQ(dom_x.back(), ubound_x);
 
     MDomainX const empty_domain(mesh_x, lbound_x, 0);
-    EXPECT_EQ(empty_domain.mesh().get<MeshX>(), mesh_x);
+    EXPECT_EQ(empty_domain.mesh<MeshX>(), mesh_x);
     EXPECT_EQ(empty_domain.size(), 0);
     EXPECT_EQ(empty_domain.empty(), true);
     EXPECT_EQ(empty_domain[0], lbound_x);

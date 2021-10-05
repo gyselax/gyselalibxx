@@ -3,9 +3,9 @@
 #include <cstdint>
 #include <tuple>
 
+#include "ddc/detail/product_mesh.hpp"
 #include "ddc/mcoord.hpp"
 #include "ddc/mesh.hpp"
-#include "ddc/product_mesh.hpp"
 #include "ddc/rcoord.hpp"
 #include "ddc/taggedtuple.hpp"
 #include "ddc/type_seq.hpp"
@@ -37,7 +37,7 @@ public:
     using mlength_type = MLength<Meshes...>;
 
 private:
-    ProductMesh<Meshes...> m_mesh;
+    detail::ProductMesh<Meshes...> m_mesh;
 
     MCoord<Meshes...> m_lbound;
 
@@ -72,18 +72,6 @@ public:
     {
     }
 
-
-    /** Construct a ProductMDomain starting from (0, ..., 0) with size points.
-     * @param mesh the discrete space on which the domain is constructed
-     * @param size the number of points in each direction
-     */
-    constexpr ProductMDomain(ProductMesh<Meshes...> const& mesh, mlength_type const& size)
-        : m_mesh(mesh)
-        , m_lbound((get<Meshes>(size) - get<Meshes>(size))...) // Hack to have expansion of zero
-        , m_ubound((get<Meshes>(size) - 1)...)
-    {
-    }
-
     /** Construct a ProductMDomain starting from lbound with size points.
      * @param meshes the discrete dimensions on which the domain is constructed
      * @param lbound the lower bound in each direction
@@ -94,22 +82,6 @@ public:
             mcoord_type const& lbound,
             mlength_type const& size)
         : m_mesh(meshes...)
-        , m_lbound(lbound)
-        , m_ubound((get<Meshes>(lbound) + get<Meshes>(size) - 1)...)
-    {
-    }
-
-
-    /** Construct a ProductMDomain starting from lbound with size points.
-     * @param mesh the discrete space on which the domain is constructed
-     * @param lbound the lower bound in each direction
-     * @param size the number of points in each direction
-     */
-    constexpr ProductMDomain(
-            ProductMesh<Meshes...> const& mesh,
-            mcoord_type const& lbound,
-            mlength_type const& size)
-        : m_mesh(mesh)
         , m_lbound(lbound)
         , m_ubound((get<Meshes>(lbound) + get<Meshes>(size) - 1)...)
     {
@@ -140,15 +112,10 @@ public:
     }
 #endif
 
-    template <class... QueryMeshes>
-    ProductMesh<Meshes...> mesh() const
+    template <class QueryMesh>
+    auto const& mesh() const
     {
-        return select<QueryMeshes...>(mesh());
-    }
-
-    ProductMesh<Meshes...> mesh() const
-    {
-        return m_mesh;
+        return get<QueryMesh>(m_mesh);
     }
 
     std::size_t size() const
@@ -194,7 +161,7 @@ public:
         const MCoord<Meshes...> myextents = extents();
         const MCoord<OMeshes...> oextents = odomain.extents();
         return ProductMDomain(
-                m_mesh,
+                get<Meshes>(m_mesh)...,
                 MCoord<Meshes...>((get_or<Meshes>(odomain.m_lbound, get<Meshes>(m_lbound)))...),
                 MCoord<Meshes...>((get_or<Meshes>(oextents, get<Meshes>(myextents)))...));
     }
@@ -259,10 +226,10 @@ public:
 };
 
 template <class... QueryMeshes, class... Meshes>
-constexpr auto select(ProductMDomain<Meshes...> const& domain)
+constexpr ProductMDomain<QueryMeshes...> select(ProductMDomain<Meshes...> const& domain)
 {
-    return ProductMDomain(
-            select<QueryMeshes...>(domain.mesh()),
+    return ProductMDomain<QueryMeshes...>(
+            domain.template mesh<QueryMeshes>()...,
             select<QueryMeshes...>(domain.front()),
             select<QueryMeshes...>(domain.extents()));
 }

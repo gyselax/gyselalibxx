@@ -8,7 +8,6 @@
 #include <ddc/BlockSpan>
 #include <ddc/MCoord>
 #include <ddc/ProductMDomain>
-#include <ddc/ProductMesh>
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>
@@ -32,14 +31,12 @@ using DBlockSpanVx = BlockSpan<double, MDomainVx>;
 using MCoordVx = MCoord<MeshVx>;
 using RCoordVx = RCoord<DimVx>;
 
-using MeshXVx = ProductMesh<MeshX, MeshVx>;
 using MDomainXVx = ProductMDomain<MeshX, MeshVx>;
 using DBlockXVx = Block<double, MDomainXVx>;
 using DBlockSpanXVx = BlockSpan<double, MDomainXVx>;
 using MCoordXVx = MCoord<MeshX, MeshVx>;
 using RCoordXVx = RCoord<DimX, DimVx>;
 
-using MeshVxX = ProductMesh<MeshVx, MeshX>;
 using MDomainVxX = ProductMDomain<MeshVx, MeshX>;
 using DBlockVxX = Block<double, MDomainVxX>;
 using DBlockSpanVxX = BlockSpan<double, MDomainVxX>;
@@ -61,8 +58,7 @@ static void deepcopy_1d(benchmark::State& state)
     std::vector<double> src_data(state.range(0), 0.0);
     std::vector<double> dst_data(state.range(0), -1.0);
     MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(0));
-    ProductMesh mesh(mesh_vx);
-    MDomainVx const dom(mesh, MCoordVx(state.range(0)));
+    MDomainVx const dom(mesh_vx, MCoordVx(state.range(0)));
     DBlockSpanVx src(src_data.data(), dom);
     DBlockSpanVx dst(dst_data.data(), dom);
     for (auto _ : state) {
@@ -94,8 +90,7 @@ static void deepcopy_2d(benchmark::State& state)
     std::vector<double> dst_data(state.range(0) * state.range(1), -1.0);
     MeshX mesh_x(RCoordX(0.), RCoordX(2.), state.range(0));
     MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(1));
-    ProductMesh mesh(mesh_x, mesh_vx);
-    MDomainXVx const dom(mesh, MCoordXVx(state.range(0) - 1, state.range(1) - 1));
+    MDomainXVx const dom(mesh_x, mesh_vx, MCoordXVx(state.range(0) - 1, state.range(1) - 1));
     DBlockSpanXVx src(src_data.data(), dom);
     DBlockSpanXVx dst(dst_data.data(), dom);
     for (auto _ : state) {
@@ -112,8 +107,7 @@ static void deepcopy_subblock_2d(benchmark::State& state)
     std::vector<double> dst_data(state.range(0) * state.range(1), -1.0);
     MeshX mesh_x(RCoordX(0.), RCoordX(2.), state.range(0));
     MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(1));
-    ProductMesh mesh(mesh_x, mesh_vx);
-    MDomainXVx const dom(mesh, MCoordXVx(state.range(0) - 1, state.range(1) - 1));
+    MDomainXVx const dom(mesh_x, mesh_vx, MCoordXVx(state.range(0) - 1, state.range(1) - 1));
     DBlockSpanXVx src(src_data.data(), dom);
     DBlockSpanXVx dst(dst_data.data(), dom);
     for (auto _ : state) {
