@@ -55,7 +55,7 @@ public:
     // Note that SFINAE may be redundant because a template constructor should not be selected as a copy constructor.
     template <std::size_t N = sizeof...(Meshes), class = std::enable_if_t<(N != 1)>>
     explicit constexpr ProductMDomain(ProductMDomain<Meshes> const&... domains)
-        : m_mesh(get<Meshes>(domains.mesh())...)
+        : m_mesh(domains.template mesh<Meshes>()...)
         , m_lbound(domains.front()...)
         , m_ubound(domains.back()...)
     {

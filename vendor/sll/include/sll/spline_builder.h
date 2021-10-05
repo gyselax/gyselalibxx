@@ -278,7 +278,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
         }
         m_interpolation_mesh = std::make_unique<interpolation_mesh_type>(interp_pts);
         m_interpolation_domain = std::make_unique<interpolation_domain_type>(
-                ProductMesh(*m_interpolation_mesh),
+                *m_interpolation_mesh,
                 MCoord<NonUniformMesh<tag_type>>(interp_pts.size()));
     }
 }
@@ -350,7 +350,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
 
     m_interpolation_mesh = std::make_unique<interpolation_mesh_type>(interp_pts);
     m_interpolation_domain = std::make_unique<interpolation_domain_type>(
-            ProductMesh(*m_interpolation_mesh),
+            *m_interpolation_mesh,
             MCoord<NonUniformMesh<tag_type>>(interp_pts.size()));
 }
 
