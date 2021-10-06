@@ -100,8 +100,6 @@ public:
         std::experimental::mdspan<double, std::experimental::dextents<1>>
                 vals(values.data(), values.size());
 
-        auto const& domain = spline_eval.domain();
-
         for (auto i : coords_eval.domain()) {
             spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, vals, eval_deriv_type());
         }
