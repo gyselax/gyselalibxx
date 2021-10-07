@@ -126,18 +126,7 @@ int main(int argc, char** argv)
     BlockX<RCoordX> meshX_coord(gridx);
     for (MCoordX ix : gridx) {
         meshX_coord(ix) = gridx.to_real(ix);
-        //cout << meshX_coord(ix);
     }
-    //cout << endl;
-
-    /*
-    UniformMesh<Dim::Vx> const meshx_uniform(x_min, x_max, x_size);
-    MDomainX const domainx_uniform(meshx_uniform);
-    for (MCoordX ix1 : domainx_uniform()) {
-        cout << domainx_uniform.to_real(ix1) ;
-    }
-    cout << endl;
-    */
 
     MDomainVx gridvx = select<MeshVx>(dom2d);
     BlockVx<RCoordVx> meshVx_coord(gridvx);
