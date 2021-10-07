@@ -42,7 +42,7 @@ using DBlockVxX = Block<double, MDomainVxX>;
 class DBlockXTest : public ::testing::Test
 {
 protected:
-    MeshX mesh = MeshX(0.0, 1.0);
+    MeshX mesh = MeshX(RCoordX(0.0), RCoordX(1.0));
     MDomainX dom = MDomainX(mesh, MCoordX(10), MLengthX(91));
 };
 
@@ -94,8 +94,8 @@ TEST_F(DBlockXTest, deepcopy)
 class DBlockXVxTest : public ::testing::Test
 {
 protected:
-    MeshX mesh_x = MeshX(0.0, 1.0);
-    MeshVx mesh_vx = MeshVx(0.0, 1.0);
+    MeshX mesh_x = MeshX(RCoordX(0.0), RCoordX(1.0));
+    MeshVx mesh_vx = MeshVx(RCoordVx(0.0), RCoordVx(1.0));
     MDomainXVx dom = MDomainXVx(mesh_x, mesh_vx, MCoordXVx(0, 0), MLengthXVx(101, 101));
 };
 
@@ -171,7 +171,7 @@ TEST_F(DBlockXVxTest, slice)
             ASSERT_EQ(block_v(ii), constref_block(MCoord<MeshX>(SLICE_VAL), ii));
         }
 
-        auto&& subblock = constref_block[ProductMDomain<MeshX>(mesh_x, 10, 5)];
+        auto&& subblock = constref_block[ProductMDomain<MeshX>(mesh_x, MCoordX(10), MLengthX(5))];
         // ASSERT_TRUE((std::is_same_v<
         //              std::decay_t<decltype(subblock)>::layout_type,
         //              std::experimental::layout_right>));
@@ -221,9 +221,9 @@ TEST_F(DBlockXVxTest, automatic_reordering)
 class NonZeroDBlockXVxTest : public ::testing::Test
 {
 protected:
-    MeshX mesh_x = MeshX(0.0, 1.0);
-    MeshVx mesh_vx = MeshVx(0.0, 1.0);
-    MDomainXVx dom = MDomainXVx(mesh_x, mesh_vx, MCoordXVx(100, 100), MCoordXVx(101, 101));
+    MeshX mesh_x = MeshX(RCoordX(0.0), RCoordX(1.0));
+    MeshVx mesh_vx = MeshVx(RCoordVx(0.0), RCoordVx(1.0));
+    MDomainXVx dom = MDomainXVx(mesh_x, mesh_vx, MCoordXVx(100, 100), MLengthXVx(101, 101));
 };
 
 TEST_F(NonZeroDBlockXVxTest, view)
@@ -277,7 +277,7 @@ TEST_F(NonZeroDBlockXVxTest, slice)
             ASSERT_EQ(block_v(ii), constref_block(MCoord<MeshX>(SLICE_VAL), ii));
         }
 
-        auto&& subblock = constref_block[ProductMDomain<MeshX>(mesh_x, 110, 41)];
+        auto&& subblock = constref_block[ProductMDomain<MeshX>(mesh_x, MCoordX(110), MLengthX(41))];
         // ASSERT_TRUE((std::is_same_v<
         //              std::decay_t<decltype(subblock)>::layout_type,
         //              std::experimental::layout_right>));

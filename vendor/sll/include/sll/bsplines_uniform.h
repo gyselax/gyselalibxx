@@ -71,8 +71,15 @@ public:
      * @param n_knots the number of knots
      */
     explicit UniformBSplines(RCoord<Tag> rmin, RCoord<Tag> rmax, std::size_t ncells)
-        : m_mesh(rmin, rmax, ncells + 1) // Compute correct step, independent of periodicity
-        , m_domain(m_mesh, 0, ncells + 1) // Create a mesh including the eventual periodic point
+        : m_mesh(
+                rmin,
+                rmax,
+                MLength<mesh_type>(ncells + 1)) // Compute correct step, independent of periodicity
+        , m_domain(
+                  m_mesh,
+                  MCoord<mesh_type>(0),
+                  MLength<mesh_type>(
+                          ncells + 1)) // Create a mesh including the eventual periodic point
     {
     }
 

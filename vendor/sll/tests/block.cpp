@@ -35,8 +35,8 @@ class BlockBSplinesUniformTest : public ::testing::Test
 {
 protected:
     static constexpr std::size_t ncells = 100;
-    static constexpr RCoordX xmin = 0.;
-    static constexpr RCoordX xmax = 2.;
+    static constexpr RCoordX xmin = RCoordX(0.);
+    static constexpr RCoordX xmax = RCoordX(2.);
     using BSplinesX = UniformBSplines<DimX, 2>;
     BSplinesX const bsplinesx {xmin, xmax, ncells};
 

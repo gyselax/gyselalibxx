@@ -20,6 +20,8 @@ using RCoordVx = RCoord<DimVx>;
 using MeshX = UniformMesh<DimX>;
 using MeshVx = NonUniformMesh<DimVx>;
 
+using MCoordX = MCoord<MeshX>;
+
 using MeshXVx = detail::ProductMesh<MeshX, MeshVx>;
 using MCoordXVx = MCoord<MeshX, MeshVx>;
 using RCoordXVx = RCoord<DimX, DimVx>;
@@ -27,8 +29,8 @@ using RCoordXVx = RCoord<DimX, DimVx>;
 class ProductMeshTest : public ::testing::Test
 {
 protected:
-    MeshX mesh_x = MeshX(2., 0.1);
-    std::array<RCoordVx, 4> points_vx {-1., 0., 2., 4.};
+    MeshX mesh_x = MeshX(RCoordX(2.), RCoordX(0.1));
+    std::array<RCoordVx, 4> points_vx {RCoordVx(-1.), RCoordVx(0.), RCoordVx(2.), RCoordVx(4.)};
     MeshVx mesh_vx = MeshVx(points_vx);
     MeshXVx mesh_x_vx {mesh_x, mesh_vx};
 };
@@ -53,7 +55,7 @@ TEST_F(ProductMeshTest, submesh)
 
 TEST_F(ProductMeshTest, conversion)
 {
-    constexpr static MeshX mesh_x(2., 0.1);
+    constexpr static MeshX mesh_x(RCoordX(2.), RCoordX(0.1));
     constexpr detail::ProductMesh product_mesh_x(mesh_x);
     MeshX const& mesh_x_ref = get<MeshX>(product_mesh_x);
     double step = mesh_x_ref.step();
@@ -65,7 +67,7 @@ TEST_F(ProductMeshTest, to_real)
     for (std::size_t ix = 0; ix < 5; ++ix) {
         for (std::size_t ivx = 0; ivx < points_vx.size(); ++ivx) {
             EXPECT_EQ(
-                    RCoordXVx(mesh_x.to_real(ix), points_vx[ivx]),
+                    RCoordXVx(mesh_x.to_real(MCoordX(ix)), points_vx[ivx]),
                     mesh_x_vx.to_real(MCoordXVx(ix, ivx)));
         }
     }

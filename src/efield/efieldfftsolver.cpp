@@ -77,10 +77,10 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
     m_fft(complex_phi_fx, complex_rho);
 
     // Solve Poisson's equation -d^2 Phi/dx^2 = rho in the Fourier space.
-    complex_phi_fx(0) = 0.;
-    for (std::size_t ifreq = 1; ifreq < mesh_fx.size(); ++ifreq) {
-        double const kx = 2. * M_PI * mesh_fx.to_real(ifreq);
-        complex_phi_fx(ifreq) /= kx * kx;
+    complex_phi_fx(dom_fx.front()) = 0.;
+    for (auto it_freq = dom_fx.cbegin() + 1; it_freq != dom_fx.cend(); ++it_freq) {
+        double const kx = 2. * M_PI * mesh_fx.to_real(*it_freq);
+        complex_phi_fx(*it_freq) /= kx * kx;
     }
 
     // Perform the inverse 1D FFT of the solution.

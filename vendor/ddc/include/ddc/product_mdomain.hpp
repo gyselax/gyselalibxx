@@ -158,12 +158,12 @@ public:
     {
         assert(((get<OMeshes>(m_lbound) <= get<OMeshes>(odomain.m_lbound)) && ...));
         assert(((get<OMeshes>(m_ubound) >= get<OMeshes>(odomain.m_ubound)) && ...));
-        const MCoord<Meshes...> myextents = extents();
-        const MCoord<OMeshes...> oextents = odomain.extents();
+        const MLength<Meshes...> myextents = extents();
+        const MLength<OMeshes...> oextents = odomain.extents();
         return ProductMDomain(
                 get<Meshes>(m_mesh)...,
                 MCoord<Meshes...>((get_or<Meshes>(odomain.m_lbound, get<Meshes>(m_lbound)))...),
-                MCoord<Meshes...>((get_or<Meshes>(oextents, get<Meshes>(myextents)))...));
+                MLength<Meshes...>((get_or<Meshes>(oextents, get<Meshes>(myextents)))...));
     }
 
     constexpr bool empty() const noexcept
@@ -189,7 +189,7 @@ public:
             class Mesh0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<Meshes...>>>>
     auto end() const
     {
-        return ProductMDomainIterator<Mesh0>(back() + 1);
+        return ProductMDomainIterator<Mesh0>(MCoord<Meshes...>(back() + 1));
     }
 
     template <
@@ -205,7 +205,7 @@ public:
             class Mesh0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<Meshes...>>>>
     auto cend() const
     {
-        return ProductMDomainIterator<Mesh0>(back() + 1);
+        return ProductMDomainIterator<Mesh0>(MCoord<Meshes...>(back() + 1));
     }
 
     template <

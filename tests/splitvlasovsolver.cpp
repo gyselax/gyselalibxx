@@ -45,7 +45,7 @@ TEST(SplitVlasovSolver, ordering)
 {
     MeshX mesh_x(RCoordX(0.), RCoordX(2.));
     MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.));
-    MDomainXVx const dom(mesh_x, mesh_vx, MCoordXVx(0, 0), MCoordXVx(0, 0));
+    MDomainXVx const dom(mesh_x, mesh_vx, MCoordXVx(0, 0), MLengthXVx(0, 0));
     DBlockXVx const fdistribu(dom);
     DSpanXVx const fdistribu_s(fdistribu);
     DBlockX const efield(select<MeshX>(dom));

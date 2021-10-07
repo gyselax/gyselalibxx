@@ -13,8 +13,8 @@ TEST(TaggedVector, Constructor)
 TEST(TaggedVector, ReorderingConstructor)
 {
     TaggedVector<int, double, float> map_ref(1, 2);
-    TaggedVector<int, double> submap_double = get<double>(map_ref);
-    TaggedVector<int, float> submap_float = get<float>(map_ref);
+    TaggedVector<int, double> submap_double = select<double>(map_ref);
+    TaggedVector<int, float> submap_float = select<float>(map_ref);
     TaggedVector<int, double, float> map_v1(submap_double, submap_float);
     TaggedVector<int, double, float> map_v2(submap_float, submap_double);
     ASSERT_EQ(map_v1, map_ref);

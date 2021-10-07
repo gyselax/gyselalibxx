@@ -117,12 +117,12 @@ public:
 
     RCoord<Tag> rmin() const noexcept
     {
-        return get_knot(0);
+        return RCoord<Tag>(get_knot(0));
     }
 
     RCoord<Tag> rmax() const noexcept
     {
-        return get_knot(ncells());
+        return RCoord<Tag>(get_knot(ncells()));
     }
 
     double length() const noexcept

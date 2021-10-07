@@ -171,10 +171,10 @@ TEST(SplineBuilder, BuildSpline)
     //     using BlockNonUniformX = Block<double, ProductMDomain<NonUniformMeshX>>;
     using BlockUniformX = Block<double, ProductMDomain<MeshX>>;
 
-    RCoordX constexpr x0 = 0.;
-    RCoordX constexpr xN = 1.;
+    RCoordX constexpr x0(0.);
+    RCoordX constexpr xN(1.);
     std::size_t constexpr ncells = 100;
-    MCoordX constexpr npoints = ncells + 1;
+    MCoordX constexpr npoints(ncells + 1);
 
     // 1. Create BSplines
     BSplinesX bsplines(x0, xN, npoints);
@@ -227,7 +227,7 @@ TEST(SplineBuilder, BuildSpline)
     // 7. Checking errors
     double max_norm_error = 0.;
     double max_norm_error_diff = 0.;
-    for (std::size_t i = 0; i < interpolation_domain.size(); ++i) {
+    for (auto i : interpolation_domain) {
         auto&& x = interpolation_domain.to_real(i);
 
         // Compute error

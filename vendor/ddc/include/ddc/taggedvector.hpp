@@ -79,14 +79,15 @@ public:
     inline constexpr TaggedVector(TaggedVector&&) = default;
 
     template <class... OTags>
-    inline constexpr TaggedVector(
+    explicit inline constexpr TaggedVector(
             TaggedVector<ElementType, OTags> const&... other) noexcept
         : m_values {take_first<Tags>(other...).value()...}
     {
     }
 
     template <class OElementType, class... OTags>
-    inline constexpr TaggedVector(TaggedVector<OElementType, OTags...> const& other) noexcept
+    explicit inline constexpr TaggedVector(
+            TaggedVector<OElementType, OTags...> const& other) noexcept
         : m_values {(static_cast<ElementType>(other.template get<Tags>()))...}
     {
     }
@@ -96,7 +97,7 @@ public:
             class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
             class = std::enable_if_t<(!is_tagged_vector_v<Params> && ...)>,
             class = std::enable_if_t<sizeof...(Params) == sizeof...(Tags)>>
-    inline constexpr TaggedVector(Params const&... params) noexcept
+    explicit inline constexpr TaggedVector(Params const&... params) noexcept
         : m_values {static_cast<ElementType>(params)...}
     {
     }

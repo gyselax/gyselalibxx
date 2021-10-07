@@ -160,7 +160,7 @@ private:
 
         double y = 0.0;
         for (int i(0); i < bsplines_type::degree() + 1; ++i) {
-            y += spline_coef(jmin + i) * vals(i);
+            y += spline_coef(MCoord<BSplinesType>(jmin + i)) * vals(i);
         }
         return y;
     }

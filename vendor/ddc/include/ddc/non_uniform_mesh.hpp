@@ -25,7 +25,7 @@ public:
     }
 
 private:
-    std::vector<double> m_points;
+    std::vector<rcoord_type> m_points;
 
 public:
     NonUniformMesh() = default;
@@ -93,13 +93,13 @@ public:
     /// @brief Lower bound index of the mesh
     constexpr mcoord_type lbound() const noexcept
     {
-        return 0;
+        return mcoord_type(0);
     }
 
     /// @brief Upper bound index of the mesh
     constexpr mcoord_type ubound() const noexcept
     {
-        return m_points.size() - 1;
+        return mcoord_type(m_points.size() - 1);
     }
 
     /// @brief Convert a mesh index into a position in `RDim`
@@ -107,7 +107,7 @@ public:
     {
         assert(icoord >= lbound());
         assert(icoord <= ubound());
-        return m_points[static_cast<std::size_t>(icoord)];
+        return m_points[icoord.value()];
     }
 
     /// @brief Position of the lower bound in `RDim`

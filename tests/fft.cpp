@@ -304,7 +304,7 @@ TEST(FFT, DomainEven)
 
     constexpr double tol = 2.e-16;
     for (std::size_t i = 0; i < meshfx.size(); ++i) {
-        EXPECT_LT(std::fabs(meshfx.to_real(i) - expected_freqs[i]), tol);
+        EXPECT_LT(std::fabs(meshfx.to_real(MCoordFx(i)) - expected_freqs[i]), tol);
     }
 }
 
@@ -326,7 +326,7 @@ TEST(FFT, DomainOdd)
 
     constexpr double tol = 2.e-16;
     for (std::size_t i = 0; i < meshfx.size(); ++i) {
-        EXPECT_LT(std::fabs(meshfx.to_real(i) - expected_freqs[i]), tol);
+        EXPECT_LT(std::fabs(meshfx.to_real(MCoordFx(i)) - expected_freqs[i]), tol);
     }
 }
 
@@ -343,7 +343,7 @@ TEST(FFT, Identity)
 
     BlockX<std::complex<double>> values(domx);
     std::cout << domx.size() << std::endl;
-    for (std::size_t i = 0; i < domx.size(); ++i) {
+    for (auto i : domx) {
         values(i) = compute_f(domx.to_real(i));
     }
 
@@ -354,12 +354,12 @@ TEST(FFT, Identity)
     FftwInverseFourierTransform<Dim::X> ifft;
     ifft(ifft_fft_values, fourier_values);
 
-    for (std::size_t ii = 0; ii < domx.size(); ++ii) {
+    for (auto ii : domx) {
         ifft_fft_values(ii) /= domx.size();
     }
 
     double max_error = 0.;
-    for (int ii = 0; ii < domx.size(); ++ii) {
+    for (auto ii : domx) {
         max_error = std::fmax(max_error, std::abs(values(ii) - ifft_fft_values(ii)));
     }
 
@@ -387,7 +387,7 @@ TEST(FFT, Simple)
     ProductMDomain<MeshFx> domfx(meshfx, MLengthFx(meshfx.size()));
 
     BlockX<std::complex<double>> values(domx);
-    for (std::size_t i = 0; i < domx.size(); ++i) {
+    for (auto i : domx) {
         values(i) = std::cos(2. * M_PI * f * domx.to_real(i));
     }
 
@@ -397,7 +397,7 @@ TEST(FFT, Simple)
     constexpr double tol = 1.0e-13;
     for (std::size_t i = 0; i < domfx.size(); ++i) {
         if ((i != M) && (i != domfx.size() - M)) {
-            EXPECT_LE(std::fabs(fourier_values(i)), tol);
+            EXPECT_LE(std::fabs(fourier_values(MCoordFx(i))), tol);
         }
     }
 }

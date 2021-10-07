@@ -16,7 +16,7 @@ using MeshX = NonUniformMesh<DimX>;
 
 #define VALUES                                                                                     \
     {                                                                                              \
-        0.1, 0.2, 0.3, 0.4                                                                         \
+        RCoord<DimX>(0.1), RCoord<DimX>(0.2), RCoord<DimX>(0.3), RCoord<DimX>(0.4)                 \
     }
 
 class NonUniformMeshTest : public testing::Test
@@ -24,12 +24,12 @@ class NonUniformMeshTest : public testing::Test
 protected:
     std::array<double, 4> array_points VALUES;
     std::vector<double> vector_points VALUES;
-    RCoord<DimX> min_x = 0.1;
-    RCoord<DimX> max_x = 0.4;
-    MCoord<MeshX> lbound = 0;
-    MCoord<MeshX> ubound = 3;
-    MCoord<MeshX> point_ix = 2;
-    RCoord<DimX> point_rx = 0.3;
+    RCoord<DimX> min_x = RCoord<DimX>(0.1);
+    RCoord<DimX> max_x = RCoord<DimX>(0.4);
+    MCoord<MeshX> lbound = MCoord<MeshX>(0);
+    MCoord<MeshX> ubound = MCoord<MeshX>(3);
+    MCoord<MeshX> point_ix = MCoord<MeshX>(2);
+    RCoord<DimX> point_rx = RCoord<DimX>(0.3);
 };
 
 TEST_F(NonUniformMeshTest, rank)
@@ -87,7 +87,7 @@ TEST_F(NonUniformMeshTest, iterator_constructor)
 
 TEST(NonUniformMesh, formatting)
 {
-    MeshX mesh_x({0.1, 0.4});
+    MeshX mesh_x({RCoord<DimX>(0.1), RCoord<DimX>(0.4)});
     std::stringstream oss;
     oss << mesh_x;
     EXPECT_EQ(oss.str(), "NonUniformMesh( (0.1), ..., (0.4) )");

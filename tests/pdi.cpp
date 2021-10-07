@@ -27,7 +27,7 @@ int main(int argc, char** argv)
 
     MeshX mesh_x(RCoordX(0.), RCoordX(2.));
     MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.));
-    MDomainXVx const dom(mesh_x, mesh_vx, MCoordXVx(0, 0), MCoordXVx(9, 9));
+    MDomainXVx const dom(mesh_x, mesh_vx, MCoordXVx(0, 0), MLengthXVx(9, 9));
     DBlockXVx fdistribu(dom);
     auto const fdistribu_s = fdistribu.cview();
 

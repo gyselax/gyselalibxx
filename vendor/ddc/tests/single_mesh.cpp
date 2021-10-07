@@ -30,7 +30,7 @@ TEST(SingleMesh, class_size)
 
 TEST(SingleMesh, constructor)
 {
-    constexpr RCoordX x = 1.;
+    constexpr RCoordX x(1.);
 
     SingleMesh<DimX> mesh_x(x);
 

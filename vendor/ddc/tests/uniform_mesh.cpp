@@ -15,12 +15,12 @@ using MeshX = UniformMesh<DimX>;
 class UniformMeshTest : public ::testing::Test
 {
 protected:
-    RCoord<DimX> origin = -1.;
-    RCoord<DimX> step = 0.5;
-    MLength<DimX> npoints = 5;
-    MCoord<MeshX> lbound = 0;
-    MCoord<MeshX> point_ix = 2;
-    RCoord<DimX> point_rx = 0.;
+    RCoord<DimX> origin = RCoord<DimX>(-1.);
+    RCoord<DimX> step = RCoord<DimX>(0.5);
+    MLength<DimX> npoints = MLength<DimX>(5);
+    MCoord<MeshX> lbound = MCoord<MeshX>(0);
+    MCoord<MeshX> point_ix = MCoord<MeshX>(2);
+    RCoord<DimX> point_rx = RCoord<DimX>(0.);
 };
 
 TEST_F(UniformMeshTest, rank)
@@ -40,7 +40,7 @@ TEST_F(UniformMeshTest, constructor)
 
 TEST_F(UniformMeshTest, constructor2)
 {
-    MeshX mesh_x(origin, 1., npoints);
+    MeshX mesh_x(origin, RCoord<DimX>(1.), npoints);
     EXPECT_EQ(mesh_x.lbound(), lbound);
     EXPECT_EQ(mesh_x.origin(), origin);
     EXPECT_EQ(mesh_x.step(), step);
@@ -50,7 +50,7 @@ TEST_F(UniformMeshTest, constructor2)
 
 TEST(UniformMesh, formatting)
 {
-    MeshX mesh_x(-1., 0.5);
+    MeshX mesh_x(RCoord<DimX>(-1.), RCoord<DimX>(0.5));
     std::stringstream oss;
     oss << mesh_x;
     EXPECT_EQ(oss.str(), "UniformMesh( origin=(-1), step=(0.5) )");

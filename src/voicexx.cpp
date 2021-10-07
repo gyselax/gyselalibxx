@@ -39,32 +39,32 @@ int main(int argc, char** argv)
     RCoordX x_min = [&]() {
         double x_min;
         PC_double(PC_get(conf_voicexx, ".Mesh.x_min"), &x_min);
-        return x_min;
+        return RCoordX(x_min);
     }();
     RCoordX x_max = [&]() {
         double x_max;
         PC_double(PC_get(conf_voicexx, ".Mesh.x_max"), &x_max);
-        return x_max;
+        return RCoordX(x_max);
     }();
     MLengthX x_size = [&]() {
         long x_size;
         PC_int(PC_get(conf_voicexx, ".Mesh.x_size"), &x_size);
-        return x_size;
+        return MLengthX(x_size);
     }();
     RCoordVx vx_min = [&]() {
         double vx_min;
         PC_double(PC_get(conf_voicexx, ".Mesh.vx_min"), &vx_min);
-        return vx_min;
+        return RCoordVx(vx_min);
     }();
     RCoordVx vx_max = [&]() {
         double vx_max;
         PC_double(PC_get(conf_voicexx, ".Mesh.vx_max"), &vx_max);
-        return vx_max;
+        return RCoordVx(vx_max);
     }();
     MLengthVx vx_size = [&]() {
         double vx_size;
         PC_double(PC_get(conf_voicexx, ".Mesh.vx_size"), &vx_size);
-        return vx_size;
+        return MLengthVx(vx_size);
     }();
     // --> Equilibrium
     long ion_charge;

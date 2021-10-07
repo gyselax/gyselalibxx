@@ -192,15 +192,17 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
     //       provided by the user must be multiplied by dx^i
     if constexpr (BcXmin == BoundCond::HERMITE) {
         for (int i(s_nbc_xmin); i > 0; --i) {
-            spline(s_nbc_xmin - i) = (*derivs_xmin)(i - 1) * ipow(m_dx, i + s_odd - 1);
+            spline(MCoord<bsplines_type>(s_nbc_xmin - i))
+                    = (*derivs_xmin)(i - 1) * ipow(m_dx, i + s_odd - 1);
         }
     }
     for (int i(s_nbc_xmin); i < s_nbc_xmin + s_offset; ++i) {
-        spline(i) = 0.0;
+        spline(MCoord<bsplines_type>(i)) = 0.0;
     }
 
     for (int i(0); i < m_interpolation_domain->extents(); ++i) {
-        spline(s_nbc_xmin + i + s_offset) = vals(i);
+        spline(MCoord<bsplines_type>(s_nbc_xmin + i + s_offset))
+                = vals(MCoord<interpolation_mesh_type>(i));
     }
 
     // Hermite boundary conditions at xmax, if any
@@ -208,7 +210,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
     //       provided by the user must be multiplied by dx^i
     if constexpr (BcXmax == BoundCond::HERMITE) {
         for (int i(0); i < s_nbc_xmax; ++i) {
-            spline(m_bsplines.nbasis() - s_nbc_xmax + i) = (*derivs_xmax)(i)*ipow(m_dx, i + s_odd);
+            spline(MCoord<bsplines_type>(m_bsplines.nbasis() - s_nbc_xmax + i))
+                    = (*derivs_xmax)(i)*ipow(m_dx, i + s_odd);
         }
     }
 
@@ -217,10 +220,12 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
 
     if constexpr (BcXmin == BoundCond::PERIODIC && s_offset != 0) {
         for (int i(0); i < s_offset; ++i) {
-            spline(i) = spline(m_bsplines.nbasis() + i);
+            spline(MCoord<bsplines_type>(i))
+                    = spline(MCoord<bsplines_type>(m_bsplines.nbasis() + i));
         }
         for (int i(s_offset); i < bsplines_type::degree(); ++i) {
-            spline(m_bsplines.nbasis() + i) = spline(i);
+            spline(MCoord<bsplines_type>(m_bsplines.nbasis() + i))
+                    = spline(MCoord<bsplines_type>(i));
         }
     }
 }
@@ -237,11 +242,12 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
 
     if constexpr (BcXmin == BoundCond::PERIODIC) {
         double const shift(!s_odd ? 0.5 : 0.0);
-        m_interpolation_mesh
-                = std::make_unique<interpolation_mesh_type>(m_bsplines.rmin() + shift * m_dx, m_dx);
+        m_interpolation_mesh = std::make_unique<interpolation_mesh_type>(
+                RCoord<tag_type>(m_bsplines.rmin() + shift * m_dx),
+                RCoord<tag_type>(m_dx));
         m_interpolation_domain = std::make_unique<interpolation_domain_type>(
                 *m_interpolation_mesh,
-                MCoord<UniformMesh<tag_type>>(n_interp_pts));
+                MLength<interpolation_mesh_type>(n_interp_pts));
     } else {
         std::vector<double> interp_pts(n_interp_pts);
 
@@ -284,7 +290,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
         m_interpolation_mesh = std::make_unique<interpolation_mesh_type>(interp_pts);
         m_interpolation_domain = std::make_unique<interpolation_domain_type>(
                 *m_interpolation_mesh,
-                MCoord<NonUniformMesh<tag_type>>(interp_pts.size()));
+                MLength<NonUniformMesh<tag_type>>(interp_pts.size()));
     }
 }
 
@@ -509,7 +515,10 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
     double values_ptr[bsplines_type::degree() + 1];
     DSpan1D values(values_ptr, bsplines_type::degree() + 1);
     for (int i(0); i < m_bsplines.nbasis() - s_nbc_xmin - s_nbc_xmax; ++i) {
-        m_bsplines.eval_basis(m_interpolation_domain->to_real(i), values, jmin);
+        m_bsplines.eval_basis(
+                m_interpolation_domain->to_real(MCoord<interpolation_mesh_type>(i)),
+                values,
+                jmin);
         for (int s(0); s < bsplines_type::degree() + 1; ++s) {
             int j = modulo(jmin - s_offset + s, (int)m_bsplines.nbasis());
             matrix->set_element(j, i + s_nbc_xmin, values(s));

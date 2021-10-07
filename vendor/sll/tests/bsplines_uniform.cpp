@@ -28,8 +28,8 @@ class BSplinesUniformTest : public ::testing::Test
 protected:
     static constexpr std::size_t spline_degree = 2;
     static constexpr std::size_t ncells = 100;
-    static constexpr RCoordX xmin = 0.;
-    static constexpr RCoordX xmax = 2.;
+    static constexpr RCoordX xmin = RCoordX(0.);
+    static constexpr RCoordX xmax = RCoordX(2.);
     UniformBSplines<DimX, spline_degree> const bsplines {xmin, xmax, ncells};
     deprecated::UniformBSplines const
             old_bsplines {spline_degree, DimX::PERIODIC, xmin, xmax, ncells};

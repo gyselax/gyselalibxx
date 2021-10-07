@@ -25,9 +25,9 @@ public:
     }
 
 private:
-    double m_origin = 0.;
+    rcoord_type m_origin = 0.;
 
-    double m_step = 1.;
+    rcoord_type m_step = 1.;
 
 public:
     UniformMesh() = default;
@@ -95,7 +95,7 @@ public:
     /// @brief Lower bound index of the mesh
     constexpr mcoord_type lbound() const noexcept
     {
-        return 0;
+        return mcoord_type(0);
     }
 
     /// @brief Lower bound index of the mesh
@@ -114,7 +114,7 @@ public:
     constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
         assert(icoord >= lbound());
-        return m_origin + icoord * m_step;
+        return m_origin + rcoord_type(icoord.value()) * m_step;
     }
 
     /// @brief Position of the lower bound in `RDim`
