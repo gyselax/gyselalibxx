@@ -10,9 +10,11 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "efieldfftsolver.h"
 #include "fdistribu.h"
+#include "fftw.h"
 #include "geometry.h"
-#include "nullefieldsolver.h"
+#include "ifftw.h"
 #include "pdi_out.yml.h"
 #include "predcorr.h"
 #include "splineadvectionvx.h"
@@ -111,7 +113,11 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    NullEfieldSolver const efield;
+    FftwFourierTransform<Dim::X> fft;
+
+    FftwInverseFourierTransform<Dim::X> ifft;
+
+    EfieldFftSolver efield(fft, ifft, bsplines_x, builder_x, bsplines_vx, builder_vx);
 
     PredCorr const predcorr(vlasov, efield, deltat);
 
