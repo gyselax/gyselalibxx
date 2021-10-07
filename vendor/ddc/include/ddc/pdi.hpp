@@ -43,7 +43,7 @@ public:
         static_assert(
                 !(access & PDI_IN) || !std::is_const_v<ElementType>,
                 "Invalid access for constant data");
-        auto const& extents = data.domain().extents().array();
+        auto extents = data.domain().extents().array();
         size_t rank = extents.size();
         PDI_share((name + "_rank").c_str(), &rank, PDI_OUT);
         m_names.push_back(name + "_rank");
