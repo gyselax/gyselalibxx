@@ -97,7 +97,7 @@ public:
     SplineBuilder& operator=(SplineBuilder&& x) = default;
 
     void operator()(
-            BlockSpan<double, ProductMDomain<bsplines_type>>& spline,
+            BlockSpan<double, ProductMDomain<bsplines_type>> const& spline,
             BlockSpan<double const, interpolation_domain_type> const& vals,
             DSpan1D const* derivs_xmin = nullptr,
             DSpan1D const* derivs_xmax = nullptr) const;
@@ -105,6 +105,11 @@ public:
     interpolation_domain_type const& interpolation_domain() const noexcept
     {
         return *m_interpolation_domain;
+    }
+
+    ProductMDomain<BSplines> spline_domain() const noexcept
+    {
+        return ProductMDomain<BSplines>(m_bsplines, MLength<BSplines>(m_bsplines.size()));
     }
 
 private:
@@ -165,7 +170,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolant_degree1(
 
 template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
-        BlockSpan<double, ProductMDomain<bsplines_type>>& spline,
+        BlockSpan<double, ProductMDomain<bsplines_type>> const& spline,
         BlockSpan<double const, interpolation_domain_type> const& vals,
         DSpan1D const* derivs_xmin,
         DSpan1D const* derivs_xmax) const

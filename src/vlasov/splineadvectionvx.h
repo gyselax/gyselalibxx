@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include <sll/spline_evaluator.h>
 
 #include <geometry.h>
@@ -16,6 +18,14 @@ private:
     const SplineVxBuilder& m_spline_vx_builder;
 
     SplineEvaluator<BSplinesVx> m_spline_vx_evaluator;
+
+    std::vector<double> m_derivs_vxmin_data;
+
+    Span1D<double> m_derivs_vxmin;
+
+    std::vector<double> m_derivs_vxmax_data;
+
+    Span1D<double> m_derivs_vxmax;
 
 public:
     SplineAdvectionVx(const BSplinesVx& bspl, const SplineVxBuilder& spl_interp);

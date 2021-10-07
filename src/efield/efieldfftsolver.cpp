@@ -21,38 +21,25 @@
 
 #include "efieldfftsolver.h"
 
-static double compute_dens(DViewVx const& fdistribu)
-{
-    auto&& dom_vx = get_domain<MeshVx>(fdistribu);
-    double const dv = dom_vx.mesh<MeshVx>().step();
-    double rho = 0.;
-    for (MCoordVx ivx : dom_vx) {
-        rho += fdistribu(ivx) * dv;
-    }
-    return rho;
-}
-
-static void compute_rho(DSpanX const& rho, DViewXVx const& fdistribu)
-{
-    DBlockVx contiguous_slice(fdistribu.domain<MeshVx>());
-    for (MCoordX ix : rho.domain()) {
-        deepcopy(contiguous_slice, fdistribu[ix]);
-        double const dens_elec = compute_dens(contiguous_slice);
-        double const dens_ion = 1.;
-        rho(ix) = (dens_ion - dens_elec);
-    }
-}
-
 EfieldFftSolver::EfieldFftSolver(
         IFourierTransform<Dim::X> const& fft,
         IInverseFourierTransform<Dim::X> const& ifft,
         BSplinesX const& bsplines_x,
-        SplineXBuilder const& spline_x_builder)
+        SplineXBuilder const& spline_x_builder,
+        BSplinesVx const& bsplines_vx,
+        SplineVxBuilder const& spline_vx_builder)
     : m_fft(fft)
     , m_ifft(ifft)
     , m_spline_x_basis(bsplines_x)
     , m_spline_x_builder(spline_x_builder)
     , m_spline_x_evaluator(bsplines_x, NullBoundaryValue::value, NullBoundaryValue::value)
+    , m_spline_vx_basis(bsplines_vx)
+    , m_spline_vx_builder(spline_vx_builder)
+    , m_spline_vx_evaluator(bsplines_vx, NullBoundaryValue::value, NullBoundaryValue::value)
+    , m_derivs_vxmin_data(BSplinesVx::degree() / 2, 0.)
+    , m_derivs_vxmin(m_derivs_vxmin_data.data(), m_derivs_vxmin_data.size())
+    , m_derivs_vxmax_data(BSplinesVx::degree() / 2, 0.)
+    , m_derivs_vxmax(m_derivs_vxmax_data.data(), m_derivs_vxmax_data.size())
 {
 }
 
@@ -65,7 +52,19 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
 
     // Compute the RHS of the Poisson equation.
     Block<double, MDomainX> rho(dom_x);
-    compute_rho(rho, fdistribu);
+    DBlockVx contiguous_slice_vx(fdistribu.domain<MeshVx>());
+    Block<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
+    for (MCoordX ix : rho.domain()) {
+        deepcopy(contiguous_slice_vx, fdistribu[ix]);
+        m_spline_vx_builder(
+                vx_spline_coef.view(),
+                contiguous_slice_vx.cview(),
+                &m_derivs_vxmin,
+                &m_derivs_vxmax);
+        double const dens_elec = m_spline_vx_evaluator.integrate(vx_spline_coef.cview());
+        double const dens_ion = 1.;
+        rho(ix) = (dens_ion - dens_elec);
+    }
 
     // Copy RHS into a complex `Block`.
     Block<std::complex<double>, MDomainX> complex_rho(dom_x);
@@ -96,8 +95,7 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
     }
 
     // Construct a domain over the bounded basis and allocate memory on this support
-    BSDomainX const dom_bsx(m_spline_x_basis, MLength<BSplinesX>(m_spline_x_basis.size()));
-    Block<double, BSDomainX> phi_spline_coef(dom_bsx);
+    Block<double, BSDomainX> phi_spline_coef(m_spline_x_builder.spline_domain());
     m_spline_x_builder(phi_spline_coef, phi_x);
 
     // Compute the electric field E = -d Phi / dx using a spline representation

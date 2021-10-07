@@ -12,10 +12,10 @@
 
 #include "fdistribu.h"
 #include "geometry.h"
-#include "nulladvectionvx.h"
 #include "nullefieldsolver.h"
 #include "pdi_out.yml.h"
 #include "predcorr.h"
+#include "splineadvectionvx.h"
 #include "splineadvectionx.h"
 #include "splitvlasovsolver.h"
 
@@ -97,20 +97,17 @@ int main(int argc, char** argv)
 
     SplineXBuilder const builder_x(bsplines_x);
 
-    MeshX const mesh_x(x_min, x_max, x_size);
+    BSplinesVx const bsplines_vx(vx_min, vx_max, vx_size);
 
-    MeshVx const mesh_vx(vx_min, vx_max, vx_size);
+    SplineVxBuilder const builder_vx(bsplines_vx);
 
-    MDomainXVx const
-            dom2d(builder_x.interpolation_domain().mesh<MeshX>(),
-                  mesh_vx,
-                  MLengthXVx(builder_x.interpolation_domain().extents(), vx_size));
+    MDomainXVx const dom2d(builder_x.interpolation_domain(), builder_vx.interpolation_domain());
 
     // Creating operators
 
     SplineAdvectionX const advection_x(bsplines_x, builder_x);
 
-    NullAdvectionVx const advection_vx;
+    SplineAdvectionVx const advection_vx(bsplines_vx, builder_vx);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 

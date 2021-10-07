@@ -58,11 +58,11 @@ using BSplinesVx = UniformBSplines<Dim::Vx, 3>;
 
 using BSDomainVx = ProductMDomain<BSplinesVx>;
 
-using SplineVxBuilder = SplineBuilder<BSplinesVx, BoundCond::GREVILLE, BoundCond::GREVILLE>;
+using SplineVxBuilder = SplineBuilder<BSplinesVx, BoundCond::HERMITE, BoundCond::HERMITE>;
 
 using MeshX = typename SplineXBuilder::interpolation_mesh_type;
 
-using MeshVx = UniformMesh<Dim::Vx>;
+using MeshVx = typename SplineVxBuilder::interpolation_mesh_type;
 
 using MeshFx = NonUniformMesh<Dim::Fx>;
 

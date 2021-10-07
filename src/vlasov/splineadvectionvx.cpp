@@ -31,6 +31,10 @@ SplineAdvectionVx::SplineAdvectionVx(
     : m_vx_spline_basis(bspl)
     , m_spline_vx_builder(spl_interp)
     , m_spline_vx_evaluator(bspl, bc_left, bc_right)
+    , m_derivs_vxmin_data(BSplinesVx::degree() / 2, 0.)
+    , m_derivs_vxmin(m_derivs_vxmin_data.data(), m_derivs_vxmin_data.size())
+    , m_derivs_vxmax_data(BSplinesVx::degree() / 2, 0.)
+    , m_derivs_vxmax(m_derivs_vxmax_data.data(), m_derivs_vxmax_data.size())
 {
 }
 
@@ -40,7 +44,7 @@ DSpanXVx SplineAdvectionVx::operator()(
         double sqrt_me_on_mspecies,
         double dt) const
 {
-    // assert(get_domain<MeshVx>(fdistribu) == m_spline_v_builder.interpolation_domain());
+    assert(get_domain<MeshVx>(fdistribu) == m_spline_vx_builder.interpolation_domain());
 
     const MDomainX& x_dom = get_domain<MeshX>(fdistribu);
     const MDomainVx& vx_dom = get_domain<MeshVx>(fdistribu);
@@ -48,12 +52,8 @@ DSpanXVx SplineAdvectionVx::operator()(
     // pre-allocate some memory to prevent allocation later in loop
     DBlockVx feet_coords(vx_dom);
 
-    Block<double, SplineVxBuilder::interpolation_domain_type> interpolated_fdistribu(
-            m_spline_vx_builder.interpolation_domain());
-
     // Construct a domain over the bounded basis and allocate memory on this support
-    BSDomainVx const dom_bsvx(m_vx_spline_basis, MLength<BSplinesVx>(m_vx_spline_basis.size()));
-    Block<double, BSDomainVx> spline_coef(dom_bsvx);
+    Block<double, BSDomainVx> spline_coef(m_spline_vx_builder.spline_domain());
 
     for (MCoordX ix : x_dom) {
         // compute the displacement
@@ -64,10 +64,8 @@ DSpanXVx SplineAdvectionVx::operator()(
             feet_coords(iv) = vx_dom.to_real(iv) - dvx;
         }
 
-        // some_interpolation(interpolated_fdistribu, fdistribu[ix]);
-
         // build a spline representation of the data
-        m_spline_vx_builder(spline_coef, interpolated_fdistribu);
+        m_spline_vx_builder(spline_coef, fdistribu[ix], &m_derivs_vxmin, &m_derivs_vxmax);
 
         // evaluate the function at the feet using the spline
         m_spline_vx_evaluator(fdistribu[ix], feet_coords.cview(), spline_coef.cview());
