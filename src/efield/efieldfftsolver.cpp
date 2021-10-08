@@ -91,7 +91,7 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
     Block<double, MDomainX> phi_x(dom_x);
     // deepcopy(phi_x, complex_phi_x);
     for (MCoordX ix : dom_x) {
-        phi_x(ix) = std::real(complex_phi_x(ix));
+        phi_x(ix) = std::real(complex_phi_x(ix)) / dom_fx.size();
     }
 
     // Construct a domain over the bounded basis and allocate memory on this support
