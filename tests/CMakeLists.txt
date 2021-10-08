@@ -4,7 +4,6 @@ include(GoogleTest)
 
 add_executable(unit_tests
 	fft.cpp
-	pdi.cpp
 	splitvlasovsolver.cpp
 )
 target_compile_features(unit_tests PUBLIC cxx_std_17)
