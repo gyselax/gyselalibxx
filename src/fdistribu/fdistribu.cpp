@@ -60,8 +60,8 @@ void perturbation_initialization(
         DSpanX perturbation)
 {
     auto gridx = perturbation.domain();
-    const double Lx = fabs(gridx.rmax() - gridx.rmin());
-    const double kx = mode * M_2_PI / Lx;
+    const double Lx = fabs(gridx.mesh<MeshX>().step() + gridx.rmax() - gridx.rmin());
+    const double kx = mode * 2. * M_PI / Lx;
     for (MCoordX ix : gridx) {
         const RCoordX x = gridx.to_real(ix);
         perturbation(ix) = perturb_amplitude * cos(kx * x);
@@ -82,7 +82,7 @@ void DistributionFunction::init()
     MDomainVx gridvx = values.domain<MeshVx>();
 
     // Initialization of the perturbation
-    const int mode = 2;
+    const int mode = 1;
     const double perturb_amplitude = 0.001;
     DBlockX perturbation(gridx);
     perturbation_initialization(mode, perturb_amplitude, perturbation);
