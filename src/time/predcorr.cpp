@@ -23,6 +23,8 @@ void PredCorr::operator()(DistributionFunction& fdistribu, double electron_mass,
     // a 2D block of the same size as fdistribu
     DBlockXVx fdistribu_half_t(fdistribu.values.domain());
 
+    m_efield(ex, fdistribu.values);
+
     double const sqrt_me_on_mspecies = sqrt(electron_mass / fdistribu.mass);
     int iter = 0;
     for (; iter < steps; ++iter) {
