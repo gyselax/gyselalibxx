@@ -37,7 +37,7 @@ int main(int argc, char** argv)
     }
 
     // Reading config
-    // --> Mesh
+    // --> Mesh info
     RCoordX x_min = [&]() {
         double x_min;
         PC_double(PC_get(conf_voicexx, ".Mesh.x_min"), &x_min);
@@ -68,7 +68,8 @@ int main(int argc, char** argv)
         PC_double(PC_get(conf_voicexx, ".Mesh.vx_size"), &vx_size);
         return MLengthVx(vx_size);
     }();
-    // --> Equilibrium
+
+    // --> Equilibrium info
     long ion_charge;
     PC_int(PC_get(conf_voicexx, ".Equilibrium.ion_charge"), &ion_charge);
     double ion_mass;
@@ -83,11 +84,32 @@ int main(int argc, char** argv)
     PC_int(PC_get(conf_voicexx, ".Equilibrium.electron_charge"), &electron_charge);
     double electron_mass;
     PC_double(PC_get(conf_voicexx, ".Equilibrium.electron_mass"), &electron_mass);
+    double electron_density_eq;
+    PC_double(PC_get(conf_voicexx, ".Equilibrium.electron_density_eq"), &electron_density_eq);
+    double electron_temperature_eq;
+    PC_double(
+            PC_get(conf_voicexx, ".Equilibrium.electron_temperature_eq"),
+            &electron_temperature_eq);
+    double electron_mean_velocity_eq;
+    PC_double(
+            PC_get(conf_voicexx, ".Equilibrium.electron_mean_velocity_eq"),
+            &electron_mean_velocity_eq);
 
+    // --> Perturbation info
+    long init_perturb_mode;
+    PC_int(PC_get(conf_voicexx, ".Perturbation.mode"), &init_perturb_mode);
+    double init_perturb_amplitude;
+    PC_double(PC_get(conf_voicexx, ".Perturbation.amplitude"), &init_perturb_amplitude);
+
+    // --> Algorithm info
     double deltat;
     PC_double(PC_get(conf_voicexx, ".Algorithm.deltat"), &deltat);
     long nbiter;
     PC_int(PC_get(conf_voicexx, ".Algorithm.nbiter"), &nbiter);
+
+    // --> Output info
+    double time_diag;
+    PC_double(PC_get(conf_voicexx, ".Output.time_diag"), &time_diag);
 
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
 
@@ -119,7 +141,7 @@ int main(int argc, char** argv)
 
     EfieldFftSolver efield(fft, ifft, bsplines_vx, builder_vx);
 
-    PredCorr const predcorr(vlasov, efield, deltat);
+    PredCorr const predcorr(vlasov, efield, deltat, time_diag);
 
     // Creating of mesh for output saving
     MDomainX gridx = select<MeshX>(dom2d);
@@ -135,15 +157,16 @@ int main(int argc, char** argv)
     }
 
     // Initialization of the distribution function
-    DistributionFunction
-            fion(ion_charge,
-                 ion_mass,
-                 ion_density_eq,
-                 ion_temperature_eq,
-                 ion_mean_velocity_eq,
-                 dom2d);
-    cout << "ion charge=" << fion.charge << endl;
-    fion.init();
+    DistributionFunction felectron(
+            electron_charge,
+            electron_mass,
+            electron_density_eq,
+            electron_temperature_eq,
+            electron_mean_velocity_eq,
+            init_perturb_mode,
+            init_perturb_amplitude,
+            dom2d);
+    felectron.init();
 
     // Starting the code
     expose_to_pdi("Nx", x_size);
@@ -151,7 +174,7 @@ int main(int argc, char** argv)
     expose_to_pdi("MeshX", meshX_coord);
     expose_to_pdi("MeshVx", meshVx_coord);
 
-    predcorr(fion, electron_mass, nbiter);
+    predcorr(felectron, electron_mass, nbiter);
 
     PC_tree_destroy(&conf_pdi);
 

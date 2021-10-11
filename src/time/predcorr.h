@@ -10,14 +10,21 @@ class IVlasovSolver;
 
 class PredCorr : public ITimeSolver
 {
-    IVlasovSolver const& m_vlasov;
+    IVlasovSolver const& m_vlasov_solver;
 
-    IEfieldSolver const& m_efield;
+    IEfieldSolver const& m_efield_solver;
 
     double const m_dt;
 
-public:
-    PredCorr(const IVlasovSolver& vlasov, const IEfieldSolver& efield, double dt);
+    double const m_time_diag;
 
-    void operator()(DistributionFunction& fdistribu, double mass_ratio, int steps) const override;
+public:
+    PredCorr(
+            const IVlasovSolver& vlasov_solver,
+            const IEfieldSolver& efield_solver,
+            double dt,
+            double time_diag);
+
+    void operator()(DistributionFunction& fdistribu, double electron_mass, int steps)
+            const override;
 };

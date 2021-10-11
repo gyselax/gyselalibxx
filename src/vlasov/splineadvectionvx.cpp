@@ -41,6 +41,7 @@ SplineAdvectionVx::SplineAdvectionVx(
 DSpanXVx SplineAdvectionVx::operator()(
         DSpanXVx fdistribu,
         DViewX efield,
+        int charge_species,
         double sqrt_me_on_mspecies,
         double dt) const
 {
@@ -57,7 +58,7 @@ DSpanXVx SplineAdvectionVx::operator()(
 
     for (MCoordX ix : x_dom) {
         // compute the displacement
-        const double dvx = sqrt_me_on_mspecies * dt * efield(ix);
+        const double dvx = charge_species * sqrt_me_on_mspecies * dt * efield(ix);
 
         // compute the coordinates of the feet
         for (MCoordVx iv : vx_dom) {

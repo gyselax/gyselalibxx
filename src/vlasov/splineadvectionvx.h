@@ -36,6 +36,10 @@ public:
             const BoundaryValue& bc_left,
             const BoundaryValue& bc_right);
 
-    DSpanXVx operator()(DSpanXVx fdistribu, DViewX efield, double sqrt_me_on_mspecies, double dt)
-            const override;
+    DSpanXVx operator()(
+            DSpanXVx fdistribu,
+            DViewX efield,
+            int charge_species,
+            double sqrt_me_on_mspecies,
+            double dt) const override;
 };

@@ -1,10 +1,10 @@
 Mesh:
   x_min: 0.0
   x_max: 12.56637061435917
-  x_size: 129
+  x_size: 128
   vx_min: -6.0
   vx_max: +6.0
-  vx_size: 128
+  vx_size: 127
 
 Equilibrium:
   ion_charge: 1
@@ -14,9 +14,17 @@ Equilibrium:
   ion_mean_velocity_eq: 0.
   electron_charge: -1
   electron_mass: 0.0005
+  electron_density_eq: 1.
+  electron_temperature_eq: 1.
+  electron_mean_velocity_eq: 0.
+
+Perturbation:
   mode: 1
-  perturb_amplitude: 0.01
+  amplitude: 0.01
 
 Algorithm:
   deltat: 0.125
-  nbiter: 10
+  nbiter: 360
+
+Output:
+  time_diag: 0.25

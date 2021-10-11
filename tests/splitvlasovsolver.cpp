@@ -30,12 +30,20 @@ public:
     MOCK_METHOD(
             DSpanXVx,
             CallOp,
-            (DSpanXVx fdistribu, DViewX efield, double sqrt_me_on_mspecies, double dt),
+            (DSpanXVx fdistribu,
+             DViewX efield,
+             int charge_species,
+             double sqrt_me_on_mspecies,
+             double dt),
             (const));
-    DSpanXVx operator()(DSpanXVx fdistribu, DViewX efield, double sqrt_me_on_mspecies, double dt)
-            const override
+    DSpanXVx operator()(
+            DSpanXVx fdistribu,
+            DViewX efield,
+            int charge_species,
+            double sqrt_me_on_mspecies,
+            double dt) const override
     {
-        return this->CallOp(fdistribu, efield, sqrt_me_on_mspecies, dt);
+        return this->CallOp(fdistribu, efield, charge_species, sqrt_me_on_mspecies, dt);
     }
 };
 
@@ -50,6 +58,7 @@ TEST(SplitVlasovSolver, ordering)
     DSpanXVx const fdistribu_s(fdistribu);
     DBlockX const efield(select<MeshX>(dom));
     double const sqrt_me_on_mspecies = 1.;
+    int const charge_species = -1;
     double const dt = 0.;
 
     MockAdvectionX const advec_x;
@@ -64,5 +73,5 @@ TEST(SplitVlasovSolver, ordering)
         EXPECT_CALL(advec_x, CallOp).WillOnce(Return(fdistribu_s));
     }
 
-    solver(fdistribu_s, efield, sqrt_me_on_mspecies, dt);
+    solver(fdistribu_s, efield, charge_species, sqrt_me_on_mspecies, dt);
 }

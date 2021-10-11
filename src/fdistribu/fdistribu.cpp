@@ -6,31 +6,6 @@
 using std::cos, std::fabs, std::sqrt, std::exp;
 
 /*
- Initialization of the distribution function
-*/
-/*DistributionFunction::DistributionFunction(MDomainXVx const &domXVx):
-    DBlockXVx values(domXVx)
-{
-    fdistribu_initialization(values);
-}*/
-DistributionFunction::DistributionFunction(
-        int const species_charge,
-        double const species_mass,
-        double const species_n_eq,
-        double const species_T_eq,
-        double const species_u_eq,
-        MDomainXVx const& domXVx)
-    : charge(species_charge)
-    , mass(species_mass)
-    , density_eq(species_n_eq)
-    , temperature_eq(species_T_eq)
-    , mean_velocity_eq(species_u_eq)
-    , Maxw_values(select<MeshVx>(domXVx))
-    , values(domXVx)
-{
-}
-
-/*
  Computing the non-centered Maxwellian function as
    fM(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T))
   with n the density and T the temperature and
@@ -60,6 +35,7 @@ void perturbation_initialization(
         DSpanX perturbation)
 {
     auto gridx = perturbation.domain();
+    // TODO: BECAREFUL this computation for Lx is only valid for X periodic
     const double Lx = fabs(gridx.mesh<MeshX>().step() + gridx.rmax() - gridx.rmin());
     const double kx = mode * 2. * M_PI / Lx;
     for (MCoordX ix : gridx) {
@@ -78,26 +54,24 @@ void perturbation_initialization(
 */
 void DistributionFunction::init()
 {
-    MDomainX gridx = values.domain<MeshX>();
-    MDomainVx gridvx = values.domain<MeshVx>();
+    MDomainX gridx = m_values.domain<MeshX>();
+    MDomainVx gridvx = m_values.domain<MeshVx>();
 
     // Initialization of the perturbation
-    const int mode = 1;
-    const double perturb_amplitude = 0.001;
     DBlockX perturbation(gridx);
-    perturbation_initialization(mode, perturb_amplitude, perturbation);
+    perturbation_initialization(m_init_perturb_mode, m_init_perturb_amplitude, perturbation);
 
     // Initialization of the Maxwellian --> fill Maxw_values
-    Maxwellian_initialization(density_eq, temperature_eq, mean_velocity_eq, Maxw_values);
+    Maxwellian_initialization(m_density_eq, m_temperature_eq, m_mean_velocity_eq, m_Maxw_values);
 
     // Initialization of the distribution function --> fill values
     for (MCoordX ix : gridx) {
         for (MCoordVx iv : gridvx) {
-            double fdistribu_val = Maxw_values(iv) * (1. + perturbation(ix));
+            double fdistribu_val = m_Maxw_values(iv) * (1. + perturbation(ix));
             if (fdistribu_val < 1.e-60) {
                 fdistribu_val = 1.e-60;
             }
-            values(ix, iv) = fdistribu_val;
+            m_values(ix, iv) = fdistribu_val;
         }
     }
 }

@@ -7,6 +7,10 @@
 class NullAdvectionVx : public IAdvectionVx
 {
 public:
-    DSpanXVx operator()(DSpanXVx fdistribu, DViewX efield, double sqrt_me_on_mspecies, double dt)
-            const override;
+    DSpanXVx operator()(
+            DSpanXVx fdistribu,
+            DViewX efield,
+            int charge_species,
+            double sqrt_me_on_mspecies,
+            double dt) const override;
 };
