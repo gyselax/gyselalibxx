@@ -117,7 +117,7 @@ int main(int argc, char** argv)
 
     FftwInverseFourierTransform<Dim::X> ifft;
 
-    EfieldFftSolver efield(fft, ifft, bsplines_x, builder_x, bsplines_vx, builder_vx);
+    EfieldFftSolver efield(fft, ifft, bsplines_vx, builder_vx);
 
     PredCorr const predcorr(vlasov, efield, deltat);
 

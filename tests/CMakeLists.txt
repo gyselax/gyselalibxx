@@ -15,7 +15,6 @@ target_link_libraries(unit_tests
 		FFTW::Double
 		paraconf::paraconf
 		DDC::PDI
-		vcx::deprecated::fft
 		vcx::fft
 		vcx::vlasov
 )

@@ -43,6 +43,38 @@ public:
         return NonUniformMesh<Fourier<Tags>...>(freqs);
     }
 
+    // Perform FFT where the input is a real and the output is a complex
+    void operator()(
+            BlockSpan<
+                    std::complex<double>,
+                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
+                    std::experimental::layout_right> const& out_values,
+            BlockSpan<
+                    double,
+                    ProductMDomain<UniformMesh<Tags>...>,
+                    std::experimental::layout_right> const& in_values) const noexcept override
+    {
+        assert(in_values.extents().array() == out_values.extents().array());
+
+        // It needs to be of type 'int'
+        auto extents = out_values.extents();
+        std::array<int, sizeof...(Tags)> n;
+        for (std::size_t i = 0; i < extents.size(); ++i) {
+            n[i] = extents[i];
+        }
+
+        fftw_plan plan = fftw_plan_dft_r2c(
+                n.size(),
+                n.data(),
+                reinterpret_cast<double*>(in_values.data()),
+                reinterpret_cast<fftw_complex*>(out_values.data()),
+                FFTW_ESTIMATE);
+        fftw_execute(plan);
+
+        fftw_destroy_plan(plan);
+    }
+
+    // Perform FFT where the input is a complex and the output is a complex
     void operator()(
             BlockSpan<
                     std::complex<double>,

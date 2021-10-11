@@ -14,12 +14,6 @@ class EfieldFftSolver : public IEfieldSolver
 
     IInverseFourierTransform<Dim::X> const& m_ifft;
 
-    BSplinesX const& m_spline_x_basis;
-
-    SplineXBuilder const& m_spline_x_builder;
-
-    SplineEvaluator<BSplinesX> m_spline_x_evaluator;
-
     BSplinesVx const& m_spline_vx_basis;
 
     SplineVxBuilder const& m_spline_vx_builder;
@@ -38,10 +32,8 @@ public:
     EfieldFftSolver(
             IFourierTransform<Dim::X> const& fft,
             IInverseFourierTransform<Dim::X> const& ifft,
-            BSplinesX const& bsplines_x,
-            SplineXBuilder const& spline_x_builder,
             BSplinesVx const& bsplines_vx,
             SplineVxBuilder const& spline_vx_builder);
 
-    DSpanX operator()(DSpanX ex, DViewXVx fdistribu) const override;
+    DSpanX operator()(DSpanX efield, DViewXVx fdistribu) const override;
 };

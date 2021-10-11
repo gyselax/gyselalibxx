@@ -21,18 +21,15 @@
 
 #include "efieldfftsolver.h"
 
+using namespace std::complex_literals;
+
 EfieldFftSolver::EfieldFftSolver(
         IFourierTransform<Dim::X> const& fft,
         IInverseFourierTransform<Dim::X> const& ifft,
-        BSplinesX const& bsplines_x,
-        SplineXBuilder const& spline_x_builder,
         BSplinesVx const& bsplines_vx,
         SplineVxBuilder const& spline_vx_builder)
     : m_fft(fft)
     , m_ifft(ifft)
-    , m_spline_x_basis(bsplines_x)
-    , m_spline_x_builder(spline_x_builder)
-    , m_spline_x_evaluator(bsplines_x, NullBoundaryValue::value, NullBoundaryValue::value)
     , m_spline_vx_basis(bsplines_vx)
     , m_spline_vx_builder(spline_vx_builder)
     , m_spline_vx_evaluator(bsplines_vx, NullBoundaryValue::value, NullBoundaryValue::value)
@@ -45,10 +42,10 @@ EfieldFftSolver::EfieldFftSolver(
 
 // 1- Inner solvers sall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
-DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
+DSpanX EfieldFftSolver::operator()(DSpanX efield, DViewXVx fdistribu) const
 {
-    assert(ex.domain() == get_domain<MeshX>(fdistribu));
-    UniformMDomainX dom_x = ex.domain();
+    assert(efield.domain() == get_domain<MeshX>(fdistribu));
+    UniformMDomainX dom_x = efield.domain();
 
     // Compute the RHS of the Poisson equation.
     Block<double, MDomainX> rho(dom_x);
@@ -66,42 +63,24 @@ DSpanX EfieldFftSolver::operator()(DSpanX ex, DViewXVx fdistribu) const
         rho(ix) = (dens_ion - dens_elec);
     }
 
-    // Copy RHS into a complex `Block`.
-    Block<std::complex<double>, MDomainX> complex_rho(dom_x);
-    deepcopy(complex_rho, rho);
-
     // Build a mesh in the fourier space, for N points
     MeshFx const mesh_fx = m_fft.compute_fourier_domain(dom_x);
     MDomainFx const dom_fx(mesh_fx, MLength<MeshFx>(mesh_fx.size()));
-    Block<std::complex<double>, MDomainFx> complex_phi_fx(dom_fx);
-    m_fft(complex_phi_fx, complex_rho);
 
-    // Solve Poisson's equation -d^2 Phi/dx^2 = rho in the Fourier space.
-    complex_phi_fx(dom_fx.front()) = 0.;
+    // Compute FFT(rho)
+    Block<std::complex<double>, MDomainFx> complex_Ex_fx(dom_fx);
+    m_fft(complex_Ex_fx, rho);
+
+    // Solve Poisson's equation -d2Phi/dx2 = rho by solving
+    //   dEx/dx = rho in the Fourier space (i.e i*kx*FFT(E)=FFT(rho)) with Ex = -dPhi/dx.
+    complex_Ex_fx(dom_fx.front()) = 0.;
     for (auto it_freq = dom_fx.cbegin() + 1; it_freq != dom_fx.cend(); ++it_freq) {
         double const kx = 2. * M_PI * mesh_fx.to_real(*it_freq);
-        complex_phi_fx(*it_freq) /= kx * kx;
+        complex_Ex_fx(*it_freq) /= 1.0i * kx;
     }
 
     // Perform the inverse 1D FFT of the solution.
-    Block<std::complex<double>, MDomainX> complex_phi_x(dom_x);
-    m_ifft(complex_phi_x, complex_phi_fx);
+    m_ifft(efield, complex_Ex_fx);
 
-    // Duplicate the result in the (real) phi_x 1D array.
-    Block<double, MDomainX> phi_x(dom_x);
-    // deepcopy(phi_x, complex_phi_x);
-    for (MCoordX ix : dom_x) {
-        phi_x(ix) = std::real(complex_phi_x(ix)) / dom_fx.size();
-    }
-
-    // Construct a domain over the bounded basis and allocate memory on this support
-    Block<double, BSDomainX> phi_spline_coef(m_spline_x_builder.spline_domain());
-    m_spline_x_builder(phi_spline_coef, phi_x);
-
-    // Compute the electric field E = -d Phi / dx using a spline representation
-    for (MCoordX ix : dom_x) {
-        ex(ix) = -m_spline_x_evaluator.deriv(dom_x.to_real(ix), phi_spline_coef.cview());
-    }
-
-    return ex;
+    return efield;
 }

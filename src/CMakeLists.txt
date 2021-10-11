@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
 
-add_subdirectory(deprecated)
 add_subdirectory(efield)
 add_subdirectory(fft)
 add_subdirectory(geometry)

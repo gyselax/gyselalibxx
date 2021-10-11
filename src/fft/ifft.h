@@ -23,6 +23,18 @@ public:
 
     IInverseFourierTransform& operator=(IInverseFourierTransform&& x) = default;
 
+    // Perform the normalized invFFT where the input is a complex and the output is a real
+    virtual void operator()(
+            BlockSpan<
+                    double,
+                    ProductMDomain<UniformMesh<Tags>...>,
+                    std::experimental::layout_right> const& out_values,
+            BlockSpan<
+                    std::complex<double>,
+                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
+                    std::experimental::layout_right> const& in_values) const noexcept = 0;
+
+    // Perform the normalized invFFT where the input is a complex and the output is a complex
     virtual void operator()(
             BlockSpan<
                     std::complex<double>,
