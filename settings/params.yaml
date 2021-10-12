@@ -27,4 +27,4 @@ Algorithm:
   nbiter: 360
 
 Output:
-  time_diag: 0.25
+  time_diag: 0.5

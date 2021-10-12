@@ -36,22 +36,17 @@ void PredCorr::operator()(DistributionFunction& fdistribu, double electron_mass,
     double const sqrt_me_on_mspecies = sqrt(electron_mass / fdistribu.m_mass);
 
     int iter = 0;
-    int iter_save = 0;
     for (; iter < steps; ++iter) {
         double const iter_time = iter * m_dt;
 
         // computation of Efield(tn)
         m_efield_solver(efield, fdistribu.m_values);
 
-        if (std::fmod(iter_time, m_time_diag) == 0.0) {
-            PdiEvent("iteration")
-                    .with("iter", iter)
-                    .and_with("iter_time", iter_time)
-                    .and_with("iter_save", iter_save)
-                    .and_with("fdistribu", fdistribu.m_values)
-                    .and_with("efield", efield);
-            iter_save += 1;
-        }
+        PdiEvent("iteration")
+                .with("iter", iter)
+                .and_with("iter_time", iter_time)
+                .and_with("fdistribu", fdistribu.m_values)
+                .and_with("efield", efield);
 
         // copy fdistribu
         deepcopy(fdistribu_half_t, fdistribu.m_values);
@@ -76,7 +71,6 @@ void PredCorr::operator()(DistributionFunction& fdistribu, double electron_mass,
     PdiEvent("last_iteration")
             .with("iter", iter)
             .and_with("iter_time", final_time)
-            .and_with("iter_save", iter_save)
             .and_with("fdistribu", fdistribu.m_values)
             .and_with("efield", efield);
 }

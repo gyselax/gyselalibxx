@@ -110,6 +110,8 @@ int main(int argc, char** argv)
     // --> Output info
     double time_diag;
     PC_double(PC_get(conf_voicexx, ".Output.time_diag"), &time_diag);
+    int const nbstep_diag = int(time_diag / deltat);
+    std::cout << "nbstep_diag= " << nbstep_diag << std::endl;
 
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
 
@@ -173,6 +175,8 @@ int main(int argc, char** argv)
     expose_to_pdi("Nvx", vx_size);
     expose_to_pdi("MeshX", meshX_coord);
     expose_to_pdi("MeshVx", meshVx_coord);
+    expose_to_pdi("nbstep_diag", nbstep_diag);
+    PdiEvent("initial_state");
 
     predcorr(felectron, electron_mass, nbiter);
 
