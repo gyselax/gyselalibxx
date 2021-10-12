@@ -140,7 +140,6 @@ int main(int argc, char** argv)
     double time_diag;
     PC_double(PC_get(conf_voicexx, ".Output.time_diag"), &time_diag);
     int const nbstep_diag = int(time_diag / deltat);
-    std::cout << "nbstep_diag= " << nbstep_diag << std::endl;
 
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
 

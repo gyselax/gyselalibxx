@@ -18,11 +18,11 @@ metadata:
     size: [ '$MeshVx_extents[0]' ]
   
 data:
-  fdistribu_extents: { type: array, subtype: int64, size: 2 }
+  fdistribu_extents: { type: array, subtype: int64, size: 3 }
   fdistribu:
     type: array
     subtype: double
-    size: [ '$fdistribu_extents[0]', '$fdistribu_extents[1]' ]
+    size: [ '$fdistribu_extents[0]', '$fdistribu_extents[1]', '$fdistribu_extents[2]' ]
   efield_extents: { type: array, subtype: int64, size: 1 }
   efield:
     type: array
