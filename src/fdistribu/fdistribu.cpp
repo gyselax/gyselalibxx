@@ -34,8 +34,8 @@ void perturbation_initialization(
         const double perturb_amplitude,
         DSpanX perturbation)
 {
+    static_assert(Dim::X::PERIODIC, "this computation for Lx is only valid for X periodic");
     auto gridx = perturbation.domain();
-    // TODO: BECAREFUL this computation for Lx is only valid for X periodic
     const double Lx = fabs(gridx.mesh<MeshX>().step() + gridx.rmax() - gridx.rmin());
     const double kx = mode * 2. * M_PI / Lx;
     for (MCoordX ix : gridx) {
