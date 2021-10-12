@@ -54,11 +54,7 @@ public:
     {
     }
 
-    /** Constructs a new Block by copy
-     * 
-     * This is deleted, one should use deepcopy
-     * @param other the Block to copy
-     */
+    /// Deleted: use deepcopy instead
     inline constexpr Block(Block const& other) = delete;
 
     /** Constructs a new Block by move
@@ -77,10 +73,7 @@ public:
         }
     }
 
-    /** Copy-assigns a new value to this field
-     * @param other the Block to copy
-     * @return *this
-     */
+    /// Deleted: use deepcopy instead
     inline constexpr Block& operator=(Block const& other) = delete;
 
     /** Move-assigns a new value to this field
@@ -91,17 +84,6 @@ public:
     {
         static_cast<block_span_type&>(*this) = std::move(other);
         other.m_internal_mdspan = internal_mdspan_type();
-        return *this;
-    }
-
-    /** Copy-assigns a new value to this field
-     * @param other the Block to copy
-     * @return *this
-     */
-    template <class OElementType, class... OMeshes>
-    inline Block& operator=(Block<OElementType, ProductMDomain<OMeshes...>>&& other)
-    {
-        copy(*this, other);
         return *this;
     }
 

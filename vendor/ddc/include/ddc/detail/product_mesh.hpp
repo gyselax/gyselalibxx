@@ -15,7 +15,7 @@ class ProductMesh
     using rdim_t = typename Mesh::rdim_type;
 
     template <class Mesh>
-    using storage_t = Mesh const&;
+    using storage_t = Mesh const*;
 
 private:
     // static_assert((... && is_mesh_v<Meshes>), "A template parameter is not a mesh");
@@ -40,7 +40,7 @@ public:
 public:
     ProductMesh() = default;
 
-    constexpr explicit ProductMesh(Meshes const&... meshes) : m_meshes(meshes...) {}
+    constexpr explicit ProductMesh(Meshes const&... meshes) : m_meshes(&meshes...) {}
 
     ProductMesh(ProductMesh const& x) = default;
 
@@ -55,21 +55,21 @@ public:
     template <class QueryMesh>
     QueryMesh const& get() const noexcept
     {
-        return std::get<storage_t<QueryMesh>>(m_meshes);
+        return *std::get<storage_t<QueryMesh>>(m_meshes);
     }
 
     template <class... QueryMeshes>
     RCoord<rdim_t<QueryMeshes>...> to_real(MCoord<QueryMeshes...> const& mcoord) const noexcept
     {
         return RCoord<rdim_t<QueryMeshes>...>(
-                std::get<storage_t<QueryMeshes>>(m_meshes).to_real(select<QueryMeshes>(mcoord))...);
+                std::get<storage_t<QueryMeshes>>(m_meshes)->to_real(select<QueryMeshes>(mcoord))...);
     }
 
     friend constexpr bool operator==(ProductMesh const& lhs, ProductMesh const& rhs)
     {
         return (...
-                && (std::get<storage_t<Meshes>>(lhs.m_meshes)
-                    == std::get<storage_t<Meshes>>(rhs.m_meshes)));
+                && (*std::get<storage_t<Meshes>>(lhs.m_meshes)
+                    == *std::get<storage_t<Meshes>>(rhs.m_meshes)));
     }
 
 #if __cplusplus <= 201703L
@@ -94,4 +94,4 @@ constexpr ProductMesh<QueryMeshes...> select(ProductMesh<Meshes...> const& mesh)
     return ProductMesh(get<QueryMeshes>(mesh)...);
 }
 
-}
+} // namespace detail

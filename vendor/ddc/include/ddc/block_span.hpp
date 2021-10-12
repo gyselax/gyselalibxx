@@ -219,14 +219,16 @@ public:
         return m_internal_mdspan(indices.array());
     }
 
+    /// @deprecated
     template <class QueryMesh>
-    inline constexpr std::size_t ibegin() const noexcept
+    [[deprecated]] inline constexpr std::size_t ibegin() const noexcept
     {
         return front<QueryMesh>(m_domain);
     }
 
+    /// @deprecated
     template <class QueryMesh>
-    inline constexpr std::size_t iend() const noexcept
+    [[deprecated]] inline constexpr std::size_t iend() const noexcept
     {
         return back<QueryMesh>(m_domain) + 1;
     }
