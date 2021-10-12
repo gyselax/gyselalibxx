@@ -64,7 +64,11 @@ public:
     /** Constructs a new Block by move
      * @param other the Block to move
      */
-    inline constexpr Block(Block&& other) = default;
+    inline constexpr Block(Block&& other)
+        : block_span_type(std::move(other))
+    {
+        other.m_internal_mdspan = internal_mdspan_type();
+    }
 
     inline ~Block()
     {
@@ -77,13 +81,18 @@ public:
      * @param other the Block to copy
      * @return *this
      */
-    inline constexpr Block& operator=(Block const& other) = default;
+    inline constexpr Block& operator=(Block const& other) = delete;
 
     /** Move-assigns a new value to this field
      * @param other the Block to move
      * @return *this
      */
-    inline constexpr Block& operator=(Block&& other) = default;
+    inline constexpr Block& operator=(Block&& other)
+    {
+        static_cast<block_span_type&>(*this) = std::move(other);
+        other.m_internal_mdspan = internal_mdspan_type();
+        return *this;
+    }
 
     /** Copy-assigns a new value to this field
      * @param other the Block to copy
