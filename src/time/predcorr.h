@@ -2,7 +2,6 @@
 
 #include <geometry.h>
 
-#include "fdistribu.h"
 #include "itimesolver.h"
 
 class IEfieldSolver;
@@ -25,6 +24,5 @@ public:
             double dt,
             double time_diag);
 
-    void operator()(DistributionFunction& fdistribu, double electron_mass, int steps)
-            const override;
+    void operator()(DSpanSpXVx fdistribu, int steps) const override;
 };

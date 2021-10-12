@@ -18,12 +18,14 @@
 #include <sll/spline_evaluator.h>
 
 #include <geometry.h>
+#include <species_info.hpp>
 
 #include "efieldfftsolver.h"
 
 using namespace std::complex_literals;
 
 EfieldFftSolver::EfieldFftSolver(
+        SpeciesInformation const& species_info,
         IFourierTransform<Dim::X> const& fft,
         IInverseFourierTransform<Dim::X> const& ifft,
         BSplinesVx const& bsplines_vx,
@@ -37,12 +39,13 @@ EfieldFftSolver::EfieldFftSolver(
     , m_derivs_vxmin(m_derivs_vxmin_data.data(), m_derivs_vxmin_data.size())
     , m_derivs_vxmax_data(BSplinesVx::degree() / 2, 0.)
     , m_derivs_vxmax(m_derivs_vxmax_data.data(), m_derivs_vxmax_data.size())
+    , m_species_info(species_info)
 {
 }
 
 // 1- Inner solvers sall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
-DSpanX EfieldFftSolver::operator()(DSpanX efield, DViewXVx fdistribu) const
+DSpanX EfieldFftSolver::operator()(DSpanX efield, DViewSpXVx fdistribu) const
 {
     assert(efield.domain() == get_domain<MeshX>(fdistribu));
     UniformMDomainX dom_x = efield.domain();
@@ -52,15 +55,17 @@ DSpanX EfieldFftSolver::operator()(DSpanX efield, DViewXVx fdistribu) const
     DBlockVx contiguous_slice_vx(fdistribu.domain<MeshVx>());
     Block<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
     for (MCoordX ix : rho.domain()) {
-        deepcopy(contiguous_slice_vx, fdistribu[ix]);
-        m_spline_vx_builder(
-                vx_spline_coef.view(),
-                contiguous_slice_vx.cview(),
-                &m_derivs_vxmin,
-                &m_derivs_vxmax);
-        double const dens_elec = m_spline_vx_evaluator.integrate(vx_spline_coef.cview());
-        double const dens_ion = 1.;
-        rho(ix) = (dens_ion - dens_elec);
+        rho(ix) = m_species_info.charge()(m_species_info.ielec());
+        for (MCoordSp isp : get_domain<MeshSp>(fdistribu)) {
+            deepcopy(contiguous_slice_vx, fdistribu[isp][ix]);
+            m_spline_vx_builder(
+                    vx_spline_coef.view(),
+                    contiguous_slice_vx.cview(),
+                    &m_derivs_vxmin,
+                    &m_derivs_vxmax);
+            rho(ix) += m_species_info.charge()(isp)
+                       * m_spline_vx_evaluator.integrate(vx_spline_coef.cview());
+        }
     }
 
     // Build a mesh in the fourier space, for N points

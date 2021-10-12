@@ -1,7 +1,7 @@
 #include <cmath>
 #include <iostream>
 
-#include "fdistribu.h"
+#include "species_info.hpp"
 
 using std::cos, std::fabs, std::sqrt, std::exp;
 
@@ -52,26 +52,38 @@ void perturbation_initialization(
  The boundary conditions are  :
     f(x=x0,v) = f(x=xmax,v) = fM(v)
 */
-void DistributionFunction::init()
+void SpeciesInformation::init(DSpanSpXVx fdistribu)
 {
-    MDomainX gridx = m_values.domain<MeshX>();
-    MDomainVx gridvx = m_values.domain<MeshVx>();
+    MDomainX gridx = fdistribu.domain<MeshX>();
+    MDomainVx gridvx = fdistribu.domain<MeshVx>();
+    MDomainSp gridsp = fdistribu.domain<MeshSp>();
 
     // Initialization of the perturbation
     DBlockX perturbation(gridx);
-    perturbation_initialization(m_init_perturb_mode, m_init_perturb_amplitude, perturbation);
+    for (MCoordSp isp : gridsp) {
+        perturbation_initialization(
+                m_init_perturb_mode(isp),
+                m_init_perturb_amplitude(isp),
+                perturbation);
 
-    // Initialization of the Maxwellian --> fill Maxw_values
-    Maxwellian_initialization(m_density_eq, m_temperature_eq, m_mean_velocity_eq, m_Maxw_values);
+        // Initialization of the Maxwellian --> fill Maxw_values
+        Maxwellian_initialization(
+                m_density_eq(isp),
+                m_temperature_eq(isp),
+                m_mean_velocity_eq(isp),
+                m_maxw_values[isp]);
 
-    // Initialization of the distribution function --> fill values
-    for (MCoordX ix : gridx) {
-        for (MCoordVx iv : gridvx) {
-            double fdistribu_val = m_Maxw_values(iv) * (1. + perturbation(ix));
-            if (fdistribu_val < 1.e-60) {
-                fdistribu_val = 1.e-60;
+        // Initialization of the distribution function --> fill values
+        for (MCoordSp isp : gridsp) {
+            for (MCoordX ix : gridx) {
+                for (MCoordVx iv : gridvx) {
+                    double fdistribu_val = m_maxw_values(isp, iv) * (1. + perturbation(ix));
+                    if (fdistribu_val < 1.e-60) {
+                        fdistribu_val = 1.e-60;
+                    }
+                    fdistribu(isp, ix, iv) = fdistribu_val;
+                }
             }
-            m_values(ix, iv) = fdistribu_val;
         }
     }
 }

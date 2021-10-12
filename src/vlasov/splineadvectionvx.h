@@ -9,6 +9,7 @@
 #include "iadvectionvx.h"
 
 class BoundaryValue;
+class SpeciesInformation;
 
 class SplineAdvectionVx : public IAdvectionVx
 {
@@ -27,19 +28,20 @@ private:
 
     Span1D<double> m_derivs_vxmax;
 
+    SpeciesInformation const& m_species_info;
+
 public:
-    SplineAdvectionVx(const BSplinesVx& bspl, const SplineVxBuilder& spl_interp);
+    SplineAdvectionVx(
+            SpeciesInformation const& species_info,
+            const BSplinesVx& bspl,
+            const SplineVxBuilder& spl_interp);
 
     SplineAdvectionVx(
+            SpeciesInformation const& species_info,
             const BSplinesVx& bspl,
             const SplineVxBuilder& spl_interp,
             const BoundaryValue& bc_left,
             const BoundaryValue& bc_right);
 
-    DSpanXVx operator()(
-            DSpanXVx fdistribu,
-            DViewX efield,
-            int charge_species,
-            double sqrt_me_on_mspecies,
-            double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx fdistribu, DViewX efield, double dt) const override;
 };

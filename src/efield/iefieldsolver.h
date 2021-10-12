@@ -7,5 +7,5 @@
 class IEfieldSolver
 {
 public:
-    virtual DSpanX operator()(DSpanX efield, DViewXVx fdistribu) const = 0;
+    virtual DSpanX operator()(DSpanX efield, DViewSpXVx fdistribu) const = 0;
 };

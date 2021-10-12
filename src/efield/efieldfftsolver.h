@@ -8,6 +8,8 @@
 
 #include "iefieldsolver.h"
 
+class SpeciesInformation;
+
 class EfieldFftSolver : public IEfieldSolver
 {
     IFourierTransform<Dim::X> const& m_fft;
@@ -28,12 +30,15 @@ class EfieldFftSolver : public IEfieldSolver
 
     Span1D<double> m_derivs_vxmax;
 
+    SpeciesInformation const& m_species_info;
+
 public:
     EfieldFftSolver(
+            SpeciesInformation const& species_info,
             IFourierTransform<Dim::X> const& fft,
             IInverseFourierTransform<Dim::X> const& ifft,
             BSplinesVx const& bsplines_vx,
             SplineVxBuilder const& spline_vx_builder);
 
-    DSpanX operator()(DSpanX efield, DViewXVx fdistribu) const override;
+    DSpanX operator()(DSpanX efield, DViewSpXVx fdistribu) const override;
 };

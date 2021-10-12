@@ -7,6 +7,5 @@
 class IAdvectionX
 {
 public:
-    virtual DSpanXVx operator()(DSpanXVx fdistribu, double sqrt_me_on_mspecies, double dt)
-            const = 0;
+    virtual DSpanSpXVx operator()(DSpanSpXVx fdistribu, double dt) const = 0;
 };

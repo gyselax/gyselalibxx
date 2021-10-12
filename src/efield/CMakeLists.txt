@@ -16,6 +16,7 @@ target_link_libraries(efield
 	PUBLIC
 		DDC::DDC
 		sll::splines
+		vcx::speciesinfo
 		vcx::fft
 		vcx::geometry
 )

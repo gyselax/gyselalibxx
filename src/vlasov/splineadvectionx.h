@@ -7,6 +7,7 @@
 #include "iadvectionx.h"
 
 class BoundaryValue;
+class SpeciesInformation;
 
 class SplineAdvectionX : public IAdvectionX
 {
@@ -17,14 +18,20 @@ private:
 
     SplineEvaluator<BSplinesX> m_spline_x_evaluator;
 
+    SpeciesInformation const& m_species_info;
+
 public:
-    SplineAdvectionX(const BSplinesX& bspl, const SplineXBuilder& spl_interp);
+    SplineAdvectionX(
+            SpeciesInformation const& species,
+            const BSplinesX& bspl,
+            const SplineXBuilder& spl_interp);
 
     SplineAdvectionX(
+            SpeciesInformation const& species,
             const BSplinesX& bspl,
             const SplineXBuilder& spl_interp,
             const BoundaryValue& bc_left,
             const BoundaryValue& bc_right);
 
-    DSpanXVx operator()(DSpanXVx fdistribu, double sqrt_me_on_mspecies, double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx fdistribu, double dt) const override;
 };

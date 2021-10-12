@@ -18,6 +18,7 @@ target_link_libraries(vlasov
 	PUBLIC
 		DDC::DDC
 		sll::splines
+		vcx::speciesinfo
 		vcx::geometry
 )
 

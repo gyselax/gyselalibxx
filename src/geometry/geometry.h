@@ -66,12 +66,39 @@ using MeshVx = typename SplineVxBuilder::interpolation_mesh_type;
 
 using MeshFx = NonUniformMesh<Dim::Fx>;
 
+// Species dimension
+class MeshSp
+{
+public:
+    using mcoord_type = MCoord<MeshSp>;
+
+    using rdim_type = void;
+
+    constexpr static std::size_t rank()
+    {
+        return 1;
+    }
+
+    constexpr bool operator==(MeshSp const& other) const
+    {
+        return true;
+    }
+
+    constexpr bool operator!=(MeshSp const& other) const
+    {
+        return !(*this == other);
+    }
+};
 
 using MCoordX = MCoord<MeshX>;
 
 using MCoordVx = MCoord<MeshVx>;
 
+using MCoordSp = MCoord<MeshSp>;
+
 using MCoordXVx = MCoord<MeshX, MeshVx>;
+
+using MCoordSpXVx = MCoord<MeshSp, MeshX, MeshVx>;
 
 using MCoordFx = MCoord<MeshFx>;
 
@@ -81,7 +108,11 @@ using MLengthVx = MLength<MeshVx>;
 
 using MLengthXVx = MLength<MeshX, MeshVx>;
 
+using MLengthSpXVx = MLength<MeshSp, MeshX, MeshVx>;
+
 using MLengthFx = MLength<MeshFx>;
+
+using MLengthSp = MLength<MeshSp>;
 
 using UniformMDomainX = ProductMDomain<MeshX>;
 
@@ -93,7 +124,11 @@ using MDomainX = UniformMDomainX;
 
 using MDomainVx = UniformMDomainVx;
 
-using MDomainXVx = UniformMDomainXVx;
+using MDomainSp = ProductMDomain<MeshSp>;
+
+using MDomainSpVx = ProductMDomain<MeshSp, MeshVx>;
+
+using MDomainSpXVx = ProductMDomain<MeshSp, MeshX, MeshVx>;
 
 using MDomainFx = ProductMDomain<MeshFx>;
 
@@ -108,9 +143,9 @@ using SpanVx = BlockSpan<ElementType, MDomainVx>;
 using DSpanVx = SpanVx<double>;
 
 template <class ElementType>
-using SpanXVx = BlockSpan<ElementType, MDomainXVx>;
+using SpanSpXVx = BlockSpan<ElementType, MDomainSpXVx>;
 
-using DSpanXVx = SpanXVx<double>;
+using DSpanSpXVx = SpanSpXVx<double>;
 
 template <class ElementType>
 using ViewX = BlockSpan<ElementType const, MDomainX>;
@@ -123,9 +158,19 @@ using ViewVx = BlockSpan<ElementType const, MDomainVx>;
 using DViewVx = ViewVx<double>;
 
 template <class ElementType>
-using ViewXVx = BlockSpan<ElementType const, MDomainXVx>;
+using ViewSp = BlockSpan<ElementType const, MDomainSp>;
 
-using DViewXVx = ViewXVx<double>;
+using DViewSp = ViewSp<double>;
+
+template <class ElementType>
+using ViewSpVx = BlockSpan<ElementType const, MDomainSpVx>;
+
+using DViewSpVx = ViewSpVx<double>;
+
+template <class ElementType>
+using ViewSpXVx = BlockSpan<ElementType const, MDomainSpXVx>;
+
+using DViewSpXVx = ViewSpXVx<double>;
 
 template <class ElementType>
 using BlockX = Block<ElementType, MDomainX>;
@@ -138,6 +183,16 @@ using BlockVx = Block<ElementType, MDomainVx>;
 using DBlockVx = BlockVx<double>;
 
 template <class ElementType>
-using BlockXVx = Block<ElementType, MDomainXVx>;
+using BlockSp = Block<ElementType, MDomainSp>;
 
-using DBlockXVx = BlockXVx<double>;
+using DBlockSp = BlockSp<double>;
+
+template <class ElementType>
+using BlockSpVx = Block<ElementType, MDomainSpVx>;
+
+using DBlockSpVx = BlockSpVx<double>;
+
+template <class ElementType>
+using BlockSpXVx = Block<ElementType, MDomainSpXVx>;
+
+using DBlockSpXVx = BlockSpXVx<double>;

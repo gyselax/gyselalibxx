@@ -32,8 +32,8 @@ using DBlockX = Block<double, MDomainX>;
 using RCoordXVx = RCoord<DimX, DimVx>;
 using MCoordXVx = MCoord<MeshX, MeshVx>;
 using MLengthXVx = MLength<MeshX, MeshVx>;
-using MDomainXVx = ProductMDomain<MeshX, MeshVx>;
-using DBlockXVx = Block<double, MDomainXVx>;
+using MDomainSpXVx = ProductMDomain<MeshX, MeshVx>;
+using DBlockSpXVx = Block<double, MDomainSpXVx>;
 using RCoordVxX = RCoord<DimVx, DimX>;
 using MCoordVxX = MCoord<MeshVx, MeshX>;
 using MDomainVxX = ProductMDomain<MeshVx, MeshX>;
@@ -96,18 +96,18 @@ class DBlockXVxTest : public ::testing::Test
 protected:
     MeshX mesh_x = MeshX(RCoordX(0.0), RCoordX(1.0));
     MeshVx mesh_vx = MeshVx(RCoordVx(0.0), RCoordVx(1.0));
-    MDomainXVx dom = MDomainXVx(mesh_x, mesh_vx, MCoordXVx(0, 0), MLengthXVx(101, 101));
+    MDomainSpXVx dom = MDomainSpXVx(mesh_x, mesh_vx, MCoordXVx(0, 0), MLengthXVx(101, 101));
 };
 
 TEST_F(DBlockXVxTest, deepcopy)
 {
-    DBlockXVx block(dom);
+    DBlockSpXVx block(dom);
     for (auto&& ii : block.domain<MeshX>()) {
         for (auto&& jj : block.domain<MeshVx>()) {
             block(ii, jj) = 1. * ii + .001 * jj;
         }
     }
-    DBlockXVx block2(block.domain());
+    DBlockSpXVx block2(block.domain());
     deepcopy(block2, block);
     for (auto&& ii : block.domain<MeshX>()) {
         for (auto&& jj : block.domain<MeshVx>()) {
@@ -119,7 +119,7 @@ TEST_F(DBlockXVxTest, deepcopy)
 
 TEST_F(DBlockXVxTest, reordering)
 {
-    DBlockXVx block(dom);
+    DBlockSpXVx block(dom);
     for (auto&& ii : block.domain<MeshX>()) {
         for (auto&& jj : block.domain<MeshVx>()) {
             block(ii, jj) = 1. * ii + .001 * jj;
@@ -139,7 +139,7 @@ TEST_F(DBlockXVxTest, reordering)
 
 TEST_F(DBlockXVxTest, slice)
 {
-    DBlockXVx block(dom);
+    DBlockSpXVx block(dom);
     for (auto&& ii : block.domain<MeshX>()) {
         for (auto&& jj : block.domain<MeshVx>()) {
             block(ii, jj) = 1. * ii + .001 * jj;
@@ -149,7 +149,7 @@ TEST_F(DBlockXVxTest, slice)
                  std::decay_t<decltype(block)>::layout_type,
                  std::experimental::layout_right>));
     {
-        const DBlockXVx& constref_block = block;
+        const DBlockSpXVx& constref_block = block;
         constexpr auto SLICE_VAL = 1;
         auto&& block_x = constref_block[MCoord<MeshVx>(SLICE_VAL)];
         ASSERT_TRUE((std::is_same_v<
@@ -188,7 +188,7 @@ TEST_F(DBlockXVxTest, slice)
 
 TEST_F(DBlockXVxTest, view)
 {
-    DBlockXVx block(dom);
+    DBlockSpXVx block(dom);
     for (auto&& ii : block.domain<MeshX>()) {
         for (auto&& jj : block.domain<MeshVx>()) {
             block(ii, jj) = 1. * ii + .001 * jj;
@@ -205,7 +205,7 @@ TEST_F(DBlockXVxTest, view)
 
 TEST_F(DBlockXVxTest, automatic_reordering)
 {
-    DBlockXVx block(dom);
+    DBlockSpXVx block(dom);
     for (auto&& ii : block.domain<MeshX>()) {
         for (auto&& jj : block.domain<MeshVx>()) {
             block(ii, jj) = 1. * ii + .001 * jj;
@@ -223,12 +223,12 @@ class NonZeroDBlockXVxTest : public ::testing::Test
 protected:
     MeshX mesh_x = MeshX(RCoordX(0.0), RCoordX(1.0));
     MeshVx mesh_vx = MeshVx(RCoordVx(0.0), RCoordVx(1.0));
-    MDomainXVx dom = MDomainXVx(mesh_x, mesh_vx, MCoordXVx(100, 100), MLengthXVx(101, 101));
+    MDomainSpXVx dom = MDomainSpXVx(mesh_x, mesh_vx, MCoordXVx(100, 100), MLengthXVx(101, 101));
 };
 
 TEST_F(NonZeroDBlockXVxTest, view)
 {
-    DBlockXVx block(dom);
+    DBlockSpXVx block(dom);
     for (auto&& ii : block.domain<MeshX>()) {
         for (auto&& jj : block.domain<MeshVx>()) {
             block(ii, jj) = 1. * ii + .001 * jj;
@@ -245,7 +245,7 @@ TEST_F(NonZeroDBlockXVxTest, view)
 
 TEST_F(NonZeroDBlockXVxTest, slice)
 {
-    DBlockXVx block(dom);
+    DBlockSpXVx block(dom);
     for (auto&& ii : block.domain<MeshX>()) {
         for (auto&& jj : block.domain<MeshVx>()) {
             block(ii, jj) = 1. * ii + .001 * jj;
@@ -255,7 +255,7 @@ TEST_F(NonZeroDBlockXVxTest, slice)
                  std::decay_t<decltype(block)>::layout_type,
                  std::experimental::layout_right>));
     {
-        const DBlockXVx& constref_block = block;
+        const DBlockSpXVx& constref_block = block;
         constexpr auto SLICE_VAL = 1;
         auto&& block_x = constref_block[MCoord<MeshVx>(SLICE_VAL)];
         ASSERT_TRUE((std::is_same_v<

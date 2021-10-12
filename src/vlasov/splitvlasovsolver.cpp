@@ -9,15 +9,10 @@ SplitVlasovSolver::SplitVlasovSolver(const IAdvectionX& advec_x, const IAdvectio
 }
 
 
-DSpanXVx SplitVlasovSolver::operator()(
-        DSpanXVx fdistribu,
-        DViewX efield,
-        int charge_species,
-        double sqrt_me_on_mspecies,
-        double dt) const
+DSpanSpXVx SplitVlasovSolver::operator()(DSpanSpXVx fdistribu, DViewX efield, double dt) const
 {
-    m_advec_x(fdistribu, sqrt_me_on_mspecies, dt / 2);
-    m_advec_vx(fdistribu, efield, charge_species, sqrt_me_on_mspecies, dt);
-    m_advec_x(fdistribu, sqrt_me_on_mspecies, dt / 2);
+    m_advec_x(fdistribu, dt / 2);
+    m_advec_vx(fdistribu, efield, dt);
+    m_advec_x(fdistribu, dt / 2);
     return fdistribu;
 }

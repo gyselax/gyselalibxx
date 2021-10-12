@@ -11,18 +11,17 @@
 #include <pdi.h>
 
 #include "efieldfftsolver.h"
-#include "fdistribu.h"
 #include "fftw.h"
 #include "geometry.h"
 #include "ifftw.h"
 #include "pdi_out.yml.h"
 #include "predcorr.h"
+#include "species_info.hpp"
 #include "splineadvectionvx.h"
 #include "splineadvectionx.h"
 #include "splitvlasovsolver.h"
 
 using std::cerr;
-using std::cout;
 using std::endl;
 namespace fs = std::filesystem;
 
@@ -69,37 +68,67 @@ int main(int argc, char** argv)
         return MLengthVx(vx_size);
     }();
 
-    // --> Equilibrium info
-    long ion_charge;
-    PC_int(PC_get(conf_voicexx, ".Equilibrium.ion_charge"), &ion_charge);
-    double ion_mass;
-    PC_double(PC_get(conf_voicexx, ".Equilibrium.ion_mass"), &ion_mass);
-    double ion_density_eq;
-    PC_double(PC_get(conf_voicexx, ".Equilibrium.ion_density_eq"), &ion_density_eq);
-    double ion_temperature_eq;
-    PC_double(PC_get(conf_voicexx, ".Equilibrium.ion_temperature_eq"), &ion_temperature_eq);
-    double ion_mean_velocity_eq;
-    PC_double(PC_get(conf_voicexx, ".Equilibrium.ion_mean_velocity_eq"), &ion_mean_velocity_eq);
-    long electron_charge;
-    PC_int(PC_get(conf_voicexx, ".Equilibrium.electron_charge"), &electron_charge);
-    double electron_mass;
-    PC_double(PC_get(conf_voicexx, ".Equilibrium.electron_mass"), &electron_mass);
-    double electron_density_eq;
-    PC_double(PC_get(conf_voicexx, ".Equilibrium.electron_density_eq"), &electron_density_eq);
-    double electron_temperature_eq;
-    PC_double(
-            PC_get(conf_voicexx, ".Equilibrium.electron_temperature_eq"),
-            &electron_temperature_eq);
-    double electron_mean_velocity_eq;
-    PC_double(
-            PC_get(conf_voicexx, ".Equilibrium.electron_mean_velocity_eq"),
-            &electron_mean_velocity_eq);
+    // Creating mesh & supports
+    BSplinesX const bsplines_x(x_min, x_max, x_size);
 
-    // --> Perturbation info
-    long init_perturb_mode;
-    PC_int(PC_get(conf_voicexx, ".Perturbation.mode"), &init_perturb_mode);
-    double init_perturb_amplitude;
-    PC_double(PC_get(conf_voicexx, ".Perturbation.amplitude"), &init_perturb_amplitude);
+    SplineXBuilder const builder_x(bsplines_x);
+
+    BSplinesVx const bsplines_vx(vx_min, vx_max, vx_size);
+
+    SplineVxBuilder const builder_vx(bsplines_vx);
+
+    MeshSp species;
+
+    MDomainSp dom_sp(species, MLengthSp(2));
+
+    MDomainSpXVx const
+            mesh(dom_sp, builder_x.interpolation_domain(), builder_vx.interpolation_domain());
+
+    BlockSp<int> charges(dom_sp);
+    DBlockSp masses(dom_sp);
+    DBlockSp density_eq(dom_sp);
+    DBlockSp temperature_eq(dom_sp);
+    DBlockSp mean_velocity_eq(dom_sp);
+    BlockSp<int> init_perturb_mode(dom_sp);
+    DBlockSp init_perturb_amplitude(dom_sp);
+    for (MCoordSp isp : dom_sp) {
+        // --> SpeciesInfo info
+        long charge;
+        PC_int(PC_get(conf_voicexx, ".SpeciesInfo.charge[%d]", isp.value()), &charge);
+        charges(isp) = charge;
+        PC_double(PC_get(conf_voicexx, ".SpeciesInfo.mass[%d]", isp.value()), &masses(isp));
+        PC_double(
+                PC_get(conf_voicexx, ".SpeciesInfo.density_eq[%d]", isp.value()),
+                &density_eq(isp));
+        PC_double(
+                PC_get(conf_voicexx, ".SpeciesInfo.temperature_eq[%d]", isp.value()),
+                &temperature_eq(isp));
+        PC_double(
+                PC_get(conf_voicexx, ".SpeciesInfo.mean_velocity_eq[%d]", isp.value()),
+                &mean_velocity_eq(isp));
+
+        // --> Perturbation info
+        PC_double(
+                PC_get(conf_voicexx, ".Perturbation.amplitude[%d]", isp.value()),
+                &init_perturb_amplitude(isp));
+        long init_perturb_mode_sp;
+        PC_int(PC_get(conf_voicexx, ".Perturbation.mode[%d]", isp.value()), &init_perturb_mode_sp);
+        init_perturb_mode(isp) = init_perturb_mode_sp;
+    }
+
+    // Initialization of the distribution function
+    SpeciesInformation species_info(
+            std::move(charges),
+            std::move(masses),
+            std::move(density_eq),
+            std::move(temperature_eq),
+            std::move(mean_velocity_eq),
+            std::move(init_perturb_mode),
+            std::move(init_perturb_amplitude),
+            mesh);
+
+    DBlockSpXVx fdistribu(mesh.restrict(MDomainSp(species, species_info.ielec(), MLengthSp(1))));
+    species_info.init(fdistribu);
 
     // --> Algorithm info
     double deltat;
@@ -117,23 +146,11 @@ int main(int argc, char** argv)
 
     PDI_init(conf_pdi);
 
-    // Creating mesh & supports
-
-    BSplinesX const bsplines_x(x_min, x_max, x_size);
-
-    SplineXBuilder const builder_x(bsplines_x);
-
-    BSplinesVx const bsplines_vx(vx_min, vx_max, vx_size);
-
-    SplineVxBuilder const builder_vx(bsplines_vx);
-
-    MDomainXVx const dom2d(builder_x.interpolation_domain(), builder_vx.interpolation_domain());
-
     // Creating operators
 
-    SplineAdvectionX const advection_x(bsplines_x, builder_x);
+    SplineAdvectionX const advection_x(species_info, bsplines_x, builder_x);
 
-    SplineAdvectionVx const advection_vx(bsplines_vx, builder_vx);
+    SplineAdvectionVx const advection_vx(species_info, bsplines_vx, builder_vx);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
@@ -141,34 +158,22 @@ int main(int argc, char** argv)
 
     FftwInverseFourierTransform<Dim::X> ifft;
 
-    EfieldFftSolver efield(fft, ifft, bsplines_vx, builder_vx);
+    EfieldFftSolver efield(species_info, fft, ifft, bsplines_vx, builder_vx);
 
     PredCorr const predcorr(vlasov, efield, deltat, time_diag);
 
     // Creating of mesh for output saving
-    MDomainX gridx = select<MeshX>(dom2d);
+    MDomainX gridx = select<MeshX>(mesh);
     BlockX<RCoordX> meshX_coord(gridx);
     for (MCoordX ix : gridx) {
         meshX_coord(ix) = gridx.to_real(ix);
     }
 
-    MDomainVx gridvx = select<MeshVx>(dom2d);
+    MDomainVx gridvx = select<MeshVx>(mesh);
     BlockVx<RCoordVx> meshVx_coord(gridvx);
     for (MCoordVx ivx : gridvx) {
         meshVx_coord(ivx) = gridvx.to_real(ivx);
     }
-
-    // Initialization of the distribution function
-    DistributionFunction felectron(
-            electron_charge,
-            electron_mass,
-            electron_density_eq,
-            electron_temperature_eq,
-            electron_mean_velocity_eq,
-            init_perturb_mode,
-            init_perturb_amplitude,
-            dom2d);
-    felectron.init();
 
     // Starting the code
     expose_to_pdi("Nx", x_size);
@@ -178,7 +183,7 @@ int main(int argc, char** argv)
     expose_to_pdi("nbstep_diag", nbstep_diag);
     PdiEvent("initial_state");
 
-    predcorr(felectron, electron_mass, nbiter);
+    predcorr(fdistribu, nbiter);
 
     PC_tree_destroy(&conf_pdi);
 
