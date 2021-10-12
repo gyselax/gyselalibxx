@@ -31,7 +31,7 @@ def plot_Philogabs(Phi,timegrid,
 #--------------------------------------------------
 # MAIN
 #--------------------------------------------------
-ResuFileList = sorted(glob.glob('VOICEXX_*.h5'))
+ResuFileList = sorted(glob.glob('VOICEXX_[0-9]*.h5'))
 nbFiles = np.size(ResuFileList)
 
 print(ResuFileList)
