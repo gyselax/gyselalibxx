@@ -364,7 +364,11 @@ public:
         mapping_type m;
         extents_type extents_s(::extents<Meshes>(m_domain)...);
         if constexpr (std::is_same_v<LayoutStridedPolicy, std::experimental::layout_stride>) {
-            m = mapping_type(extents_s, m_internal_mdspan.mapping().strides());
+            // Temporary workaround: layout_stride::mapping is missing the function `strides`
+            const std::array<std::size_t, extents_type::rank()> strides {
+                    m_internal_mdspan.mapping().stride(
+                            type_seq_rank_v<Meshes, detail::TypeSeq<Meshes...>>)...};
+            m = mapping_type(extents_s, strides);
         } else {
             m = mapping_type(extents_s);
         }
