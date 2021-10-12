@@ -12,8 +12,6 @@ class SpeciesInformation;
 class SplineAdvectionX : public IAdvectionX
 {
 private:
-    const BSplinesX& m_x_spline_basis;
-
     const SplineXBuilder& m_spline_x_builder;
 
     SplineEvaluator<BSplinesX> m_spline_x_evaluator;

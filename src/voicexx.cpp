@@ -160,7 +160,7 @@ int main(int argc, char** argv)
 
     EfieldFftSolver efield(species_info, fft, ifft, bsplines_vx, builder_vx);
 
-    PredCorr const predcorr(vlasov, efield, deltat, time_diag);
+    PredCorr const predcorr(vlasov, efield, deltat);
 
     // Creating of mesh for output saving
     MDomainX gridx = select<MeshX>(mesh);

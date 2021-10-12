@@ -16,8 +16,6 @@ class EfieldFftSolver : public IEfieldSolver
 
     IInverseFourierTransform<Dim::X> const& m_ifft;
 
-    BSplinesVx const& m_spline_vx_basis;
-
     SplineVxBuilder const& m_spline_vx_builder;
 
     SplineEvaluator<BSplinesVx> m_spline_vx_evaluator;

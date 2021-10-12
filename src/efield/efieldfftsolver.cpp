@@ -32,7 +32,6 @@ EfieldFftSolver::EfieldFftSolver(
         SplineVxBuilder const& spline_vx_builder)
     : m_fft(fft)
     , m_ifft(ifft)
-    , m_spline_vx_basis(bsplines_vx)
     , m_spline_vx_builder(spline_vx_builder)
     , m_spline_vx_evaluator(bsplines_vx, NullBoundaryValue::value, NullBoundaryValue::value)
     , m_derivs_vxmin_data(BSplinesVx::degree() / 2, 0.)

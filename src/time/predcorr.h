@@ -15,14 +15,8 @@ class PredCorr : public ITimeSolver
 
     double const m_dt;
 
-    double const m_time_diag;
-
 public:
-    PredCorr(
-            const IVlasovSolver& vlasov_solver,
-            const IEfieldSolver& efield_solver,
-            double dt,
-            double time_diag);
+    PredCorr(const IVlasovSolver& vlasov_solver, const IEfieldSolver& efield_solver, double dt);
 
     void operator()(DSpanSpXVx fdistribu, int steps) const override;
 };

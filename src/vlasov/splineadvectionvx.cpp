@@ -39,8 +39,7 @@ SplineAdvectionVx::SplineAdvectionVx(
         const SplineVxBuilder& spl_interp,
         const BoundaryValue& bc_left,
         const BoundaryValue& bc_right)
-    : m_vx_spline_basis(bspl)
-    , m_spline_vx_builder(spl_interp)
+    : m_spline_vx_builder(spl_interp)
     , m_spline_vx_evaluator(bspl, bc_left, bc_right)
     , m_derivs_vxmin_data(BSplinesVx::degree() / 2, 0.)
     , m_derivs_vxmin(m_derivs_vxmin_data.data(), m_derivs_vxmin_data.size())

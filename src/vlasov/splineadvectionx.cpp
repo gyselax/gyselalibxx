@@ -39,8 +39,7 @@ SplineAdvectionX::SplineAdvectionX(
         const SplineXBuilder& spl_interp,
         const BoundaryValue& bc_left,
         const BoundaryValue& bc_right)
-    : m_x_spline_basis(bspl)
-    , m_spline_x_builder(spl_interp)
+    : m_spline_x_builder(spl_interp)
     , m_spline_x_evaluator(bspl, bc_left, bc_right)
     , m_species_info(species_info)
 {

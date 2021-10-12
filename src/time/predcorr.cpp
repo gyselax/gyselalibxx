@@ -14,12 +14,10 @@
 PredCorr::PredCorr(
         const IVlasovSolver& vlasov_solver,
         const IEfieldSolver& efield_solver,
-        double dt,
-        double time_diag)
+        double dt)
     : m_vlasov_solver(vlasov_solver)
     , m_efield_solver(efield_solver)
     , m_dt(dt)
-    , m_time_diag(time_diag)
 {
 }
 

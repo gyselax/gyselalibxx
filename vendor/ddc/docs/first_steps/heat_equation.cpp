@@ -92,9 +92,6 @@ int main(int argc, char** argv)
     auto temperature_i_x_right = T_in[MCoord<MeshX>(nx + gw)];
     auto temperature_i_y_left = T_in[MCoord<MeshY>(gw)];
     auto temperature_i_y_right = T_in[MCoord<MeshY>(ny + gw)];
-
-    // Inner domain
-    auto temperature_inner = T_in[inner_xy];
     //! [subdomains]
 
     // Initialize the whole domain

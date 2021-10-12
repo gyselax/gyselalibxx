@@ -14,8 +14,6 @@ class SpeciesInformation;
 class SplineAdvectionVx : public IAdvectionVx
 {
 private:
-    const BSplinesVx& m_vx_spline_basis;
-
     const SplineVxBuilder& m_spline_vx_builder;
 
     SplineEvaluator<BSplinesVx> m_spline_vx_evaluator;
