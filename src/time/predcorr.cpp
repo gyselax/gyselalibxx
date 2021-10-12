@@ -40,7 +40,7 @@ void PredCorr::operator()(DSpanSpXVx fdistribu, int steps) const
 
         PdiEvent("iteration")
                 .with("iter", iter)
-                .and_with("iter_time", iter_time)
+                .and_with("time_saved", iter_time)
                 .and_with("fdistribu", fdistribu)
                 .and_with("efield", efield);
 
@@ -61,7 +61,7 @@ void PredCorr::operator()(DSpanSpXVx fdistribu, int steps) const
     m_efield_solver(efield, fdistribu);
     PdiEvent("last_iteration")
             .with("iter", iter)
-            .and_with("iter_time", final_time)
+            .and_with("time_saved", final_time)
             .and_with("fdistribu", fdistribu)
             .and_with("efield", efield);
 }

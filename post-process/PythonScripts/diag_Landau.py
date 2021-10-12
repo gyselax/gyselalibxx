@@ -34,25 +34,12 @@ def plot_Philogabs(Phi,timegrid,
 ResuFileList = sorted(glob.glob('VOICEXX_[0-9]*.h5'))
 nbFiles = np.size(ResuFileList)
 
-print(ResuFileList)
-
-H = H5ut.loadHDF5(ResuFileList[0])
-Nx = H.Nx
-gridx = H.MeshX
+Hinit = H5ut.loadHDF5('VOICEXX_initstate.h5');
+gridx = Hinit.MeshX
 dx = gridx[1]-gridx[0]
 
-time_t = np.zeros([nbFiles])
-efield_tx = np.zeros([nbFiles,Nx])
+H = H5ut.loadHDF5(ResuFileList)
 
-ifile = 0
-for ifilename in ResuFileList:
-    print(ifilename)
-    H = H5ut.loadHDF5(ifilename)
-    time_t[ifile] = H.iter_time
-    efield_tx[ifile,:] = H.efield
-    ifile += 1
-
-Phi_tx = - np.gradient(efield_tx,dx,axis=1)
-
-plot_Philogabs(Phi_tx,time_t)
+Phi_tx = - np.gradient(H.efield,dx,axis=1)
+plot_Philogabs(Phi_tx,H.time_saved)
 

@@ -67,7 +67,7 @@ class loadHDF5():
                     if isinstance(var, np.generic):
                         var = var.item()
                 else:
-                    var = np.array(var_tmp, order='F')
+                    var = np.array(var_tmp, order='C')
 
             group.add_attr(str_var_new, var)
 
@@ -77,7 +77,7 @@ class loadHDF5():
             str_var_new = self.get_str_var_new(str_var, name_map)
             var_tmp     = fh5[str_var]
 
-            nd = 0 if var_tmp.size == 1 else len(var_tmp.shape)
+            nd = len(var_tmp.shape)
 
             if i_diag == 0:
                 # Create enough space for data at each time step
@@ -85,9 +85,10 @@ class loadHDF5():
                     var = HDF5Group()
                 else:
                     # Fortran ordering is used as we index by time a lot
-                    var = np.empty(shape = (*var_tmp.shape, nb_diag),
+                    
+                    var = np.empty(shape = (nb_diag,*var_tmp.shape),
                                    dtype = var_tmp.dtype,
-                                   order='F').squeeze()
+                                   order='C')
                 group.add_attr(str_var_new, var)
             else:
                 # Collect previously created space
@@ -98,10 +99,9 @@ class loadHDF5():
                 self.collect_time_group(var_tmp, name_map, i_diag, nb_diag, var)
             else:
                 # Create indexes, last index is time
-                idxs = [slice(None)]*nd + [i_diag]
+                idxs = [i_diag] + [slice(None)]*nd 
                 # Save data
-                var[tuple(idxs)] = var_tmp[:]
-
+                var[tuple(idxs)] = var_tmp[()]
         #end for
 
     def append(self, other_file):
