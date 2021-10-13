@@ -23,11 +23,11 @@ data:
     type: array
     subtype: double
     size: [ '$fdistribu_extents[0]', '$fdistribu_extents[1]', '$fdistribu_extents[2]' ]
-  efield_extents: { type: array, subtype: int64, size: 1 }
-  efield:
+  electric_potential_extents: { type: array, subtype: int64, size: 1 }
+  electric_potential:
     type: array
     subtype: double
-    size: [ '$efield_extents[0]' ]
+    size: [ '$electric_potential_extents[0]' ]
     
 plugins:
   set_value:
@@ -49,6 +49,6 @@ plugins:
       on_event: [iteration, last_iteration]
       when: '${iter} % ${nbstep_diag} = 0'
       collision_policy: replace_and_warn
-      write: [time_saved, fdistribu, efield ]
+      write: [time_saved, fdistribu, electric_potential ]
   #trace: ~
 )PDI_CFG";

@@ -4,19 +4,19 @@
 
 #include "itimesolver.h"
 
-class IEfieldSolver;
+class IPoissonSolver;
 class IVlasovSolver;
 
 class PredCorr : public ITimeSolver
 {
     IVlasovSolver const& m_vlasov_solver;
 
-    IEfieldSolver const& m_efield_solver;
+    IPoissonSolver const& m_poisson_solver;
 
     double const m_dt;
 
 public:
-    PredCorr(const IVlasovSolver& vlasov_solver, const IEfieldSolver& efield_solver, double dt);
+    PredCorr(const IVlasovSolver& vlasov_solver, const IPoissonSolver& poisson_solver, double dt);
 
     void operator()(DSpanSpXVx fdistribu, int steps) const override;
 };

@@ -10,7 +10,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "efieldfftsolver.h"
+#include "fftpoissonsolver.hpp"
 #include "fftw.h"
 #include "geometry.h"
 #include "ifftw.h"
@@ -149,7 +149,8 @@ int main(int argc, char** argv)
 
     SplineAdvectionX const advection_x(species_info, bsplines_x, builder_x);
 
-    SplineAdvectionVx const advection_vx(species_info, bsplines_vx, builder_vx);
+    SplineAdvectionVx const
+            advection_vx(species_info, bsplines_x, builder_x, bsplines_vx, builder_vx);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
@@ -157,9 +158,9 @@ int main(int argc, char** argv)
 
     FftwInverseFourierTransform<Dim::X> ifft;
 
-    EfieldFftSolver efield(species_info, fft, ifft, bsplines_vx, builder_vx);
+    FftPoissonSolver poisson(species_info, fft, ifft, bsplines_vx, builder_vx);
 
-    PredCorr const predcorr(vlasov, efield, deltat);
+    PredCorr const predcorr(vlasov, poisson, deltat);
 
     // Creating of mesh for output saving
     MDomainX gridx = select<MeshX>(mesh);

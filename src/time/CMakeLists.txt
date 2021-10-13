@@ -16,7 +16,7 @@ target_link_libraries(time
 		DDC::DDC
 		DDC::PDI
 		vcx::speciesinfo
-		vcx::efield
+		vcx::poisson
 		vcx::vlasov
 )
 

@@ -6,11 +6,11 @@
 #include <geometry.h>
 #include <ifft.h>
 
-#include "iefieldsolver.h"
+#include "ipoissonsolver.hpp"
 
 class SpeciesInformation;
 
-class EfieldFftSolver : public IEfieldSolver
+class FftPoissonSolver : public IPoissonSolver
 {
     IFourierTransform<Dim::X> const& m_fft;
 
@@ -31,12 +31,12 @@ class EfieldFftSolver : public IEfieldSolver
     SpeciesInformation const& m_species_info;
 
 public:
-    EfieldFftSolver(
+    FftPoissonSolver(
             SpeciesInformation const& species_info,
             IFourierTransform<Dim::X> const& fft,
             IInverseFourierTransform<Dim::X> const& ifft,
             BSplinesVx const& bsplines_vx,
             SplineVxBuilder const& spline_vx_builder);
 
-    DSpanX operator()(DSpanX efield, DViewSpXVx fdistribu) const override;
+    DSpanX operator()(DSpanX electric_potential, DViewSpXVx fdistribu) const override;
 };

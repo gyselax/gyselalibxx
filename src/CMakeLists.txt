@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-add_subdirectory(efield)
+add_subdirectory(poisson)
 add_subdirectory(fft)
 add_subdirectory(geometry)
 add_subdirectory(time)
@@ -16,7 +16,7 @@ target_link_libraries(voicexx
 		DDC::DDC
 		DDC::PDI
 		vcx::fft
-		vcx::efield
+		vcx::poisson
 		vcx::time
 		vcx::speciesinfo
 		vcx::vlasov

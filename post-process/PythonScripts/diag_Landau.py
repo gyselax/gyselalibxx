@@ -40,6 +40,5 @@ dx = gridx[1]-gridx[0]
 
 H = H5ut.loadHDF5(ResuFileList)
 
-Phi_tx = - np.gradient(H.efield,dx,axis=1)
-plot_Philogabs(Phi_tx,H.time_saved)
+plot_Philogabs(H.electric_potential,H.time_saved)
 

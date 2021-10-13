@@ -9,10 +9,11 @@ SplitVlasovSolver::SplitVlasovSolver(const IAdvectionX& advec_x, const IAdvectio
 }
 
 
-DSpanSpXVx SplitVlasovSolver::operator()(DSpanSpXVx fdistribu, DViewX efield, double dt) const
+DSpanSpXVx SplitVlasovSolver::operator()(DSpanSpXVx fdistribu, DViewX electric_potential, double dt)
+        const
 {
     m_advec_x(fdistribu, dt / 2);
-    m_advec_vx(fdistribu, efield, dt);
+    m_advec_vx(fdistribu, electric_potential, dt);
     m_advec_x(fdistribu, dt / 2);
     return fdistribu;
 }

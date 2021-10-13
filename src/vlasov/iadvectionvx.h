@@ -7,5 +7,6 @@
 class IAdvectionVx
 {
 public:
-    virtual DSpanSpXVx operator()(DSpanSpXVx fdistribu, DViewX efield, double dt) const = 0;
+    virtual DSpanSpXVx operator()(DSpanSpXVx fdistribu, DViewX electric_potential, double dt)
+            const = 0;
 };

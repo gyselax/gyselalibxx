@@ -14,6 +14,10 @@ class SpeciesInformation;
 class SplineAdvectionVx : public IAdvectionVx
 {
 private:
+    const SplineXBuilder& m_spline_x_builder;
+
+    SplineEvaluator<BSplinesX> m_spline_x_evaluator;
+
     const SplineVxBuilder& m_spline_vx_builder;
 
     SplineEvaluator<BSplinesVx> m_spline_vx_evaluator;
@@ -31,15 +35,20 @@ private:
 public:
     SplineAdvectionVx(
             SpeciesInformation const& species_info,
-            const BSplinesVx& bspl,
-            const SplineVxBuilder& spl_interp);
+            const BSplinesX& bspl_x,
+            const SplineXBuilder& spl_x_interp,
+            const BSplinesVx& bspl_vx,
+            const SplineVxBuilder& spl_vx_interp);
 
     SplineAdvectionVx(
             SpeciesInformation const& species_info,
-            const BSplinesVx& bspl,
-            const SplineVxBuilder& spl_interp,
-            const BoundaryValue& bc_left,
-            const BoundaryValue& bc_right);
+            const BSplinesX& bspl_x,
+            const SplineXBuilder& spl_x_interp,
+            const BSplinesVx& bspl_vx,
+            const SplineVxBuilder& spl_vx_interp,
+            const BoundaryValue& bc_vx_left,
+            const BoundaryValue& bc_vx_right);
 
-    DSpanSpXVx operator()(DSpanSpXVx fdistribu, DViewX efield, double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx fdistribu, DViewX electric_potential, double dt)
+            const override;
 };

@@ -20,11 +20,11 @@
 #include <geometry.h>
 #include <species_info.hpp>
 
-#include "efieldfftsolver.h"
+#include "fftpoissonsolver.hpp"
 
 using namespace std::complex_literals;
 
-EfieldFftSolver::EfieldFftSolver(
+FftPoissonSolver::FftPoissonSolver(
         SpeciesInformation const& species_info,
         IFourierTransform<Dim::X> const& fft,
         IInverseFourierTransform<Dim::X> const& ifft,
@@ -44,10 +44,10 @@ EfieldFftSolver::EfieldFftSolver(
 
 // 1- Inner solvers sall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
-DSpanX EfieldFftSolver::operator()(DSpanX efield, DViewSpXVx fdistribu) const
+DSpanX FftPoissonSolver::operator()(DSpanX electric_potential, DViewSpXVx fdistribu) const
 {
-    assert(efield.domain() == get_domain<MeshX>(fdistribu));
-    UniformMDomainX dom_x = efield.domain();
+    assert(electric_potential.domain() == get_domain<MeshX>(fdistribu));
+    UniformMDomainX dom_x = electric_potential.domain();
 
     // Compute the RHS of the Poisson equation.
     Block<double, MDomainX> rho(dom_x);
@@ -72,19 +72,19 @@ DSpanX EfieldFftSolver::operator()(DSpanX efield, DViewSpXVx fdistribu) const
     MDomainFx const dom_fx(mesh_fx, MLength<MeshFx>(mesh_fx.size()));
 
     // Compute FFT(rho)
-    Block<std::complex<double>, MDomainFx> complex_Ex_fx(dom_fx);
-    m_fft(complex_Ex_fx, rho);
+    Block<std::complex<double>, MDomainFx> complex_Phi_fx(dom_fx);
+    m_fft(complex_Phi_fx, rho);
 
-    // Solve Poisson's equation -d2Phi/dx2 = rho by solving
-    //   dEx/dx = rho in the Fourier space (i.e i*kx*FFT(E)=FFT(rho)) with Ex = -dPhi/dx.
-    complex_Ex_fx(dom_fx.front()) = 0.;
+    // Solve Poisson's equation -d2Phi/dx2 = rho
+    //   in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))
+    complex_Phi_fx(dom_fx.front()) = 0.;
     for (auto it_freq = dom_fx.cbegin() + 1; it_freq != dom_fx.cend(); ++it_freq) {
         double const kx = 2. * M_PI * mesh_fx.to_real(*it_freq);
-        complex_Ex_fx(*it_freq) /= 1.0i * kx;
+        complex_Phi_fx(*it_freq) /= kx * kx;
     }
 
     // Perform the inverse 1D FFT of the solution.
-    m_ifft(efield, complex_Ex_fx);
+    m_ifft(electric_potential, complex_Phi_fx);
 
-    return efield;
+    return electric_potential;
 }
