@@ -173,7 +173,7 @@ INSTANTIATE_TEST_SUITE_P(
         SplinesAtPoints,
         SplinesTest,
         testing::Combine(
-                testing::Range(1, 9),
+                testing::Range(4, 7),
                 testing::ValuesIn(available_bc),
                 testing::ValuesIn(available_bc)));
 
