@@ -12,8 +12,8 @@
 
 #include "fft.h"
 
-template <class... Tags>
-class FftwFourierTransform : public IFourierTransform<Tags...>
+template <class Tag>
+class FftwFourierTransform : public IFourierTransform<Tag>
 {
 public:
     FftwFourierTransform() = default;
@@ -28,37 +28,36 @@ public:
 
     FftwFourierTransform& operator=(FftwFourierTransform&& x) = default;
 
-    NonUniformMesh<Fourier<Tags...>> compute_fourier_domain(
-            ProductMDomain<UniformMesh<Tags>...> const& dom_x) const noexcept override
+    NonUniformMesh<Fourier<Tag>> compute_fourier_domain(
+            ProductMDomain<UniformMesh<Tag>> const& dom_x) const noexcept override
     {
         std::vector<double> freqs(dom_x.size());
-        double const inv_Nd
-                = 1. / (dom_x.size() * dom_x.template mesh<UniformMesh<Tags>...>().step());
+        double const inv_Nd = 1. / (dom_x.size() * dom_x.template mesh<UniformMesh<Tag>>().step());
         for (std::size_t ii = 0; ii <= dom_x.size() / 2; ++ii) {
             freqs[ii] = ii * inv_Nd;
         }
         for (std::size_t ii = dom_x.size() / 2 + 1; ii < dom_x.size(); ++ii) {
             freqs[ii] = -((dom_x.size() - ii) * inv_Nd);
         }
-        return NonUniformMesh<Fourier<Tags>...>(freqs);
+        return NonUniformMesh<Fourier<Tag>>(freqs);
     }
 
     // Perform FFT where the input is a real and the output is a complex
     void operator()(
             BlockSpan<
                     std::complex<double>,
-                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
+                    ProductMDomain<NonUniformMesh<Fourier<Tag>>>,
                     std::experimental::layout_right> const& out_values,
             BlockSpan<
                     double,
-                    ProductMDomain<UniformMesh<Tags>...>,
+                    ProductMDomain<UniformMesh<Tag>>,
                     std::experimental::layout_right> const& in_values) const noexcept override
     {
         assert(in_values.extents().array() == out_values.extents().array());
 
         // It needs to be of type 'int'
         auto extents = out_values.extents();
-        std::array<int, sizeof...(Tags)> n;
+        std::array<int, 1> n;
         for (std::size_t i = 0; i < extents.size(); ++i) {
             n[i] = extents[i];
         }
@@ -78,18 +77,18 @@ public:
     void operator()(
             BlockSpan<
                     std::complex<double>,
-                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
+                    ProductMDomain<NonUniformMesh<Fourier<Tag>>>,
                     std::experimental::layout_right> const& out_values,
             BlockSpan<
                     std::complex<double>,
-                    ProductMDomain<UniformMesh<Tags>...>,
+                    ProductMDomain<UniformMesh<Tag>>,
                     std::experimental::layout_right> const& in_values) const noexcept override
     {
         assert(in_values.extents().array() == out_values.extents().array());
 
         // It needs to be of type 'int'
         auto extents = out_values.extents();
-        std::array<int, sizeof...(Tags)> n;
+        std::array<int, 1> n;
         for (std::size_t i = 0; i < extents.size(); ++i) {
             n[i] = extents[i];
         }

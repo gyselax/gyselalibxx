@@ -7,7 +7,7 @@
 
 #include <geometry.h>
 
-template <class... Tags>
+template <class Tag>
 class IInverseFourierTransform
 {
 public:
@@ -27,21 +27,21 @@ public:
     virtual void operator()(
             BlockSpan<
                     double,
-                    ProductMDomain<UniformMesh<Tags>...>,
+                    ProductMDomain<UniformMesh<Tag>>,
                     std::experimental::layout_right> const& out_values,
             BlockSpan<
                     std::complex<double>,
-                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
+                    ProductMDomain<NonUniformMesh<Fourier<Tag>>>,
                     std::experimental::layout_right> const& in_values) const noexcept = 0;
 
     // Perform the normalized invFFT where the input is a complex and the output is a complex
     virtual void operator()(
             BlockSpan<
                     std::complex<double>,
-                    ProductMDomain<UniformMesh<Tags>...>,
+                    ProductMDomain<UniformMesh<Tag>>,
                     std::experimental::layout_right> const& out_values,
             BlockSpan<
                     std::complex<double>,
-                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
+                    ProductMDomain<NonUniformMesh<Fourier<Tag>>>,
                     std::experimental::layout_right> const& in_values) const noexcept = 0;
 };

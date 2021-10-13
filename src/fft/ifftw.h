@@ -12,8 +12,8 @@
 
 #include "ifft.h"
 
-template <class... Tags>
-class FftwInverseFourierTransform : public IInverseFourierTransform<Tags...>
+template <class Tag>
+class FftwInverseFourierTransform : public IInverseFourierTransform<Tag>
 {
 public:
     FftwInverseFourierTransform() = default;
@@ -32,18 +32,18 @@ public:
     void operator()(
             BlockSpan<
                     double,
-                    ProductMDomain<UniformMesh<Tags>...>,
+                    ProductMDomain<UniformMesh<Tag>>,
                     std::experimental::layout_right> const& out_values,
             BlockSpan<
                     std::complex<double>,
-                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
+                    ProductMDomain<NonUniformMesh<Fourier<Tag>>>,
                     std::experimental::layout_right> const& in_values) const noexcept override
     {
         assert(in_values.extents().array() == out_values.extents().array());
 
         // It needs to be of type 'int'
         auto extents = out_values.extents();
-        std::array<int, sizeof...(Tags)> n;
+        std::array<int, 1> n;
         for (std::size_t i = 0; i < extents.size(); ++i) {
             n[i] = extents[i];
         }
@@ -69,18 +69,18 @@ public:
     void operator()(
             BlockSpan<
                     std::complex<double>,
-                    ProductMDomain<UniformMesh<Tags>...>,
+                    ProductMDomain<UniformMesh<Tag>>,
                     std::experimental::layout_right> const& out_values,
             BlockSpan<
                     std::complex<double>,
-                    ProductMDomain<NonUniformMesh<Fourier<Tags>>...>,
+                    ProductMDomain<NonUniformMesh<Fourier<Tag>>>,
                     std::experimental::layout_right> const& in_values) const noexcept override
     {
         assert(in_values.extents().array() == out_values.extents().array());
 
         // It needs to be of type 'int'
         auto extents = out_values.extents();
-        std::array<int, sizeof...(Tags)> n;
+        std::array<int, 1> n;
         for (std::size_t i = 0; i < extents.size(); ++i) {
             n[i] = extents[i];
         }
