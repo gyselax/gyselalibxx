@@ -11,6 +11,10 @@ all_tests:
     cd build
     cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON ..
     make -j 2 VERBOSE=1
-    ctest --output-on-failure --timeout 5
+    ctest --output-junit tests.xml --output-on-failure --timeout 5
     cd ..
     find src tests vendor/ddc vendor/sll '(' -name '*.h' -o -name '*.cpp' ')' -exec clang-format -n -Werror '{}' '+' && echo "Identation is Ok!"
+  artifacts:
+    when: always
+    reports:
+      junit: ./build/tests.xml
