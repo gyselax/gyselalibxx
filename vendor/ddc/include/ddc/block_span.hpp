@@ -5,8 +5,8 @@
 #include <type_traits>
 #include <vector>
 
-#include "ddc/product_mdomain.hpp"
 #include "ddc/detail/product_mesh.hpp"
+#include "ddc/product_mdomain.hpp"
 
 template <class, class>
 class Block;

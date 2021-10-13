@@ -60,8 +60,7 @@ public:
     /** Constructs a new Block by move
      * @param other the Block to move
      */
-    inline constexpr Block(Block&& other)
-        : block_span_type(std::move(other))
+    inline constexpr Block(Block&& other) : block_span_type(std::move(other))
     {
         other.m_internal_mdspan = internal_mdspan_type();
     }

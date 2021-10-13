@@ -61,8 +61,8 @@ public:
     template <class... QueryMeshes>
     RCoord<rdim_t<QueryMeshes>...> to_real(MCoord<QueryMeshes...> const& mcoord) const noexcept
     {
-        return RCoord<rdim_t<QueryMeshes>...>(
-                std::get<storage_t<QueryMeshes>>(m_meshes)->to_real(select<QueryMeshes>(mcoord))...);
+        return RCoord<rdim_t<QueryMeshes>...>(std::get<storage_t<QueryMeshes>>(m_meshes)->to_real(
+                select<QueryMeshes>(mcoord))...);
     }
 
     friend constexpr bool operator==(ProductMesh const& lhs, ProductMesh const& rhs)
