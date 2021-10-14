@@ -5,11 +5,11 @@
 
 #include <experimental/mdspan>
 
-#include "sll/deprecated/bsplines.h"
-#include "sll/deprecated/spline_1d.h"
-#include "sll/deprecated/spline_2d.h"
-#include "sll/deprecated/spline_builder_1d.h"
-#include "sll/deprecated/spline_builder_2d.h"
+#include "sll/deprecated/bsplines.hpp"
+#include "sll/deprecated/spline_1d.hpp"
+#include "sll/deprecated/spline_2d.hpp"
+#include "sll/deprecated/spline_builder_1d.hpp"
+#include "sll/deprecated/spline_builder_2d.hpp"
 
 namespace deprecated {
 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <sll/spline_evaluator.h>
+#include <sll/spline_evaluator.hpp>
 
-#include <fft.h>
-#include <geometry.h>
-#include <ifft.h>
+#include <fft.hpp>
+#include <geometry.hpp>
+#include <ifft.hpp>
 
 #include "ipoissonsolver.hpp"
 

@@ -2,7 +2,7 @@
 
 #include <ddc/BlockSpan>
 
-#include <geometry.h>
+#include <geometry.hpp>
 
 class IPoissonSolver
 {

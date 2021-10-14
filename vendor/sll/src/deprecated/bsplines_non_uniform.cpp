@@ -4,8 +4,8 @@
 
 #include <experimental/mdspan>
 
-#include "sll/deprecated/bsplines.h"
-#include "sll/deprecated/bsplines_non_uniform.h"
+#include "sll/deprecated/bsplines.hpp"
+#include "sll/deprecated/bsplines_non_uniform.hpp"
 
 namespace stdex = std::experimental;
 

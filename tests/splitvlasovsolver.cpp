@@ -5,11 +5,11 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "geometry.h"
-#include "iadvectionvx.h"
-#include "iadvectionx.h"
+#include "geometry.hpp"
+#include "iadvectionvx.hpp"
+#include "iadvectionx.hpp"
 #include "species_info.hpp"
-#include "splitvlasovsolver.h"
+#include "splitvlasovsolver.hpp"
 
 class MockAdvectionX : public IAdvectionX
 {

@@ -5,7 +5,7 @@
 
 #include <string.h>
 
-#include "sll/matrix_corner_block.h"
+#include "sll/matrix_corner_block.hpp"
 
 Matrix_Corner_Block::Matrix_Corner_Block(int n, int k, std::unique_ptr<Matrix> q)
     : Matrix(n)

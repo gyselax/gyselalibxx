@@ -7,9 +7,9 @@
 #include <ddc/pdi.hpp>
 
 #include <ipoissonsolver.hpp>
-#include <ivlasovsolver.h>
+#include <ivlasovsolver.hpp>
 
-#include "predcorr.h"
+#include "predcorr.hpp"
 
 PredCorr::PredCorr(
         const IVlasovSolver& vlasov_solver,

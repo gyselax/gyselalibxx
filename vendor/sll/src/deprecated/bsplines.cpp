@@ -1,4 +1,4 @@
-#include "sll/deprecated/bsplines.h"
+#include "sll/deprecated/bsplines.hpp"
 
 namespace deprecated {
 

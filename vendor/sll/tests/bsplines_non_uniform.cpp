@@ -9,9 +9,9 @@
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 
-#include <sll/bsplines_non_uniform.h>
-#include <sll/deprecated/bsplines_non_uniform.h>
-#include <sll/view.h>
+#include <sll/bsplines_non_uniform.hpp>
+#include <sll/deprecated/bsplines_non_uniform.hpp>
+#include <sll/view.hpp>
 
 #include <gtest/gtest.h>
 

@@ -5,9 +5,9 @@
 
 #include <experimental/mdspan>
 
-#include "sll/matrix.h"
-#include "sll/matrix_dense.h"
-#include "sll/matrix_periodic_banded.h"
+#include "sll/matrix.hpp"
+#include "sll/matrix_dense.hpp"
+#include "sll/matrix_periodic_banded.hpp"
 
 using std::max;
 using std::min;

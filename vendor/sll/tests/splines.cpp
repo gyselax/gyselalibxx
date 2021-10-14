@@ -9,12 +9,12 @@
 
 #include <experimental/mdspan>
 
-#include <sll/deprecated/boundary_conditions.h>
-#include <sll/deprecated/bsplines.h>
-#include <sll/deprecated/bsplines_uniform.h>
-#include <sll/deprecated/spline_1d.h>
-#include <sll/deprecated/spline_builder_1d.h>
-#include <sll/view.h>
+#include <sll/deprecated/boundary_conditions.hpp>
+#include <sll/deprecated/bsplines.hpp>
+#include <sll/deprecated/bsplines_uniform.hpp>
+#include <sll/deprecated/spline_1d.hpp>
+#include <sll/deprecated/spline_builder_1d.hpp>
+#include <sll/view.hpp>
 
 #include <gtest/gtest.h>
 

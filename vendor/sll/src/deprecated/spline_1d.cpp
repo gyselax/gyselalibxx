@@ -4,11 +4,11 @@
 #include <type_traits>
 #include <vector>
 
-#include "sll/boundary_value.h"
-#include "sll/deprecated/bsplines.h"
-#include "sll/deprecated/bsplines_non_uniform.h"
-#include "sll/deprecated/bsplines_uniform.h"
-#include "sll/deprecated/spline_1d.h"
+#include "sll/boundary_value.hpp"
+#include "sll/deprecated/bsplines.hpp"
+#include "sll/deprecated/bsplines_non_uniform.hpp"
+#include "sll/deprecated/bsplines_uniform.hpp"
+#include "sll/deprecated/spline_1d.hpp"
 
 namespace deprecated {
 

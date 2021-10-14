@@ -8,12 +8,12 @@
 #include <ddc/RCoord>
 #include <ddc/TaggedVector>
 
-#include <sll/null_boundary_value.h>
-#include <sll/spline_evaluator.h>
+#include <sll/null_boundary_value.hpp>
+#include <sll/spline_evaluator.hpp>
 
 #include <species_info.hpp>
 
-#include "splineadvectionvx.h"
+#include "splineadvectionvx.hpp"
 
 class BoundaryValue;
 

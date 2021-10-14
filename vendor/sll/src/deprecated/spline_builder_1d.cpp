@@ -5,13 +5,13 @@
 
 #include <experimental/mdspan>
 
-#include "sll/deprecated/boundary_conditions.h"
-#include "sll/deprecated/bsplines.h"
-#include "sll/deprecated/bsplines_non_uniform.h"
-#include "sll/deprecated/spline_1d.h"
-#include "sll/deprecated/spline_builder_1d.h"
-#include "sll/math_tools.h"
-#include "sll/matrix.h"
+#include "sll/deprecated/boundary_conditions.hpp"
+#include "sll/deprecated/bsplines.hpp"
+#include "sll/deprecated/bsplines_non_uniform.hpp"
+#include "sll/deprecated/spline_1d.hpp"
+#include "sll/deprecated/spline_builder_1d.hpp"
+#include "sll/math_tools.hpp"
+#include "sll/matrix.hpp"
 
 namespace deprecated {
 

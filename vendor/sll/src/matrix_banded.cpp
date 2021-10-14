@@ -2,7 +2,7 @@
 #include <cassert>
 #include <cmath>
 
-#include "sll/matrix_banded.h"
+#include "sll/matrix_banded.hpp"
 
 using std::max;
 using std::min;

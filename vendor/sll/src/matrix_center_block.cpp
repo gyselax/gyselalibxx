@@ -2,8 +2,8 @@
 
 #include <string.h> //for memcpy
 
-#include "sll/matrix.h"
-#include "sll/matrix_center_block.h"
+#include "sll/matrix.hpp"
+#include "sll/matrix_center_block.hpp"
 
 Matrix_Center_Block::Matrix_Center_Block(
         int n,

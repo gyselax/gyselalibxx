@@ -11,16 +11,16 @@
 #include <pdi.h>
 
 #include "fftpoissonsolver.hpp"
-#include "fftw.h"
-#include "geometry.h"
-#include "ifftw.h"
-#include "pdi_out.yml.h"
-#include "predcorr.h"
+#include "fftw.hpp"
+#include "geometry.hpp"
+#include "ifftw.hpp"
+#include "pdi_out.yml.hpp"
+#include "predcorr.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
-#include "splineadvectionvx.h"
-#include "splineadvectionx.h"
-#include "splitvlasovsolver.h"
+#include "splineadvectionvx.hpp"
+#include "splineadvectionx.hpp"
+#include "splitvlasovsolver.hpp"
 
 using std::cerr;
 using std::endl;

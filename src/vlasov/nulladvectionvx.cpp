@@ -1,4 +1,4 @@
-#include "nulladvectionvx.h"
+#include "nulladvectionvx.hpp"
 
 DSpanSpXVx NullAdvectionVx::operator()(
         DSpanSpXVx allfdistribu,

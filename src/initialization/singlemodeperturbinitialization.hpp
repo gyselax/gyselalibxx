@@ -1,6 +1,6 @@
 #pragma once
 
-#include <geometry.h>
+#include <geometry.hpp>
 #include <species_info.hpp>
 
 #include "iinitialization.hpp"

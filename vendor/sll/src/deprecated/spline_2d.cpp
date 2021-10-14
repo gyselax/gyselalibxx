@@ -4,10 +4,10 @@
 
 #include <experimental/mdspan>
 
-#include "sll/deprecated/bsplines.h"
-#include "sll/deprecated/bsplines_non_uniform.h"
-#include "sll/deprecated/bsplines_uniform.h"
-#include "sll/deprecated/spline_2d.h"
+#include "sll/deprecated/bsplines.hpp"
+#include "sll/deprecated/bsplines_non_uniform.hpp"
+#include "sll/deprecated/bsplines_uniform.hpp"
+#include "sll/deprecated/spline_2d.hpp"
 
 namespace deprecated {
 

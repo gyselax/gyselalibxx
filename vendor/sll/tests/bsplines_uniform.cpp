@@ -9,9 +9,9 @@
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>
 
-#include <sll/bsplines_uniform.h>
-#include <sll/deprecated/bsplines_uniform.h>
-#include <sll/view.h>
+#include <sll/bsplines_uniform.hpp>
+#include <sll/deprecated/bsplines_uniform.hpp>
+#include <sll/view.hpp>
 
 #include <gtest/gtest.h>
 

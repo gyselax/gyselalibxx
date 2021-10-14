@@ -1,6 +1,6 @@
 #include <cassert>
 
-#include "sll/matrix_dense.h"
+#include "sll/matrix_dense.hpp"
 
 extern "C" int dgetrf_(const int* m, const int* n, double* a, const int* lda, int* ipiv, int* info);
 extern "C" int dgetrs_(

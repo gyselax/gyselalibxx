@@ -3,9 +3,9 @@
 
 #include <experimental/mdspan>
 
-#include "sll/deprecated/bsplines.h"
-#include "sll/deprecated/bsplines_uniform.h"
-#include "sll/math_tools.h"
+#include "sll/deprecated/bsplines.hpp"
+#include "sll/deprecated/bsplines_uniform.hpp"
+#include "sll/math_tools.hpp"
 
 namespace stdex = std::experimental;
 

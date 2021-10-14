@@ -1,6 +1,6 @@
 #pragma once
 
-#include "geometry.h"
+#include "geometry.hpp"
 
 /*
  Computing the non-centered Maxwellian function as

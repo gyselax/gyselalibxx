@@ -5,14 +5,14 @@
 #include <memory>
 #include <utility>
 
-#include "sll/matrix.h"
-#include "sll/matrix_banded.h"
-#include "sll/matrix_center_block.h"
-#include "sll/matrix_corner_block.h"
-#include "sll/matrix_dense.h"
-#include "sll/matrix_pds_tridiag.h"
-#include "sll/matrix_periodic_banded.h"
-#include "sll/view.h"
+#include "sll/matrix.hpp"
+#include "sll/matrix_banded.hpp"
+#include "sll/matrix_center_block.hpp"
+#include "sll/matrix_corner_block.hpp"
+#include "sll/matrix_dense.hpp"
+#include "sll/matrix_pds_tridiag.hpp"
+#include "sll/matrix_periodic_banded.hpp"
+#include "sll/view.hpp"
 
 using std::max;
 using std::min;

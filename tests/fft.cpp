@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
-#include "fftw.h"
-#include "geometry.h"
-#include "ifftw.h"
+#include "fftw.hpp"
+#include "geometry.hpp"
+#include "ifftw.hpp"
 
 using namespace std;
 

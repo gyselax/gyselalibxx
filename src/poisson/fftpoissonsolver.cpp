@@ -12,12 +12,12 @@
 #include <ddc/TaggedVector>
 #include <ddc/UniformMesh>
 
-#include <sll/bsplines_uniform.h>
-#include <sll/null_boundary_value.h>
-#include <sll/spline_builder.h>
-#include <sll/spline_evaluator.h>
+#include <sll/bsplines_uniform.hpp>
+#include <sll/null_boundary_value.hpp>
+#include <sll/spline_builder.hpp>
+#include <sll/spline_evaluator.hpp>
 
-#include <geometry.h>
+#include <geometry.hpp>
 #include <species_info.hpp>
 
 #include "fftpoissonsolver.hpp"
