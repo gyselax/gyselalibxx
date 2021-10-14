@@ -6,6 +6,7 @@ add_subdirectory(geometry)
 add_subdirectory(time)
 add_subdirectory(speciesinfo)
 add_subdirectory(vlasov)
+add_subdirectory(initialization)
 
 add_executable(voicexx
 	voicexx.cpp
@@ -15,6 +16,7 @@ target_link_libraries(voicexx
 	PUBLIC
 		DDC::DDC
 		DDC::PDI
+		vcx::initialization
 		vcx::fft
 		vcx::poisson
 		vcx::time

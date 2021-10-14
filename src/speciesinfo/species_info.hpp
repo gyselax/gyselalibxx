@@ -2,6 +2,18 @@
 
 #include "geometry.h"
 
+/*
+ Computing the non-centered Maxwellian function as
+   fM(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T))
+  with n the density and T the temperature and
+  where u is the mean velocity
+*/
+void maxwellian_initialization(
+        const double density,
+        const double temperature,
+        const double mean_velocity,
+        DSpanVx fMaxwellian);
+
 class SpeciesInformation
 {
 private:
@@ -23,12 +35,6 @@ private:
     // Maxwellian values
     BlockSpVx<double> const m_maxw_values;
 
-    // initial perturbed mode
-    BlockSp<int> const m_init_perturb_mode;
-
-    // initial perturbation amplitude
-    BlockSp<double> const m_init_perturb_amplitude;
-
 public:
     SpeciesInformation(
             BlockSp<int> charge,
@@ -36,8 +42,6 @@ public:
             BlockSp<double> n_eq,
             BlockSp<double> T_eq,
             BlockSp<double> u_eq,
-            BlockSp<int> init_perturb_mode,
-            BlockSp<double> init_perturb_amplitude,
             MDomainSpXVx const& domSpXVx)
         : m_charge(std::move(charge))
         , m_mass(std::move(mass))
@@ -45,9 +49,15 @@ public:
         , m_temperature_eq(std::move(T_eq))
         , m_mean_velocity_eq(std::move(u_eq))
         , m_maxw_values(select<MeshSp, MeshVx>(domSpXVx))
-        , m_init_perturb_mode(std::move(init_perturb_mode))
-        , m_init_perturb_amplitude(std::move(init_perturb_amplitude))
     {
+        for (MCoordSp isp : get_domain<MeshSp>(charge)) {
+            // Initialization of the Maxwellian --> fill m_maxw_values
+            maxwellian_initialization(
+                    m_density_eq(isp),
+                    m_temperature_eq(isp),
+                    m_mean_velocity_eq(isp),
+                    m_maxw_values[isp]);
+        }
     }
 
     MCoordSp ielec() const
@@ -84,6 +94,4 @@ public:
     {
         return m_maxw_values;
     }
-
-    void init(DSpanSpXVx fdistribu);
 };

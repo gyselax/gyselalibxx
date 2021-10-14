@@ -16,6 +16,7 @@
 #include "ifftw.h"
 #include "pdi_out.yml.h"
 #include "predcorr.h"
+#include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
 #include "splineadvectionvx.h"
 #include "splineadvectionx.h"
@@ -123,12 +124,12 @@ int main(int argc, char** argv)
             std::move(density_eq),
             std::move(temperature_eq),
             std::move(mean_velocity_eq),
-            std::move(init_perturb_mode),
-            std::move(init_perturb_amplitude),
             mesh);
 
     DBlockSpXVx fdistribu(mesh.restrict(MDomainSp(species, species_info.ielec(), MLengthSp(1))));
-    species_info.init(fdistribu);
+
+    SingleModePerturbInitialization init(species_info, init_perturb_mode, init_perturb_amplitude);
+    init(fdistribu);
 
     // --> Algorithm info
     double deltat;

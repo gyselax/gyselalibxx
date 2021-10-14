@@ -148,6 +148,11 @@ using SpanSpXVx = BlockSpan<ElementType, MDomainSpXVx>;
 using DSpanSpXVx = SpanSpXVx<double>;
 
 template <class ElementType>
+using SpanSpVx = BlockSpan<ElementType, MDomainSpVx>;
+
+using DSpanSpVx = SpanSpVx<double>;
+
+template <class ElementType>
 using ViewX = BlockSpan<ElementType const, MDomainX>;
 
 using DViewX = ViewX<double>;
