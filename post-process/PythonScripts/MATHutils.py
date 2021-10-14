@@ -174,8 +174,8 @@ def Fourier1D(F, x):
     assert x.ndim == 1
     dx = np.abs(x[1]-x[0])
 
-    kx  = (2.*np.pi/dx)*scipy.fft.fftfreq(x.shape[-1])
-    TFF = scipy.fft.fft(F)
+    kx  = (2.*np.pi/dx)*np.fft.fftfreq(x.shape[-1])
+    TFF = np.fft.fft(F)
 
     kx  = np.fft.fftshift(kx)
     TFF = np.fft.fftshift(TFF)
