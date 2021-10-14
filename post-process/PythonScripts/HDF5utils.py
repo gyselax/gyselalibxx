@@ -128,7 +128,7 @@ def write_group(myfile, group):
 
             if hasattr(data, 'shape'):
                 dset = myfile.create_dataset(name, data.shape, dtype =data.dtype )
-                dset[:] = data
+                dset[()] = data
             else:
                 dtype = h5.string_dtype(encoding='ascii') if isinstance(data, str) else type(data)
                 dset = myfile.create_dataset(name, [1], dtype = dtype, data = data)
