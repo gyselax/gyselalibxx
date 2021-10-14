@@ -7,5 +7,5 @@
 class NullPoissonSolver : public IPoissonSolver
 {
 public:
-    DSpanX operator()(DSpanX electic_potential, DViewSpXVx fdistribu) const override;
+    DSpanX operator()(DSpanX electic_potential, DViewSpXVx allfdistribu) const override;
 };

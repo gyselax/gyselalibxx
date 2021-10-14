@@ -126,10 +126,10 @@ int main(int argc, char** argv)
             std::move(mean_velocity_eq),
             mesh);
 
-    DBlockSpXVx fdistribu(mesh.restrict(MDomainSp(species, species_info.ielec(), MLengthSp(1))));
+    DBlockSpXVx allfdistribu(mesh.restrict(MDomainSp(species, species_info.ielec(), MLengthSp(1))));
 
     SingleModePerturbInitialization init(species_info, init_perturb_mode, init_perturb_amplitude);
-    init(fdistribu);
+    init(allfdistribu);
 
     // --> Algorithm info
     double deltat;
@@ -184,7 +184,7 @@ int main(int argc, char** argv)
     expose_to_pdi("nbstep_diag", nbstep_diag);
     PdiEvent("initial_state");
 
-    predcorr(fdistribu, nbiter);
+    predcorr(allfdistribu, nbiter);
 
     PC_tree_destroy(&conf_pdi);
 

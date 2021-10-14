@@ -38,5 +38,5 @@ public:
             BSplinesVx const& bsplines_vx,
             SplineVxBuilder const& spline_vx_builder);
 
-    DSpanX operator()(DSpanX electric_potential, DViewSpXVx fdistribu) const override;
+    DSpanX operator()(DSpanX electric_potential, DViewSpXVx allfdistribu) const override;
 };

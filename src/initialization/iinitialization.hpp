@@ -17,5 +17,5 @@ public:
 
     IInitialization& operator=(IInitialization&& x) = default;
 
-    virtual DSpanSpXVx operator()(DSpanSpXVx fdistribu) const = 0;
+    virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu) const = 0;
 };

@@ -44,19 +44,19 @@ FftPoissonSolver::FftPoissonSolver(
 
 // 1- Inner solvers sall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
-DSpanX FftPoissonSolver::operator()(DSpanX electric_potential, DViewSpXVx fdistribu) const
+DSpanX FftPoissonSolver::operator()(DSpanX electric_potential, DViewSpXVx allfdistribu) const
 {
-    assert(electric_potential.domain() == get_domain<MeshX>(fdistribu));
+    assert(electric_potential.domain() == get_domain<MeshX>(allfdistribu));
     UniformMDomainX dom_x = electric_potential.domain();
 
     // Compute the RHS of the Poisson equation.
     Block<double, MDomainX> rho(dom_x);
-    DBlockVx contiguous_slice_vx(fdistribu.domain<MeshVx>());
+    DBlockVx contiguous_slice_vx(allfdistribu.domain<MeshVx>());
     Block<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
     for (MCoordX ix : rho.domain()) {
         rho(ix) = m_species_info.charge()(m_species_info.ielec());
-        for (MCoordSp isp : get_domain<MeshSp>(fdistribu)) {
-            deepcopy(contiguous_slice_vx, fdistribu[isp][ix]);
+        for (MCoordSp isp : get_domain<MeshSp>(allfdistribu)) {
+            deepcopy(contiguous_slice_vx, allfdistribu[isp][ix]);
             m_spline_vx_builder(
                     vx_spline_coef.view(),
                     contiguous_slice_vx.cview(),

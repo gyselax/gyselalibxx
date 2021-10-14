@@ -10,11 +10,11 @@ SingleModePerturbInitialization::SingleModePerturbInitialization(
 {
 }
 
-DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx fdistribu) const
+DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx allfdistribu) const
 {
-    MDomainX gridx = fdistribu.domain<MeshX>();
-    MDomainVx gridvx = fdistribu.domain<MeshVx>();
-    MDomainSp gridsp = fdistribu.domain<MeshSp>();
+    MDomainX gridx = allfdistribu.domain<MeshX>();
+    MDomainVx gridvx = allfdistribu.domain<MeshVx>();
+    MDomainSp gridsp = allfdistribu.domain<MeshSp>();
 
     // Initialization of the perturbation
     DBlockX perturbation(gridx);
@@ -33,12 +33,12 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx fdistribu) con
                     if (fdistribu_val < 1.e-60) {
                         fdistribu_val = 1.e-60;
                     }
-                    fdistribu(isp, ix, iv) = fdistribu_val;
+                    allfdistribu(isp, ix, iv) = fdistribu_val;
                 }
             }
         }
     }
-    return fdistribu;
+    return allfdistribu;
 }
 
 void SingleModePerturbInitialization::perturbation_initialization(

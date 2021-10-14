@@ -7,5 +7,5 @@
 class IPoissonSolver
 {
 public:
-    virtual DSpanX operator()(DSpanX electric_potential, DViewSpXVx fdistribu) const = 0;
+    virtual DSpanX operator()(DSpanX electric_potential, DViewSpXVx allfdistribu) const = 0;
 };

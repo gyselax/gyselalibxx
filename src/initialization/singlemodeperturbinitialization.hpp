@@ -32,5 +32,5 @@ public:
 
     ~SingleModePerturbInitialization() override = default;
 
-    DSpanSpXVx operator()(DSpanSpXVx fdistribu) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu) const override;
 };

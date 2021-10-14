@@ -49,6 +49,6 @@ public:
             const BoundaryValue& bc_vx_left,
             const BoundaryValue& bc_vx_right);
 
-    DSpanSpXVx operator()(DSpanSpXVx fdistribu, DViewX electric_potential, double dt)
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_potential, double dt)
             const override;
 };

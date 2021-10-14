@@ -46,13 +46,13 @@ SplineAdvectionX::SplineAdvectionX(
     assert(bspl.is_periodic());
 }
 
-DSpanSpXVx SplineAdvectionX::operator()(DSpanSpXVx fdistribu, double dt) const
+DSpanSpXVx SplineAdvectionX::operator()(DSpanSpXVx allfdistribu, double dt) const
 {
-    assert(get_domain<MeshX>(fdistribu) == m_spline_x_builder.interpolation_domain());
+    assert(get_domain<MeshX>(allfdistribu) == m_spline_x_builder.interpolation_domain());
 
-    const MDomainX& x_dom = get_domain<MeshX>(fdistribu);
-    const MDomainVx& v_dom = get_domain<MeshVx>(fdistribu);
-    const MDomainSp& sp_dom = get_domain<MeshSp>(fdistribu);
+    const MDomainX& x_dom = get_domain<MeshX>(allfdistribu);
+    const MDomainVx& v_dom = get_domain<MeshVx>(allfdistribu);
+    const MDomainSp& sp_dom = get_domain<MeshSp>(allfdistribu);
 
     // pre-allocate some memory to prevent allocation later in loop
     DBlockX feet_coords(x_dom);
@@ -75,7 +75,7 @@ DSpanSpXVx SplineAdvectionX::operator()(DSpanSpXVx fdistribu, double dt) const
             }
 
             // copy the slice in contiguous memory
-            deepcopy(contiguous_slice, fdistribu[isp][iv]);
+            deepcopy(contiguous_slice, allfdistribu[isp][iv]);
 
             // build a spline representation of the data
             m_spline_x_builder(spline_coef, contiguous_slice);
@@ -84,8 +84,8 @@ DSpanSpXVx SplineAdvectionX::operator()(DSpanSpXVx fdistribu, double dt) const
             m_spline_x_evaluator(contiguous_slice.view(), feet_coords.cview(), spline_coef.cview());
 
             // copy back
-            deepcopy(fdistribu[isp][iv], contiguous_slice);
+            deepcopy(allfdistribu[isp][iv], contiguous_slice);
         }
     }
-    return fdistribu;
+    return allfdistribu;
 }

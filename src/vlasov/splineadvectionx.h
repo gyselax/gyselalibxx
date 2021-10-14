@@ -31,5 +31,5 @@ public:
             const BoundaryValue& bc_left,
             const BoundaryValue& bc_right);
 
-    DSpanSpXVx operator()(DSpanSpXVx fdistribu, double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
 };

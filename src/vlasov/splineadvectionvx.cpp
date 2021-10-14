@@ -57,14 +57,16 @@ SplineAdvectionVx::SplineAdvectionVx(
 {
 }
 
-DSpanSpXVx SplineAdvectionVx::operator()(DSpanSpXVx fdistribu, DViewX electric_potential, double dt)
-        const
+DSpanSpXVx SplineAdvectionVx::operator()(
+        DSpanSpXVx allfdistribu,
+        DViewX electric_potential,
+        double dt) const
 {
-    assert(get_domain<MeshVx>(fdistribu) == m_spline_vx_builder.interpolation_domain());
+    assert(get_domain<MeshVx>(allfdistribu) == m_spline_vx_builder.interpolation_domain());
 
-    const MDomainX& x_dom = get_domain<MeshX>(fdistribu);
-    const MDomainVx& vx_dom = get_domain<MeshVx>(fdistribu);
-    const MDomainSp& sp_dom = get_domain<MeshSp>(fdistribu);
+    const MDomainX& x_dom = get_domain<MeshX>(allfdistribu);
+    const MDomainVx& vx_dom = get_domain<MeshVx>(allfdistribu);
+    const MDomainSp& sp_dom = get_domain<MeshSp>(allfdistribu);
 
     // pre-allocate some memory to prevent allocation later in loop
     DBlockVx feet_coords(vx_dom);
@@ -94,12 +96,16 @@ DSpanSpXVx SplineAdvectionVx::operator()(DSpanSpXVx fdistribu, DViewX electric_p
             }
 
             // build a spline representation of the data
-            m_spline_vx_builder(spline_coef, fdistribu[isp][ix], &m_derivs_vxmin, &m_derivs_vxmax);
+            m_spline_vx_builder(
+                    spline_coef,
+                    allfdistribu[isp][ix],
+                    &m_derivs_vxmin,
+                    &m_derivs_vxmax);
 
             // evaluate the function at the feet using the spline
-            m_spline_vx_evaluator(fdistribu[isp][ix], feet_coords.cview(), spline_coef.cview());
+            m_spline_vx_evaluator(allfdistribu[isp][ix], feet_coords.cview(), spline_coef.cview());
         }
     }
 
-    return fdistribu;
+    return allfdistribu;
 }
