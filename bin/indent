@@ -1,6 +1,75 @@
 #!/bin/bash
+set -o errexit -o noclobber -o nounset -o pipefail
+
+usage() {
+    echo "Usage: $0 [<options>]" >&2
+    echo '  where <options> is one of:' >&2
+    echo '  * -t --test:      do not indent, test for indentation instead' >&2
+    echo '  * -d --no-docker: do not use docker, use the locally available tools' >&2
+    echo '  * -h --help:      display this message and quits' >&2
+}
+
+params="$(getopt -o tdh -l test,no-docker,help --name "$0" -- "$@")"
+eval set -- "$params"
+
+TEST_ONLY=0
+USE_DOCKER=1
+
+while true
+do
+    case "$1" in
+        -t|--test)
+            TEST_ONLY=1
+            shift
+            ;;
+        -d|--no-docker)
+            USE_DOCKER=0
+            shift
+            ;;
+        -h|--help)
+            usage
+            exit
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+if (( $# > 0 ))
+then
+    usage
+    exit 1
+fi
+
 
 cd "$(dirname "$0")"
 cd ..
 
-docker run -v "$(pwd):/data" -u "$(id -u):$(id -g)" -ti jbigot/voicexx_env find src tests vendor/ddc vendor/sll '(' -name '*.h' -o -name '*.cpp' ')' -exec clang-format -i '{}' '+'
+if (( USE_DOCKER > 0 ))
+then
+    DOCKER_COMMAND="docker run -v $(pwd):/data -u $(id -u):$(id -g) -ti jbigot/voicexx_env"
+else
+    DOCKER_COMMAND=''
+fi
+
+if (( TEST_ONLY > 0 ))
+then
+    FORMAT_PARAMS="-n -Werror"
+    RUN_IF_OK='echo Identation is Ok!'
+else
+    FORMAT_PARAMS="-i"
+    RUN_IF_OK='true'
+fi
+
+
+${DOCKER_COMMAND} find \
+    src tests vendor/ddc vendor/sll \
+    '(' -name '*.h' -o -name '*.hpp' -o -name '*.cpp' ')' \
+    -exec clang-format ${FORMAT_PARAMS} '{}' '+' \
+&& ${RUN_IF_OK}

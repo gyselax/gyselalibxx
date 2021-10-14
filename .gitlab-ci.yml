@@ -25,4 +25,4 @@ indentation:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
-    find src tests vendor/ddc vendor/sll '(' -name '*.h' -o -name '*.hpp' -o -name '*.cpp' ')' -exec clang-format -n -Werror '{}' '+' && echo "Identation is Ok!"
+    ./bin/indent -td
