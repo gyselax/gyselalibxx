@@ -129,6 +129,12 @@ public:
         return mlength_type((get<Meshes>(m_ubound) + 1 - get<Meshes>(m_lbound))...);
     }
 
+    template <class QueryMesh>
+    inline constexpr MLength<QueryMesh> extent() const noexcept
+    {
+        return MLength<QueryMesh>(get<QueryMesh>(m_ubound) + 1 - get<QueryMesh>(m_lbound));
+    }
+
     constexpr mcoord_type front() const noexcept
     {
         return m_lbound;
