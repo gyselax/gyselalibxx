@@ -1,3 +1,4 @@
+#include <chrono>
 #include <cmath>
 #include <cstdlib>
 #include <filesystem>
@@ -24,6 +25,7 @@
 
 using std::cerr;
 using std::endl;
+using std::chrono::steady_clock;
 namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
@@ -184,7 +186,14 @@ int main(int argc, char** argv)
     expose_to_pdi("nbstep_diag", nbstep_diag);
     PdiEvent("initial_state");
 
+    steady_clock::time_point start = steady_clock::now();
+
     predcorr(allfdistribu, nbiter);
+
+    steady_clock::time_point end = steady_clock::now();
+
+    double simulation_time = std::chrono::duration<double>(end - start).count();
+    std::cout << "Simulation time: " << simulation_time << "s\n";
 
     PC_tree_destroy(&conf_pdi);
 
