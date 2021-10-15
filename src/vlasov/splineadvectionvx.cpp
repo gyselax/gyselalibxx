@@ -22,33 +22,14 @@ using namespace std::experimental;
 
 SplineAdvectionVx::SplineAdvectionVx(
         SpeciesInformation const& species_info,
-        const BSplinesX& bspl_x,
-        const SplineXBuilder& spl_x_interp,
-        const BSplinesVx& bspl_vx,
-        const SplineVxBuilder& spl_vx_interp)
-    : SplineAdvectionVx(
-            species_info,
-            bspl_x,
-            spl_x_interp,
-            bspl_vx,
-            spl_vx_interp,
-            NullBoundaryValue::value,
-            NullBoundaryValue::value)
-{
-}
-
-SplineAdvectionVx::SplineAdvectionVx(
-        SpeciesInformation const& species_info,
-        const BSplinesX& bspl_x,
-        const SplineXBuilder& spl_x_interp,
-        const BSplinesVx& bspl_vx,
-        const SplineVxBuilder& spl_vx_interp,
-        const BoundaryValue& bc_vx_left,
-        const BoundaryValue& bc_vx_right)
-    : m_spline_x_builder(spl_x_interp)
-    , m_spline_x_evaluator(bspl_x, NullBoundaryValue::value, NullBoundaryValue::value)
-    , m_spline_vx_builder(spl_vx_interp)
-    , m_spline_vx_evaluator(bspl_vx, bc_vx_left, bc_vx_right)
+        SplineXBuilder const& spline_x_builder,
+        SplineEvaluator<BSplinesX> const& spline_x_evaluator,
+        SplineVxBuilder const& spline_vx_builder,
+        SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
+    : m_spline_x_builder(spline_x_builder)
+    , m_spline_x_evaluator(spline_x_evaluator)
+    , m_spline_vx_builder(spline_vx_builder)
+    , m_spline_vx_evaluator(spline_vx_evaluator)
     , m_derivs_vxmin_data(BSplinesVx::degree() / 2, 0.)
     , m_derivs_vxmin(m_derivs_vxmin_data.data(), m_derivs_vxmin_data.size())
     , m_derivs_vxmax_data(BSplinesVx::degree() / 2, 0.)

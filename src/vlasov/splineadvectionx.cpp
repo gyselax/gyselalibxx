@@ -22,28 +22,12 @@ using namespace std::experimental;
 
 SplineAdvectionX::SplineAdvectionX(
         SpeciesInformation const& species_info,
-        const BSplinesX& bspl,
-        const SplineXBuilder& spl_interp)
-    : SplineAdvectionX(
-            species_info,
-            bspl,
-            spl_interp,
-            NullBoundaryValue::value,
-            NullBoundaryValue::value)
-{
-}
-
-SplineAdvectionX::SplineAdvectionX(
-        SpeciesInformation const& species_info,
-        const BSplinesX& bspl,
-        const SplineXBuilder& spl_interp,
-        const BoundaryValue& bc_left,
-        const BoundaryValue& bc_right)
-    : m_spline_x_builder(spl_interp)
-    , m_spline_x_evaluator(bspl, bc_left, bc_right)
+        SplineXBuilder const& spline_x_builder,
+        SplineEvaluator<BSplinesX> const& spline_x_evaluator)
+    : m_spline_x_builder(spline_x_builder)
+    , m_spline_x_evaluator(spline_x_evaluator)
     , m_species_info(species_info)
 {
-    assert(bspl.is_periodic());
 }
 
 DSpanSpXVx SplineAdvectionX::operator()(DSpanSpXVx allfdistribu, double dt) const

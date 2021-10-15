@@ -28,12 +28,12 @@ FftPoissonSolver::FftPoissonSolver(
         SpeciesInformation const& species_info,
         IFourierTransform<Dim::X> const& fft,
         IInverseFourierTransform<Dim::X> const& ifft,
-        BSplinesVx const& bsplines_vx,
-        SplineVxBuilder const& spline_vx_builder)
+        SplineVxBuilder const& spline_vx_builder,
+        SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
     : m_fft(fft)
     , m_ifft(ifft)
     , m_spline_vx_builder(spline_vx_builder)
-    , m_spline_vx_evaluator(bsplines_vx, NullBoundaryValue::value, NullBoundaryValue::value)
+    , m_spline_vx_evaluator(spline_vx_evaluator)
     , m_derivs_vxmin_data(BSplinesVx::degree() / 2, 0.)
     , m_derivs_vxmin(m_derivs_vxmin_data.data(), m_derivs_vxmin_data.size())
     , m_derivs_vxmax_data(BSplinesVx::degree() / 2, 0.)

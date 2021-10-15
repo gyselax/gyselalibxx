@@ -8,6 +8,9 @@
 #include <ddc/ProductMDomain>
 #include <ddc/pdi.hpp>
 
+#include <sll/null_boundary_value.hpp>
+#include <sll/spline_evaluator.hpp>
+
 #include <paraconf.h>
 #include <pdi.h>
 
@@ -150,10 +153,20 @@ int main(int argc, char** argv)
 
     // Creating operators
 
-    SplineAdvectionX const advection_x(species_info, bsplines_x, builder_x);
+    SplineEvaluator<BSplinesVx>
+            spline_vx_evaluator(bsplines_vx, NullBoundaryValue::value, NullBoundaryValue::value);
 
-    SplineAdvectionVx const
-            advection_vx(species_info, bsplines_x, builder_x, bsplines_vx, builder_vx);
+    SplineEvaluator<BSplinesX>
+            spline_x_evaluator(bsplines_x, NullBoundaryValue::value, NullBoundaryValue::value);
+
+    SplineAdvectionX const advection_x(species_info, builder_x, spline_x_evaluator);
+
+    SplineAdvectionVx const advection_vx(
+            species_info,
+            builder_x,
+            spline_x_evaluator,
+            builder_vx,
+            spline_vx_evaluator);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
@@ -161,7 +174,7 @@ int main(int argc, char** argv)
 
     FftwInverseFourierTransform<Dim::X> ifft;
 
-    FftPoissonSolver poisson(species_info, fft, ifft, bsplines_vx, builder_vx);
+    FftPoissonSolver poisson(species_info, fft, ifft, builder_vx, spline_vx_evaluator);
 
     PredCorr const predcorr(vlasov, poisson, deltat);
 

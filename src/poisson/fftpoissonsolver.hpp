@@ -18,7 +18,7 @@ class FftPoissonSolver : public IPoissonSolver
 
     SplineVxBuilder const& m_spline_vx_builder;
 
-    SplineEvaluator<BSplinesVx> m_spline_vx_evaluator;
+    SplineEvaluator<BSplinesVx> const& m_spline_vx_evaluator;
 
     std::vector<double> m_derivs_vxmin_data;
 
@@ -35,8 +35,8 @@ public:
             SpeciesInformation const& species_info,
             IFourierTransform<Dim::X> const& fft,
             IInverseFourierTransform<Dim::X> const& ifft,
-            BSplinesVx const& bsplines_vx,
-            SplineVxBuilder const& spline_vx_builder);
+            SplineVxBuilder const& spline_vx_builder,
+            SplineEvaluator<BSplinesVx> const& spline_vx_evaluator);
 
     DSpanX operator()(DSpanX electric_potential, DViewSpXVx allfdistribu) const override;
 };

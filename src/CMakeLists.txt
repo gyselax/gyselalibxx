@@ -24,4 +24,5 @@ target_link_libraries(voicexx
 		vcx::vlasov
 		FFTW::Double
 		PDI::pdi
+		sll::splines
 )
