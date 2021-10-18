@@ -23,12 +23,12 @@ protected:
     Coordinate<DimX> point_rx = Coordinate<DimX>(0.);
 };
 
-TEST_F(UniformDiscretizationTest, rank)
+TEST_F(UniformDiscretizationTest, Rank)
 {
     EXPECT_EQ(DDimX::rank(), 1);
 }
 
-TEST_F(UniformDiscretizationTest, constructor)
+TEST_F(UniformDiscretizationTest, Constructor)
 {
     DDimX ddim_x(origin, step);
     EXPECT_EQ(ddim_x.lbound(), lbound);
@@ -38,7 +38,7 @@ TEST_F(UniformDiscretizationTest, constructor)
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
-TEST_F(UniformDiscretizationTest, constructor2)
+TEST_F(UniformDiscretizationTest, Constructor2)
 {
     DDimX ddim_x(origin, Coordinate<DimX>(1.), npoints);
     EXPECT_EQ(ddim_x.lbound(), lbound);
@@ -48,7 +48,7 @@ TEST_F(UniformDiscretizationTest, constructor2)
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
-TEST(UniformDiscretization, formatting)
+TEST(UniformDiscretization, Formatting)
 {
     DDimX ddim_x(Coordinate<DimX>(-1.), Coordinate<DimX>(0.5));
     std::stringstream oss;

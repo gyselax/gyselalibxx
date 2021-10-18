@@ -34,7 +34,7 @@ protected:
             old_bsplines {spline_degree, DimX::PERIODIC, xmin, xmax, ncells};
 };
 
-TEST_F(BSplinesUniformTest, constructor)
+TEST_F(BSplinesUniformTest, Constructor)
 {
     EXPECT_EQ(bsplines.degree(), spline_degree);
     EXPECT_EQ(bsplines.is_periodic(), DimX::PERIODIC);
@@ -43,7 +43,7 @@ TEST_F(BSplinesUniformTest, constructor)
     EXPECT_EQ(bsplines.ncells(), ncells);
 }
 
-TEST_F(BSplinesUniformTest, comparison)
+TEST_F(BSplinesUniformTest, Comparison)
 {
     EXPECT_EQ(bsplines.degree(), old_bsplines.degree());
     EXPECT_EQ(bsplines.is_radial(), old_bsplines.radial());

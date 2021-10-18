@@ -102,7 +102,7 @@ static MDomainXY constexpr ddim_x_y = MDomainXY(idim_x, idim_y, lbound_x_y, npoi
 
 // Member types of Chunk 1D \{
 
-TEST(Chunk1DTest, layout_type)
+TEST(Chunk1DTest, LayoutType)
 {
     ChunkX<double> chunck(ddim_x);
 
@@ -116,7 +116,7 @@ TEST(Chunk1DTest, layout_type)
 // \}
 // Functions implemented in Chunk 1D (and free functions specific to it) \{
 
-TEST(Chunk1DTest, move_constructor)
+TEST(Chunk1DTest, MoveConstructor)
 {
     double constexpr factor = 1.391;
     ChunkX<double> chunck(ddim_x);
@@ -132,7 +132,7 @@ TEST(Chunk1DTest, move_constructor)
     }
 }
 
-TEST(Chunk1DTest, move_assignment)
+TEST(Chunk1DTest, MoveAssignment)
 {
     double constexpr factor = 1.976;
     ChunkX<double> chunck(ddim_x);
@@ -149,7 +149,7 @@ TEST(Chunk1DTest, move_assignment)
     }
 }
 
-TEST(Chunk1DTest, swap)
+TEST(Chunk1DTest, Swap)
 {
     double constexpr factor = 1.976;
     ChunkX<double> chunck(ddim_x);
@@ -171,7 +171,7 @@ TEST(Chunk1DTest, swap)
 
 // no dim subset access in 1D
 
-TEST(Chunk1DTest, access_const)
+TEST(Chunk1DTest, AccessConst)
 {
     double constexpr factor = 1.012;
     ChunkX<double> chunck(ddim_x);
@@ -183,7 +183,7 @@ TEST(Chunk1DTest, access_const)
     }
 }
 
-TEST(Chunk1DTest, access)
+TEST(Chunk1DTest, Access)
 {
     double constexpr factor = 1.012;
     ChunkX<double> chunck(ddim_x);
@@ -194,7 +194,7 @@ TEST(Chunk1DTest, access)
     }
 }
 
-TEST(Chunk1DTest, span_cview)
+TEST(Chunk1DTest, SpanCview)
 {
     double constexpr factor = 1.567;
     ChunkX<double> chunck(ddim_x);
@@ -205,7 +205,7 @@ TEST(Chunk1DTest, span_cview)
     }
 }
 
-TEST(Chunk1DTest, view_const)
+TEST(Chunk1DTest, ViewConst)
 {
     double constexpr factor = 1.802;
     ChunkX<double> chunck(ddim_x);
@@ -217,7 +217,7 @@ TEST(Chunk1DTest, view_const)
     }
 }
 
-TEST(Chunk1DTest, view)
+TEST(Chunk1DTest, View)
 {
     double constexpr factor = 1.259;
     ChunkX<double> chunck(ddim_x);
@@ -239,13 +239,13 @@ TEST(Chunk1DTest, view)
 
 // access (operator()) operators are hidden
 
-TEST(Chunk1DTest, ibegin)
+TEST(Chunk1DTest, Ibegin)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(chunck.ibegin<IDimX>(), lbound_x);
 }
 
-TEST(Chunk1DTest, iend)
+TEST(Chunk1DTest, Iend)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(chunck.iend<IDimX>(), sentinel_x);
@@ -253,49 +253,49 @@ TEST(Chunk1DTest, iend)
 
 // TODO: accessor
 
-TEST(Chunk1DTest, rank)
+TEST(Chunk1DTest, Rank)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(ChunkX<double>::rank(), 1);
 }
 
-TEST(Chunk1DTest, rank_dynamic)
+TEST(Chunk1DTest, RankDynamic)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(ChunkX<double>::rank_dynamic(), 1);
 }
 
-TEST(Chunk1DTest, extents)
+TEST(Chunk1DTest, Extents)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(chunck.extents(), npoints_x);
 }
 
-TEST(Chunk1DTest, extent)
+TEST(Chunk1DTest, Extent)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(chunck.extent<IDimX>(), npoints_x.value());
 }
 
-TEST(Chunk1DTest, size)
+TEST(Chunk1DTest, Size)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(chunck.size(), npoints_x.value());
 }
 
-TEST(Chunk1DTest, unique_size)
+TEST(Chunk1DTest, UniqueSize)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(chunck.unique_size(), npoints_x.value());
 }
 
-TEST(Chunk1DTest, is_always_unique)
+TEST(Chunk1DTest, IsAlwaysUnique)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_TRUE(chunck.is_always_unique());
 }
 
-TEST(Chunk1DTest, is_always_contiguous)
+TEST(Chunk1DTest, IsAlwaysContiguous)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_TRUE(chunck.is_always_contiguous());
@@ -309,19 +309,19 @@ TEST(Chunk1DTest, is_always_strided)
 
 // TODO: mapping
 
-TEST(Chunk1DTest, is_unique)
+TEST(Chunk1DTest, IsUnique)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_TRUE(chunck.is_unique());
 }
 
-TEST(Chunk1DTest, is_contiguous)
+TEST(Chunk1DTest, IsContiguous)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_TRUE(chunck.is_contiguous());
 }
 
-TEST(Chunk1DTest, is_strided)
+TEST(Chunk1DTest, IsStrided)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_TRUE(chunck.is_strided());
@@ -331,13 +331,13 @@ TEST(Chunk1DTest, is_strided)
 
 // swap is hidden
 
-TEST(Chunk1DTest, domain)
+TEST(Chunk1DTest, Domain)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(ddim_x, chunck.domain());
 }
 
-TEST(Chunk1DTest, domainX)
+TEST(Chunk1DTest, DomainX)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(ddim_x, chunck.domain<IDimX>());
@@ -349,13 +349,13 @@ TEST(Chunk1DTest, domainX)
 
 // TODO: allocation_mdspan
 
-TEST(Chunk1DTest, get_domainX)
+TEST(Chunk1DTest, GetDomainX)
 {
     ChunkX<double> chunck(ddim_x);
     EXPECT_EQ(ddim_x, get_domain<IDimX>(chunck));
 }
 
-TEST(Chunk1DTest, deepcopy)
+TEST(Chunk1DTest, Deepcopy)
 {
     ChunkX<double> chunck(ddim_x);
     for (auto&& ix : chunck.domain()) {
@@ -374,7 +374,7 @@ TEST(Chunk1DTest, deepcopy)
 
 // TODO: lots to do still!
 
-TEST(Chunk2DTest, access)
+TEST(Chunk2DTest, Access)
 {
     ChunkXY<double> chunck(ddim_x_y);
     for (auto&& ix : chunck.domain<IDimX>()) {
@@ -386,7 +386,7 @@ TEST(Chunk2DTest, access)
     }
 }
 
-TEST(Chunk2DTest, access_reordered)
+TEST(Chunk2DTest, AccessReordered)
 {
     ChunkXY<double> chunck(ddim_x_y);
     for (auto&& ix : chunck.domain<IDimX>()) {
@@ -398,7 +398,7 @@ TEST(Chunk2DTest, access_reordered)
     }
 }
 
-TEST(Chunk2DTest, cview)
+TEST(Chunk2DTest, Cview)
 {
     ChunkXY<double> chunck(ddim_x_y);
     for (auto&& ix : chunck.domain<IDimX>()) {
@@ -415,7 +415,7 @@ TEST(Chunk2DTest, cview)
     }
 }
 
-TEST(Chunk2DTest, slice_coord_x)
+TEST(Chunk2DTest, SliceCoordX)
 {
     IndexX constexpr slice_x_val = IndexX(lbound_x + 1);
 
@@ -438,7 +438,7 @@ TEST(Chunk2DTest, slice_coord_x)
     }
 }
 
-TEST(Chunk2DTest, slice_coord_y)
+TEST(Chunk2DTest, SliceCoordY)
 {
     MCoordY constexpr slice_y_val = MCoordY(lbound_y + 1);
 
@@ -461,7 +461,7 @@ TEST(Chunk2DTest, slice_coord_y)
     }
 }
 
-TEST(Chunk2DTest, slice_domain_x)
+TEST(Chunk2DTest, SliceDomainX)
 {
     IDomainX constexpr subdomain_x = IDomainX(idim_x, IndexX(lbound_x + 1), IVectX(npoints_x - 2));
 
@@ -488,7 +488,7 @@ TEST(Chunk2DTest, slice_domain_x)
     }
 }
 
-TEST(Chunk2DTest, slice_domain_x_tooearly)
+TEST(Chunk2DTest, SliceDomainXTooearly)
 {
     IDomainX constexpr subdomain_x = IDomainX(idim_x, IndexX(lbound_x - 1), npoints_x);
 
@@ -501,7 +501,7 @@ TEST(Chunk2DTest, slice_domain_x_tooearly)
 #endif
 }
 
-TEST(Chunk2DTest, slice_domain_x_toolate)
+TEST(Chunk2DTest, SliceDomainXToolate)
 {
     IDomainX constexpr subdomain_x = IDomainX(idim_x, lbound_x, IVectX(npoints_x + 1));
 
@@ -514,7 +514,7 @@ TEST(Chunk2DTest, slice_domain_x_toolate)
 #endif
 }
 
-TEST(Chunk2DTest, slice_domain_y)
+TEST(Chunk2DTest, SliceDomainY)
 {
     MDomainY constexpr subdomain_y
             = MDomainY(idim_y, MCoordY(lbound_y + 1), MLengthY(npoints_y - 2));
@@ -541,7 +541,7 @@ TEST(Chunk2DTest, slice_domain_y)
     }
 }
 
-TEST(Chunk2DTest, deepcopy)
+TEST(Chunk2DTest, Deepcopy)
 {
     ChunkXY<double> chunck(ddim_x_y);
     for (auto&& ix : chunck.domain<IDimX>()) {
@@ -559,7 +559,7 @@ TEST(Chunk2DTest, deepcopy)
     }
 }
 
-TEST(Chunk2DTest, deepcopy_reordered)
+TEST(Chunk2DTest, DeepcopyReordered)
 {
     ChunkXY<double> chunck(ddim_x_y);
     for (auto&& ix : chunck.domain<IDimX>()) {

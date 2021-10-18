@@ -18,7 +18,7 @@ struct z;
 
 } // namespace
 
-TEST(TypeSeqTest, rank)
+TEST(TypeSeqTest, Rank)
 {
     using A = TypeSeq<a, b, c>;
     EXPECT_EQ((type_seq_rank_v<a, A>), 0);
@@ -26,7 +26,7 @@ TEST(TypeSeqTest, rank)
     EXPECT_EQ((type_seq_rank_v<c, A>), 2);
 }
 
-TEST(TypeSeqTest, element)
+TEST(TypeSeqTest, Element)
 {
     using A = TypeSeq<a, b, c>;
     EXPECT_TRUE((std::is_same_v<a, type_seq_element_t<0, A>>));
@@ -34,7 +34,7 @@ TEST(TypeSeqTest, element)
     EXPECT_TRUE((std::is_same_v<c, type_seq_element_t<2, A>>));
 }
 
-TEST(TypeSeqTest, same_tags)
+TEST(TypeSeqTest, SameTags)
 {
     using A = TypeSeq<a, b, c>;
     using B = TypeSeq<z, c, y>;
@@ -47,7 +47,7 @@ TEST(TypeSeqTest, same_tags)
     EXPECT_FALSE((type_seq_same_v<C, B>));
 }
 
-TEST(TypeSeqTest, remove)
+TEST(TypeSeqTest, Remove)
 {
     using A = TypeSeq<a, b, c>;
     using B = TypeSeq<z, c, y>;
@@ -56,7 +56,7 @@ TEST(TypeSeqTest, remove)
     EXPECT_TRUE((type_seq_same_v<R, ExpectedR>));
 }
 
-TEST(TypeSeqTest, merge)
+TEST(TypeSeqTest, Merge)
 {
     using A = TypeSeq<a, b, c>;
     using B = TypeSeq<z, c, y>;

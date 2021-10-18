@@ -33,7 +33,7 @@ public:
 
 using namespace ::testing;
 
-TEST(SplitVlasovSolver, ordering)
+TEST(SplitVlasovSolver, Ordering)
 {
     IDimX mesh_x(CoordX(0.), CoordX(2.));
     IDimVx mesh_vx(CoordVx(0.), CoordVx(2.));

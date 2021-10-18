@@ -23,12 +23,12 @@ using IndexX = DiscreteCoordinate<DDimX>;
 
 } // namespace
 
-TEST(SingleDiscretization, class_size)
+TEST(SingleDiscretization, ClassSize)
 {
     EXPECT_EQ(sizeof(DDimX), sizeof(double));
 }
 
-TEST(SingleDiscretization, constructor)
+TEST(SingleDiscretization, Constructor)
 {
     constexpr CoordX x(1.);
 

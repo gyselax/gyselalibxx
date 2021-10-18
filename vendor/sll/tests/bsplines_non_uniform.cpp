@@ -31,7 +31,7 @@ protected:
     deprecated::NonUniformBSplines old_bsplines {spline_degree, DimX::PERIODIC, breaks};
 };
 
-TEST_F(BSplinesNonUniformTest, constructor)
+TEST_F(BSplinesNonUniformTest, Constructor)
 {
     EXPECT_EQ(bsplines.degree(), spline_degree);
     EXPECT_EQ(bsplines.is_periodic(), DimX::PERIODIC);
@@ -41,7 +41,7 @@ TEST_F(BSplinesNonUniformTest, constructor)
     EXPECT_EQ(bsplines.ncells(), 4);
 }
 
-TEST_F(BSplinesNonUniformTest, comparison)
+TEST_F(BSplinesNonUniformTest, Comparison)
 {
     EXPECT_EQ(bsplines.degree(), old_bsplines.degree());
     EXPECT_EQ(bsplines.is_radial(), old_bsplines.radial());

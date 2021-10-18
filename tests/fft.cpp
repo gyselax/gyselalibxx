@@ -66,7 +66,7 @@ TEST(FFT, DomainOdd)
 
 // Check if IFFT(FFT(f(x)))=f(x) by using real-to-complex FFT
 //  and complex-to-real inverse FFT
-TEST(FFT, Identity_UsingReal)
+TEST(FFT, IdentityUsingReal)
 {
     // Construct a 1D mesh
     constexpr std::size_t N = 32;
@@ -105,7 +105,7 @@ TEST(FFT, Identity_UsingReal)
 
 // Check if IFFT(FFT(f(x)))=f(x) by using complex-to-complex FFT
 //  and complex-to-complex inverse FFT
-TEST(FFT, Identity_UsingComplex)
+TEST(FFT, IdentityUsingComplex)
 {
     // Construct a 1D mesh
     constexpr std::size_t N = 32;

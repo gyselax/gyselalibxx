@@ -54,7 +54,7 @@ MLengthXY constexpr ubound_x_y(lbound_x + npoints_x - 1, lbound_y + npoints_y - 
 
 } // namespace
 
-TEST(ProductMDomainTest, constructor)
+TEST(ProductMDomainTest, Constructor)
 {
     MDomainXY const dom_x_y = MDomainXY(idim_x, ddim_y, lbound_x_y, npoints_x_y);
     EXPECT_EQ(dom_x_y.extents(), npoints_x_y);
@@ -77,7 +77,7 @@ TEST(ProductMDomainTest, constructor)
     EXPECT_EQ(empty_domain[0], lbound_x);
 }
 
-TEST(ProductMDomainTest, rmin_rmax)
+TEST(ProductMDomainTest, RminRmax)
 {
     IDomainX const dom_x(idim_x, lbound_x, npoints_x);
     EXPECT_EQ(dom_x.rmin(), lbound_x.value() * step_x + origin_x);
@@ -92,7 +92,7 @@ TEST(ProductMDomainTest, rmin_rmax)
     EXPECT_EQ(dom_x_y.rmax(), rmax_y);
 }
 
-TEST(ProductMDomainTest, subdomain)
+TEST(ProductMDomainTest, Subdomain)
 {
     MDomainXY const dom_x_y = MDomainXY(idim_x, ddim_y, lbound_x_y, npoints_x_y);
     DiscreteCoordinate<IDimX> const lbound_subdomain_x(lbound_x + 1);

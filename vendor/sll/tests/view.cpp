@@ -29,7 +29,7 @@ TEST(View1DTest, Constructor)
     Span1D<double const> ccx2cv_(ccx2cv);
 }
 
-TEST(View3DTest, stream)
+TEST(View3DTest, Stream)
 {
     std::array<int, 8> data;
     SpanND<3, int> sdata(data.data(), 2, 2, 2);

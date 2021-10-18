@@ -34,25 +34,25 @@ constexpr DDimXY ddim_x_y {ddim_x, ddim_y};
 
 } // namespace
 
-TEST(DiscreteSpaceTest, constructor)
+TEST(DiscreteSpaceTest, Constructor)
 {
     EXPECT_EQ(DDimXY::rank(), DDimX::rank() + DDimY::rank());
     EXPECT_EQ(ddim_x_y.to_real(MCoordXY(0, 0)), RCoordXY(2., -1.));
 }
 
-TEST(DiscreteSpaceTest, accessor)
+TEST(DiscreteSpaceTest, Accessor)
 {
     EXPECT_EQ(ddim_x_y.get<DDimX>(), ddim_x);
 }
 
-TEST(DiscreteSpaceTest, submesh)
+TEST(DiscreteSpaceTest, Submesh)
 {
     auto&& selection = select<DDimY>(ddim_x_y);
     EXPECT_EQ(1, selection.rank());
     EXPECT_EQ(RCoordY(0.), selection.to_real(DiscreteCoordinate<DDimY>(1)));
 }
 
-TEST(DiscreteSpaceTest, conversion)
+TEST(DiscreteSpaceTest, Conversion)
 {
     constexpr static DDimX ddim_x(CoordX(2.), CoordX(0.1));
     constexpr detail::DiscreteSpace product_mesh_x(ddim_x);
@@ -61,7 +61,7 @@ TEST(DiscreteSpaceTest, conversion)
     EXPECT_EQ(0.1, step);
 }
 
-TEST(DiscreteSpaceTest, to_real)
+TEST(DiscreteSpaceTest, ToReal)
 {
     for (std::size_t ix = 0; ix < 5; ++ix) {
         for (std::size_t ivx = 0; ivx < points_y.size(); ++ivx) {

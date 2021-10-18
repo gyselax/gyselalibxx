@@ -180,7 +180,7 @@ INSTANTIATE_TEST_SUITE_P(
 //--------------------------------------
 // TESTS
 //--------------------------------------
-TEST_P(SplinesTest, test)
+TEST_P(SplinesTest, Test)
 {
     //const int ncells;
     //const int bc_xmin, bc_xmax;

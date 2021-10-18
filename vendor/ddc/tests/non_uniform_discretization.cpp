@@ -31,12 +31,12 @@ constexpr Coordinate<DimX> point_rx = Coordinate<DimX>(0.3);
 
 } // namespace
 
-TEST(NonUniformDiscretizationTest, rank)
+TEST(NonUniformDiscretizationTest, Rank)
 {
     EXPECT_EQ(DDimX::rank(), 1);
 }
 
-TEST(NonUniformDiscretizationTest, list_constructor)
+TEST(NonUniformDiscretizationTest, ListConstructor)
 {
     DDimX ddim_x(VALUES);
     EXPECT_EQ(ddim_x.size(), 4);
@@ -48,7 +48,7 @@ TEST(NonUniformDiscretizationTest, list_constructor)
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
-TEST(NonUniformDiscretizationTest, array_constructor)
+TEST(NonUniformDiscretizationTest, ArrayConstructor)
 {
     DDimX ddim_x(array_points);
     EXPECT_EQ(ddim_x.size(), array_points.size());
@@ -60,7 +60,7 @@ TEST(NonUniformDiscretizationTest, array_constructor)
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
-TEST(NonUniformDiscretizationTest, vector_constructor)
+TEST(NonUniformDiscretizationTest, VectorConstructor)
 {
     DDimX ddim_x(vector_points);
     EXPECT_EQ(ddim_x.size(), vector_points.size());
@@ -72,7 +72,7 @@ TEST(NonUniformDiscretizationTest, vector_constructor)
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
-TEST(NonUniformDiscretizationTest, iterator_constructor)
+TEST(NonUniformDiscretizationTest, IteratorConstructor)
 {
     DDimX ddim_x(vector_points.begin(), vector_points.end());
     EXPECT_EQ(ddim_x.size(), vector_points.size());
@@ -84,7 +84,7 @@ TEST(NonUniformDiscretizationTest, iterator_constructor)
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
-TEST(NonUniformDiscretization, formatting)
+TEST(NonUniformDiscretization, Formatting)
 {
     DDimX ddim_x({Coordinate<DimX>(0.1), Coordinate<DimX>(0.4)});
     std::stringstream oss;

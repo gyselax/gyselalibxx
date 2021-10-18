@@ -44,7 +44,7 @@ BSplinesY const bsplinesy {RCoordY(0.1), RCoordY(0.4), RCoordY(1.0)};
 
 } // namespace
 
-TEST(ChunkBSplinesTest, constructor)
+TEST(ChunkBSplinesTest, Constructor)
 {
     DiscreteVector<BSplinesX, BSplinesY> size(ncells, ncells);
     DiscreteDomain<BSplinesX, BSplinesY> dom(bsplinesx, bsplinesy, size);
