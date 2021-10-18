@@ -1,0 +1,44 @@
+#include <sll/spline_builder.hpp>
+#include <sll/spline_evaluator.hpp>
+
+#include "i_interpolator_vx.hpp"
+#include "spline_interpolator_vx.hpp"
+
+SplineInterpolatorVx::SplineInterpolatorVx(
+        SplineVxBuilder const& builder,
+        SplineEvaluator<BSplinesVx> const& evaluator)
+    : m_builder(builder)
+    , m_evaluator(evaluator)
+    , m_coefs(builder.spline_domain())
+    , m_derivs_xmin_alloc(BSplinesVx::degree() / 2, 0.)
+    , m_derivs_xmin(m_derivs_xmin_alloc.data(), m_derivs_xmin_alloc.size())
+    , m_derivs_xmax_alloc(BSplinesVx::degree() / 2, 0.)
+    , m_derivs_xmax(m_derivs_xmax_alloc.data(), m_derivs_xmax_alloc.size())
+{
+}
+
+void SplineInterpolatorVx::operator()(DSpanVx const inout_data, DViewVx const coordinates) const
+{
+    m_builder(m_coefs, inout_data, &m_derivs_xmin, &m_derivs_xmax);
+    m_evaluator(inout_data, coordinates, m_coefs);
+}
+
+PreallocatableSplineInterpolatorVx::PreallocatableSplineInterpolatorVx(
+        SplineVxBuilder const& builder,
+        SplineEvaluator<BSplinesVx> const& evaluator)
+    : m_builder(builder)
+    , m_evaluator(evaluator)
+{
+}
+
+InterpolatorVxProxy PreallocatableSplineInterpolatorVx::preallocate() const
+{
+    return InterpolatorVxProxy(std::make_unique<SplineInterpolatorVx>(m_builder, m_evaluator));
+}
+
+void PreallocatableSplineInterpolatorVx::operator()(
+        DSpanVx const inout_data,
+        DViewVx const coordinates) const
+{
+    return preallocate()(inout_data, coordinates);
+}

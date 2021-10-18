@@ -13,38 +13,30 @@
 
 #include <species_info.hpp>
 
-#include "splineadvectionvx.hpp"
+#include "bsl_advection_vx.hpp"
+#include "i_interpolator_vx.hpp"
+#include "i_interpolator_x.hpp"
 
 class BoundaryValue;
 
 using namespace std;
 using namespace std::experimental;
 
-SplineAdvectionVx::SplineAdvectionVx(
+BslAdvectionVx::BslAdvectionVx(
         SpeciesInformation const& species_info,
         SplineXBuilder const& spline_x_builder,
         SplineEvaluator<BSplinesX> const& spline_x_evaluator,
-        SplineVxBuilder const& spline_vx_builder,
-        SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
+        IPreallocatableInterpolatorVx const& interpolator_vx)
     : m_spline_x_builder(spline_x_builder)
     , m_spline_x_evaluator(spline_x_evaluator)
-    , m_spline_vx_builder(spline_vx_builder)
-    , m_spline_vx_evaluator(spline_vx_evaluator)
-    , m_derivs_vxmin_data(BSplinesVx::degree() / 2, 0.)
-    , m_derivs_vxmin(m_derivs_vxmin_data.data(), m_derivs_vxmin_data.size())
-    , m_derivs_vxmax_data(BSplinesVx::degree() / 2, 0.)
-    , m_derivs_vxmax(m_derivs_vxmax_data.data(), m_derivs_vxmax_data.size())
+    , m_interpolator_vx(interpolator_vx)
     , m_species_info(species_info)
 {
 }
 
-DSpanSpXVx SplineAdvectionVx::operator()(
-        DSpanSpXVx allfdistribu,
-        DViewX electric_potential,
-        double dt) const
+DSpanSpXVx BslAdvectionVx::operator()(DSpanSpXVx allfdistribu, DViewX electric_potential, double dt)
+        const
 {
-    assert(get_domain<MeshVx>(allfdistribu) == m_spline_vx_builder.interpolation_domain());
-
     const MDomainX& x_dom = get_domain<MeshX>(allfdistribu);
     const MDomainVx& vx_dom = get_domain<MeshVx>(allfdistribu);
     const MDomainSp& sp_dom = get_domain<MeshSp>(allfdistribu);
@@ -52,8 +44,7 @@ DSpanSpXVx SplineAdvectionVx::operator()(
     // pre-allocate some memory to prevent allocation later in loop
     DBlockVx feet_coords(vx_dom);
 
-    // Construct a domain over the bounded basis and allocate memory on this support
-    Block<double, BSDomainVx> spline_coef(m_spline_vx_builder.spline_domain());
+    InterpolatorVxProxy interpolator_vx = m_interpolator_vx.preallocate();
 
     // Compute efield = -dPhi/dx where Phi is the electric_potential
     Block<double, BSDomainX> elecpot_spline_coef(m_spline_x_builder.spline_domain());
@@ -77,14 +68,7 @@ DSpanSpXVx SplineAdvectionVx::operator()(
             }
 
             // build a spline representation of the data
-            m_spline_vx_builder(
-                    spline_coef,
-                    allfdistribu[isp][ix],
-                    &m_derivs_vxmin,
-                    &m_derivs_vxmax);
-
-            // evaluate the function at the feet using the spline
-            m_spline_vx_evaluator(allfdistribu[isp][ix], feet_coords.cview(), spline_coef.cview());
+            interpolator_vx(allfdistribu[isp][ix], feet_coords.cview());
         }
     }
 

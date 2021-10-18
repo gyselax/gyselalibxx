@@ -14,6 +14,8 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "bsl_advection_vx.hpp"
+#include "bsl_advection_x.hpp"
 #include "fftpoissonsolver.hpp"
 #include "fftw.hpp"
 #include "geometry.hpp"
@@ -22,8 +24,8 @@
 #include "predcorr.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
-#include "splineadvectionvx.hpp"
-#include "splineadvectionx.hpp"
+#include "spline_interpolator_vx.hpp"
+#include "spline_interpolator_x.hpp"
 #include "splitvlasovsolver.hpp"
 
 using std::cerr;
@@ -159,14 +161,14 @@ int main(int argc, char** argv)
     SplineEvaluator<BSplinesX>
             spline_x_evaluator(bsplines_x, NullBoundaryValue::value, NullBoundaryValue::value);
 
-    SplineAdvectionX const advection_x(species_info, builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolatorX spline_x_interpolator(builder_x, spline_x_evaluator);
 
-    SplineAdvectionVx const advection_vx(
-            species_info,
-            builder_x,
-            spline_x_evaluator,
-            builder_vx,
-            spline_vx_evaluator);
+    PreallocatableSplineInterpolatorVx spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+
+    BslAdvectionX const advection_x(species_info, spline_x_interpolator);
+
+    BslAdvectionVx const
+            advection_vx(species_info, builder_x, spline_x_evaluator, spline_vx_interpolator);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 

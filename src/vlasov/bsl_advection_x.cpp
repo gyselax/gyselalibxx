@@ -1,39 +1,22 @@
 #include <cassert>
-#include <iosfwd>
-
-#include <experimental/mdspan>
-
-#include <ddc/BlockSpan>
-#include <ddc/ProductMDomain>
-#include <ddc/RCoord>
-#include <ddc/TaggedVector>
-
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_evaluator.hpp>
 
 #include <species_info.hpp>
 
-#include "splineadvectionx.hpp"
-
-class BoundaryValue;
+#include "bsl_advection_x.hpp"
+#include "i_interpolator_x.hpp"
 
 using namespace std;
-using namespace std::experimental;
 
-SplineAdvectionX::SplineAdvectionX(
+BslAdvectionX::BslAdvectionX(
         SpeciesInformation const& species_info,
-        SplineXBuilder const& spline_x_builder,
-        SplineEvaluator<BSplinesX> const& spline_x_evaluator)
-    : m_spline_x_builder(spline_x_builder)
-    , m_spline_x_evaluator(spline_x_evaluator)
+        IPreallocatableInterpolatorX const& interpolator)
+    : m_interpolator(interpolator)
     , m_species_info(species_info)
 {
 }
 
-DSpanSpXVx SplineAdvectionX::operator()(DSpanSpXVx allfdistribu, double dt) const
+DSpanSpXVx BslAdvectionX::operator()(DSpanSpXVx allfdistribu, double dt) const
 {
-    assert(get_domain<MeshX>(allfdistribu) == m_spline_x_builder.interpolation_domain());
-
     const MDomainX& x_dom = get_domain<MeshX>(allfdistribu);
     const MDomainVx& v_dom = get_domain<MeshVx>(allfdistribu);
     const MDomainSp& sp_dom = get_domain<MeshSp>(allfdistribu);
@@ -41,9 +24,7 @@ DSpanSpXVx SplineAdvectionX::operator()(DSpanSpXVx allfdistribu, double dt) cons
     // pre-allocate some memory to prevent allocation later in loop
     DBlockX feet_coords(x_dom);
     DBlockX contiguous_slice(x_dom);
-
-    // Construct a domain over the bounded basis and allocate memory on this support
-    Block<double, BSDomainX> spline_coef(m_spline_x_builder.spline_domain());
+    InterpolatorXProxy interpolator = m_interpolator.preallocate();
 
     for (MCoordSp isp : sp_dom) {
         const double sqrt_me_on_mspecies = std::sqrt(
@@ -61,11 +42,8 @@ DSpanSpXVx SplineAdvectionX::operator()(DSpanSpXVx allfdistribu, double dt) cons
             // copy the slice in contiguous memory
             deepcopy(contiguous_slice, allfdistribu[isp][iv]);
 
-            // build a spline representation of the data
-            m_spline_x_builder(spline_coef, contiguous_slice);
-
-            // evaluate the function at the feet using the spline
-            m_spline_x_evaluator(contiguous_slice.view(), feet_coords.cview(), spline_coef.cview());
+            // interpolate the function at the feet using the provided interpolator
+            interpolator(contiguous_slice, feet_coords);
 
             // copy back
             deepcopy(allfdistribu[isp][iv], contiguous_slice);

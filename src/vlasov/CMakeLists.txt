@@ -1,8 +1,10 @@
 add_library(vlasov STATIC
+	bsl_advection_x.cpp
+	bsl_advection_vx.cpp
 	nulladvectionvx.cpp
-	splineadvectionx.cpp
-	splineadvectionvx.cpp
 	splitvlasovsolver.cpp
+	spline_interpolator_x.cpp
+	spline_interpolator_vx.cpp
 )
 
 target_compile_features(vlasov
