@@ -45,7 +45,7 @@ inline constexpr ElementType& get(detail::TaggedVector<ElementType, Tags...>& tu
 }
 
 template <class QueryTag, class ElementType, class... Tags>
-inline constexpr ElementType get_or(
+inline constexpr ElementType const& get_or(
         detail::TaggedVector<ElementType, Tags...> const& tuple,
         ElementType const& default_value) noexcept
 {
@@ -249,7 +249,7 @@ public:
     }
 
     template <class QueryTag>
-    ElementType get_or(ElementType const& default_value) const
+    ElementType const& get_or(ElementType const& default_value) const&
     {
         if constexpr (in_tags_v<QueryTag, tags_seq>) {
             return m_values[type_seq_rank_v<QueryTag, tags_seq>];
