@@ -1,9 +1,8 @@
 #include <cmath>
 #include <iostream>
 
-#include <ddc/BlockSpan>
-#include <ddc/ProductMDomain>
-#include <ddc/TaggedVector>
+#include <ddc/ChunkSpan>
+#include <ddc/DiscreteDomain>
 #include <ddc/pdi.hpp>
 
 #include <ipoissonsolver.hpp>
@@ -24,10 +23,10 @@ PredCorr::PredCorr(
 void PredCorr::operator()(DSpanSpXVx allfdistribu, int steps) const
 {
     // efield only depends on DX
-    DBlockX electric_potential(allfdistribu.domain<MeshX>());
+    DFieldX electric_potential(allfdistribu.domain<IDimX>());
 
-    // a 2D block of the same size as fdistribu
-    DBlockSpXVx allfdistribu_half_t(allfdistribu.domain());
+    // a 2D chunck of the same size as fdistribu
+    DFieldSpXVx allfdistribu_half_t(allfdistribu.domain());
 
     m_poisson_solver(electric_potential, allfdistribu);
 

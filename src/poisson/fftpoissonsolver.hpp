@@ -12,9 +12,9 @@ class SpeciesInformation;
 
 class FftPoissonSolver : public IPoissonSolver
 {
-    IFourierTransform<Dim::X> const& m_fft;
+    IFourierTransform<RDimX> const& m_fft;
 
-    IInverseFourierTransform<Dim::X> const& m_ifft;
+    IInverseFourierTransform<RDimX> const& m_ifft;
 
     SplineVxBuilder const& m_spline_vx_builder;
 
@@ -33,8 +33,8 @@ class FftPoissonSolver : public IPoissonSolver
 public:
     FftPoissonSolver(
             SpeciesInformation const& species_info,
-            IFourierTransform<Dim::X> const& fft,
-            IInverseFourierTransform<Dim::X> const& ifft,
+            IFourierTransform<RDimX> const& fft,
+            IInverseFourierTransform<RDimX> const& ifft,
             SplineVxBuilder const& spline_vx_builder,
             SplineEvaluator<BSplinesVx> const& spline_vx_evaluator);
 

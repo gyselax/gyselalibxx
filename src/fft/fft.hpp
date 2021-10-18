@@ -3,8 +3,8 @@
 #include <complex>
 #include <vector>
 
-#include <ddc/BlockSpan>
-#include <ddc/NonUniformMesh>
+#include <ddc/ChunkSpan>
+#include <ddc/NonUniformDiscretization>
 
 #include <geometry.hpp>
 
@@ -24,28 +24,28 @@ public:
 
     IFourierTransform& operator=(IFourierTransform&& x) = default;
 
-    virtual NonUniformMesh<Fourier<Tag>> compute_fourier_domain(
-            ProductMDomain<UniformMesh<Tag>> const& dom_x) const noexcept = 0;
+    virtual NonUniformDiscretization<Fourier<Tag>> compute_fourier_domain(
+            DiscreteDomain<UniformDiscretization<Tag>> const& dom_x) const noexcept = 0;
 
     // Perform FFT where the input is a real and the output is a complex
     virtual void operator()(
-            BlockSpan<
+            ChunkSpan<
                     std::complex<double>,
-                    ProductMDomain<NonUniformMesh<Fourier<Tag>>>,
+                    DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
                     std::experimental::layout_right> const& out_values,
-            BlockSpan<
+            ChunkSpan<
                     double,
-                    ProductMDomain<UniformMesh<Tag>>,
+                    DiscreteDomain<UniformDiscretization<Tag>>,
                     std::experimental::layout_right> const& in_values) const noexcept = 0;
 
     // Perform FFT where the input is a complex and output is a compleax
     virtual void operator()(
-            BlockSpan<
+            ChunkSpan<
                     std::complex<double>,
-                    ProductMDomain<NonUniformMesh<Fourier<Tag>>>,
+                    DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
                     std::experimental::layout_right> const& out_values,
-            BlockSpan<
+            ChunkSpan<
                     std::complex<double>,
-                    ProductMDomain<UniformMesh<Tag>>,
+                    DiscreteDomain<UniformDiscretization<Tag>>,
                     std::experimental::layout_right> const& in_values) const noexcept = 0;
 };

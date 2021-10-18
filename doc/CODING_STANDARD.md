@@ -13,32 +13,33 @@
 * If there is a single out/inout-parameter, we return it
 * For in-parameters (those we use but don't modify)
   - if it's a scalar native type (int, double, ...) we take it by copy
-  - if it's a view type (`std::span<const T>`, `BlockView<const T>`, ...) we take it by copy
+  - if it's a const view type (`std::span<const T>`, `BlockView<T>`, ...) we take it by copy
   - otherwise, we take a cont-ref: `Type const&`
 * for out/inout-parameters
-  - if it's a view type (`std::span<T>`, `BlockView<T>`, ...) we take it by copy
+  - if it's a modifiable view type (`std::span<T>`, `BlockSpan<T>`, ...) we take it by copy
   - otherwise, we take a ref: `Type&`
 
 # Naming
-* type names *must* use CamelCase
-* constant & macro names *must* be ALL_CAPS
-* function and variables names *must* use snake_case
-* non-static member variables names *should* begin with an `m_` prefix
-* static member variables names *should* begin with an `s_` prefix
+* we name everything using expressive English names (e.g. `temperature`) and don't use variable
+  names from the equations (e.g. `u`, `u_bar_star`)
+* files, functions and variables use `snake_case`
+* types use `CamelCase`
+* macros use `ALL_CAPS`
+* non-static member variables names begin with an `m_` prefix
+* static member variables names begin with an `s_` prefix
 * we don't use single letter variables
 * we don't rely on case to distinguish between variables
-* we name variables with expressive English names (e.g. temperature)
-* we don't use variable name conventions from math/physics (u)
 
 # Style
-* We *must* apply the style specified by the `.clang-format` file using clang-format 10
-* we *must not* use numerical values in the code except to initialize a named constexpr documenting
+* We use the style specified by the `.clang-format` file using clang-format 10
+* we do not use numerical values in the code except to initialize a named constexpr documenting
   the semantic of the value
 * In a class
   - we put all member types first (public, then protected, then private),
-  - then all member variables (public, then protected, then private),
-  - then all static member functions (public, then protected, then private),
-  - then all non-static member functions (public, then protected, then private),
+  - followed by static member variables (public, then protected, then private),
+  - followed by non-static member variables (public, then protected, then private),
+  - followed by static member functions (public, then protected, then private),
+  - followed by non-static member functions (public, then protected, then private),
     * the constructors first
     * then the destructor
     * then the various operators
@@ -46,4 +47,4 @@
     * then the more complex functions
 * We comment our code with Doxygen
 * We use at @keywords in Doxygen
-* we use east-const (yoda-const): `int const` rather than `const int`
+* we use east-const: `int const` rather than `const int`

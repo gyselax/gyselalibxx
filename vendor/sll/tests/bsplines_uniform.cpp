@@ -4,10 +4,9 @@
 
 #include <experimental/mdspan>
 
-#include <ddc/MCoord>
-#include <ddc/RCoord>
-#include <ddc/TaggedVector>
-#include <ddc/UniformMesh>
+#include <ddc/Coordinate>
+#include <ddc/DiscreteCoordinate>
+#include <ddc/UniformDiscretization>
 
 #include <sll/bsplines_uniform.hpp>
 #include <sll/deprecated/bsplines_uniform.hpp>
@@ -19,17 +18,17 @@ struct DimX
 {
     static constexpr bool PERIODIC = true;
 };
-using MeshX = UniformMesh<DimX>;
-using RCoordX = RCoord<DimX>;
-using MCoordX = MCoord<MeshX>;
+using IDimX = UniformDiscretization<DimX>;
+using CoordX = Coordinate<DimX>;
+using IndexX = DiscreteCoordinate<IDimX>;
 
 class BSplinesUniformTest : public ::testing::Test
 {
 protected:
     static constexpr std::size_t spline_degree = 2;
     static constexpr std::size_t ncells = 100;
-    static constexpr RCoordX xmin = RCoordX(0.);
-    static constexpr RCoordX xmax = RCoordX(2.);
+    static constexpr CoordX xmin = CoordX(0.);
+    static constexpr CoordX xmax = CoordX(2.);
     UniformBSplines<DimX, spline_degree> const bsplines {xmin, xmax, ncells};
     deprecated::UniformBSplines const
             old_bsplines {spline_degree, DimX::PERIODIC, xmin, xmax, ncells};

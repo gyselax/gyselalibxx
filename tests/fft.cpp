@@ -19,23 +19,23 @@ double compute_deriv_f(const double xpts)
 // Check the computation of the wave vector when the number of points is even
 TEST(FFT, DomainEven)
 {
-    FftwFourierTransform<Dim::X> fft;
+    FftwFourierTransform<RDimX> fft;
 
     constexpr std::size_t N = 10;
 
-    MeshX mesh_x(RCoordX(0.), RCoordX(20. / N));
-    ProductMDomain<MeshX> domx(mesh_x, MCoordX(0), MLengthX(N));
+    IDimX mesh_x(CoordX(0.), CoordX(20. / N));
+    DiscreteDomain<IDimX> domx(mesh_x, IndexX(0), IVectX(N));
     auto meshfx = fft.compute_fourier_domain(domx);
 
     //   f = [0, 1, ...,   n/2, -n/2+1, ..., -1] / (d*n)   if n is even
     std::array<double, N> expected_freqs {0., 1., 2., 3., 4., 5., -4., -3., -2., -1.};
     for (auto& f : expected_freqs) {
-        f /= domx.size() * domx.mesh<MeshX>().step();
+        f /= domx.size() * domx.mesh<IDimX>().step();
     }
 
     constexpr double tol = 2.e-16;
     for (std::size_t i = 0; i < meshfx.size(); ++i) {
-        EXPECT_LT(std::fabs(meshfx.to_real(MCoordFx(i)) - expected_freqs[i]), tol);
+        EXPECT_LT(std::fabs(meshfx.to_real(IndexFx(i)) - expected_freqs[i]), tol);
     }
 }
 
@@ -43,23 +43,23 @@ TEST(FFT, DomainEven)
 // Check the computation of the wave vector when the number of points is odd
 TEST(FFT, DomainOdd)
 {
-    FftwFourierTransform<Dim::X> fft;
+    FftwFourierTransform<RDimX> fft;
 
     constexpr std::size_t N = 9;
 
-    MeshX mesh_x(RCoordX(0.), RCoordX(20. / N));
-    ProductMDomain<MeshX> domx(mesh_x, MCoordX(0), MLengthX(N));
+    IDimX mesh_x(CoordX(0.), CoordX(20. / N));
+    DiscreteDomain<IDimX> domx(mesh_x, IndexX(0), IVectX(N));
     auto meshfx = fft.compute_fourier_domain(domx);
 
     //   f = [0, 1, ..., (n-1)/2, -n/2, ..., -1] / (d*n)   if n is odd
     std::array<double, N> expected_freqs {0., 1., 2., 3., 4., -4., -3., -2., -1.};
     for (auto& f : expected_freqs) {
-        f /= domx.size() * domx.mesh<MeshX>().step();
+        f /= domx.size() * domx.mesh<IDimX>().step();
     }
 
     constexpr double tol = 2.e-16;
     for (std::size_t i = 0; i < meshfx.size(); ++i) {
-        EXPECT_LT(std::fabs(meshfx.to_real(MCoordFx(i)) - expected_freqs[i]), tol);
+        EXPECT_LT(std::fabs(meshfx.to_real(IndexFx(i)) - expected_freqs[i]), tol);
     }
 }
 
@@ -70,25 +70,25 @@ TEST(FFT, Identity_UsingReal)
 {
     // Construct a 1D mesh
     constexpr std::size_t N = 32;
-    MeshX mesh_x(RCoordX(0.), RCoordX((2. * M_PI) / N));
-    ProductMDomain<MeshX> domx(mesh_x, MCoordX(0), MLengthX(N));
+    IDimX mesh_x(CoordX(0.), CoordX((2. * M_PI) / N));
+    DiscreteDomain<IDimX> domx(mesh_x, IndexX(0), IVectX(N));
 
     // Compute f(x) on the mesh mesh_x
-    BlockX<double> values(domx);
+    FieldX<double> values(domx);
     for (auto i : domx) {
         values(i) = compute_f(domx.to_real(i));
     }
 
     // Compute FFT(f(x))
-    FftwFourierTransform<Dim::X> fft;
+    FftwFourierTransform<RDimX> fft;
     auto meshfx = fft.compute_fourier_domain(domx);
-    ProductMDomain<typeof(meshfx)> domfx(meshfx, MLengthFx(meshfx.size()));
-    Block<std::complex<double>, MDomainFx> fft_values(domfx);
+    DiscreteDomain<typeof(meshfx)> domfx(meshfx, IVectFx(meshfx.size()));
+    Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
     fft(fft_values, values);
 
     // Compute IFFT(FFT(f(x))) and check if it is equivalent to f(x)
-    FftwInverseFourierTransform<Dim::X> ifft;
-    BlockX<double> ifft_fft_values(domx);
+    FftwInverseFourierTransform<RDimX> ifft;
+    FieldX<double> ifft_fft_values(domx);
     ifft(ifft_fft_values, fft_values);
 
     double max_error = 0.;
@@ -109,26 +109,26 @@ TEST(FFT, Identity_UsingComplex)
 {
     // Construct a 1D mesh
     constexpr std::size_t N = 32;
-    MeshX mesh_x(RCoordX(0.), RCoordX((2. * M_PI) / N));
-    ProductMDomain<MeshX> domx(mesh_x, MCoordX(0), MLengthX(N));
+    IDimX mesh_x(CoordX(0.), CoordX((2. * M_PI) / N));
+    DiscreteDomain<IDimX> domx(mesh_x, IndexX(0), IVectX(N));
 
     // Compute f(x) on the mesh mesh_x
-    BlockX<std::complex<double>> values(domx);
+    FieldX<std::complex<double>> values(domx);
     std::cout << domx.size() << std::endl;
     for (auto i : domx) {
         values(i) = compute_f(domx.to_real(i));
     }
 
     // Compute FFT(f(x))
-    FftwFourierTransform<Dim::X> fft;
+    FftwFourierTransform<RDimX> fft;
     auto meshfx = fft.compute_fourier_domain(domx);
-    ProductMDomain<typeof(meshfx)> domfx(meshfx, MLengthFx(meshfx.size()));
-    Block<std::complex<double>, MDomainFx> fft_values(domfx);
+    DiscreteDomain<typeof(meshfx)> domfx(meshfx, IVectFx(meshfx.size()));
+    Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
     fft(fft_values, values);
 
     // Compute IFFT(FFT(f(x))) and check if it is equivalent to f(x)
-    BlockX<std::complex<double>> ifft_fft_values(domx);
-    FftwInverseFourierTransform<Dim::X> ifft;
+    FieldX<std::complex<double>> ifft_fft_values(domx);
+    FftwInverseFourierTransform<RDimX> ifft;
     ifft(ifft_fft_values, fft_values);
 
     double max_error = 0.;
@@ -149,30 +149,30 @@ TEST(FFT, FirstDerivative)
 {
     // Construct a 1D mesh
     constexpr std::size_t N = 32;
-    MeshX mesh_x(RCoordX(0.), RCoordX((2. * M_PI) / N));
-    ProductMDomain<MeshX> domx(mesh_x, MCoordX(0), MLengthX(N));
+    IDimX mesh_x(CoordX(0.), CoordX((2. * M_PI) / N));
+    DiscreteDomain<IDimX> domx(mesh_x, IndexX(0), IVectX(N));
 
     // Compute f(x) on the mesh mesh_x
-    BlockX<double> values(domx);
+    FieldX<double> values(domx);
     for (auto i : domx) {
         values(i) = compute_f(domx.to_real(i));
     }
 
     // Compute df(x)/dx on the mesh mesh_x
-    BlockX<double> firstderiv_values(domx);
+    FieldX<double> firstderiv_values(domx);
     for (auto i : domx) {
         firstderiv_values(i) = compute_deriv_f(domx.to_real(i));
     }
 
     // Compute FFT(f(x))
-    FftwFourierTransform<Dim::X> fft;
+    FftwFourierTransform<RDimX> fft;
     auto meshfx = fft.compute_fourier_domain(domx);
-    ProductMDomain<typeof(meshfx)> domfx(meshfx, MLengthFx(meshfx.size()));
-    Block<std::complex<double>, MDomainFx> fft_values(domfx);
+    DiscreteDomain<typeof(meshfx)> domfx(meshfx, IVectFx(meshfx.size()));
+    Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
     fft(fft_values, values);
 
     // Compute i*kx*FFT(f(x))
-    Block<std::complex<double>, MDomainFx> ikx_fft_values(domfx);
+    Chunk<std::complex<double>, IDomainFx> ikx_fft_values(domfx);
     ikx_fft_values(domfx.front()) = 0.;
     for (auto it_freq = domfx.cbegin() + 1; it_freq != domfx.cend(); ++it_freq) {
         double const kx = 2. * M_PI * meshfx.to_real(*it_freq);
@@ -180,8 +180,8 @@ TEST(FFT, FirstDerivative)
     }
 
     // Compute IFFT(i*kx*FFT(f(x))) and check if it is equivalent to df/dx
-    FftwInverseFourierTransform<Dim::X> ifft;
-    BlockX<double> firstderiv_values_computed(domx);
+    FftwInverseFourierTransform<RDimX> ifft;
+    FieldX<double> firstderiv_values_computed(domx);
     ifft(firstderiv_values_computed, ikx_fft_values);
 
     double max_error = 0.;
@@ -202,30 +202,30 @@ TEST(FFT, FirstDerivative)
 // position.
 TEST(FFT, Simple)
 {
-    FftwFourierTransform<Dim::X> fft;
+    FftwFourierTransform<RDimX> fft;
 
     constexpr double T = 5.3;
     constexpr double f = 1.0 / T;
     constexpr std::size_t M = 2;
     constexpr std::size_t N = 50;
 
-    MeshX mesh_x(RCoordX(0.), RCoordX(M * T / N));
-    ProductMDomain<MeshX> domx(mesh_x, MCoordX(0), MLengthX(N));
-    MeshFx meshfx = fft.compute_fourier_domain(domx);
-    ProductMDomain<MeshFx> domfx(meshfx, MLengthFx(meshfx.size()));
+    IDimX mesh_x(CoordX(0.), CoordX(M * T / N));
+    DiscreteDomain<IDimX> domx(mesh_x, IndexX(0), IVectX(N));
+    IDimFx meshfx = fft.compute_fourier_domain(domx);
+    DiscreteDomain<IDimFx> domfx(meshfx, IVectFx(meshfx.size()));
 
-    BlockX<std::complex<double>> values(domx);
+    FieldX<std::complex<double>> values(domx);
     for (auto i : domx) {
         values(i) = std::cos(2. * M_PI * f * domx.to_real(i));
     }
 
-    Block<std::complex<double>, MDomainFx> fft_values(domfx);
+    Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
     fft(fft_values, values);
 
     constexpr double tol = 1.0e-13;
     for (std::size_t i = 0; i < domfx.size(); ++i) {
         if ((i != M) && (i != domfx.size() - M)) {
-            EXPECT_LE(std::fabs(fft_values(MCoordFx(i))), tol);
+            EXPECT_LE(std::fabs(fft_values(IndexFx(i))), tol);
         }
     }
 }

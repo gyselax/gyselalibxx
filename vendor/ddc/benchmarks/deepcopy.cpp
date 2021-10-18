@@ -5,45 +5,48 @@
 #include <iosfwd>
 #include <vector>
 
-#include <ddc/BlockSpan>
-#include <ddc/MCoord>
-#include <ddc/ProductMDomain>
-#include <ddc/RCoord>
-#include <ddc/TaggedVector>
-#include <ddc/UniformMesh>
+#include <ddc/ChunkSpan>
+#include <ddc/Coordinate>
+#include <ddc/DiscreteCoordinate>
+#include <ddc/DiscreteDomain>
+#include <ddc/UniformDiscretization>
 
 #include <benchmark/benchmark.h>
 
+namespace {
+
 class DimX;
-class DimVx;
+class DimY;
 
-using MeshX = UniformMesh<DimX>;
-using MDomainX = ProductMDomain<MeshX>;
-using DBlockX = Block<double, MDomainX>;
-using DBlockSpanX = BlockSpan<double, MDomainX>;
-using MCoordX = MCoord<MeshX>;
-using RCoordX = RCoord<DimX>;
+using DDimX = UniformDiscretization<DimX>;
+using IDomainX = DiscreteDomain<DDimX>;
+using DChunkX = Chunk<double, IDomainX>;
+using DChunkSpanX = ChunkSpan<double, IDomainX>;
+using IndexX = DiscreteCoordinate<DDimX>;
+using CoordX = Coordinate<DimX>;
 
-using MeshVx = UniformMesh<DimVx>;
-using MDomainVx = ProductMDomain<MeshVx>;
-using DBlockVx = Block<double, MDomainVx>;
-using DBlockSpanVx = BlockSpan<double, MDomainVx>;
-using MCoordVx = MCoord<MeshVx>;
-using MLengthVx = MLength<MeshVx>;
-using RCoordVx = RCoord<DimVx>;
+using DDimY = UniformDiscretization<DimY>;
+using MDomainY = DiscreteDomain<DDimY>;
+using DChunkY = Chunk<double, MDomainY>;
+using DChunkSpanY = ChunkSpan<double, MDomainY>;
+using MCoordY = DiscreteCoordinate<DDimY>;
+using MLengthY = DiscreteVector<DDimY>;
+using RCoordY = Coordinate<DimY>;
 
-using MDomainSpXVx = ProductMDomain<MeshX, MeshVx>;
-using DBlockSpXVx = Block<double, MDomainSpXVx>;
-using DBlockSpanXVx = BlockSpan<double, MDomainSpXVx>;
-using MCoordXVx = MCoord<MeshX, MeshVx>;
-using MLengthXVx = MLength<MeshX, MeshVx>;
-using RCoordXVx = RCoord<DimX, DimVx>;
+using MDomainSpXY = DiscreteDomain<DDimX, DDimY>;
+using DChunkSpXY = Chunk<double, MDomainSpXY>;
+using DChunkSpanXY = ChunkSpan<double, MDomainSpXY>;
+using MCoordXY = DiscreteCoordinate<DDimX, DDimY>;
+using MLengthXY = DiscreteVector<DDimX, DDimY>;
+using RCoordXY = Coordinate<DimX, DimY>;
 
-using MDomainVxX = ProductMDomain<MeshVx, MeshX>;
-using DBlockVxX = Block<double, MDomainVxX>;
-using DBlockSpanVxX = BlockSpan<double, MDomainVxX>;
-using MCoordVxX = MCoord<MeshVx, MeshX>;
-using RCoordVxX = RCoord<DimVx, DimX>;
+using MDomainYX = DiscreteDomain<DDimY, DDimX>;
+using DChunkYX = Chunk<double, MDomainYX>;
+using DChunkSpanYX = ChunkSpan<double, MDomainYX>;
+using MCoordYX = DiscreteCoordinate<DDimY, DDimX>;
+using RCoordYX = Coordinate<DimY, DimX>;
+
+} // namespace
 
 static void memcpy_1d(benchmark::State& state)
 {
@@ -59,10 +62,10 @@ static void deepcopy_1d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0), 0.0);
     std::vector<double> dst_data(state.range(0), -1.0);
-    MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(0));
-    MDomainVx const dom(mesh_vx, MLengthVx(state.range(0)));
-    DBlockSpanVx src(src_data.data(), dom);
-    DBlockSpanVx dst(dst_data.data(), dom);
+    DDimY ddim_y(RCoordY(0.), RCoordY(2.), state.range(0));
+    MDomainY const dom(ddim_y, MLengthY(state.range(0)));
+    DChunkSpanY src(src_data.data(), dom);
+    DChunkSpanY dst(dst_data.data(), dom);
     for (auto _ : state) {
         deepcopy(dst, src);
     }
@@ -90,11 +93,11 @@ static void deepcopy_2d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0) * state.range(1), 0.0);
     std::vector<double> dst_data(state.range(0) * state.range(1), -1.0);
-    MeshX mesh_x(RCoordX(0.), RCoordX(2.), state.range(0));
-    MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(1));
-    MDomainSpXVx const dom(mesh_x, mesh_vx, MLengthXVx(state.range(0) - 1, state.range(1) - 1));
-    DBlockSpanXVx src(src_data.data(), dom);
-    DBlockSpanXVx dst(dst_data.data(), dom);
+    DDimX ddim_x(CoordX(0.), CoordX(2.), state.range(0));
+    DDimY ddim_y(RCoordY(0.), RCoordY(2.), state.range(1));
+    MDomainSpXY const dom(ddim_x, ddim_y, MLengthXY(state.range(0) - 1, state.range(1) - 1));
+    DChunkSpanXY src(src_data.data(), dom);
+    DChunkSpanXY dst(dst_data.data(), dom);
     for (auto _ : state) {
         deepcopy(dst, src);
     }
@@ -103,17 +106,17 @@ static void deepcopy_2d(benchmark::State& state)
             * int64_t(state.range(0) * state.range(1) * sizeof(double)));
 }
 
-static void deepcopy_subblock_2d(benchmark::State& state)
+static void deepcopy_subchunck_2d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0) * state.range(1), 0.0);
     std::vector<double> dst_data(state.range(0) * state.range(1), -1.0);
-    MeshX mesh_x(RCoordX(0.), RCoordX(2.), state.range(0));
-    MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.), state.range(1));
-    MDomainSpXVx const dom(mesh_x, mesh_vx, MLengthXVx(state.range(0) - 1, state.range(1) - 1));
-    DBlockSpanXVx src(src_data.data(), dom);
-    DBlockSpanXVx dst(dst_data.data(), dom);
+    DDimX ddim_x(CoordX(0.), CoordX(2.), state.range(0));
+    DDimY ddim_y(RCoordY(0.), RCoordY(2.), state.range(1));
+    MDomainSpXY const dom(ddim_x, ddim_y, MLengthXY(state.range(0) - 1, state.range(1) - 1));
+    DChunkSpanXY src(src_data.data(), dom);
+    DChunkSpanXY dst(dst_data.data(), dom);
     for (auto _ : state) {
-        for (MCoordX i : select<MeshX>(dom)) {
+        for (IndexX i : select<DDimX>(dom)) {
             auto&& dst_i = dst[i];
             auto&& src_i = src[i];
             deepcopy(dst_i, src_i);
@@ -143,9 +146,9 @@ BENCHMARK(deepcopy_1d)->Arg(large_dim1_1D);
 
 // 2D
 BENCHMARK(memcpy_2d)->Args({small_dim1_2D, small_dim2_2D});
-BENCHMARK(deepcopy_subblock_2d)->Args({small_dim1_2D, small_dim2_2D});
+BENCHMARK(deepcopy_subchunck_2d)->Args({small_dim1_2D, small_dim2_2D});
 BENCHMARK(memcpy_2d)->Args({large_dim1_2D, large_dim2_2D});
 BENCHMARK(deepcopy_2d)->Args({large_dim1_2D, large_dim2_2D});
-BENCHMARK(deepcopy_subblock_2d)->Args({large_dim1_2D, large_dim2_2D});
+BENCHMARK(deepcopy_subchunck_2d)->Args({large_dim1_2D, large_dim2_2D});
 
 BENCHMARK_MAIN();

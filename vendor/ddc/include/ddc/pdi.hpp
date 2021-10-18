@@ -5,26 +5,26 @@
 
 #include <pdi.h>
 
-#include "ddc/block_span.hpp"
+#include "ddc/chunck_span.hpp"
 
 template <class ElementType>
 static constexpr PDI_inout_t default_access_v = std::is_const_v<ElementType> ? PDI_OUT : PDI_INOUT;
 
 template <class ElementType, class SupportType, class LayoutStridedPolicy>
-static constexpr PDI_inout_t default_access_v<BlockSpan<
+static constexpr PDI_inout_t default_access_v<ChunkSpan<
         ElementType,
         SupportType,
         LayoutStridedPolicy> const&> = default_access_v<ElementType>;
 
 template <class ElementType>
-static constexpr bool is_blockspan_v = false;
+static constexpr bool is_chunckspan_v = false;
 
 template <class ElementType, class SupportType, class LayoutStridedPolicy>
 static constexpr bool
-        is_blockspan_v<BlockSpan<ElementType, SupportType, LayoutStridedPolicy>> = true;
+        is_chunckspan_v<ChunkSpan<ElementType, SupportType, LayoutStridedPolicy>> = true;
 
 template <class ElementType, class SupportType>
-static constexpr bool is_blockspan_v<Block<ElementType, SupportType>> = true;
+static constexpr bool is_chunckspan_v<Chunk<ElementType, SupportType>> = true;
 
 class PdiEvent
 {
@@ -38,7 +38,7 @@ public:
     template <PDI_inout_t access, class ElementType, class SupportType, class LayoutStridedPolicy>
     PdiEvent& with(
             std::string const& name,
-            BlockSpan<ElementType, SupportType, LayoutStridedPolicy> const& data)
+            ChunkSpan<ElementType, SupportType, LayoutStridedPolicy> const& data)
     {
         static_assert(
                 !(access & PDI_IN) || !std::is_const_v<ElementType>,
@@ -49,7 +49,7 @@ public:
         m_names.push_back(name + "_rank");
         PDI_share(
                 (name + "_extents").c_str(),
-                const_cast<MLengthElement*>(extents.data()),
+                const_cast<DiscreteVectorElement*>(extents.data()),
                 PDI_OUT);
         m_names.push_back(name + "_extents");
         PDI_share(name.c_str(), const_cast<std::remove_const_t<ElementType>*>(data.data()), access);
@@ -59,7 +59,7 @@ public:
 
     template <PDI_inout_t access, class ElementType>
     std::enable_if_t<
-            !is_blockspan_v<std::remove_cv_t<std::remove_reference_t<ElementType>>>,
+            !is_chunckspan_v<std::remove_cv_t<std::remove_reference_t<ElementType>>>,
             PdiEvent>&
     with(std::string const& name, ElementType& data)
     {
@@ -74,7 +74,7 @@ public:
     template <class ElementType, class SupportType, class LayoutStridedPolicy>
     PdiEvent& with(
             std::string const& name,
-            BlockSpan<ElementType, SupportType, LayoutStridedPolicy> const& data)
+            ChunkSpan<ElementType, SupportType, LayoutStridedPolicy> const& data)
     {
         return with<default_access_v<ElementType>>(name, data);
     }

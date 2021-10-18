@@ -1,15 +1,15 @@
-#include <ddc/Block>
-#include <ddc/MCoord>
+#include <ddc/Chunk>
+#include <ddc/DiscreteCoordinate>
+#include <ddc/DiscreteDomain>
 #include <ddc/PdiEvent>
-#include <ddc/ProductMDomain>
-#include <ddc/UniformMesh>
+#include <ddc/UniformDiscretization>
 
 // Name of the axis
 struct X;
 struct Y;
 
-using MeshX = UniformMesh<X>;
-using MeshY = UniformMesh<Y>;
+using DDimX = UniformDiscretization<X>;
+using DDimY = UniformDiscretization<Y>;
 
 static int nt = 10;
 static int nx = 100;
@@ -44,61 +44,64 @@ int main(int argc, char** argv)
 {
     //! [mesh]
     // Origin on X
-    RCoord<X> min_x(-1.);
+    Coordinate<X> min_x(-1.);
 
     // Sampling step on X
-    RCoord<X> dx(0.02);
+    Coordinate<X> dx(0.02);
 
     // Actual mesh on X
-    MeshX mesh_x(min_x, dx);
+    DDimX ddim_x(min_x, dx);
 
     // Origin on Y
-    RCoord<Y> min_y(-1.);
+    Coordinate<Y> min_y(-1.);
 
     // Sampling step on Y
-    RCoord<Y> dy(0.01);
+    Coordinate<Y> dy(0.01);
 
     // Actual mesh on Y
-    MeshY mesh_y(min_y, dy);
+    DDimY ddim_y(min_y, dy);
 
     // Two-dimensional mesh on X,Y
     //! [mesh]
 
     //! [domain]
     // Take (nx+2gw) x (ny+2gw) points of `mesh_xy` starting from (0,0)
-    ProductMDomain<MeshX, MeshY>
-            domain_xy(mesh_x, mesh_y, MLength<MeshX, MeshY>(nx + 2 * gw, ny + 2 * gw));
+    DiscreteDomain<DDimX, DDimY>
+            domain_xy(ddim_x, ddim_y, DiscreteVector<DDimX, DDimY>(nx + 2 * gw, ny + 2 * gw));
 
     // Take only the inner domain (i.e. without ghost zone)
-    ProductMDomain<MeshX, MeshY>
-            inner_xy(mesh_x, mesh_y, MCoord<MeshX, MeshY>(gw, gw), MLength<MeshX, MeshY>(nx, ny));
+    DiscreteDomain<DDimX, DDimY> inner_xy(
+            ddim_x,
+            ddim_y,
+            DiscreteCoordinate<DDimX, DDimY>(gw, gw),
+            DiscreteVector<DDimX, DDimY>(nx, ny));
     //! [domain]
 
     // Allocate data located at each point of `domain_xy` (including ghost region)
     //! [memory allocation]
-    Block<double, ProductMDomain<MeshX, MeshY>> T_in(domain_xy);
-    Block<double, ProductMDomain<MeshX, MeshY>> T_out(domain_xy);
+    Chunk<double, DiscreteDomain<DDimX, DDimY>> T_in(domain_xy);
+    Chunk<double, DiscreteDomain<DDimX, DDimY>> T_out(domain_xy);
     //! [memory allocation]
 
     //! [subdomains]
     // Ghost borders
-    auto temperature_g_x_left = T_in[MCoord<MeshX>(gw - 1)];
-    auto temperature_g_x_right = T_in[MCoord<MeshX>(nx + 2 * gw - 1)];
-    auto temperature_g_y_left = T_in[MCoord<MeshY>(gw - 1)];
-    auto temperature_g_y_right = T_in[MCoord<MeshY>(ny + 2 * gw - 1)];
+    auto temperature_g_x_left = T_in[DiscreteCoordinate<DDimX>(gw - 1)];
+    auto temperature_g_x_right = T_in[DiscreteCoordinate<DDimX>(nx + 2 * gw - 1)];
+    auto temperature_g_y_left = T_in[DiscreteCoordinate<DDimY>(gw - 1)];
+    auto temperature_g_y_right = T_in[DiscreteCoordinate<DDimY>(ny + 2 * gw - 1)];
 
     // Inner borders
-    auto temperature_i_x_left = T_in[MCoord<MeshX>(gw)];
-    auto temperature_i_x_right = T_in[MCoord<MeshX>(nx + gw)];
-    auto temperature_i_y_left = T_in[MCoord<MeshY>(gw)];
-    auto temperature_i_y_right = T_in[MCoord<MeshY>(ny + gw)];
+    auto temperature_i_x_left = T_in[DiscreteCoordinate<DDimX>(gw)];
+    auto temperature_i_x_right = T_in[DiscreteCoordinate<DDimX>(nx + gw)];
+    auto temperature_i_y_left = T_in[DiscreteCoordinate<DDimY>(gw)];
+    auto temperature_i_y_right = T_in[DiscreteCoordinate<DDimY>(ny + gw)];
     //! [subdomains]
 
     // Initialize the whole domain
-    for (MCoord<MeshX> ix : select<MeshX>(domain_xy)) {
-        double x = mesh_x.to_real(ix);
-        for (MCoord<MeshY> iy : select<MeshY>(domain_xy)) {
-            double y = mesh_y.to_real(iy);
+    for (DiscreteCoordinate<DDimX> ix : select<DDimX>(domain_xy)) {
+        double x = ddim_x.to_real(ix);
+        for (DiscreteCoordinate<DDimY> iy : select<DDimY>(domain_xy)) {
+            double y = ddim_y.to_real(iy);
             T_in(ix, iy) = 0.75 * ((x * x + y * y) < 0.25);
         }
     }
@@ -123,12 +126,12 @@ int main(int argc, char** argv)
         deepcopy(temperature_g_y_right, temperature_i_y_left);
 
         // Stencil computation on inner domain `inner_xy`
-        for (MCoord<MeshX> ix : select<MeshX>(inner_xy)) {
-            const MCoord<MeshX> ixp(ix + 1);
-            const MCoord<MeshX> ixm(ix - 1);
-            for (MCoord<MeshY> iy : select<MeshY>(inner_xy)) {
-                const MCoord<MeshY> iyp(iy + 1);
-                const MCoord<MeshY> iym(iy - 1);
+        for (DiscreteCoordinate<DDimX> ix : select<DDimX>(inner_xy)) {
+            const DiscreteCoordinate<DDimX> ixp(ix + 1);
+            const DiscreteCoordinate<DDimX> ixm(ix - 1);
+            for (DiscreteCoordinate<DDimY> iy : select<DDimY>(inner_xy)) {
+                const DiscreteCoordinate<DDimY> iyp(iy + 1);
+                const DiscreteCoordinate<DDimY> iym(iy - 1);
                 T_out(ix, iy) = T_in(ix, iy);
                 T_out(ix, iy) += Cx * (T_in(ixp, iy) - 2.0 * T_in(ix, iy) + T_in(ixm, iy));
                 T_out(ix, iy) += Cy * (T_in(ix, iyp) - 2.0 * T_in(ix, iy) + T_in(ix, iym));

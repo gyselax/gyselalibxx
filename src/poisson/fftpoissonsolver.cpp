@@ -3,14 +3,13 @@
 #include <complex>
 #include <iostream>
 
-#include <ddc/Block>
-#include <ddc/BlockSpan>
-#include <ddc/MCoord>
-#include <ddc/NonUniformMesh>
-#include <ddc/ProductMDomain>
-#include <ddc/RCoord>
-#include <ddc/TaggedVector>
-#include <ddc/UniformMesh>
+#include <ddc/Chunk>
+#include <ddc/ChunkSpan>
+#include <ddc/Coordinate>
+#include <ddc/DiscreteCoordinate>
+#include <ddc/DiscreteDomain>
+#include <ddc/NonUniformDiscretization>
+#include <ddc/UniformDiscretization>
 
 #include <sll/bsplines_uniform.hpp>
 #include <sll/null_boundary_value.hpp>
@@ -26,8 +25,8 @@ using namespace std::complex_literals;
 
 FftPoissonSolver::FftPoissonSolver(
         SpeciesInformation const& species_info,
-        IFourierTransform<Dim::X> const& fft,
-        IInverseFourierTransform<Dim::X> const& ifft,
+        IFourierTransform<RDimX> const& fft,
+        IInverseFourierTransform<RDimX> const& ifft,
         SplineVxBuilder const& spline_vx_builder,
         SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
     : m_fft(fft)
@@ -46,33 +45,33 @@ FftPoissonSolver::FftPoissonSolver(
 // 2- Should it take an array of distribution functions ?
 DSpanX FftPoissonSolver::operator()(DSpanX electric_potential, DViewSpXVx allfdistribu) const
 {
-    assert(electric_potential.domain() == get_domain<MeshX>(allfdistribu));
-    UniformMDomainX dom_x = electric_potential.domain();
+    assert(electric_potential.domain() == get_domain<IDimX>(allfdistribu));
+    IDomainX dom_x = electric_potential.domain();
 
     // Compute the RHS of the Poisson equation.
-    Block<double, MDomainX> rho(dom_x);
-    DBlockVx contiguous_slice_vx(allfdistribu.domain<MeshVx>());
-    Block<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
-    for (MCoordX ix : rho.domain()) {
+    Chunk<double, IDomainX> rho(dom_x);
+    DFieldVx contiguous_slice_vx(allfdistribu.domain<IDimVx>());
+    Chunk<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
+    for (IndexX ix : rho.domain()) {
         rho(ix) = m_species_info.charge()(m_species_info.ielec());
-        for (MCoordSp isp : get_domain<MeshSp>(allfdistribu)) {
+        for (IndexSp isp : get_domain<IDimSp>(allfdistribu)) {
             deepcopy(contiguous_slice_vx, allfdistribu[isp][ix]);
             m_spline_vx_builder(
-                    vx_spline_coef.view(),
-                    contiguous_slice_vx.cview(),
+                    vx_spline_coef.span_view(),
+                    contiguous_slice_vx.span_cview(),
                     &m_derivs_vxmin,
                     &m_derivs_vxmax);
             rho(ix) += m_species_info.charge()(isp)
-                       * m_spline_vx_evaluator.integrate(vx_spline_coef.cview());
+                       * m_spline_vx_evaluator.integrate(vx_spline_coef.span_cview());
         }
     }
 
     // Build a mesh in the fourier space, for N points
-    MeshFx const mesh_fx = m_fft.compute_fourier_domain(dom_x);
-    MDomainFx const dom_fx(mesh_fx, MLength<MeshFx>(mesh_fx.size()));
+    IDimFx const mesh_fx = m_fft.compute_fourier_domain(dom_x);
+    IDomainFx const dom_fx(mesh_fx, DiscreteVector<IDimFx>(mesh_fx.size()));
 
     // Compute FFT(rho)
-    Block<std::complex<double>, MDomainFx> complex_Phi_fx(dom_fx);
+    Chunk<std::complex<double>, IDomainFx> complex_Phi_fx(dom_fx);
     m_fft(complex_Phi_fx, rho);
 
     // Solve Poisson's equation -d2Phi/dx2 = rho

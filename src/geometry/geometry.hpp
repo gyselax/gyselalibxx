@@ -1,8 +1,8 @@
 #pragma once
 
-#include <ddc/Block>
-#include <ddc/NonUniformMesh>
-#include <ddc/UniformMesh>
+#include <ddc/Chunk>
+#include <ddc/NonUniformDiscretization>
+#include <ddc/UniformDiscretization>
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
@@ -15,62 +15,56 @@ struct Fourier
     static constexpr bool PERIODIC = Tag::PERIODIC;
 };
 
-namespace Dim {
 
-struct X
+
+struct RDimX
 {
     static constexpr bool PERIODIC = true;
 };
 
-struct Vx
+struct RDimVx
 {
     static constexpr bool PERIODIC = false;
 };
 
-struct T
+struct RDimT
 {
     static constexpr bool PERIODIC = false;
 };
 
-using Fx = Fourier<X>;
+using RDimFx = Fourier<RDimX>;
 
-using Fvx = Fourier<Vx>;
 
-} // namespace Dim
 
-using RCoordT = RCoord<Dim::T>;
+using CoordT = Coordinate<RDimT>;
 
-using RCoordX = RCoord<Dim::X>;
+using CoordX = Coordinate<RDimX>;
 
-using RCoordVx = RCoord<Dim::Vx>;
+using CoordVx = Coordinate<RDimVx>;
 
-using RCoordXVx = RCoord<Dim::X, Dim::Vx>;
+using CoordXVx = Coordinate<RDimX, RDimVx>;
 
-using RCoordFx = RCoord<Dim::Fx>;
+using CoordFx = Coordinate<RDimFx>;
 
-using BSplinesX = UniformBSplines<Dim::X, 3>;
 
-using BSDomainX = ProductMDomain<BSplinesX>;
+
+using BSplinesX = UniformBSplines<RDimX, 3>;
+
+using BSplinesVx = UniformBSplines<RDimVx, 3>;
 
 using SplineXBuilder = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>;
-
-using BSplinesVx = UniformBSplines<Dim::Vx, 3>;
-
-using BSDomainVx = ProductMDomain<BSplinesVx>;
+using IDimX = typename SplineXBuilder::interpolation_mesh_type;
 
 using SplineVxBuilder = SplineBuilder<BSplinesVx, BoundCond::HERMITE, BoundCond::HERMITE>;
+using IDimVx = typename SplineVxBuilder::interpolation_mesh_type;
 
-using MeshX = typename SplineXBuilder::interpolation_mesh_type;
-
-using MeshVx = typename SplineVxBuilder::interpolation_mesh_type;
-
-using MeshFx = NonUniformMesh<Dim::Fx>;
+using IDimFx = NonUniformDiscretization<RDimFx>;
 
 // Species dimension
-class MeshSp
+class IDimSp
 {
 public:
-    using mcoord_type = MCoord<MeshSp>;
+    using mcoord_type = DiscreteCoordinate<IDimSp>;
 
     using rdim_type = void;
 
@@ -79,125 +73,142 @@ public:
         return 1;
     }
 
-    constexpr bool operator==(MeshSp const& other) const
+    constexpr bool operator==(IDimSp const& other) const
     {
         return true;
     }
 
-    constexpr bool operator!=(MeshSp const& other) const
+    constexpr bool operator!=(IDimSp const& other) const
     {
         return !(*this == other);
     }
 };
 
-using MCoordX = MCoord<MeshX>;
 
-using MCoordVx = MCoord<MeshVx>;
 
-using MCoordSp = MCoord<MeshSp>;
+using IndexX = DiscreteCoordinate<IDimX>;
 
-using MCoordXVx = MCoord<MeshX, MeshVx>;
+using IndexVx = DiscreteCoordinate<IDimVx>;
 
-using MCoordSpXVx = MCoord<MeshSp, MeshX, MeshVx>;
+using IndexSp = DiscreteCoordinate<IDimSp>;
 
-using MCoordFx = MCoord<MeshFx>;
+using IndexXVx = DiscreteCoordinate<IDimX, IDimVx>;
 
-using MLengthX = MLength<MeshX>;
+using IndexSpXVx = DiscreteCoordinate<IDimSp, IDimX, IDimVx>;
 
-using MLengthVx = MLength<MeshVx>;
+using IndexFx = DiscreteCoordinate<IDimFx>;
 
-using MLengthXVx = MLength<MeshX, MeshVx>;
 
-using MLengthSpXVx = MLength<MeshSp, MeshX, MeshVx>;
 
-using MLengthFx = MLength<MeshFx>;
+using IVectX = DiscreteVector<IDimX>;
 
-using MLengthSp = MLength<MeshSp>;
+using IVectVx = DiscreteVector<IDimVx>;
 
-using UniformMDomainX = ProductMDomain<MeshX>;
+using IVectXVx = DiscreteVector<IDimX, IDimVx>;
 
-using UniformMDomainVx = ProductMDomain<MeshVx>;
+using IVectSpXVx = DiscreteVector<IDimSp, IDimX, IDimVx>;
 
-using UniformMDomainXVx = ProductMDomain<MeshX, MeshVx>;
+using IVectFx = DiscreteVector<IDimFx>;
 
-using MDomainX = UniformMDomainX;
+using IVectSp = DiscreteVector<IDimSp>;
 
-using MDomainVx = UniformMDomainVx;
 
-using MDomainSp = ProductMDomain<MeshSp>;
 
-using MDomainSpVx = ProductMDomain<MeshSp, MeshVx>;
+using BSDomainX = DiscreteDomain<BSplinesX>;
 
-using MDomainSpXVx = ProductMDomain<MeshSp, MeshX, MeshVx>;
+using BSDomainVx = DiscreteDomain<BSplinesVx>;
 
-using MDomainFx = ProductMDomain<MeshFx>;
+using IDomainX = DiscreteDomain<IDimX>;
+
+using IDomainVx = DiscreteDomain<IDimVx>;
+
+using IDomainXVx = DiscreteDomain<IDimX, IDimVx>;
+
+using IDomainSp = DiscreteDomain<IDimSp>;
+
+using IDomainSpVx = DiscreteDomain<IDimSp, IDimVx>;
+
+using IDomainSpXVx = DiscreteDomain<IDimSp, IDimX, IDimVx>;
+
+using IDomainFx = DiscreteDomain<IDimFx>;
+
+
 
 template <class ElementType>
-using SpanX = BlockSpan<ElementType, MDomainX>;
+using FieldX = Chunk<ElementType, IDomainX>;
+
+template <class ElementType>
+using FieldVx = Chunk<ElementType, IDomainVx>;
+
+template <class ElementType>
+using FieldSp = Chunk<ElementType, IDomainSp>;
+
+template <class ElementType>
+using FieldSpVx = Chunk<ElementType, IDomainSpVx>;
+
+template <class ElementType>
+using FieldSpXVx = Chunk<ElementType, IDomainSpXVx>;
+
+
+
+using DFieldX = FieldX<double>;
+
+using DFieldVx = FieldVx<double>;
+
+using DFieldSp = FieldSp<double>;
+
+using DFieldSpVx = FieldSpVx<double>;
+
+using DFieldSpXVx = FieldSpXVx<double>;
+
+
+
+template <class ElementType>
+using SpanX = ChunkSpan<ElementType, IDomainX>;
+
+template <class ElementType>
+using SpanVx = ChunkSpan<ElementType, IDomainVx>;
+
+template <class ElementType>
+using SpanSpXVx = ChunkSpan<ElementType, IDomainSpXVx>;
+
+template <class ElementType>
+using SpanSpVx = ChunkSpan<ElementType, IDomainSpVx>;
+
+
 
 using DSpanX = SpanX<double>;
 
-template <class ElementType>
-using SpanVx = BlockSpan<ElementType, MDomainVx>;
-
 using DSpanVx = SpanVx<double>;
-
-template <class ElementType>
-using SpanSpXVx = BlockSpan<ElementType, MDomainSpXVx>;
 
 using DSpanSpXVx = SpanSpXVx<double>;
 
-template <class ElementType>
-using SpanSpVx = BlockSpan<ElementType, MDomainSpVx>;
-
 using DSpanSpVx = SpanSpVx<double>;
 
+
+
 template <class ElementType>
-using ViewX = BlockSpan<ElementType const, MDomainX>;
+using ViewX = ChunkSpan<ElementType const, IDomainX>;
+
+template <class ElementType>
+using ViewVx = ChunkSpan<ElementType const, IDomainVx>;
+
+template <class ElementType>
+using ViewSp = ChunkSpan<ElementType const, IDomainSp>;
+template <class ElementType>
+using ViewSpVx = ChunkSpan<ElementType const, IDomainSpVx>;
+
+template <class ElementType>
+using ViewSpXVx = ChunkSpan<ElementType const, IDomainSpXVx>;
+
+
 
 using DViewX = ViewX<double>;
 
-template <class ElementType>
-using ViewVx = BlockSpan<ElementType const, MDomainVx>;
-
 using DViewVx = ViewVx<double>;
-
-template <class ElementType>
-using ViewSp = BlockSpan<ElementType const, MDomainSp>;
 
 using DViewSp = ViewSp<double>;
 
-template <class ElementType>
-using ViewSpVx = BlockSpan<ElementType const, MDomainSpVx>;
-
 using DViewSpVx = ViewSpVx<double>;
 
-template <class ElementType>
-using ViewSpXVx = BlockSpan<ElementType const, MDomainSpXVx>;
-
 using DViewSpXVx = ViewSpXVx<double>;
-
-template <class ElementType>
-using BlockX = Block<ElementType, MDomainX>;
-
-using DBlockX = BlockX<double>;
-
-template <class ElementType>
-using BlockVx = Block<ElementType, MDomainVx>;
-
-using DBlockVx = BlockVx<double>;
-
-template <class ElementType>
-using BlockSp = Block<ElementType, MDomainSp>;
-
-using DBlockSp = BlockSp<double>;
-
-template <class ElementType>
-using BlockSpVx = Block<ElementType, MDomainSpVx>;
-
-using DBlockSpVx = BlockSpVx<double>;
-
-template <class ElementType>
-using BlockSpXVx = Block<ElementType, MDomainSpXVx>;
-
-using DBlockSpXVx = BlockSpXVx<double>;

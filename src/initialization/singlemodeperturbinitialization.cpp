@@ -12,22 +12,22 @@ SingleModePerturbInitialization::SingleModePerturbInitialization(
 
 DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx allfdistribu) const
 {
-    MDomainX gridx = allfdistribu.domain<MeshX>();
-    MDomainVx gridvx = allfdistribu.domain<MeshVx>();
-    MDomainSp gridsp = allfdistribu.domain<MeshSp>();
+    IDomainX gridx = allfdistribu.domain<IDimX>();
+    IDomainVx gridvx = allfdistribu.domain<IDimVx>();
+    IDomainSp gridsp = allfdistribu.domain<IDimSp>();
 
     // Initialization of the perturbation
-    DBlockX perturbation(gridx);
-    for (MCoordSp isp : gridsp) {
+    DFieldX perturbation(gridx);
+    for (IndexSp isp : gridsp) {
         perturbation_initialization(
                 perturbation,
                 m_init_perturb_mode(isp),
                 m_init_perturb_amplitude(isp));
 
         // Initialization of the distribution function --> fill values
-        for (MCoordSp isp : gridsp) {
-            for (MCoordX ix : gridx) {
-                for (MCoordVx iv : gridvx) {
+        for (IndexSp isp : gridsp) {
+            for (IndexX ix : gridx) {
+                for (IndexVx iv : gridvx) {
                     double fdistribu_val
                             = m_species_info.maxw_values()(isp, iv) * (1. + perturbation(ix));
                     if (fdistribu_val < 1.e-60) {
@@ -46,12 +46,12 @@ void SingleModePerturbInitialization::perturbation_initialization(
         const int mode,
         const double perturb_amplitude) const
 {
-    static_assert(Dim::X::PERIODIC, "this computation for Lx is only valid for X periodic");
+    static_assert(RDimX::PERIODIC, "this computation for Lx is only valid for X periodic");
     auto gridx = perturbation.domain();
-    const double Lx = fabs(gridx.mesh<MeshX>().step() + gridx.rmax() - gridx.rmin());
+    const double Lx = fabs(gridx.mesh<IDimX>().step() + gridx.rmax() - gridx.rmin());
     const double kx = mode * 2. * M_PI / Lx;
-    for (MCoordX ix : gridx) {
-        const RCoordX x = gridx.to_real(ix);
+    for (IndexX ix : gridx) {
+        const CoordX x = gridx.to_real(ix);
         perturbation(ix) = perturb_amplitude * cos(kx * x);
     }
 }

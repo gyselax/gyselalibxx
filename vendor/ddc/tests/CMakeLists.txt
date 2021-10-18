@@ -4,15 +4,14 @@ cmake_minimum_required(VERSION 3.15)
 include(GoogleTest)
 
 add_executable(ddc_tests
-	block.cpp
-	mcoord.cpp
-	product_mdomain.cpp
-	product_mesh.cpp
-	non_uniform_mesh.cpp
-	uniform_mesh.cpp
-	single_mesh.cpp
-	taggedvector.cpp
+	chunck.cpp
+	discrete_domain.cpp
+	discrete_space.cpp
+	non_uniform_discretization.cpp
+	single_discretization.cpp
+	tagged_vector.cpp
 	type_seq.cpp
+	uniform_discretization.cpp
 )
 target_compile_features(ddc_tests PUBLIC cxx_std_17)
 target_link_libraries(ddc_tests

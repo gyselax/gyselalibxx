@@ -1,6 +1,6 @@
 #include <memory>
 
-#include <ddc/BlockSpan>
+#include <ddc/ChunkSpan>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -35,13 +35,13 @@ using namespace ::testing;
 
 TEST(SplitVlasovSolver, ordering)
 {
-    MeshX mesh_x(RCoordX(0.), RCoordX(2.));
-    MeshVx mesh_vx(RCoordVx(0.), RCoordVx(2.));
-    MeshSp mesh_sp;
-    MDomainSpXVx const dom(mesh_sp, mesh_x, mesh_vx, MCoordSpXVx(0, 0, 0), MLengthSpXVx(0, 0, 0));
-    DBlockSpXVx const fdistribu(dom);
+    IDimX mesh_x(CoordX(0.), CoordX(2.));
+    IDimVx mesh_vx(CoordVx(0.), CoordVx(2.));
+    IDimSp mesh_sp;
+    IDomainSpXVx const dom(mesh_sp, mesh_x, mesh_vx, IndexSpXVx(0, 0, 0), IVectSpXVx(0, 0, 0));
+    DFieldSpXVx const fdistribu(dom);
     DSpanSpXVx const fdistribu_s(fdistribu);
-    DBlockX const efield(select<MeshX>(dom));
+    DFieldX const efield(select<IDimX>(dom));
     double const dt = 0.;
 
     MockAdvectionX const advec_x;

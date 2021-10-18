@@ -5,6 +5,7 @@
 
 #include "i_interpolator_vx.hpp"
 
+
 class SplineInterpolatorVx : public IInterpolatorVx
 {
 private:
@@ -12,7 +13,7 @@ private:
 
     SplineEvaluator<BSplinesVx> const& m_evaluator;
 
-    Block<double, BSDomainVx> m_coefs;
+    Chunk<double, BSDomainVx> m_coefs;
 
     std::vector<double> m_derivs_xmin_alloc;
 

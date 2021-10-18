@@ -4,8 +4,8 @@
 #include <filesystem>
 #include <iostream>
 
-#include <ddc/MCoord>
-#include <ddc/ProductMDomain>
+#include <ddc/DiscreteCoordinate>
+#include <ddc/DiscreteDomain>
 #include <ddc/pdi.hpp>
 
 #include <sll/null_boundary_value.hpp>
@@ -45,35 +45,35 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    RCoordX x_min = [&]() {
+    CoordX x_min = [&]() {
         double x_min;
         PC_double(PC_get(conf_voicexx, ".Mesh.x_min"), &x_min);
-        return RCoordX(x_min);
+        return CoordX(x_min);
     }();
-    RCoordX x_max = [&]() {
+    CoordX x_max = [&]() {
         double x_max;
         PC_double(PC_get(conf_voicexx, ".Mesh.x_max"), &x_max);
-        return RCoordX(x_max);
+        return CoordX(x_max);
     }();
-    MLengthX x_size = [&]() {
+    IVectX x_size = [&]() {
         long x_size;
         PC_int(PC_get(conf_voicexx, ".Mesh.x_size"), &x_size);
-        return MLengthX(x_size);
+        return IVectX(x_size);
     }();
-    RCoordVx vx_min = [&]() {
+    CoordVx vx_min = [&]() {
         double vx_min;
         PC_double(PC_get(conf_voicexx, ".Mesh.vx_min"), &vx_min);
-        return RCoordVx(vx_min);
+        return CoordVx(vx_min);
     }();
-    RCoordVx vx_max = [&]() {
+    CoordVx vx_max = [&]() {
         double vx_max;
         PC_double(PC_get(conf_voicexx, ".Mesh.vx_max"), &vx_max);
-        return RCoordVx(vx_max);
+        return CoordVx(vx_max);
     }();
-    MLengthVx vx_size = [&]() {
+    IVectVx vx_size = [&]() {
         double vx_size;
         PC_double(PC_get(conf_voicexx, ".Mesh.vx_size"), &vx_size);
-        return MLengthVx(vx_size);
+        return IVectVx(vx_size);
     }();
 
     // Creating mesh & supports
@@ -85,21 +85,21 @@ int main(int argc, char** argv)
 
     SplineVxBuilder const builder_vx(bsplines_vx);
 
-    MeshSp species;
+    IDimSp species;
 
-    MDomainSp dom_sp(species, MLengthSp(2));
+    IDomainSp dom_sp(species, IVectSp(2));
 
-    MDomainSpXVx const
+    IDomainSpXVx const
             mesh(dom_sp, builder_x.interpolation_domain(), builder_vx.interpolation_domain());
 
-    BlockSp<int> charges(dom_sp);
-    DBlockSp masses(dom_sp);
-    DBlockSp density_eq(dom_sp);
-    DBlockSp temperature_eq(dom_sp);
-    DBlockSp mean_velocity_eq(dom_sp);
-    BlockSp<int> init_perturb_mode(dom_sp);
-    DBlockSp init_perturb_amplitude(dom_sp);
-    for (MCoordSp isp : dom_sp) {
+    FieldSp<int> charges(dom_sp);
+    DFieldSp masses(dom_sp);
+    DFieldSp density_eq(dom_sp);
+    DFieldSp temperature_eq(dom_sp);
+    DFieldSp mean_velocity_eq(dom_sp);
+    FieldSp<int> init_perturb_mode(dom_sp);
+    DFieldSp init_perturb_amplitude(dom_sp);
+    for (IndexSp isp : dom_sp) {
         // --> SpeciesInfo info
         long charge;
         PC_int(PC_get(conf_voicexx, ".SpeciesInfo.charge[%d]", isp.value()), &charge);
@@ -133,7 +133,7 @@ int main(int argc, char** argv)
             std::move(mean_velocity_eq),
             mesh);
 
-    DBlockSpXVx allfdistribu(mesh.restrict(MDomainSp(species, species_info.ielec(), MLengthSp(1))));
+    DFieldSpXVx allfdistribu(mesh.restrict(IDomainSp(species, species_info.ielec(), IVectSp(1))));
 
     SingleModePerturbInitialization init(species_info, init_perturb_mode, init_perturb_amplitude);
     init(allfdistribu);
@@ -172,24 +172,24 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    FftwFourierTransform<Dim::X> fft;
+    FftwFourierTransform<RDimX> fft;
 
-    FftwInverseFourierTransform<Dim::X> ifft;
+    FftwInverseFourierTransform<RDimX> ifft;
 
     FftPoissonSolver poisson(species_info, fft, ifft, builder_vx, spline_vx_evaluator);
 
     PredCorr const predcorr(vlasov, poisson, deltat);
 
     // Creating of mesh for output saving
-    MDomainX gridx = select<MeshX>(mesh);
-    BlockX<RCoordX> meshX_coord(gridx);
-    for (MCoordX ix : gridx) {
+    IDomainX gridx = select<IDimX>(mesh);
+    FieldX<CoordX> meshX_coord(gridx);
+    for (IndexX ix : gridx) {
         meshX_coord(ix) = gridx.to_real(ix);
     }
 
-    MDomainVx gridvx = select<MeshVx>(mesh);
-    BlockVx<RCoordVx> meshVx_coord(gridvx);
-    for (MCoordVx ivx : gridvx) {
+    IDomainVx gridvx = select<IDimVx>(mesh);
+    FieldVx<CoordVx> meshVx_coord(gridvx);
+    for (IndexVx ivx : gridvx) {
         meshVx_coord(ivx) = gridvx.to_real(ivx);
     }
 

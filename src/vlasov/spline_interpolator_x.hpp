@@ -12,7 +12,7 @@ private:
 
     SplineEvaluator<BSplinesX> const& m_evaluator;
 
-    Block<double, BSDomainX> m_coefs;
+    Chunk<double, BSDomainX> m_coefs;
 
 public:
     SplineInterpolatorX(SplineXBuilder const& builder, SplineEvaluator<BSplinesX> const& evaluator);

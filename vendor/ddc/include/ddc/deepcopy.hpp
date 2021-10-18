@@ -1,21 +1,21 @@
 #pragma once
 
-#include "ddc/block_span.hpp"
+#include "ddc/chunck_span.hpp"
 
 namespace detail {
-template <class ElementType, class... Meshes, class Layout, class Functor, class... MCoords>
+template <class ElementType, class... DDims, class Layout, class Functor, class... MCoords>
 inline void for_each_impl(
-        const BlockSpan<ElementType, ProductMDomain<Meshes...>, Layout>& to,
+        const ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout>& to,
         Functor&& f,
         MCoords&&... mcoords) noexcept
 {
     if constexpr (
             sizeof...(MCoords)
-            == BlockSpan<ElementType, ProductMDomain<Meshes...>, Layout>::rank()) {
+            == ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout>::rank()) {
         f(std::forward<MCoords>(mcoords)...);
     } else {
-        using CurrentMesh = type_seq_element_t<sizeof...(MCoords), detail::TypeSeq<Meshes...>>;
-        for (auto&& ii : get_domain<CurrentMesh>(to)) {
+        using CurrentDDim = type_seq_element_t<sizeof...(MCoords), detail::TypeSeq<DDims...>>;
+        for (auto&& ii : get_domain<CurrentDDim>(to)) {
             for_each_impl(to, std::forward<Functor>(f), std::forward<MCoords>(mcoords)..., ii);
         }
     }
@@ -30,13 +30,13 @@ inline void for_each_impl(
 template <
         class ElementType,
         class OElementType,
-        class... Meshes,
-        class... OMeshes,
+        class... DDims,
+        class... ODDims,
         class Layout,
         class OLayout>
-inline BlockSpan<ElementType, ProductMDomain<Meshes...>, Layout> const& deepcopy(
-        BlockSpan<ElementType, ProductMDomain<Meshes...>, Layout> const& to,
-        BlockSpan<OElementType, ProductMDomain<OMeshes...>, OLayout> const& from) noexcept
+inline ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const& deepcopy(
+        ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const& to,
+        ChunkSpan<OElementType, DiscreteDomain<ODDims...>, OLayout> const& from) noexcept
 {
     static_assert(std::is_convertible_v<OElementType, ElementType>, "Not convertible");
     assert(to.domain().front() == from.domain().front());
@@ -49,9 +49,9 @@ inline BlockSpan<ElementType, ProductMDomain<Meshes...>, Layout> const& deepcopy
  * @param[in] view  the view whose domain to iterate
  * @param[in] f     a functor taking the list of indices as parameter
  */
-template <class ElementType, class... Meshes, class Layout, class Functor>
+template <class ElementType, class... DDims, class Layout, class Functor>
 inline void for_each(
-        const BlockSpan<ElementType, ProductMDomain<Meshes...>, Layout>& view,
+        const ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout>& view,
         Functor&& f) noexcept
 {
     detail::for_each_impl(view, std::forward<Functor>(f));

@@ -5,30 +5,30 @@
 #include <memory>
 #include <vector>
 
-#include <ddc/NonUniformMesh>
-#include <ddc/ProductMDomain>
+#include <ddc/DiscreteDomain>
+#include <ddc/NonUniformDiscretization>
 
 #include "sll/bspline.hpp"
 
-/// NonUniformMesh specialization of BSplines
+/// NonUniformDiscretization specialization of BSplines
 template <class Tag, std::size_t D>
 class NonUniformBSplines
 {
     static_assert(D > 0, "Parameter `D` must be positive");
 
 private:
-    using mesh_type = NonUniformMesh<Tag>;
+    using mesh_type = NonUniformDiscretization<Tag>;
 
-    using domain_type = ProductMDomain<mesh_type>;
+    using domain_type = DiscreteDomain<mesh_type>;
 
 public:
     using rdim_type = BSpline<Tag>;
 
     using tag_type = Tag;
 
-    using rcoord_type = RCoord<NonUniformBSplines>;
+    using rcoord_type = Coordinate<NonUniformBSplines>;
 
-    using mcoord_type = MCoord<NonUniformBSplines>;
+    using mcoord_type = DiscreteCoordinate<NonUniformBSplines>;
 
 public:
     static constexpr std::size_t rank()
@@ -57,13 +57,13 @@ public:
     }
 
 private:
-    std::vector<RCoord<Tag>> m_knots;
+    std::vector<Coordinate<Tag>> m_knots;
 
 public:
     NonUniformBSplines() = default;
 
     /// @brief Construct a `NonUniformBSplines` using a brace-list, i.e. `NonUniformBSplines bsplines({0., 1.})`
-    explicit NonUniformBSplines(std::initializer_list<RCoord<Tag>> knots)
+    explicit NonUniformBSplines(std::initializer_list<Coordinate<Tag>> knots)
         : NonUniformBSplines(knots.begin(), knots.end())
     {
     }
@@ -115,14 +115,14 @@ public:
         return m_knots[break_idx + degree()];
     }
 
-    RCoord<Tag> rmin() const noexcept
+    Coordinate<Tag> rmin() const noexcept
     {
-        return RCoord<Tag>(get_knot(0));
+        return Coordinate<Tag>(get_knot(0));
     }
 
-    RCoord<Tag> rmax() const noexcept
+    Coordinate<Tag> rmax() const noexcept
     {
-        return RCoord<Tag>(get_knot(ncells()));
+        return Coordinate<Tag>(get_knot(ncells()));
     }
 
     double length() const noexcept

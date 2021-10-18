@@ -3,7 +3,7 @@
 #include <array>
 #include <cmath>
 
-#include <ddc/BlockSpan>
+#include <ddc/ChunkSpan>
 
 #include "sll/boundary_value.hpp"
 
@@ -55,7 +55,7 @@ public:
 
     double operator()(
             double coord_eval,
-            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef) const
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
@@ -66,9 +66,9 @@ public:
 
     template <class Domain>
     void operator()(
-            BlockSpan<double, Domain> const& spline_eval,
-            BlockSpan<double const, Domain> const& coords_eval,
-            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef) const
+            ChunkSpan<double, Domain> const& spline_eval,
+            ChunkSpan<double const, Domain> const& coords_eval,
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
@@ -81,7 +81,7 @@ public:
 
     double deriv(
             double coord_eval,
-            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef) const
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
@@ -92,9 +92,9 @@ public:
 
     template <class Domain>
     void deriv(
-            BlockSpan<double, Domain> const& spline_eval,
-            BlockSpan<double const, Domain> const& coords_eval,
-            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef) const
+            ChunkSpan<double, Domain> const& spline_eval,
+            ChunkSpan<double const, Domain> const& coords_eval,
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
@@ -105,15 +105,15 @@ public:
         }
     }
 
-    double integrate(BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef) const
+    double integrate(ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef) const
     {
-        Block<double, ProductMDomain<BSplinesType>> values(spline_coef.domain());
+        Chunk<double, DiscreteDomain<BSplinesType>> values(spline_coef.domain());
         auto vals = values.allocation_mdspan();
 
         m_bsplines.integrals(vals);
 
         double y = 0.;
-        for (MCoord<BSplinesType> ibs : spline_coef.domain()) {
+        for (DiscreteCoordinate<BSplinesType> ibs : spline_coef.domain()) {
             y += spline_coef(ibs) * values(ibs);
         }
         return y;
@@ -122,7 +122,7 @@ public:
 private:
     double eval(
             double coord_eval,
-            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef,
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef,
             std::experimental::mdspan<double, std::experimental::dextents<1>>& vals) const
     {
         if constexpr (bsplines_type::is_periodic()) {
@@ -144,7 +144,7 @@ private:
     template <class EvalType>
     double eval_no_bc(
             double coord_eval,
-            BlockSpan<double const, ProductMDomain<BSplinesType>> const& spline_coef,
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef,
             std::experimental::mdspan<double, std::experimental::dextents<1>>& vals,
             EvalType) const
     {
@@ -160,7 +160,7 @@ private:
 
         double y = 0.0;
         for (int i(0); i < bsplines_type::degree() + 1; ++i) {
-            y += spline_coef(MCoord<BSplinesType>(jmin + i)) * vals(i);
+            y += spline_coef(DiscreteCoordinate<BSplinesType>(jmin + i)) * vals(i);
         }
         return y;
     }

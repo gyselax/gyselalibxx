@@ -2,17 +2,21 @@
 #include <memory>
 #include <type_traits>
 
-#include <ddc/type_seq>
+#include <ddc/detail/type_seq.hpp>
 
 #include <gtest/gtest.h>
 
-using namespace detail;
+namespace {
+
+using detail::TypeSeq;
 
 struct a;
 struct b;
 struct c;
 struct y;
 struct z;
+
+} // namespace
 
 TEST(TypeSeqTest, rank)
 {

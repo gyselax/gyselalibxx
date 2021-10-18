@@ -2,8 +2,8 @@
 
 #include <complex>
 
-#include <ddc/BlockSpan>
-#include <ddc/NonUniformMesh>
+#include <ddc/ChunkSpan>
+#include <ddc/NonUniformDiscretization>
 
 #include <geometry.hpp>
 
@@ -25,23 +25,23 @@ public:
 
     // Perform the normalized invFFT where the input is a complex and the output is a real
     virtual void operator()(
-            BlockSpan<
+            ChunkSpan<
                     double,
-                    ProductMDomain<UniformMesh<Tag>>,
+                    DiscreteDomain<UniformDiscretization<Tag>>,
                     std::experimental::layout_right> const& out_values,
-            BlockSpan<
+            ChunkSpan<
                     std::complex<double>,
-                    ProductMDomain<NonUniformMesh<Fourier<Tag>>>,
+                    DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
                     std::experimental::layout_right> const& in_values) const noexcept = 0;
 
     // Perform the normalized invFFT where the input is a complex and the output is a complex
     virtual void operator()(
-            BlockSpan<
+            ChunkSpan<
                     std::complex<double>,
-                    ProductMDomain<UniformMesh<Tag>>,
+                    DiscreteDomain<UniformDiscretization<Tag>>,
                     std::experimental::layout_right> const& out_values,
-            BlockSpan<
+            ChunkSpan<
                     std::complex<double>,
-                    ProductMDomain<NonUniformMesh<Fourier<Tag>>>,
+                    DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
                     std::experimental::layout_right> const& in_values) const noexcept = 0;
 };

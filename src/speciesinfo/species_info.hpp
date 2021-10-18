@@ -18,39 +18,39 @@ class SpeciesInformation
 {
 private:
     // charge of the particles
-    BlockSp<int> const m_charge;
+    FieldSp<int> const m_charge;
 
     // mass of the particles
-    BlockSp<double> const m_mass;
+    FieldSp<double> const m_mass;
 
     // equilibrium density
-    BlockSp<double> const m_density_eq;
+    FieldSp<double> const m_density_eq;
 
     // equilibrium temperature
-    BlockSp<double> const m_temperature_eq;
+    FieldSp<double> const m_temperature_eq;
 
     // equilibrium mean velocity
-    BlockSp<double> const m_mean_velocity_eq;
+    FieldSp<double> const m_mean_velocity_eq;
 
     // Maxwellian values
-    BlockSpVx<double> const m_maxw_values;
+    FieldSpVx<double> const m_maxw_values;
 
 public:
     SpeciesInformation(
-            BlockSp<int> charge,
-            BlockSp<double> mass,
-            BlockSp<double> n_eq,
-            BlockSp<double> T_eq,
-            BlockSp<double> u_eq,
-            MDomainSpXVx const& domSpXVx)
+            FieldSp<int> charge,
+            FieldSp<double> mass,
+            FieldSp<double> n_eq,
+            FieldSp<double> T_eq,
+            FieldSp<double> u_eq,
+            IDomainSpXVx const& domSpXVx)
         : m_charge(std::move(charge))
         , m_mass(std::move(mass))
         , m_density_eq(std::move(n_eq))
         , m_temperature_eq(std::move(T_eq))
         , m_mean_velocity_eq(std::move(u_eq))
-        , m_maxw_values(select<MeshSp, MeshVx>(domSpXVx))
+        , m_maxw_values(select<IDimSp, IDimVx>(domSpXVx))
     {
-        for (MCoordSp isp : get_domain<MeshSp>(charge)) {
+        for (IndexSp isp : get_domain<IDimSp>(charge)) {
             // Initialization of the Maxwellian --> fill m_maxw_values
             maxwellian_initialization(
                     m_density_eq(isp),
@@ -60,9 +60,9 @@ public:
         }
     }
 
-    MCoordSp ielec() const
+    IndexSp ielec() const
     {
-        return MCoordSp(0);
+        return IndexSp(0);
     }
 
     ViewSp<int> charge() const

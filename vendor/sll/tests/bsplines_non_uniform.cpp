@@ -3,11 +3,10 @@
 
 #include <experimental/mdspan>
 
-#include <ddc/MCoord>
-#include <ddc/NonUniformMesh>
-#include <ddc/ProductMDomain>
-#include <ddc/RCoord>
-#include <ddc/TaggedVector>
+#include <ddc/Coordinate>
+#include <ddc/DiscreteCoordinate>
+#include <ddc/DiscreteDomain>
+#include <ddc/NonUniformDiscretization>
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/deprecated/bsplines_non_uniform.hpp>
@@ -19,9 +18,9 @@ struct DimX
 {
     static constexpr bool PERIODIC = true;
 };
-using MeshX = NonUniformMesh<DimX>;
-using RCoordX = RCoord<DimX>;
-using MCoordX = MCoord<MeshX>;
+using IDimX = NonUniformDiscretization<DimX>;
+using CoordX = Coordinate<DimX>;
+using IndexX = DiscreteCoordinate<IDimX>;
 
 class BSplinesNonUniformTest : public ::testing::Test
 {

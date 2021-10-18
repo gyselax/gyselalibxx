@@ -6,13 +6,12 @@
 
 #include <experimental/mdspan>
 
-#include <ddc/Block>
-#include <ddc/MCoord>
-#include <ddc/NonUniformMesh>
-#include <ddc/ProductMDomain>
-#include <ddc/RCoord>
-#include <ddc/TaggedVector>
-#include <ddc/UniformMesh>
+#include <ddc/Chunk>
+#include <ddc/Coordinate>
+#include <ddc/DiscreteCoordinate>
+#include <ddc/DiscreteDomain>
+#include <ddc/NonUniformDiscretization>
+#include <ddc/UniformDiscretization>
 
 #include <sll/bsplines_uniform.hpp>
 #include <sll/null_boundary_value.hpp>
@@ -26,9 +25,9 @@ struct DimX
 {
     static constexpr bool PERIODIC = true;
 };
-using MeshX = UniformMesh<DimX>;
-using RCoordX = RCoord<DimX>;
-using MCoordX = MCoord<MeshX>;
+using IDimX = UniformDiscretization<DimX>;
+using CoordX = Coordinate<DimX>;
+using IndexX = DiscreteCoordinate<IDimX>;
 
 class PolynomialEvaluator
 {
@@ -46,12 +45,12 @@ public:
     }
 
     template <class Domain>
-    void operator()(BlockSpan<double, Domain>& block_mesh) const
+    void operator()(ChunkSpan<double, Domain>& chunck) const
     {
-        auto const& domain = block_mesh.domain();
+        auto const& domain = chunck.domain();
 
         for (std::size_t i = 0; i < domain.size(); ++i) {
-            block_mesh(i) = eval(domain.to_real(domain[i]), 0);
+            chunck(i) = eval(domain.to_real(domain[i]), 0);
         }
     }
 
@@ -61,12 +60,12 @@ public:
     }
 
     template <class Domain>
-    void deriv(BlockSpan<double, Domain>& block_mesh, int const derivative) const
+    void deriv(ChunkSpan<double, Domain>& chunck, int const derivative) const
     {
-        auto const& domain = block_mesh.domain();
+        auto const& domain = chunck.domain();
 
         for (std::size_t i = 0; i < domain.size(); ++i) {
-            block_mesh(i) = eval(domain.to_real(domain[i]), derivative);
+            chunck(i) = eval(domain.to_real(domain[i]), derivative);
         }
     }
 
@@ -116,12 +115,12 @@ public:
     }
 
     template <class Domain>
-    void operator()(BlockSpan<double, Domain>& block_mesh) const
+    void operator()(ChunkSpan<double, Domain>& chunck) const
     {
-        auto const& domain = block_mesh.domain();
+        auto const& domain = chunck.domain();
 
         for (auto&& icoord : domain) {
-            block_mesh(icoord) = eval(domain.to_real(icoord), 0);
+            chunck(icoord) = eval(domain.to_real(icoord), 0);
         }
     }
 
@@ -131,12 +130,12 @@ public:
     }
 
     template <class Domain>
-    void deriv(BlockSpan<double, Domain>& block_mesh, int const derivative) const
+    void deriv(ChunkSpan<double, Domain>& chunck, int const derivative) const
     {
-        auto const& domain = block_mesh.domain();
+        auto const& domain = chunck.domain();
 
         for (auto&& icoord : domain) {
-            block_mesh(icoord) = eval(domain.to_real(icoord), 0);
+            chunck(icoord) = eval(domain.to_real(icoord), 0);
         }
     }
 
@@ -152,7 +151,7 @@ TEST(SplineBuilder, Constructor)
 {
     using BSplinesX = UniformBSplines<DimX, 2>;
 
-    auto&& bsplines = BSplinesX(RCoordX(0.), RCoordX(0.02), 100);
+    auto&& bsplines = BSplinesX(CoordX(0.), CoordX(0.02), 100);
 
     SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> spline_builder(bsplines);
     spline_builder.interpolation_domain();
@@ -163,33 +162,34 @@ TEST(SplineBuilder, BuildSpline)
     BoundCond constexpr left_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
     BoundCond constexpr right_bc = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::HERMITE;
     int constexpr degree = 10;
-    //     using NonUniformMeshX = NonUniformMesh<DimX>;
-    //     using UniformMeshX = UniformMesh<DimX>;
+    //     using NonUniformMeshX = NonUniformDiscretization<DimX>;
+    //     using UniformMeshX = UniformDiscretization<DimX>;
     using BSplinesX = UniformBSplines<DimX, degree>;
-    using BlockSplineX2 = Block<double, ProductMDomain<BSplinesX>>;
-    //     using NonUniformDomainX = ProductMDomain<NonUniformMeshX>;
-    //     using BlockNonUniformX = Block<double, ProductMDomain<NonUniformMeshX>>;
-    using BlockUniformX = Block<double, ProductMDomain<MeshX>>;
+    using SpanSplineX2 = Chunk<double, DiscreteDomain<BSplinesX>>;
+    //     using NonUniformDomainX = DiscreteDomain<NonUniformMeshX>;
+    //     using SpanNonUniformX = Chunk<double, DiscreteDomain<NonUniformMeshX>>;
+    using SpanUniformX = Chunk<double, DiscreteDomain<IDimX>>;
 
-    RCoordX constexpr x0(0.);
-    RCoordX constexpr xN(1.);
+    CoordX constexpr x0(0.);
+    CoordX constexpr xN(1.);
     std::size_t constexpr ncells = 100;
-    MCoordX constexpr npoints(ncells + 1);
+    IndexX constexpr npoints(ncells + 1);
 
     // 1. Create BSplines
     BSplinesX bsplines(x0, xN, npoints);
-    ProductMDomain<BSplinesX> const dom_bsplines_x(bsplines, MLength<BSplinesX>(bsplines.size()));
+    DiscreteDomain<BSplinesX> const
+            dom_bsplines_x(bsplines, DiscreteVector<BSplinesX>(bsplines.size()));
 
-    // 2. Create a Spline represented by a block over BSplines
-    // The block is filled with garbage data, we need to initialize it
-    BlockSplineX2 coef(dom_bsplines_x);
+    // 2. Create a Spline represented by a chunck over BSplines
+    // The chunck is filled with garbage data, we need to initialize it
+    SpanSplineX2 coef(dom_bsplines_x);
 
     // 3. Create a SplineBuilder over BSplines using some boundary conditions
     SplineBuilder<BSplinesX, left_bc, right_bc> spline_builder(bsplines);
     auto const& interpolation_domain = spline_builder.interpolation_domain();
 
-    // 4. Allocate and fill a block over the interpolation domain
-    BlockUniformX yvals(interpolation_domain);
+    // 4. Allocate and fill a chunck over the interpolation domain
+    SpanUniformX yvals(interpolation_domain);
     CosineEvaluator cosine_evaluator;
     cosine_evaluator(yvals);
 
@@ -207,22 +207,23 @@ TEST(SplineBuilder, BuildSpline)
     DSpan1D* deriv_l(left_bc == BoundCond::HERMITE ? &Sderiv_lhs : nullptr);
     DSpan1D* deriv_r(right_bc == BoundCond::HERMITE ? &Sderiv_rhs : nullptr);
 
-    // 5. Finally build the spline by filling `block_spline`
+    // 5. Finally build the spline by filling `coef`
     spline_builder(coef, yvals, deriv_l, deriv_r);
 
     // 6. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
     SplineEvaluator spline_evaluator(bsplines, NullBoundaryValue::value, NullBoundaryValue::value);
 
-    BlockUniformX coords_eval(interpolation_domain);
+    SpanUniformX coords_eval(interpolation_domain);
     for (auto i : interpolation_domain) {
         coords_eval(i) = interpolation_domain.to_real(i);
     }
 
-    BlockUniformX spline_eval(interpolation_domain);
-    spline_evaluator(spline_eval.view(), coords_eval.cview(), coef.cview());
+    SpanUniformX spline_eval(interpolation_domain);
+    spline_evaluator(spline_eval.span_view(), coords_eval.span_cview(), coef.span_cview());
 
-    BlockUniformX spline_eval_deriv(interpolation_domain);
-    spline_evaluator.deriv(spline_eval_deriv.view(), coords_eval.cview(), coef.cview());
+    SpanUniformX spline_eval_deriv(interpolation_domain);
+    spline_evaluator
+            .deriv(spline_eval_deriv.span_view(), coords_eval.span_cview(), coef.span_cview());
 
     // 7. Checking errors
     double max_norm_error = 0.;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ddc/BlockSpan>
+#include <ddc/ChunkSpan>
 
 #include <geometry.hpp>
 

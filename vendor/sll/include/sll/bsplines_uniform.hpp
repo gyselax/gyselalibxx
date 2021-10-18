@@ -4,8 +4,8 @@
 #include <cassert>
 #include <memory>
 
-#include <ddc/ProductMDomain>
-#include <ddc/UniformMesh>
+#include <ddc/DiscreteDomain>
+#include <ddc/UniformDiscretization>
 
 #include "sll/bspline.hpp"
 #include "sll/math_tools.hpp"
@@ -16,18 +16,18 @@ class UniformBSplines
     static_assert(D > 0, "Parameter `D` must be positive");
 
 private:
-    using mesh_type = UniformMesh<Tag>;
+    using mesh_type = UniformDiscretization<Tag>;
 
-    using domain_type = ProductMDomain<mesh_type>;
+    using domain_type = DiscreteDomain<mesh_type>;
 
 public:
     using rdim_type = BSpline<Tag>;
 
     using tag_type = Tag;
 
-    using rcoord_type = RCoord<UniformBSplines>;
+    using rcoord_type = Coordinate<UniformBSplines>;
 
-    using mcoord_type = MCoord<UniformBSplines>;
+    using mcoord_type = DiscreteCoordinate<UniformBSplines>;
 
 public:
     static constexpr std::size_t rank()
@@ -59,7 +59,7 @@ private:
     mesh_type m_mesh;
 
     // In the periodic case, it contains twice the periodic point!!!
-    ProductMDomain<mesh_type> m_domain;
+    DiscreteDomain<mesh_type> m_domain;
 
 public:
     UniformBSplines() = default;
@@ -70,15 +70,16 @@ public:
      * @param rmax    the real coordinate of the last knot
      * @param n_knots the number of knots
      */
-    explicit UniformBSplines(RCoord<Tag> rmin, RCoord<Tag> rmax, std::size_t ncells)
+    explicit UniformBSplines(Coordinate<Tag> rmin, Coordinate<Tag> rmax, std::size_t ncells)
         : m_mesh(
                 rmin,
                 rmax,
-                MLength<mesh_type>(ncells + 1)) // Compute correct step, independent of periodicity
+                DiscreteVector<mesh_type>(
+                        ncells + 1)) // Compute correct step, independent of periodicity
         , m_domain(
                   m_mesh,
-                  MCoord<mesh_type>(0),
-                  MLength<mesh_type>(
+                  DiscreteCoordinate<mesh_type>(0),
+                  DiscreteVector<mesh_type>(
                           ncells + 1)) // Create a mesh including the eventual periodic point
     {
     }
