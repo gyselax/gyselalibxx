@@ -23,8 +23,10 @@ TEST(TaggedVector, ReorderingConstructor)
     TaggedVector<int, float> submap_float = select<float>(map_ref);
     TaggedVector<int, double, float> map_v1(submap_double, submap_float);
     TaggedVector<int, double, float> map_v2(submap_float, submap_double);
+    TaggedVector<int, float, double> map_v3(map_ref);
     ASSERT_EQ(map_v1, map_ref);
     ASSERT_EQ(map_v2, map_ref);
+    ASSERT_EQ(map_v3, map_ref);
 }
 
 TEST(TaggedVector, Accessor)

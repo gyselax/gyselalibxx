@@ -50,6 +50,15 @@ public:
 
     DiscreteDomain() = default;
 
+    /// Construct a DiscreteDomain from a reordered copy of `domain`
+    template <class... ODDims>
+    explicit constexpr DiscreteDomain(DiscreteDomain<ODDims...> const& domain)
+        : m_ddim(domain.template mesh<DDims>()...)
+        , m_lbound(domain.front())
+        , m_ubound(domain.back())
+    {
+    }
+
     // Use SFINAE to disambiguate with the copy constructor.
     // Note that SFINAE may be redundant because a template constructor should not be selected as a copy constructor.
     template <std::size_t N = sizeof...(DDims), class = std::enable_if_t<(N != 1)>>
