@@ -3,8 +3,6 @@ add_library(vlasov STATIC
 	bsl_advection_vx.cpp
 	nulladvectionvx.cpp
 	splitvlasovsolver.cpp
-	spline_interpolator_x.cpp
-	spline_interpolator_vx.cpp
 )
 
 target_compile_features(vlasov
@@ -20,6 +18,7 @@ target_link_libraries(vlasov
 	PUBLIC
 		DDC::DDC
 		sll::splines
+		vcx::interpolation
 		vcx::speciesinfo
 		vcx::geometry
 )
