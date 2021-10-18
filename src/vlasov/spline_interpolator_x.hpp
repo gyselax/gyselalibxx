@@ -20,9 +20,7 @@ public:
     void operator()(DSpanX const inout_data, DViewX const coordinates) const override;
 };
 
-class PreallocatableSplineInterpolatorX
-    : public IInterpolatorX
-    , public IPreallocatableInterpolatorX
+class PreallocatableSplineInterpolatorX : public IPreallocatableInterpolatorX
 {
     SplineXBuilder const& m_builder;
 

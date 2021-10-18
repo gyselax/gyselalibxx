@@ -31,9 +31,7 @@ public:
     void operator()(DSpanVx const inout_data, DViewVx const coordinates) const override;
 };
 
-class PreallocatableSplineInterpolatorVx
-    : public IInterpolatorVx
-    , public IPreallocatableInterpolatorVx
+class PreallocatableSplineInterpolatorVx : public IPreallocatableInterpolatorVx
 {
     SplineVxBuilder const& m_builder;
 

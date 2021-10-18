@@ -25,10 +25,8 @@ public:
     }
 };
 
-class IPreallocatableInterpolatorVx
+class IPreallocatableInterpolatorVx : public IInterpolatorVx
 {
 public:
-    virtual ~IPreallocatableInterpolatorVx() = default;
-
     virtual InterpolatorVxProxy preallocate() const = 0;
 };
