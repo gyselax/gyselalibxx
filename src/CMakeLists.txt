@@ -10,21 +10,21 @@ add_subdirectory(interpolation)
 add_subdirectory(initialization)
 
 add_executable(voicexx
-	voicexx.cpp
+    voicexx.cpp
 )
 target_compile_features(voicexx PUBLIC cxx_std_17)
 target_link_libraries(voicexx
-	PUBLIC
-		DDC::DDC
-		DDC::PDI
-		vcx::initialization
-		vcx::fft
-		vcx::interpolation
-		vcx::poisson
-		vcx::time
-		vcx::speciesinfo
-		vcx::vlasov
-		FFTW::Double
-		PDI::pdi
-		sll::splines
+    PUBLIC
+        DDC::DDC
+        DDC::PDI
+        vcx::initialization
+        vcx::fft
+        vcx::interpolation
+        vcx::poisson
+        vcx::time
+        vcx::speciesinfo
+        vcx::vlasov
+        FFTW::Double
+        PDI::pdi
+        sll::splines
 )
