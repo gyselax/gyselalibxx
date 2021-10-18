@@ -205,9 +205,10 @@ public:
         return ::ChunkSpan(subview, m_domain.restrict(odomain));
     }
 
+    // Warning: Do not use DiscreteCoordinate because of template deduction issue with clang 12
     template <class... ODDims>
     inline constexpr reference operator()(
-            DiscreteCoordinate<ODDims> const&... mcoords) const noexcept
+            detail::TaggedVector<DiscreteCoordElement, ODDims> const&... mcoords) const noexcept
     {
         assert(((mcoords >= front<ODDims>(m_domain)) && ...));
         return m_internal_mdspan(take_first<DDims>(mcoords...)...);

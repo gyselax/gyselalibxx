@@ -96,15 +96,18 @@ public:
         *this = std::move(tmp);
     }
 
+    // Warning: Do not use DiscreteCoordinate because of template deduction issue with clang 12
     template <class... ODDims>
     inline constexpr element_type const& operator()(
-            DiscreteCoordinate<ODDims> const&... mcoords) const noexcept
+            detail::TaggedVector<DiscreteCoordElement, ODDims> const&... mcoords) const noexcept
     {
         return this->m_internal_mdspan(take_first<DDims>(mcoords...)...);
     }
 
+    // Warning: Do not use DiscreteCoordinate because of template deduction issue with clang 12
     template <class... ODDims>
-    inline constexpr element_type& operator()(DiscreteCoordinate<ODDims> const&... mcoords) noexcept
+    inline constexpr element_type& operator()(
+            detail::TaggedVector<DiscreteCoordElement, ODDims> const&... mcoords) noexcept
     {
         assert(((mcoords >= front<ODDims>(this->m_domain)) && ...));
         return this->m_internal_mdspan(take_first<DDims>(mcoords...)...);
