@@ -211,7 +211,7 @@ public:
             detail::TaggedVector<DiscreteCoordElement, ODDims> const&... mcoords) const noexcept
     {
         assert(((mcoords >= front<ODDims>(m_domain)) && ...));
-        return m_internal_mdspan(take_first<DDims>(mcoords...)...);
+        return m_internal_mdspan(take<DDims>(mcoords...)...);
     }
 
     inline constexpr reference operator()(mcoord_type const& indices) const noexcept

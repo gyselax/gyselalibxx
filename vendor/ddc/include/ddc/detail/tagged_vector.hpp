@@ -97,14 +97,18 @@ inline constexpr detail::TaggedVector<ElementType, QueryTags...> select(
 }
 
 template <class QueryTag, class ElementType, class HeadTag, class... TailTags>
-constexpr detail::TaggedVector<ElementType, QueryTag> const& take_first(
+constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
         detail::TaggedVector<ElementType, HeadTag> const& head,
         detail::TaggedVector<ElementType, TailTags> const&... tags)
 {
+    static_assert(
+            !type_seq_contains_v<detail::TypeSeq<HeadTag>, detail::TypeSeq<TailTags...>>,
+            "ERROR: tag redundant");
     if constexpr (std::is_same_v<QueryTag, HeadTag>) {
         return head;
     } else {
-        return take_first<QueryTag>(tags...);
+        static_assert(sizeof...(TailTags) > 0, "ERROR: tag not found");
+        return take<QueryTag>(tags...);
     }
 }
 
@@ -158,7 +162,7 @@ public:
     template <class... OTags>
     explicit inline constexpr TaggedVector(
             TaggedVector<ElementType, OTags> const&... other) noexcept
-        : m_values {take_first<Tags>(other...).value()...}
+        : m_values {take<Tags>(other...).value()...}
     {
     }
 

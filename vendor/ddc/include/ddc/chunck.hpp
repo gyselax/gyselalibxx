@@ -101,7 +101,7 @@ public:
     inline constexpr element_type const& operator()(
             detail::TaggedVector<DiscreteCoordElement, ODDims> const&... mcoords) const noexcept
     {
-        return this->m_internal_mdspan(take_first<DDims>(mcoords...)...);
+        return this->m_internal_mdspan(take<DDims>(mcoords...)...);
     }
 
     // Warning: Do not use DiscreteCoordinate because of template deduction issue with clang 12
@@ -110,7 +110,7 @@ public:
             detail::TaggedVector<DiscreteCoordElement, ODDims> const&... mcoords) noexcept
     {
         assert(((mcoords >= front<ODDims>(this->m_domain)) && ...));
-        return this->m_internal_mdspan(take_first<DDims>(mcoords...)...);
+        return this->m_internal_mdspan(take<DDims>(mcoords...)...);
     }
 
     inline constexpr element_type const& operator()(mcoord_type const& indices) const noexcept
