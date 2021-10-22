@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.15)
 include(GoogleTest)
 
 add_executable(ddc_tests
-    chunck.cpp
+    chunk.cpp
     discrete_domain.cpp
     discrete_space.cpp
     non_uniform_discretization.cpp

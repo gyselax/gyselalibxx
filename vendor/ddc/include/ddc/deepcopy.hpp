@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ddc/chunck_span.hpp"
+#include "ddc/chunk_span.hpp"
 
 namespace detail {
 template <class ElementType, class... DDims, class Layout, class Functor, class... MCoords>

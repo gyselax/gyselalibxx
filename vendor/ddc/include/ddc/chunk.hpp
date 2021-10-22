@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ddc/chunck_span.hpp"
+#include "ddc/chunk_span.hpp"
 
 template <class, class>
 class Chunk;
@@ -10,7 +10,7 @@ class Chunk<ElementType, DiscreteDomain<DDims...>>
     : public ChunkSpan<ElementType, DiscreteDomain<DDims...>>
 {
 public:
-    /// type of a span of this full chunck
+    /// type of a span of this full chunk
     using span_type = ChunkSpan<ElementType, DiscreteDomain<DDims...>>;
 
 protected:
@@ -18,7 +18,7 @@ protected:
     using internal_mdspan_type = typename span_type::internal_mdspan_type;
 
 public:
-    /// type of a view of this full chunck
+    /// type of a view of this full chunk
     using view_type = ChunkSpan<ElementType const, DiscreteDomain<DDims...>>;
 
     /// The dereferenceable part of the co-domain but with indexing starting at 0

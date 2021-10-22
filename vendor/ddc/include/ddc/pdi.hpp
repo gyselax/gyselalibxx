@@ -5,7 +5,7 @@
 
 #include <pdi.h>
 
-#include "ddc/chunck_span.hpp"
+#include "ddc/chunk_span.hpp"
 
 template <class ElementType>
 static constexpr PDI_inout_t default_access_v = std::is_const_v<ElementType> ? PDI_OUT : PDI_INOUT;
@@ -17,14 +17,14 @@ static constexpr PDI_inout_t default_access_v<ChunkSpan<
         LayoutStridedPolicy> const&> = default_access_v<ElementType>;
 
 template <class ElementType>
-static constexpr bool is_chunckspan_v = false;
+static constexpr bool is_chunkspan_v = false;
 
 template <class ElementType, class SupportType, class LayoutStridedPolicy>
 static constexpr bool
-        is_chunckspan_v<ChunkSpan<ElementType, SupportType, LayoutStridedPolicy>> = true;
+        is_chunkspan_v<ChunkSpan<ElementType, SupportType, LayoutStridedPolicy>> = true;
 
 template <class ElementType, class SupportType>
-static constexpr bool is_chunckspan_v<Chunk<ElementType, SupportType>> = true;
+static constexpr bool is_chunkspan_v<Chunk<ElementType, SupportType>> = true;
 
 class PdiEvent
 {
@@ -59,7 +59,7 @@ public:
 
     template <PDI_inout_t access, class ElementType>
     std::enable_if_t<
-            !is_chunckspan_v<std::remove_cv_t<std::remove_reference_t<ElementType>>>,
+            !is_chunkspan_v<std::remove_cv_t<std::remove_reference_t<ElementType>>>,
             PdiEvent>&
     with(std::string const& name, ElementType& data)
     {

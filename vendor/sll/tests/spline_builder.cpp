@@ -45,12 +45,12 @@ public:
     }
 
     template <class Domain>
-    void operator()(ChunkSpan<double, Domain>& chunck) const
+    void operator()(ChunkSpan<double, Domain>& chunk) const
     {
-        auto const& domain = chunck.domain();
+        auto const& domain = chunk.domain();
 
         for (std::size_t i = 0; i < domain.size(); ++i) {
-            chunck(i) = eval(domain.to_real(domain[i]), 0);
+            chunk(i) = eval(domain.to_real(domain[i]), 0);
         }
     }
 
@@ -60,12 +60,12 @@ public:
     }
 
     template <class Domain>
-    void deriv(ChunkSpan<double, Domain>& chunck, int const derivative) const
+    void deriv(ChunkSpan<double, Domain>& chunk, int const derivative) const
     {
-        auto const& domain = chunck.domain();
+        auto const& domain = chunk.domain();
 
         for (std::size_t i = 0; i < domain.size(); ++i) {
-            chunck(i) = eval(domain.to_real(domain[i]), derivative);
+            chunk(i) = eval(domain.to_real(domain[i]), derivative);
         }
     }
 
@@ -115,12 +115,12 @@ public:
     }
 
     template <class Domain>
-    void operator()(ChunkSpan<double, Domain>& chunck) const
+    void operator()(ChunkSpan<double, Domain>& chunk) const
     {
-        auto const& domain = chunck.domain();
+        auto const& domain = chunk.domain();
 
         for (auto&& icoord : domain) {
-            chunck(icoord) = eval(domain.to_real(icoord), 0);
+            chunk(icoord) = eval(domain.to_real(icoord), 0);
         }
     }
 
@@ -130,12 +130,12 @@ public:
     }
 
     template <class Domain>
-    void deriv(ChunkSpan<double, Domain>& chunck, int const derivative) const
+    void deriv(ChunkSpan<double, Domain>& chunk, int const derivative) const
     {
-        auto const& domain = chunck.domain();
+        auto const& domain = chunk.domain();
 
         for (auto&& icoord : domain) {
-            chunck(icoord) = eval(domain.to_real(icoord), 0);
+            chunk(icoord) = eval(domain.to_real(icoord), 0);
         }
     }
 
@@ -180,15 +180,15 @@ TEST(SplineBuilder, BuildSpline)
     DiscreteDomain<BSplinesX> const
             dom_bsplines_x(bsplines, DiscreteVector<BSplinesX>(bsplines.size()));
 
-    // 2. Create a Spline represented by a chunck over BSplines
-    // The chunck is filled with garbage data, we need to initialize it
+    // 2. Create a Spline represented by a chunk over BSplines
+    // The chunk is filled with garbage data, we need to initialize it
     SpanSplineX2 coef(dom_bsplines_x);
 
     // 3. Create a SplineBuilder over BSplines using some boundary conditions
     SplineBuilder<BSplinesX, left_bc, right_bc> spline_builder(bsplines);
     auto const& interpolation_domain = spline_builder.interpolation_domain();
 
-    // 4. Allocate and fill a chunck over the interpolation domain
+    // 4. Allocate and fill a chunk over the interpolation domain
     SpanUniformX yvals(interpolation_domain);
     CosineEvaluator cosine_evaluator;
     cosine_evaluator(yvals);

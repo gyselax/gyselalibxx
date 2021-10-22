@@ -106,7 +106,7 @@ static void deepcopy_2d(benchmark::State& state)
             * int64_t(state.range(0) * state.range(1) * sizeof(double)));
 }
 
-static void deepcopy_subchunck_2d(benchmark::State& state)
+static void deepcopy_subchunk_2d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0) * state.range(1), 0.0);
     std::vector<double> dst_data(state.range(0) * state.range(1), -1.0);
@@ -146,9 +146,9 @@ BENCHMARK(deepcopy_1d)->Arg(large_dim1_1D);
 
 // 2D
 BENCHMARK(memcpy_2d)->Args({small_dim1_2D, small_dim2_2D});
-BENCHMARK(deepcopy_subchunck_2d)->Args({small_dim1_2D, small_dim2_2D});
+BENCHMARK(deepcopy_subchunk_2d)->Args({small_dim1_2D, small_dim2_2D});
 BENCHMARK(memcpy_2d)->Args({large_dim1_2D, large_dim2_2D});
 BENCHMARK(deepcopy_2d)->Args({large_dim1_2D, large_dim2_2D});
-BENCHMARK(deepcopy_subchunck_2d)->Args({large_dim1_2D, large_dim2_2D});
+BENCHMARK(deepcopy_subchunk_2d)->Args({large_dim1_2D, large_dim2_2D});
 
 BENCHMARK_MAIN();

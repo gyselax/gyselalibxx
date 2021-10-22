@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 include(GoogleTest)
 
 add_executable(splines_tests
-    chunck.cpp
+    chunk.cpp
     bsplines_non_uniform.cpp
     bsplines_uniform.cpp
     spline_builder.cpp

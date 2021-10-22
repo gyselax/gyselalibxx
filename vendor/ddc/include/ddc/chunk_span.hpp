@@ -24,9 +24,9 @@ class ChunkSpan;
  * @return the domain of view in the queried dimensions
  */
 template <class... QueryDDims, class ChunkType>
-auto get_domain(ChunkType const& chunck) noexcept
+auto get_domain(ChunkType const& chunk) noexcept
 {
-    return chunck.template domain<QueryDDims...>();
+    return chunk.template domain<QueryDDims...>();
 }
 
 template <class ElementType, class... DDims, class LayoutStridedPolicy>
@@ -99,7 +99,7 @@ protected:
     /// The raw view of the data
     internal_mdspan_type m_internal_mdspan;
 
-    /// The mesh on which this chunck is defined
+    /// The mesh on which this chunk is defined
     mdomain_type m_domain;
 
 public:
@@ -113,7 +113,7 @@ public:
      */
     inline constexpr ChunkSpan(ChunkSpan&& other) = default;
 
-    /** Constructs a new ChunkSpan by copy of a chunck, yields a new view to the same data
+    /** Constructs a new ChunkSpan by copy of a chunk, yields a new view to the same data
      * @param other the ChunkSpan to move
      */
     template <class OElementType>
@@ -123,7 +123,7 @@ public:
     {
     }
 
-    /** Constructs a new ChunkSpan by copy of a chunck, yields a new view to the same data
+    /** Constructs a new ChunkSpan by copy of a chunk, yields a new view to the same data
      * @param other the ChunkSpan to move
      */
     template <class OElementType>
@@ -329,16 +329,16 @@ public:
         *this = std::move(tmp);
     }
 
-    /** Provide access to the domain on which this chunck is defined
-     * @return the domain on which this chunck is defined
+    /** Provide access to the domain on which this chunk is defined
+     * @return the domain on which this chunk is defined
      */
     inline constexpr mdomain_type domain() const noexcept
     {
         return m_domain;
     }
 
-    /** Provide access to the domain on which this chunck is defined
-     * @return the domain on which this chunck is defined
+    /** Provide access to the domain on which this chunk is defined
+     * @return the domain on which this chunk is defined
      */
     template <class... QueryDDims>
     inline constexpr DiscreteDomain<QueryDDims...> domain() const noexcept

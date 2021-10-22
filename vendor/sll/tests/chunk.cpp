@@ -49,11 +49,11 @@ TEST(ChunkBSplinesTest, Constructor)
     DiscreteVector<BSplinesX, BSplinesY> size(ncells, ncells);
     DiscreteDomain<BSplinesX, BSplinesY> dom(bsplinesx, bsplinesy, size);
 
-    Chunk<double, DiscreteDomain<BSplinesX, BSplinesY>> chunck(dom);
-    auto view = chunck.span_view();
+    Chunk<double, DiscreteDomain<BSplinesX, BSplinesY>> chunk(dom);
+    auto view = chunk.span_view();
 
-    for (DiscreteCoordinate<BSplinesX> ibsx : get_domain<BSplinesX>(chunck)) {
-        for (DiscreteCoordinate<BSplinesY> ibsy : get_domain<BSplinesY>(chunck)) {
+    for (DiscreteCoordinate<BSplinesX> ibsx : get_domain<BSplinesX>(chunk)) {
+        for (DiscreteCoordinate<BSplinesY> ibsy : get_domain<BSplinesY>(chunk)) {
             view(ibsx, ibsy) = 1.0;
         }
     }
