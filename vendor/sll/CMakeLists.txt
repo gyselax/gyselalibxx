@@ -20,6 +20,7 @@ add_library(splines STATIC
     src/matrix_periodic_banded.cpp
     src/matrix_pds_tridiag.cpp
     src/null_boundary_value.cpp
+    src/gauss_legendre_integration.cpp
 )
 target_compile_features(splines PUBLIC cxx_std_17)
 target_include_directories(splines
