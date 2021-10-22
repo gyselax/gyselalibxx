@@ -33,11 +33,11 @@ plugins:
   set_value:
     on_init:
       - share:
-	- iter_saved: 0
+        - iter_saved: 0
     on_data:
       iter:
-	- set:
-	  - iter_saved: '${iter}/${nbstep_diag}'
+        - set:
+          - iter_saved: '${iter}/${nbstep_diag}'
     on_finalize:
       - release: [iter_saved]
   decl_hdf5:
