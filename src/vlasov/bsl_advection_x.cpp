@@ -17,9 +17,9 @@ BslAdvectionX::BslAdvectionX(
 
 DSpanSpXVx BslAdvectionX::operator()(DSpanSpXVx allfdistribu, double dt) const
 {
-    const IDomainX& x_dom = get_domain<IDimX>(allfdistribu);
-    const IDomainVx& v_dom = get_domain<IDimVx>(allfdistribu);
-    const IDomainSp& sp_dom = get_domain<IDimSp>(allfdistribu);
+    IDomainX const& x_dom = get_domain<IDimX>(allfdistribu);
+    IDomainVx const& v_dom = get_domain<IDimVx>(allfdistribu);
+    IDomainSp const& sp_dom = get_domain<IDimSp>(allfdistribu);
 
     // pre-allocate some memory to prevent allocation later in loop
     DFieldX feet_coords(x_dom);
@@ -27,12 +27,12 @@ DSpanSpXVx BslAdvectionX::operator()(DSpanSpXVx allfdistribu, double dt) const
     InterpolatorXProxy interpolator = m_interpolator.preallocate();
 
     for (IndexSp isp : sp_dom) {
-        const double sqrt_me_on_mspecies = std::sqrt(
+        double const sqrt_me_on_mspecies = std::sqrt(
                 m_species_info.mass()(m_species_info.ielec()) / m_species_info.mass()(isp));
 
         for (IndexVx iv : v_dom) {
             // compute the displacement
-            const double dx = sqrt_me_on_mspecies * dt * v_dom.to_real(iv);
+            double const dx = sqrt_me_on_mspecies * dt * v_dom.to_real(iv);
 
             // compute the coordinates of the feet
             for (IndexX ix : x_dom) {

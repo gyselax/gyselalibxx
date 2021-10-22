@@ -20,8 +20,8 @@ private:
     */
     void perturbation_initialization(
             DSpanX perturbation,
-            const int mode,
-            const double perturb_amplitude) const;
+            int const mode,
+            double const perturb_amplitude) const;
 
 public:
     // Warning: all variables shall remain valid until the last call to `operator()`

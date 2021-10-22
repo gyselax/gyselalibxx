@@ -40,7 +40,7 @@ TEST(TaggedVector, Accessor)
 TEST(TaggedVector, ConstAccessor)
 {
     TaggedVector<int, double, float> map(1, 2);
-    const auto& cmap = map;
+    TaggedVector<int, double, float> const& cmap = map;
 
     ASSERT_EQ(cmap.get<double>(), 1);
     ASSERT_EQ(get<float>(cmap), 2);

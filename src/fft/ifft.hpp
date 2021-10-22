@@ -13,13 +13,13 @@ class IInverseFourierTransform
 public:
     IInverseFourierTransform() = default;
 
-    IInverseFourierTransform(const IInverseFourierTransform& x) = default;
+    IInverseFourierTransform(IInverseFourierTransform const& x) = default;
 
     IInverseFourierTransform(IInverseFourierTransform&& x) = default;
 
     virtual ~IInverseFourierTransform() = default;
 
-    IInverseFourierTransform& operator=(const IInverseFourierTransform& x) = default;
+    IInverseFourierTransform& operator=(IInverseFourierTransform const& x) = default;
 
     IInverseFourierTransform& operator=(IInverseFourierTransform&& x) = default;
 

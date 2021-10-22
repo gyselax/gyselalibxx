@@ -20,14 +20,14 @@ struct DimX;
 
 using DDimX = NonUniformDiscretization<DimX>;
 
-constexpr std::array<double, 4> array_points VALUES;
+std::array<double, 4> constexpr array_points VALUES;
 static std::vector<double> const vector_points VALUES;
-constexpr Coordinate<DimX> min_x = Coordinate<DimX>(0.1);
-constexpr Coordinate<DimX> max_x = Coordinate<DimX>(0.4);
-constexpr DiscreteCoordinate<DDimX> lbound = DiscreteCoordinate<DDimX>(0);
-constexpr DiscreteCoordinate<DDimX> ubound = DiscreteCoordinate<DDimX>(3);
-constexpr DiscreteCoordinate<DDimX> point_ix = DiscreteCoordinate<DDimX>(2);
-constexpr Coordinate<DimX> point_rx = Coordinate<DimX>(0.3);
+Coordinate<DimX> constexpr min_x = Coordinate<DimX>(0.1);
+Coordinate<DimX> constexpr max_x = Coordinate<DimX>(0.4);
+DiscreteCoordinate<DDimX> constexpr lbound = DiscreteCoordinate<DDimX>(0);
+DiscreteCoordinate<DDimX> constexpr ubound = DiscreteCoordinate<DDimX>(3);
+DiscreteCoordinate<DDimX> constexpr point_ix = DiscreteCoordinate<DDimX>(2);
+Coordinate<DimX> constexpr point_rx = Coordinate<DimX>(0.3);
 
 } // namespace
 

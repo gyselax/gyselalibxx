@@ -43,15 +43,15 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx allfdistribu) 
 
 void SingleModePerturbInitialization::perturbation_initialization(
         DSpanX perturbation,
-        const int mode,
-        const double perturb_amplitude) const
+        int const mode,
+        double const perturb_amplitude) const
 {
     static_assert(RDimX::PERIODIC, "this computation for Lx is only valid for X periodic");
-    auto gridx = perturbation.domain();
-    const double Lx = fabs(gridx.mesh<IDimX>().step() + gridx.rmax() - gridx.rmin());
-    const double kx = mode * 2. * M_PI / Lx;
+    IDomainX const gridx = perturbation.domain();
+    double const Lx = fabs(gridx.mesh<IDimX>().step() + gridx.rmax() - gridx.rmin());
+    double const kx = mode * 2. * M_PI / Lx;
     for (IndexX ix : gridx) {
-        const CoordX x = gridx.to_real(ix);
+        CoordX const x = gridx.to_real(ix);
         perturbation(ix) = perturb_amplitude * cos(kx * x);
     }
 }

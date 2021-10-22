@@ -5,7 +5,7 @@
 namespace detail {
 template <class ElementType, class... DDims, class Layout, class Functor, class... MCoords>
 inline void for_each_impl(
-        const ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout>& to,
+        ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const& to,
         Functor&& f,
         MCoords&&... mcoords) noexcept
 {

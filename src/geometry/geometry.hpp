@@ -12,24 +12,24 @@ template <class Tag>
 struct Fourier
 {
     using base_tag_type = Tag;
-    static constexpr bool PERIODIC = Tag::PERIODIC;
+    static bool constexpr PERIODIC = Tag::PERIODIC;
 };
 
 
 
 struct RDimX
 {
-    static constexpr bool PERIODIC = true;
+    static bool constexpr PERIODIC = true;
 };
 
 struct RDimVx
 {
-    static constexpr bool PERIODIC = false;
+    static bool constexpr PERIODIC = false;
 };
 
 struct RDimT
 {
-    static constexpr bool PERIODIC = false;
+    static bool constexpr PERIODIC = false;
 };
 
 using RDimFx = Fourier<RDimX>;

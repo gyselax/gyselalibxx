@@ -55,12 +55,12 @@ DSpanSpXVx BslAdvectionVx::operator()(DSpanSpXVx allfdistribu, DViewX electric_p
     }
 
     for (IndexSp isp : sp_dom) {
-        const double sqrt_me_on_mspecies = std::sqrt(
+        double const sqrt_me_on_mspecies = std::sqrt(
                 m_species_info.mass()(m_species_info.ielec()) / m_species_info.mass()(isp));
 
         for (IndexX ix : x_dom) {
             // compute the displacement
-            const double dvx = m_species_info.charge()(isp) * sqrt_me_on_mspecies * dt * efield(ix);
+            double const dvx = m_species_info.charge()(isp) * sqrt_me_on_mspecies * dt * efield(ix);
 
             // compute the coordinates of the feet
             for (IndexVx iv : vx_dom) {

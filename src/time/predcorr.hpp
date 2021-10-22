@@ -16,7 +16,7 @@ class PredCorr : public ITimeSolver
     double const m_dt;
 
 public:
-    PredCorr(const IVlasovSolver& vlasov_solver, const IPoissonSolver& poisson_solver, double dt);
+    PredCorr(IVlasovSolver const& vlasov_solver, IPoissonSolver const& poisson_solver, double dt);
 
     void operator()(DSpanSpXVx allfdistribu, int steps) const override;
 };

@@ -18,13 +18,13 @@ class FftwFourierTransform : public IFourierTransform<Tag>
 public:
     FftwFourierTransform() = default;
 
-    FftwFourierTransform(const FftwFourierTransform& x) = default;
+    FftwFourierTransform(FftwFourierTransform const& x) = default;
 
     FftwFourierTransform(FftwFourierTransform&& x) = default;
 
     ~FftwFourierTransform() override = default;
 
-    FftwFourierTransform& operator=(const FftwFourierTransform& x) = default;
+    FftwFourierTransform& operator=(FftwFourierTransform const& x) = default;
 
     FftwFourierTransform& operator=(FftwFourierTransform&& x) = default;
 

@@ -18,13 +18,13 @@ class FftwInverseFourierTransform : public IInverseFourierTransform<Tag>
 public:
     FftwInverseFourierTransform() = default;
 
-    FftwInverseFourierTransform(const FftwInverseFourierTransform& x) = default;
+    FftwInverseFourierTransform(FftwInverseFourierTransform const& x) = default;
 
     FftwInverseFourierTransform(FftwInverseFourierTransform&& x) = default;
 
     ~FftwInverseFourierTransform() override = default;
 
-    FftwInverseFourierTransform& operator=(const FftwInverseFourierTransform& x) = default;
+    FftwInverseFourierTransform& operator=(FftwInverseFourierTransform const& x) = default;
 
     FftwInverseFourierTransform& operator=(FftwInverseFourierTransform&& x) = default;
 

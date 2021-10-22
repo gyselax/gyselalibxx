@@ -16,7 +16,7 @@ metadata:
     type: array
     subtype: double
     size: [ '$MeshVx_extents[0]' ]
-  
+
 data:
   fdistribu_extents: { type: array, subtype: int64, size: 3 }
   fdistribu:
@@ -28,19 +28,19 @@ data:
     type: array
     subtype: double
     size: [ '$electric_potential_extents[0]' ]
-    
+
 plugins:
   set_value:
     on_init:
       - share:
-        - iter_saved: 0
+	- iter_saved: 0
     on_data:
       iter:
-        - set:
-          - iter_saved: '${iter}/${nbstep_diag}'
+	- set:
+	  - iter_saved: '${iter}/${nbstep_diag}'
     on_finalize:
       - release: [iter_saved]
-  decl_hdf5:    
+  decl_hdf5:
     - file: 'VOICEXX_initstate.h5'
       on_event: [initial_state]
       collision_policy: replace_and_warn

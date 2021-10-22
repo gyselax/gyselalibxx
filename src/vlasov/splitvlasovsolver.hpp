@@ -9,12 +9,12 @@ class IAdvectionX;
 
 class SplitVlasovSolver : public IVlasovSolver
 {
-    const IAdvectionX& m_advec_x;
+    IAdvectionX const& m_advec_x;
 
-    const IAdvectionVx& m_advec_vx;
+    IAdvectionVx const& m_advec_vx;
 
 public:
-    SplitVlasovSolver(const IAdvectionX& advec_x, const IAdvectionVx& m_advec_vx);
+    SplitVlasovSolver(IAdvectionX const& advec_x, IAdvectionVx const& m_advec_vx);
 
     DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX efield, double dt) const override;
 };

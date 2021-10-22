@@ -11,8 +11,8 @@
 #include "predcorr.hpp"
 
 PredCorr::PredCorr(
-        const IVlasovSolver& vlasov_solver,
-        const IPoissonSolver& poisson_solver,
+        IVlasovSolver const& vlasov_solver,
+        IPoissonSolver const& poisson_solver,
         double dt)
     : m_vlasov_solver(vlasov_solver)
     , m_poisson_solver(poisson_solver)

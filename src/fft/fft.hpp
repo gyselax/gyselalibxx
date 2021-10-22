@@ -14,13 +14,13 @@ class IFourierTransform
 public:
     IFourierTransform() = default;
 
-    IFourierTransform(const IFourierTransform& x) = default;
+    IFourierTransform(IFourierTransform const& x) = default;
 
     IFourierTransform(IFourierTransform&& x) = default;
 
     virtual ~IFourierTransform() = default;
 
-    IFourierTransform& operator=(const IFourierTransform& x) = default;
+    IFourierTransform& operator=(IFourierTransform const& x) = default;
 
     IFourierTransform& operator=(IFourierTransform&& x) = default;
 

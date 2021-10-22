@@ -27,10 +27,10 @@ using DDimXY = detail::DiscreteSpace<DDimX, DDimY>;
 using MCoordXY = DiscreteCoordinate<DDimX, DDimY>;
 using RCoordXY = Coordinate<DimX, DimY>;
 
-constexpr DDimX ddim_x = DDimX(CoordX(2.), CoordX(0.1));
-constexpr std::array<RCoordY, 4> points_y {RCoordY(-1.), RCoordY(0.), RCoordY(2.), RCoordY(4.)};
+DDimX constexpr ddim_x = DDimX(CoordX(2.), CoordX(0.1));
+std::array<RCoordY, 4> constexpr points_y {RCoordY(-1.), RCoordY(0.), RCoordY(2.), RCoordY(4.)};
 static DDimY const ddim_y = DDimY(points_y);
-constexpr DDimXY ddim_x_y {ddim_x, ddim_y};
+DDimXY constexpr ddim_x_y {ddim_x, ddim_y};
 
 } // namespace
 
@@ -54,8 +54,8 @@ TEST(DiscreteSpaceTest, Submesh)
 
 TEST(DiscreteSpaceTest, Conversion)
 {
-    constexpr static DDimX ddim_x(CoordX(2.), CoordX(0.1));
-    constexpr detail::DiscreteSpace product_mesh_x(ddim_x);
+    static DDimX constexpr ddim_x(CoordX(2.), CoordX(0.1));
+    detail::DiscreteSpace constexpr product_mesh_x(ddim_x);
     DDimX const& ddim_x_ref = get<DDimX>(product_mesh_x);
     double step = ddim_x_ref.step();
     EXPECT_EQ(0.1, step);

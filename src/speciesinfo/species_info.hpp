@@ -9,9 +9,9 @@
   where u is the mean velocity
 */
 void maxwellian_initialization(
-        const double density,
-        const double temperature,
-        const double mean_velocity,
+        double const density,
+        double const temperature,
+        double const mean_velocity,
         DSpanVx fMaxwellian);
 
 class SpeciesInformation
