@@ -68,7 +68,7 @@ public:
     inline ~Chunk()
     {
         if (this->m_internal_mdspan.data()) {
-            operator delete(this->data(), std::align_val_t(64));
+            operator delete[](this->data(), std::align_val_t(64));
         }
     }
 
