@@ -6,12 +6,15 @@ SHELL ["/bin/bash", "-c"]
 
 
 RUN chmod +x /bin/bash_run \
+ && export DEBIAN_FRONTEND=noninteractive \
+ && echo tzdata tzdata/Areas string Etc | debconf-set-selections \
+ && echo tzdata tzdata/Zones/Etc string UTC | debconf-set-selections \
  && apt-get update -y \
  && apt-get upgrade -y \
- && echo -e '13\n33\n' \
-  | apt-get install -qy --no-install-recommends \
+ && apt-get install -y --no-install-recommends \
+    apt-transport-https \
+    apt-utils \
     ca-certificates \
-    tzdata \
     wget \
  && echo "deb [ arch=amd64 ] https://raw.githubusercontent.com/pdidev/repo/pdi-master.ubuntu focal main" > /etc/apt/sources.list.d/pdi.list \
  && wget -O /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg https://raw.githubusercontent.com/pdidev/repo/pdi-master.ubuntu/pdidev-archive-keyring.gpg \
@@ -28,8 +31,16 @@ RUN chmod +x /bin/bash_run \
     libfftw3-dev \
     liblapack-dev \
     pdidev-archive-keyring \
+    pdiplugin-decl-hdf5-serial \
+    pdiplugin-set-value \
+    python3-h5py \
+    python3-numpy \
+    python3-matplotlib \
+    python3-scipy \
     libpdi-dev \
  && apt-get purge -y \
+    apt-transport-https \
+    apt-utils \
     ca-certificates \
     wget \
  && apt-get autoremove -y \

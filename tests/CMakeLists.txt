@@ -19,3 +19,5 @@ target_link_libraries(unit_tests
         vcx::vlasov
 )
 gtest_discover_tests(unit_tests)
+
+add_subdirectory(landau)
