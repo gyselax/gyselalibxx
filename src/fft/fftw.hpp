@@ -32,8 +32,7 @@ public:
             DiscreteDomain<UniformDiscretization<Tag>> const& dom_x) const noexcept override
     {
         std::vector<double> freqs(dom_x.size());
-        double const inv_Nd
-                = 1. / (dom_x.size() * dom_x.template mesh<UniformDiscretization<Tag>>().step());
+        double const inv_Nd = 1. / (dom_x.size() * step<UniformDiscretization<Tag>>());
         for (std::size_t ii = 0; ii <= dom_x.size() / 2; ++ii) {
             freqs[ii] = ii * inv_Nd;
         }

@@ -6,7 +6,6 @@ include(GoogleTest)
 add_executable(ddc_tests
     chunk.cpp
     discrete_domain.cpp
-    discrete_space.cpp
     non_uniform_discretization.cpp
     single_discretization.cpp
     tagged_vector.cpp

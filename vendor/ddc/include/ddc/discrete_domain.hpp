@@ -5,7 +5,6 @@
 #include <tuple>
 
 #include "ddc/coordinate.hpp"
-#include "ddc/detail/discrete_space.hpp"
 #include "ddc/detail/type_seq.hpp"
 #include "ddc/discrete_coordinate.hpp"
 
@@ -18,26 +17,15 @@ class DiscreteDomain;
 template <class... DDims>
 class DiscreteDomain
 {
-    template <class DDim>
-    using rdim_t = typename DDim::rdim_type;
-
-    // static_assert((... && is_mesh_v<DDims>), "A template parameter is not a mesh");
-
-    static_assert((... && (DDims::rank() == 1)), "Only rank 1 ddims are allowed.");
-
     template <class...>
     friend class DiscreteDomain;
 
 public:
-    using rcoord_type = Coordinate<rdim_t<DDims>...>;
-
     using mcoord_type = DiscreteCoordinate<DDims...>;
 
     using mlength_type = DiscreteVector<DDims...>;
 
 private:
-    detail::DiscreteSpace<DDims...> m_ddim;
-
     DiscreteCoordinate<DDims...> m_lbound;
 
     DiscreteCoordinate<DDims...> m_ubound;
@@ -53,8 +41,7 @@ public:
     /// Construct a DiscreteDomain from a reordered copy of `domain`
     template <class... ODDims>
     explicit constexpr DiscreteDomain(DiscreteDomain<ODDims...> const& domain)
-        : m_ddim(domain.template mesh<DDims>()...)
-        , m_lbound(domain.front())
+        : m_lbound(domain.front())
         , m_ubound(domain.back())
     {
     }
@@ -63,34 +50,26 @@ public:
     // Note that SFINAE may be redundant because a template constructor should not be selected as a copy constructor.
     template <std::size_t N = sizeof...(DDims), class = std::enable_if_t<(N != 1)>>
     explicit constexpr DiscreteDomain(DiscreteDomain<DDims> const&... domains)
-        : m_ddim(domains.template mesh<DDims>()...)
-        , m_lbound(domains.front()...)
+        : m_lbound(domains.front()...)
         , m_ubound(domains.back()...)
     {
     }
 
     /** Construct a DiscreteDomain starting from (0, ..., 0) with size points.
-     * @param ddims the discrete dimensions on which the domain is constructed
-     * @param size the number of points in each direction
+     * @param size the number of points in each dimension
      */
-    constexpr DiscreteDomain(DDims const&... ddims, mlength_type const& size)
-        : m_ddim(ddims...)
-        , m_lbound((get<DDims>(size) - get<DDims>(size))...) // Hack to have expansion of zero
+    constexpr DiscreteDomain(mlength_type const& size)
+        : m_lbound((get<DDims>(size) - get<DDims>(size))...) // Hack to have expansion of zero
         , m_ubound((get<DDims>(size) - 1)...)
     {
     }
 
     /** Construct a DiscreteDomain starting from lbound with size points.
-     * @param ddims the discrete dimensions on which the domain is constructed
      * @param lbound the lower bound in each direction
      * @param size the number of points in each direction
      */
-    constexpr DiscreteDomain(
-            DDims const&... ddims,
-            mcoord_type const& lbound,
-            mlength_type const& size)
-        : m_ddim(ddims...)
-        , m_lbound(lbound)
+    constexpr DiscreteDomain(mcoord_type const& lbound, mlength_type const& size)
+        : m_lbound(lbound)
         , m_ubound((get<DDims>(lbound) + get<DDims>(size) - 1)...)
     {
     }
@@ -107,8 +86,7 @@ public:
 
     constexpr bool operator==(DiscreteDomain const& other) const
     {
-        return (((get<DDims>(m_ddim) == get<DDims>(other.m_ddim)) && ...)
-                && m_lbound == other.m_lbound && m_ubound == other.m_ubound);
+        return m_lbound == other.m_lbound && m_ubound == other.m_ubound;
     }
 
 #if __cplusplus <= 201703L
@@ -119,12 +97,6 @@ public:
         return !(*this == other);
     }
 #endif
-
-    template <class QueryDDim>
-    auto const& mesh() const
-    {
-        return get<QueryDDim>(m_ddim);
-    }
 
     std::size_t size() const
     {
@@ -152,21 +124,6 @@ public:
         return m_ubound;
     }
 
-    rcoord_type to_real(mcoord_type const& icoord) const noexcept
-    {
-        return m_ddim.to_real(icoord);
-    }
-
-    rcoord_type rmin() const noexcept
-    {
-        return to_real(front());
-    }
-
-    rcoord_type rmax() const noexcept
-    {
-        return to_real(back());
-    }
-
     template <class... ODDims>
     constexpr auto restrict(DiscreteDomain<ODDims...> const& odomain) const
     {
@@ -175,7 +132,6 @@ public:
         const DiscreteVector<DDims...> myextents = extents();
         const DiscreteVector<ODDims...> oextents = odomain.extents();
         return DiscreteDomain(
-                get<DDims>(m_ddim)...,
                 DiscreteCoordinate<DDims...>(
                         (get_or<DDims>(odomain.m_lbound, get<DDims>(m_lbound)))...),
                 DiscreteVector<DDims...>((get_or<DDims>(oextents, get<DDims>(myextents)))...));
@@ -244,7 +200,6 @@ template <class... QueryDDims, class... DDims>
 constexpr DiscreteDomain<QueryDDims...> select(DiscreteDomain<DDims...> const& domain)
 {
     return DiscreteDomain<QueryDDims...>(
-            domain.template mesh<QueryDDims>()...,
             select<QueryDDims...>(domain.front()),
             select<QueryDDims...>(domain.extents()));
 }
@@ -315,22 +270,22 @@ template <class DDim>
 struct DiscreteDomainIterator
 {
 private:
-    typename DDim::mcoord_type m_value = typename DDim::mcoord_type();
+    DiscreteCoordinate<DDim> m_value = DiscreteCoordinate<DDim>();
 
 public:
     using iterator_category = std::random_access_iterator_tag;
 
-    using value_type = typename DDim::mcoord_type;
+    using value_type = DiscreteCoordinate<DDim>;
 
     using difference_type = DiscreteVectorElement;
 
     DiscreteDomainIterator() = default;
 
-    constexpr explicit DiscreteDomainIterator(typename DDim::mcoord_type __value) : m_value(__value)
+    constexpr explicit DiscreteDomainIterator(DiscreteCoordinate<DDim> __value) : m_value(__value)
     {
     }
 
-    constexpr typename DDim::mcoord_type operator*() const noexcept
+    constexpr DiscreteCoordinate<DDim> operator*() const noexcept
     {
         return m_value;
     }

@@ -68,7 +68,7 @@ DSpanX FftPoissonSolver::operator()(DSpanX electric_potential, DViewSpXVx allfdi
 
     // Build a mesh in the fourier space, for N points
     IDimFx const mesh_fx = m_fft.compute_fourier_domain(dom_x);
-    IDomainFx const dom_fx(mesh_fx, DiscreteVector<IDimFx>(mesh_fx.size()));
+    IDomainFx const dom_fx(DiscreteVector<IDimFx>(mesh_fx.size()));
 
     // Compute FFT(rho)
     Chunk<std::complex<double>, IDomainFx> complex_Phi_fx(dom_fx);

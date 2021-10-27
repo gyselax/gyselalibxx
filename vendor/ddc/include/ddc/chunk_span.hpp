@@ -7,7 +7,6 @@
 
 #include <experimental/mdspan>
 
-#include "ddc/detail/discrete_space.hpp"
 #include "ddc/discrete_domain.hpp"
 
 template <class, class>

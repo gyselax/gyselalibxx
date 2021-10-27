@@ -1,2 +1,2 @@
-#include "ddc/discrete_coord.hpp"
+#include "ddc/discrete_coordinate.hpp"
 

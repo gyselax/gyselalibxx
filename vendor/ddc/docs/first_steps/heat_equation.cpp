@@ -66,13 +66,10 @@ int main(int argc, char** argv)
 
     //! [domain]
     // Take (nx+2gw) x (ny+2gw) points of `mesh_xy` starting from (0,0)
-    DiscreteDomain<DDimX, DDimY>
-            domain_xy(ddim_x, ddim_y, DiscreteVector<DDimX, DDimY>(nx + 2 * gw, ny + 2 * gw));
+    DiscreteDomain<DDimX, DDimY> domain_xy(DiscreteVector<DDimX, DDimY>(nx + 2 * gw, ny + 2 * gw));
 
     // Take only the inner domain (i.e. without ghost zone)
     DiscreteDomain<DDimX, DDimY> inner_xy(
-            ddim_x,
-            ddim_y,
             DiscreteCoordinate<DDimX, DDimY>(gw, gw),
             DiscreteVector<DDimX, DDimY>(nx, ny));
     //! [domain]

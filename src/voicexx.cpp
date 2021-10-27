@@ -45,49 +45,47 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    CoordX x_min = [&]() {
+    CoordX const x_min = [&]() {
         double x_min;
         PC_double(PC_get(conf_voicexx, ".Mesh.x_min"), &x_min);
         return CoordX(x_min);
     }();
-    CoordX x_max = [&]() {
+    CoordX const x_max = [&]() {
         double x_max;
         PC_double(PC_get(conf_voicexx, ".Mesh.x_max"), &x_max);
         return CoordX(x_max);
     }();
-    IVectX x_size = [&]() {
+    IVectX const x_size = [&]() {
         long x_size;
         PC_int(PC_get(conf_voicexx, ".Mesh.x_size"), &x_size);
         return IVectX(x_size);
     }();
-    CoordVx vx_min = [&]() {
+    CoordVx const vx_min = [&]() {
         double vx_min;
         PC_double(PC_get(conf_voicexx, ".Mesh.vx_min"), &vx_min);
         return CoordVx(vx_min);
     }();
-    CoordVx vx_max = [&]() {
+    CoordVx const vx_max = [&]() {
         double vx_max;
         PC_double(PC_get(conf_voicexx, ".Mesh.vx_max"), &vx_max);
         return CoordVx(vx_max);
     }();
-    IVectVx vx_size = [&]() {
+    IVectVx const vx_size = [&]() {
         double vx_size;
         PC_double(PC_get(conf_voicexx, ".Mesh.vx_size"), &vx_size);
         return IVectVx(vx_size);
     }();
 
     // Creating mesh & supports
-    BSplinesX const bsplines_x(x_min, x_max, x_size);
+    init_discretization<BSplinesX>(x_min, x_max, x_size);
 
-    SplineXBuilder const builder_x(bsplines_x);
+    init_discretization<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    BSplinesVx const bsplines_vx(vx_min, vx_max, vx_size);
+    SplineXBuilder const builder_x;
 
-    SplineVxBuilder const builder_vx(bsplines_vx);
+    SplineVxBuilder const builder_vx;
 
-    IDimSp species;
-
-    IDomainSp dom_sp(species, IVectSp(2));
+    IDomainSp const dom_sp(IVectSp(2));
 
     IDomainSpXVx const
             mesh(dom_sp, builder_x.interpolation_domain(), builder_vx.interpolation_domain());
@@ -125,7 +123,7 @@ int main(int argc, char** argv)
     }
 
     // Initialization of the distribution function
-    SpeciesInformation species_info(
+    SpeciesInformation const species_info(
             std::move(charges),
             std::move(masses),
             std::move(density_eq),
@@ -133,9 +131,10 @@ int main(int argc, char** argv)
             std::move(mean_velocity_eq),
             mesh);
 
-    DFieldSpXVx allfdistribu(mesh.restrict(IDomainSp(species, species_info.ielec(), IVectSp(1))));
+    DFieldSpXVx allfdistribu(mesh.restrict(IDomainSp(species_info.ielec(), IVectSp(1))));
 
-    SingleModePerturbInitialization init(species_info, init_perturb_mode, init_perturb_amplitude);
+    SingleModePerturbInitialization const
+            init(species_info, init_perturb_mode, init_perturb_amplitude);
     init(allfdistribu);
 
     // --> Algorithm info
@@ -155,15 +154,16 @@ int main(int argc, char** argv)
 
     // Creating operators
 
-    SplineEvaluator<BSplinesVx>
-            spline_vx_evaluator(bsplines_vx, NullBoundaryValue::value, NullBoundaryValue::value);
+    SplineEvaluator<BSplinesVx> const
+            spline_vx_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
 
-    SplineEvaluator<BSplinesX>
-            spline_x_evaluator(bsplines_x, NullBoundaryValue::value, NullBoundaryValue::value);
+    SplineEvaluator<BSplinesX> const
+            spline_x_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
 
-    PreallocatableSplineInterpolatorX spline_x_interpolator(builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolatorX const spline_x_interpolator(builder_x, spline_x_evaluator);
 
-    PreallocatableSplineInterpolatorVx spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    PreallocatableSplineInterpolatorVx const
+            spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
     BslAdvectionX const advection_x(species_info, spline_x_interpolator);
 
@@ -172,25 +172,25 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    FftwFourierTransform<RDimX> fft;
+    FftwFourierTransform<RDimX> const fft;
 
-    FftwInverseFourierTransform<RDimX> ifft;
+    FftwInverseFourierTransform<RDimX> const ifft;
 
-    FftPoissonSolver poisson(species_info, fft, ifft, builder_vx, spline_vx_evaluator);
+    FftPoissonSolver const poisson(species_info, fft, ifft, builder_vx, spline_vx_evaluator);
 
     PredCorr const predcorr(vlasov, poisson, deltat);
 
     // Creating of mesh for output saving
-    IDomainX gridx = select<IDimX>(mesh);
+    IDomainX const gridx = select<IDimX>(mesh);
     FieldX<CoordX> meshX_coord(gridx);
     for (IndexX ix : gridx) {
-        meshX_coord(ix) = gridx.to_real(ix);
+        meshX_coord(ix) = to_real(ix);
     }
 
-    IDomainVx gridvx = select<IDimVx>(mesh);
+    IDomainVx const gridvx = select<IDimVx>(mesh);
     FieldVx<CoordVx> meshVx_coord(gridvx);
     for (IndexVx ivx : gridvx) {
-        meshVx_coord(ivx) = gridvx.to_real(ivx);
+        meshVx_coord(ivx) = to_real(ivx);
     }
 
     // Starting the code
@@ -201,13 +201,13 @@ int main(int argc, char** argv)
     expose_to_pdi("nbstep_diag", nbstep_diag);
     PdiEvent("initial_state");
 
-    steady_clock::time_point start = steady_clock::now();
+    steady_clock::time_point const start = steady_clock::now();
 
     predcorr(allfdistribu, nbiter);
 
-    steady_clock::time_point end = steady_clock::now();
+    steady_clock::time_point const end = steady_clock::now();
 
-    double simulation_time = std::chrono::duration<double>(end - start).count();
+    double const simulation_time = std::chrono::duration<double>(end - start).count();
     std::cout << "Simulation time: " << simulation_time << "s\n";
 
     PC_tree_destroy(&conf_pdi);

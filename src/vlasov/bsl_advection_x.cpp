@@ -1,5 +1,7 @@
 #include <cassert>
 
+#include <ddc/discretization>
+
 #include <species_info.hpp>
 
 #include "bsl_advection_x.hpp"
@@ -32,11 +34,11 @@ DSpanSpXVx BslAdvectionX::operator()(DSpanSpXVx allfdistribu, double dt) const
 
         for (IndexVx iv : v_dom) {
             // compute the displacement
-            double const dx = sqrt_me_on_mspecies * dt * v_dom.to_real(iv);
+            double const dx = sqrt_me_on_mspecies * dt * to_real(iv);
 
             // compute the coordinates of the feet
             for (IndexX ix : x_dom) {
-                feet_coords(ix) = x_dom.to_real(ix) - dx;
+                feet_coords(ix) = to_real(ix) - dx;
             }
 
             // copy the slice in contiguous memory

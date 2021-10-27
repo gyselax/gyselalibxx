@@ -8,6 +8,7 @@
 #include <ddc/ChunkSpan>
 #include <ddc/NonUniformDiscretization>
 #include <ddc/UniformDiscretization>
+#include <ddc/discretization>
 
 #include "sll/math_tools.hpp"
 #include "sll/matrix.hpp"
@@ -70,11 +71,7 @@ private:
     static constexpr int s_nbc_xmax = BcXmin == BoundCond::HERMITE ? BSplines::degree() / 2 : 0;
 
 private:
-    std::unique_ptr<interpolation_mesh_type> m_interpolation_mesh;
-
     std::unique_ptr<interpolation_domain_type> m_interpolation_domain;
-
-    bsplines_type const& m_bsplines;
 
     double m_dx; // average cell size for normalization of derivatives
 
@@ -82,9 +79,7 @@ private:
     std::unique_ptr<Matrix> matrix;
 
 public:
-    SplineBuilder() = delete;
-
-    SplineBuilder(BSplines const& bsplines);
+    SplineBuilder();
 
     SplineBuilder(const SplineBuilder& x) = delete;
 
@@ -109,7 +104,8 @@ public:
 
     DiscreteDomain<BSplines> spline_domain() const noexcept
     {
-        return DiscreteDomain<BSplines>(m_bsplines, DiscreteVector<BSplines>(m_bsplines.size()));
+        return DiscreteDomain<BSplines>(
+                DiscreteVector<BSplines>(discretization<BSplines>().size()));
     }
 
 private:
@@ -131,10 +127,10 @@ private:
 };
 
 template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
-SplineBuilder<BSplines, BcXmin, BcXmax>::SplineBuilder(BSplines const& bsplines)
+SplineBuilder<BSplines, BcXmin, BcXmax>::SplineBuilder()
     : m_interpolation_domain(nullptr)
-    , m_bsplines(bsplines)
-    , m_dx((bsplines.rmax() - bsplines.rmin()) / bsplines.ncells())
+    , m_dx((discretization<BSplines>().rmax() - discretization<BSplines>().rmin())
+           / discretization<BSplines>().ncells())
     , matrix(nullptr)
 {
     int lower_block_size, upper_block_size;
@@ -158,11 +154,11 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolant_degree1(
         ChunkSpan<double, bsplines_type>& spline,
         ChunkSpan<double, interpolation_domain_type> const& vals) const
 {
-    for (int i(0); i < m_bsplines.nbasis(); ++i) {
+    for (int i(0); i < discretization<BSplines>().nbasis(); ++i) {
         spline(i) = vals(i);
     }
     if constexpr (bsplines_type::is_periodic()) {
-        spline(m_bsplines.nbasis()) = spline(0);
+        spline(discretization<BSplines>().nbasis()) = spline(0);
     }
 }
 
@@ -176,8 +172,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
         DSpan1D const* derivs_xmax) const
 {
     assert(vals.template extent<interpolation_mesh_type>()
-           == m_bsplines.nbasis() - s_nbc_xmin - s_nbc_xmax);
-    // assert(spline.belongs_to_space(m_bsplines));
+           == discretization<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax);
+    // assert(spline.belongs_to_space(discretization<BSplines>()));
     // TODO: LOG Errors
     if constexpr (bsplines_type::degree() == 1)
         return compute_interpolant_degree1(spline, vals);
@@ -210,21 +206,22 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
     //       provided by the user must be multiplied by dx^i
     if constexpr (BcXmax == BoundCond::HERMITE) {
         for (int i(0); i < s_nbc_xmax; ++i) {
-            spline(DiscreteCoordinate<bsplines_type>(m_bsplines.nbasis() - s_nbc_xmax + i))
+            spline(DiscreteCoordinate<bsplines_type>(
+                    discretization<BSplines>().nbasis() - s_nbc_xmax + i))
                     = (*derivs_xmax)(i)*ipow(m_dx, i + s_odd);
         }
     }
 
-    DSpan1D bcoef_section(spline.data() + s_offset, m_bsplines.nbasis());
+    DSpan1D bcoef_section(spline.data() + s_offset, discretization<BSplines>().nbasis());
     matrix->solve_inplace(bcoef_section);
 
     if constexpr (BcXmin == BoundCond::PERIODIC && s_offset != 0) {
         for (int i(0); i < s_offset; ++i) {
-            spline(DiscreteCoordinate<bsplines_type>(i))
-                    = spline(DiscreteCoordinate<bsplines_type>(m_bsplines.nbasis() + i));
+            spline(DiscreteCoordinate<bsplines_type>(i)) = spline(
+                    DiscreteCoordinate<bsplines_type>(discretization<BSplines>().nbasis() + i));
         }
         for (int i(s_offset); i < bsplines_type::degree(); ++i) {
-            spline(DiscreteCoordinate<bsplines_type>(m_bsplines.nbasis() + i))
+            spline(DiscreteCoordinate<bsplines_type>(discretization<BSplines>().nbasis() + i))
                     = spline(DiscreteCoordinate<bsplines_type>(i));
         }
     }
@@ -238,15 +235,14 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
 template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_uniform()
 {
-    int const n_interp_pts = m_bsplines.nbasis() - s_nbc_xmin - s_nbc_xmax;
+    int const n_interp_pts = discretization<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax;
 
     if constexpr (BcXmin == BoundCond::PERIODIC) {
         double const shift(!s_odd ? 0.5 : 0.0);
-        m_interpolation_mesh = std::make_unique<interpolation_mesh_type>(
-                Coordinate<tag_type>(m_bsplines.rmin() + shift * m_dx),
+        init_discretization<interpolation_mesh_type>(
+                Coordinate<tag_type>(discretization<BSplines>().rmin() + shift * m_dx),
                 Coordinate<tag_type>(m_dx));
         m_interpolation_domain = std::make_unique<interpolation_domain_type>(
-                *m_interpolation_mesh,
                 DiscreteVector<interpolation_mesh_type>(n_interp_pts));
     } else {
         std::vector<double> interp_pts(n_interp_pts);
@@ -265,31 +261,31 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
         }
 
         // Knots inside the domain
-        for (int j(0); j < m_bsplines.ncells() + 1; ++i, ++j) {
+        for (int j(0); j < discretization<BSplines>().ncells() + 1; ++i, ++j) {
             iknots[i] = j;
         }
 
         // Additional knots near x=xmax
         for (int j(1); i < n_iknots; ++i, ++j) {
             if constexpr (BcXmax == BoundCond::GREVILLE)
-                iknots[i] = m_bsplines.ncells();
+                iknots[i] = discretization<BSplines>().ncells();
             if constexpr (BcXmax == BoundCond::HERMITE)
-                iknots[i] = m_bsplines.ncells() + j;
+                iknots[i] = discretization<BSplines>().ncells() + j;
         }
 
         for (int j(0); j < n_interp_pts; ++j) {
             int isum(sum(iknots.data() + j, bsplines_type::degree()));
-            interp_pts[j] = m_bsplines.rmin() + m_dx * isum / bsplines_type::degree();
+            interp_pts[j]
+                    = discretization<BSplines>().rmin() + m_dx * isum / bsplines_type::degree();
         }
 
         // Non-periodic case, odd degree: fix round-off issues
         if constexpr (s_odd) {
-            interp_pts[0] = m_bsplines.rmin();
-            interp_pts[n_interp_pts - 1] = m_bsplines.rmax();
+            interp_pts[0] = discretization<BSplines>().rmin();
+            interp_pts[n_interp_pts - 1] = discretization<BSplines>().rmax();
         }
-        m_interpolation_mesh = std::make_unique<interpolation_mesh_type>(interp_pts);
+        init_discretization<interpolation_mesh_type>(interp_pts);
         m_interpolation_domain = std::make_unique<interpolation_domain_type>(
-                *m_interpolation_mesh,
                 DiscreteVector<NonUniformDiscretization<tag_type>>(interp_pts.size()));
     }
 }
@@ -299,7 +295,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
 template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_uniform()
 {
-    int n_interp_pts = m_bsplines.nbasis() - s_nbc_xmin - s_nbc_xmax;
+    int n_interp_pts = discretization<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax;
     std::vector<double> interp_pts(n_interp_pts);
 
     int n_temp_knots(n_interp_pts - 1 + bsplines_type::degree());
@@ -307,7 +303,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
 
     if constexpr (BcXmin == BoundCond::PERIODIC) {
         for (int i(0); i < n_interp_pts - 1 + bsplines_type::degree(); ++i) {
-            temp_knots[i] = m_bsplines.get_knot(1 - bsplines_type::degree() + s_offset + i);
+            temp_knots[i] = discretization<BSplines>().get_knot(
+                    1 - bsplines_type::degree() + s_offset + i);
         }
     } else {
         int i(0);
@@ -318,23 +315,28 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
             // As xmin_bc is a const variable the compiler should optimize
             // for(if..else..) to if(for..)else(for...)
             if constexpr (BcXmin == BoundCond::GREVILLE)
-                temp_knots[i] = m_bsplines.get_knot(0);
+                temp_knots[i] = discretization<BSplines>().get_knot(0);
             if constexpr (BcXmin == BoundCond::HERMITE)
-                temp_knots[i] = 2.0 * m_bsplines.get_knot(0) - m_bsplines.get_knot(n_start_pts - i);
+                temp_knots[i] = 2.0 * discretization<BSplines>().get_knot(0)
+                                - discretization<BSplines>().get_knot(n_start_pts - i);
         }
 
         // Initialise central knots
-        for (int j(0); j < m_bsplines.npoints(); ++i, ++j) {
-            temp_knots[i] = m_bsplines.get_knot(j);
+        for (int j(0); j < discretization<BSplines>().npoints(); ++i, ++j) {
+            temp_knots[i] = discretization<BSplines>().get_knot(j);
         }
 
         // Initialise knots relevant to the xmax boundary condition
         for (int j(0); i < n_temp_knots; ++i, ++j) {
             if constexpr (BcXmax == BoundCond::GREVILLE)
-                temp_knots[i] = m_bsplines.get_knot(m_bsplines.ncells());
+                temp_knots[i]
+                        = discretization<BSplines>().get_knot(discretization<BSplines>().ncells());
             if constexpr (BcXmax == BoundCond::HERMITE)
-                temp_knots[i] = 2.0 * m_bsplines.get_knot(m_bsplines.ncells())
-                                - m_bsplines.get_knot(m_bsplines.ncells() - 1 - j);
+                temp_knots[i] = 2.0
+                                        * discretization<BSplines>().get_knot(
+                                                discretization<BSplines>().ncells())
+                                - discretization<BSplines>().get_knot(
+                                        discretization<BSplines>().ncells() - 1 - j);
         }
     }
 
@@ -346,22 +348,22 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
 
     // Periodic case: apply periodic BCs to interpolation points
     if constexpr (BcXmin == BoundCond::PERIODIC) {
-        double zone_width(m_bsplines.rmax() - m_bsplines.rmin());
+        double zone_width(discretization<BSplines>().rmax() - discretization<BSplines>().rmin());
         for (int i(0); i < n_interp_pts; ++i) {
-            interp_pts[i] = modulo(interp_pts[i] - s_nbc_xmin, zone_width) + m_bsplines.rmin();
+            interp_pts[i] = modulo(interp_pts[i] - s_nbc_xmin, zone_width)
+                            + discretization<BSplines>().rmin();
         }
     }
     // Non-periodic case, odd degree: fix round-off issues
     else {
         if constexpr (s_odd) {
-            interp_pts[0] = m_bsplines.rmin();
-            interp_pts[n_interp_pts - 1] = m_bsplines.rmax();
+            interp_pts[0] = discretization<BSplines>().rmin();
+            interp_pts[n_interp_pts - 1] = discretization<BSplines>().rmax();
         }
     }
 
-    m_interpolation_mesh = std::make_unique<interpolation_mesh_type>(interp_pts);
+    init_discretization<interpolation_mesh_type>(interp_pts);
     m_interpolation_domain = std::make_unique<interpolation_domain_type>(
-            *m_interpolation_mesh,
             DiscreteCoordinate<NonUniformDiscretization<tag_type>>(interp_pts.size()));
 }
 
@@ -462,13 +464,13 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::allocate_matrix(
 
     if constexpr (BcXmin == BoundCond::PERIODIC) {
         matrix = Matrix::make_new_periodic_banded(
-                m_bsplines.nbasis(),
+                discretization<BSplines>().nbasis(),
                 upper_band_width,
                 upper_band_width,
                 bsplines_type::is_uniform());
     } else {
         matrix = Matrix::make_new_block_with_banded_region(
-                m_bsplines.nbasis(),
+                discretization<BSplines>().nbasis(),
                 upper_band_width,
                 upper_band_width,
                 bsplines_type::is_uniform(),
@@ -492,7 +494,11 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
     if constexpr (BcXmin == BoundCond::HERMITE) {
         double derivs_ptr[(bsplines_type::degree() / 2 + 1) * (bsplines_type::degree() + 1)];
         DSpan2D derivs(derivs_ptr, bsplines_type::degree() + 1, bsplines_type::degree() / 2 + 1);
-        m_bsplines.eval_basis_and_n_derivs(m_bsplines.rmin(), s_nbc_xmin, derivs, jmin);
+        discretization<BSplines>().eval_basis_and_n_derivs(
+                discretization<BSplines>().rmin(),
+                s_nbc_xmin,
+                derivs,
+                jmin);
 
         // In order to improve the condition number of the matrix, we normalize
         // all derivatives by multiplying the i-th derivative by dx^i
@@ -514,13 +520,11 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
     // Interpolation points
     double values_ptr[bsplines_type::degree() + 1];
     DSpan1D values(values_ptr, bsplines_type::degree() + 1);
-    for (int i(0); i < m_bsplines.nbasis() - s_nbc_xmin - s_nbc_xmax; ++i) {
-        m_bsplines.eval_basis(
-                m_interpolation_domain->to_real(DiscreteCoordinate<interpolation_mesh_type>(i)),
-                values,
-                jmin);
+    for (int i(0); i < discretization<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax; ++i) {
+        discretization<BSplines>()
+                .eval_basis(to_real(DiscreteCoordinate<interpolation_mesh_type>(i)), values, jmin);
         for (int s(0); s < bsplines_type::degree() + 1; ++s) {
-            int j = modulo(jmin - s_offset + s, (int)m_bsplines.nbasis());
+            int j = modulo(jmin - s_offset + s, (int)discretization<BSplines>().nbasis());
             matrix->set_element(j, i + s_nbc_xmin, values(s));
         }
     }
@@ -530,7 +534,11 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
         double derivs_ptr[(bsplines_type::degree() / 2 + 1) * (bsplines_type::degree() + 1)];
         DSpan2D derivs(derivs_ptr, bsplines_type::degree() + 1, bsplines_type::degree() / 2 + 1);
 
-        m_bsplines.eval_basis_and_n_derivs(m_bsplines.rmax(), s_nbc_xmax, derivs, jmin);
+        discretization<BSplines>().eval_basis_and_n_derivs(
+                discretization<BSplines>().rmax(),
+                s_nbc_xmax,
+                derivs,
+                jmin);
 
         // In order to improve the condition number of the matrix, we normalize
         // all derivatives by multiplying the i-th derivative by dx^i
@@ -540,8 +548,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
             }
         }
 
-        int i0(m_bsplines.nbasis() - bsplines_type::degree());
-        int j0(m_bsplines.nbasis() - s_nbc_xmax);
+        int i0(discretization<BSplines>().nbasis() - bsplines_type::degree());
+        int j0(discretization<BSplines>().nbasis() - s_nbc_xmax);
         for (int i(0); i < bsplines_type::degree(); ++i) {
             for (int j(0); j < s_nbc_xmax; ++j) {
                 matrix->set_element(i0 + i, j0 + j, derivs(i + 1, j + s_odd));

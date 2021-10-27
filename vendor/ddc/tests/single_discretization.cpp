@@ -19,7 +19,7 @@ using CoordX = Coordinate<DimX>;
 
 using DDimX = SingleDiscretization<DimX>;
 
-using IndexX = DiscreteCoordinate<DDimX>;
+using ElemX = DiscreteCoordinate<DDimX>;
 
 } // namespace
 
@@ -34,5 +34,5 @@ TEST(SingleDiscretization, Constructor)
 
     SingleDiscretization<DimX> ddim_x(x);
 
-    EXPECT_EQ(ddim_x.to_real(IndexX(0)), x);
+    EXPECT_EQ(ddim_x.to_real(ElemX(0)), x);
 }

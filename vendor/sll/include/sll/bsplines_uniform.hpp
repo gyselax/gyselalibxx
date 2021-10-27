@@ -56,8 +56,6 @@ public:
     }
 
 private:
-    mesh_type m_mesh;
-
     // In the periodic case, it contains twice the periodic point!!!
     DiscreteDomain<mesh_type> m_domain;
 
@@ -71,17 +69,12 @@ public:
      * @param n_knots the number of knots
      */
     explicit UniformBSplines(Coordinate<Tag> rmin, Coordinate<Tag> rmax, std::size_t ncells)
-        : m_mesh(
-                rmin,
-                rmax,
+        : m_domain(
+                DiscreteCoordinate<mesh_type>(0),
                 DiscreteVector<mesh_type>(
-                        ncells + 1)) // Compute correct step, independent of periodicity
-        , m_domain(
-                  m_mesh,
-                  DiscreteCoordinate<mesh_type>(0),
-                  DiscreteVector<mesh_type>(
-                          ncells + 1)) // Create a mesh including the eventual periodic point
+                        ncells + 1)) // Create a mesh including the eventual periodic point
     {
+        init_discretization<mesh_type>(rmin, rmax, DiscreteVector<mesh_type>(ncells + 1));
     }
 
     UniformBSplines(UniformBSplines const& x) = default;
@@ -118,17 +111,17 @@ public:
 
     double get_knot(int idx) const noexcept
     {
-        return m_domain.rmin() + idx * m_mesh.step();
+        return m_domain.rmin() + idx * step<mesh_type>();
     }
 
     double rmin() const noexcept
     {
-        return m_domain.rmin();
+        return to_real(m_domain.front());
     }
 
     double rmax() const noexcept
     {
-        return m_domain.rmax();
+        return to_real(m_domain.back());
     }
 
     double length() const noexcept
@@ -154,7 +147,7 @@ public:
 private:
     double inv_step() const noexcept
     {
-        return 1.0 / m_mesh.step();
+        return 1.0 / step<mesh_type>();
     }
 
     void eval_basis(
@@ -211,7 +204,7 @@ void UniformBSplines<Tag, D>::eval_deriv(
     // 3. Compute derivatives of aforementioned B-splines
     //    Derivatives are normalized, hence they should be divided by dx
     double xx, temp, saved;
-    derivs(0) = 1.0 / m_mesh.step();
+    derivs(0) = 1.0 / step<mesh_type>();
     for (int j(1); j < degree(); ++j) {
         xx = -offset;
         saved = 0.0;
@@ -350,14 +343,14 @@ void UniformBSplines<Tag, D>::integrals(
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
     for (int i(degree()); i < nbasis() - degree(); ++i) {
-        int_vals(i) = m_mesh.step();
+        int_vals(i) = step<mesh_type>();
     }
 
     if constexpr (is_periodic()) {
         // Periodic conditions lead to repeat spline coefficients
         for (int i(0); i < degree(); ++i) {
-            int_vals(i) = m_mesh.step();
-            int_vals(nbasis() - i - 1) = m_mesh.step();
+            int_vals(i) = step<mesh_type>();
+            int_vals(nbasis() - i - 1) = step<mesh_type>();
             int_vals(nbasis() + i) = 0;
         }
     } else {
@@ -373,7 +366,7 @@ void UniformBSplines<Tag, D>::integrals(
         for (int i(0); i < degree(); ++i) {
             double c_eval = sum(edge_vals, 0, degree() - i);
 
-            int_vals(i) = m_mesh.step() * (d_eval - c_eval);
+            int_vals(i) = step<mesh_type>() * (d_eval - c_eval);
             int_vals(nbasis() - 1 - i) = int_vals(i);
         }
     }

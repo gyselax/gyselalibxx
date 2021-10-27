@@ -61,29 +61,7 @@ using IDimVx = typename SplineVxBuilder::interpolation_mesh_type;
 using IDimFx = NonUniformDiscretization<RDimFx>;
 
 // Species dimension
-class IDimSp
-{
-public:
-    using mcoord_type = DiscreteCoordinate<IDimSp>;
-
-    using rdim_type = void;
-
-    constexpr static std::size_t rank()
-    {
-        return 1;
-    }
-
-    constexpr bool operator==(IDimSp const& other) const
-    {
-        return true;
-    }
-
-    constexpr bool operator!=(IDimSp const& other) const
-    {
-        return !(*this == other);
-    }
-};
-
+class IDimSp;
 
 
 using IndexX = DiscreteCoordinate<IDimX>;

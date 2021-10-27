@@ -35,10 +35,7 @@ using namespace ::testing;
 
 TEST(SplitVlasovSolver, Ordering)
 {
-    IDimX mesh_x(CoordX(0.), CoordX(2.));
-    IDimVx mesh_vx(CoordVx(0.), CoordVx(2.));
-    IDimSp mesh_sp;
-    IDomainSpXVx const dom(mesh_sp, mesh_x, mesh_vx, IndexSpXVx(0, 0, 0), IVectSpXVx(0, 0, 0));
+    IDomainSpXVx const dom(IndexSpXVx(0, 0, 0), IVectSpXVx(0, 0, 0));
     DFieldSpXVx const fdistribu(dom);
     DSpanSpXVx const fdistribu_s(fdistribu);
     DFieldX const efield(select<IDimX>(dom));

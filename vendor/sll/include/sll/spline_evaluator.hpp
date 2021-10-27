@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include <ddc/ChunkSpan>
+#include <ddc/discretization>
 
 #include "sll/boundary_value.hpp"
 
@@ -24,8 +25,6 @@ public:
     using bsplines_type = BSplinesType;
 
 private:
-    bsplines_type const& m_bsplines;
-
     BoundaryValue const& m_left_bc;
 
     BoundaryValue const& m_right_bc;
@@ -33,12 +32,8 @@ private:
 public:
     SplineEvaluator() = delete;
 
-    explicit SplineEvaluator(
-            BSplinesType const& bsplines,
-            BoundaryValue const& left_bc,
-            BoundaryValue const& right_bc)
-        : m_bsplines(bsplines)
-        , m_left_bc(left_bc)
+    explicit SplineEvaluator(BoundaryValue const& left_bc, BoundaryValue const& right_bc)
+        : m_left_bc(left_bc)
         , m_right_bc(right_bc)
     {
     }
@@ -110,7 +105,7 @@ public:
         Chunk<double, DiscreteDomain<BSplinesType>> values(spline_coef.domain());
         auto vals = values.allocation_mdspan();
 
-        m_bsplines.integrals(vals);
+        discretization<bsplines_type>().integrals(vals);
 
         double y = 0.;
         for (DiscreteCoordinate<BSplinesType> ibs : spline_coef.domain()) {
@@ -126,15 +121,18 @@ private:
             std::experimental::mdspan<double, std::experimental::dextents<1>>& vals) const
     {
         if constexpr (bsplines_type::is_periodic()) {
-            if (coord_eval < m_bsplines.rmin() || coord_eval > m_bsplines.rmax()) {
-                coord_eval -= std::floor((coord_eval - m_bsplines.rmin()) / m_bsplines.length())
-                              * m_bsplines.length();
+            if (coord_eval < discretization<bsplines_type>().rmin()
+                || coord_eval > discretization<bsplines_type>().rmax()) {
+                coord_eval -= std::floor(
+                                      (coord_eval - discretization<bsplines_type>().rmin())
+                                      / discretization<bsplines_type>().length())
+                              * discretization<bsplines_type>().length();
             }
         } else {
-            if (coord_eval < m_bsplines.rmin()) {
+            if (coord_eval < discretization<bsplines_type>().rmin()) {
                 return m_left_bc(coord_eval);
             }
-            if (coord_eval > m_bsplines.rmax()) {
+            if (coord_eval > discretization<bsplines_type>().rmax()) {
                 return m_right_bc(coord_eval);
             }
         }
@@ -153,9 +151,9 @@ private:
         int jmin;
 
         if constexpr (std::is_same_v<EvalType, eval_type>) {
-            m_bsplines.eval_basis(coord_eval, vals, jmin);
+            discretization<bsplines_type>().eval_basis(coord_eval, vals, jmin);
         } else if constexpr (std::is_same_v<EvalType, eval_deriv_type>) {
-            m_bsplines.eval_deriv(coord_eval, vals, jmin);
+            discretization<bsplines_type>().eval_deriv(coord_eval, vals, jmin);
         }
 
         double y = 0.0;

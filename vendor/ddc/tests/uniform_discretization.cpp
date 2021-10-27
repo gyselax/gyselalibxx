@@ -31,20 +31,16 @@ TEST_F(UniformDiscretizationTest, Rank)
 TEST_F(UniformDiscretizationTest, Constructor)
 {
     DDimX ddim_x(origin, step);
-    EXPECT_EQ(ddim_x.lbound(), lbound);
     EXPECT_EQ(ddim_x.origin(), origin);
     EXPECT_EQ(ddim_x.step(), step);
-    EXPECT_EQ(ddim_x.rmin(), origin);
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
 TEST_F(UniformDiscretizationTest, Constructor2)
 {
     DDimX ddim_x(origin, Coordinate<DimX>(1.), npoints);
-    EXPECT_EQ(ddim_x.lbound(), lbound);
     EXPECT_EQ(ddim_x.origin(), origin);
     EXPECT_EQ(ddim_x.step(), step);
-    EXPECT_EQ(ddim_x.rmin(), origin);
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 

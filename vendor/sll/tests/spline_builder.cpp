@@ -120,7 +120,7 @@ public:
         auto const& domain = chunk.domain();
 
         for (auto&& icoord : domain) {
-            chunk(icoord) = eval(domain.to_real(icoord), 0);
+            chunk(icoord) = eval(to_real(icoord), 0);
         }
     }
 
@@ -151,9 +151,9 @@ TEST(SplineBuilder, Constructor)
 {
     using BSplinesX = UniformBSplines<DimX, 2>;
 
-    auto&& bsplines = BSplinesX(CoordX(0.), CoordX(0.02), 100);
+    init_discretization<BSplinesX>(CoordX(0.), CoordX(0.02), 100);
 
-    SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> spline_builder(bsplines);
+    SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> spline_builder;
     spline_builder.interpolation_domain();
 }
 
@@ -176,16 +176,16 @@ TEST(SplineBuilder, BuildSpline)
     IndexX constexpr npoints(ncells + 1);
 
     // 1. Create BSplines
-    BSplinesX bsplines(x0, xN, npoints);
-    DiscreteDomain<BSplinesX> const
-            dom_bsplines_x(bsplines, DiscreteVector<BSplinesX>(bsplines.size()));
+    init_discretization<BSplinesX>(x0, xN, npoints);
+    DiscreteDomain<BSplinesX> const dom_bsplines_x(
+            DiscreteVector<BSplinesX>(discretization<BSplinesX>().size()));
 
     // 2. Create a Spline represented by a chunk over BSplines
     // The chunk is filled with garbage data, we need to initialize it
     SpanSplineX2 coef(dom_bsplines_x);
 
     // 3. Create a SplineBuilder over BSplines using some boundary conditions
-    SplineBuilder<BSplinesX, left_bc, right_bc> spline_builder(bsplines);
+    SplineBuilder<BSplinesX, left_bc, right_bc> spline_builder;
     auto const& interpolation_domain = spline_builder.interpolation_domain();
 
     // 4. Allocate and fill a chunk over the interpolation domain
@@ -211,11 +211,11 @@ TEST(SplineBuilder, BuildSpline)
     spline_builder(coef, yvals, deriv_l, deriv_r);
 
     // 6. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
-    SplineEvaluator spline_evaluator(bsplines, NullBoundaryValue::value, NullBoundaryValue::value);
+    SplineEvaluator<BSplinesX> spline_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
 
     SpanUniformX coords_eval(interpolation_domain);
     for (auto i : interpolation_domain) {
-        coords_eval(i) = interpolation_domain.to_real(i);
+        coords_eval(i) = to_real(i);
     }
 
     SpanUniformX spline_eval(interpolation_domain);
@@ -229,7 +229,7 @@ TEST(SplineBuilder, BuildSpline)
     double max_norm_error = 0.;
     double max_norm_error_diff = 0.;
     for (auto i : interpolation_domain) {
-        auto&& x = interpolation_domain.to_real(i);
+        auto&& x = to_real(i);
 
         // Compute error
         double const error = spline_eval(i) - yvals(i);

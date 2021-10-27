@@ -6,6 +6,7 @@
 #include <ddc/ChunkSpan>
 #include <ddc/Coordinate>
 #include <ddc/DiscreteDomain>
+#include <ddc/discretization>
 
 #include <sll/null_boundary_value.hpp>
 #include <sll/spline_evaluator.hpp>
@@ -50,8 +51,7 @@ DSpanSpXVx BslAdvectionVx::operator()(DSpanSpXVx allfdistribu, DViewX electric_p
     m_spline_x_builder(elecpot_spline_coef, electric_potential);
     DFieldX efield(x_dom);
     for (IndexX ix : x_dom) {
-        efield(ix)
-                = -m_spline_x_evaluator.deriv(x_dom.to_real(ix), elecpot_spline_coef.span_cview());
+        efield(ix) = -m_spline_x_evaluator.deriv(to_real(ix), elecpot_spline_coef.span_cview());
     }
 
     for (IndexSp isp : sp_dom) {
@@ -64,7 +64,7 @@ DSpanSpXVx BslAdvectionVx::operator()(DSpanSpXVx allfdistribu, DViewX electric_p
 
             // compute the coordinates of the feet
             for (IndexVx iv : vx_dom) {
-                feet_coords(iv) = vx_dom.to_real(iv) - dvx;
+                feet_coords(iv) = to_real(iv) - dvx;
             }
 
             // build a spline representation of the data

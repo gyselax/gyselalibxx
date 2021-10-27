@@ -5,18 +5,18 @@
 
 #include "ddc/coordinate.hpp"
 #include "ddc/discrete_coordinate.hpp"
-#include "ddc/discrete_dimension.hpp"
+#include "ddc/discretization.hpp"
 
-/// `NonUniformDiscretization` models a non-uniform discretization of the `RDim` segment \f$[a, b]\f$.
-template <class RDim>
-class NonUniformDiscretization : public DiscreteDimension
+/// `NonUniformDiscretization` models a non-uniform discretization of the `CDim` segment \f$[a, b]\f$.
+template <class CDim>
+class NonUniformDiscretization
 {
 public:
-    using rcoord_type = Coordinate<RDim>;
+    using rcoord_type = Coordinate<CDim>;
 
     using mcoord_type = DiscreteCoordinate<NonUniformDiscretization>;
 
-    using rdim_type = RDim;
+    using rdim_type = CDim;
 
 public:
     static constexpr std::size_t rank()
@@ -50,93 +50,63 @@ public:
     {
     }
 
-    NonUniformDiscretization(NonUniformDiscretization const& x) = default;
+    NonUniformDiscretization(NonUniformDiscretization const& x) = delete;
 
-    NonUniformDiscretization(NonUniformDiscretization&& x) = default;
+    NonUniformDiscretization(NonUniformDiscretization&& x) = delete;
 
     ~NonUniformDiscretization() = default;
-
-    NonUniformDiscretization& operator=(NonUniformDiscretization const& x) = default;
-
-    NonUniformDiscretization& operator=(NonUniformDiscretization&& x) = default;
-
-    constexpr bool operator==(NonUniformDiscretization const& other) const
-    {
-        return m_points == other.m_points;
-    }
-
-    template <class ORDim>
-    constexpr bool operator==(NonUniformDiscretization<ORDim> const& other) const
-    {
-        return false;
-    }
-
-#if __cplusplus <= 201703L
-    // Shall not be necessary anymore in C++20
-    // `a!=b` shall be translated by the compiler to `!(a==b)`
-    constexpr bool operator!=(NonUniformDiscretization const& other) const
-    {
-        return !(*this == other);
-    }
-
-    template <class ORDim>
-    constexpr bool operator!=(NonUniformDiscretization<ORDim> const& other) const
-    {
-        return !(*this == other);
-    }
-#endif
 
     constexpr std::size_t size() const
     {
         return m_points.size();
     }
 
-    /// @brief Lower bound index of the mesh
-    constexpr mcoord_type lbound() const noexcept
-    {
-        return mcoord_type(0);
-    }
-
-    /// @brief Upper bound index of the mesh
-    constexpr mcoord_type ubound() const noexcept
-    {
-        return mcoord_type(m_points.size() - 1);
-    }
-
-    /// @brief Convert a mesh index into a position in `RDim`
+    /// @brief Convert a mesh index into a position in `CDim`
     constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
-        assert(icoord >= lbound());
-        assert(icoord <= ubound());
         return m_points[icoord.value()];
-    }
-
-    /// @brief Position of the lower bound in `RDim`
-    constexpr rcoord_type rmin() const noexcept
-    {
-        return m_points.front();
-    }
-
-    /// @brief Position of the upper bound in `RDim`
-    constexpr rcoord_type rmax() const noexcept
-    {
-        return m_points.back();
-    }
-
-    /// @brief Length of `RDim`
-    constexpr rcoord_type rlength() const
-    {
-        return m_points.back() - m_points.front();
     }
 };
 
-template <class RDim>
-std::ostream& operator<<(std::ostream& out, NonUniformDiscretization<RDim> const& mesh)
+template <class>
+struct is_non_uniform_disretization : public std::false_type
 {
-    out << "NonUniformDiscretization( ";
-    if (mesh.size() > 0) {
-        out << mesh.rmin() << ", ..., " << mesh.rmax();
-    }
-    out << " )";
-    return out;
+};
+
+template <class CDim>
+struct is_non_uniform_disretization<NonUniformDiscretization<CDim>> : public std::true_type
+{
+};
+
+template <class DDim>
+constexpr bool is_non_uniform_disretization_v = is_non_uniform_disretization<DDim>::value;
+
+template <class CDim>
+std::ostream& operator<<(std::ostream& out, NonUniformDiscretization<CDim> const& mesh)
+{
+    return out << "NonUniformDiscretization(" << mesh.size() << ")";
+}
+
+template <class CDim>
+Coordinate<CDim> to_real(DiscreteCoordinate<NonUniformDiscretization<CDim>> const& c)
+{
+    return discretization<NonUniformDiscretization<CDim>>().to_real(c);
+}
+
+template <class CDim>
+Coordinate<CDim> rmin(DiscreteDomain<NonUniformDiscretization<CDim>> const& d)
+{
+    return to_real(d.front());
+}
+
+template <class CDim>
+Coordinate<CDim> rmax(DiscreteDomain<NonUniformDiscretization<CDim>> const& d)
+{
+    return to_real(d.back());
+}
+
+template <class CDim>
+Coordinate<CDim> rlength(DiscreteDomain<NonUniformDiscretization<CDim>> const& d)
+{
+    return rmax(d) - rmin(d);
 }

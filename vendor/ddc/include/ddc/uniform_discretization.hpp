@@ -4,12 +4,12 @@
 
 #include "ddc/coordinate.hpp"
 #include "ddc/discrete_coordinate.hpp"
-#include "ddc/discrete_dimension.hpp"
+#include "ddc/discretization.hpp"
 
 /** UniformDiscretization models a uniform discretization of the provided continuous dimension
  */
 template <class CDim>
-class UniformDiscretization : public DiscreteDimension
+class UniformDiscretization
 {
 public:
     using rcoord_type = Coordinate<CDim>;
@@ -25,9 +25,9 @@ public:
     }
 
 private:
-    rcoord_type m_origin = 0.;
+    rcoord_type m_origin {0.};
 
-    rcoord_type m_step = 1.;
+    rcoord_type m_step {1.};
 
 public:
     UniformDiscretization() = default;
@@ -58,47 +58,11 @@ public:
         assert(n > 1);
     }
 
-    UniformDiscretization(UniformDiscretization const& x) = default;
+    UniformDiscretization(UniformDiscretization const& x) = delete;
 
-    UniformDiscretization(UniformDiscretization&& x) = default;
+    UniformDiscretization(UniformDiscretization&& x) = delete;
 
     ~UniformDiscretization() = default;
-
-    UniformDiscretization& operator=(UniformDiscretization const& x) = default;
-
-    UniformDiscretization& operator=(UniformDiscretization&& x) = default;
-
-    constexpr bool operator==(UniformDiscretization const& other) const
-    {
-        return m_origin == other.m_origin && m_step == other.m_step;
-    }
-
-    template <class ORDim>
-    constexpr bool operator==(UniformDiscretization<ORDim> const& other) const
-    {
-        return false;
-    }
-
-#if __cplusplus <= 201703L
-    // Shall not be necessary anymore in C++20
-    // `a!=b` shall be translated by the compiler to `!(a==b)`
-    constexpr bool operator!=(UniformDiscretization const& other) const
-    {
-        return !(*this == other);
-    }
-
-    template <class ORDim>
-    constexpr bool operator!=(UniformDiscretization<ORDim> const& other) const
-    {
-        return !(*this == other);
-    }
-#endif
-
-    /// @brief Lower bound index of the mesh
-    constexpr mcoord_type lbound() const noexcept
-    {
-        return mcoord_type(0);
-    }
 
     /// @brief Lower bound index of the mesh
     constexpr rcoord_type origin() const noexcept
@@ -115,20 +79,65 @@ public:
     /// @brief Convert a mesh index into a position in `CDim`
     constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
-        assert(icoord >= lbound());
         return m_origin + rcoord_type(icoord.value()) * m_step;
     }
-
-    /// @brief Position of the lower bound in `CDim`
-    constexpr rcoord_type rmin() const noexcept
-    {
-        return m_origin;
-    }
 };
+
+template <class>
+struct is_uniform_disretization : public std::false_type
+{
+};
+
+template <class CDim>
+struct is_uniform_disretization<UniformDiscretization<CDim>> : public std::true_type
+{
+};
+
+template <class DDim>
+constexpr bool is_uniform_disretization_v = is_uniform_disretization<DDim>::value;
+
 
 template <class CDim>
 std::ostream& operator<<(std::ostream& out, UniformDiscretization<CDim> const& mesh)
 {
     return out << "UniformDiscretization( origin=" << mesh.origin() << ", step=" << mesh.step()
                << " )";
+}
+
+/// @brief Lower bound index of the mesh
+template <class DDim>
+std::enable_if_t<is_uniform_disretization_v<DDim>, typename DDim::rcoord_type> origin() noexcept
+{
+    return discretization<DDim>().origin();
+}
+
+/// @brief Spacing step of the mesh
+template <class DDim>
+std::enable_if_t<is_uniform_disretization_v<DDim>, typename DDim::rcoord_type> step() noexcept
+{
+    return discretization<DDim>().step();
+}
+
+template <class CDim>
+Coordinate<CDim> to_real(DiscreteCoordinate<UniformDiscretization<CDim>> const& c)
+{
+    return discretization<UniformDiscretization<CDim>>().to_real(c);
+}
+
+template <class CDim>
+Coordinate<CDim> rmin(DiscreteDomain<UniformDiscretization<CDim>> const& d)
+{
+    return to_real(d.front());
+}
+
+template <class CDim>
+Coordinate<CDim> rmax(DiscreteDomain<UniformDiscretization<CDim>> const& d)
+{
+    return to_real(d.back());
+}
+
+template <class CDim>
+Coordinate<CDim> rlength(DiscreteDomain<UniformDiscretization<CDim>> const& d)
+{
+    return rmax(d) - rmin(d);
 }

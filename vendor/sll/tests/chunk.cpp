@@ -47,7 +47,7 @@ BSplinesY const bsplinesy {RCoordY(0.1), RCoordY(0.4), RCoordY(1.0)};
 TEST(ChunkBSplinesTest, Constructor)
 {
     DiscreteVector<BSplinesX, BSplinesY> size(ncells, ncells);
-    DiscreteDomain<BSplinesX, BSplinesY> dom(bsplinesx, bsplinesy, size);
+    DiscreteDomain<BSplinesX, BSplinesY> dom(size);
 
     Chunk<double, DiscreteDomain<BSplinesX, BSplinesY>> chunk(dom);
     auto view = chunk.span_view();
