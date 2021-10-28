@@ -67,7 +67,3 @@ inline double ipow(double a, int i)
     }
     return r;
 }
-
-using std::max;
-
-using std::min;
