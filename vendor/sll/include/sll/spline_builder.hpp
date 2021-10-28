@@ -301,7 +301,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
     int n_temp_knots = n_interp_pts - 1 + bsplines_type::degree();
     double temp_knots[n_temp_knots];
 
-    if constexpr (BcXmin == BoundCond::PERIODIC) {
+    if constexpr (bsplines_type::is_periodic()) {
         for (int i = 0; i < n_interp_pts - 1 + bsplines_type::degree(); ++i) {
             temp_knots[i] = discretization<BSplines>().get_knot(
                     1 - bsplines_type::degree() + s_offset + i);
@@ -347,8 +347,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
     }
 
     // Periodic case: apply periodic BCs to interpolation points
-    if constexpr (BcXmin == BoundCond::PERIODIC) {
-        double zone_width(discretization<BSplines>().rmax() - discretization<BSplines>().rmin());
+    if constexpr (bsplines_type::is_periodic()) {
+        double zone_width = discretization<BSplines>().rmax() - discretization<BSplines>().rmin();
         for (int i = 0; i < n_interp_pts; ++i) {
             interp_pts[i] = modulo(interp_pts[i] - s_nbc_xmin, zone_width)
                             + discretization<BSplines>().rmin();
@@ -462,7 +462,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::allocate_matrix(
         upper_band_width = (bsplines_type::degree() + 1) / 2;
     }
 
-    if constexpr (BcXmin == BoundCond::PERIODIC) {
+    if constexpr (bsplines_type::is_periodic()) {
         matrix = Matrix::make_new_periodic_banded(
                 discretization<BSplines>().nbasis(),
                 upper_band_width,
