@@ -238,7 +238,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
     int const n_interp_pts = discretization<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax;
 
     if constexpr (BcXmin == BoundCond::PERIODIC) {
-        double const shift(!s_odd ? 0.5 : 0.0);
+        double constexpr shift = !s_odd ? 0.5 : 0.0;
         init_discretization<interpolation_mesh_type>(
                 Coordinate<tag_type>(discretization<BSplines>().rmin() + shift * m_dx),
                 Coordinate<tag_type>(m_dx));
@@ -252,7 +252,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
         int i = 0;
 
         // Additional knots near x=xmin
-        int n_to_fill_min(bsplines_type::degree() - s_nbc_xmin - 1);
+        int n_to_fill_min = bsplines_type::degree() - s_nbc_xmin - 1;
         for (; i < n_to_fill_min; ++i) {
             if constexpr (BcXmin == BoundCond::GREVILLE)
                 iknots[i] = 0;
@@ -274,7 +274,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
         }
 
         for (int j = 0; j < n_interp_pts; ++j) {
-            int isum(sum(iknots.data() + j, bsplines_type::degree()));
+            int isum = sum(iknots.data() + j, bsplines_type::degree());
             interp_pts[j]
                     = discretization<BSplines>().rmin() + m_dx * isum / bsplines_type::degree();
         }
