@@ -175,10 +175,10 @@ void UniformBSplines<Tag, D>::eval_basis(
     // 3. Compute values of aforementioned B-splines
     double xx, temp, saved;
     values(0) = 1.0;
-    for (int j(1); j < deg + 1; ++j) {
+    for (int j = 1; j < deg + 1; ++j) {
         xx = -offset;
         saved = 0.0;
-        for (int r(0); r < j; ++r) {
+        for (int r = 0; r < j; ++r) {
             xx += 1;
             temp = values(r) / j;
             values(r) = saved + xx * temp;
@@ -205,10 +205,10 @@ void UniformBSplines<Tag, D>::eval_deriv(
     //    Derivatives are normalized, hence they should be divided by dx
     double xx, temp, saved;
     derivs(0) = 1.0 / step<mesh_type>();
-    for (int j(1); j < degree(); ++j) {
+    for (int j = 1; j < degree(); ++j) {
         xx = -offset;
         saved = 0.0;
-        for (int r(0); r < j; ++r) {
+        for (int r = 0; r < j; ++r) {
             xx += 1.0;
             temp = derivs(r) / j;
             derivs(r) = saved + xx * temp;
@@ -221,7 +221,7 @@ void UniformBSplines<Tag, D>::eval_deriv(
     double bjm1 = derivs(0);
     double bj = bjm1;
     derivs(0) = -bjm1;
-    for (int j(1); j < degree(); ++j) {
+    for (int j = 1; j < degree(); ++j) {
         bj = derivs(j);
         derivs(j) = bjm1 - bj;
         bjm1 = bj;
@@ -253,10 +253,10 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
     //    ndu
     double xx, temp, saved;
     ndu(0, 0) = 1.0;
-    for (int j(1); j < degree() + 1; ++j) {
+    for (int j = 1; j < degree() + 1; ++j) {
         xx = -offset;
         saved = 0.0;
-        for (int r(0); r < j; ++r) {
+        for (int r = 0; r < j; ++r) {
             xx += 1.0;
             temp = ndu(j - 1, r) / j;
             ndu(j, r) = saved + xx * temp;
@@ -264,16 +264,16 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
         }
         ndu(j, j) = saved;
     }
-    for (int i(0); i < ndu.extent(1); ++i) {
+    for (int i = 0; i < ndu.extent(1); ++i) {
         derivs(i, 0) = ndu(degree(), i);
     }
 
-    for (int r(0); r < degree() + 1; ++r) {
+    for (int r = 0; r < degree() + 1; ++r) {
         int s1 = 0;
         int s2 = 1;
         a(0, 0) = 1.0;
-        for (int k(1); k < n + 1; ++k) {
-            double d(0.0);
+        for (int k = 1; k < n + 1; ++k) {
+            double d = 0.0;
             int rk = r - k;
             int pk = degree() - k;
             if (r >= k) {
@@ -282,7 +282,7 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
             }
             int j1 = rk > -1 ? 1 : (-rk);
             int j2 = (r - 1) <= pk ? k : (degree() - r + 1);
-            for (int j(j1); j < j2; ++j) {
+            for (int j = j1; j < j2; ++j) {
                 a(j, s2) = (a(j, s1) - a(j - 1, s1)) / (pk + 1);
                 d += a(j, s2) * ndu(pk, rk + j);
             }
@@ -291,7 +291,7 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
                 d += a(k, s2) * ndu(pk, r);
             }
             derivs(r, k) = d;
-            int tmp(s1);
+            int tmp = s1;
             s1 = s2;
             s2 = tmp;
         }
@@ -302,8 +302,8 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
     // k-th derivatives are normalized, hence they should be divided by dx^k
     double const inv_dx = inv_step();
     double d = degree() * inv_dx;
-    for (int k(1); k < n + 1; ++k) {
-        for (int i(0); i < derivs.extent(0); ++i) {
+    for (int k = 1; k < n + 1; ++k) {
+        for (int i = 0; i < derivs.extent(0); ++i) {
             derivs(i, k) *= d;
         }
         d *= (degree() - k) * inv_dx;
@@ -325,12 +325,12 @@ void UniformBSplines<Tag, D>::get_icell_and_offset(double x, int& icell, double&
         offset = 1.0;
     } else {
         offset = (x - rmin()) * inv_dx;
-        icell = int(offset);
+        icell = static_cast<int>(offset);
         offset = offset - icell;
 
         // When x is very close to xmax, round-off may cause the wrong answer
         // icell=ncells and x_offset=0, which we convert to the case x=xmax:
-        if (icell == ncells() and offset == 0.0) {
+        if (icell == ncells() && offset == 0.0) {
             icell = ncells() - 1;
             offset = 1.0;
         }
@@ -342,19 +342,19 @@ void UniformBSplines<Tag, D>::integrals(
         std::experimental::mdspan<double, std::experimental::dextents<1>>& int_vals) const
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
-    for (int i(degree()); i < nbasis() - degree(); ++i) {
+    for (int i = degree(); i < nbasis() - degree(); ++i) {
         int_vals(i) = step<mesh_type>();
     }
 
     if constexpr (is_periodic()) {
         // Periodic conditions lead to repeat spline coefficients
-        for (int i(0); i < degree(); ++i) {
+        for (int i = 0; i < degree(); ++i) {
             int_vals(i) = step<mesh_type>();
             int_vals(nbasis() - i - 1) = step<mesh_type>();
             int_vals(nbasis() + i) = 0;
         }
     } else {
-        int jmin(0);
+        int jmin = 0;
         std::array<double, degree() + 2> edge_vals_ptr;
         std::experimental::mdspan<double, std::experimental::dextents<1>>
                 edge_vals(edge_vals_ptr.data(), degree() + 2);
@@ -363,7 +363,7 @@ void UniformBSplines<Tag, D>::integrals(
 
         double d_eval = sum(edge_vals);
 
-        for (int i(0); i < degree(); ++i) {
+        for (int i = 0; i < degree(); ++i) {
             double c_eval = sum(edge_vals, 0, degree() - i);
 
             int_vals(i) = step<mesh_type>() * (d_eval - c_eval);

@@ -157,7 +157,7 @@ private:
         }
 
         double y = 0.0;
-        for (int i(0); i < bsplines_type::degree() + 1; ++i) {
+        for (int i = 0; i < bsplines_type::degree() + 1; ++i) {
             y += spline_coef(DiscreteCoordinate<BSplinesType>(jmin + i)) * vals(i);
         }
         return y;

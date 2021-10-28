@@ -181,13 +181,13 @@ inline constexpr NonUniformBSplines<Tag, D>::NonUniformBSplines(
     // Fill out the extra knots
     if constexpr (is_periodic()) {
         double period = rmax() - rmin();
-        for (int i(1); i < degree() + 1; ++i) {
+        for (int i = 1; i < degree() + 1; ++i) {
             get_knot(-i) = get_knot(ncells() - i) - period;
             get_knot(ncells() + i) = get_knot(i) + period;
         }
     } else // open
     {
-        for (int i(1); i < degree() + 1; ++i) {
+        for (int i = 1; i < degree() + 1; ++i) {
             get_knot(-i) = rmin();
             get_knot(npoints() - 1 + i) = rmax();
         }
@@ -221,11 +221,11 @@ void NonUniformBSplines<Tag, D>::eval_basis(
     // 3. Compute values of aforementioned B-splines
     double temp;
     values(0) = 1.0;
-    for (int j(0); j < degree(); ++j) {
+    for (int j = 0; j < degree(); ++j) {
         left[j] = x - get_knot(icell - j);
         right[j] = get_knot(icell + j + 1) - x;
-        double saved(0.0);
-        for (int r(0); r < j + 1; ++r) {
+        double saved = 0.0;
+        for (int r = 0; r < j + 1; ++r) {
             temp = values(r) / (right[r] + left[j - r]);
             values(r) = saved + right[r] * temp;
             saved = left[j - r] * temp;
@@ -267,11 +267,11 @@ void NonUniformBSplines<Tag, D>::eval_deriv(
      */
     double saved, temp;
     derivs(0) = 1.0;
-    for (int j(0); j < degree() - 1; ++j) {
+    for (int j = 0; j < degree() - 1; ++j) {
         left[j] = x - get_knot(icell - j);
         right[j] = get_knot(icell + j + 1) - x;
         saved = 0.0;
-        for (int r(0); r < j + 1; ++r) {
+        for (int r = 0; r < j + 1; ++r) {
             temp = derivs(r) / (right[r] + left[j - r]);
             derivs(r) = saved + right[r] * temp;
             saved = left[j - r] * temp;
@@ -285,7 +285,7 @@ void NonUniformBSplines<Tag, D>::eval_deriv(
      */
     saved = degree() * derivs(0) / (get_knot(icell + 1) - get_knot(icell + 1 - degree()));
     derivs(0) = -saved;
-    for (int j(1); j < degree(); ++j) {
+    for (int j = 1; j < degree(); ++j) {
         temp = saved;
         saved = degree() * derivs(j)
                 / (get_knot(icell + j + 1) - get_knot(icell + j + 1 - degree()));
@@ -319,7 +319,7 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
     assert(derivs.extent(1) == 1 + n);
 
     // 1. Compute cell index 'icell' and x_offset
-    int icell(find_cell(x));
+    int icell = find_cell(x);
 
     assert(icell >= 0);
     assert(icell <= ncells() - 1);
@@ -339,11 +339,11 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
 
     double saved, temp;
     ndu(0, 0) = 1.0;
-    for (int j(0); j < degree(); ++j) {
+    for (int j = 0; j < degree(); ++j) {
         left[j] = x - get_knot(icell - j);
         right[j] = get_knot(icell + j + 1) - x;
         saved = 0.0;
-        for (int r(0); r < j + 1; ++r) {
+        for (int r = 0; r < j + 1; ++r) {
             // compute inverse of knot differences and save them into lower
             // triangular part of ndu
             ndu(r, j + 1) = 1.0 / (right[r] + left[j - r]);
@@ -356,16 +356,16 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
         ndu(j + 1, j + 1) = saved;
     }
     // Save 0-th derivative
-    for (int j(0); j < degree() + 1; ++j) {
+    for (int j = 0; j < degree() + 1; ++j) {
         derivs(j, 0) = ndu(degree(), j);
     }
 
-    for (int r(0); r < degree() + 1; ++r) {
+    for (int r = 0; r < degree() + 1; ++r) {
         int s1 = 0;
         int s2 = 1;
         a(0, 0) = 1.0;
-        for (int k(1); k < n + 1; ++k) {
-            double d(0.0);
+        for (int k = 1; k < n + 1; ++k) {
+            double d = 0.0;
             int rk = r - k;
             int pk = degree() - k;
             if (r >= k) {
@@ -374,7 +374,7 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
             }
             int j1 = rk > -1 ? 1 : (-rk);
             int j2 = (r - 1) <= pk ? k : (degree() - r + 1);
-            for (int j(j1); j < j2; ++j) {
+            for (int j = j1; j < j2; ++j) {
                 a(j, s2) = (a(j, s1) - a(j - 1, s1)) * ndu(rk + j, pk + 1);
                 d += a(j, s2) * ndu(pk, rk + j);
             }
@@ -383,18 +383,18 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
                 d += a(k, s2) * ndu(pk, r);
             }
             derivs(r, k) = d;
-            int tmp(s1);
+            int tmp = s1;
             s1 = s2;
             s2 = tmp;
         }
     }
 
-    int r(degree());
-    for (int k(1); k < n + 1; ++k) {
-        for (int i(0); i < derivs.extent(0); i++) {
+    int r = degree();
+    for (int k = 1; k < n + 1; ++k) {
+        for (int i = 0; i < derivs.extent(0); i++) {
             derivs(i, k) *= r;
         }
-        r *= (degree() - k);
+        r *= degree() - k;
     }
 }
 
@@ -412,9 +412,9 @@ int NonUniformBSplines<Tag, D>::find_cell(double x) const
         return ncells() - 1;
 
     // Binary search
-    int low(0), high(ncells());
-    int icell((low + high) / 2);
-    while (x < get_knot(icell) or x >= get_knot(icell + 1)) {
+    int low = 0, high = ncells();
+    int icell = (low + high) / 2;
+    while (x < get_knot(icell) || x >= get_knot(icell + 1)) {
         if (x < get_knot(icell)) {
             high = icell;
         } else {
@@ -431,14 +431,14 @@ void NonUniformBSplines<Tag, D>::integrals(
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
 
-    double inv_deg(1.0 / (degree() + 1));
+    double inv_deg = 1.0 / (degree() + 1);
 
-    for (int i(0); i < nbasis(); ++i) {
+    for (int i = 0; i < nbasis(); ++i) {
         int_vals(i) = (get_knot(i + 1) - get_knot(i - degree())) * inv_deg;
     }
 
     if constexpr (is_periodic()) {
-        for (int i(0); i < degree(); ++i) {
+        for (int i = 0; i < degree(); ++i) {
             int_vals(nbasis() + i) = 0;
         }
     }
