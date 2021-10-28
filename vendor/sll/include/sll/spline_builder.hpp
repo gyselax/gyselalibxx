@@ -215,7 +215,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
     DSpan1D bcoef_section(spline.data() + s_offset, discretization<BSplines>().nbasis());
     matrix->solve_inplace(bcoef_section);
 
-    if constexpr (BcXmin == BoundCond::PERIODIC && s_offset != 0) {
+    if constexpr (bsplines_type::is_periodic() && s_offset != 0) {
         for (int i = 0; i < s_offset; ++i) {
             spline(DiscreteCoordinate<bsplines_type>(i)) = spline(
                     DiscreteCoordinate<bsplines_type>(discretization<BSplines>().nbasis() + i));
@@ -237,7 +237,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
 {
     int const n_interp_pts = discretization<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax;
 
-    if constexpr (BcXmin == BoundCond::PERIODIC) {
+    if constexpr (bsplines_type::is_periodic()) {
         double constexpr shift = !s_odd ? 0.5 : 0.0;
         init_discretization<interpolation_mesh_type>(
                 Coordinate<tag_type>(discretization<BSplines>().rmin() + shift * m_dx),
