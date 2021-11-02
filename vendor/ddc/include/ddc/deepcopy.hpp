@@ -30,8 +30,8 @@ inline void for_each_impl(
 template <class ChunkDst, class ChunkSrc>
 inline ChunkDst const& deepcopy(ChunkDst&& to, ChunkSrc&& from) noexcept
 {
-    static_assert(is_chunkspan_v<ChunkDst>);
-    static_assert(is_chunkspan_v<ChunkSrc>);
+    static_assert(is_chunk_v<ChunkDst>);
+    static_assert(is_chunk_v<ChunkSrc>);
     static_assert(
             std::is_assignable_v<decltype(*to.data()), decltype(*from.data())>,
             "Not assignable");

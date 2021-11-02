@@ -20,8 +20,11 @@ template <
 class ChunkSpan;
 
 template <class ElementType, class SupportType, class LayoutStridedPolicy>
-static constexpr bool
-        is_chunkspan_impl_v<ChunkSpan<ElementType, SupportType, LayoutStridedPolicy>> = true;
+inline constexpr bool enable_chunk<ChunkSpan<ElementType, SupportType, LayoutStridedPolicy>> = true;
+
+template <class ElementType, class SupportType, class LayoutStridedPolicy>
+inline constexpr bool
+        enable_borrowed_chunk<ChunkSpan<ElementType, SupportType, LayoutStridedPolicy>> = true;
 
 template <class ElementType, class... DDims, class LayoutStridedPolicy>
 class ChunkSpan<ElementType, DiscreteDomain<DDims...>, LayoutStridedPolicy>

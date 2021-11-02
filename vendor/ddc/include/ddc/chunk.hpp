@@ -7,7 +7,7 @@ template <class, class>
 class Chunk;
 
 template <class ElementType, class SupportType>
-static constexpr bool is_chunkspan_impl_v<Chunk<ElementType, SupportType>> = true;
+inline constexpr bool enable_chunk<Chunk<ElementType, SupportType>> = true;
 
 template <class ElementType, class... DDims>
 class Chunk<ElementType, DiscreteDomain<DDims...>>
