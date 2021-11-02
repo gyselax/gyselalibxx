@@ -27,21 +27,17 @@ inline void for_each_impl(
  * @param[in]  from  the view from which to copy
  * @return to
  */
-template <
-        class ElementType,
-        class OElementType,
-        class... DDims,
-        class... ODDims,
-        class Layout,
-        class OLayout>
-inline ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const& deepcopy(
-        ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const& to,
-        ChunkSpan<OElementType, DiscreteDomain<ODDims...>, OLayout> const& from) noexcept
+template <class ChunkDst, class ChunkSrc>
+inline ChunkDst const& deepcopy(ChunkDst&& to, ChunkSrc&& from) noexcept
 {
-    static_assert(std::is_convertible_v<OElementType, ElementType>, "Not convertible");
+    static_assert(is_chunkspan_v<ChunkDst>);
+    static_assert(is_chunkspan_v<ChunkSrc>);
+    static_assert(
+            std::is_assignable_v<decltype(*to.data()), decltype(*from.data())>,
+            "Not assignable");
     assert(to.domain().front() == from.domain().front());
     assert(to.domain().back() == from.domain().back());
-    for_each(to, [&to, &from](auto&&... idxs) { to(idxs...) = from(idxs...); });
+    for_each(to.span_view(), [&to, &from](auto&&... idxs) { to(idxs...) = from(idxs...); });
     return to;
 }
 

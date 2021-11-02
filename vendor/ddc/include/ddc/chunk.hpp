@@ -1,71 +1,96 @@
 #pragma once
 
+#include "ddc/chunk_common.hpp"
 #include "ddc/chunk_span.hpp"
 
 template <class, class>
 class Chunk;
 
+template <class ElementType, class SupportType>
+static constexpr bool is_chunkspan_impl_v<Chunk<ElementType, SupportType>> = true;
+
 template <class ElementType, class... DDims>
 class Chunk<ElementType, DiscreteDomain<DDims...>>
-    : public ChunkSpan<ElementType, DiscreteDomain<DDims...>>
+    : public ChunkCommon<ElementType, DiscreteDomain<DDims...>, std::experimental::layout_right>
 {
+protected:
+    using base_type
+            = ChunkCommon<ElementType, DiscreteDomain<DDims...>, std::experimental::layout_right>;
+
+    /// ND memory view
+    using internal_mdspan_type = typename base_type::internal_mdspan_type;
+
 public:
     /// type of a span of this full chunk
-    using span_type = ChunkSpan<ElementType, DiscreteDomain<DDims...>>;
+    using span_type
+            = ChunkSpan<ElementType, DiscreteDomain<DDims...>, std::experimental::layout_right>;
 
-protected:
-    /// ND memory view
-    using internal_mdspan_type = typename span_type::internal_mdspan_type;
-
-public:
     /// type of a view of this full chunk
-    using view_type = ChunkSpan<ElementType const, DiscreteDomain<DDims...>>;
+    using view_type = ChunkSpan<
+            ElementType const,
+            DiscreteDomain<DDims...>,
+            std::experimental::layout_right>;
 
     /// The dereferenceable part of the co-domain but with indexing starting at 0
-    using allocation_mdspan_type = typename span_type::allocation_mdspan_type;
+    using allocation_mdspan_type = typename base_type::allocation_mdspan_type;
 
-    using mdomain_type = typename span_type::mdomain_type;
+    using const_allocation_mdspan_type = typename base_type::const_allocation_mdspan_type;
 
-    using mcoord_type = typename mdomain_type::mcoord_type;
+    using mdomain_type = typename base_type::mdomain_type;
 
-    using extents_type = typename span_type::extents_type;
+    using mcoord_type = typename base_type::mcoord_type;
 
-    using layout_type = typename span_type::layout_type;
+    using extents_type = typename base_type::extents_type;
 
-    using mapping_type = typename span_type::mapping_type;
+    using layout_type = typename base_type::layout_type;
 
-    using element_type = typename span_type::element_type;
+    using mapping_type = typename base_type::mapping_type;
 
-    using value_type = typename span_type::value_type;
+    using element_type = typename base_type::element_type;
 
-    using size_type = typename span_type::size_type;
+    using value_type = typename base_type::value_type;
 
-    using difference_type = typename span_type::difference_type;
+    using size_type = typename base_type::size_type;
 
-    using pointer = typename span_type::pointer;
+    using difference_type = typename base_type::difference_type;
 
-    using reference = typename span_type::reference;
+    using pointer = typename base_type::pointer;
+
+    using reference = typename base_type::reference;
+
+    template <class, class>
+    friend class Chunk;
 
 public:
-    /** Construct a Chunk on a domain with uninitialized values
-     */
-    explicit inline constexpr Chunk(mdomain_type const& domain)
-        : span_type(new (std::align_val_t(64)) value_type[domain.size()], domain)
+    /// Empty Chunk
+    Chunk() = default;
+
+    /// Construct a Chunk on a domain with uninitialized values
+    explicit Chunk(mdomain_type const& domain)
+        : base_type(new (std::align_val_t(64)) value_type[domain.size()], domain)
     {
     }
 
+    /// Construct a Chunk from a deepcopy of a ChunkSpan
+    template <class OElementType, class... ODDims, class LayoutType>
+    explicit Chunk(ChunkSpan<OElementType, DiscreteDomain<ODDims...>, LayoutType> chunk_span)
+        : Chunk(chunk_span.domain())
+    {
+        deepcopy(span_view(), chunk_span);
+    }
+
     /// Deleted: use deepcopy instead
-    inline constexpr Chunk(Chunk const& other) = delete;
+    Chunk(Chunk const& other) = delete;
 
     /** Constructs a new Chunk by move
      * @param other the Chunk to move
      */
-    inline constexpr Chunk(Chunk&& other) : span_type(std::move(other))
+    Chunk(Chunk&& other) : base_type(std::move(other))
     {
         other.m_internal_mdspan = internal_mdspan_type();
     }
 
-    inline ~Chunk()
+    ~Chunk()
     {
         if (this->m_internal_mdspan.data()) {
             operator delete[](this->data(), std::align_val_t(64));
@@ -73,70 +98,136 @@ public:
     }
 
     /// Deleted: use deepcopy instead
-    inline constexpr Chunk& operator=(Chunk const& other) = delete;
+    Chunk& operator=(Chunk const& other) = delete;
 
     /** Move-assigns a new value to this field
      * @param other the Chunk to move
      * @return *this
      */
-    inline constexpr Chunk& operator=(Chunk&& other)
+    Chunk& operator=(Chunk&& other)
     {
-        static_cast<span_type&>(*this) = std::move(other);
+        static_cast<base_type&>(*this) = std::move(other);
         other.m_internal_mdspan = internal_mdspan_type();
         return *this;
     }
 
-    /** Swaps this field with another
-     * @param other the Chunk to swap with this one
-     */
-    inline constexpr void swap(Chunk& other)
+    /// Slice out some dimensions
+    template <class... QueryDDims>
+    auto operator[](DiscreteCoordinate<QueryDDims...> const& slice_spec) const
     {
-        Chunk tmp = std::move(other);
-        other = std::move(*this);
-        *this = std::move(tmp);
+        return view_type(*this)[slice_spec];
     }
 
+    /// Slice out some dimensions
+    template <class... QueryDDims>
+    auto operator[](DiscreteCoordinate<QueryDDims...> const& slice_spec)
+    {
+        return span_view()[slice_spec];
+    }
+
+    /// Slice out some dimensions
+    template <class... QueryDDims>
+    auto operator[](DiscreteDomain<QueryDDims...> const& odomain) const
+    {
+        return span_view()[odomain];
+    }
+
+    /// Slice out some dimensions
+    template <class... QueryDDims>
+    auto operator[](DiscreteDomain<QueryDDims...> const& odomain)
+    {
+        return span_view()[odomain];
+    }
+
+    /** Element access using a list of DiscreteCoordinate
+     * @param mcoords 1D discrete coordinates
+     * @return const-reference to this element
+     */
     // Warning: Do not use DiscreteCoordinate because of template deduction issue with clang 12
     template <class... ODDims>
-    inline constexpr element_type const& operator()(
+    element_type const& operator()(
             detail::TaggedVector<DiscreteCoordElement, ODDims> const&... mcoords) const noexcept
     {
         return this->m_internal_mdspan(take<DDims>(mcoords...)...);
     }
 
+    /** Element access using a list of DiscreteCoordinate
+     * @param mcoords 1D discrete coordinates
+     * @return reference to this element
+     */
     // Warning: Do not use DiscreteCoordinate because of template deduction issue with clang 12
     template <class... ODDims>
-    inline constexpr element_type& operator()(
+    element_type& operator()(
             detail::TaggedVector<DiscreteCoordElement, ODDims> const&... mcoords) noexcept
     {
         assert(((mcoords >= front<ODDims>(this->m_domain)) && ...));
         return this->m_internal_mdspan(take<DDims>(mcoords...)...);
     }
 
-    inline constexpr element_type const& operator()(mcoord_type const& indices) const noexcept
+    /** Element access using a multi-dimensional DiscreteCoordinate
+     * @param mcoords discrete coordinates
+     * @return const-reference to this element
+     */
+    element_type const& operator()(mcoord_type const& indices) const noexcept
     {
         assert(((get<DDims>(indices) >= front<DDims>(this->m_domain)) && ...));
         return this->m_internal_mdspan(indices.array());
     }
 
-    inline constexpr element_type& operator()(mcoord_type const& indices) noexcept
+    /** Element access using a multi-dimensional DiscreteCoordinate
+     * @param mcoords discrete coordinates
+     * @return reference to this element
+     */
+    element_type& operator()(mcoord_type const& indices) noexcept
     {
         assert(((get<DDims>(indices) >= front<DDims>(this->m_domain)) && ...));
         return this->m_internal_mdspan(indices.array());
     }
 
-    inline constexpr view_type span_cview() const
+    /** Access to the underlying allocation pointer
+     * @return read-only allocation pointer
+     */
+    ElementType const* data() const
     {
-        return *this;
+        return base_type::data();
     }
 
-    inline constexpr view_type span_view() const
+    /** Access to the underlying allocation pointer
+     * @return allocation pointer
+     */
+    ElementType* data()
     {
-        return *this;
+        return base_type::data();
     }
 
-    inline constexpr span_type span_view()
+    /** Provide a mdspan on the memory allocation
+     * @return read-only allocation mdspan
+     */
+    const_allocation_mdspan_type allocation_mdspan() const
     {
-        return *this;
+        return base_type::allocation_mdspan();
+    }
+
+    /** Provide a mdspan on the memory allocation
+     * @return allocation mdspan
+     */
+    allocation_mdspan_type allocation_mdspan()
+    {
+        return base_type::allocation_mdspan();
+    }
+
+    view_type span_cview() const
+    {
+        return view_type(*this);
+    }
+
+    view_type span_view() const
+    {
+        return view_type(*this);
+    }
+
+    span_type span_view()
+    {
+        return span_type(*this);
     }
 };

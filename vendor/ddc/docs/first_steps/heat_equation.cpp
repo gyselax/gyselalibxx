@@ -112,7 +112,7 @@ int main(int argc, char** argv)
     std::size_t iter = 0;
     for (; iter < nt; ++iter) {
         //! [io/pdi]
-        PdiEvent("temperature").with("iter", iter).with("temperature", T_in);
+        PdiEvent("temperature").with("iter", iter).and_with("temperature", T_in);
         //! [io/pdi]
 
         //! [numerical scheme]

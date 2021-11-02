@@ -57,12 +57,12 @@ DSpanX FftPoissonSolver::operator()(DSpanX electric_potential, DViewSpXVx allfdi
         for (IndexSp isp : get_domain<IDimSp>(allfdistribu)) {
             deepcopy(contiguous_slice_vx, allfdistribu[isp][ix]);
             m_spline_vx_builder(
-                    vx_spline_coef.span_view(),
-                    contiguous_slice_vx.span_cview(),
+                    vx_spline_coef,
+                    contiguous_slice_vx,
                     &m_derivs_vxmin,
                     &m_derivs_vxmax);
             rho(ix) += m_species_info.charge()(isp)
-                       * m_spline_vx_evaluator.integrate(vx_spline_coef.span_cview());
+                       * m_spline_vx_evaluator.integrate(vx_spline_coef);
         }
     }
 
@@ -72,7 +72,7 @@ DSpanX FftPoissonSolver::operator()(DSpanX electric_potential, DViewSpXVx allfdi
 
     // Compute FFT(rho)
     Chunk<std::complex<double>, IDomainFx> complex_Phi_fx(dom_fx);
-    m_fft(complex_Phi_fx, rho);
+    m_fft(complex_Phi_fx, rho.span_view());
 
     // Solve Poisson's equation -d2Phi/dx2 = rho
     //   in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))

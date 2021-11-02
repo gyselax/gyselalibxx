@@ -85,12 +85,12 @@ TEST(FFT, IdentityUsingReal)
     auto meshfx = fft.compute_fourier_domain(domx);
     DiscreteDomain<typeof(meshfx)> domfx(IVectFx(meshfx.size()));
     Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
-    fft(fft_values, values);
+    fft(fft_values, values.span_view());
 
     // Compute IFFT(FFT(f(x))) and check if it is equivalent to f(x)
     FftwInverseFourierTransform<RDimX> ifft;
     FieldX<double> ifft_fft_values(domx);
-    ifft(ifft_fft_values, fft_values);
+    ifft(ifft_fft_values.span_view(), fft_values);
 
     double max_error = 0.;
     for (auto ii : domx) {
@@ -125,12 +125,12 @@ TEST(FFT, IdentityUsingComplex)
     auto meshfx = fft.compute_fourier_domain(domx);
     DiscreteDomain<typeof(meshfx)> domfx(IVectFx(meshfx.size()));
     Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
-    fft(fft_values, values);
+    fft(fft_values, values.span_view());
 
     // Compute IFFT(FFT(f(x))) and check if it is equivalent to f(x)
     FieldX<std::complex<double>> ifft_fft_values(domx);
     FftwInverseFourierTransform<RDimX> ifft;
-    ifft(ifft_fft_values, fft_values);
+    ifft(ifft_fft_values.span_view(), fft_values);
 
     double max_error = 0.;
     for (auto ii : domx) {
@@ -170,7 +170,7 @@ TEST(FFT, FirstDerivative)
     auto meshfx = fft.compute_fourier_domain(domx);
     DiscreteDomain<typeof(meshfx)> domfx(IVectFx(meshfx.size()));
     Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
-    fft(fft_values, values);
+    fft(fft_values, values.span_view());
 
     // Compute i*kx*FFT(f(x))
     Chunk<std::complex<double>, IDomainFx> ikx_fft_values(domfx);
@@ -183,7 +183,7 @@ TEST(FFT, FirstDerivative)
     // Compute IFFT(i*kx*FFT(f(x))) and check if it is equivalent to df/dx
     FftwInverseFourierTransform<RDimX> ifft;
     FieldX<double> firstderiv_values_computed(domx);
-    ifft(firstderiv_values_computed, ikx_fft_values);
+    ifft(firstderiv_values_computed.span_view(), ikx_fft_values);
 
     double max_error = 0.;
     for (auto ii : domx) {
@@ -221,7 +221,7 @@ TEST(FFT, Simple)
     }
 
     Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
-    fft(fft_values, values);
+    fft(fft_values, values.span_view());
 
     constexpr double tol = 1.0e-13;
     for (std::size_t i = 0; i < domfx.size(); ++i) {

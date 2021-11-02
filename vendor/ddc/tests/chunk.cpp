@@ -80,6 +80,22 @@ TEST(Chunk1DTest, LayoutType)
 // \}
 // Functions implemented in Chunk 1D (and free functions specific to it) \{
 
+TEST(Chunk1DTest, ChunkSpanConversionConstructor)
+{
+    double constexpr factor = 1.391;
+    ChunkX<double> chunk(dom_x);
+    for (auto&& ix : chunk.domain()) {
+        chunk(ix) = factor * ix;
+    }
+
+    ChunkX<double> chunk2(chunk.span_view());
+    EXPECT_EQ(chunk2.domain(), dom_x);
+    for (auto&& ix : chunk2.domain()) {
+        // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
+        EXPECT_EQ(factor * ix, chunk2(ix));
+    }
+}
+
 TEST(Chunk1DTest, MoveConstructor)
 {
     double constexpr factor = 1.391;
@@ -124,7 +140,7 @@ TEST(Chunk1DTest, Swap)
     DDomX empty_domain(lbound_x, DVectX(0));
     ChunkX<double> chunk2(empty_domain);
 
-    chunk2.swap(chunk);
+    std::swap(chunk2, chunk);
     EXPECT_EQ(chunk.domain(), empty_domain);
     EXPECT_EQ(chunk2.domain(), dom_x);
     for (auto&& ix : chunk2.domain()) {
@@ -193,7 +209,7 @@ TEST(Chunk1DTest, View)
 }
 
 // \}
-// Functions inherited from ChunkSpan (and free functions implemented for it) \{
+// Functions inherited from ChunkCommon (and free functions implemented for it) \{
 
 // constructors are hidden
 
@@ -202,18 +218,6 @@ TEST(Chunk1DTest, View)
 // no slicing (operator[]) in 1D
 
 // access (operator()) operators are hidden
-
-TEST(Chunk1DTest, Ibegin)
-{
-    ChunkX<double> chunk(dom_x);
-    EXPECT_EQ(chunk.ibegin<DDimX>(), lbound_x);
-}
-
-TEST(Chunk1DTest, Iend)
-{
-    ChunkX<double> chunk(dom_x);
-    EXPECT_EQ(chunk.iend<DDimX>(), sentinel_x);
-}
 
 // TODO: accessor
 

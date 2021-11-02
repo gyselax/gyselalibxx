@@ -7,6 +7,7 @@
 
 #include <experimental/mdspan>
 
+#include "ddc/chunk_common.hpp"
 #include "ddc/discrete_domain.hpp"
 
 template <class, class>
@@ -18,18 +19,13 @@ template <
         class LayoutStridedPolicy = std::experimental::layout_right>
 class ChunkSpan;
 
-/** Access the domain (or subdomain) of a view
- * @param[in]  view      the view whose domain to iterate
- * @return the domain of view in the queried dimensions
- */
-template <class... QueryDDims, class ChunkType>
-auto get_domain(ChunkType const& chunk) noexcept
-{
-    return chunk.template domain<QueryDDims...>();
-}
+template <class ElementType, class SupportType, class LayoutStridedPolicy>
+static constexpr bool
+        is_chunkspan_impl_v<ChunkSpan<ElementType, SupportType, LayoutStridedPolicy>> = true;
 
 template <class ElementType, class... DDims, class LayoutStridedPolicy>
 class ChunkSpan<ElementType, DiscreteDomain<DDims...>, LayoutStridedPolicy>
+    : public ChunkCommon<ElementType, DiscreteDomain<DDims...>, LayoutStridedPolicy>
 {
 protected:
     /// the raw mdspan underlying this, with the same indexing (0 might no be dereferenceable)
@@ -38,7 +34,15 @@ protected:
             std::experimental::dextents<sizeof...(DDims)>,
             std::experimental::layout_stride>;
 
+    using base_type = ChunkCommon<ElementType, DiscreteDomain<DDims...>, LayoutStridedPolicy>;
+
 public:
+    /// type of a span of this full chunk
+    using span_type = ChunkSpan<ElementType, DiscreteDomain<DDims...>, LayoutStridedPolicy>;
+
+    /// type of a view of this full chunk
+    using view_type = ChunkSpan<ElementType const, DiscreteDomain<DDims...>, LayoutStridedPolicy>;
+
     using mdomain_type = DiscreteDomain<DDims...>;
 
     /// The dereferenceable part of the co-domain but with a different domain, starting at 0
@@ -47,37 +51,35 @@ public:
 
     using mcoord_type = typename mdomain_type::mcoord_type;
 
-    using extents_type = typename allocation_mdspan_type::extents_type;
+    using extents_type = typename base_type::extents_type;
 
-    using layout_type = typename allocation_mdspan_type::layout_type;
+    using layout_type = typename base_type::layout_type;
 
-    using accessor_type = typename allocation_mdspan_type::accessor_type;
+    using accessor_type = typename base_type::accessor_type;
 
-    using mapping_type = typename allocation_mdspan_type::mapping_type;
+    using mapping_type = typename base_type::mapping_type;
 
-    using element_type = typename allocation_mdspan_type::element_type;
+    using element_type = typename base_type::element_type;
 
-    using value_type = typename allocation_mdspan_type::value_type;
+    using value_type = typename base_type::value_type;
 
-    using size_type = typename allocation_mdspan_type::size_type;
+    using size_type = typename base_type::size_type;
 
-    using difference_type = typename allocation_mdspan_type::difference_type;
+    using difference_type = typename base_type::difference_type;
 
-    using pointer = typename allocation_mdspan_type::pointer;
+    using pointer = typename base_type::pointer;
 
-    using reference = typename allocation_mdspan_type::reference;
+    using reference = typename base_type::reference;
 
     template <class, class, class>
     friend class ChunkSpan;
-
-    static_assert(mapping_type::is_always_strided());
 
 protected:
     template <class QueryDDim, class... ODDims>
     auto get_slicer_for(DiscreteCoordinate<ODDims...> const& c) const
     {
         if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
-            return get<QueryDDim>(c) - front<QueryDDim>(m_domain);
+            return get<QueryDDim>(c) - front<QueryDDim>(this->m_domain);
         } else {
             return std::experimental::full_extent;
         }
@@ -88,37 +90,46 @@ protected:
     {
         if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
             return std::pair<std::size_t, std::size_t>(
-                    front<QueryDDim>(c) - front<QueryDDim>(m_domain),
-                    back<QueryDDim>(c) + 1 - front<QueryDDim>(m_domain));
+                    front<QueryDDim>(c) - front<QueryDDim>(this->m_domain),
+                    back<QueryDDim>(c) + 1 - front<QueryDDim>(this->m_domain));
         } else {
             return std::experimental::full_extent;
         }
     }
 
-    /// The raw view of the data
-    internal_mdspan_type m_internal_mdspan;
-
-    /// The mesh on which this chunk is defined
-    mdomain_type m_domain;
-
 public:
+    /// Empty ChunkSpan
+    constexpr ChunkSpan() = default;
+
     /** Constructs a new ChunkSpan by copy, yields a new view to the same data
      * @param other the ChunkSpan to copy
      */
-    inline constexpr ChunkSpan(ChunkSpan const& other) = default;
+    constexpr ChunkSpan(ChunkSpan const& other) = default;
 
     /** Constructs a new ChunkSpan by move
      * @param other the ChunkSpan to move
      */
-    inline constexpr ChunkSpan(ChunkSpan&& other) = default;
+    constexpr ChunkSpan(ChunkSpan&& other) = default;
 
-    /** Constructs a new ChunkSpan by copy of a chunk, yields a new view to the same data
-     * @param other the ChunkSpan to move
+    /** Constructs a new ChunkSpan from a Chunk, yields a new view to the same data
+     * @param other the Chunk to view
      */
     template <class OElementType>
-    inline constexpr ChunkSpan(Chunk<mdomain_type, OElementType> const& other) noexcept
-        : m_internal_mdspan(other.m_internal_mdspan)
-        , m_domain(other.domain())
+    constexpr ChunkSpan(Chunk<OElementType, mdomain_type>& other) noexcept
+        : base_type(other.m_internal_mdspan, other.m_domain)
+    {
+    }
+
+    /** Constructs a new ChunkSpan from a Chunk, yields a new view to the same data
+     * @param other the Chunk to view
+     */
+    // Disabled by SFINAE in the case of `ElementType` is not `const` to avoid write access
+    template <
+            class OElementType,
+            class SFINAEElementType = ElementType,
+            class = std::enable_if_t<std::is_const_v<SFINAEElementType>>>
+    constexpr ChunkSpan(Chunk<OElementType, mdomain_type> const& other) noexcept
+        : base_type(other.m_internal_mdspan, other.m_domain)
     {
     }
 
@@ -126,255 +137,126 @@ public:
      * @param other the ChunkSpan to move
      */
     template <class OElementType>
-    inline constexpr ChunkSpan(
-            ChunkSpan<OElementType, mdomain_type, layout_type> const& other) noexcept
-        : m_internal_mdspan(other.m_internal_mdspan)
-        , m_domain(other.domain())
+    constexpr ChunkSpan(ChunkSpan<OElementType, mdomain_type, layout_type> const& other) noexcept
+        : base_type(other.m_internal_mdspan, other.m_domain)
     {
     }
 
     /** Constructs a new ChunkSpan from scratch
+     * @param ptr the allocation pointer to the data
      * @param domain the domain that sustains the view
-     * @param allocation_view the allocation view to the data
      */
-    inline constexpr ChunkSpan(allocation_mdspan_type allocation_view, mdomain_type domain)
-        : m_internal_mdspan()
-        , m_domain(domain)
-    {
-        namespace stdex = std::experimental;
-        extents_type extents_s((front<DDims>(m_domain) + ::extents<DDims>(m_domain))...);
-        std::array<std::size_t, sizeof...(DDims)> strides_s {allocation_view.mapping().stride(
-                type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
-        stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
-        m_internal_mdspan = internal_mdspan_type(
-                allocation_view.data() - mapping_s(front<DDims>(domain)...),
-                mapping_s);
-    }
-
     template <
             class Mapping = mapping_type,
             std::enable_if_t<std::is_constructible_v<Mapping, extents_type>, int> = 0>
-    inline constexpr ChunkSpan(ElementType* ptr, mdomain_type domain)
-        : m_internal_mdspan()
-        , m_domain(domain)
+    constexpr ChunkSpan(ElementType* const ptr, mdomain_type const& domain) : base_type(ptr, domain)
+    {
+    }
+
+    /** Constructs a new ChunkSpan from scratch
+     * @param allocation_mdspan the allocation mdspan to the data
+     * @param domain the domain that sustains the view
+     */
+    constexpr ChunkSpan(allocation_mdspan_type allocation_mdspan, mdomain_type const& domain)
     {
         namespace stdex = std::experimental;
-        extents_type extents_r(::extents<DDims>(m_domain)...);
-        mapping_type mapping_r(extents_r);
-
-        extents_type extents_s((front<DDims>(m_domain) + ::extents<DDims>(m_domain))...);
-        std::array<std::size_t, sizeof...(DDims)> strides_s {
-                mapping_r.stride(type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
+        extents_type extents_s((front<DDims>(domain) + ::extents<DDims>(domain))...);
+        std::array<std::size_t, sizeof...(DDims)> strides_s {allocation_mdspan.mapping().stride(
+                type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
         stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
-        m_internal_mdspan
-                = internal_mdspan_type(ptr - mapping_s(front<DDims>(domain)...), mapping_s);
+        this->m_internal_mdspan = internal_mdspan_type(
+                allocation_mdspan.data() - mapping_s(front<DDims>(domain)...),
+                mapping_s);
+        this->m_domain = domain;
     }
 
     /** Copy-assigns a new value to this ChunkSpan, yields a new view to the same data
      * @param other the ChunkSpan to copy
      * @return *this
      */
-    inline constexpr ChunkSpan& operator=(ChunkSpan const& other) = default;
+    constexpr ChunkSpan& operator=(ChunkSpan const& other) = default;
 
     /** Move-assigns a new value to this ChunkSpan
      * @param other the ChunkSpan to move
      * @return *this
      */
-    inline constexpr ChunkSpan& operator=(ChunkSpan&& other) = default;
+    constexpr ChunkSpan& operator=(ChunkSpan&& other) = default;
 
     /** Slice out some dimensions
      */
     template <class... QueryDDims>
-    inline constexpr auto operator[](DiscreteCoordinate<QueryDDims...> const& slice_spec) const
+    constexpr auto operator[](DiscreteCoordinate<QueryDDims...> const& slice_spec) const
     {
         auto subview = std::experimental::
                 submdspan(allocation_mdspan(), get_slicer_for<DDims>(slice_spec)...);
         using detail::TypeSeq;
         using selected_meshes = type_seq_remove_t<TypeSeq<DDims...>, TypeSeq<QueryDDims...>>;
-        return ::ChunkSpan(subview, select_by_type_seq<selected_meshes>(m_domain));
+        return ::ChunkSpan(subview, select_by_type_seq<selected_meshes>(this->m_domain));
     }
 
     /** Slice out some dimensions
      */
     template <class... QueryDDims>
-    inline constexpr auto operator[](DiscreteDomain<QueryDDims...> const& odomain) const
+    constexpr auto operator[](DiscreteDomain<QueryDDims...> const& odomain) const
     {
         auto subview = std::experimental::
                 submdspan(allocation_mdspan(), get_slicer_for<DDims>(odomain)...);
-        return ::ChunkSpan(subview, m_domain.restrict(odomain));
+        return ::ChunkSpan(subview, this->m_domain.restrict(odomain));
     }
 
+    /** Element access using a list of DiscreteCoordinate
+     * @param mcoords 1D discrete coordinates
+     * @return reference to this element
+     */
     // Warning: Do not use DiscreteCoordinate because of template deduction issue with clang 12
     template <class... ODDims>
-    inline constexpr reference operator()(
+    constexpr reference operator()(
             detail::TaggedVector<DiscreteCoordElement, ODDims> const&... mcoords) const noexcept
     {
-        assert(((mcoords >= front<ODDims>(m_domain)) && ...));
-        return m_internal_mdspan(take<DDims>(mcoords...)...);
+        assert(((mcoords >= front<ODDims>(this->m_domain)) && ...));
+        return this->m_internal_mdspan(take<DDims>(mcoords...)...);
     }
 
-    inline constexpr reference operator()(mcoord_type const& indices) const noexcept
+    /** Element access using a multi-dimensional DiscreteCoordinate
+     * @param mcoords discrete coordinates
+     * @return reference to this element
+     */
+    constexpr reference operator()(mcoord_type const& indices) const noexcept
     {
-        assert(((get<DDims>(indices) >= front<DDims>(m_domain)) && ...));
-        return m_internal_mdspan(indices.array());
+        assert(((get<DDims>(indices) >= front<DDims>(this->m_domain)) && ...));
+        return this->m_internal_mdspan(indices.array());
+    }
+
+    /** Access to the underlying allocation pointer
+     * @return allocation pointer
+     */
+    constexpr ElementType* data() const
+    {
+        return base_type::data();
     }
 
     /// @deprecated
-    template <class QueryDDim>
-    [[deprecated]] inline constexpr std::size_t ibegin() const noexcept
+    [[deprecated]] constexpr internal_mdspan_type internal_mdspan() const
     {
-        return front<QueryDDim>(m_domain);
+        return base_type::internal_mdspan();
     }
 
-    /// @deprecated
-    template <class QueryDDim>
-    [[deprecated]] inline constexpr std::size_t iend() const noexcept
-    {
-        return back<QueryDDim>(m_domain) + 1;
-    }
-
-    inline accessor_type accessor() const
-    {
-        return m_internal_mdspan.accessor();
-    }
-
-    static inline constexpr int rank() noexcept
-    {
-        return extents_type::rank();
-    }
-
-    static inline constexpr int rank_dynamic() noexcept
-    {
-        return extents_type::rank_dynamic();
-    }
-
-    // static inline constexpr size_type static_extent(size_t r) noexcept
-    // {
-    //     return extents_type::static_extent(r);
-    // }
-
-    inline constexpr mcoord_type extents() const noexcept
-    {
-        return mcoord_type(
-                (m_internal_mdspan.extent(type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)
-                 - front<DDims>(m_domain))...);
-    }
-
-    template <class QueryDDim>
-    inline constexpr size_type extent() const noexcept
-    {
-        return m_internal_mdspan.extent(type_seq_rank_v<QueryDDim, detail::TypeSeq<DDims...>>)
-               - front<QueryDDim>(m_domain);
-    }
-
-    inline constexpr size_type size() const noexcept
-    {
-        return allocation_mdspan().size();
-    }
-
-    inline constexpr size_type unique_size() const noexcept
-    {
-        return allocation_mdspan().unique_size();
-    }
-
-    static inline constexpr bool is_always_unique() noexcept
-    {
-        return mapping_type::is_always_unique();
-    }
-
-    static inline constexpr bool is_always_contiguous() noexcept
-    {
-        return mapping_type::is_always_contiguous();
-    }
-
-    static inline constexpr bool is_always_strided() noexcept
-    {
-        return mapping_type::is_always_strided();
-    }
-
-    inline constexpr mapping_type mapping() const noexcept
-    {
-        return allocation_mdspan().mapping();
-    }
-
-    inline constexpr bool is_unique() const noexcept
-    {
-        return allocation_mdspan().is_unique();
-    }
-
-    inline constexpr bool is_contiguous() const noexcept
-    {
-        return allocation_mdspan().is_contiguous();
-    }
-
-    inline constexpr bool is_strided() const noexcept
-    {
-        return allocation_mdspan().is_strided();
-    }
-
-    template <class QueryDDim>
-    inline constexpr auto stride() const
-    {
-        return m_internal_mdspan.stride(type_seq_rank_v<QueryDDim, detail::TypeSeq<DDims...>>);
-    }
-
-    /** Swaps this field with another
-     * @param other the Chunk to swap with this one
+    /** Provide a mdspan on the memory allocation
+     * @return allocation mdspan
      */
-    inline constexpr void swap(ChunkSpan& other)
+    constexpr allocation_mdspan_type allocation_mdspan() const
     {
-        ChunkSpan tmp = std::move(other);
-        other = std::move(*this);
-        *this = std::move(tmp);
+        return base_type::allocation_mdspan();
     }
 
-    /** Provide access to the domain on which this chunk is defined
-     * @return the domain on which this chunk is defined
-     */
-    inline constexpr mdomain_type domain() const noexcept
+    constexpr view_type span_cview() const
     {
-        return m_domain;
+        return view_type(*this);
     }
 
-    /** Provide access to the domain on which this chunk is defined
-     * @return the domain on which this chunk is defined
-     */
-    template <class... QueryDDims>
-    inline constexpr DiscreteDomain<QueryDDims...> domain() const noexcept
+    constexpr span_type span_view() const
     {
-        return select<QueryDDims...>(domain());
-    }
-
-    inline constexpr ElementType* data() const
-    {
-        return &m_internal_mdspan(front<DDims>(m_domain)...);
-    }
-
-    /** Provide a modifiable view of the data
-     * @return a modifiable view of the data
-     */
-    inline constexpr internal_mdspan_type internal_mdspan() const
-    {
-        return m_internal_mdspan;
-    }
-
-    /** Provide a modifiable view of the data
-     * @return a modifiable view of the data
-     */
-    inline constexpr allocation_mdspan_type allocation_mdspan() const
-    {
-        mapping_type m;
-        extents_type extents_s(::extents<DDims>(m_domain)...);
-        if constexpr (std::is_same_v<LayoutStridedPolicy, std::experimental::layout_stride>) {
-            // Temporary workaround: layout_stride::mapping is missing the function `strides`
-            const std::array<std::size_t, extents_type::rank()> strides {
-                    m_internal_mdspan.mapping().stride(
-                            type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
-            m = mapping_type(extents_s, strides);
-        } else {
-            m = mapping_type(extents_s);
-        }
-        return allocation_mdspan_type(data(), m);
+        return *this;
     }
 };
 

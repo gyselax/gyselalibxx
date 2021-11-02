@@ -44,13 +44,12 @@ public:
         return eval(x, 0);
     }
 
-    template <class Domain>
-    void operator()(ChunkSpan<double, Domain>& chunk) const
+    void operator()(ChunkSpan<double, DiscreteDomain<IDimX>>& chunk) const
     {
         auto const& domain = chunk.domain();
 
-        for (std::size_t i = 0; i < domain.size(); ++i) {
-            chunk(i) = eval(domain.to_real(domain[i]), 0);
+        for (IndexX ix : domain) {
+            chunk(ix) = eval(to_real(ix), 0);
         }
     }
 
@@ -59,13 +58,12 @@ public:
         return eval(x, derivative);
     }
 
-    template <class Domain>
-    void deriv(ChunkSpan<double, Domain>& chunk, int const derivative) const
+    void deriv(ChunkSpan<double, DiscreteDomain<IDimX>>& chunk, int const derivative) const
     {
         auto const& domain = chunk.domain();
 
-        for (std::size_t i = 0; i < domain.size(); ++i) {
-            chunk(i) = eval(domain.to_real(domain[i]), derivative);
+        for (IndexX ix : domain) {
+            chunk(ix) = eval(to_real(ix), derivative);
         }
     }
 
@@ -114,13 +112,12 @@ public:
         return eval(x, 0);
     }
 
-    template <class Domain>
-    void operator()(ChunkSpan<double, Domain>& chunk) const
+    void operator()(ChunkSpan<double, DiscreteDomain<IDimX>> chunk) const
     {
         auto const& domain = chunk.domain();
 
-        for (auto&& icoord : domain) {
-            chunk(icoord) = eval(to_real(icoord), 0);
+        for (IndexX ix : domain) {
+            chunk(ix) = eval(to_real(ix), 0);
         }
     }
 
@@ -129,13 +126,12 @@ public:
         return eval(x, derivative);
     }
 
-    template <class Domain>
-    void deriv(ChunkSpan<double, Domain>& chunk, int const derivative) const
+    void deriv(ChunkSpan<double, DiscreteDomain<IDimX>> chunk, int const derivative) const
     {
         auto const& domain = chunk.domain();
 
-        for (auto&& icoord : domain) {
-            chunk(icoord) = eval(domain.to_real(icoord), 0);
+        for (IndexX ix : domain) {
+            chunk(ix) = eval(to_real(ix), 0);
         }
     }
 

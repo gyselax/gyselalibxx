@@ -33,7 +33,7 @@ private:
     FieldSp<double> const m_mean_velocity_eq;
 
     // Maxwellian values
-    FieldSpVx<double> const m_maxw_values;
+    FieldSpVx<double> m_maxw_values;
 
 public:
     SpeciesInformation(

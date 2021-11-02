@@ -16,16 +16,6 @@ static constexpr PDI_inout_t default_access_v<ChunkSpan<
         SupportType,
         LayoutStridedPolicy> const&> = default_access_v<ElementType>;
 
-template <class ElementType>
-static constexpr bool is_chunkspan_v = false;
-
-template <class ElementType, class SupportType, class LayoutStridedPolicy>
-static constexpr bool
-        is_chunkspan_v<ChunkSpan<ElementType, SupportType, LayoutStridedPolicy>> = true;
-
-template <class ElementType, class SupportType>
-static constexpr bool is_chunkspan_v<Chunk<ElementType, SupportType>> = true;
-
 class PdiEvent
 {
     std::string m_event;
@@ -57,16 +47,27 @@ public:
         return *this;
     }
 
-    template <PDI_inout_t access, class ElementType>
-    std::enable_if_t<
-            !is_chunkspan_v<std::remove_cv_t<std::remove_reference_t<ElementType>>>,
-            PdiEvent>&
-    with(std::string const& name, ElementType& data)
+    template <PDI_inout_t access, class ElementType, class SupportType>
+    PdiEvent& with(std::string const& name, Chunk<ElementType, SupportType>& data)
+    {
+        return with(name, data.span_view());
+    }
+
+    template <PDI_inout_t access, class ElementType, class SupportType>
+    PdiEvent& with(std::string const& name, Chunk<ElementType, SupportType> const& data)
+    {
+        return with(name, data.span_view());
+    }
+
+    template <PDI_inout_t access, class DataType>
+    std::enable_if_t<!is_chunkspan_v<DataType>, PdiEvent>& with(
+            std::string const& name,
+            DataType& data)
     {
         static_assert(
-                !(access & PDI_IN) || !std::is_const_v<ElementType>,
+                !(access & PDI_IN) || !std::is_const_v<DataType>,
                 "Invalid access for constant data");
-        PDI_share(name.c_str(), const_cast<std::remove_const_t<ElementType>*>(&data), access);
+        PDI_share(name.c_str(), const_cast<std::remove_const_t<DataType>*>(&data), access);
         m_names.push_back(name);
         return *this;
     }
@@ -79,22 +80,23 @@ public:
         return with<default_access_v<ElementType>>(name, data);
     }
 
-    template <class ElementType>
-    PdiEvent& with(std::string const& name, ElementType& data)
+    template <class DataType>
+    PdiEvent& with(std::string const& name, DataType& data)
     {
-        return with<default_access_v<ElementType>>(name, data);
+        return with<default_access_v<DataType>>(name, data);
     }
 
-    template <class ElementType>
-    PdiEvent& and_with(std::string const& name, ElementType& data)
+    template <class DataType>
+    PdiEvent& and_with(std::string const& name, DataType&& data)
     {
-        return with(name, data);
+        return with(name, std::forward<DataType>(data));
     }
 
-    template <PDI_inout_t access, class ElementType>
-    PdiEvent& and_with(std::string const& name, ElementType& data)
+    template <PDI_inout_t access, class DataType>
+    PdiEvent& and_with(std::string const& name, DataType&& data)
     {
-        return with<default_access_v<ElementType>>(name, data);
+        return with<default_access_v<
+                std::remove_reference_t<DataType>>>(name, std::forward<DataType>(data));
     }
 
     ~PdiEvent()
@@ -106,14 +108,14 @@ public:
     }
 };
 
-template <PDI_inout_t access, class ElementType>
-void expose_to_pdi(std::string const& name, ElementType& data)
+template <PDI_inout_t access, class DataType>
+void expose_to_pdi(std::string const& name, DataType&& data)
 {
-    PdiEvent(name).with<access>(name, data);
+    PdiEvent(name).with<access>(name, std::forward<DataType>(data));
 }
 
-template <class ElementType>
-void expose_to_pdi(std::string const& name, ElementType& data)
+template <class DataType>
+void expose_to_pdi(std::string const& name, DataType&& data)
 {
-    PdiEvent(name).with(name, data);
+    PdiEvent(name).with(name, std::forward<DataType>(data));
 }

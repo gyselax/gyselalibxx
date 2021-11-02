@@ -51,7 +51,7 @@ DSpanSpXVx BslAdvectionVx::operator()(DSpanSpXVx allfdistribu, DViewX electric_p
     m_spline_x_builder(elecpot_spline_coef, electric_potential);
     DFieldX efield(x_dom);
     for (IndexX ix : x_dom) {
-        efield(ix) = -m_spline_x_evaluator.deriv(to_real(ix), elecpot_spline_coef.span_cview());
+        efield(ix) = -m_spline_x_evaluator.deriv(to_real(ix), elecpot_spline_coef);
     }
 
     for (IndexSp isp : sp_dom) {
@@ -68,7 +68,7 @@ DSpanSpXVx BslAdvectionVx::operator()(DSpanSpXVx allfdistribu, DViewX electric_p
             }
 
             // build a spline representation of the data
-            interpolator_vx(allfdistribu[isp][ix], feet_coords.span_cview());
+            interpolator_vx(allfdistribu[isp][ix], feet_coords);
         }
     }
 
