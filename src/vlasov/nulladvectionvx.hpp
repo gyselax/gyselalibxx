@@ -7,6 +7,8 @@
 class NullAdvectionVx : public IAdvectionVx
 {
 public:
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_potential, double dt)
-            const override;
+    DSpanSpXVx operator()(
+            DSpanSpXVx const allfdistribu,
+            DViewX const electric_potential,
+            double const dt) const override;
 };

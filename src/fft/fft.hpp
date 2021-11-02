@@ -28,24 +28,32 @@ public:
             DiscreteDomain<UniformDiscretization<Tag>> const& dom_x) const noexcept = 0;
 
     // Perform FFT where the input is a real and the output is a complex
-    virtual void operator()(
+    virtual ChunkSpan<
+            std::complex<double>,
+            DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
+            std::experimental::layout_right>
+    operator()(
             ChunkSpan<
                     std::complex<double>,
                     DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
-                    std::experimental::layout_right> const& out_values,
+                    std::experimental::layout_right> out_values,
             ChunkSpan<
                     double,
                     DiscreteDomain<UniformDiscretization<Tag>>,
-                    std::experimental::layout_right> const& in_values) const noexcept = 0;
+                    std::experimental::layout_right> in_values) const noexcept = 0;
 
     // Perform FFT where the input is a complex and output is a compleax
-    virtual void operator()(
+    virtual ChunkSpan<
+            std::complex<double>,
+            DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
+            std::experimental::layout_right>
+    operator()(
             ChunkSpan<
                     std::complex<double>,
                     DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
-                    std::experimental::layout_right> const& out_values,
+                    std::experimental::layout_right> out_values,
             ChunkSpan<
                     std::complex<double>,
                     DiscreteDomain<UniformDiscretization<Tag>>,
-                    std::experimental::layout_right> const& in_values) const noexcept = 0;
+                    std::experimental::layout_right> in_values) const noexcept = 0;
 };

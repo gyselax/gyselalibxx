@@ -9,9 +9,9 @@
   where u is the mean velocity
 */
 void maxwellian_initialization(
-        double const density,
-        double const temperature,
-        double const mean_velocity,
+        double density,
+        double temperature,
+        double mean_velocity,
         DSpanVx fMaxwellian);
 
 class SpeciesInformation
@@ -42,23 +42,7 @@ public:
             FieldSp<double> n_eq,
             FieldSp<double> T_eq,
             FieldSp<double> u_eq,
-            IDomainSpXVx const& domSpXVx)
-        : m_charge(std::move(charge))
-        , m_mass(std::move(mass))
-        , m_density_eq(std::move(n_eq))
-        , m_temperature_eq(std::move(T_eq))
-        , m_mean_velocity_eq(std::move(u_eq))
-        , m_maxw_values(select<IDimSp, IDimVx>(domSpXVx))
-    {
-        for (IndexSp isp : get_domain<IDimSp>(charge)) {
-            // Initialization of the Maxwellian --> fill m_maxw_values
-            maxwellian_initialization(
-                    m_density_eq(isp),
-                    m_temperature_eq(isp),
-                    m_mean_velocity_eq(isp),
-                    m_maxw_values[isp]);
-        }
-    }
+            IDomainSpXVx const& domSpXVx);
 
     IndexSp ielec() const
     {

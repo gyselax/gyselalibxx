@@ -16,11 +16,11 @@ public:
 
 protected:
     virtual void calculate_delta_to_factorize() override;
-    virtual void solve_lambda_section(DSpan1D& v, DSpan1D const& u) const override;
-    virtual void solve_lambda_section(DSpan2D& v, DSpan2D const& u) const override;
-    virtual void solve_lambda_section_transpose(DSpan1D& v, DSpan1D const& u) const override;
-    const int kl; // no. of subdiagonals
-    const int ku; // no. of superdiagonals
+    virtual DSpan1D solve_lambda_section(DSpan1D v, DView1D u) const override;
+    virtual DSpan2D solve_lambda_section(DSpan2D v, DView2D u) const override;
+    virtual void solve_lambda_section_transpose(DSpan1D u, DSpan1D v) const override;
+    int const kl; // no. of subdiagonals
+    int const ku; // no. of superdiagonals
 };
 
 #endif // MATRIX_PERIODIC_BANDED_H

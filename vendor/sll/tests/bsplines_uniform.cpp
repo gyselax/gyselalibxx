@@ -64,14 +64,14 @@ TEST_F(BSplinesUniformTest, Comparison)
 
     double const x = 1.07;
 
-    bsplines.eval_basis(x, values, jmin);
+    bsplines.eval_basis(values, jmin, x);
     old_bsplines.eval_basis(x, old_values, old_jmin);
     EXPECT_EQ(jmin, old_jmin);
     for (std::size_t i = 0; i < values.extent(0); ++i) {
         EXPECT_EQ(values(i), old_values(i));
     }
 
-    bsplines.eval_deriv(x, values, jmin);
+    bsplines.eval_deriv(values, jmin, x);
     old_bsplines.eval_deriv(x, old_values, old_jmin);
     EXPECT_EQ(jmin, old_jmin);
     for (std::size_t i = 0; i < values.extent(0); ++i) {

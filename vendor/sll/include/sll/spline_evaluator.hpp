@@ -7,6 +7,7 @@
 #include <ddc/discretization>
 
 #include "sll/boundary_value.hpp"
+#include "sll/view.hpp"
 
 template <class BSplinesType>
 class SplineEvaluator
@@ -38,36 +39,34 @@ public:
     {
     }
 
-    SplineEvaluator(const SplineEvaluator& x) = default;
+    SplineEvaluator(SplineEvaluator const& x) = default;
 
     SplineEvaluator(SplineEvaluator&& x) = default;
 
     ~SplineEvaluator() = default;
 
-    SplineEvaluator& operator=(const SplineEvaluator& x) = default;
+    SplineEvaluator& operator=(SplineEvaluator const& x) = default;
 
     SplineEvaluator& operator=(SplineEvaluator&& x) = default;
 
     double operator()(
-            double coord_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef) const
+            double const coord_eval,
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        std::experimental::mdspan<double, std::experimental::dextents<1>>
-                vals(values.data(), values.size());
+        DSpan1D const vals(values.data(), values.size());
 
         return eval(coord_eval, spline_coef, vals);
     }
 
     template <class Domain>
     void operator()(
-            ChunkSpan<double, Domain> const& spline_eval,
-            ChunkSpan<double const, Domain> const& coords_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef) const
+            ChunkSpan<double, Domain> const spline_eval,
+            ChunkSpan<double const, Domain> const coords_eval,
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        std::experimental::mdspan<double, std::experimental::dextents<1>>
-                vals(values.data(), values.size());
+        DSpan1D const vals(values.data(), values.size());
 
         for (auto i : coords_eval.domain()) {
             spline_eval(i) = eval(coords_eval(i), spline_coef, vals);
@@ -75,35 +74,33 @@ public:
     }
 
     double deriv(
-            double coord_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef) const
+            double const coord_eval,
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        std::experimental::mdspan<double, std::experimental::dextents<1>>
-                vals(values.data(), values.size());
+        DSpan1D const vals(values.data(), values.size());
 
         return eval_no_bc(coord_eval, spline_coef, vals, eval_deriv_type());
     }
 
     template <class Domain>
     void deriv(
-            ChunkSpan<double, Domain> const& spline_eval,
-            ChunkSpan<double const, Domain> const& coords_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef) const
+            ChunkSpan<double, Domain> const spline_eval,
+            ChunkSpan<double const, Domain> const coords_eval,
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        std::experimental::mdspan<double, std::experimental::dextents<1>>
-                vals(values.data(), values.size());
+        DSpan1D const vals(values.data(), values.size());
 
         for (auto i : coords_eval.domain()) {
             spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, vals, eval_deriv_type());
         }
     }
 
-    double integrate(ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef) const
+    double integrate(ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         Chunk<double, DiscreteDomain<BSplinesType>> values(spline_coef.domain());
-        auto vals = values.allocation_mdspan();
+        auto const vals = values.allocation_mdspan();
 
         discretization<bsplines_type>().integrals(vals);
 
@@ -117,8 +114,8 @@ public:
 private:
     double eval(
             double coord_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef,
-            std::experimental::mdspan<double, std::experimental::dextents<1>>& vals) const
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef,
+            DSpan1D const vals) const
     {
         if constexpr (bsplines_type::is_periodic()) {
             if (coord_eval < discretization<bsplines_type>().rmin()
@@ -141,19 +138,19 @@ private:
 
     template <class EvalType>
     double eval_no_bc(
-            double coord_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const& spline_coef,
-            std::experimental::mdspan<double, std::experimental::dextents<1>>& vals,
-            EvalType) const
+            double const coord_eval,
+            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef,
+            DSpan1D const vals,
+            EvalType const) const
     {
         static_assert(
                 std::is_same_v<EvalType, eval_type> || std::is_same_v<EvalType, eval_deriv_type>);
         int jmin;
 
         if constexpr (std::is_same_v<EvalType, eval_type>) {
-            discretization<bsplines_type>().eval_basis(coord_eval, vals, jmin);
+            discretization<bsplines_type>().eval_basis(vals, jmin, coord_eval);
         } else if constexpr (std::is_same_v<EvalType, eval_deriv_type>) {
-            discretization<bsplines_type>().eval_deriv(coord_eval, vals, jmin);
+            discretization<bsplines_type>().eval_deriv(vals, jmin, coord_eval);
         }
 
         double y = 0.0;

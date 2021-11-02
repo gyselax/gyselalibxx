@@ -13,14 +13,14 @@
 PredCorr::PredCorr(
         IVlasovSolver const& vlasov_solver,
         IPoissonSolver const& poisson_solver,
-        double dt)
+        double const dt)
     : m_vlasov_solver(vlasov_solver)
     , m_poisson_solver(poisson_solver)
     , m_dt(dt)
 {
 }
 
-void PredCorr::operator()(DSpanSpXVx allfdistribu, int steps) const
+void PredCorr::operator()(DSpanSpXVx const allfdistribu, int const steps) const
 {
     // efield only depends on DX
     DFieldX electric_potential(allfdistribu.domain<IDimX>());

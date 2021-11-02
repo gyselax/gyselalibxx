@@ -9,7 +9,7 @@ class IInterpolatorVx
 public:
     virtual ~IInterpolatorVx() = default;
 
-    virtual void operator()(DSpanVx const inout_data, DViewVx const coordinates) const = 0;
+    virtual void operator()(DSpanVx inout_data, DViewVx coordinates) const = 0;
 };
 
 class InterpolatorVxProxy : public IInterpolatorVx

@@ -43,18 +43,19 @@ FftPoissonSolver::FftPoissonSolver(
 
 // 1- Inner solvers sall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
-DSpanX FftPoissonSolver::operator()(DSpanX electric_potential, DViewSpXVx allfdistribu) const
+DSpanX FftPoissonSolver::operator()(DSpanX const electric_potential, DViewSpXVx const allfdistribu)
+        const
 {
     assert(electric_potential.domain() == get_domain<IDimX>(allfdistribu));
-    IDomainX dom_x = electric_potential.domain();
+    IDomainX const dom_x = electric_potential.domain();
 
     // Compute the RHS of the Poisson equation.
     Chunk<double, IDomainX> rho(dom_x);
     DFieldVx contiguous_slice_vx(allfdistribu.domain<IDimVx>());
     Chunk<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
-    for (IndexX ix : rho.domain()) {
+    for (IndexX const ix : rho.domain()) {
         rho(ix) = m_species_info.charge()(m_species_info.ielec());
-        for (IndexSp isp : get_domain<IDimSp>(allfdistribu)) {
+        for (IndexSp const isp : get_domain<IDimSp>(allfdistribu)) {
             deepcopy(contiguous_slice_vx, allfdistribu[isp][ix]);
             m_spline_vx_builder(
                     vx_spline_coef,

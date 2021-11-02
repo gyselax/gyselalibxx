@@ -4,9 +4,9 @@
 class NullBoundaryValue : public BoundaryValue
 {
     NullBoundaryValue() = default;
-    NullBoundaryValue(const NullBoundaryValue&) = delete;
+    NullBoundaryValue(NullBoundaryValue const&) = delete;
     NullBoundaryValue(NullBoundaryValue&&) = delete;
-    void operator=(const NullBoundaryValue&) = delete;
+    void operator=(NullBoundaryValue const&) = delete;
     void operator=(NullBoundaryValue&&) = delete;
 
 public:

@@ -35,7 +35,7 @@ public:
         assert(n > 0);
         assert(n <= glc::max_order);
 
-        const std::size_t offset = n * (n - 1) / 2;
+        std::size_t const offset = n * (n - 1) / 2;
         m_wx.resize(n);
         for (std::size_t i = 0; i < n; ++i) {
             m_wx[i].first = static_cast<double>(glc::weight[offset + i]);

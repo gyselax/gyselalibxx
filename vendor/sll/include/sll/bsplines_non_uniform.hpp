@@ -9,6 +9,7 @@
 #include <ddc/NonUniformDiscretization>
 
 #include "sll/bspline.hpp"
+#include "sll/view.hpp"
 
 /// NonUniformDiscretization specialization of BSplines
 template <class Tag, std::size_t D>
@@ -89,24 +90,13 @@ public:
 
     NonUniformBSplines& operator=(NonUniformBSplines&& x) = default;
 
-    void eval_basis(
-            double x,
-            std::experimental::mdspan<double, std::experimental::dextents<1>>& values,
-            int& jmin) const;
+    void eval_basis(DSpan1D values, int& jmin, double x) const;
 
-    void eval_deriv(
-            double x,
-            std::experimental::mdspan<double, std::experimental::dextents<1>>& derivs,
-            int& jmin) const;
+    void eval_deriv(DSpan1D derivs, int& jmin, double x) const;
 
-    void eval_basis_and_n_derivs(
-            double x,
-            int n,
-            std::experimental::mdspan<double, std::experimental::dextents<2>>& derivs,
-            int& jmin) const;
+    void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, int n) const;
 
-    void integrals(
-            std::experimental::mdspan<double, std::experimental::dextents<1>>& int_vals) const;
+    DSpan1D integrals(DSpan1D int_vals) const;
 
     double get_knot(int break_idx) const noexcept
     {
@@ -164,15 +154,15 @@ private:
 template <class Tag, std::size_t D>
 template <class RandomIt>
 inline constexpr NonUniformBSplines<Tag, D>::NonUniformBSplines(
-        RandomIt knots_begin,
-        RandomIt knots_end)
+        RandomIt const knots_begin,
+        RandomIt const knots_end)
     : m_knots((knots_end - knots_begin) + 2 * degree())
 {
     assert(ncells() > 0);
 
     // Fill the provided knots
     int ii = 0;
-    for (auto&& it = knots_begin; it < knots_end; ++it) {
+    for (RandomIt it = knots_begin; it < knots_end; ++it) {
         get_knot(ii) = *it;
         ++ii;
     }
@@ -180,7 +170,7 @@ inline constexpr NonUniformBSplines<Tag, D>::NonUniformBSplines(
 
     // Fill out the extra knots
     if constexpr (is_periodic()) {
-        double period = rmax() - rmin();
+        double const period = rmax() - rmin();
         for (int i = 1; i < degree() + 1; ++i) {
             get_knot(-i) = get_knot(ncells() - i) - period;
             get_knot(ncells() + i) = get_knot(i) + period;
@@ -195,10 +185,7 @@ inline constexpr NonUniformBSplines<Tag, D>::NonUniformBSplines(
 }
 
 template <class Tag, std::size_t D>
-void NonUniformBSplines<Tag, D>::eval_basis(
-        double x,
-        std::experimental::mdspan<double, std::experimental::dextents<1>>& values,
-        int& jmin) const
+void NonUniformBSplines<Tag, D>::eval_basis(DSpan1D const values, int& jmin, double const x) const
 {
     std::array<double, degree()> left;
     std::array<double, degree()> right;
@@ -208,7 +195,7 @@ void NonUniformBSplines<Tag, D>::eval_basis(
     assert(values.extent(0) == degree() + 1);
 
     // 1. Compute cell index 'icell'
-    int icell = find_cell(x);
+    int const icell = find_cell(x);
 
     assert(icell >= 0);
     assert(icell <= ncells() - 1);
@@ -235,10 +222,7 @@ void NonUniformBSplines<Tag, D>::eval_basis(
 }
 
 template <class Tag, std::size_t D>
-void NonUniformBSplines<Tag, D>::eval_deriv(
-        double x,
-        std::experimental::mdspan<double, std::experimental::dextents<1>>& derivs,
-        int& jmin) const
+void NonUniformBSplines<Tag, D>::eval_deriv(DSpan1D const derivs, int& jmin, double const x) const
 {
     std::array<double, degree()> left;
     std::array<double, degree()> right;
@@ -248,7 +232,7 @@ void NonUniformBSplines<Tag, D>::eval_deriv(
     assert(derivs.extent(0) == degree() + 1);
 
     // 1. Compute cell index 'icell'
-    int icell = find_cell(x);
+    int const icell = find_cell(x);
 
     assert(icell >= 0);
     assert(icell <= ncells() - 1);
@@ -296,20 +280,21 @@ void NonUniformBSplines<Tag, D>::eval_deriv(
 
 template <class Tag, std::size_t D>
 void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
-        double x,
-        int n,
-        std::experimental::mdspan<double, std::experimental::dextents<2>>& derivs,
-        int& jmin) const
+        DSpan2D const derivs,
+        int& jmin,
+        double const x,
+        int const n) const
 {
     std::array<double, degree()> left;
     std::array<double, degree()> right;
 
     std::array<double, 2 * (degree() + 1)> a_ptr;
-    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, 2>> a(a_ptr.data());
+    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, 2>> const a(
+            a_ptr.data());
 
     std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
-    std::experimental::mdspan<double, std::experimental::dextents<2>>
-            ndu(ndu_ptr.data(), degree() + 1, degree() + 1);
+    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, degree() + 1>> const
+            ndu(ndu_ptr.data());
 
     assert(x >= rmin());
     assert(x <= rmax());
@@ -319,7 +304,7 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
     assert(derivs.extent(1) == 1 + n);
 
     // 1. Compute cell index 'icell' and x_offset
-    int icell = find_cell(x);
+    int const icell = find_cell(x);
 
     assert(icell >= 0);
     assert(icell <= ncells() - 1);
@@ -366,14 +351,14 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
         a(0, 0) = 1.0;
         for (int k = 1; k < n + 1; ++k) {
             double d = 0.0;
-            int rk = r - k;
-            int pk = degree() - k;
+            int const rk = r - k;
+            int const pk = degree() - k;
             if (r >= k) {
                 a(0, s2) = a(0, s1) * ndu(rk, pk + 1);
                 d = a(0, s2) * ndu(pk, rk);
             }
-            int j1 = rk > -1 ? 1 : (-rk);
-            int j2 = (r - 1) <= pk ? k : (degree() - r + 1);
+            int const j1 = rk > -1 ? 1 : (-rk);
+            int const j2 = (r - 1) <= pk ? k : (degree() - r + 1);
             for (int j = j1; j < j2; ++j) {
                 a(j, s2) = (a(j, s1) - a(j - 1, s1)) * ndu(rk + j, pk + 1);
                 d += a(j, s2) * ndu(pk, rk + j);
@@ -383,9 +368,7 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
                 d += a(k, s2) * ndu(pk, r);
             }
             derivs(r, k) = d;
-            int tmp = s1;
-            s1 = s2;
-            s2 = tmp;
+            std::swap(s1, s2);
         }
     }
 
@@ -399,7 +382,7 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
 }
 
 template <class Tag, std::size_t D>
-int NonUniformBSplines<Tag, D>::find_cell(double x) const
+int NonUniformBSplines<Tag, D>::find_cell(double const x) const
 {
     if (x > rmax())
         return -1;
@@ -426,12 +409,11 @@ int NonUniformBSplines<Tag, D>::find_cell(double x) const
 }
 
 template <class Tag, std::size_t D>
-void NonUniformBSplines<Tag, D>::integrals(
-        std::experimental::mdspan<double, std::experimental::dextents<1>>& int_vals) const
+DSpan1D NonUniformBSplines<Tag, D>::integrals(DSpan1D const int_vals) const
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
 
-    double inv_deg = 1.0 / (degree() + 1);
+    double const inv_deg = 1.0 / (degree() + 1);
 
     for (int i = 0; i < nbasis(); ++i) {
         int_vals(i) = (get_knot(i + 1) - get_knot(i - degree())) * inv_deg;
@@ -442,4 +424,5 @@ void NonUniformBSplines<Tag, D>::integrals(
             int_vals(nbasis() + i) = 0;
         }
     }
+    return int_vals;
 }

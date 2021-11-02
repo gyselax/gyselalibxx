@@ -17,42 +17,45 @@
 using std::max;
 using std::min;
 
-void Matrix::solve_inplace(DSpan1D& b) const
+DSpan1D Matrix::solve_inplace(DSpan1D const b) const
 {
     assert(b.extent(0) == n);
-    int info = solve_inplace_method('N', b.data(), b.extent(0), 1);
+    int const info = solve_inplace_method(b.data(), 'N', b.extent(0), 1);
 
     if (info < 0) {
         std::cerr << -info << "-th argument had an illegal value" << std::endl;
         // TODO: Add LOG_FATAL_ERROR
     }
+    return b;
 }
 
-void Matrix::solve_transpose_inplace(DSpan1D& b) const
+DSpan1D Matrix::solve_transpose_inplace(DSpan1D const b) const
 {
     assert(b.extent(0) == n);
-    int info = solve_inplace_method('T', b.data(), b.extent(0), 1);
+    int const info = solve_inplace_method(b.data(), 'T', b.extent(0), 1);
 
     if (info < 0) {
         std::cerr << -info << "-th argument had an illegal value" << std::endl;
         // TODO: Add LOG_FATAL_ERROR
     }
+    return b;
 }
 
-void Matrix::solve_inplace_matrix(DSpan2D& bx) const
+DSpan2D Matrix::solve_inplace_matrix(DSpan2D const bx) const
 {
     assert(bx.extent(1) == n);
-    int info = solve_inplace_method('N', bx.data(), bx.extent(1), bx.extent(0));
+    int const info = solve_inplace_method(bx.data(), 'N', bx.extent(1), bx.extent(0));
 
     if (info < 0) {
         std::cerr << -info << "-th argument had an illegal value" << std::endl;
         // TODO: Add LOG_FATAL_ERROR
     }
+    return bx;
 }
 
 void Matrix::factorize()
 {
-    int info = factorize_method();
+    int const info = factorize_method();
 
     if (info < 0) {
         std::cerr << -info << "-th argument had an illegal value" << std::endl;
@@ -68,7 +71,11 @@ void Matrix::factorize()
     }
 }
 
-std::unique_ptr<Matrix> Matrix::make_new_banded(int n, int kl, int ku, bool pds)
+std::unique_ptr<Matrix> Matrix::make_new_banded(
+        int const n,
+        int const kl,
+        int const ku,
+        bool const pds)
 {
     if (kl == ku && kl == 1 && pds) {
         return std::make_unique<Matrix_PDS_Tridiag>(n);
@@ -79,10 +86,14 @@ std::unique_ptr<Matrix> Matrix::make_new_banded(int n, int kl, int ku, bool pds)
     }
 }
 
-std::unique_ptr<Matrix> Matrix::make_new_periodic_banded(int n, int kl, int ku, bool pds)
+std::unique_ptr<Matrix> Matrix::make_new_periodic_banded(
+        int const n,
+        int const kl,
+        int const ku,
+        bool const pds)
 {
-    int border_size(max(kl, ku));
-    int banded_size(n - border_size);
+    int const border_size = max(kl, ku);
+    int const banded_size = n - border_size;
     std::unique_ptr<Matrix> block_mat;
     if (pds && kl == ku && kl == 1) {
         block_mat = std::make_unique<Matrix_PDS_Tridiag>(banded_size);
@@ -97,14 +108,14 @@ std::unique_ptr<Matrix> Matrix::make_new_periodic_banded(int n, int kl, int ku, 
 }
 
 std::unique_ptr<Matrix> Matrix::make_new_block_with_banded_region(
-        int n,
-        int kl,
-        int ku,
-        bool pds,
-        int block1_size,
-        int block2_size)
+        int const n,
+        int const kl,
+        int const ku,
+        bool const pds,
+        int const block1_size,
+        int const block2_size)
 {
-    int banded_size(n - block1_size - block2_size);
+    int const banded_size = n - block1_size - block2_size;
     std::unique_ptr<Matrix> block_mat;
     if (pds && kl == ku && kl == 1) {
         block_mat = std::make_unique<Matrix_PDS_Tridiag>(banded_size);
@@ -121,14 +132,14 @@ std::unique_ptr<Matrix> Matrix::make_new_block_with_banded_region(
     }
 }
 
-std::ostream& operator<<(std::ostream& o, const Matrix& m)
+std::ostream& operator<<(std::ostream& os, Matrix const& m)
 {
-    const int n(m.get_size());
-    for (int i(0); i < n; ++i) {
-        for (int j(0); j < n; ++j) {
-            o << std::fixed << std::setprecision(3) << std::setw(10) << m.get_element(i, j);
+    int const n = m.get_size();
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            os << std::fixed << std::setprecision(3) << std::setw(10) << m.get_element(i, j);
         }
-        o << std::endl;
+        os << std::endl;
     }
-    return o;
+    return os;
 }

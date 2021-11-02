@@ -9,6 +9,7 @@
 
 #include "sll/bspline.hpp"
 #include "sll/math_tools.hpp"
+#include "sll/view.hpp"
 
 template <class Tag, std::size_t D>
 class UniformBSplines
@@ -87,27 +88,16 @@ public:
 
     UniformBSplines& operator=(UniformBSplines&& x) = default;
 
-    void eval_basis(
-            double x,
-            std::experimental::mdspan<double, std::experimental::dextents<1>>& values,
-            int& jmin) const
+    void eval_basis(DSpan1D values, int& jmin, double x) const
     {
-        return eval_basis(x, values, jmin, degree());
+        return eval_basis(values, jmin, x, degree());
     }
 
-    void eval_deriv(
-            double x,
-            std::experimental::mdspan<double, std::experimental::dextents<1>>& derivs,
-            int& jmin) const;
+    void eval_deriv(DSpan1D derivs, int& jmin, double x) const;
 
-    void eval_basis_and_n_derivs(
-            double x,
-            int n,
-            std::experimental::mdspan<double, std::experimental::dextents<2>>& derivs,
-            int& jmin) const;
+    void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, int n) const;
 
-    void integrals(
-            std::experimental::mdspan<double, std::experimental::dextents<1>>& int_vals) const;
+    DSpan1D integrals(DSpan1D int_vals) const;
 
     double get_knot(int idx) const noexcept
     {
@@ -150,27 +140,23 @@ private:
         return 1.0 / step<mesh_type>();
     }
 
-    void eval_basis(
-            double x,
-            std::experimental::mdspan<double, std::experimental::dextents<1>>& values,
-            int& jmin,
-            int degree) const;
-    void get_icell_and_offset(double x, int& icell, double& offset) const;
+    void eval_basis(DSpan1D values, int& jmin, double x, int degree) const;
+    void get_icell_and_offset(int& icell, double& offset, double x) const;
 };
 
 template <class Tag, std::size_t D>
 void UniformBSplines<Tag, D>::eval_basis(
-        double x,
-        std::experimental::mdspan<double, std::experimental::dextents<1>>& values,
+        DSpan1D const values,
         int& jmin,
-        int deg) const
+        double const x,
+        int const deg) const
 {
     assert(values.extent(0) == deg + 1);
 
     double offset;
     // 1. Compute cell index 'icell' and x_offset
     // 2. Compute index range of B-splines with support over cell 'icell'
-    get_icell_and_offset(x, jmin, offset);
+    get_icell_and_offset(jmin, offset, x);
 
     // 3. Compute values of aforementioned B-splines
     double xx, temp, saved;
@@ -189,17 +175,14 @@ void UniformBSplines<Tag, D>::eval_basis(
 }
 
 template <class Tag, std::size_t D>
-void UniformBSplines<Tag, D>::eval_deriv(
-        double x,
-        std::experimental::mdspan<double, std::experimental::dextents<1>>& derivs,
-        int& jmin) const
+void UniformBSplines<Tag, D>::eval_deriv(DSpan1D const derivs, int& jmin, double const x) const
 {
     assert(derivs.extent(0) == degree() + 1);
 
     double offset;
     // 1. Compute cell index 'icell' and x_offset
     // 2. Compute index range of B-splines with support over cell 'icell'
-    get_icell_and_offset(x, jmin, offset);
+    get_icell_and_offset(jmin, offset, x);
 
     // 3. Compute derivatives of aforementioned B-splines
     //    Derivatives are normalized, hence they should be divided by dx
@@ -231,21 +214,22 @@ void UniformBSplines<Tag, D>::eval_deriv(
 
 template <class Tag, std::size_t D>
 void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
-        double x,
-        int n,
-        std::experimental::mdspan<double, std::experimental::dextents<2>>& derivs,
-        int& jmin) const
+        DSpan2D const derivs,
+        int& jmin,
+        double const x,
+        int const n) const
 {
     std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
-    std::experimental::mdspan<double, std::experimental::dextents<2>>
-            ndu(ndu_ptr.data(), degree() + 1, degree() + 1);
+    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, degree() + 1>> const
+            ndu(ndu_ptr.data());
     std::array<double, 2 * (degree() + 1)> a_ptr;
-    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, 2>> a(a_ptr.data());
+    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, 2>> const a(
+            a_ptr.data());
     double offset;
 
     // 1. Compute cell index 'icell' and x_offset
     // 2. Compute index range of B-splines with support over cell 'icell'
-    get_icell_and_offset(x, jmin, offset);
+    get_icell_and_offset(jmin, offset, x);
 
     // 3. Recursively evaluate B-splines (see
     // "sll_s_uniform_BSplines_eval_basis")
@@ -274,14 +258,14 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
         a(0, 0) = 1.0;
         for (int k = 1; k < n + 1; ++k) {
             double d = 0.0;
-            int rk = r - k;
-            int pk = degree() - k;
+            int const rk = r - k;
+            int const pk = degree() - k;
             if (r >= k) {
                 a(0, s2) = a(0, s1) / (pk + 1);
                 d = a(0, s2) * ndu(pk, rk);
             }
-            int j1 = rk > -1 ? 1 : (-rk);
-            int j2 = (r - 1) <= pk ? k : (degree() - r + 1);
+            int const j1 = rk > -1 ? 1 : (-rk);
+            int const j2 = (r - 1) <= pk ? k : (degree() - r + 1);
             for (int j = j1; j < j2; ++j) {
                 a(j, s2) = (a(j, s1) - a(j - 1, s1)) / (pk + 1);
                 d += a(j, s2) * ndu(pk, rk + j);
@@ -291,9 +275,7 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
                 d += a(k, s2) * ndu(pk, r);
             }
             derivs(r, k) = d;
-            int tmp = s1;
-            s1 = s2;
-            s2 = tmp;
+            std::swap(s1, s2);
         }
     }
 
@@ -311,7 +293,7 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
 }
 
 template <class Tag, std::size_t D>
-void UniformBSplines<Tag, D>::get_icell_and_offset(double x, int& icell, double& offset) const
+void UniformBSplines<Tag, D>::get_icell_and_offset(int& icell, double& offset, double const x) const
 {
     assert(x >= rmin());
     assert(x <= rmax());
@@ -338,8 +320,7 @@ void UniformBSplines<Tag, D>::get_icell_and_offset(double x, int& icell, double&
 }
 
 template <class Tag, std::size_t D>
-void UniformBSplines<Tag, D>::integrals(
-        std::experimental::mdspan<double, std::experimental::dextents<1>>& int_vals) const
+DSpan1D UniformBSplines<Tag, D>::integrals(DSpan1D const int_vals) const
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
     for (int i = degree(); i < nbasis() - degree(); ++i) {
@@ -356,18 +337,19 @@ void UniformBSplines<Tag, D>::integrals(
     } else {
         int jmin = 0;
         std::array<double, degree() + 2> edge_vals_ptr;
-        std::experimental::mdspan<double, std::experimental::dextents<1>>
-                edge_vals(edge_vals_ptr.data(), degree() + 2);
+        std::experimental::mdspan<double, std::experimental::extents<degree() + 2>> const edge_vals(
+                edge_vals_ptr.data());
 
-        eval_basis(rmin(), edge_vals, jmin, degree() + 1);
+        eval_basis(edge_vals, jmin, rmin(), degree() + 1);
 
-        double d_eval = sum(edge_vals);
+        double const d_eval = sum(edge_vals);
 
         for (int i = 0; i < degree(); ++i) {
-            double c_eval = sum(edge_vals, 0, degree() - i);
+            double const c_eval = sum(edge_vals, 0, degree() - i);
 
             int_vals(i) = step<mesh_type>() * (d_eval - c_eval);
             int_vals(nbasis() - 1 - i) = int_vals(i);
         }
     }
+    return int_vals;
 }

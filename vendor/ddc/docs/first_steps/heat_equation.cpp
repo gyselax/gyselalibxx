@@ -106,9 +106,9 @@ int main(int argc, char** argv)
     PDI_init(PC_parse_string(PDI_CFG));
     PDI_expose("ghostwidth", &gw, PDI_OUT);
 
-    const double dt = 0.49 / (1.0 / (dx * dx) + 1.0 / (dy * dy));
-    const double Cx = k * dt / (dx * dx);
-    const double Cy = k * dt / (dy * dy);
+    double const dt = 0.49 / (1.0 / (dx * dx) + 1.0 / (dy * dy));
+    double const Cx = k * dt / (dx * dx);
+    double const Cy = k * dt / (dy * dy);
     std::size_t iter = 0;
     for (; iter < nt; ++iter) {
         //! [io/pdi]
@@ -124,11 +124,11 @@ int main(int argc, char** argv)
 
         // Stencil computation on inner domain `inner_xy`
         for (DiscreteCoordinate<DDimX> ix : select<DDimX>(inner_xy)) {
-            const DiscreteCoordinate<DDimX> ixp(ix + 1);
-            const DiscreteCoordinate<DDimX> ixm(ix - 1);
+            DiscreteCoordinate<DDimX> const ixp(ix + 1);
+            DiscreteCoordinate<DDimX> const ixm(ix - 1);
             for (DiscreteCoordinate<DDimY> iy : select<DDimY>(inner_xy)) {
-                const DiscreteCoordinate<DDimY> iyp(iy + 1);
-                const DiscreteCoordinate<DDimY> iym(iy - 1);
+                DiscreteCoordinate<DDimY> const iyp(iy + 1);
+                DiscreteCoordinate<DDimY> const iym(iy - 1);
                 T_out(ix, iy) = T_in(ix, iy);
                 T_out(ix, iy) += Cx * (T_in(ixp, iy) - 2.0 * T_in(ix, iy) + T_in(ixm, iy));
                 T_out(ix, iy) += Cy * (T_in(ix, iyp) - 2.0 * T_in(ix, iy) + T_in(ix, iym));

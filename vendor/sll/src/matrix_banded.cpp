@@ -4,32 +4,33 @@
 
 #include "sll/matrix_banded.hpp"
 
-using std::max;
-using std::min;
-
 extern "C" int dgbtrf_(
-        const int* m,
-        const int* n,
-        const int* kl,
-        const int* ku,
+        int const* m,
+        int const* n,
+        int const* kl,
+        int const* ku,
         double* a_b,
-        const int* lda_b,
+        int const* lda_b,
         int* ipiv,
         int* info);
 extern "C" int dgbtrs_(
-        const char* trans,
-        const int* n,
-        const int* kl,
-        const int* ku,
-        const int* nrhs,
+        char const* trans,
+        int const* n,
+        int const* kl,
+        int const* ku,
+        int const* nrhs,
         double* a_b,
-        const int* lda_b,
+        int const* lda_b,
         int* ipiv,
         double* b,
-        const int* ldb,
+        int const* ldb,
         int* info);
 
-Matrix_Banded::Matrix_Banded(int n, int kl, int ku) : Matrix(n), kl(kl), ku(ku), c(2 * kl + ku + 1)
+Matrix_Banded::Matrix_Banded(int const n, int const kl, int const ku)
+    : Matrix(n)
+    , kl(kl)
+    , ku(ku)
+    , c(2 * kl + ku + 1)
 {
     assert(n > 0);
     assert(kl >= 0);
@@ -48,26 +49,26 @@ Matrix_Banded::Matrix_Banded(int n, int kl, int ku) : Matrix(n), kl(kl), ku(ku),
      * for the superdiagonals. (The kl additional rows are needed for pivoting.)
      * The term A(i,j) of the full matrix is stored in q(i-j+2*kl+1,j).
      */
-    for (int i(0); i < c * n; ++i) {
+    for (int i = 0; i < c * n; ++i) {
         q[i] = 0.0;
     }
 }
 
-double Matrix_Banded::get_element(int i, int j) const
+double Matrix_Banded::get_element(int const i, int const j) const
 {
-    if (i >= max(0, j - ku) and i < min(n, j + kl + 1)) {
+    if (i >= std::max(0, j - ku) && i < std::min(n, j + kl + 1)) {
         return q[i * c + kl + ku + j - i];
     } else {
         return 0.0;
     }
 }
 
-void Matrix_Banded::set_element(int i, int j, double a_ij)
+void Matrix_Banded::set_element(int const i, int const j, double const a_ij)
 {
-    if (i >= max(0, j - ku) and i < min(n, j + kl + 1)) {
+    if (i >= std::max(0, j - ku) && i < std::min(n, j + kl + 1)) {
         q[i * c + kl + ku + j - i] = a_ij;
     } else {
-        assert(fabs(a_ij) < 1e-20);
+        assert(std::fabs(a_ij) < 1e-20);
     }
 }
 
@@ -78,10 +79,13 @@ int Matrix_Banded::factorize_method()
     return info;
 }
 
-int Matrix_Banded::solve_inplace_method(const char transpose, double* b, int nrows, int ncols) const
+int Matrix_Banded::solve_inplace_method(
+        double* b,
+        char const transpose,
+        int const nrows,
+        int const ncols) const
 {
     int info;
-
     dgbtrs_(&transpose, &n, &kl, &ku, &ncols, q.get(), &c, ipiv.get(), b, &nrows, &info);
     return info;
 }

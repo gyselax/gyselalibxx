@@ -5,7 +5,7 @@
 namespace detail {
 template <class ElementType, class... DDims, class Layout, class Functor, class... MCoords>
 inline void for_each_impl(
-        ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const& to,
+        ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const to,
         Functor&& f,
         MCoords&&... mcoords) noexcept
 {
@@ -47,7 +47,7 @@ inline ChunkDst const& deepcopy(ChunkDst&& to, ChunkSrc&& from) noexcept
  */
 template <class ElementType, class... DDims, class Layout, class Functor>
 inline void for_each(
-        const ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout>& view,
+        ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const view,
         Functor&& f) noexcept
 {
     detail::for_each_impl(view, std::forward<Functor>(f));

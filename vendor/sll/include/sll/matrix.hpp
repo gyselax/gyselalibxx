@@ -13,9 +13,9 @@ public:
     virtual double get_element(int i, int j) const = 0;
     virtual void set_element(int i, int j, double aij) = 0;
     virtual void factorize();
-    virtual void solve_inplace(DSpan1D& b) const;
-    virtual void solve_transpose_inplace(DSpan1D& b) const;
-    virtual void solve_inplace_matrix(DSpan2D& bx) const;
+    virtual DSpan1D solve_inplace(DSpan1D b) const;
+    virtual DSpan1D solve_transpose_inplace(DSpan1D b) const;
+    virtual DSpan2D solve_inplace_matrix(DSpan2D bx) const;
     int get_size() const
     {
         return n;
@@ -32,9 +32,8 @@ public:
 
 protected:
     virtual int factorize_method() = 0;
-    virtual int solve_inplace_method(const char transpose, double* b, int nrows, int ncols)
-            const = 0;
-    const int n; // matrix size
+    virtual int solve_inplace_method(double* b, char transpose, int nrows, int ncols) const = 0;
+    int const n; // matrix size
 };
 
-std::ostream& operator<<(std::ostream& o, const Matrix& m);
+std::ostream& operator<<(std::ostream& o, Matrix const& m);

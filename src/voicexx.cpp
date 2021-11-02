@@ -97,7 +97,7 @@ int main(int argc, char** argv)
     DFieldSp mean_velocity_eq(dom_sp);
     FieldSp<int> init_perturb_mode(dom_sp);
     DFieldSp init_perturb_amplitude(dom_sp);
-    for (IndexSp isp : dom_sp) {
+    for (IndexSp const isp : dom_sp) {
         // --> SpeciesInfo info
         long charge;
         PC_int(PC_get(conf_voicexx, ".SpeciesInfo.charge[%d]", isp.value()), &charge);
@@ -183,13 +183,13 @@ int main(int argc, char** argv)
     // Creating of mesh for output saving
     IDomainX const gridx = select<IDimX>(mesh);
     FieldX<CoordX> meshX_coord(gridx);
-    for (IndexX ix : gridx) {
+    for (IndexX const ix : gridx) {
         meshX_coord(ix) = to_real(ix);
     }
 
     IDomainVx const gridvx = select<IDimVx>(mesh);
     FieldVx<CoordVx> meshVx_coord(gridvx);
-    for (IndexVx ivx : gridvx) {
+    for (IndexVx const ivx : gridvx) {
         meshVx_coord(ivx) = to_real(ivx);
     }
 

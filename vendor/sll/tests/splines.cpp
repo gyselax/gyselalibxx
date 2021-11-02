@@ -182,8 +182,8 @@ INSTANTIATE_TEST_SUITE_P(
 //--------------------------------------
 TEST_P(SplinesTest, Test)
 {
-    //const int ncells;
-    //const int bc_xmin, bc_xmax;
+    //int const ncells;
+    //int const bc_xmin, bc_xmax;
 
 
     constexpr double x0 = 0.0;

@@ -2,34 +2,34 @@
 
 #include "sll/matrix_dense.hpp"
 
-extern "C" int dgetrf_(const int* m, const int* n, double* a, const int* lda, int* ipiv, int* info);
+extern "C" int dgetrf_(int const* m, int const* n, double* a, int const* lda, int* ipiv, int* info);
 extern "C" int dgetrs_(
-        const char* trans,
-        const int* n,
-        const int* nrhs,
+        char const* trans,
+        int const* n,
+        int const* nrhs,
         double* a,
-        const int* lda,
+        int const* lda,
         int* ipiv,
         double* b,
-        const int* ldb,
+        int const* ldb,
         int* info);
 
-Matrix_Dense::Matrix_Dense(int n) : Matrix(n)
+Matrix_Dense::Matrix_Dense(int const n) : Matrix(n)
 {
     assert(n > 0);
     ipiv = std::make_unique<int[]>(n);
     a = std::make_unique<double[]>(n * n);
-    for (int i(0); i < n * n; ++i) {
+    for (int i = 0; i < n * n; ++i) {
         a[i] = 0;
     }
 }
 
-void Matrix_Dense::set_element(int i, int j, double aij)
+void Matrix_Dense::set_element(int const i, int const j, double const aij)
 {
     a[i * n + j] = aij;
 }
 
-double Matrix_Dense::get_element(int i, int j) const
+double Matrix_Dense::get_element(int const i, int const j) const
 {
     assert(i < n);
     assert(j < n);
@@ -43,10 +43,13 @@ int Matrix_Dense::factorize_method()
     return info;
 }
 
-int Matrix_Dense::solve_inplace_method(const char transpose, double* b, int nrows, int ncols) const
+int Matrix_Dense::solve_inplace_method(
+        double* b,
+        char const transpose,
+        int const nrows,
+        int const ncols) const
 {
     int info;
-
     dgetrs_(&transpose, &n, &ncols, a.get(), &n, ipiv.get(), b, &nrows, &info);
     return info;
 }

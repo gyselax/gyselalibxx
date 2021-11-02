@@ -18,7 +18,7 @@ public:
 
 protected:
     virtual int factorize_method() override;
-    virtual int solve_inplace_method(const char transpose, double* b, int nrows, int ncols)
+    virtual int solve_inplace_method(double* b, char transpose, int nrows, int ncols)
             const override;
     std::unique_ptr<double[]> d; // diagonal
     std::unique_ptr<double[]> l; // lower diagonal

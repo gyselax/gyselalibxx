@@ -5,17 +5,17 @@
 
 #include "sll/matrix_pds_tridiag.hpp"
 
-extern "C" int dpttrf_(const int* n, double* d, double* e, int* info);
+extern "C" int dpttrf_(int const* n, double* d, double* e, int* info);
 extern "C" int dpttrs_(
-        const int* n,
-        const int* nrhs,
+        int const* n,
+        int const* nrhs,
         double* d,
         double* e,
         double* b,
-        const int* ldb,
+        int const* ldb,
         int* info);
 
-Matrix_PDS_Tridiag::Matrix_PDS_Tridiag(int n)
+Matrix_PDS_Tridiag::Matrix_PDS_Tridiag(int const n)
     : Matrix(n)
     , d(std::make_unique<double[]>(n))
     , l(std::make_unique<double[]>(n - 1))
@@ -30,9 +30,7 @@ double Matrix_PDS_Tridiag::get_element(int i, int j) const
         return d[i];
     }
     if (i > j) {
-        int tmp(i);
-        i = j;
-        j = tmp;
+        std::swap(i, j);
     }
     if (i + 1 == j) {
         return l[i];
@@ -40,19 +38,17 @@ double Matrix_PDS_Tridiag::get_element(int i, int j) const
     return 0.0;
 }
 
-void Matrix_PDS_Tridiag::set_element(int i, int j, double a_ij)
+void Matrix_PDS_Tridiag::set_element(int i, int j, double const a_ij)
 {
     if (i == j) {
         d[i] = a_ij;
         return;
     }
     if (i > j) {
-        int tmp(i);
-        i = j;
-        j = tmp;
+        std::swap(i, j);
     }
     if (i + 1 != j) {
-        assert(fabs(a_ij) < 1e-20);
+        assert(std::fabs(a_ij) < 1e-20);
     } else {
         l[i] = a_ij;
     }
@@ -65,8 +61,11 @@ int Matrix_PDS_Tridiag::factorize_method()
     return info;
 }
 
-int Matrix_PDS_Tridiag::solve_inplace_method(const char transpose, double* b, int nrows, int ncols)
-        const
+int Matrix_PDS_Tridiag::solve_inplace_method(
+        double* b,
+        char const transpose,
+        int const nrows,
+        int const ncols) const
 {
     int info;
     dpttrs_(&n, &ncols, d.get(), l.get(), b, &nrows, &info);

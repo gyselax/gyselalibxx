@@ -13,11 +13,11 @@ public:
 
 protected:
     virtual int factorize_method() override;
-    virtual int solve_inplace_method(const char transpose, double* b, int nrows, int ncols)
+    virtual int solve_inplace_method(double* b, char transpose, int nrows, int ncols)
             const override;
-    const int kl; // no. of subdiagonals
-    const int ku; // no. of superdiagonals
-    const int c; // no. of columns in q
+    int const kl; // no. of subdiagonals
+    int const ku; // no. of superdiagonals
+    int const c; // no. of columns in q
     std::unique_ptr<int[]> ipiv; // pivot indices
     std::unique_ptr<double[]> q; // banded matrix representation
 };
