@@ -2,6 +2,8 @@
 
 #include <ddc/ChunkSpan>
 
+#include <geometry.hpp>
+
 class IVlasovSolver
 {
 public:

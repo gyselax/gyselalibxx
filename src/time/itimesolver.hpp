@@ -5,5 +5,5 @@
 class ITimeSolver
 {
 public:
-    virtual void operator()(DSpanSpXVx allfdistribu, int steps) const = 0;
+    virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu, int steps) const = 0;
 };

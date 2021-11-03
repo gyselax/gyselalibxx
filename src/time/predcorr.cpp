@@ -20,7 +20,7 @@ PredCorr::PredCorr(
 {
 }
 
-void PredCorr::operator()(DSpanSpXVx const allfdistribu, int const steps) const
+DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, int const steps) const
 {
     // efield only depends on DX
     DFieldX electric_potential(allfdistribu.domain<IDimX>());
@@ -63,4 +63,6 @@ void PredCorr::operator()(DSpanSpXVx const allfdistribu, int const steps) const
             .and_with("time_saved", final_time)
             .and_with("fdistribu", allfdistribu)
             .and_with("electric_potential", electric_potential);
+
+    return allfdistribu;
 }

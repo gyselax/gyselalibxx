@@ -1,9 +1,7 @@
 #include "nulladvectionvx.hpp"
 
-DSpanSpXVx NullAdvectionVx::operator()(
-        DSpanSpXVx const allfdistribu,
-        DViewX const electric_potential,
-        double const dt) const
+DSpanSpXVx NullAdvectionVx::operator()(DSpanSpXVx const allfdistribu, DViewX const, double const)
+        const
 {
     return allfdistribu;
 }
