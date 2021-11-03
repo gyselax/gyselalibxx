@@ -13,10 +13,11 @@ SplineInterpolatorX::SplineInterpolatorX(
 {
 }
 
-void SplineInterpolatorX::operator()(DSpanX const inout_data, DViewX const coordinates) const
+DSpanX SplineInterpolatorX::operator()(DSpanX const inout_data, DViewX const coordinates) const
 {
     m_builder(m_coefs, inout_data);
     m_evaluator(inout_data, coordinates, m_coefs);
+    return inout_data;
 }
 
 PreallocatableSplineInterpolatorX::PreallocatableSplineInterpolatorX(
@@ -32,7 +33,7 @@ InterpolatorXProxy PreallocatableSplineInterpolatorX::preallocate() const
     return InterpolatorXProxy(std::make_unique<SplineInterpolatorX>(m_builder, m_evaluator));
 }
 
-void PreallocatableSplineInterpolatorX::operator()(
+DSpanX PreallocatableSplineInterpolatorX::operator()(
         DSpanX const inout_data,
         DViewX const coordinates) const
 {

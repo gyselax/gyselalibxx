@@ -9,7 +9,7 @@ class IInterpolatorX
 public:
     virtual ~IInterpolatorX() = default;
 
-    virtual void operator()(DSpanX inout_data, DViewX coordinates) const = 0;
+    virtual DSpanX operator()(DSpanX inout_data, DViewX coordinates) const = 0;
 };
 
 class InterpolatorXProxy : public IInterpolatorX
@@ -21,7 +21,7 @@ public:
 
     ~InterpolatorXProxy() override = default;
 
-    virtual void operator()(DSpanX const inout_data, DViewX const coordinates) const override
+    virtual DSpanX operator()(DSpanX const inout_data, DViewX const coordinates) const override
     {
         return (*m_impl)(inout_data, coordinates);
     }

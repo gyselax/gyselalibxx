@@ -17,10 +17,11 @@ SplineInterpolatorVx::SplineInterpolatorVx(
 {
 }
 
-void SplineInterpolatorVx::operator()(DSpanVx const inout_data, DViewVx const coordinates) const
+DSpanVx SplineInterpolatorVx::operator()(DSpanVx const inout_data, DViewVx const coordinates) const
 {
     m_builder(m_coefs, inout_data, &m_derivs_xmin, &m_derivs_xmax);
     m_evaluator(inout_data, coordinates, m_coefs);
+    return inout_data;
 }
 
 PreallocatableSplineInterpolatorVx::PreallocatableSplineInterpolatorVx(
@@ -36,7 +37,7 @@ InterpolatorVxProxy PreallocatableSplineInterpolatorVx::preallocate() const
     return InterpolatorVxProxy(std::make_unique<SplineInterpolatorVx>(m_builder, m_evaluator));
 }
 
-void PreallocatableSplineInterpolatorVx::operator()(
+DSpanVx PreallocatableSplineInterpolatorVx::operator()(
         DSpanVx const inout_data,
         DViewVx const coordinates) const
 {
