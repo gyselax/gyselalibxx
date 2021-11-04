@@ -13,7 +13,7 @@ using detail::TaggedVector;
 
 TEST(TaggedVector, Constructor)
 {
-    TaggedVector<int, double, float> map(1, 2);
+    [[maybe_unused]] TaggedVector<int, double, float> map(1, 2);
 }
 
 TEST(TaggedVector, ReorderingConstructor)

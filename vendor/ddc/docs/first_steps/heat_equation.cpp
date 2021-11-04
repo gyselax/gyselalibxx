@@ -40,7 +40,7 @@ plugins:
   trace: ~
 )PDI_CFG";
 
-int main(int argc, char** argv)
+int main()
 {
     //! [mesh]
     // Origin on X

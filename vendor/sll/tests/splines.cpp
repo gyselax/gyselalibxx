@@ -42,7 +42,6 @@ void cos_splines_test(
         double& max_norm_error_diff,
         double& max_norm_error_int,
         int const degree,
-        double const h,
         int const N,
         double const x0,
         double const xN,
@@ -76,7 +75,6 @@ void cos_splines_test(
         double& max_norm_error_diff,
         double& max_norm_error_int,
         int const degree,
-        double const h,
         int const N,
         double const x0,
         double const xN,
@@ -213,13 +211,6 @@ TEST_P(SplinesTest, Test)
     //    continue;
     //}
 
-    double h;
-    if (bc_xmin == BoundCond::PERIODIC) {
-        h = (xN - x0) / N;
-    } else {
-        h = (xN - x0) / (N - 1);
-    }
-
     double max_norm_error;
     double max_norm_error_diff;
     double max_norm_error_int;
@@ -228,7 +219,6 @@ TEST_P(SplinesTest, Test)
             max_norm_error_diff,
             max_norm_error_int,
             degree,
-            h,
             N,
             x0,
             xN,

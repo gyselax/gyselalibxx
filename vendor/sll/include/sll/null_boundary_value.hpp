@@ -10,7 +10,7 @@ class NullBoundaryValue : public BoundaryValue
     void operator=(NullBoundaryValue&&) = delete;
 
 public:
-    inline virtual double operator()(double x) const override
+    inline virtual double operator()(double) const override
     {
         return 0.0;
     }

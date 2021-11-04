@@ -131,7 +131,7 @@ public:
         auto const& domain = chunk.domain();
 
         for (IndexX ix : domain) {
-            chunk(ix) = eval(to_real(ix), 0);
+            chunk(ix) = eval(to_real(ix), derivative);
         }
     }
 

@@ -294,7 +294,7 @@ public:
 };
 
 template <class ElementType>
-std::ostream& operator<<(std::ostream& out, TaggedVector<ElementType> const& arr)
+std::ostream& operator<<(std::ostream& out, TaggedVector<ElementType> const&)
 {
     out << "()";
     return out;

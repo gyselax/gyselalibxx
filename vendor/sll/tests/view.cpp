@@ -18,15 +18,15 @@ TEST(View1DTest, Constructor)
     std::array<double, 10> const ccx = {0};
     std::array<double const, 10> const ccx2 = {0};
     Span1D<double> xv(x.data(), x.size());
-    Span1D<double> xv_(xv);
-    Span1D<double const> xcv(xv);
-    Span1D<double const> xcv_(xcv);
+    [[maybe_unused]] Span1D<double> xv_(xv);
+    [[maybe_unused]] Span1D<double const> xcv(xv);
+    [[maybe_unused]] Span1D<double const> xcv_(xcv);
     Span1D<double const> cxcv(cx.data(), cx.size());
-    Span1D<double const> cxcv_(cxcv);
+    [[maybe_unused]] Span1D<double const> cxcv_(cxcv);
     Span1D<double const> ccxcv(ccx.data(), ccx.size());
-    Span1D<double const> ccxcv_(cxcv);
+    [[maybe_unused]] Span1D<double const> ccxcv_(cxcv);
     Span1D<double const> ccx2cv(ccx2.data(), ccx2.size());
-    Span1D<double const> ccx2cv_(ccx2cv);
+    [[maybe_unused]] Span1D<double const> ccx2cv_(ccx2cv);
 }
 
 TEST(View3DTest, Stream)

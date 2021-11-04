@@ -43,7 +43,7 @@ private:
     {
         return 0;
     }
-    virtual int solve_inplace_method(double* b, char transpose, int nrows, int ncols) const override
+    virtual int solve_inplace_method(double*, char, int, int) const override
     {
         return 0;
     }

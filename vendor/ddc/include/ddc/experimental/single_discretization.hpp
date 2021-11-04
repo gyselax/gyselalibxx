@@ -39,7 +39,7 @@ public:
         return m_point;
     }
 
-    inline constexpr rcoord_type to_real(mcoord_type icoord) const noexcept
+    inline constexpr rcoord_type to_real([[maybe_unused]] mcoord_type icoord) const noexcept
     {
         assert(icoord == mcoord_type(0));
         return m_point;

@@ -52,7 +52,7 @@ using ChunkYX = Chunk<Datatype, DDomYX>;
 
 static ElemX constexpr lbound_x(50);
 static DVectX constexpr nelems_x(3);
-static ElemX constexpr sentinel_x(lbound_x + nelems_x);
+[[maybe_unused]] static ElemX constexpr sentinel_x(lbound_x + nelems_x);
 static DDomX constexpr dom_x(lbound_x, nelems_x);
 
 static ElemY constexpr lbound_y(4);
@@ -458,7 +458,7 @@ TEST(Chunk2DTest, SliceDomainX)
 
 TEST(Chunk2DTest, SliceDomainXTooearly)
 {
-    DDomX constexpr subdomain_x = DDomX(ElemX(lbound_x - 1), nelems_x);
+    [[maybe_unused]] DDomX constexpr subdomain_x = DDomX(ElemX(lbound_x - 1), nelems_x);
 
     ChunkXY<double> chunk(dom_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
@@ -471,7 +471,7 @@ TEST(Chunk2DTest, SliceDomainXTooearly)
 
 TEST(Chunk2DTest, SliceDomainXToolate)
 {
-    DDomX constexpr subdomain_x = DDomX(lbound_x, DVectX(nelems_x + 1));
+    [[maybe_unused]] DDomX constexpr subdomain_x = DDomX(lbound_x, DVectX(nelems_x + 1));
 
     ChunkXY<double> chunk(dom_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined

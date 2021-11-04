@@ -18,11 +18,11 @@ namespace {
 
 struct DimX
 {
-    static constexpr bool PERIODIC = true;
+    [[maybe_unused]] static constexpr bool PERIODIC = true;
 };
 struct DimY
 {
-    static constexpr bool PERIODIC = false;
+    [[maybe_unused]] static constexpr bool PERIODIC = false;
 };
 
 using CoordX = Coordinate<DimX>;

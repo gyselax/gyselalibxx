@@ -140,8 +140,6 @@ void Spline2D::eval_array_loop(DSpan2D const& x1, DSpan2D const& x2, DSpan2D& y)
     DSpan1D vals1(values1.data(), values1.size());
     DSpan1D vals2(values2.data(), values2.size());
 
-    int jmin1, jmin2;
-
     const T1& l_bspl1 = static_cast<const T1&>(m_bspl1);
     const T2& l_bspl2 = static_cast<const T1&>(m_bspl2);
 

@@ -61,11 +61,8 @@ int Matrix_PDS_Tridiag::factorize_method()
     return info;
 }
 
-int Matrix_PDS_Tridiag::solve_inplace_method(
-        double* b,
-        char const transpose,
-        int const nrows,
-        int const ncols) const
+int Matrix_PDS_Tridiag::solve_inplace_method(double* b, char, int const nrows, int const ncols)
+        const
 {
     int info;
     dpttrs_(&n, &ncols, d.get(), l.get(), b, &nrows, &info);
