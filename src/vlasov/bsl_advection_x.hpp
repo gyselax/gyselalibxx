@@ -19,5 +19,7 @@ public:
             SpeciesInformation const& species_info,
             IPreallocatableInterpolatorX const& interpolator);
 
+    ~BslAdvectionX() override = default;
+
     DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
 };

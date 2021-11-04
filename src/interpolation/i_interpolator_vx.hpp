@@ -19,6 +19,8 @@ class InterpolatorVxProxy : public IInterpolatorVx
 public:
     InterpolatorVxProxy(std::unique_ptr<IInterpolatorVx>&& impl) : m_impl(std::move(impl)) {}
 
+    ~InterpolatorVxProxy() override = default;
+
     virtual void operator()(DSpanVx const inout_data, DViewVx const coordinates) const override
     {
         return (*m_impl)(inout_data, coordinates);
@@ -28,5 +30,7 @@ public:
 class IPreallocatableInterpolatorVx : public IInterpolatorVx
 {
 public:
+    ~IPreallocatableInterpolatorVx() override = default;
+
     virtual InterpolatorVxProxy preallocate() const = 0;
 };

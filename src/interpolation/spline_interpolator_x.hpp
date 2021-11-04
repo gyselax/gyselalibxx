@@ -17,6 +17,8 @@ private:
 public:
     SplineInterpolatorX(SplineXBuilder const& builder, SplineEvaluator<BSplinesX> const& evaluator);
 
+    ~SplineInterpolatorX() override = default;
+
     void operator()(DSpanX inout_data, DViewX coordinates) const override;
 };
 
@@ -30,6 +32,8 @@ public:
     PreallocatableSplineInterpolatorX(
             SplineXBuilder const& builder,
             SplineEvaluator<BSplinesX> const& evaluator);
+
+    ~PreallocatableSplineInterpolatorX() override = default;
 
     InterpolatorXProxy preallocate() const override;
 

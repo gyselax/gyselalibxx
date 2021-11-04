@@ -48,3 +48,26 @@
 * We comment our code with Doxygen
 * We use at @keywords in Doxygen
 * we use east-const: `int const` rather than `const int`
+
+# Operators
+
+## Interfaces
+
+We define an *interface* to be an empty class (i.e. without any member
+variable) offering a pure virtual call operator: `operator()` and can
+offer various overloads of this operator with different parameters but
+similar behaviour.
+
+Interfaces should:
+* be prefixed by `I` as in `IVlasovSolver`,
+* explicitly define a virtual destructor,
+* implicitly define constructors and assignment operators.
+
+## Implementation
+
+Implementation classes should implement at least one interface.
+When relying on other operations, these classes should use the dependency
+injection pattern.
+Each implementation class should take `const` references to the used operations
+interfaces as parameters of the constructor and store them so as to call them in
+the `operator()` implementation.

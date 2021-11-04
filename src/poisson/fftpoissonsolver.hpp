@@ -38,5 +38,7 @@ public:
             SplineVxBuilder const& spline_vx_builder,
             SplineEvaluator<BSplinesVx> const& spline_vx_evaluator);
 
+    ~FftPoissonSolver() override = default;
+
     DSpanX operator()(DSpanX electric_potential, DViewSpXVx allfdistribu) const override;
 };

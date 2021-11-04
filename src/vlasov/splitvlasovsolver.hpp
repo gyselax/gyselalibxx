@@ -16,5 +16,7 @@ class SplitVlasovSolver : public IVlasovSolver
 public:
     SplitVlasovSolver(IAdvectionX const& advec_x, IAdvectionVx const& m_advec_vx);
 
+    ~SplitVlasovSolver() override = default;
+
     DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX efield, double dt) const override;
 };

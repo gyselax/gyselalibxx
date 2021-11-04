@@ -31,6 +31,8 @@ public:
             SplineEvaluator<BSplinesX> const& spline_x_evaluator,
             IPreallocatableInterpolatorVx const& interpolator_vx);
 
+    ~BslAdvectionVx() override = default;
+
     DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_potential, double dt)
             const override;
 };
