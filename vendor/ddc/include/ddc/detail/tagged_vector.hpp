@@ -62,6 +62,24 @@ constexpr inline auto operator+(
     return detail::TaggedVector<RElementType, Tags...>((get<Tags>(lhs) + get<Tags>(rhs))...);
 }
 
+template <class ElementType, class... Tags, class OElementType>
+constexpr inline auto operator+(
+        detail::TaggedVector<ElementType, Tags...> const& lhs,
+        OElementType const& rhs)
+{
+    using RElementType = decltype(std::declval<ElementType>() + std::declval<OElementType>());
+    return detail::TaggedVector<RElementType, Tags...>((get<Tags>(lhs) + rhs)...);
+}
+
+template <class ElementType, class... Tags, class OElementType>
+constexpr inline auto operator+(
+        OElementType const& lhs,
+        detail::TaggedVector<ElementType, Tags...> const& rhs)
+{
+    using RElementType = decltype(std::declval<ElementType>() + std::declval<OElementType>());
+    return detail::TaggedVector<RElementType, Tags...>((lhs + get<Tags>(rhs))...);
+}
+
 template <class ElementType, class... Tags, class OElementType, class... OTags>
 constexpr inline auto operator-(
         detail::TaggedVector<ElementType, Tags...> const& lhs,
@@ -70,6 +88,24 @@ constexpr inline auto operator-(
     static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     using RElementType = decltype(std::declval<ElementType>() - std::declval<OElementType>());
     return detail::TaggedVector<RElementType, Tags...>((get<Tags>(lhs) - get<Tags>(rhs))...);
+}
+
+template <class ElementType, class... Tags, class OElementType>
+constexpr inline auto operator-(
+        detail::TaggedVector<ElementType, Tags...> const& lhs,
+        OElementType const& rhs)
+{
+    using RElementType = decltype(std::declval<ElementType>() + std::declval<OElementType>());
+    return detail::TaggedVector<RElementType, Tags...>((get<Tags>(lhs) - rhs)...);
+}
+
+template <class ElementType, class... Tags, class OElementType>
+constexpr inline auto operator-(
+        OElementType const& lhs,
+        detail::TaggedVector<ElementType, Tags...> const& rhs)
+{
+    using RElementType = decltype(std::declval<ElementType>() + std::declval<OElementType>());
+    return detail::TaggedVector<RElementType, Tags...>((lhs - get<Tags>(rhs))...);
 }
 
 template <class ElementType, class... Tags, class OElementType, class... OTags>
@@ -276,11 +312,25 @@ public:
         return *this;
     }
 
+    template <class OElementType>
+    constexpr inline TaggedVector& operator+=(OElementType const& rhs)
+    {
+        ((m_values[type_seq_rank_v<Tags, tags_seq>] += rhs), ...);
+        return *this;
+    }
+
     template <class OElementType, class... OTags>
     constexpr inline TaggedVector& operator-=(TaggedVector<OElementType, OTags...> const& rhs)
     {
         static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] -= rhs.template get<Tags>()), ...);
+        return *this;
+    }
+
+    template <class OElementType>
+    constexpr inline TaggedVector& operator-=(OElementType const& rhs)
+    {
+        ((m_values[type_seq_rank_v<Tags, tags_seq>] -= rhs), ...);
         return *this;
     }
 

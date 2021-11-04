@@ -11,10 +11,10 @@ struct Y;
 using DDimX = UniformDiscretization<X>;
 using DDimY = UniformDiscretization<Y>;
 
-static int nt = 10;
-static int nx = 100;
-static int ny = 200;
-static int gw = 1;
+static unsigned nt = 10;
+static unsigned nx = 100;
+static unsigned ny = 200;
+static unsigned gw = 1;
 static double k = 0.1;
 
 constexpr char const* const PDI_CFG = R"PDI_CFG(
@@ -44,32 +44,33 @@ int main()
 {
     //! [mesh]
     // Origin on X
-    Coordinate<X> min_x(-1.);
+    Coordinate<X> const min_x(-1.);
 
     // Sampling step on X
-    Coordinate<X> dx(0.02);
+    Coordinate<X> const dx(0.02);
 
     // Actual mesh on X
-    DDimX ddim_x(min_x, dx);
+    DDimX const ddim_x(min_x, dx);
 
     // Origin on Y
-    Coordinate<Y> min_y(-1.);
+    Coordinate<Y> const min_y(-1.);
 
     // Sampling step on Y
-    Coordinate<Y> dy(0.01);
+    Coordinate<Y> const dy(0.01);
 
     // Actual mesh on Y
-    DDimY ddim_y(min_y, dy);
+    DDimY const ddim_y(min_y, dy);
 
     // Two-dimensional mesh on X,Y
     //! [mesh]
 
     //! [domain]
     // Take (nx+2gw) x (ny+2gw) points of `mesh_xy` starting from (0,0)
-    DiscreteDomain<DDimX, DDimY> domain_xy(DiscreteVector<DDimX, DDimY>(nx + 2 * gw, ny + 2 * gw));
+    DiscreteDomain<DDimX, DDimY> const domain_xy(
+            DiscreteVector<DDimX, DDimY>(nx + 2 * gw, ny + 2 * gw));
 
     // Take only the inner domain (i.e. without ghost zone)
-    DiscreteDomain<DDimX, DDimY> inner_xy(
+    DiscreteDomain<DDimX, DDimY> const inner_xy(
             DiscreteCoordinate<DDimX, DDimY>(gw, gw),
             DiscreteVector<DDimX, DDimY>(nx, ny));
     //! [domain]
@@ -82,23 +83,23 @@ int main()
 
     //! [subdomains]
     // Ghost borders
-    auto temperature_g_x_left = T_in[DiscreteCoordinate<DDimX>(gw - 1)];
-    auto temperature_g_x_right = T_in[DiscreteCoordinate<DDimX>(nx + 2 * gw - 1)];
-    auto temperature_g_y_left = T_in[DiscreteCoordinate<DDimY>(gw - 1)];
-    auto temperature_g_y_right = T_in[DiscreteCoordinate<DDimY>(ny + 2 * gw - 1)];
+    ChunkSpan const temperature_g_x_left = T_in[DiscreteCoordinate<DDimX>(gw - 1)];
+    ChunkSpan const temperature_g_x_right = T_in[DiscreteCoordinate<DDimX>(nx + 2 * gw - 1)];
+    ChunkSpan const temperature_g_y_left = T_in[DiscreteCoordinate<DDimY>(gw - 1)];
+    ChunkSpan const temperature_g_y_right = T_in[DiscreteCoordinate<DDimY>(ny + 2 * gw - 1)];
 
     // Inner borders
-    auto temperature_i_x_left = T_in[DiscreteCoordinate<DDimX>(gw)];
-    auto temperature_i_x_right = T_in[DiscreteCoordinate<DDimX>(nx + gw)];
-    auto temperature_i_y_left = T_in[DiscreteCoordinate<DDimY>(gw)];
-    auto temperature_i_y_right = T_in[DiscreteCoordinate<DDimY>(ny + gw)];
+    ChunkSpan const temperature_i_x_left = std::as_const(T_in)[DiscreteCoordinate<DDimX>(gw)];
+    ChunkSpan const temperature_i_x_right = std::as_const(T_in)[DiscreteCoordinate<DDimX>(nx + gw)];
+    ChunkSpan const temperature_i_y_left = std::as_const(T_in)[DiscreteCoordinate<DDimY>(gw)];
+    ChunkSpan const temperature_i_y_right = std::as_const(T_in)[DiscreteCoordinate<DDimY>(ny + gw)];
     //! [subdomains]
 
     // Initialize the whole domain
-    for (DiscreteCoordinate<DDimX> ix : select<DDimX>(domain_xy)) {
-        double x = ddim_x.to_real(ix);
-        for (DiscreteCoordinate<DDimY> iy : select<DDimY>(domain_xy)) {
-            double y = ddim_y.to_real(iy);
+    for (DiscreteCoordinate<DDimX> const ix : select<DDimX>(domain_xy)) {
+        double const x = ddim_x.to_real(ix);
+        for (DiscreteCoordinate<DDimY> const iy : select<DDimY>(domain_xy)) {
+            double const y = ddim_y.to_real(iy);
             T_in(ix, iy) = 0.75 * ((x * x + y * y) < 0.25);
         }
     }
@@ -123,15 +124,11 @@ int main()
         deepcopy(temperature_g_y_right, temperature_i_y_left);
 
         // Stencil computation on inner domain `inner_xy`
-        for (DiscreteCoordinate<DDimX> ix : select<DDimX>(inner_xy)) {
-            DiscreteCoordinate<DDimX> const ixp(ix + 1);
-            DiscreteCoordinate<DDimX> const ixm(ix - 1);
-            for (DiscreteCoordinate<DDimY> iy : select<DDimY>(inner_xy)) {
-                DiscreteCoordinate<DDimY> const iyp(iy + 1);
-                DiscreteCoordinate<DDimY> const iym(iy - 1);
+        for (DiscreteCoordinate<DDimX> const ix : select<DDimX>(inner_xy)) {
+            for (DiscreteCoordinate<DDimY> const iy : select<DDimY>(inner_xy)) {
                 T_out(ix, iy) = T_in(ix, iy);
-                T_out(ix, iy) += Cx * (T_in(ixp, iy) - 2.0 * T_in(ix, iy) + T_in(ixm, iy));
-                T_out(ix, iy) += Cy * (T_in(ix, iyp) - 2.0 * T_in(ix, iy) + T_in(ix, iym));
+                T_out(ix, iy) += Cx * (T_in(ix + 1, iy) - 2.0 * T_in(ix, iy) + T_in(ix - 1, iy));
+                T_out(ix, iy) += Cy * (T_in(ix, iy + 1) - 2.0 * T_in(ix, iy) + T_in(ix, iy - 1));
             }
         }
         //! [numerical scheme]
