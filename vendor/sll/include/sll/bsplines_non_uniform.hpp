@@ -64,21 +64,21 @@ public:
     NonUniformBSplines() = default;
 
     /// @brief Construct a `NonUniformBSplines` using a brace-list, i.e. `NonUniformBSplines bsplines({0., 1.})`
-    explicit NonUniformBSplines(std::initializer_list<Coordinate<Tag>> knots)
-        : NonUniformBSplines(knots.begin(), knots.end())
+    explicit NonUniformBSplines(std::initializer_list<Coordinate<Tag>> breaks)
+        : NonUniformBSplines(breaks.begin(), breaks.end())
     {
     }
 
     /// @brief Construct a `NonUniformBSplines` using a C++20 "common range".
     template <class InputRange>
-    inline constexpr NonUniformBSplines(InputRange&& knots)
-        : NonUniformBSplines(knots.begin(), knots.end())
+    inline constexpr NonUniformBSplines(InputRange&& breaks)
+        : NonUniformBSplines(breaks.begin(), breaks.end())
     {
     }
 
     /// @brief Construct a `NonUniformBSplines` using a pair of iterators.
     template <class RandomIt>
-    inline constexpr NonUniformBSplines(RandomIt knots_begin, RandomIt knots_end);
+    inline constexpr NonUniformBSplines(RandomIt breaks_begin, RandomIt breaks_end);
 
     NonUniformBSplines(NonUniformBSplines const& x) = default;
 
@@ -154,15 +154,15 @@ private:
 template <class Tag, std::size_t D>
 template <class RandomIt>
 inline constexpr NonUniformBSplines<Tag, D>::NonUniformBSplines(
-        RandomIt const knots_begin,
-        RandomIt const knots_end)
-    : m_knots((knots_end - knots_begin) + 2 * degree())
+        RandomIt const break_begin,
+        RandomIt const break_end)
+    : m_knots((break_end - break_begin) + 2 * degree())
 {
     assert(ncells() > 0);
 
     // Fill the provided knots
     int ii = 0;
-    for (RandomIt it = knots_begin; it < knots_end; ++it) {
+    for (RandomIt it = break_begin; it < break_end; ++it) {
         get_knot(ii) = *it;
         ++ii;
     }
