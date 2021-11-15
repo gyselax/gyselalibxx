@@ -1,6 +1,7 @@
 #pragma once
 
 #include <optional>
+#include <stdexcept>
 
 #include "ddc/discrete_coordinate.hpp"
 #include "ddc/discrete_domain.hpp"
@@ -23,6 +24,9 @@ std::optional<IDim> Discretization<IDim>::s_disc;
 template <class D, class... Args>
 void init_discretization(Args&&... a)
 {
+    if (detail::Discretization<D>::s_disc) {
+        throw std::runtime_error("Discretization function already initialized.");
+    }
     detail::Discretization<D>::s_disc.emplace(std::forward<Args>(a)...);
 }
 

@@ -17,7 +17,14 @@ class UniformBSplines
     static_assert(D > 0, "Parameter `D` must be positive");
 
 private:
-    using mesh_type = UniformDiscretization<Tag>;
+    template <class T>
+    struct InternalTagGenerator;
+
+    /// An internal tag necessary to allocate an internal discretization function.
+    /// It must remain internal, for example it shall not be exposed when returning coordinates. Instead use `Tag`
+    using internal_tag = InternalTagGenerator<Tag>;
+
+    using mesh_type = UniformDiscretization<internal_tag>;
 
     using domain_type = DiscreteDomain<mesh_type>;
 
@@ -75,7 +82,10 @@ public:
                 DiscreteVector<mesh_type>(
                         ncells + 1)) // Create a mesh including the eventual periodic point
     {
-        init_discretization<mesh_type>(rmin, rmax, DiscreteVector<mesh_type>(ncells + 1));
+        init_discretization<mesh_type>(
+                Coordinate<internal_tag>(rmin.value()),
+                Coordinate<internal_tag>(rmax.value()),
+                DiscreteVector<mesh_type>(ncells + 1));
     }
 
     UniformBSplines(UniformBSplines const& x) = default;
