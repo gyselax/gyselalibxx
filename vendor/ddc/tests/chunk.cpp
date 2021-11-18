@@ -251,12 +251,6 @@ TEST(Chunk1DTest, Size)
     EXPECT_EQ(chunk.size(), nelems_x.value());
 }
 
-TEST(Chunk1DTest, UniqueSize)
-{
-    ChunkX<double> chunk(dom_x);
-    EXPECT_EQ(chunk.unique_size(), nelems_x.value());
-}
-
 TEST(Chunk1DTest, IsAlwaysUnique)
 {
     ChunkX<double> chunk(dom_x);

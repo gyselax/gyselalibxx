@@ -178,11 +178,6 @@ public:
         return allocation_mdspan().size();
     }
 
-    constexpr size_type unique_size() const noexcept
-    {
-        return allocation_mdspan().unique_size();
-    }
-
     constexpr mapping_type mapping() const noexcept
     {
         return allocation_mdspan().mapping();
@@ -311,11 +306,7 @@ protected:
     {
         extents_type extents_s(::extents<DDims>(m_domain)...);
         if constexpr (std::is_same_v<LayoutStridedPolicy, std::experimental::layout_stride>) {
-            // Temporary workaround: layout_stride::mapping is missing the function `strides`
-            const std::array<std::size_t, extents_type::rank()> strides {
-                    m_internal_mdspan.mapping().stride(
-                            type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
-            mapping_type map(extents_s, strides);
+            mapping_type map(extents_s, m_internal_mdspan.mapping().strides());
             return allocation_mdspan_type(data(), map);
         } else {
             mapping_type map(extents_s);
