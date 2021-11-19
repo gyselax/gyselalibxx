@@ -9,5 +9,8 @@ class IPoissonSolver
 public:
     virtual ~IPoissonSolver() = default;
 
-    virtual DSpanX operator()(DSpanX electric_potential, DViewSpXVx allfdistribu) const = 0;
+    virtual void operator()(
+            DSpanX electrostatic_potential,
+            DSpanX electric_field,
+            DViewSpXVx allfdistribu) const = 0;
 };

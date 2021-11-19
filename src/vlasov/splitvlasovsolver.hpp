@@ -18,5 +18,5 @@ public:
 
     ~SplitVlasovSolver() override = default;
 
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX efield, double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_field, double dt) const override;
 };

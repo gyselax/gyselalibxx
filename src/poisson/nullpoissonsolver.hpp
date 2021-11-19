@@ -11,5 +11,6 @@ public:
 
     ~NullPoissonSolver() override = default;
 
-    DSpanX operator()(DSpanX electic_potential, DViewSpXVx allfdistribu) const override;
+    void operator()(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu)
+            const override;
 };

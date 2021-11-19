@@ -22,47 +22,49 @@ PredCorr::PredCorr(
 
 DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, int const steps) const
 {
-    // efield only depends on DX
-    DFieldX electric_potential(allfdistribu.domain<IDimX>());
+    // electrostatic potential and electric field (depending only on x)
+    DFieldX electrostatic_potential(allfdistribu.domain<IDimX>());
+    DFieldX electric_field(allfdistribu.domain<IDimX>());
 
     // a 2D chunck of the same size as fdistribu
     DFieldSpXVx allfdistribu_half_t(allfdistribu.domain());
 
-    m_poisson_solver(electric_potential, allfdistribu);
+    m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
 
     int iter = 0;
     for (; iter < steps; ++iter) {
         double const iter_time = iter * m_dt;
 
-        // computation of Electric_Potential(tn)
-        m_poisson_solver(electric_potential, allfdistribu);
+        // computation of the electrostatic potential at time tn and
+        // the associated electric field
+        m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
 
         PdiEvent("iteration")
                 .with("iter", iter)
                 .and_with("time_saved", iter_time)
                 .and_with("fdistribu", allfdistribu)
-                .and_with("electric_potential", electric_potential);
+                .and_with("electrostatic_potential", electrostatic_potential);
 
         // copy fdistribu
         deepcopy(allfdistribu_half_t, allfdistribu);
 
         // predictor
-        m_vlasov_solver(allfdistribu_half_t, electric_potential, m_dt / 2);
+        m_vlasov_solver(allfdistribu_half_t, electric_field, m_dt / 2);
 
-        // computation of Electric_Potential(tn+1/2)
-        m_poisson_solver(electric_potential, allfdistribu_half_t);
-
+        // computation of the electrostatic potential at time tn+1/2
+        // and the associated electric field
+        m_poisson_solver(electrostatic_potential, electric_field, allfdistribu_half_t);
         // correction on a dt
-        m_vlasov_solver(allfdistribu, electric_potential, m_dt);
+        m_vlasov_solver(allfdistribu, electric_field, m_dt);
     }
 
     double const final_time = iter * m_dt;
-    m_poisson_solver(electric_potential, allfdistribu);
+    m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
     PdiEvent("last_iteration")
             .with("iter", iter)
             .and_with("time_saved", final_time)
             .and_with("fdistribu", allfdistribu)
-            .and_with("electric_potential", electric_potential);
+            .and_with("electrostatic_potential", electrostatic_potential);
 
     return allfdistribu;
 }

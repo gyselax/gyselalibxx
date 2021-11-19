@@ -36,7 +36,7 @@ BslAdvectionVx::BslAdvectionVx(
 
 DSpanSpXVx BslAdvectionVx::operator()(
         DSpanSpXVx const allfdistribu,
-        DViewX const electric_potential,
+        DViewX const electric_field,
         double const dt) const
 {
     IDomainX const& x_dom = get_domain<IDimX>(allfdistribu);
@@ -48,21 +48,14 @@ DSpanSpXVx BslAdvectionVx::operator()(
 
     InterpolatorVxProxy const interpolator_vx = m_interpolator_vx.preallocate();
 
-    // Compute efield = -dPhi/dx where Phi is the electric_potential
-    Chunk<double, BSDomainX> elecpot_spline_coef(m_spline_x_builder.spline_domain());
-    m_spline_x_builder(elecpot_spline_coef, electric_potential);
-    DFieldX efield(x_dom);
-    for (IndexX const ix : x_dom) {
-        efield(ix) = -m_spline_x_evaluator.deriv(to_real(ix), elecpot_spline_coef);
-    }
-
     for (IndexSp const isp : sp_dom) {
         double const sqrt_me_on_mspecies = std::sqrt(
                 m_species_info.mass()(m_species_info.ielec()) / m_species_info.mass()(isp));
 
         for (IndexX const ix : x_dom) {
             // compute the displacement
-            double const dvx = m_species_info.charge()(isp) * sqrt_me_on_mspecies * dt * efield(ix);
+            double const dvx
+                    = m_species_info.charge()(isp) * sqrt_me_on_mspecies * dt * electric_field(ix);
 
             // compute the coordinates of the feet
             for (IndexVx const iv : vx_dom) {

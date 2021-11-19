@@ -9,6 +9,8 @@ class IAdvectionVx
 public:
     virtual ~IAdvectionVx() = default;
 
-    virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_potential, double dt)
-            const = 0;
+    virtual DSpanSpXVx operator()(
+            DSpanSpXVx allfdistribu,
+            DViewX electrostatic_potential,
+            double dt) const = 0;
 };

@@ -1,6 +1,8 @@
 #include "nullpoissonsolver.hpp"
 
-DSpanX NullPoissonSolver::operator()(DSpanX const electostatic_potential, DViewSpXVx) const
+void NullPoissonSolver::operator()(
+        DSpanX const electrostatic_potential,
+        DSpanX const electric_field,
+        DViewSpXVx allfdistribu) const
 {
-    return electostatic_potential;
 }

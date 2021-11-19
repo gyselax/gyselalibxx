@@ -16,6 +16,10 @@ class FftPoissonSolver : public IPoissonSolver
 
     IInverseFourierTransform<RDimX> const& m_ifft;
 
+    SplineXBuilder const& m_spline_x_builder;
+
+    SplineEvaluator<BSplinesX> const& m_spline_x_evaluator;
+
     SplineVxBuilder const& m_spline_vx_builder;
 
     SplineEvaluator<BSplinesVx> const& m_spline_vx_evaluator;
@@ -35,10 +39,13 @@ public:
             SpeciesInformation const& species_info,
             IFourierTransform<RDimX> const& fft,
             IInverseFourierTransform<RDimX> const& ifft,
+            SplineXBuilder const& spline_x_builder,
+            SplineEvaluator<BSplinesX> const& spline_x_evaluator,
             SplineVxBuilder const& spline_vx_builder,
             SplineEvaluator<BSplinesVx> const& spline_vx_evaluator);
 
     ~FftPoissonSolver() override = default;
 
-    DSpanX operator()(DSpanX electric_potential, DViewSpXVx allfdistribu) const override;
+    void operator()(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu)
+            const override;
 };

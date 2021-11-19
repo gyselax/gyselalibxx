@@ -176,7 +176,14 @@ int main(int argc, char** argv)
 
     FftwInverseFourierTransform<RDimX> const ifft;
 
-    FftPoissonSolver const poisson(species_info, fft, ifft, builder_vx, spline_vx_evaluator);
+    FftPoissonSolver const
+            poisson(species_info,
+                    fft,
+                    ifft,
+                    builder_x,
+                    spline_x_evaluator,
+                    builder_vx,
+                    spline_vx_evaluator);
 
     PredCorr const predcorr(vlasov, poisson, deltat);
 

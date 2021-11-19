@@ -14,7 +14,7 @@ if not READut.valid_directory('.'):
 
 vxx_res = READut.Read_VOICEXX_results('.')
 
-plot_Landau_damping(vxx_res.electric_potential,
+plot_Landau_damping(vxx_res.electrostatic_potential,
                     vxx_res.time_saved,
                     dirname='.',
                     plotfig=True,

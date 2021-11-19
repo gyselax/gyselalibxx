@@ -11,6 +11,6 @@ public:
 
     ~NullAdvectionVx() override = default;
 
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_potential, double dt)
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electrostatic_potential, double dt)
             const override;
 };

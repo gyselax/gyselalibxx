@@ -33,6 +33,5 @@ public:
 
     ~BslAdvectionVx() override = default;
 
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_potential, double dt)
-            const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_field, double dt) const override;
 };

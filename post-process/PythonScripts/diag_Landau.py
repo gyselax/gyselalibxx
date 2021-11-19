@@ -140,7 +140,7 @@ def main():
     dx = gridx[1] - gridx[0]
 
     [damping_rate, damping_rate_relerror, frequency, frequency_relerror] = \
-        plot_Landau_damping(vxx_res.electric_potential,
+        plot_Landau_damping(vxx_res.electrostatic_potential,
                             vxx_res.time_saved,
                             dirname=VOICEXX_dir,
                             plotfig=args.save)
