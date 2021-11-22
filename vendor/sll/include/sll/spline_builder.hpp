@@ -69,7 +69,7 @@ private:
 
     static constexpr int s_nbc_xmin = BcXmin == BoundCond::HERMITE ? BSplines::degree() / 2 : 0;
 
-    static constexpr int s_nbc_xmax = BcXmin == BoundCond::HERMITE ? BSplines::degree() / 2 : 0;
+    static constexpr int s_nbc_xmax = BcXmax == BoundCond::HERMITE ? BSplines::degree() / 2 : 0;
 
 private:
     std::unique_ptr<interpolation_domain_type> m_interpolation_domain;
