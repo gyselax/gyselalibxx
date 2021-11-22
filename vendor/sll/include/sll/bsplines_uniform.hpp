@@ -111,7 +111,7 @@ public:
 
     double get_knot(int idx) const noexcept
     {
-        return m_domain.rmin() + idx * step<mesh_type>();
+        return rmin() + idx * step<mesh_type>();
     }
 
     double rmin() const noexcept
