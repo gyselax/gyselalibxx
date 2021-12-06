@@ -416,7 +416,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_block_sizes_non_uniform(
 {
     switch (BcXmin) {
     case BoundCond::PERIODIC:
-        upper_block_size = (bsplines_type::degree() + 1) / 2;
+        upper_block_size = bsplines_type::degree() - 1;
         break;
     case BoundCond::HERMITE:
         upper_block_size = s_nbc_xmin + 1;
@@ -429,7 +429,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_block_sizes_non_uniform(
     }
     switch (BcXmax) {
     case BoundCond::PERIODIC:
-        lower_block_size = (bsplines_type::degree() + 1) / 2;
+        lower_block_size = bsplines_type::degree() - 1;
         break;
     case BoundCond::HERMITE:
         lower_block_size = s_nbc_xmax + 1;
@@ -461,7 +461,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::allocate_matrix(
     if (bsplines_type::is_uniform()) {
         upper_band_width = bsplines_type::degree() / 2;
     } else {
-        upper_band_width = (bsplines_type::degree() + 1) / 2;
+        upper_band_width = bsplines_type::degree() - 1;
     }
 
     if constexpr (bsplines_type::is_periodic()) {
