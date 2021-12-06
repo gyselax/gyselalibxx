@@ -19,6 +19,6 @@ ctest --output-on-failure
 ## Dependencies
 
 * cmake-3.15+
-* mdspan
+* PDI
 * a c++-17 compiler:
   * gcc-9 should work

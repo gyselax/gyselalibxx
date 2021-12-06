@@ -1,0 +1,9 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(PDI REQUIRED COMPONENTS C)
+
+include(${CMAKE_CURRENT_LIST_DIR}/DDCTargets.cmake)
+
+check_required_components(DDC)
