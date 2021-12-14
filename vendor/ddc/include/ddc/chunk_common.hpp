@@ -253,7 +253,7 @@ protected:
         extents_type extents_s((front<DDims>(domain) + ::extents<DDims>(domain))...);
         std::array<std::size_t, sizeof...(DDims)> strides_s {
                 mapping_r.stride(type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
-        stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
+        stdex::layout_stride::mapping<extents_type> mapping_s(extents_s, strides_s);
 
         // Pointer offset to handle non-zero indexing
         ptr -= mapping_s(front<DDims>(domain)...);

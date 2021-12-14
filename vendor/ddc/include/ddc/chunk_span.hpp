@@ -166,7 +166,7 @@ public:
         extents_type extents_s((front<DDims>(domain) + ::extents<DDims>(domain))...);
         std::array<std::size_t, sizeof...(DDims)> strides_s {allocation_mdspan.mapping().stride(
                 type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
-        stdex::layout_stride::mapping mapping_s(extents_s, strides_s);
+        stdex::layout_stride::mapping<extents_type> mapping_s(extents_s, strides_s);
         this->m_internal_mdspan = internal_mdspan_type(
                 allocation_mdspan.data() - mapping_s(front<DDims>(domain)...),
                 mapping_s);
