@@ -15,7 +15,8 @@ static unsigned nt = 10;
 static unsigned nx = 100;
 static unsigned ny = 200;
 static unsigned gw = 1;
-static double k = 0.1;
+static double kx = 100.;
+static double ky = 1.;
 
 constexpr char const* const PDI_CFG = R"PDI_CFG(
 metadata:
@@ -50,7 +51,7 @@ int main()
     Coordinate<X> const dx(0.02);
 
     // Actual mesh on X
-    DDimX const ddim_x(min_x, dx);
+    init_discretization<DDimX>(min_x, dx);
 
     // Origin on Y
     Coordinate<Y> const min_y(-1.);
@@ -59,7 +60,7 @@ int main()
     Coordinate<Y> const dy(0.01);
 
     // Actual mesh on Y
-    DDimY const ddim_y(min_y, dy);
+    init_discretization<DDimY>(min_y, dy);
 
     // Two-dimensional mesh on X,Y
     //! [mesh]
@@ -97,9 +98,9 @@ int main()
 
     // Initialize the whole domain
     for (DiscreteCoordinate<DDimX> const ix : select<DDimX>(domain_xy)) {
-        double const x = ddim_x.to_real(ix);
+        double const x = to_real(ix);
         for (DiscreteCoordinate<DDimY> const iy : select<DDimY>(domain_xy)) {
-            double const y = ddim_y.to_real(iy);
+            double const y = to_real(iy);
             T_in(ix, iy) = 0.75 * ((x * x + y * y) < 0.25);
         }
     }
@@ -107,9 +108,10 @@ int main()
     PDI_init(PC_parse_string(PDI_CFG));
     PDI_expose("ghostwidth", &gw, PDI_OUT);
 
-    double const dt = 0.49 / (1.0 / (dx * dx) + 1.0 / (dy * dy));
-    double const Cx = k * dt / (dx * dx);
-    double const Cy = k * dt / (dy * dy);
+    double const cfl = 0.99;
+    double const dt = 0.5 * cfl / (kx / (dx * dx) + ky / (dy * dy));
+    double const Cx = kx * dt / (dx * dx);
+    double const Cy = ky * dt / (dy * dy);
     std::size_t iter = 0;
     for (; iter < nt; ++iter) {
         //! [io/pdi]
