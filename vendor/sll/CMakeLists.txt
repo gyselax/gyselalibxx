@@ -5,13 +5,6 @@ project(splines CXX)
 
 ## The library itself
 add_library(splines STATIC
-    src/deprecated/bsplines.cpp
-    src/deprecated/bsplines_uniform.cpp
-    src/deprecated/bsplines_non_uniform.cpp
-    src/deprecated/spline_1d.cpp
-    src/deprecated/spline_2d.cpp
-    src/deprecated/spline_builder_1d.cpp
-    src/deprecated/spline_builder_2d.cpp
     src/matrix.cpp
     src/matrix_dense.cpp
     src/matrix_banded.cpp
@@ -22,6 +15,17 @@ add_library(splines STATIC
     src/null_boundary_value.cpp
     src/gauss_legendre_integration.cpp
 )
+if(VOICEXX_ENABLE_DEPRECATED)
+    target_sources(splines
+	      src/deprecated/bsplines.cpp
+        src/deprecated/bsplines_uniform.cpp
+        src/deprecated/bsplines_non_uniform.cpp
+        src/deprecated/spline_1d.cpp
+        src/deprecated/spline_2d.cpp
+        src/deprecated/spline_builder_1d.cpp
+        src/deprecated/spline_builder_2d.cpp
+    )
+endif()
 target_compile_features(splines PUBLIC cxx_std_17)
 target_include_directories(splines
     PUBLIC

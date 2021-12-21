@@ -13,6 +13,7 @@ set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are re
 
 # List of options
 option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
+option(VOICEXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
 
 # Our dependencies
 
