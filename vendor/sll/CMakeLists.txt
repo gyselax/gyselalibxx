@@ -30,9 +30,13 @@ target_include_directories(splines
 target_link_libraries(splines
     PUBLIC
         DDC::DDC
-    PRIVATE
-        ${LAPACK_LIBRARIES}
+				std::mdspan
 )
+if(CMAKE_VERSION GREATER_EQUAL 3.18)
+    target_link_libraries(splines PRIVATE LAPACK::LAPACK)
+else()
+    target_link_libraries(splines PRIVATE ${LAPACK_LIBRARIES})
+endif()
 add_library(sll::splines ALIAS splines)
 
 ## if tests are enabled, build the tests in `tests/`
