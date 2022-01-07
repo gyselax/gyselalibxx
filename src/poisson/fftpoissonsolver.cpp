@@ -20,8 +20,7 @@
 #include <species_info.hpp>
 
 #include "fftpoissonsolver.hpp"
-
-using namespace std::complex_literals;
+#include "poissonsolvercommons.hpp"
 
 FftPoissonSolver::FftPoissonSolver(
         SpeciesInformation const& species_info,
@@ -31,7 +30,8 @@ FftPoissonSolver::FftPoissonSolver(
         SplineEvaluator<BSplinesX> const& spline_x_evaluator,
         SplineVxBuilder const& spline_vx_builder,
         SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
-    : m_fft(fft)
+    : m_species_info(species_info)
+    , m_fft(fft)
     , m_ifft(ifft)
     , m_spline_x_builder(spline_x_builder)
     , m_spline_x_evaluator(spline_x_evaluator)
@@ -41,11 +41,10 @@ FftPoissonSolver::FftPoissonSolver(
     , m_derivs_vxmin(m_derivs_vxmin_data.data(), m_derivs_vxmin_data.size())
     , m_derivs_vxmax_data(BSplinesVx::degree() / 2, 0.)
     , m_derivs_vxmax(m_derivs_vxmax_data.data(), m_derivs_vxmax_data.size())
-    , m_species_info(species_info)
 {
 }
 
-// 1- Inner solvers sall be passed in the constructor
+// 1- Inner solvers shall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
 void FftPoissonSolver::operator()(
         DSpanX const electrostatic_potential,
@@ -59,19 +58,14 @@ void FftPoissonSolver::operator()(
     Chunk<double, IDomainX> rho(x_dom);
     DFieldVx contiguous_slice_vx(allfdistribu.domain<IDimVx>());
     Chunk<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
-    for (IndexX const ix : rho.domain()) {
-        rho(ix) = m_species_info.charge()(m_species_info.ielec());
-        for (IndexSp const isp : get_domain<IDimSp>(allfdistribu)) {
-            deepcopy(contiguous_slice_vx, allfdistribu[isp][ix]);
-            m_spline_vx_builder(
-                    vx_spline_coef,
-                    contiguous_slice_vx,
-                    &m_derivs_vxmin,
-                    &m_derivs_vxmax);
-            rho(ix) += m_species_info.charge()(isp)
-                       * m_spline_vx_evaluator.integrate(vx_spline_coef);
-        }
-    }
+    compute_rho(
+            rho,
+            m_species_info,
+            m_spline_vx_builder,
+            m_spline_vx_evaluator,
+            m_derivs_vxmin,
+            m_derivs_vxmax,
+            allfdistribu);
 
     // Build a mesh in the fourier space, for N points
     IDimFx const mesh_fx = m_fft.compute_fourier_domain(x_dom);
@@ -92,10 +86,10 @@ void FftPoissonSolver::operator()(
     // Perform the inverse 1D FFT of the solution to deduce the electrostatic potential
     m_ifft(electrostatic_potential, complex_Phi_fx);
 
-    // Compute efield = -dPhi/dx where Phi is the electrostatic_potential
-    Chunk<double, BSDomainX> elecpot_spline_coef(m_spline_x_builder.spline_domain());
-    m_spline_x_builder(elecpot_spline_coef, electrostatic_potential);
-    for (IndexX const ix : x_dom) {
-        electric_field(ix) = -m_spline_x_evaluator.deriv(to_real(ix), elecpot_spline_coef);
-    }
+    // Compute efield = -dPhi/dx where Phi is the electrostatic potential
+    compute_electric_field_fromvalues(
+            electric_field,
+            m_spline_x_builder,
+            m_spline_x_evaluator,
+            electrostatic_potential);
 }

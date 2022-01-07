@@ -44,6 +44,7 @@ public:
             FieldSp<double> u_eq,
             IDomainSpXVx const& domSpXVx);
 
+    // Consider that the electron species is always at the 0 position
     IndexSp ielec() const
     {
         return IndexSp(0);

@@ -4,6 +4,8 @@
 
 #include <geometry.hpp>
 
+class SpeciesInformation;
+
 class IPoissonSolver
 {
 public:

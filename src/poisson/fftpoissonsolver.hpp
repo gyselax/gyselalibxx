@@ -1,9 +1,9 @@
 #pragma once
 
+#include <sll/spline_builder.hpp>
 #include <sll/spline_evaluator.hpp>
 
 #include <fft.hpp>
-#include <geometry.hpp>
 #include <ifft.hpp>
 
 #include "ipoissonsolver.hpp"
@@ -12,6 +12,8 @@ class SpeciesInformation;
 
 class FftPoissonSolver : public IPoissonSolver
 {
+    SpeciesInformation const& m_species_info;
+
     IFourierTransform<RDimX> const& m_fft;
 
     IInverseFourierTransform<RDimX> const& m_ifft;
@@ -31,8 +33,6 @@ class FftPoissonSolver : public IPoissonSolver
     std::vector<double> m_derivs_vxmax_data;
 
     Span1D<double> m_derivs_vxmax;
-
-    SpeciesInformation const& m_species_info;
 
 public:
     FftPoissonSolver(

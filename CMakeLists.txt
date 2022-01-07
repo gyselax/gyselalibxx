@@ -56,11 +56,12 @@ add_subdirectory("vendor/sll/" "sll")
 # Our project code
 
 ## The main code in `src/`
-add_subdirectory(src)
+add_subdirectory(src/)
+add_subdirectory(simulations/landau)
 
 ## if tests are enabled, build the tests in `tests/`
 if("${BUILD_TESTING}")
     add_subdirectory(tests/)
 endif()
 
-install(TARGETS voicexx)
+install(TARGETS landau_fft)
