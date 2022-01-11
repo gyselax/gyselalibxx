@@ -1,0 +1,13 @@
+spack:
+  concretization: together
+  specs:
+  - 'benchmark'
+  - 'cmake@3.15:'
+  - 'fftw precision=double -mpi'
+  - 'googletest +gmock'
+  - 'lapack'
+  - 'paraconf@0.4.15:'
+  - 'pdi'
+  - 'pdiplugin-decl-hdf5'
+  - 'pdiplugin-set-value'
+  - 'pdiplugin-trace'
