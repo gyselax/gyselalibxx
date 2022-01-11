@@ -17,22 +17,28 @@ void maxwellian_initialization(
 class SpeciesInformation
 {
 private:
-    // charge of the particles
+    // charge of the particles (kinetic + adiabatic)
     FieldSp<int> const m_charge;
 
-    // mass of the particles
+    // mass of the particles of all kinetic species
     FieldSp<double> const m_mass;
 
-    // equilibrium density
+    // equilibrium density of all kinetic species
     FieldSp<double> const m_density_eq;
 
-    // equilibrium temperature
+    // equilibrium temperature of all kinetic species
     FieldSp<double> const m_temperature_eq;
 
-    // equilibrium mean velocity
+    // equilibrium mean velocity of all kinetic species
     FieldSp<double> const m_mean_velocity_eq;
 
-    // Maxwellian values
+    // Initial perturbation amplitude of all kinetic species
+    FieldSp<double> const m_perturb_amplitude;
+
+    // Initial perturbation mode of all kinetic species
+    FieldSp<int> const m_perturb_mode;
+
+    // Maxwellian values of all kinetic species
     FieldSpVx<double> m_maxw_values;
 
 public:
@@ -42,6 +48,8 @@ public:
             FieldSp<double> n_eq,
             FieldSp<double> T_eq,
             FieldSp<double> u_eq,
+            FieldSp<double> perturb_amplitude,
+            FieldSp<int> perturb_mode,
             IDomainSpXVx const& domSpXVx);
 
     // Consider that the electron species is always at the 0 position
@@ -73,6 +81,16 @@ public:
     ViewSp<double> mean_velocity_eq() const
     {
         return m_mean_velocity_eq;
+    }
+
+    ViewSp<double> perturb_amplitude() const
+    {
+        return m_perturb_amplitude;
+    }
+
+    ViewSp<int> perturb_mode() const
+    {
+        return m_perturb_mode;
     }
 
     ViewSpVx<double> maxw_values() const

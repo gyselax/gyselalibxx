@@ -28,15 +28,19 @@ SpeciesInformation::SpeciesInformation(
         FieldSp<double> n_eq,
         FieldSp<double> T_eq,
         FieldSp<double> u_eq,
+        FieldSp<double> perturb_amplitude,
+        FieldSp<int> perturb_mode,
         IDomainSpXVx const& domSpXVx)
     : m_charge(std::move(charge))
     , m_mass(std::move(mass))
     , m_density_eq(std::move(n_eq))
     , m_temperature_eq(std::move(T_eq))
     , m_mean_velocity_eq(std::move(u_eq))
+    , m_perturb_amplitude(std::move(perturb_amplitude))
+    , m_perturb_mode(std::move(perturb_mode))
     , m_maxw_values(select<IDimSp, IDimVx>(domSpXVx))
 {
-    for (IndexSp const isp : get_domain<IDimSp>(charge)) {
+    for (IndexSp const isp : get_domain<IDimSp>(n_eq)) {
         // Initialization of the Maxwellian --> fill m_maxw_values
         maxwellian_initialization(
                 m_density_eq(isp),

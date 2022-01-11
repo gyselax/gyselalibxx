@@ -23,7 +23,7 @@ TESTDIR="${PWD}"
 
 cd "${TMPDIR}"
 
-"${VOICEXX_EXEC}" "${TESTDIR}/params.yaml"
+"${VOICEXX_EXEC}" "${TESTDIR}/landau.yaml"
 export PYTHONPATH="${VOICEXX_SRCDIR}/post-process/PythonScripts"
 "${PYTHON3_EXE}" -B "${TESTDIR}/check_Landau.py"
 cp *.png "${OUTDIR}"

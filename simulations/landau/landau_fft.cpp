@@ -71,8 +71,8 @@ int main(int argc, char** argv)
         return CoordVx(vx_max);
     }();
     IVectVx const vx_size = [&]() {
-        double vx_size;
-        PC_double(PC_get(conf_voicexx, ".Mesh.vx_size"), &vx_size);
+        long vx_size;
+        PC_int(PC_get(conf_voicexx, ".Mesh.vx_size"), &vx_size);
         return IVectVx(vx_size);
     }();
 
@@ -85,41 +85,64 @@ int main(int argc, char** argv)
 
     SplineVxBuilder const builder_vx;
 
-    IDomainSp const dom_sp(IVectSp(2));
+    IVectSp const nb_kinspecies = [&]() {
+        int nb_kinspecies;
+        PC_len(PC_get(conf_voicexx,".SpeciesInfo"),&nb_kinspecies);
+        return IVectSp(nb_kinspecies);
+    }();
+    IDomainSp const dom_kinsp(nb_kinspecies);
 
     IDomainSpXVx const
-            mesh(dom_sp, builder_x.interpolation_domain(), builder_vx.interpolation_domain());
+            mesh(dom_kinsp, builder_x.interpolation_domain(), builder_vx.interpolation_domain());
 
-    FieldSp<int> charges(dom_sp);
-    DFieldSp masses(dom_sp);
-    DFieldSp density_eq(dom_sp);
-    DFieldSp temperature_eq(dom_sp);
-    DFieldSp mean_velocity_eq(dom_sp);
-    FieldSp<int> init_perturb_mode(dom_sp);
-    DFieldSp init_perturb_amplitude(dom_sp);
-    for (IndexSp const isp : dom_sp) {
+    FieldSp<int> kinetic_charges(dom_kinsp);
+    DFieldSp masses(dom_kinsp);
+    DFieldSp density_eq(dom_kinsp);
+    DFieldSp temperature_eq(dom_kinsp);
+    DFieldSp mean_velocity_eq(dom_kinsp);
+    FieldSp<int> init_perturb_mode(dom_kinsp);
+    DFieldSp init_perturb_amplitude(dom_kinsp);
+    int nb_elec_adiabspecies = 1;
+    int nb_ion_adiabspecies = 1;
+    
+    for (IndexSp const isp : dom_kinsp) {
         // --> SpeciesInfo info
         long charge;
-        PC_int(PC_get(conf_voicexx, ".SpeciesInfo.charge[%d]", isp.value()), &charge);
-        charges(isp) = charge;
-        PC_double(PC_get(conf_voicexx, ".SpeciesInfo.mass[%d]", isp.value()), &masses(isp));
+        PC_int(PC_get(conf_voicexx, ".SpeciesInfo[%d].charge",isp.value()), &charge);
+        kinetic_charges(isp) = charge;
+        if (charge == -1) {
+            nb_elec_adiabspecies = 0;
+        } else {
+            nb_ion_adiabspecies = 0;
+        }
+
+        PC_double(PC_get(conf_voicexx, ".SpeciesInfo[%d].mass",isp.value()), &masses(isp));
         PC_double(
-                PC_get(conf_voicexx, ".SpeciesInfo.density_eq[%d]", isp.value()),
+                PC_get(conf_voicexx, ".SpeciesInfo[%d].density_eq",isp.value()),
                 &density_eq(isp));
         PC_double(
-                PC_get(conf_voicexx, ".SpeciesInfo.temperature_eq[%d]", isp.value()),
+                PC_get(conf_voicexx, ".SpeciesInfo[%d].temperature_eq",isp.value()),
                 &temperature_eq(isp));
         PC_double(
-                PC_get(conf_voicexx, ".SpeciesInfo.mean_velocity_eq[%d]", isp.value()),
+                PC_get(conf_voicexx, ".SpeciesInfo[%d].mean_velocity_eq",isp.value()),
                 &mean_velocity_eq(isp));
-
-        // --> Perturbation info
         PC_double(
-                PC_get(conf_voicexx, ".Perturbation.amplitude[%d]", isp.value()),
+                PC_get(conf_voicexx, ".SpeciesInfo[%d].perturb_amplitude",isp.value()),
                 &init_perturb_amplitude(isp));
+
         long init_perturb_mode_sp;
-        PC_int(PC_get(conf_voicexx, ".Perturbation.mode[%d]", isp.value()), &init_perturb_mode_sp);
+        PC_int(PC_get(conf_voicexx, ".SpeciesInfo[%d].perturb_mode",isp.value()), &init_perturb_mode_sp);
         init_perturb_mode(isp) = init_perturb_mode_sp;
+    }
+
+    // Create the domain of all species including kinetic species + adiabatic species (if existing) 
+    IDomainSp const dom_allsp(nb_kinspecies+nb_elec_adiabspecies+nb_ion_adiabspecies);
+    FieldSp<int> charges(dom_allsp);
+    for (IndexSp isp : dom_kinsp) {
+        charges(isp) = kinetic_charges(isp);
+    }
+    if (nb_elec_adiabspecies+nb_ion_adiabspecies>0){
+        charges(dom_kinsp.back()+1) = nb_ion_adiabspecies-nb_elec_adiabspecies;
     }
 
     // Initialization of the distribution function
@@ -129,12 +152,12 @@ int main(int argc, char** argv)
             std::move(density_eq),
             std::move(temperature_eq),
             std::move(mean_velocity_eq),
+            std::move(init_perturb_amplitude),
+            std::move(init_perturb_mode),
             mesh);
-
-    DFieldSpXVx allfdistribu(mesh.restrict(IDomainSp(species_info.ielec(), IVectSp(1))));
-
-    SingleModePerturbInitialization const
-            init(species_info, init_perturb_mode, init_perturb_amplitude);
+    DFieldSpXVx allfdistribu(mesh);
+    SingleModePerturbInitialization const 
+        init(species_info, species_info.perturb_mode(), species_info.perturb_amplitude());
     init(allfdistribu);
 
     // --> Algorithm info
@@ -153,7 +176,6 @@ int main(int argc, char** argv)
     PDI_init(conf_pdi);
 
     // Creating operators
-
     SplineEvaluator<BSplinesVx> const
             spline_vx_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
 

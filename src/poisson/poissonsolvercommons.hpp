@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <sll/gauss_legendre_integration.hpp>
 #include <sll/spline_evaluator.hpp>
 
@@ -18,9 +20,16 @@ void compute_rho(
 {
     DFieldVx f_vx_slice(allfdistribu.domain<IDimVx>());
     Chunk<double, BSDomainVx> vx_spline_coef(spline_vx_builder.spline_domain());
+
+    double chargedens_adiabspecies = 0.;
+    IndexSp last_kin_species = allfdistribu.domain<IDimSp>().back();
+    IndexSp last_species = species_info.charge().domain().back();
+    if (last_kin_species != last_species) {
+        chargedens_adiabspecies = double(species_info.charge()(last_species));
+    }
     for (IndexX ix : rho.domain()) {
-        rho(ix) = species_info.charge()(species_info.ielec());
-        for (IndexSp isp : get_domain<IDimSp>(allfdistribu)) {
+        rho(ix) = chargedens_adiabspecies;
+        for (IndexSp const isp : get_domain<IDimSp>(allfdistribu)) {
             deepcopy(f_vx_slice, allfdistribu[isp][ix]);
             spline_vx_builder(
                     vx_spline_coef.span_view(),

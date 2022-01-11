@@ -7,15 +7,13 @@ Mesh:
   vx_size: 127
 
 SpeciesInfo:
-  charge: [-1, 1]
-  mass: [0.0005, 2.]
-  density_eq: [1., 1.]
-  temperature_eq: [1., 1.]
-  mean_velocity_eq: [0., 0.]
-
-Perturbation:
-  mode: [1, 1]
-  amplitude: [0.01, 0.01]
+- charge: -1
+  mass: 0.0005
+  density_eq: 1.
+  temperature_eq: 1.
+  mean_velocity_eq: 0.
+  perturb_amplitude: 0.01
+  perturb_mode: 1
 
 Algorithm:
   deltat: 0.125
