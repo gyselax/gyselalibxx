@@ -28,6 +28,8 @@ elseif(DDC_mdspan_DEPENDENCY_POLICY STREQUAL "INSTALLED")
 	find_package(mdspan CONFIG REQUIRED)
 endif()
 
+find_package(OpenMP REQUIRED)
+
 # Our project
 
 ## The library itself
@@ -42,7 +44,7 @@ target_include_directories(DDC
 		"$<INSTALL_INTERFACE:include>"
 )
 target_link_libraries(DDC
-	INTERFACE std::mdspan)
+	INTERFACE std::mdspan OpenMP::OpenMP_CXX)
 add_library(DDC::DDC ALIAS DDC)
 install(
 	TARGETS DDC

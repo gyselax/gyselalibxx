@@ -3,6 +3,7 @@
 #include <ddc/DiscreteDomain>
 #include <ddc/PdiEvent>
 #include <ddc/UniformDiscretization>
+#include <ddc/for_each>
 
 // Name of the axis
 struct X;
@@ -97,13 +98,11 @@ int main()
     //! [subdomains]
 
     // Initialize the whole domain
-    for (DiscreteCoordinate<DDimX> const ix : select<DDimX>(domain_xy)) {
-        double const x = to_real(ix);
-        for (DiscreteCoordinate<DDimY> const iy : select<DDimY>(domain_xy)) {
-            double const y = to_real(iy);
-            T_in(ix, iy) = 0.75 * ((x * x + y * y) < 0.25);
-        }
-    }
+    for_each(domain_xy, [&](DiscreteCoordinate<DDimX, DDimY> const ixy) {
+        double const x = to_real(select<DDimX>(ixy));
+        double const y = to_real(select<DDimY>(ixy));
+        T_in(ixy) = 0.75 * ((x * x + y * y) < 0.25);
+    });
 
     PDI_init(PC_parse_string(PDI_CFG));
     PDI_expose("ghostwidth", &gw, PDI_OUT);
@@ -126,13 +125,13 @@ int main()
         deepcopy(temperature_g_y_right, temperature_i_y_left);
 
         // Stencil computation on inner domain `inner_xy`
-        for (DiscreteCoordinate<DDimX> const ix : select<DDimX>(inner_xy)) {
-            for (DiscreteCoordinate<DDimY> const iy : select<DDimY>(inner_xy)) {
-                T_out(ix, iy) = T_in(ix, iy);
-                T_out(ix, iy) += Cx * (T_in(ix + 1, iy) - 2.0 * T_in(ix, iy) + T_in(ix - 1, iy));
-                T_out(ix, iy) += Cy * (T_in(ix, iy + 1) - 2.0 * T_in(ix, iy) + T_in(ix, iy - 1));
-            }
-        }
+        for_each(inner_xy, [&](DiscreteCoordinate<DDimX, DDimY> const ixy) {
+            DiscreteCoordinate<DDimX> const ix = select<DDimX>(ixy);
+            DiscreteCoordinate<DDimY> const iy = select<DDimY>(ixy);
+            T_out(ix, iy) = T_in(ix, iy);
+            T_out(ix, iy) += Cx * (T_in(ix + 1, iy) - 2.0 * T_in(ix, iy) + T_in(ix - 1, iy));
+            T_out(ix, iy) += Cy * (T_in(ix, iy + 1) - 2.0 * T_in(ix, iy) + T_in(ix, iy - 1));
+        });
         //! [numerical scheme]
 
         // Copy buf2 into buf1, a swap could also do the job

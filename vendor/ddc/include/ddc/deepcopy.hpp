@@ -1,5 +1,8 @@
 #pragma once
 
+#include <type_traits>
+#include <utility>
+
 #include "ddc/chunk_span.hpp"
 
 namespace detail {
@@ -37,18 +40,8 @@ inline ChunkDst const& deepcopy(ChunkDst&& to, ChunkSrc&& from) noexcept
             "Not assignable");
     assert(to.domain().front() == from.domain().front());
     assert(to.domain().back() == from.domain().back());
-    for_each(to.span_view(), [&to, &from](auto&&... idxs) { to(idxs...) = from(idxs...); });
+    detail::for_each_impl(to.span_view(), [&to, &from](auto&&... idxs) {
+        to(idxs...) = from(idxs...);
+    });
     return to;
-}
-
-/** iterates over the domain of a view
- * @param[in] view  the view whose domain to iterate
- * @param[in] f     a functor taking the list of indices as parameter
- */
-template <class ElementType, class... DDims, class Layout, class Functor>
-inline void for_each(
-        ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const view,
-        Functor&& f) noexcept
-{
-    detail::for_each_impl(view, std::forward<Functor>(f));
 }
