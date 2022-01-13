@@ -44,7 +44,7 @@ struct PeriodicSplineBuilderTestFixture<
 };
 
 using Cases = tuple_to_types_t<cartesian_product_t<
-        std::integer_sequence<std::size_t, 2, 3, 4, 5, 6>,
+        std::integer_sequence<std::size_t, 1, 2, 3, 4, 5, 6>,
         std::tuple<CosineEvaluator>>>;
 
 TYPED_TEST_SUITE(PeriodicSplineBuilderTestFixture, Cases);

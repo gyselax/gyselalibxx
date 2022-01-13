@@ -48,7 +48,7 @@ struct NonPeriodicSplineBuilderTestFixture<std::tuple<
 };
 
 using Cases = tuple_to_types_t<cartesian_product_t<
-        std::integer_sequence<std::size_t, 2, 3, 4, 5, 6>,
+        std::integer_sequence<std::size_t, 1, 2, 3, 4, 5, 6>,
         std::tuple<CosineEvaluator>,
         std::integer_sequence<BoundCond, BoundCond::GREVILLE, BoundCond::HERMITE>,
         std::integer_sequence<BoundCond, BoundCond::GREVILLE, BoundCond::HERMITE>>>;

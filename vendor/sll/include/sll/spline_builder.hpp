@@ -121,7 +121,7 @@ private:
     void allocate_matrix(int kl, int ku);
 
     void compute_interpolant_degree1(
-            ChunkSpan<double, bsplines_type> spline,
+            ChunkSpan<double, DiscreteDomain<bsplines_type>> spline,
             ChunkSpan<double const, interpolation_domain_type> vals) const;
 
     void build_matrix_system();
@@ -152,14 +152,14 @@ SplineBuilder<BSplines, BcXmin, BcXmax>::SplineBuilder()
 
 template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolant_degree1(
-        ChunkSpan<double, bsplines_type> const spline,
+        ChunkSpan<double, DiscreteDomain<bsplines_type>> const spline,
         ChunkSpan<double const, interpolation_domain_type> const vals) const
 {
     for (int i = 0; i < discretization<BSplines>().nbasis(); ++i) {
-        spline(i) = vals(i);
+        spline(DiscreteCoordinate<bsplines_type>(i)) = vals(DiscreteCoordinate<interpolation_mesh_type>(i));
     }
     if constexpr (bsplines_type::is_periodic()) {
-        spline(discretization<BSplines>().nbasis()) = spline(0);
+        spline(DiscreteCoordinate<bsplines_type>(discretization<BSplines>().nbasis())) = spline(DiscreteCoordinate<bsplines_type>(0));
     }
 }
 
