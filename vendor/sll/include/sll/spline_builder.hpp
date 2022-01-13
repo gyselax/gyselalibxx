@@ -156,10 +156,12 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolant_degree1(
         ChunkSpan<double const, interpolation_domain_type> const vals) const
 {
     for (int i = 0; i < discretization<BSplines>().nbasis(); ++i) {
-        spline(DiscreteCoordinate<bsplines_type>(i)) = vals(DiscreteCoordinate<interpolation_mesh_type>(i));
+        spline(DiscreteCoordinate<bsplines_type>(i))
+                = vals(DiscreteCoordinate<interpolation_mesh_type>(i));
     }
     if constexpr (bsplines_type::is_periodic()) {
-        spline(DiscreteCoordinate<bsplines_type>(discretization<BSplines>().nbasis())) = spline(DiscreteCoordinate<bsplines_type>(0));
+        spline(DiscreteCoordinate<bsplines_type>(discretization<BSplines>().nbasis()))
+                = spline(DiscreteCoordinate<bsplines_type>(0));
     }
 }
 
