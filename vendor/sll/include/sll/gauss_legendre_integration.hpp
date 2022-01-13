@@ -79,7 +79,7 @@ public:
         // map the interval [-1,1] into the interval [a,b].
         double const l = 0.5 * (x1 - x0);
         double const c = 0.5 * (x0 + x1);
-        for (int i = 0; i < m_wx.size(); ++i) {
+        for (std::size_t i = 0; i < m_wx.size(); ++i) {
             points(i) = l * m_wx[i].second + c;
         }
     }
@@ -95,8 +95,8 @@ public:
         // map the interval [-1,1] into the interval [a,b].
         double const l = 0.5 * (x1 - x0);
         double const c = 0.5 * (x0 + x1);
-        for (int i = 0; i < m_wx.size(); ++i) {
-            weights(i) = m_wx[i].first;
+        for (std::size_t i = 0; i < m_wx.size(); ++i) {
+            weights(i) = l * m_wx[i].first;
             points(i) = l * m_wx[i].second + c;
         }
     }
