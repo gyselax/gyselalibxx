@@ -237,6 +237,13 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
             a_ptr.data());
     double offset;
 
+    assert(x >= rmin());
+    assert(x <= rmax());
+    assert(n >= 0);
+    assert(n <= degree());
+    assert(derivs.extent(0) == 1 + degree());
+    assert(derivs.extent(1) == 1 + n);
+
     // 1. Compute cell index 'icell' and x_offset
     // 2. Compute index range of B-splines with support over cell 'icell'
     get_icell_and_offset(jmin, offset, x);
