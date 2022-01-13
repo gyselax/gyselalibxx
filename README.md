@@ -28,36 +28,16 @@ and `tests/landau/frequency_t0.0to45.0.png`:
 
 ## Dependencies
 
-* cmake-3.15+
-* a c++-17 compiler:
-  * gcc-9+ should work
-* Lapack
-* PDI
-* FFTW-3
-* mdspan (embedded)
-* googletest (embedded)
+To install dependencies through spack, first follow the the 3 first steps of 
+https://github.com/pdidev/spack
+
+Then execute the following:
+```sh
+spack env create voice spack.yaml
+spack env activate voice
+spack concretize --reuse
+spack install
+```
 
 For example, you can find a Dockerfile installing these dependencies on ubuntu in 
 `voicexx_env/Dockerfile`.
-
-# Architecture
-
-## Operation classes
-
-### `splines` & `boundary_conditions`
-
-Spline interpolation (mesh to spline) & evaluation (spline to mesh)
-
-### `time`
-
-Time iteration, including main time loop & predictor-corrector.
-
-### `vlasov`
-
-Vlasov solver including splitting & advections.
-
-### `efield`
-
-TODO field solver.
-
-
