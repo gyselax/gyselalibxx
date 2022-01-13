@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are re
 # List of options
 option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
 option(VOICEXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
+set(VOICEXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Voice++")
 
 # Our dependencies
 
@@ -54,6 +55,7 @@ add_subdirectory("vendor/sll/" "sll")
 
 
 # Our project code
+set(CMAKE_CXX_FLAGS "${VOICEXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 ## The main code in `src/`
 add_subdirectory(src/)

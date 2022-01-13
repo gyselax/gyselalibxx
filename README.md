@@ -7,7 +7,7 @@ git clone --recurse-submodules git@gitlab.maisondelasimulation.fr:gysela-develop
 cd voicexx
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" ..
 make
 ```
 
