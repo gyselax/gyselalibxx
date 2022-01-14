@@ -34,11 +34,11 @@ spack env create voicexx "${VOICE_DIR}/spack.yaml" 2> /dev/null || true
 spack -e voicexx config add "packages:all:compiler:[gcc@10.3.0]"
 
 # modify the env to remove MPI dep
-spack -e voicexx rm pdiplugin-decl-hdf5
+spack -e voicexx rm pdiplugin-decl-hdf5 || true
 spack -e voicexx add pdiplugin-decl-hdf5^hdf5~mpi
 
 # do the actual install
-echo -e "\n   Now installing everything...\n\e[33m\e[1mBeware\e[0m, this can take up to mutiple hours and multi-GB of space\!" >&2
+echo -e "\n   Now installing everything...\n\e[91m\e[1mBeware\e[33m, this can take up to mutiple hours and multi-GB of space\!\e[0m" >&2
 trap 'kill $(jobs -p)' EXIT QUIT ABRT KILL SEGV INT TERM STOP
 for N in $(seq 10)
 do spack -e voicexx install --reuse --fail-fast --show-log-on-error
