@@ -1,0 +1,60 @@
+#!/bin/bash
+set -e
+
+# some initial cleanup
+despacktivate &> /dev/null || true
+spack unload -a &> /dev/null || true
+module purge &> /dev/null || true
+
+# fetch and activate spack
+SPACK_ROOT="${SPACK_ROOT:-${HOME}/spack}"
+git clone https://github.com/spack/spack.git &> /dev/null || true
+if ! which spack &> /dev/null
+then
+    . "${SPACK_ROOT}/share/spack/setup-env.sh"
+fi
+
+# fetch and activate our additional recipes
+git clone https://github.com/pdidev/spack.git "${SPACK_ROOT}/var/spack/repos/pdi" &> /dev/null || true
+git -C "${SPACK_ROOT}/var/spack/repos/pdi" fetch --all -p
+git -C "${SPACK_ROOT}/var/spack/repos/pdi" reset --hard origin/stable
+spack repo add spack/var/spack/repos/pdi &> /dev/null || true
+
+# detect the local python install
+spack external find python 2> /dev/null || true
+
+# detect the local GCC install
+module load gcc/10.3.0
+spack compiler find 2> /dev/null || true
+module purge
+
+# create our environment
+VOICE_DIR="$(dirname "$(dirname "$(readlink -f "$0" )")")"
+spack env create voicexx "${VOICE_DIR}/spack.yaml" 2> /dev/null || true
+spack -e voicexx config add "packages:all:compiler:[gcc@10.3.0]"
+
+# modify the env to remove MPI dep
+spack -e voicexx rm pdiplugin-decl-hdf5
+spack -e voicexx add pdiplugin-decl-hdf5^hdf5~mpi
+
+# do the actual install
+echo -e "\n   Now installing everything...\n\e[33m\e[1mBeware\e[0m, this can take up to mutiple hours and multi-GB of space\!" >&2
+trap 'kill $(jobs -p)' EXIT QUIT ABRT KILL SEGV INT TERM STOP
+for N in $(seq 10)
+do spack -e voicexx install --reuse --fail-fast --show-log-on-error
+done
+wait
+
+# create an activation script
+cat<<EOF > "${VOICE_DIR}/bin/voicexx.env.sh"
+despacktivate &> /dev/null || true
+spack unload -a &> /dev/null || true
+module purge &> /dev/null || true
+module load gcc/10.3.0
+if ! which spack &> /dev/null
+then
+    . "${SPACK_ROOT}/share/spack/setup-env.sh"
+fi
+spack env activate voicexx
+EOF
+echo -e "\n\nIf everything went well, you can now activate your environment with:\n source $(realpath --relative-to=. ${VOICE_DIR}/bin/voicexx.env.sh)"
