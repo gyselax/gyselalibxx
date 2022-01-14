@@ -38,7 +38,7 @@ spack -e voicexx rm pdiplugin-decl-hdf5 || true
 spack -e voicexx add pdiplugin-decl-hdf5^hdf5~mpi
 
 # do the actual install
-echo -e "\n   Now installing everything...\n\e[91m\e[1mBeware\e[33m, this can take up to mutiple hours and multi-GB of space!\e[0m" >&2
+echo -e "\n   Now installing everything...\n\e[91m\e[1mBeware\e[33m, this can take up to mutiple hours and multi-GB of space!\e[0m\n" >&2
 trap 'kill $(jobs -p)' EXIT QUIT ABRT KILL SEGV INT TERM STOP
 for N in $(seq 10)
 do spack -e voicexx install --reuse --fail-fast --show-log-on-error
