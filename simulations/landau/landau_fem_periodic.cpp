@@ -16,10 +16,8 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
-#include "fftpoissonsolver.hpp"
-#include "fftw.hpp"
+#include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
-#include "ifftw.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
 #include "singlemodeperturbinitialization.hpp"
@@ -176,12 +174,12 @@ int main(int argc, char** argv)
 
     // Creating operators
     SplineEvaluator<BSplinesX> const
-            spline_x_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
+        spline_x_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
 
     PreallocatableSplineInterpolatorX const spline_x_interpolator(builder_x, spline_x_evaluator);
 
     SplineEvaluator<BSplinesVx> const
-        spline_vx_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
+            spline_vx_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
 
     PreallocatableSplineInterpolatorVx const
             spline_vx_interpolator(builder_vx, spline_vx_evaluator);
@@ -193,14 +191,8 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    FftwFourierTransform<RDimX> const fft;
-
-    FftwInverseFourierTransform<RDimX> const ifft;
-
-    FftPoissonSolver const
+    FemPeriodicPoissonSolver const
             poisson(species_info,
-                    fft,
-                    ifft,
                     builder_x,
                     spline_x_evaluator,
                     builder_vx,

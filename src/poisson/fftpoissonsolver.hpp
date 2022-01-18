@@ -6,14 +6,14 @@
 #include <fft.hpp>
 #include <ifft.hpp>
 
+#include "chargedensitycalculator.hpp"
+#include "electricfield.hpp"
 #include "ipoissonsolver.hpp"
 
 class SpeciesInformation;
 
 class FftPoissonSolver : public IPoissonSolver
 {
-    SpeciesInformation const& m_species_info;
-
     IFourierTransform<RDimX> const& m_fft;
 
     IInverseFourierTransform<RDimX> const& m_ifft;
@@ -22,17 +22,9 @@ class FftPoissonSolver : public IPoissonSolver
 
     SplineEvaluator<BSplinesX> const& m_spline_x_evaluator;
 
-    SplineVxBuilder const& m_spline_vx_builder;
+    ChargeDensityCalculator compute_rho;
 
-    SplineEvaluator<BSplinesVx> const& m_spline_vx_evaluator;
-
-    std::vector<double> m_derivs_vxmin_data;
-
-    Span1D<double> m_derivs_vxmin;
-
-    std::vector<double> m_derivs_vxmax_data;
-
-    Span1D<double> m_derivs_vxmax;
+    ElectricField m_electric_field;
 
 public:
     FftPoissonSolver(

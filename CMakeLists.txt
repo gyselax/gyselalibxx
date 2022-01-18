@@ -67,3 +67,4 @@ if("${BUILD_TESTING}")
 endif()
 
 install(TARGETS landau_fft)
+install(TARGETS landau_fem_periodic)

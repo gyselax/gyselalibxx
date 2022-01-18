@@ -101,6 +101,26 @@ public:
         }
     }
 
+    void compute_points_and_weights_on_mesh(
+            Span1D<double> points,
+            Span1D<double> weights,
+            Span1D<double> mesh_edges) const
+    {
+        int const nbcells = mesh_edges.size() - 1;
+        int const npts_gauss = m_wx.size();
+        assert(points.extent(0) == m_wx.size() * nbcells);
+        assert(weights.extent(0) == m_wx.size() * nbcells);
+
+        for (int icell = 0; icell < nbcells; icell++) {
+            double const x0 = mesh_edges(icell);
+            double const x1 = mesh_edges(icell + 1);
+            DSpan1D gl_points(points.data() + icell * npts_gauss, npts_gauss);
+            DSpan1D gl_weights(weights.data() + icell * npts_gauss, npts_gauss);
+
+            compute_points_and_weights(gl_points, gl_weights, x0, x1);
+        }
+    }
+
 private:
     std::vector<std::pair<double, double>> m_wx;
 };

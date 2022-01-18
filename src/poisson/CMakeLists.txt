@@ -1,6 +1,9 @@
 add_library(poisson STATIC
+    chargedensitycalculator.cpp
+    electricfield.cpp
     nullpoissonsolver.cpp
     fftpoissonsolver.cpp
+    femperiodicpoissonsolver.cpp
 )
 
 target_compile_features(poisson

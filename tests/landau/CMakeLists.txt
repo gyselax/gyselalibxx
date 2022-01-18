@@ -2,10 +2,18 @@ cmake_minimum_required(VERSION 3.15)
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
-add_test(NAME TestLandau
+add_test(NAME TestLandauFFT
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau.sh"
         "${PROJECT_SOURCE_DIR}"
         "$<TARGET_FILE:landau_fft>"
         "$<TARGET_FILE:Python3::Interpreter>")
-set_property(TEST TestLandau PROPERTY TIMEOUT 200)
-set_property(TEST TestLandau PROPERTY LABELS test_on_Release_only)
+set_property(TEST TestLandauFFT PROPERTY TIMEOUT 200)
+set_property(TEST TestLandauFFT PROPERTY LABELS test_on_Release_only)
+
+add_test(NAME TestLandauFEM
+    COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau.sh"
+        "${PROJECT_SOURCE_DIR}"
+        "$<TARGET_FILE:landau_fem_periodic>"
+        "$<TARGET_FILE:Python3::Interpreter>")
+set_property(TEST TestLandauFEM PROPERTY TIMEOUT 200)
+set_property(TEST TestLandauFEM PROPERTY LABELS test_on_Release_only)

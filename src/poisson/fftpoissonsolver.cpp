@@ -20,7 +20,6 @@
 #include <species_info.hpp>
 
 #include "fftpoissonsolver.hpp"
-#include "poissonsolvercommons.hpp"
 
 FftPoissonSolver::FftPoissonSolver(
         SpeciesInformation const& species_info,
@@ -30,17 +29,12 @@ FftPoissonSolver::FftPoissonSolver(
         SplineEvaluator<BSplinesX> const& spline_x_evaluator,
         SplineVxBuilder const& spline_vx_builder,
         SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
-    : m_species_info(species_info)
-    , m_fft(fft)
+    : m_fft(fft)
     , m_ifft(ifft)
     , m_spline_x_builder(spline_x_builder)
     , m_spline_x_evaluator(spline_x_evaluator)
-    , m_spline_vx_builder(spline_vx_builder)
-    , m_spline_vx_evaluator(spline_vx_evaluator)
-    , m_derivs_vxmin_data(BSplinesVx::degree() / 2, 0.)
-    , m_derivs_vxmin(m_derivs_vxmin_data.data(), m_derivs_vxmin_data.size())
-    , m_derivs_vxmax_data(BSplinesVx::degree() / 2, 0.)
-    , m_derivs_vxmax(m_derivs_vxmax_data.data(), m_derivs_vxmax_data.size())
+    , compute_rho(species_info, spline_vx_builder, spline_vx_evaluator)
+    , m_electric_field(spline_x_builder, spline_x_evaluator)
 {
 }
 
@@ -57,15 +51,7 @@ void FftPoissonSolver::operator()(
     // Compute the RHS of the Poisson equation.
     Chunk<double, IDomainX> rho(x_dom);
     DFieldVx contiguous_slice_vx(allfdistribu.domain<IDimVx>());
-    Chunk<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
-    compute_rho(
-            rho,
-            m_species_info,
-            m_spline_vx_builder,
-            m_spline_vx_evaluator,
-            m_derivs_vxmin,
-            m_derivs_vxmax,
-            allfdistribu);
+    compute_rho(rho, allfdistribu);
 
     // Build a mesh in the fourier space, for N points
     IDimFx const mesh_fx = m_fft.compute_fourier_domain(x_dom);
@@ -87,9 +73,5 @@ void FftPoissonSolver::operator()(
     m_ifft(electrostatic_potential, complex_Phi_fx);
 
     // Compute efield = -dPhi/dx where Phi is the electrostatic potential
-    compute_electric_field_fromvalues(
-            electric_field,
-            m_spline_x_builder,
-            m_spline_x_evaluator,
-            electrostatic_potential);
+    m_electric_field(electric_field, electrostatic_potential);
 }

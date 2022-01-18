@@ -179,6 +179,9 @@ using ViewSpVx = ChunkSpan<ElementType const, IDomainSpVx>;
 template <class ElementType>
 using ViewSpXVx = ChunkSpan<ElementType const, IDomainSpXVx>;
 
+template <class ElementType>
+using BSViewX = ChunkSpan<ElementType const, BSDomainX>;
+
 
 
 using DViewX = ViewX<double>;
@@ -190,3 +193,5 @@ using DViewSp = ViewSp<double>;
 using DViewSpVx = ViewSpVx<double>;
 
 using DViewSpXVx = ViewSpXVx<double>;
+
+using DBSViewX = BSViewX<double>;
