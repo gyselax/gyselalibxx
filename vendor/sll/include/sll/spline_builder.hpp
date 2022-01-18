@@ -368,7 +368,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
 
     init_discretization<interpolation_mesh_type>(interp_pts);
     m_interpolation_domain = std::make_unique<interpolation_domain_type>(
-            DiscreteCoordinate<NonUniformDiscretization<tag_type>>(interp_pts.size()));
+            DiscreteVector<NonUniformDiscretization<tag_type>>(interp_pts.size()));
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -13,6 +13,7 @@
 #include <ddc/NonUniformDiscretization>
 #include <ddc/UniformDiscretization>
 
+#include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
 #include <sll/null_boundary_value.hpp>
 #include <sll/spline_builder.hpp>
@@ -27,25 +28,29 @@
 template <class T>
 struct PeriodicSplineBuilderTestFixture;
 
-template <std::size_t D, class Evaluator>
-struct PeriodicSplineBuilderTestFixture<
-        std::tuple<std::integral_constant<std::size_t, D>, Evaluator>> : public testing::Test
+template <std::size_t D, class Evaluator, bool Uniform>
+struct PeriodicSplineBuilderTestFixture<std::tuple<
+        std::integral_constant<std::size_t, D>,
+        Evaluator,
+        std::integral_constant<bool, Uniform>>> : public testing::Test
 {
     struct DimX
     {
         static constexpr bool PERIODIC = true;
     };
     static constexpr std::size_t s_degree = D;
-    using IDimX = typename SplineBuilder<
-            UniformBSplines<DimX, D>,
-            BoundCond::PERIODIC,
-            BoundCond::PERIODIC>::interpolation_mesh_type;
+    using BSpline
+            = std::conditional_t<Uniform, UniformBSplines<DimX, D>, NonUniformBSplines<DimX, D>>;
+    using IDimX = typename SplineBuilder<BSpline, BoundCond::PERIODIC, BoundCond::PERIODIC>::
+            interpolation_mesh_type;
     using evaluator_type = typename Evaluator::template Evaluator<IDimX>;
 };
 
-using Cases = tuple_to_types_t<cartesian_product_t<
-        std::integer_sequence<std::size_t, 1, 2, 3, 4, 5, 6>,
-        std::tuple<CosineEvaluator>>>;
+using degrees = std::integer_sequence<std::size_t, 1, 2, 3, 4, 5, 6>;
+using evaluators = std::tuple<CosineEvaluator>;
+using is_uniform_types = std::tuple<std::true_type, std::false_type>;
+
+using Cases = tuple_to_types_t<cartesian_product_t<degrees, evaluators, is_uniform_types>>;
 
 TYPED_TEST_SUITE(PeriodicSplineBuilderTestFixture, Cases);
 
@@ -67,10 +72,11 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
     using DimX = typename TestFixture::DimX;
     using IDimX = typename TestFixture::IDimX;
     using IndexX = DiscreteCoordinate<IDimX>;
-    using BSplinesX = UniformBSplines<DimX, TestFixture::s_degree>;
+    using BSplinesX = typename TestFixture::BSpline;
     using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
     using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
     using CoordX = Coordinate<DimX>;
+    size_t constexpr D = TestFixture::s_degree;
 
     CoordX constexpr x0(0.);
     CoordX constexpr xN(1.);
@@ -78,7 +84,16 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
     IndexX constexpr npoints(ncells + 1);
 
     // 1. Create BSplines
-    init_discretization<BSplinesX>(x0, xN, npoints);
+    if constexpr (BSplinesX::is_uniform()) {
+        init_discretization<UniformBSplines<DimX, D>>(x0, xN, npoints);
+    } else {
+        std::vector<double> breaks(11);
+        double dx = (xN - x0) / 10;
+        for (int i(0); i < 11; ++i) {
+            breaks[i] = x0 + i * dx;
+        }
+        init_discretization<NonUniformBSplines<DimX, D>>(breaks);
+    }
     DiscreteDomain<BSplinesX> const dom_bsplines_x(
             DiscreteVector<BSplinesX>(discretization<BSplinesX>().size()));
 
