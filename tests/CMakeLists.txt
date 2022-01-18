@@ -5,6 +5,7 @@ include(GoogleTest)
 add_executable(unit_tests
     fft.cpp
     splitvlasovsolver.cpp
+    femperiodicpoissonsolver.cpp
 )
 target_compile_features(unit_tests PUBLIC cxx_std_17)
 target_link_libraries(unit_tests
@@ -17,6 +18,7 @@ target_link_libraries(unit_tests
         DDC::PDI
         vcx::fft
         vcx::vlasov
+	vcx::poisson
 )
 gtest_discover_tests(unit_tests)
 
