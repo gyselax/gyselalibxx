@@ -210,18 +210,18 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
     CoordX constexpr x0(0.);
     CoordX constexpr xN(1.);
     std::size_t constexpr ncells = 100;
-    IndexX constexpr npoints(ncells + 1);
 
     // 1. Create BSplines
     if constexpr (BSplinesX::is_uniform()) {
-        init_discretization<UniformBSplines<DimX, degree>>(x0, xN, npoints);
+        init_discretization<BSplinesX>(x0, xN, ncells);
     } else {
+        IndexX constexpr npoints(ncells + 1);
         std::vector<double> breaks(npoints);
         double dx = (xN - x0) / ncells;
         for (int i(0); i < npoints; ++i) {
             breaks[i] = x0 + i * dx;
         }
-        init_discretization<NonUniformBSplines<DimX, degree>>(breaks);
+        init_discretization<BSplinesX>(breaks);
     }
     DiscreteDomain<BSplinesX> const dom_bsplines_x(
             DiscreteVector<BSplinesX>(discretization<BSplinesX>().size()));
