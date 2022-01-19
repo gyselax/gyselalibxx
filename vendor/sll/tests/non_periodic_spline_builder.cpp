@@ -218,7 +218,7 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
         IndexX constexpr npoints(ncells + 1);
         std::vector<double> breaks(npoints);
         double dx = (xN - x0) / ncells;
-        for (int i(0); i < npoints; ++i) {
+        for (std::size_t i(0); i < npoints; ++i) {
             breaks[i] = x0 + i * dx;
         }
         init_discretization<BSplinesX>(breaks);
