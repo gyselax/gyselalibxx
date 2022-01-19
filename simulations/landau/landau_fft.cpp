@@ -20,6 +20,7 @@
 #include "fftw.hpp"
 #include "geometry.hpp"
 #include "ifftw.hpp"
+#include "paraconfpp.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
 #include "singlemodeperturbinitialization.hpp"
@@ -42,39 +43,16 @@ int main(int argc, char** argv)
         cerr << "usage: " << argv[0] << " <config_file.yml>" << endl;
         return EXIT_FAILURE;
     }
+    PC_errhandler(PC_NULL_HANDLER);
 
     // Reading config
     // --> Mesh info
-    CoordX const x_min = [&]() {
-        double x_min;
-        PC_double(PC_get(conf_voicexx, ".Mesh.x_min"), &x_min);
-        return CoordX(x_min);
-    }();
-    CoordX const x_max = [&]() {
-        double x_max;
-        PC_double(PC_get(conf_voicexx, ".Mesh.x_max"), &x_max);
-        return CoordX(x_max);
-    }();
-    IVectX const x_size = [&]() {
-        long x_size;
-        PC_int(PC_get(conf_voicexx, ".Mesh.x_size"), &x_size);
-        return IVectX(x_size);
-    }();
-    CoordVx const vx_min = [&]() {
-        double vx_min;
-        PC_double(PC_get(conf_voicexx, ".Mesh.vx_min"), &vx_min);
-        return CoordVx(vx_min);
-    }();
-    CoordVx const vx_max = [&]() {
-        double vx_max;
-        PC_double(PC_get(conf_voicexx, ".Mesh.vx_max"), &vx_max);
-        return CoordVx(vx_max);
-    }();
-    IVectVx const vx_size = [&]() {
-        long vx_size;
-        PC_int(PC_get(conf_voicexx, ".Mesh.vx_size"), &vx_size);
-        return IVectVx(vx_size);
-    }();
+    CoordX const x_min(PCpp_double(conf_voicexx, ".Mesh.x_min"));
+    CoordX const x_max(PCpp_double(conf_voicexx, ".Mesh.x_max"));
+    IVectX const x_size(PCpp_int(conf_voicexx, ".Mesh.x_size"));
+    CoordVx const vx_min(PCpp_double(conf_voicexx, ".Mesh.vx_min"));
+    CoordVx const vx_max(PCpp_double(conf_voicexx, ".Mesh.vx_max"));
+    IVectVx const vx_size(PCpp_int(conf_voicexx, ".Mesh.vx_size"));
 
     // Creating mesh & supports
     init_discretization<BSplinesX>(x_min, x_max, x_size);
@@ -85,11 +63,7 @@ int main(int argc, char** argv)
 
     SplineVxBuilder const builder_vx;
 
-    IVectSp const nb_kinspecies = [&]() {
-        int nb_kinspecies;
-        PC_len(PC_get(conf_voicexx,".SpeciesInfo"),&nb_kinspecies);
-        return IVectSp(nb_kinspecies);
-    }();
+    IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(nb_kinspecies);
 
     IDomainSpXVx const
@@ -104,45 +78,35 @@ int main(int argc, char** argv)
     DFieldSp init_perturb_amplitude(dom_kinsp);
     int nb_elec_adiabspecies = 1;
     int nb_ion_adiabspecies = 1;
-    
+
     for (IndexSp const isp : dom_kinsp) {
         // --> SpeciesInfo info
-        long charge;
-        PC_int(PC_get(conf_voicexx, ".SpeciesInfo[%d].charge",isp.value()), &charge);
-        kinetic_charges(isp) = charge;
-        if (charge == -1) {
+        std::cout << isp << std::endl;
+        PC_tree_t const conf_isp = PCpp_get(conf_voicexx, ".SpeciesInfo[%d]", isp.value());
+
+        kinetic_charges(isp) = static_cast<int>(PCpp_int(conf_isp, ".charge"));
+        if (kinetic_charges(isp) == -1) {
             nb_elec_adiabspecies = 0;
         } else {
             nb_ion_adiabspecies = 0;
         }
 
-        PC_double(PC_get(conf_voicexx, ".SpeciesInfo[%d].mass",isp.value()), &masses(isp));
-        PC_double(
-                PC_get(conf_voicexx, ".SpeciesInfo[%d].density_eq",isp.value()),
-                &density_eq(isp));
-        PC_double(
-                PC_get(conf_voicexx, ".SpeciesInfo[%d].temperature_eq",isp.value()),
-                &temperature_eq(isp));
-        PC_double(
-                PC_get(conf_voicexx, ".SpeciesInfo[%d].mean_velocity_eq",isp.value()),
-                &mean_velocity_eq(isp));
-        PC_double(
-                PC_get(conf_voicexx, ".SpeciesInfo[%d].perturb_amplitude",isp.value()),
-                &init_perturb_amplitude(isp));
-
-        long init_perturb_mode_sp;
-        PC_int(PC_get(conf_voicexx, ".SpeciesInfo[%d].perturb_mode",isp.value()), &init_perturb_mode_sp);
-        init_perturb_mode(isp) = init_perturb_mode_sp;
+        masses(isp) = PCpp_double(conf_isp, ".mass");
+        density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
+        temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
+        mean_velocity_eq(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
+        init_perturb_amplitude(isp) = PCpp_double(conf_isp, ".perturb_amplitude");
+        init_perturb_mode(isp) = static_cast<int>(PCpp_int(conf_isp, ".perturb_mode"));
     }
 
-    // Create the domain of all species including kinetic species + adiabatic species (if existing) 
-    IDomainSp const dom_allsp(nb_kinspecies+nb_elec_adiabspecies+nb_ion_adiabspecies);
+    // Create the domain of all species including kinetic species + adiabatic species (if existing)
+    IDomainSp const dom_allsp(nb_kinspecies + nb_elec_adiabspecies + nb_ion_adiabspecies);
     FieldSp<int> charges(dom_allsp);
     for (IndexSp isp : dom_kinsp) {
         charges(isp) = kinetic_charges(isp);
     }
-    if (nb_elec_adiabspecies+nb_ion_adiabspecies>0){
-        charges(dom_kinsp.back()+1) = nb_ion_adiabspecies-nb_elec_adiabspecies;
+    if (nb_elec_adiabspecies + nb_ion_adiabspecies > 0) {
+        charges(dom_kinsp.back() + 1) = nb_ion_adiabspecies - nb_elec_adiabspecies;
     }
 
     // Initialization of the distribution function
@@ -156,18 +120,15 @@ int main(int argc, char** argv)
             std::move(init_perturb_mode),
             mesh);
     DFieldSpXVx allfdistribu(mesh);
-    SingleModePerturbInitialization const 
-        init(species_info, species_info.perturb_mode(), species_info.perturb_amplitude());
+    SingleModePerturbInitialization const
+            init(species_info, species_info.perturb_mode(), species_info.perturb_amplitude());
 
     // --> Algorithm info
-    double deltat;
-    PC_double(PC_get(conf_voicexx, ".Algorithm.deltat"), &deltat);
-    long nbiter;
-    PC_int(PC_get(conf_voicexx, ".Algorithm.nbiter"), &nbiter);
+    double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
+    int const nbiter = static_cast<int>(PCpp_int(conf_voicexx, ".Algorithm.nbiter"));
 
     // --> Output info
-    double time_diag;
-    PC_double(PC_get(conf_voicexx, ".Output.time_diag"), &time_diag);
+    double const time_diag = PCpp_double(conf_voicexx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
 
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
@@ -181,7 +142,7 @@ int main(int argc, char** argv)
     PreallocatableSplineInterpolatorX const spline_x_interpolator(builder_x, spline_x_evaluator);
 
     SplineEvaluator<BSplinesVx> const
-        spline_vx_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
+            spline_vx_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
 
     PreallocatableSplineInterpolatorVx const
             spline_vx_interpolator(builder_vx, spline_vx_evaluator);

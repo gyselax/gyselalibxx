@@ -13,8 +13,10 @@ target_link_libraries(landau_fft
         vcx::time
         vcx::speciesinfo
         vcx::vlasov
+        vcx::paraconfpp
         FFTW::Double
         PDI::pdi
+        paraconf::paraconf
         sll::splines
 )
 
@@ -32,7 +34,9 @@ target_link_libraries(landau_fem_periodic
         vcx::time
         vcx::speciesinfo
         vcx::vlasov
+        vcx::paraconfpp
         FFTW::Double
         PDI::pdi
+        paraconf::paraconf
         sll::splines
 )
