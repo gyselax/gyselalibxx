@@ -1,4 +1,6 @@
-Mesh:
+#pragma once
+
+constexpr char const* const params_yaml = R"PDI_CFG(Mesh:
   x_min: 0.0
   x_max: 12.56637061435917
   x_size: 128
@@ -21,3 +23,4 @@ Algorithm:
 
 Output:
   time_diag: 0.25
+)PDI_CFG";

@@ -2,7 +2,9 @@
 #include <cmath>
 #include <cstdlib>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
+#include <string_view>
 
 #include <ddc/DiscreteCoordinate>
 #include <ddc/DiscreteDomain>
@@ -19,6 +21,7 @@
 #include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
+#include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
 #include "singlemodeperturbinitialization.hpp"
@@ -35,10 +38,16 @@ namespace fs = std::filesystem;
 int main(int argc, char** argv)
 {
     PC_tree_t conf_voicexx;
-    if (argc > 1) {
+    if (argc == 2) {
         conf_voicexx = PC_parse_path(fs::path(argv[1]).c_str());
+    } else if (argc == 3) {
+        if (argv[1] == std::string_view("--dump-config")) {
+            std::fstream file(argv[2], std::fstream::out);
+            file << params_yaml;
+            return EXIT_SUCCESS;
+        }
     } else {
-        cerr << "usage: " << argv[0] << " <config_file.yml>" << endl;
+        cerr << "usage: " << argv[0] << " [--dump-config] <config_file.yml>" << endl;
         return EXIT_FAILURE;
     }
     PC_errhandler(PC_NULL_HANDLER);
