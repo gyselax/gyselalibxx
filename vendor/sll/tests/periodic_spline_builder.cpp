@@ -81,12 +81,12 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
     CoordX constexpr x0(0.);
     CoordX constexpr xN(1.);
     std::size_t constexpr ncells = 100;
-    IndexX constexpr npoints(ncells + 1);
 
     // 1. Create BSplines
     if constexpr (BSplinesX::is_uniform()) {
-        init_discretization<UniformBSplines<DimX, D>>(x0, xN, npoints);
+        init_discretization<UniformBSplines<DimX, D>>(x0, xN, ncells);
     } else {
+        IndexX constexpr npoints(ncells + 1);
         std::vector<double> breaks(npoints);
         double dx = (xN - x0) / ncells;
         for (std::size_t i(0); i < npoints; ++i) {
