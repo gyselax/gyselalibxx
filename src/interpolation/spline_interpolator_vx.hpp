@@ -15,13 +15,13 @@ private:
 
     mutable Chunk<double, BSDomainVx> m_coefs;
 
-    std::vector<double> m_derivs_xmin_alloc;
+    std::vector<double> m_derivs_vxmin_alloc;
 
-    Span1D<double> m_derivs_xmin;
+    Span1D<double> m_derivs_vxmin;
 
-    std::vector<double> m_derivs_xmax_alloc;
+    std::vector<double> m_derivs_vxmax_alloc;
 
-    Span1D<double> m_derivs_xmax;
+    Span1D<double> m_derivs_vxmax;
 
 public:
     SplineInterpolatorVx(

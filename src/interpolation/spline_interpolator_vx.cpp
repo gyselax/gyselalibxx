@@ -10,16 +10,16 @@ SplineInterpolatorVx::SplineInterpolatorVx(
     : m_builder(builder)
     , m_evaluator(evaluator)
     , m_coefs(builder.spline_domain())
-    , m_derivs_xmin_alloc(BSplinesVx::degree() / 2, 0.)
-    , m_derivs_xmin(m_derivs_xmin_alloc.data(), m_derivs_xmin_alloc.size())
-    , m_derivs_xmax_alloc(BSplinesVx::degree() / 2, 0.)
-    , m_derivs_xmax(m_derivs_xmax_alloc.data(), m_derivs_xmax_alloc.size())
+    , m_derivs_vxmin_alloc(BSplinesVx::degree() / 2, 0.)
+    , m_derivs_vxmin(m_derivs_vxmin_alloc.data(), m_derivs_vxmin_alloc.size())
+    , m_derivs_vxmax_alloc(BSplinesVx::degree() / 2, 0.)
+    , m_derivs_vxmax(m_derivs_vxmax_alloc.data(), m_derivs_vxmax_alloc.size())
 {
 }
 
 DSpanVx SplineInterpolatorVx::operator()(DSpanVx const inout_data, DViewVx const coordinates) const
 {
-    m_builder(m_coefs, inout_data, &m_derivs_xmin, &m_derivs_xmax);
+    m_builder(m_coefs, inout_data, &m_derivs_vxmin, &m_derivs_vxmax);
     m_evaluator(inout_data, coordinates, m_coefs);
     return inout_data;
 }
