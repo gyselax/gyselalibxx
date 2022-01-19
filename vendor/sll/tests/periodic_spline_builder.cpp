@@ -84,7 +84,7 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
 
     // 1. Create BSplines
     if constexpr (BSplinesX::is_uniform()) {
-        init_discretization<UniformBSplines<DimX, D>>(x0, xN, ncells);
+        init_discretization<BSplinesX>(x0, xN, ncells);
     } else {
         IndexX constexpr npoints(ncells + 1);
         std::vector<double> breaks(npoints);
@@ -92,7 +92,7 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
         for (std::size_t i(0); i < npoints; ++i) {
             breaks[i] = x0 + i * dx;
         }
-        init_discretization<NonUniformBSplines<DimX, D>>(breaks);
+        init_discretization<BSplinesX>(breaks);
     }
     DiscreteDomain<BSplinesX> const dom_bsplines_x(
             DiscreteVector<BSplinesX>(discretization<BSplinesX>().size()));
