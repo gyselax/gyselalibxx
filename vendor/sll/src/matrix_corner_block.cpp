@@ -121,7 +121,7 @@ DSpan2D Matrix_Corner_Block::solve_lambda_section(DSpan2D const v, DView2D const
     for (int i = 0; i < k; ++i) {
         // Upper diagonals in lambda
         for (int j = 0; j < nb; ++j) {
-            for (int col = 0; col < v.extent(1); ++col) {
+            for (std::size_t col = 0; col < v.extent(1); ++col) {
                 v(i, col) -= lambda(j, i) * u(j, col);
             }
         }
@@ -195,7 +195,7 @@ DSpan2D Matrix_Corner_Block::solve_inplace_matrix(DSpan2D const bx) const
 
     delta.solve_inplace_matrix(v);
 
-    for (int col = 0; col < bx.extent(1); ++col) {
+    for (std::size_t col = 0; col < bx.extent(1); ++col) {
         for (int i = 0; i < nb; ++i) {
             double val = 0.;
             for (int j = 0; j < k; ++j) {

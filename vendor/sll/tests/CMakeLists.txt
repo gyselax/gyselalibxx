@@ -23,3 +23,15 @@ target_link_libraries(splines_tests
         sll::splines
 )
 gtest_discover_tests(splines_tests)
+
+add_executable(bsplines_tests
+	bsplines.cpp
+)
+target_compile_features(bsplines_tests PUBLIC cxx_std_17)
+target_link_libraries(bsplines_tests
+    PUBLIC
+        GTest::gtest_main
+        sll::splines
+)
+
+gtest_discover_tests(bsplines_tests)

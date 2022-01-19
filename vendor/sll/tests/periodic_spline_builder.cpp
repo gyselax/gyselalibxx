@@ -87,9 +87,9 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
     if constexpr (BSplinesX::is_uniform()) {
         init_discretization<UniformBSplines<DimX, D>>(x0, xN, npoints);
     } else {
-        std::vector<double> breaks(11);
-        double dx = (xN - x0) / 10;
-        for (int i(0); i < 11; ++i) {
+        std::vector<double> breaks(npoints);
+        double dx = (xN - x0) / ncells;
+        for (std::size_t i(0); i < npoints; ++i) {
             breaks[i] = x0 + i * dx;
         }
         init_discretization<NonUniformBSplines<DimX, D>>(breaks);

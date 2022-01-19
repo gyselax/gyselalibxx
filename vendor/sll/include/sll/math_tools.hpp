@@ -23,7 +23,7 @@ inline ElementType sum(std::experimental::mdspan<
                        AccessorPolicy> const& array)
 {
     ElementType val(0.0);
-    for (int i(0); i < array.extent(0); ++i) {
+    for (std::size_t i(0); i < array.extent(0); ++i) {
         val += array[i];
     }
     return val;
