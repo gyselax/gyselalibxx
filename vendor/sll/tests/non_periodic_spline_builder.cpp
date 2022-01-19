@@ -205,7 +205,7 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
     using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
     using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
     using CoordX = Coordinate<DimX>;
-    size_t constexpr degree = TestFixture::s_degree;
+    std::size_t constexpr degree = TestFixture::s_degree;
 
     CoordX constexpr x0(0.);
     CoordX constexpr xN(1.);
