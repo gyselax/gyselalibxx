@@ -6,7 +6,8 @@ add_test(NAME TestLandauFFT
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau.sh"
         "${PROJECT_SOURCE_DIR}"
         "$<TARGET_FILE:landau_fft>"
-        "$<TARGET_FILE:Python3::Interpreter>")
+        "$<TARGET_FILE:Python3::Interpreter>"
+        "fft")
 set_property(TEST TestLandauFFT PROPERTY TIMEOUT 200)
 set_property(TEST TestLandauFFT PROPERTY LABELS test_on_Release_only)
 
@@ -14,6 +15,7 @@ add_test(NAME TestLandauFEM
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau.sh"
         "${PROJECT_SOURCE_DIR}"
         "$<TARGET_FILE:landau_fem_periodic>"
-        "$<TARGET_FILE:Python3::Interpreter>")
+        "$<TARGET_FILE:Python3::Interpreter>"
+        "fem")
 set_property(TEST TestLandauFEM PROPERTY TIMEOUT 200)
 set_property(TEST TestLandauFEM PROPERTY LABELS test_on_Release_only)
