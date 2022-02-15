@@ -15,6 +15,7 @@ target_link_libraries(fft
     INTERFACE
         DDC::DDC
         vcx::geometry
+        FFTW::Double
 )
 
 

@@ -48,9 +48,14 @@ void SingleModePerturbInitialization::perturbation_initialization(
         int const mode,
         double const perturb_amplitude) const
 {
-    static_assert(RDimX::PERIODIC, "this computation for Lx is only valid for X periodic");
     IDomainX const gridx = perturbation.domain();
-    double const Lx = fabs(step<IDimX>() + rlength(gridx));
+#if defined(ENABLE_PERIODIC_RDIMX)
+#if ENABLE_PERIODIC_RDIMX
+    double const Lx = fabs(rlength(gridx) + step<IDimX>());
+#else
+    double const Lx = fabs(rlength(gridx));
+#endif
+#endif
     double const kx = mode * 2. * M_PI / Lx;
     for (IndexX const ix : gridx) {
         CoordX const x = to_real(ix);

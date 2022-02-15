@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are re
 # List of options
 option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
 option(VOICEXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
+option(VOICEXX_ENABLE_PERIODIC_RDIMX "Enable the X periodic dimension" ON)
 set(VOICEXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Voice++")
 
 # Our dependencies
@@ -65,6 +66,3 @@ add_subdirectory(simulations/landau)
 if("${BUILD_TESTING}")
     add_subdirectory(tests/)
 endif()
-
-install(TARGETS landau_fft)
-install(TARGETS landau_fem_periodic)

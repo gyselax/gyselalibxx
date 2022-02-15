@@ -19,7 +19,13 @@ struct Fourier
 
 struct RDimX
 {
+#if defined(ENABLE_PERIODIC_RDIMX)
+#if ENABLE_PERIODIC_RDIMX
     static bool constexpr PERIODIC = true;
+#else
+    static bool constexpr PERIODIC = false;
+#endif
+#endif
 };
 
 struct RDimVx
@@ -32,8 +38,6 @@ struct RDimT
     static bool constexpr PERIODIC = false;
 };
 
-using RDimFx = Fourier<RDimX>;
-
 
 
 using CoordT = Coordinate<RDimT>;
@@ -44,21 +48,24 @@ using CoordVx = Coordinate<RDimVx>;
 
 using CoordXVx = Coordinate<RDimX, RDimVx>;
 
-using CoordFx = Coordinate<RDimFx>;
+int constexpr BSDegreeX = 3;
+int constexpr BSDegreeVx = 3;
 
+using BSplinesX = UniformBSplines<RDimX, BSDegreeX>;
 
+using BSplinesVx = UniformBSplines<RDimVx, BSDegreeVx>;
 
-using BSplinesX = UniformBSplines<RDimX, 3>;
-
-using BSplinesVx = UniformBSplines<RDimVx, 3>;
-
+#if defined(ENABLE_PERIODIC_RDIMX)
+#if ENABLE_PERIODIC_RDIMX
 using SplineXBuilder = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+#else
+using SplineXBuilder = SplineBuilder<BSplinesX, BoundCond::GREVILLE, BoundCond::GREVILLE>;
+#endif
+#endif
 using IDimX = typename SplineXBuilder::interpolation_mesh_type;
 
 using SplineVxBuilder = SplineBuilder<BSplinesVx, BoundCond::HERMITE, BoundCond::HERMITE>;
 using IDimVx = typename SplineVxBuilder::interpolation_mesh_type;
-
-using IDimFx = NonUniformDiscretization<RDimFx>;
 
 // Species dimension
 class IDimSp;
@@ -74,8 +81,6 @@ using IndexXVx = DiscreteCoordinate<IDimX, IDimVx>;
 
 using IndexSpXVx = DiscreteCoordinate<IDimSp, IDimX, IDimVx>;
 
-using IndexFx = DiscreteCoordinate<IDimFx>;
-
 
 
 using IVectX = DiscreteVector<IDimX>;
@@ -85,8 +90,6 @@ using IVectVx = DiscreteVector<IDimVx>;
 using IVectXVx = DiscreteVector<IDimX, IDimVx>;
 
 using IVectSpXVx = DiscreteVector<IDimSp, IDimX, IDimVx>;
-
-using IVectFx = DiscreteVector<IDimFx>;
 
 using IVectSp = DiscreteVector<IDimSp>;
 
@@ -107,8 +110,6 @@ using IDomainSp = DiscreteDomain<IDimSp>;
 using IDomainSpVx = DiscreteDomain<IDimSp, IDimVx>;
 
 using IDomainSpXVx = DiscreteDomain<IDimSp, IDimX, IDimVx>;
-
-using IDomainFx = DiscreteDomain<IDimFx>;
 
 
 
@@ -195,3 +196,16 @@ using DViewSpVx = ViewSpVx<double>;
 using DViewSpXVx = ViewSpXVx<double>;
 
 using DBSViewX = BSViewX<double>;
+
+
+
+#if defined(ENABLE_PERIODIC_RDIMX)
+#if ENABLE_PERIODIC_RDIMX
+using RDimFx = Fourier<RDimX>;
+using CoordFx = Coordinate<RDimFx>;
+using IDimFx = NonUniformDiscretization<RDimFx>;
+using IndexFx = DiscreteCoordinate<IDimFx>;
+using IVectFx = DiscreteVector<IDimFx>;
+using IDomainFx = DiscreteDomain<IDimFx>;
+#endif
+#endif

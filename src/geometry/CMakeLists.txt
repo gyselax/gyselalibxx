@@ -9,4 +9,11 @@ target_link_libraries(geometry INTERFACE
     DDC::DDC
     sll::splines
 )
+
+if(VOICEXX_ENABLE_PERIODIC_RDIMX)
+    target_compile_definitions(geometry INTERFACE -DENABLE_PERIODIC_RDIMX=1)
+else()
+    target_compile_definitions(geometry INTERFACE -DENABLE_PERIODIC_RDIMX=0)
+endif()
+
 add_library(vcx::geometry ALIAS geometry)

@@ -2,8 +2,6 @@ add_library(poisson STATIC
     chargedensitycalculator.cpp
     electricfield.cpp
     nullpoissonsolver.cpp
-    fftpoissonsolver.cpp
-    femperiodicpoissonsolver.cpp
 )
 
 target_compile_features(poisson
@@ -20,8 +18,23 @@ target_link_libraries(poisson
         DDC::DDC
         sll::splines
         vcx::speciesinfo
-        vcx::fft
         vcx::geometry
 )
+
+if(VOICEXX_ENABLE_PERIODIC_RDIMX)
+    target_sources(poisson
+        PRIVATE
+            fftpoissonsolver.cpp
+            femperiodicpoissonsolver.cpp
+    )
+    target_link_libraries(poisson
+        PUBLIC
+            vcx::fft)
+else()
+    target_sources(poisson
+        PRIVATE
+            femnonperiodicpoissonsolver.cpp
+    )
+endif()
 
 add_library(vcx::poisson ALIAS poisson)
