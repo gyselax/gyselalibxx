@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cd "$(dirname "$0")"
+cd ..
+
+rm -rf vendor/ddc
+git clone --depth 1 https://github.com/Maison-de-la-Simulation/ddc.git vendor/ddc
+DDC_REF="$(git -C vendor/ddc rev-parse --short HEAD)"
+rm -rf vendor/ddc/.git
+git add -A vendor/ddc
+if [ "x$1" = "x--push" ]
+then
+	git commit -m "Sync DDC version ${DDC_REF}"
+	git push
+fi
