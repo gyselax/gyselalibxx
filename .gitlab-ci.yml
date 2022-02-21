@@ -64,3 +64,11 @@ indentation:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
     ./bin/indent -td
+ddc_sync:
+  only: [ triggers ]
+  needs: []
+  image: jbigot/voicexx_env
+  script: |
+    git config user.email "${GITLAB_USER_EMAIL}"
+    git config user.name "${GITLAB_USER_NAME}"
+    ./bin/ddc_sync --push
