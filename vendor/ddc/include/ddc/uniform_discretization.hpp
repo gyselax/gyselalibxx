@@ -125,6 +125,18 @@ Coordinate<CDim> to_real(DiscreteCoordinate<UniformDiscretization<CDim>> const& 
 }
 
 template <class CDim>
+Coordinate<CDim> distance_at_left(DiscreteCoordinate<UniformDiscretization<CDim>> i)
+{
+    return discretization<UniformDiscretization<CDim>>().step();
+}
+
+template <class CDim>
+Coordinate<CDim> distance_at_right(DiscreteCoordinate<UniformDiscretization<CDim>> i)
+{
+    return discretization<UniformDiscretization<CDim>>().step();
+}
+
+template <class CDim>
 Coordinate<CDim> rmin(DiscreteDomain<UniformDiscretization<CDim>> const& d)
 {
     return to_real(d.front());

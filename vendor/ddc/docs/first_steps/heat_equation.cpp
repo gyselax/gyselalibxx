@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include <ddc/Chunk>
 #include <ddc/DiscreteCoordinate>
 #include <ddc/DiscreteDomain>
@@ -18,6 +20,7 @@ static unsigned ny = 200;
 static unsigned gw = 1;
 static double kx = 100.;
 static double ky = 1.;
+static double cfl = 0.99;
 
 constexpr char const* const PDI_CFG = R"PDI_CFG(
 metadata:
@@ -107,10 +110,16 @@ int main()
     PDI_init(PC_parse_string(PDI_CFG));
     PDI_expose("ghostwidth", &gw, PDI_OUT);
 
-    double const cfl = 0.99;
-    double const dt = 0.5 * cfl / (kx / (dx * dx) + ky / (dy * dy));
-    double const Cx = kx * dt / (dx * dx);
-    double const Cy = ky * dt / (dy * dy);
+    // Some heuristic for the time step
+    double invdx2_max = 0.0;
+    for (auto ix : select<DDimX>(inner_xy)) {
+        invdx2_max = std::fmax(invdx2_max, 1.0 / (distance_at_left(ix) * distance_at_right(ix)));
+    }
+    double invdy2_max = 0.0;
+    for (auto iy : select<DDimY>(inner_xy)) {
+        invdy2_max = std::fmax(invdy2_max, 1.0 / (distance_at_left(iy) * distance_at_right(iy)));
+    }
+    double const dt = 0.5 * cfl / (kx * invdx2_max + ky * invdy2_max);
     std::size_t iter = 0;
     for (; iter < nt; ++iter) {
         //! [io/pdi]
@@ -128,9 +137,21 @@ int main()
         for_each(inner_xy, [&](DiscreteCoordinate<DDimX, DDimY> const ixy) {
             DiscreteCoordinate<DDimX> const ix = select<DDimX>(ixy);
             DiscreteCoordinate<DDimY> const iy = select<DDimY>(ixy);
+            double const dx_l = distance_at_left(ix);
+            double const dx_r = distance_at_right(ix);
+            double const dx_m = 0.5 * (dx_l + dx_r);
+            double const dy_l = distance_at_left(iy);
+            double const dy_r = distance_at_right(iy);
+            double const dy_m = 0.5 * (dy_l + dy_r);
             T_out(ix, iy) = T_in(ix, iy);
-            T_out(ix, iy) += Cx * (T_in(ix + 1, iy) - 2.0 * T_in(ix, iy) + T_in(ix - 1, iy));
-            T_out(ix, iy) += Cy * (T_in(ix, iy + 1) - 2.0 * T_in(ix, iy) + T_in(ix, iy - 1));
+            T_out(ix, iy) += kx * dt
+                             * (dx_l * T_in(ix + 1, iy) - 2.0 * dx_m * T_in(ix, iy)
+                                + dx_r * T_in(ix - 1, iy))
+                             / (dx_l * dx_m * dx_r);
+            T_out(ix, iy) += ky * dt
+                             * (dy_l * T_in(ix, iy + 1) - 2.0 * dy_m * T_in(ix, iy)
+                                + dy_r * T_in(ix, iy - 1))
+                             / (dy_l * dy_m * dy_r);
         });
         //! [numerical scheme]
 

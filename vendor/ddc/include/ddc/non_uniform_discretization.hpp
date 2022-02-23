@@ -94,6 +94,18 @@ Coordinate<CDim> to_real(DiscreteCoordinate<NonUniformDiscretization<CDim>> cons
 }
 
 template <class CDim>
+Coordinate<CDim> distance_at_left(DiscreteCoordinate<NonUniformDiscretization<CDim>> i)
+{
+    return to_real(i) - to_real(i - 1);
+}
+
+template <class CDim>
+Coordinate<CDim> distance_at_right(DiscreteCoordinate<NonUniformDiscretization<CDim>> i)
+{
+    return to_real(i + 1) - to_real(i);
+}
+
+template <class CDim>
 Coordinate<CDim> rmin(DiscreteDomain<NonUniformDiscretization<CDim>> const& d)
 {
     return to_real(d.front());
