@@ -1,3 +1,5 @@
+#include <ddc/for_each>
+
 #include <sll/gauss_legendre_integration.hpp>
 #include <sll/matrix.hpp>
 
@@ -179,8 +181,8 @@ void FemNonPeriodicPoissonSolver::operator()(
     solve_matrix_system(phi_spline_coef, rho_spline_coef);
 
     //
-    for (IndexX const ix : dom_x) {
+    for_each(dom_x, [&](IndexX const ix) {
         electrostatic_potential(ix) = m_spline_x_nu_evaluator(to_real(ix), phi_spline_coef);
         electric_field(ix) = -m_spline_x_nu_evaluator.deriv(to_real(ix), phi_spline_coef);
-    }
+    });
 }

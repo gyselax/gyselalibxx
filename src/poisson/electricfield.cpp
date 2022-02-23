@@ -1,3 +1,5 @@
+#include <ddc/for_each>
+
 #include <sll/gauss_legendre_integration.hpp>
 #include <sll/spline_evaluator.hpp>
 
@@ -19,9 +21,9 @@ DSpanX ElectricField::operator()(DSpanX electric_field, DBSViewX const electrost
         const
 {
     IDomainX const& x_dom = electric_field.domain();
-    for (IndexX const ix : x_dom) {
+    for_each(x_dom, [&](IndexX const ix) {
         electric_field(ix) = -m_spline_x_evaluator.deriv(to_real(ix), electrostatic_potential);
-    }
+    });
     return electric_field;
 }
 

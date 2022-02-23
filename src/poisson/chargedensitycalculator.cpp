@@ -1,3 +1,5 @@
+#include <ddc/for_each>
+
 #include <species_info.hpp>
 
 #include "chargedensitycalculator.hpp"
@@ -28,9 +30,9 @@ void ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const allf
         chargedens_adiabspecies = double(m_species_info.charge()(last_species));
     }
 
-    for (IndexX ix : rho.domain()) {
+    for_each(rho.domain(), [&](IndexX const ix) {
         rho(ix) = chargedens_adiabspecies;
-        for (IndexSp const isp : get_domain<IDimSp>(allfdistribu)) {
+        for_each(get_domain<IDimSp>(allfdistribu), [&](IndexSp const isp) {
             deepcopy(f_vx_slice, allfdistribu[isp][ix]);
             m_spline_vx_builder(
                     vx_spline_coef.span_view(),
@@ -39,6 +41,6 @@ void ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const allf
                     &m_derivs_vxmax);
             rho(ix) += m_species_info.charge()(isp)
                        * m_spline_vx_evaluator.integrate(vx_spline_coef.span_cview());
-        }
-    }
+        });
+    });
 }

@@ -7,6 +7,7 @@
 #include <ddc/Coordinate>
 #include <ddc/DiscreteDomain>
 #include <ddc/discretization>
+#include <ddc/for_each>
 
 #include <sll/null_boundary_value.hpp>
 #include <sll/spline_evaluator.hpp>
@@ -48,24 +49,22 @@ DSpanSpXVx BslAdvectionVx::operator()(
 
     InterpolatorVxProxy const interpolator_vx = m_interpolator_vx.preallocate();
 
-    for (IndexSp const isp : sp_dom) {
+    for_each(sp_dom, [&](IndexSp const isp) {
         double const sqrt_me_on_mspecies = std::sqrt(
                 m_species_info.mass()(m_species_info.ielec()) / m_species_info.mass()(isp));
 
-        for (IndexX const ix : x_dom) {
+        for_each(x_dom, [&](IndexX const ix) {
             // compute the displacement
             double const dvx
                     = m_species_info.charge()(isp) * sqrt_me_on_mspecies * dt * electric_field(ix);
 
             // compute the coordinates of the feet
-            for (IndexVx const iv : vx_dom) {
-                feet_coords(iv) = to_real(iv) - dvx;
-            }
+            for_each(vx_dom, [&](IndexVx const iv) { feet_coords(iv) = to_real(iv) - dvx; });
 
             // build a spline representation of the data
             interpolator_vx(allfdistribu[isp][ix], feet_coords);
-        }
-    }
+        });
+    });
 
     return allfdistribu;
 }

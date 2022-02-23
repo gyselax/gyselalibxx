@@ -1,4 +1,5 @@
 #include <ddc/discretization>
+#include <ddc/for_each>
 
 #include "singlemodeperturbinitialization.hpp"
 
@@ -20,26 +21,26 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
 
     // Initialization of the perturbation
     DFieldX perturbation(gridx);
-    for (IndexSp const isp : gridsp) {
+    for_each(gridsp, [&](IndexSp const isp) {
         perturbation_initialization(
                 perturbation,
                 m_init_perturb_mode(isp),
                 m_init_perturb_amplitude(isp));
 
         // Initialization of the distribution function --> fill values
-        for (IndexSp const isp : gridsp) {
-            for (IndexX const ix : gridx) {
-                for (IndexVx const iv : gridvx) {
+        for_each(gridsp, [&](IndexSp const isp) {
+            for_each(gridx, [&](IndexX const ix) {
+                for_each(gridvx, [&](IndexVx const iv) {
                     double fdistribu_val
                             = m_species_info.maxw_values()(isp, iv) * (1. + perturbation(ix));
                     if (fdistribu_val < 1.e-60) {
                         fdistribu_val = 1.e-60;
                     }
                     allfdistribu(isp, ix, iv) = fdistribu_val;
-                }
-            }
-        }
-    }
+                });
+            });
+        });
+    });
     return allfdistribu;
 }
 

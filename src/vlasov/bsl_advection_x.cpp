@@ -1,6 +1,7 @@
 #include <cassert>
 
 #include <ddc/discretization>
+#include <ddc/for_each>
 
 #include <species_info.hpp>
 
@@ -28,18 +29,16 @@ DSpanSpXVx BslAdvectionX::operator()(DSpanSpXVx const allfdistribu, double const
     DFieldX contiguous_slice(x_dom);
     InterpolatorXProxy const interpolator = m_interpolator.preallocate();
 
-    for (IndexSp const isp : sp_dom) {
+    for_each(sp_dom, [&](IndexSp const isp) {
         double const sqrt_me_on_mspecies = std::sqrt(
                 m_species_info.mass()(m_species_info.ielec()) / m_species_info.mass()(isp));
 
-        for (IndexVx const iv : v_dom) {
+        for_each(v_dom, [&](IndexVx const iv) {
             // compute the displacement
             double const dx = sqrt_me_on_mspecies * dt * to_real(iv);
 
             // compute the coordinates of the feet
-            for (IndexX const ix : x_dom) {
-                feet_coords(ix) = to_real(ix) - dx;
-            }
+            for_each(x_dom, [&](IndexX const ix) { feet_coords(ix) = to_real(ix) - dx; });
 
             // copy the slice in contiguous memory
             deepcopy(contiguous_slice, allfdistribu[isp][iv]);
@@ -49,7 +48,8 @@ DSpanSpXVx BslAdvectionX::operator()(DSpanSpXVx const allfdistribu, double const
 
             // copy back
             deepcopy(allfdistribu[isp][iv], contiguous_slice);
-        }
-    }
+        });
+    });
+
     return allfdistribu;
 }
