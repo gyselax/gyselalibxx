@@ -85,10 +85,9 @@ int main(int argc, char** argv)
     DFieldSp init_perturb_amplitude(dom_kinsp);
     int nb_elec_adiabspecies = 1;
     int nb_ion_adiabspecies = 1;
-    
+
     for (IndexSp const isp : dom_kinsp) {
         // --> SpeciesInfo info
-        std::cout << isp << std::endl;
         PC_tree_t const conf_isp = PCpp_get(conf_voicexx, ".SpeciesInfo[%d]", isp.value());
 
         kinetic_charges(isp) = static_cast<int>(PCpp_int(conf_isp, ".charge"));
