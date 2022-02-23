@@ -9,8 +9,12 @@ git clone --depth 1 https://github.com/Maison-de-la-Simulation/ddc.git vendor/dd
 DDC_REF="$(git -C vendor/ddc rev-parse --short HEAD)"
 rm -rf vendor/ddc/.git
 git add -A vendor/ddc
-if [ "x$1" = "x--push" -a -n "$(git status --porcelain)" ]
+if [ ( "x$1" = "x--push" -o  "x$1" = "x--commit )" -a -n "$(git status --porcelain)" ]
 then
 	git commit -m "Sync DDC version ${DDC_REF}"
+fi
+
+if [ "x$1" = "x--push" ]
+then
 	git push origin main
 fi

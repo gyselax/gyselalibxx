@@ -73,4 +73,5 @@ ddc_sync:
   - git config user.email "${GITLAB_USER_EMAIL}"
   - git config user.name "${GITLAB_USER_NAME}"
   - git checkout "${CI_COMMIT_BRANCH}"
-  - ./bin/ddc_sync --push
+  - ./bin/ddc_sync --commit
+  - git push http://root:$ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git HEAD:master
