@@ -16,5 +16,5 @@ fi
 
 if [ "x$1" = "x--push" ]
 then
-	git push origin main
+	git push
 fi

@@ -69,9 +69,8 @@ ddc_sync:
   needs: []
   image: jbigot/voicexx_env
   script:
-  - export GIT_SSH_COMMAND="ssh -o IdentityFile=${SELF_COMMIT_PRIV}"
   - git config user.email "${GITLAB_USER_EMAIL}"
   - git config user.name "${GITLAB_USER_NAME}"
   - git checkout "${CI_COMMIT_BRANCH}"
   - ./bin/ddc_sync --commit
-  - git push http://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git HEAD:main
+  - git push "http://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" "HEAD:${CI_COMMIT_BRANCH}"
