@@ -16,6 +16,17 @@ metadata:
     type: array
     subtype: double
     size: [ '$MeshVx_extents[0]' ]
+  Nkinspecies: int
+  fdistribu_charges_extents : { type: array, subtype: int64, size: 1 }
+  fdistribu_charges:
+    type: array
+    subtype: int
+    size: [ '$fdistribu_charges_extents[0]' ]
+  fdistribu_masses_extents : { type: array, subtype: int64, size: 1 }
+  fdistribu_masses:
+    type: array
+    subtype: double
+    size: [ '$fdistribu_masses_extents[0]' ]
 
 data:
   fdistribu_extents: { type: array, subtype: int64, size: 3 }
@@ -44,11 +55,11 @@ plugins:
     - file: 'VOICEXX_initstate.h5'
       on_event: [initial_state]
       collision_policy: replace_and_warn
-      write: [Nx, Nvx, MeshX, MeshVx, nbstep_diag ]
+      write: [Nx, Nvx, MeshX, MeshVx, nbstep_diag, Nkinspecies,fdistribu_charges,fdistribu_masses]
     - file: 'VOICEXX_${iter_saved:05}.h5'
       on_event: [iteration, last_iteration]
       when: '${iter} % ${nbstep_diag} = 0'
       collision_policy: replace_and_warn
-      write: [time_saved, fdistribu, electrostatic_potential ]
+      write: [time_saved, fdistribu, electrostatic_potential]
   #trace: ~
 )PDI_CFG";

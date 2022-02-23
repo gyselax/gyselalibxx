@@ -188,6 +188,9 @@ int main(int argc, char** argv)
     expose_to_pdi("MeshX", meshX_coord);
     expose_to_pdi("MeshVx", meshVx_coord);
     expose_to_pdi("nbstep_diag", nbstep_diag);
+    expose_to_pdi("Nkinspecies", nb_kinspecies.value());
+    expose_to_pdi("fdistribu_charges",species_info.charge()[dom_kinsp]);
+    expose_to_pdi("fdistribu_masses",species_info.mass()[dom_kinsp]);
     PdiEvent("initial_state");
 
     steady_clock::time_point const start = steady_clock::now();
