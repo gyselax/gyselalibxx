@@ -80,3 +80,10 @@ jobs:
         git -C public add -A .
         git -C public commit -a -m "Update to match ${GITHUB_SHA} by ${GITHUB_EVENT_NAME} ${GITHUB_RUN_NUMBER}" || true
         git -C public push
+  ddc_sync:
+    runs-on: ubuntu-latest
+    environment: ddc-deploy
+    steps:
+    - name:
+      if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+      run: curl -X POST -F "token=${{ secrets.VOICEXX_SYNC }}" -F ref=main https://gitlab.maisondelasimulation.fr/api/v4/projects/720/trigger/pipeline
