@@ -68,7 +68,7 @@ ddc_sync:
   only: [ triggers ]
   needs: []
   image: jbigot/voicexx_env
-  env:
+  variables:
     GIT_SSH_COMMAND: "ssh -o IdentityFile=SELF_COMMIT_PRIV"
   script: |
     git config user.email "${GITLAB_USER_EMAIL}"
