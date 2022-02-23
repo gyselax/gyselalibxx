@@ -41,7 +41,6 @@ RUN chmod +x /bin/bash_run \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
-    ca-certificates \
     wget \
  && apt-get autoremove -y \
  && apt-get clean -y \
