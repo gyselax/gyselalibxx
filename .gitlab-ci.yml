@@ -68,7 +68,7 @@ ddc_sync:
   only: [ triggers ]
   needs: []
   image: jbigot/voicexx_env
-  script: |
+  script:
   - export GIT_SSH_COMMAND="ssh -o IdentityFile=${SELF_COMMIT_PRIV}"
   - git config user.email "${GITLAB_USER_EMAIL}"
   - git config user.name "${GITLAB_USER_NAME}"
