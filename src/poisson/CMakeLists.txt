@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 add_library(poisson STATIC
     chargedensitycalculator.cpp
     electricfield.cpp

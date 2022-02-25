@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 add_library(interpolation STATIC
     spline_interpolator_x.cpp
     spline_interpolator_vx.cpp

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 if (VOICEXX_ENABLE_PERIODIC_RDIMX)
     add_executable(landau_fft landau_fft.cpp)
     target_compile_features(landau_fft PUBLIC cxx_std_17)

@@ -1,6 +1,7 @@
 #!/bin/bash
+# SPDX-License-Identifier: MIT
+
 set -e -o errexit -o noclobber -o nounset -o pipefail
-set -x
 
 cd "$(dirname "$0")"
 cd ..
@@ -28,3 +29,5 @@ git add -A .
 git commit -m "${CI_COMMIT_MESSAGE}"
 
 git push origin "HEAD:public"
+export GIT_SSH_COMMAND="ssh -i ${GITHUB_MIRROR_PRIVKEY} -o IdentitiesOnly=yes"
+git push -f git@github.com:gyselax/gyselalibxx.git "HEAD:main"

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Using :
 #  python ../post-process/PythonScripts/diag_Landau.py
 #  python ../post-process/PythonScripts/diag_Landau.py --dir . --save

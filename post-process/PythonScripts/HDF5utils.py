@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 import h5py as h5
 import numpy as np
 

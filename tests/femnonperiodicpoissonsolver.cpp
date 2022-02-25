@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 #include <ddc/DiscreteCoordinate>
 #include <ddc/DiscreteDomain>
 #include <ddc/pdi.hpp>

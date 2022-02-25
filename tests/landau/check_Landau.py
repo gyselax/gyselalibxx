@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 #!/bin/env python3
 
 import sys

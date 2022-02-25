@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 from math import pow
 import numpy as np
 import scipy

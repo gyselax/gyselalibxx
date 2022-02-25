@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
