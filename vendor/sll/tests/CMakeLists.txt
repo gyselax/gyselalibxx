@@ -35,3 +35,14 @@ target_link_libraries(bsplines_tests
 )
 
 gtest_discover_tests(bsplines_tests)
+
+add_executable(matrix_tests
+	matrix.cpp
+)
+target_compile_features(matrix_tests PUBLIC cxx_std_17)
+target_link_libraries(matrix_tests
+    PUBLIC
+        GTest::gtest_main
+        sll::splines
+)
+gtest_discover_tests(matrix_tests)

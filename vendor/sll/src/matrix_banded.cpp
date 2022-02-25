@@ -57,7 +57,7 @@ Matrix_Banded::Matrix_Banded(int const n, int const kl, int const ku)
 double Matrix_Banded::get_element(int const i, int const j) const
 {
     if (i >= std::max(0, j - ku) && i < std::min(n, j + kl + 1)) {
-        return q[i * c + kl + ku + j - i];
+        return q[j * c + kl + ku + i - j];
     } else {
         return 0.0;
     }
@@ -66,7 +66,7 @@ double Matrix_Banded::get_element(int const i, int const j) const
 void Matrix_Banded::set_element(int const i, int const j, double const a_ij)
 {
     if (i >= std::max(0, j - ku) && i < std::min(n, j + kl + 1)) {
-        q[i * c + kl + ku + j - i] = a_ij;
+        q[j * c + kl + ku + i - j] = a_ij;
     } else {
         assert(std::fabs(a_ij) < 1e-20);
     }
@@ -79,13 +79,10 @@ int Matrix_Banded::factorize_method()
     return info;
 }
 
-int Matrix_Banded::solve_inplace_method(
-        double* b,
-        char const transpose,
-        int const nrows,
-        int const ncols) const
+int Matrix_Banded::solve_inplace_method(double* b, char const transpose, int const n_equations)
+        const
 {
     int info;
-    dgbtrs_(&transpose, &n, &kl, &ku, &ncols, q.get(), &c, ipiv.get(), b, &nrows, &info);
+    dgbtrs_(&transpose, &n, &kl, &ku, &n_equations, q.get(), &c, ipiv.get(), b, &n, &info);
     return info;
 }

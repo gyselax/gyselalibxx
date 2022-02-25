@@ -19,7 +19,7 @@ public:
     virtual void set_element(int i, int j, double a_ij) override;
     virtual DSpan1D solve_inplace(DSpan1D bx) const override;
     virtual DSpan1D solve_transpose_inplace(DSpan1D bx) const override;
-    virtual DSpan2D solve_inplace_matrix(DSpan2D bx) const override;
+    virtual DSpan2D solve_multiple_inplace(DSpan2D bx) const override;
 
 protected:
     void adjust_indexes(int& i, int& j) const;

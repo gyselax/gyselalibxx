@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <iostream>
 #include <memory>
 #include <vector>
 
@@ -513,10 +514,9 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
         }
 
         // iterate only to deg as last bspline is 0
-        for (std::size_t j = 0; j < s_nbc_xmin; ++j) {
-            for (std::size_t i = 0; i < bsplines_type::degree(); ++i) {
-                // Elements are set in Fortran order as they are LAPACK input
-                matrix->set_element(i, j, derivs(i, s_nbc_xmin - j - 1 + s_odd));
+        for (std::size_t i = 0; i < s_nbc_xmin; ++i) {
+            for (std::size_t j = 0; j < bsplines_type::degree(); ++j) {
+                matrix->set_element(i, j, derivs(j, s_nbc_xmin - i - 1 + s_odd));
             }
         }
     }
@@ -532,7 +532,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
         for (std::size_t s = 0; s < bsplines_type::degree() + 1; ++s) {
             int const j
                     = modulo(int(jmin - s_offset + s), (int)discretization<BSplines>().nbasis());
-            matrix->set_element(j, i + s_nbc_xmin, values(s));
+            matrix->set_element(i + s_nbc_xmin, j, values(s));
         }
     }
 
@@ -560,11 +560,11 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
             }
         }
 
-        int const i0 = discretization<BSplines>().nbasis() - bsplines_type::degree();
-        int const j0 = discretization<BSplines>().nbasis() - s_nbc_xmax;
-        for (std::size_t i = 0; i < bsplines_type::degree(); ++i) {
-            for (std::size_t j = 0; j < s_nbc_xmax; ++j) {
-                matrix->set_element(i0 + i, j0 + j, derivs(i + 1, j + s_odd));
+        int const i0 = discretization<BSplines>().nbasis() - s_nbc_xmax;
+        int const j0 = discretization<BSplines>().nbasis() - bsplines_type::degree();
+        for (std::size_t j = 0; j < bsplines_type::degree(); ++j) {
+            for (std::size_t i = 0; i < s_nbc_xmax; ++i) {
+                matrix->set_element(i0 + i, j0 + j, derivs(j + 1, i + s_odd));
             }
         }
     }

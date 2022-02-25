@@ -21,6 +21,7 @@ Matrix_Corner_Block::Matrix_Corner_Block(int const n, int const k, std::unique_p
     assert(n > 0);
     assert(k >= 0);
     assert(k <= n);
+    assert(nb == q_block->get_size());
     memset(lambda_ptr.get(), 0, sizeof(double) * k * nb);
     memset(Abm_1_gamma_ptr.get(), 0, sizeof(double) * k * nb);
 }
@@ -29,21 +30,23 @@ Matrix_Corner_Block::Matrix_Corner_Block(
         int const n,
         int const k,
         std::unique_ptr<Matrix> q,
-        int const lambda_size)
+        int const lambda_size1,
+        int const lambda_size2)
     : Matrix(n)
     , k(k)
     , nb(n - k)
     , Abm_1_gamma_ptr(std::make_unique<double[]>(k * nb))
-    , lambda_ptr(std::make_unique<double[]>(lambda_size))
+    , lambda_ptr(std::make_unique<double[]>(lambda_size1 * lambda_size2))
     , q_block(std::move(q))
     , delta(k)
     , Abm_1_gamma(Abm_1_gamma_ptr.get(), k, nb)
-    , lambda(lambda_ptr.get(), nb, k)
+    , lambda(lambda_ptr.get(), lambda_size1, lambda_size2)
 {
     assert(n > 0);
     assert(k >= 0);
     assert(k <= n);
-    memset(lambda_ptr.get(), 0, sizeof(double) * lambda_size);
+    assert(nb == q_block->get_size());
+    memset(lambda_ptr.get(), 0, sizeof(double) * lambda_size1 * lambda_size2);
     memset(Abm_1_gamma_ptr.get(), 0, sizeof(double) * k * nb);
 }
 
@@ -57,10 +60,10 @@ double Matrix_Corner_Block::get_element(int const i, int const j) const
         return q_block->get_element(i, j);
     } else if (i >= nb && j >= nb) {
         return delta.get_element(i - nb, j - nb);
-    } else if (i >= nb) {
-        return Abm_1_gamma(i - nb, j);
+    } else if (j >= nb) {
+        return Abm_1_gamma(j - nb, i);
     } else {
-        return lambda(i, j - nb);
+        return lambda(j, i - nb);
     }
 }
 
@@ -74,23 +77,22 @@ void Matrix_Corner_Block::set_element(int const i, int const j, double const a_i
         q_block->set_element(i, j, a_ij);
     } else if (i >= nb && j >= nb) {
         delta.set_element(i - nb, j - nb, a_ij);
-    } else if (i >= nb) {
-        Abm_1_gamma(i - nb, j) = a_ij;
+    } else if (j >= nb) {
+        Abm_1_gamma(j - nb, i) = a_ij;
     } else {
-        lambda(i, j - nb) = a_ij;
+        lambda(j, i - nb) = a_ij;
     }
 }
 
 void Matrix_Corner_Block::calculate_delta_to_factorize()
 {
     for (int i = 0; i < k; ++i) {
-        // Upper diagonals in lambda
-        for (int l = 0; l < nb; ++l) {
-            double const lambda_il = lambda(l, i);
-            for (int j = 0; j < k; ++j) {
-                double const new_val(delta.get_element(j, i) - lambda_il * Abm_1_gamma(j, l));
-                delta.set_element(j, i, new_val);
+        for (int j = 0; j < k; ++j) {
+            double val = 0.0;
+            for (int l = 0; l < nb; ++l) {
+                val += lambda(l, i) * Abm_1_gamma(j, l);
             }
+            delta.set_element(i, j, delta.get_element(i, j) - val);
         }
     }
 }
@@ -98,7 +100,7 @@ void Matrix_Corner_Block::calculate_delta_to_factorize()
 void Matrix_Corner_Block::factorize()
 {
     q_block->factorize();
-    q_block->solve_inplace_matrix(Abm_1_gamma);
+    q_block->solve_multiple_inplace(Abm_1_gamma);
 
     calculate_delta_to_factorize();
 
@@ -116,32 +118,45 @@ DSpan1D Matrix_Corner_Block::solve_lambda_section(DSpan1D const v, DView1D const
     return v;
 }
 
-DSpan2D Matrix_Corner_Block::solve_lambda_section(DSpan2D const v, DView2D const u) const
+DSpan1D Matrix_Corner_Block::solve_lambda_section_transpose(DSpan1D const u, DView1D const v) const
 {
-    for (int i = 0; i < k; ++i) {
+    for (int i = 0; i < nb; ++i) {
         // Upper diagonals in lambda
-        for (int j = 0; j < nb; ++j) {
-            for (std::size_t col = 0; col < v.extent(1); ++col) {
-                v(i, col) -= lambda(j, i) * u(j, col);
-            }
+        for (int j = 0; j < k; ++j) {
+            u(i) -= lambda(i, j) * v(j);
         }
     }
-    return v;
+    return u;
 }
 
-void Matrix_Corner_Block::solve_lambda_section_transpose(DSpan1D const u, DSpan1D const v) const
+DSpan1D Matrix_Corner_Block::solve_gamma_section(DSpan1D const u, DView1D const v) const
 {
-    for (int i = 0; i < k; ++i) {
-        // Upper diagonals in (*lambda)
-        for (int j = 0; j < nb; ++j) {
-            u(j) -= lambda(j, i) * v(i);
+    for (int i = 0; i < nb; ++i) {
+        double val = 0.;
+        for (int j = 0; j < k; ++j) {
+            val += Abm_1_gamma(j, i) * v(j);
         }
+        u(i) -= val;
     }
+    return u;
+}
+
+DSpan1D Matrix_Corner_Block::solve_gamma_section_transpose(DSpan1D const v, DView1D const u) const
+{
+    for (int j = 0; j < k; ++j) {
+        double val = 0.;
+        for (int i = 0; i < nb; ++i) {
+            val += Abm_1_gamma(j, i) * u(i);
+        }
+        v(j) -= val;
+    }
+    return v;
 }
 
 DSpan1D Matrix_Corner_Block::solve_inplace(DSpan1D const bx) const
 {
     assert(bx.extent(0) == n);
+
     DSpan1D const u(bx.data(), nb);
     DSpan1D const v(bx.data() + nb, k);
 
@@ -151,13 +166,8 @@ DSpan1D Matrix_Corner_Block::solve_inplace(DSpan1D const bx) const
 
     delta.solve_inplace(v);
 
-    for (int i = 0; i < nb; ++i) {
-        double val = 0.;
-        for (int j = 0; j < k; ++j) {
-            val += Abm_1_gamma(j, i) * v(j);
-        }
-        u(i) -= val;
-    }
+    solve_gamma_section(u, v);
+
     return bx;
 }
 
@@ -167,42 +177,23 @@ DSpan1D Matrix_Corner_Block::solve_transpose_inplace(DSpan1D const bx) const
     DSpan1D const u(bx.data(), nb);
     DSpan1D const v(bx.data() + nb, k);
 
-    delta.solve_inplace(v);
+    solve_gamma_section_transpose(v, u);
+
+    delta.solve_transpose_inplace(v);
 
     solve_lambda_section_transpose(u, v);
 
-    q_block->solve_inplace(u);
+    q_block->solve_transpose_inplace(u);
 
-    for (int j = 0; j < k; ++j) {
-        double val = 0.;
-        for (int i = 0; i < nb; ++i) {
-            val += Abm_1_gamma(j, i) * v(i);
-        }
-        v(j) -= val;
-    }
     return bx;
 }
 
-DSpan2D Matrix_Corner_Block::solve_inplace_matrix(DSpan2D const bx) const
+DSpan2D Matrix_Corner_Block::solve_multiple_inplace(DSpan2D const bx) const
 {
     assert(bx.extent(0) == n);
-    DSpan2D const u(bx.data(), nb, bx.extent(1));
-    DSpan2D const v(bx.data() + nb * bx.extent(1), k, bx.extent(1));
-
-    q_block->solve_inplace_matrix(u);
-
-    solve_lambda_section(v, u);
-
-    delta.solve_inplace_matrix(v);
-
-    for (std::size_t col = 0; col < bx.extent(1); ++col) {
-        for (int i = 0; i < nb; ++i) {
-            double val = 0.;
-            for (int j = 0; j < k; ++j) {
-                val += Abm_1_gamma(j, i) * v(j, col);
-            }
-            u(i, col) -= val;
-        }
+    for (int i(0); i < bx.extent(0); ++i) {
+        DSpan1D const b(bx.data() + n * i, n);
+        solve_inplace(b);
     }
     return bx;
 }

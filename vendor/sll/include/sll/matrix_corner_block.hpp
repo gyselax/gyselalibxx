@@ -15,14 +15,20 @@ public:
     virtual void factorize() override;
     virtual DSpan1D solve_inplace(DSpan1D bx) const override;
     virtual DSpan1D solve_transpose_inplace(DSpan1D bx) const override;
-    virtual DSpan2D solve_inplace_matrix(DSpan2D bx) const override;
+    virtual DSpan2D solve_multiple_inplace(DSpan2D bx) const override;
 
 protected:
-    Matrix_Corner_Block(int n, int k, std::unique_ptr<Matrix> q, int lambda_size);
+    Matrix_Corner_Block(
+            int n,
+            int k,
+            std::unique_ptr<Matrix> q,
+            int lambda_size1,
+            int lambda_size2);
     virtual void calculate_delta_to_factorize();
     virtual DSpan1D solve_lambda_section(DSpan1D v, DView1D u) const;
-    virtual DSpan2D solve_lambda_section(DSpan2D v, DView2D u) const;
-    virtual void solve_lambda_section_transpose(DSpan1D u, DSpan1D v) const;
+    virtual DSpan1D solve_lambda_section_transpose(DSpan1D u, DView1D v) const;
+    virtual DSpan1D solve_gamma_section(DSpan1D const u, DView1D const v) const;
+    virtual DSpan1D solve_gamma_section_transpose(DSpan1D const v, DView1D const u) const;
     int const k; // small block size
     int const nb; // main block matrix size
     std::unique_ptr<double[]> Abm_1_gamma_ptr;
@@ -43,7 +49,7 @@ private:
     {
         return 0;
     }
-    virtual int solve_inplace_method(double*, char, int, int) const override
+    virtual int solve_inplace_method(double*, char, int) const override
     {
         return 0;
     }

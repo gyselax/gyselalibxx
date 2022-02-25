@@ -13,8 +13,7 @@ public:
 
 protected:
     virtual int factorize_method() override;
-    virtual int solve_inplace_method(double* b, char transpose, int nrows, int ncols)
-            const override;
+    virtual int solve_inplace_method(double* b, char transpose, int n_equations) const override;
     int const kl; // no. of subdiagonals
     int const ku; // no. of superdiagonals
     int const c; // no. of columns in q

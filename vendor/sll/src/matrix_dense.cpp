@@ -26,14 +26,14 @@ Matrix_Dense::Matrix_Dense(int const n) : Matrix(n)
 
 void Matrix_Dense::set_element(int const i, int const j, double const aij)
 {
-    a[i * n + j] = aij;
+    a[j * n + i] = aij;
 }
 
 double Matrix_Dense::get_element(int const i, int const j) const
 {
     assert(i < n);
     assert(j < n);
-    return a[i * n + j];
+    return a[j * n + i];
 }
 
 int Matrix_Dense::factorize_method()
@@ -43,13 +43,9 @@ int Matrix_Dense::factorize_method()
     return info;
 }
 
-int Matrix_Dense::solve_inplace_method(
-        double* b,
-        char const transpose,
-        int const nrows,
-        int const ncols) const
+int Matrix_Dense::solve_inplace_method(double* b, char const transpose, int const n_equations) const
 {
     int info;
-    dgetrs_(&transpose, &n, &ncols, a.get(), &n, ipiv.get(), b, &nrows, &info);
+    dgetrs_(&transpose, &n, &n_equations, a.get(), &n, ipiv.get(), b, &n, &info);
     return info;
 }

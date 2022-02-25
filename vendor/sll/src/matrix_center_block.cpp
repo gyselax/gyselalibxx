@@ -101,10 +101,10 @@ DSpan1D Matrix_Center_Block::solve_transpose_inplace(DSpan1D const bx) const
     return bx;
 }
 
-DSpan2D Matrix_Center_Block::solve_inplace_matrix(DSpan2D const bx) const
+DSpan2D Matrix_Center_Block::solve_multiple_inplace(DSpan2D const bx) const
 {
     swap_array_to_corner(bx);
-    Matrix_Corner_Block::solve_inplace_matrix(bx);
+    Matrix_Corner_Block::solve_multiple_inplace(bx);
     swap_array_to_center(bx);
     return bx;
 }

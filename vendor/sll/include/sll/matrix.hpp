@@ -15,7 +15,7 @@ public:
     virtual void factorize();
     virtual DSpan1D solve_inplace(DSpan1D b) const;
     virtual DSpan1D solve_transpose_inplace(DSpan1D b) const;
-    virtual DSpan2D solve_inplace_matrix(DSpan2D bx) const;
+    virtual DSpan2D solve_multiple_inplace(DSpan2D bx) const;
     int get_size() const
     {
         return n;
@@ -32,7 +32,7 @@ public:
 
 protected:
     virtual int factorize_method() = 0;
-    virtual int solve_inplace_method(double* b, char transpose, int nrows, int ncols) const = 0;
+    virtual int solve_inplace_method(double* b, char transpose, int n_equations) const = 0;
     int const n; // matrix size
 };
 

@@ -20,7 +20,7 @@ using std::min;
 DSpan1D Matrix::solve_inplace(DSpan1D const b) const
 {
     assert(b.extent(0) == n);
-    int const info = solve_inplace_method(b.data(), 'N', b.extent(0), 1);
+    int const info = solve_inplace_method(b.data(), 'N', 1);
 
     if (info < 0) {
         std::cerr << -info << "-th argument had an illegal value" << std::endl;
@@ -32,7 +32,7 @@ DSpan1D Matrix::solve_inplace(DSpan1D const b) const
 DSpan1D Matrix::solve_transpose_inplace(DSpan1D const b) const
 {
     assert(b.extent(0) == n);
-    int const info = solve_inplace_method(b.data(), 'T', b.extent(0), 1);
+    int const info = solve_inplace_method(b.data(), 'T', 1);
 
     if (info < 0) {
         std::cerr << -info << "-th argument had an illegal value" << std::endl;
@@ -41,10 +41,10 @@ DSpan1D Matrix::solve_transpose_inplace(DSpan1D const b) const
     return b;
 }
 
-DSpan2D Matrix::solve_inplace_matrix(DSpan2D const bx) const
+DSpan2D Matrix::solve_multiple_inplace(DSpan2D const bx) const
 {
     assert(bx.extent(1) == n);
-    int const info = solve_inplace_method(bx.data(), 'N', bx.extent(1), bx.extent(0));
+    int const info = solve_inplace_method(bx.data(), 'N', bx.extent(0));
 
     if (info < 0) {
         std::cerr << -info << "-th argument had an illegal value" << std::endl;
