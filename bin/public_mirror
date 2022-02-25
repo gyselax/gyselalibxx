@@ -27,4 +27,4 @@ find . -name .private -print0 | xargs -r0 dirname -z | xargs -r0 rm -rf
 git add -A .
 git commit -m "${CI_COMMIT_MESSAGE}"
 
-git push  "HEAD:public"
+git push origin "HEAD:public"
