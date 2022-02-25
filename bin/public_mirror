@@ -17,8 +17,7 @@ git config user.name "${GITLAB_USER_NAME}"
 git remote set-url origin "http://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
 git fetch --all -p
 
-git switch public
-git git reset --hard origin/public
+git switch -c public origin/public
 
 git rm -rf .
 find "$SRC_DIR" -maxdepth 1 -mindepth 1 '!' -name .git -exec cp -r '{}' "$NEWSRC_DIR" '+'
