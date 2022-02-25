@@ -46,11 +46,13 @@ RUN chmod +x /bin/bash_run \
  && apt-get clean -y \
  && apt-get autoclean -y \
  && rm -rf /var/lib/apt/lists/* \
- && useradd -m -U default \
- && mkdir /data
+ && useradd -d /ci -m -U ci \
+ && mkdir /data \
+ && chown ci:ci /ci /data
 
-USER 1001
-WORKDIR /data
+USER ci:ci
+WORKDIR /ci
+ENV HOME=/ci
 
 ENTRYPOINT ["/bin/bash_run"]
 CMD ["/bin/bash", "-li"]

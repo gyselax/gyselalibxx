@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd "$(dirname "$0")"
-cd ..
+cd ../docker
 
 docker build -t jbigot/voicexx_env voicexx_env && \
 docker push jbigot/voicexx_env
