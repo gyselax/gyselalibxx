@@ -1,2 +1,4 @@
+// SPDX-License-Identifier: MIT
+
 #include "ddc/discrete_coordinate.hpp"
 

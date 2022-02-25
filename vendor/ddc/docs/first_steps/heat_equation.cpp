@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 #include <cmath>
 
 #include <ddc/Chunk>

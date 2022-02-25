@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 #include <ddc/Chunk>
 #include <ddc/transform_reduce>
 

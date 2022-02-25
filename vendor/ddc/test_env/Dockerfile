@@ -1,4 +1,5 @@
 FROM ubuntu:focal
+# SPDX-License-Identifier: MIT
 
 COPY bash_run /bin/
 ENV BASH_ENV=/etc/profile
