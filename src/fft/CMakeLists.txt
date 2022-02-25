@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 add_library(fft INTERFACE
 )
 

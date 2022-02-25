@@ -1,0 +1,18 @@
+Multiple people have contributed to Gyselalib++. To show our appreciation for
+their public spirit, we list here in alphabetical order a condensed list of their
+contributions.
+
+
+Julien Bigot <julien.bigot@cea.fr>
+* Initial C++ design
+
+Emily Bourne <emily.bourne@cea.fr>
+* Spline related development
+
+Virginie Grandgirard <virginie.grandgirard@cea.fr>
+* Initial designer and Fortran version
+* Maintainer
+
+Thomas Padioleau <thomas.padioleau@cea.fr>
+* Fortran to C++ port
+* Optimization

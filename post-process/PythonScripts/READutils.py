@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 #--------------------------------------------------
 #  file : READutils.py
 #  date : 2016/04/12

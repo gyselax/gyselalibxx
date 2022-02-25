@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 #include <ddc/discretization>
 #include <ddc/for_each>
 

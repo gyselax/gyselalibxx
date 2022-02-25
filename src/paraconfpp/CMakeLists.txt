@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 add_library(paraconfpp INTERFACE)
 target_include_directories(paraconfpp
     INTERFACE

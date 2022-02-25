@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 #include <ddc/for_each>
 
 #include <sll/gauss_legendre_integration.hpp>

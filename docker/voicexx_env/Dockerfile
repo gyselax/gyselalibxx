@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 FROM ubuntu:focal
 
 COPY bash_run /bin/

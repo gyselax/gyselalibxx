@@ -1,3 +1,8 @@
+# Gyselalib++
+
+Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes and
+similar as well as a collection of such codes.
+
 ## Compilation
 
 to compile voice++:

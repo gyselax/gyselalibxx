@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 #include <sll/spline_builder.hpp>
 #include <sll/spline_evaluator.hpp>
 

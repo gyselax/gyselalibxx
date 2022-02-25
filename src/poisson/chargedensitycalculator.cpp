@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 #include <ddc/for_each>
 
 #include <species_info.hpp>

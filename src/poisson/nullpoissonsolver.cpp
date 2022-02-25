@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 #include "nullpoissonsolver.hpp"
 
 void NullPoissonSolver::operator()(
