@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e -o errexit -o noclobber -o nounset -o pipefail
+
+cd "$(dirname "$0")"
+cd ..
+SRC_DIR="$PWD"
+
+cd "$(mktemp --tmpdir -d)"
+WK_DIR="$PWD"
+
+git clone "$SRC_DIR" clone
+cd clone
+NEWSRC_DIR="$PWD"
+
+git config user.email "${GITLAB_USER_EMAIL}"
+git config user.name "${GITLAB_USER_NAME}"
+git remote set-url origin "http://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+git fetch --all -p
+
+git switch public
+git git reset --hard origin/public
+
+git rm -rf .
+find "$SRC_DIR" -maxdepth 1 -mindepth 1 '!' -name .git -exec cp -r '{}' "$NEWSRC_DIR" '+'
+find . -name .private -print0 | xargs -r0 dirname -z | xargs -r0 rm -rf
+git add -A .
+git commit -m "${CI_COMMIT_MESSAGE}"
+
+git push  "HEAD:public"

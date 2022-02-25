@@ -74,3 +74,8 @@ ddc_sync:
   - git checkout "${CI_COMMIT_BRANCH}"
   - ./bin/ddc_sync --commit
   - git push "http://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" "HEAD:${CI_COMMIT_BRANCH}"
+public_mirror:
+  only: [ main ]
+  needs: []
+  image: jbigot/voicexx_env
+  script: ./bin/public_mirror
