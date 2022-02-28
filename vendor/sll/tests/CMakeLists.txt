@@ -10,7 +10,8 @@ add_executable(splines_tests
     gauss_legendre_integration.cpp
 )
 if(VOICEXX_ENABLE_DEPRECATED)
-    target_sources(splines
+    target_sources(splines_tests
+	PUBLIC
         bsplines_non_uniform.cpp
         bsplines_uniform.cpp
         splines.cpp
