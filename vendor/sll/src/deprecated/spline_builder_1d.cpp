@@ -393,7 +393,7 @@ void SplineBuilder1D::build_matrix_system()
         for (int j(0); j < m_nbc_xmin; ++j) {
             for (int i(0); i < bspl.degree(); ++i) {
                 // Elements are set in Fortran order as they are LAPACK input
-                matrix->set_element(i, j, derivs(i, m_nbc_xmin - j - 1 + odd));
+                matrix->set_element(j, i, derivs(i, m_nbc_xmin - j - 1 + odd));
             }
         }
     }
@@ -405,7 +405,7 @@ void SplineBuilder1D::build_matrix_system()
         bspl.eval_basis(interp_pts(i), values, jmin);
         for (int s(0); s < bspl.degree() + 1; ++s) {
             int j = modulo(jmin - offset + s, bspl.nbasis());
-            matrix->set_element(j, i + m_nbc_xmin, values(s));
+            matrix->set_element(i + m_nbc_xmin, j, values(s));
         }
     }
 
@@ -428,7 +428,7 @@ void SplineBuilder1D::build_matrix_system()
         int j0(bspl.nbasis() - m_nbc_xmax);
         for (int i(0); i < bspl.degree(); ++i) {
             for (int j(0); j < m_nbc_xmax; ++j) {
-                matrix->set_element(i0 + i, j0 + j, derivs(i + 1, j + odd));
+                matrix->set_element(j0 + j, i0 + i, derivs(i + 1, j + odd));
             }
         }
     }
