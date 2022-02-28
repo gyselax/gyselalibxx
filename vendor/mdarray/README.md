@@ -1,2 +1,0 @@
-
-TODO Write project readme

@@ -1,23 +1,14 @@
-Copyright: CEA, CNRS, INRIA, IPP, Universite de Strasbourg
-
-Copyright (c) 2021-2022 Centre national de la recherche scientifique (CNRS)
-Copyright (c) 2021-2022 Commissariat a l'energie atomique et aux energies alternatives (CEA)
-Copyright (c) 2021-2022 Université Paris-Saclay
-     
-The SeLaLib software library is a modular library for kinetic
-and gyrokinetic simulations of plasmas in fusion energy devices
-by semi-Lagrangian or particle-in-cell methods.
-
-This software is governed by the CeCILL-B license
-under French law and abiding by the rules of distribution
-of free software.  You can  use, modify and redistribute
-the software under the terms of the CeCILL-B license as
-circulated by CEA, CNRS and INRIA at the following URL
-"http://www.cecill.info".
-
-
-
 CeCILL-B FREE SOFTWARE LICENSE AGREEMENT
+
+
+Copyright (c) 2021-2022 Centre national de la recherche scientifique
+                        (CNRS)
+Copyright (c) 2021-2022 Commissariat a l'énergie atomique et aux énergies
+                        alternatives (CEA)
+Copyright (c) 2021-2022 Université Paris-Saclay
+Copyright (c) 2021-2022 Université de Versailles Saint-Quentin-en-Yvelines
+
+
 
     Notice
 
