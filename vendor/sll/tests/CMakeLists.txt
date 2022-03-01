@@ -11,7 +11,7 @@ add_executable(splines_tests
 )
 if(VOICEXX_ENABLE_DEPRECATED)
     target_sources(splines_tests
-	PUBLIC
+	PRIVATE
         bsplines_non_uniform.cpp
         bsplines_uniform.cpp
         splines.cpp
