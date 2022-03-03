@@ -20,7 +20,6 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
-#include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -31,6 +30,14 @@
 #include "spline_interpolator_vx.hpp"
 #include "spline_interpolator_x.hpp"
 #include "splitvlasovsolver.hpp"
+
+#if defined(ENABLE_PERIODIC_RDIMX)
+#if ENABLE_PERIODIC_RDIMX
+#include "femperiodicpoissonsolver.hpp"
+#else
+#include "femnonperiodicpoissonsolver.hpp"
+#endif
+#endif
 
 using std::cerr;
 using std::endl;
@@ -162,12 +169,13 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
+#if ENABLE_PERIODIC_RDIMX
     FemPeriodicPoissonSolver const
-            poisson(species_info,
-                    builder_x,
-                    spline_x_evaluator,
-                    builder_vx,
-                    spline_vx_evaluator);
+            poisson(species_info, builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
+#else
+    FemNonPeriodicPoissonSolver const
+            poisson(species_info, builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
+#endif
 
     PredCorr const predcorr(vlasov, poisson, deltat);
 
@@ -191,8 +199,8 @@ int main(int argc, char** argv)
     expose_to_pdi("MeshVx", meshVx_coord);
     expose_to_pdi("nbstep_diag", nbstep_diag);
     expose_to_pdi("Nkinspecies", nb_kinspecies.value());
-    expose_to_pdi("fdistribu_charges",species_info.charge()[dom_kinsp]);
-    expose_to_pdi("fdistribu_masses",species_info.mass()[dom_kinsp]);
+    expose_to_pdi("fdistribu_charges", species_info.charge()[dom_kinsp]);
+    expose_to_pdi("fdistribu_masses", species_info.mass()[dom_kinsp]);
     PdiEvent("initial_state");
 
     steady_clock::time_point const start = steady_clock::now();
