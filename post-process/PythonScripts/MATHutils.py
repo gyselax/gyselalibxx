@@ -269,11 +269,11 @@ def iFourier2D(TFF, kx, ky):
 #--------------------------------------------------
 def compute_intFdv(F,v):
 
-    [nv,nx,nt] = np.shape(F)
-    intFdv = np.zeros([nx,nt])
+    [nt,nx,nv] = np.shape(F)
+    intFdv = np.zeros([nt,nx])
     for ix in np.arange(nx):
         for it in np.arange(nt):
-            intFdv[ix,it] = integrate.simps(F[:,ix,it],v)
+            intFdv[it,ix] = integrate.simps(F[it,ix,:],v)
 
     return intFdv
     
