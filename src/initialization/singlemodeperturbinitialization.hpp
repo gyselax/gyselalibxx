@@ -10,7 +10,7 @@
 /// Initialization operator with a sinusoidal perturbation of a Maxwellian. This initializes all species.
 class SingleModePerturbInitialization : public IInitialization
 {
-    SpeciesInformation const& m_species_info;
+    DViewSpVx m_fequilibrium;
 
     ViewSp<int> m_init_perturb_mode;
 
@@ -25,7 +25,7 @@ private:
 public:
     // Warning: all variables shall remain valid until the last call to `operator()`
     SingleModePerturbInitialization(
-            SpeciesInformation const& species_info,
+            DViewSpVx fequilibrium,
             ViewSp<int> init_perturb_mode,
             DViewSp init_perturb_amplitude);
 

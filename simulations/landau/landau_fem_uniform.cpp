@@ -21,6 +21,7 @@
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "geometry.hpp"
+#include "maxwellianequilibrium.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
@@ -83,7 +84,8 @@ int main(int argc, char** argv)
     IDomainSp const dom_kinsp(nb_kinspecies);
 
     IDomainSpXVx const
-            mesh(dom_kinsp, builder_x.interpolation_domain(), builder_vx.interpolation_domain());
+            meshSpXVx(dom_kinsp, builder_x.interpolation_domain(), builder_vx.interpolation_domain());
+    IDomainSpVx const meshSpVx(dom_kinsp, builder_vx.interpolation_domain());
 
     FieldSp<int> kinetic_charges(dom_kinsp);
     DFieldSp masses(dom_kinsp);
@@ -128,15 +130,18 @@ int main(int argc, char** argv)
     SpeciesInformation const species_info(
             std::move(charges),
             std::move(masses),
-            std::move(density_eq),
-            std::move(temperature_eq),
-            std::move(mean_velocity_eq),
             std::move(init_perturb_amplitude),
-            std::move(init_perturb_mode),
-            mesh);
-    DFieldSpXVx allfdistribu(mesh);
+            std::move(init_perturb_mode));
+    DFieldSpVx allfequilibrium(meshSpVx);
+    MaxwellianEquilibrium const init_fequilibrium(
+        std::move(density_eq),
+        std::move(temperature_eq),
+        std::move(mean_velocity_eq));
+    init_fequilibrium(allfequilibrium);
+    DFieldSpXVx allfdistribu(meshSpXVx);
     SingleModePerturbInitialization const
-            init(species_info, species_info.perturb_mode(), species_info.perturb_amplitude());
+            init(allfequilibrium, species_info.perturb_mode(), species_info.perturb_amplitude());
+    init(allfdistribu);
 
     // --> Algorithm info
     double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
@@ -180,13 +185,13 @@ int main(int argc, char** argv)
     PredCorr const predcorr(vlasov, poisson, deltat);
 
     // Creating of mesh for output saving
-    IDomainX const gridx = select<IDimX>(mesh);
+    IDomainX const gridx = select<IDimX>(meshSpXVx);
     FieldX<CoordX> meshX_coord(gridx);
     for (IndexX const ix : gridx) {
         meshX_coord(ix) = to_real(ix);
     }
 
-    IDomainVx const gridvx = select<IDimVx>(mesh);
+    IDomainVx const gridvx = select<IDimVx>(meshSpXVx);
     FieldVx<CoordVx> meshVx_coord(gridvx);
     for (IndexVx const ivx : gridvx) {
         meshVx_coord(ivx) = to_real(ivx);
@@ -205,7 +210,6 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const start = steady_clock::now();
 
-    init(allfdistribu);
     predcorr(allfdistribu, nbiter);
 
     steady_clock::time_point const end = steady_clock::now();
