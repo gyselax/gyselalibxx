@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 add_library(initialization STATIC
+    maxwellianequilibrium.cpp
     singlemodeperturbinitialization.cpp
 )
 

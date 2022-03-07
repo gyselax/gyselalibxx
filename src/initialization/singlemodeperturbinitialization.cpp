@@ -6,10 +6,10 @@
 #include "singlemodeperturbinitialization.hpp"
 
 SingleModePerturbInitialization::SingleModePerturbInitialization(
-        SpeciesInformation const& species_info,
+        DViewSpVx fequilibrium,
         ViewSp<int> const init_perturb_mode,
         DViewSp const init_perturb_amplitude)
-    : m_species_info(species_info)
+    : m_fequilibrium(fequilibrium)
     , m_init_perturb_mode(init_perturb_mode)
     , m_init_perturb_amplitude(init_perturb_amplitude)
 {
@@ -33,8 +33,7 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
         for_each(gridsp, [&](IndexSp const isp) {
             for_each(gridx, [&](IndexX const ix) {
                 for_each(gridvx, [&](IndexVx const iv) {
-                    double fdistribu_val
-                            = m_species_info.maxw_values()(isp, iv) * (1. + perturbation(ix));
+                    double fdistribu_val = m_fequilibrium(isp, iv) * (1. + perturbation(ix));
                     if (fdistribu_val < 1.e-60) {
                         fdistribu_val = 1.e-60;
                     }
