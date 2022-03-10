@@ -57,22 +57,22 @@ std::ostream& operator<<(std::ostream& out, SingleDiscretization<Tag> const& dom
 } // namespace experimental
 
 template <class>
-struct is_single_disretization : public std::false_type
+struct is_single_discretization : public std::false_type
 {
 };
 
 template <class CDim>
-struct is_single_disretization<experimental::SingleDiscretization<CDim>> : public std::true_type
+struct is_single_discretization<experimental::SingleDiscretization<CDim>> : public std::true_type
 {
 };
 
 template <class DDim>
-constexpr bool is_single_disretization_v = is_single_disretization<DDim>::value;
+constexpr bool is_single_discretization_v = is_single_discretization<DDim>::value;
 
 
 /// @brief coordinate of the mesh
 template <class DDim>
-std::enable_if_t<is_single_disretization_v<DDim>, typename DDim::rcoord_type> origin() noexcept
+std::enable_if_t<is_single_discretization_v<DDim>, typename DDim::rcoord_type> origin() noexcept
 {
     return discretization<DDim>().origin();
 }

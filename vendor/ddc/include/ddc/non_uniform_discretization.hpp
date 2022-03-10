@@ -71,17 +71,17 @@ public:
 };
 
 template <class>
-struct is_non_uniform_disretization : public std::false_type
+struct is_non_uniform_discretization : public std::false_type
 {
 };
 
 template <class CDim>
-struct is_non_uniform_disretization<NonUniformDiscretization<CDim>> : public std::true_type
+struct is_non_uniform_discretization<NonUniformDiscretization<CDim>> : public std::true_type
 {
 };
 
 template <class DDim>
-constexpr bool is_non_uniform_disretization_v = is_non_uniform_disretization<DDim>::value;
+constexpr bool is_non_uniform_discretization_v = is_non_uniform_discretization<DDim>::value;
 
 template <class CDim>
 std::ostream& operator<<(std::ostream& out, NonUniformDiscretization<CDim> const& mesh)
