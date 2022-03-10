@@ -15,7 +15,7 @@ struct is_uniform_domain : std::false_type
 template <class... DDims>
 struct is_uniform_domain<DiscreteDomain<DDims...>>
     : std::conditional_t<
-              (is_uniform_disretization_v<DDims> && ...),
+              (is_uniform_discretization_v<DDims> && ...),
               std::true_type,
               std::false_type>
 {
