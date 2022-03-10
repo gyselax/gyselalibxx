@@ -32,7 +32,7 @@ git rm -rf .
 find "$SRC_DIR" -maxdepth 1 -mindepth 1 '!' -name .git -exec cp -a -t "$NEWSRC_DIR" '{}' '+'
 find . -name .private -print0 | xargs -r0 dirname -z | xargs -r0 rm -rf
 git add -A .
-git commit -m "${CI_COMMIT_MESSAGE}"
+git commit -m "${CI_COMMIT_MESSAGE}" || true
 
 git push origin "HEAD:public"
 
