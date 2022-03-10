@@ -10,7 +10,8 @@ SRC_DIR="$PWD"
 
 cd "$(mktemp --tmpdir -d)"
 SSH_DIR="$PWD"
-chmod go-rwx "${SSH_DIR}"
+cp "${GITHUB_MIRROR_PRIVKEY}" "${SSH_DIR}/id_rsa"
+chmod -R go-rwx "${SSH_DIR}"
 
 cd "$(mktemp --tmpdir -d)"
 WK_DIR="$PWD"
@@ -35,6 +36,5 @@ git commit -m "${CI_COMMIT_MESSAGE}"
 
 git push origin "HEAD:public"
 
-cp ${GITHUB_MIRROR_PRIVKEY} "${SSH_DIR}/id_rsa"
 export GIT_SSH_COMMAND="ssh -i ${SSH_DIR}/id_rsa -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
 git push -f git@github.com:gyselax/gyselalibxx.git "HEAD:main"
