@@ -86,17 +86,17 @@ public:
 };
 
 template <class>
-struct is_uniform_disretization : public std::false_type
+struct is_uniform_discretization : public std::false_type
 {
 };
 
 template <class CDim>
-struct is_uniform_disretization<UniformDiscretization<CDim>> : public std::true_type
+struct is_uniform_discretization<UniformDiscretization<CDim>> : public std::true_type
 {
 };
 
 template <class DDim>
-constexpr bool is_uniform_disretization_v = is_uniform_disretization<DDim>::value;
+constexpr bool is_uniform_discretization_v = is_uniform_discretization<DDim>::value;
 
 
 template <class CDim>
@@ -108,14 +108,14 @@ std::ostream& operator<<(std::ostream& out, UniformDiscretization<CDim> const& m
 
 /// @brief Lower bound index of the mesh
 template <class DDim>
-std::enable_if_t<is_uniform_disretization_v<DDim>, typename DDim::rcoord_type> origin() noexcept
+std::enable_if_t<is_uniform_discretization_v<DDim>, typename DDim::rcoord_type> origin() noexcept
 {
     return discretization<DDim>().origin();
 }
 
 /// @brief Spacing step of the mesh
 template <class DDim>
-std::enable_if_t<is_uniform_disretization_v<DDim>, typename DDim::rcoord_type> step() noexcept
+std::enable_if_t<is_uniform_discretization_v<DDim>, typename DDim::rcoord_type> step() noexcept
 {
     return discretization<DDim>().step();
 }
