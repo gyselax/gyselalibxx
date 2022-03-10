@@ -57,12 +57,6 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     charges(dom_sp.front()) = 1;
     DFieldSp masses(dom_sp);
     masses(dom_sp.front()) = 1.0;
-    DFieldSp density_eq(dom_sp);
-    density_eq(dom_sp.front()) = 1.0;
-    DFieldSp temperature_eq(dom_sp);
-    temperature_eq(dom_sp.front()) = 1.0;
-    DFieldSp mean_velocity_eq(dom_sp);
-    mean_velocity_eq(dom_sp.front()) = 0.0;
     FieldSp<int> init_perturb_mode(dom_sp);
     init_perturb_mode(dom_sp.front()) = 0;
     DFieldSp init_perturb_amplitude(dom_sp);
@@ -72,12 +66,8 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     SpeciesInformation const species_info(
             std::move(charges),
             std::move(masses),
-            std::move(density_eq),
-            std::move(temperature_eq),
-            std::move(mean_velocity_eq),
             std::move(init_perturb_amplitude),
-            std::move(init_perturb_mode),
-            mesh);
+            std::move(init_perturb_mode));
 
     FemNonPeriodicPoissonSolver
             poisson(species_info, builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);

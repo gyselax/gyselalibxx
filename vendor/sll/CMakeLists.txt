@@ -17,7 +17,7 @@ add_library(splines STATIC
 )
 if(VOICEXX_ENABLE_DEPRECATED)
     target_sources(splines
-	    PUBLIC
+	    PRIVATE
 	      src/deprecated/bsplines.cpp
         src/deprecated/bsplines_uniform.cpp
         src/deprecated/bsplines_non_uniform.cpp

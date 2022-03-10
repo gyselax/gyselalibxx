@@ -13,11 +13,11 @@ add_test(NAME TestLandauFFT
 set_property(TEST TestLandauFFT PROPERTY TIMEOUT 200)
 set_property(TEST TestLandauFFT PROPERTY LABELS test_on_Release_only)
 
-add_test(NAME TestLandauFEM
+add_test(NAME TestLandauFemUniform
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau.sh"
         "${PROJECT_SOURCE_DIR}"
-        "$<TARGET_FILE:landau_fem_periodic>"
+        "$<TARGET_FILE:landau_fem_uniform>"
         "$<TARGET_FILE:Python3::Interpreter>"
         "fem")
-set_property(TEST TestLandauFEM PROPERTY TIMEOUT 200)
-set_property(TEST TestLandauFEM PROPERTY LABELS test_on_Release_only)
+set_property(TEST TestLandauFemUniform PROPERTY TIMEOUT 200)
+set_property(TEST TestLandauFemUniform PROPERTY LABELS test_on_Release_only)
