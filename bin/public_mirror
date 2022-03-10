@@ -9,6 +9,10 @@ cd ..
 SRC_DIR="$PWD"
 
 cd "$(mktemp --tmpdir -d)"
+SSH_DIR="$PWD"
+chmod go-rwx "${SSH_DIR}"
+
+cd "$(mktemp --tmpdir -d)"
 WK_DIR="$PWD"
 
 git config --global advice.detachedHead false
@@ -31,9 +35,6 @@ git commit -m "${CI_COMMIT_MESSAGE}"
 
 git push origin "HEAD:public"
 
-cp ${GITHUB_MIRROR_PRIVKEY} GITHUB_MIRROR_PRIVKEY_copy
-chmod go-rwx GITHUB_MIRROR_PRIVKEY_copy
-head -n 1 GITHUB_MIRROR_PRIVKEY_copy
-export GIT_SSH_COMMAND="ssh -i GITHUB_MIRROR_PRIVKEY_copy -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
-${GIT_SSH_COMMAND} git@github.com
+cp ${GITHUB_MIRROR_PRIVKEY} "${SSH_DIR}/id_rsa"
+export GIT_SSH_COMMAND="ssh -i ${SSH_DIR}/id_rsa -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
 git push -f git@github.com:gyselax/gyselalibxx.git "HEAD:main"
