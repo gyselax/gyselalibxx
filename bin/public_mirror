@@ -33,5 +33,5 @@ git push origin "HEAD:public"
 
 head -n 1 ${GITHUB_MIRROR_PRIVKEY}
 export GIT_SSH_COMMAND="ssh -i ${GITHUB_MIRROR_PRIVKEY} -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
-${GIT_SSH_COMMAND} git@github.com:gyselax/gyselalibxx.git
+${GIT_SSH_COMMAND} git@github.com
 git push -f git@github.com:gyselax/gyselalibxx.git "HEAD:main"
