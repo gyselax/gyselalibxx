@@ -75,6 +75,7 @@ jobs:
         git worktree add -B gh-pages public remotes/origin/gh-pages
         find public -mindepth 1 -maxdepth 1 '!' -name .git -exec rm -rf '{}' '+'
         mv docs/html/* public/
+        echo "ddc.mdls.fr" > public/CNAME
         git -C public config user.name "${GITHUB_ACTOR}"
         git -C public config user.email "${GITHUB_ACTOR}@noreply.example.com"
         git -C public add -A .
