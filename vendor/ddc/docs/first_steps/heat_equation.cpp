@@ -19,7 +19,6 @@ using DDimY = UniformDiscretization<Y>;
 static unsigned nt = 10;
 static unsigned nx = 100;
 static unsigned ny = 200;
-static unsigned gw = 1;
 static double kx = 100.;
 static double ky = 1.;
 static double cfl = 0.99;
@@ -35,8 +34,8 @@ data:
     type: array
     subtype: double
     size: [ '$temperature_extents[0]', '$temperature_extents[1]' ]
-    start: [ '$ghostwidth', '$ghostwidth' ]
-    subsize: [ '$temperature_extents[0]-2*$ghostwidth', '$temperature_extents[1]-2*$ghostwidth' ]
+    start: [ '1', '1' ]
+    subsize: [ '$temperature_extents[0]-2', '$temperature_extents[1]-2' ]
 
 plugins:
   decl_hdf5:
@@ -57,7 +56,7 @@ int main()
     Coordinate<X> const dx(0.02);
 
     // Actual mesh on X
-    init_discretization<DDimX>(min_x, dx);
+    init_discretization<DDimX>(min_x - dx, dx);
 
     // Origin on Y
     Coordinate<Y> const min_y(-1.);
@@ -66,20 +65,19 @@ int main()
     Coordinate<Y> const dy(0.01);
 
     // Actual mesh on Y
-    init_discretization<DDimY>(min_y, dy);
+    init_discretization<DDimY>(min_y - dy, dy);
 
     // Two-dimensional mesh on X,Y
     //! [mesh]
 
     //! [domain]
-    // Take (nx+2gw) x (ny+2gw) points of `mesh_xy` starting from (0,0)
-    DiscreteDomain<DDimX, DDimY> const domain_xy(
-            DiscreteVector<DDimX, DDimY>(nx + 2 * gw, ny + 2 * gw));
+    DiscreteDomain<DDimX> const domain_x(DiscreteVector<DDimX>(nx + 2));
+    DiscreteDomain<DDimY> const domain_y(DiscreteVector<DDimY>(ny + 2));
+    DiscreteDomain domain_xy(domain_x, domain_y);
 
-    // Take only the inner domain (i.e. without ghost zone)
-    DiscreteDomain<DDimX, DDimY> const inner_xy(
-            DiscreteCoordinate<DDimX, DDimY>(gw, gw),
-            DiscreteVector<DDimX, DDimY>(nx, ny));
+    DiscreteDomain<DDimX> const inner_x(domain_x.front() + 1, DiscreteVector<DDimX>(nx));
+    DiscreteDomain<DDimY> const inner_y(domain_y.front() + 1, DiscreteVector<DDimY>(ny));
+    DiscreteDomain inner_xy(inner_x, inner_y);
     //! [domain]
 
     // Allocate data located at each point of `domain_xy` (including ghost region)
@@ -90,16 +88,16 @@ int main()
 
     //! [subdomains]
     // Ghost borders
-    ChunkSpan const temperature_g_x_left = T_in[DiscreteCoordinate<DDimX>(gw - 1)];
-    ChunkSpan const temperature_g_x_right = T_in[DiscreteCoordinate<DDimX>(nx + 2 * gw - 1)];
-    ChunkSpan const temperature_g_y_left = T_in[DiscreteCoordinate<DDimY>(gw - 1)];
-    ChunkSpan const temperature_g_y_right = T_in[DiscreteCoordinate<DDimY>(ny + 2 * gw - 1)];
+    ChunkSpan const temperature_g_x_left = T_in[domain_x.front()][inner_y];
+    ChunkSpan const temperature_g_x_right = T_in[domain_x.back()][inner_y];
+    ChunkSpan const temperature_g_y_left = T_in[domain_y.front()][inner_x];
+    ChunkSpan const temperature_g_y_right = T_in[domain_y.back()][inner_x];
 
     // Inner borders
-    ChunkSpan const temperature_i_x_left = std::as_const(T_in)[DiscreteCoordinate<DDimX>(gw)];
-    ChunkSpan const temperature_i_x_right = std::as_const(T_in)[DiscreteCoordinate<DDimX>(nx + gw)];
-    ChunkSpan const temperature_i_y_left = std::as_const(T_in)[DiscreteCoordinate<DDimY>(gw)];
-    ChunkSpan const temperature_i_y_right = std::as_const(T_in)[DiscreteCoordinate<DDimY>(ny + gw)];
+    ChunkSpan const temperature_i_x_left = std::as_const(T_in)[inner_x.front()][inner_y];
+    ChunkSpan const temperature_i_x_right = std::as_const(T_in)[inner_x.back()][inner_y];
+    ChunkSpan const temperature_i_y_left = std::as_const(T_in)[inner_y.front()][inner_x];
+    ChunkSpan const temperature_i_y_right = std::as_const(T_in)[inner_y.back()][inner_x];
     //! [subdomains]
 
     // Initialize the whole domain
@@ -110,15 +108,14 @@ int main()
     });
 
     PDI_init(PC_parse_string(PDI_CFG));
-    PDI_expose("ghostwidth", &gw, PDI_OUT);
 
     // Some heuristic for the time step
     double invdx2_max = 0.0;
-    for (auto ix : select<DDimX>(inner_xy)) {
+    for (DiscreteCoordinate<DDimX> const ix : inner_x) {
         invdx2_max = std::fmax(invdx2_max, 1.0 / (distance_at_left(ix) * distance_at_right(ix)));
     }
     double invdy2_max = 0.0;
-    for (auto iy : select<DDimY>(inner_xy)) {
+    for (DiscreteCoordinate<DDimY> const iy : inner_y) {
         invdy2_max = std::fmax(invdy2_max, 1.0 / (distance_at_left(iy) * distance_at_right(iy)));
     }
     double const dt = 0.5 * cfl / (kx * invdx2_max + ky * invdy2_max);
