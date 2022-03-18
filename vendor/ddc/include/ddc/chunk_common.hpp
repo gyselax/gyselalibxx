@@ -112,7 +112,7 @@ public:
     template <class, class, class>
     friend class ChunkSpan;
 
-    template <class, class>
+    template <class, class, class>
     friend class Chunk;
 
     static_assert(mapping_type::is_always_strided());
