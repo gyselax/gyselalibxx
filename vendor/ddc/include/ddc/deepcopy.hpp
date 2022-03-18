@@ -11,17 +11,17 @@ namespace detail {
 template <class ElementType, class... DDims, class Layout, class Functor, class... MCoords>
 inline void for_each_impl(
         ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const to,
-        Functor&& f,
-        MCoords&&... mcoords) noexcept
+        Functor const& f,
+        MCoords const&... mcoords) noexcept
 {
     if constexpr (
             sizeof...(MCoords)
             == ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout>::rank()) {
-        f(std::forward<MCoords>(mcoords)...);
+        f(mcoords...);
     } else {
         using CurrentDDim = type_seq_element_t<sizeof...(MCoords), detail::TypeSeq<DDims...>>;
-        for (auto&& ii : get_domain<CurrentDDim>(to)) {
-            for_each_impl(to, std::forward<Functor>(f), std::forward<MCoords>(mcoords)..., ii);
+        for (DiscreteCoordinate<CurrentDDim> const ii : get_domain<CurrentDDim>(to)) {
+            for_each_impl(to, f, mcoords..., ii);
         }
     }
 }
