@@ -2,17 +2,19 @@
 
 #pragma once
 
+#include <memory>
+
 #include "ddc/chunk_common.hpp"
 #include "ddc/chunk_span.hpp"
 
-template <class, class>
+template <class ElementType, class, class Allocator = std::allocator<ElementType>>
 class Chunk;
 
-template <class ElementType, class SupportType>
-inline constexpr bool enable_chunk<Chunk<ElementType, SupportType>> = true;
+template <class ElementType, class SupportType, class Allocator>
+inline constexpr bool enable_chunk<Chunk<ElementType, SupportType, Allocator>> = true;
 
-template <class ElementType, class... DDims>
-class Chunk<ElementType, DiscreteDomain<DDims...>>
+template <class ElementType, class... DDims, class Allocator>
+class Chunk<ElementType, DiscreteDomain<DDims...>, Allocator>
     : public ChunkCommon<ElementType, DiscreteDomain<DDims...>, std::experimental::layout_right>
 {
 protected:
@@ -60,23 +62,29 @@ public:
 
     using reference = typename base_type::reference;
 
-    template <class, class>
+    template <class, class, class>
     friend class Chunk;
+
+private:
+    Allocator m_allocator;
 
 public:
     /// Empty Chunk
     Chunk() = default;
 
     /// Construct a Chunk on a domain with uninitialized values
-    explicit Chunk(mdomain_type const& domain)
-        : base_type(new (std::align_val_t(64)) value_type[domain.size()], domain)
+    explicit Chunk(mdomain_type const& domain, Allocator allocator = Allocator())
+        : base_type(std::allocator_traits<Allocator>::allocate(m_allocator, domain.size()), domain)
+        , m_allocator(std::move(allocator))
     {
     }
 
     /// Construct a Chunk from a deepcopy of a ChunkSpan
     template <class OElementType, class... ODDims, class LayoutType>
-    explicit Chunk(ChunkSpan<OElementType, DiscreteDomain<ODDims...>, LayoutType> chunk_span)
-        : Chunk(chunk_span.domain())
+    explicit Chunk(
+            ChunkSpan<OElementType, DiscreteDomain<ODDims...>, LayoutType> chunk_span,
+            Allocator allocator = Allocator())
+        : Chunk(chunk_span.domain(), std::move(allocator))
     {
         deepcopy(span_view(), chunk_span);
     }
@@ -87,7 +95,9 @@ public:
     /** Constructs a new Chunk by move
      * @param other the Chunk to move
      */
-    Chunk(Chunk&& other) : base_type(std::move(other))
+    Chunk(Chunk&& other)
+        : base_type(std::move(static_cast<base_type&>(other)))
+        , m_allocator(std::move(other.m_allocator))
     {
         other.m_internal_mdspan = internal_mdspan_type();
     }
@@ -95,7 +105,7 @@ public:
     ~Chunk()
     {
         if (this->m_internal_mdspan.data()) {
-            operator delete[](this->data(), std::align_val_t(64));
+            std::allocator_traits<Allocator>::deallocate(m_allocator, this->data(), this->size());
         }
     }
 
@@ -108,7 +118,10 @@ public:
      */
     Chunk& operator=(Chunk&& other)
     {
-        static_cast<base_type&>(*this) = std::move(other);
+        assert(this != &other);
+        static_cast<base_type&>(*this) = std::move(static_cast<base_type&>(other));
+        m_allocator = std::move(other.m_allocator);
+
         other.m_internal_mdspan = internal_mdspan_type();
         return *this;
     }
