@@ -3,6 +3,7 @@
 #include <array>
 #include <cmath>
 
+#include <ddc/Chunk>
 #include <ddc/ChunkSpan>
 #include <ddc/discretization>
 
