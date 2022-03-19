@@ -219,7 +219,9 @@ public:
     constexpr reference operator()(
             detail::TaggedVector<DiscreteCoordElement, ODDims> const&... mcoords) const noexcept
     {
+        static_assert(sizeof...(ODDims) == sizeof...(DDims), "Invalid number of dimensions");
         assert(((mcoords >= front<ODDims>(this->m_domain)) && ...));
+        assert(((mcoords <= back<ODDims>(this->m_domain)) && ...));
         return this->m_internal_mdspan(take<DDims>(mcoords...)...);
     }
 
@@ -227,10 +229,14 @@ public:
      * @param mcoords discrete coordinates
      * @return reference to this element
      */
-    constexpr reference operator()(mcoord_type const& indices) const noexcept
+    template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
+    constexpr reference operator()(
+            detail::TaggedVector<DiscreteCoordElement, ODDims...> const& mcoords) const noexcept
     {
-        assert(((get<DDims>(indices) >= front<DDims>(this->m_domain)) && ...));
-        return this->m_internal_mdspan(indices.array());
+        static_assert(sizeof...(ODDims) == sizeof...(DDims), "Invalid number of dimensions");
+        assert(((get<ODDims>(mcoords) >= front<ODDims>(this->m_domain)) && ...));
+        assert(((get<ODDims>(mcoords) <= back<ODDims>(this->m_domain)) && ...));
+        return this->m_internal_mdspan(get<DDims>(mcoords)...);
     }
 
     /** Access to the underlying allocation pointer
