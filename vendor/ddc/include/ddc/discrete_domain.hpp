@@ -86,7 +86,8 @@ public:
 
     DiscreteDomain& operator=(DiscreteDomain&& x) = default;
 
-    constexpr bool operator==(DiscreteDomain const& other) const
+    template <class... ODims>
+    constexpr bool operator==(DiscreteDomain<ODims...> const& other) const
     {
         return m_lbound == other.m_lbound && m_ubound == other.m_ubound;
     }
