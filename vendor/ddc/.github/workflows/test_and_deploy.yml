@@ -68,11 +68,7 @@ jobs:
     - name: Build site
       run: |
         cmake -DBUILD_DOCUMENTATION=ON -DDDC_BUILD_PDI_WRAPPER=OFF .
-        if make doc 2>&1 | tee >(cat>&2) | grep ' warning: ' > /dev/null
-        then
-          make doc 2>&1 | grep ' warning: '
-          exit 1
-        fi
+        make doc
     - name: Publish site
       if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
       run: |
