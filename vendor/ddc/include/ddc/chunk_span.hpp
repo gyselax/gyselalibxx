@@ -226,17 +226,17 @@ public:
     }
 
     /** Element access using a multi-dimensional DiscreteCoordinate
-     * @param mcoords discrete coordinates
+     * @param mcoord discrete coordinates
      * @return reference to this element
      */
     template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
     constexpr reference operator()(
-            detail::TaggedVector<DiscreteCoordElement, ODDims...> const& mcoords) const noexcept
+            detail::TaggedVector<DiscreteCoordElement, ODDims...> const& mcoord) const noexcept
     {
         static_assert(sizeof...(ODDims) == sizeof...(DDims), "Invalid number of dimensions");
-        assert(((get<ODDims>(mcoords) >= front<ODDims>(this->m_domain)) && ...));
-        assert(((get<ODDims>(mcoords) <= back<ODDims>(this->m_domain)) && ...));
-        return this->m_internal_mdspan(get<DDims>(mcoords)...);
+        assert(((get<ODDims>(mcoord) >= front<ODDims>(this->m_domain)) && ...));
+        assert(((get<ODDims>(mcoord) <= back<ODDims>(this->m_domain)) && ...));
+        return this->m_internal_mdspan(get<DDims>(mcoord)...);
     }
 
     /** Access to the underlying allocation pointer
