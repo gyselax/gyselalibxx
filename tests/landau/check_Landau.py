@@ -4,7 +4,7 @@
 
 import sys
 import READutils as READut
-from diag_Landau import plot_Landau_damping
+from diag_VOICE_XVx import plot_Phi_growthrate_frequency
 
 if len(sys.argv) != 1:
     print('Usage: {}'.format(sys.argv[0]), file=sys.stderr)
@@ -16,8 +16,10 @@ if not READut.valid_directory('.'):
 
 vxx_res = READut.Read_VOICEXX_results('.')
 
-plot_Landau_damping(vxx_res.electrostatic_potential,
-                    vxx_res.time_saved,
-                    dirname='.',
-                    plotfig=True,
-                    validate=True)
+plot_Phi_growthrate_frequency (vxx_res.electrostatic_potential,
+                               vxx_res.time_saved,
+                               dirname='.',
+                               plotfig=True,
+                               validate=True,
+                               growth_rate_theory=-0.153,
+                               frequency_theory=1.4156)

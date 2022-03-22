@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MIT
 
 # Using :
-#  python ../post-process/PythonScripts/diag_Landau.py
-#  python ../post-process/PythonScripts/diag_Landau.py --dir . --save
-#  python ../post-process/PythonScripts/diag_Landau.py --dir . --no-save
+#  python ../post-process/PythonScripts/diag_VOICE_XVx.py
+#  python ../post-process/PythonScripts/diag_VOICE_XVx.py --dir . --save
+#  python ../post-process/PythonScripts/diag_VOICE_XVx.py --dir . --no-save
 
 from argparse import ArgumentParser
 import glob
@@ -16,9 +16,12 @@ import MATHutils as MATHut
 import READutils as READut
 
 
-def plot_Landau_damping(Phi, timegrid, time_end=None, dirname=".", plotfig=False, validate=False):
+def plot_Phi_growthrate_frequency(Phi, timegrid, time_end=None, dirname=".",
+                                  plotfig=False, validate=False,
+                                  growth_rate_theory=-0.153,
+                                  frequency_theory=1.4156):
     """
-    Plot the time evolution of abs(Phi) to compute the Landau damping rate and frequency
+    Plot the time evolution of abs(Phi) to compute the growth rate (or damping rate) and frequency
     """
 
     [nt, nx] = np.shape(Phi)
@@ -29,7 +32,7 @@ def plot_Landau_damping(Phi, timegrid, time_end=None, dirname=".", plotfig=False
     if (time_end is None):
         nt_end = nt
 
-    # Computation of the damping rate
+    # Computation of the growth rate
     serie_max_indx = [0]
     serie_max_t = [timegrid[0]]
     serie_max_phi = [absPhi_rp[0]]
@@ -51,13 +54,10 @@ def plot_Landau_damping(Phi, timegrid, time_end=None, dirname=".", plotfig=False
                            np.log(serie_max_phi[indx_fit:len(serie_max_t) - icorr]),
                            1, full='True')
     [p_fit, s_fit] = poly_resu[0]
-    damping_rate = p_fit
-    damping_rate_theory = -0.153
-    damping_rate_relerror = abs(damping_rate - damping_rate_theory) / abs(damping_rate_theory)
-    print("damping rate = ", damping_rate)
-    print("--> rel. error  = ", damping_rate_relerror)
-    if validate and damping_rate_relerror > 0.05:
-        sys.exit(1)
+    growth_rate = p_fit
+    growth_rate_relerror = abs(growth_rate - growth_rate_theory) / abs(growth_rate_theory)
+    print("growth rate = ", growth_rate)
+    print("--> rel. error  = ", growth_rate_relerror)
 
     if (plotfig):
         plt.figure()
@@ -68,12 +68,12 @@ def plot_Landau_damping(Phi, timegrid, time_end=None, dirname=".", plotfig=False
                      'r', lw=3)
         plt.ylabel('abs(Phi(middle_box))', fontsize=16)
         plt.xlabel('time', fontsize=16)
-        plt.title('damping_rate = ' + str(round(damping_rate, 4)) +
-                  " ; theory = " + str(damping_rate_theory), fontsize=16)
+        plt.title('growth_rate = ' + str(round(growth_rate, 4)) +
+                  " ; theory = " + str(growth_rate_theory), fontsize=16)
 
         time_acronym = '_t' + str(round(timegrid[0], 4)
                                   ) + 'to' + str(round(timegrid[nt_end - 1], 4))
-        savefig_filename = dirname + '/dampingrate' + time_acronym + '.png'
+        savefig_filename = dirname + '/growthrate' + time_acronym + '.png'
         print("Save figure in " + savefig_filename)
         plt.savefig(savefig_filename)
 
@@ -82,12 +82,9 @@ def plot_Landau_damping(Phi, timegrid, time_end=None, dirname=".", plotfig=False
     abs_FFTPhi_tt = np.abs(FFTPhi_tt)
     frequency = np.abs(freq[np.max(np.nonzero(
         abs_FFTPhi_tt == np.max(abs_FFTPhi_tt)))])
-    frequency_theory = 1.4156
     frequency_relerror = abs(frequency - frequency_theory) / frequency_theory
     print("frequency   = ", frequency)
     print(" --> rel. error = ", frequency_relerror)
-    if validate and frequency_relerror > 0.05:
-        sys.exit(1)
 
     if (plotfig):
         plt.figure()
@@ -107,7 +104,11 @@ def plot_Landau_damping(Phi, timegrid, time_end=None, dirname=".", plotfig=False
         print("Save figure in " + savefig_filename)
         plt.savefig(savefig_filename)
 
-    return [damping_rate, damping_rate_relerror, frequency, frequency_relerror]
+    # Check the results compared to the theory
+    if validate and (growth_rate_relerror > 0.05 or frequency_relerror > 0.05):
+        sys.exit(1)
+
+    return [growth_rate, growth_rate_relerror, frequency, frequency_relerror]
 
 
 # --------------------------------------------------
@@ -141,11 +142,11 @@ def main():
     gridx = vxx_res.MeshX
     dx = gridx[1] - gridx[0]
 
-    [damping_rate, damping_rate_relerror, frequency, frequency_relerror] = \
-        plot_Landau_damping(vxx_res.electrostatic_potential,
-                            vxx_res.time_saved,
-                            dirname=VOICEXX_dir,
-                            plotfig=args.save)
+    [growth_rate, growth_rate_relerror, frequency, frequency_relerror] = \
+        plot_Phi_growthrate_frequency(vxx_res.electrostatic_potential,
+                                      vxx_res.time_saved,
+                                      dirname=VOICEXX_dir,
+                                      plotfig=args.save)
 
 
 if __name__ == "__main__":
