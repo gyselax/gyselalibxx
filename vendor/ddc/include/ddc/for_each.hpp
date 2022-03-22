@@ -13,8 +13,8 @@ struct serial_policy
 {
 };
 
-/** iterates over a 1d domain
- * @param[in] domain the 1d domain to iterate
+/** iterates over a 1D domain
+ * @param[in] domain the domain over which to iterate
  * @param[in] f      a functor taking an index as parameter
  */
 template <class DDim, class Functor>

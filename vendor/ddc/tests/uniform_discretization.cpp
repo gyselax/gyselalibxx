@@ -17,7 +17,7 @@ class UniformDiscretizationTest : public ::testing::Test
 protected:
     Coordinate<DimX> origin = Coordinate<DimX>(-1.);
     Coordinate<DimX> step = Coordinate<DimX>(0.5);
-    DiscreteVector<DimX> npoints = DiscreteVector<DimX>(5);
+    DiscreteVector<DDimX> npoints = DiscreteVector<DDimX>(5);
     DiscreteCoordinate<DDimX> lbound = DiscreteCoordinate<DDimX>(0);
     DiscreteCoordinate<DDimX> point_ix = DiscreteCoordinate<DDimX>(2);
     Coordinate<DimX> point_rx = Coordinate<DimX>(0.);

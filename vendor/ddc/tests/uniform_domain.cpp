@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-#include <type_traits>
+#include <cstddef>
 
-#include <ddc/Coordinate>
-#include <ddc/DiscreteCoordinate>
 #include <ddc/DiscreteDomain>
 #include <ddc/NonUniformDiscretization>
 #include <ddc/UniformDiscretization>
-#include <ddc/UniformDomain>
+#include <ddc/is_uniform_domain_v>
 
 #include <gtest/gtest.h>
 
