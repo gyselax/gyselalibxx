@@ -59,8 +59,10 @@ public:
 
     /** Construct a DiscreteDomain starting from (0, ..., 0) with size points.
      * @param size the number of points in each dimension
+     * 
+     * @deprecated use the version with explicit lower bound instead
      */
-    constexpr DiscreteDomain(mlength_type const& size)
+    [[deprecated]] constexpr DiscreteDomain(mlength_type const& size)
         : m_lbound((get<DDims>(size) - get<DDims>(size))...) // Hack to have expansion of zero
         , m_ubound((get<DDims>(size) - 1)...)
     {
