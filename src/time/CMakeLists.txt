@@ -16,7 +16,7 @@ target_include_directories(time
 target_link_libraries(time
     PUBLIC
         DDC::DDC
-        DDC::PDI
+        DDC::PDI_Wrapper
         vcx::speciesinfo
         vcx::poisson
         vcx::vlasov
