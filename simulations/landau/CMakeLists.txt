@@ -5,7 +5,7 @@ target_compile_features(landau_fem_uniform PUBLIC cxx_std_17)
 target_link_libraries(landau_fem_uniform
   PUBLIC
   DDC::DDC
-  DDC::PDI
+  DDC::PDI_Wrapper
   vcx::initialization
   vcx::interpolation
   vcx::poisson
@@ -26,7 +26,7 @@ if (VOICEXX_ENABLE_PERIODIC_RDIMX)
     target_link_libraries(landau_fft
         PUBLIC
             DDC::DDC
-            DDC::PDI
+            DDC::PDI_Wrapper
             vcx::initialization
             vcx::fft
             vcx::interpolation

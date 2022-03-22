@@ -12,7 +12,7 @@ target_link_libraries(unit_tests
         GTest::gmock
         GTest::gmock_main
         paraconf::paraconf
-        DDC::PDI
+        DDC::PDI_Wrapper
         vcx::vlasov
         vcx::poisson
 )
