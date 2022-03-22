@@ -3,9 +3,11 @@
 #pragma once
 
 #include <cassert>
+#include <type_traits>
 
 #include "ddc/coordinate.hpp"
 #include "ddc/discrete_coordinate.hpp"
+#include "ddc/discrete_domain.hpp"
 #include "ddc/discretization.hpp"
 
 /** UniformDiscretization models a uniform discretization of the provided continuous dimension
@@ -43,7 +45,7 @@ public:
     UniformDiscretization(UniformDiscretization&&) = default;
 
     /** @brief Construct a `UniformDiscretization` from a point and a spacing step.
-     * 
+     *
      * @param origin the real coordinate of mesh coordinate 0
      * @param step   the real distance between two points of mesh distance 1
      */
@@ -55,7 +57,7 @@ public:
     }
 
     /** @brief Construct a `UniformDiscretization` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
-     * 
+     *
      * @param a the coordinate of a first real point (will have mesh coordinate 0)
      * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
      * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
@@ -258,4 +260,41 @@ template <class CDim>
 Coordinate<CDim> rlength(DiscreteDomain<UniformDiscretization<CDim>> const& d)
 {
     return rmax(d) - rmin(d);
+}
+
+template <class T>
+struct is_uniform_domain : std::false_type
+{
+};
+
+template <class... DDims>
+struct is_uniform_domain<DiscreteDomain<DDims...>>
+    : std::conditional_t<
+              (is_uniform_discretization_v<DDims> && ...),
+              std::true_type,
+              std::false_type>
+{
+};
+
+template <class T>
+constexpr bool is_uniform_domain_v = is_uniform_domain<T>::value;
+
+
+/** Construct a uniform `DiscreteDomain` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a
+ *  number of points `n`.
+ *
+ * @param a the coordinate of a first real point (will have mesh coordinate 0)
+ * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
+ * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
+ */
+template <class D, class = std::enable_if_t<is_uniform_discretization_v<D>>>
+constexpr DiscreteDomain<D> init_global_domain(
+        typename D::rcoord_type a,
+        typename D::rcoord_type b,
+        typename D::dvect_type n)
+{
+    assert(a < b);
+    assert(n > 1);
+    init_discretization<D>(a, typename D::rcoord_type {(b - a) / (n - 1)});
+    return DiscreteDomain<D>(n);
 }

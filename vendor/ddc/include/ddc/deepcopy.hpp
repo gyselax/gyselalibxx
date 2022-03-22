@@ -6,26 +6,7 @@
 #include <utility>
 
 #include "ddc/chunk_span.hpp"
-
-namespace detail {
-template <class ElementType, class... DDims, class Layout, class Functor, class... MCoords>
-inline void for_each_impl(
-        ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout> const to,
-        Functor const& f,
-        MCoords const&... mcoords) noexcept
-{
-    if constexpr (
-            sizeof...(MCoords)
-            == ChunkSpan<ElementType, DiscreteDomain<DDims...>, Layout>::rank()) {
-        f(mcoords...);
-    } else {
-        using CurrentDDim = type_seq_element_t<sizeof...(MCoords), detail::TypeSeq<DDims...>>;
-        for (DiscreteCoordinate<CurrentDDim> const ii : get_domain<CurrentDDim>(to)) {
-            for_each_impl(to, f, mcoords..., ii);
-        }
-    }
-}
-} // namespace detail
+#include "ddc/for_each.hpp"
 
 /** Copy the content of a view into another
  * @param[out] to    the view in which to copy
@@ -40,10 +21,9 @@ inline ChunkDst const& deepcopy(ChunkDst&& to, ChunkSrc&& from) noexcept
     static_assert(
             std::is_assignable_v<decltype(*to.data()), decltype(*from.data())>,
             "Not assignable");
-    assert(to.domain().front() == from.domain().front());
-    assert(to.domain().back() == from.domain().back());
-    detail::for_each_impl(to.span_view(), [&to, &from](auto&&... idxs) {
-        to(idxs...) = from(idxs...);
+    assert(to.domain().extents() == from.domain().extents());
+    for_each_n(to.domain().extents(), [&to, &from](auto&& idx) {
+        to(to.domain().front() + idx) = from(from.domain().front() + idx);
     });
     return to;
 }
