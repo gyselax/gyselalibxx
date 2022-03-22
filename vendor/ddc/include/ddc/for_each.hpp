@@ -5,41 +5,60 @@
 #include <utility>
 
 #include "ddc/chunk_span.hpp"
+#include "ddc/detail/tagged_vector.hpp"
 #include "ddc/discrete_coordinate.hpp"
 #include "ddc/discrete_domain.hpp"
+
+namespace detail {
+
+template <class... DDims, class Element, class Functor, class... DCoords>
+inline void for_each_impl(
+        detail::TaggedVector<Element, DDims...> const& start,
+        detail::TaggedVector<Element, DDims...> const& end,
+        Functor const& f,
+        DCoords const&... dcs) noexcept
+{
+    if constexpr (sizeof...(DCoords) == sizeof...(DDims)) {
+        f(detail::TaggedVector<Element, DDims...> {dcs...});
+    } else {
+        using CurrentDDim = type_seq_element_t<sizeof...(DCoords), detail::TypeSeq<DDims...>>;
+        for (Element ii = select<CurrentDDim>(start); ii <= select<CurrentDDim>(end); ++ii) {
+            for_each_impl(start, end, f, dcs..., ii);
+        }
+    }
+}
+
+template <class X, class T, T v>
+constexpr T type_constant_v = std::integral_constant<T, v>::value;
+
+} // namespace detail
 
 /// Serial execution
 struct serial_policy
 {
 };
 
-/** iterates over a 1D domain
+/** iterates over a nD domain
  * @param[in] domain the domain over which to iterate
  * @param[in] f      a functor taking an index as parameter
  */
-template <class DDim, class Functor>
-inline void for_each(serial_policy, DiscreteDomain<DDim> const& domain, Functor&& f) noexcept
+template <class... DDims, class Functor>
+inline void for_each(serial_policy, DiscreteDomain<DDims...> const& domain, Functor&& f) noexcept
 {
-    for (DiscreteCoordinate<DDim> const i : domain) {
-        f(i);
-    }
+    detail::for_each_impl(domain.front(), domain.back(), std::forward<Functor>(f));
 }
 
-/** iterates over a 2d domain
- * @param[in] domain the 2d domain to iterate
- * @param[in] f      a functor taking 2 indices as parameter
+/** iterates over a nD extent
+ * @param[in] extent the extent over which to iterate
+ * @param[in] f      a functor taking an index as parameter
  */
-template <class DDim1, class DDim2, class Functor>
-inline void for_each(
-        serial_policy,
-        DiscreteDomain<DDim1, DDim2> const& domain,
-        Functor&& f) noexcept
+template <class... DDims, class Functor>
+inline void for_each_n(serial_policy, DiscreteVector<DDims...> const& extent, Functor&& f) noexcept
 {
-    for (DiscreteCoordinate<DDim1> const i1 : select<DDim1>(domain)) {
-        for (DiscreteCoordinate<DDim2> const i2 : select<DDim2>(domain)) {
-            f(DiscreteCoordinate<DDim1, DDim2>(i1, i2));
-        }
-    }
+    detail::for_each_impl(
+            DiscreteVector<DDims...> {detail::type_constant_v<DDims, std::ptrdiff_t, 0>...},
+            DiscreteVector<DDims...> {get<DDims>(extent) - 1 ...},
+            std::forward<Functor>(f));
 }
 
 /** OpenMP parallel execution
@@ -97,6 +116,12 @@ template <class... DDims, class Functor>
 inline void for_each(DiscreteDomain<DDims...> const& domain, Functor&& f) noexcept
 {
     for_each(default_policy(), domain, std::forward<Functor>(f));
+}
+
+template <class... DDims, class Functor>
+inline void for_each_n(DiscreteVector<DDims...> const& domain, Functor&& f) noexcept
+{
+    for_each_n(default_policy(), domain, std::forward<Functor>(f));
 }
 
 template <
