@@ -69,9 +69,10 @@ ddc_sync:
   needs: []
   image: jbigot/voicexx_env
   script:
-  - git checkout "${CI_COMMIT_BRANCH}"
+  - git checkout -b main origin/main
   - ./bin/ddc_sync --commit
-  - git push "http://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" "HEAD:${CI_COMMIT_BRANCH}"
+  - git pull
+  - git push "http://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" "HEAD:main"
 public_mirror:
   only: [ main ]
   tags: [ outssh ]
