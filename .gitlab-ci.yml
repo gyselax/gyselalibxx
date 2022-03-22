@@ -69,9 +69,9 @@ ddc_sync:
   needs: []
   image: jbigot/voicexx_env
   script:
-  - git checkout -b main origin/main
+  - git checkout -B main origin/main
   - ./bin/ddc_sync --commit
-  - git pull
+  - git pull --rebase
   - git push "http://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" "HEAD:main"
 public_mirror:
   only: [ main ]
