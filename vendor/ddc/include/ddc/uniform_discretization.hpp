@@ -18,6 +18,10 @@ public:
 
     using mcoord_type = DiscreteCoordinate<UniformDiscretization>;
 
+    using dvect_type = DiscreteVector<UniformDiscretization>;
+
+    using ddom_type = DiscreteDomain<UniformDiscretization>;
+
     using rdim_type = CDim;
 
 public:
@@ -51,8 +55,26 @@ public:
      * @param a the coordinate of a first real point (will have mesh coordinate 0)
      * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
      * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
+     * 
+     * @deprecated use the version accepting a vector for n instead
      */
-    constexpr UniformDiscretization(rcoord_type a, rcoord_type b, std::size_t n)
+    [[deprecated(
+            "Use the version accepting a vector for n "
+            "instead.")]] constexpr UniformDiscretization(rcoord_type a, rcoord_type b, std::size_t n)
+        : m_origin(a)
+        , m_step((b - a) / (n - 1))
+    {
+        assert(a < b);
+        assert(n > 1);
+    }
+
+    /** @brief Construct a `UniformDiscretization` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
+     * 
+     * @param a the coordinate of a first real point (will have mesh coordinate 0)
+     * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
+     * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
+     */
+    constexpr UniformDiscretization(rcoord_type a, rcoord_type b, dvect_type n)
         : m_origin(a)
         , m_step((b - a) / (n - 1))
     {
