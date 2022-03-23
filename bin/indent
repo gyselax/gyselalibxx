@@ -71,7 +71,7 @@ fi
 
 
 ${DOCKER_COMMAND} find \
-    src tests vendor/ddc vendor/sll \
+    src tests vendor/sll \
     '(' -name '*.h' -o -name '*.hpp' -o -name '*.cpp' ')' \
     -exec clang-format ${FORMAT_PARAMS} '{}' '+' \
 && ${RUN_IF_OK}
