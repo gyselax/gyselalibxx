@@ -55,7 +55,7 @@ cd ..
 
 if (( USE_DOCKER > 0 ))
 then
-    DOCKER_COMMAND="docker run -v $(pwd):/data -u $(id -u):$(id -g) -ti jbigot/voicexx_env"
+    DOCKER_COMMAND="docker run -v $(pwd):/data -w /data -u $(id -u):$(id -g) -ti jbigot/voicexx_env"
 else
     DOCKER_COMMAND=''
 fi
