@@ -13,6 +13,7 @@ add_executable(ddc_tests
     transform_reduce.cpp
     rectilinear_domain.cpp
     uniform_domain.cpp
+    for_each.cpp
 )
 target_compile_features(ddc_tests PUBLIC cxx_std_17)
 target_link_libraries(ddc_tests
