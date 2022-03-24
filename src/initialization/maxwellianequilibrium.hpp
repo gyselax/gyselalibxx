@@ -28,15 +28,12 @@ private:
 */
     void compute_maxwellian(
             DSpanVx fMaxwellian,
-            double const density,
-            double const temperature,
-            double const mean_velocity) const;
+            double density,
+            double temperature,
+            double mean_velocity) const;
 
 public:
-    MaxwellianEquilibrium(
-            DViewSp const density_eq,
-            DViewSp const temperature_eq,
-            DViewSp const mean_velocity_eq);
+    MaxwellianEquilibrium(DViewSp density_eq, DViewSp temperature_eq, DViewSp mean_velocity_eq);
 
     ~MaxwellianEquilibrium() override = default;
 
