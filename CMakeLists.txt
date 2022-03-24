@@ -63,6 +63,7 @@ set(CMAKE_CXX_FLAGS "${VOICEXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 ## The main code in `src/`
 add_subdirectory(src/)
 add_subdirectory(simulations/landau)
+add_subdirectory(simulations/bump_on_tail)
 
 ## if tests are enabled, build the tests in `tests/`
 if("${BUILD_TESTING}")

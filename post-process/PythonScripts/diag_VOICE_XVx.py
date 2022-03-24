@@ -43,7 +43,7 @@ def plot_Phi_growthrate_frequency(Phi, timegrid, time_end=None, dirname=".",
             serie_max_indx.append(it)
             serie_max_t.append(timegrid[it])
             serie_max_phi.append(absPhi_rp[it])
-    indx_fit = 1
+    indx_fit = 6
     icorr = 0
     for i in np.r_[1:len(serie_max_t) - 3]:
         correlation = np.corrcoef(serie_max_t[indx_fit:len(serie_max_t) - i],
