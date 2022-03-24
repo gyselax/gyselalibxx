@@ -43,7 +43,7 @@ DSpanSpVx MaxwellianEquilibrium::operator()(DSpanSpVx const allfequilibrium) con
   where u is the mean velocity
 */
 void MaxwellianEquilibrium::compute_maxwellian(
-        DSpanVx fMaxwellian,
+        DSpanVx const fMaxwellian,
         double const density,
         double const temperature,
         double const mean_velocity) const
