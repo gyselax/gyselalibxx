@@ -92,8 +92,8 @@ int main(int argc, char** argv)
     DFieldSp density_eq(dom_kinsp);
     DFieldSp temperature_eq(dom_kinsp);
     DFieldSp mean_velocity_eq(dom_kinsp);
-    FieldSp<int> init_perturb_mode(dom_kinsp);
     DFieldSp init_perturb_amplitude(dom_kinsp);
+    FieldSp<int> init_perturb_mode(dom_kinsp);
     int nb_elec_adiabspecies = 1;
     int nb_ion_adiabspecies = 1;
 
