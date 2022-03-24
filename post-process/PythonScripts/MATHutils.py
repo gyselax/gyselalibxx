@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: MIT
+""" File containing mathematical tools
+"""
 
-from math import pow
+import math
 import numpy as np
 import scipy
 import scipy.integrate as integrate
@@ -75,11 +77,9 @@ def Deriv_nthorder(F, dx, periodic=0, nth_deriv=1 , order=4):
     """
 
     if nth_deriv not in [1,2]:
-        print(str(nth_deriv) + "= unexpected derivative : should be 1 or 2")
-        return
+        raise ValueError(str(nth_deriv) + "= unexpected derivative : should be 1 or 2")
     if order not in [2,4,6]:
-        print(str(order) + "= unexpected order : should be 2,4 or 6")
-        return
+        raise ValueError(str(order) + "= unexpected order : should be 2,4 or 6")
 
     nx   = len(F)
     dnFdxn = np.zeros((nx))
@@ -116,7 +116,7 @@ def Deriv_nthorder(F, dx, periodic=0, nth_deriv=1 , order=4):
             for i,coeff in enumerate(cc):
                 dnFdxn[indx] = dnFdxn[indx] + coeff*F[np.fmod(indx+i-offset,nx)]
 
-    dnFdxn = dnFdxn / pow(dx,nth_deriv)
+    dnFdxn = dnFdxn / math.pow(dx,nth_deriv)
 
     return dnFdxn
 
@@ -201,7 +201,7 @@ def iFourier1D(TFF, kx):
     dkx = np.abs(kx[1] - kx[0])
     x   = np.linspace(0., 2.*np.pi/dkx,nx,endpoint=False)
     TFF = np.fft.ifftshift(TFF)
-    F   = np.real(scipy.fft.ifft(TFF))
+    F   = np.real(scipy.fftpack.ifft(TFF))
 
     return F, x
 
@@ -223,9 +223,9 @@ def Fourier2D(F, x, y):
     assert y.ndim == 1
     dy = np.abs(y[1]-y[0])
 
-    kx = (2.*np.pi/dx)*scipy.fft.fftfreq(x.shape[-1])
-    ky = (2.*np.pi/dy)*scipy.fft.fftfreq(y.shape[-1])
-    TFF = scipy.fft.fft2(F)
+    kx = (2.*np.pi/dx)*scipy.fftpack.fftfreq(x.shape[-1])
+    ky = (2.*np.pi/dy)*scipy.fftpack.fftfreq(y.shape[-1])
+    TFF = scipy.fftpack.fft2(F)
 
     kx  = np.fft.fftshift(kx)
     ky  = np.fft.fftshift(ky)
@@ -256,7 +256,7 @@ def iFourier2D(TFF, kx, ky):
     y   = np.linspace(0., 2.*np.pi/dky,ny,endpoint=False)
 
     TFF = np.fft.ifftshift(TFF)
-    F   = np.real(scipy.fft.ifft2(TFF))
+    F   = np.real(scipy.fftpack.ifft2(TFF))
 
     return F, x, y
 
@@ -265,18 +265,18 @@ def iFourier2D(TFF, kx, ky):
 
 
 #--------------------------------------------------
-#  Computation of int F(v,x,t) dv
-#--------------------------------------------------
 def compute_intFdv(F,v):
+    """ Computation of int F(v,x,t) dv
+    """
 
-    [nt,nx,nv] = np.shape(F)
+    [nt,nx,_] = np.shape(F)
     intFdv = np.zeros([nt,nx])
     for ix in np.arange(nx):
         for it in np.arange(nt):
             intFdv[it,ix] = integrate.simps(F[it,ix,:],v)
 
     return intFdv
-    
+
 #end def compute_intFdv
 #--------------------------------------------------
 
@@ -285,26 +285,26 @@ def compute_intFdv(F,v):
 #  Computation of PDF
 #--------------------------------------------------
 def Compute_PDF(data,theory_val):
-    """ Computation of the PDF for the data set given in the variable 'data' 
+    """ Computation of the PDF for the data set given in the variable 'data'
     using the theoretical value 'theory_val' """
-    
-    """ Computation of the error on the data set. 
-        The commented line below do the same thing but 
-        in linear scale """
-    
+
+    # Computation of the error on the data set.
+    # The commented line below does the same thing but
+    # in linear scale
+
     error   = np.log10(np.abs(data - theory_val))
     #error = data - theory_val
-    
-    """ Computation of the foundamental parameters 
-        of the error data set [min, max, mean, rms]"""
-    
+
+    # Computation of the foundamental parameters
+    # of the error data set [min, max, mean, rms]
+
     min_err = np.min(error)
     max_err = np.max(error)
     mean = np.mean(error)
     rms = np.sqrt(np.mean((error-mean)*(error-mean)))
-    
-    """ Binning operation on the error axis """
-    
+
+    # Binning operation on the error axis
+
     step = rms/100
     Np_p = int((max_err - mean)/step)+1  # Number of positive bins
     Np_m = int((mean-min_err)/step)+1    # Number of negative bins
@@ -312,24 +312,24 @@ def Compute_PDF(data,theory_val):
     stat_min = mean - Np_m*step          # Minimum value of the error axis
     stat_max = mean + Np_p*step          # Maximum value of the error axis
     bins = np.arange(stat_min,stat_max,step) # Error axis
-    
-    """ Building the NDF """
+
+    # Building the NDF
     IND = (error - stat_min)/step
-    IND = IND.astype(int) + 1 
+    IND = IND.astype(int) + 1
     NDF = np.zeros(N)
-    
+
     for i in np.arange( len(IND) ):
         if (IND[i]>0 & IND[i]<N):
             a = IND[i]
             NDF[a-1] = NDF[a-1] + 1
-    
-    """ Building the PDF """
+
+    # Building the PDF
     PDF = NDF / np.sum(NDF)
     mean_PDF = np.mean(np.exp(bins*np.log(10))*PDF)
     #mean_PDF = np.sum(PDF*bins)/len(PDF)
     print('mean_PDF = '+str(mean_PDF))
-    
-    
+
+
     #VG#""" Plots"""
     #VG#mpp.plot(bins, NDF,'.')
     #VG#mpp.yscale('log')
@@ -344,16 +344,15 @@ def Compute_PDF(data,theory_val):
     #VG#mpp.xlabel('be-1',size=20)
     #VG#mpp.savefig('PDF_be_dt2-5_log.png')
     #VG#mpp.show()
-    
+
 #end def Compute_PDF
 
 
 #--------------------------------------------------
-#  Find the lowest non-zero number in the array and
-#   replace all zeroes by a number lower than
-#   the lowest
-#--------------------------------------------------
 def replaceZeros(data):
+    """ Find the lowest non-zero number in the array and
+    replace all zeroes by a number lower than the lowest
+    """
 
     min_nonzero = np.min(data[np.nonzero(data)])
     data[data == 0] = min_nonzero*0.001

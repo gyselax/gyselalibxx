@@ -1,17 +1,19 @@
 # SPDX-License-Identifier: MIT
 
-# Using :
-#  python ../post-process/PythonScripts/diag_VOICE_XVx.py
-#  python ../post-process/PythonScripts/diag_VOICE_XVx.py --dir . --save
-#  python ../post-process/PythonScripts/diag_VOICE_XVx.py --dir . --no-save
+"""
+File for analysing VOICEXX results
 
+Usage :
+  python ../post-process/PythonScripts/diag_VOICE_XVx.py
+  python ../post-process/PythonScripts/diag_VOICE_XVx.py --dir . --save
+  python ../post-process/PythonScripts/diag_VOICE_XVx.py --dir . --no-save
+"""
+
+import sys
 from argparse import ArgumentParser
-import glob
 import matplotlib.pyplot as plt
 import numpy as np
-import sys
 
-import HDF5utils as H5ut
 import MATHutils as MATHut
 import READutils as READut
 
@@ -115,7 +117,7 @@ def plot_Phi_growthrate_frequency(Phi, timegrid, time_end=None, dirname=".",
 # MAIN
 # --------------------------------------------------
 
-def main():
+if __name__ == "__main__":
     parser = ArgumentParser(description="Analysis of VOICEXX results")
     parser.add_argument('--dir', type=str, help="Folder containing the hdf5 files")
     save_group = parser.add_mutually_exclusive_group(required=False)
@@ -139,15 +141,9 @@ def main():
         VOICEXX_dir = READut.Ask_directory()
 
     vxx_res = READut.Read_VOICEXX_results(VOICEXX_dir)
-    gridx = vxx_res.MeshX
-    dx = gridx[1] - gridx[0]
 
-    [growth_rate, growth_rate_relerror, frequency, frequency_relerror] = \
-        plot_Phi_growthrate_frequency(vxx_res.electrostatic_potential,
-                                      vxx_res.time_saved,
-                                      dirname=VOICEXX_dir,
-                                      plotfig=args.save)
+    plot_Phi_growthrate_frequency(vxx_res.electrostatic_potential,
+                            vxx_res.time_saved,
+                            dirname=VOICEXX_dir,
+                            plotfig=args.save)
 
-
-if __name__ == "__main__":
-    main()
