@@ -2,6 +2,7 @@
 
 add_library(initialization STATIC
     maxwellianequilibrium.cpp
+    bumpontailequilibrium.cpp
     singlemodeperturbinitialization.cpp
 )
 

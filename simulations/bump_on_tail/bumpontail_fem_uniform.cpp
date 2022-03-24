@@ -20,11 +20,8 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
-#include "fftpoissonsolver.hpp"
-#include "fftw.hpp"
 #include "geometry.hpp"
-#include "ifftw.hpp"
-#include "maxwellianequilibrium.hpp"
+#include "bumpontailequilibrium.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
@@ -34,6 +31,7 @@
 #include "spline_interpolator_vx.hpp"
 #include "spline_interpolator_x.hpp"
 #include "splitvlasovsolver.hpp"
+#include "femperiodicpoissonsolver.hpp"
 
 using std::cerr;
 using std::endl;
@@ -80,14 +78,13 @@ int main(int argc, char** argv)
 
     IDomainSpXVx const
             meshSpXVx(dom_kinsp, builder_x.interpolation_domain(), builder_vx.interpolation_domain());
-    IDomainSpVx const
-            meshSpVx(dom_kinsp, builder_vx.interpolation_domain());
+    IDomainSpVx const meshSpVx(dom_kinsp, builder_vx.interpolation_domain());
 
     FieldSp<int> kinetic_charges(dom_kinsp);
     DFieldSp masses(dom_kinsp);
-    DFieldSp density_eq(dom_kinsp);
-    DFieldSp temperature_eq(dom_kinsp);
-    DFieldSp mean_velocity_eq(dom_kinsp);
+    DFieldSp epsilon_bot(dom_kinsp);
+    DFieldSp temperature_bot(dom_kinsp);
+    DFieldSp mean_velocity_bot(dom_kinsp);
     DFieldSp init_perturb_amplitude(dom_kinsp);
     FieldSp<int> init_perturb_mode(dom_kinsp);
     int nb_elec_adiabspecies = 1;
@@ -105,9 +102,9 @@ int main(int argc, char** argv)
         }
 
         masses(isp) = PCpp_double(conf_isp, ".mass");
-        density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
-        temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
-        mean_velocity_eq(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
+        epsilon_bot(isp) = PCpp_double(conf_isp, ".epsilon_bot");
+        temperature_bot(isp) = PCpp_double(conf_isp, ".temperature_bot");
+        mean_velocity_bot(isp) = PCpp_double(conf_isp, ".mean_velocity_bot");
         init_perturb_amplitude(isp) = PCpp_double(conf_isp, ".perturb_amplitude");
         init_perturb_mode(isp) = static_cast<int>(PCpp_int(conf_isp, ".perturb_mode"));
     }
@@ -129,10 +126,10 @@ int main(int argc, char** argv)
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
     DFieldSpVx allfequilibrium(meshSpVx);
-    MaxwellianEquilibrium const init_fequilibrium(
-        std::move(density_eq),
-        std::move(temperature_eq),
-        std::move(mean_velocity_eq));
+    BumpontailEquilibrium const init_fequilibrium(
+        std::move(epsilon_bot),
+        std::move(temperature_bot),
+        std::move(mean_velocity_bot));
     init_fequilibrium(allfequilibrium);
     DFieldSpXVx allfdistribu(meshSpXVx);
     SingleModePerturbInitialization const
@@ -170,18 +167,8 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    FftwFourierTransform<RDimX> const fft;
-
-    FftwInverseFourierTransform<RDimX> const ifft;
-
-    FftPoissonSolver const
-            poisson(species_info,
-                    fft,
-                    ifft,
-                    builder_x,
-                    spline_x_evaluator,
-                    builder_vx,
-                    spline_vx_evaluator);
+    FemPeriodicPoissonSolver const
+            poisson(species_info, builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 
     PredCorr const predcorr(vlasov, poisson, deltat);
 
@@ -205,8 +192,8 @@ int main(int argc, char** argv)
     expose_to_pdi("MeshVx", meshVx_coord);
     expose_to_pdi("nbstep_diag", nbstep_diag);
     expose_to_pdi("Nkinspecies", nb_kinspecies.value());
-    expose_to_pdi("fdistribu_charges",species_info.charge()[dom_kinsp]);
-    expose_to_pdi("fdistribu_masses",species_info.mass()[dom_kinsp]);
+    expose_to_pdi("fdistribu_charges", species_info.charge()[dom_kinsp]);
+    expose_to_pdi("fdistribu_masses", species_info.mass()[dom_kinsp]);
     PdiEvent("initial_state");
 
     steady_clock::time_point const start = steady_clock::now();
