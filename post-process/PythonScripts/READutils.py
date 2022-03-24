@@ -6,17 +6,18 @@
 #
 #  Reading of the VOICEXX files
 #--------------------------------------------------
+
+""" Tools for accessing results folders
+"""
 import glob
-import h5py as h5
-import numpy as np
 import os
 
 import HDF5utils as H5ut
 
 #===============================================
-# Check if result directory is valid
-#-----------------------------------------------
 def valid_directory(ResuDir):
+    """ Check if result directory is valid
+    """
     cache_file  = os.path.join(ResuDir, 'combined_diag.h5')
     find_fnames = os.path.join(ResuDir,'VOICEXX_[0-9]*.h5')
     find_fnames = glob.glob(find_fnames)
@@ -24,10 +25,9 @@ def valid_directory(ResuDir):
     return nb_fnames!=0 or os.path.exists(cache_file)
 
 #===============================================
-# Ask for the result directory 
-#-----------------------------------------------
 def Ask_directory():
-
+    """ Ask for the result directory
+    """
     ResuDir = ''
     while True:
         ResuDir = input("Result directory [default = current]: ? ")
@@ -46,10 +46,9 @@ def Ask_directory():
 
 
 #===============================================
-# Read the result directory 
-#-----------------------------------------------    
 def Read_VOICEXX_results(ResuDir, cache = True):
-
+    """ Read the result directory
+    """
     cache_file = os.path.join(ResuDir, 'combined_diag.h5')
     ResuFileList = sorted(glob.glob(ResuDir+'/VOICEXX_[0-9]*.h5'))
 

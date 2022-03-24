@@ -39,6 +39,7 @@ RUN chmod +x /bin/bash_run \
     python3-numpy \
     python3-matplotlib \
     python3-scipy \
+    pylint \
     libpdi-dev \
  && apt-get purge -y \
     apt-transport-https \
