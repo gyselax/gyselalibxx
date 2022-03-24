@@ -31,15 +31,12 @@ private:
      */
     void compute_twomaxwellian(
             DSpanVx fMaxwellian,
-            double const epsilon_bot,
-            double const temperature_bot,
-            double const mean_velocity_bot) const;
+            double epsilon_bot,
+            double temperature_bot,
+            double mean_velocity_bot) const;
 
 public:
-    BumpontailEquilibrium(
-            DViewSp const epsilon_bot,
-            DViewSp const temperature_bot,
-            DViewSp const mean_velocity_bot);
+    BumpontailEquilibrium(DViewSp epsilon_bot, DViewSp temperature_bot, DViewSp mean_velocity_bot);
 
     ~BumpontailEquilibrium() override = default;
 
