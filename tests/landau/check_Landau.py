@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: MIT
 
 #!/bin/env python3
+""" File which tests whether the specified results of a landau damping test case
+follow the gradient predicted by the theory
+"""
 
 import sys
 import READutils as READut

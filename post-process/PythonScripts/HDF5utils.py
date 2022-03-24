@@ -1,23 +1,37 @@
 # SPDX-License-Identifier: MIT
 
+""" Handle interactions with HDF5
+"""
+
 import h5py as h5
 import numpy as np
 
 class HDF5Group():
+    """Object which represents the contents of a HDF5 group"""
     def __init__(self):
         self.keys = []
 
     def add_attr(self, name, val):
+        """ Add a new attribute to the group
+        """
         self.keys.append(name)
         setattr(self, name, val)
 
 #--------------------------------------------------
-# Load an HDF5 file
-#--------------------------------------------------
 class loadHDF5():
-    """ Load an HDF5 file"""
+    """Object which represents the contents of a HDF5 file in
+    numpy objects which can be more easily manipulated in the
+    rest of the code
 
-    def __init__(self, filenames, name_map = None, nb_diag = None):
+    Parameters
+    ----------
+    filenames : str/list of str
+                The name of the HDF5 files to be represented
+    name_map  : dict
+                A dictionary indicating any desired name remapping
+    """
+
+    def __init__(self, filenames, name_map = None):
         if isinstance(filenames, list):
             nb_diag = len(filenames)
         else:
@@ -42,14 +56,25 @@ class loadHDF5():
         #end for
     #end def __init__
 
-    def get_str_var_new(self, str_var, name_map):
-        #--> replace '%' by '_' in variable names
+    @staticmethod
+    def get_str_var_new(str_var, name_map):
+        """ replace '%' by '_' in variable names
+
+        Parameters
+        ----------
+        str_var  : str
+                   The variable name
+        name_map : dict
+                   A dictionary mapping variable names to their replacement
+        """
         str_var_new = str_var.replace('%','_')
         if str_var_new in name_map:
             str_var_new = name_map[str_var_new]
         return str_var_new
 
     def collect_group(self, fh5, name_map, group):
+        """ Collect all elements from a group from a HDF5 file
+        """
         for str_var in list(fh5.keys()):
             str_var_new = self.get_str_var_new(str_var, name_map)
             var_tmp     = fh5[str_var]
@@ -74,6 +99,24 @@ class loadHDF5():
             group.add_attr(str_var_new, var)
 
     def collect_time_group(self, fh5, name_map, i_diag, nb_diag, group):
+        """ Collect all elements from a group from a HDF5 file.
+        This function should be called multiple times to create an array of
+        results from files representing different points in time
+
+        Parameters
+        ----------
+        fh5      : h5.File
+                   The HDF5 file to be read
+        name_map : dict
+                   A dictionary indicating if and and how any attributes
+                   should be renamed
+        i_diag   : int
+                   The index of the current diagnostic file
+        nb_diag  : int
+                   The total number of current diagnostic files
+        group    : HDF5Group
+                   A group where the results will be stored
+        """
 
         for str_var in list(fh5.keys()):
             str_var_new = self.get_str_var_new(str_var, name_map)
@@ -87,7 +130,7 @@ class loadHDF5():
                     var = HDF5Group()
                 else:
                     # Fortran ordering is used as we index by time a lot
-                    
+
                     var = np.empty(shape = (nb_diag,*var_tmp.shape),
                                    dtype = var_tmp.dtype,
                                    order='C')
@@ -101,25 +144,29 @@ class loadHDF5():
                 self.collect_time_group(var_tmp, name_map, i_diag, nb_diag, var)
             else:
                 # Create indexes, last index is time
-                idxs = [i_diag] + [slice(None)]*nd 
+                idxs = [i_diag] + [slice(None)]*nd
                 # Save data
                 var[tuple(idxs)] = var_tmp[()]
         #end for
 
     def append(self, other_file):
+        """ Save the values from another loadHDF5 instance into this instance
+        """
         for k in other_file.keys:
             self.add_attr(k, getattr(other_file,k))
 
     def add_attr(self, name, val):
+        """ Add a new attribute to the file
+        """
         self.keys.append(name)
         setattr(self, name, val)
 
 #end class loadHDF5
 
 #--------------------------------------------------
-# 
-#--------------------------------------------------
 def write_group(myfile, group):
+    """ Save the group to a HDF5 file
+    """
     for name in group.keys:
         data = getattr(group, name)
 
@@ -137,9 +184,9 @@ def write_group(myfile, group):
 
 
 #--------------------------------------------------
-# 
-#--------------------------------------------------
 def write_results(filename, data):
+    """ Save data to a HDF5 file
+    """
 
     myfile = h5.File(filename,'w')
     write_group(myfile, data)
@@ -147,18 +194,18 @@ def write_results(filename, data):
 
 
 #-----------------------------------------------
-#  Save a dictionary into an HDF5 group
-#-----------------------------------------------
 def save_dict_contents_to_group( h5file, path, dic):
+    """ Save a dictionary into an HDF5 group
+    """
 
     # argument type checking
     if not isinstance(dic, dict):
-        raise ValueError("must provide a dictionary")        
+        raise ValueError("must provide a dictionary")
 
     if not isinstance(path, str):
         raise ValueError("path must be a string")
 
-    if not isinstance(h5file, h5._hl.files.File):
+    if not isinstance(h5file, h5.File):
         raise ValueError("must be an open hdf5 file")
 
     # save items to the hdf5 file
@@ -177,10 +224,10 @@ def save_dict_contents_to_group( h5file, path, dic):
             if not h5file[path + key][()] == item:
                 raise ValueError('The data representation in the HDF5 file does not match the original dict.')
         # save numpy arrays
-        elif isinstance(item, np.ndarray):            
+        elif isinstance(item, np.ndarray):
             try:
                 h5file[path + key] = item
-            except:
+            except KeyError:
                 item = np.array(item).astype('|S9')
                 h5file[path + key] = item
             if not np.array_equal(h5file[path + key][()], item):
@@ -197,26 +244,26 @@ def save_dict_contents_to_group( h5file, path, dic):
 
 
 #-----------------------------------------------
-#  Load a dictionary from an HDF5 group
-#----------------------------------------------- 
 def load_dict_contents_from_group(h5file, path):
+    """ Load a dictionary from an HDF5 group
+    """
 
     ans = {}
     for key,item in h5file[path].items():
-        if isinstance(item, h5._hl.dataset.Dataset):
+        if isinstance(item, h5.Dataset):
             ans[key] = item[()]
-        elif isinstance(item, h5._hl.group.Group):
+        elif isinstance(item, h5.Group):
             ans[key] = load_dict_contents_from_group(h5file, path + key + '/')
     return ans
 
-#end load_dict_contents_from_group  
-#-----------------------------------------------   
-
-
+#end load_dict_contents_from_group
 #-----------------------------------------------
-#  Save a dictionary to a HDF5 file
+
+
 #-----------------------------------------------
 def save_dict_to_hdf5(dic, group, filename):
+    """ Save a dictionary to a HDF5 file
+    """
 
     with h5.File(filename, 'a') as h5file:
         if group not in h5file.keys():
@@ -229,30 +276,30 @@ def save_dict_to_hdf5(dic, group, filename):
 
 
 #-----------------------------------------------
-#  Load a dictionary into a HDF5 file
-#-----------------------------------------------
 def load_dict_from_hdf5(filename, group):
+    """ Load a dictionary into a HDF5 file
+    """
 
     with h5.File(filename, 'r') as h5file:
         if group in h5file.keys():
             return load_dict_contents_from_group(h5file, group)
         else:
-            print(group + ' not saved in ' + filename)
-            
+            raise ValueError(group + ' not saved in ' + filename)
+
 #end def load_dict_from_hdf5
 #-----------------------------------------------
 
 
 #-----------------------------------------------
-#  Search if a group exist in a HDF5 file
-#-----------------------------------------------
 def group_exist_in_hdf5(filename, group):
+    """ Search if a group exist in a HDF5 file
+    """
 
     group_exist = False
     with h5.File(filename, 'r') as h5file:
         if group in h5file.keys():
             group_exist = True
-            
+
     return group_exist
 
 #end def group_exist_in_hdf5
