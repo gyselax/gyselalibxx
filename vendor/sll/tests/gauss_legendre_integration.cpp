@@ -126,7 +126,7 @@ int test_compute_points_and_weights()
                                          * (std::pow(domains[i].second, p + 1)
                                             - std::pow(domains[i].first, p + 1));
                 double sol_num = 0.0;
-                for (int xi = 0; xi < order; ++xi) {
+                for (std::size_t xi = 0; xi < order; ++xi) {
                     sol_num += gl_weights(xi) * f(gl_points(xi));
                 }
                 double const err = std::fabs((sol_num - sol_exact) / sol_exact);
