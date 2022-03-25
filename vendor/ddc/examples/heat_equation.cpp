@@ -187,7 +187,7 @@ int main()
     // Initialization of the global domain in time:
     // - the number of discrete time-points is equal to the number of
     //   steps + 1
-    DiscreteDomain const time_domain
+    DiscreteDomain<DDimT> const time_domain
             = init_discretization(DDimT::
                                           init(Coordinate<T>(start_time),
                                                Coordinate<T>(end_time),
@@ -198,16 +198,20 @@ int main()
     // Maps temperature into the full domain (including ghosts) twice:
     // - once for the last fully computed time-step
     Chunk<double, DiscreteDomain<DDimX, DDimY>> ghosted_last_temp(
-            DiscreteDomain(ghosted_x_domain, ghosted_y_domain));
+            DiscreteDomain<
+                    DDimX,
+                    DDimY>(ghosted_x_domain, ghosted_y_domain));
     // - once for time-step being computed
     Chunk<double, DiscreteDomain<DDimX, DDimY>> ghosted_next_temp(
-            DiscreteDomain(ghosted_x_domain, ghosted_y_domain));
+            DiscreteDomain<
+                    DDimX,
+                    DDimY>(ghosted_x_domain, ghosted_y_domain));
     //! [data allocation]
 
     //! [initial-conditions]
     // Initialize the temperature on the main domain
     for_each(
-            DiscreteDomain(x_domain, y_domain),
+            DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
             [&](DiscreteCoordinate<DDimX, DDimY> const ixy) {
                 double const x = to_real(select<DDimX>(ixy));
                 double const y = to_real(select<DDimY>(ixy));
