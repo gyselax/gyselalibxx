@@ -94,7 +94,7 @@ public:
 
     void eval_deriv(DSpan1D derivs, int& jmin, double x) const;
 
-    void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, int n) const;
+    void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, std::size_t n) const;
 
     DSpan1D integrals(DSpan1D int_vals) const;
 
@@ -158,7 +158,7 @@ inline constexpr NonUniformBSplines<Tag, D>::NonUniformBSplines(
         RandomIt const break_end)
     : m_knots((break_end - break_begin) + 2 * degree())
 {
-    assert(ncells() > 0);
+    assert(m_knots.size() > 2 * degree() + 1);
 
     // Fill the provided knots
     int ii = 0;
@@ -198,7 +198,7 @@ void NonUniformBSplines<Tag, D>::eval_basis(DSpan1D const values, int& jmin, dou
     int const icell = find_cell(x);
 
     assert(icell >= 0);
-    assert(icell <= ncells() - 1);
+    assert(icell <= int(ncells() - 1));
     assert(get_knot(icell) <= x);
     assert(get_knot(icell + 1) >= x);
 
@@ -235,7 +235,7 @@ void NonUniformBSplines<Tag, D>::eval_deriv(DSpan1D const derivs, int& jmin, dou
     int const icell = find_cell(x);
 
     assert(icell >= 0);
-    assert(icell <= ncells() - 1);
+    assert(icell <= int(ncells() - 1));
     assert(get_knot(icell) <= x);
     assert(get_knot(icell + 1) >= x);
 
@@ -283,7 +283,7 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
         DSpan2D const derivs,
         int& jmin,
         double const x,
-        int const n) const
+        std::size_t const n) const
 {
     std::array<double, degree()> left;
     std::array<double, degree()> right;
@@ -307,7 +307,7 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
     int const icell = find_cell(x);
 
     assert(icell >= 0);
-    assert(icell <= ncells() - 1);
+    assert(icell <= int(ncells() - 1));
     assert(get_knot(icell) <= x);
     assert(get_knot(icell + 1) >= x);
 
@@ -349,7 +349,7 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
         int s1 = 0;
         int s2 = 1;
         a(0, 0) = 1.0;
-        for (int k = 1; k < n + 1; ++k) {
+        for (int k = 1; k < int(n + 1); ++k) {
             double d = 0.0;
             int const rk = r - k;
             int const pk = degree() - k;
@@ -373,7 +373,7 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
     }
 
     int r = degree();
-    for (int k = 1; k < n + 1; ++k) {
+    for (int k = 1; k < int(n + 1); ++k) {
         for (std::size_t i = 0; i < derivs.extent(0); i++) {
             derivs(i, k) *= r;
         }

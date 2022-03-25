@@ -35,8 +35,8 @@ void fill_identity(DSpan2D mat)
 
 void copy_matrix(DSpan2D copy, std::unique_ptr<Matrix>& mat)
 {
-    assert(mat->get_size() == copy.extent(0));
-    assert(mat->get_size() == copy.extent(1));
+    assert(mat->get_size() == int(copy.extent(0)));
+    assert(mat->get_size() == int(copy.extent(1)));
 
     for (std::size_t i(0); i < copy.extent(0); ++i) {
         for (std::size_t j(0); j < copy.extent(1); ++j) {
@@ -204,7 +204,7 @@ TYPED_TEST(MatrixSizesFixture, PositiveDefiniteSymmetricTranspose)
     DSpan2D inv(inv_ptr, N, N);
     fill_identity(inv);
     matrix->factorize();
-    for (int i(0); i < N; ++i) {
+    for (std::size_t i(0); i < N; ++i) {
         DSpan1D inv_line(inv_ptr + i * N, N);
         matrix->solve_transpose_inplace(inv_line);
     }
@@ -236,7 +236,7 @@ TYPED_TEST(MatrixSizesFixture, OffsetBandedTranspose)
     DSpan2D inv(inv_ptr, N, N);
     fill_identity(inv);
     matrix->factorize();
-    for (int i(0); i < N; ++i) {
+    for (std::size_t i(0); i < N; ++i) {
         DSpan1D inv_line(inv_ptr + i * N, N);
         matrix->solve_transpose_inplace(inv_line);
     }

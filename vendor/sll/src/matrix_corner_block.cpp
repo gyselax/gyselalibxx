@@ -155,7 +155,7 @@ DSpan1D Matrix_Corner_Block::solve_gamma_section_transpose(DSpan1D const v, DVie
 
 DSpan1D Matrix_Corner_Block::solve_inplace(DSpan1D const bx) const
 {
-    assert(bx.extent(0) == n);
+    assert(int(bx.extent(0)) == n);
 
     DSpan1D const u(bx.data(), nb);
     DSpan1D const v(bx.data() + nb, k);
@@ -173,7 +173,7 @@ DSpan1D Matrix_Corner_Block::solve_inplace(DSpan1D const bx) const
 
 DSpan1D Matrix_Corner_Block::solve_transpose_inplace(DSpan1D const bx) const
 {
-    assert(bx.extent(0) == n);
+    assert(int(bx.extent(0)) == n);
     DSpan1D const u(bx.data(), nb);
     DSpan1D const v(bx.data() + nb, k);
 
@@ -190,8 +190,8 @@ DSpan1D Matrix_Corner_Block::solve_transpose_inplace(DSpan1D const bx) const
 
 DSpan2D Matrix_Corner_Block::solve_multiple_inplace(DSpan2D const bx) const
 {
-    assert(bx.extent(0) == n);
-    for (int i(0); i < bx.extent(0); ++i) {
+    assert(int(bx.extent(0)) == n);
+    for (std::size_t i(0); i < bx.extent(0); ++i) {
         DSpan1D const b(bx.data() + n * i, n);
         solve_inplace(b);
     }
