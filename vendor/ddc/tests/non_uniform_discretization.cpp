@@ -20,7 +20,7 @@ struct DimX;
 
 using DDimX = NonUniformDiscretization<DimX>;
 
-std::array<double, 4> constexpr array_points VALUES;
+static std::array<double, 4> const array_points VALUES;
 static std::vector<double> const vector_points VALUES;
 [[maybe_unused]] Coordinate<DimX> constexpr min_x = Coordinate<DimX>(0.1);
 [[maybe_unused]] Coordinate<DimX> constexpr max_x = Coordinate<DimX>(0.4);
