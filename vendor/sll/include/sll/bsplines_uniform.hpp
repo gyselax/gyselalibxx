@@ -82,6 +82,7 @@ public:
                 DiscreteVector<mesh_type>(
                         ncells + 1)) // Create a mesh including the eventual periodic point
     {
+        assert(ncells > 0);
         init_discretization<mesh_type>(
                 Coordinate<internal_tag>(rmin.value()),
                 Coordinate<internal_tag>(rmax.value()),
@@ -105,7 +106,7 @@ public:
 
     void eval_deriv(DSpan1D derivs, int& jmin, double x) const;
 
-    void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, int n) const;
+    void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, std::size_t n) const;
 
     DSpan1D integrals(DSpan1D int_vals) const;
 
@@ -227,7 +228,7 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
         DSpan2D const derivs,
         int& jmin,
         double const x,
-        int const n) const
+        std::size_t const n) const
 {
     std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
     std::experimental::mdspan<double, std::experimental::extents<degree() + 1, degree() + 1>> const
@@ -273,7 +274,7 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
         int s1 = 0;
         int s2 = 1;
         a(0, 0) = 1.0;
-        for (int k = 1; k < n + 1; ++k) {
+        for (int k = 1; k < int(n + 1); ++k) {
             double d = 0.0;
             int const rk = r - k;
             int const pk = degree() - k;
@@ -301,7 +302,7 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
     // k-th derivatives are normalized, hence they should be divided by dx^k
     double const inv_dx = inv_step();
     double d = degree() * inv_dx;
-    for (int k = 1; k < n + 1; ++k) {
+    for (int k = 1; k < int(n + 1); ++k) {
         for (std::size_t i = 0; i < derivs.extent(0); ++i) {
             derivs(i, k) *= d;
         }

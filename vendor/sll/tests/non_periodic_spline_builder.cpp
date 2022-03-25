@@ -80,6 +80,7 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
     using IDimX = typename TestFixture::IDimX;
     using IndexX = DiscreteCoordinate<IDimX>;
     using BSplinesX = typename TestFixture::BSpline;
+    using BsplIndexX = DiscreteCoordinate<BSplinesX>;
     using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
     using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
     using CoordX = Coordinate<DimX>;
@@ -101,6 +102,7 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
         init_discretization<BSplinesX>(breaks);
     }
     DiscreteDomain<BSplinesX> const dom_bsplines_x(
+            BsplIndexX(0),
             DiscreteVector<BSplinesX>(discretization<BSplinesX>().size()));
 
     // 2. Create a Spline represented by a chunk over BSplines
@@ -201,6 +203,7 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
     using IDimX = typename TestFixture::IDimX;
     using IndexX = DiscreteCoordinate<IDimX>;
     using BSplinesX = typename TestFixture::BSpline;
+    using BsplIndexX = DiscreteCoordinate<BSplinesX>;
     using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
     using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
     using CoordX = Coordinate<DimX>;
@@ -223,6 +226,7 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
         init_discretization<BSplinesX>(breaks);
     }
     DiscreteDomain<BSplinesX> const dom_bsplines_x(
+            BsplIndexX(0),
             DiscreteVector<BSplinesX>(discretization<BSplinesX>().size()));
 
     // 2. Create a Spline represented by a chunk over BSplines
