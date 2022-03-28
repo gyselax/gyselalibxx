@@ -70,11 +70,6 @@ using DDimT = UniformDiscretization<T>;
 //! [time-space]
 
 
-//! [max]
-double const& (&max)(double const&, double const&) = std::max<double>;
-//! [max]
-
-
 //! [display]
 /** A function to pretty print the temperature
  * @param time the time at which the output is made
@@ -83,9 +78,12 @@ double const& (&max)(double const&, double const&) = std::max<double>;
 template <class ChunkType>
 void display(double time, ChunkType temp)
 {
-    double const mean_temp
-            = transform_reduce(temp.domain(), 0., std::plus(), temp)
-              / temp.domain().size();
+    double const mean_temp = transform_reduce(
+                                     temp.domain(),
+                                     0.,
+                                     reducer::sum<double>(),
+                                     temp)
+                             / temp.domain().size();
     std::cout << std::fixed << std::setprecision(3);
     std::cout << "At t = " << time << ",\n";
     std::cout << "  * mean temperature  = " << mean_temp << "\n";
@@ -164,7 +162,7 @@ int main()
     double const invdx2_max = transform_reduce(
             x_domain,
             0.,
-            max,
+            reducer::max<double>(),
             [](DiscreteCoordinate<DDimX> ix) {
                 return 1.
                        / (distance_at_left(ix) * distance_at_right(ix));
@@ -173,7 +171,7 @@ int main()
     double const invdy2_max = transform_reduce(
             y_domain,
             0.,
-            max,
+            reducer::max<double>(),
             [](DiscreteCoordinate<DDimY> iy) {
                 return 1.
                        / (distance_at_left(iy) * distance_at_right(iy));
