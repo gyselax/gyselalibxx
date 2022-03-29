@@ -659,14 +659,14 @@ div.directory
 .directory td
 {
 	margin: 0;
-	padding: .2rem .5rem;
+	padding: .4rem .5rem;
 	vertical-align: top;
 	border: none;
 }
 
 .directory td.entry
 {
-	white-space: nowrap;
+	white-space: pre-wrap;
 	padding-left: 0;
 }
 
@@ -694,7 +694,7 @@ div.directory
 
 .directory td.desc
 {
-	width: 100%;
+	min-width: 50%;
 	border-left: 1px solid rgba(0,0,0,0.05);
 }
 
