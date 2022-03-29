@@ -119,6 +119,9 @@ public:
     Chunk& operator=(Chunk&& other)
     {
         assert(this != &other);
+        if (this->m_internal_mdspan.data()) {
+            std::allocator_traits<Allocator>::deallocate(m_allocator, this->data(), this->size());
+        }
         static_cast<base_type&>(*this) = std::move(static_cast<base_type&>(other));
         m_allocator = std::move(other.m_allocator);
 
