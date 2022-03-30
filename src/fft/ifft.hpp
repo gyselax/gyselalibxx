@@ -4,8 +4,7 @@
 
 #include <complex>
 
-#include <ddc/ChunkSpan>
-#include <ddc/NonUniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include <geometry.hpp>
 

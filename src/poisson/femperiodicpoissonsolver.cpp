@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-#include <ddc/for_each>
+#include <ddc/ddc.hpp>
 
 #include <sll/gauss_legendre_integration.hpp>
 #include <sll/matrix.hpp>

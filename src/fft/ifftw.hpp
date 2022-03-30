@@ -6,8 +6,7 @@
 #include <complex>
 #include <type_traits>
 
-#include <ddc/ChunkSpan>
-#include <ddc/NonUniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include <fftw3.h>
 #include <geometry.hpp>

@@ -5,11 +5,7 @@
 #include <memory>
 #include <vector>
 
-#include <ddc/Chunk>
-#include <ddc/ChunkSpan>
-#include <ddc/NonUniformDiscretization>
-#include <ddc/UniformDiscretization>
-#include <ddc/discretization>
+#include <ddc/ddc.hpp>
 
 #include "sll/math_tools.hpp"
 #include "sll/matrix.hpp"

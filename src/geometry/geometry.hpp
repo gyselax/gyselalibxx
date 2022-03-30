@@ -2,9 +2,7 @@
 
 #pragma once
 
-#include <ddc/Chunk>
-#include <ddc/NonUniformDiscretization>
-#include <ddc/UniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>

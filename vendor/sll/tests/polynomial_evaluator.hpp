@@ -4,9 +4,7 @@
 #include <random>
 #include <vector>
 
-#include <ddc/ChunkSpan>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/DiscreteDomain>
+#include <ddc/ddc.hpp>
 
 struct PolynomialEvaluator
 {

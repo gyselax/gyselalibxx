@@ -5,14 +5,7 @@
 #include <complex>
 #include <iostream>
 
-#include <ddc/Chunk>
-#include <ddc/ChunkSpan>
-#include <ddc/Coordinate>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/DiscreteDomain>
-#include <ddc/NonUniformDiscretization>
-#include <ddc/UniformDiscretization>
-#include <ddc/for_each>
+#include <ddc/ddc.hpp>
 
 #include <sll/bsplines_uniform.hpp>
 #include <sll/null_boundary_value.hpp>
