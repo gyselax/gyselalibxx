@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: MIT
-#include <ddc/Chunk>
-#include <ddc/ChunkSpan>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/DiscreteDomain>
+#include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 
