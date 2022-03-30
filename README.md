@@ -23,9 +23,9 @@ to run the tests:
 ctest --output-on-failure
 ```
 
-Then, just have a look at `tests/landau/dampingrate_t0.0to45.0.png`:
+Then, just have a look at `tests/landau/growthrate_t0.0to45.0.png`:
 
-![tests/landau/fft/dampingrate_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/voicexx/-/jobs/artifacts/main/raw/build/tests/landau/fft/dampingrate_t0.0to45.0.png?job=cmake_tests_Release "Landau damping rate")
+![tests/landau/fft/growthrate_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/voicexx/-/jobs/artifacts/main/raw/build/tests/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release "Landau damping rate")
 
 and `tests/landau/frequency_t0.0to45.0.png`:
 
