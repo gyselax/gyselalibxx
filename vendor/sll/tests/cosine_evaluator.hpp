@@ -2,9 +2,7 @@
 
 #include <cmath>
 
-#include <ddc/ChunkSpan>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/DiscreteDomain>
+#include <ddc/ddc.hpp>
 
 struct CosineEvaluator
 {

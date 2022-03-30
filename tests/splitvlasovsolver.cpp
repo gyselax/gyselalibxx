@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include <ddc/ChunkSpan>
+#include <ddc/ddc.hpp>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

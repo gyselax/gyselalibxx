@@ -3,9 +3,7 @@
 #include <cmath>
 #include <iostream>
 
-#include <ddc/ChunkSpan>
-#include <ddc/DiscreteDomain>
-#include <ddc/pdi.hpp>
+#include <ddc/ddc.hpp>
 
 #include <ipoissonsolver.hpp>
 #include <ivlasovsolver.hpp>

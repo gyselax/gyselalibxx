@@ -5,8 +5,7 @@
 #include <memory>
 #include <vector>
 
-#include <ddc/DiscreteDomain>
-#include <ddc/NonUniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include "sll/bspline.hpp"
 #include "sll/view.hpp"

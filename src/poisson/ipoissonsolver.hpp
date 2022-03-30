@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <ddc/ChunkSpan>
+#include <ddc/ddc.hpp>
 
 #include <geometry.hpp>
 

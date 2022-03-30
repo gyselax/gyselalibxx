@@ -3,10 +3,7 @@
 
 #include <experimental/mdspan>
 
-#include <ddc/Coordinate>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/DiscreteDomain>
-#include <ddc/NonUniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/deprecated/bsplines_non_uniform.hpp>

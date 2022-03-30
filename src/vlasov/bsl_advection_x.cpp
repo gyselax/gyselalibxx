@@ -2,8 +2,7 @@
 
 #include <cassert>
 
-#include <ddc/discretization>
-#include <ddc/for_each>
+#include <ddc/ddc.hpp>
 
 #include <species_info.hpp>
 

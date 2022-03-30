@@ -4,8 +4,7 @@
 #include <cassert>
 #include <memory>
 
-#include <ddc/DiscreteDomain>
-#include <ddc/UniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include "sll/bspline.hpp"
 #include "sll/math_tools.hpp"

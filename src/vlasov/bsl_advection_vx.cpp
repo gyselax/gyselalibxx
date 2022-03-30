@@ -5,11 +5,7 @@
 
 #include <experimental/mdspan>
 
-#include <ddc/ChunkSpan>
-#include <ddc/Coordinate>
-#include <ddc/DiscreteDomain>
-#include <ddc/discretization>
-#include <ddc/for_each>
+#include <ddc/ddc.hpp>
 
 #include <sll/null_boundary_value.hpp>
 #include <sll/spline_evaluator.hpp>
