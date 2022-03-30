@@ -2,12 +2,7 @@
 
 #include <type_traits>
 
-#include <ddc/Coordinate>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/DiscreteDomain>
-#include <ddc/NonUniformDiscretization>
-#include <ddc/RectilinearDomain>
-#include <ddc/UniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 

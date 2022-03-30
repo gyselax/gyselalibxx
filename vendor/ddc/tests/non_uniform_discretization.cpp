@@ -3,9 +3,7 @@
 #include <sstream>
 #include <vector>
 
-#include <ddc/Coordinate>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/NonUniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 

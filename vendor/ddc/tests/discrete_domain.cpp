@@ -2,11 +2,7 @@
 #include <iosfwd>
 #include <memory>
 
-#include <ddc/Coordinate>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/DiscreteDomain>
-#include <ddc/NonUniformDiscretization>
-#include <ddc/UniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 

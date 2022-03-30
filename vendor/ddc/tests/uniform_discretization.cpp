@@ -2,9 +2,7 @@
 #include <memory>
 #include <sstream>
 
-#include <ddc/Coordinate>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/UniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 

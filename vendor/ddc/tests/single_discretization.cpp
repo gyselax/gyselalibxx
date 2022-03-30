@@ -2,9 +2,6 @@
 #include <memory>
 #include <utility>
 
-#include <ddc/Coordinate>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/NonUniformDiscretization>
 #include <ddc/experimental/single_discretization.hpp>
 
 #include <gtest/gtest.h>
