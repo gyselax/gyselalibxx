@@ -51,7 +51,7 @@ cmake_tests_Release:
   artifacts:
     when: always
     paths:
-      - ./build/tests/landau/fft/dampingrate_t0.0to45.0.png
+      - ./build/tests/landau/fft/growthrate_t0.0to45.0.png
       - ./build/tests/landau/fft/frequency_t0.0to45.0.png
     reports:
       junit: ./build/tests.xml
