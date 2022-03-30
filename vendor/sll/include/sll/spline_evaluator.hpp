@@ -3,9 +3,7 @@
 #include <array>
 #include <cmath>
 
-#include <ddc/Chunk>
-#include <ddc/ChunkSpan>
-#include <ddc/discretization>
+#include <ddc/ddc.hpp>
 
 #include "sll/boundary_value.hpp"
 #include "sll/view.hpp"

@@ -1,9 +1,7 @@
 #include <array>
 #include <cmath>
 
-#include <ddc/Coordinate>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/UniformDiscretization>
+#include <ddc/ddc.hpp>
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>

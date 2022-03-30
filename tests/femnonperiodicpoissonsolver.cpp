@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-#include <ddc/DiscreteCoordinate>
-#include <ddc/DiscreteDomain>
-#include <ddc/pdi.hpp>
+#include <ddc/ddc.hpp>
 
 #include <sll/null_boundary_value.hpp>
 #include <sll/spline_builder.hpp>
