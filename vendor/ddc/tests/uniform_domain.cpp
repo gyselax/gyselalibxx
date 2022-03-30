@@ -2,10 +2,7 @@
 
 #include <cstddef>
 
-#include <ddc/DiscreteDomain>
-#include <ddc/NonUniformDiscretization>
-#include <ddc/UniformDiscretization>
-#include <ddc/is_uniform_domain_v>
+#include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 

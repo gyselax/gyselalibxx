@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 #include <memory>
 
-#include <ddc/detail/tagged_vector.hpp>
+#include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 

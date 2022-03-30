@@ -6,13 +6,7 @@
 #include <iostream>
 #include <numeric>
 
-#include <ddc/Chunk>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/DiscreteDomain>
-#include <ddc/DiscreteVector>
-#include <ddc/UniformDiscretization>
-#include <ddc/for_each>
-#include <ddc/transform_reduce>
+#include <ddc/ddc.hpp>
 //! [includes]
 
 

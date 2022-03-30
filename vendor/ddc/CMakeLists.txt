@@ -157,6 +157,7 @@ if("${DDC_BUILD_PDI_WRAPPER}")
 		INTERFACE
 			DDC::DDC
 			PDI::PDI_C)
+	target_compile_definitions(PDI_Wrapper INTERFACE "DDC_BUILD_PDI_WRAPPER")
 	add_library(DDC::PDI_Wrapper ALIAS PDI_Wrapper)
 	install(
 		TARGETS PDI_Wrapper

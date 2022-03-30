@@ -5,9 +5,7 @@
 #include <iosfwd>
 #include <vector>
 
-#include <ddc/ChunkSpan>
-#include <ddc/DiscreteCoordinate>
-#include <ddc/DiscreteDomain>
+#include <ddc/ddc.hpp>
 
 #include <benchmark/benchmark.h>
 

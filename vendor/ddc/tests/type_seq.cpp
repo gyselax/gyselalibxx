@@ -2,7 +2,7 @@
 #include <memory>
 #include <type_traits>
 
-#include <ddc/detail/type_seq.hpp>
+#include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 
