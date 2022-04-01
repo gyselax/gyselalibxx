@@ -45,11 +45,13 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    SplineEvaluator<BSplinesX> const
-            spline_x_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
+    SplineEvaluator<BSplinesX> const spline_x_evaluator(
+            NullBoundaryValue<BSplinesX>::value,
+            NullBoundaryValue<BSplinesX>::value);
 
-    SplineEvaluator<BSplinesVx> const
-            spline_vx_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
+    SplineEvaluator<BSplinesVx> const spline_vx_evaluator(
+            NullBoundaryValue<BSplinesVx>::value,
+            NullBoundaryValue<BSplinesVx>::value);
 
     FieldSp<int> charges(dom_sp);
     charges(dom_sp.front()) = 1;

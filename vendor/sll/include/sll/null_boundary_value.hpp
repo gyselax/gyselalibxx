@@ -1,7 +1,8 @@
 #pragma once
-#include "sll/boundary_value.hpp"
+#include "sll/spline_boundary_value.hpp"
 
-class NullBoundaryValue : public BoundaryValue
+template <class BSplines>
+class NullBoundaryValue : public SplineBoundaryValue<BSplines>
 {
     NullBoundaryValue() = default;
     NullBoundaryValue(NullBoundaryValue const&) = delete;
@@ -10,9 +11,12 @@ class NullBoundaryValue : public BoundaryValue
     void operator=(NullBoundaryValue&&) = delete;
 
 public:
-    inline virtual double operator()(double) const override
+    ~NullBoundaryValue() override = default;
+
+    inline double operator()(double x, ChunkSpan<const double, DiscreteDomain<BSplines>>)
+            const final
     {
         return 0.0;
     }
-    static NullBoundaryValue value;
+    static inline NullBoundaryValue<BSplines> value;
 };

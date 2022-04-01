@@ -5,7 +5,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "sll/boundary_value.hpp"
+#include "sll/spline_boundary_value.hpp"
 #include "sll/view.hpp"
 
 template <class BSplinesType>
@@ -25,14 +25,16 @@ public:
     using bsplines_type = BSplinesType;
 
 private:
-    BoundaryValue const& m_left_bc;
+    SplineBoundaryValue<BSplinesType> const& m_left_bc;
 
-    BoundaryValue const& m_right_bc;
+    SplineBoundaryValue<BSplinesType> const& m_right_bc;
 
 public:
     SplineEvaluator() = delete;
 
-    explicit SplineEvaluator(BoundaryValue const& left_bc, BoundaryValue const& right_bc)
+    explicit SplineEvaluator(
+            SplineBoundaryValue<BSplinesType> const& left_bc,
+            SplineBoundaryValue<BSplinesType> const& right_bc)
         : m_left_bc(left_bc)
         , m_right_bc(right_bc)
     {
@@ -126,10 +128,10 @@ private:
             }
         } else {
             if (coord_eval < discretization<bsplines_type>().rmin()) {
-                return m_left_bc(coord_eval);
+                return m_left_bc(coord_eval, spline_coef);
             }
             if (coord_eval > discretization<bsplines_type>().rmax()) {
-                return m_right_bc(coord_eval);
+                return m_right_bc(coord_eval, spline_coef);
             }
         }
         return eval_no_bc(coord_eval, spline_coef, vals, eval_type());
