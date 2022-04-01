@@ -12,7 +12,6 @@ add_library(splines STATIC
     src/matrix_center_block.cpp
     src/matrix_periodic_banded.cpp
     src/matrix_pds_tridiag.cpp
-    src/null_boundary_value.cpp
     src/gauss_legendre_integration.cpp
 )
 if(VOICEXX_ENABLE_DEPRECATED)

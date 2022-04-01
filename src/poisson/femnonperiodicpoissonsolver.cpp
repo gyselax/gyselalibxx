@@ -26,7 +26,10 @@ static SplineEvaluator<NUBSplinesX> jit_build_nubsplinesx(
             knots[i] = discretization<UBSplinesX>().get_knot(i);
         }
         init_discretization<NUBSplinesX>(knots);
-        return SplineEvaluator<NUBSplinesX>(NullBoundaryValue::value, NullBoundaryValue::value);
+        // Boundary values are never evaluated
+        return SplineEvaluator<NUBSplinesX>(
+                NullBoundaryValue<NUBSplinesX>::value,
+                NullBoundaryValue<NUBSplinesX>::value);
     } else {
         return spline_x_evaluator;
     }
