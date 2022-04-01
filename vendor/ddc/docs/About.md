@@ -4,7 +4,7 @@
 world an equivalent to the
 [`xarray.DataArray`](https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html)/[`dask.Array`](https://docs.dask.org/en/stable/array.html)
 python environment.
-Where these two libraries are based on [`numpy`](https://numpy.org/), DDC relies on
+Where these two libraries are based on [numpy](https://numpy.org/), DDC relies on
 [Kokkos](https://github.com/kokkos/kokkos) and
 [mdspan](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/p0009r10.html) to offer
 CPU/GPU performance-portable multi-dimensional arrays and iterators.
@@ -31,5 +31,4 @@ mesh to a non-uniform one) with performance portability.
 
 If you like the project,
 [leave us a ⭐star⭐ on Github](https://github.com/Maison-de-la-Simulation/ddc).
-
-We would love to talk with you on our [Slack channel ![Slack](slack.png)](https://join.slack.com/t/ddc-lib/shared_invite/zt-14b6rjcrn-AwSfM6_arEamAKk_VgQPhg).
+And of course, we would love to talk with you on our [Slack channel ![Slack](slack.png) https://ddc-lib.slack.com/](https://join.slack.com/t/ddc-lib/shared_invite/zt-14b6rjcrn-AwSfM6_arEamAKk_VgQPhg).
