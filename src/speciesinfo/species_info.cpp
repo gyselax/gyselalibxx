@@ -3,7 +3,7 @@
 #include <cmath>
 #include <iostream>
 
-#include "ddc/discretization"
+#include <ddc/ddc.hpp>
 
 #include "species_info.hpp"
 

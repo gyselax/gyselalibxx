@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 
-#include <ddc/ChunkSpan>
+#include <ddc/ddc.hpp>
 
 template <class BSplines>
 class SplineBoundaryValue
