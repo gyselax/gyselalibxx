@@ -32,5 +32,4 @@ mesh to a non-uniform one) with performance portability.
 If you like the project,
 [leave us a ⭐star⭐ on Github](https://github.com/Maison-de-la-Simulation/ddc).
 
-[![slack](slack.png) Come talk with us on Slack](https://join.slack.com/t/ddc-lib/shared_invite/zt-14b6rjcrn-AwSfM6_arEamAKk_VgQPhg)
-
+We would love to talk with you on our [Slack channel ![Slack](slack.png)](https://join.slack.com/t/ddc-lib/shared_invite/zt-14b6rjcrn-AwSfM6_arEamAKk_VgQPhg).
