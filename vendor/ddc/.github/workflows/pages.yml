@@ -41,15 +41,17 @@ jobs:
             make doc 2>&1 | grep ' warning: '
             exit 1
           fi
-          mv docs/html /src/
+          mv docs/html /src/docs
         EOF
+        mkdir docs
+        chmod a+rwx docs
         docker run -v ${PWD}:/src ghcr.io/maison-de-la-simulation/ddc/doxygen:${GITHUB_SHA:0:7} bash /src/run.sh
     - name: Publish site
       if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
       run: |
         git worktree add -B gh-pages public remotes/origin/gh-pages
         find public -mindepth 1 -maxdepth 1 '!' -name .git -exec rm -rf '{}' '+'
-        mv html/* public/
+        mv docs/html/* public/
         echo "ddc.mdls.fr" > public/CNAME
         git -C public config user.name "${GITHUB_ACTOR}"
         git -C public config user.email "${GITHUB_ACTOR}@noreply.example.com"
