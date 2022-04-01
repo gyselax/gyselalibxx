@@ -7,40 +7,22 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     steps:
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
-    - name: Set up Buildx
-      uses: docker/setup-buildx-action@v1
-    - name: Login to GHCR.io
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Cache pull
-      run: docker pull ghcr.io/maison-de-la-simulation/ddc/doxygen:latest
+    - name: Checkout built branch
+      uses: actions/checkout@v2
     - name: Build
-      uses: docker/build-push-action@v2
-      with:
-        context: "{{ defaultContext }}:docker/doxygen"
-        pull: true
-        load: true
-        cache-from: type=registry,ref=ghcr.io/maison-de-la-simulation/ddc/doxygen:latest
-        tags: ghcr.io/maison-de-la-simulation/ddc/doxygen:${{ github.sha }}
-    - name: Tagged push
-      uses: docker/build-push-action@v2
-      with:
-        context: "{{ defaultContext }}:docker/doxygen"
-        push: true
-        tags: ghcr.io/maison-de-la-simulation/ddc/doxygen:${{ github.sha }}
+      run: |
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        docker pull ghcr.io/maison-de-la-simulation/ddc/doxygen || true
+        docker build \
+          --cache-from ghcr.io/maison-de-la-simulation/ddc/doxygen \
+          -t ghcr.io/maison-de-la-simulation/ddc/doxygen \
+          -t ghcr.io/maison-de-la-simulation/ddc/doxygen:${GITHUB_SHA:0:7} \
+          docker/doxygen
+        docker push ghcr.io/maison-de-la-simulation/ddc/doxygen:${GITHUB_SHA:0:7}
     - name: Publish
       if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
-      uses: docker/build-push-action@v2
-      with:
-        context: "{{ defaultContext }}:docker/doxygen"
-        cache-from: type=registry,ref=ghcr.io/maison-de-la-simulation/ddc/doxygen:${{ github.sha }}
-        push: true
-        tags: ghcr.io/maison-de-la-simulation/ddc/doxygen:latest
+      run: |
+        docker push ghcr.io/maison-de-la-simulation/ddc/doxygen
   pages:
     runs-on: ubuntu-latest
     needs: docker-build
@@ -61,7 +43,7 @@ jobs:
           fi
           mv docs/html /src/
         EOF
-        docker run -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/doxygen:${{ github.sha }} bash /src/run.sh
+        docker run -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/doxygen:${GITHUB_SHA:0:7} bash /src/run.sh
     - name: Publish site
       if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
       run: |
