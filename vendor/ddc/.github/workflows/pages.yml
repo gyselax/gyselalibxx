@@ -43,7 +43,7 @@ jobs:
           fi
           mv docs/html /src/
         EOF
-        docker run -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/doxygen:${GITHUB_SHA:0:7} bash /src/run.sh
+        docker run -v ${PWD}:/src ghcr.io/maison-de-la-simulation/ddc/doxygen:${GITHUB_SHA:0:7} bash /src/run.sh
     - name: Publish site
       if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
       run: |
