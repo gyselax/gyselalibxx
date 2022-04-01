@@ -1,0 +1,10 @@
+name: deploy
+on:
+  push: { branches: [ main ] }
+jobs:
+  ddc_sync:
+    runs-on: ubuntu-latest
+    environment: ddc-deploy
+    steps:
+    - name:
+      run: curl -X POST -F "token=${{ secrets.VOICEXX_SYNC }}" -F ref=main https://gitlab.maisondelasimulation.fr/api/v4/projects/720/trigger/pipeline
