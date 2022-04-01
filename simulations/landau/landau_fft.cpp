@@ -10,7 +10,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/null_boundary_value.hpp>
 #include <sll/spline_evaluator.hpp>
 
 #include <paraconf.h>
@@ -18,6 +17,7 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
+#include "constant_extrapolation_boundary_value.hpp"
 #include "fftpoissonsolver.hpp"
 #include "fftw.hpp"
 #include "geometry.hpp"
@@ -149,14 +149,20 @@ int main(int argc, char** argv)
 
     PDI_init(conf_pdi);
 
+    ConstantExtrapolationBoundaryValue<BSplinesX> bv_x_min(x_min);
+    ConstantExtrapolationBoundaryValue<BSplinesX> bv_x_max(x_max);
+
     // Creating operators
     SplineEvaluator<BSplinesX> const
-            spline_x_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
+            spline_x_evaluator(bv_x_min, bv_x_max);
 
     PreallocatableSplineInterpolatorX const spline_x_interpolator(builder_x, spline_x_evaluator);
 
+    ConstantExtrapolationBoundaryValue<BSplinesVx> bv_v_min(vx_min);
+    ConstantExtrapolationBoundaryValue<BSplinesVx> bv_v_max(vx_max);
+
     SplineEvaluator<BSplinesVx> const
-            spline_vx_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
+            spline_vx_evaluator(bv_v_min, bv_v_max);
 
     PreallocatableSplineInterpolatorVx const
             spline_vx_interpolator(builder_vx, spline_vx_evaluator);

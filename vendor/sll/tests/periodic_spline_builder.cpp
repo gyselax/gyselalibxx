@@ -110,7 +110,9 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
     spline_builder(coef, yvals);
 
     // 6. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
-    SplineEvaluator<BSplinesX> spline_evaluator(NullBoundaryValue::value, NullBoundaryValue::value);
+    SplineEvaluator<BSplinesX> spline_evaluator(
+            NullBoundaryValue<BSplinesX>::value,
+            NullBoundaryValue<BSplinesX>::value);
 
     FieldX coords_eval(interpolation_domain);
     for (IndexX const ix : interpolation_domain) {
