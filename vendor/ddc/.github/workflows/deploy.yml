@@ -5,6 +5,9 @@ jobs:
   ddc_sync:
     runs-on: ubuntu-latest
     environment: ddc-deploy
+    concurrency: 
+      group: ddc_sync
+      cancel-in-progress: true
     steps:
     - name:
       run: curl -X POST -F "token=${{ secrets.VOICEXX_SYNC }}" -F ref=main https://gitlab.maisondelasimulation.fr/api/v4/projects/720/trigger/pipeline
