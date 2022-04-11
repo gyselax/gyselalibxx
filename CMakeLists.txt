@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 cmake_minimum_required(VERSION 3.15)
-project(voicexx CXX)
+project(voicexx C CXX)
 
 # Our include path
 
