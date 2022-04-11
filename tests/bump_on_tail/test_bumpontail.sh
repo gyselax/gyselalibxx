@@ -28,4 +28,8 @@ cd "${TMPDIR}"
 "${VOICEXX_EXEC}" "${TESTDIR}/bumpontail.yaml"
 export PYTHONPATH="${VOICEXX_SRCDIR}/post-process/PythonScripts"
 "${PYTHON3_EXE}" -B "${TESTDIR}/check_bumpontail.py"
-mkdir "${OUTDIR}" && cp *.png "${OUTDIR}"
+if [ ! -d ${OUTDIR} ]
+then
+    mkdir "${OUTDIR}"
+fi
+cp *.png "${OUTDIR}"

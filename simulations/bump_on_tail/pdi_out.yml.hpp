@@ -29,6 +29,11 @@ metadata:
     type: array
     subtype: double
     size: [ '$fdistribu_masses_extents[0]' ]
+  fequil_extents : { type: array, subtype: int64, size: 2 }
+  fequil:
+    type: array
+    subtype: double
+    size: [ '$fequil_extents[0]', '$fequil_extents[1]' ]
 
 data:
   fdistribu_extents: { type: array, subtype: int64, size: 3 }
