@@ -28,4 +28,9 @@ cd "${TMPDIR}"
 "${VOICEXX_EXEC}" "${TESTDIR}/landau.yaml"
 export PYTHONPATH="${VOICEXX_SRCDIR}/post-process/PythonScripts"
 "${PYTHON3_EXE}" -B "${TESTDIR}/check_Landau.py"
-mkdir "${OUTDIR}" && cp *.png "${OUTDIR}"
+if [ ! -d ${OUTDIR} ]
+then
+    mkdir "${OUTDIR}"
+fi
+cp *.png "${OUTDIR}"
+
