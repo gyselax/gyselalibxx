@@ -29,11 +29,11 @@ metadata:
     type: array
     subtype: double
     size: [ '$fdistribu_masses_extents[0]' ]
-  fequil_extents : { type: array, subtype: int64, size: 2 }
-  fequil:
+  fdistribu_eq_extents : { type: array, subtype: int64, size: 2 }
+  fdistribu_eq:
     type: array
     subtype: double
-    size: [ '$fequil_extents[0]', '$fequil_extents[1]' ]
+    size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]' ]
 
 data:
   fdistribu_extents: { type: array, subtype: int64, size: 3 }
@@ -62,7 +62,7 @@ plugins:
     - file: 'VOICEXX_initstate.h5'
       on_event: [initial_state]
       collision_policy: replace_and_warn
-      write: [Nx, Nvx, MeshX, MeshVx, nbstep_diag, Nkinspecies,fdistribu_charges,fdistribu_masses]
+      write: [Nx, Nvx, MeshX, MeshVx, nbstep_diag, Nkinspecies, fdistribu_charges, fdistribu_masses, fdistribu_eq]
     - file: 'VOICEXX_${iter_saved:05}.h5'
       on_event: [iteration, last_iteration]
       when: '${iter} % ${nbstep_diag} = 0'
