@@ -212,7 +212,7 @@ int main(int argc, char** argv)
     expose_to_pdi("fdistribu_charges",species_info.charge()[dom_kinsp]);
     expose_to_pdi("fdistribu_masses",species_info.mass()[dom_kinsp]);
     PdiEvent("initial_state")
-        .with("fequil",allfequilibrium);
+        .with("fdistribu_eq",allfequilibrium);
 
     steady_clock::time_point const start = steady_clock::now();
 
