@@ -17,11 +17,11 @@ set +v
 arg=$#
 
 if [ $# -lt 2 ]; then
-    echo " Syntaxe:  jean-zay-gpu-pinn.slurm <YAML_input_PINN> <VOICEXX_directory>
+    echo " Syntaxe:  jean-zay-gpu-pinn.slurm <YAML_input_PINN> <VOICEXX_directory>"
     exit
 fi
 
-#----- Configuration de l'environnement -----
+##----- Configuration de l'environnement -----
 module load tensorflow-gpu
 
 python PINNmain.py -i $1 -p $2
