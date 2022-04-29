@@ -49,6 +49,7 @@ RUN chmod +x /bin/bash_run \
     PyYAML \
     dask \
     h5py \
+    imageio \
     matplotlib \
     numpy \
     pip \
