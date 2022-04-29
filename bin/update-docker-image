@@ -1,9 +1,10 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 
+set -e
 
 cd "$(dirname "$0")"
 cd ../docker
 
-docker build -t jbigot/voicexx_env voicexx_env && \
+docker build -t jbigot/voicexx_env voicexx_env
 docker push jbigot/voicexx_env
