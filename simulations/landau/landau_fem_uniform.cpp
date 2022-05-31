@@ -81,8 +81,10 @@ int main(int argc, char** argv)
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(nb_kinspecies);
 
-    IDomainSpXVx const
-            meshSpXVx(dom_kinsp, builder_x.interpolation_domain(), builder_vx.interpolation_domain());
+    IDomainSpXVx const meshSpXVx(
+            dom_kinsp,
+            builder_x.interpolation_domain(),
+            builder_vx.interpolation_domain());
     IDomainSpVx const meshSpVx(dom_kinsp, builder_vx.interpolation_domain());
 
     FieldSp<int> kinetic_charges(dom_kinsp);
@@ -132,9 +134,9 @@ int main(int argc, char** argv)
             std::move(init_perturb_mode));
     DFieldSpVx allfequilibrium(meshSpVx);
     MaxwellianEquilibrium const init_fequilibrium(
-        std::move(density_eq),
-        std::move(temperature_eq),
-        std::move(mean_velocity_eq));
+            std::move(density_eq),
+            std::move(temperature_eq),
+            std::move(mean_velocity_eq));
     init_fequilibrium(allfequilibrium);
     DFieldSpXVx allfdistribu(meshSpXVx);
     SingleModePerturbInitialization const
@@ -157,16 +159,14 @@ int main(int argc, char** argv)
     ConstantExtrapolationBoundaryValue<BSplinesX> bv_x_max(x_max);
 
     // Creating operators
-    SplineEvaluator<BSplinesX> const
-            spline_x_evaluator(bv_x_min, bv_x_max);
+    SplineEvaluator<BSplinesX> const spline_x_evaluator(bv_x_min, bv_x_max);
 
     PreallocatableSplineInterpolatorX const spline_x_interpolator(builder_x, spline_x_evaluator);
 
     ConstantExtrapolationBoundaryValue<BSplinesVx> bv_v_min(vx_min);
     ConstantExtrapolationBoundaryValue<BSplinesVx> bv_v_max(vx_max);
 
-    SplineEvaluator<BSplinesVx> const
-            spline_vx_evaluator(bv_v_min, bv_v_max);
+    SplineEvaluator<BSplinesVx> const spline_vx_evaluator(bv_v_min, bv_v_max);
 
     PreallocatableSplineInterpolatorVx const
             spline_vx_interpolator(builder_vx, spline_vx_evaluator);
@@ -210,8 +210,7 @@ int main(int argc, char** argv)
     expose_to_pdi("Nkinspecies", nb_kinspecies.value());
     expose_to_pdi("fdistribu_charges", species_info.charge()[dom_kinsp]);
     expose_to_pdi("fdistribu_masses", species_info.mass()[dom_kinsp]);
-    PdiEvent("initial_state")
-        .with("fdistribu_eq",allfequilibrium);
+    PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium);
 
     steady_clock::time_point const start = steady_clock::now();
 
