@@ -32,6 +32,7 @@ RUN chmod +x /bin/bash_run \
     git \
     libfftw3-dev \
     liblapack-dev \
+    openssh-client \
     pdidev-archive-keyring \
     pdiplugin-decl-hdf5-serial \
     pdiplugin-set-value \
