@@ -26,8 +26,13 @@ cd "${TMPDIR}"
 
 "${VOICEXX_EXEC}" "--dump-config" "${TESTDIR}/bumpontail.yaml"
 "${VOICEXX_EXEC}" "${TESTDIR}/bumpontail.yaml"
+
+# Theoretical values for Landau damping
+growthrate_theory=0.16
+frequency_theory=1.07
+
 export PYTHONPATH="${VOICEXX_SRCDIR}/post-process/PythonScripts"
-"${PYTHON3_EXE}" -B "${TESTDIR}/check_bumpontail.py"
+"${PYTHON3_EXE}" -B "${VOICEXX_SRCDIR}/tests/check_growthrate_freq.py" . -g ${growthrate_theory} -f ${frequency_theory}
 if [ ! -d ${OUTDIR} ]
 then
     mkdir "${OUTDIR}"

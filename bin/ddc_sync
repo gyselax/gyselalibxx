@@ -7,6 +7,10 @@ cd "$(dirname "$0")"
 cd ..
 
 rm -rf vendor/ddc
+pwd
+id
+ls -l .
+git config --add safe.directory .
 git clone --depth 1 https://github.com/Maison-de-la-Simulation/ddc.git vendor/ddc
 DDC_REF="$(git -C vendor/ddc rev-parse --short HEAD)"
 git config user.email "$(git -C vendor/ddc show -s --format='%ae' HEAD)"

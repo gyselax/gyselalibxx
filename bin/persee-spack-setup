@@ -10,7 +10,7 @@ module purge &> /dev/null || true
 
 # fetch and activate spack
 SPACK_ROOT="${SPACK_ROOT:-${HOME}/spack}"
-git clone https://github.com/spack/spack.git &> /dev/null || true
+git clone https://github.com/spack/spack.git "${SPACK_ROOT}" &> /dev/null || true
 if ! which spack &> /dev/null
 then
     . "${SPACK_ROOT}/share/spack/setup-env.sh"
@@ -20,7 +20,7 @@ fi
 git clone https://github.com/pdidev/spack.git "${SPACK_ROOT}/var/spack/repos/pdi" &> /dev/null || true
 git -C "${SPACK_ROOT}/var/spack/repos/pdi" fetch --all -p
 git -C "${SPACK_ROOT}/var/spack/repos/pdi" reset --hard origin/stable
-spack repo add spack/var/spack/repos/pdi &> /dev/null || true
+spack repo add "${SPACK_ROOT}/var/spack/repos/pdi" &> /dev/null || true
 
 # detect the local python install
 spack external find python 2> /dev/null || true
@@ -30,20 +30,16 @@ module load gcc/10.3.0
 spack compiler find 2> /dev/null || true
 module purge
 
-# create our environment
+# create our environment (VOICE_DIR contains spack.yaml)
 VOICE_DIR="$(dirname "$(dirname "$(readlink -f "$0" )")")"
-spack env create voicexx "${VOICE_DIR}/spack.yaml" 2> /dev/null || true
-spack -e voicexx config add "packages:all:compiler:[gcc@10.3.0]"
-
-# modify the env to remove MPI dep
-spack -e voicexx rm pdiplugin-decl-hdf5 || true
-spack -e voicexx add pdiplugin-decl-hdf5^hdf5~mpi
+spack env create -d "${VOICE_DIR}" 2> /dev/null || true
+spack -e "${VOICE_DIR}" config add "packages:all:compiler:[gcc@10.3.0]"
 
 # do the actual install
 echo -e "\n   Now installing everything...\n\e[91m\e[1mBeware\e[33m, this can take up to mutiple hours and multi-GB of space!\e[0m\n" >&2
 trap 'kill $(jobs -p) 2> /dev/null' EXIT QUIT ABRT KILL SEGV INT TERM STOP
 for N in $(seq 10)
-do spack -e voicexx install --reuse --fail-fast --show-log-on-error
+do spack -e "${VOICE_DIR}" install --reuse --fail-fast --show-log-on-error
 done
 wait
 trap '-' EXIT QUIT ABRT KILL SEGV INT TERM STOP
@@ -58,6 +54,6 @@ if ! which spack &> /dev/null
 then
     . "${SPACK_ROOT}/share/spack/setup-env.sh"
 fi
-spack env activate voicexx
+spack env activate -d "${VOICE_DIR}"
 EOF
 echo -e "\n\nIf everything went well, you can now activate your environment with:\n source $(realpath --relative-to=. ${VOICE_DIR}/bin/voicexx.env.sh)"

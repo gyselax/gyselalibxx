@@ -35,10 +35,7 @@ RUN chmod +x /bin/bash_run \
     pdidev-archive-keyring \
     pdiplugin-decl-hdf5-serial \
     pdiplugin-set-value \
-    python3-h5py \
-    python3-numpy \
-    python3-matplotlib \
-    python3-scipy \
+    python3-pip \
     pylint \
     libpdi-dev \
  && apt-get purge -y \
@@ -48,6 +45,16 @@ RUN chmod +x /bin/bash_run \
  && apt-get autoremove -y \
  && apt-get clean -y \
  && apt-get autoclean -y \
+ && python3 -m pip install --system -U --no-cache-dir \
+    PyYAML \
+    dask \
+    h5py \
+    imageio \
+    matplotlib \
+    numpy \
+    pip \
+    scipy \
+    xarray \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \

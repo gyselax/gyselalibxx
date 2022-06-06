@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+
+# SPDX-License-Identifier: MIT
+
+import os
+import sys
+
+from argparse import ArgumentParser
+from pathlib import Path
+
+import diag_efield as Ediag
+from gysdata import DiskStore
+
+
+if __name__ == '__main__':
+    parser = ArgumentParser(description="Plot growth (or damping) rate.")
+    parser.add_argument('data_dir',
+                        action='store',
+                        nargs='?',
+                        default=Path.cwd(),
+                        type=Path,
+                        help='location of the results')
+    parser.add_argument('-o', '--output',
+                        action='store',
+                        default=None,
+                        type=Path,
+                        help='output file to generate',
+                        metavar='OUTFILE')
+    parser.add_argument('-t', '--theoretical',
+                        action='store',
+                        default=None,
+                        type=float,
+                        help='theoretical growthrate')
+    parser.add_argument('-s', '--start',
+                        action='store',
+                        default=0,
+                        type=int,
+                        help='start time index')
+    parser.add_argument('-e', '--end',
+                        action='store',
+                        default=None,
+                        type=int,
+                        help='end time index')
+    args = parser.parse_args()
+
+    # Load data
+    ds = DiskStore(args.data_dir)
+    epot = ds['electrostatic_potential']
+    epot = epot.isel(x=int(epot.sizes["x"] / 2))
+    epot = epot.isel(time=slice(args.start, args.end))
+
+    # Compute the diag
+    (fitted_values, fit,
+     growthrate, valid) = Ediag.compute_growthrate(epot, args.theoretical)
+
+    # Plot the fig
+    basename = os.path.basename(args.data_dir)
+    if args.output is None:
+        out_file = Path.cwd()/(
+            f'{basename}_growthrate_t_{epot.coords["time"].values[0]}'
+            f'_to_{epot.coords["time"].values[-1]}.png')
+    else:
+        out_file = Path(args.output)
+    Ediag.plot_growthrate(out_file, abs(epot), fitted_values, fit,
+                          growthrate, args.theoretical)
+
+    if not valid:
+        sys.exit(1)
