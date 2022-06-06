@@ -23,7 +23,7 @@ NEWSRC_DIR="$PWD"
 
 git config user.email "${GITLAB_USER_EMAIL}"
 git config user.name "${GITLAB_USER_NAME}"
-git remote set-url origin "http://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+git remote set-url origin "https://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
 
 git fetch -p origin public
 git switch -c public origin/public
