@@ -12,8 +12,6 @@
 #include "electricfield.hpp"
 #include "ipoissonsolver.hpp"
 
-class SpeciesInformation;
-
 class FftPoissonSolver : public IPoissonSolver
 {
     IFourierTransform<RDimX> const& m_fft;
@@ -30,7 +28,6 @@ class FftPoissonSolver : public IPoissonSolver
 
 public:
     FftPoissonSolver(
-            SpeciesInformation const& species_info,
             IFourierTransform<RDimX> const& fft,
             IInverseFourierTransform<RDimX> const& ifft,
             SplineXBuilder const& spline_x_builder,

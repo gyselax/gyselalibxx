@@ -11,11 +11,8 @@
 
 using namespace std;
 
-BslAdvectionX::BslAdvectionX(
-        SpeciesInformation const& species_info,
-        IPreallocatableInterpolatorX const& interpolator)
+BslAdvectionX::BslAdvectionX(IPreallocatableInterpolatorX const& interpolator)
     : m_interpolator(interpolator)
-    , m_species_info(species_info)
 {
 }
 
@@ -31,8 +28,7 @@ DSpanSpXVx BslAdvectionX::operator()(DSpanSpXVx const allfdistribu, double const
     InterpolatorXProxy const interpolator = m_interpolator.preallocate();
 
     for_each(sp_dom, [&](IndexSp const isp) {
-        double const sqrt_me_on_mspecies = std::sqrt(
-                m_species_info.mass()(m_species_info.ielec()) / m_species_info.mass()(isp));
+        double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
 
         for_each(v_dom, [&](IndexVx const iv) {
             // compute the displacement

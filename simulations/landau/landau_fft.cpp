@@ -15,6 +15,8 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "ddc/discretization.hpp"
+
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "constant_extrapolation_boundary_value.hpp"
@@ -122,7 +124,7 @@ int main(int argc, char** argv)
     }
 
     // Initialization of the distribution function
-    SpeciesInformation const species_info(
+    init_discretization<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
@@ -135,7 +137,9 @@ int main(int argc, char** argv)
     init_fequilibrium(allfequilibrium);
     DFieldSpXVx allfdistribu(meshSpXVx);
     SingleModePerturbInitialization const
-            init(allfequilibrium, species_info.perturb_mode(), species_info.perturb_amplitude());
+            init(allfequilibrium,
+                 discretization<IDimSp>().perturb_modes(),
+                 discretization<IDimSp>().perturb_amplitudes());
     init(allfdistribu);
 
     // --> Algorithm info
@@ -166,10 +170,9 @@ int main(int argc, char** argv)
     PreallocatableSplineInterpolatorVx const
             spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
-    BslAdvectionX const advection_x(species_info, spline_x_interpolator);
+    BslAdvectionX const advection_x(spline_x_interpolator);
 
-    BslAdvectionVx const
-            advection_vx(species_info, builder_x, spline_x_evaluator, spline_vx_interpolator);
+    BslAdvectionVx const advection_vx(builder_x, spline_x_evaluator, spline_vx_interpolator);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
@@ -178,13 +181,7 @@ int main(int argc, char** argv)
     FftwInverseFourierTransform<RDimX> const ifft;
 
     FftPoissonSolver const
-            poisson(species_info,
-                    fft,
-                    ifft,
-                    builder_x,
-                    spline_x_evaluator,
-                    builder_vx,
-                    spline_vx_evaluator);
+            poisson(fft, ifft, builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 
     PredCorr const predcorr(vlasov, poisson, deltat);
 
@@ -208,8 +205,8 @@ int main(int argc, char** argv)
     expose_to_pdi("MeshVx", meshVx_coord);
     expose_to_pdi("nbstep_diag", nbstep_diag);
     expose_to_pdi("Nkinspecies", nb_kinspecies.value());
-    expose_to_pdi("fdistribu_charges", species_info.charge()[dom_kinsp]);
-    expose_to_pdi("fdistribu_masses", species_info.mass()[dom_kinsp]);
+    expose_to_pdi("fdistribu_charges", discretization<IDimSp>().charges()[dom_kinsp]);
+    expose_to_pdi("fdistribu_masses", discretization<IDimSp>().masses()[dom_kinsp]);
     PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium);
 
     steady_clock::time_point const start = steady_clock::now();

@@ -13,12 +13,10 @@
 #include <sll/spline_evaluator.hpp>
 
 #include <geometry.hpp>
-#include <species_info.hpp>
 
 #include "fftpoissonsolver.hpp"
 
 FftPoissonSolver::FftPoissonSolver(
-        SpeciesInformation const& species_info,
         IFourierTransform<RDimX> const& fft,
         IInverseFourierTransform<RDimX> const& ifft,
         SplineXBuilder const& spline_x_builder,
@@ -29,7 +27,7 @@ FftPoissonSolver::FftPoissonSolver(
     , m_ifft(ifft)
     , m_spline_x_builder(spline_x_builder)
     , m_spline_x_evaluator(spline_x_evaluator)
-    , compute_rho(species_info, spline_vx_builder, spline_vx_evaluator)
+    , compute_rho(spline_vx_builder, spline_vx_evaluator)
     , m_electric_field(spline_x_builder, spline_x_evaluator)
 {
 }

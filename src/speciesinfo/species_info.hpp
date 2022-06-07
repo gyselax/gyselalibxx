@@ -2,53 +2,76 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include <ddc/ddc.hpp>
+
+#include "ddc/discrete_coordinate.hpp"
 
 class SpeciesInformation
 {
+    using mcoord_type = DiscreteCoordinate<SpeciesInformation>;
+
+    using dvect_type = DiscreteVector<SpeciesInformation>;
+
+    using idim_type = DiscreteDomain<SpeciesInformation>;
+
 private:
     // charge of the particles (kinetic + adiabatic)
-    FieldSp<int> const m_charge;
+    Chunk<int, idim_type> const m_charge;
 
     // mass of the particles of all kinetic species
-    FieldSp<double> const m_mass;
+    Chunk<double, idim_type> const m_mass;
 
     // Initial perturbation amplitude of all kinetic species
-    FieldSp<double> const m_perturb_amplitude;
+    Chunk<double, idim_type> const m_perturb_amplitude;
 
     // Initial perturbation mode of all kinetic species
-    FieldSp<int> const m_perturb_mode;
+    Chunk<int, idim_type> const m_perturb_mode;
 
 public:
     SpeciesInformation(
-            FieldSp<int> charge,
-            FieldSp<double> mass,
-            FieldSp<double> perturb_amplitude,
-            FieldSp<int> perturb_mode);
+            Chunk<int, idim_type> charge,
+            Chunk<double, idim_type> mass,
+            Chunk<double, idim_type> perturb_amplitude,
+            Chunk<int, idim_type> perturb_mode);
 
     // Consider that the electron species is always at the 0 position
-    IndexSp ielec() const
+    mcoord_type ielec() const
     {
-        return IndexSp(0);
+        return mcoord_type(0);
     }
 
-    ViewSp<int> charge() const
+    ChunkSpan<const int, idim_type> charges() const
     {
         return m_charge;
     }
 
-    ViewSp<double> mass() const
+    ChunkSpan<const double, idim_type> masses() const
     {
         return m_mass;
     }
 
-    ViewSp<double> perturb_amplitude() const
+    ChunkSpan<const double, idim_type> perturb_amplitudes() const
     {
         return m_perturb_amplitude;
     }
 
-    ViewSp<int> perturb_mode() const
+    ChunkSpan<const int, idim_type> perturb_modes() const
     {
         return m_perturb_mode;
     }
 };
+
+inline DiscreteCoordinate<SpeciesInformation> ielec()
+{
+    return discretization<SpeciesInformation>().ielec();
+}
+
+inline int charge(DiscreteCoordinate<SpeciesInformation> isp)
+{
+    return discretization<SpeciesInformation>().charges()(isp);
+}
+
+inline double mass(DiscreteCoordinate<SpeciesInformation> isp)
+{
+    return discretization<SpeciesInformation>().masses()(isp);
+}

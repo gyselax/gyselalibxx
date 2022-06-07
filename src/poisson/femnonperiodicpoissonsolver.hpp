@@ -13,8 +13,6 @@ using NUBSplinesX = NonUniformBSplines<RDimX, BSDegreeX>;
 using NUBSDomainX = DiscreteDomain<NUBSplinesX>;
 using UBSplinesX = UniformBSplines<RDimX, BSDegreeX>;
 
-class SpeciesInformation;
-
 class FemNonPeriodicPoissonSolver : public IPoissonSolver
 {
     SplineXBuilder const& m_spline_x_builder;
@@ -52,7 +50,6 @@ private:
 
 public:
     FemNonPeriodicPoissonSolver(
-            SpeciesInformation const& species_info,
             SplineXBuilder const& spline_x_builder,
             SplineEvaluator<BSplinesX> const& spline_x_evaluator,
             SplineVxBuilder const& spline_vx_builder,

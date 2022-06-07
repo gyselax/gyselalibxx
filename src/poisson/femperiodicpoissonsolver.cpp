@@ -13,14 +13,13 @@
 #include "femperiodicpoissonsolver.hpp"
 
 FemPeriodicPoissonSolver::FemPeriodicPoissonSolver(
-        SpeciesInformation const& species_info,
         SplineXBuilder const& spline_x_builder,
         SplineEvaluator<BSplinesX> const& spline_x_evaluator,
         SplineVxBuilder const& spline_vx_builder,
         SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
     : m_spline_x_builder(spline_x_builder)
     , m_spline_x_evaluator(spline_x_evaluator)
-    , compute_rho(species_info, spline_vx_builder, spline_vx_evaluator)
+    , compute_rho(spline_vx_builder, spline_vx_evaluator)
     , m_eval_pts_ptr(m_npts_gauss * m_ncells)
     , m_quad_coef_ptr(m_npts_gauss * m_ncells)
     , m_eval_pts(m_eval_pts_ptr.data(), m_npts_gauss * m_ncells)
