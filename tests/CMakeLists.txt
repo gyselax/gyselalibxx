@@ -17,6 +17,7 @@ target_link_libraries(unit_tests
         vcx::poisson
 )
 
+add_subdirectory(bump_on_tail)
 if(VOICEXX_ENABLE_PERIODIC_RDIMX)
     target_sources(unit_tests
         PRIVATE
@@ -27,7 +28,6 @@ if(VOICEXX_ENABLE_PERIODIC_RDIMX)
     target_link_libraries(unit_tests PRIVATE vcx::fft)
 
     add_subdirectory(landau)
-    add_subdirectory(bump_on_tail)
 else()
     target_sources(unit_tests PRIVATE femnonperiodicpoissonsolver.cpp)
 endif()
