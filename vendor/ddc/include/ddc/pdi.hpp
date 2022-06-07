@@ -39,7 +39,7 @@ public:
         static_assert(
                 !(access & PDI_IN) || (chunk_default_access_v<BorrowedChunk> & PDI_IN),
                 "Invalid access for constant data");
-        auto extents = data.domain().extents().array();
+        auto extents = detail::array(data.domain().extents());
         size_t rank = extents.size();
         PDI_share((name + "_rank").c_str(), &rank, PDI_OUT);
         m_names.push_back(name + "_rank");

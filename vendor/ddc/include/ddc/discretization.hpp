@@ -14,11 +14,8 @@ namespace detail {
 template <class IDim>
 struct Discretization
 {
-    static std::optional<IDim> s_disc;
+    static inline std::optional<IDim> s_disc;
 };
-
-template <class IDim>
-std::optional<IDim> Discretization<IDim>::s_disc;
 
 template <class Tuple, std::size_t... Ids>
 auto extract_after(Tuple&& t, std::index_sequence<Ids...>)

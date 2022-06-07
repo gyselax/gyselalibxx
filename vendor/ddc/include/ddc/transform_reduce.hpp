@@ -85,7 +85,7 @@ inline T transform_reduce(
             } else {
                 thread_result = reduce(
                         thread_result,
-                        transform_reduce_serial(domain, neutral, reduce, transform, *it));
+                        detail::transform_reduce_serial(domain, neutral, reduce, transform, *it));
             }
         }
 

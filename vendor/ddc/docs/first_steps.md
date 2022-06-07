@@ -60,24 +60,27 @@ domains.
 
 \snippet heat_equation.cpp main-start
 
-We start by defining `gwx`, the number of "ghost" points in the `X` dimension.
+We start by defining `gwx`, the number of "ghost" points in the `X` dimension, those represented in
+dark grey in the figure on each side of the domain.
+
+\snippet heat_equation.cpp X-parameters
 This can be made `static constexpr` since here this is a compile-time constant.
 The type for this constant is `DiscreteVector<DDimX>` that represents a number of elements in the
 discretization of the `X` dimension.
 
-\snippet heat_equation.cpp X-parameters
-
-Once done, we initialize the actual discretization of the `X` dimension.
-Its name has been specified before, but we now set its parameters.
+Once done, we initialize the discretization of the `X` dimension.
+Its name has been specified before, but we now set its parameters with the `init_discretization`
+function.
 
 \snippet heat_equation.cpp X-global-domain
-
-Since we use the `init_ghosted` function, we receive four 1D domains as a result.
+Depending on the way the function is called, its return type can differ.
+Here we use it with an inner call to `init_ghosted` and receive four 1D domains as a result.
 Their type is not specified because we use C++
 [structured bindings](https://en.cppreference.com/w/cpp/language/structured_binding), but they are
 all of the same type: `DiscreteDomain<DDimX>` that represents a set of contiguous points in the
 discretization of `X`.
-This function expects as parameter the coordinate of the first and last discretized points, the
+
+\ref UniformDiscretization::init_ghosted "init_ghosted" takes as parameters the coordinate of the first and last discretized points, the
 number of discretized points in the domain and the number of additional points on each side of the
 domain.
 The fours `DiscreteDomain`s returned are:
