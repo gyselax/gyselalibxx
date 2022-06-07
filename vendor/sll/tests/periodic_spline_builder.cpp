@@ -67,6 +67,7 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
     using DimX = typename TestFixture::DimX;
     using IDimX = typename TestFixture::IDimX;
     using IndexX = DiscreteCoordinate<IDimX>;
+    using DVectX = DiscreteVector<IDimX>;
     using BSplinesX = typename TestFixture::BSpline;
     using BsplIndexX = DiscreteCoordinate<BSplinesX>;
     using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
@@ -81,7 +82,7 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
     if constexpr (BSplinesX::is_uniform()) {
         init_discretization<BSplinesX>(x0, xN, ncells);
     } else {
-        IndexX constexpr npoints(ncells + 1);
+        DVectX constexpr npoints(ncells + 1);
         std::vector<double> breaks(npoints);
         double dx = (xN - x0) / ncells;
         for (std::size_t i(0); i < npoints; ++i) {
