@@ -10,6 +10,7 @@ target_include_directories(geometry
 target_link_libraries(geometry INTERFACE
     DDC::DDC
     sll::splines
+    vcx::speciesinfo
 )
 
 if(VOICEXX_ENABLE_PERIODIC_RDIMX)

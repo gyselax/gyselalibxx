@@ -8,6 +8,8 @@
 #include <sll/bsplines_uniform.hpp>
 #include <sll/spline_builder.hpp>
 
+#include <species_info.hpp>
+
 template <class Tag>
 struct Fourier
 {
@@ -68,7 +70,7 @@ using SplineVxBuilder = SplineBuilder<BSplinesVx, BoundCond::HERMITE, BoundCond:
 using IDimVx = typename SplineVxBuilder::interpolation_mesh_type;
 
 // Species dimension
-class IDimSp;
+using IDimSp = SpeciesInformation;
 
 
 using IndexX = DiscreteCoordinate<IDimX>;

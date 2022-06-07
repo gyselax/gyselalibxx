@@ -9,12 +9,8 @@
 
 #include <geometry.hpp>
 
-class SpeciesInformation;
-
 class ChargeDensityCalculator
 {
-    SpeciesInformation const& m_species_info;
-
     SplineVxBuilder const& m_spline_vx_builder;
 
     SplineEvaluator<BSplinesVx> m_spline_vx_evaluator;
@@ -29,7 +25,6 @@ class ChargeDensityCalculator
 
 public:
     ChargeDensityCalculator(
-            SpeciesInformation const& species_info,
             SplineVxBuilder const& spline_vx_builder,
             SplineEvaluator<BSplinesVx> const& spline_vx_evaluator);
 

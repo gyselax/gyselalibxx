@@ -63,14 +63,14 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     init_perturb_amplitude(dom_sp.front()) = 0.0;
 
     // Initialization of the distribution function
-    SpeciesInformation const species_info(
+    init_discretization<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
 
     FemNonPeriodicPoissonSolver
-            poisson(species_info, builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
+            poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 
     DFieldX electrostatic_potential(gridx);
     DFieldX electric_field(gridx);

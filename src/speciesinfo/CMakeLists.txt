@@ -10,6 +10,5 @@ target_include_directories(speciesinfo
 target_link_libraries(speciesinfo PUBLIC
     DDC::DDC
     sll::splines
-    vcx::geometry
 )
 add_library(vcx::speciesinfo ALIAS speciesinfo)
