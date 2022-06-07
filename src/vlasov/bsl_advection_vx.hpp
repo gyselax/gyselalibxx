@@ -13,7 +13,6 @@
 class IPreallocatableInterpolatorX;
 class IPreallocatableInterpolatorVx;
 class BoundaryValue;
-class SpeciesInformation;
 
 class BslAdvectionVx : public IAdvectionVx
 {
@@ -24,11 +23,8 @@ private:
 
     IPreallocatableInterpolatorVx const& m_interpolator_vx;
 
-    SpeciesInformation const& m_species_info;
-
 public:
     BslAdvectionVx(
-            SpeciesInformation const& species_info,
             SplineXBuilder const& spline_x_builder,
             SplineEvaluator<BSplinesX> const& spline_x_evaluator,
             IPreallocatableInterpolatorVx const& interpolator_vx);

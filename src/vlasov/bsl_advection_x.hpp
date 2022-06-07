@@ -7,19 +7,14 @@
 #include "iadvectionx.hpp"
 
 class IPreallocatableInterpolatorX;
-class SpeciesInformation;
 
 class BslAdvectionX : public IAdvectionX
 {
 private:
     IPreallocatableInterpolatorX const& m_interpolator;
 
-    SpeciesInformation const& m_species_info;
-
 public:
-    BslAdvectionX(
-            SpeciesInformation const& species_info,
-            IPreallocatableInterpolatorX const& interpolator);
+    BslAdvectionX(IPreallocatableInterpolatorX const& interpolator);
 
     ~BslAdvectionX() override = default;
 
