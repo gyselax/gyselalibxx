@@ -131,8 +131,7 @@ void FemPeriodicPoissonSolver::solve_matrix_system(
     // Copy the first d coefficients into the last d coefficients
     // These coefficients refer to the same BSplines which cross the boundaries
     for (int i = 0; i < m_degree; i++) {
-        phi_spline_coef(DiscreteCoordinate<BSplinesX>(m_nbasis + i))
-                = phi_rhs(DiscreteCoordinate<BSplinesX>(i));
+        phi_spline_coef(DiscreteCoordinate<BSplinesX>(m_nbasis + i)) = phi_rhs(i);
     }
 }
 

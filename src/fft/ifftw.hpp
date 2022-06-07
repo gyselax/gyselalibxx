@@ -33,18 +33,14 @@ public:
                     DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
                     std::experimental::layout_right> const in_values) const noexcept override
     {
-        assert(in_values.extents().array() == out_values.extents().array());
+        assert(in_values.extents().value() == out_values.extents().value());
 
         // It needs to be of type 'int'
-        auto extents = out_values.extents();
-        std::array<int, 1> n;
-        for (std::size_t i = 0; i < extents.size(); ++i) {
-            n[i] = extents[i];
-        }
+        int const n = out_values.extents().value();
 
         fftw_plan plan = fftw_plan_dft_c2r(
-                n.size(),
-                n.data(),
+                1,
+                &n,
                 reinterpret_cast<fftw_complex*>(in_values.data()),
                 reinterpret_cast<double*>(out_values.data()),
                 FFTW_ESTIMATE);
@@ -76,18 +72,14 @@ public:
                     DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
                     std::experimental::layout_right> const in_values) const noexcept override
     {
-        assert(in_values.extents().array() == out_values.extents().array());
+        assert(in_values.extents().value() == out_values.extents().value());
 
         // It needs to be of type 'int'
-        auto const extents = out_values.extents();
-        std::array<int, 1> n;
-        for (std::size_t i = 0; i < extents.size(); ++i) {
-            n[i] = extents[i];
-        }
+        int const n = out_values.extents().value();
 
         fftw_plan plan = fftw_plan_dft(
-                n.size(),
-                n.data(),
+                1,
+                &n,
                 reinterpret_cast<fftw_complex*>(in_values.data()),
                 reinterpret_cast<fftw_complex*>(out_values.data()),
                 FFTW_BACKWARD,
