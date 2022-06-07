@@ -82,6 +82,10 @@ ddc_sync:
   needs: []
   image: jbigot/voicexx_env
   script:
+  - pwd
+  - id
+  - ls -l .
+  - git config --add safe.directory .
   - git checkout -B main origin/main
   - ./bin/ddc_sync --commit
   - git pull --rebase
