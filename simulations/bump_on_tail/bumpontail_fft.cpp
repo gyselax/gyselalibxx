@@ -94,7 +94,7 @@ int main(int argc, char** argv)
 
     for (IndexSp const isp : dom_kinsp) {
         // --> SpeciesInfo info
-        PC_tree_t const conf_isp = PCpp_get(conf_voicexx, ".SpeciesInfo[%d]", isp.value());
+        PC_tree_t const conf_isp = PCpp_get(conf_voicexx, ".SpeciesInfo[%d]", isp.uid());
 
         kinetic_charges(isp) = static_cast<int>(PCpp_int(conf_isp, ".charge"));
         if (kinetic_charges(isp) == -1) {
