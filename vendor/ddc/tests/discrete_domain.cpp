@@ -96,6 +96,6 @@ TEST(ProductMDomainTest, RangeFor)
         ASSERT_LE(lbound_x, ix);
         EXPECT_EQ(ix, ii);
         ASSERT_LE(ix, ubound_x);
-        ++ii.get<DDimX>();
+        ++ii.uid<DDimX>();
     }
 }

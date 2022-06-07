@@ -14,6 +14,7 @@ add_executable(ddc_tests
     rectilinear_domain.cpp
     uniform_domain.cpp
     for_each.cpp
+    discrete_element.cpp
 )
 target_compile_features(ddc_tests PUBLIC cxx_std_17)
 target_link_libraries(ddc_tests

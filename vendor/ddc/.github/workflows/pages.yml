@@ -35,12 +35,9 @@ jobs:
     - name: Build site
       run: |
         cat<<-EOF > run.sh
+          set -xe 
           cmake -DBUILD_DOCUMENTATION=ON -DDDC_BUILD_PDI_WRAPPER=OFF /src
-          if make doc 2>&1 | tee >(cat>&2) | grep ' warning: ' > /dev/null
-          then
-            make doc 2>&1 | grep ' warning: '
-            exit 1
-          fi
+          make doc
           mv docs/html /src/docs_out
         EOF
         mkdir docs_out

@@ -7,6 +7,7 @@
 
 #include "ddc/coordinate.hpp"
 #include "ddc/discrete_coordinate.hpp"
+#include "ddc/discrete_vector.hpp"
 #include "ddc/discretization.hpp"
 
 /// `NonUniformDiscretization` models a non-uniform discretization of the `CDim` segment \f$[a, b]\f$.
@@ -66,7 +67,7 @@ public:
     /// @brief Convert a mesh index into a position in `CDim`
     constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
     {
-        return m_points[icoord.value()];
+        return m_points[icoord.uid()];
     }
 };
 
