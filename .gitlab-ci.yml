@@ -2,7 +2,7 @@ cmake_tests_non_periodic:
   only: [ main, merge_requests ]
   stage: test
   needs: []
-  image: jbigot/voicexx_env
+  image: ghcr.io/gyselax/voicexx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
@@ -20,7 +20,7 @@ cmake_tests:
   only: [ main, merge_requests ]
   stage: test
   needs: []
-  image: jbigot/voicexx_env
+  image: ghcr.io/gyselax/voicexx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
@@ -38,7 +38,7 @@ cmake_tests_Release:
   only: [ main, merge_requests ]
   stage: test
   needs: []
-  image: jbigot/voicexx_env
+  image: ghcr.io/gyselax/voicexx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
@@ -59,7 +59,7 @@ indentation:
   only: [ main, merge_requests ]
   stage: test
   needs: []
-  image: jbigot/voicexx_env
+  image: ghcr.io/gyselax/voicexx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
@@ -68,7 +68,7 @@ python_best_practices:
   only: [ main, merge_requests ]
   stage: test
   needs: []
-  image: jbigot/voicexx_env
+  image: ghcr.io/gyselax/voicexx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   before_script:
@@ -90,5 +90,5 @@ public_mirror:
   only: [ main ]
   tags: [ outssh ]
   needs: []
-  image: jbigot/voicexx_env
+  image: ghcr.io/gyselax/voicexx_env
   script: ./bin/public_mirror
