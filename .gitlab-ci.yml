@@ -80,16 +80,12 @@ python_best_practices:
 ddc_sync:
   only: [ triggers ]
   needs: []
-  image: jbigot/voicexx_env
+  image: ghcr.io/gyselax/voicexx_env
+  variables:
+    GIT_STRATEGY: clone
   script:
-  - pwd
-  - id
-  - ls -l .
-  - git config --add safe.directory .
-  - git checkout -B main origin/main
-  - ./bin/ddc_sync --commit
-  - git pull --rebase
-  - git push "http://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" "HEAD:main"
+  - git clone --depth 1 --branch main -- "https://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" /data/gyselalibxx
+  - /data/gyselalibxx/bin/ddc_sync --push
 public_mirror:
   only: [ main ]
   tags: [ outssh ]
