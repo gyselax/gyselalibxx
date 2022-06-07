@@ -40,3 +40,9 @@ else()
 endif()
 
 add_library(vcx::poisson ALIAS poisson)
+
+if(VOICEXX_ENABLE_PERIODIC_RDIMX)
+    target_compile_definitions(poisson INTERFACE -DENABLE_PERIODIC_RDIMX=1)
+else()
+    target_compile_definitions(poisson INTERFACE -DENABLE_PERIODIC_RDIMX=0)
+endif()
