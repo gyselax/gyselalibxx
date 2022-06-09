@@ -130,6 +130,31 @@ public:
         return m_ubound;
     }
 
+    constexpr DiscreteDomain take_first(mlength_type n) const
+    {
+        return DiscreteDomain(front(), n);
+    }
+
+    constexpr DiscreteDomain take_last(mlength_type n) const
+    {
+        return DiscreteDomain(front() + size() - n, n);
+    }
+
+    constexpr DiscreteDomain remove_first(mlength_type n) const
+    {
+        return take_last(size() - n);
+    }
+
+    constexpr DiscreteDomain remove_last(mlength_type n) const
+    {
+        return take_first(size() - n);
+    }
+
+    constexpr DiscreteDomain remove(mlength_type n1, mlength_type n2) const
+    {
+        return remove_first(n1).remove_last(n2);
+    }
+
     template <class... ODDims>
     constexpr auto restrict(DiscreteDomain<ODDims...> const& odomain) const
     {
