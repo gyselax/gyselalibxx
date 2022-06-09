@@ -52,6 +52,7 @@ std::ostream& print_2DChunk(
 int main()
 {
     DiscreteDomain<DDimX, DDimY> const domain_xy(
+            DiscreteCoordinate<DDimX, DDimY>(0, 0),
             DiscreteVector<DDimX, DDimY>(length, height));
 
     DiscreteDomain<DDimX, DDimY> const inner_domain_xy(
