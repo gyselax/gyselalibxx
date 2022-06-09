@@ -242,8 +242,7 @@ public:
     inline constexpr TaggedVector(TaggedVector&&) = default;
 
     template <class... OTags>
-    explicit inline constexpr TaggedVector(
-            TaggedVector<ElementType, OTags> const&... other) noexcept
+    inline constexpr TaggedVector(TaggedVector<ElementType, OTags> const&... other) noexcept
         : m_values {take<Tags>(other...).value()...}
     {
     }
