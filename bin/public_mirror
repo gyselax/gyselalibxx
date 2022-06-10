@@ -32,6 +32,13 @@ git merge origin/public
 git rm -rf .
 find "$SRC_DIR" -maxdepth 1 -mindepth 1 '!' -name .git -exec cp -a -t "$NEWSRC_DIR" '{}' '+'
 find . -name .private -print0 | xargs -r0 dirname -z | xargs -r0 rm -rf
+git config -f .gitmodules --get-regexp '^submodule\..*\.path$' | while read path_key path_val
+do
+    url_key="$(echo $path_key | sed 's/\.path/.url/')"
+    url="$(git config -f .gitmodules --get "$url_key")"
+    rm -rf "$path_val"
+    git submodule add "$url" "$path_val"
+done
 git add -A .
 git commit -m "${CI_COMMIT_MESSAGE}" || true
 
