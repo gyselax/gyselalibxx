@@ -24,8 +24,8 @@ TESTDIR="${PWD}"
 
 cd "${TMPDIR}"
 
-"${VOICEXX_EXEC}" "--dump-config" "${TESTDIR}/landau.yaml"
-"${VOICEXX_EXEC}" "${TESTDIR}/landau.yaml"
+"${VOICEXX_EXEC}" "--dump-config" "${PWD}/landau.yaml"
+"${VOICEXX_EXEC}" "${PWD}/landau.yaml"
 
 # Theoretical values for Landau damping
 growthrate_theory=-0.153

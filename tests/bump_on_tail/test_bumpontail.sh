@@ -24,8 +24,8 @@ TESTDIR="${PWD}"
 
 cd "${TMPDIR}"
 
-"${VOICEXX_EXEC}" "--dump-config" "${TESTDIR}/bumpontail.yaml"
-"${VOICEXX_EXEC}" "${TESTDIR}/bumpontail.yaml"
+"${VOICEXX_EXEC}" "--dump-config" "${PWD}/bumpontail.yaml"
+"${VOICEXX_EXEC}" "${PWD}/bumpontail.yaml"
 
 # Theoretical values for Landau damping
 growthrate_theory=0.16
