@@ -1,0 +1,78 @@
+name: gyselalibxx
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+jobs:
+  tests_non_periodic:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout gyselalibxx
+      uses: actions/checkout@v3
+      with:
+        repository: gyselax/gyselalibxx
+        submodules: recursive
+    - name: rm ddc
+      run: rm -rf vendor/ddc
+    - name: Checkout ddc
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        path: vendor/ddc
+    - name: Build
+      run: |
+        cat<<-EOF > run.sh
+          set -xe
+          cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DVOICEXX_ENABLE_PERIODIC_RDIMX=OFF /src
+          make -j 2 VERBOSE=1
+          ctest --output-on-failure --timeout 5 -LE test_on_Release_only
+        EOF
+        docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env bash /src/run.sh
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout gyselalibxx
+      uses: actions/checkout@v3
+      with:
+        repository: gyselax/gyselalibxx
+        submodules: recursive
+    - name: rm ddc
+      run: rm -rf vendor/ddc
+    - name: Checkout ddc
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        path: vendor/ddc
+    - name: Build
+      run: |
+        cat<<-EOF > run.sh
+          set -xe
+          cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON /src
+          make -j 2 VERBOSE=1
+          ctest --output-on-failure --timeout 5 -LE test_on_Release_only
+        EOF
+        docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env bash /src/run.sh
+  tests_Release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout gyselalibxx
+      uses: actions/checkout@v3
+      with:
+        repository: gyselax/gyselalibxx
+        submodules: recursive
+    - name: rm ddc
+      run: rm -rf vendor/ddc
+    - name: Checkout ddc
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        path: vendor/ddc
+    - name: Build
+      run: |
+        cat<<-EOF > run.sh
+          set -xe
+          cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release /src
+          make -j 2 VERBOSE=1
+          ctest --output-on-failure --timeout 5
+        EOF
+        docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env bash /src/run.sh
