@@ -58,12 +58,10 @@ void FftPoissonSolver::operator()(
     // Solve Poisson's equation -d2Phi/dx2 = rho
     //   in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))
     complex_Phi_fx(dom_fx.front()) = 0.;
-    for_each(
-            IDomainFx(dom_fx.front() + 1, DiscreteVector<IDimFx>(dom_fx.size() - 1)),
-            [&](IndexFx const ifreq) {
-                double const kx = 2. * M_PI * mesh_fx.to_real(ifreq);
-                complex_Phi_fx(ifreq) /= kx * kx;
-            });
+    for_each(dom_fx.remove_first(IVectFx(1)), [&](IndexFx const ifreq) {
+        double const kx = 2. * M_PI * mesh_fx.to_real(ifreq);
+        complex_Phi_fx(ifreq) /= kx * kx;
+    });
 
     // Perform the inverse 1D FFT of the solution to deduce the electrostatic potential
     m_ifft(electrostatic_potential, complex_Phi_fx);
