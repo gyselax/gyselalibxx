@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout built branch
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Build
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
@@ -26,7 +26,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: DoozyX/clang-format-lint-action@v0.13
       with:
         source: 'include/ddc/ tests/ examples/'
@@ -38,9 +38,9 @@ jobs:
     needs: docker-build
     steps:
     - name: Checkout built branch
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-        submodules: true
+        submodules: recursive
     - name: Build
       run: |
         cat<<-EOF > run.sh
@@ -55,9 +55,9 @@ jobs:
     needs: docker-build
     steps:
     - name: Checkout built branch
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-        submodules: true
+        submodules: recursive
     - name: Build
       run: |
         cat<<-EOF > run.sh
