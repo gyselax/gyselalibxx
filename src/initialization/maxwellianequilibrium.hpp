@@ -33,7 +33,7 @@ private:
             double mean_velocity) const;
 
 public:
-    MaxwellianEquilibrium(DViewSp density_eq, DViewSp temperature_eq, DViewSp mean_velocity_eq);
+    MaxwellianEquilibrium(DFieldSp density_eq, DFieldSp temperature_eq, DFieldSp mean_velocity_eq);
 
     ~MaxwellianEquilibrium() override = default;
 

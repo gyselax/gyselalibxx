@@ -7,12 +7,12 @@
 using std::sqrt, std::exp;
 
 MaxwellianEquilibrium::MaxwellianEquilibrium(
-        DViewSp const density_eq,
-        DViewSp const temperature_eq,
-        DViewSp const mean_velocity_eq)
-    : m_density_eq(density_eq)
-    , m_temperature_eq(temperature_eq)
-    , m_mean_velocity_eq(mean_velocity_eq)
+        DFieldSp density_eq,
+        DFieldSp temperature_eq,
+        DFieldSp mean_velocity_eq)
+    : m_density_eq(std::move(density_eq))
+    , m_temperature_eq(std::move(temperature_eq))
+    , m_mean_velocity_eq(std::move(mean_velocity_eq))
 {
 }
 
