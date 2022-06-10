@@ -15,6 +15,8 @@ target_link_libraries(unit_tests
         DDC::PDI_Wrapper
         vcx::vlasov
         vcx::poisson
+        vcx::quadrature
+	sll::splines
 )
 
 add_subdirectory(bump_on_tail)
@@ -31,5 +33,6 @@ if(VOICEXX_ENABLE_PERIODIC_RDIMX)
 else()
     target_sources(unit_tests PRIVATE femnonperiodicpoissonsolver.cpp)
 endif()
+target_sources(unit_tests PRIVATE quadrature.cpp)
 
 gtest_discover_tests(unit_tests)
