@@ -43,16 +43,16 @@ if __name__ == '__main__':
     (fitted_values, fit,
      growthrate_computed, valid_growthrate) = Ediag.compute_growthrate(epot,
                                                                        args.growthrate)
-    growthrate_outfile = Path(f'growthrate_t_{epot.coords["time"].values[0]}'
-                              f'_to_{epot.coords["time"].values[-1]}.png')
+    growthrate_outfile = Path(f'growthrate_t{epot.coords["time"].values[0]}'
+                              f'to{epot.coords["time"].values[-1]}.png')
     Ediag.plot_growthrate(growthrate_outfile, abs(epot), fitted_values, fit,
                           growthrate_computed, args.growthrate)
 
     # Compute and plot the growth (or damping) rate
     (frequencies, max_frequency, valid_freq) = Ediag.compute_frequency(epot,
                                                                        args.frequency)
-    frequency_outfile = Path(f'frequency_t_{epot.coords["time"].values[0]}'
-                             f'_to_{epot.coords["time"].values[-1]}.png')
+    frequency_outfile = Path(f'frequency_t{epot.coords["time"].values[0]}'
+                             f'to{epot.coords["time"].values[-1]}.png')
     Ediag.plot_frequency(frequency_outfile, frequencies, max_frequency, args.frequency)
 
     if not valid_growthrate and not valid_freq:
