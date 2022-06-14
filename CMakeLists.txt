@@ -50,6 +50,8 @@ endif()
 set(MDSPAN_CXX_STANDARD "${CMAKE_CXX_STANDARD}" CACHE STRING "Override the default CXX_STANDARD to compile with" FORCE)
 add_subdirectory("vendor/mdspan/" "mdspan")
 
+add_subdirectory("vendor/kokkos/" "kokkos")
+
 ## Look for the Domain DeComposition library (ddc) in `vendor/`
 add_subdirectory("vendor/ddc/" "ddc")
 

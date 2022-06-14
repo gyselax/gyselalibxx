@@ -48,12 +48,12 @@ void FftPoissonSolver::operator()(
     compute_rho(rho, allfdistribu);
 
     // Build a mesh in the fourier space, for N points
-    IDimFx const mesh_fx = m_fft.compute_fourier_domain(x_dom);
+    IDimFx::Impl<Kokkos::HostSpace> const mesh_fx = m_fft.compute_fourier_domain(x_dom);
     IDomainFx const dom_fx(DiscreteVector<IDimFx>(mesh_fx.size()));
 
     // Compute FFT(rho)
     Chunk<std::complex<double>, IDomainFx> complex_Phi_fx(dom_fx);
-    m_fft(complex_Phi_fx, rho.span_view());
+    m_fft(complex_Phi_fx.span_view(), rho.span_view());
 
     // Solve Poisson's equation -d2Phi/dx2 = rho
     //   in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))

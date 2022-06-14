@@ -62,100 +62,107 @@ public:
         return true;
     }
 
-private:
-    // In the periodic case, it contains twice the periodic point!!!
-    DiscreteDomain<mesh_type> m_domain;
+    template <class MemorySpace>
+    class Impl
+    {
+    private:
+        // In the periodic case, it contains twice the periodic point!!!
+        DiscreteDomain<mesh_type> m_domain;
 
-public:
-    UniformBSplines() = default;
+    public:
+        using ddim_type = UniformBSplines<Tag, D>;
 
-    /** Constructs a BSpline basis with n equidistant knots over \f$[a, b]\f$
+        Impl() = default;
+
+        /** Constructs a BSpline basis with n equidistant knots over \f$[a, b]\f$
      * 
      * @param rmin    the real coordinate of the first knot
      * @param rmax    the real coordinate of the last knot
      * @param n_knots the number of knots
      */
-    explicit UniformBSplines(Coordinate<Tag> rmin, Coordinate<Tag> rmax, std::size_t ncells)
-        : m_domain(
-                DiscreteCoordinate<mesh_type>(0),
-                DiscreteVector<mesh_type>(
-                        ncells + 1)) // Create a mesh including the eventual periodic point
-    {
-        assert(ncells > 0);
-        init_discretization<mesh_type>(
-                Coordinate<internal_tag>(rmin.value()),
-                Coordinate<internal_tag>(rmax.value()),
-                DiscreteVector<mesh_type>(ncells + 1));
-    }
+        explicit Impl(Coordinate<Tag> rmin, Coordinate<Tag> rmax, std::size_t ncells)
+            : m_domain(
+                    DiscreteCoordinate<mesh_type>(0),
+                    DiscreteVector<mesh_type>(
+                            ncells + 1)) // Create a mesh including the eventual periodic point
+        {
+            assert(ncells > 0);
+            init_discretization<mesh_type>(
+                    Coordinate<internal_tag>(rmin.value()),
+                    Coordinate<internal_tag>(rmax.value()),
+                    DiscreteVector<mesh_type>(ncells + 1));
+        }
 
-    UniformBSplines(UniformBSplines const& x) = default;
+        Impl(Impl const& x) = default;
 
-    UniformBSplines(UniformBSplines&& x) = default;
+        Impl(Impl&& x) = default;
 
-    ~UniformBSplines() = default;
+        ~Impl() = default;
 
-    UniformBSplines& operator=(UniformBSplines const& x) = default;
+        Impl& operator=(Impl const& x) = default;
 
-    UniformBSplines& operator=(UniformBSplines&& x) = default;
+        Impl& operator=(Impl&& x) = default;
 
-    void eval_basis(DSpan1D values, int& jmin, double x) const
-    {
-        return eval_basis(values, jmin, x, degree());
-    }
+        void eval_basis(DSpan1D values, int& jmin, double x) const
+        {
+            return eval_basis(values, jmin, x, degree());
+        }
 
-    void eval_deriv(DSpan1D derivs, int& jmin, double x) const;
+        void eval_deriv(DSpan1D derivs, int& jmin, double x) const;
 
-    void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, std::size_t n) const;
+        void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, std::size_t n) const;
 
-    DSpan1D integrals(DSpan1D int_vals) const;
+        DSpan1D integrals(DSpan1D int_vals) const;
 
-    double get_knot(int idx) const noexcept
-    {
-        return rmin() + idx * step<mesh_type>();
-    }
+        double get_knot(int idx) const noexcept
+        {
+            return rmin() + idx * step<mesh_type>();
+        }
 
-    double rmin() const noexcept
-    {
-        return to_real(m_domain.front());
-    }
+        double rmin() const noexcept
+        {
+            return to_real(m_domain.front());
+        }
 
-    double rmax() const noexcept
-    {
-        return to_real(m_domain.back());
-    }
+        double rmax() const noexcept
+        {
+            return to_real(m_domain.back());
+        }
 
-    double length() const noexcept
-    {
-        return rmax() - rmin();
-    }
+        double length() const noexcept
+        {
+            return rmax() - rmin();
+        }
 
-    std::size_t size() const noexcept
-    {
-        return degree() + ncells();
-    }
+        std::size_t size() const noexcept
+        {
+            return degree() + ncells();
+        }
 
-    std::size_t nbasis() const noexcept
-    {
-        return ncells() + !is_periodic() * degree();
-    }
+        std::size_t nbasis() const noexcept
+        {
+            return ncells() + !is_periodic() * degree();
+        }
 
-    std::size_t ncells() const noexcept
-    {
-        return m_domain.size() - 1;
-    }
+        std::size_t ncells() const noexcept
+        {
+            return m_domain.size() - 1;
+        }
 
-private:
-    double inv_step() const noexcept
-    {
-        return 1.0 / step<mesh_type>();
-    }
+    private:
+        double inv_step() const noexcept
+        {
+            return 1.0 / step<mesh_type>();
+        }
 
-    void eval_basis(DSpan1D values, int& jmin, double x, std::size_t degree) const;
-    void get_icell_and_offset(int& icell, double& offset, double x) const;
+        void eval_basis(DSpan1D values, int& jmin, double x, std::size_t degree) const;
+        void get_icell_and_offset(int& icell, double& offset, double x) const;
+    };
 };
 
 template <class Tag, std::size_t D>
-void UniformBSplines<Tag, D>::eval_basis(
+template <class MemorySpace>
+void UniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis(
         DSpan1D const values,
         int& jmin,
         double const x,
@@ -185,7 +192,11 @@ void UniformBSplines<Tag, D>::eval_basis(
 }
 
 template <class Tag, std::size_t D>
-void UniformBSplines<Tag, D>::eval_deriv(DSpan1D const derivs, int& jmin, double const x) const
+template <class MemorySpace>
+void UniformBSplines<Tag, D>::Impl<MemorySpace>::eval_deriv(
+        DSpan1D const derivs,
+        int& jmin,
+        double const x) const
 {
     assert(derivs.extent(0) == degree() + 1);
 
@@ -223,7 +234,8 @@ void UniformBSplines<Tag, D>::eval_deriv(DSpan1D const derivs, int& jmin, double
 }
 
 template <class Tag, std::size_t D>
-void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
+template <class MemorySpace>
+void UniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis_and_n_derivs(
         DSpan2D const derivs,
         int& jmin,
         double const x,
@@ -310,7 +322,11 @@ void UniformBSplines<Tag, D>::eval_basis_and_n_derivs(
 }
 
 template <class Tag, std::size_t D>
-void UniformBSplines<Tag, D>::get_icell_and_offset(int& icell, double& offset, double const x) const
+template <class MemorySpace>
+void UniformBSplines<Tag, D>::Impl<MemorySpace>::get_icell_and_offset(
+        int& icell,
+        double& offset,
+        double const x) const
 {
     assert(x >= rmin());
     assert(x <= rmax());
@@ -337,7 +353,8 @@ void UniformBSplines<Tag, D>::get_icell_and_offset(int& icell, double& offset, d
 }
 
 template <class Tag, std::size_t D>
-DSpan1D UniformBSplines<Tag, D>::integrals(DSpan1D const int_vals) const
+template <class MemorySpace>
+DSpan1D UniformBSplines<Tag, D>::Impl<MemorySpace>::integrals(DSpan1D const int_vals) const
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
     for (std::size_t i = degree(); i < nbasis() - degree(); ++i) {
