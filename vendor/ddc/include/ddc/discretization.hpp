@@ -134,8 +134,10 @@ __device__ inline typename IDim::template Impl<Kokkos::CudaSpace> const& discret
 
 #if defined(__HIPCC__)
 template <class IDim>
-__device__ inline typename IDim::template Impl<Kokkos::Experimental::HIPSpace> const& discretization_device()
+__device__ inline typename IDim::template Impl<Kokkos::Experimental::HIPSpace> const&
+discretization_device()
 {
-    return *detail::discretization_device<typename IDim::template Impl<Kokkos::Experimental::HIPSpace>>;
+    return *detail::discretization_device<
+            typename IDim::template Impl<Kokkos::Experimental::HIPSpace>>;
 }
 #endif
