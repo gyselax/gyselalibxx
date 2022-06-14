@@ -44,7 +44,8 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_Uniform)
     static constexpr CoordX xmin = CoordX(0.0);
     static constexpr CoordX xmax = CoordX(0.2);
     static constexpr std::size_t ncells = TestFixture::ncells;
-    UniformBSplines<DimX, degree> const bsplines {xmin, xmax, ncells};
+    typename UniformBSplines<DimX, degree>::template Impl<Kokkos::HostSpace> const
+            bsplines {xmin, xmax, ncells};
 
     std::array<double, degree + 1> vals_data;
     DSpan1D values(vals_data.data(), degree + 1);
@@ -77,7 +78,8 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_NonUniform)
     for (std::size_t i(0); i < ncells + 1; ++i) {
         breaks[i] = xmin + i * dx;
     }
-    NonUniformBSplines<DimX, degree> const bsplines {breaks};
+    typename NonUniformBSplines<DimX, degree>::template Impl<Kokkos::HostSpace> const bsplines {
+            breaks};
 
     std::array<double, degree + 1> vals_data;
     DSpan1D values(vals_data.data(), degree + 1);

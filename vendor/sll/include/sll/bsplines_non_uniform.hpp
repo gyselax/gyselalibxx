@@ -56,103 +56,109 @@ public:
         return false;
     }
 
-private:
-    std::vector<Coordinate<Tag>> m_knots;
-
-public:
-    NonUniformBSplines() = default;
-
-    /// @brief Construct a `NonUniformBSplines` using a brace-list, i.e. `NonUniformBSplines bsplines({0., 1.})`
-    explicit NonUniformBSplines(std::initializer_list<Coordinate<Tag>> breaks)
-        : NonUniformBSplines(breaks.begin(), breaks.end())
+    template <class MemorySpace>
+    class Impl
     {
-    }
+    private:
+        std::vector<Coordinate<Tag>> m_knots;
 
-    /// @brief Construct a `NonUniformBSplines` using a C++20 "common range".
-    template <class InputRange>
-    inline constexpr NonUniformBSplines(InputRange&& breaks)
-        : NonUniformBSplines(breaks.begin(), breaks.end())
-    {
-    }
+    public:
+        using ddim_type = NonUniformBSplines<Tag, D>;
 
-    /// @brief Construct a `NonUniformBSplines` using a pair of iterators.
-    template <class RandomIt>
-    inline constexpr NonUniformBSplines(RandomIt breaks_begin, RandomIt breaks_end);
+        Impl() = default;
 
-    NonUniformBSplines(NonUniformBSplines const& x) = default;
+        /// @brief Construct a `Impl` using a brace-list, i.e. `Impl bsplines({0., 1.})`
+        explicit Impl(std::initializer_list<Coordinate<Tag>> breaks)
+            : Impl(breaks.begin(), breaks.end())
+        {
+        }
 
-    NonUniformBSplines(NonUniformBSplines&& x) = default;
+        /// @brief Construct a `Impl` using a C++20 "common range".
+        template <class InputRange>
+        inline constexpr Impl(InputRange&& breaks) : Impl(breaks.begin(), breaks.end())
+        {
+        }
 
-    ~NonUniformBSplines() = default;
+        /// @brief Construct a `Impl` using a pair of iterators.
+        template <class RandomIt>
+        inline constexpr Impl(RandomIt breaks_begin, RandomIt breaks_end);
 
-    NonUniformBSplines& operator=(NonUniformBSplines const& x) = default;
+        Impl(Impl const& x) = default;
 
-    NonUniformBSplines& operator=(NonUniformBSplines&& x) = default;
+        Impl(Impl&& x) = default;
 
-    void eval_basis(DSpan1D values, int& jmin, double x) const;
+        ~Impl() = default;
 
-    void eval_deriv(DSpan1D derivs, int& jmin, double x) const;
+        Impl& operator=(Impl const& x) = default;
 
-    void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, std::size_t n) const;
+        Impl& operator=(Impl&& x) = default;
 
-    DSpan1D integrals(DSpan1D int_vals) const;
+        void eval_basis(DSpan1D values, int& jmin, double x) const;
 
-    double get_knot(int break_idx) const noexcept
-    {
-        // TODO: assert break_idx >= 1 - degree
-        // TODO: assert break_idx <= npoints + degree
-        return m_knots[break_idx + degree()];
-    }
+        void eval_deriv(DSpan1D derivs, int& jmin, double x) const;
 
-    Coordinate<Tag> rmin() const noexcept
-    {
-        return Coordinate<Tag>(get_knot(0));
-    }
+        void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, std::size_t n) const;
 
-    Coordinate<Tag> rmax() const noexcept
-    {
-        return Coordinate<Tag>(get_knot(ncells()));
-    }
+        DSpan1D integrals(DSpan1D int_vals) const;
 
-    double length() const noexcept
-    {
-        return rmax() - rmin();
-    }
+        double get_knot(int break_idx) const noexcept
+        {
+            // TODO: assert break_idx >= 1 - degree
+            // TODO: assert break_idx <= npoints + degree
+            return m_knots[break_idx + degree()];
+        }
 
-    std::size_t size() const noexcept
-    {
-        return degree() + ncells();
-    }
+        Coordinate<Tag> rmin() const noexcept
+        {
+            return Coordinate<Tag>(get_knot(0));
+        }
 
-    std::size_t npoints() const noexcept
-    {
-        return m_knots.size() - 2 * degree();
-    }
+        Coordinate<Tag> rmax() const noexcept
+        {
+            return Coordinate<Tag>(get_knot(ncells()));
+        }
 
-    std::size_t nbasis() const noexcept
-    {
-        return ncells() + !is_periodic() * degree();
-    }
+        double length() const noexcept
+        {
+            return rmax() - rmin();
+        }
 
-    std::size_t ncells() const noexcept
-    {
-        return npoints() - 1;
-    }
+        std::size_t size() const noexcept
+        {
+            return degree() + ncells();
+        }
 
-private:
-    int find_cell(double x) const;
+        std::size_t npoints() const noexcept
+        {
+            return m_knots.size() - 2 * degree();
+        }
 
-    double& get_knot(int break_idx)
-    {
-        // TODO: assert break_idx >= 1 - degree
-        // TODO: assert break_idx <= npoints + degree
-        return m_knots[break_idx + degree()];
-    }
+        std::size_t nbasis() const noexcept
+        {
+            return ncells() + !is_periodic() * degree();
+        }
+
+        std::size_t ncells() const noexcept
+        {
+            return npoints() - 1;
+        }
+
+    private:
+        int find_cell(double x) const;
+
+        double& get_knot(int break_idx)
+        {
+            // TODO: assert break_idx >= 1 - degree
+            // TODO: assert break_idx <= npoints + degree
+            return m_knots[break_idx + degree()];
+        }
+    };
 };
 
 template <class Tag, std::size_t D>
+template <class MemorySpace>
 template <class RandomIt>
-inline constexpr NonUniformBSplines<Tag, D>::NonUniformBSplines(
+inline constexpr NonUniformBSplines<Tag, D>::Impl<MemorySpace>::Impl(
         RandomIt const break_begin,
         RandomIt const break_end)
     : m_knots((break_end - break_begin) + 2 * degree())
@@ -184,7 +190,11 @@ inline constexpr NonUniformBSplines<Tag, D>::NonUniformBSplines(
 }
 
 template <class Tag, std::size_t D>
-void NonUniformBSplines<Tag, D>::eval_basis(DSpan1D const values, int& jmin, double const x) const
+template <class MemorySpace>
+void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis(
+        DSpan1D const values,
+        int& jmin,
+        double const x) const
 {
     std::array<double, degree()> left;
     std::array<double, degree()> right;
@@ -221,7 +231,11 @@ void NonUniformBSplines<Tag, D>::eval_basis(DSpan1D const values, int& jmin, dou
 }
 
 template <class Tag, std::size_t D>
-void NonUniformBSplines<Tag, D>::eval_deriv(DSpan1D const derivs, int& jmin, double const x) const
+template <class MemorySpace>
+void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_deriv(
+        DSpan1D const derivs,
+        int& jmin,
+        double const x) const
 {
     std::array<double, degree()> left;
     std::array<double, degree()> right;
@@ -278,7 +292,8 @@ void NonUniformBSplines<Tag, D>::eval_deriv(DSpan1D const derivs, int& jmin, dou
 }
 
 template <class Tag, std::size_t D>
-void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
+template <class MemorySpace>
+void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis_and_n_derivs(
         DSpan2D const derivs,
         int& jmin,
         double const x,
@@ -381,7 +396,8 @@ void NonUniformBSplines<Tag, D>::eval_basis_and_n_derivs(
 }
 
 template <class Tag, std::size_t D>
-int NonUniformBSplines<Tag, D>::find_cell(double const x) const
+template <class MemorySpace>
+int NonUniformBSplines<Tag, D>::Impl<MemorySpace>::find_cell(double const x) const
 {
     if (x > rmax())
         return -1;
@@ -408,7 +424,8 @@ int NonUniformBSplines<Tag, D>::find_cell(double const x) const
 }
 
 template <class Tag, std::size_t D>
-DSpan1D NonUniformBSplines<Tag, D>::integrals(DSpan1D const int_vals) const
+template <class MemorySpace>
+DSpan1D NonUniformBSplines<Tag, D>::Impl<MemorySpace>::integrals(DSpan1D const int_vals) const
 {
     assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
 

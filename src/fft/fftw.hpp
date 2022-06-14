@@ -21,7 +21,8 @@ public:
 
     ~FftwFourierTransform() override = default;
 
-    NonUniformDiscretization<Fourier<Tag>> compute_fourier_domain(
+    typename NonUniformDiscretization<Fourier<Tag>>::template Impl<Kokkos::HostSpace>
+    compute_fourier_domain(
             DiscreteDomain<UniformDiscretization<Tag>> const& dom_x) const noexcept override
     {
         std::vector<double> freqs(dom_x.size());
@@ -32,7 +33,8 @@ public:
         for (std::size_t ii = dom_x.size() / 2 + 1; ii < dom_x.size(); ++ii) {
             freqs[ii] = -((dom_x.size() - ii) * inv_Nd);
         }
-        return NonUniformDiscretization<Fourier<Tag>>(freqs);
+        return typename NonUniformDiscretization<Fourier<Tag>>::template Impl<Kokkos::HostSpace>(
+                freqs);
     }
 
     // Perform FFT where the input is a real and the output is a complex

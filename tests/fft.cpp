@@ -85,7 +85,7 @@ TEST(FFT, IdentityUsingReal)
     // Compute FFT(f(x))
     FftwFourierTransform<RDimX> fft;
     auto meshfx = fft.compute_fourier_domain(domx);
-    DiscreteDomain<typeof(meshfx)> domfx(IVectFx(meshfx.size()));
+    DiscreteDomain<IDimFx> domfx(IVectFx(meshfx.size()));
     Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
     fft(fft_values, values.span_view());
 
@@ -125,7 +125,7 @@ TEST(FFT, IdentityUsingComplex)
     // Compute FFT(f(x))
     FftwFourierTransform<RDimX> fft;
     auto meshfx = fft.compute_fourier_domain(domx);
-    DiscreteDomain<typeof(meshfx)> domfx(IVectFx(meshfx.size()));
+    DiscreteDomain<IDimFx> domfx(IVectFx(meshfx.size()));
     Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
     fft(fft_values, values.span_view());
 
@@ -170,7 +170,7 @@ TEST(FFT, FirstDerivative)
     // Compute FFT(f(x))
     FftwFourierTransform<RDimX> fft;
     auto meshfx = fft.compute_fourier_domain(domx);
-    DiscreteDomain<typeof(meshfx)> domfx(IVectFx(meshfx.size()));
+    DiscreteDomain<IDimFx> domfx(IVectFx(meshfx.size()));
     Chunk<std::complex<double>, IDomainFx> fft_values(domfx);
     fft(fft_values, values.span_view());
 
@@ -214,7 +214,7 @@ TEST(FFT, Simple)
 
     init_discretization<IDimX>(CoordX(0.), CoordX(M * T / N));
     DiscreteDomain<IDimX> domx(IndexX(0), IVectX(N));
-    IDimFx meshfx = fft.compute_fourier_domain(domx);
+    auto meshfx = fft.compute_fourier_domain(domx);
     DiscreteDomain<IDimFx> domfx(IVectFx(meshfx.size()));
 
     FieldX<std::complex<double>> values(domx);

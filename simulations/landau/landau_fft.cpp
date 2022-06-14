@@ -42,6 +42,8 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
+    ScopeGuard scope(argc, argv);
+
     PC_tree_t conf_voicexx;
     if (argc == 2) {
         conf_voicexx = PC_parse_path(fs::path(argv[1]).c_str());
