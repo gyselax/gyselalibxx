@@ -7,6 +7,8 @@
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #define VALUES                                                                                     \
     {                                                                                              \
         Coordinate<DimX>(0.1), Coordinate<DimX>(0.2), Coordinate<DimX>(0.3), Coordinate<DimX>(0.4) \
@@ -36,35 +38,35 @@ TEST(NonUniformDiscretizationTest, Rank)
 
 TEST(NonUniformDiscretizationTest, ListConstructor)
 {
-    DDimX ddim_x(VALUES);
+    DDimX::Impl<Kokkos::HostSpace> ddim_x(VALUES);
     EXPECT_EQ(ddim_x.size(), 4);
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
 TEST(NonUniformDiscretizationTest, ArrayConstructor)
 {
-    DDimX ddim_x(array_points);
+    DDimX::Impl<Kokkos::HostSpace> ddim_x(array_points);
     EXPECT_EQ(ddim_x.size(), array_points.size());
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
 TEST(NonUniformDiscretizationTest, VectorConstructor)
 {
-    DDimX ddim_x(vector_points);
+    DDimX::Impl<Kokkos::HostSpace> ddim_x(vector_points);
     EXPECT_EQ(ddim_x.size(), vector_points.size());
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
 TEST(NonUniformDiscretizationTest, IteratorConstructor)
 {
-    DDimX ddim_x(vector_points.begin(), vector_points.end());
+    DDimX::Impl<Kokkos::HostSpace> ddim_x(vector_points.begin(), vector_points.end());
     EXPECT_EQ(ddim_x.size(), vector_points.size());
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
 }
 
 TEST(NonUniformDiscretization, Formatting)
 {
-    DDimX ddim_x({Coordinate<DimX>(0.1), Coordinate<DimX>(0.4)});
+    DDimX::Impl<Kokkos::HostSpace> ddim_x({Coordinate<DimX>(0.1), Coordinate<DimX>(0.4)});
     std::stringstream oss;
     oss << ddim_x;
     EXPECT_EQ(oss.str(), "NonUniformDiscretization(2)");

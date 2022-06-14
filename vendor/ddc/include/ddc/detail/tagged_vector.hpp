@@ -7,6 +7,7 @@
 #include <ostream>
 #include <utility>
 
+#include "ddc/detail/macros.hpp"
 #include "ddc/detail/type_seq.hpp"
 
 
@@ -179,7 +180,7 @@ inline constexpr detail::TaggedVector<ElementType, QueryTags...> select(
 }
 
 template <class QueryTag, class ElementType, class HeadTag, class... TailTags>
-constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
+constexpr detail::TaggedVector<ElementType, QueryTag> const& take_impl(
         detail::TaggedVector<ElementType, HeadTag> const& head,
         detail::TaggedVector<ElementType, TailTags> const&... tags)
 {
@@ -190,8 +191,22 @@ constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
         return head;
     } else {
         static_assert(sizeof...(TailTags) > 0, "ERROR: tag not found");
-        return take<QueryTag>(tags...);
+        return take_impl<QueryTag>(tags...);
     }
+}
+
+template <class QueryTag, class ElementType, class... Tags>
+constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
+        detail::TaggedVector<ElementType, Tags> const&... tags)
+{
+    return
+#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
+            DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
+#endif
+                    take_impl<QueryTag>(tags...);
+#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
+    DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
+#endif
 }
 
 
@@ -336,11 +351,19 @@ public:
     template <class QueryTag>
     ElementType const& get_or(ElementType const& default_value) const&
     {
-        if constexpr (in_tags_v<QueryTag, tags_seq>) {
-            return m_values[type_seq_rank_v<QueryTag, tags_seq>];
-        } else {
-            return default_value;
-        }
+#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
+        DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
+        return [&]() -> ElementType const& {
+#endif
+            if constexpr (in_tags_v<QueryTag, tags_seq>) {
+                return m_values[type_seq_rank_v<QueryTag, tags_seq>];
+            } else {
+                return default_value;
+            }
+#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
+        }();
+        DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
+#endif
     }
 
     template <std::size_t N = sizeof...(Tags)>

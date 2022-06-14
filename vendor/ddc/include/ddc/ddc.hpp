@@ -1,13 +1,16 @@
 #pragma once
 
 // Misc
+#include "ddc/detail/macros.hpp"
 #include "ddc/detail/tagged_vector.hpp"
 #include "ddc/detail/type_seq.hpp"
+#include "ddc/scope_guard.hpp"
 
 // Containers
 #include "ddc/aligned_allocator.hpp"
 #include "ddc/chunk.hpp"
 #include "ddc/chunk_span.hpp"
+#include "ddc/kokkos_allocator.hpp"
 
 // Discretizations
 #include "ddc/discrete_coordinate.hpp"

@@ -6,8 +6,9 @@
 
 #include "ddc/chunk_common.hpp"
 #include "ddc/chunk_span.hpp"
+#include "ddc/kokkos_allocator.hpp"
 
-template <class ElementType, class, class Allocator = std::allocator<ElementType>>
+template <class ElementType, class, class Allocator = HostAllocator<ElementType>>
 class Chunk;
 
 template <class ElementType, class SupportType, class Allocator>
@@ -26,14 +27,18 @@ protected:
 
 public:
     /// type of a span of this full chunk
-    using span_type
-            = ChunkSpan<ElementType, DiscreteDomain<DDims...>, std::experimental::layout_right>;
+    using span_type = ChunkSpan<
+            ElementType,
+            DiscreteDomain<DDims...>,
+            std::experimental::layout_right,
+            typename Allocator::memory_space>;
 
     /// type of a view of this full chunk
     using view_type = ChunkSpan<
             ElementType const,
             DiscreteDomain<DDims...>,
-            std::experimental::layout_right>;
+            std::experimental::layout_right,
+            typename Allocator::memory_space>;
 
     /// The dereferenceable part of the co-domain but with indexing starting at 0
     using allocation_mdspan_type = typename base_type::allocation_mdspan_type;
@@ -41,6 +46,8 @@ public:
     using const_allocation_mdspan_type = typename base_type::const_allocation_mdspan_type;
 
     using mdomain_type = typename base_type::mdomain_type;
+
+    using memory_space = typename Allocator::memory_space;
 
     using mcoord_type = typename base_type::mcoord_type;
 
@@ -241,6 +248,38 @@ public:
         return base_type::allocation_mdspan();
     }
 
+    /** Provide a mdspan on the memory allocation
+     * @return allocation mdspan
+     */
+    constexpr auto allocation_kokkos_view()
+    {
+        auto s = this->allocation_mdspan();
+        auto kokkos_layout = detail::build_kokkos_layout(
+                s.extents(),
+                s.mapping(),
+                std::make_index_sequence<sizeof...(DDims)> {});
+        return Kokkos::View<
+                detail::mdspan_to_kokkos_element_type_t<ElementType, sizeof...(DDims)>,
+                decltype(kokkos_layout),
+                typename Allocator::memory_space>(s.data(), kokkos_layout);
+    }
+
+    /** Provide a mdspan on the memory allocation
+     * @return allocation mdspan
+     */
+    constexpr auto allocation_kokkos_view() const
+    {
+        auto s = this->allocation_mdspan();
+        auto kokkos_layout = detail::build_kokkos_layout(
+                s.extents(),
+                s.mapping(),
+                std::make_index_sequence<sizeof...(DDims)> {});
+        return Kokkos::View<
+                detail::mdspan_to_kokkos_element_type_t<ElementType, sizeof...(DDims)>,
+                decltype(kokkos_layout),
+                typename Allocator::memory_space>(s.data(), kokkos_layout);
+    }
+
     view_type span_cview() const
     {
         return view_type(*this);
@@ -256,3 +295,7 @@ public:
         return span_type(*this);
     }
 };
+
+template <class... DDims, class Allocator>
+Chunk(DiscreteDomain<DDims...> const&, Allocator)
+        -> Chunk<typename Allocator::value_type, DiscreteDomain<DDims...>, Allocator>;

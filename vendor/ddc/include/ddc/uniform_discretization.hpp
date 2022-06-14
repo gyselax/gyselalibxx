@@ -5,7 +5,10 @@
 #include <cassert>
 #include <type_traits>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc/coordinate.hpp"
+#include "ddc/detail/macros.hpp"
 #include "ddc/discrete_coordinate.hpp"
 #include "ddc/discrete_domain.hpp"
 #include "ddc/discrete_vector.hpp"
@@ -33,31 +36,44 @@ public:
         return 1;
     }
 
-private:
-    rcoord_type m_origin {0.};
+    template <class MemorySpace>
+    class Impl
+    {
+        template <class OMemorySpace>
+        friend class Impl;
 
-    rcoord_type m_step {1.};
+    private:
+        rcoord_type m_origin {0.};
 
-public:
-    UniformDiscretization() = default;
+        rcoord_type m_step {1.};
 
-    UniformDiscretization(UniformDiscretization const&) = delete;
+    public:
+        using ddim_type = UniformDiscretization<CDim>;
 
-    UniformDiscretization(UniformDiscretization&&) = default;
+        Impl() = default;
 
-    /** @brief Construct a `UniformDiscretization` from a point and a spacing step.
+        Impl(Impl const&) = delete;
+
+        template <class OriginMemorySpace>
+        explicit Impl(Impl<OriginMemorySpace> const& impl)
+        {
+            m_origin = impl.m_origin;
+            m_step = impl.m_step;
+        }
+
+        Impl(Impl&&) = default;
+
+        /** @brief Construct a `Impl` from a point and a spacing step.
      *
      * @param origin the real coordinate of mesh coordinate 0
      * @param step   the real distance between two points of mesh distance 1
      */
-    constexpr UniformDiscretization(rcoord_type origin, rcoord_type step)
-        : m_origin(origin)
-        , m_step(step)
-    {
-        assert(step > 0);
-    }
+        constexpr Impl(rcoord_type origin, rcoord_type step) : m_origin(origin), m_step(step)
+        {
+            assert(step > 0);
+        }
 
-    /** @brief Construct a `UniformDiscretization` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
+        /** @brief Construct a `Impl` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
      *
      * @param a the coordinate of a first real point (will have mesh coordinate 0)
      * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
@@ -65,71 +81,71 @@ public:
      * 
      * @deprecated use the version accepting a vector for n instead
      */
-    [[deprecated(
-            "Use the version accepting a vector for n "
-            "instead.")]] constexpr UniformDiscretization(rcoord_type a, rcoord_type b, std::size_t n)
-        : m_origin(a)
-        , m_step((b - a) / (n - 1))
-    {
-        assert(a < b);
-        assert(n > 1);
-    }
+        [[deprecated("Use the version accepting a vector for n "
+                     "instead.")]] constexpr Impl(rcoord_type a, rcoord_type b, std::size_t n)
+            : m_origin(a)
+            , m_step((b - a) / (n - 1))
+        {
+            assert(a < b);
+            assert(n > 1);
+        }
 
-    /** @brief Construct a `UniformDiscretization` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
+        /** @brief Construct a `Impl` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
      * 
      * @param a the coordinate of a first real point (will have mesh coordinate 0)
      * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
      * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
      */
-    constexpr UniformDiscretization(rcoord_type a, rcoord_type b, dvect_type n)
-        : m_origin(a)
-        , m_step((b - a) / (n - 1))
-    {
-        assert(a < b);
-        assert(n > 1);
-    }
+        constexpr Impl(rcoord_type a, rcoord_type b, dvect_type n)
+            : m_origin(a)
+            , m_step((b - a) / (n - 1))
+        {
+            assert(a < b);
+            assert(n > 1);
+        }
 
-    ~UniformDiscretization() = default;
+        ~Impl() = default;
 
-    /// @brief Lower bound index of the mesh
-    constexpr rcoord_type origin() const noexcept
-    {
-        return m_origin;
-    }
+        /// @brief Lower bound index of the mesh
+        constexpr rcoord_type origin() const noexcept
+        {
+            return m_origin;
+        }
 
-    /// @brief Lower bound index of the mesh
-    constexpr mcoord_type front() const noexcept
-    {
-        return mcoord_type {0};
-    }
+        /// @brief Lower bound index of the mesh
+        constexpr mcoord_type front() const noexcept
+        {
+            return mcoord_type {0};
+        }
 
-    /// @brief Spacing step of the mesh
-    constexpr rcoord_type step() const
-    {
-        return m_step;
-    }
+        /// @brief Spacing step of the mesh
+        constexpr rcoord_type step() const
+        {
+            return m_step;
+        }
 
-    /// @brief Convert a mesh index into a position in `CDim`
-    constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
-    {
-        return m_origin + rcoord_type(icoord.uid()) * m_step;
-    }
+        /// @brief Convert a mesh index into a position in `CDim`
+        constexpr rcoord_type to_real(mcoord_type const& icoord) const noexcept
+        {
+            return m_origin + rcoord_type(icoord.uid()) * m_step;
+        }
+    };
 
-    /** Construct a UniformDiscretization and associated ddom_type from a segment
+    /** Construct a Impl<Kokkos::HostSpace> and associated ddom_type from a segment
      *  \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
      *
      * @param a coordinate of the first point of the domain
      * @param b coordinate of the last point of the domain
      * @param n number of points to map on the segment \f$[a, b]\f$ including a & b
      */
-    static std::tuple<UniformDiscretization, ddom_type> init(
+    static std::tuple<Impl<Kokkos::HostSpace>, ddom_type> init(
             rcoord_type a,
             rcoord_type b,
             dvect_type n)
     {
         assert(a < b);
         assert(n > 1);
-        UniformDiscretization disc(a, rcoord_type {(b - a) / (n - 1)});
+        Impl<Kokkos::HostSpace> disc(a, rcoord_type {(b - a) / (n - 1)});
         ddom_type domain {disc.front(), n};
         return std::make_tuple(std::move(disc), std::move(domain));
     }
@@ -143,7 +159,7 @@ public:
      * @param n_ghosts_before number of additional "ghost" points before the segment
      * @param n_ghosts_after number of additional "ghost" points after the segment
      */
-    static std::tuple<UniformDiscretization, ddom_type, ddom_type, ddom_type, ddom_type>
+    static std::tuple<Impl<Kokkos::HostSpace>, ddom_type, ddom_type, ddom_type, ddom_type>
     init_ghosted(
             rcoord_type a,
             rcoord_type b,
@@ -156,7 +172,7 @@ public:
         assert(a < b);
         assert(n > 1);
         rcoord_type discretization_step {(b - a) / (n - 1)};
-        UniformDiscretization
+        Impl<Kokkos::HostSpace>
                 disc(a - n_ghosts_before.value() * discretization_step, discretization_step);
         ddom_type ghosted_domain = ddom_type(disc.front(), n + n_ghosts_before + n_ghosts_after);
         ddom_type pre_ghost = ddom_type(ghosted_domain.front(), n_ghosts_before);
@@ -178,7 +194,7 @@ public:
      * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
      * @param n_ghosts number of additional "ghost" points before and after the segment
      */
-    static std::tuple<UniformDiscretization, ddom_type, ddom_type, ddom_type, ddom_type>
+    static std::tuple<Impl<Kokkos::HostSpace>, ddom_type, ddom_type, ddom_type, ddom_type>
     init_ghosted(rcoord_type a, rcoord_type b, dvect_type n, dvect_type n_ghosts)
     {
         return init_ghosted(a, b, n, n_ghosts, n_ghosts);
@@ -199,8 +215,10 @@ template <class DDim>
 constexpr bool is_uniform_discretization_v = is_uniform_discretization<DDim>::value;
 
 
-template <class CDim>
-std::ostream& operator<<(std::ostream& out, UniformDiscretization<CDim> const& mesh)
+template <
+        class DDimImpl,
+        std::enable_if_t<is_uniform_discretization_v<typename DDimImpl::ddim_type>, int> = 0>
+std::ostream& operator<<(std::ostream& out, DDimImpl const& mesh)
 {
     return out << "UniformDiscretization( origin=" << mesh.origin() << ", step=" << mesh.step()
                << " )";
@@ -208,57 +226,79 @@ std::ostream& operator<<(std::ostream& out, UniformDiscretization<CDim> const& m
 
 /// @brief Lower bound index of the mesh
 template <class DDim>
-std::enable_if_t<is_uniform_discretization_v<DDim>, typename DDim::rcoord_type> origin() noexcept
+DDC_INLINE_FUNCTION std::enable_if_t<is_uniform_discretization_v<DDim>, typename DDim::rcoord_type>
+origin() noexcept
 {
-    return discretization<DDim>().origin();
+#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
+    return discretization_device<DDim>().origin();
+#else
+    return discretization_host<DDim>().origin();
+#endif
 }
 
 /// @brief Lower bound index of the mesh
 template <class DDim>
-std::enable_if_t<is_uniform_discretization_v<DDim>, typename DDim::mcoord_type> front() noexcept
+DDC_INLINE_FUNCTION std::enable_if_t<is_uniform_discretization_v<DDim>, typename DDim::mcoord_type>
+front() noexcept
 {
-    return discretization<DDim>().front();
+#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
+    return discretization_device<DDim>().front();
+#else
+    return discretization_host<DDim>().front();
+#endif
 }
 
 /// @brief Spacing step of the mesh
 template <class DDim>
-std::enable_if_t<is_uniform_discretization_v<DDim>, typename DDim::rcoord_type> step() noexcept
+DDC_INLINE_FUNCTION std::enable_if_t<is_uniform_discretization_v<DDim>, typename DDim::rcoord_type>
+step() noexcept
 {
-    return discretization<DDim>().step();
+#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
+    return discretization_device<DDim>().step();
+#else
+    return discretization_host<DDim>().step();
+#endif
 }
 
 template <class CDim>
-Coordinate<CDim> to_real(DiscreteCoordinate<UniformDiscretization<CDim>> const& c)
+DDC_INLINE_FUNCTION constexpr Coordinate<CDim> to_real(
+        DiscreteCoordinate<UniformDiscretization<CDim>> const& c)
 {
-    return discretization<UniformDiscretization<CDim>>().to_real(c);
+#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
+    return discretization_device<UniformDiscretization<CDim>>().to_real(c);
+#else
+    return discretization_host<UniformDiscretization<CDim>>().to_real(c);
+#endif
 }
 
 template <class CDim>
-Coordinate<CDim> distance_at_left(DiscreteCoordinate<UniformDiscretization<CDim>> i)
+DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_left(
+        DiscreteCoordinate<UniformDiscretization<CDim>> i)
 {
-    return discretization<UniformDiscretization<CDim>>().step();
+    return step<UniformDiscretization<CDim>>();
 }
 
 template <class CDim>
-Coordinate<CDim> distance_at_right(DiscreteCoordinate<UniformDiscretization<CDim>> i)
+DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_right(
+        DiscreteCoordinate<UniformDiscretization<CDim>> i)
 {
-    return discretization<UniformDiscretization<CDim>>().step();
+    return step<UniformDiscretization<CDim>>();
 }
 
 template <class CDim>
-Coordinate<CDim> rmin(DiscreteDomain<UniformDiscretization<CDim>> const& d)
+DDC_INLINE_FUNCTION Coordinate<CDim> rmin(DiscreteDomain<UniformDiscretization<CDim>> const& d)
 {
     return to_real(d.front());
 }
 
 template <class CDim>
-Coordinate<CDim> rmax(DiscreteDomain<UniformDiscretization<CDim>> const& d)
+DDC_INLINE_FUNCTION Coordinate<CDim> rmax(DiscreteDomain<UniformDiscretization<CDim>> const& d)
 {
     return to_real(d.back());
 }
 
 template <class CDim>
-Coordinate<CDim> rlength(DiscreteDomain<UniformDiscretization<CDim>> const& d)
+DDC_INLINE_FUNCTION Coordinate<CDim> rlength(DiscreteDomain<UniformDiscretization<CDim>> const& d)
 {
     return rmax(d) - rmin(d);
 }
@@ -281,21 +321,21 @@ template <class T>
 constexpr bool is_uniform_domain_v = is_uniform_domain<T>::value;
 
 
-/** Construct a uniform `DiscreteDomain` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a
- *  number of points `n`.
- *
- * @param a the coordinate of a first real point (will have mesh coordinate 0)
- * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
- * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
- */
-template <class D, class = std::enable_if_t<is_uniform_discretization_v<D>>>
-constexpr DiscreteDomain<D> init_global_domain(
-        typename D::rcoord_type a,
-        typename D::rcoord_type b,
-        typename D::dvect_type n)
-{
-    assert(a < b);
-    assert(n > 1);
-    init_discretization<D>(a, typename D::rcoord_type {(b - a) / (n - 1)});
-    return DiscreteDomain<D>(n);
-}
+// /** Construct a uniform `DiscreteDomain` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a
+//  *  number of points `n`.
+//  *
+//  * @param a the coordinate of a first real point (will have mesh coordinate 0)
+//  * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
+//  * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
+//  */
+// template <class D, class = std::enable_if_t<is_uniform_discretization_v<D>>>
+// constexpr DiscreteDomain<D> init_global_domain(
+//         typename D::rcoord_type a,
+//         typename D::rcoord_type b,
+//         typename D::dvect_type n)
+// {
+//     assert(a < b);
+//     assert(n > 1);
+//     init_discretization<D>(a, typename D::rcoord_type {(b - a) / (n - 1)});
+//     return DiscreteDomain<D>(n);
+// }

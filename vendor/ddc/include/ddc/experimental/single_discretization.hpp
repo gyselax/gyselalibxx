@@ -23,29 +23,34 @@ public:
 
     using rdim_type = CDim;
 
-private:
-    /// origin
-    rcoord_type m_point;
-
-public:
-    inline constexpr SingleDiscretization(rcoord_type origin) noexcept : m_point(std::move(origin))
+    template <class MemorySpace>
+    class Impl
     {
-    }
+        template <class OMemorySpace>
+        friend class Impl;
 
-    SingleDiscretization(SingleDiscretization const& other) = delete;
+    private:
+        /// origin
+        rcoord_type m_point;
 
-    constexpr SingleDiscretization(SingleDiscretization&& other) = delete;
+    public:
+        inline constexpr Impl(rcoord_type origin) noexcept : m_point(std::move(origin)) {}
 
-    inline constexpr rcoord_type origin() const noexcept
-    {
-        return m_point;
-    }
+        Impl(Impl const& other) = delete;
 
-    inline constexpr rcoord_type to_real([[maybe_unused]] mcoord_type icoord) const noexcept
-    {
-        assert(icoord == mcoord_type(0));
-        return m_point;
-    }
+        constexpr Impl(Impl&& other) = delete;
+
+        inline constexpr rcoord_type origin() const noexcept
+        {
+            return m_point;
+        }
+
+        inline constexpr rcoord_type to_real([[maybe_unused]] mcoord_type icoord) const noexcept
+        {
+            assert(icoord == mcoord_type(0));
+            return m_point;
+        }
+    };
 };
 
 template <class Tag>
@@ -74,13 +79,21 @@ constexpr bool is_single_discretization_v = is_single_discretization<DDim>::valu
 template <class DDim>
 std::enable_if_t<is_single_discretization_v<DDim>, typename DDim::rcoord_type> origin() noexcept
 {
-    return discretization<DDim>().origin();
+#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
+    return discretization_device<DDim>().origin();
+#else
+    return discretization_host<DDim>().origin();
+#endif
 }
 
 template <class CDim>
 Coordinate<CDim> to_real(DiscreteCoordinate<experimental::SingleDiscretization<CDim>> const& c)
 {
-    return discretization<experimental::SingleDiscretization<CDim>>().to_real(c);
+#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
+    return discretization_device<experimental::SingleDiscretization<CDim>>().to_real(c);
+#else
+    return discretization_host<experimental::SingleDiscretization<CDim>>().to_real(c);
+#endif
 }
 
 template <class CDim>

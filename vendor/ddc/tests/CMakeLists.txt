@@ -2,6 +2,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 add_executable(ddc_tests
+    main.cpp
     aligned_allocator.cpp
     chunk.cpp
     discrete_domain.cpp
@@ -19,7 +20,7 @@ add_executable(ddc_tests
 target_compile_features(ddc_tests PUBLIC cxx_std_17)
 target_link_libraries(ddc_tests
     PUBLIC
-        GTest::gtest_main
+        GTest::gtest
         DDC::DDC
 )
 gtest_discover_tests(ddc_tests)

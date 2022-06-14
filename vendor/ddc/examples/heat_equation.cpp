@@ -7,36 +7,9 @@
 #include <numeric>
 
 #include <ddc/ddc.hpp>
+
+#include <Kokkos_Core.hpp>
 //! [includes]
-
-
-// some parameters that would typically be read from some form of
-// configuration file in a more realistic code
-
-//! [parameters]
-// Start of the domain of interest in the X dimension
-double const x_start = -1.;
-// End of the domain of interest in the X dimension
-double const x_end = 1.;
-// Number of discretization points in the X dimension
-size_t const nb_x_points = 10;
-// Thermal diffusion coefficient
-double const kx = .01;
-// Start of the domain of interest in the Y dimension
-double const y_start = -1.;
-// End of the domain of interest in the Y dimension
-double const y_end = 1.;
-// Number of discretization points in the Y dimension
-size_t const nb_y_points = 100;
-// Thermal diffusion coefficient
-double const ky = .002;
-// Simulated time at which to start simulation
-double const start_time = 0.;
-// Simulated time to reach as target of the simulation
-double const end_time = 10.;
-// Number of time-steps between outputs
-size_t const t_output_period = 10;
-//! [parameters]
 
 
 //! [X-dimension]
@@ -87,17 +60,50 @@ void display(double time, ChunkType temp)
                    + get_domain<DDimY>(temp).size() / 2];
     std::cout << "  * temperature[y:"
               << get_domain<DDimY>(temp).size() / 2 << "] = {";
-    for_each(get_domain<DDimX>(temp), [&](auto&& ix) {
-        std::cout << std::setw(6) << temp_slice(ix);
-    });
+    for_each(
+            policies::serial_host,
+            get_domain<DDimX>(temp),
+            DDC_LAMBDA(auto&& ix) {
+                std::cout << std::setw(6) << temp_slice(ix);
+            });
     std::cout << " }" << std::endl;
 }
 //! [display]
 
 
 //! [main-start]
-int main()
+int main(int argc, char** argv)
 {
+    ScopeGuard scope(argc, argv);
+
+    // some parameters that would typically be read from some form of
+    // configuration file in a more realistic code
+
+    //! [parameters]
+    // Start of the domain of interest in the X dimension
+    double const x_start = -1.;
+    // End of the domain of interest in the X dimension
+    double const x_end = 1.;
+    // Number of discretization points in the X dimension
+    size_t const nb_x_points = 10;
+    // Thermal diffusion coefficient
+    double const kx = .01;
+    // Start of the domain of interest in the Y dimension
+    double const y_start = -1.;
+    // End of the domain of interest in the Y dimension
+    double const y_end = 1.;
+    // Number of discretization points in the Y dimension
+    size_t const nb_y_points = 100;
+    // Thermal diffusion coefficient
+    double const ky = .002;
+    // Simulated time at which to start simulation
+    double const start_time = 0.;
+    // Simulated time to reach as target of the simulation
+    double const end_time = 10.;
+    // Number of time-steps between outputs
+    size_t const t_output_period = 10;
+    //! [parameters]
+
     //! [main-start]
     //! [X-parameters]
     // Number of ghost points to use on each side in X
@@ -108,7 +114,7 @@ int main()
     // Initialization of the global domain in X with gwx ghost points on
     // each side
     auto const [x_domain, ghosted_x_domain, x_pre_ghost, x_post_ghost]
-            = init_discretization<DDimX>(DDimX::init_ghosted(
+            = init_discretization(DDimX::init_ghosted(
                     Coordinate<X>(x_start),
                     Coordinate<X>(x_end),
                     DiscreteVector<DDimX>(nb_x_points),
@@ -189,33 +195,46 @@ int main()
     //! [data allocation]
     // Maps temperature into the full domain (including ghosts) twice:
     // - once for the last fully computed time-step
-    Chunk<double, DiscreteDomain<DDimX, DDimY>> ghosted_last_temp(
+    Chunk ghosted_last_temp(
             DiscreteDomain<
                     DDimX,
-                    DDimY>(ghosted_x_domain, ghosted_y_domain));
+                    DDimY>(ghosted_x_domain, ghosted_y_domain),
+            DeviceAllocator<double>());
+
     // - once for time-step being computed
-    Chunk<double, DiscreteDomain<DDimX, DDimY>> ghosted_next_temp(
+    Chunk ghosted_next_temp(
             DiscreteDomain<
                     DDimX,
-                    DDimY>(ghosted_x_domain, ghosted_y_domain));
+                    DDimY>(ghosted_x_domain, ghosted_y_domain),
+            DeviceAllocator<double>());
     //! [data allocation]
 
     //! [initial-conditions]
+    auto ghosted_last_temp_ = ghosted_last_temp.span_view();
     // Initialize the temperature on the main domain
     for_each(
+            policies::parallel_device,
             DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
-            [&](DiscreteCoordinate<DDimX, DDimY> const ixy) {
+            DDC_LAMBDA(DiscreteCoordinate<DDimX, DDimY> const ixy) {
                 double const x = to_real(select<DDimX>(ixy));
                 double const y = to_real(select<DDimY>(ixy));
-                ghosted_last_temp(ixy)
+                ghosted_last_temp_(ixy)
                         = 9.999 * ((x * x + y * y) < 0.25);
             });
     //! [initial-conditions]
 
+    Chunk ghosted_temp(
+            DiscreteDomain<
+                    DDimX,
+                    DDimY>(ghosted_x_domain, ghosted_y_domain),
+            HostAllocator<double>());
+
+
     //! [initial output]
     // display the initial data
+    deepcopy(ghosted_temp, ghosted_last_temp);
     display(to_real(time_domain.front()),
-            ghosted_last_temp[x_domain][y_domain]);
+            ghosted_temp[x_domain][y_domain]);
     // time of the iteration where the last output happened
     DiscreteCoordinate<DDimT> last_output = time_domain.front();
     //! [initial output]
@@ -253,8 +272,9 @@ int main()
         //! [numerical scheme]
         // Stencil computation on the main domain
         for_each(
+                policies::parallel_device,
                 next_temp.domain(),
-                [&](DiscreteCoordinate<DDimX, DDimY> const ixy) {
+                DDC_LAMBDA(DiscreteCoordinate<DDimX, DDimY> const ixy) {
                     DiscreteCoordinate<DDimX> const ix
                             = select<DDimX>(ixy);
                     DiscreteCoordinate<DDimY> const iy
@@ -284,7 +304,8 @@ int main()
         //! [output]
         if (iter - last_output >= t_output_period) {
             last_output = iter;
-            display(to_real(iter), next_temp);
+            deepcopy(ghosted_temp, ghosted_last_temp);
+            display(to_real(iter), ghosted_temp[x_domain][y_domain]);
         }
         //! [output]
 
@@ -296,8 +317,9 @@ int main()
 
     //! [final output]
     if (last_output < time_domain.back()) {
+        deepcopy(ghosted_temp, ghosted_last_temp);
         display(to_real(time_domain.back()),
-                ghosted_last_temp[x_domain][y_domain]);
+                ghosted_temp[x_domain][y_domain]);
     }
     //! [final output]
 }

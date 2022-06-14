@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <cstddef>
+#include <limits>
 #include <type_traits>
 #include <utility>
 
@@ -100,7 +102,7 @@ struct TypeSeqMerge<TypeSeq<TagsA...>, TypeSeq<HeadTagsB, TailTagsB...>, TypeSeq
 } // namespace detail
 
 template <class QueryTag, class TypeSeq>
-constexpr std::size_t type_seq_rank_v = -1;
+constexpr std::size_t type_seq_rank_v = std::numeric_limits<std::size_t>::max();
 
 template <class QueryTag, class OTypeSeq>
 constexpr bool in_tags_v = false;
