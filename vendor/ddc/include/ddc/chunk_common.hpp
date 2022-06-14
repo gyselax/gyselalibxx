@@ -9,6 +9,10 @@
 
 #include <experimental/mdspan>
 
+#include <Kokkos_Core.hpp>
+
+#include "ddc/detail/kokkos.hpp"
+#include "ddc/detail/macros.hpp"
 #include "ddc/discrete_domain.hpp"
 
 template <class T>
@@ -109,7 +113,7 @@ public:
     template <class, class, class>
     friend class ChunkCommon;
 
-    template <class, class, class>
+    template <class, class, class, class>
     friend class ChunkSpan;
 
     template <class, class, class>
@@ -247,7 +251,8 @@ protected:
     constexpr ChunkCommon(ElementType* ptr, mdomain_type const& domain)
     {
         namespace stdex = std::experimental;
-        assert(ptr != nullptr);
+        // Handle the case where an allocation of size 0 returns a nullptr.
+        assert((domain.size() == 0) || ((ptr != nullptr) && (domain.size() != 0)));
 
         extents_type extents_r(::extents<DDims>(domain).value()...);
         mapping_type mapping_r(extents_r);
@@ -314,5 +319,8 @@ protected:
             mapping_type map(extents_s);
             return allocation_mdspan_type(data(), map);
         }
+#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
+        return allocation_mdspan_type();
+#endif
     }
 };

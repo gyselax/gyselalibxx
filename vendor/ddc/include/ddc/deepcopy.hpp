@@ -5,25 +5,25 @@
 #include <type_traits>
 #include <utility>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc/chunk_span.hpp"
 #include "ddc/for_each.hpp"
 
 /** Copy the content of a view into another
- * @param[out] to    the view in which to copy
- * @param[in]  from  the view from which to copy
+ * @param[out] dst the view in which to copy
+ * @param[in]  src the view from which to copy
  * @return to
  */
 template <class ChunkDst, class ChunkSrc>
-inline ChunkDst const& deepcopy(ChunkDst&& to, ChunkSrc&& from) noexcept
+inline ChunkDst const& deepcopy(ChunkDst&& dst, ChunkSrc&& src) noexcept
 {
     static_assert(is_chunk_v<ChunkDst>);
     static_assert(is_chunk_v<ChunkSrc>);
     static_assert(
-            std::is_assignable_v<decltype(*to.data()), decltype(*from.data())>,
+            std::is_assignable_v<decltype(*dst.data()), decltype(*src.data())>,
             "Not assignable");
-    assert(to.domain().extents() == from.domain().extents());
-    for_each_n(to.domain().extents(), [&to, &from](auto&& idx) {
-        to(to.domain().front() + idx) = from(from.domain().front() + idx);
-    });
-    return to;
+    assert(dst.domain().extents() == src.domain().extents());
+    Kokkos::deep_copy(dst.allocation_kokkos_view(), src.allocation_kokkos_view());
+    return dst;
 }

@@ -8,3 +8,6 @@
 [submodule "vendor/benchmark"]
 	path = vendor/benchmark
 	url = https://github.com/google/benchmark.git
+[submodule "vendor/kokkos"]
+	path = vendor/kokkos
+	url = https://github.com/kokkos/kokkos.git
