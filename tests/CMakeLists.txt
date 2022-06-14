@@ -4,11 +4,11 @@ cmake_minimum_required(VERSION 3.15)
 
 include(GoogleTest)
 
-add_executable(unit_tests splitvlasovsolver.cpp)
+add_executable(unit_tests main.cpp splitvlasovsolver.cpp)
 target_compile_features(unit_tests PUBLIC cxx_std_17)
 target_link_libraries(unit_tests
     PUBLIC
-        GTest::gtest_main
+        GTest::gtest
         GTest::gmock
         GTest::gmock_main
         paraconf::paraconf
@@ -16,7 +16,7 @@ target_link_libraries(unit_tests
         vcx::vlasov
         vcx::poisson
         vcx::quadrature
-	sll::splines
+        sll::splines
 )
 
 add_subdirectory(bump_on_tail)

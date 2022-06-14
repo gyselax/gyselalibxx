@@ -35,9 +35,9 @@ using BSplinesY = NonUniformBSplines<DimY, 4>;
 constexpr std::size_t ncells = 100;
 constexpr CoordX xmin(0.);
 constexpr CoordX xmax(2.);
-BSplinesX const bsplinesx {xmin, xmax, ncells};
+BSplinesX::Impl<Kokkos::HostSpace> const bsplinesx {xmin, xmax, ncells};
 
-BSplinesY const bsplinesy {RCoordY(0.1), RCoordY(0.4), RCoordY(1.0)};
+BSplinesY::Impl<Kokkos::HostSpace> const bsplinesy {RCoordY(0.1), RCoordY(0.4), RCoordY(1.0)};
 
 } // namespace
 
