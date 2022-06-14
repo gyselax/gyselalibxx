@@ -44,7 +44,22 @@ elseif("${DDC_mdspan_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
 	find_package(mdspan CONFIG REQUIRED)
 endif()
 
-add_subdirectory(vendor/kokkos)
+## kokkos
+
+set(DDC_Kokkos_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `Kokkos` package. Options: ${DDC_DEPENDENCY_POLICIES}")
+set_property(CACHE DDC_Kokkos_DEPENDENCY_POLICY PROPERTY STRINGS "${DDC_DEPENDENCY_POLICIES}")
+if("${DDC_Kokkos_DEPENDENCY_POLICY}" STREQUAL "AUTO")
+	if(NOT TARGET Kokkos::kokkos)
+		find_package(Kokkos CONFIG QUIET)
+		if(NOT Kokkos_FOUND)
+			add_subdirectory(vendor/kokkos)
+		endif()
+	endif()
+elseif("${DDC_Kokkos_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
+	add_subdirectory(vendor/kokkos)
+elseif("${DDC_Kokkos_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
+	find_package(Kokkos CONFIG REQUIRED)
+endif()
 
 ## PDI
 
