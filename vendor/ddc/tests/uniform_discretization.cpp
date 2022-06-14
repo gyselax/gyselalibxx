@@ -6,6 +6,8 @@
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 struct DimX;
 
 using DDimX = UniformDiscretization<DimX>;
@@ -28,7 +30,7 @@ TEST_F(UniformDiscretizationTest, Rank)
 
 TEST_F(UniformDiscretizationTest, Constructor)
 {
-    DDimX ddim_x(origin, step);
+    DDimX::Impl<Kokkos::HostSpace> ddim_x(origin, step);
     EXPECT_EQ(ddim_x.origin(), origin);
     EXPECT_EQ(ddim_x.step(), step);
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
@@ -36,7 +38,7 @@ TEST_F(UniformDiscretizationTest, Constructor)
 
 TEST_F(UniformDiscretizationTest, Constructor2)
 {
-    DDimX ddim_x(origin, Coordinate<DimX>(1.), npoints);
+    DDimX::Impl<Kokkos::HostSpace> ddim_x(origin, Coordinate<DimX>(1.), npoints);
     EXPECT_EQ(ddim_x.origin(), origin);
     EXPECT_EQ(ddim_x.step(), step);
     EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
@@ -44,7 +46,7 @@ TEST_F(UniformDiscretizationTest, Constructor2)
 
 TEST(UniformDiscretization, Formatting)
 {
-    DDimX ddim_x(Coordinate<DimX>(-1.), Coordinate<DimX>(0.5));
+    DDimX::Impl<Kokkos::HostSpace> ddim_x(Coordinate<DimX>(-1.), Coordinate<DimX>(0.5));
     std::stringstream oss;
     oss << ddim_x;
     EXPECT_EQ(oss.str(), "UniformDiscretization( origin=(-1), step=(0.5) )");

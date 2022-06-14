@@ -26,7 +26,6 @@ static DVectY constexpr nelems_y(12);
 
 static ElemXY constexpr lbound_x_y {lbound_x, lbound_y};
 static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
-static DDomXY constexpr dom_x_y(lbound_x_y, nelems_x_y);
 
 TEST(ForEachSerial, OneDimension)
 {
@@ -62,4 +61,52 @@ TEST(ForEachOmp, TwoDimensions)
     ChunkSpan<int, DDomXY> view(storage.data(), dom);
     for_each(policies::omp, dom, [=](ElemXY const ixy) { view(ixy) += 1; });
     ASSERT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
+}
+
+static void TestForEachKokkosOneDimension()
+{
+    DDomX const dom(lbound_x, nelems_x);
+    Chunk<int, DDomX, DeviceAllocator<int>> storage(dom);
+    Kokkos::deep_copy(storage.allocation_kokkos_view(), 0);
+    ChunkSpan view(storage.span_view());
+    for_each(
+            policies::parallel_device,
+            dom,
+            DDC_LAMBDA(ElemX const ix) { view(ix) += 1; });
+    int const* const ptr = storage.data();
+    int sum;
+    Kokkos::parallel_reduce(
+            dom.size(),
+            KOKKOS_LAMBDA(std::size_t i, int& local_sum) { local_sum += ptr[i]; },
+            Kokkos::Sum<int>(sum));
+    ASSERT_EQ(sum, dom.size());
+}
+
+TEST(ForEachKokkos, OneDimension)
+{
+    TestForEachKokkosOneDimension();
+}
+
+static void TestForEachKokkosTwoDimensions()
+{
+    DDomXY const dom(lbound_x_y, nelems_x_y);
+    Chunk<int, DDomXY, DeviceAllocator<int>> storage(dom);
+    Kokkos::deep_copy(storage.allocation_kokkos_view(), 0);
+    ChunkSpan view(storage.span_view());
+    for_each(
+            policies::parallel_device,
+            dom,
+            DDC_LAMBDA(ElemXY const ixy) { view(ixy) += 1; });
+    int const* const ptr = storage.data();
+    int sum;
+    Kokkos::parallel_reduce(
+            dom.size(),
+            KOKKOS_LAMBDA(std::size_t i, int& local_sum) { local_sum += ptr[i]; },
+            Kokkos::Sum<int>(sum));
+    ASSERT_EQ(sum, dom.size());
+}
+
+TEST(ForEachKokkos, TwoDimensions)
+{
+    TestForEachKokkosTwoDimensions();
 }

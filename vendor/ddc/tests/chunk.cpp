@@ -526,7 +526,9 @@ TEST(Chunk2DTest, DeepcopyReordered)
         }
     }
     ChunkYX<double> chunk2(select<DDimY, DDimX>(chunk.domain()));
-    deepcopy(chunk2, chunk);
+    ChunkSpan<double, DDomXY, std::experimental::layout_left>
+            chunk2_view(chunk2.data(), chunk.domain());
+    deepcopy(chunk2_view, chunk);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy

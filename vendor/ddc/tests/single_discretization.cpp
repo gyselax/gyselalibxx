@@ -6,6 +6,8 @@
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 namespace {
 
 using experimental::SingleDiscretization;
@@ -22,14 +24,14 @@ using ElemX = DiscreteCoordinate<DDimX>;
 
 TEST(SingleDiscretization, ClassSize)
 {
-    EXPECT_EQ(sizeof(DDimX), sizeof(double));
+    EXPECT_EQ(sizeof(DDimX::Impl<Kokkos::HostSpace>), sizeof(double));
 }
 
 TEST(SingleDiscretization, Constructor)
 {
     constexpr CoordX x(1.);
 
-    SingleDiscretization<DimX> ddim_x(x);
+    SingleDiscretization<DimX>::Impl<Kokkos::HostSpace> ddim_x(x);
 
     EXPECT_EQ(ddim_x.to_real(ElemX(0)), x);
 }
