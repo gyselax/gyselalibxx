@@ -27,7 +27,7 @@ double Quadrature<IDim>::operator()(ChunkSpan<double, DiscreteDomain<IDim>> cons
     auto domain = get_domain<IDim>(coefficients);
     assert(get_domain<IDim>(values) == domain);
     return transform_reduce(
-            policies::omp,
+            policies::parallel_host,
             domain,
             0.0,
             reducer::sum<double>(),
