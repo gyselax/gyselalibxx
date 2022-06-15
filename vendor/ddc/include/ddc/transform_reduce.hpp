@@ -115,55 +115,6 @@ inline T transform_reduce_serial(
     }
 }
 
-/** A reduction over a n-D domain using the OpenMP execution policy
- * @param[in] policy the execution policy to use
- * @param[in] domain the range over which to apply the algorithm
- * @param[in] neutral the neutral element of the reduction operation
- * @param[in] reduce a binary FunctionObject that will be applied in unspecified order to the
- *            results of transform, the results of other reduce and neutral.
- * @param[in] transform a unary FunctionObject that will be applied to each element of the input
- *            range. The return type must be acceptable as input to reduce
- */
-template <class... DDims, class T, class BinaryReductionOp, class UnaryTransformOp>
-inline T transform_reduce_openmp(
-        DiscreteDomain<DDims...> const& domain,
-        T const neutral,
-        BinaryReductionOp const& reduce,
-        UnaryTransformOp const& transform) noexcept
-{
-    using FirstDDim = type_seq_element_t<0, detail::TypeSeq<DDims...>>;
-    DiscreteDomainIterator<FirstDDim> const it_b = select<FirstDDim>(domain).begin();
-    DiscreteDomainIterator<FirstDDim> const it_e = select<FirstDDim>(domain).end();
-
-    T global_result = neutral;
-#pragma omp parallel default(none)                                                                 \
-        shared(global_result, neutral, it_b, it_e, domain, reduce, transform)
-    {
-        // Each thread has its private result
-        T thread_result = neutral;
-
-        // Distribute work among threads
-        // Do not use the global result in this region
-#pragma omp for
-        for (DiscreteDomainIterator<FirstDDim> it = it_b; it != it_e; ++it) {
-            if constexpr (sizeof...(DDims) == 1) {
-                thread_result = reduce(thread_result, transform(*it));
-            } else {
-                thread_result = reduce(
-                        thread_result,
-                        detail::transform_reduce_serial(domain, neutral, reduce, transform, *it));
-            }
-        }
-
-        // Reduce thread private results into the global result
-#pragma omp critical
-        {
-            global_result = reduce(global_result, thread_result);
-        }
-    }
-    return global_result;
-}
-
 template <class Reducer, class Functor, class... DDims>
 class TransformReducerKokkosLambdaAdapter
 {
@@ -312,36 +263,6 @@ inline T transform_reduce(
     DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
 #endif
     return detail::transform_reduce_kokkos<Kokkos::DefaultHostExecutionSpace>(
-            domain,
-            neutral,
-            std::forward<BinaryReductionOp>(reduce),
-            std::forward<UnaryTransformOp>(transform));
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
-#endif
-}
-
-/** A reduction over a n-D domain using the OpenMP execution policy
- * @param[in] policy the execution policy to use
- * @param[in] domain the range over which to apply the algorithm
- * @param[in] neutral the neutral element of the reduction operation
- * @param[in] reduce a binary FunctionObject that will be applied in unspecified order to the
- *            results of transform, the results of other reduce and neutral.
- * @param[in] transform a unary FunctionObject that will be applied to each element of the input
- *            range. The return type must be acceptable as input to reduce
- */
-template <class... DDims, class T, class BinaryReductionOp, class UnaryTransformOp>
-inline T transform_reduce(
-        [[maybe_unused]] omp_policy policy,
-        DiscreteDomain<DDims...> const& domain,
-        T const neutral,
-        BinaryReductionOp&& reduce,
-        UnaryTransformOp&& transform) noexcept
-{
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
-#endif
-    return detail::transform_reduce_openmp(
             domain,
             neutral,
             std::forward<BinaryReductionOp>(reduce),

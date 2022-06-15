@@ -29,7 +29,7 @@ static DVectY constexpr nelems_y(12);
 static ElemXY constexpr lbound_x_y {lbound_x, lbound_y};
 static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
 
-TEST(TransformReduceSerial, OneDimension)
+TEST(TransformReduceSerialHost, OneDimension)
 {
     DDomX const dom(lbound_x, nelems_x);
     std::vector<int> storage(dom.size(), 0);
@@ -38,7 +38,7 @@ TEST(TransformReduceSerial, OneDimension)
     for_each(dom, [&](ElemX const ix) { chunk(ix) = count++; });
     ASSERT_EQ(
             transform_reduce(
-                    policies::serial,
+                    policies::serial_host,
                     dom,
                     0,
                     reducer::sum<int>(),
@@ -46,7 +46,7 @@ TEST(TransformReduceSerial, OneDimension)
             dom.size() * (dom.size() - 1) / 2);
 }
 
-TEST(TransformReduceSerial, TwoDimensions)
+TEST(TransformReduceSerialHost, TwoDimensions)
 {
     DDomXY const dom(lbound_x_y, nelems_x_y);
     std::vector<int> storage(dom.size(), 0);
@@ -55,7 +55,7 @@ TEST(TransformReduceSerial, TwoDimensions)
     for_each(dom, [&](ElemXY const ixy) { chunk(ixy) = count++; });
     ASSERT_EQ(
             transform_reduce(
-                    policies::serial,
+                    policies::serial_host,
                     dom,
                     0,
                     reducer::sum<int>(),
@@ -63,7 +63,7 @@ TEST(TransformReduceSerial, TwoDimensions)
             dom.size() * (dom.size() - 1) / 2);
 }
 
-TEST(TransformReduceOmp, OneDimension)
+TEST(TransformReduceParallelHost, OneDimension)
 {
     DDomX const dom(lbound_x, nelems_x);
     std::vector<int> storage(dom.size(), 0);
@@ -72,7 +72,7 @@ TEST(TransformReduceOmp, OneDimension)
     for_each(dom, [&](ElemX const ix) { chunk(ix) = count++; });
     ASSERT_EQ(
             transform_reduce(
-                    policies::omp,
+                    policies::parallel_host,
                     dom,
                     0,
                     reducer::sum<int>(),
@@ -80,7 +80,7 @@ TEST(TransformReduceOmp, OneDimension)
             dom.size() * (dom.size() - 1) / 2);
 }
 
-TEST(TransformReduceOmp, TwoDimensions)
+TEST(TransformReduceParallelHost, TwoDimensions)
 {
     DDomXY const dom(lbound_x_y, nelems_x_y);
     std::vector<int> storage(dom.size(), 0);
@@ -89,7 +89,7 @@ TEST(TransformReduceOmp, TwoDimensions)
     for_each(dom, [&](ElemXY const ixy) { chunk(ixy) = count++; });
     ASSERT_EQ(
             transform_reduce(
-                    policies::omp,
+                    policies::parallel_host,
                     dom,
                     0,
                     reducer::sum<int>(),
@@ -97,7 +97,7 @@ TEST(TransformReduceOmp, TwoDimensions)
             dom.size() * (dom.size() - 1) / 2);
 }
 
-static void TestTransformReduceKokkosOneDimension()
+static void TestTransformReduceParallelDeviceOneDimension()
 {
     DDomX const dom(lbound_x, nelems_x);
     Chunk<int, DDomX, DeviceAllocator<int>> storage(dom);
@@ -118,12 +118,12 @@ static void TestTransformReduceKokkosOneDimension()
             dom.size() * (dom.size() - 1) / 2);
 }
 
-TEST(TransformReduceKokkos, OneDimension)
+TEST(TransformReduceParallelDevice, OneDimension)
 {
-    TestTransformReduceKokkosOneDimension();
+    TestTransformReduceParallelDeviceOneDimension();
 }
 
-static void TestTransformReduceKokkosTwoDimensions()
+static void TestTransformReduceParallelDeviceTwoDimensions()
 {
     DDomXY const dom(lbound_x_y, nelems_x_y);
     Chunk<int, DDomXY, DeviceAllocator<int>> storage(dom);
@@ -144,7 +144,7 @@ static void TestTransformReduceKokkosTwoDimensions()
             dom.size() * (dom.size() - 1) / 2);
 }
 
-TEST(TransformReduceKokkos, TwoDimensions)
+TEST(TransformReduceParallelDevice, TwoDimensions)
 {
-    TestTransformReduceKokkosTwoDimensions();
+    TestTransformReduceParallelDeviceTwoDimensions();
 }
