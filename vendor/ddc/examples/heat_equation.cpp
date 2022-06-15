@@ -63,7 +63,7 @@ void display(double time, ChunkType temp)
     for_each(
             policies::serial_host,
             get_domain<DDimX>(temp),
-            DDC_LAMBDA(auto&& ix) {
+            [=](DiscreteCoordinate<DDimX> const ix) {
                 std::cout << std::setw(6) << temp_slice(ix);
             });
     std::cout << " }" << std::endl;
@@ -210,7 +210,7 @@ int main(int argc, char** argv)
     //! [data allocation]
 
     //! [initial-conditions]
-    auto ghosted_last_temp_ = ghosted_last_temp.span_view();
+    ChunkSpan const ghosted_initial_temp = ghosted_last_temp.span_view();
     // Initialize the temperature on the main domain
     for_each(
             policies::parallel_device,
@@ -218,7 +218,7 @@ int main(int argc, char** argv)
             DDC_LAMBDA(DiscreteCoordinate<DDimX, DDimY> const ixy) {
                 double const x = to_real(select<DDimX>(ixy));
                 double const y = to_real(select<DDimY>(ixy));
-                ghosted_last_temp_(ixy)
+                ghosted_initial_temp(ixy)
                         = 9.999 * ((x * x + y * y) < 0.25);
             });
     //! [initial-conditions]
