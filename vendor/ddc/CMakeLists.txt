@@ -22,11 +22,6 @@ include(CMakePackageConfigHelpers)
 include(CTest)
 
 
-## OpenMP
-
-find_package(OpenMP REQUIRED)
-
-
 ## mdspan
 
 set(DDC_mdspan_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `mdspan` package. Options: ${DDC_DEPENDENCY_POLICIES}")
@@ -149,7 +144,7 @@ target_include_directories(DDC
 		"$<INSTALL_INTERFACE:include>"
 )
 target_link_libraries(DDC
-	INTERFACE std::mdspan OpenMP::OpenMP_CXX Kokkos::kokkos)
+	INTERFACE std::mdspan Kokkos::kokkos)
 add_library(DDC::DDC ALIAS DDC)
 install(
 	TARGETS DDC
