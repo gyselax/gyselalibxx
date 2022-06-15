@@ -83,33 +83,12 @@ inline void for_each_serial(
     }
 }
 
-template <class RetType, class Element, std::size_t N, class Functor>
-inline void for_each_omp(
-        std::array<Element, N> const& start,
-        std::array<Element, N> const& end,
-        Functor&& f) noexcept
-{
-    Element const ib = start[0];
-    Element const ie = end[0];
-#pragma omp parallel for default(none) shared(ib, ie, start, end, f)
-    for (Element ii = ib; ii <= ie; ++ii) {
-        if constexpr (N == 1) {
-            f(RetType(ii));
-        } else {
-            detail::for_each_serial<RetType>(start, end, f, ii);
-        }
-    }
-}
-
 } // namespace detail
 
 /// Serial execution on the host
 struct serial_host_policy
 {
 };
-
-/// Serial execution on the host
-using serial_policy = serial_host_policy;
 
 /** iterates over a nD domain using the serial execution policy
  * @param[in] domain the domain over which to iterate
@@ -148,11 +127,6 @@ struct parallel_host_policy
 {
 };
 
-/// OpenMP parallel execution on the outer loop with default scheduling
-struct omp_policy
-{
-};
-
 /** iterates over a nD domain using the serial execution policy
  * @param[in] domain the domain over which to iterate
  * @param[in] f      a functor taking an index as parameter
@@ -164,32 +138,6 @@ inline void for_each(
         Functor&& f) noexcept
 {
     detail::for_each_kokkos<Kokkos::DefaultHostExecutionSpace>(domain, std::forward<Functor>(f));
-}
-
-/** iterates over a nD domain using the OpenMP execution policy
- * @param[in] domain the domain over which to iterate
- * @param[in] f      a functor taking an index as parameter
- */
-template <class... DDims, class Functor>
-inline void for_each(omp_policy, DiscreteDomain<DDims...> const& domain, Functor&& f) noexcept
-{
-    detail::for_each_omp<DiscreteCoordinate<DDims...>>(
-            detail::array(domain.front()),
-            detail::array(domain.back()),
-            std::forward<Functor>(f));
-}
-
-/** iterates over a nD extent using the OpenMP execution policy
- * @param[in] extent the extent over which to iterate
- * @param[in] f      a functor taking an index as parameter
- */
-template <class... DDims, class Functor>
-inline void for_each_n(omp_policy, DiscreteVector<DDims...> const& extent, Functor&& f) noexcept
-{
-    detail::for_each_omp<DiscreteVector<DDims...>>(
-            std::array<DiscreteVectorElement, sizeof...(DDims)> {},
-            std::array<DiscreteVectorElement, sizeof...(DDims)> {get<DDims>(extent) - 1 ...},
-            std::forward<Functor>(f));
 }
 
 /// Kokkos parallel execution uisng MDRange policy
@@ -210,12 +158,10 @@ inline void for_each(
     detail::for_each_kokkos<Kokkos::DefaultExecutionSpace>(domain, std::forward<Functor>(f));
 }
 
-using default_policy = serial_policy;
+using default_policy = serial_host_policy;
 
 namespace policies {
 
-inline constexpr omp_policy omp;
-inline constexpr serial_policy serial;
 inline constexpr serial_host_policy serial_host;
 inline constexpr parallel_host_policy parallel_host;
 inline constexpr parallel_device_policy parallel_device;
