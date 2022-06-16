@@ -241,7 +241,7 @@ int main(int argc, char** argv)
 
     //! [time iteration]
     for (auto const iter :
-         DiscreteDomain {time_domain.front() + 1, nb_time_steps - 1}) {
+         time_domain.remove_first(DiscreteVector<DDimT>(1))) {
         //! [time iteration]
 
         //! [boundary conditions]
