@@ -22,8 +22,9 @@ template <class IDimImpl>
 inline IDimImpl* discretization_host = nullptr;
 
 #if defined(__CUDACC__) || defined(__HIPCC__)
+// WARNING: do not put the `inline` keyword, seems to fail on MI100 rocm/4.5.0
 template <class IDimImpl>
-inline __device__ __constant__ IDimImpl* discretization_device = nullptr;
+__device__ __constant__ IDimImpl* discretization_device = nullptr;
 #endif
 
 template <class Tuple, std::size_t... Ids>
