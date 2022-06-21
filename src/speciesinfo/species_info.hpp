@@ -4,8 +4,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include "ddc/discrete_coordinate.hpp"
-
 class SpeciesInformation
 {
     using mcoord_type = DiscreteCoordinate<SpeciesInformation>;
