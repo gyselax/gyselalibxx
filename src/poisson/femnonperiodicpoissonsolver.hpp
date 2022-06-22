@@ -28,10 +28,10 @@ private:
     static int constexpr m_degree = BSplinesX::degree();
 
     // Number of spline basis in x direction
-    int const m_nbasis = discretization<BSplinesX>().nbasis();
+    int const m_nbasis = discrete_space<BSplinesX>().nbasis();
 
     // Number of cells in x direction
-    int const m_ncells = discretization<BSplinesX>().ncells();
+    int const m_ncells = discrete_space<BSplinesX>().ncells();
 
     // Gauss points used for integration computation
     static int constexpr m_npts_gauss = m_degree + 1;

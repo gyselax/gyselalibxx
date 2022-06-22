@@ -32,10 +32,10 @@ DSpanSpXVx BslAdvectionX::operator()(DSpanSpXVx const allfdistribu, double const
 
         for_each(v_dom, [&](IndexVx const iv) {
             // compute the displacement
-            double const dx = sqrt_me_on_mspecies * dt * to_real(iv);
+            double const dx = sqrt_me_on_mspecies * dt * coordinate(iv);
 
             // compute the coordinates of the feet
-            for_each(x_dom, [&](IndexX const ix) { feet_coords(ix) = to_real(ix) - dx; });
+            for_each(x_dom, [&](IndexX const ix) { feet_coords(ix) = coordinate(ix) - dx; });
 
             // copy the slice in contiguous memory
             deepcopy(contiguous_slice, allfdistribu[isp][iv]);

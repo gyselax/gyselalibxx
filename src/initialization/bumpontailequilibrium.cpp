@@ -53,7 +53,7 @@ void BumpontailEquilibrium::compute_twomaxwellian(
     double const norm_f2 = inv_sqrt_2pi / sqrt(temperature_bot);
     IDomainVx const gridvx = fMaxwellian.domain();
     for (IndexVx const iv : gridvx) {
-        CoordVx const v = to_real(iv);
+        CoordVx const v = coordinate(iv);
         // bulk plasma particles
         double const f1_v = (1. - epsilon_bot) * inv_sqrt_2pi * exp(-0.5 * v * v);
         // beam

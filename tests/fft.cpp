@@ -26,7 +26,7 @@ TEST(FFT, DomainEven)
 
     constexpr std::size_t N = 10;
 
-    init_discretization<IDimX>(CoordX(0.), CoordX(20. / N));
+    init_discrete_space<IDimX>(CoordX(0.), CoordX(20. / N));
     DiscreteDomain<IDimX> dom_x(IndexX(0), IVectX(N));
     auto meshfx = fft.compute_fourier_domain(dom_x);
 
@@ -38,7 +38,7 @@ TEST(FFT, DomainEven)
 
     constexpr double tol = 2.e-16;
     for (std::size_t i = 0; i < meshfx.size(); ++i) {
-        EXPECT_LT(std::fabs(meshfx.to_real(IndexFx(i)) - expected_freqs[i]), tol);
+        EXPECT_LT(std::fabs(meshfx.coordinate(IndexFx(i)) - expected_freqs[i]), tol);
     }
 }
 
@@ -50,7 +50,7 @@ TEST(FFT, DomainOdd)
 
     constexpr std::size_t N = 9;
 
-    init_discretization<IDimX>(CoordX(0.), CoordX(20. / N));
+    init_discrete_space<IDimX>(CoordX(0.), CoordX(20. / N));
     DiscreteDomain<IDimX> domx(IndexX(0), IVectX(N));
     auto meshfx = fft.compute_fourier_domain(domx);
 
@@ -62,7 +62,7 @@ TEST(FFT, DomainOdd)
 
     constexpr double tol = 2.e-16;
     for (std::size_t i = 0; i < meshfx.size(); ++i) {
-        EXPECT_LT(std::fabs(meshfx.to_real(IndexFx(i)) - expected_freqs[i]), tol);
+        EXPECT_LT(std::fabs(meshfx.coordinate(IndexFx(i)) - expected_freqs[i]), tol);
     }
 }
 
@@ -73,13 +73,13 @@ TEST(FFT, IdentityUsingReal)
 {
     // Construct a 1D mesh
     constexpr std::size_t N = 32;
-    init_discretization<IDimX>(CoordX(0.), CoordX((2. * M_PI) / N));
+    init_discrete_space<IDimX>(CoordX(0.), CoordX((2. * M_PI) / N));
     DiscreteDomain<IDimX> domx(IndexX(0), IVectX(N));
 
     // Compute f(x) on the mesh mesh_x
     FieldX<double> values(domx);
     for (auto i : domx) {
-        values(i) = compute_f(to_real(i));
+        values(i) = compute_f(coordinate(i));
     }
 
     // Compute FFT(f(x))
@@ -112,14 +112,14 @@ TEST(FFT, IdentityUsingComplex)
 {
     // Construct a 1D mesh
     constexpr std::size_t N = 32;
-    init_discretization<IDimX>(CoordX(0.), CoordX((2. * M_PI) / N));
+    init_discrete_space<IDimX>(CoordX(0.), CoordX((2. * M_PI) / N));
     DiscreteDomain<IDimX> domx(IndexX(0), IVectX(N));
 
     // Compute f(x) on the mesh mesh_x
     FieldX<std::complex<double>> values(domx);
     std::cout << domx.size() << std::endl;
     for (auto i : domx) {
-        values(i) = compute_f(to_real(i));
+        values(i) = compute_f(coordinate(i));
     }
 
     // Compute FFT(f(x))
@@ -152,19 +152,19 @@ TEST(FFT, FirstDerivative)
 {
     // Construct a 1D mesh
     constexpr std::size_t N = 32;
-    init_discretization<IDimX>(CoordX(0.), CoordX((2. * M_PI) / N));
+    init_discrete_space<IDimX>(CoordX(0.), CoordX((2. * M_PI) / N));
     DiscreteDomain<IDimX> domx(IndexX(0), IVectX(N));
 
     // Compute f(x) on the mesh mesh_x
     FieldX<double> values(domx);
     for (auto i : domx) {
-        values(i) = compute_f(to_real(i));
+        values(i) = compute_f(coordinate(i));
     }
 
     // Compute df(x)/dx on the mesh mesh_x
     FieldX<double> firstderiv_values(domx);
     for (auto i : domx) {
-        firstderiv_values(i) = compute_deriv_f(to_real(i));
+        firstderiv_values(i) = compute_deriv_f(coordinate(i));
     }
 
     // Compute FFT(f(x))
@@ -178,7 +178,7 @@ TEST(FFT, FirstDerivative)
     Chunk<std::complex<double>, IDomainFx> ikx_fft_values(domfx);
     ikx_fft_values(domfx.front()) = 0.;
     for (auto it_freq = domfx.cbegin() + 1; it_freq != domfx.cend(); ++it_freq) {
-        double const kx = 2. * M_PI * meshfx.to_real(*it_freq);
+        double const kx = 2. * M_PI * meshfx.coordinate(*it_freq);
         ikx_fft_values(*it_freq) = 1.0i * kx * fft_values(*it_freq);
     }
 
@@ -212,14 +212,14 @@ TEST(FFT, Simple)
     constexpr std::size_t M = 2;
     constexpr std::size_t N = 50;
 
-    init_discretization<IDimX>(CoordX(0.), CoordX(M * T / N));
+    init_discrete_space<IDimX>(CoordX(0.), CoordX(M * T / N));
     DiscreteDomain<IDimX> domx(IndexX(0), IVectX(N));
     auto meshfx = fft.compute_fourier_domain(domx);
     DiscreteDomain<IDimFx> domfx(IVectFx(meshfx.size()));
 
     FieldX<std::complex<double>> values(domx);
     for (auto i : domx) {
-        values(i) = std::cos(2. * M_PI * f * to_real(i));
+        values(i) = std::cos(2. * M_PI * f * coordinate(i));
     }
 
     Chunk<std::complex<double>, IDomainFx> fft_values(domfx);

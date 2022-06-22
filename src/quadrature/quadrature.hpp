@@ -31,5 +31,5 @@ double Quadrature<IDim>::operator()(ChunkSpan<double, DiscreteDomain<IDim>> cons
             domain,
             0.0,
             reducer::sum<double>(),
-            [&](DiscreteCoordinate<IDim> const ix) { return coefficients(ix) * values(ix); });
+            [&](DiscreteElement<IDim> const ix) { return coefficients(ix) * values(ix); });
 }

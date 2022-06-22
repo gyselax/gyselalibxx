@@ -30,8 +30,8 @@ struct CosineEvaluator
         {
             auto const& domain = chunk.domain();
 
-            for (DiscreteCoordinate<DDim> const i : domain) {
-                chunk(i) = eval(to_real(i), 0);
+            for (DiscreteElement<DDim> const i : domain) {
+                chunk(i) = eval(coordinate(i), 0);
             }
         }
 
@@ -44,8 +44,8 @@ struct CosineEvaluator
         {
             auto const& domain = chunk.domain();
 
-            for (DiscreteCoordinate<DDim> const i : domain) {
-                chunk(i) = eval(to_real(i), derivative);
+            for (DiscreteElement<DDim> const i : domain) {
+                chunk(i) = eval(coordinate(i), derivative);
             }
         }
 

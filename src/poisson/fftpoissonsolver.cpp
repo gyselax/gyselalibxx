@@ -59,7 +59,7 @@ void FftPoissonSolver::operator()(
     //   in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))
     complex_Phi_fx(dom_fx.front()) = 0.;
     for_each(dom_fx.remove_first(IVectFx(1)), [&](IndexFx const ifreq) {
-        double const kx = 2. * M_PI * mesh_fx.to_real(ifreq);
+        double const kx = 2. * M_PI * mesh_fx.coordinate(ifreq);
         complex_Phi_fx(ifreq) /= kx * kx;
     });
 

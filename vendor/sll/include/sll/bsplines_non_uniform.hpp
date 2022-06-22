@@ -10,25 +10,25 @@
 #include "sll/bspline.hpp"
 #include "sll/view.hpp"
 
-/// NonUniformDiscretization specialization of BSplines
+/// NonUniformPointSampling specialization of BSplines
 template <class Tag, std::size_t D>
 class NonUniformBSplines
 {
     static_assert(D > 0, "Parameter `D` must be positive");
 
-private:
-    using mesh_type = NonUniformDiscretization<Tag>;
-
-    using domain_type = DiscreteDomain<mesh_type>;
-
 public:
-    using rdim_type = BSpline<Tag>;
-
     using tag_type = Tag;
 
-    using rcoord_type = Coordinate<NonUniformBSplines>;
+    using continuous_dimension_type = BSpline<Tag>;
 
-    using mcoord_type = DiscreteCoordinate<NonUniformBSplines>;
+
+    using discrete_dimension_type = NonUniformBSplines;
+
+    using discrete_element_type = DiscreteElement<NonUniformBSplines>;
+
+    using discrete_domain_type = DiscreteDomain<NonUniformBSplines>;
+
+    using discrete_vector_type = DiscreteVector<NonUniformBSplines>;
 
 public:
     static constexpr std::size_t rank()
@@ -59,11 +59,14 @@ public:
     template <class MemorySpace>
     class Impl
     {
+        template <class OMemorySpace>
+        friend class Impl;
+
     private:
         std::vector<Coordinate<Tag>> m_knots;
 
     public:
-        using ddim_type = NonUniformBSplines<Tag, D>;
+        using discrete_dimension_type = NonUniformBSplines;
 
         Impl() = default;
 

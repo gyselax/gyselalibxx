@@ -103,10 +103,10 @@ public:
         Chunk<double, DiscreteDomain<BSplinesType>> values(spline_coef.domain());
         auto const vals = values.allocation_mdspan();
 
-        discretization<bsplines_type>().integrals(vals);
+        discrete_space<bsplines_type>().integrals(vals);
 
         double y = 0.;
-        for (DiscreteCoordinate<BSplinesType> ibs : spline_coef.domain()) {
+        for (DiscreteElement<BSplinesType> ibs : spline_coef.domain()) {
             y += spline_coef(ibs) * values(ibs);
         }
         return y;
@@ -119,18 +119,18 @@ private:
             DSpan1D const vals) const
     {
         if constexpr (bsplines_type::is_periodic()) {
-            if (coord_eval < discretization<bsplines_type>().rmin()
-                || coord_eval > discretization<bsplines_type>().rmax()) {
+            if (coord_eval < discrete_space<bsplines_type>().rmin()
+                || coord_eval > discrete_space<bsplines_type>().rmax()) {
                 coord_eval -= std::floor(
-                                      (coord_eval - discretization<bsplines_type>().rmin())
-                                      / discretization<bsplines_type>().length())
-                              * discretization<bsplines_type>().length();
+                                      (coord_eval - discrete_space<bsplines_type>().rmin())
+                                      / discrete_space<bsplines_type>().length())
+                              * discrete_space<bsplines_type>().length();
             }
         } else {
-            if (coord_eval < discretization<bsplines_type>().rmin()) {
+            if (coord_eval < discrete_space<bsplines_type>().rmin()) {
                 return m_left_bc(coord_eval, spline_coef);
             }
-            if (coord_eval > discretization<bsplines_type>().rmax()) {
+            if (coord_eval > discrete_space<bsplines_type>().rmax()) {
                 return m_right_bc(coord_eval, spline_coef);
             }
         }
@@ -149,14 +149,14 @@ private:
         int jmin;
 
         if constexpr (std::is_same_v<EvalType, eval_type>) {
-            discretization<bsplines_type>().eval_basis(vals, jmin, coord_eval);
+            discrete_space<bsplines_type>().eval_basis(vals, jmin, coord_eval);
         } else if constexpr (std::is_same_v<EvalType, eval_deriv_type>) {
-            discretization<bsplines_type>().eval_deriv(vals, jmin, coord_eval);
+            discrete_space<bsplines_type>().eval_deriv(vals, jmin, coord_eval);
         }
 
         double y = 0.0;
         for (std::size_t i = 0; i < bsplines_type::degree() + 1; ++i) {
-            y += spline_coef(DiscreteCoordinate<BSplinesType>(jmin + i)) * vals(i);
+            y += spline_coef(DiscreteElement<BSplinesType>(jmin + i)) * vals(i);
         }
         return y;
     }

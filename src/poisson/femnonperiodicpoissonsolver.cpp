@@ -19,13 +19,13 @@ static SplineEvaluator<NUBSplinesX> jit_build_nubsplinesx(
 {
     static_assert(std::is_same_v<BSplines, UBSplinesX> || std::is_same_v<BSplines, NUBSplinesX>);
     if constexpr (std::is_same_v<BSplines, UBSplinesX>) {
-        int ncells = discretization<UBSplinesX>().ncells();
+        int ncells = discrete_space<UBSplinesX>().ncells();
         std::vector<double> knots(ncells + 1);
 
         for (size_t i(0); i < ncells + 1; ++i) {
-            knots[i] = discretization<UBSplinesX>().get_knot(i);
+            knots[i] = discrete_space<UBSplinesX>().get_knot(i);
         }
-        init_discretization<NUBSplinesX>(knots);
+        init_discrete_space<NUBSplinesX>(knots);
         // Boundary values are never evaluated
         return SplineEvaluator<NUBSplinesX>(
                 NullBoundaryValue<NUBSplinesX>::value,
@@ -57,7 +57,7 @@ FemNonPeriodicPoissonSolver::FemNonPeriodicPoissonSolver(
     DSpan1D knots(knots_ptr.data(), m_ncells + 1);
 
     for (size_t i(0); i < m_ncells + 1; ++i) {
-        knots(i) = discretization<NUBSplinesX>().get_knot(i);
+        knots(i) = discrete_space<NUBSplinesX>().get_knot(i);
     }
 
     // Calculate the integration coefficients
@@ -89,7 +89,7 @@ void FemNonPeriodicPoissonSolver::build_matrix()
     DSpan1D derivs(derivs_ptr, m_degree + 1);
     int jmin;
     for (int i = 0; i < m_eval_pts.size(); ++i) {
-        discretization<NUBSplinesX>().eval_deriv(derivs, jmin, m_eval_pts[i]);
+        discrete_space<NUBSplinesX>().eval_deriv(derivs, jmin, m_eval_pts[i]);
         for (int j = 0; j < m_degree + 1; ++j) {
             for (int k = 0; k < m_degree + 1; ++k) {
                 int const j_idx = (j + jmin) % m_nbasis - 1;
@@ -123,7 +123,7 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
     DSpan1D values(values_ptr, m_degree + 1);
 
     for (int i(0); i < m_nbasis; ++i) {
-        phi_spline_coef(DiscreteCoordinate<NUBSplinesX>(i)) = 0.0;
+        phi_spline_coef(DiscreteElement<NUBSplinesX>(i)) = 0.0;
     }
 
     int const rhs_size = m_nbasis - 2;
@@ -134,7 +134,7 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
     //     RHS of the matrix equation
     for (int i = 0; i < nb_eval_pts; ++i) {
         int jmin;
-        discretization<BSplinesX>().eval_basis(values, jmin, m_eval_pts[i]);
+        discrete_space<BSplinesX>().eval_basis(values, jmin, m_eval_pts[i]);
         double const rho_val = m_spline_x_evaluator(m_eval_pts[i], rho_spline_coef);
         for (int j = 0; j < m_degree + 1; ++j) {
             int const j_idx = (jmin + j) % m_nbasis - 1;
@@ -178,7 +178,7 @@ void FemNonPeriodicPoissonSolver::operator()(
     compute_rho(rho, allfdistribu);
 
     //
-    NUBSDomainX nu_dom(DiscreteVector<NUBSplinesX>(discretization<NUBSplinesX>().size()));
+    NUBSDomainX nu_dom(DiscreteVector<NUBSplinesX>(discrete_space<NUBSplinesX>().size()));
     Chunk<double, BSDomainX> rho_spline_coef(m_spline_x_builder.spline_domain());
     m_spline_x_builder(rho_spline_coef, rho);
     Chunk<double, NUBSDomainX> phi_spline_coef(nu_dom);
@@ -186,7 +186,7 @@ void FemNonPeriodicPoissonSolver::operator()(
 
     //
     for_each(dom_x, [&](IndexX const ix) {
-        electrostatic_potential(ix) = m_spline_x_nu_evaluator(to_real(ix), phi_spline_coef);
-        electric_field(ix) = -m_spline_x_nu_evaluator.deriv(to_real(ix), phi_spline_coef);
+        electrostatic_potential(ix) = m_spline_x_nu_evaluator(coordinate(ix), phi_spline_coef);
+        electric_field(ix) = -m_spline_x_nu_evaluator.deriv(coordinate(ix), phi_spline_coef);
     });
 }

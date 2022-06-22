@@ -32,7 +32,7 @@ struct NonPeriodicSplineBuilderTestFixture<std::tuple<
         std::integral_constant<BoundCond, BcR>,
         std::integral_constant<bool, Uniform>>> : public testing::Test
 {
-    // Needs to be defined here to avoid multiple initializations of the discretization function
+    // Needs to be defined here to avoid multiple initializations of the discrete_space function
     struct DimX
     {
         static constexpr bool PERIODIC = false;
@@ -61,7 +61,7 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Constructor)
     using DimX = typename TestFixture::DimX;
     using BSplinesX = UniformBSplines<DimX, TestFixture::s_degree>;
 
-    init_discretization<BSplinesX>(Coordinate<DimX>(0.), Coordinate<DimX>(0.02), 100);
+    init_discrete_space<BSplinesX>(Coordinate<DimX>(0.), Coordinate<DimX>(0.02), 100);
 
     SplineBuilder<BSplinesX, TestFixture::s_bcl, TestFixture::s_bcr> spline_builder;
     spline_builder.interpolation_domain();
@@ -73,10 +73,10 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
 {
     using DimX = typename TestFixture::DimX;
     using IDimX = typename TestFixture::IDimX;
-    using IndexX = DiscreteCoordinate<IDimX>;
+    using IndexX = DiscreteElement<IDimX>;
     using DVectX = DiscreteVector<IDimX>;
     using BSplinesX = typename TestFixture::BSpline;
-    using BsplIndexX = DiscreteCoordinate<BSplinesX>;
+    using BsplIndexX = DiscreteElement<BSplinesX>;
     using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
     using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
     using CoordX = Coordinate<DimX>;
@@ -87,7 +87,7 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
 
     // 1. Create BSplines
     if constexpr (BSplinesX::is_uniform()) {
-        init_discretization<BSplinesX>(x0, xN, ncells);
+        init_discrete_space<BSplinesX>(x0, xN, ncells);
     } else {
         DVectX constexpr npoints(ncells + 1);
         std::vector<double> breaks(npoints);
@@ -95,11 +95,11 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
         for (std::size_t i(0); i < npoints; ++i) {
             breaks[i] = x0 + i * dx;
         }
-        init_discretization<BSplinesX>(breaks);
+        init_discrete_space<BSplinesX>(breaks);
     }
     DiscreteDomain<BSplinesX> const dom_bsplines_x(
             BsplIndexX(0),
-            DiscreteVector<BSplinesX>(discretization<BSplinesX>().size()));
+            DiscreteVector<BSplinesX>(discrete_space<BSplinesX>().size()));
 
     // 2. Create a Spline represented by a chunk over BSplines
     // The chunk is filled with garbage data, we need to initialize it
@@ -138,7 +138,7 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
 
     FieldX coords_eval(interpolation_domain);
     for (IndexX const ix : interpolation_domain) {
-        coords_eval(ix) = to_real(ix);
+        coords_eval(ix) = coordinate(ix);
     }
 
     FieldX spline_eval(interpolation_domain);
@@ -152,7 +152,7 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
     double max_norm_error = 0.;
     double max_norm_error_diff = 0.;
     for (IndexX const ix : interpolation_domain) {
-        CoordX const x = to_real(ix);
+        CoordX const x = coordinate(ix);
 
         // Compute error
         double const error = spline_eval(ix) - yvals(ix);
@@ -175,7 +175,7 @@ struct PolynomialNonPeriodicSplineBuilderTestFixture<std::tuple<
         std::integral_constant<BoundCond, BcR>,
         std::integral_constant<bool, Uniform>>> : public testing::Test
 {
-    // Needs to be defined here to avoid multiple initializations of the discretization function
+    // Needs to be defined here to avoid multiple initializations of the discrete_space function
     struct DimX
     {
         static constexpr bool PERIODIC = false;
@@ -199,10 +199,10 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
 {
     using DimX = typename TestFixture::DimX;
     using IDimX = typename TestFixture::IDimX;
-    using IndexX = DiscreteCoordinate<IDimX>;
+    using IndexX = DiscreteElement<IDimX>;
     using DVectX = DiscreteVector<IDimX>;
     using BSplinesX = typename TestFixture::BSpline;
-    using BsplIndexX = DiscreteCoordinate<BSplinesX>;
+    using BsplIndexX = DiscreteElement<BSplinesX>;
     using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
     using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
     using CoordX = Coordinate<DimX>;
@@ -214,7 +214,7 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
 
     // 1. Create BSplines
     if constexpr (BSplinesX::is_uniform()) {
-        init_discretization<BSplinesX>(x0, xN, ncells);
+        init_discrete_space<BSplinesX>(x0, xN, ncells);
     } else {
         DVectX constexpr npoints(ncells + 1);
         std::vector<double> breaks(npoints);
@@ -222,11 +222,11 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
         for (std::size_t i(0); i < npoints; ++i) {
             breaks[i] = x0 + i * dx;
         }
-        init_discretization<BSplinesX>(breaks);
+        init_discrete_space<BSplinesX>(breaks);
     }
     DiscreteDomain<BSplinesX> const dom_bsplines_x(
             BsplIndexX(0),
-            DiscreteVector<BSplinesX>(discretization<BSplinesX>().size()));
+            DiscreteVector<BSplinesX>(discrete_space<BSplinesX>().size()));
 
     // 2. Create a Spline represented by a chunk over BSplines
     // The chunk is filled with garbage data, we need to initialize it

@@ -24,7 +24,7 @@ DSpanX ElectricField::operator()(DSpanX electric_field, DBSViewX const electrost
 {
     IDomainX const& x_dom = electric_field.domain();
     for_each(x_dom, [&](IndexX const ix) {
-        electric_field(ix) = -m_spline_x_evaluator.deriv(to_real(ix), electrostatic_potential);
+        electric_field(ix) = -m_spline_x_evaluator.deriv(coordinate(ix), electrostatic_potential);
     });
     return electric_field;
 }
