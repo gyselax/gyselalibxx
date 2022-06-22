@@ -5,8 +5,8 @@
 #include <type_traits>
 
 #include "ddc/discrete_domain.hpp"
-#include "ddc/non_uniform_discretization.hpp"
-#include "ddc/uniform_discretization.hpp"
+#include "ddc/non_uniform_point_sampling.hpp"
+#include "ddc/uniform_point_sampling.hpp"
 
 template <class T>
 struct is_rectilinear_domain : std::false_type
@@ -16,7 +16,7 @@ struct is_rectilinear_domain : std::false_type
 template <class... DDims>
 struct is_rectilinear_domain<DiscreteDomain<DDims...>>
     : std::conditional_t<
-              ((is_uniform_discretization_v<DDims> || is_non_uniform_discretization_v<DDims>)&&...),
+              ((is_uniform_sampling_v<DDims> || is_non_uniform_sampling_v<DDims>)&&...),
               std::true_type,
               std::false_type>
 {

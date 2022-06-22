@@ -15,59 +15,58 @@
     }
 
 namespace {
-
 struct DimX;
 
-using DDimX = NonUniformDiscretization<DimX>;
+using DDimX = NonUniformPointSampling<DimX>;
 
 static std::array<double, 4> const array_points VALUES;
 static std::vector<double> const vector_points VALUES;
 [[maybe_unused]] Coordinate<DimX> constexpr min_x = Coordinate<DimX>(0.1);
 [[maybe_unused]] Coordinate<DimX> constexpr max_x = Coordinate<DimX>(0.4);
-[[maybe_unused]] DiscreteCoordinate<DDimX> constexpr lbound = DiscreteCoordinate<DDimX>(0);
-[[maybe_unused]] DiscreteCoordinate<DDimX> constexpr ubound = DiscreteCoordinate<DDimX>(3);
-DiscreteCoordinate<DDimX> constexpr point_ix = DiscreteCoordinate<DDimX>(2);
+[[maybe_unused]] DiscreteElement<DDimX> constexpr lbound = DiscreteElement<DDimX>(0);
+[[maybe_unused]] DiscreteElement<DDimX> constexpr ubound = DiscreteElement<DDimX>(3);
+DiscreteElement<DDimX> constexpr point_ix = DiscreteElement<DDimX>(2);
 Coordinate<DimX> constexpr point_rx = Coordinate<DimX>(0.3);
 
 } // namespace
 
-TEST(NonUniformDiscretizationTest, Rank)
+TEST(NonUniformPointSamplingTest, Rank)
 {
     EXPECT_EQ(DDimX::rank(), 1);
 }
 
-TEST(NonUniformDiscretizationTest, ListConstructor)
+TEST(NonUniformPointSamplingTest, ListConstructor)
 {
     DDimX::Impl<Kokkos::HostSpace> ddim_x(VALUES);
     EXPECT_EQ(ddim_x.size(), 4);
-    EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
+    EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
-TEST(NonUniformDiscretizationTest, ArrayConstructor)
+TEST(NonUniformPointSamplingTest, ArrayConstructor)
 {
     DDimX::Impl<Kokkos::HostSpace> ddim_x(array_points);
     EXPECT_EQ(ddim_x.size(), array_points.size());
-    EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
+    EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
-TEST(NonUniformDiscretizationTest, VectorConstructor)
+TEST(NonUniformPointSamplingTest, VectorConstructor)
 {
     DDimX::Impl<Kokkos::HostSpace> ddim_x(vector_points);
     EXPECT_EQ(ddim_x.size(), vector_points.size());
-    EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
+    EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
-TEST(NonUniformDiscretizationTest, IteratorConstructor)
+TEST(NonUniformPointSamplingTest, IteratorConstructor)
 {
     DDimX::Impl<Kokkos::HostSpace> ddim_x(vector_points.begin(), vector_points.end());
     EXPECT_EQ(ddim_x.size(), vector_points.size());
-    EXPECT_EQ(ddim_x.to_real(point_ix), point_rx);
+    EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
-TEST(NonUniformDiscretization, Formatting)
+TEST(NonUniformPointSampling, Formatting)
 {
     DDimX::Impl<Kokkos::HostSpace> ddim_x({Coordinate<DimX>(0.1), Coordinate<DimX>(0.4)});
     std::stringstream oss;
     oss << ddim_x;
-    EXPECT_EQ(oss.str(), "NonUniformDiscretization(2)");
+    EXPECT_EQ(oss.str(), "NonUniformPointSampling(2)");
 }

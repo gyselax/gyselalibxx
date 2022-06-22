@@ -11,10 +11,10 @@ namespace {
 struct X;
 struct Y;
 
-using DDimX = UniformDiscretization<X>;
-using DDimY = UniformDiscretization<Y>;
-using NUDDimX = NonUniformDiscretization<X>;
-using NUDDimY = NonUniformDiscretization<Y>;
+using DDimX = UniformPointSampling<X>;
+using DDimY = UniformPointSampling<Y>;
+using NUDDimX = NonUniformPointSampling<X>;
+using NUDDimY = NonUniformPointSampling<Y>;
 
 using DDomNull = DiscreteDomain<std::nullptr_t>;
 using DDomX = DiscreteDomain<DDimX>;

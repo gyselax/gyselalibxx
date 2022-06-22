@@ -12,7 +12,7 @@
 namespace {
 
 struct DDimX;
-using ElemX = DiscreteCoordinate<DDimX>;
+using DElemX = DiscreteElement<DDimX>;
 using DVectX = DiscreteVector<DDimX>;
 using DDomX = DiscreteDomain<DDimX>;
 
@@ -23,7 +23,7 @@ using ChunkSpanX = ChunkSpan<Datatype, DDomX>;
 struct DDimY;
 
 
-using ElemXY = DiscreteCoordinate<DDimX, DDimY>;
+using DElemXY = DiscreteElement<DDimX, DDimY>;
 using DVectXY = DiscreteVector<DDimX, DDimY>;
 using DDomXY = DiscreteDomain<DDimX, DDimY>;
 
@@ -59,7 +59,7 @@ static void deepcopy_1d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0), 0.0);
     std::vector<double> dst_data(state.range(0), -1.0);
-    DDomX const dom(ElemX(0), DVectX(state.range(0)));
+    DDomX const dom(DElemX(0), DVectX(state.range(0)));
     ChunkSpanX<double> src(src_data.data(), dom);
     ChunkSpanX<double> dst(dst_data.data(), dom);
     for (auto _ : state) {
@@ -89,7 +89,7 @@ static void deepcopy_2d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0) * state.range(1), 0.0);
     std::vector<double> dst_data(state.range(0) * state.range(1), -1.0);
-    DDomXY const dom(ElemXY(0, 0), DVectXY(state.range(0) - 1, state.range(1) - 1));
+    DDomXY const dom(DElemXY(0, 0), DVectXY(state.range(0) - 1, state.range(1) - 1));
     ChunkSpanXY<double> src(src_data.data(), dom);
     ChunkSpanXY<double> dst(dst_data.data(), dom);
     for (auto _ : state) {
@@ -104,11 +104,11 @@ static void deepcopy_subchunk_2d(benchmark::State& state)
 {
     std::vector<double> src_data(state.range(0) * state.range(1), 0.0);
     std::vector<double> dst_data(state.range(0) * state.range(1), -1.0);
-    DDomXY const dom(ElemXY(0, 0), DVectXY(state.range(0) - 1, state.range(1) - 1));
+    DDomXY const dom(DElemXY(0, 0), DVectXY(state.range(0) - 1, state.range(1) - 1));
     ChunkSpanXY<double> src(src_data.data(), dom);
     ChunkSpanXY<double> dst(dst_data.data(), dom);
     for (auto _ : state) {
-        for (ElemX i : select<DDimX>(dom)) {
+        for (DElemX i : select<DDimX>(dom)) {
             auto&& dst_i = dst[i];
             auto&& src_i = src[i];
             deepcopy(dst_i, src_i);

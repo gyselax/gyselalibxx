@@ -7,26 +7,26 @@
 #include <Kokkos_Core.hpp>
 
 struct DDimX;
-using ElemX = DiscreteCoordinate<DDimX>;
+using DElemX = DiscreteElement<DDimX>;
 using DVectX = DiscreteVector<DDimX>;
 using DDomX = DiscreteDomain<DDimX>;
 
 struct DDimY;
-using ElemY = DiscreteCoordinate<DDimY>;
+using DElemY = DiscreteElement<DDimY>;
 using DVectY = DiscreteVector<DDimY>;
 using DDomY = DiscreteDomain<DDimY>;
 
-using ElemXY = DiscreteCoordinate<DDimX, DDimY>;
+using DElemXY = DiscreteElement<DDimX, DDimY>;
 using DVectXY = DiscreteVector<DDimX, DDimY>;
 using DDomXY = DiscreteDomain<DDimX, DDimY>;
 
-static ElemX constexpr lbound_x(0);
+static DElemX constexpr lbound_x(0);
 static DVectX constexpr nelems_x(10);
 
-static ElemY constexpr lbound_y(0);
+static DElemY constexpr lbound_y(0);
 static DVectY constexpr nelems_y(12);
 
-static ElemXY constexpr lbound_x_y {lbound_x, lbound_y};
+static DElemXY constexpr lbound_x_y {lbound_x, lbound_y};
 static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
 
 TEST(TransformReduceSerialHost, OneDimension)
@@ -35,14 +35,14 @@ TEST(TransformReduceSerialHost, OneDimension)
     std::vector<int> storage(dom.size(), 0);
     ChunkSpan<int, DDomX> chunk(storage.data(), dom);
     int count = 0;
-    for_each(dom, [&](ElemX const ix) { chunk(ix) = count++; });
+    for_each(dom, [&](DElemX const ix) { chunk(ix) = count++; });
     ASSERT_EQ(
             transform_reduce(
                     policies::serial_host,
                     dom,
                     0,
                     reducer::sum<int>(),
-                    [&](ElemX const ix) { return chunk(ix); }),
+                    [&](DElemX const ix) { return chunk(ix); }),
             dom.size() * (dom.size() - 1) / 2);
 }
 
@@ -52,14 +52,14 @@ TEST(TransformReduceSerialHost, TwoDimensions)
     std::vector<int> storage(dom.size(), 0);
     ChunkSpan<int, DDomXY> chunk(storage.data(), dom);
     int count = 0;
-    for_each(dom, [&](ElemXY const ixy) { chunk(ixy) = count++; });
+    for_each(dom, [&](DElemXY const ixy) { chunk(ixy) = count++; });
     ASSERT_EQ(
             transform_reduce(
                     policies::serial_host,
                     dom,
                     0,
                     reducer::sum<int>(),
-                    [&](ElemXY const ixy) { return chunk(ixy); }),
+                    [&](DElemXY const ixy) { return chunk(ixy); }),
             dom.size() * (dom.size() - 1) / 2);
 }
 
@@ -69,14 +69,14 @@ TEST(TransformReduceParallelHost, OneDimension)
     std::vector<int> storage(dom.size(), 0);
     ChunkSpan<int, DDomX> chunk(storage.data(), dom);
     int count = 0;
-    for_each(dom, [&](ElemX const ix) { chunk(ix) = count++; });
+    for_each(dom, [&](DElemX const ix) { chunk(ix) = count++; });
     ASSERT_EQ(
             transform_reduce(
                     policies::parallel_host,
                     dom,
                     0,
                     reducer::sum<int>(),
-                    [&](ElemX const ix) { return chunk(ix); }),
+                    [&](DElemX const ix) { return chunk(ix); }),
             dom.size() * (dom.size() - 1) / 2);
 }
 
@@ -86,14 +86,14 @@ TEST(TransformReduceParallelHost, TwoDimensions)
     std::vector<int> storage(dom.size(), 0);
     ChunkSpan<int, DDomXY> chunk(storage.data(), dom);
     int count = 0;
-    for_each(dom, [&](ElemXY const ixy) { chunk(ixy) = count++; });
+    for_each(dom, [&](DElemXY const ixy) { chunk(ixy) = count++; });
     ASSERT_EQ(
             transform_reduce(
                     policies::parallel_host,
                     dom,
                     0,
                     reducer::sum<int>(),
-                    [&](ElemXY const ixy) { return chunk(ixy); }),
+                    [&](DElemXY const ixy) { return chunk(ixy); }),
             dom.size() * (dom.size() - 1) / 2);
 }
 
@@ -107,14 +107,14 @@ static void TestTransformReduceParallelDeviceOneDimension()
     for_each(
             policies::parallel_device,
             dom,
-            DDC_LAMBDA(ElemX const ix) { chunk(ix) = Kokkos::atomic_fetch_add(&count(), 1); });
+            DDC_LAMBDA(DElemX const ix) { chunk(ix) = Kokkos::atomic_fetch_add(&count(), 1); });
     ASSERT_EQ(
             transform_reduce(
                     policies::parallel_device,
                     dom,
                     0,
                     reducer::sum<int>(),
-                    DDC_LAMBDA(ElemX const ix) { return chunk(ix); }),
+                    DDC_LAMBDA(DElemX const ix) { return chunk(ix); }),
             dom.size() * (dom.size() - 1) / 2);
 }
 
@@ -133,14 +133,14 @@ static void TestTransformReduceParallelDeviceTwoDimensions()
     for_each(
             policies::parallel_device,
             dom,
-            DDC_LAMBDA(ElemXY const ixy) { chunk(ixy) = Kokkos::atomic_fetch_add(&count(), 1); });
+            DDC_LAMBDA(DElemXY const ixy) { chunk(ixy) = Kokkos::atomic_fetch_add(&count(), 1); });
     ASSERT_EQ(
             transform_reduce(
                     policies::parallel_device,
                     dom,
                     0,
                     reducer::sum<int>(),
-                    DDC_LAMBDA(ElemXY const ixy) { return chunk(ixy); }),
+                    DDC_LAMBDA(DElemXY const ixy) { return chunk(ixy); }),
             dom.size() * (dom.size() - 1) / 2);
 }
 

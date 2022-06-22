@@ -26,12 +26,12 @@ void blinker_init(
     for_each(
             policies::parallel_device,
             domain,
-            DDC_LAMBDA(DiscreteCoordinate<DDimX, DDimY> const ixy) {
-                DiscreteCoordinate<DDimX> const ix = select<DDimX>(ixy);
-                DiscreteCoordinate<DDimY> const iy = select<DDimY>(ixy);
-                if (iy == DiscreteCoordinate<DDimY>(2)
-                    && (ix >= DiscreteCoordinate<DDimX>(1)
-                        && ix <= DiscreteCoordinate<DDimX>(3)))
+            DDC_LAMBDA(DiscreteElement<DDimX, DDimY> const ixy) {
+                DiscreteElement<DDimX> const ix = select<DDimX>(ixy);
+                DiscreteElement<DDimY> const iy = select<DDimY>(ixy);
+                if (iy == DiscreteElement<DDimY>(2)
+                    && (ix >= DiscreteElement<DDimX>(1)
+                        && ix <= DiscreteElement<DDimX>(3)))
                     cells(ixy) = true;
                 else
                     cells(ixy) = false;
@@ -45,10 +45,10 @@ std::ostream& print_2DChunk(
 {
     for_each(
             select<DDimY>(chunk.domain()),
-            [&](DiscreteCoordinate<DDimY> const iy) {
+            [&](DiscreteElement<DDimY> const iy) {
                 for_each(
                         select<DDimX>(chunk.domain()),
-                        [&](DiscreteCoordinate<DDimX> const ix) {
+                        [&](DiscreteElement<DDimX> const ix) {
                             os << (chunk(ix, iy) ? "*" : ".");
                         });
                 os << "\n";
@@ -61,11 +61,11 @@ int main()
     ScopeGuard scope;
 
     DiscreteDomain<DDimX, DDimY> const domain_xy(
-            DiscreteCoordinate<DDimX, DDimY>(0, 0),
+            DiscreteElement<DDimX, DDimY>(0, 0),
             DiscreteVector<DDimX, DDimY>(length, height));
 
     DiscreteDomain<DDimX, DDimY> const inner_domain_xy(
-            DiscreteCoordinate<DDimX, DDimY>(1, 1),
+            DiscreteElement<DDimX, DDimY>(1, 1),
             DiscreteVector<DDimX, DDimY>(length - 2, height - 2));
 
     Chunk cells_in_host_alloc(domain_xy, HostAllocator<cell>());
@@ -87,11 +87,9 @@ int main()
         for_each(
                 policies::parallel_device,
                 inner_domain_xy,
-                DDC_LAMBDA(DiscreteCoordinate<DDimX, DDimY> const ixy) {
-                    DiscreteCoordinate<DDimX> const ix
-                            = select<DDimX>(ixy);
-                    DiscreteCoordinate<DDimY> const iy
-                            = select<DDimY>(ixy);
+                DDC_LAMBDA(DiscreteElement<DDimX, DDimY> const ixy) {
+                    DiscreteElement<DDimX> const ix = select<DDimX>(ixy);
+                    DiscreteElement<DDimY> const iy = select<DDimY>(ixy);
                     int alive_neighbors = 0;
                     // Iterate on neighbors and increase the count of alive neighbors when necessary
                     for (int i = -1; i < 2; ++i) {
