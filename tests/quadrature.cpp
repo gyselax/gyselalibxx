@@ -16,7 +16,7 @@ TEST(QuadratureTest, ExactForConstantFunc)
     IVectX const x_size(10);
 
     // Creating mesh & supports
-    init_discretization<BSplinesX>(x_min, x_max, x_size);
+    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
     SplineXBuilder const builder_x;
 
@@ -26,7 +26,7 @@ TEST(QuadratureTest, ExactForConstantFunc)
 
     DFieldX values(gridx);
 
-    for_each(gridx, [&](DiscreteCoordinate<IDimX> const idx) { values(idx) = 1.0; });
+    for_each(gridx, [&](DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-9);
@@ -50,7 +50,7 @@ double compute_error(int n_elems)
     Coordinate<Y<N>> const x_min(0.0);
     Coordinate<Y<N>> const x_max(M_PI);
 
-    init_discretization<BSplinesY>(x_min, x_max, n_elems);
+    init_discrete_space<BSplinesY>(x_min, x_max, n_elems);
 
     SplineYBuilder const builder_x;
 
@@ -60,7 +60,7 @@ double compute_error(int n_elems)
 
     DFieldY values(gridx);
 
-    for_each(gridx, [&](DiscreteCoordinate<IDimY> const idx) { values(idx) = sin(to_real(idx)); });
+    for_each(gridx, [&](DiscreteElement<IDimY> const idx) { values(idx) = sin(coordinate(idx)); });
     double integral = integrate(values);
     return std::abs(2 - integral);
 }

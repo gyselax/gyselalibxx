@@ -31,9 +31,9 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
     IDomainSp const dom_sp(nb_kinspecies);
 
     // Creating mesh & supports
-    init_discretization<BSplinesX>(x_min, x_max, x_size);
+    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    init_discretization<BSplinesVx>(vx_min, vx_max, vx_size);
+    init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
     SplineXBuilder const builder_x;
 
@@ -63,7 +63,7 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
     init_perturb_amplitude(dom_sp.front()) = 0.0;
 
     // Initialization of the distribution function
-    init_discretization<IDimSp>(
+    init_discrete_space<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
@@ -79,7 +79,7 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
     // Initialization of the distribution function --> fill values
     for (IndexSp const isp : gridsp) {
         for (IndexX const ix : gridx) {
-            double fdistribu_val = cos(to_real(ix));
+            double fdistribu_val = cos(coordinate(ix));
             for (IndexVx const iv : gridvx) {
                 allfdistribu(isp, ix, iv) = fdistribu_val;
             }
@@ -92,9 +92,9 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
     double error_field = 0.0;
 
     for (IndexX const ix : gridx) {
-        double const exact_pot = cos(to_real(ix));
+        double const exact_pot = cos(coordinate(ix));
         error_pot = fmax(fabs(electrostatic_potential(ix) - exact_pot), error_pot);
-        double const exact_field = sin(to_real(ix));
+        double const exact_field = sin(coordinate(ix));
         error_field = fmax(fabs(electric_field(ix) - exact_field), error_field);
     }
     EXPECT_LE(error_pot, 1e-8);

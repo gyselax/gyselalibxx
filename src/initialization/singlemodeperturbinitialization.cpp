@@ -59,7 +59,7 @@ void SingleModePerturbInitialization::perturbation_initialization(
 #endif
     double const kx = mode * 2. * M_PI / Lx;
     for (IndexX const ix : gridx) {
-        CoordX const x = to_real(ix);
+        CoordX const x = coordinate(ix);
         perturbation(ix) = perturb_amplitude * cos(kx * x);
     }
 }

@@ -53,7 +53,7 @@ DSpanSpXVx BslAdvectionVx::operator()(
             double const dvx = charge(isp) * sqrt_me_on_mspecies * dt * electric_field(ix);
 
             // compute the coordinates of the feet
-            for_each(vx_dom, [&](IndexVx const iv) { feet_coords(iv) = to_real(iv) - dvx; });
+            for_each(vx_dom, [&](IndexVx const iv) { feet_coords(iv) = coordinate(iv) - dvx; });
 
             // build a spline representation of the data
             interpolator_vx(allfdistribu[isp][ix], feet_coords);

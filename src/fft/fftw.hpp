@@ -21,35 +21,35 @@ public:
 
     ~FftwFourierTransform() override = default;
 
-    typename NonUniformDiscretization<Fourier<Tag>>::template Impl<Kokkos::HostSpace>
+    typename NonUniformPointSampling<Fourier<Tag>>::template Impl<Kokkos::HostSpace>
     compute_fourier_domain(
-            DiscreteDomain<UniformDiscretization<Tag>> const& dom_x) const noexcept override
+            DiscreteDomain<UniformPointSampling<Tag>> const& dom_x) const noexcept override
     {
         std::vector<double> freqs(dom_x.size());
-        double const inv_Nd = 1. / (dom_x.size() * step<UniformDiscretization<Tag>>());
+        double const inv_Nd = 1. / (dom_x.size() * step<UniformPointSampling<Tag>>());
         for (std::size_t ii = 0; ii <= dom_x.size() / 2; ++ii) {
             freqs[ii] = ii * inv_Nd;
         }
         for (std::size_t ii = dom_x.size() / 2 + 1; ii < dom_x.size(); ++ii) {
             freqs[ii] = -((dom_x.size() - ii) * inv_Nd);
         }
-        return typename NonUniformDiscretization<Fourier<Tag>>::template Impl<Kokkos::HostSpace>(
+        return typename NonUniformPointSampling<Fourier<Tag>>::template Impl<Kokkos::HostSpace>(
                 freqs);
     }
 
     // Perform FFT where the input is a real and the output is a complex
     ChunkSpan<
             std::complex<double>,
-            DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
+            DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
             std::experimental::layout_right>
     operator()(
             ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
+                    DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
                     std::experimental::layout_right> const out_values,
             ChunkSpan<
                     double,
-                    DiscreteDomain<UniformDiscretization<Tag>>,
+                    DiscreteDomain<UniformPointSampling<Tag>>,
                     std::experimental::layout_right> const in_values) const noexcept override
     {
         assert(in_values.extents().value() == out_values.extents().value());
@@ -73,16 +73,16 @@ public:
     // Perform FFT where the input is a complex and the output is a complex
     ChunkSpan<
             std::complex<double>,
-            DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
+            DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
             std::experimental::layout_right>
     operator()(
             ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<NonUniformDiscretization<Fourier<Tag>>>,
+                    DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
                     std::experimental::layout_right> const out_values,
             ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<UniformDiscretization<Tag>>,
+                    DiscreteDomain<UniformPointSampling<Tag>>,
                     std::experimental::layout_right> const in_values) const noexcept override
     {
         assert(in_values.extents().value() == out_values.extents().value());

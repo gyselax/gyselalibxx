@@ -23,13 +23,13 @@ struct DimY
 };
 
 using CoordX = Coordinate<DimX>;
-using IDimX = UniformDiscretization<DimX>;
-using IndexX = DiscreteCoordinate<IDimX>;
+using IDimX = UniformPointSampling<DimX>;
+using IndexX = DiscreteElement<IDimX>;
 using BSplinesX = UniformBSplines<DimX, 3>;
 
 using RCoordY = Coordinate<DimY>;
-using MeshY = NonUniformDiscretization<DimY>;
-using MCoordY = DiscreteCoordinate<MeshY>;
+using MeshY = NonUniformPointSampling<DimY>;
+using MCoordY = DiscreteElement<MeshY>;
 using BSplinesY = NonUniformBSplines<DimY, 4>;
 
 constexpr std::size_t ncells = 100;
@@ -43,15 +43,15 @@ BSplinesY::Impl<Kokkos::HostSpace> const bsplinesy {RCoordY(0.1), RCoordY(0.4), 
 
 TEST(ChunkBSplinesTest, Constructor)
 {
-    DiscreteCoordinate<BSplinesX, BSplinesY> start(0, 0);
+    DiscreteElement<BSplinesX, BSplinesY> start(0, 0);
     DiscreteVector<BSplinesX, BSplinesY> size(ncells, ncells);
     DiscreteDomain<BSplinesX, BSplinesY> dom(start, size);
 
     Chunk<double, DiscreteDomain<BSplinesX, BSplinesY>> chunk(dom);
     auto view = chunk.span_view();
 
-    for (DiscreteCoordinate<BSplinesX> ibsx : get_domain<BSplinesX>(chunk)) {
-        for (DiscreteCoordinate<BSplinesY> ibsy : get_domain<BSplinesY>(chunk)) {
+    for (DiscreteElement<BSplinesX> ibsx : get_domain<BSplinesX>(chunk)) {
+        for (DiscreteElement<BSplinesY> ibsy : get_domain<BSplinesY>(chunk)) {
             view(ibsx, ibsy) = 1.0;
         }
     }
