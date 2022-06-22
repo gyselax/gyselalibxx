@@ -87,7 +87,7 @@ public:
             std::experimental::dextents<sizeof...(DDims)>,
             LayoutStridedPolicy>;
 
-    using mcoord_type = typename mdomain_type::mcoord_type;
+    using discrete_element_type = typename mdomain_type::discrete_element_type;
 
     using extents_type = typename allocation_mdspan_type::extents_type;
 

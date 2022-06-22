@@ -80,7 +80,7 @@ Their type is not specified because we use C++
 all of the same type: `DiscreteDomain<DDimX>` that represents a set of contiguous points in the
 discretization of `X`.
 
-\ref UniformDiscretization::init_ghosted "init_ghosted" takes as parameters the coordinate of the first and last discretized points, the
+\ref UniformPointSampling::init_ghosted "init_ghosted" takes as parameters the coordinate of the first and last discretized points, the
 number of discretized points in the domain and the number of additional points on each side of the
 domain.
 The fours `DiscreteDomain`s returned are:
@@ -107,12 +107,12 @@ The type of both sub-domains is `DiscreteDomain<DDimX>` even if only `DiscreteDo
 this relies on C++
 [class template argument deduction (CTAD)](https://en.cppreference.com/w/cpp/language/class_template_argument_deduction).
 The first parameter given to the constructor is the first element of the domain, a
-`DiscreteCoordinate<DDimX>`, the second parameter is a number of elements to include, a
+`DiscreteElement<DDimX>`, the second parameter is a number of elements to include, a
 `DiscreteVector<DDimX>`.
 
 **To summarize,** in this section, we have introduced the following types:
 * `Coordinate<X>` that represents a point in the continuous dimension `X`,
-* `DiscreteCoordinate<DDimX>` that represents one of the elements of `DDimX`, the discretization of
+* `DiscreteElement<DDimX>` that represents one of the elements of `DDimX`, the discretization of
   `X`,
 * `DiscreteVector<DDimX>` that represents a number of elements of `DDimX`,
 * `DiscreteDomain<DDimX>` that represents an interval in `DDimX`, a set of contiguous elements of

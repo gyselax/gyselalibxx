@@ -7,8 +7,8 @@
 #include <Kokkos_Core.hpp>
 
 #include "ddc/detail/macros.hpp"
-#include "ddc/discrete_coordinate.hpp"
 #include "ddc/discrete_domain.hpp"
+#include "ddc/discrete_element.hpp"
 #include "ddc/for_each.hpp"
 #include "ddc/reducer.hpp"
 
@@ -102,11 +102,11 @@ inline T transform_reduce_serial(
         DCoords const&... dcoords) noexcept
 {
     if constexpr (sizeof...(DCoords) == sizeof...(DDims)) {
-        return transform(DiscreteCoordinate<DDims...>(dcoords...));
+        return transform(DiscreteElement<DDims...>(dcoords...));
     } else {
         using CurrentDDim = type_seq_element_t<sizeof...(DCoords), detail::TypeSeq<DDims...>>;
         T result = neutral;
-        for (DiscreteCoordinate<CurrentDDim> const ii : select<CurrentDDim>(domain)) {
+        for (DiscreteElement<CurrentDDim> const ii : select<CurrentDDim>(domain)) {
             result = reduce(
                     result,
                     transform_reduce_serial(domain, neutral, reduce, transform, dcoords..., ii));
@@ -135,7 +135,7 @@ public:
             index_type<DDims>... ids,
             typename Reducer::value_type& a) const
     {
-        a = reducer(a, functor(DiscreteCoordinate<DDims...>(ids...)));
+        a = reducer(a, functor(DiscreteElement<DDims...>(ids...)));
     }
 };
 
