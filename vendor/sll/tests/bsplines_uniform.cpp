@@ -16,9 +16,9 @@ struct DimX
 {
     static constexpr bool PERIODIC = true;
 };
-using IDimX = UniformDiscretization<DimX>;
+using IDimX = UniformPointSampling<DimX>;
 using CoordX = Coordinate<DimX>;
-using IndexX = DiscreteCoordinate<IDimX>;
+using IndexX = DiscreteElement<IDimX>;
 
 class BSplinesUniformTest : public ::testing::Test
 {

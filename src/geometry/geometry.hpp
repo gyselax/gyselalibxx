@@ -73,15 +73,15 @@ using IDimVx = typename SplineVxBuilder::interpolation_mesh_type;
 using IDimSp = SpeciesInformation;
 
 
-using IndexX = DiscreteCoordinate<IDimX>;
+using IndexX = DiscreteElement<IDimX>;
 
-using IndexVx = DiscreteCoordinate<IDimVx>;
+using IndexVx = DiscreteElement<IDimVx>;
 
-using IndexSp = DiscreteCoordinate<IDimSp>;
+using IndexSp = DiscreteElement<IDimSp>;
 
-using IndexXVx = DiscreteCoordinate<IDimX, IDimVx>;
+using IndexXVx = DiscreteElement<IDimX, IDimVx>;
 
-using IndexSpXVx = DiscreteCoordinate<IDimSp, IDimX, IDimVx>;
+using IndexSpXVx = DiscreteElement<IDimSp, IDimX, IDimVx>;
 
 
 
@@ -205,8 +205,8 @@ using DBSViewX = BSViewX<double>;
 #if ENABLE_PERIODIC_RDIMX
 using RDimFx = Fourier<RDimX>;
 using CoordFx = Coordinate<RDimFx>;
-using IDimFx = NonUniformDiscretization<RDimFx>;
-using IndexFx = DiscreteCoordinate<IDimFx>;
+using IDimFx = NonUniformPointSampling<RDimFx>;
+using IndexFx = DiscreteElement<IDimFx>;
 using IVectFx = DiscreteVector<IDimFx>;
 using IDomainFx = DiscreteDomain<IDimFx>;
 #endif

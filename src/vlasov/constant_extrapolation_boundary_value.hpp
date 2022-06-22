@@ -25,11 +25,11 @@ public:
         DSpan1D const vals(values.data(), values.size());
         int jmin;
 
-        discretization<BSplines>().eval_basis(vals, jmin, m_eval_pos);
+        discrete_space<BSplines>().eval_basis(vals, jmin, m_eval_pos);
 
         double y = 0.0;
         for (std::size_t i = 0; i < BSplines::degree() + 1; ++i) {
-            y += spline_coef(DiscreteCoordinate<BSplines>(jmin + i)) * vals(i);
+            y += spline_coef(DiscreteElement<BSplines>(jmin + i)) * vals(i);
         }
         return y;
     }

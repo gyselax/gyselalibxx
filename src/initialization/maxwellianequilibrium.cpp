@@ -50,7 +50,7 @@ void MaxwellianEquilibrium::compute_maxwellian(
     double const inv_sqrt_2piT = 1. / sqrt(2. * M_PI * temperature);
     IDomainVx const gridvx = fMaxwellian.domain();
     for (IndexVx const iv : gridvx) {
-        CoordVx const v = to_real(iv);
+        CoordVx const v = coordinate(iv);
         fMaxwellian(iv) = density * inv_sqrt_2piT
                           * exp(-(v - mean_velocity) * (v - mean_velocity) / (2. * temperature));
     }

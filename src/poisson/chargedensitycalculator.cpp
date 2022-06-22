@@ -22,7 +22,7 @@ void ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const allf
     Chunk<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
 
     IndexSp last_kin_species = allfdistribu.domain<IDimSp>().back();
-    IndexSp last_species = discretization<IDimSp>().charges().domain().back();
+    IndexSp last_species = discrete_space<IDimSp>().charges().domain().back();
     double chargedens_adiabspecies = 0.;
     if (last_kin_species != last_species) {
         chargedens_adiabspecies = double(charge(last_species));

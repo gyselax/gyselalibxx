@@ -72,9 +72,9 @@ int main(int argc, char** argv)
     IVectVx const vx_size(PCpp_int(conf_voicexx, ".Mesh.vx_size"));
 
     // Creating mesh & supports
-    init_discretization<BSplinesX>(x_min, x_max, x_size);
+    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    init_discretization<BSplinesVx>(vx_min, vx_max, vx_size);
+    init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
     SplineXBuilder const builder_x;
 
@@ -129,7 +129,7 @@ int main(int argc, char** argv)
     }
 
     // Initialization of the distribution function
-    init_discretization<IDimSp>(
+    init_discrete_space<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
@@ -143,8 +143,8 @@ int main(int argc, char** argv)
     DFieldSpXVx allfdistribu(meshSpXVx);
     SingleModePerturbInitialization const
             init(allfequilibrium,
-                 discretization<IDimSp>().perturb_modes(),
-                 discretization<IDimSp>().perturb_amplitudes());
+                 discrete_space<IDimSp>().perturb_modes(),
+                 discrete_space<IDimSp>().perturb_amplitudes());
     init(allfdistribu);
 
     // --> Algorithm info
@@ -195,13 +195,13 @@ int main(int argc, char** argv)
     IDomainX const gridx = select<IDimX>(meshSpXVx);
     FieldX<CoordX> meshX_coord(gridx);
     for (IndexX const ix : gridx) {
-        meshX_coord(ix) = to_real(ix);
+        meshX_coord(ix) = coordinate(ix);
     }
 
     IDomainVx const gridvx = select<IDimVx>(meshSpXVx);
     FieldVx<CoordVx> meshVx_coord(gridvx);
     for (IndexVx const ivx : gridvx) {
-        meshVx_coord(ivx) = to_real(ivx);
+        meshVx_coord(ivx) = coordinate(ivx);
     }
 
     // Starting the code
@@ -211,8 +211,8 @@ int main(int argc, char** argv)
     expose_to_pdi("MeshVx", meshVx_coord);
     expose_to_pdi("nbstep_diag", nbstep_diag);
     expose_to_pdi("Nkinspecies", nb_kinspecies.value());
-    expose_to_pdi("fdistribu_charges", discretization<IDimSp>().charges()[dom_kinsp]);
-    expose_to_pdi("fdistribu_masses", discretization<IDimSp>().masses()[dom_kinsp]);
+    expose_to_pdi("fdistribu_charges", discrete_space<IDimSp>().charges()[dom_kinsp]);
+    expose_to_pdi("fdistribu_masses", discrete_space<IDimSp>().masses()[dom_kinsp]);
     PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium);
 
     steady_clock::time_point const start = steady_clock::now();

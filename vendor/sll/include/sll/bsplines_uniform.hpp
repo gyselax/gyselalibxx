@@ -19,22 +19,25 @@ private:
     template <class T>
     struct InternalTagGenerator;
 
-    /// An internal tag necessary to allocate an internal discretization function.
+    /// An internal tag necessary to allocate an internal discrete_space function.
     /// It must remain internal, for example it shall not be exposed when returning coordinates. Instead use `Tag`
     using internal_tag = InternalTagGenerator<Tag>;
 
-    using mesh_type = UniformDiscretization<internal_tag>;
-
-    using domain_type = DiscreteDomain<mesh_type>;
+    using mesh_type = UniformPointSampling<internal_tag>;
 
 public:
-    using rdim_type = BSpline<Tag>;
-
     using tag_type = Tag;
 
-    using rcoord_type = Coordinate<UniformBSplines>;
+    using continuous_dimension_type = BSpline<Tag>;
 
-    using mcoord_type = DiscreteCoordinate<UniformBSplines>;
+
+    using discrete_dimension_type = UniformBSplines;
+
+    using discrete_element_type = DiscreteElement<UniformBSplines>;
+
+    using discrete_domain_type = DiscreteDomain<UniformBSplines>;
+
+    using discrete_vector_type = DiscreteVector<UniformBSplines>;
 
 public:
     static constexpr std::size_t rank()
@@ -65,12 +68,15 @@ public:
     template <class MemorySpace>
     class Impl
     {
+        template <class OMemorySpace>
+        friend class Impl;
+
     private:
         // In the periodic case, it contains twice the periodic point!!!
         DiscreteDomain<mesh_type> m_domain;
 
     public:
-        using ddim_type = UniformBSplines<Tag, D>;
+        using discrete_dimension_type = UniformBSplines;
 
         Impl() = default;
 
@@ -82,12 +88,12 @@ public:
      */
         explicit Impl(Coordinate<Tag> rmin, Coordinate<Tag> rmax, std::size_t ncells)
             : m_domain(
-                    DiscreteCoordinate<mesh_type>(0),
+                    DiscreteElement<mesh_type>(0),
                     DiscreteVector<mesh_type>(
                             ncells + 1)) // Create a mesh including the eventual periodic point
         {
             assert(ncells > 0);
-            init_discretization<mesh_type>(
+            init_discrete_space<mesh_type>(
                     Coordinate<internal_tag>(rmin.value()),
                     Coordinate<internal_tag>(rmax.value()),
                     DiscreteVector<mesh_type>(ncells + 1));
@@ -121,12 +127,12 @@ public:
 
         double rmin() const noexcept
         {
-            return to_real(m_domain.front());
+            return coordinate(m_domain.front());
         }
 
         double rmax() const noexcept
         {
-            return to_real(m_domain.back());
+            return coordinate(m_domain.back());
         }
 
         double length() const noexcept
