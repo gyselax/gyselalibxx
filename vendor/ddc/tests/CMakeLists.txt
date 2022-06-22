@@ -6,11 +6,11 @@ add_executable(ddc_tests
     aligned_allocator.cpp
     chunk.cpp
     discrete_domain.cpp
-    non_uniform_discretization.cpp
+    non_uniform_point_sampling.cpp
     single_discretization.cpp
     tagged_vector.cpp
     type_seq.cpp
-    uniform_discretization.cpp
+    uniform_point_sampling.cpp
     transform_reduce.cpp
     rectilinear_domain.cpp
     uniform_domain.cpp

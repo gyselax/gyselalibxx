@@ -19,21 +19,21 @@ struct X;
 
 //! [X-discretization]
 /// A uniform discretization of X
-using DDimX = UniformDiscretization<X>;
+using DDimX = UniformPointSampling<X>;
 //! [X-discretization]
 
 //! [Y-space]
 // Our second continuous dimension
 struct Y;
 // Its uniform discretization
-using DDimY = UniformDiscretization<Y>;
+using DDimY = UniformPointSampling<Y>;
 //! [Y-space]
 
 //! [time-space]
 // Our simulated time dimension
 struct T;
 // Its uniform discretization
-using DDimT = UniformDiscretization<T>;
+using DDimT = UniformPointSampling<T>;
 //! [time-space]
 
 
@@ -63,7 +63,7 @@ void display(double time, ChunkType temp)
     for_each(
             policies::serial_host,
             get_domain<DDimX>(temp),
-            [=](DiscreteCoordinate<DDimX> const ix) {
+            [=](DiscreteElement<DDimX> const ix) {
                 std::cout << std::setw(6) << temp_slice(ix);
             });
     std::cout << " }" << std::endl;
@@ -114,7 +114,7 @@ int main(int argc, char** argv)
     // Initialization of the global domain in X with gwx ghost points on
     // each side
     auto const [x_domain, ghosted_x_domain, x_pre_ghost, x_post_ghost]
-            = init_discretization(DDimX::init_ghosted(
+            = init_discrete_space(DDimX::init_ghosted(
                     Coordinate<X>(x_start),
                     Coordinate<X>(x_end),
                     DiscreteVector<DDimX>(nb_x_points),
@@ -140,7 +140,7 @@ int main(int argc, char** argv)
     // Initialization of the global domain in Y with gwy ghost points on
     // each side
     auto const [y_domain, ghosted_y_domain, y_pre_ghost, y_post_ghost]
-            = init_discretization(DDimY::init_ghosted(
+            = init_discrete_space(DDimY::init_ghosted(
                     Coordinate<Y>(y_start),
                     Coordinate<Y>(y_end),
                     DiscreteVector<DDimY>(nb_y_points),
@@ -163,7 +163,7 @@ int main(int argc, char** argv)
             x_domain,
             0.,
             reducer::max<double>(),
-            [](DiscreteCoordinate<DDimX> ix) {
+            [](DiscreteElement<DDimX> ix) {
                 return 1.
                        / (distance_at_left(ix) * distance_at_right(ix));
             });
@@ -172,7 +172,7 @@ int main(int argc, char** argv)
             y_domain,
             0.,
             reducer::max<double>(),
-            [](DiscreteCoordinate<DDimY> iy) {
+            [](DiscreteElement<DDimY> iy) {
                 return 1.
                        / (distance_at_left(iy) * distance_at_right(iy));
             });
@@ -186,7 +186,7 @@ int main(int argc, char** argv)
     // - the number of discrete time-points is equal to the number of
     //   steps + 1
     DiscreteDomain<DDimT> const time_domain
-            = init_discretization(DDimT::
+            = init_discrete_space(DDimT::
                                           init(Coordinate<T>(start_time),
                                                Coordinate<T>(end_time),
                                                nb_time_steps + 1));
@@ -215,9 +215,9 @@ int main(int argc, char** argv)
     for_each(
             policies::parallel_device,
             DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
-            DDC_LAMBDA(DiscreteCoordinate<DDimX, DDimY> const ixy) {
-                double const x = to_real(select<DDimX>(ixy));
-                double const y = to_real(select<DDimY>(ixy));
+            DDC_LAMBDA(DiscreteElement<DDimX, DDimY> const ixy) {
+                double const x = coordinate(select<DDimX>(ixy));
+                double const y = coordinate(select<DDimY>(ixy));
                 ghosted_initial_temp(ixy)
                         = 9.999 * ((x * x + y * y) < 0.25);
             });
@@ -233,10 +233,10 @@ int main(int argc, char** argv)
     //! [initial output]
     // display the initial data
     deepcopy(ghosted_temp, ghosted_last_temp);
-    display(to_real(time_domain.front()),
+    display(coordinate(time_domain.front()),
             ghosted_temp[x_domain][y_domain]);
     // time of the iteration where the last output happened
-    DiscreteCoordinate<DDimT> last_output = time_domain.front();
+    DiscreteElement<DDimT> last_output = time_domain.front();
     //! [initial output]
 
     //! [time iteration]
@@ -274,11 +274,9 @@ int main(int argc, char** argv)
         for_each(
                 policies::parallel_device,
                 next_temp.domain(),
-                DDC_LAMBDA(DiscreteCoordinate<DDimX, DDimY> const ixy) {
-                    DiscreteCoordinate<DDimX> const ix
-                            = select<DDimX>(ixy);
-                    DiscreteCoordinate<DDimY> const iy
-                            = select<DDimY>(ixy);
+                DDC_LAMBDA(DiscreteElement<DDimX, DDimY> const ixy) {
+                    DiscreteElement<DDimX> const ix = select<DDimX>(ixy);
+                    DiscreteElement<DDimY> const iy = select<DDimY>(ixy);
                     double const dx_l = distance_at_left(ix);
                     double const dx_r = distance_at_right(ix);
                     double const dx_m = 0.5 * (dx_l + dx_r);
@@ -305,7 +303,7 @@ int main(int argc, char** argv)
         if (iter - last_output >= t_output_period) {
             last_output = iter;
             deepcopy(ghosted_temp, ghosted_last_temp);
-            display(to_real(iter), ghosted_temp[x_domain][y_domain]);
+            display(coordinate(iter), ghosted_temp[x_domain][y_domain]);
         }
         //! [output]
 
@@ -318,7 +316,7 @@ int main(int argc, char** argv)
     //! [final output]
     if (last_output < time_domain.back()) {
         deepcopy(ghosted_temp, ghosted_last_temp);
-        display(to_real(time_domain.back()),
+        display(coordinate(time_domain.back()),
                 ghosted_temp[x_domain][y_domain]);
     }
     //! [final output]

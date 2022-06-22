@@ -10,8 +10,8 @@
 #include <experimental/mdspan>
 
 #include "ddc/chunk_common.hpp"
-#include "ddc/discrete_coordinate.hpp"
 #include "ddc/discrete_domain.hpp"
+#include "ddc/discrete_element.hpp"
 
 template <class, class, class>
 class Chunk;
@@ -64,7 +64,7 @@ public:
     using allocation_mdspan_type = std::experimental::
             mdspan<ElementType, std::experimental::dextents<sizeof...(DDims)>, LayoutStridedPolicy>;
 
-    using mcoord_type = typename mdomain_type::mcoord_type;
+    using discrete_element_type = typename mdomain_type::discrete_element_type;
 
     using extents_type = typename base_type::extents_type;
 
@@ -91,7 +91,7 @@ public:
 
 protected:
     template <class QueryDDim, class... ODDims>
-    auto get_slicer_for(DiscreteCoordinate<ODDims...> const& c) const
+    auto get_slicer_for(DiscreteElement<ODDims...> const& c) const
     {
 #if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
         DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
@@ -230,7 +230,7 @@ public:
     /** Slice out some dimensions
      */
     template <class... QueryDDims>
-    constexpr auto operator[](DiscreteCoordinate<QueryDDims...> const& slice_spec) const
+    constexpr auto operator[](DiscreteElement<QueryDDims...> const& slice_spec) const
     {
         auto subview = std::experimental::
                 submdspan(allocation_mdspan(), get_slicer_for<DDims>(slice_spec)...);
@@ -257,30 +257,30 @@ public:
                 memory_space>(subview, this->m_domain.restrict(odomain));
     }
 
-    /** Element access using a list of DiscreteCoordinate
-     * @param mcoords 1D discrete coordinates
+    /** Element access using a list of DiscreteElement
+     * @param delems 1D discrete elements
      * @return reference to this element
      */
     template <class... ODDims>
-    constexpr reference operator()(DiscreteCoordinate<ODDims> const&... mcoords) const noexcept
+    constexpr reference operator()(DiscreteElement<ODDims> const&... delems) const noexcept
     {
         static_assert(sizeof...(ODDims) == sizeof...(DDims), "Invalid number of dimensions");
-        assert(((mcoords >= front<ODDims>(this->m_domain)) && ...));
-        assert(((mcoords <= back<ODDims>(this->m_domain)) && ...));
-        return this->m_internal_mdspan(uid(take<DDims>(mcoords...))...);
+        assert(((delems >= front<ODDims>(this->m_domain)) && ...));
+        assert(((delems <= back<ODDims>(this->m_domain)) && ...));
+        return this->m_internal_mdspan(uid(take<DDims>(delems...))...);
     }
 
-    /** Element access using a multi-dimensional DiscreteCoordinate
-     * @param mcoord discrete coordinates
+    /** Element access using a multi-dimensional DiscreteElement
+     * @param delems discrete elements
      * @return reference to this element
      */
     template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    constexpr reference operator()(DiscreteCoordinate<ODDims...> const& mcoord) const noexcept
+    constexpr reference operator()(DiscreteElement<ODDims...> const& delems) const noexcept
     {
         static_assert(sizeof...(ODDims) == sizeof...(DDims), "Invalid number of dimensions");
-        assert(((select<ODDims>(mcoord) >= front<ODDims>(this->m_domain)) && ...));
-        assert(((select<ODDims>(mcoord) <= back<ODDims>(this->m_domain)) && ...));
-        return this->m_internal_mdspan(uid<DDims>(mcoord)...);
+        assert(((select<ODDims>(delems) >= front<ODDims>(this->m_domain)) && ...));
+        assert(((select<ODDims>(delems) <= back<ODDims>(this->m_domain)) && ...));
+        return this->m_internal_mdspan(uid<DDims>(delems)...);
     }
 
     /** Access to the underlying allocation pointer

@@ -3,8 +3,8 @@
 #pragma once
 
 #include "ddc/coordinate.hpp"
-#include "ddc/discrete_coordinate.hpp"
-#include "ddc/discretization.hpp"
+#include "ddc/discrete_element.hpp"
+#include "ddc/discrete_space.hpp"
 
 namespace experimental {
 
@@ -17,11 +17,18 @@ template <class CDim>
 class SingleDiscretization
 {
 public:
-    using rcoord_type = Coordinate<CDim>;
+    using continuous_dimension_type = CDim;
 
-    using mcoord_type = DiscreteCoordinate<SingleDiscretization>;
+    using continuous_element_type = Coordinate<CDim>;
 
-    using rdim_type = CDim;
+
+    using discrete_dimension_type = SingleDiscretization;
+
+    using discrete_domain_type = DiscreteDomain<SingleDiscretization>;
+
+    using discrete_element_type = DiscreteElement<SingleDiscretization>;
+
+    using discrete_vector_type = DiscreteVector<SingleDiscretization>;
 
     template <class MemorySpace>
     class Impl
@@ -31,23 +38,28 @@ public:
 
     private:
         /// origin
-        rcoord_type m_point;
+        continuous_element_type m_point;
 
     public:
-        inline constexpr Impl(rcoord_type origin) noexcept : m_point(std::move(origin)) {}
+        using discrete_dimension_type = SingleDiscretization;
+
+        inline constexpr Impl(continuous_element_type origin) noexcept : m_point(std::move(origin))
+        {
+        }
 
         Impl(Impl const& other) = delete;
 
         constexpr Impl(Impl&& other) = delete;
 
-        inline constexpr rcoord_type origin() const noexcept
+        inline constexpr continuous_element_type origin() const noexcept
         {
             return m_point;
         }
 
-        inline constexpr rcoord_type to_real([[maybe_unused]] mcoord_type icoord) const noexcept
+        inline constexpr continuous_element_type coordinate(
+                [[maybe_unused]] discrete_element_type icoord) const noexcept
         {
-            assert(icoord == mcoord_type(0));
+            assert(icoord == discrete_element_type(0));
             return m_point;
         }
     };
@@ -77,35 +89,36 @@ constexpr bool is_single_discretization_v = is_single_discretization<DDim>::valu
 
 /// @brief coordinate of the mesh
 template <class DDim>
-std::enable_if_t<is_single_discretization_v<DDim>, typename DDim::rcoord_type> origin() noexcept
+std::enable_if_t<is_single_discretization_v<DDim>, typename DDim::continuous_element_type>
+origin() noexcept
 {
 #if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
-    return discretization_device<DDim>().origin();
+    return discrete_space_device<DDim>().origin();
 #else
-    return discretization_host<DDim>().origin();
+    return discrete_space_host<DDim>().origin();
 #endif
 }
 
 template <class CDim>
-Coordinate<CDim> to_real(DiscreteCoordinate<experimental::SingleDiscretization<CDim>> const& c)
+Coordinate<CDim> coordinate(DiscreteElement<experimental::SingleDiscretization<CDim>> const& c)
 {
 #if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
-    return discretization_device<experimental::SingleDiscretization<CDim>>().to_real(c);
+    return discrete_space_device<experimental::SingleDiscretization<CDim>>().coordinate(c);
 #else
-    return discretization_host<experimental::SingleDiscretization<CDim>>().to_real(c);
+    return discrete_space_host<experimental::SingleDiscretization<CDim>>().coordinate(c);
 #endif
 }
 
 template <class CDim>
 Coordinate<CDim> rmin(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
 {
-    return to_real(d.front());
+    return coordinate(d.front());
 }
 
 template <class CDim>
 Coordinate<CDim> rmax(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
 {
-    return to_real(d.back());
+    return coordinate(d.back());
 }
 
 template <class CDim>

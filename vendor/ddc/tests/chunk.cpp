@@ -6,7 +6,7 @@
 namespace {
 
 struct DDimX;
-using ElemX = DiscreteCoordinate<DDimX>;
+using DElemX = DiscreteElement<DDimX>;
 using DVectX = DiscreteVector<DDimX>;
 using DDomX = DiscreteDomain<DDimX>;
 
@@ -17,7 +17,7 @@ using ChunkSpanX = ChunkSpan<Datatype, DDomX>;
 
 
 struct DDimY;
-using ElemY = DiscreteCoordinate<DDimY>;
+using DElemY = DiscreteElement<DDimY>;
 using DVectY = DiscreteVector<DDimY>;
 using DDomY = DiscreteDomain<DDimY>;
 
@@ -26,12 +26,12 @@ using ChunkY = Chunk<Datatype, DDomY>;
 
 
 struct DDimZ;
-using ElemZ = DiscreteCoordinate<DDimZ>;
+using DElemZ = DiscreteElement<DDimZ>;
 using DVectZ = DiscreteVector<DDimZ>;
 using DDomZ = DiscreteDomain<DDimZ>;
 
 
-using ElemXY = DiscreteCoordinate<DDimX, DDimY>;
+using DElemXY = DiscreteElement<DDimX, DDimY>;
 using DVectXY = DiscreteVector<DDimX, DDimY>;
 using DDomXY = DiscreteDomain<DDimX, DDimY>;
 
@@ -39,7 +39,7 @@ template <class Datatype>
 using ChunkXY = Chunk<Datatype, DDomXY>;
 
 
-using ElemYX = DiscreteCoordinate<DDimY, DDimX>;
+using DElemYX = DiscreteElement<DDimY, DDimX>;
 using DVectYX = DiscreteVector<DDimY, DDimX>;
 using DDomYX = DiscreteDomain<DDimY, DDimX>;
 
@@ -47,15 +47,15 @@ template <class Datatype>
 using ChunkYX = Chunk<Datatype, DDomYX>;
 
 
-static ElemX constexpr lbound_x(50);
+static DElemX constexpr lbound_x(50);
 static DVectX constexpr nelems_x(3);
-[[maybe_unused]] static ElemX constexpr sentinel_x(lbound_x + nelems_x);
+[[maybe_unused]] static DElemX constexpr sentinel_x(lbound_x + nelems_x);
 static DDomX constexpr dom_x(lbound_x, nelems_x);
 
-static ElemY constexpr lbound_y(4);
+static DElemY constexpr lbound_y(4);
 static DVectY constexpr nelems_y(12);
 
-static ElemXY constexpr lbound_x_y {lbound_x, lbound_y};
+static DElemXY constexpr lbound_x_y {lbound_x, lbound_y};
 static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
 static DDomXY constexpr dom_x_y(lbound_x_y, nelems_x_y);
 
@@ -376,7 +376,7 @@ TEST(Chunk2DTest, Cview)
 
 TEST(Chunk2DTest, SliceCoordX)
 {
-    ElemX constexpr slice_x_val = ElemX(lbound_x + 1);
+    DElemX constexpr slice_x_val = DElemX(lbound_x + 1);
 
     ChunkXY<double> chunk(dom_x_y);
     ChunkXY<double> const& chunk_cref = chunk;
@@ -399,7 +399,7 @@ TEST(Chunk2DTest, SliceCoordX)
 
 TEST(Chunk2DTest, SliceCoordY)
 {
-    ElemY constexpr slice_y_val = ElemY(lbound_y + 1);
+    DElemY constexpr slice_y_val = DElemY(lbound_y + 1);
 
     ChunkXY<double> chunk(dom_x_y);
     ChunkXY<double> const& chunk_cref = chunk;
@@ -422,7 +422,7 @@ TEST(Chunk2DTest, SliceCoordY)
 
 TEST(Chunk2DTest, SliceDomainX)
 {
-    DDomX constexpr subdomain_x = DDomX(ElemX(lbound_x + 1), DVectX(nelems_x - 2));
+    DDomX constexpr subdomain_x = DDomX(DElemX(lbound_x + 1), DVectX(nelems_x - 2));
 
     ChunkXY<double> chunk(dom_x_y);
     ChunkXY<double> const& chunk_cref = chunk;
@@ -449,7 +449,7 @@ TEST(Chunk2DTest, SliceDomainX)
 
 TEST(Chunk2DTest, SliceDomainXTooearly)
 {
-    [[maybe_unused]] DDomX constexpr subdomain_x = DDomX(ElemX(lbound_x - 1), nelems_x);
+    [[maybe_unused]] DDomX constexpr subdomain_x = DDomX(DElemX(lbound_x - 1), nelems_x);
 
     ChunkXY<double> chunk(dom_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
@@ -475,7 +475,7 @@ TEST(Chunk2DTest, SliceDomainXToolate)
 
 TEST(Chunk2DTest, SliceDomainY)
 {
-    DDomY constexpr subdomain_y = DDomY(ElemY(lbound_y + 1), DVectY(nelems_y - 2));
+    DDomY constexpr subdomain_y = DDomY(DElemY(lbound_y + 1), DVectY(nelems_y - 2));
 
     ChunkXY<double> chunk(dom_x_y);
     ChunkXY<double> const& chunk_cref = chunk;
