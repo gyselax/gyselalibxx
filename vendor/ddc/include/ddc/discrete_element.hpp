@@ -12,76 +12,74 @@
 
 
 template <class...>
-class DiscreteCoordinate;
+class DiscreteElement;
 
 template <class T>
-struct IsDiscreteCoordinate : std::false_type
+struct IsDiscreteElement : std::false_type
 {
 };
 
 template <class... Tags>
-struct IsDiscreteCoordinate<DiscreteCoordinate<Tags...>> : std::true_type
+struct IsDiscreteElement<DiscreteElement<Tags...>> : std::true_type
 {
 };
 
 template <class T>
-inline constexpr bool is_discrete_coordinate_v = IsDiscreteCoordinate<T>::value;
+inline constexpr bool is_discrete_element_v = IsDiscreteElement<T>::value;
 
 
 /** A DiscreteCoordElement is a scalar that identifies an element of the discrete dimension
  */
-using DiscreteCoordinateElement = std::size_t;
+using DiscreteElementType = std::size_t;
 
 template <class Tag>
-inline constexpr DiscreteCoordinateElement const& uid(DiscreteCoordinate<Tag> const& tuple) noexcept
+inline constexpr DiscreteElementType const& uid(DiscreteElement<Tag> const& tuple) noexcept
 {
     return tuple.uid();
 }
 
 template <class Tag>
-inline constexpr DiscreteCoordinateElement& uid(DiscreteCoordinate<Tag>& tuple) noexcept
+inline constexpr DiscreteElementType& uid(DiscreteElement<Tag>& tuple) noexcept
 {
     return tuple.uid();
 }
 
 template <class QueryTag, class... Tags>
-inline constexpr DiscreteCoordinateElement const& uid(
-        DiscreteCoordinate<Tags...> const& tuple) noexcept
+inline constexpr DiscreteElementType const& uid(DiscreteElement<Tags...> const& tuple) noexcept
 {
     return tuple.template uid<QueryTag>();
 }
 
 template <class QueryTag, class... Tags>
-inline constexpr DiscreteCoordinateElement& uid(DiscreteCoordinate<Tags...>& tuple) noexcept
+inline constexpr DiscreteElementType& uid(DiscreteElement<Tags...>& tuple) noexcept
 {
     return tuple.template uid<QueryTag>();
 }
 
 template <class QueryTag, class... Tags>
-inline constexpr DiscreteCoordinateElement const& uid_or(
-        DiscreteCoordinate<Tags...> const& tuple,
-        DiscreteCoordinateElement const& default_value) noexcept
+inline constexpr DiscreteElementType const& uid_or(
+        DiscreteElement<Tags...> const& tuple,
+        DiscreteElementType const& default_value) noexcept
 {
     return tuple.template uid_or<QueryTag>(default_value);
 }
 
 template <class... QueryTags, class... Tags>
-inline constexpr DiscreteCoordinate<QueryTags...> select(
-        DiscreteCoordinate<Tags...> const& arr) noexcept
+inline constexpr DiscreteElement<QueryTags...> select(DiscreteElement<Tags...> const& arr) noexcept
 {
-    return DiscreteCoordinate<QueryTags...>(arr);
+    return DiscreteElement<QueryTags...>(arr);
 }
 
 template <class... QueryTags, class... Tags>
-inline constexpr DiscreteCoordinate<QueryTags...> select(DiscreteCoordinate<Tags...>&& arr) noexcept
+inline constexpr DiscreteElement<QueryTags...> select(DiscreteElement<Tags...>&& arr) noexcept
 {
-    return DiscreteCoordinate<QueryTags...>(std::move(arr));
+    return DiscreteElement<QueryTags...>(std::move(arr));
 }
 
 template <class QueryTag, class HeadTag, class... TailTags>
-constexpr DiscreteCoordinate<QueryTag> const& take(
-        DiscreteCoordinate<HeadTag> const& head,
-        DiscreteCoordinate<TailTags> const&... tags)
+constexpr DiscreteElement<QueryTag> const& take(
+        DiscreteElement<HeadTag> const& head,
+        DiscreteElement<TailTags> const&... tags)
 {
     static_assert(
             !type_seq_contains_v<detail::TypeSeq<HeadTag>, detail::TypeSeq<TailTags...>>,
@@ -98,42 +96,42 @@ namespace detail {
 
 /// Returns a reference to the underlying `std::array`
 template <class... Tags>
-constexpr inline std::array<DiscreteCoordinateElement, sizeof...(Tags)>& array(
-        DiscreteCoordinate<Tags...>& v) noexcept
+constexpr inline std::array<DiscreteElementType, sizeof...(Tags)>& array(
+        DiscreteElement<Tags...>& v) noexcept
 {
     return v.m_values;
 }
 
 /// Returns a reference to the underlying `std::array`
 template <class... Tags>
-constexpr inline std::array<DiscreteCoordinateElement, sizeof...(Tags)> const& array(
-        DiscreteCoordinate<Tags...> const& v) noexcept
+constexpr inline std::array<DiscreteElementType, sizeof...(Tags)> const& array(
+        DiscreteElement<Tags...> const& v) noexcept
 {
     return v.m_values;
 }
 
 } // namespace detail
 
-/** A DiscreteCoordinate identifies an element of the discrete dimension
+/** A DiscreteElement identifies an element of the discrete dimension
  *
  * Each one is tagged by its associated dimensions.
  */
 template <class... Tags>
-class DiscreteCoordinate
+class DiscreteElement
 {
     using tags_seq = detail::TypeSeq<Tags...>;
 
-    friend constexpr std::array<DiscreteCoordinateElement, sizeof...(Tags)>& detail::array<Tags...>(
-            DiscreteCoordinate<Tags...>& v) noexcept;
+    friend constexpr std::array<DiscreteElementType, sizeof...(Tags)>& detail::array<Tags...>(
+            DiscreteElement<Tags...>& v) noexcept;
 
-    friend constexpr std::array<DiscreteCoordinateElement, sizeof...(Tags)> const& detail::array<
-            Tags...>(DiscreteCoordinate<Tags...> const& v) noexcept;
+    friend constexpr std::array<DiscreteElementType, sizeof...(Tags)> const& detail::array<Tags...>(
+            DiscreteElement<Tags...> const& v) noexcept;
 
 private:
-    std::array<DiscreteCoordinateElement, sizeof...(Tags)> m_values;
+    std::array<DiscreteElementType, sizeof...(Tags)> m_values;
 
 public:
-    using value_type = DiscreteCoordinateElement;
+    using value_type = DiscreteElementType;
 
     static constexpr std::size_t size() noexcept
     {
@@ -141,20 +139,20 @@ public:
     }
 
 public:
-    inline constexpr DiscreteCoordinate() = default;
+    inline constexpr DiscreteElement() = default;
 
-    inline constexpr DiscreteCoordinate(DiscreteCoordinate const&) = default;
+    inline constexpr DiscreteElement(DiscreteElement const&) = default;
 
-    inline constexpr DiscreteCoordinate(DiscreteCoordinate&&) = default;
+    inline constexpr DiscreteElement(DiscreteElement&&) = default;
 
     template <class... OTags>
-    explicit inline constexpr DiscreteCoordinate(DiscreteCoordinate<OTags> const&... other) noexcept
+    explicit inline constexpr DiscreteElement(DiscreteElement<OTags> const&... other) noexcept
         : m_values {take<Tags>(other...).uid()...}
     {
     }
 
     template <class... OTags>
-    explicit inline constexpr DiscreteCoordinate(DiscreteCoordinate<OTags...> const& other) noexcept
+    explicit inline constexpr DiscreteElement(DiscreteElement<OTags...> const& other) noexcept
         : m_values {other.template uid<Tags>()...}
     {
     }
@@ -162,27 +160,26 @@ public:
     template <
             class... Params,
             class = std::enable_if_t<(std::is_integral_v<Params> && ...)>,
-            class = std::enable_if_t<(!is_discrete_coordinate_v<Params> && ...)>,
+            class = std::enable_if_t<(!is_discrete_element_v<Params> && ...)>,
             class = std::enable_if_t<sizeof...(Params) == sizeof...(Tags)>>
-    explicit inline constexpr DiscreteCoordinate(Params const&... params) noexcept
+    explicit inline constexpr DiscreteElement(Params const&... params) noexcept
         : m_values {static_cast<value_type>(params)...}
     {
     }
 
-    constexpr inline DiscreteCoordinate& operator=(DiscreteCoordinate const& other) = default;
+    constexpr inline DiscreteElement& operator=(DiscreteElement const& other) = default;
 
-    constexpr inline DiscreteCoordinate& operator=(DiscreteCoordinate&& other) = default;
+    constexpr inline DiscreteElement& operator=(DiscreteElement&& other) = default;
 
     template <class... OTags>
-    constexpr inline DiscreteCoordinate& operator=(
-            DiscreteCoordinate<OTags...> const& other) noexcept
+    constexpr inline DiscreteElement& operator=(DiscreteElement<OTags...> const& other) noexcept
     {
         m_values = other.m_values;
         return *this;
     }
 
     template <class... OTags>
-    constexpr inline DiscreteCoordinate& operator=(DiscreteCoordinate<OTags...>&& other) noexcept
+    constexpr inline DiscreteElement& operator=(DiscreteElement<OTags...>&& other) noexcept
     {
         m_values = std::move(other.m_values);
         return *this;
@@ -202,9 +199,7 @@ public:
     inline constexpr value_type& uid() noexcept
     {
         using namespace detail;
-        static_assert(
-                in_tags_v<QueryTag, tags_seq>,
-                "requested Tag absent from DiscreteCoordinate");
+        static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from DiscreteElement");
         return m_values[type_seq_rank_v<QueryTag, tags_seq>];
     }
 
@@ -212,9 +207,7 @@ public:
     inline constexpr value_type const& uid() const noexcept
     {
         using namespace detail;
-        static_assert(
-                in_tags_v<QueryTag, tags_seq>,
-                "requested Tag absent from DiscreteCoordinate");
+        static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from DiscreteElement");
         return m_values[type_seq_rank_v<QueryTag, tags_seq>];
     }
 
@@ -231,37 +224,37 @@ public:
     }
 
     template <std::size_t N = sizeof...(Tags), class = std::enable_if_t<N == 1>>
-    constexpr inline DiscreteCoordinate& operator++()
+    constexpr inline DiscreteElement& operator++()
     {
         ++m_values[0];
         return *this;
     }
 
     template <std::size_t N = sizeof...(Tags), class = std::enable_if_t<N == 1>>
-    constexpr inline DiscreteCoordinate operator++(int)
+    constexpr inline DiscreteElement operator++(int)
     {
-        DiscreteCoordinate const tmp = *this;
+        DiscreteElement const tmp = *this;
         ++m_values[0];
         return tmp;
     }
 
     template <std::size_t N = sizeof...(Tags), class = std::enable_if_t<N == 1>>
-    constexpr inline DiscreteCoordinate& operator--()
+    constexpr inline DiscreteElement& operator--()
     {
         ++m_values[0];
         return *this;
     }
 
     template <std::size_t N = sizeof...(Tags), class = std::enable_if_t<N == 1>>
-    constexpr inline DiscreteCoordinate operator--(int)
+    constexpr inline DiscreteElement operator--(int)
     {
-        DiscreteCoordinate const tmp = *this;
+        DiscreteElement const tmp = *this;
         ++m_values[0];
         return tmp;
     }
 
     template <class... OTags>
-    constexpr inline DiscreteCoordinate& operator+=(DiscreteVector<OTags...> const& rhs)
+    constexpr inline DiscreteElement& operator+=(DiscreteVector<OTags...> const& rhs)
     {
         static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] += rhs.template get<Tags>()), ...);
@@ -273,14 +266,14 @@ public:
             std::size_t N = sizeof...(Tags),
             class = std::enable_if_t<N == 1>,
             class = std::enable_if_t<std::is_integral_v<IntegralType>>>
-    constexpr inline DiscreteCoordinate& operator+=(IntegralType const& rhs)
+    constexpr inline DiscreteElement& operator+=(IntegralType const& rhs)
     {
         m_values[0] += rhs;
         return *this;
     }
 
     template <class... OTags>
-    constexpr inline DiscreteCoordinate& operator-=(DiscreteVector<OTags...> const& rhs)
+    constexpr inline DiscreteElement& operator-=(DiscreteVector<OTags...> const& rhs)
     {
         static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] -= rhs.template get<Tags>()), ...);
@@ -292,21 +285,21 @@ public:
             std::size_t N = sizeof...(Tags),
             class = std::enable_if_t<N == 1>,
             class = std::enable_if_t<std::is_integral_v<IntegralType>>>
-    constexpr inline DiscreteCoordinate& operator-=(IntegralType const& rhs)
+    constexpr inline DiscreteElement& operator-=(IntegralType const& rhs)
     {
         m_values[0] -= rhs;
         return *this;
     }
 };
 
-inline std::ostream& operator<<(std::ostream& out, DiscreteCoordinate<> const&)
+inline std::ostream& operator<<(std::ostream& out, DiscreteElement<> const&)
 {
     out << "()";
     return out;
 }
 
 template <class Head, class... Tags>
-std::ostream& operator<<(std::ostream& out, DiscreteCoordinate<Head, Tags...> const& arr)
+std::ostream& operator<<(std::ostream& out, DiscreteElement<Head, Tags...> const& arr)
 {
     out << "(";
     out << uid<Head>(arr);
@@ -318,48 +311,40 @@ std::ostream& operator<<(std::ostream& out, DiscreteCoordinate<Head, Tags...> co
 
 template <class... Tags, class... OTags>
 constexpr inline bool operator==(
-        DiscreteCoordinate<Tags...> const& lhs,
-        DiscreteCoordinate<OTags...> const& rhs) noexcept
+        DiscreteElement<Tags...> const& lhs,
+        DiscreteElement<OTags...> const& rhs) noexcept
 {
     return ((lhs.template uid<Tags>() == rhs.template uid<Tags>()) && ...);
 }
 
 template <class... Tags, class... OTags>
 constexpr inline bool operator!=(
-        DiscreteCoordinate<Tags...> const& lhs,
-        DiscreteCoordinate<OTags...> const& rhs) noexcept
+        DiscreteElement<Tags...> const& lhs,
+        DiscreteElement<OTags...> const& rhs) noexcept
 {
     return !(lhs == rhs);
 }
 
 template <class Tag>
-constexpr inline bool operator<(
-        DiscreteCoordinate<Tag> const& lhs,
-        DiscreteCoordinate<Tag> const& rhs)
+constexpr inline bool operator<(DiscreteElement<Tag> const& lhs, DiscreteElement<Tag> const& rhs)
 {
     return lhs.uid() < rhs.uid();
 }
 
 template <class Tag>
-constexpr inline bool operator<=(
-        DiscreteCoordinate<Tag> const& lhs,
-        DiscreteCoordinate<Tag> const& rhs)
+constexpr inline bool operator<=(DiscreteElement<Tag> const& lhs, DiscreteElement<Tag> const& rhs)
 {
     return lhs.uid() <= rhs.uid();
 }
 
 template <class Tag>
-constexpr inline bool operator>(
-        DiscreteCoordinate<Tag> const& lhs,
-        DiscreteCoordinate<Tag> const& rhs)
+constexpr inline bool operator>(DiscreteElement<Tag> const& lhs, DiscreteElement<Tag> const& rhs)
 {
     return lhs.uid() > rhs.uid();
 }
 
 template <class Tag>
-constexpr inline bool operator>=(
-        DiscreteCoordinate<Tag> const& lhs,
-        DiscreteCoordinate<Tag> const& rhs)
+constexpr inline bool operator>=(DiscreteElement<Tag> const& lhs, DiscreteElement<Tag> const& rhs)
 {
     return lhs.uid() >= rhs.uid();
 }
@@ -367,12 +352,12 @@ constexpr inline bool operator>=(
 /// right external binary operators: +, -
 
 template <class... Tags, class... OTags>
-constexpr inline DiscreteCoordinate<Tags...> operator+(
-        DiscreteCoordinate<Tags...> const& lhs,
+constexpr inline DiscreteElement<Tags...> operator+(
+        DiscreteElement<Tags...> const& lhs,
         DiscreteVector<OTags...> const& rhs)
 {
     static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    return DiscreteCoordinate<Tags...>((uid<Tags>(lhs) + get<Tags>(rhs))...);
+    return DiscreteElement<Tags...>((uid<Tags>(lhs) + get<Tags>(rhs))...);
 }
 
 template <
@@ -380,20 +365,20 @@ template <
         class IntegralType,
         class = std::enable_if_t<std::is_integral_v<IntegralType>>,
         class = std::enable_if_t<!is_discrete_vector_v<IntegralType>>>
-constexpr inline DiscreteCoordinate<Tag> operator+(
-        DiscreteCoordinate<Tag> const& lhs,
+constexpr inline DiscreteElement<Tag> operator+(
+        DiscreteElement<Tag> const& lhs,
         IntegralType const& rhs)
 {
-    return DiscreteCoordinate<Tag>(uid<Tag>(lhs) + rhs);
+    return DiscreteElement<Tag>(uid<Tag>(lhs) + rhs);
 }
 
 template <class... Tags, class... OTags>
-constexpr inline DiscreteCoordinate<Tags...> operator-(
-        DiscreteCoordinate<Tags...> const& lhs,
+constexpr inline DiscreteElement<Tags...> operator-(
+        DiscreteElement<Tags...> const& lhs,
         DiscreteVector<OTags...> const& rhs)
 {
     static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    return DiscreteCoordinate<Tags...>((uid<Tags>(lhs) - get<Tags>(rhs))...);
+    return DiscreteElement<Tags...>((uid<Tags>(lhs) - get<Tags>(rhs))...);
 }
 
 template <
@@ -401,19 +386,19 @@ template <
         class IntegralType,
         class = std::enable_if_t<std::is_integral_v<IntegralType>>,
         class = std::enable_if_t<!is_discrete_vector_v<IntegralType>>>
-constexpr inline DiscreteCoordinate<Tag> operator-(
-        DiscreteCoordinate<Tag> const& lhs,
+constexpr inline DiscreteElement<Tag> operator-(
+        DiscreteElement<Tag> const& lhs,
         IntegralType const& rhs)
 {
-    return DiscreteCoordinate<Tag>(uid<Tag>(lhs) - rhs);
+    return DiscreteElement<Tag>(uid<Tag>(lhs) - rhs);
 }
 
 /// binary operator: -
 
 template <class... Tags, class... OTags>
 constexpr inline DiscreteVector<Tags...> operator-(
-        DiscreteCoordinate<Tags...> const& lhs,
-        DiscreteCoordinate<OTags...> const& rhs)
+        DiscreteElement<Tags...> const& lhs,
+        DiscreteElement<OTags...> const& rhs)
 {
     static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     return DiscreteVector<Tags...>((uid<Tags>(lhs) - uid<Tags>(rhs))...);

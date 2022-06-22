@@ -18,7 +18,7 @@ using CoordX = Coordinate<DimX>;
 
 using DDimX = SingleDiscretization<DimX>;
 
-using ElemX = DiscreteCoordinate<DDimX>;
+using DElemX = DiscreteElement<DDimX>;
 
 } // namespace
 
@@ -33,5 +33,5 @@ TEST(SingleDiscretization, Constructor)
 
     SingleDiscretization<DimX>::Impl<Kokkos::HostSpace> ddim_x(x);
 
-    EXPECT_EQ(ddim_x.to_real(ElemX(0)), x);
+    EXPECT_EQ(ddim_x.coordinate(DElemX(0)), x);
 }
