@@ -72,29 +72,23 @@ kokkos_layout_t<typename MP::layout_type> build_kokkos_layout(
         MP const& mapping,
         std::index_sequence<Is...>)
 {
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
-    return [&]() {
-#endif
-        using kokkos_layout_type = kokkos_layout_t<typename MP::layout_type>;
-        if constexpr (std::is_same_v<kokkos_layout_type, Kokkos::LayoutStride>) {
-            std::array<std::size_t, sizeof...(Is) * 2> storage;
-            std::experimental::mdspan<
-                    std::size_t,
-                    std::experimental::extents<sizeof...(Is), sizeof...(Is)>,
-                    std::experimental::layout_right>
-                    interleaved_extents_strides(storage.data());
-            ((interleaved_extents_strides(Is, 0) = ep.extent(Is),
-              interleaved_extents_strides(Is, 1) = mapping.stride(Is)),
-             ...);
-            return make_layout_stride(storage, std::make_index_sequence<sizeof...(Is) * 2> {});
-        } else {
-            return kokkos_layout_type(ep.extent(Is)...);
-        }
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    }();
-    DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
-#endif
+    DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
+    using kokkos_layout_type = kokkos_layout_t<typename MP::layout_type>;
+    if constexpr (std::is_same_v<kokkos_layout_type, Kokkos::LayoutStride>) {
+        std::array<std::size_t, sizeof...(Is) * 2> storage;
+        std::experimental::mdspan<
+                std::size_t,
+                std::experimental::extents<sizeof...(Is), sizeof...(Is)>,
+                std::experimental::layout_right>
+                interleaved_extents_strides(storage.data());
+        ((interleaved_extents_strides(Is, 0) = ep.extent(Is),
+          interleaved_extents_strides(Is, 1) = mapping.stride(Is)),
+         ...);
+        return make_layout_stride(storage, std::make_index_sequence<sizeof...(Is) * 2> {});
+    } else {
+        return kokkos_layout_type(ep.extent(Is)...);
+    }
+    DDC_IF_NVCC_THEN_POP
 }
 
 /// Recursively add a pointer
@@ -139,29 +133,20 @@ constexpr inline std::size_t kokkos_to_mdspan_element_type_rank
 template <class DataType, class... Properties, std::size_t... Is>
 auto build_mdspan(Kokkos::View<DataType, Properties...> const view, std::index_sequence<Is...>)
 {
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
-    return [&]() {
-#endif
-        using element_type = kokkos_to_mdspan_element_type_t<DataType>;
-        using extents_type
-                = std::experimental::dextents<Kokkos::View<DataType, Properties...>::rank>;
-        using layout_type
-                = mdspan_layout_t<typename Kokkos::View<DataType, Properties...>::array_layout>;
-        using mapping_type = typename layout_type::template mapping<extents_type>;
-        extents_type exts(view.extent(Is)...);
-        if constexpr (std::is_same_v<layout_type, std::experimental::layout_stride>) {
-            return std::experimental::mdspan(view.data(), mapping_type(exts, {view.stride(Is)...}));
-        } else {
-            return std::experimental::mdspan<
-                    element_type,
-                    extents_type,
-                    layout_type>(view.data(), mapping_type(exts));
-        }
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    }();
-    DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
-#endif
+    DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
+    using element_type = kokkos_to_mdspan_element_type_t<DataType>;
+    using extents_type = std::experimental::dextents<Kokkos::View<DataType, Properties...>::rank>;
+    using layout_type
+            = mdspan_layout_t<typename Kokkos::View<DataType, Properties...>::array_layout>;
+    using mapping_type = typename layout_type::template mapping<extents_type>;
+    extents_type exts(view.extent(Is)...);
+    if constexpr (std::is_same_v<layout_type, std::experimental::layout_stride>) {
+        return std::experimental::mdspan(view.data(), mapping_type(exts, {view.stride(Is)...}));
+    } else {
+        return std::experimental::
+                mdspan<element_type, extents_type, layout_type>(view.data(), mapping_type(exts));
+    }
+    DDC_IF_NVCC_THEN_POP
 }
 
 } // namespace detail

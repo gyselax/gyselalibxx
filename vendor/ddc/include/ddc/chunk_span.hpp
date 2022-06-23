@@ -93,39 +93,27 @@ protected:
     template <class QueryDDim, class... ODDims>
     auto get_slicer_for(DiscreteElement<ODDims...> const& c) const
     {
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-        DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
-        return [&]() {
-#endif
-            if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
-                return (uid<QueryDDim>(c) - front<QueryDDim>(this->m_domain).uid());
-            } else {
-                return std::experimental::full_extent;
-            }
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-        }();
-        DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
-#endif
+        DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
+        if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
+            return (uid<QueryDDim>(c) - front<QueryDDim>(this->m_domain).uid());
+        } else {
+            return std::experimental::full_extent;
+        }
+        DDC_IF_NVCC_THEN_POP
     }
 
     template <class QueryDDim, class... ODDims>
     auto get_slicer_for(DiscreteDomain<ODDims...> const& c) const
     {
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-        DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
-        return [&]() {
-#endif
-            if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
-                return std::pair<std::size_t, std::size_t>(
-                        front<QueryDDim>(c) - front<QueryDDim>(this->m_domain),
-                        back<QueryDDim>(c) + 1 - front<QueryDDim>(this->m_domain));
-            } else {
-                return std::experimental::full_extent;
-            }
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-        }();
-        DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
-#endif
+        DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
+        if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
+            return std::pair<std::size_t, std::size_t>(
+                    front<QueryDDim>(c) - front<QueryDDim>(this->m_domain),
+                    back<QueryDDim>(c) + 1 - front<QueryDDim>(this->m_domain));
+        } else {
+            return std::experimental::full_extent;
+        }
+        DDC_IF_NVCC_THEN_POP
     }
 
 public:

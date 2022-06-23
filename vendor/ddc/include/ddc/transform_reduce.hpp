@@ -101,6 +101,7 @@ inline T transform_reduce_serial(
         UnaryTransformOp const& transform,
         DCoords const&... dcoords) noexcept
 {
+    DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
     if constexpr (sizeof...(DCoords) == sizeof...(DDims)) {
         return transform(DiscreteElement<DDims...>(dcoords...));
     } else {
@@ -113,6 +114,7 @@ inline T transform_reduce_serial(
         }
         return result;
     }
+    DDC_IF_NVCC_THEN_POP
 }
 
 template <class Reducer, class Functor, class... DDims>
@@ -229,17 +231,11 @@ inline T transform_reduce(
         BinaryReductionOp&& reduce,
         UnaryTransformOp&& transform) noexcept
 {
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
-#endif
     return detail::transform_reduce_serial(
             domain,
             neutral,
             std::forward<BinaryReductionOp>(reduce),
             std::forward<UnaryTransformOp>(transform));
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
-#endif
 }
 
 /** A reduction over a nD domain using the Kokkos execution policy
@@ -259,17 +255,11 @@ inline T transform_reduce(
         BinaryReductionOp&& reduce,
         UnaryTransformOp&& transform) noexcept
 {
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
-#endif
     return detail::transform_reduce_kokkos<Kokkos::DefaultHostExecutionSpace>(
             domain,
             neutral,
             std::forward<BinaryReductionOp>(reduce),
             std::forward<UnaryTransformOp>(transform));
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
-#endif
 }
 
 /** A reduction over a nD domain using the Kokkos execution policy
@@ -289,17 +279,11 @@ inline T transform_reduce(
         BinaryReductionOp&& reduce,
         UnaryTransformOp&& transform) noexcept
 {
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
-#endif
     return detail::transform_reduce_kokkos<Kokkos::DefaultExecutionSpace>(
             domain,
             neutral,
             std::forward<BinaryReductionOp>(reduce),
             std::forward<UnaryTransformOp>(transform));
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
-#endif
 }
 
 /** A reduction over a nD domain using the default execution policy
