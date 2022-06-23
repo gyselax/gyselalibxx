@@ -311,6 +311,7 @@ protected:
      */
     constexpr allocation_mdspan_type allocation_mdspan() const
     {
+        DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
         extents_type extents_s(::extents<DDims>(m_domain).value()...);
         if constexpr (std::is_same_v<LayoutStridedPolicy, std::experimental::layout_stride>) {
             mapping_type map(extents_s, m_internal_mdspan.mapping().strides());
@@ -319,8 +320,6 @@ protected:
             mapping_type map(extents_s);
             return allocation_mdspan_type(data(), map);
         }
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-        return allocation_mdspan_type();
-#endif
+        DDC_IF_NVCC_THEN_POP
     }
 };

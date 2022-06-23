@@ -145,6 +145,7 @@ constexpr DiscreteVector<QueryTag> const& take(
         DiscreteVector<HeadTag> const& head,
         DiscreteVector<TailTags> const&... tags)
 {
+    DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
     static_assert(
             !type_seq_contains_v<detail::TypeSeq<HeadTag>, detail::TypeSeq<TailTags...>>,
             "ERROR: tag redundant");
@@ -154,6 +155,7 @@ constexpr DiscreteVector<QueryTag> const& take(
         static_assert(sizeof...(TailTags) > 0, "ERROR: tag not found");
         return take<QueryTag>(tags...);
     }
+    DDC_IF_NVCC_THEN_POP
 }
 
 template <class T>
@@ -299,11 +301,13 @@ public:
     template <class QueryTag>
     DiscreteVectorElement const& get_or(DiscreteVectorElement const& default_value) const&
     {
+        DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
         if constexpr (in_tags_v<QueryTag, tags_seq>) {
             return m_values[type_seq_rank_v<QueryTag, tags_seq>];
         } else {
             return default_value;
         }
+        DDC_IF_NVCC_THEN_POP
     }
 
     template <std::size_t N = sizeof...(Tags)>
