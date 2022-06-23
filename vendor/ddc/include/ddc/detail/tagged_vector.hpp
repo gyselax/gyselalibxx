@@ -184,6 +184,7 @@ constexpr detail::TaggedVector<ElementType, QueryTag> const& take_impl(
         detail::TaggedVector<ElementType, HeadTag> const& head,
         detail::TaggedVector<ElementType, TailTags> const&... tags)
 {
+    DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
     static_assert(
             !type_seq_contains_v<detail::TypeSeq<HeadTag>, detail::TypeSeq<TailTags...>>,
             "ERROR: tag redundant");
@@ -193,20 +194,14 @@ constexpr detail::TaggedVector<ElementType, QueryTag> const& take_impl(
         static_assert(sizeof...(TailTags) > 0, "ERROR: tag not found");
         return take_impl<QueryTag>(tags...);
     }
+    DDC_IF_NVCC_THEN_POP
 }
 
 template <class QueryTag, class ElementType, class... Tags>
 constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
         detail::TaggedVector<ElementType, Tags> const&... tags)
 {
-    return
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-            DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
-#endif
-                    take_impl<QueryTag>(tags...);
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-    DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
-#endif
+    return take_impl<QueryTag>(tags...);
 }
 
 
@@ -351,19 +346,13 @@ public:
     template <class QueryTag>
     ElementType const& get_or(ElementType const& default_value) const&
     {
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-        DDC_NV_DIAG_SUPPRESS(implicit_return_from_non_void_function)
-        return [&]() -> ElementType const& {
-#endif
-            if constexpr (in_tags_v<QueryTag, tags_seq>) {
-                return m_values[type_seq_rank_v<QueryTag, tags_seq>];
-            } else {
-                return default_value;
-            }
-#if defined(DDC_INTERNAL_FIX_NVCC_IF_CONSTEXPR)
-        }();
-        DDC_NV_DIAG_DEFAULT(implicit_return_from_non_void_function)
-#endif
+        DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
+        if constexpr (in_tags_v<QueryTag, tags_seq>) {
+            return m_values[type_seq_rank_v<QueryTag, tags_seq>];
+        } else {
+            return default_value;
+        }
+        DDC_IF_NVCC_THEN_POP
     }
 
     template <std::size_t N = sizeof...(Tags)>
