@@ -178,6 +178,8 @@ int main(int argc, char** argv)
 
     FftwFourierTransform<RDimX> const fft;
 
+    init_discrete_space<IDimFx>(fft.compute_fourier_domain(select<IDimX>(meshSpXVx)));
+
     FftwInverseFourierTransform<RDimX> const ifft;
 
     FftPoissonSolver const
