@@ -48,8 +48,7 @@ void FftPoissonSolver::operator()(
     compute_rho(rho, allfdistribu);
 
     // Build a mesh in the fourier space, for N points
-    IDimFx::Impl<Kokkos::HostSpace> const mesh_fx = m_fft.compute_fourier_domain(x_dom);
-    IDomainFx const dom_fx(DiscreteVector<IDimFx>(mesh_fx.size()));
+    IDomainFx const dom_fx(IndexFx(0), IVectFx(discrete_space<IDimFx>().size()));
 
     // Compute FFT(rho)
     Chunk<std::complex<double>, IDomainFx> complex_Phi_fx(dom_fx);
@@ -59,7 +58,7 @@ void FftPoissonSolver::operator()(
     //   in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))
     complex_Phi_fx(dom_fx.front()) = 0.;
     for_each(dom_fx.remove_first(IVectFx(1)), [&](IndexFx const ifreq) {
-        double const kx = 2. * M_PI * mesh_fx.coordinate(ifreq);
+        double const kx = 2. * M_PI * coordinate(ifreq);
         complex_Phi_fx(ifreq) /= kx * kx;
     });
 
