@@ -94,4 +94,6 @@ public_mirror:
   tags: [ outssh ]
   needs: []
   image: ghcr.io/gyselax/voicexx_env
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
   script: ./bin/public_mirror
