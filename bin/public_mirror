@@ -41,7 +41,9 @@ do
     commit_sha1="$(git -C "${SRC_DIR}/${path_val}" rev-parse --verify HEAD)"
     rm -r "$path_val"
     git submodule add "$url" "$path_val"
-    git submodule update --init -- "${path_val}"
+    git submodule init -- "${path_val}"
+    git submodule update --init --recursive -- "${path_val}"
+    git submodule sync --recursive -- "${path_val}"
     git -C "${path_val}" checkout "${commit_sha1}"
     git add -A "${path_val}"
 done
