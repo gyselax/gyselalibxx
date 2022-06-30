@@ -13,6 +13,8 @@ SSH_DIR="$PWD"
 cp "${GITHUB_MIRROR_PRIVKEY}" "${SSH_DIR}/id_rsa"
 chmod -R go-rwx "${SSH_DIR}"
 
+git config --global --add safe.directory "${SRC_DIR}"
+
 cd "$(mktemp --tmpdir -d)"
 WK_DIR="$PWD"
 
