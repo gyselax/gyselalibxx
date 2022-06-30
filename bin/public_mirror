@@ -38,7 +38,8 @@ git config -f .gitmodules --get-regexp '^submodule\..*\.path$' | while read path
 do
     url_key="$(echo $path_key | sed 's/\.path/.url/')"
     url="$(git config -f .gitmodules --get "$url_key")"
-    commit_sha1="$(git -C "${SRC_DIR}/${path_val}" rev-parse --verify HEAD)"
+    git config --global --add safe.directory "${SRC_DIR}/${path_val}"
+    commit_sha1="$(git -C "${SRC_DIR}" submodule status -- "${path_val}" | awk "{print $1}")"
     rm -r "$path_val"
     git submodule add "$url" "$path_val"
     git submodule init -- "${path_val}"
