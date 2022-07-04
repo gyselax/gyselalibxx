@@ -89,7 +89,7 @@ void init_discrete_space_devices()
             sizeof(IDimImplDevice),
             hipMemcpyHostToDevice);
     hipMemcpyToSymbol(
-            discrete_space_device<IDimImplDevice>,
+            g_discrete_space_device<IDimImplDevice>,
             &ptr_device,
             sizeof(IDimImplDevice*),
             0,
