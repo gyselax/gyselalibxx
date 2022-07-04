@@ -345,23 +345,3 @@ struct is_uniform_domain<DiscreteDomain<DDims...>>
 
 template <class T>
 constexpr bool is_uniform_domain_v = is_uniform_domain<T>::value;
-
-
-// /** Construct a uniform `DiscreteDomain` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a
-//  *  number of points `n`.
-//  *
-//  * @param a the coordinate of a first real point (will have mesh coordinate 0)
-//  * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
-//  * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
-//  */
-// template <class D, class = std::enable_if_t<is_uniform_sampling_v<D>>>
-// constexpr DiscreteDomain<D> init_global_domain(
-//         typename D::continuous_element_type a,
-//         typename D::continuous_element_type b,
-//         typename D::discrete_vector_type n)
-// {
-//     assert(a < b);
-//     assert(n > 1);
-//     init_discretization<D>(a, typename D::continuous_element_type {(b - a) / (n - 1)});
-//     return DiscreteDomain<D>(n);
-// }
