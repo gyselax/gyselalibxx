@@ -4,7 +4,7 @@ on:
     branches: [ main ]
   pull_request:
 jobs:
-  docker-build:
+  docker-build-test_env:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout built branch
@@ -23,6 +23,25 @@ jobs:
       if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
       run: |
         docker push ghcr.io/maison-de-la-simulation/ddc/test_env
+  docker-build-jammy_env:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout built branch
+      uses: actions/checkout@v3
+    - name: Build
+      run: |
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        docker pull ghcr.io/maison-de-la-simulation/ddc/jammy_env || true
+        docker build \
+          --cache-from ghcr.io/maison-de-la-simulation/ddc/jammy_env \
+          -t ghcr.io/maison-de-la-simulation/ddc/jammy_env \
+          -t ghcr.io/maison-de-la-simulation/ddc/jammy_env:${GITHUB_SHA:0:7} \
+          docker/jammy_env
+        docker push ghcr.io/maison-de-la-simulation/ddc/jammy_env:${GITHUB_SHA:0:7}
+    - name: Publish
+      if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+      run: |
+        docker push ghcr.io/maison-de-la-simulation/ddc/jammy_env
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +54,7 @@ jobs:
         clangFormatVersion: 12
   test-Debug:
     runs-on: ubuntu-latest
-    needs: docker-build
+    needs: docker-build-test_env
     steps:
     - name: Checkout built branch
       uses: actions/checkout@v3
@@ -52,7 +71,7 @@ jobs:
         docker run -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/test_env:${GITHUB_SHA:0:7} bash /src/run.sh
   test-Release:
     runs-on: ubuntu-latest
-    needs: docker-build
+    needs: docker-build-test_env
     steps:
     - name: Checkout built branch
       uses: actions/checkout@v3
@@ -65,5 +84,43 @@ jobs:
           cmake -DCMAKE_CXX_FLAGS="-Wall" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release /src
           make -j 2 VERBOSE=1
           ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
+        EOF
+        docker run -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/test_env:${GITHUB_SHA:0:7} bash /src/run.sh
+  test-cuda:
+    runs-on: ubuntu-latest
+    needs: docker-build-jammy_env
+    steps:
+    - name: Checkout built branch
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Build
+      run: |
+        cat<<-EOF > run.sh
+          set -xe
+          export CC=gcc-10
+          export CXX=g++-10
+          export FC=gfortran-10
+          cmake -DCMAKE_CXX_FLAGS="-Wall" -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_CUDA=ON -DKokkos_ARCH_VOLTA70=ON -DKokkos_ENABLE_LIBDL=OFF /src
+          make -j 2 VERBOSE=1
+        EOF
+        docker run -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/jammy_env:${GITHUB_SHA:0:7} bash /src/run.sh
+  test-hip:
+    runs-on: ubuntu-latest
+    needs: docker-build-test_env
+    steps:
+    - name: Checkout built branch
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Build
+      run: |
+        cat<<-EOF > run.sh
+          set -xe
+          export CC=/opt/rocm/bin/amdclang
+          export CXX=/opt/rocm/bin/amdclang++
+          export FC=/opt/rocm/bin/amdflang
+          cmake -DCMAKE_CXX_FLAGS="-Wall" -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_HIP=ON -DKokkos_ARCH_VEGA900=ON -DCMAKE_PREFIX_PATH=/opt/rocm /src
+          make -j 2 VERBOSE=1
         EOF
         docker run -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/test_env:${GITHUB_SHA:0:7} bash /src/run.sh
