@@ -92,21 +92,13 @@ template <class DDim>
 std::enable_if_t<is_single_discretization_v<DDim>, typename DDim::continuous_element_type>
 origin() noexcept
 {
-#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
-    return discrete_space_device<DDim>().origin();
-#else
-    return discrete_space_host<DDim>().origin();
-#endif
+    return discrete_space<DDim>().origin();
 }
 
 template <class CDim>
 Coordinate<CDim> coordinate(DiscreteElement<experimental::SingleDiscretization<CDim>> const& c)
 {
-#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
-    return discrete_space_device<experimental::SingleDiscretization<CDim>>().coordinate(c);
-#else
-    return discrete_space_host<experimental::SingleDiscretization<CDim>>().coordinate(c);
-#endif
+    return discrete_space<experimental::SingleDiscretization<CDim>>().coordinate(c);
 }
 
 template <class CDim>

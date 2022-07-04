@@ -257,11 +257,7 @@ DDC_INLINE_FUNCTION std::
         enable_if_t<is_uniform_sampling_v<DDim>, typename DDim::continuous_element_type>
         origin() noexcept
 {
-#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
-    return discrete_space_device<DDim>().origin();
-#else
-    return discrete_space_host<DDim>().origin();
-#endif
+    return discrete_space<DDim>().origin();
 }
 
 /// @brief Lower bound index of the mesh
@@ -270,11 +266,7 @@ DDC_INLINE_FUNCTION std::
         enable_if_t<is_uniform_sampling_v<DDim>, typename DDim::discrete_element_type>
         front() noexcept
 {
-#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
-    return discrete_space_device<DDim>().front();
-#else
-    return discrete_space_host<DDim>().front();
-#endif
+    return discrete_space<DDim>().front();
 }
 
 /// @brief Spacing step of the mesh
@@ -283,22 +275,14 @@ DDC_INLINE_FUNCTION std::
         enable_if_t<is_uniform_sampling_v<DDim>, typename DDim::continuous_element_type>
         step() noexcept
 {
-#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
-    return discrete_space_device<DDim>().step();
-#else
-    return discrete_space_host<DDim>().step();
-#endif
+    return discrete_space<DDim>().step();
 }
 
 template <class CDim>
 DDC_INLINE_FUNCTION constexpr Coordinate<CDim> coordinate(
         DiscreteElement<UniformPointSampling<CDim>> const& c)
 {
-#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
-    return discrete_space_device<UniformPointSampling<CDim>>().coordinate(c);
-#else
-    return discrete_space_host<UniformPointSampling<CDim>>().coordinate(c);
-#endif
+    return discrete_space<UniformPointSampling<CDim>>().coordinate(c);
 }
 
 template <class CDim>
