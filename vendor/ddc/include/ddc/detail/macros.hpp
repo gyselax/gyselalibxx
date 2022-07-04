@@ -39,3 +39,11 @@
 #define DDC_INLINE_FUNCTION KOKKOS_INLINE_FUNCTION
 
 #define DDC_FORCEINLINE_FUNCTION KOKKOS_FORCEINLINE_FUNCTION
+
+#if defined(__HIP_DEVICE_COMPILE__)
+#define DDC_CURRENT_KOKKOS_SPACE Kokkos::Experimental::HIPSpace
+#elif defined(__CUDA_ARCH__)
+#define DDC_CURRENT_KOKKOS_SPACE Kokkos::CudaSpace
+#else
+#define DDC_CURRENT_KOKKOS_SPACE Kokkos::HostSpace
+#endif

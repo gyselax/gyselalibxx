@@ -140,11 +140,7 @@ template <class CDim>
 DDC_INLINE_FUNCTION Coordinate<CDim> coordinate(
         DiscreteElement<NonUniformPointSampling<CDim>> const& c)
 {
-#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
-    return discrete_space_device<NonUniformPointSampling<CDim>>().coordinate(c);
-#else
-    return discrete_space_host<NonUniformPointSampling<CDim>>().coordinate(c);
-#endif
+    return discrete_space<NonUniformPointSampling<CDim>>().coordinate(c);
 }
 
 template <class CDim>
