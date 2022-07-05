@@ -78,7 +78,7 @@ kokkos_layout_t<typename MP::layout_type> build_kokkos_layout(
         std::array<std::size_t, sizeof...(Is) * 2> storage;
         std::experimental::mdspan<
                 std::size_t,
-                std::experimental::extents<sizeof...(Is), sizeof...(Is)>,
+                std::experimental::extents<sizeof...(Is), 2>,
                 std::experimental::layout_right>
                 interleaved_extents_strides(storage.data());
         ((interleaved_extents_strides(Is, 0) = ep.extent(Is),
