@@ -15,70 +15,71 @@
 namespace detail {
 
 template <class Reducer>
-struct KokkosReducer;
-
-template <class Reducer>
-using KokkosReducer_t = typename KokkosReducer<Reducer>::type;
+struct ddc_to_kokkos_reducer;
 
 template <class T>
-struct KokkosReducer<reducer::sum<T>>
+struct ddc_to_kokkos_reducer<reducer::sum<T>>
 {
     using type = Kokkos::Sum<T>;
 };
 
 template <class T>
-struct KokkosReducer<reducer::prod<T>>
+struct ddc_to_kokkos_reducer<reducer::prod<T>>
 {
     using type = Kokkos::Prod<T>;
 };
 
 template <>
-struct KokkosReducer<reducer::land>
+struct ddc_to_kokkos_reducer<reducer::land>
 {
     using type = Kokkos::LAnd<void>;
 };
 
 template <>
-struct KokkosReducer<reducer::lor>
+struct ddc_to_kokkos_reducer<reducer::lor>
 {
     using type = Kokkos::LOr<void>;
 };
 
 template <class T>
-struct KokkosReducer<reducer::band<T>>
+struct ddc_to_kokkos_reducer<reducer::band<T>>
 {
     using type = Kokkos::BAnd<T>;
 };
 
 template <class T>
-struct KokkosReducer<reducer::bor<T>>
+struct ddc_to_kokkos_reducer<reducer::bor<T>>
 {
     using type = Kokkos::BOr<T>;
 };
 
 template <class T>
-struct KokkosReducer<reducer::bxor<T>>
+struct ddc_to_kokkos_reducer<reducer::bxor<T>>
 {
     static_assert(std::is_same_v<T, T>, "This reducer is not yet implemented");
 };
 
 template <class T>
-struct KokkosReducer<reducer::min<T>>
+struct ddc_to_kokkos_reducer<reducer::min<T>>
 {
     using type = Kokkos::Min<T>;
 };
 
 template <class T>
-struct KokkosReducer<reducer::max<T>>
+struct ddc_to_kokkos_reducer<reducer::max<T>>
 {
     using type = Kokkos::Max<T>;
 };
 
 template <class T>
-struct KokkosReducer<reducer::minmax<T>>
+struct ddc_to_kokkos_reducer<reducer::minmax<T>>
 {
     using type = Kokkos::MinMax<T>;
 };
+
+/// Alias template to transform a DDC reducer type to a Kokkos reducer type
+template <class Reducer>
+using ddc_to_kokkos_reducer_t = typename ddc_to_kokkos_reducer<Reducer>::type;
 
 /** A serial reduction over a nD domain
  * @param[in] domain the range over which to apply the algorithm
@@ -165,7 +166,7 @@ inline T transform_reduce_kokkos(
                     BinaryReductionOp,
                     UnaryTransformOp,
                     DDim0>(reduce, transform),
-            KokkosReducer_t<BinaryReductionOp>(result));
+            ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
     return result;
 }
 
@@ -208,7 +209,7 @@ inline T transform_reduce_kokkos(
                     DDim0,
                     DDim1,
                     DDims...>(reduce, transform),
-            KokkosReducer_t<BinaryReductionOp>(result));
+            ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
     return result;
 }
 
