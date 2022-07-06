@@ -259,7 +259,7 @@ public:
                 s.mapping(),
                 std::make_index_sequence<sizeof...(DDims)> {});
         return Kokkos::View<
-                detail::mdspan_to_kokkos_element_type_t<ElementType, sizeof...(DDims)>,
+                detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
                 decltype(kokkos_layout),
                 typename Allocator::memory_space>(s.data(), kokkos_layout);
     }
@@ -275,7 +275,7 @@ public:
                 s.mapping(),
                 std::make_index_sequence<sizeof...(DDims)> {});
         return Kokkos::View<
-                detail::mdspan_to_kokkos_element_type_t<ElementType, sizeof...(DDims)>,
+                detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
                 decltype(kokkos_layout),
                 typename Allocator::memory_space>(s.data(), kokkos_layout);
     }

@@ -8,54 +8,100 @@
 
 namespace detail {
 
-template <class KokkosLP>
-struct mdspan_layout;
+template <class T>
+struct type_holder
+{
+    using type = T;
+};
 
 template <class KokkosLP>
-using mdspan_layout_t = typename mdspan_layout<KokkosLP>::type;
+struct kokkos_to_mdspan_layout
+{
+    static_assert(
+            std::is_same_v<KokkosLP, KokkosLP>,
+            "Usage of non-specialized kokkos_to_mdspan_layout struct is not allowed");
+};
 
 template <>
-struct mdspan_layout<Kokkos::LayoutLeft>
+struct kokkos_to_mdspan_layout<Kokkos::LayoutLeft>
 {
     using type = std::experimental::layout_left;
 };
 
 template <>
-struct mdspan_layout<Kokkos::LayoutRight>
+struct kokkos_to_mdspan_layout<Kokkos::LayoutRight>
 {
     using type = std::experimental::layout_right;
 };
 
 template <>
-struct mdspan_layout<Kokkos::LayoutStride>
+struct kokkos_to_mdspan_layout<Kokkos::LayoutStride>
 {
     using type = std::experimental::layout_stride;
 };
 
+/// Alias template to transform a mdspan layout type to a Kokkos layout type
+template <class KokkosLP>
+using kokkos_to_mdspan_layout_t = typename kokkos_to_mdspan_layout<KokkosLP>::type;
+
 
 template <class mdspanLP>
-struct kokkos_layout;
-
-template <class mdspanLP>
-using kokkos_layout_t = typename kokkos_layout<mdspanLP>::type;
+struct mdspan_to_kokkos_layout
+{
+    static_assert(
+            std::is_same_v<mdspanLP, mdspanLP>,
+            "Usage of non-specialized mdspan_to_kokkos_layout struct is not allowed");
+};
 
 template <>
-struct kokkos_layout<std::experimental::layout_left>
+struct mdspan_to_kokkos_layout<std::experimental::layout_left>
 {
     using type = Kokkos::LayoutLeft;
 };
 
 template <>
-struct kokkos_layout<std::experimental::layout_right>
+struct mdspan_to_kokkos_layout<std::experimental::layout_right>
 {
     using type = Kokkos::LayoutRight;
 };
 
 template <>
-struct kokkos_layout<std::experimental::layout_stride>
+struct mdspan_to_kokkos_layout<std::experimental::layout_stride>
 {
     using type = Kokkos::LayoutStride;
 };
+
+/// Alias template to transform a Kokkos layout type to a mdspan layout type
+template <class mdspanLP>
+using mdspan_to_kokkos_layout_t = typename mdspan_to_kokkos_layout<mdspanLP>::type;
+
+template <class ET, std::size_t N>
+struct mdspan_to_kokkos_element
+    : std::conditional_t<
+              N == 0,
+              type_holder<ET>,
+              mdspan_to_kokkos_element<std::add_pointer_t<ET>, N - 1>>
+{
+};
+
+/// Alias template to transform a mdspan element type to a Kokkos element type
+/// Only dynamic dimensions is supported for now i.e. `double[4]*` is not yet covered.
+template <class ET, std::size_t N>
+using mdspan_to_kokkos_element_t = typename mdspan_to_kokkos_element<ET, N>::type;
+
+template <class ET>
+struct kokkos_to_mdspan_element
+    : std::conditional_t<
+              std::is_pointer_v<std::decay_t<ET>>,
+              kokkos_to_mdspan_element<std::remove_pointer_t<std::decay_t<ET>>>,
+              type_holder<ET>>
+{
+};
+
+/// Alias template to transform a Kokkos element type to a mdspan element type
+/// Only dynamic dimensions is supported for now i.e. `double[4]*` is not yet covered.
+template <class ET>
+using kokkos_to_mdspan_element_t = typename kokkos_to_mdspan_element<ET>::type;
 
 
 template <std::size_t... Is>
@@ -67,13 +113,13 @@ Kokkos::LayoutStride make_layout_stride(
 }
 
 template <class EP, class MP, std::size_t... Is>
-kokkos_layout_t<typename MP::layout_type> build_kokkos_layout(
+mdspan_to_kokkos_layout_t<typename MP::layout_type> build_kokkos_layout(
         EP const& ep,
         MP const& mapping,
         std::index_sequence<Is...>)
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
-    using kokkos_layout_type = kokkos_layout_t<typename MP::layout_type>;
+    using kokkos_layout_type = mdspan_to_kokkos_layout_t<typename MP::layout_type>;
     if constexpr (std::is_same_v<kokkos_layout_type, Kokkos::LayoutStride>) {
         std::array<std::size_t, sizeof...(Is) * 2> storage;
         std::experimental::mdspan<
@@ -91,53 +137,14 @@ kokkos_layout_t<typename MP::layout_type> build_kokkos_layout(
     DDC_IF_NVCC_THEN_POP
 }
 
-/// Recursively add a pointer
-template <class ET, std::size_t N>
-struct mdspan_to_kokkos_element_type : mdspan_to_kokkos_element_type<std::add_pointer_t<ET>, N - 1>
-{
-};
-
-template <class ET>
-struct mdspan_to_kokkos_element_type<ET, 0>
-{
-    using type = ET;
-};
-
-template <class ET, std::size_t N>
-using mdspan_to_kokkos_element_type_t = typename mdspan_to_kokkos_element_type<ET, N>::type;
-
-template <class T, std::size_t N>
-struct final_type
-{
-    using type = T;
-    static constexpr std::size_t rank = N;
-};
-
-/// Recursively remove a pointer
-template <class ET, std::size_t N>
-struct kokkos_to_mdspan_element_type
-    : std::conditional_t<
-              std::is_pointer_v<std::decay_t<ET>>,
-              kokkos_to_mdspan_element_type<std::remove_pointer_t<std::decay_t<ET>>, N + 1>,
-              final_type<ET, N>>
-{
-};
-
-template <class ET>
-using kokkos_to_mdspan_element_type_t = typename kokkos_to_mdspan_element_type<ET, 0>::type;
-
-template <class ET>
-constexpr inline std::size_t kokkos_to_mdspan_element_type_rank
-        = kokkos_to_mdspan_element_type<ET, 0>::rank;
-
 template <class DataType, class... Properties, std::size_t... Is>
 auto build_mdspan(Kokkos::View<DataType, Properties...> const view, std::index_sequence<Is...>)
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
-    using element_type = kokkos_to_mdspan_element_type_t<DataType>;
+    using element_type = kokkos_to_mdspan_element_t<DataType>;
     using extents_type = std::experimental::dextents<Kokkos::View<DataType, Properties...>::rank>;
-    using layout_type
-            = mdspan_layout_t<typename Kokkos::View<DataType, Properties...>::array_layout>;
+    using layout_type = kokkos_to_mdspan_layout_t<
+            typename Kokkos::View<DataType, Properties...>::array_layout>;
     using mapping_type = typename layout_type::template mapping<extents_type>;
     extents_type exts(view.extent(Is)...);
     if constexpr (std::is_same_v<layout_type, std::experimental::layout_stride>) {
