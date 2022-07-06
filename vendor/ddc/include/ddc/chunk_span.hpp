@@ -304,7 +304,7 @@ public:
                 s.mapping(),
                 std::make_index_sequence<sizeof...(DDims)> {});
         return Kokkos::View<
-                detail::mdspan_to_kokkos_element_type_t<ElementType, sizeof...(DDims)>,
+                detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
                 decltype(kokkos_layout),
                 MemorySpace>(s.data(), kokkos_layout);
     }
@@ -325,9 +325,9 @@ template <
         class... DDims,
         class = std::enable_if_t<Kokkos::is_view<KokkosView>::value>>
 ChunkSpan(KokkosView const& view, DiscreteDomain<DDims...> domain) -> ChunkSpan<
-        detail::kokkos_to_mdspan_element_type_t<typename KokkosView::data_type>,
+        detail::kokkos_to_mdspan_element_t<typename KokkosView::data_type>,
         DiscreteDomain<DDims...>,
-        detail::mdspan_layout_t<typename KokkosView::array_layout>,
+        detail::kokkos_to_mdspan_layout_t<typename KokkosView::array_layout>,
         typename KokkosView::memory_space>;
 
 template <
