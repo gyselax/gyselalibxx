@@ -58,8 +58,8 @@ auto extract_after(Tuple&& t, std::index_sequence<Ids...>)
 template <class IDim>
 void init_discrete_space_devices()
 {
-    using IDimImplHost = typename IDim::template Impl<Kokkos::HostSpace>;
 #if defined(__CUDACC__)
+    using IDimImplHost = typename IDim::template Impl<Kokkos::HostSpace>;
     using IDimImplDevice = typename IDim::template Impl<Kokkos::CudaSpace>;
     g_discrete_space_host<IDimImplDevice> = new IDimImplDevice(
             *g_discrete_space_host<IDimImplHost>);
@@ -78,6 +78,7 @@ void init_discrete_space_devices()
             cudaMemcpyHostToDevice);
 #endif
 #if defined(__HIPCC__)
+    using IDimImplHost = typename IDim::template Impl<Kokkos::HostSpace>;
     using IDimImplDevice = typename IDim::template Impl<Kokkos::Experimental::HIPSpace>;
     g_discrete_space_host<IDimImplDevice> = new IDimImplDevice(
             *g_discrete_space_host<IDimImplHost>);
