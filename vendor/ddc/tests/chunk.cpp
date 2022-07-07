@@ -456,7 +456,7 @@ TEST(Chunk2DTest, SliceDomainXTooearly)
     // the error message is checked with clang & gcc only
     ASSERT_DEATH(
             chunk[subdomain_x],
-            R"rgx([Aa]ssert.*uid<ODDims>\(m_lbound\).*uid<ODDims>\(odomain\.m_lbound\))rgx");
+            R"rgx([Aa]ssert.*uid<ODDims>\(m_element_begin\).*uid<ODDims>\(odomain\.m_element_begin\))rgx");
 #endif
 }
 
@@ -469,7 +469,7 @@ TEST(Chunk2DTest, SliceDomainXToolate)
     // the error message is checked with clang & gcc only
     ASSERT_DEATH(
             chunk[subdomain_x],
-            R"rgx([Aa]ssert.*uid<ODDims>\(m_ubound\).*uid<ODDims>\(odomain\.m_ubound\).*)rgx");
+            R"rgx([Aa]ssert.*uid<ODDims>\(m_element_end\).*uid<ODDims>\(odomain\.m_element_end\).*)rgx");
 #endif
 }
 

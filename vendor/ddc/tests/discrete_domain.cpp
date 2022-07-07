@@ -75,6 +75,14 @@ TEST(ProductMDomainTest, Constructor)
     EXPECT_EQ(empty_domain[0], lbound_x);
 }
 
+TEST(ProductMDomainTest, EmptyDomain)
+{
+    DDomXY const dom_x_y = DDomXY();
+    EXPECT_EQ(dom_x_y.extents(), DVectXY(0, 0));
+    EXPECT_EQ(dom_x_y.size(), 0);
+    EXPECT_TRUE(dom_x_y.empty());
+}
+
 TEST(ProductMDomainTest, Subdomain)
 {
     DDomXY const dom_x_y = DDomXY(lbound_x_y, nelems_x_y);

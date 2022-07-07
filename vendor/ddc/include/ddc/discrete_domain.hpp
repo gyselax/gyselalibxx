@@ -29,9 +29,9 @@ public:
     using mlength_type = DiscreteVector<DDims...>;
 
 private:
-    DiscreteElement<DDims...> m_lbound;
+    DiscreteElement<DDims...> m_element_begin;
 
-    DiscreteElement<DDims...> m_ubound;
+    DiscreteElement<DDims...> m_element_end;
 
 public:
     static constexpr std::size_t rank()
@@ -44,8 +44,8 @@ public:
     /// Construct a DiscreteDomain from a reordered copy of `domain`
     template <class... ODDims>
     explicit constexpr DiscreteDomain(DiscreteDomain<ODDims...> const& domain)
-        : m_lbound(domain.front())
-        , m_ubound(domain.back())
+        : m_element_begin(domain.front())
+        , m_element_end(domain.front() + domain.extents())
     {
     }
 
@@ -53,8 +53,8 @@ public:
     // Note that SFINAE may be redundant because a template constructor should not be selected as a copy constructor.
     template <std::size_t N = sizeof...(DDims), class = std::enable_if_t<(N != 1)>>
     explicit constexpr DiscreteDomain(DiscreteDomain<DDims> const&... domains)
-        : m_lbound(domains.front()...)
-        , m_ubound(domains.back()...)
+        : m_element_begin(domains.front()...)
+        , m_element_end((domains.front() + domains.extents())...)
     {
     }
 
@@ -64,18 +64,19 @@ public:
      * @deprecated use the version with explicit lower bound instead
      */
     [[deprecated]] constexpr DiscreteDomain(mlength_type const& size)
-        : m_lbound((get<DDims>(size) - get<DDims>(size))...) // Hack to have expansion of zero
-        , m_ubound((get<DDims>(size) - 1)...)
+        : m_element_begin(
+                (get<DDims>(size) - get<DDims>(size))...) // Hack to have expansion of zero
+        , m_element_end(get<DDims>(size)...)
     {
     }
 
-    /** Construct a DiscreteDomain starting from lbound with size points.
-     * @param lbound the lower bound in each direction
+    /** Construct a DiscreteDomain starting from element_begin with size points.
+     * @param element_begin the lower bound in each direction
      * @param size the number of points in each direction
      */
-    constexpr DiscreteDomain(discrete_element_type const& lbound, mlength_type const& size)
-        : m_lbound(lbound)
-        , m_ubound((uid<DDims>(lbound) + get<DDims>(size) - 1)...)
+    constexpr DiscreteDomain(discrete_element_type const& element_begin, mlength_type const& size)
+        : m_element_begin(element_begin)
+        , m_element_end(element_begin + size)
     {
     }
 
@@ -92,7 +93,7 @@ public:
     template <class... ODims>
     constexpr bool operator==(DiscreteDomain<ODims...> const& other) const
     {
-        return m_lbound == other.m_lbound && m_ubound == other.m_ubound;
+        return m_element_begin == other.m_element_begin && m_element_end == other.m_element_end;
     }
 
 #if __cplusplus <= 201703L
@@ -106,28 +107,29 @@ public:
 
     std::size_t size() const
     {
-        return (1ul * ... * (uid<DDims>(m_ubound) + 1 - uid<DDims>(m_lbound)));
+        return (1ul * ... * (uid<DDims>(m_element_end) - uid<DDims>(m_element_begin)));
     }
 
     constexpr mlength_type extents() const noexcept
     {
-        return mlength_type((uid<DDims>(m_ubound) + 1 - uid<DDims>(m_lbound))...);
+        return mlength_type((uid<DDims>(m_element_end) - uid<DDims>(m_element_begin))...);
     }
 
     template <class QueryDDim>
     inline constexpr DiscreteVector<QueryDDim> extent() const noexcept
     {
-        return DiscreteVector<QueryDDim>(uid<QueryDDim>(m_ubound) + 1 - uid<QueryDDim>(m_lbound));
+        return DiscreteVector<QueryDDim>(
+                uid<QueryDDim>(m_element_end) - uid<QueryDDim>(m_element_begin));
     }
 
     constexpr discrete_element_type front() const noexcept
     {
-        return m_lbound;
+        return m_element_begin;
     }
 
     constexpr discrete_element_type back() const noexcept
     {
-        return m_ubound;
+        return discrete_element_type((uid<DDims>(m_element_end) - 1)...);
     }
 
     constexpr DiscreteDomain take_first(mlength_type n) const
@@ -158,13 +160,13 @@ public:
     template <class... ODDims>
     constexpr auto restrict(DiscreteDomain<ODDims...> const& odomain) const
     {
-        assert(((uid<ODDims>(m_lbound) <= uid<ODDims>(odomain.m_lbound)) && ...));
-        assert(((uid<ODDims>(m_ubound) >= uid<ODDims>(odomain.m_ubound)) && ...));
+        assert(((uid<ODDims>(m_element_begin) <= uid<ODDims>(odomain.m_element_begin)) && ...));
+        assert(((uid<ODDims>(m_element_end) >= uid<ODDims>(odomain.m_element_end)) && ...));
         const DiscreteVector<DDims...> myextents = extents();
         const DiscreteVector<ODDims...> oextents = odomain.extents();
         return DiscreteDomain(
                 DiscreteElement<DDims...>(
-                        (uid_or<DDims>(odomain.m_lbound, uid<DDims>(m_lbound)))...),
+                        (uid_or<DDims>(odomain.m_element_begin, uid<DDims>(m_element_begin)))...),
                 DiscreteVector<DDims...>((get_or<DDims>(oextents, get<DDims>(myextents)))...));
     }
 
@@ -191,7 +193,7 @@ public:
             class DDim0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<DDims...>>>>
     auto end() const
     {
-        return DiscreteDomainIterator<DDim0>(DiscreteElement<DDims...>(back() + 1));
+        return DiscreteDomainIterator<DDim0>(m_element_end);
     }
 
     template <
@@ -207,7 +209,7 @@ public:
             class DDim0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<DDims...>>>>
     auto cend() const
     {
-        return DiscreteDomainIterator<DDim0>(DiscreteElement<DDims...>(back() + 1));
+        return DiscreteDomainIterator<DDim0>(m_element_end);
     }
 
     template <
