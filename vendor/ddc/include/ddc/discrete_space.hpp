@@ -17,34 +17,34 @@
 
 namespace detail {
 
-template <class IDim, class MemorySpace>
+template <class DDim, class MemorySpace>
 struct DiscreteSpaceGetter;
 
 // For now, in the future, this should be specialized by tag
-template <class IDimImpl>
-inline IDimImpl* g_discrete_space_host = nullptr;
+template <class DDimImpl>
+inline DDimImpl* g_discrete_space_host = nullptr;
 
-template <class IDim>
-struct DiscreteSpaceGetter<IDim, Kokkos::HostSpace>
+template <class DDim>
+struct DiscreteSpaceGetter<DDim, Kokkos::HostSpace>
 {
-    static inline typename IDim::template Impl<Kokkos::HostSpace> const& get()
+    static inline typename DDim::template Impl<Kokkos::HostSpace> const& get()
     {
-        return *g_discrete_space_host<typename IDim::template Impl<Kokkos::HostSpace>>;
+        return *g_discrete_space_host<typename DDim::template Impl<Kokkos::HostSpace>>;
     }
 };
 
 #if defined(__CUDACC__) || defined(__HIPCC__)
 // WARNING: do not put the `inline` keyword, seems to fail on MI100 rocm/4.5.0
-template <class IDimImpl>
-__device__ __constant__ IDimImpl* g_discrete_space_device = nullptr;
+template <class DDimImpl>
+__device__ __constant__ DDimImpl* g_discrete_space_device = nullptr;
 
-template <class IDim, class MemorySpace>
+template <class DDim, class MemorySpace>
 struct DiscreteSpaceGetter
 {
     DDC_INLINE_FUNCTION
-    static typename IDim::template Impl<MemorySpace> const& get()
+    static typename DDim::template Impl<MemorySpace> const& get()
     {
-        return *g_discrete_space_device<typename IDim::template Impl<MemorySpace>>;
+        return *g_discrete_space_device<typename DDim::template Impl<MemorySpace>>;
     }
 };
 #endif
@@ -55,44 +55,44 @@ auto extract_after(Tuple&& t, std::index_sequence<Ids...>)
     return std::make_tuple(std::move(std::get<Ids + 1>(t))...);
 }
 
-template <class IDim>
+template <class DDim>
 void init_discrete_space_devices()
 {
 #if defined(__CUDACC__)
-    using IDimImplHost = typename IDim::template Impl<Kokkos::HostSpace>;
-    using IDimImplDevice = typename IDim::template Impl<Kokkos::CudaSpace>;
-    g_discrete_space_host<IDimImplDevice> = new IDimImplDevice(
-            *g_discrete_space_host<IDimImplHost>);
-    IDimImplDevice* ptr_device;
-    cudaMalloc(&ptr_device, sizeof(IDimImplDevice));
+    using DDimImplHost = typename DDim::template Impl<Kokkos::HostSpace>;
+    using DDimImplDevice = typename DDim::template Impl<Kokkos::CudaSpace>;
+    g_discrete_space_host<DDimImplDevice> = new DDimImplDevice(
+            *g_discrete_space_host<DDimImplHost>);
+    DDimImplDevice* ptr_device;
+    cudaMalloc(&ptr_device, sizeof(DDimImplDevice));
     cudaMemcpy(
             (void*)ptr_device,
-            g_discrete_space_host<IDimImplDevice>,
-            sizeof(IDimImplDevice),
+            g_discrete_space_host<DDimImplDevice>,
+            sizeof(DDimImplDevice),
             cudaMemcpyHostToDevice);
     cudaMemcpyToSymbol(
-            g_discrete_space_device<IDimImplDevice>,
+            g_discrete_space_device<DDimImplDevice>,
             &ptr_device,
-            sizeof(IDimImplDevice*),
+            sizeof(DDimImplDevice*),
             0,
             cudaMemcpyHostToDevice);
 #endif
 #if defined(__HIPCC__)
-    using IDimImplHost = typename IDim::template Impl<Kokkos::HostSpace>;
-    using IDimImplDevice = typename IDim::template Impl<Kokkos::Experimental::HIPSpace>;
-    g_discrete_space_host<IDimImplDevice> = new IDimImplDevice(
-            *g_discrete_space_host<IDimImplHost>);
-    IDimImplDevice* ptr_device;
-    hipMalloc(&ptr_device, sizeof(IDimImplDevice));
+    using DDimImplHost = typename DDim::template Impl<Kokkos::HostSpace>;
+    using DDimImplDevice = typename DDim::template Impl<Kokkos::Experimental::HIPSpace>;
+    g_discrete_space_host<DDimImplDevice> = new DDimImplDevice(
+            *g_discrete_space_host<DDimImplHost>);
+    DDimImplDevice* ptr_device;
+    hipMalloc(&ptr_device, sizeof(DDimImplDevice));
     hipMemcpy(
             (void*)ptr_device,
-            g_discrete_space_host<IDimImplDevice>,
-            sizeof(IDimImplDevice),
+            g_discrete_space_host<DDimImplDevice>,
+            sizeof(DDimImplDevice),
             hipMemcpyHostToDevice);
     hipMemcpyToSymbol(
-            g_discrete_space_device<IDimImplDevice>,
+            g_discrete_space_device<DDimImplDevice>,
             &ptr_device,
-            sizeof(IDimImplDevice*),
+            sizeof(DDimImplDevice*),
             0,
             hipMemcpyHostToDevice);
 #endif
@@ -120,10 +120,10 @@ static inline void init_discrete_space(Args&&... a)
  * @param a - the discrete space to move at index 0
  *          - the arguments to pass through at index 1
  */
-template <class IDimImpl, class Arg>
-static inline Arg init_discrete_space(std::tuple<IDimImpl, Arg>&& a)
+template <class DDimImpl, class Arg>
+static inline Arg init_discrete_space(std::tuple<DDimImpl, Arg>&& a)
 {
-    using DDim = typename IDimImpl::discrete_dimension_type;
+    using DDim = typename DDimImpl::discrete_dimension_type;
     init_discrete_space<DDim>(std::move(std::get<0>(a)));
     return std::get<1>(a);
 }
@@ -133,17 +133,17 @@ static inline Arg init_discrete_space(std::tuple<IDimImpl, Arg>&& a)
  * @param a - the discrete space to move at index 0
  *          - the (2+) arguments to pass through in other indices
  */
-template <class IDimImpl, class... Args>
+template <class DDimImpl, class... Args>
 static inline std::enable_if_t<2 <= sizeof...(Args), std::tuple<Args...>> init_discrete_space(
-        std::tuple<IDimImpl, Args...>&& a)
+        std::tuple<DDimImpl, Args...>&& a)
 {
-    using DDim = typename IDimImpl::discrete_dimension_type;
+    using DDim = typename DDimImpl::discrete_dimension_type;
     init_discrete_space<DDim>(std::move(std::get<0>(a)));
     return detail::extract_after(std::move(a), std::index_sequence_for<Args...>());
 }
 
-template <class IDim, class MemorySpace = DDC_CURRENT_KOKKOS_SPACE>
-DDC_INLINE_FUNCTION typename IDim::template Impl<MemorySpace> const& discrete_space()
+template <class DDim, class MemorySpace = DDC_CURRENT_KOKKOS_SPACE>
+DDC_INLINE_FUNCTION typename DDim::template Impl<MemorySpace> const& discrete_space()
 {
-    return detail::DiscreteSpaceGetter<IDim, MemorySpace>::get();
+    return detail::DiscreteSpaceGetter<DDim, MemorySpace>::get();
 }
