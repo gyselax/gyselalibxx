@@ -49,17 +49,6 @@ using Cases = tuple_to_types_t<cartesian_product_t<degrees, evaluators, is_unifo
 
 TYPED_TEST_SUITE(PeriodicSplineBuilderTestFixture, Cases);
 
-TYPED_TEST(PeriodicSplineBuilderTestFixture, Constructor)
-{
-    using DimX = typename TestFixture::DimX;
-    using BSplinesX = UniformBSplines<DimX, TestFixture::s_degree>;
-
-    init_discrete_space<BSplinesX>(Coordinate<DimX>(0.), Coordinate<DimX>(0.02), 100);
-
-    SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> spline_builder;
-    spline_builder.interpolation_domain();
-}
-
 // Checks that when evaluating the spline at interpolation points one
 // recovers values that were used to build the spline
 TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
