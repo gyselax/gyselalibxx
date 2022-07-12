@@ -35,14 +35,16 @@ using BSplinesY = NonUniformBSplines<DimY, 4>;
 constexpr std::size_t ncells = 100;
 constexpr CoordX xmin(0.);
 constexpr CoordX xmax(2.);
-BSplinesX::Impl<Kokkos::HostSpace> const bsplinesx {xmin, xmax, ncells};
-
-BSplinesY::Impl<Kokkos::HostSpace> const bsplinesy {RCoordY(0.1), RCoordY(0.4), RCoordY(1.0)};
 
 } // namespace
 
 TEST(ChunkBSplinesTest, Constructor)
 {
+    init_discrete_space<BSplinesX>(xmin, xmax, ncells);
+
+    init_discrete_space<BSplinesY>(
+            std::initializer_list<RCoordY> {RCoordY(0.1), RCoordY(0.4), RCoordY(1.0)});
+
     DiscreteElement<BSplinesX, BSplinesY> start(0, 0);
     DiscreteVector<BSplinesX, BSplinesY> size(ncells, ncells);
     DiscreteDomain<BSplinesX, BSplinesY> dom(start, size);
