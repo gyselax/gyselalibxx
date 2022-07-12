@@ -56,17 +56,6 @@ using Cases = tuple_to_types_t<
 
 TYPED_TEST_SUITE(NonPeriodicSplineBuilderTestFixture, Cases);
 
-TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Constructor)
-{
-    using DimX = typename TestFixture::DimX;
-    using BSplinesX = UniformBSplines<DimX, TestFixture::s_degree>;
-
-    init_discrete_space<BSplinesX>(Coordinate<DimX>(0.), Coordinate<DimX>(0.02), 100);
-
-    SplineBuilder<BSplinesX, TestFixture::s_bcl, TestFixture::s_bcr> spline_builder;
-    spline_builder.interpolation_domain();
-}
-
 // Checks that when evaluating the spline at interpolation points one
 // recovers values that were used to build the spline
 TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
