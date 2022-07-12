@@ -87,12 +87,12 @@ inline DiscreteElement<SpeciesInformation> ielec()
     return discrete_space<SpeciesInformation>().ielec();
 }
 
-inline int charge(DiscreteElement<SpeciesInformation> isp)
+inline int charge(DiscreteElement<SpeciesInformation> const isp)
 {
     return discrete_space<SpeciesInformation>().charges()(isp);
 }
 
-inline double mass(DiscreteElement<SpeciesInformation> isp)
+inline double mass(DiscreteElement<SpeciesInformation> const isp)
 {
     return discrete_space<SpeciesInformation>().masses()(isp);
 }
