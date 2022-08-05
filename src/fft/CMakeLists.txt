@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: MIT
 
-add_library(fft INTERFACE
-)
+add_library(fft INTERFACE)
 
 target_compile_features(fft
     INTERFACE
@@ -16,9 +15,8 @@ target_include_directories(fft
 target_link_libraries(fft
     INTERFACE
         DDC::DDC
-        vcx::geometry
+        "${GEOMETRY_LIB}"
         FFTW::Double
 )
-
 
 add_library(vcx::fft ALIAS fft)

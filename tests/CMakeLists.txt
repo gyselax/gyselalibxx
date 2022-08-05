@@ -4,35 +4,42 @@ cmake_minimum_required(VERSION 3.15)
 
 include(GoogleTest)
 
-add_executable(unit_tests main.cpp splitvlasovsolver.cpp)
-target_compile_features(unit_tests PUBLIC cxx_std_17)
-target_link_libraries(unit_tests
+foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
+
+add_executable(unit_tests_${GEOMETRY_VARIANT}
+    main.cpp
+    quadrature.cpp
+    splitvlasovsolver.cpp
+)
+target_compile_features(unit_tests_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
+target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
     PUBLIC
+        DDC::PDI_Wrapper
         GTest::gtest
         GTest::gmock
         GTest::gmock_main
         paraconf::paraconf
-        DDC::PDI_Wrapper
-        vcx::vlasov
-        vcx::poisson
-        vcx::quadrature
         sll::splines
+        vcx::poisson_${GEOMETRY_VARIANT}
+        vcx::quadrature
+        vcx::vlasov_${GEOMETRY_VARIANT}
 )
 
+gtest_discover_tests(unit_tests_${GEOMETRY_VARIANT}
+    TEST_SUFFIX "_${GEOMETRY_VARIANT}")
+
+endforeach()
+
+target_sources(unit_tests_periodic_rdimx
+    PRIVATE
+        fft.cpp
+        femperiodicpoissonsolver.cpp
+)
+
+target_link_libraries(unit_tests_periodic_rdimx PRIVATE vcx::fft)
+
+target_sources(unit_tests_nonperiodic_rdimx PRIVATE femnonperiodicpoissonsolver.cpp)
+
 add_subdirectory(bump_on_tail)
-if(VOICEXX_ENABLE_PERIODIC_RDIMX)
-    target_sources(unit_tests
-        PRIVATE
-            fft.cpp
-            femperiodicpoissonsolver.cpp
-    )
 
-    target_link_libraries(unit_tests PRIVATE vcx::fft)
-
-    add_subdirectory(landau)
-else()
-    target_sources(unit_tests PRIVATE femnonperiodicpoissonsolver.cpp)
-endif()
-target_sources(unit_tests PRIVATE quadrature.cpp)
-
-gtest_discover_tests(unit_tests)
+add_subdirectory(landau)

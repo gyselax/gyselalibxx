@@ -1,21 +1,3 @@
-cmake_tests_non_periodic:
-  only: [ main, merge_requests ]
-  stage: test
-  needs: []
-  image: ghcr.io/gyselax/voicexx_env
-  variables:
-    GIT_SUBMODULE_STRATEGY: recursive
-  script: |
-    rm -rf build || true
-    mkdir build
-    cd build
-    cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DVOICEXX_ENABLE_PERIODIC_RDIMX=OFF ..
-    make -j 4 VERBOSE=1
-    ctest -j 2 --output-on-failure --timeout 5 -LE test_on_Release_only --output-junit tests.xml
-  artifacts:
-    when: always
-    reports:
-      junit: ./build/tests.xml
 cmake_tests:
   only: [ main, merge_requests ]
   stage: test

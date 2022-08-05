@@ -1,48 +1,42 @@
 # SPDX-License-Identifier: MIT
 
-add_library(poisson STATIC
+foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
+
+add_library("poisson_${GEOMETRY_VARIANT}" STATIC
     chargedensitycalculator.cpp
     electricfield.cpp
     nullpoissonsolver.cpp
 )
 
-target_compile_features(poisson
+target_compile_features("poisson_${GEOMETRY_VARIANT}"
     PUBLIC
         cxx_std_17
 )
 
-target_include_directories(poisson
+target_include_directories("poisson_${GEOMETRY_VARIANT}"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-target_link_libraries(poisson
+target_link_libraries("poisson_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         sll::splines
+        vcx::geometry_${GEOMETRY_VARIANT}
         vcx::speciesinfo
-        vcx::geometry
 )
 
-if(VOICEXX_ENABLE_PERIODIC_RDIMX)
-    target_sources(poisson
-        PRIVATE
-            fftpoissonsolver.cpp
-            femperiodicpoissonsolver.cpp
-    )
-    target_link_libraries(poisson
-        PUBLIC
-            vcx::fft)
-else()
-    target_sources(poisson
-        PRIVATE
-            femnonperiodicpoissonsolver.cpp
-    )
-endif()
+add_library("vcx::poisson_${GEOMETRY_VARIANT}" ALIAS "poisson_${GEOMETRY_VARIANT}")
 
-add_library(vcx::poisson ALIAS poisson)
+endforeach()
 
-if(VOICEXX_ENABLE_PERIODIC_RDIMX)
-    target_compile_definitions(poisson INTERFACE -DENABLE_PERIODIC_RDIMX=1)
-else()
-    target_compile_definitions(poisson INTERFACE -DENABLE_PERIODIC_RDIMX=0)
-endif()
+target_sources(poisson_periodic_rdimx
+    PRIVATE
+        fftpoissonsolver.cpp
+        femperiodicpoissonsolver.cpp
+)
+target_link_libraries(poisson_periodic_rdimx PUBLIC vcx::fft)
+
+target_sources(poisson_nonperiodic_rdimx
+    PRIVATE
+        femnonperiodicpoissonsolver.cpp
+)
