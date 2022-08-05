@@ -19,7 +19,8 @@
 #include "bsl_advection_x.hpp"
 #include "bumpontailequilibrium.hpp"
 #include "constant_extrapolation_boundary_value.hpp"
-#include "fempoissonsolver.hpp"
+#include "femnonperiodicpoissonsolver.hpp"
+#include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -174,7 +175,9 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    FemPoissonSolver const poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
+    using FemPoissonSolverX = std::
+            conditional_t<RDimX::PERIODIC, FemPeriodicPoissonSolver, FemNonPeriodicPoissonSolver>;
+    FemPoissonSolverX const poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 
     PredCorr const predcorr(vlasov, poisson, deltat);
 

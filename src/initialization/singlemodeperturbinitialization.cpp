@@ -44,19 +44,32 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
     return allfdistribu;
 }
 
+//TODO: this should be directly handled by ddc::Discretization really,
+//      in the meantime, we do it ourselves
+template <class IDim>
+constexpr std::enable_if_t<!IDim::continuous_dimension_type::PERIODIC, double>
+total_interval_length(DiscreteDomain<IDim> const& dom)
+{
+    return fabs(rlength(dom));
+}
+
+//TODO: this should be directly handled by ddc::Discretization really,
+//      in the meantime, we do it ourselves
+template <class RDim>
+constexpr std::enable_if_t<RDim::PERIODIC, double> total_interval_length(
+        DiscreteDomain<UniformPointSampling<RDim>> const& dom)
+{
+    return fabs(rlength(dom) + step<UniformPointSampling<RDim>>());
+}
+
 void SingleModePerturbInitialization::perturbation_initialization(
         DSpanX const perturbation,
         int const mode,
         double const perturb_amplitude) const
 {
     IDomainX const gridx = perturbation.domain();
-#if defined(ENABLE_PERIODIC_RDIMX)
-#if ENABLE_PERIODIC_RDIMX
-    double const Lx = fabs(rlength(gridx) + step<IDimX>());
-#else
-    double const Lx = fabs(rlength(gridx));
-#endif
-#endif
+    double const Lx = total_interval_length(gridx);
+
     double const kx = mode * 2. * M_PI / Lx;
     for (IndexX const ix : gridx) {
         CoordX const x = coordinate(ix);

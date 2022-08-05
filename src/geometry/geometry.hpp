@@ -21,12 +21,10 @@ struct Fourier
 
 struct RDimX
 {
-#if defined(ENABLE_PERIODIC_RDIMX)
-#if ENABLE_PERIODIC_RDIMX
+#ifdef PERIODIC_RDIMX
     static bool constexpr PERIODIC = true;
 #else
     static bool constexpr PERIODIC = false;
-#endif
 #endif
 };
 
@@ -57,13 +55,8 @@ using BSplinesX = UniformBSplines<RDimX, BSDegreeX>;
 
 using BSplinesVx = UniformBSplines<RDimVx, BSDegreeVx>;
 
-#if defined(ENABLE_PERIODIC_RDIMX)
-#if ENABLE_PERIODIC_RDIMX
-using SplineXBuilder = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>;
-#else
-using SplineXBuilder = SplineBuilder<BSplinesX, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-#endif
-#endif
+auto constexpr SplineXBoundary = RDimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
+using SplineXBuilder = SplineBuilder<BSplinesX, SplineXBoundary, SplineXBoundary>;
 using IDimX = typename SplineXBuilder::interpolation_mesh_type;
 
 using SplineVxBuilder = SplineBuilder<BSplinesVx, BoundCond::HERMITE, BoundCond::HERMITE>;
@@ -199,15 +192,9 @@ using DViewSpXVx = ViewSpXVx<double>;
 
 using DBSViewX = BSViewX<double>;
 
-
-
-#if defined(ENABLE_PERIODIC_RDIMX)
-#if ENABLE_PERIODIC_RDIMX
 using RDimFx = Fourier<RDimX>;
 using CoordFx = Coordinate<RDimFx>;
 using IDimFx = NonUniformPointSampling<RDimFx>;
 using IndexFx = DiscreteElement<IDimFx>;
 using IVectFx = DiscreteVector<IDimFx>;
 using IDomainFx = DiscreteDomain<IDimFx>;
-#endif
-#endif
