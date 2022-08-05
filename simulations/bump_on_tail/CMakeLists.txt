@@ -1,44 +1,46 @@
 # SPDX-License-Identifier: MIT
 
-add_executable(bumpontail_fem_uniform bumpontail_fem_uniform.cpp)
-target_compile_features(bumpontail_fem_uniform PUBLIC cxx_std_17)
-target_link_libraries(bumpontail_fem_uniform
-  PUBLIC
-      DDC::DDC
-      DDC::PDI_Wrapper
-      vcx::initialization
-      vcx::interpolation
-      vcx::poisson
-      vcx::time
-      vcx::speciesinfo
-      vcx::vlasov
-      vcx::paraconfpp
-      PDI::pdi
-      paraconf::paraconf
-      sll::splines
+foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
+
+add_executable(bumpontail_fem_uniform_${GEOMETRY_VARIANT} bumpontail_fem_uniform.cpp)
+target_compile_features(bumpontail_fem_uniform_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
+target_link_libraries(bumpontail_fem_uniform_${GEOMETRY_VARIANT}
+    PUBLIC
+        DDC::DDC
+        DDC::PDI_Wrapper
+        paraconf::paraconf
+        PDI::pdi
+        sll::splines
+        vcx::initialization_${GEOMETRY_VARIANT}
+        vcx::interpolation_${GEOMETRY_VARIANT}
+        vcx::paraconfpp
+        vcx::poisson_${GEOMETRY_VARIANT}
+        vcx::speciesinfo
+        vcx::time_${GEOMETRY_VARIANT}
+        vcx::vlasov_${GEOMETRY_VARIANT}
 )
 
-install(TARGETS bumpontail_fem_uniform)
+install(TARGETS bumpontail_fem_uniform_${GEOMETRY_VARIANT})
 
-if (VOICEXX_ENABLE_PERIODIC_RDIMX)
-    add_executable(bumpontail_fft bumpontail_fft.cpp)
-    target_compile_features(bumpontail_fft PUBLIC cxx_std_17)
-    target_link_libraries(bumpontail_fft
-        PUBLIC
-            DDC::DDC
-            DDC::PDI_Wrapper
-            vcx::initialization
-            vcx::fft
-            vcx::interpolation
-            vcx::poisson
-            vcx::time
-            vcx::speciesinfo
-            vcx::vlasov
-            vcx::paraconfpp
-            PDI::pdi
-            paraconf::paraconf
-            sll::splines
-    )
+endforeach()
 
-    install(TARGETS bumpontail_fft)
-endif()
+add_executable(bumpontail_fft bumpontail_fft.cpp)
+target_compile_features(bumpontail_fft PUBLIC cxx_std_17)
+target_link_libraries(bumpontail_fft
+    PUBLIC
+        DDC::DDC
+        DDC::PDI_Wrapper
+        paraconf::paraconf
+        PDI::pdi
+        sll::splines
+        vcx::fft
+        vcx::initialization_periodic_rdimx
+        vcx::interpolation_periodic_rdimx
+        vcx::paraconfpp
+        vcx::poisson_periodic_rdimx
+        vcx::speciesinfo
+        vcx::time_periodic_rdimx
+        vcx::vlasov_periodic_rdimx
+)
+
+install(TARGETS bumpontail_fft)

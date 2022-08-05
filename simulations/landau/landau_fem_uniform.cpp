@@ -18,6 +18,8 @@
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "constant_extrapolation_boundary_value.hpp"
+#include "femnonperiodicpoissonsolver.hpp"
+#include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "paraconfpp.hpp"
@@ -29,14 +31,6 @@
 #include "spline_interpolator_vx.hpp"
 #include "spline_interpolator_x.hpp"
 #include "splitvlasovsolver.hpp"
-
-#if defined(ENABLE_PERIODIC_RDIMX)
-#if ENABLE_PERIODIC_RDIMX
-#include "femperiodicpoissonsolver.hpp"
-#else
-#include "femnonperiodicpoissonsolver.hpp"
-#endif
-#endif
 
 using std::cerr;
 using std::endl;
@@ -181,13 +175,9 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-#if ENABLE_PERIODIC_RDIMX
-    FemPeriodicPoissonSolver const
-            poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
-#else
-    FemNonPeriodicPoissonSolver const
-            poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
-#endif
+    using FemPoissonSolverX = std::
+            conditional_t<RDimX::PERIODIC, FemPeriodicPoissonSolver, FemNonPeriodicPoissonSolver>;
+    FemPoissonSolverX const poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 
     PredCorr const predcorr(vlasov, poisson, deltat);
 
