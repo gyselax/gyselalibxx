@@ -56,6 +56,7 @@ RUN chmod +x /bin/bash_run \
     scipy \
     xarray \
     pylint \
+    pylint-exit \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
