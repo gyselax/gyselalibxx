@@ -2,6 +2,7 @@
 Main program to apply PINN method to Vlasov-Poisson equation
 '''
 
+# pylint: disable=import-error
 # pylint: disable=invalid-name
 # pylint: disable=no-member
 
