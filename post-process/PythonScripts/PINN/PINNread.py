@@ -3,6 +3,7 @@ Functions used to read the PINN parameters
 and the results coming from VOICEXX
 """
 
+# pylint: disable=E1101
 # pylint: disable=invalid-name
 # pylint: disable=import-error
 
