@@ -37,7 +37,6 @@ RUN chmod +x /bin/bash_run \
     pdiplugin-decl-hdf5-serial \
     pdiplugin-set-value \
     python3-pip \
-    pylint \
     libpdi-dev \
  && apt-get purge -y \
     apt-transport-https \
@@ -56,6 +55,7 @@ RUN chmod +x /bin/bash_run \
     pip \
     scipy \
     xarray \
+    pylint \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
