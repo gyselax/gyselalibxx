@@ -21,7 +21,8 @@ target_link_libraries("time_${GEOMETRY_VARIANT}"
         DDC::PDI_Wrapper
         vcx::poisson_${GEOMETRY_VARIANT}
         vcx::speciesinfo
-        vcx::vlasov_${GEOMETRY_VARIANT}
+        vcx::boltzmann_${GEOMETRY_VARIANT}
+        vcx::rhs_${GEOMETRY_VARIANT}
 )
 
 add_library("vcx::time_${GEOMETRY_VARIANT}" ALIAS "time_${GEOMETRY_VARIANT}")

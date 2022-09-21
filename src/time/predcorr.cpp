@@ -5,16 +5,16 @@
 
 #include <ddc/ddc.hpp>
 
+#include <iboltzmannsolver.hpp>
 #include <ipoissonsolver.hpp>
-#include <ivlasovsolver.hpp>
 
 #include "predcorr.hpp"
 
 PredCorr::PredCorr(
-        IVlasovSolver const& vlasov_solver,
+        IBoltzmannSolver const& boltzmann_solver,
         IPoissonSolver const& poisson_solver,
         double const dt)
-    : m_vlasov_solver(vlasov_solver)
+    : m_boltzmann_solver(boltzmann_solver)
     , m_poisson_solver(poisson_solver)
     , m_dt(dt)
 {
@@ -49,13 +49,13 @@ DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, int const steps) 
         deepcopy(allfdistribu_half_t, allfdistribu);
 
         // predictor
-        m_vlasov_solver(allfdistribu_half_t, electric_field, m_dt / 2);
+        m_boltzmann_solver(allfdistribu_half_t, electric_field, m_dt / 2);
 
         // computation of the electrostatic potential at time tn+1/2
         // and the associated electric field
         m_poisson_solver(electrostatic_potential, electric_field, allfdistribu_half_t);
         // correction on a dt
-        m_vlasov_solver(allfdistribu, electric_field, m_dt);
+        m_boltzmann_solver(allfdistribu, electric_field, m_dt);
     }
 
     double const final_time = iter * m_dt;

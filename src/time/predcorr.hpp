@@ -7,18 +7,21 @@
 #include "itimesolver.hpp"
 
 class IPoissonSolver;
-class IVlasovSolver;
+class IBoltzmannSolver;
 
 class PredCorr : public ITimeSolver
 {
-    IVlasovSolver const& m_vlasov_solver;
+    IBoltzmannSolver const& m_boltzmann_solver;
 
     IPoissonSolver const& m_poisson_solver;
 
     double const m_dt;
 
 public:
-    PredCorr(IVlasovSolver const& vlasov_solver, IPoissonSolver const& poisson_solver, double dt);
+    PredCorr(
+            IBoltzmannSolver const& boltzmann_solver,
+            IPoissonSolver const& poisson_solver,
+            double dt);
 
     ~PredCorr() override = default;
 
