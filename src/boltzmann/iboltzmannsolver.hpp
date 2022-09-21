@@ -2,14 +2,12 @@
 
 #pragma once
 
-#include <ddc/ddc.hpp>
-
 #include <geometry.hpp>
 
-class IVlasovSolver
+class IBoltzmannSolver
 {
 public:
-    virtual ~IVlasovSolver() = default;
+    virtual ~IBoltzmannSolver() = default;
 
     virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX efield, double dt) const = 0;
 };

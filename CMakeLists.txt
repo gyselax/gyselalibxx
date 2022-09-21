@@ -75,6 +75,7 @@ add_subdirectory(src/)
 ## Build the simulations (applications mains) in `simulations/`
 add_subdirectory(simulations/landau)
 add_subdirectory(simulations/bump_on_tail)
+add_subdirectory(simulations/sheath)
 
 ## if tests are enabled, build the tests in `tests/`
 if("${BUILD_TESTING}")

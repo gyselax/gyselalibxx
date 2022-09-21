@@ -17,7 +17,7 @@ target_link_libraries(landau_fem_uniform_${GEOMETRY_VARIANT}
         vcx::poisson_${GEOMETRY_VARIANT}
         vcx::speciesinfo
         vcx::time_${GEOMETRY_VARIANT}
-        vcx::vlasov_${GEOMETRY_VARIANT}
+        vcx::boltzmann_${GEOMETRY_VARIANT}
 )
 
 install(TARGETS landau_fem_uniform_${GEOMETRY_VARIANT})
@@ -40,7 +40,7 @@ target_link_libraries(landau_fft
         vcx::poisson_periodic_rdimx
         vcx::speciesinfo
         vcx::time_periodic_rdimx
-        vcx::vlasov_periodic_rdimx
+        vcx::boltzmann_periodic_rdimx
 )
 
 install(TARGETS landau_fft)

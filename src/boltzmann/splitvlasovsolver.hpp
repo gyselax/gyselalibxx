@@ -4,12 +4,12 @@
 
 #include <geometry.hpp>
 
-#include "ivlasovsolver.hpp"
+#include "iboltzmannsolver.hpp"
 
 class IAdvectionVx;
 class IAdvectionX;
 
-class SplitVlasovSolver : public IVlasovSolver
+class SplitVlasovSolver : public IBoltzmannSolver
 {
     IAdvectionX const& m_advec_x;
 

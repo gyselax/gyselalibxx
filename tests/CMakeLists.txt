@@ -10,6 +10,7 @@ add_executable(unit_tests_${GEOMETRY_VARIANT}
     main.cpp
     quadrature.cpp
     splitvlasovsolver.cpp
+    kineticsource.cpp
 )
 target_compile_features(unit_tests_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
@@ -22,7 +23,7 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         sll::splines
         vcx::poisson_${GEOMETRY_VARIANT}
         vcx::quadrature
-        vcx::vlasov_${GEOMETRY_VARIANT}
+        vcx::boltzmann_${GEOMETRY_VARIANT}
 )
 
 gtest_discover_tests(unit_tests_${GEOMETRY_VARIANT}
