@@ -29,15 +29,13 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
                 m_init_perturb_amplitude(isp));
 
         // Initialization of the distribution function --> fill values
-        for_each(gridsp, [&](IndexSp const isp) {
-            for_each(gridx, [&](IndexX const ix) {
-                for_each(gridvx, [&](IndexVx const iv) {
-                    double fdistribu_val = m_fequilibrium(isp, iv) * (1. + perturbation(ix));
-                    if (fdistribu_val < 1.e-60) {
-                        fdistribu_val = 1.e-60;
-                    }
-                    allfdistribu(isp, ix, iv) = fdistribu_val;
-                });
+        for_each(gridx, [&](IndexX const ix) {
+            for_each(gridvx, [&](IndexVx const iv) {
+                double fdistribu_val = m_fequilibrium(isp, iv) * (1. + perturbation(ix));
+                if (fdistribu_val < 1.e-60) {
+                    fdistribu_val = 1.e-60;
+                }
+                allfdistribu(isp, ix, iv) = fdistribu_val;
             });
         });
     });
