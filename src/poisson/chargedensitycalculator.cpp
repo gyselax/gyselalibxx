@@ -35,8 +35,8 @@ void ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const allf
             m_spline_vx_builder(
                     vx_spline_coef.span_view(),
                     f_vx_slice.span_cview(),
-                    &m_derivs_vxmin,
-                    &m_derivs_vxmax);
+                    m_derivs_vxmin,
+                    m_derivs_vxmax);
             rho(ix) += charge(isp) * m_spline_vx_evaluator.integrate(vx_spline_coef.span_cview());
         });
     });

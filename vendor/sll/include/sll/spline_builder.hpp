@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <iostream>
 #include <memory>
+#include <optional>
+#include <stdexcept>
 #include <vector>
 
 #include <ddc/ddc.hpp>
@@ -31,7 +33,7 @@ static inline std::ostream& operator<<(std::ostream& out, BoundCond bc)
     case BoundCond::GREVILLE:
         return out << "GREVILLE";
     default:
-        std::exit(1);
+        throw std::runtime_error("BoundCond not handled");
     }
 }
 
@@ -92,8 +94,8 @@ public:
     void operator()(
             ChunkSpan<double, DiscreteDomain<bsplines_type>> spline,
             ChunkSpan<double const, interpolation_domain_type> vals,
-            DSpan1D const* derivs_xmin = nullptr,
-            DSpan1D const* derivs_xmax = nullptr) const;
+            std::optional<DSpan1D> const derivs_xmin = std::nullopt,
+            std::optional<DSpan1D> const derivs_xmax = std::nullopt) const;
 
     interpolation_domain_type const& interpolation_domain() const noexcept
     {
@@ -168,8 +170,8 @@ template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
         ChunkSpan<double, DiscreteDomain<bsplines_type>> const spline,
         ChunkSpan<double const, interpolation_domain_type> const vals,
-        DSpan1D const* const derivs_xmin,
-        DSpan1D const* const derivs_xmax) const
+        std::optional<DSpan1D> const derivs_xmin,
+        std::optional<DSpan1D> const derivs_xmax) const
 {
     assert(vals.template extent<interpolation_mesh_type>()
            == discrete_space<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax);
@@ -179,9 +181,9 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
         return compute_interpolant_degree1(spline, vals);
 
     assert((BcXmin == BoundCond::HERMITE)
-           != (derivs_xmin == nullptr || derivs_xmin->extent(0) == 0));
+           != (!derivs_xmin.has_value() || derivs_xmin->extent(0) == 0));
     assert((BcXmax == BoundCond::HERMITE)
-           != (derivs_xmax == nullptr || derivs_xmax->extent(0) == 0));
+           != (!derivs_xmax.has_value() || derivs_xmax->extent(0) == 0));
 
     // Hermite boundary conditions at xmin, if any
     // NOTE: For consistency with the linear system, the i-th derivative

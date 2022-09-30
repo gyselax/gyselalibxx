@@ -21,7 +21,7 @@ SplineInterpolatorVx::SplineInterpolatorVx(
 
 DSpanVx SplineInterpolatorVx::operator()(DSpanVx const inout_data, DViewVx const coordinates) const
 {
-    m_builder(m_coefs, inout_data, &m_derivs_vxmin, &m_derivs_vxmax);
+    m_builder(m_coefs, inout_data, m_derivs_vxmin, m_derivs_vxmax);
     m_evaluator(inout_data, coordinates, m_coefs);
     return inout_data;
 }
