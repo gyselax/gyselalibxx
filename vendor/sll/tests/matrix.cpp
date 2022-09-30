@@ -11,17 +11,7 @@
 
 #include "test_utils.hpp"
 
-template <class T>
-struct MatrixSizesFixture;
-
-template <std::size_t N, std::size_t k>
-struct MatrixSizesFixture<
-        std::tuple<std::integral_constant<std::size_t, N>, std::integral_constant<std::size_t, k>>>
-    : public testing::Test
-{
-    static constexpr std::size_t matrix_size = N;
-    static constexpr std::size_t ndiags = k;
-};
+namespace {
 
 void fill_identity(DSpan2D mat)
 {
@@ -56,11 +46,7 @@ void check_inverse(DSpan2D matrix, DSpan2D inv)
             for (std::size_t k(0); k < N; ++k) {
                 id_val += matrix(i, k) * inv(j, k);
             }
-            if (i == j) {
-                ASSERT_TRUE(fabs(id_val - 1.0) < TOL);
-            } else {
-                ASSERT_TRUE(fabs(id_val) < TOL);
-            }
+            EXPECT_NEAR(id_val, static_cast<double>(i == j), TOL);
         }
     }
 }
@@ -76,26 +62,20 @@ void check_inverse_transpose(DSpan2D matrix, DSpan2D inv)
             for (std::size_t k(0); k < N; ++k) {
                 id_val += matrix(i, k) * inv(k, j);
             }
-            if (i == j) {
-                ASSERT_TRUE(fabs(id_val - 1.0) < TOL);
-            } else {
-                ASSERT_TRUE(fabs(id_val) < TOL);
-            }
+            EXPECT_NEAR(id_val, static_cast<double>(i == j), TOL);
         }
     }
 }
 
-using sizes = std::integer_sequence<std::size_t, 10, 20>;
-using diagonals = std::integer_sequence<std::size_t, 1, 2, 3, 4, 5, 6>;
+} // namespace
 
-using Cases = tuple_to_types_t<cartesian_product_t<sizes, diagonals>>;
-
-TYPED_TEST_SUITE(MatrixSizesFixture, Cases);
-
-TYPED_TEST(MatrixSizesFixture, PositiveDefiniteSymmetric)
+class MatrixSizesFixture : public testing::TestWithParam<std::tuple<std::size_t, std::size_t>>
 {
-    constexpr std::size_t N = TestFixture::matrix_size;
-    constexpr std::size_t k = TestFixture::ndiags;
+};
+
+TEST_P(MatrixSizesFixture, PositiveDefiniteSymmetric)
+{
+    auto const [N, k] = GetParam();
     std::unique_ptr<Matrix> matrix = Matrix::make_new_banded(N, k, k, true);
 
     for (std::size_t i(0); i < N; ++i) {
@@ -107,22 +87,21 @@ TYPED_TEST(MatrixSizesFixture, PositiveDefiniteSymmetric)
             matrix->set_element(i, j, -1.0);
         }
     }
-    double val_ptr[N * N];
-    DSpan2D val(val_ptr, N, N);
+    std::vector<double> val_ptr(N * N);
+    DSpan2D val(val_ptr.data(), N, N);
     copy_matrix(val, matrix);
 
-    double inv_ptr[N * N];
-    DSpan2D inv(inv_ptr, N, N);
+    std::vector<double> inv_ptr(N * N);
+    DSpan2D inv(inv_ptr.data(), N, N);
     fill_identity(inv);
     matrix->factorize();
     matrix->solve_multiple_inplace(inv);
     check_inverse(val, inv);
 }
 
-TYPED_TEST(MatrixSizesFixture, OffsetBanded)
+TEST_P(MatrixSizesFixture, OffsetBanded)
 {
-    constexpr std::size_t N = TestFixture::matrix_size;
-    constexpr std::size_t k = TestFixture::ndiags;
+    auto const [N, k] = GetParam();
     std::unique_ptr<Matrix> matrix = Matrix::make_new_banded(N, 0, 2 * k, true);
 
     for (std::size_t i(0); i < N; ++i) {
@@ -136,22 +115,21 @@ TYPED_TEST(MatrixSizesFixture, OffsetBanded)
             matrix->set_element(i, j, -1.0);
         }
     }
-    double val_ptr[N * N];
-    DSpan2D val(val_ptr, N, N);
+    std::vector<double> val_ptr(N * N);
+    DSpan2D val(val_ptr.data(), N, N);
     copy_matrix(val, matrix);
 
-    double inv_ptr[N * N];
-    DSpan2D inv(inv_ptr, N, N);
+    std::vector<double> inv_ptr(N * N);
+    DSpan2D inv(inv_ptr.data(), N, N);
     fill_identity(inv);
     matrix->factorize();
     matrix->solve_multiple_inplace(inv);
     check_inverse(val, inv);
 }
 
-TYPED_TEST(MatrixSizesFixture, PeriodicBanded)
+TEST_P(MatrixSizesFixture, PeriodicBanded)
 {
-    constexpr int N = TestFixture::matrix_size;
-    constexpr int k = TestFixture::ndiags;
+    auto const [N, k] = GetParam();
 
     for (int s(-k); s < k + 1; ++s) {
         if (s == 0)
@@ -161,19 +139,19 @@ TYPED_TEST(MatrixSizesFixture, PeriodicBanded)
         for (int i(0); i < N; ++i) {
             for (int j(0); j < N; ++j) {
                 int diag = modulo(j - i, int(N));
-                if (diag == s or diag == N + s) {
+                if (diag == s || diag == N + s) {
                     matrix->set_element(i, j, 0.5);
-                } else if (diag <= s + k or diag >= N + s - k) {
+                } else if (diag <= s + k || diag >= N + s - k) {
                     matrix->set_element(i, j, -1.0 / k);
                 }
             }
         }
-        double val_ptr[N * N];
-        DSpan2D val(val_ptr, N, N);
+        std::vector<double> val_ptr(N * N);
+        DSpan2D val(val_ptr.data(), N, N);
         copy_matrix(val, matrix);
 
-        double inv_ptr[N * N];
-        DSpan2D inv(inv_ptr, N, N);
+        std::vector<double> inv_ptr(N * N);
+        DSpan2D inv(inv_ptr.data(), N, N);
         fill_identity(inv);
         matrix->factorize();
         matrix->solve_multiple_inplace(inv);
@@ -181,10 +159,9 @@ TYPED_TEST(MatrixSizesFixture, PeriodicBanded)
     }
 }
 
-TYPED_TEST(MatrixSizesFixture, PositiveDefiniteSymmetricTranspose)
+TEST_P(MatrixSizesFixture, PositiveDefiniteSymmetricTranspose)
 {
-    constexpr std::size_t N = TestFixture::matrix_size;
-    constexpr std::size_t k = TestFixture::ndiags;
+    auto const [N, k] = GetParam();
     std::unique_ptr<Matrix> matrix = Matrix::make_new_banded(N, k, k, true);
 
     for (std::size_t i(0); i < N; ++i) {
@@ -196,25 +173,24 @@ TYPED_TEST(MatrixSizesFixture, PositiveDefiniteSymmetricTranspose)
             matrix->set_element(i, j, -1.0);
         }
     }
-    double val_ptr[N * N];
-    DSpan2D val(val_ptr, N, N);
+    std::vector<double> val_ptr(N * N);
+    DSpan2D val(val_ptr.data(), N, N);
     copy_matrix(val, matrix);
 
-    double inv_ptr[N * N];
-    DSpan2D inv(inv_ptr, N, N);
+    std::vector<double> inv_ptr(N * N);
+    DSpan2D inv(inv_ptr.data(), N, N);
     fill_identity(inv);
     matrix->factorize();
     for (std::size_t i(0); i < N; ++i) {
-        DSpan1D inv_line(inv_ptr + i * N, N);
+        DSpan1D inv_line(inv_ptr.data() + i * N, N);
         matrix->solve_transpose_inplace(inv_line);
     }
     check_inverse_transpose(val, inv);
 }
 
-TYPED_TEST(MatrixSizesFixture, OffsetBandedTranspose)
+TEST_P(MatrixSizesFixture, OffsetBandedTranspose)
 {
-    constexpr std::size_t N = TestFixture::matrix_size;
-    constexpr std::size_t k = TestFixture::ndiags;
+    auto const [N, k] = GetParam();
     std::unique_ptr<Matrix> matrix = Matrix::make_new_banded(N, 0, 2 * k, true);
 
     for (std::size_t i(0); i < N; ++i) {
@@ -228,25 +204,24 @@ TYPED_TEST(MatrixSizesFixture, OffsetBandedTranspose)
             matrix->set_element(i, j, -1.0);
         }
     }
-    double val_ptr[N * N];
-    DSpan2D val(val_ptr, N, N);
+    std::vector<double> val_ptr(N * N);
+    DSpan2D val(val_ptr.data(), N, N);
     copy_matrix(val, matrix);
 
-    double inv_ptr[N * N];
-    DSpan2D inv(inv_ptr, N, N);
+    std::vector<double> inv_ptr(N * N);
+    DSpan2D inv(inv_ptr.data(), N, N);
     fill_identity(inv);
     matrix->factorize();
     for (std::size_t i(0); i < N; ++i) {
-        DSpan1D inv_line(inv_ptr + i * N, N);
+        DSpan1D inv_line(inv_ptr.data() + i * N, N);
         matrix->solve_transpose_inplace(inv_line);
     }
     check_inverse_transpose(val, inv);
 }
 
-TYPED_TEST(MatrixSizesFixture, PeriodicBandedTranspose)
+TEST_P(MatrixSizesFixture, PeriodicBandedTranspose)
 {
-    constexpr int N = TestFixture::matrix_size;
-    constexpr int k = TestFixture::ndiags;
+    auto const [N, k] = GetParam();
 
     for (int s(-k); s < k + 1; ++s) {
         if (s == 0)
@@ -256,25 +231,30 @@ TYPED_TEST(MatrixSizesFixture, PeriodicBandedTranspose)
         for (int i(0); i < N; ++i) {
             for (int j(0); j < N; ++j) {
                 int diag = modulo(j - i, int(N));
-                if (diag == s or diag == N + s) {
+                if (diag == s || diag == N + s) {
                     matrix->set_element(i, j, 0.5);
-                } else if (diag <= s + k or diag >= N + s - k) {
+                } else if (diag <= s + k || diag >= N + s - k) {
                     matrix->set_element(i, j, -1.0 / k);
                 }
             }
         }
-        double val_ptr[N * N];
-        DSpan2D val(val_ptr, N, N);
+        std::vector<double> val_ptr(N * N);
+        DSpan2D val(val_ptr.data(), N, N);
         copy_matrix(val, matrix);
 
-        double inv_ptr[N * N];
-        DSpan2D inv(inv_ptr, N, N);
+        std::vector<double> inv_ptr(N * N);
+        DSpan2D inv(inv_ptr.data(), N, N);
         fill_identity(inv);
         matrix->factorize();
         for (int i(0); i < N; ++i) {
-            DSpan1D inv_line(inv_ptr + i * N, N);
+            DSpan1D inv_line(inv_ptr.data() + i * N, N);
             matrix->solve_transpose_inplace(inv_line);
         }
         check_inverse_transpose(val, inv);
     }
 }
+
+INSTANTIATE_TEST_SUITE_P(
+        MyGroup,
+        MatrixSizesFixture,
+        testing::Combine(testing::Values<std::size_t>(10, 20), testing::Range<std::size_t>(1, 7)));
