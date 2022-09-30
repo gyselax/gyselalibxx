@@ -114,8 +114,10 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
     for (std::size_t ii = 0; ii < Sderiv_rhs.extent(0); ++ii) {
         Sderiv_rhs(ii) = evaluator.deriv(xN, ii + shift);
     }
-    DSpan1D* deriv_l(TestFixture::s_bcl == BoundCond::HERMITE ? &Sderiv_lhs : nullptr);
-    DSpan1D* deriv_r(TestFixture::s_bcr == BoundCond::HERMITE ? &Sderiv_rhs : nullptr);
+    std::optional<DSpan1D> deriv_l(
+            TestFixture::s_bcl == BoundCond::HERMITE ? std::optional(Sderiv_lhs) : std::nullopt);
+    std::optional<DSpan1D> deriv_r(
+            TestFixture::s_bcr == BoundCond::HERMITE ? std::optional(Sderiv_rhs) : std::nullopt);
 
     // 5. Finally build the spline by filling `coef`
     spline_builder(coef, yvals, deriv_l, deriv_r);
@@ -241,8 +243,10 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
     for (std::size_t ii = 0; ii < Sderiv_rhs.extent(0); ++ii) {
         Sderiv_rhs(ii) = evaluator.deriv(xN, ii + shift);
     }
-    DSpan1D* deriv_l(TestFixture::s_bcl == BoundCond::HERMITE ? &Sderiv_lhs : nullptr);
-    DSpan1D* deriv_r(TestFixture::s_bcr == BoundCond::HERMITE ? &Sderiv_rhs : nullptr);
+    std::optional<DSpan1D> deriv_l(
+            TestFixture::s_bcl == BoundCond::HERMITE ? std::optional(Sderiv_lhs) : std::nullopt);
+    std::optional<DSpan1D> deriv_r(
+            TestFixture::s_bcr == BoundCond::HERMITE ? std::optional(Sderiv_rhs) : std::nullopt);
 
     // 5. Finally build the spline by filling `coef`
     spline_builder(coef, yvals, deriv_l, deriv_r);
