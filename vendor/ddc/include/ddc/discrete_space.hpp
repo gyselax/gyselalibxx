@@ -83,7 +83,6 @@ auto extract_after(Tuple&& t, std::index_sequence<Ids...>)
 template <class DDim, class... Args>
 static inline void init_discrete_space(Args&&... args)
 {
-    using DDimImplHost = typename DDim::template Impl<Kokkos::HostSpace>;
     if (detail::g_discrete_space_host<DDim>) {
         throw std::runtime_error("Discrete space function already initialized.");
     }
