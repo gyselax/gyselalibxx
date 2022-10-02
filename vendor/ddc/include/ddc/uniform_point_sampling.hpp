@@ -286,14 +286,13 @@ DDC_INLINE_FUNCTION constexpr Coordinate<CDim> coordinate(
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_left(DiscreteElement<UniformPointSampling<CDim>> i)
+DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_left(DiscreteElement<UniformPointSampling<CDim>>)
 {
     return step<UniformPointSampling<CDim>>();
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_right(
-        DiscreteElement<UniformPointSampling<CDim>> i)
+DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_right(DiscreteElement<UniformPointSampling<CDim>>)
 {
     return step<UniformPointSampling<CDim>>();
 }
