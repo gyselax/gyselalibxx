@@ -28,7 +28,7 @@ public:
     constexpr KokkosAllocator(KokkosAllocator&& x) noexcept = default;
 
     template <class U>
-    constexpr explicit KokkosAllocator(KokkosAllocator<U, MemorySpace> const& b) noexcept
+    constexpr explicit KokkosAllocator(KokkosAllocator<U, MemorySpace> const&) noexcept
     {
     }
 
@@ -39,7 +39,7 @@ public:
     constexpr KokkosAllocator& operator=(KokkosAllocator&& x) noexcept = default;
 
     template <class U>
-    constexpr KokkosAllocator& operator=(KokkosAllocator<U, MemorySpace> const& b) noexcept
+    constexpr KokkosAllocator& operator=(KokkosAllocator<U, MemorySpace> const&) noexcept
     {
     }
 

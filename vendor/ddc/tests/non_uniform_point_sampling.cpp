@@ -21,10 +21,6 @@ using DDimX = NonUniformPointSampling<DimX>;
 
 static std::array<double, 4> const array_points VALUES;
 static std::vector<double> const vector_points VALUES;
-[[maybe_unused]] Coordinate<DimX> constexpr min_x = Coordinate<DimX>(0.1);
-[[maybe_unused]] Coordinate<DimX> constexpr max_x = Coordinate<DimX>(0.4);
-[[maybe_unused]] DiscreteElement<DDimX> constexpr lbound = DiscreteElement<DDimX>(0);
-[[maybe_unused]] DiscreteElement<DDimX> constexpr ubound = DiscreteElement<DDimX>(3);
 DiscreteElement<DDimX> constexpr point_ix = DiscreteElement<DDimX>(2);
 Coordinate<DimX> constexpr point_rx = Coordinate<DimX>(0.3);
 

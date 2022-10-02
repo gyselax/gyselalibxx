@@ -25,7 +25,7 @@ public:
     constexpr AlignedAllocator(AlignedAllocator&& x) noexcept = default;
 
     template <class U>
-    constexpr explicit AlignedAllocator(AlignedAllocator<U, N> const& b) noexcept
+    constexpr explicit AlignedAllocator(AlignedAllocator<U, N> const&) noexcept
     {
     }
 
@@ -36,7 +36,7 @@ public:
     constexpr AlignedAllocator& operator=(AlignedAllocator&& x) noexcept = default;
 
     template <class U>
-    constexpr AlignedAllocator& operator=(AlignedAllocator<U, N> const& b) noexcept
+    constexpr AlignedAllocator& operator=(AlignedAllocator<U, N> const&) noexcept
     {
     }
 
