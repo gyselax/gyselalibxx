@@ -97,7 +97,7 @@ template <
         class... DCoords>
 inline T transform_reduce_serial(
         DiscreteDomain<DDims...> const& domain,
-        T const neutral,
+        [[maybe_unused]] T const neutral,
         BinaryReductionOp const& reduce,
         UnaryTransformOp const& transform,
         DCoords const&... dcoords) noexcept

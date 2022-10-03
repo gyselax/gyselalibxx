@@ -49,7 +49,6 @@ using ChunkYX = Chunk<Datatype, DDomYX>;
 
 static DElemX constexpr lbound_x(50);
 static DVectX constexpr nelems_x(3);
-[[maybe_unused]] static DElemX constexpr sentinel_x(lbound_x + nelems_x);
 static DDomX constexpr dom_x(lbound_x, nelems_x);
 
 static DElemY constexpr lbound_y(4);
