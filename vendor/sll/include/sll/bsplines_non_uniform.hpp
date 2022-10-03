@@ -63,12 +63,18 @@ public:
         friend class Impl;
 
     private:
-        std::vector<Coordinate<Tag>> m_knots;
+        Kokkos::View<Coordinate<Tag>*, MemorySpace> m_knots;
 
     public:
         using discrete_dimension_type = NonUniformBSplines;
 
         Impl() = default;
+
+        template <class OriginMemorySpace>
+        explicit Impl(Impl<OriginMemorySpace> const& impl)
+        {
+            Kokkos::deep_copy(m_knots, impl.m_knots);
+        }
 
         /// @brief Construct a `Impl` using a brace-list, i.e. `Impl bsplines({0., 1.})`
         explicit Impl(std::initializer_list<Coordinate<Tag>> breaks)
@@ -77,14 +83,14 @@ public:
         }
 
         /// @brief Construct a `Impl` using a C++20 "common range".
-        template <class InputRange>
-        inline constexpr Impl(InputRange&& breaks) : Impl(breaks.begin(), breaks.end())
+        explicit Impl(std::vector<Coordinate<Tag>> const& breaks)
+            : Impl(breaks.begin(), breaks.end())
         {
         }
 
         /// @brief Construct a `Impl` using a pair of iterators.
         template <class RandomIt>
-        inline constexpr Impl(RandomIt breaks_begin, RandomIt breaks_end);
+        Impl(RandomIt breaks_begin, RandomIt breaks_end);
 
         Impl(Impl const& x) = default;
 
@@ -108,7 +114,7 @@ public:
         {
             // TODO: assert break_idx >= 1 - degree
             // TODO: assert break_idx <= npoints + degree
-            return m_knots[break_idx + degree()];
+            return m_knots(break_idx + degree());
         }
 
         Coordinate<Tag> rmin() const noexcept
@@ -153,7 +159,7 @@ public:
         {
             // TODO: assert break_idx >= 1 - degree
             // TODO: assert break_idx <= npoints + degree
-            return m_knots[break_idx + degree()];
+            return m_knots(break_idx + degree());
         }
     };
 };
@@ -161,10 +167,10 @@ public:
 template <class Tag, std::size_t D>
 template <class MemorySpace>
 template <class RandomIt>
-inline constexpr NonUniformBSplines<Tag, D>::Impl<MemorySpace>::Impl(
+NonUniformBSplines<Tag, D>::Impl<MemorySpace>::Impl(
         RandomIt const break_begin,
         RandomIt const break_end)
-    : m_knots((break_end - break_begin) + 2 * degree())
+    : m_knots("", (break_end - break_begin) + 2 * degree())
 {
     assert(m_knots.size() > 2 * degree() + 1);
 
