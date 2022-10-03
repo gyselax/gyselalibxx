@@ -15,7 +15,9 @@ class UniformBSplines
 {
     static_assert(D > 0, "Parameter `D` must be positive");
 
-private:
+public:
+    // From nvcc: 'A type that is defined inside a class and has private or protected access cannot be used
+    // in the template argument type of a variable template instantiation'
     template <class T>
     struct InternalTagGenerator;
 
@@ -79,6 +81,12 @@ public:
         using discrete_dimension_type = UniformBSplines;
 
         Impl() = default;
+
+        template <class OriginMemorySpace>
+        explicit Impl(Impl<OriginMemorySpace> const& impl)
+        {
+            m_domain = impl.m_domain;
+        }
 
         /** Constructs a BSpline basis with n equidistant knots over \f$[a, b]\f$
      * 

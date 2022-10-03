@@ -79,10 +79,10 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
         init_discrete_space<BSplinesX>(x0, xN, ncells);
     } else {
         DVectX constexpr npoints(ncells + 1);
-        std::vector<double> breaks(npoints);
+        std::vector<CoordX> breaks(npoints);
         double dx = (xN - x0) / ncells;
         for (std::size_t i(0); i < npoints; ++i) {
-            breaks[i] = x0 + i * dx;
+            breaks[i] = CoordX(x0 + i * dx);
         }
         init_discrete_space<BSplinesX>(breaks);
     }
@@ -123,9 +123,8 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
     spline_builder(coef, yvals, deriv_l, deriv_r);
 
     // 6. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
-    SplineEvaluator<BSplinesX> spline_evaluator(
-            NullBoundaryValue<BSplinesX>::value,
-            NullBoundaryValue<BSplinesX>::value);
+    SplineEvaluator<BSplinesX>
+            spline_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);
 
     FieldX coords_eval(interpolation_domain);
     for (IndexX const ix : interpolation_domain) {
@@ -207,10 +206,10 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
         init_discrete_space<BSplinesX>(x0, xN, ncells);
     } else {
         DVectX constexpr npoints(ncells + 1);
-        std::vector<double> breaks(npoints);
+        std::vector<CoordX> breaks(npoints);
         double dx = (xN - x0) / ncells;
         for (std::size_t i(0); i < npoints; ++i) {
-            breaks[i] = x0 + i * dx;
+            breaks[i] = CoordX(x0 + i * dx);
         }
         init_discrete_space<BSplinesX>(breaks);
     }
@@ -251,9 +250,8 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
     spline_builder(coef, yvals, deriv_l, deriv_r);
 
     // 6. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
-    SplineEvaluator<BSplinesX> spline_evaluator(
-            NullBoundaryValue<BSplinesX>::value,
-            NullBoundaryValue<BSplinesX>::value);
+    SplineEvaluator<BSplinesX>
+            spline_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);
 
     // 7. Checking errors
     double max_norm_error = 0.;

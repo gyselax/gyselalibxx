@@ -4,6 +4,7 @@
 
 #include <sll/gauss_legendre_integration.hpp>
 #include <sll/matrix.hpp>
+#include <sll/null_boundary_value.hpp>
 
 #include <geometry.hpp>
 #include <species_info.hpp>
@@ -20,16 +21,15 @@ static SplineEvaluator<NUBSplinesX> jit_build_nubsplinesx(
     static_assert(std::is_same_v<BSplines, UBSplinesX> || std::is_same_v<BSplines, NUBSplinesX>);
     if constexpr (std::is_same_v<BSplines, UBSplinesX>) {
         int ncells = discrete_space<UBSplinesX>().ncells();
-        std::vector<double> knots(ncells + 1);
+        std::vector<CoordX> knots(ncells + 1);
 
         for (size_t i(0); i < ncells + 1; ++i) {
-            knots[i] = discrete_space<UBSplinesX>().get_knot(i);
+            knots[i] = CoordX(discrete_space<UBSplinesX>().get_knot(i));
         }
         init_discrete_space<NUBSplinesX>(knots);
         // Boundary values are never evaluated
-        return SplineEvaluator<NUBSplinesX>(
-                NullBoundaryValue<NUBSplinesX>::value,
-                NullBoundaryValue<NUBSplinesX>::value);
+        return SplineEvaluator<
+                NUBSplinesX>(g_null_boundary<NUBSplinesX>, g_null_boundary<NUBSplinesX>);
     } else {
         return spline_x_evaluator;
     }

@@ -5,15 +5,16 @@
 template <class BSplines>
 class NullBoundaryValue : public SplineBoundaryValue<BSplines>
 {
+public:
     NullBoundaryValue() = default;
 
-public:
     ~NullBoundaryValue() override = default;
 
     double operator()(double, ChunkSpan<const double, DiscreteDomain<BSplines>>) const final
     {
         return 0.0;
     }
-
-    static inline NullBoundaryValue<BSplines> value;
 };
+
+template <class BSplines>
+inline NullBoundaryValue<BSplines> const g_null_boundary;

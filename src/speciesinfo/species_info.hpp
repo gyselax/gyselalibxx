@@ -29,19 +29,33 @@ public:
 
     private:
         // charge of the particles (kinetic + adiabatic)
-        Chunk<int, discrete_domain_type> const m_charge;
+        Chunk<int, discrete_domain_type, KokkosAllocator<int, MemorySpace>> m_charge;
 
         // mass of the particles of all kinetic species
-        Chunk<double, discrete_domain_type> const m_mass;
+        Chunk<double, discrete_domain_type, KokkosAllocator<double, MemorySpace>> m_mass;
 
         // Initial perturbation amplitude of all kinetic species
-        Chunk<double, discrete_domain_type> const m_perturb_amplitude;
+        Chunk<double, discrete_domain_type, KokkosAllocator<double, MemorySpace>>
+                m_perturb_amplitude;
 
         // Initial perturbation mode of all kinetic species
-        Chunk<int, discrete_domain_type> const m_perturb_mode;
+        Chunk<int, discrete_domain_type, KokkosAllocator<int, MemorySpace>> m_perturb_mode;
 
     public:
         using discrete_dimension_type = SpeciesInformation;
+
+        template <class OMemorySpace>
+        explicit Impl(Impl<OMemorySpace> const& impl)
+            : m_charge(impl.m_charge.domain())
+            , m_mass(impl.m_mass.domain())
+            , m_perturb_amplitude(impl.m_perturb_amplitude.domain())
+            , m_perturb_mode(impl.m_perturb_mode.domain())
+        {
+            deepcopy(m_charge, impl.m_charge);
+            deepcopy(m_mass, impl.m_mass);
+            deepcopy(m_perturb_amplitude, impl.m_perturb_amplitude);
+            deepcopy(m_perturb_mode, impl.m_perturb_mode);
+        }
 
         Impl(Chunk<int, discrete_domain_type> charge,
              Chunk<double, discrete_domain_type> mass,

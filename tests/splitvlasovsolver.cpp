@@ -16,6 +16,8 @@
 class MockAdvectionX : public IAdvectionX
 {
 public:
+    MockAdvectionX() = default;
+
     MOCK_METHOD(DSpanSpXVx, CallOp, (DSpanSpXVx fdistribu, double dt), (const));
     DSpanSpXVx operator()(DSpanSpXVx fdistribu, double dt) const override
     {
@@ -26,6 +28,8 @@ public:
 class MockAdvectionVx : public IAdvectionVx
 {
 public:
+    MockAdvectionVx() = default;
+
     MOCK_METHOD(DSpanSpXVx, CallOp, (DSpanSpXVx fdistribu, DViewX efield, double dt), (const));
     DSpanSpXVx operator()(DSpanSpXVx fdistribu, DViewX efield, double dt) const override
     {
