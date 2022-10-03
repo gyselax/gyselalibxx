@@ -10,6 +10,7 @@
 
 #include <ddc/ddc.hpp>
 
+#include <sll/constant_extrapolation_boundary_value.hpp>
 #include <sll/spline_evaluator.hpp>
 
 #include <paraconf.h>
@@ -18,7 +19,6 @@
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "bumpontailequilibrium.hpp"
-#include "constant_extrapolation_boundary_value.hpp"
 #include "fftpoissonsolver.hpp"
 #include "fftw.hpp"
 #include "geometry.hpp"
