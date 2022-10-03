@@ -171,7 +171,7 @@ int main(int argc, char** argv)
 
     BslAdvectionX const advection_x(spline_x_interpolator);
 
-    BslAdvectionVx const advection_vx(builder_x, spline_x_evaluator, spline_vx_interpolator);
+    BslAdvectionVx const advection_vx(spline_vx_interpolator);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 

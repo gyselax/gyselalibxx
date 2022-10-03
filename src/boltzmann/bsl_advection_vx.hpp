@@ -17,17 +17,10 @@ class BoundaryValue;
 class BslAdvectionVx : public IAdvectionVx
 {
 private:
-    SplineXBuilder const& m_spline_x_builder;
-
-    SplineEvaluator<BSplinesX> const& m_spline_x_evaluator;
-
     IPreallocatableInterpolatorVx const& m_interpolator_vx;
 
 public:
-    BslAdvectionVx(
-            SplineXBuilder const& spline_x_builder,
-            SplineEvaluator<BSplinesX> const& spline_x_evaluator,
-            IPreallocatableInterpolatorVx const& interpolator_vx);
+    explicit BslAdvectionVx(IPreallocatableInterpolatorVx const& interpolator_vx);
 
     ~BslAdvectionVx() override = default;
 

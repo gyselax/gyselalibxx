@@ -11,14 +11,11 @@ private:
     double m_eval_pos;
 
 public:
-    ConstantExtrapolationBoundaryValue(double eval_pos) : m_eval_pos(eval_pos) {}
-    ConstantExtrapolationBoundaryValue(ConstantExtrapolationBoundaryValue const&) = delete;
-    ConstantExtrapolationBoundaryValue(ConstantExtrapolationBoundaryValue&&) = delete;
-    ~ConstantExtrapolationBoundaryValue() override = default;
-    void operator=(ConstantExtrapolationBoundaryValue const&) = delete;
-    void operator=(ConstantExtrapolationBoundaryValue&&) = delete;
+    explicit ConstantExtrapolationBoundaryValue(double eval_pos) : m_eval_pos(eval_pos) {}
 
-    inline double operator()(double, ChunkSpan<double const, DiscreteDomain<BSplines>> spline_coef)
+    ~ConstantExtrapolationBoundaryValue() override = default;
+
+    double operator()(double, ChunkSpan<double const, DiscreteDomain<BSplines>> const spline_coef)
             const final
     {
         std::array<double, BSplines::degree() + 1> values;

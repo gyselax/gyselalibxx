@@ -25,8 +25,6 @@ FftPoissonSolver::FftPoissonSolver(
         SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
     : m_fft(fft)
     , m_ifft(ifft)
-    , m_spline_x_builder(spline_x_builder)
-    , m_spline_x_evaluator(spline_x_evaluator)
     , compute_rho(spline_vx_builder, spline_vx_evaluator)
     , m_electric_field(spline_x_builder, spline_x_evaluator)
 {

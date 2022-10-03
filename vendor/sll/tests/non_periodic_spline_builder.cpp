@@ -190,7 +190,6 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
 {
     using DimX = typename TestFixture::DimX;
     using IDimX = typename TestFixture::IDimX;
-    using IndexX = DiscreteElement<IDimX>;
     using DVectX = DiscreteVector<IDimX>;
     using BSplinesX = typename TestFixture::BSpline;
     using BsplIndexX = DiscreteElement<BSplinesX>;
