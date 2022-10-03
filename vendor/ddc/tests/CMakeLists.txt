@@ -9,6 +9,8 @@ add_executable(ddc_tests
     non_uniform_point_sampling.cpp
     single_discretization.cpp
     tagged_vector.cpp
+    relocatable_device_code_initialization.cpp
+    relocatable_device_code.cpp
     type_seq.cpp
     uniform_point_sampling.cpp
     transform_reduce.cpp

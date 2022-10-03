@@ -129,9 +129,8 @@ jobs:
       run: |
         cat<<-EOF > run.sh
           set -xe
-          export CC=/opt/rocm/bin/amdclang
-          export CXX=/opt/rocm/bin/amdclang++
-          export FC=/opt/rocm/bin/amdflang
+          export CC=/opt/rocm/hip/bin/hipcc
+          export CXX=/opt/rocm/hip/bin/hipcc
           cmake -DCMAKE_CXX_FLAGS="-Wall" -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_HIP=ON -DKokkos_ARCH_VEGA900=ON -DCMAKE_PREFIX_PATH=/opt/rocm /src
           make -j 2 VERBOSE=1
         EOF
