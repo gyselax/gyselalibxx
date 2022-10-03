@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
+
 #include <ddc/ddc.hpp>
 
 template <class IDim>

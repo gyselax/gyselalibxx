@@ -22,7 +22,7 @@ TEST(QuadratureTest, ExactForConstantFunc)
 
     IDomainX const gridx = builder_x.interpolation_domain();
 
-    Quadrature<IDimX> integrate = {trapezoid_quadrature_coefficients<IDimX>(gridx)};
+    Quadrature<IDimX> const integrate(trapezoid_quadrature_coefficients(gridx));
 
     DFieldX values(gridx);
 
@@ -56,7 +56,7 @@ double compute_error(int n_elems)
 
     IDomainY const gridx = builder_x.interpolation_domain();
 
-    Quadrature<IDimY> integrate = {trapezoid_quadrature_coefficients<IDimY>(gridx)};
+    Quadrature<IDimY> const integrate(trapezoid_quadrature_coefficients(gridx));
 
     DFieldY values(gridx);
 
