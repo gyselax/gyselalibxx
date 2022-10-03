@@ -72,10 +72,10 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_NonUniform)
     static constexpr CoordX xmin = CoordX(0.0);
     static constexpr CoordX xmax = CoordX(0.2);
     static constexpr std::size_t ncells = TestFixture::ncells;
-    std::vector<double> breaks(ncells + 1);
+    std::vector<CoordX> breaks(ncells + 1);
     double dx = (xmax - xmin) / ncells;
     for (std::size_t i(0); i < ncells + 1; ++i) {
-        breaks[i] = xmin + i * dx;
+        breaks[i] = CoordX(xmin + i * dx);
     }
     init_discrete_space<NonUniformBSplines<DimX, degree>>(breaks);
 
