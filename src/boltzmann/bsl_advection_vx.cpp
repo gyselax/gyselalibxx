@@ -21,13 +21,8 @@ class BoundaryValue;
 using namespace std;
 using namespace std::experimental;
 
-BslAdvectionVx::BslAdvectionVx(
-        SplineXBuilder const& spline_x_builder,
-        SplineEvaluator<BSplinesX> const& spline_x_evaluator,
-        IPreallocatableInterpolatorVx const& interpolator_vx)
-    : m_spline_x_builder(spline_x_builder)
-    , m_spline_x_evaluator(spline_x_evaluator)
-    , m_interpolator_vx(interpolator_vx)
+BslAdvectionVx::BslAdvectionVx(IPreallocatableInterpolatorVx const& interpolator_vx)
+    : m_interpolator_vx(interpolator_vx)
 {
 }
 

@@ -18,10 +18,6 @@ class FftPoissonSolver : public IPoissonSolver
 
     IInverseFourierTransform<RDimX> const& m_ifft;
 
-    SplineXBuilder const& m_spline_x_builder;
-
-    SplineEvaluator<BSplinesX> const& m_spline_x_evaluator;
-
     ChargeDensityCalculator compute_rho;
 
     ElectricField m_electric_field;

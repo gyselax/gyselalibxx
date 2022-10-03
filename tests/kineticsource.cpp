@@ -48,8 +48,8 @@ TEST(KineticSource, Ordering)
     IDomainVx const gridvx = builder_vx.interpolation_domain();
     IDomainSp const gridsp = dom_sp;
 
-    Quadrature<IDimX> integrate_x = {trapezoid_quadrature_coefficients<IDimX>(gridx)};
-    Quadrature<IDimVx> integrate_v = {trapezoid_quadrature_coefficients<IDimVx>(gridvx)};
+    Quadrature<IDimX> const integrate_x(trapezoid_quadrature_coefficients(gridx));
+    Quadrature<IDimVx> const integrate_v(trapezoid_quadrature_coefficients(gridvx));
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 

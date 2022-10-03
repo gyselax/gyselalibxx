@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
+
 #include <cassert>
 
 #include <ddc/ddc.hpp>
@@ -9,27 +10,24 @@ template <class IDim>
 class Quadrature
 {
 private:
-    using IDomain = DiscreteDomain<IDim>;
-
-    Chunk<double, IDomain> coefficients;
+    Chunk<double, DiscreteDomain<IDim>> m_coefficients;
 
 public:
-    Quadrature(Chunk<double, IDomain>&& coeffs) : coefficients(std::move(coeffs)) {}
+    explicit Quadrature(Chunk<double, DiscreteDomain<IDim>>&& coeffs)
+        : m_coefficients(std::move(coeffs))
+    {
+    }
+
     ~Quadrature() = default;
 
-    double operator()(ChunkSpan<double, IDomain> const& values);
+    double operator()(ChunkSpan<double, DiscreteDomain<IDim>> const values) const
+    {
+        assert(get_domain<IDim>(values) == get_domain<IDim>(m_coefficients));
+        return transform_reduce(
+                policies::parallel_host,
+                values.domain(),
+                0.0,
+                reducer::sum<double>(),
+                [&](DiscreteElement<IDim> const ix) { return m_coefficients(ix) * values(ix); });
+    }
 };
-
-
-template <class IDim>
-double Quadrature<IDim>::operator()(ChunkSpan<double, DiscreteDomain<IDim>> const& values)
-{
-    auto domain = get_domain<IDim>(coefficients);
-    assert(get_domain<IDim>(values) == domain);
-    return transform_reduce(
-            policies::parallel_host,
-            domain,
-            0.0,
-            reducer::sum<double>(),
-            [&](DiscreteElement<IDim> const ix) { return coefficients(ix) * values(ix); });
-}
