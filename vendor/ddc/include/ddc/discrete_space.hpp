@@ -81,7 +81,7 @@ auto extract_after(Tuple&& t, std::index_sequence<Ids...>)
  * @param a the constructor arguments
  */
 template <class DDim, class... Args>
-static inline void init_discrete_space(Args&&... args)
+void init_discrete_space(Args&&... args)
 {
     if (detail::g_discrete_space_host<DDim>) {
         throw std::runtime_error("Discrete space function already initialized.");
@@ -118,7 +118,7 @@ static inline void init_discrete_space(Args&&... args)
  *          - the arguments to pass through at index 1
  */
 template <class DDimImpl, class Arg>
-static inline Arg init_discrete_space(std::tuple<DDimImpl, Arg>&& a)
+Arg init_discrete_space(std::tuple<DDimImpl, Arg>&& a)
 {
     using DDim = typename DDimImpl::discrete_dimension_type;
     init_discrete_space<DDim>(std::move(std::get<0>(a)));
@@ -131,7 +131,7 @@ static inline Arg init_discrete_space(std::tuple<DDimImpl, Arg>&& a)
  *          - the (2+) arguments to pass through in other indices
  */
 template <class DDimImpl, class... Args>
-static inline std::enable_if_t<2 <= sizeof...(Args), std::tuple<Args...>> init_discrete_space(
+std::enable_if_t<2 <= sizeof...(Args), std::tuple<Args...>> init_discrete_space(
         std::tuple<DDimImpl, Args...>&& a)
 {
     using DDim = typename DDimImpl::discrete_dimension_type;
