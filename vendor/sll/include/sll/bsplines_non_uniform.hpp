@@ -71,7 +71,7 @@ public:
         Impl() = default;
 
         template <class OriginMemorySpace>
-        explicit Impl(Impl<OriginMemorySpace> const& impl)
+        explicit Impl(Impl<OriginMemorySpace> const& impl) : m_knots("", impl.m_knots.extent(0))
         {
             Kokkos::deep_copy(m_knots, impl.m_knots);
         }
