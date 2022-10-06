@@ -1,10 +1,11 @@
 spack:
-  concretization: together
+  concretizer:
+    unify: when_possible
   specs:
-  - 'benchmark'
   - 'cmake@3.15:'
-  - 'fftw precision=double -mpi'
+  - 'benchmark'
   - 'googletest +gmock'
+  - 'fftw ~mpi precision=double'
   - 'lapack'
   - 'paraconf@0.4.15:'
   - 'pdi'
