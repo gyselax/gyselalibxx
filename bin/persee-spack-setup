@@ -3,14 +3,17 @@
 
 set -e
 
+SPACK_VERSION="0.18.1"
+
 # some initial cleanup
 despacktivate &> /dev/null || true
 spack unload -a &> /dev/null || true
 module purge &> /dev/null || true
 
 # fetch and activate spack
-SPACK_ROOT="${SPACK_ROOT:-${HOME}/spack}"
+SPACK_ROOT="${SPACK_ROOT:-${HOME}/spack-${SPACK_VERSION}}"
 git clone https://github.com/spack/spack.git "${SPACK_ROOT}" &> /dev/null || true
+git -C "${SPACK_ROOT}" checkout "v${SPACK_VERSION}" &> /dev/null || true
 if ! which spack &> /dev/null
 then
     . "${SPACK_ROOT}/share/spack/setup-env.sh"
@@ -22,13 +25,12 @@ git -C "${SPACK_ROOT}/var/spack/repos/pdi" fetch --all -p
 git -C "${SPACK_ROOT}/var/spack/repos/pdi" reset --hard origin/stable
 spack repo add "${SPACK_ROOT}/var/spack/repos/pdi" &> /dev/null || true
 
-# detect the local python install
-spack external find python 2> /dev/null || true
-
 # detect the local GCC install
 module load gcc/10.3.0
 spack compiler find 2> /dev/null || true
 module purge
+
+spack external find autoconf
 
 # create our environment (VOICE_DIR contains spack.yaml)
 VOICE_DIR="$(dirname "$(dirname "$(readlink -f "$0" )")")"
