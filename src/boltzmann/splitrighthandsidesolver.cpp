@@ -4,20 +4,20 @@
 #include <vector>
 
 #include <geometry.hpp>
-#include <isource.hpp>
+#include <irighthandside.hpp>
 
 #include "iboltzmannsolver.hpp"
-#include "splitsourceenvironmentsolver.hpp"
+#include "splitrighthandsidesolver.hpp"
 
-SplitSourceEnvironmentSolver::SplitSourceEnvironmentSolver(
+SplitRightHandSideSolver::SplitRightHandSideSolver(
         IBoltzmannSolver const& boltzmann_solver,
-        std::vector<std::reference_wrapper<ISource const>> rhs)
+        std::vector<std::reference_wrapper<IRightHandSide const>> rhs)
     : m_boltzmann_solver(boltzmann_solver)
     , m_rhs(std::move(rhs))
 {
 }
 
-DSpanSpXVx SplitSourceEnvironmentSolver::operator()(
+DSpanSpXVx SplitRightHandSideSolver::operator()(
         DSpanSpXVx const allfdistribu,
         DViewX const electric_field,
         double const dt) const

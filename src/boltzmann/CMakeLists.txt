@@ -7,7 +7,7 @@ add_library("boltzmann_${GEOMETRY_VARIANT}" STATIC
     bsl_advection_vx.cpp
     nulladvectionvx.cpp
     splitvlasovsolver.cpp
-    splitsourceenvironmentsolver.cpp
+    splitrighthandsidesolver.cpp
 )
 
 target_compile_features("boltzmann_${GEOMETRY_VARIANT}"
