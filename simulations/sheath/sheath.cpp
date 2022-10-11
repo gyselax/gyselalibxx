@@ -21,7 +21,7 @@
 #include "femnonperiodicpoissonsolver.hpp"
 #include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
-#include "isource.hpp"
+#include "irighthandside.hpp"
 #include "kinetic_source.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "paraconfpp.hpp"
@@ -32,7 +32,7 @@
 #include "species_info.hpp"
 #include "spline_interpolator_vx.hpp"
 #include "spline_interpolator_x.hpp"
-#include "splitsourceenvironmentsolver.hpp"
+#include "splitrighthandsidesolver.hpp"
 #include "splitvlasovsolver.hpp"
 
 using std::cerr;
@@ -217,7 +217,7 @@ int main(int argc, char** argv)
             temperature_kineticsource);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
-    SplitSourceEnvironmentSolver const boltzmann(vlasov, {kinetic_source});
+    SplitRightHandSideSolver const boltzmann(vlasov, {kinetic_source});
 
     using FemPoissonSolverX = std::
             conditional_t<RDimX::PERIODIC, FemPeriodicPoissonSolver, FemNonPeriodicPoissonSolver>;
