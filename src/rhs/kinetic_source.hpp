@@ -2,11 +2,11 @@
 
 #include <geometry.hpp>
 
-#include "isource.hpp"
+#include "irighthandside.hpp"
 
 class SpeciesInformation;
 
-class Kinetic_source : public ISource
+class Kinetic_source : public IRightHandSide
 {
 private:
     double const m_px_source;

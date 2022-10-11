@@ -14,11 +14,11 @@
 
 #include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
-#include "isource.hpp"
+#include "irighthandside.hpp"
 #include "kinetic_source.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
-#include "splitsourceenvironmentsolver.hpp"
+#include "splitrighthandsidesolver.hpp"
 #include "trapezoid_quadrature.hpp"
 
 TEST(KineticSource, Ordering)

@@ -6,22 +6,22 @@
 #include <vector>
 
 #include <geometry.hpp>
-#include <isource.hpp>
+#include <irighthandside.hpp>
 
 #include "iboltzmannsolver.hpp"
 
-class SplitSourceEnvironmentSolver : public IBoltzmannSolver
+class SplitRightHandSideSolver : public IBoltzmannSolver
 {
     IBoltzmannSolver const& m_boltzmann_solver;
 
-    std::vector<std::reference_wrapper<ISource const>> m_rhs;
+    std::vector<std::reference_wrapper<IRightHandSide const>> m_rhs;
 
 public:
-    SplitSourceEnvironmentSolver(
+    SplitRightHandSideSolver(
             IBoltzmannSolver const& vlasov_solver,
-            std::vector<std::reference_wrapper<ISource const>> rhs);
+            std::vector<std::reference_wrapper<IRightHandSide const>> rhs);
 
-    ~SplitSourceEnvironmentSolver() override = default;
+    ~SplitRightHandSideSolver() override = default;
 
     DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_field, double dt) const override;
 };

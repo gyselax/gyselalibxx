@@ -4,10 +4,10 @@
 
 #include <geometry.hpp>
 
-class ISource
+class IRightHandSide
 {
 public:
-    virtual ~ISource() = default;
+    virtual ~IRightHandSide() = default;
 
     virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const = 0;
 };
