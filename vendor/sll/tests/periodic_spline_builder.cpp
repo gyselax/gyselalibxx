@@ -65,7 +65,7 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
 
     CoordX constexpr x0(0.);
     CoordX constexpr xN(1.);
-    std::size_t constexpr ncells = 100;
+    std::size_t constexpr ncells = 10;
 
     // 1. Create BSplines
     if constexpr (BSplinesX::is_uniform()) {
@@ -130,4 +130,44 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
         max_norm_error_diff = std::fmax(max_norm_error_diff, std::fabs(error_deriv));
     }
     EXPECT_LE(max_norm_error, 1.0e-12);
+}
+
+TYPED_TEST(PeriodicSplineBuilderTestFixture, OrderedPoints)
+{
+    using DimX = typename TestFixture::DimX;
+    using IDimX = typename TestFixture::IDimX;
+    using IndexX = DiscreteElement<IDimX>;
+    using BSplinesX = typename TestFixture::BSpline;
+    using CoordX = Coordinate<DimX>;
+
+    CoordX constexpr x0(0.);
+    CoordX constexpr xN(1.);
+    std::size_t constexpr ncells = 10;
+
+    // 1. Create BSplines
+    if constexpr (BSplinesX::is_uniform()) {
+        init_discrete_space<BSplinesX>(x0, xN, ncells);
+    } else {
+        int constexpr npoints(ncells + 1);
+        std::vector<CoordX> breaks(npoints);
+        double dx = (xN - x0) / ncells;
+        for (std::size_t i(0); i < npoints; ++i) {
+            breaks[i] = x0 + i * dx;
+        }
+        init_discrete_space<BSplinesX>(breaks);
+    }
+
+    // 2. Create a SplineBuilder over BSplines using some boundary conditions
+    SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> spline_builder;
+    auto interpolation_domain = spline_builder.interpolation_domain();
+
+    double last(coordinate(interpolation_domain.front()));
+    double current;
+    for (IndexX const ix : interpolation_domain) {
+        current = coordinate(ix);
+        ASSERT_LE(current, discrete_space<BSplinesX>().rmax());
+        ASSERT_GE(current, discrete_space<BSplinesX>().rmin());
+        ASSERT_LE(last, current);
+        last = current;
+    }
 }

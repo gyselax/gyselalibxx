@@ -111,13 +111,13 @@ public:
 private:
     void compute_interpolation_points_uniform();
 
-    void compute_interpolation_points_non_uniform();
+    int compute_interpolation_points_non_uniform();
 
     void compute_block_sizes_uniform(int& lower_block_size, int& upper_block_size) const;
 
     void compute_block_sizes_non_uniform(int& lower_block_size, int& upper_block_size) const;
 
-    void allocate_matrix(int kl, int ku);
+    void allocate_matrix(int lower_block_size, int upper_block_size, int diag_shift);
 
     void compute_interpolant_degree1(
             ChunkSpan<double, DiscreteDomain<bsplines_type>> spline,
@@ -133,15 +133,16 @@ SplineBuilder<BSplines, BcXmin, BcXmax>::SplineBuilder()
            / discrete_space<BSplines>().ncells())
     , matrix(nullptr)
 {
+    int diag_shift = 0;
     int lower_block_size, upper_block_size;
     if constexpr (bsplines_type::is_uniform()) {
         compute_interpolation_points_uniform();
         compute_block_sizes_uniform(lower_block_size, upper_block_size);
     } else {
-        compute_interpolation_points_non_uniform();
+        diag_shift = compute_interpolation_points_non_uniform();
         compute_block_sizes_non_uniform(lower_block_size, upper_block_size);
     }
-    allocate_matrix(lower_block_size, upper_block_size);
+    allocate_matrix(lower_block_size, upper_block_size, diag_shift);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -295,8 +296,9 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
 //-------------------------------------------------------------------------------------------------
 
 template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
-void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_uniform()
+int SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_uniform()
 {
+    int diag_shift = 0;
     std::size_t const n_interp_pts = discrete_space<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax;
     std::vector<double> interp_pts(n_interp_pts);
 
@@ -352,9 +354,35 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
     if constexpr (bsplines_type::is_periodic()) {
         double const zone_width
                 = discrete_space<BSplines>().rmax() - discrete_space<BSplines>().rmin();
-        for (std::size_t i = 0; i < n_interp_pts; ++i) {
-            interp_pts[i] = modulo(interp_pts[i] - s_nbc_xmin, zone_width)
-                            + discrete_space<BSplines>().rmin();
+        if (interp_pts[0] < discrete_space<BSplines>().rmin()) {
+            // Count the number of interpolation points that need shifting to preserve the ordering
+            while (interp_pts[diag_shift] < discrete_space<BSplines>().rmin()) {
+                temp_knots[diag_shift] = modulo(interp_pts[diag_shift] - s_nbc_xmin, zone_width)
+                                         + discrete_space<BSplines>().rmin();
+                diag_shift++;
+            }
+            // Shift the points
+            for (std::size_t i = 0; i < n_interp_pts - diag_shift; ++i) {
+                interp_pts[i] = interp_pts[i + diag_shift];
+            }
+            for (std::size_t i = 0; i < diag_shift; ++i) {
+                interp_pts[n_interp_pts - diag_shift + i] = temp_knots[i];
+            }
+        } else if (interp_pts[n_interp_pts - 1] > discrete_space<BSplines>().rmax()) {
+            // Count the number of interpolation points that need shifting to preserve the ordering
+            while (interp_pts[n_interp_pts - 1 + diag_shift] > discrete_space<BSplines>().rmin()) {
+                temp_knots[-diag_shift]
+                        = modulo(interp_pts[n_interp_pts - 1 + diag_shift] - s_nbc_xmin, zone_width)
+                          + discrete_space<BSplines>().rmin();
+                diag_shift--;
+            }
+            // Shift the points
+            for (std::size_t i = 0; i < n_interp_pts + diag_shift; ++i) {
+                interp_pts[i - diag_shift] = interp_pts[i];
+            }
+            for (std::size_t i = 0; i < -diag_shift; ++i) {
+                interp_pts[-diag_shift - 1 - i] = temp_knots[i];
+            }
         }
     }
     // Non-periodic case, odd degree: fix round-off issues
@@ -368,6 +396,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
     init_discrete_space<interpolation_mesh_type>(interp_pts);
     m_interpolation_domain = std::make_unique<interpolation_domain_type>(
             DiscreteVector<NonUniformPointSampling<tag_type>>(interp_pts.size()));
+
+    return diag_shift;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -451,7 +481,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_block_sizes_non_uniform(
 template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 void SplineBuilder<BSplines, BcXmin, BcXmax>::allocate_matrix(
         int lower_block_size,
-        int upper_block_size)
+        int upper_block_size,
+        int diag_shift)
 {
     // Special case: linear spline
     // No need for matrix assembly
@@ -468,8 +499,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::allocate_matrix(
     if constexpr (bsplines_type::is_periodic()) {
         matrix = Matrix::make_new_periodic_banded(
                 discrete_space<BSplines>().nbasis(),
-                upper_band_width,
-                upper_band_width,
+                upper_band_width - diag_shift,
+                upper_band_width + diag_shift,
                 bsplines_type::is_uniform());
     } else {
         matrix = Matrix::make_new_block_with_banded_region(
