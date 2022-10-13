@@ -33,7 +33,7 @@ TEST(KineticSource, Ordering)
 
     IVectSp const nb_kinspecies(1);
 
-    IDomainSp const dom_sp(nb_kinspecies);
+    IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
 
     // Creating mesh & supports
     init_discrete_space<BSplinesX>(x_min, x_max, x_size);

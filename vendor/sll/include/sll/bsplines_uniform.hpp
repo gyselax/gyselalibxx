@@ -153,6 +153,12 @@ public:
             return degree() + ncells();
         }
 
+        /// Returns the discrete domain including ghost bsplines
+        discrete_domain_type full_domain() const
+        {
+            return discrete_domain_type(discrete_element_type(0), discrete_vector_type(size()));
+        }
+
         std::size_t nbasis() const noexcept
         {
             return ncells() + !is_periodic() * degree();
