@@ -178,10 +178,9 @@ void FemNonPeriodicPoissonSolver::operator()(
     compute_rho(rho, allfdistribu);
 
     //
-    NUBSDomainX nu_dom(DiscreteVector<NUBSplinesX>(discrete_space<NUBSplinesX>().size()));
     Chunk<double, BSDomainX> rho_spline_coef(m_spline_x_builder.spline_domain());
     m_spline_x_builder(rho_spline_coef, rho);
-    Chunk<double, NUBSDomainX> phi_spline_coef(nu_dom);
+    Chunk<double, NUBSDomainX> phi_spline_coef(discrete_space<NUBSplinesX>().full_domain());
     solve_matrix_system(phi_spline_coef, rho_spline_coef);
 
     //

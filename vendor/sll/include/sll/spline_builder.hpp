@@ -104,8 +104,7 @@ public:
 
     DiscreteDomain<BSplines> spline_domain() const noexcept
     {
-        return DiscreteDomain<BSplines>(
-                DiscreteVector<BSplines>(discrete_space<BSplines>().size()));
+        return discrete_space<BSplines>().full_domain();
     }
 
 private:

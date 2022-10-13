@@ -75,7 +75,7 @@ int main(int argc, char** argv)
     SplineVxBuilder const builder_vx;
 
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
-    IDomainSp const dom_kinsp(nb_kinspecies);
+    IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
 
     IDomainSpXVx const meshSpXVx(
             dom_kinsp,
@@ -113,7 +113,8 @@ int main(int argc, char** argv)
     }
 
     // Create the domain of all species including kinetic species + adiabatic species (if existing)
-    IDomainSp const dom_allsp(nb_kinspecies + nb_elec_adiabspecies + nb_ion_adiabspecies);
+    IDomainSp const
+            dom_allsp(IndexSp(0), nb_kinspecies + nb_elec_adiabspecies + nb_ion_adiabspecies);
     FieldSp<int> charges(dom_allsp);
     for (IndexSp isp : dom_kinsp) {
         charges(isp) = kinetic_charges(isp);
