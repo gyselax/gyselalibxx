@@ -50,3 +50,15 @@ target_link_libraries(matrix_tests
         sll::splines
 )
 gtest_discover_tests(matrix_tests)
+
+add_executable(bernstein_tests
+  main.cpp
+	bernstein.cpp
+)
+target_compile_features(bernstein_tests PUBLIC cxx_std_17)
+target_link_libraries(bernstein_tests
+    PUBLIC
+        GTest::gtest
+        sll::splines
+)
+gtest_discover_tests(bernstein_tests)
