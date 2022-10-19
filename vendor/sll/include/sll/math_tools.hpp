@@ -67,3 +67,12 @@ inline double ipow(double a, int i)
     }
     return r;
 }
+
+inline std::size_t factorial(std::size_t f)
+{
+    std::size_t r = 1;
+    for (std::size_t i(2); i < f + 1; ++i) {
+        r *= i;
+    }
+    return r;
+}
