@@ -61,7 +61,7 @@ public:
 
     using interpolation_domain_type = DiscreteDomain<interpolation_mesh_type>;
 
-private:
+public:
     static constexpr bool s_odd = BSplines::degree() % 2;
 
     static constexpr int s_nbc_xmin = BcXmin == BoundCond::HERMITE ? BSplines::degree() / 2 : 0;
@@ -94,8 +94,8 @@ public:
     void operator()(
             ChunkSpan<double, DiscreteDomain<bsplines_type>> spline,
             ChunkSpan<double const, interpolation_domain_type> vals,
-            std::optional<DSpan1D> const derivs_xmin = std::nullopt,
-            std::optional<DSpan1D> const derivs_xmax = std::nullopt) const;
+            std::optional<CDSpan1D> const derivs_xmin = std::nullopt,
+            std::optional<CDSpan1D> const derivs_xmax = std::nullopt) const;
 
     interpolation_domain_type const& interpolation_domain() const noexcept
     {
@@ -170,8 +170,8 @@ template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
         ChunkSpan<double, DiscreteDomain<bsplines_type>> const spline,
         ChunkSpan<double const, interpolation_domain_type> const vals,
-        std::optional<DSpan1D> const derivs_xmin,
-        std::optional<DSpan1D> const derivs_xmax) const
+        std::optional<CDSpan1D> const derivs_xmin,
+        std::optional<CDSpan1D> const derivs_xmax) const
 {
     assert(vals.template extent<interpolation_mesh_type>()
            == discrete_space<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax);
@@ -189,6 +189,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
     // NOTE: For consistency with the linear system, the i-th derivative
     //       provided by the user must be multiplied by dx^i
     if constexpr (BcXmin == BoundCond::HERMITE) {
+        assert(derivs_xmin->extent(0) == s_nbc_xmin);
         for (int i = s_nbc_xmin; i > 0; --i) {
             spline(DiscreteElement<bsplines_type>(s_nbc_xmin - i))
                     = (*derivs_xmin)(i - 1) * ipow(m_dx, i + s_odd - 1);
@@ -207,6 +208,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
     // NOTE: For consistency with the linear system, the i-th derivative
     //       provided by the user must be multiplied by dx^i
     if constexpr (BcXmax == BoundCond::HERMITE) {
+        assert(derivs_xmax->extent(0) == s_nbc_xmax);
         for (int i = 0; i < s_nbc_xmax; ++i) {
             spline(DiscreteElement<bsplines_type>(
                     discrete_space<BSplines>().nbasis() - s_nbc_xmax + i))

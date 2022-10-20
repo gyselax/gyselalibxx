@@ -1,26 +1,26 @@
 #pragma once
 
+#include <array>
 #include <cmath>
 #include <random>
-#include <vector>
 
 #include <ddc/ddc.hpp>
 
 struct PolynomialEvaluator
 {
-    template <class DDim>
+    template <class DDim, std::size_t DEGREE>
     class Evaluator
     {
         static inline constexpr double s_2_pi = 2. * M_PI;
 
     private:
-        std::vector<double> m_coeffs;
+        std::array<double, DEGREE + 1> m_coeffs;
         int const m_degree;
 
     public:
-        Evaluator(int max_degree) : m_coeffs(max_degree + 1, 0.0), m_degree(max_degree)
+        Evaluator() : m_degree(DEGREE)
         {
-            for (int i(0); i < max_degree + 1; ++i) {
+            for (int i(0); i < m_degree + 1; ++i) {
                 m_coeffs[i] = double(rand() % 100) / 100.0;
             }
         }
@@ -58,7 +58,7 @@ struct PolynomialEvaluator
         {
             double result(0.0);
             int start = derivative < 0 ? 0 : derivative;
-            for (int i(start); i < m_degree; ++i) {
+            for (int i(start); i < m_degree + 1; ++i) {
                 double v = double(falling_factorial(i, derivative)) * std::pow(x, i - derivative);
                 result += m_coeffs[i] * v;
             }

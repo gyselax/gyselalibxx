@@ -74,7 +74,7 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
         DVectX constexpr npoints(ncells + 1);
         std::vector<CoordX> breaks(npoints);
         double dx = (xN - x0) / ncells;
-        for (std::size_t i(0); i < npoints; ++i) {
+        for (int i(0); i < npoints; ++i) {
             breaks[i] = CoordX(x0 + i * dx);
         }
         init_discrete_space<BSplinesX>(breaks);
