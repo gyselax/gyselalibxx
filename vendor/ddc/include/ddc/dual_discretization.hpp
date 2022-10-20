@@ -26,12 +26,13 @@ class DualDiscretization
     using DDimImplDevice = typename DDim::template Impl<Kokkos::CudaSpace>;
 #elif defined(__HIPCC__)
     using DDimImplDevice = typename DDim::template Impl<Kokkos::Experimental::HIPSpace>;
+#else
+    using DDimImplDevice = DDimImplHost;
 #endif
 
     DDimImplHost m_host;
 #if defined(__CUDACC__) || defined(__HIPCC__)
     DDimImplDevice m_device_on_host;
-    std::unique_ptr<DDimImplDevice, std::function<void(DDimImplDevice*)>> m_device;
 #endif
 
 public:
@@ -42,33 +43,6 @@ public:
         , m_device_on_host(m_host)
 #endif
     {
-#if defined(__CUDACC__)
-        DDimImplDevice* ptr_device;
-        cudaMalloc(&ptr_device, sizeof(DDimImplDevice));
-        m_device = std::unique_ptr<
-                DDimImplDevice,
-                std::function<void(DDimImplDevice*)>>(ptr_device, [](DDimImplDevice* ptr) {
-            cudaFree(ptr);
-        });
-        cudaMemcpy(
-                reinterpret_cast<void*>(ptr_device),
-                &m_device_on_host,
-                sizeof(DDimImplDevice),
-                cudaMemcpyHostToDevice);
-#elif defined(__HIPCC__)
-        DDimImplDevice* ptr_device;
-        hipMalloc(&ptr_device, sizeof(DDimImplDevice));
-        m_device = std::unique_ptr<
-                DDimImplDevice,
-                std::function<void(DDimImplDevice*)>>(ptr_device, [](DDimImplDevice* ptr) {
-            hipFree(ptr);
-        });
-        hipMemcpy(
-                reinterpret_cast<void*>(ptr_device),
-                &m_device_on_host,
-                sizeof(DDimImplDevice),
-                hipMemcpyHostToDevice);
-#endif
     }
 
     template <class MemorySpace>
@@ -81,7 +55,7 @@ public:
         else if constexpr (std::is_same_v<MemorySpace, Kokkos::CudaSpace>) {
             return m_device_on_host;
         }
-#elif defined(__CUDACC__)
+#elif defined(__HIPCC__)
         else if constexpr (std::is_same_v<MemorySpace, Kokkos::Experimental::HIPSpace>) {
             return m_device_on_host;
         }
@@ -91,10 +65,17 @@ public:
         }
     }
 
-#if defined(__CUDACC__) || defined(__HIPCC__)
-    DDimImplDevice* get_device_ptr() const
+    DDC_INLINE_FUNCTION DDimImplHost const& get_host()
     {
-        return m_device.get();
+        return m_host;
     }
+
+    DDC_INLINE_FUNCTION DDimImplDevice const& get_device()
+    {
+#if defined(__CUDACC__) || defined(__HIPCC__)
+        return m_device_on_host;
+#else
+        return m_host;
 #endif
+    }
 };
