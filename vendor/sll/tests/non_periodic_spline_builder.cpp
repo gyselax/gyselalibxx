@@ -81,7 +81,7 @@ TYPED_TEST(NonPeriodicSplineBuilderTestFixture, Identity)
         DVectX constexpr npoints(ncells + 1);
         std::vector<CoordX> breaks(npoints);
         double dx = (xN - x0) / ncells;
-        for (std::size_t i(0); i < npoints; ++i) {
+        for (int i(0); i < npoints; ++i) {
             breaks[i] = CoordX(x0 + i * dx);
         }
         init_discrete_space<BSplinesX>(breaks);
@@ -208,7 +208,7 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
         DVectX constexpr npoints(ncells + 1);
         std::vector<CoordX> breaks(npoints);
         double dx = (xN - x0) / ncells;
-        for (std::size_t i(0); i < npoints; ++i) {
+        for (int i(0); i < npoints; ++i) {
             breaks[i] = CoordX(x0 + i * dx);
         }
         init_discrete_space<BSplinesX>(breaks);
@@ -227,7 +227,7 @@ TYPED_TEST(PolynomialNonPeriodicSplineBuilderTestFixture, PolynomialIdentity)
 
     // 4. Allocate and fill a chunk over the interpolation domain
     FieldX yvals(interpolation_domain);
-    typename PolynomialEvaluator::Evaluator<IDimX> evaluator(degree);
+    typename PolynomialEvaluator::Evaluator<IDimX, TestFixture::s_degree> evaluator;
     evaluator(yvals.span_view());
 
     int constexpr shift = degree % 2; // shift = 0 for even order, 1 for odd order

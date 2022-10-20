@@ -106,6 +106,10 @@ using DSpan1D = Span1D<double>;
 
 using DSpan2D = Span2D<double>;
 
+using CDSpan1D = Span1D<double const>;
+
+using CDSpan2D = Span2D<double const>;
+
 using DView1D = View1D<double>;
 
 using DView2D = View2D<double>;
