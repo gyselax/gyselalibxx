@@ -9,6 +9,8 @@ add_executable(splines_tests
     non_periodic_spline_builder.cpp
     view.cpp
     gauss_legendre_integration.cpp
+    2d_spline_builder.cpp
+    2d_spline_builder_periodic.cpp
 )
 if(VOICEXX_ENABLE_DEPRECATED)
     target_sources(splines_tests
