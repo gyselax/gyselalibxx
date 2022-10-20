@@ -23,37 +23,55 @@
 namespace detail {
 
 template <class DDim, class MemorySpace>
-struct DiscreteSpaceGetter;
+using ddim_impl_t = typename DDim::template Impl<MemorySpace>;
 
+template <class T>
+class gpu_proxy
+{
+    static_assert(std::is_standard_layout_v<T>, "Not standard layout");
+    // Ideally T should be trivially destructible and copy constructible
+    // static_assert(std::is_trivially_destructible_v<T>, "Not trivially destructible");
+    // static_assert(std::is_trivially_copy_constructible_v<T>, "Not trivially copy-constructible");
+
+private:
+    alignas(T) std::byte m_data[sizeof(T)];
+
+public:
+    DDC_INLINE_FUNCTION
+    T* operator->()
+    {
+        return reinterpret_cast<T*>(m_data);
+    }
+
+    DDC_INLINE_FUNCTION
+    T& operator*()
+    {
+        return *reinterpret_cast<T*>(m_data);
+    }
+
+    DDC_INLINE_FUNCTION
+    T* data()
+    {
+        return reinterpret_cast<T*>(m_data);
+    }
+};
+
+// Global CPU variable storing resetters. Required to correctly free data.
 inline std::optional<std::map<std::string, std::function<void()>>> g_discretization_store;
 
-// For now, in the future, this should be specialized by tag
+// Global CPU variable owning discrete spaces data for CPU and GPU
 template <class DDim>
-inline std::optional<DualDiscretization<DDim>> g_discrete_space_host;
+inline std::optional<DualDiscretization<DDim>> g_discrete_space_dual;
 
+#if defined(__CUDACC__)
+// Global GPU variable viewing data owned by the CPU
 template <class DDim>
-struct DiscreteSpaceGetter<DDim, Kokkos::HostSpace>
-{
-    static inline typename DDim::template Impl<Kokkos::HostSpace> const& get()
-    {
-        return g_discrete_space_host<DDim>->template get<Kokkos::HostSpace>();
-    }
-};
-
-#if defined(__CUDACC__) || defined(__HIPCC__)
+__constant__ gpu_proxy<ddim_impl_t<DDim, Kokkos::CudaSpace>> g_discrete_space_device;
+#elif defined(__HIPCC__)
+// Global GPU variable viewing data owned by the CPU
 // WARNING: do not put the `inline` keyword, seems to fail on MI100 rocm/4.5.0
-template <class DDimImpl>
-__device__ __constant__ DDimImpl* g_discrete_space_device = nullptr;
-
-template <class DDim, class MemorySpace>
-struct DiscreteSpaceGetter
-{
-    DDC_INLINE_FUNCTION
-    static typename DDim::template Impl<MemorySpace> const& get()
-    {
-        return *g_discrete_space_device<typename DDim::template Impl<MemorySpace>>;
-    }
-};
+template <class DDim>
+__constant__ gpu_proxy<ddim_impl_t<DDim, Kokkos::Experimental::HIPSpace>> g_discrete_space_device;
 #endif
 
 inline void display_discretization_store(std::ostream& os)
@@ -83,32 +101,23 @@ auto extract_after(Tuple&& t, std::index_sequence<Ids...>)
 template <class DDim, class... Args>
 void init_discrete_space(Args&&... args)
 {
-    if (detail::g_discrete_space_host<DDim>) {
+    if (detail::g_discrete_space_dual<DDim>) {
         throw std::runtime_error("Discrete space function already initialized.");
     }
-    detail::g_discrete_space_host<DDim>.emplace(std::forward<Args>(args)...);
+    detail::g_discrete_space_dual<DDim>.emplace(std::forward<Args>(args)...);
     detail::g_discretization_store->emplace(typeid(DDim).name(), []() {
-        detail::g_discrete_space_host<DDim>.reset();
+        detail::g_discrete_space_dual<DDim>.reset();
     });
 #if defined(__CUDACC__)
-    using DDimImplDevice = typename DDim::template Impl<Kokkos::CudaSpace>;
-    DDimImplDevice* device_ptr = detail::g_discrete_space_host<DDim>->get_device_ptr();
     cudaMemcpyToSymbol(
-            detail::g_discrete_space_device<DDimImplDevice>,
-            &device_ptr,
-            sizeof(DDimImplDevice*),
-            0,
-            cudaMemcpyHostToDevice);
-#endif
-#if defined(__HIPCC__)
-    using DDimImplDevice = typename DDim::template Impl<Kokkos::Experimental::HIPSpace>;
-    DDimImplDevice* device_ptr = detail::g_discrete_space_host<DDim>->get_device_ptr();
+            detail::g_discrete_space_device<DDim>,
+            &detail::g_discrete_space_dual<DDim>->get_device(),
+            sizeof(detail::g_discrete_space_dual<DDim>->get_device()));
+#elif defined(__HIPCC__)
     hipMemcpyToSymbol(
-            detail::g_discrete_space_device<DDimImplDevice>,
-            &device_ptr,
-            sizeof(DDimImplDevice*),
-            0,
-            hipMemcpyHostToDevice);
+            detail::g_discrete_space_device<DDim>,
+            &detail::g_discrete_space_dual<DDim>->get_device(),
+            sizeof(detail::g_discrete_space_dual<DDim>->get_device()));
 #endif
 }
 
@@ -140,7 +149,21 @@ std::enable_if_t<2 <= sizeof...(Args), std::tuple<Args...>> init_discrete_space(
 }
 
 template <class DDim, class MemorySpace = DDC_CURRENT_KOKKOS_SPACE>
-DDC_INLINE_FUNCTION typename DDim::template Impl<MemorySpace> const& discrete_space()
+DDC_INLINE_FUNCTION detail::ddim_impl_t<DDim, MemorySpace> const& discrete_space()
 {
-    return detail::DiscreteSpaceGetter<DDim, MemorySpace>::get();
+    if constexpr (std::is_same_v<MemorySpace, Kokkos::HostSpace>) {
+        return detail::g_discrete_space_dual<DDim>->get_host();
+    }
+#if defined(__CUDACC__)
+    else if constexpr (std::is_same_v<MemorySpace, Kokkos::CudaSpace>) {
+        return *detail::g_discrete_space_device<DDim>;
+    }
+#elif defined(__HIPCC__)
+    else if constexpr (std::is_same_v<MemorySpace, Kokkos::Experimental::HIPSpace>) {
+        return *detail::g_discrete_space_device<DDim>;
+    }
+#endif
+    else {
+        static_assert(std::is_same_v<MemorySpace, MemorySpace>, "Memory space not handled");
+    }
 }
