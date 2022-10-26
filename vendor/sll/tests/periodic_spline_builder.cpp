@@ -18,59 +18,50 @@
 #include <gtest/gtest.h>
 
 #include "cosine_evaluator.hpp"
-#include "test_utils.hpp"
+#include "polynomial_evaluator.hpp"
 
-template <class T>
-struct PeriodicSplineBuilderTestFixture;
-
-template <std::size_t D, class Evaluator, bool Uniform>
-struct PeriodicSplineBuilderTestFixture<std::tuple<
-        std::integral_constant<std::size_t, D>,
-        Evaluator,
-        std::integral_constant<bool, Uniform>>> : public testing::Test
+struct DimX
 {
-    struct DimX
-    {
-        static constexpr bool PERIODIC = true;
-    };
-    static constexpr std::size_t s_degree = D;
-    using BSpline
-            = std::conditional_t<Uniform, UniformBSplines<DimX, D>, NonUniformBSplines<DimX, D>>;
-    using IDimX = typename SplineBuilder<BSpline, BoundCond::PERIODIC, BoundCond::PERIODIC>::
-            interpolation_mesh_type;
-    using evaluator_type = typename Evaluator::template Evaluator<IDimX>;
+    static constexpr bool PERIODIC = true;
 };
 
-using degrees = std::integer_sequence<std::size_t, 1, 2, 3, 4, 5, 6>;
-using evaluators = std::tuple<CosineEvaluator>;
-using is_uniform_types = std::tuple<std::true_type, std::false_type>;
+static constexpr std::size_t s_degree_x = DEGREE_X;
 
-using Cases = tuple_to_types_t<cartesian_product_t<degrees, evaluators, is_uniform_types>>;
+#if UNIFORM == 1
+using BSplinesX = UniformBSplines<DimX, s_degree_x>;
+#elif UNIFORM == 0
+using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
+#endif
 
-TYPED_TEST_SUITE(PeriodicSplineBuilderTestFixture, Cases);
+using IDimX = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>::
+        interpolation_mesh_type;
+
+#if EVALUATOR == Cosine
+using evaluator_type = CosineEvaluator::Evaluator<IDimX>;
+#elif EVALUATOR == Polynomial
+using evaluator_type = PolynomialEvaluator::Evaluator<IDimX>;
+#endif
+
+using IndexX = DiscreteElement<IDimX>;
+using DVectX = DiscreteVector<IDimX>;
+using BsplIndexX = DiscreteElement<BSplinesX>;
+using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
+using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
+using CoordX = Coordinate<DimX>;
 
 // Checks that when evaluating the spline at interpolation points one
 // recovers values that were used to build the spline
-TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
+TEST(PeriodicSplineBuilderTest, Identity)
 {
-    using DimX = typename TestFixture::DimX;
-    using IDimX = typename TestFixture::IDimX;
-    using IndexX = DiscreteElement<IDimX>;
-    using DVectX = DiscreteVector<IDimX>;
-    using BSplinesX = typename TestFixture::BSpline;
-    using BsplIndexX = DiscreteElement<BSplinesX>;
-    using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
-    using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
-    using CoordX = Coordinate<DimX>;
-
     CoordX constexpr x0(0.);
     CoordX constexpr xN(1.);
     std::size_t constexpr ncells = 10;
 
     // 1. Create BSplines
-    if constexpr (BSplinesX::is_uniform()) {
+    {
+#if UNIFORM == 1
         init_discrete_space<BSplinesX>(x0, xN, ncells);
-    } else {
+#elif UNIFORM == 0
         DVectX constexpr npoints(ncells + 1);
         std::vector<CoordX> breaks(npoints);
         double dx = (xN - x0) / ncells;
@@ -78,10 +69,9 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
             breaks[i] = CoordX(x0 + i * dx);
         }
         init_discrete_space<BSplinesX>(breaks);
+#endif
     }
-    DiscreteDomain<BSplinesX> const dom_bsplines_x(
-            BsplIndexX(0),
-            DiscreteVector<BSplinesX>(discrete_space<BSplinesX>().size()));
+    DiscreteDomain<BSplinesX> const dom_bsplines_x(discrete_space<BSplinesX>().full_domain());
 
     // 2. Create a Spline represented by a chunk over BSplines
     // The chunk is filled with garbage data, we need to initialize it
@@ -93,7 +83,7 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
 
     // 4. Allocate and fill a chunk over the interpolation domain
     FieldX yvals(interpolation_domain);
-    typename TestFixture::evaluator_type evaluator;
+    evaluator_type evaluator;
     evaluator(yvals);
 
     // 5. Finally build the spline by filling `coef`
@@ -132,111 +122,9 @@ TYPED_TEST(PeriodicSplineBuilderTestFixture, Identity)
     EXPECT_LE(max_norm_error, 1.0e-12);
 }
 
-template <class T>
-struct PeriodicSplineBuilderOrderTestFixture;
-
-template <std::size_t D, class Evaluator>
-struct PeriodicSplineBuilderOrderTestFixture<
-        std::tuple<std::integral_constant<std::size_t, D>, Evaluator>> : public testing::Test
+int main(int argc, char** argv)
 {
-    struct DimX
-    {
-        static constexpr bool PERIODIC = true;
-    };
-    static constexpr std::size_t s_degree = D;
-    using BSpline = NonUniformBSplines<DimX, D>;
-    using IDimX = typename SplineBuilder<BSpline, BoundCond::PERIODIC, BoundCond::PERIODIC>::
-            interpolation_mesh_type;
-    using evaluator_type = typename Evaluator::template Evaluator<IDimX>;
-};
-
-using OrderCases = tuple_to_types_t<cartesian_product_t<degrees, evaluators>>;
-
-TYPED_TEST_SUITE(PeriodicSplineBuilderOrderTestFixture, OrderCases);
-
-
-TYPED_TEST(PeriodicSplineBuilderOrderTestFixture, OrderedPoints)
-{
-    using DimX = typename TestFixture::DimX;
-    using IDimX = typename TestFixture::IDimX;
-    using IndexX = DiscreteElement<IDimX>;
-    using BSplinesX = typename TestFixture::BSpline;
-    using BsplIndexX = DiscreteElement<BSplinesX>;
-    using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
-    using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
-    using CoordX = Coordinate<DimX>;
-
-    CoordX constexpr x0(0.);
-    CoordX constexpr xN(1.);
-    std::size_t constexpr ncells = 10;
-
-    // 1. Create BSplines
-    int constexpr npoints(ncells + 1);
-    std::vector<double> d_breaks({0, 0.01, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0});
-    std::vector<CoordX> breaks(npoints);
-    for (std::size_t i(0); i < npoints; ++i) {
-        breaks[i] = CoordX(d_breaks[i]);
-    }
-    init_discrete_space<BSplinesX>(breaks);
-
-    // 2. Create a SplineBuilder over BSplines using some boundary conditions
-    SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> spline_builder;
-    auto interpolation_domain = spline_builder.interpolation_domain();
-
-    double last(coordinate(interpolation_domain.front()));
-    double current;
-    for (IndexX const ix : interpolation_domain) {
-        current = coordinate(ix);
-        ASSERT_LE(current, discrete_space<BSplinesX>().rmax());
-        ASSERT_GE(current, discrete_space<BSplinesX>().rmin());
-        ASSERT_LE(last, current);
-        last = current;
-    }
-    DiscreteDomain<BSplinesX> const dom_bsplines_x(
-            BsplIndexX(0),
-            DiscreteVector<BSplinesX>(discrete_space<BSplinesX>().size()));
-
-    // 3. Create a Spline represented by a chunk over BSplines
-    // The chunk is filled with garbage data, we need to initialize it
-    SplineX coef(dom_bsplines_x);
-
-    // 4. Allocate and fill a chunk over the interpolation domain
-    FieldX yvals(interpolation_domain);
-    typename TestFixture::evaluator_type evaluator;
-    evaluator(yvals);
-
-    // 5. Finally build the spline by filling `coef`
-    spline_builder(coef, yvals);
-
-    // 6. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
-    SplineEvaluator<BSplinesX>
-            spline_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);
-
-    FieldX coords_eval(interpolation_domain);
-    for (IndexX const ix : interpolation_domain) {
-        coords_eval(ix) = coordinate(ix);
-    }
-
-    FieldX spline_eval(interpolation_domain);
-    spline_evaluator(spline_eval.span_view(), coords_eval.span_cview(), coef.span_cview());
-
-    FieldX spline_eval_deriv(interpolation_domain);
-    spline_evaluator
-            .deriv(spline_eval_deriv.span_view(), coords_eval.span_cview(), coef.span_cview());
-
-    // 7. Checking errors
-    double max_norm_error = 0.;
-    double max_norm_error_diff = 0.;
-    for (IndexX const ix : interpolation_domain) {
-        CoordX const x = coordinate(ix);
-
-        // Compute error
-        double const error = spline_eval(ix) - yvals(ix);
-        max_norm_error = std::fmax(max_norm_error, std::fabs(error));
-
-        // Compute error
-        double const error_deriv = spline_eval_deriv(ix) - evaluator.deriv(x, 1);
-        max_norm_error_diff = std::fmax(max_norm_error_diff, std::fabs(error_deriv));
-    }
-    EXPECT_LE(max_norm_error, 1.0e-12);
+    ::testing::InitGoogleTest(&argc, argv);
+    ::ScopeGuard scope(argc, argv);
+    return RUN_ALL_TESTS();
 }
