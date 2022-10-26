@@ -8,17 +8,17 @@
 
 struct PolynomialEvaluator
 {
-    template <class DDim, std::size_t DEGREE>
+    template <class DDim, std::size_t Degree>
     class Evaluator
     {
         static inline constexpr double s_2_pi = 2. * M_PI;
 
     private:
-        std::array<double, DEGREE + 1> m_coeffs;
+        std::array<double, Degree + 1> m_coeffs;
         int const m_degree;
 
     public:
-        Evaluator() : m_degree(DEGREE)
+        Evaluator() : m_degree(Degree)
         {
             for (int i(0); i < m_degree + 1; ++i) {
                 m_coeffs[i] = double(rand() % 100) / 100.0;

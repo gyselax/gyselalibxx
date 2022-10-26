@@ -19,83 +19,71 @@
 
 #include "cosine_evaluator.hpp"
 #include "evaluator_2d.hpp"
-#include "test_utils.hpp"
+#include "polynomial_evaluator.hpp"
 
-template <class T>
-struct Periodic2DSplineBuilderTestFixture;
-
-template <std::size_t DX, std::size_t DY, bool Uniform>
-struct Periodic2DSplineBuilderTestFixture<std::tuple<
-        std::integral_constant<std::size_t, DX>,
-        std::integral_constant<std::size_t, DY>,
-        std::integral_constant<bool, Uniform>>> : public testing::Test
+struct DimX
 {
-    // Needs to be defined here to avoid multiple initializations of the discrete_space function
-    struct DimX
-    {
-        static constexpr bool PERIODIC = true;
-    };
-    struct DimY
-    {
-        static constexpr bool PERIODIC = true;
-    };
-    static constexpr std::size_t s_degree_X = DX;
-    static constexpr std::size_t s_degree_Y = DY;
-    static constexpr BoundCond s_bcl = BoundCond::PERIODIC;
-    static constexpr BoundCond s_bcr = BoundCond::PERIODIC;
-    using BSplineX
-            = std::conditional_t<Uniform, UniformBSplines<DimX, DX>, NonUniformBSplines<DimX, DX>>;
-    using BSplineY
-            = std::conditional_t<Uniform, UniformBSplines<DimY, DY>, NonUniformBSplines<DimY, DY>>;
-    using IDimX = typename SplineBuilder<BSplineX, BoundCond::PERIODIC, BoundCond::PERIODIC>::
-            interpolation_mesh_type;
-    using IDimY = typename SplineBuilder<BSplineY, BoundCond::PERIODIC, BoundCond::PERIODIC>::
-            interpolation_mesh_type;
+    static constexpr bool PERIODIC = true;
 };
 
-using degrees = std::integer_sequence<std::size_t, 1, 2, 3, 4, 5, 6>;
-using is_uniform_types = std::tuple<std::true_type, std::false_type>;
+static constexpr std::size_t s_degree_x = DEGREE_X;
 
-using Cases = tuple_to_types_t<cartesian_product_t<degrees, degrees, is_uniform_types>>;
+#if UNIFORM == 1
+using BSplinesX = UniformBSplines<DimX, s_degree_x>;
+#elif UNIFORM == 0
+using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
+#endif
 
-TYPED_TEST_SUITE(Periodic2DSplineBuilderTestFixture, Cases);
+using IDimX = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>::
+        interpolation_mesh_type;
+
+struct DimY
+{
+    static constexpr bool PERIODIC = true;
+};
+
+static constexpr std::size_t s_degree_y = DEGREE_Y;
+
+#if UNIFORM == 1
+using BSplinesY = UniformBSplines<DimY, s_degree_y>;
+#elif UNIFORM == 0
+using BSplinesY = NonUniformBSplines<DimY, s_degree_y>;
+#endif
+
+using IDimY = SplineBuilder<BSplinesY, BoundCond::PERIODIC, BoundCond::PERIODIC>::
+        interpolation_mesh_type;
+
+using IndexX = DiscreteElement<IDimX>;
+using DVectX = DiscreteVector<IDimX>;
+using CoordX = Coordinate<DimX>;
+
+using IndexY = DiscreteElement<IDimY>;
+using DVectY = DiscreteVector<IDimY>;
+using CoordY = Coordinate<DimY>;
+
+using IndexXY = DiscreteElement<IDimX, IDimY>;
+using BsplIndexXY = DiscreteElement<BSplinesX, BSplinesY>;
+using SplineXY = Chunk<double, DiscreteDomain<BSplinesX, BSplinesY>>;
+using FieldXY = Chunk<double, DiscreteDomain<IDimX, IDimY>>;
+using CoordXY = Coordinate<DimX, DimY>;
+
+using EvaluatorType = Evaluator2D::
+        Evaluator<CosineEvaluator::Evaluator<IDimX>, CosineEvaluator::Evaluator<IDimY>>;
 
 // Checks that when evaluating the spline at interpolation points one
 // recovers values that were used to build the spline
-TYPED_TEST(Periodic2DSplineBuilderTestFixture, Identity)
+TEST(Periodic2DSplineBuilderTest, Identity)
 {
-    using DimX = typename TestFixture::DimX;
-    using IDimX = typename TestFixture::IDimX;
-    using IndexX = DiscreteElement<IDimX>;
-    using DVectX = DiscreteVector<IDimX>;
-    using CoordX = Coordinate<DimX>;
-
-    using DimY = typename TestFixture::DimY;
-    using IDimY = typename TestFixture::IDimY;
-    using IndexY = DiscreteElement<IDimY>;
-    using DVectY = DiscreteVector<IDimY>;
-    using CoordY = Coordinate<DimY>;
-
-    using IndexXY = DiscreteElement<IDimX, IDimY>;
-    using BSplinesX = typename TestFixture::BSplineX;
-    using BSplinesY = typename TestFixture::BSplineY;
-    using BsplIndexXY = DiscreteElement<BSplinesX, BSplinesY>;
-    using SplineXY = Chunk<double, DiscreteDomain<BSplinesX, BSplinesY>>;
-    using FieldXY = Chunk<double, DiscreteDomain<IDimX, IDimY>>;
-    using CoordXY = Coordinate<DimX, DimY>;
-
-    using EvaluatorType = typename Evaluator2D::
-            Evaluator<CosineEvaluator::Evaluator<IDimX>, CosineEvaluator::Evaluator<IDimY>>;
-
     CoordXY constexpr x0(0., 0.);
     CoordXY constexpr xN(1., 1.);
     std::size_t constexpr ncells1 = 100;
     std::size_t constexpr ncells2 = 50;
 
     // 1. Create BSplines
-    if constexpr (BSplinesX::is_uniform()) {
-        init_discrete_space<BSplinesX>((CoordX)get<DimX>(x0), (CoordX)get<DimX>(xN), ncells1);
-    } else {
+    {
+#if UNIFORM == 1
+        init_discrete_space<BSplinesX>(select<DimX>(x0), select<DimX>(xN), ncells1);
+#elif UNIFORM == 0
         DVectX constexpr npoints(ncells1 + 1);
         std::vector<CoordX> breaks(npoints);
         double constexpr dx = (get<DimX>(xN) - get<DimX>(x0)) / ncells1;
@@ -103,10 +91,12 @@ TYPED_TEST(Periodic2DSplineBuilderTestFixture, Identity)
             breaks[i] = CoordX(get<DimX>(x0) + i * dx);
         }
         init_discrete_space<BSplinesX>(breaks);
+#endif
     }
-    if constexpr (BSplinesY::is_uniform()) {
-        init_discrete_space<BSplinesY>((CoordY)get<DimY>(x0), (CoordY)get<DimY>(xN), ncells2);
-    } else {
+    {
+#if UNIFORM == 1
+        init_discrete_space<BSplinesY>(select<DimY>(x0), select<DimY>(xN), ncells2);
+#elif UNIFORM == 0
         DVectY constexpr npoints(ncells2 + 1);
         std::vector<CoordY> breaks(npoints);
         double constexpr dx = (get<DimY>(xN) - get<DimY>(x0)) / ncells2;
@@ -114,6 +104,7 @@ TYPED_TEST(Periodic2DSplineBuilderTestFixture, Identity)
             breaks[i] = CoordY(get<DimY>(x0) + i * dx);
         }
         init_discrete_space<BSplinesY>(breaks);
+#endif
     }
 
     DiscreteDomain<BSplinesX, BSplinesY> const dom_bsplines_xy(
@@ -211,4 +202,11 @@ TYPED_TEST(Periodic2DSplineBuilderTestFixture, Identity)
     //EXPECT_LE(max_norm_error_diff1, 1.0e-3);
     //EXPECT_LE(max_norm_error_diff2, 1.0e-3);
     //EXPECT_LE(max_norm_error_diff12, 1.0e-3);
+}
+
+int main(int argc, char** argv)
+{
+    ::testing::InitGoogleTest(&argc, argv);
+    ::ScopeGuard scope(argc, argv);
+    return RUN_ALL_TESTS();
 }
