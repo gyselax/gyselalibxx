@@ -17,88 +17,83 @@
 
 #include <gtest/gtest.h>
 
+#include "cosine_evaluator.hpp"
 #include "evaluator_2d.hpp"
 #include "polynomial_evaluator.hpp"
-#include "test_utils.hpp"
 
-template <class T>
-struct NonPeriodic2DSplineBuilderTestFixture;
 
-template <std::size_t DX, std::size_t DY, BoundCond BcL, BoundCond BcR, bool Uniform>
-struct NonPeriodic2DSplineBuilderTestFixture<std::tuple<
-        std::integral_constant<std::size_t, DX>,
-        std::integral_constant<std::size_t, DY>,
-        std::integral_constant<BoundCond, BcL>,
-        std::integral_constant<BoundCond, BcR>,
-        std::integral_constant<bool, Uniform>>> : public testing::Test
+#if BCL == GREVILLE
+static constexpr BoundCond s_bcl = BoundCond::GREVILLE;
+#elif BCL == HERMITE
+static constexpr BoundCond s_bcl = BoundCond::HERMITE;
+#endif
+
+#if BCR == GREVILLE
+static constexpr BoundCond s_bcr = BoundCond::GREVILLE;
+#elif BCR == HERMITE
+static constexpr BoundCond s_bcr = BoundCond::HERMITE;
+#endif
+
+struct DimX
 {
-    // Needs to be defined here to avoid multiple initializations of the discrete_space function
-    struct DimX
-    {
-        static constexpr bool PERIODIC = false;
-    };
-    struct DimY
-    {
-        static constexpr bool PERIODIC = false;
-    };
-    static constexpr std::size_t s_degree_X = DX;
-    static constexpr std::size_t s_degree_Y = DY;
-    static constexpr BoundCond s_bcl = BcL;
-    static constexpr BoundCond s_bcr = BcR;
-    using BSplineX
-            = std::conditional_t<Uniform, UniformBSplines<DimX, DX>, NonUniformBSplines<DimX, DX>>;
-    using BSplineY
-            = std::conditional_t<Uniform, UniformBSplines<DimY, DY>, NonUniformBSplines<DimY, DY>>;
-    using IDimX = typename SplineBuilder<BSplineX, BcL, BcR>::interpolation_mesh_type;
-    using IDimY = typename SplineBuilder<BSplineY, BcL, BcR>::interpolation_mesh_type;
+    static constexpr bool PERIODIC = false;
 };
 
-using degrees = std::integer_sequence<std::size_t, 1, 2, 3, 4, 5, 6>;
-using boundary_conds = std::integer_sequence<BoundCond, BoundCond::GREVILLE, BoundCond::HERMITE>;
-using is_uniform_types = std::tuple<std::true_type, std::false_type>;
+static constexpr std::size_t s_degree_x = DEGREE_X;
 
-using Cases = tuple_to_types_t<
-        cartesian_product_t<degrees, degrees, boundary_conds, boundary_conds, is_uniform_types>>;
+#if UNIFORM == 1
+using BSplinesX = UniformBSplines<DimX, s_degree_x>;
+#elif UNIFORM == 0
+using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
+#endif
 
-TYPED_TEST_SUITE(NonPeriodic2DSplineBuilderTestFixture, Cases);
+using IDimX = SplineBuilder<BSplinesX, s_bcl, s_bcr>::interpolation_mesh_type;
+using IndexX = DiscreteElement<IDimX>;
+using DVectX = DiscreteVector<IDimX>;
+using CoordX = Coordinate<DimX>;
+
+struct DimY
+{
+    static constexpr bool PERIODIC = false;
+};
+
+static constexpr std::size_t s_degree_y = DEGREE_Y;
+
+#if UNIFORM == 1
+using BSplinesY = UniformBSplines<DimY, s_degree_y>;
+#elif UNIFORM == 0
+using BSplinesY = NonUniformBSplines<DimY, s_degree_y>;
+#endif
+
+using IDimY = SplineBuilder<BSplinesY, s_bcl, s_bcr>::interpolation_mesh_type;
+using IndexY = DiscreteElement<IDimY>;
+using DVectY = DiscreteVector<IDimY>;
+using CoordY = Coordinate<DimY>;
+
+using IndexXY = DiscreteElement<IDimX, IDimY>;
+using BsplIndexXY = DiscreteElement<BSplinesX, BSplinesY>;
+using SplineXY = Chunk<double, DiscreteDomain<BSplinesX, BSplinesY>>;
+using FieldXY = Chunk<double, DiscreteDomain<IDimX, IDimY>>;
+using CoordXY = Coordinate<DimX, DimY>;
+
+using EvaluatorType = Evaluator2D::Evaluator<
+        PolynomialEvaluator::Evaluator<IDimX, s_degree_x>,
+        PolynomialEvaluator::Evaluator<IDimY, 0>>;
 
 // Checks that when evaluating the spline at interpolation points one
 // recovers values that were used to build the spline
-TYPED_TEST(NonPeriodic2DSplineBuilderTestFixture, Identity)
+TEST(NonPeriodic2DSplineBuilderTest, Identity)
 {
-    using DimX = typename TestFixture::DimX;
-    using IDimX = typename TestFixture::IDimX;
-    using IndexX = DiscreteElement<IDimX>;
-    using DVectX = DiscreteVector<IDimX>;
-    using CoordX = Coordinate<DimX>;
-
-    using DimY = typename TestFixture::DimY;
-    using IDimY = typename TestFixture::IDimY;
-    using IndexY = DiscreteElement<IDimY>;
-    using DVectY = DiscreteVector<IDimY>;
-    using CoordY = Coordinate<DimY>;
-
-    using IndexXY = DiscreteElement<IDimX, IDimY>;
-    using BSplinesX = typename TestFixture::BSplineX;
-    using BSplinesY = typename TestFixture::BSplineY;
-    using BsplIndexXY = DiscreteElement<BSplinesX, BSplinesY>;
-    using SplineXY = Chunk<double, DiscreteDomain<BSplinesX, BSplinesY>>;
-    using FieldXY = Chunk<double, DiscreteDomain<IDimX, IDimY>>;
-    using CoordXY = Coordinate<DimX, DimY>;
-
-    using EvaluatorType = typename Evaluator2D::Evaluator<
-            PolynomialEvaluator::Evaluator<IDimX, TestFixture::s_degree_X>,
-            PolynomialEvaluator::Evaluator<IDimY, 0>>;
-
     CoordXY constexpr x0(0., 0.);
     CoordXY constexpr xN(1., 1.);
     std::size_t constexpr ncells1 = 100;
     std::size_t constexpr ncells2 = 50;
 
     // 1. Create BSplines
-    if constexpr (BSplinesX::is_uniform()) {
-        init_discrete_space<BSplinesX>((CoordX)get<DimX>(x0), (CoordX)get<DimX>(xN), ncells1);
-    } else {
+    {
+#if UNIFORM == 1
+        init_discrete_space<BSplinesX>(select<DimX>(x0), select<DimX>(xN), ncells1);
+#elif UNIFORM == 0
         DVectX constexpr npoints(ncells1 + 1);
         std::vector<CoordX> breaks(npoints);
         double constexpr dx = (get<DimX>(xN) - get<DimX>(x0)) / ncells1;
@@ -106,10 +101,12 @@ TYPED_TEST(NonPeriodic2DSplineBuilderTestFixture, Identity)
             breaks[i] = CoordX(get<DimX>(x0) + i * dx);
         }
         init_discrete_space<BSplinesX>(breaks);
+#endif
     }
-    if constexpr (BSplinesY::is_uniform()) {
-        init_discrete_space<BSplinesY>((CoordY)get<DimY>(x0), (CoordY)get<DimY>(xN), ncells2);
-    } else {
+    {
+#if UNIFORM == 1
+        init_discrete_space<BSplinesY>(select<DimY>(x0), select<DimY>(xN), ncells2);
+#elif UNIFORM == 0
         DVectY constexpr npoints(ncells2 + 1);
         std::vector<CoordY> breaks(npoints);
         double constexpr dx = (get<DimY>(xN) - get<DimY>(x0)) / ncells2;
@@ -117,6 +114,7 @@ TYPED_TEST(NonPeriodic2DSplineBuilderTestFixture, Identity)
             breaks[i] = CoordY(get<DimY>(x0) + i * dx);
         }
         init_discrete_space<BSplinesY>(breaks);
+#endif
     }
 
     DiscreteDomain<BSplinesX, BSplinesY> const dom_bsplines_xy(
@@ -130,14 +128,7 @@ TYPED_TEST(NonPeriodic2DSplineBuilderTestFixture, Identity)
     SplineXY coef(dom_bsplines_xy);
 
     // 3. Create a SplineBuilder over BSplines using some boundary conditions
-    const SplineBuilder2D<
-            BSplinesX,
-            BSplinesY,
-            TestFixture::s_bcl,
-            TestFixture::s_bcr,
-            TestFixture::s_bcl,
-            TestFixture::s_bcr>
-            spline_builder;
+    const SplineBuilder2D<BSplinesX, BSplinesY, s_bcl, s_bcr, s_bcl, s_bcr> spline_builder;
     auto interpolation_domain = spline_builder.interpolation_domain();
     auto interpolation_domain_X = spline_builder.interpolation_domain1();
     auto interpolation_domain_Y = spline_builder.interpolation_domain2();
@@ -147,13 +138,11 @@ TYPED_TEST(NonPeriodic2DSplineBuilderTestFixture, Identity)
     EvaluatorType evaluator;
     evaluator(yvals.span_view());
 
-    int constexpr shift_X
-            = TestFixture::s_degree_X % 2; // shift = 0 for even order, 1 for odd order
-    int constexpr shift_Y
-            = TestFixture::s_degree_Y % 2; // shift = 0 for even order, 1 for odd order
+    int constexpr shift_X = s_degree_x % 2; // shift = 0 for even order, 1 for odd order
+    int constexpr shift_Y = s_degree_y % 2; // shift = 0 for even order, 1 for odd order
 
-    int constexpr n_bc_X = TestFixture::s_degree_X / 2;
-    int constexpr n_bc_Y = TestFixture::s_degree_Y / 2;
+    int constexpr n_bc_X = s_degree_x / 2;
+    int constexpr n_bc_Y = s_degree_y / 2;
 
     std::vector<double> deriv_xmin_data_X(n_bc_X * interpolation_domain_Y.size());
     std::vector<double> deriv_xmax_data_X(n_bc_X * interpolation_domain_Y.size());
@@ -215,27 +204,25 @@ TYPED_TEST(NonPeriodic2DSplineBuilderTestFixture, Identity)
     }
 
     const std::optional<CDSpan2D> deriv_l_X(
-            TestFixture::s_bcl == BoundCond::HERMITE ? std::optional(c_deriv_xmin) : std::nullopt);
+            s_bcl == BoundCond::HERMITE ? std::optional(c_deriv_xmin) : std::nullopt);
     const std::optional<CDSpan2D> deriv_r_X(
-            TestFixture::s_bcr == BoundCond::HERMITE ? std::optional(c_deriv_xmax) : std::nullopt);
+            s_bcr == BoundCond::HERMITE ? std::optional(c_deriv_xmax) : std::nullopt);
     const std::optional<CDSpan2D> deriv_l_Y(
-            TestFixture::s_bcl == BoundCond::HERMITE ? std::optional(c_deriv_ymin) : std::nullopt);
+            s_bcl == BoundCond::HERMITE ? std::optional(c_deriv_ymin) : std::nullopt);
     const std::optional<CDSpan2D> deriv_r_Y(
-            TestFixture::s_bcr == BoundCond::HERMITE ? std::optional(c_deriv_ymax) : std::nullopt);
+            s_bcr == BoundCond::HERMITE ? std::optional(c_deriv_ymax) : std::nullopt);
     const std::optional<CDSpan2D> md_xmin_ymin(
-            TestFixture::s_bcl == BoundCond::HERMITE ? std::optional(c_mixed_derivs_xmin_ymin)
-                                                     : std::nullopt);
+            s_bcl == BoundCond::HERMITE ? std::optional(c_mixed_derivs_xmin_ymin) : std::nullopt);
     const std::optional<CDSpan2D> md_xmin_ymax(
-            TestFixture::s_bcl == BoundCond::HERMITE && TestFixture::s_bcr == BoundCond::HERMITE
+            s_bcl == BoundCond::HERMITE && s_bcr == BoundCond::HERMITE
                     ? std::optional(c_mixed_derivs_xmin_ymax)
                     : std::nullopt);
     const std::optional<CDSpan2D> md_xmax_ymin(
-            TestFixture::s_bcl == BoundCond::HERMITE && TestFixture::s_bcr == BoundCond::HERMITE
+            s_bcl == BoundCond::HERMITE && s_bcr == BoundCond::HERMITE
                     ? std::optional(c_mixed_derivs_xmax_ymin)
                     : std::nullopt);
     const std::optional<CDSpan2D> md_xmax_ymax(
-            TestFixture::s_bcr == BoundCond::HERMITE ? std::optional(c_mixed_derivs_xmax_ymax)
-                                                     : std::nullopt);
+            s_bcr == BoundCond::HERMITE ? std::optional(c_mixed_derivs_xmax_ymax) : std::nullopt);
 
     // 5. Finally build the spline by filling `coef`
     spline_builder(
@@ -314,4 +301,11 @@ TYPED_TEST(NonPeriodic2DSplineBuilderTestFixture, Identity)
     EXPECT_LE(max_norm_error_diff1, 1.0e-3);
     EXPECT_LE(max_norm_error_diff2, 1.0e-3);
     EXPECT_LE(max_norm_error_diff12, 1.0e-3);
+}
+
+int main(int argc, char** argv)
+{
+    ::testing::InitGoogleTest(&argc, argv);
+    ::ScopeGuard scope(argc, argv);
+    return RUN_ALL_TESTS();
 }
