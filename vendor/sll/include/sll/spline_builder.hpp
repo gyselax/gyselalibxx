@@ -221,7 +221,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::operator()(
 
     if constexpr (bsplines_type::is_periodic()) {
         if (m_offset != 0) {
-            for (std::size_t i = 0; i < m_offset; ++i) {
+            for (int i = 0; i < m_offset; ++i) {
                 spline(DiscreteElement<bsplines_type>(i)) = spline(
                         DiscreteElement<bsplines_type>(discrete_space<BSplines>().nbasis() + i));
             }
@@ -370,7 +370,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
             for (std::size_t i = 0; i < n_interp_pts - diag_shift; ++i) {
                 interp_pts[i] = interp_pts[i + diag_shift];
             }
-            for (std::size_t i = 0; i < diag_shift; ++i) {
+            for (int i = 0; i < diag_shift; ++i) {
                 interp_pts[n_interp_pts - diag_shift + i] = temp_knots[i];
             }
         } else if (interp_pts[n_interp_pts - 1] > discrete_space<BSplines>().rmax()) {
@@ -388,7 +388,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_non_u
             for (std::size_t i = 0; i < n_interp_pts + diag_shift; ++i) {
                 interp_pts[i - diag_shift] = interp_pts[i];
             }
-            for (std::size_t i = 0; i < -diag_shift; ++i) {
+            for (int i = 0; i < -diag_shift; ++i) {
                 interp_pts[-diag_shift - 1 - i] = temp_knots[i];
             }
         }

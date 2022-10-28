@@ -101,15 +101,17 @@ public:
     double integrate(ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         Chunk<double, DiscreteDomain<BSplinesType>> values(spline_coef.domain());
-        auto const vals = values.allocation_mdspan();
 
-        discrete_space<bsplines_type>().integrals(vals);
+        discrete_space<bsplines_type>().integrals(values);
 
-        double y = 0.;
-        for (DiscreteElement<BSplinesType> ibs : spline_coef.domain()) {
-            y += spline_coef(ibs) * values(ibs);
-        }
-        return y;
+        return transform_reduce(
+                policies::parallel_host,
+                spline_coef.domain(),
+                0.0,
+                reducer::sum<double>(),
+                [&](DiscreteElement<BSplinesType> const ibspl) {
+                    return spline_coef(ibspl) * values(ibspl);
+                });
     }
 
 private:

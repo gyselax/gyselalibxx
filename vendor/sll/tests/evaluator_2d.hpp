@@ -12,7 +12,12 @@ struct Evaluator2D
         Eval2 eval_func2;
 
     public:
-        Evaluator() = default;
+        template <class Domain>
+        Evaluator(Domain domain)
+            : eval_func1(select<typename Eval1::Dim>(domain))
+            , eval_func2(select<typename Eval2::Dim>(domain))
+        {
+        }
 
         double operator()(double const x, double const y) const noexcept
         {
@@ -64,6 +69,11 @@ struct Evaluator2D
                 chunk(i) = eval_func1.deriv(coordinate(select<DDim1>(i)), derivative_x)
                            * eval_func2.deriv(coordinate(select<DDim2>(i)), derivative_y);
             });
+        }
+
+        double max_norm(int diff1 = 0, int diff2 = 0) const
+        {
+            return eval_func1.max_norm(diff1) * eval_func2.max_norm(diff2);
         }
     };
 };

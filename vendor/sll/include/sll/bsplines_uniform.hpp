@@ -126,7 +126,8 @@ public:
 
         void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, std::size_t n) const;
 
-        DSpan1D integrals(DSpan1D int_vals) const;
+        ChunkSpan<double, discrete_domain_type> integrals(
+                ChunkSpan<double, discrete_domain_type> int_vals) const;
 
         double get_knot(int idx) const noexcept
         {
@@ -374,21 +375,38 @@ void UniformBSplines<Tag, D>::Impl<MemorySpace>::get_icell_and_offset(
 
 template <class Tag, std::size_t D>
 template <class MemorySpace>
-DSpan1D UniformBSplines<Tag, D>::Impl<MemorySpace>::integrals(DSpan1D const int_vals) const
+ChunkSpan<double, DiscreteDomain<UniformBSplines<Tag, D>>> UniformBSplines<Tag, D>::Impl<
+        MemorySpace>::integrals(ChunkSpan<double, DiscreteDomain<UniformBSplines<Tag, D>>> int_vals)
+        const
 {
-    assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
-    for (std::size_t i = degree(); i < nbasis() - degree(); ++i) {
-        int_vals(i) = step<mesh_type>();
+    if constexpr (is_periodic()) {
+        assert(int_vals.size() == nbasis() || int_vals.size() == size());
+    } else {
+        assert(int_vals.size() == nbasis());
     }
+    discrete_domain_type const full_dom_splines(full_domain());
 
     if constexpr (is_periodic()) {
-        // Periodic conditions lead to repeat spline coefficients
-        for (std::size_t i = 0; i < degree(); ++i) {
-            int_vals(i) = step<mesh_type>();
-            int_vals(nbasis() - i - 1) = step<mesh_type>();
-            int_vals(nbasis() + i) = 0;
+        discrete_domain_type const dom_bsplines(
+                full_dom_splines.take_first(discrete_vector_type {nbasis()}));
+        for (auto ix : dom_bsplines) {
+            int_vals(ix) = step<mesh_type>();
+        }
+        if (int_vals.size() == size()) {
+            discrete_domain_type const dom_bsplines_repeated(
+                    full_dom_splines.take_last(discrete_vector_type {degree()}));
+            for (auto ix : dom_bsplines_repeated) {
+                int_vals(ix) = 0;
+            }
         }
     } else {
+        discrete_domain_type const dom_bspline_entirely_in_domain
+                = full_dom_splines
+                          .remove(discrete_vector_type(degree()), discrete_vector_type(degree()));
+        for (auto ix : dom_bspline_entirely_in_domain) {
+            int_vals(ix) = step<mesh_type>();
+        }
+
         int jmin = 0;
         std::array<double, degree() + 2> edge_vals_ptr;
         std::experimental::mdspan<double, std::experimental::extents<degree() + 2>> const edge_vals(
@@ -401,8 +419,10 @@ DSpan1D UniformBSplines<Tag, D>::Impl<MemorySpace>::integrals(DSpan1D const int_
         for (std::size_t i = 0; i < degree(); ++i) {
             double const c_eval = sum(edge_vals, 0, degree() - i);
 
-            int_vals(i) = step<mesh_type>() * (d_eval - c_eval);
-            int_vals(nbasis() - 1 - i) = int_vals(i);
+            double const edge_value = step<mesh_type>() * (d_eval - c_eval);
+
+            int_vals(discrete_element_type(i)) = edge_value;
+            int_vals(discrete_element_type(nbasis() - 1 - i)) = edge_value;
         }
     }
     return int_vals;
