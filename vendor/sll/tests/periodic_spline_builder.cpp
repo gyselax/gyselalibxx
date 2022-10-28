@@ -27,20 +27,16 @@ struct DimX
 
 static constexpr std::size_t s_degree_x = DEGREE_X;
 
-#if UNIFORM == 1
+#if defined(BSPLINES_TYPE_UNIFORM)
 using BSplinesX = UniformBSplines<DimX, s_degree_x>;
-#elif UNIFORM == 0
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
 using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
 #endif
 
 using IDimX = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>::
         interpolation_mesh_type;
 
-#if EVALUATOR == Cosine
 using evaluator_type = CosineEvaluator::Evaluator<IDimX>;
-#elif EVALUATOR == Polynomial
-using evaluator_type = PolynomialEvaluator::Evaluator<IDimX>;
-#endif
 
 using IndexX = DiscreteElement<IDimX>;
 using DVectX = DiscreteVector<IDimX>;
@@ -59,9 +55,9 @@ TEST(PeriodicSplineBuilderTest, Identity)
 
     // 1. Create BSplines
     {
-#if UNIFORM == 1
+#if defined(BSPLINES_TYPE_UNIFORM)
         init_discrete_space<BSplinesX>(x0, xN, ncells);
-#elif UNIFORM == 0
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
         DVectX constexpr npoints(ncells + 1);
         std::vector<CoordX> breaks(npoints);
         double dx = (xN - x0) / ncells;
