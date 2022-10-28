@@ -19,6 +19,7 @@
 
 #include "cosine_evaluator.hpp"
 #include "polynomial_evaluator.hpp"
+#include "spline_error_bounds.hpp"
 
 struct DimX
 {
@@ -79,7 +80,7 @@ TEST(PeriodicSplineBuilderTest, Identity)
 
     // 4. Allocate and fill a chunk over the interpolation domain
     FieldX yvals(interpolation_domain);
-    evaluator_type evaluator;
+    evaluator_type evaluator(interpolation_domain);
     evaluator(yvals);
 
     // 5. Finally build the spline by filling `coef`
@@ -115,7 +116,25 @@ TEST(PeriodicSplineBuilderTest, Identity)
         double const error_deriv = spline_eval_deriv(ix) - evaluator.deriv(x, 1);
         max_norm_error_diff = std::fmax(max_norm_error_diff, std::fabs(error_deriv));
     }
-    EXPECT_LE(max_norm_error, 1.0e-12);
+    double const max_norm_error_integ = std::fabs(
+            spline_evaluator.integrate(coef.span_cview()) - evaluator.deriv(xN, -1)
+            + evaluator.deriv(x0, -1));
+
+    double const max_norm = evaluator.max_norm();
+    double const max_norm_diff = evaluator.max_norm(1);
+    double const max_norm_int = evaluator.max_norm(-1);
+
+    SplineErrorBounds<evaluator_type> error_bounds(evaluator);
+    const double h = (xN - x0) / ncells;
+    EXPECT_LE(
+            max_norm_error,
+            std::max(error_bounds.error_bound(h, s_degree_x), 1.0e-14 * max_norm));
+    EXPECT_LE(
+            max_norm_error_diff,
+            std::max(error_bounds.error_bound_on_deriv(h, s_degree_x), 1e-12 * max_norm_diff));
+    EXPECT_LE(
+            max_norm_error_integ,
+            std::max(error_bounds.error_bound_on_int(h, s_degree_x), 1.0e-14 * max_norm_int));
 }
 
 int main(int argc, char** argv)

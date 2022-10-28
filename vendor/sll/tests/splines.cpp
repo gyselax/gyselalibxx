@@ -141,14 +141,14 @@ void cos_splines_test(
 
         // Compute error
         double const error = spline_value - eval_cos(eval_pts[ii], coeffs);
-        max_norm_error = max(max_norm_error, abs(error));
+        max_norm_error = std::max(max_norm_error, abs(error));
 
         // Check eval_deriv function
         double const spline_deriv_value = spline.eval_deriv(eval_pts[ii]);
 
         // Compute error
         double const error_deriv = spline_deriv_value - eval_cos(eval_pts[ii], coeffs, 1);
-        max_norm_error_diff = max(max_norm_error_diff, abs(error_deriv));
+        max_norm_error_diff = std::max(max_norm_error_diff, abs(error_deriv));
     }
 
     max_norm_error_int = spline.integrate();

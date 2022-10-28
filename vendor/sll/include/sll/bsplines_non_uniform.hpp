@@ -108,13 +108,29 @@ public:
 
         void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, std::size_t n) const;
 
-        DSpan1D integrals(DSpan1D int_vals) const;
+        ChunkSpan<double, discrete_domain_type> integrals(
+                ChunkSpan<double, discrete_domain_type> int_vals) const;
 
         double get_knot(int break_idx) const noexcept
         {
             // TODO: assert break_idx >= 1 - degree
             // TODO: assert break_idx <= npoints + degree
             return m_knots(break_idx + degree());
+        }
+
+        double get_first_support_knot(discrete_element_type const& ix) const
+        {
+            return m_knots(ix.uid());
+        }
+
+        double get_last_support_knot(discrete_element_type const& ix) const
+        {
+            return m_knots(ix.uid() + degree() + 1);
+        }
+
+        double get_support_knot_n(discrete_element_type const& ix, int n) const
+        {
+            return m_knots(ix.uid() + n);
         }
 
         Coordinate<Tag> rmin() const noexcept
@@ -440,19 +456,31 @@ int NonUniformBSplines<Tag, D>::Impl<MemorySpace>::find_cell(double const x) con
 
 template <class Tag, std::size_t D>
 template <class MemorySpace>
-DSpan1D NonUniformBSplines<Tag, D>::Impl<MemorySpace>::integrals(DSpan1D const int_vals) const
+ChunkSpan<double, DiscreteDomain<NonUniformBSplines<Tag, D>>> NonUniformBSplines<Tag, D>::Impl<
+        MemorySpace>::integrals(ChunkSpan<double, DiscreteDomain<NonUniformBSplines<Tag, D>>>
+                                        int_vals) const
 {
-    assert(int_vals.extent(0) == nbasis() + degree() * is_periodic());
+    if constexpr (is_periodic()) {
+        assert(int_vals.size() == nbasis() || int_vals.size() == size());
+    } else {
+        assert(int_vals.size() == nbasis());
+    }
 
     double const inv_deg = 1.0 / (degree() + 1);
 
-    for (std::size_t i = 0; i < nbasis(); ++i) {
-        int_vals(i) = (get_knot(i + 1) - get_knot(i - degree())) * inv_deg;
+    discrete_domain_type const dom_bsplines(
+            full_domain().take_first(discrete_vector_type {nbasis()}));
+    for (auto ix : dom_bsplines) {
+        int_vals(ix) = (get_last_support_knot(ix) - get_first_support_knot(ix)) * inv_deg;
     }
 
     if constexpr (is_periodic()) {
-        for (std::size_t i = 0; i < degree(); ++i) {
-            int_vals(nbasis() + i) = 0;
+        if (int_vals.size() == size()) {
+            discrete_domain_type const dom_bsplines_wrap(
+                    full_domain().take_last(discrete_vector_type {degree()}));
+            for (auto ix : dom_bsplines_wrap) {
+                int_vals(ix) = 0;
+            }
         }
     }
     return int_vals;
