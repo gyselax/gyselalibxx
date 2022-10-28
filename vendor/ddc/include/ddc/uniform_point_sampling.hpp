@@ -34,11 +34,6 @@ public:
     using discrete_vector_type = DiscreteVector<UniformPointSampling>;
 
 public:
-    static constexpr std::size_t rank()
-    {
-        return 1;
-    }
-
     template <class MemorySpace>
     class Impl
     {
