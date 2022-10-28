@@ -26,11 +26,6 @@ Coordinate<DimX> constexpr point_rx = Coordinate<DimX>(0.3);
 
 } // namespace
 
-TEST(NonUniformPointSamplingTest, Rank)
-{
-    EXPECT_EQ(DDimX::rank(), 1);
-}
-
 TEST(NonUniformPointSamplingTest, ListConstructor)
 {
     DDimX::Impl<Kokkos::HostSpace> ddim_x(VALUES);
