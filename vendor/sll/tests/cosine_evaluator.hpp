@@ -4,20 +4,30 @@
 
 #include <ddc/ddc.hpp>
 
+#include <sll/math_tools.hpp>
+
 struct CosineEvaluator
 {
     template <class DDim>
     class Evaluator
     {
+    public:
+        using Dim = DDim;
+
+    private:
         static inline constexpr double s_2_pi = 2. * M_PI;
 
     private:
-        double m_c0 = 1.;
+        double m_c0;
 
-        double m_c1 = 0.;
+        double m_c1;
 
     public:
-        Evaluator() = default;
+        template <class Domain>
+        Evaluator(Domain domain) : m_c0(1.0)
+                                 , m_c1(0.0)
+        {
+        }
 
         Evaluator(double c0, double c1) : m_c0(c0), m_c1(c1) {}
 
@@ -49,10 +59,15 @@ struct CosineEvaluator
             }
         }
 
+        double max_norm(int diff = 0) const
+        {
+            return ipow(s_2_pi * m_c0, diff);
+        }
+
     private:
         double eval(double const x, int const derivative) const noexcept
         {
-            return std::pow(s_2_pi * m_c0, derivative)
+            return ipow(s_2_pi * m_c0, derivative)
                    * std::cos(M_PI_2 * derivative + s_2_pi * (m_c0 * x + m_c1));
         }
     };

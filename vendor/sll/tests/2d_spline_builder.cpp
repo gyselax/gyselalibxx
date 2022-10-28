@@ -20,6 +20,7 @@
 #include "cosine_evaluator.hpp"
 #include "evaluator_2d.hpp"
 #include "polynomial_evaluator.hpp"
+#include "spline_error_bounds.hpp"
 
 
 #if defined(BCL_GREVILLE)
@@ -73,7 +74,7 @@ using CoordXY = Coordinate<DimX, DimY>;
 
 using EvaluatorType = Evaluator2D::Evaluator<
         PolynomialEvaluator::Evaluator<IDimX, s_degree_x>,
-        PolynomialEvaluator::Evaluator<IDimY, 0>>;
+        PolynomialEvaluator::Evaluator<IDimY, s_degree_y>>;
 
 // Checks that when evaluating the spline at interpolation points one
 // recovers values that were used to build the spline
@@ -130,7 +131,7 @@ TEST(NonPeriodic2DSplineBuilderTest, Identity)
 
     // 4. Allocate and fill a chunk over the interpolation domain
     FieldXY yvals(interpolation_domain);
-    EvaluatorType evaluator;
+    EvaluatorType evaluator(interpolation_domain);
     evaluator(yvals.span_view());
 
     int constexpr shift_X = s_degree_x % 2; // shift = 0 for even order, 1 for odd order
@@ -292,10 +293,10 @@ TEST(NonPeriodic2DSplineBuilderTest, Identity)
         double const error_deriv12 = spline_eval_deriv12(ix, iy) - evaluator.deriv(x, y, 1, 1);
         max_norm_error_diff12 = std::fmax(max_norm_error_diff12, std::fabs(error_deriv12));
     });
-    EXPECT_LE(max_norm_error, 1.0e-12);
-    EXPECT_LE(max_norm_error_diff1, 1.0e-3);
-    EXPECT_LE(max_norm_error_diff2, 1.0e-3);
-    EXPECT_LE(max_norm_error_diff12, 1.0e-3);
+    EXPECT_LE(max_norm_error / evaluator.max_norm(), 1.0e-14);
+    EXPECT_LE(max_norm_error_diff1 / evaluator.max_norm(1, 0), 1.0e-12);
+    EXPECT_LE(max_norm_error_diff2 / evaluator.max_norm(0, 1), 1.0e-12);
+    EXPECT_LE(max_norm_error_diff12 / evaluator.max_norm(1, 1), 1.0e-10);
 }
 
 int main(int argc, char** argv)

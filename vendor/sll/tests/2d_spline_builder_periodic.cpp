@@ -20,6 +20,7 @@
 #include "cosine_evaluator.hpp"
 #include "evaluator_2d.hpp"
 #include "polynomial_evaluator.hpp"
+#include "spline_error_bounds.hpp"
 
 struct DimX
 {
@@ -127,7 +128,7 @@ TEST(Periodic2DSplineBuilderTest, Identity)
 
     // 4. Allocate and fill a chunk over the interpolation domain
     FieldXY yvals(interpolation_domain);
-    EvaluatorType evaluator;
+    EvaluatorType evaluator(interpolation_domain);
     evaluator(yvals.span_view());
 
     // 5. Finally build the spline by filling `coef`
@@ -193,10 +194,33 @@ TEST(Periodic2DSplineBuilderTest, Identity)
         double const error_deriv12 = spline_eval_deriv12(ix, iy) - evaluator.deriv(x, y, 1, 1);
         max_norm_error_diff12 = std::fmax(max_norm_error_diff12, std::fabs(error_deriv12));
     });
-    EXPECT_LE(max_norm_error, 1.0e-12);
-    //EXPECT_LE(max_norm_error_diff1, 1.0e-3);
-    //EXPECT_LE(max_norm_error_diff2, 1.0e-3);
-    //EXPECT_LE(max_norm_error_diff12, 1.0e-3);
+
+    double const max_norm = evaluator.max_norm();
+    double const max_norm_diff1 = evaluator.max_norm(1, 0);
+    double const max_norm_diff2 = evaluator.max_norm(0, 1);
+    double const max_norm_diff12 = evaluator.max_norm(1, 1);
+
+    SplineErrorBounds<EvaluatorType> error_bounds(evaluator);
+    const double h1 = (get<DimX>(xN) - get<DimX>(x0)) / ncells1;
+    const double h2 = (get<DimY>(xN) - get<DimY>(x0)) / ncells2;
+    EXPECT_LE(
+            max_norm_error,
+            std::max(error_bounds.error_bound(h1, h2, s_degree_x, s_degree_y), 1.0e-14 * max_norm));
+    EXPECT_LE(
+            max_norm_error_diff1,
+            std::
+                    max(error_bounds.error_bound_on_deriv_1(h1, h2, s_degree_x, s_degree_y),
+                        1e-12 * max_norm_diff1));
+    EXPECT_LE(
+            max_norm_error_diff2,
+            std::
+                    max(error_bounds.error_bound_on_deriv_2(h1, h2, s_degree_x, s_degree_y),
+                        1e-12 * max_norm_diff2));
+    EXPECT_LE(
+            max_norm_error_diff12,
+            std::
+                    max(error_bounds.error_bound_on_deriv_12(h1, h2, s_degree_x, s_degree_y),
+                        1e-10 * max_norm_diff12));
 }
 
 int main(int argc, char** argv)

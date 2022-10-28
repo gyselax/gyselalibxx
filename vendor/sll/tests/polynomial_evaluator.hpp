@@ -1,24 +1,32 @@
 #pragma once
 
+#include <algorithm>
 #include <array>
 #include <cmath>
 #include <random>
 
 #include <ddc/ddc.hpp>
 
+#include <sll/math_tools.hpp>
+
 struct PolynomialEvaluator
 {
     template <class DDim, std::size_t Degree>
     class Evaluator
     {
-        static inline constexpr double s_2_pi = 2. * M_PI;
+    public:
+        using Dim = DDim;
 
     private:
         std::array<double, Degree + 1> m_coeffs;
         int const m_degree;
+        double const m_xN;
 
     public:
-        Evaluator() : m_degree(Degree)
+        template <class Domain>
+        Evaluator(Domain domain)
+            : m_degree(Degree)
+            , m_xN(std::max(std::abs(rmin(domain)), std::abs(rmax(domain))))
         {
             for (int i(0); i < m_degree + 1; ++i) {
                 m_coeffs[i] = double(rand() % 100) / 100.0;
@@ -51,6 +59,11 @@ struct PolynomialEvaluator
             for (DiscreteElement<DDim> const i : domain) {
                 chunk(i) = eval(coordinate(i), derivative);
             }
+        }
+
+        double max_norm(int diff = 0) const
+        {
+            return std::abs(deriv(m_xN, diff));
         }
 
     private:

@@ -81,13 +81,17 @@ void FemPeriodicPoissonSolver::build_matrix()
     }
 
     // Impose the boundary conditions
-    int const int_vals_size = m_nbasis + m_degree;
-    double int_vals_ptr[int_vals_size];
-    DSpan1D int_vals(int_vals_ptr, int_vals_size);
+    const DiscreteDomain bspline_full_domain = discrete_space<BSplinesX>().full_domain();
+    const DiscreteDomain bspline_dom
+            = bspline_full_domain.take_first(DiscreteVector<BSplinesX>(m_nbasis));
+
+    Chunk<double, DiscreteDomain<BSplinesX>> int_vals(bspline_dom);
     discrete_space<BSplinesX>().integrals(int_vals);
-    for (int i = 0; i < m_nbasis; ++i) {
-        m_fem_matrix->set_element(m_nbasis, i, int_vals[i]);
-        m_fem_matrix->set_element(i, m_nbasis, int_vals[i]);
+
+    for (auto ix : bspline_dom) {
+        const int i = ix.uid();
+        m_fem_matrix->set_element(m_nbasis, i, int_vals(ix));
+        m_fem_matrix->set_element(i, m_nbasis, int_vals(ix));
     }
 
     // Factorize the matrix ready to call solve
