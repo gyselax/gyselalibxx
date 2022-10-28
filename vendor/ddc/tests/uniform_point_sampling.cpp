@@ -23,11 +23,6 @@ protected:
     Coordinate<DimX> point_rx = Coordinate<DimX>(0.);
 };
 
-TEST_F(UniformPointSamplingTest, Rank)
-{
-    EXPECT_EQ(DDimX::rank(), 1);
-}
-
 TEST_F(UniformPointSamplingTest, Constructor)
 {
     DDimX::Impl<Kokkos::HostSpace> ddim_x(origin, step);

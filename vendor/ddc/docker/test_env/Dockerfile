@@ -36,6 +36,7 @@ RUN chmod +x /bin/bash_run \
     libnuma1 \
     libpdi-dev \
     rocm-hip-sdk \
+    libelf-dev \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
