@@ -26,29 +26,24 @@ struct DimX
     static constexpr bool PERIODIC = true;
 };
 
-static constexpr std::size_t s_degree_x = DEGREE_X;
-
-#if UNIFORM == 1
-using BSplinesX = UniformBSplines<DimX, s_degree_x>;
-#elif UNIFORM == 0
-using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
-#endif
-
-using IDimX = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>::
-        interpolation_mesh_type;
-
 struct DimY
 {
     static constexpr bool PERIODIC = true;
 };
 
+static constexpr std::size_t s_degree_x = DEGREE_X;
 static constexpr std::size_t s_degree_y = DEGREE_Y;
 
-#if UNIFORM == 1
+#if defined(BSPLINES_TYPE_UNIFORM)
+using BSplinesX = UniformBSplines<DimX, s_degree_x>;
 using BSplinesY = UniformBSplines<DimY, s_degree_y>;
-#elif UNIFORM == 0
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
+using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
 using BSplinesY = NonUniformBSplines<DimY, s_degree_y>;
 #endif
+
+using IDimX = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>::
+        interpolation_mesh_type;
 
 using IDimY = SplineBuilder<BSplinesY, BoundCond::PERIODIC, BoundCond::PERIODIC>::
         interpolation_mesh_type;
@@ -81,9 +76,9 @@ TEST(Periodic2DSplineBuilderTest, Identity)
 
     // 1. Create BSplines
     {
-#if UNIFORM == 1
+#if defined(BSPLINES_TYPE_UNIFORM)
         init_discrete_space<BSplinesX>(select<DimX>(x0), select<DimX>(xN), ncells1);
-#elif UNIFORM == 0
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
         DVectX constexpr npoints(ncells1 + 1);
         std::vector<CoordX> breaks(npoints);
         double constexpr dx = (get<DimX>(xN) - get<DimX>(x0)) / ncells1;
@@ -94,9 +89,9 @@ TEST(Periodic2DSplineBuilderTest, Identity)
 #endif
     }
     {
-#if UNIFORM == 1
+#if defined(BSPLINES_TYPE_UNIFORM)
         init_discrete_space<BSplinesY>(select<DimY>(x0), select<DimY>(xN), ncells2);
-#elif UNIFORM == 0
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
         DVectY constexpr npoints(ncells2 + 1);
         std::vector<CoordY> breaks(npoints);
         double constexpr dx = (get<DimY>(xN) - get<DimY>(x0)) / ncells2;

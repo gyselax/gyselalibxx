@@ -22,15 +22,15 @@
 #include "polynomial_evaluator.hpp"
 
 
-#if BCL == GREVILLE
+#if defined(BCL_GREVILLE)
 static constexpr BoundCond s_bcl = BoundCond::GREVILLE;
-#elif BCL == HERMITE
+#elif defined(BCL_HERMITE)
 static constexpr BoundCond s_bcl = BoundCond::HERMITE;
 #endif
 
-#if BCR == GREVILLE
+#if defined(BCR_GREVILLE)
 static constexpr BoundCond s_bcr = BoundCond::GREVILLE;
-#elif BCR == HERMITE
+#elif defined(BCR_HERMITE)
 static constexpr BoundCond s_bcr = BoundCond::HERMITE;
 #endif
 
@@ -39,31 +39,26 @@ struct DimX
     static constexpr bool PERIODIC = false;
 };
 
-static constexpr std::size_t s_degree_x = DEGREE_X;
+struct DimY
+{
+    static constexpr bool PERIODIC = false;
+};
 
-#if UNIFORM == 1
+static constexpr std::size_t s_degree_x = DEGREE_X;
+static constexpr std::size_t s_degree_y = DEGREE_Y;
+
+#if defined(BSPLINES_TYPE_UNIFORM)
 using BSplinesX = UniformBSplines<DimX, s_degree_x>;
-#elif UNIFORM == 0
+using BSplinesY = UniformBSplines<DimY, s_degree_y>;
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
 using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
+using BSplinesY = NonUniformBSplines<DimY, s_degree_y>;
 #endif
 
 using IDimX = SplineBuilder<BSplinesX, s_bcl, s_bcr>::interpolation_mesh_type;
 using IndexX = DiscreteElement<IDimX>;
 using DVectX = DiscreteVector<IDimX>;
 using CoordX = Coordinate<DimX>;
-
-struct DimY
-{
-    static constexpr bool PERIODIC = false;
-};
-
-static constexpr std::size_t s_degree_y = DEGREE_Y;
-
-#if UNIFORM == 1
-using BSplinesY = UniformBSplines<DimY, s_degree_y>;
-#elif UNIFORM == 0
-using BSplinesY = NonUniformBSplines<DimY, s_degree_y>;
-#endif
 
 using IDimY = SplineBuilder<BSplinesY, s_bcl, s_bcr>::interpolation_mesh_type;
 using IndexY = DiscreteElement<IDimY>;
@@ -91,9 +86,9 @@ TEST(NonPeriodic2DSplineBuilderTest, Identity)
 
     // 1. Create BSplines
     {
-#if UNIFORM == 1
+#if defined(BSPLINES_TYPE_UNIFORM)
         init_discrete_space<BSplinesX>(select<DimX>(x0), select<DimX>(xN), ncells1);
-#elif UNIFORM == 0
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
         DVectX constexpr npoints(ncells1 + 1);
         std::vector<CoordX> breaks(npoints);
         double constexpr dx = (get<DimX>(xN) - get<DimX>(x0)) / ncells1;
@@ -104,9 +99,9 @@ TEST(NonPeriodic2DSplineBuilderTest, Identity)
 #endif
     }
     {
-#if UNIFORM == 1
+#if defined(BSPLINES_TYPE_UNIFORM)
         init_discrete_space<BSplinesY>(select<DimY>(x0), select<DimY>(xN), ncells2);
-#elif UNIFORM == 0
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
         DVectY constexpr npoints(ncells2 + 1);
         std::vector<CoordY> breaks(npoints);
         double constexpr dx = (get<DimY>(xN) - get<DimY>(x0)) / ncells2;

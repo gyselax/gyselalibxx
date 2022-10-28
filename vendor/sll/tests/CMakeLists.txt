@@ -61,25 +61,23 @@ target_link_libraries(bernstein_tests
 )
 gtest_discover_tests(bernstein_tests)
 
-foreach(EVALUATOR "Cosine" "Polynomial")
-  foreach(DEGREE_X RANGE 1 7)
-    foreach(UNIFORM 0 1)
-      set(test_name "splines_tests_degree_${DEGREE_X}_uniform_${UNIFORM}_evaluator_${EVALUATOR}")
-      add_executable("${test_name}" periodic_spline_builder.cpp)
-      target_compile_features("${test_name}" PUBLIC cxx_std_17)
-      target_link_libraries("${test_name}"
-        PUBLIC
-        GTest::gtest
-        sll::splines
-      )
-      target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -DUNIFORM=${UNIFORM} -DEVALUATOR=${EVALUATOR})
-      add_test("${test_name}" "${test_name}")
-    endforeach()
+foreach(DEGREE_X RANGE 1 7)
+  foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
+    set(test_name "splines_tests_DEGREE_X_${DEGREE_X}_${BSPLINES_TYPE}")
+    add_executable("${test_name}" periodic_spline_builder.cpp)
+    target_compile_features("${test_name}" PUBLIC cxx_std_17)
+    target_link_libraries("${test_name}"
+      PUBLIC
+      GTest::gtest
+      sll::splines
+    )
+    target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -D${BSPLINES_TYPE})
+    add_test("${test_name}" "${test_name}")
   endforeach()
 endforeach()
 
 foreach(DEGREE_X RANGE 1 7)
-  set(test_name "splines_ordered_points_degree_${DEGREE_X}")
+  set(test_name "splines_ordered_points_DEGREE_X_${DEGREE_X}")
   add_executable("${test_name}" periodic_spline_builder_ordered_points.cpp)
   target_compile_features("${test_name}" PUBLIC cxx_std_17)
   target_link_libraries("${test_name}"
@@ -91,12 +89,12 @@ foreach(DEGREE_X RANGE 1 7)
   add_test("${test_name}" "${test_name}")
 endforeach()
 
-foreach(BCL "GREVILLE" "HERMITE")
-  foreach(BCR "GREVILLE" "HERMITE")
-    foreach(EVALUATOR "Cosine" "Polynomial")
+foreach(BCL "BCL_GREVILLE" "BCL_HERMITE")
+  foreach(BCR "BCR_GREVILLE" "BCR_HERMITE")
+    foreach(EVALUATOR "EVALUATOR_COSINE" "EVALUATOR_POLYNOMIAL")
       foreach(DEGREE_X RANGE 1 7)
-        foreach(UNIFORM 0 1)
-          set(test_name "splines_tests_degree_${DEGREE_X}_uniform_${UNIFORM}_evaluator_${EVALUATOR}_bcl_${BCL}_bcr_${BCR}")
+        foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
+          set(test_name "splines_tests_DEGREE_X_${DEGREE_X}_${BSPLINES_TYPE}_${EVALUATOR}_bcl_${BCL}_bcr_${BCR}")
           add_executable("${test_name}" non_periodic_spline_builder.cpp)
           target_compile_features("${test_name}" PUBLIC cxx_std_17)
           target_link_libraries("${test_name}"
@@ -104,7 +102,7 @@ foreach(BCL "GREVILLE" "HERMITE")
             GTest::gtest
             sll::splines
           )
-          target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -DUNIFORM=${UNIFORM} -DEVALUATOR=${EVALUATOR} -DBCL=${BCL} -DBCR=${BCR})
+          target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -D${BSPLINES_TYPE} -D${EVALUATOR} -D${BCL} -D${BCR})
           add_test("${test_name}" "${test_name}")
         endforeach()
       endforeach()
@@ -112,32 +110,30 @@ foreach(BCL "GREVILLE" "HERMITE")
   endforeach()
 endforeach()
 
-foreach(EVALUATOR "Cosine")
-  foreach(DEGREE_X RANGE 1 7)
-    foreach(DEGREE_Y RANGE 1 7)
-      foreach(UNIFORM 0 1)
-        set(test_name "2d_splines_tests_degree_x_${DEGREE_X}_degree_y_${DEGREE_Y}_uniform_${UNIFORM}_evaluator_${EVALUATOR}")
-        add_executable("${test_name}" 2d_spline_builder_periodic.cpp)
-        target_compile_features("${test_name}" PUBLIC cxx_std_17)
-        target_link_libraries("${test_name}"
-          PUBLIC
-          GTest::gtest
-          sll::splines
-        )
-        target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -DDEGREE_Y=${DEGREE_Y} -DUNIFORM=${UNIFORM} -DEVALUATOR=${EVALUATOR})
-        add_test("${test_name}" "${test_name}")
-      endforeach()
+foreach(DEGREE_X RANGE 1 7)
+  foreach(DEGREE_Y RANGE 1 7)
+    foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
+      set(test_name "2d_splines_tests_DEGREE_X_${DEGREE_X}_DEGREE_Y_${DEGREE_Y}_${BSPLINES_TYPE}")
+      add_executable("${test_name}" 2d_spline_builder_periodic.cpp)
+      target_compile_features("${test_name}" PUBLIC cxx_std_17)
+      target_link_libraries("${test_name}"
+        PUBLIC
+        GTest::gtest
+        sll::splines
+      )
+      target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -DDEGREE_Y=${DEGREE_Y} -D${BSPLINES_TYPE})
+      add_test("${test_name}" "${test_name}")
     endforeach()
   endforeach()
 endforeach()
 
-foreach(BCL "GREVILLE" "HERMITE")
-  foreach(BCR "GREVILLE" "HERMITE")
-    foreach(EVALUATOR "Polynomial")
+foreach(BCL "BCL_GREVILLE" "BCL_HERMITE")
+  foreach(BCR "BCR_GREVILLE" "BCR_HERMITE")
+    foreach(EVALUATOR "EVALUATOR_POLYNOMIAL")
       foreach(DEGREE_X RANGE 1 7)
         foreach(DEGREE_Y RANGE 1 7)
-          foreach(UNIFORM 0 1)
-            set(test_name "2d_splines_tests_degree_x_${DEGREE_X}_degree_y_${DEGREE_Y}_uniform_${UNIFORM}_evaluator_${EVALUATOR}_bcl_${BCL}_bcr_${BCR}")
+          foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
+            set(test_name "2d_splines_tests_DEGREE_X_${DEGREE_X}_DEGREE_Y_${DEGREE_Y}_${BSPLINES_TYPE}_${EVALUATOR}_${BCL}_${BCR}")
             add_executable("${test_name}" 2d_spline_builder.cpp)
             target_compile_features("${test_name}" PUBLIC cxx_std_17)
             target_link_libraries("${test_name}"
@@ -145,7 +141,7 @@ foreach(BCL "GREVILLE" "HERMITE")
               GTest::gtest
               sll::splines
             )
-            target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -DDEGREE_Y=${DEGREE_Y} -DUNIFORM=${UNIFORM} -DEVALUATOR=${EVALUATOR} -DBCL=${BCL} -DBCR=${BCR})
+            target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -DDEGREE_Y=${DEGREE_Y} -D${BSPLINES_TYPE} -D${EVALUATOR} -D${BCL} -D${BCR})
             add_test("${test_name}" "${test_name}")
           endforeach()
         endforeach()
