@@ -28,10 +28,15 @@ using ddim_impl_t = typename DDim::template Impl<MemorySpace>;
 template <class T>
 class gpu_proxy
 {
+    // Here are some reasonable concepts that T should satisfy to avoid undefined behaviors:
+    // - copy-constructible: objects may be memcopied to the device,
+    // - standard layout: objects will be ensured to have the same, standard, representation on the host and the device,
+    // - trivially destructible: the destructor of objects located on a device may not be called.
     static_assert(std::is_standard_layout_v<T>, "Not standard layout");
-    // Ideally T should be trivially destructible and copy constructible
     // static_assert(std::is_trivially_destructible_v<T>, "Not trivially destructible");
     // static_assert(std::is_trivially_copy_constructible_v<T>, "Not trivially copy-constructible");
+    // Currently not trivially destructible because for example of the Kokkos::View (mostly reference-counting)
+    // Currently not trivially copy-constructible because of discrete spaces that have deleted copy-constructors and Kokkos::View (mostly reference-counting)
 
 private:
     alignas(T) std::byte m_data[sizeof(T)];
