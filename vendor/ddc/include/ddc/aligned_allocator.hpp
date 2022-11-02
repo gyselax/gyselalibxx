@@ -6,6 +6,8 @@
 #include <new>
 #include <type_traits>
 
+namespace ddc {
+
 template <class T, std::size_t N>
 class AlignedAllocator
 {
@@ -62,3 +64,5 @@ constexpr bool operator!=(AlignedAllocator<T, NT> const&, AlignedAllocator<U, NU
 {
     return !std::is_same_v<AlignedAllocator<T, NT>, AlignedAllocator<U, NU>>;
 }
+
+} // namespace ddc

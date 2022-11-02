@@ -9,6 +9,8 @@
 
 #include "ddc/chunk_span.hpp"
 
+namespace ddc {
+
 template <class T>
 static constexpr PDI_inout_t default_access_v
         = (std::is_lvalue_reference_v<T> && !std::is_const_v<std::remove_reference_t<T>>)
@@ -39,7 +41,7 @@ public:
         static_assert(
                 !(access & PDI_IN) || (chunk_default_access_v<BorrowedChunk> & PDI_IN),
                 "Invalid access for constant data");
-        auto extents = detail::array(data.domain().extents());
+        auto extents = ddc_detail::array(data.domain().extents());
         size_t rank = extents.size();
         PDI_share((name + "_rank").c_str(), &rank, PDI_OUT);
         m_names.push_back(name + "_rank");
@@ -118,3 +120,6 @@ void expose_to_pdi(std::string const& name, DataType&& data)
 {
     PdiEvent(name).with(name, std::forward<DataType>(data));
 }
+
+
+} // namespace ddc

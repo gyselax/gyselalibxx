@@ -8,6 +8,8 @@
 #include "ddc/non_uniform_point_sampling.hpp"
 #include "ddc/uniform_point_sampling.hpp"
 
+namespace ddc {
+
 template <class T>
 struct is_rectilinear_domain : std::false_type
 {
@@ -24,3 +26,5 @@ struct is_rectilinear_domain<DiscreteDomain<DDims...>>
 
 template <class T>
 constexpr bool is_rectilinear_domain_v = is_rectilinear_domain<T>::value;
+
+} // namespace ddc

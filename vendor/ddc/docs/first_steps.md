@@ -80,7 +80,7 @@ Their type is not specified because we use C++
 all of the same type: `DiscreteDomain<DDimX>` that represents a set of contiguous points in the
 discretization of `X`.
 
-\ref UniformPointSampling::init_ghosted "init_ghosted" takes as parameters the coordinate of the first and last discretized points, the
+\ref ddc::UniformPointSampling::init_ghosted "init_ghosted" takes as parameters the coordinate of the first and last discretized points, the
 number of discretized points in the domain and the number of additional points on each side of the
 domain.
 The fours `DiscreteDomain`s returned are:

@@ -6,6 +6,8 @@
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_space.hpp"
 
+namespace ddc {
+
 namespace experimental {
 
 /** Experimental concept representing a discretization with a single point.
@@ -19,7 +21,7 @@ class SingleDiscretization
 public:
     using continuous_dimension_type = CDim;
 
-    using continuous_element_type = Coordinate<CDim>;
+    using continuous_element_type = ddc::Coordinate<CDim>;
 
 
     using discrete_dimension_type = SingleDiscretization;
@@ -96,25 +98,27 @@ origin() noexcept
 }
 
 template <class CDim>
-Coordinate<CDim> coordinate(DiscreteElement<experimental::SingleDiscretization<CDim>> const& c)
+ddc::Coordinate<CDim> coordinate(DiscreteElement<experimental::SingleDiscretization<CDim>> const& c)
 {
     return discrete_space<experimental::SingleDiscretization<CDim>>().coordinate(c);
 }
 
 template <class CDim>
-Coordinate<CDim> rmin(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
+ddc::Coordinate<CDim> rmin(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
 {
     return coordinate(d.front());
 }
 
 template <class CDim>
-Coordinate<CDim> rmax(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
+ddc::Coordinate<CDim> rmax(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
 {
     return coordinate(d.back());
 }
 
 template <class CDim>
-Coordinate<CDim> rlength(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
+ddc::Coordinate<CDim> rlength(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
 {
     return rmax(d) - rmin(d);
 }
+
+} // namespace ddc

@@ -9,6 +9,7 @@
 
 #include "ddc/detail/type_seq.hpp"
 
+namespace ddc {
 
 template <class...>
 class DiscreteVector;
@@ -72,7 +73,7 @@ constexpr inline DiscreteVector<Tags...> operator+(
         DiscreteVector<Tags...> const& lhs,
         DiscreteVector<OTags...> const& rhs)
 {
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
+    static_assert(type_seq_same_v<ddc_detail::TypeSeq<Tags...>, ddc_detail::TypeSeq<OTags...>>);
     return DiscreteVector<Tags...>((get<Tags>(lhs) + get<Tags>(rhs))...);
 }
 
@@ -97,7 +98,7 @@ constexpr inline DiscreteVector<Tags...> operator-(
         DiscreteVector<Tags...> const& lhs,
         DiscreteVector<OTags...> const& rhs)
 {
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
+    static_assert(type_seq_same_v<ddc_detail::TypeSeq<Tags...>, ddc_detail::TypeSeq<OTags...>>);
     return DiscreteVector<Tags...>((get<Tags>(lhs) - get<Tags>(rhs))...);
 }
 
@@ -147,7 +148,7 @@ constexpr DiscreteVector<QueryTag> const& take(
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
     static_assert(
-            !type_seq_contains_v<detail::TypeSeq<HeadTag>, detail::TypeSeq<TailTags...>>,
+            !type_seq_contains_v<ddc_detail::TypeSeq<HeadTag>, ddc_detail::TypeSeq<TailTags...>>,
             "ERROR: tag redundant");
     if constexpr (std::is_same_v<QueryTag, HeadTag>) {
         return head;
@@ -178,7 +179,7 @@ public:
     }
 };
 
-namespace detail {
+namespace ddc_detail {
 
 /// Returns a reference to the underlying `std::array`
 template <class... Tags>
@@ -196,7 +197,7 @@ constexpr inline std::array<DiscreteVectorElement, sizeof...(Tags)> const& array
     return v.m_values;
 }
 
-} // namespace detail
+} // namespace ddc_detail
 
 /** A DiscreteVector is a vector in the discrete dimension
  *
@@ -207,12 +208,12 @@ class DiscreteVector : public ConversionOperators<DiscreteVector<Tags...>>
 {
     friend class ConversionOperators<DiscreteVector<Tags...>>;
 
-    friend constexpr std::array<DiscreteVectorElement, sizeof...(Tags)>& detail::array<Tags...>(
+    friend constexpr std::array<DiscreteVectorElement, sizeof...(Tags)>& ddc_detail::array<Tags...>(
             DiscreteVector<Tags...>& v) noexcept;
-    friend constexpr std::array<DiscreteVectorElement, sizeof...(Tags)> const& detail::array<
+    friend constexpr std::array<DiscreteVectorElement, sizeof...(Tags)> const& ddc_detail::array<
             Tags...>(DiscreteVector<Tags...> const& v) noexcept;
 
-    using tags_seq = detail::TypeSeq<Tags...>;
+    using tags_seq = ddc_detail::TypeSeq<Tags...>;
 
 private:
     std::array<DiscreteVectorElement, sizeof...(Tags)> m_values;
@@ -285,7 +286,7 @@ public:
     template <class QueryTag>
     inline constexpr DiscreteVectorElement& get() noexcept
     {
-        using namespace detail;
+        using namespace ddc_detail;
         static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from DiscreteVector");
         return m_values[type_seq_rank_v<QueryTag, tags_seq>];
     }
@@ -293,7 +294,7 @@ public:
     template <class QueryTag>
     inline constexpr DiscreteVectorElement const& get() const noexcept
     {
-        using namespace detail;
+        using namespace ddc_detail;
         static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from DiscreteVector");
         return m_values[type_seq_rank_v<QueryTag, tags_seq>];
     }
@@ -349,7 +350,7 @@ public:
     template <class... OTags>
     constexpr inline DiscreteVector& operator+=(DiscreteVector<OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
+        static_assert(type_seq_same_v<tags_seq, ddc_detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] += rhs.template get<Tags>()), ...);
         return *this;
     }
@@ -368,7 +369,7 @@ public:
     template <class... OTags>
     constexpr inline DiscreteVector& operator-=(DiscreteVector<OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
+        static_assert(type_seq_same_v<tags_seq, ddc_detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] -= rhs.template get<Tags>()), ...);
         return *this;
     }
@@ -387,7 +388,7 @@ public:
     template <class... OTags>
     constexpr inline DiscreteVector& operator*=(DiscreteVector<OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
+        static_assert(type_seq_same_v<tags_seq, ddc_detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] *= rhs.template get<Tags>()), ...);
         return *this;
     }
@@ -420,3 +421,4 @@ std::ostream& operator<<(std::ostream& out, DiscreteVector<Head, Tags...> const&
     out << ")";
     return out;
 }
+} // namespace ddc
