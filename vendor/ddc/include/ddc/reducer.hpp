@@ -3,7 +3,7 @@
 #include <limits>
 #include <utility>
 
-namespace reducer {
+namespace ddc::reducer {
 
 template <class T>
 struct sum
@@ -115,4 +115,4 @@ struct minmax
     }
 };
 
-} // namespace reducer
+} // namespace ddc::reducer

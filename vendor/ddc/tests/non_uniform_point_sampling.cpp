@@ -11,18 +11,19 @@
 
 #define VALUES                                                                                     \
     {                                                                                              \
-        Coordinate<DimX>(0.1), Coordinate<DimX>(0.2), Coordinate<DimX>(0.3), Coordinate<DimX>(0.4) \
+        ddc::Coordinate<DimX>(0.1), ddc::Coordinate<DimX>(0.2), ddc::Coordinate<DimX>(0.3),        \
+                ddc::Coordinate<DimX>(0.4)                                                         \
     }
 
 namespace {
 struct DimX;
 
-using DDimX = NonUniformPointSampling<DimX>;
+using DDimX = ddc::NonUniformPointSampling<DimX>;
 
 static std::array<double, 4> const array_points VALUES;
 static std::vector<double> const vector_points VALUES;
-DiscreteElement<DDimX> constexpr point_ix = DiscreteElement<DDimX>(2);
-Coordinate<DimX> constexpr point_rx = Coordinate<DimX>(0.3);
+ddc::DiscreteElement<DDimX> constexpr point_ix = ddc::DiscreteElement<DDimX>(2);
+ddc::Coordinate<DimX> constexpr point_rx = ddc::Coordinate<DimX>(0.3);
 
 } // namespace
 
@@ -56,7 +57,7 @@ TEST(NonUniformPointSamplingTest, IteratorConstructor)
 
 TEST(NonUniformPointSampling, Formatting)
 {
-    DDimX::Impl<Kokkos::HostSpace> ddim_x({Coordinate<DimX>(0.1), Coordinate<DimX>(0.4)});
+    DDimX::Impl<Kokkos::HostSpace> ddim_x({ddc::Coordinate<DimX>(0.1), ddc::Coordinate<DimX>(0.4)});
     std::stringstream oss;
     oss << ddim_x;
     EXPECT_EQ(oss.str(), "NonUniformPointSampling(2)");

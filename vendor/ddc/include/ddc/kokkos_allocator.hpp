@@ -7,6 +7,8 @@
 
 #include <Kokkos_Core.hpp>
 
+namespace ddc {
+
 template <class T, class MemorySpace>
 class KokkosAllocator
 {
@@ -71,3 +73,5 @@ using DeviceAllocator = KokkosAllocator<T, Kokkos::DefaultExecutionSpace::memory
 
 template <class T>
 using HostAllocator = KokkosAllocator<T, Kokkos::HostSpace>;
+
+} // namespace ddc

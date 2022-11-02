@@ -16,22 +16,24 @@ static unsigned length = 5;
 static unsigned height = 5;
 
 void blinker_init(
-        DiscreteDomain<DDimX, DDimY> const& domain,
-        ChunkSpan<
+        ddc::DiscreteDomain<DDimX, DDimY> const& domain,
+        ddc::ChunkSpan<
                 cell,
-                DiscreteDomain<DDimX, DDimY>,
+                ddc::DiscreteDomain<DDimX, DDimY>,
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> cells)
 {
-    for_each(
-            policies::parallel_device,
+    ddc::for_each(
+            ddc::policies::parallel_device,
             domain,
-            DDC_LAMBDA(DiscreteElement<DDimX, DDimY> const ixy) {
-                DiscreteElement<DDimX> const ix = select<DDimX>(ixy);
-                DiscreteElement<DDimY> const iy = select<DDimY>(ixy);
-                if (iy == DiscreteElement<DDimY>(2)
-                    && (ix >= DiscreteElement<DDimX>(1)
-                        && ix <= DiscreteElement<DDimX>(3)))
+            DDC_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
+                ddc::DiscreteElement<DDimX> const ix
+                        = ddc::select<DDimX>(ixy);
+                ddc::DiscreteElement<DDimY> const iy
+                        = ddc::select<DDimY>(ixy);
+                if (iy == ddc::DiscreteElement<DDimY>(2)
+                    && (ix >= ddc::DiscreteElement<DDimX>(1)
+                        && ix <= ddc::DiscreteElement<DDimX>(3)))
                     cells(ixy) = true;
                 else
                     cells(ixy) = false;
@@ -41,14 +43,15 @@ void blinker_init(
 template <class ElementType, class DDimX, class DDimY>
 std::ostream& print_2DChunk(
         std::ostream& os,
-        ChunkSpan<ElementType, DiscreteDomain<DDimX, DDimY>> chunk)
+        ddc::ChunkSpan<ElementType, ddc::DiscreteDomain<DDimX, DDimY>>
+                chunk)
 {
-    for_each(
-            select<DDimY>(chunk.domain()),
-            [&](DiscreteElement<DDimY> const iy) {
-                for_each(
-                        select<DDimX>(chunk.domain()),
-                        [&](DiscreteElement<DDimX> const ix) {
+    ddc::for_each(
+            ddc::select<DDimY>(chunk.domain()),
+            [&](ddc::DiscreteElement<DDimY> const iy) {
+                ddc::for_each(
+                        ddc::select<DDimX>(chunk.domain()),
+                        [&](ddc::DiscreteElement<DDimX> const ix) {
                             os << (chunk(ix, iy) ? "*" : ".");
                         });
                 os << "\n";
@@ -58,22 +61,25 @@ std::ostream& print_2DChunk(
 
 int main()
 {
-    ScopeGuard scope;
+    ddc::ScopeGuard scope;
 
-    DiscreteDomain<DDimX, DDimY> const domain_xy(
-            DiscreteElement<DDimX, DDimY>(0, 0),
-            DiscreteVector<DDimX, DDimY>(length, height));
+    ddc::DiscreteDomain<DDimX, DDimY> const domain_xy(
+            ddc::DiscreteElement<DDimX, DDimY>(0, 0),
+            ddc::DiscreteVector<DDimX, DDimY>(length, height));
 
-    DiscreteDomain<DDimX, DDimY> const inner_domain_xy(
-            DiscreteElement<DDimX, DDimY>(1, 1),
-            DiscreteVector<DDimX, DDimY>(length - 2, height - 2));
+    ddc::DiscreteDomain<DDimX, DDimY> const inner_domain_xy(
+            ddc::DiscreteElement<DDimX, DDimY>(1, 1),
+            ddc::DiscreteVector<DDimX, DDimY>(length - 2, height - 2));
 
-    Chunk cells_in_host_alloc(domain_xy, HostAllocator<cell>());
-    Chunk cells_in_dev_alloc(domain_xy, DeviceAllocator<cell>());
-    Chunk cells_out_dev_alloc(domain_xy, DeviceAllocator<cell>());
+    ddc::Chunk
+            cells_in_host_alloc(domain_xy, ddc::HostAllocator<cell>());
+    ddc::Chunk
+            cells_in_dev_alloc(domain_xy, ddc::DeviceAllocator<cell>());
+    ddc::Chunk
+            cells_out_dev_alloc(domain_xy, ddc::DeviceAllocator<cell>());
 
-    ChunkSpan cells_in = cells_in_dev_alloc.span_view();
-    ChunkSpan cells_out = cells_out_dev_alloc.span_view();
+    ddc::ChunkSpan cells_in = cells_in_dev_alloc.span_view();
+    ddc::ChunkSpan cells_out = cells_out_dev_alloc.span_view();
 
     // Initialize the whole domain
     blinker_init(domain_xy, cells_in);
@@ -81,15 +87,18 @@ int main()
 
     std::size_t iter = 0;
     for (; iter < nt; ++iter) {
-        deepcopy(cells_in_host_alloc, cells_in);
+        ddc::deepcopy(cells_in_host_alloc, cells_in);
         print_2DChunk(std::cout, cells_in_host_alloc.span_cview())
                 << "\n";
-        for_each(
-                policies::parallel_device,
+        ddc::for_each(
+                ddc::policies::parallel_device,
                 inner_domain_xy,
-                DDC_LAMBDA(DiscreteElement<DDimX, DDimY> const ixy) {
-                    DiscreteElement<DDimX> const ix = select<DDimX>(ixy);
-                    DiscreteElement<DDimY> const iy = select<DDimY>(ixy);
+                DDC_LAMBDA(
+                        ddc::DiscreteElement<DDimX, DDimY> const ixy) {
+                    ddc::DiscreteElement<DDimX> const ix
+                            = ddc::select<DDimX>(ixy);
+                    ddc::DiscreteElement<DDimY> const iy
+                            = ddc::select<DDimY>(ixy);
                     int alive_neighbors = 0;
                     // Iterate on neighbors and increase the count of alive neighbors when necessary
                     for (int i = -1; i < 2; ++i) {
@@ -110,9 +119,9 @@ int main()
                             cells_out(ixy) = true;
                     }
                 });
-        deepcopy(cells_in, cells_out);
+        ddc::deepcopy(cells_in, cells_out);
     }
-    deepcopy(cells_in_host_alloc, cells_in);
+    ddc::deepcopy(cells_in_host_alloc, cells_in);
     print_2DChunk(std::cout, cells_in_host_alloc.span_cview()) << "\n";
 
     return 0;

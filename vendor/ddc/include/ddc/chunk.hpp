@@ -6,7 +6,10 @@
 
 #include "ddc/chunk_common.hpp"
 #include "ddc/chunk_span.hpp"
+#include "ddc/deepcopy.hpp"
 #include "ddc/kokkos_allocator.hpp"
+
+namespace ddc {
 
 template <class ElementType, class, class Allocator = HostAllocator<ElementType>>
 class Chunk;
@@ -254,12 +257,12 @@ public:
     constexpr auto allocation_kokkos_view()
     {
         auto s = this->allocation_mdspan();
-        auto kokkos_layout = detail::build_kokkos_layout(
+        auto kokkos_layout = ddc_detail::build_kokkos_layout(
                 s.extents(),
                 s.mapping(),
                 std::make_index_sequence<sizeof...(DDims)> {});
         return Kokkos::View<
-                detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
+                ddc_detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
                 decltype(kokkos_layout),
                 typename Allocator::memory_space>(s.data(), kokkos_layout);
     }
@@ -270,12 +273,12 @@ public:
     constexpr auto allocation_kokkos_view() const
     {
         auto s = this->allocation_mdspan();
-        auto kokkos_layout = detail::build_kokkos_layout(
+        auto kokkos_layout = ddc_detail::build_kokkos_layout(
                 s.extents(),
                 s.mapping(),
                 std::make_index_sequence<sizeof...(DDims)> {});
         return Kokkos::View<
-                detail::mdspan_to_kokkos_element_t<const ElementType, sizeof...(DDims)>,
+                ddc_detail::mdspan_to_kokkos_element_t<const ElementType, sizeof...(DDims)>,
                 decltype(kokkos_layout),
                 typename Allocator::memory_space>(s.data(), kokkos_layout);
     }
@@ -299,3 +302,5 @@ public:
 template <class... DDims, class Allocator>
 Chunk(DiscreteDomain<DDims...> const&, Allocator)
         -> Chunk<typename Allocator::value_type, DiscreteDomain<DDims...>, Allocator>;
+
+} // namespace ddc

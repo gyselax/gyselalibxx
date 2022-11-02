@@ -10,9 +10,9 @@
 #include "ddc/detail/macros.hpp"
 #include "ddc/detail/type_seq.hpp"
 
+namespace ddc {
 
-namespace detail {
-
+namespace ddc_detail {
 
 template <class, class...>
 class TaggedVector;
@@ -31,25 +31,25 @@ template <class T>
 inline constexpr bool is_tagged_vector_v = IsTaggedVector<T>::value;
 
 
-} // namespace detail
+} // namespace ddc_detail
 
 
 template <class QueryTag, class ElementType, class... Tags>
 inline constexpr ElementType const& get(
-        detail::TaggedVector<ElementType, Tags...> const& tuple) noexcept
+        ddc_detail::TaggedVector<ElementType, Tags...> const& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
 }
 
 template <class QueryTag, class ElementType, class... Tags>
-inline constexpr ElementType& get(detail::TaggedVector<ElementType, Tags...>& tuple) noexcept
+inline constexpr ElementType& get(ddc_detail::TaggedVector<ElementType, Tags...>& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
 }
 
 template <class QueryTag, class ElementType, class... Tags>
 inline constexpr ElementType const& get_or(
-        detail::TaggedVector<ElementType, Tags...> const& tuple,
+        ddc_detail::TaggedVector<ElementType, Tags...> const& tuple,
         ElementType const& default_value) noexcept
 {
     return tuple.template get_or<QueryTag>(default_value);
@@ -58,95 +58,95 @@ inline constexpr ElementType const& get_or(
 /// Unary operators: +, -
 
 template <class ElementType, class... Tags>
-constexpr inline detail::TaggedVector<ElementType, Tags...> operator+(
-        detail::TaggedVector<ElementType, Tags...> const& x)
+constexpr inline ddc_detail::TaggedVector<ElementType, Tags...> operator+(
+        ddc_detail::TaggedVector<ElementType, Tags...> const& x)
 {
     return x;
 }
 
 template <class ElementType, class... Tags>
-constexpr inline detail::TaggedVector<ElementType, Tags...> operator-(
-        detail::TaggedVector<ElementType, Tags...> const& x)
+constexpr inline ddc_detail::TaggedVector<ElementType, Tags...> operator-(
+        ddc_detail::TaggedVector<ElementType, Tags...> const& x)
 {
-    return detail::TaggedVector<ElementType, Tags...>((-get<Tags>(x))...);
+    return ddc_detail::TaggedVector<ElementType, Tags...>((-get<Tags>(x))...);
 }
 
 /// Internal binary operators: +, -
 
 template <class ElementType, class... Tags, class OElementType, class... OTags>
 constexpr inline auto operator+(
-        detail::TaggedVector<ElementType, Tags...> const& lhs,
-        detail::TaggedVector<OElementType, OTags...> const& rhs)
+        ddc_detail::TaggedVector<ElementType, Tags...> const& lhs,
+        ddc_detail::TaggedVector<OElementType, OTags...> const& rhs)
 {
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
+    static_assert(type_seq_same_v<ddc_detail::TypeSeq<Tags...>, ddc_detail::TypeSeq<OTags...>>);
     using RElementType = decltype(std::declval<ElementType>() + std::declval<OElementType>());
-    return detail::TaggedVector<RElementType, Tags...>((get<Tags>(lhs) + get<Tags>(rhs))...);
+    return ddc_detail::TaggedVector<RElementType, Tags...>((get<Tags>(lhs) + get<Tags>(rhs))...);
 }
 
 template <
         class ElementType,
         class Tag,
         class OElementType,
-        class = std::enable_if_t<!detail::is_tagged_vector_v<OElementType>>,
+        class = std::enable_if_t<!ddc_detail::is_tagged_vector_v<OElementType>>,
         class = std::enable_if_t<std::is_convertible_v<OElementType, ElementType>>>
 constexpr inline auto operator+(
-        detail::TaggedVector<ElementType, Tag> const& lhs,
+        ddc_detail::TaggedVector<ElementType, Tag> const& lhs,
         OElementType const& rhs)
 {
     using RElementType = decltype(std::declval<ElementType>() + std::declval<OElementType>());
-    return detail::TaggedVector<RElementType, Tag>(get<Tag>(lhs) + rhs);
+    return ddc_detail::TaggedVector<RElementType, Tag>(get<Tag>(lhs) + rhs);
 }
 
 template <
         class ElementType,
         class Tag,
         class OElementType,
-        class = std::enable_if_t<!detail::is_tagged_vector_v<OElementType>>,
+        class = std::enable_if_t<!ddc_detail::is_tagged_vector_v<OElementType>>,
         class = std::enable_if_t<std::is_convertible_v<ElementType, OElementType>>>
 constexpr inline auto operator+(
         OElementType const& lhs,
-        detail::TaggedVector<ElementType, Tag> const& rhs)
+        ddc_detail::TaggedVector<ElementType, Tag> const& rhs)
 {
     using RElementType = decltype(std::declval<ElementType>() + std::declval<OElementType>());
-    return detail::TaggedVector<RElementType, Tag>(lhs + get<Tag>(rhs));
+    return ddc_detail::TaggedVector<RElementType, Tag>(lhs + get<Tag>(rhs));
 }
 
 template <class ElementType, class... Tags, class OElementType, class... OTags>
 constexpr inline auto operator-(
-        detail::TaggedVector<ElementType, Tags...> const& lhs,
-        detail::TaggedVector<OElementType, OTags...> const& rhs)
+        ddc_detail::TaggedVector<ElementType, Tags...> const& lhs,
+        ddc_detail::TaggedVector<OElementType, OTags...> const& rhs)
 {
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
+    static_assert(type_seq_same_v<ddc_detail::TypeSeq<Tags...>, ddc_detail::TypeSeq<OTags...>>);
     using RElementType = decltype(std::declval<ElementType>() - std::declval<OElementType>());
-    return detail::TaggedVector<RElementType, Tags...>((get<Tags>(lhs) - get<Tags>(rhs))...);
+    return ddc_detail::TaggedVector<RElementType, Tags...>((get<Tags>(lhs) - get<Tags>(rhs))...);
 }
 
 template <
         class ElementType,
         class Tag,
         class OElementType,
-        class = std::enable_if_t<!detail::is_tagged_vector_v<OElementType>>,
+        class = std::enable_if_t<!ddc_detail::is_tagged_vector_v<OElementType>>,
         class = std::enable_if_t<std::is_convertible_v<OElementType, ElementType>>>
 constexpr inline auto operator-(
-        detail::TaggedVector<ElementType, Tag> const& lhs,
+        ddc_detail::TaggedVector<ElementType, Tag> const& lhs,
         OElementType const& rhs)
 {
     using RElementType = decltype(std::declval<ElementType>() + std::declval<OElementType>());
-    return detail::TaggedVector<RElementType, Tag>(get<Tag>(lhs) - rhs);
+    return ddc_detail::TaggedVector<RElementType, Tag>(get<Tag>(lhs) - rhs);
 }
 
 template <
         class ElementType,
         class Tag,
         class OElementType,
-        class = std::enable_if_t<!detail::is_tagged_vector_v<OElementType>>,
+        class = std::enable_if_t<!ddc_detail::is_tagged_vector_v<OElementType>>,
         class = std::enable_if_t<std::is_convertible_v<ElementType, OElementType>>>
 constexpr inline auto operator-(
         OElementType const& lhs,
-        detail::TaggedVector<ElementType, Tag> const& rhs)
+        ddc_detail::TaggedVector<ElementType, Tag> const& rhs)
 {
     using RElementType = decltype(std::declval<ElementType>() + std::declval<OElementType>());
-    return detail::TaggedVector<RElementType, Tag>(lhs - get<Tag>(rhs));
+    return ddc_detail::TaggedVector<RElementType, Tag>(lhs - get<Tag>(rhs));
 }
 
 /// external left binary operator: *
@@ -155,38 +155,38 @@ template <
         class ElementType,
         class OElementType,
         class... Tags,
-        class = std::enable_if_t<!detail::is_tagged_vector_v<OElementType>>,
+        class = std::enable_if_t<!ddc_detail::is_tagged_vector_v<OElementType>>,
         class = std::enable_if_t<std::is_convertible_v<ElementType, OElementType>>>
 constexpr inline auto operator*(
         ElementType const& lhs,
-        detail::TaggedVector<OElementType, Tags...> const& rhs)
+        ddc_detail::TaggedVector<OElementType, Tags...> const& rhs)
 {
     using RElementType = decltype(std::declval<ElementType>() * std::declval<OElementType>());
-    return detail::TaggedVector<RElementType, Tags...>((lhs * get<Tags>(rhs))...);
+    return ddc_detail::TaggedVector<RElementType, Tags...>((lhs * get<Tags>(rhs))...);
 }
 
 template <class... QueryTags, class ElementType, class... Tags>
-inline constexpr detail::TaggedVector<ElementType, QueryTags...> select(
-        detail::TaggedVector<ElementType, Tags...> const& arr) noexcept
+inline constexpr ddc_detail::TaggedVector<ElementType, QueryTags...> select(
+        ddc_detail::TaggedVector<ElementType, Tags...> const& arr) noexcept
 {
-    return detail::TaggedVector<ElementType, QueryTags...>(arr);
+    return ddc_detail::TaggedVector<ElementType, QueryTags...>(arr);
 }
 
 template <class... QueryTags, class ElementType, class... Tags>
-inline constexpr detail::TaggedVector<ElementType, QueryTags...> select(
-        detail::TaggedVector<ElementType, Tags...>&& arr) noexcept
+inline constexpr ddc_detail::TaggedVector<ElementType, QueryTags...> select(
+        ddc_detail::TaggedVector<ElementType, Tags...>&& arr) noexcept
 {
-    return detail::TaggedVector<ElementType, QueryTags...>(std::move(arr));
+    return ddc_detail::TaggedVector<ElementType, QueryTags...>(std::move(arr));
 }
 
 template <class QueryTag, class ElementType, class HeadTag, class... TailTags>
-constexpr detail::TaggedVector<ElementType, QueryTag> const& take_impl(
-        detail::TaggedVector<ElementType, HeadTag> const& head,
-        detail::TaggedVector<ElementType, TailTags> const&... tags)
+constexpr ddc_detail::TaggedVector<ElementType, QueryTag> const& take_impl(
+        ddc_detail::TaggedVector<ElementType, HeadTag> const& head,
+        ddc_detail::TaggedVector<ElementType, TailTags> const&... tags)
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
     static_assert(
-            !type_seq_contains_v<detail::TypeSeq<HeadTag>, detail::TypeSeq<TailTags...>>,
+            !type_seq_contains_v<ddc_detail::TypeSeq<HeadTag>, ddc_detail::TypeSeq<TailTags...>>,
             "ERROR: tag redundant");
     if constexpr (std::is_same_v<QueryTag, HeadTag>) {
         return head;
@@ -198,14 +198,14 @@ constexpr detail::TaggedVector<ElementType, QueryTag> const& take_impl(
 }
 
 template <class QueryTag, class ElementType, class... Tags>
-constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
-        detail::TaggedVector<ElementType, Tags> const&... tags)
+constexpr ddc_detail::TaggedVector<ElementType, QueryTag> const& take(
+        ddc_detail::TaggedVector<ElementType, Tags> const&... tags)
 {
     return take_impl<QueryTag>(tags...);
 }
 
 
-namespace detail {
+namespace ddc_detail {
 
 
 template <class T>
@@ -233,7 +233,7 @@ class TaggedVector : public ConversionOperators<TaggedVector<ElementType, Tags..
 {
     friend class ConversionOperators<TaggedVector<ElementType, Tags...>>;
 
-    using tags_seq = detail::TypeSeq<Tags...>;
+    using tags_seq = ddc_detail::TypeSeq<Tags...>;
 
 private:
     std::array<ElementType, sizeof...(Tags)> m_values;
@@ -330,7 +330,7 @@ public:
     template <class QueryTag>
     inline constexpr ElementType& get() noexcept
     {
-        using namespace detail;
+        using namespace ddc_detail;
         static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from TaggedVector");
         return m_values[type_seq_rank_v<QueryTag, tags_seq>];
     }
@@ -338,7 +338,7 @@ public:
     template <class QueryTag>
     inline constexpr ElementType const& get() const noexcept
     {
-        using namespace detail;
+        using namespace ddc_detail;
         static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from TaggedVector");
         return m_values[type_seq_rank_v<QueryTag, tags_seq>];
     }
@@ -364,7 +364,7 @@ public:
     template <class OElementType, class... OTags>
     constexpr inline TaggedVector& operator+=(TaggedVector<OElementType, OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
+        static_assert(type_seq_same_v<tags_seq, ddc_detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] += rhs.template get<Tags>()), ...);
         return *this;
     }
@@ -379,7 +379,7 @@ public:
     template <class OElementType, class... OTags>
     constexpr inline TaggedVector& operator-=(TaggedVector<OElementType, OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
+        static_assert(type_seq_same_v<tags_seq, ddc_detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] -= rhs.template get<Tags>()), ...);
         return *this;
     }
@@ -394,7 +394,7 @@ public:
     template <class OElementType, class... OTags>
     constexpr inline TaggedVector& operator*=(TaggedVector<OElementType, OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
+        static_assert(type_seq_same_v<tags_seq, ddc_detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] *= rhs.template get<Tags>()), ...);
         return *this;
     }
@@ -417,5 +417,6 @@ std::ostream& operator<<(std::ostream& out, TaggedVector<ElementType, Head, Tags
     return out;
 }
 
+} // namespace ddc_detail
 
-} // namespace detail
+} // namespace ddc

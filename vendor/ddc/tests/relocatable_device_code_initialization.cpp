@@ -5,9 +5,9 @@
 
 namespace rdc {
 
-void initialize_ddimx(Coordinate<DimX> const origin, Coordinate<DimX> const step)
+void initialize_ddimx(ddc::Coordinate<DimX> const origin, ddc::Coordinate<DimX> const step)
 {
-    init_discrete_space<DDimX>(origin, step);
+    ddc::init_discrete_space<DDimX>(origin, step);
 }
 
 } // namespace rdc

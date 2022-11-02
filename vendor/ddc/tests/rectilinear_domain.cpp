@@ -11,33 +11,33 @@ namespace {
 struct X;
 struct Y;
 
-using DDimX = UniformPointSampling<X>;
-using DDimY = UniformPointSampling<Y>;
-using NUDDimX = NonUniformPointSampling<X>;
-using NUDDimY = NonUniformPointSampling<Y>;
+using DDimX = ddc::UniformPointSampling<X>;
+using DDimY = ddc::UniformPointSampling<Y>;
+using NUDDimX = ddc::NonUniformPointSampling<X>;
+using NUDDimY = ddc::NonUniformPointSampling<Y>;
 
-using DDomNull = DiscreteDomain<std::nullptr_t>;
-using DDomX = DiscreteDomain<DDimX>;
-using NUDDomX = DiscreteDomain<NUDDimX>;
-using DDomXY = DiscreteDomain<DDimX, DDimY>;
-using NUDDomXY = DiscreteDomain<NUDDimX, NUDDimY>;
-using DDomXNUDDomY = DiscreteDomain<DDimX, NUDDimY>;
+using DDomNull = ddc::DiscreteDomain<std::nullptr_t>;
+using DDomX = ddc::DiscreteDomain<DDimX>;
+using NUDDomX = ddc::DiscreteDomain<NUDDimX>;
+using DDomXY = ddc::DiscreteDomain<DDimX, DDimY>;
+using NUDDomXY = ddc::DiscreteDomain<NUDDimX, NUDDimY>;
+using DDomXNUDDomY = ddc::DiscreteDomain<DDimX, NUDDimY>;
 
 } // namespace
 
 TEST(RectilinearDomainTest, NonDiscreteDomainSpecializationValue)
 {
-    EXPECT_FALSE(is_rectilinear_domain_v<std::nullptr_t>);
-    EXPECT_FALSE(is_rectilinear_domain_v<X>);
+    EXPECT_FALSE(ddc::is_rectilinear_domain_v<std::nullptr_t>);
+    EXPECT_FALSE(ddc::is_rectilinear_domain_v<X>);
 }
 
 TEST(RectilinearDomainTest, DiscreteDomainSpecializationValue)
 {
-    EXPECT_FALSE(is_rectilinear_domain_v<DDomNull>);
+    EXPECT_FALSE(ddc::is_rectilinear_domain_v<DDomNull>);
 
-    EXPECT_TRUE(is_rectilinear_domain_v<DDomX>);
-    EXPECT_TRUE(is_rectilinear_domain_v<DDomXY>);
-    EXPECT_TRUE(is_rectilinear_domain_v<NUDDomX>);
-    EXPECT_TRUE(is_rectilinear_domain_v<NUDDomXY>);
-    EXPECT_TRUE(is_rectilinear_domain_v<DDomXNUDDomY>);
+    EXPECT_TRUE(ddc::is_rectilinear_domain_v<DDomX>);
+    EXPECT_TRUE(ddc::is_rectilinear_domain_v<DDomXY>);
+    EXPECT_TRUE(ddc::is_rectilinear_domain_v<NUDDomX>);
+    EXPECT_TRUE(ddc::is_rectilinear_domain_v<NUDDomXY>);
+    EXPECT_TRUE(ddc::is_rectilinear_domain_v<DDomXNUDDomY>);
 }

@@ -6,45 +6,45 @@
 namespace {
 
 struct DDimX;
-using DElemX = DiscreteElement<DDimX>;
-using DVectX = DiscreteVector<DDimX>;
-using DDomX = DiscreteDomain<DDimX>;
+using DElemX = ddc::DiscreteElement<DDimX>;
+using DVectX = ddc::DiscreteVector<DDimX>;
+using DDomX = ddc::DiscreteDomain<DDimX>;
 
 template <class Datatype>
-using ChunkX = Chunk<Datatype, DDomX>;
+using ChunkX = ddc::Chunk<Datatype, DDomX>;
 template <class Datatype>
-using ChunkSpanX = ChunkSpan<Datatype, DDomX>;
+using ChunkSpanX = ddc::ChunkSpan<Datatype, DDomX>;
 
 
 struct DDimY;
-using DElemY = DiscreteElement<DDimY>;
-using DVectY = DiscreteVector<DDimY>;
-using DDomY = DiscreteDomain<DDimY>;
+using DElemY = ddc::DiscreteElement<DDimY>;
+using DVectY = ddc::DiscreteVector<DDimY>;
+using DDomY = ddc::DiscreteDomain<DDimY>;
 
 template <class Datatype>
-using ChunkY = Chunk<Datatype, DDomY>;
+using ChunkY = ddc::Chunk<Datatype, DDomY>;
 
 
 struct DDimZ;
-using DElemZ = DiscreteElement<DDimZ>;
-using DVectZ = DiscreteVector<DDimZ>;
-using DDomZ = DiscreteDomain<DDimZ>;
+using DElemZ = ddc::DiscreteElement<DDimZ>;
+using DVectZ = ddc::DiscreteVector<DDimZ>;
+using DDomZ = ddc::DiscreteDomain<DDimZ>;
 
 
-using DElemXY = DiscreteElement<DDimX, DDimY>;
-using DVectXY = DiscreteVector<DDimX, DDimY>;
-using DDomXY = DiscreteDomain<DDimX, DDimY>;
-
-template <class Datatype>
-using ChunkXY = Chunk<Datatype, DDomXY>;
-
-
-using DElemYX = DiscreteElement<DDimY, DDimX>;
-using DVectYX = DiscreteVector<DDimY, DDimX>;
-using DDomYX = DiscreteDomain<DDimY, DDimX>;
+using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;
+using DVectXY = ddc::DiscreteVector<DDimX, DDimY>;
+using DDomXY = ddc::DiscreteDomain<DDimX, DDimY>;
 
 template <class Datatype>
-using ChunkYX = Chunk<Datatype, DDomYX>;
+using ChunkXY = ddc::Chunk<Datatype, DDomXY>;
+
+
+using DElemYX = ddc::DiscreteElement<DDimY, DDimX>;
+using DVectYX = ddc::DiscreteVector<DDimY, DDimX>;
+using DDomYX = ddc::DiscreteDomain<DDimY, DDimX>;
+
+template <class Datatype>
+using ChunkYX = ddc::Chunk<Datatype, DDomYX>;
 
 
 static DElemX constexpr lbound_x(50);
@@ -310,7 +310,7 @@ TEST(Chunk1DTest, DomainX)
 TEST(Chunk1DTest, GetDomainX)
 {
     ChunkX<double> chunk(dom_x);
-    EXPECT_EQ(dom_x, get_domain<DDimX>(chunk));
+    EXPECT_EQ(dom_x, ddc::get_domain<DDimX>(chunk));
 }
 
 TEST(Chunk1DTest, Deepcopy)
@@ -320,7 +320,7 @@ TEST(Chunk1DTest, Deepcopy)
         chunk(ix) = 1.001 * ix.uid();
     }
     ChunkX<double> chunk2(chunk.domain());
-    deepcopy(chunk2, chunk);
+    ddc::deepcopy(chunk2, chunk);
     for (auto&& ix : chunk.domain()) {
         // we expect exact equality, not EXPECT_DOUBLE_EQ: these are copy
         EXPECT_EQ(chunk2(ix), chunk(ix));
@@ -507,7 +507,7 @@ TEST(Chunk2DTest, Deepcopy)
         }
     }
     ChunkXY<double> chunk2(chunk.domain());
-    deepcopy(chunk2, chunk);
+    ddc::deepcopy(chunk2, chunk);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
@@ -524,10 +524,10 @@ TEST(Chunk2DTest, DeepcopyReordered)
             chunk(ix, iy) = 1.739 * ix.uid() + 1.412 * iy.uid();
         }
     }
-    ChunkYX<double> chunk2(select<DDimY, DDimX>(chunk.domain()));
-    ChunkSpan<double, DDomXY, std::experimental::layout_left>
+    ChunkYX<double> chunk2(ddc::select<DDimY, DDimX>(chunk.domain()));
+    ddc::ChunkSpan<double, DDomXY, std::experimental::layout_left>
             chunk2_view(chunk2.data(), chunk.domain());
-    deepcopy(chunk2_view, chunk);
+    ddc::deepcopy(chunk2_view, chunk);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy

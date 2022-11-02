@@ -13,8 +13,9 @@
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_vector.hpp"
 
+namespace ddc {
 
-namespace detail {
+namespace ddc_detail {
 
 template <class F, class... DDims>
 class ForEachKokkosLambdaAdapter
@@ -83,7 +84,7 @@ inline void for_each_serial(
     }
 }
 
-} // namespace detail
+} // namespace ddc_detail
 
 /// Serial execution on the host
 struct serial_host_policy
@@ -100,9 +101,9 @@ inline void for_each(
         DiscreteDomain<DDims...> const& domain,
         Functor&& f) noexcept
 {
-    detail::for_each_serial<DiscreteElement<DDims...>>(
-            detail::array(domain.front()),
-            detail::array(domain.back()),
+    ddc_detail::for_each_serial<DiscreteElement<DDims...>>(
+            ddc_detail::array(domain.front()),
+            ddc_detail::array(domain.back()),
             std::forward<Functor>(f));
 }
 
@@ -116,7 +117,7 @@ inline void for_each_n(
         DiscreteVector<DDims...> const& extent,
         Functor&& f) noexcept
 {
-    detail::for_each_serial<DiscreteVector<DDims...>>(
+    ddc_detail::for_each_serial<DiscreteVector<DDims...>>(
             std::array<DiscreteVectorElement, sizeof...(DDims)> {},
             std::array<DiscreteVectorElement, sizeof...(DDims)> {get<DDims>(extent) - 1 ...},
             std::forward<Functor>(f));
@@ -137,7 +138,8 @@ inline void for_each(
         DiscreteDomain<DDims...> const& domain,
         Functor&& f) noexcept
 {
-    detail::for_each_kokkos<Kokkos::DefaultHostExecutionSpace>(domain, std::forward<Functor>(f));
+    ddc_detail::for_each_kokkos<
+            Kokkos::DefaultHostExecutionSpace>(domain, std::forward<Functor>(f));
 }
 
 /// Kokkos parallel execution uisng MDRange policy
@@ -155,7 +157,7 @@ inline void for_each(
         DiscreteDomain<DDims...> const& domain,
         Functor&& f) noexcept
 {
-    detail::for_each_kokkos<Kokkos::DefaultExecutionSpace>(domain, std::forward<Functor>(f));
+    ddc_detail::for_each_kokkos<Kokkos::DefaultExecutionSpace>(domain, std::forward<Functor>(f));
 }
 
 using default_policy = serial_host_policy;
@@ -209,3 +211,5 @@ inline void for_each_elem(
 {
     for_each(chunk_span.domain(), std::forward<Functor>(f));
 }
+
+} // namespace ddc

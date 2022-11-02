@@ -7,11 +7,11 @@ namespace rdc {
 
 struct DimX;
 
-using DDimX = UniformPointSampling<DimX>;
-using DElemX = DiscreteElement<DDimX>;
-using DVectX = DiscreteVector<DDimX>;
-using DDomX = DiscreteDomain<DDimX>;
+using DDimX = ddc::UniformPointSampling<DimX>;
+using DElemX = ddc::DiscreteElement<DDimX>;
+using DVectX = ddc::DiscreteVector<DDimX>;
+using DDomX = ddc::DiscreteDomain<DDimX>;
 
-void initialize_ddimx(Coordinate<DimX> origin, Coordinate<DimX> step);
+void initialize_ddimx(ddc::Coordinate<DimX> origin, ddc::Coordinate<DimX> step);
 
 } // namespace rdc
