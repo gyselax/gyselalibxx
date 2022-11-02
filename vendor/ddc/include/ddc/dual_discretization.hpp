@@ -18,6 +18,8 @@
 #include <hip/hip_runtime.h>
 #endif
 
+namespace ddc {
+
 template <class DDim>
 class DualDiscretization
 {
@@ -79,3 +81,5 @@ public:
 #endif
     }
 };
+
+} // namespace ddc

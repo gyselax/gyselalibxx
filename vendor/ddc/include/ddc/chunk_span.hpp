@@ -13,6 +13,8 @@
 #include "ddc/discrete_domain.hpp"
 #include "ddc/discrete_element.hpp"
 
+namespace ddc {
+
 template <class, class, class>
 class Chunk;
 
@@ -94,7 +96,7 @@ protected:
     auto get_slicer_for(DiscreteElement<ODDims...> const& c) const
     {
         DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
-        if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
+        if constexpr (in_tags_v<QueryDDim, ddc_detail::TypeSeq<ODDims...>>) {
             return (uid<QueryDDim>(c) - front<QueryDDim>(this->m_domain).uid());
         } else {
             return std::experimental::full_extent;
@@ -106,7 +108,7 @@ protected:
     auto get_slicer_for(DiscreteDomain<ODDims...> const& c) const
     {
         DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
-        if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
+        if constexpr (in_tags_v<QueryDDim, ddc_detail::TypeSeq<ODDims...>>) {
             return std::pair<std::size_t, std::size_t>(
                     front<QueryDDim>(c) - front<QueryDDim>(this->m_domain),
                     back<QueryDDim>(c) + 1 - front<QueryDDim>(this->m_domain));
@@ -181,9 +183,9 @@ public:
     constexpr ChunkSpan(allocation_mdspan_type allocation_mdspan, mdomain_type const& domain)
     {
         namespace stdex = std::experimental;
-        extents_type extents_s((front<DDims>(domain) + ::extents<DDims>(domain)).uid()...);
+        extents_type extents_s((front<DDims>(domain) + extents<DDims>(domain)).uid()...);
         std::array<std::size_t, sizeof...(DDims)> strides_s {allocation_mdspan.mapping().stride(
-                type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
+                type_seq_rank_v<DDims, ddc_detail::TypeSeq<DDims...>>)...};
         stdex::layout_stride::mapping<extents_type> mapping_s(extents_s, strides_s);
         this->m_internal_mdspan = internal_mdspan_type(
                 allocation_mdspan.data() - mapping_s(front<DDims>(domain).uid()...),
@@ -198,7 +200,7 @@ public:
     template <class KokkosView, class = std::enable_if_t<Kokkos::is_view<KokkosView>::value>>
     constexpr ChunkSpan(KokkosView const& view, mdomain_type const& domain) noexcept
         : ChunkSpan(
-                detail::build_mdspan(view, std::make_index_sequence<sizeof...(DDims)> {}),
+                ddc_detail::build_mdspan(view, std::make_index_sequence<sizeof...(DDims)> {}),
                 domain)
     {
     }
@@ -222,9 +224,9 @@ public:
     {
         auto subview = std::experimental::
                 submdspan(allocation_mdspan(), get_slicer_for<DDims>(slice_spec)...);
-        using detail::TypeSeq;
+        using ddc_detail::TypeSeq;
         using selected_meshes = type_seq_remove_t<TypeSeq<DDims...>, TypeSeq<QueryDDims...>>;
-        return ::ChunkSpan<
+        return ChunkSpan<
                 ElementType,
                 decltype(select_by_type_seq<selected_meshes>(this->m_domain)),
                 typename decltype(subview)::layout_type,
@@ -238,7 +240,7 @@ public:
     {
         auto subview = std::experimental::
                 submdspan(allocation_mdspan(), get_slicer_for<DDims>(odomain)...);
-        return ::ChunkSpan<
+        return ChunkSpan<
                 ElementType,
                 decltype(this->m_domain.restrict(odomain)),
                 typename decltype(subview)::layout_type,
@@ -299,12 +301,12 @@ public:
     constexpr auto allocation_kokkos_view() const
     {
         auto s = this->allocation_mdspan();
-        auto kokkos_layout = detail::build_kokkos_layout(
+        auto kokkos_layout = ddc_detail::build_kokkos_layout(
                 s.extents(),
                 s.mapping(),
                 std::make_index_sequence<sizeof...(DDims)> {});
         return Kokkos::View<
-                detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
+                ddc_detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
                 decltype(kokkos_layout),
                 MemorySpace>(s.data(), kokkos_layout);
     }
@@ -325,9 +327,9 @@ template <
         class... DDims,
         class = std::enable_if_t<Kokkos::is_view<KokkosView>::value>>
 ChunkSpan(KokkosView const& view, DiscreteDomain<DDims...> domain) -> ChunkSpan<
-        detail::kokkos_to_mdspan_element_t<typename KokkosView::data_type>,
+        ddc_detail::kokkos_to_mdspan_element_t<typename KokkosView::data_type>,
         DiscreteDomain<DDims...>,
-        detail::kokkos_to_mdspan_layout_t<typename KokkosView::array_layout>,
+        ddc_detail::kokkos_to_mdspan_layout_t<typename KokkosView::array_layout>,
         typename KokkosView::memory_space>;
 
 template <
@@ -336,3 +338,5 @@ template <
         class LayoutStridedPolicy = std::experimental::layout_right,
         class MemorySpace = Kokkos::HostSpace>
 using ChunkView = ChunkSpan<ElementType const, SupportType, LayoutStridedPolicy, MemorySpace>;
+
+} // namespace ddc

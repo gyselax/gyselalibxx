@@ -11,6 +11,8 @@
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_vector.hpp"
 
+namespace ddc {
+
 template <class DDim>
 struct DiscreteDomainIterator;
 
@@ -256,47 +258,47 @@ constexpr DiscreteElement<QueryDDims...> back(DiscreteDomain<DDims...> const& do
 }
 
 template <class... QueryDDims, class... DDims>
-Coordinate<QueryDDims...> coordinate(
+ddc::Coordinate<QueryDDims...> coordinate(
         DiscreteDomain<DDims...> const& domain,
         DiscreteElement<QueryDDims...> const& icoord) noexcept
 {
-    return Coordinate<QueryDDims...>(
+    return ddc::Coordinate<QueryDDims...>(
             select<QueryDDims>(domain).coordinate(select<QueryDDims>(icoord))...);
 }
 
 template <class... QueryDDims, class... DDims>
-Coordinate<QueryDDims...> rmin(DiscreteDomain<DDims...> const& domain) noexcept
+ddc::Coordinate<QueryDDims...> rmin(DiscreteDomain<DDims...> const& domain) noexcept
 {
-    return Coordinate<QueryDDims...>(select<QueryDDims>(domain).rmin()...);
+    return ddc::Coordinate<QueryDDims...>(select<QueryDDims>(domain).rmin()...);
 }
 
 template <class... QueryDDims, class... DDims>
-Coordinate<QueryDDims...> rmax(DiscreteDomain<DDims...> const& domain) noexcept
+ddc::Coordinate<QueryDDims...> rmax(DiscreteDomain<DDims...> const& domain) noexcept
 {
-    return Coordinate<QueryDDims...>(select<QueryDDims>(domain).rmax()...);
+    return ddc::Coordinate<QueryDDims...>(select<QueryDDims>(domain).rmax()...);
 }
 
-namespace detail {
+namespace ddc_detail {
 
 template <class QueryDDimSeq>
 struct Selection;
 
 template <class... QueryDDims>
-struct Selection<detail::TypeSeq<QueryDDims...>>
+struct Selection<ddc_detail::TypeSeq<QueryDDims...>>
 {
     template <class Domain>
     static constexpr auto select(Domain const& domain)
     {
-        return ::select<QueryDDims...>(domain);
+        return ddc::select<QueryDDims...>(domain);
     }
 };
 
-} // namespace detail
+} // namespace ddc_detail
 
 template <class QueryDDimSeq, class... DDims>
 constexpr auto select_by_type_seq(DiscreteDomain<DDims...> const& domain)
 {
-    return detail::Selection<QueryDDimSeq>::select(domain);
+    return ddc_detail::Selection<QueryDDimSeq>::select(domain);
 }
 
 template <class DDim>
@@ -441,3 +443,5 @@ public:
                                          : (xx.m_value - yy.m_value);
     }
 };
+
+} // namespace ddc

@@ -19,21 +19,21 @@ struct X;
 
 //! [X-discretization]
 /// A uniform discretization of X
-using DDimX = UniformPointSampling<X>;
+using DDimX = ddc::UniformPointSampling<X>;
 //! [X-discretization]
 
 //! [Y-space]
 // Our second continuous dimension
 struct Y;
 // Its uniform discretization
-using DDimY = UniformPointSampling<Y>;
+using DDimY = ddc::UniformPointSampling<Y>;
 //! [Y-space]
 
 //! [time-space]
 // Our simulated time dimension
 struct T;
 // Its uniform discretization
-using DDimT = UniformPointSampling<T>;
+using DDimT = ddc::UniformPointSampling<T>;
 //! [time-space]
 
 
@@ -48,22 +48,22 @@ void display(double time, ChunkType temp)
     double const mean_temp = transform_reduce(
                                      temp.domain(),
                                      0.,
-                                     reducer::sum<double>(),
+                                     ddc::reducer::sum<double>(),
                                      temp)
                              / temp.domain().size();
     std::cout << std::fixed << std::setprecision(3);
     std::cout << "At t = " << time << ",\n";
     std::cout << "  * mean temperature  = " << mean_temp << "\n";
     // take a slice in the middle of the box
-    ChunkSpan temp_slice
-            = temp[get_domain<DDimY>(temp).front()
-                   + get_domain<DDimY>(temp).size() / 2];
+    ddc::ChunkSpan temp_slice
+            = temp[ddc::get_domain<DDimY>(temp).front()
+                   + ddc::get_domain<DDimY>(temp).size() / 2];
     std::cout << "  * temperature[y:"
-              << get_domain<DDimY>(temp).size() / 2 << "] = {";
-    for_each(
-            policies::serial_host,
-            get_domain<DDimX>(temp),
-            [=](DiscreteElement<DDimX> const ix) {
+              << ddc::get_domain<DDimY>(temp).size() / 2 << "] = {";
+    ddc::for_each(
+            ddc::policies::serial_host,
+            ddc::get_domain<DDimX>(temp),
+            [=](ddc::DiscreteElement<DDimX> const ix) {
                 std::cout << std::setw(6) << temp_slice(ix);
             });
     std::cout << " }" << std::endl;
@@ -74,7 +74,7 @@ void display(double time, ChunkType temp)
 //! [main-start]
 int main(int argc, char** argv)
 {
-    ScopeGuard scope(argc, argv);
+    ddc::ScopeGuard scope(argc, argv);
 
     // some parameters that would typically be read from some form of
     // configuration file in a more realistic code
@@ -107,7 +107,7 @@ int main(int argc, char** argv)
     //! [main-start]
     //! [X-parameters]
     // Number of ghost points to use on each side in X
-    DiscreteVector<DDimX> static constexpr gwx {1};
+    ddc::DiscreteVector<DDimX> static constexpr gwx {1};
     //! [X-parameters]
 
     //! [X-global-domain]
@@ -115,44 +115,44 @@ int main(int argc, char** argv)
     // each side
     auto const [x_domain, ghosted_x_domain, x_pre_ghost, x_post_ghost]
             = init_discrete_space(DDimX::init_ghosted(
-                    Coordinate<X>(x_start),
-                    Coordinate<X>(x_end),
-                    DiscreteVector<DDimX>(nb_x_points),
+                    ddc::Coordinate<X>(x_start),
+                    ddc::Coordinate<X>(x_end),
+                    ddc::DiscreteVector<DDimX>(nb_x_points),
                     gwx));
     //! [X-global-domain]
 
     //! [X-domains]
     // our zone at the start of the domain that will be mirrored to the
     // ghost
-    DiscreteDomain const
+    ddc::DiscreteDomain const
             x_domain_begin(x_domain.front(), x_post_ghost.extents());
     // our zone at the end of the domain that will be mirrored to the
     // ghost
-    DiscreteDomain const x_domain_end(
+    ddc::DiscreteDomain const x_domain_end(
             x_domain.back() - x_pre_ghost.extents() + 1,
             x_pre_ghost.extents());
     //! [X-domains]
 
     //! [Y-domains]
     // Number of ghost points to use on each side in Y
-    DiscreteVector<DDimY> static constexpr gwy {1};
+    ddc::DiscreteVector<DDimY> static constexpr gwy {1};
 
     // Initialization of the global domain in Y with gwy ghost points on
     // each side
     auto const [y_domain, ghosted_y_domain, y_pre_ghost, y_post_ghost]
             = init_discrete_space(DDimY::init_ghosted(
-                    Coordinate<Y>(y_start),
-                    Coordinate<Y>(y_end),
-                    DiscreteVector<DDimY>(nb_y_points),
+                    ddc::Coordinate<Y>(y_start),
+                    ddc::Coordinate<Y>(y_end),
+                    ddc::DiscreteVector<DDimY>(nb_y_points),
                     gwy));
 
     // our zone at the start of the domain that will be mirrored to the
     // ghost
-    DiscreteDomain const
+    ddc::DiscreteDomain const
             y_domain_begin(y_domain.front(), y_post_ghost.extents());
     // our zone at the end of the domain that will be mirrored to the
     // ghost
-    DiscreteDomain const y_domain_end(
+    ddc::DiscreteDomain const y_domain_end(
             y_domain.back() - y_pre_ghost.extents() + 1,
             y_pre_ghost.extents());
     //! [Y-domains]
@@ -162,8 +162,8 @@ int main(int argc, char** argv)
     double const invdx2_max = transform_reduce(
             x_domain,
             0.,
-            reducer::max<double>(),
-            [](DiscreteElement<DDimX> ix) {
+            ddc::reducer::max<double>(),
+            [](ddc::DiscreteElement<DDimX> ix) {
                 return 1.
                        / (distance_at_left(ix) * distance_at_right(ix));
             });
@@ -171,91 +171,92 @@ int main(int argc, char** argv)
     double const invdy2_max = transform_reduce(
             y_domain,
             0.,
-            reducer::max<double>(),
-            [](DiscreteElement<DDimY> iy) {
+            ddc::reducer::max<double>(),
+            [](ddc::DiscreteElement<DDimY> iy) {
                 return 1.
                        / (distance_at_left(iy) * distance_at_right(iy));
             });
-    Coordinate<T> const max_dt {
+    ddc::Coordinate<T> const max_dt {
             .5 / (kx * invdx2_max + ky * invdy2_max)};
 
     // number of time intervals required to reach the end time
-    DiscreteVector<DDimT> const nb_time_steps {
+    ddc::DiscreteVector<DDimT> const nb_time_steps {
             std::ceil((end_time - start_time) / max_dt) + .2};
     // Initialization of the global domain in time:
     // - the number of discrete time-points is equal to the number of
     //   steps + 1
-    DiscreteDomain<DDimT> const time_domain
-            = init_discrete_space(DDimT::
-                                          init(Coordinate<T>(start_time),
-                                               Coordinate<T>(end_time),
-                                               nb_time_steps + 1));
+    ddc::DiscreteDomain<DDimT> const time_domain = init_discrete_space(
+            DDimT::
+                    init(ddc::Coordinate<T>(start_time),
+                         ddc::Coordinate<T>(end_time),
+                         nb_time_steps + 1));
     //! [time-domains]
 
     //! [data allocation]
     // Maps temperature into the full domain (including ghosts) twice:
     // - once for the last fully computed time-step
-    Chunk ghosted_last_temp(
-            DiscreteDomain<
+    ddc::Chunk ghosted_last_temp(
+            ddc::DiscreteDomain<
                     DDimX,
                     DDimY>(ghosted_x_domain, ghosted_y_domain),
-            DeviceAllocator<double>());
+            ddc::DeviceAllocator<double>());
 
     // - once for time-step being computed
-    Chunk ghosted_next_temp(
-            DiscreteDomain<
+    ddc::Chunk ghosted_next_temp(
+            ddc::DiscreteDomain<
                     DDimX,
                     DDimY>(ghosted_x_domain, ghosted_y_domain),
-            DeviceAllocator<double>());
+            ddc::DeviceAllocator<double>());
     //! [data allocation]
 
     //! [initial-conditions]
-    ChunkSpan const ghosted_initial_temp = ghosted_last_temp.span_view();
+    ddc::ChunkSpan const ghosted_initial_temp
+            = ghosted_last_temp.span_view();
     // Initialize the temperature on the main domain
-    for_each(
-            policies::parallel_device,
-            DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
-            DDC_LAMBDA(DiscreteElement<DDimX, DDimY> const ixy) {
-                double const x = coordinate(select<DDimX>(ixy));
-                double const y = coordinate(select<DDimY>(ixy));
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
+            DDC_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
+                double const x = coordinate(ddc::select<DDimX>(ixy));
+                double const y = coordinate(ddc::select<DDimY>(ixy));
                 ghosted_initial_temp(ixy)
                         = 9.999 * ((x * x + y * y) < 0.25);
             });
     //! [initial-conditions]
 
-    Chunk ghosted_temp(
-            DiscreteDomain<
+    ddc::Chunk ghosted_temp(
+            ddc::DiscreteDomain<
                     DDimX,
                     DDimY>(ghosted_x_domain, ghosted_y_domain),
-            HostAllocator<double>());
+            ddc::HostAllocator<double>());
 
 
     //! [initial output]
     // display the initial data
-    deepcopy(ghosted_temp, ghosted_last_temp);
+    ddc::deepcopy(ghosted_temp, ghosted_last_temp);
     display(coordinate(time_domain.front()),
             ghosted_temp[x_domain][y_domain]);
     // time of the iteration where the last output happened
-    DiscreteElement<DDimT> last_output = time_domain.front();
+    ddc::DiscreteElement<DDimT> last_output = time_domain.front();
     //! [initial output]
 
     //! [time iteration]
     for (auto const iter :
-         time_domain.remove_first(DiscreteVector<DDimT>(1))) {
+         time_domain.remove_first(ddc::DiscreteVector<DDimT>(1))) {
         //! [time iteration]
 
         //! [boundary conditions]
         // Periodic boundary conditions
-        deepcopy(
+        ddc::deepcopy(
                 ghosted_last_temp[x_pre_ghost][y_domain],
                 ghosted_last_temp[y_domain][x_domain_end]);
-        deepcopy(
+        ddc::deepcopy(
                 ghosted_last_temp[y_domain][x_post_ghost],
                 ghosted_last_temp[y_domain][x_domain_begin]);
-        deepcopy(
+        ddc::deepcopy(
                 ghosted_last_temp[x_domain][y_pre_ghost],
                 ghosted_last_temp[x_domain][y_domain_end]);
-        deepcopy(
+        ddc::deepcopy(
                 ghosted_last_temp[x_domain][y_post_ghost],
                 ghosted_last_temp[x_domain][y_domain_begin]);
         //! [boundary conditions]
@@ -263,20 +264,23 @@ int main(int argc, char** argv)
         //! [manipulated views]
         // a span excluding ghosts of the temperature at the time-step we
         // will build
-        ChunkSpan const next_temp {
+        ddc::ChunkSpan const next_temp {
                 ghosted_next_temp[x_domain][y_domain]};
         // a read-only view of the temperature at the previous time-step
-        ChunkSpan const last_temp {ghosted_last_temp.span_view()};
+        ddc::ChunkSpan const last_temp {ghosted_last_temp.span_view()};
         //! [manipulated views]
 
         //! [numerical scheme]
         // Stencil computation on the main domain
-        for_each(
-                policies::parallel_device,
+        ddc::for_each(
+                ddc::policies::parallel_device,
                 next_temp.domain(),
-                DDC_LAMBDA(DiscreteElement<DDimX, DDimY> const ixy) {
-                    DiscreteElement<DDimX> const ix = select<DDimX>(ixy);
-                    DiscreteElement<DDimY> const iy = select<DDimY>(ixy);
+                DDC_LAMBDA(
+                        ddc::DiscreteElement<DDimX, DDimY> const ixy) {
+                    ddc::DiscreteElement<DDimX> const ix
+                            = ddc::select<DDimX>(ixy);
+                    ddc::DiscreteElement<DDimY> const iy
+                            = ddc::select<DDimY>(ixy);
                     double const dx_l = distance_at_left(ix);
                     double const dx_r = distance_at_right(ix);
                     double const dx_m = 0.5 * (dx_l + dx_r);
@@ -302,7 +306,7 @@ int main(int argc, char** argv)
         //! [output]
         if (iter - last_output >= t_output_period) {
             last_output = iter;
-            deepcopy(ghosted_temp, ghosted_last_temp);
+            ddc::deepcopy(ghosted_temp, ghosted_last_temp);
             display(coordinate(iter), ghosted_temp[x_domain][y_domain]);
         }
         //! [output]
@@ -315,7 +319,7 @@ int main(int argc, char** argv)
 
     //! [final output]
     if (last_output < time_domain.back()) {
-        deepcopy(ghosted_temp, ghosted_last_temp);
+        ddc::deepcopy(ghosted_temp, ghosted_last_temp);
         display(coordinate(time_domain.back()),
                 ghosted_temp[x_domain][y_domain]);
     }

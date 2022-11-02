@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 
 using T = double;
-using A = AlignedAllocator<T, 64>;
+using A = ddc::AlignedAllocator<T, 64>;
 using U = char;
 using B = std::allocator_traits<A>::rebind_alloc<U>;
 
@@ -22,7 +22,7 @@ TEST(AlignedAllocatorTest, Traits)
     ASSERT_TRUE((std::is_same_v<traits::propagate_on_container_copy_assignment, std::false_type>));
     ASSERT_TRUE((std::is_same_v<traits::propagate_on_container_move_assignment, std::false_type>));
     ASSERT_TRUE((std::is_same_v<traits::propagate_on_container_swap, std::false_type>));
-    ASSERT_TRUE((std::is_same_v<traits::rebind_alloc<U>, AlignedAllocator<U, 64>>));
+    ASSERT_TRUE((std::is_same_v<traits::rebind_alloc<U>, ddc::AlignedAllocator<U, 64>>));
     ASSERT_TRUE((std::is_same_v<traits::is_always_equal, std::true_type>));
 }
 

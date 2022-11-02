@@ -9,21 +9,21 @@
 namespace {
 
 struct DDimX;
-using DElemX = DiscreteElement<DDimX>;
-using DVectX = DiscreteVector<DDimX>;
+using DElemX = ddc::DiscreteElement<DDimX>;
+using DVectX = ddc::DiscreteVector<DDimX>;
 
 
 struct DDimY;
-using DElemY = DiscreteElement<DDimY>;
-using DVectY = DiscreteVector<DDimY>;
+using DElemY = ddc::DiscreteElement<DDimY>;
+using DVectY = ddc::DiscreteVector<DDimY>;
 
 
-using DElemXY = DiscreteElement<DDimX, DDimY>;
-using DVectXY = DiscreteVector<DDimX, DDimY>;
+using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;
+using DVectXY = ddc::DiscreteVector<DDimX, DDimY>;
 
 
-using DElemYX = DiscreteElement<DDimY, DDimX>;
-using DVectYX = DiscreteVector<DDimY, DDimX>;
+using DElemYX = ddc::DiscreteElement<DDimY, DDimX>;
+using DVectYX = ddc::DiscreteVector<DDimY, DDimX>;
 
 } // namespace
 
@@ -53,7 +53,7 @@ TEST(DiscreteElementXTest, BinaryOperatorMinus)
     std::ptrdiff_t const dv_x = -2;
     DElemX const ix2 = ix + dv_x;
     DVectX dv2_x = ix2 - ix;
-    ASSERT_EQ(get<DDimX>(dv2_x), dv_x);
+    ASSERT_EQ(ddc::get<DDimX>(dv2_x), dv_x);
 }
 
 TEST(DiscreteElementXYTest, ValueConstructor)
@@ -105,6 +105,6 @@ TEST(DiscreteElementXYTest, BinaryOperatorMinus)
     std::ptrdiff_t const dv_y = +3;
     DElemXY const ixy2 = ixy + DVectXY(dv_x, dv_y);
     DVectXY dv_xy = ixy2 - ixy;
-    ASSERT_EQ(get<DDimX>(dv_xy), dv_x);
-    ASSERT_EQ(get<DDimY>(dv_xy), dv_y);
+    ASSERT_EQ(ddc::get<DDimX>(dv_xy), dv_x);
+    ASSERT_EQ(ddc::get<DDimY>(dv_xy), dv_y);
 }

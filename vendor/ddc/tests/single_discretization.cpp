@@ -10,15 +10,15 @@
 
 namespace {
 
-using experimental::SingleDiscretization;
+using ddc::experimental::SingleDiscretization;
 
 class DimX;
 
-using CoordX = Coordinate<DimX>;
+using CoordX = ddc::Coordinate<DimX>;
 
 using DDimX = SingleDiscretization<DimX>;
 
-using DElemX = DiscreteElement<DDimX>;
+using DElemX = ddc::DiscreteElement<DDimX>;
 
 } // namespace
 

@@ -9,31 +9,31 @@
 namespace {
 
 struct DDimX;
-using DElemX = DiscreteElement<DDimX>;
-using DVectX = DiscreteVector<DDimX>;
-using DDomX = DiscreteDomain<DDimX>;
+using DElemX = ddc::DiscreteElement<DDimX>;
+using DVectX = ddc::DiscreteVector<DDimX>;
+using DDomX = ddc::DiscreteDomain<DDimX>;
 
 
 struct DDimY;
-using DElemY = DiscreteElement<DDimY>;
-using DVectY = DiscreteVector<DDimY>;
-using DDomY = DiscreteDomain<DDimY>;
+using DElemY = ddc::DiscreteElement<DDimY>;
+using DVectY = ddc::DiscreteVector<DDimY>;
+using DDomY = ddc::DiscreteDomain<DDimY>;
 
 
 struct DDimZ;
-using DElemZ = DiscreteElement<DDimZ>;
-using DVectZ = DiscreteVector<DDimZ>;
-using DDomZ = DiscreteDomain<DDimZ>;
+using DElemZ = ddc::DiscreteElement<DDimZ>;
+using DVectZ = ddc::DiscreteVector<DDimZ>;
+using DDomZ = ddc::DiscreteDomain<DDimZ>;
 
 
-using DElemXY = DiscreteElement<DDimX, DDimY>;
-using DVectXY = DiscreteVector<DDimX, DDimY>;
-using DDomXY = DiscreteDomain<DDimX, DDimY>;
+using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;
+using DVectXY = ddc::DiscreteVector<DDimX, DDimY>;
+using DDomXY = ddc::DiscreteDomain<DDimX, DDimY>;
 
 
-using DElemYX = DiscreteElement<DDimY, DDimX>;
-using DVectYX = DiscreteVector<DDimY, DDimX>;
-using DDomYX = DiscreteDomain<DDimY, DDimX>;
+using DElemYX = ddc::DiscreteElement<DDimY, DDimX>;
+using DVectYX = ddc::DiscreteVector<DDimY, DDimX>;
+using DDomYX = ddc::DiscreteDomain<DDimY, DDimX>;
 
 
 static DElemX constexpr lbound_x(50);
@@ -86,14 +86,14 @@ TEST(ProductMDomainTest, EmptyDomain)
 TEST(ProductMDomainTest, Subdomain)
 {
     DDomXY const dom_x_y = DDomXY(lbound_x_y, nelems_x_y);
-    DiscreteElement<DDimX> const lbound_subdomain_x(lbound_x + 1);
-    DiscreteVector<DDimX> const npoints_subdomain_x(nelems_x - 2);
+    ddc::DiscreteElement<DDimX> const lbound_subdomain_x(lbound_x + 1);
+    ddc::DiscreteVector<DDimX> const npoints_subdomain_x(nelems_x - 2);
     DDomX const subdomain_x(lbound_subdomain_x, npoints_subdomain_x);
     DDomXY const subdomain = dom_x_y.restrict(subdomain_x);
     EXPECT_EQ(
             subdomain,
-            DDomXY(DiscreteElement<DDimX, DDimY>(lbound_subdomain_x, lbound_y),
-                   DiscreteVector<DDimX, DDimY>(npoints_subdomain_x, nelems_y)));
+            DDomXY(ddc::DiscreteElement<DDimX, DDimY>(lbound_subdomain_x, lbound_y),
+                   ddc::DiscreteVector<DDimX, DDimY>(npoints_subdomain_x, nelems_y)));
 }
 
 TEST(ProductMDomainTest, RangeFor)

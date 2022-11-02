@@ -10,6 +10,8 @@
 #include "ddc/chunk_span.hpp"
 #include "ddc/for_each.hpp"
 
+namespace ddc {
+
 /** Copy the content of a view into another
  * @param[out] dst the view in which to copy
  * @param[in]  src the view from which to copy
@@ -27,3 +29,5 @@ inline ChunkDst const& deepcopy(ChunkDst&& dst, ChunkSrc&& src) noexcept
     Kokkos::deep_copy(dst.allocation_kokkos_view(), src.allocation_kokkos_view());
     return dst;
 }
+
+} // namespace ddc

@@ -14,6 +14,8 @@
 #include "ddc/discrete_space.hpp"
 #include "ddc/discrete_vector.hpp"
 
+namespace ddc {
+
 /// `NonUniformPointSampling` models a non-uniform discretization of the `CDim` segment \f$[a, b]\f$.
 template <class CDim>
 class NonUniformPointSampling
@@ -169,3 +171,5 @@ DDC_INLINE_FUNCTION Coordinate<CDim> rlength(DiscreteDomain<NonUniformPointSampl
 {
     return rmax(d) - rmin(d);
 }
+
+} // namespace ddc
