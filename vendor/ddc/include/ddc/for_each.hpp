@@ -168,7 +168,7 @@ inline constexpr serial_host_policy serial_host;
 inline constexpr parallel_host_policy parallel_host;
 inline constexpr parallel_device_policy parallel_device;
 
-}; // namespace policies
+} // namespace policies
 
 /** iterates over a nD domain using the default execution policy
  * @param[in] domain the domain over which to iterate
