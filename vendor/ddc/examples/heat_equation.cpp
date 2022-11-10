@@ -114,7 +114,7 @@ int main(int argc, char** argv)
     // Initialization of the global domain in X with gwx ghost points on
     // each side
     auto const [x_domain, ghosted_x_domain, x_pre_ghost, x_post_ghost]
-            = init_discrete_space(DDimX::init_ghosted(
+            = ddc::init_discrete_space(DDimX::init_ghosted(
                     ddc::Coordinate<X>(x_start),
                     ddc::Coordinate<X>(x_end),
                     ddc::DiscreteVector<DDimX>(nb_x_points),
@@ -140,7 +140,7 @@ int main(int argc, char** argv)
     // Initialization of the global domain in Y with gwy ghost points on
     // each side
     auto const [y_domain, ghosted_y_domain, y_pre_ghost, y_post_ghost]
-            = init_discrete_space(DDimY::init_ghosted(
+            = ddc::init_discrete_space(DDimY::init_ghosted(
                     ddc::Coordinate<Y>(y_start),
                     ddc::Coordinate<Y>(y_end),
                     ddc::DiscreteVector<DDimY>(nb_y_points),
@@ -185,11 +185,12 @@ int main(int argc, char** argv)
     // Initialization of the global domain in time:
     // - the number of discrete time-points is equal to the number of
     //   steps + 1
-    ddc::DiscreteDomain<DDimT> const time_domain = init_discrete_space(
-            DDimT::
-                    init(ddc::Coordinate<T>(start_time),
-                         ddc::Coordinate<T>(end_time),
-                         nb_time_steps + 1));
+    ddc::DiscreteDomain<DDimT> const time_domain
+            = ddc::init_discrete_space(
+                    DDimT::
+                            init(ddc::Coordinate<T>(start_time),
+                                 ddc::Coordinate<T>(end_time),
+                                 nb_time_steps + 1));
     //! [time-domains]
 
     //! [data allocation]
