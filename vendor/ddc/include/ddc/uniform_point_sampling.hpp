@@ -326,4 +326,4 @@ struct is_uniform_domain<DiscreteDomain<DDims...>>
 template <class T>
 constexpr bool is_uniform_domain_v = is_uniform_domain<T>::value;
 
-}; // namespace ddc
+} // namespace ddc
