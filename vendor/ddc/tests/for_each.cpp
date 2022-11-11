@@ -27,6 +27,16 @@ static DVectY constexpr nelems_y(12);
 static DElemXY constexpr lbound_x_y {lbound_x, lbound_y};
 static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
 
+TEST(ForEachSerialHost, Empty)
+{
+    DDomX const dom(lbound_x, DVectX(0));
+    std::vector<int> storage(dom.size(), 0);
+    ddc::ChunkSpan<int, DDomX> view(storage.data(), dom);
+    ddc::for_each(ddc::policies::serial_host, dom, [=](DElemX const ix) { view(ix) += 1; });
+    ASSERT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
+    std::cout << std::count(storage.begin(), storage.end(), 1) << std::endl;
+}
+
 TEST(ForEachSerialHost, OneDimension)
 {
     DDomX const dom(lbound_x, nelems_x);
