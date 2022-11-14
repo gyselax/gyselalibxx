@@ -30,15 +30,12 @@ public:
     using bsplines_type1 = BSplines1;
     using bsplines_type2 = BSplines2;
 
+    using builder_type1 = SplineBuilder<BSplines1, BcXmin1, BcXmax1>;
+    using builder_type2 = SplineBuilder<BSplines2, BcXmin2, BcXmax2>;
+
     // No need to check boundary conditions, it shall fail if it periodic with non-periodic boundary conditions
-    using interpolation_mesh_type1 = std::conditional_t<
-            BSplines1::is_uniform() && BSplines1::is_periodic(),
-            UniformPointSampling<tag_type1>,
-            NonUniformPointSampling<tag_type1>>;
-    using interpolation_mesh_type2 = std::conditional_t<
-            BSplines2::is_uniform() && BSplines2::is_periodic(),
-            UniformPointSampling<tag_type2>,
-            NonUniformPointSampling<tag_type2>>;
+    using interpolation_mesh_type1 = typename builder_type1::interpolation_mesh_type;
+    using interpolation_mesh_type2 = typename builder_type2::interpolation_mesh_type;
 
     using interpolation_domain_type1 = DiscreteDomain<interpolation_mesh_type1>;
     using interpolation_domain_type2 = DiscreteDomain<interpolation_mesh_type2>;
@@ -46,8 +43,8 @@ public:
             = DiscreteDomain<interpolation_mesh_type1, interpolation_mesh_type2>;
 
 private:
-    SplineBuilder<BSplines1, BcXmin1, BcXmax1> spline_builder1;
-    SplineBuilder<BSplines2, BcXmin2, BcXmax2> spline_builder2;
+    builder_type1 spline_builder1;
+    builder_type2 spline_builder2;
     std::unique_ptr<interpolation_domain_type> m_interpolation_domain;
 
 public:
