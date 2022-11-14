@@ -50,12 +50,18 @@ class SplineBuilder
 private:
     using tag_type = typename BSplines::tag_type;
 
+    static constexpr bool is_uniform_mesh
+            = BSplines::is_uniform()
+              && (BSplines::degree() == 1 || BSplines::is_periodic()
+                  || (BcXmin == BoundCond::HERMITE && BcXmax == BoundCond::HERMITE
+                      && BSplines::degree() % 2 == 1));
+
 public:
     using bsplines_type = BSplines;
 
     // No need to check boundary conditions, it shall fail if it periodic with non-periodic boundary conditions
     using interpolation_mesh_type = std::conditional_t<
-            BSplines::is_uniform() && BSplines::is_periodic(),
+            is_uniform_mesh,
             UniformPointSampling<tag_type>,
             NonUniformPointSampling<tag_type>>;
 
@@ -243,7 +249,7 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::compute_interpolation_points_unifo
 {
     std::size_t const n_interp_pts = discrete_space<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax;
 
-    if constexpr (bsplines_type::is_periodic()) {
+    if constexpr (is_uniform_mesh) {
         double constexpr shift = !s_odd ? 0.5 : 0.0;
         init_discrete_space<interpolation_mesh_type>(
                 Coordinate<tag_type>(discrete_space<BSplines>().rmin() + shift * m_dx),
