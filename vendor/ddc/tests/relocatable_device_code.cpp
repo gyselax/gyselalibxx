@@ -28,7 +28,7 @@ std::pair<ddc::Coordinate<rdc::DimX>, ddc::Coordinate<rdc::DimX>> read_from_devi
 TEST(RelocatableDeviceCode, ReadFromDevice)
 {
     ddc::Coordinate<rdc::DimX> const origin(-1.);
-    ddc::Coordinate<rdc::DimX> const step(0.5);
+    double const step = 0.5;
     rdc::initialize_ddimx(origin, step);
     auto const& [origin_from_device, step_from_device] = read_from_device();
     EXPECT_DOUBLE_EQ(origin, origin_from_device);

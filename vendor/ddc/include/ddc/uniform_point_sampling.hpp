@@ -45,7 +45,7 @@ public:
     private:
         continuous_element_type m_origin {0.};
 
-        continuous_element_type m_step {1.};
+        double m_step {1.};
 
     public:
         using discrete_dimension_type = UniformPointSampling;
@@ -68,9 +68,7 @@ public:
      * @param origin the real coordinate of mesh coordinate 0
      * @param step   the real distance between two points of mesh distance 1
      */
-        constexpr Impl(continuous_element_type origin, continuous_element_type step)
-            : m_origin(origin)
-            , m_step(step)
+        constexpr Impl(continuous_element_type origin, double step) : m_origin(origin), m_step(step)
         {
             assert(step > 0);
         }
@@ -122,7 +120,7 @@ public:
         }
 
         /// @brief Spacing step of the mesh
-        constexpr continuous_element_type step() const
+        constexpr double step() const
         {
             return m_step;
         }
@@ -180,7 +178,7 @@ public:
         using discrete_domain_type = discrete_domain_type;
         assert(a < b);
         assert(n > 1);
-        continuous_element_type discretization_step {(b - a) / (n - 1)};
+        double discretization_step {(b - a) / (n - 1)};
         Impl<Kokkos::HostSpace>
                 disc(a - n_ghosts_before.value() * discretization_step, discretization_step);
         discrete_domain_type ghosted_domain
@@ -268,9 +266,7 @@ DDC_INLINE_FUNCTION std::
 
 /// @brief Spacing step of the mesh
 template <class DDim>
-DDC_INLINE_FUNCTION std::
-        enable_if_t<is_uniform_sampling_v<DDim>, typename DDim::continuous_element_type>
-        step() noexcept
+DDC_INLINE_FUNCTION std::enable_if_t<is_uniform_sampling_v<DDim>, double> step() noexcept
 {
     return discrete_space<DDim>().step();
 }
@@ -285,13 +281,13 @@ DDC_INLINE_FUNCTION constexpr Coordinate<CDim> coordinate(
 template <class CDim>
 DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_left(DiscreteElement<UniformPointSampling<CDim>>)
 {
-    return step<UniformPointSampling<CDim>>();
+    return Coordinate<CDim>(step<UniformPointSampling<CDim>>());
 }
 
 template <class CDim>
 DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_right(DiscreteElement<UniformPointSampling<CDim>>)
 {
-    return step<UniformPointSampling<CDim>>();
+    return Coordinate<CDim>(step<UniformPointSampling<CDim>>());
 }
 
 template <class CDim>
