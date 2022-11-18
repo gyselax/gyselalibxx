@@ -16,7 +16,7 @@ class UniformPointSamplingTest : public ::testing::Test
 {
 protected:
     ddc::Coordinate<DimX> origin = ddc::Coordinate<DimX>(-1.);
-    ddc::Coordinate<DimX> step = ddc::Coordinate<DimX>(0.5);
+    double step = 0.5;
     ddc::DiscreteVector<DDimX> npoints = ddc::DiscreteVector<DDimX>(5);
     ddc::DiscreteElement<DDimX> lbound = ddc::DiscreteElement<DDimX>(0);
     ddc::DiscreteElement<DDimX> point_ix = ddc::DiscreteElement<DDimX>(2);
@@ -41,8 +41,8 @@ TEST_F(UniformPointSamplingTest, Constructor2)
 
 TEST(UniformPointSampling, Formatting)
 {
-    DDimX::Impl<Kokkos::HostSpace> ddim_x(ddc::Coordinate<DimX>(-1.), ddc::Coordinate<DimX>(0.5));
+    DDimX::Impl<Kokkos::HostSpace> ddim_x(ddc::Coordinate<DimX>(-1.), 0.5);
     std::stringstream oss;
     oss << ddim_x;
-    EXPECT_EQ(oss.str(), "UniformPointSampling( origin=(-1), step=(0.5) )");
+    EXPECT_EQ(oss.str(), "UniformPointSampling( origin=(-1), step=0.5 )");
 }

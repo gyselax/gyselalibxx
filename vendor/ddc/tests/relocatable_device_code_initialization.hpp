@@ -12,6 +12,6 @@ using DElemX = ddc::DiscreteElement<DDimX>;
 using DVectX = ddc::DiscreteVector<DDimX>;
 using DDomX = ddc::DiscreteDomain<DDimX>;
 
-void initialize_ddimx(ddc::Coordinate<DimX> origin, ddc::Coordinate<DimX> step);
+void initialize_ddimx(ddc::Coordinate<DimX> origin, double step);
 
 } // namespace rdc
