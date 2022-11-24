@@ -6,7 +6,10 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <stdexcept>
+#include <string>
 #include <string_view>
+#include <vector>
 
 #include <ddc/ddc.hpp>
 
@@ -23,6 +26,8 @@
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "kinetic_source.hpp"
+#include "krook_source_adaptive.hpp"
+#include "krook_source_constant.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "paraconfpp.hpp"
 #include "pdi_out.yml.hpp"
@@ -145,22 +150,6 @@ int main(int argc, char** argv)
                  discrete_space<IDimSp>().perturb_amplitudes());
     init(allfdistribu);
 
-    // RHS information
-    double const px_source = PCpp_double(conf_voicexx, ".SourceInfo.px_source");
-    double const dx_source = PCpp_double(conf_voicexx, ".SourceInfo.dx_source");
-    double const px_sink = PCpp_double(conf_voicexx, ".SourceInfo.px_sink");
-    double const dx_sink = PCpp_double(conf_voicexx, ".SourceInfo.dx_sink");
-
-    // Kinetic source information
-    double const amplitude_kineticsource
-            = PCpp_double(conf_voicexx, ".KineticSourceInfo.source_amplitude");
-    double const density_amplitude_kineticsource
-            = PCpp_double(conf_voicexx, ".KineticSourceInfo.density_amplitude");
-    double const energy_amplitude_kineticsource
-            = PCpp_double(conf_voicexx, ".KineticSourceInfo.energy_amplitude");
-    double const temperature_kineticsource
-            = PCpp_double(conf_voicexx, ".KineticSourceInfo.temperature_source");
-
     // --> Algorithm info
     double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
     int const nbiter = static_cast<int>(PCpp_int(conf_voicexx, ".Algorithm.nbiter"));
@@ -206,19 +195,68 @@ int main(int argc, char** argv)
         meshVx_coord(ivx) = coordinate(ivx);
     }
 
-    // Rhs sources initialisation
-    Kinetic_source const kinetic_source(
+    // list of rhs operators
+    std::vector<std::reference_wrapper<IRightHandSide const>> rhs_operators;
+    std::vector<KrookSourceConstant> krook_source_constant_vector;
+    std::vector<KrookSourceAdaptive> krook_source_adaptive_vector;
+    // Krook operators initialization
+    int const nb_rhsKrook(PCpp_len(conf_voicexx, ".Krook"));
+    for (int ik = 0; ik < nb_rhsKrook; ++ik) {
+        // --> Krook info
+        PC_tree_t const conf_krook = PCpp_get(conf_voicexx, ".Krook[%d]", ik);
+
+        static std::map<std::string, RhsType>
+                str2rhstype {{"source", RhsType::Source}, {"sink", RhsType::Sink}};
+        RhsType type = str2rhstype[PCpp_string(conf_krook, ".type")];
+        std::string const krook_name = PCpp_string(conf_krook, ".name");
+        if (krook_name == "constant") {
+            krook_source_constant_vector.emplace_back(
+                    gridx,
+                    gridvx,
+                    type,
+                    PCpp_double(conf_krook, ".extent"),
+                    PCpp_double(conf_krook, ".stiffness"),
+                    PCpp_double(conf_krook, ".amplitude"),
+                    PCpp_double(conf_krook, ".density"),
+                    PCpp_double(conf_krook, ".temperature"));
+            rhs_operators.emplace_back(krook_source_constant_vector.back());
+
+        } else if (krook_name == "adaptive") {
+            static std::map<std::string, RhsSolver> str2solver {{"rk2", RhsSolver::Rk2}};
+            RhsSolver solver = str2solver[PCpp_string(conf_krook, ".solver")];
+
+            krook_source_adaptive_vector.emplace_back(
+                    gridx,
+                    gridvx,
+                    type,
+                    solver,
+                    PCpp_double(conf_krook, ".extent"),
+                    PCpp_double(conf_krook, ".stiffness"),
+                    PCpp_double(conf_krook, ".amplitude"),
+                    PCpp_double(conf_krook, ".density"),
+                    PCpp_double(conf_krook, ".temperature"),
+                    deltat);
+            rhs_operators.emplace_back(krook_source_adaptive_vector.back());
+        } else {
+            throw std::invalid_argument(
+                    "Invalid krook name, allowed values are: 'constant', or 'adaptive'.");
+        }
+    }
+
+    // Kinetic source
+    KineticSource const rhs_kinetic_source(
             gridx,
             gridvx,
-            px_source,
-            dx_source,
-            amplitude_kineticsource,
-            density_amplitude_kineticsource,
-            energy_amplitude_kineticsource,
-            temperature_kineticsource);
+            PCpp_double(conf_voicexx, ".KineticSource.extent"),
+            PCpp_double(conf_voicexx, ".KineticSource.stiffness"),
+            PCpp_double(conf_voicexx, ".KineticSource.amplitude"),
+            PCpp_double(conf_voicexx, ".KineticSource.density"),
+            PCpp_double(conf_voicexx, ".KineticSource.energy"),
+            PCpp_double(conf_voicexx, ".KineticSource.temperature"));
+    rhs_operators.emplace_back(rhs_kinetic_source);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
-    SplitRightHandSideSolver const boltzmann(vlasov, {kinetic_source});
+    SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);
 
     using FemPoissonSolverX = std::
             conditional_t<RDimX::PERIODIC, FemPeriodicPoissonSolver, FemNonPeriodicPoissonSolver>;

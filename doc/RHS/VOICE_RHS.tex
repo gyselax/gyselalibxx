@@ -45,6 +45,62 @@
 \end{center}
 
 
+\section{Krook source and sink}
+\label{sec:krook_source_and_sink}
+The following operator is a BGK term \cite{BGK_Operator} that can act as a source or a sink of particles, momentum and energy. It has the following form:
+\[  S_\mathrm{BGK}(x, v_a, t) = - \nu_\mathrm{a} \mathcal{M}\left( f_a - g \right)  \]
+The $\nu_\mathrm{a}$ coefficient sets the magnitude of the operator. It can be either constant or space and time dependent, see below. The mask function $\mathcal{M}(x)$ defines the spatial extent of the simulation box where the operator is active. It is a hyperbolic tangent function that takes a value of one inside a specific domain, and vanishes outside. This mask can have two different forms. The first one is such that the mask equals one inside the domain  $\left[ x_\mathrm{\ell}, \, x_\mathrm{r} \right] $.  The Krook operator can then be used for instance as a source of particles active in this region. The mask function is thus defined in this case as
+%
+\begin{equation}\label{eq:mask_source}
+     \mathcal{M}_{\mathrm{sc}}(x) = \dfrac{1}{2}\left\{ \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{\ell}}{d}\right)} - \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{r}}{d}\right)}  \right\} .
+\end{equation}
+%
+The $x_\ell$ and $x_\mathrm{r}$ positions are defined using the total simulation box length $L_x$ and the factor $p_{\mathrm{mask}}$ as
+\[ x_\ell = p_{\mathrm{mask}}L_x;\quad x_\mathrm{r} = (1-p_\mathrm{mask}) L_x. \]
+The second option is to have a mask of vanishing value in the domain $\left[ x_\mathrm{\ell}, \, x_\mathrm{r} \right] $. The Krook operator can be used in this case as sink of particles that absorbs particles outside of this domain. The mask is then written as
+%
+\begin{equation}\label{eq:mask_sink}
+ \mathcal{M}_\mathrm{sk}(x) = 1 - \dfrac{1}{2}\left\{ \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{\ell}}{d}\right)} - \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{r}}{d}\right)}  \right\},
+\end{equation}
+%
+%
+The $d$ parameter controls the stiffness of the mask function. The target distribution function $g$ is a maxwellian characterized by a constant density $n_\mathrm{t}$ and temperature $T_\mathrm{t}$. It is written in normalized units as 
+\[ g(v) = \dfrac{n_\mathrm{t}}{\sqrt{2\pi T_\mathrm{t}} } \operatorname{exp} \left( - \dfrac{v^2}{2 T_\mathrm{t}}  \right). \]
+Depending on the values given to $n_\mathrm{t}$ and $T_\mathrm{t}$, the BGK operator will absorb or inject particles and energy. Two different versions of the operator exist: the $\nu$ coefficient can be either constant, or depend on the time and space variables.
+
+\paragraph{Constant Krook operator:} In the case of constant $\nu_\mathrm{a}$ coefficients the differential equation $\partial_t f_\mathrm{a}  = S_\mathrm{BGK}$ is analytical. Its solution is given by
+\[ f_a(t+dt) = g_\mathrm{t} + (f_a(t) - g_\mathrm{t})\operatorname{exp} \left( - \nu \mathcal{M} dt \right). \]
+
+\paragraph{Adaptive Krook operator:} It is possible to chose a constant value of $\nu_\mathrm{i}$ and to adapt $\nu_\mathrm{e}$ at each timestep and spatial position such that
+\[ \nu_{\mathrm{i}} = \mathrm{cte}; \quad \nu_{\mathrm{e}} = \nu_{\mathrm{i}}\, \dfrac{n_\mathrm{i} - n_\mathrm{t}}{ n_\mathrm{e} - n_\mathrm{t}}. \]
+Note here that the $n_a$ quantity is the density of species $a$, and thus depends on space and time. The $\partial_t f_\mathrm{a}  = S_\mathrm{BGK}$ equation is no longer analytical and is solved with an explicit scheme (RK2 scheme for instance).
+
+To verify the implementation of the operator a simple test is conducted, valid for both constant and adaptive $\nu_\mathrm{a}$ coefficients. Integrating the $\partial_t f_\mathrm{i}  = S_\mathrm{BGK}$ equation against the velocity variable yields
+\[ \partial_{t} n_\mathrm{i} = - \nu_\mathrm{i} \mathcal{M} \left( n_\mathrm{i} - n_\mathrm{t} \right), \]
+which is an equation with analytical solutions. The input parameters of the code allowing for tuning the characteristics of the BGK operator are summarized in Table~\ref{tab:input_para_krook}. Two additional parameters, namely $\texttt{name} \in \left\{ ``source", \, ``sink"\right\} $ and $\texttt{type} \in \left\{ ``constant", \, ``adaptive"\right\} $, are available. The first one allows for for choosing between the masks of Eq.~(\ref{eq:mask_source}) and Eq.~(\ref{eq:mask_sink}). The second one defines the behavior of the $\nu_\mathrm{a}$ coefficients: constant or adaptive.
+%
+\begin{table}
+    \centering
+\renewcommand{\arraystretch}{1.5}
+\caption{\label{tab:input_para_krook}Krook input parameters significance.}
+\vspace{2mm}
+%\begin{ruledtabular}
+\begin{tabular}{c|c|c|c|c}
+    $\texttt{extent}$ & $\texttt{stiffness}$ & $\texttt{amplitude}$ & $\texttt{density}$ &  $\texttt{temperature}$ \\
+    \hline
+    \hline
+  $p_{\mathrm{mask}}$ & $d$ & $\nu_\mathrm{i}$ & $n_\mathrm{t}$ & $T_\mathrm{t}$ \\
+\end{tabular}
+%\end{ruledtabular}
+\end{table}
+%
+
+
+
+
+
+
+
 \section{Kinetic source}
 \label{sec:kinetic_source}
 

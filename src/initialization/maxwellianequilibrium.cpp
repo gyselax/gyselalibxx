@@ -4,8 +4,6 @@
 
 #include "maxwellianequilibrium.hpp"
 
-using std::sqrt, std::exp;
-
 MaxwellianEquilibrium::MaxwellianEquilibrium(
         DFieldSp density_eq,
         DFieldSp temperature_eq,
@@ -45,13 +43,14 @@ void MaxwellianEquilibrium::compute_maxwellian(
         DSpanVx const fMaxwellian,
         double const density,
         double const temperature,
-        double const mean_velocity) const
+        double const mean_velocity)
 {
-    double const inv_sqrt_2piT = 1. / sqrt(2. * M_PI * temperature);
+    double const inv_sqrt_2piT = 1. / std::sqrt(2. * M_PI * temperature);
     IDomainVx const gridvx = fMaxwellian.domain();
     for (IndexVx const iv : gridvx) {
         CoordVx const v = coordinate(iv);
-        fMaxwellian(iv) = density * inv_sqrt_2piT
-                          * exp(-(v - mean_velocity) * (v - mean_velocity) / (2. * temperature));
+        fMaxwellian(iv)
+                = density * inv_sqrt_2piT
+                  * std::exp(-(v - mean_velocity) * (v - mean_velocity) / (2. * temperature));
     }
 }
