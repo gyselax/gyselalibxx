@@ -309,25 +309,24 @@ private:
                 std::is_same_v<EvalType1, eval_type> || std::is_same_v<EvalType1, eval_deriv_type>);
         static_assert(
                 std::is_same_v<EvalType2, eval_type> || std::is_same_v<EvalType2, eval_deriv_type>);
-        int jmin1, jmin2;
+        DiscreteElement<BSplinesType1> jmin1;
+        DiscreteElement<BSplinesType2> jmin2;
 
         if constexpr (std::is_same_v<EvalType1, eval_type>) {
-            discrete_space<bsplines_type1>().eval_basis(vals1, jmin1, coord_eval1);
+            jmin1 = discrete_space<bsplines_type1>().eval_basis(vals1, coord_eval1);
         } else if constexpr (std::is_same_v<EvalType1, eval_deriv_type>) {
-            discrete_space<bsplines_type1>().eval_deriv(vals1, jmin1, coord_eval1);
+            jmin1 = discrete_space<bsplines_type1>().eval_deriv(vals1, coord_eval1);
         }
         if constexpr (std::is_same_v<EvalType2, eval_type>) {
-            discrete_space<bsplines_type2>().eval_basis(vals2, jmin2, coord_eval2);
+            jmin2 = discrete_space<bsplines_type2>().eval_basis(vals2, coord_eval2);
         } else if constexpr (std::is_same_v<EvalType2, eval_deriv_type>) {
-            discrete_space<bsplines_type2>().eval_deriv(vals2, jmin2, coord_eval2);
+            jmin2 = discrete_space<bsplines_type2>().eval_deriv(vals2, coord_eval2);
         }
 
         double y = 0.0;
         for (std::size_t i = 0; i < bsplines_type1::degree() + 1; ++i) {
             for (std::size_t j = 0; j < bsplines_type2::degree() + 1; ++j) {
-                y += spline_coef(
-                             DiscreteElement<BSplinesType1, BSplinesType2>(jmin1 + i, jmin2 + j))
-                     * vals1(i) * vals2(j);
+                y += spline_coef(jmin1 + i, jmin2 + j) * vals1(i) * vals2(j);
             }
         }
         return y;

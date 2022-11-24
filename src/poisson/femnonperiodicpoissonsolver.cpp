@@ -87,13 +87,12 @@ void FemNonPeriodicPoissonSolver::build_matrix()
     // Fill the banded part of the matrix
     double derivs_ptr[m_degree + 1];
     DSpan1D derivs(derivs_ptr, m_degree + 1);
-    int jmin;
     for (int i = 0; i < m_eval_pts.size(); ++i) {
-        discrete_space<NUBSplinesX>().eval_deriv(derivs, jmin, m_eval_pts[i]);
+        auto jmin = discrete_space<NUBSplinesX>().eval_deriv(derivs, m_eval_pts[i]);
         for (int j = 0; j < m_degree + 1; ++j) {
             for (int k = 0; k < m_degree + 1; ++k) {
-                int const j_idx = (j + jmin) % m_nbasis - 1;
-                int const k_idx = (k + jmin) % m_nbasis - 1;
+                int const j_idx = (j + jmin.uid()) % m_nbasis - 1;
+                int const k_idx = (k + jmin.uid()) % m_nbasis - 1;
 
                 if (j_idx != -1 && j_idx != matrix_size && k_idx != -1 && k_idx != matrix_size) {
                     double a_jk = m_fem_matrix->get_element(j_idx, k_idx);
@@ -133,11 +132,10 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
     // Rk: phi_rhs no longer contains spline coefficients, but is the
     //     RHS of the matrix equation
     for (int i = 0; i < nb_eval_pts; ++i) {
-        int jmin;
-        discrete_space<BSplinesX>().eval_basis(values, jmin, m_eval_pts[i]);
+        auto jmin = discrete_space<BSplinesX>().eval_basis(values, m_eval_pts[i]);
         double const rho_val = m_spline_x_evaluator(m_eval_pts[i], rho_spline_coef);
         for (int j = 0; j < m_degree + 1; ++j) {
-            int const j_idx = (jmin + j) % m_nbasis - 1;
+            int const j_idx = (jmin.uid() + j) % m_nbasis - 1;
             if (j_idx != -1 && j_idx != rhs_size) {
                 phi_rhs(j_idx) += rho_val * values(j) * m_quad_coef[i];
             }

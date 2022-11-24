@@ -148,17 +148,17 @@ private:
     {
         static_assert(
                 std::is_same_v<EvalType, eval_type> || std::is_same_v<EvalType, eval_deriv_type>);
-        int jmin;
+        DiscreteElement<BSplinesType> jmin;
 
         if constexpr (std::is_same_v<EvalType, eval_type>) {
-            discrete_space<bsplines_type>().eval_basis(vals, jmin, coord_eval);
+            jmin = discrete_space<bsplines_type>().eval_basis(vals, coord_eval);
         } else if constexpr (std::is_same_v<EvalType, eval_deriv_type>) {
-            discrete_space<bsplines_type>().eval_deriv(vals, jmin, coord_eval);
+            jmin = discrete_space<bsplines_type>().eval_deriv(vals, coord_eval);
         }
 
         double y = 0.0;
         for (std::size_t i = 0; i < bsplines_type::degree() + 1; ++i) {
-            y += spline_coef(DiscreteElement<BSplinesType>(jmin + i)) * vals(i);
+            y += spline_coef(jmin + i) * vals(i);
         }
         return y;
     }

@@ -20,13 +20,12 @@ public:
     {
         std::array<double, BSplines::degree() + 1> values;
         DSpan1D const vals(values.data(), values.size());
-        int jmin;
 
-        discrete_space<BSplines>().eval_basis(vals, jmin, m_eval_pos);
+        DiscreteElement<BSplines> idx = discrete_space<BSplines>().eval_basis(vals, m_eval_pos);
 
         double y = 0.0;
         for (std::size_t i = 0; i < BSplines::degree() + 1; ++i) {
-            y += spline_coef(DiscreteElement<BSplines>(jmin + i)) * vals(i);
+            y += spline_coef(idx + i) * vals(i);
         }
         return y;
     }
