@@ -102,11 +102,12 @@ public:
 
         Impl& operator=(Impl&& x) = default;
 
-        void eval_basis(DSpan1D values, int& jmin, double x) const;
+        discrete_element_type eval_basis(DSpan1D values, double x) const;
 
-        void eval_deriv(DSpan1D derivs, int& jmin, double x) const;
+        discrete_element_type eval_deriv(DSpan1D derivs, double x) const;
 
-        void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, std::size_t n) const;
+        discrete_element_type eval_basis_and_n_derivs(DSpan2D derivs, double x, std::size_t n)
+                const;
 
         ChunkSpan<double, discrete_domain_type> integrals(
                 ChunkSpan<double, discrete_domain_type> int_vals) const;
@@ -222,10 +223,8 @@ NonUniformBSplines<Tag, D>::Impl<MemorySpace>::Impl(
 
 template <class Tag, std::size_t D>
 template <class MemorySpace>
-void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis(
-        DSpan1D const values,
-        int& jmin,
-        double const x) const
+DiscreteElement<NonUniformBSplines<Tag, D>> NonUniformBSplines<Tag, D>::Impl<
+        MemorySpace>::eval_basis(DSpan1D const values, double const x) const
 {
     std::array<double, degree()> left;
     std::array<double, degree()> right;
@@ -242,10 +241,7 @@ void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis(
     assert(get_knot(icell) <= x);
     assert(get_knot(icell + 1) >= x);
 
-    // 2. Compute index range of B-splines with support over cell 'icell'
-    jmin = icell;
-
-    // 3. Compute values of aforementioned B-splines
+    // 2. Compute values of B-splines with support over cell 'icell'
     double temp;
     values(0) = 1.0;
     for (std::size_t j = 0; j < degree(); ++j) {
@@ -259,14 +255,14 @@ void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis(
         }
         values(j + 1) = saved;
     }
+
+    return discrete_element_type(icell);
 }
 
 template <class Tag, std::size_t D>
 template <class MemorySpace>
-void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_deriv(
-        DSpan1D const derivs,
-        int& jmin,
-        double const x) const
+DiscreteElement<NonUniformBSplines<Tag, D>> NonUniformBSplines<Tag, D>::Impl<
+        MemorySpace>::eval_deriv(DSpan1D const derivs, double const x) const
 {
     std::array<double, degree()> left;
     std::array<double, degree()> right;
@@ -283,10 +279,7 @@ void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_deriv(
     assert(get_knot(icell) <= x);
     assert(get_knot(icell + 1) >= x);
 
-    // 2. Compute index range of B-splines with support over cell 'icell'
-    jmin = icell;
-
-    // 3. Compute values of aforementioned B-splines
+    // 2. Compute values of derivatives of B-splines with support over cell 'icell'
 
     /*
      * Compute nonzero basis functions and knot differences
@@ -320,15 +313,14 @@ void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_deriv(
         derivs(j) = temp - saved;
     }
     derivs(degree()) = saved;
+
+    return discrete_element_type(icell);
 }
 
 template <class Tag, std::size_t D>
 template <class MemorySpace>
-void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis_and_n_derivs(
-        DSpan2D const derivs,
-        int& jmin,
-        double const x,
-        std::size_t const n) const
+DiscreteElement<NonUniformBSplines<Tag, D>> NonUniformBSplines<Tag, D>::Impl<MemorySpace>::
+        eval_basis_and_n_derivs(DSpan2D const derivs, double const x, std::size_t const n) const
 {
     std::array<double, degree()> left;
     std::array<double, degree()> right;
@@ -356,10 +348,7 @@ void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis_and_n_derivs(
     assert(get_knot(icell) <= x);
     assert(get_knot(icell + 1) >= x);
 
-    // 2. Compute index range of B-splines with support over cell 'icell'
-    jmin = icell;
-
-    // 3. Compute nonzero basis functions and knot differences for splines
+    // 2. Compute nonzero basis functions and knot differences for splines
     //    up to degree (degree-1) which are needed to compute derivative
     //    Algorithm  A2.3 of NURBS book
     //
@@ -424,6 +413,8 @@ void NonUniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis_and_n_derivs(
         }
         r *= degree() - k;
     }
+
+    return discrete_element_type(icell);
 }
 
 template <class Tag, std::size_t D>

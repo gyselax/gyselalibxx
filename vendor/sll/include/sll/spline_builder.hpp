@@ -533,17 +533,12 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::allocate_matrix(
 template <class BSplines, BoundCond BcXmin, BoundCond BcXmax>
 void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
 {
-    int jmin;
-
     // Hermite boundary conditions at xmin, if any
     if constexpr (BcXmin == BoundCond::HERMITE) {
         double derivs_ptr[(bsplines_type::degree() / 2 + 1) * (bsplines_type::degree() + 1)];
         DSpan2D derivs(derivs_ptr, bsplines_type::degree() + 1, bsplines_type::degree() / 2 + 1);
-        discrete_space<BSplines>().eval_basis_and_n_derivs(
-                derivs,
-                jmin,
-                discrete_space<BSplines>().rmin(),
-                s_nbc_xmin);
+        discrete_space<BSplines>()
+                .eval_basis_and_n_derivs(derivs, discrete_space<BSplines>().rmin(), s_nbc_xmin);
 
         // In order to improve the condition number of the matrix, we normalize
         // all derivatives by multiplying the i-th derivative by dx^i
@@ -567,11 +562,13 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
             values(values_ptr.data());
     for (std::size_t i = 0; i < discrete_space<BSplines>().nbasis() - s_nbc_xmin - s_nbc_xmax;
          ++i) {
-        discrete_space<BSplines>()
-                .eval_basis(values, jmin, coordinate(DiscreteElement<interpolation_mesh_type>(i)));
+        auto jmin = discrete_space<BSplines>().eval_basis(
+                values,
+                coordinate(DiscreteElement<interpolation_mesh_type>(i)));
         for (std::size_t s = 0; s < bsplines_type::degree() + 1; ++s) {
-            int const j
-                    = modulo(int(jmin - m_offset + s), (int)discrete_space<BSplines>().nbasis());
+            int const j = modulo(
+                    int(jmin.uid() - m_offset + s),
+                    (int)discrete_space<BSplines>().nbasis());
             matrix->set_element(i + s_nbc_xmin, j, values(s));
         }
     }
@@ -586,11 +583,8 @@ void SplineBuilder<BSplines, BcXmin, BcXmax>::build_matrix_system()
                         extents<bsplines_type::degree() + 1, bsplines_type::degree() / 2 + 1>> const
                 derivs(derivs_ptr.data());
 
-        discrete_space<BSplines>().eval_basis_and_n_derivs(
-                derivs,
-                jmin,
-                discrete_space<BSplines>().rmax(),
-                s_nbc_xmax);
+        discrete_space<BSplines>()
+                .eval_basis_and_n_derivs(derivs, discrete_space<BSplines>().rmax(), s_nbc_xmax);
 
         // In order to improve the condition number of the matrix, we normalize
         // all derivatives by multiplying the i-th derivative by dx^i
