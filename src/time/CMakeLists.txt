@@ -4,6 +4,7 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
 
 add_library("time_${GEOMETRY_VARIANT}" STATIC
     predcorr.cpp
+    rk2_solver.cpp
 )
 
 target_compile_features("time_${GEOMETRY_VARIANT}"

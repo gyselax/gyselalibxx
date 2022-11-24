@@ -72,7 +72,11 @@ using IndexVx = DiscreteElement<IDimVx>;
 
 using IndexSp = DiscreteElement<IDimSp>;
 
+using IndexSpX = DiscreteElement<IDimSp, IDimX>;
+
 using IndexXVx = DiscreteElement<IDimX, IDimVx>;
+
+using IndexSpVx = DiscreteElement<IDimSp, IDimVx>;
 
 using IndexSpXVx = DiscreteElement<IDimSp, IDimX, IDimVx>;
 
@@ -88,6 +92,8 @@ using IVectSpXVx = DiscreteVector<IDimSp, IDimX, IDimVx>;
 
 using IVectSp = DiscreteVector<IDimSp>;
 
+using IVectSpVx = DiscreteVector<IDimSp, IDimVx>;
+
 
 
 using BSDomainX = DiscreteDomain<BSplinesX>;
@@ -101,6 +107,8 @@ using IDomainVx = DiscreteDomain<IDimVx>;
 using IDomainXVx = DiscreteDomain<IDimX, IDimVx>;
 
 using IDomainSp = DiscreteDomain<IDimSp>;
+
+using IDomainSpX = DiscreteDomain<IDimSp, IDimX>;
 
 using IDomainSpVx = DiscreteDomain<IDimSp, IDimVx>;
 
@@ -118,6 +126,9 @@ template <class ElementType>
 using FieldSp = Chunk<ElementType, IDomainSp>;
 
 template <class ElementType>
+using FieldSpX = Chunk<ElementType, IDomainSpX>;
+
+template <class ElementType>
 using FieldSpVx = Chunk<ElementType, IDomainSpVx>;
 
 template <class ElementType>
@@ -131,11 +142,15 @@ using DFieldVx = FieldVx<double>;
 
 using DFieldSp = FieldSp<double>;
 
+using DFieldSpX = FieldSpX<double>;
+
 using DFieldSpVx = FieldSpVx<double>;
 
 using DFieldSpXVx = FieldSpXVx<double>;
 
 
+template <class ElementType>
+using SpanSp = ChunkSpan<ElementType, IDomainSp>;
 
 template <class ElementType>
 using SpanX = ChunkSpan<ElementType, IDomainX>;
@@ -150,6 +165,8 @@ template <class ElementType>
 using SpanSpVx = ChunkSpan<ElementType, IDomainSpVx>;
 
 
+
+using DSpanSp = SpanSp<double>;
 
 using DSpanX = SpanX<double>;
 

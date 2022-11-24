@@ -54,6 +54,22 @@ bool PCpp_bool(PC_tree_t tree, std::string const& str, Args&&... args)
 }
 
 template <class... Args>
+std::string PCpp_string(PC_tree_t tree, std::string const& str, Args&&... args)
+{
+    char* c_str = nullptr;
+    if (PC_status_t s = PC_string(PC_get(tree, str.c_str(), std::forward<Args>(args)...), &c_str);
+        s != PC_OK) {
+        if (c_str != nullptr) {
+            free(c_str);
+        }
+        throw std::runtime_error(PC_errmsg());
+    }
+    std::string const str_out(c_str);
+    free(c_str);
+    return str_out;
+}
+
+template <class... Args>
 PC_tree_t PCpp_get(PC_tree_t tree, std::string const& str, Args&&... args)
 {
     return PC_get(tree, str.c_str(), std::forward<Args>(args)...);

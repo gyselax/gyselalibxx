@@ -4,11 +4,11 @@
 
 constexpr char const* const params_yaml = R"PARAMS_CFG(Mesh:
   x_min: 0.0
-  x_max: 12.56637061435917
-  x_size: 128
+  x_max: 50
+  x_size: 512
   vx_min: -6.0
   vx_max: +6.0
-  vx_size: 127
+  vx_size: 256
 
 SpeciesInfo:
 - charge: -1
@@ -27,22 +27,28 @@ SpeciesInfo:
   perturb_amplitude: 0.
   perturb_mode: 1
 
-SourceInfo:
-  px_source: 0.45
-  dx_source: 4
-  px_sink: 0.45
-  dx_sink: 4
+Krook:
+  - name: 'constant' # 'constant' or adaptive': constant values or not for nu coeff.
+    type: 'sink'
+    solver: 'rk2' # possible values : 'rk2'
+    extent: 0.20
+    stiffness: 1
+    amplitude: 0.1
+    density: 1e-9
+    temperature: 0.5
 
-KineticSourceInfo:
-  source_amplitude: 0.01
-  density_amplitude: 1.
-  energy_amplitude: 1.
-  temperature_source: 1.
+KineticSource:
+  extent: 0.45
+  stiffness: 4
+  amplitude: 0.1
+  density: 1.
+  energy: 1.
+  temperature: 1.
 
 Algorithm:
-  deltat: 0.125
-  nbiter: 360
+  deltat: 0.1
+  nbiter: 100
 
 Output:
-  time_diag: 0.25
+  time_diag: 0.3
 )PARAMS_CFG";
