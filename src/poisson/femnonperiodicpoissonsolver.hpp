@@ -15,6 +15,23 @@ using UBSplinesX = UniformBSplines<RDimX, BSDegreeX>;
 
 class FemNonPeriodicPoissonSolver : public IPoissonSolver
 {
+private:
+    struct QDimX
+    {
+    };
+
+    using QMeshX = NonUniformPointSampling<QDimX>;
+
+    static inline Coordinate<QDimX> quad_point_from_coord(Coordinate<RDimX> const& coord)
+    {
+        return Coordinate<QDimX>(get<RDimX>(coord));
+    }
+    static inline Coordinate<RDimX> coord_from_quad_point(Coordinate<QDimX> const& coord)
+    {
+        return Coordinate<RDimX>(get<QDimX>(coord));
+    }
+
+private:
     SplineXBuilder const& m_spline_x_builder;
 
     SplineEvaluator<BSplinesX> m_spline_x_evaluator;
@@ -35,10 +52,7 @@ private:
 
     // Gauss points used for integration computation
     static int constexpr m_npts_gauss = m_degree + 1;
-    std::vector<double> m_eval_pts_ptr;
-    std::vector<double> m_quad_coef_ptr;
-    DSpan1D m_eval_pts;
-    DSpan1D m_quad_coef;
+    Chunk<double, DiscreteDomain<QMeshX>> m_quad_coef;
 
     std::unique_ptr<Matrix> m_fem_matrix;
 

@@ -8,6 +8,8 @@
 
 #include <gtest/gtest.h>
 
+using namespace ddc;
+
 class fn
 {
 public:
@@ -24,6 +26,10 @@ public:
 
 private:
     std::size_t m_n;
+};
+
+struct DimX
+{
 };
 
 static std::map<std::size_t, std::string> type_names;
@@ -43,8 +49,8 @@ int test_integrate()
 
     bool test_passed = true;
 
-    for (std::size_t order = 1; order <= GaussLegendre::max_order(); ++order) {
-        GaussLegendre const gl(order);
+    for (std::size_t order = 1; order <= GaussLegendre<DimX>::max_order(); ++order) {
+        GaussLegendre<DimX> const gl(order);
 
         std::cout << "integration at order " << order;
         std::cout << std::endl;
@@ -104,12 +110,15 @@ int test_compute_points_and_weights()
 
     bool test_passed = true;
 
-    for (std::size_t order = 1; order <= GaussLegendre::max_order(); ++order) {
-        std::vector<double> gl_points_ptr(order);
-        DSpan1D gl_points(gl_points_ptr.data(), order);
-        std::vector<double> gl_weights_ptr(order);
-        DSpan1D gl_weights(gl_weights_ptr.data(), order);
-        GaussLegendre const gl(order);
+    struct IDimX
+    {
+    };
+
+    for (std::size_t order = 1; order <= GaussLegendre<DimX>::max_order(); ++order) {
+        DiscreteDomain<IDimX> domain(DiscreteElement<IDimX> {0}, DiscreteVector<IDimX> {order});
+        Chunk<Coordinate<DimX>, DiscreteDomain<IDimX>> gl_points(domain);
+        Chunk<double, DiscreteDomain<IDimX>> gl_weights(domain);
+        GaussLegendre<DimX> const gl(order);
 
         std::cout << "integration at order " << order;
         std::cout << std::endl;
@@ -118,15 +127,15 @@ int test_compute_points_and_weights()
             fn const f(p);
             for (std::size_t i = 0; i < domains.size(); ++i) {
                 gl.compute_points_and_weights(
-                        gl_points,
-                        gl_weights,
-                        domains[i].first,
-                        domains[i].second);
+                        gl_points.span_view(),
+                        gl_weights.span_view(),
+                        Coordinate<DimX>(domains[i].first),
+                        Coordinate<DimX>(domains[i].second));
                 double const sol_exact = 1.0 / (p + 1)
                                          * (std::pow(domains[i].second, p + 1)
                                             - std::pow(domains[i].first, p + 1));
                 double sol_num = 0.0;
-                for (std::size_t xi = 0; xi < order; ++xi) {
+                for (auto xi : domain) {
                     sol_num += gl_weights(xi) * f(gl_points(xi));
                 }
                 double const err = std::fabs((sol_num - sol_exact) / sol_exact);

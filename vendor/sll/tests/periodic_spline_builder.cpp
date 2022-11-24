@@ -21,6 +21,8 @@
 #include "polynomial_evaluator.hpp"
 #include "spline_error_bounds.hpp"
 
+using namespace ddc;
+
 struct DimX
 {
     static constexpr bool PERIODIC = true;
@@ -90,7 +92,7 @@ TEST(PeriodicSplineBuilderTest, Identity)
     SplineEvaluator<BSplinesX>
             spline_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);
 
-    FieldX coords_eval(interpolation_domain);
+    Chunk<CoordX, DiscreteDomain<IDimX>> coords_eval(interpolation_domain);
     for (IndexX const ix : interpolation_domain) {
         coords_eval(ix) = coordinate(ix);
     }

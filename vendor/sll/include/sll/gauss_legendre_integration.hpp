@@ -7,6 +7,8 @@
 #include <utility>
 #include <vector>
 
+#include <ddc/ddc.hpp>
+
 #include "sll/view.hpp"
 
 struct GaussLegendreCoefficients
@@ -20,6 +22,7 @@ struct GaussLegendreCoefficients
     static std::array<long double, nb_coefficients> pos;
 };
 
+template <class Dim>
 class GaussLegendre
 {
     using glc = GaussLegendreCoefficients;
@@ -39,7 +42,7 @@ public:
         m_wx.resize(n);
         for (std::size_t i = 0; i < n; ++i) {
             m_wx[i].first = static_cast<double>(glc::weight[offset + i]);
-            m_wx[i].second = static_cast<double>(glc::pos[offset + i]);
+            m_wx[i].second = static_cast<ddc::Coordinate<Dim>>(glc::pos[offset + i]);
         }
     }
 
@@ -66,61 +69,71 @@ public:
         double const l = 0.5 * (x1 - x0);
         double const c = 0.5 * (x0 + x1);
         double integral = 0;
-        for (std::pair<double, double> const& wx : m_wx) {
+        for (std::pair<double, ddc::Coordinate<Dim>> const& wx : m_wx) {
             integral += wx.first * f(l * wx.second + c);
         }
         return l * integral;
     }
 
-    void compute_points(Span1D<double> points, double x0, double x1) const
+    template <class Domain>
+    void compute_points(ddc::ChunkSpan<ddc::Coordinate<Dim>, Domain> points, double x0, double x1)
+            const
     {
         assert(x0 <= x1);
-        assert(points.extent(0) == m_wx.size());
+        assert(points.size() == m_wx.size());
         // map the interval [-1,1] into the interval [a,b].
         double const l = 0.5 * (x1 - x0);
         double const c = 0.5 * (x0 + x1);
-        for (std::size_t i = 0; i < m_wx.size(); ++i) {
-            points(i) = l * m_wx[i].second + c;
+        int const dom_start = points.domain().front().uid();
+        for (auto i : points.domain()) {
+            points(i) = ddc::Coordinate<Dim>(l * m_wx[i.uid() - dom_start].second + c);
         }
     }
 
+    template <class Domain>
     void compute_points_and_weights(
-            Span1D<double> points,
-            Span1D<double> weights,
-            double x0,
-            double x1) const
+            ddc::ChunkSpan<ddc::Coordinate<Dim>, Domain> points,
+            ddc::ChunkSpan<double, Domain> weights,
+            ddc::Coordinate<Dim> const& x0,
+            ddc::Coordinate<Dim> const& x1) const
     {
         assert(x0 <= x1);
-        assert(points.extent(0) == m_wx.size());
+        assert(points.size() == m_wx.size());
         // map the interval [-1,1] into the interval [a,b].
-        double const l = 0.5 * (x1 - x0);
-        double const c = 0.5 * (x0 + x1);
-        for (std::size_t i = 0; i < m_wx.size(); ++i) {
-            weights(i) = l * m_wx[i].first;
-            points(i) = l * m_wx[i].second + c;
+        double const l = 0.5 * (get<Dim>(x1) - get<Dim>(x0));
+        ddc::Coordinate<Dim> const c = 0.5 * (x0 + x1);
+        int const dom_start = points.domain().front().uid();
+        for (auto i : points.domain()) {
+            weights(i) = l * m_wx[i.uid() - dom_start].first;
+            points(i) = l * m_wx[i.uid() - dom_start].second + c;
         }
     }
 
+    template <class Domain1, class Domain2>
     void compute_points_and_weights_on_mesh(
-            Span1D<double> points,
-            Span1D<double> weights,
-            Span1D<double> mesh_edges) const
+            ddc::ChunkSpan<ddc::Coordinate<Dim>, Domain1> points,
+            ddc::ChunkSpan<double, Domain1> weights,
+            ddc::ChunkSpan<const ddc::Coordinate<Dim>, Domain2> mesh_edges) const
     {
         int const nbcells = mesh_edges.size() - 1;
         int const npts_gauss = m_wx.size();
-        assert(points.extent(0) == m_wx.size() * nbcells);
-        assert(weights.extent(0) == m_wx.size() * nbcells);
+        assert(points.size() == m_wx.size() * nbcells);
+        assert(weights.size() == m_wx.size() * nbcells);
 
-        for (int icell = 0; icell < nbcells; icell++) {
-            double const x0 = mesh_edges(icell);
-            double const x1 = mesh_edges(icell + 1);
-            DSpan1D gl_points(points.data() + icell * npts_gauss, npts_gauss);
-            DSpan1D gl_weights(weights.data() + icell * npts_gauss, npts_gauss);
+        ddc::for_each(
+                mesh_edges.domain().remove_last(typename Domain2::mlength_type(1)),
+                [&](auto icell) {
+                    ddc::Coordinate<Dim> const x0 = mesh_edges(icell);
+                    ddc::Coordinate<Dim> const x1 = mesh_edges(icell + 1);
 
-            compute_points_and_weights(gl_points, gl_weights, x0, x1);
-        }
+                    Domain1 local_domain(
+                            typename Domain1::discrete_element_type(icell.uid() * npts_gauss),
+                            typename Domain1::mlength_type(npts_gauss));
+
+                    compute_points_and_weights(points[local_domain], weights[local_domain], x0, x1);
+                });
     }
 
 private:
-    std::vector<std::pair<double, double>> m_wx;
+    std::vector<std::pair<double, ddc::Coordinate<Dim>>> m_wx;
 };

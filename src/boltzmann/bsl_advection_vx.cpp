@@ -36,7 +36,7 @@ DSpanSpXVx BslAdvectionVx::operator()(
     IDomainSp const& sp_dom = get_domain<IDimSp>(allfdistribu);
 
     // pre-allocate some memory to prevent allocation later in loop
-    DFieldVx feet_coords(vx_dom);
+    FieldVx<CoordVx> feet_coords(vx_dom);
 
     InterpolatorVxProxy const interpolator_vx = m_interpolator_vx.preallocate();
 
