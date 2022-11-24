@@ -32,7 +32,7 @@ public:
 
     ~SplineInterpolatorVx() override = default;
 
-    DSpanVx operator()(DSpanVx inout_data, DViewVx coordinates) const override;
+    DSpanVx operator()(DSpanVx inout_data, ViewVx<CoordVx> coordinates) const override;
 };
 
 class PreallocatableSplineInterpolatorVx : public IPreallocatableInterpolatorVx
@@ -50,5 +50,5 @@ public:
 
     InterpolatorVxProxy preallocate() const override;
 
-    DSpanVx operator()(DSpanVx inout_data, DViewVx coordinates) const override;
+    DSpanVx operator()(DSpanVx inout_data, ViewVx<CoordVx> coordinates) const override;
 };

@@ -22,10 +22,19 @@ public:
     struct InternalTagGenerator;
 
     /// An internal tag necessary to allocate an internal discrete_space function.
-    /// It must remain internal, for example it shall not be exposed when returning coordinates. Instead use `Tag`
-    using internal_tag = InternalTagGenerator<Tag>;
+    /// It must remain internal, for example it shall not be exposed when returning ddc::coordinates. Instead use `Tag`
+    using KnotDim = InternalTagGenerator<Tag>;
 
-    using mesh_type = UniformPointSampling<internal_tag>;
+    using mesh_type = ddc::UniformPointSampling<KnotDim>;
+
+    static inline ddc::Coordinate<KnotDim> knot_from_coord(ddc::Coordinate<Tag> const& coord)
+    {
+        return ddc::Coordinate<KnotDim>(ddc::get<Tag>(coord));
+    }
+    static inline ddc::Coordinate<Tag> coord_from_knot(ddc::Coordinate<KnotDim> const& coord)
+    {
+        return ddc::Coordinate<Tag>(ddc::get<KnotDim>(coord));
+    }
 
 public:
     using tag_type = Tag;
@@ -35,11 +44,11 @@ public:
 
     using discrete_dimension_type = UniformBSplines;
 
-    using discrete_element_type = DiscreteElement<UniformBSplines>;
+    using discrete_element_type = ddc::DiscreteElement<UniformBSplines>;
 
-    using discrete_domain_type = DiscreteDomain<UniformBSplines>;
+    using discrete_domain_type = ddc::DiscreteDomain<UniformBSplines>;
 
-    using discrete_vector_type = DiscreteVector<UniformBSplines>;
+    using discrete_vector_type = ddc::DiscreteVector<UniformBSplines>;
 
 public:
     static constexpr std::size_t rank()
@@ -75,7 +84,7 @@ public:
 
     private:
         // In the periodic case, it contains twice the periodic point!!!
-        DiscreteDomain<mesh_type> m_domain;
+        ddc::DiscreteDomain<mesh_type> m_domain;
 
     public:
         using discrete_dimension_type = UniformBSplines;
@@ -83,28 +92,27 @@ public:
         Impl() = default;
 
         template <class OriginMemorySpace>
-        explicit Impl(Impl<OriginMemorySpace> const& impl)
+        explicit Impl(Impl<OriginMemorySpace> const& impl) : m_domain(impl.m_domain)
         {
-            m_domain = impl.m_domain;
         }
 
         /** Constructs a BSpline basis with n equidistant knots over \f$[a, b]\f$
-     * 
-     * @param rmin    the real coordinate of the first knot
-     * @param rmax    the real coordinate of the last knot
-     * @param n_knots the number of knots
-     */
-        explicit Impl(Coordinate<Tag> rmin, Coordinate<Tag> rmax, std::size_t ncells)
+         * 
+         * @param rmin    the real ddc::coordinate of the first knot
+         * @param rmax    the real ddc::coordinate of the last knot
+         * @param n_knots the number of knots
+         */
+        explicit Impl(ddc::Coordinate<Tag> rmin, ddc::Coordinate<Tag> rmax, std::size_t ncells)
             : m_domain(
-                    DiscreteElement<mesh_type>(0),
-                    DiscreteVector<mesh_type>(
+                    ddc::DiscreteElement<mesh_type>(0),
+                    ddc::DiscreteVector<mesh_type>(
                             ncells + 1)) // Create a mesh including the eventual periodic point
         {
             assert(ncells > 0);
-            init_discrete_space<mesh_type>(
-                    Coordinate<internal_tag>(rmin.value()),
-                    Coordinate<internal_tag>(rmax.value()),
-                    DiscreteVector<mesh_type>(ncells + 1));
+            ddc::init_discrete_space<mesh_type>(
+                    knot_from_coord(rmin),
+                    knot_from_coord(rmax),
+                    ddc::DiscreteVector<mesh_type>(ncells + 1));
         }
 
         Impl(Impl const& x) = default;
@@ -117,32 +125,34 @@ public:
 
         Impl& operator=(Impl&& x) = default;
 
-        discrete_element_type eval_basis(DSpan1D values, double x) const
+        discrete_element_type eval_basis(DSpan1D values, ddc::Coordinate<Tag> const& x) const
         {
             return eval_basis(values, x, degree());
         }
 
-        discrete_element_type eval_deriv(DSpan1D derivs, double x) const;
+        discrete_element_type eval_deriv(DSpan1D derivs, ddc::Coordinate<Tag> const& x) const;
 
-        discrete_element_type eval_basis_and_n_derivs(DSpan2D derivs, double x, std::size_t n)
-                const;
+        discrete_element_type eval_basis_and_n_derivs(
+                DSpan2D derivs,
+                ddc::Coordinate<Tag> const& x,
+                std::size_t n) const;
 
-        ChunkSpan<double, discrete_domain_type> integrals(
-                ChunkSpan<double, discrete_domain_type> int_vals) const;
+        ddc::ChunkSpan<double, discrete_domain_type> integrals(
+                ddc::ChunkSpan<double, discrete_domain_type> int_vals) const;
 
-        double get_knot(int idx) const noexcept
+        ddc::Coordinate<Tag> get_knot(int idx) const noexcept
         {
-            return rmin() + idx * step<mesh_type>();
+            return rmin() + idx * ddc::step<mesh_type>();
         }
 
-        double rmin() const noexcept
+        ddc::Coordinate<Tag> rmin() const noexcept
         {
-            return coordinate(m_domain.front());
+            return coord_from_knot(ddc::coordinate(m_domain.front()));
         }
 
-        double rmax() const noexcept
+        ddc::Coordinate<Tag> rmax() const noexcept
         {
-            return coordinate(m_domain.back());
+            return coord_from_knot(ddc::coordinate(m_domain.back()));
         }
 
         double length() const noexcept
@@ -174,18 +184,21 @@ public:
     private:
         double inv_step() const noexcept
         {
-            return 1.0 / step<mesh_type>();
+            return 1.0 / ddc::step<mesh_type>();
         }
 
-        discrete_element_type eval_basis(DSpan1D values, double x, std::size_t degree) const;
-        void get_icell_and_offset(int& icell, double& offset, double x) const;
+        discrete_element_type eval_basis(
+                DSpan1D values,
+                ddc::Coordinate<Tag> const& x,
+                std::size_t degree) const;
+        void get_icell_and_offset(int& icell, double& offset, ddc::Coordinate<Tag> const& x) const;
     };
 };
 
 template <class Tag, std::size_t D>
 template <class MemorySpace>
-ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<
-        MemorySpace>::eval_basis(DSpan1D const values, double const x, std::size_t const deg) const
+ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<MemorySpace>::
+        eval_basis(DSpan1D const values, ddc::Coordinate<Tag> const& x, std::size_t const deg) const
 {
     assert(values.extent(0) == deg + 1);
 
@@ -216,7 +229,7 @@ ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<
 template <class Tag, std::size_t D>
 template <class MemorySpace>
 ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<
-        MemorySpace>::eval_deriv(DSpan1D const derivs, double const x) const
+        MemorySpace>::eval_deriv(DSpan1D const derivs, ddc::Coordinate<Tag> const& x) const
 {
     assert(derivs.extent(0) == degree() + 1);
 
@@ -229,7 +242,7 @@ ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<
     // 3. Compute derivatives of aforementioned B-splines
     //    Derivatives are normalized, hence they should be divided by dx
     double xx, temp, saved;
-    derivs(0) = 1.0 / step<mesh_type>();
+    derivs(0) = 1.0 / ddc::step<mesh_type>();
     for (std::size_t j = 1; j < degree(); ++j) {
         xx = -offset;
         saved = 0.0;
@@ -259,7 +272,10 @@ ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<
 template <class Tag, std::size_t D>
 template <class MemorySpace>
 ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<MemorySpace>::
-        eval_basis_and_n_derivs(DSpan2D const derivs, double const x, std::size_t const n) const
+        eval_basis_and_n_derivs(
+                DSpan2D const derivs,
+                ddc::Coordinate<Tag> const& x,
+                std::size_t const n) const
 {
     std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
     std::experimental::mdspan<double, std::experimental::extents<degree() + 1, degree() + 1>> const
@@ -349,7 +365,7 @@ template <class MemorySpace>
 void UniformBSplines<Tag, D>::Impl<MemorySpace>::get_icell_and_offset(
         int& icell,
         double& offset,
-        double const x) const
+        ddc::Coordinate<Tag> const& x) const
 {
     assert(x >= rmin());
     assert(x <= rmax());
@@ -377,9 +393,9 @@ void UniformBSplines<Tag, D>::Impl<MemorySpace>::get_icell_and_offset(
 
 template <class Tag, std::size_t D>
 template <class MemorySpace>
-ChunkSpan<double, DiscreteDomain<UniformBSplines<Tag, D>>> UniformBSplines<Tag, D>::Impl<
-        MemorySpace>::integrals(ChunkSpan<double, DiscreteDomain<UniformBSplines<Tag, D>>> int_vals)
-        const
+ddc::ChunkSpan<double, ddc::DiscreteDomain<UniformBSplines<Tag, D>>> UniformBSplines<Tag, D>::Impl<
+        MemorySpace>::integrals(ddc::ChunkSpan<double, ddc::DiscreteDomain<UniformBSplines<Tag, D>>>
+                                        int_vals) const
 {
     if constexpr (is_periodic()) {
         assert(int_vals.size() == nbasis() || int_vals.size() == size());
@@ -392,7 +408,7 @@ ChunkSpan<double, DiscreteDomain<UniformBSplines<Tag, D>>> UniformBSplines<Tag, 
         discrete_domain_type const dom_bsplines(
                 full_dom_splines.take_first(discrete_vector_type {nbasis()}));
         for (auto ix : dom_bsplines) {
-            int_vals(ix) = step<mesh_type>();
+            int_vals(ix) = ddc::step<mesh_type>();
         }
         if (int_vals.size() == size()) {
             discrete_domain_type const dom_bsplines_repeated(
@@ -406,7 +422,7 @@ ChunkSpan<double, DiscreteDomain<UniformBSplines<Tag, D>>> UniformBSplines<Tag, 
                 = full_dom_splines
                           .remove(discrete_vector_type(degree()), discrete_vector_type(degree()));
         for (auto ix : dom_bspline_entirely_in_domain) {
-            int_vals(ix) = step<mesh_type>();
+            int_vals(ix) = ddc::step<mesh_type>();
         }
 
         int jmin = 0;
@@ -421,7 +437,7 @@ ChunkSpan<double, DiscreteDomain<UniformBSplines<Tag, D>>> UniformBSplines<Tag, 
         for (std::size_t i = 0; i < degree(); ++i) {
             double const c_eval = sum(edge_vals, 0, degree() - i);
 
-            double const edge_value = step<mesh_type>() * (d_eval - c_eval);
+            double const edge_value = ddc::step<mesh_type>() * (d_eval - c_eval);
 
             int_vals(discrete_element_type(i)) = edge_value;
             int_vals(discrete_element_type(nbasis() - 1 - i)) = edge_value;

@@ -11,6 +11,8 @@
 
 #include "test_utils.hpp"
 
+using namespace ddc;
+
 template <class T>
 struct BSplinesFixture;
 
@@ -53,7 +55,7 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_Uniform)
     double const dx = (xmax - xmin) / (n_test_points - 1);
 
     for (std::size_t i(0); i < n_test_points; ++i) {
-        double const test_point = xmin + dx * i;
+        CoordX test_point(xmin + dx * i);
         discrete_space<UniformBSplines<DimX, degree>>().eval_basis(values, test_point);
         double sum = 0.0;
         for (std::size_t j(0); j < degree + 1; ++j) {
@@ -85,7 +87,7 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_NonUniform)
     dx = (xmax - xmin) / (n_test_points - 1);
 
     for (std::size_t i(0); i < n_test_points; ++i) {
-        double test_point = xmin + dx * i;
+        CoordX test_point(xmin + dx * i);
         discrete_space<NonUniformBSplines<DimX, degree>>().eval_basis(values, test_point);
         double sum = 0.0;
         for (std::size_t j(0); j < degree + 1; ++j) {
