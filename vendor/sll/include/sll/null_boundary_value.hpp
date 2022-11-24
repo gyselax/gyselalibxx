@@ -10,7 +10,9 @@ public:
 
     ~NullBoundaryValue() override = default;
 
-    double operator()(double, ChunkSpan<const double, DiscreteDomain<BSplines>>) const final
+    double operator()(
+            ddc::Coordinate<typename BSplines::tag_type>,
+            ddc::ChunkSpan<const double, ddc::DiscreteDomain<BSplines>>) const final
     {
         return 0.0;
     }
@@ -28,9 +30,9 @@ public:
     ~NullBoundaryValue2D() override = default;
 
     double operator()(
-            double x,
-            double y,
-            ChunkSpan<double const, DiscreteDomain<BSplines1, BSplines2>>) const final
+            ddc::Coordinate<typename BSplines1::tag_type> x,
+            ddc::Coordinate<typename BSplines2::tag_type> y,
+            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplines1, BSplines2>>) const final
     {
         return 0.0;
     }

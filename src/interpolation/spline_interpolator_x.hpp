@@ -21,7 +21,7 @@ public:
 
     ~SplineInterpolatorX() override = default;
 
-    DSpanX operator()(DSpanX inout_data, DViewX coordinates) const override;
+    DSpanX operator()(DSpanX inout_data, ViewX<CoordX> coordinates) const override;
 };
 
 class PreallocatableSplineInterpolatorX : public IPreallocatableInterpolatorX
@@ -39,5 +39,5 @@ public:
 
     InterpolatorXProxy preallocate() const override;
 
-    DSpanX operator()(DSpanX inout_data, DViewX coordinates) const override;
+    DSpanX operator()(DSpanX inout_data, ViewX<CoordX> coordinates) const override;
 };

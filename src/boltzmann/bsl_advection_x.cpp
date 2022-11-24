@@ -23,7 +23,7 @@ DSpanSpXVx BslAdvectionX::operator()(DSpanSpXVx const allfdistribu, double const
     IDomainSp const& sp_dom = get_domain<IDimSp>(allfdistribu);
 
     // pre-allocate some memory to prevent allocation later in loop
-    DFieldX feet_coords(x_dom);
+    FieldX<CoordX> feet_coords(x_dom);
     DFieldX contiguous_slice(x_dom);
     InterpolatorXProxy const interpolator = m_interpolator.preallocate();
 
@@ -41,7 +41,7 @@ DSpanSpXVx BslAdvectionX::operator()(DSpanSpXVx const allfdistribu, double const
             deepcopy(contiguous_slice, allfdistribu[isp][iv]);
 
             // interpolate the function at the feet using the provided interpolator
-            interpolator(contiguous_slice, feet_coords);
+            interpolator(contiguous_slice, feet_coords.span_cview());
 
             // copy back
             deepcopy(allfdistribu[isp][iv], contiguous_slice);

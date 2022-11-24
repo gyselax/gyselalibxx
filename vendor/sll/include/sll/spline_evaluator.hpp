@@ -24,6 +24,8 @@ private:
 public:
     using bsplines_type = BSplinesType;
 
+    using tag_type = typename BSplinesType::tag_type;
+
 private:
     SplineBoundaryValue<BSplinesType> const& m_left_bc;
 
@@ -51,8 +53,8 @@ public:
     SplineEvaluator& operator=(SplineEvaluator&& x) = default;
 
     double operator()(
-            double const coord_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
+            ddc::Coordinate<tag_type> const& coord_eval,
+            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         DSpan1D const vals(values.data(), values.size());
@@ -62,9 +64,9 @@ public:
 
     template <class Domain>
     void operator()(
-            ChunkSpan<double, Domain> const spline_eval,
-            ChunkSpan<double const, Domain> const coords_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
+            ddc::ChunkSpan<double, Domain> const spline_eval,
+            ddc::ChunkSpan<const ddc::Coordinate<tag_type>, Domain> const coords_eval,
+            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         DSpan1D const vals(values.data(), values.size());
@@ -75,8 +77,8 @@ public:
     }
 
     double deriv(
-            double const coord_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
+            ddc::Coordinate<tag_type> const& coord_eval,
+            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         DSpan1D const vals(values.data(), values.size());
@@ -86,9 +88,9 @@ public:
 
     template <class Domain>
     void deriv(
-            ChunkSpan<double, Domain> const spline_eval,
-            ChunkSpan<double const, Domain> const coords_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
+            ddc::ChunkSpan<double, Domain> const spline_eval,
+            ddc::ChunkSpan<const ddc::Coordinate<tag_type>, Domain> const coords_eval,
+            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
         DSpan1D const vals(values.data(), values.size());
@@ -98,41 +100,42 @@ public:
         }
     }
 
-    double integrate(ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef) const
+    double integrate(
+            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef) const
     {
-        Chunk<double, DiscreteDomain<BSplinesType>> values(spline_coef.domain());
+        Chunk<double, ddc::DiscreteDomain<BSplinesType>> values(spline_coef.domain());
 
-        discrete_space<bsplines_type>().integrals(values);
+        ddc::discrete_space<bsplines_type>().integrals(values);
 
-        return transform_reduce(
-                policies::parallel_host,
+        return ddc::transform_reduce(
+                ddc::policies::parallel_host,
                 spline_coef.domain(),
                 0.0,
-                reducer::sum<double>(),
-                [&](DiscreteElement<BSplinesType> const ibspl) {
+                ddc::reducer::sum<double>(),
+                [&](ddc::DiscreteElement<BSplinesType> const ibspl) {
                     return spline_coef(ibspl) * values(ibspl);
                 });
     }
 
 private:
     double eval(
-            double coord_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef,
+            ddc::Coordinate<tag_type> coord_eval,
+            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef,
             DSpan1D const vals) const
     {
         if constexpr (bsplines_type::is_periodic()) {
-            if (coord_eval < discrete_space<bsplines_type>().rmin()
-                || coord_eval > discrete_space<bsplines_type>().rmax()) {
+            if (coord_eval < ddc::discrete_space<bsplines_type>().rmin()
+                || coord_eval > ddc::discrete_space<bsplines_type>().rmax()) {
                 coord_eval -= std::floor(
-                                      (coord_eval - discrete_space<bsplines_type>().rmin())
-                                      / discrete_space<bsplines_type>().length())
-                              * discrete_space<bsplines_type>().length();
+                                      (coord_eval - ddc::discrete_space<bsplines_type>().rmin())
+                                      / ddc::discrete_space<bsplines_type>().length())
+                              * ddc::discrete_space<bsplines_type>().length();
             }
         } else {
-            if (coord_eval < discrete_space<bsplines_type>().rmin()) {
+            if (coord_eval < ddc::discrete_space<bsplines_type>().rmin()) {
                 return m_left_bc(coord_eval, spline_coef);
             }
-            if (coord_eval > discrete_space<bsplines_type>().rmax()) {
+            if (coord_eval > ddc::discrete_space<bsplines_type>().rmax()) {
                 return m_right_bc(coord_eval, spline_coef);
             }
         }
@@ -141,8 +144,8 @@ private:
 
     template <class EvalType>
     double eval_no_bc(
-            double const coord_eval,
-            ChunkSpan<double const, DiscreteDomain<BSplinesType>> const spline_coef,
+            ddc::Coordinate<tag_type> const& coord_eval,
+            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef,
             DSpan1D const vals,
             EvalType const) const
     {
@@ -151,9 +154,9 @@ private:
         DiscreteElement<BSplinesType> jmin;
 
         if constexpr (std::is_same_v<EvalType, eval_type>) {
-            jmin = discrete_space<bsplines_type>().eval_basis(vals, coord_eval);
+            jmin = ddc::discrete_space<bsplines_type>().eval_basis(vals, coord_eval);
         } else if constexpr (std::is_same_v<EvalType, eval_deriv_type>) {
-            jmin = discrete_space<bsplines_type>().eval_deriv(vals, coord_eval);
+            jmin = ddc::discrete_space<bsplines_type>().eval_deriv(vals, coord_eval);
         }
 
         double y = 0.0;

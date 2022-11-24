@@ -23,7 +23,7 @@ static SplineEvaluator<NUBSplinesX> jit_build_nubsplinesx(
         int ncells = discrete_space<UBSplinesX>().ncells();
         std::vector<CoordX> knots(ncells + 1);
 
-        for (size_t i(0); i < ncells + 1; ++i) {
+        for (int i(0); i < ncells + 1; ++i) {
             knots[i] = CoordX(discrete_space<UBSplinesX>().get_knot(i));
         }
         init_discrete_space<NUBSplinesX>(knots);
@@ -47,22 +47,28 @@ FemNonPeriodicPoissonSolver::FemNonPeriodicPoissonSolver(
     , m_spline_x_evaluator(spline_x_evaluator)
     , m_spline_x_nu_evaluator(jit_build_nubsplinesx(spline_x_evaluator))
     , compute_rho(spline_vx_builder, spline_vx_evaluator)
-    , m_eval_pts_ptr(m_npts_gauss * m_ncells)
-    , m_quad_coef_ptr(m_npts_gauss * m_ncells)
-    , m_eval_pts(m_eval_pts_ptr.data(), m_npts_gauss * m_ncells)
-    , m_quad_coef(m_quad_coef_ptr.data(), m_npts_gauss * m_ncells)
+    , m_quad_coef(DiscreteDomain<QMeshX>(
+              DiscreteElement<QMeshX>(0),
+              DiscreteVector<QMeshX>((m_degree + 1) * m_ncells)))
 {
     static_assert(!SplineXBuilder::bsplines_type::is_periodic());
-    std::vector<double> knots_ptr(m_ncells + 1);
-    DSpan1D knots(knots_ptr.data(), m_ncells + 1);
+    typename BSplinesX::discrete_domain_type
+            domain(typename BSplinesX::discrete_element_type {0},
+                   typename BSplinesX::discrete_vector_type {m_ncells + 1});
+    Chunk<Coordinate<QDimX>, typename BSplinesX::discrete_domain_type> knots(domain);
 
-    for (size_t i(0); i < m_ncells + 1; ++i) {
-        knots(i) = discrete_space<NUBSplinesX>().get_knot(i);
+    for (auto i : domain) {
+        knots(i) = quad_point_from_coord(discrete_space<NUBSplinesX>().get_knot(i.uid()));
     }
 
     // Calculate the integration coefficients
-    GaussLegendre const gl(m_npts_gauss);
-    gl.compute_points_and_weights_on_mesh(m_eval_pts, m_quad_coef, knots);
+    GaussLegendre<QDimX> const gl(m_npts_gauss);
+    std::vector<Coordinate<QDimX>> eval_pts_data(m_quad_coef.domain().size());
+    ChunkSpan<Coordinate<QDimX>, DiscreteDomain<QMeshX>>
+            eval_pts(eval_pts_data.data(), m_quad_coef.domain());
+    gl.compute_points_and_weights_on_mesh(eval_pts, m_quad_coef.span_view(), knots.span_cview());
+
+    init_discrete_space<QMeshX>(eval_pts_data);
 
     // Build the finite elements matrix
     build_matrix();
@@ -87,8 +93,9 @@ void FemNonPeriodicPoissonSolver::build_matrix()
     // Fill the banded part of the matrix
     double derivs_ptr[m_degree + 1];
     DSpan1D derivs(derivs_ptr, m_degree + 1);
-    for (int i = 0; i < m_eval_pts.size(); ++i) {
-        auto jmin = discrete_space<NUBSplinesX>().eval_deriv(derivs, m_eval_pts[i]);
+    for_each(m_quad_coef.domain(), [&](DiscreteElement<QMeshX> const ix) {
+        Coordinate<RDimX> coord = coord_from_quad_point(coordinate(ix));
+        auto jmin = discrete_space<NUBSplinesX>().eval_deriv(derivs, coord);
         for (int j = 0; j < m_degree + 1; ++j) {
             for (int k = 0; k < m_degree + 1; ++k) {
                 int const j_idx = (j + jmin.uid()) % m_nbasis - 1;
@@ -97,13 +104,13 @@ void FemNonPeriodicPoissonSolver::build_matrix()
                 if (j_idx != -1 && j_idx != matrix_size && k_idx != -1 && k_idx != matrix_size) {
                     double a_jk = m_fem_matrix->get_element(j_idx, k_idx);
                     // Update element
-                    a_jk += derivs(j) * derivs(k) * m_quad_coef[i];
+                    a_jk += derivs(j) * derivs(k) * m_quad_coef(ix);
 
                     m_fem_matrix->set_element(j_idx, k_idx, a_jk);
                 }
             }
         }
-    }
+    });
 
     // Factorize the matrix ready to call solve
     m_fem_matrix->factorize();
@@ -117,7 +124,6 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
         ChunkSpan<double, NUBSDomainX> phi_spline_coef,
         ChunkSpan<double, BSDomainX> rho_spline_coef) const
 {
-    int const nb_eval_pts = m_eval_pts.size();
     double values_ptr[m_degree + 1];
     DSpan1D values(values_ptr, m_degree + 1);
 
@@ -131,16 +137,17 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
     // Fill phi_rhs(i) with \int rho(x) b_i(x) dx
     // Rk: phi_rhs no longer contains spline coefficients, but is the
     //     RHS of the matrix equation
-    for (int i = 0; i < nb_eval_pts; ++i) {
-        auto jmin = discrete_space<BSplinesX>().eval_basis(values, m_eval_pts[i]);
-        double const rho_val = m_spline_x_evaluator(m_eval_pts[i], rho_spline_coef);
+    for_each(m_quad_coef.domain(), [&](DiscreteElement<QMeshX> const ix) {
+        Coordinate<RDimX> coord = coord_from_quad_point(coordinate(ix));
+        auto jmin = discrete_space<BSplinesX>().eval_basis(values, coord);
+        double const rho_val = m_spline_x_evaluator(coord, rho_spline_coef);
         for (int j = 0; j < m_degree + 1; ++j) {
             int const j_idx = (jmin.uid() + j) % m_nbasis - 1;
             if (j_idx != -1 && j_idx != rhs_size) {
-                phi_rhs(j_idx) += rho_val * values(j) * m_quad_coef[i];
+                phi_rhs(j_idx) += rho_val * values(j) * m_quad_coef(ix);
             }
         }
-    }
+    });
 
     // Solve the matrix equation to find the spline coefficients of phi
     m_fem_matrix->solve_inplace(phi_rhs);
