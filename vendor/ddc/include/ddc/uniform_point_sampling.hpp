@@ -174,7 +174,6 @@ public:
             discrete_vector_type n_ghosts_before,
             discrete_vector_type n_ghosts_after)
     {
-        using continuous_element_type = continuous_element_type;
         using discrete_domain_type = discrete_domain_type;
         assert(a < b);
         assert(n > 1);
