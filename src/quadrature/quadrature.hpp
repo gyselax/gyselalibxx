@@ -20,7 +20,7 @@ public:
 
     ~Quadrature() = default;
 
-    double operator()(ChunkSpan<double, DiscreteDomain<IDim>> const values) const
+    double operator()(ChunkSpan<const double, DiscreteDomain<IDim>> const values) const
     {
         assert(get_domain<IDim>(values) == get_domain<IDim>(m_coefficients));
         return transform_reduce(

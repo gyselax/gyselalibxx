@@ -77,11 +77,8 @@ TEST(KineticSource, Ordering)
 
     DFieldSpXVx allfdistribu(mesh);
 
-    // Initialization of the distribution function --> fill values
-    double fdistribu_val = 0.;
-    for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-        allfdistribu(ispxvx) = fdistribu_val;
-    });
+    // Initialization of the distribution function
+    ddc::fill(allfdistribu, 0.);
 
     // Maxwellian source test
     double const px_source = 0.2;
@@ -94,7 +91,7 @@ TEST(KineticSource, Ordering)
     // --> Algorithm info
     double const deltat = 1.;
 
-    Kinetic_source const kinetic_source(
+    KineticSource const kinetic_source(
             gridx,
             gridvx,
             px_source,
