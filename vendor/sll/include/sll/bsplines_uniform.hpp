@@ -117,14 +117,15 @@ public:
 
         Impl& operator=(Impl&& x) = default;
 
-        void eval_basis(DSpan1D values, int& jmin, double x) const
+        discrete_element_type eval_basis(DSpan1D values, double x) const
         {
-            return eval_basis(values, jmin, x, degree());
+            return eval_basis(values, x, degree());
         }
 
-        void eval_deriv(DSpan1D derivs, int& jmin, double x) const;
+        discrete_element_type eval_deriv(DSpan1D derivs, double x) const;
 
-        void eval_basis_and_n_derivs(DSpan2D derivs, int& jmin, double x, std::size_t n) const;
+        discrete_element_type eval_basis_and_n_derivs(DSpan2D derivs, double x, std::size_t n)
+                const;
 
         ChunkSpan<double, discrete_domain_type> integrals(
                 ChunkSpan<double, discrete_domain_type> int_vals) const;
@@ -176,22 +177,20 @@ public:
             return 1.0 / step<mesh_type>();
         }
 
-        void eval_basis(DSpan1D values, int& jmin, double x, std::size_t degree) const;
+        discrete_element_type eval_basis(DSpan1D values, double x, std::size_t degree) const;
         void get_icell_and_offset(int& icell, double& offset, double x) const;
     };
 };
 
 template <class Tag, std::size_t D>
 template <class MemorySpace>
-void UniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis(
-        DSpan1D const values,
-        int& jmin,
-        double const x,
-        std::size_t const deg) const
+ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<
+        MemorySpace>::eval_basis(DSpan1D const values, double const x, std::size_t const deg) const
 {
     assert(values.extent(0) == deg + 1);
 
     double offset;
+    int jmin;
     // 1. Compute cell index 'icell' and x_offset
     // 2. Compute index range of B-splines with support over cell 'icell'
     get_icell_and_offset(jmin, offset, x);
@@ -210,18 +209,19 @@ void UniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis(
         }
         values(j) = saved;
     }
+
+    return discrete_element_type(jmin);
 }
 
 template <class Tag, std::size_t D>
 template <class MemorySpace>
-void UniformBSplines<Tag, D>::Impl<MemorySpace>::eval_deriv(
-        DSpan1D const derivs,
-        int& jmin,
-        double const x) const
+ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<
+        MemorySpace>::eval_deriv(DSpan1D const derivs, double const x) const
 {
     assert(derivs.extent(0) == degree() + 1);
 
     double offset;
+    int jmin;
     // 1. Compute cell index 'icell' and x_offset
     // 2. Compute index range of B-splines with support over cell 'icell'
     get_icell_and_offset(jmin, offset, x);
@@ -252,15 +252,14 @@ void UniformBSplines<Tag, D>::Impl<MemorySpace>::eval_deriv(
         bjm1 = bj;
     }
     derivs(degree()) = bj;
+
+    return discrete_element_type(jmin);
 }
 
 template <class Tag, std::size_t D>
 template <class MemorySpace>
-void UniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis_and_n_derivs(
-        DSpan2D const derivs,
-        int& jmin,
-        double const x,
-        std::size_t const n) const
+ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<MemorySpace>::
+        eval_basis_and_n_derivs(DSpan2D const derivs, double const x, std::size_t const n) const
 {
     std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
     std::experimental::mdspan<double, std::experimental::extents<degree() + 1, degree() + 1>> const
@@ -269,6 +268,7 @@ void UniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis_and_n_derivs(
     std::experimental::mdspan<double, std::experimental::extents<degree() + 1, 2>> const a(
             a_ptr.data());
     double offset;
+    int jmin;
 
     assert(x >= rmin());
     assert(x <= rmax());
@@ -340,6 +340,8 @@ void UniformBSplines<Tag, D>::Impl<MemorySpace>::eval_basis_and_n_derivs(
         }
         d *= (degree() - k) * inv_dx;
     }
+
+    return discrete_element_type(jmin);
 }
 
 template <class Tag, std::size_t D>
@@ -412,7 +414,7 @@ ChunkSpan<double, DiscreteDomain<UniformBSplines<Tag, D>>> UniformBSplines<Tag, 
         std::experimental::mdspan<double, std::experimental::extents<degree() + 2>> const edge_vals(
                 edge_vals_ptr.data());
 
-        eval_basis(edge_vals, jmin, rmin(), degree() + 1);
+        eval_basis(edge_vals, rmin(), degree() + 1);
 
         double const d_eval = sum(edge_vals);
 
