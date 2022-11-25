@@ -87,8 +87,8 @@ void FemPeriodicPoissonSolver::build_matrix()
     });
 
     // Impose the boundary conditions
-    const DiscreteDomain bspline_full_domain = discrete_space<BSplinesX>().full_domain();
-    const DiscreteDomain bspline_dom
+    const BSDomainX bspline_full_domain = discrete_space<BSplinesX>().full_domain();
+    const BSDomainX bspline_dom
             = bspline_full_domain.take_first(DiscreteVector<BSplinesX>(m_nbasis));
 
     Chunk<double, DiscreteDomain<BSplinesX>> int_vals(bspline_dom);

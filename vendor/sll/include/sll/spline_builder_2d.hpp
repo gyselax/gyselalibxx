@@ -314,18 +314,21 @@ void SplineBuilder2D<BSplines1, BSplines2, BcXmin1, BcXmax1, BcXmin2, BcXmax2>::
     *  Cycle over x1 position (or order of x1-derivative at boundary)
     *  and interpolate x2 cofficients along x2 direction.
     *******************************************************************/
-    const DiscreteDomain spline_basis_domain = DiscreteDomain<BSplines1>(
+    const DiscreteDomain<BSplines1> spline_basis_domain = DiscreteDomain<BSplines1>(
             DiscreteElement<BSplines1>(0),
             DiscreteVector<BSplines1>(discrete_space<BSplines1>().nbasis()));
 
     for_each(spline_basis_domain, [&](DiscreteElement<bsplines_type1> const i) {
-        const ChunkSpan line_2 = spline[i];
+        const ChunkSpan<double, DiscreteDomain<bsplines_type2>> line_2 = spline[i];
         const DiscreteDomain<bsplines_type2> whole_line_dom = get_domain<bsplines_type2>(spline);
         // Get interpolated values
-        ChunkSpan const vals2(line_2[whole_line_dom.remove(IMeshV2(nbc_ymin), IMeshV2(nbc_ymax))]);
+        ChunkSpan<double, DiscreteDomain<bsplines_type2>> const vals2(
+                line_2[whole_line_dom.remove(IMeshV2(nbc_ymin), IMeshV2(nbc_ymax))]);
         // Get interpolated values acting as derivatives
-        ChunkSpan const l_derivs(line_2[whole_line_dom.take_first(IMeshV2(nbc_ymin))]);
-        ChunkSpan const r_derivs(line_2[whole_line_dom.take_last(IMeshV2(nbc_ymax))]);
+        ChunkSpan<double, DiscreteDomain<bsplines_type2>> const l_derivs(
+                line_2[whole_line_dom.take_first(IMeshV2(nbc_ymin))]);
+        ChunkSpan<double, DiscreteDomain<bsplines_type2>> const r_derivs(
+                line_2[whole_line_dom.take_last(IMeshV2(nbc_ymax))]);
         const std::optional<CDSpan1D> deriv_l(
                 BcXmin2 == BoundCond::HERMITE ? std::optional(l_derivs.allocation_mdspan())
                                               : std::nullopt);
