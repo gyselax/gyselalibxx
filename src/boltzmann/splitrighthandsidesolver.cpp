@@ -23,11 +23,11 @@ DSpanSpXVx SplitRightHandSideSolver::operator()(
         double const dt) const
 {
     for (auto rhsit = m_rhs.begin(); rhsit != m_rhs.end(); ++rhsit) {
-        (*rhsit)(allfdistribu, dt);
+        (*rhsit)(allfdistribu, dt / 2.);
     }
     m_boltzmann_solver(allfdistribu, electric_field, dt);
     for (auto rhsit = m_rhs.rbegin(); rhsit != m_rhs.rend(); ++rhsit) {
-        (*rhsit)(allfdistribu, dt);
+        (*rhsit)(allfdistribu, dt / 2.);
     }
 
     return allfdistribu;
