@@ -10,17 +10,14 @@
 
 #include "predcorr.hpp"
 
-PredCorr::PredCorr(
-        IBoltzmannSolver const& boltzmann_solver,
-        IPoissonSolver const& poisson_solver,
-        double const dt)
+PredCorr::PredCorr(IBoltzmannSolver const& boltzmann_solver, IPoissonSolver const& poisson_solver)
     : m_boltzmann_solver(boltzmann_solver)
     , m_poisson_solver(poisson_solver)
-    , m_dt(dt)
 {
 }
 
-DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, int const steps) const
+DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, double const dt, int const steps)
+        const
 {
     // electrostatic potential and electric field (depending only on x)
     DFieldX electrostatic_potential(allfdistribu.domain<IDimX>());
@@ -33,7 +30,7 @@ DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, int const steps) 
 
     int iter = 0;
     for (; iter < steps; ++iter) {
-        double const iter_time = iter * m_dt;
+        double const iter_time = iter * dt;
 
         // computation of the electrostatic potential at time tn and
         // the associated electric field
@@ -49,16 +46,16 @@ DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, int const steps) 
         deepcopy(allfdistribu_half_t, allfdistribu);
 
         // predictor
-        m_boltzmann_solver(allfdistribu_half_t, electric_field, m_dt / 2);
+        m_boltzmann_solver(allfdistribu_half_t, electric_field, dt / 2);
 
         // computation of the electrostatic potential at time tn+1/2
         // and the associated electric field
         m_poisson_solver(electrostatic_potential, electric_field, allfdistribu_half_t);
         // correction on a dt
-        m_boltzmann_solver(allfdistribu, electric_field, m_dt);
+        m_boltzmann_solver(allfdistribu, electric_field, dt);
     }
 
-    double const final_time = iter * m_dt;
+    double const final_time = iter * dt;
     m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
     PdiEvent("last_iteration")
             .with("iter", iter)

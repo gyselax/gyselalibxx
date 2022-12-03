@@ -1,10 +1,8 @@
 #pragma once
 
 #include <geometry.hpp>
+#include <irighthandside.hpp>
 #include <rk2_solver.hpp>
-
-#include "irighthandside.hpp"
-#include "itimesolver.hpp"
 
 class KrookSourceAdaptive : public IRightHandSide
 {
@@ -16,7 +14,6 @@ private:
     double m_amplitude;
     double m_density;
     double m_temperature;
-    double m_deltat;
     DFieldX m_mask;
     DFieldVx m_ftarget;
     std::unique_ptr<ITimeSolver> m_solver;
@@ -33,8 +30,7 @@ public:
             double const stiffness,
             double const amplitude,
             double const density,
-            double const temperature,
-            double const deltat);
+            double const temperature);
 
     KrookSourceAdaptive(KrookSourceAdaptive&&) = default;
 

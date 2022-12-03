@@ -186,7 +186,7 @@ int main(int argc, char** argv)
     FftPoissonSolver const
             poisson(fft, ifft, builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 
-    PredCorr const predcorr(vlasov, poisson, deltat);
+    PredCorr const predcorr(vlasov, poisson);
 
     // Creating of mesh for output saving
     IDomainX const gridx = select<IDimX>(meshSpXVx);
@@ -214,7 +214,7 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const start = steady_clock::now();
 
-    predcorr(allfdistribu, nbiter);
+    predcorr(allfdistribu, deltat, nbiter);
 
     steady_clock::time_point const end = steady_clock::now();
 
