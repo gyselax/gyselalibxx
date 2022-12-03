@@ -234,8 +234,7 @@ int main(int argc, char** argv)
                     PCpp_double(conf_krook, ".stiffness"),
                     PCpp_double(conf_krook, ".amplitude"),
                     PCpp_double(conf_krook, ".density"),
-                    PCpp_double(conf_krook, ".temperature"),
-                    deltat);
+                    PCpp_double(conf_krook, ".temperature"));
             rhs_operators.emplace_back(krook_source_adaptive_vector.back());
         } else {
             throw std::invalid_argument(
@@ -262,7 +261,7 @@ int main(int argc, char** argv)
             conditional_t<RDimX::PERIODIC, FemPeriodicPoissonSolver, FemNonPeriodicPoissonSolver>;
     FemPoissonSolverX const poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 
-    PredCorr const predcorr(boltzmann, poisson, deltat);
+    PredCorr const predcorr(boltzmann, poisson);
 
     // Starting the code
     expose_to_pdi("Nx", x_size.value());
@@ -277,7 +276,7 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const start = steady_clock::now();
 
-    predcorr(allfdistribu, nbiter);
+    predcorr(allfdistribu, deltat, nbiter);
 
     steady_clock::time_point const end = steady_clock::now();
 

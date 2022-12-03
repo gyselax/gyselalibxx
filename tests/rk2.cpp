@@ -67,9 +67,8 @@ TEST(Rk2, Rk2_uniform_vx)
     RK2_solver solver = RK2_solver(
             [](DSpanVx df, DViewSpXVx allfdistribu, double const time, IndexSpX const ispx) {
                 ddc::fill(df, time);
-            },
-            deltat);
-    solver(allfdistribu, 1);
+            });
+    solver(allfdistribu, deltat);
 
     double const prediction = 0.5 * deltat * deltat;
 

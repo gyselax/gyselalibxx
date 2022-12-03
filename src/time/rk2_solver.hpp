@@ -12,16 +12,11 @@ class RK2_solver : public ITimeSolver
 {
 private:
     std::function<void(DSpanVx, DViewSpXVx, const double, const IndexSpX)> m_rhs;
-    double const m_deltat;
 
 public:
-    RK2_solver(
-            std::function<
-                    void(DSpanVx df,
-                         DViewSpXVx allfdistribu,
-                         double const time,
-                         IndexSpX const ispx)> rhs,
-            double const deltat);
+    RK2_solver(std::function<
+               void(DSpanVx df, DViewSpXVx allfdistribu, double const time, IndexSpX const ispx)>
+                       rhs);
 
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, int const steps) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double deltat, int steps = 1) const override;
 };
