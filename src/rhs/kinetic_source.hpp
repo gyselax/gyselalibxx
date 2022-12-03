@@ -6,8 +6,6 @@
 
 #include "irighthandside.hpp"
 
-class SpeciesInformation;
-
 class KineticSource : public IRightHandSide
 {
 private:
