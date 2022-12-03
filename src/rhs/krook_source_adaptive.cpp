@@ -56,7 +56,7 @@ KrookSourceAdaptive::KrookSourceAdaptive(
     MaxwellianEquilibrium::compute_maxwellian(m_ftarget, m_density, m_temperature, 0.);
 }
 
-double const KrookSourceAdaptive::get_amplitudes(DViewSpXVx allfdistribu, IndexSpX const ispx) const
+double KrookSourceAdaptive::get_amplitudes(DViewSpXVx allfdistribu, IndexSpX const ispx) const
 {
     if (charge(select<IDimSp>(ispx)) >= 0.) {
         return m_amplitude;
