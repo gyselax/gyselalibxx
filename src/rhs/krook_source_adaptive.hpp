@@ -18,7 +18,7 @@ private:
     DFieldVx m_ftarget;
     std::unique_ptr<ITimeSolver> m_solver;
 
-    double const get_amplitudes(DViewSpXVx allfdistribu, IndexSpX const ispx) const;
+    double get_amplitudes(DViewSpXVx allfdistribu, IndexSpX const ispx) const;
 
 public:
     KrookSourceAdaptive(
