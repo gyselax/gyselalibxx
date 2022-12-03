@@ -90,8 +90,7 @@ TEST(KrookSource, Adaptive)
             stiffness,
             amplitude,
             density_target,
-            temperature_target,
-            0.1);
+            temperature_target);
 
     // Initialization of the distribution function : maxwellian
     double const density_init_ion = 1.;

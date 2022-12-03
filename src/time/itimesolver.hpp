@@ -9,5 +9,5 @@ class ITimeSolver
 public:
     virtual ~ITimeSolver() = default;
 
-    virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu, int steps) const = 0;
+    virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt, int steps = 1) const = 0;
 };

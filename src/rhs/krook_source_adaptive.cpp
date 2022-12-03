@@ -19,8 +19,7 @@ KrookSourceAdaptive::KrookSourceAdaptive(
         double const stiffness,
         double const amplitude,
         double const density,
-        double const temperature,
-        double const deltat)
+        double const temperature)
     : m_type(type)
     , m_solver_name(solver_name)
     , m_extent(extent)
@@ -28,7 +27,6 @@ KrookSourceAdaptive::KrookSourceAdaptive(
     , m_amplitude(amplitude)
     , m_density(density)
     , m_temperature(temperature)
-    , m_deltat(deltat)
     , m_ftarget(gridvx)
 {
     // mask that defines the region where the operator is active
@@ -50,8 +48,7 @@ KrookSourceAdaptive::KrookSourceAdaptive(
                 [this](DSpanVx rhs_val,
                        DViewSpXVx allfdistribu,
                        double const time,
-                       IndexSpX const ispx) { rhs(rhs_val, allfdistribu, time, ispx); },
-                deltat);
+                       IndexSpX const ispx) { rhs(rhs_val, allfdistribu, time, ispx); });
         break;
     }
 
@@ -100,5 +97,5 @@ void KrookSourceAdaptive::rhs(
 
 DSpanSpXVx KrookSourceAdaptive::operator()(DSpanSpXVx allfdistribu, double const dt) const
 {
-    return (*m_solver)(allfdistribu, 1);
+    return (*m_solver)(allfdistribu, dt);
 }
