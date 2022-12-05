@@ -288,7 +288,7 @@ ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<Memo
 
     assert(x >= rmin());
     assert(x <= rmax());
-    assert(n >= 0);
+    // assert(n >= 0); as long as n is unsigned
     assert(n <= degree());
     assert(derivs.extent(0) == 1 + degree());
     assert(derivs.extent(1) == 1 + n);
@@ -425,7 +425,6 @@ ddc::ChunkSpan<double, ddc::DiscreteDomain<UniformBSplines<Tag, D>>> UniformBSpl
             int_vals(ix) = ddc::step<mesh_type>();
         }
 
-        int jmin = 0;
         std::array<double, degree() + 2> edge_vals_ptr;
         std::experimental::mdspan<double, std::experimental::extents<degree() + 2>> const edge_vals(
                 edge_vals_ptr.data());

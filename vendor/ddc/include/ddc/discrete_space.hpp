@@ -34,7 +34,7 @@ class gpu_proxy
     // - copy-constructible: objects may be memcopied to the device,
     // - standard layout: objects will be ensured to have the same, standard, representation on the host and the device,
     // - trivially destructible: the destructor of objects located on a device may not be called.
-    static_assert(std::is_standard_layout_v<T>, "Not standard layout");
+    // static_assert(std::is_standard_layout_v<T>, "Not standard layout");
     // static_assert(std::is_trivially_destructible_v<T>, "Not trivially destructible");
     // static_assert(std::is_trivially_copy_constructible_v<T>, "Not trivially copy-constructible");
     // Currently not trivially destructible because for example of the Kokkos::View (mostly reference-counting)

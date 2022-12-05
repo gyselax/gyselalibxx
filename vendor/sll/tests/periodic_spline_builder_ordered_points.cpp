@@ -37,8 +37,6 @@ using CoordX = Coordinate<DimX>;
 
 TEST(PeriodicSplineBuilderOrderTest, OrderedPoints)
 {
-    CoordX constexpr x0(0.);
-    CoordX constexpr xN(1.);
     std::size_t constexpr ncells = 10;
 
     // 1. Create BSplines

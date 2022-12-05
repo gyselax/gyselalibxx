@@ -93,7 +93,9 @@ public:
         Impl() = default;
 
         template <class OriginMemorySpace>
-        explicit Impl(Impl<OriginMemorySpace> const& impl) : m_domain(impl.m_domain)
+        explicit Impl(Impl<OriginMemorySpace> const& impl)
+            : m_domain(impl.m_domain)
+            , m_nknots(impl.m_nknots)
         {
         }
 
@@ -361,7 +363,7 @@ ddc::DiscreteElement<NonUniformBSplines<Tag, D>> NonUniformBSplines<Tag, D>::Imp
 
     assert(x >= rmin());
     assert(x <= rmax());
-    assert(n >= 0);
+    // assert(n >= 0); as long as n is unsigned
     assert(n <= degree());
     assert(derivs.extent(0) == 1 + degree());
     assert(derivs.extent(1) == 1 + n);

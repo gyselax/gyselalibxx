@@ -15,11 +15,12 @@ using UBSplinesX = UniformBSplines<RDimX, BSDegreeX>;
 
 class FemNonPeriodicPoissonSolver : public IPoissonSolver
 {
-private:
+public:
     struct QDimX
     {
     };
 
+private:
     using QMeshX = NonUniformPointSampling<QDimX>;
 
     static inline Coordinate<QDimX> quad_point_from_coord(Coordinate<RDimX> const& coord)
