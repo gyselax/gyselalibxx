@@ -19,26 +19,26 @@ FemPeriodicPoissonSolver::FemPeriodicPoissonSolver(
         SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
     : m_spline_x_builder(spline_x_builder)
     , m_spline_x_evaluator(spline_x_evaluator)
-    , compute_rho(spline_vx_builder, spline_vx_evaluator)
+    , m_compute_rho(spline_vx_builder, spline_vx_evaluator)
+    , m_nbasis(discrete_space<BSplinesX>().nbasis())
+    , m_ncells(discrete_space<BSplinesX>().ncells())
     , m_quad_coef(DiscreteDomain<QMeshX>(
               DiscreteElement<QMeshX>(0),
-              DiscreteVector<QMeshX>(m_npts_gauss * m_ncells)))
+              DiscreteVector<QMeshX>(s_npts_gauss * m_ncells)))
 {
     static_assert(SplineXBuilder::bsplines_type::is_periodic());
 
-    typename BSplinesX::discrete_domain_type
-            domain(typename BSplinesX::discrete_element_type {0},
-                   typename BSplinesX::discrete_vector_type {m_ncells + 1});
-    Chunk<Coordinate<QDimX>, typename BSplinesX::discrete_domain_type> knots(domain);
+    BSDomainX const domain(DiscreteElement<BSplinesX>(0), DiscreteVector<BSplinesX>(m_ncells + 1));
+    Chunk<Coordinate<QDimX>, BSDomainX> knots(domain);
 
-    for (auto i : domain) {
+    for (DiscreteElement<BSplinesX> const i : domain) {
         knots(i) = quad_point_from_coord(discrete_space<BSplinesX>().get_knot(i.uid()));
     }
 
     // Calculate the integration coefficients
-    GaussLegendre<QDimX> const gl(m_npts_gauss);
+    GaussLegendre<QDimX> const gl(s_npts_gauss);
     std::vector<Coordinate<QDimX>> eval_pts_data(m_quad_coef.domain().size());
-    ChunkSpan<Coordinate<QDimX>, DiscreteDomain<QMeshX>>
+    ChunkSpan<Coordinate<QDimX>, DiscreteDomain<QMeshX>> const
             eval_pts(eval_pts_data.data(), m_quad_coef.domain());
     gl.compute_points_and_weights_on_mesh(eval_pts, m_quad_coef.span_view(), knots.span_cview());
 
@@ -54,7 +54,7 @@ FemPeriodicPoissonSolver::FemPeriodicPoissonSolver(
 //===========================================================================
 void FemPeriodicPoissonSolver::build_matrix()
 {
-    int constexpr n_lower_diags = m_degree + 1;
+    int constexpr n_lower_diags = s_degree + 1;
     int const matrix_size = m_nbasis + 1;
     bool const positive_definite_symmetric = false;
 
@@ -68,13 +68,14 @@ void FemPeriodicPoissonSolver::build_matrix()
             n_lower_diags);
 
     // Fill the banded part of the matrix
-    double derivs_ptr[m_degree + 1];
-    DSpan1D derivs(derivs_ptr, m_degree + 1);
+    std::array<double, s_degree + 1> derivs_ptr;
+    DSpan1D const derivs(derivs_ptr.data(), derivs_ptr.size());
     for_each(m_quad_coef.domain(), [&](DiscreteElement<QMeshX> const ix) {
-        Coordinate<RDimX> coord = coord_from_quad_point(coordinate(ix));
-        auto jmin = discrete_space<BSplinesX>().eval_deriv(derivs, coord);
-        for (int j = 0; j < m_degree + 1; ++j) {
-            for (int k = 0; k < m_degree + 1; ++k) {
+        Coordinate<RDimX> const coord = coord_from_quad_point(coordinate(ix));
+        DiscreteElement<BSplinesX> const jmin
+                = discrete_space<BSplinesX>().eval_deriv(derivs, coord);
+        for (int j = 0; j < s_degree + 1; ++j) {
+            for (int k = 0; k < s_degree + 1; ++k) {
                 int const j_idx = (j + jmin.uid()) % m_nbasis;
                 int const k_idx = (k + jmin.uid()) % m_nbasis;
                 double a_jk = m_fem_matrix->get_element(j_idx, k_idx);
@@ -87,15 +88,15 @@ void FemPeriodicPoissonSolver::build_matrix()
     });
 
     // Impose the boundary conditions
-    const BSDomainX bspline_full_domain = discrete_space<BSplinesX>().full_domain();
-    const BSDomainX bspline_dom
+    BSDomainX const bspline_full_domain = discrete_space<BSplinesX>().full_domain();
+    BSDomainX const bspline_dom
             = bspline_full_domain.take_first(DiscreteVector<BSplinesX>(m_nbasis));
 
     Chunk<double, DiscreteDomain<BSplinesX>> int_vals(bspline_dom);
     discrete_space<BSplinesX>().integrals(int_vals);
 
-    for (auto ix : bspline_dom) {
-        const int i = ix.uid();
+    for (DiscreteElement<BSplinesX> const ix : bspline_dom) {
+        int const i = ix.uid();
         m_fem_matrix->set_element(m_nbasis, i, int_vals(ix));
         m_fem_matrix->set_element(i, m_nbasis, int_vals(ix));
     }
@@ -109,14 +110,14 @@ void FemPeriodicPoissonSolver::build_matrix()
 //               Solve the Poisson equation
 //---------------------------------------------------------------------------
 void FemPeriodicPoissonSolver::solve_matrix_system(
-        ChunkSpan<double, BSDomainX> phi_spline_coef,
-        ChunkSpan<double, BSDomainX> rho_spline_coef) const
+        ChunkSpan<double, BSDomainX> const phi_spline_coef,
+        ChunkSpan<double, BSDomainX> const rho_spline_coef) const
 {
-    double values_ptr[m_degree + 1];
-    DSpan1D values(values_ptr, m_degree + 1);
+    std::array<double, s_degree + 1> values_ptr;
+    DSpan1D const values(values_ptr.data(), values_ptr.size());
 
     int const rhs_size = m_nbasis + 1;
-    DSpan1D phi_rhs(phi_spline_coef.data(), rhs_size);
+    DSpan1D const phi_rhs(phi_spline_coef.data(), rhs_size);
     for (int i(0); i < rhs_size; ++i) {
         phi_rhs(i) = 0.0;
     }
@@ -125,10 +126,11 @@ void FemPeriodicPoissonSolver::solve_matrix_system(
     // Rk: phi_rhs no longer contains spline coefficients, but is the
     //     RHS of the matrix equation
     for_each(m_quad_coef.domain(), [&](DiscreteElement<QMeshX> const ix) {
-        Coordinate<RDimX> coord = coord_from_quad_point(coordinate(ix));
-        auto jmin = discrete_space<BSplinesX>().eval_basis(values, coord);
+        Coordinate<RDimX> const coord = coord_from_quad_point(coordinate(ix));
+        DiscreteElement<BSplinesX> const jmin
+                = discrete_space<BSplinesX>().eval_basis(values, coord);
         double const rho_val = m_spline_x_evaluator(coord, rho_spline_coef);
-        for (int j = 0; j < m_degree + 1; ++j) {
+        for (int j = 0; j < s_degree + 1; ++j) {
             int const j_idx = (jmin.uid() + j) % m_nbasis;
             phi_rhs(j_idx) = phi_rhs(j_idx) + rho_val * values(j) * m_quad_coef(ix);
         }
@@ -139,7 +141,7 @@ void FemPeriodicPoissonSolver::solve_matrix_system(
 
     // Copy the first d coefficients into the last d coefficients
     // These coefficients refer to the same BSplines which cross the boundaries
-    for (int i = 0; i < m_degree; i++) {
+    for (int i = 0; i < s_degree; i++) {
         phi_spline_coef(DiscreteElement<BSplinesX>(m_nbasis + i)) = phi_rhs(i);
     }
 }
@@ -162,16 +164,16 @@ void FemPeriodicPoissonSolver::solve_matrix_system(
 // with Lagrangian multipliers
 //----------------------------------------------------------------------------
 void FemPeriodicPoissonSolver::operator()(
-        DSpanX electrostatic_potential,
-        DSpanX electric_field,
-        DViewSpXVx allfdistribu) const
+        DSpanX const electrostatic_potential,
+        DSpanX const electric_field,
+        DViewSpXVx const allfdistribu) const
 {
     assert(electrostatic_potential.domain() == get_domain<IDimX>(allfdistribu));
-    IDomainX dom_x = electrostatic_potential.domain();
+    IDomainX const dom_x = electrostatic_potential.domain();
 
     // Compute the RHS of the Poisson equation
     Chunk<double, IDomainX> rho(dom_x);
-    compute_rho(rho, allfdistribu);
+    m_compute_rho(rho, allfdistribu);
 
     //
     Chunk<double, BSDomainX> rho_spline_coef(m_spline_x_builder.spline_domain());

@@ -25,7 +25,7 @@ FftPoissonSolver::FftPoissonSolver(
         SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
     : m_fft(fft)
     , m_ifft(ifft)
-    , compute_rho(spline_vx_builder, spline_vx_evaluator)
+    , m_compute_rho(spline_vx_builder, spline_vx_evaluator)
     , m_electric_field(spline_x_builder, spline_x_evaluator)
 {
 }
@@ -43,7 +43,7 @@ void FftPoissonSolver::operator()(
     // Compute the RHS of the Poisson equation.
     Chunk<double, IDomainX> rho(x_dom);
     DFieldVx contiguous_slice_vx(allfdistribu.domain<IDimVx>());
-    compute_rho(rho, allfdistribu);
+    m_compute_rho(rho, allfdistribu);
 
     // Build a mesh in the fourier space, for N points
     IDomainFx const dom_fx(IndexFx(0), IVectFx(discrete_space<IDimFx>().size()));

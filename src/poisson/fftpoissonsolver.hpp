@@ -18,7 +18,7 @@ class FftPoissonSolver : public IPoissonSolver
 
     IInverseFourierTransform<RDimX> const& m_ifft;
 
-    ChargeDensityCalculator compute_rho;
+    ChargeDensityCalculator m_compute_rho;
 
     ElectricField m_electric_field;
 
