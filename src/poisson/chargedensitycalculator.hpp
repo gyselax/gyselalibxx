@@ -28,5 +28,5 @@ public:
             SplineVxBuilder const& spline_vx_builder,
             SplineEvaluator<BSplinesVx> const& spline_vx_evaluator);
 
-    void operator()(DSpanX const rho, DViewSpXVx const allfdistribu) const;
+    void operator()(DSpanX rho, DViewSpXVx allfdistribu) const;
 };
