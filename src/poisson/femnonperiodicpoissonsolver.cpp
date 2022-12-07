@@ -98,9 +98,9 @@ void FemNonPeriodicPoissonSolver::build_matrix()
     std::array<double, s_degree + 1> derivs_ptr;
     DSpan1D const derivs(derivs_ptr.data(), derivs_ptr.size());
     for_each(m_quad_coef.domain(), [&](DiscreteElement<QMeshX> const ix) {
-        Coordinate<RDimX> const coord = coord_from_quad_point(coordinate(ix));
-        DiscreteElement<NUBSplinesX> const jmin
-                = discrete_space<NUBSplinesX>().eval_deriv(derivs, coord);
+        ddc::Coordinate<RDimX> const coord = coord_from_quad_point(ddc::coordinate(ix));
+        ddc::DiscreteElement<NUBSplinesX> const jmin
+                = ddc::discrete_space<NUBSplinesX>().eval_deriv(derivs, coord);
         for (int j = 0; j < s_degree + 1; ++j) {
             for (int k = 0; k < s_degree + 1; ++k) {
                 int const j_idx = (j + jmin.uid()) % m_nbasis - 1;
@@ -126,14 +126,14 @@ void FemNonPeriodicPoissonSolver::build_matrix()
 //               Solve the Poisson equation
 //---------------------------------------------------------------------------
 void FemNonPeriodicPoissonSolver::solve_matrix_system(
-        ChunkSpan<double, NUBSDomainX> const phi_spline_coef,
-        ChunkSpan<double, BSDomainX> const rho_spline_coef) const
+        ddc::ChunkSpan<double, NUBSDomainX> const phi_spline_coef,
+        ddc::ChunkSpan<double, BSDomainX> const rho_spline_coef) const
 {
     std::array<double, s_degree + 1> values_ptr;
     DSpan1D const values(values_ptr.data(), values_ptr.size());
 
     for (int i(0); i < m_nbasis; ++i) {
-        phi_spline_coef(DiscreteElement<NUBSplinesX>(i)) = 0.0;
+        phi_spline_coef(ddc::DiscreteElement<NUBSplinesX>(i)) = 0.0;
     }
 
     int const rhs_size = m_nbasis - 2;
@@ -185,17 +185,17 @@ void FemNonPeriodicPoissonSolver::operator()(
     IDomainX const dom_x = electrostatic_potential.domain();
 
     // Compute the RHS of the Poisson equation
-    Chunk<double, IDomainX> rho(dom_x);
+    ddc::Chunk<double, IDomainX> rho(dom_x);
     m_compute_rho(rho, allfdistribu);
 
     //
-    Chunk<double, BSDomainX> rho_spline_coef(m_spline_x_builder.spline_domain());
+    ddc::Chunk<double, BSDomainX> rho_spline_coef(m_spline_x_builder.spline_domain());
     m_spline_x_builder(rho_spline_coef, rho);
-    Chunk<double, NUBSDomainX> phi_spline_coef(discrete_space<NUBSplinesX>().full_domain());
+    ddc::Chunk<double, NUBSDomainX> phi_spline_coef(discrete_space<NUBSplinesX>().full_domain());
     solve_matrix_system(phi_spline_coef, rho_spline_coef);
 
     //
-    for_each(dom_x, [&](IndexX const ix) {
+    ddc::for_each(dom_x, [&](IndexX const ix) {
         electrostatic_potential(ix) = m_spline_x_nu_evaluator(coordinate(ix), phi_spline_coef);
         electric_field(ix) = -m_spline_x_nu_evaluator.deriv(coordinate(ix), phi_spline_coef);
     });

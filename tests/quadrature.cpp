@@ -18,7 +18,10 @@ TEST(QuadratureTest, ExactForConstantFunc)
     // Creating mesh & supports
     init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    SplineXBuilder const builder_x;
+    init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    DiscreteDomain<IDimX> interpolation_domain_x(InterpPointsX::get_domain());
+
+    SplineXBuilder const builder_x(interpolation_domain_x);
 
     IDomainX const gridx = builder_x.interpolation_domain();
 
@@ -41,9 +44,13 @@ struct Y
 template <std::size_t N>
 double compute_error(int n_elems)
 {
-    using BSplinesY = UniformBSplines<Y<N>, 3>;
-    using SplineYBuilder = SplineBuilder<BSplinesY, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-    using IDimY = typename SplineYBuilder::interpolation_mesh_type;
+    using DimY = Y<N>;
+    using BSplinesY = UniformBSplines<DimY, 3>;
+    using GrevillePointsY
+            = GrevilleInterpolationPoints<BSplinesY, BoundCond::GREVILLE, BoundCond::GREVILLE>;
+    using IDimY = typename GrevillePointsY::interpolation_mesh_type;
+    using SplineYBuilder
+            = SplineBuilder<BSplinesY, IDimY, BoundCond::GREVILLE, BoundCond::GREVILLE>;
     using IDomainY = DiscreteDomain<IDimY>;
     using DFieldY = Chunk<double, IDomainY>;
 
@@ -52,9 +59,10 @@ double compute_error(int n_elems)
 
     init_discrete_space<BSplinesY>(x_min, x_max, n_elems);
 
-    SplineYBuilder const builder_x;
+    init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
+    IDomainY const gridx(GrevillePointsY::get_domain());
 
-    IDomainY const gridx = builder_x.interpolation_domain();
+    SplineYBuilder const builder_x(gridx);
 
     Quadrature<IDimY> const integrate(trapezoid_quadrature_coefficients(gridx));
 

@@ -10,7 +10,9 @@
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
+#include <sll/greville_interpolation_points.hpp>
 #include <sll/null_boundary_value.hpp>
+#include <sll/spline_boundary_conditions.hpp>
 #include <sll/spline_builder_2d.hpp>
 #include <sll/spline_evaluator_2d.hpp>
 #include <sll/view.hpp>
@@ -56,12 +58,16 @@ using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
 using BSplinesY = NonUniformBSplines<DimY, s_degree_y>;
 #endif
 
-using IDimX = SplineBuilder<BSplinesX, s_bcl, s_bcr>::interpolation_mesh_type;
+using GrevillePointsX = GrevilleInterpolationPoints<BSplinesX, s_bcl, s_bcr>;
+
+using IDimX = GrevillePointsX::interpolation_mesh_type;
 using IndexX = DiscreteElement<IDimX>;
 using DVectX = DiscreteVector<IDimX>;
 using CoordX = Coordinate<DimX>;
 
-using IDimY = SplineBuilder<BSplinesY, s_bcl, s_bcr>::interpolation_mesh_type;
+using GrevillePointsY = GrevilleInterpolationPoints<BSplinesY, s_bcl, s_bcr>;
+
+using IDimY = GrevillePointsY::interpolation_mesh_type;
 using IndexY = DiscreteElement<IDimY>;
 using DVectY = DiscreteVector<IDimY>;
 using CoordY = Coordinate<DimY>;
@@ -123,13 +129,19 @@ TEST(NonPeriodic2DSplineBuilderTest, Identity)
     // The chunk is filled with garbage data, we need to initialize it
     SplineXY coef(dom_bsplines_xy);
 
-    // 3. Create a SplineBuilder over BSplines using some boundary conditions
-    const SplineBuilder2D<BSplinesX, BSplinesY, s_bcl, s_bcr, s_bcl, s_bcr> spline_builder;
-    auto interpolation_domain = spline_builder.interpolation_domain();
-    auto interpolation_domain_X = spline_builder.interpolation_domain1();
-    auto interpolation_domain_Y = spline_builder.interpolation_domain2();
+    // 3. Create the interpolation domain
+    init_discrete_space<IDimX>(GrevillePointsX::get_sampling());
+    init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
+    DiscreteDomain<IDimX> interpolation_domain_X(GrevillePointsX::get_domain());
+    DiscreteDomain<IDimY> interpolation_domain_Y(GrevillePointsY::get_domain());
+    DiscreteDomain<IDimX, IDimY>
+            interpolation_domain(interpolation_domain_X, interpolation_domain_Y);
 
-    // 4. Allocate and fill a chunk over the interpolation domain
+    // 4. Create a SplineBuilder over BSplines using some boundary conditions
+    const SplineBuilder2D<BSplinesX, BSplinesY, IDimX, IDimY, s_bcl, s_bcr, s_bcl, s_bcr>
+            spline_builder(interpolation_domain);
+
+    // 5. Allocate and fill a chunk over the interpolation domain
     FieldXY yvals(interpolation_domain);
     EvaluatorType evaluator(interpolation_domain);
     evaluator(yvals.span_view());

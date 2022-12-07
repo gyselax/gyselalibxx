@@ -10,7 +10,9 @@
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
+#include <sll/greville_interpolation_points.hpp>
 #include <sll/null_boundary_value.hpp>
+#include <sll/spline_boundary_conditions.hpp>
 #include <sll/spline_builder_2d.hpp>
 #include <sll/spline_evaluator_2d.hpp>
 #include <sll/view.hpp>
@@ -43,16 +45,17 @@ using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
 using BSplinesY = NonUniformBSplines<DimY, s_degree_y>;
 #endif
 
-using IDimX = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>::
-        interpolation_mesh_type;
+using GrevillePointsX
+        = GrevilleInterpolationPoints<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+using GrevillePointsY
+        = GrevilleInterpolationPoints<BSplinesY, BoundCond::PERIODIC, BoundCond::PERIODIC>;
 
-using IDimY = SplineBuilder<BSplinesY, BoundCond::PERIODIC, BoundCond::PERIODIC>::
-        interpolation_mesh_type;
-
+using IDimX = GrevillePointsX::interpolation_mesh_type;
 using IndexX = DiscreteElement<IDimX>;
 using DVectX = DiscreteVector<IDimX>;
 using CoordX = Coordinate<DimX>;
 
+using IDimY = GrevillePointsY::interpolation_mesh_type;
 using IndexY = DiscreteElement<IDimY>;
 using DVectY = DiscreteVector<IDimY>;
 using CoordY = Coordinate<DimY>;
@@ -113,28 +116,35 @@ TEST(Periodic2DSplineBuilderTest, Identity)
     // The chunk is filled with garbage data, we need to initialize it
     SplineXY coef(dom_bsplines_xy);
 
-    // 3. Create a SplineBuilder over BSplines using some boundary conditions
+    // 3. Create the interpolation domain
+    init_discrete_space<IDimX>(GrevillePointsX::get_sampling());
+    init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
+    DiscreteDomain<IDimX> interpolation_domain_X(GrevillePointsX::get_domain());
+    DiscreteDomain<IDimY> interpolation_domain_Y(GrevillePointsY::get_domain());
+    DiscreteDomain<IDimX, IDimY>
+            interpolation_domain(interpolation_domain_X, interpolation_domain_Y);
+
+    // 4. Create a SplineBuilder over BSplines using some boundary conditions
     const SplineBuilder2D<
             BSplinesX,
             BSplinesY,
+            IDimX,
+            IDimY,
             BoundCond::PERIODIC,
             BoundCond::PERIODIC,
             BoundCond::PERIODIC,
             BoundCond::PERIODIC>
-            spline_builder;
-    auto interpolation_domain = spline_builder.interpolation_domain();
-    auto interpolation_domain_X = spline_builder.interpolation_domain1();
-    auto interpolation_domain_Y = spline_builder.interpolation_domain2();
+            spline_builder(interpolation_domain);
 
-    // 4. Allocate and fill a chunk over the interpolation domain
+    // 5. Allocate and fill a chunk over the interpolation domain
     FieldXY yvals(interpolation_domain);
     EvaluatorType evaluator(interpolation_domain);
     evaluator(yvals.span_view());
 
-    // 5. Finally build the spline by filling `coef`
+    // 6. Finally build the spline by filling `coef`
     spline_builder(coef, yvals);
 
-    // 6. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
+    // 7. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
     const SplineEvaluator2D<BSplinesX, BSplinesY> spline_evaluator(
             g_null_boundary_2d<BSplinesX, BSplinesY>,
             g_null_boundary_2d<BSplinesX, BSplinesY>,
@@ -167,7 +177,7 @@ TEST(Periodic2DSplineBuilderTest, Identity)
             coords_eval.span_cview(),
             coef.span_cview());
 
-    // 7. Checking errors
+    // 8. Checking errors
     double max_norm_error = 0.;
     double max_norm_error_diff1 = 0.;
     double max_norm_error_diff2 = 0.;

@@ -9,7 +9,9 @@
 #include <ddc/ddc.hpp>
 
 #include <sll/bsplines_non_uniform.hpp>
+#include <sll/greville_interpolation_points.hpp>
 #include <sll/null_boundary_value.hpp>
+#include <sll/spline_boundary_conditions.hpp>
 #include <sll/spline_builder.hpp>
 #include <sll/spline_evaluator.hpp>
 #include <sll/view.hpp>
@@ -25,8 +27,10 @@ static constexpr std::size_t s_degree_x = DEGREE_X;
 
 using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
 
-using IDimX = SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>::
-        interpolation_mesh_type;
+using GrevillePoints
+        = GrevilleInterpolationPoints<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+
+using IDimX = GrevillePoints::interpolation_mesh_type;
 
 using IndexX = DiscreteElement<IDimX>;
 using DVectX = DiscreteVector<IDimX>;
@@ -48,9 +52,9 @@ TEST(PeriodicSplineBuilderOrderTest, OrderedPoints)
     }
     init_discrete_space<BSplinesX>(breaks);
 
-    // 2. Create a SplineBuilder over BSplines using some boundary conditions
-    SplineBuilder<BSplinesX, BoundCond::PERIODIC, BoundCond::PERIODIC> spline_builder;
-    auto interpolation_domain = spline_builder.interpolation_domain();
+    // 2. Create the interpolation domain
+    init_discrete_space<IDimX>(GrevillePoints::get_sampling());
+    DiscreteDomain<IDimX> interpolation_domain(GrevillePoints::get_domain());
 
     double last(coordinate(interpolation_domain.front()));
     double current;
