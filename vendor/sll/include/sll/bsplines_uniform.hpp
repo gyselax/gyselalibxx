@@ -145,6 +145,21 @@ public:
             return rmin() + idx * ddc::step<mesh_type>();
         }
 
+        double get_first_support_knot(discrete_element_type const& ix) const
+        {
+            return get_knot(ix.uid() - degree());
+        }
+
+        double get_last_support_knot(discrete_element_type const& ix) const
+        {
+            return get_knot(ix.uid() + 1);
+        }
+
+        double get_support_knot_n(discrete_element_type const& ix, int n) const
+        {
+            return get_knot(ix.uid() + n - degree());
+        }
+
         ddc::Coordinate<Tag> rmin() const noexcept
         {
             return coord_from_knot(ddc::coordinate(m_domain.front()));

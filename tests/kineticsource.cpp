@@ -36,13 +36,19 @@ TEST(KineticSource, Ordering)
     IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
 
     // Creating mesh & supports
-    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
+    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    SplineXBuilder const builder_x;
+    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
 
-    SplineVxBuilder const builder_vx;
+    IDomainX interpolation_domain_x(InterpPointsX::get_domain());
+    IDomainVx interpolation_domain_vx(InterpPointsVx::get_domain());
+
+    SplineXBuilder const builder_x(interpolation_domain_x);
+
+    SplineVxBuilder const builder_vx(interpolation_domain_vx);
 
     IDomainX const gridx = builder_x.interpolation_domain();
     IDomainVx const gridvx = builder_vx.interpolation_domain();

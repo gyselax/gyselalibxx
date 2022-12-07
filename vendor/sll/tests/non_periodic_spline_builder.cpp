@@ -10,7 +10,9 @@
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
+#include <sll/greville_interpolation_points.hpp>
 #include <sll/null_boundary_value.hpp>
+#include <sll/spline_boundary_conditions.hpp>
 #include <sll/spline_builder.hpp>
 #include <sll/spline_evaluator.hpp>
 #include <sll/view.hpp>
@@ -48,7 +50,9 @@ using BSplinesX = UniformBSplines<DimX, s_degree_x>;
 using BSplinesX = NonUniformBSplines<DimX, s_degree_x>;
 #endif
 
-using IDimX = SplineBuilder<BSplinesX, s_bcl, s_bcr>::interpolation_mesh_type;
+using GrevillePoints = GrevilleInterpolationPoints<BSplinesX, s_bcl, s_bcr>;
+
+using IDimX = GrevillePoints::interpolation_mesh_type;
 
 #if defined(EVALUATOR_COSINE)
 using evaluator_type = CosineEvaluator::Evaluator<IDimX>;
@@ -91,11 +95,14 @@ TEST(NonPeriodicSplineBuilderTest, Identity)
     // The chunk is filled with garbage data, we need to initialize it
     SplineX coef(dom_bsplines_x);
 
-    // 3. Create a SplineBuilder over BSplines using some boundary conditions
-    SplineBuilder<BSplinesX, s_bcl, s_bcr> spline_builder;
-    auto interpolation_domain = spline_builder.interpolation_domain();
+    // 3. Create the interpolation domain
+    init_discrete_space<IDimX>(GrevillePoints::get_sampling());
+    DiscreteDomain<IDimX> interpolation_domain(GrevillePoints::get_domain());
 
-    // 4. Allocate and fill a chunk over the interpolation domain
+    // 4. Create a SplineBuilder over BSplines using some boundary conditions
+    SplineBuilder<BSplinesX, IDimX, s_bcl, s_bcr> spline_builder(interpolation_domain);
+
+    // 5. Allocate and fill a chunk over the interpolation domain
     FieldX yvals(interpolation_domain);
     evaluator_type evaluator(interpolation_domain);
     evaluator(yvals.span_view());
@@ -121,10 +128,10 @@ TEST(NonPeriodicSplineBuilderTest, Identity)
         deriv_r = Sderiv_rhs;
     }
 
-    // 5. Finally build the spline by filling `coef`
+    // 6. Finally build the spline by filling `coef`
     spline_builder(coef, yvals, deriv_l, deriv_r);
 
-    // 6. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
+    // 7. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
     SplineEvaluator<BSplinesX>
             spline_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);
 
@@ -140,7 +147,7 @@ TEST(NonPeriodicSplineBuilderTest, Identity)
     spline_evaluator
             .deriv(spline_eval_deriv.span_view(), coords_eval.span_cview(), coef.span_cview());
 
-    // 7. Checking errors
+    // 8. Checking errors
     double max_norm_error = 0.;
     double max_norm_error_diff = 0.;
     for (IndexX const ix : interpolation_domain) {

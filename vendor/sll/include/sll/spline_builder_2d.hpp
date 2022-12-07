@@ -5,6 +5,8 @@
 template <
         class BSplines1,
         class BSplines2,
+        class interpolation_mesh_type1,
+        class interpolation_mesh_type2,
         BoundCond BcXmin1,
         BoundCond BcXmax1,
         BoundCond BcXmin2,
@@ -30,12 +32,8 @@ public:
     using bsplines_type1 = BSplines1;
     using bsplines_type2 = BSplines2;
 
-    using builder_type1 = SplineBuilder<BSplines1, BcXmin1, BcXmax1>;
-    using builder_type2 = SplineBuilder<BSplines2, BcXmin2, BcXmax2>;
-
-    // No need to check boundary conditions, it shall fail if it periodic with non-periodic boundary conditions
-    using interpolation_mesh_type1 = typename builder_type1::interpolation_mesh_type;
-    using interpolation_mesh_type2 = typename builder_type2::interpolation_mesh_type;
+    using builder_type1 = SplineBuilder<BSplines1, interpolation_mesh_type1, BcXmin1, BcXmax1>;
+    using builder_type2 = SplineBuilder<BSplines2, interpolation_mesh_type2, BcXmin2, BcXmax2>;
 
     using interpolation_domain_type1 = DiscreteDomain<interpolation_mesh_type1>;
     using interpolation_domain_type2 = DiscreteDomain<interpolation_mesh_type2>;
@@ -45,15 +43,13 @@ public:
 private:
     builder_type1 spline_builder1;
     builder_type2 spline_builder2;
-    std::unique_ptr<interpolation_domain_type> m_interpolation_domain;
+    interpolation_domain_type m_interpolation_domain;
 
 public:
-    SplineBuilder2D()
-        : spline_builder1()
-        , spline_builder2()
-        , m_interpolation_domain(std::make_unique<interpolation_domain_type>(
-                  spline_builder1.interpolation_domain(),
-                  spline_builder2.interpolation_domain()))
+    SplineBuilder2D(interpolation_domain_type const& interpolation_domain)
+        : spline_builder1(select<interpolation_mesh_type1>(interpolation_domain))
+        , spline_builder2(select<interpolation_mesh_type2>(interpolation_domain))
+        , m_interpolation_domain(interpolation_domain)
     {
     }
 
@@ -108,11 +104,22 @@ public:
 template <
         class BSplines1,
         class BSplines2,
+        class interpolation_mesh_type1,
+        class interpolation_mesh_type2,
         BoundCond BcXmin1,
         BoundCond BcXmax1,
         BoundCond BcXmin2,
         BoundCond BcXmax2>
-void SplineBuilder2D<BSplines1, BSplines2, BcXmin1, BcXmax1, BcXmin2, BcXmax2>::operator()(
+void SplineBuilder2D<
+        BSplines1,
+        BSplines2,
+        interpolation_mesh_type1,
+        interpolation_mesh_type2,
+        BcXmin1,
+        BcXmax1,
+        BcXmin2,
+        BcXmax2>::
+operator()(
         ChunkSpan<double, DiscreteDomain<bsplines_type1, bsplines_type2>> spline,
         ChunkSpan<double const, interpolation_domain_type> vals,
         std::optional<CDSpan2D> const derivs_xmin,

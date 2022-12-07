@@ -45,11 +45,15 @@ TEST(KrookSource, Adaptive)
     init_discrete_space<BSplinesX>(x_min, x_max, x_size);
     init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    SplineXBuilder const builder_x;
-    SplineVxBuilder const builder_vx;
+    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
 
-    IDomainX const gridx = builder_x.interpolation_domain();
-    IDomainVx const gridvx = builder_vx.interpolation_domain();
+    IDomainX gridx(InterpPointsX::get_domain());
+    IDomainVx gridvx(InterpPointsVx::get_domain());
+
+    SplineXBuilder const builder_x(gridx);
+    SplineVxBuilder const builder_vx(gridvx);
+
     IDomainSp const gridsp = dom_sp;
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
@@ -171,12 +175,15 @@ TEST(KrookSource, Constant)
 
     init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    SplineXBuilder const builder_x;
+    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
 
-    SplineVxBuilder const builder_vx;
+    IDomainX gridx(InterpPointsX::get_domain());
+    IDomainVx gridvx(InterpPointsVx::get_domain());
 
-    IDomainX const gridx = builder_x.interpolation_domain();
-    IDomainVx const gridvx = builder_vx.interpolation_domain();
+    SplineXBuilder const builder_x(gridx);
+    SplineVxBuilder const builder_vx(gridvx);
+
     IDomainSp const gridsp = dom_sp;
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
