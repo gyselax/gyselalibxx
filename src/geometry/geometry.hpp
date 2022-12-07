@@ -6,6 +6,7 @@
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
+#include <sll/greville_interpolation_points.hpp>
 #include <sll/spline_builder.hpp>
 
 #include <species_info.hpp>
@@ -40,13 +41,13 @@ struct RDimT
 
 
 
-using CoordT = Coordinate<RDimT>;
+using CoordT = ddc::Coordinate<RDimT>;
 
-using CoordX = Coordinate<RDimX>;
+using CoordX = ddc::Coordinate<RDimX>;
 
-using CoordVx = Coordinate<RDimVx>;
+using CoordVx = ddc::Coordinate<RDimVx>;
 
-using CoordXVx = Coordinate<RDimX, RDimVx>;
+using CoordXVx = ddc::Coordinate<RDimX, RDimVx>;
 
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeVx = 3;
@@ -56,83 +57,86 @@ using BSplinesX = UniformBSplines<RDimX, BSDegreeX>;
 using BSplinesVx = UniformBSplines<RDimVx, BSDegreeVx>;
 
 auto constexpr SplineXBoundary = RDimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
-using SplineXBuilder = SplineBuilder<BSplinesX, SplineXBoundary, SplineXBoundary>;
-using IDimX = typename SplineXBuilder::interpolation_mesh_type;
+using InterpPointsX = GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+using IDimX = typename InterpPointsX::interpolation_mesh_type;
+using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;
 
-using SplineVxBuilder = SplineBuilder<BSplinesVx, BoundCond::HERMITE, BoundCond::HERMITE>;
-using IDimVx = typename SplineVxBuilder::interpolation_mesh_type;
+using InterpPointsVx
+        = GrevilleInterpolationPoints<BSplinesVx, BoundCond::HERMITE, BoundCond::HERMITE>;
+using IDimVx = typename InterpPointsVx::interpolation_mesh_type;
+using SplineVxBuilder = SplineBuilder<BSplinesVx, IDimVx, BoundCond::HERMITE, BoundCond::HERMITE>;
 
 // Species dimension
 using IDimSp = SpeciesInformation;
 
 
-using IndexX = DiscreteElement<IDimX>;
+using IndexX = ddc::DiscreteElement<IDimX>;
 
-using IndexVx = DiscreteElement<IDimVx>;
+using IndexVx = ddc::DiscreteElement<IDimVx>;
 
-using IndexSp = DiscreteElement<IDimSp>;
+using IndexSp = ddc::DiscreteElement<IDimSp>;
 
-using IndexSpX = DiscreteElement<IDimSp, IDimX>;
+using IndexSpX = ddc::DiscreteElement<IDimSp, IDimX>;
 
-using IndexXVx = DiscreteElement<IDimX, IDimVx>;
+using IndexXVx = ddc::DiscreteElement<IDimX, IDimVx>;
 
-using IndexSpVx = DiscreteElement<IDimSp, IDimVx>;
+using IndexSpVx = ddc::DiscreteElement<IDimSp, IDimVx>;
 
-using IndexSpXVx = DiscreteElement<IDimSp, IDimX, IDimVx>;
+using IndexSpXVx = ddc::DiscreteElement<IDimSp, IDimX, IDimVx>;
 
 
 
-using IVectX = DiscreteVector<IDimX>;
+using IVectX = ddc::DiscreteVector<IDimX>;
 
-using IVectVx = DiscreteVector<IDimVx>;
+using IVectVx = ddc::DiscreteVector<IDimVx>;
 
-using IVectXVx = DiscreteVector<IDimX, IDimVx>;
+using IVectXVx = ddc::DiscreteVector<IDimX, IDimVx>;
 
-using IVectSpXVx = DiscreteVector<IDimSp, IDimX, IDimVx>;
+using IVectSpXVx = ddc::DiscreteVector<IDimSp, IDimX, IDimVx>;
 
-using IVectSp = DiscreteVector<IDimSp>;
+using IVectSp = ddc::DiscreteVector<IDimSp>;
 
 using IVectSpVx = DiscreteVector<IDimSp, IDimVx>;
 
 
 
-using BSDomainX = DiscreteDomain<BSplinesX>;
+using BSDomainX = ddc::DiscreteDomain<BSplinesX>;
 
-using BSDomainVx = DiscreteDomain<BSplinesVx>;
+using BSDomainVx = ddc::DiscreteDomain<BSplinesVx>;
 
-using IDomainX = DiscreteDomain<IDimX>;
+using IDomainX = ddc::DiscreteDomain<IDimX>;
 
-using IDomainVx = DiscreteDomain<IDimVx>;
+using IDomainVx = ddc::DiscreteDomain<IDimVx>;
 
-using IDomainXVx = DiscreteDomain<IDimX, IDimVx>;
+using IDomainXVx = ddc::DiscreteDomain<IDimX, IDimVx>;
 
-using IDomainSp = DiscreteDomain<IDimSp>;
+using IDomainSp = ddc::DiscreteDomain<IDimSp>;
 
-using IDomainSpX = DiscreteDomain<IDimSp, IDimX>;
+using IDomainSpX = ddc::DiscreteDomain<IDimSp, IDimX>;
 
-using IDomainSpVx = DiscreteDomain<IDimSp, IDimVx>;
+using IDomainSpVx = ddc::DiscreteDomain<IDimSp, IDimVx>;
 
-using IDomainSpXVx = DiscreteDomain<IDimSp, IDimX, IDimVx>;
+using IDomainSpXVx = ddc::DiscreteDomain<IDimSp, IDimX, IDimVx>;
 
 
-
-template <class ElementType>
-using FieldX = Chunk<ElementType, IDomainX>;
 
 template <class ElementType>
-using FieldVx = Chunk<ElementType, IDomainVx>;
+using FieldX = ddc::Chunk<ElementType, IDomainX>;
 
 template <class ElementType>
-using FieldSp = Chunk<ElementType, IDomainSp>;
+using FieldVx = ddc::Chunk<ElementType, IDomainVx>;
 
 template <class ElementType>
-using FieldSpX = Chunk<ElementType, IDomainSpX>;
+using FieldSp = ddc::Chunk<ElementType, IDomainSp>;
 
 template <class ElementType>
-using FieldSpVx = Chunk<ElementType, IDomainSpVx>;
+using FieldSpX = ddc::Chunk<ElementType, IDomainSpX>;
 
 template <class ElementType>
-using FieldSpXVx = Chunk<ElementType, IDomainSpXVx>;
+using FieldSpVx = ddc::Chunk<ElementType, IDomainSpVx>;
+
+template <class ElementType>
+using FieldSpXVx = ddc::Chunk<ElementType, IDomainSpXVx>;
 
 
 
@@ -153,16 +157,16 @@ template <class ElementType>
 using SpanSp = ChunkSpan<ElementType, IDomainSp>;
 
 template <class ElementType>
-using SpanX = ChunkSpan<ElementType, IDomainX>;
+using SpanX = ddc::ChunkSpan<ElementType, IDomainX>;
 
 template <class ElementType>
-using SpanVx = ChunkSpan<ElementType, IDomainVx>;
+using SpanVx = ddc::ChunkSpan<ElementType, IDomainVx>;
 
 template <class ElementType>
-using SpanSpXVx = ChunkSpan<ElementType, IDomainSpXVx>;
+using SpanSpXVx = ddc::ChunkSpan<ElementType, IDomainSpXVx>;
 
 template <class ElementType>
-using SpanSpVx = ChunkSpan<ElementType, IDomainSpVx>;
+using SpanSpVx = ddc::ChunkSpan<ElementType, IDomainSpVx>;
 
 
 
@@ -179,21 +183,21 @@ using DSpanSpVx = SpanSpVx<double>;
 
 
 template <class ElementType>
-using ViewX = ChunkSpan<ElementType const, IDomainX>;
+using ViewX = ddc::ChunkSpan<ElementType const, IDomainX>;
 
 template <class ElementType>
-using ViewVx = ChunkSpan<ElementType const, IDomainVx>;
+using ViewVx = ddc::ChunkSpan<ElementType const, IDomainVx>;
 
 template <class ElementType>
-using ViewSp = ChunkSpan<ElementType const, IDomainSp>;
+using ViewSp = ddc::ChunkSpan<ElementType const, IDomainSp>;
 template <class ElementType>
-using ViewSpVx = ChunkSpan<ElementType const, IDomainSpVx>;
+using ViewSpVx = ddc::ChunkSpan<ElementType const, IDomainSpVx>;
 
 template <class ElementType>
-using ViewSpXVx = ChunkSpan<ElementType const, IDomainSpXVx>;
+using ViewSpXVx = ddc::ChunkSpan<ElementType const, IDomainSpXVx>;
 
 template <class ElementType>
-using BSViewX = ChunkSpan<ElementType const, BSDomainX>;
+using BSViewX = ddc::ChunkSpan<ElementType const, BSDomainX>;
 
 
 
@@ -210,8 +214,8 @@ using DViewSpXVx = ViewSpXVx<double>;
 using DBSViewX = BSViewX<double>;
 
 using RDimFx = Fourier<RDimX>;
-using CoordFx = Coordinate<RDimFx>;
-using IDimFx = NonUniformPointSampling<RDimFx>;
-using IndexFx = DiscreteElement<IDimFx>;
-using IVectFx = DiscreteVector<IDimFx>;
-using IDomainFx = DiscreteDomain<IDimFx>;
+using CoordFx = ddc::Coordinate<RDimFx>;
+using IDimFx = ddc::NonUniformPointSampling<RDimFx>;
+using IndexFx = ddc::DiscreteElement<IDimFx>;
+using IVectFx = ddc::DiscreteVector<IDimFx>;
+using IDomainFx = ddc::DiscreteDomain<IDimFx>;

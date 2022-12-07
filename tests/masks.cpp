@@ -27,9 +27,11 @@ TEST(Masks, Ordering)
     // Creating mesh & supports
     init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    SplineXBuilder const builder_x;
+    init_discrete_space<IDimX>(InterpPointsX::get_sampling());
 
-    IDomainX const gridx = builder_x.interpolation_domain();
+    IDomainX gridx(InterpPointsX::get_domain());
+
+    SplineXBuilder const builder_x(gridx);
 
     SplineEvaluator<BSplinesX> const
             spline_x_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);

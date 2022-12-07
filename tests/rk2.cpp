@@ -37,12 +37,15 @@ TEST(Rk2, Rk2_uniform_vx)
 
     init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    SplineXBuilder const builder_x;
+    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
 
-    SplineVxBuilder const builder_vx;
+    IDomainX gridx(InterpPointsX::get_domain());
+    IDomainVx gridvx(InterpPointsVx::get_domain());
 
-    IDomainX const gridx = builder_x.interpolation_domain();
-    IDomainVx const gridvx = builder_vx.interpolation_domain();
+    SplineXBuilder const builder_x(gridx);
+    SplineVxBuilder const builder_vx(gridvx);
+
     IDomainSp const gridsp = dom_sp;
 
     Quadrature<IDimX> const integrate_x(trapezoid_quadrature_coefficients(gridx));

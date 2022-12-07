@@ -78,9 +78,14 @@ int main(int argc, char** argv)
 
     init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    SplineXBuilder const builder_x;
+    init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
+    DiscreteDomain<IDimX> interpolation_domain_x(InterpPointsX::get_domain());
+    DiscreteDomain<IDimVx> interpolation_domain_vx(InterpPointsVx::get_domain());
 
-    SplineVxBuilder const builder_vx;
+    SplineXBuilder const builder_x(interpolation_domain_x);
+
+    SplineVxBuilder const builder_vx(interpolation_domain_vx);
 
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
