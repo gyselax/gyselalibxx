@@ -78,6 +78,10 @@ using SplineXY = Chunk<double, DiscreteDomain<BSplinesX, BSplinesY>>;
 using FieldXY = Chunk<double, DiscreteDomain<IDimX, IDimY>>;
 using CoordXY = Coordinate<DimX, DimY>;
 
+using BuilderX = SplineBuilder<BSplinesX, IDimX, s_bcl, s_bcr>;
+using BuilderY = SplineBuilder<BSplinesY, IDimY, s_bcl, s_bcr>;
+using BuilderXY = SplineBuilder2D<BuilderX, BuilderY>;
+
 using EvaluatorType = Evaluator2D::Evaluator<
         PolynomialEvaluator::Evaluator<IDimX, s_degree_x>,
         PolynomialEvaluator::Evaluator<IDimY, s_degree_y>>;
@@ -138,8 +142,7 @@ TEST(NonPeriodic2DSplineBuilderTest, Identity)
             interpolation_domain(interpolation_domain_X, interpolation_domain_Y);
 
     // 4. Create a SplineBuilder over BSplines using some boundary conditions
-    const SplineBuilder2D<BSplinesX, BSplinesY, IDimX, IDimY, s_bcl, s_bcr, s_bcl, s_bcr>
-            spline_builder(interpolation_domain);
+    const BuilderXY spline_builder(interpolation_domain);
 
     // 5. Allocate and fill a chunk over the interpolation domain
     FieldXY yvals(interpolation_domain);

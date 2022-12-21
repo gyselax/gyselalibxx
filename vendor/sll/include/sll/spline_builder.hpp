@@ -30,6 +30,8 @@ private:
 public:
     using bsplines_type = BSplines;
 
+    using mesh_type = interpolation_mesh_type;
+
     using interpolation_domain_type = ddc::DiscreteDomain<interpolation_mesh_type>;
 
 public:
@@ -42,6 +44,9 @@ public:
     static constexpr int s_nbc_xmin = n_user_input(BcXmin, BSplines::degree());
 
     static constexpr int s_nbc_xmax = n_user_input(BcXmax, BSplines::degree());
+
+    static constexpr BoundCond s_bc_xmin = BcXmin;
+    static constexpr BoundCond s_bc_xmax = BcXmax;
 
 private:
     interpolation_domain_type m_interpolation_domain;
