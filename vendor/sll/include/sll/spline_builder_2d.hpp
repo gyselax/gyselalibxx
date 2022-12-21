@@ -2,43 +2,32 @@
 #include <sll/spline_builder.hpp>
 
 
-template <
-        class BSplines1,
-        class BSplines2,
-        class interpolation_mesh_type1,
-        class interpolation_mesh_type2,
-        BoundCond BcXmin1,
-        BoundCond BcXmax1,
-        BoundCond BcXmin2,
-        BoundCond BcXmax2>
+template <class SplineBuilder1, class SplineBuilder2>
 class SplineBuilder2D
 {
-    static_assert(
-            (BSplines1::is_periodic() && (BcXmin1 == BoundCond::PERIODIC)
-             && (BcXmax1 == BoundCond::PERIODIC))
-            || (!BSplines1::is_periodic() && (BcXmin1 != BoundCond::PERIODIC)
-                && (BcXmax1 != BoundCond::PERIODIC)));
-    static_assert(
-            (BSplines2::is_periodic() && (BcXmin2 == BoundCond::PERIODIC)
-             && (BcXmax2 == BoundCond::PERIODIC))
-            || (!BSplines2::is_periodic() && (BcXmin2 != BoundCond::PERIODIC)
-                && (BcXmax2 != BoundCond::PERIODIC)));
-
 private:
-    using tag_type1 = typename BSplines1::tag_type;
-    using tag_type2 = typename BSplines2::tag_type;
+    using tag_type1 = typename SplineBuilder1::bsplines_type::tag_type;
+    using tag_type2 = typename SplineBuilder2::bsplines_type::tag_type;
 
 public:
-    using bsplines_type1 = BSplines1;
-    using bsplines_type2 = BSplines2;
+    using bsplines_type1 = typename SplineBuilder1::bsplines_type;
+    using bsplines_type2 = typename SplineBuilder2::bsplines_type;
 
-    using builder_type1 = SplineBuilder<BSplines1, interpolation_mesh_type1, BcXmin1, BcXmax1>;
-    using builder_type2 = SplineBuilder<BSplines2, interpolation_mesh_type2, BcXmin2, BcXmax2>;
+    using builder_type1 = SplineBuilder1;
+    using builder_type2 = SplineBuilder2;
+
+    using interpolation_mesh_type1 = typename SplineBuilder1::mesh_type;
+    using interpolation_mesh_type2 = typename SplineBuilder2::mesh_type;
 
     using interpolation_domain_type1 = DiscreteDomain<interpolation_mesh_type1>;
     using interpolation_domain_type2 = DiscreteDomain<interpolation_mesh_type2>;
     using interpolation_domain_type
             = DiscreteDomain<interpolation_mesh_type1, interpolation_mesh_type2>;
+
+    static constexpr BoundCond BcXmin1 = SplineBuilder1::s_bc_xmin;
+    static constexpr BoundCond BcXmax1 = SplineBuilder1::s_bc_xmax;
+    static constexpr BoundCond BcXmin2 = SplineBuilder2::s_bc_xmin;
+    static constexpr BoundCond BcXmax2 = SplineBuilder2::s_bc_xmax;
 
 private:
     builder_type1 spline_builder1;
@@ -92,34 +81,18 @@ public:
         return *m_interpolation_domain;
     }
 
-    DiscreteDomain<BSplines1, BSplines2> spline_domain() const noexcept
+    DiscreteDomain<bsplines_type1, bsplines_type2> spline_domain() const noexcept
     {
-        return DiscreteDomain<BSplines1, BSplines2>(DiscreteVector<BSplines1, BSplines2>(
-                discrete_space<BSplines1>().size(),
-                discrete_space<BSplines2>().size()));
+        return DiscreteDomain<bsplines_type1, bsplines_type2>(
+                DiscreteVector<bsplines_type1, bsplines_type2>(
+                        discrete_space<bsplines_type1>().size(),
+                        discrete_space<bsplines_type2>().size()));
     }
 };
 
 
-template <
-        class BSplines1,
-        class BSplines2,
-        class interpolation_mesh_type1,
-        class interpolation_mesh_type2,
-        BoundCond BcXmin1,
-        BoundCond BcXmax1,
-        BoundCond BcXmin2,
-        BoundCond BcXmax2>
-void SplineBuilder2D<
-        BSplines1,
-        BSplines2,
-        interpolation_mesh_type1,
-        interpolation_mesh_type2,
-        BcXmin1,
-        BcXmax1,
-        BcXmin2,
-        BcXmax2>::
-operator()(
+template <class SplineBuilder1, class SplineBuilder2>
+void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
         ChunkSpan<double, DiscreteDomain<bsplines_type1, bsplines_type2>> spline,
         ChunkSpan<double const, interpolation_domain_type> vals,
         std::optional<CDSpan2D> const derivs_xmin,
@@ -274,7 +247,7 @@ operator()(
         for (int i = nbc_ymax; i > 0; --i) {
             // In the boundary region we interpolate the derivatives
             const DiscreteElement<bsplines_type2> spl_idx(
-                    i + discrete_space<BSplines2>().nbasis() - nbc_ymax - 1);
+                    i + discrete_space<bsplines_type2>().nbasis() - nbc_ymax - 1);
 
             // Get interpolated values
             Chunk<double, interpolation_domain_type1> vals1(spline_builder1.interpolation_domain());
@@ -321,9 +294,9 @@ operator()(
     *  Cycle over x1 position (or order of x1-derivative at boundary)
     *  and interpolate x2 cofficients along x2 direction.
     *******************************************************************/
-    const DiscreteDomain<BSplines1> spline_basis_domain = DiscreteDomain<BSplines1>(
-            DiscreteElement<BSplines1>(0),
-            DiscreteVector<BSplines1>(discrete_space<BSplines1>().nbasis()));
+    const DiscreteDomain<bsplines_type1> spline_basis_domain = DiscreteDomain<bsplines_type1>(
+            DiscreteElement<bsplines_type1>(0),
+            DiscreteVector<bsplines_type1>(discrete_space<bsplines_type1>().nbasis()));
 
     for_each(spline_basis_domain, [&](DiscreteElement<bsplines_type1> const i) {
         const ChunkSpan<double, DiscreteDomain<bsplines_type2>> line_2 = spline[i];
@@ -350,18 +323,21 @@ operator()(
         spline_builder2(spline2, vals2_i, deriv_l, deriv_r);
 
         // Re-write result into 2d spline structure
-        for_each(get_domain<BSplines2>(spline), [&](DiscreteElement<bsplines_type2> const j) {
+        for_each(get_domain<bsplines_type2>(spline), [&](DiscreteElement<bsplines_type2> const j) {
             spline(i, j) = spline2(j);
         });
     });
 
-    if (BSplines1::is_periodic()) {
-        for (std::size_t i(0); i < BSplines1::degree(); ++i) {
+    if (bsplines_type1::is_periodic()) {
+        for (std::size_t i(0); i < bsplines_type1::degree(); ++i) {
             const DiscreteElement<bsplines_type1> i_start(i);
-            const DiscreteElement<bsplines_type1> i_end(discrete_space<BSplines1>().nbasis() + i);
-            for_each(get_domain<BSplines2>(spline), [&](DiscreteElement<bsplines_type2> const j) {
-                spline(i_end, j) = spline(i_start, j);
-            });
+            const DiscreteElement<bsplines_type1> i_end(
+                    discrete_space<bsplines_type1>().nbasis() + i);
+            for_each(
+                    get_domain<bsplines_type2>(spline),
+                    [&](DiscreteElement<bsplines_type2> const j) {
+                        spline(i_end, j) = spline(i_start, j);
+                    });
         }
     }
 }
