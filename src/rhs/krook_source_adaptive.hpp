@@ -18,25 +18,26 @@ private:
     DFieldVx m_ftarget;
     std::unique_ptr<ITimeSolver> m_solver;
 
-    double get_amplitudes(DViewSpXVx allfdistribu, IndexSpX const ispx) const;
-
 public:
     KrookSourceAdaptive(
             IDomainX const& gridx,
             IDomainVx const& gridvx,
-            RhsType type,
+            RhsType const type,
             RhsSolver const solver_name,
-            double const extent,
-            double const stiffness,
-            double const amplitude,
-            double const density,
-            double const temperature);
+            double extent,
+            double stiffness,
+            double amplitude,
+            double density,
+            double temperature);
 
     KrookSourceAdaptive(KrookSourceAdaptive&&) = default;
 
     ~KrookSourceAdaptive() override = default;
 
-    void rhs(DSpanVx rhs, DViewSpXVx allfdistribu, double const time, IndexSpX const ispx) const;
+    void rhs(DSpanVx rhs, DViewSpXVx allfdistribu, double time, IndexSpX const& ispx) const;
 
     DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
+
+private:
+    double get_amplitudes(DViewSpXVx allfdistribu, IndexSpX const& ispx) const;
 };

@@ -7,6 +7,20 @@
 #include <mask_tanh.hpp>
 #include <maxwellianequilibrium.hpp>
 
+/**
+ * Solves the equation \partial f / \partial_t = -amplitude * mask * ( f - ftarget) (BGK operator)
+ * 
+ * mask defines the spatial region where the operator is active. 
+ * If type = Source, the mask equals one in the central zone of the plasma of width extent; 
+ * If type = Sink, the mask equals zero in the central zone of the plasma of width extent;
+ *
+ * ftarget is a maxwellian characterized by density and temperature, and a zero fluid velocity.
+ *
+ * amplitude is a constant
+ *
+ * therefore : 
+ * f(t+dt) = ftarget + (f(t)-ftarget)*exp(-amplitude*mask*dt)
+ */
 KrookSourceConstant::KrookSourceConstant(
         IDomainX const& gridx,
         IDomainVx const& gridvx,
