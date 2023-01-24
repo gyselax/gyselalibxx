@@ -10,6 +10,21 @@
 #include <quadrature.hpp>
 #include <trapezoid_quadrature.hpp>
 
+/**
+ * Solves the equation \partial f / \partial_t = -amplitude * mask * ( f - ftarget) (BGK operator)
+ * 
+ * mask defines the spatial region where the operator is active. 
+ * If type = Source, the mask equals one in the central zone of the plasma of width extent; 
+ * If type = Sink, the mask equals zero in the central zone of the plasma of width extent;
+ *
+ * ftarget is a maxwellian characterized by density and temperature, and a zero fluid velocity.
+ *
+ * amplitude depends on space, time and the considered species so that: 
+ * amplitude(ions) = m_amplitude = constant
+ * amplitude(electrons, x, t) = m_amplitude
+ *                  * (density_ions(x,t) - m_density) / (density_electrons(x,t) - m_density)
+ * so that the operator conserves locally the charge. 
+ */
 KrookSourceAdaptive::KrookSourceAdaptive(
         IDomainX const& gridx,
         IDomainVx const& gridvx,
@@ -47,8 +62,8 @@ KrookSourceAdaptive::KrookSourceAdaptive(
         m_solver = std::make_unique<RK2_solver>(
                 [this](DSpanVx rhs_val,
                        DViewSpXVx allfdistribu,
-                       double const time,
-                       IndexSpX const ispx) { rhs(rhs_val, allfdistribu, time, ispx); });
+                       double time,
+                       IndexSpX const& ispx) { rhs(rhs_val, allfdistribu, time, ispx); });
         break;
     }
 
@@ -56,7 +71,14 @@ KrookSourceAdaptive::KrookSourceAdaptive(
     MaxwellianEquilibrium::compute_maxwellian(m_ftarget, m_density, m_temperature, 0.);
 }
 
-double KrookSourceAdaptive::get_amplitudes(DViewSpXVx allfdistribu, IndexSpX const ispx) const
+/**
+ * Computes the amplitude parameter for each species: 
+ * amplitude(ions) = m_amplitude = constant
+ * amplitude(electrons, x, t) = m_amplitude
+ *                  * (density_ions(x,t) - m_density) / (density_electrons(x,t) - m_density)
+ */
+double KrookSourceAdaptive::get_amplitudes(DViewSpXVx const allfdistribu, IndexSpX const& ispx)
+        const
 {
     if (charge(select<IDimSp>(ispx)) >= 0.) {
         return m_amplitude;
@@ -81,11 +103,14 @@ double KrookSourceAdaptive::get_amplitudes(DViewSpXVx allfdistribu, IndexSpX con
     return amplitude;
 }
 
+/**
+ * right hand side of the equation \partial f / \partial_t = -amplitude * mask * ( f - ftarget)
+ */
 void KrookSourceAdaptive::rhs(
-        DSpanVx rhs,
-        DViewSpXVx allfdistribu,
+        DSpanVx const rhs,
+        DViewSpXVx const allfdistribu,
         double const time,
-        IndexSpX const ispx) const
+        IndexSpX const& ispx) const
 {
     double const amplitude = get_amplitudes(allfdistribu, ispx);
     for_each(policies::parallel_host, get_domain<IDimVx>(allfdistribu), [&](IndexVx const ivx) {
@@ -95,7 +120,7 @@ void KrookSourceAdaptive::rhs(
     });
 }
 
-DSpanSpXVx KrookSourceAdaptive::operator()(DSpanSpXVx allfdistribu, double const dt) const
+DSpanSpXVx KrookSourceAdaptive::operator()(DSpanSpXVx const allfdistribu, double const dt) const
 {
     return (*m_solver)(allfdistribu, dt);
 }

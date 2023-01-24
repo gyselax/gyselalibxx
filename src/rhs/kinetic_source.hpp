@@ -15,19 +15,19 @@ private:
     double m_density;
     double m_energy;
     double m_temperature;
-    DFieldX m_mask_source;
-    DFieldVx m_kinetic_source_vx;
+    DFieldX m_spatial_extent;
+    DFieldVx m_velocity_shape;
 
 public:
     KineticSource(
             IDomainX const& gridx,
             IDomainVx const& gridv,
-            double const extent,
-            double const stiffness,
-            double const amplitude,
-            double const density,
-            double const energy,
-            double const temperature);
+            double extent,
+            double stiffness,
+            double amplitude,
+            double density,
+            double energy,
+            double temperature);
 
     ~KineticSource() override = default;
 
