@@ -9,7 +9,7 @@ cmake_tests:
     rm -rf build || true
     mkdir build
     cd build
-    cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
+    cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 ..
     make -j 4
     ctest -j 2 --output-on-failure --timeout 5 -LE test_on_Release_only --output-junit tests.xml
   artifacts:
@@ -28,7 +28,7 @@ cmake_tests_Release:
     rm -rf build || true
     mkdir build
     cd build
-    cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
+    cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 ..
     make -j 4
     ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
     ls ./tests/landau/fft/growthrate_t0.0to45.0.png
