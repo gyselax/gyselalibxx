@@ -6,7 +6,7 @@ enum class MaskType { Normal, Inverted };
 
 DFieldX mask_tanh(
         IDomainX const& gridx,
-        double const extent,
-        double const stiffness,
-        MaskType type,
-        bool const normalized);
+        double extent,
+        double stiffness,
+        MaskType const type,
+        bool normalized);

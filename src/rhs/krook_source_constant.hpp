@@ -21,11 +21,11 @@ public:
             IDomainX const& gridx,
             IDomainVx const& gridv,
             RhsType const type,
-            double const extent,
-            double const stiffness,
-            double const amplitude,
-            double const density,
-            double const temperature);
+            double extent,
+            double stiffness,
+            double amplitude,
+            double density,
+            double temperature);
 
     KrookSourceConstant(KrookSourceConstant&&) = default;
 
