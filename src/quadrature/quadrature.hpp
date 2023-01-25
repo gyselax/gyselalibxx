@@ -18,6 +18,8 @@ public:
     {
     }
 
+    Quadrature(Quadrature&& rhs) = default;
+
     ~Quadrature() = default;
 
     double operator()(ChunkSpan<const double, DiscreteDomain<IDim>> const values) const
