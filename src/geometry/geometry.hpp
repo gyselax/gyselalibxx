@@ -96,7 +96,9 @@ using IVectSpXVx = ddc::DiscreteVector<IDimSp, IDimX, IDimVx>;
 
 using IVectSp = ddc::DiscreteVector<IDimSp>;
 
-using IVectSpVx = DiscreteVector<IDimSp, IDimVx>;
+using IVectSpX = ddc::DiscreteVector<IDimSp, IDimX>;
+
+using IVectSpVx = ddc::DiscreteVector<IDimSp, IDimVx>;
 
 
 
@@ -154,10 +156,13 @@ using DFieldSpXVx = FieldSpXVx<double>;
 
 
 template <class ElementType>
-using SpanSp = ChunkSpan<ElementType, IDomainSp>;
+using SpanSp = ddc::ChunkSpan<ElementType, IDomainSp>;
 
 template <class ElementType>
 using SpanX = ddc::ChunkSpan<ElementType, IDomainX>;
+
+template <class ElementType>
+using SpanSpX = ddc::ChunkSpan<ElementType, IDomainSpX>;
 
 template <class ElementType>
 using SpanVx = ddc::ChunkSpan<ElementType, IDomainVx>;
@@ -171,6 +176,8 @@ using SpanSpVx = ddc::ChunkSpan<ElementType, IDomainSpVx>;
 
 
 using DSpanSp = SpanSp<double>;
+
+using DSpanSpX = SpanSpX<double>;
 
 using DSpanX = SpanX<double>;
 
@@ -190,6 +197,10 @@ using ViewVx = ddc::ChunkSpan<ElementType const, IDomainVx>;
 
 template <class ElementType>
 using ViewSp = ddc::ChunkSpan<ElementType const, IDomainSp>;
+
+template <class ElementType>
+using ViewSpX = ddc::ChunkSpan<ElementType const, IDomainSpX>;
+
 template <class ElementType>
 using ViewSpVx = ddc::ChunkSpan<ElementType const, IDomainSpVx>;
 
@@ -206,6 +217,8 @@ using DViewX = ViewX<double>;
 using DViewVx = ViewVx<double>;
 
 using DViewSp = ViewSp<double>;
+
+using DViewSpX = ViewSpX<double>;
 
 using DViewSpVx = ViewSpVx<double>;
 

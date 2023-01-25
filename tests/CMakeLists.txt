@@ -7,12 +7,13 @@ include(GoogleTest)
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
 
 add_executable(unit_tests_${GEOMETRY_VARIANT}
-    main.cpp
-    quadrature.cpp
-    splitvlasovsolver.cpp
+    fluid_moments.cpp
     kineticsource.cpp
     krooksource.cpp
+    main.cpp
     masks.cpp
+    quadrature.cpp
+    splitvlasovsolver.cpp
     rk2.cpp
 )
 target_compile_features(unit_tests_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
@@ -24,9 +25,10 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         GTest::gmock_main
         paraconf::paraconf
         sll::splines
+        vcx::boltzmann_${GEOMETRY_VARIANT}
         vcx::poisson_${GEOMETRY_VARIANT}
         vcx::quadrature
-        vcx::boltzmann_${GEOMETRY_VARIANT}
+        vcx::utils_${GEOMETRY_VARIANT}
 )
 
 gtest_discover_tests(unit_tests_${GEOMETRY_VARIANT}
