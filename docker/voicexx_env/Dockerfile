@@ -45,7 +45,7 @@ RUN chmod +x /bin/bash_run \
  && apt-get autoremove -y \
  && apt-get clean -y \
  && apt-get autoclean -y \
- && python3 -m pip install --system -U --no-cache-dir \
+ && python3 -m pip install -U --no-cache-dir \
     PyYAML \
     dask \
     h5py \
