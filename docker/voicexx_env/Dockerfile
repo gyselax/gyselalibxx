@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 COPY bash_run /bin/
 ENV BASH_ENV=/etc/profile
