@@ -18,7 +18,7 @@ RUN chmod +x /bin/bash_run \
     apt-utils \
     ca-certificates \
     wget \
- && echo "deb [ arch=amd64 ] https://raw.githubusercontent.com/pdidev/repo/pdi-master.ubuntu focal main" > /etc/apt/sources.list.d/pdi.list \
+ && echo "deb [ arch=amd64 ] https://raw.githubusercontent.com/pdidev/repo/pdi-master.ubuntu jammy main" > /etc/apt/sources.list.d/pdi.list \
  && wget -O /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg https://raw.githubusercontent.com/pdidev/repo/pdi-master.ubuntu/pdidev-archive-keyring.gpg \
  && chmod a+r /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg \
  && apt-get update -y \
