@@ -37,8 +37,8 @@ struct for_each_tuple_cat;
 template <class... Tuples, class Tuple>
 struct for_each_tuple_cat<std::tuple<Tuples...>, Tuple>
 {
-    using type = std::tuple<decltype(
-            std::tuple_cat(std::declval<Tuples>(), std::declval<Tuple>()))...>;
+    using type = std::tuple<
+            decltype(std::tuple_cat(std::declval<Tuples>(), std::declval<Tuple>()))...>;
 };
 
 /// Construct a tuple of tuples that is the result of the concatenation of the tuples in TupleOfTuples with Tuple.
