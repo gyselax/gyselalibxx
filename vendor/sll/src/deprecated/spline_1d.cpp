@@ -47,22 +47,16 @@ template <class T, bool periodic, std::enable_if_t<std::is_base_of_v<BSplines, T
 double Spline1D::eval_intern(double x, const T& bspl, DSpan1D& vals) const
 {
     if constexpr (periodic) {
-        if (x < bspl.xmin() || x > bspl.xmax())
-            [[unlikely]]
-            {
-                x -= std::floor((x - bspl.xmin()) / bspl.length()) * bspl.length();
-            }
+        if (x < bspl.xmin() || x > bspl.xmax()) [[unlikely]] {
+            x -= std::floor((x - bspl.xmin()) / bspl.length()) * bspl.length();
+        }
     } else {
-        if (x < bspl.xmin())
-            [[unlikely]]
-            {
-                return m_left_bc(x);
-            }
-        if (x > bspl.xmax())
-            [[unlikely]]
-            {
-                return m_right_bc(x);
-            }
+        if (x < bspl.xmin()) [[unlikely]] {
+            return m_left_bc(x);
+        }
+        if (x > bspl.xmax()) [[unlikely]] {
+            return m_right_bc(x);
+        }
     }
     return eval_intern_no_bcs<T>(x, bspl, vals);
 }
