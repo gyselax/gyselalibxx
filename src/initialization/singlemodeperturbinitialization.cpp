@@ -2,6 +2,7 @@
 
 #include <ddc/ddc.hpp>
 
+#include "ddc_helper.hpp"
 #include "singlemodeperturbinitialization.hpp"
 
 SingleModePerturbInitialization::SingleModePerturbInitialization(
@@ -42,31 +43,13 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
     return allfdistribu;
 }
 
-//TODO: this should be directly handled by ddc::Discretization really,
-//      in the meantime, we do it ourselves
-template <class IDim>
-constexpr std::enable_if_t<!IDim::continuous_dimension_type::PERIODIC, double>
-total_interval_length(DiscreteDomain<IDim> const& dom)
-{
-    return fabs(rlength(dom));
-}
-
-//TODO: this should be directly handled by ddc::Discretization really,
-//      in the meantime, we do it ourselves
-template <class RDim>
-constexpr std::enable_if_t<RDim::PERIODIC, double> total_interval_length(
-        DiscreteDomain<UniformPointSampling<RDim>> const& dom)
-{
-    return fabs(rlength(dom) + step<UniformPointSampling<RDim>>());
-}
-
 void SingleModePerturbInitialization::perturbation_initialization(
         DSpanX const perturbation,
         int const mode,
         double const perturb_amplitude) const
 {
     IDomainX const gridx = perturbation.domain();
-    double const Lx = total_interval_length(gridx);
+    double const Lx = ddcHelper::total_interval_length(gridx);
 
     double const kx = mode * 2. * M_PI / Lx;
     for (IndexX const ix : gridx) {

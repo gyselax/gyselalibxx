@@ -21,6 +21,7 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
+#include "collisions_intra.hpp"
 #include "femnonperiodicpoissonsolver.hpp"
 #include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
@@ -258,6 +259,11 @@ int main(int argc, char** argv)
             PCpp_double(conf_voicexx, ".KineticSource.energy"),
             PCpp_double(conf_voicexx, ".KineticSource.temperature"));
     rhs_operators.emplace_back(rhs_kinetic_source);
+
+    CollisionsIntra const
+            collisions_intra(meshSpXVx, PCpp_double(conf_voicexx, ".CollisionsInfo.nustar0"));
+    collisions_intra.expose_rhs_to_pdi();
+    rhs_operators.emplace_back(collisions_intra);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
     SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);

@@ -3,9 +3,10 @@
 
 #include <ddc/ddc.hpp>
 
-#include <krook_source_constant.hpp>
-#include <mask_tanh.hpp>
 #include <maxwellianequilibrium.hpp>
+
+#include "krook_source_constant.hpp"
+#include "mask_tanh.hpp"
 
 /**
  * Solves the equation \partial f / \partial_t = -amplitude * mask * ( f - ftarget) (BGK operator)

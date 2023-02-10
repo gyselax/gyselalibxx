@@ -4,6 +4,8 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
 
 add_library("rhs_${GEOMETRY_VARIANT}" STATIC
     kinetic_source.cpp
+    collisions_utils.cpp
+    collisions_intra.cpp
     krook_source_adaptive.cpp
     krook_source_constant.cpp
     mask_tanh.cpp
@@ -22,10 +24,11 @@ target_link_libraries("rhs_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         vcx::geometry_${GEOMETRY_VARIANT}
-        vcx::initialization_${GEOMETRY_VARIANT}
         vcx::quadrature
         vcx::speciesinfo
+        vcx::initialization_${GEOMETRY_VARIANT}
         vcx::time_${GEOMETRY_VARIANT}
+        vcx::utils_${GEOMETRY_VARIANT}
 )
 
 add_library("vcx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
