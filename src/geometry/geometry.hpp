@@ -159,6 +159,9 @@ template <class ElementType>
 using SpanSp = ddc::ChunkSpan<ElementType, IDomainSp>;
 
 template <class ElementType>
+using SpanSpX = ddc::ChunkSpan<ElementType, IDomainSpX>;
+
+template <class ElementType>
 using SpanX = ddc::ChunkSpan<ElementType, IDomainX>;
 
 template <class ElementType>

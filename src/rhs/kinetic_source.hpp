@@ -9,8 +9,6 @@
 class KineticSource : public IRightHandSide
 {
 private:
-    double m_extent;
-    double m_stiffness;
     double m_amplitude;
     double m_density;
     double m_energy;

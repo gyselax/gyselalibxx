@@ -1,8 +1,9 @@
 #include <ddc/ddc.hpp>
 
-#include <kinetic_source.hpp>
-#include <mask_tanh.hpp>
 #include <species_info.hpp>
+
+#include "kinetic_source.hpp"
+#include "mask_tanh.hpp"
 
 /**
  * Solves the equation \partial f / \partial t = S(v, x),
@@ -31,9 +32,7 @@ KineticSource::KineticSource(
         double const density,
         double const energy,
         double const temperature)
-    : m_extent(extent)
-    , m_stiffness(stiffness)
-    , m_amplitude(amplitude)
+    : m_amplitude(amplitude)
     , m_density(density)
     , m_energy(energy)
     , m_temperature(temperature)

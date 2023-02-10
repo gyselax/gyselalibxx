@@ -2,26 +2,17 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <paraconf.h>
-#include <pdi.h>
-
-#include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "kinetic_source.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
-#include "splitrighthandsidesolver.hpp"
 #include "trapezoid_quadrature.hpp"
 
-TEST(KineticSource, Ordering)
+TEST(KineticSource, Moments)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(1.0);
@@ -52,18 +43,10 @@ TEST(KineticSource, Ordering)
 
     IDomainX const gridx = builder_x.interpolation_domain();
     IDomainVx const gridvx = builder_vx.interpolation_domain();
-    IDomainSp const gridsp = dom_sp;
+    IDomainSpXVx const mesh(dom_sp, gridx, gridvx);
 
     Quadrature<IDimX> const integrate_x(trapezoid_quadrature_coefficients(gridx));
     Quadrature<IDimVx> const integrate_v(trapezoid_quadrature_coefficients(gridvx));
-
-    IDomainSpXVx const mesh(gridsp, gridx, gridvx);
-
-    SplineEvaluator<BSplinesX> const
-            spline_x_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);
-
-    SplineEvaluator<BSplinesVx> const
-            spline_vx_evaluator(g_null_boundary<BSplinesVx>, g_null_boundary<BSplinesVx>);
 
     FieldSp<int> charges(dom_sp);
     charges(dom_sp.front()) = 1;
@@ -80,7 +63,6 @@ TEST(KineticSource, Ordering)
             std::move(masses),
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
-
     DFieldSpXVx allfdistribu(mesh);
 
     // Initialization of the distribution function
