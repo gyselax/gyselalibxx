@@ -17,6 +17,8 @@ metadata:
     subtype: double
     size: [ '$MeshVx_extents[0]' ]
 
+  collintra_nustar0 : double
+
 data:
   fdistribu_extents: { type: array, subtype: int64, size: 3 }
   fdistribu:
@@ -44,7 +46,13 @@ plugins:
     - file: 'VOICEXX_initstate.h5'
       on_event: [initial_state]
       collision_policy: replace_and_warn
-      write: [Nx, Nvx, MeshX, MeshVx, nbstep_diag ]
+      write:
+        - Nx
+        - Nvx
+        - MeshX
+        - MeshVx
+        - nbstep_diag
+        - collintra_nustar0
     - file: 'VOICEXX_${iter_saved:05}.h5'
       on_event: [iteration, last_iteration]
       when: '${iter} % ${nbstep_diag} = 0'

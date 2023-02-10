@@ -1,8 +1,9 @@
 #pragma once
 
 #include <geometry.hpp>
-#include <irighthandside.hpp>
 #include <rk2_solver.hpp>
+
+#include "irighthandside.hpp"
 
 class KrookSourceAdaptive : public IRightHandSide
 {

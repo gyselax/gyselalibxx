@@ -2,28 +2,12 @@
 
 #include <ddc/ddc.hpp>
 
+#include <ddc_helper.hpp>
 #include <geometry.hpp>
-#include <mask_tanh.hpp>
 #include <quadrature.hpp>
 #include <trapezoid_quadrature.hpp>
 
-//TODO: this should be directly handled by ddc::Discretization really,
-//      in the meantime, we do it ourselves
-template <class IDim>
-constexpr std::enable_if_t<!IDim::continuous_dimension_type::PERIODIC, double>
-total_interval_length(DiscreteDomain<IDim> const& dom)
-{
-    return std::fabs(rlength(dom));
-}
-
-//TODO: this should be directly handled by ddc::Discretization really,
-//      in the meantime, we do it ourselves
-template <class RDim>
-constexpr std::enable_if_t<RDim::PERIODIC, double> total_interval_length(
-        DiscreteDomain<UniformPointSampling<RDim>> const& dom)
-{
-    return std::fabs(rlength(dom) + step<UniformPointSampling<RDim>>());
-}
+#include "mask_tanh.hpp"
 
 /**
  * Returns a mask function defined with hyperbolic tangents
@@ -50,7 +34,7 @@ DFieldX mask_tanh(
 
     IVectX const Nx(gridx.size());
     CoordX const x_min(coordinate(gridx.front()));
-    double const Lx = total_interval_length(gridx);
+    double const Lx = ddcHelper::total_interval_length(gridx);
     CoordX const x_left(x_min + Lx * extent);
     CoordX const x_right(x_min + Lx - Lx * extent);
 

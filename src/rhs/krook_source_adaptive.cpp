@@ -4,11 +4,12 @@
 
 #include <ddc/ddc.hpp>
 
-#include <krook_source_adaptive.hpp>
-#include <mask_tanh.hpp>
 #include <maxwellianequilibrium.hpp>
 #include <quadrature.hpp>
 #include <trapezoid_quadrature.hpp>
+
+#include "krook_source_adaptive.hpp"
+#include "mask_tanh.hpp"
 
 /**
  * Solves the equation \partial f / \partial_t = -amplitude * mask * ( f - ftarget) (BGK operator)

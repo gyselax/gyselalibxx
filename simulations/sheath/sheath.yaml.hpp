@@ -45,6 +45,9 @@ KineticSource:
   energy: 1.
   temperature: 1.
 
+CollisionsInfo:
+  nustar0: 0.1
+
 Algorithm:
   deltat: 0.1
   nbiter: 100

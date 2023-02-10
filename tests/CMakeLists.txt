@@ -7,6 +7,8 @@ include(GoogleTest)
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
 
 add_executable(unit_tests_${GEOMETRY_VARIANT}
+    collisions_intra_gridvx.cpp
+    collisions_intra_maxwellian.cpp
     fluid_moments.cpp
     kineticsource.cpp
     krooksource.cpp
@@ -26,6 +28,7 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         paraconf::paraconf
         sll::splines
         vcx::boltzmann_${GEOMETRY_VARIANT}
+        vcx::initialization_${GEOMETRY_VARIANT}
         vcx::poisson_${GEOMETRY_VARIANT}
         vcx::quadrature
         vcx::utils_${GEOMETRY_VARIANT}
