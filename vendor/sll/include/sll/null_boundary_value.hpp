@@ -40,3 +40,20 @@ public:
 
 template <class BSplines1, class BSplines2>
 inline NullBoundaryValue2D<BSplines1, BSplines2> const g_null_boundary_2d;
+
+template <class PolarBSplines>
+class PolarNullBoundaryValue2D : public PolarSplineBoundaryValue2D<PolarBSplines>
+{
+public:
+    PolarNullBoundaryValue2D() = default;
+
+    ~PolarNullBoundaryValue2D() override = default;
+
+    double operator()(double x, double y, PolarSplineView<PolarBSplines>) const final
+    {
+        return 0.0;
+    }
+};
+
+template <class PolarBSplines>
+inline PolarNullBoundaryValue2D<PolarBSplines> const g_polar_null_boundary_2d;
