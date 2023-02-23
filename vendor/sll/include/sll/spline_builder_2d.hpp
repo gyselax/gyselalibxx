@@ -78,12 +78,13 @@ public:
 
     interpolation_domain_type const& interpolation_domain() const noexcept
     {
-        return *m_interpolation_domain;
+        return m_interpolation_domain;
     }
 
     DiscreteDomain<bsplines_type1, bsplines_type2> spline_domain() const noexcept
     {
         return DiscreteDomain<bsplines_type1, bsplines_type2>(
+                DiscreteElement<bsplines_type1, bsplines_type2>(0, 0),
                 DiscreteVector<bsplines_type1, bsplines_type2>(
                         discrete_space<bsplines_type1>().size(),
                         discrete_space<bsplines_type2>().size()));
