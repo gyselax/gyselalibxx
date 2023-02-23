@@ -4,8 +4,10 @@
 
 #include <ddc/ddc.hpp>
 
+#include <sll/mapping/curvilinear2d_to_cartesian.hpp>
+
 template <class DimX, class DimY, class DimR, class DimP>
-class CircularToCartesian
+class CircularToCartesian : public Curvilinear2DToCartesian<DimX, DimY, DimR, DimP>
 {
 public:
     using cartesian_tag_x = DimX;
@@ -26,21 +28,53 @@ public:
 
     CircularToCartesian& operator=(CircularToCartesian&& x) = default;
 
-    Coordinate<DimX, DimY> operator()(Coordinate<DimR, DimP> const& coord) const
+    ddc::Coordinate<DimX, DimY> operator()(ddc::Coordinate<DimR, DimP> const& coord) const
     {
         const double r = get<DimR>(coord);
         const double p = get<DimP>(coord);
         const double x = r * std::cos(p);
         const double y = r * std::sin(p);
-        return Coordinate<DimX, DimY>(x, y);
+        return ddc::Coordinate<DimX, DimY>(x, y);
     }
 
-    Coordinate<DimR, DimP> operator()(Coordinate<DimX, DimY> const& coord) const
+    ddc::Coordinate<DimR, DimP> operator()(ddc::Coordinate<DimX, DimY> const& coord) const
     {
         const double x = get<DimX>(coord);
         const double y = get<DimY>(coord);
         const double r = std::sqrt(x * x + y * y);
         const double p = std::atan2(y, x);
-        return Coordinate<DimR, DimP>(r, p);
+        return ddc::Coordinate<DimR, DimP>(r, p);
+    }
+
+    double jacobian(ddc::Coordinate<DimR, DimP> const& coord) const final
+    {
+        double r = get<DimR>(coord);
+        return r;
+    }
+
+    double jacobian_11(ddc::Coordinate<DimR, DimP> const& coord) const final
+    {
+        const double p = get<DimP>(coord);
+        return std::cos(p);
+    }
+
+    double jacobian_12(ddc::Coordinate<DimR, DimP> const& coord) const final
+    {
+        const double r = get<DimR>(coord);
+        const double p = get<DimP>(coord);
+        return -r * std::sin(p);
+    }
+
+    double jacobian_21(ddc::Coordinate<DimR, DimP> const& coord) const final
+    {
+        const double p = get<DimP>(coord);
+        return std::sin(p);
+    }
+
+    double jacobian_22(ddc::Coordinate<DimR, DimP> const& coord) const final
+    {
+        const double r = get<DimR>(coord);
+        const double p = get<DimP>(coord);
+        return r * std::cos(p);
     }
 };
