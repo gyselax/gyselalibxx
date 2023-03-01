@@ -85,3 +85,25 @@ inline std::size_t factorial(std::size_t f)
     }
     return r;
 }
+
+template <class T, std::size_t D>
+T dot_product(std::array<T, D> const& a, std::array<T, D> const& b)
+{
+    T result = 0;
+    for (std::size_t i(0); i < D; ++i) {
+        result += a[i] * b[i];
+    }
+    return result;
+}
+
+template <typename T>
+inline T min(T x, T y)
+{
+    return x < y ? x : y;
+}
+
+template <typename T>
+inline T max(T x, T y)
+{
+    return x > y ? x : y;
+}

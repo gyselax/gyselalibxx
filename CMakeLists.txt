@@ -97,6 +97,13 @@ endif()
 ## Use Kokkos from `vendor/`
 add_subdirectory("vendor/kokkos/" "kokkos")
 
+find_package (Eigen3 3.3 NO_MODULE)
+
+if (NOT EIGEN3_FOUND)
+  ## Use Eigen from `vendor/`
+  add_subdirectory("vendor/eigen/" "eigen")
+endif (NOT EIGEN3_FOUND)
+
 ## Use the discrete domain computation library (ddc) from `vendor/`
 add_subdirectory("vendor/ddc/" "ddc")
 

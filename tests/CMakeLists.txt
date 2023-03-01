@@ -52,3 +52,5 @@ target_sources(unit_tests_nonperiodic_rdimx PRIVATE femnonperiodicpoissonsolver.
 add_subdirectory(bump_on_tail)
 
 add_subdirectory(landau)
+
+add_subdirectory(polar_poisson)
