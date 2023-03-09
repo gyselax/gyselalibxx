@@ -3,6 +3,7 @@ cmake_tests:
   stage: test
   needs: []
   image: ghcr.io/gyselax/voicexx_env
+  timeout: 2 hours
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
@@ -21,6 +22,7 @@ cmake_tests_Release:
   stage: test
   needs: []
   image: ghcr.io/gyselax/voicexx_env
+  timeout: 2 hours
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
