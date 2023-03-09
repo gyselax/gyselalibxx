@@ -6,8 +6,6 @@
 #include <quadrature.hpp>
 #include <trapezoid_quadrature.hpp>
 
-IndexSp iion();
-
 void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0);
 
 // intra species collision operator helper functions
