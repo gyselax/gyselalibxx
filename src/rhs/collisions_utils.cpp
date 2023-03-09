@@ -1,6 +1,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <optional>
 
 #include <ddc_helper.hpp>
 #include <quadrature.hpp>
@@ -9,15 +10,26 @@
 
 #include "collisions_utils.hpp"
 
-/**
- * Useful function for computing collision related quantities: 
- *  - kernel maxwellian moments
- */
+namespace {
 
-IndexSp iion()
+/**
+ * Useful function for computing collision related quantities:
+ *  - kernel maxwellian moments
+ * Warning: only meaningful for the collision operator!
+ */
+IndexSp find_ion(IDomainSp const dom_sp)
 {
-    return ielec() + 1;
+    assert(dom_sp.size() == 2);
+    std::optional<IndexSp> iion_opt;
+    for (IndexSp const isp : dom_sp) {
+        if (charge(isp) > 0) {
+            iion_opt = isp;
+        }
+    }
+    return iion_opt.value();
 }
+
+} // namespace
 
 /**
  * Computes the spatial profile of nustar, which is constant here,
@@ -57,20 +69,20 @@ void compute_collfreq_ei(
         DViewSpX density,
         DViewSpX temperature)
 {
+    IndexSp const iion = find_ion(density.domain<IDimSp>());
     double const coeff(
-            charge(iion()) * charge(iion())
-            / (4 * std::sqrt(2) * charge(ielec()) * charge(ielec())));
-    double const mass_ratio(mass(ielec()) / mass(iion()));
+            charge(iion) * charge(iion) / (4 * std::sqrt(2) * charge(ielec()) * charge(ielec())));
+    double const mass_ratio(mass(ielec()) / mass(iion));
     for_each(policies::parallel_host, collfreq_ei.domain(), [&](IndexX const ix) {
         double const collfreq_elec(
                 nustar_profile(ielec(), ix) * density(ielec(), ix)
                 / std::pow(temperature(ielec(), ix), 1.5));
 
         collfreq_ei(ix)
-                = coeff * collfreq_elec * density(iion(), ix) / density(ielec(), ix)
+                = coeff * collfreq_elec * density(iion, ix) / density(ielec(), ix)
                   * (1. + mass_ratio)
                   / std::
-                          pow(1. + mass_ratio * temperature(iion(), ix) / temperature(ielec(), ix),
+                          pow(1. + mass_ratio * temperature(iion, ix) / temperature(ielec(), ix),
                               1.5);
     });
 }
@@ -88,22 +100,23 @@ void compute_momentum_energy_exchange(
         DViewSpX mean_velocity,
         DViewSpX temperature)
 {
-    double const mass_ratio(mass(ielec()) / mass(iion()));
-    double const me_on_memi(mass(ielec()) / (mass(ielec()) + mass(iion())));
+    IndexSp const iion = find_ion(density.domain<IDimSp>());
+    double const mass_ratio(mass(ielec()) / mass(iion));
+    double const me_on_memi(mass(ielec()) / (mass(ielec()) + mass(iion)));
     for_each(policies::parallel_host, collfreq_ei.domain(), [&](IndexX const ix) {
         // momentum exchange terms
-        momentum_exchange_ei(ix) = -collfreq_ei(ix) * density(ielec(), ix)
-                                   * (mean_velocity(ielec(), ix)
-                                      - std::sqrt(mass_ratio) * mean_velocity(iion(), ix));
+        momentum_exchange_ei(ix)
+                = -collfreq_ei(ix) * density(ielec(), ix)
+                  * (mean_velocity(ielec(), ix) - std::sqrt(mass_ratio) * mean_velocity(iion, ix));
         momentum_exchange_ie(ix) = -std::sqrt(mass_ratio) * momentum_exchange_ei(ix);
 
         // energy exchange terms
         energy_exchange_ei(ix) = -3. * collfreq_ei(ix) * me_on_memi * density(ielec(), ix)
-                                         * (temperature(ielec(), ix) - temperature(iion(), ix))
+                                         * (temperature(ielec(), ix) - temperature(iion, ix))
                                  - mean_velocity(ielec(), ix) * momentum_exchange_ei(ix);
         energy_exchange_ie(ix)
                 = -energy_exchange_ei(ix)
-                  - (mean_velocity(ielec(), ix) - std::sqrt(mass_ratio) * mean_velocity(iion(), ix))
+                  - (mean_velocity(ielec(), ix) - std::sqrt(mass_ratio) * mean_velocity(iion, ix))
                             * momentum_exchange_ei(ix);
     });
 }

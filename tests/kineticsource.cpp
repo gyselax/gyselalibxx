@@ -22,9 +22,10 @@ TEST(KineticSource, Moments)
     CoordVx const vx_max(6);
     IVectVx const vx_size(30);
 
-    IVectSp const nb_kinspecies(1);
-
-    IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
+    IVectSp const nb_species(2);
+    IDomainSp const dom_sp(IndexSp(0), nb_species);
+    IndexSp const my_iion = dom_sp.front();
+    IndexSp const my_ielec = dom_sp.back();
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -43,19 +44,20 @@ TEST(KineticSource, Moments)
 
     IDomainX const gridx = builder_x.interpolation_domain();
     IDomainVx const gridvx = builder_vx.interpolation_domain();
-    IDomainSpXVx const mesh(dom_sp, gridx, gridvx);
+    IDomainSpXVx const mesh(IDomainSp(my_iion, IVectSp(1)), gridx, gridvx);
 
     Quadrature<IDimX> const integrate_x(trapezoid_quadrature_coefficients(gridx));
     Quadrature<IDimVx> const integrate_v(trapezoid_quadrature_coefficients(gridvx));
 
     FieldSp<int> charges(dom_sp);
-    charges(dom_sp.front()) = 1;
+    charges(my_ielec) = -1;
+    charges(my_iion) = 1;
     DFieldSp masses(dom_sp);
-    masses(dom_sp.front()) = 1.0;
+    ddc::fill(masses, 1);
     FieldSp<int> init_perturb_mode(dom_sp);
-    init_perturb_mode(dom_sp.front()) = 0;
+    ddc::fill(init_perturb_mode, 0);
     DFieldSp init_perturb_amplitude(dom_sp);
-    init_perturb_amplitude(dom_sp.front()) = 0.0;
+    ddc::fill(init_perturb_amplitude, 0);
 
     // Initialization of the distribution function
     init_discrete_space<IDimSp>(

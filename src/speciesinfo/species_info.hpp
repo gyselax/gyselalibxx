@@ -41,6 +41,8 @@ public:
         // Initial perturbation mode of all kinetic species
         Chunk<int, discrete_domain_type, KokkosAllocator<int, MemorySpace>> m_perturb_mode;
 
+        discrete_element_type m_ielec;
+
     public:
         using discrete_dimension_type = SpeciesInformation;
 
@@ -50,6 +52,7 @@ public:
             , m_mass(impl.m_mass.domain())
             , m_perturb_amplitude(impl.m_perturb_amplitude.domain())
             , m_perturb_mode(impl.m_perturb_mode.domain())
+            , m_ielec(impl.m_ielec)
         {
             deepcopy(m_charge, impl.m_charge);
             deepcopy(m_mass, impl.m_mass);
@@ -66,12 +69,22 @@ public:
             , m_perturb_amplitude(std::move(perturb_amplitude))
             , m_perturb_mode(std::move(perturb_mode))
         {
+            assert(charge.size() >= 2);
+            bool electron_found = false;
+            for (discrete_element_type const isp : m_charge.domain()) {
+                if (m_charge(isp) == -1) {
+                    electron_found = true;
+                    m_ielec = isp;
+                }
+            }
+            if (!electron_found) {
+                throw std::runtime_error("electron not found");
+            }
         }
 
-        // Consider that the electron species is always at the 0 position
         discrete_element_type ielec() const
         {
-            return discrete_element_type(0);
+            return m_ielec;
         }
 
         ChunkSpan<const int, discrete_domain_type> charges() const
