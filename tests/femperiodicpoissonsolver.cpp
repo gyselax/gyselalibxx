@@ -26,9 +26,10 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
     CoordVx const vx_max(0.5);
     IVectVx const vx_size(10);
 
-    IVectSp const nb_kinspecies(1);
-
-    IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
+    IVectSp const nb_species(2);
+    IDomainSp const dom_sp(IndexSp(0), nb_species);
+    IndexSp const my_ielec = dom_sp.front();
+    IndexSp const my_iion = dom_sp.back();
 
     // Creating mesh & supports
     init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -46,7 +47,7 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
 
     IDomainX const gridx = builder_x.interpolation_domain();
     IDomainVx const gridvx = builder_vx.interpolation_domain();
-    IDomainSp const gridsp = dom_sp;
+    IDomainSp const gridsp = IDomainSp(my_iion, IVectSp(1));
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
@@ -57,13 +58,14 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
             spline_vx_evaluator(g_null_boundary<BSplinesVx>, g_null_boundary<BSplinesVx>);
 
     FieldSp<int> charges(dom_sp);
-    charges(dom_sp.front()) = 1;
+    charges(my_ielec) = -1;
+    charges(my_iion) = 1;
     DFieldSp masses(dom_sp);
-    masses(dom_sp.front()) = 1.0;
+    ddc::fill(masses, 1);
     FieldSp<int> init_perturb_mode(dom_sp);
-    init_perturb_mode(dom_sp.front()) = 0;
+    ddc::fill(init_perturb_mode, 0);
     DFieldSp init_perturb_amplitude(dom_sp);
-    init_perturb_amplitude(dom_sp.front()) = 0.0;
+    ddc::fill(init_perturb_amplitude, 0);
 
     // Initialization of the distribution function
     init_discrete_space<IDimSp>(

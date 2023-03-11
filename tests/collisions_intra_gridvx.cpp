@@ -30,6 +30,8 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     IVectSp const nb_kinspecies(2);
 
     IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
+    IndexSp const my_iion = dom_sp.front();
+    IndexSp const my_ielec = dom_sp.back();
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -51,18 +53,17 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     IDomainSpXVx const mesh(dom_sp, gridx, gridvx);
 
     FieldSp<int> charges(dom_sp);
-    charges(ielec()) = -1;
-    charges(iion()) = 1;
+    charges(my_ielec) = -1;
+    charges(my_iion) = 1;
     DFieldSp masses(dom_sp);
-    double const mass_ion(400), mass_elec(1);
-    masses(ielec()) = mass_elec;
-    masses(iion()) = mass_ion;
+    double const mass_ion(400);
+    double const mass_elec(1);
+    masses(my_ielec) = mass_elec;
+    masses(my_iion) = mass_ion;
     FieldSp<int> init_perturb_mode(dom_sp);
-    init_perturb_mode(ielec()) = 0;
-    init_perturb_mode(iion()) = 0;
+    ddc::fill(init_perturb_mode, 0);
     DFieldSp init_perturb_amplitude(dom_sp);
-    init_perturb_amplitude(ielec()) = 0.0;
-    init_perturb_amplitude(iion()) = 0.0;
+    ddc::fill(init_perturb_amplitude, 0);
     init_discrete_space<IDimSp>(
             std::move(charges),
             std::move(masses),

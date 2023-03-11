@@ -15,6 +15,7 @@ add_executable(unit_tests_${GEOMETRY_VARIANT}
     main.cpp
     masks.cpp
     quadrature.cpp
+    species_info.cpp
     splitvlasovsolver.cpp
     rk2.cpp
 )
