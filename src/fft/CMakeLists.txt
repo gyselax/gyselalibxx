@@ -15,7 +15,6 @@ target_include_directories(fft
 target_link_libraries(fft
     INTERFACE
         DDC::DDC
-        "${GEOMETRY_LIB}"
         FFTW::Double
 )
 
