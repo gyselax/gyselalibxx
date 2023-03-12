@@ -9,8 +9,8 @@
 #include <ddc/ddc.hpp>
 
 #include <fftw3.h>
-#include <geometry.hpp>
 
+#include "fft_tag.hpp"
 #include "ifft.hpp"
 
 template <class Tag>

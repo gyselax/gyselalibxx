@@ -6,7 +6,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include <geometry.hpp>
+#include "fft_tag.hpp"
 
 template <class Tag>
 class IInverseFourierTransform

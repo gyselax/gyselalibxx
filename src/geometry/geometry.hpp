@@ -9,16 +9,8 @@
 #include <sll/greville_interpolation_points.hpp>
 #include <sll/spline_builder.hpp>
 
+#include <fft_tag.hpp>
 #include <species_info.hpp>
-
-template <class Tag>
-struct Fourier
-{
-    using base_tag_type = Tag;
-    static bool constexpr PERIODIC = Tag::PERIODIC;
-};
-
-
 
 struct RDimX
 {
