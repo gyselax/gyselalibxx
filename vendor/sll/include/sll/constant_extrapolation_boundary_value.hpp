@@ -25,7 +25,7 @@ public:
             const final
     {
         std::array<double, BSplines::degree() + 1> values;
-        DSpan1D const vals(values.data(), values.size());
+        DSpan1D const vals = as_span(values);
 
         ddc::DiscreteElement<BSplines> idx
                 = ddc::discrete_space<BSplines>().eval_basis(vals, m_eval_pos);

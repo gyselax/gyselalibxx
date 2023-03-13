@@ -115,7 +115,7 @@ public:
             ddc::ChunkSpan<double, Domain1> weights,
             ddc::ChunkSpan<const ddc::Coordinate<Dim>, Domain2> mesh_edges) const
     {
-        int const nbcells = mesh_edges.size() - 1;
+        [[maybe_unused]] int const nbcells = mesh_edges.size() - 1;
         int const npts_gauss = m_wx.size();
         assert(points.size() == m_wx.size() * nbcells);
         assert(weights.size() == m_wx.size() * nbcells);

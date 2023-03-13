@@ -49,7 +49,7 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_Uniform)
     init_discrete_space<UniformBSplines<DimX, degree>>(xmin, xmax, ncells);
 
     std::array<double, degree + 1> vals_data;
-    DSpan1D values(vals_data.data(), degree + 1);
+    DSpan1D values = as_span(vals_data);
 
     std::size_t const n_test_points = ncells * 30;
     double const dx = (xmax - xmin) / (n_test_points - 1);
@@ -81,7 +81,7 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_NonUniform)
     init_discrete_space<NonUniformBSplines<DimX, degree>>(breaks);
 
     std::array<double, degree + 1> vals_data;
-    DSpan1D values(vals_data.data(), degree + 1);
+    DSpan1D values = as_span(vals_data);
 
     std::size_t n_test_points = ncells * 30;
     dx = (xmax - xmin) / (n_test_points - 1);
