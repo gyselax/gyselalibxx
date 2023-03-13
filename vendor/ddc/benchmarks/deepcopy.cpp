@@ -12,23 +12,23 @@
 namespace {
 
 struct DDimX;
-using DElemX = DiscreteElement<DDimX>;
-using DVectX = DiscreteVector<DDimX>;
-using DDomX = DiscreteDomain<DDimX>;
+using DElemX = ddc::DiscreteElement<DDimX>;
+using DVectX = ddc::DiscreteVector<DDimX>;
+using DDomX = ddc::DiscreteDomain<DDimX>;
 
 template <class Datatype>
-using ChunkSpanX = ChunkSpan<Datatype, DDomX>;
+using ChunkSpanX = ddc::ChunkSpan<Datatype, DDomX>;
 
 
 struct DDimY;
 
 
-using DElemXY = DiscreteElement<DDimX, DDimY>;
-using DVectXY = DiscreteVector<DDimX, DDimY>;
-using DDomXY = DiscreteDomain<DDimX, DDimY>;
+using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;
+using DVectXY = ddc::DiscreteVector<DDimX, DDimY>;
+using DDomXY = ddc::DiscreteDomain<DDimX, DDimY>;
 
 template <class Datatype>
-using ChunkSpanXY = ChunkSpan<Datatype, DDomXY>;
+using ChunkSpanXY = ddc::ChunkSpan<Datatype, DDomXY>;
 
 
 // Let say 1MB cache
@@ -63,7 +63,7 @@ static void deepcopy_1d(benchmark::State& state)
     ChunkSpanX<double> src(src_data.data(), dom);
     ChunkSpanX<double> dst(dst_data.data(), dom);
     for (auto _ : state) {
-        deepcopy(dst, src);
+        ddc::deepcopy(dst, src);
     }
     state.SetBytesProcessed(int64_t(state.iterations()) * int64_t(state.range(0) * sizeof(double)));
 }
@@ -93,7 +93,7 @@ static void deepcopy_2d(benchmark::State& state)
     ChunkSpanXY<double> src(src_data.data(), dom);
     ChunkSpanXY<double> dst(dst_data.data(), dom);
     for (auto _ : state) {
-        deepcopy(dst, src);
+        ddc::deepcopy(dst, src);
     }
     state.SetBytesProcessed(
             int64_t(state.iterations())
@@ -108,10 +108,10 @@ static void deepcopy_subchunk_2d(benchmark::State& state)
     ChunkSpanXY<double> src(src_data.data(), dom);
     ChunkSpanXY<double> dst(dst_data.data(), dom);
     for (auto _ : state) {
-        for (DElemX i : select<DDimX>(dom)) {
+        for (DElemX i : ddc::select<DDimX>(dom)) {
             auto&& dst_i = dst[i];
             auto&& src_i = src[i];
-            deepcopy(dst_i, src_i);
+            ddc::deepcopy(dst_i, src_i);
         }
     }
     state.SetBytesProcessed(
