@@ -59,10 +59,10 @@ using CircToCart = CzarnyToCartesian<DimX, DimY, DimR, DimP>;
 
 TEST(PolarSplineTest, ConstantEval)
 {
-    using PolarCoord = Coordinate<DimR, DimP>;
+    using PolarCoord = ddc::Coordinate<DimR, DimP>;
     using BSplines = PolarBSplines<BSplinesR, BSplinesP, continuity>;
-    using CoordR = Coordinate<DimR>;
-    using CoordP = Coordinate<DimP>;
+    using CoordR = ddc::Coordinate<DimR>;
+    using CoordP = ddc::Coordinate<DimP>;
     using Spline = PolarSpline<BSplines>;
     using Evaluator = PolarSplineEvaluator<BSplines>;
     using BuilderR = SplineBuilder<BSplinesR, IDimR, BoundCond::GREVILLE, BoundCond::GREVILLE>;
@@ -78,31 +78,31 @@ TEST(PolarSplineTest, ConstantEval)
 
     // 1. Create BSplines
     {
-        DiscreteVector<IDimR> constexpr npoints_r(ncells + 1);
+        ddc::DiscreteVector<IDimR> constexpr npoints_r(ncells + 1);
         std::vector<CoordR> breaks_r(npoints_r);
         const double dr = (rN - r0) / ncells;
         for (int i(0); i < npoints_r; ++i) {
             breaks_r[i] = CoordR(r0 + i * dr);
         }
-        init_discrete_space<BSplinesR>(breaks_r);
+        ddc::init_discrete_space<BSplinesR>(breaks_r);
 #if defined(BSPLINES_TYPE_UNIFORM)
-        init_discrete_space<BSplinesP>(p0, pN, ncells);
+        ddc::init_discrete_space<BSplinesP>(p0, pN, ncells);
 #elif defined(BSPLINES_TYPE_NON_UNIFORM)
-        DiscreteVector<IDimP> constexpr npoints_p(ncells + 1);
+        ddc::DiscreteVector<IDimP> constexpr npoints_p(ncells + 1);
         std::vector<CoordP> breaks_p(npoints_p);
         const double dp = (pN - p0) / ncells;
         for (int i(0); i < npoints_r; ++i) {
             breaks_p[i] = CoordP(p0 + i * dp);
         }
-        init_discrete_space<BSplinesP>(breaks_p);
+        ddc::init_discrete_space<BSplinesP>(breaks_p);
 #endif
     }
 
-    init_discrete_space<IDimR>(GrevillePointsR::get_sampling());
-    init_discrete_space<IDimP>(GrevillePointsP::get_sampling());
-    DiscreteDomain<IDimR> interpolation_domain_R(GrevillePointsR::get_domain());
-    DiscreteDomain<IDimP> interpolation_domain_P(GrevillePointsP::get_domain());
-    DiscreteDomain<IDimR, IDimP>
+    ddc::init_discrete_space<IDimR>(GrevillePointsR::get_sampling());
+    ddc::init_discrete_space<IDimP>(GrevillePointsP::get_sampling());
+    ddc::DiscreteDomain<IDimR> interpolation_domain_R(GrevillePointsR::get_domain());
+    ddc::DiscreteDomain<IDimP> interpolation_domain_P(GrevillePointsP::get_domain());
+    ddc::DiscreteDomain<IDimR, IDimP>
             interpolation_domain(interpolation_domain_R, interpolation_domain_P);
 
     BuilderR builder_r(interpolation_domain_R);
@@ -116,27 +116,27 @@ TEST(PolarSplineTest, ConstantEval)
 #endif
     DiscreteMapping const mapping
             = DiscreteMapping::analytical_to_discrete(coord_changer, builder_rp);
-    init_discrete_space<BSplines>(mapping, builder_r, builder_p);
+    ddc::init_discrete_space<BSplines>(mapping, builder_r, builder_p);
 
-    DiscreteDomain<BSplines> const dom_bsplines_singular(
-            DiscreteElement<BSplines>(0),
-            DiscreteVector<BSplines>(BSplines::n_singular_basis()));
-    DiscreteDomain<BSplinesR> const r_domain(
-            DiscreteElement<BSplinesR>(continuity + 1),
-            DiscreteVector<BSplinesR>(discrete_space<BSplinesR>().size()));
-    DiscreteDomain<BSplinesP> const p_domain(
-            DiscreteElement<BSplinesP>(0),
-            DiscreteVector<BSplinesP>(discrete_space<BSplinesP>().size()));
-    DiscreteDomain<BSplinesR, BSplinesP> const dom_2d_bsplines(r_domain, p_domain);
+    ddc::DiscreteDomain<BSplines> const dom_bsplines_singular(
+            ddc::DiscreteElement<BSplines>(0),
+            ddc::DiscreteVector<BSplines>(BSplines::n_singular_basis()));
+    ddc::DiscreteDomain<BSplinesR> const r_domain(
+            ddc::DiscreteElement<BSplinesR>(continuity + 1),
+            ddc::DiscreteVector<BSplinesR>(ddc::discrete_space<BSplinesR>().size()));
+    ddc::DiscreteDomain<BSplinesP> const p_domain(
+            ddc::DiscreteElement<BSplinesP>(0),
+            ddc::DiscreteVector<BSplinesP>(ddc::discrete_space<BSplinesP>().size()));
+    ddc::DiscreteDomain<BSplinesR, BSplinesP> const dom_2d_bsplines(r_domain, p_domain);
 
     Spline coef(dom_bsplines_singular, dom_2d_bsplines);
 
-    for_each(coef.singular_spline_coef.domain(), [&](DiscreteElement<BSplines> const i) {
+    ddc::for_each(coef.singular_spline_coef.domain(), [&](ddc::DiscreteElement<BSplines> const i) {
         coef.singular_spline_coef(i) = 1.0;
     });
-    for_each(coef.spline_coef.domain(), [&](DiscreteElement<BSplinesR, BSplinesP> const i) {
-        coef.spline_coef(i) = 1.0;
-    });
+    ddc::for_each(
+            coef.spline_coef.domain(),
+            [&](ddc::DiscreteElement<BSplinesR, BSplinesP> const i) { coef.spline_coef(i) = 1.0; });
 
     const Evaluator spline_evaluator(g_polar_null_boundary_2d<BSplines>);
 
@@ -156,6 +156,6 @@ TEST(PolarSplineTest, ConstantEval)
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
-    ::ScopeGuard scope(argc, argv);
+    ::ddc::ScopeGuard scope(argc, argv);
     return RUN_ALL_TESTS();
 }

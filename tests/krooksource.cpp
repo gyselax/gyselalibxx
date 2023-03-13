@@ -42,8 +42,8 @@ TEST(KrookSource, Adaptive)
     IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
 
     // Creating mesh & supports
-    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
-    init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
     ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
     ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
@@ -66,14 +66,14 @@ TEST(KrookSource, Adaptive)
     DFieldSp init_perturb_amplitude(dom_sp);
     charges(dom_sp.front()) = 1;
     charges(dom_sp.back()) = -1;
-    for_each(policies::parallel_host, dom_sp, [&](IndexSp const isp) {
+    ddc::for_each(ddc::policies::parallel_host, dom_sp, [&](IndexSp const isp) {
         masses(isp) = 1.0;
         init_perturb_mode(isp) = 0;
         init_perturb_amplitude(isp) = 0.0;
     });
 
     // Initialization of the distribution function
-    init_discrete_space<IDimSp>(
+    ddc::init_discrete_space<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
@@ -101,12 +101,12 @@ TEST(KrookSource, Adaptive)
     double const density_init_elec = 2.;
     double const temperature_init = 1.;
     DFieldSpXVx allfdistribu(mesh);
-    for_each(
-            policies::parallel_host,
-            get_domain<IDimSp, IDimX>(allfdistribu),
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
             [&](IndexSpX const ispx) {
                 DFieldVx finit(gridvx);
-                if (charge(select<IDimSp>(ispx)) >= 0.) {
+                if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
                     MaxwellianEquilibrium::
                             compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
                     ddc::deepcopy(allfdistribu[ispx], finit);
@@ -121,33 +121,33 @@ TEST(KrookSource, Adaptive)
     DFieldX mask = mask_tanh(gridx, extent, stiffness, MaskType::Inverted, false);
     DFieldVx ftarget(gridvx);
     MaxwellianEquilibrium::compute_maxwellian(ftarget, density_target, temperature_target, 0.);
-    for_each(
-            policies::parallel_host,
-            get_domain<IDimSp, IDimX>(allfdistribu),
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
             [&](IndexSpX const ispx) {
                 DFieldVx rhs(gridvx);
                 rhs_krook.rhs(rhs, allfdistribu, 0.0, ispx);
 
-                for_each(
-                        policies::parallel_host,
-                        get_domain<IDimVx>(allfdistribu),
+                ddc::for_each(
+                        ddc::policies::parallel_host,
+                        ddc::get_domain<IDimVx>(allfdistribu),
                         [&](IndexVx const ivx) {
                             double rhs_pred;
-                            if (charge(select<IDimSp>(ispx)) >= 0.) {
-                                rhs_pred = -amplitude * mask(select<IDimX>(ispx))
+                            if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
+                                rhs_pred = -amplitude * mask(ddc::select<IDimX>(ispx))
                                            * (allfdistribu(
-                                                      select<IDimSp>(ispx),
-                                                      select<IDimX>(ispx),
+                                                      ddc::select<IDimSp>(ispx),
+                                                      ddc::select<IDimX>(ispx),
                                                       ivx)
                                               - ftarget(ivx));
                             } else {
                                 double const amplitude_elec
                                         = amplitude * (density_init_ion - density_target)
                                           / (density_init_elec - density_target);
-                                rhs_pred = -amplitude_elec * mask(select<IDimX>(ispx))
+                                rhs_pred = -amplitude_elec * mask(ddc::select<IDimX>(ispx))
                                            * (allfdistribu(
-                                                      select<IDimSp>(ispx),
-                                                      select<IDimX>(ispx),
+                                                      ddc::select<IDimSp>(ispx),
+                                                      ddc::select<IDimX>(ispx),
                                                       ivx)
                                               - ftarget(ivx));
                             }
@@ -171,9 +171,9 @@ TEST(KrookSource, Constant)
     IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
 
     // Creating mesh & supports
-    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
+    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
     ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
     ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
@@ -194,14 +194,14 @@ TEST(KrookSource, Constant)
     DFieldSp init_perturb_amplitude(dom_sp);
     charges(dom_sp.front()) = 1;
     charges(dom_sp.back()) = -1;
-    for_each(policies::parallel_host, dom_sp, [&](IndexSp const isp) {
+    ddc::for_each(ddc::policies::parallel_host, dom_sp, [&](IndexSp const isp) {
         masses(isp) = 1.0;
         init_perturb_mode(isp) = 0;
         init_perturb_amplitude(isp) = 0.0;
     });
 
     // Initialization of the distribution function
-    init_discrete_space<IDimSp>(
+    ddc::init_discrete_space<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
@@ -235,9 +235,9 @@ TEST(KrookSource, Constant)
     DFieldVx finit(gridvx);
     MaxwellianEquilibrium::compute_maxwellian(finit, density_init, temperature_init, 0.);
     DFieldSpXVx allfdistribu(mesh);
-    for_each(
-            policies::parallel_host,
-            get_domain<IDimSp, IDimX>(allfdistribu),
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
             [&](IndexSpX const ispx) { ddc::deepcopy(allfdistribu[ispx], finit); });
 
     int const nbsteps = 100;
@@ -248,14 +248,20 @@ TEST(KrookSource, Constant)
     // tests if distribution function matches theoretical prediction
     DFieldVx ftarget(gridvx);
     MaxwellianEquilibrium::compute_maxwellian(ftarget, density_target, temperature_target, 0.);
-    for_each(policies::parallel_host, allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-        // predicted distribution function value
-        double const allfdistribu_pred
-                = ftarget(select<IDimVx>(ispxvx))
-                  + (finit(select<IDimVx>(ispxvx)) - ftarget(select<IDimVx>(ispxvx)))
-                            * std::exp(-amplitude * mask(select<IDimX>(ispxvx)) * deltat * nbsteps);
-        double const error = std::fabs(allfdistribu(ispxvx) - allfdistribu_pred);
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            allfdistribu.domain(),
+            [&](IndexSpXVx const ispxvx) {
+                // predicted distribution function value
+                double const allfdistribu_pred
+                        = ftarget(ddc::select<IDimVx>(ispxvx))
+                          + (finit(ddc::select<IDimVx>(ispxvx))
+                             - ftarget(ddc::select<IDimVx>(ispxvx)))
+                                    * std::exp(
+                                            -amplitude * mask(ddc::select<IDimX>(ispxvx)) * deltat
+                                            * nbsteps);
+                double const error = std::fabs(allfdistribu(ispxvx) - allfdistribu_pred);
 
-        EXPECT_LE(error, 1e-13);
-    });
+                EXPECT_LE(error, 1e-13);
+            });
 }

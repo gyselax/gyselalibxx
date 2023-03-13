@@ -30,8 +30,8 @@ public:
 
     ddc::Coordinate<DimX, DimY> operator()(ddc::Coordinate<DimR, DimP> const& coord) const
     {
-        const double r = get<DimR>(coord);
-        const double p = get<DimP>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double p = ddc::get<DimP>(coord);
         const double x = r * std::cos(p);
         const double y = r * std::sin(p);
         return ddc::Coordinate<DimX, DimY>(x, y);
@@ -39,8 +39,8 @@ public:
 
     ddc::Coordinate<DimR, DimP> operator()(ddc::Coordinate<DimX, DimY> const& coord) const
     {
-        const double x = get<DimX>(coord);
-        const double y = get<DimY>(coord);
+        const double x = ddc::get<DimX>(coord);
+        const double y = ddc::get<DimY>(coord);
         const double r = std::sqrt(x * x + y * y);
         const double p = std::atan2(y, x);
         return ddc::Coordinate<DimR, DimP>(r, p);
@@ -48,33 +48,33 @@ public:
 
     double jacobian(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        double r = get<DimR>(coord);
+        double r = ddc::get<DimR>(coord);
         return r;
     }
 
     double jacobian_11(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double p = get<DimP>(coord);
+        const double p = ddc::get<DimP>(coord);
         return std::cos(p);
     }
 
     double jacobian_12(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = get<DimR>(coord);
-        const double p = get<DimP>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double p = ddc::get<DimP>(coord);
         return -r * std::sin(p);
     }
 
     double jacobian_21(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double p = get<DimP>(coord);
+        const double p = ddc::get<DimP>(coord);
         return std::sin(p);
     }
 
     double jacobian_22(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = get<DimR>(coord);
-        const double p = get<DimP>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double p = ddc::get<DimP>(coord);
         return r * std::cos(p);
     }
 };

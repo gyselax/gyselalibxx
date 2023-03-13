@@ -9,11 +9,11 @@ class SpeciesInformation
 public:
     using discrete_dimension_type = SpeciesInformation;
 
-    using discrete_element_type = DiscreteElement<SpeciesInformation>;
+    using discrete_element_type = ddc::DiscreteElement<SpeciesInformation>;
 
-    using discrete_domain_type = DiscreteDomain<SpeciesInformation>;
+    using discrete_domain_type = ddc::DiscreteDomain<SpeciesInformation>;
 
-    using discrete_vector_type = DiscreteVector<SpeciesInformation>;
+    using discrete_vector_type = ddc::DiscreteVector<SpeciesInformation>;
 
 public:
     static constexpr std::size_t rank()
@@ -29,17 +29,18 @@ public:
 
     private:
         // charge of the particles (kinetic + adiabatic)
-        Chunk<int, discrete_domain_type, KokkosAllocator<int, MemorySpace>> m_charge;
+        ddc::Chunk<int, discrete_domain_type, ddc::KokkosAllocator<int, MemorySpace>> m_charge;
 
         // mass of the particles of all kinetic species
-        Chunk<double, discrete_domain_type, KokkosAllocator<double, MemorySpace>> m_mass;
+        ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> m_mass;
 
         // Initial perturbation amplitude of all kinetic species
-        Chunk<double, discrete_domain_type, KokkosAllocator<double, MemorySpace>>
+        ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
                 m_perturb_amplitude;
 
         // Initial perturbation mode of all kinetic species
-        Chunk<int, discrete_domain_type, KokkosAllocator<int, MemorySpace>> m_perturb_mode;
+        ddc::Chunk<int, discrete_domain_type, ddc::KokkosAllocator<int, MemorySpace>>
+                m_perturb_mode;
 
         discrete_element_type m_ielec;
 
@@ -54,16 +55,16 @@ public:
             , m_perturb_mode(impl.m_perturb_mode.domain())
             , m_ielec(impl.m_ielec)
         {
-            deepcopy(m_charge, impl.m_charge);
-            deepcopy(m_mass, impl.m_mass);
-            deepcopy(m_perturb_amplitude, impl.m_perturb_amplitude);
-            deepcopy(m_perturb_mode, impl.m_perturb_mode);
+            ddc::deepcopy(m_charge, impl.m_charge);
+            ddc::deepcopy(m_mass, impl.m_mass);
+            ddc::deepcopy(m_perturb_amplitude, impl.m_perturb_amplitude);
+            ddc::deepcopy(m_perturb_mode, impl.m_perturb_mode);
         }
 
-        Impl(Chunk<int, discrete_domain_type> charge,
-             Chunk<double, discrete_domain_type> mass,
-             Chunk<double, discrete_domain_type> perturb_amplitude,
-             Chunk<int, discrete_domain_type> perturb_mode)
+        Impl(ddc::Chunk<int, discrete_domain_type> charge,
+             ddc::Chunk<double, discrete_domain_type> mass,
+             ddc::Chunk<double, discrete_domain_type> perturb_amplitude,
+             ddc::Chunk<int, discrete_domain_type> perturb_mode)
             : m_charge(std::move(charge))
             , m_mass(std::move(mass))
             , m_perturb_amplitude(std::move(perturb_amplitude))
@@ -87,39 +88,39 @@ public:
             return m_ielec;
         }
 
-        ChunkSpan<const int, discrete_domain_type> charges() const
+        ddc::ChunkSpan<const int, discrete_domain_type> charges() const
         {
             return m_charge;
         }
 
-        ChunkSpan<const double, discrete_domain_type> masses() const
+        ddc::ChunkSpan<const double, discrete_domain_type> masses() const
         {
             return m_mass;
         }
 
-        ChunkSpan<const double, discrete_domain_type> perturb_amplitudes() const
+        ddc::ChunkSpan<const double, discrete_domain_type> perturb_amplitudes() const
         {
             return m_perturb_amplitude;
         }
 
-        ChunkSpan<const int, discrete_domain_type> perturb_modes() const
+        ddc::ChunkSpan<const int, discrete_domain_type> perturb_modes() const
         {
             return m_perturb_mode;
         }
     };
 };
 
-inline DiscreteElement<SpeciesInformation> ielec()
+inline ddc::DiscreteElement<SpeciesInformation> ielec()
 {
-    return discrete_space<SpeciesInformation>().ielec();
+    return ddc::discrete_space<SpeciesInformation>().ielec();
 }
 
-inline int charge(DiscreteElement<SpeciesInformation> const isp)
+inline int charge(ddc::DiscreteElement<SpeciesInformation> const isp)
 {
-    return discrete_space<SpeciesInformation>().charges()(isp);
+    return ddc::discrete_space<SpeciesInformation>().charges()(isp);
 }
 
-inline double mass(DiscreteElement<SpeciesInformation> const isp)
+inline double mass(ddc::DiscreteElement<SpeciesInformation> const isp)
 {
-    return discrete_space<SpeciesInformation>().masses()(isp);
+    return ddc::discrete_space<SpeciesInformation>().masses()(isp);
 }

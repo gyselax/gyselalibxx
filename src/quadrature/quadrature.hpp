@@ -10,10 +10,10 @@ template <class IDim>
 class Quadrature
 {
 private:
-    Chunk<double, DiscreteDomain<IDim>> m_coefficients;
+    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> m_coefficients;
 
 public:
-    explicit Quadrature(Chunk<double, DiscreteDomain<IDim>>&& coeffs)
+    explicit Quadrature(ddc::Chunk<double, ddc::DiscreteDomain<IDim>>&& coeffs)
         : m_coefficients(std::move(coeffs))
     {
     }
@@ -22,14 +22,16 @@ public:
 
     ~Quadrature() = default;
 
-    double operator()(ChunkSpan<const double, DiscreteDomain<IDim>> const values) const
+    double operator()(ddc::ChunkSpan<const double, ddc::DiscreteDomain<IDim>> const values) const
     {
-        assert(get_domain<IDim>(values) == get_domain<IDim>(m_coefficients));
-        return transform_reduce(
-                policies::parallel_host,
+        assert(ddc::get_domain<IDim>(values) == ddc::get_domain<IDim>(m_coefficients));
+        return ddc::transform_reduce(
+                ddc::policies::parallel_host,
                 values.domain(),
                 0.0,
-                reducer::sum<double>(),
-                [&](DiscreteElement<IDim> const ix) { return m_coefficients(ix) * values(ix); });
+                ddc::reducer::sum<double>(),
+                [&](ddc::DiscreteElement<IDim> const ix) {
+                    return m_coefficients(ix) * values(ix);
+                });
     }
 };

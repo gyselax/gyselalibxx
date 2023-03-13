@@ -33,15 +33,15 @@ DFieldX mask_tanh(
     DFieldX mask(gridx);
 
     IVectX const Nx(gridx.size());
-    CoordX const x_min(coordinate(gridx.front()));
+    CoordX const x_min(ddc::coordinate(gridx.front()));
     double const Lx = ddcHelper::total_interval_length(gridx);
     CoordX const x_left(x_min + Lx * extent);
     CoordX const x_right(x_min + Lx - Lx * extent);
 
     switch (type) {
     case MaskType::Normal:
-        for_each(policies::parallel_host, gridx, [&](IndexX const ix) {
-            CoordX const coordx = coordinate(ix);
+        ddc::for_each(ddc::policies::parallel_host, gridx, [&](IndexX const ix) {
+            CoordX const coordx = ddc::coordinate(ix);
             mask(ix) = 0.5
                        * (std::tanh((coordx - x_left) / stiffness)
                           - std::tanh((coordx - x_right) / stiffness));
@@ -49,8 +49,8 @@ DFieldX mask_tanh(
         break;
 
     case MaskType::Inverted:
-        for_each(policies::parallel_host, gridx, [&](IndexX const ix) {
-            CoordX const coordx = coordinate(ix);
+        ddc::for_each(ddc::policies::parallel_host, gridx, [&](IndexX const ix) {
+            CoordX const coordx = ddc::coordinate(ix);
             mask(ix) = 1
                        - 0.5
                                  * (std::tanh((coordx - x_left) / stiffness)
@@ -62,7 +62,7 @@ DFieldX mask_tanh(
     if (normalized) {
         Quadrature<IDimX> const integrate_x(trapezoid_quadrature_coefficients(gridx));
         double const coeff_norm = integrate_x(mask);
-        for_each(policies::parallel_host, gridx, [&](IndexX const ix) {
+        ddc::for_each(ddc::policies::parallel_host, gridx, [&](IndexX const ix) {
             mask(ix) = mask(ix) / coeff_norm;
         });
     }

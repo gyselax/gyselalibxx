@@ -23,14 +23,14 @@ DSpanSpVx BumpontailEquilibrium::operator()(DSpanSpVx const allfequilibrium) con
 
     // Initialization of the maxwellian
     DFieldVx maxwellian(gridvx);
-    for_each(gridsp, [&](IndexSp const isp) {
+    ddc::for_each(gridsp, [&](IndexSp const isp) {
         compute_twomaxwellian(
                 maxwellian,
                 m_epsilon_bot(isp),
                 m_temperature_bot(isp),
                 m_mean_velocity_bot(isp));
 
-        for_each(gridvx, [&](IndexVx const iv) { allfequilibrium(isp, iv) = maxwellian(iv); });
+        ddc::for_each(gridvx, [&](IndexVx const iv) { allfequilibrium(isp, iv) = maxwellian(iv); });
     });
     return allfequilibrium;
 }
@@ -53,7 +53,7 @@ void BumpontailEquilibrium::compute_twomaxwellian(
     double const norm_f2 = inv_sqrt_2pi / sqrt(temperature_bot);
     IDomainVx const gridvx = fMaxwellian.domain();
     for (IndexVx const iv : gridvx) {
-        CoordVx const v = coordinate(iv);
+        CoordVx const v = ddc::coordinate(iv);
         // bulk plasma particles
         double const f1_v = (1. - epsilon_bot) * inv_sqrt_2pi * exp(-0.5 * v * v);
         // beam

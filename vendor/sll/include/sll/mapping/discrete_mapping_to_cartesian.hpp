@@ -100,7 +100,7 @@ public:
         ddc::Chunk<double, spline_domain> curvilinear_to_y_spline(builder.spline_domain());
         ddc::Chunk<double, Domain> curvilinear_to_x_vals(builder.interpolation_domain());
         ddc::Chunk<double, Domain> curvilinear_to_y_vals(builder.interpolation_domain());
-        for_each(
+        ddc::for_each(
                 builder.interpolation_domain(),
                 [&](typename Domain::discrete_element_type const& el) {
                     ddc::Coordinate<circular_tag_r, circular_tag_p> polar_coord(get_coord(el));

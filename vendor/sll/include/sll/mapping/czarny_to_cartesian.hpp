@@ -41,23 +41,23 @@ public:
         return m_e;
     }
 
-    Coordinate<DimX, DimY> operator()(Coordinate<DimR, DimP> const& coord) const
+    ddc::Coordinate<DimX, DimY> operator()(ddc::Coordinate<DimR, DimP> const& coord) const
     {
-        const double r = get<DimR>(coord);
-        const double theta = get<DimP>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
         const double tmp1 = std::sqrt(m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta)) + 1.0);
 
         const double x = (1.0 - tmp1) / m_epsilon;
         const double y = m_e * r * std::sin(theta)
                          / (std::sqrt(1.0 - 0.25 * m_epsilon * m_epsilon) * (2.0 - tmp1));
 
-        return Coordinate<DimX, DimY>(x, y);
+        return ddc::Coordinate<DimX, DimY>(x, y);
     }
 
-    Coordinate<DimR, DimP> operator()(Coordinate<DimX, DimY> const& coord) const
+    ddc::Coordinate<DimR, DimP> operator()(ddc::Coordinate<DimX, DimY> const& coord) const
     {
-        const double x = get<DimX>(coord);
-        const double y = get<DimY>(coord);
+        const double x = ddc::get<DimX>(coord);
+        const double y = ddc::get<DimY>(coord);
         const double ex = 1. + m_epsilon * x;
         const double ex2 = (m_epsilon * x * x - 2. * x - m_epsilon);
         const double xi2 = 1. / (1. - m_epsilon * m_epsilon * 0.25);
@@ -67,29 +67,29 @@ public:
                 = std::atan2(2. * y * ex, (m_e * xi * (m_epsilon * x * x - 2. * x - m_epsilon)));
         if (theta < 0)
             theta = 6.283185307179586 + theta;
-        return Coordinate<DimR, DimP>(r, theta);
+        return ddc::Coordinate<DimR, DimP>(r, theta);
     }
 
-    double jacobian_11(Coordinate<DimR, DimP> const& coord) const final
+    double jacobian_11(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = get<DimR>(coord);
-        const double theta = get<DimP>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
         return -std::cos(theta)
                / std::sqrt(m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta)) + 1.0);
     }
 
-    double jacobian_12(Coordinate<DimR, DimP> const& coord) const final
+    double jacobian_12(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = get<DimR>(coord);
-        const double theta = get<DimP>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
         return r * std::sin(theta)
                / std::sqrt(m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta)) + 1.0);
     }
 
-    double jacobian_21(Coordinate<DimR, DimP> const& coord) const final
+    double jacobian_21(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = get<DimR>(coord);
-        const double theta = get<DimP>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
 
         const double sin_theta = std::sin(theta);
         const double cos_theta = std::cos(theta);
@@ -101,10 +101,10 @@ public:
                + m_e * sin_theta * xi / tmp2;
     }
 
-    double jacobian_22(Coordinate<DimR, DimP> const& coord) const final
+    double jacobian_22(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = get<DimR>(coord);
-        const double theta = get<DimP>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
 
         const double sin_theta = std::sin(theta);
         const double cos_theta = std::cos(theta);

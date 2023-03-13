@@ -20,10 +20,11 @@ class GrevilleInterpolationPoints
         using SamplingImpl = typename Sampling::template Impl<Kokkos::HostSpace>;
 
         double constexpr shift = (BSplines::degree() % 2 == 0) ? 0.5 : 0.0;
-        double dx = (discrete_space<BSplines>().rmax() - discrete_space<BSplines>().rmin())
-                    / discrete_space<BSplines>().ncells();
+        double dx
+                = (ddc::discrete_space<BSplines>().rmax() - ddc::discrete_space<BSplines>().rmin())
+                  / ddc::discrete_space<BSplines>().ncells();
         return SamplingImpl(
-                ddc::Coordinate<tag_type>(discrete_space<BSplines>().rmin() + shift * dx),
+                ddc::Coordinate<tag_type>(ddc::discrete_space<BSplines>().rmin() + shift * dx),
                 ddc::Coordinate<tag_type>(dx));
     }
 
@@ -33,17 +34,17 @@ class GrevilleInterpolationPoints
         using Sampling = ddc::NonUniformPointSampling<tag_type>;
         using SamplingImpl = typename Sampling::template Impl<Kokkos::HostSpace>;
 
-        std::vector<double> greville_points(discrete_space<BSplines>().nbasis());
+        std::vector<double> greville_points(ddc::discrete_space<BSplines>().nbasis());
         ddc::DiscreteDomain<BSplines> bspline_domain
-                = discrete_space<BSplines>().full_domain().take_first(
-                        ddc::DiscreteVector<BSplines>(discrete_space<BSplines>().nbasis()));
+                = ddc::discrete_space<BSplines>().full_domain().take_first(
+                        ddc::DiscreteVector<BSplines>(ddc::discrete_space<BSplines>().nbasis()));
 
-        for_each(bspline_domain, [&](ddc::DiscreteElement<BSplines> ib) {
+        ddc::for_each(bspline_domain, [&](ddc::DiscreteElement<BSplines> ib) {
             // Define the Greville points from the bspline knots
             greville_points[ib.uid()] = 0.0;
             for (std::size_t i(0); i < BSplines::degree(); ++i) {
                 greville_points[ib.uid()]
-                        += discrete_space<BSplines>().get_support_knot_n(ib, i + 1);
+                        += ddc::discrete_space<BSplines>().get_support_knot_n(ib, i + 1);
             }
             greville_points[ib.uid()] /= BSplines::degree();
         });
@@ -53,17 +54,18 @@ class GrevilleInterpolationPoints
         if constexpr (U::is_periodic()) {
             int npoints(0);
             // Count the number of interpolation points that need shifting to preserve the ordering
-            while (greville_points[npoints] < discrete_space<BSplines>().rmin()) {
+            while (greville_points[npoints] < ddc::discrete_space<BSplines>().rmin()) {
                 temp_knots[npoints]
-                        = greville_points[npoints] + discrete_space<BSplines>().length();
+                        = greville_points[npoints] + ddc::discrete_space<BSplines>().length();
                 npoints++;
             }
             // Shift the points
-            for (std::size_t i = 0; i < discrete_space<BSplines>().nbasis() - npoints; ++i) {
+            for (std::size_t i = 0; i < ddc::discrete_space<BSplines>().nbasis() - npoints; ++i) {
                 greville_points[i] = greville_points[i + npoints];
             }
             for (int i = 0; i < npoints; ++i) {
-                greville_points[discrete_space<BSplines>().nbasis() - npoints + i] = temp_knots[i];
+                greville_points[ddc::discrete_space<BSplines>().nbasis() - npoints + i]
+                        = temp_knots[i];
             }
         }
 
@@ -98,17 +100,17 @@ public:
         using SamplingImpl = typename Sampling::template Impl<Kokkos::HostSpace>;
         if constexpr (U::is_uniform()) {
             auto points_wo_bcs = uniform_greville_points();
-            int const n_break_points = discrete_space<BSplines>().ncells() + 1;
-            int const npoints = discrete_space<BSplines>().nbasis() - N_BE_MIN - N_BE_MAX;
+            int const n_break_points = ddc::discrete_space<BSplines>().ncells() + 1;
+            int const npoints = ddc::discrete_space<BSplines>().nbasis() - N_BE_MIN - N_BE_MAX;
             std::vector<double> points_with_bcs(npoints);
 
             // Construct Greville-like points at the edge
             if constexpr (BcXmin == BoundCond::GREVILLE) {
                 for (std::size_t i(0); i < BSplines::degree() / 2 + 1; ++i) {
                     points_with_bcs[i]
-                            = (BSplines::degree() - i) * discrete_space<BSplines>().rmin();
+                            = (BSplines::degree() - i) * ddc::discrete_space<BSplines>().rmin();
                     for (std::size_t j(0); j < i; ++j) {
-                        points_with_bcs[i] += discrete_space<BSplines>().get_support_knot_n(
+                        points_with_bcs[i] += ddc::discrete_space<BSplines>().get_support_knot_n(
                                 ddc::DiscreteElement<BSplines>(i),
                                 BSplines::degree() - j);
                     }
@@ -126,7 +128,7 @@ public:
                            ddc::DiscreteVector<ddc::UniformPointSampling<tag_type>>(domain_size));
 
             // Copy central points
-            for_each(domain, [&](auto ip) {
+            ddc::for_each(domain, [&](auto ip) {
                 points_with_bcs[ip.uid() + n_start - 1] = points_wo_bcs.coordinate(ip);
             });
 
@@ -134,12 +136,12 @@ public:
             if constexpr (BcXmax == BoundCond::GREVILLE) {
                 for (std::size_t i(0); i < BSplines::degree() / 2 + 1; ++i) {
                     points_with_bcs[npoints - 1 - i]
-                            = (BSplines::degree() - i) * discrete_space<BSplines>().rmax();
+                            = (BSplines::degree() - i) * ddc::discrete_space<BSplines>().rmax();
                     for (std::size_t j(0); j < i; ++j) {
                         points_with_bcs[npoints - 1 - i]
-                                += discrete_space<BSplines>().get_support_knot_n(
+                                += ddc::discrete_space<BSplines>().get_support_knot_n(
                                         ddc::DiscreteElement<BSplines>(
-                                                discrete_space<BSplines>().nbasis() - 1 - i),
+                                                ddc::discrete_space<BSplines>().nbasis() - 1 - i),
                                         j + 1);
                     }
                     points_with_bcs[npoints - 1 - i] /= BSplines::degree();
@@ -147,7 +149,8 @@ public:
             } else {
                 points_with_bcs[npoints - 1] = points_wo_bcs.coordinate(
                         ddc::DiscreteElement<ddc::UniformPointSampling<tag_type>>(
-                                discrete_space<BSplines>().ncells() - 1 + BSplines::degree() % 2));
+                                ddc::discrete_space<BSplines>().ncells() - 1
+                                + BSplines::degree() % 2));
             }
             return SamplingImpl(points_with_bcs);
         } else {
@@ -167,7 +170,7 @@ public:
                                length(points_with_bcs.size()));
 
                 points_with_bcs[0] = points_wo_bcs.coordinate(domain.front());
-                for_each(domain.remove(length(1), length(1)), [&](auto ip) {
+                ddc::for_each(domain.remove(length(1), length(1)), [&](auto ip) {
                     points_with_bcs[ip.uid() - n_start] = points_wo_bcs.coordinate(ip);
                 });
                 points_with_bcs[points_with_bcs.size() - 1]

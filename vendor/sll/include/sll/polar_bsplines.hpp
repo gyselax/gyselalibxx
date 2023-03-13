@@ -68,18 +68,18 @@ public:
     static discrete_element_type get_polar_index(
             ddc::DiscreteElement<BSplinesR, BSplinesP> const& idx)
     {
-        int const r_idx = select<BSplinesR>(idx).uid();
-        int const p_idx = select<BSplinesP>(idx).uid();
+        int const r_idx = ddc::select<BSplinesR>(idx).uid();
+        int const p_idx = ddc::select<BSplinesP>(idx).uid();
         assert(r_idx >= C + 1);
-        int local_idx((r_idx - C - 1) * discrete_space<BSplinesP>().nbasis() + p_idx);
+        int local_idx((r_idx - C - 1) * ddc::discrete_space<BSplinesP>().nbasis() + p_idx);
         return discrete_element_type(n_singular_basis() + local_idx);
     }
 
     static ddc::DiscreteElement<BSplinesR, BSplinesP> get_2d_index(discrete_element_type const& idx)
     {
         int const idx_2d = idx.uid() - n_singular_basis();
-        int const r_idx = idx_2d / discrete_space<BSplinesP>().nbasis();
-        int const p_idx = idx_2d - r_idx * discrete_space<BSplinesP>().nbasis();
+        int const r_idx = idx_2d / ddc::discrete_space<BSplinesP>().nbasis();
+        int const p_idx = idx_2d - r_idx * ddc::discrete_space<BSplinesP>().nbasis();
         ddc::DiscreteElement<BSplinesR> r_idx_elem(r_idx + C + 1);
         ddc::DiscreteElement<BSplinesP> p_idx_elem(p_idx);
         return ddc::DiscreteElement<BSplinesR, BSplinesP>(r_idx_elem, p_idx_elem);
@@ -116,17 +116,17 @@ public:
         {
             if constexpr (C > -1) {
                 const ddc::Coordinate<DimX, DimY> pole
-                        = curvilinear_to_cartesian(Coordinate<DimR, DimP>(0.0, 0.0));
-                const double x0 = get<DimX>(pole);
-                const double y0 = get<DimY>(pole);
+                        = curvilinear_to_cartesian(ddc::Coordinate<DimR, DimP>(0.0, 0.0));
+                const double x0 = ddc::get<DimX>(pole);
+                const double y0 = ddc::get<DimY>(pole);
                 double tau = 0.0;
-                for (std::size_t i(0); i < discrete_space<BSplinesP>().size(); ++i) {
+                for (std::size_t i(0); i < ddc::discrete_space<BSplinesP>().size(); ++i) {
                     const ddc::Coordinate<DimX, DimY> point
                             = curvilinear_to_cartesian.control_point(
                                     ddc::DiscreteElement<BSplinesR, BSplinesP>(1, i));
 
-                    const double c_x = get<DimX>(point);
-                    const double c_y = get<DimY>(point);
+                    const double c_x = ddc::get<DimX>(point);
+                    const double c_y = ddc::get<DimY>(point);
 
                     double tau1 = -2.0 * (c_x - x0);
                     double tau2 = c_x - x0 - sqrt(3.0) * (c_y - y0);
@@ -135,9 +135,11 @@ public:
                     tau = tau > tau2 ? tau : tau2;
                     tau = tau > tau3 ? tau : tau3;
                 }
-                const Coordinate<DimX, DimY> corner1(x0 + tau, y0);
-                const Coordinate<DimX, DimY> corner2(x0 - 0.5 * tau, y0 + 0.5 * tau * sqrt(3.0));
-                const Coordinate<DimX, DimY> corner3(x0 - 0.5 * tau, y0 - 0.5 * tau * sqrt(3.0));
+                const ddc::Coordinate<DimX, DimY> corner1(x0 + tau, y0);
+                const ddc::Coordinate<DimX, DimY>
+                        corner2(x0 - 0.5 * tau, y0 + 0.5 * tau * sqrt(3.0));
+                const ddc::Coordinate<DimX, DimY>
+                        corner3(x0 - 0.5 * tau, y0 - 0.5 * tau * sqrt(3.0));
 
                 struct Corner1Tag
                 {
@@ -163,7 +165,7 @@ public:
                         Corner2Tag,
                         Corner3Tag,
                         C>;
-                init_discrete_space<BernsteinBasis>(barycentric_coordinate_converter);
+                ddc::init_discrete_space<BernsteinBasis>(barycentric_coordinate_converter);
 
                 using IndexR = ddc::DiscreteElement<BSplinesR>;
                 using IndexP = ddc::DiscreteElement<BSplinesP>;
@@ -195,7 +197,7 @@ public:
                                 = curvilinear_to_cartesian.control_point(SplIndexRP(ir, ip));
                         ddc::Chunk<double, ddc::DiscreteDomain<BernsteinBasis>> bernstein_vals(
                                 bernstein_domain);
-                        discrete_space<BernsteinBasis>().eval_basis(bernstein_vals, point);
+                        ddc::discrete_space<BernsteinBasis>().eval_basis(bernstein_vals, point);
                         // Fill spline coefficients
                         for (auto k : bernstein_domain) {
                             SplIndexRP const idx(ir.uid(), ip.uid());
@@ -206,7 +208,8 @@ public:
                         for (std::size_t ip(0); ip < BSplinesP::degree(); ++ip) {
                             SplIndexRP const start_idx(ir.uid(), ip);
                             SplIndexRP const
-                                    end_idx(ir.uid(), discrete_space<BSplinesP>().nbasis() + ip);
+                                    end_idx(ir.uid(),
+                                            ddc::discrete_space<BSplinesP>().nbasis() + ip);
                             m_singular_basis_elements[k](end_idx)
                                     = m_singular_basis_elements[k](start_idx);
                         }
@@ -239,25 +242,25 @@ public:
         ddc::DiscreteElement<BSplinesR, BSplinesP> eval_basis(
                 DSpan1D singular_values,
                 DSpan2D values,
-                Coordinate<DimR, DimP> p) const;
+                ddc::Coordinate<DimR, DimP> p) const;
         ddc::DiscreteElement<BSplinesR, BSplinesP> eval_deriv_r(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                Coordinate<DimR, DimP> p) const;
+                ddc::Coordinate<DimR, DimP> p) const;
         ddc::DiscreteElement<BSplinesR, BSplinesP> eval_deriv_p(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                Coordinate<DimR, DimP> p) const;
+                ddc::Coordinate<DimR, DimP> p) const;
         ddc::DiscreteElement<BSplinesR, BSplinesP> eval_deriv_r_and_p(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                Coordinate<DimR, DimP> p) const;
+                ddc::Coordinate<DimR, DimP> p) const;
         void integrals(DSpan1D singular_int_vals, DSpan2D int_vals) const;
 
         std::size_t nbasis() const noexcept
         {
-            std::size_t nr = discrete_space<BSplinesR>().nbasis() - C - 1;
-            std::size_t np = discrete_space<BSplinesP>().nbasis();
+            std::size_t nr = ddc::discrete_space<BSplinesR>().nbasis() - C - 1;
+            std::size_t np = ddc::discrete_space<BSplinesP>().nbasis();
             return n_singular_basis() + nr * np;
         }
 
@@ -276,7 +279,7 @@ public:
         ddc::DiscreteElement<BSplinesR, BSplinesP> eval(
                 DSpan1D singular_values,
                 DSpan2D values,
-                Coordinate<DimR, DimP> coord_eval,
+                ddc::Coordinate<DimR, DimP> coord_eval,
                 EvalTypeR const,
                 EvalTypeP const) const;
     };
@@ -284,9 +287,11 @@ public:
 
 template <class BSplinesR, class BSplinesP, int C>
 template <class MemorySpace>
-ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::Impl<
-        MemorySpace>::eval_basis(DSpan1D singular_values, DSpan2D values, Coordinate<DimR, DimP> p)
-        const
+ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
+        Impl<MemorySpace>::eval_basis(
+                DSpan1D singular_values,
+                DSpan2D values,
+                ddc::Coordinate<DimR, DimP> p) const
 {
     return eval(singular_values, values, p, eval_type(), eval_type());
 }
@@ -297,7 +302,7 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
         Impl<MemorySpace>::eval_deriv_r(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                Coordinate<DimR, DimP> p) const
+                ddc::Coordinate<DimR, DimP> p) const
 {
     return eval(singular_derivs, derivs, p, eval_deriv_type(), eval_type());
 }
@@ -308,7 +313,7 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
         Impl<MemorySpace>::eval_deriv_p(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                Coordinate<DimR, DimP> p) const
+                ddc::Coordinate<DimR, DimP> p) const
 {
     return eval(singular_derivs, derivs, p, eval_type(), eval_deriv_type());
 }
@@ -319,7 +324,7 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
         Impl<MemorySpace>::eval_deriv_r_and_p(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                Coordinate<DimR, DimP> p) const
+                ddc::Coordinate<DimR, DimP> p) const
 {
     return eval(singular_derivs, derivs, p, eval_deriv_type(), eval_deriv_type());
 }
@@ -331,7 +336,7 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
         Impl<MemorySpace>::eval(
                 DSpan1D singular_values,
                 DSpan2D values,
-                Coordinate<DimR, DimP> coord_eval,
+                ddc::Coordinate<DimR, DimP> coord_eval,
                 EvalTypeR const,
                 EvalTypeP const) const
 {
@@ -350,14 +355,14 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
             std::is_same_v<EvalTypeP, eval_type> || std::is_same_v<EvalTypeP, eval_deriv_type>);
 
     if constexpr (std::is_same_v<EvalTypeR, eval_type>) {
-        jmin_r = ddc::discrete_space<BSplinesR>().eval_basis(vals_r, select<DimR>(coord_eval));
+        jmin_r = ddc::discrete_space<BSplinesR>().eval_basis(vals_r, ddc::select<DimR>(coord_eval));
     } else if constexpr (std::is_same_v<EvalTypeR, eval_deriv_type>) {
-        jmin_r = ddc::discrete_space<BSplinesR>().eval_deriv(vals_r, select<DimR>(coord_eval));
+        jmin_r = ddc::discrete_space<BSplinesR>().eval_deriv(vals_r, ddc::select<DimR>(coord_eval));
     }
     if constexpr (std::is_same_v<EvalTypeP, eval_type>) {
-        jmin_p = ddc::discrete_space<BSplinesP>().eval_basis(vals_p, select<DimP>(coord_eval));
+        jmin_p = ddc::discrete_space<BSplinesP>().eval_basis(vals_p, ddc::select<DimP>(coord_eval));
     } else if constexpr (std::is_same_v<EvalTypeP, eval_deriv_type>) {
-        jmin_p = ddc::discrete_space<BSplinesP>().eval_deriv(vals_p, select<DimP>(coord_eval));
+        jmin_p = ddc::discrete_space<BSplinesP>().eval_deriv(vals_p, ddc::select<DimP>(coord_eval));
     }
     std::size_t nr = vals_r.size();
     std::size_t np = vals_p.size();
@@ -401,38 +406,39 @@ void PolarBSplines<BSplinesR, BSplinesP, C>::Impl<MemorySpace>::integrals(
         DSpan1D singular_int_vals,
         DSpan2D int_vals) const
 {
-    const int nr = discrete_space<BSplinesR>().ncells() + BSplinesR::degree() - C - 1;
-    const int np = discrete_space<BSplinesP>().ncells() + BSplinesP::degree();
+    const int nr = ddc::discrete_space<BSplinesR>().ncells() + BSplinesR::degree() - C - 1;
+    const int np = ddc::discrete_space<BSplinesP>().ncells() + BSplinesP::degree();
     assert(singular_int_vals.extent(0) == n_singular_basis());
     assert(int_vals.extent(0) == nr);
-    assert(int_vals.extent(1) == np || int_vals.extent(1) == discrete_space<BSplinesP>().ncells());
+    assert(int_vals.extent(1) == np
+           || int_vals.extent(1) == ddc::discrete_space<BSplinesP>().ncells());
 
     std::vector<double> r_integrals_data(nr);
-    std::vector<double> p_integrals_data(discrete_space<BSplinesP>().ncells());
+    std::vector<double> p_integrals_data(ddc::discrete_space<BSplinesP>().ncells());
     DSpan1D r_integrals(r_integrals_data.data(), nr);
-    DSpan1D p_integrals(p_integrals_data.data(), discrete_space<BSplinesP>().ncells());
-    discrete_space<BSplinesR>().integrals(r_integrals);
-    discrete_space<BSplinesP>().integrals(p_integrals);
+    DSpan1D p_integrals(p_integrals_data.data(), ddc::discrete_space<BSplinesP>().ncells());
+    ddc::discrete_space<BSplinesR>().integrals(r_integrals);
+    ddc::discrete_space<BSplinesP>().integrals(p_integrals);
 
     for (int k(0); k < n_singular_basis(); ++k) {
         singular_int_vals(k) = 0.0;
-        for_each(
+        ddc::for_each(
                 m_singular_basis_elements[k].domain(),
                 [=](ddc::DiscreteElement<BSplinesR, BSplinesP> const i) {
                     singular_int_vals(k) += m_singular_basis_elements[k](i)
-                                            * r_integrals(select<BSplinesR>(i))
-                                            * p_integrals(select<BSplinesP>(i));
+                                            * r_integrals(ddc::select<BSplinesR>(i))
+                                            * p_integrals(ddc::select<BSplinesP>(i));
                 });
     }
     for (int i(n_singular_basis()); i < nr; ++i) {
-        for (int j(0); j < discrete_space<BSplinesP>().ncells(); ++j) {
+        for (int j(0); j < ddc::discrete_space<BSplinesP>().ncells(); ++j) {
             int_vals(i, j) = r_integrals(i) * p_integrals(j);
         }
     }
     if (int_vals.extent(1) == np) {
         for (int i(n_singular_basis()); i < nr; ++i) {
             for (int j(0); j < BSplinesP::degree(); ++j) {
-                int_vals(i, j) = int_vals(i, j + discrete_space<BSplinesP>().ncells());
+                int_vals(i, j) = int_vals(i, j + ddc::discrete_space<BSplinesP>().ncells());
             }
         }
     }

@@ -15,7 +15,7 @@ private:
 
     SplineEvaluator<BSplinesVx> const& m_evaluator;
 
-    mutable Chunk<double, BSDomainVx> m_coefs;
+    mutable ddc::Chunk<double, BSDomainVx> m_coefs;
 
     std::vector<double> m_derivs_vxmin_alloc;
 

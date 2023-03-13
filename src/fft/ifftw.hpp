@@ -22,15 +22,18 @@ public:
     ~FftwInverseFourierTransform() override = default;
 
     // Perform the normalized invFFT where the input is a complex and the output is a real
-    ChunkSpan<double, DiscreteDomain<UniformPointSampling<Tag>>, std::experimental::layout_right>
+    ddc::ChunkSpan<
+            double,
+            ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>>,
+            std::experimental::layout_right>
     operator()(
-            ChunkSpan<
+            ddc::ChunkSpan<
                     double,
-                    DiscreteDomain<UniformPointSampling<Tag>>,
+                    ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>>,
                     std::experimental::layout_right> const out_values,
-            ChunkSpan<
+            ddc::ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
+                    ddc::DiscreteDomain<ddc::NonUniformPointSampling<Fourier<Tag>>>,
                     std::experimental::layout_right> const in_values) const noexcept override
     {
         assert(in_values.extents().value() == out_values.extents().value());
@@ -58,18 +61,18 @@ public:
     }
 
     // Perform the normalized invFFT where the input is a complex and the output is a complex
-    ChunkSpan<
+    ddc::ChunkSpan<
             std::complex<double>,
-            DiscreteDomain<UniformPointSampling<Tag>>,
+            ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>>,
             std::experimental::layout_right>
     operator()(
-            ChunkSpan<
+            ddc::ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<UniformPointSampling<Tag>>,
+                    ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>>,
                     std::experimental::layout_right> const out_values,
-            ChunkSpan<
+            ddc::ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
+                    ddc::DiscreteDomain<ddc::NonUniformPointSampling<Fourier<Tag>>>,
                     std::experimental::layout_right> const in_values) const noexcept override
     {
         assert(in_values.extents().value() == out_values.extents().value());

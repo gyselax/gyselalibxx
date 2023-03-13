@@ -22,7 +22,7 @@ public:
     template <class T>
     struct InternalTagGenerator;
 
-    /// An internal tag necessary to allocate an internal discrete_space function.
+    /// An internal tag necessary to allocate an internal ddc::discrete_space function.
     /// It must remain internal, for example it shall not be exposed when returning ddc::coordinates. Instead use `Tag`
     using KnotDim = InternalTagGenerator<Tag>;
 
@@ -233,8 +233,9 @@ NonUniformBSplines<Tag, D>::Impl<MemorySpace>::Impl(
     if constexpr (is_periodic()) {
         double const period = rmax - rmin;
         for (std::size_t i = 1; i < degree() + 1; ++i) {
-            knots[degree() + -i] = knots[degree() + ncells() - i] - period;
-            knots[degree() + ncells() + i] = knots[degree() + i] + period;
+            knots[degree() + -i]
+                    = ddc::Coordinate<KnotDim>(knots[degree() + ncells() - i] - period);
+            knots[degree() + ncells() + i] = ddc::Coordinate<KnotDim>(knots[degree() + i] + period);
         }
     } else // open
     {

@@ -51,20 +51,20 @@ using GrevillePointsY
         = GrevilleInterpolationPoints<BSplinesY, BoundCond::PERIODIC, BoundCond::PERIODIC>;
 
 using IDimX = GrevillePointsX::interpolation_mesh_type;
-using IndexX = DiscreteElement<IDimX>;
-using DVectX = DiscreteVector<IDimX>;
-using CoordX = Coordinate<DimX>;
+using IndexX = ddc::DiscreteElement<IDimX>;
+using DVectX = ddc::DiscreteVector<IDimX>;
+using CoordX = ddc::Coordinate<DimX>;
 
 using IDimY = GrevillePointsY::interpolation_mesh_type;
-using IndexY = DiscreteElement<IDimY>;
-using DVectY = DiscreteVector<IDimY>;
-using CoordY = Coordinate<DimY>;
+using IndexY = ddc::DiscreteElement<IDimY>;
+using DVectY = ddc::DiscreteVector<IDimY>;
+using CoordY = ddc::Coordinate<DimY>;
 
-using IndexXY = DiscreteElement<IDimX, IDimY>;
-using BsplIndexXY = DiscreteElement<BSplinesX, BSplinesY>;
-using SplineXY = Chunk<double, DiscreteDomain<BSplinesX, BSplinesY>>;
-using FieldXY = Chunk<double, DiscreteDomain<IDimX, IDimY>>;
-using CoordXY = Coordinate<DimX, DimY>;
+using IndexXY = ddc::DiscreteElement<IDimX, IDimY>;
+using BsplIndexXY = ddc::DiscreteElement<BSplinesX, BSplinesY>;
+using SplineXY = ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX, BSplinesY>>;
+using FieldXY = ddc::Chunk<double, ddc::DiscreteDomain<IDimX, IDimY>>;
+using CoordXY = ddc::Coordinate<DimX, DimY>;
 
 using BuilderX = SplineBuilder<BSplinesX, IDimX, BoundCond::PERIODIC, BoundCond::PERIODIC>;
 using BuilderY = SplineBuilder<BSplinesY, IDimY, BoundCond::PERIODIC, BoundCond::PERIODIC>;
@@ -85,47 +85,47 @@ TEST(Periodic2DSplineBuilderTest, Identity)
     // 1. Create BSplines
     {
 #if defined(BSPLINES_TYPE_UNIFORM)
-        init_discrete_space<BSplinesX>(select<DimX>(x0), select<DimX>(xN), ncells1);
+        ddc::init_discrete_space<BSplinesX>(ddc::select<DimX>(x0), ddc::select<DimX>(xN), ncells1);
 #elif defined(BSPLINES_TYPE_NON_UNIFORM)
         DVectX constexpr npoints(ncells1 + 1);
         std::vector<CoordX> breaks(npoints);
-        double constexpr dx = (get<DimX>(xN) - get<DimX>(x0)) / ncells1;
+        double constexpr dx = (ddc::get<DimX>(xN) - ddc::get<DimX>(x0)) / ncells1;
         for (int i(0); i < npoints; ++i) {
-            breaks[i] = CoordX(get<DimX>(x0) + i * dx);
+            breaks[i] = CoordX(ddc::get<DimX>(x0) + i * dx);
         }
-        init_discrete_space<BSplinesX>(breaks);
+        ddc::init_discrete_space<BSplinesX>(breaks);
 #endif
     }
     {
 #if defined(BSPLINES_TYPE_UNIFORM)
-        init_discrete_space<BSplinesY>(select<DimY>(x0), select<DimY>(xN), ncells2);
+        ddc::init_discrete_space<BSplinesY>(ddc::select<DimY>(x0), ddc::select<DimY>(xN), ncells2);
 #elif defined(BSPLINES_TYPE_NON_UNIFORM)
         DVectY constexpr npoints(ncells2 + 1);
         std::vector<CoordY> breaks(npoints);
-        double constexpr dx = (get<DimY>(xN) - get<DimY>(x0)) / ncells2;
+        double constexpr dx = (ddc::get<DimY>(xN) - ddc::get<DimY>(x0)) / ncells2;
         for (int i(0); i < npoints; ++i) {
-            breaks[i] = CoordY(get<DimY>(x0) + i * dx);
+            breaks[i] = CoordY(ddc::get<DimY>(x0) + i * dx);
         }
-        init_discrete_space<BSplinesY>(breaks);
+        ddc::init_discrete_space<BSplinesY>(breaks);
 #endif
     }
 
-    DiscreteDomain<BSplinesX, BSplinesY> const dom_bsplines_xy(
+    ddc::DiscreteDomain<BSplinesX, BSplinesY> const dom_bsplines_xy(
             BsplIndexXY(0, 0),
-            DiscreteVector<BSplinesX, BSplinesY>(
-                    discrete_space<BSplinesX>().size(),
-                    discrete_space<BSplinesY>().size()));
+            ddc::DiscreteVector<BSplinesX, BSplinesY>(
+                    ddc::discrete_space<BSplinesX>().size(),
+                    ddc::discrete_space<BSplinesY>().size()));
 
     // 2. Create a Spline represented by a chunk over BSplines
     // The chunk is filled with garbage data, we need to initialize it
     SplineXY coef(dom_bsplines_xy);
 
     // 3. Create the interpolation domain
-    init_discrete_space<IDimX>(GrevillePointsX::get_sampling());
-    init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
-    DiscreteDomain<IDimX> interpolation_domain_X(GrevillePointsX::get_domain());
-    DiscreteDomain<IDimY> interpolation_domain_Y(GrevillePointsY::get_domain());
-    DiscreteDomain<IDimX, IDimY>
+    ddc::init_discrete_space<IDimX>(GrevillePointsX::get_sampling());
+    ddc::init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
+    ddc::DiscreteDomain<IDimX> interpolation_domain_X(GrevillePointsX::get_domain());
+    ddc::DiscreteDomain<IDimY> interpolation_domain_Y(GrevillePointsY::get_domain());
+    ddc::DiscreteDomain<IDimX, IDimY>
             interpolation_domain(interpolation_domain_X, interpolation_domain_Y);
 
     // 4. Create a SplineBuilder over BSplines using some boundary conditions
@@ -146,9 +146,11 @@ TEST(Periodic2DSplineBuilderTest, Identity)
             g_null_boundary_2d<BSplinesX, BSplinesY>,
             g_null_boundary_2d<BSplinesX, BSplinesY>);
 
-    Chunk<CoordXY, DiscreteDomain<IDimX, IDimY>> coords_eval(interpolation_domain);
-    for_each(interpolation_domain, [&](IndexXY const ixy) {
-        coords_eval(ixy) = CoordXY(coordinate(select<IDimX>(ixy)), coordinate(select<IDimY>(ixy)));
+    ddc::Chunk<CoordXY, ddc::DiscreteDomain<IDimX, IDimY>> coords_eval(interpolation_domain);
+    ddc::for_each(interpolation_domain, [&](IndexXY const ixy) {
+        coords_eval(ixy) = CoordXY(
+                ddc::coordinate(ddc::select<IDimX>(ixy)),
+                ddc::coordinate(ddc::select<IDimY>(ixy)));
     });
 
     FieldXY spline_eval(interpolation_domain);
@@ -177,11 +179,11 @@ TEST(Periodic2DSplineBuilderTest, Identity)
     double max_norm_error_diff1 = 0.;
     double max_norm_error_diff2 = 0.;
     double max_norm_error_diff12 = 0.;
-    for_each(interpolation_domain, [&](IndexXY const ixy) {
-        IndexX const ix = select<IDimX>(ixy);
-        IndexY const iy = select<IDimY>(ixy);
-        CoordX const x = coordinate(ix);
-        CoordY const y = coordinate(iy);
+    ddc::for_each(interpolation_domain, [&](IndexXY const ixy) {
+        IndexX const ix = ddc::select<IDimX>(ixy);
+        IndexY const iy = ddc::select<IDimY>(ixy);
+        CoordX const x = ddc::coordinate(ix);
+        CoordY const y = ddc::coordinate(iy);
 
         // Compute error
         double const error = spline_eval(ix, iy) - yvals(ix, iy);
@@ -206,8 +208,8 @@ TEST(Periodic2DSplineBuilderTest, Identity)
     double const max_norm_diff12 = evaluator.max_norm(1, 1);
 
     SplineErrorBounds<EvaluatorType> error_bounds(evaluator);
-    const double h1 = (get<DimX>(xN) - get<DimX>(x0)) / ncells1;
-    const double h2 = (get<DimY>(xN) - get<DimY>(x0)) / ncells2;
+    const double h1 = (ddc::get<DimX>(xN) - ddc::get<DimX>(x0)) / ncells1;
+    const double h2 = (ddc::get<DimY>(xN) - ddc::get<DimY>(x0)) / ncells2;
     EXPECT_LE(
             max_norm_error,
             std::max(error_bounds.error_bound(h1, h2, s_degree_x, s_degree_y), 1.0e-14 * max_norm));
@@ -231,6 +233,6 @@ TEST(Periodic2DSplineBuilderTest, Identity)
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
-    ::ScopeGuard scope(argc, argv);
+    ::ddc::ScopeGuard scope(argc, argv);
     return RUN_ALL_TESTS();
 }

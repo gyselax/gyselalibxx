@@ -36,12 +36,12 @@ struct CosineEvaluator
             return eval(x, 0);
         }
 
-        void operator()(ChunkSpan<double, DiscreteDomain<DDim>> chunk) const
+        void operator()(ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> chunk) const
         {
             auto const& domain = chunk.domain();
 
-            for (DiscreteElement<DDim> const i : domain) {
-                chunk(i) = eval(coordinate(i), 0);
+            for (ddc::DiscreteElement<DDim> const i : domain) {
+                chunk(i) = eval(ddc::coordinate(i), 0);
             }
         }
 
@@ -50,12 +50,13 @@ struct CosineEvaluator
             return eval(x, derivative);
         }
 
-        void deriv(ChunkSpan<double, DiscreteDomain<DDim>> chunk, int const derivative) const
+        void deriv(ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> chunk, int const derivative)
+                const
         {
             auto const& domain = chunk.domain();
 
-            for (DiscreteElement<DDim> const i : domain) {
-                chunk(i) = eval(coordinate(i), derivative);
+            for (ddc::DiscreteElement<DDim> const i : domain) {
+                chunk(i) = eval(ddc::coordinate(i), derivative);
             }
         }
 

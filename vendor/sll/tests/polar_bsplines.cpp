@@ -14,8 +14,6 @@
 
 #include "test_utils.hpp"
 
-using namespace ddc;
-
 template <class T>
 struct PolarBsplineFixture;
 
@@ -69,13 +67,13 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     int constexpr continuity = TestFixture::continuity;
     using DimR = typename TestFixture::DimR;
     using IDimR = typename TestFixture::IDimR;
-    using DVectR = DiscreteVector<IDimR>;
+    using DVectR = ddc::DiscreteVector<IDimR>;
     using DimP = typename TestFixture::DimP;
     using IDimP = typename TestFixture::IDimP;
-    using DVectP = DiscreteVector<IDimP>;
+    using DVectP = ddc::DiscreteVector<IDimP>;
     using DimX = typename TestFixture::DimX;
     using DimY = typename TestFixture::DimY;
-    using PolarCoord = Coordinate<DimR, DimP>;
+    using PolarCoord = ddc::Coordinate<DimR, DimP>;
     using BSplinesR = typename TestFixture::BSplineR;
     using BSplinesP = typename TestFixture::BSplineP;
     using CircToCart = CircularToCartesian<DimX, DimY, DimR, DimP>;
@@ -84,8 +82,8 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     using BuilderRP = SplineBuilder2D<BuilderR, BuilderP>;
     using DiscreteMapping = DiscreteToCartesian<DimX, DimY, BuilderRP>;
     using BSplines = PolarBSplines<BSplinesR, BSplinesP, continuity>;
-    using CoordR = Coordinate<DimR>;
-    using CoordP = Coordinate<DimP>;
+    using CoordR = ddc::Coordinate<DimR>;
+    using CoordP = ddc::Coordinate<DimP>;
     using GrevillePointsR = typename TestFixture::GrevillePointsR;
     using GrevillePointsP = typename TestFixture::GrevillePointsP;
 
@@ -103,10 +101,10 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
         for (int i(0); i < npoints; ++i) {
             breaks[i] = CoordR(r0 + i * dr);
         }
-        init_discrete_space<BSplinesR>(breaks);
+        ddc::init_discrete_space<BSplinesR>(breaks);
     }
     if constexpr (BSplinesP::is_uniform()) {
-        init_discrete_space<BSplinesP>(p0, pN, ncells);
+        ddc::init_discrete_space<BSplinesP>(p0, pN, ncells);
     } else {
         DVectP constexpr npoints(ncells + 1);
         std::vector<CoordP> breaks(npoints);
@@ -114,14 +112,14 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
         for (int i(0); i < npoints; ++i) {
             breaks[i] = CoordP(p0 + i * dp);
         }
-        init_discrete_space<BSplinesP>(breaks);
+        ddc::init_discrete_space<BSplinesP>(breaks);
     }
 
-    init_discrete_space<IDimR>(GrevillePointsR::get_sampling());
-    init_discrete_space<IDimP>(GrevillePointsP::get_sampling());
-    DiscreteDomain<IDimR> interpolation_domain_R(GrevillePointsR::get_domain());
-    DiscreteDomain<IDimP> interpolation_domain_P(GrevillePointsP::get_domain());
-    DiscreteDomain<IDimR, IDimP>
+    ddc::init_discrete_space<IDimR>(GrevillePointsR::get_sampling());
+    ddc::init_discrete_space<IDimP>(GrevillePointsP::get_sampling());
+    ddc::DiscreteDomain<IDimR> interpolation_domain_R(GrevillePointsR::get_domain());
+    ddc::DiscreteDomain<IDimP> interpolation_domain_P(GrevillePointsP::get_domain());
+    ddc::DiscreteDomain<IDimR, IDimP>
             interpolation_domain(interpolation_domain_R, interpolation_domain_P);
 
     BuilderR builder_r(interpolation_domain_R);
@@ -131,7 +129,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     const CircToCart coord_changer;
     DiscreteMapping const mapping
             = DiscreteMapping::analytical_to_discrete(coord_changer, builder_rp);
-    init_discrete_space<BSplines>(mapping, builder_r, builder_p);
+    ddc::init_discrete_space<BSplines>(mapping, builder_r, builder_p);
 
     int const n_eval = (BSplinesR::degree() + 1) * (BSplinesP::degree() + 1);
     std::size_t const n_test_points = 100;
@@ -146,7 +144,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             DSpan2D vals(data.data(), BSplinesR::degree() + 1, BSplinesP::degree() + 1);
 
             PolarCoord const test_point(r0 + i * dr, p0 + j * dp);
-            discrete_space<BSplines>().eval_basis(singular_vals, vals, test_point);
+            ddc::discrete_space<BSplines>().eval_basis(singular_vals, vals, test_point);
             double total(0.0);
             for (std::size_t k(0); k < BSplines::n_singular_basis(); ++k) {
                 total += singular_vals(k);

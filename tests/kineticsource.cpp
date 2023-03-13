@@ -60,7 +60,7 @@ TEST(KineticSource, Moments)
     ddc::fill(init_perturb_amplitude, 0);
 
     // Initialization of the distribution function
-    init_discrete_space<IDimSp>(
+    ddc::init_discrete_space<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
@@ -100,21 +100,21 @@ TEST(KineticSource, Moments)
     DFieldVx values_density(gridvx);
     DFieldVx values_fluid_velocity(gridvx);
     DFieldVx values_temperature(gridvx);
-    for_each(gridx, [&](IndexX const ix) {
+    ddc::for_each(gridx, [&](IndexX const ix) {
         // density
-        deepcopy(values_density, allfdistribu[dom_sp.front()][ix]);
+        ddc::deepcopy(values_density, allfdistribu[dom_sp.front()][ix]);
         density(ix) = integrate_v(values_density);
 
         // fluid velocity
-        for_each(gridvx, [&](IndexVx const iv) {
-            values_fluid_velocity(iv) = values_density(iv) * coordinate(iv);
+        ddc::for_each(gridvx, [&](IndexVx const iv) {
+            values_fluid_velocity(iv) = values_density(iv) * ddc::coordinate(iv);
         });
         fluid_velocity(ix) = integrate_v(values_fluid_velocity) / density(ix);
 
         // temperature
-        for_each(gridvx, [&](IndexVx const iv) {
+        ddc::for_each(gridvx, [&](IndexVx const iv) {
             values_temperature(iv)
-                    = values_density(iv) * std::pow(coordinate(iv) - fluid_velocity(ix), 2);
+                    = values_density(iv) * std::pow(ddc::coordinate(iv) - fluid_velocity(ix), 2);
         });
         temperature(ix) = integrate_v(values_temperature) / density(ix);
     });
@@ -124,7 +124,7 @@ TEST(KineticSource, Moments)
 
     double error_fluid_velocity(0);
     double error_temperature(0);
-    for_each(gridx, [&](IndexX const ix) {
+    ddc::for_each(gridx, [&](IndexX const ix) {
         error_fluid_velocity = std::fmax(std::fabs(fluid_velocity(ix)), error_fluid_velocity);
         error_temperature
                 = std::fmax(std::fabs(temperature(ix) - temperature_source), error_temperature);

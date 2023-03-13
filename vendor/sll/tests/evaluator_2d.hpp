@@ -14,8 +14,8 @@ struct Evaluator2D
     public:
         template <class Domain>
         Evaluator(Domain domain)
-            : eval_func1(select<typename Eval1::Dim>(domain))
-            , eval_func2(select<typename Eval2::Dim>(domain))
+            : eval_func1(ddc::select<typename Eval1::Dim>(domain))
+            , eval_func2(ddc::select<typename Eval2::Dim>(domain))
         {
         }
 
@@ -25,19 +25,19 @@ struct Evaluator2D
         }
 
         template <class DDim1, class DDim2>
-        double operator()(Coordinate<DDim1, DDim2> const x) const noexcept
+        double operator()(ddc::Coordinate<DDim1, DDim2> const x) const noexcept
         {
-            return eval_func1(get<DDim1>(x)) * eval_func2(get<DDim2>(x));
+            return eval_func1(ddc::get<DDim1>(x)) * eval_func2(ddc::get<DDim2>(x));
         }
 
         template <class DDim1, class DDim2>
-        void operator()(ChunkSpan<double, DiscreteDomain<DDim1, DDim2>> chunk) const
+        void operator()(ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim1, DDim2>> chunk) const
         {
             auto const& domain = chunk.domain();
 
-            for_each(domain, [=](DiscreteElement<DDim1, DDim2> const i) {
-                chunk(i) = eval_func1(coordinate(select<DDim1>(i)))
-                           * eval_func2(coordinate(select<DDim2>(i)));
+            ddc::for_each(domain, [=](ddc::DiscreteElement<DDim1, DDim2> const i) {
+                chunk(i) = eval_func1(ddc::coordinate(ddc::select<DDim1>(i)))
+                           * eval_func2(ddc::coordinate(ddc::select<DDim2>(i)));
             });
         }
 
@@ -49,25 +49,25 @@ struct Evaluator2D
 
         template <class DDim1, class DDim2>
         double deriv(
-                Coordinate<DDim1, DDim2> const x,
+                ddc::Coordinate<DDim1, DDim2> const x,
                 int const derivative_x,
                 int const derivative_y) const noexcept
         {
-            return eval_func1.deriv(get<DDim1>(x), derivative_x)
-                   * eval_func2.deriv(get<DDim2>(x), derivative_y);
+            return eval_func1.deriv(ddc::get<DDim1>(x), derivative_x)
+                   * eval_func2.deriv(ddc::get<DDim2>(x), derivative_y);
         }
 
         template <class DDim1, class DDim2>
         void deriv(
-                ChunkSpan<double, DiscreteDomain<DDim1, DDim2>> chunk,
+                ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim1, DDim2>> chunk,
                 int const derivative_x,
                 int const derivative_y) const
         {
             auto const& domain = chunk.domain();
 
-            for_each(domain, [=](DiscreteElement<DDim1, DDim2> const i) {
-                chunk(i) = eval_func1.deriv(coordinate(select<DDim1>(i)), derivative_x)
-                           * eval_func2.deriv(coordinate(select<DDim2>(i)), derivative_y);
+            ddc::for_each(domain, [=](ddc::DiscreteElement<DDim1, DDim2> const i) {
+                chunk(i) = eval_func1.deriv(ddc::coordinate(ddc::select<DDim1>(i)), derivative_x)
+                           * eval_func2.deriv(ddc::coordinate(ddc::select<DDim2>(i)), derivative_y);
             });
         }
 

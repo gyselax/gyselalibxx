@@ -38,10 +38,10 @@ IndexSp find_ion(IDomainSp const dom_sp)
  */
 void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0)
 {
-    double const Lx = ddcHelper::total_interval_length(get_domain<IDimX>(nustar_profile));
-    for_each(policies::parallel_host, nustar_profile.domain(), [&](IndexSpX const ispx) {
-        double const coeff = std::sqrt(mass(ielec()) / mass(select<IDimSp>(ispx)))
-                             * std::pow(charge(select<IDimSp>(ispx)), 4) / Lx;
+    double const Lx = ddcHelper::total_interval_length(ddc::get_domain<IDimX>(nustar_profile));
+    ddc::for_each(ddc::policies::parallel_host, nustar_profile.domain(), [&](IndexSpX const ispx) {
+        double const coeff = std::sqrt(mass(ielec()) / mass(ddc::select<IDimSp>(ispx)))
+                             * std::pow(charge(ddc::select<IDimSp>(ispx)), 4) / Lx;
         nustar_profile(ispx) = coeff * nustar0;
     });
 }
@@ -55,7 +55,7 @@ void compute_collfreq(
         DViewSpX density,
         DViewSpX temperature)
 {
-    for_each(policies::parallel_host, collfreq.domain(), [&](IndexSpX const ispx) {
+    ddc::for_each(ddc::policies::parallel_host, collfreq.domain(), [&](IndexSpX const ispx) {
         collfreq(ispx) = nustar_profile(ispx) * density(ispx) / std::pow(temperature(ispx), 1.5);
     });
 }
@@ -73,7 +73,7 @@ void compute_collfreq_ei(
     double const coeff(
             charge(iion) * charge(iion) / (4 * std::sqrt(2) * charge(ielec()) * charge(ielec())));
     double const mass_ratio(mass(ielec()) / mass(iion));
-    for_each(policies::parallel_host, collfreq_ei.domain(), [&](IndexX const ix) {
+    ddc::for_each(ddc::policies::parallel_host, collfreq_ei.domain(), [&](IndexX const ix) {
         double const collfreq_elec(
                 nustar_profile(ielec(), ix) * density(ielec(), ix)
                 / std::pow(temperature(ielec(), ix), 1.5));
@@ -103,7 +103,7 @@ void compute_momentum_energy_exchange(
     IndexSp const iion = find_ion(density.domain<IDimSp>());
     double const mass_ratio(mass(ielec()) / mass(iion));
     double const me_on_memi(mass(ielec()) / (mass(ielec()) + mass(iion)));
-    for_each(policies::parallel_host, collfreq_ei.domain(), [&](IndexX const ix) {
+    ddc::for_each(ddc::policies::parallel_host, collfreq_ei.domain(), [&](IndexX const ix) {
         // momentum exchange terms
         momentum_exchange_ei(ix)
                 = -collfreq_ei(ix) * density(ielec(), ix)

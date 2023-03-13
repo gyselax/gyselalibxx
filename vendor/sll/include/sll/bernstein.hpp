@@ -15,11 +15,11 @@ template <
 class BernsteinPolynomialBasis
 {
 public:
-    using discrete_element_type = DiscreteElement<BernsteinPolynomialBasis>;
+    using discrete_element_type = ddc::DiscreteElement<BernsteinPolynomialBasis>;
 
-    using discrete_domain_type = DiscreteDomain<BernsteinPolynomialBasis>;
+    using discrete_domain_type = ddc::DiscreteDomain<BernsteinPolynomialBasis>;
 
-    using discrete_vector_type = DiscreteVector<BernsteinPolynomialBasis>;
+    using discrete_vector_type = ddc::DiscreteVector<BernsteinPolynomialBasis>;
 
 public:
     static constexpr std::size_t rank()
@@ -76,8 +76,8 @@ public:
         Impl& operator=(Impl&& x) = default;
 
         void eval_basis(
-                ChunkSpan<double, DiscreteDomain<BernsteinPolynomialBasis>> values,
-                Coordinate<Tag1, Tag2> const& x) const;
+                ddc::ChunkSpan<double, ddc::DiscreteDomain<BernsteinPolynomialBasis>> values,
+                ddc::Coordinate<Tag1, Tag2> const& x) const;
     };
 };
 
@@ -91,16 +91,16 @@ template <
 template <class MemorySpace>
 void BernsteinPolynomialBasis<Tag1, Tag2, Corner1Tag, Corner2Tag, Corner3Tag, D>::
         Impl<MemorySpace>::eval_basis(
-                ChunkSpan<double, DiscreteDomain<BernsteinPolynomialBasis>> values,
-                Coordinate<Tag1, Tag2> const& x) const
+                ddc::ChunkSpan<double, ddc::DiscreteDomain<BernsteinPolynomialBasis>> values,
+                ddc::Coordinate<Tag1, Tag2> const& x) const
 {
-    const Coordinate<Corner1Tag, Corner2Tag, Corner3Tag> bary_coords = m_coord_changer(x);
-    const double l1 = get<Corner1Tag>(bary_coords);
-    const double l2 = get<Corner2Tag>(bary_coords);
-    const double l3 = get<Corner3Tag>(bary_coords);
+    const ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag> bary_coords = m_coord_changer(x);
+    const double l1 = ddc::get<Corner1Tag>(bary_coords);
+    const double l2 = ddc::get<Corner2Tag>(bary_coords);
+    const double l3 = ddc::get<Corner3Tag>(bary_coords);
     assert(values.size() == nbasis());
 
-    DiscreteElement<BernsteinPolynomialBasis> idx(0);
+    ddc::DiscreteElement<BernsteinPolynomialBasis> idx(0);
     for (std::size_t i(0); i < D + 1; ++i) {
         for (std::size_t j(0); j < D + 1 - i; ++j, ++idx) {
             const int k = D - i - j;
