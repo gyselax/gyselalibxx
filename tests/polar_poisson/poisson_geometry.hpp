@@ -29,9 +29,9 @@ struct DimP
     static bool constexpr PERIODIC = true;
 };
 
-using CoordR = Coordinate<DimR>;
-using CoordP = Coordinate<DimP>;
-using CoordRP = Coordinate<DimR, DimP>;
+using CoordR = ddc::Coordinate<DimR>;
+using CoordP = ddc::Coordinate<DimP>;
+using CoordRP = ddc::Coordinate<DimR, DimP>;
 
 int constexpr BSDegree = 3;
 
@@ -51,62 +51,69 @@ using SplineRBuilder = SplineBuilder<BSplinesR, IDimR, BoundCond::GREVILLE, Boun
 using SplinePBuilder = SplineBuilder<BSplinesP, IDimP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
 using SplineRPBuilder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
 
-using BSDomainR = DiscreteDomain<BSplinesR>;
-using BSDomainP = DiscreteDomain<BSplinesP>;
-using BSDomainRP = DiscreteDomain<BSplinesR, BSplinesP>;
-using BSDomainPolar = DiscreteDomain<PolarBSplinesRP>;
+using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
+using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
+using BSDomainP = ddc::DiscreteDomain<BSplinesP>;
+using BSDomainP = ddc::DiscreteDomain<BSplinesP>;
+using BSDomainRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
+using BSDomainRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
+using BSDomainPolar = ddc::DiscreteDomain<PolarBSplinesRP>;
+using BSDomainPolar = ddc::DiscreteDomain<PolarBSplinesRP>;
 
-using IndexR = DiscreteElement<IDimR>;
-using IndexP = DiscreteElement<IDimP>;
-using IndexRP = DiscreteElement<IDimR, IDimP>;
+using IndexR = ddc::DiscreteElement<IDimR>;
+using IndexP = ddc::DiscreteElement<IDimP>;
+using IndexRP = ddc::DiscreteElement<IDimR, IDimP>;
 
-using IVectR = DiscreteVector<IDimR>;
-using IVectP = DiscreteVector<IDimP>;
-using IVectRP = DiscreteVector<IDimR, IDimP>;
+using IVectR = ddc::DiscreteVector<IDimR>;
+using IVectP = ddc::DiscreteVector<IDimP>;
+using IVectRP = ddc::DiscreteVector<IDimR, IDimP>;
 
-using IDomainR = DiscreteDomain<IDimR>;
-using IDomainP = DiscreteDomain<IDimP>;
-using IDomainRP = DiscreteDomain<IDimR, IDimP>;
+using IDomainR = ddc::DiscreteDomain<IDimR>;
+using IDomainR = ddc::DiscreteDomain<IDimR>;
+using IDomainP = ddc::DiscreteDomain<IDimP>;
+using IDomainP = ddc::DiscreteDomain<IDimP>;
+using IDomainRP = ddc::DiscreteDomain<IDimR, IDimP>;
+using IDomainRP = ddc::DiscreteDomain<IDimR, IDimP>;
 
 template <class ElementType>
-using FieldR = Chunk<ElementType, IDomainR>;
+using FieldR = ddc::Chunk<ElementType, IDomainR>;
 
 template <class ElementType>
-using FieldP = Chunk<ElementType, IDomainP>;
+using FieldP = ddc::Chunk<ElementType, IDomainP>;
 
 template <class ElementType>
-using FieldRP = Chunk<ElementType, IDomainRP>;
+using FieldRP = ddc::Chunk<ElementType, IDomainRP>;
 
 using DFieldR = FieldR<double>;
 using DFieldP = FieldP<double>;
 using DFieldRP = FieldRP<double>;
 
 template <class ElementType>
-using SpanR = ChunkSpan<ElementType, IDomainR>;
+using SpanR = ddc::ChunkSpan<ElementType, IDomainR>;
 
 template <class ElementType>
-using SpanP = ChunkSpan<ElementType, IDomainP>;
+using SpanP = ddc::ChunkSpan<ElementType, IDomainP>;
 
 template <class ElementType>
-using SpanRP = ChunkSpan<ElementType, IDomainRP>;
+using SpanRP = ddc::ChunkSpan<ElementType, IDomainRP>;
 
 using DSpanR = SpanR<double>;
 using DSpanP = SpanP<double>;
 using DSpanRP = SpanRP<double>;
 
 template <class ElementType>
-using ViewR = ChunkView<ElementType const, IDomainR>;
+using ViewR = ddc::ChunkView<ElementType const, IDomainR>;
 
 template <class ElementType>
-using ViewP = ChunkView<ElementType const, IDomainP>;
+using ViewP = ddc::ChunkView<ElementType const, IDomainP>;
 
 template <class ElementType>
-using ViewRP = ChunkView<ElementType const, IDomainRP>;
+using ViewRP = ddc::ChunkView<ElementType const, IDomainRP>;
 
 using DViewR = ViewR<double>;
 using DViewP = ViewP<double>;
 using DViewRP = ViewRP<double>;
 
-using Spline2D = Chunk<double, BSDomainRP>;
-using Spline2DSpan = ChunkSpan<double, BSDomainRP>;
-using Spline2DView = ChunkSpan<double const, BSDomainRP>;
+using Spline2D = ddc::Chunk<double, BSDomainRP>;
+using Spline2DSpan = ddc::ChunkSpan<double, BSDomainRP>;
+using Spline2DView = ddc::ChunkSpan<double const, BSDomainRP>;

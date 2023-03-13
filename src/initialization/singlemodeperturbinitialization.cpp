@@ -23,15 +23,15 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
 
     // Initialization of the perturbation
     DFieldX perturbation(gridx);
-    for_each(gridsp, [&](IndexSp const isp) {
+    ddc::for_each(gridsp, [&](IndexSp const isp) {
         perturbation_initialization(
                 perturbation,
                 m_init_perturb_mode(isp),
                 m_init_perturb_amplitude(isp));
 
         // Initialization of the distribution function --> fill values
-        for_each(gridx, [&](IndexX const ix) {
-            for_each(gridvx, [&](IndexVx const iv) {
+        ddc::for_each(gridx, [&](IndexX const ix) {
+            ddc::for_each(gridvx, [&](IndexVx const iv) {
                 double fdistribu_val = m_fequilibrium(isp, iv) * (1. + perturbation(ix));
                 if (fdistribu_val < 1.e-60) {
                     fdistribu_val = 1.e-60;
@@ -53,7 +53,7 @@ void SingleModePerturbInitialization::perturbation_initialization(
 
     double const kx = mode * 2. * M_PI / Lx;
     for (IndexX const ix : gridx) {
-        CoordX const x = coordinate(ix);
+        CoordX const x = ddc::coordinate(ix);
         perturbation(ix) = perturb_amplitude * cos(kx * x);
     }
 }

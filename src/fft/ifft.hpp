@@ -15,32 +15,32 @@ public:
     virtual ~IInverseFourierTransform() = default;
 
     // Perform the normalized invFFT where the input is a complex and the output is a real
-    virtual ChunkSpan<
+    virtual ddc::ChunkSpan<
             double,
-            DiscreteDomain<UniformPointSampling<Tag>>,
+            ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>>,
             std::experimental::layout_right>
     operator()(
-            ChunkSpan<
+            ddc::ChunkSpan<
                     double,
-                    DiscreteDomain<UniformPointSampling<Tag>>,
+                    ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>>,
                     std::experimental::layout_right> out_values,
-            ChunkSpan<
+            ddc::ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
+                    ddc::DiscreteDomain<ddc::NonUniformPointSampling<Fourier<Tag>>>,
                     std::experimental::layout_right> in_values) const noexcept = 0;
 
     // Perform the normalized invFFT where the input is a complex and the output is a complex
-    virtual ChunkSpan<
+    virtual ddc::ChunkSpan<
             std::complex<double>,
-            DiscreteDomain<UniformPointSampling<Tag>>,
+            ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>>,
             std::experimental::layout_right>
     operator()(
-            ChunkSpan<
+            ddc::ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<UniformPointSampling<Tag>>,
+                    ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>>,
                     std::experimental::layout_right> out_values,
-            ChunkSpan<
+            ddc::ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
+                    ddc::DiscreteDomain<ddc::NonUniformPointSampling<Fourier<Tag>>>,
                     std::experimental::layout_right> in_values) const noexcept = 0;
 };

@@ -25,9 +25,9 @@ TEST(Masks, Ordering)
     IVectX const x_size(100);
 
     // Creating mesh & supports
-    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
 
     IDomainX gridx(InterpPointsX::get_domain());
 

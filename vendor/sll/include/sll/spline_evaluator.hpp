@@ -103,7 +103,7 @@ public:
     double integrate(
             ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef) const
     {
-        Chunk<double, ddc::DiscreteDomain<BSplinesType>> values(spline_coef.domain());
+        ddc::Chunk<double, ddc::DiscreteDomain<BSplinesType>> values(spline_coef.domain());
 
         ddc::discrete_space<bsplines_type>().integrals(values);
 
@@ -151,7 +151,7 @@ private:
     {
         static_assert(
                 std::is_same_v<EvalType, eval_type> || std::is_same_v<EvalType, eval_deriv_type>);
-        DiscreteElement<BSplinesType> jmin;
+        ddc::DiscreteElement<BSplinesType> jmin;
 
         if constexpr (std::is_same_v<EvalType, eval_type>) {
             jmin = ddc::discrete_space<bsplines_type>().eval_basis(vals, coord_eval);

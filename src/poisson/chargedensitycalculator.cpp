@@ -19,19 +19,19 @@ ChargeDensityCalculator::ChargeDensityCalculator(
 void ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const allfdistribu) const
 {
     DFieldVx f_vx_slice(allfdistribu.domain<IDimVx>());
-    Chunk<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
+    ddc::Chunk<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
 
     IndexSp const last_kin_species = allfdistribu.domain<IDimSp>().back();
-    IndexSp const last_species = discrete_space<IDimSp>().charges().domain().back();
+    IndexSp const last_species = ddc::discrete_space<IDimSp>().charges().domain().back();
     double chargedens_adiabspecies = 0.;
     if (last_kin_species != last_species) {
         chargedens_adiabspecies = double(charge(last_species));
     }
 
-    for_each(rho.domain(), [&](IndexX const ix) {
+    ddc::for_each(rho.domain(), [&](IndexX const ix) {
         rho(ix) = chargedens_adiabspecies;
-        for_each(get_domain<IDimSp>(allfdistribu), [&](IndexSp const isp) {
-            deepcopy(f_vx_slice, allfdistribu[isp][ix]);
+        ddc::for_each(ddc::get_domain<IDimSp>(allfdistribu), [&](IndexSp const isp) {
+            ddc::deepcopy(f_vx_slice, allfdistribu[isp][ix]);
             m_spline_vx_builder(
                     vx_spline_coef.span_view(),
                     f_vx_slice.span_cview(),

@@ -18,9 +18,9 @@ void FluidMoments::operator()(
         DViewSpXVx const allfdistribu,
         FluidMoments::MomentDensity)
 {
-    for_each(
-            policies::parallel_host,
-            get_domain<IDimSp, IDimX>(allfdistribu),
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
             [&](IndexSpX const ispx) { density(ispx) = m_integrate_v(allfdistribu[ispx]); });
 }
 
@@ -34,14 +34,17 @@ void FluidMoments::operator()(
         FluidMoments::MomentVelocity)
 {
     DFieldSpXVx integrand(allfdistribu.domain());
-    for_each(policies::parallel_host, allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-        CoordVx const coordv = coordinate(select<IDimVx>(ispxvx));
-        integrand(ispxvx) = coordv * allfdistribu(ispxvx);
-    });
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            allfdistribu.domain(),
+            [&](IndexSpXVx const ispxvx) {
+                CoordVx const coordv = ddc::coordinate(ddc::select<IDimVx>(ispxvx));
+                integrand(ispxvx) = coordv * allfdistribu(ispxvx);
+            });
 
-    for_each(
-            policies::parallel_host,
-            get_domain<IDimSp, IDimX>(allfdistribu),
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
             [&](IndexSpX const ispx) {
                 mean_velocity(ispx) = m_integrate_v(integrand[ispx]) / density(ispx);
             });
@@ -58,15 +61,18 @@ void FluidMoments::operator()(
         FluidMoments::MomentTemperature)
 {
     DFieldSpXVx integrand(allfdistribu.domain());
-    for_each(policies::parallel_host, allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-        double const coeff
-                = coordinate(select<IDimVx>(ispxvx)) - mean_velocity(select<IDimSp, IDimX>(ispxvx));
-        integrand(ispxvx) = coeff * coeff * allfdistribu(ispxvx);
-    });
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            allfdistribu.domain(),
+            [&](IndexSpXVx const ispxvx) {
+                double const coeff = ddc::coordinate(ddc::select<IDimVx>(ispxvx))
+                                     - mean_velocity(ddc::select<IDimSp, IDimX>(ispxvx));
+                integrand(ispxvx) = coeff * coeff * allfdistribu(ispxvx);
+            });
 
-    for_each(
-            policies::parallel_host,
-            get_domain<IDimSp, IDimX>(allfdistribu),
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
             [&](IndexSpX const ispx) {
                 temperature(ispx) = m_integrate_v(integrand[ispx]) / density(ispx);
             });

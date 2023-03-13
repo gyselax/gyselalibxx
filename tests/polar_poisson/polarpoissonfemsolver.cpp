@@ -42,7 +42,7 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
-    ScopeGuard scope(argc, argv);
+    ::ddc::ScopeGuard scope(argc, argv);
 
     PC_tree_t conf_voicexx;
     if (argc == 2) {
@@ -77,19 +77,19 @@ int main(int argc, char** argv)
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
     for (int i(0); i < r_size + 1; ++i) {
-        r_knots[i] = r_min + i * dr;
+        r_knots[i] = CoordR(r_min + i * dr);
     }
     for (int i(0); i < p_size + 1; ++i) {
-        p_knots[i] = p_min + i * dp;
+        p_knots[i] = CoordP(p_min + i * dp);
     }
 
     // Creating mesh & supports
-    init_discrete_space<BSplinesR>(r_knots);
+    ddc::init_discrete_space<BSplinesR>(r_knots);
 
-    init_discrete_space<BSplinesP>(p_knots);
+    ddc::init_discrete_space<BSplinesP>(p_knots);
 
-    init_discrete_space<IDimR>(InterpPointsR::get_sampling());
-    init_discrete_space<IDimP>(InterpPointsP::get_sampling());
+    ddc::init_discrete_space<IDimR>(InterpPointsR::get_sampling());
+    ddc::init_discrete_space<IDimP>(InterpPointsP::get_sampling());
 
     IDomainR interpolation_domain_R(InterpPointsR::get_domain());
     IDomainP interpolation_domain_P(InterpPointsP::get_domain());
@@ -107,7 +107,7 @@ int main(int argc, char** argv)
     DiscreteMapping const discrete_mapping
             = DiscreteMapping::analytical_to_discrete(mapping, builder);
 
-    init_discrete_space<PolarBSplinesRP>(discrete_mapping, r_builder, p_builder);
+    ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping, r_builder, p_builder);
 
     auto dom_bsplinesRP = builder.spline_domain();
 
@@ -116,14 +116,16 @@ int main(int argc, char** argv)
     DFieldRP x(grid);
     DFieldRP y(grid);
 
-    for_each(grid, [&](IndexRP const irp) {
-        coeff_alpha(irp) = std::exp(-std::tanh((coordinate(select<IDimR>(irp)) - 0.7) / 0.05));
+    ddc::for_each(grid, [&](IndexRP const irp) {
+        coeff_alpha(irp)
+                = std::exp(-std::tanh((ddc::coordinate(ddc::select<IDimR>(irp)) - 0.7) / 0.05));
         coeff_beta(irp) = 1.0 / coeff_alpha(irp);
         ddc::Coordinate<DimR, DimP>
-                coord(coordinate(ddc::select<IDimR>(irp)), coordinate(ddc::select<IDimP>(irp)));
+                coord(ddc::coordinate(ddc::select<IDimR>(irp)),
+                      ddc::coordinate(ddc::select<IDimP>(irp)));
         auto cartesian_coord = mapping(coord);
-        x(irp) = get<DimX>(cartesian_coord);
-        y(irp) = get<DimY>(cartesian_coord);
+        x(irp) = ddc::get<DimX>(cartesian_coord);
+        y(irp) = ddc::get<DimY>(cartesian_coord);
     });
 
     Spline2D coeff_alpha_spline(dom_bsplinesRP);
@@ -157,13 +159,15 @@ int main(int argc, char** argv)
     RHSFunction rhs(mapping);
     FieldRP<CoordRP> coords(grid);
     DFieldRP result(grid);
-    for_each(grid, [&](IndexRP const irp) {
-        coords(irp) = CoordRP(coordinate(select<IDimR>(irp)), coordinate(select<IDimP>(irp)));
+    ddc::for_each(grid, [&](IndexRP const irp) {
+        coords(irp) = CoordRP(
+                ddc::coordinate(ddc::select<IDimR>(irp)),
+                ddc::coordinate(ddc::select<IDimP>(irp)));
     });
     if (discrete_rhs) {
         Spline2D rhs_spline(dom_bsplinesRP);
         DFieldRP rhs_vals(grid);
-        for_each(grid, [&](IndexRP const irp) { rhs_vals(irp) = rhs(coords(irp)); });
+        ddc::for_each(grid, [&](IndexRP const irp) { rhs_vals(irp) = rhs(coords(irp)); });
         builder(rhs_spline, rhs_vals);
 
         start_time = std::chrono::system_clock::now();
@@ -187,7 +191,7 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
 
     double max_err = 0.0;
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         const double err = result(irp) - lhs(coords(irp));
         if (err > 0) {
             max_err = max_err > err ? max_err : err;

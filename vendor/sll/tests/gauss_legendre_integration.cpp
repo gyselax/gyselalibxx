@@ -8,8 +8,6 @@
 
 #include <gtest/gtest.h>
 
-using namespace ddc;
-
 class fn
 {
 public:
@@ -115,9 +113,10 @@ int test_compute_points_and_weights()
     };
 
     for (std::size_t order = 1; order <= GaussLegendre<DimX>::max_order(); ++order) {
-        DiscreteDomain<IDimX> domain(DiscreteElement<IDimX> {0}, DiscreteVector<IDimX> {order});
-        Chunk<Coordinate<DimX>, DiscreteDomain<IDimX>> gl_points(domain);
-        Chunk<double, DiscreteDomain<IDimX>> gl_weights(domain);
+        ddc::DiscreteDomain<IDimX>
+                domain(ddc::DiscreteElement<IDimX> {0}, ddc::DiscreteVector<IDimX> {order});
+        ddc::Chunk<ddc::Coordinate<DimX>, ddc::DiscreteDomain<IDimX>> gl_points(domain);
+        ddc::Chunk<double, ddc::DiscreteDomain<IDimX>> gl_weights(domain);
         GaussLegendre<DimX> const gl(order);
 
         std::cout << "integration at order " << order;
@@ -129,8 +128,8 @@ int test_compute_points_and_weights()
                 gl.compute_points_and_weights(
                         gl_points.span_view(),
                         gl_weights.span_view(),
-                        Coordinate<DimX>(domains[i].first),
-                        Coordinate<DimX>(domains[i].second));
+                        ddc::Coordinate<DimX>(domains[i].first),
+                        ddc::Coordinate<DimX>(domains[i].second));
                 double const sol_exact = 1.0 / (p + 1)
                                          * (std::pow(domains[i].second, p + 1)
                                             - std::pow(domains[i].first, p + 1));

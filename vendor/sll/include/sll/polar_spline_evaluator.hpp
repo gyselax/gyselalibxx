@@ -67,7 +67,7 @@ public:
             ddc::ChunkSpan<ddc::Coordinate<DimR, DimP> const, Domain> const coords_eval,
             PolarSplineView<PolarBSplinesType> const spline_coef) const
     {
-        for_each(coords_eval.domain(), [=](auto i) {
+        ddc::for_each(coords_eval.domain(), [=](auto i) {
             spline_eval(i) = eval(coords_eval(i), spline_coef);
         });
     }
@@ -101,7 +101,7 @@ public:
             ddc::ChunkSpan<ddc::Coordinate<DimR, DimP> const, Domain> const coords_eval,
             PolarSplineView<PolarBSplinesType> const spline_coef) const
     {
-        for_each(coords_eval.domain(), [=](auto i) {
+        ddc::for_each(coords_eval.domain(), [=](auto i) {
             spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_type());
         });
     }
@@ -112,7 +112,7 @@ public:
             ddc::ChunkSpan<ddc::Coordinate<DimR, DimP> const, Domain> const coords_eval,
             PolarSplineView<PolarBSplinesType> const spline_coef) const
     {
-        for_each(coords_eval.domain(), [=](auto i) {
+        ddc::for_each(coords_eval.domain(), [=](auto i) {
             spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_p_type());
         });
     }
@@ -123,7 +123,7 @@ public:
             ddc::ChunkSpan<ddc::Coordinate<DimR, DimP> const, Domain> const coords_eval,
             PolarSplineView<PolarBSplinesType> const spline_coef) const
     {
-        for_each(coords_eval.domain(), [=](auto i) {
+        ddc::for_each(coords_eval.domain(), [=](auto i) {
             spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_p_type());
         });
     }
@@ -132,27 +132,27 @@ public:
     double integrate(PolarSplineView<PolarBSplinesType> const spline_coef, Mapping const mapping)
             const
     {
-        int constexpr nr = discrete_space<BSplinesR>().ncells() + BSplinesR::degree() - 2;
-        int constexpr np = discrete_space<BSplinesP>().ncells() + BSplinesP::degree();
+        int constexpr nr = ddc::discrete_space<BSplinesR>().ncells() + BSplinesR::degree() - 2;
+        int constexpr np = ddc::discrete_space<BSplinesP>().ncells() + BSplinesP::degree();
         std::array<double, PolarBSplinesType::eval_size()> singular_values;
         DSpan1D singular_vals(singular_values.data(), PolarBSplinesType::n_singular_basis());
         std::array<double, nr * np> values;
         DSpan2D vals(values.data(), nr, np);
 
-        discrete_space<PolarBSplinesType>().integrals(singular_vals, vals);
+        ddc::discrete_space<PolarBSplinesType>().integrals(singular_vals, vals);
 
         double y = 0.;
-        for_each(
+        ddc::for_each(
                 spline_coef.singular_spline_coef.domain(),
                 [=](ddc::DiscreteElement<PolarBSplinesType> const i) {
                     y += spline_coef.singular_spline_coef(i) * singular_vals(i)
                          * mapping.determinant(i);
                 });
-        for_each(
+        ddc::for_each(
                 spline_coef.spline_coef.domain(),
                 [=](ddc::DiscreteElement<BSplinesR, BSplinesP> const i) {
                     y += spline_coef.spline_coef(i)
-                         * vals(select<BSplinesR>(i), select<BSplinesP>(i))
+                         * vals(ddc::select<BSplinesR>(i), ddc::select<BSplinesP>(i))
                          * mapping.determinant(i);
                 });
         return y;
@@ -163,17 +163,17 @@ private:
             ddc::Coordinate<DimR, DimP> coord_eval,
             PolarSplineView<PolarBSplinesType> const spline_coef) const
     {
-        const double coord_eval1 = get<DimR>(coord_eval);
-        double coord_eval2 = get<DimP>(coord_eval);
-        if (coord_eval1 > discrete_space<BSplinesR>().rmax()) {
+        const double coord_eval1 = ddc::get<DimR>(coord_eval);
+        double coord_eval2 = ddc::get<DimP>(coord_eval);
+        if (coord_eval1 > ddc::discrete_space<BSplinesR>().rmax()) {
             return m_outer_bc(coord_eval1, coord_eval2, spline_coef);
         }
-        if (coord_eval2 < discrete_space<BSplinesP>().rmin()
-            || coord_eval2 > discrete_space<BSplinesP>().rmax()) {
+        if (coord_eval2 < ddc::discrete_space<BSplinesP>().rmin()
+            || coord_eval2 > ddc::discrete_space<BSplinesP>().rmax()) {
             coord_eval2 -= std::floor(
-                                   (coord_eval2 - discrete_space<BSplinesP>().rmin())
-                                   / discrete_space<BSplinesP>().length())
-                           * discrete_space<BSplinesP>().length();
+                                   (coord_eval2 - ddc::discrete_space<BSplinesP>().rmin())
+                                   / ddc::discrete_space<BSplinesP>().length())
+                           * ddc::discrete_space<BSplinesP>().length();
         }
         return eval_no_bc(
                 ddc::Coordinate<DimR, DimP>(coord_eval1, coord_eval2),
@@ -200,15 +200,16 @@ private:
         ddc::DiscreteElement<BSplinesR, BSplinesP> jmin;
 
         if constexpr (std::is_same_v<EvalType, eval_type>) {
-            jmin = discrete_space<PolarBSplinesType>().eval_basis(singular_vals, vals, coord_eval);
+            jmin = ddc::discrete_space<PolarBSplinesType>()
+                           .eval_basis(singular_vals, vals, coord_eval);
         } else if constexpr (std::is_same_v<EvalType, eval_deriv_r_type>) {
-            jmin = discrete_space<PolarBSplinesType>()
+            jmin = ddc::discrete_space<PolarBSplinesType>()
                            .eval_deriv_r(singular_vals, vals, coord_eval);
         } else if constexpr (std::is_same_v<EvalType, eval_deriv_p_type>) {
-            jmin = discrete_space<PolarBSplinesType>()
+            jmin = ddc::discrete_space<PolarBSplinesType>()
                            .eval_deriv_p(singular_vals, vals, coord_eval);
         } else if constexpr (std::is_same_v<EvalType, eval_deriv_r_p_type>) {
-            jmin = discrete_space<PolarBSplinesType>()
+            jmin = ddc::discrete_space<PolarBSplinesType>()
                            .eval_deriv_r_and_p(singular_vals, vals, coord_eval);
         }
 

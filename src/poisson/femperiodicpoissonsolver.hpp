@@ -18,7 +18,7 @@ public:
     };
 
 private:
-    using QMeshX = NonUniformPointSampling<QDimX>;
+    using QMeshX = ddc::NonUniformPointSampling<QDimX>;
 
 private:
     // Spline degree in x direction
@@ -40,19 +40,19 @@ private:
     // Number of cells in x direction
     int m_ncells;
 
-    Chunk<double, DiscreteDomain<QMeshX>> m_quad_coef;
+    ddc::Chunk<double, ddc::DiscreteDomain<QMeshX>> m_quad_coef;
 
     std::unique_ptr<Matrix> m_fem_matrix;
 
 private:
-    static Coordinate<QDimX> quad_point_from_coord(Coordinate<RDimX> const& coord)
+    static ddc::Coordinate<QDimX> quad_point_from_coord(ddc::Coordinate<RDimX> const& coord)
     {
-        return Coordinate<QDimX>(get<RDimX>(coord));
+        return ddc::Coordinate<QDimX>(ddc::get<RDimX>(coord));
     }
 
-    static Coordinate<RDimX> coord_from_quad_point(Coordinate<QDimX> const& coord)
+    static ddc::Coordinate<RDimX> coord_from_quad_point(ddc::Coordinate<QDimX> const& coord)
     {
-        return Coordinate<RDimX>(get<QDimX>(coord));
+        return ddc::Coordinate<RDimX>(ddc::get<QDimX>(coord));
     }
 
 public:
@@ -69,6 +69,6 @@ private:
     void build_matrix();
 
     void solve_matrix_system(
-            ChunkSpan<double, BSDomainX> phi_spline_coef,
-            ChunkSpan<double, BSDomainX> rho_spline_coef) const;
+            ddc::ChunkSpan<double, BSDomainX> phi_spline_coef,
+            ddc::ChunkSpan<double, BSDomainX> rho_spline_coef) const;
 };

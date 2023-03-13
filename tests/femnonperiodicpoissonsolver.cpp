@@ -32,14 +32,14 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     IndexSp const my_iion = dom_sp.back();
 
     // Creating mesh & supports
-    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
+    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    init_discrete_space<IDimX>(InterpPointsX::get_sampling());
-    init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
-    DiscreteDomain<IDimX> interpolation_domain_x(InterpPointsX::get_domain());
-    DiscreteDomain<IDimVx> interpolation_domain_vx(InterpPointsVx::get_domain());
+    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
+    ddc::DiscreteDomain<IDimX> interpolation_domain_x(InterpPointsX::get_domain());
+    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(InterpPointsVx::get_domain());
 
     SplineXBuilder const builder_x(interpolation_domain_x);
 
@@ -68,7 +68,7 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     ddc::fill(init_perturb_amplitude, 0);
 
     // Initialization of the distribution function
-    init_discrete_space<IDimSp>(
+    ddc::init_discrete_space<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
@@ -84,7 +84,7 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     // Initialization of the distribution function --> fill values
     for (IndexSp const isp : gridsp) {
         for (IndexX const ix : gridx) {
-            double fdistribu_val = sin(coordinate(ix));
+            double fdistribu_val = sin(ddc::coordinate(ix));
             for (IndexVx const iv : gridvx) {
                 allfdistribu(isp, ix, iv) = fdistribu_val;
             }
@@ -97,9 +97,9 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     double error_field = 0.0;
 
     for (IndexX const ix : gridx) {
-        double const exact_pot = sin(coordinate(ix));
+        double const exact_pot = sin(ddc::coordinate(ix));
         error_pot = fmax(fabs(electrostatic_potential(ix) - exact_pot), error_pot);
-        double const exact_field = -cos(coordinate(ix));
+        double const exact_field = -cos(ddc::coordinate(ix));
         error_field = fmax(fabs(electric_field(ix) - exact_field), error_field);
     }
     EXPECT_LE(error_pot, 1e-2);

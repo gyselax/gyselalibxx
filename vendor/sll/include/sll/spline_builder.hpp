@@ -353,8 +353,10 @@ void SplineBuilder<BSplines, interpolation_mesh_type, BcXmin, BcXmax>::build_mat
     if constexpr (BcXmin == BoundCond::HERMITE) {
         double derivs_ptr[(bsplines_type::degree() / 2 + 1) * (bsplines_type::degree() + 1)];
         DSpan2D derivs(derivs_ptr, bsplines_type::degree() + 1, bsplines_type::degree() / 2 + 1);
-        ddc::discrete_space<BSplines>()
-                .eval_basis_and_n_derivs(derivs, discrete_space<BSplines>().rmin(), s_nbc_xmin);
+        ddc::discrete_space<BSplines>().eval_basis_and_n_derivs(
+                derivs,
+                ddc::discrete_space<BSplines>().rmin(),
+                s_nbc_xmin);
 
         // In order to improve the condition number of the matrix, we normalize
         // all derivatives by multiplying the i-th derivative by dx^i
@@ -380,7 +382,7 @@ void SplineBuilder<BSplines, interpolation_mesh_type, BcXmin, BcXmax>::build_mat
     ddc::for_each(m_interpolation_domain, [&](auto ix) {
         auto jmin = ddc::discrete_space<BSplines>().eval_basis(
                 values,
-                coordinate(ddc::DiscreteElement<interpolation_mesh_type>(ix)));
+                ddc::coordinate(ddc::DiscreteElement<interpolation_mesh_type>(ix)));
         for (std::size_t s = 0; s < bsplines_type::degree() + 1; ++s) {
             int const j = modulo(
                     int(jmin.uid() - m_offset + s),
@@ -399,8 +401,10 @@ void SplineBuilder<BSplines, interpolation_mesh_type, BcXmin, BcXmax>::build_mat
                         extents<bsplines_type::degree() + 1, bsplines_type::degree() / 2 + 1>> const
                 derivs(derivs_ptr.data());
 
-        ddc::discrete_space<BSplines>()
-                .eval_basis_and_n_derivs(derivs, discrete_space<BSplines>().rmax(), s_nbc_xmax);
+        ddc::discrete_space<BSplines>().eval_basis_and_n_derivs(
+                derivs,
+                ddc::discrete_space<BSplines>().rmax(),
+                s_nbc_xmax);
 
         // In order to improve the condition number of the matrix, we normalize
         // all derivatives by multiplying the i-th derivative by dx^i

@@ -85,7 +85,7 @@ public:
         std::array<double, bsplines_type2::degree() + 1> values2;
         DSpan1D const vals2 = as_span(values2);
 
-        for_each(coords_eval.domain(), [=](auto i) {
+        ddc::for_each(coords_eval.domain(), [=](auto i) {
             spline_eval(i) = eval(coords_eval(i), spline_coef, vals1, vals2);
         });
     }
@@ -162,7 +162,7 @@ public:
         std::array<double, bsplines_type2::degree() + 1> values2;
         DSpan1D const vals2 = as_span(values2);
 
-        for_each(coords_eval.domain(), [=](auto i) {
+        ddc::for_each(coords_eval.domain(), [=](auto i) {
             spline_eval(i) = eval_no_bc(
                     ddc::select<Dim1>(coords_eval(i)),
                     ddc::select<Dim2>(coords_eval(i)),
@@ -186,7 +186,7 @@ public:
         std::array<double, bsplines_type2::degree() + 1> values2;
         DSpan1D const vals2 = as_span(values2);
 
-        for_each(coords_eval.domain(), [=](auto i) {
+        ddc::for_each(coords_eval.domain(), [=](auto i) {
             spline_eval(i) = eval_no_bc(
                     ddc::select<Dim1>(coords_eval(i)),
                     ddc::select<Dim2>(coords_eval(i)),
@@ -210,7 +210,7 @@ public:
         std::array<double, bsplines_type2::degree() + 1> values2;
         DSpan1D const vals2 = as_span(values2);
 
-        for_each(coords_eval.domain(), [=](auto i) {
+        ddc::for_each(coords_eval.domain(), [=](auto i) {
             spline_eval(i) = eval_no_bc(
                     ddc::select<Dim1>(coords_eval(i)),
                     ddc::select<Dim2>(coords_eval(i)),
@@ -226,9 +226,9 @@ public:
             ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType1, BSplinesType2>> const
                     spline_coef) const
     {
-        Chunk<double, ddc::DiscreteDomain<BSplinesType1>> values1(spline_coef.domain());
+        ddc::Chunk<double, ddc::DiscreteDomain<BSplinesType1>> values1(spline_coef.domain());
         DSpan1D vals1 = values1.allocation_mdspan();
-        Chunk<double, ddc::DiscreteDomain<BSplinesType2>> values2(spline_coef.domain());
+        ddc::Chunk<double, ddc::DiscreteDomain<BSplinesType2>> values2(spline_coef.domain());
         DSpan1D vals2 = values2.allocation_mdspan();
 
         ddc::discrete_space<bsplines_type1>().integrals(vals1);

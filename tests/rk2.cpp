@@ -33,9 +33,9 @@ TEST(Rk2, Rk2_uniform_vx)
     IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
 
     // Creating mesh & supports
-    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
+    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
     ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
     ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
@@ -75,8 +75,11 @@ TEST(Rk2, Rk2_uniform_vx)
 
     double const prediction = 0.5 * deltat * deltat;
 
-    for_each(policies::parallel_host, allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-        double const val = std::fabs(allfdistribu(ispxvx) - prediction);
-        EXPECT_LE(val, tolerance);
-    });
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            allfdistribu.domain(),
+            [&](IndexSpXVx const ispxvx) {
+                double const val = std::fabs(allfdistribu(ispxvx) - prediction);
+                EXPECT_LE(val, tolerance);
+            });
 }

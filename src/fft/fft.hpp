@@ -15,37 +15,37 @@ class IFourierTransform
 public:
     virtual ~IFourierTransform() = default;
 
-    virtual typename NonUniformPointSampling<Fourier<Tag>>::template Impl<Kokkos::HostSpace>
+    virtual typename ddc::NonUniformPointSampling<Fourier<Tag>>::template Impl<Kokkos::HostSpace>
     compute_fourier_domain(
-            DiscreteDomain<UniformPointSampling<Tag>> const& dom_x) const noexcept = 0;
+            ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>> const& dom_x) const noexcept = 0;
 
     // Perform FFT where the input is a real and the output is a complex
-    virtual ChunkSpan<
+    virtual ddc::ChunkSpan<
             std::complex<double>,
-            DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
+            ddc::DiscreteDomain<ddc::NonUniformPointSampling<Fourier<Tag>>>,
             std::experimental::layout_right>
     operator()(
-            ChunkSpan<
+            ddc::ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
+                    ddc::DiscreteDomain<ddc::NonUniformPointSampling<Fourier<Tag>>>,
                     std::experimental::layout_right> out_values,
-            ChunkSpan<
+            ddc::ChunkSpan<
                     double,
-                    DiscreteDomain<UniformPointSampling<Tag>>,
+                    ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>>,
                     std::experimental::layout_right> in_values) const noexcept = 0;
 
     // Perform FFT where the input is a complex and output is a compleax
-    virtual ChunkSpan<
+    virtual ddc::ChunkSpan<
             std::complex<double>,
-            DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
+            ddc::DiscreteDomain<ddc::NonUniformPointSampling<Fourier<Tag>>>,
             std::experimental::layout_right>
     operator()(
-            ChunkSpan<
+            ddc::ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<NonUniformPointSampling<Fourier<Tag>>>,
+                    ddc::DiscreteDomain<ddc::NonUniformPointSampling<Fourier<Tag>>>,
                     std::experimental::layout_right> out_values,
-            ChunkSpan<
+            ddc::ChunkSpan<
                     std::complex<double>,
-                    DiscreteDomain<UniformPointSampling<Tag>>,
+                    ddc::DiscreteDomain<ddc::UniformPointSampling<Tag>>,
                     std::experimental::layout_right> in_values) const noexcept = 0;
 };

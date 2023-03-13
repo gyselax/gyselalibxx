@@ -64,7 +64,7 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     ddc::fill(init_perturb_mode, 0);
     DFieldSp init_perturb_amplitude(dom_sp);
     ddc::fill(init_perturb_amplitude, 0);
-    init_discrete_space<IDimSp>(
+    ddc::init_discrete_space<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
@@ -73,10 +73,10 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     // collision operator
     double const nustar0(1.);
     CollisionsIntra collisions(mesh, nustar0);
-    DiscreteDomain<CollisionsIntra::ghosted_vx_point_sampling> gridvx_ghosted
+    ddc::DiscreteDomain<CollisionsIntra::ghosted_vx_point_sampling> gridvx_ghosted
             = collisions.get_gridvx_ghosted();
-    DiscreteDomain<CollisionsIntra::ghosted_vx_staggered_point_sampling> gridvx_ghosted_staggered
-            = collisions.get_gridvx_ghosted_staggered();
+    ddc::DiscreteDomain<CollisionsIntra::ghosted_vx_staggered_point_sampling>
+            gridvx_ghosted_staggered = collisions.get_gridvx_ghosted_staggered();
 
     double const npoints(gridvx.size());
     std::vector<double> gridvx_ghosted_pred(npoints + 2);
@@ -94,13 +94,13 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
         gridvx_ghosted_staggered_pred[i] = vx_min - dv / 2. + dv * i;
     }
 
-    for_each(policies::parallel_host, gridvx_ghosted, [&](auto const ivx_gh) {
-        EXPECT_LE(std::fabs(coordinate(ivx_gh) - gridvx_ghosted_pred[ivx_gh.uid()]), 1.e-12);
+    ddc::for_each(ddc::policies::parallel_host, gridvx_ghosted, [&](auto const ivx_gh) {
+        EXPECT_LE(std::fabs(ddc::coordinate(ivx_gh) - gridvx_ghosted_pred[ivx_gh.uid()]), 1.e-12);
     });
 
-    for_each(policies::parallel_host, gridvx_ghosted_staggered, [&](auto const ivx_ghs) {
+    ddc::for_each(ddc::policies::parallel_host, gridvx_ghosted_staggered, [&](auto const ivx_ghs) {
         EXPECT_LE(
-                std::fabs(coordinate(ivx_ghs) - gridvx_ghosted_staggered_pred[ivx_ghs.uid()]),
+                std::fabs(ddc::coordinate(ivx_ghs) - gridvx_ghosted_staggered_pred[ivx_ghs.uid()]),
                 1.e-12);
     });
 }

@@ -9,10 +9,10 @@
 #include "test_utils.hpp"
 
 template <class Tag1, class Tag2>
-Coordinate<Tag1, Tag2> generate_random_point_in_triangle(
-        Coordinate<Tag1, Tag2> const& corner1,
-        Coordinate<Tag1, Tag2> const& corner2,
-        Coordinate<Tag1, Tag2> const& corner3)
+ddc::Coordinate<Tag1, Tag2> generate_random_point_in_triangle(
+        ddc::Coordinate<Tag1, Tag2> const& corner1,
+        ddc::Coordinate<Tag1, Tag2> const& corner2,
+        ddc::Coordinate<Tag1, Tag2> const& corner3)
 {
     std::random_device rd;
     std::mt19937 mt(rd());
@@ -23,16 +23,16 @@ Coordinate<Tag1, Tag2> generate_random_point_in_triangle(
         rand1 = 1 - rand1;
         rand2 = 1 - rand2;
     }
-    const double c1_x = get<Tag1>(corner1);
-    const double c1_y = get<Tag2>(corner1);
-    const double c2_x = get<Tag1>(corner2);
-    const double c2_y = get<Tag2>(corner2);
-    const double c3_x = get<Tag1>(corner3);
-    const double c3_y = get<Tag2>(corner3);
+    const double c1_x = ddc::get<Tag1>(corner1);
+    const double c1_y = ddc::get<Tag2>(corner1);
+    const double c2_x = ddc::get<Tag1>(corner2);
+    const double c2_y = ddc::get<Tag2>(corner2);
+    const double c3_x = ddc::get<Tag1>(corner3);
+    const double c3_y = ddc::get<Tag2>(corner3);
     const double point_x = c1_x + (c2_x - c1_x) * rand1 + (c3_x - c1_x) * rand2;
     const double point_y = c1_y + (c2_y - c1_y) * rand1 + (c3_y - c1_y) * rand2;
 
-    return Coordinate<Tag1, Tag2>(point_x, point_y);
+    return ddc::Coordinate<Tag1, Tag2>(point_x, point_y);
 }
 
 template <class T>
@@ -75,7 +75,7 @@ TYPED_TEST(BernsteinFixture, PartitionOfUnity)
     using Corner1 = typename TestFixture::Corner1;
     using Corner2 = typename TestFixture::Corner2;
     using Corner3 = typename TestFixture::Corner3;
-    using CoordXY = Coordinate<DimX, DimY>;
+    using CoordXY = ddc::Coordinate<DimX, DimY>;
     using Bernstein = BernsteinPolynomialBasis<DimX, DimY, Corner1, Corner2, Corner3, degree>;
 
     const CoordXY c1(-1.0, -1.0);
@@ -84,23 +84,24 @@ TYPED_TEST(BernsteinFixture, PartitionOfUnity)
 
     CartesianToBarycentricCoordinates<DimX, DimY, Corner1, Corner2, Corner3>
             coordinate_converter(c1, c2, c3);
-    init_discrete_space<Bernstein>(coordinate_converter);
+    ddc::init_discrete_space<Bernstein>(coordinate_converter);
 
-    DiscreteDomain<Bernstein>
-            domain(DiscreteElement<Bernstein>(0), DiscreteVector<Bernstein>(Bernstein::nbasis()));
+    ddc::DiscreteDomain<Bernstein>
+            domain(ddc::DiscreteElement<Bernstein>(0),
+                   ddc::DiscreteVector<Bernstein>(Bernstein::nbasis()));
 
-    Chunk<double, DiscreteDomain<Bernstein>> values(domain);
+    ddc::Chunk<double, ddc::DiscreteDomain<Bernstein>> values(domain);
 
     std::size_t const n_test_points = 100;
     for (std::size_t i(0); i < n_test_points; ++i) {
         CoordXY const test_point = generate_random_point_in_triangle(c1, c2, c3);
-        discrete_space<Bernstein>().eval_basis(values, test_point);
-        double total = transform_reduce(
-                policies::serial_host,
+        ddc::discrete_space<Bernstein>().eval_basis(values, test_point);
+        double total = ddc::transform_reduce(
+                ddc::policies::serial_host,
                 domain,
                 0.0,
-                reducer::sum<double>(),
-                [&](DiscreteElement<Bernstein> const ix) { return values(ix); });
+                ddc::reducer::sum<double>(),
+                [&](ddc::DiscreteElement<Bernstein> const ix) { return values(ix); });
         EXPECT_LE(fabs(total - 1.0), 1.0e-15);
     }
 }

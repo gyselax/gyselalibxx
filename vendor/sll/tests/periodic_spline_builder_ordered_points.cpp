@@ -32,12 +32,12 @@ using GrevillePoints
 
 using IDimX = GrevillePoints::interpolation_mesh_type;
 
-using IndexX = DiscreteElement<IDimX>;
-using DVectX = DiscreteVector<IDimX>;
-using BsplIndexX = DiscreteElement<BSplinesX>;
-using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
-using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
-using CoordX = Coordinate<DimX>;
+using IndexX = ddc::DiscreteElement<IDimX>;
+using DVectX = ddc::DiscreteVector<IDimX>;
+using BsplIndexX = ddc::DiscreteElement<BSplinesX>;
+using SplineX = ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX>>;
+using FieldX = ddc::Chunk<double, ddc::DiscreteDomain<IDimX>>;
+using CoordX = ddc::Coordinate<DimX>;
 
 TEST(PeriodicSplineBuilderOrderTest, OrderedPoints)
 {
@@ -50,18 +50,18 @@ TEST(PeriodicSplineBuilderOrderTest, OrderedPoints)
     for (std::size_t i(0); i < npoints; ++i) {
         breaks[i] = CoordX(d_breaks[i]);
     }
-    init_discrete_space<BSplinesX>(breaks);
+    ddc::init_discrete_space<BSplinesX>(breaks);
 
     // 2. Create the interpolation domain
-    init_discrete_space<IDimX>(GrevillePoints::get_sampling());
-    DiscreteDomain<IDimX> interpolation_domain(GrevillePoints::get_domain());
+    ddc::init_discrete_space<IDimX>(GrevillePoints::get_sampling());
+    ddc::DiscreteDomain<IDimX> interpolation_domain(GrevillePoints::get_domain());
 
-    double last(coordinate(interpolation_domain.front()));
+    double last(ddc::coordinate(interpolation_domain.front()));
     double current;
     for (IndexX const ix : interpolation_domain) {
-        current = coordinate(ix);
-        ASSERT_LE(current, discrete_space<BSplinesX>().rmax());
-        ASSERT_GE(current, discrete_space<BSplinesX>().rmin());
+        current = ddc::coordinate(ix);
+        ASSERT_LE(current, ddc::discrete_space<BSplinesX>().rmax());
+        ASSERT_GE(current, ddc::discrete_space<BSplinesX>().rmin());
         ASSERT_LE(last, current);
         last = current;
     }
@@ -70,6 +70,6 @@ TEST(PeriodicSplineBuilderOrderTest, OrderedPoints)
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
-    ::ScopeGuard scope(argc, argv);
+    ::ddc::ScopeGuard scope(argc, argv);
     return RUN_ALL_TESTS();
 }

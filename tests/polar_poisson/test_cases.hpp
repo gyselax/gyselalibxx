@@ -30,7 +30,7 @@ public:
         : m_coordinate_converter(coordinate_converter)
     {
     }
-    virtual double operator()(Coordinate<DimR, DimP> const& coord) const = 0;
+    virtual double operator()(ddc::Coordinate<DimR, DimP> const& coord) const = 0;
 };
 
 template <class CurvilinearToCartesian>
@@ -41,10 +41,10 @@ public:
         : PoissonSolution<CurvilinearToCartesian>(coordinate_converter)
     {
     }
-    double operator()(Coordinate<DimR, DimP> const& coord) const final
+    double operator()(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double s = get<DimR>(coord);
-        const double t = get<DimP>(coord);
+        const double s = ddc::get<DimR>(coord);
+        const double t = ddc::get<DimP>(coord);
         return 1e-4 * ipow(s, 6) * ipow(s - 1, 6) / ipow(0.5, 12) * std::cos(11 * t);
     }
 };
@@ -57,13 +57,13 @@ public:
         : PoissonSolution<CurvilinearToCartesian>(coordinate_converter)
     {
     }
-    double operator()(Coordinate<DimR, DimP> const& coord) const final
+    double operator()(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double s = get<DimR>(coord);
-        const Coordinate<DimX, DimY> cart_coord
+        const double s = ddc::get<DimR>(coord);
+        const ddc::Coordinate<DimX, DimY> cart_coord
                 = PoissonSolution<CurvilinearToCartesian>::m_coordinate_converter(coord);
-        const double x = get<DimX>(cart_coord);
-        const double y = get<DimY>(cart_coord);
+        const double x = ddc::get<DimX>(cart_coord);
+        const double y = ddc::get<DimY>(cart_coord);
         return 1e-4 * ipow(1 + s, 6) * ipow(1 - s, 6) * std::cos(2 * M_PI * x)
                * std::sin(2 * M_PI * y) / ipow(0.5, 12);
     }
@@ -83,11 +83,11 @@ public:
         : m_coordinate_converter(coordinate_converter)
     {
     }
-    double solution_at_pole(Coordinate<DimR, DimP> const& coord) const;
-    double non_singular_solution(Coordinate<DimR, DimP> const& coord) const;
-    double operator()(Coordinate<DimR, DimP> const& coord) const
+    double solution_at_pole(ddc::Coordinate<DimR, DimP> const& coord) const;
+    double non_singular_solution(ddc::Coordinate<DimR, DimP> const& coord) const;
+    double operator()(ddc::Coordinate<DimR, DimP> const& coord) const
     {
-        if (get<DimR>(coord) == 0.0) {
+        if (ddc::get<DimR>(coord) == 0.0) {
             return solution_at_pole(coord);
         } else {
             return non_singular_solution(coord);

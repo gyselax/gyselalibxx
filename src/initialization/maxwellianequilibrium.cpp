@@ -21,14 +21,14 @@ DSpanSpVx MaxwellianEquilibrium::operator()(DSpanSpVx const allfequilibrium) con
 
     // Initialization of the maxwellian
     DFieldVx maxwellian(gridvx);
-    for_each(gridsp, [&](IndexSp const isp) {
+    ddc::for_each(gridsp, [&](IndexSp const isp) {
         compute_maxwellian(
                 maxwellian,
                 m_density_eq(isp),
                 m_temperature_eq(isp),
                 m_mean_velocity_eq(isp));
 
-        for_each(gridvx, [&](IndexVx const iv) { allfequilibrium(isp, iv) = maxwellian(iv); });
+        ddc::for_each(gridvx, [&](IndexVx const iv) { allfequilibrium(isp, iv) = maxwellian(iv); });
     });
     return allfequilibrium;
 }
@@ -48,7 +48,7 @@ void MaxwellianEquilibrium::compute_maxwellian(
     double const inv_sqrt_2piT = 1. / std::sqrt(2. * M_PI * temperature);
     IDomainVx const gridvx = fMaxwellian.domain();
     for (IndexVx const iv : gridvx) {
-        CoordVx const v = coordinate(iv);
+        CoordVx const v = ddc::coordinate(iv);
         fMaxwellian(iv)
                 = density * inv_sqrt_2piT
                   * std::exp(-(v - mean_velocity) * (v - mean_velocity) / (2. * temperature));
