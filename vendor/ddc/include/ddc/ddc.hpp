@@ -32,5 +32,3 @@
 #if defined(DDC_BUILD_PDI_WRAPPER)
 #include "ddc/pdi.hpp"
 #endif
-
-using namespace ddc;
