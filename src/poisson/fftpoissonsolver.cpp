@@ -37,26 +37,26 @@ void FftPoissonSolver::operator()(
         DSpanX const electric_field,
         DViewSpXVx const allfdistribu) const
 {
-    assert(electrostatic_potential.domain() == get_domain<IDimX>(allfdistribu));
+    assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
     IDomainX const x_dom = electrostatic_potential.domain();
 
     // Compute the RHS of the Poisson equation.
-    Chunk<double, IDomainX> rho(x_dom);
+    ddc::Chunk<double, IDomainX> rho(x_dom);
     DFieldVx contiguous_slice_vx(allfdistribu.domain<IDimVx>());
     m_compute_rho(rho, allfdistribu);
 
     // Build a mesh in the fourier space, for N points
-    IDomainFx const dom_fx(IndexFx(0), IVectFx(discrete_space<IDimFx>().size()));
+    IDomainFx const dom_fx(IndexFx(0), IVectFx(ddc::discrete_space<IDimFx>().size()));
 
     // Compute FFT(rho)
-    Chunk<std::complex<double>, IDomainFx> complex_Phi_fx(dom_fx);
+    ddc::Chunk<std::complex<double>, IDomainFx> complex_Phi_fx(dom_fx);
     m_fft(complex_Phi_fx.span_view(), rho.span_view());
 
     // Solve Poisson's equation -d2Phi/dx2 = rho
     //   in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))
     complex_Phi_fx(dom_fx.front()) = 0.;
-    for_each(dom_fx.remove_first(IVectFx(1)), [&](IndexFx const ifreq) {
-        double const kx = 2. * M_PI * coordinate(ifreq);
+    ddc::for_each(dom_fx.remove_first(IVectFx(1)), [&](IndexFx const ifreq) {
+        double const kx = 2. * M_PI * ddc::coordinate(ifreq);
         complex_Phi_fx(ifreq) /= kx * kx;
     });
 

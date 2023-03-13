@@ -22,16 +22,16 @@ public:
             using Sampling = ddc::UniformPointSampling<tag_type>;
             using SamplingImpl = typename Sampling::template Impl<Kokkos::HostSpace>;
             return SamplingImpl(
-                    discrete_space<BSplines>().rmin(),
-                    discrete_space<BSplines>().rmax(),
-                    DiscreteVector<ddc::UniformPointSampling<tag_type>>(
-                            discrete_space<BSplines>().ncells() + 1));
+                    ddc::discrete_space<BSplines>().rmin(),
+                    ddc::discrete_space<BSplines>().rmax(),
+                    ddc::DiscreteVector<ddc::UniformPointSampling<tag_type>>(
+                            ddc::discrete_space<BSplines>().ncells() + 1));
         } else {
             using Sampling = ddc::NonUniformPointSampling<tag_type>;
             using SamplingImpl = typename Sampling::template Impl<Kokkos::HostSpace>;
-            std::vector<double> knots(discrete_space<BSplines>().npoints());
-            for (int i(0); i < discrete_space<BSplines>().npoints(); ++i) {
-                knots[i] = discrete_space<BSplines>().get_knot(i);
+            std::vector<double> knots(ddc::discrete_space<BSplines>().npoints());
+            for (int i(0); i < ddc::discrete_space<BSplines>().npoints(); ++i) {
+                knots[i] = ddc::discrete_space<BSplines>().get_knot(i);
             }
             return SamplingImpl(knots);
         }

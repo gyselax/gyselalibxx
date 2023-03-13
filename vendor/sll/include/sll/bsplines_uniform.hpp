@@ -21,7 +21,7 @@ public:
     template <class T>
     struct InternalTagGenerator;
 
-    /// An internal tag necessary to allocate an internal discrete_space function.
+    /// An internal tag necessary to allocate an internal ddc::discrete_space function.
     /// It must remain internal, for example it shall not be exposed when returning ddc::coordinates. Instead use `Tag`
     using KnotDim = InternalTagGenerator<Tag>;
 
@@ -142,7 +142,7 @@ public:
 
         ddc::Coordinate<Tag> get_knot(int idx) const noexcept
         {
-            return rmin() + idx * ddc::step<mesh_type>();
+            return ddc::Coordinate<Tag>(rmin() + idx * ddc::step<mesh_type>());
         }
 
         double get_first_support_knot(discrete_element_type const& ix) const

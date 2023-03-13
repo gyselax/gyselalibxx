@@ -15,9 +15,9 @@ struct DimX
 {
     static constexpr bool PERIODIC = true;
 };
-using IDimX = NonUniformPointSampling<DimX>;
-using CoordX = Coordinate<DimX>;
-using IndexX = DiscreteElement<IDimX>;
+using IDimX = ddc::NonUniformPointSampling<DimX>;
+using CoordX = ddc::Coordinate<DimX>;
+using IndexX = ddc::DiscreteElement<IDimX>;
 
 class BSplinesNonUniformTest : public ::testing::Test
 {

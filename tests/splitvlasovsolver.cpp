@@ -44,7 +44,7 @@ TEST(SplitVlasovSolver, Ordering)
     IDomainSpXVx const dom(IndexSpXVx(0, 0, 0), IVectSpXVx(0, 0, 0));
     DFieldSpXVx fdistribu(dom);
     DSpanSpXVx const fdistribu_s(fdistribu);
-    DFieldX const efield(select<IDimX>(dom));
+    DFieldX const efield(ddc::select<IDimX>(dom));
     double const dt = 0.;
 
     MockAdvectionX const advec_x;

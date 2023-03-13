@@ -19,10 +19,10 @@ public:
     using interpolation_mesh_type1 = typename SplineBuilder1::mesh_type;
     using interpolation_mesh_type2 = typename SplineBuilder2::mesh_type;
 
-    using interpolation_domain_type1 = DiscreteDomain<interpolation_mesh_type1>;
-    using interpolation_domain_type2 = DiscreteDomain<interpolation_mesh_type2>;
+    using interpolation_domain_type1 = ddc::DiscreteDomain<interpolation_mesh_type1>;
+    using interpolation_domain_type2 = ddc::DiscreteDomain<interpolation_mesh_type2>;
     using interpolation_domain_type
-            = DiscreteDomain<interpolation_mesh_type1, interpolation_mesh_type2>;
+            = ddc::DiscreteDomain<interpolation_mesh_type1, interpolation_mesh_type2>;
 
     static constexpr BoundCond BcXmin1 = SplineBuilder1::s_bc_xmin;
     static constexpr BoundCond BcXmax1 = SplineBuilder1::s_bc_xmax;
@@ -36,8 +36,8 @@ private:
 
 public:
     SplineBuilder2D(interpolation_domain_type const& interpolation_domain)
-        : spline_builder1(select<interpolation_mesh_type1>(interpolation_domain))
-        , spline_builder2(select<interpolation_mesh_type2>(interpolation_domain))
+        : spline_builder1(ddc::select<interpolation_mesh_type1>(interpolation_domain))
+        , spline_builder2(ddc::select<interpolation_mesh_type2>(interpolation_domain))
         , m_interpolation_domain(interpolation_domain)
     {
     }
@@ -53,8 +53,8 @@ public:
     SplineBuilder2D& operator=(SplineBuilder2D&& x) = default;
 
     void operator()(
-            ChunkSpan<double, DiscreteDomain<bsplines_type1, bsplines_type2>> spline,
-            ChunkSpan<double const, interpolation_domain_type> vals,
+            ddc::ChunkSpan<double, ddc::DiscreteDomain<bsplines_type1, bsplines_type2>> spline,
+            ddc::ChunkSpan<double const, interpolation_domain_type> vals,
             std::optional<CDSpan2D> const derivs_xmin = std::nullopt,
             std::optional<CDSpan2D> const derivs_xmax = std::nullopt,
             std::optional<CDSpan2D> const derivs_ymin = std::nullopt,
@@ -81,21 +81,21 @@ public:
         return m_interpolation_domain;
     }
 
-    DiscreteDomain<bsplines_type1, bsplines_type2> spline_domain() const noexcept
+    ddc::DiscreteDomain<bsplines_type1, bsplines_type2> spline_domain() const noexcept
     {
-        return DiscreteDomain<bsplines_type1, bsplines_type2>(
-                DiscreteElement<bsplines_type1, bsplines_type2>(0, 0),
-                DiscreteVector<bsplines_type1, bsplines_type2>(
-                        discrete_space<bsplines_type1>().size(),
-                        discrete_space<bsplines_type2>().size()));
+        return ddc::DiscreteDomain<bsplines_type1, bsplines_type2>(
+                ddc::DiscreteElement<bsplines_type1, bsplines_type2>(0, 0),
+                ddc::DiscreteVector<bsplines_type1, bsplines_type2>(
+                        ddc::discrete_space<bsplines_type1>().size(),
+                        ddc::discrete_space<bsplines_type2>().size()));
     }
 };
 
 
 template <class SplineBuilder1, class SplineBuilder2>
 void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
-        ChunkSpan<double, DiscreteDomain<bsplines_type1, bsplines_type2>> spline,
-        ChunkSpan<double const, interpolation_domain_type> vals,
+        ddc::ChunkSpan<double, ddc::DiscreteDomain<bsplines_type1, bsplines_type2>> spline,
+        ddc::ChunkSpan<double const, interpolation_domain_type> vals,
         std::optional<CDSpan2D> const derivs_xmin,
         std::optional<CDSpan2D> const derivs_xmax,
         std::optional<CDSpan2D> const derivs_ymin,
@@ -131,11 +131,13 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
            != (!mixed_derivs_xmax_ymax.has_value()
                || mixed_derivs_xmax_ymax->extent(0) != nbc_xmax));
 
-    Chunk<double, DiscreteDomain<bsplines_type1>> spline1(spline_builder1.spline_domain());
-    Chunk<double, DiscreteDomain<bsplines_type2>> spline2(spline_builder2.spline_domain());
+    ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type1>> spline1(
+            spline_builder1.spline_domain());
+    ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type2>> spline2(
+            spline_builder2.spline_domain());
 
-    using IMesh1 = DiscreteElement<interpolation_mesh_type1>;
-    using IMesh2 = DiscreteElement<interpolation_mesh_type2>;
+    using IMesh1 = ddc::DiscreteElement<interpolation_mesh_type1>;
+    using IMesh2 = ddc::DiscreteElement<interpolation_mesh_type2>;
 
     /******************************************************************
     *  Cycle over x1 position (or order of x1-derivative at boundary)
@@ -155,11 +157,12 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
         }
         // In the boundary region we interpolate the derivatives
         for (int i = nbc_ymin; i > 0; --i) {
-            const DiscreteElement<bsplines_type2> spl_idx(i - 1);
+            const ddc::DiscreteElement<bsplines_type2> spl_idx(i - 1);
 
             // Get interpolated values
-            Chunk<double, interpolation_domain_type1> vals1(spline_builder1.interpolation_domain());
-            for_each(spline_builder1.interpolation_domain(), [&](IMesh1 const j) {
+            ddc::Chunk<double, interpolation_domain_type1> vals1(
+                    spline_builder1.interpolation_domain());
+            ddc::for_each(spline_builder1.interpolation_domain(), [&](IMesh1 const j) {
                 vals1(j) = (*derivs_ymin)(j.uid(), i - 1);
             });
 
@@ -188,9 +191,9 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
             spline_builder1(spline1, vals1, deriv_l, deriv_r);
 
             // Save result into 2d spline structure
-            for_each(
-                    get_domain<bsplines_type1>(spline),
-                    [&](DiscreteElement<bsplines_type1> const j) {
+            ddc::for_each(
+                    ddc::get_domain<bsplines_type1>(spline),
+                    [&](ddc::DiscreteElement<bsplines_type1> const j) {
                         spline(spl_idx, j) = spline1(j);
                     });
         }
@@ -206,13 +209,14 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
                        == spline_builder2.interpolation_domain().extents()
                && derivs_xmax->extent(1) == nbc_xmax);
     }
-    for_each(spline_builder2.interpolation_domain(), [&](IMesh2 const i) {
+    ddc::for_each(spline_builder2.interpolation_domain(), [&](IMesh2 const i) {
         const std::size_t ii = i.uid();
-        const DiscreteElement<bsplines_type2> spl_idx(nbc_ymin + ii);
+        const ddc::DiscreteElement<bsplines_type2> spl_idx(nbc_ymin + ii);
 
         // Get interpolated values
-        Chunk<double, interpolation_domain_type1> vals1(spline_builder1.interpolation_domain());
-        deepcopy(vals1, vals[i]);
+        ddc::Chunk<double, interpolation_domain_type1> vals1(
+                spline_builder1.interpolation_domain());
+        ddc::deepcopy(vals1, vals[i]);
 
         // Get interpolated derivatives
         const std::optional<CDSpan1D> deriv_l(
@@ -228,9 +232,11 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
         spline_builder1(spline1, vals1, deriv_l, deriv_r);
 
         // Save result into 2d spline structure
-        for_each(get_domain<bsplines_type1>(spline), [&](DiscreteElement<bsplines_type1> const j) {
-            spline(spl_idx, j) = spline1(j);
-        });
+        ddc::for_each(
+                ddc::get_domain<bsplines_type1>(spline),
+                [&](ddc::DiscreteElement<bsplines_type1> const j) {
+                    spline(spl_idx, j) = spline1(j);
+                });
     });
 
     if constexpr (BcXmax2 == BoundCond::HERMITE) {
@@ -247,12 +253,13 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
         }
         for (int i = nbc_ymax; i > 0; --i) {
             // In the boundary region we interpolate the derivatives
-            const DiscreteElement<bsplines_type2> spl_idx(
-                    i + discrete_space<bsplines_type2>().nbasis() - nbc_ymax - 1);
+            const ddc::DiscreteElement<bsplines_type2> spl_idx(
+                    i + ddc::discrete_space<bsplines_type2>().nbasis() - nbc_ymax - 1);
 
             // Get interpolated values
-            Chunk<double, interpolation_domain_type1> vals1(spline_builder1.interpolation_domain());
-            for_each(spline_builder1.interpolation_domain(), [&](IMesh1 const j) {
+            ddc::Chunk<double, interpolation_domain_type1> vals1(
+                    spline_builder1.interpolation_domain());
+            ddc::for_each(spline_builder1.interpolation_domain(), [&](IMesh1 const j) {
                 vals1(j) = (*derivs_ymax)(j.uid(), i - 1);
             });
 
@@ -281,34 +288,37 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
             spline_builder1(spline1, vals1, deriv_l, deriv_r);
 
             // Save result into 2d spline structure
-            for_each(
-                    get_domain<bsplines_type1>(spline),
-                    [&](DiscreteElement<bsplines_type1> const j) {
+            ddc::for_each(
+                    ddc::get_domain<bsplines_type1>(spline),
+                    [&](ddc::DiscreteElement<bsplines_type1> const j) {
                         spline(spl_idx, j) = spline1(j);
                     });
         }
     }
 
-    using IMeshV2 = DiscreteVector<bsplines_type2>;
+    using IMeshV2 = ddc::DiscreteVector<bsplines_type2>;
 
     /******************************************************************
     *  Cycle over x1 position (or order of x1-derivative at boundary)
     *  and interpolate x2 cofficients along x2 direction.
     *******************************************************************/
-    const DiscreteDomain<bsplines_type1> spline_basis_domain = DiscreteDomain<bsplines_type1>(
-            DiscreteElement<bsplines_type1>(0),
-            DiscreteVector<bsplines_type1>(discrete_space<bsplines_type1>().nbasis()));
+    const ddc::DiscreteDomain<bsplines_type1> spline_basis_domain
+            = ddc::DiscreteDomain<bsplines_type1>(
+                    ddc::DiscreteElement<bsplines_type1>(0),
+                    ddc::DiscreteVector<bsplines_type1>(
+                            ddc::discrete_space<bsplines_type1>().nbasis()));
 
-    for_each(spline_basis_domain, [&](DiscreteElement<bsplines_type1> const i) {
-        const ChunkSpan<double, DiscreteDomain<bsplines_type2>> line_2 = spline[i];
-        const DiscreteDomain<bsplines_type2> whole_line_dom = get_domain<bsplines_type2>(spline);
+    ddc::for_each(spline_basis_domain, [&](ddc::DiscreteElement<bsplines_type1> const i) {
+        const ddc::ChunkSpan<double, ddc::DiscreteDomain<bsplines_type2>> line_2 = spline[i];
+        const ddc::DiscreteDomain<bsplines_type2> whole_line_dom
+                = ddc::get_domain<bsplines_type2>(spline);
         // Get interpolated values
-        ChunkSpan<double, DiscreteDomain<bsplines_type2>> const vals2(
+        ddc::ChunkSpan<double, ddc::DiscreteDomain<bsplines_type2>> const vals2(
                 line_2[whole_line_dom.remove(IMeshV2(nbc_ymin), IMeshV2(nbc_ymax))]);
         // Get interpolated values acting as derivatives
-        ChunkSpan<double, DiscreteDomain<bsplines_type2>> const l_derivs(
+        ddc::ChunkSpan<double, ddc::DiscreteDomain<bsplines_type2>> const l_derivs(
                 line_2[whole_line_dom.take_first(IMeshV2(nbc_ymin))]);
-        ChunkSpan<double, DiscreteDomain<bsplines_type2>> const r_derivs(
+        ddc::ChunkSpan<double, ddc::DiscreteDomain<bsplines_type2>> const r_derivs(
                 line_2[whole_line_dom.take_last(IMeshV2(nbc_ymax))]);
         const std::optional<CDSpan1D> deriv_l(
                 BcXmin2 == BoundCond::HERMITE ? std::optional(l_derivs.allocation_mdspan())
@@ -317,26 +327,26 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
                 BcXmax2 == BoundCond::HERMITE ? std::optional(r_derivs.allocation_mdspan())
                                               : std::nullopt);
 
-        ChunkSpan<double const, interpolation_domain_type2>
+        ddc::ChunkSpan<double const, interpolation_domain_type2>
                 vals2_i(vals2.data(), spline_builder2.interpolation_domain());
 
         // Interpolate coefficients
         spline_builder2(spline2, vals2_i, deriv_l, deriv_r);
 
         // Re-write result into 2d spline structure
-        for_each(get_domain<bsplines_type2>(spline), [&](DiscreteElement<bsplines_type2> const j) {
-            spline(i, j) = spline2(j);
-        });
+        ddc::for_each(
+                ddc::get_domain<bsplines_type2>(spline),
+                [&](ddc::DiscreteElement<bsplines_type2> const j) { spline(i, j) = spline2(j); });
     });
 
     if (bsplines_type1::is_periodic()) {
         for (std::size_t i(0); i < bsplines_type1::degree(); ++i) {
-            const DiscreteElement<bsplines_type1> i_start(i);
-            const DiscreteElement<bsplines_type1> i_end(
-                    discrete_space<bsplines_type1>().nbasis() + i);
-            for_each(
-                    get_domain<bsplines_type2>(spline),
-                    [&](DiscreteElement<bsplines_type2> const j) {
+            const ddc::DiscreteElement<bsplines_type1> i_start(i);
+            const ddc::DiscreteElement<bsplines_type1> i_end(
+                    ddc::discrete_space<bsplines_type1>().nbasis() + i);
+            ddc::for_each(
+                    ddc::get_domain<bsplines_type2>(spline),
+                    [&](ddc::DiscreteElement<bsplines_type2> const j) {
                         spline(i_end, j) = spline(i_start, j);
                     });
         }

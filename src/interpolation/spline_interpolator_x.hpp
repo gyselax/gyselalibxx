@@ -14,7 +14,7 @@ private:
 
     SplineEvaluator<BSplinesX> const& m_evaluator;
 
-    mutable Chunk<double, BSDomainX> m_coefs;
+    mutable ddc::Chunk<double, BSDomainX> m_coefs;
 
 public:
     SplineInterpolatorX(SplineXBuilder const& builder, SplineEvaluator<BSplinesX> const& evaluator);

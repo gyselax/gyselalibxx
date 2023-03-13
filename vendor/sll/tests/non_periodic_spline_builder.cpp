@@ -23,8 +23,6 @@
 #include "polynomial_evaluator.hpp"
 #include "spline_error_bounds.hpp"
 
-using namespace ddc;
-
 struct DimX
 {
     static constexpr bool PERIODIC = false;
@@ -60,12 +58,12 @@ using evaluator_type = CosineEvaluator::Evaluator<IDimX>;
 using evaluator_type = PolynomialEvaluator::Evaluator<IDimX, s_degree_x>;
 #endif
 
-using IndexX = DiscreteElement<IDimX>;
-using DVectX = DiscreteVector<IDimX>;
-using BsplIndexX = DiscreteElement<BSplinesX>;
-using SplineX = Chunk<double, DiscreteDomain<BSplinesX>>;
-using FieldX = Chunk<double, DiscreteDomain<IDimX>>;
-using CoordX = Coordinate<DimX>;
+using IndexX = ddc::DiscreteElement<IDimX>;
+using DVectX = ddc::DiscreteVector<IDimX>;
+using BsplIndexX = ddc::DiscreteElement<BSplinesX>;
+using SplineX = ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX>>;
+using FieldX = ddc::Chunk<double, ddc::DiscreteDomain<IDimX>>;
+using CoordX = ddc::Coordinate<DimX>;
 
 // Checks that when evaluating the spline at interpolation points one
 // recovers values that were used to build the spline
@@ -78,7 +76,7 @@ TEST(NonPeriodicSplineBuilderTest, Identity)
     // 1. Create BSplines
     {
 #if defined(BSPLINES_TYPE_UNIFORM)
-        init_discrete_space<BSplinesX>(x0, xN, ncells);
+        ddc::init_discrete_space<BSplinesX>(x0, xN, ncells);
 #elif defined(BSPLINES_TYPE_NON_UNIFORM)
         DVectX constexpr npoints(ncells + 1);
         std::vector<CoordX> breaks(npoints);
@@ -86,18 +84,19 @@ TEST(NonPeriodicSplineBuilderTest, Identity)
         for (int i(0); i < npoints; ++i) {
             breaks[i] = CoordX(x0 + i * dx);
         }
-        init_discrete_space<BSplinesX>(breaks);
+        ddc::init_discrete_space<BSplinesX>(breaks);
 #endif
     }
-    DiscreteDomain<BSplinesX> const dom_bsplines_x(discrete_space<BSplinesX>().full_domain());
+    ddc::DiscreteDomain<BSplinesX> const dom_bsplines_x(
+            ddc::discrete_space<BSplinesX>().full_domain());
 
     // 2. Create a Spline represented by a chunk over BSplines
     // The chunk is filled with garbage data, we need to initialize it
     SplineX coef(dom_bsplines_x);
 
     // 3. Create the interpolation domain
-    init_discrete_space<IDimX>(GrevillePoints::get_sampling());
-    DiscreteDomain<IDimX> interpolation_domain(GrevillePoints::get_domain());
+    ddc::init_discrete_space<IDimX>(GrevillePoints::get_sampling());
+    ddc::DiscreteDomain<IDimX> interpolation_domain(GrevillePoints::get_domain());
 
     // 4. Create a SplineBuilder over BSplines using some boundary conditions
     SplineBuilder<BSplinesX, IDimX, s_bcl, s_bcr> spline_builder(interpolation_domain);
@@ -135,9 +134,9 @@ TEST(NonPeriodicSplineBuilderTest, Identity)
     SplineEvaluator<BSplinesX>
             spline_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);
 
-    Chunk<Coordinate<DimX>, DiscreteDomain<IDimX>> coords_eval(interpolation_domain);
+    ddc::Chunk<ddc::Coordinate<DimX>, ddc::DiscreteDomain<IDimX>> coords_eval(interpolation_domain);
     for (IndexX const ix : interpolation_domain) {
-        coords_eval(ix) = coordinate(ix);
+        coords_eval(ix) = ddc::coordinate(ix);
     }
 
     FieldX spline_eval(interpolation_domain);
@@ -151,7 +150,7 @@ TEST(NonPeriodicSplineBuilderTest, Identity)
     double max_norm_error = 0.;
     double max_norm_error_diff = 0.;
     for (IndexX const ix : interpolation_domain) {
-        CoordX const x = coordinate(ix);
+        CoordX const x = ddc::coordinate(ix);
 
         // Compute error
         double const error = spline_eval(ix) - yvals(ix);
@@ -191,6 +190,6 @@ TEST(NonPeriodicSplineBuilderTest, Identity)
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
-    ::ScopeGuard scope(argc, argv);
+    ::ddc::ScopeGuard scope(argc, argv);
     return RUN_ALL_TESTS();
 }

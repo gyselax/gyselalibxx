@@ -36,14 +36,14 @@ DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, double const dt, 
         // the associated electric field
         m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
 
-        PdiEvent("iteration")
+        ddc::PdiEvent("iteration")
                 .with("iter", iter)
                 .and_with("time_saved", iter_time)
                 .and_with("fdistribu", allfdistribu)
                 .and_with("electrostatic_potential", electrostatic_potential);
 
         // copy fdistribu
-        deepcopy(allfdistribu_half_t, allfdistribu);
+        ddc::deepcopy(allfdistribu_half_t, allfdistribu);
 
         // predictor
         m_boltzmann_solver(allfdistribu_half_t, electric_field, dt / 2);
@@ -57,7 +57,7 @@ DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, double const dt, 
 
     double const final_time = iter * dt;
     m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
-    PdiEvent("last_iteration")
+    ddc::PdiEvent("last_iteration")
             .with("iter", iter)
             .and_with("time_saved", final_time)
             .and_with("fdistribu", allfdistribu)

@@ -41,8 +41,8 @@ KineticSource::KineticSource(
 {
     // compute the source velocity profile (maxwellian profile if density = energy = 1.)
     double const coeff(1.0 / std::sqrt(2 * M_PI * m_temperature));
-    for_each(policies::parallel_host, gridvx, [=](IndexVx const ivx) {
-        CoordVx const coordvx = coordinate(ivx);
+    ddc::for_each(ddc::policies::parallel_host, gridvx, [=](IndexVx const ivx) {
+        CoordVx const coordvx = ddc::coordinate(ivx);
         double const coordvx_sq = coordvx * coordvx;
         double const density_source = coeff * (1.5 - coordvx_sq / (2 * m_temperature))
                                       * std::exp(-coordvx_sq / (2 * m_temperature));
@@ -54,12 +54,15 @@ KineticSource::KineticSource(
 
 DSpanSpXVx KineticSource::operator()(DSpanSpXVx const allfdistribu, double const dt) const
 {
-    for_each(policies::parallel_host, allfdistribu.domain(), [=](IndexSpXVx const ispxvx) {
-        double const df(
-                m_amplitude * m_spatial_extent(select<IDimX>(ispxvx))
-                * m_velocity_shape(select<IDimVx>(ispxvx)) * dt);
-        allfdistribu(ispxvx) += df;
-    });
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            allfdistribu.domain(),
+            [=](IndexSpXVx const ispxvx) {
+                double const df(
+                        m_amplitude * m_spatial_extent(ddc::select<IDimX>(ispxvx))
+                        * m_velocity_shape(ddc::select<IDimVx>(ispxvx)) * dt);
+                allfdistribu(ispxvx) += df;
+            });
 
     return allfdistribu;
 }

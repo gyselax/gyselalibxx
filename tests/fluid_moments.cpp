@@ -62,7 +62,7 @@ TEST(Physics, FluidMoments)
     ddc::fill(init_perturb_amplitude, 0);
 
     // Initialization of the distribution function as a maxwellian
-    init_discrete_space<IDimSp>(
+    ddc::init_discrete_space<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
@@ -71,12 +71,12 @@ TEST(Physics, FluidMoments)
 
     // Initialization of the distribution function as a maxwellian with
     // moments depending on space
-    DFieldSpX density_init(get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX mean_velocity_init(get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX temperature_init(get_domain<IDimSp, IDimX>(allfdistribu));
-    for_each(
-            policies::parallel_host,
-            get_domain<IDimSp, IDimX>(allfdistribu),
+    DFieldSpX density_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    DFieldSpX mean_velocity_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    DFieldSpX temperature_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
             [&](IndexSpX const ispx) {
                 double const density = 1.;
                 double const density_ampl = 0.1;
@@ -85,18 +85,19 @@ TEST(Physics, FluidMoments)
                 double const temperature = 1;
                 double const temperature_ampl = 0.3;
 
-                double const coordx = coordinate(select<IDimX>(ispx));
+                double const coordx = ddc::coordinate(ddc::select<IDimX>(ispx));
                 density_init(ispx)
                         = density
-                          + density_ampl * std::sin(2 * M_PI * coordx / coordinate(gridx.back()));
+                          + density_ampl
+                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
                 mean_velocity_init(ispx)
                         = mean_velocity
                           + mean_velocity_ampl
-                                    * std::sin(2 * M_PI * coordx / coordinate(gridx.back()));
+                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
                 temperature_init(ispx)
                         = temperature
                           + temperature_ampl
-                                    * std::sin(2 * M_PI * coordx / coordinate(gridx.back()));
+                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
                 DFieldVx finit(gridvx);
                 MaxwellianEquilibrium::compute_maxwellian(
                         finit.span_view(),
@@ -107,11 +108,11 @@ TEST(Physics, FluidMoments)
             });
 
     // density and temperature
-    DFieldSpX density_computed(get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX mean_velocity_computed(get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX temperature_computed(get_domain<IDimSp, IDimX>(allfdistribu));
+    DFieldSpX density_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    DFieldSpX mean_velocity_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    DFieldSpX temperature_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     FluidMoments moments(Quadrature<IDimVx>(
-            trapezoid_quadrature_coefficients(get_domain<IDimVx>(allfdistribu))));
+            trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu))));
 
     moments(density_computed.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);
     moments(mean_velocity_computed.span_view(),
@@ -124,9 +125,9 @@ TEST(Physics, FluidMoments)
             mean_velocity_computed.span_cview(),
             FluidMoments::s_temperature);
 
-    for_each(
-            policies::parallel_host,
-            get_domain<IDimSp, IDimX>(allfdistribu),
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
             [&](IndexSpX const ispx) {
                 EXPECT_LE(std::fabs(density_computed(ispx) - density_init(ispx)), 1e-12);
                 EXPECT_LE(

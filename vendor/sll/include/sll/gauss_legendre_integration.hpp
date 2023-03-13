@@ -100,12 +100,12 @@ public:
         assert(x0 <= x1);
         assert(points.size() == m_wx.size());
         // map the interval [-1,1] into the interval [a,b].
-        double const l = 0.5 * (get<Dim>(x1) - get<Dim>(x0));
-        ddc::Coordinate<Dim> const c = 0.5 * (x0 + x1);
+        double const l = 0.5 * (ddc::get<Dim>(x1) - ddc::get<Dim>(x0));
+        ddc::Coordinate<Dim> const c(0.5 * (x0 + x1));
         int const dom_start = points.domain().front().uid();
         for (auto i : points.domain()) {
             weights(i) = l * m_wx[i.uid() - dom_start].first;
-            points(i) = l * m_wx[i.uid() - dom_start].second + c;
+            points(i) = ddc::Coordinate<Dim>(l * m_wx[i.uid() - dom_start].second + c);
         }
     }
 

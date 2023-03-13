@@ -40,7 +40,7 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
-    ScopeGuard scope(argc, argv);
+    ddc::ScopeGuard scope(argc, argv);
 
     PC_tree_t conf_voicexx;
     if (argc == 2) {
@@ -67,14 +67,14 @@ int main(int argc, char** argv)
     IVectVx const vx_size(PCpp_int(conf_voicexx, ".Mesh.vx_size"));
 
     // Creating mesh & supports
-    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
+    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    init_discrete_space<IDimX>(InterpPointsX::get_sampling());
-    init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
-    DiscreteDomain<IDimX> interpolation_domain_x(InterpPointsX::get_domain());
-    DiscreteDomain<IDimVx> interpolation_domain_vx(InterpPointsVx::get_domain());
+    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
+    ddc::DiscreteDomain<IDimX> interpolation_domain_x(InterpPointsX::get_domain());
+    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(InterpPointsVx::get_domain());
 
     SplineXBuilder const builder_x(interpolation_domain_x);
 
@@ -130,7 +130,7 @@ int main(int argc, char** argv)
     }
 
     // Initialization of the distribution function
-    init_discrete_space<IDimSp>(
+    ddc::init_discrete_space<IDimSp>(
             std::move(charges),
             std::move(masses),
             std::move(init_perturb_amplitude),
@@ -144,8 +144,8 @@ int main(int argc, char** argv)
     DFieldSpXVx allfdistribu(meshSpXVx);
     SingleModePerturbInitialization const
             init(allfequilibrium,
-                 discrete_space<IDimSp>().perturb_modes(),
-                 discrete_space<IDimSp>().perturb_amplitudes());
+                 ddc::discrete_space<IDimSp>().perturb_modes(),
+                 ddc::discrete_space<IDimSp>().perturb_amplitudes());
     init(allfdistribu);
 
     // --> Algorithm info
@@ -184,7 +184,7 @@ int main(int argc, char** argv)
 
     FftwFourierTransform<RDimX> const fft;
 
-    init_discrete_space<IDimFx>(fft.compute_fourier_domain(select<IDimX>(meshSpXVx)));
+    ddc::init_discrete_space<IDimFx>(fft.compute_fourier_domain(ddc::select<IDimX>(meshSpXVx)));
 
     FftwInverseFourierTransform<RDimX> const ifft;
 
@@ -194,28 +194,28 @@ int main(int argc, char** argv)
     PredCorr const predcorr(vlasov, poisson);
 
     // Creating of mesh for output saving
-    IDomainX const gridx = select<IDimX>(meshSpXVx);
+    IDomainX const gridx = ddc::select<IDimX>(meshSpXVx);
     FieldX<CoordX> meshX_coord(gridx);
     for (IndexX const ix : gridx) {
-        meshX_coord(ix) = coordinate(ix);
+        meshX_coord(ix) = ddc::coordinate(ix);
     }
 
-    IDomainVx const gridvx = select<IDimVx>(meshSpXVx);
+    IDomainVx const gridvx = ddc::select<IDimVx>(meshSpXVx);
     FieldVx<CoordVx> meshVx_coord(gridvx);
     for (IndexVx const ivx : gridvx) {
-        meshVx_coord(ivx) = coordinate(ivx);
+        meshVx_coord(ivx) = ddc::coordinate(ivx);
     }
 
     // Starting the code
-    expose_to_pdi("Nx", x_size.value());
-    expose_to_pdi("Nvx", vx_size.value());
-    expose_to_pdi("MeshX", meshX_coord);
-    expose_to_pdi("MeshVx", meshVx_coord);
-    expose_to_pdi("nbstep_diag", nbstep_diag);
-    expose_to_pdi("Nkinspecies", nb_kinspecies.value());
-    expose_to_pdi("fdistribu_charges", discrete_space<IDimSp>().charges()[dom_kinsp]);
-    expose_to_pdi("fdistribu_masses", discrete_space<IDimSp>().masses()[dom_kinsp]);
-    PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium);
+    ddc::expose_to_pdi("Nx", x_size.value());
+    ddc::expose_to_pdi("Nvx", vx_size.value());
+    ddc::expose_to_pdi("MeshX", meshX_coord);
+    ddc::expose_to_pdi("MeshVx", meshVx_coord);
+    ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
+    ddc::expose_to_pdi("Nkinspecies", nb_kinspecies.value());
+    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
+    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[dom_kinsp]);
+    ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium);
 
     steady_clock::time_point const start = steady_clock::now();
 

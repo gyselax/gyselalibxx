@@ -16,10 +16,10 @@ TEST(QuadratureTest, ExactForConstantFunc)
     IVectX const x_size(10);
 
     // Creating mesh & supports
-    init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    init_discrete_space<IDimX>(InterpPointsX::get_sampling());
-    DiscreteDomain<IDimX> interpolation_domain_x(InterpPointsX::get_domain());
+    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    ddc::DiscreteDomain<IDimX> interpolation_domain_x(InterpPointsX::get_domain());
 
     SplineXBuilder const builder_x(interpolation_domain_x);
 
@@ -29,7 +29,7 @@ TEST(QuadratureTest, ExactForConstantFunc)
 
     DFieldX values(gridx);
 
-    for_each(gridx, [&](DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
+    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-9);
@@ -51,15 +51,15 @@ double compute_error(int n_elems)
     using IDimY = typename GrevillePointsY::interpolation_mesh_type;
     using SplineYBuilder
             = SplineBuilder<BSplinesY, IDimY, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-    using IDomainY = DiscreteDomain<IDimY>;
-    using DFieldY = Chunk<double, IDomainY>;
+    using IDomainY = ddc::DiscreteDomain<IDimY>;
+    using DFieldY = ddc::Chunk<double, IDomainY>;
 
-    Coordinate<Y<N>> const x_min(0.0);
-    Coordinate<Y<N>> const x_max(M_PI);
+    ddc::Coordinate<Y<N>> const x_min(0.0);
+    ddc::Coordinate<Y<N>> const x_max(M_PI);
 
-    init_discrete_space<BSplinesY>(x_min, x_max, n_elems);
+    ddc::init_discrete_space<BSplinesY>(x_min, x_max, n_elems);
 
-    init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
+    ddc::init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
     IDomainY const gridx(GrevillePointsY::get_domain());
 
     SplineYBuilder const builder_x(gridx);
@@ -68,7 +68,9 @@ double compute_error(int n_elems)
 
     DFieldY values(gridx);
 
-    for_each(gridx, [&](DiscreteElement<IDimY> const idx) { values(idx) = sin(coordinate(idx)); });
+    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimY> const idx) {
+        values(idx) = sin(ddc::coordinate(idx));
+    });
     double integral = integrate(values);
     return std::abs(2 - integral);
 }

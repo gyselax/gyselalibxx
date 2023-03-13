@@ -23,26 +23,32 @@ DSpanSpXVx RK2_solver::operator()(
     DFieldSpXVx df(allfdistribu.domain());
     for (int iter = 0; iter < steps; ++iter) {
         // RK2 first half step
-        for_each(
-                policies::parallel_host,
-                get_domain<IDimSp, IDimX>(allfdistribu),
+        ddc::for_each(
+                ddc::policies::parallel_host,
+                ddc::get_domain<IDimSp, IDimX>(allfdistribu),
                 [&](IndexSpX const ispx) { m_rhs(df[ispx], allfdistribu, 0, ispx); });
 
-        for_each(policies::parallel_host, allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-            allfdistribu_half(ispxvx) = allfdistribu(ispxvx) + df(ispxvx) * deltat / 2.0;
-        });
+        ddc::for_each(
+                ddc::policies::parallel_host,
+                allfdistribu.domain(),
+                [&](IndexSpXVx const ispxvx) {
+                    allfdistribu_half(ispxvx) = allfdistribu(ispxvx) + df(ispxvx) * deltat / 2.0;
+                });
 
         // RK2 final step
-        for_each(
-                policies::parallel_host,
-                get_domain<IDimSp, IDimX>(allfdistribu),
+        ddc::for_each(
+                ddc::policies::parallel_host,
+                ddc::get_domain<IDimSp, IDimX>(allfdistribu),
                 [&](IndexSpX const ispx) {
                     m_rhs(df[ispx], allfdistribu_half, deltat / 2.0, ispx);
                 });
 
-        for_each(policies::parallel_host, allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-            allfdistribu(ispxvx) = allfdistribu(ispxvx) + df(ispxvx) * deltat;
-        });
+        ddc::for_each(
+                ddc::policies::parallel_host,
+                allfdistribu.domain(),
+                [&](IndexSpXVx const ispxvx) {
+                    allfdistribu(ispxvx) = allfdistribu(ispxvx) + df(ispxvx) * deltat;
+                });
     }
 
     return allfdistribu;

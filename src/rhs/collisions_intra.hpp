@@ -51,39 +51,40 @@ private:
         return ddc::DiscreteElement<GhostedVx>(index.uid() + 1);
     }
 
-    static constexpr bool uniform_edge_v = std::is_same_v<RDimVx, UniformPointSampling<RDimVx>>;
+    static constexpr bool uniform_edge_v
+            = std::is_same_v<RDimVx, ddc::UniformPointSampling<RDimVx>>;
 
 public:
     using ghosted_vx_point_sampling = std::conditional_t<
             uniform_edge_v,
-            UniformPointSampling<GhostedVx>,
-            NonUniformPointSampling<GhostedVx>>;
+            ddc::UniformPointSampling<GhostedVx>,
+            ddc::NonUniformPointSampling<GhostedVx>>;
 
     using ghosted_vx_staggered_point_sampling = std::conditional_t<
             uniform_edge_v,
-            UniformPointSampling<GhostedVxStaggered>,
-            NonUniformPointSampling<GhostedVxStaggered>>;
+            ddc::UniformPointSampling<GhostedVxStaggered>,
+            ddc::NonUniformPointSampling<GhostedVxStaggered>>;
 
-    using IDomainSpXVx_ghosted = DiscreteDomain<IDimSp, IDimX, ghosted_vx_point_sampling>;
+    using IDomainSpXVx_ghosted = ddc::DiscreteDomain<IDimSp, IDimX, ghosted_vx_point_sampling>;
 
     using IDomainSpXVx_ghosted_staggered
-            = DiscreteDomain<IDimSp, IDimX, ghosted_vx_staggered_point_sampling>;
+            = ddc::DiscreteDomain<IDimSp, IDimX, ghosted_vx_staggered_point_sampling>;
 
-    using IndexVx_ghosted = DiscreteElement<ghosted_vx_point_sampling>;
+    using IndexVx_ghosted = ddc::DiscreteElement<ghosted_vx_point_sampling>;
 
-    using IndexVx_ghosted_staggered = DiscreteElement<ghosted_vx_staggered_point_sampling>;
+    using IndexVx_ghosted_staggered = ddc::DiscreteElement<ghosted_vx_staggered_point_sampling>;
 
-    using IndexSpXVx_ghosted = DiscreteElement<IDimSp, IDimX, ghosted_vx_point_sampling>;
+    using IndexSpXVx_ghosted = ddc::DiscreteElement<IDimSp, IDimX, ghosted_vx_point_sampling>;
 
     using IndexSpXVx_ghosted_staggered
-            = DiscreteElement<IDimSp, IDimX, ghosted_vx_staggered_point_sampling>;
+            = ddc::DiscreteElement<IDimSp, IDimX, ghosted_vx_staggered_point_sampling>;
 
 private:
     double m_nustar0;
     double m_fthresh;
 
-    DiscreteDomain<ghosted_vx_point_sampling> m_gridvx_ghosted;
-    DiscreteDomain<ghosted_vx_staggered_point_sampling> m_gridvx_ghosted_staggered;
+    ddc::DiscreteDomain<ghosted_vx_point_sampling> m_gridvx_ghosted;
+    ddc::DiscreteDomain<ghosted_vx_staggered_point_sampling> m_gridvx_ghosted_staggered;
 
     IDomainSpXVx_ghosted m_mesh_ghosted;
     IDomainSpXVx_ghosted_staggered m_mesh_ghosted_staggered;
@@ -99,11 +100,12 @@ public:
 
     double get_nustar0() const;
 
-    DiscreteDomain<ghosted_vx_point_sampling> const& get_gridvx_ghosted() const;
+    ddc::DiscreteDomain<ghosted_vx_point_sampling> const& get_gridvx_ghosted() const;
 
-    DiscreteDomain<ghosted_vx_staggered_point_sampling> const& get_gridvx_ghosted_staggered() const;
+    ddc::DiscreteDomain<ghosted_vx_staggered_point_sampling> const& get_gridvx_ghosted_staggered()
+            const;
 
-    DiscreteDomain<IDimSp, IDimX, ghosted_vx_point_sampling> const& get_mesh_ghosted() const;
+    ddc::DiscreteDomain<IDimSp, IDimX, ghosted_vx_point_sampling> const& get_mesh_ghosted() const;
 
     void compute_rhs_vector(
             DSpanSpXVx RR,

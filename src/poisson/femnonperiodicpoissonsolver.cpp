@@ -22,13 +22,13 @@ SplineEvaluator<NUBSplinesX> jit_build_nubsplinesx(
 {
     static_assert(std::is_same_v<BSplines, UBSplinesX> || std::is_same_v<BSplines, NUBSplinesX>);
     if constexpr (std::is_same_v<BSplines, UBSplinesX>) {
-        int const ncells = discrete_space<UBSplinesX>().ncells();
+        int const ncells = ddc::discrete_space<UBSplinesX>().ncells();
         std::vector<CoordX> knots(ncells + 1);
 
         for (int i(0); i < ncells + 1; ++i) {
-            knots[i] = CoordX(discrete_space<UBSplinesX>().get_knot(i));
+            knots[i] = CoordX(ddc::discrete_space<UBSplinesX>().get_knot(i));
         }
-        init_discrete_space<NUBSplinesX>(knots);
+        ddc::init_discrete_space<NUBSplinesX>(knots);
         // Boundary values are never evaluated
         return SplineEvaluator<
                 NUBSplinesX>(g_null_boundary<NUBSplinesX>, g_null_boundary<NUBSplinesX>);
@@ -51,28 +51,30 @@ FemNonPeriodicPoissonSolver::FemNonPeriodicPoissonSolver(
     , m_spline_x_evaluator(spline_x_evaluator)
     , m_spline_x_nu_evaluator(jit_build_nubsplinesx(spline_x_evaluator))
     , m_compute_rho(spline_vx_builder, spline_vx_evaluator)
-    , m_nbasis(discrete_space<BSplinesX>().nbasis())
-    , m_ncells(discrete_space<BSplinesX>().ncells())
-    , m_quad_coef(DiscreteDomain<QMeshX>(
-              DiscreteElement<QMeshX>(0),
-              DiscreteVector<QMeshX>(s_npts_gauss * m_ncells)))
+    , m_nbasis(ddc::discrete_space<BSplinesX>().nbasis())
+    , m_ncells(ddc::discrete_space<BSplinesX>().ncells())
+    , m_quad_coef(ddc::DiscreteDomain<QMeshX>(
+              ddc::DiscreteElement<QMeshX>(0),
+              ddc::DiscreteVector<QMeshX>(s_npts_gauss * m_ncells)))
 {
     static_assert(!SplineXBuilder::bsplines_type::is_periodic());
-    BSDomainX const domain(DiscreteElement<BSplinesX>(0), DiscreteVector<BSplinesX>(m_ncells + 1));
-    Chunk<Coordinate<QDimX>, BSDomainX> knots(domain);
+    BSDomainX const
+            domain(ddc::DiscreteElement<BSplinesX>(0),
+                   ddc::DiscreteVector<BSplinesX>(m_ncells + 1));
+    ddc::Chunk<ddc::Coordinate<QDimX>, BSDomainX> knots(domain);
 
-    for (DiscreteElement<BSplinesX> const i : domain) {
-        knots(i) = quad_point_from_coord(discrete_space<NUBSplinesX>().get_knot(i.uid()));
+    for (ddc::DiscreteElement<BSplinesX> const i : domain) {
+        knots(i) = quad_point_from_coord(ddc::discrete_space<NUBSplinesX>().get_knot(i.uid()));
     }
 
     // Calculate the integration coefficients
     GaussLegendre<QDimX> const gl(s_npts_gauss);
-    std::vector<Coordinate<QDimX>> eval_pts_data(m_quad_coef.domain().size());
-    ChunkSpan<Coordinate<QDimX>, DiscreteDomain<QMeshX>> const
+    std::vector<ddc::Coordinate<QDimX>> eval_pts_data(m_quad_coef.domain().size());
+    ddc::ChunkSpan<ddc::Coordinate<QDimX>, ddc::DiscreteDomain<QMeshX>> const
             eval_pts(eval_pts_data.data(), m_quad_coef.domain());
     gl.compute_points_and_weights_on_mesh(eval_pts, m_quad_coef.span_view(), knots.span_cview());
 
-    init_discrete_space<QMeshX>(eval_pts_data);
+    ddc::init_discrete_space<QMeshX>(eval_pts_data);
 
     // Build the finite elements matrix
     build_matrix();
@@ -97,7 +99,7 @@ void FemNonPeriodicPoissonSolver::build_matrix()
     // Fill the banded part of the matrix
     std::array<double, s_degree + 1> derivs_ptr;
     DSpan1D const derivs(derivs_ptr.data(), derivs_ptr.size());
-    for_each(m_quad_coef.domain(), [&](DiscreteElement<QMeshX> const ix) {
+    ddc::for_each(m_quad_coef.domain(), [&](ddc::DiscreteElement<QMeshX> const ix) {
         ddc::Coordinate<RDimX> const coord = coord_from_quad_point(ddc::coordinate(ix));
         ddc::DiscreteElement<NUBSplinesX> const jmin
                 = ddc::discrete_space<NUBSplinesX>().eval_deriv(derivs, coord);
@@ -142,10 +144,10 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
     // Fill phi_rhs(i) with \int rho(x) b_i(x) dx
     // Rk: phi_rhs no longer contains spline coefficients, but is the
     //     RHS of the matrix equation
-    for_each(m_quad_coef.domain(), [&](DiscreteElement<QMeshX> const ix) {
-        Coordinate<RDimX> const coord = coord_from_quad_point(coordinate(ix));
-        DiscreteElement<BSplinesX> const jmin
-                = discrete_space<BSplinesX>().eval_basis(values, coord);
+    ddc::for_each(m_quad_coef.domain(), [&](ddc::DiscreteElement<QMeshX> const ix) {
+        ddc::Coordinate<RDimX> const coord = coord_from_quad_point(ddc::coordinate(ix));
+        ddc::DiscreteElement<BSplinesX> const jmin
+                = ddc::discrete_space<BSplinesX>().eval_basis(values, coord);
         double const rho_val = m_spline_x_evaluator(coord, rho_spline_coef);
         for (int j = 0; j < s_degree + 1; ++j) {
             int const j_idx = (jmin.uid() + j) % m_nbasis - 1;
@@ -181,7 +183,7 @@ void FemNonPeriodicPoissonSolver::operator()(
         DSpanX const electric_field,
         DViewSpXVx const allfdistribu) const
 {
-    assert(electrostatic_potential.domain() == get_domain<IDimX>(allfdistribu));
+    assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
     IDomainX const dom_x = electrostatic_potential.domain();
 
     // Compute the RHS of the Poisson equation
@@ -191,12 +193,13 @@ void FemNonPeriodicPoissonSolver::operator()(
     //
     ddc::Chunk<double, BSDomainX> rho_spline_coef(m_spline_x_builder.spline_domain());
     m_spline_x_builder(rho_spline_coef, rho);
-    ddc::Chunk<double, NUBSDomainX> phi_spline_coef(discrete_space<NUBSplinesX>().full_domain());
+    ddc::Chunk<double, NUBSDomainX> phi_spline_coef(
+            ddc::discrete_space<NUBSplinesX>().full_domain());
     solve_matrix_system(phi_spline_coef, rho_spline_coef);
 
     //
     ddc::for_each(dom_x, [&](IndexX const ix) {
-        electrostatic_potential(ix) = m_spline_x_nu_evaluator(coordinate(ix), phi_spline_coef);
-        electric_field(ix) = -m_spline_x_nu_evaluator.deriv(coordinate(ix), phi_spline_coef);
+        electrostatic_potential(ix) = m_spline_x_nu_evaluator(ddc::coordinate(ix), phi_spline_coef);
+        electric_field(ix) = -m_spline_x_nu_evaluator.deriv(ddc::coordinate(ix), phi_spline_coef);
     });
 }
