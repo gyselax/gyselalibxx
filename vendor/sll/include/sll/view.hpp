@@ -102,6 +102,18 @@ using View1D = ViewND<1, ElementType>;
 template <class ElementType>
 using View2D = ViewND<2, ElementType>;
 
+template <class ElementType, std::size_t N>
+Span1D<ElementType> as_span(std::array<ElementType, N>& arr) noexcept
+{
+    return Span1D<ElementType>(arr.data(), N);
+}
+
+template <class ElementType, std::size_t N>
+Span1D<const ElementType> as_span(std::array<ElementType, N> const& arr) noexcept
+{
+    return Span1D<const ElementType>(arr.data(), N);
+}
+
 using DSpan1D = Span1D<double>;
 
 using DSpan2D = Span2D<double>;

@@ -57,7 +57,7 @@ public:
             ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        DSpan1D const vals(values.data(), values.size());
+        DSpan1D const vals = as_span(values);
 
         return eval(coord_eval, spline_coef, vals);
     }
@@ -69,7 +69,7 @@ public:
             ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        DSpan1D const vals(values.data(), values.size());
+        DSpan1D const vals = as_span(values);
 
         for (auto i : coords_eval.domain()) {
             spline_eval(i) = eval(coords_eval(i), spline_coef, vals);
@@ -81,7 +81,7 @@ public:
             ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        DSpan1D const vals(values.data(), values.size());
+        DSpan1D const vals = as_span(values);
 
         return eval_no_bc(coord_eval, spline_coef, vals, eval_deriv_type());
     }
@@ -93,7 +93,7 @@ public:
             ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType>> const spline_coef) const
     {
         std::array<double, bsplines_type::degree() + 1> values;
-        DSpan1D const vals(values.data(), values.size());
+        DSpan1D const vals = as_span(values);
 
         for (auto i : coords_eval.domain()) {
             spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, vals, eval_deriv_type());
