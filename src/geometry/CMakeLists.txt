@@ -12,6 +12,7 @@ target_include_directories("geometry_${GEOMETRY_VARIANT}"
 target_link_libraries("geometry_${GEOMETRY_VARIANT}" INTERFACE
     DDC::DDC
     sll::splines
+    vcx::fft
     vcx::speciesinfo
 )
 add_library("vcx::geometry_${GEOMETRY_VARIANT}" ALIAS "geometry_${GEOMETRY_VARIANT}")

@@ -9,9 +9,9 @@
 #include <ddc/ddc.hpp>
 
 #include <fftw3.h>
-#include <geometry.hpp>
 
 #include "fft.hpp"
+#include "fft_tag.hpp"
 
 template <class Tag>
 class FftwFourierTransform : public IFourierTransform<Tag>
