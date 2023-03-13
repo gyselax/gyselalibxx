@@ -58,8 +58,8 @@ public:
             return m_point;
         }
 
-        inline constexpr continuous_element_type coordinate([
-                [maybe_unused]] discrete_element_type icoord) const noexcept
+        inline constexpr continuous_element_type coordinate(
+                [[maybe_unused]] discrete_element_type icoord) const noexcept
         {
             assert(icoord == discrete_element_type(0));
             return m_point;
