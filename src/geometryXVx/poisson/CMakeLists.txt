@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 
-foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
+foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("poisson_${GEOMETRY_VARIANT}" STATIC
     chargedensitycalculator.cpp
@@ -29,14 +29,14 @@ add_library("vcx::poisson_${GEOMETRY_VARIANT}" ALIAS "poisson_${GEOMETRY_VARIANT
 
 endforeach()
 
-target_sources(poisson_periodic_rdimx
+target_sources(poisson_xperiod_vx
     PRIVATE
         fftpoissonsolver.cpp
         femperiodicpoissonsolver.cpp
 )
-target_link_libraries(poisson_periodic_rdimx PUBLIC vcx::fft)
+target_link_libraries(poisson_xperiod_vx PUBLIC vcx::fft)
 
-target_sources(poisson_nonperiodic_rdimx
+target_sources(poisson_xnonperiod_vx
     PRIVATE
         femnonperiodicpoissonsolver.cpp
 )

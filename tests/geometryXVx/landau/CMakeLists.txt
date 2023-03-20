@@ -12,10 +12,10 @@ add_test(NAME TestSimulationLandauFFT
         "fft")
 set_property(TEST TestSimulationLandauFFT PROPERTY TIMEOUT 200)
 
-add_test(NAME TestSimulationLandauFemUniform_periodic_rdimx
+add_test(NAME TestSimulationLandauFemUniform_xperiod_vx
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau.sh"
         "${PROJECT_SOURCE_DIR}"
-        "$<TARGET_FILE:landau_fem_uniform_periodic_rdimx>"
+        "$<TARGET_FILE:landau_fem_uniform_xperiod_vx>"
         "$<TARGET_FILE:Python3::Interpreter>"
         "fem")
-set_property(TEST TestSimulationLandauFemUniform_periodic_rdimx PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationLandauFemUniform_xperiod_vx PROPERTY TIMEOUT 200)

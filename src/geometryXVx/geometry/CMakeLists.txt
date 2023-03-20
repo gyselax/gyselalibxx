@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
+foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("geometry_${GEOMETRY_VARIANT}" INTERFACE)
 target_include_directories("geometry_${GEOMETRY_VARIANT}"
@@ -19,4 +19,4 @@ add_library("vcx::geometry_${GEOMETRY_VARIANT}" ALIAS "geometry_${GEOMETRY_VARIA
 
 endforeach()
 
-target_compile_definitions(geometry_periodic_rdimx INTERFACE PERIODIC_RDIMX)
+target_compile_definitions(geometry_xperiod_vx INTERFACE PERIODIC_RDIMX)
