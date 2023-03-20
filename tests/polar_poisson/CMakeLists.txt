@@ -14,7 +14,7 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
             paraconf::paraconf
             PDI::pdi
             sll::splines
-            vcx::poisson_nonperiodic_rdimx
+            vcx::poisson_xnonperiod_vx
             vcx::paraconfpp
             Eigen3::Eigen
     )

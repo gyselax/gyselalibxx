@@ -71,7 +71,7 @@ fi
 
 
 ${DOCKER_COMMAND} find \
-    src tests vendor/sll simulations/landau simulations/bump_on_tail \
+    src tests vendor/sll simulations \
     '(' -name '*.h' -o -name '*.hpp' -o -name '*.cpp' ')' \
     -exec clang-format ${FORMAT_PARAMS} '{}' '+' \
 && ${RUN_IF_OK}
