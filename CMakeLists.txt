@@ -116,14 +116,13 @@ add_subdirectory("vendor/sll/" "sll")
 ## Change the C++ flags to the voice specific ones
 set(CMAKE_CXX_FLAGS "${VOICEXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 
+set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx)
+
 ## Get the main code in `src/`
-set(GEOMETRY_VARIANTS_LIST periodic_rdimx nonperiodic_rdimx)
 add_subdirectory(src/)
 
 ## Build the simulations (applications mains) in `simulations/`
-add_subdirectory(simulations/landau)
-add_subdirectory(simulations/bump_on_tail)
-add_subdirectory(simulations/sheath)
+add_subdirectory(simulations/)
 
 ## if tests are enabled, build the tests in `tests/`
 if("${BUILD_TESTING}")

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 
-foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
+foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_executable(landau_fem_uniform_${GEOMETRY_VARIANT} landau_fem_uniform.cpp)
 target_compile_features(landau_fem_uniform_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
@@ -16,8 +16,9 @@ target_link_libraries(landau_fem_uniform_${GEOMETRY_VARIANT}
         vcx::paraconfpp
         vcx::poisson_${GEOMETRY_VARIANT}
         vcx::speciesinfo
-        vcx::time_${GEOMETRY_VARIANT}
+        vcx::time_integration_${GEOMETRY_VARIANT}
         vcx::boltzmann_${GEOMETRY_VARIANT}
+        vcx::advection_${GEOMETRY_VARIANT}
 )
 
 install(TARGETS landau_fem_uniform_${GEOMETRY_VARIANT})
@@ -34,13 +35,14 @@ target_link_libraries(landau_fft
         PDI::pdi
         sll::splines
         vcx::fft
-        vcx::initialization_periodic_rdimx
-        vcx::interpolation_periodic_rdimx
+        vcx::initialization_xperiod_vx
+        vcx::interpolation_xperiod_vx
         vcx::paraconfpp
-        vcx::poisson_periodic_rdimx
+        vcx::poisson_xperiod_vx
         vcx::speciesinfo
-        vcx::time_periodic_rdimx
-        vcx::boltzmann_periodic_rdimx
+        vcx::time_integration_xperiod_vx
+        vcx::boltzmann_xperiod_vx
+        vcx::advection_xperiod_vx
 )
 
 install(TARGETS landau_fft)

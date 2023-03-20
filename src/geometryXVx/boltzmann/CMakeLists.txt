@@ -1,11 +1,8 @@
 # SPDX-License-Identifier: MIT
 
-foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_VARIANTS_LIST)
+foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("boltzmann_${GEOMETRY_VARIANT}" STATIC
-    bsl_advection_x.cpp
-    bsl_advection_vx.cpp
-    nulladvectionvx.cpp
     splitvlasovsolver.cpp
     splitrighthandsidesolver.cpp
 )
@@ -27,6 +24,7 @@ target_link_libraries("boltzmann_${GEOMETRY_VARIANT}"
         vcx::speciesinfo
         vcx::geometry_${GEOMETRY_VARIANT}
         vcx::rhs_${GEOMETRY_VARIANT}
+        vcx::advection_${GEOMETRY_VARIANT}
 )
 
 add_library("vcx::boltzmann_${GEOMETRY_VARIANT}" ALIAS "boltzmann_${GEOMETRY_VARIANT}")
