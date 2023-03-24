@@ -1,0 +1,625 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{biblatex}
+\usepackage{csquotes}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig,graphics,graphicx,color,multicol}
+\usepackage{siunitx}
+\usepackage{changepage}
+\usepackage{amsmath}
+\usepackage{stmaryrd}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amscd}
+\usepackage{silence}
+\usepackage{cleveref}
+\addbibresource{library.bib}
+\usepackage[margin=1.2in]{geometry}
+
+\newcommand{\dd}{\textrm d}
+\newcommand{\ee}{\textrm e}
+\newcommand{\bbf}{{\bf b}}
+\newcommand{\ebf}{{\bf e}}
+\newcommand{\kbf}{{\bf k}}
+\newcommand{\qbf}{{\bf q}}
+\newcommand{\sbf}{{\bf s}}
+\newcommand{\vbf}{{\bf v}}
+\newcommand{\xbf}{{\bf x}}
+\newcommand{\Bbf}{{\bf B}}
+\newcommand{\Ebf}{{\bf E}}
+\newcommand{\Vbf}{{\bf V}}
+\newcommand{\nablabf}{{\pmb\nabla}}
+\newcommand{\Nwke}{{\mathcal{N}}}
+
+\newcommand{\HRule}[1]{\rule{0.5\linewidth}{#1}} 
+
+\begin{document}
+
+\begin{center}
+    \LARGE \textbf{1V two species collision operator} \\
+    \vspace{0.8cm} 
+\end{center}
+%\today
+%============================================================
+\section{Introduction}
+%============================================================
+This note describes the multi-species collision operator implemented for 1X1V kinetic plasma simulations. We restrict the analysis to \emph{linearized 1-dimensional} operators in the velocity space (so-called ``1-$v$''). This operator is composed of two terms: $(i)$ a single-species collision operator of the Fokker-Planck type which ensures, among others things, the regularization of the distribution function in the velocity space, plus $(ii)$ a two-species collision operator which retains the minimal ingredients -- in practice those due to the Maxwellian part of the distribution functions -- for momentum and energy exchange between species.
+
+%============================================================
+\section{Single-species collision operator}
+
+%============================================================
+
+We propose here a single-species collision operator directly inspired from the one discussed in reference \cite{DifPradalier2011}, valid for full-$f$ kinetic codes. It is expressed as
+
+%
+\begin{equation} \label{eq:CollOp_1}
+\mathcal{C}_{aa}(f_a) = \partial_{v} \left( 
+D_v\, \partial_{v}f_{a} - V_v\,  f_a\right)
+\;\;\; \textrm{with} \;\;\;
+V_v = D_v\, \partial_{v} \operatorname{log} f^M_{a} .
+\end{equation}
+%
+It exhibits the general form of a Fokker-Planck collision operator, made of a diffusive ($D_v$) and a convective ($V_v$) term in velocity space.
+The Maxwellian $f_a^{M}(x,v)$ is
+%
+\begin{equation} \label{eq:f_M}
+f_a^{M} = \frac{n_{M}}{(2\pi T_{M}/m_a)^{1/2}}\, \exp\left[ -\frac{m_a(v-u_{M})^2}{2T_{M}}\right],
+\end{equation}
+%
+so that $\partial_v(\log f_{M}) = -m_a(v-u_{M})/T_{M}$. Here, $n_{M}$, $u_{M}$ and $T_{M}$ are functions of space and time which remain to be defined. They are species-dependent, the subscript $a$ being omitted for the sake of compactness. As shown in next section, they are constrained by the conservation properties of the collision operator.
+
+%------------------------------------------------------------
+\subsection{Conservation properties -- implications for $u_M$ and $T_M$}\label{sub:cons_ppy}
+%------------------------------------------------------------
+Intra-species elastic collisions should conserve particles, momentum and energy. 
+They involve integrals over the velocity of the form $\int_{\mathbb{R}} v^k \mathcal{C}_{aa}(f_a) \, \,d v$ with $k\in\{0,1,2\}$ for particles, momentum and energy conservation respectively. The case $k=0$ is trivial: the structure of the collision operator (\ref{eq:CollOp_1}) indeed ensures that the number of particles is automatically conserved:
+%
+\begin{equation} \label{eq:conserv_n}
+\int_{\mathbb{R}} \mathcal{C}_{aa}(f_a) \,dv = 0.
+\end{equation}
+%
+Yet, the choice of $n_M$ is not arbitrary, since $f_M$ should be equal to the distribution function $f$ if the latter is a Maxwellian. This imposes $n_M$ to be equal to the actual density $n(x,t)$, so that
+%
+\begin{equation} \label{eq:def_nM}
+n_M = n_a(x,t) = \int dv \, f_a(x,v,t).\\
+\end{equation}
+%
+Remark however that in its form given by \cref{eq:CollOp_1} the density $n_M$ does not intervene, since we have $\partial_{v}\operatorname{log} f_a^{M} = -(v-u_M)/T_M$. Momentum and energy conservation correspond to the relations
+%
+\begin{eqnarray}
+&& \int_{\mathbb{R}} v\, \mathcal{C}_{aa}(f_a) \,d v = 0 \label{eq:conserv_v}, \\
+&& \int_{\mathbb{R}} \frac{1}{2}mv^2\, \mathcal{C}_{aa}(f_a) \,d v = 0 \label{eq:conserv_T}.
+\end{eqnarray}
+%
+Integrating by parts eqs.\,(\ref{eq:conserv_v},\,\ref{eq:conserv_T}) whenever possible
+leads to
+%
+\begin{eqnarray}
+&&  \int_{\mathbb{R}} d v\, f_a\left[ 
+D_v^\prime - \frac{m}{T_M} (v-u_M)D_v \right] = 0 \label{eq:conserv_v2}, \\
+&& \int_{\mathbb{R}} d v\, f_a\left[ 
+(vD_v)^\prime - \frac{m}{T_M} v(v-u_M)D_v \right] = 0 \label{eq:conserv_T2},
+\end{eqnarray}
+%
+with the definition $D_v^\prime = \partial_v (D_v)$ and $(vD_v)^\prime = \partial_v (vD_v) = D_v + vD_v^\prime$. 
+One then introduces for the sake of clarity the brackets notation
+%
+\begin{equation*}
+\langle ... \rangle = \int_{\mathbb{R}} ... \; f_a \, dv.
+\end{equation*}
+%
+With this notation, eqs.\,\eqref{eq:conserv_v2}-\eqref{eq:conserv_T2} can be easily recast as a linear system of two equations with the two unknowns being $u_M$ and $T_M$
+%
+\begin{eqnarray}
+&&  \langle D_v \rangle\, u_M + \frac{\langle D_v^\prime \rangle}{m}\, T_M 
+= \langle v D_v \rangle  \label{eq:conserv_v3}, \\
+&&  \langle v D_v \rangle\, u_M + 
+\frac{\langle (v D_v)^\prime \rangle}{m}\, T_M 
+= \langle v^2 D_v \rangle.\label{eq:conserv_T3}
+\end{eqnarray}
+Solving it provides the expressions of $u_M$ and $T_M$ that ensure that the collision operator (\ref{eq:CollOp_1}) fulfills both momentum and energy conservations
+%
+\begin{eqnarray}
+u_M(x,t) &=& 
+\frac{-\langle vD_v \rangle\langle (v D_v)^\prime \rangle+\langle v^2D_v \rangle\langle D_v^\prime \rangle}
+{\langle vD_v \rangle\langle D_v^\prime \rangle-\langle D_v \rangle\langle (v D_v)^\prime \rangle},  \label{eq:def_VM} \\
+\frac{T_M(x,t)}{m} &=&
+\frac{\langle vD_v \rangle^2 - \langle D_v \rangle\langle v^2D_v \rangle}
+{\langle vD_v \rangle\langle D_v^\prime \rangle-\langle D_v \rangle\langle (v D_v)^\prime \rangle}. \label{eq:def_TM}
+\end{eqnarray} 
+%
+These two expression are in turn consistent with eqs.\ (4-6) in \cite{DifPradalier2011}.
+
+%\bigskip
+\begin{footnotesize}
+\begin{quotation}
+	\textbf{Remark 1:} In the specific case where $f$ is a Maxwellian of mean velocity $V$ and temperature $T$, one finds that
+  %
+	\begin{eqnarray*}
+	\langle D_v^\prime \rangle &=& \frac{m}{T}\left( 
+	  \langle vD_v \rangle - \langle D_v \rangle V\right) \\
+	\langle (vD_v)^\prime \rangle &=& \frac{m}{T}\left( 
+    	\langle v^2D_v \rangle - \langle vD_v \rangle V_0\right),
+	\end{eqnarray*}
+  %
+	so that after some straightforward calculations:
+  %
+	\begin{eqnarray*}
+		u_M = V \;\;\;\;\; \textrm{and} \;\;\;\;\; T_M = T.
+	\end{eqnarray*}
+  %
+	In this case, it appears that the coefficients $u_M$ and $T_M$ to be considered in the collision operator are nothing else but the mean velocity and the temperature of the distribution function itself, as they should.
+\end{quotation}
+\end{footnotesize}
+
+\begin{footnotesize}
+\begin{quotation}
+	\textbf{Remark 2:} In the specific case where $f$ is even in velocity $v$ (so that $\partial_v f$ is odd in $v$), the expressions eqs.\,\eqref{eq:def_VM}-\eqref{eq:def_TM} become much simpler. Indeed, since $D_v$ depends on the modulus of the velocity $|v|$ only (cf. Appendix \ref{appendix:Dv}), one gets:
+  %
+	\begin{equation*}
+		\langle D_v^\prime \rangle = 0
+		\;\;\;\;\; \textrm{and} \;\;\;\;\; \langle vD_v \rangle = 0
+	\end{equation*}
+  %
+	so that:
+  %
+	\begin{eqnarray*}
+		u_M &=& 0 \\
+		T_M &=&
+		\frac{m \langle v^2D_v \rangle}{\langle (v D_v)^\prime \rangle}
+	\end{eqnarray*}
+	%
+\end{quotation}
+\end{footnotesize}
+
+
+%------------------------------------------------------------
+\subsection{On the positivity of $T_M$}
+%------------------------------------------------------------
+
+An important issue is whether the positivity of the temperature $T_M$ defined by \cref{eq:def_TM} is ensured. 
+The condition reads as follows:
+%
+\begin{equation} \label{eq:TM_positivity1}
+T_M \geq 0 \;\; \Leftrightarrow \;\;
+\left[\langle vD_v \rangle^2 - \langle D_v \rangle\langle v^2D_v \rangle \right]
+\left[\langle vD_v \rangle\langle D_v^\prime \rangle-\langle D_v \rangle\langle (v D_v)^\prime \rangle\right] \geq0.
+\end{equation}
+%
+There, one can use the inequality of Cauchy-Schwartz (C-S hereafter) -- stating that $\langle F|G \rangle^2 \leq \langle F|F \rangle \langle G|G \rangle$ for any scalar product $\langle .|. \rangle$ -- to show that the first term of the product is negative. The bracket notation introduced in \cref{sub:cons_ppy} can indeed be considered as a scalar product for any physical distribution function $f_a$. Then, taking $F=v\sqrt{D_v}$ and $G=\sqrt{D_v}$, one then finds using C-S: $\langle vD_v \rangle^2 \leq \langle D_v \rangle\langle v^2D_v \rangle$. Hence, \cref{eq:TM_positivity1} is equivalent to
+%
+\begin{equation} \label{eq:TM_positivity2}
+T_M \geq 0 \;\; \Leftrightarrow \;\;
+\langle D_v \rangle\langle (v D_v)^\prime \rangle
+\geq
+\langle vD_v \rangle\langle D_v^\prime \rangle.
+\end{equation}
+%
+Notice that this inequality is trivially fulfilled if $D_v$ is constant (in this case, the inequality reduces to $\langle D_v \rangle^2 \geq 0$).
+Using the expression of $D_v$ given in Appendix \ref{appendix:Dv}, inequality \eqref{eq:TM_positivity2} also reads
+%
+\begin{equation} \label{eq:TM_positivity3}
+T_M \geq 0 \;\; \Leftrightarrow \;\;
+\left\langle \frac{2G}{x} \right\rangle \left\langle \frac{\Phi-G}{x} \right\rangle 
+\geq
+\left\langle \Phi-G \right\rangle \left\langle \frac{3G-\Phi}{x^2} \right\rangle ,
+\end{equation}
+%
+where $x = |v|/\sqrt{2}v_{Ta}$ and the functions $\Phi(x)$ and $G(x)$ are given by eqs.\,\eqref{eq:def_Phi}-\eqref{eq:def_G}. Using again C-S\footnote{One notices that $\langle G\rangle \langle G/x^2\rangle \geq \langle G/x\rangle^2$, and similarly $\langle \Phi\rangle \langle \Phi/x^2\rangle \geq \langle \Phi/x\rangle^2$.}, one can show that \cref{eq:TM_positivity3} is satisfied if (sufficient -- not necessary -- condition):
+%
+\begin{equation} \label{eq:TM_positivity4}
+\left(\left\langle \frac{G}{x} \right\rangle + \left\langle \frac{\Phi}{x} \right\rangle \right)^2
+\geq
+3\left\langle \frac{G}{x^2} \right\rangle \langle \Phi \rangle
++ \langle G \rangle \left\langle \frac{\Phi}{x^2} \right\rangle
+\;\; \Rightarrow \;\; T_M \geq 0 .
+\end{equation}
+%
+One can further notice that the right hand side of \cref{eq:TM_positivity4} is positive since it is larger than $4\langle \sqrt{\Phi G}/x \rangle^2$ (using again C-S). At the present moment the positivity of $T_M$ has not been demonstrated.
+
+%============================================================
+\subsection{Normalization}
+%============================================================
+A reference density $n_0$ and temperature $T_0$ is introduced to normalize distances and time to the Debye length $\lambda_{D0} = (\varepsilon_0T_0/e^2n_0)^{1/2}$ and electron plasma frequency $\omega_{p0e} = v_{T0e} / \lambda_{D0}$, with $v_{T0e} = (T_0/m_e)^{1/2}$, the electron thermal velocity computed at temperature $T_0$. The normalization of the phase space velocity $v$ is species-dependent, the normalized velocity $v_a$ being defined as $v_a = v/v_{T0a}$, with $v_{T0a} = (T_0/m_a)^{1/2}$. The distribution functions are normalized to $n_0/v_{T0a}$ and the electric potential to $T_0/e$.
+In the following $A_a=m_e/m_a$ is the electron mass divided by the mass of the species $a$, $Z_a=e_a/e$ the normalized charge state ($Z_e=-1$) For the sake of clarity, we denote dimensionless quantities with a hat, so that e.g.\ dimensionless collision frequencies are defined by $\hat\nu_{ab} = \nu_{ab} / \omega_{p0e}$.
+
+
+\paragraph{Collision frequencies}
+\label{par:collision_frequencies}
+
+The two-species collision frequency is defined in dimensional units as
+%
+\begin{equation}  \label{eq:def_nuab}
+\nu_{ab} = \frac{4\sqrt{2\pi}}{3} \frac{n_b}{m_a}\frac{m_a+m_b}{m_am_b} 
+\frac{e_a^2e_b^2\, \ln\Lambda}{(4\pi\epsilon_0)^2} 
+\frac{1}{(v_{Ta}^2+v_{Tb}^2)^{3/2}}.
+\end{equation} 
+%
+Here, $\ln\Lambda \approx20$ stands for the Coulomb logarithm and $v_{Ts}(x,t) = (T_a(x,t)/m_a)^{1/2}$ is the thermal velocity of the considered species $s$ at position $x$. From this expression we define a single-species collision frequency $\nu_{aa}$ as
+%
+\begin{equation}\label{eq:nu_aa}
+  \nu_{aa} = \dfrac{e^{4}\ln \Lambda}{12 \pi^{3/2} \varepsilon_0^{2}} \dfrac{n_a}{\sqrt{m_a}  }\left[ T_a(x,t) \right]^{-3/2}.
+\end{equation}
+%
+Using the latter expression we define a reference collision frequency $\nu_0$ for a species characterized by a mass $m_0$, density $n_0$ and temperature $T_0$. We then express all collision frequencies in the present note as functions of the reference collisionality $\nu^*_0$ defined as 
+%
+\begin{equation}
+	\nu^*_0 
+	= \frac{\nu_{0}\, L_x}{v_{T0}} 
+	= \frac{e^4\, \ln\Lambda}{12\pi^{3/2}\epsilon_0^2} 
+	\frac{n_0}{T_0^2}\, \hat L_x.
+\end{equation}
+%
+The collisionality $\nu_0^*$ is an input parameter. This parameter represents the number of collision a particle will experience on average when travelling on a distance $\hat{L}_x$ in the simulation box. Remembering that $T_0$ stands actually for an energy (hence in joule), it can be easily checked that $\nu^*_0$ is indeed a dimensionless variable as it should be. In addition, $\nu^*_0$ can be given a spatial shape so as to increase/decrease the collisionality at specific locations (e.g. in the wall). In this framework, single species dimensionless collision frequencies read
+%
+\begin{eqnarray}
+	\hat\nu_{aa}(x,t) 
+	&=& \nu^*_0\; \frac{Z_a^4 \sqrt{A_a}}{\hat L_x}\; \frac{\hat n_a(x,t)}{[\hat T_a(x,t)]^{3/2}}.
+\end{eqnarray}
+%
+In these expressions, the spatial dependency is governed by the actual profiles of density and temperature of the species, and by the possible profile given to $\nu^*_0$. Let us additionally remark that 
+%
+\begin{align}
+  \hat{\nu}_{aa} & = \hat{\nu}_{b b} \, \dfrac{\hat{n}_a}{\hat{n}_b} \sqrt{\dfrac{m_b}{m_a}} \left( \dfrac{Z_a}{Z_b} \right) ^{4} \left( \dfrac{\hat{T}_b}{\hat{T}_a} \right) ^{3/2}.
+\end{align}
+%
+\paragraph{Diffusion coefficient}
+\label{par:diffusion_coefficient}
+The dimensionless expression of the diffusion coefficient in velocity space $D_0$ is---see \cref{eq:def_Dv}
+%
+\begin{equation}
+	\hat D_{0a}(x,t) = \frac{D_0}{v_{T0a}^2 \omega_{p0e}}
+	= \frac{3\sqrt{2\pi}}{4}\, \hat T_a(x,t) \, \hat \nu_{aa}(x,t).
+\end{equation}
+%
+The $y$ variable is already a species-dependent dimensionless quantity: $y_a = \left| \hat{v}_a \right| /\sqrt{2 \hat{T}_a} $ and therefore the expression of $\hat{D}_{va}$ reads
+%
+\begin{equation}\label{eq:Dva}
+  \hat{D}_{va} = \hat{D}_{0a}\, \dfrac{\Phi - G}{y_a}.
+\end{equation}
+%
+The normalization of the Fokker-Planck convective term yields
+%
+\begin{equation}\label{eq:nr_vv}
+  \hat{V}_{va} = - \hat{D}_{va} \left\{ \dfrac{1}{\hat{T}_{Ma}} \left( \hat{v}_a - \hat{V}_{Ma} \right)  \right\} ,
+\end{equation}
+%
+with $\hat{T}_{Ma}$ and $\hat{V}_{Ma}$ being the species-dependent normalized temperature and fluid velocity defined in \cref{eq:def_VM,eq:def_TM}. 
+
+\paragraph{Collision operator}
+\label{par:collision_operator}
+The intra-species collision operator is normalized as 
+%
+\begin{equation}\label{eq:nm_caa}
+  \hat{\mathcal{C}}_{aa} = \mathcal{C}_{aa} v_{T_{0a}}/(n_0 \omega_{p_0e})
+\end{equation}
+%
+which is coherent with the normalization of $D_v$ and $V_v$ and leads to
+%
+\begin{equation}\label{eq:c_aa_nr}
+  \hat{\mathcal{C}}_{aa} = \partial_{\hat{v}_a} \left( \hat{D}_{va}\,  \partial_{\hat{v}_a}\hat{f}_a - \hat{V}_{va}\, \hat{f}_a \right) .
+\end{equation}
+%
+
+
+\subsection{Numerical scheme}
+\label{sub:numerical_scheme}
+The collision operator is implemented using a Crank-Nicolson semi implicit scheme, adapted for non-uniform grid points in the $v$ direction. The velocity array is discretized using $N +1$ points of the form  
+%
+\begin{equation}  
+\sum\limits_{k=0}^{i} \Delta_k, \,\, \text{with} \, \, i \, \in \, \llbracket 0, N \rrbracket. 
+\end{equation}
+%
+In all the following we use $D$ and $V$ to denote coefficient $D_v$ and $V_v$ respectively. Every variable is considered to be normalized, but we do not use explicitly the hat for the sake of compactness. We do not mention the considered species either. We use the notation $g_i$ to represent the value of a function $g$ at grid point $v_i$. The distance between two consecutive points of the grid is defined as $\Delta_i = v_{i+1}-v_i$. The derivative $g_i'$of function $g$ at point $i$ can be approximated with second order accuracy using the finite-difference formula
+%
+\begin{equation}\label{eq:diff_fmla}
+  g_i' \approx \dfrac{1}{\Delta_i( 1 + \delta_i ) }\left( g_{i+1} + ( \delta_i^2 -1)g_i  - \delta_i^2 g_{i-1}\right).
+\end{equation}
+%
+Were we have $\delta_i = \Delta_i / \Delta_{i-1}$. Two additional points $i+\tfrac{1}{2}$ and $i-\tfrac{1}{2}$ are added around point $i$ to compute the value of the diffusive term of \cref{eq:c_aa_nr}
+%
+\begin{equation}\label{eq:diff_tem}
+  \partial_{v} (D \partial_{v}f )|_i \approx \dfrac{2}{\Delta_i(1+\delta_i)}\left( D_{i+1/2}  \left( \partial_{v}f \right)|_{i+1/2}  + ( \delta_i^2-1)D_i \left( \partial_{v} f \right) |_i  - D_{i-1/2}  \left( \partial_{v}f \right)|_{i-1/2}\right), 
+\end{equation}
+%
+which is then expanded using the classical order-two derivative formula
+%
+\begin{equation}
+  \partial_{v}f|_{i+1/2} \approx \dfrac{f_{i+1} - f_{i}}{\Delta_i}, \quad  \partial_{v}f|_{i-1/2} \approx \dfrac{f_{i} - f_{i-1}}{\Delta_i},
+\end{equation}
+%
+and
+%
+\begin{equation}
+ \partial_{v}f|_i \approx \dfrac{1}{\Delta_i(1+\delta_i)} \left( f_{i+1} + (\delta_i^2-1)f_i - \delta_i^2f_{i-1} \right).
+\end{equation}
+%
+Similarly the convective term can be approximated as
+%
+\begin{equation}\label{eq:conv_tem}
+  \partial_{v}(Vf) |_i \approx \dfrac{1}{\Delta_i(1+\delta_i)} \left( V_{i+1}f_{i+1} + (\delta_i^2 -1) V_i f_i - V_{i-1} f_{i-1} \delta_i^2\right) .
+\end{equation}
+%
+The Crank-Nicolson scheme can be written at a time $n\Delta t$ and position $i$ as
+%
+\begin{equation}\label{eq:ck_nonunif}
+  f_i^{n+1} - \dfrac{\Delta t}{2} \mathcal{C}(f_i^{n+1}) = f_i^{n} + \dfrac{\Delta t}{2} \mathcal{C}(f^{n}).
+\end{equation}
+%
+Rearranging the terms of \cref{eq:diff_tem,eq:conv_tem} and using \cref{eq:ck_nonunif} we find  the evolution equation
+%
+\begin{equation}\label{eq:ck_equation_nequi}
+  f_{i-1}^{n+1} A_i + f_i^{n+1} B_i + f_{i+1}^{n+1} C_i = f_{i-1}^{n}(-A_i) + f_i^{n} (2 - B_i) + f_{i+1}^{n}(-C_i),
+\end{equation}
+%
+valid for $i \, \in \, \llbracket 1, N-1 \rrbracket $. We made the implicit assumption that $D^{n+1} = D^{n}$ and $V^{n+1} = V^{n}$ in order to get a linear system of equations. The $A$,  $B$ and $C$ coefficients are expressed as 
+%
+\begin{eqnarray}
+  A_i &=& - \alpha_i \left( \delta_i^3 D^{n}_{i-1/2} - \delta_i^2 (\delta_i-1) D^{n}_i\right) - \beta_i \delta_i^2V^{n}_{i-1} , \\
+  B_i &=& 1  + \alpha_i \left(  D^{n}_{i+1/2}  + \delta_i^3 D^{n}_{i-1/2} - (\delta_i-1)(\delta_i^2-1) D^{n}_i \right) + \beta_i (\delta_i^2 -1) V^{n}_i, \\
+  C_i &=& -\alpha_i \left( D^{n}_{i+1/2} + (\delta_i - 1)D^{n}_i \right) + \beta_i V^{n}_{i+1},
+\end{eqnarray}
+%
+$\alpha_i$ and $\beta_i$ being defined as 
+%
+\begin{equation}
+  \alpha_i = \dfrac{\Delta t}{\Delta i ^2 (1+\delta_i)}, \quad \beta_i = \dfrac{\Delta t}{2 \Delta_i (1 + \delta_i)}.
+\end{equation}
+%
+Then, two virtual points at $i=-1$ and $i=N+1$ are introduced. By choosing a relevant value for $f_i$ at both of these points we can solve \cref{eq:ck_equation_nequi} for $i \, \in \,  \llbracket 0, N \rrbracket $. A simple Dirichlet boundary condition is used on $f_{-1}$ and $f_{N+1}$ such that
+%
+\begin{equation}\label{eq:dirichlet_bc}
+  f_{-1} = f_{N+1} = f_{\text{thresh.}}, \,\, \text{with} \,\, f_{\text{thresh.}} = 10^{-20} \,\, \text{typically}.
+\end{equation}
+%
+This choice has proven to be stabler then Neumann or zero-curvature boundary conditions. We finally obtain for the $i=0$ and $i=N$ cases in \cref{eq:ck_equation_nequi}  the relations
+%
+\begin{eqnarray}
+  f_0^{n+1} B_0 + f_1^{n+1} C_0  &=& f_0^{n} (2-B_0) - f_1^{n}C_0  - 2A_{0}f_{\text{thresh.}} \label{eq:bc},\\
+  f_{N - 1}^{n+1} A_{N}  + f_{N}^{n+1}B_{N} &=& - f_{N-1}^{n} A_{N} + f_{N}^{n}(2 - B_{N}) - 2C_{N} f_{\text{tresh.}}.
+\end{eqnarray}
+The system (\ref{eq:ck_equation_nequi}) together with the above boundary conditions is equivalent to the tridiagonal system
+%
+\begin{align}
+  \begin{aligned}
+    \renewcommand{\arraystretch}{1.2}
+    \setlength\arraycolsep{5pt}
+    \begin{pmatrix}
+      B_0 & C_0  \\ 
+      A_1 & B_1 & \ddots   \\
+         & \ddots  & \ddots &   \\
+         &    &   & B_{N-1} & C_{N-1} \\
+         &    &   & A_{N}   & B_{N}
+    \end{pmatrix}
+  \end{aligned}
+  \begin{aligned}
+    \left(
+    \begin{array}{c}
+      f^{n+1}_{0} \\
+      \vdots \\
+      \vdots \\
+      \vdots \\
+      f^{n+1}_{N}
+    \end{array}
+     \right)  
+  \end{aligned} 
+  = R_n,
+  \end{align}
+%
+with the right hand side vector
+%
+\begin{align}
+  R_n = 
+\begin{aligned}
+    \renewcommand{\arraystretch}{1.2}
+    \setlength\arraycolsep{5pt}
+    \begin{pmatrix}
+      2-B_0 & - C_0   \\ 
+      -A_1  & 2-B_1 & \ddots \\
+      & \ddots  & \ddots \\
+      &    &      & 2-B_{N-1} & -C_{N-1} \\
+      &    &      & -A_{N}    & 2-B_{N}
+    \end{pmatrix}
+  \end{aligned}
+ \begin{aligned}
+    \left(
+    \begin{array}{c}
+      f^{n}_{0} \\
+      \vdots \\
+      \vdots \\
+      \vdots \\
+      f^{n}_{N}
+    \end{array}
+     \right)   
+  \end{aligned} 
+ \begin{aligned}
+    \renewcommand{\arraystretch}{1.2}
+     -f_{\text{thresh.}} \left(
+    \begin{array}{c}
+      2A_0\\
+      0 \\
+      \vdots \\
+      0 \\
+      2C_N
+    \end{array}
+     \right).    
+  \end{aligned} 
+\end{align}
+%
+The system can then be solved using a matrix inversion routine.
+
+%============================================================
+\section{Two-species collision operator}\label{sec:two_species}
+%============================================================
+Inter-species collision operators can reveal much more complicated in that they have to allow for momentum and energy transfer between species while keeping conserved total quantities. Denoting $a$ and $b$ the two species, this means means that the two-species collision operator $\mathcal{C}_{ab}(f_a)$ should satisfy the relations
+%
+\begin{eqnarray}
+\mathcal{R}_{ab} = \int \,d v\, m_av\, \mathcal{C}_{ab}(f_a) &=& - \int \,d v\, m_bv\, \mathcal{C}_{ba}(f_b) = -\mathcal{R}_{ba} \label{eq:conserv_R}, \\
+\mathcal{E}_{ab} = \int \,d v\,  \frac{1}{2}m_av^2\, \mathcal{C}_{ab}(f_a) &=& - \int \,d v\, \frac{1}{2}m_bv^2\, \mathcal{C}_{ba}(f_b) = -\mathcal{E}_{ba}  \label{eq:conserv_E}.
+\end{eqnarray}
+%
+The first equation -- stating that the collisional drag force $\mathcal{R}_{ab}$ exerted from particle $b$ to particle $a$ should be the opposite of that of $b$ on $a$ -- is also known as the action-reaction principle. The energy exchange $\mathcal{E}_{ab}$ can be recast as the sum of the thermal energy exchange $\mathcal{Q}_{ab}$ (which includes the convective energy transfer) plus the work of the drag force: $\mathcal{E}_{ab} = \mathcal{Q}_{ab} + V_a \mathcal{R}_{ab}$, with
+%
+\begin{equation}  \label{eq:def_Q}
+\mathcal{Q}_{ab} = \int \,d v\,  \frac{1}{2}m_a(v-V_a)^2\, \mathcal{C}_{ab}(f_a).
+\end{equation} 
+%
+Energy conservation \eqref{eq:conserv_E} then imposes the following relationship: $\mathcal{Q}_{ab} = -\mathcal{Q}_{ba} + (V_a-V_b)\mathcal{R}_{ba}$. It reduces to $\mathcal{Q}_{ab} = -\mathcal{Q}_{ba}$ if all species have the same mean flow. 
+
+\vspace{5mm}
+
+ As a first step, we propose to only consider the zero-order component of this operator, which consists in accounting for momentum and energy transfer between the Maxwellian parts of the two distribution functions, called $F_{Ma}$ and $F_{Mb}$ hereafter. Denoting $s=\{a,b\}$ one of the species, we define
+ %
+\begin{eqnarray} 
+&& F_{Ms} = \frac{n_a}{\sqrt{2\pi T_a/m_a}} \exp\left[ -\frac{m_a(v-V_a)^2}{2T_a}\right], \\
+&& \textrm{with} \nonumber \\
+&& n_a(x,t) = \int \,d v \, f_a(x,v,t), \nonumber \\
+&& V_a(x,t) = \int \,d v \, vf_a(x,v,t) / n_a, \nonumber \\
+&& T_a(x,t) = \int \,d v \, m_a(v-V_a)^2f_a(x,v,t) / n_a. \nonumber 
+\end{eqnarray}
+%
+In this case \cite{Hinton1983}, the drag force reduces to the friction force
+%
+\begin{equation}  \label{eq:def_RM}
+\mathcal{R}_{ab}^M = -n_am_a\nu_{ab}(V_a-V_b),
+\end{equation} 
+%
+and the thermal energy exchange reads
+%
+\begin{equation}  \label{eq:def_QM}
+\mathcal{Q}_{ab}^M = -3 n_a\frac{m_a}{m_a+m_b}\nu_{ab}(T_a-T_b) - V_a\, \mathcal{R}_{ab}^M,
+\end{equation} 
+%
+where the two-species collision frequency $\nu_{ab}$ is defined in \cref{eq:def_nuab}. In the spirit of the expression retained in reference \cite{Esteve2015} (eq.\ 9), the general form we propose for the 0-order two-species collision operator is
+%
+\begin{equation*}
+\mathcal{C}_{ab}^{(0)} = \alpha \left[ \frac{m_a}{2T_a}(v-V_a)^2 - \frac{1}{2}\right] F_{Ma} 
++ \beta (v-V_a) F_{Ma}.
+\end{equation*} 
+%
+The $\alpha$ and $\beta$ coefficients have to be chosen so as to fulfill momentum and energy conservation, leading to
+%
+\begin{equation*}
+\alpha = \frac{2\mathcal{Q}_{ab}^M}{n_aT_a}
+\;\;\;\;\; \textrm{and} \;\;\;\;\;
+\beta = \frac{\mathcal{R}_{ab}^M}{n_aT_a}.
+\end{equation*} 
+%
+In the end, the two-species collision operator reads
+%
+\begin{equation}  \label{eq:CollOp_ab}
+\mathcal{C}_{ab}^{(0)} = 
+\frac{2\mathcal{Q}_{ab}^M}{n_aT_a} \left[ \frac{m_a}{2T_a}(v-V_a)^2 - \frac{1}{2}\right] F_{Ma} 
++ \frac{\mathcal{R}_{ab}^M}{n_aT_a} (v-V_a) F_{Ma}.
+\end{equation} 
+%
+With the above choice for $\alpha$ and $\beta$ it readily follows that $\int \mathcal{C}_{ab}^{(0)} \,d v=0$, $\int m_a v\; \mathcal{C}_{ab}^{(0)} \,d v = \mathcal{R}_{ab}^M$ and $\int \frac{1}{2} m_a v^2\; \mathcal{C}_{ab}^{(0)} \,d v = \mathcal{Q}_{ab}^M + V_a\mathcal{R}_{ab}^M$.
+
+
+\subsection{Normalization and numerical scheme}
+The two species normalized collision frequency can be written as
+%
+\begin{eqnarray}
+	\hat\nu_{ab}(x,t) 
+    &=& \nu^*_0\; \sqrt{2} \frac{Z_a^2Z_b^2 \sqrt{A_a}}{\hat L_x} \left(1+\frac{m_a}{m_b}\right)\; 
+        \frac{\hat n_b(x,t)}{[\hat T_a(x,t)]^{3/2}} 
+        \left(1+\frac{m_a\hat T_b(x,t)}{m_b \hat T_a(x,t)}\right)^{-3/2}, \nonumber\\
+    &=&  \hat\nu_{aa} \sqrt{2}\left(\frac{Z_b}{Z_a}\right)^2
+        \left(1+\frac{m_a}{m_b}\right)\; 
+        \frac{\hat n_b(x,t)}{\hat n_a(x,t)}\;
+        \left(1+\frac{m_a\hat T_b(x,t)}{m_b \hat T_a(x,t)}\right)^{-3/2}.
+\end{eqnarray}
+%
+The following relation holds:
+%
+\begin{align}
+  \hat{\nu}_{ab} & = \hat{\nu}_{ba} \, \dfrac{\hat{n}_b}{\hat{n}_a}   \dfrac{m_b}{m_a}. \\
+\end{align}
+%
+Similarly to the normalization procedure of the single-species collision operator, the normalized inter-species collision term $\hat{\mathcal{C}}_{ab} = \mathcal{C}_{ab} v_{T_0a} / (n_0 \omega_{p0e})$ is 
+%
+\begin{equation}\label{eq:c_ab_nr}
+  \hat{\mathcal{C}}_{ab} = \dfrac{2 \hat{\mathcal{Q}}_{ab}^{M}}{\hat{n}_a \hat{T}_a} \left\{ \dfrac{1}{2 \hat{T}_a} \left( \hat{v}_a - \hat{V}_a \right) ^2 - \dfrac{1}{2}  \right\} \hat{F}_{Ma} + \dfrac{\hat{\mathcal{R}}_{ab}^{M}}{\hat{n}_a \hat{T}_a} \left( \hat{v}_a - \hat{V}_{a} \right) \hat{F}_{Ma}.
+\end{equation}
+%
+Remember here that all the quantities with a hat on the above equation are space dependent quantities (except the normalized velocity $\hat{v}_a$ of course). The normalized Maxwellian distribution function is
+%
+\begin{equation}\label{eq:nmz_max}
+  \hat{F}_{Ma}(\hat{v}_a, \hat{x}, \hat{t}) = \dfrac{\hat{n}_a}{\sqrt{  2\pi \hat{T}_a(x,t) }} \operatorname{exp} \left\{- \dfrac{1}{2\hat{ T_a(x,t)}}(\hat{v}_a - \hat{V}_{a}(x,t))^2 \right\}.
+\end{equation}
+%
+The normalized fluid drag force $\hat{\mathcal{R}_{ab}^{M}}$ and thermal energy exchange $\hat{\mathcal{Q}}_{ab}^{M}$ are written as 
+%
+  \begin{align}
+ & \begin{aligned}
+    \hat{\mathcal{R}}_{ab}^{M} = \dfrac{\mathcal{R}_{ab}^{M} v_{T 0 a}}{n_0 T_0 \omega_{p 0e}} = - \hat{n}_a \hat{\nu}_{ab} \left( \hat{V}_a - \sqrt{\dfrac{m_a}{m_b}} \hat{V}_b  \right),
+\end{aligned}\\
+ & \begin{aligned}
+   \hat{\mathcal{Q}}_{ab}^{M} = \dfrac{\mathcal{Q}_{ab}^{M}}{n_0 T_0 \omega_{p 0e}} = - 3 \hat{n}_a \dfrac{m_a}{m_a + m_b} \hat{\nu}_{ab} \left( \hat{T}_a - \hat{T}_b \right) - \hat{V}_a \hat{\mathcal{R}}_{ab}^{M}.
+ \end{aligned}
+  \end{align}
+  %
+  With $\hat{V}_a$ the normalized fluid velocity of species $a$. We additionally have the two relations 
+%
+  \begin{align}
+ & \begin{aligned}
+    \hat{\mathcal{R}}_{ba}^{M} = - \hat{\mathcal{R}}_{ab}^{M} \sqrt{\dfrac{m_a}{m_b}},
+\end{aligned}\\
+ & \begin{aligned}
+   \hat{\mathcal{Q}}_{ba}^{M} = - \hat{\mathcal{Q}}_{ab}^{M} - \left( \hat{V}_a - \sqrt{\dfrac{m_a}{m_b}} \hat{V}_b \right) \hat{\mathcal{R}}_{ab}^{M}.
+ \end{aligned}
+  \end{align}
+%
+The inter-species collision operator $\mathcal{C}_{ab}$ is solved using either a 2$^{th}$ order Runge-Kutta method RK2. Moreover, a boolean parameter allows one to operate the single species collision operator only, i.e.\ not to take into account the inter species momentum and energy exchange.
+
+\newpage
+\appendix
+%===================================================================
+\section{Expression of the diffusion coefficient $D_v$}
+\label{appendix:Dv}
+%===================================================================
+The diffusion coefficient in the velocity space of single-species collisions results from the linearization of the collision operator by considering small fluctuations around a Maxwellian distribution function. It scales like the collision frequency times the square of the thermal velocity and has the following expression:
+%
+\begin{equation} \label{eq:def_Dv}
+D_v = D_0 \; \frac{\Phi - G}{y}
+\;\;\;\;\; \textrm{with} \;\;\;\;\;
+D_0 = \frac{3\sqrt{2\pi}}{4}\, v_{Ta}^2\nu_{aa}
+\end{equation}
+%
+where $\nu_{aa}$ is given by expression \eqref{eq:def_nuab} taking $b=a$. Here, $y = |v|/\sqrt{2}v_{Ta}$ is the normalized modulus of the velocity. Note here that the $y$ variable depends on the spatial position, since $T_a$ is in general a function of the variable $x$: $v_{Ta} = v_{Ta}(x,t) = \sqrt{T_a(x,t)/m_a}$. $\Phi(y)$ and $G(y)$ are the error and the Chandrasekhar functions, respectively (in this appendix, the prime $^\prime$ denotes derivation with respect to$y$):
+%
+\begin{eqnarray}
+\label{eq:def_Phi}
+\Phi(y) &=& \frac{2}{\sqrt{\pi}} \int_0^{y} \ee^{-z^2}\,d z 
+\;\;\; \to \;\;\;
+\Phi^\prime = \frac{2}{\sqrt{\pi}}\; \ee^{-y^2} 
+\\
+\label{eq:def_G}
+G(y)    &=& \frac{\Phi - y\, \Phi^\prime}{2y^2}
+\;\;\; \to \;\;\;
+G^\prime = \Phi^\prime - \frac{2}{y}\; G 
+\end{eqnarray}
+%
+Since the $D_v$ functions exhibits a singularity when $y \to  0$, in the VOICE code we use the value of $\lim_{y \to 0} D_v   = 4/(3\sqrt{\pi } )$ when $y$ is smaller than a threshold value. One can further notice the useful following relations, noticing that $\partial_v(...) = (\epsilon_v/\sqrt{2}v_{Ta}) \, (...)^\prime$ with $\epsilon_v = \textrm{sign}(v)$:
+%
+\begin{eqnarray}
+\partial_v(D_v) &=& \frac{\epsilon_v D_0}{\sqrt{2}v_{Ta}} 
+\left( \frac{\Phi - G}{y}\right)^\prime 
+= \frac{\epsilon_v D_0}{\sqrt{2}v_{Ta}} \frac{3G-\Phi}{y^2}
+\\
+\partial_v(vD_v) &=& (yD_v)^\prime
+= D_0 (\Phi-G)^\prime = 2D_0 \; \frac{G}{y}
+\end{eqnarray}
+%
+
+\newpage
+\printbibliography
+
+\end{document}
