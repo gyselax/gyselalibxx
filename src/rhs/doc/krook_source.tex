@@ -1,0 +1,72 @@
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{biblatex}
+\usepackage{csquotes}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{changepage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\addbibresource{library.bib}
+\usepackage[margin=1.2in]{geometry}
+
+
+\newcommand{\HRule}[1]{\rule{0.5\linewidth}{#1}} 
+
+\begin{document}
+
+\begin{center}
+    \LARGE \textbf{Krook source} \\
+    \vspace{0.8cm} 
+\end{center}
+
+The present documents describes the \texttt{krook\_source\_adaptive} and \texttt{krook\_source\_constant} modules. Both of them are Bhatnagar-Gross-Krook operators \cite{BGK_Operator} that can act as sources or a sinks of particles, momentum and energy. They are written as
+%
+%
+\begin{equation}\label{eq:bgk_operator}
+\mathcal{S}(f_a) = - \nu_a \mathcal{M}\left( f_a - g \right).   
+\end{equation}
+%
+
+%
+The mask function $\mathcal{M}(x)$ defines the region where the operator is active. The target distribution function $g$ is a maxwellian characterized by a constant density $n_g$ and temperature $T_g$. Its normalized expression is 
+%
+\[ g(v) = \dfrac{n_g}{\sqrt{2\pi T_g} } \operatorname{exp} \left( - \dfrac{v^2}{2 T_g}  \right). \]
+%
+Depending on the values given to $n_g$ and $T_g$, the BGK operator will either inject or absorb particles, energy and momentum. The $\nu_a$ coefficient sets the magnitude of the operator. It can either be constant, or depend on the time and space variables.
+
+\paragraph{Constant Krook source:} When the $\nu_a$ coefficients are taken as constants for both species, the evolution equation $\partial_{t}f_a = \mathcal{S}(f_a)$ with $\mathcal{S}(f_a)$ given in Eq.~\ref{eq:bgk_operator} can be solved analytically as
+\[ f_a(t+dt) = g + (f_a(t) - g)\operatorname{exp} \left( - \nu \mathcal{M} dt \right). \]
+Note that in this particular case case the Krook operator does not ensure the local conservation charge. The distribution function of electrons and ions are relaxed towards the target function $g$ independently of each other, thus the operator can act as a source or sink of charge.
+
+\paragraph{Adaptive Krook operator:} The other available option is to choose a constant value of $\nu_a$ for ions, so that $\nu_\mathrm{i}$ is a constant, and to adapt $\nu_\mathrm{e}$ at each timestep and spatial position following
+%
+\begin{equation}\label{eq:adaptive}
+\nu_{\mathrm{e}} = \nu_{\mathrm{i}}\, \dfrac{n_\mathrm{i} - n_g}{ n_\mathrm{e} - n_g}. 
+\end{equation}
+%
+Note here that the $n_a$ quantity is the density of species $a$ defined as $n_a (x,t) = \int_{}^{} dv f_a $, and thus depends on space and time. In this case Eq.~\ref{eq:bgk_operator} is solved with a numerical scheme (RK2 for instance). When using these adaptive coefficients, the operator absorb or inject the same amount of ions and electrons, thus the charge is conserved locally. This property can be seen directly from integrating Eq.~(\ref{eq:bgk_operator}) against the velocity variable, to find the rate of injection of particles of the operator (or particle source term), namely
+%
+\begin{equation}
+\mathcal{S}_n(f_a) = - \nu_a \mathcal{M}\left( n_a - n_g \right).   
+\end{equation}
+%
+Then multiplying this equation by the normalized charge of the considered species $Z_a = q_a /e$, and by summing the result for ions and electrons we obtain the rate of injection of charges in the plasma
+%
+\begin{equation}
+  Z_\mathrm{i}\mathcal{S}_n(f_\mathrm{i})  + Z_\mathrm{e}\mathcal{S}_n(f_\mathrm{e})= 0,
+\end{equation}
+%
+since in this case Eq.~(\ref{eq:adaptive}) holds.
+\newpage
+\printbibliography
+
+\end{document}
