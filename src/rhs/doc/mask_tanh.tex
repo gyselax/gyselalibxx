@@ -1,0 +1,51 @@
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{biblatex}
+\usepackage{csquotes}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{changepage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\addbibresource{library.bib}
+\usepackage[margin=1.2in]{geometry}
+
+
+\newcommand{\HRule}[1]{\rule{0.5\linewidth}{#1}} 
+
+\begin{document}
+
+\begin{center}
+    \LARGE \textbf{Hyperbolic mask function} \\
+    \vspace{0.8cm} 
+\end{center}
+
+The hyperbolic mask denoted $\mathcal{M}(x)$ is a function that transitions smoothly between 0 and 1. It is mostly used to define some regions of the simulation box where specific operators become active. It is a hyperbolic tangent function that takes a value of one inside a specific domain, and vanishes outside. This mask can have two different forms. The first one is such that the mask equals one inside the domain  $\left[ x_\mathrm{\ell}, \, x_\mathrm{r} \right] $ and zero outside as
+%
+\begin{equation}\label{eq:mask_normal}
+     \mathcal{M}(x) = \dfrac{1}{2}\left\{ \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{\ell}}{d}\right)} - \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{r}}{d}\right)}  \right\} .
+\end{equation}
+%
+The $d$ parameter controls the steepness of the mask transition. The second possibility is to have a mask that is equal to zero inside the $\left[ x_\mathrm{\ell}, \, x_\mathrm{r} \right] $ domain, and zero outside. In this case it is expressed as
+%
+\begin{equation}\label{eq:mask_inverted}
+     \mathcal{M}(x) = 1 - \dfrac{1}{2}\left\{ \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{\ell}}{d}\right)} - \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{r}}{d}\right)}  \right\} .
+\end{equation}
+%
+Lastly, it is possible to use a normalized version of these masks function so that their integral is equal to one. For instance Eq.~(\ref{eq:mask_normal}) becomes  
+%
+\begin{equation*}\label{eq:mask_nmz}
+     \mathcal{M}(x) = \dfrac{1}{2V_\mathcal{M}}\left\{ \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{\ell}}{d}\right)} - \operatorname{tanh}{\left(\dfrac{x-x_\mathrm{r}}{d}\right)}  \right\},
+\end{equation*}
+%
+with $V_\mathcal{M} = \int_{0}^{L_x} d x \, \mathcal{M}$, and $L_x$ is the total length of the simulation box.
+
+\end{document}
