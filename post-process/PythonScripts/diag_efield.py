@@ -31,7 +31,7 @@ def compute_growthrate(epot: xr.DataArray,
     epot_extrema = abs_epot.where(
         np.logical_and(
             (abs_epot - abs_epot.shift(time=-1)) > 0,
-            (abs_epot - abs_epot.shift(time=1)) > 0),
+            (abs_epot - abs_epot.shift(time=1)) > 0).compute(),
         drop=True)
 
     # find a linear fit for the log of the extrema
