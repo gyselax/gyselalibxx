@@ -5,6 +5,16 @@
 
 namespace {
 
+using DElem0D = ddc::DiscreteElement<>;
+using DVect0D = ddc::DiscreteVector<>;
+using DDom0D = ddc::DiscreteDomain<>;
+
+template <class Datatype>
+using Chunk0D = ddc::Chunk<Datatype, DDom0D>;
+template <class Datatype>
+using ChunkSpan0D = ddc::ChunkSpan<Datatype, DDom0D>;
+
+
 struct DDimX;
 using DElemX = ddc::DiscreteElement<DDimX>;
 using DVectX = ddc::DiscreteVector<DDimX>;
@@ -12,8 +22,6 @@ using DDomX = ddc::DiscreteDomain<DDimX>;
 
 template <class Datatype>
 using ChunkX = ddc::Chunk<Datatype, DDomX>;
-template <class Datatype>
-using ChunkSpanX = ddc::ChunkSpan<Datatype, DDomX>;
 
 
 struct DDimY;
@@ -47,6 +55,10 @@ template <class Datatype>
 using ChunkYX = ddc::Chunk<Datatype, DDomYX>;
 
 
+static DElem0D constexpr lbound_0d {};
+static DVect0D constexpr nelems_0d {};
+static DDom0D constexpr dom_0d(lbound_0d, nelems_0d);
+
 static DElemX constexpr lbound_x(50);
 static DVectX constexpr nelems_x(3);
 static DDomX constexpr dom_x(lbound_x, nelems_x);
@@ -62,6 +74,15 @@ static DDomXY constexpr dom_x_y(lbound_x_y, nelems_x_y);
 
 // Member types of Chunk 1D \{
 
+TEST(Chunk0DTest, LayoutType)
+{
+    Chunk0D<double> chunk;
+
+    EXPECT_TRUE((std::is_same_v<
+                 std::decay_t<decltype(chunk)>::layout_type,
+                 std::experimental::layout_right>));
+}
+
 TEST(Chunk1DTest, LayoutType)
 {
     ChunkX<double> chunk(dom_x);
@@ -76,6 +97,17 @@ TEST(Chunk1DTest, LayoutType)
 // \}
 // Functions implemented in Chunk 1D (and free functions specific to it) \{
 
+TEST(Chunk0DTest, ChunkSpanConversionConstructor)
+{
+    double constexpr factor = 1.391;
+    Chunk0D<double> chunk(dom_0d);
+    chunk() = factor;
+
+    Chunk0D<double> chunk2(chunk.span_view());
+    EXPECT_EQ(chunk2.domain(), dom_0d);
+    EXPECT_DOUBLE_EQ(factor, chunk2());
+}
+
 TEST(Chunk1DTest, ChunkSpanConversionConstructor)
 {
     double constexpr factor = 1.391;
@@ -87,9 +119,19 @@ TEST(Chunk1DTest, ChunkSpanConversionConstructor)
     ChunkX<double> chunk2(chunk.span_view());
     EXPECT_EQ(chunk2.domain(), dom_x);
     for (auto&& ix : chunk2.domain()) {
-        // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(factor * ix.uid(), chunk2(ix));
+        EXPECT_DOUBLE_EQ(factor * ix.uid(), chunk2(ix));
     }
+}
+
+TEST(Chunk0DTest, MoveConstructor)
+{
+    double constexpr factor = 1.391;
+    Chunk0D<double> chunk(dom_0d);
+    chunk() = factor;
+
+    Chunk0D<double> chunk2(std::move(chunk));
+    EXPECT_EQ(chunk2.domain(), dom_0d);
+    EXPECT_DOUBLE_EQ(factor, chunk2());
 }
 
 TEST(Chunk1DTest, MoveConstructor)
@@ -108,6 +150,18 @@ TEST(Chunk1DTest, MoveConstructor)
     }
 }
 
+TEST(Chunk0DTest, MoveAssignment)
+{
+    double constexpr factor = 1.976;
+    Chunk0D<double> chunk(dom_0d);
+    chunk() = factor;
+
+    Chunk0D<double> chunk2(DDom0D(lbound_0d, DVect0D()));
+    chunk2 = std::move(chunk);
+    EXPECT_EQ(chunk2.domain(), dom_0d);
+    EXPECT_DOUBLE_EQ(factor, chunk2());
+}
+
 TEST(Chunk1DTest, MoveAssignment)
 {
     double constexpr factor = 1.976;
@@ -123,6 +177,21 @@ TEST(Chunk1DTest, MoveAssignment)
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
         EXPECT_EQ(factor * ix.uid(), chunk2(ix));
     }
+}
+
+TEST(Chunk0DTest, Swap)
+{
+    double constexpr factor = 1.976;
+    Chunk0D<double> chunk(dom_0d);
+    chunk() = factor;
+
+    DDom0D empty_domain(lbound_0d, DVect0D());
+    Chunk0D<double> chunk2(empty_domain);
+
+    std::swap(chunk2, chunk);
+    EXPECT_EQ(chunk.domain(), empty_domain);
+    EXPECT_EQ(chunk2.domain(), dom_0d);
+    EXPECT_DOUBLE_EQ(factor, chunk2());
 }
 
 TEST(Chunk1DTest, Swap)

@@ -101,7 +101,7 @@ int main(int argc, char** argv)
     // Simulated time to reach as target of the simulation
     double const end_time = 10.;
     // Number of time-steps between outputs
-    size_t const t_output_period = 10;
+    ptrdiff_t const t_output_period = 10;
     //! [parameters]
 
     //! [main-start]
