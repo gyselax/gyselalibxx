@@ -38,7 +38,7 @@ private:
 public:
     static constexpr std::size_t rank()
     {
-        return (0 + ... + DDims::rank());
+        return sizeof...(DDims);
     }
 
     DiscreteDomain() = default;
