@@ -35,6 +35,11 @@ using DElemYX = ddc::DiscreteElement<DDimY, DDimX>;
 using DVectYX = ddc::DiscreteVector<DDimY, DDimX>;
 using DDomYX = ddc::DiscreteDomain<DDimY, DDimX>;
 
+using DElemZY = ddc::DiscreteElement<DDimZ, DDimY>;
+using DVectZY = ddc::DiscreteVector<DDimZ, DDimY>;
+using DDomZY = ddc::DiscreteDomain<DDimZ, DDimY>;
+
+
 
 static DElemX constexpr lbound_x(50);
 static DVectX constexpr nelems_x(3);
@@ -106,4 +111,20 @@ TEST(ProductMDomainTest, RangeFor)
         ASSERT_LE(ix, ubound_x);
         ++ii.uid<DDimX>();
     }
+}
+
+TEST(ProductMDomainTest, DiffEmpty)
+{
+    DDomX const dom_x = DDomX();
+    auto const subdomain = ddc::remove_dims_of(dom_x, dom_x);
+    EXPECT_EQ(subdomain, ddc::DiscreteDomain<>());
+}
+
+TEST(ProductMDomainTest, Diff)
+{
+    DDomX const dom_x = DDomX();
+    DDomXY const dom_x_y = DDomXY();
+    DDomZY const dom_z_y = DDomZY();
+    auto const subdomain = ddc::remove_dims_of(dom_x_y, dom_z_y);
+    EXPECT_EQ(subdomain, dom_x);
 }

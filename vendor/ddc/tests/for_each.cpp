@@ -4,6 +4,10 @@
 
 #include <gtest/gtest.h>
 
+using DElem0D = ddc::DiscreteElement<>;
+using DVect0D = ddc::DiscreteVector<>;
+using DDom0D = ddc::DiscreteDomain<>;
+
 struct DDimX;
 using DElemX = ddc::DiscreteElement<DDimX>;
 using DVectX = ddc::DiscreteVector<DDimX>;
@@ -33,8 +37,17 @@ TEST(ForEachSerialHost, Empty)
     std::vector<int> storage(dom.size(), 0);
     ddc::ChunkSpan<int, DDomX> view(storage.data(), dom);
     ddc::for_each(ddc::policies::serial_host, dom, [=](DElemX const ix) { view(ix) += 1; });
-    ASSERT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
-    std::cout << std::count(storage.begin(), storage.end(), 1) << std::endl;
+    ASSERT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size())
+            << std::count(storage.begin(), storage.end(), 1) << std::endl;
+}
+
+TEST(ForEachSerialHost, ZeroDimension)
+{
+    DDom0D const dom;
+    int storage = 0;
+    ddc::ChunkSpan<int, DDom0D> view(&storage, dom);
+    ddc::for_each(ddc::policies::serial_host, dom, [=](DElem0D const ii) { view(ii) += 1; });
+    ASSERT_EQ(storage, 1) << storage << std::endl;
 }
 
 TEST(ForEachSerialHost, OneDimension)
