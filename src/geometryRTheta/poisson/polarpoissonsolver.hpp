@@ -13,7 +13,7 @@
 #include <Eigen/Sparse>
 
 //#include "chargedensitycalculator.hpp"
-#include "ipoissonsolver.hpp"
+//#include "ipoissonsolver.hpp"
 
 template <class PolarBSplines>
 class PolarSplineFEMPoissonSolver

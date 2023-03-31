@@ -8,7 +8,7 @@
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
 
-#include "poisson_geometry.hpp"
+#include "geometry.hpp"
 
 template <class CurvilinearToCartesian>
 class PoissonSolution
