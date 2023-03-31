@@ -14,9 +14,9 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "poisson_geometry.hpp"
 #include "polarpoissonsolver.hpp"
 #include "test_cases.hpp"
 
