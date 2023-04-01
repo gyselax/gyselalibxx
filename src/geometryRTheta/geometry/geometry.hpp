@@ -6,6 +6,7 @@
 #include <sll/greville_interpolation_points.hpp>
 #include <sll/null_boundary_value.hpp>
 #include <sll/polar_bsplines.hpp>
+#include <sll/spline_boundary_conditions.hpp>
 #include <sll/spline_builder.hpp>
 #include <sll/spline_builder_2d.hpp>
 #include <sll/spline_evaluator.hpp>
