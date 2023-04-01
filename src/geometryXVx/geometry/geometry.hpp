@@ -7,6 +7,7 @@
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
 #include <sll/greville_interpolation_points.hpp>
+#include <sll/spline_boundary_conditions.hpp>
 #include <sll/spline_builder.hpp>
 
 #include <fft_tag.hpp>
