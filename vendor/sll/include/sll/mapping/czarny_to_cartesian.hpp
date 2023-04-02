@@ -63,10 +63,11 @@ public:
         const double xi2 = 1. / (1. - m_epsilon * m_epsilon * 0.25);
         const double xi = std::sqrt(xi2);
         const double r = std::sqrt(y * y * ex * ex / (m_e * m_e * xi2) + ex2 * ex2 * 0.25);
-        const double theta
+        double theta
                 = std::atan2(2. * y * ex, (m_e * xi * (m_epsilon * x * x - 2. * x - m_epsilon)));
-        if (theta < 0)
-            theta = 6.283185307179586 + theta;
+        if (theta < 0) {
+            theta = 2 * M_PI + theta;
+        }
         return ddc::Coordinate<DimR, DimP>(r, theta);
     }
 
