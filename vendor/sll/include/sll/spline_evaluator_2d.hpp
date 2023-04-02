@@ -226,13 +226,15 @@ public:
             ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesType1, BSplinesType2>> const
                     spline_coef) const
     {
-        ddc::Chunk<double, ddc::DiscreteDomain<BSplinesType1>> values1(spline_coef.domain());
+        ddc::Chunk<double, ddc::DiscreteDomain<BSplinesType1>> values1(
+                ddc::DiscreteDomain<BSplinesType1>(spline_coef.domain()));
         DSpan1D vals1 = values1.allocation_mdspan();
-        ddc::Chunk<double, ddc::DiscreteDomain<BSplinesType2>> values2(spline_coef.domain());
+        ddc::Chunk<double, ddc::DiscreteDomain<BSplinesType2>> values2(
+                ddc::DiscreteDomain<BSplinesType2>(spline_coef.domain()));
         DSpan1D vals2 = values2.allocation_mdspan();
 
-        ddc::discrete_space<bsplines_type1>().integrals(vals1);
-        ddc::discrete_space<bsplines_type2>().integrals(vals2);
+        ddc::discrete_space<bsplines_type1>().integrals(values1.span_view());
+        ddc::discrete_space<bsplines_type2>().integrals(values2.span_view());
 
         return ddc::transform_reduce(
                 ddc::policies::parallel_host,
