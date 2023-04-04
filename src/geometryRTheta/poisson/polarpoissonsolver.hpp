@@ -554,7 +554,7 @@ public:
     void operator()(
             RHSFunction const& rhs,
             ddc::ChunkSpan<ddc::Coordinate<DimR, DimP> const, Domain> const coords_eval,
-            ddc::ChunkSpan<double, Domain> result)
+            ddc::ChunkSpan<double, Domain> result) const
     {
         Eigen::VectorXd b(
                 ddc::discrete_space<PolarBSplines>().nbasis()
@@ -680,7 +680,7 @@ public:
     }
 
 private:
-    QuadratureDomainRP get_quadrature_points_in_cell(int cell_idx_r, int cell_idx_p)
+    static QuadratureDomainRP get_quadrature_points_in_cell(int cell_idx_r, int cell_idx_p)
     {
         const QuadratureMeshR first_quad_point_r(cell_idx_r * n_gauss_legendre_r);
         const QuadratureMeshP first_quad_point_p(cell_idx_p * n_gauss_legendre_p);
@@ -979,7 +979,7 @@ private:
     }
 
     template <class... QueryDDims>
-    ddc::Coordinate<typename QueryDDims::continuous_dimension_type::tag...> get_coordinate(
+    static ddc::Coordinate<typename QueryDDims::continuous_dimension_type::tag...> get_coordinate(
             ddc::DiscreteElement<QueryDDims...> mesh_idx)
     {
         ddc::Coordinate<typename QueryDDims::continuous_dimension_type...> coord(
@@ -988,7 +988,7 @@ private:
                 ddc::get<typename QueryDDims::continuous_dimension_type>(coord)...);
     }
 
-    int pmod(int idx_p)
+    static int pmod(int idx_p)
     {
         int ncells_p = ddc::discrete_space<BSplinesP>().ncells();
         while (idx_p < 0)
