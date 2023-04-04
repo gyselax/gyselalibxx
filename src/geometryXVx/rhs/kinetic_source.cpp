@@ -50,6 +50,14 @@ KineticSource::KineticSource(
                                      * std::exp(-coordvx_sq / (2 * m_temperature));
         m_velocity_shape(ivx) = m_density * density_source + m_energy * energy_source;
     });
+    ddc::expose_to_pdi("kinetic_source_extent", m_spatial_extent);
+    ddc::expose_to_pdi("kinetic_source_stiffness", stiffness);
+    ddc::expose_to_pdi("kinetic_source_amplitude", m_amplitude);
+    ddc::expose_to_pdi("kinetic_source_density", m_density);
+    ddc::expose_to_pdi("kinetic_source_energy", m_energy);
+    ddc::expose_to_pdi("kinetic_source_temperature", m_temperature);
+    ddc::expose_to_pdi("kinetic_source_velocity_shape", m_velocity_shape);
+    ddc::expose_to_pdi("kinetic_source_spatial_extent", m_spatial_extent);
 }
 
 DSpanSpXVx KineticSource::operator()(DSpanSpXVx const allfdistribu, double const dt) const

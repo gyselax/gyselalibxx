@@ -52,6 +52,27 @@ KrookSourceConstant::KrookSourceConstant(
     }
     // target distribution function
     MaxwellianEquilibrium::compute_maxwellian(m_ftarget, m_density, m_temperature, 0.);
+
+    switch (m_type) {
+    case RhsType::Source:
+        ddc::expose_to_pdi("krook_source_constant_extent", m_extent);
+        ddc::expose_to_pdi("krook_source_constant_stiffness", m_stiffness);
+        ddc::expose_to_pdi("krook_source_constant_amplitude", m_amplitude);
+        ddc::expose_to_pdi("krook_source_constant_density", m_density);
+        ddc::expose_to_pdi("krook_source_constant_temperature", m_temperature);
+        ddc::expose_to_pdi("krook_source_constant_ftarget", m_ftarget);
+        ddc::expose_to_pdi("krook_source_constant_mask", m_mask);
+        break;
+    case RhsType::Sink:
+        ddc::expose_to_pdi("krook_sink_constant_extent", m_extent);
+        ddc::expose_to_pdi("krook_sink_constant_stiffness", m_stiffness);
+        ddc::expose_to_pdi("krook_sink_constant_amplitude", m_amplitude);
+        ddc::expose_to_pdi("krook_sink_constant_density", m_density);
+        ddc::expose_to_pdi("krook_sink_constant_temperature", m_temperature);
+        ddc::expose_to_pdi("krook_sink_constant_ftarget", m_ftarget);
+        ddc::expose_to_pdi("krook_sink_constant_mask", m_mask);
+        break;
+    }
 }
 
 DSpanSpXVx KrookSourceConstant::operator()(DSpanSpXVx const allfdistribu, double const dt) const

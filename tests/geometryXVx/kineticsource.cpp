@@ -5,12 +5,13 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "geometry.hpp"
-#include "irighthandside.hpp"
-#include "kinetic_source.hpp"
-#include "quadrature.hpp"
-#include "species_info.hpp"
-#include "trapezoid_quadrature.hpp"
+#include <geometry.hpp>
+#include <irighthandside.hpp>
+#include <kinetic_source.hpp>
+#include <pdi.h>
+#include <quadrature.hpp>
+#include <species_info.hpp>
+#include <trapezoid_quadrature.hpp>
 
 TEST(KineticSource, Moments)
 {
@@ -26,6 +27,9 @@ TEST(KineticSource, Moments)
     IDomainSp const dom_sp(IndexSp(0), nb_species);
     IndexSp const my_iion = dom_sp.front();
     IndexSp const my_ielec = dom_sp.back();
+
+    PC_tree_t conf_pdi = PC_parse_string("");
+    PDI_init(conf_pdi);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -132,4 +136,7 @@ TEST(KineticSource, Moments)
     EXPECT_LE(error_source_amplitude, 1e-3);
     EXPECT_LE(error_fluid_velocity, 1e-8);
     EXPECT_LE(error_temperature, 1e-8);
+
+    PC_tree_destroy(&conf_pdi);
+    PDI_finalize();
 }

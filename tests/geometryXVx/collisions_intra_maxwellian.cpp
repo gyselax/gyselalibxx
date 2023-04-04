@@ -14,6 +14,7 @@
 #include <geometry.hpp>
 #include <irighthandside.hpp>
 #include <maxwellianequilibrium.hpp>
+#include <pdi.h>
 #include <quadrature.hpp>
 #include <species_info.hpp>
 #include <trapezoid_quadrature.hpp>
@@ -36,6 +37,9 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
     IndexSp const my_iion = dom_sp.front();
     IndexSp const my_ielec = dom_sp.back();
+
+    PC_tree_t conf_pdi = PC_parse_string("");
+    PDI_init(conf_pdi);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -353,4 +357,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
                 EXPECT_LE(std::fabs(mean_velocity_res(ielec(), ix) - Vcoll(ielec(), ix)), 1.e-4);
                 EXPECT_LE(std::fabs(temperature_res(ielec(), ix) - Tcoll(ielec(), ix)), 1.e-4);
             });
+
+    PC_tree_destroy(&conf_pdi);
+    PDI_finalize();
 }
