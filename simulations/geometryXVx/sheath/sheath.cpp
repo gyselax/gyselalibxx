@@ -262,7 +262,6 @@ int main(int argc, char** argv)
 
     CollisionsIntra const
             collisions_intra(meshSpXVx, PCpp_double(conf_voicexx, ".CollisionsInfo.nustar0"));
-    collisions_intra.expose_rhs_to_pdi();
     rhs_operators.emplace_back(collisions_intra);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
