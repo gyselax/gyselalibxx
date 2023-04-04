@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+
+# SPDX-License-Identifier: MIT
+
+import numpy as np
+import os
+
+from argparse import ArgumentParser
+from pathlib import Path
+
+from gysdata import DiskStore
+from plot_utils import plot_field1d, plot_field2d
+from math_utils import compute_moment, differentiate
+from geometryXVx.utils import compute_krook_sink_constant, compute_kinetic_source
+
+
+"""
+diagnostic of momentum conservation equation:
+  d(gamma)/dt + sqrt(1/m)*{d(pi)/dx} = sqrt(1/m)*q_s*E*n_s + Su_s
+"""
+if __name__ == '__main__':
+    parser = ArgumentParser(
+        description='Plots the momentum conservation equation error')
+    parser.add_argument('data_dir',
+                        action='store',
+                        nargs='?',
+                        default=Path.cwd(),
+                        type=Path,
+                        help='location of the results')
+    parser.add_argument('--itime',
+                        action='store',
+                        default=-1,
+                        type=int,
+                        help='time index')
+
+    args = parser.parse_args()
+
+    # Load data
+    path_data_structure = Path('data_structure_sheath.yaml')
+    ds = DiskStore(args.data_dir, data_structure=path_data_structure)
+    fdistribu = ds['fdistribu']
+    electric_field = -ds['electrostatic_potential'].differentiate('x')
+    charge = ds['fdistribu_charges']
+    mass = ds['fdistribu_masses']
+
+    density = compute_moment(fdistribu, 'v_x', moment_order=0)
+    particle_flux = compute_moment(fdistribu, 'v_x', moment_order=1)
+    momentum_flux = compute_moment(fdistribu, 'v_x', moment_order=2)
+
+    particle_flux = particle_flux.chunk({'time': len(particle_flux['time'])})
+    dgamma_dt = differentiate(particle_flux, 'time')
+    grad_flux_over_m = differentiate(momentum_flux, 'x') / np.sqrt(mass)
+    force_term = density*charge/np.sqrt(mass)*electric_field
+    momentum_source = compute_moment(compute_krook_sink_constant(ds), 'v_x', moment_order=1) \
+            + compute_moment(compute_kinetic_source(ds), 'v_x', moment_order=1)
+    error = dgamma_dt + grad_flux_over_m - momentum_source - force_term
+
+    time_diag = fdistribu.coords['time'].values[args.itime]
+    for species in density.coords['species'].values:
+        title = f'momentum conservation equation error {species}'
+        output_filename = os.path.join(Path.cwd(), f'momentum_conservation_error_{species}_xt.png')
+        plot_field2d(error.sel(species=species),
+                     title,
+                     output_filename,
+                     scale='linear',
+                     cmap='viridis')
+
+        output_filename = os.path.join(Path.cwd(), f'momentum_conservation_error_{species}_t{time_diag}.png')
+        data_dict = {r'$\partial_t \Gamma_{s}$': dgamma_dt.sel(species=species, time=time_diag),
+                     r'$\sqrt{A_s}\partial_x \Pi_{s}$': grad_flux_over_m.sel(species=species, time=time_diag),
+                     r'$- \sqrt{A_s}n_{s}q_{s}E$': force_term.sel(species=species, time=time_diag),
+                     r'$S_{us}$': momentum_source.sel(species=species, time=time_diag),
+                     r'lhs-rhs': error.sel(species=species, time=time_diag)}
+
+        plot_field1d(data_dict, title, output_filename)

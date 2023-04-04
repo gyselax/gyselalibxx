@@ -10,6 +10,7 @@
 #include <geometry.hpp>
 #include <irighthandside.hpp>
 #include <maxwellianequilibrium.hpp>
+#include <pdi.h>
 #include <quadrature.hpp>
 #include <species_info.hpp>
 #include <trapezoid_quadrature.hpp>
@@ -32,6 +33,9 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
     IndexSp const my_iion = dom_sp.front();
     IndexSp const my_ielec = dom_sp.back();
+
+    PC_tree_t conf_pdi = PC_parse_string("");
+    PDI_init(conf_pdi);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -103,4 +107,7 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
                 std::fabs(ddc::coordinate(ivx_ghs) - gridvx_ghosted_staggered_pred[ivx_ghs.uid()]),
                 1.e-12);
     });
+
+    PC_tree_destroy(&conf_pdi);
+    PDI_finalize();
 }

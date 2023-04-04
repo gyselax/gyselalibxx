@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 constexpr char const* const PDI_CFG = R"PDI_CFG(
 metadata:
   Nx : int
@@ -16,8 +18,56 @@ metadata:
     type: array
     subtype: double
     size: [ '$MeshVx_extents[0]' ]
-
+  Nkinspecies: int
+  fdistribu_charges_extents : { type: array, subtype: int64, size: 1 }
+  fdistribu_charges:
+    type: array
+    subtype: int
+    size: [ '$fdistribu_charges_extents[0]' ]
+  fdistribu_masses_extents : { type: array, subtype: int64, size: 1 }
+  fdistribu_masses:
+    type: array
+    subtype: double
+    size: [ '$fdistribu_masses_extents[0]' ]
+  fdistribu_eq_extents : { type: array, subtype: int64, size: 2 }
+  fdistribu_eq:
+    type: array
+    subtype: double
+    size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]' ]
   collintra_nustar0 : double
+
+  krook_sink_constant_extent : double
+  krook_sink_constant_stiffness : double
+  krook_sink_constant_amplitude : double
+  krook_sink_constant_density : double
+  krook_sink_constant_temperature : double
+  krook_sink_constant_mask_extents: { type: array, subtype: int64, size: 1 }
+  krook_sink_constant_mask:
+    type: array
+    subtype: double
+    size: [ '$krook_sink_constant_mask_extents[0]' ]
+  krook_sink_constant_ftarget_extents: { type: array, subtype: int64, size: 1 }
+  krook_sink_constant_ftarget:
+    type: array
+    subtype: double
+    size: [ '$krook_sink_constant_ftarget_extents[0]' ]
+
+  kinetic_source_extent : double
+  kinetic_source_stiffness : double
+  kinetic_source_amplitude : double
+  kinetic_source_density : double
+  kinetic_source_energy : double
+  kinetic_source_temperature : double
+  kinetic_source_velocity_shape_extents: { type: array, subtype: int64, size: 1 }
+  kinetic_source_velocity_shape:
+    type: array
+    subtype: double
+    size: [ '$kinetic_source_velocity_shape_extents[0]' ]
+  kinetic_source_spatial_extent_extents: { type: array, subtype: int64, size: 1 }
+  kinetic_source_spatial_extent:
+    type: array
+    subtype: double
+    size: [ '$kinetic_source_spatial_extent_extents[0]' ]
 
 data:
   fdistribu_extents: { type: array, subtype: int64, size: 3 }
@@ -53,10 +103,31 @@ plugins:
         - MeshVx
         - nbstep_diag
         - collintra_nustar0
+        - Nkinspecies
+        - fdistribu_charges
+        - fdistribu_masses
+        - fdistribu_eq
+
+        - krook_sink_constant_extent
+        - krook_sink_constant_stiffness
+        - krook_sink_constant_amplitude
+        - krook_sink_constant_density
+        - krook_sink_constant_temperature
+        - krook_sink_constant_mask
+        - krook_sink_constant_ftarget
+
+        - kinetic_source_extent
+        - kinetic_source_stiffness
+        - kinetic_source_amplitude
+        - kinetic_source_density
+        - kinetic_source_energy
+        - kinetic_source_temperature
+        - kinetic_source_velocity_shape
+        - kinetic_source_spatial_extent
     - file: 'VOICEXX_${iter_saved:05}.h5'
       on_event: [iteration, last_iteration]
       when: '${iter} % ${nbstep_diag} = 0'
       collision_policy: replace_and_warn
-      write: [time_saved, fdistribu, electrostatic_potential ]
+      write: [time_saved, fdistribu, electrostatic_potential]
   #trace: ~
 )PDI_CFG";

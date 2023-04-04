@@ -16,6 +16,74 @@ import numpy as np
 
 import imageio
 
+
+def plot_field1d(data_dict, titlename, filename, **opt_args):
+    """
+    Plots 1D field(s).
+
+    Parameters
+    ----------
+    filename: pathlib.Path or str
+        path of the file to generate
+
+    data_dict : dictionnary of the form
+        { label : xarray.DataArray}
+        the xarray is the 1D data to plot
+        label to be put in the figure legend}
+    """
+
+    for data in data_dict.values():
+        if data.ndim != 1:
+            raise ValueError(f"Expected 1D data, got {data.ndim}D, {data.coords}")
+
+    figsize = opt_args.get('figsize', (10, 10))
+    fontsize = opt_args.get('fontsize', figsize[0]*2)
+    fontname = opt_args.get('fontname', 'DejaVu Sans')
+    title = opt_args.get('title', titlename)
+    ymax = opt_args.get('ymax', None)
+    ymin = opt_args.get('ymin', None)
+    axis_font = opt_args.get(
+        'axis_font', {'fontname': fontname, 'size': fontsize})
+    title_font = opt_args.get('title_font', {'fontname': fontname,
+                                             'size': fontsize,
+                                             'verticalalignment': 'bottom'})
+    scale = opt_args.get('scale', 'linear')
+    linewidth = opt_args.get('linewidth', 2.)
+
+    # Plotting with naive matplotlib
+    mpl.style.use('classic')
+    plt.rc('xtick', labelsize=fontsize*.8)
+    plt.rc('ytick', labelsize=fontsize*.8)
+    plt.rc('font', family=fontname)
+
+    fig, ax = plt.subplots(figsize=figsize)
+    axis_label = None
+    for label, data in data_dict.items():
+        ax.plot(data.coords[data.dims[0]], data.values, label=label, lw=linewidth)
+        if axis_label is None:
+            axis_label = data.dims[0]
+
+    ax.set_xlabel(rf'${axis_label}$', **axis_font)
+    ax.set_title(title, **title_font)
+    ax.set_yscale(scale)
+    ax.grid()
+    ax.set_ylim(ymin, ymax)
+    ax.margins(y=0.05)
+    ax.axis('tight')
+    ax.legend(loc='best')
+
+    if isinstance(filename, str):
+        filename = Path(filename)
+    try:
+        filename.parent.mkdir(parents=True)
+    except FileExistsError:
+        pass
+
+    fig.savefig(filename)
+    print('saved', filename)
+    return fig, ax
+
+
 def plot_field2d(data, titlename, filename, **opt_args):
     """
     Plots an image of a 2D field.
@@ -30,13 +98,12 @@ def plot_field2d(data, titlename, filename, **opt_args):
     """
 
     if data.ndim != 2:
-        raise ValueError("Expected 2D data, got {}D, {}".format(
-            data.ndim, data.coords))
+        raise ValueError(f"Expected 2D data, got {data.ndim}D, {data.coords}")
 
     figsize = opt_args.get('figsize', (10, 10))
     fontsize = opt_args.get('fontsize', figsize[0]*2)
-    fontname = opt_args.get('fontname', 'Times New Roman')
-    title = opt_args.get('title', data.name+' '+titlename)
+    fontname = opt_args.get('fontname', 'DejaVu Sans')
+    title = opt_args.get('title', titlename)
     vmax = opt_args.get('vmax', np.nanmax(data))
     vmin = opt_args.get('vmin', np.nanmin(data))
     axis_font = opt_args.get(
@@ -45,12 +112,13 @@ def plot_field2d(data, titlename, filename, **opt_args):
                                              'size': fontsize,
                                              'verticalalignment': 'bottom'})
     scale = opt_args.get('scale', 'log')
+    cmap = opt_args.get('cmap', 'jet')
 
     # Plotting with naive matplotlib
     mpl.style.use('classic')
     plt.rc('xtick', labelsize=fontsize*.8)
     plt.rc('ytick', labelsize=fontsize*.8)
-    plt.rc('font',  family=fontname)
+    plt.rc('font', family=fontname)
 
     fig, ax = plt.subplots(figsize=figsize)
     if scale == 'log':
@@ -64,19 +132,17 @@ def plot_field2d(data, titlename, filename, **opt_args):
         else:
             norm = mcolors.LogNorm(vmin=vmin, vmax=vmax)
     else:
-        norm = None
+        norm = mpl.colors.Normalize(vmin=vmin, vmax=vmax)
 
     im = ax.pcolormesh(data.coords[data.dims[1]],
                        data.coords[data.dims[0]],
                        data.values,
-                       vmin=vmin,
-                       vmax=vmax,
                        norm=norm,
                        shading='auto',
-                       cmap='jet')
+                       cmap=cmap)
     ax.set_title(title, **title_font)
-    ax.set_xlabel(r'${}$'.format(data.dims[1]), **axis_font)
-    ax.set_ylabel(r'${}$'.format(data.dims[0]), **axis_font)
+    ax.set_xlabel(rf'${data.dims[1]}$', **axis_font)
+    ax.set_ylabel(rf'${data.dims[0]}$', **axis_font)
     ax.axis('tight')
     fig.colorbar(im, ax=ax)
 
@@ -84,10 +150,11 @@ def plot_field2d(data, titlename, filename, **opt_args):
         filename = Path(filename)
     try:
         filename.parent.mkdir(parents=True)
-    except ValueError:
+    except FileExistsError:
         pass
 
     fig.savefig(filename)
+    print('saved', filename)
     return im, ax
 
 
@@ -110,8 +177,7 @@ def anim_field3d_append(data, out_writer, anim_dim='time', **opt_args):
         the dimension over which to generate the animation
     """
     if data.ndim != 3:
-        raise ValueError("Expected 3D data, got {}D, {}".format(
-            data.ndim, data.coords))
+        raise ValueError("Expected 3D data, got {data.ndims}D, {data.coords}")
 
     for it in range(data.sizes[anim_dim]):
         it_val = float(data.coords[anim_dim][it])

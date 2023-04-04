@@ -70,6 +70,27 @@ KrookSourceAdaptive::KrookSourceAdaptive(
 
     // target distribution function
     MaxwellianEquilibrium::compute_maxwellian(m_ftarget, m_density, m_temperature, 0.);
+
+    switch (m_type) {
+    case RhsType::Source:
+        ddc::expose_to_pdi("krook_source_adaptive_extent", m_extent);
+        ddc::expose_to_pdi("krook_source_adaptive_stiffness", m_stiffness);
+        ddc::expose_to_pdi("krook_source_adaptive_amplitude", m_amplitude);
+        ddc::expose_to_pdi("krook_source_adaptive_density", m_density);
+        ddc::expose_to_pdi("krook_source_adaptive_temperature", m_temperature);
+        ddc::expose_to_pdi("krook_source_adaptive_ftarget", m_ftarget);
+        ddc::expose_to_pdi("krook_source_adaptive_mask", m_mask);
+        break;
+    case RhsType::Sink:
+        ddc::expose_to_pdi("krook_sink_adaptive_extent", m_extent);
+        ddc::expose_to_pdi("krook_sink_adaptive_stiffness", m_stiffness);
+        ddc::expose_to_pdi("krook_sink_adaptive_amplitude", m_amplitude);
+        ddc::expose_to_pdi("krook_sink_adaptive_density", m_density);
+        ddc::expose_to_pdi("krook_sink_adaptive_temperature", m_temperature);
+        ddc::expose_to_pdi("krook_sink_adaptive_ftarget", m_ftarget);
+        ddc::expose_to_pdi("krook_sink_adaptive_mask", m_mask);
+        break;
+    }
 }
 
 /**

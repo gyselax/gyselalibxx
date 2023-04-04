@@ -104,10 +104,7 @@ CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
         });
         ddc::init_discrete_space<ddc::NonUniformPointSampling<GhostedVxStaggered>>(breaks);
     }
-}
 
-void CollisionsIntra::expose_rhs_to_pdi() const
-{
     ddc::expose_to_pdi("collintra_nustar0", m_nustar0);
 }
 

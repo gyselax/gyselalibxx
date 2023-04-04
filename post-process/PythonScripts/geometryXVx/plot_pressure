@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+
+# SPDX-License-Identifier: MIT
+
+import os
+
+from argparse import ArgumentParser
+from pathlib import Path
+
+from gysdata import DiskStore
+from plot_utils import plot_field1d, plot_field2d
+from math_utils import first_moment, second_moment, third_moment
+from utils import compute_pressure
+
+
+if __name__ == '__main__':
+    parser = ArgumentParser(
+        description='Plots the plasma pressure')
+    parser.add_argument('data_dir',
+                        action='store',
+                        nargs='?',
+                        default=Path.cwd(),
+                        type=Path,
+                        help='location of the results')
+    parser.add_argument('--itime',
+                        action='store',
+                        default=-1,
+                        type=int,
+                        help='time index')
+
+    args = parser.parse_args()
+
+    # Load data
+    ds = DiskStore(args.data_dir)
+    fdistribu = ds['fdistribu']
+    density = first_moment(fdistribu, 'v_x')
+    particle_flux = second_moment(fdistribu, 'v_x')
+    momentum_flux = third_moment(fdistribu, 'v_x')
+    data = compute_pressure(density, particle_flux, momentum_flux)
+    time_init = fdistribu.coords['time'].values[0]
+    time_diag = fdistribu.coords['time'].values[args.itime]
+    for species in data.coords['species'].values:
+        title = f'pressure nT {species}'
+        output_filename = os.path.join(Path.cwd(), f'pressure_{species}_xt.png')
+        plot_field2d(data.sel(species=species),
+                     title,
+                     output_filename,
+                     scale='linear',
+                     cmap='viridis')
+
+        output_filename = os.path.join(Path.cwd(), f'pressure_{species}_t{time_diag}.png')
+        data_dict = {f't={time_init}': data.sel(time=time_init, species=species),
+                     f't={time_diag}': data.sel(time=time_diag, species=species)}
+        plot_field1d(data_dict, title, output_filename)

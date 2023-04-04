@@ -41,6 +41,9 @@ TEST(KrookSource, Adaptive)
 
     IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
 
+    PC_tree_t conf_pdi = PC_parse_string("");
+    PDI_init(conf_pdi);
+
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
@@ -154,6 +157,9 @@ TEST(KrookSource, Adaptive)
                             EXPECT_LE(std::fabs(rhs_pred - rhs(ivx)), 1e-10);
                         });
             });
+
+    PC_tree_destroy(&conf_pdi);
+    PDI_finalize();
 }
 
 TEST(KrookSource, Constant)
@@ -169,6 +175,9 @@ TEST(KrookSource, Constant)
     IVectSp const nb_kinspecies(2);
 
     IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
+
+    PC_tree_t conf_pdi = PC_parse_string("");
+    PDI_init(conf_pdi);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -264,4 +273,7 @@ TEST(KrookSource, Constant)
 
                 EXPECT_LE(error, 1e-13);
             });
+
+    PC_tree_destroy(&conf_pdi);
+    PDI_finalize();
 }
