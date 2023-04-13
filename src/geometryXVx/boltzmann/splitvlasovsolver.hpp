@@ -6,17 +6,21 @@
 
 #include "iboltzmannsolver.hpp"
 
-class IAdvectionVx;
-class IAdvectionX;
+template <class Geometry, class DDimX>
+class IAdvectionSpatial;
+template <class Geometry, class DDimV>
+class IAdvectionVelocity;
 
 class SplitVlasovSolver : public IBoltzmannSolver
 {
-    IAdvectionX const& m_advec_x;
+    IAdvectionSpatial<GeometryXVx, IDimX> const& m_advec_x;
 
-    IAdvectionVx const& m_advec_vx;
+    IAdvectionVelocity<GeometryXVx, IDimVx> const& m_advec_vx;
 
 public:
-    SplitVlasovSolver(IAdvectionX const& advec_x, IAdvectionVx const& m_advec_vx);
+    SplitVlasovSolver(
+            IAdvectionSpatial<GeometryXVx, IDimX> const& advec_x,
+            IAdvectionVelocity<GeometryXVx, IDimVx> const& m_advec_vx);
 
     ~SplitVlasovSolver() override = default;
 

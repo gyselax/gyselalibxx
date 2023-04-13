@@ -28,7 +28,7 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         GTest::gmock_main
         paraconf::paraconf
         sll::splines
-        vcx::advection_${GEOMETRY_VARIANT}
+        vcx::advection
         vcx::boltzmann_${GEOMETRY_VARIANT}
         vcx::initialization_${GEOMETRY_VARIANT}
         vcx::poisson_${GEOMETRY_VARIANT}

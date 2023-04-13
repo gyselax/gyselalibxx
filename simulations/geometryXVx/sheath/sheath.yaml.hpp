@@ -46,6 +46,7 @@ KineticSource:
   temperature: 1.
 
 CollisionsInfo:
+  enable_inter: true
   nustar0: 0.1
 
 Algorithm:
