@@ -4,7 +4,9 @@
 #include "iadvectionx.hpp"
 #include "splitvlasovsolver.hpp"
 
-SplitVlasovSolver::SplitVlasovSolver(IAdvectionX const& advec_x, IAdvectionVx const& advec_vx)
+SplitVlasovSolver::SplitVlasovSolver(
+        IAdvectionSpatial<GeometryXVx, IDimX> const& advec_x,
+        IAdvectionVelocity<GeometryXVx, IDimVx> const& advec_vx)
     : m_advec_x(advec_x)
     , m_advec_vx(advec_vx)
 {

@@ -135,6 +135,10 @@ using FieldSpXVx = ddc::Chunk<ElementType, IDomainSpXVx>;
 
 
 
+template <class DomainType>
+using DField = ddc::Chunk<double, DomainType>;
+
+
 using DFieldX = FieldX<double>;
 
 using DFieldVx = FieldVx<double>;
@@ -169,6 +173,10 @@ using SpanSpXVx = ddc::ChunkSpan<ElementType, IDomainSpXVx>;
 template <class ElementType>
 using SpanSpVx = ddc::ChunkSpan<ElementType, IDomainSpVx>;
 
+
+
+template <class DomainType>
+using DSpan = ddc::ChunkSpan<double, DomainType>;
 
 
 using DSpanSp = SpanSp<double>;
@@ -208,6 +216,10 @@ using BSViewX = ddc::ChunkSpan<ElementType const, BSDomainX>;
 
 
 
+template <class DomainType>
+using DView = ddc::ChunkSpan<double const, DomainType>;
+
+
 using DViewX = ViewX<double>;
 
 using DViewVx = ViewVx<double>;
@@ -228,3 +240,23 @@ using IDimFx = ddc::NonUniformPointSampling<RDimFx>;
 using IndexFx = ddc::DiscreteElement<IDimFx>;
 using IVectFx = ddc::DiscreteVector<IDimFx>;
 using IDomainFx = ddc::DiscreteDomain<IDimFx>;
+
+class GeometryXVx
+{
+public:
+    template <class T>
+    using velocity_dim_for = std::conditional_t<std::is_same_v<T, IDimX>, IDimVx, void>;
+
+    template <class T>
+    using spatial_dim_for = std::conditional_t<std::is_same_v<T, IDimVx>, IDimX, void>;
+
+    using DDimSp = IDimSp;
+
+    using SpatialDDom = IDomainX;
+
+    using VelocityDDom = IDomainVx;
+
+
+    // using FdistribuDDom = DiscreteDomain<DimSp, typename decltype(SpatialDDom), typename decltype(VelocityDDom)>(ddc::DiscreteDomain());
+    using FdistribuDDom = IDomainSpXVx;
+};

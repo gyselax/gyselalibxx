@@ -20,11 +20,11 @@ target_link_libraries("boltzmann_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         sll::splines
-        vcx::interpolation_${GEOMETRY_VARIANT}
+        vcx::interpolation
         vcx::speciesinfo
         vcx::geometry_${GEOMETRY_VARIANT}
         vcx::rhs_${GEOMETRY_VARIANT}
-        vcx::advection_${GEOMETRY_VARIANT}
+        vcx::advection
 )
 
 add_library("vcx::boltzmann_${GEOMETRY_VARIANT}" ALIAS "boltzmann_${GEOMETRY_VARIANT}")

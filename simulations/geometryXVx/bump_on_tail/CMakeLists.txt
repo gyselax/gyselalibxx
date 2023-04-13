@@ -12,13 +12,13 @@ target_link_libraries(bumpontail_fem_uniform_${GEOMETRY_VARIANT}
         PDI::pdi
         sll::splines
         vcx::initialization_${GEOMETRY_VARIANT}
-        vcx::interpolation_${GEOMETRY_VARIANT}
+        vcx::interpolation
         vcx::paraconfpp
         vcx::poisson_${GEOMETRY_VARIANT}
         vcx::speciesinfo
         vcx::time_integration_${GEOMETRY_VARIANT}
         vcx::boltzmann_${GEOMETRY_VARIANT}
-        vcx::advection_${GEOMETRY_VARIANT}
+        vcx::advection
 )
 
 install(TARGETS bumpontail_fem_uniform_${GEOMETRY_VARIANT})
@@ -36,13 +36,13 @@ target_link_libraries(bumpontail_fft
         sll::splines
         vcx::fft
         vcx::initialization_xperiod_vx
-        vcx::interpolation_xperiod_vx
+        vcx::interpolation
         vcx::paraconfpp
         vcx::poisson_xperiod_vx
         vcx::speciesinfo
         vcx::time_integration_xperiod_vx
         vcx::boltzmann_xperiod_vx
-        vcx::advection_xperiod_vx
+        vcx::advection
 )
 
 install(TARGETS bumpontail_fft)

@@ -13,7 +13,7 @@
 #include "species_info.hpp"
 #include "splitvlasovsolver.hpp"
 
-class MockAdvectionX : public IAdvectionX
+class MockAdvectionX : public IAdvectionSpatial<GeometryXVx, IDimX>
 {
 public:
     MockAdvectionX() = default;
@@ -25,7 +25,7 @@ public:
     }
 };
 
-class MockAdvectionVx : public IAdvectionVx
+class MockAdvectionVx : public IAdvectionVelocity<GeometryXVx, IDimVx>
 {
 public:
     MockAdvectionVx() = default;

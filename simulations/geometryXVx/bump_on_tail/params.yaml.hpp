@@ -14,9 +14,9 @@ SpeciesInfo:
 - charge: -1
   mass: 0.0005
   epsilon_bot: 0.1
-  temperature_bot: 0.2
-  mean_velocity_bot: 3.8
-  perturb_amplitude: 0.00001
+  temperature_bot: 0.2 # [ .1 ; .5 ]
+  mean_velocity_bot: 3.8 # [ 2 ; 6 ]
+  perturb_amplitude: 0.00001 # [ 0 ; 0.001 ]
   perturb_mode: 3
 
 Algorithm:
