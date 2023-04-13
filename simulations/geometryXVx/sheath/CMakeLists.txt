@@ -9,12 +9,12 @@ target_link_libraries(sheath_${GEOMETRY_VARIANT}
   DDC::DDC
   DDC::PDI_Wrapper
   vcx::initialization_${GEOMETRY_VARIANT}
-  vcx::interpolation_${GEOMETRY_VARIANT}
+  vcx::interpolation
   vcx::poisson_${GEOMETRY_VARIANT}
   vcx::time_integration_${GEOMETRY_VARIANT}
   vcx::speciesinfo
   vcx::boltzmann_${GEOMETRY_VARIANT}
-  vcx::advection_${GEOMETRY_VARIANT}
+  vcx::advection
   vcx::paraconfpp
   vcx::rhs_${GEOMETRY_VARIANT}
   PDI::pdi

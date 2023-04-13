@@ -22,8 +22,11 @@
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "collisions_intra.hpp"
-#include "femnonperiodicpoissonsolver.hpp"
+#ifdef PERIODIC_RDIMX
 #include "femperiodicpoissonsolver.hpp"
+#else
+#include "femnonperiodicpoissonsolver.hpp"
+#endif
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "kinetic_source.hpp"
@@ -36,8 +39,7 @@
 #include "sheath.yaml.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
-#include "spline_interpolator_vx.hpp"
-#include "spline_interpolator_x.hpp"
+#include "spline_interpolator.hpp"
 #include "splitrighthandsidesolver.hpp"
 #include "splitvlasovsolver.hpp"
 
@@ -174,19 +176,18 @@ int main(int argc, char** argv)
     // Creating operators
     SplineEvaluator<BSplinesX> const spline_x_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolatorX const spline_x_interpolator(builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
 
     ConstantExtrapolationBoundaryValue<BSplinesVx> bv_v_min(vx_min);
     ConstantExtrapolationBoundaryValue<BSplinesVx> bv_v_max(vx_max);
 
     SplineEvaluator<BSplinesVx> const spline_vx_evaluator(bv_v_min, bv_v_max);
 
-    PreallocatableSplineInterpolatorVx const
-            spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
-    BslAdvectionX const advection_x(spline_x_interpolator);
+    BslAdvectionSpatial<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
 
-    BslAdvectionVx const advection_vx(spline_vx_interpolator);
+    BslAdvectionVelocity<GeometryXVx, IDimVx> const advection_vx(spline_vx_interpolator);
 
     // Creating of mesh for output saving
     IDomainX const gridx = ddc::select<IDimX>(meshSpXVx);
@@ -260,6 +261,7 @@ int main(int argc, char** argv)
             PCpp_double(conf_voicexx, ".KineticSource.temperature"));
     rhs_operators.emplace_back(rhs_kinetic_source);
 
+
     CollisionsIntra const
             collisions_intra(meshSpXVx, PCpp_double(conf_voicexx, ".CollisionsInfo.nustar0"));
     rhs_operators.emplace_back(collisions_intra);
@@ -267,8 +269,11 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
     SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);
 
-    using FemPoissonSolverX = std::
-            conditional_t<RDimX::PERIODIC, FemPeriodicPoissonSolver, FemNonPeriodicPoissonSolver>;
+#ifdef PERIODIC_RDIMX
+    using FemPoissonSolverX = FemPeriodicPoissonSolver;
+#else
+    using FemPoissonSolverX = FemNonPeriodicPoissonSolver;
+#endif
     FemPoissonSolverX const poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 
     PredCorr const predcorr(boltzmann, poisson);

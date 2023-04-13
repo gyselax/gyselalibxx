@@ -18,8 +18,11 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
-#include "femnonperiodicpoissonsolver.hpp"
+#ifdef PERIODIC_RDIMX
 #include "femperiodicpoissonsolver.hpp"
+#else
+#include "femnonperiodicpoissonsolver.hpp"
+#endif
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "paraconfpp.hpp"
@@ -28,14 +31,23 @@
 #include "predcorr.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
-#include "spline_interpolator_vx.hpp"
-#include "spline_interpolator_x.hpp"
+#include "spline_interpolator.hpp"
 #include "splitvlasovsolver.hpp"
 
 using std::cerr;
 using std::endl;
 using std::chrono::steady_clock;
 namespace fs = std::filesystem;
+
+using PreallocatableSplineInterpolatorX
+        = PreallocatableSplineInterpolator<IDimX, BSplinesX, SplineXBoundary, SplineXBoundary>;
+using PreallocatableSplineInterpolatorVx = PreallocatableSplineInterpolator<
+        IDimVx,
+        BSplinesVx,
+        BoundCond::HERMITE,
+        BoundCond::HERMITE>;
+using BslAdvectionX = BslAdvectionSpatial<GeometryXVx, IDimX>;
+using BslAdvectionVx = BslAdvectionVelocity<GeometryXVx, IDimVx>;
 
 int main(int argc, char** argv)
 {
@@ -181,8 +193,12 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    using FemPoissonSolverX = std::
-            conditional_t<RDimX::PERIODIC, FemPeriodicPoissonSolver, FemNonPeriodicPoissonSolver>;
+#ifdef PERIODIC_RDIMX
+    using FemPoissonSolverX = FemPeriodicPoissonSolver;
+#else
+    using FemPoissonSolverX = FemNonPeriodicPoissonSolver;
+#endif
+
     FemPoissonSolverX const poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 
     PredCorr const predcorr(vlasov, poisson);
