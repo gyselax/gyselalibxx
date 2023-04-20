@@ -16,6 +16,6 @@ using CoordinateElement = double;
  * It is tagged by its dimensions.
  */
 template <class... CDims>
-using Coordinate = ddc_detail::TaggedVector<CoordinateElement, CDims...>;
+using Coordinate = detail::TaggedVector<CoordinateElement, CDims...>;
 
 } // namespace ddc

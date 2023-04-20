@@ -15,7 +15,7 @@
 
 namespace ddc {
 
-namespace ddc_detail {
+namespace detail {
 
 template <class F, class... DDims>
 class ForEachKokkosLambdaAdapter
@@ -86,7 +86,7 @@ inline void for_each_serial(
     }
 }
 
-} // namespace ddc_detail
+} // namespace detail
 
 /// Serial execution on the host
 struct serial_host_policy
@@ -105,9 +105,9 @@ inline void for_each(
 {
     DiscreteElement<DDims...> const ddc_begin = domain.front();
     DiscreteElement<DDims...> const ddc_end = domain.front() + domain.extents();
-    std::array const begin = ddc_detail::array(ddc_begin);
-    std::array const end = ddc_detail::array(ddc_end);
-    ddc_detail::for_each_serial<DiscreteElement<DDims...>>(begin, end, std::forward<Functor>(f));
+    std::array const begin = detail::array(ddc_begin);
+    std::array const end = detail::array(ddc_end);
+    detail::for_each_serial<DiscreteElement<DDims...>>(begin, end, std::forward<Functor>(f));
 }
 
 /** iterates over a nD extent using the serial execution policy
@@ -122,9 +122,9 @@ inline void for_each_n(
 {
     DiscreteVector<DDims...> const ddc_begin {};
     DiscreteVector<DDims...> const ddc_end = extent;
-    std::array const begin = ddc_detail::array(ddc_begin);
-    std::array const end = ddc_detail::array(ddc_end);
-    ddc_detail::for_each_serial<DiscreteVector<DDims...>>(begin, end, std::forward<Functor>(f));
+    std::array const begin = detail::array(ddc_begin);
+    std::array const end = detail::array(ddc_end);
+    detail::for_each_serial<DiscreteVector<DDims...>>(begin, end, std::forward<Functor>(f));
 }
 
 /// Parallel execution on the default device
@@ -142,8 +142,7 @@ inline void for_each(
         DiscreteDomain<DDims...> const& domain,
         Functor&& f) noexcept
 {
-    ddc_detail::for_each_kokkos<
-            Kokkos::DefaultHostExecutionSpace>(domain, std::forward<Functor>(f));
+    detail::for_each_kokkos<Kokkos::DefaultHostExecutionSpace>(domain, std::forward<Functor>(f));
 }
 
 /// Kokkos parallel execution uisng MDRange policy
@@ -161,7 +160,7 @@ inline void for_each(
         DiscreteDomain<DDims...> const& domain,
         Functor&& f) noexcept
 {
-    ddc_detail::for_each_kokkos<Kokkos::DefaultExecutionSpace>(domain, std::forward<Functor>(f));
+    detail::for_each_kokkos<Kokkos::DefaultExecutionSpace>(domain, std::forward<Functor>(f));
 }
 
 using default_policy = serial_host_policy;

@@ -257,12 +257,12 @@ public:
     constexpr auto allocation_kokkos_view()
     {
         auto s = this->allocation_mdspan();
-        auto kokkos_layout = ddc_detail::build_kokkos_layout(
+        auto kokkos_layout = detail::build_kokkos_layout(
                 s.extents(),
                 s.mapping(),
                 std::make_index_sequence<sizeof...(DDims)> {});
         return Kokkos::View<
-                ddc_detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
+                detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
                 decltype(kokkos_layout),
                 typename Allocator::memory_space>(s.data(), kokkos_layout);
     }
@@ -273,12 +273,12 @@ public:
     constexpr auto allocation_kokkos_view() const
     {
         auto s = this->allocation_mdspan();
-        auto kokkos_layout = ddc_detail::build_kokkos_layout(
+        auto kokkos_layout = detail::build_kokkos_layout(
                 s.extents(),
                 s.mapping(),
                 std::make_index_sequence<sizeof...(DDims)> {});
         return Kokkos::View<
-                ddc_detail::mdspan_to_kokkos_element_t<const ElementType, sizeof...(DDims)>,
+                detail::mdspan_to_kokkos_element_t<const ElementType, sizeof...(DDims)>,
                 decltype(kokkos_layout),
                 typename Allocator::memory_space>(s.data(), kokkos_layout);
     }

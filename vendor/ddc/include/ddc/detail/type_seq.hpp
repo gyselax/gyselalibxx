@@ -9,7 +9,7 @@
 
 namespace ddc {
 
-namespace ddc_detail {
+namespace detail {
 
 template <class...>
 struct TypeSeq;
@@ -73,7 +73,7 @@ struct TypeSeqRemove<TypeSeq<>, TypeSeq<TagsB...>, TypeSeq<TagsR...>>
 template <class HeadTagsA, class... TailTagsA, class... TagsB, class... TagsR>
 struct TypeSeqRemove<TypeSeq<HeadTagsA, TailTagsA...>, TypeSeq<TagsB...>, TypeSeq<TagsR...>>
     : std::conditional_t<
-              TypeSeqRank<ddc_detail::SingleType<HeadTagsA>, TypeSeq<TagsB...>>::present,
+              TypeSeqRank<detail::SingleType<HeadTagsA>, TypeSeq<TagsB...>>::present,
               TypeSeqRemove<TypeSeq<TailTagsA...>, TypeSeq<TagsB...>, TypeSeq<TagsR...>>,
               TypeSeqRemove<TypeSeq<TailTagsA...>, TypeSeq<TagsB...>, TypeSeq<TagsR..., HeadTagsA>>>
 {
@@ -95,13 +95,13 @@ struct TypeSeqMerge<TypeSeq<TagsA...>, TypeSeq<>, TypeSeq<TagsR...>>
 template <class... TagsA, class HeadTagsB, class... TailTagsB, class... TagsR>
 struct TypeSeqMerge<TypeSeq<TagsA...>, TypeSeq<HeadTagsB, TailTagsB...>, TypeSeq<TagsR...>>
     : std::conditional_t<
-              TypeSeqRank<ddc_detail::SingleType<HeadTagsB>, TypeSeq<TagsA...>>::present,
+              TypeSeqRank<detail::SingleType<HeadTagsB>, TypeSeq<TagsA...>>::present,
               TypeSeqMerge<TypeSeq<TagsA...>, TypeSeq<TailTagsB...>, TypeSeq<TagsR...>>,
               TypeSeqMerge<TypeSeq<TagsA...>, TypeSeq<TailTagsB...>, TypeSeq<TagsR..., HeadTagsB>>>
 {
 };
 
-} // namespace ddc_detail
+} // namespace detail
 
 template <class QueryTag, class TypeSeq>
 constexpr std::size_t type_seq_rank_v = std::numeric_limits<std::size_t>::max();
@@ -116,26 +116,25 @@ template <class TypeSeq, class B>
 constexpr bool type_seq_same_v = type_seq_contains_v<TypeSeq, B>&& type_seq_contains_v<B, TypeSeq>;
 
 template <class QueryTag, class... Tags>
-constexpr bool in_tags_v<QueryTag, ddc_detail::TypeSeq<Tags...>> = ddc_detail::
-        TypeSeqRank<ddc_detail::SingleType<QueryTag>, ddc_detail::TypeSeq<Tags...>>::present;
+constexpr bool in_tags_v<QueryTag, detail::TypeSeq<Tags...>> = detail::
+        TypeSeqRank<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::present;
 
 template <class... Tags, class OTypeSeq>
 constexpr bool type_seq_contains_v<
-        ddc_detail::TypeSeq<Tags...>,
-        OTypeSeq> = ((ddc_detail::TypeSeqRank<ddc_detail::SingleType<Tags>, OTypeSeq>::present) && ...);
+        detail::TypeSeq<Tags...>,
+        OTypeSeq> = ((detail::TypeSeqRank<detail::SingleType<Tags>, OTypeSeq>::present) && ...);
 
 template <class QueryTag, class... Tags>
-constexpr std::size_t type_seq_rank_v<QueryTag, ddc_detail::TypeSeq<Tags...>> = ddc_detail::
-        TypeSeqRank<ddc_detail::SingleType<QueryTag>, ddc_detail::TypeSeq<Tags...>>::val;
+constexpr std::size_t type_seq_rank_v<QueryTag, detail::TypeSeq<Tags...>> = detail::
+        TypeSeqRank<detail::SingleType<QueryTag>, detail::TypeSeq<Tags...>>::val;
 
 template <std::size_t I, class TagSeq>
-using type_seq_element_t = typename ddc_detail::TypeSeqElement<I, TagSeq>::type;
+using type_seq_element_t = typename detail::TypeSeqElement<I, TagSeq>::type;
 
 template <class TagSeqA, class TagSeqB>
-using type_seq_remove_t =
-        typename ddc_detail::TypeSeqRemove<TagSeqA, TagSeqB, ddc_detail::TypeSeq<>>::type;
+using type_seq_remove_t = typename detail::TypeSeqRemove<TagSeqA, TagSeqB, detail::TypeSeq<>>::type;
 
 template <class TagSeqA, class TagSeqB>
-using type_seq_merge_t = typename ddc_detail::TypeSeqMerge<TagSeqA, TagSeqB, TagSeqA>::type;
+using type_seq_merge_t = typename detail::TypeSeqMerge<TagSeqA, TagSeqB, TagSeqA>::type;
 
 } // namespace ddc
