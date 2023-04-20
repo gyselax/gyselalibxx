@@ -6,7 +6,7 @@
 
 #include "macros.hpp"
 
-namespace ddc::ddc_detail {
+namespace ddc::detail {
 
 template <class T>
 struct type_holder
@@ -156,4 +156,4 @@ auto build_mdspan(Kokkos::View<DataType, Properties...> const view, std::index_s
     DDC_IF_NVCC_THEN_POP
 }
 
-} // namespace ddc::ddc_detail
+} // namespace ddc::detail
