@@ -16,7 +16,7 @@ class ScopeGuard
 
     void discretization_store_initialization() const
     {
-        ddc_detail::g_discretization_store
+        detail::g_discretization_store
                 = std::make_optional<std::map<std::string, std::function<void()>>>();
     }
 
@@ -37,10 +37,10 @@ public:
 
     ~ScopeGuard() noexcept
     {
-        for (auto const& [name, fn] : *ddc_detail::g_discretization_store) {
+        for (auto const& [name, fn] : *detail::g_discretization_store) {
             fn();
         }
-        ddc_detail::g_discretization_store.reset();
+        detail::g_discretization_store.reset();
     }
 
     ScopeGuard& operator=(ScopeGuard const& x) = delete;

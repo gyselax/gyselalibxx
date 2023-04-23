@@ -22,7 +22,7 @@
 
 namespace ddc {
 
-namespace ddc_detail {
+namespace detail {
 
 template <class DDim, class MemorySpace>
 using ddim_impl_t = typename DDim::template Impl<MemorySpace>;
@@ -99,7 +99,7 @@ auto extract_after(Tuple&& t, std::index_sequence<Ids...>)
     return std::make_tuple(std::move(std::get<Ids + 1>(t))...);
 }
 
-} // namespace ddc_detail
+} // namespace detail
 
 /** Initialize (emplace) a global singleton discrete space
  * 
@@ -108,23 +108,23 @@ auto extract_after(Tuple&& t, std::index_sequence<Ids...>)
 template <class DDim, class... Args>
 void init_discrete_space(Args&&... args)
 {
-    if (ddc_detail::g_discrete_space_dual<DDim>) {
+    if (detail::g_discrete_space_dual<DDim>) {
         throw std::runtime_error("Discrete space function already initialized.");
     }
-    ddc_detail::g_discrete_space_dual<DDim>.emplace(std::forward<Args>(args)...);
-    ddc_detail::g_discretization_store->emplace(typeid(DDim).name(), []() {
-        ddc_detail::g_discrete_space_dual<DDim>.reset();
+    detail::g_discrete_space_dual<DDim>.emplace(std::forward<Args>(args)...);
+    detail::g_discretization_store->emplace(typeid(DDim).name(), []() {
+        detail::g_discrete_space_dual<DDim>.reset();
     });
 #if defined(__CUDACC__)
     cudaMemcpyToSymbol(
-            ddc_detail::g_discrete_space_device<DDim>,
-            &ddc_detail::g_discrete_space_dual<DDim>->get_device(),
-            sizeof(ddc_detail::g_discrete_space_dual<DDim>->get_device()));
+            detail::g_discrete_space_device<DDim>,
+            &detail::g_discrete_space_dual<DDim>->get_device(),
+            sizeof(detail::g_discrete_space_dual<DDim>->get_device()));
 #elif defined(__HIPCC__)
     hipMemcpyToSymbol(
-            ddc_detail::g_discrete_space_device<DDim>,
-            &ddc_detail::g_discrete_space_dual<DDim>->get_device(),
-            sizeof(ddc_detail::g_discrete_space_dual<DDim>->get_device()));
+            detail::g_discrete_space_device<DDim>,
+            &detail::g_discrete_space_dual<DDim>->get_device(),
+            sizeof(detail::g_discrete_space_dual<DDim>->get_device()));
 #endif
 }
 
@@ -152,22 +152,22 @@ std::enable_if_t<2 <= sizeof...(Args), std::tuple<Args...>> init_discrete_space(
 {
     using DDim = typename DDimImpl::discrete_dimension_type;
     init_discrete_space<DDim>(std::move(std::get<0>(a)));
-    return ddc_detail::extract_after(std::move(a), std::index_sequence_for<Args...>());
+    return detail::extract_after(std::move(a), std::index_sequence_for<Args...>());
 }
 
 template <class DDim, class MemorySpace = DDC_CURRENT_KOKKOS_SPACE>
-DDC_INLINE_FUNCTION ddc_detail::ddim_impl_t<DDim, MemorySpace> const& discrete_space()
+DDC_INLINE_FUNCTION detail::ddim_impl_t<DDim, MemorySpace> const& discrete_space()
 {
     if constexpr (std::is_same_v<MemorySpace, Kokkos::HostSpace>) {
-        return ddc_detail::g_discrete_space_dual<DDim>->get_host();
+        return detail::g_discrete_space_dual<DDim>->get_host();
     }
 #if defined(__CUDACC__)
     else if constexpr (std::is_same_v<MemorySpace, Kokkos::CudaSpace>) {
-        return *ddc_detail::g_discrete_space_device<DDim>;
+        return *detail::g_discrete_space_device<DDim>;
     }
 #elif defined(__HIPCC__)
     else if constexpr (std::is_same_v<MemorySpace, Kokkos::Experimental::HIPSpace>) {
-        return *ddc_detail::g_discrete_space_device<DDim>;
+        return *detail::g_discrete_space_device<DDim>;
     }
 #endif
     else {

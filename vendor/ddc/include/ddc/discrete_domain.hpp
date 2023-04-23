@@ -359,13 +359,13 @@ constexpr DiscreteDomain<QueryDDims...> select(DiscreteDomain<DDims...> const& d
             select<QueryDDims...>(domain.extents()));
 }
 
-namespace ddc_detail {
+namespace detail {
 
 template <class T>
 struct ConvertTypeSeqToDiscreteDomain;
 
 template <class... DDims>
-struct ConvertTypeSeqToDiscreteDomain<ddc_detail::TypeSeq<DDims...>>
+struct ConvertTypeSeqToDiscreteDomain<detail::TypeSeq<DDims...>>
 {
     using type = DiscreteDomain<DDims...>;
 };
@@ -373,18 +373,18 @@ struct ConvertTypeSeqToDiscreteDomain<ddc_detail::TypeSeq<DDims...>>
 template <class T>
 using convert_type_seq_to_discrete_domain = typename ConvertTypeSeqToDiscreteDomain<T>::type;
 
-} // namespace ddc_detail
+} // namespace detail
 
 template <class... DDimsA, class... DDimsB>
 constexpr auto remove_dims_of(
         DiscreteDomain<DDimsA...> const& DDom_a,
         DiscreteDomain<DDimsB...> const& DDom_b) noexcept
 {
-    using TagSeqA = ddc_detail::TypeSeq<DDimsA...>;
-    using TagSeqB = ddc_detail::TypeSeq<DDimsB...>;
+    using TagSeqA = detail::TypeSeq<DDimsA...>;
+    using TagSeqB = detail::TypeSeq<DDimsB...>;
 
     using type_seq_r = type_seq_remove_t<TagSeqA, TagSeqB>;
-    return ddc_detail::convert_type_seq_to_discrete_domain<type_seq_r>(DDom_a);
+    return detail::convert_type_seq_to_discrete_domain<type_seq_r>(DDom_a);
 }
 
 template <class... QueryDDims, class... DDims>
@@ -426,13 +426,13 @@ ddc::Coordinate<QueryDDims...> rmax(DiscreteDomain<DDims...> const& domain) noex
     return ddc::Coordinate<QueryDDims...>(select<QueryDDims>(domain).rmax()...);
 }
 
-namespace ddc_detail {
+namespace detail {
 
 template <class QueryDDimSeq>
 struct Selection;
 
 template <class... QueryDDims>
-struct Selection<ddc_detail::TypeSeq<QueryDDims...>>
+struct Selection<detail::TypeSeq<QueryDDims...>>
 {
     template <class Domain>
     static constexpr auto select(Domain const& domain)
@@ -441,12 +441,12 @@ struct Selection<ddc_detail::TypeSeq<QueryDDims...>>
     }
 };
 
-} // namespace ddc_detail
+} // namespace detail
 
 template <class QueryDDimSeq, class... DDims>
 constexpr auto select_by_type_seq(DiscreteDomain<DDims...> const& domain)
 {
-    return ddc_detail::Selection<QueryDDimSeq>::select(domain);
+    return detail::Selection<QueryDDimSeq>::select(domain);
 }
 
 template <class DDim>

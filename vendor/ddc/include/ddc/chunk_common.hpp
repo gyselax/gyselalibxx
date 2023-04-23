@@ -170,14 +170,14 @@ public:
     constexpr DiscreteVector<DDims...> extents() const noexcept
     {
         return DiscreteVector<DDims...>(
-                (m_internal_mdspan.extent(type_seq_rank_v<DDims, ddc_detail::TypeSeq<DDims...>>)
+                (m_internal_mdspan.extent(type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)
                  - front<DDims>(m_domain).uid())...);
     }
 
     template <class QueryDDim>
     constexpr size_type extent() const noexcept
     {
-        return m_internal_mdspan.extent(type_seq_rank_v<QueryDDim, ddc_detail::TypeSeq<DDims...>>)
+        return m_internal_mdspan.extent(type_seq_rank_v<QueryDDim, detail::TypeSeq<DDims...>>)
                - front<QueryDDim>(m_domain).uid();
     }
 
@@ -209,7 +209,7 @@ public:
     template <class QueryDDim>
     constexpr size_type stride() const
     {
-        return m_internal_mdspan.stride(type_seq_rank_v<QueryDDim, ddc_detail::TypeSeq<DDims...>>);
+        return m_internal_mdspan.stride(type_seq_rank_v<QueryDDim, detail::TypeSeq<DDims...>>);
     }
 
     /** Provide access to the domain on which this chunk is defined
@@ -261,7 +261,7 @@ protected:
 
         extents_type extents_s((front<DDims>(domain) + ddc::extents<DDims>(domain)).uid()...);
         std::array<std::size_t, sizeof...(DDims)> strides_s {
-                mapping_r.stride(type_seq_rank_v<DDims, ddc_detail::TypeSeq<DDims...>>)...};
+                mapping_r.stride(type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
         stdex::layout_stride::mapping<extents_type> mapping_s(extents_s, strides_s);
 
         // Pointer offset to handle non-zero indexing

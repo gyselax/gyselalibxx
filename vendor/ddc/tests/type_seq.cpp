@@ -18,7 +18,7 @@ struct z;
 
 TEST(TypeSeqTest, Rank)
 {
-    using A = ddc::ddc_detail::TypeSeq<a, b, c>;
+    using A = ddc::detail::TypeSeq<a, b, c>;
     EXPECT_EQ((ddc::type_seq_rank_v<a, A>), 0);
     EXPECT_EQ((ddc::type_seq_rank_v<b, A>), 1);
     EXPECT_EQ((ddc::type_seq_rank_v<c, A>), 2);
@@ -26,7 +26,7 @@ TEST(TypeSeqTest, Rank)
 
 TEST(TypeSeqTest, Element)
 {
-    using A = ddc::ddc_detail::TypeSeq<a, b, c>;
+    using A = ddc::detail::TypeSeq<a, b, c>;
     EXPECT_TRUE((std::is_same_v<a, ddc::type_seq_element_t<0, A>>));
     EXPECT_TRUE((std::is_same_v<b, ddc::type_seq_element_t<1, A>>));
     EXPECT_TRUE((std::is_same_v<c, ddc::type_seq_element_t<2, A>>));
@@ -34,9 +34,9 @@ TEST(TypeSeqTest, Element)
 
 TEST(TypeSeqTest, SameTags)
 {
-    using A = ddc::ddc_detail::TypeSeq<a, b, c>;
-    using B = ddc::ddc_detail::TypeSeq<z, c, y>;
-    using C = ddc::ddc_detail::TypeSeq<c, b, a>;
+    using A = ddc::detail::TypeSeq<a, b, c>;
+    using B = ddc::detail::TypeSeq<z, c, y>;
+    using C = ddc::detail::TypeSeq<c, b, a>;
     EXPECT_FALSE((ddc::type_seq_same_v<A, B>));
     EXPECT_FALSE((ddc::type_seq_same_v<B, A>));
     EXPECT_TRUE((ddc::type_seq_same_v<A, C>));
@@ -47,18 +47,18 @@ TEST(TypeSeqTest, SameTags)
 
 TEST(TypeSeqTest, Remove)
 {
-    using A = ddc::ddc_detail::TypeSeq<a, b, c>;
-    using B = ddc::ddc_detail::TypeSeq<z, c, y>;
+    using A = ddc::detail::TypeSeq<a, b, c>;
+    using B = ddc::detail::TypeSeq<z, c, y>;
     using R = ddc::type_seq_remove_t<A, B>;
-    using ExpectedR = ddc::ddc_detail::TypeSeq<a, b>;
+    using ExpectedR = ddc::detail::TypeSeq<a, b>;
     EXPECT_TRUE((ddc::type_seq_same_v<R, ExpectedR>));
 }
 
 TEST(TypeSeqTest, Merge)
 {
-    using A = ddc::ddc_detail::TypeSeq<a, b, c>;
-    using B = ddc::ddc_detail::TypeSeq<z, c, y>;
+    using A = ddc::detail::TypeSeq<a, b, c>;
+    using B = ddc::detail::TypeSeq<z, c, y>;
     using R = ddc::type_seq_merge_t<A, B>;
-    using ExpectedR = ddc::ddc_detail::TypeSeq<a, b, c, z, y>;
+    using ExpectedR = ddc::detail::TypeSeq<a, b, c, z, y>;
     EXPECT_TRUE((ddc::type_seq_same_v<R, ExpectedR>));
 }
