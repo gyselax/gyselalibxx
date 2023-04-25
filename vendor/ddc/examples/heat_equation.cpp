@@ -45,7 +45,7 @@ using DDimT = ddc::UniformPointSampling<T>;
 template <class ChunkType>
 void display(double time, ChunkType temp)
 {
-    double const mean_temp = transform_reduce(
+    double const mean_temp = ddc::transform_reduce(
                                      temp.domain(),
                                      0.,
                                      ddc::reducer::sum<double>(),
@@ -159,22 +159,24 @@ int main(int argc, char** argv)
 
     //! [time-domains]
     // max(1/dx^2)
-    double const invdx2_max = transform_reduce(
+    double const invdx2_max = ddc::transform_reduce(
             x_domain,
             0.,
             ddc::reducer::max<double>(),
             [](ddc::DiscreteElement<DDimX> ix) {
                 return 1.
-                       / (distance_at_left(ix) * distance_at_right(ix));
+                       / (ddc::distance_at_left(ix)
+                          * ddc::distance_at_right(ix));
             });
     // max(1/dy^2)
-    double const invdy2_max = transform_reduce(
+    double const invdy2_max = ddc::transform_reduce(
             y_domain,
             0.,
             ddc::reducer::max<double>(),
             [](ddc::DiscreteElement<DDimY> iy) {
                 return 1.
-                       / (distance_at_left(iy) * distance_at_right(iy));
+                       / (ddc::distance_at_left(iy)
+                          * ddc::distance_at_right(iy));
             });
     ddc::Coordinate<T> const max_dt {
             .5 / (kx * invdx2_max + ky * invdy2_max)};
@@ -218,8 +220,10 @@ int main(int argc, char** argv)
             ddc::policies::parallel_device,
             ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
             DDC_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
-                double const x = coordinate(ddc::select<DDimX>(ixy));
-                double const y = coordinate(ddc::select<DDimY>(ixy));
+                double const x
+                        = ddc::coordinate(ddc::select<DDimX>(ixy));
+                double const y
+                        = ddc::coordinate(ddc::select<DDimY>(ixy));
                 ghosted_initial_temp(ixy)
                         = 9.999 * ((x * x + y * y) < 0.25);
             });
@@ -235,7 +239,7 @@ int main(int argc, char** argv)
     //! [initial output]
     // display the initial data
     ddc::deepcopy(ghosted_temp, ghosted_last_temp);
-    display(coordinate(time_domain.front()),
+    display(ddc::coordinate(time_domain.front()),
             ghosted_temp[x_domain][y_domain]);
     // time of the iteration where the last output happened
     ddc::DiscreteElement<DDimT> last_output = time_domain.front();
@@ -282,11 +286,11 @@ int main(int argc, char** argv)
                             = ddc::select<DDimX>(ixy);
                     ddc::DiscreteElement<DDimY> const iy
                             = ddc::select<DDimY>(ixy);
-                    double const dx_l = distance_at_left(ix);
-                    double const dx_r = distance_at_right(ix);
+                    double const dx_l = ddc::distance_at_left(ix);
+                    double const dx_r = ddc::distance_at_right(ix);
                     double const dx_m = 0.5 * (dx_l + dx_r);
-                    double const dy_l = distance_at_left(iy);
-                    double const dy_r = distance_at_right(iy);
+                    double const dy_l = ddc::distance_at_left(iy);
+                    double const dy_r = ddc::distance_at_right(iy);
                     double const dy_m = 0.5 * (dy_l + dy_r);
                     next_temp(ix, iy) = last_temp(ix, iy);
                     next_temp(ix, iy)
@@ -308,7 +312,8 @@ int main(int argc, char** argv)
         if (iter - last_output >= t_output_period) {
             last_output = iter;
             ddc::deepcopy(ghosted_temp, ghosted_last_temp);
-            display(coordinate(iter), ghosted_temp[x_domain][y_domain]);
+            display(ddc::coordinate(iter),
+                    ghosted_temp[x_domain][y_domain]);
         }
         //! [output]
 
@@ -321,7 +326,7 @@ int main(int argc, char** argv)
     //! [final output]
     if (last_output < time_domain.back()) {
         ddc::deepcopy(ghosted_temp, ghosted_last_temp);
-        display(coordinate(time_domain.back()),
+        display(ddc::coordinate(time_domain.back()),
                 ghosted_temp[x_domain][y_domain]);
     }
     //! [final output]
