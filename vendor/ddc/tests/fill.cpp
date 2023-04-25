@@ -4,6 +4,8 @@
 
 #include <gtest/gtest.h>
 
+namespace {
+
 struct DDimX;
 using DElemX = ddc::DiscreteElement<DDimX>;
 using DVectX = ddc::DiscreteVector<DDimX>;
@@ -26,6 +28,8 @@ static DVectY constexpr nelems_y(12);
 
 static DElemXY constexpr lbound_x_y {lbound_x, lbound_y};
 static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
+
+} // namespace
 
 TEST(Fill, OneDimension)
 {
