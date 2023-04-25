@@ -73,38 +73,6 @@ public:
             assert(step > 0);
         }
 
-        /** @brief Construct a `Impl` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
-         *
-         * @param a the coordinate of a first real point (will have mesh coordinate 0)
-         * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
-         * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
-         *
-         * @deprecated use the version accepting a vector for n instead
-         */
-        [[deprecated(
-                "Use the version accepting a vector for n "
-                "instead.")]] constexpr Impl(continuous_element_type a, continuous_element_type b, std::size_t n)
-            : m_origin(a)
-            , m_step((b - a) / (n - 1))
-        {
-            assert(a < b);
-            assert(n > 1);
-        }
-
-        /** @brief Construct a `Impl` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
-         *
-         * @param a the coordinate of a first real point (will have mesh coordinate 0)
-         * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
-         * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
-         */
-        constexpr Impl(continuous_element_type a, continuous_element_type b, discrete_vector_type n)
-            : m_origin(a)
-            , m_step((b - a) / (n - 1))
-        {
-            assert(a < b);
-            assert(n > 1);
-        }
-
         ~Impl() = default;
 
         /// @brief Lower bound index of the mesh
