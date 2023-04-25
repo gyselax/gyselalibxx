@@ -109,10 +109,10 @@ public:
                             ncells + 1)) // Create a mesh including the eventual periodic point
         {
             assert(ncells > 0);
-            ddc::init_discrete_space<mesh_type>(
-                    knot_from_coord(rmin),
-                    knot_from_coord(rmax),
-                    ddc::DiscreteVector<mesh_type>(ncells + 1));
+            ddc::init_discrete_space(mesh_type::
+                                             init(knot_from_coord(rmin),
+                                                  knot_from_coord(rmax),
+                                                  ddc::DiscreteVector<mesh_type>(ncells + 1)));
         }
 
         Impl(Impl const& x) = default;
