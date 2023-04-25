@@ -31,14 +31,6 @@ TEST_F(UniformPointSamplingTest, Constructor)
     EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
-TEST_F(UniformPointSamplingTest, Constructor2)
-{
-    DDimX::Impl<Kokkos::HostSpace> ddim_x(origin, ddc::Coordinate<DimX>(1.), npoints);
-    EXPECT_EQ(ddim_x.origin(), origin);
-    EXPECT_EQ(ddim_x.step(), step);
-    EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
-}
-
 TEST(UniformPointSampling, Formatting)
 {
     DDimX::Impl<Kokkos::HostSpace> ddim_x(ddc::Coordinate<DimX>(-1.), 0.5);
