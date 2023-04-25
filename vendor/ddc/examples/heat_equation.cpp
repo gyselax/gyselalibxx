@@ -165,7 +165,8 @@ int main(int argc, char** argv)
             ddc::reducer::max<double>(),
             [](ddc::DiscreteElement<DDimX> ix) {
                 return 1.
-                       / (distance_at_left(ix) * distance_at_right(ix));
+                       / (ddc::distance_at_left(ix)
+                          * ddc::distance_at_right(ix));
             });
     // max(1/dy^2)
     double const invdy2_max = ddc::transform_reduce(
@@ -174,7 +175,8 @@ int main(int argc, char** argv)
             ddc::reducer::max<double>(),
             [](ddc::DiscreteElement<DDimY> iy) {
                 return 1.
-                       / (distance_at_left(iy) * distance_at_right(iy));
+                       / (ddc::distance_at_left(iy)
+                          * ddc::distance_at_right(iy));
             });
     ddc::Coordinate<T> const max_dt {
             .5 / (kx * invdx2_max + ky * invdy2_max)};
@@ -284,11 +286,11 @@ int main(int argc, char** argv)
                             = ddc::select<DDimX>(ixy);
                     ddc::DiscreteElement<DDimY> const iy
                             = ddc::select<DDimY>(ixy);
-                    double const dx_l = distance_at_left(ix);
-                    double const dx_r = distance_at_right(ix);
+                    double const dx_l = ddc::distance_at_left(ix);
+                    double const dx_r = ddc::distance_at_right(ix);
                     double const dx_m = 0.5 * (dx_l + dx_r);
-                    double const dy_l = distance_at_left(iy);
-                    double const dy_r = distance_at_right(iy);
+                    double const dy_l = ddc::distance_at_left(iy);
+                    double const dy_r = ddc::distance_at_right(iy);
                     double const dy_m = 0.5 * (dy_l + dy_r);
                     next_temp(ix, iy) = last_temp(ix, iy);
                     next_temp(ix, iy)
