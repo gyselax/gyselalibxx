@@ -60,18 +60,6 @@ public:
     {
     }
 
-    /** Construct a DiscreteDomain starting from (0, ..., 0) with size points.
-     * @param size the number of points in each dimension
-     * 
-     * @deprecated use the version with explicit lower bound instead
-     */
-    [[deprecated]] constexpr DiscreteDomain(mlength_type const& size)
-        : m_element_begin(
-                (get<DDims>(size) - get<DDims>(size))...) // Hack to have expansion of zero
-        , m_element_end(get<DDims>(size)...)
-    {
-    }
-
     /** Construct a DiscreteDomain starting from element_begin with size points.
      * @param element_begin the lower bound in each direction
      * @param size the number of points in each direction

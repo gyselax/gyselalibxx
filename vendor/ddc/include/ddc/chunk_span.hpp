@@ -281,12 +281,6 @@ public:
         return base_type::data();
     }
 
-    /// @deprecated
-    [[deprecated]] constexpr internal_mdspan_type internal_mdspan() const
-    {
-        return base_type::internal_mdspan();
-    }
-
     /** Provide a mdspan on the memory allocation
      * @return allocation mdspan
      */
