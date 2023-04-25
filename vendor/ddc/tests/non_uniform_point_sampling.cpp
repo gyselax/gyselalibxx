@@ -16,6 +16,7 @@
     }
 
 namespace {
+
 struct DimX;
 
 using DDimX = ddc::NonUniformPointSampling<DimX>;
