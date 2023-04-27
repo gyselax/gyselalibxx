@@ -213,6 +213,13 @@ std::ostream& operator<<(std::ostream& out, DDimImpl const& mesh)
                << " )";
 }
 
+template <class CDim>
+DDC_INLINE_FUNCTION Coordinate<CDim> coordinate(
+        DiscreteElement<UniformPointSampling<CDim>> const& c)
+{
+    return discrete_space<UniformPointSampling<CDim>>().coordinate(c);
+}
+
 /// @brief Lower bound index of the mesh
 template <class DDim>
 DDC_INLINE_FUNCTION std::
