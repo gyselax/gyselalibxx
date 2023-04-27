@@ -11,8 +11,10 @@
 namespace {
 
 struct DimX;
+struct DimY;
 
 using DDimX = ddc::UniformPointSampling<DimX>;
+using DDimY = ddc::UniformPointSampling<DimY>;
 
 static ddc::Coordinate<DimX> constexpr origin(-1.);
 static double constexpr step = 0.5;
@@ -35,4 +37,19 @@ TEST(UniformPointSampling, Formatting)
     std::stringstream oss;
     oss << ddim_x;
     EXPECT_EQ(oss.str(), "UniformPointSampling( origin=(-1), step=0.5 )");
+}
+
+TEST(UniformPointSamplingTest, Coordinate)
+{
+    ddc::DiscreteElement<DDimY> point_iy(4);
+    ddc::Coordinate<DimY> point_ry(-6.);
+
+    ddc::DiscreteElement<DDimX, DDimY> point_ixy(point_ix, point_iy);
+    ddc::Coordinate<DimX, DimY> point_rxy(point_rx, point_ry);
+
+    ddc::init_discrete_space<DDimX>(origin, step);
+    ddc::init_discrete_space<DDimY>(ddc::Coordinate<DimY>(-10.), 1.);
+    EXPECT_EQ(coordinate(point_ix), point_rx);
+    EXPECT_EQ(coordinate(point_iy), point_ry);
+    EXPECT_EQ(coordinate(point_ixy), point_rxy);
 }
