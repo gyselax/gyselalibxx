@@ -69,12 +69,41 @@ constexpr inline DiscreteVector<Tags...> operator-(DiscreteVector<Tags...> const
 /// Internal binary operators: +, -
 
 template <class... Tags, class... OTags>
-constexpr inline DiscreteVector<Tags...> operator+(
+constexpr inline auto operator+(
         DiscreteVector<Tags...> const& lhs,
         DiscreteVector<OTags...> const& rhs)
 {
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    return DiscreteVector<Tags...>((get<Tags>(lhs) + get<Tags>(rhs))...);
+    using detail::TypeSeq;
+    if constexpr (sizeof...(Tags) >= sizeof...(OTags)) {
+        static_assert(((type_seq_contains_v<TypeSeq<OTags>, TypeSeq<Tags...>>)&&...));
+        DiscreteVector<Tags...> result(lhs);
+        result += rhs;
+        return result;
+    } else {
+        static_assert(((type_seq_contains_v<TypeSeq<Tags>, TypeSeq<OTags...>>)&&...));
+        DiscreteVector<OTags...> result(rhs);
+        result += lhs;
+        return result;
+    }
+}
+
+template <class... Tags, class... OTags>
+constexpr inline auto operator-(
+        DiscreteVector<Tags...> const& lhs,
+        DiscreteVector<OTags...> const& rhs)
+{
+    using detail::TypeSeq;
+    if constexpr (sizeof...(Tags) >= sizeof...(OTags)) {
+        static_assert(((type_seq_contains_v<TypeSeq<OTags>, TypeSeq<Tags...>>)&&...));
+        DiscreteVector<Tags...> result(lhs);
+        result -= rhs;
+        return result;
+    } else {
+        static_assert(((type_seq_contains_v<TypeSeq<Tags>, TypeSeq<OTags...>>)&&...));
+        DiscreteVector<OTags...> result(-rhs);
+        result += lhs;
+        return result;
+    }
 }
 
 template <class Tag, class IntegralType, class = std::enable_if_t<std::is_integral_v<IntegralType>>>
@@ -91,15 +120,6 @@ constexpr inline DiscreteVector<Tag> operator+(
         DiscreteVector<Tag> const& rhs)
 {
     return DiscreteVector<Tag>(lhs + get<Tag>(rhs));
-}
-
-template <class... Tags, class... OTags>
-constexpr inline DiscreteVector<Tags...> operator-(
-        DiscreteVector<Tags...> const& lhs,
-        DiscreteVector<OTags...> const& rhs)
-{
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    return DiscreteVector<Tags...>((get<Tags>(lhs) - get<Tags>(rhs))...);
 }
 
 template <class Tag, class IntegralType, class = std::enable_if_t<std::is_integral_v<IntegralType>>>
@@ -350,8 +370,8 @@ public:
     template <class... OTags>
     constexpr inline DiscreteVector& operator+=(DiscreteVector<OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
-        ((m_values[type_seq_rank_v<Tags, tags_seq>] += rhs.template get<Tags>()), ...);
+        static_assert(((type_seq_contains_v<detail::TypeSeq<OTags>, tags_seq>)&&...));
+        ((m_values[type_seq_rank_v<OTags, tags_seq>] += rhs.template get<OTags>()), ...);
         return *this;
     }
 
@@ -369,8 +389,8 @@ public:
     template <class... OTags>
     constexpr inline DiscreteVector& operator-=(DiscreteVector<OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
-        ((m_values[type_seq_rank_v<Tags, tags_seq>] -= rhs.template get<Tags>()), ...);
+        static_assert(((type_seq_contains_v<detail::TypeSeq<OTags>, tags_seq>)&&...));
+        ((m_values[type_seq_rank_v<OTags, tags_seq>] -= rhs.template get<OTags>()), ...);
         return *this;
     }
 
@@ -388,8 +408,8 @@ public:
     template <class... OTags>
     constexpr inline DiscreteVector& operator*=(DiscreteVector<OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
-        ((m_values[type_seq_rank_v<Tags, tags_seq>] *= rhs.template get<Tags>()), ...);
+        static_assert(((type_seq_contains_v<detail::TypeSeq<OTags>, tags_seq>)&&...));
+        ((m_values[type_seq_rank_v<OTags, tags_seq>] *= rhs.template get<OTags>()), ...);
         return *this;
     }
 };
