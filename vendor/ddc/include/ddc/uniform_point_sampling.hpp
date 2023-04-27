@@ -239,13 +239,6 @@ DDC_INLINE_FUNCTION std::enable_if_t<is_uniform_sampling_v<DDim>, double> step()
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION constexpr Coordinate<CDim> coordinate(
-        DiscreteElement<UniformPointSampling<CDim>> const& c)
-{
-    return discrete_space<UniformPointSampling<CDim>>().coordinate(c);
-}
-
-template <class CDim>
 DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_left(DiscreteElement<UniformPointSampling<CDim>>)
 {
     return Coordinate<CDim>(step<UniformPointSampling<CDim>>());
