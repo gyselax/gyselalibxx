@@ -134,13 +134,6 @@ std::ostream& operator<<(std::ostream& out, DDimImpl const& mesh)
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> coordinate(
-        DiscreteElement<NonUniformPointSampling<CDim>> const& c)
-{
-    return discrete_space<NonUniformPointSampling<CDim>>().coordinate(c);
-}
-
-template <class CDim>
 DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_left(
         DiscreteElement<NonUniformPointSampling<CDim>> i)
 {
