@@ -19,6 +19,7 @@ add_executable(ddc_tests
     for_each.cpp
     fill.cpp
     discrete_element.cpp
+    discrete_vector.cpp
 )
 target_compile_features(ddc_tests PUBLIC cxx_std_17)
 target_link_libraries(ddc_tests

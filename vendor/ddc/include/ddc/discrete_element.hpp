@@ -261,8 +261,8 @@ public:
     template <class... OTags>
     constexpr inline DiscreteElement& operator+=(DiscreteVector<OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
-        ((m_values[type_seq_rank_v<Tags, tags_seq>] += rhs.template get<Tags>()), ...);
+        static_assert(((type_seq_contains_v<detail::TypeSeq<OTags>, tags_seq>)&&...));
+        ((m_values[type_seq_rank_v<OTags, tags_seq>] += rhs.template get<OTags>()), ...);
         return *this;
     }
 
@@ -280,8 +280,8 @@ public:
     template <class... OTags>
     constexpr inline DiscreteElement& operator-=(DiscreteVector<OTags...> const& rhs)
     {
-        static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
-        ((m_values[type_seq_rank_v<Tags, tags_seq>] -= rhs.template get<Tags>()), ...);
+        static_assert(((type_seq_contains_v<detail::TypeSeq<OTags>, tags_seq>)&&...));
+        ((m_values[type_seq_rank_v<OTags, tags_seq>] -= rhs.template get<OTags>()), ...);
         return *this;
     }
 
@@ -361,8 +361,11 @@ constexpr inline DiscreteElement<Tags...> operator+(
         DiscreteElement<Tags...> const& lhs,
         DiscreteVector<OTags...> const& rhs)
 {
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    return DiscreteElement<Tags...>((uid<Tags>(lhs) + get<Tags>(rhs))...);
+    using detail::TypeSeq;
+    static_assert(((type_seq_contains_v<TypeSeq<OTags>, TypeSeq<Tags...>>)&&...));
+    DiscreteElement<Tags...> result(lhs);
+    result += rhs;
+    return result;
 }
 
 template <
@@ -382,8 +385,11 @@ constexpr inline DiscreteElement<Tags...> operator-(
         DiscreteElement<Tags...> const& lhs,
         DiscreteVector<OTags...> const& rhs)
 {
-    static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
-    return DiscreteElement<Tags...>((uid<Tags>(lhs) - get<Tags>(rhs))...);
+    using detail::TypeSeq;
+    static_assert(((type_seq_contains_v<TypeSeq<OTags>, TypeSeq<Tags...>>)&&...));
+    DiscreteElement<Tags...> result(lhs);
+    result -= rhs;
+    return result;
 }
 
 template <
