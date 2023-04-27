@@ -393,27 +393,6 @@ constexpr DiscreteElement<QueryDDims...> back(DiscreteDomain<DDims...> const& do
     return DiscreteElement<QueryDDims...>(select<QueryDDims>(domain).back()...);
 }
 
-template <class... QueryDDims, class... DDims>
-ddc::Coordinate<QueryDDims...> coordinate(
-        DiscreteDomain<DDims...> const& domain,
-        DiscreteElement<QueryDDims...> const& icoord) noexcept
-{
-    return ddc::Coordinate<QueryDDims...>(
-            select<QueryDDims>(domain).coordinate(select<QueryDDims>(icoord))...);
-}
-
-template <class... QueryDDims, class... DDims>
-ddc::Coordinate<QueryDDims...> rmin(DiscreteDomain<DDims...> const& domain) noexcept
-{
-    return ddc::Coordinate<QueryDDims...>(select<QueryDDims>(domain).rmin()...);
-}
-
-template <class... QueryDDims, class... DDims>
-ddc::Coordinate<QueryDDims...> rmax(DiscreteDomain<DDims...> const& domain) noexcept
-{
-    return ddc::Coordinate<QueryDDims...>(select<QueryDDims>(domain).rmax()...);
-}
-
 namespace detail {
 
 template <class QueryDDimSeq>
