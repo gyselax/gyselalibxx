@@ -82,6 +82,7 @@ public:
 private:
     double m_nustar0;
     double m_fthresh;
+    DFieldSpX m_nustar_profile;
 
     ddc::DiscreteDomain<ghosted_vx_point_sampling> m_gridvx_ghosted;
     ddc::DiscreteDomain<ghosted_vx_staggered_point_sampling> m_gridvx_ghosted_staggered;
@@ -95,8 +96,6 @@ public:
     ~CollisionsIntra() = default;
 
     DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
-
-    void expose_rhs_to_pdi() const;
 
     double get_nustar0() const;
 
