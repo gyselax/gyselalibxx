@@ -18,7 +18,6 @@ add_executable(unit_tests_${GEOMETRY_VARIANT}
     quadrature.cpp
     species_info.cpp
     splitvlasovsolver.cpp
-    rk2.cpp
 )
 target_compile_features(unit_tests_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_${GEOMETRY_VARIANT}

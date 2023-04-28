@@ -230,14 +230,10 @@ int main(int argc, char** argv)
             rhs_operators.emplace_back(krook_source_constant_vector.back());
 
         } else if (krook_name == "adaptive") {
-            static std::map<std::string, RhsSolver> str2solver {{"rk2", RhsSolver::Rk2}};
-            RhsSolver solver = str2solver[PCpp_string(conf_krook, ".solver")];
-
             krook_source_adaptive_vector.emplace_back(
                     gridx,
                     gridvx,
                     type,
-                    solver,
                     PCpp_double(conf_krook, ".extent"),
                     PCpp_double(conf_krook, ".stiffness"),
                     PCpp_double(conf_krook, ".amplitude"),

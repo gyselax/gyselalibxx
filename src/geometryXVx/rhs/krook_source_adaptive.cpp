@@ -6,6 +6,7 @@
 
 #include <maxwellianequilibrium.hpp>
 #include <quadrature.hpp>
+#include <species_info.hpp>
 #include <trapezoid_quadrature.hpp>
 
 #include "krook_source_adaptive.hpp"
@@ -30,14 +31,12 @@ KrookSourceAdaptive::KrookSourceAdaptive(
         IDomainX const& gridx,
         IDomainVx const& gridvx,
         RhsType const type,
-        RhsSolver const solver_name,
         double const extent,
         double const stiffness,
         double const amplitude,
         double const density,
         double const temperature)
     : m_type(type)
-    , m_solver_name(solver_name)
     , m_extent(extent)
     , m_stiffness(stiffness)
     , m_amplitude(amplitude)
@@ -54,17 +53,6 @@ KrookSourceAdaptive::KrookSourceAdaptive(
     case RhsType::Sink:
         // the mask equals zero in the center of the plasma
         m_mask = mask_tanh(gridx, m_extent, m_stiffness, MaskType::Inverted, false);
-        break;
-    }
-
-    // solver for the module
-    switch (m_solver_name) {
-    case RhsSolver::Rk2:
-        m_solver = std::make_unique<RK2_solver>(
-                [this](DSpanVx rhs_val,
-                       DViewSpXVx allfdistribu,
-                       double time,
-                       IndexSpX const& ispx) { rhs(rhs_val, allfdistribu, time, ispx); });
         break;
     }
 
@@ -95,58 +83,70 @@ KrookSourceAdaptive::KrookSourceAdaptive(
 
 /**
  * Computes the amplitude parameter for each species: 
- * amplitude(ions) = m_amplitude = constant
- * amplitude(electrons, x, t) = m_amplitude
+ * amplitudes(ions) = m_amplitude = constant
+ * amplitudes(electrons, x, t) = m_amplitude
  *                  * (density_ions(x,t) - m_density) / (density_electrons(x,t) - m_density)
  */
-double KrookSourceAdaptive::get_amplitudes(DViewSpXVx const allfdistribu, IndexSpX const& ispx)
-        const
+void KrookSourceAdaptive::get_amplitudes(DSpanSp amplitudes, DViewSpVx const allfdistribu) const
 {
-    if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
-        return m_amplitude;
+    IDomainSp const dom_sp(ddc::get_domain<IDimSp>(allfdistribu));
+    assert(dom_sp.size() == 2);
+    assert(charge(dom_sp.front()) * charge(dom_sp.back()) < 0);
+    std::optional<IndexSp> iion_opt;
+    for (IndexSp const isp : dom_sp) {
+        if (charge(isp) > 0) {
+            iion_opt = isp;
+        }
     }
+    IndexSp iion(iion_opt.value());
+    amplitudes(iion) = m_amplitude;
 
-    assert(ddc::get_domain<IDimSp>(allfdistribu).size() == 2);
-    IndexSp isp_ion;
-    if (charge(ddc::select<IDimSp>(ispx))
-        != charge(ddc::get_domain<IDimSp>(allfdistribu).front())) {
-        isp_ion = ddc::get_domain<IDimSp>(allfdistribu).front();
-    } else {
-        isp_ion = ddc::get_domain<IDimSp>(allfdistribu).back();
-    }
-
-    // compute densities for each species
     IDomainVx const gridvx = allfdistribu.domain<IDimVx>();
     Quadrature<IDimVx> const integrate_v(trapezoid_quadrature_coefficients(gridvx));
-    double const density_ion = integrate_v(allfdistribu[isp_ion][ddc::select<IDimX>(ispx)]);
-    double const density_electron = integrate_v(allfdistribu[ddc::select<IDimSp, IDimX>(ispx)]);
+    double const density_ion = integrate_v(allfdistribu[iion]);
+    double const density_electron = integrate_v(allfdistribu[ielec()]);
 
-    double const amplitude
-            = m_amplitude * (density_ion - m_density) / (density_electron - m_density);
-    return amplitude;
+    amplitudes(ielec()) = m_amplitude * (density_ion - m_density) / (density_electron - m_density);
 }
 
-/**
- * right hand side of the equation \partial f / \partial_t = -amplitude * mask * ( f - ftarget)
- */
-void KrookSourceAdaptive::rhs(
-        DSpanVx const rhs,
-        DViewSpXVx const allfdistribu,
-        double const time,
-        IndexSpX const& ispx) const
-{
-    double const amplitude = get_amplitudes(allfdistribu, ispx);
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimVx>(allfdistribu),
-            [&](IndexVx const ivx) {
-                IndexSpXVx ispxvx(ddc::select<IDimSp>(ispx), ddc::select<IDimX>(ispx), ivx);
-                rhs(ivx) = -m_mask(ddc::select<IDimX>(ispx)) * amplitude
-                           * (allfdistribu(ispxvx) - m_ftarget(ivx));
-            });
-}
 
 DSpanSpXVx KrookSourceAdaptive::operator()(DSpanSpXVx const allfdistribu, double const dt) const
 {
-    return (*m_solver)(allfdistribu, dt);
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimX>(allfdistribu),
+            [&](IndexX const ix) {
+                // RK2 first half step
+                DFieldSpVx allfdistribu_half(allfdistribu[ix]);
+                DFieldSp amplitudes(ddc::get_domain<IDimSp>(allfdistribu));
+                get_amplitudes(amplitudes.span_view(), allfdistribu_half.span_cview());
+                ddc::for_each(
+                        ddc::policies::parallel_host,
+                        ddc::get_domain<IDimSp, IDimVx>(allfdistribu),
+                        [&](IndexSpVx const ispvx) {
+                            IndexSp isp(ddc::select<IDimSp>(ispvx));
+                            IndexVx ivx(ddc::select<IDimVx>(ispvx));
+                            IndexSpXVx ispxvx(isp, ix, ivx);
+                            double const df = -m_mask(ix) * amplitudes(isp)
+                                              * (allfdistribu(ispxvx) - m_ftarget(ivx)) * dt / 2.0;
+                            allfdistribu_half(isp, ivx) = allfdistribu(ispxvx) + df;
+                        });
+
+                // RK2 final step
+                get_amplitudes(amplitudes.span_view(), allfdistribu_half.span_cview());
+                ddc::for_each(
+                        ddc::policies::parallel_host,
+                        ddc::get_domain<IDimSp, IDimVx>(allfdistribu),
+                        [&](IndexSpVx const ispvx) {
+                            IndexSp isp(ddc::select<IDimSp>(ispvx));
+                            IndexVx ivx(ddc::select<IDimVx>(ispvx));
+                            IndexSpXVx ispxvx(isp, ix, ivx);
+
+                            double const df = -m_mask(ix) * amplitudes(isp)
+                                              * (allfdistribu(ispxvx) - m_ftarget(ivx)) * dt;
+                            allfdistribu(ispxvx) = allfdistribu(ispxvx) + df;
+                        });
+            });
+
+    return allfdistribu;
 }
