@@ -67,8 +67,10 @@ TEST(KrookSource, Adaptive)
     DFieldSp masses(dom_sp);
     FieldSp<int> init_perturb_mode(dom_sp);
     DFieldSp init_perturb_amplitude(dom_sp);
-    charges(dom_sp.front()) = 1;
-    charges(dom_sp.back()) = -1;
+    IndexSp my_iion(dom_sp.front());
+    IndexSp my_ielec(dom_sp.back());
+    charges(my_iion) = 1;
+    charges(my_ielec) = -1;
     ddc::for_each(ddc::policies::parallel_host, dom_sp, [&](IndexSp const isp) {
         masses(isp) = 1.0;
         init_perturb_mode(isp) = 0;
@@ -82,7 +84,7 @@ TEST(KrookSource, Adaptive)
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
 
-    double const extent = 0.25;
+    double const extent = 0.5;
     double const stiffness = 0.01;
     double const amplitude = 0.1;
     double const density_target = 0.5;
@@ -92,7 +94,6 @@ TEST(KrookSource, Adaptive)
             gridx,
             gridvx,
             RhsType::Sink,
-            RhsSolver::Rk2,
             extent,
             stiffness,
             amplitude,
@@ -120,42 +121,64 @@ TEST(KrookSource, Adaptive)
                 }
             });
 
-    // test of rhs
-    DFieldX mask = mask_tanh(gridx, extent, stiffness, MaskType::Inverted, false);
-    DFieldVx ftarget(gridvx);
-    MaxwellianEquilibrium::compute_maxwellian(ftarget, density_target, temperature_target, 0.);
+    // error with a given deltat
+    double const deltat = 0.1;
+    rhs_krook(allfdistribu, deltat);
+
+    DFieldSpX densities(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
+            [&](IndexSpX const ispx) { densities(ispx) = integrate_v(allfdistribu[ispx]); });
+
+    // the charge should be conserved by the operator
+    DFieldX error(ddc::get_domain<IDimX>(allfdistribu));
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimX>(allfdistribu),
+            [&](IndexX const ix) {
+                error(ix) = std::fabs(
+                        charge(my_iion) * (densities(my_iion, ix) - density_init_ion)
+                        + charge(my_ielec) * (densities(my_ielec, ix) - density_init_elec));
+            });
+
+    // reinitialization of the distribution function
     ddc::for_each(
             ddc::policies::parallel_host,
             ddc::get_domain<IDimSp, IDimX>(allfdistribu),
             [&](IndexSpX const ispx) {
-                DFieldVx rhs(gridvx);
-                rhs_krook.rhs(rhs, allfdistribu, 0.0, ispx);
+                DFieldVx finit(gridvx);
+                if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
+                    MaxwellianEquilibrium::
+                            compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
+                    ddc::deepcopy(allfdistribu[ispx], finit);
+                } else {
+                    MaxwellianEquilibrium::
+                            compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
+                    ddc::deepcopy(allfdistribu[ispx], finit);
+                }
+            });
 
-                ddc::for_each(
-                        ddc::policies::parallel_host,
-                        ddc::get_domain<IDimVx>(allfdistribu),
-                        [&](IndexVx const ivx) {
-                            double rhs_pred;
-                            if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
-                                rhs_pred = -amplitude * mask(ddc::select<IDimX>(ispx))
-                                           * (allfdistribu(
-                                                      ddc::select<IDimSp>(ispx),
-                                                      ddc::select<IDimX>(ispx),
-                                                      ivx)
-                                              - ftarget(ivx));
-                            } else {
-                                double const amplitude_elec
-                                        = amplitude * (density_init_ion - density_target)
-                                          / (density_init_elec - density_target);
-                                rhs_pred = -amplitude_elec * mask(ddc::select<IDimX>(ispx))
-                                           * (allfdistribu(
-                                                      ddc::select<IDimSp>(ispx),
-                                                      ddc::select<IDimX>(ispx),
-                                                      ivx)
-                                              - ftarget(ivx));
-                            }
-                            EXPECT_LE(std::fabs(rhs_pred - rhs(ivx)), 1e-10);
-                        });
+    // error with a deltat 10 times smaller
+    rhs_krook(allfdistribu, 0.01);
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
+            [&](IndexSpX const ispx) { densities(ispx) = integrate_v(allfdistribu[ispx]); });
+
+    // the rk2 scheme used in the krook operator should be of order 2
+    // hence the error should be divided by at least 100 when dt is divided by 10
+    double const order = 2;
+    ddc::for_each(
+            ddc::policies::parallel_host,
+            ddc::get_domain<IDimX>(allfdistribu),
+            [&](IndexX const ix) {
+                double const error_smalldt = std::fabs(
+                        charge(my_iion) * (densities(my_iion, ix) - density_init_ion)
+                        + charge(my_ielec) * (densities(my_ielec, ix) - density_init_elec));
+                std::cout << "ix " << ix << "error " << error(ix) << " error_smalldt "
+                          << error_smalldt << std::endl;
+                EXPECT_LE(error_smalldt, error(ix) / std::pow(10, order));
             });
 
     PC_tree_destroy(&conf_pdi);
