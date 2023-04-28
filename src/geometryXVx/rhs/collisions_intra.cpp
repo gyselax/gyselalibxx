@@ -42,6 +42,7 @@
 CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
     , m_fthresh(1.e-30)
+    , m_nustar_profile(ddc::select<IDimSp, IDimX>(mesh))
     , m_gridvx_ghosted(
               ddc::DiscreteElement<ghosted_vx_point_sampling>(0),
               ddc::DiscreteVector<ghosted_vx_point_sampling>(ddc::select<IDimVx>(mesh).size() + 2))
@@ -105,6 +106,7 @@ CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
         ddc::init_discrete_space<ddc::NonUniformPointSampling<GhostedVxStaggered>>(breaks);
     }
 
+    compute_nustar_profile(m_nustar_profile.span_view(), m_nustar0);
     ddc::expose_to_pdi("collintra_nustar0", m_nustar0);
 }
 
@@ -244,10 +246,6 @@ void CollisionsIntra::compute_rhs_vector(
 
 DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
 {
-    // collisionality profile
-    DFieldSpX nustar_profile(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    compute_nustar_profile(nustar_profile.span_view(), m_nustar0);
-
     // density and temperature
     DFieldSpX density(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX mean_velocity(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
@@ -270,7 +268,7 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
     DFieldSpX collfreq(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     compute_collfreq(
             collfreq.span_view(),
-            nustar_profile.span_cview(),
+            m_nustar_profile.span_cview(),
             density.span_cview(),
             temperature.span_cview());
 

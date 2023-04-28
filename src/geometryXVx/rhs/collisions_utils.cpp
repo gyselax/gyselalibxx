@@ -63,60 +63,57 @@ void compute_collfreq(
 /**
  * Computes the two species collision frequency collfreq_ei
  */
-void compute_collfreq_ei(
-        DSpanX collfreq_ei,
-        DViewSpX nustar_profile,
-        DViewSpX density,
-        DViewSpX temperature)
+void compute_collfreq_ab(
+        DSpanSp collfreq_ab,
+        DViewSp nustar_profile,
+        DViewSp density,
+        DViewSp temperature)
 {
     IndexSp const iion = find_ion(density.domain<IDimSp>());
-    double const coeff(
-            charge(iion) * charge(iion) / (4 * std::sqrt(2) * charge(ielec()) * charge(ielec())));
-    double const mass_ratio(mass(ielec()) / mass(iion));
-    ddc::for_each(ddc::policies::parallel_host, collfreq_ei.domain(), [&](IndexX const ix) {
-        double const collfreq_elec(
-                nustar_profile(ielec(), ix) * density(ielec(), ix)
-                / std::pow(temperature(ielec(), ix), 1.5));
+    double const charge_ratio(charge(iion) / charge(ielec()));
+    double const me_on_mi(mass(ielec()) / mass(iion));
+    double const collfreq_elec(
+            nustar_profile(ielec()) * density(ielec()) / std::pow(temperature(ielec()), 1.5));
 
-        collfreq_ei(ix)
-                = coeff * collfreq_elec * density(iion, ix) / density(ielec(), ix)
-                  * (1. + mass_ratio)
-                  / std::
-                          pow(1. + mass_ratio * temperature(iion, ix) / temperature(ielec(), ix),
-                              1.5);
-    });
+    collfreq_ab(ielec())
+            = std::sqrt(2.) * charge_ratio * charge_ratio * collfreq_elec * density(iion)
+              / density(ielec()) * (1. + me_on_mi)
+              / std::pow(1. + me_on_mi * temperature(iion) / temperature(ielec()), 1.5);
+
+    double const collfreq_ion(
+            nustar_profile(iion) * density(iion) / std::pow(temperature(iion), 1.5));
+    collfreq_ab(iion)
+            = std::sqrt(2.) / (charge_ratio * charge_ratio) * collfreq_ion * density(ielec())
+              / density(iion) * (1. + 1. / me_on_mi)
+              / std::pow(1. + 1. / me_on_mi * temperature(ielec()) / temperature(iion), 1.5);
 }
 
 /**
  * Computes the momentum and energy exchange terms between ions and electrons
  */
 void compute_momentum_energy_exchange(
-        DSpanX momentum_exchange_ei,
-        DSpanX momentum_exchange_ie,
-        DSpanX energy_exchange_ei,
-        DSpanX energy_exchange_ie,
-        DViewX collfreq_ei,
-        DViewSpX density,
-        DViewSpX mean_velocity,
-        DViewSpX temperature)
+        DSpanSp momentum_exchange_ab,
+        DSpanSp energy_exchange_ab,
+        DViewSp collfreq_ab,
+        DViewSp density,
+        DViewSp mean_velocity,
+        DViewSp temperature)
 {
     IndexSp const iion = find_ion(density.domain<IDimSp>());
     double const mass_ratio(mass(ielec()) / mass(iion));
     double const me_on_memi(mass(ielec()) / (mass(ielec()) + mass(iion)));
-    ddc::for_each(ddc::policies::parallel_host, collfreq_ei.domain(), [&](IndexX const ix) {
-        // momentum exchange terms
-        momentum_exchange_ei(ix)
-                = -collfreq_ei(ix) * density(ielec(), ix)
-                  * (mean_velocity(ielec(), ix) - std::sqrt(mass_ratio) * mean_velocity(iion, ix));
-        momentum_exchange_ie(ix) = -std::sqrt(mass_ratio) * momentum_exchange_ei(ix);
+    // momentum exchange terms
+    momentum_exchange_ab(ielec())
+            = -collfreq_ab(ielec()) * density(ielec())
+              * (mean_velocity(ielec()) - std::sqrt(mass_ratio) * mean_velocity(iion));
+    momentum_exchange_ab(iion) = -std::sqrt(mass_ratio) * momentum_exchange_ab(ielec());
 
-        // energy exchange terms
-        energy_exchange_ei(ix) = -3. * collfreq_ei(ix) * me_on_memi * density(ielec(), ix)
-                                         * (temperature(ielec(), ix) - temperature(iion, ix))
-                                 - mean_velocity(ielec(), ix) * momentum_exchange_ei(ix);
-        energy_exchange_ie(ix)
-                = -energy_exchange_ei(ix)
-                  - (mean_velocity(ielec(), ix) - std::sqrt(mass_ratio) * mean_velocity(iion, ix))
-                            * momentum_exchange_ei(ix);
-    });
+    // energy exchange terms
+    energy_exchange_ab(ielec()) = -3. * collfreq_ab(ielec()) * me_on_memi * density(ielec())
+                                          * (temperature(ielec()) - temperature(iion))
+                                  - mean_velocity(ielec()) * momentum_exchange_ab(ielec());
+    energy_exchange_ab(iion)
+            = -energy_exchange_ab(ielec())
+              - (mean_velocity(ielec()) - std::sqrt(mass_ratio) * mean_velocity(iion))
+                        * momentum_exchange_ab(ielec());
 }

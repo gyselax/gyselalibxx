@@ -35,13 +35,28 @@ public:
 
     ~FluidMoments() = default;
 
+    void operator()(double& density, DViewVx allfdistribu, MomentDensity);
+
     void operator()(DSpanSpX density, DViewSpXVx allfdistribu, MomentDensity);
+
+    void operator()(
+            double& mean_velocity,
+            DViewVx fdistribu,
+            double const& density,
+            MomentVelocity);
 
     void operator()(
             DSpanSpX mean_velocity,
             DViewSpXVx allfdistribu,
             DViewSpX density,
             MomentVelocity);
+
+    void operator()(
+            double& temperature,
+            DViewVx fdistribu,
+            double const& density,
+            double const& mean_velocity,
+            MomentTemperature);
 
     void operator()(
             DSpanSpX temperature,
