@@ -16,6 +16,7 @@
 #include <sll/constant_extrapolation_boundary_value.hpp>
 #include <sll/spline_evaluator.hpp>
 
+#include <collisions_inter.hpp>
 #include <paraconf.h>
 #include <pdi.h>
 
@@ -265,6 +266,12 @@ int main(int argc, char** argv)
     CollisionsIntra const
             collisions_intra(meshSpXVx, PCpp_double(conf_voicexx, ".CollisionsInfo.nustar0"));
     rhs_operators.emplace_back(collisions_intra);
+
+    std::optional<CollisionsInter> collisions_inter;
+    if (PCpp_bool(conf_voicexx, ".CollisionsInfo.enable_inter")) {
+        collisions_inter.emplace(meshSpXVx, PCpp_double(conf_voicexx, ".CollisionsInfo.nustar0"));
+        rhs_operators.emplace_back(*collisions_inter);
+    }
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
     SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);

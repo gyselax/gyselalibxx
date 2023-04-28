@@ -174,18 +174,16 @@ void compute_Nucoll(
 }
 
 // inter species collision operator helper functions
-void compute_collfreq_ei(
-        DSpanSpX collfreq_ei,
-        DViewSpX nustar_profile,
-        DViewSpX density,
-        DViewSpX temperature);
+void compute_collfreq_ab(
+        DSpanSp collfreq_ab,
+        DViewSp nustar_profile,
+        DViewSp density,
+        DViewSp temperature);
 
 void compute_momentum_energy_exchange(
-        DSpanSpX momentum_exchange_ei,
-        DSpanSpX momentum_exchange_ie,
-        DSpanSpX energy_exchange_ei,
-        DSpanSpX energy_exchange_ie,
-        DViewX collfreq_ei,
-        DViewSpX density,
-        DViewSpX mean_velocity,
-        DViewSpX temperature);
+        DSpanSp momentum_exchange_ab,
+        DSpanSp energy_exchange_ab,
+        DViewSp collfreq_ab,
+        DViewSp density,
+        DViewSp mean_velocity,
+        DViewSp temperature);
