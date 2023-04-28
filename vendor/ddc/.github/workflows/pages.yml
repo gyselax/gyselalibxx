@@ -35,7 +35,8 @@ jobs:
     - name: Build site
       run: |
         cat<<-EOF > run.sh
-          set -xe 
+          set -xe
+          git config --global --add safe.directory /src/vendor/kokkos
           cmake -DBUILD_DOCUMENTATION=ON -DDDC_BUILD_PDI_WRAPPER=OFF /src
           make doc
           mv docs/html /src/docs_out
