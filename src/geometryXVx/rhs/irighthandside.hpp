@@ -6,8 +6,6 @@
 
 enum class RhsType { Source, Sink };
 
-enum class RhsSolver { Rk2 };
-
 class IRightHandSide
 {
 public:
