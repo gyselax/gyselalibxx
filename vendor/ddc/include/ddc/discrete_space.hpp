@@ -78,7 +78,7 @@ __constant__ gpu_proxy<ddim_impl_t<DDim, Kokkos::CudaSpace>> g_discrete_space_de
 // Global GPU variable viewing data owned by the CPU
 // WARNING: do not put the `inline` keyword, seems to fail on MI100 rocm/4.5.0
 template <class DDim>
-__constant__ gpu_proxy<ddim_impl_t<DDim, Kokkos::Experimental::HIPSpace>> g_discrete_space_device;
+__constant__ gpu_proxy<ddim_impl_t<DDim, Kokkos::HIPSpace>> g_discrete_space_device;
 #endif
 
 inline void display_discretization_store(std::ostream& os)
@@ -166,7 +166,7 @@ DDC_INLINE_FUNCTION detail::ddim_impl_t<DDim, MemorySpace> const& discrete_space
         return *detail::g_discrete_space_device<DDim>;
     }
 #elif defined(__HIPCC__)
-    else if constexpr (std::is_same_v<MemorySpace, Kokkos::Experimental::HIPSpace>) {
+    else if constexpr (std::is_same_v<MemorySpace, Kokkos::HIPSpace>) {
         return *detail::g_discrete_space_device<DDim>;
     }
 #endif
