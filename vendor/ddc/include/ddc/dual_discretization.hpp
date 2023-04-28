@@ -27,7 +27,7 @@ class DualDiscretization
 #if defined(__CUDACC__)
     using DDimImplDevice = typename DDim::template Impl<Kokkos::CudaSpace>;
 #elif defined(__HIPCC__)
-    using DDimImplDevice = typename DDim::template Impl<Kokkos::Experimental::HIPSpace>;
+    using DDimImplDevice = typename DDim::template Impl<Kokkos::HIPSpace>;
 #else
     using DDimImplDevice = DDimImplHost;
 #endif
@@ -58,7 +58,7 @@ public:
             return m_device_on_host;
         }
 #elif defined(__HIPCC__)
-        else if constexpr (std::is_same_v<MemorySpace, Kokkos::Experimental::HIPSpace>) {
+        else if constexpr (std::is_same_v<MemorySpace, Kokkos::HIPSpace>) {
             return m_device_on_host;
         }
 #endif
