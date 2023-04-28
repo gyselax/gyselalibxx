@@ -7,6 +7,7 @@ cmake_tests:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
+    git config --global --add safe.directory /builds/gysela-developpers/voicexx/vendor/kokkos
     rm -rf build || true
     mkdir build
     cd build
@@ -27,6 +28,7 @@ cmake_tests_Release:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
     set -e
+    git config --global --add safe.directory /builds/gysela-developpers/voicexx/vendor/kokkos
     rm -rf build || true
     mkdir build
     cd build
