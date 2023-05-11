@@ -33,6 +33,7 @@ RUN chmod +x /bin/bash_run \
     cmake-data \
     git \
     pdidev-archive-keyring \
+    libfftw3-dev \
     libnuma1 \
     libpdi-dev \
     rocm-hip-sdk \
