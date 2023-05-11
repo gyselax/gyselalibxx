@@ -31,6 +31,7 @@ RUN chmod +x /bin/bash_run \
     g++-10 \
     gfortran-10 \
     git \
+    libfftw3-dev \
     libpdi-dev \
     llvm-14-tools \
     nvidia-cuda-toolkit \
