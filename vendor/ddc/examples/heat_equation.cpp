@@ -294,13 +294,13 @@ int main(int argc, char** argv)
                     double const dy_m = 0.5 * (dy_l + dy_r);
                     next_temp(ix, iy) = last_temp(ix, iy);
                     next_temp(ix, iy)
-                            += kx * max_dt
+                            += kx * ddc::step<DDimT>()
                                * (dx_l * last_temp(ix + 1, iy)
                                   - 2.0 * dx_m * last_temp(ix, iy)
                                   + dx_r * last_temp(ix - 1, iy))
                                / (dx_l * dx_m * dx_r);
                     next_temp(ix, iy)
-                            += ky * max_dt
+                            += ky * ddc::step<DDimT>()
                                * (dy_l * last_temp(ix, iy + 1)
                                   - 2.0 * dy_m * last_temp(ix, iy)
                                   + dy_r * last_temp(ix, iy - 1))
