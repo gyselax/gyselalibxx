@@ -77,7 +77,7 @@ jobs:
         cat<<-EOF > run.sh
           set -xe
           git config --global --add safe.directory /src/vendor/kokkos
-          cmake -DCMAKE_CXX_FLAGS="-Wall -fno-omit-frame-pointer -fsanitize=address" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Debug -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
+          cmake -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror=vla -fno-omit-frame-pointer -fsanitize=address" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Debug -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
           make -j 2 VERBOSE=1
           ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
         EOF
@@ -95,7 +95,7 @@ jobs:
         cat<<-EOF > run.sh
           set -xe
           git config --global --add safe.directory /src/vendor/kokkos
-          cmake -DCMAKE_CXX_FLAGS="-Wall" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release /src
+          cmake -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror=vla" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release /src
           make -j 2 VERBOSE=1
           ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
         EOF
@@ -116,7 +116,7 @@ jobs:
           export CXX=g++-10
           export FC=gfortran-10
           git config --global --add safe.directory /src/vendor/kokkos
-          cmake -DCMAKE_CXX_FLAGS="-Wall" -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_CUDA=ON -DKokkos_ARCH_VOLTA70=ON -DKokkos_ENABLE_LIBDL=OFF -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
+          cmake -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror=vla" -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_CUDA=ON -DKokkos_ARCH_AMPERE80=ON -DKokkos_ENABLE_LIBDL=OFF -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
           make -j 2 VERBOSE=1
         EOF
         docker run -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/jammy_env:${GITHUB_SHA:0:7} bash /src/run.sh
@@ -135,7 +135,7 @@ jobs:
           export CC=/opt/rocm/hip/bin/hipcc
           export CXX=/opt/rocm/hip/bin/hipcc
           git config --global --add safe.directory /src/vendor/kokkos
-          cmake -DCMAKE_CXX_FLAGS="-Wall" -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_HIP=ON -DKokkos_ARCH_VEGA90A=ON -DCMAKE_PREFIX_PATH=/opt/rocm -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
+          cmake -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror=vla" -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_HIP=ON -DKokkos_ARCH_VEGA90A=ON -DCMAKE_PREFIX_PATH=/opt/rocm -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
           make -j 2 VERBOSE=1
         EOF
         docker run -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/test_env:${GITHUB_SHA:0:7} bash /src/run.sh
