@@ -239,7 +239,7 @@ public:
 
     // Construct a DiscreteDomain from a reordered copy of `domain`
     template <class... ODDims>
-    explicit constexpr DiscreteDomain(DiscreteDomain<ODDims...> const& domain)
+    explicit constexpr DiscreteDomain([[maybe_unused]] DiscreteDomain<ODDims...> const& domain)
     {
     }
 
@@ -263,7 +263,7 @@ public:
 
     DiscreteDomain& operator=(DiscreteDomain&& x) = default;
 
-    constexpr bool operator==(DiscreteDomain const& other) const
+    constexpr bool operator==([[maybe_unused]] DiscreteDomain const& other) const
     {
         return true;
     }
@@ -297,27 +297,29 @@ public:
         return {};
     }
 
-    constexpr DiscreteDomain take_first(mlength_type n) const
+    constexpr DiscreteDomain take_first([[maybe_unused]] mlength_type n) const
     {
         return *this;
     }
 
-    constexpr DiscreteDomain take_last(mlength_type n) const
+    constexpr DiscreteDomain take_last([[maybe_unused]] mlength_type n) const
     {
         return *this;
     }
 
-    constexpr DiscreteDomain remove_first(mlength_type n) const
+    constexpr DiscreteDomain remove_first([[maybe_unused]] mlength_type n) const
     {
         return *this;
     }
 
-    constexpr DiscreteDomain remove_last(mlength_type n) const
+    constexpr DiscreteDomain remove_last([[maybe_unused]] mlength_type n) const
     {
         return *this;
     }
 
-    constexpr DiscreteDomain remove(mlength_type n1, mlength_type n2) const
+    constexpr DiscreteDomain remove(
+            [[maybe_unused]] mlength_type n1,
+            [[maybe_unused]] mlength_type n2) const
     {
         return *this;
     }
@@ -366,7 +368,7 @@ using convert_type_seq_to_discrete_domain = typename ConvertTypeSeqToDiscreteDom
 template <class... DDimsA, class... DDimsB>
 constexpr auto remove_dims_of(
         DiscreteDomain<DDimsA...> const& DDom_a,
-        DiscreteDomain<DDimsB...> const& DDom_b) noexcept
+        [[maybe_unused]] DiscreteDomain<DDimsB...> const& DDom_b) noexcept
 {
     using TagSeqA = detail::TypeSeq<DDimsA...>;
     using TagSeqB = detail::TypeSeq<DDimsB...>;
