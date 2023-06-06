@@ -1,4 +1,4 @@
-FROM ubuntu:impish
+FROM ubuntu:jammy
 # SPDX-License-Identifier: MIT
 
 COPY bash_run /bin/
