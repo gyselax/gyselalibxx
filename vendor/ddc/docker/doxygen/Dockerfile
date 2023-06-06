@@ -20,6 +20,7 @@ RUN chmod +x /bin/bash_run \
     doxygen \
     pkg-config \
     cmake-data \
+    libfftw3-dev \
     doxygen \
     doxygen-latex \
     git \
