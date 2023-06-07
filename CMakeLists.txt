@@ -27,9 +27,6 @@ include(CTest)
 ## Look for a pre-installed LAPACK
 find_package(LAPACK REQUIRED COMPONENTS CXX)
 
-## Look for a pre-installed FFTW
-find_package(FFTW REQUIRED COMPONENTS DOUBLE_LIB)
-
 ## Look for a pre-installed paraconf
 find_package(paraconf REQUIRED COMPONENTS C)
 

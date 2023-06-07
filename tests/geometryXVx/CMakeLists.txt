@@ -43,11 +43,8 @@ endforeach()
 
 target_sources(unit_tests_xperiod_vx
     PRIVATE
-        fft.cpp
         femperiodicpoissonsolver.cpp
 )
-
-target_link_libraries(unit_tests_xperiod_vx PRIVATE vcx::fft)
 
 target_sources(unit_tests_xnonperiod_vx PRIVATE femnonperiodicpoissonsolver.cpp)
 
