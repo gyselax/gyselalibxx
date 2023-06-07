@@ -9,6 +9,7 @@
 #include <string_view>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/fft.hpp>
 
 #include <sll/constant_extrapolation_boundary_value.hpp>
 #include <sll/spline_evaluator.hpp>
@@ -19,9 +20,7 @@
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "fftpoissonsolver.hpp"
-#include "fftw.hpp"
 #include "geometry.hpp"
-#include "ifftw.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -191,14 +190,9 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    FftwFourierTransform<RDimX> const fft;
+    ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXVx));
 
-    ddc::init_discrete_space<IDimFx>(fft.compute_fourier_domain(ddc::select<IDimX>(meshSpXVx)));
-
-    FftwInverseFourierTransform<RDimX> const ifft;
-
-    FftPoissonSolver const
-            poisson(fft, ifft, builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
+    FftPoissonSolver const poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 
     PredCorr const predcorr(vlasov, poisson);
 

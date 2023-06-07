@@ -34,7 +34,6 @@ target_sources(poisson_xperiod_vx
         fftpoissonsolver.cpp
         femperiodicpoissonsolver.cpp
 )
-target_link_libraries(poisson_xperiod_vx PUBLIC vcx::fft)
 
 target_sources(poisson_xnonperiod_vx
     PRIVATE
