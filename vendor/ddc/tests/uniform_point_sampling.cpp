@@ -49,7 +49,7 @@ TEST(UniformPointSamplingTest, Coordinate)
 
     ddc::init_discrete_space<DDimX>(origin, step);
     ddc::init_discrete_space<DDimY>(ddc::Coordinate<DimY>(-10.), 1.);
-    EXPECT_EQ(coordinate(point_ix), point_rx);
-    EXPECT_EQ(coordinate(point_iy), point_ry);
-    EXPECT_EQ(coordinate(point_ixy), point_rxy);
+    EXPECT_EQ(ddc::coordinate(point_ix), point_rx);
+    EXPECT_EQ(ddc::coordinate(point_iy), point_ry);
+    EXPECT_EQ(ddc::coordinate(point_ixy), point_rxy);
 }

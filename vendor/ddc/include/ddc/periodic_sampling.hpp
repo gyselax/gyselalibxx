@@ -58,20 +58,20 @@ public:
 
         template <class OriginMemorySpace>
         explicit Impl(Impl<OriginMemorySpace> const& impl)
+            : m_origin(impl.m_origin)
+            , m_step(impl.m_step)
+            , m_n_period(impl.m_n_period)
         {
-            m_origin = impl.m_origin;
-            m_step = impl.m_step;
-            m_n_period = impl.m_n_period;
         }
 
         Impl(Impl&&) = default;
 
         /** @brief Construct a `Impl` from a point and a spacing step.
-     *
-     * @param origin the real coordinate of mesh coordinate 0
-     * @param step   the real distance between two points of mesh distance 1
-     * @param n_period   the number of steps in a period
-     */
+         *
+         * @param origin the real coordinate of mesh coordinate 0
+         * @param step   the real distance between two points of mesh distance 1
+         * @param n_period   the number of steps in a period
+         */
         constexpr Impl(continuous_element_type origin, double step, std::size_t n_period)
             : m_origin(origin)
             , m_step(step)
@@ -79,48 +79,6 @@ public:
         {
             assert(step > 0);
             assert(n_period > 0);
-        }
-
-        /** @brief Construct a `Impl` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
-     *
-     * @param a the coordinate of a first real point (will have mesh coordinate 0)
-     * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
-     * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
-     * @param n_period   the number of steps in a period
-     * 
-     * @deprecated use the version accepting a vector for n instead
-     */
-        [[deprecated(
-                "Use the version accepting a vector for n "
-                "instead.")]] constexpr Impl(continuous_element_type a, continuous_element_type b, std::size_t n, std::size_t n_period)
-            : m_origin(a)
-            , m_step((b - a) / (n - 1))
-            , m_n_period(n_period)
-        {
-            assert(a < b);
-            assert(n > 1);
-            assert(n_period > 1);
-        }
-
-        /** @brief Construct a `Impl` from a segment \f$[a, b] \subset [a, +\infty[\f$ and a number of points `n`.
-     * 
-     * @param a the coordinate of a first real point (will have mesh coordinate 0)
-     * @param b the coordinate of the second real point (will have mesh coordinate `n-1`)
-     * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
-     * @param n_period   the number of steps in a period
-     */
-        constexpr Impl(
-                continuous_element_type a,
-                continuous_element_type b,
-                discrete_vector_type n,
-                discrete_vector_type n_period)
-            : m_origin(a)
-            , m_step((b - a) / (n - 1))
-            , m_n_period(n_period)
-        {
-            assert(a < b);
-            assert(n > 1);
-            assert(n_period > 1);
         }
 
         ~Impl() = default;
