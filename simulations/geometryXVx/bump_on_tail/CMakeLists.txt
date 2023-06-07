@@ -34,7 +34,6 @@ target_link_libraries(bumpontail_fft
         paraconf::paraconf
         PDI::pdi
         sll::splines
-        vcx::fft
         vcx::initialization_xperiod_vx
         vcx::interpolation
         vcx::paraconfpp
