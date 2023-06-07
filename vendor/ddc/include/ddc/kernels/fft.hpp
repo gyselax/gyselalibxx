@@ -626,14 +626,11 @@ void fft(
                             layout_right> && std::is_same_v<layout_out, std::experimental::layout_right>,
             "Layouts must be right-handed");
 
-    ddc::DiscreteDomain<ddc::UniformPointSampling<X>...> in_mesh
-            = ddc::get_domain<ddc::UniformPointSampling<X>...>(in);
-
     ddc::detail::fft::core<Tin, Tout, ExecSpace, MemorySpace, X...>(
             execSpace,
             out.data(),
             in.data(),
-            in_mesh,
+            in.domain(),
             {ddc::FFT_Direction::FORWARD, kwargs.normalization});
 }
 
@@ -667,14 +664,11 @@ void ifft(
                             layout_right> && std::is_same_v<layout_out, std::experimental::layout_right>,
             "Layouts must be right-handed");
 
-    ddc::DiscreteDomain<ddc::UniformPointSampling<X>...> out_mesh
-            = ddc::get_domain<ddc::UniformPointSampling<X>...>(out);
-
     ddc::detail::fft::core<Tin, Tout, ExecSpace, MemorySpace, X...>(
             execSpace,
             out.data(),
             in.data(),
-            out_mesh,
+            out.domain(),
             {ddc::FFT_Direction::BACKWARD, kwargs.normalization});
 }
 } // namespace ddc
