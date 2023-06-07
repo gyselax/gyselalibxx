@@ -9,7 +9,10 @@ option(BUILD_BENCHMARKS      "Build DDC benchmarks." OFF)
 option(BUILD_DOCUMENTATION   "Build DDC documentation/website" OFF)
 option(BUILD_EXAMPLES        "Build DDC examples" ON)
 option(DDC_BUILD_PDI_WRAPPER "Build DDC PDI wrapper" ON)
-
+option(HIP_FOR_NVIDIA 		 "Use the HIP wrapper for CUDA on NVIDIA plateforms, for development purpose" OFF)
+if(NOT(Kokkos_ENABLE_CUDA) AND HIP_FOR_NVIDIA)
+	message(FATAL_ERROR "Kokkos_ENABLE_CUDA has to be ON to use HIP wrapper on NVIDIA plateforms")
+endif()
 
 # Dependencies
 
@@ -87,6 +90,21 @@ elseif("${DDC_Kokkos_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
 elseif("${DDC_Kokkos_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
 	find_package(Kokkos CONFIG REQUIRED)
 endif()
+
+# FFTW
+list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ) # Maybe not specific to FFTW
+if(NOT FFTW_FOUND)
+	find_package( FFTW MODULE REQUIRED )
+endif()
+
+## CUDA + CUDAToolkit
+if("${Kokkos_ENABLE_CUDA}" AND NOT("${HIP_FOR_NVIDIA}"))
+	find_package( CUDAToolkit MODULE REQUIRED )
+	if( NOT(CUDAToolkit_FOUND) ) 
+	  message(FATAL_ERROR "CUDAToolkit not found." )
+	endif()
+endif()
+
 
 ## PDI
 
@@ -182,7 +200,56 @@ install(
 	TARGETS DDC
 	EXPORT DDCTargets)
 
-	
+# Link library to DDC
+
+if( FFTW_FOUND ) 
+	target_link_libraries( DDC INTERFACE FFTW::Float )
+	target_link_libraries( DDC INTERFACE FFTW::Double )
+	target_compile_definitions(DDC INTERFACE fftw_AVAIL)
+endif()
+
+if( FFTW_FOUND AND "${Kokkos_ENABLE_OPENMP}") 
+	target_link_libraries( DDC INTERFACE FFTW::FloatOpenMP )
+	target_link_libraries( DDC INTERFACE FFTW::DoubleOpenMP )
+	target_compile_definitions(DDC INTERFACE fftw_omp_AVAIL)
+endif()
+
+if( CUDAToolkit_FOUND ) 
+	target_link_libraries( DDC INTERFACE CUDA::cufft )	
+	target_compile_definitions(DDC INTERFACE cufft_AVAIL)
+endif()
+
+if("${Kokkos_ENABLE_HIP}")
+	find_package( hipfft REQUIRED ) # Not compatible with nvidia
+	target_link_libraries( DDC INTERFACE hip::hipfft )	
+	target_compile_definitions(DDC INTERFACE hipfft_AVAIL)
+endif()
+
+if("${HIP_FOR_NVIDIA}")
+	find_package( HIP REQUIRED )
+
+	target_include_directories(DDC
+	SYSTEM INTERFACE
+	"$<BUILD_INTERFACE:${HIP_ROOT_DIR}/include>"
+	)
+	target_compile_definitions(DDC INTERFACE hip_AVAIL)
+	target_compile_definitions(DDC INTERFACE HIP_FOR_NVIDIA)
+
+	if( DEFINED HIP_TOOLKIT_PATH ) # Usually called ROCM_PATH in the HIP documentation. By default : /opt/rocm
+		list( APPEND CMAKE_PREFIX_PATH ${HIP_TOOLKIT_PATH}/hipfft/lib )
+		find_library(HIPFFT_LIB  hipfft REQUIRED)
+		target_link_libraries( DDC INTERFACE ${HIPFFT_LIB} )	
+		target_include_directories(DDC
+		SYSTEM INTERFACE
+			"$<BUILD_INTERFACE:${HIP_TOOLKIT_PATH}/include>"
+		)
+		target_compile_definitions(DDC INTERFACE hipfft_AVAIL)
+	else()
+		message( "HIP_TOOLKIT_PATH is not defined. Kernels functions may be unaccessible. To get them, add -DHIP_TOOLKIT_PATH=\"path_to_hip_toolkit\" in your cmake line" )
+	endif()
+endif()
+
+
 ## The PDI wrapper
 
 if("${DDC_BUILD_PDI_WRAPPER}")
