@@ -25,7 +25,6 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         DDC::PDI_Wrapper
         GTest::gtest
         GTest::gmock
-        GTest::gmock_main
         paraconf::paraconf
         sll::splines
         vcx::advection

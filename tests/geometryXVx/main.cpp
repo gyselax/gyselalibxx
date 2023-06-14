@@ -1,5 +1,6 @@
 #include <ddc/ddc.hpp>
 
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 namespace testing::internal {
@@ -9,7 +10,7 @@ extern bool g_help_flag;
 
 int main(int argc, char** argv)
 {
-    ::testing::InitGoogleTest(&argc, argv);
+    ::testing::InitGoogleMock(&argc, argv);
     if (::testing::GTEST_FLAG(list_tests) || ::testing::internal::g_help_flag) {
         // do not initialize DDC just to list tests or show help so as to be able to run
         // a Cuda/Hip/etc. enabled DDC with no device available
