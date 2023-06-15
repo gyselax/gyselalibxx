@@ -4,8 +4,18 @@
 
 #include <gtest/gtest.h>
 
-#include <geometry.hpp>
 #include <species_info.hpp>
+
+namespace {
+
+using IDimSp = SpeciesInformation;
+using IVectSp = ddc::DiscreteVector<IDimSp>;
+using IndexSp = ddc::DiscreteElement<IDimSp>;
+using IDomainSp = ddc::DiscreteDomain<IDimSp>;
+template <class ElementType>
+using FieldSp = ddc::Chunk<ElementType, IDomainSp>;
+
+} // namespace
 
 TEST(SpeciesInfo, Ielec)
 {
