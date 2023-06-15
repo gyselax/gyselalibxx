@@ -22,7 +22,7 @@ jobs:
       test_env_image: ${{ steps.image_output.outputs.test_env_image }}
     steps:
     - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
+      uses: jlumbroso/free-disk-space@v1.2.0
       with:
         tool-cache: false
 
@@ -31,7 +31,7 @@ jobs:
         android: true
         dotnet: true
         haskell: true
-        large-packages: true
+        large-packages: false
         swap-storage: true
     - name: Checkout built branch
       uses: actions/checkout@v3
@@ -135,7 +135,7 @@ jobs:
       with:
         submodules: recursive
     - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
+      uses: jlumbroso/free-disk-space@v1.2.0
       with:
         tool-cache: false
 
@@ -144,7 +144,7 @@ jobs:
         android: true
         dotnet: true
         haskell: true
-        large-packages: true
+        large-packages: false
         swap-storage: true
     - name: Collect test_env docker
       if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
@@ -175,7 +175,7 @@ jobs:
       with:
         submodules: recursive
     - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
+      uses: jlumbroso/free-disk-space@v1.2.0
       with:
         tool-cache: false
 
@@ -184,7 +184,7 @@ jobs:
         android: true
         dotnet: true
         haskell: true
-        large-packages: true
+        large-packages: false
         swap-storage: true
     - name: Collect test_env docker
       if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
@@ -215,7 +215,7 @@ jobs:
       with:
         submodules: recursive
     - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
+      uses: jlumbroso/free-disk-space@v1.2.0
       with:
         tool-cache: false
 
@@ -224,7 +224,7 @@ jobs:
         android: true
         dotnet: true
         haskell: true
-        large-packages: true
+        large-packages: false
         swap-storage: true
     - name: Collect jammy_env docker
       if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
@@ -257,7 +257,7 @@ jobs:
       with:
         submodules: recursive
     - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
+      uses: jlumbroso/free-disk-space@v1.2.0
       with:
         tool-cache: false
 
@@ -266,7 +266,7 @@ jobs:
         android: true
         dotnet: true
         haskell: true
-        large-packages: true
+        large-packages: false
         swap-storage: true
     - name: Collect test_env docker
       if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
