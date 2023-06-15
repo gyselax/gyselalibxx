@@ -4,8 +4,21 @@ on:
     branches: [ main ]
   pull_request:
 jobs:
-  docker-build:
+  id_repo:
     runs-on: ubuntu-latest
+    outputs:
+      in_base_repo: ${{ steps.identify_repo.outputs.in_base_repo }}
+    steps:
+    - name: Identify repository
+      id: identify_repo
+      run: |
+        echo "in_base_repo=${{ (github.event == 'push' && github.repository == 'Maison-de-la-Simulation/ddc') || github.event.pull_request.head.repo.full_name == 'Maison-de-la-Simulation/ddc' }}" >> "$GITHUB_OUTPUT"
+        echo "$GITHUB_OUTPUT"
+  docker-build:
+    needs: id_repo
+    runs-on: ubuntu-latest
+    outputs:
+      doxygen_image: ${{ steps.image_output.outputs.doxygen_image }}
     steps:
     - name: Checkout built branch
       uses: actions/checkout@v3
@@ -17,21 +30,51 @@ jobs:
           --cache-from ghcr.io/maison-de-la-simulation/ddc/doxygen \
           -t ghcr.io/maison-de-la-simulation/ddc/doxygen \
           -t ghcr.io/maison-de-la-simulation/ddc/doxygen:${GITHUB_SHA:0:7} \
+          -t doxygen_image \
           docker/doxygen
+    - name: Publish doxygen artifact for current SHA
+      if: ${{ needs.id_repo.outputs.in_base_repo == 'true' }}
+      run: |
+        echo "doxygen_image=ghcr.io/maison-de-la-simulation/ddc/doxygen:${GITHUB_SHA:0:7}" >> $GITHUB_ENV
         docker push ghcr.io/maison-de-la-simulation/ddc/doxygen:${GITHUB_SHA:0:7}
+    - name: Create doxygen docker artifact
+      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
+      run: |
+        echo "doxygen_image=doxygen_image" >> $GITHUB_ENV
+        docker save doxygen_image > doxygen.tar
     - name: Publish
-      if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+      if: ${{ github.event_name == 'push' && github.ref_name == 'main' && needs.id_repo.outputs.in_base_repo == 'true' }}
       run: |
         docker push ghcr.io/maison-de-la-simulation/ddc/doxygen
+    - name: Save doxygen docker
+      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: doxygen-artifact
+        path: doxygen.tar
+        retention-days: 1
+    - name: Output image
+      id: image_output
+      run: |
+        echo "doxygen_image=${doxygen_image}" >> "$GITHUB_OUTPUT"
   pages:
     runs-on: ubuntu-latest
-    needs: docker-build
+    needs: [docker-build, id_repo]
     steps:
     - name: Checkout built branch
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
         submodules: true
+    - name: Collect doxygen docker
+      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
+      uses: actions/download-artifact@v3
+      with:
+        name: doxygen-artifact
+    - name: Load doxygen docker
+      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
+      run: |
+        docker load < doxygen.tar
     - name: Build site
       run: |
         cat<<-EOF > run.sh
@@ -43,9 +86,9 @@ jobs:
         EOF
         mkdir docs_out
         chmod a+rwx docs_out
-        docker run -v ${PWD}:/src ghcr.io/maison-de-la-simulation/ddc/doxygen:${GITHUB_SHA:0:7} bash /src/run.sh
+        docker run -v ${PWD}:/src ${{ needs.docker-build.outputs.doxygen_image }} bash /src/run.sh
     - name: Publish site
-      if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+      if: ${{ github.event_name == 'push' && github.ref_name == 'main' && needs.id_repo.outputs.in_base_repo == 'true' }}
       run: |
         git worktree add -B gh-pages public remotes/origin/gh-pages
         find public -mindepth 1 -maxdepth 1 '!' -name .git -exec rm -rf '{}' '+'
