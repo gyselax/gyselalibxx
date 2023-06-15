@@ -13,10 +13,9 @@ add_executable(unit_tests_${GEOMETRY_VARIANT}
     fluid_moments.cpp
     kineticsource.cpp
     krooksource.cpp
-    main.cpp
+    ../main.cpp
     masks.cpp
     quadrature.cpp
-    species_info.cpp
     splitvlasovsolver.cpp
 )
 target_compile_features(unit_tests_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
