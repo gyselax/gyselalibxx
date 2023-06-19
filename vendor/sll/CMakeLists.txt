@@ -43,7 +43,7 @@ else()
 endif()
 add_library(sll::splines ALIAS splines)
 
-# ## if tests are enabled, build the tests in `tests/`
-# if("${BUILD_TESTING}")
-#     add_subdirectory(tests/)
-# endif()
+## if tests are enabled, build the tests in `tests/`
+if("${BUILD_TESTING}")
+    add_subdirectory(tests/)
+endif()
