@@ -38,13 +38,10 @@ class ChunkSpan<ElementType, DiscreteDomain<DDims...>, LayoutStridedPolicy, Memo
     : public ChunkCommon<ElementType, DiscreteDomain<DDims...>, LayoutStridedPolicy>
 {
 protected:
-    /// the raw mdspan underlying this, with the same indexing (0 might no be dereferenceable)
-    using internal_mdspan_type = std::experimental::mdspan<
-            ElementType,
-            std::experimental::dextents<sizeof...(DDims)>,
-            std::experimental::layout_stride>;
-
     using base_type = ChunkCommon<ElementType, DiscreteDomain<DDims...>, LayoutStridedPolicy>;
+
+    /// the raw mdspan underlying this, with the same indexing (0 might no be dereferenceable)
+    using typename base_type::internal_mdspan_type;
 
 public:
     /// type of a span of this full chunk
@@ -63,8 +60,9 @@ public:
     using memory_space = MemorySpace;
 
     /// The dereferenceable part of the co-domain but with a different domain, starting at 0
-    using allocation_mdspan_type = std::experimental::
-            mdspan<ElementType, std::experimental::dextents<sizeof...(DDims)>, LayoutStridedPolicy>;
+    using allocation_mdspan_type = typename base_type::allocation_mdspan_type;
+
+    using const_allocation_mdspan_type = typename base_type::const_allocation_mdspan_type;
 
     using discrete_element_type = typename mdomain_type::discrete_element_type;
 
