@@ -1,120 +1,8 @@
 name: test
 on:
-  push:
-    branches: [ main ]
+  push: { branches: [ main ] }
   pull_request:
 jobs:
-  id_repo:
-    runs-on: ubuntu-latest
-    outputs:
-      in_base_repo: ${{ steps.identify_repo.outputs.in_base_repo }}
-    steps:
-    - name: Identify repository
-      id: identify_repo
-      run: |
-        echo "in_base_repo=${{ (github.event == 'push' && github.repository == 'Maison-de-la-Simulation/ddc') || github.event.pull_request.head.repo.full_name == 'Maison-de-la-Simulation/ddc' }}" >> "$GITHUB_OUTPUT"
-        echo "$GITHUB_OUTPUT"
-
-  docker-build-test_env:
-    needs: id_repo
-    runs-on: ubuntu-latest
-    outputs:
-      test_env_image: ${{ steps.image_output.outputs.test_env_image }}
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@v1.2.0
-      with:
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: false
-        swap-storage: true
-    - name: Checkout built branch
-      uses: actions/checkout@v3
-    - name: Build
-      run: |
-        echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-        docker pull ghcr.io/maison-de-la-simulation/ddc/test_env || true
-        docker build \
-          --cache-from ghcr.io/maison-de-la-simulation/ddc/test_env \
-          -t ghcr.io/maison-de-la-simulation/ddc/test_env \
-          -t ghcr.io/maison-de-la-simulation/ddc/test_env:${GITHUB_SHA:0:7} \
-          -t test_env_image \
-          docker/test_env
-    - name: Publish test_env artifact for current SHA
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'true' }}
-      run: |
-        echo "test_env_image=ghcr.io/maison-de-la-simulation/ddc/test_env:${GITHUB_SHA:0:7}" >> $GITHUB_ENV
-        docker push ghcr.io/maison-de-la-simulation/ddc/test_env:${GITHUB_SHA:0:7}
-    - name: Create test_env docker artifact
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
-      run: |
-        echo "test_env_image=test_env_image" >> $GITHUB_ENV
-        docker save test_env_image > test_env.tar
-    - name: Publish
-      if: ${{ github.event_name == 'push' && github.ref_name == 'main' && needs.id_repo.outputs.in_base_repo == 'true' }}
-      run: |
-        docker push ghcr.io/maison-de-la-simulation/ddc/test_env
-    - name: Save test_env docker
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
-      uses: actions/upload-artifact@v3
-      with:
-        name: test_env-artifact
-        path: test_env.tar
-        retention-days: 1
-    - name: Output image
-      id: image_output
-      run: |
-        echo "test_env_image=${test_env_image}" >> "$GITHUB_OUTPUT"
-
-  docker-build-jammy_env:
-    needs: id_repo
-    runs-on: ubuntu-latest
-    outputs:
-      jammy_image: ${{ steps.image_output.outputs.jammy_image }}
-    steps:
-    - name: Checkout built branch
-      uses: actions/checkout@v3
-    - name: Build
-      run: |
-        echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-        docker pull ghcr.io/maison-de-la-simulation/ddc/jammy_env || true
-        docker build \
-          --cache-from ghcr.io/maison-de-la-simulation/ddc/jammy_env \
-          -t ghcr.io/maison-de-la-simulation/ddc/jammy_env \
-          -t ghcr.io/maison-de-la-simulation/ddc/jammy_env:${GITHUB_SHA:0:7} \
-          -t jammy_env_image \
-          docker/jammy_env
-    - name: Publish jammy_env artifact for current SHA
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'true' }}
-      run: |
-        echo "jammy_image=ghcr.io/maison-de-la-simulation/ddc/jammy_env:${GITHUB_SHA:0:7}" >> $GITHUB_ENV
-        docker push ghcr.io/maison-de-la-simulation/ddc/jammy_env:${GITHUB_SHA:0:7}
-    - name: Create jammy_env artifact
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
-      run: |
-        echo "jammy_image=jammy_env_image" >> $GITHUB_ENV
-        docker save jammy_env_image > jammy_env.tar
-    - name: Publish
-      if: ${{ github.event_name == 'push' && github.ref_name == 'main' && needs.id_repo.outputs.in_base_repo == 'true' }}
-      run: |
-        docker push ghcr.io/maison-de-la-simulation/ddc/jammy_env
-    - name: Save jammy_env docker
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
-      uses: actions/upload-artifact@v3
-      with:
-        name: jammy_env-artifact
-        path: jammy_env.tar
-        retention-days: 1
-    - name: Output image
-      id: image_output
-      run: |
-        echo "jammy_image=${jammy_image}" >> "$GITHUB_OUTPUT"
-
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -125,166 +13,140 @@ jobs:
         exclude: ''
         extensions: 'hpp,cpp'
         clangFormatVersion: 12
-
-  test-Debug:
+  
+  id_repo:
     runs-on: ubuntu-latest
-    needs: [docker-build-test_env, id_repo]
+    outputs: { in_base_repo: '${{ steps.identify_repo.outputs.in_base_repo }}' }
     steps:
-    - name: Checkout built branch
-      uses: actions/checkout@v3
-      with:
-        submodules: recursive
+    - name: Identify repository
+      id: identify_repo
+      run: |
+        echo "in_base_repo=${{ (github.event == 'push' && github.repository == 'Maison-de-la-Simulation/ddc') || github.event.pull_request.head.repo.full_name == 'Maison-de-la-Simulation/ddc' }}" >> "$GITHUB_OUTPUT"
+        echo "$GITHUB_OUTPUT"
+
+  docker-build-env:
+    strategy:
+      matrix: { image: ['test_env', 'jammy_env'] }
+    needs: id_repo
+    runs-on: ubuntu-latest
+    steps:
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@v1.2.0
-      with:
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: false
-        swap-storage: true
-    - name: Collect test_env docker
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
-      uses: actions/download-artifact@v3
-      with:
-        name: test_env-artifact
-    - name: Load test_env docker
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
-      run: |
-        docker load < test_env.tar
-    - name: Build
-      run: |
-        cat<<-EOF > run.sh
-          set -xe
-          git config --global --add safe.directory /src/vendor/kokkos
-          cmake -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror=vla -fno-omit-frame-pointer -fsanitize=address" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Debug -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
-          make -j 2 VERBOSE=1
-          ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
-        EOF
-        docker run -v ${PWD}:/src:ro ${{ needs.docker-build-test_env.outputs.test_env_image }} bash /src/run.sh
-
-  test-Release:
-    runs-on: ubuntu-latest
-    needs: [docker-build-test_env, id_repo]
-    steps:
+      with: { tool-cache: true, large-packages: false }
     - name: Checkout built branch
       uses: actions/checkout@v3
-      with:
-        submodules: recursive
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@v1.2.0
-      with:
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: false
-        swap-storage: true
-    - name: Collect test_env docker
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
-      uses: actions/download-artifact@v3
-      with:
-        name: test_env-artifact
-    - name: Load test_env docker
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
-      run: |
-        docker load < test_env.tar
     - name: Build
       run: |
-        cat<<-EOF > run.sh
-          set -xe
-          git config --global --add safe.directory /src/vendor/kokkos
-          cmake -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror=vla" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release /src
-          make -j 2 VERBOSE=1
-          ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
-        EOF
-        docker run -v ${PWD}:/src:ro ${{ needs.docker-build-test_env.outputs.test_env_image }} bash /src/run.sh
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin || true
+        docker pull ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}} || true
+        docker build \
+          --cache-from ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}} \
+          -t ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}} \
+          -t ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}:${GITHUB_SHA:0:7} \
+          docker/${{matrix.image}}
+    - name: Publish image for current SHA
+      if: needs.id_repo.outputs.in_base_repo == 'true'
+      run: |
+        docker push ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}:${GITHUB_SHA:0:7}
+    - name: Publish latest (default) image 
+      if: github.event_name == 'push' && github.ref_name == 'main' && needs.id_repo.outputs.in_base_repo == 'true'
+      run: |
+        docker push ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}
+    - name: Create image tarball
+      if: needs.id_repo.outputs.in_base_repo == 'false'
+      run: |
+        docker save ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}:${GITHUB_SHA:0:7} > ${{matrix.image}}.tar
+    - name: Generate docker artifact from image
+      if: needs.id_repo.outputs.in_base_repo == 'false'
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{matrix.image}}-artifact
+        path: ${{matrix.image}}.tar
+        retention-days: 1
 
-  test-cuda:
+  test-build-and-run:
+    strategy:
+      fail-fast: false
+      matrix:
+        cxx_version:  ['17', '20', '23']
+        cmake_build_type: ['Debug', 'Release']
+        kokkos_backend: ['CPU-gnu', 'CPU-clang', 'GPU-HIP', 'GPU-CUDA']
+        image: ['test_env', 'jammy_env']
+        exclude:
+        - cxx_version: '23'
+          image: 'test_env'
+        - kokkos_backend: 'GPU-CUDA'
+          image: 'test_env'
+        - kokkos_backend: 'GPU-CUDA'
+          image: 'jammy_env'
+          cxx_version: '20'
+        - kokkos_backend: 'GPU-CUDA'
+          image: 'jammy_env'
+          cxx_version: '23'
     runs-on: ubuntu-latest
-    needs: [docker-build-jammy_env, id_repo]
+    needs: [docker-build-env, id_repo]
     steps:
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@v1.2.0
+      with: { tool-cache: true, large-packages: false }
     - name: Checkout built branch
       uses: actions/checkout@v3
-      with:
-        submodules: recursive
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@v1.2.0
-      with:
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: false
-        swap-storage: true
-    - name: Collect jammy_env docker
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
+      with: { submodules: recursive }
+    - name: Collect image artifact
+      if: needs.id_repo.outputs.in_base_repo == 'false'
       uses: actions/download-artifact@v3
-      with:
-        name: jammy_env-artifact
-    - name: Load jammy_env docker
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
+      with: { name: '${{matrix.image}}-artifact' }
+    - name: Load image artifact into docker
+      if: needs.id_repo.outputs.in_base_repo == 'false'
       run: |
-        docker load < jammy_env.tar
+        docker load < ${{matrix.image}}.tar
+        rm ${{matrix.image}}.tar
     - name: Build
       run: |
-        cat<<-EOF > run.sh
+        cat<<-'EOF' > run.sh
           set -xe
-          export CC=gcc-10
-          export CXX=g++-10
-          export FC=gfortran-10
-          git config --global --add safe.directory /src/vendor/kokkos
-          cmake -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror=vla" -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_CUDA=ON -DKokkos_ARCH_AMPERE80=ON -DKokkos_ENABLE_LIBDL=OFF -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
-          make -j 2 VERBOSE=1
+          git config --global --add safe.directory '*'
+          case "${{matrix.kokkos_backend}}" in
+          'GPU-CUDA')
+            export CC=gcc-10
+            export CXX=g++-10
+            export FC=gfortran-10
+            EXTRA_CMAKE_FLAGS="-DKokkos_ENABLE_CUDA=ON -DKokkos_ARCH_AMPERE80=ON -DKokkos_ENABLE_LIBDL=OFF"
+          ;;
+          'GPU-HIP')
+            export CC=/opt/rocm/hip/bin/hipcc
+            export CXX=/opt/rocm/hip/bin/hipcc
+            EXTRA_CMAKE_FLAGS="-DKokkos_ENABLE_HIP=ON -DKokkos_ARCH_VEGA90A=ON -DCMAKE_PREFIX_PATH=/opt/rocm"
+            CMAKE_CXX_FLAGS="-Wno-gnu-zero-variadic-macro-arguments"
+          ;;
+          'CPU-clang')
+            export CC=clang
+            export CXX=clang++
+            CMAKE_CXX_FLAGS="-Wno-gnu-zero-variadic-macro-arguments"
+          ;;
+          'CPU-gnu')
+            if [ 'Debug' = '${{matrix.cmake_build_type}}' ]
+            then
+              CMAKE_CXX_FLAGS="-fno-omit-frame-pointer -fsanitize=address"
+            fi
+          ;;
+          esac
+          cmake \
+            -DBUILD_BENCHMARKS=ON \
+            -DCMAKE_BUILD_TYPE=${{matrix.cmake_build_type}} \
+            -DCMAKE_CXX_STANDARD=${{matrix.cxx_version}} \
+            -DMDSPAN_CXX_STANDARD=${{matrix.cxx_version}} \
+            -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF \
+            -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF \
+            -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
+            -DCMAKE_CXX_FLAGS="-Wall -Wextra -Wpedantic -Werror=vla ${CMAKE_CXX_FLAGS}" \
+            ${EXTRA_CMAKE_FLAGS} \
+            /src
+          make  -j 2 VERBOSE=1
+          case "${{matrix.kokkos_backend}}" in
+          CPU-*)
+            ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
+          ;;
+          esac
         EOF
-        docker run -v ${PWD}:/src:ro ${{ needs.docker-build-jammy_env.outputs.jammy_image }} bash /src/run.sh
-
-  test-hip:
-    runs-on: ubuntu-latest
-    needs: [docker-build-test_env, id_repo]
-    steps:
-    - name: Checkout built branch
-      uses: actions/checkout@v3
-      with:
-        submodules: recursive
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@v1.2.0
-      with:
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: false
-        swap-storage: true
-    - name: Collect test_env docker
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
-      uses: actions/download-artifact@v3
-      with:
-        name: test_env-artifact
-    - name: Load test_env docker
-      if: ${{ needs.id_repo.outputs.in_base_repo == 'false' }}
-      run: |
-        docker load < test_env.tar
-    - name: Build
-      run: |
-        cat<<-EOF > run.sh
-          set -xe
-          export CC=/opt/rocm/hip/bin/hipcc
-          export CXX=/opt/rocm/hip/bin/hipcc
-          git config --global --add safe.directory /src/vendor/kokkos
-          cmake -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror=vla" -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_HIP=ON -DKokkos_ARCH_VEGA90A=ON -DCMAKE_PREFIX_PATH=/opt/rocm -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
-          make -j 2 VERBOSE=1
-        EOF
-        docker run -v ${PWD}:/src:ro ${{ needs.docker-build-test_env.outputs.test_env_image }} bash /src/run.sh
+        docker run -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}:${GITHUB_SHA:0:7} bash /src/run.sh

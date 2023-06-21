@@ -183,6 +183,8 @@ endif()
 
 ## The library itself
 
+
+
 add_library(DDC INTERFACE)
 target_compile_features(DDC INTERFACE cxx_std_17)
 target_include_directories(DDC
@@ -195,6 +197,7 @@ target_include_directories(DDC
 )
 target_link_libraries(DDC
 	INTERFACE std::mdspan Kokkos::kokkos)
+target_compile_definitions(DDC INTERFACE MDSPAN_USE_PAREN_OPERATOR=1)
 add_library(DDC::DDC ALIAS DDC)
 install(
 	TARGETS DDC

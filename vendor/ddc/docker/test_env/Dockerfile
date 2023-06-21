@@ -18,26 +18,26 @@ RUN chmod +x /bin/bash_run \
     ca-certificates \
     wget \
  && echo 'deb [arch=amd64] https://repo.radeon.com/amdgpu/latest/ubuntu focal main' > /etc/apt/sources.list.d/amdgpu.list \
- && echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/debian/ ubuntu main' > /etc/apt/sources.list.d/rocm.list \
+ && echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/latest focal main' > /etc/apt/sources.list.d/rocm.list \
  && echo "deb [arch=amd64] https://raw.githubusercontent.com/pdidev/repo/ubuntu focal main" > /etc/apt/sources.list.d/pdi.list \
  && wget -q -O /etc/apt/trusted.gpg.d/rocm.asc https://repo.radeon.com/rocm/rocm.gpg.key \
  && wget -q -O /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg https://raw.githubusercontent.com/pdidev/repo/ubuntu/pdidev-archive-keyring.gpg \
- && chmod a+r /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg \
+ && chmod -R a+r /etc/apt/trusted.gpg.d/ \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
+    clang \
     clang-format \
     cmake \
-    doxygen \
     pkg-config \
     cmake-data \
     git \
-    pdidev-archive-keyring \
+    libelf-dev \
     libfftw3-dev \
     libnuma1 \
     libpdi-dev \
+    pdidev-archive-keyring \
     rocm-hip-sdk \
-    libelf-dev \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
