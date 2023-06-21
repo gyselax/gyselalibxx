@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM ubuntu:lunar
 # SPDX-License-Identifier: MIT
 
 COPY bash_run /bin/
@@ -13,14 +13,22 @@ RUN chmod +x /bin/bash_run \
  && apt-get upgrade -y \
  && apt-get install -y --no-install-recommends \
     apt-transport-https \
+    apt-utils \
+    ca-certificates \
+    wget \
+ && echo "deb [ arch=amd64 ] https://raw.githubusercontent.com/pdidev/repo/ubuntu lunar main" > /etc/apt/sources.list.d/pdi.list \
+ && wget -q -O /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg https://raw.githubusercontent.com/pdidev/repo/ubuntu/pdidev-archive-keyring.gpg \
+ && chmod -R a+r /etc/apt/trusted.gpg.d/ \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
+    clang \
     cmake \
     doxygen \
     pkg-config \
     cmake-data \
     libfftw3-dev \
+    libpdi-dev \
     doxygen \
     doxygen-latex \
     git \
