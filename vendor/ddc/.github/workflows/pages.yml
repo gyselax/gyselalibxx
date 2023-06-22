@@ -95,6 +95,7 @@ jobs:
     - name: Publish site
       if: ${{ github.event_name == 'push' && github.ref_name == 'main' && needs.id_repo.outputs.in_base_repo == 'true' }}
       run: |
+        git fetch --all -p
         git worktree add -B gh-pages public remotes/origin/gh-pages
         find public -mindepth 1 -maxdepth 1 '!' -name .git -exec rm -rf '{}' '+'
         cp -a docs_out/html/* public/
