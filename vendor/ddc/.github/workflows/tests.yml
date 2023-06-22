@@ -21,7 +21,7 @@ jobs:
     - name: Identify repository
       id: identify_repo
       run: |
-        echo "github.event.type = ${{github.event}}"
+        echo "github.event.type = ${{github.event.type}}"
         echo "github.repository = ${{github.repository}}"
         echo "github.event.pull_request.head.repo.full_name = ${{github.event.pull_request.head.repo.full_name}}"
         echo "in_base_repo = ${{(github.event.type == 'push' && github.repository == 'Maison-de-la-Simulation/ddc') || github.event.pull_request.head.repo.full_name == 'Maison-de-la-Simulation/ddc'}}"
