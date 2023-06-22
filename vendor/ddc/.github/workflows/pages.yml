@@ -11,8 +11,7 @@ jobs:
     - name: Identify repository
       id: identify_repo
       run: |
-        echo "in_base_repo=${{ (github.event == 'push' && github.repository == 'Maison-de-la-Simulation/ddc') || github.event.pull_request.head.repo.full_name == 'Maison-de-la-Simulation/ddc' }}" >> "$GITHUB_OUTPUT"
-        echo "$GITHUB_OUTPUT"
+        echo "in_base_repo=${{ (github.event_name == 'push' && github.repository == 'Maison-de-la-Simulation/ddc') || github.event.pull_request.head.repo.full_name == 'Maison-de-la-Simulation/ddc' }}" >> "$GITHUB_OUTPUT"
   
   docker-build:
     needs: id_repo
