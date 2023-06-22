@@ -139,7 +139,11 @@ jobs:
             -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF \
             -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF \
             -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
-            -DCMAKE_CXX_FLAGS="-Wall -Wextra -Wpedantic -Werror=vla ${CMAKE_CXX_FLAGS}" \
+            -DCMAKE_CXX_FLAGS="\
+              -Wall -Wextra -Wpedantic \
+              -Werror=vla \
+              -Werror=implicit-fallthrough \
+              ${CMAKE_CXX_FLAGS}" \
             ${EXTRA_CMAKE_FLAGS} \
             /src
           make  -j 2 VERBOSE=1
