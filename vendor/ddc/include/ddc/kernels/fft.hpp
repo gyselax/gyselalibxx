@@ -498,18 +498,24 @@ void core(
         switch (kwargs.normalization) {
         case ddc::FFT_Normalization::OFF:
             norm_coef = 1;
+            break;
         case ddc::FFT_Normalization::FORWARD:
-            norm_coef = kwargs.direction == ddc::FFT_Direction::FORWARD
-                                ? 1 / (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) * ...)
-                                : 1;
+            norm_coef
+                    = kwargs.direction == ddc::FFT_Direction::FORWARD
+                              ? 1. / (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) * ...)
+                              : 1.;
+            break;
         case ddc::FFT_Normalization::BACKWARD:
-            norm_coef = kwargs.direction == ddc::FFT_Direction::BACKWARD
-                                ? 1 / (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) * ...)
-                                : 1;
+            norm_coef
+                    = kwargs.direction == ddc::FFT_Direction::BACKWARD
+                              ? 1. / (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) * ...)
+                              : 1.;
+            break;
         case ddc::FFT_Normalization::ORTHO:
-            norm_coef = 1
+            norm_coef = 1.
                         / Kokkos::sqrt(
                                 (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) * ...));
+            break;
         case ddc::FFT_Normalization::FULL:
             norm_coef
                     = kwargs.direction == ddc::FFT_Direction::FORWARD
@@ -528,6 +534,7 @@ void core(
                                   * (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) - 1)
                                   / ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()))
                                  * ...);
+            break;
         }
 
         Kokkos::parallel_for(
