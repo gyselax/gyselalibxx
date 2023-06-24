@@ -7,10 +7,10 @@
 #include <numeric>
 
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/fft.hpp>
 
 #include <Kokkos_Core.hpp>
 //! [includes]
+
 
 //! [X-dimension]
 /// Our first continuous dimension
@@ -35,6 +35,7 @@ struct T;
 // Its uniform discretization
 using DDimT = ddc::UniformPointSampling<T>;
 //! [time-space]
+
 
 //! [display]
 /** A function to pretty print the temperature
@@ -69,6 +70,7 @@ void display(double time, ChunkType temp)
 }
 //! [display]
 
+
 //! [main-start]
 int main(int argc, char** argv)
 {
@@ -83,7 +85,7 @@ int main(int argc, char** argv)
     // End of the domain of interest in the X dimension
     double const x_end = 1.;
     // Number of discretization points in the X dimension
-    size_t const nb_x_points = 100;
+    size_t const nb_x_points = 10;
     // Thermal diffusion coefficient
     double const kx = .01;
     // Start of the domain of interest in the Y dimension
@@ -103,8 +105,6 @@ int main(int argc, char** argv)
     //! [parameters]
 
     //! [main-start]
-    std::cout << "Using finite differences method \n";
-
     //! [X-parameters]
     // Number of ghost points to use on each side in X
     ddc::DiscreteVector<DDimX> static constexpr gwx {1};
@@ -179,9 +179,7 @@ int main(int argc, char** argv)
                           * ddc::distance_at_right(iy));
             });
     ddc::Coordinate<T> const max_dt {
-            .5
-            / (kx * invdx2_max
-               + ky * invdy2_max)}; // Classical stability theory gives .5 but empirically we see that for FFT method we need .2
+            .5 / (kx * invdx2_max + ky * invdy2_max)};
 
     // number of time intervals required to reach the end time
     ddc::DiscreteVector<DDimT> const nb_time_steps {
@@ -218,11 +216,9 @@ int main(int argc, char** argv)
     ddc::ChunkSpan const ghosted_initial_temp
             = ghosted_last_temp.span_view();
     // Initialize the temperature on the main domain
-    ddc::DiscreteDomain<DDimX, DDimY> x_mesh
-            = ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain);
     ddc::for_each(
             ddc::policies::parallel_device,
-            x_mesh,
+            ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
             DDC_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                 double const x
                         = ddc::coordinate(ddc::select<DDimX>(ixy));
@@ -268,7 +264,6 @@ int main(int argc, char** argv)
         ddc::deepcopy(
                 ghosted_last_temp[x_domain][y_post_ghost],
                 ghosted_last_temp[x_domain][y_domain_begin]);
-
         //! [boundary conditions]
 
         //! [manipulated views]
