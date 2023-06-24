@@ -494,10 +494,9 @@ void core(
 #endif
 
     if (kwargs.normalization != ddc::FFT_Normalization::OFF) {
-        real_type_t<Tout> norm_coef;
+        real_type_t<Tout> norm_coef = 1;
         switch (kwargs.normalization) {
         case ddc::FFT_Normalization::OFF:
-            norm_coef = 1;
             break;
         case ddc::FFT_Normalization::FORWARD:
             norm_coef
