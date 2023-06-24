@@ -146,7 +146,7 @@ jobs:
               ${CMAKE_CXX_FLAGS}" \
             ${EXTRA_CMAKE_FLAGS} \
             /src
-          make  -j 2 VERBOSE=1
+          make -j 2
           case "${{matrix.kokkos_backend}}" in
           CPU-*)
             ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
