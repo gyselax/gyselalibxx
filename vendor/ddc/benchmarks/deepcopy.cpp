@@ -73,7 +73,7 @@ static void memcpy_2d(benchmark::State& state)
     std::vector<double> src_data(state.range(0) * state.range(1), 0.0);
     std::vector<double> dst_data(state.range(0) * state.range(1), -1.0);
     for (auto _ : state) {
-        for (std::size_t i = 0ull; i < state.range(0); ++i) {
+        for (int64_t i = 0; i < state.range(0); ++i) {
             std::
                     memcpy(dst_data.data() + i * state.range(1),
                            src_data.data() + i * state.range(1),
