@@ -18,7 +18,7 @@ inline T sum(T* array, int size)
 template <class ElementType, class LayoutPolicy, class AccessorPolicy, std::size_t Ext>
 inline ElementType sum(std::experimental::mdspan<
                        ElementType,
-                       std::experimental::extents<Ext>,
+                       std::experimental::extents<std::size_t, Ext>,
                        LayoutPolicy,
                        AccessorPolicy> const& array)
 {
@@ -33,7 +33,7 @@ template <class ElementType, class LayoutPolicy, class AccessorPolicy, std::size
 inline ElementType sum(
         std::experimental::mdspan<
                 ElementType,
-                std::experimental::extents<Ext>,
+                std::experimental::extents<std::size_t, Ext>,
                 LayoutPolicy,
                 AccessorPolicy> const& array,
         int start,
