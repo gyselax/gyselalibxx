@@ -102,7 +102,7 @@ void TestForEachParallelDeviceOneDimension()
             ddc::policies::parallel_device,
             dom,
             DDC_LAMBDA(DElemX const ix) { view(ix) += 1; });
-    int const* const ptr = storage.data();
+    int const* const ptr = storage.data_handle();
     int sum;
     Kokkos::parallel_reduce(
             dom.size(),
@@ -130,7 +130,7 @@ void TestForEachParallelDeviceTwoDimensions()
             ddc::policies::parallel_device,
             dom,
             DDC_LAMBDA(DElemXY const ixy) { view(ixy) += 1; });
-    int const* const ptr = storage.data();
+    int const* const ptr = storage.data_handle();
     int sum;
     Kokkos::parallel_reduce(
             dom.size(),

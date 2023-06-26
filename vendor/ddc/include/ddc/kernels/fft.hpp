@@ -634,8 +634,8 @@ void fft(
 
     ddc::detail::fft::core<Tin, Tout, ExecSpace, MemorySpace, X...>(
             execSpace,
-            out.data(),
-            in.data(),
+            out.data_handle(),
+            in.data_handle(),
             in.domain(),
             {ddc::FFT_Direction::FORWARD, kwargs.normalization});
 }
@@ -672,8 +672,8 @@ void ifft(
 
     ddc::detail::fft::core<Tin, Tout, ExecSpace, MemorySpace, X...>(
             execSpace,
-            out.data(),
-            in.data(),
+            out.data_handle(),
+            in.data_handle(),
             out.domain(),
             {ddc::FFT_Direction::BACKWARD, kwargs.normalization});
 }
