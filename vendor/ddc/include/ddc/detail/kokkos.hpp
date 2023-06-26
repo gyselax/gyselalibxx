@@ -124,7 +124,7 @@ mdspan_to_kokkos_layout_t<typename MP::layout_type> build_kokkos_layout(
         std::array<std::size_t, sizeof...(Is) * 2> storage;
         std::experimental::mdspan<
                 std::size_t,
-                std::experimental::extents<sizeof...(Is), 2>,
+                std::experimental::extents<std::size_t, sizeof...(Is), 2>,
                 std::experimental::layout_right>
                 interleaved_extents_strides(storage.data());
         ((interleaved_extents_strides(Is, 0) = ep.extent(Is),
@@ -142,16 +142,20 @@ auto build_mdspan(Kokkos::View<DataType, Properties...> const view, std::index_s
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
     using element_type = kokkos_to_mdspan_element_t<DataType>;
-    using extents_type = std::experimental::dextents<Kokkos::View<DataType, Properties...>::rank>;
+    using extents_type
+            = std::experimental::dextents<std::size_t, Kokkos::View<DataType, Properties...>::rank>;
     using layout_type = kokkos_to_mdspan_layout_t<
             typename Kokkos::View<DataType, Properties...>::array_layout>;
     using mapping_type = typename layout_type::template mapping<extents_type>;
     extents_type exts(view.extent(Is)...);
     if constexpr (std::is_same_v<layout_type, std::experimental::layout_stride>) {
-        return std::experimental::mdspan(view.data(), mapping_type(exts, {view.stride(Is)...}));
-    } else {
         return std::experimental::
-                mdspan<element_type, extents_type, layout_type>(view.data(), mapping_type(exts));
+                mdspan(view.data_handle(), mapping_type(exts, {view.stride(Is)...}));
+    } else {
+        return std::experimental::mdspan<
+                element_type,
+                extents_type,
+                layout_type>(view.data_handle(), mapping_type(exts));
     }
     DDC_IF_NVCC_THEN_POP
 }
