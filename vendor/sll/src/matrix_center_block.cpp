@@ -45,9 +45,13 @@ void Matrix_Center_Block::set_element(int i, int j, double a_ij)
 
 DSpan1D Matrix_Center_Block::swap_array_to_corner(DSpan1D const bx) const
 {
-    memcpy(swap_array.get(), bx.data() + top_block_size, q_block->get_size() * sizeof(double));
-    memcpy(bx.data() + q_block->get_size(), bx.data(), top_block_size * sizeof(double));
-    memcpy(bx.data(), swap_array.get(), q_block->get_size() * sizeof(double));
+    memcpy(swap_array.get(),
+           bx.data_handle() + top_block_size,
+           q_block->get_size() * sizeof(double));
+    memcpy(bx.data_handle() + q_block->get_size(),
+           bx.data_handle(),
+           top_block_size * sizeof(double));
+    memcpy(bx.data_handle(), swap_array.get(), q_block->get_size() * sizeof(double));
     return bx;
 }
 
@@ -55,31 +59,35 @@ DSpan2D Matrix_Center_Block::swap_array_to_corner(DSpan2D const bx) const
 {
     int const ncols = bx.extent(1);
     memcpy(swap_array.get(),
-           bx.data() + top_block_size * ncols,
+           bx.data_handle() + top_block_size * ncols,
            q_block->get_size() * ncols * sizeof(double));
-    memcpy(bx.data() + q_block->get_size() * ncols,
-           bx.data(),
+    memcpy(bx.data_handle() + q_block->get_size() * ncols,
+           bx.data_handle(),
            top_block_size * ncols * sizeof(double));
-    memcpy(bx.data(), swap_array.get(), q_block->get_size() * ncols * sizeof(double));
+    memcpy(bx.data_handle(), swap_array.get(), q_block->get_size() * ncols * sizeof(double));
     return bx;
 }
 
 DSpan1D Matrix_Center_Block::swap_array_to_center(DSpan1D const bx) const
 {
-    memcpy(swap_array.get(), bx.data(), q_block->get_size() * sizeof(double));
-    memcpy(bx.data(), bx.data() + q_block->get_size(), top_block_size * sizeof(double));
-    memcpy(bx.data() + top_block_size, swap_array.get(), q_block->get_size() * sizeof(double));
+    memcpy(swap_array.get(), bx.data_handle(), q_block->get_size() * sizeof(double));
+    memcpy(bx.data_handle(),
+           bx.data_handle() + q_block->get_size(),
+           top_block_size * sizeof(double));
+    memcpy(bx.data_handle() + top_block_size,
+           swap_array.get(),
+           q_block->get_size() * sizeof(double));
     return bx;
 }
 
 DSpan2D Matrix_Center_Block::swap_array_to_center(DSpan2D const bx) const
 {
     int const ncols = bx.extent(1);
-    memcpy(swap_array.get(), bx.data(), q_block->get_size() * ncols * sizeof(double));
-    memcpy(bx.data(),
-           bx.data() + q_block->get_size() * ncols,
+    memcpy(swap_array.get(), bx.data_handle(), q_block->get_size() * ncols * sizeof(double));
+    memcpy(bx.data_handle(),
+           bx.data_handle() + q_block->get_size() * ncols,
            top_block_size * ncols * sizeof(double));
-    memcpy(bx.data() + top_block_size * ncols,
+    memcpy(bx.data_handle() + top_block_size * ncols,
            swap_array.get(),
            q_block->get_size() * ncols * sizeof(double));
     return bx;

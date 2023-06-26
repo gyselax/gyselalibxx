@@ -119,7 +119,7 @@ void FemPeriodicPoissonSolver::solve_matrix_system(
     DSpan1D const values(values_ptr.data(), values_ptr.size());
 
     int const rhs_size = m_nbasis + 1;
-    DSpan1D const phi_rhs(phi_spline_coef.data(), rhs_size);
+    DSpan1D const phi_rhs(phi_spline_coef.data_handle(), rhs_size);
     for (int i(0); i < rhs_size; ++i) {
         phi_rhs(i) = 0.0;
     }
