@@ -47,7 +47,10 @@ public:
         m_names.push_back(name + "_rank");
         PDI_share((name + "_extents").c_str(), extents.data(), PDI_OUT);
         m_names.push_back(name + "_extents");
-        PDI_share(name.c_str(), const_cast<chunk_value_t<BorrowedChunk>*>(data.data()), access);
+        PDI_share(
+                name.c_str(),
+                const_cast<chunk_value_t<BorrowedChunk>*>(data.data_handle()),
+                access);
         m_names.push_back(name);
         return *this;
     }

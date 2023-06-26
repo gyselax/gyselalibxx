@@ -35,9 +35,10 @@ template <class T>
 struct chunk_traits
 {
     static_assert(is_chunk_v<T>);
-    using value_type = std::remove_cv_t<std::remove_pointer_t<decltype(std::declval<T>().data())>>;
-    using pointer_type = decltype(std::declval<T>().data());
-    using reference_type = decltype(*std::declval<T>().data());
+    using value_type
+            = std::remove_cv_t<std::remove_pointer_t<decltype(std::declval<T>().data_handle())>>;
+    using pointer_type = decltype(std::declval<T>().data_handle());
+    using reference_type = decltype(*std::declval<T>().data_handle());
 };
 
 template <class T>
@@ -74,19 +75,21 @@ protected:
     /// the raw mdspan underlying this, with the same indexing (0 might no be dereferenceable)
     using internal_mdspan_type = std::experimental::mdspan<
             ElementType,
-            std::experimental::dextents<sizeof...(DDims)>,
+            std::experimental::dextents<std::size_t, sizeof...(DDims)>,
             std::experimental::layout_stride>;
 
 public:
     using mdomain_type = DiscreteDomain<DDims...>;
 
     /// The dereferenceable part of the co-domain but with a different domain, starting at 0
-    using allocation_mdspan_type = std::experimental::
-            mdspan<ElementType, std::experimental::dextents<sizeof...(DDims)>, LayoutStridedPolicy>;
+    using allocation_mdspan_type = std::experimental::mdspan<
+            ElementType,
+            std::experimental::dextents<std::size_t, sizeof...(DDims)>,
+            LayoutStridedPolicy>;
 
     using const_allocation_mdspan_type = std::experimental::mdspan<
             const ElementType,
-            std::experimental::dextents<sizeof...(DDims)>,
+            std::experimental::dextents<std::size_t, sizeof...(DDims)>,
             LayoutStridedPolicy>;
 
     using discrete_element_type = typename mdomain_type::discrete_element_type;
@@ -105,9 +108,7 @@ public:
 
     using size_type = typename allocation_mdspan_type::size_type;
 
-    using difference_type = typename allocation_mdspan_type::difference_type;
-
-    using pointer = typename allocation_mdspan_type::pointer;
+    using data_handle_type = typename allocation_mdspan_type::data_handle_type;
 
     using reference = typename allocation_mdspan_type::reference;
 
@@ -151,9 +152,9 @@ public:
         return mapping_type::is_always_unique();
     }
 
-    static constexpr bool is_always_contiguous() noexcept
+    static constexpr bool is_always_exhaustive() noexcept
     {
-        return mapping_type::is_always_contiguous();
+        return mapping_type::is_always_exhaustive();
     }
 
     static constexpr bool is_always_strided() noexcept
@@ -196,9 +197,9 @@ public:
         return allocation_mdspan().is_unique();
     }
 
-    constexpr bool is_contiguous() const noexcept
+    constexpr bool is_exhaustive() const noexcept
     {
-        return allocation_mdspan().is_contiguous();
+        return allocation_mdspan().is_exhaustive();
     }
 
     constexpr bool is_strided() const noexcept
@@ -251,23 +252,8 @@ protected:
             class Mapping = mapping_type,
             std::enable_if_t<std::is_constructible_v<Mapping, extents_type>, int> = 0>
     constexpr ChunkCommon(ElementType* ptr, mdomain_type const& domain)
+        : ChunkCommon {ptr, domain, make_mapping_for(domain)}
     {
-        namespace stdex = std::experimental;
-        // Handle the case where an allocation of size 0 returns a nullptr.
-        assert((domain.size() == 0) || ((ptr != nullptr) && (domain.size() != 0)));
-
-        extents_type extents_r(::ddc::extents<DDims>(domain).value()...);
-        mapping_type mapping_r(extents_r);
-
-        extents_type extents_s((front<DDims>(domain) + ddc::extents<DDims>(domain)).uid()...);
-        std::array<std::size_t, sizeof...(DDims)> strides_s {
-                mapping_r.stride(type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
-        stdex::layout_stride::mapping<extents_type> mapping_s(extents_s, strides_s);
-
-        // Pointer offset to handle non-zero indexing
-        ptr -= mapping_s(front<DDims>(domain).uid()...);
-        m_internal_mdspan = internal_mdspan_type(ptr, mapping_s);
-        m_domain = domain;
     }
 
     /** Constructs a new ChunkCommon by copy, yields a new view to the same data
@@ -295,7 +281,7 @@ protected:
     /** Access to the underlying allocation pointer
      * @return allocation pointer
      */
-    constexpr ElementType* data() const
+    constexpr ElementType* data_handle() const
     {
         return &m_internal_mdspan(front<DDims>(m_domain).uid()...);
     }
@@ -317,13 +303,48 @@ protected:
         extents_type extents_s(::ddc::extents<DDims>(m_domain).value()...);
         if constexpr (std::is_same_v<LayoutStridedPolicy, std::experimental::layout_stride>) {
             mapping_type map(extents_s, m_internal_mdspan.mapping().strides());
-            return allocation_mdspan_type(data(), map);
+            return allocation_mdspan_type(data_handle(), map);
         } else {
             mapping_type map(extents_s);
-            return allocation_mdspan_type(data(), map);
+            return allocation_mdspan_type(data_handle(), map);
         }
         DDC_IF_NVCC_THEN_POP
     }
+
+private:
+    /** builds the mapping to use in the internal mdspan
+     * @param domain the domain that sustains the view
+     */
+    template <class Mapping = mapping_type>
+    constexpr std::enable_if_t<
+            std::is_constructible_v<Mapping, extents_type>,
+            std::experimental::layout_stride::mapping<extents_type>>
+    make_mapping_for(mdomain_type const& domain)
+    {
+        extents_type extents_r(::ddc::extents<DDims>(domain).value()...);
+        mapping_type mapping_r(extents_r);
+
+        extents_type extents_s((front<DDims>(domain) + ddc::extents<DDims>(domain)).uid()...);
+        std::array<std::size_t, sizeof...(DDims)> strides_s {
+                mapping_r.stride(type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
+        return std::experimental::layout_stride::mapping<extents_type>(extents_s, strides_s);
+    }
+
+    /** Constructs a new ChunkCommon from scratch
+     * @param ptr the allocation pointer to the data_handle()
+     * @param domain the domain that sustains the view
+     */
+    constexpr ChunkCommon(
+            ElementType* ptr,
+            mdomain_type const& domain,
+            std::experimental::layout_stride::mapping<extents_type>&& s_domain)
+        : m_internal_mdspan {ptr - s_domain(front<DDims>(domain).uid()...), s_domain}
+        , m_domain {domain}
+    {
+        // Handle the case where an allocation of size 0 returns a nullptr.
+        assert((domain.size() == 0) || ((ptr != nullptr) && (domain.size() != 0)));
+    }
 };
+
 
 } // namespace ddc

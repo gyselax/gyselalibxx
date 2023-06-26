@@ -80,9 +80,7 @@ public:
 
     using size_type = typename base_type::size_type;
 
-    using difference_type = typename base_type::difference_type;
-
-    using pointer = typename base_type::pointer;
+    using data_handle_type = typename base_type::data_handle_type;
 
     using reference = typename base_type::reference;
 
@@ -186,7 +184,7 @@ public:
                 type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
         stdex::layout_stride::mapping<extents_type> mapping_s(extents_s, strides_s);
         this->m_internal_mdspan = internal_mdspan_type(
-                allocation_mdspan.data() - mapping_s(front<DDims>(domain).uid()...),
+                allocation_mdspan.data_handle() - mapping_s(front<DDims>(domain).uid()...),
                 mapping_s);
         this->m_domain = domain;
     }
@@ -274,9 +272,9 @@ public:
     /** Access to the underlying allocation pointer
      * @return allocation pointer
      */
-    constexpr ElementType* data() const
+    constexpr ElementType* data_handle() const
     {
-        return base_type::data();
+        return base_type::data_handle();
     }
 
     /** Provide a mdspan on the memory allocation
@@ -300,7 +298,7 @@ public:
         return Kokkos::View<
                 detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
                 decltype(kokkos_layout),
-                MemorySpace>(s.data(), kokkos_layout);
+                MemorySpace>(s.data_handle(), kokkos_layout);
     }
 
     constexpr view_type span_cview() const
