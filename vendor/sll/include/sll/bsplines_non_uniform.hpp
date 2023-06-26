@@ -355,11 +355,14 @@ ddc::DiscreteElement<NonUniformBSplines<Tag, D>> NonUniformBSplines<Tag, D>::Imp
     std::array<double, degree()> right;
 
     std::array<double, 2 * (degree() + 1)> a_ptr;
-    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, 2>> const a(
-            a_ptr.data());
+    std::experimental::
+            mdspan<double, std::experimental::extents<std::size_t, degree() + 1, 2>> const a(
+                    a_ptr.data());
 
     std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
-    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, degree() + 1>> const
+    std::experimental::mdspan<
+            double,
+            std::experimental::extents<std::size_t, degree() + 1, degree() + 1>> const
             ndu(ndu_ptr.data());
 
     assert(x >= rmin());

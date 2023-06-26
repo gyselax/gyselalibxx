@@ -293,11 +293,14 @@ ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSplines<Tag, D>::Impl<Memo
                 std::size_t const n) const
 {
     std::array<double, (degree() + 1) * (degree() + 1)> ndu_ptr;
-    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, degree() + 1>> const
+    std::experimental::mdspan<
+            double,
+            std::experimental::extents<std::size_t, degree() + 1, degree() + 1>> const
             ndu(ndu_ptr.data());
     std::array<double, 2 * (degree() + 1)> a_ptr;
-    std::experimental::mdspan<double, std::experimental::extents<degree() + 1, 2>> const a(
-            a_ptr.data());
+    std::experimental::
+            mdspan<double, std::experimental::extents<std::size_t, degree() + 1, 2>> const a(
+                    a_ptr.data());
     double offset;
     int jmin;
 
@@ -441,8 +444,9 @@ ddc::ChunkSpan<double, ddc::DiscreteDomain<UniformBSplines<Tag, D>>> UniformBSpl
         }
 
         std::array<double, degree() + 2> edge_vals_ptr;
-        std::experimental::mdspan<double, std::experimental::extents<degree() + 2>> const edge_vals(
-                edge_vals_ptr.data());
+        std::experimental::
+                mdspan<double, std::experimental::extents<std::size_t, degree() + 2>> const
+                        edge_vals(edge_vals_ptr.data());
 
         eval_basis(edge_vals, rmin(), degree() + 1);
 

@@ -220,13 +220,13 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
 
         // Get interpolated derivatives
         const std::optional<CDSpan1D> deriv_l(
-                BcXmin1 == BoundCond::HERMITE
-                        ? std::optional(CDSpan1D(derivs_xmin->data() + ii * nbc_xmin, nbc_xmin))
-                        : std::nullopt);
+                BcXmin1 == BoundCond::HERMITE ? std::optional(
+                        CDSpan1D(derivs_xmin->data_handle() + ii * nbc_xmin, nbc_xmin))
+                                              : std::nullopt);
         const std::optional<CDSpan1D> deriv_r(
-                BcXmax1 == BoundCond::HERMITE
-                        ? std::optional(CDSpan1D(derivs_xmax->data() + ii * nbc_xmax, nbc_xmax))
-                        : std::nullopt);
+                BcXmax1 == BoundCond::HERMITE ? std::optional(
+                        CDSpan1D(derivs_xmax->data_handle() + ii * nbc_xmax, nbc_xmax))
+                                              : std::nullopt);
 
         // Interpolate values
         spline_builder1(spline1, vals1, deriv_l, deriv_r);
@@ -328,7 +328,7 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
                                               : std::nullopt);
 
         ddc::ChunkSpan<double const, interpolation_domain_type2>
-                vals2_i(vals2.data(), spline_builder2.interpolation_domain());
+                vals2_i(vals2.data_handle(), spline_builder2.interpolation_domain());
 
         // Interpolate coefficients
         spline_builder2(spline2, vals2_i, deriv_l, deriv_r);

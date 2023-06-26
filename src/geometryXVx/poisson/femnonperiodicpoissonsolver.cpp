@@ -139,7 +139,7 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
     }
 
     int const rhs_size = m_nbasis - 2;
-    DSpan1D const phi_rhs(phi_spline_coef.data() + 1, rhs_size);
+    DSpan1D const phi_rhs(phi_spline_coef.data_handle() + 1, rhs_size);
 
     // Fill phi_rhs(i) with \int rho(x) b_i(x) dx
     // Rk: phi_rhs no longer contains spline coefficients, but is the

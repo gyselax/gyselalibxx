@@ -348,7 +348,7 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
                         CC[ispx].span_cview());
 
                 DSpan1D RR_Span1D(
-                        RR[ispx].allocation_mdspan().data(),
+                        RR[ispx].allocation_mdspan().data_handle(),
                         ddc::get_domain<IDimVx>(allfdistribu).size());
                 matrix.factorize();
                 matrix.solve_inplace(RR_Span1D);
