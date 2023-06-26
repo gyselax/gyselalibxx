@@ -14,15 +14,19 @@ struct ViewNDMaker;
 template <std::size_t N, class ElementType>
 struct ViewNDMaker<N, ElementType, true>
 {
-    using type = std::experimental::
-            mdspan<ElementType, std::experimental::dextents<N>, std::experimental::layout_right>;
+    using type = std::experimental::mdspan<
+            ElementType,
+            std::experimental::dextents<std::size_t, N>,
+            std::experimental::layout_right>;
 };
 
 template <std::size_t N, class ElementType>
 struct ViewNDMaker<N, ElementType, false>
 {
-    using type = std::experimental::
-            mdspan<ElementType, std::experimental::dextents<N>, std::experimental::layout_stride>;
+    using type = std::experimental::mdspan<
+            ElementType,
+            std::experimental::dextents<std::size_t, N>,
+            std::experimental::layout_stride>;
 };
 
 /// Note: We use the comma operator to fill the input parameters
@@ -85,7 +89,7 @@ std::ostream& stream_impl(
 
 
 template <std::size_t N, class ElementType>
-using SpanND = std::experimental::mdspan<ElementType, std::experimental::dextents<N>>;
+using SpanND = std::experimental::mdspan<ElementType, std::experimental::dextents<std::size_t, N>>;
 
 template <std::size_t N, class ElementType>
 using ViewND = SpanND<N, ElementType const>;

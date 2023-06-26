@@ -208,7 +208,9 @@ void SplineBuilder<BSplines, interpolation_mesh_type, BcXmin, BcXmax>::operator(
         }
     }
 
-    DSpan1D const bcoef_section(spline.data() + m_offset, ddc::discrete_space<BSplines>().nbasis());
+    DSpan1D const bcoef_section(
+            spline.data_handle() + m_offset,
+            ddc::discrete_space<BSplines>().nbasis());
     matrix->solve_inplace(bcoef_section);
 
     if constexpr (bsplines_type::is_periodic()) {
@@ -376,7 +378,9 @@ void SplineBuilder<BSplines, interpolation_mesh_type, BcXmin, BcXmax>::build_mat
 
     // Interpolation points
     std::array<double, bsplines_type::degree() + 1> values_ptr;
-    std::experimental::mdspan<double, std::experimental::extents<bsplines_type::degree() + 1>> const
+    std::experimental::mdspan<
+            double,
+            std::experimental::extents<std::size_t, bsplines_type::degree() + 1>> const
             values(values_ptr.data());
     int start = m_interpolation_domain.front().uid();
     ddc::for_each(m_interpolation_domain, [&](auto ix) {
@@ -397,9 +401,10 @@ void SplineBuilder<BSplines, interpolation_mesh_type, BcXmin, BcXmax>::build_mat
                 derivs_ptr;
         std::experimental::mdspan<
                 double,
-                std::experimental::
-                        extents<bsplines_type::degree() + 1, bsplines_type::degree() / 2 + 1>> const
-                derivs(derivs_ptr.data());
+                std::experimental::extents<
+                        std::size_t,
+                        bsplines_type::degree() + 1,
+                        bsplines_type::degree() / 2 + 1>> const derivs(derivs_ptr.data());
 
         ddc::discrete_space<BSplines>().eval_basis_and_n_derivs(
                 derivs,
