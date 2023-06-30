@@ -15,7 +15,7 @@ jobs:
       - name: Checkout documentation
         uses: actions/checkout@v3
         with:
-          ref: origin/documentation
+          ref: documentation
           path: doc_branch
       - name: Generate docs
         run: |
