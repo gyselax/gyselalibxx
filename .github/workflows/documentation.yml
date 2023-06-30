@@ -48,7 +48,9 @@ jobs:
     if: github.event_name == 'push' && github.ref_name == 'ebourne_doc_setup_test'
     needs: docker
     runs-on: ubuntu-latest
-    container: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
+    container:
+      image: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
+      options: --user root
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
