@@ -48,6 +48,7 @@ jobs:
     if: github.event_name == 'push' && github.ref_name == 'ebourne_doc_setup_test'
     needs: docker
     runs-on: ubuntu-latest
+    container: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -60,13 +61,12 @@ jobs:
           ref: documentation
           path: doc_branch
       - name: Generate docs
-        using: 'docker'
-        image: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
         run: |
           mkdir build
           cd build
           cmake -DBUILD_DOCUMENTATION=ON ../code_branch
           make doc
+        shell: bash
       - name: Update documentation
         run: |
           cd doc_branch
@@ -75,5 +75,6 @@ jobs:
           git add .
           git commit -m "Update docs"
           git push
+        shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
