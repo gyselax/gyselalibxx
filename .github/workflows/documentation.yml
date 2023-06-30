@@ -73,7 +73,7 @@ jobs:
         run: |
           cd doc_branch
           git rm *
-          cp -r ../build/docs/html .
+          cp -r ../build/docs/html/* .
           git add .
           git config --global user.name "GitHub CI Documentation builder"
           git config --global user.email "username@users.noreply.github.com"
