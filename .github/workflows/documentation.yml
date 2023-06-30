@@ -46,6 +46,7 @@ jobs:
 
   Docs:
     if: github.event_name == 'push' && github.ref_name == 'ebourne_doc_setup_test'
+    needs: docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -60,21 +61,21 @@ jobs:
           path: doc_branch
       - name: Generate docs
         run: |
-          ls
-          ls /src
+          mkdir build
+          cd build
           cat<<-EOF > run.sh
             set -xe
-            cmake -DBUILD_DOCUMENTATION=ON /src
+            cmake -DBUILD_DOCUMENTATION=ON ../code_branch
             make doc
           EOF
-          docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env:${{ github.sha }} bash /src/run.sh
-          ls
+          docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env:${{ github.sha }} bash run.sh
+          cd ..
         shell: bash
       - name: Update documentation
         run: |
           cd doc_branch
           git rm *
-          cp -r ../code_branch/build/docs/html .
+          cp -r ../build/docs/html .
           git add .
           git commit -m "Update docs"
           git push
