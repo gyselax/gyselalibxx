@@ -1,7 +1,0 @@
-name: Documentation Generation
-
-on:
-  push:
-    branches: [ ebourne_doc_setup_test ]
-
-jobs:
