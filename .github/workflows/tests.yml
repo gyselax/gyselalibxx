@@ -84,3 +84,40 @@ jobs:
           ctest --output-on-failure --timeout 5
         EOF
         docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env:${{ github.sha }} bash /src/run.sh
+
+  Docs:
+    if: github.event_name == 'push' && github.ref_name == 'ebourne_doc_setup_test'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          path: code_branch
+          submodules: recursive
+      - name: Checkout documentation
+        uses: actions/checkout@v3
+        with:
+          ref: documentation
+          path: doc_branch
+      - name: Generate docs
+        run: |
+          ls
+          ls /src
+          cat<<-EOF > run.sh
+            set -xe
+            cmake -DBUILD_DOCUMENTATION=ON /src
+            make doc
+          EOF
+          docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env:${{ github.sha }} bash /src/run.sh
+          ls
+        shell: bash
+      - name: Update documentation
+        run: |
+          cd doc_branch
+          git rm *
+          cp -r ../code_branch/build/docs/html .
+          git add .
+          git commit -m "Update docs"
+          git push
+        env:
+          GH_TOKEN: ${{ github.token }}
