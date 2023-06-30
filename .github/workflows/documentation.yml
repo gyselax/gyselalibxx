@@ -1,0 +1,82 @@
+name: docker
+
+on:
+  push:
+    branches:
+    - 'ebourne_doc_setup_test'
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    -
+      name: Checkout
+      uses: actions/checkout@v3
+    -
+      name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+    -
+      name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    -
+      name: Login to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    -
+      name: Build and push to tag
+      uses: docker/build-push-action@v3
+      with:
+        context: ./docker/voicexx_env
+        cache-from: type=registry,ref=ghcr.io/gyselax/voicexx_env:latest
+        pull: true
+        push: true
+        tags: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
+    -
+      name: Build and push latest
+      if: github.event_name == 'push' && github.ref_name == 'main'
+      uses: docker/build-push-action@v3
+      with:
+        context: ./docker/voicexx_env
+        cache-from: type=registry,ref=ghcr.io/gyselax/voicexx_env:latest
+        pull: true
+        push: true
+        tags: ghcr.io/gyselax/voicexx_env:latest
+
+  Docs:
+    if: github.event_name == 'push' && github.ref_name == 'ebourne_doc_setup_test'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          path: code_branch
+          submodules: recursive
+      - name: Checkout documentation
+        uses: actions/checkout@v3
+        with:
+          ref: documentation
+          path: doc_branch
+      - name: Generate docs
+        run: |
+          ls
+          ls /src
+          cat<<-EOF > run.sh
+            set -xe
+            cmake -DBUILD_DOCUMENTATION=ON /src
+            make doc
+          EOF
+          docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env:${{ github.sha }} bash /src/run.sh
+          ls
+        shell: bash
+      - name: Update documentation
+        run: |
+          cd doc_branch
+          git rm *
+          cp -r ../code_branch/build/docs/html .
+          git add .
+          git commit -m "Update docs"
+          git push
+        env:
+          GH_TOKEN: ${{ github.token }}
