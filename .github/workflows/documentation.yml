@@ -60,17 +60,13 @@ jobs:
           ref: documentation
           path: doc_branch
       - name: Generate docs
+        using: 'docker'
+        image: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
         run: |
           mkdir build
           cd build
-          cat<<-EOF > run.sh
-            set -xe
-            cmake -DBUILD_DOCUMENTATION=ON ../code_branch
-            make doc
-          EOF
-          docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env:${{ github.sha }} bash run.sh
-          cd ..
-        shell: bash
+          cmake -DBUILD_DOCUMENTATION=ON ../code_branch
+          make doc
       - name: Update documentation
         run: |
           cd doc_branch
