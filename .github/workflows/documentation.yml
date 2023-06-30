@@ -72,7 +72,7 @@ jobs:
       - name: Update documentation
         run: |
           cd doc_branch
-          git rm *
+          git rm -r *
           cp -r ../build/docs/html/* .
           git add .
           git config --global user.name "GitHub CI Documentation builder"
