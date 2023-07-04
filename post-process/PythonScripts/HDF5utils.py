@@ -39,7 +39,7 @@ class loadHDF5():
             filenames = [filenames]
 
         if name_map is None:
-            name_map = dict()
+            name_map = {}
 
         self.keys = []
 
@@ -237,7 +237,7 @@ def save_dict_contents_to_group( h5file, path, dic):
             save_dict_contents_to_group(h5file, path + key + '/', item)
         # other types cannot be saved and will result in an error
         else:
-            raise ValueError('Cannot save %s type.' % type(item))
+            raise ValueError(f'Cannot save {type(item)} type.')
 
 #end def save_dict_contents_to_group
 #-----------------------------------------------
