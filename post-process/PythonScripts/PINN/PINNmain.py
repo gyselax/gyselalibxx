@@ -75,25 +75,25 @@ if __name__ == "__main__":
             # at the randomly selected indexes
             pinn.createTFvblesTrain()
             pinn.train()
-            print("...training loss over batches = {}".format(pinn.loss_batch.numpy()), end='\r')
+            print("...training loss over batches =", pinn.loss_batch.numpy(), end='\r')
 
         if epoch%pinn.freq_save_data == 0:
             pinn.lossEpoch()
             pinn.test()
             t3 = time.time()
             print("\n", end='\r')
-            print("Time = {} -> Epoch {}/{}:".format(t3-tstart_training,
-                                                     epoch+1, pinn.no_epochs))
-            print("             Train loss = {}, Test loss = {}".\
-                  format(pinn.train_loss[-1].numpy(), pinn.test_loss[-1].numpy()))
-            print("             L1 = {}, L2 = {}, L3 = {}, L4 = {}, L5 = {}, L6 = {}".\
-                  format(pinn.L1[-1].numpy(), pinn.L2[-1].numpy(),
-                         pinn.L3[-1].numpy(), pinn.L4[-1].numpy(),
-                         pinn.L5[-1].numpy(), pinn.L6[-1].numpy()))
+            print(f"Time = {t3-tstart_training} -> Epoch {epoch+1}/{pinn.no_epochs}:")
+            print("             Train loss =", pinn.train_loss[-1].numpy(), ", Test loss =", \
+                  pinn.test_loss[-1].numpy())
+            print("             L1 =", pinn.L1[-1].numpy(),
+                    ", L2 =", pinn.L2[-1].numpy(),
+                    ", L3 =", pinn.L3[-1].numpy(),
+                    ", L4 =", pinn.L4[-1].numpy(),
+                    ", L5 =", pinn.L5[-1].numpy(),
+                    ", L6 =", pinn.L6[-1].numpy())
             if pinn.verify_simu == 1:
                 pinn.append_Coeff()
-                print("             Coefficients:[{},{}]".\
-                      format(pinn.Coeff[0].numpy(), pinn.Coeff[1].numpy()))
+                print("             Coefficients:[{pinn.Coeff[0].numpy()},{pinn.Coeff[1].numpy()}]")
 
         if epoch%pinn.freq_save_pred == 0:
             # Plot the losses and the prediction
@@ -110,9 +110,9 @@ if __name__ == "__main__":
     pinn.save_training()
     tend_save_training = time.time()
 
-    print("Time for training: {}".format(tend_training-tstart_training))
-    print("Time for saving the training losses: {}".\
-          format(tend_save_training-tend_training))
+    print("Time for training:", tend_training-tstart_training)
+    print("Time for saving the training losses:", \
+            tend_save_training-tend_training)
     print("\n")
 
     # Save final model

@@ -236,8 +236,8 @@ def Compute_POPEcoeff_forPoisson(
     op_LHS_1 = Mp*ni
     op_LHS_2 = -Mp*ne
     op_RHS = -d2xPhi
-    [qi, qe, qi_LS, qe_LS] = compute_POPEcoeff_2operators(
-        op_LHS_1[:, :, None], op_LHS_2[:, :, None], op_RHS[:, :, None], "Poisson")
+    [qi, qe, qi_LS, qe_LS] = compute_POPEcoeff_2operators( #pylint: disable=unbalanced-tuple-unpacking
+            op_LHS_1[:, :, None], op_LHS_2[:, :, None], op_RHS[:, :, None], "Poisson")
 
     dic_POPEcoeff_Poisson = {
         'xgrid': dic_POPEop_Poisson['xgrid'],
@@ -412,8 +412,8 @@ def ComputeGaussian_POPE_coeff(dic_POPE_coeff):
                 key_mean = np.mean(key_val_nonzero)
                 key_RMS = np.sqrt(np.mean((key_val_nonzero-key_mean) *
                                           (key_val_nonzero-key_mean)))
-                print('{}: Mean = {}, RMS = {}'.format(key_name, key_mean, key_RMS))
+                print(f'{key_name}: Mean = {key_mean}, RMS = {key_RMS}')
             else:
-                print('{}: Mean = NAN, RMS = NAN'.format(key_name))
+                print(f'{key_name}: Mean = NAN, RMS = NAN')
 
 # end def ComputeGaussian_POPE_coeff

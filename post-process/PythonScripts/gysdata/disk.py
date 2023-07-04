@@ -92,7 +92,7 @@ class Store(object):
         fields_structure = {}
         if fields is not None and not isinstance(fields, list):
             self.fields = [fields]
-        with open(data_structure) as f:
+        with open(data_structure, encoding="utf-8") as f:
             fields_structure_data = yaml.load(f, Loader=SafeLoader)
             for field_name, field_data in fields_structure_data.items():
                 if fields is not None and field_name not in fields:
@@ -145,7 +145,7 @@ class Store(object):
                         str(path.relative_to(data_dir)))
                     if file_match is None:
                         continue
-                    for dset_name in h5file.keys():
+                    for dset_name, dset_value in h5file.items():
                         dset_match = dset_info.dset.fullmatch(dset_name)
                         if dset_match is None:
                             continue
@@ -161,7 +161,7 @@ class Store(object):
                                 global_coords
                             )
 
-                        data = da.from_array(h5file[dset_name])
+                        data = da.from_array(dset_value)
 
                         # Small verification the match between the coordinates and the data.
                         target_ndim = len(coords)
@@ -182,8 +182,7 @@ class Store(object):
                             data_array = xr.DataArray(
                                 data, dims=coords.keys(), coords=coords)
                         except Exception as e:
-                            raise ValueError(
-                                str(e)+" for '{}'".format(field_name))
+                            raise ValueError(f"{e} for '{field_name}'") from e
                         # remove the names to work-around xr.combine_by_coords failure,
                         # see https://github.com/pydata/xarray/pull/5834
                         data_array.name = None

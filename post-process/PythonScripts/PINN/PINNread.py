@@ -22,7 +22,7 @@ def Read_PINN_parameters(YAML_inputFile):
     Read the PINN parameter from the YAML input file
     '''
 
-    with open(YAML_inputFile, "r") as stream:
+    with open(YAML_inputFile, "r", encoding="utf-8") as stream:
         input_data = yaml.safe_load(stream)
 
     for key, data in input_data.items():

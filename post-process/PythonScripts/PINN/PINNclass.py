@@ -999,7 +999,7 @@ class PINN():
 
                 axs[iix].legend()
 
-        fig_title = "/Prediction_distribfunc_epoch-%d.png"%self.epoch
+        fig_title = f"/Prediction_distribfunc_epoch-{self.epoch}.png"
         figureFile = self.path_to_results+fig_title
         print("Figure for prediction saved in :", figureFile)
         plt.savefig(figureFile)

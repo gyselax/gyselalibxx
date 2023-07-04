@@ -34,7 +34,7 @@ def myModel(hidden_dim=(20, 20, 20), input_dim=2, output_dim=1,
 
     model = Model(inputs, output)
     # print out network description
-    with open(file_for_summary, 'w') as f:
+    with open(file_for_summary, 'w', encoding="utf-8") as f:
         with redirect_stdout(f):
             model.summary()
 
