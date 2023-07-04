@@ -184,8 +184,7 @@ def anim_field3d_append(data, out_writer, anim_dim='time', **opt_args):
         data_it = data.isel(indexers={anim_dim: it}, drop=True)
         with BytesIO() as imgdata:
             plot_field2d(data_it, filename=imgdata,
-                         titlename=r'${} = {:02.2f}$'.format(
-                             anim_dim, it_val),
+                         titlename=f'${anim_dim} = {it_val:02.2f}$',
                          **opt_args)
             imgdata.seek(0)
             out_writer.append_data(imageio.imread(imgdata))

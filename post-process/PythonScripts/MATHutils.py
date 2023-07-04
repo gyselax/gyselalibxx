@@ -5,7 +5,7 @@ File containing mathematical tools
 
 import math
 import numpy as np
-import scipy.integrate as integrate
+from scipy import integrate
 
 # *** COEFFICIENTS FOR FINITE DIFFERENCE ***
 dic_coeff_FD = {}

@@ -153,14 +153,14 @@ def plot_epot_atonetime(epot: xr.DataArray,
                         shading='auto',
                         cmap='jet')
     axs[ix1].set_title('electrostatic potential')
-    axs[ix1].set_xlabel(r'${}$'.format(epot.coords['x'].name), fontsize=12)
-    axs[ix1].set_ylabel(r'${}$'.format(epot.coords['time'].name), fontsize=12)
+    axs[ix1].set_xlabel(f"${epot.coords['x'].name}$", fontsize=12)
+    axs[ix1].set_ylabel(f"${epot.coords['time'].name}$", fontsize=12)
 
     # plot 2: time evolution of E(x=Nx/2)
     ix2 = 1
     nb_x = epot.sizes["x"]
     axs[ix2].semilogy(epot.coords["time"], np.abs(epot.isel(x=nb_x//2)))
-    axs[ix2].set_xlabel(r'${}$'.format(epot.coords['time'].name), fontsize=12)
+    axs[ix2].set_xlabel(f"${epot.coords['time'].name}$", fontsize=12)
     axs[ix2].set_ylabel('abs(Phi(middle_box))', fontsize=12)
 
     # plot 3: E(x) for 3 times
@@ -170,7 +170,7 @@ def plot_epot_atonetime(epot: xr.DataArray,
                       epot.isel(time=it),
                       line_type[iit],
                       label=f't= {epot.coords["time"].values[itime]}')
-    axs[ix3].set_xlabel(r'${}$'.format(epot.coords['x'].name), fontsize=12)
+    axs[ix3].set_xlabel(f"${epot.coords['x'].name}$", fontsize=12)
     axs[ix3].set_ylabel('epot', fontsize=12)
     axs[ix3].legend()
 

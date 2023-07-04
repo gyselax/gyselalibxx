@@ -20,7 +20,7 @@ class loadYAML():
 
     def __init__(self, filename):
 
-        with open(filename, "r") as stream:
+        with open(filename, "r", encoding="utf-8") as stream:
             input_data = yaml.safe_load(stream)
 
         self.keys = []

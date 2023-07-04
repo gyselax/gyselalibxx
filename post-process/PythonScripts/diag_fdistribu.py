@@ -18,7 +18,7 @@ def compute_deltaf(fdistribu_eq: xr.DataArray, fdistribu: xr.DataArray):
     Compute delta f function = fdistribu - fdistribu_eq
     '''
     deltaf = (fdistribu - fdistribu_eq)
-    deltaf.name = '{}-{}'.format(fdistribu.name, fdistribu_eq.name)
+    deltaf.name = f'{fdistribu.name}-{fdistribu_eq.name}'
 
     return deltaf
 
@@ -87,8 +87,8 @@ def plot_fdistribu_atonetime(fdistribu: xr.DataArray,
                             shading='auto',
                             cmap='jet')
         axs[ix1].set_title(f'{f_spec_name} at t = {time_diag}')
-        axs[ix1].set_xlabel(r'${}$'.format(f_spec.coords['v_x'].name), fontsize=12)
-        axs[ix1].set_ylabel(r'${}$'.format(f_spec.coords['x'].name), fontsize=12)
+        axs[ix1].set_xlabel(f"${f_spec.coords['v_x'].name}$", fontsize=12)
+        axs[ix1].set_ylabel(f"${f_spec.coords['x'].name}$", fontsize=12)
 
         # plot 2: f(v) for 3 times
         ix2 = 3*ispec+1
@@ -97,7 +97,7 @@ def plot_fdistribu_atonetime(fdistribu: xr.DataArray,
                           fdistribu.isel(time=it, species=ispec, x=ix),
                           line_type[iit],
                           label=f't= {fdistribu.coords["time"].values[it]}')
-        axs[ix2].set_xlabel(r'${}$'.format(f_spec.coords['v_x'].name), fontsize=12)
+        axs[ix2].set_xlabel(f"${f_spec.coords['v_x'].name}$", fontsize=12)
         axs[ix2].set_ylabel('fdistribu', fontsize=12)
         axs[ix2].legend()
 
@@ -109,7 +109,7 @@ def plot_fdistribu_atonetime(fdistribu: xr.DataArray,
                               line_type[iivx],
                               label=f'v_x= {fdistribu.coords["v_x"][ivx].item()}')
         axs[ix3].set_title(f'{f_spec_name} at t = {time_diag}')
-        axs[ix3].set_xlabel(r'${}$'.format(f_spec.coords['x'].name), fontsize=12)
+        axs[ix3].set_xlabel(f"${f_spec.coords['x'].name}$", fontsize=12)
         axs[ix3].set_ylabel('fdistribu', fontsize=12)
         axs[ix3].legend()
 

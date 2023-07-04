@@ -151,7 +151,7 @@ class scattered_coord:
         match_dictionnary.update(dataset_match_dictionnary)
 
         for dim in pattern.dims:
-            if dim in match_dictionnary.keys():
+            if dim in match_dictionnary:
                 pattern = pattern[{dim: int(match_dictionnary[dim])}]
         pattern = pattern.data
 
