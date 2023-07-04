@@ -63,9 +63,9 @@ python_best_practices:
   before_script:
     export PYTHONPATH="./post-process/PythonScripts"
   script: |
-    pylint $(find tests -iname *.py) || pylint-exit --error-fail $?
-    pylint $(find doc -iname *.py) || pylint-exit --error-fail $?
-    pylint post-process/PythonScripts || pylint-exit --error-fail $?
+    pylint $(find tests -iname *.py)
+    pylint $(find doc -iname *.py)
+    pylint post-process/PythonScripts
 ddc_sync:
   only: [ triggers ]
   needs: []
