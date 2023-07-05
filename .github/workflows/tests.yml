@@ -50,7 +50,7 @@ jobs:
     needs: docker
     container:
       image: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
-      options: --user root
+      #options: --user root
     steps:
     - 
       name: Checkout gyselalibxx
