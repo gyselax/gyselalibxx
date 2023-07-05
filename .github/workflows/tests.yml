@@ -60,7 +60,9 @@ jobs:
       name: Run tests
       run: |
         git config --global --add safe.directory src/vendor/kokkos
-        cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF .
+        mkdir build
+        cd build
+        cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
         make -j 2 VERBOSE=1
         ctest --output-on-failure --timeout 5 -LE test_on_Release_only
 
@@ -78,7 +80,9 @@ jobs:
     - 
       name: Run tests
       run: |
-        cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF .
+        mkdir build
+        cd build
+        cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
         make -j 2 VERBOSE=1
         ctest --output-on-failure --timeout 5
 
