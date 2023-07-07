@@ -13,10 +13,8 @@ template <class Geometry, class DDimV>
 class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, DDimV>
 {
     using DDimSp = typename Geometry::DDimSp;
-    using DDimX = typename Geometry::template spatial_dim_for<DDimV>;
     using FdistribuDDom = typename Geometry::FdistribuDDom;
     using SpatialDDom = typename Geometry::SpatialDDom;
-    static_assert(std::is_same_v<FdistribuDDom, ddc::DiscreteDomain<DDimSp, DDimX, DDimV>>);
     using DElemV = ddc::DiscreteElement<DDimV>;
     using DElemSp = ddc::DiscreteElement<DDimSp>;
     using CDimV = typename DDimV::continuous_dimension_type;
