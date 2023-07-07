@@ -15,7 +15,6 @@ class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, DDimX>
     using DDimSp = typename Geometry::DDimSp;
     using DDimV = typename Geometry::template velocity_dim_for<DDimX>;
     using DDom = typename Geometry::FdistribuDDom;
-    static_assert(std::is_same_v<DDom, ddc::DiscreteDomain<DDimSp, DDimX, DDimV>>);
     using DElemX = ddc::DiscreteElement<DDimX>;
     using DElemV = ddc::DiscreteElement<DDimV>;
     using DElemSp = ddc::DiscreteElement<DDimSp>;
