@@ -22,7 +22,7 @@ target_link_libraries("initialization_${GEOMETRY_VARIANT}"
         DDC::DDC
         vcx::speciesinfo
         vcx::geometry_${GEOMETRY_VARIANT}
-        vcx::utils_${GEOMETRY_VARIANT}
+        vcx::utils
 )
 
 add_library("vcx::initialization_${GEOMETRY_VARIANT}" ALIAS "initialization_${GEOMETRY_VARIANT}")
