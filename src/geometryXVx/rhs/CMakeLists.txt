@@ -30,6 +30,7 @@ target_link_libraries("rhs_${GEOMETRY_VARIANT}"
         vcx::initialization_${GEOMETRY_VARIANT}
         vcx::time_integration_${GEOMETRY_VARIANT}
         vcx::utils_${GEOMETRY_VARIANT}
+        vcx::utils
 )
 
 add_library("vcx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
