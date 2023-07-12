@@ -79,17 +79,9 @@ where the mask function $\mathcal{M}$ defines the spatial extent of the source, 
 %
 \end{enumerate}
 %
-\paragraph{Collisions} The collisions term $\mathcal{C}(f_a)$ can be composed of the following operators.
-\begin{enumerate}
-\item An intra species collision operator \cite{Dif-Pradalier2011} that accounts for ion-ion and electron-electron collisions which is written as
-%
-\begin{equation} \label{eq:CollOp_1}
-\mathcal{C}_{aa}(f_a) = \partial_{v} \left[ D_v f_{a}^{M} \, \partial_{v}
-\left( \frac{f_a}{f_{a}^M} \right)\right].
-\end{equation}
-%
-In this expression $D_v$ is a function of space and velocity, and depends on the collisionality $\nu_0^\star$. This latter parameter is an input of the code that sets the magnitude of the collision operator. The $f_a^{M}$ function is a Maxwellian that depends on space $x$, velocity $v$ and time.  This Maxwellian is constructed such that the collision operator conserves locally the density, momentum and energy of the distribution function $f_a$.
-\end{enumerate}
+\paragraph{Collisions} The collisions term $\mathcal{C}(f_a)$ accounts for both intra and inter species collisions. \\
+
+\noindent An extensive description of the source, sink and collision operators described above can be found in the \texttt{src/geometryXVx/rhs/doc} folder. 
   \clearpage
   \printbibliography
 \end{document}
