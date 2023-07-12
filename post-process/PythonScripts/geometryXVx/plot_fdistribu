@@ -39,7 +39,7 @@ if __name__ == '__main__':
             for time in [time_init, time_diag]:
                 output_filename = os.path.join(Path.cwd(), f'fdistribu_xv_{species}_t{time}_{scale}.png')
                 plot_field2d(data.sel(time=time_diag, species=species).T,
-                             f't={time}',
+                             f'fdistribu {species} t={time}',
                              output_filename,
                              cmap='viridis',
                              scale=scale)

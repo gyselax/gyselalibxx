@@ -25,12 +25,11 @@ def compute_fluid_velocity(density, particle_flux):
 
 def compute_pressure(density, particle_flux, momentum_flux):
     fluid_velocity = particle_flux / density
-    return momentum_flux - 0.5*fluid_velocity**2
+    return momentum_flux - particle_flux*fluid_velocity
 
 
 def compute_temperature(density, particle_flux, momentum_flux):
-    fluid_velocity = particle_flux / density
-    return (momentum_flux - 0.5*fluid_velocity**2) / density
+    return compute_pressure(density, particle_flux, momentum_flux) / density
 
 
 def compute_krook_sink_constant(diskstore):
