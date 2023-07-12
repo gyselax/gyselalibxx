@@ -10,7 +10,7 @@ from pathlib import Path
 
 from gysdata import DiskStore
 from plot_utils import plot_field1d, plot_field2d
-from math_utils import second_moment
+from math_utils import compute_moment
 
 
 if __name__ == '__main__':
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     charges = ds['fdistribu_charges']
     masses = ds['fdistribu_masses']
 
-    particle_flux = second_moment(fdistribu, 'v_x')
+    particle_flux = compute_moment(fdistribu, 'v_x', moment_order=1)
     data = particle_flux * charges / np.sqrt(masses)
     data = data.sum('species')
 

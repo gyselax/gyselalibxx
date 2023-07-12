@@ -9,7 +9,7 @@ from pathlib import Path
 
 from gysdata import DiskStore
 from plot_utils import plot_field1d, plot_field2d
-from math_utils import first_moment, second_moment, third_moment
+from math_utils import compute_moment
 from utils import compute_temperature
 
 
@@ -33,9 +33,9 @@ if __name__ == '__main__':
     # Load data
     ds = DiskStore(args.data_dir)
     fdistribu = ds['fdistribu']
-    density = first_moment(fdistribu, 'v_x')
-    particle_flux = second_moment(fdistribu, 'v_x')
-    momentum_flux = third_moment(fdistribu, 'v_x')
+    density = compute_moment(fdistribu, 'v_x', moment_order=0)
+    particle_flux = compute_moment(fdistribu, 'v_x', moment_order=1)
+    momentum_flux = compute_moment(fdistribu, 'v_x', moment_order=2)
     data = compute_temperature(density, particle_flux, momentum_flux)
     time_init = fdistribu.coords['time'].values[0]
     time_diag = fdistribu.coords['time'].values[args.itime]

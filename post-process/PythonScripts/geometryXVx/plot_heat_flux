@@ -10,11 +10,12 @@ from pathlib import Path
 from gysdata import DiskStore
 from plot_utils import plot_field1d, plot_field2d
 from math_utils import compute_moment
+from utils import compute_pressure
 
 
 if __name__ == '__main__':
     parser = ArgumentParser(
-        description='Plots the plasma particle flux')
+        description='Plots the plasma heat flux')
     parser.add_argument('data_dir',
                         action='store',
                         nargs='?',
@@ -32,19 +33,27 @@ if __name__ == '__main__':
     # Load data
     ds = DiskStore(args.data_dir)
     fdistribu = ds['fdistribu']
-    data = compute_moment(fdistribu, 'v_x', moment_order=1)
+    
+    density = compute_moment(fdistribu, 'v_x', moment_order=0)
+    particle_flux = compute_moment(fdistribu, 'v_x', moment_order=1)
+    momentum_flux = compute_moment(fdistribu, 'v_x', moment_order=2)
+    pressure = compute_pressure(density, particle_flux, momentum_flux)
+    energy = momentum_flux/2 
+    energy_flux = compute_moment(fdistribu, 'v_x', moment_order=3, coeff=0.5)
+    heat_flux = energy_flux - particle_flux/density*(energy + pressure)
+
     time_init = fdistribu.coords['time'].values[0]
     time_diag = fdistribu.coords['time'].values[args.itime]
-    for species in data.coords['species'].values:
-        title = f'particle flux $nu$ {species}'
-        output_filename = os.path.join(Path.cwd(), f'particle_flux_{species}_xt.png')
-        plot_field2d(data.sel(species=species),
+    for species in heat_flux.coords['species'].values:
+        title = rf'heat flux {species}'
+        output_filename = os.path.join(Path.cwd(), f'heat_flux_{species}_xt.png')
+        plot_field2d(heat_flux.sel(species=species),
                      title,
                      output_filename,
                      scale='linear',
                      cmap='viridis')
 
-        output_filename = os.path.join(Path.cwd(), f'particle_flux_{species}_t{time_diag}.png')
-        data_dict = {f't={time_init}': data.sel(time=time_init, species=species),
-                     f't={time_diag}': data.sel(time=time_diag, species=species)}
+        output_filename = os.path.join(Path.cwd(), f'heat_flux_{species}_t{time_diag}.png')
+        data_dict = {f't={time_init}': heat_flux.sel(time=time_init, species=species),
+                     f't={time_diag}': heat_flux.sel(time=time_diag, species=species)}
         plot_field1d(data_dict, title, output_filename)

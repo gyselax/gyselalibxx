@@ -9,7 +9,7 @@ from pathlib import Path
 
 from gysdata import DiskStore
 from plot_utils import plot_field1d, plot_field2d
-from math_utils import first_moment
+from math_utils import compute_moment
 
 
 if __name__ == '__main__':
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     # Load data
     ds = DiskStore(args.data_dir)
     fdistribu = ds['fdistribu']
-    data = first_moment(fdistribu, 'v_x')
+    data = compute_moment(fdistribu, 'v_x', moment_order=0)
     time_init = fdistribu.coords['time'].values[0]
     time_diag = fdistribu.coords['time'].values[args.itime]
     for species in data.coords['species'].values:
