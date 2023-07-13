@@ -44,7 +44,9 @@ public:
         // pre-allocate some memory to prevent allocation later in loop
         ddc::Chunk<ddc::Coordinate<CDimX>, ddc::DiscreteDomain<DDimX>> feet_coords(x_dom);
         ddc::Chunk<double, ddc::DiscreteDomain<DDimX>> contiguous_slice(x_dom);
-        InterpolatorProxy<DDimX> const interpolator_x = m_interpolator_x.preallocate();
+        std::unique_ptr<IInterpolator<DDimX>> const interpolator_x_ptr
+                = m_interpolator_x.preallocate();
+        IInterpolator<DDimX> const& interpolator_x = *interpolator_x_ptr;
 
         auto c_dom = ddc::remove_dims_of(
                 dom,
