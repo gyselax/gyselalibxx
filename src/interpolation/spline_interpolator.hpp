@@ -76,11 +76,10 @@ public:
 
     ~PreallocatableSplineInterpolator() override = default;
 
-    InterpolatorProxy<DDim> preallocate() const override
+    std::unique_ptr<IInterpolator<DDim>> preallocate() const override
     {
-        return InterpolatorProxy<DDim>(
-                std::make_unique<
-                        SplineInterpolator<DDim, BSplines, BcMin, BcMax>>(m_builder, m_evaluator));
+        return std::make_unique<
+                SplineInterpolator<DDim, BSplines, BcMin, BcMax>>(m_builder, m_evaluator);
     }
 
     ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> operator()(
@@ -88,6 +87,6 @@ public:
             ddc::ChunkSpan<const ddc::Coordinate<CDim>, ddc::DiscreteDomain<DDim>> const
                     coordinates) const override
     {
-        return preallocate()(inout_data, coordinates);
+        return (*preallocate())(inout_data, coordinates);
     }
 };

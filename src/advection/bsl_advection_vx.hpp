@@ -42,7 +42,9 @@ public:
         // pre-allocate some memory to prevent allocation later in loop
         ddc::Chunk<ddc::Coordinate<CDimV>, ddc::DiscreteDomain<DDimV>> feet_coords(v_dom);
         ddc::Chunk<double, ddc::DiscreteDomain<DDimV>> contiguous_slice(v_dom);
-        InterpolatorProxy<DDimV> const interpolator_v = m_interpolator_v.preallocate();
+        std::unique_ptr<IInterpolator<DDimV>> const interpolator_v_ptr
+                = m_interpolator_v.preallocate();
+        IInterpolator<DDimV> const& interpolator_v = *interpolator_v_ptr;
 
         SpatialDDom const spatial_dom(allfdistribu.domain());
 
