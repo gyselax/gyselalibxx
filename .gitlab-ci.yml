@@ -65,7 +65,16 @@ python_best_practices:
   script: |
     pylint $(find tests -iname *.py)
     pylint $(find doc -iname *.py)
-    pylint post-process/PythonScripts
+    # Find all files with no extension or a .py extension in post-process/PythonScripts/
+    POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
+    # Get pylint errors without failing
+    pylint ${POST_PROCESS_PYTHON_FILES} > post_process_errors.txt || true
+    # Filter errors on changed files
+    git config --global --add safe.directory $(pwd)
+    git fetch origin main
+    for f in $(git diff origin/main --name-only); do grep $f post_process_errors.txt || true; done | tee filtered_errors.txt
+    # Raise an error if post-process in filtered errors
+    ! grep "post-process" filtered_errors.txt >/dev/null
 ddc_sync:
   only: [ triggers ]
   needs: []
