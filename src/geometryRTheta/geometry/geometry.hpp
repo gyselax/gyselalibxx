@@ -52,6 +52,8 @@ using SplineRBuilder = SplineBuilder<BSplinesR, IDimR, BoundCond::GREVILLE, Boun
 using SplinePBuilder = SplineBuilder<BSplinesP, IDimP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
 using SplineRPBuilder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
 
+using SplineRPEvaluator = SplineEvaluator2D<BSplinesR, BSplinesP>;
+
 using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
 using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
 using BSDomainP = ddc::DiscreteDomain<BSplinesP>;
