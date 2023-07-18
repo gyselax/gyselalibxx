@@ -16,4 +16,5 @@ target_link_libraries(unit_tests_common
 gtest_discover_tests(unit_tests_common)
 
 add_subdirectory(geometryXVx)
+add_subdirectory(geometryXYVxVy)
 add_subdirectory(geometryRTheta)
