@@ -2,6 +2,14 @@
 
 # SPDX-License-Identifier: MIT
 
+'''
+file : diag_growthrate
+date : 17/07/2023
+
+Diagnostics used to plot the time evolution of the absolute value of the electrostatic potential and
+to compute the growthrate using a linear fitting on the maximum values.
+'''
+
 import os
 import sys
 
@@ -43,15 +51,24 @@ if __name__ == '__main__':
                         help='end time index')
     args = parser.parse_args()
 
+    data_structure_name = 'data_structure_XVx.yaml'
+    multid = False
+
+    if 'XYVxVy' in str(args.data_dir):
+        data_structure_name='data_structure_XYVxVy.yaml'
+        multid = True
+
     # Load data
-    ds = DiskStore(args.data_dir)
-    epot = ds['electrostatic_potential']
-    epot = epot.isel(x=int(epot.sizes["x"] / 2))
+    ds = DiskStore(args.data_dir,data_structure=Path(data_structure_name))
+    if not multid:
+        epot = ds['electrostatic_potential']
+        epot = epot.isel(x=int(epot.sizes["x"] / 2))
+
     epot = epot.isel(time=slice(args.start, args.end))
 
     # Compute the diag
     (fitted_values, fit,
-     growthrate, valid) = Ediag.compute_growthrate(epot, args.theoretical)
+        growthrate, valid) = Ediag.compute_growthrate(epot, args.theoretical)
 
     # Plot the fig
     basename = os.path.basename(args.data_dir)
