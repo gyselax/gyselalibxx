@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['femnonperiodicpoissonsolver_28',['FemNonPeriodicPoissonSolver',['../classFemNonPeriodicPoissonSolver.html',1,'']]],
-  ['femperiodicpoissonsolver_29',['FemPeriodicPoissonSolver',['../classFemPeriodicPoissonSolver.html',1,'']]],
-  ['fftpoissonsolver_30',['FftPoissonSolver',['../classFftPoissonSolver.html',1,'']]],
-  ['fluidmoments_31',['FluidMoments',['../classFluidMoments.html',1,'']]],
-  ['full_5fdomain_32',['full_domain',['../classNonUniformBSplines_1_1Impl.html#ac8a6caf50fd6643695e349fc63600008',1,'NonUniformBSplines::Impl::full_domain()'],['../classUniformBSplines_1_1Impl.html#a4ec6f3bfdd493458acbf5db3c2488eec',1,'UniformBSplines::Impl::full_domain()']]]
+  ['ddchelper_23',['ddcHelper',['../classddcHelper.html',1,'']]],
+  ['dimp_24',['DimP',['../structDimP.html',1,'']]],
+  ['dimr_25',['DimR',['../structDimR.html',1,'']]],
+  ['dimx_26',['DimX',['../structDimX.html',1,'']]],
+  ['dimy_27',['DimY',['../structDimY.html',1,'']]],
+  ['discretetocartesian_28',['DiscreteToCartesian',['../classDiscreteToCartesian.html',1,'']]]
 ];

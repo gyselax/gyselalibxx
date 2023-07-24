@@ -117,6 +117,7 @@ Inheritance diagram for MaxwellianEquilibrium:</div>
   <img src="classMaxwellianEquilibrium.png" usemap="#MaxwellianEquilibrium_map" alt=""/>
   <map id="MaxwellianEquilibrium_map" name="MaxwellianEquilibrium_map">
 <area href="classIEquilibrium.html" alt="IEquilibrium" shape="rect" coords="0,0,136,24"/>
+<area href="classIEquilibrium.html" alt="IEquilibrium" shape="rect" coords="146,0,282,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -137,6 +138,21 @@ ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tem
 <tr class="memitem:a4e9512b33726f548cbbbdf4cba09c58a"><td class="memItemLeft" align="right" valign="top"><a id="a4e9512b33726f548cbbbdf4cba09c58a"></a>
 ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mean_velocity_eq</b> () const</td></tr>
 <tr class="separator:a4e9512b33726f548cbbbdf4cba09c58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d592e3fee525903a504fbdb819142b"><td class="memItemLeft" align="right" valign="top"><a id="ab3d592e3fee525903a504fbdb819142b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MaxwellianEquilibrium</b> (DFieldSp density_eq, DFieldSp temperature_eq, DFieldSp mean_velocity_eq)</td></tr>
+<tr class="separator:ab3d592e3fee525903a504fbdb819142b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7052573b3a3cb1a05f8e8bf3911bb293"><td class="memItemLeft" align="right" valign="top"><a id="a7052573b3a3cb1a05f8e8bf3911bb293"></a>
+DSpanSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpVxVy allfequilibrium) const override</td></tr>
+<tr class="separator:a7052573b3a3cb1a05f8e8bf3911bb293"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98691722df96759535fe638dcb41b674"><td class="memItemLeft" align="right" valign="top"><a id="a98691722df96759535fe638dcb41b674"></a>
+ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>density_eq</b> () const</td></tr>
+<tr class="separator:a98691722df96759535fe638dcb41b674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c644a45780479702f52205ae1439343"><td class="memItemLeft" align="right" valign="top"><a id="a2c644a45780479702f52205ae1439343"></a>
+ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>temperature_eq</b> () const</td></tr>
+<tr class="separator:a2c644a45780479702f52205ae1439343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e9512b33726f548cbbbdf4cba09c58a"><td class="memItemLeft" align="right" valign="top"><a id="a4e9512b33726f548cbbbdf4cba09c58a"></a>
+ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mean_velocity_eq</b> () const</td></tr>
+<tr class="separator:a4e9512b33726f548cbbbdf4cba09c58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -144,11 +160,15 @@ Static Public Member Functions</h2></td></tr>
 static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#ac211d7ccdd4ba1c2fb38907f82378fb4">compute_maxwellian</a> (DSpanVx const fMaxwellian, double const density, double const temperature, double const mean_velocity)</td></tr>
 <tr class="memdesc:ac211d7ccdd4ba1c2fb38907f82378fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computing the non-centered Maxwellian function as fM(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T)) with n the density and T the temperature and where u is the mean velocity. <br /></td></tr>
 <tr class="separator:ac211d7ccdd4ba1c2fb38907f82378fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab63430311240b2df71442657602caea0"><td class="memItemLeft" align="right" valign="top"><a id="ab63430311240b2df71442657602caea0"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#ab63430311240b2df71442657602caea0">compute_maxwellian</a> (DSpanVxVy const fMaxwellian, double const density, double const temperature, double const mean_velocity)</td></tr>
+<tr class="memdesc:ab63430311240b2df71442657602caea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computing the non-centered Maxwellian function as fM(v) = n/(2*PI*T)*exp(-(v-u)**2/(2*T)) with n the density and T the temperature and where u is the mean velocity. <br /></td></tr>
+<tr class="separator:ab63430311240b2df71442657602caea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Equilibrium operator as Maxwellian. This initializes all species. </p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
-<li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialization/<a class="el" href="maxwellianequilibrium_8hpp_source.html">maxwellianequilibrium.hpp</a></li>
+<li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialization/<a class="el" href="geometryXVx_2initialization_2maxwellianequilibrium_8hpp_source.html">maxwellianequilibrium.hpp</a></li>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialization/maxwellianequilibrium.cpp</li>
 </ul>
 </div><!-- contents -->

@@ -119,7 +119,7 @@ Inheritance diagram for KineticSource:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a361b8d5b34373ff17f657c9df6067f88"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticSource.html#a361b8d5b34373ff17f657c9df6067f88">KineticSource</a> (IDomainX const &amp;gridx, IDomainVx const &amp;gridv, double extent, double stiffness, double amplitude, double density, double energy, double temperature)</td></tr>
-<tr class="memdesc:a361b8d5b34373ff17f657c9df6067f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the equation \partial f / \partial t = S(v, x), where S is a space and velocity dependent source that does not depend on f or on time.  <a href="classKineticSource.html#a361b8d5b34373ff17f657c9df6067f88">More...</a><br /></td></tr>
+<tr class="memdesc:a361b8d5b34373ff17f657c9df6067f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the equation \(\partial f / \partial t = S(v, x)\), where S is a space and velocity dependent source that does not depend on f or on time.  <a href="classKineticSource.html#a361b8d5b34373ff17f657c9df6067f88">More...</a><br /></td></tr>
 <tr class="separator:a361b8d5b34373ff17f657c9df6067f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3425fe8d56c34d35fe15a4378e97a6a"><td class="memItemLeft" align="right" valign="top"><a id="ab3425fe8d56c34d35fe15a4378e97a6a"></a>
 DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpXVx allfdistribu, double dt) const override</td></tr>
@@ -188,7 +188,7 @@ DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> 
       </table>
 </div><div class="memdoc">
 
-<p>Solves the equation \partial f / \partial t = S(v, x), where S is a space and velocity dependent source that does not depend on f or on time. </p>
+<p>Solves the equation \(\partial f / \partial t = S(v, x)\), where S is a space and velocity dependent source that does not depend on f or on time. </p>
 <p>Therefore f(t+dt) = f(t) + S*dt</p>
 <p>S = spatial_extent(x) * velocity_shape(v) spatial_extent defines the location where the source is active. spatial_extent is normalized, so that its integral along the spatial direction equals one. It has a hyperbolic tangent shape. It is equal to one in a central zone of the plasma of width defined by the extent parameter.</p>
 <p>velocity_shape defines the velocity profile of the source in the parallel velocity direction. It is the sum of a source that injects only density, and a source that injects only energy. If the density and energy parameters are equal to one (usual case), the resulting velocity_shape is maxwellian. </p>

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['uniformbsplines_122',['UniformBSplines',['../classdeprecated_1_1UniformBSplines.html',1,'deprecated::UniformBSplines'],['../classUniformBSplines.html',1,'UniformBSplines&lt; Tag, D &gt;']]]
+  ['qdimx_102',['QDimX',['../classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX',1,'FemNonPeriodicPoissonSolver::QDimX'],['../classFemPeriodicPoissonSolver.html#structFemPeriodicPoissonSolver_1_1QDimX',1,'FemPeriodicPoissonSolver::QDimX']]],
+  ['quadrature_103',['Quadrature',['../classQuadrature.html',1,'']]],
+  ['quadrature_3c_20idimvx_20_3e_104',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]]
 ];

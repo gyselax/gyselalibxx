@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['ddchelper_21',['ddcHelper',['../classddcHelper.html',1,'']]],
-  ['dimp_22',['DimP',['../structDimP.html',1,'']]],
-  ['dimr_23',['DimR',['../structDimR.html',1,'']]],
-  ['dimx_24',['DimX',['../structDimX.html',1,'']]],
-  ['dimy_25',['DimY',['../structDimY.html',1,'']]],
-  ['discretetocartesian_26',['DiscreteToCartesian',['../classDiscreteToCartesian.html',1,'']]]
+  ['bernsteinpolynomialbasis_2',['BernsteinPolynomialBasis',['../classBernsteinPolynomialBasis.html',1,'']]],
+  ['boundary_5fdata_5f2d_3',['Boundary_data_2d',['../structdeprecated_1_1Boundary__data__2d.html',1,'deprecated']]],
+  ['bsladvectionspatial_4',['BslAdvectionSpatial',['../classBslAdvectionSpatial.html',1,'']]],
+  ['bsladvectionvelocity_5',['BslAdvectionVelocity',['../classBslAdvectionVelocity.html',1,'']]],
+  ['bspline_6',['BSpline',['../structBSpline.html',1,'']]],
+  ['bsplines_7',['BSplines',['../classdeprecated_1_1BSplines.html',1,'deprecated']]],
+  ['bumpontailequilibrium_8',['BumpontailEquilibrium',['../classBumpontailEquilibrium.html',1,'']]]
 ];

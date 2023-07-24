@@ -25,19 +25,29 @@
 var NAVTREE =
 [
   [ "Gyselalib++", "index.html", [
-    [ "Gyselalib++", "index.html#autotoc_md0", [
-      [ "Compilation", "index.html#autotoc_md1", null ],
-      [ "Execution", "index.html#autotoc_md2", null ],
-      [ "Dependencies", "index.html#autotoc_md3", null ]
-    ] ],
-    [ "Code Conventions", "md_Code_conventions.html", [
-      [ "Organisation of Classes", "md_Code_conventions.html#autotoc_md5", null ],
-      [ "Naming conventions", "md_Code_conventions.html#autotoc_md6", [
-        [ "Abstract Classes", "md_Code_conventions.html#autotoc_md7", null ],
-        [ "Class Names", "md_Code_conventions.html#autotoc_md8", null ]
+    [ "Adding Documentation", "adding_docs.html", [
+      [ "Compilation", "index.html#autotoc_md0", null ],
+      [ "Execution", "index.html#autotoc_md1", null ],
+      [ "Dependencies", "index.html#autotoc_md2", [
+        [ "Documentation describing code structures", "adding_docs.html#autotoc_md3", [
+          [ "Short summary", "adding_docs.html#autotoc_md4", null ],
+          [ "Extended summary", "adding_docs.html#autotoc_md5", null ],
+          [ "Argument annotation", "adding_docs.html#autotoc_md6", null ],
+          [ "Result annotation", "adding_docs.html#autotoc_md7", null ],
+          [ "References to other relevant parts of the code", "adding_docs.html#autotoc_md8", null ],
+          [ "Example", "adding_docs.html#autotoc_md9", null ]
+        ] ],
+        [ "Documentation describing general methods", "adding_docs.html#autotoc_md10", null ],
+        [ "Mathematical notation in documentation", "adding_docs.html#autotoc_md11", null ]
       ] ]
     ] ],
-    [ "sll", "md____w_gyselalibxx_gyselalibxx_code_branch_vendor_sll_README.html", null ],
+    [ "Coding Standards", "conventions.html", null ],
+    [ "Using Git", "git.html", null ],
+    [ "Spline interpolator in polar coordinates", "Spline_interpolator_polar.html", [
+      [ "Spline interpolator in polar coordinates", "Spline_interpolator_polar.html#autotoc_md28", null ]
+    ] ],
+    [ "\"Gyselalib++ contents\"", "src.html", "src" ],
+    [ "Selalib++", "sll.html", null ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]
   ] ]
@@ -45,10 +55,10 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"classKrookSourceConstant.html#a94d8fa0b721fbe980a11a9edc298b9c8",
-"classSplineBoundaryValue.html#a772793f39da3ff86099ca45d56d3a4b6",
-"collisions__utils_8hpp_source.html"
+"Spline_interpolator_polar.html",
+"classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6",
+"classPolarSplineFEMPoissonSolver.html",
+"classdeprecated_1_1Spline2D.html#a55b2a17dc7d4786bdaa291d7a68e6151"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

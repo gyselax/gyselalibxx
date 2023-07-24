@@ -118,38 +118,38 @@ $(document).ready(function(){initNavTree('bsl__advection__vx_8hpp_source.html','
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classBslAdvectionVelocity.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBslAdvectionVelocity.html">BslAdvectionVelocity</a> : <span class="keyword">public</span> <a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>&lt;Geometry, DDimV&gt;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">using</span> DDimSp = <span class="keyword">typename</span> Geometry::DDimSp;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">using</span> DDimX = <span class="keyword">typename</span> Geometry::template spatial_dim_for&lt;DDimV&gt;;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">using</span> FdistribuDDom = <span class="keyword">typename</span> Geometry::FdistribuDDom;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">using</span> SpatialDDom = <span class="keyword">typename</span> Geometry::SpatialDDom;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    static_assert(std::is_same_v&lt;FdistribuDDom, ddc::DiscreteDomain&lt;DDimSp, DDimX, DDimV&gt;&gt;);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">using</span> DElemV = ddc::DiscreteElement&lt;DDimV&gt;;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">using</span> DElemSp = ddc::DiscreteElement&lt;DDimSp&gt;;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">using</span> CDimV = <span class="keyword">typename</span> DDimV::continuous_dimension_type;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator&lt;DDimV&gt;</a> <span class="keyword">const</span>&amp; m_interpolator_v;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classBslAdvectionVelocity.html">BslAdvectionVelocity</a>(<a class="code" href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator&lt;DDimV&gt;</a> <span class="keyword">const</span>&amp; interpolator_v)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        : m_interpolator_v(interpolator_v)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">using</span> FdistribuDDom = <span class="keyword">typename</span> Geometry::FdistribuDDom;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">using</span> SpatialDDom = <span class="keyword">typename</span> Geometry::SpatialDDom;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">using</span> DElemV = ddc::DiscreteElement&lt;DDimV&gt;;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">using</span> DElemSp = ddc::DiscreteElement&lt;DDimSp&gt;;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">using</span> CDimV = <span class="keyword">typename</span> DDimV::continuous_dimension_type;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator&lt;DDimV&gt;</a> <span class="keyword">const</span>&amp; m_interpolator_v;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classBslAdvectionVelocity.html">BslAdvectionVelocity</a>(<a class="code" href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator&lt;DDimV&gt;</a> <span class="keyword">const</span>&amp; interpolator_v)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        : m_interpolator_v(interpolator_v)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    ~<a class="code" href="classBslAdvectionVelocity.html">BslAdvectionVelocity</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    ~<a class="code" href="classBslAdvectionVelocity.html">BslAdvectionVelocity</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    ddc::ChunkSpan&lt;double, FdistribuDDom&gt; operator()(</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            ddc::ChunkSpan&lt;double, FdistribuDDom&gt; <span class="keyword">const</span> allfdistribu,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            ddc::ChunkSpan&lt;const double, SpatialDDom&gt; <span class="keyword">const</span> electric_field,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> dt)<span class="keyword"> const override</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        FdistribuDDom <span class="keyword">const</span> dom = allfdistribu.domain();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        ddc::DiscreteDomain&lt;DDimV&gt; <span class="keyword">const</span> v_dom = ddc::select&lt;DDimV&gt;(dom);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        ddc::DiscreteDomain&lt;DDimSp&gt; <span class="keyword">const</span> sp_dom = ddc::select&lt;DDimSp&gt;(dom);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">// pre-allocate some memory to prevent allocation later in loop</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        ddc::Chunk&lt;ddc::Coordinate&lt;CDimV&gt;, ddc::DiscreteDomain&lt;DDimV&gt;&gt; feet_coords(v_dom);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDimV&gt;&gt; contiguous_slice(v_dom);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="classInterpolatorProxy.html">InterpolatorProxy&lt;DDimV&gt;</a> <span class="keyword">const</span> interpolator_v = m_interpolator_v.preallocate();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    ddc::ChunkSpan&lt;double, FdistribuDDom&gt; operator()(</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            ddc::ChunkSpan&lt;double, FdistribuDDom&gt; <span class="keyword">const</span> allfdistribu,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            ddc::ChunkSpan&lt;const double, SpatialDDom&gt; <span class="keyword">const</span> electric_field,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> dt)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        FdistribuDDom <span class="keyword">const</span> dom = allfdistribu.domain();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        ddc::DiscreteDomain&lt;DDimV&gt; <span class="keyword">const</span> v_dom = ddc::select&lt;DDimV&gt;(dom);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        ddc::DiscreteDomain&lt;DDimSp&gt; <span class="keyword">const</span> sp_dom = ddc::select&lt;DDimSp&gt;(dom);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="comment">// pre-allocate some memory to prevent allocation later in loop</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        ddc::Chunk&lt;ddc::Coordinate&lt;CDimV&gt;, ddc::DiscreteDomain&lt;DDimV&gt;&gt; feet_coords(v_dom);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDimV&gt;&gt; contiguous_slice(v_dom);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        std::unique_ptr&lt;IInterpolator&lt;DDimV&gt;&gt; <span class="keyword">const</span> interpolator_v_ptr</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                = m_interpolator_v.<a class="code" href="classIPreallocatableInterpolator.html#aceaa10e332a925c432a9f2f1ca1b7110">preallocate</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="classIInterpolator.html">IInterpolator&lt;DDimV&gt;</a> <span class="keyword">const</span>&amp; interpolator_v = *interpolator_v_ptr;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        SpatialDDom <span class="keyword">const</span> spatial_dom(allfdistribu.domain());</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
@@ -189,8 +189,9 @@ $(document).ready(function(){initNavTree('bsl__advection__vx_8hpp_source.html','
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
 <div class="ttc" id="aclassBslAdvectionVelocity_html"><div class="ttname"><a href="classBslAdvectionVelocity.html">BslAdvectionVelocity</a></div><div class="ttdef"><b>Definition:</b> bsl_advection_vx.hpp:14</div></div>
 <div class="ttc" id="aclassIAdvectionVelocity_html"><div class="ttname"><a href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div><div class="ttdef"><b>Definition:</b> iadvectionvx.hpp:9</div></div>
+<div class="ttc" id="aclassIInterpolator_html"><div class="ttname"><a href="classIInterpolator.html">IInterpolator</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> i_interpolator.hpp:18</div></div>
 <div class="ttc" id="aclassIPreallocatableInterpolator_html"><div class="ttname"><a href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator&lt; DDimV &gt;</a></div></div>
-<div class="ttc" id="aclassInterpolatorProxy_html"><div class="ttname"><a href="classInterpolatorProxy.html">InterpolatorProxy</a></div><div class="ttdef"><b>Definition:</b> i_interpolator.hpp:25</div></div>
+<div class="ttc" id="aclassIPreallocatableInterpolator_html_aceaa10e332a925c432a9f2f1ca1b7110"><div class="ttname"><a href="classIPreallocatableInterpolator.html#aceaa10e332a925c432a9f2f1ca1b7110">IPreallocatableInterpolator::preallocate</a></div><div class="ttdeci">virtual std::unique_ptr&lt; IInterpolator&lt; DDim &gt; &gt; preallocate() const =0</div><div class="ttdoc">Allocate an instance of an InterpolatorProxy to use as an IInterpolator.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

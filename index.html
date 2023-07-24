@@ -103,10 +103,8 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title">Gyselalib++ Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md0"></a>
-Gyselalib++</h1>
-<p>Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes and similar as well as a collection of such codes.</p>
-<h2><a class="anchor" id="autotoc_md1"></a>
+<div class="textblock"><p>Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes and similar as well as a collection of such codes.</p>
+<h2><a class="anchor" id="autotoc_md0"></a>
 Compilation</h2>
 <p>to compile voice++:</p>
 <div class="fragment"><div class="line">git clone --recurse-submodules git@gitlab.maisondelasimulation.fr:gysela-developpers/voicexx.git</div>
@@ -115,14 +113,14 @@ Compilation</h2>
 <div class="line">cd build</div>
 <div class="line">cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=&quot;-Wall -Wno-sign-compare&quot; ..</div>
 <div class="line">make</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1"></a>
 Execution</h2>
 <p>to run the tests: </p><div class="fragment"><div class="line">ctest --output-on-failure</div>
 </div><!-- fragment --><p>Then, just have a look at <code>tests/landau/growthrate_t0.0to45.0.png</code>:</p>
 <p><img src="https://gitlab.maisondelasimulation.fr/gysela-developpers/voicexx/-/jobs/artifacts/main/raw/build/tests/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release" alt="tests/landau/fft/growthrate_t0.0to45.0.png" title="Landau damping rate" class="inline"/></p>
 <p>and <code>tests/landau/frequency_t0.0to45.0.png</code>:</p>
 <p><img src="https://gitlab.maisondelasimulation.fr/gysela-developpers/voicexx/-/jobs/artifacts/main/raw/build/tests/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release" alt="tests/landau/fft/frequency_t0.0to45.0.png" title="Landau damping frequency" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md2"></a>
 Dependencies</h2>
 <p>To install dependencies through spack, first follow the the 3 first steps of <a href="https://github.com/pdidev/spack">https://github.com/pdidev/spack</a></p>
 <p>Then execute the following: </p><div class="fragment"><div class="line">spack env create voice spack.yaml</div>

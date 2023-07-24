@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['nonuniformbsplines_71',['NonUniformBSplines',['../classdeprecated_1_1NonUniformBSplines.html',1,'deprecated::NonUniformBSplines'],['../classNonUniformBSplines.html',1,'NonUniformBSplines&lt; Tag, D &gt;']]],
-  ['nulladvectionvelocity_72',['NullAdvectionVelocity',['../classNullAdvectionVelocity.html',1,'']]],
-  ['nullboundaryvalue_73',['NullBoundaryValue',['../classNullBoundaryValue.html',1,'']]],
-  ['nullboundaryvalue2d_74',['NullBoundaryValue2D',['../classNullBoundaryValue2D.html',1,'']]],
-  ['nullpoissonsolver_75',['NullPoissonSolver',['../classNullPoissonSolver.html',1,'']]]
+  ['kineticsource_64',['KineticSource',['../classKineticSource.html',1,'KineticSource'],['../classKineticSource.html#a361b8d5b34373ff17f657c9df6067f88',1,'KineticSource::KineticSource()']]],
+  ['knotdim_65',['KnotDim',['../classNonUniformBSplines.html#a266155b617441df530bb202effb00199',1,'NonUniformBSplines::KnotDim()'],['../classUniformBSplines.html#a35a003b75d534eac96c099cb4fdcad0f',1,'UniformBSplines::KnotDim()']]],
+  ['knotsasinterpolationpoints_66',['KnotsAsInterpolationPoints',['../classKnotsAsInterpolationPoints.html',1,'']]],
+  ['krooksourceadaptive_67',['KrookSourceAdaptive',['../classKrookSourceAdaptive.html',1,'KrookSourceAdaptive'],['../classKrookSourceAdaptive.html#abf1debbb6437f7a5b9fe6656e39dee27',1,'KrookSourceAdaptive::KrookSourceAdaptive()']]],
+  ['krooksourceconstant_68',['KrookSourceConstant',['../classKrookSourceConstant.html',1,'KrookSourceConstant'],['../classKrookSourceConstant.html#ad395273e96edc581ba4ba375c6fbb98c',1,'KrookSourceConstant::KrookSourceConstant()']]]
 ];

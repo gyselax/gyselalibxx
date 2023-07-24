@@ -106,25 +106,132 @@ $(document).ready(function(){initNavTree('classSplineInterpolator.html',''); ini
 <div class="title">SplineInterpolator&lt; DDim, BSplines, BcMin, BcMax &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class for interpolating a function using splines.  
+ <a href="classSplineInterpolator.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for SplineInterpolator&lt; DDim, BSplines, BcMin, BcMax &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classSplineInterpolator.png" usemap="#SplineInterpolator_3C_20DDim_2C_20BSplines_2C_20BcMin_2C_20BcMax_20_3E_map" alt=""/>
   <map id="SplineInterpolator_3C_20DDim_2C_20BSplines_2C_20BcMin_2C_20BcMax_20_3E_map" name="SplineInterpolator_3C_20DDim_2C_20BSplines_2C_20BcMin_2C_20BcMax_20_3E_map">
-<area href="classIInterpolator.html" alt="IInterpolator&lt; DDim &gt;" shape="rect" coords="0,0,316,24"/>
+<area href="classIInterpolator.html" title="A class which provides an interpolating function." alt="IInterpolator&lt; DDim &gt;" shape="rect" coords="0,0,316,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3c0b8537b24131f56969c1d31191c6c1"><td class="memItemLeft" align="right" valign="top"><a id="a3c0b8537b24131f56969c1d31191c6c1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SplineInterpolator</b> (<a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, DDim, BcMin, BcMax &gt; const &amp;builder, <a class="el" href="classSplineEvaluator.html">SplineEvaluator</a>&lt; BSplines &gt; const &amp;evaluator)</td></tr>
+<tr class="memitem:a3c0b8537b24131f56969c1d31191c6c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolator.html#a3c0b8537b24131f56969c1d31191c6c1">SplineInterpolator</a> (<a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, DDim, BcMin, BcMax &gt; const &amp;builder, <a class="el" href="classSplineEvaluator.html">SplineEvaluator</a>&lt; BSplines &gt; const &amp;evaluator)</td></tr>
+<tr class="memdesc:a3c0b8537b24131f56969c1d31191c6c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a spline interpolator object.  <a href="classSplineInterpolator.html#a3c0b8537b24131f56969c1d31191c6c1">More...</a><br /></td></tr>
 <tr class="separator:a3c0b8537b24131f56969c1d31191c6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fdb19f028e6c568f4fbe0e23b9feefe"><td class="memItemLeft" align="right" valign="top"><a id="a9fdb19f028e6c568f4fbe0e23b9feefe"></a>
-ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; const inout_data, ddc::ChunkSpan&lt; const ddc::Coordinate&lt; CDim &gt;, ddc::DiscreteDomain&lt; DDim &gt;&gt; const coordinates) const override</td></tr>
+<tr class="memitem:a9fdb19f028e6c568f4fbe0e23b9feefe"><td class="memItemLeft" align="right" valign="top">ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolator.html#a9fdb19f028e6c568f4fbe0e23b9feefe">operator()</a> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; const inout_data, ddc::ChunkSpan&lt; const ddc::Coordinate&lt; CDim &gt;, ddc::DiscreteDomain&lt; DDim &gt;&gt; const coordinates) const override</td></tr>
+<tr class="memdesc:a9fdb19f028e6c568f4fbe0e23b9feefe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classSplineInterpolator.html#a9fdb19f028e6c568f4fbe0e23b9feefe">More...</a><br /></td></tr>
 <tr class="separator:a9fdb19f028e6c568f4fbe0e23b9feefe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class DDim, class BSplines, BoundCond BcMin, BoundCond BcMax&gt;<br />
+class SplineInterpolator&lt; DDim, BSplines, BcMin, BcMax &gt;</h3>
+
+<p>A class for interpolating a function using splines. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3c0b8537b24131f56969c1d31191c6c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c0b8537b24131f56969c1d31191c6c1">&#9670;&nbsp;</a></span>SplineInterpolator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DDim , class BSplines , BoundCond BcMin, BoundCond BcMax&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSplineInterpolator.html">SplineInterpolator</a>&lt; DDim, BSplines, BcMin, BcMax &gt;::<a class="el" href="classSplineInterpolator.html">SplineInterpolator</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, DDim, BcMin, BcMax &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>builder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSplineEvaluator.html">SplineEvaluator</a>&lt; BSplines &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>evaluator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a spline interpolator object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">builder</td><td>An operator which builds spline coefficients from the values of a function at known interpolation points. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">evaluator</td><td>An operator which evaluates the value of a spline at requested coordinates. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9fdb19f028e6c568f4fbe0e23b9feefe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fdb19f028e6c568f4fbe0e23b9feefe">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DDim , class BSplines , BoundCond BcMin, BoundCond BcMax&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim&gt; &gt; <a class="el" href="classSplineInterpolator.html">SplineInterpolator</a>&lt; DDim, BSplines, BcMin, BcMax &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; const&#160;</td>
+          <td class="paramname"><em>inout_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ddc::ChunkSpan&lt; const ddc::Coordinate&lt; CDim &gt;, ddc::DiscreteDomain&lt; DDim &gt;&gt; const&#160;</td>
+          <td class="paramname"><em>coordinates</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">inout_data</td><td>On input: an array containing the value of the function at the interpolation points. On output: an array containing the value of the function at the coordinates. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coordinates</td><td>The coordinates where the function should be evaluated.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the inout_data array containing the value of the function at the coordinates. </dd></dl>
+
+<p>Implements <a class="el" href="classIInterpolator.html#a5321defe083a5f46ab01233ead86ed6a">IInterpolator&lt; DDim &gt;</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/interpolation/<a class="el" href="spline__interpolator_8hpp_source.html">spline_interpolator.hpp</a></li>
 </ul>

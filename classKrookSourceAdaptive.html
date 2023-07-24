@@ -119,7 +119,7 @@ Inheritance diagram for KrookSourceAdaptive:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abf1debbb6437f7a5b9fe6656e39dee27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceAdaptive.html#abf1debbb6437f7a5b9fe6656e39dee27">KrookSourceAdaptive</a> (IDomainX const &amp;gridx, IDomainVx const &amp;gridvx, RhsType const type, double extent, double stiffness, double amplitude, double density, double temperature)</td></tr>
-<tr class="memdesc:abf1debbb6437f7a5b9fe6656e39dee27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the equation \partial f / \partial_t = -amplitude * mask * ( f - ftarget) (BGK operator)  <a href="classKrookSourceAdaptive.html#abf1debbb6437f7a5b9fe6656e39dee27">More...</a><br /></td></tr>
+<tr class="memdesc:abf1debbb6437f7a5b9fe6656e39dee27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the equation \(\partial f / \partial_t\) = -amplitude * mask * ( f - ftarget) (BGK operator)  <a href="classKrookSourceAdaptive.html#abf1debbb6437f7a5b9fe6656e39dee27">More...</a><br /></td></tr>
 <tr class="separator:abf1debbb6437f7a5b9fe6656e39dee27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bddcb9927245e841113f9483271e6a0"><td class="memItemLeft" align="right" valign="top"><a id="a7bddcb9927245e841113f9483271e6a0"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>KrookSourceAdaptive</b> (<a class="el" href="classKrookSourceAdaptive.html">KrookSourceAdaptive</a> &amp;&amp;)=default</td></tr>
@@ -191,7 +191,7 @@ DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> 
       </table>
 </div><div class="memdoc">
 
-<p>Solves the equation \partial f / \partial_t = -amplitude * mask * ( f - ftarget) (BGK operator) </p>
+<p>Solves the equation \(\partial f / \partial_t\) = -amplitude * mask * ( f - ftarget) (BGK operator) </p>
 <p>mask defines the spatial region where the operator is active. If type = Source, the mask equals one in the central zone of the plasma of width extent; If type = Sink, the mask equals zero in the central zone of the plasma of width extent;</p>
 <p>ftarget is a maxwellian characterized by density and temperature, and a zero fluid velocity.</p>
 <p>amplitude depends on space, time and the considered species so that: amplitude(ions) = m_amplitude = constant amplitude(electrons, x, t) = m_amplitude</p><ul>

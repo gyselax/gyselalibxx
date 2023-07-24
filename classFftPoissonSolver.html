@@ -113,6 +113,7 @@ Inheritance diagram for FftPoissonSolver:</div>
   <img src="classFftPoissonSolver.png" usemap="#FftPoissonSolver_map" alt=""/>
   <map id="FftPoissonSolver_map" name="FftPoissonSolver_map">
 <area href="classIPoissonSolver.html" alt="IPoissonSolver" shape="rect" coords="0,0,108,24"/>
+<area href="classIPoissonSolver.html" alt="IPoissonSolver" shape="rect" coords="118,0,226,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -124,13 +125,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a58e99a7d9c0110c9174edee83ac3025b"><td class="memItemLeft" align="right" valign="top"><a id="a58e99a7d9c0110c9174edee83ac3025b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const override</td></tr>
 <tr class="separator:a58e99a7d9c0110c9174edee83ac3025b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acda345c088d81af75e1c787ac609af25"><td class="memItemLeft" align="right" valign="top"><a id="acda345c088d81af75e1c787ac609af25"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>FftPoissonSolver</b> (<a class="el" href="classSplineBuilder2D.html">SplineXYBuilder</a> const &amp;spline_xy_builder, <a class="el" href="classSplineEvaluator2D.html">SplineXYEvaluator</a> const &amp;spline_x_evaluator, <a class="el" href="classSplineBuilder2D.html">SplineVxVyBuilder</a> const &amp;spline_vxvy_builder, <a class="el" href="classSplineEvaluator2D.html">SplineVxVyEvaluator</a> const &amp;spline_vxvy_evaluator)</td></tr>
+<tr class="separator:acda345c088d81af75e1c787ac609af25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39d2b32d21f00f96f2c9f1625211eb98"><td class="memItemLeft" align="right" valign="top"><a id="a39d2b32d21f00f96f2c9f1625211eb98"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const override</td></tr>
+<tr class="separator:a39d2b32d21f00f96f2c9f1625211eb98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classIPoissonSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIPoissonSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIPoissonSolver.html">IPoissonSolver</a></td></tr>
 <tr class="memitem:af34e73695fa0b1aedca9fa32bfcced72 inherit pub_methods_classIPoissonSolver"><td class="memItemLeft" align="right" valign="top"><a id="af34e73695fa0b1aedca9fa32bfcced72"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanRP electrostatic_potential, DSpanRP electric_field, DViewRP allfdistribu) const =0</td></tr>
 <tr class="separator:af34e73695fa0b1aedca9fa32bfcced72 inherit pub_methods_classIPoissonSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="fftpoissonsolver_8hpp_source.html">fftpoissonsolver.hpp</a></li>
+<li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="geometryXVx_2poisson_2fftpoissonsolver_8hpp_source.html">fftpoissonsolver.hpp</a></li>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/fftpoissonsolver.cpp</li>
 </ul>
 </div><!-- contents -->
