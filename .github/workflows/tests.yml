@@ -48,6 +48,9 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     needs: docker
+    container:
+      image: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
+      options: --user root
     steps:
     - 
       name: Checkout gyselalibxx
@@ -56,18 +59,18 @@ jobs:
     - 
       name: Run tests
       run: |
-        cat<<-EOF > run.sh
-          set -xe
-          git config --global --add safe.directory /src/vendor/kokkos
-          cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
-          make -j 2 VERBOSE=1
-          ctest --output-on-failure --timeout 5 -LE test_on_Release_only
-        EOF
-        docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env:${{ github.sha }} bash /src/run.sh
+        mkdir build
+        cd build
+        cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
+        make -j 2 VERBOSE=1
+        ctest --output-on-failure --timeout 5 -LE test_on_Release_only
 
   tests_Release:
     runs-on: ubuntu-latest
     needs: docker
+    container:
+      image: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
+      options: --user root
     steps:
     - 
       name: Checkout gyselalibxx
@@ -76,11 +79,47 @@ jobs:
     - 
       name: Run tests
       run: |
-        cat<<-EOF > run.sh
-          set -xe
-          git config --global --add safe.directory /src/vendor/kokkos
-          cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF /src
-          make -j 2 VERBOSE=1
-          ctest --output-on-failure --timeout 5
-        EOF
-        docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env:${{ github.sha }} bash /src/run.sh
+        mkdir build
+        cd build
+        cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
+        make -j 2 VERBOSE=1
+        ctest --output-on-failure --timeout 5
+
+  Docs:
+    if: github.event_name == 'push' && github.ref_name == 'main'
+    needs: docker
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
+      options: --user root
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          path: code_branch
+          submodules: recursive
+      - name: Checkout documentation
+        uses: actions/checkout@v3
+        with:
+          ref: documentation
+          path: doc_branch
+      - name: Generate docs
+        run: |
+          mkdir build
+          cd build
+          cmake -DBUILD_DOCUMENTATION=ON ../code_branch
+          make doc
+        shell: bash
+      - name: Update documentation
+        run: |
+          cd doc_branch
+          git rm -r *
+          cp -r ../build/docs/html/* .
+          git add .
+          git config --global user.name "GitHub CI Documentation builder"
+          git config --global user.email "username@users.noreply.github.com"
+          git commit -m "Update docs"
+          git push
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}

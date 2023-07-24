@@ -9,7 +9,7 @@
 #include "mask_tanh.hpp"
 
 /**
- * Solves the equation \partial f / \partial_t = -amplitude * mask * ( f - ftarget) (BGK operator)
+ * Solves the equation \f$\partial f / \partial_t\f$ = -amplitude * mask * ( f - ftarget) (BGK operator)
  * 
  * mask defines the spatial region where the operator is active. 
  * If type = Source, the mask equals one in the central zone of the plasma of width extent; 
