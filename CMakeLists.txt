@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are re
 
 ## List of options
 option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
+option(BUILD_DOCUMENTATION "Build the documentation." OFF)
 option(VOICEXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
 set(VOICEXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Voice++")
 
@@ -32,6 +33,9 @@ find_package(paraconf REQUIRED COMPONENTS C)
 
 ## Look for a pre-installed PDI
 find_package(PDI REQUIRED COMPONENTS C)
+
+## Look for a pre-installed Doxygen
+find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
 
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
@@ -91,6 +95,14 @@ elseif("${VOICEXX_mdspan_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
   find_package(mdspan "0.3" REQUIRED)
 endif()
 
+## if documentation is enabled, build it
+if("${BUILD_DOCUMENTATION}")
+        add_subdirectory(docs/)
+endif()
+
+## Turn off documentation for subpackages
+set(BUILD_DOCUMENTATION OFF)
+
 ## Use Kokkos from `vendor/`
 add_subdirectory("vendor/kokkos/" "kokkos")
 
@@ -98,6 +110,7 @@ find_package (Eigen3 3.3 NO_MODULE)
 
 if (NOT EIGEN3_FOUND)
   ## Use Eigen from `vendor/`
+  set(EIGEN_BUILD_DOC OFF CACHE BOOL "Don't build eigen docs")
   add_subdirectory("vendor/eigen/" "eigen")
 endif (NOT EIGEN3_FOUND)
 

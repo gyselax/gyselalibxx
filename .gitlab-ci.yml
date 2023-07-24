@@ -65,6 +65,7 @@ python_best_practices:
   script: |
     pylint $(find tests -iname *.py)
     pylint $(find doc -iname *.py)
+    pylint $(find ci_tools -iname *.py)
     # Find all files with no extension or a .py extension in post-process/PythonScripts/
     POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
     # Get pylint errors without failing
@@ -92,3 +93,29 @@ public_mirror:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: ./bin/public_mirror
+
+documentation:
+  only: [ merge_requests ]
+  stage: test
+  needs: []
+  image: ghcr.io/gyselax/voicexx_env
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  before_script: |
+    git config --global --add safe.directory $CI_PROJECT_DIR
+    git fetch origin ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} --recurse-submodules=no
+  script: |
+    git config --global --add safe.directory /builds/gysela-developpers/voicexx/vendor/kokkos
+    rm -rf build || true
+    # Make docs
+    mkdir build
+    cd build
+    cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_DOCUMENTATION=ON -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
+    make doc
+    cd ..
+    # Get files which have changed in this merge request
+    git diff origin/${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}..HEAD --no-indent-heuristic --unified=0 --output=pull_diff.txt --no-color
+    # Filter documentation messages to only complain about modified files
+    python3 ci_tools/check_documentation.py pull_diff.txt build/docs/doxygen.log
+    git diff origin/${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}..HEAD --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
+    python3 ci_tools/check_readme_presence.py pull_new_files.txt
