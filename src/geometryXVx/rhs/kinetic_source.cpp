@@ -6,7 +6,7 @@
 #include "mask_tanh.hpp"
 
 /**
- * Solves the equation \partial f / \partial t = S(v, x),
+ * Solves the equation @f$\partial f / \partial t = S(v, x)@f$,
  * where S is a space and velocity dependent source 
  * that does not depend on f or on time. 
  * Therefore f(t+dt) = f(t) + S*dt

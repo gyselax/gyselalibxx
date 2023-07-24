@@ -1,0 +1,91 @@
+<doxygenlayout version="1.0">
+	<navindex>
+		<tab type="mainpage" visible="yes" title="Gyselalib++"/>
+		<tab type="pages" visible="yes" title="" intro=""/>
+		<tab type="classlist" visible="yes" title="API reference" intro=""/>
+		<tab type="filelist" visible="yes" title="Files" intro=""/>
+	</navindex>
+
+	<!-- Layout definition for a class page -->
+	<class>
+		<briefdescription visible="yes"/>
+		<includes visible="no"/>
+		<inheritancegraph visible="yes"/>
+		<collaborationgraph visible="no"/>
+		<memberdecl>
+			<nestedclasses visible="yes" title=""/>
+			<publictypes title=""/>
+			<services title=""/>
+			<interfaces title=""/>
+			<publicslots title=""/>
+			<signals title=""/>
+			<publicmethods title=""/>
+			<publicstaticmethods title=""/>
+			<publicattributes title=""/>
+			<publicstaticattributes title=""/>
+			<protectedtypes title=""/>
+			<protectedslots title=""/>
+			<protectedmethods title=""/>
+			<protectedstaticmethods title=""/>
+			<protectedattributes title=""/>
+			<protectedstaticattributes title=""/>
+			<packagetypes title=""/>
+			<packagemethods title=""/>
+			<packagestaticmethods title=""/>
+			<packageattributes title=""/>
+			<packagestaticattributes title=""/>
+			<properties title=""/>
+			<events title=""/>
+			<privatetypes title=""/>
+			<privateslots title=""/>
+			<privatemethods title=""/>
+			<privatestaticmethods title=""/>
+			<privateattributes title=""/>
+			<privatestaticattributes title=""/>
+			<friends title=""/>
+			<related title="" subtitle=""/>
+			<membergroups visible="yes"/>
+		</memberdecl>
+		<detaileddescription title=""/>
+		<memberdef>
+			<inlineclasses title=""/>
+			<typedefs title=""/>
+			<enums title=""/>
+			<services title=""/>
+			<interfaces title=""/>
+			<constructors title=""/>
+			<functions title=""/>
+			<related title=""/>
+			<variables title=""/>
+			<properties title=""/>
+			<events title=""/>
+		</memberdef>
+		<allmemberslink visible="yes"/>
+		<usedfiles visible="$SHOW_USED_FILES"/>
+		<authorsection visible="no"/>
+	</class>
+
+	<!-- Layout definition for a namespace page -->
+	<namespace>
+		<briefdescription visible="yes"/>
+		<memberdecl>
+			<nestednamespaces visible="yes" title=""/>
+			<constantgroups visible="yes" title=""/>
+			<classes visible="yes" title=""/>
+			<typedefs title=""/>
+			<enums title=""/>
+			<functions title=""/>
+			<variables title=""/>
+			<membergroups visible="yes"/>
+		</memberdecl>
+		<detaileddescription title=""/>
+		<memberdef>
+			<inlineclasses title=""/>
+			<typedefs title=""/>
+			<enums title=""/>
+			<functions title=""/>
+			<variables title=""/>
+		</memberdef>
+		<authorsection visible="yes"/>
+	</namespace>
+</doxygenlayout>
