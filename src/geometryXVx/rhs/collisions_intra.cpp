@@ -26,12 +26,12 @@
  *  - Vcoll = Pcoll^{-1}[Imean4*Imean1 - Imean3*Imean2]
  *  - Pcoll = Imean0*Imean4 - Imean1*Imean3
  *  where the 5 integrals are defined as:
- *     Imean0=<Dcoll> ;
- *     Imean1=<v*Dcoll> ;
- *     Imean2=<v^2*Dcoll> ;
- *     Imean3=<d/dv(Dcoll)>
- *     Imean4=<d/dv(v*Dcoll>
- *  The brackets <.> represent the integral in velocity: <.> = \int . dv
+ *     @f$Imean0=\langle Dcoll \rangle@f$ ;
+ *     @f$Imean1=\langle v*Dcoll \rangle@f$ ;
+ *     @f$Imean2=\langle v^2*Dcoll \rangle@f$ ;
+ *     @f$Imean3=\langle d/dv(Dcoll) \rangle@f$
+ *     @f$Imean4=\langle d/dv(v*Dcoll) \rangle@f$
+ *  The brackets @f$\langle\cdot\rangle@f$ represent the integral in velocity: @f$\langle\cdot\rangle = \int \cdot dv@f$
  *
  *  C_ab = { 2 Q_ab [m_a(v-V_a)^2/2T_a - 1/2]
  *         + R_ab (v-V_a) } * FM_a / (n_a Ta)
