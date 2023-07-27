@@ -43,9 +43,6 @@ var NAVTREE =
     ] ],
     [ "Coding Standards", "conventions.html", null ],
     [ "Using Git", "git.html", null ],
-    [ "Spline interpolator in polar coordinates", "Spline_interpolator_polar.html", [
-      [ "Spline interpolator in polar coordinates", "Spline_interpolator_polar.html#autotoc_md28", null ]
-    ] ],
     [ "\"Gyselalib++ contents\"", "src.html", "src" ],
     [ "Selalib++", "sll.html", null ],
     [ "API reference", "annotated.html", "annotated" ],
@@ -56,9 +53,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Spline_interpolator_polar.html",
-"classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6",
-"classPolarSplineFEMPoissonSolver.html",
-"classdeprecated_1_1Spline2D.html#a55b2a17dc7d4786bdaa291d7a68e6151"
+"classIPoissonSolver.html#af34e73695fa0b1aedca9fa32bfcced72",
+"classPolarSplineFEMPoissonSolver.html#a51c7049b09235defa8c3242508d95ba4",
+"classdeprecated_1_1Spline2D.html#a7048da14e61740d6da8c1d0596e19beb"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -5,7 +5,7 @@ var indexSectionsWithContent =
   2: "cfikops",
   3: "m",
   4: "k",
-  5: "\"acisu"
+  5: "\"acgisu"
 };
 
 var indexSectionNames =

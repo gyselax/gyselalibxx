@@ -1,5 +1,7 @@
 var classdeprecated_1_1BSplines =
 [
+    [ "Spline Interpolation", "interpolation.html#autotoc_md28", null ],
+    [ "Memory concerns", "interpolation.html#autotoc_md29", null ],
     [ "~BSplines", "classdeprecated_1_1BSplines.html#aa988a402d049367148d42a802ae6cd28", null ],
     [ "BSplines", "classdeprecated_1_1BSplines.html#a4f9a4112a9f796342fb7d1d881c55ddc", null ],
     [ "degree", "classdeprecated_1_1BSplines.html#a252b828716d1b96f7d546f9298536885", null ],
