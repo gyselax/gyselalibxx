@@ -1,5 +1,8 @@
 cmake_tests:
-  only: [ main, merge_requests ]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   stage: test
   needs: []
   image: ghcr.io/gyselax/voicexx_env
@@ -19,7 +22,10 @@ cmake_tests:
     reports:
       junit: ./build/tests.xml
 cmake_tests_Release:
-  only: [ main, merge_requests ]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   stage: test
   needs: []
   image: ghcr.io/gyselax/voicexx_env
@@ -45,7 +51,9 @@ cmake_tests_Release:
     reports:
       junit: ./build/tests.xml
 indentation:
-  only: [ main, merge_requests ]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   stage: test
   needs: []
   image: ghcr.io/gyselax/voicexx_env
@@ -54,7 +62,9 @@ indentation:
   script: |
     ./bin/indent -td
 python_best_practices:
-  only: [ main, merge_requests ]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   stage: test
   needs: []
   image: ghcr.io/gyselax/voicexx_env
@@ -77,7 +87,8 @@ python_best_practices:
     # Raise an error if post-process in filtered errors
     ! grep "post-process" filtered_errors.txt >/dev/null
 ddc_sync:
-  only: [ triggers ]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "trigger"
   needs: []
   image: ghcr.io/gyselax/voicexx_env
   variables:
@@ -86,7 +97,8 @@ ddc_sync:
   - git clone --depth 1 --branch main -- "https://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" /data/gyselalibxx
   - /data/gyselalibxx/bin/ddc_sync --push
 public_mirror:
-  only: [ main ]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   tags: [ outssh ]
   needs: []
   image: ghcr.io/gyselax/voicexx_env
@@ -95,7 +107,8 @@ public_mirror:
   script: ./bin/public_mirror
 
 documentation:
-  only: [ merge_requests ]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   stage: test
   needs: []
   image: ghcr.io/gyselax/voicexx_env
