@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(splines CXX)
 
 # Our project
+option(SLL_BUILD_TESTING "Build sll tests" ON)
 
 ## The library itself
 add_library(splines STATIC
@@ -44,6 +45,6 @@ endif()
 add_library(sll::splines ALIAS splines)
 
 ## if tests are enabled, build the tests in `tests/`
-if("${BUILD_TESTING}")
+if("${BUILD_TESTING}" AND "${SLL_BUILD_TESTING}")
     add_subdirectory(tests/)
 endif()
