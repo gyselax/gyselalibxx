@@ -7,6 +7,7 @@
 #include <ostream>
 #include <utility>
 
+#include "ddc/coordinate.hpp"
 #include "ddc/detail/type_seq.hpp"
 #include "ddc/discrete_vector.hpp"
 
@@ -414,5 +415,14 @@ constexpr inline DiscreteVector<Tags...> operator-(
     static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     return DiscreteVector<Tags...>((uid<Tags>(lhs) - uid<Tags>(rhs))...);
 }
+
+// Gives access to the type of the coordinates of a discrete element
+// Example usage : "using Coords = coordinate_of_t<DElem>;"
+template <class... DDims>
+struct coordinate_of<ddc::DiscreteElement<DDims...>>
+{
+    // maybe a static_assert on DDims ?
+    using type = Coordinate<typename DDims::continuous_dimension_type...>;
+};
 
 } // namespace ddc
