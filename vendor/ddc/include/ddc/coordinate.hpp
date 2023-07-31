@@ -15,7 +15,14 @@ using CoordinateElement = double;
  * 
  * It is tagged by its dimensions.
  */
+
 template <class... CDims>
 using Coordinate = detail::TaggedVector<CoordinateElement, CDims...>;
+
+template <class T>
+struct coordinate_of;
+
+template <class T>
+using coordinate_of_t = typename coordinate_of<T>::type;
 
 } // namespace ddc
