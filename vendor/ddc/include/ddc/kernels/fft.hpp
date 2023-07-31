@@ -351,7 +351,8 @@ void core(
             Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible,
             "MemorySpace has to be accessible for ExecutionSpace.");
 
-    int n[sizeof...(X)] = {(int)ddc::get<ddc::UniformPointSampling<X>>(mesh.extents())...};
+    std::array<int, sizeof...(X)> n
+            = {(int)ddc::get<ddc::UniformPointSampling<X>>(mesh.extents())...};
     int idist = 1;
     int odist = 1;
     for (size_t i = 0; i < sizeof...(X); i++) {
@@ -371,7 +372,7 @@ void core(
                 kwargs.direction == ddc::FFT_Direction::FORWARD ? FFTW_FORWARD : FFTW_BACKWARD,
                 FFTW_ESTIMATE,
                 (int)sizeof...(X),
-                n,
+                n.data(),
                 1,
                 reinterpret_cast<typename _fftw_type<Tin>::type*>(in_data),
                 (int*)NULL,
@@ -404,7 +405,7 @@ void core(
                 kwargs.direction == ddc::FFT_Direction::FORWARD ? FFTW_FORWARD : FFTW_BACKWARD,
                 FFTW_ESTIMATE,
                 (int)sizeof...(X),
-                n,
+                n.data(),
                 1,
                 reinterpret_cast<typename _fftw_type<Tin>::type*>(in_data),
                 (int*)NULL,
@@ -434,7 +435,7 @@ void core(
         cufft_rt = cufftPlanMany(
                 &plan, // plan handle
                 sizeof...(X),
-                n, // Nx, Ny...
+                n.data(), // Nx, Ny...
                 NULL,
                 1,
                 idist,
@@ -468,7 +469,7 @@ void core(
         hipfft_rt = hipfftPlanMany(
                 &plan, // plan handle
                 sizeof...(X),
-                n, // Nx, Ny...
+                n.data(), // Nx, Ny...
                 NULL,
                 1,
                 idist,

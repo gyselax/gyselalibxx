@@ -212,10 +212,10 @@ int main(int argc, char** argv)
             ddc::PeriodicSampling<ddc::Fourier<X>>,
             ddc::PeriodicSampling<ddc::Fourier<Y>>> const k_mesh
             = ddc::FourierMesh(initial_temp.domain(), false);
-    ddc::Chunk _Ff = ddc::
+    ddc::Chunk Ff_allocation = ddc::
             Chunk(k_mesh,
                   ddc::DeviceAllocator<Kokkos::complex<double>>());
-    ddc::ChunkSpan Ff = _Ff.span_view();
+    ddc::ChunkSpan Ff = Ff_allocation.span_view();
 
     //! [time iteration]
     for (auto const iter :
