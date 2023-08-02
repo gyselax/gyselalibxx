@@ -1,4 +1,4 @@
-@page git Using Git
+# Using Git
 
 Git is an extremely important tool for handling versioning and concurrent developments on the same code. There are many resources available online to help you get to grips with this tool. Here we summarise a few key concepts which will be helpful when working with git and Gyselalibxx. It is designed to be a jumping-off point and a reference for reoccuring git questions, not a complete git reference or tutorial.
 

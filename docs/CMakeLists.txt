@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: MIT
 cmake_minimum_required(VERSION 3.15)
 
+FIND_PACKAGE(Python3 REQUIRED)
+message(STATUS "DOXYGEN")
+
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html")
 set(DOXYGEN_PROJECT_NAME "Gyselalib++")
 set(DOXYGEN_AUTOLINK_SUPPORT YES)
@@ -52,10 +55,37 @@ set(DOXYGEN_WARN_AS_ERROR NO)
 set(DOXYGEN_WARN_LOGFILE "doxygen.log")
 set(DOXYGEN_STRIP_FROM_PATH "")
 #set(DOXYGEN_IMAGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/images")
-FILE(GLOB MarkdownSources "${CMAKE_CURRENT_SOURCE_DIR}/*.md")
+FILE(GLOB_RECURSE MarkdownSources
+	"${voicexx_SOURCE_DIR}/src/*README.md"
+	"${voicexx_SOURCE_DIR}/tests/*README.md"
+	"${voicexx_SOURCE_DIR}/simulations/*README.md"
+	"${voicexx_SOURCE_DIR}/vendor/sll/*README.md"
+	"${CMAKE_CURRENT_SOURCE_DIR}/*.md")
+
+message(STATUS ${MarkdownSources})
+
+SET(TREATED_MD)
+
+# Generate Doxygen compatible Markdown files
+foreach(MD_FILE ${MarkdownSources} "${voicexx_SOURCE_DIR}/README.md")
+
+	file(RELATIVE_PATH relpath ${voicexx_SOURCE_DIR} ${MD_FILE})
+
+	message(STATUS "${Python3_EXECUTABLE} ${voicexx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py ${MD_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${relpath}")
+
+add_custom_command(
+        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${relpath}
+	COMMAND ${Python3_EXECUTABLE} ${voicexx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py ${MD_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${relpath}
+        DEPENDS ${MD_FILE} ${voicexx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py
+        VERBATIM
+)
+
+SET(TREATED_MD ${TREATED_MD} ${CMAKE_CURRENT_BINARY_DIR}/${relpath})
+
+endforeach()
+
+message(STATUS ${TREATED_MD})
+
 doxygen_add_docs(doc
-	${MarkdownSources}
-        "${voicexx_SOURCE_DIR}/src"
-	"${voicexx_SOURCE_DIR}/vendor/sll/README.md"
-        "${voicexx_SOURCE_DIR}/vendor/sll/include"
+	${TREATED_MD}
         ALL)
