@@ -1,4 +1,4 @@
-@page conventions Coding Standards
+# Coding Standards
 
 ## C++ Features
 * We use C++17
