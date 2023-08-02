@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Main Page</title>
+<title>Gyselalib++: Sheath simulations</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('index.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('simulations_geometryXVx_sheath.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,36 +100,32 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Gyselalib++ Documentation</div>  </div>
+<div class="title">Sheath simulations </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes and similar as well as a collection of such codes.</p>
-<h1><a class="anchor" id="Compilation"></a>
-Compilation</h1>
-<p>to compile voice++:</p>
-<div class="fragment"><div class="line">git clone --recurse-submodules git@gitlab.maisondelasimulation.fr:gysela-developpers/voicexx.git</div>
-<div class="line">cd voicexx</div>
-<div class="line">mkdir build</div>
-<div class="line">cd build</div>
-<div class="line">cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=&quot;-Wall -Wno-sign-compare&quot; ..</div>
-<div class="line">make</div>
-</div><!-- fragment --><h1><a class="anchor" id="Execution"></a>
-Execution</h1>
-<p>to run the tests: </p><div class="fragment"><div class="line">ctest --output-on-failure</div>
-</div><!-- fragment --><p>Then, just have a look at <code>tests/landau/growthrate_t0.0to45.0.png</code>:</p>
-<p><img src="https://gitlab.maisondelasimulation.fr/gysela-developpers/voicexx/-/jobs/artifacts/main/raw/build/tests/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release" alt="tests/landau/fft/growthrate_t0.0to45.0.png" title="Landau damping rate" class="inline"/></p>
-<p>and <code>tests/landau/frequency_t0.0to45.0.png</code>:</p>
-<p><img src="https://gitlab.maisondelasimulation.fr/gysela-developpers/voicexx/-/jobs/artifacts/main/raw/build/tests/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release" alt="tests/landau/fft/frequency_t0.0to45.0.png" title="Landau damping frequency" class="inline"/></p>
-<h1><a class="anchor" id="Dependencies"></a>
-Dependencies</h1>
-<p>To install dependencies through spack, first follow the the 3 first steps of <a href="https://github.com/pdidev/spack">https://github.com/pdidev/spack</a></p>
-<p>Then execute the following: </p><div class="fragment"><div class="line">spack env create voice spack.yaml</div>
-<div class="line">spack env activate voice</div>
-<div class="line">spack concretize --reuse</div>
-<div class="line">spack install</div>
-</div><!-- fragment --><p>For example, you can find a Dockerfile installing these dependencies on ubuntu in <code>voicexx_env/Dockerfile</code>. </p>
-</div></div><!-- PageDoc -->
-</div><!-- contents -->
+<div class="textblock"><h1><a class="anchor" id="Description"></a>
+Description</h1>
+<p>The <code>sheath</code> executable allows the study of kinetic plasma-wall interaction. A Boltzmann-Poisson system is solved for the electric field and the distribution function for both electrons and ions species. The model is one dimensional in space and velocity (1D1V). <br  />
+</p>
+<p>The particularity of the model lies in the description of the wall region, which is treated using immersed boundary condition (or penalization). Electrons and ions are absorbed inside this region. The inertia difference between the two species drives the appearance of a positively charged layer (the sheath) at the plasma boundary. More details about the sheath physics along with the need for non-equidistant meshes to conduct such simulations can be found in [1,2]. <br  />
+</p>
+<h1><a class="anchor" id="Usage"></a>
+Usage</h1>
+<p>After building the code, run the executable located in <code>build/simulations/sheath/</code>. To use the default simulation parameters the user can provide the <code>--dump-config</code> option when launching the executable.</p>
+<h1><a class="anchor" id="Recommended_parameters"></a>
+Recommended parameters</h1>
+<p>Two sets of parameters are available :</p><ul>
+<li>the default parameter given in <code>sheath.yaml.hpp</code>. This cas corresponds to a very light simulation case that runs a few iterations for testing purposes. This is the set of parameters that can be retrieved with the <code>--dump-config</code> command.</li>
+<li>the parameters given in the folder <code>ref_simulation</code>, in the <code>sheath_ref.yaml</code> file. This simulation presents a glimpse of the plasma-wall interaction physics that can be seen on the figures in the mentioned folder: formation of a positively charged layer in front of the wall region, accompanied by a drop of the electric potential that confines fast electrons. A particle flux going towards the wall exists in the plasma. With the number of iterations performed to obtain these figures, the system is not at steady state. To observe a steady state plasma-wall interaction with interesting physical features (supersonic flow of ions, truncation of fast velocity electrons, etc.) see the paramerers of [2].</li>
+</ul>
+<h1><a class="anchor" id="References"></a>
+References</h1>
+<ul>
+<li>[1] E. Bourne, Y. Munschy, V. Grandgirard, M. Mehrenberger, and P. Ghendrih, Non-Uniform Splines for Semi-Lagrangian Kinetic Simulations of the Plasma Sheath (2022)</li>
+<li>[2] Y. Munschy, E. Bourne, P. Ghendrih, G. Dif-Pradalier, Y. Sarazin, V. Grandgirard, and P. Donnel, Kinetic plasma-wall interaction using immersed boundary conditions (2023) </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

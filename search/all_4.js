@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['ddchelper_23',['ddcHelper',['../classddcHelper.html',1,'']]],
-  ['dimp_24',['DimP',['../structDimP.html',1,'']]],
-  ['dimr_25',['DimR',['../structDimR.html',1,'']]],
-  ['dimx_26',['DimX',['../structDimX.html',1,'']]],
-  ['dimy_27',['DimY',['../structDimY.html',1,'']]],
-  ['discretetocartesian_28',['DiscreteToCartesian',['../classDiscreteToCartesian.html',1,'']]]
+  ['selalib_2b_2b_5',['Selalib++',['../vendor_sll.html',1,'']]],
+  ['sheath_20simulations_6',['Sheath simulations',['../simulations_geometryXVx_sheath.html',1,'']]],
+  ['spline_20interpolator_20in_20polar_20coordinates_7',['Spline interpolator in polar coordinates',['../src_geometryRTheta_interpolation.html',1,'src_geometryRTheta']]]
 ];

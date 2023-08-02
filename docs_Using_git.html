@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Main Page</title>
+<title>Gyselalib++: Using Git</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('index.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('docs_Using_git.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,36 +100,31 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Gyselalib++ Documentation</div>  </div>
+<div class="title">Using Git </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes and similar as well as a collection of such codes.</p>
-<h1><a class="anchor" id="Compilation"></a>
-Compilation</h1>
-<p>to compile voice++:</p>
-<div class="fragment"><div class="line">git clone --recurse-submodules git@gitlab.maisondelasimulation.fr:gysela-developpers/voicexx.git</div>
-<div class="line">cd voicexx</div>
-<div class="line">mkdir build</div>
-<div class="line">cd build</div>
-<div class="line">cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=&quot;-Wall -Wno-sign-compare&quot; ..</div>
-<div class="line">make</div>
-</div><!-- fragment --><h1><a class="anchor" id="Execution"></a>
-Execution</h1>
-<p>to run the tests: </p><div class="fragment"><div class="line">ctest --output-on-failure</div>
-</div><!-- fragment --><p>Then, just have a look at <code>tests/landau/growthrate_t0.0to45.0.png</code>:</p>
-<p><img src="https://gitlab.maisondelasimulation.fr/gysela-developpers/voicexx/-/jobs/artifacts/main/raw/build/tests/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release" alt="tests/landau/fft/growthrate_t0.0to45.0.png" title="Landau damping rate" class="inline"/></p>
-<p>and <code>tests/landau/frequency_t0.0to45.0.png</code>:</p>
-<p><img src="https://gitlab.maisondelasimulation.fr/gysela-developpers/voicexx/-/jobs/artifacts/main/raw/build/tests/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release" alt="tests/landau/fft/frequency_t0.0to45.0.png" title="Landau damping frequency" class="inline"/></p>
-<h1><a class="anchor" id="Dependencies"></a>
-Dependencies</h1>
-<p>To install dependencies through spack, first follow the the 3 first steps of <a href="https://github.com/pdidev/spack">https://github.com/pdidev/spack</a></p>
-<p>Then execute the following: </p><div class="fragment"><div class="line">spack env create voice spack.yaml</div>
-<div class="line">spack env activate voice</div>
-<div class="line">spack concretize --reuse</div>
-<div class="line">spack install</div>
-</div><!-- fragment --><p>For example, you can find a Dockerfile installing these dependencies on ubuntu in <code>voicexx_env/Dockerfile</code>. </p>
-</div></div><!-- PageDoc -->
-</div><!-- contents -->
+<div class="textblock"><p>Git is an extremely important tool for handling versioning and concurrent developments on the same code. There are many resources available online to help you get to grips with this tool. Here we summarise a few key concepts which will be helpful when working with git and Gyselalibxx. It is designed to be a jumping-off point and a reference for reoccuring git questions, not a complete git reference or tutorial.</p>
+<h1><a class="anchor" id="Branches"></a>
+Branches</h1>
+<p>Branches are an important tool for handling concurrent development. The <code>main</code> branch is the starting point for all developments. It contains all major developments which are considered sufficiently mature for other developers to also use them.</p>
+<p>Whenever you wish to add something new to gyselalibxx or fix an issue you should create a new branch from the <code>main</code> branch. The branch name should have the following format: </p><div class="fragment"><div class="line">&lt;user_name&gt;_&lt;description_of_development&gt;</div>
+</div><!-- fragment --><p> this allows us to quickly and easily identify the branch owner and the contents of the branch.</p>
+<p>It is important to keep your branch up to date with the main branch so that your changes can one day be merged into the main and used by other people. If this is not done on a regular basis then changes can accumulate making it exponentially harder to determine which changes are still relevant. As an <b>absolute minimum</b> you should update your branch <b>once a month</b>. You can do this using either a <a href="https://git-scm.com/docs/git-merge">merge</a> command: </p><div class="fragment"><div class="line">git fetch</div>
+<div class="line">git merge origin/main</div>
+</div><!-- fragment --><p> or a <a href="https://git-scm.com/docs/git-rebase">rebase</a> command: </p><div class="fragment"><div class="line">git fetch</div>
+<div class="line">git rebase origin/main</div>
+</div><!-- fragment --><p>After this command conflicts may appear between your branch and the main branch. For a <code>git merge</code> command all conflicts will appear at the same time. For a <code>git rebase</code> command conflicts may appear for each commit in your branch since the last rebase command (or its creation from the main branch). Conflicts should each be examined individually to ensure no new developments are lost. There are many resources (e.g. <a href="https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts">bitbucket</a>) online which describe how to fix these conflicts.</p>
+<h1><a class="anchor" id="Submodules"></a>
+Submodules</h1>
+<p>Gyselalibxx depends on other external libraries to compile. These libraries are included in the repository via <a href="https://git-scm.com/docs/gitsubmodules">submodules</a>. In general you will not need to touch the code inside the folders associated with these repositories. However their presence sometimes causes unexpected behaviour. The following is a small FAQ of common issues concerning submodules:</p>
+<h4><a class="anchor" id="autotoc_md12"></a>
+Q: I cloned the repository but the submodules were not cloned</h4>
+<p><b>A:</b> If you accidentally cloned the repository without the <code>--recurse-submodules</code> option you can collect the submodules by running the following command: </p><div class="fragment"><div class="line">git submodule update --init</div>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md13"></a>
+Q: Git reports changes in the submodule but I didn't change this code</h4>
+<p><b>A:</b> It is likely that you previously checked out a branch where the submodule was pinned to a different version. When you changed to your current branch the submodule was not updated, hence the reported changes. You can revert the changes to return to the version in your branch using: </p><div class="fragment"><div class="line">git submodule update --init</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

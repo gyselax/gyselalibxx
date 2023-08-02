@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['adding_20documentation_295',['Adding Documentation',['../adding_docs.html',1,'']]]
+  ['coding_20standards_11',['Coding Standards',['../docs_CODING_STANDARD.html',1,'']]]
 ];

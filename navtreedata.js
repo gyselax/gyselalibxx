@@ -25,37 +25,41 @@
 var NAVTREE =
 [
   [ "Gyselalib++", "index.html", [
-    [ "Adding Documentation", "adding_docs.html", [
-      [ "Compilation", "index.html#autotoc_md0", null ],
-      [ "Execution", "index.html#autotoc_md1", null ],
-      [ "Dependencies", "index.html#autotoc_md2", [
-        [ "Documentation describing code structures", "adding_docs.html#autotoc_md3", [
-          [ "Short summary", "adding_docs.html#autotoc_md4", null ],
-          [ "Extended summary", "adding_docs.html#autotoc_md5", null ],
-          [ "Argument annotation", "adding_docs.html#autotoc_md6", null ],
-          [ "Result annotation", "adding_docs.html#autotoc_md7", null ],
-          [ "References to other relevant parts of the code", "adding_docs.html#autotoc_md8", null ],
-          [ "Example", "adding_docs.html#autotoc_md9", null ]
-        ] ],
-        [ "Documentation describing general methods", "adding_docs.html#autotoc_md10", null ],
-        [ "Mathematical notation in documentation", "adding_docs.html#autotoc_md11", null ]
-      ] ]
+    [ "Compilation", "index.html#Compilation", null ],
+    [ "Execution", "index.html#Execution", null ],
+    [ "Dependencies", "index.html#Dependencies", null ],
+    [ "Adding Documentation", "docs_Adding_docs.html", [
+      [ "Documentation describing code structures", "docs_Adding_docs.html#Documentation_describing_code_structures", null ],
+      [ "Documentation describing general methods", "docs_Adding_docs.html#Documentation_describing_general_methods", null ],
+      [ "Mathematical notation in documentation", "docs_Adding_docs.html#Mathematical_notation_in_documentation", null ]
     ] ],
-    [ "Coding Standards", "conventions.html", null ],
-    [ "Using Git", "git.html", null ],
-    [ "\"Gyselalib++ contents\"", "src.html", "src" ],
-    [ "Selalib++", "sll.html", null ],
-    [ "API reference", "annotated.html", "annotated" ],
-    [ "Files", "files.html", "files" ]
+    [ "Coding Standards", "docs_CODING_STANDARD.html", [
+      [ "C++ Features", "docs_CODING_STANDARD.html#Cxx_Features", null ],
+      [ "Parameter passing", "docs_CODING_STANDARD.html#Parameter_passing", null ],
+      [ "Naming", "docs_CODING_STANDARD.html#Naming", null ],
+      [ "Style", "docs_CODING_STANDARD.html#Style", null ],
+      [ "Operators", "docs_CODING_STANDARD.html#Operators", null ],
+      [ "Code Organisation", "docs_CODING_STANDARD.html#Code_Organisation", null ]
+    ] ],
+    [ "Using Git", "docs_Using_git.html", [
+      [ "Branches", "docs_Using_git.html#Branches", null ],
+      [ "Submodules", "docs_Using_git.html#Submodules", null ]
+    ] ],
+    [ "Sheath simulations", "simulations_geometryXVx_sheath.html", [
+      [ "Description", "simulations_geometryXVx_sheath.html#Description", null ],
+      [ "Usage", "simulations_geometryXVx_sheath.html#Usage", null ],
+      [ "Recommended parameters", "simulations_geometryXVx_sheath.html#Recommended_parameters", null ],
+      [ "References", "simulations_geometryXVx_sheath.html#References", null ]
+    ] ],
+    [ "Gyselalib++ contents", "src.html", "src" ],
+    [ "Tests on spline interpolator in polar coordinates", "tests_geometryRTheta_2d_spline_interpolator.html", null ],
+    [ "Selalib++", "vendor_sll.html", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"Spline_interpolator_polar.html",
-"classIPoissonSolver.html#af34e73695fa0b1aedca9fa32bfcced72",
-"classPolarSplineFEMPoissonSolver.html#a51c7049b09235defa8c3242508d95ba4",
-"classdeprecated_1_1Spline2D.html#a7048da14e61740d6da8c1d0596e19beb"
+"docs_Adding_docs.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
