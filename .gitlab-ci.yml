@@ -100,16 +100,6 @@ python_best_practices:
     for f in $(git diff origin/main --name-only); do grep $f post_process_errors.txt || true; done | tee filtered_errors.txt
     # Raise an error if post-process in filtered errors
     ! grep "post-process" filtered_errors.txt >/dev/null
-ddc_sync:
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "trigger"
-  needs: []
-  image: ghcr.io/gyselax/voicexx_env
-  variables:
-    GIT_STRATEGY: clone
-  script:
-  - git clone --depth 1 --branch main -- "https://root:${SELF_COMMIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" /data/gyselalibxx
-  - /data/gyselalibxx/bin/ddc_sync --push
 public_mirror:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
