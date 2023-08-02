@@ -1,10 +1,10 @@
-@page interpolation Interpolation Methods
+# Interpolation Methods
 
-Interpolation methods are any methods which, given values @f$f_j=f(x_j)@f$, allow the construction of an interpolating function @f$\phi(x)@f$ such that:
+Interpolation methods are any methods which, given values $f_j=f(x_j)$, allow the construction of an interpolating function $\phi(x)$ such that:
 
-@f$\phi(x_j)=f_j=f(x_j)@f$
+$\phi(x_j)=f_j=f(x_j)$
 
-and return the value of that interpolating function @f$\phi(x)@f$ at the desired coordinates.
+and return the value of that interpolating function $\phi(x)$ at the desired coordinates.
 
 The general interface for this method is defined via IInterpolator.
 
@@ -13,9 +13,9 @@ The interpolation methods implemented are:
 
 ## Spline Interpolation
 
-Interpolation by a spline interpolating function is implemented in the class SplineInterpolator. In this case the interpolating function @f$\phi(x)@f$ is a spline. The basis splines are passed as a template parameter, it is these that determine the order of the spline interpolation.
+Interpolation by a spline interpolating function is implemented in the class SplineInterpolator. In this case the interpolating function $\phi(x)$ is a spline. The basis splines are passed as a template parameter, it is these that determine the order of the spline interpolation.
 
-In order for the interpolation to function correctly the values @f$f_j=f(x_j)@f$ provided must be located at the points @f$x_j@f$ identified as the spline interpolation points.
+In order for the interpolation to function correctly the values $f_j=f(x_j)$ provided must be located at the points $x_j$ identified as the spline interpolation points.
 
 The spline interpolation method is based entirely on the SplineBuilder and SplineEvaluator classes which are found in @ref sll.
 

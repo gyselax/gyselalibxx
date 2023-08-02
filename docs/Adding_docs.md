@@ -1,4 +1,4 @@
-@page adding_docs Adding Documentation
+# Adding Documentation
 
 There are two types of documentation:
 1.  Documentation describing code structures
@@ -91,20 +91,20 @@ public:
 
 Each folder containing code should also contain a `README.md` file providing an overview of the contents of the folder and any general information and references which may be helpful for understanding this code.
 
-The `README.md` file should begin with the line:
+The `README.md` file should begin with a title:
 ```markdown
-@page <tag> <title>
+# <title>
 ```
-Where `<tag>` is a one word key which identifies the page, and `<title>` is the title of the page. If the folder doesn't contain a `.private` file (indicating that the folder is not yet ready to be shared publically), the new page can be referenced from any enclosing page that may exist. For example if you create a new folder in `src/`, you should add the following line to the list of folders in `src/README.md`:
+If the folder doesn't contain a `.private` file (indicating that the folder is not yet ready to be shared publically), the new page can be referenced from any enclosing page that may exist. For example if you create a new folder in `src/`, you should add the following line to the list of folders in `src/README.md`:
 ```markdown
-- @subpage <tag>
+- [my_new_folder](./my_new_folder/README.md) : Short description of contents.
 ```
 
 ## Mathematical notation in documentation
 
-Mathematical notation can be used in Doxygen output. It should be blocked with `@f$` commands. E.g:
-@code
-@f$a \ne b@f$
-@endcode
+Mathematical notation can be used in Doxygen output. It should be blocked with `$` commands. E.g:
+```
+$a \ne b$
+```
 
 An equation can also be printed on its own line using `$$` commands.
