@@ -24,11 +24,11 @@ target_include_directories("rhs_${GEOMETRY_VARIANT}"
 target_link_libraries("rhs_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
+        DDC::PDI_Wrapper
         vcx::geometry_${GEOMETRY_VARIANT}
         vcx::quadrature
         vcx::speciesinfo
         vcx::initialization_${GEOMETRY_VARIANT}
-        vcx::time_integration_${GEOMETRY_VARIANT}
         vcx::utils_${GEOMETRY_VARIANT}
         vcx::utils
 )
