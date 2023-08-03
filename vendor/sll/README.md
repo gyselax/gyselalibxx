@@ -6,4 +6,4 @@ implemented in Fortran as part of the [Selalib](https://selalib.github.io/) libr
 These tools are:
 - Splines
 - Gauss-Legendre %Quadrature
-- Mappings
+- [Mappings](./include/sll/mapping/README.md)
