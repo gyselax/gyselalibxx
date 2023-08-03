@@ -51,7 +51,7 @@ void CollisionsInter::compute_rhs(
     DFieldSp density(dom_sp);
     DFieldSp fluid_velocity(dom_sp);
     DFieldSp temperature(dom_sp);
-    ddc::for_each(ddc::policies::parallel_host, dom_sp, [&](IndexSp const isp) {
+    ddc::for_each(dom_sp, [&](IndexSp const isp) {
         moments(density(isp), allfdistribu[isp], FluidMoments::s_density);
         moments(fluid_velocity(isp), allfdistribu[isp], density(isp), FluidMoments::s_velocity);
         moments(temperature(isp),
@@ -74,7 +74,7 @@ void CollisionsInter::compute_rhs(
             fluid_velocity,
             temperature);
 
-    ddc::for_each(ddc::policies::parallel_host, dom_sp, [&](IndexSp const isp) {
+    ddc::for_each(dom_sp, [&](IndexSp const isp) {
         DFieldVx fmaxwellian(gridvx);
         MaxwellianEquilibrium::compute_maxwellian(
                 fmaxwellian.span_view(),
@@ -82,7 +82,7 @@ void CollisionsInter::compute_rhs(
                 temperature(isp),
                 fluid_velocity(isp));
 
-        ddc::for_each(ddc::policies::parallel_host, gridvx, [&](IndexVx const ivx) {
+        ddc::for_each(gridvx, [&](IndexVx const ivx) {
             double const coordv = ddc::coordinate(ivx);
             double const term_v(coordv - fluid_velocity(isp));
             rhs(isp, ivx) = (2. * energy_exchange_ab(isp)
@@ -98,45 +98,28 @@ DSpanSpXVx CollisionsInter::operator()(DSpanSpXVx allfdistribu, double dt) const
 {
     IDomainVx const gridvx(ddc::get_domain<IDimVx>(allfdistribu));
     FluidMoments moments(Quadrature<IDimVx>(trapezoid_quadrature_coefficients(gridvx)));
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimX>(allfdistribu),
-            [&](IndexX const ix) {
-                //RK2 first step
-                DFieldSpVx coll_term(ddc::get_domain<IDimSp, IDimVx>(allfdistribu));
-                DFieldSp nustar_profile_copy(ddc::get_domain<IDimSp>(allfdistribu));
-                ddc::deepcopy(nustar_profile_copy, m_nustar_profile[ix]);
-                DFieldSpVx allfdistribu_copy(ddc::get_domain<IDimSp, IDimVx>(allfdistribu));
-                ddc::deepcopy(allfdistribu_copy, allfdistribu[ix]);
-                DFieldSpVx allfdistribu_half(ddc::get_domain<IDimSp, IDimVx>(allfdistribu));
-                compute_rhs(
-                        coll_term.span_view(),
-                        nustar_profile_copy.span_cview(),
-                        allfdistribu_copy);
-                ddc::for_each(
-                        ddc::policies::parallel_host,
-                        ddc::get_domain<IDimSp, IDimVx>(allfdistribu),
-                        [&](IndexSpVx const ispvx) {
-                            IndexSp const isp(ddc::select<IDimSp>(ispvx));
-                            IndexVx const ivx(ddc::select<IDimVx>(ispvx));
-                            allfdistribu_half(isp, ivx)
-                                    = allfdistribu(isp, ix, ivx) + coll_term(ispvx) * dt / 2;
-                        });
+    ddc::for_each(ddc::get_domain<IDimX>(allfdistribu), [&](IndexX const ix) {
+        //RK2 first step
+        DFieldSpVx coll_term(ddc::get_domain<IDimSp, IDimVx>(allfdistribu));
+        DFieldSp nustar_profile_copy(ddc::get_domain<IDimSp>(allfdistribu));
+        ddc::deepcopy(nustar_profile_copy, m_nustar_profile[ix]);
+        DFieldSpVx allfdistribu_copy(ddc::get_domain<IDimSp, IDimVx>(allfdistribu));
+        ddc::deepcopy(allfdistribu_copy, allfdistribu[ix]);
+        DFieldSpVx allfdistribu_half(ddc::get_domain<IDimSp, IDimVx>(allfdistribu));
+        compute_rhs(coll_term.span_view(), nustar_profile_copy.span_cview(), allfdistribu_copy);
+        ddc::for_each(ddc::get_domain<IDimSp, IDimVx>(allfdistribu), [&](IndexSpVx const ispvx) {
+            IndexSp const isp(ddc::select<IDimSp>(ispvx));
+            IndexVx const ivx(ddc::select<IDimVx>(ispvx));
+            allfdistribu_half(isp, ivx) = allfdistribu(isp, ix, ivx) + coll_term(ispvx) * dt / 2;
+        });
 
-                //RK2 final step
-                compute_rhs(
-                        coll_term.span_view(),
-                        nustar_profile_copy.span_cview(),
-                        allfdistribu_half);
-                ddc::for_each(
-                        ddc::policies::parallel_host,
-                        ddc::get_domain<IDimSp, IDimVx>(allfdistribu),
-                        [&](IndexSpVx const ispvx) {
-                            IndexSp const isp(ddc::select<IDimSp>(ispvx));
-                            IndexVx const ivx(ddc::select<IDimVx>(ispvx));
-                            allfdistribu(isp, ix, ivx)
-                                    = allfdistribu(isp, ix, ivx) + coll_term(ispvx) * dt;
-                        });
-            });
+        //RK2 final step
+        compute_rhs(coll_term.span_view(), nustar_profile_copy.span_cview(), allfdistribu_half);
+        ddc::for_each(ddc::get_domain<IDimSp, IDimVx>(allfdistribu), [&](IndexSpVx const ispvx) {
+            IndexSp const isp(ddc::select<IDimSp>(ispvx));
+            IndexVx const ivx(ddc::select<IDimVx>(ispvx));
+            allfdistribu(isp, ix, ivx) = allfdistribu(isp, ix, ivx) + coll_term(ispvx) * dt;
+        });
+    });
     return allfdistribu;
 }

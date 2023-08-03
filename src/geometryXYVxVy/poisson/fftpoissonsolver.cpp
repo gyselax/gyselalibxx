@@ -51,7 +51,7 @@ void FftPoissonSolver::operator()(
     // Compute FFT(rho)
     ddc::FFT_Normalization norm = ddc::FFT_Normalization::BACKWARD;
     ddc::
-            fft(Kokkos::DefaultExecutionSpace(),
+            fft(Kokkos::DefaultHostExecutionSpace(),
                 intermediate_chunk.span_view(),
                 rho.span_view(),
                 (ddc::kwArgs_fft) {.normalization = norm});
@@ -72,7 +72,7 @@ void FftPoissonSolver::operator()(
 
     // Perform the inverse 1D FFT of the solution to deduce the electrostatic potential
     ddc::
-            ifft(Kokkos::DefaultExecutionSpace(),
+            ifft(Kokkos::DefaultHostExecutionSpace(),
                  electrostatic_potential.span_view(),
                  intermediate_chunk.span_view(),
                  (ddc::kwArgs_fft) {.normalization = norm});

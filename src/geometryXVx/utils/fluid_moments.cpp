@@ -26,12 +26,9 @@ void FluidMoments::operator()(
         DViewSpXVx const allfdistribu,
         FluidMoments::MomentDensity)
 {
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                (*this)(density(ispx), allfdistribu[ispx], FluidMoments::s_density);
-            });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        (*this)(density(ispx), allfdistribu[ispx], FluidMoments::s_density);
+    });
 }
 
 /*
@@ -44,7 +41,7 @@ void FluidMoments::operator()(
         FluidMoments::MomentVelocity)
 {
     DFieldVx integrand(fdistribu.domain());
-    ddc::for_each(ddc::policies::parallel_host, fdistribu.domain(), [&](IndexVx const ivx) {
+    ddc::for_each(fdistribu.domain(), [&](IndexVx const ivx) {
         CoordVx const coordv = ddc::coordinate(ivx);
         integrand(ivx) = coordv * fdistribu(ivx);
     });
@@ -61,20 +58,14 @@ void FluidMoments::operator()(
         FluidMoments::MomentVelocity)
 {
     DFieldSpXVx integrand(allfdistribu.domain());
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            allfdistribu.domain(),
-            [&](IndexSpXVx const ispxvx) {
-                CoordVx const coordv = ddc::coordinate(ddc::select<IDimVx>(ispxvx));
-                integrand(ispxvx) = coordv * allfdistribu(ispxvx);
-            });
+    ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
+        CoordVx const coordv = ddc::coordinate(ddc::select<IDimVx>(ispxvx));
+        integrand(ispxvx) = coordv * allfdistribu(ispxvx);
+    });
 
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                mean_velocity(ispx) = m_integrate_v(integrand[ispx]) / density(ispx);
-            });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        mean_velocity(ispx) = m_integrate_v(integrand[ispx]) / density(ispx);
+    });
 }
 
 /*
@@ -88,7 +79,7 @@ void FluidMoments::operator()(
         FluidMoments::MomentTemperature)
 {
     DFieldVx integrand(fdistribu.domain());
-    ddc::for_each(ddc::policies::parallel_host, fdistribu.domain(), [&](IndexVx const ivx) {
+    ddc::for_each(fdistribu.domain(), [&](IndexVx const ivx) {
         double const coeff = ddc::coordinate(ddc::select<IDimVx>(ivx)) - mean_velocity;
         integrand(ivx) = coeff * coeff * fdistribu(ivx);
     });
@@ -106,19 +97,13 @@ void FluidMoments::operator()(
         FluidMoments::MomentTemperature)
 {
     DFieldSpXVx integrand(allfdistribu.domain());
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            allfdistribu.domain(),
-            [&](IndexSpXVx const ispxvx) {
-                double const coeff = ddc::coordinate(ddc::select<IDimVx>(ispxvx))
-                                     - mean_velocity(ddc::select<IDimSp, IDimX>(ispxvx));
-                integrand(ispxvx) = coeff * coeff * allfdistribu(ispxvx);
-            });
+    ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
+        double const coeff = ddc::coordinate(ddc::select<IDimVx>(ispxvx))
+                             - mean_velocity(ddc::select<IDimSp, IDimX>(ispxvx));
+        integrand(ispxvx) = coeff * coeff * allfdistribu(ispxvx);
+    });
 
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                temperature(ispx) = m_integrate_v(integrand[ispx]) / density(ispx);
-            });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        temperature(ispx) = m_integrate_v(integrand[ispx]) / density(ispx);
+    });
 }

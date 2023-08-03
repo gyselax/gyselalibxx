@@ -39,7 +39,7 @@ IndexSp find_ion(IDomainSp const dom_sp)
 void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0)
 {
     double const Lx = ddcHelper::total_interval_length(ddc::get_domain<IDimX>(nustar_profile));
-    ddc::for_each(ddc::policies::parallel_host, nustar_profile.domain(), [&](IndexSpX const ispx) {
+    ddc::for_each(nustar_profile.domain(), [&](IndexSpX const ispx) {
         double const coeff = std::sqrt(mass(ielec()) / mass(ddc::select<IDimSp>(ispx)))
                              * std::pow(charge(ddc::select<IDimSp>(ispx)), 4) / Lx;
         nustar_profile(ispx) = coeff * nustar0;
@@ -55,7 +55,7 @@ void compute_collfreq(
         DViewSpX density,
         DViewSpX temperature)
 {
-    ddc::for_each(ddc::policies::parallel_host, collfreq.domain(), [&](IndexSpX const ispx) {
+    ddc::for_each(collfreq.domain(), [&](IndexSpX const ispx) {
         collfreq(ispx) = nustar_profile(ispx) * density(ispx) / std::pow(temperature(ispx), 1.5);
     });
 }

@@ -108,7 +108,6 @@ public:
         ddc::discrete_space<bsplines_type>().integrals(values);
 
         return ddc::transform_reduce(
-                ddc::policies::parallel_host,
                 spline_coef.domain(),
                 0.0,
                 ddc::reducer::sum<double>(),
