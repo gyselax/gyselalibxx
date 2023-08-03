@@ -3,6 +3,8 @@
 cmake_minimum_required(VERSION 3.20)
 project(voicexx C CXX)
 
+set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
+
 # Our CMake module path
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
