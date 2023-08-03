@@ -102,9 +102,13 @@ If the folder doesn't contain a `.private` file (indicating that the folder is n
 
 ## Mathematical notation in documentation
 
-Mathematical notation can be used in Doxygen output. It should be blocked with `$` commands. E.g:
+Mathematical notation can be used in Doxygen output.
+
+In Markdown files it should be blocked with `$` commands. E.g:
 ```
 $a \ne b$
 ```
 
 An equation can also be printed on its own line using `$$` commands.
+
+In C++ header files it should be blocked with Doxagen syntax, i.e. `@f$` instead of `$`, and `@f[` and `@f]` instead of `$$`.

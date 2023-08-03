@@ -84,8 +84,14 @@ SET(TREATED_MD ${TREATED_MD} ${CMAKE_CURRENT_BINARY_DIR}/${relpath})
 
 endforeach()
 
+FILE(GLOB_RECURSE HPP_SOURCES
+	"${voicexx_SOURCE_DIR}/src/*.hpp"
+	"${voicexx_SOURCE_DIR}/tests/*.hpp"
+	"${voicexx_SOURCE_DIR}/vendor/sll/*.hpp")
+
 message(STATUS ${TREATED_MD})
 
 doxygen_add_docs(doc
 	${TREATED_MD}
+	${HPP_SOURCES}
         ALL)

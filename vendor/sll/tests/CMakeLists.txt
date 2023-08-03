@@ -77,6 +77,33 @@ target_link_libraries(metric_tensor_tests
 )
 gtest_discover_tests(metric_tensor_tests)
 
+
+add_executable(jacobian_mapping_tests
+  	main.cpp
+	mapping_jacobian.cpp
+)
+target_compile_features(jacobian_mapping_tests PUBLIC cxx_std_17)
+target_link_libraries(jacobian_mapping_tests
+    PUBLIC
+        GTest::gtest
+        sll::splines
+)
+gtest_discover_tests(jacobian_mapping_tests)
+
+
+add_executable(jacobian_mapping_matrix_coef_tests
+  	main.cpp
+	mapping_jacobian_matrix_coef.cpp
+)
+target_compile_features(jacobian_mapping_matrix_coef_tests PUBLIC cxx_std_17)
+target_link_libraries(jacobian_mapping_matrix_coef_tests
+    PUBLIC
+        GTest::gtest
+        sll::splines
+)
+gtest_discover_tests(jacobian_mapping_matrix_coef_tests)
+
+
 foreach(DEGREE_X RANGE "${SLL_SPLINES_TEST_DEGREE_MIN}" "${SLL_SPLINES_TEST_DEGREE_MAX}")
   foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
     set(test_name "splines_tests_DEGREE_X_${DEGREE_X}_${BSPLINES_TYPE}")

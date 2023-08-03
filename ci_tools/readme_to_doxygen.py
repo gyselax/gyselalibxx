@@ -34,6 +34,28 @@ def get_compatible_tag(tag):
         tag = tag.replace(k, v)
     return tag
 
+def get_code_blocks(line):
+    """
+    Get the position of code blocks in the line.
+
+    Parameters
+    ----------
+    line : str
+        A line of markdown text.
+
+    Returns
+    -------
+    list of 2-tuples
+        Returns a list of 2-tuples describing the start and end of the code blocks in the line.
+    """
+    # Find the code blocks in the line
+    code_tags = [i for i,l in enumerate(line) if l=='`']
+    n_code_tags = len(code_tags)
+    # Ensure that all inline code blocks are closed
+    assert n_code_tags % 2 == 0
+    n_code_tags //= 2
+    return [(code_tags[2*i], code_tags[2*i+1]) for i in range(n_code_tags)]
+
 def format_equations(line, start_tag, end_tag, start_replace, end_replace):
     """
     Format equations with Doxygen style.
@@ -64,13 +86,7 @@ def format_equations(line, start_tag, end_tag, start_replace, end_replace):
     str
         The updated line.
     """
-    # Find the code blocks in the line
-    code_tags = [i for i,l in enumerate(line) if l=='`']
-    n_code_tags = len(code_tags)
-    # Ensure that all inline code blocks are closed
-    assert n_code_tags % 2 == 0
-    n_code_tags //= 2
-    code_blocks = [(code_tags[i], code_tags[i+1]) for i in range(n_code_tags)]
+    code_blocks = get_code_blocks(line)
     start_match = start_tag.search(line)
     while start_match:
         if not any(start < start_match.start() < end for start, end in code_blocks):
@@ -78,6 +94,7 @@ def format_equations(line, start_tag, end_tag, start_replace, end_replace):
             assert end_match is not None
             replacement = start_replace + line[start_match.end():end_match.start()] + end_replace
             line = line[:start_match.start()] + replacement + line[end_match.end():]
+            code_blocks = get_code_blocks(line)
             start_match = start_tag.search(line, start_match.start() + len(replacement))
         else:
             start_match = start_tag.search(line, start_match.end())
