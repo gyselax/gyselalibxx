@@ -74,38 +74,33 @@ TEST(Physics, FluidMoments)
     DFieldSpX density_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX mean_velocity_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX temperature_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                double const density = 1.;
-                double const density_ampl = 0.1;
-                double const mean_velocity = 0.;
-                double const mean_velocity_ampl = 0.2;
-                double const temperature = 1;
-                double const temperature_ampl = 0.3;
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        double const density = 1.;
+        double const density_ampl = 0.1;
+        double const mean_velocity = 0.;
+        double const mean_velocity_ampl = 0.2;
+        double const temperature = 1;
+        double const temperature_ampl = 0.3;
 
-                double const coordx = ddc::coordinate(ddc::select<IDimX>(ispx));
-                density_init(ispx)
-                        = density
-                          + density_ampl
-                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-                mean_velocity_init(ispx)
-                        = mean_velocity
-                          + mean_velocity_ampl
-                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-                temperature_init(ispx)
-                        = temperature
-                          + temperature_ampl
-                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-                DFieldVx finit(gridvx);
-                MaxwellianEquilibrium::compute_maxwellian(
-                        finit.span_view(),
-                        density_init(ispx),
-                        temperature_init(ispx),
-                        mean_velocity_init(ispx));
-                ddc::deepcopy(allfdistribu[ispx], finit);
-            });
+        double const coordx = ddc::coordinate(ddc::select<IDimX>(ispx));
+        density_init(ispx)
+                = density
+                  + density_ampl * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
+        mean_velocity_init(ispx)
+                = mean_velocity
+                  + mean_velocity_ampl
+                            * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
+        temperature_init(ispx)
+                = temperature
+                  + temperature_ampl * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
+        DFieldVx finit(gridvx);
+        MaxwellianEquilibrium::compute_maxwellian(
+                finit.span_view(),
+                density_init(ispx),
+                temperature_init(ispx),
+                mean_velocity_init(ispx));
+        ddc::deepcopy(allfdistribu[ispx], finit);
+    });
 
     // density and temperature
     DFieldSpX density_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
@@ -125,14 +120,9 @@ TEST(Physics, FluidMoments)
             mean_velocity_computed.span_cview(),
             FluidMoments::s_temperature);
 
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                EXPECT_LE(std::fabs(density_computed(ispx) - density_init(ispx)), 1e-12);
-                EXPECT_LE(
-                        std::fabs(mean_velocity_computed(ispx) - mean_velocity_init(ispx)),
-                        1e-12);
-                EXPECT_LE(std::fabs(temperature_computed(ispx) - temperature_init(ispx)), 1e-12);
-            });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        EXPECT_LE(std::fabs(density_computed(ispx) - density_init(ispx)), 1e-12);
+        EXPECT_LE(std::fabs(mean_velocity_computed(ispx) - mean_velocity_init(ispx)), 1e-12);
+        EXPECT_LE(std::fabs(temperature_computed(ispx) - temperature_init(ispx)), 1e-12);
+    });
 }

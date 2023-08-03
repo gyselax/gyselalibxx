@@ -85,18 +85,15 @@ TEST(CollisionsInter, CollisionsInter)
         temperature_init(my_iion) = 1.;
         temperature_init(my_ielec) = 1.2;
         double const fluid_velocity_init(0.);
-        ddc::for_each(
-                ddc::policies::parallel_host,
-                ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-                [&](IndexSpX const ispx) {
-                    DFieldVx finit(gridvx);
-                    MaxwellianEquilibrium::compute_maxwellian(
-                            finit.span_view(),
-                            density_init,
-                            temperature_init(ddc::select<IDimSp>(ispx)),
-                            fluid_velocity_init);
-                    ddc::deepcopy(allfdistribu[ispx], finit);
-                });
+        ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+            DFieldVx finit(gridvx);
+            MaxwellianEquilibrium::compute_maxwellian(
+                    finit.span_view(),
+                    density_init,
+                    temperature_init(ddc::select<IDimSp>(ispx)),
+                    fluid_velocity_init);
+            ddc::deepcopy(allfdistribu[ispx], finit);
+        });
 
         double const nustar0(0.1);
         CollisionsInter collisions(mesh, nustar0);
@@ -112,11 +109,11 @@ TEST(CollisionsInter, CollisionsInter)
         }
 
         double error_L1(0);
-        ddc::for_each(ddc::policies::parallel_host, gridx, [&](IndexX const ix) {
+        ddc::for_each(gridx, [&](IndexX const ix) {
             DFieldSp density(dom_sp);
             DFieldSp fluid_velocity(dom_sp);
             DFieldSp temperature(dom_sp);
-            ddc::for_each(ddc::policies::parallel_host, dom_sp, [&](IndexSp const isp) {
+            ddc::for_each(dom_sp, [&](IndexSp const isp) {
                 IndexSpX const ispx(isp, ix);
                 moments(density(isp), allfdistribu[ispx], FluidMoments::s_density);
                 moments(fluid_velocity(isp),
