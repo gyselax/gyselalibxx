@@ -1,5 +1,7 @@
 var classCollisionsIntra =
 [
+    [ "GhostedVx", "classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx", null ],
+    [ "GhostedVxStaggered", "classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVxStaggered", null ],
     [ "ghosted_vx_point_sampling", "classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524", null ],
     [ "ghosted_vx_staggered_point_sampling", "classCollisionsIntra.html#a10027e09096499cca4d7b2dda2afa60d", null ],
     [ "IDomainSpXVx_ghosted", "classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e", null ],

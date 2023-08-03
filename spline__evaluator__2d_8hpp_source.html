@@ -342,106 +342,105 @@ $(document).ready(function(){initNavTree('spline__evaluator__2d_8hpp_source.html
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        ddc::discrete_space&lt;bsplines_type2&gt;().integrals(values2.span_view());</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <span class="keywordflow">return</span> ddc::transform_reduce(</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                ddc::policies::parallel_host,</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                spline_coef.domain(),</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                0.0,</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                ddc::reducer::sum&lt;double&gt;(),</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                [&amp;](ddc::DiscreteElement&lt;BSplinesType1, BSplinesType2&gt; <span class="keyword">const</span> i) {</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                    return spline_coef(i) * values1(ddc::select&lt;BSplinesType1&gt;(i))</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                           * values2(ddc::select&lt;BSplinesType2&gt;(i));</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                });</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    }</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordtype">double</span> eval(</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            ddc::Coordinate&lt;Dim1, Dim2&gt; <span class="keyword">const</span>&amp; coord_eval,</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            ddc::ChunkSpan&lt;<span class="keywordtype">double</span> <span class="keyword">const</span>, ddc::DiscreteDomain&lt;BSplinesType1, BSplinesType2&gt;&gt; <span class="keyword">const</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                    spline_coef,</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            DSpan1D <span class="keyword">const</span> vals1,</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            DSpan1D <span class="keyword">const</span> vals2)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        ddc::Coordinate&lt;Dim1&gt; coord_eval1 = ddc::select&lt;Dim1&gt;(coord_eval);</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        ddc::Coordinate&lt;Dim2&gt; coord_eval2 = ddc::select&lt;Dim2&gt;(coord_eval);</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keywordflow">if</span> constexpr (bsplines_type1::is_periodic()) {</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            <span class="keywordflow">if</span> (coord_eval1 &lt; ddc::discrete_space&lt;bsplines_type1&gt;().rmin()</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                || coord_eval1 &gt; ddc::discrete_space&lt;bsplines_type1&gt;().rmax()) {</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                coord_eval1 -= std::floor(</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                                       (coord_eval1 - ddc::discrete_space&lt;bsplines_type1&gt;().rmin())</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                                       / ddc::discrete_space&lt;bsplines_type1&gt;().length())</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                               * ddc::discrete_space&lt;bsplines_type1&gt;().length();</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            }</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            <span class="keywordflow">if</span> (coord_eval1 &lt; ddc::discrete_space&lt;bsplines_type1&gt;().rmin()) {</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                <span class="keywordflow">return</span> m_left_bc_1(coord_eval1, coord_eval2, spline_coef);</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            }</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            <span class="keywordflow">if</span> (coord_eval1 &gt; ddc::discrete_space&lt;bsplines_type1&gt;().rmax()) {</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                <span class="keywordflow">return</span> m_right_bc_1(coord_eval1, coord_eval2, spline_coef);</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            }</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        }</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <span class="keywordflow">if</span> constexpr (bsplines_type2::is_periodic()) {</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            <span class="keywordflow">if</span> (coord_eval2 &lt; ddc::discrete_space&lt;bsplines_type2&gt;().rmin()</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                || coord_eval2 &gt; ddc::discrete_space&lt;bsplines_type2&gt;().rmax()) {</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                coord_eval2 -= std::floor(</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                                       (coord_eval2 - ddc::discrete_space&lt;bsplines_type2&gt;().rmin())</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                                       / ddc::discrete_space&lt;bsplines_type2&gt;().length())</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                               * ddc::discrete_space&lt;bsplines_type2&gt;().length();</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            }</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            <span class="keywordflow">if</span> (coord_eval2 &lt; ddc::discrete_space&lt;bsplines_type2&gt;().rmin()) {</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                <span class="keywordflow">return</span> m_left_bc_2(coord_eval1, coord_eval2, spline_coef);</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            }</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            <span class="keywordflow">if</span> (coord_eval2 &gt; ddc::discrete_space&lt;bsplines_type2&gt;().rmax()) {</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                <span class="keywordflow">return</span> m_right_bc_2(coord_eval1, coord_eval2, spline_coef);</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;            }</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        }</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keywordflow">return</span> eval_no_bc(</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                coord_eval1,</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                coord_eval2,</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                spline_coef,</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                vals1,</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                vals2,</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                eval_type(),</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                eval_type());</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    }</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> EvalType1, <span class="keyword">class</span> EvalType2&gt;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keywordtype">double</span> eval_no_bc(</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            ddc::Coordinate&lt;Dim1&gt; <span class="keyword">const</span>&amp; coord_eval1,</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            ddc::Coordinate&lt;Dim2&gt; <span class="keyword">const</span>&amp; coord_eval2,</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            ddc::ChunkSpan&lt;<span class="keywordtype">double</span> <span class="keyword">const</span>, ddc::DiscreteDomain&lt;BSplinesType1, BSplinesType2&gt;&gt; <span class="keyword">const</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                    spline_coef,</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            DSpan1D <span class="keyword">const</span> vals1,</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            DSpan1D <span class="keyword">const</span> vals2,</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            EvalType1 <span class="keyword">const</span>,</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;            EvalType2 <span class="keyword">const</span>)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        static_assert(</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                std::is_same_v&lt;EvalType1, eval_type&gt; || std::is_same_v&lt;EvalType1, eval_deriv_type&gt;);</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        static_assert(</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                std::is_same_v&lt;EvalType2, eval_type&gt; || std::is_same_v&lt;EvalType2, eval_deriv_type&gt;);</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        ddc::DiscreteElement&lt;BSplinesType1&gt; jmin1;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        ddc::DiscreteElement&lt;BSplinesType2&gt; jmin2;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalType1, eval_type&gt;) {</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            jmin1 = ddc::discrete_space&lt;bsplines_type1&gt;().eval_basis(vals1, coord_eval1);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalType1, eval_deriv_type&gt;) {</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            jmin1 = ddc::discrete_space&lt;bsplines_type1&gt;().eval_deriv(vals1, coord_eval1);</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        }</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalType2, eval_type&gt;) {</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            jmin2 = ddc::discrete_space&lt;bsplines_type2&gt;().eval_basis(vals2, coord_eval2);</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalType2, eval_deriv_type&gt;) {</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            jmin2 = ddc::discrete_space&lt;bsplines_type2&gt;().eval_deriv(vals2, coord_eval2);</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        }</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="keywordtype">double</span> y = 0.0;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="keywordflow">for</span> (std::size_t i = 0; i &lt; bsplines_type1::degree() + 1; ++i) {</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            <span class="keywordflow">for</span> (std::size_t j = 0; j &lt; bsplines_type2::degree() + 1; ++j) {</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                y += spline_coef(jmin1 + i, jmin2 + j) * vals1(i) * vals2(j);</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            }</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        }</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        <span class="keywordflow">return</span> y;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    }</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;};</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                spline_coef.domain(),</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                0.0,</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                ddc::reducer::sum&lt;double&gt;(),</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                [&amp;](ddc::DiscreteElement&lt;BSplinesType1, BSplinesType2&gt; <span class="keyword">const</span> i) {</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                    return spline_coef(i) * values1(ddc::select&lt;BSplinesType1&gt;(i))</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                           * values2(ddc::select&lt;BSplinesType2&gt;(i));</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                });</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    }</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordtype">double</span> eval(</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            ddc::Coordinate&lt;Dim1, Dim2&gt; <span class="keyword">const</span>&amp; coord_eval,</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            ddc::ChunkSpan&lt;<span class="keywordtype">double</span> <span class="keyword">const</span>, ddc::DiscreteDomain&lt;BSplinesType1, BSplinesType2&gt;&gt; <span class="keyword">const</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                    spline_coef,</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            DSpan1D <span class="keyword">const</span> vals1,</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            DSpan1D <span class="keyword">const</span> vals2)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        ddc::Coordinate&lt;Dim1&gt; coord_eval1 = ddc::select&lt;Dim1&gt;(coord_eval);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        ddc::Coordinate&lt;Dim2&gt; coord_eval2 = ddc::select&lt;Dim2&gt;(coord_eval);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordflow">if</span> constexpr (bsplines_type1::is_periodic()) {</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            <span class="keywordflow">if</span> (coord_eval1 &lt; ddc::discrete_space&lt;bsplines_type1&gt;().rmin()</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                || coord_eval1 &gt; ddc::discrete_space&lt;bsplines_type1&gt;().rmax()) {</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                coord_eval1 -= std::floor(</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                                       (coord_eval1 - ddc::discrete_space&lt;bsplines_type1&gt;().rmin())</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                                       / ddc::discrete_space&lt;bsplines_type1&gt;().length())</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                               * ddc::discrete_space&lt;bsplines_type1&gt;().length();</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <span class="keywordflow">if</span> (coord_eval1 &lt; ddc::discrete_space&lt;bsplines_type1&gt;().rmin()) {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                <span class="keywordflow">return</span> m_left_bc_1(coord_eval1, coord_eval2, spline_coef);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            }</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">if</span> (coord_eval1 &gt; ddc::discrete_space&lt;bsplines_type1&gt;().rmax()) {</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                <span class="keywordflow">return</span> m_right_bc_1(coord_eval1, coord_eval2, spline_coef);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            }</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <span class="keywordflow">if</span> constexpr (bsplines_type2::is_periodic()) {</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <span class="keywordflow">if</span> (coord_eval2 &lt; ddc::discrete_space&lt;bsplines_type2&gt;().rmin()</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                || coord_eval2 &gt; ddc::discrete_space&lt;bsplines_type2&gt;().rmax()) {</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                coord_eval2 -= std::floor(</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                                       (coord_eval2 - ddc::discrete_space&lt;bsplines_type2&gt;().rmin())</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                                       / ddc::discrete_space&lt;bsplines_type2&gt;().length())</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                               * ddc::discrete_space&lt;bsplines_type2&gt;().length();</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            }</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            <span class="keywordflow">if</span> (coord_eval2 &lt; ddc::discrete_space&lt;bsplines_type2&gt;().rmin()) {</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                <span class="keywordflow">return</span> m_left_bc_2(coord_eval1, coord_eval2, spline_coef);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            }</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            <span class="keywordflow">if</span> (coord_eval2 &gt; ddc::discrete_space&lt;bsplines_type2&gt;().rmax()) {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                <span class="keywordflow">return</span> m_right_bc_2(coord_eval1, coord_eval2, spline_coef);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            }</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        }</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <span class="keywordflow">return</span> eval_no_bc(</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                coord_eval1,</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                coord_eval2,</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                spline_coef,</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                vals1,</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                vals2,</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                eval_type(),</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                eval_type());</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    }</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> EvalType1, <span class="keyword">class</span> EvalType2&gt;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordtype">double</span> eval_no_bc(</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            ddc::Coordinate&lt;Dim1&gt; <span class="keyword">const</span>&amp; coord_eval1,</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            ddc::Coordinate&lt;Dim2&gt; <span class="keyword">const</span>&amp; coord_eval2,</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            ddc::ChunkSpan&lt;<span class="keywordtype">double</span> <span class="keyword">const</span>, ddc::DiscreteDomain&lt;BSplinesType1, BSplinesType2&gt;&gt; <span class="keyword">const</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                    spline_coef,</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            DSpan1D <span class="keyword">const</span> vals1,</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            DSpan1D <span class="keyword">const</span> vals2,</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            EvalType1 <span class="keyword">const</span>,</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            EvalType2 <span class="keyword">const</span>)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        static_assert(</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                std::is_same_v&lt;EvalType1, eval_type&gt; || std::is_same_v&lt;EvalType1, eval_deriv_type&gt;);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        static_assert(</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                std::is_same_v&lt;EvalType2, eval_type&gt; || std::is_same_v&lt;EvalType2, eval_deriv_type&gt;);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        ddc::DiscreteElement&lt;BSplinesType1&gt; jmin1;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        ddc::DiscreteElement&lt;BSplinesType2&gt; jmin2;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalType1, eval_type&gt;) {</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            jmin1 = ddc::discrete_space&lt;bsplines_type1&gt;().eval_basis(vals1, coord_eval1);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalType1, eval_deriv_type&gt;) {</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            jmin1 = ddc::discrete_space&lt;bsplines_type1&gt;().eval_deriv(vals1, coord_eval1);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        }</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalType2, eval_type&gt;) {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            jmin2 = ddc::discrete_space&lt;bsplines_type2&gt;().eval_basis(vals2, coord_eval2);</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalType2, eval_deriv_type&gt;) {</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            jmin2 = ddc::discrete_space&lt;bsplines_type2&gt;().eval_deriv(vals2, coord_eval2);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        }</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        <span class="keywordtype">double</span> y = 0.0;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="keywordflow">for</span> (std::size_t i = 0; i &lt; bsplines_type1::degree() + 1; ++i) {</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;            <span class="keywordflow">for</span> (std::size_t j = 0; j &lt; bsplines_type2::degree() + 1; ++j) {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                y += spline_coef(jmin1 + i, jmin2 + j) * vals1(i) * vals2(j);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;            }</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        }</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keywordflow">return</span> y;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    }</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;};</div>
 <div class="ttc" id="aclassSplineBoundaryValue2D_html"><div class="ttname"><a href="classSplineBoundaryValue2D.html">SplineBoundaryValue2D&lt; BSplinesType1, BSplinesType2 &gt;</a></div></div>
 <div class="ttc" id="aclassSplineEvaluator2D_html"><div class="ttname"><a href="classSplineEvaluator2D.html">SplineEvaluator2D</a></div><div class="ttdef"><b>Definition:</b> spline_evaluator_2d.hpp:12</div></div>
 </div><!-- fragment --></div><!-- contents -->

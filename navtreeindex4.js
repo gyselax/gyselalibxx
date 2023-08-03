@@ -1,5 +1,16 @@
 var NAVTREEINDEX4 =
 {
+"polynomial__evaluator_8hpp_source.html":[11,2,0,1,2],
+"quadrature_8hpp_source.html":[11,0,6,0],
+"simulations_geometryXVx_sheath.html":[6],
+"simulations_geometryXVx_sheath.html#Description":[6,0],
+"simulations_geometryXVx_sheath.html#Recommended_parameters":[6,2],
+"simulations_geometryXVx_sheath.html#References":[6,3],
+"simulations_geometryXVx_sheath.html#Usage":[6,1],
+"species__info_8hpp_source.html":[11,0,7,0],
+"spline__1d_8hpp_source.html":[11,2,0,0,0,0,4],
+"spline__2d_8hpp_source.html":[11,2,0,0,0,0,5],
+"spline__boundary__conditions_8hpp_source.html":[11,2,0,0,0,22],
 "spline__boundary__value_8hpp_source.html":[11,2,0,0,0,23],
 "spline__builder_8hpp_source.html":[11,2,0,0,0,24],
 "spline__builder__1d_8hpp_source.html":[11,2,0,0,0,0,6],

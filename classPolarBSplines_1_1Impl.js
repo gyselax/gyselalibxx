@@ -1,5 +1,8 @@
 var classPolarBSplines_1_1Impl =
 [
+    [ "Corner1Tag", "classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner1Tag", null ],
+    [ "Corner2Tag", "classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner2Tag", null ],
+    [ "Corner3Tag", "classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner3Tag", null ],
     [ "discrete_dimension_type", "classPolarBSplines_1_1Impl.html#aaf6866a2bb501564808f8ba20a3e962d", null ],
     [ "Impl", "classPolarBSplines_1_1Impl.html#aaed9f0037acefbb5acdecff592114967", null ],
     [ "Impl", "classPolarBSplines_1_1Impl.html#a2dd5ab4233bbd69675345f083a271b7d", null ],

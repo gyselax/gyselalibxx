@@ -118,13 +118,20 @@ Inheritance diagram for CollisionsIntra:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:structCollisionsIntra_1_1GhostedVx"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx">GhostedVx</a></td></tr>
+<tr class="separator:structCollisionsIntra_1_1GhostedVx"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:structCollisionsIntra_1_1GhostedVxStaggered"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVxStaggered">GhostedVxStaggered</a></td></tr>
+<tr class="separator:structCollisionsIntra_1_1GhostedVxStaggered"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a48b47bcef17a6eacebe77247026b8524"><td class="memItemLeft" align="right" valign="top"><a id="a48b47bcef17a6eacebe77247026b8524"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>ghosted_vx_point_sampling</b> = std::conditional_t&lt; uniform_edge_v, ddc::UniformPointSampling&lt; GhostedVx &gt;, ddc::NonUniformPointSampling&lt; GhostedVx &gt; &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ghosted_vx_point_sampling</b> = std::conditional_t&lt; uniform_edge_v, ddc::UniformPointSampling&lt; <a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx">GhostedVx</a> &gt;, ddc::NonUniformPointSampling&lt; <a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx">GhostedVx</a> &gt; &gt;</td></tr>
 <tr class="separator:a48b47bcef17a6eacebe77247026b8524"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10027e09096499cca4d7b2dda2afa60d"><td class="memItemLeft" align="right" valign="top"><a id="a10027e09096499cca4d7b2dda2afa60d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>ghosted_vx_staggered_point_sampling</b> = std::conditional_t&lt; uniform_edge_v, ddc::UniformPointSampling&lt; GhostedVxStaggered &gt;, ddc::NonUniformPointSampling&lt; GhostedVxStaggered &gt; &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ghosted_vx_staggered_point_sampling</b> = std::conditional_t&lt; uniform_edge_v, ddc::UniformPointSampling&lt; <a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVxStaggered">GhostedVxStaggered</a> &gt;, ddc::NonUniformPointSampling&lt; <a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVxStaggered">GhostedVxStaggered</a> &gt; &gt;</td></tr>
 <tr class="separator:a10027e09096499cca4d7b2dda2afa60d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b9b6393f5916d8c0800619c8e61f72e"><td class="memItemLeft" align="right" valign="top"><a id="a0b9b6393f5916d8c0800619c8e61f72e"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>IDomainSpXVx_ghosted</b> = ddc::DiscreteDomain&lt; <a class="el" href="classSpeciesInformation.html">IDimSp</a>, IDimX, ghosted_vx_point_sampling &gt;</td></tr>
@@ -175,6 +182,35 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>compute_matrix_coeff<
 void&#160;</td><td class="memItemRight" valign="bottom"><b>fill_matrix_with_coeff</b> (<a class="el" href="classMatrix__Banded.html">Matrix_Banded</a> &amp;matrix, DViewVx AA, DViewVx BB, DViewVx CC) const</td></tr>
 <tr class="separator:a030ed88a896325bca0ad3b249af1a264"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="structCollisionsIntra_1_1GhostedVx" id="structCollisionsIntra_1_1GhostedVx"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structCollisionsIntra_1_1GhostedVx">&#9670;&nbsp;</a></span>CollisionsIntra::GhostedVx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct CollisionsIntra::GhostedVx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"></div>
+</div>
+</div>
+<a name="structCollisionsIntra_1_1GhostedVxStaggered" id="structCollisionsIntra_1_1GhostedVxStaggered"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structCollisionsIntra_1_1GhostedVxStaggered">&#9670;&nbsp;</a></span>CollisionsIntra::GhostedVxStaggered</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct CollisionsIntra::GhostedVxStaggered</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"></div>
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/<a class="el" href="collisions__intra_8hpp_source.html">collisions_intra.hpp</a></li>
 </ul>

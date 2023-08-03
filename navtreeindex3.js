@@ -1,5 +1,16 @@
 var NAVTREEINDEX3 =
 {
+"classdeprecated_1_1BSplines.html#aa988a402d049367148d42a802ae6cd28":[10,0,0,12],
+"classdeprecated_1_1BSplines.html#ac10f9df03a1d22f91ed1c3b0c81a765a":[10,0,0,15],
+"classdeprecated_1_1BSplines.html#ad5a406e78eb4069f8b37f6421a83e6be":[10,0,0,34],
+"classdeprecated_1_1BSplines.html#adaaebe730e66c05d02367ea9a99845a1":[10,0,0,23],
+"classdeprecated_1_1BSplines.html#ae6644ef87cc1a18daf0bdac1ec059697":[10,0,0,31],
+"classdeprecated_1_1BSplines.html#afccf99ea1b7e1faa252192f81c4ca57e":[10,0,0,35],
+"classdeprecated_1_1NonUniformBSplines.html":[10,0,1],
+"classdeprecated_1_1NonUniformBSplines.html#a0b6d12f4a7044fdec2fe2954511e100f":[10,0,1,9],
+"classdeprecated_1_1NonUniformBSplines.html#a1a6eace470509ed7966ebaa5cb7d6d90":[10,0,1,13],
+"classdeprecated_1_1NonUniformBSplines.html#a47fec32aafc3c43bb49cbaef2600894c":[10,0,1,8],
+"classdeprecated_1_1NonUniformBSplines.html#a5238536e33547fa1911717d70a9cc6ec":[10,0,1,0],
 "classdeprecated_1_1NonUniformBSplines.html#a565396adc8f843a478bda007694007c3":[10,0,1,12],
 "classdeprecated_1_1NonUniformBSplines.html#a5cd87e52b042f57830f60d10a6557edf":[10,0,1,5],
 "classdeprecated_1_1NonUniformBSplines.html#a82babc1fd0fa390c154e6f615fb49000":[10,0,1,4],
@@ -238,16 +249,5 @@ var NAVTREEINDEX3 =
 "polar__poisson_2params_8yaml_8hpp_source.html":[11,1,0,1,0],
 "polar__spline_8hpp_source.html":[11,2,0,0,0,20],
 "polar__spline__evaluator_8hpp_source.html":[11,2,0,0,0,21],
-"polarpoissonsolver_8hpp_source.html":[11,0,1,2,2],
-"polynomial__evaluator_8hpp_source.html":[11,2,0,1,2],
-"quadrature_8hpp_source.html":[11,0,6,0],
-"simulations_geometryXVx_sheath.html":[6],
-"simulations_geometryXVx_sheath.html#Description":[6,0],
-"simulations_geometryXVx_sheath.html#Recommended_parameters":[6,2],
-"simulations_geometryXVx_sheath.html#References":[6,3],
-"simulations_geometryXVx_sheath.html#Usage":[6,1],
-"species__info_8hpp_source.html":[11,0,7,0],
-"spline__1d_8hpp_source.html":[11,2,0,0,0,0,4],
-"spline__2d_8hpp_source.html":[11,2,0,0,0,0,5],
-"spline__boundary__conditions_8hpp_source.html":[11,2,0,0,0,22]
+"polarpoissonsolver_8hpp_source.html":[11,0,1,2,2]
 };

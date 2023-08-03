@@ -131,15 +131,14 @@ $(document).ready(function(){initNavTree('quadrature_8hpp_source.html',''); init
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        assert(ddc::get_domain&lt;IDim&gt;(values) == ddc::get_domain&lt;IDim&gt;(m_coefficients));</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">return</span> ddc::transform_reduce(</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                ddc::policies::parallel_host,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                values.domain(),</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                0.0,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                ddc::reducer::sum&lt;double&gt;(),</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                [&amp;](ddc::DiscreteElement&lt;IDim&gt; <span class="keyword">const</span> ix) {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                    return m_coefficients(ix) * values(ix);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                });</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                values.domain(),</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                0.0,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                ddc::reducer::sum&lt;double&gt;(),</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                [&amp;](ddc::DiscreteElement&lt;IDim&gt; <span class="keyword">const</span> ix) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                    return m_coefficients(ix) * values(ix);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                });</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
 <div class="ttc" id="aclassQuadrature_html"><div class="ttname"><a href="classQuadrature.html">Quadrature</a></div><div class="ttdef"><b>Definition:</b> quadrature.hpp:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

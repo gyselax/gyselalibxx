@@ -1,5 +1,12 @@
 var classPolarSplineFEMPoissonSolver =
 [
+    [ "InternalTagGenerator", "classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator", [
+      [ "tag", "classPolarSplineFEMPoissonSolver.html#a7905bb7674f4ab0af6d298e559096c84", null ]
+    ] ],
+    [ "PBasisSubset", "classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1PBasisSubset", null ],
+    [ "PCellDim", "classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1PCellDim", null ],
+    [ "RBasisSubset", "classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1RBasisSubset", null ],
+    [ "RCellDim", "classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1RCellDim", null ],
     [ "BSplinesR", "classPolarSplineFEMPoissonSolver.html#a73328569294653365237e7c093b32963", null ],
     [ "BSplinesP", "classPolarSplineFEMPoissonSolver.html#a51c7049b09235defa8c3242508d95ba4", null ],
     [ "DimR", "classPolarSplineFEMPoissonSolver.html#a96af186eeeeb68deaf32eaef97c58460", null ],
