@@ -79,13 +79,9 @@ CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
         std::vector<ddc::Coordinate<GhostedVx>> breaks(npoints);
         breaks[0] = ddc::Coordinate<GhostedVx>(vx0 - (vx1 - vx0));
         breaks[npoints - 1] = ddc::Coordinate<GhostedVx>(vxN + (vxN - vxNm1));
-        ddc::for_each(
-                ddc::policies::parallel_host,
-                ddc::select<IDimVx>(mesh),
-                [&](IndexVx const ivx) {
-                    breaks[ghosted_from_index(ivx).uid()]
-                            = ghosted_from_coord(ddc::coordinate(ivx));
-                });
+        ddc::for_each(ddc::select<IDimVx>(mesh), [&](IndexVx const ivx) {
+            breaks[ghosted_from_index(ivx).uid()] = ghosted_from_coord(ddc::coordinate(ivx));
+        });
         ddc::init_discrete_space<ddc::NonUniformPointSampling<GhostedVx>>(breaks);
     }
 
@@ -99,7 +95,7 @@ CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
         breaks[0] = ddc::Coordinate<GhostedVxStaggered>(vx0 - (vx1 - vx0) / 2.);
         breaks[npoints - 1] = ddc::Coordinate<GhostedVxStaggered>(vxN + (vxN - vxNm1) / 2.);
         IDomainVx const gridvx_less(ddc::select<IDimVx>(mesh).remove_last(IVectVx(1)));
-        ddc::for_each(ddc::policies::parallel_host, gridvx_less, [&](IndexVx const ivx) {
+        ddc::for_each(gridvx_less, [&](IndexVx const ivx) {
             breaks[ivx.uid() + 1] = CollisionsIntra::ghosted_staggered_from_coord(
                     CoordVx((ddc::coordinate(ivx) + ddc::coordinate(ivx + 1)) / 2.));
         });
@@ -140,7 +136,7 @@ void CollisionsIntra::compute_matrix_coeff(
         ddc::ChunkSpan<double, IDomainSpXVx_ghosted> Nucoll,
         double deltat) const
 {
-    ddc::for_each(ddc::policies::parallel_host, AA.domain(), [&](IndexSpXVx const ispxvx) {
+    ddc::for_each(AA.domain(), [&](IndexSpXVx const ispxvx) {
         IndexSp const isp = ddc::select<IDimSp>(ispxvx);
         IndexX const ix = ddc::select<IDimX>(ispxvx);
 
@@ -216,7 +212,7 @@ void CollisionsIntra::compute_rhs_vector(
         DViewSpXVx allfdistribu,
         double fthresh) const
 {
-    ddc::for_each(ddc::policies::parallel_host, RR.domain(), [&](IndexSpXVx const ispxvx) {
+    ddc::for_each(RR.domain(), [&](IndexSpXVx const ispxvx) {
         IndexSp const isp = ddc::select<IDimSp>(ispxvx);
         IndexX const ix = ddc::select<IDimX>(ispxvx);
         IndexVx const ivx = ddc::select<IDimVx>(ispxvx);
@@ -336,24 +332,21 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
             m_fthresh);
 
 
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                Matrix_Banded matrix(ddc::get_domain<IDimVx>(allfdistribu).size(), 1, 1);
-                fill_matrix_with_coeff(
-                        matrix,
-                        AA[ispx].span_cview(),
-                        BB[ispx].span_cview(),
-                        CC[ispx].span_cview());
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        Matrix_Banded matrix(ddc::get_domain<IDimVx>(allfdistribu).size(), 1, 1);
+        fill_matrix_with_coeff(
+                matrix,
+                AA[ispx].span_cview(),
+                BB[ispx].span_cview(),
+                CC[ispx].span_cview());
 
-                DSpan1D RR_Span1D(
-                        RR[ispx].allocation_mdspan().data_handle(),
-                        ddc::get_domain<IDimVx>(allfdistribu).size());
-                matrix.factorize();
-                matrix.solve_inplace(RR_Span1D);
-                ddc::deepcopy(allfdistribu[ispx], RR[ispx]);
-            });
+        DSpan1D RR_Span1D(
+                RR[ispx].allocation_mdspan().data_handle(),
+                ddc::get_domain<IDimVx>(allfdistribu).size());
+        matrix.factorize();
+        matrix.solve_inplace(RR_Span1D);
+        ddc::deepcopy(allfdistribu[ispx], RR[ispx]);
+    });
 
     return allfdistribu;
 }

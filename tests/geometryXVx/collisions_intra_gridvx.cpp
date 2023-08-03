@@ -98,11 +98,11 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
         gridvx_ghosted_staggered_pred[i] = vx_min - dv / 2. + dv * i;
     }
 
-    ddc::for_each(ddc::policies::parallel_host, gridvx_ghosted, [&](auto const ivx_gh) {
+    ddc::for_each(gridvx_ghosted, [&](auto const ivx_gh) {
         EXPECT_LE(std::fabs(ddc::coordinate(ivx_gh) - gridvx_ghosted_pred[ivx_gh.uid()]), 1.e-12);
     });
 
-    ddc::for_each(ddc::policies::parallel_host, gridvx_ghosted_staggered, [&](auto const ivx_ghs) {
+    ddc::for_each(gridvx_ghosted_staggered, [&](auto const ivx_ghs) {
         EXPECT_LE(
                 std::fabs(ddc::coordinate(ivx_ghs) - gridvx_ghosted_staggered_pred[ivx_ghs.uid()]),
                 1.e-12);

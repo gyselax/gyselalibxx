@@ -71,7 +71,7 @@ TEST(KrookSource, Adaptive)
     IndexSp my_ielec(dom_sp.back());
     charges(my_iion) = 1;
     charges(my_ielec) = -1;
-    ddc::for_each(ddc::policies::parallel_host, dom_sp, [&](IndexSp const isp) {
+    ddc::for_each(dom_sp, [&](IndexSp const isp) {
         masses(isp) = 1.0;
         init_perturb_mode(isp) = 0;
         init_perturb_amplitude(isp) = 0.0;
@@ -105,81 +105,67 @@ TEST(KrookSource, Adaptive)
     double const density_init_elec = 2.;
     double const temperature_init = 1.;
     DFieldSpXVx allfdistribu(mesh);
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                DFieldVx finit(gridvx);
-                if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
-                    MaxwellianEquilibrium::
-                            compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
-                    ddc::deepcopy(allfdistribu[ispx], finit);
-                } else {
-                    MaxwellianEquilibrium::
-                            compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
-                    ddc::deepcopy(allfdistribu[ispx], finit);
-                }
-            });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        DFieldVx finit(gridvx);
+        if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
+            MaxwellianEquilibrium::
+                    compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
+            ddc::deepcopy(allfdistribu[ispx], finit);
+        } else {
+            MaxwellianEquilibrium::
+                    compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
+            ddc::deepcopy(allfdistribu[ispx], finit);
+        }
+    });
 
     // error with a given deltat
     double const deltat = 0.1;
     rhs_krook(allfdistribu, deltat);
 
     DFieldSpX densities(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) { densities(ispx) = integrate_v(allfdistribu[ispx]); });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        densities(ispx) = integrate_v(allfdistribu[ispx]);
+    });
 
     // the charge should be conserved by the operator
     DFieldX error(ddc::get_domain<IDimX>(allfdistribu));
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimX>(allfdistribu),
-            [&](IndexX const ix) {
-                error(ix) = std::fabs(
-                        charge(my_iion) * (densities(my_iion, ix) - density_init_ion)
-                        + charge(my_ielec) * (densities(my_ielec, ix) - density_init_elec));
-            });
+    ddc::for_each(ddc::get_domain<IDimX>(allfdistribu), [&](IndexX const ix) {
+        error(ix) = std::fabs(
+                charge(my_iion) * (densities(my_iion, ix) - density_init_ion)
+                + charge(my_ielec) * (densities(my_ielec, ix) - density_init_elec));
+    });
 
     // reinitialization of the distribution function
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                DFieldVx finit(gridvx);
-                if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
-                    MaxwellianEquilibrium::
-                            compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
-                    ddc::deepcopy(allfdistribu[ispx], finit);
-                } else {
-                    MaxwellianEquilibrium::
-                            compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
-                    ddc::deepcopy(allfdistribu[ispx], finit);
-                }
-            });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        DFieldVx finit(gridvx);
+        if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
+            MaxwellianEquilibrium::
+                    compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
+            ddc::deepcopy(allfdistribu[ispx], finit);
+        } else {
+            MaxwellianEquilibrium::
+                    compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
+            ddc::deepcopy(allfdistribu[ispx], finit);
+        }
+    });
 
     // error with a deltat 10 times smaller
     rhs_krook(allfdistribu, 0.01);
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) { densities(ispx) = integrate_v(allfdistribu[ispx]); });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        densities(ispx) = integrate_v(allfdistribu[ispx]);
+    });
 
     // the rk2 scheme used in the krook operator should be of order 2
     // hence the error should be divided by at least 100 when dt is divided by 10
     double const order = 2;
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimX>(allfdistribu),
-            [&](IndexX const ix) {
-                double const error_smalldt = std::fabs(
-                        charge(my_iion) * (densities(my_iion, ix) - density_init_ion)
-                        + charge(my_ielec) * (densities(my_ielec, ix) - density_init_elec));
-                std::cout << "ix " << ix << "error " << error(ix) << " error_smalldt "
-                          << error_smalldt << std::endl;
-                EXPECT_LE(error_smalldt, error(ix) / std::pow(10, order));
-            });
+    ddc::for_each(ddc::get_domain<IDimX>(allfdistribu), [&](IndexX const ix) {
+        double const error_smalldt = std::fabs(
+                charge(my_iion) * (densities(my_iion, ix) - density_init_ion)
+                + charge(my_ielec) * (densities(my_ielec, ix) - density_init_elec));
+        std::cout << "ix " << ix << "error " << error(ix) << " error_smalldt " << error_smalldt
+                  << std::endl;
+        EXPECT_LE(error_smalldt, error(ix) / std::pow(10, order));
+    });
 
     PC_tree_destroy(&conf_pdi);
     PDI_finalize();
@@ -226,7 +212,7 @@ TEST(KrookSource, Constant)
     DFieldSp init_perturb_amplitude(dom_sp);
     charges(dom_sp.front()) = 1;
     charges(dom_sp.back()) = -1;
-    ddc::for_each(ddc::policies::parallel_host, dom_sp, [&](IndexSp const isp) {
+    ddc::for_each(dom_sp, [&](IndexSp const isp) {
         masses(isp) = 1.0;
         init_perturb_mode(isp) = 0;
         init_perturb_amplitude(isp) = 0.0;
@@ -267,10 +253,9 @@ TEST(KrookSource, Constant)
     DFieldVx finit(gridvx);
     MaxwellianEquilibrium::compute_maxwellian(finit, density_init, temperature_init, 0.);
     DFieldSpXVx allfdistribu(mesh);
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) { ddc::deepcopy(allfdistribu[ispx], finit); });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        ddc::deepcopy(allfdistribu[ispx], finit);
+    });
 
     int const nbsteps = 100;
     for (int iter = 0; iter < nbsteps; ++iter) {
@@ -280,22 +265,18 @@ TEST(KrookSource, Constant)
     // tests if distribution function matches theoretical prediction
     DFieldVx ftarget(gridvx);
     MaxwellianEquilibrium::compute_maxwellian(ftarget, density_target, temperature_target, 0.);
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            allfdistribu.domain(),
-            [&](IndexSpXVx const ispxvx) {
-                // predicted distribution function value
-                double const allfdistribu_pred
-                        = ftarget(ddc::select<IDimVx>(ispxvx))
-                          + (finit(ddc::select<IDimVx>(ispxvx))
-                             - ftarget(ddc::select<IDimVx>(ispxvx)))
-                                    * std::exp(
-                                            -amplitude * mask(ddc::select<IDimX>(ispxvx)) * deltat
-                                            * nbsteps);
-                double const error = std::fabs(allfdistribu(ispxvx) - allfdistribu_pred);
+    ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
+        // predicted distribution function value
+        double const allfdistribu_pred
+                = ftarget(ddc::select<IDimVx>(ispxvx))
+                  + (finit(ddc::select<IDimVx>(ispxvx)) - ftarget(ddc::select<IDimVx>(ispxvx)))
+                            * std::exp(
+                                    -amplitude * mask(ddc::select<IDimX>(ispxvx)) * deltat
+                                    * nbsteps);
+        double const error = std::fabs(allfdistribu(ispxvx) - allfdistribu_pred);
 
-                EXPECT_LE(error, 1e-13);
-            });
+        EXPECT_LE(error, 1e-13);
+    });
 
     PC_tree_destroy(&conf_pdi);
     PDI_finalize();

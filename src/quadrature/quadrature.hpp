@@ -26,7 +26,6 @@ public:
     {
         assert(ddc::get_domain<IDim>(values) == ddc::get_domain<IDim>(m_coefficients));
         return ddc::transform_reduce(
-                ddc::policies::parallel_host,
                 values.domain(),
                 0.0,
                 ddc::reducer::sum<double>(),

@@ -15,14 +15,16 @@
 
 class CollisionsIntra : public IRightHandSide
 {
-private:
+public:
     struct GhostedVx
     {
     };
+
     struct GhostedVxStaggered
     {
     };
 
+private:
     static ddc::Coordinate<GhostedVx> ghosted_from_coord(ddc::Coordinate<RDimVx> const& coord)
     {
         return ddc::Coordinate<GhostedVx>(ddc::get<RDimVx>(coord));

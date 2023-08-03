@@ -112,41 +112,32 @@ void KrookSourceAdaptive::get_amplitudes(DSpanSp amplitudes, DViewSpVx const all
 
 DSpanSpXVx KrookSourceAdaptive::operator()(DSpanSpXVx const allfdistribu, double const dt) const
 {
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimX>(allfdistribu),
-            [&](IndexX const ix) {
-                // RK2 first half step
-                DFieldSpVx allfdistribu_half(allfdistribu[ix]);
-                DFieldSp amplitudes(ddc::get_domain<IDimSp>(allfdistribu));
-                get_amplitudes(amplitudes.span_view(), allfdistribu_half.span_cview());
-                ddc::for_each(
-                        ddc::policies::parallel_host,
-                        ddc::get_domain<IDimSp, IDimVx>(allfdistribu),
-                        [&](IndexSpVx const ispvx) {
-                            IndexSp isp(ddc::select<IDimSp>(ispvx));
-                            IndexVx ivx(ddc::select<IDimVx>(ispvx));
-                            IndexSpXVx ispxvx(isp, ix, ivx);
-                            double const df = -m_mask(ix) * amplitudes(isp)
-                                              * (allfdistribu(ispxvx) - m_ftarget(ivx)) * dt / 2.0;
-                            allfdistribu_half(isp, ivx) = allfdistribu(ispxvx) + df;
-                        });
+    ddc::for_each(ddc::get_domain<IDimX>(allfdistribu), [&](IndexX const ix) {
+        // RK2 first half step
+        DFieldSpVx allfdistribu_half(allfdistribu[ix]);
+        DFieldSp amplitudes(ddc::get_domain<IDimSp>(allfdistribu));
+        get_amplitudes(amplitudes.span_view(), allfdistribu_half.span_cview());
+        ddc::for_each(ddc::get_domain<IDimSp, IDimVx>(allfdistribu), [&](IndexSpVx const ispvx) {
+            IndexSp isp(ddc::select<IDimSp>(ispvx));
+            IndexVx ivx(ddc::select<IDimVx>(ispvx));
+            IndexSpXVx ispxvx(isp, ix, ivx);
+            double const df = -m_mask(ix) * amplitudes(isp)
+                              * (allfdistribu(ispxvx) - m_ftarget(ivx)) * dt / 2.0;
+            allfdistribu_half(isp, ivx) = allfdistribu(ispxvx) + df;
+        });
 
-                // RK2 final step
-                get_amplitudes(amplitudes.span_view(), allfdistribu_half.span_cview());
-                ddc::for_each(
-                        ddc::policies::parallel_host,
-                        ddc::get_domain<IDimSp, IDimVx>(allfdistribu),
-                        [&](IndexSpVx const ispvx) {
-                            IndexSp isp(ddc::select<IDimSp>(ispvx));
-                            IndexVx ivx(ddc::select<IDimVx>(ispvx));
-                            IndexSpXVx ispxvx(isp, ix, ivx);
+        // RK2 final step
+        get_amplitudes(amplitudes.span_view(), allfdistribu_half.span_cview());
+        ddc::for_each(ddc::get_domain<IDimSp, IDimVx>(allfdistribu), [&](IndexSpVx const ispvx) {
+            IndexSp isp(ddc::select<IDimSp>(ispvx));
+            IndexVx ivx(ddc::select<IDimVx>(ispvx));
+            IndexSpXVx ispxvx(isp, ix, ivx);
 
-                            double const df = -m_mask(ix) * amplitudes(isp)
-                                              * (allfdistribu(ispxvx) - m_ftarget(ivx)) * dt;
-                            allfdistribu(ispxvx) = allfdistribu(ispxvx) + df;
-                        });
-            });
+            double const df
+                    = -m_mask(ix) * amplitudes(isp) * (allfdistribu(ispxvx) - m_ftarget(ivx)) * dt;
+            allfdistribu(ispxvx) = allfdistribu(ispxvx) + df;
+        });
+    });
 
     return allfdistribu;
 }

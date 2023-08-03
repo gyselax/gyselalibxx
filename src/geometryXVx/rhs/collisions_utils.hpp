@@ -25,7 +25,7 @@ void compute_Dcoll(
         DViewSpX density,
         DViewSpX temperature)
 {
-    ddc::for_each(ddc::policies::parallel_host, Dcoll.domain(), [&](auto const ispxvx) {
+    ddc::for_each(Dcoll.domain(), [&](auto const ispxvx) {
         double const vT(std::sqrt(2. * temperature(ddc::select<IDimSp, IDimX>(ispxvx))));
         double const v_norm(std::fabs(ddc::coordinate(ddc::select<IDimension>(ispxvx))) / vT);
         double const tol = 1.e-15;
@@ -55,7 +55,7 @@ void compute_dvDcoll(
         DViewSpX density,
         DViewSpX temperature)
 {
-    ddc::for_each(ddc::policies::parallel_host, dvDcoll.domain(), [&](auto const ispxvx) {
+    ddc::for_each(dvDcoll.domain(), [&](auto const ispxvx) {
         double const vT(std::sqrt(2. * temperature(ddc::select<IDimSp, IDimX>(ispxvx))));
         double const v_norm(std::fabs(ddc::coordinate(ddc::select<IDimension>(ispxvx))) / vT);
         double const tol = 1.e-15;
@@ -115,21 +115,17 @@ void compute_Vcoll_Tcoll(
     DFieldSpXVx I2mean_integrand(allfdistribu.domain());
     DFieldSpXVx I3mean_integrand(allfdistribu.domain());
     DFieldSpXVx I4mean_integrand(allfdistribu.domain());
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            allfdistribu.domain(),
-            [&](IndexSpXVx const ispxvx) {
-                ddc::DiscreteElement<IDimension> const idimx(ddc::select<IDimVx>(ispxvx).uid() + 1);
-                ddc::DiscreteElement<IDimSp, IDimX, IDimension>
-                        ispxdimx(ddc::select<IDimSp>(ispxvx), ddc::select<IDimX>(ispxvx), idimx);
-                CoordVx const coordv = ddc::coordinate(ddc::select<IDimVx>(ispxvx));
-                I0mean_integrand(ispxvx) = Dcoll(ispxdimx) * allfdistribu(ispxvx);
-                I1mean_integrand(ispxvx) = I0mean_integrand(ispxvx) * coordv;
-                I2mean_integrand(ispxvx) = I1mean_integrand(ispxvx) * coordv;
-                I3mean_integrand(ispxvx) = dvDcoll(ispxdimx) * allfdistribu(ispxvx);
-                I4mean_integrand(ispxvx)
-                        = I0mean_integrand(ispxvx) + I3mean_integrand(ispxvx) * coordv;
-            });
+    ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
+        ddc::DiscreteElement<IDimension> const idimx(ddc::select<IDimVx>(ispxvx).uid() + 1);
+        ddc::DiscreteElement<IDimSp, IDimX, IDimension>
+                ispxdimx(ddc::select<IDimSp>(ispxvx), ddc::select<IDimX>(ispxvx), idimx);
+        CoordVx const coordv = ddc::coordinate(ddc::select<IDimVx>(ispxvx));
+        I0mean_integrand(ispxvx) = Dcoll(ispxdimx) * allfdistribu(ispxvx);
+        I1mean_integrand(ispxvx) = I0mean_integrand(ispxvx) * coordv;
+        I2mean_integrand(ispxvx) = I1mean_integrand(ispxvx) * coordv;
+        I3mean_integrand(ispxvx) = dvDcoll(ispxdimx) * allfdistribu(ispxvx);
+        I4mean_integrand(ispxvx) = I0mean_integrand(ispxvx) + I3mean_integrand(ispxvx) * coordv;
+    });
 
     // computation of the integrals over the Vx direction
     DFieldSpX I0mean(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
@@ -137,23 +133,17 @@ void compute_Vcoll_Tcoll(
     DFieldSpX I2mean(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX I3mean(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX I4mean(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                I0mean(ispx) = integrate_v(I0mean_integrand[ispx]);
-                I1mean(ispx) = integrate_v(I1mean_integrand[ispx]);
-                I2mean(ispx) = integrate_v(I2mean_integrand[ispx]);
-                I3mean(ispx) = integrate_v(I3mean_integrand[ispx]);
-                I4mean(ispx) = integrate_v(I4mean_integrand[ispx]);
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        I0mean(ispx) = integrate_v(I0mean_integrand[ispx]);
+        I1mean(ispx) = integrate_v(I1mean_integrand[ispx]);
+        I2mean(ispx) = integrate_v(I2mean_integrand[ispx]);
+        I3mean(ispx) = integrate_v(I3mean_integrand[ispx]);
+        I4mean(ispx) = integrate_v(I4mean_integrand[ispx]);
 
-                double const inv_Pcoll(
-                        1. / (I0mean(ispx) * I4mean(ispx) - I1mean(ispx) * I3mean(ispx)));
-                Vcoll(ispx)
-                        = inv_Pcoll * (I1mean(ispx) * I4mean(ispx) - I2mean(ispx) * I3mean(ispx));
-                Tcoll(ispx)
-                        = inv_Pcoll * (I0mean(ispx) * I2mean(ispx) - I1mean(ispx) * I1mean(ispx));
-            });
+        double const inv_Pcoll(1. / (I0mean(ispx) * I4mean(ispx) - I1mean(ispx) * I3mean(ispx)));
+        Vcoll(ispx) = inv_Pcoll * (I1mean(ispx) * I4mean(ispx) - I2mean(ispx) * I3mean(ispx));
+        Tcoll(ispx) = inv_Pcoll * (I0mean(ispx) * I2mean(ispx) - I1mean(ispx) * I1mean(ispx));
+    });
 }
 
 /**
@@ -166,7 +156,7 @@ void compute_Nucoll(
         DViewSpX Vcoll,
         DViewSpX Tcoll)
 {
-    ddc::for_each(ddc::policies::parallel_host, Dcoll.domain(), [&](auto const ispxdimx) {
+    ddc::for_each(Dcoll.domain(), [&](auto const ispxdimx) {
         double const coordv(ddc::coordinate(ddc::select<IDimension>(ispxdimx)));
         Nucoll(ispxdimx) = -Dcoll(ispxdimx) * (coordv - Vcoll(ddc::select<IDimSp, IDimX>(ispxdimx)))
                            / Tcoll(ddc::select<IDimSp, IDimX>(ispxdimx));

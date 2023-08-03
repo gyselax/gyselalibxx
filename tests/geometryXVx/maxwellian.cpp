@@ -48,13 +48,13 @@ TEST(Maxwellian, Moments)
 
     // mean velocity
     DFieldVx integrand(gridvx);
-    ddc::for_each(ddc::policies::parallel_host, gridvx, [&](IndexVx const ivx) {
+    ddc::for_each(gridvx, [&](IndexVx const ivx) {
         integrand(ivx) = ddc::coordinate(ivx) * fdistribu(ivx);
     });
     double const mean_velocity_res = integrate_v(integrand) / density_res;
 
     // temperature
-    ddc::for_each(ddc::policies::parallel_host, gridvx, [&](IndexVx const ivx) {
+    ddc::for_each(gridvx, [&](IndexVx const ivx) {
         double const velocity = ddc::coordinate(ivx) - mean_velocity_res;
         integrand(ivx) = velocity * velocity * fdistribu(ivx);
     });

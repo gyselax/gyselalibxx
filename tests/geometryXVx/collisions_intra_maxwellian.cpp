@@ -85,38 +85,33 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     DFieldSpX density_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX mean_velocity_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX temperature_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                double const density = 1.;
-                double const density_ampl = 0.1;
-                double const mean_velocity = 0.;
-                double const mean_velocity_ampl = 0.2;
-                double const temperature = 1;
-                double const temperature_ampl = 0.3;
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        double const density = 1.;
+        double const density_ampl = 0.1;
+        double const mean_velocity = 0.;
+        double const mean_velocity_ampl = 0.2;
+        double const temperature = 1;
+        double const temperature_ampl = 0.3;
 
-                double const coordx = ddc::coordinate(ddc::select<IDimX>(ispx));
-                density_init(ispx)
-                        = density
-                          + density_ampl
-                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-                mean_velocity_init(ispx)
-                        = mean_velocity
-                          + mean_velocity_ampl
-                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-                temperature_init(ispx)
-                        = temperature
-                          + temperature_ampl
-                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-                DFieldVx finit(gridvx);
-                MaxwellianEquilibrium::compute_maxwellian(
-                        finit.span_view(),
-                        density_init(ispx),
-                        temperature_init(ispx),
-                        mean_velocity_init(ispx));
-                ddc::deepcopy(allfdistribu[ispx], finit);
-            });
+        double const coordx = ddc::coordinate(ddc::select<IDimX>(ispx));
+        density_init(ispx)
+                = density
+                  + density_ampl * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
+        mean_velocity_init(ispx)
+                = mean_velocity
+                  + mean_velocity_ampl
+                            * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
+        temperature_init(ispx)
+                = temperature
+                  + temperature_ampl * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
+        DFieldVx finit(gridvx);
+        MaxwellianEquilibrium::compute_maxwellian(
+                finit.span_view(),
+                density_init(ispx),
+                temperature_init(ispx),
+                mean_velocity_init(ispx));
+        ddc::deepcopy(allfdistribu[ispx], finit);
+    });
 
     double const nustar0(0.1);
     double const deltat(0.1);
@@ -128,18 +123,15 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     // nustar profile
     DFieldSpX nustar_profile(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     compute_nustar_profile(nustar_profile.span_view(), nustar0);
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                if (charge(ddc::select<IDimSp>(ispx)) < 0.) {
-                    double const pred(1 / x_max * nustar0);
-                    EXPECT_LE(std::fabs(nustar_profile(ispx) - pred), 1e-12);
-                } else {
-                    double const pred(1 / (std::sqrt(mass_ion) * x_max) * nustar0);
-                    EXPECT_LE(std::fabs(nustar_profile(ispx) - pred), 1e-12);
-                }
-            });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        if (charge(ddc::select<IDimSp>(ispx)) < 0.) {
+            double const pred(1 / x_max * nustar0);
+            EXPECT_LE(std::fabs(nustar_profile(ispx) - pred), 1e-12);
+        } else {
+            double const pred(1 / (std::sqrt(mass_ion) * x_max) * nustar0);
+            EXPECT_LE(std::fabs(nustar_profile(ispx) - pred), 1e-12);
+        }
+    });
 
     //collfreq
     DFieldSpX collfreq(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
@@ -149,22 +141,19 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
             density_init.span_cview(),
             temperature_init.span_cview());
 
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::select<IDimSp, IDimX>(mesh),
-            [&](IndexSpX const ispx) {
-                if (charge(ddc::select<IDimSp>(ispx)) < 0.) {
-                    double const pred(
-                            1 / x_max * nustar0 * density_init(ispx)
-                            / std::pow(temperature_init(ispx), 1.5));
-                    EXPECT_LE(std::fabs(collfreq(ispx) - pred), 1e-12);
-                } else {
-                    double const pred(
-                            1 / (std::sqrt(mass_ion) * x_max) * nustar0 * density_init(ispx)
-                            / std::pow(temperature_init(ispx), 1.5));
-                    EXPECT_LE(std::fabs(collfreq(ispx) - pred), 1e-12);
-                }
-            });
+    ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
+        if (charge(ddc::select<IDimSp>(ispx)) < 0.) {
+            double const pred(
+                    1 / x_max * nustar0 * density_init(ispx)
+                    / std::pow(temperature_init(ispx), 1.5));
+            EXPECT_LE(std::fabs(collfreq(ispx) - pred), 1e-12);
+        } else {
+            double const pred(
+                    1 / (std::sqrt(mass_ion) * x_max) * nustar0 * density_init(ispx)
+                    / std::pow(temperature_init(ispx), 1.5));
+            EXPECT_LE(std::fabs(collfreq(ispx) - pred), 1e-12);
+        }
+    });
 
     // diffusion coefficient
     ddc::Chunk<
@@ -197,13 +186,10 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
             Dcoll.span_cview(),
             dvDcoll.span_cview());
 
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                EXPECT_LE(std::fabs(Vcoll(ispx) - mean_velocity_init(ispx)), 1e-12);
-                EXPECT_LE(std::fabs(Tcoll(ispx) - temperature_init(ispx)), 1e-12);
-            });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        EXPECT_LE(std::fabs(Vcoll(ispx) - mean_velocity_init(ispx)), 1e-12);
+        EXPECT_LE(std::fabs(Tcoll(ispx) - temperature_init(ispx)), 1e-12);
+    });
 
     collisions(allfdistribu, deltat);
 
@@ -226,48 +212,40 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
             FluidMoments::s_temperature);
 
     double const tol = 1.e-6;
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            [&](IndexSpX const ispx) {
-                EXPECT_LE(std::fabs(density_res(ispx) - density_init(ispx)), tol);
-                EXPECT_LE(std::fabs(mean_velocity_res(ispx) - mean_velocity_init(ispx)), tol);
-                EXPECT_LE(std::fabs(temperature_res(ispx) - temperature_init(ispx)), tol);
-            });
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        EXPECT_LE(std::fabs(density_res(ispx) - density_init(ispx)), tol);
+        EXPECT_LE(std::fabs(mean_velocity_res(ispx) - mean_velocity_init(ispx)), tol);
+        EXPECT_LE(std::fabs(temperature_res(ispx) - temperature_init(ispx)), tol);
+    });
 
     // * Intra species collisions applied on a perturbed distribution function
     // * should make it relax towards a maxwellian, i.e. Vcoll = mean_velocity, Tcoll = temperature at equilibrium
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::select<IDimSp, IDimX>(mesh),
-            [&](IndexSpX const ispx) {
-                double const density = 1.;
-                double const density_ampl = 0.1;
-                double const mean_velocity = 0.;
-                double const mean_velocity_ampl = 0.2;
-                double const temperature = 1;
-                double const temperature_ampl = 0.3;
-                double const coordx = ddc::coordinate(ddc::select<IDimX>(ispx));
-                double const density_loc
-                        = density
-                          + density_ampl
-                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-                double const mean_velocity_loc
-                        = mean_velocity
-                          + mean_velocity_ampl
-                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-                double const temperature_loc
-                        = temperature
-                          + temperature_ampl
-                                    * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-                DFieldVx finit(gridvx);
-                MaxwellianEquilibrium::compute_maxwellian(
-                        finit.span_view(),
-                        density_loc,
-                        temperature_loc,
-                        mean_velocity_loc);
-                ddc::deepcopy(allfdistribu[ispx], finit);
-            });
+    ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
+        double const density = 1.;
+        double const density_ampl = 0.1;
+        double const mean_velocity = 0.;
+        double const mean_velocity_ampl = 0.2;
+        double const temperature = 1;
+        double const temperature_ampl = 0.3;
+        double const coordx = ddc::coordinate(ddc::select<IDimX>(ispx));
+        double const density_loc
+                = density
+                  + density_ampl * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
+        double const mean_velocity_loc
+                = mean_velocity
+                  + mean_velocity_ampl
+                            * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
+        double const temperature_loc
+                = temperature
+                  + temperature_ampl * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
+        DFieldVx finit(gridvx);
+        MaxwellianEquilibrium::compute_maxwellian(
+                finit.span_view(),
+                density_loc,
+                temperature_loc,
+                mean_velocity_loc);
+        ddc::deepcopy(allfdistribu[ispx], finit);
+    });
 
     // initial perturbation
     double const perturb_velocity = 0.5;
@@ -275,7 +253,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     double const perturb_density = 0.5;
     double const coeff_mxw(perturb_density / std::sqrt(2 * M_PI * perturb_temperature));
 
-    ddc::for_each(ddc::policies::parallel_host, mesh, [&](IndexSpXVx const ispxvx) {
+    ddc::for_each(mesh, [&](IndexSpXVx const ispxvx) {
         CoordVx const coordvx = ddc::coordinate(ddc::select<IDimVx>(ispxvx));
         double const coordvx_sq = (coordvx - perturb_velocity) * (coordvx - perturb_velocity);
         double const perturb
@@ -299,13 +277,10 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
             FluidMoments::s_temperature);
 
 
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimX>(allfdistribu),
-            [&](IndexX const ix) {
-                EXPECT_GE(std::fabs(mean_velocity_res(ielec(), ix) - Vcoll(ielec(), ix)), 1.e-4);
-                EXPECT_GE(std::fabs(temperature_res(ielec(), ix) - Tcoll(ielec(), ix)), 1.e-4);
-            });
+    ddc::for_each(ddc::get_domain<IDimX>(allfdistribu), [&](IndexX const ix) {
+        EXPECT_GE(std::fabs(mean_velocity_res(ielec(), ix) - Vcoll(ielec(), ix)), 1.e-4);
+        EXPECT_GE(std::fabs(temperature_res(ielec(), ix) - Tcoll(ielec(), ix)), 1.e-4);
+    });
 
 
     int const nbsteps = 300;
@@ -350,13 +325,10 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
             mean_velocity_res.span_cview(),
             FluidMoments::s_temperature);
 
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            ddc::get_domain<IDimX>(allfdistribu),
-            [&](IndexX const ix) {
-                EXPECT_LE(std::fabs(mean_velocity_res(ielec(), ix) - Vcoll(ielec(), ix)), 1.e-4);
-                EXPECT_LE(std::fabs(temperature_res(ielec(), ix) - Tcoll(ielec(), ix)), 1.e-4);
-            });
+    ddc::for_each(ddc::get_domain<IDimX>(allfdistribu), [&](IndexX const ix) {
+        EXPECT_LE(std::fabs(mean_velocity_res(ielec(), ix) - Vcoll(ielec(), ix)), 1.e-4);
+        EXPECT_LE(std::fabs(temperature_res(ielec(), ix) - Tcoll(ielec(), ix)), 1.e-4);
+    });
 
     PC_tree_destroy(&conf_pdi);
     PDI_finalize();

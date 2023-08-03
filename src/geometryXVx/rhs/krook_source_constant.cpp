@@ -77,16 +77,12 @@ KrookSourceConstant::KrookSourceConstant(
 
 DSpanSpXVx KrookSourceConstant::operator()(DSpanSpXVx const allfdistribu, double const dt) const
 {
-    ddc::for_each(
-            ddc::policies::parallel_host,
-            allfdistribu.domain(),
-            [&](IndexSpXVx const ispxvx) {
-                allfdistribu(ispxvx)
-                        = m_ftarget(ddc::select<IDimVx>(ispxvx))
-                          + (allfdistribu(ispxvx) - m_ftarget(ddc::select<IDimVx>(ispxvx)))
-                                    * std::exp(
-                                            -m_amplitude * m_mask(ddc::select<IDimX>(ispxvx)) * dt);
-            });
+    ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
+        allfdistribu(ispxvx)
+                = m_ftarget(ddc::select<IDimVx>(ispxvx))
+                  + (allfdistribu(ispxvx) - m_ftarget(ddc::select<IDimVx>(ispxvx)))
+                            * std::exp(-m_amplitude * m_mask(ddc::select<IDimX>(ispxvx)) * dt);
+    });
 
     return allfdistribu;
 }
