@@ -125,7 +125,7 @@ public:
      *
      * @see CzarnyToCartesian
      */
-    const double epsilon() const
+    double epsilon() const
     {
         return m_epsilon;
     }
@@ -137,7 +137,7 @@ public:
      *
      * @see CzarnyToCartesian
      */
-    const double e() const
+    double e() const
     {
         return m_e;
     }
