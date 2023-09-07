@@ -26,7 +26,7 @@ static DVectX constexpr nelems_x(10);
 static DElemY constexpr lbound_y(0);
 static DVectY constexpr nelems_y(12);
 
-static DElemXY constexpr lbound_x_y {lbound_x, lbound_y};
+static DElemXY constexpr lbound_x_y(lbound_x, lbound_y);
 static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
 
 TEST(TransformReduceSerialHost, OneDimension)
@@ -36,7 +36,7 @@ TEST(TransformReduceSerialHost, OneDimension)
     ddc::ChunkSpan<int, DDomX> chunk(storage.data(), dom);
     int count = 0;
     ddc::for_each(dom, [&](DElemX const ix) { chunk(ix) = count++; });
-    ASSERT_EQ(
+    EXPECT_EQ(
             ddc::transform_reduce(
                     ddc::policies::serial_host,
                     dom,
@@ -53,7 +53,7 @@ TEST(TransformReduceSerialHost, TwoDimensions)
     ddc::ChunkSpan<int, DDomXY> chunk(storage.data(), dom);
     int count = 0;
     ddc::for_each(dom, [&](DElemXY const ixy) { chunk(ixy) = count++; });
-    ASSERT_EQ(
+    EXPECT_EQ(
             ddc::transform_reduce(
                     ddc::policies::serial_host,
                     dom,
@@ -70,7 +70,7 @@ TEST(TransformReduceParallelHost, OneDimension)
     ddc::ChunkSpan<int, DDomX> chunk(storage.data(), dom);
     int count = 0;
     ddc::for_each(dom, [&](DElemX const ix) { chunk(ix) = count++; });
-    ASSERT_EQ(
+    EXPECT_EQ(
             ddc::transform_reduce(
                     ddc::policies::parallel_host,
                     dom,
@@ -87,7 +87,7 @@ TEST(TransformReduceParallelHost, TwoDimensions)
     ddc::ChunkSpan<int, DDomXY> chunk(storage.data(), dom);
     int count = 0;
     ddc::for_each(dom, [&](DElemXY const ixy) { chunk(ixy) = count++; });
-    ASSERT_EQ(
+    EXPECT_EQ(
             ddc::transform_reduce(
                     ddc::policies::parallel_host,
                     dom,
@@ -108,7 +108,7 @@ static void TestTransformReduceParallelDeviceOneDimension()
             ddc::policies::parallel_device,
             dom,
             DDC_LAMBDA(DElemX const ix) { chunk(ix) = Kokkos::atomic_fetch_add(&count(), 1); });
-    ASSERT_EQ(
+    EXPECT_EQ(
             ddc::transform_reduce(
                     ddc::policies::parallel_device,
                     dom,
@@ -134,7 +134,7 @@ static void TestTransformReduceParallelDeviceTwoDimensions()
             ddc::policies::parallel_device,
             dom,
             DDC_LAMBDA(DElemXY const ixy) { chunk(ixy) = Kokkos::atomic_fetch_add(&count(), 1); });
-    ASSERT_EQ(
+    EXPECT_EQ(
             ddc::transform_reduce(
                     ddc::policies::parallel_device,
                     dom,

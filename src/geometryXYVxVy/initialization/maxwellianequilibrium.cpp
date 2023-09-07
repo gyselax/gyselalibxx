@@ -55,9 +55,9 @@ void MaxwellianEquilibrium::compute_maxwellian(
     IDomainVy const gridvy = fMaxwellian.domain<IDimVy>();
 
     for (IndexVx const ivx : gridvx) {
-        CoordVx const vx = ddc::coordinate(ivx);
+        double const vx = ddc::coordinate(ivx);
         for (IndexVy const ivy : gridvy) {
-            CoordVy const vy = ddc::coordinate(ivy);
+            double const vy = ddc::coordinate(ivy);
             fMaxwellian(ivx, ivy)
                     = density * inv_2pi
                       * std::exp(

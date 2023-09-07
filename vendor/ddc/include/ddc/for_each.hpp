@@ -2,11 +2,13 @@
 
 #pragma once
 
+#include <type_traits>
 #include <utility>
 
 #include <Kokkos_Core.hpp>
 
 #include "ddc/chunk_span.hpp"
+#include "ddc/detail/kokkos.hpp"
 #include "ddc/detail/macros.hpp"
 #include "ddc/detail/tagged_vector.hpp"
 #include "ddc/discrete_domain.hpp"
@@ -28,7 +30,13 @@ class ForEachKokkosLambdaAdapter
 public:
     ForEachKokkosLambdaAdapter(F const& f) : m_f(f) {}
 
-    DDC_FORCEINLINE_FUNCTION void operator()(index_type<DDims>... ids) const
+    KOKKOS_IMPL_FORCEINLINE void operator()(index_type<DDims>... ids) const
+    {
+        m_f(DiscreteElement<DDims...>(ids...));
+    }
+
+    KOKKOS_FORCEINLINE_FUNCTION void operator()(use_annotated_operator, index_type<DDims>... ids)
+            const
     {
         m_f(DiscreteElement<DDims...>(ids...));
     }
@@ -41,9 +49,15 @@ inline void for_each_kokkos(DiscreteDomain<DDim0> const& domain, Functor const& 
     DiscreteElement<DDim0> const ddc_end = domain.front() + domain.extents();
     std::size_t const begin = ddc::uid<DDim0>(ddc_begin);
     std::size_t const end = ddc::uid<DDim0>(ddc_end);
-    Kokkos::parallel_for(
-            Kokkos::RangePolicy<ExecSpace>(begin, end),
-            ForEachKokkosLambdaAdapter<Functor, DDim0>(f));
+    if constexpr (need_annotated_operator<ExecSpace>()) {
+        Kokkos::parallel_for(
+                Kokkos::RangePolicy<ExecSpace, use_annotated_operator>(begin, end),
+                ForEachKokkosLambdaAdapter<Functor, DDim0>(f));
+    } else {
+        Kokkos::parallel_for(
+                Kokkos::RangePolicy<ExecSpace>(begin, end),
+                ForEachKokkosLambdaAdapter<Functor, DDim0>(f));
+    }
 }
 
 template <class ExecSpace, class Functor, class DDim0, class DDim1, class... DDims>
@@ -59,14 +73,26 @@ inline void for_each_kokkos(
                    ddc::uid<DDims>(ddc_begin)...};
     Kokkos::Array<std::size_t, 2 + sizeof...(DDims)> const
             end {ddc::uid<DDim0>(ddc_end), ddc::uid<DDim1>(ddc_end), ddc::uid<DDims>(ddc_end)...};
-    Kokkos::parallel_for(
-            Kokkos::MDRangePolicy<
-                    ExecSpace,
-                    Kokkos::Rank<
-                            2 + sizeof...(DDims),
-                            Kokkos::Iterate::Right,
-                            Kokkos::Iterate::Right>>(begin, end),
-            ForEachKokkosLambdaAdapter<Functor, DDim0, DDim1, DDims...>(f));
+    if constexpr (need_annotated_operator<ExecSpace>()) {
+        Kokkos::parallel_for(
+                Kokkos::MDRangePolicy<
+                        ExecSpace,
+                        Kokkos::Rank<
+                                2 + sizeof...(DDims),
+                                Kokkos::Iterate::Right,
+                                Kokkos::Iterate::Right>,
+                        use_annotated_operator>(begin, end),
+                ForEachKokkosLambdaAdapter<Functor, DDim0, DDim1, DDims...>(f));
+    } else {
+        Kokkos::parallel_for(
+                Kokkos::MDRangePolicy<
+                        ExecSpace,
+                        Kokkos::Rank<
+                                2 + sizeof...(DDims),
+                                Kokkos::Iterate::Right,
+                                Kokkos::Iterate::Right>>(begin, end),
+                ForEachKokkosLambdaAdapter<Functor, DDim0, DDim1, DDims...>(f));
+    }
 }
 
 template <class RetType, class Element, std::size_t N, class Functor, class... Is>

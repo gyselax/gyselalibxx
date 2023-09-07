@@ -518,7 +518,7 @@ TEST(Chunk2DTest, SliceDomainXTooearly)
     ChunkXY<double> chunk(dom_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
     // the error message is checked with clang & gcc only
-    ASSERT_DEATH(
+    EXPECT_DEATH(
             chunk[subdomain_x],
             R"rgx([Aa]ssert.*uid<ODDims>\(m_element_begin\).*uid<ODDims>\(odomain\.m_element_begin\))rgx");
 #endif
@@ -531,7 +531,7 @@ TEST(Chunk2DTest, SliceDomainXToolate)
     ChunkXY<double> chunk(dom_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
     // the error message is checked with clang & gcc only
-    ASSERT_DEATH(
+    EXPECT_DEATH(
             chunk[subdomain_x],
             R"rgx([Aa]ssert.*uid<ODDims>\(m_element_end\).*uid<ODDims>\(odomain\.m_element_end\).*)rgx");
 #endif

@@ -55,6 +55,8 @@ inline constexpr ElementType const& get_or(
     return tuple.template get_or<QueryTag>(default_value);
 }
 
+namespace detail {
+
 /// Unary operators: +, -
 
 template <class ElementType, class... Tags>
@@ -165,6 +167,8 @@ constexpr inline auto operator*(
     return detail::TaggedVector<RElementType, Tags...>((lhs * get<Tags>(rhs))...);
 }
 
+} // namespace detail
+
 template <class... QueryTags, class ElementType, class... Tags>
 inline constexpr detail::TaggedVector<ElementType, QueryTags...> select(
         detail::TaggedVector<ElementType, Tags...> const& arr) noexcept
@@ -178,6 +182,8 @@ inline constexpr detail::TaggedVector<ElementType, QueryTags...> select(
 {
     return detail::TaggedVector<ElementType, QueryTags...>(std::move(arr));
 }
+
+namespace detail {
 
 template <class QueryTag, class ElementType, class HeadTag, class... TailTags>
 constexpr detail::TaggedVector<ElementType, QueryTag> const& take_impl(
@@ -203,9 +209,6 @@ constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
 {
     return take_impl<QueryTag>(tags...);
 }
-
-
-namespace detail {
 
 
 template <class T>

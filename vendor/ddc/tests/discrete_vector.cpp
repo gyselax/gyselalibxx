@@ -46,25 +46,25 @@ TEST(DiscreteVectorTest, ExternalBinaryOperatorPlus)
     DVectXYZ result4(dxz + dxyz);
     DVectXYZ result5(dxyz + dxyz2);
 
-    ASSERT_EQ(ddc::get<DDimX>(result1), dv_x + dv2_x);
-    ASSERT_EQ(ddc::get<DDimY>(result1), dv_y);
-    ASSERT_EQ(ddc::get<DDimZ>(result1), dv_z);
+    EXPECT_EQ(ddc::get<DDimX>(result1), dv_x + dv2_x);
+    EXPECT_EQ(ddc::get<DDimY>(result1), dv_y);
+    EXPECT_EQ(ddc::get<DDimZ>(result1), dv_z);
 
-    ASSERT_EQ(ddc::get<DDimX>(result2), dv_x + dv2_x);
-    ASSERT_EQ(ddc::get<DDimY>(result2), dv_y);
-    ASSERT_EQ(ddc::get<DDimZ>(result2), dv_z);
+    EXPECT_EQ(ddc::get<DDimX>(result2), dv_x + dv2_x);
+    EXPECT_EQ(ddc::get<DDimY>(result2), dv_y);
+    EXPECT_EQ(ddc::get<DDimZ>(result2), dv_z);
 
-    ASSERT_EQ(ddc::get<DDimX>(result3), dv_x + dv2_x);
-    ASSERT_EQ(ddc::get<DDimY>(result3), dv_y);
-    ASSERT_EQ(ddc::get<DDimZ>(result3), dv_z + dv2_z);
+    EXPECT_EQ(ddc::get<DDimX>(result3), dv_x + dv2_x);
+    EXPECT_EQ(ddc::get<DDimY>(result3), dv_y);
+    EXPECT_EQ(ddc::get<DDimZ>(result3), dv_z + dv2_z);
 
-    ASSERT_EQ(ddc::get<DDimX>(result4), dv_x + dv2_x);
-    ASSERT_EQ(ddc::get<DDimY>(result4), dv_y);
-    ASSERT_EQ(ddc::get<DDimZ>(result4), dv_z + dv2_z);
+    EXPECT_EQ(ddc::get<DDimX>(result4), dv_x + dv2_x);
+    EXPECT_EQ(ddc::get<DDimY>(result4), dv_y);
+    EXPECT_EQ(ddc::get<DDimZ>(result4), dv_z + dv2_z);
 
-    ASSERT_EQ(ddc::get<DDimX>(result5), dv_x + dv2_x);
-    ASSERT_EQ(ddc::get<DDimY>(result5), dv_y + dv2_y);
-    ASSERT_EQ(ddc::get<DDimZ>(result5), dv_z + dv2_z);
+    EXPECT_EQ(ddc::get<DDimX>(result5), dv_x + dv2_x);
+    EXPECT_EQ(ddc::get<DDimY>(result5), dv_y + dv2_y);
+    EXPECT_EQ(ddc::get<DDimZ>(result5), dv_z + dv2_z);
 }
 
 TEST(DiscreteVectorTest, ExternalBinaryOperatorMinus)
@@ -86,23 +86,23 @@ TEST(DiscreteVectorTest, ExternalBinaryOperatorMinus)
     DVectXYZ result4(dxz - dxyz);
     DVectXYZ result5(dxyz - dxyz2);
 
-    ASSERT_EQ(ddc::get<DDimX>(result1), dv_x - dv2_x);
-    ASSERT_EQ(ddc::get<DDimY>(result1), dv_y);
-    ASSERT_EQ(ddc::get<DDimZ>(result1), dv_z);
+    EXPECT_EQ(ddc::get<DDimX>(result1), dv_x - dv2_x);
+    EXPECT_EQ(ddc::get<DDimY>(result1), dv_y);
+    EXPECT_EQ(ddc::get<DDimZ>(result1), dv_z);
 
-    ASSERT_EQ(ddc::get<DDimX>(result2), -dv_x + dv2_x);
-    ASSERT_EQ(ddc::get<DDimY>(result2), -dv_y);
-    ASSERT_EQ(ddc::get<DDimZ>(result2), -dv_z);
+    EXPECT_EQ(ddc::get<DDimX>(result2), -dv_x + dv2_x);
+    EXPECT_EQ(ddc::get<DDimY>(result2), -dv_y);
+    EXPECT_EQ(ddc::get<DDimZ>(result2), -dv_z);
 
-    ASSERT_EQ(ddc::get<DDimX>(result3), dv_x - dv2_x);
-    ASSERT_EQ(ddc::get<DDimY>(result3), dv_y);
-    ASSERT_EQ(ddc::get<DDimZ>(result3), dv_z - dv2_z);
+    EXPECT_EQ(ddc::get<DDimX>(result3), dv_x - dv2_x);
+    EXPECT_EQ(ddc::get<DDimY>(result3), dv_y);
+    EXPECT_EQ(ddc::get<DDimZ>(result3), dv_z - dv2_z);
 
-    ASSERT_EQ(ddc::get<DDimX>(result4), -dv_x + dv2_x);
-    ASSERT_EQ(ddc::get<DDimY>(result4), -dv_y);
-    ASSERT_EQ(ddc::get<DDimZ>(result4), -dv_z + dv2_z);
+    EXPECT_EQ(ddc::get<DDimX>(result4), -dv_x + dv2_x);
+    EXPECT_EQ(ddc::get<DDimY>(result4), -dv_y);
+    EXPECT_EQ(ddc::get<DDimZ>(result4), -dv_z + dv2_z);
 
-    ASSERT_EQ(ddc::get<DDimX>(result5), dv_x - dv2_x);
-    ASSERT_EQ(ddc::get<DDimY>(result5), dv_y - dv2_y);
-    ASSERT_EQ(ddc::get<DDimZ>(result5), dv_z - dv2_z);
+    EXPECT_EQ(ddc::get<DDimX>(result5), dv_x - dv2_x);
+    EXPECT_EQ(ddc::get<DDimY>(result5), dv_y - dv2_y);
+    EXPECT_EQ(ddc::get<DDimZ>(result5), dv_z - dv2_z);
 }

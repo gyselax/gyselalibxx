@@ -117,7 +117,7 @@ void Interpolation_on_random_coord(
 
             random_coords(irp) = CoordRP(
                     coord_r + delta_coord_r * random_factor_r,
-                    fmod(coord_p + delta_coord_p * random_factor_p, 2 * M_PI));
+                    CoordP(fmod(coord_p + delta_coord_p * random_factor_p, 2 * M_PI)));
         }
     });
 

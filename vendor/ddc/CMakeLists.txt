@@ -9,6 +9,7 @@ option(BUILD_BENCHMARKS      "Build DDC benchmarks." OFF)
 option(BUILD_DOCUMENTATION   "Build DDC documentation/website" OFF)
 option(BUILD_EXAMPLES        "Build DDC examples" ON)
 option(DDC_BUILD_PDI_WRAPPER "Build DDC PDI wrapper" ON)
+option(DDC_ENABLE_DOUBLE     "Build DDC with double precision support, float is used otherwise" ON)
 option(HIP_FOR_NVIDIA 		 "Use the HIP wrapper for CUDA on NVIDIA plateforms, for development purpose" OFF)
 if(NOT(Kokkos_ENABLE_CUDA) AND HIP_FOR_NVIDIA)
 	message(FATAL_ERROR "Kokkos_ENABLE_CUDA has to be ON to use HIP wrapper on NVIDIA plateforms")
@@ -202,6 +203,9 @@ target_compile_definitions(DDC
 	INTERFACE
 		MDSPAN_USE_PAREN_OPERATOR=1
 )
+if("${DDC_ENABLE_DOUBLE}")
+	target_compile_definitions(DDC INTERFACE DDC_ENABLE_DOUBLE)
+endif()
 add_library(DDC::DDC ALIAS DDC)
 install(
 	TARGETS DDC
