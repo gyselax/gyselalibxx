@@ -13,6 +13,7 @@
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_space.hpp"
 #include "ddc/discrete_vector.hpp"
+#include "ddc/real_type.hpp"
 
 namespace ddc {
 
@@ -43,9 +44,9 @@ public:
         friend class Impl;
 
     private:
-        continuous_element_type m_origin {0.};
+        continuous_element_type m_origin {0};
 
-        double m_step {1.};
+        Real m_step {1};
 
         std::size_t m_n_period {2};
 
@@ -72,7 +73,7 @@ public:
          * @param step   the real distance between two points of mesh distance 1
          * @param n_period   the number of steps in a period
          */
-        constexpr Impl(continuous_element_type origin, double step, std::size_t n_period)
+        constexpr Impl(continuous_element_type origin, Real step, std::size_t n_period)
             : m_origin(origin)
             , m_step(step)
             , m_n_period(n_period)
@@ -96,7 +97,7 @@ public:
         }
 
         /// @brief Spacing step of the mesh
-        constexpr double step() const
+        constexpr Real step() const
         {
             return m_step;
         }
@@ -169,7 +170,7 @@ public:
         assert(a < b);
         assert(n > 1);
         assert(n_period > 1);
-        double discretization_step {(b - a) / (n - 1)};
+        Real discretization_step {(b - a) / (n - 1)};
         Impl<Kokkos::HostSpace>
                 disc(a - n_ghosts_before.value() * discretization_step,
                      discretization_step,
@@ -260,7 +261,7 @@ DDC_INLINE_FUNCTION std::
 
 /// @brief Spacing step of the mesh
 template <class DDim>
-DDC_INLINE_FUNCTION std::enable_if_t<is_periodic_sampling_v<DDim>, double> step() noexcept
+DDC_INLINE_FUNCTION std::enable_if_t<is_periodic_sampling_v<DDim>, Real> step() noexcept
 {
     return discrete_space<DDim>().step();
 }

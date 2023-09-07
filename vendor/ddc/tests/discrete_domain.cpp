@@ -43,17 +43,17 @@ using DDomZY = ddc::DiscreteDomain<DDimZ, DDimY>;
 
 static DElemX constexpr lbound_x(50);
 static DVectX constexpr nelems_x(3);
-static DElemX constexpr sentinel_x = lbound_x + nelems_x;
+static DElemX constexpr sentinel_x(lbound_x + nelems_x);
 static DElemX constexpr ubound_x(sentinel_x - 1); //TODO: correct type
 
 
 static DElemY constexpr lbound_y(4);
 static DVectY constexpr nelems_y(12);
-static DElemY constexpr sentinel_y = lbound_y + nelems_y;
+static DElemY constexpr sentinel_y(lbound_y + nelems_y);
 static DElemY constexpr ubound_y(sentinel_y - 1); //TODO: correct type
 
 
-static DElemXY constexpr lbound_x_y {lbound_x, lbound_y};
+static DElemXY constexpr lbound_x_y(lbound_x, lbound_y);
 static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
 static DElemXY constexpr ubound_x_y(ubound_x, ubound_y);
 
@@ -106,9 +106,9 @@ TEST(ProductMDomainTest, RangeFor)
     DDomX const dom = DDomX(lbound_x, nelems_x);
     DElemX ii = lbound_x;
     for (DElemX ix : dom) {
-        ASSERT_LE(lbound_x, ix);
+        EXPECT_LE(lbound_x, ix);
         EXPECT_EQ(ix, ii);
-        ASSERT_LE(ix, ubound_x);
+        EXPECT_LE(ix, ubound_x);
         ++ii.uid<DDimX>();
     }
 }
@@ -127,4 +127,42 @@ TEST(ProductMDomainTest, Diff)
     DDomZY const dom_z_y = DDomZY();
     auto const subdomain = ddc::remove_dims_of(dom_x_y, dom_z_y);
     EXPECT_EQ(subdomain, dom_x);
+}
+
+TEST(ProductMDomainTest, TakeFirst)
+{
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
+    EXPECT_EQ(dom_x_y.take_first(DVectXY(1, 4)), DDomXY(dom_x_y.front(), DVectXY(1, 4)));
+}
+
+TEST(ProductMDomainTest, TakeLast)
+{
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
+    EXPECT_EQ(
+            dom_x_y.take_last(DVectXY(1, 4)),
+            DDomXY(dom_x_y.front() + dom_x_y.extents() - DVectXY(1, 4), DVectXY(1, 4)));
+}
+
+TEST(ProductMDomainTest, RemoveFirst)
+{
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
+    EXPECT_EQ(
+            dom_x_y.remove_first(DVectXY(1, 4)),
+            DDomXY(dom_x_y.front() + DVectXY(1, 4), dom_x_y.extents() - DVectXY(1, 4)));
+}
+
+TEST(ProductMDomainTest, RemoveLast)
+{
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
+    EXPECT_EQ(
+            dom_x_y.remove_last(DVectXY(1, 4)),
+            DDomXY(dom_x_y.front(), dom_x_y.extents() - DVectXY(1, 4)));
+}
+
+TEST(ProductMDomainTest, Remove)
+{
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
+    EXPECT_EQ(
+            dom_x_y.remove(DVectXY(1, 4), DVectXY(1, 1)),
+            DDomXY(dom_x_y.front() + DVectXY(1, 4), dom_x_y.extents() - DVectXY(2, 5)));
 }

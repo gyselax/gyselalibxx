@@ -6,6 +6,7 @@
 
 #include <Kokkos_Core.hpp>
 
+#include "ddc/detail/kokkos.hpp"
 #include "ddc/detail/macros.hpp"
 #include "ddc/discrete_domain.hpp"
 #include "ddc/discrete_element.hpp"
@@ -137,7 +138,15 @@ public:
     {
     }
 
-    DDC_FORCEINLINE_FUNCTION void operator()(
+    KOKKOS_IMPL_FORCEINLINE void operator()(
+            index_type<DDims>... ids,
+            typename Reducer::value_type& a) const
+    {
+        a = reducer(a, functor(DiscreteElement<DDims...>(ids...)));
+    }
+
+    KOKKOS_FORCEINLINE_FUNCTION void operator()(
+            use_annotated_operator,
             index_type<DDims>... ids,
             typename Reducer::value_type& a) const
     {
@@ -161,15 +170,27 @@ inline T transform_reduce_kokkos(
         UnaryTransformOp const& transform) noexcept
 {
     T result = neutral;
-    Kokkos::parallel_reduce(
-            Kokkos::RangePolicy<ExecSpace>(
-                    select<DDim0>(domain).front().uid(),
-                    select<DDim0>(domain).back().uid() + 1),
-            TransformReducerKokkosLambdaAdapter<
-                    BinaryReductionOp,
-                    UnaryTransformOp,
-                    DDim0>(reduce, transform),
-            ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
+    if constexpr (need_annotated_operator<ExecSpace>()) {
+        Kokkos::parallel_reduce(
+                Kokkos::RangePolicy<ExecSpace, use_annotated_operator>(
+                        select<DDim0>(domain).front().uid(),
+                        select<DDim0>(domain).back().uid() + 1),
+                TransformReducerKokkosLambdaAdapter<
+                        BinaryReductionOp,
+                        UnaryTransformOp,
+                        DDim0>(reduce, transform),
+                ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
+    } else {
+        Kokkos::parallel_reduce(
+                Kokkos::RangePolicy<ExecSpace>(
+                        select<DDim0>(domain).front().uid(),
+                        select<DDim0>(domain).back().uid() + 1),
+                TransformReducerKokkosLambdaAdapter<
+                        BinaryReductionOp,
+                        UnaryTransformOp,
+                        DDim0>(reduce, transform),
+                ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
+    }
     return result;
 }
 
@@ -204,15 +225,30 @@ inline T transform_reduce_kokkos(
             end {select<DDim0>(domain).back().uid() + 1,
                  select<DDim1>(domain).back().uid() + 1,
                  (select<DDims>(domain).back().uid() + 1)...};
-    Kokkos::parallel_reduce(
-            Kokkos::MDRangePolicy<ExecSpace, Kokkos::Rank<2 + sizeof...(DDims)>>(begin, end),
-            TransformReducerKokkosLambdaAdapter<
-                    BinaryReductionOp,
-                    UnaryTransformOp,
-                    DDim0,
-                    DDim1,
-                    DDims...>(reduce, transform),
-            ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
+    if constexpr (need_annotated_operator<ExecSpace>()) {
+        Kokkos::parallel_reduce(
+                Kokkos::MDRangePolicy<
+                        ExecSpace,
+                        Kokkos::Rank<2 + sizeof...(DDims)>,
+                        use_annotated_operator>(begin, end),
+                TransformReducerKokkosLambdaAdapter<
+                        BinaryReductionOp,
+                        UnaryTransformOp,
+                        DDim0,
+                        DDim1,
+                        DDims...>(reduce, transform),
+                ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
+    } else {
+        Kokkos::parallel_reduce(
+                Kokkos::MDRangePolicy<ExecSpace, Kokkos::Rank<2 + sizeof...(DDims)>>(begin, end),
+                TransformReducerKokkosLambdaAdapter<
+                        BinaryReductionOp,
+                        UnaryTransformOp,
+                        DDim0,
+                        DDim1,
+                        DDims...>(reduce, transform),
+                ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
+    }
     return result;
 }
 
