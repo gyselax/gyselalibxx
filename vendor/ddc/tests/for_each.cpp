@@ -30,7 +30,7 @@ static DVectX constexpr nelems_x(10);
 static DElemY constexpr lbound_y(0);
 static DVectY constexpr nelems_y(12);
 
-static DElemXY constexpr lbound_x_y {lbound_x, lbound_y};
+static DElemXY constexpr lbound_x_y(lbound_x, lbound_y);
 static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
 
 } // namespace
@@ -41,7 +41,7 @@ TEST(ForEachSerialHost, Empty)
     std::vector<int> storage(dom.size(), 0);
     ddc::ChunkSpan<int, DDomX> view(storage.data(), dom);
     ddc::for_each(ddc::policies::serial_host, dom, [=](DElemX const ix) { view(ix) += 1; });
-    ASSERT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size())
+    EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size())
             << std::count(storage.begin(), storage.end(), 1) << std::endl;
 }
 
@@ -51,7 +51,7 @@ TEST(ForEachSerialHost, ZeroDimension)
     int storage = 0;
     ddc::ChunkSpan<int, DDom0D> view(&storage, dom);
     ddc::for_each(ddc::policies::serial_host, dom, [=](DElem0D const ii) { view(ii) += 1; });
-    ASSERT_EQ(storage, 1) << storage << std::endl;
+    EXPECT_EQ(storage, 1) << storage << std::endl;
 }
 
 TEST(ForEachSerialHost, OneDimension)
@@ -60,7 +60,7 @@ TEST(ForEachSerialHost, OneDimension)
     std::vector<int> storage(dom.size(), 0);
     ddc::ChunkSpan<int, DDomX> view(storage.data(), dom);
     ddc::for_each(ddc::policies::serial_host, dom, [=](DElemX const ix) { view(ix) += 1; });
-    ASSERT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
+    EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
 }
 
 TEST(ForEachSerialHost, TwoDimensions)
@@ -69,7 +69,7 @@ TEST(ForEachSerialHost, TwoDimensions)
     std::vector<int> storage(dom.size(), 0);
     ddc::ChunkSpan<int, DDomXY> view(storage.data(), dom);
     ddc::for_each(ddc::policies::serial_host, dom, [=](DElemXY const ixy) { view(ixy) += 1; });
-    ASSERT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
+    EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
 }
 
 TEST(ForEachParallelHost, OneDimension)
@@ -78,7 +78,7 @@ TEST(ForEachParallelHost, OneDimension)
     std::vector<int> storage(dom.size(), 0);
     ddc::ChunkSpan<int, DDomX> view(storage.data(), dom);
     ddc::for_each(ddc::policies::parallel_host, dom, [=](DElemX const ix) { view(ix) += 1; });
-    ASSERT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
+    EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
 }
 
 TEST(ForEachParallelHost, TwoDimensions)
@@ -87,7 +87,7 @@ TEST(ForEachParallelHost, TwoDimensions)
     std::vector<int> storage(dom.size(), 0);
     ddc::ChunkSpan<int, DDomXY> view(storage.data(), dom);
     ddc::for_each(ddc::policies::parallel_host, dom, [=](DElemXY const ixy) { view(ixy) += 1; });
-    ASSERT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
+    EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
 }
 
 namespace {
@@ -108,7 +108,7 @@ void TestForEachParallelDeviceOneDimension()
             dom.size(),
             KOKKOS_LAMBDA(std::size_t i, int& local_sum) { local_sum += ptr[i]; },
             Kokkos::Sum<int>(sum));
-    ASSERT_EQ(sum, dom.size());
+    EXPECT_EQ(sum, dom.size());
 }
 
 } // namespace
@@ -136,7 +136,7 @@ void TestForEachParallelDeviceTwoDimensions()
             dom.size(),
             KOKKOS_LAMBDA(std::size_t i, int& local_sum) { local_sum += ptr[i]; },
             Kokkos::Sum<int>(sum));
-    ASSERT_EQ(sum, dom.size());
+    EXPECT_EQ(sum, dom.size());
 }
 
 } // namespace
