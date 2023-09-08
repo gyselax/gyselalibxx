@@ -3,13 +3,14 @@
 #pragma once
 
 #include "ddc/detail/tagged_vector.hpp"
+#include "ddc/real_type.hpp"
 
 namespace ddc {
 
 /** A CoordinateElement the type of the scalar used to represent elements of coordinates in the
  * continuous space.
  */
-using CoordinateElement = double;
+using CoordinateElement = Real;
 
 /** A Coordinate represents a coordinate in the continuous space
  * 

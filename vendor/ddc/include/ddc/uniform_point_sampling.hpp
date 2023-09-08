@@ -13,6 +13,7 @@
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_space.hpp"
 #include "ddc/discrete_vector.hpp"
+#include "ddc/real_type.hpp"
 
 namespace ddc {
 
@@ -43,9 +44,9 @@ public:
         friend class Impl;
 
     private:
-        continuous_element_type m_origin {0.};
+        continuous_element_type m_origin {0};
 
-        double m_step {1.};
+        Real m_step {1};
 
     public:
         using discrete_dimension_type = UniformPointSampling;
@@ -68,7 +69,7 @@ public:
          * @param origin the real coordinate of mesh coordinate 0
          * @param step   the real distance between two points of mesh distance 1
          */
-        constexpr Impl(continuous_element_type origin, double step) : m_origin(origin), m_step(step)
+        constexpr Impl(continuous_element_type origin, Real step) : m_origin(origin), m_step(step)
         {
             assert(step > 0);
         }
@@ -88,7 +89,7 @@ public:
         }
 
         /// @brief Spacing step of the mesh
-        constexpr double step() const
+        constexpr Real step() const
         {
             return m_step;
         }
@@ -145,7 +146,7 @@ public:
         using discrete_domain_type = discrete_domain_type;
         assert(a < b);
         assert(n > 1);
-        double discretization_step {(b - a) / (n - 1)};
+        Real discretization_step {(b - a) / (n - 1)};
         Impl<Kokkos::HostSpace>
                 disc(a - n_ghosts_before.value() * discretization_step, discretization_step);
         discrete_domain_type ghosted_domain
@@ -240,7 +241,7 @@ DDC_INLINE_FUNCTION std::
 
 /// @brief Spacing step of the mesh
 template <class DDim>
-DDC_INLINE_FUNCTION std::enable_if_t<is_uniform_sampling_v<DDim>, double> step() noexcept
+DDC_INLINE_FUNCTION std::enable_if_t<is_uniform_sampling_v<DDim>, Real> step() noexcept
 {
     return discrete_space<DDim>().step();
 }

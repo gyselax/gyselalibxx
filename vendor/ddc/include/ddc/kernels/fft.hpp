@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <memory>
+
 #include <experimental/mdspan>
 
 #include <ddc/ddc.hpp>
@@ -429,11 +431,18 @@ void core(
     else if constexpr (std::is_same_v<ExecSpace, Kokkos::Cuda>) {
         cudaStream_t stream = execSpace.cuda_stream();
 
-        cufftHandle plan = -1;
-        cufftResult cufft_rt = cufftCreate(&plan);
-        cufftSetStream(plan, stream);
+        cufftHandle unmanaged_plan = -1;
+        cufftResult cufft_rt = cufftCreate(&unmanaged_plan);
+
+        if (cufft_rt != CUFFT_SUCCESS)
+            throw std::runtime_error("cufftCreate failed");
+
+        std::unique_ptr<cufftHandle, std::function<void(cufftHandle*)>> const
+                managed_plan(&unmanaged_plan, [](cufftHandle* handle) { cufftDestroy(*handle); });
+
+        cufftSetStream(unmanaged_plan, stream);
         cufft_rt = cufftPlanMany(
-                &plan, // plan handle
+                &unmanaged_plan, // plan handle
                 sizeof...(X),
                 n.data(), // Nx, Ny...
                 NULL,
@@ -450,12 +459,11 @@ void core(
 
         cufft_rt = _cufftExec<Tin, Tout>(
                 kwargs.direction == ddc::FFT_Direction::FORWARD ? CUFFT_FORWARD : CUFFT_INVERSE,
-                plan,
+                unmanaged_plan,
                 reinterpret_cast<typename _cufft_type<Tin>::type*>(in_data),
                 reinterpret_cast<typename _cufft_type<Tout>::type*>(out_data));
         if (cufft_rt != CUFFT_SUCCESS)
             throw std::runtime_error("cufftExec failed");
-        cufftDestroy(plan);
         // std::cout << "performed with cufft";
     }
 #endif
@@ -463,11 +471,18 @@ void core(
     else if constexpr (std::is_same_v<ExecSpace, Kokkos::HIP>) {
         hipStream_t stream = execSpace.hip_stream();
 
-        hipfftHandle plan;
-        hipfftResult hipfft_rt = hipfftCreate(&plan);
-        hipfftSetStream(plan, stream);
+        hipfftHandle unmanaged_plan;
+        hipfftResult hipfft_rt = hipfftCreate(&unmanaged_plan);
+
+        if (hipfft_rt != HIPFFT_SUCCESS)
+            throw std::runtime_error("hipfftCreate failed");
+
+        std::unique_ptr<hipfftHandle, std::function<void(hipfftHandle*)>> const
+                managed_plan(&unmanaged_plan, [](hipfftHandle* handle) { hipfftDestroy(*handle); });
+
+        hipfftSetStream(unmanaged_plan, stream);
         hipfft_rt = hipfftPlanMany(
-                &plan, // plan handle
+                &unmanaged_plan, // plan handle
                 sizeof...(X),
                 n.data(), // Nx, Ny...
                 NULL,
@@ -484,12 +499,11 @@ void core(
 
         hipfft_rt = _hipfftExec<Tin, Tout>(
                 kwargs.direction == ddc::FFT_Direction::FORWARD ? HIPFFT_FORWARD : HIPFFT_BACKWARD,
-                plan,
+                unmanaged_plan,
                 reinterpret_cast<typename _hipfft_type<Tin>::type*>(in_data),
                 reinterpret_cast<typename _hipfft_type<Tout>::type*>(out_data));
         if (hipfft_rt != HIPFFT_SUCCESS)
             throw std::runtime_error("hipfftExec failed");
-        hipfftDestroy(plan);
         // std::cout << "performed with hipfft";
     }
 #endif
