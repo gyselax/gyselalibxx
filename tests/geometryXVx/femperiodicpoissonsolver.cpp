@@ -36,10 +36,10 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
-    ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
-    ddc::DiscreteDomain<IDimX> interpolation_domain_x(InterpPointsX::get_domain());
-    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(InterpPointsVx::get_domain());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
+    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
+    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
 
     SplineXBuilder const builder_x(interpolation_domain_x);
 

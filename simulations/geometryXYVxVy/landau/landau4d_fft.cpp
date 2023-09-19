@@ -94,13 +94,13 @@ int main(int argc, char** argv)
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
-    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
-    ddc::DiscreteDomain<IDimX> interpolation_domain_x(InterpPointsX::get_domain());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
+    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
     SplineXBuilder const builder_x(interpolation_domain_x);
 
     ddc::init_discrete_space<BSplinesY>(y_min, y_max, y_size);
-    ddc::init_discrete_space<IDimY>(InterpPointsY::get_sampling());
-    ddc::DiscreteDomain<IDimY> interpolation_domain_y(InterpPointsY::get_domain());
+    ddc::init_discrete_space<IDimY>(SplineInterpPointsY::get_sampling());
+    ddc::DiscreteDomain<IDimY> interpolation_domain_y(SplineInterpPointsY::get_domain());
     SplineYBuilder const builder_y(interpolation_domain_y);
 
     ddc::DiscreteDomain<IDimX, IDimY>
@@ -108,13 +108,13 @@ int main(int argc, char** argv)
     SplineXYBuilder const builder_xy(interpolation_domain_xy);
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
-    ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
-    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(InterpPointsVx::get_domain());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
+    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
     SplineVxBuilder const builder_vx(interpolation_domain_vx);
 
     ddc::init_discrete_space<BSplinesVy>(vy_min, vy_max, vy_size);
-    ddc::init_discrete_space<IDimVy>(InterpPointsVy::get_sampling());
-    ddc::DiscreteDomain<IDimVy> interpolation_domain_vy(InterpPointsVy::get_domain());
+    ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling());
+    ddc::DiscreteDomain<IDimVy> interpolation_domain_vy(SplineInterpPointsVy::get_domain());
     SplineVyBuilder const builder_vy(interpolation_domain_vy);
 
     ddc::DiscreteDomain<IDimVx, IDimVy>
