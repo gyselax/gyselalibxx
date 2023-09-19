@@ -15,23 +15,47 @@
 
 #include <species_info.hpp>
 
+/**
+ * @brief A class which describes the real space in the first spatial direction X.
+ */
 struct RDimX
 {
+    /**
+     * @brief A boolean indicating if the dimension is periodic.
+     */
     static bool constexpr PERIODIC = true;
 };
 
+/**
+ * @brief A class which describes the real space in the second spatial direction Y.
+ */
 struct RDimY
 {
+    /**
+     * @brief A boolean indicating if the dimension is periodic.
+     */
     static bool constexpr PERIODIC = true;
 };
 
+/**
+ * @brief A class which describes the real space in the second velocity direction X.
+ */
 struct RDimVx
 {
+    /**
+     * @brief A boolean indicating if the dimension is periodic.
+     */
     static bool constexpr PERIODIC = false;
 };
 
+/**
+ * @brief A class which describes the real space in the second velocity direction Y.
+ */
 struct RDimVy
 {
+    /**
+     * @brief A boolean indicating if the dimension is periodic.
+     */
     static bool constexpr PERIODIC = false;
 };
 
@@ -48,30 +72,84 @@ int constexpr BSDegreeY = 3;
 int constexpr BSDegreeVx = 3;
 int constexpr BSDegreeVy = 3;
 
-using BSplinesX = UniformBSplines<RDimX, BSDegreeX>;
-using BSplinesY = UniformBSplines<RDimY, BSDegreeY>;
+bool constexpr BsplineOnUniformCellsX = true;
+bool constexpr BsplineOnUniformCellsY = true;
 
-using BSplinesVx = UniformBSplines<RDimVx, BSDegreeVx>;
-using BSplinesVy = UniformBSplines<RDimVy, BSDegreeVy>;
+bool constexpr BsplineOnUniformCellsVx = true;
+bool constexpr BsplineOnUniformCellsVy = true;
+
+using BSplinesX = std::conditional_t<
+        BsplineOnUniformCellsX,
+        UniformBSplines<RDimX, BSDegreeX>,
+        NonUniformBSplines<RDimX, BSDegreeX>>;
+using BSplinesY = std::conditional_t<
+        BsplineOnUniformCellsY,
+        UniformBSplines<RDimY, BSDegreeY>,
+        NonUniformBSplines<RDimY, BSDegreeY>>;
+
+using BSplinesVx = std::conditional_t<
+        BsplineOnUniformCellsVx,
+        UniformBSplines<RDimVx, BSDegreeVx>,
+        NonUniformBSplines<RDimVx, BSDegreeVx>>;
+using BSplinesVy = std::conditional_t<
+        BsplineOnUniformCellsVy,
+        UniformBSplines<RDimVy, BSDegreeVy>,
+        NonUniformBSplines<RDimVy, BSDegreeVy>>;
 
 BoundCond constexpr SplineXBoundary = BoundCond::PERIODIC;
 BoundCond constexpr SplineYBoundary = BoundCond::PERIODIC;
+BoundCond constexpr SplineVxBoundary = BoundCond::HERMITE;
+BoundCond constexpr SplineVyBoundary = BoundCond::HERMITE;
+
+bool constexpr UniformMeshX = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsX,
+        SplineXBoundary,
+        SplineXBoundary,
+        BSDegreeX);
+bool constexpr UniformMeshY = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsY,
+        SplineYBoundary,
+        SplineYBoundary,
+        BSDegreeY);
+bool constexpr UniformMeshVx = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsVx,
+        SplineVxBoundary,
+        SplineVxBoundary,
+        BSDegreeVx);
+bool constexpr UniformMeshVy = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsVy,
+        SplineVyBoundary,
+        SplineVyBoundary,
+        BSDegreeVy);
 
 // IDim definition
 using IDimSp = SpeciesInformation;
-using InterpPointsX = GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
-using IDimX = typename InterpPointsX::interpolation_mesh_type;
+using IDimX = std::conditional_t<
+        UniformMeshX,
+        ddc::UniformPointSampling<RDimX>,
+        ddc::NonUniformPointSampling<RDimX>>;
+using IDimY = std::conditional_t<
+        UniformMeshY,
+        ddc::UniformPointSampling<RDimY>,
+        ddc::NonUniformPointSampling<RDimY>>;
+using IDimVx = std::conditional_t<
+        UniformMeshVx,
+        ddc::UniformPointSampling<RDimVx>,
+        ddc::NonUniformPointSampling<RDimVx>>;
+using IDimVy = std::conditional_t<
+        UniformMeshVy,
+        ddc::UniformPointSampling<RDimVy>,
+        ddc::NonUniformPointSampling<RDimVy>>;
 
-using InterpPointsY = GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
-using IDimY = typename InterpPointsY::interpolation_mesh_type;
-
-using InterpPointsVx
+// IDim initialisers
+using SplineInterpPointsX
+        = GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+using SplineInterpPointsY
+        = GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
+using SplineInterpPointsVx
         = GrevilleInterpolationPoints<BSplinesVx, BoundCond::HERMITE, BoundCond::HERMITE>;
-using IDimVx = typename InterpPointsVx::interpolation_mesh_type;
-
-using InterpPointsVy
+using SplineInterpPointsVy
         = GrevilleInterpolationPoints<BSplinesVy, BoundCond::HERMITE, BoundCond::HERMITE>;
-using IDimVy = typename InterpPointsVy::interpolation_mesh_type;
 
 // SplineBuilder and SplineEvaluator definition
 using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;

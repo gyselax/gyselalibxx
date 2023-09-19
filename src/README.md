@@ -4,7 +4,8 @@ The `src/` folder contains all the code necessary to build a gyrokinetic semi-La
 
 <!-- - [advection](./advection/README.md) - Code describing semi-Lagrangian advection routines. -->
 - [geometryRTheta](./geometryRTheta/README.md) - Code describing methods which are specific to a 2D curvilinear geometry containing a singular point.
-<!-- - [geometryXVx](./geometryXVx/README.md) - Code describing methods which are specific to a simulation with 1 spatial dimension and 1 velocity dimension. -->
+- [geometryXVx](./geometryXVx/README.md) - Code describing methods which are specific to a simulation with 1 spatial dimension and 1 velocity dimension.
+- [geometryXYVxVy](./geometryXYVxVy/README.md) - Code describing methods which are specific to a simulation with 2 spatial dimensions and 2 velocity dimension.
 - [interpolation](./interpolation/README.md) - Code describing interpolation methods.
 <!-- - [paraconfpp](./paraconfpp/README.md) - Paraconf utility functions. -->
 <!-- - [quadrature](./quadrature/README.md) - Code describing different quadrature methods. -->
