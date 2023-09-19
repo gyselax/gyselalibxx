@@ -108,70 +108,398 @@ $(document).ready(function(){initNavTree('classSplineBuilder.html',''); initResi
 <div class="title">SplineBuilder&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class for creating a spline approximation of a function.  
+ <a href="classSplineBuilder.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a8e306ff751612410e7c80db1eeabd0c8"><td class="memItemLeft" align="right" valign="top"><a id="a8e306ff751612410e7c80db1eeabd0c8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>bsplines_type</b> = BSplines</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8">bsplines_type</a> = BSplines</td></tr>
+<tr class="memdesc:a8e306ff751612410e7c80db1eeabd0c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the BSplines which are compatible with this class. <br /></td></tr>
 <tr class="separator:a8e306ff751612410e7c80db1eeabd0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a277cde780e9a94f7f2dbc8a3fef5e4ff"><td class="memItemLeft" align="right" valign="top"><a id="a277cde780e9a94f7f2dbc8a3fef5e4ff"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>mesh_type</b> = interpolation_mesh_type</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a277cde780e9a94f7f2dbc8a3fef5e4ff">mesh_type</a> = interpolation_mesh_type</td></tr>
+<tr class="memdesc:a277cde780e9a94f7f2dbc8a3fef5e4ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the interpolation mesh used by this class. <br /></td></tr>
 <tr class="separator:a277cde780e9a94f7f2dbc8a3fef5e4ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec9bd498c486b22848aeb026de467fcf"><td class="memItemLeft" align="right" valign="top"><a id="aec9bd498c486b22848aeb026de467fcf"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>interpolation_domain_type</b> = ddc::DiscreteDomain&lt; interpolation_mesh_type &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#aec9bd498c486b22848aeb026de467fcf">interpolation_domain_type</a> = ddc::DiscreteDomain&lt; interpolation_mesh_type &gt;</td></tr>
+<tr class="memdesc:aec9bd498c486b22848aeb026de467fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the domain for the interpolation mesh used by this class. <br /></td></tr>
 <tr class="separator:aec9bd498c486b22848aeb026de467fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa1c79d6ada6f3253febfc994b9a2d55e"><td class="memItemLeft" align="right" valign="top"><a id="aa1c79d6ada6f3253febfc994b9a2d55e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SplineBuilder</b> (interpolation_domain_type const &amp;interpolation_domain)</td></tr>
+<tr class="memitem:aa1c79d6ada6f3253febfc994b9a2d55e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#aa1c79d6ada6f3253febfc994b9a2d55e">SplineBuilder</a> (<a class="el" href="classSplineBuilder.html#aec9bd498c486b22848aeb026de467fcf">interpolation_domain_type</a> const &amp;<a class="el" href="classSplineBuilder.html#aea5b09d866bfabd34f93dc7244061e51">interpolation_domain</a>)</td></tr>
+<tr class="memdesc:aa1c79d6ada6f3253febfc994b9a2d55e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a>.  <a href="classSplineBuilder.html#aa1c79d6ada6f3253febfc994b9a2d55e">More...</a><br /></td></tr>
 <tr class="separator:aa1c79d6ada6f3253febfc994b9a2d55e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff30d3c9ee7e83246b37719a0866874c"><td class="memItemLeft" align="right" valign="top"><a id="aff30d3c9ee7e83246b37719a0866874c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SplineBuilder</b> (<a class="el" href="classSplineBuilder.html">SplineBuilder</a> const &amp;x)=delete</td></tr>
+<tr class="memitem:aff30d3c9ee7e83246b37719a0866874c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#aff30d3c9ee7e83246b37719a0866874c">SplineBuilder</a> (<a class="el" href="classSplineBuilder.html">SplineBuilder</a> const &amp;x)=delete</td></tr>
+<tr class="memdesc:aff30d3c9ee7e83246b37719a0866874c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a> by copy.  <a href="classSplineBuilder.html#aff30d3c9ee7e83246b37719a0866874c">More...</a><br /></td></tr>
 <tr class="separator:aff30d3c9ee7e83246b37719a0866874c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad62a92276f053ebdfcc38f1ede5b7198"><td class="memItemLeft" align="right" valign="top"><a id="ad62a92276f053ebdfcc38f1ede5b7198"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SplineBuilder</b> (<a class="el" href="classSplineBuilder.html">SplineBuilder</a> &amp;&amp;x)=default</td></tr>
+<tr class="memitem:ad62a92276f053ebdfcc38f1ede5b7198"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#ad62a92276f053ebdfcc38f1ede5b7198">SplineBuilder</a> (<a class="el" href="classSplineBuilder.html">SplineBuilder</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:ad62a92276f053ebdfcc38f1ede5b7198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a> by copy.  <a href="classSplineBuilder.html#ad62a92276f053ebdfcc38f1ede5b7198">More...</a><br /></td></tr>
 <tr class="separator:ad62a92276f053ebdfcc38f1ede5b7198"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a002107d0fdbfd399afca2f822e048f4f"><td class="memItemLeft" align="right" valign="top"><a id="a002107d0fdbfd399afca2f822e048f4f"></a>
 <a class="el" href="classSplineBuilder.html">SplineBuilder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classSplineBuilder.html">SplineBuilder</a> const &amp;x)=delete</td></tr>
 <tr class="separator:a002107d0fdbfd399afca2f822e048f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2763318a2269b27a7a051200bbc5b659"><td class="memItemLeft" align="right" valign="top"><a id="a2763318a2269b27a7a051200bbc5b659"></a>
-<a class="el" href="classSplineBuilder.html">SplineBuilder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classSplineBuilder.html">SplineBuilder</a> &amp;&amp;x)=default</td></tr>
+<tr class="memitem:a2763318a2269b27a7a051200bbc5b659"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSplineBuilder.html">SplineBuilder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a2763318a2269b27a7a051200bbc5b659">operator=</a> (<a class="el" href="classSplineBuilder.html">SplineBuilder</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:a2763318a2269b27a7a051200bbc5b659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a>.  <a href="classSplineBuilder.html#a2763318a2269b27a7a051200bbc5b659">More...</a><br /></td></tr>
 <tr class="separator:a2763318a2269b27a7a051200bbc5b659"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60ece27168e990dd396dd059ce238267"><td class="memItemLeft" align="right" valign="top"><a id="a60ece27168e990dd396dd059ce238267"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; bsplines_type &gt;&gt; spline, ddc::ChunkSpan&lt; double const, interpolation_domain_type &gt; vals, std::optional&lt; CDSpan1D &gt; const derivs_xmin=std::nullopt, std::optional&lt; CDSpan1D &gt; const derivs_xmax=std::nullopt) const</td></tr>
+<tr class="memitem:a60ece27168e990dd396dd059ce238267"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a60ece27168e990dd396dd059ce238267">operator()</a> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; <a class="el" href="classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8">bsplines_type</a> &gt;&gt; spline, ddc::ChunkSpan&lt; double const, <a class="el" href="classSplineBuilder.html#aec9bd498c486b22848aeb026de467fcf">interpolation_domain_type</a> &gt; vals, std::optional&lt; CDSpan1D &gt; const derivs_xmin=std::nullopt, std::optional&lt; CDSpan1D &gt; const derivs_xmax=std::nullopt) const</td></tr>
+<tr class="memdesc:a60ece27168e990dd396dd059ce238267"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a spline approximation of a function.  <a href="classSplineBuilder.html#a60ece27168e990dd396dd059ce238267">More...</a><br /></td></tr>
 <tr class="separator:a60ece27168e990dd396dd059ce238267"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea5b09d866bfabd34f93dc7244061e51"><td class="memItemLeft" align="right" valign="top"><a id="aea5b09d866bfabd34f93dc7244061e51"></a>
-interpolation_domain_type const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>interpolation_domain</b> () const noexcept</td></tr>
+<tr class="memitem:aea5b09d866bfabd34f93dc7244061e51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSplineBuilder.html#aec9bd498c486b22848aeb026de467fcf">interpolation_domain_type</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#aea5b09d866bfabd34f93dc7244061e51">interpolation_domain</a> () const noexcept</td></tr>
+<tr class="memdesc:aea5b09d866bfabd34f93dc7244061e51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the domain from which the approximation is defined.  <a href="classSplineBuilder.html#aea5b09d866bfabd34f93dc7244061e51">More...</a><br /></td></tr>
 <tr class="separator:aea5b09d866bfabd34f93dc7244061e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d211caa5dd227dd6d05947484d1b6e9"><td class="memItemLeft" align="right" valign="top"><a id="a2d211caa5dd227dd6d05947484d1b6e9"></a>
-ddc::DiscreteDomain&lt; BSplines &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>spline_domain</b> () const noexcept</td></tr>
+<tr class="memitem:a2d211caa5dd227dd6d05947484d1b6e9"><td class="memItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; BSplines &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9">spline_domain</a> () const noexcept</td></tr>
+<tr class="memdesc:a2d211caa5dd227dd6d05947484d1b6e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the domain on which the approximation is defined.  <a href="classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9">More...</a><br /></td></tr>
 <tr class="separator:a2d211caa5dd227dd6d05947484d1b6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a8c55b038757bcdf9ad2572897f4f836b"><td class="memItemLeft" align="right" valign="top"><a id="a8c55b038757bcdf9ad2572897f4f836b"></a>
-static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>s_odd</b> = BSplines::degree() % 2</td></tr>
+static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a8c55b038757bcdf9ad2572897f4f836b">s_odd</a> = BSplines::degree() % 2</td></tr>
+<tr class="memdesc:a8c55b038757bcdf9ad2572897f4f836b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates if the degree of the splines is odd or even. <br /></td></tr>
 <tr class="separator:a8c55b038757bcdf9ad2572897f4f836b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e27acbbf2fc5f1400ce4a08c810d52e"><td class="memItemLeft" align="right" valign="top"><a id="a6e27acbbf2fc5f1400ce4a08c810d52e"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>s_nbe_xmin</b> = n_boundary_equations(BcXmin, BSplines::degree())</td></tr>
+static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a6e27acbbf2fc5f1400ce4a08c810d52e">s_nbe_xmin</a> = n_boundary_equations(BcXmin, BSplines::degree())</td></tr>
+<tr class="memdesc:a6e27acbbf2fc5f1400ce4a08c810d52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of equations which define the boundary conditions at the lower bound. <br /></td></tr>
 <tr class="separator:a6e27acbbf2fc5f1400ce4a08c810d52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac37e871f135ba9da956d8faacff00032"><td class="memItemLeft" align="right" valign="top"><a id="ac37e871f135ba9da956d8faacff00032"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>s_nbe_xmax</b> = n_boundary_equations(BcXmax, BSplines::degree())</td></tr>
+static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#ac37e871f135ba9da956d8faacff00032">s_nbe_xmax</a> = n_boundary_equations(BcXmax, BSplines::degree())</td></tr>
+<tr class="memdesc:ac37e871f135ba9da956d8faacff00032"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of equations which define the boundary conditions at the upper bound. <br /></td></tr>
 <tr class="separator:ac37e871f135ba9da956d8faacff00032"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad95603fd1144bd421f0ab85c8e8985a8"><td class="memItemLeft" align="right" valign="top"><a id="ad95603fd1144bd421f0ab85c8e8985a8"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>s_nbc_xmin</b> = n_user_input(BcXmin, BSplines::degree())</td></tr>
+<tr class="memitem:ad95603fd1144bd421f0ab85c8e8985a8"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#ad95603fd1144bd421f0ab85c8e8985a8">s_nbc_xmin</a> = n_user_input(BcXmin, BSplines::degree())</td></tr>
+<tr class="memdesc:ad95603fd1144bd421f0ab85c8e8985a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of boundary conditions which must be provided by the user at the lower bound.  <a href="classSplineBuilder.html#ad95603fd1144bd421f0ab85c8e8985a8">More...</a><br /></td></tr>
 <tr class="separator:ad95603fd1144bd421f0ab85c8e8985a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a750e366c0f6cff13ee6b09e84fbd7f39"><td class="memItemLeft" align="right" valign="top"><a id="a750e366c0f6cff13ee6b09e84fbd7f39"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>s_nbc_xmax</b> = n_user_input(BcXmax, BSplines::degree())</td></tr>
+<tr class="memitem:a750e366c0f6cff13ee6b09e84fbd7f39"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a750e366c0f6cff13ee6b09e84fbd7f39">s_nbc_xmax</a> = n_user_input(BcXmax, BSplines::degree())</td></tr>
+<tr class="memdesc:a750e366c0f6cff13ee6b09e84fbd7f39"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of boundary conditions which must be provided by the user at the upper bound.  <a href="classSplineBuilder.html#a750e366c0f6cff13ee6b09e84fbd7f39">More...</a><br /></td></tr>
 <tr class="separator:a750e366c0f6cff13ee6b09e84fbd7f39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d5e60f3a4050a4a54415835b65d03c8"><td class="memItemLeft" align="right" valign="top"><a id="a4d5e60f3a4050a4a54415835b65d03c8"></a>
-static constexpr BoundCond&#160;</td><td class="memItemRight" valign="bottom"><b>s_bc_xmin</b> = BcXmin</td></tr>
+static constexpr BoundCond&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a4d5e60f3a4050a4a54415835b65d03c8">s_bc_xmin</a> = BcXmin</td></tr>
+<tr class="memdesc:a4d5e60f3a4050a4a54415835b65d03c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The boundary condition implemented at the lower bound. <br /></td></tr>
 <tr class="separator:a4d5e60f3a4050a4a54415835b65d03c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecdea9406e7d85496bf6ed4c479d064d"><td class="memItemLeft" align="right" valign="top"><a id="aecdea9406e7d85496bf6ed4c479d064d"></a>
-static constexpr BoundCond&#160;</td><td class="memItemRight" valign="bottom"><b>s_bc_xmax</b> = BcXmax</td></tr>
+static constexpr BoundCond&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#aecdea9406e7d85496bf6ed4c479d064d">s_bc_xmax</a> = BcXmax</td></tr>
+<tr class="memdesc:aecdea9406e7d85496bf6ed4c479d064d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The boundary condition implemented at the upper bound. <br /></td></tr>
 <tr class="separator:aecdea9406e7d85496bf6ed4c479d064d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class BSplines, class interpolation_mesh_type, BoundCond BcXmin, BoundCond BcXmax&gt;<br />
+class SplineBuilder&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;</h3>
+
+<p>A class for creating a spline approximation of a function. </p>
+<p>A class which contains an operator () which can be used to build a spline approximation of a function. A spline approximation is represented by coeffecients stored in a Chunk of BSplines. The spline is constructed such that it respects the boundary conditions BcXmin and BcXmax, and it interpolates the function at the points on the interpolation_mesh associated with interpolation_mesh_type. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa1c79d6ada6f3253febfc994b9a2d55e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1c79d6ada6f3253febfc994b9a2d55e">&#9670;&nbsp;</a></span>SplineBuilder() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::<a class="el" href="classSplineBuilder.html">SplineBuilder</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSplineBuilder.html#aec9bd498c486b22848aeb026de467fcf">interpolation_domain_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>interpolation_domain</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a new <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">interpolation_domain</td><td>The domain on which points will be provided in order to create the spline approximation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aff30d3c9ee7e83246b37719a0866874c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff30d3c9ee7e83246b37719a0866874c">&#9670;&nbsp;</a></span>SplineBuilder() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::<a class="el" href="classSplineBuilder.html">SplineBuilder</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a new <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a> by copy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a> being copied. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad62a92276f053ebdfcc38f1ede5b7198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad62a92276f053ebdfcc38f1ede5b7198">&#9670;&nbsp;</a></span>SplineBuilder() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::<a class="el" href="classSplineBuilder.html">SplineBuilder</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a new <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a> by copy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a> being copied. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2763318a2269b27a7a051200bbc5b659"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2763318a2269b27a7a051200bbc5b659">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSplineBuilder.html">SplineBuilder</a>&amp; <a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy a <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a> being copied. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to this object. </dd></dl>
+
+</div>
+</div>
+<a id="a60ece27168e990dd396dd059ce238267"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60ece27168e990dd396dd059ce238267">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; <a class="el" href="classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8">bsplines_type</a> &gt;&gt;&#160;</td>
+          <td class="paramname"><em>spline</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ddc::ChunkSpan&lt; double const, <a class="el" href="classSplineBuilder.html#aec9bd498c486b22848aeb026de467fcf">interpolation_domain_type</a> &gt;&#160;</td>
+          <td class="paramname"><em>vals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::optional&lt; CDSpan1D &gt; const&#160;</td>
+          <td class="paramname"><em>derivs_xmin</em> = <code>std::nullopt</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::optional&lt; CDSpan1D &gt; const&#160;</td>
+          <td class="paramname"><em>derivs_xmax</em> = <code>std::nullopt</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Build a spline approximation of a function. </p>
+<p>Use the values of a function at known grid points (as specified by <a class="el" href="classSplineBuilder.html#aea5b09d866bfabd34f93dc7244061e51" title="Get the domain from which the approximation is defined.">SplineBuilder::interpolation_domain</a>) and the derivatives of the function at the boundaries (if necessary for the chosen boundary conditions) to calculate a spline approximation of a function.</p>
+<p>The spline approximation is stored as a ChunkSpan of coefficients associated with basis-splines.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">spline</td><td>The coefficients of the spline calculated by the function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">vals</td><td>The values of the function at the grid points. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_xmin</td><td>The values of the derivatives at the lower boundary. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_xmax</td><td>The values of the derivatives at the upper boundary. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aea5b09d866bfabd34f93dc7244061e51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea5b09d866bfabd34f93dc7244061e51">&#9670;&nbsp;</a></span>interpolation_domain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSplineBuilder.html#aec9bd498c486b22848aeb026de467fcf">interpolation_domain_type</a> const&amp; <a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::interpolation_domain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the domain from which the approximation is defined. </p>
+<p>Get the domain on which values of the function must be provided in order to build a spline approximation of the function.</p>
+<dl class="section return"><dt>Returns</dt><dd>The domain for the grid points. </dd></dl>
+
+</div>
+</div>
+<a id="a2d211caa5dd227dd6d05947484d1b6e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d211caa5dd227dd6d05947484d1b6e9">&#9670;&nbsp;</a></span>spline_domain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ddc::DiscreteDomain&lt;BSplines&gt; <a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::spline_domain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the domain on which the approximation is defined. </p>
+<p>Get the domain of the basis-splines for which the coefficients of the spline approximation must be calculated.</p>
+<dl class="section return"><dt>Returns</dt><dd>The domain for the splines. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad95603fd1144bd421f0ab85c8e8985a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad95603fd1144bd421f0ab85c8e8985a8">&#9670;&nbsp;</a></span>s_nbc_xmin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int <a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::s_nbc_xmin = n_user_input(BcXmin, BSplines::degree())</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of boundary conditions which must be provided by the user at the lower bound. </p>
+<p>This value is usually equal to s_nbe_xmin, but it may be difference if the chosen boundary conditions impose a specific value (e.g. no values need to be provided for Dirichlet boundary conditions). </p>
+
+</div>
+</div>
+<a id="a750e366c0f6cff13ee6b09e84fbd7f39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a750e366c0f6cff13ee6b09e84fbd7f39">&#9670;&nbsp;</a></span>s_nbc_xmax</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int <a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::s_nbc_xmax = n_user_input(BcXmax, BSplines::degree())</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of boundary conditions which must be provided by the user at the upper bound. </p>
+<p>This value is usually equal to s_nbe_xmin, but it may be difference if the chosen boundary conditions impose a specific value (e.g. no values need to be provided for Dirichlet boundary conditions). </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/<a class="el" href="spline__builder_8hpp_source.html">spline_builder.hpp</a></li>
 </ul>

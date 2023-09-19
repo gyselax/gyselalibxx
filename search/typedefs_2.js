@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['knotdim_406',['KnotDim',['../classNonUniformBSplines.html#a266155b617441df530bb202effb00199',1,'NonUniformBSplines::KnotDim()'],['../classUniformBSplines.html#a35a003b75d534eac96c099cb4fdcad0f',1,'UniformBSplines::KnotDim()']]]
+  ['interpolation_5fdomain_5ftype_439',['interpolation_domain_type',['../classSplineBuilder.html#aec9bd498c486b22848aeb026de467fcf',1,'SplineBuilder']]]
 ];

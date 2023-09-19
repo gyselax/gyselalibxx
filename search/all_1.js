@@ -8,5 +8,6 @@ var searchData=
   ['bsplinep_8',['BSplineP',['../classDiscreteToCartesian.html#aabeacc8cb7637a03d010696e2b7645ed',1,'DiscreteToCartesian']]],
   ['bspliner_9',['BSplineR',['../classDiscreteToCartesian.html#a56a6643d010d176c4ebe807e8d44624f',1,'DiscreteToCartesian']]],
   ['bsplines_10',['BSplines',['../classdeprecated_1_1BSplines.html',1,'deprecated']]],
-  ['bumpontailequilibrium_11',['BumpontailEquilibrium',['../classBumpontailEquilibrium.html',1,'']]]
+  ['bsplines_5ftype_11',['bsplines_type',['../classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8',1,'SplineBuilder']]],
+  ['bumpontailequilibrium_12',['BumpontailEquilibrium',['../classBumpontailEquilibrium.html',1,'']]]
 ];
