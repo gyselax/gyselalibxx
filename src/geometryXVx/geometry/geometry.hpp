@@ -13,8 +13,14 @@
 
 #include <species_info.hpp>
 
+/**
+ * @brief A class which describes the real space in the spatial X direction
+ */
 struct RDimX
 {
+    /**
+     * @brief A boolean indicating if the dimension is periodic.
+     */
 #ifdef PERIODIC_RDIMX
     static bool constexpr PERIODIC = true;
 #else
@@ -22,13 +28,25 @@ struct RDimX
 #endif
 };
 
+/**
+ * @brief A class which describes the real space in the X-velocity direction
+ */
 struct RDimVx
 {
+    /**
+     * @brief A boolean indicating if the dimension is periodic.
+     */
     static bool constexpr PERIODIC = false;
 };
 
+/**
+ * @brief A class which describes the real space in the temporal direction
+ */
 struct RDimT
 {
+    /**
+     * @brief A boolean indicating if the dimension is periodic.
+     */
     static bool constexpr PERIODIC = false;
 };
 
@@ -45,19 +63,50 @@ using CoordXVx = ddc::Coordinate<RDimX, RDimVx>;
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeVx = 3;
 
-using BSplinesX = UniformBSplines<RDimX, BSDegreeX>;
+bool constexpr BsplineOnUniformCellsX = true;
+bool constexpr BsplineOnUniformCellsVx = true;
 
-using BSplinesVx = UniformBSplines<RDimVx, BSDegreeVx>;
+using BSplinesX = std::conditional_t<
+        BsplineOnUniformCellsX,
+        UniformBSplines<RDimX, BSDegreeX>,
+        NonUniformBSplines<RDimX, BSDegreeX>>;
+
+using BSplinesVx = std::conditional_t<
+        BsplineOnUniformCellsVx,
+        UniformBSplines<RDimVx, BSDegreeVx>,
+        NonUniformBSplines<RDimVx, BSDegreeVx>>;
 
 auto constexpr SplineXBoundary = RDimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
-using InterpPointsX = GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
-using IDimX = typename InterpPointsX::interpolation_mesh_type;
-using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;
+auto constexpr SplineVxBoundary = BoundCond::HERMITE;
 
-using InterpPointsVx
-        = GrevilleInterpolationPoints<BSplinesVx, BoundCond::HERMITE, BoundCond::HERMITE>;
-using IDimVx = typename InterpPointsVx::interpolation_mesh_type;
+bool constexpr UniformMeshX = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsX,
+        SplineXBoundary,
+        SplineXBoundary,
+        BSDegreeX);
+bool constexpr UniformMeshVx = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsVx,
+        SplineVxBoundary,
+        SplineVxBoundary,
+        BSDegreeVx);
+
+using IDimX = std::conditional_t<
+        UniformMeshX,
+        ddc::UniformPointSampling<RDimX>,
+        ddc::NonUniformPointSampling<RDimX>>;
+using IDimVx = std::conditional_t<
+        UniformMeshVx,
+        ddc::UniformPointSampling<RDimVx>,
+        ddc::NonUniformPointSampling<RDimVx>>;
+
+using SplineInterpPointsX
+        = GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+using SplineInterpPointsVx
+        = GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+
+using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;
 using SplineVxBuilder = SplineBuilder<BSplinesVx, IDimVx, BoundCond::HERMITE, BoundCond::HERMITE>;
+
 
 // Species dimension
 using IDimSp = SpeciesInformation;
