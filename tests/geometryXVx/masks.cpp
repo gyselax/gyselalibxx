@@ -27,9 +27,9 @@ TEST(Masks, Ordering)
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    ddc::init_discrete_space<IDimX>(InterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
 
-    IDomainX gridx(InterpPointsX::get_domain());
+    IDomainX gridx(SplineInterpPointsX::get_domain());
 
     SplineXBuilder const builder_x(gridx);
 
