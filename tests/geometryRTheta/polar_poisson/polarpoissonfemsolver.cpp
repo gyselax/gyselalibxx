@@ -104,8 +104,13 @@ int main(int argc, char** argv)
 #elif defined(CZARNY_MAPPING)
     const Mapping mapping(0.3, 1.4);
 #endif
+    SplineEvaluator2D<BSplinesR, BSplinesP> evaluator(
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>);
     DiscreteMapping const discrete_mapping
-            = DiscreteMapping::analytical_to_discrete(mapping, builder);
+            = DiscreteMapping::analytical_to_discrete(mapping, builder, evaluator);
 
     ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping, r_builder, p_builder);
 
