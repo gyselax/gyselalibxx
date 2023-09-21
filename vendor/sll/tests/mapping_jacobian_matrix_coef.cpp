@@ -5,7 +5,9 @@
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/greville_interpolation_points.hpp>
+#include <sll/null_boundary_value.hpp>
 #include <sll/spline_builder_2d.hpp>
+#include <sll/spline_evaluator_2d.hpp>
 
 #include "sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp"
 #include "sll/mapping/circular_to_cartesian.hpp"
@@ -283,9 +285,14 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
     IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
 
     SplineRPBuilder builder(grid);
+    SplineEvaluator2D<BSplinesR, BSplinesP> evaluator(
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>);
     DiscreteToCartesian<DimX, DimY, SplineRPBuilder> mapping
             = DiscreteToCartesian<DimX, DimY, SplineRPBuilder>::
-                    analytical_to_discrete(analytical_mapping, builder);
+                    analytical_to_discrete(analytical_mapping, builder, evaluator);
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.

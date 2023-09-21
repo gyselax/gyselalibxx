@@ -51,8 +51,6 @@ public:
      * @brief Instantiate a Curvilinear2DToCartesian from another temporary
      *  Curvilinear2DToCartesian (rvalue).
      *
-     * The input x
-     *
      * @param[in] x
      * 		Curvilinear2DToCartesian mapping used to instantiate the new one.
      */
@@ -120,7 +118,7 @@ public:
      * For some computations, we need the complete Jacobian matrix or just the
      * coefficients.
      * The coefficients can be given indendently with the functions
-     * 'jacobian_11', 'jacobian_12', ' jacobian_21' and 'jacobian_22'.
+     * jacobian_11, jacobian_12,  jacobian_21 and jacobian_22.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
@@ -191,7 +189,7 @@ public:
      * For some computations, we need the complete inverse Jacobian matrix or just the
      * coefficients.
      * The coefficients can be given indendently with the functions
-     * 'inv_jacobian_11', 'inv_jacobian_12', 'inv_jacobian_21' and 'inv_jacobian_22'.
+     * inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.

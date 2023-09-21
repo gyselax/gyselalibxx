@@ -109,13 +109,19 @@ TEST(PolarSplineTest, ConstantEval)
     BuilderP builder_p(interpolation_domain_P);
     BuilderRP builder_rp(interpolation_domain);
 
+    SplineEvaluator2D<BSplinesR, BSplinesP> evaluator_rp(
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>);
+
 #if defined(CIRCULAR_MAPPING)
     CircToCart const coord_changer;
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
     DiscreteMapping const mapping
-            = DiscreteMapping::analytical_to_discrete(coord_changer, builder_rp);
+            = DiscreteMapping::analytical_to_discrete(coord_changer, builder_rp, evaluator_rp);
     ddc::init_discrete_space<BSplines>(mapping, builder_r, builder_p);
 
     ddc::DiscreteDomain<BSplines> const dom_bsplines_singular(

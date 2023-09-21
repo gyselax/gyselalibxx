@@ -12,26 +12,26 @@
  *
  * The mapping @f$ (r,\theta)\mapsto (x,y) @f$ is defined by
  *
- * @f$ x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \right),@f$
+ * @f$ x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right),@f$
  *
- * @f$ y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} },@f$
+ * @f$ y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} },@f$
  *
  * with @f$ \xi = 1/\sqrt{1 - \epsilon^2 /4} @f$ and @f$ e @f$ and @f$ \epsilon @f$ given as parameters.
  * It and its Jacobian matrix are invertible everywhere except for @f$ r = 0 @f$.
  *
  * Its Jacobian coefficients are defined as follow
  *
- * @f$ J_{11}(r,\theta) = - \frac{\cos(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} } @f$
+ * @f$ J_{11}(r,\theta) = - \cos(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } @f$
  *
- * @f$ J_{12}(r,\theta)  =  \frac{r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} } @f$
+ * @f$ J_{12}(r,\theta)  =  r\sin(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } @f$
  *
- * @f$ J_{21}(r,\theta)  =  \frac{e\epsilon \xi r\sin(\theta)\cos(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \left(
- * 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)}  \right)^2 }
- * +  \frac{e\xi \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} }@f$
+ * @f$ J_{21}(r,\theta)  =  \cos(\theta)\frac{e\epsilon \xi r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+ * 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}  \right)^2 }
+ * +  \sin(\theta)\frac{e\xi }{ 2- \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }@f$
  *
- * @f$ J_{22}(r,\theta)  =   \frac{e\epsilon \xi r^2 \sin^2(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \left(
- * 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \right)^2 }
- * +  \frac{e\xi r\cos(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} }@f$.
+ * @f$ J_{22}(r,\theta)  =   r \sin(\theta)\frac{e\epsilon \xi r \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+ * 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right)^2 }
+ * +  r\cos(\theta)\frac{e\xi }{ 2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }@f$.
  *
  *
  * @see AnalyticalInvertibleCurvilinear2DToCartesian
@@ -71,10 +71,10 @@ public:
      * @brief Instantiate a CzarnyToCartesian from parameters.
      *
      * @param[in] epsilon
-     * 			The @f$ \epsilon @f$ parameter in the definition of the mapping 'CzarnyToCartesian'.
+     * 			The @f$ \epsilon @f$ parameter in the definition of the mapping CzarnyToCartesian.
      *
      * @param[in] e
-     * 			The @f$ e @f$ parameter in the definition of the mapping 'CzarnyToCartesian'.
+     * 			The @f$ e @f$ parameter in the definition of the mapping CzarnyToCartesian.
      *
      * @see CzarnyToCartesian
      */
