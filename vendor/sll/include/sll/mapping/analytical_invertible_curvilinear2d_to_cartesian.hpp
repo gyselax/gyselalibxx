@@ -27,7 +27,7 @@ public:
      * @brief Compute the logical coordinates from the physical coordinates.
      *
      * This class defined analytical invertible mappings which is not always the
-     * case for a general mapping (see 'Curvilinear2DToCartesian::operator()').
+     * case for a general mapping (see Curvilinear2DToCartesian::operator()).
      *
      * @param[in] coord
      * 			The coordinates in the physical domain.

@@ -67,19 +67,21 @@ private:
 private:
     ddc::Chunk<double, spline_domain> x_spline_representation;
     ddc::Chunk<double, spline_domain> y_spline_representation;
-    SplineEvaluator2D<BSplineR, BSplineP> spline_evaluator;
+    SplineEvaluator2D<BSplineR, BSplineP> const& spline_evaluator;
 
 public:
     /**
-     * @brief Instantiate a DiscreteToCartesian from B-splines coefficients of the mapping.
+     * @brief Instantiate a DiscreteToCartesian from the coefficients of 2D splines approximating the mapping.
      *
-     * A discrete mapping is given only on the mesh points of the grid. To interpolate the mapping,
-     * we use B-splines. The discrete mapping must first be decomposed on B-splines and defined by the coefficients
-     * on B-splines (using 'SplineBuilder2D').
-     * Then to interpolate the mapping, we will evaluate the decomposed functions on B-splines
-     * (see 'DiscreteToCartesian::operator()').
+     * A discrete mapping is a mapping whose values are known only at the mesh points of the grid.
+     * To interpolate the mapping, we use B-splines. The DiscreteToCartesian mapping is initialized
+     * from the coefficients in front of the basis splines which arise when we approximate the
+     * functions @f$ x(r,\theta) @f$, and @f$ y(r,\theta) @f$ (with @f$ x @f$ and @f$ y @f$ the physical dimensions in
+     * the logical domain) with Splines (using SplineBuilder2D). Then to interpolate the mapping,
+     * we will evaluate the decomposed functions on B-splines (see DiscreteToCartesian::operator()).
+
      *
-     * Here, the default evaluator has null boundary conditions.
+     * Here, the evaluator is given as input.
      *
      * @param[in] curvilinear_to_x
      * 		Bsplines coefficients of the first physical dimension in the logical domain.
@@ -87,21 +89,21 @@ public:
      * @param[in] curvilinear_to_y
      * 		Bsplines coefficients of the second physical dimension in the logical domain.
      *
+     * @param[in] evaluator
+     * 		The evaluator used to evaluate the mapping.
+     *
      *
      * @see SplineBuilder2D
      * @see DiscreteToCartesian::operator()
-     * @see NullBoundaryValue
+     * @see SplineBoundaryValue
      */
     DiscreteToCartesian(
             ddc::Chunk<double, spline_domain>&& curvilinear_to_x,
-            ddc::Chunk<double, spline_domain>&& curvilinear_to_y)
+            ddc::Chunk<double, spline_domain>&& curvilinear_to_y,
+            SplineEvaluator2D<BSplineR, BSplineP> const& evaluator)
         : x_spline_representation(std::move(curvilinear_to_x))
         , y_spline_representation(std::move(curvilinear_to_y))
-        , spline_evaluator(
-                  g_null_boundary_2d<BSplineR, BSplineP>,
-                  g_null_boundary_2d<BSplineR, BSplineP>,
-                  g_null_boundary_2d<BSplineR, BSplineP>,
-                  g_null_boundary_2d<BSplineR, BSplineP>)
+        , spline_evaluator(evaluator)
     {
     }
 
@@ -109,7 +111,7 @@ public:
      * @brief Compute the physical coordinates from the logical coordinates.
      *
      * It evaluates the decomposed mapping on B-splines at the coordinate point
-     * with a 'SplineEvaluator2D'.
+     * with a SplineEvaluator2D.
      *
      * @param[in] coord
      * 			The coordinates in the logical domain.
@@ -132,7 +134,7 @@ public:
      * For some computations, we need the complete Jacobian matrix or just the
      * coefficients.
      * The coefficients can be given indendently with the functions
-     * 'jacobian_11', 'jacobian_12', 'jacobian_21' and 'jacobian_22'.
+     * jacobian_11, jacobian_12, jacobian_21 and jacobian_22.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
@@ -161,7 +163,7 @@ public:
      * (1,1) coefficient of the Jacobian matrix is given by @f$ \frac{\partial x}{\partial r} @f$.
      * As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines
      * @f$ \frac{\partial x}{\partial r} (r,\theta)= \sum_k c_{x,k} \frac{\partial B_k}{\partial r}(r,\theta)@f$
-     * (the derivatives are implemented in 'SplineEvaluator2D').
+     * (the derivatives are implemented in SplineEvaluator2D).
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
@@ -182,7 +184,7 @@ public:
      * (1,2) coefficient of the Jacobian matrix is given by @f$ \frac{\partial x}{\partial \theta} @f$.
      * As the mapping is decomposed on B-splines, it means it computes
      * @f$ \frac{\partial x}{\partial \theta}(r,\theta) = \sum_k c_{x,k} \frac{\partial B_k}{\partial \theta}(r,\theta) @f$
-     * (the derivatives of B-splines are implemented in 'SplineEvaluator2D').
+     * (the derivatives of B-splines are implemented in SplineEvaluator2D).
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
@@ -203,7 +205,7 @@ public:
      * (2,1) coefficient of the Jacobian matrix is given by @f$ \frac{\partial y}{\partial r} @f$.
      * As the mapping is decomposed on B-splines, it means it computes
      * @f$ \frac{\partial y}{\partial r}(r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial r}(r,\theta)@f$
-     * (the derivatives of B-splines are implemented in 'SplineEvaluator2D').
+     * (the derivatives of B-splines are implemented in SplineEvaluator2D).
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix. .
@@ -224,7 +226,7 @@ public:
      * (2,2) coefficient of the Jacobian matrix is given by @f$ \frac{\partial y}{\partial \theta} @f$.
      * As the mapping is decomposed on B-splines, it means it computes
      * @f$ \frac{\partial y}{\partial \theta} (r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial \theta}(r,\theta) @f$
-     * (the derivatives of B-splines are implemented in 'SplineEvaluator2D').
+     * (the derivatives of B-splines are implemented in SplineEvaluator2D).
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
@@ -252,8 +254,8 @@ public:
      * where @f$ N_r\times N_{\theta} @f$ is the number of B-splines.
      *
      * The control points can be obtained by interpolating the mapping on interpolation
-     * points (see 'GrevilleInterpolationPoints' or 'KnotsAsInterpolationPoints').
-     * We can also note that the first control points @f$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta} @f$
+     * points (see GrevilleInterpolationPoints or KnotsAsInterpolationPoints).
+     * We can also note that the first control points @f$ \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} @f$
      * are equal to the pole @f$ (c_{x,k}, c_{y,k}) = (x_0,y_0) @f$, @f$ \forall k = 0, ..., N_{\theta}-1 @f$
      * where @f$ x(0,\theta), y(0,\theta) = (x_0,y_0) @f$ @f$ \forall \theta @f$.
      *
@@ -280,16 +282,20 @@ public:
      * @param[in] analytical_mapping
      * 			The mapping defined analytically.
      * @param[in] builder
-     * 			The spline builder of the B-splines on which we want to decompose the mapping.
+     * 			The spline builder on the B-splines on which we want to decompose the mapping.
+     * @param[in] evaluator
+     * 			The spline evaluator with which we want to evaluate the mapping.
      *
      * @return A DiscreteToCartesian version of the analytical mapping.
      *
      * @see SplineBuilder2D
+     * @see SplineEvaluator2D
      */
-    template <class Mapping, class Builder2D>
+    template <class Mapping, class Builder2D, class Evaluator2D>
     static DiscreteToCartesian analytical_to_discrete(
             Mapping const& analytical_mapping,
-            Builder2D const& builder)
+            Builder2D const& builder,
+            Evaluator2D const& evaluator)
     {
         using Domain = typename Builder2D::interpolation_domain_type;
         ddc::Chunk<double, spline_domain> curvilinear_to_x_spline(builder.spline_domain());
@@ -309,6 +315,7 @@ public:
         builder(curvilinear_to_y_spline, curvilinear_to_y_vals);
         return DiscreteToCartesian(
                 std::move(curvilinear_to_x_spline),
-                std::move(curvilinear_to_y_spline));
+                std::move(curvilinear_to_y_spline),
+                evaluator);
     }
 };
