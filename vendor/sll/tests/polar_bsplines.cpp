@@ -126,9 +126,15 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     BuilderP builder_p(interpolation_domain_P);
     BuilderRP builder_rp(interpolation_domain);
 
+    SplineEvaluator2D<BSplinesR, BSplinesP> evaluator_rp(
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>);
+
     const CircToCart coord_changer;
     DiscreteMapping const mapping
-            = DiscreteMapping::analytical_to_discrete(coord_changer, builder_rp);
+            = DiscreteMapping::analytical_to_discrete(coord_changer, builder_rp, evaluator_rp);
     ddc::init_discrete_space<BSplines>(mapping, builder_r, builder_p);
 
     int const n_eval = (BSplinesR::degree() + 1) * (BSplinesP::degree() + 1);

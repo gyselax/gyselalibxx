@@ -243,9 +243,14 @@ TEST_P(InverseJacobianMatrix, InverseMatrixDiscCzarMap)
     IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
 
     SplineRPBuilder builder(grid);
+    SplineEvaluator2D<BSplinesR, BSplinesP> evaluator(
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>,
+            g_null_boundary_2d<BSplinesR, BSplinesP>);
     DiscreteToCartesian<DimX, DimY, SplineRPBuilder> mapping
             = DiscreteToCartesian<DimX, DimY, SplineRPBuilder>::
-                    analytical_to_discrete(analytical_mapping, builder);
+                    analytical_to_discrete(analytical_mapping, builder, evaluator);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IndexRP const irp) {
