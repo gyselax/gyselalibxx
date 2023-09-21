@@ -7,7 +7,7 @@ var classDiscreteToCartesian =
     [ "circular_tag_r", "classDiscreteToCartesian.html#a6bed491350aa17dda83454512e3ea70e", null ],
     [ "circular_tag_p", "classDiscreteToCartesian.html#ae1c7b39ab242d555ed6f74529cce5ccc", null ],
     [ "Matrix_2x2", "classDiscreteToCartesian.html#aff278fecc61e7bf4519da6b8e32f6fa8", null ],
-    [ "DiscreteToCartesian", "classDiscreteToCartesian.html#a0e223ea039ce1dbb65a65984e000e2f9", null ],
+    [ "DiscreteToCartesian", "classDiscreteToCartesian.html#ae2bc5f7be14ee231156b039074859bab", null ],
     [ "operator()", "classDiscreteToCartesian.html#a2886ad4e22efd1d8d875478e5b50c823", null ],
     [ "jacobian_matrix", "classDiscreteToCartesian.html#a4f53f0eb32eb687dec8c4071c390811f", null ],
     [ "jacobian_11", "classDiscreteToCartesian.html#ae724fc03c7fca1e9f61b138f22fa28cc", null ],

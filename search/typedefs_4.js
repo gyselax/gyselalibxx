@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['matrix_5f2x2_441',['Matrix_2x2',['../classCircularToCartesian.html#afdac5ab113c09b1b53029e479f224664',1,'CircularToCartesian::Matrix_2x2()'],['../classCurvilinear2DToCartesian.html#ad0f61c18363bff817f9c34f2b03e8d4c',1,'Curvilinear2DToCartesian::Matrix_2x2()'],['../classCzarnyToCartesian.html#a3c3bdf0e9db5495c57f16c361943928c',1,'CzarnyToCartesian::Matrix_2x2()'],['../classDiscreteToCartesian.html#aff278fecc61e7bf4519da6b8e32f6fa8',1,'DiscreteToCartesian::Matrix_2x2()']]],
-  ['mesh_5ftype_442',['mesh_type',['../classSplineBuilder.html#a277cde780e9a94f7f2dbc8a3fef5e4ff',1,'SplineBuilder']]]
+  ['knotdim_481',['KnotDim',['../classNonUniformBSplines.html#a266155b617441df530bb202effb00199',1,'NonUniformBSplines::KnotDim()'],['../classUniformBSplines.html#a35a003b75d534eac96c099cb4fdcad0f',1,'UniformBSplines::KnotDim()']]]
 ];

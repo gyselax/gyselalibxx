@@ -1,5 +1,17 @@
 var NAVTREEINDEX3 =
 {
+"classdeprecated_1_1BSplines.html#a39994f9d8e2cde1a3c849c21c50cc417":[10,0,0,29],
+"classdeprecated_1_1BSplines.html#a4f9a4112a9f796342fb7d1d881c55ddc":[10,0,0,13],
+"classdeprecated_1_1BSplines.html#a6c8f121fccaf4ebf176c9f9282a5507d":[10,0,0,17],
+"classdeprecated_1_1BSplines.html#a70a9350c913ae7c6ec0998cc449ba9ae":[10,0,0,26],
+"classdeprecated_1_1BSplines.html#a7206b67f3bcfc6e1abe4ec3135e4965a":[10,0,0,27],
+"classdeprecated_1_1BSplines.html#a7710617ec02931e9749d338d55c907de":[10,0,0,30],
+"classdeprecated_1_1BSplines.html#a79ecbace784afbe5c901892153d5736c":[10,0,0,21],
+"classdeprecated_1_1BSplines.html#a7bb03cafc77673161d43e9059e2f8e6c":[10,0,0,24],
+"classdeprecated_1_1BSplines.html#a86b2a4466e301b09dcc76f59e39f042c":[10,0,0,33],
+"classdeprecated_1_1BSplines.html#a93d7206c3355d3489bc7f8b7ab94e96f":[10,0,0,16],
+"classdeprecated_1_1BSplines.html#a9c1d8df02196c2ed5dbbd90c722425c4":[10,0,0,28],
+"classdeprecated_1_1BSplines.html#aa12bc672d6daf3844d21f754d3a1bc04":[10,0,0,18],
 "classdeprecated_1_1BSplines.html#aa988a402d049367148d42a802ae6cd28":[10,0,0,12],
 "classdeprecated_1_1BSplines.html#ac10f9df03a1d22f91ed1c3b0c81a765a":[10,0,0,15],
 "classdeprecated_1_1BSplines.html#ad5a406e78eb4069f8b37f6421a83e6be":[10,0,0,34],
@@ -237,17 +249,5 @@ var NAVTREEINDEX3 =
 "matrix_8hpp_source.html":[11,2,0,0,0,11],
 "matrix__banded_8hpp_source.html":[11,2,0,0,0,12],
 "matrix__center__block_8hpp_source.html":[11,2,0,0,0,13],
-"matrix__corner__block_8hpp_source.html":[11,2,0,0,0,14],
-"matrix__dense_8hpp_source.html":[11,2,0,0,0,15],
-"matrix__pds__tridiag_8hpp_source.html":[11,2,0,0,0,16],
-"matrix__periodic__banded_8hpp_source.html":[11,2,0,0,0,17],
-"null__boundary__value_8hpp_source.html":[11,2,0,0,0,18],
-"nulladvectionvx_8hpp_source.html":[11,0,0,4],
-"pages.html":[],
-"paraconfpp_8hpp_source.html":[11,0,5,0],
-"polar__bsplines_8hpp_source.html":[11,2,0,0,0,19],
-"polar__poisson_2params_8yaml_8hpp_source.html":[11,1,0,1,0],
-"polar__spline_8hpp_source.html":[11,2,0,0,0,20],
-"polar__spline__evaluator_8hpp_source.html":[11,2,0,0,0,21],
-"polarpoissonsolver_8hpp_source.html":[11,0,1,2,2]
+"matrix__corner__block_8hpp_source.html":[11,2,0,0,0,14]
 };

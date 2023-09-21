@@ -62,10 +62,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classIEquilibrium.html#a7244af05e0e1176c0c02212cee0cfb43",
-"classPolarBSplines_1_1Impl.html#aefe0ad76c608d98f362a676a00250e43",
-"classdeprecated_1_1BSplines.html#aa988a402d049367148d42a802ae6cd28",
-"polynomial__evaluator_8hpp_source.html"
+"classGrevilleInterpolationPoints.html#a80607a4c866ff36244d980e41870a347",
+"classPolarBSplines_1_1Impl.html#a2dd5ab4233bbd69675345f083a271b7d",
+"classdeprecated_1_1BSplines.html#a39994f9d8e2cde1a3c849c21c50cc417",
+"matrix__dense_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

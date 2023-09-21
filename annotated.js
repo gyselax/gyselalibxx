@@ -26,6 +26,7 @@ var annotated =
     [ "CollisionsInter", "classCollisionsInter.html", "classCollisionsInter" ],
     [ "CollisionsIntra", "classCollisionsIntra.html", "classCollisionsIntra" ],
     [ "ConstantExtrapolationBoundaryValue", "classConstantExtrapolationBoundaryValue.html", "classConstantExtrapolationBoundaryValue" ],
+    [ "ConstantExtrapolationBoundaryValue2D", "classConstantExtrapolationBoundaryValue2D.html", "classConstantExtrapolationBoundaryValue2D" ],
     [ "CosineEvaluator", "structCosineEvaluator.html", [
       [ "Evaluator", "classCosineEvaluator_1_1Evaluator.html", "classCosineEvaluator_1_1Evaluator" ]
     ] ],

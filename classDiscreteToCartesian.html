@@ -175,9 +175,9 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0e223ea039ce1dbb65a65984e000e2f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a0e223ea039ce1dbb65a65984e000e2f9">DiscreteToCartesian</a> (ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;curvilinear_to_x, ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;curvilinear_to_y)</td></tr>
-<tr class="memdesc:a0e223ea039ce1dbb65a65984e000e2f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> from B-splines coefficients of the mapping.  <a href="classDiscreteToCartesian.html#a0e223ea039ce1dbb65a65984e000e2f9">More...</a><br /></td></tr>
-<tr class="separator:a0e223ea039ce1dbb65a65984e000e2f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2bc5f7be14ee231156b039074859bab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ae2bc5f7be14ee231156b039074859bab">DiscreteToCartesian</a> (ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;curvilinear_to_x, ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;curvilinear_to_y, <a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>&lt; <a class="el" href="classDiscreteToCartesian.html#a56a6643d010d176c4ebe807e8d44624f">BSplineR</a>, <a class="el" href="classDiscreteToCartesian.html#aabeacc8cb7637a03d010696e2b7645ed">BSplineP</a> &gt; const &amp;evaluator)</td></tr>
+<tr class="memdesc:ae2bc5f7be14ee231156b039074859bab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> from the coefficients of 2D splines approximating the mapping.  <a href="classDiscreteToCartesian.html#ae2bc5f7be14ee231156b039074859bab">More...</a><br /></td></tr>
+<tr class="separator:ae2bc5f7be14ee231156b039074859bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2886ad4e22efd1d8d875478e5b50c823"><td class="memItemLeft" align="right" valign="top">ddc::Coordinate&lt; <a class="el" href="structDimX.html">DimX</a>, <a class="el" href="structDimY.html">DimY</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a2886ad4e22efd1d8d875478e5b50c823">operator()</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#a6bed491350aa17dda83454512e3ea70e">circular_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#ae1c7b39ab242d555ed6f74529cce5ccc">circular_tag_p</a> &gt; const &amp;coord) const final</td></tr>
 <tr class="memdesc:a2886ad4e22efd1d8d875478e5b50c823"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the physical coordinates from the logical coordinates.  <a href="classDiscreteToCartesian.html#a2886ad4e22efd1d8d875478e5b50c823">More...</a><br /></td></tr>
 <tr class="separator:a2886ad4e22efd1d8d875478e5b50c823"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -260,10 +260,10 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aebb4d3f7327cb2ec30c9b059f469fff3"><td class="memTemplParams" colspan="2">template&lt;class Mapping , class Builder2D &gt; </td></tr>
-<tr class="memitem:aebb4d3f7327cb2ec30c9b059f469fff3"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#aebb4d3f7327cb2ec30c9b059f469fff3">analytical_to_discrete</a> (Mapping const &amp;analytical_mapping, Builder2D const &amp;builder)</td></tr>
-<tr class="memdesc:aebb4d3f7327cb2ec30c9b059f469fff3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> mapping from an analytical mapping.  <a href="classDiscreteToCartesian.html#aebb4d3f7327cb2ec30c9b059f469fff3">More...</a><br /></td></tr>
-<tr class="separator:aebb4d3f7327cb2ec30c9b059f469fff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6f79a79fd0d58ef8d43a9a48adfd4fd"><td class="memTemplParams" colspan="2">template&lt;class Mapping , class Builder2D , class Evaluator2D &gt; </td></tr>
+<tr class="memitem:aa6f79a79fd0d58ef8d43a9a48adfd4fd"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#aa6f79a79fd0d58ef8d43a9a48adfd4fd">analytical_to_discrete</a> (Mapping const &amp;analytical_mapping, Builder2D const &amp;builder, <a class="el" href="structEvaluator2D.html">Evaluator2D</a> const &amp;evaluator)</td></tr>
+<tr class="memdesc:aa6f79a79fd0d58ef8d43a9a48adfd4fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> mapping from an analytical mapping.  <a href="classDiscreteToCartesian.html#aa6f79a79fd0d58ef8d43a9a48adfd4fd">More...</a><br /></td></tr>
+<tr class="separator:aa6f79a79fd0d58ef8d43a9a48adfd4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class DimX, class DimY, class SplineBuilder&gt;<br />
@@ -276,8 +276,8 @@ class DiscreteToCartesian&lt; DimX, DimY, SplineBuilder &gt;</h3>
 <p>This mapping could be costly to inverse.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a0e223ea039ce1dbb65a65984e000e2f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e223ea039ce1dbb65a65984e000e2f9">&#9670;&nbsp;</a></span>DiscreteToCartesian()</h2>
+<a id="ae2bc5f7be14ee231156b039074859bab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2bc5f7be14ee231156b039074859bab">&#9670;&nbsp;</a></span>DiscreteToCartesian()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -297,7 +297,13 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>curvilinear_to_y</em>&#160;</td>
+          <td class="paramname"><em>curvilinear_to_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>&lt; <a class="el" href="classDiscreteToCartesian.html#a56a6643d010d176c4ebe807e8d44624f">BSplineR</a>, <a class="el" href="classDiscreteToCartesian.html#aabeacc8cb7637a03d010696e2b7645ed">BSplineP</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>evaluator</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -312,13 +318,14 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Instantiate a <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> from B-splines coefficients of the mapping. </p>
-<p>A discrete mapping is given only on the mesh points of the grid. To interpolate the mapping, we use B-splines. The discrete mapping must first be decomposed on B-splines and defined by the coefficients on B-splines (using '<a class="el" href="classSplineBuilder2D.html">SplineBuilder2D</a>'). Then to interpolate the mapping, we will evaluate the decomposed functions on B-splines (see 'DiscreteToCartesian::operator()').</p>
-<p>Here, the default evaluator has null boundary conditions.</p>
+<p>Instantiate a <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> from the coefficients of 2D splines approximating the mapping. </p>
+<p>A discrete mapping is a mapping whose values are known only at the mesh points of the grid. To interpolate the mapping, we use B-splines. The <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> mapping is initialized from the coefficients in front of the basis splines which arise when we approximate the functions \( x(r,\theta) \), and \( y(r,\theta) \) (with \( x \) and \( y \) the physical dimensions in the logical domain) with Splines (using <a class="el" href="classSplineBuilder2D.html">SplineBuilder2D</a>). Then to interpolate the mapping, we will evaluate the decomposed functions on B-splines (see DiscreteToCartesian::operator()).</p>
+<p>Here, the evaluator is given as input.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">curvilinear_to_x</td><td>Bsplines coefficients of the first physical dimension in the logical domain.</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">curvilinear_to_y</td><td>Bsplines coefficients of the second physical dimension in the logical domain.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">evaluator</td><td>The evaluator used to evaluate the mapping.</td></tr>
   </table>
   </dd>
 </dl>
@@ -326,7 +333,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 <dd>
 DiscreteToCartesian::operator() </dd>
 <dd>
-<a class="el" href="classNullBoundaryValue.html">NullBoundaryValue</a> </dd></dl>
+<a class="el" href="classSplineBoundaryValue.html">SplineBoundaryValue</a> </dd></dl>
 
 </div>
 </div>
@@ -358,7 +365,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the physical coordinates from the logical coordinates. </p>
-<p>It evaluates the decomposed mapping on B-splines at the coordinate point with a '<a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>'.</p>
+<p>It evaluates the decomposed mapping on B-splines at the coordinate point with a <a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinates in the logical domain.</td></tr>
@@ -366,7 +373,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The coordinates of the mapping in the physical domain.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
 
 </div>
 </div>
@@ -407,7 +414,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute full Jacobian matrix. </p>
-<p>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given indendently with the functions 'jacobian_11', 'jacobian_12', 'jacobian_21' and 'jacobian_22'.</p>
+<p>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given indendently with the functions jacobian_11, jacobian_12, jacobian_21 and jacobian_22.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -452,7 +459,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (1,1) coefficient of the Jacobian matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,1) coefficient of the Jacobian matrix is given by \( \frac{\partial x}{\partial r} \). As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines \( \frac{\partial x}{\partial r} (r,\theta)= \sum_k c_{x,k} \frac{\partial B_k}{\partial r}(r,\theta)\) (the derivatives are implemented in '<a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>').</p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,1) coefficient of the Jacobian matrix is given by \( \frac{\partial x}{\partial r} \). As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines \( \frac{\partial x}{\partial r} (r,\theta)= \sum_k c_{x,k} \frac{\partial B_k}{\partial r}(r,\theta)\) (the derivatives are implemented in <a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a>).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
@@ -460,7 +467,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the Jacobian matrix.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
 
 </div>
 </div>
@@ -491,7 +498,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (1,2) coefficient of the Jacobian matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,2) coefficient of the Jacobian matrix is given by \( \frac{\partial x}{\partial \theta} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial x}{\partial \theta}(r,\theta) = \sum_k c_{x,k} \frac{\partial B_k}{\partial \theta}(r,\theta) \) (the derivatives of B-splines are implemented in '<a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>').</p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,2) coefficient of the Jacobian matrix is given by \( \frac{\partial x}{\partial \theta} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial x}{\partial \theta}(r,\theta) = \sum_k c_{x,k} \frac{\partial B_k}{\partial \theta}(r,\theta) \) (the derivatives of B-splines are implemented in <a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a>).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
@@ -499,7 +506,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the Jacobian matrix.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
 
 </div>
 </div>
@@ -530,7 +537,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (2,1) coefficient of the Jacobian matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,1) coefficient of the Jacobian matrix is given by \( \frac{\partial y}{\partial r} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial y}{\partial r}(r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial r}(r,\theta)\) (the derivatives of B-splines are implemented in '<a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>').</p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,1) coefficient of the Jacobian matrix is given by \( \frac{\partial y}{\partial r} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial y}{\partial r}(r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial r}(r,\theta)\) (the derivatives of B-splines are implemented in <a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a>).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. .</td></tr>
@@ -538,7 +545,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the Jacobian matrix.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
 
 </div>
 </div>
@@ -569,7 +576,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (2,2) coefficient of the Jacobian matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,2) coefficient of the Jacobian matrix is given by \( \frac{\partial y}{\partial \theta} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial y}{\partial \theta} (r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial \theta}(r,\theta) \) (the derivatives of B-splines are implemented in '<a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>').</p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,2) coefficient of the Jacobian matrix is given by \( \frac{\partial y}{\partial \theta} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial y}{\partial \theta} (r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial \theta}(r,\theta) \) (the derivatives of B-splines are implemented in <a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a>).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
@@ -577,7 +584,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the Jacobian matrix.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
 
 </div>
 </div>
@@ -612,7 +619,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 <p>\( x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} \),</p>
 <p>\( y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} \),</p>
 <p>where \( N_r\times N_{\theta} \) is the number of B-splines.</p>
-<p>The control points can be obtained by interpolating the mapping on interpolation points (see '<a class="el" href="classGrevilleInterpolationPoints.html">GrevilleInterpolationPoints</a>' or '<a class="el" href="classKnotsAsInterpolationPoints.html">KnotsAsInterpolationPoints</a>'). We can also note that the first control points \( \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta} \) are equal to the pole \( (c_{x,k}, c_{y,k}) = (x_0,y_0) \), \( \forall k = 0, ..., N_{\theta}-1 \) where \( x(0,\theta), y(0,\theta) = (x_0,y_0) \) \( \forall \theta \).</p>
+<p>The control points can be obtained by interpolating the mapping on interpolation points (see <a class="el" href="classGrevilleInterpolationPoints.html">GrevilleInterpolationPoints</a> or <a class="el" href="classKnotsAsInterpolationPoints.html">KnotsAsInterpolationPoints</a>). We can also note that the first control points \( \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} \) are equal to the pole \( (c_{x,k}, c_{y,k}) = (x_0,y_0) \), \( \forall k = 0, ..., N_{\theta}-1 \) where \( x(0,\theta), y(0,\theta) = (x_0,y_0) \) \( \forall \theta \).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">el</td><td>The number of the control point.</td></tr>
@@ -626,15 +633,15 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 
 </div>
 </div>
-<a id="aebb4d3f7327cb2ec30c9b059f469fff3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebb4d3f7327cb2ec30c9b059f469fff3">&#9670;&nbsp;</a></span>analytical_to_discrete()</h2>
+<a id="aa6f79a79fd0d58ef8d43a9a48adfd4fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6f79a79fd0d58ef8d43a9a48adfd4fd">&#9670;&nbsp;</a></span>analytical_to_discrete()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 <div class="memtemplate">
-template&lt;class Mapping , class Builder2D &gt; </div>
+template&lt;class Mapping , class Builder2D , class Evaluator2D &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -649,7 +656,13 @@ template&lt;class Mapping , class Builder2D &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Builder2D const &amp;&#160;</td>
-          <td class="paramname"><em>builder</em>&#160;</td>
+          <td class="paramname"><em>builder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structEvaluator2D.html">Evaluator2D</a> const &amp;&#160;</td>
+          <td class="paramname"><em>evaluator</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -668,12 +681,15 @@ template&lt;class Mapping , class Builder2D &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">analytical_mapping</td><td>The mapping defined analytically. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">builder</td><td>The spline builder of the B-splines on which we want to decompose the mapping.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">builder</td><td>The spline builder on the B-splines on which we want to decompose the mapping. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">evaluator</td><td>The spline evaluator with which we want to evaluate the mapping.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> version of the analytical mapping.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineBuilder2D.html">SplineBuilder2D</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineBuilder2D.html">SplineBuilder2D</a> </dd>
+<dd>
+<a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
 
 </div>
 </div>

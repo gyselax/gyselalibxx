@@ -256,14 +256,14 @@ class CzarnyToCartesian&lt; DimX, DimY, DimR, DimP &gt;</h3>
 
 <p>A class for describing the Czarny 2D mapping. </p>
 <p>The mapping \( (r,\theta)\mapsto (x,y) \) is defined by</p>
-<p>\( x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \right),\)</p>
-<p>\( y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} },\)</p>
+<p>\( x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right),\)</p>
+<p>\( y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} },\)</p>
 <p>with \( \xi = 1/\sqrt{1 - \epsilon^2 /4} \) and \( e \) and \( \epsilon \) given as parameters. It and its Jacobian matrix are invertible everywhere except for \( r = 0 \).</p>
 <p>Its Jacobian coefficients are defined as follow</p>
-<p>\( J_{11}(r,\theta) = - \frac{\cos(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} } \)</p>
-<p>\( J_{12}(r,\theta) = \frac{r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} } \)</p>
-<p>\( J_{21}(r,\theta) = \frac{e\epsilon \xi r\sin(\theta)\cos(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \left( 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \right)^2 } + \frac{e\xi \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} }\)</p>
-<p>\( J_{22}(r,\theta) = \frac{e\epsilon \xi r^2 \sin^2(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \left( 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \right)^2 } + \frac{e\xi r\cos(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} }\).</p>
+<p>\( J_{11}(r,\theta) = - \cos(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } \)</p>
+<p>\( J_{12}(r,\theta) = r\sin(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } \)</p>
+<p>\( J_{21}(r,\theta) = \cos(\theta)\frac{e\epsilon \xi r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left( 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right)^2 } + \sin(\theta)\frac{e\xi }{ 2- \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\)</p>
+<p>\( J_{22}(r,\theta) = r \sin(\theta)\frac{e\epsilon \xi r \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left( 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right)^2 } + r\cos(\theta)\frac{e\xi }{ 2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\).</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classAnalyticalInvertibleCurvilinear2DToCartesian.html" title="A class for describing analytical invertible curvilinear 2D mappings from the logical domain to the p...">AnalyticalInvertibleCurvilinear2DToCartesian</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aca44b792c19189a6e9d70693cdde739d"></a>
@@ -305,8 +305,8 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 <p>Instantiate a <a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a> from parameters. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">epsilon</td><td>The \( \epsilon \) parameter in the definition of the mapping '<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>'.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">e</td><td>The \( e \) parameter in the definition of the mapping '<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>'.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">epsilon</td><td>The \( \epsilon \) parameter in the definition of the mapping <a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">e</td><td>The \( e \) parameter in the definition of the mapping <a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>.</td></tr>
   </table>
   </dd>
 </dl>
@@ -590,7 +590,7 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the logical coordinates from the physical coordinates. </p>
-<p>This class defined analytical invertible mappings which is not always the case for a general mapping (see 'Curvilinear2DToCartesian::operator()').</p>
+<p>This class defined analytical invertible mappings which is not always the case for a general mapping (see Curvilinear2DToCartesian::operator()).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinates in the physical domain.</td></tr>
@@ -641,7 +641,7 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute full Jacobian matrix. </p>
-<p>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given indendently with the functions 'jacobian_11', 'jacobian_12', ' jacobian_21' and 'jacobian_22'.</p>
+<p>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given indendently with the functions jacobian_11, jacobian_12, jacobian_21 and jacobian_22.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>

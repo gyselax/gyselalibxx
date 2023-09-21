@@ -1,10 +1,4 @@
 var searchData=
 [
-  ['s_5fbc_5fxmax_423',['s_bc_xmax',['../classSplineBuilder.html#aecdea9406e7d85496bf6ed4c479d064d',1,'SplineBuilder']]],
-  ['s_5fbc_5fxmin_424',['s_bc_xmin',['../classSplineBuilder.html#a4d5e60f3a4050a4a54415835b65d03c8',1,'SplineBuilder']]],
-  ['s_5fnbc_5fxmax_425',['s_nbc_xmax',['../classSplineBuilder.html#a750e366c0f6cff13ee6b09e84fbd7f39',1,'SplineBuilder']]],
-  ['s_5fnbc_5fxmin_426',['s_nbc_xmin',['../classSplineBuilder.html#ad95603fd1144bd421f0ab85c8e8985a8',1,'SplineBuilder']]],
-  ['s_5fnbe_5fxmax_427',['s_nbe_xmax',['../classSplineBuilder.html#ac37e871f135ba9da956d8faacff00032',1,'SplineBuilder']]],
-  ['s_5fnbe_5fxmin_428',['s_nbe_xmin',['../classSplineBuilder.html#a6e27acbbf2fc5f1400ce4a08c810d52e',1,'SplineBuilder']]],
-  ['s_5fodd_429',['s_odd',['../classSplineBuilder.html#a8c55b038757bcdf9ad2572897f4f836b',1,'SplineBuilder']]]
+  ['periodic_454',['PERIODIC',['../structRDimX.html#a8cb720efb33235cee3371843279ea9ab',1,'RDimX::PERIODIC()'],['../structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78',1,'RDimVx::PERIODIC()'],['../structRDimT.html#ac518ba935033dd7ec6e36a2860a5ee68',1,'RDimT::PERIODIC()'],['../structRDimY.html#ab96a435336002946e36409db13c890c4',1,'RDimY::PERIODIC()'],['../structRDimVy.html#abd8c88ddb8bd09a06883fc41d9fc10b6',1,'RDimVy::PERIODIC()']]]
 ];
