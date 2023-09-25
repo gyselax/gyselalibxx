@@ -167,14 +167,39 @@ if __name__ == '__main__':
                 # Look for references
                 match_found = reference_tag.search(line)
                 while match_found:
+                    # Get path to referenced file
                     path = match_found.group(2)[1:-1]
+
                     # Replace references to READMEs with the page tag
                     if path.endswith('README.md') and not os.path.isabs(path):
+                        # Get the path to the referenced file directory from the root directory
                         path = os.path.normpath(os.path.join(folder, path))
                         relpath = os.path.relpath(path, start=root_dir)
                         reldir = os.path.dirname(relpath)
+
+                        # Get the path to the referenced file directory from the file containing the reference
+                        path_from_file = os.path.relpath(os.path.dirname(path), start=os.path.dirname(file))
+
+                        # Check if the referenced file is a subpage.
+                        # It is a subpage if it is found in a sub-folder and no other README is found in a
+                        # closer sub-folder
+                        is_subpage = '..' not in path_from_file
+                        if is_subpage:
+                            intermediate_folders = path_from_file.split('/')
+                            for i in range(1,len(intermediate_folders)-1):
+                                # Check if a README can be found in the intermediate file
+                                if os.path.exists(os.path.join(folder, *intermediate_folders[:i], "README.md")):
+                                    is_subpage = False
+                                    break
+
+                        # Calculate the tag of the page
                         subpage_tag = get_compatible_tag(reldir)
-                        doxygen_ref = "@subpage " + subpage_tag
+
+                        # Create the complete doxygen command to reference the page.
+                        doxygen_command = "@subpage " if is_subpage else "@ref "
+                        doxygen_ref = doxygen_command + subpage_tag
+
+                        # Replace the markdown command with the doxygen command
                         line = line[:match_found.start()] + doxygen_ref + line[match_found.end():]
                         match_found = reference_tag.search(line, match_found.start() + len(doxygen_ref))
                     else:
