@@ -54,7 +54,7 @@ private:
     }
 
     static constexpr bool uniform_edge_v
-            = std::is_same_v<RDimVx, ddc::UniformPointSampling<RDimVx>>;
+            = std::is_same_v<IDimVx, ddc::UniformPointSampling<RDimVx>>;
 
 public:
     using ghosted_vx_point_sampling = std::conditional_t<
