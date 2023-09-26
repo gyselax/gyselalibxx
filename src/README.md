@@ -8,5 +8,5 @@ The `src/` folder contains all the code necessary to build a gyrokinetic semi-La
 - [geometryXYVxVy](./geometryXYVxVy/README.md) - Code describing methods which are specific to a simulation with 2 spatial dimensions and 2 velocity dimension.
 - [interpolation](./interpolation/README.md) - Code describing interpolation methods.
 <!-- - [paraconfpp](./paraconfpp/README.md) - Paraconf utility functions. -->
-<!-- - [quadrature](./quadrature/README.md) - Code describing different quadrature methods. -->
+- [quadrature](./quadrature/README.md) - Code describing different quadrature methods.
 <!-- - [speciesinfo](./speciesinfo/README.md) - Code used to describe the different species. -->

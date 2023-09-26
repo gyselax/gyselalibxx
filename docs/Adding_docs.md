@@ -52,7 +52,7 @@ If other parts of the code are relevant to your description or may be relevant i
 
 ### Example
 
-```cpp
+```
 /**
  * @brief A class which provides an interpolating function.
  *
@@ -99,6 +99,19 @@ If the folder doesn't contain a `.private` file (indicating that the folder is n
 ```markdown
 - [my_new_folder](./my_new_folder/README.md) : Short description of contents.
 ```
+
+## Documenting functions
+
+By default Doxygen only documents classes and class methods. In order to also document the functions in a file an additional descriptor must be added to the top of that file.
+The following is an example:
+```
+/**
+ * @file my_file.hpp
+ * Description of file.
+ */
+```
+
+This can be seen in action in the files in the folder `src/quadrature/`.
 
 ## Mathematical notation in documentation
 
