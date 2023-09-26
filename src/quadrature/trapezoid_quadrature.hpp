@@ -1,9 +1,23 @@
 // SPDX-License-Identifier: MIT
-
+/** @file trapezoid_quadrature.hpp
+ * File providing quadrature coefficients via the trapezoidal method.
+ */
 #pragma once
 
 #include <ddc/ddc.hpp>
 
+#include "quadrature_coeffs_nd.hpp"
+
+/**
+ * @brief Get the trapezoid coefficients in 1D.
+ *
+ * Calculate the quadrature coefficients for the trapezoid method defined on the provided domain.
+ *
+ * @param[in] domain
+ * 	The domain on which the quadrature will be carried out.
+ *
+ * @return The quadrature coefficients for the trapezoid method defined on the provided domain.
+ */
 template <class IDim>
 ddc::Chunk<double, ddc::DiscreteDomain<IDim>> trapezoid_quadrature_coefficients(
         ddc::DiscreteDomain<IDim> const& domain)
@@ -24,4 +38,21 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> trapezoid_quadrature_coefficients(
     }
 
     return coefficients;
+}
+
+/**
+ * @brief Get the trapezoid coefficients in ND.
+ *
+ * Calculate the quadrature coefficients for the trapezoid method defined on the provided domain.
+ *
+ * @param[in] domain
+ * 	The domain on which the quadrature will be carried out.
+ *
+ * @return The quadrature coefficients for the trapezoid method defined on the provided domain.
+ */
+template <class... ODims>
+ddc::Chunk<double, ddc::DiscreteDomain<ODims...>> trapezoid_quadrature_coefficients(
+        ddc::DiscreteDomain<ODims...> const& domain)
+{
+    return quadrature_coeffs_nd(domain, (trapezoid_quadrature_coefficients<ODims>)...);
 }
