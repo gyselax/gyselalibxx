@@ -197,6 +197,22 @@ inline constexpr serial_host_policy serial_host;
 inline constexpr parallel_host_policy parallel_host;
 inline constexpr parallel_device_policy parallel_device;
 
+template <typename ExecSpace>
+constexpr auto policy([[maybe_unused]] ExecSpace exec_space)
+{
+    if constexpr (std::is_same_v<ExecSpace, Kokkos::Serial>) {
+        return ddc::policies::serial_host;
+#ifdef KOKKOS_ENABLE_OPENMP
+    } else if constexpr (std::is_same_v<ExecSpace, Kokkos::OpenMP>) {
+        return ddc::policies::parallel_host;
+#endif
+#if defined(KOKKOS_ENABLE_CUDA) || defined(KOKKOS_ENABLE_HIP)
+    } else {
+        return ddc::policies::parallel_device;
+#endif
+    }
+}
+
 } // namespace policies
 
 /** iterates over a nD domain using the default execution policy
