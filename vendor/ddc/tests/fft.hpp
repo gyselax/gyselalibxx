@@ -20,26 +20,12 @@ using DDom = ddc::DiscreteDomain<DDim...>;
 template <typename Kx>
 using DFDim = ddc::PeriodicSampling<Kx>;
 
-template <typename ExecSpace>
-constexpr auto policy = [] {
-    if constexpr (std::is_same_v<ExecSpace, Kokkos::Serial>) {
-        return ddc::policies::serial_host;
-    }
-#if fftw_omp_AVAIL
-    else if constexpr (std::is_same_v<ExecSpace, Kokkos::OpenMP>) {
-        return ddc::policies::parallel_host;
-    }
-#endif
-    else {
-        return ddc::policies::parallel_device;
-    }
-};
-
 // TODO:
 // - FFT multidim but according to a subset of dimensions
 template <typename ExecSpace, typename MemorySpace, typename Tin, typename Tout, typename... X>
 static void test_fft()
 {
+    const ExecSpace exec_space = ExecSpace();
     constexpr bool full_fft
             = ddc::detail::fft::is_complex_v<Tin> && ddc::detail::fft::is_complex_v<Tout>;
     const double a = -10;
@@ -57,7 +43,7 @@ static void test_fft()
     ddc::Chunk _f(x_mesh, ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan f = _f.span_view();
     ddc::for_each(
-            policy<ExecSpace>(),
+            ddc::policies::policy(exec_space),
             f.domain(),
             DDC_LAMBDA(DElem<DDim<X>...> const e) {
                 ddc::Real const xn2
@@ -70,7 +56,7 @@ static void test_fft()
 
     ddc::Chunk Ff_alloc(k_mesh, ddc::KokkosAllocator<Tout, MemorySpace>());
     ddc::ChunkSpan Ff = Ff_alloc.span_view();
-    ddc::fft(ExecSpace(), Ff, f_bis, {ddc::FFT_Normalization::FULL});
+    ddc::fft(exec_space, Ff, f_bis, {ddc::FFT_Normalization::FULL});
     Kokkos::fence();
 
     // deepcopy of Ff because FFT C2R overwrites the input
@@ -80,7 +66,7 @@ static void test_fft()
 
     ddc::Chunk FFf_alloc(f.domain(), ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan FFf = FFf_alloc.span_view();
-    ddc::ifft(ExecSpace(), FFf, Ff_bis, {ddc::FFT_Normalization::FULL});
+    ddc::ifft(exec_space, FFf, Ff_bis, {ddc::FFT_Normalization::FULL});
 
     ddc::Chunk f_host_alloc(f.domain(), ddc::HostAllocator<Tin>());
     ddc::ChunkSpan f_host = f_host_alloc.span_view();
@@ -130,6 +116,7 @@ static void test_fft()
 template <typename ExecSpace, typename MemorySpace, typename Tin, typename Tout, typename X>
 static void test_fft_norm(ddc::FFT_Normalization const norm)
 {
+    const ExecSpace exec_space = ExecSpace();
     constexpr bool full_fft
             = ddc::detail::fft::is_complex_v<Tin> && ddc::detail::fft::is_complex_v<Tout>;
 
@@ -143,7 +130,7 @@ static void test_fft_norm(ddc::FFT_Normalization const norm)
     ddc::Chunk f_alloc = ddc::Chunk(x_mesh, ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan f = f_alloc.span_view();
     ddc::for_each(
-            policy<ExecSpace>(),
+            ddc::policies::policy(exec_space),
             f.domain(),
             DDC_LAMBDA(DElem<DDim<X>> const e) { f(e) = static_cast<Tin>(1); });
 
@@ -154,7 +141,7 @@ static void test_fft_norm(ddc::FFT_Normalization const norm)
 
     ddc::Chunk Ff_alloc = ddc::Chunk(k_mesh, ddc::KokkosAllocator<Tout, MemorySpace>());
     ddc::ChunkSpan Ff = Ff_alloc.span_view();
-    ddc::fft(ExecSpace(), Ff, f_bis, {norm});
+    ddc::fft(exec_space, Ff, f_bis, {norm});
     Kokkos::fence();
 
     // deepcopy of Ff because FFT C2R overwrites the input
@@ -164,7 +151,7 @@ static void test_fft_norm(ddc::FFT_Normalization const norm)
 
     ddc::Chunk FFf_alloc = ddc::Chunk(x_mesh, ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan FFf = FFf_alloc.span_view();
-    ddc::ifft(ExecSpace(), FFf, Ff_bis, {norm});
+    ddc::ifft(exec_space, FFf, Ff_bis, {norm});
 
     double const f_sum = ddc::transform_reduce(f.domain(), 0., ddc::reducer::sum<double>(), f);
 
