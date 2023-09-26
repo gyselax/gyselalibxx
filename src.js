@@ -6,5 +6,6 @@ var src =
     [ "Interpolation Methods", "src_interpolation.html", [
       [ "Spline Interpolation", "src_interpolation.html#Spline_Interpolation", null ],
       [ "Memory concerns", "src_interpolation.html#Memory_concerns", null ]
-    ] ]
+    ] ],
+    [ "Quadrature Methods", "src_quadrature.html", null ]
 ];

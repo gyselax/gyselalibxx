@@ -168,7 +168,8 @@ var NAVTREEINDEX3 =
 "docs_Adding_docs.html":[3],
 "docs_Adding_docs.html#Documentation_describing_code_structures":[3,0],
 "docs_Adding_docs.html#Documentation_describing_general_methods":[3,1],
-"docs_Adding_docs.html#Mathematical_notation_in_documentation":[3,2],
+"docs_Adding_docs.html#Documenting_functions":[3,2],
+"docs_Adding_docs.html#Mathematical_notation_in_documentation":[3,3],
 "docs_Adding_docs.html#autotoc_md0":[0],
 "docs_Adding_docs.html#autotoc_md1":[1],
 "docs_Adding_docs.html#autotoc_md2":[2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "math__tools_8hpp_source.html":[11,2,0,0,0,10],
 "matrix_8hpp_source.html":[11,2,0,0,0,11],
 "matrix__banded_8hpp_source.html":[11,2,0,0,0,12],
-"matrix__center__block_8hpp_source.html":[11,2,0,0,0,13],
-"matrix__corner__block_8hpp_source.html":[11,2,0,0,0,14]
+"matrix__center__block_8hpp_source.html":[11,2,0,0,0,13]
 };

@@ -141,28 +141,51 @@ References to other relevant parts of the code</h3>
 <p>If other parts of the code are relevant to your description or may be relevant in places where the code is used you can signal this with the <code>@see</code> tag which must be followed by the full name of the relevant class or function.</p>
 <h3><a class="anchor" id="autotoc_md5"></a>
 Example</h3>
-<div class="fragment"><div class="line"> </div>
-<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim&gt;</div>
-<div class="line"><span class="keyword">class </span><a class="code" href="classIInterpolator.html">IInterpolator</a></div>
+<div class="fragment"><div class="line">/**</div>
+<div class="line"> * @brief A class which provides an interpolating function.</div>
+<div class="line"> *</div>
+<div class="line"> * An abstract class which implements a function allowing</div>
+<div class="line"> * the value of a function to be approximated at a set of</div>
+<div class="line"> * coordinates from a set of known values of the function.</div>
+<div class="line"> */</div>
+<div class="line">template &lt;class DDim&gt;</div>
+<div class="line">class IInterpolator</div>
 <div class="line">{</div>
-<div class="line">    <span class="keyword">using</span> CDim = <span class="keyword">typename</span> DDim::continuous_dimension_type;</div>
+<div class="line">    using CDim = typename DDim::continuous_dimension_type;</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">virtual</span> ~<a class="code" href="classIInterpolator.html">IInterpolator</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line">public:</div>
+<div class="line">    virtual ~IInterpolator() = default;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim&gt;&gt; <a class="code" href="classIInterpolator.html#a5321defe083a5f46ab01233ead86ed6a">operator()</a>(</div>
-<div class="line">            ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;DDim&gt;&gt; inout_data,</div>
-<div class="line">            ddc::ChunkSpan&lt;<span class="keyword">const</span> ddc::Coordinate&lt;CDim&gt;, ddc::DiscreteDomain&lt;DDim&gt;&gt; coordinates)</div>
-<div class="line">            <span class="keyword">const</span> = 0;</div>
+<div class="line">    /**</div>
+<div class="line">     * @brief Approximate the value of a function at a set of coordinates using the</div>
+<div class="line">     * current values at a known set of interpolation points.</div>
+<div class="line">     *</div>
+<div class="line">     * @param[in, out] inout_data On input: an array containing the value of the function at the interpolation points.</div>
+<div class="line">     *                   On output: an array containing the value of the function at the coordinates.</div>
+<div class="line">     * @param[in] coordinates The coordinates where the function should be evaluated.</div>
+<div class="line">     *</div>
+<div class="line">     * @return A reference to the inout_data array containing the value of the function at the coordinates.</div>
+<div class="line">     *</div>
+<div class="line">     * @see InterpolatorProxy::operator()</div>
+<div class="line">     */</div>
+<div class="line">    virtual ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim&gt;&gt; operator()(</div>
+<div class="line">            ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim&gt;&gt; inout_data,</div>
+<div class="line">            ddc::ChunkSpan&lt;const ddc::Coordinate&lt;CDim&gt;, ddc::DiscreteDomain&lt;DDim&gt;&gt; coordinates)</div>
+<div class="line">            const = 0;</div>
 <div class="line">};</div>
-<div class="ttc" id="aclassIInterpolator_html"><div class="ttname"><a href="classIInterpolator.html">IInterpolator</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> i_interpolator.hpp:18</div></div>
-<div class="ttc" id="aclassIInterpolator_html_a5321defe083a5f46ab01233ead86ed6a"><div class="ttname"><a href="classIInterpolator.html#a5321defe083a5f46ab01233ead86ed6a">IInterpolator::operator()</a></div><div class="ttdeci">virtual ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt; &gt; operator()(ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; inout_data, ddc::ChunkSpan&lt; const ddc::Coordinate&lt; CDim &gt;, ddc::DiscreteDomain&lt; DDim &gt;&gt; coordinates) const =0</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="Documentation_describing_general_methods"></a>
 Documentation describing general methods</h1>
 <p>Each folder containing code should also contain a <code>README.md</code> file providing an overview of the contents of the folder and any general information and references which may be helpful for understanding this code.</p>
 <p>The <code>README.md</code> file should begin with a title: </p><div class="fragment"><div class="line"># &lt;title&gt;</div>
 </div><!-- fragment --><p> If the folder doesn't contain a <code>.private</code> file (indicating that the folder is not yet ready to be shared publically), the new page can be referenced from any enclosing page that may exist. For example if you create a new folder in <code>src/</code>, you should add the following line to the list of folders in <code>src/README.md</code>: </p><div class="fragment"><div class="line">- [my_new_folder](./my_new_folder/README.md) : Short description of contents.</div>
-</div><!-- fragment --><h1><a class="anchor" id="Mathematical_notation_in_documentation"></a>
+</div><!-- fragment --><h1><a class="anchor" id="Documenting_functions"></a>
+Documenting functions</h1>
+<p>By default Doxygen only documents classes and class methods. In order to also document the functions in a file an additional descriptor must be added to the top of that file. The following is an example: </p><div class="fragment"><div class="line">/**</div>
+<div class="line"> * @file my_file.hpp</div>
+<div class="line"> * Description of file.</div>
+<div class="line"> */</div>
+</div><!-- fragment --><p>This can be seen in action in the files in the folder <code>src/quadrature/</code>.</p>
+<h1><a class="anchor" id="Mathematical_notation_in_documentation"></a>
 Mathematical notation in documentation</h1>
 <p>Mathematical notation can be used in Doxygen output.</p>
 <p>In Markdown files it should be blocked with <code>$</code> commands. E.g: </p><div class="fragment"><div class="line">$a \ne b$</div>

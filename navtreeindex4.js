@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"matrix__corner__block_8hpp_source.html":[11,2,0,0,0,14],
 "matrix__dense_8hpp_source.html":[11,2,0,0,0,15],
 "matrix__pds__tridiag_8hpp_source.html":[11,2,0,0,0,16],
 "matrix__periodic__banded_8hpp_source.html":[11,2,0,0,0,17],
@@ -14,6 +15,10 @@ var NAVTREEINDEX4 =
 "polarpoissonsolver_8hpp_source.html":[11,0,1,2,2],
 "polynomial__evaluator_8hpp_source.html":[11,2,0,1,2],
 "quadrature_8hpp_source.html":[11,0,6,0],
+"quadrature__coeffs__nd_8hpp.html":[11,0,6,1],
+"quadrature__coeffs__nd_8hpp.html#a75111622b2d60d9c91dd623dab7faba8":[11,0,6,1,0],
+"quadrature__coeffs__nd_8hpp.html#a8ad4afcced6bbc0657439d943580386b":[11,0,6,1,1],
+"quadrature__coeffs__nd_8hpp_source.html":[11,0,6,1],
 "simulations_geometryXVx_sheath.html":[6],
 "simulations_geometryXVx_sheath.html#Description":[6,0],
 "simulations_geometryXVx_sheath.html#Recommended_parameters":[6,2],
@@ -43,6 +48,7 @@ var NAVTREEINDEX4 =
 "src_interpolation.html":[7,3],
 "src_interpolation.html#Memory_concerns":[7,3,1],
 "src_interpolation.html#Spline_Interpolation":[7,3,0],
+"src_quadrature.html":[7,4],
 "structDimP.html":[10,23],
 "structDimR.html":[10,24],
 "structDimX.html":[10,25],
@@ -77,7 +83,10 @@ var NAVTREEINDEX4 =
 "tests_geometryRTheta_2d_spline_interpolator.html":[8],
 "tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md14":[10],
 "tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md15":[11],
-"trapezoid__quadrature_8hpp_source.html":[11,0,6,1],
+"trapezoid__quadrature_8hpp.html":[11,0,6,2],
+"trapezoid__quadrature_8hpp.html#a4d668965c9906452c2022447457175fe":[11,0,6,2,0],
+"trapezoid__quadrature_8hpp.html#a9b37968b97363d75ad6401309016c8f9":[11,0,6,2,1],
+"trapezoid__quadrature_8hpp_source.html":[11,0,6,2],
 "vendor_sll.html":[9],
 "vendor_sll_include_sll_mapping.html":[9,0],
 "view_8hpp_source.html":[11,2,0,0,0,28]

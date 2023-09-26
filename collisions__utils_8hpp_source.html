@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;quadrature.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;trapezoid_quadrature.hpp&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">void</span> compute_nustar_profile(DSpanSpX nustar_profile, <span class="keywordtype">double</span> nustar0);</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
@@ -194,7 +194,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        ddc::ChunkSpan&lt;<span class="keywordtype">double</span> <span class="keyword">const</span>, ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimension&gt;&gt; dvDcoll)</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="classQuadrature.html">Quadrature&lt;IDimVx&gt;</a> <span class="keyword">const</span> integrate_v(</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            trapezoid_quadrature_coefficients(ddc::get_domain&lt;IDimVx&gt;(allfdistribu)));</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <a class="code" href="trapezoid__quadrature_8hpp.html#a4d668965c9906452c2022447457175fe">trapezoid_quadrature_coefficients</a>(ddc::get_domain&lt;IDimVx&gt;(allfdistribu)));</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="comment">// computation of the integrands</span></div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    DFieldSpXVx I0mean_integrand(allfdistribu.domain());</div>
@@ -262,6 +262,8 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        DViewSp mean_velocity,</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        DViewSp temperature);</div>
 <div class="ttc" id="aclassQuadrature_html"><div class="ttname"><a href="classQuadrature.html">Quadrature&lt; IDimVx &gt;</a></div></div>
+<div class="ttc" id="atrapezoid__quadrature_8hpp_html"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a></div><div class="ttdoc">File providing quadrature coefficients via the trapezoidal method.</div></div>
+<div class="ttc" id="atrapezoid__quadrature_8hpp_html_a4d668965c9906452c2022447457175fe"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#a4d668965c9906452c2022447457175fe">trapezoid_quadrature_coefficients</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt; trapezoid_quadrature_coefficients(ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain)</div><div class="ttdoc">Get the trapezoid coefficients in 1D.</div><div class="ttdef"><b>Definition:</b> trapezoid_quadrature.hpp:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

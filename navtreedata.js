@@ -31,6 +31,7 @@ var NAVTREE =
     [ "Adding Documentation", "docs_Adding_docs.html", [
       [ "Documentation describing code structures", "docs_Adding_docs.html#Documentation_describing_code_structures", null ],
       [ "Documentation describing general methods", "docs_Adding_docs.html#Documentation_describing_general_methods", null ],
+      [ "Documenting functions", "docs_Adding_docs.html#Documenting_functions", null ],
       [ "Mathematical notation in documentation", "docs_Adding_docs.html#Mathematical_notation_in_documentation", null ]
     ] ],
     [ "Coding Standards", "docs_CODING_STANDARD.html", [
@@ -65,7 +66,7 @@ var NAVTREEINDEX =
 "classGrevilleInterpolationPoints.html#a80607a4c866ff36244d980e41870a347",
 "classPolarBSplines_1_1Impl.html#a2dd5ab4233bbd69675345f083a271b7d",
 "classdeprecated_1_1BSplines.html#a39994f9d8e2cde1a3c849c21c50cc417",
-"matrix__dense_8hpp_source.html"
+"matrix__corner__block_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

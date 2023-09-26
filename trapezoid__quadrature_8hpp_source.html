@@ -103,39 +103,50 @@ $(document).ready(function(){initNavTree('trapezoid__quadrature_8hpp_source.html
 <div class="title">trapezoid_quadrature.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<a href="trapezoid__quadrature_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim&gt;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt; trapezoid_quadrature_coefficients(</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; domain)</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt; coefficients(domain);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    ddc::DiscreteDomain&lt;IDim&gt; middle_domain</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            = domain.remove(ddc::DiscreteVector&lt;IDim&gt;(1), ddc::DiscreteVector&lt;IDim&gt;(1));</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    coefficients(domain.front()) = 0.5 * distance_at_right(domain.front());</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    ddc::for_each(middle_domain, [&amp;](ddc::DiscreteElement&lt;IDim&gt; <span class="keyword">const</span> idx) {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        coefficients(idx) = 0.5 * (distance_at_left(idx) + distance_at_right(idx));</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    });</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    coefficients(domain.back()) = 0.5 * distance_at_left(domain.back());</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">if</span> constexpr (IDim::continuous_dimension_type::PERIODIC) {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        coefficients(domain.front()) += 0.5 * distance_at_left(domain.back());</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        coefficients(domain.back()) += 0.5 * distance_at_right(domain.front());</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="quadrature__coeffs__nd_8hpp.html">quadrature_coeffs_nd.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim&gt;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="trapezoid__quadrature_8hpp.html#a4d668965c9906452c2022447457175fe">   22</a></span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt; <a class="code" href="trapezoid__quadrature_8hpp.html#a4d668965c9906452c2022447457175fe">trapezoid_quadrature_coefficients</a>(</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; domain)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt; coefficients(domain);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    ddc::DiscreteDomain&lt;IDim&gt; middle_domain</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            = domain.remove(ddc::DiscreteVector&lt;IDim&gt;(1), ddc::DiscreteVector&lt;IDim&gt;(1));</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    coefficients(domain.front()) = 0.5 * distance_at_right(domain.front());</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    ddc::for_each(middle_domain, [&amp;](ddc::DiscreteElement&lt;IDim&gt; <span class="keyword">const</span> idx) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        coefficients(idx) = 0.5 * (distance_at_left(idx) + distance_at_right(idx));</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    });</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    coefficients(domain.back()) = 0.5 * distance_at_left(domain.back());</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">if</span> constexpr (IDim::continuous_dimension_type::PERIODIC) {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        coefficients(domain.front()) += 0.5 * distance_at_left(domain.back());</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        coefficients(domain.back()) += 0.5 * distance_at_right(domain.front());</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... ODims&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="trapezoid__quadrature_8hpp.html#a9b37968b97363d75ad6401309016c8f9">   54</a></span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;ODims...&gt;&gt; <a class="code" href="trapezoid__quadrature_8hpp.html#a4d668965c9906452c2022447457175fe">trapezoid_quadrature_coefficients</a>(</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        ddc::DiscreteDomain&lt;ODims...&gt; <span class="keyword">const</span>&amp; domain)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="quadrature__coeffs__nd_8hpp.html#a75111622b2d60d9c91dd623dab7faba8">quadrature_coeffs_nd</a>(domain, (trapezoid_quadrature_coefficients&lt;ODims&gt;)...);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="ttc" id="aquadrature__coeffs__nd_8hpp_html"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html">quadrature_coeffs_nd.hpp</a></div><div class="ttdoc">File providing helper functions for defining multi-dimensional quadrature methods.</div></div>
+<div class="ttc" id="aquadrature__coeffs__nd_8hpp_html_a75111622b2d60d9c91dd623dab7faba8"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html#a75111622b2d60d9c91dd623dab7faba8">quadrature_coeffs_nd</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim, ODims... &gt; &gt; quadrature_coeffs_nd(ddc::DiscreteDomain&lt; IDim, ODims... &gt; const &amp;domain, std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt;&gt;(ddc::DiscreteDomain&lt; IDim &gt;)&gt; func, std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; ODims &gt;&gt;(ddc::DiscreteDomain&lt; ODims &gt;)&gt;... o_funcs)</div><div class="ttdoc">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</div><div class="ttdef"><b>Definition:</b> quadrature_coeffs_nd.hpp:22</div></div>
+<div class="ttc" id="atrapezoid__quadrature_8hpp_html_a4d668965c9906452c2022447457175fe"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#a4d668965c9906452c2022447457175fe">trapezoid_quadrature_coefficients</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt; trapezoid_quadrature_coefficients(ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain)</div><div class="ttdoc">Get the trapezoid coefficients in 1D.</div><div class="ttdef"><b>Definition:</b> trapezoid_quadrature.hpp:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_42e0d6fcfa69cb3b4e97936052cc6ddf.html">quadrature</a></li><li class="navelem"><b>trapezoid_quadrature.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_42e0d6fcfa69cb3b4e97936052cc6ddf.html">quadrature</a></li><li class="navelem"><a class="el" href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

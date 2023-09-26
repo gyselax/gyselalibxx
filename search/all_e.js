@@ -1,6 +1,9 @@
 var searchData=
 [
   ['qdimx_179',['QDimX',['../classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX',1,'FemNonPeriodicPoissonSolver::QDimX'],['../classFemPeriodicPoissonSolver.html#structFemPeriodicPoissonSolver_1_1QDimX',1,'FemPeriodicPoissonSolver::QDimX']]],
-  ['quadrature_180',['Quadrature',['../classQuadrature.html',1,'']]],
-  ['quadrature_3c_20idimvx_20_3e_181',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]]
+  ['quadrature_180',['Quadrature',['../classQuadrature.html',1,'Quadrature&lt; IDim &gt;'],['../classQuadrature.html#afd6d17aed37b3b62d7c638075c5be300',1,'Quadrature::Quadrature(ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; &amp;&amp;coeffs)'],['../classQuadrature.html#af6bd0619387d4161c2a9ed844c76cd52',1,'Quadrature::Quadrature(Quadrature &amp;&amp;rhs)=default']]],
+  ['quadrature_20methods_181',['Quadrature Methods',['../src_quadrature.html',1,'src']]],
+  ['quadrature_3c_20idimvx_20_3e_182',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]],
+  ['quadrature_5fcoeffs_5fnd_183',['quadrature_coeffs_nd',['../quadrature__coeffs__nd_8hpp.html#a75111622b2d60d9c91dd623dab7faba8',1,'quadrature_coeffs_nd(ddc::DiscreteDomain&lt; IDim, ODims... &gt; const &amp;domain, std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt;&gt;(ddc::DiscreteDomain&lt; IDim &gt;)&gt; func, std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; ODims &gt;&gt;(ddc::DiscreteDomain&lt; ODims &gt;)&gt;... o_funcs):&#160;quadrature_coeffs_nd.hpp'],['../quadrature__coeffs__nd_8hpp.html#a8ad4afcced6bbc0657439d943580386b',1,'quadrature_coeffs_nd(ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain, std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt;&gt;(ddc::DiscreteDomain&lt; IDim &gt;)&gt; func):&#160;quadrature_coeffs_nd.hpp']]],
+  ['quadrature_5fcoeffs_5fnd_2ehpp_184',['quadrature_coeffs_nd.hpp',['../quadrature__coeffs__nd_8hpp.html',1,'']]]
 ];
