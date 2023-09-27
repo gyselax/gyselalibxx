@@ -19,7 +19,7 @@
  * @return The quadrature coefficients for the trapezoid method defined on the provided domain.
  */
 template <class IDim>
-ddc::Chunk<double, ddc::DiscreteDomain<IDim>> trapezoid_quadrature_coefficients(
+ddc::Chunk<double, ddc::DiscreteDomain<IDim>> trapezoid_quadrature_coefficients_1d(
         ddc::DiscreteDomain<IDim> const& domain)
 {
     ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
@@ -54,5 +54,8 @@ template <class... ODims>
 ddc::Chunk<double, ddc::DiscreteDomain<ODims...>> trapezoid_quadrature_coefficients(
         ddc::DiscreteDomain<ODims...> const& domain)
 {
-    return quadrature_coeffs_nd(domain, (trapezoid_quadrature_coefficients<ODims>)...);
+    return quadrature_coeffs_nd(
+            domain,
+            (std::function<ddc::Chunk<double, ddc::DiscreteDomain<ODims>>(
+                     ddc::DiscreteDomain<ODims>)>(trapezoid_quadrature_coefficients_1d<ODims>))...);
 }
