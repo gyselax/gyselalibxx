@@ -159,20 +159,20 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2geometry_2geometry_8hp
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsVx = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsVy = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">using</span> BSplinesX = std::conditional_t&lt;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">using</span> <a class="code" href="classUniformBSplines.html">BSplinesX</a> = std::conditional_t&lt;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        BsplineOnUniformCellsX,</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="classUniformBSplines.html">UniformBSplines&lt;RDimX, BSDegreeX&gt;</a>,</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="classNonUniformBSplines.html">NonUniformBSplines&lt;RDimX, BSDegreeX&gt;</a>&gt;;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">using</span> BSplinesY = std::conditional_t&lt;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">using</span> <a class="code" href="classUniformBSplines.html">BSplinesY</a> = std::conditional_t&lt;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        BsplineOnUniformCellsY,</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classUniformBSplines.html">UniformBSplines&lt;RDimY, BSDegreeY&gt;</a>,</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <a class="code" href="classNonUniformBSplines.html">NonUniformBSplines&lt;RDimY, BSDegreeY&gt;</a>&gt;;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">using</span> BSplinesVx = std::conditional_t&lt;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">using</span> <a class="code" href="classUniformBSplines.html">BSplinesVx</a> = std::conditional_t&lt;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        BsplineOnUniformCellsVx,</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <a class="code" href="classUniformBSplines.html">UniformBSplines&lt;RDimVx, BSDegreeVx&gt;</a>,</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <a class="code" href="classNonUniformBSplines.html">NonUniformBSplines&lt;RDimVx, BSDegreeVx&gt;</a>&gt;;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">using</span> BSplinesVy = std::conditional_t&lt;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">using</span> <a class="code" href="classUniformBSplines.html">BSplinesVy</a> = std::conditional_t&lt;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        BsplineOnUniformCellsVy,</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <a class="code" href="classUniformBSplines.html">UniformBSplines&lt;RDimVy, BSDegreeVy&gt;</a>,</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <a class="code" href="classNonUniformBSplines.html">NonUniformBSplines&lt;RDimVy, BSDegreeVy&gt;</a>&gt;;</div>

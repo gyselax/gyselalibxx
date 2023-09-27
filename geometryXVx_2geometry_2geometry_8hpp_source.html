@@ -153,12 +153,12 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsX = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsVx = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">using</span> BSplinesX = std::conditional_t&lt;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">using</span> <a class="code" href="classUniformBSplines.html">BSplinesX</a> = std::conditional_t&lt;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        BsplineOnUniformCellsX,</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="classUniformBSplines.html">UniformBSplines&lt;RDimX, BSDegreeX&gt;</a>,</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <a class="code" href="classNonUniformBSplines.html">NonUniformBSplines&lt;RDimX, BSDegreeX&gt;</a>&gt;;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">using</span> BSplinesVx = std::conditional_t&lt;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">using</span> <a class="code" href="classUniformBSplines.html">BSplinesVx</a> = std::conditional_t&lt;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        BsplineOnUniformCellsVx,</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <a class="code" href="classUniformBSplines.html">UniformBSplines&lt;RDimVx, BSDegreeVx&gt;</a>,</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="classNonUniformBSplines.html">NonUniformBSplines&lt;RDimVx, BSDegreeVx&gt;</a>&gt;;</div>
