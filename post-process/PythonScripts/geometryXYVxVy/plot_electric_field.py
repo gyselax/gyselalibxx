@@ -7,6 +7,9 @@ file : plot_electric_field
 date : 17/07/2023
 
 Diagnostic for (X,Y,Vx,Vy) geometry
+
+-----> Simple usage: python3 plot_electric_field.py ../../../build/simulations/geometryXYVxVy/landau/ --itime 10 
+
 '''
 
 # pylint: disable=invalid-name
@@ -63,16 +66,34 @@ if __name__ == '__main__':
     data_dict = {f't={time_init}': epot.sel(time=time_init),
                  f't={time_diag}': epot.sel(time=time_diag)}
 
-    def plot_electric_field():
+    def plot_electric_potential(itime):
+        '''
+        Plot electric potential
+        '''
+        output_filename_epot = os.path.join(Path.cwd(), 'electric_potential.png')
+        plot_field2d(epot[itime,:,:].T , '', output_filename_epot, cmap='jet', scale='linear')
+
+
+    def plot_electric_field(itime):
         '''
         Plot electric field
         '''
 
         output_filename_Ex = os.path.join(Path.cwd(), 'electric_field_x.png')
-        plot_field2d(Ex[Timer-1,:,:].T , '', output_filename_Ex, cmap='jet', scale='linear')
+        plot_field2d(Ex[itime-1,:,:].T , '', output_filename_Ex, cmap='jet', scale='linear')
 
         output_filename_Ey = os.path.join(Path.cwd(), 'electric_field_y.png')
-        plot_field2d(Ey[Timer-1,:,:].T , '', output_filename_Ey, cmap='jet', scale='linear')
+        plot_field2d(Ey[itime-1,:,:].T , '', output_filename_Ey, cmap='jet', scale='linear')
+
+    def plot_electric_energy_density_field(itime):
+        '''
+        Plot electric energy density field
+        '''
+
+        z = np.power(Ex[itime-1,:,:],2)+np.power(Ey[itime-1,:,:],2)
+        output_filename_U = os.path.join(Path.cwd(), 'electric_energy_density_field.png')
+        plot_field2d(z, '', output_filename_U, cmap='jet', scale='linear')
+
 
     def compute_electric_energy():
         '''
@@ -117,7 +138,7 @@ if __name__ == '__main__':
         plt.title(f'growthrate: {res[0]:0.3f} (theory: {theo_rate:0.3f})', fontsize=16)
         plt.savefig('Electric_energy.png')
 
-    def plot_fdist(Vx,Vy):
+    def plot_fdist(itime,Vx,Vy):
         '''
         Plot the initial distribution function in (X,Y) fo a fixed (Vx, Vy) velocity position.
         '''
@@ -125,11 +146,13 @@ if __name__ == '__main__':
         plt.clf()
         fig = plt.figure()
         ax = fig.add_subplot()# 111,projection='3d')
-        im = ax.imshow(fdistribu[0,0,:,:,Vx,Vy] )
+        im = ax.imshow(fdistribu[itime,0,:,:,Vx,Vy] )
         fig.colorbar(im)
         plt.title('initial distribution function at Vx='+str(Vx)+' Vy='+str(Vy))
         plt.savefig('test_fdistribution.png')
 
-    plot_electric_field()
+    plot_electric_potential(args.itime)
+    plot_electric_field(args.itime)
+    plot_electric_energy_density_field(args.itime)
     plot_electric_energy()
-    plot_fdist(31,31)
+    plot_fdist(args.itime,31,31)
