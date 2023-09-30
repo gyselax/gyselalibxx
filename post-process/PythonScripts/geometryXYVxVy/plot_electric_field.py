@@ -9,6 +9,7 @@ date : 17/07/2023
 Diagnostic for (X,Y,Vx,Vy) geometry
 
 -----> Simple usage: python3 plot_electric_field.py ../../../build/simulations/geometryXYVxVy/landau/ --itime 10 
+-----> Animation: python3 plot_electric_field.py ../../../build/simulations/geometryXYVxVy/landau/ --gif True
 
 '''
 
@@ -26,6 +27,8 @@ import os
 from gysdata import DiskStore
 from plot_utils import plot_field2d
 
+import imageio.v2 as imageio
+
 if __name__ == '__main__':
     parser = ArgumentParser(
         description='Plots the electric field')
@@ -35,6 +38,11 @@ if __name__ == '__main__':
                         default=Path.cwd(),
                         type=Path,
                         help='location of the results')
+    parser.add_argument('--gif',
+                        action='store',
+                        default=False,
+                        type=bool,
+                        help='produce animation')
     parser.add_argument('--itime',
                         action='store',
                         default=-1,
@@ -151,8 +159,42 @@ if __name__ == '__main__':
         plt.title('initial distribution function at Vx='+str(Vx)+' Vy='+str(Vy))
         plt.savefig('test_fdistribution.png')
 
-    plot_electric_potential(args.itime)
-    plot_electric_field(args.itime)
-    plot_electric_energy_density_field(args.itime)
-    plot_electric_energy()
-    plot_fdist(args.itime,31,31)
+    if (not(args.gif)):
+        plot_electric_potential(args.itime)
+        plot_electric_field(args.itime)
+        plot_electric_energy_density_field(args.itime)
+        plot_electric_energy()
+        plot_fdist(args.itime,31,31)
+
+    else:
+        min_efield = min([np.min(Ex),np.min(Ey)]).compute()
+        max_efield = max([np.max(Ex),np.max(Ey)]).compute()
+        min_epot = np.min(epot).compute()
+        max_epot = np.max(epot).compute()
+        min_energy_den = np.min(np.power(Ex,2)+np.power(Ey,2)).compute()
+        max_energy_den = np.max(np.power(Ex,2)+np.power(Ey,2)).compute()
+
+        images = []
+        for itime in range(Timer):
+            plot_field2d(epot[itime-1,:,:].T , '', os.path.join(Path.cwd(), 'temp.png'), vmin=min_epot, vmax=max_epot, cmap='jet', scale='linear')
+            images.append(imageio.imread(os.path.join(Path.cwd(), 'temp.png')))
+        imageio.mimsave('electric_potential.gif', images)
+
+        images = []
+        for itime in range(Timer):
+            plot_field2d(Ex[itime-1,:,:].T , '', os.path.join(Path.cwd(), 'temp.png'), vmin=min_efield, vmax=max_efield, cmap='jet', scale='linear')
+            images.append(imageio.imread(os.path.join(Path.cwd(), 'temp.png')))
+        imageio.mimsave('electric_field_x.gif', images)
+
+        images = []
+        for itime in range(Timer):
+            plot_field2d(Ey[itime-1,:,:].T , '', os.path.join(Path.cwd(), 'temp.png'), vmin=min_efield, vmax=max_efield, cmap='jet', scale='linear')
+            images.append(imageio.imread(os.path.join(Path.cwd(), 'temp.png')))
+        imageio.mimsave('electric_field_y.gif', images)
+
+        images = []
+        for itime in range(Timer):
+            z = np.power(Ex[itime-1,:,:],2)+np.power(Ey[itime-1,:,:],2)
+            plot_field2d(z, '', os.path.join(Path.cwd(), 'temp.png'), vmin=min_energy_den, vmax=max_energy_den, cmap='jet', scale='linear')
+            images.append(imageio.imread(os.path.join(Path.cwd(), 'temp.png')))
+        imageio.mimsave('electric_energy_density_field.gif', images)
