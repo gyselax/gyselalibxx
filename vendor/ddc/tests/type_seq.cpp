@@ -11,6 +11,8 @@ namespace {
 struct a;
 struct b;
 struct c;
+struct d;
+struct e;
 struct y;
 struct z;
 
@@ -60,5 +62,15 @@ TEST(TypeSeqTest, Merge)
     using B = ddc::detail::TypeSeq<z, c, y>;
     using R = ddc::type_seq_merge_t<A, B>;
     using ExpectedR = ddc::detail::TypeSeq<a, b, c, z, y>;
+    EXPECT_TRUE((ddc::type_seq_same_v<R, ExpectedR>));
+}
+
+TEST(TypeSeqTest, Replace)
+{
+    using A = ddc::detail::TypeSeq<a, b, c, d, e>;
+    using B = ddc::detail::TypeSeq<b, d>;
+    using C = ddc::detail::TypeSeq<y, z>;
+    using R = ddc::type_seq_replace_t<A, B, C>;
+    using ExpectedR = ddc::detail::TypeSeq<a, y, c, z, e>;
     EXPECT_TRUE((ddc::type_seq_same_v<R, ExpectedR>));
 }
