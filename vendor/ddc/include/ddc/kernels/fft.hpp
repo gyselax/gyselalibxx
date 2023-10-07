@@ -153,7 +153,10 @@ using _fftw_plan = std::conditional_t<std::is_same_v<real_type_t<T>, float>, fft
 
 // _fftw_plan_many_dft : templated function working for all types of transformation
 template <typename Tin, typename Tout, typename... Args, typename PenultArg, typename LastArg>
-_fftw_plan<Tin> _fftw_plan_many_dft(PenultArg penultArg, LastArg lastArg, Args... args)
+_fftw_plan<Tin> _fftw_plan_many_dft(
+        [[maybe_unused]] PenultArg penultArg,
+        LastArg lastArg,
+        Args... args)
 { // Ugly, penultArg and lastArg are passed before the rest because of a limitation of C++ (parameter packs must be last arguments)
     const TransformType transformType = transform_type_v<Tin, Tout>;
     if constexpr (transformType == TransformType::R2C && std::is_same_v<Tin, float>)
@@ -216,7 +219,7 @@ constexpr auto cufft_transform_type()
 // cufftExec : argument passed in the cufftMakePlan function
 // _fftw_plan_many_dft : templated function working for all types of transformation
 template <typename Tin, typename Tout, typename... Args, typename LastArg>
-cufftResult _cufftExec(LastArg lastArg, Args... args)
+cufftResult _cufftExec([[maybe_unused]] LastArg lastArg, Args... args)
 { // Ugly for same reason as fftw
     const TransformType transformType = transform_type_v<Tin, Tout>;
     if constexpr (transformType == TransformType::R2C && std::is_same_v<Tin, float>)
@@ -280,7 +283,7 @@ constexpr auto hipfft_transform_type()
 // hipfftExec : argument passed in the hipfftMakePlan function
 // _fftw_plan_many_dft : templated function working for all types of transformation
 template <typename Tin, typename Tout, typename... Args, typename LastArg>
-hipfftResult _hipfftExec(LastArg lastArg, Args... args)
+hipfftResult _hipfftExec([[maybe_unused]] LastArg lastArg, Args... args)
 {
     const TransformType transformType = transform_type_v<Tin, Tout>;
     if constexpr (transformType == TransformType::R2C && std::is_same_v<Tin, float>)

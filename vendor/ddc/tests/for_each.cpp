@@ -72,6 +72,15 @@ TEST(ForEachSerialHost, TwoDimensions)
     EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
 }
 
+TEST(ForEachParallelHost, ZeroDimension)
+{
+    DDom0D const dom;
+    std::vector<int> storage(dom.size(), 0);
+    ddc::ChunkSpan<int, DDom0D> view(storage.data(), dom);
+    ddc::for_each(ddc::policies::parallel_host, dom, [=](DElem0D const i) { view(i) += 1; });
+    EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
+}
+
 TEST(ForEachParallelHost, OneDimension)
 {
     DDomX const dom(lbound_x, nelems_x);
@@ -88,6 +97,34 @@ TEST(ForEachParallelHost, TwoDimensions)
     ddc::ChunkSpan<int, DDomXY> view(storage.data(), dom);
     ddc::for_each(ddc::policies::parallel_host, dom, [=](DElemXY const ixy) { view(ixy) += 1; });
     EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
+}
+
+namespace {
+
+void TestForEachParallelDeviceZeroDimension()
+{
+    DDom0D const dom;
+    ddc::Chunk<int, DDom0D, ddc::DeviceAllocator<int>> storage(dom);
+    Kokkos::deep_copy(storage.allocation_kokkos_view(), 0);
+    ddc::ChunkSpan view(storage.span_view());
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            dom,
+            DDC_LAMBDA(DElem0D const i) { view(i) += 1; });
+    int const* const ptr = storage.data_handle();
+    int sum;
+    Kokkos::parallel_reduce(
+            dom.size(),
+            KOKKOS_LAMBDA(std::size_t i, int& local_sum) { local_sum += ptr[i]; },
+            Kokkos::Sum<int>(sum));
+    EXPECT_EQ(sum, dom.size());
+}
+
+} // namespace
+
+TEST(ForEachParallelDevice, ZeroDimension)
+{
+    TestForEachParallelDeviceZeroDimension();
 }
 
 namespace {

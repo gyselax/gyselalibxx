@@ -138,6 +138,25 @@ public:
     {
     }
 
+    template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N == 0), bool> = true>
+    KOKKOS_IMPL_FORCEINLINE void operator()(
+            [[maybe_unused]] index_type<void> unused_id,
+            typename Reducer::value_type& a) const
+    {
+        a = reducer(a, functor(DiscreteElement<>()));
+    }
+
+    template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N == 0), bool> = true>
+    KOKKOS_FORCEINLINE_FUNCTION void operator()(
+            use_annotated_operator,
+            [[maybe_unused]] index_type<void> unused_id,
+            typename Reducer::value_type& a) const
+
+    {
+        a = reducer(a, functor(DiscreteElement<>()));
+    }
+
+    template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N > 0), bool> = true>
     KOKKOS_IMPL_FORCEINLINE void operator()(
             index_type<DDims>... ids,
             typename Reducer::value_type& a) const
@@ -145,6 +164,8 @@ public:
         a = reducer(a, functor(DiscreteElement<DDims...>(ids...)));
     }
 
+
+    template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N > 0), bool> = true>
     KOKKOS_FORCEINLINE_FUNCTION void operator()(
             use_annotated_operator,
             index_type<DDims>... ids,
@@ -153,6 +174,40 @@ public:
         a = reducer(a, functor(DiscreteElement<DDims...>(ids...)));
     }
 };
+
+/** A parallel reduction over a nD domain using the default Kokkos execution space
+ * @param[in] domain the range over which to apply the algorithm
+ * @param[in] neutral the neutral element of the reduction operation
+ * @param[in] reduce a binary FunctionObject that will be applied in unspecified order to the
+ *            results of transform, the results of other reduce and neutral.
+ * @param[in] transform a unary FunctionObject that will be applied to each element of the input
+ *            range. The return type must be acceptable as input to reduce
+ */
+template <class ExecSpace, class T, class BinaryReductionOp, class UnaryTransformOp>
+inline T transform_reduce_kokkos(
+        [[maybe_unused]] DiscreteDomain<> const& domain,
+        T neutral,
+        BinaryReductionOp const& reduce,
+        UnaryTransformOp const& transform) noexcept
+{
+    T result = neutral;
+    if constexpr (need_annotated_operator<ExecSpace>()) {
+        Kokkos::parallel_reduce(
+                Kokkos::RangePolicy<ExecSpace, use_annotated_operator>(0, 1),
+                TransformReducerKokkosLambdaAdapter<
+                        BinaryReductionOp,
+                        UnaryTransformOp>(reduce, transform),
+                ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
+    } else {
+        Kokkos::parallel_reduce(
+                Kokkos::RangePolicy<ExecSpace>(0, 1),
+                TransformReducerKokkosLambdaAdapter<
+                        BinaryReductionOp,
+                        UnaryTransformOp>(reduce, transform),
+                ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
+    }
+    return result;
+}
 
 /** A parallel reduction over a nD domain using the default Kokkos execution space
  * @param[in] domain the range over which to apply the algorithm
@@ -172,9 +227,9 @@ inline T transform_reduce_kokkos(
     T result = neutral;
     if constexpr (need_annotated_operator<ExecSpace>()) {
         Kokkos::parallel_reduce(
-                Kokkos::RangePolicy<ExecSpace, use_annotated_operator>(
-                        select<DDim0>(domain).front().uid(),
-                        select<DDim0>(domain).back().uid() + 1),
+                Kokkos::RangePolicy<
+                        ExecSpace,
+                        use_annotated_operator>(domain.front().uid(), domain.back().uid() + 1),
                 TransformReducerKokkosLambdaAdapter<
                         BinaryReductionOp,
                         UnaryTransformOp,
@@ -182,9 +237,7 @@ inline T transform_reduce_kokkos(
                 ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
     } else {
         Kokkos::parallel_reduce(
-                Kokkos::RangePolicy<ExecSpace>(
-                        select<DDim0>(domain).front().uid(),
-                        select<DDim0>(domain).back().uid() + 1),
+                Kokkos::RangePolicy<ExecSpace>(domain.front().uid(), domain.back().uid() + 1),
                 TransformReducerKokkosLambdaAdapter<
                         BinaryReductionOp,
                         UnaryTransformOp,

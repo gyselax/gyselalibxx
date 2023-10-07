@@ -101,6 +101,58 @@ struct TypeSeqMerge<TypeSeq<TagsA...>, TypeSeq<HeadTagsB, TailTagsB...>, TypeSeq
 {
 };
 
+/// A is replaced by element of C at same position than the first element of B equal to A.
+/// Remark : It may not be usefull in its own, it is an helper for TypeSeqReplace
+template <class TagA, class TagSeqB, class TagSeqC>
+struct TypeSeqReplaceSingle;
+
+template <class TagA>
+struct TypeSeqReplaceSingle<TagA, TypeSeq<>, TypeSeq<>>
+{
+    using type = TagA;
+};
+
+template <class TagA, class HeadTagsB, class... TailTagsB, class HeadTagsC, class... TailTagsC>
+struct TypeSeqReplaceSingle<
+        TagA,
+        TypeSeq<HeadTagsB, TailTagsB...>,
+        TypeSeq<HeadTagsC, TailTagsC...>>
+    : std::conditional_t<
+              std::is_same_v<TagA, HeadTagsB>,
+              TypeSeqReplaceSingle<HeadTagsC, TypeSeq<>, TypeSeq<>>,
+              TypeSeqReplaceSingle<TagA, TypeSeq<TailTagsB...>, TypeSeq<TailTagsC...>>>
+{
+};
+
+/// R contains all elements of A except those of B which are replaced by those of C.
+/// Remark : This operation preserves the orders.
+template <class TagSeqA, class TagSeqB, class TagSeqC, class TagSeqR>
+struct TypeSeqReplace;
+
+template <class... TagsB, class... TagsC, class... TagsR>
+struct TypeSeqReplace<TypeSeq<>, TypeSeq<TagsB...>, TypeSeq<TagsC...>, TypeSeq<TagsR...>>
+{
+    using type = TypeSeq<TagsR...>;
+};
+
+template <class HeadTagsA, class... TailTagsA, class... TagsB, class... TagsC, class... TagsR>
+struct TypeSeqReplace<
+        TypeSeq<HeadTagsA, TailTagsA...>,
+        TypeSeq<TagsB...>,
+        TypeSeq<TagsC...>,
+        TypeSeq<TagsR...>>
+    : TypeSeqReplace<
+              TypeSeq<TailTagsA...>,
+              TypeSeq<TagsB...>,
+              TypeSeq<TagsC...>,
+              TypeSeq<TagsR...,
+                      typename TypeSeqReplaceSingle<
+                              HeadTagsA,
+                              TypeSeq<TagsB...>,
+                              TypeSeq<TagsC...>>::type>>
+{
+};
+
 } // namespace detail
 
 template <class QueryTag, class TypeSeq>
@@ -137,4 +189,7 @@ using type_seq_remove_t = typename detail::TypeSeqRemove<TagSeqA, TagSeqB, detai
 template <class TagSeqA, class TagSeqB>
 using type_seq_merge_t = typename detail::TypeSeqMerge<TagSeqA, TagSeqB, TagSeqA>::type;
 
+template <class TagSeqA, class TagSeqB, class TagSeqC>
+using type_seq_replace_t =
+        typename detail::TypeSeqReplace<TagSeqA, TagSeqB, TagSeqC, detail::TypeSeq<>>::type;
 } // namespace ddc

@@ -30,17 +30,49 @@ class ForEachKokkosLambdaAdapter
 public:
     ForEachKokkosLambdaAdapter(F const& f) : m_f(f) {}
 
+    template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N == 0), bool> = true>
+    KOKKOS_IMPL_FORCEINLINE void operator()([[maybe_unused]] index_type<void> unused_id) const
+    {
+        m_f(DiscreteElement<>());
+    }
+
+    template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N == 0), bool> = true>
+    KOKKOS_FORCEINLINE_FUNCTION void operator()(
+            use_annotated_operator,
+            [[maybe_unused]] index_type<void> unused_id) const
+    {
+        m_f(DiscreteElement<>());
+    }
+
+    template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N > 0), bool> = true>
     KOKKOS_IMPL_FORCEINLINE void operator()(index_type<DDims>... ids) const
     {
         m_f(DiscreteElement<DDims...>(ids...));
     }
 
+    template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N > 0), bool> = true>
     KOKKOS_FORCEINLINE_FUNCTION void operator()(use_annotated_operator, index_type<DDims>... ids)
             const
     {
         m_f(DiscreteElement<DDims...>(ids...));
     }
 };
+
+template <class ExecSpace, class Functor>
+inline void for_each_kokkos(
+        [[maybe_unused]] DiscreteDomain<> const& domain,
+        Functor const& f) noexcept
+{
+    if constexpr (need_annotated_operator<ExecSpace>()) {
+        Kokkos::parallel_for(
+                Kokkos::RangePolicy<ExecSpace, use_annotated_operator>(0, 1),
+                ForEachKokkosLambdaAdapter<Functor>(f));
+    } else {
+        Kokkos::parallel_for(
+                Kokkos::RangePolicy<ExecSpace>(0, 1),
+                ForEachKokkosLambdaAdapter<Functor>(f));
+    }
+}
 
 template <class ExecSpace, class Functor, class DDim0>
 inline void for_each_kokkos(DiscreteDomain<DDim0> const& domain, Functor const& f) noexcept
