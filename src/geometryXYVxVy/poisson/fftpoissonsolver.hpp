@@ -18,7 +18,7 @@ class FftPoissonSolver : public IPoissonSolver
 public:
     FftPoissonSolver(
             SplineXYBuilder const& spline_xy_builder,
-            SplineXYEvaluator const& spline_x_evaluator,
+            SplineXYEvaluator const& spline_xy_evaluator,
             SplineVxVyBuilder const& spline_vxvy_builder,
             SplineVxVyEvaluator const& spline_vxvy_evaluator);
 
