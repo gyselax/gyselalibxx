@@ -35,6 +35,10 @@ using DElemYX = ddc::DiscreteElement<DDimY, DDimX>;
 using DVectYX = ddc::DiscreteVector<DDimY, DDimX>;
 using DDomYX = ddc::DiscreteDomain<DDimY, DDimX>;
 
+using DElemXZ = ddc::DiscreteElement<DDimX, DDimZ>;
+using DVectXZ = ddc::DiscreteVector<DDimX, DDimZ>;
+using DDomXZ = ddc::DiscreteDomain<DDimX, DDimZ>;
+
 using DElemZY = ddc::DiscreteElement<DDimZ, DDimY>;
 using DVectZY = ddc::DiscreteVector<DDimZ, DDimY>;
 using DDomZY = ddc::DiscreteDomain<DDimZ, DDimY>;
@@ -44,18 +48,23 @@ using DDomZY = ddc::DiscreteDomain<DDimZ, DDimY>;
 static DElemX constexpr lbound_x(50);
 static DVectX constexpr nelems_x(3);
 static DElemX constexpr sentinel_x(lbound_x + nelems_x);
-static DElemX constexpr ubound_x(sentinel_x - 1); //TODO: correct type
+static DElemX constexpr ubound_x(sentinel_x - 1);
 
 
 static DElemY constexpr lbound_y(4);
 static DVectY constexpr nelems_y(12);
 static DElemY constexpr sentinel_y(lbound_y + nelems_y);
-static DElemY constexpr ubound_y(sentinel_y - 1); //TODO: correct type
+static DElemY constexpr ubound_y(sentinel_y - 1);
 
+static DElemZ constexpr lbound_z(7);
+static DVectZ constexpr nelems_z(15);
 
 static DElemXY constexpr lbound_x_y(lbound_x, lbound_y);
 static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
 static DElemXY constexpr ubound_x_y(ubound_x, ubound_y);
+
+static DElemXZ constexpr lbound_x_z(lbound_x, lbound_z);
+static DVectXZ constexpr nelems_x_z(nelems_x, nelems_z);
 
 } // namespace
 
@@ -128,6 +137,16 @@ TEST(ProductMDomainTest, Diff)
     auto const subdomain = ddc::remove_dims_of(dom_x_y, dom_z_y);
     EXPECT_EQ(subdomain, dom_x);
 }
+
+TEST(ProductMDomainTest, Replace)
+{
+    DDomXY const dom_x_y = DDomXY(lbound_x_y, nelems_x_y);
+    DDomZ const dom_z = DDomZ(lbound_z, nelems_z);
+    DDomXZ const dom_x_z = DDomXZ(lbound_x_z, nelems_x_z);
+    auto const subdomain = ddc::replace_dim_of<DDimY, DDimZ>(dom_x_y, dom_z);
+    EXPECT_EQ(subdomain, dom_x_z);
+}
+
 
 TEST(ProductMDomainTest, TakeFirst)
 {

@@ -89,7 +89,7 @@ public:
 
 protected:
     template <class QueryDDim, class... ODDims>
-    auto get_slicer_for(DiscreteElement<ODDims...> const& c) const
+    constexpr auto get_slicer_for(DiscreteElement<ODDims...> const& c) const
     {
         DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
         if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
@@ -101,7 +101,7 @@ protected:
     }
 
     template <class QueryDDim, class... ODDims>
-    auto get_slicer_for(DiscreteDomain<ODDims...> const& c) const
+    constexpr auto get_slicer_for(DiscreteDomain<ODDims...> const& c) const
     {
         DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
         if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
@@ -176,7 +176,9 @@ public:
      * @param allocation_mdspan the allocation mdspan to the data
      * @param domain the domain that sustains the view
      */
-    constexpr ChunkSpan(allocation_mdspan_type allocation_mdspan, mdomain_type const& domain)
+    KOKKOS_FUNCTION constexpr ChunkSpan(
+            allocation_mdspan_type allocation_mdspan,
+            mdomain_type const& domain)
     {
         namespace stdex = std::experimental;
         extents_type extents_s((front<DDims>(domain) + extents<DDims>(domain)).uid()...);
@@ -229,7 +231,7 @@ public:
                 memory_space>(subview, select_by_type_seq<selected_meshes>(this->m_domain));
     }
 
-    /** Slice out some dimensions
+    /** Restrict to a subdomain
      */
     template <class... QueryDDims>
     constexpr auto operator[](DiscreteDomain<QueryDDims...> const& odomain) const
