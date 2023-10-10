@@ -373,14 +373,15 @@ using BSplinesVx = UniformBSplines<DimVx, BSDegreeVx>;
 
 
 auto constexpr SplineXBoundary = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
+auto constexpr SplineVxBoundary = BoundCond::HERMITE;
+
 using InterpPointsX = GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
 using IDimX = typename InterpPointsX::interpolation_mesh_type;
 using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;
 
-using InterpPointsVx
-        = GrevilleInterpolationPoints<BSplinesVx, BoundCond::HERMITE, BoundCond::HERMITE>;
+using InterpPointsVx = GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
 using IDimVx = typename InterpPointsVx::interpolation_mesh_type;
-using SplineVxBuilder = SplineBuilder<BSplinesVx, IDimVx, BoundCond::HERMITE, BoundCond::HERMITE>;
+using SplineVxBuilder = SplineBuilder<BSplinesVx, IDimVx, SplineVxBoundary, SplineVxBoundary>;
 
 // Species dimension
 using IDimSp = SpeciesInformation;
@@ -542,14 +543,15 @@ using BSplinesVy = UniformBSplines<DimVy, BSDegreeVy>;
 
 
 auto constexpr SplineYBoundary = DimY::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
+auto constexpr SplineVyBoundary = BoundCond::HERMITE;
+
 using InterpPointsY = GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
 using IDimY = typename InterpPointsY::interpolation_mesh_type;
 using SplineYBuilder = SplineBuilder<BSplinesY, IDimY, SplineYBoundary, SplineYBoundary>;
 
-using InterpPointsVy
-        = GrevilleInterpolationPoints<BSplinesVy, BoundCond::HERMITE, BoundCond::HERMITE>;
+using InterpPointsVy = GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
 using IDimVy = typename InterpPointsVy::interpolation_mesh_type;
-using SplineVyBuilder = SplineBuilder<BSplinesVy, IDimVy, BoundCond::HERMITE, BoundCond::HERMITE>;
+using SplineVyBuilder = SplineBuilder<BSplinesVy, IDimVy, SplineVyBoundary, SplineVyBoundary>;
 
 // Species dimension
 using IndexY = ddc::DiscreteElement<IDimY>;
