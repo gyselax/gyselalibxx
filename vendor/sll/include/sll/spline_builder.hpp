@@ -30,7 +30,7 @@ constexpr bool is_spline_interpolation_mesh_uniform(
  * @brief A class for creating a spline approximation of a function.
  *
  * A class which contains an operator () which can be used to build a spline approximation
- * of a function. A spline approximation is represented by coeffecients stored in a Chunk
+ * of a function. A spline approximation is represented by coefficients stored in a Chunk
  * of BSplines. The spline is constructed such that it respects the boundary conditions
  * BcXmin and BcXmax, and it interpolates the function at the points on the interpolation_mesh
  * associated with interpolation_mesh_type.
@@ -199,6 +199,57 @@ public:
     {
         return ddc::discrete_space<BSplines>().full_domain();
     }
+
+    /**
+     * @brief Get the spline quadrature coefficients.
+     *
+     * To integrate a function with a spline quadrature, we use:
+     *
+     * @f$ \int_a^b f(x)dx
+     * \simeq \sum_{i = 0}^{N_{\text{basis}} -1 } c_i  \int_a^b b_{i,d}()x dx @f$,
+     *
+     * which rewritten gives
+     *
+     * @f$ \int_a^b f(x)dx
+     * \simeq \sum_{i = 0}^{N_{\text{basis}} - 1} q_i f_i @f$,
+     *
+     * with
+     *  - @f$\{ f_i\}_i @f$ the values of the function at the interpolation points;
+     *  - @f$ q = \{ q_i\}_i @f$ the quadrature coefficients we compute thanks to
+     *  @f$ q B^T = I_b @f$,
+     *      - with @f$ B @f$ the matrix of B-splines @f$ B_{ij} = b_{j,d}(x_i)@f$,
+     *      - and @f$ I_b = \int_a^b b_{i,d}(x)dx @f$ the integrated B-splines.
+     *
+     * More details are given in Emily Bourne's thesis
+     * "Non-Uniform Numerical Schemes for the Modelling of Turbulence
+     * in the 5D GYSELA Code". December 2022.
+     *
+     *
+     * @param[in] domain
+     *      The domain where the functions we want to integrate
+     *      are defined.
+     *
+     * @return A chunk with the quadrature coefficients @f$ q @f$.
+     */
+    template <class IDim>
+    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> quadrature_coefficients(
+            ddc::DiscreteDomain<IDim> const& domain) const noexcept
+    {
+        ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
+
+        // Vector of integrals of B-splines
+        ddc::ChunkSpan<double, ddc::DiscreteDomain<bsplines_type>>
+                integral_bsplines(coefficients.allocation_mdspan(), spline_domain());
+        ddc::discrete_space<bsplines_type>().integrals(integral_bsplines);
+
+        // Coefficients of quadrature in integral_bsplines
+        ddc::DiscreteDomain<bsplines_type> slice = spline_domain().take_first(
+                ddc::DiscreteVector<bsplines_type> {ddc::discrete_space<BSplines>().nbasis()});
+        matrix->solve_transpose_inplace(integral_bsplines[slice].allocation_mdspan());
+
+        return coefficients;
+    }
+
 
 private:
     void compute_block_sizes_uniform(int& lower_block_size, int& upper_block_size) const;
