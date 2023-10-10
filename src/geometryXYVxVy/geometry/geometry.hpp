@@ -147,16 +147,16 @@ using SplineInterpPointsX
 using SplineInterpPointsY
         = GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
 using SplineInterpPointsVx
-        = GrevilleInterpolationPoints<BSplinesVx, BoundCond::HERMITE, BoundCond::HERMITE>;
+        = GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
 using SplineInterpPointsVy
-        = GrevilleInterpolationPoints<BSplinesVy, BoundCond::HERMITE, BoundCond::HERMITE>;
+        = GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
 
 // SplineBuilder and SplineEvaluator definition
 using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;
 using SplineYBuilder = SplineBuilder<BSplinesY, IDimY, SplineYBoundary, SplineYBoundary>;
 using SplineXYBuilder = SplineBuilder2D<SplineXBuilder, SplineYBuilder>;
-using SplineVxBuilder = SplineBuilder<BSplinesVx, IDimVx, BoundCond::HERMITE, BoundCond::HERMITE>;
-using SplineVyBuilder = SplineBuilder<BSplinesVy, IDimVy, BoundCond::HERMITE, BoundCond::HERMITE>;
+using SplineVxBuilder = SplineBuilder<BSplinesVx, IDimVx, SplineVxBoundary, SplineVxBoundary>;
+using SplineVyBuilder = SplineBuilder<BSplinesVy, IDimVy, SplineVyBoundary, SplineVyBoundary>;
 using SplineVxVyBuilder = SplineBuilder2D<SplineVxBuilder, SplineVyBuilder>;
 using SplineXYEvaluator = SplineEvaluator2D<BSplinesX, BSplinesY>;
 using SplineVxVyEvaluator = SplineEvaluator2D<BSplinesVx, BSplinesVy>;
