@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quadrature_5fcoeffs_5fnd_2ehpp_417',['quadrature_coeffs_nd.hpp',['../quadrature__coeffs__nd_8hpp.html',1,'']]]
+  ['compute_5fnorms_2ehpp_439',['compute_norms.hpp',['../compute__norms_8hpp.html',1,'']]]
 ];

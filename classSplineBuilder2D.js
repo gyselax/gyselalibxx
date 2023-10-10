@@ -19,5 +19,7 @@ var classSplineBuilder2D =
     [ "interpolation_domain1", "classSplineBuilder2D.html#a3c9bff8d716e44e4eddd2d0ca3f96a2e", null ],
     [ "interpolation_domain2", "classSplineBuilder2D.html#aa8b6177989a74d8e158343ae555ca22d", null ],
     [ "interpolation_domain", "classSplineBuilder2D.html#a39af65f3e39ba9570fbc517ac614241e", null ],
-    [ "spline_domain", "classSplineBuilder2D.html#a10d968260f75240a4be9d38d8c853353", null ]
+    [ "spline_domain", "classSplineBuilder2D.html#a10d968260f75240a4be9d38d8c853353", null ],
+    [ "get_builder_1", "classSplineBuilder2D.html#ab9e9788616d4be20d309ec04da8e25fe", null ],
+    [ "get_builder_2", "classSplineBuilder2D.html#a5a406c6bc3f47c2895963a66c40e5cee", null ]
 ];

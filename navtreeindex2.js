@@ -118,6 +118,7 @@ var NAVTREEINDEX2 =
 "classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8":[10,99,0],
 "classSplineBuilder.html#aa1c79d6ada6f3253febfc994b9a2d55e":[10,99,3],
 "classSplineBuilder.html#ad62a92276f053ebdfcc38f1ede5b7198":[10,99,5],
+"classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06":[10,99,12],
 "classSplineBuilder.html#aea5b09d866bfabd34f93dc7244061e51":[10,99,10],
 "classSplineBuilder.html#aec9bd498c486b22848aeb026de467fcf":[10,99,2],
 "classSplineBuilder.html#aff30d3c9ee7e83246b37719a0866874c":[10,99,4],
@@ -131,10 +132,12 @@ var NAVTREEINDEX2 =
 "classSplineBuilder2D.html#a39af65f3e39ba9570fbc517ac614241e":[10,100,18],
 "classSplineBuilder2D.html#a3c9bff8d716e44e4eddd2d0ca3f96a2e":[10,100,16],
 "classSplineBuilder2D.html#a49f64925a4092c41f0d2ef47bfee3300":[10,100,10],
+"classSplineBuilder2D.html#a5a406c6bc3f47c2895963a66c40e5cee":[10,100,21],
 "classSplineBuilder2D.html#a79579f5213c410988e0caa6da989d2c8":[10,100,14],
 "classSplineBuilder2D.html#a81b27475c41175f3360482d560a63638":[10,100,13],
 "classSplineBuilder2D.html#a8ae9bfa7b55d920faeb880abbb1a0c0c":[10,100,7],
 "classSplineBuilder2D.html#aa8b6177989a74d8e158343ae555ca22d":[10,100,17],
+"classSplineBuilder2D.html#ab9e9788616d4be20d309ec04da8e25fe":[10,100,20],
 "classSplineBuilder2D.html#aba437ab9712bba5ffa5dc5a88641bde9":[10,100,9],
 "classSplineBuilder2D.html#acd4a14a7f938241a3b019ade5023f7ce":[10,100,12],
 "classSplineBuilder2D.html#aceec329f2770bef48e3d35871ae01502":[10,100,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX2 =
 "classdeprecated_1_1BSplines.html":[10,0,0],
 "classdeprecated_1_1BSplines.html#a13092f46541ed8b97fdb22d44633a0c7":[10,0,0,19],
 "classdeprecated_1_1BSplines.html#a1761b9f1d086e3c1ce6ea6fa730e1bf1":[10,0,0,25],
-"classdeprecated_1_1BSplines.html#a24214a7282ca8b29fe11e650028463e9":[10,0,0,32],
-"classdeprecated_1_1BSplines.html#a252b828716d1b96f7d546f9298536885":[10,0,0,14],
-"classdeprecated_1_1BSplines.html#a302f6b136922a81b4c6bf57565817014":[10,0,0,20],
-"classdeprecated_1_1BSplines.html#a34057a6f2e50d74467ca34891df2ea29":[10,0,0,22]
+"classdeprecated_1_1BSplines.html#a24214a7282ca8b29fe11e650028463e9":[10,0,0,32]
 };

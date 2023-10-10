@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['trapezoid_5fquadrature_2ehpp_418',['trapezoid_quadrature.hpp',['../trapezoid__quadrature_8hpp.html',1,'']]]
+  ['quadrature_5fcoeffs_5fnd_2ehpp_440',['quadrature_coeffs_nd.hpp',['../quadrature__coeffs__nd_8hpp.html',1,'']]]
 ];

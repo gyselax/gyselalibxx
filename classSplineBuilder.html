@@ -153,6 +153,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2d211caa5dd227dd6d05947484d1b6e9"><td class="memItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; BSplines &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9">spline_domain</a> () const noexcept</td></tr>
 <tr class="memdesc:a2d211caa5dd227dd6d05947484d1b6e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the domain on which the approximation is defined.  <a href="classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9">More...</a><br /></td></tr>
 <tr class="separator:a2d211caa5dd227dd6d05947484d1b6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adce1a4d93d232bc29f6c8482d7ecdd06"><td class="memTemplParams" colspan="2">template&lt;class IDim &gt; </td></tr>
+<tr class="memitem:adce1a4d93d232bc29f6c8482d7ecdd06"><td class="memTemplItemLeft" align="right" valign="top">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06">quadrature_coefficients</a> (ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain) const noexcept</td></tr>
+<tr class="memdesc:adce1a4d93d232bc29f6c8482d7ecdd06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients.  <a href="classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06">More...</a><br /></td></tr>
+<tr class="separator:adce1a4d93d232bc29f6c8482d7ecdd06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -188,7 +192,7 @@ static constexpr BoundCond&#160;</td><td class="memItemRight" valign="bottom"><a
 class SplineBuilder&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;</h3>
 
 <p>A class for creating a spline approximation of a function. </p>
-<p>A class which contains an operator () which can be used to build a spline approximation of a function. A spline approximation is represented by coeffecients stored in a Chunk of BSplines. The spline is constructed such that it respects the boundary conditions BcXmin and BcXmax, and it interpolates the function at the points on the interpolation_mesh associated with interpolation_mesh_type. </p>
+<p>A class which contains an operator () which can be used to build a spline approximation of a function. A spline approximation is represented by coefficients stored in a Chunk of BSplines. The spline is constructed such that it respects the boundary conditions BcXmin and BcXmax, and it interpolates the function at the points on the interpolation_mesh associated with interpolation_mesh_type. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa1c79d6ada6f3253febfc994b9a2d55e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa1c79d6ada6f3253febfc994b9a2d55e">&#9670;&nbsp;</a></span>SplineBuilder() <span class="overload">[1/3]</span></h2>
@@ -442,6 +446,59 @@ template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, B
 <p>Get the domain on which the approximation is defined. </p>
 <p>Get the domain of the basis-splines for which the coefficients of the spline approximation must be calculated.</p>
 <dl class="section return"><dt>Returns</dt><dd>The domain for the splines. </dd></dl>
+
+</div>
+</div>
+<a id="adce1a4d93d232bc29f6c8482d7ecdd06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adce1a4d93d232bc29f6c8482d7ecdd06">&#9670;&nbsp;</a></span>quadrature_coefficients()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+<div class="memtemplate">
+template&lt;class IDim &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt; &gt; <a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::quadrature_coefficients </td>
+          <td>(</td>
+          <td class="paramtype">ddc::DiscreteDomain&lt; IDim &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>domain</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the spline quadrature coefficients. </p>
+<p>To integrate a function with a spline quadrature, we use:</p>
+<p>\( \int_a^b f(x)dx \simeq \sum_{i = 0}^{N_{\text{basis}} -1 } c_i \int_a^b b_{i,d}()x dx \),</p>
+<p>which rewritten gives</p>
+<p>\( \int_a^b f(x)dx \simeq \sum_{i = 0}^{N_{\text{basis}} - 1} q_i f_i \),</p>
+<p>with</p><ul>
+<li>\(\{ f_i\}_i \) the values of the function at the interpolation points;</li>
+<li>\( q = \{ q_i\}_i \) the quadrature coefficients we compute thanks to \( q B^T = I_b \),<ul>
+<li>with \( B \) the matrix of B-splines \( B_{ij} = b_{j,d}(x_i)\),</li>
+<li>and \( I_b = \int_a^b b_{i,d}(x)dx \) the integrated B-splines.</li>
+</ul>
+</li>
+</ul>
+<p>More details are given in Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
+in the 5D GYSELA Code". December 2022.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">domain</td><td>The domain where the functions we want to integrate are defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A chunk with the quadrature coefficients \( q \). </dd></dl>
 
 </div>
 </div>

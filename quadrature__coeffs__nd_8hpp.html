@@ -114,43 +114,33 @@ $(document).ready(function(){initNavTree('quadrature__coeffs__nd_8hpp.html','');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a75111622b2d60d9c91dd623dab7faba8"><td class="memTemplParams" colspan="2">template&lt;class IDim , class... ODims&gt; </td></tr>
-<tr class="memitem:a75111622b2d60d9c91dd623dab7faba8"><td class="memTemplItemLeft" align="right" valign="top">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim, ODims... &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="quadrature__coeffs__nd_8hpp.html#a75111622b2d60d9c91dd623dab7faba8">quadrature_coeffs_nd</a> (ddc::DiscreteDomain&lt; IDim, ODims... &gt; const &amp;domain, std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt;&gt;(ddc::DiscreteDomain&lt; IDim &gt;)&gt; func, std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; ODims &gt;&gt;(ddc::DiscreteDomain&lt; ODims &gt;)&gt;... o_funcs)</td></tr>
-<tr class="memdesc:a75111622b2d60d9c91dd623dab7faba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.  <a href="quadrature__coeffs__nd_8hpp.html#a75111622b2d60d9c91dd623dab7faba8">More...</a><br /></td></tr>
-<tr class="separator:a75111622b2d60d9c91dd623dab7faba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ad4afcced6bbc0657439d943580386b"><td class="memTemplParams" colspan="2">template&lt;class IDim &gt; </td></tr>
-<tr class="memitem:a8ad4afcced6bbc0657439d943580386b"><td class="memTemplItemLeft" align="right" valign="top">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="quadrature__coeffs__nd_8hpp.html#a8ad4afcced6bbc0657439d943580386b">quadrature_coeffs_nd</a> (ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain, std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt;&gt;(ddc::DiscreteDomain&lt; IDim &gt;)&gt; func)</td></tr>
-<tr class="memdesc:a8ad4afcced6bbc0657439d943580386b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialised 1D version of quadrature_coeffs_nd&lt;IDim, ODims...&gt;.  <a href="quadrature__coeffs__nd_8hpp.html#a8ad4afcced6bbc0657439d943580386b">More...</a><br /></td></tr>
-<tr class="separator:a8ad4afcced6bbc0657439d943580386b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaef832627a2d4ddc3f8ca6c570f1a46d"><td class="memTemplParams" colspan="2">template&lt;class... DDims&gt; </td></tr>
+<tr class="memitem:aaef832627a2d4ddc3f8ca6c570f1a46d"><td class="memTemplItemLeft" align="right" valign="top">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims... &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d">quadrature_coeffs_nd</a> (ddc::DiscreteDomain&lt; DDims... &gt; const &amp;domain, std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims &gt;&gt;(ddc::DiscreteDomain&lt; DDims &gt;)&gt;... funcs)</td></tr>
+<tr class="memdesc:aaef832627a2d4ddc3f8ca6c570f1a46d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.  <a href="quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d">More...</a><br /></td></tr>
+<tr class="separator:aaef832627a2d4ddc3f8ca6c570f1a46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File providing helper functions for defining multi-dimensional quadrature methods. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a75111622b2d60d9c91dd623dab7faba8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75111622b2d60d9c91dd623dab7faba8">&#9670;&nbsp;</a></span>quadrature_coeffs_nd() <span class="overload">[1/2]</span></h2>
+<a id="aaef832627a2d4ddc3f8ca6c570f1a46d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaef832627a2d4ddc3f8ca6c570f1a46d">&#9670;&nbsp;</a></span>quadrature_coeffs_nd()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class IDim , class... ODims&gt; </div>
+template&lt;class... DDims&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim, ODims...&gt; &gt; quadrature_coeffs_nd </td>
+          <td class="memname">ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt; &gt; quadrature_coeffs_nd </td>
           <td>(</td>
-          <td class="paramtype">ddc::DiscreteDomain&lt; IDim, ODims... &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::DiscreteDomain&lt; DDims... &gt; const &amp;&#160;</td>
           <td class="paramname"><em>domain</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt;&gt;(ddc::DiscreteDomain&lt; IDim &gt;)&gt;&#160;</td>
-          <td class="paramname"><em>func</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; ODims &gt;&gt;(ddc::DiscreteDomain&lt; ODims &gt;)&gt;...&#160;</td>
-          <td class="paramname"><em>o_funcs</em>&#160;</td>
+          <td class="paramtype">std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims &gt;&gt;(ddc::DiscreteDomain&lt; DDims &gt;)&gt;...&#160;</td>
+          <td class="paramname"><em>funcs</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -164,52 +154,11 @@ template&lt;class IDim , class... ODims&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">domain</td><td>The domain on which the coefficients will be defined. </td></tr>
-    <tr><td class="paramname">func</td><td>The function which defines quadrature coefficients in the first dimension. </td></tr>
-    <tr><td class="paramname">o_funcs</td><td>The functions which define quadrature coefficients in the subsequent dimensions.</td></tr>
+    <tr><td class="paramname">funcs</td><td>The functions which define quadrature coefficients in the different dimensions.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The coefficients which define the quadrature method in ND. </dd></dl>
-
-</div>
-</div>
-<a id="a8ad4afcced6bbc0657439d943580386b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ad4afcced6bbc0657439d943580386b">&#9670;&nbsp;</a></span>quadrature_coeffs_nd() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class IDim &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt; &gt; quadrature_coeffs_nd </td>
-          <td>(</td>
-          <td class="paramtype">ddc::DiscreteDomain&lt; IDim &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>domain</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt;&gt;(ddc::DiscreteDomain&lt; IDim &gt;)&gt;&#160;</td>
-          <td class="paramname"><em>func</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Specialised 1D version of quadrature_coeffs_nd&lt;IDim, ODims...&gt;. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">domain</td><td>The domain on which the coefficients will be defined. </td></tr>
-    <tr><td class="paramname">func</td><td>The function which defines quadrature coefficients.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The coefficients which define the quadrature method in 1D. </dd></dl>
 
 </div>
 </div>

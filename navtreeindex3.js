@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"classdeprecated_1_1BSplines.html#a252b828716d1b96f7d546f9298536885":[10,0,0,14],
+"classdeprecated_1_1BSplines.html#a302f6b136922a81b4c6bf57565817014":[10,0,0,20],
+"classdeprecated_1_1BSplines.html#a34057a6f2e50d74467ca34891df2ea29":[10,0,0,22],
 "classdeprecated_1_1BSplines.html#a39994f9d8e2cde1a3c849c21c50cc417":[10,0,0,29],
 "classdeprecated_1_1BSplines.html#a4f9a4112a9f796342fb7d1d881c55ddc":[10,0,0,13],
 "classdeprecated_1_1BSplines.html#a6c8f121fccaf4ebf176c9f9282a5507d":[10,0,0,17],
@@ -120,6 +123,11 @@ var NAVTREEINDEX3 =
 "collisions__inter_8hpp_source.html":[11,0,2,4,0],
 "collisions__intra_8hpp_source.html":[11,0,2,4,1],
 "collisions__utils_8hpp_source.html":[11,0,2,4,2],
+"compute__norms_8hpp.html":[11,0,6,0],
+"compute__norms_8hpp.html#a7a640bd20a4a4bc8702cb1c902aeb46c":[11,0,6,0,2],
+"compute__norms_8hpp.html#ab2f12689e870d77a2208117f277f47e4":[11,0,6,0,0],
+"compute__norms_8hpp.html#adf7a0fca8cca7bb92d7103878a39a7a0":[11,0,6,0,1],
+"compute__norms_8hpp_source.html":[11,0,6,0],
 "constant__extrapolation__boundary__value_8hpp_source.html":[11,2,0,0,0,6],
 "cosine__evaluator_8hpp_source.html":[11,2,0,1,0],
 "curvilinear2d__to__cartesian_8hpp_source.html":[11,2,0,0,0,1,3],
@@ -241,13 +249,5 @@ var NAVTREEINDEX3 =
 "index.html#Execution":[1],
 "irighthandside_8hpp_source.html":[11,0,2,4,3],
 "ivlasovsolver_8hpp_source.html":[11,0,3,4,0],
-"kinetic__source_8hpp_source.html":[11,0,2,4,4],
-"knots__as__interpolation__points_8hpp_source.html":[11,2,0,0,0,9],
-"krook__source__adaptive_8hpp_source.html":[11,0,2,4,5],
-"krook__source__constant_8hpp_source.html":[11,0,2,4,6],
-"mask__tanh_8hpp_source.html":[11,0,2,4,7],
-"math__tools_8hpp_source.html":[11,2,0,0,0,10],
-"matrix_8hpp_source.html":[11,2,0,0,0,11],
-"matrix__banded_8hpp_source.html":[11,2,0,0,0,12],
-"matrix__center__block_8hpp_source.html":[11,2,0,0,0,13]
+"kinetic__source_8hpp_source.html":[11,0,2,4,4]
 };
