@@ -134,16 +134,17 @@ if __name__ == '__main__':
 
         Emax = np.array(Emaxval)
         tm = np.array(tm)
-        res = stats.linregress(tm,np.log(np.sqrt(Emax)))
-        print(f'relative error on growth rate {(theo_rate-res[0]) /abs(res[0]):0.2f}')
-
+        if Emax.size>0:
+            res = stats.linregress(tm,np.log(np.sqrt(Emax)))
+            print(f'relative error on growth rate {(theo_rate-res[0]) /abs(res[0]):0.2f}')
         plt.clf()
         plt.plot(epot.coords['time'].values,np.log(np.sqrt(Energy)))
         plt.scatter(tm ,np.log(np.sqrt(Emax)),c='red')
-        plt.plot(tm ,tm*res[0]+res[1]  ,c='green')
+        if Emax.size>0:
+            plt.plot(tm ,tm*res[0]+res[1]  ,c='green')
+            plt.title(f'growthrate: {res[0]:0.3f} (theory: {theo_rate:0.3f})', fontsize=16)
         plt.ylabel('Electric energy', fontsize=12)
         plt.xlabel('time', fontsize=12)
-        plt.title(f'growthrate: {res[0]:0.3f} (theory: {theo_rate:0.3f})', fontsize=16)
         plt.savefig('Electric_energy.png')
 
     def plot_fdist(itime,Vx,Vy):
