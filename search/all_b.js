@@ -1,9 +1,20 @@
 var searchData=
 [
-  ['nobcdim_173',['NoBCDim',['../classConstantExtrapolationBoundaryValue2D.html#a75bbdf35f1f8bcb4893cbae1fae4414b',1,'ConstantExtrapolationBoundaryValue2D']]],
-  ['nonuniformbsplines_174',['NonUniformBSplines',['../classdeprecated_1_1NonUniformBSplines.html',1,'deprecated::NonUniformBSplines'],['../classNonUniformBSplines.html',1,'NonUniformBSplines&lt; Tag, D &gt;']]],
-  ['nulladvectionvelocity_175',['NullAdvectionVelocity',['../classNullAdvectionVelocity.html',1,'']]],
-  ['nullboundaryvalue_176',['NullBoundaryValue',['../classNullBoundaryValue.html',1,'']]],
-  ['nullboundaryvalue2d_177',['NullBoundaryValue2D',['../classNullBoundaryValue2D.html',1,'']]],
-  ['nullpoissonsolver_178',['NullPoissonSolver',['../classNullPoissonSolver.html',1,'']]]
+  ['m_5fncells_157',['m_ncells',['../classdeprecated_1_1BSplines.html#ae6644ef87cc1a18daf0bdac1ec059697',1,'deprecated::BSplines']]],
+  ['manufacturedpoissontest_158',['ManufacturedPoissonTest',['../classManufacturedPoissonTest.html',1,'']]],
+  ['mappings_159',['Mappings',['../vendor_sll_include_sll_mapping.html',1,'vendor_sll']]],
+  ['matrix_160',['Matrix',['../classMatrix.html',1,'']]],
+  ['matrix_5f2x2_161',['Matrix_2x2',['../classCircularToCartesian.html#afdac5ab113c09b1b53029e479f224664',1,'CircularToCartesian::Matrix_2x2()'],['../classCurvilinear2DToCartesian.html#ad0f61c18363bff817f9c34f2b03e8d4c',1,'Curvilinear2DToCartesian::Matrix_2x2()'],['../classCzarnyToCartesian.html#a3c3bdf0e9db5495c57f16c361943928c',1,'CzarnyToCartesian::Matrix_2x2()'],['../classDiscreteToCartesian.html#aff278fecc61e7bf4519da6b8e32f6fa8',1,'DiscreteToCartesian::Matrix_2x2()']]],
+  ['matrix_5fbanded_162',['Matrix_Banded',['../classMatrix__Banded.html',1,'']]],
+  ['matrix_5fcenter_5fblock_163',['Matrix_Center_Block',['../classMatrix__Center__Block.html',1,'']]],
+  ['matrix_5fcorner_5fblock_164',['Matrix_Corner_Block',['../classMatrix__Corner__Block.html',1,'']]],
+  ['matrix_5fdense_165',['Matrix_Dense',['../classMatrix__Dense.html',1,'']]],
+  ['matrix_5fpds_5ftridiag_166',['Matrix_PDS_Tridiag',['../classMatrix__PDS__Tridiag.html',1,'']]],
+  ['matrix_5fperiodic_5fbanded_167',['Matrix_Periodic_Banded',['../classMatrix__Periodic__Banded.html',1,'']]],
+  ['maxwellianequilibrium_168',['MaxwellianEquilibrium',['../classMaxwellianEquilibrium.html',1,'']]],
+  ['mesh_5ftype_169',['mesh_type',['../classSplineBuilder.html#a277cde780e9a94f7f2dbc8a3fef5e4ff',1,'SplineBuilder']]],
+  ['metric_5ftensor_170',['metric_tensor',['../classCurvilinear2DToCartesian.html#a5d1a1f488cffb8a5e11c9a94dee2036a',1,'Curvilinear2DToCartesian']]],
+  ['momentdensity_171',['MomentDensity',['../classFluidMoments.html#structFluidMoments_1_1MomentDensity',1,'FluidMoments']]],
+  ['momenttemperature_172',['MomentTemperature',['../classFluidMoments.html#structFluidMoments_1_1MomentTemperature',1,'FluidMoments']]],
+  ['momentvelocity_173',['MomentVelocity',['../classFluidMoments.html#structFluidMoments_1_1MomentVelocity',1,'FluidMoments']]]
 ];

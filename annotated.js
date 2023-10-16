@@ -33,7 +33,6 @@ var annotated =
     [ "Curvilinear2DToCartesian", "classCurvilinear2DToCartesian.html", "classCurvilinear2DToCartesian" ],
     [ "CurvilinearSolution", "classCurvilinearSolution.html", "classCurvilinearSolution" ],
     [ "CzarnyToCartesian", "classCzarnyToCartesian.html", "classCzarnyToCartesian" ],
-    [ "ddcHelper", "classddcHelper.html", null ],
     [ "DimP", "structDimP.html", null ],
     [ "DimR", "structDimR.html", null ],
     [ "DimVp", "structDimVp.html", null ],
@@ -128,5 +127,8 @@ var annotated =
     [ "to_tuple< std::pair< T, U > >", "structto__tuple_3_01std_1_1pair_3_01T_00_01U_01_4_01_4.html", "structto__tuple_3_01std_1_1pair_3_01T_00_01U_01_4_01_4" ],
     [ "tuple_to_types", "structtuple__to__types.html", "structtuple__to__types" ],
     [ "tuple_to_types< std::tuple< Args... > >", "structtuple__to__types_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html", "structtuple__to__types_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4" ],
-    [ "UniformBSplines", "classUniformBSplines.html", "classUniformBSplines" ]
+    [ "UniformBSplines", "classUniformBSplines.html", "classUniformBSplines" ],
+    [ "VectorField", "classVectorField.html", "classVectorField" ],
+    [ "VectorFieldCommon", "classVectorFieldCommon.html", null ],
+    [ "VectorFieldSpan", "classVectorFieldSpan.html", "classVectorFieldSpan" ]
 ];

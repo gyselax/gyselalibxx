@@ -65,8 +65,8 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classGrevilleInterpolationPoints.html#a80607a4c866ff36244d980e41870a347",
 "classPolarBSplines_1_1Impl.html#a2dd5ab4233bbd69675345f083a271b7d",
-"classdeprecated_1_1BSplines.html#a252b828716d1b96f7d546f9298536885",
-"knots__as__interpolation__points_8hpp_source.html"
+"classVectorField.html#a40800a9ffc0b36a09ae8154aac00759b",
+"geometryXVx_2geometry_2geometry_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

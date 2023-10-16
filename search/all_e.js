@@ -1,10 +1,23 @@
 var searchData=
 [
-  ['qdimx_201',['QDimX',['../classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX',1,'FemNonPeriodicPoissonSolver::QDimX'],['../classFemPeriodicPoissonSolver.html#structFemPeriodicPoissonSolver_1_1QDimX',1,'FemPeriodicPoissonSolver::QDimX']]],
-  ['quadrature_202',['Quadrature',['../classQuadrature.html',1,'Quadrature&lt; IDim &gt;'],['../classQuadrature.html#afd6d17aed37b3b62d7c638075c5be300',1,'Quadrature::Quadrature(ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; &amp;&amp;coeffs)'],['../classQuadrature.html#af6bd0619387d4161c2a9ed844c76cd52',1,'Quadrature::Quadrature(Quadrature &amp;&amp;rhs)=default']]],
-  ['quadrature_20methods_203',['Quadrature Methods',['../src_quadrature.html',1,'src']]],
-  ['quadrature_3c_20idimvx_20_3e_204',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]],
-  ['quadrature_5fcoefficients_205',['quadrature_coefficients',['../classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06',1,'SplineBuilder']]],
-  ['quadrature_5fcoeffs_5fnd_206',['quadrature_coeffs_nd',['../quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d',1,'quadrature_coeffs_nd.hpp']]],
-  ['quadrature_5fcoeffs_5fnd_2ehpp_207',['quadrature_coeffs_nd.hpp',['../quadrature__coeffs__nd_8hpp.html',1,'']]]
+  ['pbasissubset_183',['PBasisSubset',['../classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1PBasisSubset',1,'PolarSplineFEMPoissonSolver']]],
+  ['pcelldim_184',['PCellDim',['../classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1PCellDim',1,'PolarSplineFEMPoissonSolver']]],
+  ['periodic_185',['PERIODIC',['../structDimX.html#ab818de6d8c71b798aa2000523655a342',1,'DimX::PERIODIC()'],['../structRDimVy.html#abd8c88ddb8bd09a06883fc41d9fc10b6',1,'RDimVy::PERIODIC()'],['../structRDimY.html#ab96a435336002946e36409db13c890c4',1,'RDimY::PERIODIC()'],['../structRDimT.html#ac518ba935033dd7ec6e36a2860a5ee68',1,'RDimT::PERIODIC()'],['../structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78',1,'RDimVx::PERIODIC()'],['../structRDimX.html#a8cb720efb33235cee3371843279ea9ab',1,'RDimX::PERIODIC()'],['../structDimVy.html#ab70a7645fbd0b658762e6730de14100a',1,'DimVy::PERIODIC()'],['../structDimVx.html#ae8dddd250620608a92b693b5aae37a88',1,'DimVx::PERIODIC()'],['../structDimVp.html#aad66ff9a40adfbbbc197ec5995473b34',1,'DimVp::PERIODIC()'],['../structDimVr.html#afbf15ef2093495c8f90f237be4a5d7a2',1,'DimVr::PERIODIC()'],['../structDimP.html#a1e4668a4113ef4ea738f78006b89982e',1,'DimP::PERIODIC()'],['../structDimR.html#a8e125f136ce056bde2ad9bd9e48cf3d7',1,'DimR::PERIODIC()'],['../structDimY.html#acd0985279137de907884975ccab79038',1,'DimY::PERIODIC()']]],
+  ['poissonsolution_186',['PoissonSolution',['../classPoissonSolution.html',1,'']]],
+  ['polarbsplines_187',['PolarBSplines',['../classPolarBSplines.html',1,'']]],
+  ['polarnullboundaryvalue2d_188',['PolarNullBoundaryValue2D',['../classPolarNullBoundaryValue2D.html',1,'']]],
+  ['polarspline_189',['PolarSpline',['../structPolarSpline.html',1,'']]],
+  ['polarsplineboundaryvalue2d_190',['PolarSplineBoundaryValue2D',['../classPolarSplineBoundaryValue2D.html',1,'']]],
+  ['polarsplineboundaryvalue2d_3c_20polarbsplines_20_3e_191',['PolarSplineBoundaryValue2D&lt; PolarBSplines &gt;',['../classPolarSplineBoundaryValue2D.html',1,'']]],
+  ['polarsplineboundaryvalue2d_3c_20polarbsplinestype_20_3e_192',['PolarSplineBoundaryValue2D&lt; PolarBSplinesType &gt;',['../classPolarSplineBoundaryValue2D.html',1,'']]],
+  ['polarsplineevaluator_193',['PolarSplineEvaluator',['../classPolarSplineEvaluator.html',1,'']]],
+  ['polarsplineevaluator_3c_20polarbsplines_20_3e_194',['PolarSplineEvaluator&lt; PolarBSplines &gt;',['../classPolarSplineEvaluator.html',1,'']]],
+  ['polarsplinefempoissonsolver_195',['PolarSplineFEMPoissonSolver',['../classPolarSplineFEMPoissonSolver.html',1,'']]],
+  ['polarsplinespan_196',['PolarSplineSpan',['../structPolarSplineSpan.html',1,'']]],
+  ['polarsplineview_197',['PolarSplineView',['../structPolarSplineView.html',1,'']]],
+  ['polynomialevaluator_198',['PolynomialEvaluator',['../structPolynomialEvaluator.html',1,'']]],
+  ['preallocatablesplineinterpolator_199',['PreallocatableSplineInterpolator',['../classPreallocatableSplineInterpolator.html#ace33f4ec317493b8f2a36eedf6521b93',1,'PreallocatableSplineInterpolator::PreallocatableSplineInterpolator()'],['../classPreallocatableSplineInterpolator.html',1,'PreallocatableSplineInterpolator&lt; DDim, BSplines, BcMin, BcMax &gt;']]],
+  ['preallocatablesplineinterpolatorrp_200',['PreallocatableSplineInterpolatorRP',['../classPreallocatableSplineInterpolatorRP.html#ade36aac246ed7b8003ec0e227ca95b7e',1,'PreallocatableSplineInterpolatorRP::PreallocatableSplineInterpolatorRP()'],['../classPreallocatableSplineInterpolatorRP.html',1,'PreallocatableSplineInterpolatorRP']]],
+  ['preallocate_201',['preallocate',['../classIPreallocatableInterpolatorRP.html#a351c066ba6ec6e97a2ddb1ce38c3f0a6',1,'IPreallocatableInterpolatorRP::preallocate()'],['../classPreallocatableSplineInterpolatorRP.html#a96c0faf84015ec3b49d8d98b3eeef938',1,'PreallocatableSplineInterpolatorRP::preallocate()'],['../classIPreallocatableInterpolator.html#aceaa10e332a925c432a9f2f1ca1b7110',1,'IPreallocatableInterpolator::preallocate()'],['../classPreallocatableSplineInterpolator.html#a9397d6689255a55208fe9b74ddbee1a7',1,'PreallocatableSplineInterpolator::preallocate()']]],
+  ['predcorr_202',['PredCorr',['../classPredCorr.html',1,'']]]
 ];

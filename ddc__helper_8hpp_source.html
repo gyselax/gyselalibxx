@@ -109,28 +109,25 @@ $(document).ready(function(){initNavTree('ddc__helper_8hpp_source.html',''); ini
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classddcHelper.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classddcHelper.html">ddcHelper</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">//TODO: this should be directly handled by ddc::Discretization really,</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">//      in the meantime, we do it ourselves</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">static</span> constexpr std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double&gt;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    total_interval_length(ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; dom)</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordflow">return</span> std::fabs(ddc::rlength(dom));</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">//TODO: this should be directly handled by ddc::Discretization really,</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">//      in the meantime, we do it ourselves</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> RDim&gt;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">static</span> constexpr std::enable_if_t&lt;RDim::PERIODIC, double&gt; total_interval_length(</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            ddc::DiscreteDomain&lt;ddc::UniformPointSampling&lt;RDim&gt;&gt; <span class="keyword">const</span>&amp; dom)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">return</span> std::fabs(ddc::rlength(dom) + ddc::step&lt;ddc::UniformPointSampling&lt;RDim&gt;&gt;());</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
-<div class="ttc" id="aclassddcHelper_html"><div class="ttname"><a href="classddcHelper.html">ddcHelper</a></div><div class="ttdoc">Computes fluid moments of the distribution function Density, mean velocity and temperature.</div><div class="ttdef"><b>Definition:</b> ddc_helper.hpp:12</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>ddcHelper {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//TODO: this should be directly handled by ddc::Discretization really,</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//      in the meantime, we do it ourselves</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim&gt;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;constexpr std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;total_interval_length(ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; dom)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">return</span> std::fabs(ddc::rlength(dom));</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//TODO: this should be directly handled by ddc::Discretization really,</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//      in the meantime, we do it ourselves</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">class</span> RDim&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;constexpr std::enable_if_t&lt;RDim::PERIODIC, double&gt; total_interval_length(</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        ddc::DiscreteDomain&lt;ddc::UniformPointSampling&lt;RDim&gt;&gt; <span class="keyword">const</span>&amp; dom)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> std::fabs(ddc::rlength(dom) + ddc::step&lt;ddc::UniformPointSampling&lt;RDim&gt;&gt;());</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}; <span class="comment">// namespace ddcHelper</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

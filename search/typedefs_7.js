@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tag_5ftype_546',['tag_type',['../classConstantExtrapolationBoundaryValue.html#aae8a770049d4897e5472c2d01772bf5e',1,'ConstantExtrapolationBoundaryValue']]]
+  ['nobcdim_568',['NoBCDim',['../classConstantExtrapolationBoundaryValue2D.html#a75bbdf35f1f8bcb4893cbae1fae4414b',1,'ConstantExtrapolationBoundaryValue2D']]]
 ];

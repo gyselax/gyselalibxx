@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Member List</title>
+<title>Gyselalib++: Utility Functions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classddcHelper.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('src_utils.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -98,17 +98,17 @@ $(document).ready(function(){initNavTree('classddcHelper.html',''); initResizabl
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">ddcHelper Member List</div>  </div>
+<div class="title">Utility Functions </div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>This is the complete list of members for <a class="el" href="classddcHelper.html">ddcHelper</a>, including all inherited members.</p>
-<table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>total_interval_length</b>(ddc::DiscreteDomain&lt; IDim &gt; const &amp;dom) (defined in <a class="el" href="classddcHelper.html">ddcHelper</a>)</td><td class="entry"><a class="el" href="classddcHelper.html">ddcHelper</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>total_interval_length</b>(ddc::DiscreteDomain&lt; ddc::UniformPointSampling&lt; RDim &gt;&gt; const &amp;dom) (defined in <a class="el" href="classddcHelper.html">ddcHelper</a>)</td><td class="entry"><a class="el" href="classddcHelper.html">ddcHelper</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-</table></div><!-- contents -->
+<div class="textblock"><p>This folder contains classes and functions which facilitate the writing of the rest of the code. For the most part these objects are required to fill gaps in DDC which will hopefully be filled in the future.</p>
+<p>The class ddcHelper exists to provide functionalities which are currently missing from DDC.</p>
+<p>The class NDTag exists to provide a way to group directional tags together. This is notably useful in order to create a vector field.</p>
+<p>Finally the classes <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a> and <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> provide a way to represent a vector field. </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
