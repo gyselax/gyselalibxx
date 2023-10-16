@@ -10,3 +10,4 @@ The `src/` folder contains all the code necessary to build a gyrokinetic semi-La
 <!-- - [paraconfpp](./paraconfpp/README.md) - Paraconf utility functions. -->
 - [quadrature](./quadrature/README.md) - Code describing different quadrature methods.
 <!-- - [speciesinfo](./speciesinfo/README.md) - Code used to describe the different species. -->
+- [utils](./utils/README.md) - Code describing utility functions.
