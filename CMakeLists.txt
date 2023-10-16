@@ -36,9 +36,6 @@ find_package(paraconf REQUIRED COMPONENTS C)
 ## Look for a pre-installed PDI
 find_package(PDI REQUIRED COMPONENTS C)
 
-## Look for a pre-installed Doxygen
-find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
-
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
 if("${BUILD_TESTING}")
@@ -99,7 +96,10 @@ endif()
 
 ## if documentation is enabled, build it
 if("${BUILD_DOCUMENTATION}")
-        add_subdirectory(docs/)
+  ## Look for a pre-installed Doxygen
+  find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
+
+  add_subdirectory(docs/)
 endif()
 
 ## Turn off documentation for subpackages
