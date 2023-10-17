@@ -60,7 +60,7 @@ public:
 
         /// @brief Construct a `NonUniformPointSampling` using a C++20 "common range".
         template <class InputRange>
-        explicit inline constexpr Impl(InputRange const& points)
+        explicit Impl(InputRange const& points)
         {
             if constexpr (Kokkos::is_view<InputRange>::value) {
                 Kokkos::deep_copy(m_points, points);
@@ -75,7 +75,7 @@ public:
 
         /// @brief Construct a `NonUniformPointSampling` using a pair of iterators.
         template <class InputIt>
-        inline constexpr Impl(InputIt points_begin, InputIt points_end)
+        Impl(InputIt points_begin, InputIt points_end)
         {
             std::vector<continuous_element_type> host_points(points_begin, points_end);
             Kokkos::View<continuous_element_type*, Kokkos::HostSpace>
@@ -96,14 +96,14 @@ public:
 
         ~Impl() = default;
 
-        constexpr std::size_t size() const
+        KOKKOS_FUNCTION std::size_t size() const
         {
             return m_points.size();
         }
 
         /// @brief Convert a mesh index into a position in `CDim`
-        constexpr continuous_element_type coordinate(
-                discrete_element_type const& icoord) const noexcept
+        KOKKOS_FUNCTION continuous_element_type
+        coordinate(discrete_element_type const& icoord) const noexcept
         {
             return m_points(icoord.uid());
         }
@@ -134,40 +134,37 @@ std::ostream& operator<<(std::ostream& out, DDimImpl const& mesh)
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> coordinate(
-        DiscreteElement<NonUniformPointSampling<CDim>> const& c)
+KOKKOS_FUNCTION Coordinate<CDim> coordinate(DiscreteElement<NonUniformPointSampling<CDim>> const& c)
 {
     return discrete_space<NonUniformPointSampling<CDim>>().coordinate(c);
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_left(
-        DiscreteElement<NonUniformPointSampling<CDim>> i)
+KOKKOS_FUNCTION Coordinate<CDim> distance_at_left(DiscreteElement<NonUniformPointSampling<CDim>> i)
 {
     return coordinate(i) - coordinate(i - 1);
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_right(
-        DiscreteElement<NonUniformPointSampling<CDim>> i)
+KOKKOS_FUNCTION Coordinate<CDim> distance_at_right(DiscreteElement<NonUniformPointSampling<CDim>> i)
 {
     return coordinate(i + 1) - coordinate(i);
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> rmin(DiscreteDomain<NonUniformPointSampling<CDim>> const& d)
+KOKKOS_FUNCTION Coordinate<CDim> rmin(DiscreteDomain<NonUniformPointSampling<CDim>> const& d)
 {
     return coordinate(d.front());
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> rmax(DiscreteDomain<NonUniformPointSampling<CDim>> const& d)
+KOKKOS_FUNCTION Coordinate<CDim> rmax(DiscreteDomain<NonUniformPointSampling<CDim>> const& d)
 {
     return coordinate(d.back());
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> rlength(DiscreteDomain<NonUniformPointSampling<CDim>> const& d)
+KOKKOS_FUNCTION Coordinate<CDim> rlength(DiscreteDomain<NonUniformPointSampling<CDim>> const& d)
 {
     return rmax(d) - rmin(d);
 }

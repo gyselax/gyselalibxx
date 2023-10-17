@@ -73,7 +73,7 @@ public:
          * @param step   the real distance between two points of mesh distance 1
          * @param n_period   the number of steps in a period
          */
-        constexpr Impl(continuous_element_type origin, Real step, std::size_t n_period)
+        Impl(continuous_element_type origin, Real step, std::size_t n_period)
             : m_origin(origin)
             , m_step(step)
             , m_n_period(n_period)
@@ -85,32 +85,32 @@ public:
         ~Impl() = default;
 
         /// @brief Lower bound index of the mesh
-        constexpr continuous_element_type origin() const noexcept
+        KOKKOS_FUNCTION continuous_element_type origin() const noexcept
         {
             return m_origin;
         }
 
         /// @brief Lower bound index of the mesh
-        constexpr discrete_element_type front() const noexcept
+        KOKKOS_FUNCTION discrete_element_type front() const noexcept
         {
             return discrete_element_type {0};
         }
 
         /// @brief Spacing step of the mesh
-        constexpr Real step() const
+        KOKKOS_FUNCTION Real step() const
         {
             return m_step;
         }
 
         /// @brief Number of steps in a period
-        constexpr std::size_t n_period() const
+        KOKKOS_FUNCTION std::size_t n_period() const
         {
             return m_n_period;
         }
 
         /// @brief Convert a mesh index into a position in `CDim`
-        constexpr continuous_element_type coordinate(
-                discrete_element_type const& icoord) const noexcept
+        KOKKOS_FUNCTION continuous_element_type
+        coordinate(discrete_element_type const& icoord) const noexcept
         {
             return m_origin
                    + continuous_element_type(
@@ -243,7 +243,7 @@ std::ostream& operator<<(std::ostream& out, DDimImpl const& mesh)
 
 /// @brief Lower bound index of the mesh
 template <class DDim>
-DDC_INLINE_FUNCTION std::
+KOKKOS_FUNCTION std::
         enable_if_t<is_periodic_sampling_v<DDim>, typename DDim::continuous_element_type>
         origin() noexcept
 {
@@ -252,53 +252,51 @@ DDC_INLINE_FUNCTION std::
 
 /// @brief Lower bound index of the mesh
 template <class DDim>
-DDC_INLINE_FUNCTION std::
-        enable_if_t<is_periodic_sampling_v<DDim>, typename DDim::discrete_element_type>
-        front() noexcept
+KOKKOS_FUNCTION std::enable_if_t<is_periodic_sampling_v<DDim>, typename DDim::discrete_element_type>
+front() noexcept
 {
     return discrete_space<DDim>().front();
 }
 
 /// @brief Spacing step of the mesh
 template <class DDim>
-DDC_INLINE_FUNCTION std::enable_if_t<is_periodic_sampling_v<DDim>, Real> step() noexcept
+KOKKOS_FUNCTION std::enable_if_t<is_periodic_sampling_v<DDim>, Real> step() noexcept
 {
     return discrete_space<DDim>().step();
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION constexpr Coordinate<CDim> coordinate(
-        DiscreteElement<PeriodicSampling<CDim>> const& c)
+KOKKOS_FUNCTION Coordinate<CDim> coordinate(DiscreteElement<PeriodicSampling<CDim>> const& c)
 {
     return discrete_space<PeriodicSampling<CDim>>().coordinate(c);
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_left(DiscreteElement<PeriodicSampling<CDim>>)
+KOKKOS_FUNCTION Coordinate<CDim> distance_at_left(DiscreteElement<PeriodicSampling<CDim>>)
 {
     return Coordinate<CDim>(step<PeriodicSampling<CDim>>());
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_right(DiscreteElement<PeriodicSampling<CDim>>)
+KOKKOS_FUNCTION Coordinate<CDim> distance_at_right(DiscreteElement<PeriodicSampling<CDim>>)
 {
     return Coordinate<CDim>(step<PeriodicSampling<CDim>>());
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> rmin(DiscreteDomain<PeriodicSampling<CDim>> const& d)
+KOKKOS_FUNCTION Coordinate<CDim> rmin(DiscreteDomain<PeriodicSampling<CDim>> const& d)
 {
     return coordinate(d.front());
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> rmax(DiscreteDomain<PeriodicSampling<CDim>> const& d)
+KOKKOS_FUNCTION Coordinate<CDim> rmax(DiscreteDomain<PeriodicSampling<CDim>> const& d)
 {
     return coordinate(d.back());
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> rlength(DiscreteDomain<PeriodicSampling<CDim>> const& d)
+KOKKOS_FUNCTION Coordinate<CDim> rlength(DiscreteDomain<PeriodicSampling<CDim>> const& d)
 {
     return rmax(d) - rmin(d);
 }

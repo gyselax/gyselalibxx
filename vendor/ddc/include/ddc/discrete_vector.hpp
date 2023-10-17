@@ -7,6 +7,8 @@
 #include <ostream>
 #include <utility>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc/detail/type_seq.hpp"
 
 namespace ddc {
@@ -33,19 +35,20 @@ inline constexpr bool is_discrete_vector_v = IsDiscreteVector<T>::value;
 using DiscreteVectorElement = std::ptrdiff_t;
 
 template <class QueryTag, class... Tags>
-inline constexpr DiscreteVectorElement const& get(DiscreteVector<Tags...> const& tuple) noexcept
+KOKKOS_FUNCTION constexpr DiscreteVectorElement const& get(
+        DiscreteVector<Tags...> const& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
 }
 
 template <class QueryTag, class... Tags>
-inline constexpr DiscreteVectorElement& get(DiscreteVector<Tags...>& tuple) noexcept
+KOKKOS_FUNCTION constexpr DiscreteVectorElement& get(DiscreteVector<Tags...>& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
 }
 
 template <class QueryTag, class... Tags>
-inline constexpr DiscreteVectorElement const& get_or(
+KOKKOS_FUNCTION constexpr DiscreteVectorElement const& get_or(
         DiscreteVector<Tags...> const& tuple,
         DiscreteVectorElement const& default_value) noexcept
 {
@@ -55,13 +58,13 @@ inline constexpr DiscreteVectorElement const& get_or(
 /// Unary operators: +, -
 
 template <class... Tags>
-constexpr inline DiscreteVector<Tags...> operator+(DiscreteVector<Tags...> const& x)
+KOKKOS_FUNCTION constexpr DiscreteVector<Tags...> operator+(DiscreteVector<Tags...> const& x)
 {
     return x;
 }
 
 template <class... Tags>
-constexpr inline DiscreteVector<Tags...> operator-(DiscreteVector<Tags...> const& x)
+KOKKOS_FUNCTION constexpr DiscreteVector<Tags...> operator-(DiscreteVector<Tags...> const& x)
 {
     return DiscreteVector<Tags...>((-get<Tags>(x))...);
 }
@@ -69,7 +72,7 @@ constexpr inline DiscreteVector<Tags...> operator-(DiscreteVector<Tags...> const
 /// Internal binary operators: +, -
 
 template <class... Tags, class... OTags>
-constexpr inline auto operator+(
+KOKKOS_FUNCTION constexpr auto operator+(
         DiscreteVector<Tags...> const& lhs,
         DiscreteVector<OTags...> const& rhs)
 {
@@ -88,7 +91,7 @@ constexpr inline auto operator+(
 }
 
 template <class... Tags, class... OTags>
-constexpr inline auto operator-(
+KOKKOS_FUNCTION constexpr auto operator-(
         DiscreteVector<Tags...> const& lhs,
         DiscreteVector<OTags...> const& rhs)
 {
@@ -107,7 +110,7 @@ constexpr inline auto operator-(
 }
 
 template <class Tag, class IntegralType, class = std::enable_if_t<std::is_integral_v<IntegralType>>>
-constexpr inline DiscreteVector<Tag> operator+(
+KOKKOS_FUNCTION constexpr DiscreteVector<Tag> operator+(
         DiscreteVector<Tag> const& lhs,
         IntegralType const& rhs)
 {
@@ -115,7 +118,7 @@ constexpr inline DiscreteVector<Tag> operator+(
 }
 
 template <class IntegralType, class Tag, class = std::enable_if_t<std::is_integral_v<IntegralType>>>
-constexpr inline DiscreteVector<Tag> operator+(
+KOKKOS_FUNCTION constexpr DiscreteVector<Tag> operator+(
         IntegralType const& lhs,
         DiscreteVector<Tag> const& rhs)
 {
@@ -123,7 +126,7 @@ constexpr inline DiscreteVector<Tag> operator+(
 }
 
 template <class Tag, class IntegralType, class = std::enable_if_t<std::is_integral_v<IntegralType>>>
-constexpr inline DiscreteVector<Tag> operator-(
+KOKKOS_FUNCTION constexpr DiscreteVector<Tag> operator-(
         DiscreteVector<Tag> const& lhs,
         IntegralType const& rhs)
 {
@@ -131,7 +134,7 @@ constexpr inline DiscreteVector<Tag> operator-(
 }
 
 template <class IntegralType, class Tag, class = std::enable_if_t<std::is_integral_v<IntegralType>>>
-constexpr inline DiscreteVector<Tag> operator-(
+KOKKOS_FUNCTION constexpr DiscreteVector<Tag> operator-(
         IntegralType const& lhs,
         DiscreteVector<Tag> const& rhs)
 {
@@ -144,25 +147,29 @@ template <
         class IntegralType,
         class... Tags,
         class = std::enable_if_t<std::is_integral_v<IntegralType>>>
-constexpr inline auto operator*(IntegralType const& lhs, DiscreteVector<Tags...> const& rhs)
+KOKKOS_FUNCTION constexpr auto operator*(
+        IntegralType const& lhs,
+        DiscreteVector<Tags...> const& rhs)
 {
     return DiscreteVector<Tags...>((lhs * get<Tags>(rhs))...);
 }
 
 template <class... QueryTags, class... Tags>
-inline constexpr DiscreteVector<QueryTags...> select(DiscreteVector<Tags...> const& arr) noexcept
+KOKKOS_FUNCTION constexpr DiscreteVector<QueryTags...> select(
+        DiscreteVector<Tags...> const& arr) noexcept
 {
     return DiscreteVector<QueryTags...>(arr);
 }
 
 template <class... QueryTags, class... Tags>
-inline constexpr DiscreteVector<QueryTags...> select(DiscreteVector<Tags...>&& arr) noexcept
+KOKKOS_FUNCTION constexpr DiscreteVector<QueryTags...> select(
+        DiscreteVector<Tags...>&& arr) noexcept
 {
     return DiscreteVector<QueryTags...>(std::move(arr));
 }
 
 template <class QueryTag, class HeadTag, class... TailTags>
-constexpr DiscreteVector<QueryTag> const& take(
+KOKKOS_FUNCTION constexpr DiscreteVector<QueryTag> const& take(
         DiscreteVector<HeadTag> const& head,
         DiscreteVector<TailTags> const&... tags)
 {
@@ -188,12 +195,12 @@ template <class Tag>
 class ConversionOperators<DiscreteVector<Tag>>
 {
 public:
-    constexpr inline operator DiscreteVectorElement const &() const noexcept
+    KOKKOS_FUNCTION constexpr operator DiscreteVectorElement const &() const noexcept
     {
         return static_cast<DiscreteVector<Tag> const*>(this)->m_values[0];
     }
 
-    constexpr inline operator DiscreteVectorElement&() noexcept
+    KOKKOS_FUNCTION constexpr operator DiscreteVectorElement&() noexcept
     {
         return static_cast<DiscreteVector<Tag>*>(this)->m_values[0];
     }
@@ -203,7 +210,7 @@ namespace detail {
 
 /// Returns a reference to the underlying `std::array`
 template <class... Tags>
-constexpr inline std::array<DiscreteVectorElement, sizeof...(Tags)>& array(
+KOKKOS_FUNCTION constexpr std::array<DiscreteVectorElement, sizeof...(Tags)>& array(
         DiscreteVector<Tags...>& v) noexcept
 {
     return v.m_values;
@@ -211,7 +218,7 @@ constexpr inline std::array<DiscreteVectorElement, sizeof...(Tags)>& array(
 
 /// Returns a reference to the underlying `std::array`
 template <class... Tags>
-constexpr inline std::array<DiscreteVectorElement, sizeof...(Tags)> const& array(
+KOKKOS_FUNCTION constexpr std::array<DiscreteVectorElement, sizeof...(Tags)> const& array(
         DiscreteVector<Tags...> const& v) noexcept
 {
     return v.m_values;
@@ -228,10 +235,10 @@ class DiscreteVector : public ConversionOperators<DiscreteVector<Tags...>>
 {
     friend class ConversionOperators<DiscreteVector<Tags...>>;
 
-    friend constexpr std::array<DiscreteVectorElement, sizeof...(Tags)>& detail::array<Tags...>(
-            DiscreteVector<Tags...>& v) noexcept;
-    friend constexpr std::array<DiscreteVectorElement, sizeof...(Tags)> const& detail::array<
-            Tags...>(DiscreteVector<Tags...> const& v) noexcept;
+    friend KOKKOS_FUNCTION constexpr std::array<DiscreteVectorElement, sizeof...(Tags)>& detail::
+            array<Tags...>(DiscreteVector<Tags...>& v) noexcept;
+    friend KOKKOS_FUNCTION constexpr std::array<DiscreteVectorElement, sizeof...(Tags)> const&
+    detail::array<Tags...>(DiscreteVector<Tags...> const& v) noexcept;
 
     using tags_seq = detail::TypeSeq<Tags...>;
 
@@ -239,26 +246,28 @@ private:
     std::array<DiscreteVectorElement, sizeof...(Tags)> m_values;
 
 public:
-    static constexpr std::size_t size() noexcept
+    static KOKKOS_FUNCTION constexpr std::size_t size() noexcept
     {
         return sizeof...(Tags);
     }
 
 public:
-    inline constexpr DiscreteVector() = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr DiscreteVector() = default;
 
-    inline constexpr DiscreteVector(DiscreteVector const&) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr DiscreteVector(DiscreteVector const&) = default;
 
-    inline constexpr DiscreteVector(DiscreteVector&&) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr DiscreteVector(DiscreteVector&&) = default;
 
     template <class... OTags>
-    explicit inline constexpr DiscreteVector(DiscreteVector<OTags> const&... other) noexcept
+    explicit KOKKOS_FUNCTION constexpr DiscreteVector(
+            DiscreteVector<OTags> const&... other) noexcept
         : m_values {take<Tags>(other...).value()...}
     {
     }
 
     template <class... OTags>
-    explicit inline constexpr DiscreteVector(DiscreteVector<OTags...> const& other) noexcept
+    explicit KOKKOS_FUNCTION constexpr DiscreteVector(
+            DiscreteVector<OTags...> const& other) noexcept
         : m_values {other.template get<Tags>()...}
     {
     }
@@ -268,43 +277,47 @@ public:
             class = std::enable_if_t<(std::is_convertible_v<Params, DiscreteVectorElement> && ...)>,
             class = std::enable_if_t<(!is_discrete_vector_v<Params> && ...)>,
             class = std::enable_if_t<sizeof...(Params) == sizeof...(Tags)>>
-    explicit inline constexpr DiscreteVector(Params const&... params) noexcept
+    explicit KOKKOS_FUNCTION constexpr DiscreteVector(Params const&... params) noexcept
         : m_values {static_cast<DiscreteVectorElement>(params)...}
     {
     }
 
-    constexpr inline DiscreteVector& operator=(DiscreteVector const& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION ~DiscreteVector() = default;
 
-    constexpr inline DiscreteVector& operator=(DiscreteVector&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr DiscreteVector& operator=(DiscreteVector const& other)
+            = default;
+
+    KOKKOS_DEFAULTED_FUNCTION constexpr DiscreteVector& operator=(DiscreteVector&& other) = default;
 
     template <class... OTags>
-    constexpr inline DiscreteVector& operator=(DiscreteVector<OTags...> const& other) noexcept
+    KOKKOS_FUNCTION constexpr DiscreteVector& operator=(
+            DiscreteVector<OTags...> const& other) noexcept
     {
         m_values = other.m_values;
         return *this;
     }
 
     template <class... OTags>
-    constexpr inline DiscreteVector& operator=(DiscreteVector<OTags...>&& other) noexcept
+    KOKKOS_FUNCTION constexpr DiscreteVector& operator=(DiscreteVector<OTags...>&& other) noexcept
     {
         m_values = std::move(other.m_values);
         return *this;
     }
 
     template <class... OTags>
-    constexpr inline bool operator==(DiscreteVector<OTags...> const& rhs) const noexcept
+    KOKKOS_FUNCTION constexpr bool operator==(DiscreteVector<OTags...> const& rhs) const noexcept
     {
         return ((m_values[type_seq_rank_v<Tags, tags_seq>] == rhs.template get<Tags>()) && ...);
     }
 
     template <class... OTags>
-    constexpr inline bool operator!=(DiscreteVector<OTags...> const& rhs) const noexcept
+    KOKKOS_FUNCTION constexpr bool operator!=(DiscreteVector<OTags...> const& rhs) const noexcept
     {
         return !(*this == rhs);
     }
 
     template <class QueryTag>
-    inline constexpr DiscreteVectorElement& get() noexcept
+    KOKKOS_FUNCTION constexpr DiscreteVectorElement& get() noexcept
     {
         using namespace detail;
         static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from DiscreteVector");
@@ -312,7 +325,7 @@ public:
     }
 
     template <class QueryTag>
-    inline constexpr DiscreteVectorElement const& get() const noexcept
+    KOKKOS_FUNCTION constexpr DiscreteVectorElement const& get() const noexcept
     {
         using namespace detail;
         static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from DiscreteVector");
@@ -320,7 +333,8 @@ public:
     }
 
     template <class QueryTag>
-    DiscreteVectorElement const& get_or(DiscreteVectorElement const& default_value) const&
+    KOKKOS_FUNCTION constexpr DiscreteVectorElement const& get_or(
+            DiscreteVectorElement const& default_value) const&
     {
         DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
         if constexpr (in_tags_v<QueryTag, tags_seq>) {
@@ -332,20 +346,21 @@ public:
     }
 
     template <std::size_t N = sizeof...(Tags)>
-    constexpr inline std::enable_if_t<N == 1, DiscreteVectorElement const&> value() const noexcept
+    KOKKOS_FUNCTION constexpr std::enable_if_t<N == 1, DiscreteVectorElement const&> value()
+            const noexcept
     {
         return m_values[0];
     }
 
     template <std::size_t N = sizeof...(Tags), class = std::enable_if_t<N == 1>>
-    constexpr inline DiscreteVector& operator++()
+    KOKKOS_FUNCTION constexpr DiscreteVector& operator++()
     {
         ++m_values[0];
         return *this;
     }
 
     template <std::size_t N = sizeof...(Tags), class = std::enable_if_t<N == 1>>
-    constexpr inline DiscreteVector operator++(int)
+    KOKKOS_FUNCTION constexpr DiscreteVector operator++(int)
     {
         DiscreteVector const tmp = *this;
         ++m_values[0];
@@ -353,14 +368,14 @@ public:
     }
 
     template <std::size_t N = sizeof...(Tags), class = std::enable_if_t<N == 1>>
-    constexpr inline DiscreteVector& operator--()
+    KOKKOS_FUNCTION constexpr DiscreteVector& operator--()
     {
         ++m_values[0];
         return *this;
     }
 
     template <std::size_t N = sizeof...(Tags), class = std::enable_if_t<N == 1>>
-    constexpr inline DiscreteVector operator--(int)
+    KOKKOS_FUNCTION constexpr DiscreteVector operator--(int)
     {
         DiscreteVector const tmp = *this;
         ++m_values[0];
@@ -368,7 +383,7 @@ public:
     }
 
     template <class... OTags>
-    constexpr inline DiscreteVector& operator+=(DiscreteVector<OTags...> const& rhs)
+    KOKKOS_FUNCTION constexpr DiscreteVector& operator+=(DiscreteVector<OTags...> const& rhs)
     {
         static_assert(((type_seq_contains_v<detail::TypeSeq<OTags>, tags_seq>)&&...));
         ((m_values[type_seq_rank_v<OTags, tags_seq>] += rhs.template get<OTags>()), ...);
@@ -380,14 +395,14 @@ public:
             std::size_t N = sizeof...(Tags),
             class = std::enable_if_t<N == 1>,
             class = std::enable_if_t<std::is_integral_v<IntegralType>>>
-    constexpr inline DiscreteVector& operator+=(IntegralType const& rhs)
+    KOKKOS_FUNCTION constexpr DiscreteVector& operator+=(IntegralType const& rhs)
     {
         m_values[0] += rhs;
         return *this;
     }
 
     template <class... OTags>
-    constexpr inline DiscreteVector& operator-=(DiscreteVector<OTags...> const& rhs)
+    KOKKOS_FUNCTION constexpr DiscreteVector& operator-=(DiscreteVector<OTags...> const& rhs)
     {
         static_assert(((type_seq_contains_v<detail::TypeSeq<OTags>, tags_seq>)&&...));
         ((m_values[type_seq_rank_v<OTags, tags_seq>] -= rhs.template get<OTags>()), ...);
@@ -399,14 +414,14 @@ public:
             std::size_t N = sizeof...(Tags),
             class = std::enable_if_t<N == 1>,
             class = std::enable_if_t<std::is_integral_v<IntegralType>>>
-    constexpr inline DiscreteVector& operator-=(IntegralType const& rhs)
+    KOKKOS_FUNCTION constexpr DiscreteVector& operator-=(IntegralType const& rhs)
     {
         m_values[0] -= rhs;
         return *this;
     }
 
     template <class... OTags>
-    constexpr inline DiscreteVector& operator*=(DiscreteVector<OTags...> const& rhs)
+    KOKKOS_FUNCTION constexpr DiscreteVector& operator*=(DiscreteVector<OTags...> const& rhs)
     {
         static_assert(((type_seq_contains_v<detail::TypeSeq<OTags>, tags_seq>)&&...));
         ((m_values[type_seq_rank_v<OTags, tags_seq>] *= rhs.template get<OTags>()), ...);
@@ -415,13 +430,15 @@ public:
 };
 
 template <class Tag>
-constexpr inline bool operator<(DiscreteVector<Tag> const& lhs, DiscreteVector<Tag> const& rhs)
+KOKKOS_FUNCTION constexpr bool operator<(
+        DiscreteVector<Tag> const& lhs,
+        DiscreteVector<Tag> const& rhs)
 {
     return lhs.value() < rhs.value();
 }
 
 template <class Tag, class IntegralType>
-constexpr inline bool operator<(DiscreteVector<Tag> const& lhs, IntegralType const& rhs)
+KOKKOS_FUNCTION constexpr bool operator<(DiscreteVector<Tag> const& lhs, IntegralType const& rhs)
 {
     return lhs.value() < rhs;
 }
@@ -441,4 +458,5 @@ std::ostream& operator<<(std::ostream& out, DiscreteVector<Head, Tags...> const&
     out << ")";
     return out;
 }
+
 } // namespace ddc

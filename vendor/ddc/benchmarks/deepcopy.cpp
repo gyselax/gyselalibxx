@@ -133,4 +133,16 @@ BENCHMARK(memcpy_2d)->Args({large_dim1_2D, large_dim2_2D});
 BENCHMARK(deepcopy_2d)->Args({large_dim1_2D, large_dim2_2D});
 BENCHMARK(deepcopy_subchunk_2d)->Args({large_dim1_2D, large_dim2_2D});
 
-BENCHMARK_MAIN();
+int main(int argc, char** argv)
+{
+    ::benchmark::Initialize(&argc, argv);
+    if (::benchmark::ReportUnrecognizedArguments(argc, argv)) {
+        return 1;
+    }
+    {
+        ddc::ScopeGuard const guard;
+        ::benchmark::RunSpecifiedBenchmarks();
+    }
+    ::benchmark::Shutdown();
+    return 0;
+}

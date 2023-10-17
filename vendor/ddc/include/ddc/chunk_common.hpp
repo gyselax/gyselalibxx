@@ -132,43 +132,43 @@ protected:
     mdomain_type m_domain;
 
 public:
-    static constexpr int rank() noexcept
+    static KOKKOS_FUNCTION constexpr int rank() noexcept
     {
         return extents_type::rank();
     }
 
-    static constexpr int rank_dynamic() noexcept
+    static KOKKOS_FUNCTION constexpr int rank_dynamic() noexcept
     {
         return extents_type::rank_dynamic();
     }
 
-    static constexpr size_type static_extent(std::size_t r) noexcept
+    static KOKKOS_FUNCTION constexpr size_type static_extent(std::size_t r) noexcept
     {
         return extents_type::static_extent(r);
     }
 
-    static constexpr bool is_always_unique() noexcept
+    static KOKKOS_FUNCTION constexpr bool is_always_unique() noexcept
     {
         return mapping_type::is_always_unique();
     }
 
-    static constexpr bool is_always_exhaustive() noexcept
+    static KOKKOS_FUNCTION constexpr bool is_always_exhaustive() noexcept
     {
         return mapping_type::is_always_exhaustive();
     }
 
-    static constexpr bool is_always_strided() noexcept
+    static KOKKOS_FUNCTION constexpr bool is_always_strided() noexcept
     {
         return mapping_type::is_always_strided();
     }
 
 public:
-    constexpr accessor_type accessor() const
+    KOKKOS_FUNCTION constexpr accessor_type accessor() const
     {
         return m_internal_mdspan.accessor();
     }
 
-    constexpr DiscreteVector<DDims...> extents() const noexcept
+    KOKKOS_FUNCTION constexpr DiscreteVector<DDims...> extents() const noexcept
     {
         return DiscreteVector<DDims...>(
                 (m_internal_mdspan.extent(type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)
@@ -176,39 +176,39 @@ public:
     }
 
     template <class QueryDDim>
-    constexpr size_type extent() const noexcept
+    KOKKOS_FUNCTION constexpr size_type extent() const noexcept
     {
         return m_internal_mdspan.extent(type_seq_rank_v<QueryDDim, detail::TypeSeq<DDims...>>)
                - front<QueryDDim>(m_domain).uid();
     }
 
-    constexpr size_type size() const noexcept
+    KOKKOS_FUNCTION constexpr size_type size() const noexcept
     {
         return allocation_mdspan().size();
     }
 
-    constexpr mapping_type mapping() const noexcept
+    KOKKOS_FUNCTION constexpr mapping_type mapping() const noexcept
     {
         return allocation_mdspan().mapping();
     }
 
-    constexpr bool is_unique() const noexcept
+    KOKKOS_FUNCTION constexpr bool is_unique() const noexcept
     {
         return allocation_mdspan().is_unique();
     }
 
-    constexpr bool is_exhaustive() const noexcept
+    KOKKOS_FUNCTION constexpr bool is_exhaustive() const noexcept
     {
         return allocation_mdspan().is_exhaustive();
     }
 
-    constexpr bool is_strided() const noexcept
+    KOKKOS_FUNCTION constexpr bool is_strided() const noexcept
     {
         return allocation_mdspan().is_strided();
     }
 
     template <class QueryDDim>
-    constexpr size_type stride() const
+    KOKKOS_FUNCTION constexpr size_type stride() const
     {
         return m_internal_mdspan.stride(type_seq_rank_v<QueryDDim, detail::TypeSeq<DDims...>>);
     }
@@ -216,7 +216,7 @@ public:
     /** Provide access to the domain on which this chunk is defined
      * @return the domain on which this chunk is defined
      */
-    constexpr mdomain_type domain() const noexcept
+    KOKKOS_FUNCTION constexpr mdomain_type domain() const noexcept
     {
         return m_domain;
     }
@@ -225,20 +225,22 @@ public:
      * @return the domain on which this chunk is defined
      */
     template <class... QueryDDims>
-    constexpr DiscreteDomain<QueryDDims...> domain() const noexcept
+    KOKKOS_FUNCTION constexpr DiscreteDomain<QueryDDims...> domain() const noexcept
     {
         return select<QueryDDims...>(domain());
     }
 
 protected:
     /// Empty ChunkCommon
-    constexpr ChunkCommon() = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr ChunkCommon() = default;
 
     /** Constructs a new ChunkCommon from scratch
      * @param internal_mdspan
      * @param domain
      */
-    constexpr ChunkCommon(internal_mdspan_type internal_mdspan, mdomain_type const& domain) noexcept
+    KOKKOS_FUNCTION constexpr ChunkCommon(
+            internal_mdspan_type internal_mdspan,
+            mdomain_type const& domain) noexcept
         : m_internal_mdspan(std::move(internal_mdspan))
         , m_domain(domain)
     {
@@ -251,7 +253,7 @@ protected:
     template <
             class Mapping = mapping_type,
             std::enable_if_t<std::is_constructible_v<Mapping, extents_type>, int> = 0>
-    constexpr ChunkCommon(ElementType* ptr, mdomain_type const& domain)
+    KOKKOS_FUNCTION constexpr ChunkCommon(ElementType* ptr, mdomain_type const& domain)
         : ChunkCommon {ptr, domain, make_mapping_for(domain)}
     {
     }
@@ -259,29 +261,31 @@ protected:
     /** Constructs a new ChunkCommon by copy, yields a new view to the same data
      * @param other the ChunkCommon to copy
      */
-    constexpr ChunkCommon(ChunkCommon const& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr ChunkCommon(ChunkCommon const& other) = default;
 
     /** Constructs a new ChunkCommon by move
      * @param other the ChunkCommon to move
      */
-    constexpr ChunkCommon(ChunkCommon&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr ChunkCommon(ChunkCommon&& other) = default;
+
+    KOKKOS_DEFAULTED_FUNCTION ~ChunkCommon() = default;
 
     /** Copy-assigns a new value to this ChunkCommon, yields a new view to the same data
      * @param other the ChunkCommon to copy
      * @return *this
      */
-    constexpr ChunkCommon& operator=(ChunkCommon const& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr ChunkCommon& operator=(ChunkCommon const& other) = default;
 
     /** Move-assigns a new value to this ChunkCommon
      * @param other the ChunkCommon to move
      * @return *this
      */
-    constexpr ChunkCommon& operator=(ChunkCommon&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr ChunkCommon& operator=(ChunkCommon&& other) = default;
 
     /** Access to the underlying allocation pointer
      * @return allocation pointer
      */
-    constexpr ElementType* data_handle() const
+    KOKKOS_FUNCTION constexpr ElementType* data_handle() const
     {
         return &m_internal_mdspan(front<DDims>(m_domain).uid()...);
     }
@@ -289,7 +293,7 @@ protected:
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
      */
-    constexpr internal_mdspan_type internal_mdspan() const
+    KOKKOS_FUNCTION constexpr internal_mdspan_type internal_mdspan() const
     {
         return m_internal_mdspan;
     }
@@ -297,7 +301,7 @@ protected:
     /** Provide a modifiable view of the data
      * @return a modifiable view of the data
      */
-    constexpr allocation_mdspan_type allocation_mdspan() const
+    KOKKOS_FUNCTION constexpr allocation_mdspan_type allocation_mdspan() const
     {
         DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
         extents_type extents_s(::ddc::extents<DDims>(m_domain).value()...);
@@ -316,7 +320,7 @@ private:
      * @param domain the domain that sustains the view
      */
     template <class Mapping = mapping_type>
-    constexpr std::enable_if_t<
+    KOKKOS_FUNCTION constexpr std::enable_if_t<
             std::is_constructible_v<Mapping, extents_type>,
             std::experimental::layout_stride::mapping<extents_type>>
     make_mapping_for(mdomain_type const& domain)
@@ -334,7 +338,7 @@ private:
      * @param ptr the allocation pointer to the data_handle()
      * @param domain the domain that sustains the view
      */
-    constexpr ChunkCommon(
+    KOKKOS_FUNCTION constexpr ChunkCommon(
             ElementType* ptr,
             mdomain_type const& domain,
             std::experimental::layout_stride::mapping<extents_type>&& s_domain)

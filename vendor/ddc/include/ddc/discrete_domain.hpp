@@ -36,16 +36,16 @@ private:
     DiscreteElement<DDims...> m_element_end;
 
 public:
-    static constexpr std::size_t rank()
+    static KOKKOS_FUNCTION constexpr std::size_t rank()
     {
         return sizeof...(DDims);
     }
 
-    DiscreteDomain() = default;
+    KOKKOS_DEFAULTED_FUNCTION DiscreteDomain() = default;
 
     /// Construct a DiscreteDomain from a reordered copy of `domain`
     template <class... ODDims>
-    explicit constexpr DiscreteDomain(DiscreteDomain<ODDims...> const& domain)
+    explicit KOKKOS_FUNCTION constexpr DiscreteDomain(DiscreteDomain<ODDims...> const& domain)
         : m_element_begin(domain.front())
         , m_element_end(domain.front() + domain.extents())
     {
@@ -54,7 +54,7 @@ public:
     // Use SFINAE to disambiguate with the copy constructor.
     // Note that SFINAE may be redundant because a template constructor should not be selected as a copy constructor.
     template <std::size_t N = sizeof...(DDims), class = std::enable_if_t<(N != 1)>>
-    explicit constexpr DiscreteDomain(DiscreteDomain<DDims> const&... domains)
+    explicit KOKKOS_FUNCTION constexpr DiscreteDomain(DiscreteDomain<DDims> const&... domains)
         : m_element_begin(domains.front()...)
         , m_element_end((domains.front() + domains.extents())...)
     {
@@ -64,24 +64,26 @@ public:
      * @param element_begin the lower bound in each direction
      * @param size the number of points in each direction
      */
-    constexpr DiscreteDomain(discrete_element_type const& element_begin, mlength_type const& size)
+    KOKKOS_FUNCTION constexpr DiscreteDomain(
+            discrete_element_type const& element_begin,
+            mlength_type const& size)
         : m_element_begin(element_begin)
         , m_element_end(element_begin + size)
     {
     }
 
-    DiscreteDomain(DiscreteDomain const& x) = default;
+    KOKKOS_DEFAULTED_FUNCTION DiscreteDomain(DiscreteDomain const& x) = default;
 
-    DiscreteDomain(DiscreteDomain&& x) = default;
+    KOKKOS_DEFAULTED_FUNCTION DiscreteDomain(DiscreteDomain&& x) = default;
 
-    ~DiscreteDomain() = default;
+    KOKKOS_DEFAULTED_FUNCTION ~DiscreteDomain() = default;
 
-    DiscreteDomain& operator=(DiscreteDomain const& x) = default;
+    KOKKOS_DEFAULTED_FUNCTION DiscreteDomain& operator=(DiscreteDomain const& x) = default;
 
-    DiscreteDomain& operator=(DiscreteDomain&& x) = default;
+    KOKKOS_DEFAULTED_FUNCTION DiscreteDomain& operator=(DiscreteDomain&& x) = default;
 
     template <class... ODims>
-    constexpr bool operator==(DiscreteDomain<ODims...> const& other) const
+    KOKKOS_FUNCTION constexpr bool operator==(DiscreteDomain<ODims...> const& other) const
     {
         return m_element_begin == other.m_element_begin && m_element_end == other.m_element_end;
     }
@@ -89,66 +91,66 @@ public:
 #if __cplusplus <= 201703L
     // Shall not be necessary anymore in C++20
     // `a!=b` shall be translated by the compiler to `!(a==b)`
-    constexpr bool operator!=(DiscreteDomain const& other) const
+    KOKKOS_FUNCTION constexpr bool operator!=(DiscreteDomain const& other) const
     {
         return !(*this == other);
     }
 #endif
 
-    constexpr std::size_t size() const
+    KOKKOS_FUNCTION constexpr std::size_t size() const
     {
         return (1ul * ... * (uid<DDims>(m_element_end) - uid<DDims>(m_element_begin)));
     }
 
-    constexpr mlength_type extents() const noexcept
+    KOKKOS_FUNCTION constexpr mlength_type extents() const noexcept
     {
         return mlength_type((uid<DDims>(m_element_end) - uid<DDims>(m_element_begin))...);
     }
 
     template <class QueryDDim>
-    inline constexpr DiscreteVector<QueryDDim> extent() const noexcept
+    KOKKOS_FUNCTION constexpr DiscreteVector<QueryDDim> extent() const noexcept
     {
         return DiscreteVector<QueryDDim>(
                 uid<QueryDDim>(m_element_end) - uid<QueryDDim>(m_element_begin));
     }
 
-    constexpr discrete_element_type front() const noexcept
+    KOKKOS_FUNCTION constexpr discrete_element_type front() const noexcept
     {
         return m_element_begin;
     }
 
-    constexpr discrete_element_type back() const noexcept
+    KOKKOS_FUNCTION constexpr discrete_element_type back() const noexcept
     {
         return discrete_element_type((uid<DDims>(m_element_end) - 1)...);
     }
 
-    constexpr DiscreteDomain take_first(mlength_type n) const
+    KOKKOS_FUNCTION constexpr DiscreteDomain take_first(mlength_type n) const
     {
         return DiscreteDomain(front(), n);
     }
 
-    constexpr DiscreteDomain take_last(mlength_type n) const
+    KOKKOS_FUNCTION constexpr DiscreteDomain take_last(mlength_type n) const
     {
         return DiscreteDomain(front() + (extents() - n), n);
     }
 
-    constexpr DiscreteDomain remove_first(mlength_type n) const
+    KOKKOS_FUNCTION constexpr DiscreteDomain remove_first(mlength_type n) const
     {
         return DiscreteDomain(front() + n, extents() - n);
     }
 
-    constexpr DiscreteDomain remove_last(mlength_type n) const
+    KOKKOS_FUNCTION constexpr DiscreteDomain remove_last(mlength_type n) const
     {
         return DiscreteDomain(front(), extents() - n);
     }
 
-    constexpr DiscreteDomain remove(mlength_type n1, mlength_type n2) const
+    KOKKOS_FUNCTION constexpr DiscreteDomain remove(mlength_type n1, mlength_type n2) const
     {
         return DiscreteDomain(front() + n1, extents() - n1 - n2);
     }
 
     template <class... ODDims>
-    constexpr auto restrict(DiscreteDomain<ODDims...> const& odomain) const
+    KOKKOS_FUNCTION constexpr auto restrict(DiscreteDomain<ODDims...> const& odomain) const
     {
         assert(((uid<ODDims>(m_element_begin) <= uid<ODDims>(odomain.m_element_begin)) && ...));
         assert(((uid<ODDims>(m_element_end) >= uid<ODDims>(odomain.m_element_end)) && ...));
@@ -160,12 +162,12 @@ public:
                 DiscreteVector<DDims...>((get_or<DDims>(oextents, get<DDims>(myextents)))...));
     }
 
-    constexpr bool empty() const noexcept
+    KOKKOS_FUNCTION constexpr bool empty() const noexcept
     {
         return size() == 0;
     }
 
-    constexpr explicit operator bool()
+    KOKKOS_FUNCTION constexpr explicit operator bool()
     {
         return !empty();
     }
@@ -173,7 +175,7 @@ public:
     template <
             std::size_t N = sizeof...(DDims),
             class DDim0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<DDims...>>>>
-    auto begin() const
+    KOKKOS_FUNCTION auto begin() const
     {
         return DiscreteDomainIterator<DDim0>(front());
     }
@@ -181,7 +183,7 @@ public:
     template <
             std::size_t N = sizeof...(DDims),
             class DDim0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<DDims...>>>>
-    auto end() const
+    KOKKOS_FUNCTION auto end() const
     {
         return DiscreteDomainIterator<DDim0>(m_element_end);
     }
@@ -189,7 +191,7 @@ public:
     template <
             std::size_t N = sizeof...(DDims),
             class DDim0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<DDims...>>>>
-    auto cbegin() const
+    KOKKOS_FUNCTION auto cbegin() const
     {
         return DiscreteDomainIterator<DDim0>(front());
     }
@@ -197,7 +199,7 @@ public:
     template <
             std::size_t N = sizeof...(DDims),
             class DDim0 = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<DDims...>>>>
-    auto cend() const
+    KOKKOS_FUNCTION auto cend() const
     {
         return DiscreteDomainIterator<DDim0>(m_element_end);
     }
@@ -205,7 +207,7 @@ public:
     template <
             std::size_t N = sizeof...(DDims),
             class = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<DDims...>>>>
-    constexpr decltype(auto) operator[](std::size_t n)
+    KOKKOS_FUNCTION constexpr decltype(auto) operator[](std::size_t n)
     {
         return begin()[n];
     }
@@ -213,7 +215,7 @@ public:
     template <
             std::size_t N = sizeof...(DDims),
             class = std::enable_if_t<N == 1, std::tuple_element_t<0, std::tuple<DDims...>>>>
-    constexpr decltype(auto) operator[](std::size_t n) const
+    KOKKOS_FUNCTION constexpr decltype(auto) operator[](std::size_t n) const
     {
         return begin()[n];
     }
@@ -230,7 +232,7 @@ public:
 
     using mlength_type = DiscreteVector<>;
 
-    static constexpr std::size_t rank()
+    static KOKKOS_FUNCTION constexpr std::size_t rank()
     {
         return 0;
     }
@@ -239,7 +241,8 @@ public:
 
     // Construct a DiscreteDomain from a reordered copy of `domain`
     template <class... ODDims>
-    explicit constexpr DiscreteDomain([[maybe_unused]] DiscreteDomain<ODDims...> const& domain)
+    explicit KOKKOS_FUNCTION constexpr DiscreteDomain(
+            [[maybe_unused]] DiscreteDomain<ODDims...> const& domain)
     {
     }
 
@@ -247,23 +250,23 @@ public:
      * @param element_begin the lower bound in each direction
      * @param size the number of points in each direction
      */
-    constexpr DiscreteDomain(
+    KOKKOS_FUNCTION constexpr DiscreteDomain(
             [[maybe_unused]] discrete_element_type const& element_begin,
             [[maybe_unused]] mlength_type const& size)
     {
     }
 
-    constexpr DiscreteDomain(DiscreteDomain const& x) = default;
+    KOKKOS_DEFAULTED_FUNCTION DiscreteDomain(DiscreteDomain const& x) = default;
 
-    constexpr DiscreteDomain(DiscreteDomain&& x) = default;
+    KOKKOS_DEFAULTED_FUNCTION DiscreteDomain(DiscreteDomain&& x) = default;
 
-    ~DiscreteDomain() = default;
+    KOKKOS_DEFAULTED_FUNCTION ~DiscreteDomain() = default;
 
-    DiscreteDomain& operator=(DiscreteDomain const& x) = default;
+    KOKKOS_DEFAULTED_FUNCTION DiscreteDomain& operator=(DiscreteDomain const& x) = default;
 
-    DiscreteDomain& operator=(DiscreteDomain&& x) = default;
+    KOKKOS_DEFAULTED_FUNCTION DiscreteDomain& operator=(DiscreteDomain&& x) = default;
 
-    constexpr bool operator==([[maybe_unused]] DiscreteDomain const& other) const
+    KOKKOS_FUNCTION constexpr bool operator==([[maybe_unused]] DiscreteDomain const& other) const
     {
         return true;
     }
@@ -271,53 +274,53 @@ public:
 #if __cplusplus <= 201703L
     // Shall not be necessary anymore in C++20
     // `a!=b` shall be translated by the compiler to `!(a==b)`
-    constexpr bool operator!=(DiscreteDomain const& other) const
+    KOKKOS_FUNCTION constexpr bool operator!=(DiscreteDomain const& other) const
     {
         return !(*this == other);
     }
 #endif
 
-    constexpr std::size_t size() const
+    KOKKOS_FUNCTION constexpr std::size_t size() const
     {
         return 1;
     }
 
-    constexpr mlength_type extents() const noexcept
+    KOKKOS_FUNCTION constexpr mlength_type extents() const noexcept
     {
         return {};
     }
 
-    constexpr discrete_element_type front() const noexcept
+    KOKKOS_FUNCTION constexpr discrete_element_type front() const noexcept
     {
         return {};
     }
 
-    constexpr discrete_element_type back() const noexcept
+    KOKKOS_FUNCTION constexpr discrete_element_type back() const noexcept
     {
         return {};
     }
 
-    constexpr DiscreteDomain take_first([[maybe_unused]] mlength_type n) const
+    KOKKOS_FUNCTION constexpr DiscreteDomain take_first([[maybe_unused]] mlength_type n) const
     {
         return *this;
     }
 
-    constexpr DiscreteDomain take_last([[maybe_unused]] mlength_type n) const
+    KOKKOS_FUNCTION constexpr DiscreteDomain take_last([[maybe_unused]] mlength_type n) const
     {
         return *this;
     }
 
-    constexpr DiscreteDomain remove_first([[maybe_unused]] mlength_type n) const
+    KOKKOS_FUNCTION constexpr DiscreteDomain remove_first([[maybe_unused]] mlength_type n) const
     {
         return *this;
     }
 
-    constexpr DiscreteDomain remove_last([[maybe_unused]] mlength_type n) const
+    KOKKOS_FUNCTION constexpr DiscreteDomain remove_last([[maybe_unused]] mlength_type n) const
     {
         return *this;
     }
 
-    constexpr DiscreteDomain remove(
+    KOKKOS_FUNCTION constexpr DiscreteDomain remove(
             [[maybe_unused]] mlength_type n1,
             [[maybe_unused]] mlength_type n2) const
     {
@@ -325,24 +328,25 @@ public:
     }
 
     template <class... ODims>
-    constexpr DiscreteDomain restrict(DiscreteDomain<ODims...> const&) const
+    KOKKOS_FUNCTION constexpr DiscreteDomain restrict(DiscreteDomain<ODims...> const&) const
     {
         return *this;
     }
 
-    constexpr bool empty() const noexcept
+    KOKKOS_FUNCTION constexpr bool empty() const noexcept
     {
         return false;
     }
 
-    constexpr explicit operator bool()
+    KOKKOS_FUNCTION constexpr explicit operator bool()
     {
         return true;
     }
 };
 
 template <class... QueryDDims, class... DDims>
-constexpr DiscreteDomain<QueryDDims...> select(DiscreteDomain<DDims...> const& domain)
+KOKKOS_FUNCTION constexpr DiscreteDomain<QueryDDims...> select(
+        DiscreteDomain<DDims...> const& domain)
 {
     return DiscreteDomain<QueryDDims...>(
             select<QueryDDims...>(domain.front()),
@@ -394,7 +398,7 @@ using cartesian_prod_t = typename cartesian_prod<DDom...>::type;
 
 // Computes the substraction DDom_a - DDom_b in the sense of linear spaces(retained dimensions are those in DDom_a which are not in DDom_b)
 template <class... DDimsA, class... DDimsB>
-constexpr auto remove_dims_of(
+KOKKOS_FUNCTION constexpr auto remove_dims_of(
         DiscreteDomain<DDimsA...> const& DDom_a,
         [[maybe_unused]] DiscreteDomain<DDimsB...> const& DDom_b) noexcept
 {
@@ -408,7 +412,7 @@ constexpr auto remove_dims_of(
 
 // Checks if dimension of DDom_a is DDim1. If not, returns restriction to DDim2 of DDom_b. May not be usefull in its own, it helps for replace_dim_of
 template <typename DDim1, typename DDim2, typename DDimA, typename... DDimsB>
-constexpr std::conditional_t<
+KOKKOS_FUNCTION constexpr std::conditional_t<
         std::is_same_v<DDimA, DDim1>,
         ddc::DiscreteDomain<DDim2>,
         ddc::DiscreteDomain<DDimA>>
@@ -425,7 +429,7 @@ replace_dim_of_1d(
 
 // Replace in DDom_a the dimension Dim1 by the dimension Dim2 of DDom_b
 template <typename DDim1, typename DDim2, typename... DDimsA, typename... DDimsB>
-constexpr auto replace_dim_of(
+KOKKOS_FUNCTION constexpr auto replace_dim_of(
         DiscreteDomain<DDimsA...> const& DDom_a,
         [[maybe_unused]] DiscreteDomain<DDimsB...> const& DDom_b) noexcept
 {
@@ -444,19 +448,22 @@ constexpr auto replace_dim_of(
 }
 
 template <class... QueryDDims, class... DDims>
-constexpr DiscreteVector<QueryDDims...> extents(DiscreteDomain<DDims...> const& domain) noexcept
+KOKKOS_FUNCTION constexpr DiscreteVector<QueryDDims...> extents(
+        DiscreteDomain<DDims...> const& domain) noexcept
 {
     return DiscreteVector<QueryDDims...>(select<QueryDDims>(domain).size()...);
 }
 
 template <class... QueryDDims, class... DDims>
-constexpr DiscreteElement<QueryDDims...> front(DiscreteDomain<DDims...> const& domain) noexcept
+KOKKOS_FUNCTION constexpr DiscreteElement<QueryDDims...> front(
+        DiscreteDomain<DDims...> const& domain) noexcept
 {
     return DiscreteElement<QueryDDims...>(select<QueryDDims>(domain).front()...);
 }
 
 template <class... QueryDDims, class... DDims>
-constexpr DiscreteElement<QueryDDims...> back(DiscreteDomain<DDims...> const& domain) noexcept
+KOKKOS_FUNCTION constexpr DiscreteElement<QueryDDims...> back(
+        DiscreteDomain<DDims...> const& domain) noexcept
 {
     return DiscreteElement<QueryDDims...>(select<QueryDDims>(domain).back()...);
 }
@@ -470,7 +477,7 @@ template <class... QueryDDims>
 struct Selection<detail::TypeSeq<QueryDDims...>>
 {
     template <class Domain>
-    static constexpr auto select(Domain const& domain)
+    static KOKKOS_FUNCTION constexpr auto select(Domain const& domain)
     {
         return ddc::select<QueryDDims...>(domain);
     }
@@ -479,7 +486,7 @@ struct Selection<detail::TypeSeq<QueryDDims...>>
 } // namespace detail
 
 template <class QueryDDimSeq, class... DDims>
-constexpr auto select_by_type_seq(DiscreteDomain<DDims...> const& domain)
+KOKKOS_FUNCTION constexpr auto select_by_type_seq(DiscreteDomain<DDims...> const& domain)
 {
     return detail::Selection<QueryDDimSeq>::select(domain);
 }
@@ -497,42 +504,45 @@ public:
 
     using difference_type = std::ptrdiff_t;
 
-    DiscreteDomainIterator() = default;
+    KOKKOS_DEFAULTED_FUNCTION DiscreteDomainIterator() = default;
 
-    constexpr explicit DiscreteDomainIterator(DiscreteElement<DDim> value) : m_value(value) {}
+    KOKKOS_FUNCTION constexpr explicit DiscreteDomainIterator(DiscreteElement<DDim> value)
+        : m_value(value)
+    {
+    }
 
-    constexpr DiscreteElement<DDim> operator*() const noexcept
+    KOKKOS_FUNCTION constexpr DiscreteElement<DDim> operator*() const noexcept
     {
         return m_value;
     }
 
-    constexpr DiscreteDomainIterator& operator++()
+    KOKKOS_FUNCTION constexpr DiscreteDomainIterator& operator++()
     {
         ++m_value.uid();
         return *this;
     }
 
-    constexpr DiscreteDomainIterator operator++(int)
+    KOKKOS_FUNCTION constexpr DiscreteDomainIterator operator++(int)
     {
         auto tmp = *this;
         ++*this;
         return tmp;
     }
 
-    constexpr DiscreteDomainIterator& operator--()
+    KOKKOS_FUNCTION constexpr DiscreteDomainIterator& operator--()
     {
         --m_value.uid();
         return *this;
     }
 
-    constexpr DiscreteDomainIterator operator--(int)
+    KOKKOS_FUNCTION constexpr DiscreteDomainIterator operator--(int)
     {
         auto tmp = *this;
         --*this;
         return tmp;
     }
 
-    constexpr DiscreteDomainIterator& operator+=(difference_type n)
+    KOKKOS_FUNCTION constexpr DiscreteDomainIterator& operator+=(difference_type n)
     {
         if (n >= difference_type(0))
             m_value.uid() += static_cast<DiscreteElementType>(n);
@@ -541,7 +551,7 @@ public:
         return *this;
     }
 
-    constexpr DiscreteDomainIterator& operator-=(difference_type n)
+    KOKKOS_FUNCTION constexpr DiscreteDomainIterator& operator-=(difference_type n)
     {
         if (n >= difference_type(0))
             m_value.uid() -= static_cast<DiscreteElementType>(n);
@@ -550,69 +560,75 @@ public:
         return *this;
     }
 
-    constexpr DiscreteElement<DDim> operator[](difference_type n) const
+    KOKKOS_FUNCTION constexpr DiscreteElement<DDim> operator[](difference_type n) const
     {
         return m_value + n;
     }
 
-    friend constexpr bool operator==(
+    friend KOKKOS_FUNCTION constexpr bool operator==(
             DiscreteDomainIterator const& xx,
             DiscreteDomainIterator const& yy)
     {
         return xx.m_value == yy.m_value;
     }
 
-    friend constexpr bool operator!=(
+    friend KOKKOS_FUNCTION constexpr bool operator!=(
             DiscreteDomainIterator const& xx,
             DiscreteDomainIterator const& yy)
     {
         return xx.m_value != yy.m_value;
     }
 
-    friend constexpr bool operator<(
+    friend KOKKOS_FUNCTION constexpr bool operator<(
             DiscreteDomainIterator const& xx,
             DiscreteDomainIterator const& yy)
     {
         return xx.m_value < yy.m_value;
     }
 
-    friend constexpr bool operator>(
+    friend KOKKOS_FUNCTION constexpr bool operator>(
             DiscreteDomainIterator const& xx,
             DiscreteDomainIterator const& yy)
     {
         return yy < xx;
     }
 
-    friend constexpr bool operator<=(
+    friend KOKKOS_FUNCTION constexpr bool operator<=(
             DiscreteDomainIterator const& xx,
             DiscreteDomainIterator const& yy)
     {
         return !(yy < xx);
     }
 
-    friend constexpr bool operator>=(
+    friend KOKKOS_FUNCTION constexpr bool operator>=(
             DiscreteDomainIterator const& xx,
             DiscreteDomainIterator const& yy)
     {
         return !(xx < yy);
     }
 
-    friend constexpr DiscreteDomainIterator operator+(DiscreteDomainIterator i, difference_type n)
+    friend KOKKOS_FUNCTION constexpr DiscreteDomainIterator operator+(
+            DiscreteDomainIterator i,
+            difference_type n)
     {
         return i += n;
     }
 
-    friend constexpr DiscreteDomainIterator operator+(difference_type n, DiscreteDomainIterator i)
+    friend KOKKOS_FUNCTION constexpr DiscreteDomainIterator operator+(
+            difference_type n,
+            DiscreteDomainIterator i)
     {
         return i += n;
     }
 
-    friend constexpr DiscreteDomainIterator operator-(DiscreteDomainIterator i, difference_type n)
+    friend KOKKOS_FUNCTION constexpr DiscreteDomainIterator operator-(
+            DiscreteDomainIterator i,
+            difference_type n)
     {
         return i -= n;
     }
 
-    friend constexpr difference_type operator-(
+    friend KOKKOS_FUNCTION constexpr difference_type operator-(
             DiscreteDomainIterator const& xx,
             DiscreteDomainIterator const& yy)
     {
