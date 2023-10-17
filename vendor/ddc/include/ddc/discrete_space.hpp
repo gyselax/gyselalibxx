@@ -75,19 +75,19 @@ private:
     alignas(T) Kokkos::Array<std::byte, sizeof(T)> m_data;
 
 public:
-    DDC_INLINE_FUNCTION
+    KOKKOS_FORCEINLINE_FUNCTION
     T* operator->()
     {
         return reinterpret_cast<T*>(m_data.data());
     }
 
-    DDC_INLINE_FUNCTION
+    KOKKOS_FORCEINLINE_FUNCTION
     T& operator*()
     {
         return *reinterpret_cast<T*>(m_data.data());
     }
 
-    DDC_INLINE_FUNCTION
+    KOKKOS_FORCEINLINE_FUNCTION
     T* data()
     {
         return reinterpret_cast<T*>(m_data.data());
@@ -187,7 +187,7 @@ std::enable_if_t<2 <= sizeof...(Args), std::tuple<Args...>> init_discrete_space(
 }
 
 template <class DDim, class MemorySpace = DDC_CURRENT_KOKKOS_SPACE>
-DDC_INLINE_FUNCTION detail::ddim_impl_t<DDim, MemorySpace> const& discrete_space()
+KOKKOS_FORCEINLINE_FUNCTION detail::ddim_impl_t<DDim, MemorySpace> const& discrete_space()
 {
     if constexpr (std::is_same_v<MemorySpace, Kokkos::HostSpace>) {
         return detail::g_discrete_space_dual<DDim>->get_host();

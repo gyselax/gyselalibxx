@@ -91,13 +91,13 @@ constexpr bool is_complex_v = is_complex<T>::value;
 
 // LastSelector: returns a if Dim==Last, else b
 template <typename T, typename Dim, typename Last>
-constexpr T LastSelector(const T a, const T b)
+KOKKOS_FUNCTION constexpr T LastSelector(const T a, const T b)
 {
     return std::is_same_v<Dim, Last> ? a : b;
 }
 
 template <typename T, typename Dim, typename First, typename Second, typename... Tail>
-constexpr T LastSelector(const T a, const T b)
+KOKKOS_FUNCTION constexpr T LastSelector(const T a, const T b)
 {
     return LastSelector<T, Dim, Second, Tail...>(a, b);
 }
@@ -401,10 +401,10 @@ void core(
     else if constexpr (std::is_same_v<ExecSpace, Kokkos::OpenMP>) {
         if constexpr (std::is_same_v<real_type_t<Tin>, float>) {
             fftwf_init_threads();
-            fftwf_plan_with_nthreads(ExecSpace::concurrency());
+            fftwf_plan_with_nthreads(execSpace.concurrency());
         } else {
             fftw_init_threads();
-            fftw_plan_with_nthreads(ExecSpace::concurrency());
+            fftw_plan_with_nthreads(execSpace.concurrency());
         }
         _fftw_plan<Tin> plan = _fftw_plan_many_dft<Tin, Tout>(
                 kwargs.direction == ddc::FFT_Direction::FORWARD ? FFTW_FORWARD : FFTW_BACKWARD,

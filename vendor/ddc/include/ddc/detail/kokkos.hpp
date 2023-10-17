@@ -105,7 +105,7 @@ using kokkos_to_mdspan_element_t = typename kokkos_to_mdspan_element<ET>::type;
 
 
 template <std::size_t... Is>
-Kokkos::LayoutStride make_layout_stride(
+KOKKOS_FUNCTION Kokkos::LayoutStride make_layout_stride(
         std::array<std::size_t, sizeof...(Is)> const& interleaved_extents_strides,
         std::index_sequence<Is...>)
 {
@@ -113,7 +113,7 @@ Kokkos::LayoutStride make_layout_stride(
 }
 
 template <class EP, class MP, std::size_t... Is>
-mdspan_to_kokkos_layout_t<typename MP::layout_type> build_kokkos_layout(
+KOKKOS_FUNCTION mdspan_to_kokkos_layout_t<typename MP::layout_type> build_kokkos_layout(
         EP const& ep,
         MP const& mapping,
         std::index_sequence<Is...>)
@@ -138,7 +138,9 @@ mdspan_to_kokkos_layout_t<typename MP::layout_type> build_kokkos_layout(
 }
 
 template <class DataType, class... Properties, std::size_t... Is>
-auto build_mdspan(Kokkos::View<DataType, Properties...> const view, std::index_sequence<Is...>)
+KOKKOS_FUNCTION auto build_mdspan(
+        Kokkos::View<DataType, Properties...> const view,
+        std::index_sequence<Is...>)
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
     using element_type = kokkos_to_mdspan_element_t<DataType>;

@@ -89,7 +89,7 @@ public:
 
 protected:
     template <class QueryDDim, class... ODDims>
-    constexpr auto get_slicer_for(DiscreteElement<ODDims...> const& c) const
+    KOKKOS_FUNCTION constexpr auto get_slicer_for(DiscreteElement<ODDims...> const& c) const
     {
         DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
         if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
@@ -101,7 +101,7 @@ protected:
     }
 
     template <class QueryDDim, class... ODDims>
-    constexpr auto get_slicer_for(DiscreteDomain<ODDims...> const& c) const
+    KOKKOS_FUNCTION constexpr auto get_slicer_for(DiscreteDomain<ODDims...> const& c) const
     {
         DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
         if constexpr (in_tags_v<QueryDDim, detail::TypeSeq<ODDims...>>) {
@@ -116,23 +116,24 @@ protected:
 
 public:
     /// Empty ChunkSpan
-    constexpr ChunkSpan() = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr ChunkSpan() = default;
 
     /** Constructs a new ChunkSpan by copy, yields a new view to the same data
      * @param other the ChunkSpan to copy
      */
-    constexpr ChunkSpan(ChunkSpan const& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr ChunkSpan(ChunkSpan const& other) = default;
 
     /** Constructs a new ChunkSpan by move
      * @param other the ChunkSpan to move
      */
-    constexpr ChunkSpan(ChunkSpan&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr ChunkSpan(ChunkSpan&& other) = default;
 
     /** Constructs a new ChunkSpan from a Chunk, yields a new view to the same data
      * @param other the Chunk to view
      */
     template <class OElementType, class Allocator>
-    constexpr ChunkSpan(Chunk<OElementType, mdomain_type, Allocator>& other) noexcept
+    KOKKOS_FUNCTION constexpr ChunkSpan(
+            Chunk<OElementType, mdomain_type, Allocator>& other) noexcept
         : base_type(other.m_internal_mdspan, other.m_domain)
     {
     }
@@ -146,7 +147,8 @@ public:
             class SFINAEElementType = ElementType,
             class = std::enable_if_t<std::is_const_v<SFINAEElementType>>,
             class Allocator>
-    constexpr ChunkSpan(Chunk<OElementType, mdomain_type, Allocator> const& other) noexcept
+    KOKKOS_FUNCTION constexpr ChunkSpan(
+            Chunk<OElementType, mdomain_type, Allocator> const& other) noexcept
         : base_type(other.m_internal_mdspan, other.m_domain)
     {
     }
@@ -155,7 +157,7 @@ public:
      * @param other the ChunkSpan to move
      */
     template <class OElementType>
-    constexpr ChunkSpan(
+    KOKKOS_FUNCTION constexpr ChunkSpan(
             ChunkSpan<OElementType, mdomain_type, layout_type, MemorySpace> const& other) noexcept
         : base_type(other.m_internal_mdspan, other.m_domain)
     {
@@ -168,7 +170,8 @@ public:
     template <
             class Mapping = mapping_type,
             std::enable_if_t<std::is_constructible_v<Mapping, extents_type>, int> = 0>
-    constexpr ChunkSpan(ElementType* const ptr, mdomain_type const& domain) : base_type(ptr, domain)
+    KOKKOS_FUNCTION constexpr ChunkSpan(ElementType* const ptr, mdomain_type const& domain)
+        : base_type(ptr, domain)
     {
     }
 
@@ -196,29 +199,32 @@ public:
      * @param domain the domain that sustains the view
      */
     template <class KokkosView, class = std::enable_if_t<Kokkos::is_view<KokkosView>::value>>
-    constexpr ChunkSpan(KokkosView const& view, mdomain_type const& domain) noexcept
+    KOKKOS_FUNCTION constexpr ChunkSpan(KokkosView const& view, mdomain_type const& domain) noexcept
         : ChunkSpan(
                 detail::build_mdspan(view, std::make_index_sequence<sizeof...(DDims)> {}),
                 domain)
     {
     }
 
+    KOKKOS_DEFAULTED_FUNCTION ~ChunkSpan() = default;
+
     /** Copy-assigns a new value to this ChunkSpan, yields a new view to the same data
      * @param other the ChunkSpan to copy
      * @return *this
      */
-    constexpr ChunkSpan& operator=(ChunkSpan const& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr ChunkSpan& operator=(ChunkSpan const& other) = default;
 
     /** Move-assigns a new value to this ChunkSpan
      * @param other the ChunkSpan to move
      * @return *this
      */
-    constexpr ChunkSpan& operator=(ChunkSpan&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr ChunkSpan& operator=(ChunkSpan&& other) = default;
 
     /** Slice out some dimensions
      */
     template <class... QueryDDims>
-    constexpr auto operator[](DiscreteElement<QueryDDims...> const& slice_spec) const
+    KOKKOS_FUNCTION constexpr auto operator[](
+            DiscreteElement<QueryDDims...> const& slice_spec) const
     {
         auto subview = std::experimental::
                 submdspan(allocation_mdspan(), get_slicer_for<DDims>(slice_spec)...);
@@ -234,7 +240,7 @@ public:
     /** Restrict to a subdomain
      */
     template <class... QueryDDims>
-    constexpr auto operator[](DiscreteDomain<QueryDDims...> const& odomain) const
+    KOKKOS_FUNCTION constexpr auto operator[](DiscreteDomain<QueryDDims...> const& odomain) const
     {
         auto subview = std::experimental::
                 submdspan(allocation_mdspan(), get_slicer_for<DDims>(odomain)...);
@@ -250,7 +256,8 @@ public:
      * @return reference to this element
      */
     template <class... ODDims>
-    constexpr reference operator()(DiscreteElement<ODDims> const&... delems) const noexcept
+    KOKKOS_FUNCTION constexpr reference operator()(
+            DiscreteElement<ODDims> const&... delems) const noexcept
     {
         static_assert(sizeof...(ODDims) == sizeof...(DDims), "Invalid number of dimensions");
         assert(((delems >= front<ODDims>(this->m_domain)) && ...));
@@ -263,7 +270,8 @@ public:
      * @return reference to this element
      */
     template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    constexpr reference operator()(DiscreteElement<ODDims...> const& delems) const noexcept
+    KOKKOS_FUNCTION constexpr reference operator()(
+            DiscreteElement<ODDims...> const& delems) const noexcept
     {
         static_assert(sizeof...(ODDims) == sizeof...(DDims), "Invalid number of dimensions");
         assert(((select<ODDims>(delems) >= front<ODDims>(this->m_domain)) && ...));
@@ -274,7 +282,7 @@ public:
     /** Access to the underlying allocation pointer
      * @return allocation pointer
      */
-    constexpr ElementType* data_handle() const
+    KOKKOS_FUNCTION constexpr ElementType* data_handle() const
     {
         return base_type::data_handle();
     }
@@ -282,7 +290,7 @@ public:
     /** Provide a mdspan on the memory allocation
      * @return allocation mdspan
      */
-    constexpr allocation_mdspan_type allocation_mdspan() const
+    KOKKOS_FUNCTION constexpr allocation_mdspan_type allocation_mdspan() const
     {
         return base_type::allocation_mdspan();
     }
@@ -290,7 +298,7 @@ public:
     /** Provide a mdspan on the memory allocation
      * @return allocation mdspan
      */
-    constexpr auto allocation_kokkos_view() const
+    KOKKOS_FUNCTION constexpr auto allocation_kokkos_view() const
     {
         auto s = this->allocation_mdspan();
         auto kokkos_layout = detail::build_kokkos_layout(
@@ -303,12 +311,12 @@ public:
                 MemorySpace>(s.data_handle(), kokkos_layout);
     }
 
-    constexpr view_type span_cview() const
+    KOKKOS_FUNCTION constexpr view_type span_cview() const
     {
         return view_type(*this);
     }
 
-    constexpr span_type span_view() const
+    KOKKOS_FUNCTION constexpr span_type span_view() const
     {
         return *this;
     }

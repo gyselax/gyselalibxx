@@ -48,7 +48,7 @@ public:
     }
 
     template <class MemorySpace>
-    DDC_INLINE_FUNCTION typename DDim::template Impl<MemorySpace> const& get()
+    KOKKOS_FORCEINLINE_FUNCTION typename DDim::template Impl<MemorySpace> const& get()
     {
         if constexpr (std::is_same_v<MemorySpace, Kokkos::HostSpace>) {
             return m_host;
@@ -67,12 +67,12 @@ public:
         }
     }
 
-    DDC_INLINE_FUNCTION DDimImplHost const& get_host()
+    KOKKOS_FORCEINLINE_FUNCTION DDimImplHost const& get_host()
     {
         return m_host;
     }
 
-    DDC_INLINE_FUNCTION DDimImplDevice const& get_device()
+    KOKKOS_FORCEINLINE_FUNCTION DDimImplDevice const& get_device()
     {
 #if defined(__CUDACC__) || defined(__HIPCC__)
         return m_device_on_host;
