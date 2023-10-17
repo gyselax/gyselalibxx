@@ -22,7 +22,7 @@ public:
             SplineXBuilder const& spline_x_builder,
             SplineEvaluator<BSplinesX> const& spline_x_evaluator);
 
-    DSpanX operator()(DSpanX electric_field, DViewX electrostatic_potential) const;
+    void operator()(DSpanX electric_field, DViewX electrostatic_potential) const;
 
-    DSpanX operator()(DSpanX electric_field, DBSViewX electrostatic_potential) const;
+    void operator()(DSpanX electric_field, DBSViewX electrostatic_potential) const;
 };

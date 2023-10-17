@@ -46,7 +46,9 @@ void ElectricField::operator()(
         DSpanXY const electric_field_y,
         DViewXY const electrostatic_potential) const
 {
+    Kokkos::Profiling::pushRegion("PoissonSolver");
     ddc::Chunk<double, BSDomainXY> elecpot_spline_coef((m_spline_xy_builder.spline_domain()));
     m_spline_xy_builder(elecpot_spline_coef, electrostatic_potential);
-    return (*this)(electric_field_x, electric_field_y, elecpot_spline_coef);
+    (*this)(electric_field_x, electric_field_y, elecpot_spline_coef);
+    Kokkos::Profiling::popRegion();
 }

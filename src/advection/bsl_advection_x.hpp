@@ -36,6 +36,7 @@ public:
             ddc::ChunkSpan<double, DDom> const allfdistribu,
             double const dt) const override
     {
+        Kokkos::Profiling::pushRegion("BslAdvectionSpatial");
         DDom const dom = allfdistribu.domain();
         ddc::DiscreteDomain<DDimX> const x_dom = ddc::select<DDimX>(dom);
         ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
@@ -78,6 +79,7 @@ public:
             });
         });
 
+        Kokkos::Profiling::popRegion();
         return allfdistribu;
     }
 };

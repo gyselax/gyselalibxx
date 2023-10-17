@@ -18,6 +18,7 @@ ChargeDensityCalculator::ChargeDensityCalculator(
 
 void ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const allfdistribu) const
 {
+    Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
     DFieldVx f_vx_slice(allfdistribu.domain<IDimVx>());
     ddc::Chunk<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
 
@@ -40,4 +41,5 @@ void ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const allf
             rho(ix) += charge(isp) * m_spline_vx_evaluator.integrate(vx_spline_coef.span_cview());
         });
     });
+    Kokkos::Profiling::popRegion();
 }
