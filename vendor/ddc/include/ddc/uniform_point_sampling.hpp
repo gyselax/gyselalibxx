@@ -69,7 +69,7 @@ public:
          * @param origin the real coordinate of mesh coordinate 0
          * @param step   the real distance between two points of mesh distance 1
          */
-        constexpr Impl(continuous_element_type origin, Real step) : m_origin(origin), m_step(step)
+        Impl(continuous_element_type origin, Real step) : m_origin(origin), m_step(step)
         {
             assert(step > 0);
         }
@@ -77,26 +77,26 @@ public:
         ~Impl() = default;
 
         /// @brief Lower bound index of the mesh
-        constexpr continuous_element_type origin() const noexcept
+        KOKKOS_FUNCTION continuous_element_type origin() const noexcept
         {
             return m_origin;
         }
 
         /// @brief Lower bound index of the mesh
-        constexpr discrete_element_type front() const noexcept
+        KOKKOS_FUNCTION discrete_element_type front() const noexcept
         {
             return discrete_element_type {0};
         }
 
         /// @brief Spacing step of the mesh
-        constexpr Real step() const
+        KOKKOS_FUNCTION Real step() const
         {
             return m_step;
         }
 
         /// @brief Convert a mesh index into a position in `CDim`
-        constexpr continuous_element_type coordinate(
-                discrete_element_type const& icoord) const noexcept
+        KOKKOS_FUNCTION continuous_element_type
+        coordinate(discrete_element_type const& icoord) const noexcept
         {
             return m_origin + continuous_element_type(icoord.uid()) * m_step;
         }
@@ -215,15 +215,14 @@ std::ostream& operator<<(std::ostream& out, DDimImpl const& mesh)
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> coordinate(
-        DiscreteElement<UniformPointSampling<CDim>> const& c)
+KOKKOS_FUNCTION Coordinate<CDim> coordinate(DiscreteElement<UniformPointSampling<CDim>> const& c)
 {
     return discrete_space<UniformPointSampling<CDim>>().coordinate(c);
 }
 
 /// @brief Lower bound index of the mesh
 template <class DDim>
-DDC_INLINE_FUNCTION std::
+KOKKOS_FUNCTION std::
         enable_if_t<is_uniform_sampling_v<DDim>, typename DDim::continuous_element_type>
         origin() noexcept
 {
@@ -232,46 +231,45 @@ DDC_INLINE_FUNCTION std::
 
 /// @brief Lower bound index of the mesh
 template <class DDim>
-DDC_INLINE_FUNCTION std::
-        enable_if_t<is_uniform_sampling_v<DDim>, typename DDim::discrete_element_type>
-        front() noexcept
+KOKKOS_FUNCTION std::enable_if_t<is_uniform_sampling_v<DDim>, typename DDim::discrete_element_type>
+front() noexcept
 {
     return discrete_space<DDim>().front();
 }
 
 /// @brief Spacing step of the mesh
 template <class DDim>
-DDC_INLINE_FUNCTION std::enable_if_t<is_uniform_sampling_v<DDim>, Real> step() noexcept
+KOKKOS_FUNCTION std::enable_if_t<is_uniform_sampling_v<DDim>, Real> step() noexcept
 {
     return discrete_space<DDim>().step();
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_left(DiscreteElement<UniformPointSampling<CDim>>)
+KOKKOS_FUNCTION Coordinate<CDim> distance_at_left(DiscreteElement<UniformPointSampling<CDim>>)
 {
     return Coordinate<CDim>(step<UniformPointSampling<CDim>>());
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> distance_at_right(DiscreteElement<UniformPointSampling<CDim>>)
+KOKKOS_FUNCTION Coordinate<CDim> distance_at_right(DiscreteElement<UniformPointSampling<CDim>>)
 {
     return Coordinate<CDim>(step<UniformPointSampling<CDim>>());
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> rmin(DiscreteDomain<UniformPointSampling<CDim>> const& d)
+KOKKOS_FUNCTION Coordinate<CDim> rmin(DiscreteDomain<UniformPointSampling<CDim>> const& d)
 {
     return coordinate(d.front());
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> rmax(DiscreteDomain<UniformPointSampling<CDim>> const& d)
+KOKKOS_FUNCTION Coordinate<CDim> rmax(DiscreteDomain<UniformPointSampling<CDim>> const& d)
 {
     return coordinate(d.back());
 }
 
 template <class CDim>
-DDC_INLINE_FUNCTION Coordinate<CDim> rlength(DiscreteDomain<UniformPointSampling<CDim>> const& d)
+KOKKOS_FUNCTION Coordinate<CDim> rlength(DiscreteDomain<UniformPointSampling<CDim>> const& d)
 {
     return rmax(d) - rmin(d);
 }

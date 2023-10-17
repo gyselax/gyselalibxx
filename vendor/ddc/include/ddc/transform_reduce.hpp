@@ -133,7 +133,6 @@ class TransformReducerKokkosLambdaAdapter
     Functor functor;
 
 public:
-    DDC_FORCEINLINE_FUNCTION
     TransformReducerKokkosLambdaAdapter(Reducer const& r, Functor const& f) : reducer(r), functor(f)
     {
     }
