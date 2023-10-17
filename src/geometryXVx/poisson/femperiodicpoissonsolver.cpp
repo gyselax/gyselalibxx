@@ -170,6 +170,7 @@ void FemPeriodicPoissonSolver::operator()(
         DSpanX const electric_field,
         DViewSpXVx const allfdistribu) const
 {
+    Kokkos::Profiling::pushRegion("PoissonSolver");
     assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
     IDomainX const dom_x = electrostatic_potential.domain();
 
@@ -188,4 +189,5 @@ void FemPeriodicPoissonSolver::operator()(
         electrostatic_potential(ix) = m_spline_x_evaluator(ddc::coordinate(ix), phi_spline_coef);
         electric_field(ix) = -m_spline_x_evaluator.deriv(ddc::coordinate(ix), phi_spline_coef);
     });
+    Kokkos::Profiling::popRegion();
 }
