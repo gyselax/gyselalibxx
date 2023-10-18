@@ -127,9 +127,9 @@ $(document).ready(function(){initNavTree('geometryXVx_2poisson_2electricfield_8h
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <a class="code" href="classSplineBuilder.html">SplineXBuilder</a> <span class="keyword">const</span>&amp; spline_x_builder,</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <a class="code" href="classSplineEvaluator.html">SplineEvaluator&lt;BSplinesX&gt;</a> <span class="keyword">const</span>&amp; spline_x_evaluator);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    DSpanX operator()(DSpanX electric_field, DViewX electrostatic_potential) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> operator()(DSpanX electric_field, DViewX electrostatic_potential) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    DSpanX operator()(DSpanX electric_field, DBSViewX electrostatic_potential) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> operator()(DSpanX electric_field, DBSViewX electrostatic_potential) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
 <div class="ttc" id="aclassElectricField_html"><div class="ttname"><a href="classElectricField.html">ElectricField</a></div><div class="ttdef"><b>Definition:</b> electricfield.hpp:15</div></div>
 <div class="ttc" id="aclassSplineBuilder_html"><div class="ttname"><a href="classSplineBuilder.html">SplineBuilder</a></div><div class="ttdoc">A class for creating a spline approximation of a function.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:40</div></div>
