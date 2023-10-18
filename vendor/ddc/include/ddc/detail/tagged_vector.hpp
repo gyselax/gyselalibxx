@@ -35,20 +35,21 @@ inline constexpr bool is_tagged_vector_v = IsTaggedVector<T>::value;
 
 
 template <class QueryTag, class ElementType, class... Tags>
-inline constexpr ElementType const& get(
+KOKKOS_FUNCTION constexpr ElementType const& get(
         detail::TaggedVector<ElementType, Tags...> const& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
 }
 
 template <class QueryTag, class ElementType, class... Tags>
-inline constexpr ElementType& get(detail::TaggedVector<ElementType, Tags...>& tuple) noexcept
+KOKKOS_FUNCTION constexpr ElementType& get(
+        detail::TaggedVector<ElementType, Tags...>& tuple) noexcept
 {
     return tuple.template get<QueryTag>();
 }
 
 template <class QueryTag, class ElementType, class... Tags>
-inline constexpr ElementType const& get_or(
+KOKKOS_FUNCTION constexpr ElementType const& get_or(
         detail::TaggedVector<ElementType, Tags...> const& tuple,
         ElementType const& default_value) noexcept
 {
@@ -60,14 +61,14 @@ namespace detail {
 /// Unary operators: +, -
 
 template <class ElementType, class... Tags>
-constexpr inline detail::TaggedVector<ElementType, Tags...> operator+(
+KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, Tags...> operator+(
         detail::TaggedVector<ElementType, Tags...> const& x)
 {
     return x;
 }
 
 template <class ElementType, class... Tags>
-constexpr inline detail::TaggedVector<ElementType, Tags...> operator-(
+KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, Tags...> operator-(
         detail::TaggedVector<ElementType, Tags...> const& x)
 {
     return detail::TaggedVector<ElementType, Tags...>((-get<Tags>(x))...);
@@ -76,7 +77,7 @@ constexpr inline detail::TaggedVector<ElementType, Tags...> operator-(
 /// Internal binary operators: +, -
 
 template <class ElementType, class... Tags, class OElementType, class... OTags>
-constexpr inline auto operator+(
+KOKKOS_FUNCTION constexpr auto operator+(
         detail::TaggedVector<ElementType, Tags...> const& lhs,
         detail::TaggedVector<OElementType, OTags...> const& rhs)
 {
@@ -91,7 +92,7 @@ template <
         class OElementType,
         class = std::enable_if_t<!detail::is_tagged_vector_v<OElementType>>,
         class = std::enable_if_t<std::is_convertible_v<OElementType, ElementType>>>
-constexpr inline auto operator+(
+KOKKOS_FUNCTION constexpr auto operator+(
         detail::TaggedVector<ElementType, Tag> const& lhs,
         OElementType const& rhs)
 {
@@ -105,7 +106,7 @@ template <
         class OElementType,
         class = std::enable_if_t<!detail::is_tagged_vector_v<OElementType>>,
         class = std::enable_if_t<std::is_convertible_v<ElementType, OElementType>>>
-constexpr inline auto operator+(
+KOKKOS_FUNCTION constexpr auto operator+(
         OElementType const& lhs,
         detail::TaggedVector<ElementType, Tag> const& rhs)
 {
@@ -114,7 +115,7 @@ constexpr inline auto operator+(
 }
 
 template <class ElementType, class... Tags, class OElementType, class... OTags>
-constexpr inline auto operator-(
+KOKKOS_FUNCTION constexpr auto operator-(
         detail::TaggedVector<ElementType, Tags...> const& lhs,
         detail::TaggedVector<OElementType, OTags...> const& rhs)
 {
@@ -129,7 +130,7 @@ template <
         class OElementType,
         class = std::enable_if_t<!detail::is_tagged_vector_v<OElementType>>,
         class = std::enable_if_t<std::is_convertible_v<OElementType, ElementType>>>
-constexpr inline auto operator-(
+KOKKOS_FUNCTION constexpr auto operator-(
         detail::TaggedVector<ElementType, Tag> const& lhs,
         OElementType const& rhs)
 {
@@ -143,7 +144,7 @@ template <
         class OElementType,
         class = std::enable_if_t<!detail::is_tagged_vector_v<OElementType>>,
         class = std::enable_if_t<std::is_convertible_v<ElementType, OElementType>>>
-constexpr inline auto operator-(
+KOKKOS_FUNCTION constexpr auto operator-(
         OElementType const& lhs,
         detail::TaggedVector<ElementType, Tag> const& rhs)
 {
@@ -159,7 +160,7 @@ template <
         class... Tags,
         class = std::enable_if_t<!detail::is_tagged_vector_v<OElementType>>,
         class = std::enable_if_t<std::is_convertible_v<ElementType, OElementType>>>
-constexpr inline auto operator*(
+KOKKOS_FUNCTION constexpr auto operator*(
         ElementType const& lhs,
         detail::TaggedVector<OElementType, Tags...> const& rhs)
 {
@@ -170,14 +171,14 @@ constexpr inline auto operator*(
 } // namespace detail
 
 template <class... QueryTags, class ElementType, class... Tags>
-inline constexpr detail::TaggedVector<ElementType, QueryTags...> select(
+KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, QueryTags...> select(
         detail::TaggedVector<ElementType, Tags...> const& arr) noexcept
 {
     return detail::TaggedVector<ElementType, QueryTags...>(arr);
 }
 
 template <class... QueryTags, class ElementType, class... Tags>
-inline constexpr detail::TaggedVector<ElementType, QueryTags...> select(
+KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, QueryTags...> select(
         detail::TaggedVector<ElementType, Tags...>&& arr) noexcept
 {
     return detail::TaggedVector<ElementType, QueryTags...>(std::move(arr));
@@ -186,7 +187,7 @@ inline constexpr detail::TaggedVector<ElementType, QueryTags...> select(
 namespace detail {
 
 template <class QueryTag, class ElementType, class HeadTag, class... TailTags>
-constexpr detail::TaggedVector<ElementType, QueryTag> const& take_impl(
+KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, QueryTag> const& take_impl(
         detail::TaggedVector<ElementType, HeadTag> const& head,
         detail::TaggedVector<ElementType, TailTags> const&... tags)
 {
@@ -204,7 +205,7 @@ constexpr detail::TaggedVector<ElementType, QueryTag> const& take_impl(
 }
 
 template <class QueryTag, class ElementType, class... Tags>
-constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
+KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
         detail::TaggedVector<ElementType, Tags> const&... tags)
 {
     return take_impl<QueryTag>(tags...);
@@ -220,12 +221,12 @@ template <class ElementType, class Tag>
 class ConversionOperators<TaggedVector<ElementType, Tag>>
 {
 public:
-    constexpr inline operator ElementType const &() const noexcept
+    KOKKOS_FUNCTION constexpr operator ElementType const &() const noexcept
     {
         return static_cast<TaggedVector<ElementType, Tag> const*>(this)->m_values[0];
     }
 
-    constexpr inline operator ElementType&() noexcept
+    KOKKOS_FUNCTION constexpr operator ElementType&() noexcept
     {
         return static_cast<TaggedVector<ElementType, Tag>*>(this)->m_values[0];
     }
@@ -244,26 +245,27 @@ private:
 public:
     using value_type = ElementType;
 
-    static constexpr std::size_t size() noexcept
+    static KOKKOS_FUNCTION constexpr std::size_t size() noexcept
     {
         return sizeof...(Tags);
     }
 
 public:
-    inline constexpr TaggedVector() = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr TaggedVector() = default;
 
-    inline constexpr TaggedVector(TaggedVector const&) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr TaggedVector(TaggedVector const&) = default;
 
-    inline constexpr TaggedVector(TaggedVector&&) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr TaggedVector(TaggedVector&&) = default;
 
     template <class... OTags>
-    inline constexpr TaggedVector(TaggedVector<ElementType, OTags> const&... other) noexcept
+    KOKKOS_FUNCTION constexpr TaggedVector(
+            TaggedVector<ElementType, OTags> const&... other) noexcept
         : m_values {take<Tags>(other...).value()...}
     {
     }
 
     template <class OElementType, class... OTags>
-    explicit inline constexpr TaggedVector(
+    explicit KOKKOS_FUNCTION constexpr TaggedVector(
             TaggedVector<OElementType, OTags...> const& other) noexcept
         : m_values {(static_cast<ElementType>(other.template get<Tags>()))...}
     {
@@ -274,17 +276,19 @@ public:
             class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
             class = std::enable_if_t<(!is_tagged_vector_v<Params> && ...)>,
             class = std::enable_if_t<sizeof...(Params) == sizeof...(Tags)>>
-    explicit inline constexpr TaggedVector(Params const&... params) noexcept
+    explicit KOKKOS_FUNCTION constexpr TaggedVector(Params const&... params) noexcept
         : m_values {static_cast<ElementType>(params)...}
     {
     }
 
-    constexpr inline TaggedVector& operator=(TaggedVector const& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION ~TaggedVector() = default;
 
-    constexpr inline TaggedVector& operator=(TaggedVector&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION TaggedVector& operator=(TaggedVector const& other) = default;
+
+    KOKKOS_DEFAULTED_FUNCTION TaggedVector& operator=(TaggedVector&& other) = default;
 
     template <class... OTags>
-    constexpr inline TaggedVector& operator=(
+    KOKKOS_FUNCTION constexpr TaggedVector& operator=(
             TaggedVector<ElementType, OTags...> const& other) noexcept
     {
         m_values = other.m_values;
@@ -292,48 +296,51 @@ public:
     }
 
     template <class... OTags>
-    constexpr inline TaggedVector& operator=(TaggedVector<ElementType, OTags...>&& other) noexcept
+    KOKKOS_FUNCTION constexpr TaggedVector& operator=(
+            TaggedVector<ElementType, OTags...>&& other) noexcept
     {
         m_values = std::move(other.m_values);
         return *this;
     }
 
     /// Returns a reference to the underlying `std::array`
-    constexpr inline std::array<ElementType, sizeof...(Tags)>& array() noexcept
+    KOKKOS_FUNCTION constexpr std::array<ElementType, sizeof...(Tags)>& array() noexcept
     {
         return m_values;
     }
 
     /// Returns a const reference to the underlying `std::array`
-    constexpr inline std::array<ElementType, sizeof...(Tags)> const& array() const noexcept
+    KOKKOS_FUNCTION constexpr std::array<ElementType, sizeof...(Tags)> const& array() const noexcept
     {
         return m_values;
     }
 
-    constexpr inline ElementType& operator[](size_t pos)
+    KOKKOS_FUNCTION constexpr ElementType& operator[](size_t pos)
     {
         return m_values[pos];
     }
 
-    constexpr inline ElementType const& operator[](size_t pos) const
+    KOKKOS_FUNCTION constexpr ElementType const& operator[](size_t pos) const
     {
         return m_values[pos];
     }
 
     template <class OElementType, class... OTags>
-    constexpr inline bool operator==(TaggedVector<OElementType, OTags...> const& rhs) const noexcept
+    KOKKOS_FUNCTION constexpr bool operator==(
+            TaggedVector<OElementType, OTags...> const& rhs) const noexcept
     {
         return ((m_values[type_seq_rank_v<Tags, tags_seq>] == rhs.template get<Tags>()) && ...);
     }
 
     template <class OElementType, class... OTags>
-    constexpr inline bool operator!=(TaggedVector<OElementType, OTags...> const& rhs) const noexcept
+    KOKKOS_FUNCTION constexpr bool operator!=(
+            TaggedVector<OElementType, OTags...> const& rhs) const noexcept
     {
         return !(*this == rhs);
     }
 
     template <class QueryTag>
-    inline constexpr ElementType& get() noexcept
+    KOKKOS_FUNCTION constexpr ElementType& get() noexcept
     {
         using namespace detail;
         static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from TaggedVector");
@@ -341,7 +348,7 @@ public:
     }
 
     template <class QueryTag>
-    inline constexpr ElementType const& get() const noexcept
+    KOKKOS_FUNCTION constexpr ElementType const& get() const noexcept
     {
         using namespace detail;
         static_assert(in_tags_v<QueryTag, tags_seq>, "requested Tag absent from TaggedVector");
@@ -349,7 +356,7 @@ public:
     }
 
     template <class QueryTag>
-    ElementType const& get_or(ElementType const& default_value) const&
+    KOKKOS_FUNCTION constexpr ElementType const& get_or(ElementType const& default_value) const&
     {
         DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
         if constexpr (in_tags_v<QueryTag, tags_seq>) {
@@ -361,13 +368,14 @@ public:
     }
 
     template <std::size_t N = sizeof...(Tags)>
-    constexpr inline std::enable_if_t<N == 1, ElementType const&> value() const noexcept
+    KOKKOS_FUNCTION constexpr std::enable_if_t<N == 1, ElementType const&> value() const noexcept
     {
         return m_values[0];
     }
 
     template <class OElementType, class... OTags>
-    constexpr inline TaggedVector& operator+=(TaggedVector<OElementType, OTags...> const& rhs)
+    KOKKOS_FUNCTION constexpr TaggedVector& operator+=(
+            TaggedVector<OElementType, OTags...> const& rhs)
     {
         static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] += rhs.template get<Tags>()), ...);
@@ -375,14 +383,15 @@ public:
     }
 
     template <class OElementType>
-    constexpr inline TaggedVector& operator+=(OElementType const& rhs)
+    KOKKOS_FUNCTION constexpr TaggedVector& operator+=(OElementType const& rhs)
     {
         ((m_values[type_seq_rank_v<Tags, tags_seq>] += rhs), ...);
         return *this;
     }
 
     template <class OElementType, class... OTags>
-    constexpr inline TaggedVector& operator-=(TaggedVector<OElementType, OTags...> const& rhs)
+    KOKKOS_FUNCTION constexpr TaggedVector& operator-=(
+            TaggedVector<OElementType, OTags...> const& rhs)
     {
         static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] -= rhs.template get<Tags>()), ...);
@@ -390,14 +399,15 @@ public:
     }
 
     template <class OElementType>
-    constexpr inline TaggedVector& operator-=(OElementType const& rhs)
+    KOKKOS_FUNCTION constexpr TaggedVector& operator-=(OElementType const& rhs)
     {
         ((m_values[type_seq_rank_v<Tags, tags_seq>] -= rhs), ...);
         return *this;
     }
 
     template <class OElementType, class... OTags>
-    constexpr inline TaggedVector& operator*=(TaggedVector<OElementType, OTags...> const& rhs)
+    KOKKOS_FUNCTION constexpr TaggedVector& operator*=(
+            TaggedVector<OElementType, OTags...> const& rhs)
     {
         static_assert(type_seq_same_v<tags_seq, detail::TypeSeq<OTags...>>);
         ((m_values[type_seq_rank_v<Tags, tags_seq>] *= rhs.template get<Tags>()), ...);

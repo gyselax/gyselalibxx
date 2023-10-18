@@ -35,6 +35,7 @@ public:
             ddc::ChunkSpan<const double, SpatialDDom> const electric_field,
             double const dt) const override
     {
+        Kokkos::Profiling::pushRegion("BslAdvectionVelocity");
         FdistribuDDom const dom = allfdistribu.domain();
         ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
         ddc::DiscreteDomain<DDimSp> const sp_dom = ddc::select<DDimSp>(dom);
@@ -79,6 +80,7 @@ public:
             });
         });
 
+        Kokkos::Profiling::popRegion();
         return allfdistribu;
     }
 };
