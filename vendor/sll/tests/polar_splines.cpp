@@ -154,7 +154,12 @@ TEST(PolarSplineTest, ConstantEval)
         for (std::size_t j(0); j < n_test_points; ++j) {
             PolarCoord const test_point(r0 + i * dr, p0 + j * dp);
             const double val = spline_evaluator(test_point, coef);
+            const double deriv_1 = spline_evaluator.deriv_dim_1(test_point, coef);
+            const double deriv_2 = spline_evaluator.deriv_dim_2(test_point, coef);
+
             EXPECT_LE(fabs(val - 1.0), 1.0e-14);
+            EXPECT_LE(fabs(deriv_1), 5.0e-14);
+            EXPECT_LE(fabs(deriv_2), 5.0e-14);
         }
     }
 }

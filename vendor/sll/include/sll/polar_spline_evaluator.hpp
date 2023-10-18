@@ -2,35 +2,73 @@
 
 #include <sll/polar_spline.hpp>
 
+/**
+ * @brief Define an evaluator on polar B-splines.
+ *
+ * @see PolarBSplines
+ */
 template <class PolarBSplinesType>
 class PolarSplineEvaluator
 {
 private:
     // Tags to determine what to evaluate
+    /**
+     * @brief Tag for the evaluation of the function.
+     */
     struct eval_type
     {
     };
 
+    /**
+     * @brief Tag for the evaluation of the derivative on the
+     * first dimension.
+     */
     struct eval_deriv_r_type
     {
     };
 
+    /**
+     * @brief Tag for the evaluation of the derivative on the
+     * second dimension.
+     */
     struct eval_deriv_p_type
     {
     };
 
+    /**
+     * @brief Tag for the evaluation of the cross derivative of the function.
+     */
     struct eval_deriv_r_p_type
     {
     };
 
 public:
+    /**
+     * @brief Tag the type of B-splines.
+     */
     using bsplines_type = PolarBSplinesType;
+    /**
+     * @brief Tag the type of first dimension B-splines.
+     */
     using BSplinesR = typename PolarBSplinesType::BSplinesR_tag;
+    /**
+     * @brief Tag the type of second dimension B-splines.
+     */
     using BSplinesP = typename PolarBSplinesType::BSplinesP_tag;
+    /**
+     * @brief Tag the first dimension of the space.
+     */
     using DimR = typename BSplinesR::tag_type;
+    /**
+     * @brief Tag the second dimension of the space.
+     */
     using DimP = typename BSplinesP::tag_type;
 
 public:
+    /**
+     * @brief Tag the order of continuity of the B-splines basis
+     * at the O-point.
+     */
     static int constexpr continuity = PolarBSplinesType::continuity;
 
 private:
@@ -39,21 +77,70 @@ private:
 public:
     PolarSplineEvaluator() = delete;
 
+    /**
+     * @brief Instantiate a PolarSplineEvaluator with boundary evaluation conditions.
+     *
+     * Instantiate a PolarSplineEvaluator by specifying how points lying outside the
+     * domain should be evaluated. The domain is the domain on which the polar splines
+     * are defined.
+     *
+     * @param[in] outer_bc
+     *      A class containing an operator which can be called to provide a boundary value to
+     *      evaluate a point lying outside the domain.
+     */
     explicit PolarSplineEvaluator(PolarSplineBoundaryValue2D<PolarBSplinesType> const& outer_bc)
         : m_outer_bc(outer_bc)
     {
     }
 
+    /**
+     * @brief Instantiate a PolarSplineEvaluator from another.
+     *
+     * @param[in] x
+     *      Another PolarSplineEvaluator (lvalue).
+     */
     PolarSplineEvaluator(PolarSplineEvaluator const& x) = default;
 
+    /**
+     * @brief Instantiate a PolarSplineEvaluator from another temporary.
+     *
+     * @param[in] x
+     *      Another temporary PolarSplineEvaluator (rvalue).
+     */
     PolarSplineEvaluator(PolarSplineEvaluator&& x) = default;
 
     ~PolarSplineEvaluator() = default;
 
+    /**
+     * @brief Assign a PolarSplineEvaluator from another.
+     *
+     * @param[in] x
+     *      Another PolarSplineEvaluator (lvalue).
+     *
+     * @return PolarSplineEvaluator assigned.
+     */
     PolarSplineEvaluator& operator=(PolarSplineEvaluator const& x) = default;
 
+    /**
+     * @brief Assign a PolarSplineEvaluator from another temporary.
+     *
+     * @param[in] x
+     *      Another temporary PolarSplineEvaluator (rvalue).
+     *
+     * @return PolarSplineEvaluator assigned.
+     */
     PolarSplineEvaluator& operator=(PolarSplineEvaluator&& x) = default;
 
+    /**
+     * @brief Get the value of the spline function at a given coordinate.
+     *
+     * @param[in] coord_eval
+     *      The coordinate where we want to evaluate.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the function we want to evaluate.
+     *
+     * @return A double with value of the spline function at the given coordinate.
+     */
     double operator()(
             ddc::Coordinate<DimR, DimP> coord_eval,
             PolarSplineView<PolarBSplinesType> const spline_coef) const
@@ -61,6 +148,16 @@ public:
         return eval(coord_eval, spline_coef);
     }
 
+    /**
+     * @brief Get the values of the spline function on a domain.
+     *
+     * @param[out] spline_eval
+     *      The values of the function evaluated on the domain.
+     * @param[in] coords_eval
+     *      The coordinates where we want to evaluate.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the spline function we want to evaluate.
+     */
     template <class Domain>
     void operator()(
             ddc::ChunkSpan<double, Domain> const spline_eval,
@@ -72,6 +169,18 @@ public:
         });
     }
 
+    /**
+     * @brief Get the value of the derivative of the spline function on the
+     * first dimension.
+     *
+     * @param[in] coord_eval
+     *      The coordinate where we want to evaluate.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the function we want to evaluate.
+     *
+     * @return The value of the derivative of the spline function on the
+     * first dimension.
+     */
     double deriv_dim_1(
             ddc::Coordinate<DimR, DimP> coord_eval,
             PolarSplineView<PolarBSplinesType> const spline_coef) const
@@ -79,15 +188,37 @@ public:
         return eval_no_bc(coord_eval, spline_coef, eval_deriv_r_type());
     }
 
+    /**
+     * @brief Get the value of the derivative of the spline function on the
+     * second dimension.
+     *
+     * @param[in] coord_eval
+     *      The coordinate where we want to evaluate.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the function we want to evaluate.
+     *
+     * @return The value of the derivative of the spline function on the
+     * second dimension.
+     */
     double deriv_dim_2(
             ddc::Coordinate<DimR, DimP> coord_eval,
-            double const coord_eval1,
-            double const coord_eval2,
             PolarSplineView<PolarBSplinesType> const spline_coef) const
     {
         return eval_no_bc(coord_eval, spline_coef, eval_deriv_p_type());
     }
 
+
+    /**
+     * @brief Get the value of the cross derivative of the spline function.
+     *
+     * @param[in] coord_eval
+     *      The coordinate where we want to evaluate.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the function we want to evaluate.
+     *
+     * @return The value of the cross derivative of the spline
+     * function
+     */
     double deriv_1_and_2(
             ddc::Coordinate<DimR, DimP> coord_eval,
             PolarSplineView<PolarBSplinesType> const spline_coef) const
@@ -95,6 +226,17 @@ public:
         return eval_no_bc(coord_eval, spline_coef, eval_deriv_r_p_type());
     }
 
+    /**
+     * @brief Get the values of the derivative of the spline function on the
+     * first dimension.
+     *
+     *@param[out] spline_eval
+     *      The values of the function evaluated on the domain.
+     * @param[in] coords_eval
+     *      The coordinates where we want to evaluate.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the spline function we want to evaluate.
+     */
     template <class Domain>
     void deriv_dim_1(
             ddc::ChunkSpan<double, Domain> const spline_eval,
@@ -106,6 +248,17 @@ public:
         });
     }
 
+    /**
+     * @brief Get the values of the derivative of the spline function on the
+     * second dimension.
+     *
+     *@param[out] spline_eval
+     *      The values of the function evaluated on the domain.
+     * @param[in] coords_eval
+     *      The coordinates where we want to evaluate.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the spline function we want to evaluate..
+     */
     template <class Domain>
     void deriv_dim_2(
             ddc::ChunkSpan<double, Domain> const spline_eval,
@@ -117,6 +270,16 @@ public:
         });
     }
 
+    /**
+     * @brief Get the values of the cross derivative of the spline function.
+     *
+     *@param[out] spline_eval
+     *      The values of the function evaluated on the domain.
+     * @param[in] coords_eval
+     *      The coordinates where we want to evaluate.
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the splinefunction we want to evaluate.
+     */
     template <class Domain>
     void deriv_dim_1_and_2(
             ddc::ChunkSpan<double, Domain> const spline_eval,
@@ -128,6 +291,16 @@ public:
         });
     }
 
+    /**
+     * @brief Get the in integral of a spline function over the domain.
+     *
+     * @param[in] spline_coef
+     *      The B-splines coefficients of the function we want to evaluate.
+     * @param[in] mapping
+     *      The mapping function.
+     *
+     * @return The integral of the spline function over the domain.
+     */
     template <class Mapping>
     double integrate(PolarSplineView<PolarBSplinesType> const spline_coef, Mapping const mapping)
             const
