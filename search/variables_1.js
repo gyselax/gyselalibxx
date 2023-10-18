@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['m_5fncells_529',['m_ncells',['../classdeprecated_1_1BSplines.html#ae6644ef87cc1a18daf0bdac1ec059697',1,'deprecated::BSplines']]]
+  ['continuity_533',['continuity',['../classPolarSplineEvaluator.html#a15aee591887e56951f682344a630d204',1,'PolarSplineEvaluator']]]
 ];

@@ -14,11 +14,13 @@ var searchData=
   ['bsplines_14',['BSplines',['../classdeprecated_1_1BSplines.html',1,'deprecated']]],
   ['bsplines1_5fis_5fperiodic_15',['BSplines1_is_periodic',['../classConstantExtrapolationBoundaryValue2D.html#ae0efdcf994a473793187c15d457644ac',1,'ConstantExtrapolationBoundaryValue2D']]],
   ['bsplines2_5fis_5fperiodic_16',['BSplines2_is_periodic',['../classConstantExtrapolationBoundaryValue2D.html#a919241d1d62db14ce4b9eabe93b23469',1,'ConstantExtrapolationBoundaryValue2D']]],
-  ['bsplines_5ftype_17',['bsplines_type',['../classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8',1,'SplineBuilder']]],
+  ['bsplines_5ftype_17',['bsplines_type',['../classPolarSplineEvaluator.html#a26a1961933d750d08fb027e9142cb6ba',1,'PolarSplineEvaluator::bsplines_type()'],['../classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8',1,'SplineBuilder::bsplines_type()']]],
   ['bsplines_5ftype1_18',['bsplines_type1',['../classSplineBuilder2D.html#aceec329f2770bef48e3d35871ae01502',1,'SplineBuilder2D::bsplines_type1()'],['../classSplineEvaluator2D.html#a61d223c29a716634e15dca19daa41955',1,'SplineEvaluator2D::bsplines_type1()']]],
   ['bsplines_5ftype2_19',['bsplines_type2',['../classSplineBuilder2D.html#ad1c9fafdefd9b45835b8b89573571900',1,'SplineBuilder2D::bsplines_type2()'],['../classSplineEvaluator2D.html#a20ef11c270ad545361a8b3f683a724d8',1,'SplineEvaluator2D::bsplines_type2()']]],
   ['bsplinesnobc_5fis_5fperiodic_20',['BSplinesNoBC_is_periodic',['../classConstantExtrapolationBoundaryValue2D.html#adaa000f80443f67449caf90ced1ecc50',1,'ConstantExtrapolationBoundaryValue2D']]],
-  ['builder_5ftype1_21',['builder_type1',['../classSplineBuilder2D.html#a32fa22d267cdeb0722572c33fd6c6e11',1,'SplineBuilder2D']]],
-  ['builder_5ftype2_22',['builder_type2',['../classSplineBuilder2D.html#a0a33a10b79cf3d7273c5f20337727dff',1,'SplineBuilder2D']]],
-  ['bumpontailequilibrium_23',['BumpontailEquilibrium',['../classBumpontailEquilibrium.html',1,'']]]
+  ['bsplinesp_21',['BSplinesP',['../classPolarSplineEvaluator.html#a21c225b744962b5b83476156e737b46f',1,'PolarSplineEvaluator']]],
+  ['bsplinesr_22',['BSplinesR',['../classPolarSplineEvaluator.html#af95eaa07f8890667fe4feade36d50423',1,'PolarSplineEvaluator']]],
+  ['builder_5ftype1_23',['builder_type1',['../classSplineBuilder2D.html#a32fa22d267cdeb0722572c33fd6c6e11',1,'SplineBuilder2D']]],
+  ['builder_5ftype2_24',['builder_type2',['../classSplineBuilder2D.html#a0a33a10b79cf3d7273c5f20337727dff',1,'SplineBuilder2D']]],
+  ['bumpontailequilibrium_25',['BumpontailEquilibrium',['../classBumpontailEquilibrium.html',1,'']]]
 ];

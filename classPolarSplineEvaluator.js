@@ -15,7 +15,7 @@ var classPolarSplineEvaluator =
     [ "operator()", "classPolarSplineEvaluator.html#a2dfd0747f1aa1bd56676980918723d68", null ],
     [ "operator()", "classPolarSplineEvaluator.html#a60de03671b33a0daf678b6df31cc9206", null ],
     [ "deriv_dim_1", "classPolarSplineEvaluator.html#a41bb228d256a0785988519f9683b100c", null ],
-    [ "deriv_dim_2", "classPolarSplineEvaluator.html#aeab0fd36a26c2bc5c5660a893da2f826", null ],
+    [ "deriv_dim_2", "classPolarSplineEvaluator.html#a27b0b79479680b3d506184bf1febc231", null ],
     [ "deriv_1_and_2", "classPolarSplineEvaluator.html#aa8f280512a34519fbb3f3dabfc0a1d87", null ],
     [ "deriv_dim_1", "classPolarSplineEvaluator.html#a0615c3c92b01a46d9c2a7804688af657", null ],
     [ "deriv_dim_2", "classPolarSplineEvaluator.html#a87a65b0a223262639ba069a9182993bc", null ],
