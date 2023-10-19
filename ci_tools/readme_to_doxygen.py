@@ -56,7 +56,7 @@ def get_code_blocks(line):
     n_code_tags //= 2
     return [(code_tags[2*i], code_tags[2*i+1]) for i in range(n_code_tags)]
 
-def format_equations(line, start_tag, end_tag, start_replace, end_replace):
+def format_equations(line, start_tag, end_tag, start_replace, end_replace, contents = None, idx = None):
     """
     Format equations with Doxygen style.
 
@@ -81,25 +81,47 @@ def format_equations(line, start_tag, end_tag, start_replace, end_replace):
     end_replace : str
         A Doxygen-compatible string which should be used to close the equation.
 
+    contents : list, optional
+        A list of all the lines in the file. This should be provided for multi-line
+        equations.
+
+    idx : int
+        The index of the line in the contents. This should be provided for multi-line
+        equations.
+
     Returns
     -------
     str
         The updated line.
+
+    int
+        The updated line index.
     """
     code_blocks = get_code_blocks(line)
     start_match = start_tag.search(line)
+    if contents:
+        n = len(contents)
+
     while start_match:
         if not any(start < start_match.start() < end for start, end in code_blocks):
             end_match = end_tag.search(line, start_match.end())
-            assert end_match is not None
+            if end_match is None:
+                assert contents is not None
+
+            while end_match is None and idx < n-1:
+                idx += 1
+                line += '\n' + contents[idx]
+                end_match = end_tag.search(line, start_match.end())
+
             replacement = start_replace + line[start_match.end():end_match.start()] + end_replace
             line = line[:start_match.start()] + replacement + line[end_match.end():]
             code_blocks = get_code_blocks(line)
             start_match = start_tag.search(line, start_match.start() + len(replacement))
+
         else:
             start_match = start_tag.search(line, start_match.end())
 
-    return line
+    return line, idx
 
 root_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
 
@@ -139,7 +161,10 @@ if __name__ == '__main__':
     body = []
     in_code = False
     in_math_code = False
-    for line in contents[1:]:
+    line_index = 1
+    n_lines = len(contents)
+    while line_index < n_lines:
+        line = contents[line_index]
         stripped = line.strip()
         if stripped.startswith('```'):
             if in_code:
@@ -161,8 +186,8 @@ if __name__ == '__main__':
                 line = f"\n@section {sec_tag} {sec_title}\n"
             else:
                 # Replace inline math with Doxygen tag
-                line = format_equations(line, single_math_tag, single_math_tag, "@f$", "@f$")
-                line = format_equations(line, multiline_math_tag, multiline_math_tag, "@f[", "@f]")
+                line, _ = format_equations(line, single_math_tag, single_math_tag, "@f$", "@f$")
+                line, line_index = format_equations(line, multiline_math_tag, multiline_math_tag, "@f[", "@f]", contents, line_index)
 
                 # Look for references
                 match_found = reference_tag.search(line)
@@ -206,6 +231,7 @@ if __name__ == '__main__':
                         match_found = reference_tag.search(line, match_found.end())
 
         body.append(line)
+        line_index += 1
 
 
     directory = os.path.dirname(args.output_file)
