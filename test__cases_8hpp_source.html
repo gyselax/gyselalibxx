@@ -122,10 +122,10 @@ $(document).ready(function(){initNavTree('test__cases_8hpp_source.html',''); ini
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">using</span> coordinate_converter_type = CurvilinearToCartesian;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">using</span> <a class="code" href="structDimX.html">DimX</a> = <span class="keyword">typename</span> CurvilinearToCartesian::cartesian_tag_x;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">using</span> <a class="code" href="structDimY.html">DimY</a> = <span class="keyword">typename</span> CurvilinearToCartesian::cartesian_tag_y;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">using</span> <a class="code" href="structDimR.html">DimR</a> = <span class="keyword">typename</span> CurvilinearToCartesian::curvilinear_tag_r;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">using</span> <a class="code" href="structDimP.html">DimP</a> = <span class="keyword">typename</span> CurvilinearToCartesian::curvilinear_tag_p;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">using</span> <a class="code" href="structRDimX.html">RDimX</a> = <span class="keyword">typename</span> CurvilinearToCartesian::cartesian_tag_x;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">using</span> <a class="code" href="structRDimY.html">RDimY</a> = <span class="keyword">typename</span> CurvilinearToCartesian::cartesian_tag_y;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">using</span> <a class="code" href="structRDimR.html">RDimR</a> = <span class="keyword">typename</span> CurvilinearToCartesian::curvilinear_tag_r;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">using</span> <a class="code" href="structRDimP.html">RDimP</a> = <span class="keyword">typename</span> CurvilinearToCartesian::curvilinear_tag_p;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    CurvilinearToCartesian <span class="keyword">const</span>&amp; m_coordinate_converter;</div>
@@ -135,7 +135,7 @@ $(document).ready(function(){initNavTree('test__cases_8hpp_source.html',''); ini
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        : m_coordinate_converter(coordinate_converter)</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">double</span> operator()(ddc::Coordinate&lt;DimR, DimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">double</span> operator()(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> CurvilinearToCartesian&gt;</div>
@@ -146,10 +146,10 @@ $(document).ready(function(){initNavTree('test__cases_8hpp_source.html',''); ini
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        : <a class="code" href="classPoissonSolution.html">PoissonSolution&lt;CurvilinearToCartesian&gt;</a>(coordinate_converter)</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">double</span> operator()(ddc::Coordinate&lt;DimR, DimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">double</span> operator()(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> s = ddc::get&lt;DimR&gt;(coord);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> t = ddc::get&lt;DimP&gt;(coord);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> s = ddc::get&lt;RDimR&gt;(coord);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> t = ddc::get&lt;RDimP&gt;(coord);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">return</span> 1e-4 * ipow(s, 6) * ipow(s - 1, 6) / ipow(0.5, 12) * std::cos(11 * t);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
@@ -162,13 +162,13 @@ $(document).ready(function(){initNavTree('test__cases_8hpp_source.html',''); ini
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        : <a class="code" href="classPoissonSolution.html">PoissonSolution&lt;CurvilinearToCartesian&gt;</a>(coordinate_converter)</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    {</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">double</span> operator()(ddc::Coordinate&lt;DimR, DimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">double</span> operator()(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> s = ddc::get&lt;DimR&gt;(coord);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keyword">const</span> ddc::Coordinate&lt;DimX, DimY&gt; cart_coord</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> s = ddc::get&lt;RDimR&gt;(coord);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keyword">const</span> ddc::Coordinate&lt;RDimX, RDimY&gt; cart_coord</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                = <a class="code" href="classPoissonSolution.html">PoissonSolution&lt;CurvilinearToCartesian&gt;::m_coordinate_converter</a>(coord);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> x = ddc::get&lt;DimX&gt;(cart_coord);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> y = ddc::get&lt;DimY&gt;(cart_coord);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> x = ddc::get&lt;RDimX&gt;(cart_coord);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> y = ddc::get&lt;RDimY&gt;(cart_coord);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">return</span> 1e-4 * ipow(1 + s, 6) * ipow(1 - s, 6) * std::cos(2 * M_PI * x)</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;               * std::sin(2 * M_PI * y) / ipow(0.5, 12);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
@@ -188,11 +188,11 @@ $(document).ready(function(){initNavTree('test__cases_8hpp_source.html',''); ini
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        : m_coordinate_converter(coordinate_converter)</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">double</span> solution_at_pole(ddc::Coordinate&lt;DimR, DimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">double</span> non_singular_solution(ddc::Coordinate&lt;DimR, DimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">double</span> operator()(ddc::Coordinate&lt;DimR, DimP&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">double</span> solution_at_pole(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">double</span> non_singular_solution(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">double</span> operator()(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">if</span> (ddc::get&lt;DimR&gt;(coord) == 0.0) {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">if</span> (ddc::get&lt;RDimR&gt;(coord) == 0.0) {</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">return</span> solution_at_pole(coord);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="keywordflow">return</span> non_singular_solution(coord);</div>
@@ -203,10 +203,10 @@ $(document).ready(function(){initNavTree('test__cases_8hpp_source.html',''); ini
 <div class="ttc" id="aclassCurvilinearSolution_html"><div class="ttname"><a href="classCurvilinearSolution.html">CurvilinearSolution</a></div><div class="ttdef"><b>Definition:</b> test_cases.hpp:38</div></div>
 <div class="ttc" id="aclassManufacturedPoissonTest_html"><div class="ttname"><a href="classManufacturedPoissonTest.html">ManufacturedPoissonTest</a></div><div class="ttdef"><b>Definition:</b> test_cases.hpp:74</div></div>
 <div class="ttc" id="aclassPoissonSolution_html"><div class="ttname"><a href="classPoissonSolution.html">PoissonSolution</a></div><div class="ttdef"><b>Definition:</b> test_cases.hpp:15</div></div>
-<div class="ttc" id="astructDimP_html"><div class="ttname"><a href="structDimP.html">DimP</a></div><div class="ttdoc">Define periodic Theta dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:63</div></div>
-<div class="ttc" id="astructDimR_html"><div class="ttname"><a href="structDimR.html">DimR</a></div><div class="ttdoc">Define non periodic R dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:52</div></div>
-<div class="ttc" id="astructDimX_html"><div class="ttname"><a href="structDimX.html">DimX</a></div><div class="ttdoc">Define non periodic X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:30</div></div>
-<div class="ttc" id="astructDimY_html"><div class="ttname"><a href="structDimY.html">DimY</a></div><div class="ttdoc">Define non periodic Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:41</div></div>
+<div class="ttc" id="astructRDimP_html"><div class="ttname"><a href="structRDimP.html">RDimP</a></div><div class="ttdoc">Define periodic real Theta dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:42</div></div>
+<div class="ttc" id="astructRDimR_html"><div class="ttname"><a href="structRDimR.html">RDimR</a></div><div class="ttdoc">Define non periodic real R dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:31</div></div>
+<div class="ttc" id="astructRDimX_html"><div class="ttname"><a href="structRDimX.html">RDimX</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:392</div></div>
+<div class="ttc" id="astructRDimY_html"><div class="ttname"><a href="structRDimY.html">RDimY</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:605</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

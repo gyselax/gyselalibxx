@@ -139,10 +139,10 @@ $(document).ready(function(){initNavTree('polar__bsplines_8hpp_source.html','');
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> <a class="code" href="classNonUniformBSplines.html">BSplinesR_tag</a> = <a class="code" href="classNonUniformBSplines.html">BSplinesR</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> <a class="code" href="classNonUniformBSplines.html">BSplinesP_tag</a> = <a class="code" href="classNonUniformBSplines.html">BSplinesP</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">using</span> <a class="code" href="structDimR.html">DimR</a> = <span class="keyword">typename</span> BSplinesR::tag_type;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">using</span> <a class="code" href="structDimP.html">DimP</a> = <span class="keyword">typename</span> BSplinesP::tag_type;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> BSplinesR_tag = BSplinesR;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> BSplinesP_tag = BSplinesP;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">using</span> DimR = <span class="keyword">typename</span> BSplinesR::tag_type;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">using</span> DimP = <span class="keyword">typename</span> BSplinesP::tag_type;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr continuity = C;</div>
@@ -219,15 +219,15 @@ $(document).ready(function(){initNavTree('polar__bsplines_8hpp_source.html','');
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">using</span> <a class="code" href="classPolarBSplines.html">discrete_dimension_type</a> = <a class="code" href="classPolarBSplines.html">PolarBSplines</a>;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> DimX, <span class="keyword">class</span> DimY, <span class="keyword">class</span> SplineBuilderR, <span class="keyword">class</span> SplineBuilderP&gt;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <a class="code" href="classPolarBSplines_1_1Impl.html">Impl</a>(<span class="keyword">const</span> <a class="code" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt;<a class="code" href="structDimX.html">DimX</a>, <a class="code" href="structDimY.html">DimY</a>, <a class="code" href="classSplineBuilder2D.html">SplineBuilder2D&lt;SplineBuilderR, SplineBuilderP&gt;</a>&gt;&amp;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <a class="code" href="classPolarBSplines_1_1Impl.html">Impl</a>(<span class="keyword">const</span> <a class="code" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt;DimX, DimY, <a class="code" href="classSplineBuilder2D.html">SplineBuilder2D&lt;SplineBuilderR, SplineBuilderP&gt;</a>&gt;&amp;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                     curvilinear_to_cartesian,</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;             SplineBuilderR <span class="keyword">const</span>&amp; spline_builder_r,</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;             SplineBuilderP <span class="keyword">const</span>&amp; spline_builder_p)</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            : m_spline_evaluator(</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                    g_null_boundary_2d&lt;<a class="code" href="classNonUniformBSplines.html">BSplinesR</a>, <a class="code" href="classNonUniformBSplines.html">BSplinesP</a>&gt;,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    g_null_boundary_2d&lt;<a class="code" href="classNonUniformBSplines.html">BSplinesR</a>, <a class="code" href="classNonUniformBSplines.html">BSplinesP</a>&gt;,</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                    g_null_boundary_2d&lt;<a class="code" href="classNonUniformBSplines.html">BSplinesR</a>, <a class="code" href="classNonUniformBSplines.html">BSplinesP</a>&gt;,</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                    g_null_boundary_2d&lt;<a class="code" href="classNonUniformBSplines.html">BSplinesR</a>, <a class="code" href="classNonUniformBSplines.html">BSplinesP</a>&gt;)</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                    g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                    g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                    g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;)</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        {</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">if</span> constexpr (C &gt; -1) {</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                <span class="keyword">const</span> ddc::Coordinate&lt;DimX, DimY&gt; pole</div>
@@ -257,15 +257,15 @@ $(document).ready(function(){initNavTree('polar__bsplines_8hpp_source.html','');
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                        corner3(x0 - 0.5 * tau, y0 - 0.5 * tau * sqrt(3.0));</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                <span class="keyword">const</span> <a class="code" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                        <a class="code" href="structDimX.html">DimX</a>,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                        <a class="code" href="structDimY.html">DimY</a>,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                        DimX,</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                        DimY,</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                        Corner1Tag,</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                        Corner2Tag,</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                        Corner3Tag&gt;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                        barycentric_coordinate_converter(corner1, corner2, corner3);</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                <span class="keyword">using</span> BernsteinBasis = <a class="code" href="classBernsteinPolynomialBasis.html">BernsteinPolynomialBasis</a>&lt;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                        <a class="code" href="structDimX.html">DimX</a>,</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                        <a class="code" href="structDimY.html">DimY</a>,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                        DimX,</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                        DimY,</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                        Corner1Tag,</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                        Corner2Tag,</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                        Corner3Tag,</div>
@@ -326,10 +326,10 @@ $(document).ready(function(){initNavTree('polar__bsplines_8hpp_source.html','');
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> OriginMemorySpace&gt;</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="keyword">explicit</span> Impl(Impl&lt;OriginMemorySpace&gt; <span class="keyword">const</span>&amp; impl)</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            : m_spline_evaluator(</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                    g_null_boundary_2d&lt;<a class="code" href="classNonUniformBSplines.html">BSplinesR</a>, <a class="code" href="classNonUniformBSplines.html">BSplinesP</a>&gt;,</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                    g_null_boundary_2d&lt;<a class="code" href="classNonUniformBSplines.html">BSplinesR</a>, <a class="code" href="classNonUniformBSplines.html">BSplinesP</a>&gt;,</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                    g_null_boundary_2d&lt;<a class="code" href="classNonUniformBSplines.html">BSplinesR</a>, <a class="code" href="classNonUniformBSplines.html">BSplinesP</a>&gt;,</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                    g_null_boundary_2d&lt;<a class="code" href="classNonUniformBSplines.html">BSplinesR</a>, <a class="code" href="classNonUniformBSplines.html">BSplinesP</a>&gt;)</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                    g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;,</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                    g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;,</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                    g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;,</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                    g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;)</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        {</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="keywordflow">for</span> (std::size_t i = 0; i &lt; m_singular_basis_elements.size(); ++i) {</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                m_singular_basis_elements[i] = Spline2D(impl.m_singular_basis_elements[i].domain());</div>
@@ -554,18 +554,13 @@ $(document).ready(function(){initNavTree('polar__bsplines_8hpp_source.html','');
 <div class="ttc" id="aclassBernsteinPolynomialBasis_html"><div class="ttname"><a href="classBernsteinPolynomialBasis.html">BernsteinPolynomialBasis</a></div><div class="ttdef"><b>Definition:</b> bernstein.hpp:16</div></div>
 <div class="ttc" id="aclassCartesianToBarycentricCoordinates_html"><div class="ttname"><a href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a></div><div class="ttdef"><b>Definition:</b> barycentric_coordinates.hpp:7</div></div>
 <div class="ttc" id="aclassDiscreteToCartesian_html"><div class="ttname"><a href="classDiscreteToCartesian.html">DiscreteToCartesian</a></div><div class="ttdoc">A class for describing discrete 2D mappings from the logical domain to the physical domain.</div><div class="ttdef"><b>Definition:</b> discrete_mapping_to_cartesian.hpp:32</div></div>
-<div class="ttc" id="aclassNonUniformBSplines_html"><div class="ttname"><a href="classNonUniformBSplines.html">NonUniformBSplines</a></div><div class="ttdoc">NonUniformPointSampling specialization of BSplines.</div><div class="ttdef"><b>Definition:</b> bsplines_non_uniform.hpp:16</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html">PolarBSplines::Impl</a></div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:94</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_structPolarBSplines_1_1Impl_1_1Corner1Tag"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner1Tag">PolarBSplines::Impl::Corner1Tag</a></div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:105</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_structPolarBSplines_1_1Impl_1_1Corner2Tag"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner2Tag">PolarBSplines::Impl::Corner2Tag</a></div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:108</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_structPolarBSplines_1_1Impl_1_1Corner3Tag"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner3Tag">PolarBSplines::Impl::Corner3Tag</a></div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:111</div></div>
 <div class="ttc" id="aclassPolarBSplines_html"><div class="ttname"><a href="classPolarBSplines.html">PolarBSplines</a></div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:19</div></div>
 <div class="ttc" id="aclassSplineBuilder2D_html"><div class="ttname"><a href="classSplineBuilder2D.html">SplineBuilder2D</a></div><div class="ttdoc">A class for creating a 2D spline approximation of a function.</div><div class="ttdef"><b>Definition:</b> spline_builder_2d.hpp:15</div></div>
-<div class="ttc" id="aclassSplineEvaluator2D_html"><div class="ttname"><a href="classSplineEvaluator2D.html">SplineEvaluator2D</a></div><div class="ttdoc">Define an evaluator 2D on B-splines.</div><div class="ttdef"><b>Definition:</b> spline_evaluator_2d.hpp:15</div></div>
-<div class="ttc" id="astructDimP_html"><div class="ttname"><a href="structDimP.html">DimP</a></div><div class="ttdoc">Define periodic Theta dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:63</div></div>
-<div class="ttc" id="astructDimR_html"><div class="ttname"><a href="structDimR.html">DimR</a></div><div class="ttdoc">Define non periodic R dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:52</div></div>
-<div class="ttc" id="astructDimX_html"><div class="ttname"><a href="structDimX.html">DimX</a></div><div class="ttdoc">Define non periodic X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:30</div></div>
-<div class="ttc" id="astructDimY_html"><div class="ttname"><a href="structDimY.html">DimY</a></div><div class="ttdoc">Define non periodic Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:41</div></div>
+<div class="ttc" id="aclassSplineEvaluator2D_html"><div class="ttname"><a href="classSplineEvaluator2D.html">SplineEvaluator2D&lt; BSplinesR, BSplinesP &gt;</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

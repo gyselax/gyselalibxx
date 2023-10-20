@@ -118,18 +118,18 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;species_info.hpp&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structRDimX.html">   19</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimX.html">RDimX</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimX.html">RDimX</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifdef PERIODIC_RDIMX</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">PERIODIC</a> = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">   27</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structRDimVx.html">   34</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimVx.html">RDimVx</a></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimVx.html">RDimVx</a></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">   39</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structRDimT.html">   45</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimT.html">RDimT</a></div>
@@ -153,12 +153,12 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsX = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsVx = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">using</span> <a class="code" href="classUniformBSplines.html">BSplinesX</a> = std::conditional_t&lt;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">using</span> BSplinesX = std::conditional_t&lt;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        BsplineOnUniformCellsX,</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="classUniformBSplines.html">UniformBSplines&lt;RDimX, BSDegreeX&gt;</a>,</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <a class="code" href="classNonUniformBSplines.html">NonUniformBSplines&lt;RDimX, BSDegreeX&gt;</a>&gt;;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">using</span> <a class="code" href="classUniformBSplines.html">BSplinesVx</a> = std::conditional_t&lt;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">using</span> BSplinesVx = std::conditional_t&lt;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        BsplineOnUniformCellsVx,</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <a class="code" href="classUniformBSplines.html">UniformBSplines&lt;RDimVx, BSDegreeVx&gt;</a>,</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="classNonUniformBSplines.html">NonUniformBSplines&lt;RDimVx, BSDegreeVx&gt;</a>&gt;;</div>
@@ -404,10 +404,10 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="ttc" id="aclassUniformBSplines_html"><div class="ttname"><a href="classUniformBSplines.html">UniformBSplines</a></div><div class="ttdef"><b>Definition:</b> bsplines_uniform.hpp:15</div></div>
 <div class="ttc" id="astructRDimT_html"><div class="ttname"><a href="structRDimT.html">RDimT</a></div><div class="ttdoc">A class which describes the real space in the temporal direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:46</div></div>
 <div class="ttc" id="astructRDimT_html_ac518ba935033dd7ec6e36a2860a5ee68"><div class="ttname"><a href="structRDimT.html#ac518ba935033dd7ec6e36a2860a5ee68">RDimT::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">A boolean indicating if the dimension is periodic.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:50</div></div>
-<div class="ttc" id="astructRDimVx_html"><div class="ttname"><a href="structRDimVx.html">RDimVx</a></div><div class="ttdoc">A class which describes the real space in the X-velocity direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:35</div></div>
-<div class="ttc" id="astructRDimVx_html_a11bf97b66f066f6e9b062e8742f6cc78"><div class="ttname"><a href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">RDimVx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">A boolean indicating if the dimension is periodic.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:39</div></div>
-<div class="ttc" id="astructRDimX_html"><div class="ttname"><a href="structRDimX.html">RDimX</a></div><div class="ttdoc">A class which describes the real space in the spatial X direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:20</div></div>
-<div class="ttc" id="astructRDimX_html_a8cb720efb33235cee3371843279ea9ab"><div class="ttname"><a href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">RDimX::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">A boolean indicating if the dimension is periodic.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:27</div></div>
+<div class="ttc" id="astructRDimVx_html"><div class="ttname"><a href="structRDimVx.html">RDimVx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:403</div></div>
+<div class="ttc" id="astructRDimVx_html_a11bf97b66f066f6e9b062e8742f6cc78"><div class="ttname"><a href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">RDimVx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:408</div></div>
+<div class="ttc" id="astructRDimX_html"><div class="ttname"><a href="structRDimX.html">RDimX</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:392</div></div>
+<div class="ttc" id="astructRDimX_html_a8cb720efb33235cee3371843279ea9ab"><div class="ttname"><a href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">RDimX::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:397</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

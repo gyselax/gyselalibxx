@@ -125,17 +125,17 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a73328569294653365237e7c093b32963"><td class="memItemLeft" align="right" valign="top"><a id="a73328569294653365237e7c093b32963"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesR</b> = typename <a class="el" href="classNonUniformBSplines.html">PolarBSplines::BSplinesR_tag</a></td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesR</b> = typename PolarBSplines::BSplinesR_tag</td></tr>
 <tr class="separator:a73328569294653365237e7c093b32963"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c7049b09235defa8c3242508d95ba4"><td class="memItemLeft" align="right" valign="top"><a id="a51c7049b09235defa8c3242508d95ba4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesP</b> = typename <a class="el" href="classNonUniformBSplines.html">PolarBSplines::BSplinesP_tag</a></td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesP</b> = typename PolarBSplines::BSplinesP_tag</td></tr>
 <tr class="separator:a51c7049b09235defa8c3242508d95ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96af186eeeeb68deaf32eaef97c58460"><td class="memItemLeft" align="right" valign="top"><a id="a96af186eeeeb68deaf32eaef97c58460"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>DimR</b> = typename BSplinesR::tag_type</td></tr>
-<tr class="separator:a96af186eeeeb68deaf32eaef97c58460"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb4c0c277974c22d9da45c175eb3fa13"><td class="memItemLeft" align="right" valign="top"><a id="aeb4c0c277974c22d9da45c175eb3fa13"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>DimP</b> = typename BSplinesP::tag_type</td></tr>
-<tr class="separator:aeb4c0c277974c22d9da45c175eb3fa13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae11676f1f41aaf23fc0b76b3d7b75a21"><td class="memItemLeft" align="right" valign="top"><a id="ae11676f1f41aaf23fc0b76b3d7b75a21"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>RDimR</b> = typename BSplinesR::tag_type</td></tr>
+<tr class="separator:ae11676f1f41aaf23fc0b76b3d7b75a21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22b4815b665f9db9d48c3fcb25b8add8"><td class="memItemLeft" align="right" valign="top"><a id="a22b4815b665f9db9d48c3fcb25b8add8"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>RDimP</b> = typename BSplinesP::tag_type</td></tr>
+<tr class="separator:a22b4815b665f9db9d48c3fcb25b8add8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdb449665614d1309260d2c3032654e2"><td class="memItemLeft" align="right" valign="top"><a id="afdb449665614d1309260d2c3032654e2"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>SplineRP</b> = ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; BSplinesR, BSplinesP &gt; &gt;</td></tr>
 <tr class="separator:afdb449665614d1309260d2c3032654e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,10 +149,10 @@ Public Member Functions</h2></td></tr>
 template&lt;class Mapping &gt; </td></tr>
 <tr class="memitem:aea2e5f1a3571a3b1058978d41374c01e"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>PolarSplineFEMPoissonSolver</b> (ddc::ChunkSpan&lt; double const, ddc::DiscreteDomain&lt; BSplinesR, BSplinesP &gt;&gt; coeff_alpha, ddc::ChunkSpan&lt; double const, ddc::DiscreteDomain&lt; BSplinesR, BSplinesP &gt;&gt; coeff_beta, Mapping const &amp;mapping)</td></tr>
 <tr class="separator:aea2e5f1a3571a3b1058978d41374c01e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6087567923ae2ba0ad8c4d034883023b"><td class="memTemplParams" colspan="2"><a id="a6087567923ae2ba0ad8c4d034883023b"></a>
+<tr class="memitem:a9fa355d44f384704dac27784afe492c7"><td class="memTemplParams" colspan="2"><a id="a9fa355d44f384704dac27784afe492c7"></a>
 template&lt;class RHSFunction , class Domain &gt; </td></tr>
-<tr class="memitem:a6087567923ae2ba0ad8c4d034883023b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator()</b> (RHSFunction const &amp;rhs, ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="structDimR.html">DimR</a>, <a class="el" href="structDimP.html">DimP</a> &gt; const, Domain &gt; const coords_eval, ddc::ChunkSpan&lt; double, Domain &gt; result) const</td></tr>
-<tr class="separator:a6087567923ae2ba0ad8c4d034883023b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fa355d44f384704dac27784afe492c7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator()</b> (RHSFunction const &amp;rhs, ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const, Domain &gt; const coords_eval, ddc::ChunkSpan&lt; double, Domain &gt; result) const</td></tr>
+<tr class="separator:a9fa355d44f384704dac27784afe492c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/><h2 class="groupheader">Class Documentation</h2>
 <a name="structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator" id="structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator"></a>
