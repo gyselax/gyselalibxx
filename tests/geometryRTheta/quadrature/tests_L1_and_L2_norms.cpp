@@ -130,7 +130,7 @@ void launch_tests(
     // --- TEST 2 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 2: f(r,theta ) = cos(theta) " << std::endl;
     ddc::for_each(grid, [&](IndexRP const irp) {
-        double const th = ddc::select<DimP>(ddc::coordinate(irp));
+        double const th = ddc::select<RDimP>(ddc::coordinate(irp));
         test(irp) = std::cos(th);
     });
     check_norms(quadrature, test, expected_norms[1], TOLs[1]);
@@ -139,7 +139,7 @@ void launch_tests(
     // --- TEST 3 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 3: f(r,theta ) = r " << std::endl;
     ddc::for_each(grid, [&](IndexRP const irp) {
-        double const r = ddc::select<DimR>(ddc::coordinate(irp));
+        double const r = ddc::select<RDimR>(ddc::coordinate(irp));
         test(irp) = r;
     });
     check_norms(quadrature, test, expected_norms[2], TOLs[2]);
@@ -147,8 +147,8 @@ void launch_tests(
     // --- TEST 4 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 4: f(r,theta ) = r cos(theta) " << std::endl;
     ddc::for_each(grid, [&](IndexRP const irp) {
-        double const r = ddc::select<DimR>(ddc::coordinate(irp));
-        double const th = ddc::select<DimP>(ddc::coordinate(irp));
+        double const r = ddc::select<RDimR>(ddc::coordinate(irp));
+        double const th = ddc::select<RDimP>(ddc::coordinate(irp));
         test(irp) = r * std::cos(th);
     });
     check_norms(quadrature, test, expected_norms[3], TOLs[3]);
@@ -157,8 +157,8 @@ void launch_tests(
     // --- TEST 5 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 5: f(r,theta ) = r⁵ cos(10*theta) " << std::endl;
     ddc::for_each(grid, [&](IndexRP const irp) {
-        double const r = ddc::select<DimR>(ddc::coordinate(irp));
-        double const th = ddc::select<DimP>(ddc::coordinate(irp));
+        double const r = ddc::select<RDimR>(ddc::coordinate(irp));
+        double const th = ddc::select<RDimP>(ddc::coordinate(irp));
         test(irp) = std::pow(r, 5) * std::cos(10 * th);
     });
     check_norms(quadrature, test, expected_norms[4], TOLs[4]);
@@ -209,11 +209,11 @@ TEST_P(SplineQuadrature, TestFunctions)
     ddc::init_discrete_space<BSplinesR>(r_knots);
     ddc::init_discrete_space<BSplinesP>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(InterpPointsR::get_sampling());
-    ddc::init_discrete_space<IDimP>(InterpPointsP::get_sampling());
+    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling());
+    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling());
 
-    IDomainR interpolation_domain_R(InterpPointsR::get_domain());
-    IDomainP interpolation_domain_P(InterpPointsP::get_domain());
+    IDomainR interpolation_domain_R(SplineInterpPointsR::get_domain());
+    IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain());
     IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
 
     SplineRPBuilder builder(grid);
@@ -222,7 +222,7 @@ TEST_P(SplineQuadrature, TestFunctions)
     // ------------------------------------------------------------------------------------------------
     std::cout << "CIRCULAR MAPPING ---------------------------------------------------"
               << std::endl;
-    const CircularToCartesian<DimX, DimY, DimR, DimP> mapping_1;
+    const CircularToCartesian<RDimX, RDimY, RDimR, RDimP> mapping_1;
     std::array<std::array<double, 2>, 5> expected_norms;
     expected_norms[0][0] = M_PI;
     expected_norms[0][1] = std::sqrt(M_PI);
@@ -259,8 +259,8 @@ TEST_P(SplineQuadrature, TestFunctions)
             g_null_boundary_2d<BSplinesR, BSplinesP>,
             g_null_boundary_2d<BSplinesR, BSplinesP>);
 
-    DiscreteToCartesian<DimX, DimY, SplineRPBuilder> const discrete_mapping
-            = DiscreteToCartesian<DimX, DimY, SplineRPBuilder>::
+    DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder> const discrete_mapping
+            = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>::
                     analytical_to_discrete(mapping_1, builder, spline_evaluator_extrapol);
     TOLs[0][0] = 5e-6;
     TOLs[0][1] = 5e-7;

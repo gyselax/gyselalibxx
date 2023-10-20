@@ -23,11 +23,11 @@
 using PoissonSolver = PolarSplineFEMPoissonSolver<PolarBSplinesRP>;
 
 #if defined(CIRCULAR_MAPPING)
-using Mapping = CircularToCartesian<DimX, DimY, DimR, DimP>;
+using Mapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
 #elif defined(CZARNY_MAPPING)
-using Mapping = CzarnyToCartesian<DimX, DimY, DimR, DimP>;
+using Mapping = CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>;
 #endif
-using DiscreteMapping = DiscreteToCartesian<DimX, DimY, SplineRPBuilder>;
+using DiscreteMapping = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>;
 
 #if defined(CURVILINEAR_SOLUTION)
 using LHSFunction = CurvilinearSolution<Mapping>;
@@ -88,11 +88,11 @@ int main(int argc, char** argv)
 
     ddc::init_discrete_space<BSplinesP>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(InterpPointsR::get_sampling());
-    ddc::init_discrete_space<IDimP>(InterpPointsP::get_sampling());
+    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling());
+    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling());
 
-    IDomainR interpolation_domain_R(InterpPointsR::get_domain());
-    IDomainP interpolation_domain_P(InterpPointsP::get_domain());
+    IDomainR interpolation_domain_R(SplineInterpPointsR::get_domain());
+    IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain());
     IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
 
     SplineRBuilder const r_builder(interpolation_domain_R);
@@ -125,12 +125,12 @@ int main(int argc, char** argv)
         coeff_alpha(irp)
                 = std::exp(-std::tanh((ddc::coordinate(ddc::select<IDimR>(irp)) - 0.7) / 0.05));
         coeff_beta(irp) = 1.0 / coeff_alpha(irp);
-        ddc::Coordinate<DimR, DimP>
+        ddc::Coordinate<RDimR, RDimP>
                 coord(ddc::coordinate(ddc::select<IDimR>(irp)),
                       ddc::coordinate(ddc::select<IDimP>(irp)));
         auto cartesian_coord = mapping(coord);
-        x(irp) = ddc::get<DimX>(cartesian_coord);
-        y(irp) = ddc::get<DimY>(cartesian_coord);
+        x(irp) = ddc::get<RDimX>(cartesian_coord);
+        y(irp) = ddc::get<RDimY>(cartesian_coord);
     });
 
     Spline2D coeff_alpha_spline(dom_bsplinesRP);
