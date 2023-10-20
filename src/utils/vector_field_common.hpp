@@ -21,7 +21,7 @@ inline constexpr bool is_borrowed_field_v
         = is_field_v<
                   T> && (std::is_lvalue_reference_v<T> || enable_borrowed_field<std::remove_cv_t<std::remove_reference_t<T>>>);
 
-namespace ddcHelpers {
+namespace ddcHelper {
 
 template <class... QueryDDims, class FieldType>
 auto get_domain(FieldType const& field) noexcept
@@ -60,7 +60,7 @@ inline constexpr typename ChunkType::view_type get(
 }
 
 
-}; // namespace ddcHelpers
+}; // namespace ddcHelper
 
 template <class ChunkType, class... DDims>
 class VectorFieldCommon<ChunkType, ddc::detail::TypeSeq<DDims...>>

@@ -35,4 +35,5 @@ public:
 
 private:
     void get_amplitudes(DSpanSp amplitudes, DViewSpVx allfdistribu) const;
+    void get_derivative(DSpanSpXVx df, DViewSpXVx f, DViewSpXVx f0) const;
 };

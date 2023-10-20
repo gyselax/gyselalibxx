@@ -6,6 +6,7 @@
 
 #include <maxwellianequilibrium.hpp>
 #include <quadrature.hpp>
+#include <rk2.hpp>
 #include <species_info.hpp>
 #include <trapezoid_quadrature.hpp>
 
@@ -109,34 +110,34 @@ void KrookSourceAdaptive::get_amplitudes(DSpanSp amplitudes, DViewSpVx const all
     amplitudes(ielec()) = m_amplitude * (density_ion - m_density) / (density_electron - m_density);
 }
 
+void KrookSourceAdaptive::get_derivative(
+        DSpanSpXVx df,
+        DViewSpXVx allfdistribu,
+        DViewSpXVx allfdistribu_start) const
+{
+    IDomainSpVx sp_vx_dom = ddc::get_domain<IDimSp, IDimVx>(allfdistribu);
+    IDomainSp sp_dom = ddc::get_domain<IDimSp>(allfdistribu);
+    IDomainX x_dom = ddc::get_domain<IDimX>(allfdistribu);
+
+    DFieldSp amplitudes(sp_dom);
+    ddc::for_each(x_dom, [&](IndexX const ix) {
+        DFieldSpVx allfdistribu_slice(allfdistribu[ix]);
+        get_amplitudes(amplitudes.span_view(), allfdistribu_slice);
+        ddc::for_each(sp_vx_dom, [&](IndexSpVx const ispvx) {
+            IndexSp isp(ddc::select<IDimSp>(ispvx));
+            IndexVx ivx(ddc::select<IDimVx>(ispvx));
+            IndexSpXVx ispxvx(isp, ix, ivx);
+            df(ispxvx)
+                    = -m_mask(ix) * amplitudes(isp) * (allfdistribu_start(ispxvx) - m_ftarget(ivx));
+        });
+    });
+}
 
 DSpanSpXVx KrookSourceAdaptive::operator()(DSpanSpXVx const allfdistribu, double const dt) const
 {
-    ddc::for_each(ddc::get_domain<IDimX>(allfdistribu), [&](IndexX const ix) {
-        // RK2 first half step
-        DFieldSpVx allfdistribu_half(allfdistribu[ix]);
-        DFieldSp amplitudes(ddc::get_domain<IDimSp>(allfdistribu));
-        get_amplitudes(amplitudes.span_view(), allfdistribu_half.span_cview());
-        ddc::for_each(ddc::get_domain<IDimSp, IDimVx>(allfdistribu), [&](IndexSpVx const ispvx) {
-            IndexSp isp(ddc::select<IDimSp>(ispvx));
-            IndexVx ivx(ddc::select<IDimVx>(ispvx));
-            IndexSpXVx ispxvx(isp, ix, ivx);
-            double const df = -m_mask(ix) * amplitudes(isp)
-                              * (allfdistribu(ispxvx) - m_ftarget(ivx)) * dt / 2.0;
-            allfdistribu_half(isp, ivx) = allfdistribu(ispxvx) + df;
-        });
-
-        // RK2 final step
-        get_amplitudes(amplitudes.span_view(), allfdistribu_half.span_cview());
-        ddc::for_each(ddc::get_domain<IDimSp, IDimVx>(allfdistribu), [&](IndexSpVx const ispvx) {
-            IndexSp isp(ddc::select<IDimSp>(ispvx));
-            IndexVx ivx(ddc::select<IDimVx>(ispvx));
-            IndexSpXVx ispxvx(isp, ix, ivx);
-
-            double const df
-                    = -m_mask(ix) * amplitudes(isp) * (allfdistribu(ispxvx) - m_ftarget(ivx)) * dt;
-            allfdistribu(ispxvx) = allfdistribu(ispxvx) + df;
-        });
+    RK2<DFieldSpXVx> timestepper(allfdistribu.domain());
+    timestepper.update(allfdistribu, dt, [&](DSpanSpXVx df, DViewSpXVx f) {
+        get_derivative(df, f, allfdistribu);
     });
 
     return allfdistribu;
