@@ -34,6 +34,7 @@ RUN chmod +x /bin/bash_run \
     liblapack-dev \
     openssh-client \
     pdidev-archive-keyring \
+    hdf5-tools \
     pdiplugin-decl-hdf5-serial \
     pdiplugin-set-value \
     python3-pip \
