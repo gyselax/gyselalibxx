@@ -134,6 +134,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a3ec69912b7bbe42bf8302013b4ee3bcd">view_type</a> = <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; const ElementType, Domain, NDTag, std::experimental::layout_right, typename Allocator::memory_space &gt;</td></tr>
 <tr class="memdesc:a3ec69912b7bbe42bf8302013b4ee3bcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a constant reference to this <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>. <br /></td></tr>
 <tr class="separator:a3ec69912b7bbe42bf8302013b4ee3bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab896e267b63db730e4344e1e15f2956f"><td class="memItemLeft" align="right" valign="top"><a id="ab896e267b63db730e4344e1e15f2956f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#ab896e267b63db730e4344e1e15f2956f">mdomain_type</a> = typename base_type::mdomain_type</td></tr>
+<tr class="memdesc:ab896e267b63db730e4344e1e15f2956f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the domain on which the field is defined. <br /></td></tr>
+<tr class="separator:ab896e267b63db730e4344e1e15f2956f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -141,7 +145,7 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#affcf9abd0e02dde4aa553233de0b57c8">VectorField</a> ()=default</td></tr>
 <tr class="memdesc:affcf9abd0e02dde4aa553233de0b57c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>. <br /></td></tr>
 <tr class="separator:affcf9abd0e02dde4aa553233de0b57c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9355ed87913f63a941e03f6b61a4c9e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a9355ed87913f63a941e03f6b61a4c9e0">VectorField</a> (mdomain_type const &amp;domain, Allocator allocator=Allocator())</td></tr>
+<tr class="memitem:a9355ed87913f63a941e03f6b61a4c9e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a9355ed87913f63a941e03f6b61a4c9e0">VectorField</a> (<a class="el" href="classVectorField.html#ab896e267b63db730e4344e1e15f2956f">mdomain_type</a> const &amp;domain, Allocator allocator=Allocator())</td></tr>
 <tr class="memdesc:a9355ed87913f63a941e03f6b61a4c9e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a> on a domain with uninitialized values.  <a href="classVectorField.html#a9355ed87913f63a941e03f6b61a4c9e0">More...</a><br /></td></tr>
 <tr class="separator:a9355ed87913f63a941e03f6b61a4c9e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e6b67ec99341f76401f77a27575cbfc"><td class="memTemplParams" colspan="2">template&lt;class OElementType , class LayoutDomain , class MemorySpace &gt; </td></tr>
@@ -209,7 +213,7 @@ template&lt;class ElementType , class Domain , class NDTag , class Allocator &gt
         <tr>
           <td class="memname"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, Domain, NDTag, Allocator &gt;::<a class="el" href="classVectorField.html">VectorField</a> </td>
           <td>(</td>
-          <td class="paramtype">mdomain_type const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html#ab896e267b63db730e4344e1e15f2956f">mdomain_type</a> const &amp;&#160;</td>
           <td class="paramname"><em>domain</em>, </td>
         </tr>
         <tr>

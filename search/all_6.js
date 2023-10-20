@@ -11,8 +11,9 @@ var searchData=
   ['geometryxyvxvy_96',['GeometryXYVxVy',['../classGeometryXYVxVy.html',1,'']]],
   ['get_5fbuilder_5f1_97',['get_builder_1',['../classSplineBuilder2D.html#ab9e9788616d4be20d309ec04da8e25fe',1,'SplineBuilder2D']]],
   ['get_5fbuilder_5f2_98',['get_builder_2',['../classSplineBuilder2D.html#a5a406c6bc3f47c2895963a66c40e5cee',1,'SplineBuilder2D']]],
-  ['ghostedvx_99',['GhostedVx',['../classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx',1,'CollisionsIntra']]],
-  ['ghostedvxstaggered_100',['GhostedVxStaggered',['../classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVxStaggered',1,'CollisionsIntra']]],
-  ['grevilleinterpolationpoints_101',['GrevilleInterpolationPoints',['../classGrevilleInterpolationPoints.html',1,'']]],
-  ['gyselalib_2b_2b_20contents_102',['Gyselalib++ contents',['../src.html',1,'']]]
+  ['get_5fnustar0_99',['get_nustar0',['../classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac',1,'CollisionsInter']]],
+  ['ghostedvx_100',['GhostedVx',['../classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx',1,'CollisionsIntra']]],
+  ['ghostedvxstaggered_101',['GhostedVxStaggered',['../classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVxStaggered',1,'CollisionsIntra']]],
+  ['grevilleinterpolationpoints_102',['GrevilleInterpolationPoints',['../classGrevilleInterpolationPoints.html',1,'']]],
+  ['gyselalib_2b_2b_20contents_103',['Gyselalib++ contents',['../src.html',1,'']]]
 ];

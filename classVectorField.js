@@ -3,6 +3,7 @@ var classVectorField =
     [ "chunk_type", "classVectorField.html#a17028a562655b6e58926450f8849b066", null ],
     [ "span_type", "classVectorField.html#a94d0034047dacae6e8a7f87d8b21fc41", null ],
     [ "view_type", "classVectorField.html#a3ec69912b7bbe42bf8302013b4ee3bcd", null ],
+    [ "mdomain_type", "classVectorField.html#ab896e267b63db730e4344e1e15f2956f", null ],
     [ "VectorField", "classVectorField.html#affcf9abd0e02dde4aa553233de0b57c8", null ],
     [ "VectorField", "classVectorField.html#a9355ed87913f63a941e03f6b61a4c9e0", null ],
     [ "VectorField", "classVectorField.html#a8e6b67ec99341f76401f77a27575cbfc", null ],

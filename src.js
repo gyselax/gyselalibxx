@@ -8,5 +8,6 @@ var src =
       [ "Memory concerns", "src_interpolation.html#Memory_concerns", null ]
     ] ],
     [ "Quadrature Methods", "src_quadrature.html", null ],
+    [ "Time Stepping Methods", "src_timestepper.html", null ],
     [ "Utility Functions", "src_utils.html", null ]
 ];
