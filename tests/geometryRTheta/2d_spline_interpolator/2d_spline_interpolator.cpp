@@ -183,7 +183,7 @@ public:
      */
     double operator()(CoordRP const& coord) const override
     {
-        const double r = ddc::get<DimR>(coord);
+        const double r = ddc::get<RDimR>(coord);
         double val = 1.0;
         for (int i(0); i < m_d; i++)
             val *= r;
@@ -208,8 +208,8 @@ public:
      */
     double operator()(CoordRP const& coord) const override
     {
-        const double r = ddc::get<DimR>(coord);
-        const double t = ddc::get<DimP>(coord);
+        const double r = ddc::get<RDimR>(coord);
+        const double t = ddc::get<RDimP>(coord);
         return r * std::cos(t);
     }
 };
@@ -230,8 +230,8 @@ public:
      */
     double operator()(CoordRP const& coord) const override
     {
-        const double r = ddc::get<DimR>(coord);
-        const double t = ddc::get<DimP>(coord);
+        const double r = ddc::get<RDimR>(coord);
+        const double t = ddc::get<RDimP>(coord);
 
         double x0 = 0.;
         double y0 = 0.;
@@ -320,11 +320,11 @@ int main(int argc, char** argv)
     ddc::init_discrete_space<BSplinesR>(r_knots);
     ddc::init_discrete_space<BSplinesP>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(InterpPointsR::get_sampling());
-    ddc::init_discrete_space<IDimP>(InterpPointsP::get_sampling());
+    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling());
+    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling());
 
-    IDomainR interpolation_domain_R(InterpPointsR::get_domain());
-    IDomainP interpolation_domain_P(InterpPointsP::get_domain());
+    IDomainR interpolation_domain_R(SplineInterpPointsR::get_domain());
+    IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain());
     IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
 
 

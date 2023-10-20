@@ -22,8 +22,8 @@ public:
     using BSplinesR = typename PolarBSplines::BSplinesR_tag;
     using BSplinesP = typename PolarBSplines::BSplinesP_tag;
 
-    using DimR = typename BSplinesR::tag_type;
-    using DimP = typename BSplinesP::tag_type;
+    using RDimR = typename BSplinesR::tag_type;
+    using RDimP = typename BSplinesP::tag_type;
 
 public:
     using SplineRP = ddc::ChunkSpan<double, ddc::DiscreteDomain<BSplinesR, BSplinesP>>;
@@ -49,8 +49,8 @@ public:
     };
 
 private:
-    using QDimR = InternalTagGenerator<DimR>;
-    using QDimP = InternalTagGenerator<DimP>;
+    using QDimR = InternalTagGenerator<RDimR>;
+    using QDimP = InternalTagGenerator<RDimP>;
     using QDimRMesh = ddc::NonUniformPointSampling<QDimR>;
     using QDimPMesh = ddc::NonUniformPointSampling<QDimP>;
     using QuadratureDomainR = ddc::DiscreteDomain<QDimRMesh>;
@@ -188,11 +188,11 @@ public:
 
         ddc::for_each(r_edges_dom, [&](ddc::DiscreteElement<RCellDim> i) {
             breaks_r(i) = ddc::Coordinate<QDimR>(
-                    ddc::get<DimR>(ddc::discrete_space<BSplinesR>().get_knot(i.uid())));
+                    ddc::get<RDimR>(ddc::discrete_space<BSplinesR>().get_knot(i.uid())));
         });
         ddc::for_each(p_edges_dom, [&](ddc::DiscreteElement<PCellDim> i) {
             breaks_p(i) = ddc::Coordinate<QDimP>(
-                    ddc::get<DimP>(ddc::discrete_space<BSplinesP>().get_knot(i.uid())));
+                    ddc::get<RDimP>(ddc::discrete_space<BSplinesP>().get_knot(i.uid())));
         });
 
         // Define quadrature points and weights
@@ -254,7 +254,7 @@ public:
             QuadratureMeshR ir = ddc::select<QDimRMesh>(irp);
             QuadratureMeshP ip = ddc::select<QDimPMesh>(irp);
 
-            const ddc::Coordinate<DimR, DimP> coord(get_coordinate(irp));
+            const ddc::Coordinate<RDimR, RDimP> coord(get_coordinate(irp));
 
             // Calculate the value
             ddc::discrete_space<PolarBSplines>().eval_basis(singular_vals, vals, coord);
@@ -282,7 +282,7 @@ public:
         ddc::for_each(all_quad_points, [&](QuadratureMeshRP const irp) {
             QuadratureMeshR const ir = ddc::select<QDimRMesh>(irp);
             QuadratureMeshP const ip = ddc::select<QDimPMesh>(irp);
-            ddc::Coordinate<DimR, DimP> coord(get_coordinate(ir), get_coordinate(ip));
+            ddc::Coordinate<RDimR, RDimP> coord(get_coordinate(ir), get_coordinate(ip));
             int_volume(ir, ip) = abs(mapping.jacobian(coord)) * weights_r(ir) * weights_p(ip);
         });
 
@@ -491,7 +491,7 @@ public:
     template <class RHSFunction, class Domain>
     void operator()(
             RHSFunction const& rhs,
-            ddc::ChunkSpan<ddc::Coordinate<DimR, DimP> const, Domain> const coords_eval,
+            ddc::ChunkSpan<ddc::Coordinate<RDimR, RDimP> const, Domain> const coords_eval,
             ddc::ChunkSpan<double, Domain> result) const
     {
         Eigen::VectorXd b(
@@ -507,7 +507,7 @@ public:
                     [&](QuadratureMeshRP const quad_idx) {
                         QuadratureMeshR const ir = ddc::select<QDimRMesh>(quad_idx);
                         QuadratureMeshP const ip = ddc::select<QDimPMesh>(quad_idx);
-                        ddc::Coordinate<DimR, DimP> coord(get_coordinate(ir), get_coordinate(ip));
+                        ddc::Coordinate<RDimR, RDimP> coord(get_coordinate(ir), get_coordinate(ip));
                         return rhs(coord) * singular_basis_vals_and_derivs(idx, ir, ip).value
                                * int_volume(ir, ip);
                     });
@@ -556,7 +556,7 @@ public:
                         [&](QuadratureMeshRP const quad_idx) {
                             QuadratureMeshR const ir = ddc::select<QDimRMesh>(quad_idx);
                             QuadratureMeshP const ip = ddc::select<QDimPMesh>(quad_idx);
-                            ddc::Coordinate<DimR, DimP>
+                            ddc::Coordinate<RDimR, RDimP>
                                     coord(get_coordinate(ir), get_coordinate(ip));
                             double rb = r_basis_vals_and_derivs(ib_r, ir).value;
                             double pb = p_basis_vals_and_derivs(ib_p, ip).value;
@@ -763,7 +763,7 @@ private:
                         EvalDeriv1DType> || std::is_same_v<TrialValDerivType, EvalDeriv2DType>);
 
         // Calculate coefficients at quadrature point
-        ddc::Coordinate<DimR, DimP> coord(get_coordinate(ir), get_coordinate(ip));
+        ddc::Coordinate<RDimR, RDimP> coord(get_coordinate(ir), get_coordinate(ip));
         const double alpha = spline_evaluator(coord, coeff_alpha);
         const double beta = spline_evaluator(coord, coeff_beta);
 
