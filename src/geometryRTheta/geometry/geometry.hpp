@@ -23,10 +23,11 @@
  */
 
 
+
 /**
- * @brief Define non periodic X dimension.
+ * @brief Define non periodic real R dimension.
  */
-struct DimX
+struct RDimR
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -35,31 +36,9 @@ struct DimX
     static bool constexpr PERIODIC = false;
 };
 /**
- * @brief Define non periodic Y dimension.
+ * @brief Define periodic real Theta dimension.
  */
-struct DimY
-{
-    /**
-     * @brief Define periodicity of the dimension.
-     * Here, not periodic.
-     */
-    static bool constexpr PERIODIC = false;
-};
-/**
- * @brief Define non periodic R dimension.
- */
-struct DimR
-{
-    /**
-     * @brief Define periodicity of the dimension.
-     * Here, not periodic.
-     */
-    static bool constexpr PERIODIC = false;
-};
-/**
- * @brief Define periodic Theta dimension.
- */
-struct DimP
+struct RDimP
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -68,27 +47,56 @@ struct DimP
     static bool constexpr PERIODIC = true;
 };
 
-using CoordR = ddc::Coordinate<DimR>;
-using CoordP = ddc::Coordinate<DimP>;
-using CoordRP = ddc::Coordinate<DimR, DimP>;
+using CoordR = ddc::Coordinate<RDimR>;
+using CoordP = ddc::Coordinate<RDimP>;
+using CoordRP = ddc::Coordinate<RDimR, RDimP>;
 
-int constexpr BSDegree = 3;
+int constexpr BSDegreeR = 3;
+int constexpr BSDegreeP = 3;
 
-using BSplinesR = NonUniformBSplines<DimR, BSDegree>;
-using BSplinesP = NonUniformBSplines<DimP, BSDegree>;
+bool constexpr BsplineOnUniformCellsR = false;
+bool constexpr BsplineOnUniformCellsP = false;
+
+using BSplinesR = std::conditional_t<
+        BsplineOnUniformCellsR,
+        UniformBSplines<RDimR, BSDegreeR>,
+        NonUniformBSplines<RDimR, BSDegreeR>>;
+using BSplinesP = std::conditional_t<
+        BsplineOnUniformCellsP,
+        UniformBSplines<RDimP, BSDegreeP>,
+        NonUniformBSplines<RDimP, BSDegreeP>>;
 using PolarBSplinesRP = PolarBSplines<BSplinesR, BSplinesP, 1>;
 
-using InterpPointsR
-        = GrevilleInterpolationPoints<BSplinesR, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-using InterpPointsP
-        = GrevilleInterpolationPoints<BSplinesP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+auto constexpr SplineRBoundary = RDimR::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
+auto constexpr SplinePBoundary = RDimP::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
 
+bool constexpr UniformMeshR = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsR,
+        SplineRBoundary,
+        SplineRBoundary,
+        BSDegreeR);
+bool constexpr UniformMeshP = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsP,
+        SplinePBoundary,
+        SplinePBoundary,
+        BSDegreeP);
 
-using IDimR = typename InterpPointsR::interpolation_mesh_type;
-using IDimP = typename InterpPointsP::interpolation_mesh_type;
+using IDimR = std::conditional_t<
+        UniformMeshR,
+        ddc::UniformPointSampling<RDimR>,
+        ddc::NonUniformPointSampling<RDimR>>;
+using IDimP = std::conditional_t<
+        UniformMeshP,
+        ddc::UniformPointSampling<RDimP>,
+        ddc::NonUniformPointSampling<RDimP>>;
 
-using SplineRBuilder = SplineBuilder<BSplinesR, IDimR, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-using SplinePBuilder = SplineBuilder<BSplinesP, IDimP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+using SplineInterpPointsR
+        = GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
+using SplineInterpPointsP
+        = GrevilleInterpolationPoints<BSplinesP, SplinePBoundary, SplinePBoundary>;
+
+using SplineRBuilder = SplineBuilder<BSplinesR, IDimR, SplineRBoundary, SplineRBoundary>;
+using SplinePBuilder = SplineBuilder<BSplinesP, IDimP, SplinePBoundary, SplinePBoundary>;
 using SplineRPBuilder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
 
 using SplineRPEvaluator = SplineEvaluator2D<BSplinesR, BSplinesP>;
@@ -162,9 +170,9 @@ using Spline2DView = ddc::ChunkSpan<double const, BSDomainRP>;
 
 // VELOCITY ----------------------------------------------------------
 /**
- * @brief Define non periodic R velocity dimension.
+ * @brief Define non periodic real R velocity dimension.
  */
-struct DimVr
+struct RDimVr
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -174,9 +182,9 @@ struct DimVr
 };
 
 /**
- * @brief Define periodic Theta velocity dimension.
+ * @brief Define periodic real Theta velocity dimension.
  */
-struct DimVp
+struct RDimVp
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -185,29 +193,59 @@ struct DimVp
     static bool constexpr PERIODIC = true;
 };
 
-using CoordVr = ddc::Coordinate<DimVr>;
-using CoordVp = ddc::Coordinate<DimVp>;
-using CoordVrVp = ddc::Coordinate<DimVr, DimVp>;
+using CoordVr = ddc::Coordinate<RDimVr>;
+using CoordVp = ddc::Coordinate<RDimVp>;
+using CoordVrVp = ddc::Coordinate<RDimVr, RDimVp>;
 
-int constexpr BSDegreeV = 3;
+int constexpr BSDegreeVr = 3;
+int constexpr BSDegreeVp = 3;
 
-using BSplinesVr = NonUniformBSplines<DimVr, BSDegreeV>;
-using BSplinesVp = NonUniformBSplines<DimVp, BSDegreeV>;
+bool constexpr BsplineOnUniformCellsVr = false;
+bool constexpr BsplineOnUniformCellsVp = false;
+
+using BSplinesVr = std::conditional_t<
+        BsplineOnUniformCellsVr,
+        UniformBSplines<RDimVr, BSDegreeVr>,
+        NonUniformBSplines<RDimVr, BSDegreeVr>>;
+using BSplinesVp = std::conditional_t<
+        BsplineOnUniformCellsVp,
+        UniformBSplines<RDimVp, BSDegreeVp>,
+        NonUniformBSplines<RDimVp, BSDegreeVp>>;
 using PolarBSplinesVrVp = PolarBSplines<BSplinesVr, BSplinesVp, 1>;
 
 
-using InterpPointsVr
-        = GrevilleInterpolationPoints<BSplinesVr, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-using InterpPointsVp
-        = GrevilleInterpolationPoints<BSplinesVp, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+
+auto constexpr SplineVrBoundary = RDimVr::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
+auto constexpr SplineVpBoundary = RDimVp::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
+
+bool constexpr UniformMeshVr = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsVr,
+        SplineVrBoundary,
+        SplineVrBoundary,
+        BSDegreeVr);
+bool constexpr UniformMeshVp = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsVp,
+        SplineVpBoundary,
+        SplineVpBoundary,
+        BSDegreeVp);
+
+using IDimVr = std::conditional_t<
+        UniformMeshVr,
+        ddc::UniformPointSampling<RDimVr>,
+        ddc::NonUniformPointSampling<RDimVr>>;
+using IDimVp = std::conditional_t<
+        UniformMeshVp,
+        ddc::UniformPointSampling<RDimVp>,
+        ddc::NonUniformPointSampling<RDimVp>>;
 
 
-using IDimVr = typename InterpPointsVr::interpolation_mesh_type;
-using IDimVp = typename InterpPointsVp::interpolation_mesh_type;
+using SplineInterpPointsVr
+        = GrevilleInterpolationPoints<BSplinesVr, SplineVrBoundary, SplineVrBoundary>;
+using SplineInterpPointsVp
+        = GrevilleInterpolationPoints<BSplinesVp, SplineVpBoundary, SplineVpBoundary>;
 
-
-using SplineVrBuilder = SplineBuilder<BSplinesVr, IDimVr, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-using SplineVpBuilder = SplineBuilder<BSplinesVp, IDimVp, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+using SplineVrBuilder = SplineBuilder<BSplinesVr, IDimVr, SplineVrBoundary, SplineVrBoundary>;
+using SplineVpBuilder = SplineBuilder<BSplinesVp, IDimVp, SplineVpBoundary, SplineVpBoundary>;
 using SplineVrVpBuilder = SplineBuilder2D<SplineVrBuilder, SplineVpBuilder>;
 
 
@@ -348,9 +386,20 @@ using DViewRPVrVp = ViewRPVrVp<double>;
 // CARTESIAN SPACE AND VELOCITY -------------------------------------
 // -- X DIMENSION ---------------------------------------------------
 /**
- * @brief Define non periodic X velocity dimension.
+ * @brief Define non periodic real X dimension.
  */
-struct DimVx
+struct RDimX
+{
+    /**
+     * @brief Define periodicity of the dimension.
+     * Here, not periodic.
+     */
+    static bool constexpr PERIODIC = false;
+};
+/**
+ * @brief Define non periodic real X velocity dimension.
+ */
+struct RDimVx
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -361,27 +410,58 @@ struct DimVx
 
 
 
-using CoordX = ddc::Coordinate<DimX>;
-using CoordVx = ddc::Coordinate<DimVx>;
-using CoordXVx = ddc::Coordinate<DimX, DimVx>;
+using CoordX = ddc::Coordinate<RDimX>;
+using CoordVx = ddc::Coordinate<RDimVx>;
+using CoordXVx = ddc::Coordinate<RDimX, RDimVx>;
 
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeVx = 3;
 
-using BSplinesX = UniformBSplines<DimX, BSDegreeX>;
-using BSplinesVx = UniformBSplines<DimVx, BSDegreeVx>;
+bool constexpr BsplineOnUniformCellsX = false;
+bool constexpr BsplineOnUniformCellsVx = false;
 
+using BSplinesX = std::conditional_t<
+        BsplineOnUniformCellsX,
+        UniformBSplines<RDimX, BSDegreeX>,
+        NonUniformBSplines<RDimX, BSDegreeX>>;
+using BSplinesVx = std::conditional_t<
+        BsplineOnUniformCellsVx,
+        UniformBSplines<RDimVx, BSDegreeVx>,
+        NonUniformBSplines<RDimVx, BSDegreeVx>>;
 
-auto constexpr SplineXBoundary = DimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
+auto constexpr SplineXBoundary = RDimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
 auto constexpr SplineVxBoundary = BoundCond::HERMITE;
 
-using InterpPointsX = GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
-using IDimX = typename InterpPointsX::interpolation_mesh_type;
-using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;
 
-using InterpPointsVx = GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
-using IDimVx = typename InterpPointsVx::interpolation_mesh_type;
+bool constexpr UniformMeshX = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsX,
+        SplineXBoundary,
+        SplineXBoundary,
+        BSDegreeX);
+bool constexpr UniformMeshVx = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsVx,
+        SplineVxBoundary,
+        SplineVxBoundary,
+        BSDegreeVx);
+
+using IDimX = std::conditional_t<
+        UniformMeshX,
+        ddc::UniformPointSampling<RDimX>,
+        ddc::NonUniformPointSampling<RDimX>>;
+using IDimVx = std::conditional_t<
+        UniformMeshVx,
+        ddc::UniformPointSampling<RDimVx>,
+        ddc::NonUniformPointSampling<RDimVx>>;
+
+using SplineInterpPointsX
+        = GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+using SplineInterpPointsVx
+        = GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+
+using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;
 using SplineVxBuilder = SplineBuilder<BSplinesVx, IDimVx, SplineVxBoundary, SplineVxBoundary>;
+
+
 
 // Species dimension
 using IDimSp = SpeciesInformation;
@@ -519,9 +599,20 @@ using DBSViewX = BSViewX<double>;
 
 // -- Y DIMENSION ---------------------------------------------------
 /**
- * @brief Define non periodic Y velocity dimension.
+ * @brief Define non periodic real Y dimension.
  */
-struct DimVy
+struct RDimY
+{
+    /**
+     * @brief Define periodicity of the dimension.
+     * Here, not periodic.
+     */
+    static bool constexpr PERIODIC = false;
+};
+/**
+ * @brief Define non periodic real Y velocity dimension.
+ */
+struct RDimVy
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -531,27 +622,60 @@ struct DimVy
 };
 
 
-using CoordY = ddc::Coordinate<DimY>;
-using CoordVy = ddc::Coordinate<DimVy>;
-using CoordYVy = ddc::Coordinate<DimY, DimVy>;
+using CoordY = ddc::Coordinate<RDimY>;
+using CoordVy = ddc::Coordinate<RDimVy>;
+using CoordYVy = ddc::Coordinate<RDimY, RDimVy>;
 
 int constexpr BSDegreeY = 3;
 int constexpr BSDegreeVy = 3;
 
-using BSplinesY = UniformBSplines<DimY, BSDegreeY>;
-using BSplinesVy = UniformBSplines<DimVy, BSDegreeVy>;
+
+bool constexpr BsplineOnUniformCellsY = false;
+bool constexpr BsplineOnUniformCellsVy = false;
+
+using BSplinesY = std::conditional_t<
+        BsplineOnUniformCellsY,
+        UniformBSplines<RDimY, BSDegreeY>,
+        NonUniformBSplines<RDimY, BSDegreeY>>;
+
+using BSplinesVy = std::conditional_t<
+        BsplineOnUniformCellsVy,
+        UniformBSplines<RDimVy, BSDegreeVy>,
+        NonUniformBSplines<RDimVy, BSDegreeVy>>;
 
 
-auto constexpr SplineYBoundary = DimY::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
+
+auto constexpr SplineYBoundary = RDimY::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
 auto constexpr SplineVyBoundary = BoundCond::HERMITE;
 
-using InterpPointsY = GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
-using IDimY = typename InterpPointsY::interpolation_mesh_type;
-using SplineYBuilder = SplineBuilder<BSplinesY, IDimY, SplineYBoundary, SplineYBoundary>;
+bool constexpr UniformMeshY = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsY,
+        SplineYBoundary,
+        SplineYBoundary,
+        BSDegreeY);
+bool constexpr UniformMeshVy = is_spline_interpolation_mesh_uniform(
+        BsplineOnUniformCellsVy,
+        SplineVyBoundary,
+        SplineVyBoundary,
+        BSDegreeVy);
 
-using InterpPointsVy = GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
-using IDimVy = typename InterpPointsVy::interpolation_mesh_type;
+using IDimY = std::conditional_t<
+        UniformMeshY,
+        ddc::UniformPointSampling<RDimY>,
+        ddc::NonUniformPointSampling<RDimY>>;
+using IDimVy = std::conditional_t<
+        UniformMeshVy,
+        ddc::UniformPointSampling<RDimVy>,
+        ddc::NonUniformPointSampling<RDimVy>>;
+
+using SplineInterpPointsY
+        = GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
+using SplineInterpPointsVy
+        = GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
+
+using SplineYBuilder = SplineBuilder<BSplinesY, IDimY, SplineYBoundary, SplineYBoundary>;
 using SplineVyBuilder = SplineBuilder<BSplinesVy, IDimVy, SplineVyBoundary, SplineVyBoundary>;
+
 
 // Species dimension
 using IndexY = ddc::DiscreteElement<IDimY>;
@@ -671,9 +795,9 @@ using DBSViewY = BSViewY<double>;
 
 
 // -- X Y DIMENSIONS ------------------------------------------------
-using CoordXY = ddc::Coordinate<DimX, DimY>;
-using CoordVxVy = ddc::Coordinate<DimVx, DimVy>;
-using CoordXYVxVy = ddc::Coordinate<DimX, DimY, DimVx, DimVy>;
+using CoordXY = ddc::Coordinate<RDimX, RDimY>;
+using CoordVxVy = ddc::Coordinate<RDimVx, RDimVy>;
+using CoordXYVxVy = ddc::Coordinate<RDimX, RDimY, RDimVx, RDimVy>;
 
 
 using SplineXYBuilder = SplineBuilder2D<SplineXBuilder, SplineYBuilder>;
