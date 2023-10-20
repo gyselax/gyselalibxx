@@ -41,8 +41,6 @@ public:
 private:
     using base_type = VectorFieldCommon<chunk_type, NDTag>;
 
-    using mdomain_type = typename base_type::mdomain_type;
-
 public:
     /**
      * @brief A type which can hold a reference to this VectorField.
@@ -64,6 +62,11 @@ public:
             std::experimental::layout_right,
             typename Allocator::memory_space>;
 
+    /**
+     * @brief The type of the domain on which the field is defined.
+     */
+    using mdomain_type = typename base_type::mdomain_type;
+
 private:
     /// Construct a VectorField on a domain with uninitialized values
     template <std::size_t... Is>
@@ -77,8 +80,8 @@ private:
 
     template <std::size_t... Is>
     VectorField(VectorField&& other, std::index_sequence<Is...> const&)
-        : base_type(chunk_type(
-                std::move(ddcHelpers::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
+        : base_type(
+                chunk_type(std::move(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
     {
     }
 
@@ -91,7 +94,7 @@ private:
     explicit VectorField(
             VectorFieldSpan<OElementType, Domain, NDTag, LayoutDomain, MemorySpace> field_span,
             std::index_sequence<Is...> const&)
-        : base_type(chunk_type(ddcHelpers::get<ddc::type_seq_element_t<Is, NDTag>>(field_span))...)
+        : base_type(chunk_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(field_span))...)
     {
     }
 

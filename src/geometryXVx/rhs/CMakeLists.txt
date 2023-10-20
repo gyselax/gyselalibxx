@@ -29,6 +29,7 @@ target_link_libraries("rhs_${GEOMETRY_VARIANT}"
         vcx::quadrature
         vcx::speciesinfo
         vcx::initialization_${GEOMETRY_VARIANT}
+	vcx::timestepper
         vcx::utils_${GEOMETRY_VARIANT}
         vcx::utils
 )

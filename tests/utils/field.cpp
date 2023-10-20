@@ -119,8 +119,8 @@ TEST(VectorField0DTest, VectorFieldSpanConversionConstructor)
 {
     Coord constexpr factor(1.391, 2.444);
     VectorField0D<double> chunk(dom_0d);
-    ddcHelpers::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
-    ddcHelpers::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
+    ddcHelper::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
+    ddcHelper::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
 
     VectorField0D<double> chunk2(chunk.span_view());
     EXPECT_EQ(chunk2.domain(), dom_0d);
@@ -134,8 +134,8 @@ TEST(VectorField1DTest, VectorFieldSpanConversionConstructor)
     VectorFieldX<double> chunk(dom_x);
     for (auto&& ix : chunk.domain()) {
         Coord val = double(ix.uid()) * factor;
-        ddcHelpers::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelpers::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
     }
 
     VectorFieldX<double> chunk2(chunk.span_view());
@@ -150,8 +150,8 @@ TEST(VectorField0DTest, MoveConstructor)
 {
     Coord constexpr factor(1.391, 2.444);
     VectorField0D<double> chunk(dom_0d);
-    ddcHelpers::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
-    ddcHelpers::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
+    ddcHelper::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
+    ddcHelper::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
 
     VectorField0D<double> chunk2(std::move(chunk));
     EXPECT_EQ(chunk2.domain(), dom_0d);
@@ -165,8 +165,8 @@ TEST(VectorField1DTest, MoveConstructor)
     VectorFieldX<double> chunk(dom_x);
     for (auto&& ix : chunk.domain()) {
         Coord val = double(ix.uid()) * factor;
-        ddcHelpers::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelpers::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
     }
 
     VectorFieldX<double> chunk2(std::move(chunk));
@@ -183,8 +183,8 @@ TEST(VectorField0DTest, MoveAssignment)
 {
     Coord constexpr factor(1.391, 2.444);
     VectorField0D<double> chunk(dom_0d);
-    ddcHelpers::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
-    ddcHelpers::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
+    ddcHelper::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
+    ddcHelper::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
 
     VectorField0D<double> chunk2(DDom0D(lbound_0d, DVect0D()));
     chunk2 = std::move(chunk);
@@ -199,8 +199,8 @@ TEST(VectorField1DTest, MoveAssignment)
     VectorFieldX<double> chunk(dom_x);
     for (auto&& ix : chunk.domain()) {
         Coord val = double(ix.uid()) * factor;
-        ddcHelpers::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelpers::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
     }
 
     VectorFieldX<double> chunk2(DDomX(lbound_x, DVectX(0)));
@@ -218,8 +218,8 @@ TEST(VectorField0DTest, Swap)
 {
     Coord constexpr factor(1.391, 2.444);
     VectorField0D<double> chunk(dom_0d);
-    ddcHelpers::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
-    ddcHelpers::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
+    ddcHelper::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
+    ddcHelper::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
 
     DDom0D empty_domain(lbound_0d, DVect0D());
     VectorField0D<double> chunk2(empty_domain);
@@ -237,8 +237,8 @@ TEST(VectorField1DTest, Swap)
     VectorFieldX<double> chunk(dom_x);
     for (auto&& ix : chunk.domain()) {
         Coord val = double(ix.uid()) * factor;
-        ddcHelpers::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelpers::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
     }
 
     DDomX empty_domain(lbound_x, DVectX(0));
@@ -264,8 +264,8 @@ TEST(VectorField1DTest, AccessConst)
     VectorFieldX<double> const& chunk_cref = chunk;
     for (auto&& ix : chunk.domain()) {
         Coord val = double(ix.uid()) * factor;
-        ddcHelpers::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelpers::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
         EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk_cref(ix)));
         EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk_cref(ix)));
@@ -278,8 +278,8 @@ TEST(VectorField1DTest, Access)
     VectorFieldX<double> chunk(dom_x);
     for (auto&& ix : chunk.domain()) {
         Coord val = double(ix.uid()) * factor;
-        ddcHelpers::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelpers::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
         EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk(ix)));
         EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk(ix)));
@@ -292,8 +292,8 @@ TEST(VectorField1DTest, SpanCview)
     VectorFieldX<double> chunk(dom_x);
     for (auto&& ix : chunk.domain()) {
         Coord val = double(ix.uid()) * factor;
-        ddcHelpers::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelpers::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
         EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk.span_cview()(ix)));
         EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk.span_cview()(ix)));
@@ -307,8 +307,8 @@ TEST(VectorField1DTest, ViewConst)
     VectorFieldX<double> const& chunk_cref = chunk;
     for (auto&& ix : chunk.domain()) {
         Coord val = double(ix.uid()) * factor;
-        ddcHelpers::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelpers::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
         EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk_cref.span_view()(ix)));
         EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk_cref.span_view()(ix)));
@@ -322,8 +322,8 @@ TEST(VectorField1DTest, View)
     VectorFieldSpanX<double> chunk_span = chunk.span_view();
     for (auto&& ix : chunk.domain()) {
         Coord val = double(ix.uid()) * factor;
-        ddcHelpers::get<Tag1>(chunk_span)(ix) = ddc::get<Tag1>(val);
-        ddcHelpers::get<Tag2>(chunk_span)(ix) = ddc::get<Tag2>(val);
+        ddcHelper::get<Tag1>(chunk_span)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(chunk_span)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
         EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk(ix)));
         EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk(ix)));
@@ -374,7 +374,7 @@ TEST(VectorField1DTest, DomainX)
 TEST(VectorField1DTest, GetDomainX)
 {
     VectorFieldX<double> chunk(dom_x);
-    EXPECT_EQ(dom_x, ddcHelpers::get_domain<DDimX>(chunk));
+    EXPECT_EQ(dom_x, ddcHelper::get_domain<DDimX>(chunk));
 }
 
 
@@ -382,11 +382,11 @@ TEST(VectorField1DTest, Deepcopy)
 {
     VectorFieldX<double> chunk(dom_x);
     for (auto&& ix : chunk.domain()) {
-        ddcHelpers::get<Tag1>(chunk)(ix) = 1.001 * ix.uid();
-        ddcHelpers::get<Tag2>(chunk)(ix) = 0.0;
+        ddcHelper::get<Tag1>(chunk)(ix) = 1.001 * ix.uid();
+        ddcHelper::get<Tag2>(chunk)(ix) = 0.0;
     }
     VectorFieldX<double> chunk2(chunk.domain());
-    ddcHelpers::deepcopy(chunk2, chunk);
+    ddcHelper::deepcopy(chunk2, chunk);
     for (auto&& ix : chunk.domain()) {
         // we expect exact equality, not EXPECT_DOUBLE_EQ: these are copy
         EXPECT_EQ(ddc::get<Tag1>(chunk2(ix)), ddc::get<Tag1>(chunk(ix)));
@@ -404,8 +404,8 @@ TEST(VectorField2DTest, Access)
     VectorFieldXY<double> chunk(dom_x_y);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
-            ddcHelpers::get<Tag1>(chunk)(ix, iy) = 1.357 * ix.uid();
-            ddcHelpers::get<Tag2>(chunk)(ix, iy) = 1.159 * iy.uid();
+            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1.357 * ix.uid();
+            ddcHelper::get<Tag2>(chunk)(ix, iy) = 1.159 * iy.uid();
             // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
             EXPECT_EQ(ddc::get<Tag1>(chunk(ix, iy)), ddc::get<Tag1>(chunk(ix, iy)));
             EXPECT_EQ(ddc::get<Tag2>(chunk(ix, iy)), ddc::get<Tag2>(chunk(ix, iy)));
@@ -418,8 +418,8 @@ TEST(VectorField2DTest, AccessReordered)
     VectorFieldXY<double> chunk(dom_x_y);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
-            ddcHelpers::get<Tag1>(chunk)(ix, iy) = 1.455 * ix.uid();
-            ddcHelpers::get<Tag2>(chunk)(ix, iy) = 1.522 * iy.uid();
+            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1.455 * ix.uid();
+            ddcHelper::get<Tag2>(chunk)(ix, iy) = 1.522 * iy.uid();
             // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
             EXPECT_EQ(ddc::get<Tag1>(chunk(iy, ix)), ddc::get<Tag1>(chunk(ix, iy)));
             EXPECT_EQ(ddc::get<Tag2>(chunk(iy, ix)), ddc::get<Tag2>(chunk(ix, iy)));
@@ -432,8 +432,8 @@ TEST(VectorField2DTest, Cview)
     VectorFieldXY<double> chunk(dom_x_y);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
-            ddcHelpers::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
-            ddcHelpers::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
+            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
+            ddcHelper::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
         }
     }
     auto cview = chunk.span_cview();
@@ -454,8 +454,8 @@ TEST(VectorField2DTest, SliceCoordX)
     VectorFieldXY<double> const& chunk_cref = chunk;
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
-            ddcHelpers::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
-            ddcHelpers::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
+            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
+            ddcHelper::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
         }
     }
 
@@ -464,11 +464,11 @@ TEST(VectorField2DTest, SliceCoordX)
                  std::decay_t<decltype(chunk_y)>::layout_type,
                  std::experimental::layout_right>));
     EXPECT_EQ(
-            ddcHelpers::get<Tag1>(chunk_y).extent<DDimY>(),
-            ddcHelpers::get<Tag1>(chunk).extent<DDimY>());
+            ddcHelper::get<Tag1>(chunk_y).extent<DDimY>(),
+            ddcHelper::get<Tag1>(chunk).extent<DDimY>());
     EXPECT_EQ(
-            ddcHelpers::get<Tag2>(chunk_y).extent<DDimY>(),
-            ddcHelpers::get<Tag2>(chunk).extent<DDimY>());
+            ddcHelper::get<Tag2>(chunk_y).extent<DDimY>(),
+            ddcHelper::get<Tag2>(chunk).extent<DDimY>());
     for (auto&& ix : chunk_cref.domain<DDimY>()) {
         // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
         EXPECT_EQ(ddc::get<Tag1>(chunk_y(ix)), ddc::get<Tag1>(chunk_cref(slice_x_val, ix)));
@@ -484,8 +484,8 @@ TEST(VectorField2DTest, SliceCoordY)
     VectorFieldXY<double> const& chunk_cref = chunk;
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
-            ddcHelpers::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
-            ddcHelpers::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
+            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
+            ddcHelper::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
         }
     }
 
@@ -494,11 +494,11 @@ TEST(VectorField2DTest, SliceCoordY)
                  std::decay_t<decltype(chunk_x)>::layout_type,
                  std::experimental::layout_stride>));
     EXPECT_EQ(
-            ddcHelpers::get<Tag1>(chunk_x).extent<DDimX>(),
-            ddcHelpers::get<Tag1>(chunk).extent<DDimX>());
+            ddcHelper::get<Tag1>(chunk_x).extent<DDimX>(),
+            ddcHelper::get<Tag1>(chunk).extent<DDimX>());
     EXPECT_EQ(
-            ddcHelpers::get<Tag2>(chunk_x).extent<DDimX>(),
-            ddcHelpers::get<Tag2>(chunk).extent<DDimX>());
+            ddcHelper::get<Tag2>(chunk_x).extent<DDimX>(),
+            ddcHelper::get<Tag2>(chunk).extent<DDimX>());
     for (auto&& ix : chunk_cref.domain<DDimX>()) {
         // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
         EXPECT_EQ(ddc::get<Tag1>(chunk_x(ix)), ddc::get<Tag1>(chunk_cref(ix, slice_y_val)));
@@ -514,8 +514,8 @@ TEST(VectorField2DTest, SliceDomainX)
     VectorFieldXY<double> const& chunk_cref = chunk;
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
-            ddcHelpers::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
-            ddcHelpers::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
+            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
+            ddcHelper::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
         }
     }
 
@@ -524,10 +524,10 @@ TEST(VectorField2DTest, SliceDomainX)
                  std::decay_t<decltype(subchunk_x)>::layout_type,
                  std::experimental::layout_right>));
 
-    EXPECT_EQ(ddcHelpers::get<Tag1>(subchunk_x).extent<DDimX>(), subdomain_x.size());
-    EXPECT_EQ(ddcHelpers::get<Tag2>(subchunk_x).extent<DDimY>(), chunk.domain<DDimY>().size());
-    EXPECT_EQ(ddcHelpers::get<Tag1>(subchunk_x).extent<DDimX>(), subdomain_x.size());
-    EXPECT_EQ(ddcHelpers::get<Tag2>(subchunk_x).extent<DDimY>(), chunk.domain<DDimY>().size());
+    EXPECT_EQ(ddcHelper::get<Tag1>(subchunk_x).extent<DDimX>(), subdomain_x.size());
+    EXPECT_EQ(ddcHelper::get<Tag2>(subchunk_x).extent<DDimY>(), chunk.domain<DDimY>().size());
+    EXPECT_EQ(ddcHelper::get<Tag1>(subchunk_x).extent<DDimX>(), subdomain_x.size());
+    EXPECT_EQ(ddcHelper::get<Tag2>(subchunk_x).extent<DDimY>(), chunk.domain<DDimY>().size());
     for (auto&& ix : subchunk_x.domain<DDimX>()) {
         for (auto&& iy : subchunk_x.domain<DDimY>()) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
@@ -571,8 +571,8 @@ TEST(VectorField2DTest, SliceDomainY)
     VectorFieldXY<double> const& chunk_cref = chunk;
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
-            ddcHelpers::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
-            ddcHelpers::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
+            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
+            ddcHelper::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
         }
     }
     auto&& subchunk_y = chunk_cref[subdomain_y];
@@ -580,10 +580,10 @@ TEST(VectorField2DTest, SliceDomainY)
                  std::decay_t<decltype(subchunk_y)>::layout_type,
                  std::experimental::layout_stride>));
 
-    EXPECT_EQ(ddcHelpers::get<Tag1>(subchunk_y).extent<DDimX>(), chunk.domain<DDimX>().size());
-    EXPECT_EQ(ddcHelpers::get<Tag1>(subchunk_y).extent<DDimY>(), subdomain_y.size());
-    EXPECT_EQ(ddcHelpers::get<Tag2>(subchunk_y).extent<DDimX>(), chunk.domain<DDimX>().size());
-    EXPECT_EQ(ddcHelpers::get<Tag2>(subchunk_y).extent<DDimY>(), subdomain_y.size());
+    EXPECT_EQ(ddcHelper::get<Tag1>(subchunk_y).extent<DDimX>(), chunk.domain<DDimX>().size());
+    EXPECT_EQ(ddcHelper::get<Tag1>(subchunk_y).extent<DDimY>(), subdomain_y.size());
+    EXPECT_EQ(ddcHelper::get<Tag2>(subchunk_y).extent<DDimX>(), chunk.domain<DDimX>().size());
+    EXPECT_EQ(ddcHelper::get<Tag2>(subchunk_y).extent<DDimY>(), subdomain_y.size());
     for (auto&& ix : subchunk_y.domain<DDimX>()) {
         for (auto&& iy : subchunk_y.domain<DDimY>()) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
@@ -598,12 +598,12 @@ TEST(VectorField2DTest, Deepcopy)
     VectorFieldXY<double> chunk(dom_x_y);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
-            ddcHelpers::get<Tag1>(chunk)(ix, iy) = 1.739 * ix.uid();
-            ddcHelpers::get<Tag2>(chunk)(ix, iy) = 1.412 * iy.uid();
+            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1.739 * ix.uid();
+            ddcHelper::get<Tag2>(chunk)(ix, iy) = 1.412 * iy.uid();
         }
     }
     VectorFieldXY<double> chunk2(chunk.domain());
-    ddcHelpers::deepcopy(chunk2, chunk);
+    ddcHelper::deepcopy(chunk2, chunk);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
@@ -618,8 +618,8 @@ TEST(VectorField2DTest, DeepcopyReordered)
     VectorFieldXY<double> chunk(dom_x_y);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
-            ddcHelpers::get<Tag1>(chunk)(ix, iy) = 1.739 * ix.uid();
-            ddcHelpers::get<Tag2>(chunk)(ix, iy) = 1.412 * iy.uid();
+            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1.739 * ix.uid();
+            ddcHelper::get<Tag2>(chunk)(ix, iy) = 1.412 * iy.uid();
         }
     }
     VectorFieldYX<double> chunk2(ddc::select<DDimY, DDimX>(chunk.domain()));
@@ -627,7 +627,7 @@ TEST(VectorField2DTest, DeepcopyReordered)
             chunk.domain(),
             chunk2.get<Tag1>().data_handle(),
             chunk2.get<Tag2>().data_handle());
-    ddcHelpers::deepcopy(chunk2_view, chunk);
+    ddcHelper::deepcopy(chunk2_view, chunk);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
