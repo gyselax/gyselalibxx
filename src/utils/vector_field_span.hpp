@@ -52,8 +52,6 @@ public:
 private:
     using base_type = VectorFieldCommon<chunk_type, NDTag>;
 
-    using mdomain_type = typename base_type::mdomain_type;
-
 public:
     /**
      * @brief A type which can hold a modifiable reference to a VectorField.
@@ -76,6 +74,11 @@ public:
      */
     using layout_type = LayoutStridedPolicy;
 
+    /**
+     * @brief The type of the domain on which the field is defined.
+     */
+    using mdomain_type = typename base_type::mdomain_type;
+
 private:
     template <class, class, class, class, class>
     friend class VectorFieldSpan;
@@ -84,7 +87,7 @@ private:
     constexpr VectorFieldSpan(
             VectorField<OElementType, Domain, NDTag, Allocator>& other,
             std::index_sequence<Is...> const&) noexcept
-        : base_type((chunk_type(ddcHelpers::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
+        : base_type((chunk_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
     {
     }
 
@@ -101,7 +104,7 @@ private:
     constexpr VectorFieldSpan(
             VectorField<OElementType, Domain, NDTag, Allocator> const& other,
             std::index_sequence<Is...> const&) noexcept
-        : base_type((chunk_type(ddcHelpers::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
+        : base_type((chunk_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
     {
     }
 
@@ -117,10 +120,14 @@ private:
      */
     template <class OElementType, std::size_t... Is>
     constexpr VectorFieldSpan(
-            VectorFieldSpan<OElementType, mdomain_type, LayoutStridedPolicy, MemorySpace> const&
-                    other,
+            VectorFieldSpan<
+                    OElementType,
+                    mdomain_type,
+                    NDTag,
+                    LayoutStridedPolicy,
+                    MemorySpace> const& other,
             std::index_sequence<Is...> const&) noexcept
-        : base_type((ddcHelpers::get<ddc::type_seq_element_t<Is, NDTag>>(other))...)
+        : base_type((ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other))...)
     {
     }
 
@@ -180,9 +187,12 @@ public:
      * @param other the VectorFieldSpan to move
      */
     template <class OElementType>
-    constexpr VectorFieldSpan(
-            VectorFieldSpan<OElementType, mdomain_type, LayoutStridedPolicy, MemorySpace> const&
-                    other) noexcept
+    constexpr VectorFieldSpan(VectorFieldSpan<
+                              OElementType,
+                              mdomain_type,
+                              NDTag,
+                              LayoutStridedPolicy,
+                              MemorySpace> const& other) noexcept
         : VectorFieldSpan(other, std::make_index_sequence<base_type::NDims> {})
     {
     }
