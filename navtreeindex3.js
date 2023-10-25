@@ -1,5 +1,11 @@
 var NAVTREEINDEX3 =
 {
+"classUniformBSplines_1_1Impl.html#a712f3e4a6ecf72d48c808f0f7decbfb9":[10,112,0,7],
+"classUniformBSplines_1_1Impl.html#a7596bfb1ab533bec4752a86b58551428":[10,112,0,8],
+"classUniformBSplines_1_1Impl.html#a7f8da130a3163f992a5179189a7c9d5d":[10,112,0,11],
+"classUniformBSplines_1_1Impl.html#a82c7f587af6e947bed8a897243a0e229":[10,112,0,6],
+"classUniformBSplines_1_1Impl.html#a950c1075bc1aac8ee83188c2c3bf446c":[10,112,0,0],
+"classUniformBSplines_1_1Impl.html#aafd958f6cf9eebff6b36d09e56b7d32f":[10,112,0,5],
 "classUniformBSplines_1_1Impl.html#abfe2a70e17f6ac8ff2c7c2fd204061e7":[10,112,0,19],
 "classUniformBSplines_1_1Impl.html#ac909268e7b4b5410d8febcf74b9bd412":[10,112,0,1],
 "classUniformBSplines_1_1Impl.html#ace2f1fc78a496b71bb22baa456742a38":[10,112,0,15],
@@ -243,11 +249,5 @@ var NAVTREEINDEX3 =
 "docs_CODING_STANDARD.html#Cxx_Features":[4,0],
 "docs_CODING_STANDARD.html#Naming":[4,2],
 "docs_CODING_STANDARD.html#Operators":[4,4],
-"docs_CODING_STANDARD.html#Parameter_passing":[4,1],
-"docs_CODING_STANDARD.html#Style":[4,3],
-"docs_CODING_STANDARD.html#autotoc_md10":[8,1],
-"docs_CODING_STANDARD.html#autotoc_md11":[9],
-"docs_CODING_STANDARD.html#autotoc_md6":[6],
-"docs_CODING_STANDARD.html#autotoc_md7":[7],
-"docs_CODING_STANDARD.html#autotoc_md8":[8]
+"docs_CODING_STANDARD.html#Parameter_passing":[4,1]
 };

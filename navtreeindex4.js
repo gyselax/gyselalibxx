@@ -1,5 +1,11 @@
 var NAVTREEINDEX4 =
 {
+"docs_CODING_STANDARD.html#Style":[4,3],
+"docs_CODING_STANDARD.html#autotoc_md10":[8,1],
+"docs_CODING_STANDARD.html#autotoc_md11":[9],
+"docs_CODING_STANDARD.html#autotoc_md6":[6],
+"docs_CODING_STANDARD.html#autotoc_md7":[7],
+"docs_CODING_STANDARD.html#autotoc_md8":[8],
 "docs_CODING_STANDARD.html#autotoc_md9":[8,0],
 "docs_Using_git.html":[5],
 "docs_Using_git.html#Branches":[5,0],
