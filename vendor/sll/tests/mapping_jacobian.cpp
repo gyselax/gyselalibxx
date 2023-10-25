@@ -189,7 +189,7 @@ TEST_P(InverseJacobianMatrix, InverseMatrixCzarMap)
     ddc::for_each(grid, [&](IndexRP const irp) {
         coords(irp) = CoordRP(
                 r_min + dr * ddc::select<IDimR>(irp).uid(),
-                p_min + dp * ddc::select<IDimR>(irp).uid());
+                p_min + dp * ddc::select<IDimP>(irp).uid());
     });
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
