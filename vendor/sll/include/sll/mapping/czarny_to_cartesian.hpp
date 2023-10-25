@@ -29,9 +29,14 @@
  * 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}  \right)^2 }
  * +  \sin(\theta)\frac{e\xi }{ 2- \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }@f$
  *
- * @f$ J_{22}(r,\theta)  =   r \sin(\theta)\frac{e\epsilon \xi r \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+ * @f$ J_{22}(r,\theta)  =   r \sin(\theta)\frac{- e\epsilon \xi r \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
  * 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right)^2 }
  * +  r\cos(\theta)\frac{e\xi }{ 2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }@f$.
+ *
+ *
+ * and
+ * @f$ \det(J(r, \theta)) = \frac{- r}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}
+ *  \frac{1}{2 -  \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}. @f$
  *
  *
  * @see AnalyticalInvertibleCurvilinear2DToCartesian
@@ -172,6 +177,16 @@ public:
         return ddc::Coordinate<DimR, DimP>(r, theta);
     }
 
+    double jacobian(ddc::Coordinate<DimR, DimP> const& coord) const final
+    {
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
+        const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
+        return -r / std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta))) * m_e * xi
+               / (2 - std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta))));
+    }
+
+
     void jacobian_matrix(ddc::Coordinate<DimR, DimP> const& coord, Matrix_2x2& matrix) const final
     {
         const double r = ddc::get<DimR>(coord);
@@ -240,5 +255,95 @@ public:
         return r
                * (-m_e * m_epsilon * r * sin_theta * sin_theta * xi / (tmp2 * tmp2 * tmp1)
                   + m_e * cos_theta * xi / tmp2);
+    }
+
+    void inv_jacobian_matrix(ddc::Coordinate<DimR, DimP> const& coord, Matrix_2x2& matrix)
+            const final
+    {
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
+
+        assert(r >= 1e-15);
+
+        const double sin_theta = std::sin(theta);
+        const double cos_theta = std::cos(theta);
+        const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
+        const double divisor = 2 - std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+
+        const double fact_1 = 1 / std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+        const double fact_2 = m_e * m_epsilon * xi * r * sin_theta * fact_1 / divisor / divisor;
+        const double fact_3 = m_e * xi / divisor;
+
+        matrix[0][0] = -1 / fact_1 * (-sin_theta * fact_2 + cos_theta * fact_3) / fact_3;
+        matrix[0][1] = sin_theta / fact_3;
+        matrix[1][0] = 1 / r / fact_1 * (cos_theta * fact_2 + sin_theta * fact_3) / fact_3;
+        matrix[1][1] = 1 / r * cos_theta / fact_3;
+    }
+
+
+
+    double inv_jacobian_11(ddc::Coordinate<DimR, DimP> const& coord) const final
+    {
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
+
+        const double sin_theta = std::sin(theta);
+        const double cos_theta = std::cos(theta);
+        const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
+        const double divisor = 2 - std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+
+        const double fact_1 = 1 / std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+        const double fact_2 = m_e * m_epsilon * xi * r * sin_theta * fact_1 / divisor / divisor;
+        const double fact_3 = m_e * xi / divisor;
+
+        return -1 / fact_1 * (-sin_theta * fact_2 + cos_theta * fact_3) / fact_3;
+    }
+
+    double inv_jacobian_12(ddc::Coordinate<DimR, DimP> const& coord) const final
+    {
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
+
+        const double sin_theta = std::sin(theta);
+        const double cos_theta = std::cos(theta);
+        const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
+        const double divisor = 2 - std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+
+        const double fact_3 = m_e * xi / divisor;
+        return sin_theta / fact_3;
+    }
+
+    double inv_jacobian_21(ddc::Coordinate<DimR, DimP> const& coord) const final
+    {
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
+
+        assert(r >= 1e-15);
+
+        const double sin_theta = std::sin(theta);
+        const double cos_theta = std::cos(theta);
+        const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
+        const double divisor = 2 - std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+
+        const double fact_1 = 1 / std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+        const double fact_2 = m_e * m_epsilon * xi * r * sin_theta * fact_1 / divisor / divisor;
+        const double fact_3 = m_e * xi / divisor;
+
+        return 1 / r / fact_1 * (cos_theta * fact_2 + sin_theta * fact_3) / fact_3;
+    }
+
+    double inv_jacobian_22(ddc::Coordinate<DimR, DimP> const& coord) const final
+    {
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
+
+        assert(r >= 1e-15);
+
+        const double cos_theta = std::cos(theta);
+        const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
+        const double divisor = 2 - std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * cos_theta));
+
+        const double fact_3 = m_e * xi / divisor;
+        return 1 / r * cos_theta / fact_3;
     }
 };
