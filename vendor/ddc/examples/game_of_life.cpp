@@ -71,12 +71,18 @@ int main()
             ddc::DiscreteElement<DDimX, DDimY>(1, 1),
             ddc::DiscreteVector<DDimX, DDimY>(length - 2, height - 2));
 
-    ddc::Chunk
-            cells_in_host_alloc(domain_xy, ddc::HostAllocator<cell>());
-    ddc::Chunk
-            cells_in_dev_alloc(domain_xy, ddc::DeviceAllocator<cell>());
-    ddc::Chunk
-            cells_out_dev_alloc(domain_xy, ddc::DeviceAllocator<cell>());
+    ddc::Chunk cells_in_host_alloc(
+            "cells_in_host",
+            domain_xy,
+            ddc::HostAllocator<cell>());
+    ddc::Chunk cells_in_dev_alloc(
+            "cells_in_dev",
+            domain_xy,
+            ddc::DeviceAllocator<cell>());
+    ddc::Chunk cells_out_dev_alloc(
+            "cells_out_dev",
+            domain_xy,
+            ddc::DeviceAllocator<cell>());
 
     ddc::ChunkSpan cells_in = cells_in_dev_alloc.span_view();
     ddc::ChunkSpan cells_out = cells_out_dev_alloc.span_view();

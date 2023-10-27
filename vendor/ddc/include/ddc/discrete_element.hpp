@@ -87,10 +87,10 @@ KOKKOS_FUNCTION constexpr DiscreteElement<QueryTag> const& take(
         DiscreteElement<TailTags> const&... tags)
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
-    static_assert(
-            !type_seq_contains_v<detail::TypeSeq<HeadTag>, detail::TypeSeq<TailTags...>>,
-            "ERROR: tag redundant");
     if constexpr (std::is_same_v<QueryTag, HeadTag>) {
+        static_assert(
+                !type_seq_contains_v<detail::TypeSeq<QueryTag>, detail::TypeSeq<TailTags...>>,
+                "ERROR: tag redundant");
         return head;
     } else {
         static_assert(sizeof...(TailTags) > 0, "ERROR: tag not found");

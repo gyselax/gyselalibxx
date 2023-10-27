@@ -3,6 +3,7 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 #include <type_traits>
 
 #include <Kokkos_Core.hpp>
@@ -48,6 +49,11 @@ public:
     [[nodiscard]] T* allocate(std::size_t n) const
     {
         return static_cast<T*>(Kokkos::kokkos_malloc<MemorySpace>(sizeof(T) * n));
+    }
+
+    [[nodiscard]] T* allocate(std::string const& label, std::size_t n) const
+    {
+        return static_cast<T*>(Kokkos::kokkos_malloc<MemorySpace>(label, sizeof(T) * n));
     }
 
     void deallocate(T* p, std::size_t) const

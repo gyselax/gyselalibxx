@@ -187,28 +187,21 @@ KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, QueryTags...> select
 namespace detail {
 
 template <class QueryTag, class ElementType, class HeadTag, class... TailTags>
-KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, QueryTag> const& take_impl(
+KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
         detail::TaggedVector<ElementType, HeadTag> const& head,
         detail::TaggedVector<ElementType, TailTags> const&... tags)
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
-    static_assert(
-            !type_seq_contains_v<detail::TypeSeq<HeadTag>, detail::TypeSeq<TailTags...>>,
-            "ERROR: tag redundant");
     if constexpr (std::is_same_v<QueryTag, HeadTag>) {
+        static_assert(
+                !type_seq_contains_v<detail::TypeSeq<QueryTag>, detail::TypeSeq<TailTags...>>,
+                "ERROR: tag redundant");
         return head;
     } else {
         static_assert(sizeof...(TailTags) > 0, "ERROR: tag not found");
-        return take_impl<QueryTag>(tags...);
+        return take<QueryTag>(tags...);
     }
     DDC_IF_NVCC_THEN_POP
-}
-
-template <class QueryTag, class ElementType, class... Tags>
-KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
-        detail::TaggedVector<ElementType, Tags> const&... tags)
-{
-    return take_impl<QueryTag>(tags...);
 }
 
 
@@ -291,7 +284,7 @@ public:
     KOKKOS_FUNCTION constexpr TaggedVector& operator=(
             TaggedVector<ElementType, OTags...> const& other) noexcept
     {
-        m_values = other.m_values;
+        ((this->get<Tags>() = other.template get<Tags>()), ...);
         return *this;
     }
 
@@ -299,7 +292,7 @@ public:
     KOKKOS_FUNCTION constexpr TaggedVector& operator=(
             TaggedVector<ElementType, OTags...>&& other) noexcept
     {
-        m_values = std::move(other.m_values);
+        ((this->get<Tags>() = std::move(other.template get<Tags>())), ...);
         return *this;
     }
 

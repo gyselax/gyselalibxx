@@ -8,10 +8,7 @@ As usual, the file starts with a few includes that will be used in the code.
 
 \snippet heat_equation.cpp includes
 
-As you can see, DDC includes all follow the same convention: `<ddc/SYMBOL>` where `SYMBOL` is a
-the name of a DDC symbol.
-So for example, in order to use a class named `Chunk`, you should include `<ddc/Chunk>` and to use a
-free function template named `for_each`, you should include `<ddc/for_each>`.
+As you can see, to use DDC, we have to include `<ddc/ddc.hpp>`
 
 Then, we define the value of some parameters that would typically be read from some form of
 configuration file in a more realistic code.
@@ -135,7 +132,7 @@ Then we handle the domains for the simulated time dimension.
 
 # Data allocation
 
-We allocate two 2D Chunks along the X and Y dimensions which will be used to map temperature to the domains' points at t and t+dt.
+We allocate two 2D Chunks along the X and Y dimensions which will be used to map temperature to the domains' points at t and t+dt. When constructing the Chunks one can give an optional string to label the memory allocations. This helps debugging and profiling applications using the Kokkos tools, see also [Kokkos Tools](https://github.com/kokkos/kokkos-tools).
 
 \snippet heat_equation.cpp data allocation
 
