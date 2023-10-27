@@ -1,4 +1,7 @@
 // SPDX-License-Identifier: MIT
+
+#include <string_view>
+
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
@@ -267,6 +270,12 @@ TEST(Chunk1DTest, View)
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
         EXPECT_EQ(chunk(ix), factor * ix.uid());
     }
+}
+
+TEST(Chunk1DTest, Label)
+{
+    ChunkX<double> chunk("label-test", dom_x);
+    EXPECT_EQ(chunk.label(), std::string_view("label-test"));
 }
 
 // \}
