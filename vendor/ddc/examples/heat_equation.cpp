@@ -7,8 +7,6 @@
 #include <numeric>
 
 #include <ddc/ddc.hpp>
-
-#include <Kokkos_Core.hpp>
 //! [includes]
 
 
@@ -199,6 +197,7 @@ int main(int argc, char** argv)
     // Maps temperature into the full domain (including ghosts) twice:
     // - once for the last fully computed time-step
     ddc::Chunk ghosted_last_temp(
+            "ghosted_last_temp",
             ddc::DiscreteDomain<
                     DDimX,
                     DDimY>(ghosted_x_domain, ghosted_y_domain),
@@ -206,6 +205,7 @@ int main(int argc, char** argv)
 
     // - once for time-step being computed
     ddc::Chunk ghosted_next_temp(
+            "ghosted_next_temp",
             ddc::DiscreteDomain<
                     DDimX,
                     DDimY>(ghosted_x_domain, ghosted_y_domain),
@@ -230,6 +230,7 @@ int main(int argc, char** argv)
     //! [initial-conditions]
 
     ddc::Chunk ghosted_temp(
+            "ghost_temp",
             ddc::DiscreteDomain<
                     DDimX,
                     DDimY>(ghosted_x_domain, ghosted_y_domain),

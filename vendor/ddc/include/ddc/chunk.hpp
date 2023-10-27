@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <memory>
+#include <string>
 
 #include "ddc/chunk_common.hpp"
 #include "ddc/chunk_span.hpp"
@@ -76,14 +76,26 @@ public:
 private:
     Allocator m_allocator;
 
+    std::string m_label;
+
 public:
     /// Empty Chunk
     Chunk() = default;
 
+    /// Construct a labeled Chunk on a domain with uninitialized values
+    explicit Chunk(
+            std::string const& label,
+            mdomain_type const& domain,
+            Allocator allocator = Allocator())
+        : base_type(allocator.allocate(label, domain.size()), domain)
+        , m_allocator(std::move(allocator))
+        , m_label(label)
+    {
+    }
+
     /// Construct a Chunk on a domain with uninitialized values
     explicit Chunk(mdomain_type const& domain, Allocator allocator = Allocator())
-        : base_type(std::allocator_traits<Allocator>::allocate(m_allocator, domain.size()), domain)
-        , m_allocator(std::move(allocator))
+        : Chunk("no-label", domain, std::move(allocator))
     {
     }
 
@@ -106,6 +118,7 @@ public:
     Chunk(Chunk&& other)
         : base_type(std::move(static_cast<base_type&>(other)))
         , m_allocator(std::move(other.m_allocator))
+        , m_label(std::move(other.m_label))
     {
         other.m_internal_mdspan = internal_mdspan_type(nullptr, other.m_internal_mdspan.mapping());
     }
@@ -113,8 +126,7 @@ public:
     ~Chunk()
     {
         if (this->m_internal_mdspan.data_handle()) {
-            std::allocator_traits<
-                    Allocator>::deallocate(m_allocator, this->data_handle(), this->size());
+            m_allocator.deallocate(this->data_handle(), this->size());
         }
     }
 
@@ -131,11 +143,11 @@ public:
             return *this;
         }
         if (this->m_internal_mdspan.data_handle()) {
-            std::allocator_traits<
-                    Allocator>::deallocate(m_allocator, this->data_handle(), this->size());
+            m_allocator.deallocate(this->data_handle(), this->size());
         }
         static_cast<base_type&>(*this) = std::move(static_cast<base_type&>(other));
         m_allocator = std::move(other.m_allocator);
+        m_label = std::move(other.m_label);
         other.m_internal_mdspan = internal_mdspan_type(nullptr, other.m_internal_mdspan.mapping());
 
         return *this;
@@ -221,6 +233,14 @@ public:
         return this->m_internal_mdspan(uid<DDims>(delems)...);
     }
 
+    /** Returns the label of the Chunk
+     * @return c-string
+     */
+    char const* label() const
+    {
+        return m_label.c_str();
+    }
+
     /** Access to the underlying allocation pointer
      * @return read-only allocation pointer
      */
@@ -300,6 +320,10 @@ public:
         return span_type(*this);
     }
 };
+
+template <class... DDims, class Allocator>
+Chunk(std::string const&, DiscreteDomain<DDims...> const&, Allocator)
+        -> Chunk<typename Allocator::value_type, DiscreteDomain<DDims...>, Allocator>;
 
 template <class... DDims, class Allocator>
 Chunk(DiscreteDomain<DDims...> const&, Allocator)

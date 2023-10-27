@@ -167,11 +167,13 @@ int main(int argc, char** argv)
     // Maps temperature into the full domain (including ghosts) twice:
     // - once for the last fully computed time-step
     ddc::Chunk _last_temp(
+            "_last_temp",
             ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
             ddc::DeviceAllocator<double>());
 
     // - once for time-step being computed
     ddc::Chunk _next_temp(
+            "_next_temp",
             ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
             ddc::DeviceAllocator<double>());
     //! [data allocation]
@@ -194,6 +196,7 @@ int main(int argc, char** argv)
     //! [initial-conditions]
 
     ddc::Chunk _host_temp(
+            "_host_temp",
             ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
             ddc::HostAllocator<double>());
 
@@ -213,7 +216,8 @@ int main(int argc, char** argv)
             ddc::PeriodicSampling<ddc::Fourier<Y>>> const k_mesh
             = ddc::FourierMesh(initial_temp.domain(), false);
     ddc::Chunk Ff_allocation = ddc::
-            Chunk(k_mesh,
+            Chunk("Ff_allocation",
+                  k_mesh,
                   ddc::DeviceAllocator<Kokkos::complex<double>>());
     ddc::ChunkSpan Ff = Ff_allocation.span_view();
 

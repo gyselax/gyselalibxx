@@ -20,7 +20,7 @@ jobs:
     - name: Identify repository
       id: identify_repo
       run: |
-        echo "in_base_repo=${{ (github.event_name == 'push' && github.repository == 'Maison-de-la-Simulation/ddc') || github.event.pull_request.head.repo.full_name == 'Maison-de-la-Simulation/ddc' }}" >> "$GITHUB_OUTPUT"
+        echo "in_base_repo=${{ (github.event_name == 'push' && github.repository == 'CExA-project/ddc') || github.event.pull_request.head.repo.full_name == 'CExA-project/ddc' }}" >> "$GITHUB_OUTPUT"
     outputs: { in_base_repo: '${{ steps.identify_repo.outputs.in_base_repo }}' }
 
   docker-build:
@@ -43,25 +43,25 @@ jobs:
     - name: Build
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin || true
-        docker pull ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}_${{matrix.backend}} || true
+        docker pull ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}} || true
         docker build \
           --build-arg BACKEND=${{matrix.backend}} \
-          --cache-from ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}_${{matrix.backend}} \
-          -t ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}_${{matrix.backend}} \
-          -t ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}_${{matrix.backend}}:${GITHUB_SHA:0:7} \
+          --cache-from ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}} \
+          -t ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}} \
+          -t ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}}:${GITHUB_SHA:0:7} \
           docker/${{matrix.image}}
     - name: Publish image for current SHA
       if: needs.id_repo.outputs.in_base_repo == 'true'
       run: |
-        docker push ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}_${{matrix.backend}}:${GITHUB_SHA:0:7}
+        docker push ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}}:${GITHUB_SHA:0:7}
     - name: Publish latest (default) image
       if: github.event_name == 'push' && github.ref_name == 'main' && needs.id_repo.outputs.in_base_repo == 'true'
       run: |
-        docker push ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}_${{matrix.backend}}
+        docker push ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}}
     - name: Create image tarball
       if: needs.id_repo.outputs.in_base_repo == 'false'
       run: |
-        docker save ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}_${{matrix.backend}}:${GITHUB_SHA:0:7} > ${{matrix.image}}_${{matrix.backend}}.tar
+        docker save ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}}:${GITHUB_SHA:0:7} > ${{matrix.image}}_${{matrix.backend}}.tar
     - name: Generate docker artifact from image
       if: needs.id_repo.outputs.in_base_repo == 'false'
       uses: actions/upload-artifact@v3
@@ -169,7 +169,7 @@ jobs:
         docker run \
           --cidfile='docker.cid' \
           -v ${PWD}:/src:ro \
-          ghcr.io/maison-de-la-simulation/ddc/${{matrix.image}}_${{fromJSON('{"cpu-gcc":"cpu","cpu-clang":"cpu"}')[matrix.backend] || matrix.backend}}:${GITHUB_SHA:0:7} \
+          ghcr.io/cexa-project/ddc/${{matrix.image}}_${{fromJSON('{"cpu-gcc":"cpu","cpu-clang":"cpu"}')[matrix.backend] || matrix.backend}}:${GITHUB_SHA:0:7} \
           bash /src/run.sh
         if docker cp "$(cat docker.cid)":/data/tests.xml /home/runner/work/ddc/ddc/tests.xml
         then echo "with_report=true" >> "$GITHUB_OUTPUT"
@@ -221,5 +221,5 @@ jobs:
         find /src/benchmarks /src/examples /src/tests -name '*.cpp' -exec clang-tidy-14 -p build -header-filter="(/src/include/ddc/.*|/src/tests/.*)" '{}' '+'
         EOF
         docker run \
-          -v ${PWD}:/src:ro ghcr.io/maison-de-la-simulation/ddc/latest_cpu:${GITHUB_SHA:0:7} \
+          -v ${PWD}:/src:ro ghcr.io/cexa-project/ddc/latest_cpu:${GITHUB_SHA:0:7} \
           bash /src/run.sh
