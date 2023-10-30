@@ -202,4 +202,111 @@ public:
         assert(fabs(r) >= 1e-15);
         return 1 / r * std::cos(p);
     }
+
+
+
+    /**
+     * @brief  Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.
+     *
+     *
+     * Here, as @f$ \mathcal{G} =  \mathcal{F} @f$ (see DiscreteToCartesian), the Jacobian matrix of
+     * @f$(\mathcal{F} \circ \mathcal{G}^{-1})^{-1} @f$ is the identity matrix.
+     * So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :
+     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1, @f$
+     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0, @f$
+     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0, @f$
+     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1. @f$
+     *
+     *
+     *
+     * @param[in] grid
+     *      The domain where the mapping is defined.
+     * @param[out] matrix
+     *      The pseudo-Cartesian matrix evaluated at the central point.
+     *
+     *
+     * @see DiscreteToCartesian
+     * @see BslAdvection
+     * @see AdvectionDomain
+     */
+    template <class Domain>
+    void to_pseudo_cartesian_jacobian_center_matrix(Domain const& grid, Matrix_2x2& matrix) const
+    {
+        matrix[0][0] = 1.;
+        matrix[0][1] = 0.;
+        matrix[1][0] = 0.;
+        matrix[1][1] = 1.;
+    }
+
+    /**
+     * @brief Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1. @f$
+     *
+     * @param[in] grid
+     *      The domain where the mapping is defined.
+     *
+     * @return A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @see CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix
+     */
+    template <class Domain>
+    double to_pseudo_cartesian_jacobian_11_center(Domain const& grid) const
+    {
+        return 1.;
+    };
+
+    /**
+     * @brief Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0. @f$
+     *
+     * @param[in] grid
+     *      The domain where the mapping is defined.
+     *
+     * @return A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @see CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix
+     */
+    template <class Domain>
+    double to_pseudo_cartesian_jacobian_12_center(Domain const& grid) const
+    {
+        return 0.;
+    };
+
+    /**
+     * @brief Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0. @f$
+     *
+     * @param[in] grid
+     *      The domain where the mapping is defined.
+     *
+     * @return A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @see CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix
+     */
+    template <class Domain>
+    double to_pseudo_cartesian_jacobian_21_center(Domain const& grid) const
+    {
+        return 0.;
+    };
+
+    /**
+     * @brief Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1. @f$
+     *
+     * @param[in] grid
+     *      The domain where the mapping is defined.
+     *
+     * @return A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @see CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix
+     */
+    template <class Domain>
+    double to_pseudo_cartesian_jacobian_22_center(Domain const& grid) const
+    {
+        return 1.;
+    };
 };

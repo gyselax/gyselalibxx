@@ -118,6 +118,19 @@ gtest_discover_tests(const_extrapol_tests)
 
 
 
+add_executable(pseudo_cartesian_tests
+  	main.cpp
+	pseudo_cartesian_matrix.cpp
+)
+target_compile_features(pseudo_cartesian_tests PUBLIC cxx_std_17)
+target_link_libraries(pseudo_cartesian_tests
+    PUBLIC
+        GTest::gtest
+        sll::splines
+)
+gtest_discover_tests(pseudo_cartesian_tests)
+
+
 
 foreach(DEGREE_X RANGE "${SLL_SPLINES_TEST_DEGREE_MIN}" "${SLL_SPLINES_TEST_DEGREE_MAX}")
   foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
