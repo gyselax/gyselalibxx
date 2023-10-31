@@ -25,5 +25,10 @@ var classCzarnyToCartesian =
     [ "inv_jacobian_11", "classCzarnyToCartesian.html#a8b428fe5b3ecb96d0638b8a2b0b63a24", null ],
     [ "inv_jacobian_12", "classCzarnyToCartesian.html#a1d5e035e43ecd13a4cb5078f8d0fd8b5", null ],
     [ "inv_jacobian_21", "classCzarnyToCartesian.html#a54f40cd2c01452155acb39d73d45bfbd", null ],
-    [ "inv_jacobian_22", "classCzarnyToCartesian.html#a093d9a72394c1d6a936d03b8e1471914", null ]
+    [ "inv_jacobian_22", "classCzarnyToCartesian.html#a093d9a72394c1d6a936d03b8e1471914", null ],
+    [ "to_pseudo_cartesian_jacobian_center_matrix", "classCzarnyToCartesian.html#abd182453880bc399e4cf03178275a0fc", null ],
+    [ "to_pseudo_cartesian_jacobian_11_center", "classCzarnyToCartesian.html#a84ec08478d0b1d1c48a5ee35db95e045", null ],
+    [ "to_pseudo_cartesian_jacobian_12_center", "classCzarnyToCartesian.html#a07b7db6f8b4cdc17d8370eb59d96f78a", null ],
+    [ "to_pseudo_cartesian_jacobian_21_center", "classCzarnyToCartesian.html#a4754c0affa17788b8ccf334a3b0381d1", null ],
+    [ "to_pseudo_cartesian_jacobian_22_center", "classCzarnyToCartesian.html#ae3a46cd66ea71ffc5d90196ac10e6689", null ]
 ];
