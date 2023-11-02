@@ -132,6 +132,21 @@ gtest_discover_tests(pseudo_cartesian_tests)
 
 
 
+add_executable(refined_discrete_mapping_test
+  	main.cpp
+	refined_discrete_mapping.cpp
+)
+target_compile_features(refined_discrete_mapping_test PUBLIC cxx_std_17)
+target_link_libraries(refined_discrete_mapping_test
+    PUBLIC
+        GTest::gtest
+        sll::splines
+)
+gtest_discover_tests(refined_discrete_mapping_test)
+
+
+
+
 foreach(DEGREE_X RANGE "${SLL_SPLINES_TEST_DEGREE_MIN}" "${SLL_SPLINES_TEST_DEGREE_MAX}")
   foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
     set(test_name "splines_tests_DEGREE_X_${DEGREE_X}_${BSPLINES_TYPE}")
