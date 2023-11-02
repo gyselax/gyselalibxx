@@ -15,3 +15,4 @@ The current mappings implemented are:
 - Discrete mappings defined on bsplines (DiscreteToCartesian):
 	-  $x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),$
 	-  $y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).$
+- Refined discrete mappings defined on bsplines (RefinedDiscreteToCartesian): a version of DiscreteToCartesian mapping built on a refined grid.  
