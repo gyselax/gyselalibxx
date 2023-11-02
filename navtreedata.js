@@ -65,8 +65,8 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classFluidMoments.html#a1627a95ed02643b0dc08c2f64dbf5ae8",
 "classNullPoissonSolver.html#a443405a2a69acd28ae36ebf7fb6e6368",
-"classUniformBSplines.html#a740bb4b0982f34b3f071cf367dbbafcf",
-"docs_Adding_docs.html"
+"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd",
+"dir_c17d180aaa37ca880baaf9afd44e0ad0.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

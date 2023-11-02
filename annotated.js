@@ -106,6 +106,7 @@ var annotated =
     [ "RDimVy", "structRDimVy.html", null ],
     [ "RDimX", "structRDimX.html", null ],
     [ "RDimY", "structRDimY.html", null ],
+    [ "RefinedDiscreteToCartesian", "classRefinedDiscreteToCartesian.html", "classRefinedDiscreteToCartesian" ],
     [ "RK2", "classRK2.html", "classRK2" ],
     [ "RK3", "classRK3.html", "classRK3" ],
     [ "RK4", "classRK4.html", "classRK4" ],
