@@ -163,7 +163,7 @@ double check_value_not_on_grid(
         Mapping const& analytical_mapping,
         IDomainRP const& domain)
 {
-    std::srand(std::time(0));
+    std::srand(100);
 
     FieldRP<CoordRP> coords(domain);
     IndexR ir_max(ddc::select<IDimR>(domain).back());
@@ -348,6 +348,6 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
         std::cout << "  " << order << std::endl;
 
         int const BSDegree = 3;
-        EXPECT_NEAR(order, BSDegree + 1, 0.27);
+        EXPECT_NEAR(order, BSDegree + 1, 0.25);
     }
 }
