@@ -227,6 +227,9 @@ if __name__ == '__main__':
                         # Replace the markdown command with the doxygen command
                         line = line[:match_found.start()] + doxygen_ref + line[match_found.end():]
                         match_found = reference_tag.search(line, match_found.start() + len(doxygen_ref))
+                    elif path.startswith('./'):
+                        line = line[:match_found.start()] + match_found.group(1) + "(" + folder + path[1:] + ")" + line[match_found.end():]
+                        match_found = reference_tag.search(line, match_found.start() + len(folder) + 1)
                     else:
                         match_found = reference_tag.search(line, match_found.end())
 
