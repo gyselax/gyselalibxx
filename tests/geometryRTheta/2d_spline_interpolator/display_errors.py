@@ -21,7 +21,7 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
-from python_functions import launch_executable
+from polar_interpolation_functions import launch_executable
 
 # Inputs --------------------------------------------------------
 NN = range(16, 128+1)
