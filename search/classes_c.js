@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['qdimx_419',['QDimX',['../classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX',1,'FemNonPeriodicPoissonSolver::QDimX'],['../classFemPeriodicPoissonSolver.html#structFemPeriodicPoissonSolver_1_1QDimX',1,'FemPeriodicPoissonSolver::QDimX']]],
-  ['quadrature_420',['Quadrature',['../classQuadrature.html',1,'']]],
-  ['quadrature_3c_20idimvx_20_3e_421',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]]
+  ['qdimx_420',['QDimX',['../classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX',1,'FemNonPeriodicPoissonSolver::QDimX'],['../classFemPeriodicPoissonSolver.html#structFemPeriodicPoissonSolver_1_1QDimX',1,'FemPeriodicPoissonSolver::QDimX']]],
+  ['quadrature_421',['Quadrature',['../classQuadrature.html',1,'']]],
+  ['quadrature_3c_20idimvx_20_3e_422',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]]
 ];

@@ -42,6 +42,12 @@ var NAVTREE =
       [ "Operators", "docs_CODING_STANDARD.html#Operators", null ],
       [ "Code Organisation", "docs_CODING_STANDARD.html#Code_Organisation", null ]
     ] ],
+    [ "Using DDC in Gyselalibxx", "docs_DDC_in_gyselalibxx.html", [
+      [ "Coordinate", "docs_DDC_in_gyselalibxx.html#Coordinate", null ],
+      [ "Domain", "docs_DDC_in_gyselalibxx.html#Domain", null ],
+      [ "Data Storage", "docs_DDC_in_gyselalibxx.html#Data_Storage", null ],
+      [ "Example", "docs_DDC_in_gyselalibxx.html#Example", null ]
+    ] ],
     [ "Using Git", "docs_Using_git.html", [
       [ "Branches", "docs_Using_git.html#Branches", null ],
       [ "Submodules", "docs_Using_git.html#Submodules", null ]
