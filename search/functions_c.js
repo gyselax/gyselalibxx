@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['refineddiscretetocartesian_539',['RefinedDiscreteToCartesian',['../classRefinedDiscreteToCartesian.html#afc40c1cbf6aeb1a7100602a4184d75c8',1,'RefinedDiscreteToCartesian::RefinedDiscreteToCartesian(ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;curvilinear_to_x, ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;curvilinear_to_y, SplineEvaluator2D&lt; BSplineR, BSplineP &gt; const &amp;evaluator, Domain const &amp;domain)'],['../classRefinedDiscreteToCartesian.html#aa377d63dc5d07058936fae379828cd02',1,'RefinedDiscreteToCartesian::RefinedDiscreteToCartesian(ddc::Chunk&lt; double, spline_domain_refined &gt; &amp;&amp;curvilinear_to_x, ddc::Chunk&lt; double, spline_domain_refined &gt; &amp;&amp;curvilinear_to_y, SplineEvaluator2D&lt; BSplineRRefined, BSplinePRefined &gt; const &amp;evaluator)'],['../classRefinedDiscreteToCartesian.html#a71cf6ce493ab0b2d2648bbf37fe0a1b0',1,'RefinedDiscreteToCartesian::RefinedDiscreteToCartesian(RefinedDiscreteToCartesian &amp;&amp;x)=default'],['../classRefinedDiscreteToCartesian.html#ad15636dc573eac8f0822134b87be904a',1,'RefinedDiscreteToCartesian::RefinedDiscreteToCartesian(RefinedDiscreteToCartesian const &amp;x)=default']]],
-  ['rk2_540',['RK2',['../classRK2.html#a29590ce29977600f0a17c7cdfcbb3584',1,'RK2']]],
-  ['rk3_541',['RK3',['../classRK3.html#ab75113e8885dfdbc7c41494db8d2f269',1,'RK3']]],
-  ['rk4_542',['RK4',['../classRK4.html#a63289a986749f2cffeb0180bb37b8cfa',1,'RK4']]]
+  ['quadrature_546',['Quadrature',['../classQuadrature.html#afd6d17aed37b3b62d7c638075c5be300',1,'Quadrature::Quadrature(ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; &amp;&amp;coeffs)'],['../classQuadrature.html#af6bd0619387d4161c2a9ed844c76cd52',1,'Quadrature::Quadrature(Quadrature &amp;&amp;rhs)=default']]],
+  ['quadrature_5fcoefficients_547',['quadrature_coefficients',['../classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06',1,'SplineBuilder']]],
+  ['quadrature_5fcoeffs_5fnd_548',['quadrature_coeffs_nd',['../quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d',1,'quadrature_coeffs_nd.hpp']]]
 ];

@@ -136,7 +136,14 @@ Public Member Functions</h2></td></tr>
 class RK2&lt; ValChunk, DerivChunk &gt;</h3>
 
 <p>A class which provides an implementation of a second-order Runge-Kutta method. </p>
-<p>A class which provides an implementation of a second-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on a domain. </p>
+<p>A class which provides an implementation of a second-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on a domain.</p>
+<p>For the following ODE : \(\partial_t y(t) = f(t, y(t)) \),</p>
+<p>the Runge-Kutta 2 method is given by : \( y^{n+1} = y^{n} + dt k_2 \),</p>
+<p>with</p>
+<ul>
+<li>\( k_1 = f(t^{n}, y^{n}) \),</li>
+<li>\( k_2 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_1 ) \), </li>
+</ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a29590ce29977600f0a17c7cdfcbb3584"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a29590ce29977600f0a17c7cdfcbb3584">&#9670;&nbsp;</a></span>RK2()</h2>

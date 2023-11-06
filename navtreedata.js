@@ -69,10 +69,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classFluidMoments.html#a1627a95ed02643b0dc08c2f64dbf5ae8",
-"classNullPoissonSolver.html#a443405a2a69acd28ae36ebf7fb6e6368",
-"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd",
-"dir_c17d180aaa37ca880baaf9afd44e0ad0.html"
+"classFftPoissonSolver.html#a39d2b32d21f00f96f2c9f1625211eb98",
+"classNullBoundaryValue2D.html#a7193419626806e22c87f36ab6e6cf0fa",
+"classSplineInterpolatorRP.html#a7186f69f12ef92492b5cb334bafa220e",
+"dir_7249a6277f2cda29b1cef92f993ab78b.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

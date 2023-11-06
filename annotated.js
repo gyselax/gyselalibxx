@@ -30,11 +30,13 @@ var annotated =
     [ "CosineEvaluator", "structCosineEvaluator.html", [
       [ "Evaluator", "classCosineEvaluator_1_1Evaluator.html", "classCosineEvaluator_1_1Evaluator" ]
     ] ],
+    [ "CrankNicolson", "classCrankNicolson.html", "classCrankNicolson" ],
     [ "Curvilinear2DToCartesian", "classCurvilinear2DToCartesian.html", "classCurvilinear2DToCartesian" ],
     [ "CurvilinearSolution", "classCurvilinearSolution.html", "classCurvilinearSolution" ],
     [ "CzarnyToCartesian", "classCzarnyToCartesian.html", "classCzarnyToCartesian" ],
     [ "DiscreteToCartesian", "classDiscreteToCartesian.html", "classDiscreteToCartesian" ],
     [ "ElectricField", "classElectricField.html", "classElectricField" ],
+    [ "Euler", "classEuler.html", "classEuler" ],
     [ "Evaluator2D", "structEvaluator2D.html", [
       [ "Evaluator", "classEvaluator2D_1_1Evaluator.html", "classEvaluator2D_1_1Evaluator" ]
     ] ],

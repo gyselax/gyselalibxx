@@ -136,7 +136,15 @@ Public Member Functions</h2></td></tr>
 class RK3&lt; ValChunk, DerivChunk &gt;</h3>
 
 <p>A class which provides an implementation of a third-order Runge-Kutta method. </p>
-<p>A class which provides an implementation of a third-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on a domain. </p>
+<p>A class which provides an implementation of a third-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on a domain.</p>
+<p>For the following ODE : \(\partial_t y(t) = f(t, y(t)) \),</p>
+<p>the Runge-Kutta 3 method is given by : \( y^{n+1} = y^{n} + \frac{dt}{6} \left(k_1 + 4 k_2 + k_3 \right) \),</p>
+<p>with</p>
+<ul>
+<li>\( k_1 = f(t^{n}, y^{n}) \),</li>
+<li>\( k_2 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_1 ) \),</li>
+<li>\( k_3 = f(t^{n+1/2}, y^{n} + dt ( 2 k_2 - k_1) ) \). </li>
+</ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab75113e8885dfdbc7c41494db8d2f269"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab75113e8885dfdbc7c41494db8d2f269">&#9670;&nbsp;</a></span>RK3()</h2>

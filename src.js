@@ -9,5 +9,8 @@ var src =
     ] ],
     [ "Quadrature Methods", "src_quadrature.html", null ],
     [ "Time Stepping Methods", "src_timestepper.html", null ],
-    [ "Utility Functions", "src_utils.html", null ]
+    [ "Utility Functions", "src_utils.html", [
+      [ "VectorField", "src_utils.html#VectorField", null ],
+      [ "Utility tools", "src_utils.html#Utility_tools", null ]
+    ] ]
 ];
