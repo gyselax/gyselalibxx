@@ -9,6 +9,10 @@ The class should be initialised with the quadrature coefficients.
 Helper functions provide the quadrature coefficients obtained using different quadrature methods.
 The methods currently implemented are:
 -  trapezoid_quadrature_coefficients()
+-  spline_quadrature_coefficients()
 
 
 Additionally the function quadrature_coeffs_nd() helps define multi-dimensional quadrature methods from 1D methods.
+
+In the compute_norms.hpp file, the functions compute_L1_norm() and compute_L2_norm() return the norms of a function with a given quadrature method. 
+The function compute_coeffs_on_mapping() add the Jacobian determinant of the mapping as factor of the quadrature coefficients. 

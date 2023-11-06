@@ -8,6 +8,8 @@ y(t_0) = y_0
 $$
 
 The implemented methods are:
+- Explicit Euler (first order) (Euler)
+- Crank-Nicolson (second order) (CrankNicolson)
 - Second order Runge Kutta (RK2)
 - Third order Runge Kutta (RK3)
 - Fourth order Runge Kutta (RK4)
