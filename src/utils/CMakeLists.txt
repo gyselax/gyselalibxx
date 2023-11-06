@@ -17,3 +17,4 @@ target_link_libraries("utils"
 )
 
 add_library("vcx::utils" ALIAS "utils")
+

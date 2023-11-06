@@ -3,12 +3,13 @@
 #include <vector_field_common.hpp>
 
 #include "itimestepper.hpp"
+#include "utils_tools.hpp"
 
 
 /**
- * @brief A class which provides an implementation of a third-order Runge-Kutta method.
+ * @brief A class which provides an implementation of a Crank-Nicolson method.
  *
- * A class which provides an implementation of a third-order Runge-Kutta method in
+ * A class which provides an implementation of a Crank-Nicolson method in
  * order to evolve values over time. The values may be either scalars or vectors. In the
  * case of vectors the appropriate dimensions must be passed as template parameters.
  * The values which evolve are defined on a domain.
@@ -16,18 +17,17 @@
  * For the following ODE :
  * @f$\partial_t y(t) = f(t, y(t)) @f$,
  *
- * the Runge-Kutta 3 method is given by :
- * @f$ y^{n+1} =  y^{n} + \frac{dt}{6} \left(k_1 + 4 k_2 + k_3 \right) @f$,
+ * the Crank-Nicolson method is given by :
+ * @f$ y^{k} =  y^{n} + \frac{dt}{2} \left(f(t^{n}, y^{n}) + f(t^{k}, y^{k}) \right)@f$.
  *
- * with
+ * The method is an implicit method.
+ * If @f$ |y^{k+1} -  y^{k}| < \varepsilon @f$, then we set @f$ y^{n+1} = y^{k+1} @f$.
  *
- * - @f$ k_1 = f(t^{n}, y^{n}) @f$,
- * - @f$ k_2 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_1 ) @f$,
- * - @f$ k_3 = f(t^{n+1/2}, y^{n} + dt ( 2 k_2 - k_1) ) @f$.
+ * The method is order 2.
  *
  */
 template <class ValChunk, class DerivChunk = ValChunk>
-class RK3 : public ITimeStepper
+class CrankNicolson : public ITimeStepper
 {
 private:
     static_assert(ddc::is_chunk_v<ValChunk> or is_field_v<ValChunk>);
@@ -46,28 +46,39 @@ private:
     using DerivSpan = typename DerivChunk::span_type;
     using DerivView = typename DerivChunk::view_type;
 
-    ValChunk m_y_prime;
+    ValChunk m_y_init;
+    ValChunk m_y_old;
     DerivChunk m_k1;
-    DerivChunk m_k2;
-    DerivChunk m_k3;
+    DerivChunk m_k_new;
     DerivChunk m_k_total;
+
+    int const m_max_counter;
+    double const m_epsilon;
 
 public:
     /**
-     * @brief Create a RK3 object.
-     * @param[in] dom The domain on which the points which evolve over time are defined.
+     * @brief Create a CrankNicolson object.
+     * @param[in] dom
+     *      The domain on which the points which evolve over time are defined.
+     * @param[in] counter
+     *      The maximal number of loops for the implicit method.
+     * @param[in] epsilon
+     *      The @f$ \varepsilon @f$ upperbound of the difference of two steps
+     *      in the implicit method: @f$ |y^{k+1} -  y^{k}| < \varepsilon @f$.
      */
-    RK3(Domain dom)
+    CrankNicolson(Domain dom, int const counter = int(20), double const epsilon = 1e-12)
+        : m_max_counter(counter)
+        , m_epsilon(epsilon)
     {
         m_k1 = DerivChunk(dom);
-        m_k2 = DerivChunk(dom);
-        m_k3 = DerivChunk(dom);
+        m_k_new = DerivChunk(dom);
         m_k_total = DerivChunk(dom);
-        m_y_prime = ValChunk(dom);
+        m_y_init = ValChunk(dom);
+        m_y_old = ValChunk(dom);
     }
 
     /**
-     * @brief Carry out one step of the Runge-Kutta scheme.
+     * @brief Carry out one step of the Crank-Nicolson scheme.
      *
      * This function is a wrapper around the update function below. The values of the function are
      * updated using the trivial method $f += df * dt$. This is the standard method however some
@@ -91,7 +102,7 @@ public:
     }
 
     /**
-     * @brief Carry out one step of the Runge-Kutta scheme.
+     * @brief Carry out one step of the Crank-Nicolson scheme.
      *
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
@@ -109,53 +120,46 @@ public:
             std::function<void(DerivSpan, ValView)> dy,
             std::function<void(ValSpan, DerivView, double)> y_update)
     {
-        // Save initial conditions
-        copy(m_y_prime, y);
+        copy(m_y_init, y);
 
         // --------- Calculate k1 ------------
-        // Calculate k1 = f(y)
+        // Calculate k1 = f(y_n)
         dy(m_k1, y);
 
-        // --------- Calculate k2 ------------
-        // Calculate y_new := y_n + h/2*k_1
-        y_update(m_y_prime, m_k1, 0.5 * dt);
+        // -------- Calculate k_new ----------
+        bool not_converged = true;
+        int counter = 0;
+        do {
+            counter++;
 
-        // Calculate k2 = f(y_new)
-        dy(m_k2, m_y_prime);
+            // Calculate k_new = f(y_new)
+            dy(m_k_new, y);
 
-        // --------- Calculate k3 ------------
-        // Calculation of step
-        ddc::for_each(m_k_total.domain(), [&](Index const i) {
-            // k_total = 2 * k2 - k1
-            if constexpr (is_field_v<DerivChunk>) {
-                fill_k_total(i, 2 * m_k2(i) - m_k1(i));
-            } else {
-                m_k_total(i) = 2 * m_k2(i) - m_k1(i);
-            }
-        });
+            // Calculation of step
+            ddc::for_each(m_k_total.domain(), [&](Index const i) {
+                // k_total = k1 + k_new
+                if constexpr (is_field_v<DerivChunk>) {
+                    fill_k_total(i, m_k1(i) + m_k_new(i));
+                } else {
+                    m_k_total(i) = m_k1(i) + m_k_new(i);
+                }
+            });
 
-        // Collect initial conditions
-        copy(m_y_prime, y);
+            // Save the old characteristic feet
+            copy(m_y_old, y);
 
-        // Calculate y_new := y_n + h*(2*k_2-k_1)
-        y_update(m_y_prime, m_k_total, dt);
+            // Re-initiliase the characteristic feet
+            copy(y, m_y_init);
 
-        // Calculate k3 = f(y_new)
-        dy(m_k3, m_y_prime);
+            // Calculate y_new := y_n + h/2*(k_1 + k_new)
+            y_update(y, m_k_total, 0.5 * dt);
 
-        // --------- Update y ------------
-        // Calculation of step
-        ddc::for_each(m_k_total.domain(), [&](Index const i) {
-            // k_total = k1 + 4 * k2 + k3
-            if constexpr (is_field_v<DerivChunk>) {
-                fill_k_total(i, m_k1(i) + 4 * m_k2(i) + m_k3(i));
-            } else {
-                m_k_total(i) = m_k1(i) + 4 * m_k2(i) + m_k3(i);
-            }
-        });
 
-        // Calculate y_{n+1} := y_n + (k1 + 4 * k2 + k3) * h/6
-        y_update(y, m_k_total, dt / 6.);
+            // Check convergence
+            not_converged = not have_converged(m_y_old, y);
+
+
+        } while (not_converged and (counter < m_max_counter));
     };
 
 private:
@@ -172,5 +176,27 @@ private:
     void fill_k_total(Index i, ddc::Coordinate<DDims...> new_val)
     {
         ((ddcHelper::get<DDims>(m_k_total)(i) = ddc::get<DDims>(new_val)), ...);
+    }
+
+
+    // Check if the relative difference of the function between
+    // two times steps is below epsilon.
+    bool have_converged(ValView y_old, ValView y_new)
+    {
+        auto const dom = y_old.domain();
+
+        double norm_old = 0.;
+        ddc::for_each(dom, [&](Index const idx) {
+            const double abs_val = norm_inf(y_old(idx));
+            norm_old = norm_old > abs_val ? norm_old : abs_val;
+        });
+
+        double max_diff = 0.;
+        ddc::for_each(dom, [&](Index const idx) {
+            const double abs_diff = norm_inf(y_old(idx) - y_new(idx));
+            max_diff = max_diff > abs_diff ? max_diff : abs_diff;
+        });
+
+        return (max_diff / norm_old) < m_epsilon;
     }
 };
