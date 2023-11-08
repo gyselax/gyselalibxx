@@ -123,13 +123,6 @@ Inheritance diagram for RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBui
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afc40c1cbf6aeb1a7100602a4184d75c8"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:afc40c1cbf6aeb1a7100602a4184d75c8"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#afc40c1cbf6aeb1a7100602a4184d75c8">RefinedDiscreteToCartesian</a> (ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;curvilinear_to_x, ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;curvilinear_to_y, <a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>&lt; BSplineR, BSplineP &gt; const &amp;evaluator, Domain const &amp;domain)</td></tr>
-<tr class="memdesc:afc40c1cbf6aeb1a7100602a4184d75c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> from the coefficients of 2D splines approximating the mapping in the initial domain.  <a href="classRefinedDiscreteToCartesian.html#afc40c1cbf6aeb1a7100602a4184d75c8">More...</a><br /></td></tr>
-<tr class="separator:afc40c1cbf6aeb1a7100602a4184d75c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa377d63dc5d07058936fae379828cd02"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#aa377d63dc5d07058936fae379828cd02">RefinedDiscreteToCartesian</a> (ddc::Chunk&lt; double, spline_domain_refined &gt; &amp;&amp;curvilinear_to_x, ddc::Chunk&lt; double, spline_domain_refined &gt; &amp;&amp;curvilinear_to_y, <a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>&lt; BSplineRRefined, BSplinePRefined &gt; const &amp;evaluator)</td></tr>
-<tr class="memdesc:aa377d63dc5d07058936fae379828cd02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> from the coefficients of 2D splines approximating the mapping in the refined domain.  <a href="classRefinedDiscreteToCartesian.html#aa377d63dc5d07058936fae379828cd02">More...</a><br /></td></tr>
-<tr class="separator:aa377d63dc5d07058936fae379828cd02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71cf6ce493ab0b2d2648bbf37fe0a1b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a71cf6ce493ab0b2d2648bbf37fe0a1b0">RefinedDiscreteToCartesian</a> (<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> &amp;&amp;x)=default</td></tr>
 <tr class="memdesc:a71cf6ce493ab0b2d2648bbf37fe0a1b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> from another <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a>.  <a href="classRefinedDiscreteToCartesian.html#a71cf6ce493ab0b2d2648bbf37fe0a1b0">More...</a><br /></td></tr>
 <tr class="separator:a71cf6ce493ab0b2d2648bbf37fe0a1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -255,131 +248,8 @@ class RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBuilder, Nr, Nt &gt;<
 <dd>
 <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="afc40c1cbf6aeb1a7100602a4184d75c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc40c1cbf6aeb1a7100602a4184d75c8">&#9670;&nbsp;</a></span>RefinedDiscreteToCartesian() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
-<div class="memtemplate">
-template&lt;class Domain &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> </td>
-          <td>(</td>
-          <td class="paramtype">ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>curvilinear_to_x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ddc::Chunk&lt; double, spline_domain &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>curvilinear_to_y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>&lt; BSplineR, BSplineP &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>evaluator</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Domain const &amp;&#160;</td>
-          <td class="paramname"><em>domain</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Instantiate a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> from the coefficients of 2D splines approximating the mapping in the initial domain. </p>
-<p>From B-splines coefficients given in the initial domain, we build B-splines coefficients on the refined domain. We also define a builder and a evaluator on the refined domain in order to instantiate a <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> mapping on the refined domain.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">curvilinear_to_x</td><td>Bsplines coefficients of the first physical dimension in the initial logical domain.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">curvilinear_to_y</td><td>Bsplines coefficients of the second physical dimension in the initial logical domain.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">evaluator</td><td>The evaluator used to evaluate the mapping in the initial domain.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">domain</td><td>The non-refined domain.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSplineBuilder2D.html" title="A class for creating a 2D spline approximation of a function.">SplineBuilder2D</a> </dd>
-<dd>
-<a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> </dd>
-<dd>
-<a class="el" href="classSplineBoundaryValue.html">SplineBoundaryValue</a> </dd></dl>
-
-</div>
-</div>
-<a id="aa377d63dc5d07058936fae379828cd02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa377d63dc5d07058936fae379828cd02">&#9670;&nbsp;</a></span>RefinedDiscreteToCartesian() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> </td>
-          <td>(</td>
-          <td class="paramtype">ddc::Chunk&lt; double, spline_domain_refined &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>curvilinear_to_x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ddc::Chunk&lt; double, spline_domain_refined &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>curvilinear_to_y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classSplineEvaluator2D.html">SplineEvaluator2D</a>&lt; BSplineRRefined, BSplinePRefined &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>evaluator</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Instantiate a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> from the coefficients of 2D splines approximating the mapping in the refined domain. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">curvilinear_to_x</td><td>Bsplines coefficients of the first physical dimension in the refined logical domain.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">curvilinear_to_y</td><td>Bsplines coefficients of the second physical dimension in the refined logical domain.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">evaluator</td><td>The evaluator used to evaluate the mapping in the refined domain. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a71cf6ce493ab0b2d2648bbf37fe0a1b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71cf6ce493ab0b2d2648bbf37fe0a1b0">&#9670;&nbsp;</a></span>RefinedDiscreteToCartesian() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a71cf6ce493ab0b2d2648bbf37fe0a1b0">&#9670;&nbsp;</a></span>RefinedDiscreteToCartesian() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -415,7 +285,7 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 </div>
 </div>
 <a id="ad15636dc573eac8f0822134b87be904a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad15636dc573eac8f0822134b87be904a">&#9670;&nbsp;</a></span>RefinedDiscreteToCartesian() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad15636dc573eac8f0822134b87be904a">&#9670;&nbsp;</a></span>RefinedDiscreteToCartesian() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

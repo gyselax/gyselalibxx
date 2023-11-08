@@ -1,7 +1,5 @@
 var classRefinedDiscreteToCartesian =
 [
-    [ "RefinedDiscreteToCartesian", "classRefinedDiscreteToCartesian.html#afc40c1cbf6aeb1a7100602a4184d75c8", null ],
-    [ "RefinedDiscreteToCartesian", "classRefinedDiscreteToCartesian.html#aa377d63dc5d07058936fae379828cd02", null ],
     [ "RefinedDiscreteToCartesian", "classRefinedDiscreteToCartesian.html#a71cf6ce493ab0b2d2648bbf37fe0a1b0", null ],
     [ "RefinedDiscreteToCartesian", "classRefinedDiscreteToCartesian.html#ad15636dc573eac8f0822134b87be904a", null ],
     [ "operator()", "classRefinedDiscreteToCartesian.html#ab2bd385b85af4de24b2b551ad7d08395", null ],
