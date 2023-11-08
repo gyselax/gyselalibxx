@@ -343,7 +343,7 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
 
 
     std::cout << std::endl << "Convergence order : " << std::endl << "  -" << std::endl;
-    for (int i(0); i < results.size() - 1; i++) {
+    for (std::size_t i(0); i < results.size() - 1; i++) {
         double const order = std::log(results[i] / results[i + 1]) / std::log(2);
         std::cout << "  " << order << std::endl;
 
