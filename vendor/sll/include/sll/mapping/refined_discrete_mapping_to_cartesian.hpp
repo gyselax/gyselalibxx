@@ -202,15 +202,18 @@ private:
 
 
     using spline_domain = ddc::DiscreteDomain<BSplineR, BSplineP>;
-    using spline_domain_refined = ddc::DiscreteDomain<BSplineRRefined, BSplinePRefined>;
+
+    using REvalBoundary
+            = ConstantExtrapolationBoundaryValue2D<BSplineRRefined, BSplinePRefined, RDimRRefined>;
 
     /**
      * @brief Define a 2x2 matrix with an 2D array of an 2D array.
      */
     using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
-
-
+    REvalBoundary boundary_condition_r_left;
+    REvalBoundary boundary_condition_r_right;
+    SplineRPEvaluatorRefined refined_evaluator;
     DiscreteToCartesian<RDimXRefined, RDimYRefined, SplineRPBuilderRefined> m_mapping;
 
 
@@ -233,22 +236,21 @@ private:
     }
 
 
-    static inline ddc::Coordinate<RDimRRefined> to_refined(ddc::Coordinate<RDimR> const& coord)
+    static inline CoordRRefined to_refined(ddc::Coordinate<RDimR> const& coord)
     {
-        return ddc::Coordinate<RDimRRefined>(ddc::get<RDimR>(coord));
+        return CoordRRefined(ddc::get<RDimR>(coord));
     }
 
-    static inline ddc::Coordinate<RDimPRefined> to_refined(ddc::Coordinate<RDimP> const& coord)
+    static inline CoordPRefined to_refined(ddc::Coordinate<RDimP> const& coord)
     {
-        return ddc::Coordinate<RDimPRefined>(ddc::get<RDimP>(coord));
+        return CoordPRefined(ddc::get<RDimP>(coord));
     }
 
-    static inline ddc::Coordinate<RDimRRefined, RDimPRefined> to_refined(
-            ddc::Coordinate<RDimR, RDimP> const& coord)
+    static inline CoordRPRefined to_refined(ddc::Coordinate<RDimR, RDimP> const& coord)
     {
         const double coord1 = ddc::get<RDimR>(coord);
         const double coord2 = ddc::get<RDimP>(coord);
-        return ddc::Coordinate<RDimRRefined, RDimPRefined>(coord1, coord2);
+        return CoordRPRefined(coord1, coord2);
     }
 
 
@@ -271,157 +273,54 @@ private:
     }
 
 
-    static inline ddc::Coordinate<RDimR> from_refined(ddc::Coordinate<RDimRRefined> const& coord)
+    static inline ddc::Coordinate<RDimR> from_refined(CoordRRefined const& coord)
     {
         return ddc::Coordinate<RDimR>(ddc::get<RDimRRefined>(coord));
     }
 
-    static inline ddc::Coordinate<RDimP> from_refined(ddc::Coordinate<RDimPRefined> const& coord)
+    static inline ddc::Coordinate<RDimP> from_refined(CoordPRefined const& coord)
     {
         return ddc::Coordinate<RDimP>(ddc::get<RDimPRefined>(coord));
     }
 
-    static inline ddc::Coordinate<RDimR, RDimP> from_refined(
-            ddc::Coordinate<RDimRRefined, RDimPRefined> const& coord)
+    static inline ddc::Coordinate<RDimR, RDimP> from_refined(CoordRPRefined const& coord)
     {
         const double coord1 = ddc::get<RDimRRefined>(coord);
         const double coord2 = ddc::get<RDimPRefined>(coord);
         return ddc::Coordinate<RDimR, RDimP>(coord1, coord2);
     }
 
-
-
-public:
-    /**
-     * @brief Instantiate a RefinedDiscreteToCartesian from the coefficients of 2D splines
-     * approximating the mapping in the initial domain.
-     *
-     * From B-splines coefficients given in the initial domain, we build B-splines coefficients
-     * on the refined domain. We also define a builder and a evaluator on the refined domain
-     * in order to instantiate a DiscreteToCartesian mapping on the refined domain.
-     *
-     * @param[in] curvilinear_to_x
-     * 		Bsplines coefficients of the first physical dimension in the initial logical domain.
-     *
-     * @param[in] curvilinear_to_y
-     * 		Bsplines coefficients of the second physical dimension in the initial logical domain.
-     *
-     * @param[in] evaluator
-     * 		The evaluator used to evaluate the mapping in the initial domain.
-     *
-     * @param[in] domain
-     *      The non-refined domain.
-     *
-     *
-     * @see SplineBuilder2D
-     * @see DiscreteToCartesian
-     * @see SplineBoundaryValue
-     */
-
-    template <class Domain>
-    RefinedDiscreteToCartesian(
-            ddc::Chunk<double, spline_domain>&& curvilinear_to_x,
-            ddc::Chunk<double, spline_domain>&& curvilinear_to_y,
-            SplineEvaluator2D<BSplineR, BSplineP> const& evaluator,
-            Domain const& domain)
-    {
-        const double rmin = ddc::coordinate(ddc::get<IDimR>(domain).front());
-        const double rmax = ddc::coordinate(ddc::get<IDimR>(domain).back());
-
-        const double pmin = ddc::coordinate(ddc::get<IDimP>(domain).front());
-        const double pmax = ddc::coordinate(ddc::get<IDimP>(domain).back());
-
-        // Creation of a refined grid:
-        CoordRRefined const r_min(rmin);
-        CoordRRefined const r_max(rmax);
-        IVectRRefined const r_size(Nr);
-
-        CoordPRefined const p_min(pmin);
-        CoordPRefined const p_max(pmax);
-        IVectPRefined const p_size(Nt);
-
-        double const dr((r_max - r_min) / r_size);
-        double const dp((p_max - p_min) / p_size);
-
-        std::vector<CoordRRefined> r_knots(r_size + 1);
-        std::vector<CoordPRefined> p_knots(p_size + 1);
-
-        for (int i(0); i < r_size + 1; ++i) {
-            r_knots[i] = CoordRRefined(r_min + i * dr);
-        }
-        for (int i(0); i < p_size + 1; ++i) {
-            p_knots[i] = CoordPRefined(p_min + i * dp);
-        }
-
-
-        ddc::init_discrete_space<BSplineRRefined>(r_knots);
-        ddc::init_discrete_space<BSplinePRefined>(p_knots);
-
-        ddc::init_discrete_space<IDimR>(SplineInterpPointsRRefined::get_sampling());
-        ddc::init_discrete_space<IDimP>(SplineInterpPointsPRefined::get_sampling());
-
-        IDomainRRefined const interpolation_domain_R(SplineInterpPointsRRefined::get_domain());
-        IDomainPRefined const interpolation_domain_P(SplineInterpPointsPRefined::get_domain());
-        IDomainRPRefined const refined_domain(interpolation_domain_R, interpolation_domain_P);
-
-
-        // Operators in the refined domain
-        SplineRPBuilderRefined refined_builder(refined_domain);
-
-        ConstantExtrapolationBoundaryValue2D<BSplineRRefined, BSplinePRefined, RDimRRefined>
-                boundary_condition_r_left(r_min);
-        ConstantExtrapolationBoundaryValue2D<BSplineRRefined, BSplinePRefined, RDimRRefined>
-                boundary_condition_r_right(r_max);
-
-        SplineRPEvaluatorRefined refined_evaluator(
-                boundary_condition_r_left,
-                boundary_condition_r_right,
-                g_null_boundary_2d<BSplineRRefined, BSplinePRefined>,
-                g_null_boundary_2d<BSplineRRefined, BSplinePRefined>);
-
-
-        // Computation of B-splines coefficients in the refined domain
-        ddc::Chunk<double, IDomainRPRefined> refined_evaluated_x;
-        ddc::Chunk<double, IDomainRPRefined> refined_evaluated_y;
-
-        ddc::for_each(refined_domain, [&](IndexRPRefined irp) {
-            ddc::Coordinate<RDimR, RDimP> coord(from_refined(ddc::coordinate(irp)));
-            refined_evaluated_x(irp) = evaluator(coord, curvilinear_to_x);
-            refined_evaluated_y(irp) = evaluator(coord, curvilinear_to_y);
-        });
-
-        ddc::Chunk<double, spline_domain_refined> refined_curvilinear_to_x;
-        ddc::Chunk<double, spline_domain_refined> refined_curvilinear_to_y;
-        refined_builder(refined_curvilinear_to_x, refined_evaluated_x);
-        refined_builder(refined_curvilinear_to_y, refined_evaluated_y);
-
-
-        m_mapping(refined_curvilinear_to_x, refined_curvilinear_to_y, refined_evaluator);
-    }
-
-
-
     /**
      * @brief Instantiate a RefinedDiscreteToCartesian from the coefficients of 2D splines
      * approximating the mapping in the refined domain.
+     *
+     * This function is private. If the user has enough information to call this constructor
+     * then they should create a DiscreteToCartesian directly.
      *
      * @param[in] curvilinear_to_x
      *      Bsplines coefficients of the first physical dimension in the refined logical domain.
      *
      * @param[in] curvilinear_to_y
      *      Bsplines coefficients of the second physical dimension in the refined logical domain.
-     *
-     * @param[in] evaluator
-     *      The evaluator used to evaluate the mapping in the refined domain.
      */
     RefinedDiscreteToCartesian(
-            ddc::Chunk<double, spline_domain_refined>&& curvilinear_to_x,
-            ddc::Chunk<double, spline_domain_refined>&& curvilinear_to_y,
-            SplineEvaluator2D<BSplineRRefined, BSplinePRefined> const& evaluator)
-        : m_mapping(std::move(curvilinear_to_x), std::move(curvilinear_to_y), evaluator)
+            ddc::Chunk<double, BSDomainRPRefined>&& curvilinear_to_x,
+            ddc::Chunk<double, BSDomainRPRefined>&& curvilinear_to_y,
+            CoordRRefined r_min,
+            CoordRRefined r_max)
+        : boundary_condition_r_left(r_min)
+        , boundary_condition_r_right(r_max)
+        , refined_evaluator(
+                  boundary_condition_r_left,
+                  boundary_condition_r_right,
+                  g_null_boundary_2d<BSplineRRefined, BSplinePRefined>,
+                  g_null_boundary_2d<BSplineRRefined, BSplinePRefined>)
+        , m_mapping(std::move(curvilinear_to_x), std::move(curvilinear_to_y), refined_evaluator)
     {
     }
 
+
+public:
     /**
      * @brief Instantiate a RefinedDiscreteToCartesian from another
      * RefinedDiscreteToCartesian.
@@ -586,26 +485,26 @@ public:
         CoordPRefined const p_max(pmax);
         IVectPRefined const p_size(Nt);
 
-        double const dr((r_max - r_min) / r_size);
-        double const dp((p_max - p_min) / p_size);
+        if constexpr (BSplineRRefined::is_uniform()) {
+            ddc::init_discrete_space<BSplineRRefined>(r_min, r_max, r_size);
+            ddc::init_discrete_space<BSplinePRefined>(p_min, p_max, p_size);
+        } else {
+            double const dr((r_max - r_min) / r_size);
+            double const dp((p_max - p_min) / p_size);
 
-        std::vector<CoordRRefined> r_knots(r_size + 1);
-        std::vector<CoordPRefined> p_knots(p_size + 1);
+            std::vector<CoordRRefined> r_knots(r_size + 1);
+            std::vector<CoordPRefined> p_knots(p_size + 1);
 
-        for (int i(0); i < r_size + 1; ++i) {
-            r_knots[i] = CoordRRefined(r_min + i * dr);
+            for (int i(0); i < r_size + 1; ++i) {
+                r_knots[i] = CoordRRefined(r_min + i * dr);
+            }
+            for (int i(0); i < p_size + 1; ++i) {
+                p_knots[i] = CoordPRefined(p_min + i * dp);
+            }
+
+            ddc::init_discrete_space<BSplineRRefined>(r_knots);
+            ddc::init_discrete_space<BSplinePRefined>(p_knots);
         }
-        r_knots[0] = CoordRRefined(r_min);
-        r_knots[r_size] = CoordRRefined(r_max);
-        for (int i(0); i < p_size + 1; ++i) {
-            p_knots[i] = CoordPRefined(p_min + i * dp);
-        }
-        p_knots[0] = CoordPRefined(p_min);
-        p_knots[p_size] = CoordPRefined(p_max);
-
-
-        ddc::init_discrete_space<BSplineRRefined>(r_knots);
-        ddc::init_discrete_space<BSplinePRefined>(p_knots);
 
         ddc::init_discrete_space<IDimRRefined>(SplineInterpPointsRRefined::get_sampling());
         ddc::init_discrete_space<IDimPRefined>(SplineInterpPointsPRefined::get_sampling());
@@ -614,31 +513,16 @@ public:
         IDomainPRefined interpolation_domain_P(SplineInterpPointsPRefined::get_domain());
         IDomainRPRefined refined_domain(interpolation_domain_R, interpolation_domain_P);
 
-
         // Operators on the refined grid
         SplineRPBuilderRefined refined_builder(refined_domain);
 
-        ConstantExtrapolationBoundaryValue2D<BSplineRRefined, BSplinePRefined, RDimRRefined>
-                boundary_condition_r_left(r_min);
-        ConstantExtrapolationBoundaryValue2D<BSplineRRefined, BSplinePRefined, RDimRRefined>
-                boundary_condition_r_right(r_max);
-
-        SplineRPEvaluatorRefined refined_evaluator(
-                boundary_condition_r_left,
-                boundary_condition_r_right,
-                g_null_boundary_2d<BSplineRRefined, BSplinePRefined>,
-                g_null_boundary_2d<BSplineRRefined, BSplinePRefined>);
-
+        BSDomainRPRefined spline_domain = refined_builder.spline_domain();
 
         // Compute the B-splines coefficients of the analytical mapping
-        ddc::Chunk<double, spline_domain_refined> curvilinear_to_x_spline(
-                refined_builder.spline_domain());
-        ddc::Chunk<double, spline_domain_refined> curvilinear_to_y_spline(
-                refined_builder.spline_domain());
-        ddc::Chunk<double, ddc::DiscreteDomain<IDimRRefined, IDimPRefined>> curvilinear_to_x_vals(
-                refined_builder.interpolation_domain());
-        ddc::Chunk<double, ddc::DiscreteDomain<IDimRRefined, IDimPRefined>> curvilinear_to_y_vals(
-                refined_builder.interpolation_domain());
+        ddc::Chunk<double, BSDomainRPRefined> curvilinear_to_x_spline(spline_domain);
+        ddc::Chunk<double, BSDomainRPRefined> curvilinear_to_y_spline(spline_domain);
+        ddc::Chunk<double, IDomainRPRefined> curvilinear_to_x_vals(refined_domain);
+        ddc::Chunk<double, IDomainRPRefined> curvilinear_to_y_vals(refined_domain);
         ddc::for_each(
                 refined_builder.interpolation_domain(),
                 [&](typename ddc::DiscreteDomain<IDimRRefined, IDimPRefined>::
@@ -656,6 +540,7 @@ public:
         return RefinedDiscreteToCartesian(
                 std::move(curvilinear_to_x_spline),
                 std::move(curvilinear_to_y_spline),
-                refined_evaluator);
+                r_min,
+                r_max);
     }
 };
