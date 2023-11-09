@@ -80,6 +80,7 @@ private:
     static int constexpr BSDegreePRefined = BSplineP::degree();
 
 
+public:
     /**
      * @brief Define non periodic real refined R dimension.
      */
@@ -125,6 +126,7 @@ private:
         static bool constexpr PERIODIC = false;
     };
 
+private:
     using BSplineRRefined = std::conditional_t<
             BSplineR_uniform,
             UniformBSplines<RDimRRefined, BSDegreeRRefined>,

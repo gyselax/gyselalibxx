@@ -13,12 +13,13 @@
 using namespace ddc;
 
 
+struct RDimX
+{
+    bool PERIODIC = false;
+};
+
 TEST(EulerFixture, EulerOrder)
 {
-    struct RDimX
-    {
-        bool PERIODIC = false;
-    };
     using CoordX = Coordinate<RDimX>;
     using IDimX = UniformPointSampling<RDimX>;
     using IndexX = DiscreteElement<IDimX>;
