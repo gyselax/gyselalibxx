@@ -206,7 +206,7 @@ public:
             class = std::enable_if_t<
                     std::conjunction_v<std::is_same<OElementType, ElementType>...>>,
             class = std::enable_if_t<sizeof...(OElementType) == base_type::NDims>>
-    KOKKOS_FUNCTION VectorFieldSpan(mdomain_type const& domain, OElementType*... ptr)
+    VectorFieldSpan(mdomain_type const& domain, OElementType*... ptr)
         : base_type((chunk_type(ptr, domain))...)
     {
     }

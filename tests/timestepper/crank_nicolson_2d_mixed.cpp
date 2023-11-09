@@ -18,17 +18,18 @@
 using namespace ddc;
 
 
+struct RDimX
+{
+    bool PERIODIC = false;
+};
+
+struct RDimY
+{
+    bool PERIODIC = false;
+};
+
 TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
 {
-    struct RDimX
-    {
-        bool PERIODIC = false;
-    };
-
-    struct RDimY
-    {
-        bool PERIODIC = false;
-    };
     using CoordX = Coordinate<RDimX>;
     using CoordY = Coordinate<RDimY>;
     using CoordXY = Coordinate<RDimX, RDimY>;

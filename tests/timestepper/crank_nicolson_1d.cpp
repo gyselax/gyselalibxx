@@ -13,12 +13,13 @@
 using namespace ddc;
 
 
+struct RDimX
+{
+    bool PERIODIC = false;
+};
+
 TEST(CrankNicolsonFixture, CrankNicolsonOrder)
 {
-    struct RDimX
-    {
-        bool PERIODIC = false;
-    };
     using CoordX = Coordinate<RDimX>;
     using IDimX = UniformPointSampling<RDimX>;
     using IndexX = DiscreteElement<IDimX>;
