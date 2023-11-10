@@ -9,5 +9,5 @@ var searchData=
   ['dimp_77',['DimP',['../classPolarSplineEvaluator.html#a6d98892294bafa10455c71f68c0cfb12',1,'PolarSplineEvaluator']]],
   ['dimr_78',['DimR',['../classPolarSplineEvaluator.html#a131aa5dd99b62b024c4b0ae386db1489',1,'PolarSplineEvaluator']]],
   ['discretetocartesian_79',['DiscreteToCartesian',['../classDiscreteToCartesian.html',1,'DiscreteToCartesian&lt; DimX, DimY, SplineBuilder &gt;'],['../classDiscreteToCartesian.html#ae2bc5f7be14ee231156b039074859bab',1,'DiscreteToCartesian::DiscreteToCartesian()']]],
-  ['discretetocartesian_3c_20rdimxrefined_2c_20rdimyrefined_2c_20splinebuilder2d_20_3e_80',['DiscreteToCartesian&lt; RDimXRefined, RDimYRefined, SplineBuilder2D &gt;',['../classDiscreteToCartesian.html',1,'']]]
+  ['discretetocartesian_3c_20refineddiscretetocartesian_3a_3ardimxrefined_2c_20refineddiscretetocartesian_3a_3ardimyrefined_2c_20splinebuilder2d_20_3e_80',['DiscreteToCartesian&lt; RefinedDiscreteToCartesian::RDimXRefined, RefinedDiscreteToCartesian::RDimYRefined, SplineBuilder2D &gt;',['../classDiscreteToCartesian.html',1,'']]]
 ];

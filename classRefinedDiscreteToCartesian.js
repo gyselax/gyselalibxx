@@ -1,5 +1,9 @@
 var classRefinedDiscreteToCartesian =
 [
+    [ "RDimPRefined", "structRefinedDiscreteToCartesian_1_1RDimPRefined.html", null ],
+    [ "RDimRRefined", "structRefinedDiscreteToCartesian_1_1RDimRRefined.html", null ],
+    [ "RDimXRefined", "structRefinedDiscreteToCartesian_1_1RDimXRefined.html", null ],
+    [ "RDimYRefined", "structRefinedDiscreteToCartesian_1_1RDimYRefined.html", null ],
     [ "RefinedDiscreteToCartesian", "classRefinedDiscreteToCartesian.html#a71cf6ce493ab0b2d2648bbf37fe0a1b0", null ],
     [ "RefinedDiscreteToCartesian", "classRefinedDiscreteToCartesian.html#ad15636dc573eac8f0822134b87be904a", null ],
     [ "operator()", "classRefinedDiscreteToCartesian.html#ab2bd385b85af4de24b2b551ad7d08395", null ],
