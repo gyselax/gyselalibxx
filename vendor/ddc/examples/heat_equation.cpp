@@ -122,11 +122,11 @@ int main(int argc, char** argv)
     //! [X-domains]
     // our zone at the start of the domain that will be mirrored to the
     // ghost
-    ddc::DiscreteDomain const
+    ddc::DiscreteDomain<DDimX> const
             x_domain_begin(x_domain.front(), x_post_ghost.extents());
     // our zone at the end of the domain that will be mirrored to the
     // ghost
-    ddc::DiscreteDomain const x_domain_end(
+    ddc::DiscreteDomain<DDimX> const x_domain_end(
             x_domain.back() - x_pre_ghost.extents() + 1,
             x_pre_ghost.extents());
     //! [X-domains]
@@ -146,11 +146,11 @@ int main(int argc, char** argv)
 
     // our zone at the start of the domain that will be mirrored to the
     // ghost
-    ddc::DiscreteDomain const
+    ddc::DiscreteDomain<DDimY> const
             y_domain_begin(y_domain.front(), y_post_ghost.extents());
     // our zone at the end of the domain that will be mirrored to the
     // ghost
-    ddc::DiscreteDomain const y_domain_end(
+    ddc::DiscreteDomain<DDimY> const y_domain_end(
             y_domain.back() - y_pre_ghost.extents() + 1,
             y_pre_ghost.extents());
     //! [Y-domains]

@@ -27,6 +27,19 @@ using DVectXYZ = ddc::DiscreteVector<DDimX, DDimY, DDimZ>;
 
 } // namespace
 
+TEST(DiscreteVectorXYZTest, ConstructorFromDiscreteVectors)
+{
+    std::size_t const dv_x = 7;
+    std::size_t const dv_y = 13;
+    std::size_t const dv_z = 4;
+    DVectXZ const ixz(dv_x, dv_z);
+    DVectY const iy(dv_y);
+    DVectXYZ const ixyz(ixz, iy);
+    EXPECT_EQ(ixyz.get<DDimX>(), dv_x);
+    EXPECT_EQ(ixyz.get<DDimY>(), dv_y);
+    EXPECT_EQ(ixyz.get<DDimZ>(), dv_z);
+}
+
 TEST(DiscreteVectorTest, ExternalBinaryOperatorPlus)
 {
     std::size_t const dv_x = 7;
