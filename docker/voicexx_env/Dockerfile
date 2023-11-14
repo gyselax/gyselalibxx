@@ -39,6 +39,13 @@ RUN chmod +x /bin/bash_run \
     pdiplugin-set-value \
     python3-pip \
     libpdi-dev \
+ && git clone -b v1.6.0 https://github.com/ginkgo-project/ginkgo.git \
+ && cd ginkgo \
+ && cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF \
+ && cmake --build build \
+ && cmake --install build \
+ && cd .. \
+ && rm -rf ginkgo \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
