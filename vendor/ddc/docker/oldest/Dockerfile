@@ -40,6 +40,7 @@ RUN chmod +x /bin/bash_run \
     git \
     libelf-dev \
     libfftw3-dev \
+    libhwloc-dev \
     libnuma1 \
     libpdi-dev \
     pdidev-archive-keyring \
@@ -51,6 +52,18 @@ RUN chmod +x /bin/bash_run \
       apt-get install -y --no-install-recommends \
       rocm-hip-sdk \
  ;; esac \
+ && git clone -b v1.6.0 https://github.com/ginkgo-project/ginkgo.git \
+ && cd ginkgo \
+ && case "${BACKEND}" in \
+    "cpu") \
+      cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DGINKGO_BUILD_OMP=ON -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF \
+ ;; "hip") \
+      cmake -S . -B build -DCMAKE_PREFIX_PATH=/opt/rocm -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_HIP_ARCHITECTURES=gfx90a -DGINKGO_BUILD_HIP=ON -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF \
+ ;; esac \
+ && cmake --build build \
+ && cmake --install build \
+ && cd .. \
+ && rm -rf ginkgo \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
@@ -60,7 +73,10 @@ RUN chmod +x /bin/bash_run \
  && apt-get clean -y \
  && apt-get autoclean -y \
  && rm -rf /var/lib/apt/lists/* \
- && useradd -d /data -m -U ci
+ && useradd -d /data -m -U ci \
+ && if [ "xhip" = "x${BACKEND}" ] \
+ ;  then echo 'export LD_LIBRARY_PATH="/opt/rocm/lib"' > /etc/profile.d/10-rocm.sh \
+ ;  fi
 
 USER ci:ci
 WORKDIR /data

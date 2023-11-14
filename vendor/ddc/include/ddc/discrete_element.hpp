@@ -5,9 +5,11 @@
 #include <array>
 #include <cstddef>
 #include <ostream>
+#include <type_traits>
 #include <utility>
 
 #include "ddc/coordinate.hpp"
+#include "ddc/detail/macros.hpp"
 #include "ddc/detail/type_seq.hpp"
 #include "ddc/discrete_vector.hpp"
 
@@ -29,6 +31,16 @@ struct IsDiscreteElement<DiscreteElement<Tags...>> : std::true_type
 template <class T>
 inline constexpr bool is_discrete_element_v = IsDiscreteElement<T>::value;
 
+
+namespace detail {
+
+template <class... Tags>
+struct ToTypeSeq<DiscreteElement<Tags...>>
+{
+    using type = TypeSeq<Tags...>;
+};
+
+} // namespace detail
 
 /** A DiscreteCoordElement is a scalar that identifies an element of the discrete dimension
  */
@@ -81,20 +93,25 @@ KOKKOS_FUNCTION constexpr DiscreteElement<QueryTags...> select(
     return DiscreteElement<QueryTags...>(std::move(arr));
 }
 
-template <class QueryTag, class HeadTag, class... TailTags>
-KOKKOS_FUNCTION constexpr DiscreteElement<QueryTag> const& take(
-        DiscreteElement<HeadTag> const& head,
-        DiscreteElement<TailTags> const&... tags)
+/// Returns a reference towards the DiscreteElement that contains the QueryTag
+template <
+        class QueryTag,
+        class HeadDElem,
+        class... TailDElems,
+        std::enable_if_t<
+                is_discrete_element_v<HeadDElem> && (is_discrete_element_v<TailDElems> && ...),
+                int> = 1>
+KOKKOS_FUNCTION constexpr auto const& take(HeadDElem const& head, TailDElems const&... tail)
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
-    if constexpr (std::is_same_v<QueryTag, HeadTag>) {
+    if constexpr (type_seq_contains_v<detail::TypeSeq<QueryTag>, to_type_seq_t<HeadDElem>>) {
         static_assert(
-                !type_seq_contains_v<detail::TypeSeq<QueryTag>, detail::TypeSeq<TailTags...>>,
+                (!type_seq_contains_v<detail::TypeSeq<QueryTag>, to_type_seq_t<TailDElems>> && ...),
                 "ERROR: tag redundant");
         return head;
     } else {
-        static_assert(sizeof...(TailTags) > 0, "ERROR: tag not found");
-        return take<QueryTag>(tags...);
+        static_assert(sizeof...(TailDElems) > 0, "ERROR: tag not found");
+        return take<QueryTag>(tail...);
     }
     DDC_IF_NVCC_THEN_POP
 }
@@ -152,24 +169,16 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION constexpr DiscreteElement(DiscreteElement&&) = default;
 
-    template <class... OTags>
-    explicit KOKKOS_FUNCTION constexpr DiscreteElement(
-            DiscreteElement<OTags> const&... other) noexcept
-        : m_values {take<Tags>(other...).uid()...}
-    {
-    }
-
-    template <class... OTags>
-    explicit KOKKOS_FUNCTION constexpr DiscreteElement(
-            DiscreteElement<OTags...> const& other) noexcept
-        : m_values {other.template uid<Tags>()...}
+    template <class... DElems, class = std::enable_if_t<(is_discrete_element_v<DElems> && ...)>>
+    explicit KOKKOS_FUNCTION constexpr DiscreteElement(DElems const&... delems) noexcept
+        : m_values {take<Tags>(delems...).template uid<Tags>()...}
     {
     }
 
     template <
             class... Params,
-            class = std::enable_if_t<(std::is_integral_v<Params> && ...)>,
             class = std::enable_if_t<(!is_discrete_element_v<Params> && ...)>,
+            class = std::enable_if_t<(std::is_integral_v<Params> && ...)>,
             class = std::enable_if_t<sizeof...(Params) == sizeof...(Tags)>>
     explicit KOKKOS_FUNCTION constexpr DiscreteElement(Params const&... params) noexcept
         : m_values {static_cast<value_type>(params)...}
