@@ -44,6 +44,10 @@ using DVectZY = ddc::DiscreteVector<DDimZ, DDimY>;
 using DDomZY = ddc::DiscreteDomain<DDimZ, DDimY>;
 
 
+using DElemXYZ = ddc::DiscreteElement<DDimX, DDimY, DDimZ>;
+using DVectXYZ = ddc::DiscreteVector<DDimX, DDimY, DDimZ>;
+using DDomXYZ = ddc::DiscreteDomain<DDimX, DDimY, DDimZ>;
+
 
 static DElemX constexpr lbound_x(50);
 static DVectX constexpr nelems_x(3);
@@ -87,6 +91,15 @@ TEST(ProductMDomainTest, Constructor)
     EXPECT_EQ(empty_domain.size(), 0);
     EXPECT_EQ(empty_domain.empty(), true);
     EXPECT_EQ(empty_domain[0], lbound_x);
+}
+
+TEST(ProductMDomainTest, ConstructorFromDiscreteDomains)
+{
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
+    DDomZ const dom_z(lbound_z, nelems_z);
+    DDomXYZ const dom_x_y_z(dom_z, dom_x_y);
+    EXPECT_EQ(dom_x_y_z.front(), DElemXYZ(lbound_x, lbound_y, lbound_z));
+    EXPECT_EQ(dom_x_y_z.extents(), DVectXYZ(nelems_x, nelems_y, nelems_z));
 }
 
 TEST(ProductMDomainTest, EmptyDomain)

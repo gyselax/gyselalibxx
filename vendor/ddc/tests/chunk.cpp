@@ -610,3 +610,22 @@ TEST(Chunk2DTest, DeepcopyReordered)
         }
     }
 }
+
+TEST(Chunk3DTest, AccessFromDiscreteElements)
+{
+    using DDomXYZ = ddc::DiscreteDomain<DDimX, DDimY, DDimZ>;
+    DDomZ dom_z(ddc::DiscreteElement<DDimZ>(2), ddc::DiscreteVector<DDimZ>(4));
+    ddc::Chunk<double, DDomXYZ> chunk(DDomXYZ(dom_x_y, dom_z));
+    ddc::ChunkSpan const chunk_span = chunk.span_cview();
+    for (auto&& ix : chunk.domain<DDimX>()) {
+        for (auto&& iy : chunk.domain<DDimY>()) {
+            for (auto&& iz : chunk.domain<DDimZ>()) {
+                chunk(ix, iy, iz) = 1.357 * ix.uid() + 1.159 * iy.uid() + 3.2 * iz.uid();
+                ddc::DiscreteElement<DDimX, DDimZ> const izx(iz, ix);
+                // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
+                EXPECT_EQ(chunk(ix, iy, iz), chunk(iy, izx));
+                EXPECT_EQ(chunk(ix, iy, iz), chunk_span(iy, izx));
+            }
+        }
+    }
+}

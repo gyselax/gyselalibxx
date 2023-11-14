@@ -31,6 +31,16 @@ template <class T>
 inline constexpr bool is_discrete_vector_v = IsDiscreteVector<T>::value;
 
 
+namespace detail {
+
+template <class... Tags>
+struct ToTypeSeq<DiscreteVector<Tags...>>
+{
+    using type = TypeSeq<Tags...>;
+};
+
+} // namespace detail
+
 /** A DiscreteVectorElement is a scalar that represents the difference between two coordinates.
  */
 using DiscreteVectorElement = std::ptrdiff_t;
@@ -169,20 +179,25 @@ KOKKOS_FUNCTION constexpr DiscreteVector<QueryTags...> select(
     return DiscreteVector<QueryTags...>(std::move(arr));
 }
 
-template <class QueryTag, class HeadTag, class... TailTags>
-KOKKOS_FUNCTION constexpr DiscreteVector<QueryTag> const& take(
-        DiscreteVector<HeadTag> const& head,
-        DiscreteVector<TailTags> const&... tags)
+/// Returns a reference towards the DiscreteVector that contains the QueryTag
+template <
+        class QueryTag,
+        class HeadDVect,
+        class... TailDVects,
+        std::enable_if_t<
+                is_discrete_vector_v<HeadDVect> && (is_discrete_vector_v<TailDVects> && ...),
+                int> = 1>
+KOKKOS_FUNCTION constexpr auto const& take(HeadDVect const& head, TailDVects const&... tail)
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
-    if constexpr (std::is_same_v<QueryTag, HeadTag>) {
+    if constexpr (type_seq_contains_v<detail::TypeSeq<QueryTag>, to_type_seq_t<HeadDVect>>) {
         static_assert(
-                !type_seq_contains_v<detail::TypeSeq<QueryTag>, detail::TypeSeq<TailTags...>>,
+                (!type_seq_contains_v<detail::TypeSeq<QueryTag>, to_type_seq_t<TailDVects>> && ...),
                 "ERROR: tag redundant");
         return head;
     } else {
-        static_assert(sizeof...(TailTags) > 0, "ERROR: tag not found");
-        return take<QueryTag>(tags...);
+        static_assert(sizeof...(TailDVects) > 0, "ERROR: tag not found");
+        return take<QueryTag>(tail...);
     }
     DDC_IF_NVCC_THEN_POP
 }
@@ -259,24 +274,16 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION constexpr DiscreteVector(DiscreteVector&&) = default;
 
-    template <class... OTags>
-    explicit KOKKOS_FUNCTION constexpr DiscreteVector(
-            DiscreteVector<OTags> const&... other) noexcept
-        : m_values {take<Tags>(other...).value()...}
-    {
-    }
-
-    template <class... OTags>
-    explicit KOKKOS_FUNCTION constexpr DiscreteVector(
-            DiscreteVector<OTags...> const& other) noexcept
-        : m_values {other.template get<Tags>()...}
+    template <class... DVects, class = std::enable_if_t<(is_discrete_vector_v<DVects> && ...)>>
+    explicit KOKKOS_FUNCTION constexpr DiscreteVector(DVects const&... delems) noexcept
+        : m_values {take<Tags>(delems...).template get<Tags>()...}
     {
     }
 
     template <
             class... Params,
-            class = std::enable_if_t<(std::is_convertible_v<Params, DiscreteVectorElement> && ...)>,
             class = std::enable_if_t<(!is_discrete_vector_v<Params> && ...)>,
+            class = std::enable_if_t<(std::is_convertible_v<Params, DiscreteVectorElement> && ...)>,
             class = std::enable_if_t<sizeof...(Params) == sizeof...(Tags)>>
     explicit KOKKOS_FUNCTION constexpr DiscreteVector(Params const&... params) noexcept
         : m_values {static_cast<DiscreteVectorElement>(params)...}

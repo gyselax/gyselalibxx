@@ -153,6 +153,9 @@ struct TypeSeqReplace<
 {
 };
 
+template <class T>
+struct ToTypeSeq;
+
 } // namespace detail
 
 template <class QueryTag, class TypeSeq>
@@ -192,4 +195,8 @@ using type_seq_merge_t = typename detail::TypeSeqMerge<TagSeqA, TagSeqB, TagSeqA
 template <class TagSeqA, class TagSeqB, class TagSeqC>
 using type_seq_replace_t =
         typename detail::TypeSeqReplace<TagSeqA, TagSeqB, TagSeqC, detail::TypeSeq<>>::type;
+
+template <class T>
+using to_type_seq_t = typename detail::ToTypeSeq<T>::type;
+
 } // namespace ddc

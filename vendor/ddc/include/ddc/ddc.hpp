@@ -35,3 +35,7 @@
 #if defined(DDC_BUILD_PDI_WRAPPER)
 #include "ddc/pdi.hpp"
 #endif
+
+#if ginkgo_AVAIL
+#include "misc/ginkgo_executors.hpp"
+#endif

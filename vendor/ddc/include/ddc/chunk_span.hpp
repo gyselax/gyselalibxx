@@ -252,31 +252,19 @@ public:
     }
 
     /** Element access using a list of DiscreteElement
-     * @param delems 1D discrete elements
-     * @return reference to this element
-     */
-    template <class... ODDims>
-    KOKKOS_FUNCTION constexpr reference operator()(
-            DiscreteElement<ODDims> const&... delems) const noexcept
-    {
-        static_assert(sizeof...(ODDims) == sizeof...(DDims), "Invalid number of dimensions");
-        assert(((delems >= front<ODDims>(this->m_domain)) && ...));
-        assert(((delems <= back<ODDims>(this->m_domain)) && ...));
-        return this->m_internal_mdspan(uid(take<DDims>(delems...))...);
-    }
-
-    /** Element access using a multi-dimensional DiscreteElement
      * @param delems discrete elements
      * @return reference to this element
      */
-    template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    KOKKOS_FUNCTION constexpr reference operator()(
-            DiscreteElement<ODDims...> const& delems) const noexcept
+    template <class... DElems>
+    KOKKOS_FUNCTION constexpr reference operator()(DElems const&... delems) const noexcept
     {
-        static_assert(sizeof...(ODDims) == sizeof...(DDims), "Invalid number of dimensions");
-        assert(((select<ODDims>(delems) >= front<ODDims>(this->m_domain)) && ...));
-        assert(((select<ODDims>(delems) <= back<ODDims>(this->m_domain)) && ...));
-        return this->m_internal_mdspan(uid<DDims>(delems)...);
+        static_assert(
+                sizeof...(DDims) == (0 + ... + DElems::size()),
+                "Invalid number of dimensions");
+        static_assert((is_discrete_element_v<DElems> && ...), "Expected DiscreteElements");
+        assert(((select<DDims>(take<DDims>(delems...)) >= front<DDims>(this->m_domain)) && ...));
+        assert(((select<DDims>(take<DDims>(delems...)) <= back<DDims>(this->m_domain)) && ...));
+        return this->m_internal_mdspan(uid<DDims>(take<DDims>(delems...))...);
     }
 
     /** Access to the underlying allocation pointer

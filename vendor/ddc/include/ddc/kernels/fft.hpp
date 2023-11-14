@@ -470,7 +470,7 @@ void core(
         // std::cout << "performed with cufft";
     }
 #endif
-#if hipfft_AVAIL && !HIP_FOR_NVIDIA
+#if hipfft_AVAIL
     else if constexpr (std::is_same_v<ExecSpace, Kokkos::HIP>) {
         hipStream_t stream = execSpace.hip_stream();
 
