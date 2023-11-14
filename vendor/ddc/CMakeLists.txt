@@ -5,15 +5,13 @@ project(DDC VERSION 0.0.0 LANGUAGES CXX)
 
 # List of options
 
+option(BUILD_FFT_KERNEL      "Build DDC kernel for FFT" ON)
+option(BUILD_SPLINES_KERNEL  "Build DDC kernel for splines" ON)
 option(BUILD_BENCHMARKS      "Build DDC benchmarks." OFF)
 option(BUILD_DOCUMENTATION   "Build DDC documentation/website" OFF)
 option(BUILD_EXAMPLES        "Build DDC examples" ON)
 option(DDC_BUILD_PDI_WRAPPER "Build DDC PDI wrapper" ON)
 option(DDC_ENABLE_DOUBLE     "Build DDC with double precision support, float is used otherwise" ON)
-option(HIP_FOR_NVIDIA 		 "Use the HIP wrapper for CUDA on NVIDIA plateforms, for development purpose" OFF)
-if(NOT(Kokkos_ENABLE_CUDA) AND HIP_FOR_NVIDIA)
-	message(FATAL_ERROR "Kokkos_ENABLE_CUDA has to be ON to use HIP wrapper on NVIDIA plateforms")
-endif()
 
 # Dependencies
 
@@ -94,12 +92,12 @@ endif()
 
 # FFTW
 list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ) # Maybe not specific to FFTW
-if(NOT FFTW_FOUND)
+if("${BUILD_FFT_KERNEL}" AND NOT FFTW_FOUND)
 	find_package( FFTW MODULE REQUIRED )
 endif()
 
 ## CUDA + CUDAToolkit
-if("${Kokkos_ENABLE_CUDA}" AND NOT("${HIP_FOR_NVIDIA}"))
+if("${BUILD_FFT_KERNEL}" AND "${Kokkos_ENABLE_CUDA}")
 	find_package( CUDAToolkit MODULE REQUIRED )
 	if( NOT(CUDAToolkit_FOUND) ) 
 	  message(FATAL_ERROR "CUDAToolkit not found." )
@@ -237,30 +235,12 @@ if("${Kokkos_ENABLE_HIP}")
 	target_compile_definitions(DDC INTERFACE hipfft_AVAIL)
 endif()
 
-if("${HIP_FOR_NVIDIA}")
-	find_package( HIP REQUIRED )
-
-	target_include_directories(DDC
-	SYSTEM INTERFACE
-	"$<BUILD_INTERFACE:${HIP_ROOT_DIR}/include>"
-	)
-	target_compile_definitions(DDC INTERFACE hip_AVAIL)
-	target_compile_definitions(DDC INTERFACE HIP_FOR_NVIDIA)
-
-	if( DEFINED HIP_TOOLKIT_PATH ) # Usually called ROCM_PATH in the HIP documentation. By default : /opt/rocm
-		list( APPEND CMAKE_PREFIX_PATH ${HIP_TOOLKIT_PATH}/hipfft/lib )
-		find_library(HIPFFT_LIB  hipfft REQUIRED)
-		target_link_libraries( DDC INTERFACE ${HIPFFT_LIB} )	
-		target_include_directories(DDC
-		SYSTEM INTERFACE
-			"$<BUILD_INTERFACE:${HIP_TOOLKIT_PATH}/include>"
-		)
-		target_compile_definitions(DDC INTERFACE hipfft_AVAIL)
-	else()
-		message( "HIP_TOOLKIT_PATH is not defined. Kernels functions may be unaccessible. To get them, add -DHIP_TOOLKIT_PATH=\"path_to_hip_toolkit\" in your cmake line" )
-	endif()
+if("${BUILD_SPLINES_KERNEL}")
+  # Ginkgo
+  find_package(Ginkgo 1.6.0 EXACT REQUIRED)
+  target_link_libraries(DDC INTERFACE Ginkgo::ginkgo)
+  target_compile_definitions(DDC INTERFACE ginkgo_AVAIL)
 endif()
-
 
 ## The PDI wrapper
 

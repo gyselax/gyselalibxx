@@ -36,6 +36,18 @@ using DVectXYZ = ddc::DiscreteVector<DDimX, DDimY, DDimZ>;
 
 } // namespace
 
+TEST(DiscreteElementXYZTest, ConstructorFromDiscreteElements)
+{
+    std::size_t const uid_x = 7;
+    std::size_t const uid_y = 13;
+    std::size_t const uid_z = 4;
+    DElemYX const iyx(uid_y, uid_x);
+    DElemZ const iz(uid_z);
+    DElemXYZ const ixyz(iyx, iz);
+    EXPECT_EQ(ixyz.uid<DDimX>(), uid_x);
+    EXPECT_EQ(ixyz.uid<DDimY>(), uid_y);
+    EXPECT_EQ(ixyz.uid<DDimZ>(), uid_z);
+}
 
 TEST(DiscreteElementXTest, RightExternalBinaryOperatorPlus)
 {

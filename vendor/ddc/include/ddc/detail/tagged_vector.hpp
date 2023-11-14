@@ -30,6 +30,11 @@ struct IsTaggedVector<TaggedVector<ElementType, Tags...>> : std::true_type
 template <class T>
 inline constexpr bool is_tagged_vector_v = IsTaggedVector<T>::value;
 
+template <class ElementType, class... Tags>
+struct ToTypeSeq<TaggedVector<ElementType, Tags...>>
+{
+    using type = TypeSeq<Tags...>;
+};
 
 } // namespace detail
 
@@ -186,20 +191,30 @@ KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, QueryTags...> select
 
 namespace detail {
 
-template <class QueryTag, class ElementType, class HeadTag, class... TailTags>
-KOKKOS_FUNCTION constexpr detail::TaggedVector<ElementType, QueryTag> const& take(
-        detail::TaggedVector<ElementType, HeadTag> const& head,
-        detail::TaggedVector<ElementType, TailTags> const&... tags)
+/// Returns a reference towards the DiscreteElement that contains the QueryTag
+template <
+        class QueryTag,
+        class HeadTaggedVector,
+        class... TailTaggedVectors,
+        std::enable_if_t<
+                is_tagged_vector_v<
+                        HeadTaggedVector> && (is_tagged_vector_v<TailTaggedVectors> && ...),
+                int> = 1>
+KOKKOS_FUNCTION constexpr auto const& take(
+        HeadTaggedVector const& head,
+        TailTaggedVectors const&... tail)
 {
     DDC_IF_NVCC_THEN_PUSH_AND_SUPPRESS(implicit_return_from_non_void_function)
-    if constexpr (std::is_same_v<QueryTag, HeadTag>) {
+    if constexpr (type_seq_contains_v<detail::TypeSeq<QueryTag>, to_type_seq_t<HeadTaggedVector>>) {
         static_assert(
-                !type_seq_contains_v<detail::TypeSeq<QueryTag>, detail::TypeSeq<TailTags...>>,
+                (!type_seq_contains_v<
+                         detail::TypeSeq<QueryTag>,
+                         to_type_seq_t<TailTaggedVectors>> && ...),
                 "ERROR: tag redundant");
         return head;
     } else {
-        static_assert(sizeof...(TailTags) > 0, "ERROR: tag not found");
-        return take<QueryTag>(tags...);
+        static_assert(sizeof...(TailTaggedVectors) > 0, "ERROR: tag not found");
+        return take<QueryTag>(tail...);
     }
     DDC_IF_NVCC_THEN_POP
 }
@@ -250,24 +265,16 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION constexpr TaggedVector(TaggedVector&&) = default;
 
-    template <class... OTags>
-    KOKKOS_FUNCTION constexpr TaggedVector(
-            TaggedVector<ElementType, OTags> const&... other) noexcept
-        : m_values {take<Tags>(other...).value()...}
-    {
-    }
-
-    template <class OElementType, class... OTags>
-    explicit KOKKOS_FUNCTION constexpr TaggedVector(
-            TaggedVector<OElementType, OTags...> const& other) noexcept
-        : m_values {(static_cast<ElementType>(other.template get<Tags>()))...}
+    template <class... TVectors, class = std::enable_if_t<(is_tagged_vector_v<TVectors> && ...)>>
+    explicit KOKKOS_FUNCTION constexpr TaggedVector(TVectors const&... delems) noexcept
+        : m_values {static_cast<ElementType>(take<Tags>(delems...).template get<Tags>())...}
     {
     }
 
     template <
             class... Params,
-            class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
             class = std::enable_if_t<(!is_tagged_vector_v<Params> && ...)>,
+            class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
             class = std::enable_if_t<sizeof...(Params) == sizeof...(Tags)>>
     explicit KOKKOS_FUNCTION constexpr TaggedVector(Params const&... params) noexcept
         : m_values {static_cast<ElementType>(params)...}
