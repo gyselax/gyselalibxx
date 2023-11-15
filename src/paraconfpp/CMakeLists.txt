@@ -8,4 +8,4 @@ target_include_directories(paraconfpp
 target_link_libraries(paraconfpp INTERFACE
         paraconf::paraconf
 )
-add_library(vcx::paraconfpp ALIAS paraconfpp)
+add_library(gslx::paraconfpp ALIAS paraconfpp)

@@ -16,5 +16,5 @@ target_link_libraries("utils"
         DDC::DDC
 )
 
-add_library("vcx::utils" ALIAS "utils")
+add_library("gslx::utils" ALIAS "utils")
 

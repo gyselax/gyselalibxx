@@ -10,4 +10,4 @@ target_link_libraries(quadrature INTERFACE
     sll::splines
 )
 
-add_library(vcx::quadrature ALIAS quadrature)
+add_library(gslx::quadrature ALIAS quadrature)

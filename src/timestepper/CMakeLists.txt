@@ -9,6 +9,6 @@ target_include_directories(timestepper
 target_link_libraries(timestepper INTERFACE
     DDC::DDC
     sll::splines
-    vcx::utils
+    gslx::utils
 )
-add_library(vcx::timestepper ALIAS timestepper)
+add_library(gslx::timestepper ALIAS timestepper)

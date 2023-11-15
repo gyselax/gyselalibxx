@@ -21,8 +21,8 @@ target_link_libraries(unit_tests_timestepper
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
-        vcx::timestepper
-        vcx::utils
+        gslx::timestepper
+        gslx::utils
 )
 
 gtest_discover_tests(unit_tests_timestepper)
