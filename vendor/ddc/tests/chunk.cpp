@@ -629,3 +629,16 @@ TEST(Chunk3DTest, AccessFromDiscreteElements)
         }
     }
 }
+
+TEST(Chunk2DTest, Mirror)
+{
+    ChunkXY<double> chunk(dom_x_y);
+    ddc::fill(chunk, 1.4);
+    auto const chunk2 = ddc::create_mirror_and_copy(chunk.span_view());
+    for (auto&& ix : chunk.domain<DDimX>()) {
+        for (auto&& iy : chunk.domain<DDimY>()) {
+            // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
+            EXPECT_EQ(chunk2(ix, iy), chunk(ix, iy));
+        }
+    }
+}
