@@ -40,7 +40,7 @@ using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
 template <class IDim, class SplineBuilder>
 ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
         ddc::DiscreteDomain<IDim> const& domain,
-        SplineBuilder&& builder)
+        SplineBuilder const& builder)
 {
     return builder.quadrature_coefficients(domain);
 }

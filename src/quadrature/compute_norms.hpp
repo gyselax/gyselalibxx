@@ -92,7 +92,7 @@ double compute_L2_norm(
  * @return A rvalue Chunk to the modified coefficients  @f$\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} @f$.
  */
 template <class Mapping, class... IDim>
-ddc::Chunk<double, ddc::DiscreteDomain<IDim...>>&& compute_coeffs_on_mapping(
+ddc::Chunk<double, ddc::DiscreteDomain<IDim...>> compute_coeffs_on_mapping(
         Mapping& mapping,
         ddc::Chunk<double, ddc::DiscreteDomain<IDim...>>&& coefficients)
 {
@@ -100,7 +100,7 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim...>>&& compute_coeffs_on_mapping(
     ddc::for_each(grid, [&](ddc::DiscreteElement<IDim...> const idx) {
         ddc::Coordinate<typename Mapping::curvilinear_tag_r, typename Mapping::curvilinear_tag_p>
                 coord(ddc::coordinate(idx));
-        coefficients(idx) *= mapping.jacobian(coord);
+        coefficients(idx) *= fabs(mapping.jacobian(coord));
     });
     return std::move(coefficients);
 }
