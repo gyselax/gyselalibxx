@@ -15,7 +15,7 @@ add_library(splines STATIC
     src/matrix_pds_tridiag.cpp
     src/gauss_legendre_integration.cpp
 )
-if(VOICEXX_ENABLE_DEPRECATED)
+if(GYSELALIBXX_ENABLE_DEPRECATED)
     target_sources(splines
 	    PRIVATE
 	      src/deprecated/bsplines.cpp

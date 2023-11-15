@@ -17,4 +17,4 @@ target_link_libraries("interpolation"
         sll::splines
 )
 
-add_library("vcx::interpolation" ALIAS "interpolation")
+add_library("gslx::interpolation" ALIAS "interpolation")

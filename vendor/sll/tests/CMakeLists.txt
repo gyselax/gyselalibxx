@@ -11,7 +11,7 @@ add_executable(splines_tests_sll
     view.cpp
     gauss_legendre_integration.cpp
 )
-if(VOICEXX_ENABLE_DEPRECATED)
+if(GYSELALIBXX_ENABLE_DEPRECATED)
     target_sources(splines_tests_sll
 	PRIVATE
         bsplines_non_uniform.cpp

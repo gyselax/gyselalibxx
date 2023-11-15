@@ -12,7 +12,7 @@ target_link_libraries(Li_norms_spline_quadrature_tests
         GTest::gmock
         DDC::DDC
         sll::splines
-        vcx::geometry_RTheta
-        vcx::quadrature
+        gslx::geometry_RTheta
+        gslx::quadrature
 )
 gtest_discover_tests(Li_norms_spline_quadrature_tests)

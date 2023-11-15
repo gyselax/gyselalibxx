@@ -47,7 +47,7 @@ wait
 trap '-' EXIT QUIT ABRT KILL SEGV INT TERM STOP
 
 # create an activation script
-cat<<EOF > "${VOICE_DIR}/bin/voicexx.env.sh"
+cat<<EOF > "${VOICE_DIR}/bin/gyselalibxx.env.sh"
 despacktivate &> /dev/null || true
 spack unload -a &> /dev/null || true
 module purge &> /dev/null || true
@@ -58,4 +58,4 @@ then
 fi
 spack env activate -d "${VOICE_DIR}"
 EOF
-echo -e "\n\nIf everything went well, you can now activate your environment with:\n source $(realpath --relative-to=. ${VOICE_DIR}/bin/voicexx.env.sh)"
+echo -e "\n\nIf everything went well, you can now activate your environment with:\n source $(realpath --relative-to=. ${VOICE_DIR}/bin/gyselalibxx.env.sh)"

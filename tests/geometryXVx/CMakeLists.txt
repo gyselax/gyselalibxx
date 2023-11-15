@@ -26,12 +26,12 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         GTest::gmock
         paraconf::paraconf
         sll::splines
-        vcx::advection
-        vcx::boltzmann_${GEOMETRY_VARIANT}
-        vcx::initialization_${GEOMETRY_VARIANT}
-        vcx::poisson_${GEOMETRY_VARIANT}
-        vcx::quadrature
-        vcx::utils_${GEOMETRY_VARIANT}
+        gslx::advection
+        gslx::boltzmann_${GEOMETRY_VARIANT}
+        gslx::initialization_${GEOMETRY_VARIANT}
+        gslx::poisson_${GEOMETRY_VARIANT}
+        gslx::quadrature
+        gslx::utils_${GEOMETRY_VARIANT}
 )
 
 gtest_discover_tests(unit_tests_${GEOMETRY_VARIANT}
@@ -65,8 +65,8 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 	        GTest::gmock
 	        paraconf::paraconf
 	        sll::splines
-	        vcx::quadrature
-	        vcx::geometry_${GEOMETRY_VARIANT}
+	        gslx::quadrature
+	        gslx::geometry_${GEOMETRY_VARIANT}
 	)
 	
 	gtest_discover_tests(spline_quadrature_tests_${GEOMETRY_VARIANT}
