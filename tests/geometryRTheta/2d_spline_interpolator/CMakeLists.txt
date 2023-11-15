@@ -13,9 +13,9 @@ target_link_libraries(2d_spline_interpolator_tests
     PUBLIC
         DDC::DDC
         sll::splines
-        vcx::geometry_RTheta
-        vcx::interpolation_2D_rp
-        vcx::paraconfpp
+        gslx::geometry_RTheta
+        gslx::interpolation_2D_rp
+        gslx::paraconfpp
 )
 
  

@@ -18,10 +18,10 @@ target_include_directories("utils_${GEOMETRY_VARIANT}"
 target_link_libraries("utils_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
-        vcx::geometry_${GEOMETRY_VARIANT}
-        vcx::quadrature
+        gslx::geometry_${GEOMETRY_VARIANT}
+        gslx::quadrature
 )
 
-add_library("vcx::utils_${GEOMETRY_VARIANT}" ALIAS "utils_${GEOMETRY_VARIANT}")
+add_library("gslx::utils_${GEOMETRY_VARIANT}" ALIAS "utils_${GEOMETRY_VARIANT}")
 
 endforeach()

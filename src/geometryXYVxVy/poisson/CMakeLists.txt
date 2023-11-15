@@ -20,8 +20,8 @@ target_link_libraries("poisson_xy"
     PUBLIC
         DDC::DDC
         sll::splines
-        vcx::geometry_xyvxvy
-        vcx::speciesinfo
+        gslx::geometry_xyvxvy
+        gslx::speciesinfo
 )
 
-add_library("vcx::poisson_xy" ALIAS "poisson_xy")
+add_library("gslx::poisson_xy" ALIAS "poisson_xy")

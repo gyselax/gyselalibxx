@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 cmake_minimum_required(VERSION 3.20)
-project(voicexx C CXX)
+project(gyselalibxx C CXX)
 
 set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 
@@ -17,10 +17,10 @@ set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are re
 ## List of options
 option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
 option(BUILD_DOCUMENTATION "Build the documentation." OFF)
-option(VOICEXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
-set(VOICEXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Voice++")
+option(GYSELALIBXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
+set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Voice++")
 
-set(VOICEXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
+set(GYSELALIBXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
 
 # Our dependencies
 
@@ -39,17 +39,17 @@ find_package(PDI REQUIRED COMPONENTS C)
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
 if("${BUILD_TESTING}")
-  set(VOICEXX_GTest_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `GTest` package. Options: ${VOICEXX_DEPENDENCY_POLICIES}")
-  set_property(CACHE VOICEXX_GTest_DEPENDENCY_POLICY PROPERTY STRINGS ${VOICEXX_DEPENDENCY_POLICIES})
+  set(GYSELALIBXX_GTest_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `GTest` package. Options: ${GYSELALIBXX_DEPENDENCY_POLICIES}")
+  set_property(CACHE GYSELALIBXX_GTest_DEPENDENCY_POLICY PROPERTY STRINGS ${GYSELALIBXX_DEPENDENCY_POLICIES})
 
-  if("${VOICEXX_GTest_DEPENDENCY_POLICY}" STREQUAL "AUTO")
+  if("${GYSELALIBXX_GTest_DEPENDENCY_POLICY}" STREQUAL "AUTO")
     find_package(GTest "1.12" QUIET)
     if(NOT "${GTest_FOUND}")
       add_subdirectory("vendor/googletest/" "googletest")
     endif()
-  elseif("${VOICEXX_GTest_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
+  elseif("${GYSELALIBXX_GTest_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
     add_subdirectory("vendor/googletest/" "googletest")
-  elseif("${VOICEXX_GTest_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
+  elseif("${GYSELALIBXX_GTest_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
     find_package(GTest "1.12" REQUIRED)
   endif()
 endif()
@@ -58,39 +58,39 @@ endif()
 ### we use it to write our micro-benchmarks
 ### this must come after googletest
 if("${BUILD_BENCHMARKS}")
-    set(VOICEXX_benchmark_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `benchmark` package. Options: ${VOICEXX_DEPENDENCY_POLICIES}")
-    set_property(CACHE VOICEXX_benchmark_DEPENDENCY_POLICY PROPERTY STRINGS ${VOICEXX_DEPENDENCY_POLICIES})
+    set(GYSELALIBXX_benchmark_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `benchmark` package. Options: ${GYSELALIBXX_DEPENDENCY_POLICIES}")
+    set_property(CACHE GYSELALIBXX_benchmark_DEPENDENCY_POLICY PROPERTY STRINGS ${GYSELALIBXX_DEPENDENCY_POLICIES})
 
-    if("${VOICEXX_benchmark_DEPENDENCY_POLICY}" STREQUAL "AUTO")
+    if("${GYSELALIBXX_benchmark_DEPENDENCY_POLICY}" STREQUAL "AUTO")
       find_package(benchmark "1.6" QUIET)
       if(NOT "${benchmark_FOUND}")
         option(BENCHMARK_ENABLE_TESTING "Enable testing of the benchmark library." OFF)
         option(BENCHMARK_ENABLE_INSTALL "Enable installation of benchmark. (Projects embedding benchmark may want to turn this OFF.)" OFF)
         add_subdirectory("vendor/benchmark/" "benchmark")
       endif()
-    elseif("${VOICEXX_benchmark_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
+    elseif("${GYSELALIBXX_benchmark_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
       option(BENCHMARK_ENABLE_TESTING "Enable testing of the benchmark library." OFF)
       option(BENCHMARK_ENABLE_INSTALL "Enable installation of benchmark. (Projects embedding benchmark may want to turn this OFF.)" OFF)
       add_subdirectory("vendor/benchmark/" "benchmark")
-    elseif("${VOICEXX_benchmark_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
+    elseif("${GYSELALIBXX_benchmark_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
       find_package(benchmark "1.6" REQUIRED)
     endif()
 endif()
 
 ## Use mdspan from `vendor/`
-set(VOICEXX_mdspan_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `mdspan` package. Options: ${VOICEXX_DEPENDENCY_POLICIES}")
-set_property(CACHE VOICEXX_mdspan_DEPENDENCY_POLICY PROPERTY STRINGS ${VOICEXX_DEPENDENCY_POLICIES})
+set(GYSELALIBXX_mdspan_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `mdspan` package. Options: ${GYSELALIBXX_DEPENDENCY_POLICIES}")
+set_property(CACHE GYSELALIBXX_mdspan_DEPENDENCY_POLICY PROPERTY STRINGS ${GYSELALIBXX_DEPENDENCY_POLICIES})
 
-if("${VOICEXX_mdspan_DEPENDENCY_POLICY}" STREQUAL "AUTO")
+if("${GYSELALIBXX_mdspan_DEPENDENCY_POLICY}" STREQUAL "AUTO")
   find_package(mdspan "0.3" QUIET)
   if(NOT "${mdspan_FOUND}")
     set(MDSPAN_CXX_STANDARD "${CMAKE_CXX_STANDARD}" CACHE STRING "Override the default CXX_STANDARD to compile with" FORCE)
     add_subdirectory("vendor/mdspan/" "mdspan")
   endif()
-elseif("${VOICEXX_mdspan_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
+elseif("${GYSELALIBXX_mdspan_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
   set(MDSPAN_CXX_STANDARD "${CMAKE_CXX_STANDARD}" CACHE STRING "Override the default CXX_STANDARD to compile with" FORCE)
   add_subdirectory("vendor/mdspan/" "mdspan")
-elseif("${VOICEXX_mdspan_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
+elseif("${GYSELALIBXX_mdspan_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
   find_package(mdspan "0.3" REQUIRED)
 endif()
 
@@ -126,7 +126,7 @@ add_subdirectory("vendor/sll/" "sll")
 # Our project code
 
 ## Change the C++ flags to the voice specific ones
-set(CMAKE_CXX_FLAGS "${VOICEXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "${GYSELALIBXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx)
 

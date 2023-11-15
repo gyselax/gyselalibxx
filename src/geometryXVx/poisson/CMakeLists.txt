@@ -21,11 +21,11 @@ target_link_libraries("poisson_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         sll::splines
-        vcx::geometry_${GEOMETRY_VARIANT}
-        vcx::speciesinfo
+        gslx::geometry_${GEOMETRY_VARIANT}
+        gslx::speciesinfo
 )
 
-add_library("vcx::poisson_${GEOMETRY_VARIANT}" ALIAS "poisson_${GEOMETRY_VARIANT}")
+add_library("gslx::poisson_${GEOMETRY_VARIANT}" ALIAS "poisson_${GEOMETRY_VARIANT}")
 
 endforeach()
 

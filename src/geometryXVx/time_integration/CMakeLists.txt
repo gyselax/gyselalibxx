@@ -19,11 +19,11 @@ target_link_libraries("time_integration_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         DDC::PDI_Wrapper
-        vcx::poisson_${GEOMETRY_VARIANT}
-        vcx::speciesinfo
-        vcx::boltzmann_${GEOMETRY_VARIANT}
+        gslx::poisson_${GEOMETRY_VARIANT}
+        gslx::speciesinfo
+        gslx::boltzmann_${GEOMETRY_VARIANT}
 )
 
-add_library("vcx::time_integration_${GEOMETRY_VARIANT}" ALIAS "time_integration_${GEOMETRY_VARIANT}")
+add_library("gslx::time_integration_${GEOMETRY_VARIANT}" ALIAS "time_integration_${GEOMETRY_VARIANT}")
 
 endforeach()

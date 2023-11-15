@@ -17,8 +17,8 @@ target_link_libraries("poisson_RTheta"
     PUBLIC
         DDC::DDC
         sll::splines
-        vcx::geometry_RTheta
-        vcx::speciesinfo
+        gslx::geometry_RTheta
+        gslx::speciesinfo
 )
 
-add_library("vcx::poisson_RTheta" ALIAS "poisson_RTheta")
+add_library("gslx::poisson_RTheta" ALIAS "poisson_RTheta")

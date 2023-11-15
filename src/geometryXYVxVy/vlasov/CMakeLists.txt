@@ -17,9 +17,9 @@ target_link_libraries("vlasov_xyvxvy"
     PUBLIC
         DDC::DDC
         sll::splines
-        vcx::speciesinfo
-        vcx::geometry_xyvxvy
-        vcx::advection
+        gslx::speciesinfo
+        gslx::geometry_xyvxvy
+        gslx::advection
 )
 
-add_library("vcx::vlasov_xyvxvy" ALIAS "vlasov_xyvxvy")
+add_library("gslx::vlasov_xyvxvy" ALIAS "vlasov_xyvxvy")

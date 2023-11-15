@@ -15,8 +15,8 @@ target_link_libraries("advection"
     INTERFACE
         DDC::DDC
         sll::splines
-        vcx::interpolation
-        vcx::speciesinfo
+        gslx::interpolation
+        gslx::speciesinfo
 )
 
-add_library("vcx::advection" ALIAS "advection")
+add_library("gslx::advection" ALIAS "advection")

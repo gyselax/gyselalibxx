@@ -13,10 +13,10 @@ target_link_libraries(unit_tests_xy_vxvy
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
-        vcx::geometry_xyvxvy
+        gslx::geometry_xyvxvy
         sll::splines
-        vcx::advection
-        vcx::quadrature
+        gslx::advection
+        gslx::quadrature
 )
 
 gtest_discover_tests(unit_tests_xy_vxvy

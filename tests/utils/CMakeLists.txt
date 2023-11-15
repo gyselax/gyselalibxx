@@ -15,7 +15,7 @@ target_link_libraries(unit_tests_utils
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
-        vcx::utils
+        gslx::utils
 )
 
 gtest_discover_tests(unit_tests_utils)

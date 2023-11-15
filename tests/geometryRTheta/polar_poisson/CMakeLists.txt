@@ -14,10 +14,10 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
             paraconf::paraconf
             PDI::pdi
             sll::splines
-            vcx::poisson_RTheta
-            vcx::paraconfpp
+            gslx::poisson_RTheta
+            gslx::paraconfpp
             Eigen3::Eigen
-            vcx::geometry_RTheta
+            gslx::geometry_RTheta
     )
     target_compile_definitions("${test_name}" PUBLIC -D${MAPPING_TYPE} -D${SOLUTION})
 

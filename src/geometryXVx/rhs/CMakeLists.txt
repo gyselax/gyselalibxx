@@ -25,15 +25,15 @@ target_link_libraries("rhs_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         DDC::PDI_Wrapper
-        vcx::geometry_${GEOMETRY_VARIANT}
-        vcx::quadrature
-        vcx::speciesinfo
-        vcx::initialization_${GEOMETRY_VARIANT}
-	vcx::timestepper
-        vcx::utils_${GEOMETRY_VARIANT}
-        vcx::utils
+        gslx::geometry_${GEOMETRY_VARIANT}
+        gslx::quadrature
+        gslx::speciesinfo
+        gslx::initialization_${GEOMETRY_VARIANT}
+	gslx::timestepper
+        gslx::utils_${GEOMETRY_VARIANT}
+        gslx::utils
 )
 
-add_library("vcx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
+add_library("gslx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
 
 endforeach()

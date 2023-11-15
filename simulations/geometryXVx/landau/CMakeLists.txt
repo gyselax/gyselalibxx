@@ -11,14 +11,14 @@ target_link_libraries(landau_fem_uniform_${GEOMETRY_VARIANT}
         paraconf::paraconf
         PDI::pdi
         sll::splines
-        vcx::initialization_${GEOMETRY_VARIANT}
-        vcx::interpolation
-        vcx::paraconfpp
-        vcx::poisson_${GEOMETRY_VARIANT}
-        vcx::speciesinfo
-        vcx::time_integration_${GEOMETRY_VARIANT}
-        vcx::boltzmann_${GEOMETRY_VARIANT}
-        vcx::advection
+        gslx::initialization_${GEOMETRY_VARIANT}
+        gslx::interpolation
+        gslx::paraconfpp
+        gslx::poisson_${GEOMETRY_VARIANT}
+        gslx::speciesinfo
+        gslx::time_integration_${GEOMETRY_VARIANT}
+        gslx::boltzmann_${GEOMETRY_VARIANT}
+        gslx::advection
 )
 
 install(TARGETS landau_fem_uniform_${GEOMETRY_VARIANT})
@@ -34,14 +34,14 @@ target_link_libraries(landau_fft
         paraconf::paraconf
         PDI::pdi
         sll::splines
-        vcx::initialization_xperiod_vx
-        vcx::interpolation
-        vcx::paraconfpp
-        vcx::poisson_xperiod_vx
-        vcx::speciesinfo
-        vcx::time_integration_xperiod_vx
-        vcx::boltzmann_xperiod_vx
-        vcx::advection
+        gslx::initialization_xperiod_vx
+        gslx::interpolation
+        gslx::paraconfpp
+        gslx::poisson_xperiod_vx
+        gslx::speciesinfo
+        gslx::time_integration_xperiod_vx
+        gslx::boltzmann_xperiod_vx
+        gslx::advection
 )
 
 install(TARGETS landau_fft)

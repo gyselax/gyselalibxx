@@ -20,11 +20,11 @@ target_include_directories("initialization_${GEOMETRY_VARIANT}"
 target_link_libraries("initialization_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
-        vcx::speciesinfo
-        vcx::geometry_${GEOMETRY_VARIANT}
-        vcx::utils
+        gslx::speciesinfo
+        gslx::geometry_${GEOMETRY_VARIANT}
+        gslx::utils
 )
 
-add_library("vcx::initialization_${GEOMETRY_VARIANT}" ALIAS "initialization_${GEOMETRY_VARIANT}")
+add_library("gslx::initialization_${GEOMETRY_VARIANT}" ALIAS "initialization_${GEOMETRY_VARIANT}")
 
 endforeach()

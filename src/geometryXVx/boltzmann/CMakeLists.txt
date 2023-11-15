@@ -20,13 +20,13 @@ target_link_libraries("boltzmann_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         sll::splines
-        vcx::interpolation
-        vcx::speciesinfo
-        vcx::geometry_${GEOMETRY_VARIANT}
-        vcx::rhs_${GEOMETRY_VARIANT}
-        vcx::advection
+        gslx::interpolation
+        gslx::speciesinfo
+        gslx::geometry_${GEOMETRY_VARIANT}
+        gslx::rhs_${GEOMETRY_VARIANT}
+        gslx::advection
 )
 
-add_library("vcx::boltzmann_${GEOMETRY_VARIANT}" ALIAS "boltzmann_${GEOMETRY_VARIANT}")
+add_library("gslx::boltzmann_${GEOMETRY_VARIANT}" ALIAS "boltzmann_${GEOMETRY_VARIANT}")
 
 endforeach()

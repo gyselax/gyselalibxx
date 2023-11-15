@@ -17,9 +17,9 @@ target_include_directories("initialization_xyvxvy"
 target_link_libraries("initialization_xyvxvy"
     PUBLIC
         DDC::DDC
-        vcx::speciesinfo
-        vcx::geometry_xyvxvy
-        vcx::utils
+        gslx::speciesinfo
+        gslx::geometry_xyvxvy
+        gslx::utils
 )
 
-add_library("vcx::initialization_xyvxvy" ALIAS "initialization_xyvxvy")
+add_library("gslx::initialization_xyvxvy" ALIAS "initialization_xyvxvy")

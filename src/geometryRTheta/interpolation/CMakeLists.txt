@@ -18,7 +18,7 @@ target_link_libraries("interpolation_2D_rp"
     PUBLIC
         DDC::DDC
         sll::splines
-        vcx::geometry_RTheta
+        gslx::geometry_RTheta
 )
 
-add_library("vcx::interpolation_2D_rp" ALIAS "interpolation_2D_rp")
+add_library("gslx::interpolation_2D_rp" ALIAS "interpolation_2D_rp")
