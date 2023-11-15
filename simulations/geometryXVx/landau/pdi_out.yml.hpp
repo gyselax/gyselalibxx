@@ -5,6 +5,7 @@ metadata:
   Nx : int
   Nvx : int
   iter : int
+  iter_start : int
   time_saved : double
   nbstep_diag: int
   iter_saved : int
@@ -55,7 +56,7 @@ plugins:
     on_data:
       iter:
         - set:
-          - iter_saved: '${iter}/${nbstep_diag}'
+          - iter_saved: '${iter_start} + ${iter}/${nbstep_diag}'
     on_finalize:
       - release: [iter_saved]
   decl_hdf5:
@@ -68,5 +69,8 @@ plugins:
       when: '${iter} % ${nbstep_diag} = 0'
       collision_policy: replace_and_warn
       write: [time_saved, fdistribu, electrostatic_potential]
+    - file: 'VOICEXX_${iter_start:05}.h5'
+      on_event: restart
+      read: [time_saved, fdistribu]
   #trace: ~
 )PDI_CFG";
