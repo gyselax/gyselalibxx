@@ -17,7 +17,7 @@ cmake_tests:
     GIT_SUBMODULE_STRATEGY: recursive
     SLL_BUILD_TESTING: "ON"
   script: |
-    git config --global --add safe.directory /builds/gysela-developpers/voicexx/vendor/kokkos
+    git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
     rm -rf build || true
     mkdir build
     cd build
@@ -48,7 +48,7 @@ cmake_tests_Release:
     SLL_BUILD_TESTING: "ON"
   script: |
     set -e
-    git config --global --add safe.directory /builds/gysela-developpers/voicexx/vendor/kokkos
+    git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
     rm -rf build || true
     mkdir build
     cd build
@@ -122,7 +122,7 @@ documentation:
     git config --global --add safe.directory $CI_PROJECT_DIR
     git fetch origin ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} --recurse-submodules=no
   script: |
-    git config --global --add safe.directory /builds/gysela-developpers/voicexx/vendor/kokkos
+    git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
     rm -rf build || true
     # Make docs
     mkdir build
