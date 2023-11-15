@@ -106,25 +106,28 @@ $(document).ready(function(){initNavTree('classPredCorr.html',''); initResizable
 <div class="title">PredCorr Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class that solves a Boltzmann-Poisson system of equations using a predictor-corrector scheme.  
+ <a href="classPredCorr.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PredCorr:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classPredCorr.png" usemap="#PredCorr_map" alt=""/>
   <map id="PredCorr_map" name="PredCorr_map">
-<area href="classITimeSolver.html" alt="ITimeSolver" shape="rect" coords="0,0,78,24"/>
-<area href="classITimeSolver.html" alt="ITimeSolver" shape="rect" coords="88,0,166,24"/>
+<area href="classITimeSolver.html" title="An abstract class for solving a Boltzmann-Poisson system of equations." alt="ITimeSolver" shape="rect" coords="0,0,78,24"/>
+<area href="classITimeSolver.html" title="An abstract class for solving a Boltzmann-Poisson system of equations." alt="ITimeSolver" shape="rect" coords="88,0,166,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2456246c1a302aea3302ae4ea8521b4d"><td class="memItemLeft" align="right" valign="top"><a id="a2456246c1a302aea3302ae4ea8521b4d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PredCorr</b> (<a class="el" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> const &amp;boltzmann_solver, <a class="el" href="classIPoissonSolver.html">IPoissonSolver</a> const &amp;poisson_solver)</td></tr>
+<tr class="memitem:a2456246c1a302aea3302ae4ea8521b4d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d">PredCorr</a> (<a class="el" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> const &amp;boltzmann_solver, <a class="el" href="classIPoissonSolver.html">IPoissonSolver</a> const &amp;poisson_solver)</td></tr>
+<tr class="memdesc:a2456246c1a302aea3302ae4ea8521b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the predictor-corrector class.  <a href="classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d">More...</a><br /></td></tr>
 <tr class="separator:a2456246c1a302aea3302ae4ea8521b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acae5241fdde35ebb5ba55c3aaf68eb5c"><td class="memItemLeft" align="right" valign="top"><a id="acae5241fdde35ebb5ba55c3aaf68eb5c"></a>
-DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpXVx allfdistribu, double dt, int steps=1) const override</td></tr>
-<tr class="separator:acae5241fdde35ebb5ba55c3aaf68eb5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5916671433abd2af3ee5e0ed3b8eae60"><td class="memItemLeft" align="right" valign="top">DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">operator()</a> (DSpanSpXVx allfdistribu, double time_start, double dt, int steps=1) const override</td></tr>
+<tr class="memdesc:a5916671433abd2af3ee5e0ed3b8eae60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Boltzmann-Poisson system.  <a href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">More...</a><br /></td></tr>
+<tr class="separator:a5916671433abd2af3ee5e0ed3b8eae60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4b6fdfbec28c702b689ae31f56865f6"><td class="memItemLeft" align="right" valign="top"><a id="ae4b6fdfbec28c702b689ae31f56865f6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PredCorr</b> (<a class="el" href="classIVlasovSolver.html">IVlasovSolver</a> const &amp;vlasov_solver, <a class="el" href="classIPoissonSolver.html">IPoissonSolver</a> const &amp;poisson_solver)</td></tr>
 <tr class="separator:ae4b6fdfbec28c702b689ae31f56865f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,6 +135,110 @@ DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> 
 DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpXYVxVy allfdistribu, double dt, int steps=1) const override</td></tr>
 <tr class="separator:a6b53cbaf3e38421ed68ed2c3d0715d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class that solves a Boltzmann-Poisson system of equations using a predictor-corrector scheme. </p>
+<p>A class that solves a Boltzmann-Poisson system with a predictor corrector scheme. This scheme consists in estimating the electric potential after a time interval of a half-timestep. This potential is then used to compute the value of the distribution function at time t+dt, where dt is the timestep. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2456246c1a302aea3302ae4ea8521b4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2456246c1a302aea3302ae4ea8521b4d">&#9670;&nbsp;</a></span>PredCorr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PredCorr::PredCorr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> const &amp;&#160;</td>
+          <td class="paramname"><em>boltzmann_solver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classIPoissonSolver.html">IPoissonSolver</a> const &amp;&#160;</td>
+          <td class="paramname"><em>poisson_solver</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates an instance of the predictor-corrector class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">boltzmann_solver</td><td>A solver for a Boltzmann equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">poisson_solver</td><td>A solver for a Poisson equation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5916671433abd2af3ee5e0ed3b8eae60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5916671433abd2af3ee5e0ed3b8eae60">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DSpanSpXVx PredCorr::operator() </td>
+          <td>(</td>
+          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>time_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>steps</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solves the Boltzmann-Poisson system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Boltzmann-Poisson system a given number of iterations. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">time_start</td><td>The physical time at the start of the simulation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The timestep. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">steps</td><td>The number of iterations to be performed by the predictor-corrector. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the system. </dd></dl>
+
+<p>Implements <a class="el" href="classITimeSolver.html#ab62c963f741ff88c6167c798392d8d20">ITimeSolver</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/time_integration/<a class="el" href="geometryXVx_2time__integration_2predcorr_8hpp_source.html">predcorr.hpp</a></li>
 </ul>

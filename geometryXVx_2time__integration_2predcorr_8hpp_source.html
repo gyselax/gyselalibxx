@@ -114,24 +114,27 @@ $(document).ready(function(){initNavTree('geometryXVx_2time__integration_2predco
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span><a class="code" href="classIPoissonSolver.html">IPoissonSolver</a>;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a>;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classPredCorr.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPredCorr.html">PredCorr</a> : <span class="keyword">public</span> <a class="code" href="classITimeSolver.html">ITimeSolver</a></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; m_boltzmann_solver;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a> <span class="keyword">const</span>&amp; m_poisson_solver;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="classPredCorr.html">PredCorr</a>(<a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; boltzmann_solver, <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a> <span class="keyword">const</span>&amp; poisson_solver);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    ~<a class="code" href="classPredCorr.html">PredCorr</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, <span class="keywordtype">double</span> dt, <span class="keywordtype">int</span> steps = 1) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classPredCorr.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPredCorr.html">PredCorr</a> : <span class="keyword">public</span> <a class="code" href="classITimeSolver.html">ITimeSolver</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; m_boltzmann_solver;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a> <span class="keyword">const</span>&amp; m_poisson_solver;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d">   35</a></span>&#160;    <a class="code" href="classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d">PredCorr</a>(<a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; boltzmann_solver, <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a> <span class="keyword">const</span>&amp; poisson_solver);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ~<a class="code" href="classPredCorr.html">PredCorr</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">   49</a></span>&#160;    DSpanSpXVx <a class="code" href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">operator()</a>(DSpanSpXVx allfdistribu, <span class="keywordtype">double</span> time_start, <span class="keywordtype">double</span> dt, <span class="keywordtype">int</span> steps = 1)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
 <div class="ttc" id="aclassIBoltzmannSolver_html"><div class="ttname"><a href="classIBoltzmannSolver.html">IBoltzmannSolver</a></div><div class="ttdef"><b>Definition:</b> iboltzmannsolver.hpp:8</div></div>
 <div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:10</div></div>
-<div class="ttc" id="aclassITimeSolver_html"><div class="ttname"><a href="classITimeSolver.html">ITimeSolver</a></div><div class="ttdef"><b>Definition:</b> itimesolver.hpp:8</div></div>
-<div class="ttc" id="aclassPredCorr_html"><div class="ttname"><a href="classPredCorr.html">PredCorr</a></div><div class="ttdef"><b>Definition:</b> predcorr.hpp:13</div></div>
+<div class="ttc" id="aclassITimeSolver_html"><div class="ttname"><a href="classITimeSolver.html">ITimeSolver</a></div><div class="ttdoc">An abstract class for solving a Boltzmann-Poisson system of equations.</div><div class="ttdef"><b>Definition:</b> itimesolver.hpp:11</div></div>
+<div class="ttc" id="aclassPredCorr_html"><div class="ttname"><a href="classPredCorr.html">PredCorr</a></div><div class="ttdoc">A class that solves a Boltzmann-Poisson system of equations using a predictor-corrector scheme.</div><div class="ttdef"><b>Definition:</b> predcorr.hpp:23</div></div>
+<div class="ttc" id="aclassPredCorr_html_a2456246c1a302aea3302ae4ea8521b4d"><div class="ttname"><a href="classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d">PredCorr::PredCorr</a></div><div class="ttdeci">PredCorr(IBoltzmannSolver const &amp;boltzmann_solver, IPoissonSolver const &amp;poisson_solver)</div><div class="ttdoc">Creates an instance of the predictor-corrector class.</div></div>
+<div class="ttc" id="aclassPredCorr_html_a5916671433abd2af3ee5e0ed3b8eae60"><div class="ttname"><a href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">PredCorr::operator()</a></div><div class="ttdeci">DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double time_start, double dt, int steps=1) const override</div><div class="ttdoc">Solves the Boltzmann-Poisson system.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
