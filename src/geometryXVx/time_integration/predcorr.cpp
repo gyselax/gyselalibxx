@@ -16,8 +16,11 @@ PredCorr::PredCorr(IBoltzmannSolver const& boltzmann_solver, IPoissonSolver cons
 {
 }
 
-DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, double const dt, int const steps)
-        const
+DSpanSpXVx PredCorr::operator()(
+        DSpanSpXVx const allfdistribu,
+        double const time_start,
+        double const dt,
+        int const steps) const
 {
     // electrostatic potential and electric field (depending only on x)
     DFieldX electrostatic_potential(allfdistribu.domain<IDimX>());
@@ -30,7 +33,7 @@ DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, double const dt, 
 
     int iter = 0;
     for (; iter < steps; ++iter) {
-        double const iter_time = iter * dt;
+        double const iter_time = time_start + iter * dt;
 
         // computation of the electrostatic potential at time tn and
         // the associated electric field
@@ -55,7 +58,7 @@ DSpanSpXVx PredCorr::operator()(DSpanSpXVx const allfdistribu, double const dt, 
         m_boltzmann_solver(allfdistribu, electric_field, dt);
     }
 
-    double const final_time = iter * dt;
+    double const final_time = time_start + iter * dt;
     m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
     ddc::PdiEvent("last_iteration")
             .with("iter", iter)

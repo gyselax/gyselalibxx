@@ -26,6 +26,7 @@
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
+#include "restartinitialization.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
 #include "spline_interpolator.hpp"
@@ -50,6 +51,7 @@ int main(int argc, char** argv)
 {
     ddc::ScopeGuard scope(argc, argv);
 
+    long int iter_start(0);
     PC_tree_t conf_voicexx;
     if (argc == 2) {
         conf_voicexx = PC_parse_path(fs::path(argv[1]).c_str());
@@ -59,8 +61,15 @@ int main(int argc, char** argv)
             file << params_yaml;
             return EXIT_SUCCESS;
         }
+    } else if (argc == 4) {
+        if (argv[1] == std::string_view("--iter-restart")) {
+            iter_start = std::strtol(argv[2], NULL, 10);
+            conf_voicexx = PC_parse_path(fs::path(argv[3]).c_str());
+        }
     } else {
         cerr << "usage: " << argv[0] << " [--dump-config] <config_file.yml>" << endl;
+        cerr << "or to perform a restart" << argv[0] << " [--iter-restart] <iter> <config_file.yml>"
+             << endl;
         return EXIT_FAILURE;
     }
     PC_errhandler(PC_NULL_HANDLER);
@@ -150,11 +159,23 @@ int main(int argc, char** argv)
             std::move(mean_velocity_eq));
     init_fequilibrium(allfequilibrium);
     DFieldSpXVx allfdistribu(meshSpXVx);
-    SingleModePerturbInitialization const
-            init(allfequilibrium,
-                 ddc::discrete_space<IDimSp>().perturb_modes(),
-                 ddc::discrete_space<IDimSp>().perturb_amplitudes());
-    init(allfdistribu);
+
+    PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
+    PDI_init(conf_pdi);
+
+    ddc::expose_to_pdi("iter_start", iter_start);
+
+    double time_start(0);
+    if (iter_start == 0) {
+        SingleModePerturbInitialization const
+                init(allfequilibrium,
+                     ddc::discrete_space<IDimSp>().perturb_modes(),
+                     ddc::discrete_space<IDimSp>().perturb_amplitudes());
+        init(allfdistribu);
+    } else {
+        RestartInitialization const restart(iter_start, time_start);
+        restart(allfdistribu);
+    }
 
     // --> Algorithm info
     double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
@@ -163,10 +184,6 @@ int main(int argc, char** argv)
     // --> Output info
     double const time_diag = PCpp_double(conf_voicexx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
-
-    PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
-
-    PDI_init(conf_pdi);
 
     ConstantExtrapolationBoundaryValue<BSplinesX> bv_x_min(x_min);
     ConstantExtrapolationBoundaryValue<BSplinesX> bv_x_max(x_max);
@@ -222,7 +239,7 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const start = steady_clock::now();
 
-    predcorr(allfdistribu, deltat, nbiter);
+    predcorr(allfdistribu, time_start, deltat, nbiter);
 
     steady_clock::time_point const end = steady_clock::now();
 
