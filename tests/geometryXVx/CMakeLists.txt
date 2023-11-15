@@ -50,7 +50,7 @@ add_subdirectory(bump_on_tail)
 
 add_subdirectory(landau)
 
-
+add_subdirectory(sheath)
 
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 	add_executable(spline_quadrature_tests_${GEOMETRY_VARIANT}
