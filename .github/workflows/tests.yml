@@ -29,27 +29,27 @@ jobs:
       name: Build and push to tag
       uses: docker/build-push-action@v3
       with:
-        context: ./docker/voicexx_env
-        cache-from: type=registry,ref=ghcr.io/gyselax/voicexx_env:latest
+        context: ./docker/gyselalibxx_env
+        cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
         pull: true
         push: true
-        tags: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
+        tags: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
     -
       name: Build and push latest
       if: github.event_name == 'push' && github.ref_name == 'main'
       uses: docker/build-push-action@v3
       with:
-        context: ./docker/voicexx_env
-        cache-from: type=registry,ref=ghcr.io/gyselax/voicexx_env:latest
+        context: ./docker/gyselalibxx_env
+        cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
         pull: true
         push: true
-        tags: ghcr.io/gyselax/voicexx_env:latest
+        tags: ghcr.io/gyselax/gyselalibxx_env:latest
 
   tests:
     runs-on: ubuntu-latest
     needs: docker
     container:
-      image: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
+      image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
       options: --user root
     steps:
     - 
@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: docker
     container:
-      image: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
+      image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
       options: --user root
     steps:
     - 
@@ -90,7 +90,7 @@ jobs:
     needs: docker
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/gyselax/voicexx_env:${{ github.sha }}
+      image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
       options: --user root
     steps:
       - name: Checkout code
