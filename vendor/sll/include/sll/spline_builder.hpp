@@ -9,6 +9,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Core.hpp>
+
 #include "sll/math_tools.hpp"
 #include "sll/matrix.hpp"
 #include "sll/spline_boundary_conditions.hpp"
@@ -238,14 +240,18 @@ public:
         ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
 
         // Vector of integrals of B-splines
-        ddc::ChunkSpan<double, ddc::DiscreteDomain<bsplines_type>>
-                integral_bsplines(coefficients.allocation_mdspan(), spline_domain());
+        ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines(spline_domain());
         ddc::discrete_space<bsplines_type>().integrals(integral_bsplines);
 
         // Coefficients of quadrature in integral_bsplines
         ddc::DiscreteDomain<bsplines_type> slice = spline_domain().take_first(
                 ddc::DiscreteVector<bsplines_type> {ddc::discrete_space<BSplines>().nbasis()});
-        matrix->solve_transpose_inplace(integral_bsplines[slice].allocation_mdspan());
+
+        Kokkos::deep_copy(
+                coefficients.allocation_kokkos_view(),
+                integral_bsplines[slice].allocation_kokkos_view());
+
+        matrix->solve_transpose_inplace(coefficients.allocation_mdspan());
 
         return coefficients;
     }
