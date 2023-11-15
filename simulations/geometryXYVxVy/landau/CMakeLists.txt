@@ -8,15 +8,15 @@ target_link_libraries(landau4d_fft
         DDC::PDI_Wrapper
         paraconf::paraconf
         PDI::pdi
-        vcx::paraconfpp
-        vcx::geometry_xyvxvy
-        vcx::initialization_xyvxvy
-        vcx::interpolation
-        vcx::advection
-        vcx::vlasov_xyvxvy
-        vcx::poisson_xy
-        vcx::time_integration_xyvxvy
-        vcx::utils
+        gslx::paraconfpp
+        gslx::geometry_xyvxvy
+        gslx::initialization_xyvxvy
+        gslx::interpolation
+        gslx::advection
+        gslx::vlasov_xyvxvy
+        gslx::poisson_xy
+        gslx::time_integration_xyvxvy
+        gslx::utils
 )
 
 install(TARGETS landau4d_fft)

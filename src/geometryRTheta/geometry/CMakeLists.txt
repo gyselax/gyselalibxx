@@ -11,7 +11,7 @@ target_include_directories("geometry_RTheta"
 target_link_libraries("geometry_RTheta" INTERFACE
     DDC::DDC
     sll::splines
-    vcx::speciesinfo
+    gslx::speciesinfo
 )
-add_library("vcx::geometry_RTheta" ALIAS "geometry_RTheta")
+add_library("gslx::geometry_RTheta" ALIAS "geometry_RTheta")
 

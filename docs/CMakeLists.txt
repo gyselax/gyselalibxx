@@ -36,7 +36,7 @@ set(DOXYGEN_LAYOUT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/template/layout.xml")
 set(DOXYGEN_MACRO_EXPANSION YES)
 set(DOXYGEN_PREDEFINED "DOXYGEN_IGNORE")
 set(DOXYGEN_PROJECT_LOGO "${CMAKE_CURRENT_SOURCE_DIR}/images/logo.png")
-set(DOXYGEN_PROJECT_NUMBER "${voicexx_VERSION}")
+set(DOXYGEN_PROJECT_NUMBER "${gyselalibxx_VERSION}")
 set(DOXYGEN_QT_AUTOBRIEF YES)
 set(DOXYGEN_RECURSIVE YES)
 set(DOXYGEN_SEARCHENGINE YES)
@@ -56,10 +56,10 @@ set(DOXYGEN_WARN_LOGFILE "doxygen.log")
 set(DOXYGEN_STRIP_FROM_PATH "")
 #set(DOXYGEN_IMAGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/images")
 FILE(GLOB_RECURSE MarkdownSources
-	"${voicexx_SOURCE_DIR}/src/*README.md"
-	"${voicexx_SOURCE_DIR}/tests/*README.md"
-	"${voicexx_SOURCE_DIR}/simulations/*README.md"
-	"${voicexx_SOURCE_DIR}/vendor/sll/*README.md"
+	"${gyselalibxx_SOURCE_DIR}/src/*README.md"
+	"${gyselalibxx_SOURCE_DIR}/tests/*README.md"
+	"${gyselalibxx_SOURCE_DIR}/simulations/*README.md"
+	"${gyselalibxx_SOURCE_DIR}/vendor/sll/*README.md"
 	"${CMAKE_CURRENT_SOURCE_DIR}/*.md")
 
 message(STATUS ${MarkdownSources})
@@ -67,16 +67,16 @@ message(STATUS ${MarkdownSources})
 SET(TREATED_MD)
 
 # Generate Doxygen compatible Markdown files
-foreach(MD_FILE ${MarkdownSources} "${voicexx_SOURCE_DIR}/README.md")
+foreach(MD_FILE ${MarkdownSources} "${gyselalibxx_SOURCE_DIR}/README.md")
 
-	file(RELATIVE_PATH relpath ${voicexx_SOURCE_DIR} ${MD_FILE})
+	file(RELATIVE_PATH relpath ${gyselalibxx_SOURCE_DIR} ${MD_FILE})
 
-	message(STATUS "${Python3_EXECUTABLE} ${voicexx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py ${MD_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${relpath}")
+	message(STATUS "${Python3_EXECUTABLE} ${gyselalibxx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py ${MD_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${relpath}")
 
 add_custom_command(
         OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${relpath}
-	COMMAND ${Python3_EXECUTABLE} ${voicexx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py ${MD_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${relpath}
-        DEPENDS ${MD_FILE} ${voicexx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py
+	COMMAND ${Python3_EXECUTABLE} ${gyselalibxx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py ${MD_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${relpath}
+        DEPENDS ${MD_FILE} ${gyselalibxx_SOURCE_DIR}/ci_tools/readme_to_doxygen.py
         VERBATIM
 )
 
@@ -85,9 +85,9 @@ SET(TREATED_MD ${TREATED_MD} ${CMAKE_CURRENT_BINARY_DIR}/${relpath})
 endforeach()
 
 FILE(GLOB_RECURSE HPP_SOURCES
-	"${voicexx_SOURCE_DIR}/src/*.hpp"
-	"${voicexx_SOURCE_DIR}/tests/*.hpp"
-	"${voicexx_SOURCE_DIR}/vendor/sll/*.hpp")
+	"${gyselalibxx_SOURCE_DIR}/src/*.hpp"
+	"${gyselalibxx_SOURCE_DIR}/tests/*.hpp"
+	"${gyselalibxx_SOURCE_DIR}/vendor/sll/*.hpp")
 
 message(STATUS ${TREATED_MD})
 

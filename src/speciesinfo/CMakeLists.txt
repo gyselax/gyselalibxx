@@ -11,4 +11,4 @@ target_link_libraries(speciesinfo INTERFACE
     DDC::DDC
     sll::splines
 )
-add_library(vcx::speciesinfo ALIAS speciesinfo)
+add_library(gslx::speciesinfo ALIAS speciesinfo)

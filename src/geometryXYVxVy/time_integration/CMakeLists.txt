@@ -17,10 +17,10 @@ target_link_libraries("time_integration_xyvxvy"
     PUBLIC
         DDC::DDC
         DDC::PDI_Wrapper
-        vcx::poisson_xy
-        vcx::speciesinfo
-        vcx::vlasov_xyvxvy
+        gslx::poisson_xy
+        gslx::speciesinfo
+        gslx::vlasov_xyvxvy
 )
 
-add_library("vcx::time_integration_xyvxvy" ALIAS "time_integration_xyvxvy")
+add_library("gslx::time_integration_xyvxvy" ALIAS "time_integration_xyvxvy")
 

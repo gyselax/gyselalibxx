@@ -11,7 +11,7 @@ cmake_tests:
         SLL_BUILD_TESTING: "OFF"
   stage: test
   needs: []
-  image: ghcr.io/gyselax/voicexx_env
+  image: ghcr.io/gyselax/gyselalibxx_env
   timeout: 2 hours
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
@@ -41,7 +41,7 @@ cmake_tests_Release:
         SLL_BUILD_TESTING: "OFF"
   stage: test
   needs: []
-  image: ghcr.io/gyselax/voicexx_env
+  image: ghcr.io/gyselax/gyselalibxx_env
   timeout: 2 hours
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
@@ -70,7 +70,7 @@ indentation:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   stage: test
   needs: []
-  image: ghcr.io/gyselax/voicexx_env
+  image: ghcr.io/gyselax/gyselalibxx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
@@ -81,7 +81,7 @@ python_best_practices:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   stage: test
   needs: []
-  image: ghcr.io/gyselax/voicexx_env
+  image: ghcr.io/gyselax/gyselalibxx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   before_script:
@@ -105,7 +105,7 @@ public_mirror:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   tags: [ outssh ]
   needs: []
-  image: ghcr.io/gyselax/voicexx_env
+  image: ghcr.io/gyselax/gyselalibxx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: ./bin/public_mirror
@@ -115,7 +115,7 @@ documentation:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   stage: test
   needs: []
-  image: ghcr.io/gyselax/voicexx_env
+  image: ghcr.io/gyselax/gyselalibxx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   before_script: |
