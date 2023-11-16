@@ -1,23 +1,6 @@
 var searchData=
 [
-  ['rbasissubset_442',['RBasisSubset',['../classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1RBasisSubset',1,'PolarSplineFEMPoissonSolver']]],
-  ['rcelldim_443',['RCellDim',['../classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1RCellDim',1,'PolarSplineFEMPoissonSolver']]],
-  ['rdimp_444',['RDimP',['../structRDimP.html',1,'']]],
-  ['rdimprefined_445',['RDimPRefined',['../structRefinedDiscreteToCartesian_1_1RDimPRefined.html',1,'RefinedDiscreteToCartesian']]],
-  ['rdimr_446',['RDimR',['../structRDimR.html',1,'']]],
-  ['rdimrrefined_447',['RDimRRefined',['../structRefinedDiscreteToCartesian_1_1RDimRRefined.html',1,'RefinedDiscreteToCartesian']]],
-  ['rdimt_448',['RDimT',['../structRDimT.html',1,'']]],
-  ['rdimvp_449',['RDimVp',['../structRDimVp.html',1,'']]],
-  ['rdimvr_450',['RDimVr',['../structRDimVr.html',1,'']]],
-  ['rdimvx_451',['RDimVx',['../structRDimVx.html',1,'']]],
-  ['rdimvy_452',['RDimVy',['../structRDimVy.html',1,'']]],
-  ['rdimx_453',['RDimX',['../structRDimX.html',1,'']]],
-  ['rdimxrefined_454',['RDimXRefined',['../structRefinedDiscreteToCartesian_1_1RDimXRefined.html',1,'RefinedDiscreteToCartesian']]],
-  ['rdimy_455',['RDimY',['../structRDimY.html',1,'']]],
-  ['rdimyrefined_456',['RDimYRefined',['../structRefinedDiscreteToCartesian_1_1RDimYRefined.html',1,'RefinedDiscreteToCartesian']]],
-  ['refineddiscretetocartesian_457',['RefinedDiscreteToCartesian',['../classRefinedDiscreteToCartesian.html',1,'']]],
-  ['restartinitialization_458',['RestartInitialization',['../classRestartInitialization.html',1,'']]],
-  ['rk2_459',['RK2',['../classRK2.html',1,'']]],
-  ['rk3_460',['RK3',['../classRK3.html',1,'']]],
-  ['rk4_461',['RK4',['../classRK4.html',1,'']]]
+  ['qdimx_451',['QDimX',['../classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX',1,'FemNonPeriodicPoissonSolver::QDimX'],['../classFemPeriodicPoissonSolver.html#structFemPeriodicPoissonSolver_1_1QDimX',1,'FemPeriodicPoissonSolver::QDimX']]],
+  ['quadrature_452',['Quadrature',['../classQuadrature.html',1,'']]],
+  ['quadrature_3c_20idimvx_20_3e_453',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]]
 ];

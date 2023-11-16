@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['refineddiscretetocartesian_571',['RefinedDiscreteToCartesian',['../classRefinedDiscreteToCartesian.html#a71cf6ce493ab0b2d2648bbf37fe0a1b0',1,'RefinedDiscreteToCartesian::RefinedDiscreteToCartesian(RefinedDiscreteToCartesian &amp;&amp;x)=default'],['../classRefinedDiscreteToCartesian.html#ad15636dc573eac8f0822134b87be904a',1,'RefinedDiscreteToCartesian::RefinedDiscreteToCartesian(RefinedDiscreteToCartesian const &amp;x)=default']]],
-  ['restartinitialization_572',['RestartInitialization',['../classRestartInitialization.html#a9af5fa49fc9e082a38025f5d20db255f',1,'RestartInitialization']]],
-  ['rk2_573',['RK2',['../classRK2.html#a29590ce29977600f0a17c7cdfcbb3584',1,'RK2']]],
-  ['rk3_574',['RK3',['../classRK3.html#ab75113e8885dfdbc7c41494db8d2f269',1,'RK3']]],
-  ['rk4_575',['RK4',['../classRK4.html#a63289a986749f2cffeb0180bb37b8cfa',1,'RK4']]]
+  ['quadrature_586',['Quadrature',['../classQuadrature.html#a6b8f04ab1b97b80a55b478085a276755',1,'Quadrature']]],
+  ['quadrature_5fcoefficients_587',['quadrature_coefficients',['../classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06',1,'SplineBuilder']]],
+  ['quadrature_5fcoeffs_5fnd_588',['quadrature_coeffs_nd',['../quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d',1,'quadrature_coeffs_nd.hpp']]]
 ];

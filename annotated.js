@@ -22,6 +22,7 @@ var annotated =
     [ "CartesianSolution", "classCartesianSolution.html", "classCartesianSolution" ],
     [ "CartesianToBarycentricCoordinates", "classCartesianToBarycentricCoordinates.html", "classCartesianToBarycentricCoordinates" ],
     [ "ChargeDensityCalculator", "classChargeDensityCalculator.html", "classChargeDensityCalculator" ],
+    [ "ChargeDensityCalculatorSplineless", "classChargeDensityCalculatorSplineless.html", "classChargeDensityCalculatorSplineless" ],
     [ "CircularToCartesian", "classCircularToCartesian.html", "classCircularToCartesian" ],
     [ "CollisionsInter", "classCollisionsInter.html", "classCollisionsInter" ],
     [ "CollisionsIntra", "classCollisionsIntra.html", "classCollisionsIntra" ],
@@ -43,6 +44,7 @@ var annotated =
     [ "FemNonPeriodicPoissonSolver", "classFemNonPeriodicPoissonSolver.html", "classFemNonPeriodicPoissonSolver" ],
     [ "FemPeriodicPoissonSolver", "classFemPeriodicPoissonSolver.html", "classFemPeriodicPoissonSolver" ],
     [ "FftPoissonSolver", "classFftPoissonSolver.html", "classFftPoissonSolver" ],
+    [ "FftPoissonSolverSplineX", "classFftPoissonSolverSplineX.html", "classFftPoissonSolverSplineX" ],
     [ "FluidMoments", "classFluidMoments.html", "classFluidMoments" ],
     [ "for_each_tuple_cat", "structfor__each__tuple__cat.html", null ],
     [ "for_each_tuple_cat< std::tuple< Tuples... >, Tuple >", "structfor__each__tuple__cat_3_01std_1_1tuple_3_01Tuples_8_8_8_01_4_00_01Tuple_01_4.html", "structfor__each__tuple__cat_3_01std_1_1tuple_3_01Tuples_8_8_8_01_4_00_01Tuple_01_4" ],
@@ -69,6 +71,8 @@ var annotated =
     [ "KnotsAsInterpolationPoints", "classKnotsAsInterpolationPoints.html", "classKnotsAsInterpolationPoints" ],
     [ "KrookSourceAdaptive", "classKrookSourceAdaptive.html", "classKrookSourceAdaptive" ],
     [ "KrookSourceConstant", "classKrookSourceConstant.html", "classKrookSourceConstant" ],
+    [ "Lagrange", "classLagrange.html", "classLagrange" ],
+    [ "LagrangeInterpolator", "classLagrangeInterpolator.html", "classLagrangeInterpolator" ],
     [ "ManufacturedPoissonTest", "classManufacturedPoissonTest.html", "classManufacturedPoissonTest" ],
     [ "Matrix", "classMatrix.html", "classMatrix" ],
     [ "Matrix_Banded", "classMatrix__Banded.html", "classMatrix__Banded" ],
@@ -95,6 +99,7 @@ var annotated =
     [ "PolynomialEvaluator", "structPolynomialEvaluator.html", [
       [ "Evaluator", "classPolynomialEvaluator_1_1Evaluator.html", "classPolynomialEvaluator_1_1Evaluator" ]
     ] ],
+    [ "PreallocatableLagrangeInterpolator", "classPreallocatableLagrangeInterpolator.html", "classPreallocatableLagrangeInterpolator" ],
     [ "PreallocatableSplineInterpolator", "classPreallocatableSplineInterpolator.html", "classPreallocatableSplineInterpolator" ],
     [ "PreallocatableSplineInterpolatorRP", "classPreallocatableSplineInterpolatorRP.html", "classPreallocatableSplineInterpolatorRP" ],
     [ "PredCorr", "classPredCorr.html", "classPredCorr" ],
