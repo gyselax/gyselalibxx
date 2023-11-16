@@ -106,6 +106,10 @@ endif()
 set(BUILD_DOCUMENTATION OFF)
 
 ## Use Kokkos from `vendor/`
+if("${Kokkos_ENABLE_CUDA}")
+  option(Kokkos_ENABLE_CUDA_CONSTEXPR "Whether to activate experimental relaxed constexpr functions" ON)
+  option(Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE "Whether to enable relocatable device code (RDC) for CUDA" ON)
+endif()
 add_subdirectory("vendor/kokkos/" "kokkos")
 
 find_package (Eigen3 3.3 NO_MODULE)

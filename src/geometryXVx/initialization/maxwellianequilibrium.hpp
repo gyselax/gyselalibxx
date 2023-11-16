@@ -24,7 +24,7 @@ public:
 
     ~MaxwellianEquilibrium() override = default;
 
-    DSpanSpVx operator()(DSpanSpVx allfequilibrium) const override;
+    device_t<DSpanSpVx> operator()(device_t<DSpanSpVx> allfequilibrium) const override;
 
     /**
      * Computing the non-centered Maxwellian function as
@@ -33,7 +33,7 @@ public:
      * where u is the mean velocity
      */
     static void compute_maxwellian(
-            DSpanVx const fMaxwellian,
+            device_t<DSpanVx> const fMaxwellian,
             double const density,
             double const temperature,
             double const mean_velocity);

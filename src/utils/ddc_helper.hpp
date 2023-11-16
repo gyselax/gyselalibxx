@@ -39,3 +39,33 @@ constexpr std::enable_if_t<RDim::PERIODIC, double> total_interval_length(
     return std::fabs(ddc::rlength(dom) + ddc::step<ddc::UniformPointSampling<RDim>>());
 }
 }; // namespace ddcHelper
+
+// Template type giving the "device" version of a Chunk/Chunkspan/View
+template <class>
+struct Device
+{
+};
+
+template <class ElementType, class SupportType, class Allocator>
+struct Device<ddc::Chunk<ElementType, SupportType, Allocator>>
+{
+    using type = typename ddc::Chunk<
+            ElementType,
+            SupportType,
+            ddc::KokkosAllocator<ElementType, Kokkos::DefaultExecutionSpace::memory_space>>;
+};
+
+template <class ElementType, class SupportType, class Layout, class MemorySpace>
+struct Device<ddc::ChunkSpan<ElementType, SupportType, Layout, MemorySpace>>
+{
+    using type = typename ddc::ChunkSpan<
+            ElementType,
+            SupportType,
+            Layout,
+            Kokkos::DefaultExecutionSpace::memory_space>;
+};
+
+template <class C>
+using device_t = typename Device<C>::type;
+
+// namespace ddcHelper

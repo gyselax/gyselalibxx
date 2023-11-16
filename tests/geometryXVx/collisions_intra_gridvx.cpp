@@ -9,7 +9,6 @@
 #include <collisions_utils.hpp>
 #include <geometry.hpp>
 #include <irighthandside.hpp>
-#include <maxwellianequilibrium.hpp>
 #include <pdi.h>
 #include <quadrature.hpp>
 #include <species_info.hpp>

@@ -82,12 +82,14 @@ void CollisionsInter::compute_rhs(DSpanSpXVx const rhs, DViewSpXVx const allfdis
                 temperature);
 
         ddc::for_each(dom_sp, [&](IndexSp const isp) {
-            DFieldVx fmaxwellian(gridvx);
+            device_t<DFieldVx> fmaxwellian_device(gridvx);
             MaxwellianEquilibrium::compute_maxwellian(
-                    fmaxwellian.span_view(),
+                    fmaxwellian_device.span_view(),
                     density(isp),
                     temperature(isp),
                     fluid_velocity(isp));
+            auto fmaxwellian = ddc::create_mirror_view_and_copy(fmaxwellian_device.span_view());
+
 
             ddc::for_each(gridvx, [&](IndexVx const ivx) {
                 double const coordv = ddc::coordinate(ivx);

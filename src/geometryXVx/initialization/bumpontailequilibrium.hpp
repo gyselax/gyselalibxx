@@ -19,7 +19,7 @@ class BumpontailEquilibrium : public IEquilibrium
     // mean velocity of the bump-on-tail for all kinetic species
     FieldSp<double> m_mean_velocity_bot;
 
-private:
+public:
     /*
       Computation of the Maxwellian fM which is the equilibrium part 
       of the distribution function : 
@@ -30,17 +30,16 @@ private:
                                            +exp(-(v+v0)**2/2*T0)]
      */
     void compute_twomaxwellian(
-            DSpanVx fMaxwellian,
+            device_t<DSpanVx> fMaxwellian,
             double epsilon_bot,
             double temperature_bot,
             double mean_velocity_bot) const;
 
-public:
     BumpontailEquilibrium(DViewSp epsilon_bot, DViewSp temperature_bot, DViewSp mean_velocity_bot);
 
     ~BumpontailEquilibrium() override = default;
 
-    DSpanSpVx operator()(DSpanSpVx allfequilibrium) const override;
+    device_t<DSpanSpVx> operator()(device_t<DSpanSpVx> allfequilibrium) const override;
 
     ViewSp<double> epsilon_bot() const
     {

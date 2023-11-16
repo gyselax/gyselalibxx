@@ -14,13 +14,15 @@ MaxwellianEquilibrium::MaxwellianEquilibrium(
 {
 }
 
-DSpanSpVx MaxwellianEquilibrium::operator()(DSpanSpVx const allfequilibrium) const
+device_t<DSpanSpVx> MaxwellianEquilibrium::operator()(
+        device_t<DSpanSpVx> const allfequilibrium) const
 {
     IDomainVx const gridvx = allfequilibrium.domain<IDimVx>();
     IDomainSp const gridsp = allfequilibrium.domain<IDimSp>();
 
     // Initialization of the maxwellian
-    DFieldVx maxwellian(gridvx);
+    device_t<DFieldVx> maxwellian_alloc(gridvx);
+    ddc::ChunkSpan maxwellian = maxwellian_alloc.span_view();
     ddc::for_each(gridsp, [&](IndexSp const isp) {
         compute_maxwellian(
                 maxwellian,
@@ -28,7 +30,10 @@ DSpanSpVx MaxwellianEquilibrium::operator()(DSpanSpVx const allfequilibrium) con
                 m_temperature_eq(isp),
                 m_mean_velocity_eq(isp));
 
-        ddc::for_each(gridvx, [&](IndexVx const iv) { allfequilibrium(isp, iv) = maxwellian(iv); });
+        ddc::for_each(
+                ddc::policies::parallel_device,
+                gridvx,
+                DDC_LAMBDA(IndexVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
     });
     return allfequilibrium;
 }
@@ -40,17 +45,21 @@ DSpanSpVx MaxwellianEquilibrium::operator()(DSpanSpVx const allfequilibrium) con
   where u is the mean velocity
 */
 void MaxwellianEquilibrium::compute_maxwellian(
-        DSpanVx const fMaxwellian,
+        device_t<DSpanVx> const fMaxwellian,
         double const density,
         double const temperature,
         double const mean_velocity)
 {
-    double const inv_sqrt_2piT = 1. / std::sqrt(2. * M_PI * temperature);
+    double const inv_sqrt_2piT = 1. / Kokkos::sqrt(2. * M_PI * temperature);
     IDomainVx const gridvx = fMaxwellian.domain();
-    for (IndexVx const iv : gridvx) {
-        CoordVx const v = ddc::coordinate(iv);
-        fMaxwellian(iv)
-                = density * inv_sqrt_2piT
-                  * std::exp(-(v - mean_velocity) * (v - mean_velocity) / (2. * temperature));
-    }
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            gridvx,
+            DDC_LAMBDA(IndexVx const ivx) {
+                CoordVx const vx = ddc::coordinate(ivx);
+                fMaxwellian(ivx) = density * inv_sqrt_2piT
+                                   * Kokkos::exp(
+                                           -(vx - mean_velocity) * (vx - mean_velocity)
+                                           / (2. * temperature));
+            });
 }

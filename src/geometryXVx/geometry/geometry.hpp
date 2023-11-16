@@ -3,7 +3,7 @@
 #pragma once
 
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/fft.hpp> // Strange but needed to get access to Fourier tag, to be clarified
+#include <ddc/kernels/fft.hpp>
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
@@ -11,6 +11,7 @@
 #include <sll/spline_boundary_conditions.hpp>
 #include <sll/spline_builder.hpp>
 
+#include <ddc_helper.hpp>
 #include <species_info.hpp>
 
 /**
