@@ -60,8 +60,10 @@ TEST(KrookSource, Adaptive)
     IDomainSp const gridsp = dom_sp;
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    Quadrature<IDimX> const integrate_x(trapezoid_quadrature_coefficients(gridx));
-    Quadrature<IDimVx> const integrate_v(trapezoid_quadrature_coefficients(gridvx));
+    DFieldX const quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
+    DFieldVx const quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
+    Quadrature<IDimX> const integrate_x(quadrature_coeffs_x);
+    Quadrature<IDimVx> const integrate_v(quadrature_coeffs_vx);
 
     FieldSp<int> charges(dom_sp);
     DFieldSp masses(dom_sp);

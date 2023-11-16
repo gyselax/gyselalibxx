@@ -106,8 +106,9 @@ void compute_Vcoll_Tcoll(
         ddc::ChunkSpan<double const, ddc::DiscreteDomain<IDimSp, IDimX, IDimension>> Dcoll,
         ddc::ChunkSpan<double const, ddc::DiscreteDomain<IDimSp, IDimX, IDimension>> dvDcoll)
 {
-    Quadrature<IDimVx> const integrate_v(
-            trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu)));
+    DFieldVx const quadrature_coeffs
+            = trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu));
+    Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
 
     // computation of the integrands
     DFieldSpXVx I0mean_integrand(allfdistribu.domain());
