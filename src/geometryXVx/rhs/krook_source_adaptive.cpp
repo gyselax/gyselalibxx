@@ -103,7 +103,8 @@ void KrookSourceAdaptive::get_amplitudes(DSpanSp amplitudes, DViewSpVx const all
     amplitudes(iion) = m_amplitude;
 
     IDomainVx const gridvx = allfdistribu.domain<IDimVx>();
-    Quadrature<IDimVx> const integrate_v(trapezoid_quadrature_coefficients(gridvx));
+    DFieldVx const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
+    Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
     double const density_ion = integrate_v(allfdistribu[iion]);
     double const density_electron = integrate_v(allfdistribu[ielec()]);
 

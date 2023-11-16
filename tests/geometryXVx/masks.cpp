@@ -57,7 +57,8 @@ TEST(Masks, Ordering)
     EXPECT_LE(std::fabs(mask_inverted(tenth) - 1.0), tolerance);
 
     // tests if integral of normalized mask equals 1
-    Quadrature<IDimX> const integrate_x(trapezoid_quadrature_coefficients(gridx));
+    DFieldX const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
+    Quadrature<IDimX> const integrate_x(quadrature_coeffs);
 
     DFieldX mask_normalized = mask_tanh(gridx, extent, stiffness, MaskType::Normal, true);
     EXPECT_LE(std::fabs(integrate_x(mask_normalized) - 1.0), tolerance);

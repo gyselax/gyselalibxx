@@ -106,8 +106,10 @@ TEST(Physics, FluidMoments)
     DFieldSpX density_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX mean_velocity_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX temperature_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    FluidMoments moments(Quadrature<IDimVx>(
-            trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu))));
+    DFieldVx const quadrature_coeffs
+            = trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu));
+    Quadrature<IDimVx> integrate(quadrature_coeffs);
+    FluidMoments moments(integrate);
 
     moments(density_computed.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);
     moments(mean_velocity_computed.span_view(),

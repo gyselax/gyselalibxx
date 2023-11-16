@@ -60,7 +60,8 @@ DFieldX mask_tanh(
     }
 
     if (normalized) {
-        Quadrature<IDimX> const integrate_x(trapezoid_quadrature_coefficients(gridx));
+        DFieldX const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
+        Quadrature<IDimX> const integrate_x(quadrature_coeffs);
         double const coeff_norm = integrate_x(mask);
         ddc::for_each(gridx, [&](IndexX const ix) { mask(ix) = mask(ix) / coeff_norm; });
     }

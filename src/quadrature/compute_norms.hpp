@@ -25,7 +25,7 @@
  */
 template <class... IDim>
 double compute_L1_norm(
-        Quadrature<IDim...>& quadrature,
+        Quadrature<IDim...> quadrature,
         ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim...>> function)
 {
     auto grid = ddc::get_domain<IDim...>(function);
@@ -53,7 +53,7 @@ double compute_L1_norm(
  */
 template <class... IDim>
 double compute_L2_norm(
-        Quadrature<IDim...>& quadrature,
+        Quadrature<IDim...> quadrature,
         ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim...>> function)
 {
     auto grid = ddc::get_domain<IDim...>(function);
