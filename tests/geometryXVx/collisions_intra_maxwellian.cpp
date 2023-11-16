@@ -104,12 +104,13 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
         temperature_init(ispx)
                 = temperature
                   + temperature_ampl * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-        DFieldVx finit(gridvx);
+        device_t<DFieldVx> finit_device(gridvx);
         MaxwellianEquilibrium::compute_maxwellian(
-                finit.span_view(),
+                finit_device.span_view(),
                 density_init(ispx),
                 temperature_init(ispx),
                 mean_velocity_init(ispx));
+        auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
         ddc::deepcopy(allfdistribu[ispx], finit);
     });
 
@@ -240,12 +241,13 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
         double const temperature_loc
                 = temperature
                   + temperature_ampl * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-        DFieldVx finit(gridvx);
+        device_t<DFieldVx> finit_device(gridvx);
         MaxwellianEquilibrium::compute_maxwellian(
-                finit.span_view(),
+                finit_device.span_view(),
                 density_loc,
                 temperature_loc,
                 mean_velocity_loc);
+        auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
         ddc::deepcopy(allfdistribu[ispx], finit);
     });
 

@@ -9,5 +9,5 @@ class IInitialization
 public:
     virtual ~IInitialization() = default;
 
-    virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu) const = 0;
+    virtual device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu) const = 0;
 };
