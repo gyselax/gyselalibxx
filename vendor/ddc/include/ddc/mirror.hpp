@@ -14,7 +14,7 @@ namespace ddc {
 /// Returns a new `Chunk` with the same layout as `src` allocated on the memory space `Space::memory_space`.
 template <class Space, class ElementType, class Support, class Layout, class MemorySpace>
 auto create_mirror(
-        Space const& space,
+        [[maybe_unused]] Space const& space,
         ChunkSpan<ElementType, Support, Layout, MemorySpace> const& src)
 {
     return Chunk<
@@ -34,7 +34,7 @@ auto create_mirror(ChunkSpan<ElementType, Support, Layout, MemorySpace> const& s
 /// Returns a new `Chunk` with the same layout as `src` allocated on the memory space `Space::memory_space` and operates a deep copy between the two.
 template <class Space, class ElementType, class Support, class Layout, class MemorySpace>
 auto create_mirror_and_copy(
-        Space const& space,
+        [[maybe_unused]] Space const& space,
         ChunkSpan<ElementType, Support, Layout, MemorySpace> const& src)
 {
     Chunk<std::remove_const_t<ElementType>,
