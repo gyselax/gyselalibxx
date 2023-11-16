@@ -31,7 +31,8 @@ TEST(QuadratureTest, ExactForConstantFunc)
 
     IDomainXY const gridxy(gridx, gridy);
 
-    Quadrature<IDimX, IDimY> const integrate(trapezoid_quadrature_coefficients(gridxy));
+    DFieldXY const quadrature_coeffs = trapezoid_quadrature_coefficients(gridxy);
+    Quadrature<IDimX, IDimY> const integrate(quadrature_coeffs);
 
     DFieldXY values(gridxy);
 
@@ -86,7 +87,8 @@ double compute_error(int n_elems)
     IDomainY const gridy(GrevillePointsY::get_domain());
     IDomainXY const gridxy(gridx, gridy);
 
-    Quadrature<IDimX, IDimY> const integrate(trapezoid_quadrature_coefficients(gridxy));
+    DFieldXY const quadrature_coeffs = trapezoid_quadrature_coefficients(gridxy);
+    Quadrature<IDimX, IDimY> const integrate(quadrature_coeffs);
 
     DFieldXY values(gridxy);
 

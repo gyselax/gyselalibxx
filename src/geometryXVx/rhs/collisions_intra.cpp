@@ -254,8 +254,11 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
     DFieldSpX density(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX mean_velocity(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX temperature(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    FluidMoments moments(Quadrature<IDimVx>(
-            trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu))));
+
+    DFieldVx const quadrature_coeffs
+            = trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu));
+    Quadrature<IDimVx> integrate(quadrature_coeffs);
+    FluidMoments moments(integrate);
 
     moments(density.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);
     moments(mean_velocity.span_view(),

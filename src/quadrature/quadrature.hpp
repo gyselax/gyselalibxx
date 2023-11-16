@@ -13,7 +13,7 @@ template <class... IDim>
 class Quadrature
 {
 private:
-    ddc::Chunk<double, ddc::DiscreteDomain<IDim...>> m_coefficients;
+    ddc::ChunkView<double, ddc::DiscreteDomain<IDim...>> m_coefficients;
 
 public:
     /**
@@ -21,18 +21,10 @@ public:
      * @param coeffs
      * 	      The coefficients of the quadrature.
      */
-    explicit Quadrature(ddc::Chunk<double, ddc::DiscreteDomain<IDim...>>&& coeffs)
-        : m_coefficients(std::move(coeffs))
+    explicit Quadrature(ddc::ChunkView<double, ddc::DiscreteDomain<IDim...>> const& coeffs)
+        : m_coefficients(coeffs)
     {
     }
-
-    /**
-     * @brief Create a Quadrature object by copy.
-     * @param rhs The object being copied.
-     */
-    Quadrature(Quadrature&& rhs) = default;
-
-    ~Quadrature() = default;
 
     /**
      * @brief An operator for calculating the integral of a function defined on a discrete domain.

@@ -25,7 +25,8 @@ TEST(SplineQuadratureTest, ExactForConstantFunc)
 
     IDomainX const gridx = builder_x.interpolation_domain();
 
-    Quadrature const integrate(spline_quadrature_coefficients(gridx, builder_x));
+    DFieldX const quadrature_coeffs = spline_quadrature_coefficients(gridx, builder_x);
+    Quadrature const integrate(quadrature_coeffs.span_cview());
 
     DFieldX values(gridx);
 
@@ -55,21 +56,22 @@ double compute_error(int n_elems)
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = ddc::Chunk<double, IDomainY>;
 
-    ddc::Coordinate<Y<N>> const x_min(0.0);
-    ddc::Coordinate<Y<N>> const x_max(M_PI);
+    ddc::Coordinate<Y<N>> const y_min(0.0);
+    ddc::Coordinate<Y<N>> const y_max(M_PI);
 
-    ddc::init_discrete_space<BSplinesY>(x_min, x_max, n_elems);
+    ddc::init_discrete_space<BSplinesY>(y_min, y_max, n_elems);
 
     ddc::init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
-    IDomainY const gridx(GrevillePointsY::get_domain());
+    IDomainY const gridy(GrevillePointsY::get_domain());
 
-    SplineYBuilder const builder_x(gridx);
+    SplineYBuilder const builder_y(gridy);
 
-    Quadrature const integrate(spline_quadrature_coefficients(gridx, builder_x));
+    DFieldY const quadrature_coeffs = spline_quadrature_coefficients(gridy, builder_y);
+    Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    DFieldY values(gridx);
+    DFieldY values(gridy);
 
-    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimY> const idx) {
+    ddc::for_each(gridy, [&](ddc::DiscreteElement<IDimY> const idx) {
         values(idx) = sin(ddc::coordinate(idx));
     });
     double integral = integrate(values);
