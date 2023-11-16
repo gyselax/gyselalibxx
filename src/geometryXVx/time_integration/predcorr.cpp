@@ -16,12 +16,15 @@ PredCorr::PredCorr(IBoltzmannSolver const& boltzmann_solver, IPoissonSolver cons
 {
 }
 
-DSpanSpXVx PredCorr::operator()(
-        DSpanSpXVx const allfdistribu,
+device_t<DSpanSpXVx> PredCorr::operator()(
+        device_t<DSpanSpXVx> const allfdistribu_device,
         double const time_start,
         double const dt,
         int const steps) const
 {
+    auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
+    ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
+
     // electrostatic potential and electric field (depending only on x)
     DFieldX electrostatic_potential(allfdistribu.domain<IDimX>());
     DFieldX electric_field(allfdistribu.domain<IDimX>());
@@ -66,5 +69,6 @@ DSpanSpXVx PredCorr::operator()(
             .and_with("fdistribu", allfdistribu)
             .and_with("electrostatic_potential", electrostatic_potential);
 
-    return allfdistribu;
+    ddc::deepcopy(allfdistribu_device, allfdistribu);
+    return allfdistribu_device;
 }

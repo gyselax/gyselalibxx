@@ -9,5 +9,5 @@ class IEquilibrium
 public:
     virtual ~IEquilibrium() = default;
 
-    virtual DSpanSpVx operator()(DSpanSpVx allfequilibrium) const = 0;
+    virtual device_t<DSpanSpVx> operator()(device_t<DSpanSpVx> allfequilibrium) const = 0;
 };

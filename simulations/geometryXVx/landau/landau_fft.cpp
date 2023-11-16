@@ -152,30 +152,31 @@ int main(int argc, char** argv)
             std::move(masses),
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
-    DFieldSpVx allfequilibrium(meshSpVx);
+    device_t<DFieldSpVx> allfequilibrium_device(meshSpVx);
     MaxwellianEquilibrium const init_fequilibrium(
             std::move(density_eq),
             std::move(temperature_eq),
             std::move(mean_velocity_eq));
-    init_fequilibrium(allfequilibrium);
-    DFieldSpXVx allfdistribu(meshSpXVx);
+    init_fequilibrium(allfequilibrium_device);
 
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PDI_init(conf_pdi);
-
     ddc::expose_to_pdi("iter_start", iter_start);
 
+    device_t<DFieldSpXVx> allfdistribu_device(meshSpXVx);
     double time_start(0);
     if (iter_start == 0) {
         SingleModePerturbInitialization const
-                init(allfequilibrium,
+                init(allfequilibrium_device,
                      ddc::discrete_space<IDimSp>().perturb_modes(),
                      ddc::discrete_space<IDimSp>().perturb_amplitudes());
-        init(allfdistribu);
+        init(allfdistribu_device);
     } else {
         RestartInitialization const restart(iter_start, time_start);
-        restart(allfdistribu);
+        restart(allfdistribu_device);
     }
+    auto allfequilibrium = ddc::create_mirror_view_and_copy(allfequilibrium_device.span_view());
+    auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
 
     // --> Algorithm info
     double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
@@ -239,7 +240,7 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const start = steady_clock::now();
 
-    predcorr(allfdistribu, time_start, deltat, nbiter);
+    predcorr(allfdistribu_device, time_start, deltat, nbiter);
 
     steady_clock::time_point const end = steady_clock::now();
 
