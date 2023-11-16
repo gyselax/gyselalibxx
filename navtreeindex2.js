@@ -108,10 +108,8 @@ var NAVTREEINDEX2 =
 "classPredCorr.html#a7f99203dc020f4337fc4c11c04d2d0ed":[12,82,3],
 "classPredCorr.html#ae4b6fdfbec28c702b689ae31f56865f6":[12,82,2],
 "classQuadrature.html":[12,83],
-"classQuadrature.html#a533af2a43db87593d2a9863065eefde8":[12,83,3],
-"classQuadrature.html#aa565b8ab090bb41c3b41f623c5c5414b":[12,83,2],
-"classQuadrature.html#af6bd0619387d4161c2a9ed844c76cd52":[12,83,1],
-"classQuadrature.html#afd6d17aed37b3b62d7c638075c5be300":[12,83,0],
+"classQuadrature.html#a533af2a43db87593d2a9863065eefde8":[12,83,1],
+"classQuadrature.html#a6b8f04ab1b97b80a55b478085a276755":[12,83,0],
 "classRK2.html":[12,95],
 "classRK2.html#a29590ce29977600f0a17c7cdfcbb3584":[12,95,0],
 "classRK2.html#a9cf0d591ac1e741f04120a85599a4644":[12,95,2],
@@ -249,5 +247,7 @@ var NAVTREEINDEX2 =
 "classSplineEvaluator2D.html#ae0358adc831ede3cecf877df29328a81":[12,106,16],
 "classSplineInterpolator.html":[12,107],
 "classSplineInterpolator.html#a3c0b8537b24131f56969c1d31191c6c1":[12,107,0],
-"classSplineInterpolator.html#a9717f4b9c285b375d81a3003cd65cdbc":[12,107,1]
+"classSplineInterpolator.html#a9717f4b9c285b375d81a3003cd65cdbc":[12,107,1],
+"classSplineInterpolator.html#a9fdb19f028e6c568f4fbe0e23b9feefe":[12,107,2],
+"classSplineInterpolatorRP.html":[12,108]
 };

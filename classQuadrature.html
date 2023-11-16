@@ -112,12 +112,9 @@ $(document).ready(function(){initNavTree('classQuadrature.html',''); initResizab
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afd6d17aed37b3b62d7c638075c5be300"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQuadrature.html#afd6d17aed37b3b62d7c638075c5be300">Quadrature</a> (ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; &amp;&amp;coeffs)</td></tr>
-<tr class="memdesc:afd6d17aed37b3b62d7c638075c5be300"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete domain.">Quadrature</a> object.  <a href="classQuadrature.html#afd6d17aed37b3b62d7c638075c5be300">More...</a><br /></td></tr>
-<tr class="separator:afd6d17aed37b3b62d7c638075c5be300"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6bd0619387d4161c2a9ed844c76cd52"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQuadrature.html#af6bd0619387d4161c2a9ed844c76cd52">Quadrature</a> (<a class="el" href="classQuadrature.html">Quadrature</a> &amp;&amp;rhs)=default</td></tr>
-<tr class="memdesc:af6bd0619387d4161c2a9ed844c76cd52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete domain.">Quadrature</a> object by copy.  <a href="classQuadrature.html#af6bd0619387d4161c2a9ed844c76cd52">More...</a><br /></td></tr>
-<tr class="separator:af6bd0619387d4161c2a9ed844c76cd52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b8f04ab1b97b80a55b478085a276755"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a6b8f04ab1b97b80a55b478085a276755">Quadrature</a> (ddc::ChunkView&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; const &amp;coeffs)</td></tr>
+<tr class="memdesc:a6b8f04ab1b97b80a55b478085a276755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete domain.">Quadrature</a> object.  <a href="classQuadrature.html#a6b8f04ab1b97b80a55b478085a276755">More...</a><br /></td></tr>
+<tr class="separator:a6b8f04ab1b97b80a55b478085a276755"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a533af2a43db87593d2a9863065eefde8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a533af2a43db87593d2a9863065eefde8">operator()</a> (ddc::ChunkSpan&lt; const double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; const values) const</td></tr>
 <tr class="memdesc:a533af2a43db87593d2a9863065eefde8"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete domain.  <a href="classQuadrature.html#a533af2a43db87593d2a9863065eefde8">More...</a><br /></td></tr>
 <tr class="separator:a533af2a43db87593d2a9863065eefde8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,8 +125,8 @@ class Quadrature&lt; IDim &gt;</h3>
 
 <p>A class providing an operator for integrating functions defined on a discrete domain. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="afd6d17aed37b3b62d7c638075c5be300"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd6d17aed37b3b62d7c638075c5be300">&#9670;&nbsp;</a></span>Quadrature() <span class="overload">[1/2]</span></h2>
+<a id="a6b8f04ab1b97b80a55b478085a276755"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b8f04ab1b97b80a55b478085a276755">&#9670;&nbsp;</a></span>Quadrature()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -142,7 +139,7 @@ template&lt;class... IDim&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classQuadrature.html">Quadrature</a>&lt; IDim &gt;::<a class="el" href="classQuadrature.html">Quadrature</a> </td>
           <td>(</td>
-          <td class="paramtype">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; &amp;&amp;&#160;</td>
+          <td class="paramtype">ddc::ChunkView&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; const &amp;&#160;</td>
           <td class="paramname"><em>coeffs</em></td><td>)</td>
           <td></td>
         </tr>
@@ -158,42 +155,6 @@ template&lt;class... IDim&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">coeffs</td><td>The coefficients of the quadrature. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="af6bd0619387d4161c2a9ed844c76cd52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6bd0619387d4161c2a9ed844c76cd52">&#9670;&nbsp;</a></span>Quadrature() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class... IDim&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classQuadrature.html">Quadrature</a>&lt; IDim &gt;::<a class="el" href="classQuadrature.html">Quadrature</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classQuadrature.html">Quadrature</a>&lt; IDim &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Create a <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete domain.">Quadrature</a> object by copy. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>The object being copied. </td></tr>
   </table>
   </dd>
 </dl>

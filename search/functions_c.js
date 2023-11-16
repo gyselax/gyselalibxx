@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['quadrature_564',['Quadrature',['../classQuadrature.html#afd6d17aed37b3b62d7c638075c5be300',1,'Quadrature::Quadrature(ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; &amp;&amp;coeffs)'],['../classQuadrature.html#af6bd0619387d4161c2a9ed844c76cd52',1,'Quadrature::Quadrature(Quadrature &amp;&amp;rhs)=default']]],
-  ['quadrature_5fcoefficients_565',['quadrature_coefficients',['../classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06',1,'SplineBuilder']]],
-  ['quadrature_5fcoeffs_5fnd_566',['quadrature_coeffs_nd',['../quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d',1,'quadrature_coeffs_nd.hpp']]]
+  ['quadrature_568',['Quadrature',['../classQuadrature.html#a6b8f04ab1b97b80a55b478085a276755',1,'Quadrature']]],
+  ['quadrature_5fcoefficients_569',['quadrature_coefficients',['../classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06',1,'SplineBuilder']]],
+  ['quadrature_5fcoeffs_5fnd_570',['quadrature_coeffs_nd',['../quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d',1,'quadrature_coeffs_nd.hpp']]]
 ];

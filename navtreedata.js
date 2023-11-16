@@ -72,8 +72,8 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classFftPoissonSolver.html#a39d2b32d21f00f96f2c9f1625211eb98",
 "classNullBoundaryValue2D.html#a7193419626806e22c87f36ab6e6cf0fa",
-"classSplineInterpolator.html#a9fdb19f028e6c568f4fbe0e23b9feefe",
-"dir_66f693c2f51fcd3241ed49359f462f99.html"
+"classSplineInterpolatorRP.html#a7186f69f12ef92492b5cb334bafa220e",
+"dir_7249a6277f2cda29b1cef92f993ab78b.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

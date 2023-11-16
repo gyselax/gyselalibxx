@@ -1,7 +1,7 @@
 var searchData=
 [
   ['qdimx_213',['QDimX',['../classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX',1,'FemNonPeriodicPoissonSolver::QDimX'],['../classFemPeriodicPoissonSolver.html#structFemPeriodicPoissonSolver_1_1QDimX',1,'FemPeriodicPoissonSolver::QDimX']]],
-  ['quadrature_214',['Quadrature',['../classQuadrature.html',1,'Quadrature&lt; IDim &gt;'],['../classQuadrature.html#afd6d17aed37b3b62d7c638075c5be300',1,'Quadrature::Quadrature(ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; &amp;&amp;coeffs)'],['../classQuadrature.html#af6bd0619387d4161c2a9ed844c76cd52',1,'Quadrature::Quadrature(Quadrature &amp;&amp;rhs)=default']]],
+  ['quadrature_214',['Quadrature',['../classQuadrature.html',1,'Quadrature&lt; IDim &gt;'],['../classQuadrature.html#a6b8f04ab1b97b80a55b478085a276755',1,'Quadrature::Quadrature()']]],
   ['quadrature_20methods_215',['Quadrature Methods',['../src_quadrature.html',1,'src']]],
   ['quadrature_3c_20idimvx_20_3e_216',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]],
   ['quadrature_5fcoefficients_217',['quadrature_coefficients',['../classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06',1,'SplineBuilder']]],

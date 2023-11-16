@@ -1,7 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"classSplineInterpolator.html#a9fdb19f028e6c568f4fbe0e23b9feefe":[12,107,2],
-"classSplineInterpolatorRP.html":[12,108],
 "classSplineInterpolatorRP.html#a7186f69f12ef92492b5cb334bafa220e":[12,108,2],
 "classSplineInterpolatorRP.html#abe1253b38fc582c49d9f0ac08ef8b013":[12,108,0],
 "classSplineInterpolatorRP.html#ad61213cad3541fb584c780bda822270b":[12,108,1],
@@ -221,8 +219,8 @@ var NAVTREEINDEX3 =
 "collisions__utils_8hpp_source.html":[13,0,2,4,2],
 "compute__norms_8hpp.html":[13,0,6,0],
 "compute__norms_8hpp.html#a5a537a7bbe2916d26a2b34247a33a5ba":[13,0,6,0,2],
-"compute__norms_8hpp.html#ab2f12689e870d77a2208117f277f47e4":[13,0,6,0,0],
-"compute__norms_8hpp.html#adf7a0fca8cca7bb92d7103878a39a7a0":[13,0,6,0,1],
+"compute__norms_8hpp.html#a9688fb26c1bd5f7c1afd9ed25839b3c8":[13,0,6,0,1],
+"compute__norms_8hpp.html#ace1f4a574cc62230bc0a8079acdcba52":[13,0,6,0,0],
 "compute__norms_8hpp_source.html":[13,0,6,0],
 "constant__extrapolation__boundary__value_8hpp_source.html":[13,2,0,0,0,6],
 "cosine__evaluator_8hpp_source.html":[13,2,0,1,0],
@@ -249,5 +247,7 @@ var NAVTREEINDEX3 =
 "dir_4ee803047d71cb916c7a340a089db1b8.html":[13,0,2,4],
 "dir_517ca5cf38039cdc09da4808bf84bf13.html":[13,1,0],
 "dir_53c7f860d740d0c8ca7820df394fe005.html":[13,0,3,0],
-"dir_5f726612e6f7feddf1426504728ece79.html":[13,0,3]
+"dir_5f726612e6f7feddf1426504728ece79.html":[13,0,3],
+"dir_66f693c2f51fcd3241ed49359f462f99.html":[13,0,1,1],
+"dir_6e6ea23699bc866044a8bddf298d0095.html":[13,0,2,6]
 };
