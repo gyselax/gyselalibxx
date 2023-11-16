@@ -4,6 +4,7 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("poisson_${GEOMETRY_VARIANT}" STATIC
     chargedensitycalculator.cpp
+    chargedensitycalculator_splineless.cpp
     electricfield.cpp
     nullpoissonsolver.cpp
 )
@@ -21,6 +22,7 @@ target_link_libraries("poisson_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         sll::splines
+        gslx::quadrature
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::speciesinfo
 )
@@ -32,6 +34,7 @@ endforeach()
 target_sources(poisson_xperiod_vx
     PRIVATE
         fftpoissonsolver.cpp
+        fftpoissonsolver_splinex.cpp
         femperiodicpoissonsolver.cpp
 )
 

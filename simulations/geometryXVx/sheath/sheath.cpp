@@ -28,6 +28,8 @@
 #else
 #include "femnonperiodicpoissonsolver.hpp"
 #endif
+#include "Lagrange_interpolator.hpp"
+#include "fftpoissonsolver_splinex.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "kinetic_source.hpp"
@@ -202,10 +204,15 @@ int main(int argc, char** argv)
     SplineEvaluator<BSplinesVx> const spline_vx_evaluator(bv_v_min, bv_v_max);
 
     PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    IVectVx static constexpr gwvx {0};
+    LagrangeInterpolator<IDimVx, BCond::DIRICHLET, BCond::DIRICHLET> const
+            lagrange_vx_evaluator(3, interpolation_domain_vx, gwvx);
+    PreallocatableLagrangeInterpolator<IDimVx, BCond::DIRICHLET, BCond::DIRICHLET> const
+            lagrange_vx_interpolator(lagrange_vx_evaluator);
 
     BslAdvectionSpatial<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
 
-    BslAdvectionVelocity<GeometryXVx, IDimVx> const advection_vx(spline_vx_interpolator);
+    BslAdvectionVelocity<GeometryXVx, IDimVx> const advection_vx(lagrange_vx_interpolator);
 
     // Creating of mesh for output saving
     IDomainX const gridx = ddc::select<IDimX>(meshSpXVx);
@@ -285,16 +292,20 @@ int main(int argc, char** argv)
         collisions_inter.emplace(meshSpXVx, PCpp_double(conf_voicexx, ".CollisionsInfo.nustar0"));
         rhs_operators.emplace_back(*collisions_inter);
     }
-
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
     SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);
 
+    DFieldVx const quadrature_coeffs
+            = simpson_quadrature_coefficients_1d(allfdistribu.domain<IDimVx>());
+    Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
 #ifdef PERIODIC_RDIMX
-    using FemPoissonSolverX = FemPeriodicPoissonSolver;
+    ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXVx));
+    FftPoissonSolverSplineX const poisson(builder_x, spline_x_evaluator, integrate_v);
 #else
-    using FemPoissonSolverX = FemNonPeriodicPoissonSolver;
+    FemNonPeriodicPoissonSolver const
+            poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
 #endif
-    FemPoissonSolverX const poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
+
 
     PredCorr const predcorr(boltzmann, poisson);
 
