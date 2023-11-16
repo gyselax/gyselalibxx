@@ -20,7 +20,7 @@ var searchData=
   ['spline_5fdomain_257',['spline_domain',['../classSplineBuilder2D.html#a10d968260f75240a4be9d38d8c853353',1,'SplineBuilder2D::spline_domain()'],['../classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9',1,'SplineBuilder::spline_domain()']]],
   ['spline_5fquadrature_2ehpp_258',['spline_quadrature.hpp',['../spline__quadrature_8hpp.html',1,'']]],
   ['spline_5fquadrature_5fcoefficients_259',['spline_quadrature_coefficients',['../spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769',1,'spline_quadrature.hpp']]],
-  ['spline_5fquadrature_5fcoefficients_5f1d_260',['spline_quadrature_coefficients_1d',['../spline__quadrature_8hpp.html#ab791339e1829888bfc246f59fe169376',1,'spline_quadrature.hpp']]],
+  ['spline_5fquadrature_5fcoefficients_5f1d_260',['spline_quadrature_coefficients_1d',['../spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b',1,'spline_quadrature.hpp']]],
   ['splineboundaryvalue_261',['SplineBoundaryValue',['../classSplineBoundaryValue.html',1,'']]],
   ['splineboundaryvalue2d_262',['SplineBoundaryValue2D',['../classSplineBoundaryValue2D.html',1,'']]],
   ['splineboundaryvalue2d_3c_20bspliner_2c_20bsplinep_20_3e_263',['SplineBoundaryValue2D&lt; BSplineR, BSplineP &gt;',['../classSplineBoundaryValue2D.html',1,'']]],

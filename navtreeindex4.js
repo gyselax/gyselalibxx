@@ -162,7 +162,7 @@ var NAVTREEINDEX4 =
 "spline__interpolator_8hpp_source.html":[13,0,4,1],
 "spline__interpolator__2d__rp_8hpp_source.html":[13,0,1,1,1],
 "spline__quadrature_8hpp.html":[13,0,6,3],
-"spline__quadrature_8hpp.html#ab791339e1829888bfc246f59fe169376":[13,0,6,3,0],
+"spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b":[13,0,6,3,0],
 "spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769":[13,0,6,3,1],
 "spline__quadrature_8hpp_source.html":[13,0,6,3],
 "splitrighthandsidesolver_8hpp_source.html":[13,0,2,0,1],

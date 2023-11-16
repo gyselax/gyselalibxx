@@ -220,7 +220,7 @@ var NAVTREEINDEX3 =
 "collisions__intra_8hpp_source.html":[13,0,2,4,1],
 "collisions__utils_8hpp_source.html":[13,0,2,4,2],
 "compute__norms_8hpp.html":[13,0,6,0],
-"compute__norms_8hpp.html#a7a640bd20a4a4bc8702cb1c902aeb46c":[13,0,6,0,2],
+"compute__norms_8hpp.html#a5a537a7bbe2916d26a2b34247a33a5ba":[13,0,6,0,2],
 "compute__norms_8hpp.html#ab2f12689e870d77a2208117f277f47e4":[13,0,6,0,0],
 "compute__norms_8hpp.html#adf7a0fca8cca7bb92d7103878a39a7a0":[13,0,6,0,1],
 "compute__norms_8hpp_source.html":[13,0,6,0],

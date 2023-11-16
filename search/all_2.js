@@ -17,7 +17,7 @@ var searchData=
   ['coding_20standards_41',['Coding Standards',['../docs_CODING_STANDARD.html',1,'']]],
   ['collisionsinter_42',['CollisionsInter',['../classCollisionsInter.html#a17b3fd2997376d30a7d7474bf675b647',1,'CollisionsInter::CollisionsInter()'],['../classCollisionsInter.html',1,'CollisionsInter']]],
   ['collisionsintra_43',['CollisionsIntra',['../classCollisionsIntra.html',1,'']]],
-  ['compute_5fcoeffs_5fon_5fmapping_44',['compute_coeffs_on_mapping',['../compute__norms_8hpp.html#a7a640bd20a4a4bc8702cb1c902aeb46c',1,'compute_norms.hpp']]],
+  ['compute_5fcoeffs_5fon_5fmapping_44',['compute_coeffs_on_mapping',['../compute__norms_8hpp.html#a5a537a7bbe2916d26a2b34247a33a5ba',1,'compute_norms.hpp']]],
   ['compute_5fl1_5fnorm_45',['compute_L1_norm',['../compute__norms_8hpp.html#ab2f12689e870d77a2208117f277f47e4',1,'compute_norms.hpp']]],
   ['compute_5fl2_5fnorm_46',['compute_L2_norm',['../compute__norms_8hpp.html#adf7a0fca8cca7bb92d7103878a39a7a0',1,'compute_norms.hpp']]],
   ['compute_5fmaxwellian_47',['compute_maxwellian',['../classMaxwellianEquilibrium.html#a72f9f23f4753028c745d92b6512afd0e',1,'MaxwellianEquilibrium::compute_maxwellian(DSpanVxVy const fMaxwellian, double const density, double const temperature, double const mean_velocity)'],['../classMaxwellianEquilibrium.html#a3e23dd1e866fe57900314cca7f6c1ec9',1,'MaxwellianEquilibrium::compute_maxwellian(DSpanVx const fMaxwellian, double const density, double const temperature, double const mean_velocity)']]],
