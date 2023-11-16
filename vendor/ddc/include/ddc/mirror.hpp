@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <type_traits>
+
 #include <Kokkos_Core.hpp>
 
 #include "ddc/chunk_span.hpp"
@@ -15,7 +17,10 @@ auto create_mirror(
         Space const& space,
         ChunkSpan<ElementType, Support, Layout, MemorySpace> const& src)
 {
-    return Chunk<ElementType, Support, KokkosAllocator<ElementType, typename Space::memory_space>>(
+    return Chunk<
+            std::remove_const_t<ElementType>,
+            Support,
+            KokkosAllocator<std::remove_const_t<ElementType>, typename Space::memory_space>>(
             src.domain());
 }
 
@@ -32,8 +37,10 @@ auto create_mirror_and_copy(
         Space const& space,
         ChunkSpan<ElementType, Support, Layout, MemorySpace> const& src)
 {
-    Chunk<ElementType, Support, KokkosAllocator<ElementType, typename Space::memory_space>> chunk(
-            src.domain());
+    Chunk<std::remove_const_t<ElementType>,
+          Support,
+          KokkosAllocator<std::remove_const_t<ElementType>, typename Space::memory_space>>
+            chunk(src.domain());
     deepcopy(chunk, src);
     return chunk;
 }
