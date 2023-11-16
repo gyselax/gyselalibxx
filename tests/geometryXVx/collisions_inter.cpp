@@ -98,7 +98,9 @@ TEST(CollisionsInter, CollisionsInter)
         double const nustar0(0.1);
         CollisionsInter collisions(mesh, nustar0);
 
-        FluidMoments moments(Quadrature<IDimVx>(trapezoid_quadrature_coefficients(gridvx)));
+        DFieldVx const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
+        Quadrature<IDimVx> integrate(quadrature_coeffs);
+        FluidMoments moments(integrate);
 
         DFieldSpX nustar_profile(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
         compute_nustar_profile(nustar_profile.span_view(), nustar0);

@@ -43,7 +43,9 @@ void CollisionsInter::compute_rhs(DSpanSpXVx const rhs, DViewSpXVx const allfdis
     IDomainSp const dom_sp(ddc::get_domain<IDimSp>(allfdistribu));
     IDomainVx const gridvx(ddc::get_domain<IDimVx>(allfdistribu));
 
-    FluidMoments moments(Quadrature<IDimVx>(trapezoid_quadrature_coefficients(gridvx)));
+    DFieldVx const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
+    Quadrature<IDimVx> integrate(quadrature_coeffs);
+    FluidMoments moments(integrate);
 
     ddc::for_each(ddc::get_domain<IDimX>(allfdistribu), [&](IndexX const ix) {
         //Moments computation

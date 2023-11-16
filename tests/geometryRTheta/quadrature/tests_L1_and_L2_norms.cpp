@@ -38,7 +38,7 @@ namespace {
  *      The error tolerance @f$ \varepsilon @f$.
  */
 void check_norm_L1(
-        Quadrature<IDimR, IDimP>& quadrature,
+        Quadrature<IDimR, IDimP> quadrature,
         DSpanRP function,
         double const expected_norm,
         double const TOL)
@@ -66,7 +66,7 @@ void check_norm_L1(
  *      The error tolerance @f$ \varepsilon @f$.
  */
 void check_norm_L2(
-        Quadrature<IDimR, IDimP>& quadrature,
+        Quadrature<IDimR, IDimP> quadrature,
         DSpanRP function,
         double const expected_norm,
         double const TOL)
@@ -92,7 +92,7 @@ void check_norm_L2(
  *      A 2x1 array with the error tolerance @f$ \varepsilon @f$.
  */
 void check_norms(
-        Quadrature<IDimR, IDimP>& quadrature,
+        Quadrature<IDimR, IDimP> quadrature,
         DSpanRP function,
         std::array<double, 2> const& expected_norms,
         std::array<double, 2> const& TOLs)
@@ -112,12 +112,10 @@ void launch_tests(
 {
     // Test spline quadrature: ------------------------------------------------------------------------
     // Instantiate a quadrature with coefficients where we added the Jacobian determinant.
-    Quadrature<IDimR, IDimP> quadrature(compute_coeffs_on_mapping(
+    DFieldRP const quadrature_coeffs = compute_coeffs_on_mapping(
             mapping,
-            spline_quadrature_coefficients(
-                    grid,
-                    builder.get_builder_1(),
-                    builder.get_builder_2())));
+            spline_quadrature_coefficients(grid, builder.get_builder_1(), builder.get_builder_2()));
+    Quadrature<IDimR, IDimP> quadrature(quadrature_coeffs);
 
 
     DFieldRP test(grid);

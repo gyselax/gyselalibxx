@@ -6,9 +6,7 @@
 #include <quadrature.hpp>
 #include <trapezoid_quadrature.hpp>
 
-FluidMoments::FluidMoments(Quadrature<IDimVx> integrate_v) : m_integrate_v(std::move(integrate_v))
-{
-}
+FluidMoments::FluidMoments(Quadrature<IDimVx> integrate_v) : m_integrate_v(integrate_v) {}
 
 /*
  * Computes the density of fdistribu
@@ -37,7 +35,7 @@ void FluidMoments::operator()(
 void FluidMoments::operator()(
         double& mean_velocity,
         DViewVx const fdistribu,
-        double const& density,
+        double density,
         FluidMoments::MomentVelocity)
 {
     DFieldVx integrand(fdistribu.domain());
@@ -74,8 +72,8 @@ void FluidMoments::operator()(
 void FluidMoments::operator()(
         double& temperature,
         DViewVx const fdistribu,
-        double const& density,
-        double const& mean_velocity,
+        double density,
+        double mean_velocity,
         FluidMoments::MomentTemperature)
 {
     DFieldVx integrand(fdistribu.domain());

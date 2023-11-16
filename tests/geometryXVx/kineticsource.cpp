@@ -50,8 +50,10 @@ TEST(KineticSource, Moments)
     IDomainVx const gridvx = builder_vx.interpolation_domain();
     IDomainSpXVx const mesh(IDomainSp(my_iion, IVectSp(1)), gridx, gridvx);
 
-    Quadrature<IDimX> const integrate_x(trapezoid_quadrature_coefficients(gridx));
-    Quadrature<IDimVx> const integrate_v(trapezoid_quadrature_coefficients(gridvx));
+    DFieldX quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
+    DFieldVx quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
+    Quadrature<IDimX> const integrate_x(quadrature_coeffs_x);
+    Quadrature<IDimVx> const integrate_v(quadrature_coeffs_vx);
 
     FieldSp<int> charges(dom_sp);
     charges(my_ielec) = -1;
