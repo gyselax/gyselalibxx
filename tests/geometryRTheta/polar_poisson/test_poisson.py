@@ -28,7 +28,7 @@ if err:
     assert False
 
 out_lines = out.split('\n')
-error_64 = float(out_lines[-1].split(' ')[-1])
+error_64 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
 
 with open("poisson.yaml", "w", encoding="utf-8") as f:
     print("Mesh:", file=f)
@@ -47,7 +47,7 @@ if err:
     assert False
 
 out_lines = out.split('\n')
-error_128 = float(out_lines[-1].split(' ')[-1])
+error_128 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
 
 order = np.log(error_64/error_128) / np.log(2)
 
