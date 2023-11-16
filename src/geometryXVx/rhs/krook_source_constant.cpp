@@ -51,7 +51,10 @@ KrookSourceConstant::KrookSourceConstant(
         break;
     }
     // target distribution function
-    MaxwellianEquilibrium::compute_maxwellian(m_ftarget, m_density, m_temperature, 0.);
+    device_t<DFieldVx> ftarget_device(gridvx);
+    MaxwellianEquilibrium::compute_maxwellian(ftarget_device, m_density, m_temperature, 0.);
+    auto ftarget = ddc::create_mirror_view_and_copy(ftarget_device.span_view());
+    ddc::deepcopy(m_ftarget, ftarget);
 
     switch (m_type) {
     case RhsType::Source:

@@ -13,6 +13,7 @@ target_link_libraries("geometry_${GEOMETRY_VARIANT}" INTERFACE
     DDC::DDC
     sll::splines
     gslx::speciesinfo
+    gslx::utils
 )
 add_library("gslx::geometry_${GEOMETRY_VARIANT}" ALIAS "geometry_${GEOMETRY_VARIANT}")
 
