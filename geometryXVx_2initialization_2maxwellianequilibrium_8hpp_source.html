@@ -128,10 +128,10 @@ $(document).ready(function(){initNavTree('geometryXVx_2initialization_2maxwellia
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    ~<a class="code" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    DSpanSpVx operator()(DSpanSpVx allfequilibrium) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    device_t&lt;DSpanSpVx&gt; operator()(device_t&lt;DSpanSpVx&gt; allfequilibrium) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a3e23dd1e866fe57900314cca7f6c1ec9">   35</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classMaxwellianEquilibrium.html#a3e23dd1e866fe57900314cca7f6c1ec9">compute_maxwellian</a>(</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            DSpanVx <span class="keyword">const</span> fMaxwellian,</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a2b7da0b0dcd654fc6de0e6bf6dedbf46">   35</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classMaxwellianEquilibrium.html#a2b7da0b0dcd654fc6de0e6bf6dedbf46">compute_maxwellian</a>(</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            device_t&lt;DSpanVx&gt; <span class="keyword">const</span> fMaxwellian,</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> density,</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> temperature,</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> mean_velocity);</div>
@@ -153,7 +153,7 @@ $(document).ready(function(){initNavTree('geometryXVx_2initialization_2maxwellia
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
 <div class="ttc" id="aclassIEquilibrium_html"><div class="ttname"><a href="classIEquilibrium.html">IEquilibrium</a></div><div class="ttdef"><b>Definition:</b> iequilibrium.hpp:8</div></div>
 <div class="ttc" id="aclassMaxwellianEquilibrium_html"><div class="ttname"><a href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a></div><div class="ttdoc">Equilibrium operator as Maxwellian. This initializes all species.</div><div class="ttdef"><b>Definition:</b> maxwellianequilibrium.hpp:12</div></div>
-<div class="ttc" id="aclassMaxwellianEquilibrium_html_a3e23dd1e866fe57900314cca7f6c1ec9"><div class="ttname"><a href="classMaxwellianEquilibrium.html#a3e23dd1e866fe57900314cca7f6c1ec9">MaxwellianEquilibrium::compute_maxwellian</a></div><div class="ttdeci">static void compute_maxwellian(DSpanVx const fMaxwellian, double const density, double const temperature, double const mean_velocity)</div><div class="ttdoc">Computing the non-centered Maxwellian function as fM(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T)) with ...</div></div>
+<div class="ttc" id="aclassMaxwellianEquilibrium_html_a2b7da0b0dcd654fc6de0e6bf6dedbf46"><div class="ttname"><a href="classMaxwellianEquilibrium.html#a2b7da0b0dcd654fc6de0e6bf6dedbf46">MaxwellianEquilibrium::compute_maxwellian</a></div><div class="ttdeci">static void compute_maxwellian(device_t&lt; DSpanVx &gt; const fMaxwellian, double const density, double const temperature, double const mean_velocity)</div><div class="ttdoc">Computing the non-centered Maxwellian function as fM(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T)) with ...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

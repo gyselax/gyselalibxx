@@ -125,9 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2456246c1a302aea3302ae4ea8521b4d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d">PredCorr</a> (<a class="el" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> const &amp;boltzmann_solver, <a class="el" href="classIPoissonSolver.html">IPoissonSolver</a> const &amp;poisson_solver)</td></tr>
 <tr class="memdesc:a2456246c1a302aea3302ae4ea8521b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the predictor-corrector class.  <a href="classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d">More...</a><br /></td></tr>
 <tr class="separator:a2456246c1a302aea3302ae4ea8521b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5916671433abd2af3ee5e0ed3b8eae60"><td class="memItemLeft" align="right" valign="top">DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">operator()</a> (DSpanSpXVx allfdistribu, double time_start, double dt, int steps=1) const override</td></tr>
-<tr class="memdesc:a5916671433abd2af3ee5e0ed3b8eae60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Boltzmann-Poisson system.  <a href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">More...</a><br /></td></tr>
-<tr class="separator:a5916671433abd2af3ee5e0ed3b8eae60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd69c0eb2605008c0d4ecbd70e0ccbd0"><td class="memItemLeft" align="right" valign="top">device_t&lt; DSpanSpXVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#afd69c0eb2605008c0d4ecbd70e0ccbd0">operator()</a> (device_t&lt; DSpanSpXVx &gt; allfdistribu, double time_start, double dt, int steps=1) const override</td></tr>
+<tr class="memdesc:afd69c0eb2605008c0d4ecbd70e0ccbd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Boltzmann-Poisson system.  <a href="classPredCorr.html#afd69c0eb2605008c0d4ecbd70e0ccbd0">More...</a><br /></td></tr>
+<tr class="separator:afd69c0eb2605008c0d4ecbd70e0ccbd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4b6fdfbec28c702b689ae31f56865f6"><td class="memItemLeft" align="right" valign="top"><a id="ae4b6fdfbec28c702b689ae31f56865f6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PredCorr</b> (<a class="el" href="classIVlasovSolver.html">IVlasovSolver</a> const &amp;vlasov_solver, <a class="el" href="classIPoissonSolver.html">IPoissonSolver</a> const &amp;poisson_solver)</td></tr>
 <tr class="separator:ae4b6fdfbec28c702b689ae31f56865f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,8 +177,8 @@ DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5916671433abd2af3ee5e0ed3b8eae60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5916671433abd2af3ee5e0ed3b8eae60">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="afd69c0eb2605008c0d4ecbd70e0ccbd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd69c0eb2605008c0d4ecbd70e0ccbd0">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -187,9 +187,9 @@ DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DSpanSpXVx PredCorr::operator() </td>
+          <td class="memname">device_t&lt;DSpanSpXVx&gt; PredCorr::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">device_t&lt; DSpanSpXVx &gt;&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
@@ -235,7 +235,7 @@ DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the system. </dd></dl>
 
-<p>Implements <a class="el" href="classITimeSolver.html#ab62c963f741ff88c6167c798392d8d20">ITimeSolver</a>.</p>
+<p>Implements <a class="el" href="classITimeSolver.html#a7c34ee67eeac399e7296a27db629fd1a">ITimeSolver</a>.</p>
 
 </div>
 </div>

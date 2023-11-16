@@ -1,0 +1,4 @@
+var structDevice_3_01ddc_1_1ChunkSpan_3_01ElementType_00_01SupportType_00_01Layout_00_01MemorySpace_01_4_01_4 =
+[
+    [ "type", "structDevice_3_01ddc_1_1ChunkSpan_3_01ElementType_00_01SupportType_00_01Layout_00_01MemorySpace_01_4_01_4.html#aef7e06f63748e0d59810de6c2fd34e68", null ]
+];

@@ -128,6 +128,37 @@ $(document).ready(function(){initNavTree('ddc__helper_8hpp_source.html',''); ini
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> std::fabs(ddc::rlength(dom) + ddc::step&lt;ddc::UniformPointSampling&lt;RDim&gt;&gt;());</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}; <span class="comment">// namespace ddcHelper</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// Template type giving the &quot;device&quot; version of a Chunk/Chunkspan/View</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>&gt;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structDevice.html">   45</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structDevice.html">Device</a></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType, <span class="keyword">class</span> SupportType, <span class="keyword">class</span> Allocator&gt;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="structDevice_3_01ddc_1_1Chunk_3_01ElementType_00_01SupportType_00_01Allocator_01_4_01_4.html">   50</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structDevice.html">Device</a>&lt;ddc::Chunk&lt;ElementType, SupportType, Allocator&gt;&gt;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">using</span> type = <span class="keyword">typename</span> ddc::Chunk&lt;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            ElementType,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            SupportType,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            ddc::KokkosAllocator&lt;ElementType, Kokkos::DefaultExecutionSpace::memory_space&gt;&gt;;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType, <span class="keyword">class</span> SupportType, <span class="keyword">class</span> Layout, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structDevice_3_01ddc_1_1ChunkSpan_3_01ElementType_00_01SupportType_00_01Layout_00_01MemorySpace_01_4_01_4.html">   59</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structDevice.html">Device</a>&lt;ddc::ChunkSpan&lt;ElementType, SupportType, Layout, MemorySpace&gt;&gt;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">using</span> type = <span class="keyword">typename</span> ddc::ChunkSpan&lt;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            ElementType,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            SupportType,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            Layout,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            Kokkos::DefaultExecutionSpace::memory_space&gt;;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> C&gt;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">using</span> device_t = <span class="keyword">typename</span> <a class="code" href="structDevice.html">Device&lt;C&gt;::type</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">// namespace ddcHelper</span></div>
+<div class="ttc" id="astructDevice_html"><div class="ttname"><a href="structDevice.html">Device</a></div><div class="ttdef"><b>Definition:</b> ddc_helper.hpp:46</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

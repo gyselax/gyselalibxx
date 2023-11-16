@@ -126,9 +126,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab3d592e3fee525903a504fbdb819142b"><td class="memItemLeft" align="right" valign="top"><a id="ab3d592e3fee525903a504fbdb819142b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>MaxwellianEquilibrium</b> (DFieldSp density_eq, DFieldSp temperature_eq, DFieldSp mean_velocity_eq)</td></tr>
 <tr class="separator:ab3d592e3fee525903a504fbdb819142b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f4e3335acb638b07bd95fa868842d64"><td class="memItemLeft" align="right" valign="top"><a id="a0f4e3335acb638b07bd95fa868842d64"></a>
-DSpanSpVx&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpVx allfequilibrium) const override</td></tr>
-<tr class="separator:a0f4e3335acb638b07bd95fa868842d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bae749d2a0ce0ad7fca578da6efa7ee"><td class="memItemLeft" align="right" valign="top"><a id="a7bae749d2a0ce0ad7fca578da6efa7ee"></a>
+device_t&lt; DSpanSpVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (device_t&lt; DSpanSpVx &gt; allfequilibrium) const override</td></tr>
+<tr class="separator:a7bae749d2a0ce0ad7fca578da6efa7ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98691722df96759535fe638dcb41b674"><td class="memItemLeft" align="right" valign="top"><a id="a98691722df96759535fe638dcb41b674"></a>
 ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>density_eq</b> () const</td></tr>
 <tr class="separator:a98691722df96759535fe638dcb41b674"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,10 +156,10 @@ ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mea
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a3e23dd1e866fe57900314cca7f6c1ec9"><td class="memItemLeft" align="right" valign="top"><a id="a3e23dd1e866fe57900314cca7f6c1ec9"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a3e23dd1e866fe57900314cca7f6c1ec9">compute_maxwellian</a> (DSpanVx const fMaxwellian, double const density, double const temperature, double const mean_velocity)</td></tr>
-<tr class="memdesc:a3e23dd1e866fe57900314cca7f6c1ec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computing the non-centered Maxwellian function as fM(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T)) with n the density and T the temperature and where u is the mean velocity. <br /></td></tr>
-<tr class="separator:a3e23dd1e866fe57900314cca7f6c1ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b7da0b0dcd654fc6de0e6bf6dedbf46"><td class="memItemLeft" align="right" valign="top"><a id="a2b7da0b0dcd654fc6de0e6bf6dedbf46"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a2b7da0b0dcd654fc6de0e6bf6dedbf46">compute_maxwellian</a> (device_t&lt; DSpanVx &gt; const fMaxwellian, double const density, double const temperature, double const mean_velocity)</td></tr>
+<tr class="memdesc:a2b7da0b0dcd654fc6de0e6bf6dedbf46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computing the non-centered Maxwellian function as fM(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T)) with n the density and T the temperature and where u is the mean velocity. <br /></td></tr>
+<tr class="separator:a2b7da0b0dcd654fc6de0e6bf6dedbf46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72f9f23f4753028c745d92b6512afd0e"><td class="memItemLeft" align="right" valign="top"><a id="a72f9f23f4753028c745d92b6512afd0e"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a72f9f23f4753028c745d92b6512afd0e">compute_maxwellian</a> (DSpanVxVy const fMaxwellian, double const density, double const temperature, double const mean_velocity)</td></tr>
 <tr class="memdesc:a72f9f23f4753028c745d92b6512afd0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computing the non-centered Maxwellian function as fM(v) = n/(2*PI*T)*exp(-(v-u)**2/(2*T)) with n the density and T the temperature and where u is the mean velocity. <br /></td></tr>
