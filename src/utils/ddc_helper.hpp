@@ -40,7 +40,9 @@ constexpr std::enable_if_t<RDim::PERIODIC, double> total_interval_length(
 }
 }; // namespace ddcHelper
 
-// Template type giving the "device" version of a Chunk/Chunkspan/View
+namespace detail {
+
+/// \cond
 template <class>
 struct Device
 {
@@ -64,8 +66,10 @@ struct Device<ddc::ChunkSpan<ElementType, SupportType, Layout, MemorySpace>>
             Layout,
             Kokkos::DefaultExecutionSpace::memory_space>;
 };
+/// \endcond
 
+} // namespace detail
+
+/// Alias template helper returning the "device" version of a `ddc::Chunk` or a `ddc::Chunkspan`
 template <class C>
-using device_t = typename Device<C>::type;
-
-// namespace ddcHelper
+using device_t = typename detail::Device<C>::type;
