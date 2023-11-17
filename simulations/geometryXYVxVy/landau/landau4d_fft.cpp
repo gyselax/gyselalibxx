@@ -72,7 +72,9 @@ int main(int argc, char** argv)
         cerr << "usage: " << argv[0] << " [--dump-config] <config_file.yml>" << endl;
         return EXIT_FAILURE;
     }
+    PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
+    PDI_init(conf_pdi);
 
     // Reading config
     // --> Mesh info
@@ -202,10 +204,6 @@ int main(int argc, char** argv)
     // --> Output info
     double const time_diag = PCpp_double(conf_voicexx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
-
-    PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
-
-    PDI_init(conf_pdi);
 
     // Create spline evaluator
     ConstantExtrapolationBoundaryValue<BSplinesX> bv_x_min(x_min);
