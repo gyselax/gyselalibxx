@@ -131,7 +131,10 @@ public:
     /** Constructs a new ChunkSpan from a Chunk, yields a new view to the same data
      * @param other the Chunk to view
      */
-    template <class OElementType, class Allocator>
+    template <
+            class OElementType,
+            class Allocator,
+            class = std::enable_if_t<std::is_same_v<typename Allocator::memory_space, MemorySpace>>>
     KOKKOS_FUNCTION constexpr ChunkSpan(
             Chunk<OElementType, mdomain_type, Allocator>& other) noexcept
         : base_type(other.m_internal_mdspan, other.m_domain)
@@ -146,7 +149,8 @@ public:
             class OElementType,
             class SFINAEElementType = ElementType,
             class = std::enable_if_t<std::is_const_v<SFINAEElementType>>,
-            class Allocator>
+            class Allocator,
+            class = std::enable_if_t<std::is_same_v<typename Allocator::memory_space, MemorySpace>>>
     KOKKOS_FUNCTION constexpr ChunkSpan(
             Chunk<OElementType, mdomain_type, Allocator> const& other) noexcept
         : base_type(other.m_internal_mdspan, other.m_domain)
