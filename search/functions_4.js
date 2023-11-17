@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['fluidmoments_551',['FluidMoments',['../classFluidMoments.html#a349bb1bca93f384ceea5ce4df7457443',1,'FluidMoments']]],
-  ['full_5fdomain_552',['full_domain',['../classNonUniformBSplines_1_1Impl.html#ac8a6caf50fd6643695e349fc63600008',1,'NonUniformBSplines::Impl::full_domain()'],['../classUniformBSplines_1_1Impl.html#a4ec6f3bfdd493458acbf5db3c2488eec',1,'UniformBSplines::Impl::full_domain()']]]
+  ['e_629',['e',['../classCzarnyToCartesian.html#a4b4f1725b24004e0b0edc124b66396f5',1,'CzarnyToCartesian']]],
+  ['epsilon_630',['epsilon',['../classCzarnyToCartesian.html#a9e4ad729fd290d47759637b69b9aa30a',1,'CzarnyToCartesian']]],
+  ['euler_631',['Euler',['../classEuler.html#a8019703dccd8358b9b221818fa51bdcb',1,'Euler']]],
+  ['evaluate_632',['evaluate',['../classLagrange.html#a533567c65ffa19e901d778d9f6ae5577',1,'Lagrange']]],
+  ['exact_5ffeet_5fx_633',['exact_feet_x',['../classAdvectionField.html#a47445274220587dcc310cb39a6d729a1',1,'AdvectionField::exact_feet_x()'],['../classAdvectionField__decentred__rotation.html#a4c3ed2820902a85a473868a4b2eb1588',1,'AdvectionField_decentred_rotation::exact_feet_x()'],['../classAdvectionField__translation.html#af6b565c686117099dfebb9714b945937',1,'AdvectionField_translation::exact_feet_x()'],['../classAdvectionField__rotation.html#a5afdcb8a308af4351a08ffb844183789',1,'AdvectionField_rotation::exact_feet_x()']]],
+  ['exact_5ffeet_5fy_634',['exact_feet_y',['../classAdvectionField.html#a98edc064564938a301c27057159c1dc7',1,'AdvectionField::exact_feet_y()'],['../classAdvectionField__decentred__rotation.html#ad033e4149e933989948d8cbdb97b5950',1,'AdvectionField_decentred_rotation::exact_feet_y()'],['../classAdvectionField__translation.html#ab480dae130744533171acb9534ef4a0e',1,'AdvectionField_translation::exact_feet_y()'],['../classAdvectionField__rotation.html#a6836c956252eaceb70d71639815fafff',1,'AdvectionField_rotation::exact_feet_y()']]]
 ];

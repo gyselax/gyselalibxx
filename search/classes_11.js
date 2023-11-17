@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uniformbsplines_515',['UniformBSplines',['../classdeprecated_1_1UniformBSplines.html',1,'deprecated::UniformBSplines'],['../classUniformBSplines.html',1,'UniformBSplines&lt; Tag, D &gt;']]]
+  ['uniformbsplines_586',['UniformBSplines',['../classdeprecated_1_1UniformBSplines.html',1,'deprecated::UniformBSplines'],['../classUniformBSplines.html',1,'UniformBSplines&lt; Tag, D &gt;']]]
 ];

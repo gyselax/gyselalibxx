@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['norm_5finf_576',['norm_inf',['../utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c',1,'norm_inf(ddc::Coordinate&lt; Tags... &gt; coord):&#160;utils_tools.hpp'],['../utils__tools_8hpp.html#a8c5a1de1b27561eb7e33276fe08c8154',1,'norm_inf(double const coord):&#160;utils_tools.hpp']]]
+  ['metric_5ftensor_668',['metric_tensor',['../classCurvilinear2DToCartesian.html#a5d1a1f488cffb8a5e11c9a94dee2036a',1,'Curvilinear2DToCartesian']]]
 ];

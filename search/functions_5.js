@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['get_5fbuilder_5f1_553',['get_builder_1',['../classSplineBuilder2D.html#ab9e9788616d4be20d309ec04da8e25fe',1,'SplineBuilder2D']]],
-  ['get_5fbuilder_5f2_554',['get_builder_2',['../classSplineBuilder2D.html#a5a406c6bc3f47c2895963a66c40e5cee',1,'SplineBuilder2D']]],
-  ['get_5fnustar0_555',['get_nustar0',['../classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac',1,'CollisionsInter']]]
+  ['fluidmoments_635',['FluidMoments',['../classFluidMoments.html#a349bb1bca93f384ceea5ce4df7457443',1,'FluidMoments']]],
+  ['full_5fdomain_636',['full_domain',['../classNonUniformBSplines_1_1Impl.html#ac8a6caf50fd6643695e349fc63600008',1,'NonUniformBSplines::Impl::full_domain()'],['../classUniformBSplines_1_1Impl.html#a4ec6f3bfdd493458acbf5db3c2488eec',1,'UniformBSplines::Impl::full_domain()']]],
+  ['functiontobeadvected_5fcos_5f4_5felipse_637',['FunctionToBeAdvected_cos_4_elipse',['../classFunctionToBeAdvected__cos__4__elipse.html#a3b7c4536b840b3c02e61b57b3bfb0ec6',1,'FunctionToBeAdvected_cos_4_elipse']]],
+  ['functiontobeadvected_5fgaussian_638',['FunctionToBeAdvected_gaussian',['../classFunctionToBeAdvected__gaussian.html#aef3eeccf31077b83bd59c4d83d5ab360',1,'FunctionToBeAdvected_gaussian']]]
 ];

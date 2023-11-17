@@ -60,7 +60,7 @@ var NAVTREE =
     ] ],
     [ "Gyselalib++ contents", "src.html", "src" ],
     [ "Initializatin methods", "src_geometryXVx_initialization.html", null ],
-    [ "Tests on spline interpolator in polar coordinates", "tests_geometryRTheta_2d_spline_interpolator.html", null ],
+    [ "Tests : Geometry (r, theta)", "tests_geometryRTheta.html", "tests_geometryRTheta" ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]
@@ -70,11 +70,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66",
-"classNonUniformBSplines_1_1Impl.html#abf30e16afac8311af45359026a87f27f",
-"classSplineEvaluator2D.html#a3f4db4c81b8bd50014edc7ac2565ac0d",
-"czarny__to__cartesian_8hpp_source.html",
-"utils__tools_8hpp.html#a8c5a1de1b27561eb7e33276fe08c8154"
+"classCzarnyToCartesian.html#a13e22f85f9041e5d5e602513029baa4f",
+"classMatrix__Corner__Block.html",
+"classSingleModePerturbInitialization.html#a7000b61f058ed580a8c2a5d1df85313b",
+"classdeprecated_1_1Spline1D.html#a710d5bae2282257423bc1f2e148f6a4f",
+"polar__spline__evaluator_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -648,7 +648,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point. </p>
-<p>The discrete mappings can be difficult to inverse especially at the central point. In case of non analytical invertible mapping, we can work in another domain called pseudo-Cartesian domain. In this domain, it is easier to inverse the Jacobian matrix. The idea is detailed in the Edoardo Zoni's article (<em>Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the method of characteristics and spline finite elements</em>, <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>)</p>
+<p>The discrete mappings can be difficult to inverse especially at the central point. In case of non analytical invertible mapping, we can work in another domain called pseudo-Cartesian domain. In this domain, it is easier to inverse the Jacobian matrix. The idea is detailed in Edoardo Zoni's article (<em>Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the method of characteristics and spline finite elements</em>, <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>)</p>
 <p>The current mapping maps from the logical domain to the physical domain \( \mathcal{F}: (r,\theta) \mapsto (x, y)\). The pseudo-Cartesian domain is built with \( \mathcal{F} \) and using the circular mapping \( \mathcal{G} \):</p><ul>
 <li>\( \mathcal{G}_{11}(r, \theta) = \cos(\theta), \qquad\quad \mathcal{G}_{12}(r, \theta) = \sin(\theta) \),</li>
 <li>\( \mathcal{G}_{21}(r, \theta) = -\frac{1}{r}\sin(\theta), \qquad\quad \mathcal{G}_{22}(r, \theta) = \frac{1}{r}\cos(\theta) \).</li>
@@ -671,7 +671,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 <dd>
 BslAdvection </dd>
 <dd>
-AdvectionDomain </dd></dl>
+<a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> </dd></dl>
 
 </div>
 </div>
@@ -858,7 +858,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 <p>\( x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} \),</p>
 <p>\( y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} \),</p>
 <p>where \( N_r\times N_{\theta} \) is the number of B-splines.</p>
-<p>The control points can be obtained by interpolating the mapping on interpolation points (see <a class="el" href="classGrevilleInterpolationPoints.html">GrevilleInterpolationPoints</a> or <a class="el" href="classKnotsAsInterpolationPoints.html">KnotsAsInterpolationPoints</a>). We can also note that the first control points \( \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} \) are equal to the pole \( (c_{x,k}, c_{y,k}) = (x_0,y_0) \), \( \forall k = 0, ..., N_{\theta}-1 \) where \( x(0,\theta), y(0,\theta) = (x_0,y_0) \) \( \forall \theta \).</p>
+<p>The control points can be obtained by interpolating the mapping on interpolation points (see <a class="el" href="classGrevilleInterpolationPoints.html" title="A class which provides helper functions to initialise the Greville points from a B-Spline definition.">GrevilleInterpolationPoints</a> or <a class="el" href="classKnotsAsInterpolationPoints.html">KnotsAsInterpolationPoints</a>). We can also note that the first control points \( \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} \) are equal to the pole \( (c_{x,k}, c_{y,k}) = (x_0,y_0) \), \( \forall k = 0, ..., N_{\theta}-1 \) where \( x(0,\theta), y(0,\theta) = (x_0,y_0) \) \( \forall \theta \).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">el</td><td>The number of the control point.</td></tr>
@@ -866,7 +866,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The el-th control point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classGrevilleInterpolationPoints.html">GrevilleInterpolationPoints</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classGrevilleInterpolationPoints.html" title="A class which provides helper functions to initialise the Greville points from a B-Spline definition.">GrevilleInterpolationPoints</a> </dd>
 <dd>
 <a class="el" href="classKnotsAsInterpolationPoints.html">KnotsAsInterpolationPoints</a> </dd></dl>
 

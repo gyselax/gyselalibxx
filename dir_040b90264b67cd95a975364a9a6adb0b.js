@@ -1,5 +1,14 @@
 var dir_040b90264b67cd95a975364a9a6adb0b =
 [
+    [ "Studied equation", "src_geometryRTheta_advection.html#autotoc_md20", null ],
+    [ "Backward Semi-Lagrangian method", "src_geometryRTheta_advection.html#autotoc_md21", null ],
+    [ "Time integration methods", "src_geometryRTheta_advection.html#autotoc_md22", [
+      [ "Explicit Euler method", "src_geometryRTheta_advection.html#autotoc_md23", null ],
+      [ "Crank-Nicolson method", "src_geometryRTheta_advection.html#autotoc_md24", null ],
+      [ "RK3 method", "src_geometryRTheta_advection.html#autotoc_md25", null ],
+      [ "RK4 method", "src_geometryRTheta_advection.html#autotoc_md26", null ]
+    ] ],
+    [ "Advection domain", "src_geometryRTheta_advection.html#autotoc_md27", null ],
     [ "deprecated", "dir_bf05ee1a50b262d9ca6db6046de9e516.html", "dir_bf05ee1a50b262d9ca6db6046de9e516" ],
     [ "mapping", "dir_401f8b249764c6753d0f677d3a20782c.html", "dir_401f8b249764c6753d0f677d3a20782c" ],
     [ "bernstein.hpp", "bernstein_8hpp_source.html", null ],
