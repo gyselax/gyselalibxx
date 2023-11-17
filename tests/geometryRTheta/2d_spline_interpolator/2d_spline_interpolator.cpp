@@ -52,7 +52,7 @@ void Interpolation_on_random_coord(
         IDomainRP& grid,
         bool& On_the_nodes,
         Function& exact_function,
-        double const& TOL)
+        double const TOL)
 {
     int const Nr = ddc::discrete_space<BSplinesR>().ncells();
     int const Nt = ddc::discrete_space<BSplinesP>().ncells();

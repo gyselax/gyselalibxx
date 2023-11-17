@@ -12,7 +12,11 @@
 #include <sll/spline_evaluator.hpp>
 #include <sll/spline_evaluator_2d.hpp>
 
+#include <directional_tag.hpp>
 #include <species_info.hpp>
+#include <vector_field.hpp>
+#include <vector_field_span.hpp>
+
 
 /*
  * @file geometry.hpp
@@ -166,6 +170,28 @@ using DViewRP = ViewRP<double>;
 using Spline2D = ddc::Chunk<double, BSDomainRP>;
 using Spline2DSpan = ddc::ChunkSpan<double, BSDomainRP>;
 using Spline2DView = ddc::ChunkSpan<double const, BSDomainRP>;
+
+
+
+template <class Dim1, class Dim2>
+using VectorDFieldRP = VectorField<double, IDomainRP, NDTag<Dim1, Dim2>>;
+
+template <class Dim1, class Dim2>
+using VectorDSpanRP = VectorFieldSpan<double, IDomainRP, NDTag<Dim1, Dim2>>;
+
+template <class Dim1, class Dim2>
+using VectorDViewRP = VectorFieldView<double, IDomainRP, NDTag<Dim1, Dim2>>;
+
+
+
+template <class Dim1, class Dim2>
+using VectorSpline2D = VectorField<double, BSDomainRP, NDTag<Dim1, Dim2>>;
+
+template <class Dim1, class Dim2>
+using VectorSpline2DSpan = VectorFieldSpan<double, BSDomainRP, NDTag<Dim1, Dim2>>;
+
+template <class Dim1, class Dim2>
+using VectorSpline2DView = VectorFieldView<double, BSDomainRP, NDTag<Dim1, Dim2>>;
 
 
 // VELOCITY ----------------------------------------------------------
