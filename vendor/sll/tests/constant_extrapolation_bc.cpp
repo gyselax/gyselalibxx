@@ -185,7 +185,7 @@ void check_constant_outside_domain(
         Function& exact_function,
         SpanRP<CoordRP> coords,
         SpanRP<CoordRP> outside_coords,
-        double const& TOL)
+        double const TOL)
 {
     auto r_domain = ddc::get_domain<IDimR>(coords);
     double r_max = ddc::coordinate(r_domain.back());
@@ -221,7 +221,7 @@ void check_constant_outside_domain(
         Function& exact_function,
         SpanXY<CoordXY> coords,
         SpanXY<CoordXY> outside_coords,
-        double const& TOL)
+        double const TOL)
 {
     auto x_domain = ddc::get_domain<IDimX>(coords);
     auto y_domain = ddc::get_domain<IDimY>(coords);
@@ -383,7 +383,7 @@ void build_outside_grid(IDomainXY const& grid, FieldXY<CoordXY>& outside_coords)
  * 			and the computed value.
  */
 template <class Function>
-void Evaluate_on_outside_coord(IDomainRP const& grid, Function& exact_function, double const& TOL)
+void Evaluate_on_outside_coord(IDomainRP const& grid, Function& exact_function, double const TOL)
 {
     // Coordinates on the grid. --------------------------------------------------------------
     FieldRP<CoordRP> coords(grid);
@@ -445,7 +445,7 @@ void Evaluate_on_outside_coord(IDomainRP const& grid, Function& exact_function, 
 * 			and the computed value.
 */
 template <class Function>
-void Evaluate_on_outside_coord(IDomainXY const& grid, Function& exact_function, double const& TOL)
+void Evaluate_on_outside_coord(IDomainXY const& grid, Function& exact_function, double const TOL)
 {
     // Coordinates on the grid. --------------------------------------------------------------
     FieldXY<CoordXY> coords(grid);
@@ -679,9 +679,9 @@ public:
      */
     CartesianExactFunction_cos_x_sin_y(
             int const d_x,
-            double const& n_x,
+            double const n_x,
             int const d_y,
-            double const& n_y)
+            double const n_y)
         : m_d_x(d_x)
         , m_n_x(n_x)
         , m_d_y(d_y)

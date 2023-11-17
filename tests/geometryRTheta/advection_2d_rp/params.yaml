@@ -1,0 +1,9 @@
+Mesh:
+  r_min: 0
+  r_max: 1
+  r_size: 40
+  p_size: 80
+  time_step: 0.1
+  final_time: 0.8
+  save_curves: false
+  save_feet: false
