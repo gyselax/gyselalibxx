@@ -72,7 +72,9 @@ int main(int argc, char** argv)
              << endl;
         return EXIT_FAILURE;
     }
+    PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
+    PDI_init(conf_pdi);
 
     // Reading config
     // --> Mesh info
@@ -156,8 +158,6 @@ int main(int argc, char** argv)
             std::move(mean_velocity_bot));
     init_fequilibrium(allfequilibrium_device);
 
-    PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
-    PDI_init(conf_pdi);
     ddc::expose_to_pdi("iter_start", iter_start);
 
     device_t<DFieldSpXVx> allfdistribu_device(meshSpXVx);
