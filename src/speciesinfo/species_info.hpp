@@ -16,7 +16,7 @@ public:
     using discrete_vector_type = ddc::DiscreteVector<SpeciesInformation>;
 
 public:
-    static constexpr std::size_t rank()
+    static KOKKOS_FUNCTION constexpr std::size_t rank()
     {
         return 1;
     }
@@ -83,7 +83,7 @@ public:
             }
         }
 
-        discrete_element_type ielec() const
+        KOKKOS_FUNCTION discrete_element_type ielec() const
         {
             return m_ielec;
         }
@@ -110,7 +110,7 @@ public:
     };
 };
 
-inline ddc::DiscreteElement<SpeciesInformation> ielec()
+KOKKOS_INLINE_FUNCTION ddc::DiscreteElement<SpeciesInformation> ielec()
 {
     return ddc::discrete_space<SpeciesInformation>().ielec();
 }
