@@ -260,7 +260,7 @@ public:
      *
      * The discrete mappings can be difficult to inverse especially at the central point.
      * In case of non analytical invertible mapping, we can work in another domain called pseudo-Cartesian domain.
-     * In this domain, it is easier to inverse the Jacobian matrix. The idea is detailed in the Edoardo Zoni's article
+     * In this domain, it is easier to inverse the Jacobian matrix. The idea is detailed in Edoardo Zoni's article
      * (*Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the method of characteristics and
      * spline finite elements*, https://doi.org/10.1016/j.jcp.2019.108889)
      *

@@ -6,6 +6,7 @@ include(GoogleTest)
 
 add_executable(unit_tests_utils
     field.cpp
+    test_ddcHelpers.cpp
     ../main.cpp
 )
 target_compile_features(unit_tests_utils PUBLIC cxx_std_17)
