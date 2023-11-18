@@ -206,4 +206,10 @@ KOKKOS_FORCEINLINE_FUNCTION detail::ddim_impl_t<DDim, MemorySpace> const& discre
     }
 }
 
+template <class DDim>
+detail::ddim_impl_t<DDim, Kokkos::HostSpace> const& host_discrete_space()
+{
+    return detail::g_discrete_space_dual<DDim>->get_host();
+}
+
 } // namespace ddc
