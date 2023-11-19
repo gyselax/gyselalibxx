@@ -193,8 +193,8 @@ int main(int argc, char** argv)
     DFieldSpXYVxVy allfdistribu(meshSpXYVxVy);
     SingleModePerturbInitialization const
             init(allfequilibrium,
-                 ddc::discrete_space<IDimSp>().perturb_modes(),
-                 ddc::discrete_space<IDimSp>().perturb_amplitudes());
+                 ddc::host_discrete_space<IDimSp>().perturb_modes(),
+                 ddc::host_discrete_space<IDimSp>().perturb_amplitudes());
     init(allfdistribu);
 
     // --> Algorithm info

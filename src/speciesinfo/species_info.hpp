@@ -61,10 +61,13 @@ public:
             ddc::deepcopy(m_perturb_mode, impl.m_perturb_mode);
         }
 
-        Impl(ddc::Chunk<int, discrete_domain_type> charge,
-             ddc::Chunk<double, discrete_domain_type> mass,
-             ddc::Chunk<double, discrete_domain_type> perturb_amplitude,
-             ddc::Chunk<int, discrete_domain_type> perturb_mode)
+        Impl(ddc::Chunk<int, discrete_domain_type, ddc::KokkosAllocator<int, MemorySpace>> charge,
+             ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
+                     mass,
+             ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
+                     perturb_amplitude,
+             ddc::Chunk<int, discrete_domain_type, ddc::KokkosAllocator<int, MemorySpace>>
+                     perturb_mode)
             : m_charge(std::move(charge))
             , m_mass(std::move(mass))
             , m_perturb_amplitude(std::move(perturb_amplitude))
@@ -88,24 +91,24 @@ public:
             return m_ielec;
         }
 
-        ddc::ChunkSpan<const int, discrete_domain_type> charges() const
+        auto charges() const
         {
-            return m_charge;
+            return m_charge.span_view();
         }
 
-        ddc::ChunkSpan<const double, discrete_domain_type> masses() const
+        auto masses() const
         {
-            return m_mass;
+            return m_mass.span_view();
         }
 
-        ddc::ChunkSpan<const double, discrete_domain_type> perturb_amplitudes() const
+        auto perturb_amplitudes() const
         {
-            return m_perturb_amplitude;
+            return m_perturb_amplitude.span_view();
         }
 
-        ddc::ChunkSpan<const int, discrete_domain_type> perturb_modes() const
+        auto perturb_modes() const
         {
-            return m_perturb_mode;
+            return m_perturb_mode.span_view();
         }
     };
 };
@@ -117,10 +120,10 @@ KOKKOS_INLINE_FUNCTION ddc::DiscreteElement<SpeciesInformation> ielec()
 
 inline int charge(ddc::DiscreteElement<SpeciesInformation> const isp)
 {
-    return ddc::discrete_space<SpeciesInformation>().charges()(isp);
+    return ddc::host_discrete_space<SpeciesInformation>().charges()(isp);
 }
 
 inline double mass(ddc::DiscreteElement<SpeciesInformation> const isp)
 {
-    return ddc::discrete_space<SpeciesInformation>().masses()(isp);
+    return ddc::host_discrete_space<SpeciesInformation>().masses()(isp);
 }

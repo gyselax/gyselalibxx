@@ -173,8 +173,8 @@ int main(int argc, char** argv)
     if (iter_start == 0) {
         SingleModePerturbInitialization const
                 init(allfequilibrium_device,
-                     ddc::discrete_space<IDimSp>().perturb_modes(),
-                     ddc::discrete_space<IDimSp>().perturb_amplitudes());
+                     ddc::host_discrete_space<IDimSp>().perturb_modes(),
+                     ddc::host_discrete_space<IDimSp>().perturb_amplitudes());
         init(allfdistribu_device);
     } else {
         RestartInitialization const restart(iter_start, time_start);
