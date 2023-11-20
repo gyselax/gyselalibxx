@@ -419,4 +419,6 @@ int main(int argc, char** argv)
 
     std::cout << "  -------------------------------------------------------------------"
               << std::endl;
+
+    PC_tree_destroy(&conf_voicexx);
 }
