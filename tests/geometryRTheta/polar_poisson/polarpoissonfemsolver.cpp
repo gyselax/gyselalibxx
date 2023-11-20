@@ -206,5 +206,7 @@ int main(int argc, char** argv)
     });
     std::cout << "Max error : " << max_err << std::endl;
 
+    PC_tree_destroy(&conf_voicexx);
+
     return 0;
 }
