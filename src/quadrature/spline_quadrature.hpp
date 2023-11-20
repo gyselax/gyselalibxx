@@ -42,6 +42,14 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
         ddc::DiscreteDomain<IDim> const& domain,
         SplineBuilder const& builder)
 {
+    static_assert(
+            SplineBuilder::s_nbe_xmin == 0,
+            "The spline quadrature requires a builder which can construct the coefficients using "
+            "only the values at the interpolation points.");
+    static_assert(
+            SplineBuilder::s_nbe_xmax == 0,
+            "The spline quadrature requires a builder which can construct the coefficients using "
+            "only the values at the interpolation points.");
     return builder.quadrature_coefficients(domain);
 }
 
