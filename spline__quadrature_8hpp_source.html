@@ -130,40 +130,50 @@ $(document).ready(function(){initNavTree('spline__quadrature_8hpp_source.html','
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; domain,</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="classSplineBuilder.html">SplineBuilder</a> <span class="keyword">const</span>&amp; builder)</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> builder.<a class="code" href="classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06">quadrature_coefficients</a>(domain);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... DDims, <span class="keyword">class</span>... SplineBuilders&gt;</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769">   63</a></span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt;&gt; <a class="code" href="spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769">spline_quadrature_coefficients</a>(</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        ddc::DiscreteDomain&lt;DDims...&gt; <span class="keyword">const</span>&amp; domain,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        SplineBuilders <span class="keyword">const</span>&amp;... builders)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    assert((std::is_same_v&lt;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    <span class="keyword">typename</span> DDims::continuous_dimension_type,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <span class="keyword">typename</span> SplineBuilders::bsplines_type::tag_type&gt; and ...));</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">// Get coefficients for each dimension</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    std::tuple&lt;CoefficientChunk1D&lt;DDims&gt;...&gt; current_dim_coeffs(</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <a class="code" href="spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b">spline_quadrature_coefficients_1d</a>(ddc::select&lt;DDims&gt;(domain), builders)...);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">// Allocate ND coefficients</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt;&gt; coefficients(domain);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    ddc::for_each(domain, [&amp;](ddc::DiscreteElement&lt;DDims...&gt; <span class="keyword">const</span> idim) {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="comment">// multiply the 1D coefficients by one another</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        coefficients(idim)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                = (std::get&lt;CoefficientChunk1D&lt;DDims&gt;&gt;(current_dim_coeffs)(ddc::select&lt;DDims&gt;(idim))</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                   * ... * 1);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    });</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <a class="code" href="classSplineBuilder.html#a6e27acbbf2fc5f1400ce4a08c810d52e">SplineBuilder::s_nbe_xmin</a> == 0,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="stringliteral">&quot;The spline quadrature requires a builder which can construct the coefficients using &quot;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="stringliteral">&quot;only the values at the interpolation points.&quot;</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <a class="code" href="classSplineBuilder.html#ac37e871f135ba9da956d8faacff00032">SplineBuilder::s_nbe_xmax</a> == 0,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="stringliteral">&quot;The spline quadrature requires a builder which can construct the coefficients using &quot;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="stringliteral">&quot;only the values at the interpolation points.&quot;</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> builder.<a class="code" href="classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06">quadrature_coefficients</a>(domain);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... DDims, <span class="keyword">class</span>... SplineBuilders&gt;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769">   71</a></span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt;&gt; <a class="code" href="spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769">spline_quadrature_coefficients</a>(</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        ddc::DiscreteDomain&lt;DDims...&gt; <span class="keyword">const</span>&amp; domain,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        SplineBuilders <span class="keyword">const</span>&amp;... builders)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    assert((std::is_same_v&lt;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    <span class="keyword">typename</span> DDims::continuous_dimension_type,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    <span class="keyword">typename</span> SplineBuilders::bsplines_type::tag_type&gt; and ...));</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// Get coefficients for each dimension</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    std::tuple&lt;CoefficientChunk1D&lt;DDims&gt;...&gt; current_dim_coeffs(</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <a class="code" href="spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b">spline_quadrature_coefficients_1d</a>(ddc::select&lt;DDims&gt;(domain), builders)...);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// Allocate ND coefficients</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt;&gt; coefficients(domain);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    ddc::for_each(domain, [&amp;](ddc::DiscreteElement&lt;DDims...&gt; <span class="keyword">const</span> idim) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="comment">// multiply the 1D coefficients by one another</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        coefficients(idim)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                = (std::get&lt;CoefficientChunk1D&lt;DDims&gt;&gt;(current_dim_coeffs)(ddc::select&lt;DDims&gt;(idim))</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                   * ... * 1);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    });</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
 <div class="ttc" id="aclassSplineBuilder_html"><div class="ttname"><a href="classSplineBuilder.html">SplineBuilder</a></div><div class="ttdoc">A class for creating a spline approximation of a function.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:42</div></div>
+<div class="ttc" id="aclassSplineBuilder_html_a6e27acbbf2fc5f1400ce4a08c810d52e"><div class="ttname"><a href="classSplineBuilder.html#a6e27acbbf2fc5f1400ce4a08c810d52e">SplineBuilder::s_nbe_xmin</a></div><div class="ttdeci">static constexpr int s_nbe_xmin</div><div class="ttdoc">The number of equations which define the boundary conditions at the lower bound.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:78</div></div>
+<div class="ttc" id="aclassSplineBuilder_html_ac37e871f135ba9da956d8faacff00032"><div class="ttname"><a href="classSplineBuilder.html#ac37e871f135ba9da956d8faacff00032">SplineBuilder::s_nbe_xmax</a></div><div class="ttdeci">static constexpr int s_nbe_xmax</div><div class="ttdoc">The number of equations which define the boundary conditions at the upper bound.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:83</div></div>
 <div class="ttc" id="aclassSplineBuilder_html_adce1a4d93d232bc29f6c8482d7ecdd06"><div class="ttname"><a href="classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06">SplineBuilder::quadrature_coefficients</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt; quadrature_coefficients(ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain) const noexcept</div><div class="ttdoc">Get the spline quadrature coefficients.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:237</div></div>
 <div class="ttc" id="aspline__quadrature_8hpp_html_aa3abf38dc419ac6e23450295ca023e8b"><div class="ttname"><a href="spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b">spline_quadrature_coefficients_1d</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt; spline_quadrature_coefficients_1d(ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain, SplineBuilder const &amp;builder)</div><div class="ttdoc">Get the spline quadrature coefficients in 1D.</div><div class="ttdef"><b>Definition:</b> spline_quadrature.hpp:41</div></div>
-<div class="ttc" id="aspline__quadrature_8hpp_html_ac8ac1fec63f5a595332f7adf4ca2e769"><div class="ttname"><a href="spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769">spline_quadrature_coefficients</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims... &gt; &gt; spline_quadrature_coefficients(ddc::DiscreteDomain&lt; DDims... &gt; const &amp;domain, SplineBuilders const &amp;... builders)</div><div class="ttdoc">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.</div><div class="ttdef"><b>Definition:</b> spline_quadrature.hpp:63</div></div>
+<div class="ttc" id="aspline__quadrature_8hpp_html_ac8ac1fec63f5a595332f7adf4ca2e769"><div class="ttname"><a href="spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769">spline_quadrature_coefficients</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims... &gt; &gt; spline_quadrature_coefficients(ddc::DiscreteDomain&lt; DDims... &gt; const &amp;domain, SplineBuilders const &amp;... builders)</div><div class="ttdoc">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.</div><div class="ttdef"><b>Definition:</b> spline_quadrature.hpp:71</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
