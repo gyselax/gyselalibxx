@@ -100,14 +100,13 @@ double compute_error(int n_elems, Method meth)
     IDomainY const gridy(GrevillePointsY::get_domain());
 
     SplineYBuilder const builder_y(gridy);
-    std::function<ddc::Chunk<double, IDomainY>(IDomainY const&)> func;
+    DFieldY quadrature_coeffs;
     switch (meth) {
     case Method::TRAPEZ:
-        func = trapezoid_quadrature_coefficients<IDimY>;
+        quadrature_coeffs = trapezoid_quadrature_coefficients(gridy);
     case Method::SIMPSON:
-        func = simpson_quadrature_coefficients_1d<IDimY>;
+        quadrature_coeffs = simpson_quadrature_coefficients_1d(gridy);
     }
-    DFieldY const quadrature_coeffs = func(gridy);
     Quadrature<IDimY> const integrate(quadrature_coeffs);
 
     DFieldY values(gridy);

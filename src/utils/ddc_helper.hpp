@@ -109,33 +109,38 @@ restrict_to_domain(
 namespace detail {
 
 /// \cond
-template <class>
-struct Device
+template <class, class>
+struct OnMemorySpace
 {
 };
 
-template <class ElementType, class SupportType, class Allocator>
-struct Device<ddc::Chunk<ElementType, SupportType, Allocator>>
+template <class NewMemorySpace, class ElementType, class SupportType, class Allocator>
+struct OnMemorySpace<NewMemorySpace, ddc::Chunk<ElementType, SupportType, Allocator>>
 {
-    using type = typename ddc::Chunk<
-            ElementType,
-            SupportType,
-            ddc::KokkosAllocator<ElementType, Kokkos::DefaultExecutionSpace::memory_space>>;
+    using type = typename ddc::
+            Chunk<ElementType, SupportType, ddc::KokkosAllocator<ElementType, NewMemorySpace>>;
 };
 
-template <class ElementType, class SupportType, class Layout, class MemorySpace>
-struct Device<ddc::ChunkSpan<ElementType, SupportType, Layout, MemorySpace>>
+template <
+        class NewMemorySpace,
+        class ElementType,
+        class SupportType,
+        class Layout,
+        class MemorySpace>
+struct OnMemorySpace<NewMemorySpace, ddc::ChunkSpan<ElementType, SupportType, Layout, MemorySpace>>
 {
-    using type = typename ddc::ChunkSpan<
-            ElementType,
-            SupportType,
-            Layout,
-            Kokkos::DefaultExecutionSpace::memory_space>;
+    using type = typename ddc::ChunkSpan<ElementType, SupportType, Layout, NewMemorySpace>;
 };
 /// \endcond
 
 } // namespace detail
 
 /// Alias template helper returning the "device" version of a `ddc::Chunk` or a `ddc::Chunkspan`
+template <class MemorySpace, class C>
+using on_memory_space_t = typename detail::OnMemorySpace<MemorySpace, C>::type;
+
 template <class C>
-using device_t = typename detail::Device<C>::type;
+using host_t = on_memory_space_t<Kokkos::HostSpace, C>;
+
+template <class C>
+using device_t = on_memory_space_t<Kokkos::DefaultExecutionSpace::memory_space, C>;
