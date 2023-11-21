@@ -6,6 +6,6 @@ The `tests/geometryRTheta` folder contains all the code describing methods which
 
 - [2d_spline_interpolator](./2d_spline_interpolator/README.md) - Tests for the interpolator on 2D polar domain. 
 
-<!-- - [polar_poisson](./polar_poisson/README.md) --> - Tests for the polar Poisson solver.
+- [polar_poisson](./polar_poisson/README.md) - Tests for the Poisson solver on 2D polar domain.
 
 
