@@ -3,6 +3,7 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
+#include <ddc_helper.hpp>
 
 /**
  * @brief Get the Simpson coefficients in 1D.
@@ -14,9 +15,12 @@
  *
  * @return The quadrature coefficients for the Simpson method defined on the provided domain.
  */
-template <class IDim>
-ddc::Chunk<double, ddc::DiscreteDomain<IDim>> simpson_quadrature_coefficients_1d(
-        ddc::DiscreteDomain<IDim> const& domain)
+template <class ExecSpace, class IDim>
+ddc::Chunk<
+        double,
+        ddc::DiscreteDomain<IDim>,
+        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+simpson_quadrature_coefficients_1d(ExecSpace const& space, ddc::DiscreteDomain<IDim> const& domain)
 {
     ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
     ddc::DiscreteDomain<IDim> middle_domain
@@ -38,5 +42,16 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> simpson_quadrature_coefficients_1d
     }
 
 
-    return coefficients;
+    if constexpr (std::is_same_v<typename ExecSpace::memory_space, Kokkos::HostSpace>) {
+        return coefficients;
+    } else {
+        return ddc::create_mirror_and_copy(space, coefficients.span_view());
+    }
+}
+
+template <class IDim>
+ddc::Chunk<double, ddc::DiscreteDomain<IDim>, ddc::HostAllocator<double>>
+simpson_quadrature_coefficients_1d(ddc::DiscreteDomain<IDim> const& domain)
+{
+    return simpson_quadrature_coefficients_1d(Kokkos::DefaultHostExecutionSpace(), domain);
 }
