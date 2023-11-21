@@ -171,6 +171,23 @@ using Spline2D = ddc::Chunk<double, BSDomainRP>;
 using Spline2DSpan = ddc::ChunkSpan<double, BSDomainRP>;
 using Spline2DView = ddc::ChunkSpan<double const, BSDomainRP>;
 
+/**
+ * @brief Tag the polar B-splines decomposition of a function.
+ *
+ * Store the polar B-splines coefficients of the function.
+ */
+using SplinePolar = PolarSpline<PolarBSplinesRP>;
+
+/**
+ * @brief Tag type of an element of a couple of a B-splines in the first
+ * dimension and in the second dimension.
+ */
+using IDimBSpline2D = ddc::DiscreteElement<BSplinesR, BSplinesP>;
+/**
+ * @brief Tag type of an element of polar B-splines.
+ */
+using IDimPolarBspl = ddc::DiscreteElement<PolarBSplinesRP>;
+
 
 
 template <class Dim1, class Dim2>

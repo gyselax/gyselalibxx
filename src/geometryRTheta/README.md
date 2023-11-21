@@ -8,6 +8,6 @@ The `geometryRTheta` folder contains all the code describing methods which are s
 
 - [interpolation](./interpolation/README.md) - Code describing interpolation methods on 2D polar domain. 
 
-<!-- - [poisson](./poisson/README.md) --> - Code describing the polar Poisson solver.
+- [poisson](./poisson/README.md) - Code describing the polar Poisson solver.
 
 
