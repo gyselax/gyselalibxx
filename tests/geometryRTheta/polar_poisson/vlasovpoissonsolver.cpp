@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: MIT
-
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -19,6 +17,9 @@
 #include "params.yaml.hpp"
 #include "polarpoissonsolver.hpp"
 #include "test_cases.hpp"
+#include "vlasovpoissonsolver.hpp"
+
+
 
 using PoissonSolver = PolarSplineFEMPoissonSolver;
 
@@ -29,14 +30,11 @@ using Mapping = CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>;
 #endif
 using DiscreteMapping = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>;
 
-#if defined(CURVILINEAR_SOLUTION)
-using LHSFunction = CurvilinearSolution<Mapping>;
-#elif defined(CARTESIAN_SOLUTION)
+
+
 using LHSFunction = CartesianSolution<Mapping>;
-#endif
 using RHSFunction = ManufacturedPoissonTest<LHSFunction>;
 
-constexpr bool discrete_rhs = false;
 
 namespace fs = std::filesystem;
 
@@ -85,15 +83,14 @@ int main(int argc, char** argv)
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesR>(r_knots);
-
     ddc::init_discrete_space<BSplinesP>(p_knots);
 
     ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling());
     ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling());
 
-    IDomainR interpolation_domain_R(SplineInterpPointsR::get_domain());
-    IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain());
-    IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
+    IDomainR const interpolation_domain_R(SplineInterpPointsR::get_domain());
+    IDomainP const interpolation_domain_P(SplineInterpPointsP::get_domain());
+    IDomainRP const grid(interpolation_domain_R, interpolation_domain_P);
 
     SplineRBuilder const r_builder(interpolation_domain_R);
     SplinePBuilder const p_builder(interpolation_domain_P);
@@ -114,7 +111,7 @@ int main(int argc, char** argv)
 
     ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping, r_builder, p_builder);
 
-    auto dom_bsplinesRP = builder.spline_domain();
+    auto const dom_bsplinesRP = builder.spline_domain();
 
     DFieldRP coeff_alpha(grid);
     DFieldRP coeff_beta(grid);
@@ -125,10 +122,8 @@ int main(int argc, char** argv)
         coeff_alpha(irp)
                 = std::exp(-std::tanh((ddc::coordinate(ddc::select<IDimR>(irp)) - 0.7) / 0.05));
         coeff_beta(irp) = 1.0 / coeff_alpha(irp);
-        ddc::Coordinate<RDimR, RDimP>
-                coord(ddc::coordinate(ddc::select<IDimR>(irp)),
-                      ddc::coordinate(ddc::select<IDimP>(irp)));
-        auto cartesian_coord = mapping(coord);
+        const ddc::Coordinate<RDimR, RDimP> coord(ddc::coordinate(irp));
+        auto const cartesian_coord = mapping(coord);
         x(irp) = ddc::get<RDimX>(cartesian_coord);
         y(irp) = ddc::get<RDimY>(cartesian_coord);
     });
@@ -152,7 +147,10 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver solver(coeff_alpha_spline, coeff_beta_spline, discrete_mapping);
+    PoissonSolver const poisson_solver(coeff_alpha_spline, coeff_beta_spline, discrete_mapping);
+    VlasovPoissonSolver<Mapping> const
+            vlasov_poisson_solver(mapping, builder, evaluator, poisson_solver);
+
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Poisson initialisation time : "
@@ -160,51 +158,48 @@ int main(int argc, char** argv)
                          .count()
               << "ms" << std::endl;
 
+
     LHSFunction lhs(mapping);
     RHSFunction rhs(mapping);
     FieldRP<CoordRP> coords(grid);
     DFieldRP result(grid);
-    ddc::for_each(grid, [&](IndexRP const irp) {
-        coords(irp) = CoordRP(
-                ddc::coordinate(ddc::select<IDimR>(irp)),
-                ddc::coordinate(ddc::select<IDimP>(irp)));
-    });
-    if (discrete_rhs) {
-        Spline2D rhs_spline(dom_bsplinesRP);
-        DFieldRP rhs_vals(grid);
-        ddc::for_each(grid, [&](IndexRP const irp) { rhs_vals(irp) = rhs(coords(irp)); });
-        builder(rhs_spline, rhs_vals);
+    VectorField<double, IDomainRP, NDTag<RDimX, RDimY>> electric_field(grid);
 
-        start_time = std::chrono::system_clock::now();
-        SplineEvaluator2D
-                eval(g_null_boundary_2d<BSplinesR, BSplinesP>,
-                     g_null_boundary_2d<BSplinesR, BSplinesP>,
-                     g_null_boundary_2d<BSplinesR, BSplinesP>,
-                     g_null_boundary_2d<BSplinesR, BSplinesP>);
-        solver([&](CoordRP const& coord) { return eval(coord, rhs_spline); },
-               coords.span_cview(),
-               result.span_view());
-        end_time = std::chrono::system_clock::now();
-    } else {
-        start_time = std::chrono::system_clock::now();
-        solver(rhs, coords.span_cview(), result.span_view());
-        end_time = std::chrono::system_clock::now();
-    }
+    ddc::for_each(grid, [&](IndexRP const irp) { coords(irp) = CoordRP(ddc::coordinate(irp)); });
+
+
+    DFieldRP rhs_vals(grid);
+    ddc::for_each(grid, [&](IndexRP const irp) { rhs_vals(irp) = rhs(coords(irp)); });
+
+    vlasov_poisson_solver(result.span_view(), electric_field, rhs_vals);
+
+
     std::cout << "Solver time : "
               << std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time)
                          .count()
               << "ms" << std::endl;
 
+
+    double max_err_x = 0.0;
+    double max_err_y = 0.0;
+    ddc::for_each(grid, [&](IndexRP const irp) {
+        const double diff_x
+                = fabs(ddcHelper::get<RDimX>(electric_field)(irp) + lhs.derivative_x(coords(irp)));
+        const double diff_y
+                = fabs(ddcHelper::get<RDimY>(electric_field)(irp) + lhs.derivative_y(coords(irp)));
+        max_err_x = max_err_x > diff_x ? max_err_x : diff_x;
+        max_err_y = max_err_y > diff_y ? max_err_y : diff_y;
+    });
+    std::cout << "Max error Ex : " << max_err_x << std::endl;
+    std::cout << "Max error Ey : " << max_err_y << std::endl;
+
+
     double max_err = 0.0;
     ddc::for_each(grid, [&](IndexRP const irp) {
-        const double err = result(irp) - lhs(coords(irp));
-        if (err > 0) {
-            max_err = max_err > err ? max_err : err;
-        } else {
-            max_err = max_err > -err ? max_err : -err;
-        }
+        const double err = fabs(result(irp) - lhs(coords(irp)));
+        max_err = max_err > err ? max_err : err;
     });
-    std::cout << "Max error : " << max_err << std::endl;
+    std::cout << "Max error function : " << max_err << std::endl << std::endl;
 
     PC_tree_destroy(&conf_voicexx);
     return 0;

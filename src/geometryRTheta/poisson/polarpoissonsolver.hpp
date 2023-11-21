@@ -12,23 +12,24 @@
 
 #include <Eigen/Sparse>
 
-//#include "chargedensitycalculator.hpp"
-//#include "ipoissonsolver.hpp"
+#include "geometry.hpp"
 
-template <class PolarBSplines>
+/**
+ * @brief Define a polar Poisson solver.
+ *
+ * Solve the following Poisson equation
+ *
+ * (1) @f$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho @f$, in  @f$ \Omega@f$,
+ *
+ * @f$  \phi = 0 @f$, on  @f$ \partial \Omega@f$,
+ *
+ * (see in Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
+ * in the 5D GYSELA Code". December 2022.)
+ *
+ */
 class PolarSplineFEMPoissonSolver
 {
 public:
-    using BSplinesR = typename PolarBSplines::BSplinesR_tag;
-    using BSplinesP = typename PolarBSplines::BSplinesP_tag;
-
-    using RDimR = typename BSplinesR::tag_type;
-    using RDimP = typename BSplinesP::tag_type;
-
-public:
-    using SplineRP = ddc::ChunkSpan<double, ddc::DiscreteDomain<BSplinesR, BSplinesP>>;
-    using SplinePolar = PolarSpline<PolarBSplines>;
-
     struct RBasisSubset
     {
     };
@@ -42,6 +43,12 @@ public:
     {
     };
 
+    /**
+    * @brief This struct is used to provide alternative tags.
+    *
+    * It is used to create new meshes. This is necessary because
+    * in DDC we can only create a single mesh for a tagged dimension.
+    */
     template <class T>
     struct InternalTagGenerator
     {
@@ -49,24 +56,68 @@ public:
     };
 
 private:
+    /**
+     * @brief Tag the first dimension for the quadrature.
+     */
     using QDimR = InternalTagGenerator<RDimR>;
+    /**
+     * @brief Tag the second dimension for the quadrature.
+     */
     using QDimP = InternalTagGenerator<RDimP>;
+    /**
+     * @brief Tag the first dimension for the quadrature mesh.
+     */
     using QDimRMesh = ddc::NonUniformPointSampling<QDimR>;
+    /**
+     * @brief Tag the second dimension for the quadrature mesh.
+     */
     using QDimPMesh = ddc::NonUniformPointSampling<QDimP>;
+    /**
+     * @brief Tag the quadrature domain in the first dimension.
+     */
     using QuadratureDomainR = ddc::DiscreteDomain<QDimRMesh>;
+    /**
+     * @brief Tag the quadrature domain in the second dimension.
+     */
     using QuadratureDomainP = ddc::DiscreteDomain<QDimPMesh>;
+    /**
+     * @brief Tag the quadrature domain.
+     */
     using QuadratureDomainRP = ddc::DiscreteDomain<QDimRMesh, QDimPMesh>;
-    using QuadratureMeshR = ddc::DiscreteElement<QDimRMesh>;
-    using QuadratureMeshP = ddc::DiscreteElement<QDimPMesh>;
-    using QuadratureMeshRP = ddc::DiscreteElement<QDimRMesh, QDimPMesh>;
+    /**
+     * @brief Tag the elements (index) of the quadrature domain in the first dimension.
+     */
+    using QuadratureIndexR = ddc::DiscreteElement<QDimRMesh>;
+    /**
+     * @brief Tag the elements (index) of the quadrature domain in the second dimension.
+     */
+    using QuadratureIndexP = ddc::DiscreteElement<QDimPMesh>;
+    /**
+     * @brief Tag the elements (index) of the quadrature domain.
+     */
+    using QuadratureIndexRP = ddc::DiscreteElement<QDimRMesh, QDimPMesh>;
+    /**
+     * @brief Tag a vector on the first dimension of the quadrature mesh.
+     */
     using QuadratureLengthR = ddc::DiscreteVector<QDimRMesh>;
+    /**
+     * @brief Tag a vector on the second dimension of the quadrature mesh.
+     */
     using QuadratureLengthP = ddc::DiscreteVector<QDimPMesh>;
 
+    /**
+     * @brief Object storing a value and a value of the derivative
+     * of a 1D function.
+     */
     struct EvalDeriv1DType
     {
         double value;
         double derivative;
     };
+    /**
+     * @brief Object storing a value and a value of the derivatives
+     * in each direction of a 2D function.
+     */
     struct EvalDeriv2DType
     {
         double value;
@@ -74,18 +125,20 @@ private:
         double poloidal_derivative;
     };
 
-    using BSpline2DDomain = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
-    using IDimBSpline2D = ddc::DiscreteElement<BSplinesR, BSplinesP>;
-    using IDimPolarBspl = ddc::DiscreteElement<PolarBSplines>;
-
+    /**
+     * @brief Tag an index of cell.
+     */
     using CellIndex = ddc::DiscreteElement<RCellDim, PCellDim>;
 
+    /**
+     * @brief Tag type of matrix element.
+     */
     using MatrixElement = Eigen::Triplet<double>;
 
 private:
     static constexpr int n_gauss_legendre_r = BSplinesR::degree() + 1;
     static constexpr int n_gauss_legendre_p = BSplinesP::degree() + 1;
-    static constexpr int n_overlap_cells = PolarBSplines::continuity + 1;
+    static constexpr int n_overlap_cells = PolarBSplinesRP::continuity + 1;
 
     static constexpr ddc::DiscreteVector<RBasisSubset> n_non_zero_bases_r
             = ddc::DiscreteVector<RBasisSubset>(BSplinesR::degree() + 1);
@@ -101,9 +154,9 @@ private:
     const int nbasis_p;
 
     // Domains
-    ddc::DiscreteDomain<PolarBSplines> fem_non_singular_domain;
-    ddc::DiscreteDomain<BSplinesR> radial_bsplines;
-    ddc::DiscreteDomain<BSplinesP> polar_bsplines;
+    BSDomainPolar fem_non_singular_domain;
+    BSDomainR radial_bsplines;
+    BSDomainP polar_bsplines;
 
     QuadratureDomainR quadrature_domain_r;
     QuadratureDomainP quadrature_domain_p;
@@ -116,7 +169,7 @@ private:
     ddc::Chunk<double, QuadratureDomainP> weights_p;
 
     // Basis Spline values and derivatives at Gauss-Legendre points
-    ddc::Chunk<EvalDeriv2DType, ddc::DiscreteDomain<PolarBSplines, QDimRMesh, QDimPMesh>>
+    ddc::Chunk<EvalDeriv2DType, ddc::DiscreteDomain<PolarBSplinesRP, QDimRMesh, QDimPMesh>>
             singular_basis_vals_and_derivs;
     ddc::Chunk<EvalDeriv1DType, ddc::DiscreteDomain<RBasisSubset, QDimRMesh>>
             r_basis_vals_and_derivs;
@@ -125,21 +178,42 @@ private:
 
     ddc::Chunk<double, QuadratureDomainRP> int_volume;
 
-    PolarSplineEvaluator<PolarBSplines> m_polar_spline_evaluator;
+    PolarSplineEvaluator<PolarBSplinesRP> m_polar_spline_evaluator;
 
     Eigen::SimplicialLDLT<Eigen::SparseMatrix<double>> m_matrix;
 
 public:
+    /**
+     * @brief Instantiate a polar Poisson solver using FEM with B-splines.
+     *
+     * The equation we are studying:
+     *
+     * (1) @f$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho @f$, in  @f$ \Omega@f$,
+     *
+     *  @f$  \phi = 0 @f$, on  @f$ \partial \Omega@f$.
+     *
+     * @param[in] coeff_alpha
+     *      The spline representation of the @f$ \alpha @f$ function in the
+     *      definition of the Poisson equation.
+     * @param[in] coeff_beta
+     *      The spline representation of the  @f$ \beta @f$ function in the
+     *      definition of the Poisson equation.
+     * @param[in] mapping
+     *      The mapping from the logical domain to the physical domain where
+     *      the equation is defined.
+     *
+     * @tparam Mapping A Curvilinear2DToCartesian class.
+     */
     template <class Mapping>
     PolarSplineFEMPoissonSolver(
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_alpha,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_beta,
+            Spline2DView coeff_alpha,
+            Spline2DView coeff_beta,
             Mapping const& mapping)
         : nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - n_overlap_cells - 1)
         , nbasis_p(ddc::discrete_space<BSplinesP>().nbasis())
         , fem_non_singular_domain(
-                  ddc::discrete_space<PolarBSplines>().non_singular_domain().remove_last(
-                          ddc::DiscreteVector<PolarBSplines> {nbasis_p}))
+                  ddc::discrete_space<PolarBSplinesRP>().non_singular_domain().remove_last(
+                          ddc::DiscreteVector<PolarBSplinesRP> {nbasis_p}))
         , radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                   ddc::DiscreteVector<BSplinesR> {n_overlap_cells}))
         , polar_bsplines(ddc::discrete_space<BSplinesP>().full_domain().take_first(
@@ -160,8 +234,8 @@ public:
         , points_p(quadrature_domain_p)
         , weights_r(quadrature_domain_r)
         , weights_p(quadrature_domain_p)
-        , singular_basis_vals_and_derivs(ddc::DiscreteDomain<PolarBSplines, QDimRMesh, QDimPMesh>(
-                  PolarBSplines::singular_domain(),
+        , singular_basis_vals_and_derivs(ddc::DiscreteDomain<PolarBSplinesRP, QDimRMesh, QDimPMesh>(
+                  PolarBSplinesRP::singular_domain(),
                   ddc::select<QDimRMesh>(quadrature_domain_singular),
                   ddc::select<QDimPMesh>(quadrature_domain_singular)))
         , r_basis_vals_and_derivs(ddc::DiscreteDomain<
@@ -171,7 +245,7 @@ public:
                                   PBasisSubset,
                                   QDimPMesh>(non_zero_bases_p, quadrature_domain_p))
         , int_volume(QuadratureDomainRP(quadrature_domain_r, quadrature_domain_p))
-        , m_polar_spline_evaluator(g_polar_null_boundary_2d<PolarBSplines>)
+        , m_polar_spline_evaluator(g_polar_null_boundary_2d<PolarBSplinesRP>)
     {
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
         const std::size_t ncells_p = ddc::discrete_space<BSplinesP>().ncells();
@@ -221,7 +295,7 @@ public:
         ddc::init_discrete_space<QDimPMesh>(vect_points_p);
 
         // Find value and derivative of 1D bsplines in radial direction
-        ddc::for_each(quadrature_domain_r, [&](QuadratureMeshR const ir) {
+        ddc::for_each(quadrature_domain_r, [&](QuadratureIndexR const ir) {
             std::array<double, 2 * n_non_zero_bases_r> data;
             DSpan2D vals(data.data(), n_non_zero_bases_r, 2);
             ddc::discrete_space<BSplinesR>().eval_basis_and_n_derivs(vals, get_coordinate(ir), 1);
@@ -232,7 +306,7 @@ public:
         });
 
         // Find value and derivative of 1D bsplines in poloidal direction
-        ddc::for_each(quadrature_domain_p, [&](QuadratureMeshP const ip) {
+        ddc::for_each(quadrature_domain_p, [&](QuadratureIndexP const ip) {
             std::array<double, 2 * n_non_zero_bases_p> data;
             DSpan2D vals(data.data(), n_non_zero_bases_p, 2);
             ddc::discrete_space<BSplinesP>().eval_basis_and_n_derivs(vals, get_coordinate(ip), 1);
@@ -242,35 +316,35 @@ public:
             }
         });
 
-        auto singular_domain = PolarBSplines::singular_domain();
+        auto singular_domain = PolarBSplinesRP::singular_domain();
 
         // Find value and derivative of 2D bsplines covering the singular point
-        ddc::for_each(quadrature_domain_singular, [&](QuadratureMeshRP const irp) {
-            std::array<double, PolarBSplines::n_singular_basis()> singular_data;
+        ddc::for_each(quadrature_domain_singular, [&](QuadratureIndexRP const irp) {
+            std::array<double, PolarBSplinesRP::n_singular_basis()> singular_data;
             std::array<double, n_non_zero_bases_r * n_non_zero_bases_p> data;
-            DSpan1D singular_vals(singular_data.data(), PolarBSplines::n_singular_basis());
+            DSpan1D singular_vals(singular_data.data(), PolarBSplinesRP::n_singular_basis());
             DSpan2D vals(data.data(), n_non_zero_bases_r, n_non_zero_bases_p);
 
-            QuadratureMeshR ir = ddc::select<QDimRMesh>(irp);
-            QuadratureMeshP ip = ddc::select<QDimPMesh>(irp);
+            QuadratureIndexR ir = ddc::select<QDimRMesh>(irp);
+            QuadratureIndexP ip = ddc::select<QDimPMesh>(irp);
 
-            const ddc::Coordinate<RDimR, RDimP> coord(get_coordinate(irp));
+            const CoordRP coord(get_coordinate(irp));
 
             // Calculate the value
-            ddc::discrete_space<PolarBSplines>().eval_basis(singular_vals, vals, coord);
+            ddc::discrete_space<PolarBSplinesRP>().eval_basis(singular_vals, vals, coord);
             for (auto ib : singular_domain) {
                 singular_basis_vals_and_derivs(ib, ir, ip).value = singular_vals[ib.uid()];
             }
 
             // Calculate the radial derivative
-            ddc::discrete_space<PolarBSplines>().eval_deriv_r(singular_vals, vals, coord);
+            ddc::discrete_space<PolarBSplinesRP>().eval_deriv_r(singular_vals, vals, coord);
             for (auto ib : singular_domain) {
                 singular_basis_vals_and_derivs(ib, ir, ip).radial_derivative
                         = singular_vals[ib.uid()];
             }
 
             // Calculate the poloidal derivative
-            ddc::discrete_space<PolarBSplines>().eval_deriv_p(singular_vals, vals, coord);
+            ddc::discrete_space<PolarBSplinesRP>().eval_deriv_p(singular_vals, vals, coord);
             for (auto ib : singular_domain) {
                 singular_basis_vals_and_derivs(ib, ir, ip).poloidal_derivative
                         = singular_vals[ib.uid()];
@@ -279,10 +353,10 @@ public:
 
         // Find the integral volume associated with each point used in the quadrature scheme
         QuadratureDomainRP all_quad_points(quadrature_domain_r, quadrature_domain_p);
-        ddc::for_each(all_quad_points, [&](QuadratureMeshRP const irp) {
-            QuadratureMeshR const ir = ddc::select<QDimRMesh>(irp);
-            QuadratureMeshP const ip = ddc::select<QDimPMesh>(irp);
-            ddc::Coordinate<RDimR, RDimP> coord(get_coordinate(ir), get_coordinate(ip));
+        ddc::for_each(all_quad_points, [&](QuadratureIndexRP const irp) {
+            QuadratureIndexR const ir = ddc::select<QDimRMesh>(irp);
+            QuadratureIndexP const ip = ddc::select<QDimPMesh>(irp);
+            CoordRP coord(get_coordinate(ir), get_coordinate(ip));
             int_volume(ir, ip) = abs(mapping.jacobian(coord)) * weights_r(ir) * weights_p(ip);
         });
 
@@ -293,16 +367,16 @@ public:
                 g_null_boundary_2d<BSplinesR, BSplinesP>);
 
         constexpr int n_elements_singular
-                = PolarBSplines::n_singular_basis() * PolarBSplines::n_singular_basis();
+                = PolarBSplinesRP::n_singular_basis() * PolarBSplinesRP::n_singular_basis();
         const int n_elements_overlap
-                = 2 * (PolarBSplines::n_singular_basis() * BSplinesR::degree() * nbasis_p);
+                = 2 * (PolarBSplinesRP::n_singular_basis() * BSplinesR::degree() * nbasis_p);
         const int n_stencil_p = nbasis_p * min(int(1 + 2 * BSplinesP::degree()), nbasis_p);
         const int n_stencil_r = nbasis_r * (1 + 2 * BSplinesR::degree())
                                 - (1 + BSplinesR::degree()) * BSplinesR::degree();
         const int n_elements_stencil = n_stencil_r * n_stencil_p;
 
         // Matrix size is equal to the number Polar bspline
-        const int n_matrix_size = ddc::discrete_space<PolarBSplines>().nbasis() - nbasis_p;
+        const int n_matrix_size = ddc::discrete_space<PolarBSplinesRP>().nbasis() - nbasis_p;
         Eigen::SparseMatrix<double> matrix(n_matrix_size, n_matrix_size);
         const int n_matrix_elements = n_elements_singular + n_elements_overlap + n_elements_stencil;
         std::vector<MatrixElement> matrix_elements(n_matrix_elements);
@@ -318,9 +392,9 @@ public:
                                 quadrature_domain_singular,
                                 0.0,
                                 ddc::reducer::sum<double>(),
-                                [&](QuadratureMeshRP const quad_idx) {
-                                    QuadratureMeshR const ir = ddc::select<QDimRMesh>(quad_idx);
-                                    QuadratureMeshP const ip = ddc::select<QDimPMesh>(quad_idx);
+                                [&](QuadratureIndexRP const quad_idx) {
+                                    QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
+                                    QuadratureIndexP const ip = ddc::select<QDimPMesh>(quad_idx);
                                     std::optional<std::array<double, 3>> null(std::nullopt);
                                     return weak_integral_element(
                                             ir,
@@ -337,11 +411,10 @@ public:
         assert(matrix_idx == n_elements_singular);
 
         // Create domains associated with the 2D splines
-        ddc::DiscreteDomain<BSplinesR> central_radial_bspline_domain(
+        BSDomainR central_radial_bspline_domain(
                 radial_bsplines.take_first(ddc::DiscreteVector<BSplinesR> {BSplinesR::degree()}));
 
-        BSpline2DDomain
-                non_singular_domain_near_centre(central_radial_bspline_domain, polar_bsplines);
+        BSDomainRP non_singular_domain_near_centre(central_radial_bspline_domain, polar_bsplines);
 
         const ddc::DiscreteDomain<RCellDim> r_cells_near_centre(
                 ddc::DiscreteElement<RCellDim> {0},
@@ -350,7 +423,7 @@ public:
         // Calculate the matrix elements where bspline products overlap the bsplines which cover the singular point
         ddc::for_each(singular_domain, [&](IDimPolarBspl const idx_test) {
             ddc::for_each(non_singular_domain_near_centre, [&](IDimBSpline2D const idx_trial) {
-                const IDimPolarBspl polar_idx_trial(PolarBSplines::get_polar_index(idx_trial));
+                const IDimPolarBspl polar_idx_trial(PolarBSplinesRP::get_polar_index(idx_trial));
                 const ddc::DiscreteElement<BSplinesR> r_idx_trial(
                         ddc::select<BSplinesR>(idx_trial));
                 const ddc::DiscreteElement<BSplinesP> p_idx_trial(
@@ -391,9 +464,9 @@ public:
                                 cell_quad_points,
                                 0.0,
                                 ddc::reducer::sum<double>(),
-                                [&](QuadratureMeshRP const quad_idx) {
-                                    QuadratureMeshR const ir = ddc::select<QDimRMesh>(quad_idx);
-                                    QuadratureMeshP const ip = ddc::select<QDimPMesh>(quad_idx);
+                                [&](QuadratureIndexRP const quad_idx) {
+                                    QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
+                                    QuadratureIndexP const ip = ddc::select<QDimPMesh>(quad_idx);
                                     return weak_integral_element<Mapping>(
                                             ir,
                                             ip,
@@ -417,17 +490,17 @@ public:
 
         // Calculate the matrix elements following a stencil
         ddc::for_each(fem_non_singular_domain, [&](IDimPolarBspl const polar_idx_test) {
-            const IDimBSpline2D idx_test(PolarBSplines::get_2d_index(polar_idx_test));
+            const IDimBSpline2D idx_test(PolarBSplinesRP::get_2d_index(polar_idx_test));
             const std::size_t r_idx_test(ddc::select<BSplinesR>(idx_test).uid());
             const std::size_t p_idx_test(ddc::select<BSplinesP>(idx_test).uid());
 
             // Calculate the index of the elements that are already filled
-            ddc::DiscreteDomain<BSplinesP> remaining_p(
+            BSDomainP remaining_p(
                     ddc::DiscreteElement<BSplinesP> {p_idx_test},
                     ddc::DiscreteVector<BSplinesP> {BSplinesP::degree() + 1});
             ddc::for_each(remaining_p, [&](auto const p_idx_trial) {
                 IDimBSpline2D idx_trial(ddc::DiscreteElement<BSplinesR>(r_idx_test), p_idx_trial);
-                IDimPolarBspl polar_idx_trial(PolarBSplines::get_polar_index(
+                IDimPolarBspl polar_idx_trial(PolarBSplinesRP::get_polar_index(
                         IDimBSpline2D(r_idx_test, pmod(p_idx_trial.uid()))));
                 double element = get_matrix_stencil_element(
                         idx_test,
@@ -447,23 +520,23 @@ public:
                             = MatrixElement(polar_idx_trial.uid(), polar_idx_test.uid(), element);
                 }
             });
-            ddc::DiscreteDomain<BSplinesR> remaining_r(
+            BSDomainR remaining_r(
                     ddc::select<BSplinesR>(idx_test) + 1,
                     ddc::DiscreteVector<BSplinesR> {
                             min(BSplinesR::degree(),
                                 ddc::discrete_space<BSplinesR>().nbasis() - 2 - r_idx_test)});
-            ddc::DiscreteDomain<BSplinesP> relevant_p(
+            BSDomainP relevant_p(
                     ddc::DiscreteElement<BSplinesP> {
                             p_idx_test + ddc::discrete_space<BSplinesP>().nbasis()
                             - BSplinesP::degree()},
                     ddc::DiscreteVector<BSplinesP> {2 * BSplinesP::degree() + 1});
 
-            BSpline2DDomain trial_domain(remaining_r, relevant_p);
+            BSDomainRP trial_domain(remaining_r, relevant_p);
 
             ddc::for_each(trial_domain, [&](IDimBSpline2D const idx_trial) {
                 const int r_idx_trial(ddc::select<BSplinesR>(idx_trial).uid());
                 const int p_idx_trial(ddc::select<BSplinesP>(idx_trial).uid());
-                IDimPolarBspl polar_idx_trial(PolarBSplines::get_polar_index(
+                IDimPolarBspl polar_idx_trial(PolarBSplinesRP::get_polar_index(
                         IDimBSpline2D(r_idx_trial, pmod(p_idx_trial))));
                 double element = get_matrix_stencil_element(
                         idx_test,
@@ -488,33 +561,44 @@ public:
         m_matrix.compute(matrix);
     }
 
-    template <class RHSFunction, class Domain>
-    void operator()(
-            RHSFunction const& rhs,
-            ddc::ChunkSpan<ddc::Coordinate<RDimR, RDimP> const, Domain> const coords_eval,
-            ddc::ChunkSpan<double, Domain> result) const
+
+    /**
+     * @brief Solve the Poisson equation.
+     *
+     * This operator returns the coefficients associated with the B-Splines
+     * of the solution @f$\phi@f$.
+     *
+     * @param[in] rhs
+     *      The rhs @f$ \rho@f$ of the Poisson equation.
+     *      The type is templated but we can use the PoissonRHSFunction
+     *      class.
+     * @param[out] spline
+     *      The spline representation of the solution @f$\phi@f$.
+     */
+    template <class RHSFunction>
+    void operator()(RHSFunction const& rhs, SplinePolar& spline) const
     {
         Eigen::VectorXd b(
-                ddc::discrete_space<PolarBSplines>().nbasis()
+                ddc::discrete_space<PolarBSplinesRP>().nbasis()
                 - ddc::discrete_space<BSplinesP>().nbasis());
 
         // Fill b
-        ddc::for_each(PolarBSplines::singular_domain(), [&](IDimPolarBspl const idx) {
+        ddc::for_each(PolarBSplinesRP::singular_domain(), [&](IDimPolarBspl const idx) {
             b(idx.uid()) = ddc::transform_reduce(
                     quadrature_domain_singular,
                     0.0,
                     ddc::reducer::sum<double>(),
-                    [&](QuadratureMeshRP const quad_idx) {
-                        QuadratureMeshR const ir = ddc::select<QDimRMesh>(quad_idx);
-                        QuadratureMeshP const ip = ddc::select<QDimPMesh>(quad_idx);
-                        ddc::Coordinate<RDimR, RDimP> coord(get_coordinate(ir), get_coordinate(ip));
+                    [&](QuadratureIndexRP const quad_idx) {
+                        QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
+                        QuadratureIndexP const ip = ddc::select<QDimPMesh>(quad_idx);
+                        CoordRP coord(get_coordinate(ir), get_coordinate(ip));
                         return rhs(coord) * singular_basis_vals_and_derivs(idx, ir, ip).value
                                * int_volume(ir, ip);
                     });
         });
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
         ddc::for_each(fem_non_singular_domain, [&](IDimPolarBspl const idx) {
-            const IDimBSpline2D idx_2d(PolarBSplines::get_2d_index(idx));
+            const IDimBSpline2D idx_2d(PolarBSplinesRP::get_2d_index(idx));
             const std::size_t r_idx(ddc::select<BSplinesR>(idx_2d).uid());
             const std::size_t p_idx(ddc::select<BSplinesP>(idx_2d).uid());
 
@@ -553,11 +637,10 @@ public:
                         cell_quad_points,
                         0.0,
                         ddc::reducer::sum<double>(),
-                        [&](QuadratureMeshRP const quad_idx) {
-                            QuadratureMeshR const ir = ddc::select<QDimRMesh>(quad_idx);
-                            QuadratureMeshP const ip = ddc::select<QDimPMesh>(quad_idx);
-                            ddc::Coordinate<RDimR, RDimP>
-                                    coord(get_coordinate(ir), get_coordinate(ip));
+                        [&](QuadratureIndexRP const quad_idx) {
+                            QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
+                            QuadratureIndexP const ip = ddc::select<QDimPMesh>(quad_idx);
+                            CoordRP coord(get_coordinate(ir), get_coordinate(ip));
                             double rb = r_basis_vals_and_derivs(ib_r, ir).value;
                             double pb = p_basis_vals_and_derivs(ib_p, ip).value;
                             return rhs(coord) * rb * pb * int_volume(ir, ip);
@@ -569,23 +652,21 @@ public:
         // Solve the matrix equation
         Eigen::VectorXd x = m_matrix.solve(b);
 
-        ddc::DiscreteDomain<BSplinesR, BSplinesP> non_singular_2d_domain(
+        BSDomainRP non_singular_2d_domain(
                 radial_bsplines.remove_last(ddc::DiscreteVector<BSplinesR> {1}),
                 polar_bsplines);
-        ddc::DiscreteDomain<BSplinesR, BSplinesP> dirichlet_boundary_domain(
+        BSDomainRP dirichlet_boundary_domain(
                 radial_bsplines.take_last(ddc::DiscreteVector<BSplinesR> {1}),
                 polar_bsplines);
-        ddc::DiscreteDomain<BSplinesP> polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
-        SplinePolar
-                spline(PolarBSplines::singular_domain(),
-                       ddc::DiscreteDomain<BSplinesR, BSplinesP>(radial_bsplines, polar_domain));
+        BSDomainP polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
+
 
         // Fill the spline
-        ddc::for_each(PolarBSplines::singular_domain(), [&](IDimPolarBspl const idx) {
+        ddc::for_each(PolarBSplinesRP::singular_domain(), [&](IDimPolarBspl const idx) {
             spline.singular_spline_coef(idx) = x(idx.uid());
         });
         ddc::for_each(fem_non_singular_domain, [&](IDimPolarBspl const idx) {
-            const IDimBSpline2D idx_2d(PolarBSplines::get_2d_index(idx));
+            const IDimBSpline2D idx_2d(PolarBSplinesRP::get_2d_index(idx));
             spline.spline_coef(idx_2d) = x(idx.uid());
         });
         ddc::for_each(dirichlet_boundary_domain, [&](IDimBSpline2D const idx) {
@@ -593,7 +674,7 @@ public:
         });
 
         // Copy the periodic elements
-        ddc::DiscreteDomain<BSplinesR, BSplinesP> copy_domain(
+        BSDomainRP copy_domain(
                 radial_bsplines,
                 polar_domain.remove_first(
                         ddc::DiscreteVector<BSplinesP>(ddc::discrete_space<BSplinesP>().nbasis())));
@@ -604,15 +685,42 @@ public:
                             ddc::select<BSplinesP>(idx_2d)
                                     - ddc::discrete_space<BSplinesP>().nbasis());
         });
+    }
 
+
+    /**
+     * @brief Solve the Poisson equation.
+     *
+     * This operator uses the other operator () and returns the values on
+     * the grid of the solution @f$\phi@f$.
+     *
+     * @param[in] rhs
+     *      The rhs @f$ \rho@f$ of the Poisson equation.
+     *      The type is templated but we can use the PoissonRHSFunction
+     *      class.
+     * @param[in] coords_eval
+     *      A Chunk of coordinates where we want to compute the solution.
+     * @param[out] result
+     *      The values of the solution @f$\phi@f$ on the given coords_eval.
+     */
+    template <class RHSFunction>
+    void operator()(RHSFunction const& rhs, ViewRP<CoordRP> const coords_eval, DSpanRP result) const
+    {
+        BSDomainP polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
+        SplinePolar
+                spline(PolarBSplinesRP::singular_domain(),
+                       BSDomainRP(radial_bsplines, polar_domain));
+
+        (*this)(rhs, spline);
         m_polar_spline_evaluator(result, coords_eval, spline);
     }
+
 
 private:
     static QuadratureDomainRP get_quadrature_points_in_cell(int cell_idx_r, int cell_idx_p)
     {
-        const QuadratureMeshR first_quad_point_r(cell_idx_r * n_gauss_legendre_r);
-        const QuadratureMeshP first_quad_point_p(cell_idx_p * n_gauss_legendre_p);
+        const QuadratureIndexR first_quad_point_r(cell_idx_r * n_gauss_legendre_r);
+        const QuadratureIndexP first_quad_point_p(cell_idx_p * n_gauss_legendre_p);
         constexpr QuadratureLengthR n_GL_r(n_gauss_legendre_r);
         constexpr QuadratureLengthP n_GL_p(n_gauss_legendre_p);
         const QuadratureDomainR quad_points_r(first_quad_point_r, n_GL_r);
@@ -622,12 +730,12 @@ private:
 
     template <class Mapping>
     double weak_integral_element(
-            QuadratureMeshR ir,
-            QuadratureMeshP ip,
+            QuadratureIndexR ir,
+            QuadratureIndexP ip,
             EvalDeriv2DType const& test_bspline_val_and_deriv,
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_alpha,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_beta,
+            Spline2DView coeff_alpha,
+            Spline2DView coeff_beta,
             SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator,
             Mapping const& mapping)
     {
@@ -646,13 +754,13 @@ private:
 
     template <class Mapping>
     double weak_integral_element(
-            QuadratureMeshR ir,
-            QuadratureMeshP ip,
+            QuadratureIndexR ir,
+            QuadratureIndexP ip,
             EvalDeriv2DType const& test_bspline_val_and_deriv,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_r,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_p,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_alpha,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_beta,
+            Spline2DView coeff_alpha,
+            Spline2DView coeff_beta,
             SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator,
             Mapping const& mapping)
     {
@@ -671,13 +779,13 @@ private:
 
     template <class Mapping>
     double weak_integral_element(
-            QuadratureMeshR ir,
-            QuadratureMeshP ip,
+            QuadratureIndexR ir,
+            QuadratureIndexP ip,
             EvalDeriv1DType const& test_bspline_val_and_deriv_r,
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
             EvalDeriv1DType const& test_bspline_val_and_deriv_p,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_alpha,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_beta,
+            Spline2DView coeff_alpha,
+            Spline2DView coeff_beta,
             SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator,
             Mapping const& mapping)
     {
@@ -696,14 +804,14 @@ private:
 
     template <class Mapping>
     double weak_integral_element(
-            QuadratureMeshR ir,
-            QuadratureMeshP ip,
+            QuadratureIndexR ir,
+            QuadratureIndexP ip,
             EvalDeriv1DType const& test_bspline_val_and_deriv_r,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_r,
             EvalDeriv1DType const& test_bspline_val_and_deriv_p,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_p,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_alpha,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_beta,
+            Spline2DView coeff_alpha,
+            Spline2DView coeff_beta,
             SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator,
             Mapping const& mapping)
     {
@@ -742,14 +850,14 @@ private:
 
     template <class Mapping, class TestValDerivType, class TrialValDerivType>
     double templated_weak_integral_element(
-            QuadratureMeshR ir,
-            QuadratureMeshP ip,
+            QuadratureIndexR ir,
+            QuadratureIndexP ip,
             TestValDerivType const& test_bspline_val_and_deriv,
             TrialValDerivType const& trial_bspline_val_and_deriv,
             TestValDerivType const& test_bspline_val_and_deriv_p,
             TrialValDerivType const& trial_bspline_val_and_deriv_p,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_alpha,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_beta,
+            Spline2DView coeff_alpha,
+            Spline2DView coeff_beta,
             SplineEvaluator2D<BSplinesR, BSplinesP> const& spline_evaluator,
             Mapping const& mapping)
     {
@@ -763,7 +871,7 @@ private:
                         EvalDeriv1DType> || std::is_same_v<TrialValDerivType, EvalDeriv2DType>);
 
         // Calculate coefficients at quadrature point
-        ddc::Coordinate<RDimR, RDimP> coord(get_coordinate(ir), get_coordinate(ip));
+        CoordRP coord(get_coordinate(ir), get_coordinate(ip));
         const double alpha = spline_evaluator(coord, coeff_alpha);
         const double beta = spline_evaluator(coord, coeff_beta);
 
@@ -796,8 +904,8 @@ private:
     double get_matrix_stencil_element(
             IDimBSpline2D idx_test,
             IDimBSpline2D idx_trial,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_alpha,
-            ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesP>> coeff_beta,
+            Spline2DView coeff_alpha,
+            Spline2DView coeff_beta,
             SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator,
             Mapping const& mapping)
     {
@@ -889,9 +997,9 @@ private:
                             cell_quad_points,
                             0.0,
                             ddc::reducer::sum<double>(),
-                            [&](QuadratureMeshRP const quad_idx) {
-                                QuadratureMeshR const r_idx = ddc::select<QDimRMesh>(quad_idx);
-                                QuadratureMeshP const p_idx = ddc::select<QDimPMesh>(quad_idx);
+                            [&](QuadratureIndexRP const quad_idx) {
+                                QuadratureIndexR const r_idx = ddc::select<QDimRMesh>(quad_idx);
+                                QuadratureIndexP const p_idx = ddc::select<QDimPMesh>(quad_idx);
                                 return weak_integral_element(
                                         r_idx,
                                         p_idx,
