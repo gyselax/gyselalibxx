@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /__w/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/nullpoissonsolver.hpp Source File</title>
+<title>Gyselalib++: Tests on the 2D polar poisson solver</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('geometryRTheta_2poisson_2nullpoissonsolver_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('tests_geometryRTheta_polar_poisson.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -98,37 +98,56 @@ $(document).ready(function(){initNavTree('geometryRTheta_2poisson_2nullpoissonso
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">nullpoissonsolver.hpp</div>  </div>
+<div class="title">Tests on the 2D polar poisson solver </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ipoissonsolver.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classNullPoissonSolver.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a> : <span class="keyword">public</span> <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    ~<a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> operator()(DSpanRP electrostatic_potential, DSpanRP electric_field, DViewRP allfdistribu)</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
-<div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:10</div></div>
-<div class="ttc" id="aclassNullPoissonSolver_html"><div class="ttname"><a href="classNullPoissonSolver.html">NullPoissonSolver</a></div><div class="ttdef"><b>Definition:</b> nullpoissonsolver.hpp:10</div></div>
-</div><!-- fragment --></div><!-- contents -->
+<div class="textblock"><p>The tests implemented in this folder test the 2D polar poisson solver implemented in the <code>src/geometryRTheta/poisson/</code> folder ( <a class="el" href="src_geometryRTheta_poisson.html">Polar Poisson solver</a> ).</p>
+<h1><a class="anchor" id="Polar_Poisson_solver"></a>
+Polar Poisson solver</h1>
+<p>The <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a> is tested on a circular mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>) and on a Czarny mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>) with (the test cases are given in Emily Bourne's thesis [1]).</p>
+<p>The studied equation is</p>
+<p class="formulaDsp">
+\[L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho, \]
+</p>
+<p>with <br  />
+</p><ul>
+<li>\(\alpha(r) = \exp\left( - \tanh\left( \frac{r - r_p}{\delta_r} \right) \right)\), with \(r_p = 0.7\) and \(\delta_r = 0.05\),</li>
+<li>\(\beta(r) = \frac{1}{\alpha(r)}\).</li>
+</ul>
+<p>The defined test functions are:</p>
+<ul>
+<li>Polar solution: \(\phi(x, y) = C r(x,y)^6 (r(x,y) -1)^6 \cos(m\theta)\),<ul>
+<li>with \(C = 2^{12}1e-4\) and \(m = 11\);</li>
+</ul>
+</li>
+<li>Cartesian solution: \(\phi(x,y) = C (1+r(x,y))^6 (1 - r(x,y))^6 \cos(2\pi x) \sin(2\pi y)\),<ul>
+<li>with \(C = 2^{12}1e-4\).</li>
+</ul>
+</li>
+</ul>
+<p>The <a class="el" href="classVlasovPoissonSolver.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">VlasovPoissonSolver</a> is also tested on a circular mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>) and on a Czarny mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>) for the same Poisson equation with the Cartesian solution.</p>
+<h1><a class="anchor" id="References"></a>
+References</h1>
+<p>[1] Emily Bourne, "Non-Uniform Numerical Schemes for the Modelling of Turbulence in the 5D GYSELA Code". December 2022.</p>
+<h1><a class="anchor" id="Contents"></a>
+Contents</h1>
+<ul>
+<li>polarpoissonfemsolver.cpp : it tests the <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a>. It solves the Poisson equation for a selected test case.</li>
+<li>test_cases.hpp : it defines RHS (<a class="el" href="classManufacturedPoissonTest.html" title="Defining the corresponding RHS of the Poisson equation for a given exact solution.">ManufacturedPoissonTest</a>) and exact solutions (<a class="el" href="classPoissonSolution.html" title="Base class for the exact solutions of the Poisson equation.">PoissonSolution</a>) of the Poisson equation.</li>
+<li>vlasovpoissonsolver.cpp : it tests the <a class="el" href="classVlasovPoissonSolver.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">VlasovPoissonSolver</a>. It solves the Poisson equation for a selected test case and computes the electric field in the physical domain.</li>
+<li>poisson.yaml : the parameters of the tests.</li>
+<li>test_poisson.py : it launches twice polarpoissonfemsolver.cpp test and checks the convergence order of the solution. <br  />
+</li>
+<li>test_vlasov_poisson.py : it launches twice vlasovpoissonsolver.cpp test and checks the convergence order or the solution and the electric field. </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_2daa31455a745d8a4b29bdb1d755058a.html">geometryRTheta</a></li><li class="navelem"><a class="el" href="dir_cd812de525b17a822d8c90f3bfea80df.html">poisson</a></li><li class="navelem"><b>nullpoissonsolver.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

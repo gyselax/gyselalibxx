@@ -108,38 +108,128 @@ $(document).ready(function(){initNavTree('classPoissonSolution.html',''); initRe
 <div class="title">PoissonSolution&lt; CurvilinearToCartesian &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Base class for the exact solutions of the Poisson equation.  
+ <a href="classPoissonSolution.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PoissonSolution&lt; CurvilinearToCartesian &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classPoissonSolution.png" usemap="#PoissonSolution_3C_20CurvilinearToCartesian_20_3E_map" alt=""/>
   <map id="PoissonSolution_3C_20CurvilinearToCartesian_20_3E_map" name="PoissonSolution_3C_20CurvilinearToCartesian_20_3E_map">
-<area href="classCartesianSolution.html" alt="CartesianSolution&lt; CurvilinearToCartesian &gt;" shape="rect" coords="0,56,275,80"/>
-<area href="classCurvilinearSolution.html" alt="CurvilinearSolution&lt; CurvilinearToCartesian &gt;" shape="rect" coords="285,56,560,80"/>
+<area href="classCartesianSolution.html" title="Define a Cartesian solution of the Poisson equation." alt="CartesianSolution&lt; CurvilinearToCartesian &gt;" shape="rect" coords="0,56,275,80"/>
+<area href="classCurvilinearSolution.html" title="Define a curvilinear solution of the Poisson equation." alt="CurvilinearSolution&lt; CurvilinearToCartesian &gt;" shape="rect" coords="285,56,560,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a6451537e7ef15aa643718b9fec5c998c"><td class="memItemLeft" align="right" valign="top"><a id="a6451537e7ef15aa643718b9fec5c998c"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>coordinate_converter_type</b> = CurvilinearToCartesian</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonSolution.html#a6451537e7ef15aa643718b9fec5c998c">coordinate_converter_type</a> = CurvilinearToCartesian</td></tr>
+<tr class="memdesc:a6451537e7ef15aa643718b9fec5c998c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type the mapping function which converts the logical (polar) coordinates into the physical (Cartesian) coordinates. <br /></td></tr>
 <tr class="separator:a6451537e7ef15aa643718b9fec5c998c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab858595c50946f5077ed256c5b01f703"><td class="memItemLeft" align="right" valign="top"><a id="ab858595c50946f5077ed256c5b01f703"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PoissonSolution</b> (CurvilinearToCartesian const &amp;coordinate_converter)</td></tr>
+<tr class="memitem:ab858595c50946f5077ed256c5b01f703"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonSolution.html#ab858595c50946f5077ed256c5b01f703">PoissonSolution</a> (CurvilinearToCartesian const &amp;coordinate_converter)</td></tr>
+<tr class="memdesc:ab858595c50946f5077ed256c5b01f703"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPoissonSolution.html" title="Base class for the exact solutions of the Poisson equation.">PoissonSolution</a>.  <a href="classPoissonSolution.html#ab858595c50946f5077ed256c5b01f703">More...</a><br /></td></tr>
 <tr class="separator:ab858595c50946f5077ed256c5b01f703"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6eafbb2783113ace8384d433608854b7"><td class="memItemLeft" align="right" valign="top"><a id="a6eafbb2783113ace8384d433608854b7"></a>
-virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const =0</td></tr>
+<tr class="memitem:a6eafbb2783113ace8384d433608854b7"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonSolution.html#a6eafbb2783113ace8384d433608854b7">operator()</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const =0</td></tr>
+<tr class="memdesc:a6eafbb2783113ace8384d433608854b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function at a given coordinate.  <a href="classPoissonSolution.html#a6eafbb2783113ace8384d433608854b7">More...</a><br /></td></tr>
 <tr class="separator:a6eafbb2783113ace8384d433608854b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a85694a84b02f52d5dacdf98dda53fba0"><td class="memItemLeft" align="right" valign="top"><a id="a85694a84b02f52d5dacdf98dda53fba0"></a>
-CurvilinearToCartesian const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>m_coordinate_converter</b></td></tr>
+CurvilinearToCartesian const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonSolution.html#a85694a84b02f52d5dacdf98dda53fba0">m_coordinate_converter</a></td></tr>
+<tr class="memdesc:a85694a84b02f52d5dacdf98dda53fba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The mapping function which converts the logical (polar) coordinates into the physical (Cartesian) coordinates. <br /></td></tr>
 <tr class="separator:a85694a84b02f52d5dacdf98dda53fba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class CurvilinearToCartesian&gt;<br />
+class PoissonSolution&lt; CurvilinearToCartesian &gt;</h3>
+
+<p>Base class for the exact solutions of the Poisson equation. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a> </dd>
+<dd>
+<a class="el" href="classVlasovPoissonSolver.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">VlasovPoissonSolver</a> </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab858595c50946f5077ed256c5b01f703"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab858595c50946f5077ed256c5b01f703">&#9670;&nbsp;</a></span>PoissonSolution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class CurvilinearToCartesian &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPoissonSolution.html">PoissonSolution</a>&lt; CurvilinearToCartesian &gt;::<a class="el" href="classPoissonSolution.html">PoissonSolution</a> </td>
+          <td>(</td>
+          <td class="paramtype">CurvilinearToCartesian const &amp;&#160;</td>
+          <td class="paramname"><em>coordinate_converter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Instantiate a <a class="el" href="classPoissonSolution.html" title="Base class for the exact solutions of the Poisson equation.">PoissonSolution</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">coordinate_converter</td><td>The mapping function which converts the logical (polar) coordinates into the physical (Cartesian) coordinates. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6eafbb2783113ace8384d433608854b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eafbb2783113ace8384d433608854b7">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class CurvilinearToCartesian &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double <a class="el" href="classPoissonSolution.html">PoissonSolution</a>&lt; CurvilinearToCartesian &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>coord</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the function at a given coordinate. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The given polar coordinate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the function at a given coordinate. </dd></dl>
+
+<p>Implemented in <a class="el" href="classCartesianSolution.html#a7145c82766a1b52602342ab3e8eb87d1">CartesianSolution&lt; CurvilinearToCartesian &gt;</a>, and <a class="el" href="classCurvilinearSolution.html#ac393eea78d63352e2db92c6b116fe5f1">CurvilinearSolution&lt; CurvilinearToCartesian &gt;</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/tests/geometryRTheta/polar_poisson/<a class="el" href="polar__poisson_2test__cases_8hpp_source.html">test_cases.hpp</a></li>
 </ul>

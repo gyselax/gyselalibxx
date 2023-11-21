@@ -106,28 +106,31 @@ $(document).ready(function(){initNavTree('classIPoissonSolver.html',''); initRes
 <div class="title">IPoissonSolver Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Base class for Poisson solver.  
+ <a href="classIPoissonSolver.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for IPoissonSolver:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classIPoissonSolver.png" usemap="#IPoissonSolver_map" alt=""/>
   <map id="IPoissonSolver_map" name="IPoissonSolver_map">
-<area href="classFemNonPeriodicPoissonSolver.html" alt="FemNonPeriodicPoissonSolver" shape="rect" coords="197,56,384,80"/>
-<area href="classFemPeriodicPoissonSolver.html" alt="FemPeriodicPoissonSolver" shape="rect" coords="197,112,384,136"/>
-<area href="classFftPoissonSolver.html" alt="FftPoissonSolver" shape="rect" coords="197,168,384,192"/>
-<area href="classFftPoissonSolver.html" alt="FftPoissonSolver" shape="rect" coords="197,224,384,248"/>
-<area href="classFftPoissonSolverSplineX.html" alt="FftPoissonSolverSplineX" shape="rect" coords="197,280,384,304"/>
-<area href="classNullPoissonSolver.html" alt="NullPoissonSolver" shape="rect" coords="197,336,384,360"/>
-<area href="classNullPoissonSolver.html" alt="NullPoissonSolver" shape="rect" coords="197,392,384,416"/>
-<area href="classNullPoissonSolver.html" alt="NullPoissonSolver" shape="rect" coords="197,448,384,472"/>
+<area href="classFemNonPeriodicPoissonSolver.html" alt="FemNonPeriodicPoissonSolver" shape="rect" coords="215,56,420,80"/>
+<area href="classFemPeriodicPoissonSolver.html" alt="FemPeriodicPoissonSolver" shape="rect" coords="215,112,420,136"/>
+<area href="classFftPoissonSolver.html" alt="FftPoissonSolver" shape="rect" coords="215,168,420,192"/>
+<area href="classFftPoissonSolver.html" alt="FftPoissonSolver" shape="rect" coords="215,224,420,248"/>
+<area href="classFftPoissonSolverSplineX.html" alt="FftPoissonSolverSplineX" shape="rect" coords="215,280,420,304"/>
+<area href="classNullPoissonSolver.html" alt="NullPoissonSolver" shape="rect" coords="215,336,420,360"/>
+<area href="classNullPoissonSolver.html" alt="NullPoissonSolver" shape="rect" coords="215,392,420,416"/>
+<area href="classVlasovPoissonSolver.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation." alt="VlasovPoissonSolver&lt; Mapping &gt;" shape="rect" coords="215,448,420,472"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af34e73695fa0b1aedca9fa32bfcced72"><td class="memItemLeft" align="right" valign="top"><a id="af34e73695fa0b1aedca9fa32bfcced72"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanRP electrostatic_potential, DSpanRP electric_field, DViewRP allfdistribu) const =0</td></tr>
-<tr class="separator:af34e73695fa0b1aedca9fa32bfcced72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e07de086727dd87d194d5132517e8a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver.html#a2e07de086727dd87d194d5132517e8a5">operator()</a> (DSpanRP electrostatic_potential, <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; double, IDomainRP, NDTag&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt;&gt; electric_field, DViewRP allfdistribu) const =0</td></tr>
+<tr class="memdesc:a2e07de086727dd87d194d5132517e8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the electrical potential and the electric field from the Poisson equation.  <a href="classIPoissonSolver.html#a2e07de086727dd87d194d5132517e8a5">More...</a><br /></td></tr>
+<tr class="separator:a2e07de086727dd87d194d5132517e8a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2819621d345ddde4acad30a47c8fd7f9"><td class="memItemLeft" align="right" valign="top"><a id="a2819621d345ddde4acad30a47c8fd7f9"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const =0</td></tr>
 <tr class="separator:a2819621d345ddde4acad30a47c8fd7f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,6 +138,63 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const =0</td></tr>
 <tr class="separator:acc648976a27e0b36daf0615d7b8eebd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for Poisson solver. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2e07de086727dd87d194d5132517e8a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e07de086727dd87d194d5132517e8a5">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void IPoissonSolver::operator() </td>
+          <td>(</td>
+          <td class="paramtype">DSpanRP&#160;</td>
+          <td class="paramname"><em>electrostatic_potential</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; double, IDomainRP, NDTag&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt;&gt;&#160;</td>
+          <td class="paramname"><em>electric_field</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DViewRP&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the electrical potential and the electric field from the Poisson equation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">electrostatic_potential</td><td>The solution of the Poisson equation. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field</td><td>The electric field \(E = -\nabla \phi\). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The rhs of the Poisson equation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classVlasovPoissonSolver.html#a4d5d170429587fad782c0f7bcb0937a9">VlasovPoissonSolver&lt; Mapping &gt;</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/<a class="el" href="geometryRTheta_2poisson_2ipoissonsolver_8hpp_source.html">ipoissonsolver.hpp</a></li>
 </ul>

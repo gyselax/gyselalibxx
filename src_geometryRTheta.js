@@ -27,5 +27,9 @@ var src_geometryRTheta =
       [ "Unit tests", "src_geometryRTheta_advection.html#Unit_tests", null ],
       [ "Contents", "src_geometryRTheta_advection.html#Contents", null ]
     ] ],
-    [ "Spline interpolator in polar coordinates", "src_geometryRTheta_interpolation.html", null ]
+    [ "Spline interpolator in polar coordinates", "src_geometryRTheta_interpolation.html", null ],
+    [ "Polar Poisson solver", "src_geometryRTheta_poisson.html", [
+      [ "The Poisson equation", "src_geometryRTheta_poisson.html#The_Poisson_equation", null ],
+      [ "Evaluation of electric field", "src_geometryRTheta_poisson.html#Evaluation_of_electric_field", null ]
+    ] ]
 ];

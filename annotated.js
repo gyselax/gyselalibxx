@@ -104,6 +104,7 @@ var annotated =
     [ "NullBoundaryValue", "classNullBoundaryValue.html", "classNullBoundaryValue" ],
     [ "NullBoundaryValue2D", "classNullBoundaryValue2D.html", "classNullBoundaryValue2D" ],
     [ "NullPoissonSolver", "classNullPoissonSolver.html", "classNullPoissonSolver" ],
+    [ "PoissonRHSFunction", "classPoissonRHSFunction.html", "classPoissonRHSFunction" ],
     [ "PoissonSolution", "classPoissonSolution.html", "classPoissonSolution" ],
     [ "PolarBSplines", "classPolarBSplines.html", "classPolarBSplines" ],
     [ "PolarNullBoundaryValue2D", "classPolarNullBoundaryValue2D.html", "classPolarNullBoundaryValue2D" ],
@@ -158,5 +159,6 @@ var annotated =
     [ "UniformBSplines", "classUniformBSplines.html", "classUniformBSplines" ],
     [ "VectorField", "classVectorField.html", "classVectorField" ],
     [ "VectorFieldCommon", "classVectorFieldCommon.html", null ],
-    [ "VectorFieldSpan", "classVectorFieldSpan.html", "classVectorFieldSpan" ]
+    [ "VectorFieldSpan", "classVectorFieldSpan.html", "classVectorFieldSpan" ],
+    [ "VlasovPoissonSolver", "classVlasovPoissonSolver.html", "classVlasovPoissonSolver" ]
 ];

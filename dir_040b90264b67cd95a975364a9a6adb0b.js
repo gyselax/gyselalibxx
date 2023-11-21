@@ -9,6 +9,11 @@ var dir_040b90264b67cd95a975364a9a6adb0b =
       [ "RK4 method", "src_geometryRTheta_advection.html#autotoc_md26", null ]
     ] ],
     [ "Advection domain", "src_geometryRTheta_advection.html#autotoc_md27", null ],
+    [ "B-splines FEM", "src_geometryRTheta_poisson.html#autotoc_md28", [
+      [ "The B-splines", "src_geometryRTheta_poisson.html#autotoc_md29", null ],
+      [ "Treatment of the O-point", "src_geometryRTheta_poisson.html#autotoc_md30", null ],
+      [ "Weak formulation", "src_geometryRTheta_poisson.html#autotoc_md31", null ]
+    ] ],
     [ "deprecated", "dir_bf05ee1a50b262d9ca6db6046de9e516.html", "dir_bf05ee1a50b262d9ca6db6046de9e516" ],
     [ "mapping", "dir_401f8b249764c6753d0f677d3a20782c.html", "dir_401f8b249764c6753d0f677d3a20782c" ],
     [ "bernstein.hpp", "bernstein_8hpp_source.html", null ],

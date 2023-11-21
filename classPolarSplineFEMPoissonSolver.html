@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: PolarSplineFEMPoissonSolver&lt; PolarBSplines &gt; Class Template Reference</title>
+<title>Gyselalib++: PolarSplineFEMPoissonSolver Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -101,17 +101,20 @@ $(document).ready(function(){initNavTree('classPolarSplineFEMPoissonSolver.html'
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classPolarSplineFEMPoissonSolver-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">PolarSplineFEMPoissonSolver&lt; PolarBSplines &gt; Class Template Reference</div>  </div>
+<div class="title">PolarSplineFEMPoissonSolver Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Define a polar Poisson solver.  
+ <a href="classPolarSplineFEMPoissonSolver.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator">InternalTagGenerator</a></td></tr>
+<tr class="memdesc:structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This struct is used to provide alternative tags.  <a href="classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator">More...</a><br /></td></tr>
 <tr class="separator:structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:structPolarSplineFEMPoissonSolver_1_1PBasisSubset"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1PBasisSubset">PBasisSubset</a></td></tr>
 <tr class="separator:structPolarSplineFEMPoissonSolver_1_1PBasisSubset"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,39 +125,29 @@ Classes</h2></td></tr>
 <tr class="memitem:structPolarSplineFEMPoissonSolver_1_1RCellDim"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1RCellDim">RCellDim</a></td></tr>
 <tr class="separator:structPolarSplineFEMPoissonSolver_1_1RCellDim"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a73328569294653365237e7c093b32963"><td class="memItemLeft" align="right" valign="top"><a id="a73328569294653365237e7c093b32963"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesR</b> = typename PolarBSplines::BSplinesR_tag</td></tr>
-<tr class="separator:a73328569294653365237e7c093b32963"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51c7049b09235defa8c3242508d95ba4"><td class="memItemLeft" align="right" valign="top"><a id="a51c7049b09235defa8c3242508d95ba4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesP</b> = typename PolarBSplines::BSplinesP_tag</td></tr>
-<tr class="separator:a51c7049b09235defa8c3242508d95ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae11676f1f41aaf23fc0b76b3d7b75a21"><td class="memItemLeft" align="right" valign="top"><a id="ae11676f1f41aaf23fc0b76b3d7b75a21"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>RDimR</b> = typename BSplinesR::tag_type</td></tr>
-<tr class="separator:ae11676f1f41aaf23fc0b76b3d7b75a21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22b4815b665f9db9d48c3fcb25b8add8"><td class="memItemLeft" align="right" valign="top"><a id="a22b4815b665f9db9d48c3fcb25b8add8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>RDimP</b> = typename BSplinesP::tag_type</td></tr>
-<tr class="separator:a22b4815b665f9db9d48c3fcb25b8add8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdb449665614d1309260d2c3032654e2"><td class="memItemLeft" align="right" valign="top"><a id="afdb449665614d1309260d2c3032654e2"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>SplineRP</b> = ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; BSplinesR, BSplinesP &gt; &gt;</td></tr>
-<tr class="separator:afdb449665614d1309260d2c3032654e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac55e2cee8fe2e7b881734d1b752aeea8"><td class="memItemLeft" align="right" valign="top"><a id="ac55e2cee8fe2e7b881734d1b752aeea8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>SplinePolar</b> = <a class="el" href="structPolarSpline.html">PolarSpline</a>&lt; <a class="el" href="classPolarBSplines.html">PolarBSplines</a> &gt;</td></tr>
-<tr class="separator:ac55e2cee8fe2e7b881734d1b752aeea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aea2e5f1a3571a3b1058978d41374c01e"><td class="memTemplParams" colspan="2"><a id="aea2e5f1a3571a3b1058978d41374c01e"></a>
-template&lt;class Mapping &gt; </td></tr>
-<tr class="memitem:aea2e5f1a3571a3b1058978d41374c01e"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>PolarSplineFEMPoissonSolver</b> (ddc::ChunkSpan&lt; double const, ddc::DiscreteDomain&lt; BSplinesR, BSplinesP &gt;&gt; coeff_alpha, ddc::ChunkSpan&lt; double const, ddc::DiscreteDomain&lt; BSplinesR, BSplinesP &gt;&gt; coeff_beta, Mapping const &amp;mapping)</td></tr>
-<tr class="separator:aea2e5f1a3571a3b1058978d41374c01e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fa355d44f384704dac27784afe492c7"><td class="memTemplParams" colspan="2"><a id="a9fa355d44f384704dac27784afe492c7"></a>
-template&lt;class RHSFunction , class Domain &gt; </td></tr>
-<tr class="memitem:a9fa355d44f384704dac27784afe492c7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator()</b> (RHSFunction const &amp;rhs, ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const, Domain &gt; const coords_eval, ddc::ChunkSpan&lt; double, Domain &gt; result) const</td></tr>
-<tr class="separator:a9fa355d44f384704dac27784afe492c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67df2ac50d26494ba1fae371fc97a5d8"><td class="memTemplParams" colspan="2">template&lt;class Mapping &gt; </td></tr>
+<tr class="memitem:a67df2ac50d26494ba1fae371fc97a5d8"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonSolver.html#a67df2ac50d26494ba1fae371fc97a5d8">PolarSplineFEMPoissonSolver</a> (Spline2DView coeff_alpha, Spline2DView coeff_beta, Mapping const &amp;mapping)</td></tr>
+<tr class="memdesc:a67df2ac50d26494ba1fae371fc97a5d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a polar Poisson solver using FEM with B-splines.  <a href="classPolarSplineFEMPoissonSolver.html#a67df2ac50d26494ba1fae371fc97a5d8">More...</a><br /></td></tr>
+<tr class="separator:a67df2ac50d26494ba1fae371fc97a5d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab17e5f6a703cda07ed9701b908295b99"><td class="memTemplParams" colspan="2">template&lt;class RHSFunction &gt; </td></tr>
+<tr class="memitem:ab17e5f6a703cda07ed9701b908295b99"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonSolver.html#ab17e5f6a703cda07ed9701b908295b99">operator()</a> (RHSFunction const &amp;rhs, <a class="el" href="structPolarSpline.html">SplinePolar</a> &amp;spline) const</td></tr>
+<tr class="memdesc:ab17e5f6a703cda07ed9701b908295b99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the Poisson equation.  <a href="classPolarSplineFEMPoissonSolver.html#ab17e5f6a703cda07ed9701b908295b99">More...</a><br /></td></tr>
+<tr class="separator:ab17e5f6a703cda07ed9701b908295b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c831b726d553adf9811f843ad2c713e"><td class="memTemplParams" colspan="2">template&lt;class RHSFunction &gt; </td></tr>
+<tr class="memitem:a0c831b726d553adf9811f843ad2c713e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonSolver.html#a0c831b726d553adf9811f843ad2c713e">operator()</a> (RHSFunction const &amp;rhs, ViewRP&lt; CoordRP &gt; const coords_eval, DSpanRP result) const</td></tr>
+<tr class="memdesc:a0c831b726d553adf9811f843ad2c713e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the Poisson equation.  <a href="classPolarSplineFEMPoissonSolver.html#a0c831b726d553adf9811f843ad2c713e">More...</a><br /></td></tr>
+<tr class="separator:a0c831b726d553adf9811f843ad2c713e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Define a polar Poisson solver. </p>
+<p>Solve the following Poisson equation</p>
+<p>(1) \( L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho \), in \( \Omega\),</p>
+<p>\( \phi = 0 \), on \( \partial \Omega\),</p>
+<p>(see in Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
+in the 5D GYSELA Code". December 2022.) </p>
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
 <a name="structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator" id="structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#structPolarSplineFEMPoissonSolver_1_1InternalTagGenerator">&#9670;&nbsp;</a></span>PolarSplineFEMPoissonSolver::InternalTagGenerator</h2>
 
@@ -166,14 +159,15 @@ template&lt;class RHSFunction , class Domain &gt; </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><h3>template&lt;class PolarBSplines&gt;<br />
-template&lt;class T&gt;<br />
-struct PolarSplineFEMPoissonSolver&lt; PolarBSplines &gt;::InternalTagGenerator&lt; T &gt;</h3>
+<div class="textblock"><h3>template&lt;class T&gt;<br />
+struct PolarSplineFEMPoissonSolver::InternalTagGenerator&lt; T &gt;</h3>
 
+<p>This struct is used to provide alternative tags. </p>
+<p>It is used to create new meshes. This is necessary because in DDC we can only create a single mesh for a tagged dimension. </p>
 </div><table class="fieldtable">
 <tr><th colspan="3">Class Members</th></tr>
 <tr><td class="fieldtype">
-<a id="a7905bb7674f4ab0af6d298e559096c84"></a>typedef T</td>
+<a id="a0e28d602203e16d8c662fec1a3c6f24e"></a>typedef T</td>
 <td class="fieldname">
 tag</td>
 <td class="fielddoc">
@@ -193,10 +187,7 @@ tag</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><h3>template&lt;class PolarBSplines&gt;<br />
-struct PolarSplineFEMPoissonSolver&lt; PolarBSplines &gt;::PBasisSubset</h3>
-
-</div>
+<div class="textblock"></div>
 </div>
 </div>
 <a name="structPolarSplineFEMPoissonSolver_1_1PCellDim" id="structPolarSplineFEMPoissonSolver_1_1PCellDim"></a>
@@ -210,10 +201,7 @@ struct PolarSplineFEMPoissonSolver&lt; PolarBSplines &gt;::PBasisSubset</h3>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><h3>template&lt;class PolarBSplines&gt;<br />
-struct PolarSplineFEMPoissonSolver&lt; PolarBSplines &gt;::PCellDim</h3>
-
-</div>
+<div class="textblock"></div>
 </div>
 </div>
 <a name="structPolarSplineFEMPoissonSolver_1_1RBasisSubset" id="structPolarSplineFEMPoissonSolver_1_1RBasisSubset"></a>
@@ -227,10 +215,7 @@ struct PolarSplineFEMPoissonSolver&lt; PolarBSplines &gt;::PCellDim</h3>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><h3>template&lt;class PolarBSplines&gt;<br />
-struct PolarSplineFEMPoissonSolver&lt; PolarBSplines &gt;::RBasisSubset</h3>
-
-</div>
+<div class="textblock"></div>
 </div>
 </div>
 <a name="structPolarSplineFEMPoissonSolver_1_1RCellDim" id="structPolarSplineFEMPoissonSolver_1_1RCellDim"></a>
@@ -244,10 +229,175 @@ struct PolarSplineFEMPoissonSolver&lt; PolarBSplines &gt;::RBasisSubset</h3>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><h3>template&lt;class PolarBSplines&gt;<br />
-struct PolarSplineFEMPoissonSolver&lt; PolarBSplines &gt;::RCellDim</h3>
+<div class="textblock"></div>
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a67df2ac50d26494ba1fae371fc97a5d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67df2ac50d26494ba1fae371fc97a5d8">&#9670;&nbsp;</a></span>PolarSplineFEMPoissonSolver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Mapping &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">PolarSplineFEMPoissonSolver::PolarSplineFEMPoissonSolver </td>
+          <td>(</td>
+          <td class="paramtype">Spline2DView&#160;</td>
+          <td class="paramname"><em>coeff_alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Spline2DView&#160;</td>
+          <td class="paramname"><em>coeff_beta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mapping const &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Instantiate a polar Poisson solver using FEM with B-splines. </p>
+<p>The equation we are studying:</p>
+<p>(1) \( L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho \), in \( \Omega\),</p>
+<p>\( \phi = 0 \), on \( \partial \Omega\).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">coeff_alpha</td><td>The spline representation of the \( \alpha \) function in the definition of the Poisson equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coeff_beta</td><td>The spline representation of the \( \beta \) function in the definition of the Poisson equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping from the logical domain to the physical domain where the equation is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Mapping</td><td>A <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> class. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab17e5f6a703cda07ed9701b908295b99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab17e5f6a703cda07ed9701b908295b99">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class RHSFunction &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PolarSplineFEMPoissonSolver::operator() </td>
+          <td>(</td>
+          <td class="paramtype">RHSFunction const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structPolarSpline.html">SplinePolar</a> &amp;&#160;</td>
+          <td class="paramname"><em>spline</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solve the Poisson equation. </p>
+<p>This operator returns the coefficients associated with the B-Splines of the solution \(\phi\).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rhs</td><td>The rhs \( \rho\) of the Poisson equation. The type is templated but we can use the <a class="el" href="classPoissonRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonRHSFunction</a> class. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">spline</td><td>The spline representation of the solution \(\phi\). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0c831b726d553adf9811f843ad2c713e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c831b726d553adf9811f843ad2c713e">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class RHSFunction &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PolarSplineFEMPoissonSolver::operator() </td>
+          <td>(</td>
+          <td class="paramtype">RHSFunction const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ViewRP&lt; CoordRP &gt; const&#160;</td>
+          <td class="paramname"><em>coords_eval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DSpanRP&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solve the Poisson equation. </p>
+<p>This operator uses the other operator () and returns the values on the grid of the solution \(\phi\).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rhs</td><td>The rhs \( \rho\) of the Poisson equation. The type is templated but we can use the <a class="el" href="classPoissonRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonRHSFunction</a> class. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coords_eval</td><td>A Chunk of coordinates where we want to compute the solution. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">result</td><td>The values of the solution \(\phi\) on the given coords_eval. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

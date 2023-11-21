@@ -107,28 +107,170 @@ $(document).ready(function(){initNavTree('classManufacturedPoissonTest.html','')
 <div class="title">ManufacturedPoissonTest&lt; ChosenSolution &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Defining the corresponding RHS of the Poisson equation for a given exact solution.  
+ <a href="classManufacturedPoissonTest.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a7349fe81c3343867df59d8e72a110736"><td class="memItemLeft" align="right" valign="top"><a id="a7349fe81c3343867df59d8e72a110736"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>CurvilinearToCartesian</b> = typename ChosenSolution::coordinate_converter_type</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManufacturedPoissonTest.html#a7349fe81c3343867df59d8e72a110736">CurvilinearToCartesian</a> = typename ChosenSolution::coordinate_converter_type</td></tr>
+<tr class="memdesc:a7349fe81c3343867df59d8e72a110736"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type the choosen solution of the Poisson equation. <br /></td></tr>
 <tr class="separator:a7349fe81c3343867df59d8e72a110736"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2882eef1431cf9ca3ff4504e2060890b"><td class="memItemLeft" align="right" valign="top"><a id="a2882eef1431cf9ca3ff4504e2060890b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ManufacturedPoissonTest</b> (CurvilinearToCartesian const &amp;coordinate_converter)</td></tr>
+<tr class="memitem:a2882eef1431cf9ca3ff4504e2060890b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManufacturedPoissonTest.html#a2882eef1431cf9ca3ff4504e2060890b">ManufacturedPoissonTest</a> (<a class="el" href="classManufacturedPoissonTest.html#a7349fe81c3343867df59d8e72a110736">CurvilinearToCartesian</a> const &amp;coordinate_converter)</td></tr>
+<tr class="memdesc:a2882eef1431cf9ca3ff4504e2060890b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classManufacturedPoissonTest.html" title="Defining the corresponding RHS of the Poisson equation for a given exact solution.">ManufacturedPoissonTest</a>.  <a href="classManufacturedPoissonTest.html#a2882eef1431cf9ca3ff4504e2060890b">More...</a><br /></td></tr>
 <tr class="separator:a2882eef1431cf9ca3ff4504e2060890b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9aac013116d3c04b11cdef64cd870315"><td class="memItemLeft" align="right" valign="top"><a id="a9aac013116d3c04b11cdef64cd870315"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>solution_at_pole</b> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memitem:a9aac013116d3c04b11cdef64cd870315"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManufacturedPoissonTest.html#a9aac013116d3c04b11cdef64cd870315">solution_at_pole</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a9aac013116d3c04b11cdef64cd870315"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the RHS at the O-point.  <a href="classManufacturedPoissonTest.html#a9aac013116d3c04b11cdef64cd870315">More...</a><br /></td></tr>
 <tr class="separator:a9aac013116d3c04b11cdef64cd870315"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7bed860a32f8678d1128795b614d6de"><td class="memItemLeft" align="right" valign="top"><a id="af7bed860a32f8678d1128795b614d6de"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>non_singular_solution</b> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memitem:af7bed860a32f8678d1128795b614d6de"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManufacturedPoissonTest.html#af7bed860a32f8678d1128795b614d6de">non_singular_solution</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:af7bed860a32f8678d1128795b614d6de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the RHS on the domain except the O-point.  <a href="classManufacturedPoissonTest.html#af7bed860a32f8678d1128795b614d6de">More...</a><br /></td></tr>
 <tr class="separator:af7bed860a32f8678d1128795b614d6de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b5c16b99b6b74af7f724451fecd1122"><td class="memItemLeft" align="right" valign="top"><a id="a9b5c16b99b6b74af7f724451fecd1122"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memitem:a9b5c16b99b6b74af7f724451fecd1122"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManufacturedPoissonTest.html#a9b5c16b99b6b74af7f724451fecd1122">operator()</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a9b5c16b99b6b74af7f724451fecd1122"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the RHS at any point of the domain.  <a href="classManufacturedPoissonTest.html#a9b5c16b99b6b74af7f724451fecd1122">More...</a><br /></td></tr>
 <tr class="separator:a9b5c16b99b6b74af7f724451fecd1122"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ChosenSolution&gt;<br />
+class ManufacturedPoissonTest&lt; ChosenSolution &gt;</h3>
+
+<p>Defining the corresponding RHS of the Poisson equation for a given exact solution. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2882eef1431cf9ca3ff4504e2060890b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2882eef1431cf9ca3ff4504e2060890b">&#9670;&nbsp;</a></span>ManufacturedPoissonTest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ChosenSolution &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classManufacturedPoissonTest.html">ManufacturedPoissonTest</a>&lt; ChosenSolution &gt;::<a class="el" href="classManufacturedPoissonTest.html">ManufacturedPoissonTest</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classManufacturedPoissonTest.html#a7349fe81c3343867df59d8e72a110736">CurvilinearToCartesian</a> const &amp;&#160;</td>
+          <td class="paramname"><em>coordinate_converter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Instantiate a <a class="el" href="classManufacturedPoissonTest.html" title="Defining the corresponding RHS of the Poisson equation for a given exact solution.">ManufacturedPoissonTest</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">coordinate_converter</td><td>The mapping function which converts the logical (polar) coordinates into the physical (Cartesian) coordinates. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9aac013116d3c04b11cdef64cd870315"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aac013116d3c04b11cdef64cd870315">&#9670;&nbsp;</a></span>solution_at_pole()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ChosenSolution &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classManufacturedPoissonTest.html">ManufacturedPoissonTest</a>&lt; ChosenSolution &gt;::solution_at_pole </td>
+          <td>(</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>coord</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the value of the RHS at the O-point. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The given polar coordinate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the RHS at the O-point. </dd></dl>
+
+</div>
+</div>
+<a id="af7bed860a32f8678d1128795b614d6de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7bed860a32f8678d1128795b614d6de">&#9670;&nbsp;</a></span>non_singular_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ChosenSolution &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classManufacturedPoissonTest.html">ManufacturedPoissonTest</a>&lt; ChosenSolution &gt;::non_singular_solution </td>
+          <td>(</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>coord</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the value of the RHS on the domain except the O-point. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The given polar coordinate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the RHS on the domain except the O-point. </dd></dl>
+
+</div>
+</div>
+<a id="a9b5c16b99b6b74af7f724451fecd1122"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b5c16b99b6b74af7f724451fecd1122">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ChosenSolution &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classManufacturedPoissonTest.html">ManufacturedPoissonTest</a>&lt; ChosenSolution &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>coord</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the RHS at any point of the domain. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The given polar coordinate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the RHS at any point of the domain. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/tests/geometryRTheta/polar_poisson/<a class="el" href="polar__poisson_2test__cases_8hpp_source.html">test_cases.hpp</a></li>
 </ul>
