@@ -16,7 +16,7 @@ import numpy as np
 from gysdata import DiskStore
 from plot_utils import plot_field1d, plot_field2d
 from math_utils import compute_moment, differentiate
-from geometryXVx.utils import compute_krook_sink_constant, compute_krook_sink_adaptive, compute_kinetic_source
+from geometryXVx.utils import compute_krook_sink_constant, compute_kinetic_source
 
 
 if __name__ == '__main__':
@@ -53,7 +53,6 @@ if __name__ == '__main__':
     grad_flux_over_m = differentiate(momentum_flux, 'x') / np.sqrt(mass)
     force_term = density*charge/np.sqrt(mass)*electric_field
     momentum_source = compute_moment(compute_krook_sink_constant(ds), 'v_x', moment_order=1) \
-            + compute_moment(compute_krook_sink_adaptive(ds, density), 'v_x', moment_order=1) \
             + compute_moment(compute_kinetic_source(ds), 'v_x', moment_order=1)
     error = dgamma_dt + grad_flux_over_m - momentum_source - force_term
 

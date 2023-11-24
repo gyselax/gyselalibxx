@@ -28,7 +28,7 @@ SpeciesInfo:
   perturb_mode: 1
 
 Krook:
-  - name: 'adaptive' # 'constant' or adaptive': constant values or not for nu coeff.
+  - name: 'constant' # 'constant' or adaptive': constant values or not for nu coeff.
     type: 'sink'
     solver: 'rk2' # possible values : 'rk2'
     extent: 0.20
@@ -46,13 +46,13 @@ KineticSource:
   temperature: 1.
 
 CollisionsInfo:
-  enable_inter: false
+  enable_inter: true
   nustar0: 0.1
 
 Algorithm:
   deltat: 0.1
-  nbiter: 50
+  nbiter: 100
 
 Output:
-  time_diag: 0.1
+  time_diag: 0.3
 )PARAMS_CFG";

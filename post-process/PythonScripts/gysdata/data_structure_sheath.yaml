@@ -49,22 +49,6 @@ krook_sink_constant_ftarget:
   dimensions: [ *vxd ]
   path: { file: 'VOICEXX_initstate.h5', dataset: 'krook_sink_constant_ftarget' }
 
-krook_sink_adaptive_amplitude:
-  dimensions: [ ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'krook_sink_adaptive_amplitude' }
-
-krook_sink_adaptive_mask:
-  dimensions: [ *xd ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'krook_sink_adaptive_mask' }
-
-krook_sink_adaptive_ftarget:
-  dimensions: [ *vxd ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'krook_sink_adaptive_ftarget' }
-
-krook_sink_adaptive_density:
-  dimensions: [ ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'krook_sink_adaptive_density' }
-
 kinetic_source_amplitude:
   dimensions: [ ]
   path: { file: 'VOICEXX_initstate.h5', dataset: 'kinetic_source_amplitude' }

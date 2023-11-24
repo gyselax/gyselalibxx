@@ -37,22 +37,6 @@ metadata:
     size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]' ]
   collintra_nustar0 : double
 
-  krook_sink_adaptive_extent : double
-  krook_sink_adaptive_stiffness : double
-  krook_sink_adaptive_amplitude : double
-  krook_sink_adaptive_density : double
-  krook_sink_adaptive_temperature : double
-  krook_sink_adaptive_mask_extents: { type: array, subtype: int64, size: 1 }
-  krook_sink_adaptive_mask:
-    type: array
-    subtype: double
-    size: [ '$krook_sink_adaptive_mask_extents[0]' ]
-  krook_sink_adaptive_ftarget_extents: { type: array, subtype: int64, size: 1 }
-  krook_sink_adaptive_ftarget:
-    type: array
-    subtype: double
-    size: [ '$krook_sink_adaptive_ftarget_extents[0]' ]
-  
   krook_sink_constant_extent : double
   krook_sink_constant_stiffness : double
   krook_sink_constant_amplitude : double
@@ -124,14 +108,6 @@ plugins:
         - fdistribu_charges
         - fdistribu_masses
         - fdistribu_eq
-
-        - krook_sink_adaptive_extent
-        - krook_sink_adaptive_stiffness
-        - krook_sink_adaptive_amplitude
-        - krook_sink_adaptive_density
-        - krook_sink_adaptive_temperature
-        - krook_sink_adaptive_mask
-        - krook_sink_adaptive_ftarget
 
         - krook_sink_constant_extent
         - krook_sink_constant_stiffness
