@@ -56,6 +56,7 @@ var NAVTREE =
       [ "Description", "simulations_geometryXVx_sheath.html#Description", null ],
       [ "Usage", "simulations_geometryXVx_sheath.html#Usage", null ],
       [ "Recommended parameters", "simulations_geometryXVx_sheath.html#Recommended_parameters", null ],
+      [ "Verification of the simulation", "simulations_geometryXVx_sheath.html#Verification_of_the_simulation", null ],
       [ "References", "simulations_geometryXVx_sheath.html#References", null ]
     ] ],
     [ "Gyselalib++ contents", "src.html", "src" ],
