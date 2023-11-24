@@ -14,7 +14,7 @@ import numpy as np
 from gysdata import DiskStore
 from plot_utils import plot_field1d, plot_field2d
 from math_utils import compute_moment, differentiate
-from geometryXVx.utils import compute_krook_sink_constant, compute_kinetic_source
+from geometryXVx.utils import compute_krook_sink_constant, compute_krook_sink_adaptive, compute_kinetic_source
 
 
 if __name__ == '__main__':
@@ -48,6 +48,7 @@ if __name__ == '__main__':
     dn_dt = differentiate(density, 'time')
     grad_flux_over_m = differentiate(particle_flux, 'x') / np.sqrt(masses)
     mass_source = compute_moment(compute_krook_sink_constant(ds), 'v_x', moment_order=0) \
+            + compute_moment(compute_krook_sink_adaptive(ds, density), 'v_x', moment_order=0) \
             + compute_moment(compute_kinetic_source(ds), 'v_x', moment_order=0)
     error = dn_dt + grad_flux_over_m - mass_source
 
