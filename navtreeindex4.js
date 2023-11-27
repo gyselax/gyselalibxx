@@ -1,10 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classdeprecated_1_1NonUniformBSplines.html#ac20bfa597bb3cafc0a6e7f152b421112":[12,0,1,3],
-"classdeprecated_1_1NonUniformBSplines.html#ac22ee2e750df202a77727151d8aea88b":[12,0,1,11],
-"classdeprecated_1_1NonUniformBSplines.html#aca28715948e3430c34af5beb5d435de9":[12,0,1,2],
-"classdeprecated_1_1Spline1D.html":[12,0,3],
-"classdeprecated_1_1Spline1D.html#a1c55d11d519aafed580bb1ec8b9cbe93":[12,0,3,14],
 "classdeprecated_1_1Spline1D.html#a2a4bf85c408fcb9ecba4382bb15512a5":[12,0,3,13],
 "classdeprecated_1_1Spline1D.html#a2bf4b4003db316555f6a26a1b5320991":[12,0,3,8],
 "classdeprecated_1_1Spline1D.html#a30bb87b9b9c3e8cfa231551fa9e5db24":[12,0,3,11],
@@ -205,9 +200,8 @@ var NAVTREEINDEX4 =
 "geometryXVx_2poisson_2chargedensitycalculator_8hpp_source.html":[13,0,2,3,0],
 "geometryXVx_2poisson_2electricfield_8hpp_source.html":[13,0,2,3,2],
 "geometryXVx_2poisson_2fftpoissonsolver_8hpp_source.html":[13,0,2,3,5],
-"geometryXVx_2poisson_2ichargedensitycalculator_8hpp_source.html":[13,0,2,3,7],
-"geometryXVx_2poisson_2ipoissonsolver_8hpp_source.html":[13,0,2,3,8],
-"geometryXVx_2poisson_2nullpoissonsolver_8hpp_source.html":[13,0,2,3,9],
+"geometryXVx_2poisson_2ipoissonsolver_8hpp_source.html":[13,0,2,3,7],
+"geometryXVx_2poisson_2nullpoissonsolver_8hpp_source.html":[13,0,2,3,8],
 "geometryXVx_2time__integration_2itimesolver_8hpp_source.html":[13,0,2,5,0],
 "geometryXVx_2time__integration_2predcorr_8hpp_source.html":[13,0,2,5,1],
 "geometryXYVxVy_2geometry_2geometry_8hpp_source.html":[13,0,3,0,0],
@@ -218,9 +212,8 @@ var NAVTREEINDEX4 =
 "geometryXYVxVy_2poisson_2chargedensitycalculator_8hpp_source.html":[13,0,3,2,0],
 "geometryXYVxVy_2poisson_2electricfield_8hpp_source.html":[13,0,3,2,1],
 "geometryXYVxVy_2poisson_2fftpoissonsolver_8hpp_source.html":[13,0,3,2,2],
-"geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp_source.html":[13,0,3,2,3],
-"geometryXYVxVy_2poisson_2ipoissonsolver_8hpp_source.html":[13,0,3,2,4],
-"geometryXYVxVy_2poisson_2nullpoissonsolver_8hpp_source.html":[13,0,3,2,5],
+"geometryXYVxVy_2poisson_2ipoissonsolver_8hpp_source.html":[13,0,3,2,3],
+"geometryXYVxVy_2poisson_2nullpoissonsolver_8hpp_source.html":[13,0,3,2,4],
 "geometryXYVxVy_2time__integration_2itimesolver_8hpp_source.html":[13,0,3,3,0],
 "geometryXYVxVy_2time__integration_2predcorr_8hpp_source.html":[13,0,3,3,1],
 "geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source.html":[13,0,3,4,1],
@@ -249,5 +242,12 @@ var NAVTREEINDEX4 =
 "matrix__banded_8hpp_source.html":[13,2,0,0,0,17],
 "matrix__center__block_8hpp_source.html":[13,2,0,0,0,18],
 "matrix__corner__block_8hpp_source.html":[13,2,0,0,0,19],
-"matrix__dense_8hpp_source.html":[13,2,0,0,0,20]
+"matrix__dense_8hpp_source.html":[13,2,0,0,0,20],
+"matrix__pds__tridiag_8hpp_source.html":[13,2,0,0,0,21],
+"matrix__periodic__banded_8hpp_source.html":[13,2,0,0,0,22],
+"null__boundary__value_8hpp_source.html":[13,2,0,0,0,23],
+"nulladvectionvx_8hpp_source.html":[13,0,0,4],
+"pages.html":[],
+"paraconfpp_8hpp_source.html":[13,0,5,0],
+"poisson__rhs__function_8hpp_source.html":[13,0,1,3,1]
 };
