@@ -72,10 +72,10 @@ var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCzarnyToCartesian.html#a093d9a72394c1d6a936d03b8e1471914",
-"classMatrix__Center__Block.html#af5f28a16f185009bae2f649b22aefc2c",
-"classSingleModePerturbInitialization.html#adb062b4a4a260854ef16eac6e2e8b8af",
-"classdeprecated_1_1Spline1D.html#a2a4bf85c408fcb9ecba4382bb15512a5",
-"polar__bsplines_8hpp_source.html"
+"classMatrix__Center__Block.html#a89a0fd2299f8c8c6a3eef7f9d5cc4dab",
+"classSingleModePerturbInitialization.html#a26987a033a77da3a4ef971303c334981",
+"classdeprecated_1_1NonUniformBSplines.html#ac20bfa597bb3cafc0a6e7f152b421112",
+"matrix__pds__tridiag_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

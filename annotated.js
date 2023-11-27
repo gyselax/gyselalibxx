@@ -72,6 +72,7 @@ var annotated =
     [ "IAdvectionSpatial", "classIAdvectionSpatial.html", "classIAdvectionSpatial" ],
     [ "IAdvectionVelocity", "classIAdvectionVelocity.html", "classIAdvectionVelocity" ],
     [ "IBoltzmannSolver", "classIBoltzmannSolver.html", "classIBoltzmannSolver" ],
+    [ "IChargeDensityCalculator", "classIChargeDensityCalculator.html", "classIChargeDensityCalculator" ],
     [ "IEquilibrium", "classIEquilibrium.html", "classIEquilibrium" ],
     [ "IFootFinder", "classIFootFinder.html", "classIFootFinder" ],
     [ "IInitialization", "classIInitialization.html", "classIInitialization" ],
