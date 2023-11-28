@@ -16,6 +16,7 @@
 #include "fftpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "species_info.hpp"
+#include "splinechargedensitycalculator.hpp"
 
 TEST(FftPoissonSolver, CosineSource)
 {
@@ -81,7 +82,8 @@ TEST(FftPoissonSolver, CosineSource)
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
 
-    FftPoissonSolver poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
+    SplineChargeDensityCalculator rhs(builder_vx, spline_vx_evaluator);
+    FftPoissonSolver poisson(builder_x, spline_x_evaluator, rhs);
     //FftPoissonSolverSplineless poisson;
     DFieldX electrostatic_potential(gridx);
     DFieldX electric_field(gridx);

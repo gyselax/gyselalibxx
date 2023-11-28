@@ -20,9 +20,8 @@
 FftPoissonSolver::FftPoissonSolver(
         SplineXBuilder const& spline_x_builder,
         SplineEvaluator<BSplinesX> const& spline_x_evaluator,
-        SplineVxBuilder const& spline_vx_builder,
-        SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
-    : m_compute_rho(spline_vx_builder, spline_vx_evaluator)
+        IChargeDensityCalculator const& compute_rho)
+    : m_compute_rho(compute_rho)
     , m_electric_field(spline_x_builder, spline_x_evaluator)
 {
 }

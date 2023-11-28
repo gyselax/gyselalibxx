@@ -3,8 +3,8 @@
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("poisson_${GEOMETRY_VARIANT}" STATIC
+    splinechargedensitycalculator.cpp
     chargedensitycalculator.cpp
-    chargedensitycalculator_splineless.cpp
     electricfield.cpp
     nullpoissonsolver.cpp
 )
@@ -34,7 +34,6 @@ endforeach()
 target_sources(poisson_xperiod_vx
     PRIVATE
         fftpoissonsolver.cpp
-        fftpoissonsolver_splinex.cpp
         femperiodicpoissonsolver.cpp
 )
 

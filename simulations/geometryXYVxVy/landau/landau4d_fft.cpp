@@ -250,8 +250,8 @@ int main(int argc, char** argv)
 
     ddc::init_fourier_space<RDimX, RDimY>(ddc::select<IDimX, IDimY>(meshSpXYVxVy));
 
-    FftPoissonSolver const
-            poisson(builder_xy, spline_xy_evaluator, builder_vxvy, spline_vxvy_evaluator);
+    ChargeDensityCalculator const rhs(builder_vxvy, spline_vxvy_evaluator);
+    FftPoissonSolver const poisson(builder_xy, spline_xy_evaluator, rhs);
 
     // Create predcorr operator
     PredCorr const predcorr(vlasov, poisson);
