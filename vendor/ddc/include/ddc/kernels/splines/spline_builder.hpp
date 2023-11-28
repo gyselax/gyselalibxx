@@ -96,11 +96,11 @@ public:
             std::optional<int> cols_per_par_chunk = std::nullopt,
             std::optional<int> par_chunks_per_seq_chunk = std::nullopt,
             std::optional<unsigned int> preconditionner_max_block_size = std::nullopt)
-        : m_interpolation_domain(interpolation_domain)
+        : matrix(nullptr)
+        , m_offset(compute_offset(interpolation_domain))
+        , m_interpolation_domain(interpolation_domain)
         , m_dx((ddc::discrete_space<BSplines>().rmax() - ddc::discrete_space<BSplines>().rmin())
                / ddc::discrete_space<BSplines>().ncells())
-        , matrix(nullptr)
-        , m_offset(compute_offset(interpolation_domain))
     {
         // Calculate block sizes
         int lower_block_size, upper_block_size;
@@ -237,7 +237,7 @@ void SplineBuilder<
     auto const& nbasis_proxy = ddc::discrete_space<bsplines_type>().nbasis();
     Kokkos::parallel_for(
             Kokkos::RangePolicy<exec_space>(0, 1),
-            KOKKOS_LAMBDA(const int unused_index) {
+            KOKKOS_LAMBDA(int) {
                 for (std::size_t i = 0; i < nbasis_proxy; ++i) {
                     spline(ddc::DiscreteElement<bsplines_type>(i))
                             = vals(ddc::DiscreteElement<interpolation_mesh_type>(i));
@@ -246,7 +246,7 @@ void SplineBuilder<
     if constexpr (bsplines_type::is_periodic()) {
         Kokkos::parallel_for(
                 Kokkos::RangePolicy<exec_space>(0, 1),
-                KOKKOS_LAMBDA(const int unused_index) {
+                KOKKOS_LAMBDA(int) {
                     spline(ddc::DiscreteElement<bsplines_type>(nbasis_proxy))
                             = spline(ddc::DiscreteElement<bsplines_type>(0));
                 });
@@ -275,8 +275,8 @@ void SplineBuilder<
 operator()(
         ddc::ChunkSpan<double, ddc::DiscreteDomain<bsplines_type>, Layout, MemorySpace> spline,
         ddc::ChunkSpan<double, interpolation_domain_type, Layout, MemorySpace> vals,
-        std::optional<ddc::CDSpan1D> const derivs_xmin,
-        std::optional<ddc::CDSpan1D> const derivs_xmax) const
+        [[maybe_unused]] std::optional<ddc::CDSpan1D> const derivs_xmin,
+        [[maybe_unused]] std::optional<ddc::CDSpan1D> const derivs_xmax) const
 {
     assert(vals.template extent<interpolation_mesh_type>()
            == ddc::discrete_space<BSplines>().nbasis() - s_nbe_xmin - s_nbe_xmax);
@@ -305,7 +305,7 @@ operator()(
     auto const& nbasis_proxy = ddc::discrete_space<bsplines_type>().nbasis();
     Kokkos::parallel_for(
             Kokkos::RangePolicy<exec_space>(0, 1),
-            KOKKOS_LAMBDA(const int unused_index) {
+            KOKKOS_LAMBDA(int) {
                 for (int i = s_nbc_xmin; i < s_nbc_xmin + offset_proxy; ++i) {
                     spline(ddc::DiscreteElement<bsplines_type>(i)) = 0.0;
                 }
@@ -335,7 +335,7 @@ operator()(
     if constexpr (bsplines_type::is_periodic()) {
         Kokkos::parallel_for(
                 Kokkos::RangePolicy<exec_space>(0, 1),
-                KOKKOS_LAMBDA(const int unused_index) {
+                KOKKOS_LAMBDA(int) {
                     if (offset_proxy != 0) {
                         for (int i = 0; i < offset_proxy; ++i) {
                             spline(ddc::DiscreteElement<bsplines_type>(i))
@@ -471,8 +471,8 @@ void SplineBuilder<
         BcXmax,
         Solver>::
         allocate_matrix(
-                int lower_block_size,
-                int upper_block_size,
+                [[maybe_unused]] int lower_block_size,
+                [[maybe_unused]] int upper_block_size,
                 std::optional<int> cols_per_par_chunk,
                 std::optional<int> par_chunks_per_seq_chunk,
                 std::optional<unsigned int> preconditionner_max_block_size)
@@ -481,13 +481,6 @@ void SplineBuilder<
     // No need for matrix assembly
     if constexpr (bsplines_type::degree() == 1)
         return;
-
-    int upper_band_width;
-    if (bsplines_type::is_uniform()) {
-        upper_band_width = bsplines_type::degree() / 2;
-    } else {
-        upper_band_width = bsplines_type::degree() - 1;
-    }
 
     if constexpr (bsplines_type::is_periodic()) {
         if (Solver == SplineSolver::GINKGO) {
