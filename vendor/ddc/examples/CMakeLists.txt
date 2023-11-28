@@ -2,6 +2,9 @@
 
 add_executable(heat_equation heat_equation.cpp)
 target_link_libraries(heat_equation PUBLIC DDC::DDC)
+if("${DDC_BUILD_PDI_WRAPPER}")
+  target_link_libraries(heat_equation PUBLIC DDC::PDI_Wrapper)
+endif()
 if("${BUILD_FFT_KERNEL}")
   add_executable(heat_equation_spectral heat_equation_spectral.cpp)
   target_link_libraries(heat_equation_spectral PUBLIC DDC::DDC)
