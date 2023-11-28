@@ -14,7 +14,6 @@
 
 #include "advection_domain.hpp"
 #include "bsl_advection_rp.hpp"
-#include "foot_finder.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -48,6 +47,7 @@
 
 #include "advection_maths_tools.hpp"
 #include "itimestepper.hpp"
+#include "spline_foot_finder.hpp"
 
 
 

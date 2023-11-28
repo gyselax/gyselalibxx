@@ -29,6 +29,5 @@ public:
     virtual DSpanRP operator()(
             DSpanRP allfdistribu,
             VectorDViewRP<RDimX, RDimY> advection_field,
-            double const dt)
-            = 0;
+            double const dt) const = 0;
 };

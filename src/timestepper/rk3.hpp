@@ -46,25 +46,14 @@ private:
     using DerivSpan = typename DerivChunk::span_type;
     using DerivView = typename DerivChunk::view_type;
 
-    ValChunk m_y_prime;
-    DerivChunk m_k1;
-    DerivChunk m_k2;
-    DerivChunk m_k3;
-    DerivChunk m_k_total;
+    Domain const m_dom;
 
 public:
     /**
      * @brief Create a RK3 object.
      * @param[in] dom The domain on which the points which evolve over time are defined.
      */
-    RK3(Domain dom)
-    {
-        m_k1 = DerivChunk(dom);
-        m_k2 = DerivChunk(dom);
-        m_k3 = DerivChunk(dom);
-        m_k_total = DerivChunk(dom);
-        m_y_prime = ValChunk(dom);
-    }
+    RK3(Domain dom) : m_dom(dom) {}
 
     /**
      * @brief Carry out one step of the Runge-Kutta scheme.
@@ -82,7 +71,7 @@ public:
      * @param[in] dy
      *     The function describing how the derivative of the evolve function is calculated.
      */
-    void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy)
+    void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy) const
     {
         static_assert(ddc::is_chunk_v<ValChunk>);
         update(y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
@@ -107,8 +96,14 @@ public:
             ValSpan y,
             double dt,
             std::function<void(DerivSpan, ValView)> dy,
-            std::function<void(ValSpan, DerivView, double)> y_update)
+            std::function<void(ValSpan, DerivView, double)> y_update) const
     {
+        ValChunk m_y_prime(m_dom);
+        DerivChunk m_k1(m_dom);
+        DerivChunk m_k2(m_dom);
+        DerivChunk m_k3(m_dom);
+        DerivChunk m_k_total(m_dom);
+
         // Save initial conditions
         copy(m_y_prime, y);
 
@@ -128,7 +123,7 @@ public:
         ddc::for_each(m_k_total.domain(), [&](Index const i) {
             // k_total = 2 * k2 - k1
             if constexpr (is_field_v<DerivChunk>) {
-                fill_k_total(i, 2 * m_k2(i) - m_k1(i));
+                fill_k_total(i, m_k_total, 2 * m_k2(i) - m_k1(i));
             } else {
                 m_k_total(i) = 2 * m_k2(i) - m_k1(i);
             }
@@ -148,7 +143,7 @@ public:
         ddc::for_each(m_k_total.domain(), [&](Index const i) {
             // k_total = k1 + 4 * k2 + k3
             if constexpr (is_field_v<DerivChunk>) {
-                fill_k_total(i, m_k1(i) + 4 * m_k2(i) + m_k3(i));
+                fill_k_total(i, m_k_total, m_k1(i) + 4 * m_k2(i) + m_k3(i));
             } else {
                 m_k_total(i) = m_k1(i) + 4 * m_k2(i) + m_k3(i);
             }
@@ -159,7 +154,7 @@ public:
     };
 
 private:
-    void copy(ValSpan copy_to, ValView copy_from)
+    void copy(ValSpan copy_to, ValView copy_from) const
     {
         if constexpr (is_field_v<ValSpan>) {
             ddcHelper::deepcopy(copy_to, copy_from);
@@ -169,7 +164,7 @@ private:
     }
 
     template <class... DDims>
-    void fill_k_total(Index i, ddc::Coordinate<DDims...> new_val)
+    void fill_k_total(Index i, DerivSpan m_k_total, ddc::Coordinate<DDims...> new_val) const
     {
         ((ddcHelper::get<DDims>(m_k_total)(i) = ddc::get<DDims>(new_val)), ...);
     }
