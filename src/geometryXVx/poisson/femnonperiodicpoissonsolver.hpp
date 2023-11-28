@@ -26,7 +26,7 @@ using UBSplinesX = UniformBSplines<RDimX, BSDegreeX>;
  */
 class FemNonPeriodicPoissonSolver : public IPoissonSolver
 {
-private:
+public:
     /**
      * A tag to represent the dimension where the quadrature points
      * are defined.

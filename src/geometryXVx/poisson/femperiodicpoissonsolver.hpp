@@ -22,7 +22,7 @@
  */
 class FemPeriodicPoissonSolver : public IPoissonSolver
 {
-private:
+public:
     struct QDimX
     {
     };
