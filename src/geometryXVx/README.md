@@ -5,7 +5,7 @@ The `geoemtryXVx` folder contains all the code describing methods which are spec
 <!-- - [boltzmann](./botzmann/README.md) - -->
 - [geometry](./geometry/README.md)  --> - All the dimension tags used for a simulation in the geometry.
 <!-- - [initialization](./initialization/README.md) - -->
-<!-- - [poisson](./poisson/README.md) - Code describing the polar Poisson solver. -->
+- [poisson](./poisson/README.md) - Code describing the polar Poisson solver.
 <!-- - [rhs](./rhs/README.md) - Code describing the operators on the right hand side of the Boltzmann equation; namely sources, sinks and collisions.-->
 <!-- - [time_integration](./time_integration/README.md) - -->
 <!-- - [utils](./utils/README.md) - -->

@@ -15,6 +15,7 @@
 #include "femnonperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "species_info.hpp"
+#include "splinechargedensitycalculator.hpp"
 
 TEST(FemNonPeriodicPoissonSolver, Ordering)
 {
@@ -74,8 +75,8 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
 
-    FemNonPeriodicPoissonSolver
-            poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
+    SplineChargeDensityCalculator rhs(builder_vx, spline_vx_evaluator);
+    FemNonPeriodicPoissonSolver poisson(builder_x, spline_x_evaluator, rhs);
 
     DFieldX electrostatic_potential(gridx);
     DFieldX electric_field(gridx);
