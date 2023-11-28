@@ -43,17 +43,14 @@ private:
     using DerivSpan = typename DerivChunk::span_type;
     using DerivView = typename DerivChunk::view_type;
 
-    DerivChunk m_k1;
+    Domain const m_dom;
 
 public:
     /**
      * @brief Create a Euler object.
      * @param[in] dom The domain on which the points which evolve over time are defined.
      */
-    Euler(Domain dom)
-    {
-        m_k1 = DerivChunk(dom);
-    }
+    Euler(Domain dom) : m_dom(dom) {}
 
     /**
      * @brief Carry out one step of the explicit Euler scheme.
@@ -71,7 +68,7 @@ public:
      * @param[in] dy
      *     The function describing how the derivative of the evolve function is calculated.
      */
-    void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy)
+    void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy) const
     {
         static_assert(ddc::is_chunk_v<ValChunk>);
         update(y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
@@ -96,8 +93,10 @@ public:
             ValSpan y,
             double dt,
             std::function<void(DerivSpan, ValView)> dy,
-            std::function<void(ValSpan, DerivView, double)> y_update)
+            std::function<void(ValSpan, DerivView, double)> y_update) const
     {
+        DerivChunk m_k1(m_dom);
+
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
         dy(m_k1, y);
