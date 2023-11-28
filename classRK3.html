@@ -124,12 +124,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab75113e8885dfdbc7c41494db8d2f269"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRK3.html#ab75113e8885dfdbc7c41494db8d2f269">RK3</a> (Domain dom)</td></tr>
 <tr class="memdesc:ab75113e8885dfdbc7c41494db8d2f269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classRK3.html" title="A class which provides an implementation of a third-order Runge-Kutta method.">RK3</a> object.  <a href="classRK3.html#ab75113e8885dfdbc7c41494db8d2f269">More...</a><br /></td></tr>
 <tr class="separator:ab75113e8885dfdbc7c41494db8d2f269"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01fdb07a9981643ef32c8ced7482add0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRK3.html#a01fdb07a9981643ef32c8ced7482add0">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy)</td></tr>
-<tr class="memdesc:a01fdb07a9981643ef32c8ced7482add0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Runge-Kutta scheme.  <a href="classRK3.html#a01fdb07a9981643ef32c8ced7482add0">More...</a><br /></td></tr>
-<tr class="separator:a01fdb07a9981643ef32c8ced7482add0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e4820e3a0ac6d79f79f3c5c1badb162"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRK3.html#a6e4820e3a0ac6d79f79f3c5c1badb162">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update)</td></tr>
-<tr class="memdesc:a6e4820e3a0ac6d79f79f3c5c1badb162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Runge-Kutta scheme.  <a href="classRK3.html#a6e4820e3a0ac6d79f79f3c5c1badb162">More...</a><br /></td></tr>
-<tr class="separator:a6e4820e3a0ac6d79f79f3c5c1badb162"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45cc74d736d44303fb755d77976bf14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRK3.html#ab45cc74d736d44303fb755d77976bf14">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</td></tr>
+<tr class="memdesc:ab45cc74d736d44303fb755d77976bf14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Runge-Kutta scheme.  <a href="classRK3.html#ab45cc74d736d44303fb755d77976bf14">More...</a><br /></td></tr>
+<tr class="separator:ab45cc74d736d44303fb755d77976bf14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c2ae1f09b15e9896e588b1544661d44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRK3.html#a1c2ae1f09b15e9896e588b1544661d44">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update) const</td></tr>
+<tr class="memdesc:a1c2ae1f09b15e9896e588b1544661d44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Runge-Kutta scheme.  <a href="classRK3.html#a1c2ae1f09b15e9896e588b1544661d44">More...</a><br /></td></tr>
+<tr class="separator:a1c2ae1f09b15e9896e588b1544661d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class ValChunk, class DerivChunk = ValChunk&gt;<br />
@@ -183,8 +183,8 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a01fdb07a9981643ef32c8ced7482add0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01fdb07a9981643ef32c8ced7482add0">&#9670;&nbsp;</a></span>update() <span class="overload">[1/2]</span></h2>
+<a id="ab45cc74d736d44303fb755d77976bf14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab45cc74d736d44303fb755d77976bf14">&#9670;&nbsp;</a></span>update() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -215,7 +215,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -238,8 +238,8 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 
 </div>
 </div>
-<a id="a6e4820e3a0ac6d79f79f3c5c1badb162"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e4820e3a0ac6d79f79f3c5c1badb162">&#9670;&nbsp;</a></span>update() <span class="overload">[2/2]</span></h2>
+<a id="a1c2ae1f09b15e9896e588b1544661d44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c2ae1f09b15e9896e588b1544661d44">&#9670;&nbsp;</a></span>update() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -276,7 +276,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>

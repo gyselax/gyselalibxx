@@ -131,60 +131,59 @@ $(document).ready(function(){initNavTree('rk2_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">using</span> DerivSpan = <span class="keyword">typename</span> DerivChunk::span_type;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">using</span> DerivView = <span class="keyword">typename</span> DerivChunk::view_type;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    DerivChunk m_k1;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    DerivChunk m_k2;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ValChunk m_y_prime;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classRK2.html#a29590ce29977600f0a17c7cdfcbb3584">   58</a></span>&#160;    <a class="code" href="classRK2.html#a29590ce29977600f0a17c7cdfcbb3584">RK2</a>(Domain dom)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        m_k1 = DerivChunk(dom);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        m_k2 = DerivChunk(dom);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        m_y_prime = ValChunk(dom);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classRK2.html#adacd01cd49ea06df08c9b76df33f9227">   81</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRK2.html#adacd01cd49ea06df08c9b76df33f9227">update</a>(ValSpan y, <span class="keywordtype">double</span> dt, std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy)</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        static_assert(ddc::is_chunk_v&lt;ValChunk&gt;);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="classRK2.html#adacd01cd49ea06df08c9b76df33f9227">update</a>(y, dt, dy, [&amp;](ValSpan y, DerivView dy, <span class="keywordtype">double</span> dt) {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            ddc::for_each(y.domain(), [&amp;](Index <span class="keyword">const</span> idx) { y(idx) = y(idx) + dy(idx) * dt; });</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        });</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classRK2.html#a9cf0d591ac1e741f04120a85599a4644">  102</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRK2.html#a9cf0d591ac1e741f04120a85599a4644">update</a>(</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            ValSpan y,</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordtype">double</span> dt,</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy,</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(ValSpan, DerivView, <span class="keywordtype">double</span>)&gt; y_update)</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="comment">// Save initial conditions</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">if</span> constexpr (is_field_v&lt;ValChunk&gt;) {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            ddcHelper::deepcopy(m_y_prime, y);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            ddc::deepcopy(m_y_prime, y);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="comment">// --------- Calculate k1 ------------</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="comment">// Calculate k1 = f(y)</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        dy(m_k1, y);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="comment">// --------- Calculate k2 ------------</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="comment">// Calculate y_new := y_n + h/2*k_1</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        y_update(m_y_prime, m_k1, 0.5 * dt);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="comment">// Calculate k2 = f(y_new)</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        dy(m_k2, m_y_prime);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="comment">// ----------- Update y --------------</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="comment">// Calculate y_{n+1} := y_n + h*k_2</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        y_update(y, m_k2, dt);</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    };</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    Domain <span class="keyword">const</span> m_dom;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classRK2.html#a29590ce29977600f0a17c7cdfcbb3584">   57</a></span>&#160;    <a class="code" href="classRK2.html#a29590ce29977600f0a17c7cdfcbb3584">RK2</a>(Domain dom) : m_dom(dom) {}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">   75</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">update</a>(ValSpan y, <span class="keywordtype">double</span> dt, std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        static_assert(ddc::is_chunk_v&lt;ValChunk&gt;);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">update</a>(y, dt, dy, [&amp;](ValSpan y, DerivView dy, <span class="keywordtype">double</span> dt) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            ddc::for_each(y.domain(), [&amp;](Index <span class="keyword">const</span> idx) { y(idx) = y(idx) + dy(idx) * dt; });</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        });</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classRK2.html#ae1cd05ca1c4acfa3e15876eec0e18678">   96</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRK2.html#ae1cd05ca1c4acfa3e15876eec0e18678">update</a>(</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            ValSpan y,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keywordtype">double</span> dt,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(ValSpan, DerivView, <span class="keywordtype">double</span>)&gt; y_update)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        DerivChunk m_k1(m_dom);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        DerivChunk m_k2(m_dom);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        ValChunk m_y_prime(m_dom);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="comment">// Save initial conditions</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">if</span> constexpr (is_field_v&lt;ValChunk&gt;) {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            ddcHelper::deepcopy(m_y_prime, y);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            ddc::deepcopy(m_y_prime, y);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="comment">// --------- Calculate k1 ------------</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="comment">// Calculate k1 = f(y)</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        dy(m_k1, y);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="comment">// --------- Calculate k2 ------------</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="comment">// Calculate y_new := y_n + h/2*k_1</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        y_update(m_y_prime, m_k1, 0.5 * dt);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="comment">// Calculate k2 = f(y_new)</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        dy(m_k2, m_y_prime);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="comment">// ----------- Update y --------------</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="comment">// Calculate y_{n+1} := y_n + h*k_2</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        y_update(y, m_k2, dt);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    };</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;};</div>
 <div class="ttc" id="aclassITimeStepper_html"><div class="ttname"><a href="classITimeStepper.html">ITimeStepper</a></div><div class="ttdef"><b>Definition:</b> itimestepper.hpp:7</div></div>
 <div class="ttc" id="aclassRK2_html"><div class="ttname"><a href="classRK2.html">RK2</a></div><div class="ttdoc">A class which provides an implementation of a second-order Runge-Kutta method.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:31</div></div>
-<div class="ttc" id="aclassRK2_html_a29590ce29977600f0a17c7cdfcbb3584"><div class="ttname"><a href="classRK2.html#a29590ce29977600f0a17c7cdfcbb3584">RK2::RK2</a></div><div class="ttdeci">RK2(Domain dom)</div><div class="ttdoc">Create a RK2 object.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:58</div></div>
-<div class="ttc" id="aclassRK2_html_a9cf0d591ac1e741f04120a85599a4644"><div class="ttname"><a href="classRK2.html#a9cf0d591ac1e741f04120a85599a4644">RK2::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update)</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:102</div></div>
-<div class="ttc" id="aclassRK2_html_adacd01cd49ea06df08c9b76df33f9227"><div class="ttname"><a href="classRK2.html#adacd01cd49ea06df08c9b76df33f9227">RK2::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy)</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:81</div></div>
+<div class="ttc" id="aclassRK2_html_a29590ce29977600f0a17c7cdfcbb3584"><div class="ttname"><a href="classRK2.html#a29590ce29977600f0a17c7cdfcbb3584">RK2::RK2</a></div><div class="ttdeci">RK2(Domain dom)</div><div class="ttdoc">Create a RK2 object.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:57</div></div>
+<div class="ttc" id="aclassRK2_html_aa215475ac2ff63e25d2451175cff5759"><div class="ttname"><a href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">RK2::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:75</div></div>
+<div class="ttc" id="aclassRK2_html_ae1cd05ca1c4acfa3e15876eec0e18678"><div class="ttname"><a href="classRK2.html#ae1cd05ca1c4acfa3e15876eec0e18678">RK2::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:96</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

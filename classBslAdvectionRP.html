@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: BslAdvectionRP&lt; AdvectionDomain, TimeStepper &gt; Class Template Reference</title>
+<title>Gyselalib++: BslAdvectionRP&lt; FootFinder &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,37 +103,34 @@ $(document).ready(function(){initNavTree('classBslAdvectionRP.html',''); initRes
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classBslAdvectionRP-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">BslAdvectionRP&lt; AdvectionDomain, TimeStepper &gt; Class Template Reference</div>  </div>
+<div class="title">BslAdvectionRP&lt; FootFinder &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Define an advection operator on 2D \((r, \theta)\) domain.  
  <a href="classBslAdvectionRP.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for BslAdvectionRP&lt; AdvectionDomain, TimeStepper &gt;:</div>
+Inheritance diagram for BslAdvectionRP&lt; FootFinder &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classBslAdvectionRP.png" usemap="#BslAdvectionRP_3C_20AdvectionDomain_2C_20TimeStepper_20_3E_map" alt=""/>
-  <map id="BslAdvectionRP_3C_20AdvectionDomain_2C_20TimeStepper_20_3E_map" name="BslAdvectionRP_3C_20AdvectionDomain_2C_20TimeStepper_20_3E_map">
-<area href="classIAdvectionRP.html" title="Define the base class of 2D advection operators in polar domain." alt="IAdvectionRP" shape="rect" coords="0,0,304,24"/>
+  <img src="classBslAdvectionRP.png" usemap="#BslAdvectionRP_3C_20FootFinder_20_3E_map" alt=""/>
+  <map id="BslAdvectionRP_3C_20FootFinder_20_3E_map" name="BslAdvectionRP_3C_20FootFinder_20_3E_map">
+<area href="classIAdvectionRP.html" title="Define the base class of 2D advection operators in polar domain." alt="IAdvectionRP" shape="rect" coords="0,0,188,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6449b5f6493d2963def373147d6696b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRP.html#a6449b5f6493d2963def373147d6696b7">BslAdvectionRP</a> (IDomainRP const &amp;grid, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;advection_domain, <a class="el" href="classPreallocatableSplineInterpolatorRP.html">PreallocatableSplineInterpolatorRP</a> const &amp;function_interpolator, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a> const &amp;advection_builder, <a class="el" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> &amp;advection_evaluator, TimeStepper &amp;time_stepper)</td></tr>
-<tr class="memdesc:a6449b5f6493d2963def373147d6696b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an advection operator.  <a href="classBslAdvectionRP.html#a6449b5f6493d2963def373147d6696b7">More...</a><br /></td></tr>
-<tr class="separator:a6449b5f6493d2963def373147d6696b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46c2a44e36aa5b8623ba3641cd7bcb4e"><td class="memItemLeft" align="right" valign="top">DSpanRP&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRP.html#a46c2a44e36aa5b8623ba3641cd7bcb4e">operator()</a> (DSpanRP allfdistribu, <a class="el" href="classVectorFieldSpan.html">VectorDViewRP</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt; advection_field, double const dt)</td></tr>
-<tr class="memdesc:a46c2a44e36aa5b8623ba3641cd7bcb4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a ChunkSpan to the advected function.  <a href="classBslAdvectionRP.html#a46c2a44e36aa5b8623ba3641cd7bcb4e">More...</a><br /></td></tr>
-<tr class="separator:a46c2a44e36aa5b8623ba3641cd7bcb4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a3c0e17469b7d48472f7825c035cc5d"><td class="memItemLeft" align="right" valign="top">SpanRP&lt; CoordRP &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRP.html#a5a3c0e17469b7d48472f7825c035cc5d">get_feet</a> ()</td></tr>
-<tr class="memdesc:a5a3c0e17469b7d48472f7825c035cc5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of current characteristic feet.  <a href="classBslAdvectionRP.html#a5a3c0e17469b7d48472f7825c035cc5d">More...</a><br /></td></tr>
-<tr class="separator:a5a3c0e17469b7d48472f7825c035cc5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f6527cb344fc583502006d85f67b3e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRP.html#a9f6527cb344fc583502006d85f67b3e2">BslAdvectionRP</a> (<a class="el" href="classPreallocatableSplineInterpolatorRP.html">PreallocatableSplineInterpolatorRP</a> const &amp;function_interpolator, FootFinder const &amp;foot_finder)</td></tr>
+<tr class="memdesc:a9f6527cb344fc583502006d85f67b3e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an advection operator.  <a href="classBslAdvectionRP.html#a9f6527cb344fc583502006d85f67b3e2">More...</a><br /></td></tr>
+<tr class="separator:a9f6527cb344fc583502006d85f67b3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ff032788d11e429fdfe4d37122a85ec"><td class="memItemLeft" align="right" valign="top">DSpanRP&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRP.html#a6ff032788d11e429fdfe4d37122a85ec">operator()</a> (DSpanRP allfdistribu, <a class="el" href="classVectorFieldSpan.html">VectorDViewRP</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt; advection_field, double dt) const</td></tr>
+<tr class="memdesc:a6ff032788d11e429fdfe4d37122a85ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a ChunkSpan to the advected function.  <a href="classBslAdvectionRP.html#a6ff032788d11e429fdfe4d37122a85ec">More...</a><br /></td></tr>
+<tr class="separator:a6ff032788d11e429fdfe4d37122a85ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class AdvectionDomain, class TimeStepper&gt;<br />
-class BslAdvectionRP&lt; AdvectionDomain, TimeStepper &gt;</h3>
+<div class="textblock"><h3>template&lt;class FootFinder&gt;<br />
+class BslAdvectionRP&lt; FootFinder &gt;</h3>
 
 <p>Define an advection operator on 2D \((r, \theta)\) domain. </p>
 <p>The advection operator uses a semi-Lagrangian method. The method is based on the property that the solution is constant along the characteristics.</p>
@@ -149,52 +146,28 @@ class BslAdvectionRP&lt; AdvectionDomain, TimeStepper &gt;</h3>
 <dd>
 <a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a6449b5f6493d2963def373147d6696b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6449b5f6493d2963def373147d6696b7">&#9670;&nbsp;</a></span>BslAdvectionRP()</h2>
+<a id="a9f6527cb344fc583502006d85f67b3e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f6527cb344fc583502006d85f67b3e2">&#9670;&nbsp;</a></span>BslAdvectionRP()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class AdvectionDomain , class TimeStepper &gt; </div>
+template&lt;class FootFinder &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classBslAdvectionRP.html">BslAdvectionRP</a>&lt; <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a>, TimeStepper &gt;::<a class="el" href="classBslAdvectionRP.html">BslAdvectionRP</a> </td>
+          <td class="memname"><a class="el" href="classBslAdvectionRP.html">BslAdvectionRP</a>&lt; FootFinder &gt;::<a class="el" href="classBslAdvectionRP.html">BslAdvectionRP</a> </td>
           <td>(</td>
-          <td class="paramtype">IDomainRP const &amp;&#160;</td>
-          <td class="paramname"><em>grid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;&#160;</td>
-          <td class="paramname"><em>advection_domain</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="classPreallocatableSplineInterpolatorRP.html">PreallocatableSplineInterpolatorRP</a> const &amp;&#160;</td>
           <td class="paramname"><em>function_interpolator</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a> const &amp;&#160;</td>
-          <td class="paramname"><em>advection_builder</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> &amp;&#160;</td>
-          <td class="paramname"><em>advection_evaluator</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TimeStepper &amp;&#160;</td>
-          <td class="paramname"><em>time_stepper</em>&#160;</td>
+          <td class="paramtype">FootFinder const &amp;&#160;</td>
+          <td class="paramname"><em>foot_finder</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -212,12 +185,14 @@ template&lt;class AdvectionDomain , class TimeStepper &gt; </div>
 <p>Instantiate an advection operator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">grid</td><td>The domain on which the advected function is defined. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">advection_domain</td><td>The advection domain where the characteristic feet are computed. The <a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> object contains the Mapping information. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">function_interpolator</td><td>The polar interpolator to interpolate the function once the characteristic computed. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">advection_builder</td><td>The B-splines builder used to define the B-splines coefficients of the advection field. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">advection_evaluator</td><td>The B-splines evaluator used to evaluate the advection field. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">time_stepper</td><td>The time integration method used for the computation of the characteristic feet. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">foot_finder</td><td>An <a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a> which computes the characteristic feet.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname"><a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a></td><td>A child class of <a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -225,19 +200,19 @@ template&lt;class AdvectionDomain , class TimeStepper &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a46c2a44e36aa5b8623ba3641cd7bcb4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46c2a44e36aa5b8623ba3641cd7bcb4e">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a6ff032788d11e429fdfe4d37122a85ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff032788d11e429fdfe4d37122a85ec">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class AdvectionDomain , class TimeStepper &gt; </div>
+template&lt;class FootFinder &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DSpanRP <a class="el" href="classBslAdvectionRP.html">BslAdvectionRP</a>&lt; <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a>, TimeStepper &gt;::operator() </td>
+          <td class="memname">DSpanRP <a class="el" href="classBslAdvectionRP.html">BslAdvectionRP</a>&lt; FootFinder &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">DSpanRP&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
@@ -251,13 +226,13 @@ template&lt;class AdvectionDomain , class TimeStepper &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double const&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>dt</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -278,38 +253,7 @@ template&lt;class AdvectionDomain , class TimeStepper &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A ChunkSpan to allfdistribu advected on the time step given. </dd></dl>
 
-<p>Implements <a class="el" href="classIAdvectionRP.html#accd095b34b600cd8bf7a691de046fbd3">IAdvectionRP</a>.</p>
-
-</div>
-</div>
-<a id="a5a3c0e17469b7d48472f7825c035cc5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a3c0e17469b7d48472f7825c035cc5d">&#9670;&nbsp;</a></span>get_feet()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class AdvectionDomain , class TimeStepper &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">SpanRP&lt;CoordRP&gt; <a class="el" href="classBslAdvectionRP.html">BslAdvectionRP</a>&lt; <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a>, TimeStepper &gt;::get_feet </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the values of current characteristic feet. </p>
-<p>This function must be called once advection computed, so once the operator() called.</p>
-<dl class="section return"><dt>Returns</dt><dd>A ChunkSpan to the computed values of the characteristic feet. </dd></dl>
+<p>Implements <a class="el" href="classIAdvectionRP.html#ac3294f0513c2b2e89e5fc1f64fc19ac7">IAdvectionRP</a>.</p>
 
 </div>
 </div>

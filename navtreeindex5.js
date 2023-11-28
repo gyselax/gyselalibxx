@@ -1,6 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"polar__bsplines_8hpp_source.html":[13,2,0,0,0,24],
 "polar__poisson_2params_8yaml_8hpp_source.html":[13,1,0,2,0],
 "polar__poisson_2test__cases_8hpp_source.html":[13,1,0,2,1],
 "polar__spline_8hpp_source.html":[13,2,0,0,0,25],
@@ -34,6 +33,7 @@ var NAVTREEINDEX5 =
 "spline__error__bounds_8hpp_source.html":[13,2,0,1,3],
 "spline__evaluator_8hpp_source.html":[13,2,0,0,0,31],
 "spline__evaluator__2d_8hpp_source.html":[13,2,0,0,0,32],
+"spline__foot__finder_8hpp_source.html":[13,0,1,0,10],
 "spline__interpolator_8hpp_source.html":[13,0,4,3],
 "spline__interpolator__2d__rp_8hpp_source.html":[13,0,1,2,1],
 "spline__quadrature_8hpp.html":[13,0,6,4],

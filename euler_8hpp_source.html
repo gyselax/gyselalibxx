@@ -131,41 +131,40 @@ $(document).ready(function(){initNavTree('euler_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> DerivSpan = <span class="keyword">typename</span> DerivChunk::span_type;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">using</span> DerivView = <span class="keyword">typename</span> DerivChunk::view_type;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    DerivChunk m_k1;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    Domain <span class="keyword">const</span> m_dom;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">   53</a></span>&#160;    <a class="code" href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">Euler</a>(Domain dom)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        m_k1 = DerivChunk(dom);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classEuler.html#ae7bb85ef275d459c91e4c9de600b0baf">   74</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEuler.html#ae7bb85ef275d459c91e4c9de600b0baf">update</a>(ValSpan y, <span class="keywordtype">double</span> dt, std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        static_assert(ddc::is_chunk_v&lt;ValChunk&gt;);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="classEuler.html#ae7bb85ef275d459c91e4c9de600b0baf">update</a>(y, dt, dy, [&amp;](ValSpan y, DerivView dy, <span class="keywordtype">double</span> dt) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            ddc::for_each(y.domain(), [&amp;](Index <span class="keyword">const</span> idx) { y(idx) = y(idx) + dy(idx) * dt; });</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        });</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classEuler.html#a7b60290cac35ff67b94d619da9c77750">   95</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEuler.html#a7b60290cac35ff67b94d619da9c77750">update</a>(</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            ValSpan y,</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordtype">double</span> dt,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy,</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(ValSpan, DerivView, <span class="keywordtype">double</span>)&gt; y_update)</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="comment">// --------- Calculate k1 ------------</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="comment">// Calculate k1 = f(y_n)</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        dy(m_k1, y);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="comment">// ----------- Update y --------------</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="comment">// Calculate y_new := y_n + h*k_1</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        y_update(y, m_k1, dt);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    };</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">   53</a></span>&#160;    <a class="code" href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">Euler</a>(Domain dom) : m_dom(dom) {}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">   71</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">update</a>(ValSpan y, <span class="keywordtype">double</span> dt, std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        static_assert(ddc::is_chunk_v&lt;ValChunk&gt;);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <a class="code" href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">update</a>(y, dt, dy, [&amp;](ValSpan y, DerivView dy, <span class="keywordtype">double</span> dt) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            ddc::for_each(y.domain(), [&amp;](Index <span class="keyword">const</span> idx) { y(idx) = y(idx) + dy(idx) * dt; });</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        });</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classEuler.html#a38769dab3aaec635edbde16cedcccd17">   92</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEuler.html#a38769dab3aaec635edbde16cedcccd17">update</a>(</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            ValSpan y,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordtype">double</span> dt,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(ValSpan, DerivView, <span class="keywordtype">double</span>)&gt; y_update)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        DerivChunk m_k1(m_dom);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="comment">// --------- Calculate k1 ------------</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="comment">// Calculate k1 = f(y_n)</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        dy(m_k1, y);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">// ----------- Update y --------------</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="comment">// Calculate y_new := y_n + h*k_1</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        y_update(y, m_k1, dt);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    };</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
 <div class="ttc" id="aclassEuler_html"><div class="ttname"><a href="classEuler.html">Euler</a></div><div class="ttdoc">A class which provides an implementation of an explicit Euler method.</div><div class="ttdef"><b>Definition:</b> euler.hpp:28</div></div>
-<div class="ttc" id="aclassEuler_html_a7b60290cac35ff67b94d619da9c77750"><div class="ttname"><a href="classEuler.html#a7b60290cac35ff67b94d619da9c77750">Euler::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update)</div><div class="ttdoc">Carry out one step of the explicit Euler scheme.</div><div class="ttdef"><b>Definition:</b> euler.hpp:95</div></div>
+<div class="ttc" id="aclassEuler_html_a38769dab3aaec635edbde16cedcccd17"><div class="ttname"><a href="classEuler.html#a38769dab3aaec635edbde16cedcccd17">Euler::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update) const</div><div class="ttdoc">Carry out one step of the explicit Euler scheme.</div><div class="ttdef"><b>Definition:</b> euler.hpp:92</div></div>
 <div class="ttc" id="aclassEuler_html_a8019703dccd8358b9b221818fa51bdcb"><div class="ttname"><a href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">Euler::Euler</a></div><div class="ttdeci">Euler(Domain dom)</div><div class="ttdoc">Create a Euler object.</div><div class="ttdef"><b>Definition:</b> euler.hpp:53</div></div>
-<div class="ttc" id="aclassEuler_html_ae7bb85ef275d459c91e4c9de600b0baf"><div class="ttname"><a href="classEuler.html#ae7bb85ef275d459c91e4c9de600b0baf">Euler::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy)</div><div class="ttdoc">Carry out one step of the explicit Euler scheme.</div><div class="ttdef"><b>Definition:</b> euler.hpp:74</div></div>
+<div class="ttc" id="aclassEuler_html_ab0df03fe21a6b3894fb88d3119ed88f8"><div class="ttname"><a href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">Euler::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</div><div class="ttdoc">Carry out one step of the explicit Euler scheme.</div><div class="ttdef"><b>Definition:</b> euler.hpp:71</div></div>
 <div class="ttc" id="aclassITimeStepper_html"><div class="ttname"><a href="classITimeStepper.html">ITimeStepper</a></div><div class="ttdef"><b>Definition:</b> itimestepper.hpp:7</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

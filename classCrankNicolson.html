@@ -124,12 +124,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2b58f2e418530fa5218d4631b00faa4f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a2b58f2e418530fa5218d4631b00faa4f">CrankNicolson</a> (Domain dom, int const counter=int(20), double const epsilon=1e-12)</td></tr>
 <tr class="memdesc:a2b58f2e418530fa5218d4631b00faa4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classCrankNicolson.html" title="A class which provides an implementation of a Crank-Nicolson method.">CrankNicolson</a> object.  <a href="classCrankNicolson.html#a2b58f2e418530fa5218d4631b00faa4f">More...</a><br /></td></tr>
 <tr class="separator:a2b58f2e418530fa5218d4631b00faa4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98921c85796091eb1f570f71d02cddde"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a98921c85796091eb1f570f71d02cddde">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy)</td></tr>
-<tr class="memdesc:a98921c85796091eb1f570f71d02cddde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#a98921c85796091eb1f570f71d02cddde">More...</a><br /></td></tr>
-<tr class="separator:a98921c85796091eb1f570f71d02cddde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0743bf0dec509a4d8a7dacfc053b25d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#aa0743bf0dec509a4d8a7dacfc053b25d">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update)</td></tr>
-<tr class="memdesc:aa0743bf0dec509a4d8a7dacfc053b25d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#aa0743bf0dec509a4d8a7dacfc053b25d">More...</a><br /></td></tr>
-<tr class="separator:aa0743bf0dec509a4d8a7dacfc053b25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32ec24437204217997fa7f7da514bcb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a32ec24437204217997fa7f7da514bcb2">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</td></tr>
+<tr class="memdesc:a32ec24437204217997fa7f7da514bcb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#a32ec24437204217997fa7f7da514bcb2">More...</a><br /></td></tr>
+<tr class="separator:a32ec24437204217997fa7f7da514bcb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99af254ac9141120eaa40387fb53d050"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a99af254ac9141120eaa40387fb53d050">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update) const</td></tr>
+<tr class="memdesc:a99af254ac9141120eaa40387fb53d050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#a99af254ac9141120eaa40387fb53d050">More...</a><br /></td></tr>
+<tr class="separator:a99af254ac9141120eaa40387fb53d050"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class ValChunk, class DerivChunk = ValChunk&gt;<br />
@@ -197,8 +197,8 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a98921c85796091eb1f570f71d02cddde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98921c85796091eb1f570f71d02cddde">&#9670;&nbsp;</a></span>update() <span class="overload">[1/2]</span></h2>
+<a id="a32ec24437204217997fa7f7da514bcb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32ec24437204217997fa7f7da514bcb2">&#9670;&nbsp;</a></span>update() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -229,7 +229,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -252,8 +252,8 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 
 </div>
 </div>
-<a id="aa0743bf0dec509a4d8a7dacfc053b25d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0743bf0dec509a4d8a7dacfc053b25d">&#9670;&nbsp;</a></span>update() <span class="overload">[2/2]</span></h2>
+<a id="a99af254ac9141120eaa40387fb53d050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99af254ac9141120eaa40387fb53d050">&#9670;&nbsp;</a></span>update() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -290,7 +290,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>

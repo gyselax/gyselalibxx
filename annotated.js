@@ -146,6 +146,7 @@ var annotated =
     [ "SplineErrorBounds", "classSplineErrorBounds.html", "classSplineErrorBounds" ],
     [ "SplineEvaluator", "classSplineEvaluator.html", "classSplineEvaluator" ],
     [ "SplineEvaluator2D", "classSplineEvaluator2D.html", "classSplineEvaluator2D" ],
+    [ "SplineFootFinder", "classSplineFootFinder.html", "classSplineFootFinder" ],
     [ "SplineInterpolator", "classSplineInterpolator.html", "classSplineInterpolator" ],
     [ "SplineInterpolatorRP", "classSplineInterpolatorRP.html", "classSplineInterpolatorRP" ],
     [ "SplitRightHandSideSolver", "classSplitRightHandSideSolver.html", "classSplitRightHandSideSolver" ],

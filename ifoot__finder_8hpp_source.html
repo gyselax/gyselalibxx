@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Member List</title>
+<title>Gyselalib++: /__w/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection/ifoot_finder.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classIFootFinder.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('ifoot__finder_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,19 +100,34 @@ $(document).ready(function(){initNavTree('classIFootFinder.html',''); initResiza
 
 <div class="header">
   <div class="headertitle">
-<div class="title">IFootFinder Member List</div>  </div>
+<div class="title">ifoot_finder.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>This is the complete list of members for <a class="el" href="classIFootFinder.html">IFootFinder</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classIFootFinder.html#a430abc49f8be3d1315d3b270c33c2860">operator()</a>(SpanRP&lt; CoordRP &gt; feet, VectorDViewRP&lt; RDimX, RDimY &gt; advection_field, double dt) const =0</td><td class="entry"><a class="el" href="classIFootFinder.html">IFootFinder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>~IFootFinder</b>()=default (defined in <a class="el" href="classIFootFinder.html">IFootFinder</a>)</td><td class="entry"><a class="el" href="classIFootFinder.html">IFootFinder</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-</table></div><!-- contents -->
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classIFootFinder.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIFootFinder.html">IFootFinder</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIFootFinder.html">IFootFinder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classIFootFinder.html#a430abc49f8be3d1315d3b270c33c2860">   28</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classIFootFinder.html#a430abc49f8be3d1315d3b270c33c2860">operator()</a>(</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            SpanRP&lt;CoordRP&gt; feet,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <a class="code" href="classVectorFieldSpan.html">VectorDViewRP&lt;RDimX, RDimY&gt;</a> advection_field,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="ttc" id="aclassIFootFinder_html"><div class="ttname"><a href="classIFootFinder.html">IFootFinder</a></div><div class="ttdoc">Define a base class for all the time integration methods used for the advection.</div><div class="ttdef"><b>Definition:</b> ifoot_finder.hpp:13</div></div>
+<div class="ttc" id="aclassIFootFinder_html_a430abc49f8be3d1315d3b270c33c2860"><div class="ttname"><a href="classIFootFinder.html#a430abc49f8be3d1315d3b270c33c2860">IFootFinder::operator()</a></div><div class="ttdeci">virtual void operator()(SpanRP&lt; CoordRP &gt; feet, VectorDViewRP&lt; RDimX, RDimY &gt; advection_field, double dt) const =0</div><div class="ttdoc">Advect the feet over .</div></div>
+<div class="ttc" id="aclassVectorFieldSpan_html"><div class="ttname"><a href="classVectorFieldSpan.html">VectorFieldSpan</a></div><div class="ttdoc">Pre-declaration of VectorFieldSpan.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:45</div></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_2daa31455a745d8a4b29bdb1d755058a.html">geometryRTheta</a></li><li class="navelem"><a class="el" href="dir_ba5f6ae6b54a203eec996d361c10d492.html">advection</a></li><li class="navelem"><b>ifoot_finder.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classIFootFinder.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classSplineFootFinder.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,14 +100,16 @@ $(document).ready(function(){initNavTree('classIFootFinder.html',''); initResiza
 
 <div class="header">
   <div class="headertitle">
-<div class="title">IFootFinder Member List</div>  </div>
+<div class="title">SplineFootFinder&lt; TimeStepper, AdvectionDomain &gt; Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="classIFootFinder.html">IFootFinder</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="classSplineFootFinder.html">SplineFootFinder&lt; TimeStepper, AdvectionDomain &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classIFootFinder.html#a430abc49f8be3d1315d3b270c33c2860">operator()</a>(SpanRP&lt; CoordRP &gt; feet, VectorDViewRP&lt; RDimX, RDimY &gt; advection_field, double dt) const =0</td><td class="entry"><a class="el" href="classIFootFinder.html">IFootFinder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>~IFootFinder</b>()=default (defined in <a class="el" href="classIFootFinder.html">IFootFinder</a>)</td><td class="entry"><a class="el" href="classIFootFinder.html">IFootFinder</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classSplineFootFinder.html#a6c99a3c797b8e49db511bee6d62e051d">operator()</a>(SpanRP&lt; CoordRP &gt; feet, VectorDViewRP&lt; RDimX, RDimY &gt; advection_field, double dt) const final</td><td class="entry"><a class="el" href="classSplineFootFinder.html">SplineFootFinder&lt; TimeStepper, AdvectionDomain &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classSplineFootFinder.html#a1a8be554ab9c2a24cda1e2947063e916">SplineFootFinder</a>(TimeStepper const &amp;time_stepper, AdvectionDomain const &amp;advection_domain, IDomainRP const &amp;dom, SplineRPBuilder const &amp;builder_advection_field, SplineRPEvaluator const &amp;evaluator_advection_field)</td><td class="entry"><a class="el" href="classSplineFootFinder.html">SplineFootFinder&lt; TimeStepper, AdvectionDomain &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~IFootFinder</b>()=default (defined in <a class="el" href="classIFootFinder.html">IFootFinder</a>)</td><td class="entry"><a class="el" href="classIFootFinder.html">IFootFinder</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~SplineFootFinder</b>() (defined in <a class="el" href="classSplineFootFinder.html">SplineFootFinder&lt; TimeStepper, AdvectionDomain &gt;</a>)</td><td class="entry"><a class="el" href="classSplineFootFinder.html">SplineFootFinder&lt; TimeStepper, AdvectionDomain &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

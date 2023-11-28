@@ -6,7 +6,7 @@ var searchData=
   ['bcxmin2_20',['BcXmin2',['../classSplineBuilder2D.html#a4ec08d11ae6959f79f441a6c59c7d964',1,'SplineBuilder2D']]],
   ['bernsteinpolynomialbasis_21',['BernsteinPolynomialBasis',['../classBernsteinPolynomialBasis.html',1,'']]],
   ['boundary_5fdata_5f2d_22',['Boundary_data_2d',['../structdeprecated_1_1Boundary__data__2d.html',1,'deprecated']]],
-  ['bsladvectionrp_23',['BslAdvectionRP',['../classBslAdvectionRP.html',1,'BslAdvectionRP&lt; AdvectionDomain, TimeStepper &gt;'],['../classBslAdvectionRP.html#a6449b5f6493d2963def373147d6696b7',1,'BslAdvectionRP::BslAdvectionRP()']]],
+  ['bsladvectionrp_23',['BslAdvectionRP',['../classBslAdvectionRP.html',1,'BslAdvectionRP&lt; FootFinder &gt;'],['../classBslAdvectionRP.html#a9f6527cb344fc583502006d85f67b3e2',1,'BslAdvectionRP::BslAdvectionRP()']]],
   ['bsladvectionspatial_24',['BslAdvectionSpatial',['../classBslAdvectionSpatial.html',1,'']]],
   ['bsladvectionvelocity_25',['BslAdvectionVelocity',['../classBslAdvectionVelocity.html',1,'']]],
   ['bspline_26',['BSpline',['../structBSpline.html',1,'']]],

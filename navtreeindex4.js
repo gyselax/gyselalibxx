@@ -1,6 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classdeprecated_1_1Spline1D.html#a2a4bf85c408fcb9ecba4382bb15512a5":[12,0,3,13],
 "classdeprecated_1_1Spline1D.html#a2bf4b4003db316555f6a26a1b5320991":[12,0,3,8],
 "classdeprecated_1_1Spline1D.html#a30bb87b9b9c3e8cfa231551fa9e5db24":[12,0,3,11],
 "classdeprecated_1_1Spline1D.html#a4eca6bdba41567bc4fcafa49ec613b2e":[12,0,3,15],
@@ -187,7 +186,6 @@ var NAVTREEINDEX4 =
 "fftpoissonsolver__splinex_8hpp_source.html":[13,0,2,3,6],
 "files.html":[13],
 "fluid__moments_8hpp_source.html":[13,0,2,6,0],
-"foot__finder_8hpp_source.html":[13,0,1,0,7],
 "gauss__legendre__integration_8hpp_source.html":[13,2,0,0,0,12],
 "geometryRTheta_2geometry_2geometry_8hpp_source.html":[13,0,1,1,0],
 "geometryRTheta_2poisson_2ipoissonsolver_8hpp_source.html":[13,0,1,3,0],
@@ -217,14 +215,15 @@ var NAVTREEINDEX4 =
 "geometryXYVxVy_2time__integration_2itimesolver_8hpp_source.html":[13,0,3,3,0],
 "geometryXYVxVy_2time__integration_2predcorr_8hpp_source.html":[13,0,3,3,1],
 "geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source.html":[13,0,3,4,1],
-"geometry__pseudo__cartesian_8hpp_source.html":[13,0,1,0,8],
+"geometry__pseudo__cartesian_8hpp_source.html":[13,0,1,0,7],
 "greville__interpolation__points_8hpp_source.html":[13,2,0,0,0,13],
 "i__interpolator_8hpp_source.html":[13,0,4,0],
 "i__interpolator__2d__rp_8hpp_source.html":[13,0,1,2,0],
-"iadvectionrp_8hpp_source.html":[13,0,1,0,9],
+"iadvectionrp_8hpp_source.html":[13,0,1,0,8],
 "iadvectionvx_8hpp_source.html":[13,0,0,2],
 "iadvectionx_8hpp_source.html":[13,0,0,3],
 "iboltzmannsolver_8hpp_source.html":[13,0,2,0,0],
+"ifoot__finder_8hpp_source.html":[13,0,1,0,9],
 "index.html":[],
 "index.html#Compilation":[0],
 "index.html#Dependencies":[2],
@@ -249,5 +248,6 @@ var NAVTREEINDEX4 =
 "nulladvectionvx_8hpp_source.html":[13,0,0,4],
 "pages.html":[],
 "paraconfpp_8hpp_source.html":[13,0,5,0],
-"poisson__rhs__function_8hpp_source.html":[13,0,1,3,1]
+"poisson__rhs__function_8hpp_source.html":[13,0,1,3,1],
+"polar__bsplines_8hpp_source.html":[13,2,0,0,0,24]
 };

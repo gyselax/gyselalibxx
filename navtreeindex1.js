@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classCzarnyToCartesian.html#a093d9a72394c1d6a936d03b8e1471914":[12,32,25],
 "classCzarnyToCartesian.html#a0af1089db27e751c508f63885cd64688":[12,32,13],
 "classCzarnyToCartesian.html#a13e22f85f9041e5d5e602513029baa4f":[12,32,20],
 "classCzarnyToCartesian.html#a1d5e035e43ecd13a4cb5078f8d0fd8b5":[12,32,23],
@@ -62,9 +61,9 @@ var NAVTREEINDEX1 =
 "classElectricField.html#ab069fed5776e2d2f8024e93cfcf9b147":[12,37,4],
 "classElectricField.html#ad0ea427ec25cf0c1722a462dab6aeb70":[12,37,3],
 "classEuler.html":[12,38],
-"classEuler.html#a7b60290cac35ff67b94d619da9c77750":[12,38,2],
+"classEuler.html#a38769dab3aaec635edbde16cedcccd17":[12,38,2],
 "classEuler.html#a8019703dccd8358b9b221818fa51bdcb":[12,38,0],
-"classEuler.html#ae7bb85ef275d459c91e4c9de600b0baf":[12,38,1],
+"classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8":[12,38,1],
 "classFemNonPeriodicPoissonSolver.html":[12,40],
 "classFemNonPeriodicPoissonSolver.html#a581de0c56f2a53b6d918d1a2a41b052f":[12,40,1],
 "classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66":[12,40,2],
@@ -122,7 +121,7 @@ var NAVTREEINDEX1 =
 "classGrevilleInterpolationPoints.html":[12,54],
 "classGrevilleInterpolationPoints.html#a80607a4c866ff36244d980e41870a347":[12,54,0],
 "classIAdvectionRP.html":[12,55],
-"classIAdvectionRP.html#accd095b34b600cd8bf7a691de046fbd3":[12,55,1],
+"classIAdvectionRP.html#ac3294f0513c2b2e89e5fc1f64fc19ac7":[12,55,1],
 "classIAdvectionRP.html#afdf23c9e4e27f72ccdfa48d5927e85ce":[12,55,0],
 "classIAdvectionSpatial.html":[12,56],
 "classIAdvectionSpatial.html#a70ff067842fcab1a97cc30acf9e596df":[12,56,0],
@@ -139,11 +138,8 @@ var NAVTREEINDEX1 =
 "classIEquilibrium.html#aa9cde57feac60ee82ae09fc61c86c807":[12,59,3],
 "classIEquilibrium.html#aafc91262c3d3a5c87aa80707ad1ec5dc":[12,59,2],
 "classIFootFinder.html":[12,60],
-"classIFootFinder.html#a3bfd7f4a638fe986ce528d539801ed83":[12,60,1],
-"classIFootFinder.html#a42e4ad7c4542fa2f237d26717db9befd":[12,60,2],
-"classIFootFinder.html#a647ff51f32164d3762b6d3e5cf5c60bc":[12,60,3],
-"classIFootFinder.html#a8785b5da591c5804189c8aec945bd8a7":[12,60,4],
-"classIFootFinder.html#ae91ff153855c00034aa0e5fd574b0611":[12,60,0],
+"classIFootFinder.html#a331269128fb52ca8cc6acef95b8365b6":[12,60,0],
+"classIFootFinder.html#a430abc49f8be3d1315d3b270c33c2860":[12,60,1],
 "classIInitialization.html":[12,61],
 "classIInitialization.html#a5d604e8e8cde8d05154434b6f0256558":[12,61,0],
 "classIInitialization.html#a5d604e8e8cde8d05154434b6f0256558":[12,61,1],
@@ -249,5 +245,9 @@ var NAVTREEINDEX1 =
 "classMatrix__Center__Block.html#a9961a05587d30ff4203fb371fbf23515":[12,80,14],
 "classMatrix__Center__Block.html#aaf499227ba7d90c20967ab6d8e776482":[12,80,11],
 "classMatrix__Center__Block.html#ac0bcd1e75ec31a079151987909d8fcf9":[12,80,4],
-"classMatrix__Center__Block.html#ac2a92df60c4ce88f33dd25e4a3dd935b":[12,80,1]
+"classMatrix__Center__Block.html#ac2a92df60c4ce88f33dd25e4a3dd935b":[12,80,1],
+"classMatrix__Center__Block.html#af5f28a16f185009bae2f649b22aefc2c":[12,80,6],
+"classMatrix__Center__Block.html#afe444fe825170010bc3b3501aff45089":[12,80,12],
+"classMatrix__Corner__Block.html":[12,81],
+"classMatrix__Corner__Block.html#a02c714c7dbf1c5d96d3deccdc2e1c510":[12,81,0]
 };

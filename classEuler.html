@@ -124,12 +124,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8019703dccd8358b9b221818fa51bdcb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">Euler</a> (Domain dom)</td></tr>
 <tr class="memdesc:a8019703dccd8358b9b221818fa51bdcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> object.  <a href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">More...</a><br /></td></tr>
 <tr class="separator:a8019703dccd8358b9b221818fa51bdcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7bb85ef275d459c91e4c9de600b0baf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#ae7bb85ef275d459c91e4c9de600b0baf">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy)</td></tr>
-<tr class="memdesc:ae7bb85ef275d459c91e4c9de600b0baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#ae7bb85ef275d459c91e4c9de600b0baf">More...</a><br /></td></tr>
-<tr class="separator:ae7bb85ef275d459c91e4c9de600b0baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b60290cac35ff67b94d619da9c77750"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#a7b60290cac35ff67b94d619da9c77750">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update)</td></tr>
-<tr class="memdesc:a7b60290cac35ff67b94d619da9c77750"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#a7b60290cac35ff67b94d619da9c77750">More...</a><br /></td></tr>
-<tr class="separator:a7b60290cac35ff67b94d619da9c77750"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0df03fe21a6b3894fb88d3119ed88f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</td></tr>
+<tr class="memdesc:ab0df03fe21a6b3894fb88d3119ed88f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">More...</a><br /></td></tr>
+<tr class="separator:ab0df03fe21a6b3894fb88d3119ed88f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38769dab3aaec635edbde16cedcccd17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#a38769dab3aaec635edbde16cedcccd17">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update) const</td></tr>
+<tr class="memdesc:a38769dab3aaec635edbde16cedcccd17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#a38769dab3aaec635edbde16cedcccd17">More...</a><br /></td></tr>
+<tr class="separator:a38769dab3aaec635edbde16cedcccd17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class ValChunk, class DerivChunk = ValChunk&gt;<br />
@@ -178,8 +178,8 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae7bb85ef275d459c91e4c9de600b0baf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7bb85ef275d459c91e4c9de600b0baf">&#9670;&nbsp;</a></span>update() <span class="overload">[1/2]</span></h2>
+<a id="ab0df03fe21a6b3894fb88d3119ed88f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0df03fe21a6b3894fb88d3119ed88f8">&#9670;&nbsp;</a></span>update() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,7 +210,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -233,8 +233,8 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 
 </div>
 </div>
-<a id="a7b60290cac35ff67b94d619da9c77750"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b60290cac35ff67b94d619da9c77750">&#9670;&nbsp;</a></span>update() <span class="overload">[2/2]</span></h2>
+<a id="a38769dab3aaec635edbde16cedcccd17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38769dab3aaec635edbde16cedcccd17">&#9670;&nbsp;</a></span>update() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -271,7 +271,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>

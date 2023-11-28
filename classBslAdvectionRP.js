@@ -1,7 +1,6 @@
 var classBslAdvectionRP =
 [
-    [ "BslAdvectionRP", "classBslAdvectionRP.html#a6449b5f6493d2963def373147d6696b7", null ],
-    [ "~BslAdvectionRP", "classBslAdvectionRP.html#a19d550ff4c96b5477ac03f3671adbde1", null ],
-    [ "operator()", "classBslAdvectionRP.html#a46c2a44e36aa5b8623ba3641cd7bcb4e", null ],
-    [ "get_feet", "classBslAdvectionRP.html#a5a3c0e17469b7d48472f7825c035cc5d", null ]
+    [ "BslAdvectionRP", "classBslAdvectionRP.html#a9f6527cb344fc583502006d85f67b3e2", null ],
+    [ "~BslAdvectionRP", "classBslAdvectionRP.html#a45a4696837e2bd6eafb5f6bbbec452b0", null ],
+    [ "operator()", "classBslAdvectionRP.html#a6ff032788d11e429fdfe4d37122a85ec", null ]
 ];
