@@ -46,21 +46,15 @@ private:
     using DerivSpan = typename DerivChunk::span_type;
     using DerivView = typename DerivChunk::view_type;
 
-    DerivChunk m_k1;
-    DerivChunk m_k2;
-    ValChunk m_y_prime;
+
+    Domain const m_dom;
 
 public:
     /**
      * @brief Create a RK2 object.
      * @param[in] dom The domain on which the points which evolve over time are defined.
      */
-    RK2(Domain dom)
-    {
-        m_k1 = DerivChunk(dom);
-        m_k2 = DerivChunk(dom);
-        m_y_prime = ValChunk(dom);
-    }
+    RK2(Domain dom) : m_dom(dom) {}
 
     /**
      * @brief Carry out one step of the Runge-Kutta scheme.
@@ -78,7 +72,7 @@ public:
      * @param[in] dy
      *     The function describing how the derivative of the evolve function is calculated.
      */
-    void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy)
+    void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy) const
     {
         static_assert(ddc::is_chunk_v<ValChunk>);
         update(y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
@@ -103,8 +97,13 @@ public:
             ValSpan y,
             double dt,
             std::function<void(DerivSpan, ValView)> dy,
-            std::function<void(ValSpan, DerivView, double)> y_update)
+            std::function<void(ValSpan, DerivView, double)> y_update) const
     {
+        DerivChunk m_k1(m_dom);
+        DerivChunk m_k2(m_dom);
+        ValChunk m_y_prime(m_dom);
+
+
         // Save initial conditions
         if constexpr (is_field_v<ValChunk>) {
             ddcHelper::deepcopy(m_y_prime, y);

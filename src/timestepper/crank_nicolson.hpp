@@ -46,12 +46,7 @@ private:
     using DerivSpan = typename DerivChunk::span_type;
     using DerivView = typename DerivChunk::view_type;
 
-    ValChunk m_y_init;
-    ValChunk m_y_old;
-    DerivChunk m_k1;
-    DerivChunk m_k_new;
-    DerivChunk m_k_total;
-
+    Domain const m_dom;
     int const m_max_counter;
     double const m_epsilon;
 
@@ -67,14 +62,10 @@ public:
      *      in the implicit method: @f$ |y^{k+1} -  y^{k}| < \varepsilon @f$.
      */
     CrankNicolson(Domain dom, int const counter = int(20), double const epsilon = 1e-12)
-        : m_max_counter(counter)
+        : m_dom(dom)
+        , m_max_counter(counter)
         , m_epsilon(epsilon)
     {
-        m_k1 = DerivChunk(dom);
-        m_k_new = DerivChunk(dom);
-        m_k_total = DerivChunk(dom);
-        m_y_init = ValChunk(dom);
-        m_y_old = ValChunk(dom);
     }
 
     /**
@@ -93,7 +84,7 @@ public:
      * @param[in] dy
      *     The function describing how the derivative of the evolve function is calculated.
      */
-    void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy)
+    void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy) const
     {
         static_assert(ddc::is_chunk_v<ValChunk>);
         update(y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
@@ -118,8 +109,15 @@ public:
             ValSpan y,
             double dt,
             std::function<void(DerivSpan, ValView)> dy,
-            std::function<void(ValSpan, DerivView, double)> y_update)
+            std::function<void(ValSpan, DerivView, double)> y_update) const
     {
+        ValChunk m_y_init(m_dom);
+        ValChunk m_y_old(m_dom);
+        DerivChunk m_k1(m_dom);
+        DerivChunk m_k_new(m_dom);
+        DerivChunk m_k_total(m_dom);
+
+
         copy(m_y_init, y);
 
         // --------- Calculate k1 ------------
@@ -139,7 +137,7 @@ public:
             ddc::for_each(m_k_total.domain(), [&](Index const i) {
                 // k_total = k1 + k_new
                 if constexpr (is_field_v<DerivChunk>) {
-                    fill_k_total(i, m_k1(i) + m_k_new(i));
+                    fill_k_total(i, m_k_total, m_k1(i) + m_k_new(i));
                 } else {
                     m_k_total(i) = m_k1(i) + m_k_new(i);
                 }
@@ -163,7 +161,7 @@ public:
     };
 
 private:
-    void copy(ValSpan copy_to, ValView copy_from)
+    void copy(ValSpan copy_to, ValView copy_from) const
     {
         if constexpr (is_field_v<ValSpan>) {
             ddcHelper::deepcopy(copy_to, copy_from);
@@ -173,7 +171,7 @@ private:
     }
 
     template <class... DDims>
-    void fill_k_total(Index i, ddc::Coordinate<DDims...> new_val)
+    void fill_k_total(Index i, DerivSpan m_k_total, ddc::Coordinate<DDims...> new_val) const
     {
         ((ddcHelper::get<DDims>(m_k_total)(i) = ddc::get<DDims>(new_val)), ...);
     }
@@ -181,7 +179,7 @@ private:
 
     // Check if the relative difference of the function between
     // two times steps is below epsilon.
-    bool have_converged(ValView y_old, ValView y_new)
+    bool have_converged(ValView y_old, ValView y_new) const
     {
         auto const dom = y_old.domain();
 

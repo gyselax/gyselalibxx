@@ -44,10 +44,10 @@
 #include "advection_domain.hpp"
 #include "advection_maths_tools.hpp"
 #include "bsl_advection_rp.hpp"
-#include "foot_finder.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
+#include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 #include "test_cases.hpp"
 

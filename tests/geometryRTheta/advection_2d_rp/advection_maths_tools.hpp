@@ -307,6 +307,17 @@ void display_time(
  * @param[in] counter_function
  *      A integer referring to a test case for the name of the saved files.
  *
+ * @tparam Mapping
+ *      A child class of CurvilinearToCartesian.
+ * @tparam AnalyticalMapping
+ *      A child class of AnalyticalInvertibleCurvilinearToCartesian.
+ * @tparam TimeStepper
+ *      A child class of ITimeStepper.
+ * @tparam AdvectionDomain
+ *      A child class of AdvectionDomain.
+ * @tparam Simulation
+ *      A child class of AdvectionSimulation.
+ *
  * @see BslAdvection
  * @see ITimeStepper
  * @see AdvectionDomain
@@ -322,7 +333,7 @@ void simulate(
         Mapping const& mapping,
         AnalyticalMapping const& analytical_mapping,
         IDomainRP const& grid,
-        TimeStepper& time_stepper,
+        TimeStepper const& time_stepper,
         AdvectionDomain& advection_domain,
         Simulation& simulation,
         PreallocatableSplineInterpolatorRP const& function_interpolator,
@@ -341,14 +352,14 @@ void simulate(
         fs::create_directory("output/curves_" + std::to_string(counter_function));
     }
 
-
-    BslAdvectionRP advection_operator(
-            grid,
+    SplineFootFinder<TimeStepper, AdvectionDomain> const foot_finder(
+            time_stepper,
             advection_domain,
-            function_interpolator,
+            grid,
             advection_builder,
-            advection_evaluator,
-            time_stepper);
+            advection_evaluator);
+
+    BslAdvectionRP advection_operator(function_interpolator, foot_finder);
     auto function_to_be_advected_test = *(simulation.get_test_function());
     auto advection_field_test = *(simulation.get_advection_field());
 
@@ -466,10 +477,11 @@ void simulate(
     // SAVE DATA --------------------------------------------------------------------------------
     // Save the computed characteristic feet:
     if (if_save_feet) {
-        SpanRP<CoordRP> span_feet(advection_operator.get_feet());
+        FieldRP<CoordRP> feet(grid);
+        foot_finder(feet.span_view(), advection_field_test_vec, dt);
         std::string const name
                 = "output/feet_computed_" + std::to_string(counter_function) + ".txt";
-        save_feet(mapping, grid, span_feet, name);
+        save_feet(mapping, grid, feet.span_view(), name);
     }
 
     // Save the values of the exact function at the initial and final states:

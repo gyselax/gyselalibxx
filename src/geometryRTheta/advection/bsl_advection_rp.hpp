@@ -14,9 +14,9 @@
 #include <vector_field_span.hpp>
 
 #include "advection_domain.hpp"
-#include "foot_finder.hpp"
 #include "i_interpolator_2d_rp.hpp"
 #include "iadvectionrp.hpp"
+#include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 
 
@@ -58,55 +58,33 @@
  * @see AdvectionDomain
  *
  */
-template <class AdvectionDomain, class TimeStepper>
+template <class FootFinder>
 class BslAdvectionRP : public IAdvectionRP
 {
 private:
-    using RDimX_adv = typename AdvectionDomain::RDimX_adv;
-    using RDimY_adv = typename AdvectionDomain::RDimY_adv;
-
-    AdvectionDomain const& m_advection_domain;
-
     PreallocatableSplineInterpolatorRP const& m_interpolator;
 
-    IFootFinder<TimeStepper, AdvectionDomain> m_find_feet;
-
-    FieldRP<CoordRP> m_feet_coords_rp;
-
+    FootFinder const& m_find_feet;
 
 
 public:
     /**
      * @brief Instantiate an advection operator.
      *
-     * @param[in] grid
-     *      The domain on which the advected function is defined.
-     * @param [in] advection_domain
-     *      The advection domain where the characteristic feet are computed.
-     *      The AdvectionDomain object contains the Mapping information.
      * @param [in] function_interpolator
      *       The polar interpolator to interpolate the function once the
      *      characteristic computed.
-     * @param[in] advection_builder
-     *      The B-splines builder used to define the B-splines coefficients
-     *      of the advection field.
-     * @param[in] advection_evaluator
-     *      The B-splines evaluator used to evaluate the advection field.
-     * @param [in] time_stepper
-     *       The time integration method used for the computation of the
-     *      characteristic feet.
+     * @param[in] foot_finder
+     *      An IFootFinder which computes the characteristic feet.
+     *
+     * @tparam IFootFinder
+     *      A child class of IFootFinder.
      */
     BslAdvectionRP(
-            IDomainRP const& grid,
-            AdvectionDomain const& advection_domain,
             PreallocatableSplineInterpolatorRP const& function_interpolator,
-            SplineRPBuilder const& advection_builder,
-            SplineRPEvaluator& advection_evaluator,
-            TimeStepper& time_stepper)
-        : m_advection_domain(advection_domain)
-        , m_interpolator(function_interpolator)
-        , m_find_feet(time_stepper, advection_domain, grid, advection_builder, advection_evaluator)
-        , m_feet_coords_rp(grid)
+            FootFinder const& foot_finder)
+        : m_interpolator(function_interpolator)
+        , m_find_feet(foot_finder)
     {
     }
 
@@ -126,46 +104,24 @@ public:
      *
      * @return A ChunkSpan to allfdistribu advected on the time step given.
      */
-    DSpanRP operator()(
-            DSpanRP allfdistribu,
-            VectorDViewRP<RDimX, RDimY> advection_field,
-            double const dt)
+    DSpanRP operator()(DSpanRP allfdistribu, VectorDViewRP<RDimX, RDimY> advection_field, double dt)
+            const
     {
         // Pre-allocate some memory to prevent allocation later in loop
         std::unique_ptr<IInterpolatorRP> const interpolator_ptr = m_interpolator.preallocate();
 
         // Initialisation the feet
+        FieldRP<CoordRP> feet_rp(advection_field.domain());
         ddc::for_each(advection_field.domain(), [&](IndexRP const irp) {
-            m_feet_coords_rp(irp) = ddc::coordinate(irp);
+            feet_rp(irp) = ddc::coordinate(irp);
         });
 
-
-        // Set the attributes of the m_find_feet object and compute the advection field in the
-        // advection domain. ------------------------------------------------------------------------
-        m_find_feet.set_vector_field(advection_field);
-
         // Compute the characteristic feet at tn ----------------------------------------------------
-        m_find_feet.update_feet(m_feet_coords_rp.span_view(), dt);
-
-        m_find_feet.is_unified(m_feet_coords_rp.span_view());
+        m_find_feet(feet_rp.span_view(), advection_field, dt);
 
         // Interpolate the function on the characteristic feet. -------------------------------------
-        (*interpolator_ptr)(allfdistribu, m_feet_coords_rp.span_cview());
+        (*interpolator_ptr)(allfdistribu, feet_rp.span_cview());
 
         return allfdistribu;
     }
-
-
-    /**
-     * @brief Get the values of current characteristic feet.
-     *
-     * This function must be called once advection computed,
-     * so once the operator() called.
-     *
-     * @return A ChunkSpan to the computed values of the characteristic feet.
-     */
-    SpanRP<CoordRP> get_feet()
-    {
-        return m_feet_coords_rp.span_view();
-    };
 };
