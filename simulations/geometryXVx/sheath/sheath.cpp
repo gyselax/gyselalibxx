@@ -22,6 +22,7 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
+#include "chargedensitycalculator.hpp"
 #include "collisions_intra.hpp"
 #ifdef PERIODIC_RDIMX
 #include "femperiodicpoissonsolver.hpp"
@@ -29,7 +30,7 @@
 #include "femnonperiodicpoissonsolver.hpp"
 #endif
 #include "Lagrange_interpolator.hpp"
-#include "fftpoissonsolver_splinex.hpp"
+#include "fftpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "kinetic_source.hpp"
@@ -39,11 +40,15 @@
 #include "paraconfpp.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
+#include "quadrature.hpp"
 #include "restartinitialization.hpp"
 #include "sheath.yaml.hpp"
+#include "simpson_quadrature.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
 #include "spline_interpolator.hpp"
+#include "spline_quadrature.hpp"
+#include "splinechargedensitycalculator.hpp"
 #include "splitrighthandsidesolver.hpp"
 #include "splitvlasovsolver.hpp"
 
@@ -301,10 +306,11 @@ int main(int argc, char** argv)
     Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
 #ifdef PERIODIC_RDIMX
     ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXVx));
-    FftPoissonSolverSplineX const poisson(builder_x, spline_x_evaluator, integrate_v);
+    ChargeDensityCalculator rhs(integrate_v);
+    FftPoissonSolver const poisson(builder_x, spline_x_evaluator, rhs);
 #else
-    FemNonPeriodicPoissonSolver const
-            poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
+    SplineChargeDensityCalculator rhs(builder_vx, spline_vx_evaluator);
+    FemNonPeriodicPoissonSolver const poisson(builder_x, spline_x_evaluator, rhs);
 #endif
 
 
