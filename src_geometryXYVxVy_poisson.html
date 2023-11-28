@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: ChargeDensityCalculatorSplineless Class Reference</title>
+<title>Gyselalib++: Poisson Solver</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classChargeDensityCalculatorSplineless.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('src_geometryXYVxVy_poisson.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -98,79 +98,41 @@ $(document).ready(function(){initNavTree('classChargeDensityCalculatorSplineless
 </iframe>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classChargeDensityCalculatorSplineless-members.html">List of all members</a>  </div>
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">ChargeDensityCalculatorSplineless Class Reference</div>  </div>
+<div class="title">Poisson Solver </div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>A class which computes charges density .  
- <a href="classChargeDensityCalculatorSplineless.html#details">More...</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:ae9721950ce9777e46edc552c4bbd57ed"><td class="memItemLeft" align="right" valign="top"><a id="ae9721950ce9777e46edc552c4bbd57ed"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeDensityCalculatorSplineless.html#ae9721950ce9777e46edc552c4bbd57ed">ChargeDensityCalculatorSplineless</a> (const <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IDimVx &gt; &amp;quad)</td></tr>
-<tr class="memdesc:ae9721950ce9777e46edc552c4bbd57ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classChargeDensityCalculatorSplineless.html" title="A class which computes charges density .">ChargeDensityCalculatorSplineless</a> object, integration is done using composite Simpson rule. <br /></td></tr>
-<tr class="separator:ae9721950ce9777e46edc552c4bbd57ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a413b8b8af55569508a168765b6279bcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeDensityCalculatorSplineless.html#a413b8b8af55569508a168765b6279bcc">operator()</a> (DSpanX rho, DViewSpXVx allfdistribu) const</td></tr>
-<tr class="memdesc:a413b8b8af55569508a168765b6279bcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the charge density rho from the distribution function.  <a href="classChargeDensityCalculatorSplineless.html#a413b8b8af55569508a168765b6279bcc">More...</a><br /></td></tr>
-<tr class="separator:a413b8b8af55569508a168765b6279bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A class which computes charges density . </p>
-<p><br  />
- </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a413b8b8af55569508a168765b6279bcc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a413b8b8af55569508a168765b6279bcc">&#9670;&nbsp;</a></span>operator()()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ChargeDensityCalculatorSplineless::operator() </td>
-          <td>(</td>
-          <td class="paramtype">DSpanX&#160;</td>
-          <td class="paramname"><em>rho</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
-          <td class="paramname"><em>allfdistribu</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Computes the charge density rho from the distribution function. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">rho</td><td></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="chargedensitycalculator__splineless_8hpp_source.html">chargedensitycalculator_splineless.hpp</a></li>
+<div class="textblock"><p>The Poisson solver is designed to solve the following Poisson equation:</p>
+<p class="formulaDsp">
+\[ -\Delta \phi(x) = \sum_s \int q_s f_s(x,y,v_x,v_y) dv_x dv_y \]
+</p>
+<p>This calculation is split into two parts. Firstly the charge density is calculated:</p>
+<p class="formulaDsp">
+\[ \rho_{q,s}(x, y) = \int q_s f_s(x,y,v_x,v_y) dv_x v_y \]
+</p>
+<p>Then the basic Poisson equation:</p>
+<p class="formulaDsp">
+\[ -\Delta \phi(x) = \sum_s \rho_{q,s}(x,y) \]
+</p>
+<p>is solved.</p>
+<h1><a class="anchor" id="Charge_Density"></a>
+Charge Density</h1>
+<p>The charge density is calculated by integrating the distribution function. Currently this is done by creating an intermediate representation of a spline and integrating that representation. This is costly and should be replaced by a <a class="el" href="classChargeDensityCalculator.html" title="A class which computes charges density.">ChargeDensityCalculator</a> which uses a spline quadrature.</p>
+<h1><a class="anchor" id="Poisson_Solver"></a>
+Poisson Solver</h1>
+<p>The Poisson equation can be solved with a variety of different methods. Here we have implemented:</p>
+<ul>
+<li><a class="el" href="classFftPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform.">FftPoissonSolver</a></li>
 </ul>
-</div><!-- contents -->
+<p>These classes return the electric potential \(\phi\) and the electric field \(\frac{d \phi}{dx}\).</p>
+<p>The <a class="el" href="classFftPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform.">FftPoissonSolver</a> does not calculate the electric field using the Fourier modes. Rather it uses a spline interpolation to approximate this value. This interpolation is calculated by the operator <a class="el" href="classElectricField.html">ElectricField</a>. </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classChargeDensityCalculatorSplineless.html">ChargeDensityCalculatorSplineless</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
