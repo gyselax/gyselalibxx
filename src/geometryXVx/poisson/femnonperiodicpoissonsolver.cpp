@@ -45,12 +45,11 @@ SplineEvaluator<NUBSplinesX> jit_build_nubsplinesx(
 FemNonPeriodicPoissonSolver::FemNonPeriodicPoissonSolver(
         SplineXBuilder const& spline_x_builder,
         SplineEvaluator<BSplinesX> const& spline_x_evaluator,
-        SplineVxBuilder const& spline_vx_builder,
-        SplineEvaluator<BSplinesVx> const& spline_vx_evaluator)
+        IChargeDensityCalculator const& compute_rho)
     : m_spline_x_builder(spline_x_builder)
     , m_spline_x_evaluator(spline_x_evaluator)
     , m_spline_x_nu_evaluator(jit_build_nubsplinesx(spline_x_evaluator))
-    , m_compute_rho(spline_vx_builder, spline_vx_evaluator)
+    , m_compute_rho(compute_rho)
     , m_nbasis(ddc::discrete_space<BSplinesX>().nbasis())
     , m_ncells(ddc::discrete_space<BSplinesX>().ncells())
     , m_quad_coef(ddc::DiscreteDomain<QMeshX>(

@@ -33,6 +33,7 @@
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
 #include "spline_interpolator.hpp"
+#include "splinechargedensitycalculator.hpp"
 #include "splitvlasovsolver.hpp"
 
 using std::cerr;
@@ -211,16 +212,6 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-#ifdef PERIODIC_RDIMX
-    using FemPoissonSolverX = FemPeriodicPoissonSolver;
-#else
-    using FemPoissonSolverX = FemNonPeriodicPoissonSolver;
-#endif
-
-    FemPoissonSolverX const poisson(builder_x, spline_x_evaluator, builder_vx, spline_vx_evaluator);
-
-    PredCorr const predcorr(vlasov, poisson);
-
     // Creating of mesh for output saving
     IDomainX const gridx = ddc::select<IDimX>(meshSpXVx);
     FieldX<CoordX> meshX_coord(gridx);
@@ -233,6 +224,16 @@ int main(int argc, char** argv)
     for (IndexVx const ivx : gridvx) {
         meshVx_coord(ivx) = ddc::coordinate(ivx);
     }
+
+#ifdef PERIODIC_RDIMX
+    using FemPoissonSolverX = FemPeriodicPoissonSolver;
+#else
+    using FemPoissonSolverX = FemNonPeriodicPoissonSolver;
+#endif
+    SplineChargeDensityCalculator rhs(builder_vx, spline_vx_evaluator);
+    FemPoissonSolverX const poisson(builder_x, spline_x_evaluator, rhs);
+
+    PredCorr const predcorr(vlasov, poisson);
 
     // Starting the code
     ddc::expose_to_pdi("Nx", x_size.value());
