@@ -67,12 +67,12 @@ public:
         } else {
 #ifdef KOKKOS_ENABLE_SERIAL
             if (std::is_same_v<ExecSpace, Kokkos::Serial>) {
-                m_cols_per_par_chunk = 512;
+                m_cols_per_par_chunk = 256;
             }
 #endif
 #ifdef KOKKOS_ENABLE_OPENMP
             if (std::is_same_v<ExecSpace, Kokkos::OpenMP>) {
-                m_cols_per_par_chunk = 512;
+                m_cols_per_par_chunk = 256;
             }
 #endif
 #ifdef KOKKOS_ENABLE_CUDA
@@ -117,12 +117,12 @@ public:
         } else {
 #ifdef KOKKOS_ENABLE_SERIAL
             if (std::is_same_v<ExecSpace, Kokkos::Serial>) {
-                m_preconditionner_max_block_size = 8u;
+                m_preconditionner_max_block_size = 32u;
             }
 #endif
 #ifdef KOKKOS_ENABLE_OPENMP
             if (std::is_same_v<ExecSpace, Kokkos::OpenMP>) {
-                m_preconditionner_max_block_size = 8u;
+                m_preconditionner_max_block_size = 32u;
             }
 #endif
 #ifdef KOKKOS_ENABLE_CUDA
@@ -192,7 +192,7 @@ public:
         return M;
     }
 
-    virtual double get_element(int i, int j) const override
+    virtual double get_element([[maybe_unused]] int i, [[maybe_unused]] int j) const override
     {
         throw std::runtime_error("MatrixSparse::get_element() is not implemented because no API is "
                                  "provided by Ginkgo");
@@ -240,6 +240,10 @@ public:
 
     virtual int solve_inplace_method(double* b, char transpose, int n_equations) const override
     {
+        if (transpose != 'N') {
+            throw std::domain_error("transpose");
+        }
+
         std::shared_ptr<gko::Executor> gko_exec = create_gko_exec<ExecSpace>();
         auto data_mat = gko::share(to_gko_mat(
                 m_data.data(),

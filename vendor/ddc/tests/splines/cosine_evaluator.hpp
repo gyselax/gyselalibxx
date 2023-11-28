@@ -23,8 +23,8 @@ struct CosineEvaluator
 
     public:
         template <class Domain>
-        Evaluator(Domain domain) : m_c0(1.0)
-                                 , m_c1(0.0)
+        Evaluator([[maybe_unused]] Domain domain) : m_c0(1.0)
+                                                  , m_c1(0.0)
         {
         }
 
