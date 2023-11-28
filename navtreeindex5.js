@@ -1,5 +1,7 @@
 var NAVTREEINDEX5 =
 {
+"polar__poisson_2test__cases_8hpp_source.html":[13,1,0,2,1],
+"polar__spline_8hpp_source.html":[13,2,0,0,0,25],
 "polar__spline__evaluator_8hpp_source.html":[13,2,0,0,0,26],
 "polarpoissonsolver_8hpp_source.html":[13,0,1,3,2],
 "polynomial__evaluator_8hpp_source.html":[13,2,0,1,2],

@@ -1,5 +1,7 @@
 var NAVTREEINDEX4 =
 {
+"classdeprecated_1_1Spline1D.html#a4eca6bdba41567bc4fcafa49ec613b2e":[12,0,3,15],
+"classdeprecated_1_1Spline1D.html#a710d5bae2282257423bc1f2e148f6a4f":[12,0,3,1],
 "classdeprecated_1_1Spline1D.html#a8e30b577a5f7fd8246aabb6f742ea36c":[12,0,3,9],
 "classdeprecated_1_1Spline1D.html#a9b12fa2b40430c86ef29456b2a85a083":[12,0,3,10],
 "classdeprecated_1_1Spline1D.html#a9b42c3f2da23cd8818adb7f099c11e6e":[12,0,3,5],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "paraconfpp_8hpp_source.html":[13,0,5,0],
 "poisson__rhs__function_8hpp_source.html":[13,0,1,3,1],
 "polar__bsplines_8hpp_source.html":[13,2,0,0,0,24],
-"polar__poisson_2params_8yaml_8hpp_source.html":[13,1,0,2,0],
-"polar__poisson_2test__cases_8hpp_source.html":[13,1,0,2,1],
-"polar__spline_8hpp_source.html":[13,2,0,0,0,25]
+"polar__poisson_2params_8yaml_8hpp_source.html":[13,1,0,2,0]
 };
