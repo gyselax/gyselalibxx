@@ -136,8 +136,6 @@ void SplineBuilderBatched<SplineBuilder, IDimX...>::operator()(
         ddc::ChunkSpan<double, vals_domain_type, Layout, memory_space> vals) const
 {
     const std::size_t nbc_xmin = spline_builder.s_nbc_xmin;
-    const std::size_t nbc_xmax = spline_builder.s_nbc_xmax;
-    using IMesh = ddc::DiscreteElement<interpolation_mesh_type>;
 
     // TODO : Consider optimizing
     // Fill spline with vals (to work in spline afterward and preserve vals)
