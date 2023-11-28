@@ -2,13 +2,20 @@
 
 #include <functional>
 
+#include "ifoot_finder.hpp"
+
 /**
  * @brief Define a base class for all the time integration methods used for the advection.
+ *
+ * @tparam TimeStepper
+ *      A child class of ITimeStepper providing a time integration method.
+ * @tparam AdvectionDomain
+ *      A child class of AdvectionDomain providing the informations about the advection domain.
  *
  * @see BslAdvectionRP
  */
 template <class TimeStepper, class AdvectionDomain>
-class IFootFinder
+class SplineFootFinder : public IFootFinder
 {
 private:
     /**
@@ -21,12 +28,9 @@ private:
     using RDimY_adv = typename AdvectionDomain::RDimY_adv;
 
 
-    TimeStepper& m_time_stepper;
+    TimeStepper const& m_time_stepper;
 
     AdvectionDomain const& m_advection_domain;
-
-    VectorDFieldRP<RDimX_adv, RDimY_adv> m_advection_field;
-    VectorSpline2D<RDimX_adv, RDimY_adv> m_advection_field_coefs;
 
     SplineRPBuilder const& m_builder_advection_field;
     SplineRPEvaluator const& m_evaluator_advection_field;
@@ -51,65 +55,65 @@ public:
      * @param[in] evaluator_advection_field
      *      The B-splines evaluator to evaluate the advection field.
      *
+     * @tparam TimeStepper
+     *      A child class of ITimeStepper providing a time integration method.
+     * @tparam AdvectionDomain
+     *      A child class of AdvectionDomain providing the informations about the advection domain.
      *
      * @see ITimeStepper
      */
-    IFootFinder(
-            TimeStepper& time_stepper,
+    SplineFootFinder(
+            TimeStepper const& time_stepper,
             AdvectionDomain const& advection_domain,
             IDomainRP const& dom,
             SplineRPBuilder const& builder_advection_field,
-            SplineRPEvaluator& evaluator_advection_field)
+            SplineRPEvaluator const& evaluator_advection_field)
         : m_time_stepper(time_stepper)
         , m_advection_domain(advection_domain)
-        , m_advection_field(dom)
-        , m_advection_field_coefs(builder_advection_field.spline_domain())
         , m_builder_advection_field(builder_advection_field)
         , m_evaluator_advection_field(evaluator_advection_field)
     {
     }
 
-    ~IFootFinder() {};
-
-
-    /**
-     * @brief Set the advection field in the attribute of the IFootFinder class.
-     *
-     * From the advection field in the physical domain, compute the advection field
-     * in the right domain ann compute its B-splines coefficients for further
-     * computations.
-     *
-     * @param[in] advection_field
-     *      The advection field in the physical domain.
-     */
-    void set_vector_field(VectorDViewRP<RDimX, RDimY> advection_field)
-    {
-        // Compute the advection field in the advection domain.
-        m_advection_domain.compute_advection_field(advection_field, m_advection_field.span_view());
-
-        m_builder_advection_field(
-                ddcHelper::get<RDimX_adv>(m_advection_field_coefs),
-                ddcHelper::get<RDimX_adv>(m_advection_field));
-        m_builder_advection_field(
-                ddcHelper::get<RDimY_adv>(m_advection_field_coefs),
-                ddcHelper::get<RDimY_adv>(m_advection_field));
-    }
+    ~SplineFootFinder() {};
 
 
     /**
      * @brief Advect the feet over @f$ dt @f$.
      *
-     * Use the given time integration method (time_stepper) to solve the
+     * From the advection field in the physical domain, compute the advection field
+     * in the right domain an compute its B-splines coefficients.
+     * Then, use the given time integration method (time_stepper) to solve the
      * characteristic equation over @f$ dt @f$.
      *
      * @param[in, out] feet
-     *      On input: the mesh points. 
-     *      On output: the characteristic feet. 
+     *      On input: the mesh points.
+     *      On output: the characteristic feet.
+     * @param[in] advection_field
+     *      The advection field in the physical domain.
      * @param[in] dt
      *      The time step.
      */
-    void update_feet(SpanRP<CoordRP> feet, double dt)
+    void operator()(SpanRP<CoordRP> feet, VectorDViewRP<RDimX, RDimY> advection_field, double dt)
+            const final
     {
+        VectorDFieldRP<RDimX_adv, RDimY_adv> advection_field_in_adv_dom(advection_field.domain());
+        VectorSpline2D<RDimX_adv, RDimY_adv> advection_field_in_adv_dom_coefs(
+                m_builder_advection_field.spline_domain());
+
+        // Compute the advection field in the advection domain.
+        m_advection_domain
+                .compute_advection_field(advection_field, advection_field_in_adv_dom.span_view());
+
+        // Get the coefficients of the advection field in the advection domain.
+        m_builder_advection_field(
+                ddcHelper::get<RDimX_adv>(advection_field_in_adv_dom_coefs),
+                ddcHelper::get<RDimX_adv>(advection_field_in_adv_dom));
+        m_builder_advection_field(
+                ddcHelper::get<RDimY_adv>(advection_field_in_adv_dom_coefs),
+                ddcHelper::get<RDimY_adv>(advection_field_in_adv_dom));
+
+
         // The function describing how the derivative of the evolve function is calculated.
         std::function<void(VectorDSpanRP<RDimX_adv, RDimY_adv>, ViewRP<CoordRP>)> dy
                 = [&](VectorDSpanRP<RDimX_adv, RDimY_adv> updated_advection_field,
@@ -117,11 +121,13 @@ public:
                       m_evaluator_advection_field(
                               ddcHelper::get<RDimX_adv>(updated_advection_field).span_view(),
                               feet.span_cview(),
-                              ddcHelper::get<RDimX_adv>(m_advection_field_coefs).span_cview());
+                              ddcHelper::get<RDimX_adv>(advection_field_in_adv_dom_coefs)
+                                      .span_cview());
                       m_evaluator_advection_field(
                               ddcHelper::get<RDimY_adv>(updated_advection_field).span_view(),
                               feet.span_cview(),
-                              ddcHelper::get<RDimY_adv>(m_advection_field_coefs).span_cview());
+                              ddcHelper::get<RDimY_adv>(advection_field_in_adv_dom_coefs)
+                                      .span_cview());
                   };
 
         // The function describing how the value(s) are updated using the derivative.
@@ -139,9 +145,15 @@ public:
                 };
 
 
+        // Solve the characteristic equation
         m_time_stepper.update(feet, dt, dy, update_function);
+
+        is_unified(feet);
     }
 
+
+
+private:
     /**
      * @brief Check if the values at the center point are the same.
      *
@@ -155,7 +167,7 @@ public:
      *
      */
     template <class T>
-    void is_unified(SpanRP<T> const& values)
+    void is_unified(SpanRP<T> const& values) const
     {
         auto const r_domain = ddc::get_domain<IDimR>(values);
         auto const theta_domain = ddc::get_domain<IDimP>(values);
@@ -173,7 +185,7 @@ public:
         }
     }
 
-private:
+
     /**
      * @brief Replace the value at @f$  (r=0, \theta)@f$  point
      *  by the value at @f$ (r=0,0) @f$ for all @f$ \theta @f$.
@@ -188,7 +200,7 @@ private:
      *      The table of values we want to unify at the central point.
      */
     template <class T>
-    void unify_value_at_center_pt(SpanRP<T> values)
+    void unify_value_at_center_pt(SpanRP<T> values) const
     {
         auto const r_domain = ddc::get_domain<IDimR>(values);
         auto const theta_domain = ddc::get_domain<IDimP>(values);
