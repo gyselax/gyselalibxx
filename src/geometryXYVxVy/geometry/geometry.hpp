@@ -314,23 +314,45 @@ using IDomainFx = ddc::DiscreteDomain<IDimFx>;
 using IDomainFy = ddc::DiscreteDomain<IDimFy>;
 using IDomainFxFy = ddc::DiscreteDomain<IDimFx, IDimFy>;
 
+/**
+ * @brief A class providing aliases for useful subdomains of the geometry. It is used as template parameter for generic dimensionality-agnostic operat
+ors such as advections.
+ */
 class GeometryXYVxVy
 {
 public:
+    /**
+     * @brief A templated type giving the velocity discrete dimension type associated to a spatial discrete dimension type.
+     */
     template <class T>
     using velocity_dim_for = std::conditional_t<
             std::is_same_v<T, IDimX>,
             IDimVx,
             std::conditional_t<std::is_same_v<T, IDimY>, IDimVy, void>>;
 
+    /**
+     * @brief A templated type giving the spatial discrete dimension type associated to a velocity discrete dimension type.
+     */
     // template <class T>
     // using spatial_dim_for = std::conditional_t<std::is_same_v<T, IDimVx>, IDimX, std::conditional_t<std::is_same_v<T, IDimVy>, IDimY, void>>;
 
+    /**
+     * @brief An alias for species "discrete dimension" type.
+     */
     using DDimSp = IDimSp;
 
+    /**
+     * @brief An alias for the spatial discrete domain type.
+     */
     using SpatialDDom = IDomainXY;
 
+    /**
+     * @brief An alias for the velocity discrete domain type.
+     */
     using VelocityDDom = IDomainVxVy;
 
+    /**
+     * @brief An alias for the whole distribution function discrete domain type.
+     */
     using FdistribuDDom = IDomainSpXYVxVy;
 };
