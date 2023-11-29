@@ -8,17 +8,6 @@
 #include "collisions_inter.hpp"
 #include "collisions_utils.hpp"
 
-/**
- *  Treatment of the inter species collision operator
- *  We solve the following equation:
- *     df_a/dt = C_ab
- *
- *  C_ab = { 2 Q_ab [m_a(v-V_a)^2/2T_a - 1/2]
- *         + R_ab (v-V_a) } * FM_a / (n_a Ta)
- *    accounts for total energy Q_ab+V_a*R_ab & momentum R_ab exchange between species
- *    Q_ab and R_ab are computed from the equivalent Maxwellians
- *    => order 0 of the collision operator
- */
 CollisionsInter::CollisionsInter(IDomainSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
     , m_nustar_profile(ddc::select<IDimSp, IDimX>(mesh))
@@ -35,9 +24,6 @@ CollisionsInter::CollisionsInter(IDomainSpXVx const& mesh, double nustar0)
     ddc::expose_to_pdi("collinter_nustar0", m_nustar0);
 }
 
-/**
- * right hand side of the equation \partial f / \partial_t = C_ab
- */
 void CollisionsInter::compute_rhs(DSpanSpXVx const rhs, DViewSpXVx const allfdistribu) const
 {
     IDomainSp const dom_sp(ddc::get_domain<IDimSp>(allfdistribu));
@@ -104,9 +90,14 @@ void CollisionsInter::compute_rhs(DSpanSpXVx const rhs, DViewSpXVx const allfdis
 }
 
 
-DSpanSpXVx CollisionsInter::operator()(DSpanSpXVx allfdistribu, double dt) const
+device_t<DSpanSpXVx> CollisionsInter::operator()(
+        device_t<DSpanSpXVx> allfdistribu_device,
+        double dt) const
 {
+    auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
+    ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
     RK2<DFieldSpXVx> timestepper(allfdistribu.domain());
     timestepper.update(allfdistribu, dt, [&](DSpanSpXVx dy, DViewSpXVx y) { compute_rhs(dy, y); });
-    return allfdistribu;
+    ddc::deepcopy(allfdistribu_device, allfdistribu);
+    return allfdistribu_device;
 }

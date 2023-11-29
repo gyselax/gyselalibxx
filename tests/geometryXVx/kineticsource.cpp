@@ -71,10 +71,10 @@ TEST(KineticSource, Moments)
             std::move(masses),
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
-    DFieldSpXVx allfdistribu(mesh);
+    device_t<DFieldSpXVx> allfdistribu_device(mesh);
 
     // Initialization of the distribution function
-    ddc::fill(allfdistribu, 0.);
+    ddc::fill(allfdistribu_device, 0.);
 
     // Maxwellian source test
     double const px_source = 0.2;
@@ -97,7 +97,8 @@ TEST(KineticSource, Moments)
             energy_amplitude,
             temperature_source);
 
-    kinetic_source(allfdistribu, deltat);
+    kinetic_source(allfdistribu_device, deltat);
+    auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
 
     DFieldX density(gridx);
     DFieldX fluid_velocity(gridx);

@@ -38,12 +38,6 @@ device_t<DSpanSpVx> MaxwellianEquilibrium::operator()(
     return allfequilibrium;
 }
 
-/*
- Computing the non-centered Maxwellian function as
-   fM(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T))
-  with n the density and T the temperature and
-  where u is the mean velocity
-*/
 void MaxwellianEquilibrium::compute_maxwellian(
         device_t<DSpanVx> const fMaxwellian,
         double const density,

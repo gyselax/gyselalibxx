@@ -106,8 +106,8 @@ TEST(KrookSource, Adaptive)
     double const density_init_ion = 1.;
     double const density_init_elec = 2.;
     double const temperature_init = 1.;
-    DFieldSpXVx allfdistribu(mesh);
-    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+    device_t<DFieldSpXVx> allfdistribu_device(mesh);
+    ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
         device_t<DFieldVx> finit_device(gridvx);
         if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
             MaxwellianEquilibrium::
@@ -117,12 +117,13 @@ TEST(KrookSource, Adaptive)
                     compute_maxwellian(finit_device, density_init_elec, temperature_init, 0.);
         }
         auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
-        ddc::deepcopy(allfdistribu[ispx], finit);
+        ddc::deepcopy(allfdistribu_device[ispx], finit);
     });
 
     // error with a given deltat
     double const deltat = 0.1;
-    rhs_krook(allfdistribu, deltat);
+    rhs_krook(allfdistribu_device, deltat);
+    auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
 
     DFieldSpX densities(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
@@ -148,11 +149,12 @@ TEST(KrookSource, Adaptive)
                     compute_maxwellian(finit_device, density_init_elec, temperature_init, 0.);
         }
         auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
-        ddc::deepcopy(allfdistribu[ispx], finit);
+        ddc::deepcopy(allfdistribu_device[ispx], finit);
     });
 
     // error with a deltat 10 times smaller
-    rhs_krook(allfdistribu, 0.01);
+    rhs_krook(allfdistribu_device, 0.01);
+    ddc::deepcopy(allfdistribu, allfdistribu_device);
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
         densities(ispx) = integrate_v(allfdistribu[ispx]);
     });
@@ -255,15 +257,16 @@ TEST(KrookSource, Constant)
     device_t<DFieldVx> finit_device(gridvx);
     MaxwellianEquilibrium::compute_maxwellian(finit_device, density_init, temperature_init, 0.);
     auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
-    DFieldSpXVx allfdistribu(mesh);
-    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        ddc::deepcopy(allfdistribu[ispx], finit);
+    device_t<DFieldSpXVx> allfdistribu_device(mesh);
+    ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
+        ddc::deepcopy(allfdistribu_device[ispx], finit);
     });
 
     int const nbsteps = 100;
     for (int iter = 0; iter < nbsteps; ++iter) {
-        rhs_krook(allfdistribu, deltat);
+        rhs_krook(allfdistribu_device, deltat);
     };
+    auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
 
     // tests if distribution function matches theoretical prediction
     device_t<DFieldVx> ftarget_device(gridvx);

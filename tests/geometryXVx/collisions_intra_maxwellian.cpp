@@ -78,14 +78,14 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
             std::move(masses),
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
-    DFieldSpXVx allfdistribu(mesh);
+    device_t<DFieldSpXVx> allfdistribu_device(mesh);
 
     // Initialization of the distribution function as a maxwellian with
     // moments depending on space
-    DFieldSpX density_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX mean_velocity_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX temperature_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+    DFieldSpX density_init(ddc::select<IDimSp, IDimX>(mesh));
+    DFieldSpX mean_velocity_init(ddc::select<IDimSp, IDimX>(mesh));
+    DFieldSpX temperature_init(ddc::select<IDimSp, IDimX>(mesh));
+    ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
         double const density = 1.;
         double const density_ampl = 0.1;
         double const mean_velocity = 0.;
@@ -111,8 +111,9 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
                 temperature_init(ispx),
                 mean_velocity_init(ispx));
         auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
-        ddc::deepcopy(allfdistribu[ispx], finit);
+        ddc::deepcopy(allfdistribu_device[ispx], finit);
     });
+    auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
 
     double const nustar0(0.1);
     double const deltat(0.1);
@@ -192,7 +193,8 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
         EXPECT_LE(std::fabs(Tcoll(ispx) - temperature_init(ispx)), 1e-12);
     });
 
-    collisions(allfdistribu, deltat);
+    collisions(allfdistribu_device, deltat);
+    ddc::deepcopy(allfdistribu, allfdistribu_device);
 
     // collision operator should not change densiy, mean_velocity and temperature
     DFieldSpX density_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
@@ -265,6 +267,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
 
         allfdistribu(ispxvx) = allfdistribu(ispxvx) + perturb;
     });
+    ddc::deepcopy(allfdistribu_device, allfdistribu);
 
     // before the collisions the perturbed distribution should have T != Tcoll and V != Vcoll
     // this test is performed on electrons since the largest error is made for them
@@ -289,8 +292,9 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
 
     int const nbsteps = 300;
     for (int iter = 0; iter < nbsteps; ++iter) {
-        collisions(allfdistribu, deltat);
+        collisions(allfdistribu_device, deltat);
     };
+    ddc::deepcopy(allfdistribu, allfdistribu_device);
 
     // Vcoll and Tcoll calculation
     compute_collfreq(

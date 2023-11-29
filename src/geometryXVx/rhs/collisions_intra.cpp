@@ -6,39 +6,7 @@
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
 
-/**
- *  Treatment of the collision operator
- *  We solve the following equation:
- *     df_a/dt = C_aa + C_ab
- *
- *  C_aa= d/dv (Dcoll df_a/dv - Nucoll f_a)
- *    is the single species collision operator
- *  - Dcoll and Nucoll depend on the module of the velocity
- *    and can have a spatial profile
- *  - Nucoll = Dcoll * d/dv(Ln(fMcoll))
- *  - fMcoll is a Maxwellian of velocity and temperature Vcoll and Tcoll
- *    so that d/dv(Ln(fMcoll)) = -(v-Vcoll)/Tcoll
- *  - Tcoll(x,t) and Vcoll(x,t) are computed at each time step
- *  - nustar (hence the collision frequency) depends on space
- *
- *  'Vcoll' and 'Tcoll' are defined as follows:
- *  - Tcoll = Pcoll^{-1}[Imean0*Imean2 - Imean1*Imean1]
- *  - Vcoll = Pcoll^{-1}[Imean4*Imean1 - Imean3*Imean2]
- *  - Pcoll = Imean0*Imean4 - Imean1*Imean3
- *  where the 5 integrals are defined as:
- *     @f$Imean0=\langle Dcoll \rangle@f$ ;
- *     @f$Imean1=\langle v*Dcoll \rangle@f$ ;
- *     @f$Imean2=\langle v^2*Dcoll \rangle@f$ ;
- *     @f$Imean3=\langle d/dv(Dcoll) \rangle@f$
- *     @f$Imean4=\langle d/dv(v*Dcoll) \rangle@f$
- *  The brackets @f$\langle\cdot\rangle@f$ represent the integral in velocity: @f$\langle\cdot\rangle = \int \cdot dv@f$
- *
- *  C_ab = { 2 Q_ab [m_a(v-V_a)^2/2T_a - 1/2]
- *         + R_ab (v-V_a) } * FM_a / (n_a Ta)
- *    accounts for total energy Q_ab+V_a*R_ab & momentum R_ab exchange between species
- *    Q_ab and R_ab are computed from the equivalent Maxwellians
- *    => order 0 of the collision operator
- */
+
 CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
     , m_fthresh(1.e-30)
@@ -132,9 +100,6 @@ CollisionsIntra::get_mesh_ghosted() const
     return m_mesh_ghosted;
 }
 
-/**
- * Computes the matrix coefficients for the non equidistant Crank Nicolson scheme
- */
 void CollisionsIntra::compute_matrix_coeff(
         DSpanSpXVx AA,
         DSpanSpXVx BB,
@@ -209,9 +174,6 @@ void CollisionsIntra::fill_matrix_with_coeff(
     });
 }
 
-/**
- * Computes the rhs vector coefficients for the non equidistant Crank Nicolson scheme
- */
 void CollisionsIntra::compute_rhs_vector(
         DSpanSpXVx RR,
         DViewSpXVx AA,
@@ -248,8 +210,12 @@ void CollisionsIntra::compute_rhs_vector(
 
 
 
-DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
+device_t<DSpanSpXVx> CollisionsIntra::operator()(
+        device_t<DSpanSpXVx> allfdistribu_device,
+        double dt) const
 {
+    auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
+    ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
     // density and temperature
     DFieldSpX density(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX mean_velocity(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
@@ -359,5 +325,6 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
         ddc::deepcopy(allfdistribu[ispx], RR[ispx]);
     });
 
-    return allfdistribu;
+    ddc::deepcopy(allfdistribu_device, allfdistribu);
+    return allfdistribu_device;
 }

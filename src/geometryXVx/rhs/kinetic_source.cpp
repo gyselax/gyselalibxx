@@ -5,24 +5,6 @@
 #include "kinetic_source.hpp"
 #include "mask_tanh.hpp"
 
-/**
- * Solves the equation @f$\partial f / \partial t = S(v, x)@f$,
- * where S is a space and velocity dependent source 
- * that does not depend on f or on time. 
- * Therefore f(t+dt) = f(t) + S*dt
- *
- * S = spatial_extent(x) * velocity_shape(v)
- * spatial_extent defines the location where the source is active.
- * spatial_extent is normalized, so that its integral along the spatial direction 
- * equals one. It has a hyperbolic tangent shape. It is equal to one in a central 
- * zone of the plasma of width defined by the extent parameter.
- *
- * velocity_shape defines the velocity profile of the source 
- * in the parallel velocity direction. It is the sum of a source that 
- * injects only density, and a source that injects only energy. If the density 
- * and energy parameters are equal to one (usual case), the resulting velocity_shape 
- * is maxwellian. 
- */
 KineticSource::KineticSource(
         IDomainX const& gridx,
         IDomainVx const& gridvx,
@@ -60,14 +42,31 @@ KineticSource::KineticSource(
     ddc::expose_to_pdi("kinetic_source_spatial_extent", m_spatial_extent);
 }
 
-DSpanSpXVx KineticSource::operator()(DSpanSpXVx const allfdistribu, double const dt) const
+device_t<DSpanSpXVx> KineticSource::operator()(
+        device_t<DSpanSpXVx> const allfdistribu,
+        double const dt) const
 {
-    ddc::for_each(allfdistribu.domain(), [=](IndexSpXVx const ispxvx) {
-        double const df(
-                m_amplitude * m_spatial_extent(ddc::select<IDimX>(ispxvx))
-                * m_velocity_shape(ddc::select<IDimVx>(ispxvx)) * dt);
-        allfdistribu(ispxvx) += df;
-    });
+    auto velocity_shape_device_alloc = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            m_velocity_shape.span_view());
+    auto velocity_shape_device = velocity_shape_device_alloc.span_view();
+
+    auto spatial_extent_device_alloc = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            m_spatial_extent.span_view());
+    auto spatial_extent_device = spatial_extent_device_alloc.span_view();
+
+    auto const& amplitude = m_amplitude;
+
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            allfdistribu.domain(),
+            DDC_LAMBDA(IndexSpXVx const ispxvx) {
+                double const df(
+                        amplitude * spatial_extent_device(ddc::select<IDimX>(ispxvx))
+                        * velocity_shape_device(ddc::select<IDimVx>(ispxvx)) * dt);
+                allfdistribu(ispxvx) += df;
+            });
 
     return allfdistribu;
 }

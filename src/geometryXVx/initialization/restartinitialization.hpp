@@ -12,7 +12,6 @@
 /**
  * @brief A class that initializes the distribution function from a previous simulation.
  *
- * 
  * A class that triggers a PDI event to read the values of 
  * a distribution function saved in a hdf5 file. These
  * values are copied to the field that represents the 
@@ -27,7 +26,8 @@ private:
 public:
     /**
      * @brief Create an initialization object.
-     * @param[in] iter_start An integer representing the number of iteration already performed to produce the distribution function used to initialize the current simulation.
+     * @param[in] iter_start An integer representing the number of iteration already performed 
+     *                       to produce the distribution function used to initialize the current simulation.
      * @param[in] time_start The physical time corresponding to iter_start.
      */
     RestartInitialization(int iter_start, double& time_start);
@@ -36,10 +36,9 @@ public:
 
     /**
      * @brief Triggers a PDI event to fill the distribution function with values from a hdf5 file.
-     * @param[in, out] allfdistribu On input: the distribution function not initialized.
-     *                              On output: the distribution function initialized with the values 
-     *                              read from an external file.
+     * @param[out] allfdistribu The distribution function initialized with the values 
+     *                          read from an external file.
      * @return The initialized distribution function.
      */
-    device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu_device) const override;
+    device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu) const override;
 };

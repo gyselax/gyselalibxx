@@ -13,21 +13,7 @@
 #include "krook_source_adaptive.hpp"
 #include "mask_tanh.hpp"
 
-/**
- * Solves the equation \f$\partial f / \partial_t\f$ = -amplitude * mask * ( f - ftarget) (BGK operator)
- * 
- * mask defines the spatial region where the operator is active. 
- * If type = Source, the mask equals one in the central zone of the plasma of width extent; 
- * If type = Sink, the mask equals zero in the central zone of the plasma of width extent;
- *
- * ftarget is a maxwellian characterized by density and temperature, and a zero fluid velocity.
- *
- * amplitude depends on space, time and the considered species so that: 
- * amplitude(ions) = m_amplitude = constant
- * amplitude(electrons, x, t) = m_amplitude
- *                  * (density_ions(x,t) - m_density) / (density_electrons(x,t) - m_density)
- * so that the operator conserves locally the charge. 
- */
+
 KrookSourceAdaptive::KrookSourceAdaptive(
         IDomainX const& gridx,
         IDomainVx const& gridvx,
@@ -85,13 +71,9 @@ KrookSourceAdaptive::KrookSourceAdaptive(
     }
 }
 
-/**
- * Computes the amplitude parameter for each species: 
- * amplitudes(ions) = m_amplitude = constant
- * amplitudes(electrons, x, t) = m_amplitude
- *                  * (density_ions(x,t) - m_density) / (density_electrons(x,t) - m_density)
- */
-void KrookSourceAdaptive::get_amplitudes(DSpanSp amplitudes, DViewSpVx const allfdistribu) const
+void KrookSourceAdaptive::get_amplitudes(
+        device_t<DSpanSpX> amplitudes,
+        device_t<DViewSpXVx> const allfdistribu) const
 {
     IDomainSp const dom_sp(ddc::get_domain<IDimSp>(allfdistribu));
     assert(dom_sp.size() == 2);
@@ -103,15 +85,31 @@ void KrookSourceAdaptive::get_amplitudes(DSpanSp amplitudes, DViewSpVx const all
         }
     }
     IndexSp iion(iion_opt.value());
-    amplitudes(iion) = m_amplitude;
-
     IDomainVx const gridvx = allfdistribu.domain<IDimVx>();
-    DFieldVx const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
-    Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
-    double const density_ion = integrate_v(allfdistribu[iion]);
-    double const density_electron = integrate_v(allfdistribu[ielec()]);
+    DFieldVx const quadrature_coeffs(trapezoid_quadrature_coefficients(gridvx));
+    auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs.span_view());
+    auto quadrature_coeffs_device = quadrature_coeffs_alloc.span_view();
 
-    amplitudes(ielec()) = m_amplitude * (density_ion - m_density) / (density_electron - m_density);
+    auto const& amplitude = m_amplitude;
+    auto const& density = m_density;
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            ddc::get_domain<IDimX>(allfdistribu),
+            DDC_LAMBDA(IndexX const ix) {
+                amplitudes(IndexSpX(iion, ix)) = amplitude;
+                double density_ion = 0.;
+                double density_electron = 0.;
+
+                for (IndexVx ivx : allfdistribu.domain<IDimVx>()) {
+                    density_ion += quadrature_coeffs_device(ivx) * allfdistribu(iion, ix, ivx);
+                    density_electron
+                            += quadrature_coeffs_device(ivx) * allfdistribu(ielec(), ix, ivx);
+                }
+                amplitudes(IndexSpX(ielec(), ix))
+                        = amplitude * (density_ion - density) / (density_electron - density);
+            });
 }
 
 void KrookSourceAdaptive::get_derivative(
@@ -119,30 +117,55 @@ void KrookSourceAdaptive::get_derivative(
         DViewSpXVx allfdistribu,
         DViewSpXVx allfdistribu_start) const
 {
-    IDomainSpVx sp_vx_dom = ddc::get_domain<IDimSp, IDimVx>(allfdistribu);
-    IDomainSp sp_dom = ddc::get_domain<IDimSp>(allfdistribu);
-    IDomainX x_dom = ddc::get_domain<IDimX>(allfdistribu);
+    auto df_device_alloc
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), df.span_view());
+    auto df_device = df_device_alloc.span_view();
 
-    DFieldSp amplitudes(sp_dom);
-    ddc::for_each(x_dom, [&](IndexX const ix) {
-        DFieldSpVx allfdistribu_slice(allfdistribu[ix]);
-        get_amplitudes(amplitudes.span_view(), allfdistribu_slice);
-        ddc::for_each(sp_vx_dom, [&](IndexSpVx const ispvx) {
-            IndexSp isp(ddc::select<IDimSp>(ispvx));
-            IndexVx ivx(ddc::select<IDimVx>(ispvx));
-            IndexSpXVx ispxvx(isp, ix, ivx);
-            df(ispxvx)
-                    = -m_mask(ix) * amplitudes(isp) * (allfdistribu_start(ispxvx) - m_ftarget(ivx));
-        });
-    });
+    auto allfdistribu_device_alloc = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu.span_view());
+    auto allfdistribu_device = allfdistribu_device_alloc.span_view();
+
+    auto allfdistribu_start_device_alloc = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            allfdistribu_start.span_view());
+    auto allfdistribu_start_device = allfdistribu_start_device_alloc.span_view();
+
+    device_t<DFieldSpX> amplitudes_device_alloc(
+            ddc::get_domain<IDimSp, IDimX>(allfdistribu_device));
+    auto amplitudes_device = amplitudes_device_alloc.span_view();
+    get_amplitudes(amplitudes_device, allfdistribu_device);
+
+    auto mask_device_alloc
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), m_mask.span_view());
+    auto mask_device = mask_device_alloc.span_view();
+
+    auto ftarget_device_alloc = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), m_ftarget.span_view());
+    auto ftarget_device = ftarget_device_alloc.span_view();
+
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            allfdistribu_device.domain(),
+            DDC_LAMBDA(IndexSpXVx const ispxvx) {
+                IndexSp isp(ddc::select<IDimSp>(ispxvx));
+                IndexX ix(ddc::select<IDimX>(ispxvx));
+                IndexVx ivx(ddc::select<IDimVx>(ispxvx));
+                df_device(ispxvx) = -mask_device(ix) * amplitudes_device(isp, ix)
+                                    * (allfdistribu_start_device(ispxvx) - ftarget_device(ivx));
+            });
+    ddc::deepcopy(df, df_device);
 }
 
-DSpanSpXVx KrookSourceAdaptive::operator()(DSpanSpXVx const allfdistribu, double const dt) const
+device_t<DSpanSpXVx> KrookSourceAdaptive::operator()(
+        device_t<DSpanSpXVx> const allfdistribu_device,
+        double const dt) const
 {
+    auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
+    ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
     RK2<DFieldSpXVx> timestepper(allfdistribu.domain());
     timestepper.update(allfdistribu, dt, [&](DSpanSpXVx df, DViewSpXVx f) {
         get_derivative(df, f, allfdistribu);
     });
-
-    return allfdistribu;
+    ddc::deepcopy(allfdistribu_device, allfdistribu);
+    return allfdistribu_device;
 }
