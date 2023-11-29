@@ -46,6 +46,7 @@ device_t<DSpanSpXVx> KineticSource::operator()(
         device_t<DSpanSpXVx> const allfdistribu,
         double const dt) const
 {
+    Kokkos::Profiling::pushRegion("KineticSource");
     auto velocity_shape_device_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             m_velocity_shape.span_view());
@@ -68,5 +69,6 @@ device_t<DSpanSpXVx> KineticSource::operator()(
                 allfdistribu(ispxvx) += df;
             });
 
+    Kokkos::Profiling::popRegion();
     return allfdistribu;
 }
