@@ -112,48 +112,50 @@ $(document).ready(function(){initNavTree('geometryXVx_2initialization_2maxwellia
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;iequilibrium.hpp&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a> : <span class="keyword">public</span> <a class="code" href="classIEquilibrium.html">IEquilibrium</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">// equilibrium density of all kinetic species</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    FieldSp&lt;double&gt; m_density_eq;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">// equilibrium temperature of all kinetic species</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    FieldSp&lt;double&gt; m_temperature_eq;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// equilibrium mean velocity of all kinetic species</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    FieldSp&lt;double&gt; m_mean_velocity_eq;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a>(DFieldSp density_eq, DFieldSp temperature_eq, DFieldSp mean_velocity_eq);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    ~<a class="code" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    device_t&lt;DSpanSpVx&gt; operator()(device_t&lt;DSpanSpVx&gt; allfequilibrium) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a2b7da0b0dcd654fc6de0e6bf6dedbf46">   35</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classMaxwellianEquilibrium.html#a2b7da0b0dcd654fc6de0e6bf6dedbf46">compute_maxwellian</a>(</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            device_t&lt;DSpanVx&gt; <span class="keyword">const</span> fMaxwellian,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> density,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> temperature,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> mean_velocity);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    ViewSp&lt;double&gt; density_eq()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">return</span> m_density_eq;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    ViewSp&lt;double&gt; temperature_eq()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">return</span> m_temperature_eq;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ViewSp&lt;double&gt; mean_velocity_eq()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">return</span> m_mean_velocity_eq;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
-<div class="ttc" id="aclassIEquilibrium_html"><div class="ttname"><a href="classIEquilibrium.html">IEquilibrium</a></div><div class="ttdef"><b>Definition:</b> iequilibrium.hpp:8</div></div>
-<div class="ttc" id="aclassMaxwellianEquilibrium_html"><div class="ttname"><a href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a></div><div class="ttdoc">Equilibrium operator as Maxwellian. This initializes all species.</div><div class="ttdef"><b>Definition:</b> maxwellianequilibrium.hpp:12</div></div>
-<div class="ttc" id="aclassMaxwellianEquilibrium_html_a2b7da0b0dcd654fc6de0e6bf6dedbf46"><div class="ttname"><a href="classMaxwellianEquilibrium.html#a2b7da0b0dcd654fc6de0e6bf6dedbf46">MaxwellianEquilibrium::compute_maxwellian</a></div><div class="ttdeci">static void compute_maxwellian(device_t&lt; DSpanVx &gt; const fMaxwellian, double const density, double const temperature, double const mean_velocity)</div><div class="ttdoc">Computing the non-centered Maxwellian function as fM(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T)) with ...</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a> : <span class="keyword">public</span> <a class="code" href="classIEquilibrium.html">IEquilibrium</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    FieldSp&lt;double&gt; m_density_eq;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    FieldSp&lt;double&gt; m_temperature_eq;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    FieldSp&lt;double&gt; m_mean_velocity_eq;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#ab3d592e3fee525903a504fbdb819142b">   31</a></span>&#160;    <a class="code" href="classMaxwellianEquilibrium.html#ab3d592e3fee525903a504fbdb819142b">MaxwellianEquilibrium</a>(DFieldSp <a class="code" href="classMaxwellianEquilibrium.html#a98691722df96759535fe638dcb41b674">density_eq</a>, DFieldSp <a class="code" href="classMaxwellianEquilibrium.html#a2c644a45780479702f52205ae1439343">temperature_eq</a>, DFieldSp <a class="code" href="classMaxwellianEquilibrium.html#a4e9512b33726f548cbbbdf4cba09c58a">mean_velocity_eq</a>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    ~<a class="code" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a7bae749d2a0ce0ad7fca578da6efa7ee">   40</a></span>&#160;    device_t&lt;DSpanSpVx&gt; <a class="code" href="classMaxwellianEquilibrium.html#a7bae749d2a0ce0ad7fca578da6efa7ee">operator()</a>(device_t&lt;DSpanSpVx&gt; allfequilibrium) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a2b7da0b0dcd654fc6de0e6bf6dedbf46">   53</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classMaxwellianEquilibrium.html#a2b7da0b0dcd654fc6de0e6bf6dedbf46">compute_maxwellian</a>(</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            device_t&lt;DSpanVx&gt; <span class="keyword">const</span> fMaxwellian,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> density,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> temperature,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> mean_velocity);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a98691722df96759535fe638dcb41b674">   63</a></span>&#160;    ViewSp&lt;double&gt; <a class="code" href="classMaxwellianEquilibrium.html#a98691722df96759535fe638dcb41b674">density_eq</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">return</span> m_density_eq;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a2c644a45780479702f52205ae1439343">   72</a></span>&#160;    ViewSp&lt;double&gt; <a class="code" href="classMaxwellianEquilibrium.html#a2c644a45780479702f52205ae1439343">temperature_eq</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">return</span> m_temperature_eq;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a4e9512b33726f548cbbbdf4cba09c58a">   81</a></span>&#160;    ViewSp&lt;double&gt; <a class="code" href="classMaxwellianEquilibrium.html#a4e9512b33726f548cbbbdf4cba09c58a">mean_velocity_eq</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">return</span> m_mean_velocity_eq;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
+<div class="ttc" id="aclassIEquilibrium_html"><div class="ttname"><a href="classIEquilibrium.html">IEquilibrium</a></div><div class="ttdoc">An abstract class for initializing a distribution function that does not depend on space.</div><div class="ttdef"><b>Definition:</b> iequilibrium.hpp:11</div></div>
+<div class="ttc" id="aclassMaxwellianEquilibrium_html"><div class="ttname"><a href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a></div><div class="ttdoc">A class that initializes the distribution function as a Maxwellian.</div><div class="ttdef"><b>Definition:</b> maxwellianequilibrium.hpp:14</div></div>
+<div class="ttc" id="aclassMaxwellianEquilibrium_html_a2b7da0b0dcd654fc6de0e6bf6dedbf46"><div class="ttname"><a href="classMaxwellianEquilibrium.html#a2b7da0b0dcd654fc6de0e6bf6dedbf46">MaxwellianEquilibrium::compute_maxwellian</a></div><div class="ttdeci">static void compute_maxwellian(device_t&lt; DSpanVx &gt; const fMaxwellian, double const density, double const temperature, double const mean_velocity)</div><div class="ttdoc">Compute a Maxwellian distribution function.</div></div>
+<div class="ttc" id="aclassMaxwellianEquilibrium_html_a2c644a45780479702f52205ae1439343"><div class="ttname"><a href="classMaxwellianEquilibrium.html#a2c644a45780479702f52205ae1439343">MaxwellianEquilibrium::temperature_eq</a></div><div class="ttdeci">ViewSp&lt; double &gt; temperature_eq() const</div><div class="ttdoc">A method for accessing the m_temperature_eq member variable of the class.</div><div class="ttdef"><b>Definition:</b> maxwellianequilibrium.hpp:72</div></div>
+<div class="ttc" id="aclassMaxwellianEquilibrium_html_a4e9512b33726f548cbbbdf4cba09c58a"><div class="ttname"><a href="classMaxwellianEquilibrium.html#a4e9512b33726f548cbbbdf4cba09c58a">MaxwellianEquilibrium::mean_velocity_eq</a></div><div class="ttdeci">ViewSp&lt; double &gt; mean_velocity_eq() const</div><div class="ttdoc">A method for accessing the m_mean_velocity_eq member variable of the class.</div><div class="ttdef"><b>Definition:</b> maxwellianequilibrium.hpp:81</div></div>
+<div class="ttc" id="aclassMaxwellianEquilibrium_html_a7bae749d2a0ce0ad7fca578da6efa7ee"><div class="ttname"><a href="classMaxwellianEquilibrium.html#a7bae749d2a0ce0ad7fca578da6efa7ee">MaxwellianEquilibrium::operator()</a></div><div class="ttdeci">device_t&lt; DSpanSpVx &gt; operator()(device_t&lt; DSpanSpVx &gt; allfequilibrium) const override</div><div class="ttdoc">Initializes allfequilibrium as a Maxwellian.</div></div>
+<div class="ttc" id="aclassMaxwellianEquilibrium_html_a98691722df96759535fe638dcb41b674"><div class="ttname"><a href="classMaxwellianEquilibrium.html#a98691722df96759535fe638dcb41b674">MaxwellianEquilibrium::density_eq</a></div><div class="ttdeci">ViewSp&lt; double &gt; density_eq() const</div><div class="ttdoc">A method for accessing the m_density_eq member variable of the class.</div><div class="ttdef"><b>Definition:</b> maxwellianequilibrium.hpp:63</div></div>
+<div class="ttc" id="aclassMaxwellianEquilibrium_html_ab3d592e3fee525903a504fbdb819142b"><div class="ttname"><a href="classMaxwellianEquilibrium.html#ab3d592e3fee525903a504fbdb819142b">MaxwellianEquilibrium::MaxwellianEquilibrium</a></div><div class="ttdeci">MaxwellianEquilibrium(DFieldSp density_eq, DFieldSp temperature_eq, DFieldSp mean_velocity_eq)</div><div class="ttdoc">The constructor for the MaxwellianEquilibrium class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

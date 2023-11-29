@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['manufacturedpoissontest_682',['ManufacturedPoissonTest',['../classManufacturedPoissonTest.html#a2882eef1431cf9ca3ff4504e2060890b',1,'ManufacturedPoissonTest']]],
-  ['metric_5ftensor_683',['metric_tensor',['../classCurvilinear2DToCartesian.html#a5d1a1f488cffb8a5e11c9a94dee2036a',1,'Curvilinear2DToCartesian']]]
+  ['lagrange_724',['Lagrange',['../classLagrange.html#ab6595c7a452aabfd08b47bb83b626306',1,'Lagrange']]],
+  ['lagrangeinterpolator_725',['LagrangeInterpolator',['../classLagrangeInterpolator.html#aa0e69b47983499b2162abb976f3230fe',1,'LagrangeInterpolator']]]
 ];

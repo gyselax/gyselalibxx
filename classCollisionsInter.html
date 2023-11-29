@@ -115,7 +115,7 @@ Inheritance diagram for CollisionsInter:</div>
  <div class="center">
   <img src="classCollisionsInter.png" usemap="#CollisionsInter_map" alt=""/>
   <map id="CollisionsInter_map" name="CollisionsInter_map">
-<area href="classIRightHandSide.html" alt="IRightHandSide" shape="rect" coords="0,0,98,24"/>
+<area href="classIRightHandSide.html" title="An abstract class representing a source in Boltzmann equation." alt="IRightHandSide" shape="rect" coords="0,0,98,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -124,15 +124,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a17b3fd2997376d30a7d7474bf675b647"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsInter.html#a17b3fd2997376d30a7d7474bf675b647">CollisionsInter</a> (IDomainSpXVx const &amp;mesh, double nustar0)</td></tr>
 <tr class="memdesc:a17b3fd2997376d30a7d7474bf675b647"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for the operator.  <a href="classCollisionsInter.html#a17b3fd2997376d30a7d7474bf675b647">More...</a><br /></td></tr>
 <tr class="separator:a17b3fd2997376d30a7d7474bf675b647"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3675918e984dedb1d536be00a20d398b"><td class="memItemLeft" align="right" valign="top">DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsInter.html#a3675918e984dedb1d536be00a20d398b">operator()</a> (DSpanSpXVx allfdistribu, double dt) const override</td></tr>
-<tr class="memdesc:a3675918e984dedb1d536be00a20d398b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the distribution function for inter-species collision.  <a href="classCollisionsInter.html#a3675918e984dedb1d536be00a20d398b">More...</a><br /></td></tr>
-<tr class="separator:a3675918e984dedb1d536be00a20d398b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49902dd08b9767eb54de0e4cff866dd3"><td class="memItemLeft" align="right" valign="top">device_t&lt; DSpanSpXVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsInter.html#a49902dd08b9767eb54de0e4cff866dd3">operator()</a> (device_t&lt; DSpanSpXVx &gt; allfdistribu, double dt) const override</td></tr>
+<tr class="memdesc:a49902dd08b9767eb54de0e4cff866dd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the distribution function for inter-species collision.  <a href="classCollisionsInter.html#a49902dd08b9767eb54de0e4cff866dd3">More...</a><br /></td></tr>
+<tr class="separator:a49902dd08b9767eb54de0e4cff866dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0de983fd5f398b17fc7b5c6137f8e8ac"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac">get_nustar0</a> () const</td></tr>
 <tr class="memdesc:a0de983fd5f398b17fc7b5c6137f8e8ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the collision coefficient.  <a href="classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac">More...</a><br /></td></tr>
 <tr class="separator:a0de983fd5f398b17fc7b5c6137f8e8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class describing the inter-species collision operator. </p>
+<p>The inter-species collision operator accounts for momentum and energy transfer between the maxwellian parts of the distribution function of different species. It is solved using a explicit time integrator (<a class="el" href="classRK2.html" title="A class which provides an implementation of a second-order Runge-Kutta method.">RK2</a> for instance).</p>
+<p>The complete description of the operator can be found in <a href="https://github.com/gyselax/gyselalibxx/blob/main/src/geometryXVx/rhs/doc/collisions_intra_inter.pdf">rhs docs</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a17b3fd2997376d30a7d7474bf675b647"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17b3fd2997376d30a7d7474bf675b647">&#9670;&nbsp;</a></span>CollisionsInter()</h2>
@@ -164,7 +166,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">mesh</td><td>The domain on which the operator will act. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nustar0</td><td>The collision coefficient. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nustar0</td><td>The normalized collisionality. </td></tr>
   </table>
   </dd>
 </dl>
@@ -172,8 +174,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3675918e984dedb1d536be00a20d398b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3675918e984dedb1d536be00a20d398b">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a49902dd08b9767eb54de0e4cff866dd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49902dd08b9767eb54de0e4cff866dd3">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,9 +184,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DSpanSpXVx CollisionsInter::operator() </td>
+          <td class="memname">device_t&lt;DSpanSpXVx&gt; CollisionsInter::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">device_t&lt; DSpanSpXVx &gt;&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
@@ -217,7 +219,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A span referencing the distribution function passed as argument. </dd></dl>
 
-<p>Implements <a class="el" href="classIRightHandSide.html">IRightHandSide</a>.</p>
+<p>Implements <a class="el" href="classIRightHandSide.html#a745d5bae7b23395d9dc7a0fd8a4b687f">IRightHandSide</a>.</p>
 
 </div>
 </div>
@@ -237,7 +239,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the collision coefficient. </p>
-<dl class="section return"><dt>Returns</dt><dd>The collision coefficient. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The collisionality. </dd></dl>
 
 </div>
 </div>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['span_5ftype_803',['span_type',['../classVectorField.html#a94d0034047dacae6e8a7f87d8b21fc41',1,'VectorField::span_type()'],['../classVectorFieldSpan.html#a159b7fcc46c877cd175b88be6b47d2d3',1,'VectorFieldSpan::span_type()']]]
+  ['rdimx_5fadv_862',['RDimX_adv',['../classAdvectionPhysicalDomain.html#a77b189d95314b128a28c1cc16cb82812',1,'AdvectionPhysicalDomain::RDimX_adv()'],['../classAdvectionPseudoCartesianDomain.html#a76a522695ce2d2704583afb7a91f218a',1,'AdvectionPseudoCartesianDomain::RDimX_adv()']]],
+  ['rdimy_5fadv_863',['RDimY_adv',['../classAdvectionPhysicalDomain.html#ade892d96a026786816cc72679b18e496',1,'AdvectionPhysicalDomain::RDimY_adv()'],['../classAdvectionPseudoCartesianDomain.html#a761b8ac4b157cce005008ca24ba11c2b',1,'AdvectionPseudoCartesianDomain::RDimY_adv()']]]
 ];

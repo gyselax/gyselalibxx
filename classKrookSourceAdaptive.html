@@ -106,28 +106,263 @@ $(document).ready(function(){initNavTree('classKrookSourceAdaptive.html',''); in
 <div class="title">KrookSourceAdaptive Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class that describes a source of particles.  
+ <a href="classKrookSourceAdaptive.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for KrookSourceAdaptive:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classKrookSourceAdaptive.png" usemap="#KrookSourceAdaptive_map" alt=""/>
   <map id="KrookSourceAdaptive_map" name="KrookSourceAdaptive_map">
-<area href="classIRightHandSide.html" alt="IRightHandSide" shape="rect" coords="0,0,136,24"/>
+<area href="classIRightHandSide.html" title="An abstract class representing a source in Boltzmann equation." alt="IRightHandSide" shape="rect" coords="0,0,136,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abf1debbb6437f7a5b9fe6656e39dee27"><td class="memItemLeft" align="right" valign="top"><a id="abf1debbb6437f7a5b9fe6656e39dee27"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>KrookSourceAdaptive</b> (IDomainX const &amp;gridx, IDomainVx const &amp;gridvx, RhsType const type, double extent, double stiffness, double amplitude, double density, double temperature)</td></tr>
+<tr class="memitem:abf1debbb6437f7a5b9fe6656e39dee27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceAdaptive.html#abf1debbb6437f7a5b9fe6656e39dee27">KrookSourceAdaptive</a> (IDomainX const &amp;gridx, IDomainVx const &amp;gridvx, RhsType const type, double extent, double stiffness, double amplitude, double density, double temperature)</td></tr>
+<tr class="memdesc:abf1debbb6437f7a5b9fe6656e39dee27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classKrookSourceAdaptive.html" title="A class that describes a source of particles.">KrookSourceAdaptive</a> class.  <a href="classKrookSourceAdaptive.html#abf1debbb6437f7a5b9fe6656e39dee27">More...</a><br /></td></tr>
 <tr class="separator:abf1debbb6437f7a5b9fe6656e39dee27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bddcb9927245e841113f9483271e6a0"><td class="memItemLeft" align="right" valign="top"><a id="a7bddcb9927245e841113f9483271e6a0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>KrookSourceAdaptive</b> (<a class="el" href="classKrookSourceAdaptive.html">KrookSourceAdaptive</a> &amp;&amp;)=default</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceAdaptive.html#a7bddcb9927245e841113f9483271e6a0">KrookSourceAdaptive</a> (<a class="el" href="classKrookSourceAdaptive.html">KrookSourceAdaptive</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a7bddcb9927245e841113f9483271e6a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classKrookSourceAdaptive.html" title="A class that describes a source of particles.">KrookSourceAdaptive</a> class. <br /></td></tr>
 <tr class="separator:a7bddcb9927245e841113f9483271e6a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2de5dbf5c5fdda96c35462b48e9f81f7"><td class="memItemLeft" align="right" valign="top"><a id="a2de5dbf5c5fdda96c35462b48e9f81f7"></a>
-DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpXVx allfdistribu, double dt) const override</td></tr>
-<tr class="separator:a2de5dbf5c5fdda96c35462b48e9f81f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a621fd9ac2bb1eaf47f7c3bf73aabd574"><td class="memItemLeft" align="right" valign="top">device_t&lt; DSpanSpXVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceAdaptive.html#a621fd9ac2bb1eaf47f7c3bf73aabd574">operator()</a> (device_t&lt; DSpanSpXVx &gt; allfdistribu, double dt) const override</td></tr>
+<tr class="memdesc:a621fd9ac2bb1eaf47f7c3bf73aabd574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the distribution function following the <a class="el" href="classKrookSourceAdaptive.html" title="A class that describes a source of particles.">KrookSourceAdaptive</a> operator.  <a href="classKrookSourceAdaptive.html#a621fd9ac2bb1eaf47f7c3bf73aabd574">More...</a><br /></td></tr>
+<tr class="separator:a621fd9ac2bb1eaf47f7c3bf73aabd574"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33d92ab924cca3d91c5838ff55985d58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceAdaptive.html#a33d92ab924cca3d91c5838ff55985d58">get_amplitudes</a> (device_t&lt; DSpanSpX &gt; amplitudes, device_t&lt; DViewSpXVx &gt; allfdistribu) const</td></tr>
+<tr class="memdesc:a33d92ab924cca3d91c5838ff55985d58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the amplitude coefficient of the <a class="el" href="classKrookSourceAdaptive.html" title="A class that describes a source of particles.">KrookSourceAdaptive</a> operator.  <a href="classKrookSourceAdaptive.html#a33d92ab924cca3d91c5838ff55985d58">More...</a><br /></td></tr>
+<tr class="separator:a33d92ab924cca3d91c5838ff55985d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b406e47034bbf02b16a3a0a43a7207e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceAdaptive.html#a9b406e47034bbf02b16a3a0a43a7207e">get_derivative</a> (DSpanSpXVx df, DViewSpXVx f, DViewSpXVx f0) const</td></tr>
+<tr class="memdesc:a9b406e47034bbf02b16a3a0a43a7207e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the expression of the time derivative of the distribution function.  <a href="classKrookSourceAdaptive.html#a9b406e47034bbf02b16a3a0a43a7207e">More...</a><br /></td></tr>
+<tr class="separator:a9b406e47034bbf02b16a3a0a43a7207e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class that describes a source of particles. </p>
+<p>The <a class="el" href="classKrookSourceAdaptive.html" title="A class that describes a source of particles.">KrookSourceAdaptive</a> class solves the following evolution equation: df/dt = -amplitude * mask * (f - ftarget)</p>
+<p>mask defines the spatial region where the operator is active.</p>
+<p>ftarget is a maxwellian characterized by density and temperature, and a zero fluid velocity.</p>
+<p>amplitude depends on space, time and the considered species so that:</p><ul>
+<li>amplitude(ions) = m_amplitude = constant <br  />
+</li>
+<li>amplitude(electrons, x, t) = m_amplitude (density_ions(x,t) - m_density) / (density_electrons(x,t) - m_density) <br  />
+ so that the operator conserves locally the charge.</li>
+</ul>
+<p>The complete description of the operator can be found in <a href="https://github.com/gyselax/gyselalibxx/blob/main/src/geometryXVx/rhs/doc/krook_source.pdf">rhs docs</a>. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abf1debbb6437f7a5b9fe6656e39dee27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf1debbb6437f7a5b9fe6656e39dee27">&#9670;&nbsp;</a></span>KrookSourceAdaptive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">KrookSourceAdaptive::KrookSourceAdaptive </td>
+          <td>(</td>
+          <td class="paramtype">IDomainX const &amp;&#160;</td>
+          <td class="paramname"><em>gridx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IDomainVx const &amp;&#160;</td>
+          <td class="paramname"><em>gridvx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RhsType const&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>extent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>stiffness</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>amplitude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>density</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>temperature</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates an instance of the <a class="el" href="classKrookSourceAdaptive.html" title="A class that describes a source of particles.">KrookSourceAdaptive</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">gridx</td><td>The mesh in the x direction. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">gridvx</td><td>The mesh in the vx direction. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>A RhsType parameter that defines the region where the operator is active. If type = Source, the mask equals one in the central zone of the plasma of width extent; If type = Sink, the mask equals zero in the central zone of the plasma of width extent; </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">extent</td><td>A parameter that sets the extent of the source. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stiffness</td><td>A parameter that sets the stiffness of the source extent. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">amplitude</td><td>A parameter that sets the amplitude of the source. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">density</td><td>A parameter that sets the density of the Maxwellian ftarget. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">temperature</td><td>A parameter that sets the temperature of the Maxwellian ftarget. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a621fd9ac2bb1eaf47f7c3bf73aabd574"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a621fd9ac2bb1eaf47f7c3bf73aabd574">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">device_t&lt;DSpanSpXVx&gt; KrookSourceAdaptive::operator() </td>
+          <td>(</td>
+          <td class="paramtype">device_t&lt; DSpanSpXVx &gt;&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the distribution function following the <a class="el" href="classKrookSourceAdaptive.html" title="A class that describes a source of particles.">KrookSourceAdaptive</a> operator. </p>
+<p>Update the distribution function for both electrons and ions to show how it is modified following the effect of the <a class="el" href="classKrookSourceAdaptive.html" title="A class that describes a source of particles.">KrookSourceAdaptive</a> operator.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>The distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The time step.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A span referencing the distribution function passed as argument. </dd></dl>
+
+<p>Implements <a class="el" href="classIRightHandSide.html#a745d5bae7b23395d9dc7a0fd8a4b687f">IRightHandSide</a>.</p>
+
+</div>
+</div>
+<a id="a33d92ab924cca3d91c5838ff55985d58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33d92ab924cca3d91c5838ff55985d58">&#9670;&nbsp;</a></span>get_amplitudes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void KrookSourceAdaptive::get_amplitudes </td>
+          <td>(</td>
+          <td class="paramtype">device_t&lt; DSpanSpX &gt;&#160;</td>
+          <td class="paramname"><em>amplitudes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">device_t&lt; DViewSpXVx &gt;&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes the amplitude coefficient of the <a class="el" href="classKrookSourceAdaptive.html" title="A class that describes a source of particles.">KrookSourceAdaptive</a> operator. </p>
+<p>This coefficient depends on the considered species and ensures that the operator conserves the charge locally.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">amplitudes</td><td>A Span that contains on output the amplitude coefficients for each species. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9b406e47034bbf02b16a3a0a43a7207e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b406e47034bbf02b16a3a0a43a7207e">&#9670;&nbsp;</a></span>get_derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void KrookSourceAdaptive::get_derivative </td>
+          <td>(</td>
+          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramname"><em>df</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramname"><em>f0</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes the expression of the time derivative of the distribution function. </p>
+<p>The expression is df = -amplitude * mask * (f - ftarget). This function is used for the time integrator (<a class="el" href="classRK2.html" title="A class which provides an implementation of a second-order Runge-Kutta method.">RK2</a> for instance).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">df</td><td>The time derivative. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>The distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">f0</td><td>An optional parameter. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/<a class="el" href="krook__source__adaptive_8hpp_source.html">krook_source_adaptive.hpp</a></li>
 </ul>

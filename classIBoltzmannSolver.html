@@ -106,23 +106,84 @@ $(document).ready(function(){initNavTree('classIBoltzmannSolver.html',''); initR
 <div class="title">IBoltzmannSolver Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An abstract class for solving a Boltzmann equation.  
+ <a href="classIBoltzmannSolver.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for IBoltzmannSolver:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classIBoltzmannSolver.png" usemap="#IBoltzmannSolver_map" alt=""/>
   <map id="IBoltzmannSolver_map" name="IBoltzmannSolver_map">
-<area href="classSplitRightHandSideSolver.html" alt="SplitRightHandSideSolver" shape="rect" coords="0,56,156,80"/>
-<area href="classSplitVlasovSolver.html" alt="SplitVlasovSolver" shape="rect" coords="166,56,322,80"/>
+<area href="classSplitRightHandSideSolver.html" title="A class that solves a Boltzmann equation using Strang&#39;s splitting." alt="SplitRightHandSideSolver" shape="rect" coords="0,56,156,80"/>
+<area href="classSplitVlasovSolver.html" title="A class that solves a Vlasov equation using Strang&#39;s splitting." alt="SplitVlasovSolver" shape="rect" coords="166,56,322,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a98dec4fbaa427c58422ed1c179e738bb"><td class="memItemLeft" align="right" valign="top"><a id="a98dec4fbaa427c58422ed1c179e738bb"></a>
-virtual DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpXVx allfdistribu, DViewX efield, double dt) const =0</td></tr>
-<tr class="separator:a98dec4fbaa427c58422ed1c179e738bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b7024d3c9d94d96ca31a7c9bf135872"><td class="memItemLeft" align="right" valign="top">virtual device_t&lt; DSpanSpXVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBoltzmannSolver.html#a9b7024d3c9d94d96ca31a7c9bf135872">operator()</a> (device_t&lt; DSpanSpXVx &gt; allfdistribu, DViewX efield, double dt) const =0</td></tr>
+<tr class="memdesc:a9b7024d3c9d94d96ca31a7c9bf135872"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for solving the Boltzmann equation on one timestep.  <a href="classIBoltzmannSolver.html#a9b7024d3c9d94d96ca31a7c9bf135872">More...</a><br /></td></tr>
+<tr class="separator:a9b7024d3c9d94d96ca31a7c9bf135872"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An abstract class for solving a Boltzmann equation. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9b7024d3c9d94d96ca31a7c9bf135872"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b7024d3c9d94d96ca31a7c9bf135872">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual device_t&lt;DSpanSpXVx&gt; IBoltzmannSolver::operator() </td>
+          <td>(</td>
+          <td class="paramtype">device_t&lt; DSpanSpXVx &gt;&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DViewX&#160;</td>
+          <td class="paramname"><em>efield</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Operator for solving the Boltzmann equation on one timestep. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Boltzmann equation on one timestep. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">efield</td><td>The electric field computed at every spatial position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The timestep. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the Boltzmann equation. </dd></dl>
+
+<p>Implemented in <a class="el" href="classSplitVlasovSolver.html#adae2faf181e6cacd76d9b78db7f03961">SplitVlasovSolver</a>, and <a class="el" href="classSplitRightHandSideSolver.html#a5dcc4d72d6f839ef28299ef355c09f2f">SplitRightHandSideSolver</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/<a class="el" href="iboltzmannsolver_8hpp_source.html">iboltzmannsolver.hpp</a></li>
 </ul>

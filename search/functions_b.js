@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['non_5fsingular_5fsolution_684',['non_singular_solution',['../classManufacturedPoissonTest.html#af7bed860a32f8678d1128795b614d6de',1,'ManufacturedPoissonTest']]],
-  ['norm_5finf_685',['norm_inf',['../utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c',1,'norm_inf(ddc::Coordinate&lt; Tags... &gt; coord):&#160;utils_tools.hpp'],['../utils__tools_8hpp.html#a8c5a1de1b27561eb7e33276fe08c8154',1,'norm_inf(double const coord):&#160;utils_tools.hpp']]]
+  ['manufacturedpoissontest_726',['ManufacturedPoissonTest',['../classManufacturedPoissonTest.html#a2882eef1431cf9ca3ff4504e2060890b',1,'ManufacturedPoissonTest']]],
+  ['maxwellianequilibrium_727',['MaxwellianEquilibrium',['../classMaxwellianEquilibrium.html#ab3d592e3fee525903a504fbdb819142b',1,'MaxwellianEquilibrium']]],
+  ['mean_5fvelocity_5fbot_728',['mean_velocity_bot',['../classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5',1,'BumpontailEquilibrium']]],
+  ['mean_5fvelocity_5feq_729',['mean_velocity_eq',['../classMaxwellianEquilibrium.html#a4e9512b33726f548cbbbdf4cba09c58a',1,'MaxwellianEquilibrium']]],
+  ['metric_5ftensor_730',['metric_tensor',['../classCurvilinear2DToCartesian.html#a5d1a1f488cffb8a5e11c9a94dee2036a',1,'Curvilinear2DToCartesian']]]
 ];

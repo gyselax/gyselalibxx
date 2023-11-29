@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['quadrature_20methods_820',['Quadrature Methods',['../src_quadrature.html',1,'src']]]
+  ['poisson_20solver_880',['Poisson Solver',['../src_geometryXVx_poisson.html',1,'src_geometryXVx'],['../src_geometryXYVxVy_poisson.html',1,'src_geometryXYVxVy']]],
+  ['polar_20poisson_20solver_881',['Polar Poisson solver',['../src_geometryRTheta_poisson.html',1,'src_geometryRTheta']]]
 ];

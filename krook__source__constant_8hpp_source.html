@@ -109,37 +109,40 @@ $(document).ready(function(){initNavTree('krook__source__constant_8hpp_source.ht
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;irighthandside.hpp&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="classKrookSourceConstant.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="classKrookSourceConstant.html">KrookSourceConstant</a> : <span class="keyword">public</span> <a class="code" href="classIRightHandSide.html">IRightHandSide</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    RhsType m_type;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">double</span> m_extent;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">double</span> m_stiffness;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">double</span> m_amplitude;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">double</span> m_density;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">double</span> m_temperature;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    DFieldX m_mask;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    DFieldVx m_ftarget;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="classKrookSourceConstant.html">KrookSourceConstant</a>(</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            IDomainX <span class="keyword">const</span>&amp; gridx,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            IDomainVx <span class="keyword">const</span>&amp; gridv,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            RhsType <span class="keyword">const</span> type,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keywordtype">double</span> extent,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keywordtype">double</span> stiffness,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordtype">double</span> amplitude,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordtype">double</span> density,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordtype">double</span> temperature);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classKrookSourceConstant.html">KrookSourceConstant</a>(<a class="code" href="classKrookSourceConstant.html">KrookSourceConstant</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    ~<a class="code" href="classKrookSourceConstant.html">KrookSourceConstant</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classKrookSourceConstant.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classKrookSourceConstant.html">KrookSourceConstant</a> : <span class="keyword">public</span> <a class="code" href="classIRightHandSide.html">IRightHandSide</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    RhsType m_type;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">double</span> m_extent;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">double</span> m_stiffness;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">double</span> m_amplitude;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">double</span> m_density;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">double</span> m_temperature;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    DFieldX m_mask;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    DFieldVx m_ftarget;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
-<div class="ttc" id="aclassIRightHandSide_html"><div class="ttname"><a href="classIRightHandSide.html">IRightHandSide</a></div><div class="ttdef"><b>Definition:</b> irighthandside.hpp:10</div></div>
-<div class="ttc" id="aclassKrookSourceConstant_html"><div class="ttname"><a href="classKrookSourceConstant.html">KrookSourceConstant</a></div><div class="ttdef"><b>Definition:</b> krook_source_constant.hpp:8</div></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classKrookSourceConstant.html#ad395273e96edc581ba4ba375c6fbb98c">   48</a></span>&#160;    <a class="code" href="classKrookSourceConstant.html#ad395273e96edc581ba4ba375c6fbb98c">KrookSourceConstant</a>(</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            IDomainX <span class="keyword">const</span>&amp; gridx,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            IDomainVx <span class="keyword">const</span>&amp; gridv,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            RhsType <span class="keyword">const</span> type,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordtype">double</span> extent,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordtype">double</span> stiffness,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordtype">double</span> amplitude,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordtype">double</span> density,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordtype">double</span> temperature);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classKrookSourceConstant.html#a94d8fa0b721fbe980a11a9edc298b9c8">   61</a></span>&#160;    <a class="code" href="classKrookSourceConstant.html#a94d8fa0b721fbe980a11a9edc298b9c8">KrookSourceConstant</a>(<a class="code" href="classKrookSourceConstant.html">KrookSourceConstant</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    ~<a class="code" href="classKrookSourceConstant.html">KrookSourceConstant</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classKrookSourceConstant.html#aa08a2d4e7de4acb1825608460290837e">   76</a></span>&#160;    device_t&lt;DSpanSpXVx&gt; <a class="code" href="classKrookSourceConstant.html#aa08a2d4e7de4acb1825608460290837e">operator()</a>(device_t&lt;DSpanSpXVx&gt; allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
+<div class="ttc" id="aclassIRightHandSide_html"><div class="ttname"><a href="classIRightHandSide.html">IRightHandSide</a></div><div class="ttdoc">An abstract class representing a source in Boltzmann equation.</div><div class="ttdef"><b>Definition:</b> irighthandside.hpp:16</div></div>
+<div class="ttc" id="aclassKrookSourceConstant_html"><div class="ttname"><a href="classKrookSourceConstant.html">KrookSourceConstant</a></div><div class="ttdoc">A class that describes a source of particles.</div><div class="ttdef"><b>Definition:</b> krook_source_constant.hpp:23</div></div>
+<div class="ttc" id="aclassKrookSourceConstant_html_a94d8fa0b721fbe980a11a9edc298b9c8"><div class="ttname"><a href="classKrookSourceConstant.html#a94d8fa0b721fbe980a11a9edc298b9c8">KrookSourceConstant::KrookSourceConstant</a></div><div class="ttdeci">KrookSourceConstant(KrookSourceConstant &amp;&amp;)=default</div><div class="ttdoc">Creates an instance of the KrookSourceConstant class.</div></div>
+<div class="ttc" id="aclassKrookSourceConstant_html_aa08a2d4e7de4acb1825608460290837e"><div class="ttname"><a href="classKrookSourceConstant.html#aa08a2d4e7de4acb1825608460290837e">KrookSourceConstant::operator()</a></div><div class="ttdeci">device_t&lt; DSpanSpXVx &gt; operator()(device_t&lt; DSpanSpXVx &gt; allfdistribu, double dt) const override</div><div class="ttdoc">Update the distribution function following the KrookSourceConstant operator.</div></div>
+<div class="ttc" id="aclassKrookSourceConstant_html_ad395273e96edc581ba4ba375c6fbb98c"><div class="ttname"><a href="classKrookSourceConstant.html#ad395273e96edc581ba4ba375c6fbb98c">KrookSourceConstant::KrookSourceConstant</a></div><div class="ttdeci">KrookSourceConstant(IDomainX const &amp;gridx, IDomainVx const &amp;gridv, RhsType const type, double extent, double stiffness, double amplitude, double density, double temperature)</div><div class="ttdoc">Creates an instance of the KrookSourceConstant class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

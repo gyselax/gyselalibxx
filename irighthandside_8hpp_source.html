@@ -109,16 +109,17 @@ $(document).ready(function(){initNavTree('irighthandside_8hpp_source.html',''); 
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">enum class</span> RhsType { Source, Sink };</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classIRightHandSide.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIRightHandSide.html">IRightHandSide</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIRightHandSide.html">IRightHandSide</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">virtual</span> DSpanSpXVx operator()(DSpanSpXVx allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;};</div>
-<div class="ttc" id="aclassIRightHandSide_html"><div class="ttname"><a href="classIRightHandSide.html">IRightHandSide</a></div><div class="ttdef"><b>Definition:</b> irighthandside.hpp:10</div></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">enum class</span> RhsType { Source, Sink };</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classIRightHandSide.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIRightHandSide.html">IRightHandSide</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIRightHandSide.html">IRightHandSide</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classIRightHandSide.html#a745d5bae7b23395d9dc7a0fd8a4b687f">   31</a></span>&#160;    <span class="keyword">virtual</span> device_t&lt;DSpanSpXVx&gt; <a class="code" href="classIRightHandSide.html#a745d5bae7b23395d9dc7a0fd8a4b687f">operator()</a>(device_t&lt;DSpanSpXVx&gt; allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="ttc" id="aclassIRightHandSide_html"><div class="ttname"><a href="classIRightHandSide.html">IRightHandSide</a></div><div class="ttdoc">An abstract class representing a source in Boltzmann equation.</div><div class="ttdef"><b>Definition:</b> irighthandside.hpp:16</div></div>
+<div class="ttc" id="aclassIRightHandSide_html_a745d5bae7b23395d9dc7a0fd8a4b687f"><div class="ttname"><a href="classIRightHandSide.html#a745d5bae7b23395d9dc7a0fd8a4b687f">IRightHandSide::operator()</a></div><div class="ttdeci">virtual device_t&lt; DSpanSpXVx &gt; operator()(device_t&lt; DSpanSpXVx &gt; allfdistribu, double dt) const =0</div><div class="ttdoc">Operator for applying the source term on the distribution function.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

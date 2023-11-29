@@ -106,6 +106,9 @@ $(document).ready(function(){initNavTree('classIRightHandSide.html',''); initRes
 <div class="title">IRightHandSide Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An abstract class representing a source in Boltzmann equation.  
+ <a href="classIRightHandSide.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for IRightHandSide:</div>
 <div class="dyncontent">
@@ -113,19 +116,70 @@ Inheritance diagram for IRightHandSide:</div>
   <img src="classIRightHandSide.png" usemap="#IRightHandSide_map" alt=""/>
   <map id="IRightHandSide_map" name="IRightHandSide_map">
 <area href="classCollisionsInter.html" title="Class describing the inter-species collision operator." alt="CollisionsInter" shape="rect" coords="0,56,136,80"/>
-<area href="classCollisionsIntra.html" alt="CollisionsIntra" shape="rect" coords="146,56,282,80"/>
-<area href="classKineticSource.html" alt="KineticSource" shape="rect" coords="292,56,428,80"/>
-<area href="classKrookSourceAdaptive.html" alt="KrookSourceAdaptive" shape="rect" coords="438,56,574,80"/>
-<area href="classKrookSourceConstant.html" alt="KrookSourceConstant" shape="rect" coords="584,56,720,80"/>
+<area href="classCollisionsIntra.html" title="Class describing the intra-species collision operator." alt="CollisionsIntra" shape="rect" coords="146,56,282,80"/>
+<area href="classKineticSource.html" title="A class that describes a source of particles." alt="KineticSource" shape="rect" coords="292,56,428,80"/>
+<area href="classKrookSourceAdaptive.html" title="A class that describes a source of particles." alt="KrookSourceAdaptive" shape="rect" coords="438,56,574,80"/>
+<area href="classKrookSourceConstant.html" title="A class that describes a source of particles." alt="KrookSourceConstant" shape="rect" coords="584,56,720,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae583170af9abcdbb740c12c963860367"><td class="memItemLeft" align="right" valign="top"><a id="ae583170af9abcdbb740c12c963860367"></a>
-virtual DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpXVx allfdistribu, double dt) const =0</td></tr>
-<tr class="separator:ae583170af9abcdbb740c12c963860367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a745d5bae7b23395d9dc7a0fd8a4b687f"><td class="memItemLeft" align="right" valign="top">virtual device_t&lt; DSpanSpXVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRightHandSide.html#a745d5bae7b23395d9dc7a0fd8a4b687f">operator()</a> (device_t&lt; DSpanSpXVx &gt; allfdistribu, double dt) const =0</td></tr>
+<tr class="memdesc:a745d5bae7b23395d9dc7a0fd8a4b687f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for applying the source term on the distribution function.  <a href="classIRightHandSide.html#a745d5bae7b23395d9dc7a0fd8a4b687f">More...</a><br /></td></tr>
+<tr class="separator:a745d5bae7b23395d9dc7a0fd8a4b687f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An abstract class representing a source in Boltzmann equation. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a745d5bae7b23395d9dc7a0fd8a4b687f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745d5bae7b23395d9dc7a0fd8a4b687f">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual device_t&lt;DSpanSpXVx&gt; IRightHandSide::operator() </td>
+          <td>(</td>
+          <td class="paramtype">device_t&lt; DSpanSpXVx &gt;&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Operator for applying the source term on the distribution function. </p>
+<p>The source \(S\) acts on the distribution function following the evolution equation df/dt = S </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>On input: the initial value of the distribution function. On output: the value of the distribution function after solving the source evolution equation on one timestep. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The timestep. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the source evolution equation. </dd></dl>
+
+<p>Implemented in <a class="el" href="classKrookSourceConstant.html#aa08a2d4e7de4acb1825608460290837e">KrookSourceConstant</a>, <a class="el" href="classKrookSourceAdaptive.html#a621fd9ac2bb1eaf47f7c3bf73aabd574">KrookSourceAdaptive</a>, <a class="el" href="classKineticSource.html#a99ebcf6c9cdcefdfbec763a937ef03fc">KineticSource</a>, <a class="el" href="classCollisionsIntra.html#afe72a54c69e85391b7d2974e062a8fcc">CollisionsIntra</a>, and <a class="el" href="classCollisionsInter.html#a49902dd08b9767eb54de0e4cff866dd3">CollisionsInter</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/<a class="el" href="irighthandside_8hpp_source.html">irighthandside.hpp</a></li>
 </ul>

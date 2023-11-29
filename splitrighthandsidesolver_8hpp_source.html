@@ -115,23 +115,27 @@ $(document).ready(function(){initNavTree('splitrighthandsidesolver_8hpp_source.h
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;iboltzmannsolver.hpp&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classSplitRightHandSideSolver.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSplitRightHandSideSolver.html">SplitRightHandSideSolver</a> : <span class="keyword">public</span> <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; m_boltzmann_solver;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    std::vector&lt;std::reference_wrapper&lt;IRightHandSide const&gt;&gt; m_rhs;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="classSplitRightHandSideSolver.html">SplitRightHandSideSolver</a>(</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; vlasov_solver,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            std::vector&lt;std::reference_wrapper&lt;IRightHandSide const&gt;&gt; rhs);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    ~<a class="code" href="classSplitRightHandSideSolver.html">SplitRightHandSideSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_field, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
-<div class="ttc" id="aclassIBoltzmannSolver_html"><div class="ttname"><a href="classIBoltzmannSolver.html">IBoltzmannSolver</a></div><div class="ttdef"><b>Definition:</b> iboltzmannsolver.hpp:8</div></div>
-<div class="ttc" id="aclassSplitRightHandSideSolver_html"><div class="ttname"><a href="classSplitRightHandSideSolver.html">SplitRightHandSideSolver</a></div><div class="ttdef"><b>Definition:</b> splitrighthandsidesolver.hpp:14</div></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classSplitRightHandSideSolver.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSplitRightHandSideSolver.html">SplitRightHandSideSolver</a> : <span class="keyword">public</span> <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; m_boltzmann_solver;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    std::vector&lt;std::reference_wrapper&lt;IRightHandSide const&gt;&gt; m_rhs;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classSplitRightHandSideSolver.html#a0437ce68ef4e58edc866392b429bd1ac">   40</a></span>&#160;    <a class="code" href="classSplitRightHandSideSolver.html#a0437ce68ef4e58edc866392b429bd1ac">SplitRightHandSideSolver</a>(</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; vlasov_solver,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            std::vector&lt;std::reference_wrapper&lt;IRightHandSide const&gt;&gt; rhs);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    ~<a class="code" href="classSplitRightHandSideSolver.html">SplitRightHandSideSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classSplitRightHandSideSolver.html#a5dcc4d72d6f839ef28299ef355c09f2f">   54</a></span>&#160;    device_t&lt;DSpanSpXVx&gt; <a class="code" href="classSplitRightHandSideSolver.html#a5dcc4d72d6f839ef28299ef355c09f2f">operator()</a>(</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            device_t&lt;DSpanSpXVx&gt; allfdistribu,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            DViewX electric_field,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
+<div class="ttc" id="aclassIBoltzmannSolver_html"><div class="ttname"><a href="classIBoltzmannSolver.html">IBoltzmannSolver</a></div><div class="ttdoc">An abstract class for solving a Boltzmann equation.</div><div class="ttdef"><b>Definition:</b> iboltzmannsolver.hpp:11</div></div>
+<div class="ttc" id="aclassSplitRightHandSideSolver_html"><div class="ttname"><a href="classSplitRightHandSideSolver.html">SplitRightHandSideSolver</a></div><div class="ttdoc">A class that solves a Boltzmann equation using Strang's splitting.</div><div class="ttdef"><b>Definition:</b> splitrighthandsidesolver.hpp:25</div></div>
+<div class="ttc" id="aclassSplitRightHandSideSolver_html_a0437ce68ef4e58edc866392b429bd1ac"><div class="ttname"><a href="classSplitRightHandSideSolver.html#a0437ce68ef4e58edc866392b429bd1ac">SplitRightHandSideSolver::SplitRightHandSideSolver</a></div><div class="ttdeci">SplitRightHandSideSolver(IBoltzmannSolver const &amp;vlasov_solver, std::vector&lt; std::reference_wrapper&lt; IRightHandSide const &gt;&gt; rhs)</div><div class="ttdoc">Creates an instance of the split boltzmann solver class.</div></div>
+<div class="ttc" id="aclassSplitRightHandSideSolver_html_a5dcc4d72d6f839ef28299ef355c09f2f"><div class="ttname"><a href="classSplitRightHandSideSolver.html#a5dcc4d72d6f839ef28299ef355c09f2f">SplitRightHandSideSolver::operator()</a></div><div class="ttdeci">device_t&lt; DSpanSpXVx &gt; operator()(device_t&lt; DSpanSpXVx &gt; allfdistribu, DViewX electric_field, double dt) const override</div><div class="ttdoc">Solves a Boltzmann equation on a timestep dt.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

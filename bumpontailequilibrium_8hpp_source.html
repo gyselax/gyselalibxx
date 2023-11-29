@@ -112,56 +112,49 @@ $(document).ready(function(){initNavTree('bumpontailequilibrium_8hpp_source.html
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;iequilibrium.hpp&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classBumpontailEquilibrium.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBumpontailEquilibrium.html">BumpontailEquilibrium</a> : <span class="keyword">public</span> <a class="code" href="classIEquilibrium.html">IEquilibrium</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">// density of the bump-on-tail part for all kinetic species</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    FieldSp&lt;double&gt; m_epsilon_bot;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">// temperature of the bump-on-tail for all kinetic species</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    FieldSp&lt;double&gt; m_temperature_bot;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// mean velocity of the bump-on-tail for all kinetic species</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    FieldSp&lt;double&gt; m_mean_velocity_bot;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">      Computation of the Maxwellian fM which is the equilibrium part </span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">      of the distribution function : </span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">        fM(v) = f1(v) + f2(v) </span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">      with </span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">        f1(v) = (1-epsilon)/(sqrt(2*PI))*exp(-v**2/2)  </span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">        f2(v) = epsilon/sqrt(2*PI*T0)*0.5*[exp(-(v-v0)**2/2*T0)</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">                                           +exp(-(v+v0)**2/2*T0)]</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> compute_twomaxwellian(</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            device_t&lt;DSpanVx&gt; fMaxwellian,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordtype">double</span> epsilon_bot,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keywordtype">double</span> temperature_bot,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keywordtype">double</span> mean_velocity_bot) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classBumpontailEquilibrium.html">BumpontailEquilibrium</a>(DViewSp epsilon_bot, DViewSp temperature_bot, DViewSp mean_velocity_bot);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ~<a class="code" href="classBumpontailEquilibrium.html">BumpontailEquilibrium</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    device_t&lt;DSpanSpVx&gt; operator()(device_t&lt;DSpanSpVx&gt; allfequilibrium) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    ViewSp&lt;double&gt; epsilon_bot()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">return</span> m_epsilon_bot;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    ViewSp&lt;double&gt; temperature_bot()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">return</span> m_temperature_bot;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    ViewSp&lt;double&gt; mean_velocity_bot()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">return</span> m_mean_velocity_bot;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="ttc" id="aclassBumpontailEquilibrium_html"><div class="ttname"><a href="classBumpontailEquilibrium.html">BumpontailEquilibrium</a></div><div class="ttdoc">Equilibrium operator as the sum of two Maxwellian. This initializes all species.</div><div class="ttdef"><b>Definition:</b> bumpontailequilibrium.hpp:12</div></div>
-<div class="ttc" id="aclassIEquilibrium_html"><div class="ttname"><a href="classIEquilibrium.html">IEquilibrium</a></div><div class="ttdef"><b>Definition:</b> iequilibrium.hpp:8</div></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classBumpontailEquilibrium.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBumpontailEquilibrium.html">BumpontailEquilibrium</a> : <span class="keyword">public</span> <a class="code" href="classIEquilibrium.html">IEquilibrium</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    FieldSp&lt;double&gt; m_epsilon_bot;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    FieldSp&lt;double&gt; m_temperature_bot;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    FieldSp&lt;double&gt; m_mean_velocity_bot;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classBumpontailEquilibrium.html#af3f0eca1b7309fc06eadfc2968be7eb5">   43</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classBumpontailEquilibrium.html#af3f0eca1b7309fc06eadfc2968be7eb5">compute_twomaxwellian</a>(</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            device_t&lt;DSpanVx&gt; fMaxwellian,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordtype">double</span> <a class="code" href="classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c">epsilon_bot</a>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordtype">double</span> <a class="code" href="classBumpontailEquilibrium.html#ac27c5a2a94df6fd896e7f60d429a02e3">temperature_bot</a>,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordtype">double</span> <a class="code" href="classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5">mean_velocity_bot</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classBumpontailEquilibrium.html#a06a0b54f9b731073cf23f94839b2e57b">   54</a></span>&#160;    <a class="code" href="classBumpontailEquilibrium.html#a06a0b54f9b731073cf23f94839b2e57b">BumpontailEquilibrium</a>(DViewSp <a class="code" href="classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c">epsilon_bot</a>, DViewSp <a class="code" href="classBumpontailEquilibrium.html#ac27c5a2a94df6fd896e7f60d429a02e3">temperature_bot</a>, DViewSp <a class="code" href="classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5">mean_velocity_bot</a>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    ~<a class="code" href="classBumpontailEquilibrium.html">BumpontailEquilibrium</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classBumpontailEquilibrium.html#a9180339254411a4fe68d6c08aad9f785">   63</a></span>&#160;    device_t&lt;DSpanSpVx&gt; <a class="code" href="classBumpontailEquilibrium.html#a9180339254411a4fe68d6c08aad9f785">operator()</a>(device_t&lt;DSpanSpVx&gt; allfequilibrium) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c">   69</a></span>&#160;    ViewSp&lt;double&gt; <a class="code" href="classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c">epsilon_bot</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">return</span> m_epsilon_bot;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classBumpontailEquilibrium.html#ac27c5a2a94df6fd896e7f60d429a02e3">   78</a></span>&#160;    ViewSp&lt;double&gt; <a class="code" href="classBumpontailEquilibrium.html#ac27c5a2a94df6fd896e7f60d429a02e3">temperature_bot</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> m_temperature_bot;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5">   87</a></span>&#160;    ViewSp&lt;double&gt; <a class="code" href="classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5">mean_velocity_bot</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">return</span> m_mean_velocity_bot;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;};</div>
+<div class="ttc" id="aclassBumpontailEquilibrium_html"><div class="ttname"><a href="classBumpontailEquilibrium.html">BumpontailEquilibrium</a></div><div class="ttdoc">A class that initializes the distribution function as a sum of two Maxwellian functions.</div><div class="ttdef"><b>Definition:</b> bumpontailequilibrium.hpp:20</div></div>
+<div class="ttc" id="aclassBumpontailEquilibrium_html_a06a0b54f9b731073cf23f94839b2e57b"><div class="ttname"><a href="classBumpontailEquilibrium.html#a06a0b54f9b731073cf23f94839b2e57b">BumpontailEquilibrium::BumpontailEquilibrium</a></div><div class="ttdeci">BumpontailEquilibrium(DViewSp epsilon_bot, DViewSp temperature_bot, DViewSp mean_velocity_bot)</div><div class="ttdoc">Creates an instance of the BumpontailEquilibrium class.</div></div>
+<div class="ttc" id="aclassBumpontailEquilibrium_html_a816fff8b884de64b09953986507eebb5"><div class="ttname"><a href="classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5">BumpontailEquilibrium::mean_velocity_bot</a></div><div class="ttdeci">ViewSp&lt; double &gt; mean_velocity_bot() const</div><div class="ttdoc">A method for accessing the m_mean_velocity_bot member variable of the class.</div><div class="ttdef"><b>Definition:</b> bumpontailequilibrium.hpp:87</div></div>
+<div class="ttc" id="aclassBumpontailEquilibrium_html_a9180339254411a4fe68d6c08aad9f785"><div class="ttname"><a href="classBumpontailEquilibrium.html#a9180339254411a4fe68d6c08aad9f785">BumpontailEquilibrium::operator()</a></div><div class="ttdeci">device_t&lt; DSpanSpVx &gt; operator()(device_t&lt; DSpanSpVx &gt; allfequilibrium) const override</div><div class="ttdoc">Initializes the distribution function as the sum of a bulk and a bump-on-tail Maxwellians.</div></div>
+<div class="ttc" id="aclassBumpontailEquilibrium_html_ac27c5a2a94df6fd896e7f60d429a02e3"><div class="ttname"><a href="classBumpontailEquilibrium.html#ac27c5a2a94df6fd896e7f60d429a02e3">BumpontailEquilibrium::temperature_bot</a></div><div class="ttdeci">ViewSp&lt; double &gt; temperature_bot() const</div><div class="ttdoc">A method for accessing the m_temperature_bot member variable of the class.</div><div class="ttdef"><b>Definition:</b> bumpontailequilibrium.hpp:78</div></div>
+<div class="ttc" id="aclassBumpontailEquilibrium_html_ad8e352123b6d60f8b8409244ab209a8c"><div class="ttname"><a href="classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c">BumpontailEquilibrium::epsilon_bot</a></div><div class="ttdeci">ViewSp&lt; double &gt; epsilon_bot() const</div><div class="ttdoc">A method for accessing the m_epsilon_bot member variable of the class.</div><div class="ttdef"><b>Definition:</b> bumpontailequilibrium.hpp:69</div></div>
+<div class="ttc" id="aclassBumpontailEquilibrium_html_af3f0eca1b7309fc06eadfc2968be7eb5"><div class="ttname"><a href="classBumpontailEquilibrium.html#af3f0eca1b7309fc06eadfc2968be7eb5">BumpontailEquilibrium::compute_twomaxwellian</a></div><div class="ttdeci">void compute_twomaxwellian(device_t&lt; DSpanVx &gt; fMaxwellian, double epsilon_bot, double temperature_bot, double mean_velocity_bot) const</div><div class="ttdoc">Compute a distribution function defined as a sum of two Maxwellians.</div></div>
+<div class="ttc" id="aclassIEquilibrium_html"><div class="ttname"><a href="classIEquilibrium.html">IEquilibrium</a></div><div class="ttdoc">An abstract class for initializing a distribution function that does not depend on space.</div><div class="ttdef"><b>Definition:</b> iequilibrium.hpp:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

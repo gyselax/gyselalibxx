@@ -103,10 +103,15 @@ $(document).ready(function(){initNavTree('src_geometryXVx.html',''); initResizab
 <div class="title">Geometry (x, v_x) </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The <code>geoemtryXVx</code> folder contains all the code describing methods which are specific to a geometry with 1 spatial dimension and 1 velocity dimension. It is broken up into the following sub-folders:</p>
+<div class="textblock"><p>The <code>geometryXVx</code> folder contains all the code describing methods which are specific to a geometry with 1 spatial dimension and 1 velocity dimension. It is broken up into the following sub-folders:</p>
 <ul>
-<li><a class="el" href="src_geometryXVx_geometry.html">Geometry X-Vx</a> --&gt; - All the dimension tags used for a simulation in the geometry.</li>
-<li><a class="el" href="src_geometryXVx_poisson.html">Poisson Solver</a> - Code describing the polar Poisson solver. </li>
+<li><a class="el" href="src_geometryXVx_boltzmann.html">Boltzmann solver</a> : Solvers for a Boltzmann equation.</li>
+<li><a class="el" href="src_geometryXVx_geometry.html">Geometry X-Vx</a> : All the dimension tags used for a simulation in the geometry.</li>
+<li><a class="el" href="src_geometryXVx_initialization.html">Initialization methods</a> : Initialization methods for the distribution function.</li>
+<li><a class="el" href="src_geometryXVx_poisson.html">Poisson Solver</a> : Code describing the polar Poisson solver.</li>
+<li><a class="el" href="src_geometryXVx_rhs.html">RHS</a> : Code describing the operators on the right hand side of the Boltzmann equation; namely sources, sinks and collisions.</li>
+<li><a class="el" href="src_geometryXVx_time_integration.html">Time integration</a> : Time integrators for a Boltzmann-Poisson system of equations.</li>
+<li><a class="el" href="src_geometryXVx_utils.html">Utils</a> : Miscellaneous utility functions. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

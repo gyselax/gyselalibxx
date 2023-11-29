@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('classBumpontailEquilibrium.html',''); 
 </div><!--header-->
 <div class="contents">
 
-<p>Equilibrium operator as the sum of two Maxwellian. This initializes all species.  
+<p>A class that initializes the distribution function as a sum of two Maxwellian functions.  
  <a href="classBumpontailEquilibrium.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for BumpontailEquilibrium:</div>
@@ -115,29 +115,29 @@ Inheritance diagram for BumpontailEquilibrium:</div>
  <div class="center">
   <img src="classBumpontailEquilibrium.png" usemap="#BumpontailEquilibrium_map" alt=""/>
   <map id="BumpontailEquilibrium_map" name="BumpontailEquilibrium_map">
-<area href="classIEquilibrium.html" alt="IEquilibrium" shape="rect" coords="0,0,134,24"/>
+<area href="classIEquilibrium.html" title="An abstract class for initializing a distribution function that does not depend on space." alt="IEquilibrium" shape="rect" coords="0,0,134,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af3f0eca1b7309fc06eadfc2968be7eb5"><td class="memItemLeft" align="right" valign="top"><a id="af3f0eca1b7309fc06eadfc2968be7eb5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>compute_twomaxwellian</b> (device_t&lt; DSpanVx &gt; fMaxwellian, double epsilon_bot, double temperature_bot, double mean_velocity_bot) const</td></tr>
+<tr class="memitem:af3f0eca1b7309fc06eadfc2968be7eb5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#af3f0eca1b7309fc06eadfc2968be7eb5">compute_twomaxwellian</a> (device_t&lt; DSpanVx &gt; fMaxwellian, double <a class="el" href="classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c">epsilon_bot</a>, double <a class="el" href="classBumpontailEquilibrium.html#ac27c5a2a94df6fd896e7f60d429a02e3">temperature_bot</a>, double <a class="el" href="classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5">mean_velocity_bot</a>) const</td></tr>
+<tr class="memdesc:af3f0eca1b7309fc06eadfc2968be7eb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a distribution function defined as a sum of two Maxwellians.  <a href="classBumpontailEquilibrium.html#af3f0eca1b7309fc06eadfc2968be7eb5">More...</a><br /></td></tr>
 <tr class="separator:af3f0eca1b7309fc06eadfc2968be7eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06a0b54f9b731073cf23f94839b2e57b"><td class="memItemLeft" align="right" valign="top"><a id="a06a0b54f9b731073cf23f94839b2e57b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BumpontailEquilibrium</b> (DViewSp epsilon_bot, DViewSp temperature_bot, DViewSp mean_velocity_bot)</td></tr>
+<tr class="memitem:a06a0b54f9b731073cf23f94839b2e57b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#a06a0b54f9b731073cf23f94839b2e57b">BumpontailEquilibrium</a> (DViewSp <a class="el" href="classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c">epsilon_bot</a>, DViewSp <a class="el" href="classBumpontailEquilibrium.html#ac27c5a2a94df6fd896e7f60d429a02e3">temperature_bot</a>, DViewSp <a class="el" href="classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5">mean_velocity_bot</a>)</td></tr>
+<tr class="memdesc:a06a0b54f9b731073cf23f94839b2e57b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classBumpontailEquilibrium.html" title="A class that initializes the distribution function as a sum of two Maxwellian functions.">BumpontailEquilibrium</a> class.  <a href="classBumpontailEquilibrium.html#a06a0b54f9b731073cf23f94839b2e57b">More...</a><br /></td></tr>
 <tr class="separator:a06a0b54f9b731073cf23f94839b2e57b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9180339254411a4fe68d6c08aad9f785"><td class="memItemLeft" align="right" valign="top"><a id="a9180339254411a4fe68d6c08aad9f785"></a>
-device_t&lt; DSpanSpVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (device_t&lt; DSpanSpVx &gt; allfequilibrium) const override</td></tr>
+<tr class="memitem:a9180339254411a4fe68d6c08aad9f785"><td class="memItemLeft" align="right" valign="top">device_t&lt; DSpanSpVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#a9180339254411a4fe68d6c08aad9f785">operator()</a> (device_t&lt; DSpanSpVx &gt; allfequilibrium) const override</td></tr>
+<tr class="memdesc:a9180339254411a4fe68d6c08aad9f785"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the distribution function as the sum of a bulk and a bump-on-tail Maxwellians.  <a href="classBumpontailEquilibrium.html#a9180339254411a4fe68d6c08aad9f785">More...</a><br /></td></tr>
 <tr class="separator:a9180339254411a4fe68d6c08aad9f785"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8e352123b6d60f8b8409244ab209a8c"><td class="memItemLeft" align="right" valign="top"><a id="ad8e352123b6d60f8b8409244ab209a8c"></a>
-ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>epsilon_bot</b> () const</td></tr>
+<tr class="memitem:ad8e352123b6d60f8b8409244ab209a8c"><td class="memItemLeft" align="right" valign="top">ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c">epsilon_bot</a> () const</td></tr>
+<tr class="memdesc:ad8e352123b6d60f8b8409244ab209a8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the m_epsilon_bot member variable of the class.  <a href="classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c">More...</a><br /></td></tr>
 <tr class="separator:ad8e352123b6d60f8b8409244ab209a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac27c5a2a94df6fd896e7f60d429a02e3"><td class="memItemLeft" align="right" valign="top"><a id="ac27c5a2a94df6fd896e7f60d429a02e3"></a>
-ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>temperature_bot</b> () const</td></tr>
+<tr class="memitem:ac27c5a2a94df6fd896e7f60d429a02e3"><td class="memItemLeft" align="right" valign="top">ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#ac27c5a2a94df6fd896e7f60d429a02e3">temperature_bot</a> () const</td></tr>
+<tr class="memdesc:ac27c5a2a94df6fd896e7f60d429a02e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the m_temperature_bot member variable of the class.  <a href="classBumpontailEquilibrium.html#ac27c5a2a94df6fd896e7f60d429a02e3">More...</a><br /></td></tr>
 <tr class="separator:ac27c5a2a94df6fd896e7f60d429a02e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a816fff8b884de64b09953986507eebb5"><td class="memItemLeft" align="right" valign="top"><a id="a816fff8b884de64b09953986507eebb5"></a>
-ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mean_velocity_bot</b> () const</td></tr>
+<tr class="memitem:a816fff8b884de64b09953986507eebb5"><td class="memItemLeft" align="right" valign="top">ViewSp&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5">mean_velocity_bot</a> () const</td></tr>
+<tr class="memdesc:a816fff8b884de64b09953986507eebb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the m_mean_velocity_bot member variable of the class.  <a href="classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5">More...</a><br /></td></tr>
 <tr class="separator:a816fff8b884de64b09953986507eebb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classIEquilibrium"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIEquilibrium')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIEquilibrium.html">IEquilibrium</a></td></tr>
 <tr class="memitem:aa9cde57feac60ee82ae09fc61c86c807 inherit pub_methods_classIEquilibrium"><td class="memItemLeft" align="right" valign="top"><a id="aa9cde57feac60ee82ae09fc61c86c807"></a>
@@ -145,8 +145,227 @@ virtual DSpanSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operat
 <tr class="separator:aa9cde57feac60ee82ae09fc61c86c807 inherit pub_methods_classIEquilibrium"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Equilibrium operator as the sum of two Maxwellian. This initializes all species. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<div class="textblock"><p>A class that initializes the distribution function as a sum of two Maxwellian functions. </p>
+<p>This class initializes the distribution function as a sum of two Maxwellian, enabling the study of the so-called bump-on-tail instability. One of the Maxwellians represents the bulk of the distribution function that has no mean velocity, and the other Maxwellian corresponds to high velocity particles. The second Maxwellian is referred to as the "bump-on-tail" Maxwellian. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a06a0b54f9b731073cf23f94839b2e57b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06a0b54f9b731073cf23f94839b2e57b">&#9670;&nbsp;</a></span>BumpontailEquilibrium()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BumpontailEquilibrium::BumpontailEquilibrium </td>
+          <td>(</td>
+          <td class="paramtype">DViewSp&#160;</td>
+          <td class="paramname"><em>epsilon_bot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DViewSp&#160;</td>
+          <td class="paramname"><em>temperature_bot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DViewSp&#160;</td>
+          <td class="paramname"><em>mean_velocity_bot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates an instance of the <a class="el" href="classBumpontailEquilibrium.html" title="A class that initializes the distribution function as a sum of two Maxwellian functions.">BumpontailEquilibrium</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">epsilon_bot</td><td>A parameter that represents the density of the bump-on-tail Maxwellian for each species. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">temperature_bot</td><td>A parameter that represents the temperature of the bump-on-tail Maxwellian for each species. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mean_velocity_bot</td><td>A parameter that represents the mean velocity of the bump-on-tail Maxwellian for each species. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af3f0eca1b7309fc06eadfc2968be7eb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3f0eca1b7309fc06eadfc2968be7eb5">&#9670;&nbsp;</a></span>compute_twomaxwellian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BumpontailEquilibrium::compute_twomaxwellian </td>
+          <td>(</td>
+          <td class="paramtype">device_t&lt; DSpanVx &gt;&#160;</td>
+          <td class="paramname"><em>fMaxwellian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>epsilon_bot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>temperature_bot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mean_velocity_bot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute a distribution function defined as a sum of two Maxwellians. </p>
+<p>This distribution function can be written as $f(x,v) = f1(v) + f2(v) $ with $f1(v) = (1-epsilon)/(sqrt(2*PI))*exp(-v**2/2)$ $f2(v) = epsilon/sqrt(2*PI*T0)[exp(-(v-v0)**2/2*T0)$ </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">fMaxwellian</td><td>The initial distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">epsilon_bot</td><td>A parameter that represents the density of the bump-on-tail Maxwellian. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">temperature_bot</td><td>A parameter that represents the temperature of the bump-on-tail Maxwellian. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mean_velocity_bot</td><td>A parameter that represents the mean velocity of the bump-on-tail Maxwellian. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9180339254411a4fe68d6c08aad9f785"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9180339254411a4fe68d6c08aad9f785">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">device_t&lt;DSpanSpVx&gt; BumpontailEquilibrium::operator() </td>
+          <td>(</td>
+          <td class="paramtype">device_t&lt; DSpanSpVx &gt;&#160;</td>
+          <td class="paramname"><em>allfequilibrium</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes the distribution function as the sum of a bulk and a bump-on-tail Maxwellians. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">allfequilibrium</td><td>The initialized distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The initialized distribution function. </dd></dl>
+
+<p>Implements <a class="el" href="classIEquilibrium.html#aafc91262c3d3a5c87aa80707ad1ec5dc">IEquilibrium</a>.</p>
+
+</div>
+</div>
+<a id="ad8e352123b6d60f8b8409244ab209a8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8e352123b6d60f8b8409244ab209a8c">&#9670;&nbsp;</a></span>epsilon_bot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ViewSp&lt;double&gt; BumpontailEquilibrium::epsilon_bot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A method for accessing the m_epsilon_bot member variable of the class. </p>
+<dl class="section return"><dt>Returns</dt><dd>a View containing the m_epsilon_bot variable. </dd></dl>
+
+</div>
+</div>
+<a id="ac27c5a2a94df6fd896e7f60d429a02e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac27c5a2a94df6fd896e7f60d429a02e3">&#9670;&nbsp;</a></span>temperature_bot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ViewSp&lt;double&gt; BumpontailEquilibrium::temperature_bot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A method for accessing the m_temperature_bot member variable of the class. </p>
+<dl class="section return"><dt>Returns</dt><dd>a View containing the m_temperature_bot variable. </dd></dl>
+
+</div>
+</div>
+<a id="a816fff8b884de64b09953986507eebb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a816fff8b884de64b09953986507eebb5">&#9670;&nbsp;</a></span>mean_velocity_bot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ViewSp&lt;double&gt; BumpontailEquilibrium::mean_velocity_bot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A method for accessing the m_mean_velocity_bot member variable of the class. </p>
+<dl class="section return"><dt>Returns</dt><dd>a View containing the m_velocity_bot variable. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialization/<a class="el" href="bumpontailequilibrium_8hpp_source.html">bumpontailequilibrium.hpp</a></li>
 </ul>
 </div><!-- contents -->

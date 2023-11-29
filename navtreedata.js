@@ -60,7 +60,6 @@ var NAVTREE =
       [ "References", "simulations_geometryXVx_sheath.html#References", null ]
     ] ],
     [ "Gyselalib++ contents", "src.html", "src" ],
-    [ "Initializatin methods", "src_geometryXVx_initialization.html", null ],
     [ "Tests : Geometry (r, theta)", "tests_geometryRTheta.html", "tests_geometryRTheta" ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
     [ "API reference", "annotated.html", "annotated" ],
@@ -72,10 +71,10 @@ var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCzarnyToCartesian.html#a2accff89f6adf775ecd46e7a467938b5",
-"classMatrix__Corner__Block.html#a5af1055a64ebe2f66469e3522411dd73",
-"classSpeciesInformation_1_1Impl.html#a219fbcef554ce8d99265d545825c18dc",
-"classdeprecated_1_1Spline1D.html#a4eca6bdba41567bc4fcafa49ec613b2e",
-"polar__poisson_2test__cases_8hpp_source.html"
+"classMatrix__Corner__Block.html#a48fb0458b7bb4811406b6deda078de6e",
+"classSpeciesInformation_1_1Impl.html",
+"classdeprecated_1_1Spline1D.html#a2bf4b4003db316555f6a26a1b5320991",
+"polar__bsplines_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -106,6 +106,9 @@ $(document).ready(function(){initNavTree('classIInitialization.html',''); initRe
 <div class="title">IInitialization Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An abstract class that allows for initializing a distribution function.  
+ <a href="classIInitialization.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for IInitialization:</div>
 <div class="dyncontent">
@@ -113,20 +116,60 @@ Inheritance diagram for IInitialization:</div>
   <img src="classIInitialization.png" usemap="#IInitialization_map" alt=""/>
   <map id="IInitialization_map" name="IInitialization_map">
 <area href="classRestartInitialization.html" title="A class that initializes the distribution function from a previous simulation." alt="RestartInitialization" shape="rect" coords="0,56,186,80"/>
-<area href="classSingleModePerturbInitialization.html" title="Initialization operator with a sinusoidal perturbation of a Maxwellian. This initializes all species." alt="SingleModePerturbInitialization" shape="rect" coords="196,56,382,80"/>
-<area href="classSingleModePerturbInitialization.html" title="Initialization operator with a sinusoidal perturbation of a Maxwellian. This initializes all species." alt="SingleModePerturbInitialization" shape="rect" coords="392,56,578,80"/>
+<area href="classSingleModePerturbInitialization.html" title="A class that initializes the distribution function as a perturbed Maxwellian." alt="SingleModePerturbInitialization" shape="rect" coords="196,56,382,80"/>
+<area href="classSingleModePerturbInitialization.html" title="A class that initializes the distribution function as a perturbed Maxwellian." alt="SingleModePerturbInitialization" shape="rect" coords="392,56,578,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad59df5f163a86a71e7be023bdb3575d7"><td class="memItemLeft" align="right" valign="top"><a id="ad59df5f163a86a71e7be023bdb3575d7"></a>
-virtual device_t&lt; DSpanSpXVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (device_t&lt; DSpanSpXVx &gt; allfdistribu) const =0</td></tr>
+<tr class="memitem:ad59df5f163a86a71e7be023bdb3575d7"><td class="memItemLeft" align="right" valign="top">virtual device_t&lt; DSpanSpXVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInitialization.html#ad59df5f163a86a71e7be023bdb3575d7">operator()</a> (device_t&lt; DSpanSpXVx &gt; allfdistribu) const =0</td></tr>
+<tr class="memdesc:ad59df5f163a86a71e7be023bdb3575d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for initializing a distribution function.  <a href="classIInitialization.html#ad59df5f163a86a71e7be023bdb3575d7">More...</a><br /></td></tr>
 <tr class="separator:ad59df5f163a86a71e7be023bdb3575d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f426856e221de98fd68e2a4ea757819"><td class="memItemLeft" align="right" valign="top"><a id="a9f426856e221de98fd68e2a4ea757819"></a>
 virtual DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpXYVxVy allfdistribu) const =0</td></tr>
 <tr class="separator:a9f426856e221de98fd68e2a4ea757819"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An abstract class that allows for initializing a distribution function. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad59df5f163a86a71e7be023bdb3575d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad59df5f163a86a71e7be023bdb3575d7">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual device_t&lt;DSpanSpXVx&gt; IInitialization::operator() </td>
+          <td>(</td>
+          <td class="paramtype">device_t&lt; DSpanSpXVx &gt;&#160;</td>
+          <td class="paramname"><em>allfdistribu</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Operator for initializing a distribution function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>On input: the uninitialized distribution function. On output: the initialized distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The initialized distribution function. </dd></dl>
+
+<p>Implemented in <a class="el" href="classSingleModePerturbInitialization.html#a26987a033a77da3a4ef971303c334981">SingleModePerturbInitialization</a>, and <a class="el" href="classRestartInitialization.html#a1c294a807a9f20bbbf72a1f05f99fe02">RestartInitialization</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialization/<a class="el" href="geometryXVx_2initialization_2iinitialization_8hpp_source.html">iinitialization.hpp</a></li>
 </ul>
