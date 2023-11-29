@@ -68,6 +68,7 @@ device_t<DSpanSpXVx> KrookSourceConstant::operator()(
         device_t<DSpanSpXVx> const allfdistribu,
         double const dt) const
 {
+    Kokkos::Profiling::pushRegion("KrookSource");
     auto ftarget_device_alloc = ddc::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), m_ftarget.span_view());
     auto ftarget_device = ftarget_device_alloc.span_view();
@@ -90,5 +91,6 @@ device_t<DSpanSpXVx> KrookSourceConstant::operator()(
                                             * dt);
             });
 
+    Kokkos::Profiling::popRegion();
     return allfdistribu;
 }
