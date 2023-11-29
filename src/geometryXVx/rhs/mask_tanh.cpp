@@ -9,20 +9,6 @@
 
 #include "mask_tanh.hpp"
 
-/**
- * Returns a mask function defined with hyperbolic tangents
- *
- * Consider the domain [xmin, xmax], and {xleft, xright} the transition coordinates
- * defined using the extent parameter.
- *
- *  If type = 'normal' the mask equals one inside the [xleft, xright] interval
- *  and zero outside.
- *  If type = 'inverted' the mask equals zero inside the [xleft, xright] interval
- *  and one outside.
- *
- *  If m_normalized = true, the mask is normalized so that its integral equals one
- */
-
 DFieldX mask_tanh(
         IDomainX const& gridx,
         double const extent,

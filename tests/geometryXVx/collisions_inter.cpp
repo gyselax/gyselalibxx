@@ -73,7 +73,7 @@ TEST(CollisionsInter, CollisionsInter)
             std::move(masses),
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
-    DFieldSpXVx allfdistribu(mesh);
+    device_t<DFieldSpXVx> allfdistribu_device(mesh);
 
     std::vector<double> deltat_list = {0.1, 0.01};
     std::vector<double> error_deltat;
@@ -85,7 +85,7 @@ TEST(CollisionsInter, CollisionsInter)
         temperature_init(my_iion) = 1.;
         temperature_init(my_ielec) = 1.2;
         double const fluid_velocity_init(0.);
-        ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+        ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
             device_t<DFieldVx> finit_device(gridvx);
             MaxwellianEquilibrium::compute_maxwellian(
                     finit_device.span_view(),
@@ -93,8 +93,9 @@ TEST(CollisionsInter, CollisionsInter)
                     temperature_init(ddc::select<IDimSp>(ispx)),
                     fluid_velocity_init);
             auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
-            ddc::deepcopy(allfdistribu[ispx], finit);
+            ddc::deepcopy(allfdistribu_device[ispx], finit);
         });
+
 
         double const nustar0(0.1);
         CollisionsInter collisions(mesh, nustar0);
@@ -103,13 +104,15 @@ TEST(CollisionsInter, CollisionsInter)
         Quadrature<IDimVx> integrate(quadrature_coeffs);
         FluidMoments moments(integrate);
 
+        auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
         DFieldSpX nustar_profile(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
         compute_nustar_profile(nustar_profile.span_view(), nustar0);
 
         int const nbiter(100);
         for (int iter(0); iter < nbiter; iter++) {
-            collisions(allfdistribu, deltat);
+            collisions(allfdistribu_device, deltat);
         }
+        ddc::deepcopy(allfdistribu, allfdistribu_device);
 
         double error_L1(0);
         ddc::for_each(gridx, [&](IndexX const ix) {

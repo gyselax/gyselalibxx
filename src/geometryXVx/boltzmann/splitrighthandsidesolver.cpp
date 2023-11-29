@@ -17,8 +17,8 @@ SplitRightHandSideSolver::SplitRightHandSideSolver(
 {
 }
 
-DSpanSpXVx SplitRightHandSideSolver::operator()(
-        DSpanSpXVx const allfdistribu,
+device_t<DSpanSpXVx> SplitRightHandSideSolver::operator()(
+        device_t<DSpanSpXVx> const allfdistribu,
         DViewX const electric_field,
         double const dt) const
 {

@@ -12,6 +12,13 @@
 
 /**
  * @brief Class describing the inter-species collision operator
+ * 
+ * The inter-species collision operator accounts for momentum and 
+ * energy transfer between the maxwellian parts of the distribution
+ * function of different species. It is solved using a explicit time 
+ * integrator (RK2 for instance).
+ * 
+ * The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/main/src/geometryXVx/rhs/doc/collisions_intra_inter.pdf). 
  */
 class CollisionsInter : public IRightHandSide
 {
@@ -24,7 +31,7 @@ public:
      * @brief The constructor for the operator.
      *
      * @param[in] mesh The domain on which the operator will act.
-     * @param[in] nustar0 The collision coefficient.
+     * @param[in] nustar0 The normalized collisionality.
      */
     CollisionsInter(IDomainSpXVx const& mesh, double nustar0);
 
@@ -43,12 +50,12 @@ public:
      *
      * @return A span referencing the distribution function passed as argument.
      */
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
+    device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu, double dt) const override;
 
     /**
      * @brief Get the collision coefficient.
      *
-     * @return The collision coefficient.
+     * @return The collisionality.
      */
     double get_nustar0() const;
 
