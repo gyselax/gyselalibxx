@@ -7,30 +7,48 @@
 
 #include "iequilibrium.hpp"
 
-/// Equilibrium operator as Maxwellian. This initializes all species.
+/**
+ * @brief A class that initializes the distribution function as a Maxwellian.
+ */
 class MaxwellianEquilibrium : public IEquilibrium
 {
-    // equilibrium density of all kinetic species
+    /**Equilibrium density of all kinetic species*/
     FieldSp<double> m_density_eq;
 
-    // equilibrium temperature of all kinetic species
+    /**Equilibrium temperature of all kinetic species*/
     FieldSp<double> m_temperature_eq;
 
-    // equilibrium mean velocity of all kinetic species
+    /**Equilibrium mean velocity of all kinetic species*/
     FieldSp<double> m_mean_velocity_eq;
 
 public:
+    /**
+     * @brief The constructor for the MaxwellianEquilibrium class.
+     * @param[in] density_eq The density of the Maxwellian
+     * @param[in] temperature_eq The temperature of the Maxwellian
+     * @param[in] mean_velocity_eq The mean velocity of the Maxwellian
+     */
     MaxwellianEquilibrium(DFieldSp density_eq, DFieldSp temperature_eq, DFieldSp mean_velocity_eq);
 
     ~MaxwellianEquilibrium() override = default;
 
+    /**
+     * @brief Initializes allfequilibrium as a Maxwellian.
+     * @param[out] allfequilibrium A Span containing a Maxwellian distribution function.
+     * @return A Span containing a Maxwellian distribution function.
+     */
     device_t<DSpanSpVx> operator()(device_t<DSpanSpVx> allfequilibrium) const override;
 
     /**
-     * Computing the non-centered Maxwellian function as
-     * fM(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T))
-     * with n the density and T the temperature and
-     * where u is the mean velocity
+     * @brief Compute a Maxwellian distribution function.
+     * The Maxwellian distribution function is defined as 
+     * $f_M(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T))$
+     * with $n$ the density, $T$ the temperature and
+     * $u$ is the mean velocity.
+     * @param[out] fMaxwellian A Maxwellian distribution function. 
+     * @param[in] density A parameter that represents the density of Maxwellian. 
+     * @param[in] temperature A parameter that represents the temperature of Maxwellian. 
+     * @param[in] mean_velocity A parameter that represents the mean velocity of Maxwellian. 
      */
     static void compute_maxwellian(
             device_t<DSpanVx> const fMaxwellian,
@@ -38,16 +56,28 @@ public:
             double const temperature,
             double const mean_velocity);
 
+    /**
+     * @brief A method for accessing the m_density_eq member variable of the class.
+     * @return A view containing the m_density_eq value. 
+     */
     ViewSp<double> density_eq() const
     {
         return m_density_eq;
     }
 
+    /**
+     * @brief A method for accessing the m_temperature_eq member variable of the class.
+     * @return A view containing the m_temperature_eq value. 
+     */
     ViewSp<double> temperature_eq() const
     {
         return m_temperature_eq;
     }
 
+    /**
+     * @brief A method for accessing the m_mean_velocity_eq member variable of the class.
+     * @return A view containing the m_velocity_eq value. 
+     */
     ViewSp<double> mean_velocity_eq() const
     {
         return m_mean_velocity_eq;

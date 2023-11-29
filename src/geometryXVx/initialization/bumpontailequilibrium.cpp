@@ -38,14 +38,6 @@ device_t<DSpanSpVx> BumpontailEquilibrium::operator()(
     return allfequilibrium;
 }
 
-/*
-Computation of the Maxwellian fM which is the equilibrium part 
-of the distribution function : 
-  fM(v) = f1(v) + f2(v) 
-with 
-  f1(v) = (1-epsilon)/(sqrt(2*PI))*exp(-v**2/2)  
-  f2(v) = epsilon/sqrt(2*PI*T0)[exp(-(v-v0)**2/2*T0)]
-*/
 void BumpontailEquilibrium::compute_twomaxwellian(
         device_t<DSpanVx> const fMaxwellian,
         double const epsilon_bot,
