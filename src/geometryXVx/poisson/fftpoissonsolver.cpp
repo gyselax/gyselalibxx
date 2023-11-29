@@ -33,6 +33,7 @@ void FftPoissonSolver::operator()(
         DSpanX const electric_field,
         DViewSpXVx const allfdistribu) const
 {
+    Kokkos::Profiling::pushRegion("PoissonSolver");
     assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
     IDomainX const x_dom = electrostatic_potential.domain();
 
@@ -71,4 +72,5 @@ void FftPoissonSolver::operator()(
 
     // Compute efield = -dPhi/dx where Phi is the electrostatic potential
     m_electric_field(electric_field, electrostatic_potential);
+    Kokkos::Profiling::popRegion();
 }

@@ -12,6 +12,7 @@ ChargeDensityCalculator::ChargeDensityCalculator(Quadrature<IDimVx> const& quad)
 
 DSpanX ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const allfdistribu) const
 {
+    Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
     IndexSp const last_kin_species = allfdistribu.domain<IDimSp>().back();
     IndexSp const last_species = ddc::discrete_space<IDimSp>().charges().domain().back();
     double chargedens_adiabspecies = 0.;
@@ -25,6 +26,7 @@ DSpanX ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const al
             rho(ix) += charge(isp) * m_quad(allfdistribu[isp][ix]);
         });
     });
+    Kokkos::Profiling::popRegion();
 
     return rho;
 }
