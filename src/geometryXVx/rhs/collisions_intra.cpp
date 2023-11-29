@@ -214,6 +214,7 @@ device_t<DSpanSpXVx> CollisionsIntra::operator()(
         device_t<DSpanSpXVx> allfdistribu_device,
         double dt) const
 {
+    Kokkos::Profiling::pushRegion("CollisionsIntra");
     auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
     ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
     // density and temperature
@@ -326,5 +327,6 @@ device_t<DSpanSpXVx> CollisionsIntra::operator()(
     });
 
     ddc::deepcopy(allfdistribu_device, allfdistribu);
+    Kokkos::Profiling::popRegion();
     return allfdistribu_device;
 }

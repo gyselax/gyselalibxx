@@ -19,7 +19,7 @@ SplineChargeDensityCalculator::SplineChargeDensityCalculator(
 DSpanX SplineChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const allfdistribu)
         const
 {
-    Kokkos::Profiling::pushRegion("SplineChargeDensityCalculator");
+    Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
     DFieldVx f_vx_slice(allfdistribu.domain<IDimVx>());
     ddc::Chunk<double, BSDomainVx> vx_spline_coef(m_spline_vx_builder.spline_domain());
 

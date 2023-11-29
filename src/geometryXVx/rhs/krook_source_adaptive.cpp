@@ -160,6 +160,7 @@ device_t<DSpanSpXVx> KrookSourceAdaptive::operator()(
         device_t<DSpanSpXVx> const allfdistribu_device,
         double const dt) const
 {
+    Kokkos::Profiling::pushRegion("KrookSource");
     auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
     ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
     RK2<DFieldSpXVx> timestepper(allfdistribu.domain());
@@ -167,5 +168,6 @@ device_t<DSpanSpXVx> KrookSourceAdaptive::operator()(
         get_derivative(df, f, allfdistribu);
     });
     ddc::deepcopy(allfdistribu_device, allfdistribu);
+    Kokkos::Profiling::popRegion();
     return allfdistribu_device;
 }

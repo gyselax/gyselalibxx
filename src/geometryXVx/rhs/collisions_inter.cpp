@@ -94,10 +94,12 @@ device_t<DSpanSpXVx> CollisionsInter::operator()(
         device_t<DSpanSpXVx> allfdistribu_device,
         double dt) const
 {
+    Kokkos::Profiling::pushRegion("CollisionsInter");
     auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
     ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
     RK2<DFieldSpXVx> timestepper(allfdistribu.domain());
     timestepper.update(allfdistribu, dt, [&](DSpanSpXVx dy, DViewSpXVx y) { compute_rhs(dy, y); });
     ddc::deepcopy(allfdistribu_device, allfdistribu);
+    Kokkos::Profiling::popRegion();
     return allfdistribu_device;
 }
