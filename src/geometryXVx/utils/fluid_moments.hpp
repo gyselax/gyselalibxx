@@ -6,8 +6,10 @@
 #include <quadrature.hpp>
 
 /**
- * Computes fluid moments of the distribution function 
- * Density, mean velocity and temperature.
+ * @brief A class that computes fluid moments of the distribution function.
+ * 
+ * These fluid moments are the density, mean velocity and temperature of 
+ * the distribution function.
  */
 class FluidMoments
 {

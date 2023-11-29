@@ -6,9 +6,20 @@
 #include <quadrature.hpp>
 #include <trapezoid_quadrature.hpp>
 
+/**
+* @brief Compute the collisionality spatial profile.
+* @param[inout] nustar_profile The collisionality profile.
+* @param[in] nustar0 normalized collisionality coefficient.
+*/
 void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0);
 
-// intra species collision operator helper functions
+/**
+* @brief Compute the collision frequency for each species.
+* @param[inout] collfreq A Span representing the collision frequency for each species.
+* @param[in] nustar_profile The collisionality profile.
+* @param[in] density The density of each species.
+* @param[in] temperature The temperature of each species.
+*/
 void compute_collfreq(
         DSpanSpX collfreq,
         DViewSpX nustar_profile,
@@ -16,8 +27,12 @@ void compute_collfreq(
         DViewSpX temperature);
 
 /**
- * Computes the diffusion coefficent Dcoll
- */
+* @brief Compute the intra species collision operator diffusion coefficient.
+* @param[inout] Dcoll A Span representing the diffusion coefficient.
+* @param[in] collfreq The collision frequency for each species.
+* @param[in] density The density of each species.
+* @param[in] temperature The temperature of each species.
+*/
 template <class IDimension>
 void compute_Dcoll(
         ddc::ChunkSpan<double, ddc::DiscreteDomain<IDimSp, IDimX, IDimension>> Dcoll,
@@ -48,6 +63,13 @@ void compute_Dcoll(
     });
 }
 
+/**
+* @brief Compute the velocity derivative of the collision operator diffusion coefficient.
+* @param[inout] dvDcoll A Span representing the derivative of the diffusion coefficient.
+* @param[in] collfreq The collision frequency for each species.
+* @param[in] density The density of each species.
+* @param[in] temperature The temperature of each species.
+*/
 template <class IDimension>
 void compute_dvDcoll(
         ddc::ChunkSpan<double, ddc::DiscreteDomain<IDimSp, IDimX, IDimension>> dvDcoll,
@@ -84,20 +106,28 @@ void compute_dvDcoll(
 }
 
 /**
- * Computation of Vcoll and Tcoll, which are the moments
- * of the kernel maxwellian function of the intra species collision operator.
- * Vcoll and Tcoll are defined as follows:
- *  - Tcoll = Pcoll^{-1}[Imean0*Imean2 - Imean1*Imean1]
- *  - Vcoll = Pcoll^{-1}[Imean4*Imean1 - Imean3*Imean2]
- *  - Pcoll = Imean0*Imean4 - Imean1*Imean3
- *  where the 5 integrals are defined as:
- *     Imean0=<Dcoll> ;
- *     Imean1=<v*Dcoll> ;
- *     Imean2=<v^2*Dcoll> ;
- *     Imean3=<d/dv(Dcoll)>
- *     Imean4=<d/dv(v*Dcoll)>
- *  The brackets <.> represent the integral in velocity: <.> = \int . dv
- */
+* @brief Compute the Vcoll and Tcoll coefficients, used for building the linear system.
+* 
+* Computation of Vcoll and Tcoll, which are the moments
+* of the kernel maxwellian function of the intra species collision operator.
+* Vcoll and Tcoll are defined as follows:
+*  - Tcoll = Pcoll^{-1}[Imean0*Imean2 - Imean1*Imean1]
+*  - Vcoll = Pcoll^{-1}[Imean4*Imean1 - Imean3*Imean2]
+*  - Pcoll = Imean0*Imean4 - Imean1*Imean3
+*  where the 5 integrals are defined as:
+*     Imean0=<Dcoll> ;
+*     Imean1=<v*Dcoll> ;
+*     Imean2=<v^2*Dcoll> ;
+*     Imean3=<d/dv(Dcoll)>
+*     Imean4=<d/dv(v*Dcoll)>
+*  The brackets <.> represent the integral in velocity: <.> = \int . dv
+* 
+* @param[inout] Vcoll The Vcoll coefficient.
+* @param[inout] Tcoll The Tcoll coefficient.
+* @param[in] allfdistribu The distribution function.
+* @param[in] Dcoll The collision operator diffusion coefficient.
+* @param[in] dvDcoll The collision operator derivative of the diffusion coefficient.
+*/
 template <class IDimension>
 void compute_Vcoll_Tcoll(
         DSpanSpX Vcoll,
@@ -148,8 +178,12 @@ void compute_Vcoll_Tcoll(
 }
 
 /**
- * Computes the convection coefficent Nucoll
- */
+* @brief Compute the intra species collision operator advection coefficient.
+* @param[inout] Nucoll A Span representing the advection coefficient.
+* @param[in] Dcoll A Span representing the diffusion coefficient.
+* @param[in] Vcoll The Vcoll coefficient.
+* @param[in] Tcoll The Tcoll coefficient.
+*/
 template <class IDimension>
 void compute_Nucoll(
         ddc::ChunkSpan<double, ddc::DiscreteDomain<IDimSp, IDimX, IDimension>> Nucoll,
@@ -164,13 +198,28 @@ void compute_Nucoll(
     });
 }
 
-// inter species collision operator helper functions
+/**
+* @brief Compute the collision frequency between species a and b.
+* @param[inout] collfreq_ab The collision frequency between species a and b.
+* @param[in] nustar_profile The collisionality profile.
+* @param[in] density The density of each species.
+* @param[in] temperature The temperature of each species.
+*/
 void compute_collfreq_ab(
         DSpanSp collfreq_ab,
         DViewSp nustar_profile,
         DViewSp density,
         DViewSp temperature);
 
+/**
+* @brief Compute the momentum and energy exchange terms between species a and b.
+* @param[inout] momentum_exchange_ab The momentum exchange term between species a and b.
+* @param[inout] energy_exchange_ab The energy exchange term between species a and b.
+* @param[in] collfreq_ab The collision frequency between species a and b.
+* @param[in] density The density of each species.
+* @param[in] mean_velocity The mean velocity of each species.
+* @param[in] temperature The temperature of each species.
+*/
 void compute_momentum_energy_exchange(
         DSpanSp momentum_exchange_ab,
         DSpanSp energy_exchange_ab,

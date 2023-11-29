@@ -8,20 +8,6 @@
 #include "krook_source_constant.hpp"
 #include "mask_tanh.hpp"
 
-/**
- * Solves the equation \f$\partial f / \partial_t\f$ = -amplitude * mask * ( f - ftarget) (BGK operator)
- * 
- * mask defines the spatial region where the operator is active. 
- * If type = Source, the mask equals one in the central zone of the plasma of width extent; 
- * If type = Sink, the mask equals zero in the central zone of the plasma of width extent;
- *
- * ftarget is a maxwellian characterized by density and temperature, and a zero fluid velocity.
- *
- * amplitude is a constant
- *
- * therefore : 
- * f(t+dt) = ftarget + (f(t)-ftarget)*exp(-amplitude*mask*dt)
- */
 KrookSourceConstant::KrookSourceConstant(
         IDomainX const& gridx,
         IDomainVx const& gridvx,
@@ -78,14 +64,31 @@ KrookSourceConstant::KrookSourceConstant(
     }
 }
 
-DSpanSpXVx KrookSourceConstant::operator()(DSpanSpXVx const allfdistribu, double const dt) const
+device_t<DSpanSpXVx> KrookSourceConstant::operator()(
+        device_t<DSpanSpXVx> const allfdistribu,
+        double const dt) const
 {
-    ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-        allfdistribu(ispxvx)
-                = m_ftarget(ddc::select<IDimVx>(ispxvx))
-                  + (allfdistribu(ispxvx) - m_ftarget(ddc::select<IDimVx>(ispxvx)))
-                            * std::exp(-m_amplitude * m_mask(ddc::select<IDimX>(ispxvx)) * dt);
-    });
+    auto ftarget_device_alloc = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), m_ftarget.span_view());
+    auto ftarget_device = ftarget_device_alloc.span_view();
+
+    auto mask_device_alloc
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), m_mask.span_view());
+    auto mask_device = mask_device_alloc.span_view();
+
+    auto const& amplitude = m_amplitude;
+
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            allfdistribu.domain(),
+            DDC_LAMBDA(IndexSpXVx const ispxvx) {
+                allfdistribu(ispxvx)
+                        = ftarget_device(ddc::select<IDimVx>(ispxvx))
+                          + (allfdistribu(ispxvx) - ftarget_device(ddc::select<IDimVx>(ispxvx)))
+                                    * Kokkos::exp(
+                                            -amplitude * mask_device(ddc::select<IDimX>(ispxvx))
+                                            * dt);
+            });
 
     return allfdistribu;
 }
