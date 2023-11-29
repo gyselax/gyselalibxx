@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['lagrange_517',['Lagrange',['../classLagrange.html',1,'']]],
-  ['lagrangeinterpolator_518',['LagrangeInterpolator',['../classLagrangeInterpolator.html',1,'']]]
+  ['lagrange_523',['Lagrange',['../classLagrange.html',1,'']]],
+  ['lagrangeinterpolator_524',['LagrangeInterpolator',['../classLagrangeInterpolator.html',1,'']]]
 ];

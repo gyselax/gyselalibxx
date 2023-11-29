@@ -395,27 +395,31 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2geometry_2geometry_8hp
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="keyword">using</span> IDomainFy = ddc::DiscreteDomain&lt;IDimFy&gt;;</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="keyword">using</span> IDomainFxFy = ddc::DiscreteDomain&lt;IDimFx, IDimFy&gt;;</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html">  317</a></span>&#160;<span class="keyword">class </span><a class="code" href="classGeometryXYVxVy.html">GeometryXYVxVy</a></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;{</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keyword">using</span> velocity_dim_for = std::conditional_t&lt;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            std::is_same_v&lt;T, IDimX&gt;,</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            IDimVx,</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            std::conditional_t&lt;std::is_same_v&lt;T, IDimY&gt;, IDimVy, <span class="keywordtype">void</span>&gt;&gt;;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="comment">// template &lt;class T&gt;</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="comment">// using spatial_dim_for = std::conditional_t&lt;std::is_same_v&lt;T, IDimVx&gt;, IDimX, std::conditional_t&lt;std::is_same_v&lt;T, IDimVy&gt;, IDimY, void&gt;&gt;;</span></div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keyword">using</span> <a class="code" href="classSpeciesInformation.html">DDimSp</a> = <a class="code" href="classSpeciesInformation.html">IDimSp</a>;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keyword">using</span> SpatialDDom = IDomainXY;</div>
+<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html">  321</a></span>&#160;<span class="keyword">class </span><a class="code" href="classGeometryXYVxVy.html">GeometryXYVxVy</a></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;{</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00328"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">  328</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">velocity_dim_for</a> = std::conditional_t&lt;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            std::is_same_v&lt;T, IDimX&gt;,</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;            IDimVx,</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;            std::conditional_t&lt;std::is_same_v&lt;T, IDimY&gt;, IDimVy, <span class="keywordtype">void</span>&gt;&gt;;</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keyword">using</span> VelocityDDom = IDomainVxVy;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keyword">using</span> FdistribuDDom = IDomainSpXYVxVy;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;};</div>
-<div class="ttc" id="aclassGeometryXYVxVy_html"><div class="ttname"><a href="classGeometryXYVxVy.html">GeometryXYVxVy</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:318</div></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="comment">// template &lt;class T&gt;</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="comment">// using spatial_dim_for = std::conditional_t&lt;std::is_same_v&lt;T, IDimVx&gt;, IDimX, std::conditional_t&lt;std::is_same_v&lt;T, IDimVy&gt;, IDimY, void&gt;&gt;;</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
+<div class="line"><a name="l00342"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a9be0f111d79a4e10d3bc86050fc28f57">  342</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classSpeciesInformation.html">DDimSp</a> = <a class="code" href="classSpeciesInformation.html">IDimSp</a>;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">  347</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">SpatialDDom</a> = IDomainXY;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
+<div class="line"><a name="l00352"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a32ca2463cf7921342f7816c97121eddb">  352</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a32ca2463cf7921342f7816c97121eddb">VelocityDDom</a> = IDomainVxVy;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
+<div class="line"><a name="l00357"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90">  357</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90">FdistribuDDom</a> = IDomainSpXYVxVy;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;};</div>
+<div class="ttc" id="aclassGeometryXYVxVy_html"><div class="ttname"><a href="classGeometryXYVxVy.html">GeometryXYVxVy</a></div><div class="ttdoc">A class providing aliases for useful subdomains of the geometry.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:322</div></div>
+<div class="ttc" id="aclassGeometryXYVxVy_html_a32ca2463cf7921342f7816c97121eddb"><div class="ttname"><a href="classGeometryXYVxVy.html#a32ca2463cf7921342f7816c97121eddb">GeometryXYVxVy::VelocityDDom</a></div><div class="ttdeci">IDomainVxVy VelocityDDom</div><div class="ttdoc">An alias for the velocity discrete domain type.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:352</div></div>
+<div class="ttc" id="aclassGeometryXYVxVy_html_a78e6b9a2d43d06e94d551cc736801e90"><div class="ttname"><a href="classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90">GeometryXYVxVy::FdistribuDDom</a></div><div class="ttdeci">IDomainSpXYVxVy FdistribuDDom</div><div class="ttdoc">An alias for the whole distribution function discrete domain type.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:357</div></div>
+<div class="ttc" id="aclassGeometryXYVxVy_html_a93e46a882dc277945ed3d50d7cb892ad"><div class="ttname"><a href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">GeometryXYVxVy::SpatialDDom</a></div><div class="ttdeci">IDomainXY SpatialDDom</div><div class="ttdoc">An alias for the spatial discrete domain type.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:347</div></div>
+<div class="ttc" id="aclassGeometryXYVxVy_html_a9478473d2c2f743cbd876536fb40fcc0"><div class="ttname"><a href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">GeometryXYVxVy::velocity_dim_for</a></div><div class="ttdeci">std::conditional_t&lt; std::is_same_v&lt; T, IDimX &gt;, IDimVx, std::conditional_t&lt; std::is_same_v&lt; T, IDimY &gt;, IDimVy, void &gt; &gt; velocity_dim_for</div><div class="ttdoc">A templated type giving the velocity discrete dimension type associated to a spatial discrete dimensi...</div><div class="ttdef"><b>Definition:</b> geometry.hpp:331</div></div>
 <div class="ttc" id="aclassGrevilleInterpolationPoints_html"><div class="ttname"><a href="classGrevilleInterpolationPoints.html">GrevilleInterpolationPoints</a></div><div class="ttdoc">A class which provides helper functions to initialise the Greville points from a B-Spline definition.</div><div class="ttdef"><b>Definition:</b> greville_interpolation_points.hpp:20</div></div>
 <div class="ttc" id="aclassNonUniformBSplines_html"><div class="ttname"><a href="classNonUniformBSplines.html">NonUniformBSplines</a></div><div class="ttdoc">NonUniformPointSampling specialization of BSplines.</div><div class="ttdef"><b>Definition:</b> bsplines_non_uniform.hpp:16</div></div>
 <div class="ttc" id="aclassSpeciesInformation_html"><div class="ttname"><a href="classSpeciesInformation.html">SpeciesInformation</a></div><div class="ttdef"><b>Definition:</b> species_info.hpp:8</div></div>

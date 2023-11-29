@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['poisson_20solver_880',['Poisson Solver',['../src_geometryXVx_poisson.html',1,'src_geometryXVx'],['../src_geometryXYVxVy_poisson.html',1,'src_geometryXYVxVy']]],
-  ['polar_20poisson_20solver_881',['Polar Poisson solver',['../src_geometryRTheta_poisson.html',1,'src_geometryRTheta']]]
+  ['poisson_20solver_892',['Poisson Solver',['../src_geometryXVx_poisson.html',1,'src_geometryXVx'],['../src_geometryXYVxVy_poisson.html',1,'src_geometryXYVxVy']]],
+  ['polar_20poisson_20solver_893',['Polar Poisson solver',['../src_geometryRTheta_poisson.html',1,'src_geometryRTheta']]]
 ];

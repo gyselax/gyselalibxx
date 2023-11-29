@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['ghosted_5fvx_5fpoint_5fsampling_839',['ghosted_vx_point_sampling',['../classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524',1,'CollisionsIntra']]],
-  ['ghosted_5fvx_5fstaggered_5fpoint_5fsampling_840',['ghosted_vx_staggered_point_sampling',['../classCollisionsIntra.html#a10027e09096499cca4d7b2dda2afa60d',1,'CollisionsIntra']]]
+  ['fdistribuddom_846',['FdistribuDDom',['../classGeometryXVx.html#a01dd11ecfb6414512e1f8cbaf204c5cd',1,'GeometryXVx::FdistribuDDom()'],['../classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90',1,'GeometryXYVxVy::FdistribuDDom()']]]
 ];

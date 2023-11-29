@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['layout_5ftype_856',['layout_type',['../classVectorFieldSpan.html#afb64624cf289a427bf7e964b58d7d6cb',1,'VectorFieldSpan']]]
+  ['knotdim_863',['KnotDim',['../classNonUniformBSplines.html#a266155b617441df530bb202effb00199',1,'NonUniformBSplines::KnotDim()'],['../classUniformBSplines.html#a35a003b75d534eac96c099cb4fdcad0f',1,'UniformBSplines::KnotDim()']]]
 ];
