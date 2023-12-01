@@ -130,6 +130,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0de983fd5f398b17fc7b5c6137f8e8ac"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac">get_nustar0</a> () const</td></tr>
 <tr class="memdesc:a0de983fd5f398b17fc7b5c6137f8e8ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the collision coefficient.  <a href="classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac">More...</a><br /></td></tr>
 <tr class="separator:a0de983fd5f398b17fc7b5c6137f8e8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42683cdfbd5476e2d01c0b0b6c4d9fcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsInter.html#a42683cdfbd5476e2d01c0b0b6c4d9fcc">get_derivative</a> (DSpanSpXVx df, DViewSpXVx allfdistribu) const</td></tr>
+<tr class="memdesc:a42683cdfbd5476e2d01c0b0b6c4d9fcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the expression of the time derivative of the distribution function.  <a href="classCollisionsInter.html#a42683cdfbd5476e2d01c0b0b6c4d9fcc">More...</a><br /></td></tr>
+<tr class="separator:a42683cdfbd5476e2d01c0b0b6c4d9fcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class describing the inter-species collision operator. </p>
@@ -240,6 +243,44 @@ Public Member Functions</h2></td></tr>
 
 <p>Get the collision coefficient. </p>
 <dl class="section return"><dt>Returns</dt><dd>The collisionality. </dd></dl>
+
+</div>
+</div>
+<a id="a42683cdfbd5476e2d01c0b0b6c4d9fcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42683cdfbd5476e2d01c0b0b6c4d9fcc">&#9670;&nbsp;</a></span>get_derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CollisionsInter::get_derivative </td>
+          <td>(</td>
+          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramname"><em>df</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes the expression of the time derivative of the distribution function. </p>
+<p>The expression is df = C, where C is the inter species collision operator. This function is made for the time integrator that is used to solve the collision operator (<a class="el" href="classRK2.html" title="A class which provides an implementation of a second-order Runge-Kutta method.">RK2</a> for instance).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">df</td><td>The time derivative. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

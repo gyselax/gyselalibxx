@@ -167,6 +167,7 @@ var NAVTREEINDEX0 =
 "classCollisionsInter.html":[11,23],
 "classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac":[11,23,3],
 "classCollisionsInter.html#a17b3fd2997376d30a7d7474bf675b647":[11,23,0],
+"classCollisionsInter.html#a42683cdfbd5476e2d01c0b0b6c4d9fcc":[11,23,4],
 "classCollisionsInter.html#a49902dd08b9767eb54de0e4cff866dd3":[11,23,2],
 "classCollisionsInter.html#a576e68e313ffd859043c3b3f290f781b":[11,23,1],
 "classCollisionsIntra.html":[11,24],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classCzarnyToCartesian.html#a093d9a72394c1d6a936d03b8e1471914":[11,31,25],
 "classCzarnyToCartesian.html#a0af1089db27e751c508f63885cd64688":[11,31,13],
 "classCzarnyToCartesian.html#a13e22f85f9041e5d5e602513029baa4f":[11,31,20],
-"classCzarnyToCartesian.html#a1d5e035e43ecd13a4cb5078f8d0fd8b5":[11,31,23],
-"classCzarnyToCartesian.html#a23d79a28ba47330f97ca7eda0ba6dfa8":[11,31,8]
+"classCzarnyToCartesian.html#a1d5e035e43ecd13a4cb5078f8d0fd8b5":[11,31,23]
 };

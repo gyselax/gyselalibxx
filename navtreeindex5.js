@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"poisson__rhs__function_8hpp_source.html":[12,0,1,3,1],
 "polar__bsplines_8hpp_source.html":[12,2,0,0,0,24],
 "polar__poisson_2params_8yaml_8hpp_source.html":[12,1,0,2,0],
 "polar__poisson_2test__cases_8hpp_source.html":[12,1,0,2,1],

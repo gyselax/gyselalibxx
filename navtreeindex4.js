@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"classdeprecated_1_1Spline1D.html#a2a4bf85c408fcb9ecba4382bb15512a5":[11,0,3,13],
 "classdeprecated_1_1Spline1D.html#a2bf4b4003db316555f6a26a1b5320991":[11,0,3,8],
 "classdeprecated_1_1Spline1D.html#a30bb87b9b9c3e8cfa231551fa9e5db24":[11,0,3,11],
 "classdeprecated_1_1Spline1D.html#a4eca6bdba41567bc4fcafa49ec613b2e":[11,0,3,15],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "null__boundary__value_8hpp_source.html":[12,2,0,0,0,23],
 "nulladvectionvx_8hpp_source.html":[12,0,0,4],
 "pages.html":[],
-"paraconfpp_8hpp_source.html":[12,0,5,0],
-"poisson__rhs__function_8hpp_source.html":[12,0,1,3,1]
+"paraconfpp_8hpp_source.html":[12,0,5,0]
 };

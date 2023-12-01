@@ -4,7 +4,7 @@ var searchData=
   ['get_5famplitudes_699',['get_amplitudes',['../classKrookSourceAdaptive.html#a33d92ab924cca3d91c5838ff55985d58',1,'KrookSourceAdaptive']]],
   ['get_5fbuilder_5f1_700',['get_builder_1',['../classSplineBuilder2D.html#ab9e9788616d4be20d309ec04da8e25fe',1,'SplineBuilder2D']]],
   ['get_5fbuilder_5f2_701',['get_builder_2',['../classSplineBuilder2D.html#a5a406c6bc3f47c2895963a66c40e5cee',1,'SplineBuilder2D']]],
-  ['get_5fderivative_702',['get_derivative',['../classKrookSourceAdaptive.html#a9b406e47034bbf02b16a3a0a43a7207e',1,'KrookSourceAdaptive']]],
+  ['get_5fderivative_702',['get_derivative',['../classCollisionsInter.html#a42683cdfbd5476e2d01c0b0b6c4d9fcc',1,'CollisionsInter::get_derivative()'],['../classKrookSourceAdaptive.html#a9b406e47034bbf02b16a3a0a43a7207e',1,'KrookSourceAdaptive::get_derivative()']]],
   ['get_5fdomain_703',['get_domain',['../classGrevilleInterpolationPoints.html#a3127b5d6b1760431fa385c1d1c11e605',1,'GrevilleInterpolationPoints']]],
   ['get_5fgridvx_5fghosted_704',['get_gridvx_ghosted',['../classCollisionsIntra.html#a4d0cc51fe8429d6f21e5174b8e3f47b3',1,'CollisionsIntra']]],
   ['get_5fgridvx_5fghosted_5fstaggered_705',['get_gridvx_ghosted_staggered',['../classCollisionsIntra.html#a112f2e8ef15375f41b2e5b3b13574532',1,'CollisionsIntra']]],

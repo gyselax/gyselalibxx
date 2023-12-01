@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"classSpeciesInformation.html#af77dd55f79155df4dab9bf490d900a07":[11,122,1],
 "classSpeciesInformation_1_1Impl.html":[11,122,0],
 "classSpeciesInformation_1_1Impl.html#a0eb655bf420dc3a05d2cbb1e176cf279":[11,122,0,6],
 "classSpeciesInformation_1_1Impl.html#a219fbcef554ce8d99265d545825c18dc":[11,122,0,8],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "classdeprecated_1_1NonUniformBSplines.html#ac22ee2e750df202a77727151d8aea88b":[11,0,1,11],
 "classdeprecated_1_1NonUniformBSplines.html#aca28715948e3430c34af5beb5d435de9":[11,0,1,2],
 "classdeprecated_1_1Spline1D.html":[11,0,3],
-"classdeprecated_1_1Spline1D.html#a1c55d11d519aafed580bb1ec8b9cbe93":[11,0,3,14],
-"classdeprecated_1_1Spline1D.html#a2a4bf85c408fcb9ecba4382bb15512a5":[11,0,3,13]
+"classdeprecated_1_1Spline1D.html#a1c55d11d519aafed580bb1ec8b9cbe93":[11,0,3,14]
 };

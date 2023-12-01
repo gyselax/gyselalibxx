@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classCzarnyToCartesian.html#a23d79a28ba47330f97ca7eda0ba6dfa8":[11,31,8],
 "classCzarnyToCartesian.html#a2accff89f6adf775ecd46e7a467938b5":[11,31,2],
 "classCzarnyToCartesian.html#a357404759baedffd67aa69235fde390f":[11,31,15],
 "classCzarnyToCartesian.html#a39d3002bfb3a3d759823879321da8176":[11,31,7],
@@ -166,8 +167,8 @@ var NAVTREEINDEX1 =
 "classIRightHandSide.html#a745d5bae7b23395d9dc7a0fd8a4b687f":[11,66,1],
 "classITimeSolver.html":[11,67],
 "classITimeSolver.html#a08927c53d2c33753c80fccfcb51e0047":[11,67,3],
-"classITimeSolver.html#a0b6b8b4a38bfe8eb0763c65268a10379":[11,67,0],
 "classITimeSolver.html#a0b6b8b4a38bfe8eb0763c65268a10379":[11,67,1],
+"classITimeSolver.html#a0b6b8b4a38bfe8eb0763c65268a10379":[11,67,0],
 "classITimeSolver.html#a7c34ee67eeac399e7296a27db629fd1a":[11,67,2],
 "classITimeStepper.html":[11,68],
 "classIVlasovSolver.html":[11,69],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classMatrix__Corner__Block.html":[11,80],
 "classMatrix__Corner__Block.html#a02c714c7dbf1c5d96d3deccdc2e1c510":[11,80,0],
 "classMatrix__Corner__Block.html#a09a6ff9a2b9912b3ee5d2df4d4b37ee1":[11,80,2],
-"classMatrix__Corner__Block.html#a2ba0aa809c557ad1d2c710ddf8248cb2":[11,80,17],
-"classMatrix__Corner__Block.html#a33931b7ada48fc05d33614cd4818c5b7":[11,80,1]
+"classMatrix__Corner__Block.html#a2ba0aa809c557ad1d2c710ddf8248cb2":[11,80,17]
 };
