@@ -115,36 +115,51 @@ TEST(CollisionsInter, CollisionsInter)
         ddc::deepcopy(allfdistribu, allfdistribu_device);
 
         double error_L1(0);
+        DFieldSpX density(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+        DFieldSpX fluid_velocity(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+        DFieldSpX temperature(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+
+        ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+            moments(density(ispx), allfdistribu[ispx], FluidMoments::s_density);
+            moments(fluid_velocity(ispx),
+                    allfdistribu[ispx],
+                    density(ispx),
+                    FluidMoments::s_velocity);
+            moments(temperature(ispx),
+                    allfdistribu[ispx],
+                    density(ispx),
+                    fluid_velocity(ispx),
+                    FluidMoments::s_temperature);
+        });
+
+        //Collision frequencies, momentum and energy exchange terms
+        auto nustar_profile_device_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                nustar_profile.span_view());
+        auto nustar_profile_device = nustar_profile_device_alloc.span_view();
+        device_t<DFieldSpX> collfreq_ab_device(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+        auto density_device_alloc = ddc::
+                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density.span_view());
+        auto density_device = density_device_alloc.span_view();
+        auto temperature_device_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                temperature.span_view());
+        auto temperature_device = temperature_device_alloc.span_view();
+        compute_collfreq_ab(
+                collfreq_ab_device.span_view(),
+                nustar_profile_device,
+                density_device,
+                temperature_device);
+        auto collfreq_ab = ddc::create_mirror_view_and_copy(collfreq_ab_device.span_view());
+
+        double const me_on_memi(mass(my_ielec) / (mass(my_ielec) + mass(my_iion)));
         ddc::for_each(gridx, [&](IndexX const ix) {
-            DFieldSp density(dom_sp);
-            DFieldSp fluid_velocity(dom_sp);
-            DFieldSp temperature(dom_sp);
-            ddc::for_each(dom_sp, [&](IndexSp const isp) {
-                IndexSpX const ispx(isp, ix);
-                moments(density(isp), allfdistribu[ispx], FluidMoments::s_density);
-                moments(fluid_velocity(isp),
-                        allfdistribu[ispx],
-                        density(isp),
-                        FluidMoments::s_velocity);
-                moments(temperature(isp),
-                        allfdistribu[ispx],
-                        density(isp),
-                        fluid_velocity(isp),
-                        FluidMoments::s_temperature);
-            });
-
-            //Collision frequencies, momentum and energy exchange terms
-            DFieldSp nustar_profile_copy(nustar_profile[ix]);
-            DFieldSp collfreq_ab(dom_sp);
-            compute_collfreq_ab(collfreq_ab.span_view(), nustar_profile_copy, density, temperature);
-
-            double const me_on_memi(mass(my_ielec) / (mass(my_ielec) + mass(my_iion)));
             // test : dlog(T_e - T_i)/dt = -12nu_ei*m_e/(m_e+m_b)
             // should be verified
             double const error = std::fabs(
-                    std::log(std::fabs(temperature(my_ielec) - temperature(my_iion)))
+                    std::log(std::fabs(temperature(my_ielec, ix) - temperature(my_iion, ix)))
                     - std::log(std::fabs(temperature_init(my_ielec) - temperature_init(my_iion)))
-                    + 12 * collfreq_ab(my_ielec) * me_on_memi * nbiter * deltat);
+                    + 12 * collfreq_ab(my_ielec, ix) * me_on_memi * nbiter * deltat);
             error_L1 += error;
         });
         error_L1 = error_L1 / x_size;

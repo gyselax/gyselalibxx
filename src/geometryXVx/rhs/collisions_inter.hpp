@@ -59,6 +59,15 @@ public:
      */
     double get_nustar0() const;
 
-private:
-    void compute_rhs(DSpanSpXVx rhs, DViewSpXVx allfdistribu) const;
+    /**
+     * @brief Computes the expression of the time derivative of the distribution function.
+     *  
+     * The expression is df = C, where C is the inter species collision operator. 
+     * This function is made for the time integrator that is used to solve the 
+     * collision operator (RK2 for instance).
+     *
+     * @param[inout] df The time derivative.
+     * @param[in] allfdistribu The distribution function.
+     */
+    void get_derivative(DSpanSpXVx df, DViewSpXVx allfdistribu) const;
 };
