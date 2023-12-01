@@ -18,6 +18,7 @@ add_test(NAME TestSimulationBumpontailRestartFFT_XVx
         "$<TARGET_FILE:bumpontail_fft>"
         "restart")
 set_property(TEST TestSimulationBumpontailRestartFFT_XVx PROPERTY TIMEOUT 200)
+set_tests_properties(TestSimulationBumpontailRestartFFT_XVx PROPERTIES LABELS "ResultsNotTested" )
 
 add_test(NAME TestSimulationBumpontailFemUniform_xperiod_vx
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_bumpontail.sh"
@@ -33,3 +34,4 @@ add_test(NAME TestSimulationBumpontailRestartFemUniform_xperiod_vx
         "$<TARGET_FILE:bumpontail_fem_uniform_xperiod_vx>"
         "restart")
 set_property(TEST TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
+set_tests_properties(TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTIES LABELS "ResultsNotTested" )

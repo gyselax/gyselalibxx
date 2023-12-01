@@ -18,6 +18,7 @@ add_test(NAME TestSimulationLandauRestartFFT_XVx
         "$<TARGET_FILE:landau_fft>"
         "restart")
 set_property(TEST TestSimulationLandauRestartFFT_XVx PROPERTY TIMEOUT 200)
+set_tests_properties(TestSimulationLandauRestartFFT_XVx PROPERTIES LABELS "ResultsNotTested" )
 
 add_test(NAME TestSimulationLandauFemUniform_xperiod_vx
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau.sh"
@@ -33,3 +34,4 @@ add_test(NAME TestSimulationLandauRestartFemUniform_xperiod_vx
         "$<TARGET_FILE:landau_fem_uniform_xperiod_vx>"
         "restart")
 set_property(TEST TestSimulationLandauRestartFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
+set_tests_properties(TestSimulationLandauRestartFemUniform_xperiod_vx PROPERTIES LABELS "ResultsNotTested" )

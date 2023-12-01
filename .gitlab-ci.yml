@@ -64,6 +64,50 @@ cmake_tests_Release:
       - ./build/tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png
     reports:
       junit: ./build/tests.xml
+cmake_tests_Release_GPU:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+      changes:
+        - vendor/sll/**/*
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+      variables:
+        SLL_BUILD_TESTING: "OFF"
+  tags:
+    - persee
+  stage: test
+  needs: []
+  timeout: 2 hours
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    SLL_BUILD_TESTING: "ON"
+  before_script: |
+    . /data/gyselarunner/spack-0.20.0/share/spack/setup-env.sh
+    spack load gcc@11
+    spack env activate voicexx-env-omp-cuda
+  script: |
+    set -e
+    git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
+    rm -rf build || true
+    mkdir build
+    cd build
+    cmake -DCMAKE_CXX_COMPILER=${CI_PROJECT_DIR}/vendor/kokkos/bin/nvcc_wrapper -DCMAKE_CXX_FLAGS=-Wall -DSLL_BUILD_TESTING=$SLL_BUILD_TESTING -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 -DKokkos_ARCH_VOLTA70=ON -DKokkos_ENABLE_SERIAL=ON -DKokkos_ENABLE_OPENMP=ON -DKokkos_ENABLE_CUDA=ON ../
+    make -j 8
+    export OMP_PROC_BIND=spread
+    export OMP_PLACES=threads
+    export OMP_NUM_THREADS=8
+    ctest --output-on-failure --timeout 5 --output-junit tests.xml -LE ResultsNotTested
+    ls ./tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png
+    ls ./tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png
+  artifacts:
+    when: always
+    paths:
+      - ./build/tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png
+      - ./build/tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png
+    reports:
+      junit: ./build/tests.xml
 indentation:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

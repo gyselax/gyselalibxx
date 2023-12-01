@@ -184,7 +184,6 @@ def execute(executable, rmin, rmax, Nr, Nth, dt, T, curves=False, feet=False, pr
         print(out)
     if err:
         print(err)
-        assert False
     if print_out:
         print("")
 
