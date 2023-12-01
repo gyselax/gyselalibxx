@@ -206,10 +206,10 @@ void compute_Nucoll(
 * @param[in] temperature The temperature of each species.
 */
 void compute_collfreq_ab(
-        DSpanSp collfreq_ab,
-        DViewSp nustar_profile,
-        DViewSp density,
-        DViewSp temperature);
+        device_t<DSpanSpX> collfreq_ab,
+        device_t<DViewSpX> nustar_profile,
+        device_t<DViewSpX> density,
+        device_t<DViewSpX> temperature);
 
 /**
 * @brief Compute the momentum and energy exchange terms between species a and b.
@@ -221,9 +221,9 @@ void compute_collfreq_ab(
 * @param[in] temperature The temperature of each species.
 */
 void compute_momentum_energy_exchange(
-        DSpanSp momentum_exchange_ab,
-        DSpanSp energy_exchange_ab,
-        DViewSp collfreq_ab,
-        DViewSp density,
-        DViewSp mean_velocity,
-        DViewSp temperature);
+        device_t<DSpanSpX> momentum_exchange_ab,
+        device_t<DSpanSpX> energy_exchange_ab,
+        device_t<DViewSpX> collfreq_ab,
+        device_t<DViewSpX> density,
+        device_t<DViewSpX> mean_velocity,
+        device_t<DViewSpX> temperature);
