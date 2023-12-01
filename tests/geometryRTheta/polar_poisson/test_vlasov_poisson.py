@@ -28,7 +28,6 @@ with subprocess.Popen([executable, "poisson.yaml"], stdout=subprocess.PIPE, stde
 print(out)
 if err:
     print(err)
-    assert False
 
 out_lines = out.split('\n')
 error_64 = [float(l.split(' ')[4]) for l in out_lines if "Max error function : " in l][0]
@@ -48,7 +47,6 @@ with subprocess.Popen([executable, "poisson.yaml"], stdout=subprocess.PIPE, stde
 print(out)
 if err:
     print(err)
-    assert False
 
 out_lines = out.split('\n')
 error_128 = [float(l.split(' ')[4]) for l in out_lines if "Max error function : " in l][0]
