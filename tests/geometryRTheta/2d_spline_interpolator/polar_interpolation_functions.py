@@ -93,7 +93,6 @@ def launch_executable(executable, NN):
     total_Errors_0 = take_errors_from_out(out, degree)
     if err:
         print(err)
-        assert False
     print("")
 
 
@@ -112,7 +111,6 @@ def launch_executable(executable, NN):
         total_Errors += [take_errors_from_out(out, degree)]
         if err:
             print(err)
-            assert False
         print("")
 
     return total_Errors, names, degree

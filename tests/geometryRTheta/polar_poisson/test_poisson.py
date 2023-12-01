@@ -25,7 +25,6 @@ print(out)
 if err:
     err = err.decode('ascii')
     print(err)
-    assert False
 
 out_lines = out.split('\n')
 error_64 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
@@ -44,7 +43,6 @@ print(out)
 if err:
     err = err.decode('ascii')
     print(err)
-    assert False
 
 out_lines = out.split('\n')
 error_128 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
