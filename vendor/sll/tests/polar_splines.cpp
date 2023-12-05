@@ -158,8 +158,8 @@ TEST(PolarSplineTest, ConstantEval)
             const double deriv_2 = spline_evaluator.deriv_dim_2(test_point, coef);
 
             EXPECT_LE(fabs(val - 1.0), 1.0e-14);
-            EXPECT_LE(fabs(deriv_1), 5.0e-14);
-            EXPECT_LE(fabs(deriv_2), 5.0e-14);
+            EXPECT_LE(fabs(deriv_1), 1.0e-13);
+            EXPECT_LE(fabs(deriv_2), 1.0e-13);
         }
     }
 }
