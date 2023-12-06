@@ -135,12 +135,20 @@ struct OnMemorySpace<NewMemorySpace, ddc::ChunkSpan<ElementType, SupportType, La
 
 } // namespace detail
 
-/// Alias template helper returning the "device" version of a `ddc::Chunk` or a `ddc::Chunkspan`
+/**
+ * @brief Alias template helper returning the of a `ddc::Chunk` or a `ddc::Chunkspan` on a MemorySpace
+ */
 template <class MemorySpace, class C>
 using on_memory_space_t = typename detail::OnMemorySpace<MemorySpace, C>::type;
 
+/**
+ * @brief Alias template helper returning the "host" version of a `ddc::Chunk` or a `ddc::Chunkspan`
+ */
 template <class C>
 using host_t = on_memory_space_t<Kokkos::HostSpace, C>;
 
+/**
+ * @brief Alias template helper returning the "device" version of a `ddc::Chunk` or a `ddc::Chunkspan`
+ */
 template <class C>
 using device_t = on_memory_space_t<Kokkos::DefaultExecutionSpace::memory_space, C>;

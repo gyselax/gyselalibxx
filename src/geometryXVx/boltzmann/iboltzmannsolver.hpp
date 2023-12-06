@@ -23,6 +23,6 @@ public:
      */
     virtual device_t<DSpanSpXVx> operator()(
             device_t<DSpanSpXVx> allfdistribu,
-            DViewX efield,
+            device_t<DViewX> efield,
             double dt) const = 0;
 };

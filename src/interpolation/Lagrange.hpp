@@ -5,6 +5,7 @@
 
 #include <ddc/ddc.hpp>
 
+#include <ddc_helper.hpp>
 
 enum class BCond { PERIODIC, DIRICHLET };
 
@@ -14,16 +15,22 @@ enum class BCond { PERIODIC, DIRICHLET };
  * A simple class which provides the possibility to evaluate
  * an interpolation of a function known only over a restricted set of nodes.
  */
-template <class DDim, BCond BcMin, BCond BcMax>
+template <class Execspace, class DDimI, BCond BcMin, BCond BcMax>
 class Lagrange
 {
     static_assert((BcMin == BCond::PERIODIC) == (BcMax == BCond::PERIODIC));
 
-    ddc::DiscreteDomain<DDim> m_domain;
+private:
+    ddc::DiscreteDomain<DDimI> m_domain;
     int m_deg;
     int m_n;
     int m_ghost;
-    ddc::Chunk<double, ddc::DiscreteDomain<DDim>> m_Chunk;
+    ddc::ChunkSpan<
+            double,
+            ddc::DiscreteDomain<DDimI>,
+            std::experimental::layout_right,
+            typename Execspace::memory_space>
+            m_ChunkSpan;
     double m_left_bound;
     double m_right_bound;
 
@@ -36,38 +43,23 @@ public:
      * @param[in] domain along interest direction, usedful in periodic case
      * @param[in] ghost DiscretVector which gives the number of ghosted points
      */
-    Lagrange(
+    KOKKOS_FUNCTION Lagrange(
             int order,
-            ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> x_nodes_fnodes,
-            ddc::DiscreteDomain<DDim> domain,
-            ddc::DiscreteVector<DDim> ghost)
+            ddc::ChunkSpan<
+                    double,
+                    ddc::DiscreteDomain<DDimI>,
+                    std::experimental::layout_right,
+                    typename Execspace::memory_space> x_nodes_fnodes,
+            ddc::DiscreteDomain<DDimI> domain,
+            ddc::DiscreteVector<DDimI> ghost)
         : m_domain(domain)
         , m_deg(order)
         , m_n(x_nodes_fnodes.domain().size())
         , m_ghost(ghost.value())
-        , m_Chunk(domain)
+        , m_ChunkSpan(x_nodes_fnodes)
     {
-        if constexpr (BcMin == BCond::PERIODIC) {
-            for (int k = 0; k < m_ghost; k++) {
-                m_Chunk(m_domain.front() + ddc::DiscreteVector<DDim>(k))
-                        = x_nodes_fnodes(ddc::DiscreteElement<DDim>(m_n + k));
-            }
-
-            ddc::for_each(
-                    ddc::policies::serial_host,
-                    x_nodes_fnodes.domain(),
-                    [&](ddc::DiscreteElement<DDim> const ix) { m_Chunk(ix) = x_nodes_fnodes(ix); });
-            assert(domain.back() == ddc::DiscreteElement<DDim>(m_n - 1 + 2 * m_ghost));
-
-            for (int k = 0; k <= m_ghost; k++) {
-                m_Chunk(ddc::DiscreteElement<DDim>(m_n - 1 + m_ghost + k))
-                        = x_nodes_fnodes(ddc::DiscreteElement<DDim>(m_ghost + k));
-            }
-        } else {
-            ddc::deepcopy(m_Chunk, x_nodes_fnodes);
-        }
-        m_left_bound = ddc::coordinate(ddc::DiscreteElement<DDim>(m_ghost));
-        m_right_bound = ddc::coordinate(ddc::DiscreteElement<DDim>(m_n + m_ghost - 1));
+        m_left_bound = ddc::coordinate(ddc::DiscreteElement<DDimI>(m_ghost));
+        m_right_bound = ddc::coordinate(ddc::DiscreteElement<DDimI>(m_n + m_ghost - 1));
     };
 
     /**
@@ -78,52 +70,43 @@ public:
      *
      * @return The evaluation of Lagrange interpolation at the point x_intercept.
      */
-    double evaluate(double x_interp);
-
-    /**
-     * @brief Computes the basis function of Lagrange.
-     *
-     * @param[in] x_interp a node where we want to evaluate the function.
-     * @param[in] j index of the basis.
-     * @param[in] polynom_subdomain a part of the mesh centered around x_interp
-     *
-     * @return The value of the basis at x_intercept
-     */
-    double compute_basis(
-            double x_interp,
-            ddc::DiscreteElement<DDim> j,
-            ddc::DiscreteDomain<DDim> polynom_subdomain);
+    KOKKOS_FUNCTION double evaluate(double x_interp) const;
 
 private:
     auto getclosest(double value) const;
 
-    int getclosest_binsearch(double value) const;
+    KOKKOS_FUNCTION int getclosest_binsearch(double value) const;
 
-    double evaluate_lagrange(double x_interp);
+    KOKKOS_FUNCTION double evaluate_lagrange(double x_interp) const;
 
-    double apply_bc(double x_interp);
+    KOKKOS_FUNCTION double apply_bc(double x_interp) const;
+
+    KOKKOS_FUNCTION double compute_basis(
+            double x_interp,
+            ddc::DiscreteElement<DDimI> j,
+            ddc::DiscreteDomain<DDimI> polynom_subdomain) const;
 };
 
-template <class DDim, BCond BcMin, BCond BcMax>
-auto Lagrange<DDim, BcMin, BcMax>::getclosest(double value) const
+template <typename Execspace, class DDimI, BCond BcMin, BCond BcMax>
+auto Lagrange<Execspace, DDimI, BcMin, BcMax>::getclosest(double value) const
 {
     assert(value >= m_left_bound && value <= m_right_bound);
     auto it = std::min_element(m_domain.begin(), m_domain.end(), [=](auto x, auto y) {
         return std::abs(ddc::coordinate(x) - value) < std::abs(ddc::coordinate(y) - value);
     });
-    return *it - m_Chunk.domain().front();
+    return *it - m_ChunkSpan.domain().front();
 }
-
-template <class DDim, BCond BcMin, BCond BcMax>
-int Lagrange<DDim, BcMin, BcMax>::getclosest_binsearch(double x_interp) const
+template <typename Execspace, class DDimI, BCond BcMin, BCond BcMax>
+KOKKOS_INLINE_FUNCTION int Lagrange<Execspace, DDimI, BcMin, BcMax>::getclosest_binsearch(
+        double x_interp) const
 {
-    int begin = m_domain.front().uid();
-    int end = m_domain.back().uid();
-    int icell = (begin + end) / 2;
+    std::size_t begin = m_domain.front().uid();
+    std::size_t end = m_domain.back().uid();
+    std::size_t icell = (begin + end) / 2;
 
-    while (x_interp < ddc::coordinate(ddc::DiscreteElement<DDim>(icell))
-           || x_interp > ddc::coordinate(ddc::DiscreteElement<DDim>(icell + 1))) {
-        if (x_interp < ddc::coordinate((ddc::DiscreteElement<DDim>(icell)))) {
+    while (x_interp < ddc::coordinate(ddc::DiscreteElement<DDimI>(icell))
+           || x_interp > ddc::coordinate(ddc::DiscreteElement<DDimI>(icell + 1))) {
+        if (x_interp < ddc::coordinate((ddc::DiscreteElement<DDimI>(icell)))) {
             end = icell;
         } else {
             begin = icell;
@@ -135,32 +118,35 @@ int Lagrange<DDim, BcMin, BcMax>::getclosest_binsearch(double x_interp) const
     return icell;
 }
 
-template <class DDim, BCond BcMin, BCond BcMax>
-double Lagrange<DDim, BcMin, BcMax>::compute_basis(
+/**
+ * @brief Computes the basis function of Lagrange.
+ *
+ * @param[in] x_interp a node where we want to evaluate the function.
+ * @param[in] j index of the basis.
+ * @param[in] polynom_subdomain a part of the mesh centered around x_interp
+ *
+ * @return The value of the basis at x_intercept
+ */
+template <typename Execspace, class DDimI, BCond BcMin, BCond BcMax>
+KOKKOS_INLINE_FUNCTION double Lagrange<Execspace, DDimI, BcMin, BcMax>::compute_basis(
         double x_interp,
-        ddc::DiscreteElement<DDim> j,
-        ddc::DiscreteDomain<DDim> polynom_subdomain)
+        ddc::DiscreteElement<DDimI> j,
+        ddc::DiscreteDomain<DDimI> polynom_subdomain) const
 {
-    return ddc::transform_reduce(
-            ddc::policies::serial_host,
-            polynom_subdomain,
-            1.0,
-            ddc::reducer::prod<double>(),
-            [&](ddc::DiscreteElement<DDim> const ix) {
-                ddc::Coordinate<typename DDim::continuous_dimension_type> coord_i
-                        = ddc::coordinate(ix);
-                ddc::Coordinate<typename DDim::continuous_dimension_type> coord_j
-                        = ddc::coordinate(j);
-                if (coord_i != coord_j) {
-                    return (x_interp - coord_i) / (coord_j - coord_i);
-                } else {
-                    return 1.0;
-                }
-            });
+    double w(1);
+    ddc::Coordinate<typename DDimI::continuous_dimension_type> coord_j = ddc::coordinate(j);
+    for (ddc::DiscreteElement<DDimI> const i : polynom_subdomain) {
+        ddc::Coordinate<typename DDimI::continuous_dimension_type> coord_i = ddc::coordinate(i);
+        if (coord_i != coord_j) {
+            w *= (x_interp - coord_i) / (coord_j - coord_i);
+        }
+    }
+    return w;
 }
 
-template <class DDim, BCond BcMin, BCond BcMax>
-double Lagrange<DDim, BcMin, BcMax>::apply_bc(double x_interp)
+template <typename Execspace, class DDimI, BCond BcMin, BCond BcMax>
+KOKKOS_INLINE_FUNCTION double Lagrange<Execspace, DDimI, BcMin, BcMax>::apply_bc(
+        double x_interp) const
 {
     double bc_val = x_interp;
     const double d = std::abs(m_right_bound - m_left_bound);
@@ -176,8 +162,9 @@ double Lagrange<DDim, BcMin, BcMax>::apply_bc(double x_interp)
     return evaluate_lagrange(bc_val);
 }
 
-template <class DDim, BCond BcMin, BCond BcMax>
-double Lagrange<DDim, BcMin, BcMax>::evaluate(double x_interp)
+template <typename Execspace, class DDimI, BCond BcMin, BCond BcMax>
+KOKKOS_INLINE_FUNCTION double Lagrange<Execspace, DDimI, BcMin, BcMax>::evaluate(
+        double x_interp) const
 {
     double interpol_val = x_interp;
     if (x_interp < m_left_bound || m_right_bound < x_interp) {
@@ -189,8 +176,9 @@ double Lagrange<DDim, BcMin, BcMax>::evaluate(double x_interp)
     return interpol_val;
 }
 
-template <class DDim, BCond BcMin, BCond BcMax>
-double Lagrange<DDim, BcMin, BcMax>::evaluate_lagrange(double x_intern)
+template <typename Execspace, class DDimI, BCond BcMin, BCond BcMax>
+KOKKOS_INLINE_FUNCTION double Lagrange<Execspace, DDimI, BcMin, BcMax>::evaluate_lagrange(
+        double x_intern) const
 {
     int begin, end;
     int mid = getclosest_binsearch(x_intern);
@@ -208,14 +196,14 @@ double Lagrange<DDim, BcMin, BcMax>::evaluate_lagrange(double x_intern)
 
     if (end == int(m_domain.size()) - 1)
         begin = end - m_deg;
-    ddc::DiscreteElement<DDim> lbound_subdom(begin);
-    ddc::DiscreteVector<DDim> npoints_subdomain(end - begin);
-    ddc::DiscreteDomain<DDim> subdomain(lbound_subdom, npoints_subdomain);
 
+    ddc::DiscreteElement<DDimI> lbound_subdom(begin);
+    ddc::DiscreteVector<DDimI> npoints_subdomain(end - begin);
+    ddc::DiscreteDomain<DDimI> subdomain(lbound_subdom, npoints_subdomain);
     double p = 0;
-    ddc::for_each(ddc::policies::serial_host, subdomain, [&](ddc::DiscreteElement<DDim> const ix) {
-        p += compute_basis(x_intern, ix, subdomain) * m_Chunk(ix);
-    });
+    for (ddc::DiscreteElement<DDimI> const ix : subdomain) {
+        p += compute_basis(x_intern, ix, subdomain) * m_ChunkSpan(ix);
+    }
 
     return p;
 }

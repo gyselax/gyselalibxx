@@ -1,42 +1,48 @@
 // SPDX-License-Identifier: MIT
 
-#include <sll/bsplines_non_uniform.hpp>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "geometry.hpp"
 #include "quadrature.hpp"
 #include "simpson_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
+struct RDimXPeriod
+{
+    static bool constexpr PERIODIC = true;
+};
 
-
-template <std::size_t N>
-struct CDimZ;
-
+using IDimXPeriod = ddc::NonUniformPointSampling<RDimXPeriod>;
+using IDomXPeriod = ddc::DiscreteDomain<IDimXPeriod>;
+using CoordXPeriod = ddc::Coordinate<RDimXPeriod>;
 
 TEST(QuadratureTest, TrapezExactForConstantFunc)
 {
-    CoordX const x_min(0.0);
-    CoordX const x_max(M_PI);
-    IVectX const x_size(10);
+    CoordXPeriod const x_min(0.0);
+    CoordXPeriod const x_max(M_PI);
+    ddc::DiscreteVector<IDimXPeriod> const x_size(100);
 
     // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    std::vector<CoordXPeriod> point_sampling;
+    double dx = (x_max - x_min) / x_size;
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
+    // Create & intialize Uniform mesh
+    for (int k = 0; k < x_size; k++) {
+        point_sampling.push_back(x_min + k * dx);
+    }
 
-    SplineXBuilder const builder_x(interpolation_domain_x);
+    ddc::init_discrete_space<IDimXPeriod>(point_sampling);
+    ddc::DiscreteElement<IDimXPeriod> lbound(0);
+    ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
+    ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-    IDomainX const gridx = builder_x.interpolation_domain();
+    ddc::Chunk<double, IDomXPeriod> const quadrature_coeffs
+            = trapezoid_quadrature_coefficients(gridx);
+    Quadrature<IDimXPeriod> const integrate(quadrature_coeffs);
 
-    DFieldX const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
-    Quadrature<IDimX> const integrate(quadrature_coeffs);
+    ddc::Chunk<double, IDomXPeriod> values(gridx);
 
-    DFieldX values(gridx);
-
-    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
+    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimXPeriod> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-9);
@@ -44,28 +50,32 @@ TEST(QuadratureTest, TrapezExactForConstantFunc)
 
 TEST(QuadratureTest, SimpsonExactForConstantFunc)
 {
-    CoordX const x_min(0.0);
-    CoordX const x_max(M_PI);
-    IVectX const x_size(10);
+    CoordXPeriod const x_min(0.0);
+    CoordXPeriod const x_max(M_PI);
+    ddc::DiscreteVector<IDimXPeriod> const x_size(100);
 
-    // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    // Creating mesh & support
+    std::vector<CoordXPeriod> point_sampling;
+    double dx = (x_max - x_min) / x_size;
+    // Create & intialize mesh
+    for (int k = 0; k < x_size; k++) {
+        point_sampling.push_back(x_min + k * dx);
+    }
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
+    ddc::init_discrete_space<IDimXPeriod>(point_sampling);
+    ddc::DiscreteElement<IDimXPeriod> lbound(0);
+    ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
+    ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-    SplineXBuilder const builder_x(interpolation_domain_x);
+    ddc::Chunk<double, IDomXPeriod> const quadrature_coeffs
+            = simpson_quadrature_coefficients_1d(gridx);
+    Quadrature<IDimXPeriod> const integrate(quadrature_coeffs);
+    ddc::Chunk<double, IDomXPeriod> values(gridx);
 
-    IDomainX const gridx = builder_x.interpolation_domain();
-
-    DFieldX const quadrature_coeffs = simpson_quadrature_coefficients_1d(gridx);
-    Quadrature<IDimX> const integrate(quadrature_coeffs);
-
-    DFieldX values(gridx);
-
-    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
+    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimXPeriod> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);
     double expected_val = x_max - x_min;
+
     EXPECT_LE(abs(integral - expected_val), 1e-9);
 }
 
@@ -82,24 +92,25 @@ template <std::size_t N>
 double compute_error(int n_elems, Method meth)
 {
     using DimY = Y<N>;
-    using BSplinesY = UniformBSplines<DimY, 3>;
-    using GrevillePointsY
-            = GrevilleInterpolationPoints<BSplinesY, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-    using IDimY = typename GrevillePointsY::interpolation_mesh_type;
-    using SplineYBuilder
-            = SplineBuilder<BSplinesY, IDimY, BoundCond::GREVILLE, BoundCond::GREVILLE>;
+    using IDimY = ddc::NonUniformPointSampling<DimY>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = ddc::Chunk<double, IDomainY>;
 
-    ddc::Coordinate<Y<N>> const y_min(0.0);
-    ddc::Coordinate<Y<N>> const y_max(M_PI);
+    ddc::Coordinate<DimY> const y_min(0.0);
+    ddc::Coordinate<DimY> const y_max(M_PI);
+    std::vector<ddc::Coordinate<DimY>> point_sampling;
+    double dy = (y_max - y_min) / n_elems;
 
-    ddc::init_discrete_space<BSplinesY>(y_min, y_max, n_elems);
+    // Create & intialize Uniform mesh
+    for (int k = 0; k < n_elems; k++) {
+        point_sampling.push_back(y_min + k * dy);
+    }
 
-    ddc::init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
-    IDomainY const gridy(GrevillePointsY::get_domain());
+    ddc::init_discrete_space<IDimY>(point_sampling);
+    ddc::DiscreteElement<IDimY> lbound(0);
+    ddc::DiscreteVector<IDimY> npoints(n_elems);
+    ddc::DiscreteDomain<IDimY> gridy(lbound, npoints);
 
-    SplineYBuilder const builder_y(gridy);
     DFieldY quadrature_coeffs;
     switch (meth) {
     case Method::TRAPEZ:
@@ -107,8 +118,8 @@ double compute_error(int n_elems, Method meth)
     case Method::SIMPSON:
         quadrature_coeffs = simpson_quadrature_coefficients_1d(gridy);
     }
-    Quadrature<IDimY> const integrate(quadrature_coeffs);
 
+    Quadrature<IDimY> const integrate(quadrature_coeffs);
     DFieldY values(gridy);
 
     ddc::for_each(gridy, [&](ddc::DiscreteElement<IDimY> const idx) {

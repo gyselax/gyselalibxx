@@ -20,8 +20,9 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_vx.hpp"
+#include "bsl_advection_vx_batched.hpp"
 #include "bsl_advection_x.hpp"
+#include "bsl_advection_x_batched.hpp"
 #include "chargedensitycalculator.hpp"
 #include "collisions_intra.hpp"
 #ifdef PERIODIC_RDIMX
@@ -29,7 +30,7 @@
 #else
 #include "femnonperiodicpoissonsolver.hpp"
 #endif
-#include "Lagrange_interpolator.hpp"
+#include "Lagrange_interpolator_batched.hpp"
 #include "fftpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
@@ -47,6 +48,7 @@
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
 #include "spline_interpolator.hpp"
+#include "spline_interpolator_batched.hpp"
 #include "spline_quadrature.hpp"
 #include "splinechargedensitycalculator.hpp"
 #include "splitrighthandsidesolver.hpp"
@@ -97,6 +99,7 @@ int main(int argc, char** argv)
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<ddcBSplinesX>(x_min, x_max, x_size);
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
@@ -104,19 +107,20 @@ int main(int argc, char** argv)
     ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
     ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
     ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
-
-    SplineXBuilder const builder_x(interpolation_domain_x);
-
-    SplineVxBuilder const builder_vx(interpolation_domain_vx);
+    ddc::DiscreteDomain<IDimX, IDimVx> meshXVx(interpolation_domain_x, interpolation_domain_vx);
 
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
 
-    IDomainSpXVx const meshSpXVx(
-            dom_kinsp,
-            builder_x.interpolation_domain(),
-            builder_vx.interpolation_domain());
-    IDomainSpVx const meshSpVx(dom_kinsp, builder_vx.interpolation_domain());
+    IDomainSpXVx const meshSpXVx(dom_kinsp, meshXVx);
+    IDomainSpVx const meshSpVx(dom_kinsp, interpolation_domain_vx);
+
+    SplineXBuilder const builder_x(interpolation_domain_x);
+#ifdef PERIODIC_RDIMX
+    SplineXBuilderBatched const builder_x_batched(meshXVx);
+#endif
+
+    SplineVxBuilder const builder_vx(interpolation_domain_vx);
 
     FieldSp<int> kinetic_charges(dom_kinsp);
     DFieldSp masses(dom_kinsp);
@@ -196,29 +200,40 @@ int main(int argc, char** argv)
     double const time_diag = PCpp_double(conf_voicexx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
 
-    ConstantExtrapolationBoundaryValue<BSplinesX> bv_x_min(x_min);
-    ConstantExtrapolationBoundaryValue<BSplinesX> bv_x_max(x_max);
+    NullBoundaryValue<BSplinesX> bv_x_min_poisson = g_null_boundary<BSplinesX>;
+    NullBoundaryValue<BSplinesX> bv_x_max_poisson = g_null_boundary<BSplinesX>;
+    ddc::NullBoundaryValue<ddcBSplinesX> bv_x_min = ddc::g_null_boundary<ddcBSplinesX>;
+    ddc::NullBoundaryValue<ddcBSplinesX> bv_x_max = ddc::g_null_boundary<ddcBSplinesX>;
 
-    // Creating operators
-    SplineEvaluator<BSplinesX> const spline_x_evaluator(bv_x_min, bv_x_max);
-
-    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
-
+    // Creating batched operators
+    SplineXEvaluator const spline_x_evaluator(bv_x_min_poisson, bv_x_max_poisson);
+#ifdef PERIODIC_RDIMX
+    SplineXEvaluatorBatched const
+            spline_x_evaluator_batched(builder_x_batched.spline_domain(), bv_x_min, bv_x_max);
+    PreallocatableSplineInterpolatorBatched const
+            spline_x_interpolator(builder_x_batched, spline_x_evaluator_batched);
+#else
     ConstantExtrapolationBoundaryValue<BSplinesVx> bv_v_min(vx_min);
     ConstantExtrapolationBoundaryValue<BSplinesVx> bv_v_max(vx_max);
 
-    SplineEvaluator<BSplinesVx> const spline_vx_evaluator(bv_v_min, bv_v_max);
-
-    PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
+    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
+#endif
     IVectVx static constexpr gwvx {0};
-    LagrangeInterpolator<IDimVx, BCond::DIRICHLET, BCond::DIRICHLET> const
-            lagrange_vx_evaluator(3, interpolation_domain_vx, gwvx);
-    PreallocatableLagrangeInterpolator<IDimVx, BCond::DIRICHLET, BCond::DIRICHLET> const
-            lagrange_vx_interpolator(lagrange_vx_evaluator);
-
+    LagrangeInterpolatorBatched<IDimVx, BCond::DIRICHLET, BCond::DIRICHLET, IDimX, IDimVx> const
+            lagrange_vx_non_preallocatable_interpolator(3, gwvx);
+    PreallocatableLagrangeInterpolatorBatched<
+            IDimVx,
+            BCond::DIRICHLET,
+            BCond::DIRICHLET,
+            IDimX,
+            IDimVx> const lagrange_vx_interpolator(lagrange_vx_non_preallocatable_interpolator);
+#ifdef PERIODIC_RDIMX
+    BslAdvectionSpatialBatched<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
+#else
     BslAdvectionSpatial<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
-
-    BslAdvectionVelocity<GeometryXVx, IDimVx> const advection_vx(lagrange_vx_interpolator);
+#endif
+    BslAdvectionVelocityBatched<GeometryXVx, IDimVx> const advection_vx(lagrange_vx_interpolator);
 
     // Creating of mesh for output saving
     IDomainX const gridx = ddc::select<IDimX>(meshSpXVx);
