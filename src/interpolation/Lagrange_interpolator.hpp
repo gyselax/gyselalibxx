@@ -25,7 +25,7 @@ public:
      * @brief Create a Lagrange interpolator object.
      * @param[in] degree Degree of polynomials
      * @param[in] domain Discrete domain related to direction of interest for computations
-     * @param[in] ghost  Discre vector which gives the number of ghost points. by default choose 2.
+     * @param[in] ghost  Discrete vector which gives the number of ghost points. By default choose 2.
     */
     LagrangeInterpolator(
             int degree,
@@ -54,19 +54,19 @@ public:
             ddc::ChunkSpan<const ddc::Coordinate<CDim>, ddc::DiscreteDomain<DDim>> const
                     coordinates) const override
     {
-        Lagrange<DDim, BcMin, BcMax> evaluator(m_degree, inout_data, m_domain, m_ghost);
+        Lagrange<Kokkos::DefaultHostExecutionSpace, DDim, BcMin, BcMax>
+                evaluator(m_degree, inout_data, m_domain, m_ghost);
 
         ddc::for_each(
                 ddc::policies::serial_host,
                 coordinates.domain(),
-                [&](ddc::DiscreteElement<DDim> const ix) {
+                DDC_LAMBDA(ddc::DiscreteElement<DDim> const ix) {
                     inout_data(ix) = evaluator.evaluate(coordinates(ix));
                 });
 
         return inout_data;
     }
 };
-
 
 /**
  * @brief A class which stores information necessary to create an instance of the LagrangeInterpolator class.

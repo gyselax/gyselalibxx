@@ -4,12 +4,14 @@
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/fft.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
 #include <sll/greville_interpolation_points.hpp>
 #include <sll/spline_boundary_conditions.hpp>
 #include <sll/spline_builder.hpp>
+#include <sll/spline_evaluator.hpp>
 
 #include <ddc_helper.hpp>
 #include <species_info.hpp>
@@ -71,7 +73,10 @@ using BSplinesX = std::conditional_t<
         BsplineOnUniformCellsX,
         UniformBSplines<RDimX, BSDegreeX>,
         NonUniformBSplines<RDimX, BSDegreeX>>;
-
+using ddcBSplinesX = std::conditional_t< // Temporary alias for ddc:: version of BSplinesX
+        BsplineOnUniformCellsX,
+        ddc::UniformBSplines<RDimX, BSDegreeX>,
+        ddc::NonUniformBSplines<RDimX, BSDegreeX>>;
 using BSplinesVx = std::conditional_t<
         BsplineOnUniformCellsVx,
         UniformBSplines<RDimVx, BSDegreeVx>,
@@ -106,8 +111,29 @@ using SplineInterpPointsVx
         = GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
 
 using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;
+using SplineXEvaluator = SplineEvaluator<BSplinesX>;
+using SplineVxEvaluator = SplineEvaluator<BSplinesVx>;
+#ifdef PERIODIC_RDIMX
+using SplineXBuilderBatched = ddc::SplineBuilderBatched<
+        ddc::SplineBuilder<
+                Kokkos::DefaultExecutionSpace,
+                Kokkos::DefaultExecutionSpace::memory_space,
+                ddcBSplinesX,
+                IDimX,
+                ddc::BoundCond::PERIODIC,
+                ddc::BoundCond::PERIODIC>,
+        IDimX,
+        IDimVx>;
+using SplineXEvaluatorBatched = ddc::SplineEvaluatorBatched<
+        ddc::SplineEvaluator<
+                Kokkos::DefaultExecutionSpace,
+                Kokkos::DefaultExecutionSpace::memory_space,
+                ddcBSplinesX,
+                IDimX>,
+        IDimX,
+        IDimVx>;
+#endif
 using SplineVxBuilder = SplineBuilder<BSplinesVx, IDimVx, SplineVxBoundary, SplineVxBoundary>;
-
 
 // Species dimension
 using IDimSp = SpeciesInformation;

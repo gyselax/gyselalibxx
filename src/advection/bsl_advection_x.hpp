@@ -4,11 +4,15 @@
 
 #include <ddc/ddc.hpp>
 
+#include <ddc_helper.hpp>
 #include <i_interpolator.hpp>
 #include <species_info.hpp>
 
 #include "iadvectionx.hpp"
 
+/**
+ * @brief A class which computes the spatial advection along the dimension of interest DDimX. 
+ */
 template <class Geometry, class DDimX>
 class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, DDimX>
 {
@@ -25,6 +29,10 @@ private:
     IPreallocatableInterpolator<DDimX> const& m_interpolator_x;
 
 public:
+    /**
+     * @brief Constructor  
+     * @param[in] interpolator_x interpolator along the DDimX direction which refers to the spatial space.  
+     */
     BslAdvectionSpatial(IPreallocatableInterpolator<DDimX> const& interpolator_x)
         : m_interpolator_x(interpolator_x)
     {
@@ -32,11 +40,20 @@ public:
 
     ~BslAdvectionSpatial() override = default;
 
-    ddc::ChunkSpan<double, DDom> operator()(
-            ddc::ChunkSpan<double, DDom> const allfdistribu,
+    /**
+     * @brief Advects fdistribu along DDimX for a duration dt.
+     * @param[in, out] allfdistribu_device Reference to the whole distribution function for one species, allocated on the device (ie it lets the choice of the location depend on the build configuration).
+     * @param[in] dt  time step
+     * @return A reference to the allfdistribu array containing the value of the function at the coordinates.
+     */
+    device_t<ddc::ChunkSpan<double, DDom>> operator()(
+            device_t<ddc::ChunkSpan<double, DDom>> const allfdistribu_device,
             double const dt) const override
     {
         Kokkos::Profiling::pushRegion("BslAdvectionSpatial");
+        auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
+        ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
+
         DDom const dom = allfdistribu.domain();
         ddc::DiscreteDomain<DDimX> const x_dom = ddc::select<DDimX>(dom);
         ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
@@ -79,7 +96,8 @@ public:
             });
         });
 
+        ddc::deepcopy(allfdistribu_device, allfdistribu);
         Kokkos::Profiling::popRegion();
-        return allfdistribu;
+        return allfdistribu_device;
     }
 };

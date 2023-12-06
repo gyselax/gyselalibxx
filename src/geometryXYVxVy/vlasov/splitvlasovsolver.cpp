@@ -17,11 +17,21 @@ SplitVlasovSolver::SplitVlasovSolver(
 }
 
 DSpanSpXYVxVy SplitVlasovSolver::operator()(
-        DSpanSpXYVxVy const allfdistribu,
-        DViewXY const electric_field_x,
-        DViewXY const electric_field_y,
+        DSpanSpXYVxVy const allfdistribu_host,
+        DViewXY const electric_field_x_host,
+        DViewXY const electric_field_y_host,
         double const dt) const
 {
+    auto allfdistribu_alloc
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
+    ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
+    auto electric_field_x_alloc = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), electric_field_x_host);
+    ddc::ChunkSpan electric_field_x = electric_field_x_alloc.span_view();
+    auto electric_field_y_alloc = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), electric_field_y_host);
+    ddc::ChunkSpan electric_field_y = electric_field_y_alloc.span_view();
+
     m_advec_x(allfdistribu, dt / 2);
     m_advec_y(allfdistribu, dt / 2);
     m_advec_vx(allfdistribu, electric_field_x, dt / 2);
@@ -29,5 +39,7 @@ DSpanSpXYVxVy SplitVlasovSolver::operator()(
     m_advec_vx(allfdistribu, electric_field_x, dt / 2);
     m_advec_y(allfdistribu, dt / 2);
     m_advec_x(allfdistribu, dt / 2);
-    return allfdistribu;
+
+    ddc::deepcopy(allfdistribu_host, allfdistribu);
+    return allfdistribu_host;
 }
