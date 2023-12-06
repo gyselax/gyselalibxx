@@ -2,7 +2,7 @@
 
 The `src/` folder contains all the code necessary to build a gyrokinetic semi-Lagrangian simulation. It is broken up into the following sub-folders:
 
-<!-- - [advection](./advection/README.md) - Code describing semi-Lagrangian advection routines. -->
+- [advection](./advection/README.md) - Code describing semi-Lagrangian advection routines.
 - [geometryRTheta](./geometryRTheta/README.md) - Code describing methods which are specific to a 2D curvilinear geometry containing a singular point.
 - [geometryXVx](./geometryXVx/README.md) - Code describing methods which are specific to a simulation with 1 spatial dimension and 1 velocity dimension.
 - [geometryXYVxVy](./geometryXYVxVy/README.md) - Code describing methods which are specific to a simulation with 2 spatial dimensions and 2 velocity dimension.

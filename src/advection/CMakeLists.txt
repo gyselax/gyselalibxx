@@ -17,6 +17,7 @@ target_link_libraries("advection"
         sll::splines
         gslx::interpolation
         gslx::speciesinfo
+        gslx::utils
 )
 
 add_library("gslx::advection" ALIAS "advection")

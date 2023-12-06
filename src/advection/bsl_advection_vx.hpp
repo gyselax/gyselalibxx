@@ -4,11 +4,15 @@
 
 #include <ddc/ddc.hpp>
 
+#include <ddc_helper.hpp>
 #include <i_interpolator.hpp>
 #include <species_info.hpp>
 
 #include "iadvectionvx.hpp"
 
+/**
+ * @brief A class which computes the velocity advection along the dimension of interest DDimV.
+ */
 template <class Geometry, class DDimV>
 class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, DDimV>
 {
@@ -23,6 +27,10 @@ private:
     IPreallocatableInterpolator<DDimV> const& m_interpolator_v;
 
 public:
+    /**
+     * @brief Constructor 
+     * @param[in] interpolator_v interpolator along the DDimV direction which refers to the velocity space.  
+     */
     explicit BslAdvectionVelocity(IPreallocatableInterpolator<DDimV> const& interpolator_v)
         : m_interpolator_v(interpolator_v)
     {
@@ -30,12 +38,25 @@ public:
 
     ~BslAdvectionVelocity() override = default;
 
-    ddc::ChunkSpan<double, FdistribuDDom> operator()(
-            ddc::ChunkSpan<double, FdistribuDDom> const allfdistribu,
-            ddc::ChunkSpan<const double, SpatialDDom> const electric_field,
+    /**
+     * @brief Advects fdistribu along DDimV for a duration dt.
+     * @param[in, out] allfdistribu_device Reference to the whole distribution function for one species, allocated on the device (ie it lets the choice of the location depend on the build configuration).
+     * @param[in] electric_field_device Reference to the electric field which derives from electrostatic potential, allocated on the device.
+     * @param[in] dt Time step
+     * @return A reference to the allfdistribu array containing the value of the function at the coordinates.
+     */
+    device_t<ddc::ChunkSpan<double, FdistribuDDom>> operator()(
+            device_t<ddc::ChunkSpan<double, FdistribuDDom>> const allfdistribu_device,
+            device_t<ddc::ChunkSpan<const double, SpatialDDom>> const electric_field_device,
             double const dt) const override
     {
         Kokkos::Profiling::pushRegion("BslAdvectionVelocity");
+
+        auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
+        ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
+        auto electric_field_alloc = ddc::create_mirror_view_and_copy(electric_field_device);
+        ddc::ChunkSpan electric_field = electric_field_alloc.span_view();
+
         FdistribuDDom const dom = allfdistribu.domain();
         ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
         ddc::DiscreteDomain<DDimSp> const sp_dom = ddc::select<DDimSp>(dom);
@@ -80,7 +101,8 @@ public:
             });
         });
 
+        ddc::deepcopy(allfdistribu_device, allfdistribu);
         Kokkos::Profiling::popRegion();
-        return allfdistribu;
+        return allfdistribu_device;
     }
 };

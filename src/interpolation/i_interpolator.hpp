@@ -78,6 +78,16 @@ public:
      */
     virtual std::unique_ptr<IInterpolator<DDim>> preallocate() const = 0;
 
+    /**
+     * @brief Approximate the value of a function at a set of coordinates using the
+     * current values at a known set of interpolation points by temporarily preallocating an IInterpolator.
+     *
+     * @param[in, out] inout_data On input: an array containing the value of the function at the interpolation points.
+     * 			 On output: an array containing the value of the function at the coordinates.
+     * @param[in] coordinates The coordinates where the function should be evaluated.
+     *
+     * @return A reference to the inout_data array containing the value of the function at the coordinates.
+     */
     ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> operator()(
             ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> const inout_data,
             ddc::ChunkSpan<const ddc::Coordinate<CDim>, ddc::DiscreteDomain<DDim>> const
