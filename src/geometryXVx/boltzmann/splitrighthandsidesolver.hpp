@@ -42,6 +42,7 @@ public:
             std::vector<std::reference_wrapper<IRightHandSide const>> rhs);
 
     ~SplitRightHandSideSolver() override = default;
+
     /**
      * @brief Solves a Boltzmann equation on a timestep dt.
      * @param[in, out] allfdistribu On input: the initial value of the distribution function.
@@ -53,6 +54,6 @@ public:
      */
     device_t<DSpanSpXVx> operator()(
             device_t<DSpanSpXVx> allfdistribu,
-            DViewX electric_field,
+            device_t<DViewX> electric_field,
             double dt) const override;
 };

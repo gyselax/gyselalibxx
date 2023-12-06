@@ -15,6 +15,7 @@ target_link_libraries("interpolation"
     INTERFACE
         DDC::DDC
         sll::splines
+        gslx::utils
 )
 
 add_library("gslx::interpolation" ALIAS "interpolation")
