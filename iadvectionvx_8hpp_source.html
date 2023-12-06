@@ -109,18 +109,22 @@ $(document).ready(function(){initNavTree('iadvectionvx_8hpp_source.html',''); in
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Geometry, <span class="keyword">class</span> DDimV&gt;</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classIAdvectionVelocity.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">virtual</span> ddc::ChunkSpan&lt;double, typename Geometry::FdistribuDDom&gt; operator()(</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            ddc::ChunkSpan&lt;double, typename Geometry::FdistribuDDom&gt; allfdistribu,</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            ddc::ChunkSpan&lt;const double, typename Geometry::SpatialDDom&gt; electrostatic_potential,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;};</div>
-<div class="ttc" id="aclassIAdvectionVelocity_html"><div class="ttname"><a href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div><div class="ttdoc">A generic class for a velocity advection.</div><div class="ttdef"><b>Definition:</b> iadvectionvx.hpp:9</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;ddc_helper.hpp&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Geometry, <span class="keyword">class</span> DDimV&gt;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classIAdvectionVelocity.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classIAdvectionVelocity.html#a1b1caa9543145f61490ac8dcd8253827">   30</a></span>&#160;    <span class="keyword">virtual</span> device_t&lt;ddc::ChunkSpan&lt;double, typename Geometry::FdistribuDDom&gt;&gt; <a class="code" href="classIAdvectionVelocity.html#a1b1caa9543145f61490ac8dcd8253827">operator()</a>(</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;double, typename Geometry::FdistribuDDom&gt;&gt; allfdistribu,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;const double, typename Geometry::SpatialDDom&gt;&gt;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                    electrostatic_potential,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="ttc" id="aclassIAdvectionVelocity_html"><div class="ttname"><a href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div><div class="ttdoc">A class which provides an advection operator.</div><div class="ttdef"><b>Definition:</b> iadvectionvx.hpp:17</div></div>
+<div class="ttc" id="aclassIAdvectionVelocity_html_a1b1caa9543145f61490ac8dcd8253827"><div class="ttname"><a href="classIAdvectionVelocity.html#a1b1caa9543145f61490ac8dcd8253827">IAdvectionVelocity::operator()</a></div><div class="ttdeci">virtual device_t&lt; ddc::ChunkSpan&lt; double, typename Geometry::FdistribuDDom &gt; &gt; operator()(device_t&lt; ddc::ChunkSpan&lt; double, typename Geometry::FdistribuDDom &gt;&gt; allfdistribu, device_t&lt; ddc::ChunkSpan&lt; const double, typename Geometry::SpatialDDom &gt;&gt; electrostatic_potential, double dt) const =0</div><div class="ttdoc">operates a transport of the distribution function.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

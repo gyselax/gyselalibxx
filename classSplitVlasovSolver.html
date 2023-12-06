@@ -125,9 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae7bc383bc8b9884a4a04f27322c7dde5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplitVlasovSolver.html#ae7bc383bc8b9884a4a04f27322c7dde5">SplitVlasovSolver</a> (<a class="el" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>&lt; <a class="el" href="classGeometryXVx.html">GeometryXVx</a>, IDimX &gt; const &amp;advec_x, <a class="el" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>&lt; <a class="el" href="classGeometryXVx.html">GeometryXVx</a>, IDimVx &gt; const &amp;advec_vx)</td></tr>
 <tr class="memdesc:ae7bc383bc8b9884a4a04f27322c7dde5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the split vlasov solver class.  <a href="classSplitVlasovSolver.html#ae7bc383bc8b9884a4a04f27322c7dde5">More...</a><br /></td></tr>
 <tr class="separator:ae7bc383bc8b9884a4a04f27322c7dde5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adae2faf181e6cacd76d9b78db7f03961"><td class="memItemLeft" align="right" valign="top">device_t&lt; DSpanSpXVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplitVlasovSolver.html#adae2faf181e6cacd76d9b78db7f03961">operator()</a> (device_t&lt; DSpanSpXVx &gt; allfdistribu, DViewX electric_field, double dt) const override</td></tr>
-<tr class="memdesc:adae2faf181e6cacd76d9b78db7f03961"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves a Vlasov equation on a timestep dt.  <a href="classSplitVlasovSolver.html#adae2faf181e6cacd76d9b78db7f03961">More...</a><br /></td></tr>
-<tr class="separator:adae2faf181e6cacd76d9b78db7f03961"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9750a4caa7978424c5ef5952770b2944"><td class="memItemLeft" align="right" valign="top">device_t&lt; DSpanSpXVx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplitVlasovSolver.html#a9750a4caa7978424c5ef5952770b2944">operator()</a> (device_t&lt; DSpanSpXVx &gt; allfdistribu, device_t&lt; DViewX &gt; electric_field, double dt) const override</td></tr>
+<tr class="memdesc:a9750a4caa7978424c5ef5952770b2944"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves a Vlasov equation on a timestep dt.  <a href="classSplitVlasovSolver.html#a9750a4caa7978424c5ef5952770b2944">More...</a><br /></td></tr>
+<tr class="separator:a9750a4caa7978424c5ef5952770b2944"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a0d9e743da738c69f549c68e1696267"><td class="memItemLeft" align="right" valign="top"><a id="a8a0d9e743da738c69f549c68e1696267"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SplitVlasovSolver</b> (<a class="el" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>&lt; <a class="el" href="classGeometryXYVxVy.html">GeometryXYVxVy</a>, IDimX &gt; const &amp;advec_x, <a class="el" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>&lt; <a class="el" href="classGeometryXYVxVy.html">GeometryXYVxVy</a>, IDimY &gt; const &amp;advec_y, <a class="el" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>&lt; <a class="el" href="classGeometryXYVxVy.html">GeometryXYVxVy</a>, IDimVx &gt; const &amp;advec_vx, <a class="el" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>&lt; <a class="el" href="classGeometryXYVxVy.html">GeometryXYVxVy</a>, IDimVy &gt; const &amp;advec_vy)</td></tr>
 <tr class="separator:a8a0d9e743da738c69f549c68e1696267"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,8 +177,8 @@ DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="adae2faf181e6cacd76d9b78db7f03961"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adae2faf181e6cacd76d9b78db7f03961">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a9750a4caa7978424c5ef5952770b2944"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9750a4caa7978424c5ef5952770b2944">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,7 +195,7 @@ DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewX&#160;</td>
+          <td class="paramtype">device_t&lt; DViewX &gt;&#160;</td>
           <td class="paramname"><em>electric_field</em>, </td>
         </tr>
         <tr>
@@ -228,7 +228,7 @@ DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the Vlasov equation. </dd></dl>
 
-<p>Implements <a class="el" href="classIBoltzmannSolver.html#a9b7024d3c9d94d96ca31a7c9bf135872">IBoltzmannSolver</a>.</p>
+<p>Implements <a class="el" href="classIBoltzmannSolver.html#a721df2052747cfe1326bcc5969b0c76f">IBoltzmannSolver</a>.</p>
 
 </div>
 </div>

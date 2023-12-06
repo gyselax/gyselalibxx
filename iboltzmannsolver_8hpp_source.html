@@ -114,13 +114,13 @@ $(document).ready(function(){initNavTree('iboltzmannsolver_8hpp_source.html','')
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classIBoltzmannSolver.html#a9b7024d3c9d94d96ca31a7c9bf135872">   24</a></span>&#160;    <span class="keyword">virtual</span> device_t&lt;DSpanSpXVx&gt; <a class="code" href="classIBoltzmannSolver.html#a9b7024d3c9d94d96ca31a7c9bf135872">operator()</a>(</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classIBoltzmannSolver.html#a721df2052747cfe1326bcc5969b0c76f">   24</a></span>&#160;    <span class="keyword">virtual</span> device_t&lt;DSpanSpXVx&gt; <a class="code" href="classIBoltzmannSolver.html#a721df2052747cfe1326bcc5969b0c76f">operator()</a>(</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            device_t&lt;DSpanSpXVx&gt; allfdistribu,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            DViewX efield,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            device_t&lt;DViewX&gt; efield,</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
 <div class="ttc" id="aclassIBoltzmannSolver_html"><div class="ttname"><a href="classIBoltzmannSolver.html">IBoltzmannSolver</a></div><div class="ttdoc">An abstract class for solving a Boltzmann equation.</div><div class="ttdef"><b>Definition:</b> iboltzmannsolver.hpp:11</div></div>
-<div class="ttc" id="aclassIBoltzmannSolver_html_a9b7024d3c9d94d96ca31a7c9bf135872"><div class="ttname"><a href="classIBoltzmannSolver.html#a9b7024d3c9d94d96ca31a7c9bf135872">IBoltzmannSolver::operator()</a></div><div class="ttdeci">virtual device_t&lt; DSpanSpXVx &gt; operator()(device_t&lt; DSpanSpXVx &gt; allfdistribu, DViewX efield, double dt) const =0</div><div class="ttdoc">Operator for solving the Boltzmann equation on one timestep.</div></div>
+<div class="ttc" id="aclassIBoltzmannSolver_html_a721df2052747cfe1326bcc5969b0c76f"><div class="ttname"><a href="classIBoltzmannSolver.html#a721df2052747cfe1326bcc5969b0c76f">IBoltzmannSolver::operator()</a></div><div class="ttdeci">virtual device_t&lt; DSpanSpXVx &gt; operator()(device_t&lt; DSpanSpXVx &gt; allfdistribu, device_t&lt; DViewX &gt; efield, double dt) const =0</div><div class="ttdoc">Operator for solving the Boltzmann equation on one timestep.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
