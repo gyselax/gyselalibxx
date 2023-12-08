@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('docs_DDC_in_gyselalibxx.html',''); ini
 <p>The DDC library is based on templates. The template parameters are based on physical dimensions.</p>
 <p>When using DDC the first step is therefore to create structures representing each of the physical dimensions, e.g. <a class="el" href="structRDimX.html" title="Define non periodic real X dimension.">RDimX</a>. These objects should only contain one attribute, a static constexpr boolean called PERIODIC which indicates whether the dimension is periodic or not. The DDC types are then parametrised by this structure. The "R" in the name of the dimension stands for "real", it indicates that the dimension is in real space and is continuous.</p>
 <p>The following sections describe some of the DDC types used in Gyselalibxx.</p>
-<h1><a class="anchor" id="Coordinate"></a>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Coordinate"></a>
 Coordinate</h1>
 <p>A <code>ddc::Coordinate</code> is one of the only DDC types which represents a continuous data type. This means that it can take any value that can be represented by a double. It represents the position of a coordinate in the vector space.</p>
 <p>Coordinates can have 1 or more dimension. E.g. the coordinate of a position on a \((r,\theta)\) slice should have the type <code>ddc::Coordinate&lt;<a class="el" href="structRDimR.html" title="Define non periodic real R dimension.">RDimR</a>, <a class="el" href="structRDimP.html" title="Define periodic real Theta dimension.">RDimP</a>&gt;</code>, where <code><a class="el" href="structRDimR.html" title="Define non periodic real R dimension.">RDimR</a></code> represents the radial dimension \(r\), and <code><a class="el" href="structRDimP.html" title="Define periodic real Theta dimension.">RDimP</a></code> represents the poloidal dimension \(\theta\).</p>
@@ -121,7 +121,7 @@ Coordinate</h1>
 <div class="line">ddc::Coordinate&lt;RDimX, RDimY&gt; Q = R - P;</div>
 </div><!-- fragment --><p>The <code>Coordinate</code> class also provides an addition operator, comparison operators, and an output operator for easy printing using <code>cout</code>.</p>
 <p>In Gyselalibxx the alias <code>CoordX</code> is usually defined in <code>geometry.hpp</code> to describe the type <code>ddc::Coordinate&lt;<a class="el" href="structRDimX.html" title="Define non periodic real X dimension.">RDimX</a>&gt;</code> more succinctly.</p>
-<h1><a class="anchor" id="Domain"></a>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Domain"></a>
 Domain</h1>
 <p>The physical problems that our simulations describe are defined on a domain. The domain on which the problem is defined is continuous (e.g. a radial domain \([0,1)\)). However a simulation evolves on a discrete domain. This means that the value of the function is only known at a discrete set of points. In the case of a function \(f(x)\rightarrow y \in \mathbb{R}\) with \(x \in [0,1)\), we would usually discretise the domain \([0,1)\) as follows: </p><p class="formulaDsp">
 \[ x_0, x_1, ..., x_i, ..., x_N \]
@@ -199,7 +199,7 @@ DiscreteDomain</h3>
 <li><code>extents()</code> : Returns the number of points in each dimension stored in a <code>ddc::DiscreteVector</code>.</li>
 </ul>
 <p>In Gyselalibxx the alias <code>IDomainX</code> is usually defined in <code>geometry.hpp</code> to describe the domain or sub-domain containing points from the point sampling <code>IDimX</code>.</p>
-<h1><a class="anchor" id="Data_Storage"></a>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Data_Storage"></a>
 Data Storage</h1>
 <p>DDC provides the type <code>ddc::Chunk</code> to store data. This type is parametrised by the underlying data type (e.g. <code>double</code>), and the <code>ddc::DiscreteDomain</code> on which the values are defined.</p>
 <p>In order to initialise the data storage to the correct size, a <code>ddc::Chunk</code> is initailised by providing the <code>ddc::DiscreteDomain</code> on which the values are defined.</p>
@@ -226,7 +226,7 @@ Data Storage</h1>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">return</span> distribution_function[index];</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="Example"></a>
+</div><!-- fragment --><h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Example"></a>
 Example</h1>
 <p>Let us consider the following system of equations (a simple Vlasov-Poisson system): </p><p class="formulaDsp">
 \[ \left[\partial_t + \frac{1}{\sqrt{m_s}} \left(v\partial_x - q_s \partial_x \phi(t,x)\partial_v\right)\right] f_s(t,x,v) = 0\\ \partial_x^2\phi(t,x) = - \sum_s q_s \int f_s(t,x,v) dv\\ f_s(0,x,v) = \frac{n_0}{2\pi T_0}\exp\left(-\frac{v^2}{T_0}\right)\cos(k_xx) \]

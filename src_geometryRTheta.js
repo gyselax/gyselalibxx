@@ -23,13 +23,17 @@ var src_geometryRTheta =
         [ "Q: I cloned the repository but the submodules were not cloned", "docs_Using_git.html#autotoc_md18", null ],
         [ "Q: Git reports changes in the submodule but I didn't change this code", "docs_Using_git.html#autotoc_md19", null ]
       ] ],
-      [ "Advection operator", "src_geometryRTheta_advection.html#Advection_operator", null ],
-      [ "Unit tests", "src_geometryRTheta_advection.html#Unit_tests", null ],
-      [ "Contents", "src_geometryRTheta_advection.html#Contents", null ]
+      [ "Advection operator", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_operator", null ],
+      [ "Unit tests", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Unit_tests", null ],
+      [ "References", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__References", null ],
+      [ "Contents", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Contents", null ]
     ] ],
     [ "Spline interpolator in polar coordinates", "src_geometryRTheta_interpolation.html", null ],
     [ "Polar Poisson solver", "src_geometryRTheta_poisson.html", [
-      [ "The Poisson equation", "src_geometryRTheta_poisson.html#The_Poisson_equation", null ],
-      [ "Evaluation of electric field", "src_geometryRTheta_poisson.html#Evaluation_of_electric_field", null ]
+      [ "The Poisson equation", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__The_Poisson_equation", null ],
+      [ "Evaluation of electric field", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Evaluation_of_electric_field", null ],
+      [ "Unit tests", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Unit_tests", null ],
+      [ "References", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__References", null ],
+      [ "Contents", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Contents", null ]
     ] ]
 ];

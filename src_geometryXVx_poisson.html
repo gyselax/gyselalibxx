@@ -116,11 +116,11 @@ $(document).ready(function(){initNavTree('src_geometryXVx_poisson.html',''); ini
 \[ -\frac{d^2 \phi}{d x^2}(x) = \sum_s \rho_{q,s}(x) \]
 </p>
 <p>is solved.</p>
-<h1><a class="anchor" id="Charge_Density"></a>
+<h1><a class="anchor" id="src_geometryXVx_poisson__Charge_Density"></a>
 Charge Density</h1>
 <p>The charge density is calculated by integrating the distribution function. The simplest way of doing this is using the <a class="el" href="classChargeDensityCalculator.html" title="A class which computes charges density.">ChargeDensityCalculator</a> class which takes a quadrature method.</p>
 <p>For historical reasons the class <a class="el" href="classSplineChargeDensityCalculator.html" title="A class which calculates the charge density.">SplineChargeDensityCalculator</a> also exists. This class creates an intermediate representation of a spline and integrates that representation. This is equivalent to using <a class="el" href="classChargeDensityCalculator.html" title="A class which computes charges density.">ChargeDensityCalculator</a> and providing a spline quadrature. The quadrature method should be preferred as the numerical cost is significantly smaller.</p>
-<h1><a class="anchor" id="Poisson_Solver"></a>
+<h1><a class="anchor" id="src_geometryXVx_poisson__Poisson_Solver"></a>
 Poisson Solver</h1>
 <p>The Poisson equation can be solved with a variety of different methods. Here we have implemented:</p>
 <ul>

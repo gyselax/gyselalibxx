@@ -25,39 +25,39 @@
 var NAVTREE =
 [
   [ "Gyselalib++", "index.html", [
-    [ "Compilation", "index.html#Compilation", null ],
-    [ "Execution", "index.html#Execution", null ],
-    [ "Dependencies", "index.html#Dependencies", null ],
+    [ "Compilation", "index.html#__Compilation", null ],
+    [ "Execution", "index.html#__Execution", null ],
+    [ "Dependencies", "index.html#__Dependencies", null ],
     [ "Adding Documentation", "docs_Adding_docs.html", [
-      [ "Documentation describing code structures", "docs_Adding_docs.html#Documentation_describing_code_structures", null ],
-      [ "Documentation describing general methods", "docs_Adding_docs.html#Documentation_describing_general_methods", null ],
-      [ "Documenting functions", "docs_Adding_docs.html#Documenting_functions", null ],
-      [ "Mathematical notation in documentation", "docs_Adding_docs.html#Mathematical_notation_in_documentation", null ]
+      [ "Documentation describing code structures", "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_code_structures", null ],
+      [ "Documentation describing general methods", "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_general_methods", null ],
+      [ "Documenting functions", "docs_Adding_docs.html#docs_Adding_docs__Documenting_functions", null ],
+      [ "Mathematical notation in documentation", "docs_Adding_docs.html#docs_Adding_docs__Mathematical_notation_in_documentation", null ]
     ] ],
     [ "Coding Standards", "docs_CODING_STANDARD.html", [
-      [ "C++ Features", "docs_CODING_STANDARD.html#Cxx_Features", null ],
-      [ "Parameter passing", "docs_CODING_STANDARD.html#Parameter_passing", null ],
-      [ "Naming", "docs_CODING_STANDARD.html#Naming", null ],
-      [ "Style", "docs_CODING_STANDARD.html#Style", null ],
-      [ "Operators", "docs_CODING_STANDARD.html#Operators", null ],
-      [ "Code Organisation", "docs_CODING_STANDARD.html#Code_Organisation", null ]
+      [ "C++ Features", "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Cxx_Features", null ],
+      [ "Parameter passing", "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Parameter_passing", null ],
+      [ "Naming", "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Naming", null ],
+      [ "Style", "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Style", null ],
+      [ "Operators", "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Operators", null ],
+      [ "Code Organisation", "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Code_Organisation", null ]
     ] ],
     [ "Using DDC in Gyselalibxx", "docs_DDC_in_gyselalibxx.html", [
-      [ "Coordinate", "docs_DDC_in_gyselalibxx.html#Coordinate", null ],
-      [ "Domain", "docs_DDC_in_gyselalibxx.html#Domain", null ],
-      [ "Data Storage", "docs_DDC_in_gyselalibxx.html#Data_Storage", null ],
-      [ "Example", "docs_DDC_in_gyselalibxx.html#Example", null ]
+      [ "Coordinate", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Coordinate", null ],
+      [ "Domain", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Domain", null ],
+      [ "Data Storage", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Data_Storage", null ],
+      [ "Example", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Example", null ]
     ] ],
     [ "Using Git", "docs_Using_git.html", [
-      [ "Branches", "docs_Using_git.html#Branches", null ],
-      [ "Submodules", "docs_Using_git.html#Submodules", null ]
+      [ "Branches", "docs_Using_git.html#docs_Using_git__Branches", null ],
+      [ "Submodules", "docs_Using_git.html#docs_Using_git__Submodules", null ]
     ] ],
     [ "Sheath simulations", "simulations_geometryXVx_sheath.html", [
-      [ "Description", "simulations_geometryXVx_sheath.html#Description", null ],
-      [ "Usage", "simulations_geometryXVx_sheath.html#Usage", null ],
-      [ "Recommended parameters", "simulations_geometryXVx_sheath.html#Recommended_parameters", null ],
-      [ "Verification of the simulation", "simulations_geometryXVx_sheath.html#Verification_of_the_simulation", null ],
-      [ "References", "simulations_geometryXVx_sheath.html#References", null ]
+      [ "Description", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Description", null ],
+      [ "Usage", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Usage", null ],
+      [ "Recommended parameters", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Recommended_parameters", null ],
+      [ "Verification of the simulation", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Verification_of_the_simulation", null ],
+      [ "References", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__References", null ]
     ] ],
     [ "Gyselalib++ contents", "src.html", "src" ],
     [ "Tests : Geometry (r, theta)", "tests_geometryRTheta.html", "tests_geometryRTheta" ],

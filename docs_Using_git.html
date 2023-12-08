@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('docs_Using_git.html',''); initResizabl
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Git is an extremely important tool for handling versioning and concurrent developments on the same code. There are many resources available online to help you get to grips with this tool. Here we summarise a few key concepts which will be helpful when working with git and Gyselalibxx. It is designed to be a jumping-off point and a reference for reoccuring git questions, not a complete git reference or tutorial.</p>
-<h1><a class="anchor" id="Branches"></a>
+<h1><a class="anchor" id="docs_Using_git__Branches"></a>
 Branches</h1>
 <p>Branches are an important tool for handling concurrent development. The <code>main</code> branch is the starting point for all developments. It contains all major developments which are considered sufficiently mature for other developers to also use them.</p>
 <p>Whenever you wish to add something new to gyselalibxx or fix an issue you should create a new branch from the <code>main</code> branch. The branch name should have the following format: </p><div class="fragment"><div class="line">&lt;user_name&gt;_&lt;description_of_development&gt;</div>
@@ -114,7 +114,7 @@ Branches</h1>
 </div><!-- fragment --><p> or a <a href="https://git-scm.com/docs/git-rebase">rebase</a> command: </p><div class="fragment"><div class="line">git fetch</div>
 <div class="line">git rebase origin/main</div>
 </div><!-- fragment --><p>After this command conflicts may appear between your branch and the main branch. For a <code>git merge</code> command all conflicts will appear at the same time. For a <code>git rebase</code> command conflicts may appear for each commit in your branch since the last rebase command (or its creation from the main branch). Conflicts should each be examined individually to ensure no new developments are lost. There are many resources (e.g. <a href="https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts">bitbucket</a>) online which describe how to fix these conflicts.</p>
-<h1><a class="anchor" id="Submodules"></a>
+<h1><a class="anchor" id="docs_Using_git__Submodules"></a>
 Submodules</h1>
 <p>Gyselalibxx depends on other external libraries to compile. These libraries are included in the repository via <a href="https://git-scm.com/docs/gitsubmodules">submodules</a>. In general you will not need to touch the code inside the folders associated with these repositories. However their presence sometimes causes unexpected behaviour. The following is a small FAQ of common issues concerning submodules:</p>
 <h4><a class="anchor" id="autotoc_md18"></a>

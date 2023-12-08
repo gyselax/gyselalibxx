@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes and similar as well as a collection of such codes.</p>
-<h1><a class="anchor" id="Compilation"></a>
+<h1><a class="anchor" id="__Compilation"></a>
 Compilation</h1>
 <p>to compile Gyselalib++:</p>
 <div class="fragment"><div class="line">git clone --recurse-submodules git@gitlab.maisondelasimulation.fr:gysela-developpers/gyselalibxx.git gyselalibxx</div>
@@ -113,14 +113,14 @@ Compilation</h1>
 <div class="line">cd build</div>
 <div class="line">cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=&quot;-Wall -Wno-sign-compare&quot; ..</div>
 <div class="line">make</div>
-</div><!-- fragment --><h1><a class="anchor" id="Execution"></a>
+</div><!-- fragment --><h1><a class="anchor" id="__Execution"></a>
 Execution</h1>
 <p>to run the tests: </p><div class="fragment"><div class="line">ctest --output-on-failure</div>
 </div><!-- fragment --><p>Then, just have a look at <code>tests/landau/growthrate_t0.0to45.0.png</code>:</p>
 <p><img src="https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release" alt="tests/landau/fft/growthrate_t0.0to45.0.png" title="Landau damping rate" class="inline"/></p>
 <p>and <code>tests/landau/frequency_t0.0to45.0.png</code>:</p>
 <p><img src="https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release" alt="tests/landau/fft/frequency_t0.0to45.0.png" title="Landau damping frequency" class="inline"/></p>
-<h1><a class="anchor" id="Dependencies"></a>
+<h1><a class="anchor" id="__Dependencies"></a>
 Dependencies</h1>
 <p>To install dependencies through spack, first follow the the 3 first steps of <a href="https://github.com/pdidev/spack">https://github.com/pdidev/spack</a></p>
 <p>Then execute the following: </p><div class="fragment"><div class="line">spack env create gyselalibxx spack.yaml</div>

@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('docs_CODING_STANDARD.html',''); initRe
 <div class="title">Coding Standards </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="Cxx_Features"></a>
+<div class="textblock"><h1><a class="anchor" id="docs_CODING_STANDARD__Cxx_Features"></a>
 C++ Features</h1>
 <ul>
 <li>We use C++17</li>
@@ -117,7 +117,7 @@ C++ Features</h1>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="Parameter_passing"></a>
+<h1><a class="anchor" id="docs_CODING_STANDARD__Parameter_passing"></a>
 Parameter passing</h1>
 <ul>
 <li>We take out/inout-parameters (those we modify) first</li>
@@ -134,7 +134,7 @@ Parameter passing</h1>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="Naming"></a>
+<h1><a class="anchor" id="docs_CODING_STANDARD__Naming"></a>
 Naming</h1>
 <ul>
 <li>we name everything using expressive English names (e.g. <code>temperature</code>) and don't use variable names from the equations (e.g. <code>u</code>, <code>u_bar_star</code>)</li>
@@ -146,7 +146,7 @@ Naming</h1>
 <li>we don't use single letter variables</li>
 <li>we don't rely on case to distinguish between variables</li>
 </ul>
-<h1><a class="anchor" id="Style"></a>
+<h1><a class="anchor" id="docs_CODING_STANDARD__Style"></a>
 Style</h1>
 <ul>
 <li>We use the style specified by the <code>.clang-format</code> file using clang-format 10</li>
@@ -170,7 +170,7 @@ Style</h1>
 <li>We use at @keywords in Doxygen</li>
 <li>we use east-const: <code>int const</code> rather than <code>const int</code></li>
 </ul>
-<h1><a class="anchor" id="Operators"></a>
+<h1><a class="anchor" id="docs_CODING_STANDARD__Operators"></a>
 Operators</h1>
 <h3><a class="anchor" id="autotoc_md6"></a>
 Interfaces</h3>
@@ -183,7 +183,7 @@ Interfaces</h3>
 <h3><a class="anchor" id="autotoc_md7"></a>
 Implementation</h3>
 <p>Implementation classes should implement at least one interface. When relying on other operations, these classes should use the dependency injection pattern. Each implementation class should take <code>const</code> references to the used operations interfaces as parameters of the constructor and store them so as to call them in the <code>operator()</code> implementation.</p>
-<h1><a class="anchor" id="Code_Organisation"></a>
+<h1><a class="anchor" id="docs_CODING_STANDARD__Code_Organisation"></a>
 Code Organisation</h1>
 <h3><a class="anchor" id="autotoc_md8"></a>
 Object-Oriented vs. Functional Programming</h3>

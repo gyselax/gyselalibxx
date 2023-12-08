@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_poisson.html',''); 
 <div class="title">Polar Poisson solver </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="The_Poisson_equation"></a>
+<div class="textblock"><h1><a class="anchor" id="src_geometryRTheta_poisson__The_Poisson_equation"></a>
 The Poisson equation</h1>
 <p>(For more details, see Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
 in the 5D GYSELA Code". December 2022.)</p>
@@ -149,7 +149,7 @@ Weak formulation</h4>
 </ul>
 <p>So we compute the solution B-splines coefficients \(\{\phi_l\}_l\) by solving this matrix equation. <br  />
 </p>
-<h1><a class="anchor" id="Evaluation_of_electric_field"></a>
+<h1><a class="anchor" id="src_geometryRTheta_poisson__Evaluation_of_electric_field"></a>
 Evaluation of electric field</h1>
 <p>(See for more details, Edoardo Zoni's article, <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a> .)</p>
 <p>We write in this section \(\nabla_{r,\theta}\) the gradient in the logical coordinates \((r, \theta)\) and \(\nabla_{x,y}\) the gradient in the physical coordinates \((x, y)\).</p>
@@ -175,7 +175,7 @@ Evaluation of electric field</h1>
 <li>where \(\theta_1\) and \(\theta_2\) correspond to linearly independent directions.</li>
 </ul>
 <p>(In the code, we chose \(\theta_1 = \frac{\pi}{4}\) and \(\theta_2 = - \frac{\pi}{4}\), and \(\varepsilon = 10^{-12}\).)</p>
-<h1><a class="anchor" id="Unit_tests"></a>
+<h1><a class="anchor" id="src_geometryRTheta_poisson__Unit_tests"></a>
 Unit tests</h1>
 <p>The test are implemented in the <code>tests/geometryRTheta/polar_poisson/</code> folder (<a class="el" href="tests_geometryRTheta_polar_poisson.html">Tests on the 2D polar poisson solver</a>).</p>
 <p>The <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a> is tested on a circular mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>) and on a Czarny mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>) with (the test cases are given in Emily Bourne's thesis [1])</p>
@@ -198,12 +198,12 @@ Unit tests</h1>
 </li>
 </ul>
 <p>The <a class="el" href="classVlasovPoissonSolver.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">VlasovPoissonSolver</a> is tested on a circular mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>) and on a Czarny mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>) with the same Poisson coeffiecients and for the cartesian solution.</p>
-<h1><a class="anchor" id="References"></a>
+<h1><a class="anchor" id="src_geometryRTheta_poisson__References"></a>
 References</h1>
 <p>[1] Emily Bourne, "Non-Uniform Numerical Schemes for the Modelling of Turbulence in the 5D GYSELA Code". December 2022.</p>
 <p>[2] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
 method of characteristics and spline finite elements", <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>, Journal of Computational Physics, 2019.</p>
-<h1><a class="anchor" id="Contents"></a>
+<h1><a class="anchor" id="src_geometryRTheta_poisson__Contents"></a>
 Contents</h1>
 <ul>
 <li>ipoissonsolver.hpp : Define a base class for the Poisson solvers: <a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>.</li>
