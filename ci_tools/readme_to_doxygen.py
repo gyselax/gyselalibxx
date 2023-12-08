@@ -183,7 +183,7 @@ if __name__ == '__main__':
             if line.startswith('##') and line[2] != '#':
                 sec_title = line[2:].strip()
                 sec_tag = get_compatible_tag(sec_title)
-                line = f"\n@section {sec_tag} {sec_title}\n"
+                line = f"\n@section {tag}__{sec_tag} {sec_title}\n"
             else:
                 # Replace inline math with Doxygen tag
                 line, _ = format_equations(line, single_math_tag, single_math_tag, "@f$", "@f$")
