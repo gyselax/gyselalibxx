@@ -1,5 +1,10 @@
 var NAVTREEINDEX5 =
 {
+"geometryXYVxVy_2poisson_2ipoissonsolver_8hpp_source.html":[12,0,3,2,4],
+"geometryXYVxVy_2poisson_2nullpoissonsolver_8hpp_source.html":[12,0,3,2,5],
+"geometryXYVxVy_2time__integration_2itimesolver_8hpp_source.html":[12,0,3,3,0],
+"geometryXYVxVy_2time__integration_2predcorr_8hpp_source.html":[12,0,3,3,1],
+"geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source.html":[12,0,3,4,1],
 "geometry__pseudo__cartesian_8hpp_source.html":[12,0,1,0,7],
 "greville__interpolation__points_8hpp_source.html":[12,2,0,0,0,13],
 "i__interpolator_8hpp_source.html":[12,0,4,0],

@@ -1,5 +1,10 @@
 var NAVTREEINDEX4 =
 {
+"classdeprecated_1_1BSplines.html#a252b828716d1b96f7d546f9298536885":[11,0,0,2],
+"classdeprecated_1_1BSplines.html#a302f6b136922a81b4c6bf57565817014":[11,0,0,8],
+"classdeprecated_1_1BSplines.html#a34057a6f2e50d74467ca34891df2ea29":[11,0,0,10],
+"classdeprecated_1_1BSplines.html#a39994f9d8e2cde1a3c849c21c50cc417":[11,0,0,17],
+"classdeprecated_1_1BSplines.html#a4f9a4112a9f796342fb7d1d881c55ddc":[11,0,0,1],
 "classdeprecated_1_1BSplines.html#a6c8f121fccaf4ebf176c9f9282a5507d":[11,0,0,5],
 "classdeprecated_1_1BSplines.html#a70a9350c913ae7c6ec0998cc449ba9ae":[11,0,0,14],
 "classdeprecated_1_1BSplines.html#a7206b67f3bcfc6e1abe4ec3135e4965a":[11,0,0,15],
@@ -244,10 +249,5 @@ var NAVTREEINDEX4 =
 "geometryXYVxVy_2poisson_2chargedensitycalculator_8hpp_source.html":[12,0,3,2,0],
 "geometryXYVxVy_2poisson_2electricfield_8hpp_source.html":[12,0,3,2,1],
 "geometryXYVxVy_2poisson_2fftpoissonsolver_8hpp_source.html":[12,0,3,2,2],
-"geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp_source.html":[12,0,3,2,3],
-"geometryXYVxVy_2poisson_2ipoissonsolver_8hpp_source.html":[12,0,3,2,4],
-"geometryXYVxVy_2poisson_2nullpoissonsolver_8hpp_source.html":[12,0,3,2,5],
-"geometryXYVxVy_2time__integration_2itimesolver_8hpp_source.html":[12,0,3,3,0],
-"geometryXYVxVy_2time__integration_2predcorr_8hpp_source.html":[12,0,3,3,1],
-"geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source.html":[12,0,3,4,1]
+"geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp_source.html":[12,0,3,2,3]
 };

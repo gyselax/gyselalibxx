@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['lagrange_545',['Lagrange',['../classLagrange.html',1,'']]],
-  ['lagrangeinterpolator_546',['LagrangeInterpolator',['../classLagrangeInterpolator.html',1,'']]],
-  ['lagrangeinterpolatorbatched_547',['LagrangeInterpolatorBatched',['../classLagrangeInterpolatorBatched.html',1,'']]],
-  ['lagrangeinterpolatorbatched_3c_20ddimi_2c_20bcmin_2c_20bcmax_2c_20ddim_2e_2e_2e_20_3e_548',['LagrangeInterpolatorBatched&lt; DDimI, BcMin, BcMax, DDim... &gt;',['../classLagrangeInterpolatorBatched.html',1,'']]]
+  ['lagrange_541',['Lagrange',['../classLagrange.html',1,'']]],
+  ['lagrangeinterpolator_542',['LagrangeInterpolator',['../classLagrangeInterpolator.html',1,'']]],
+  ['lagrangeinterpolatorbatched_543',['LagrangeInterpolatorBatched',['../classLagrangeInterpolatorBatched.html',1,'']]],
+  ['lagrangeinterpolatorbatched_3c_20ddimi_2c_20bcmin_2c_20bcmax_2c_20ddim_2e_2e_2e_20_3e_544',['LagrangeInterpolatorBatched&lt; DDimI, BcMin, BcMax, DDim... &gt;',['../classLagrangeInterpolatorBatched.html',1,'']]]
 ];

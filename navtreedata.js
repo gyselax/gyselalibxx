@@ -73,8 +73,8 @@ var NAVTREEINDEX =
 "classCurvilinear2DToCartesian.html#afbc01889defa456fd0f757435bcdfc61",
 "classMatrix__Banded.html#af664e9b8322a6fb2e47619fffcc8201b",
 "classRK4.html#a63289a986749f2cffeb0180bb37b8cfa",
-"classdeprecated_1_1BSplines.html#a6c8f121fccaf4ebf176c9f9282a5507d",
-"geometry__pseudo__cartesian_8hpp_source.html"
+"classdeprecated_1_1BSplines.html#a252b828716d1b96f7d546f9298536885",
+"geometryXYVxVy_2poisson_2ipoissonsolver_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
