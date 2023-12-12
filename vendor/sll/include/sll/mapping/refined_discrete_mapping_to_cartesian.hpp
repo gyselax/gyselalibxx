@@ -213,10 +213,11 @@ private:
      */
     using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
-    REvalBoundary boundary_condition_r_left;
-    REvalBoundary boundary_condition_r_right;
-    SplineRPEvaluatorRefined refined_evaluator;
-    DiscreteToCartesian<RDimXRefined, RDimYRefined, SplineRPBuilderRefined> m_mapping;
+    IDomainRPRefined const m_refined_domain;
+    REvalBoundary const boundary_condition_r_left;
+    REvalBoundary const boundary_condition_r_right;
+    SplineRPEvaluatorRefined const refined_evaluator;
+    DiscreteToCartesian<RDimXRefined, RDimYRefined, SplineRPBuilderRefined> const m_mapping;
 
 
     static inline ddc::Coordinate<RDimXRefined> to_refined(ddc::Coordinate<RDimX> const& coord)
@@ -292,6 +293,7 @@ private:
         return ddc::Coordinate<RDimR, RDimP>(coord1, coord2);
     }
 
+
     /**
      * @brief Instantiate a RefinedDiscreteToCartesian from the coefficients of 2D splines
      * approximating the mapping in the refined domain.
@@ -306,11 +308,13 @@ private:
      *      Bsplines coefficients of the second physical dimension in the refined logical domain.
      */
     RefinedDiscreteToCartesian(
+            IDomainRPRefined const& refined_domain,
             ddc::Chunk<double, BSDomainRPRefined>&& curvilinear_to_x,
             ddc::Chunk<double, BSDomainRPRefined>&& curvilinear_to_y,
             CoordRRefined r_min,
             CoordRRefined r_max)
-        : boundary_condition_r_left(r_min)
+        : m_refined_domain(refined_domain)
+        , boundary_condition_r_left(r_min)
         , boundary_condition_r_right(r_max)
         , refined_evaluator(
                   boundary_condition_r_left,
@@ -349,7 +353,7 @@ public:
      * with a SplineEvaluator2D.
      *
      * @param[in] coord
-     * 			The coordinates in the initial logical domain.
+     *          The coordinates in the initial logical domain.
      *
      * @return The coordinates of the mapping in the initial physical domain.
      *
@@ -452,6 +456,108 @@ public:
 
 
     /**
+     * @brief  Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.
+     *
+     * Call the DiscreteToCartesian::to_pseudo_cartesian_jacobian_center_matrix() function.
+     *
+     * @param[in] grid
+     *      The domain where the mapping is defined.
+     * @param[out] matrix
+     *      The pseudo-Cartesian matrix evaluated at the central point.
+     *
+     *
+     * @see Discrete2DToCartesian
+     * @see BslAdvection
+     * @see AdvectionDomain
+     */
+    void to_pseudo_cartesian_jacobian_center_matrix(
+            ddc::DiscreteDomain<IDimR, IDimP> const& grid,
+            Matrix_2x2& matrix) const
+    {
+        m_mapping.to_pseudo_cartesian_jacobian_center_matrix(m_refined_domain, matrix);
+    }
+
+
+    /**
+     * @brief Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @param[in] grid
+     *      The domain where the mapping is defined.
+     *
+     * @return A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @see to_pseudo_cartesian_jacobian_center_matrix
+     */
+    double to_pseudo_cartesian_jacobian_11_center(
+            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
+    {
+        Matrix_2x2 jacobian;
+        to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
+        return jacobian[0][0];
+    }
+
+
+    /**
+     * @brief Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @param[in] grid
+     *      The domain where the mapping is defined.
+     *
+     * @return A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @see Curvilinear2DToCartesian::to_pseudo_cartesian_jacobian_center_matrix
+     */
+    double to_pseudo_cartesian_jacobian_12_center(
+            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
+    {
+        Matrix_2x2 jacobian;
+        to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
+        return jacobian[0][1];
+    }
+
+
+    /**
+     * @brief Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @param[in] grid
+     *      The domain where the mapping is defined.
+     *
+     * @return A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @see to_pseudo_cartesian_jacobian_center_matrix
+     */
+    double to_pseudo_cartesian_jacobian_21_center(
+            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
+    {
+        Matrix_2x2 jacobian;
+        to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
+        return jacobian[1][0];
+    }
+
+
+    /**
+     * @brief Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @param[in] grid
+     *      The domain where the mapping is defined.
+     *
+     * @return A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
+     *
+     * @see to_pseudo_cartesian_jacobian_center_matrix
+     */
+    double to_pseudo_cartesian_jacobian_22_center(
+            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
+    {
+        ddc::DiscreteDomain<IDimP> const theta_domain = ddc::select<IDimP>(grid);
+
+        Matrix_2x2 jacobian;
+        to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
+        return jacobian[1][1];
+    }
+
+
+
+    /**
      * @brief Define a RefinedDiscreteToCartesian mapping from an analytical mapping.
      *
      * Create a refined grid of size @f$ N_r \times N_\theta @f$ (with  @f$N_r @f$ and  @f$N_\theta @f$
@@ -511,14 +617,14 @@ public:
         ddc::init_discrete_space<IDimRRefined>(SplineInterpPointsRRefined::get_sampling());
         ddc::init_discrete_space<IDimPRefined>(SplineInterpPointsPRefined::get_sampling());
 
-        IDomainRRefined interpolation_domain_R(SplineInterpPointsRRefined::get_domain());
-        IDomainPRefined interpolation_domain_P(SplineInterpPointsPRefined::get_domain());
-        IDomainRPRefined refined_domain(interpolation_domain_R, interpolation_domain_P);
+        IDomainRRefined const interpolation_domain_R(SplineInterpPointsRRefined::get_domain());
+        IDomainPRefined const interpolation_domain_P(SplineInterpPointsPRefined::get_domain());
+        IDomainRPRefined const refined_domain(interpolation_domain_R, interpolation_domain_P);
 
         // Operators on the refined grid
-        SplineRPBuilderRefined refined_builder(refined_domain);
+        SplineRPBuilderRefined const refined_builder(refined_domain);
 
-        BSDomainRPRefined spline_domain = refined_builder.spline_domain();
+        BSDomainRPRefined const spline_domain = refined_builder.spline_domain();
 
         // Compute the B-splines coefficients of the analytical mapping
         ddc::Chunk<double, BSDomainRPRefined> curvilinear_to_x_spline(spline_domain);
@@ -540,6 +646,7 @@ public:
         refined_builder(curvilinear_to_y_spline, curvilinear_to_y_vals);
 
         return RefinedDiscreteToCartesian(
+                refined_domain,
                 std::move(curvilinear_to_x_spline),
                 std::move(curvilinear_to_y_spline),
                 r_min,
