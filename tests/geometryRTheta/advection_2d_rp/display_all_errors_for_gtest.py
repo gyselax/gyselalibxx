@@ -57,7 +57,7 @@ Returns
 import numpy as np
 import matplotlib.pyplot as plt
 
-from advection_functions import set_input, execute, take_errors_from_out, get_full_fct_names, get_fct_names
+from advection_functions import set_input, execute, take_errors_from_out, get_full_fct_names, get_fct_names, get_fct_name_key
 
 
 
@@ -82,13 +82,32 @@ fct_names = get_full_fct_names(out)
 short_fct_names = get_fct_names(out)
 nb_fct = len(fct_names)
 
-# Table of expected convergence orders --------------------------
-#                   Euler  Crank Nicolson    RK3         RK4
-order_expected  = [3, 1, 1] + [3, 2, 2] + [3, 3, 3] + [3, 3, 3]  # Circular map on physical dom
-order_expected += [3, 1, 1] + [3, 2, 2] + [3, 3, 3] + [3, 3, 3]  # Czarny map on physical dom
-order_expected += [1, 1, 1] + [3, 2, 2] + [3, 3, 3] + [3, 3, 3]  # Czarny map on pseudo Cart dom
-order_expected += [1, 1, 1] + [3, 2, 2] + [3, 3, 3] + [3, 3, 3]  # Discrete map on pseudo Cart dom
-
+# Expected convergence orders --------------------------
+order_expected = {'euler': {
+                        'circular': {'Translation':3, 'Rotation':1, 'Decentred rotation':1},
+                        'czarny_physical': {'Translation':3, 'Rotation':1, 'Decentred rotation':1},
+                        'czarny_pseudo_cartesian': {'Translation':1, 'Rotation':1, 'Decentred rotation':1},
+                        'discrete': {'Translation':1, 'Rotation':1, 'Decentred rotation':1}
+                      },
+                  'crank nicolson': {
+                        'circular': {'Translation':3, 'Rotation':2, 'Decentred rotation':2},
+                        'czarny_physical': {'Translation':3, 'Rotation':2, 'Decentred rotation':2},
+                        'czarny_pseudo_cartesian': {'Translation':3, 'Rotation':2, 'Decentred rotation':2},
+                        'discrete': {'Translation':3, 'Rotation':2, 'Decentred rotation':2}
+                    },
+                  'rk3': {
+                        'circular': {'Translation':3, 'Rotation':3, 'Decentred rotation':3},
+                        'czarny_physical': {'Translation':3, 'Rotation':3, 'Decentred rotation':3},
+                        'czarny_pseudo_cartesian': {'Translation':3, 'Rotation':3, 'Decentred rotation':3},
+                        'discrete': {'Translation':3, 'Rotation':3, 'Decentred rotation':3}
+                    },
+                  'rk4': {
+                        'circular': {'Translation':3, 'Rotation':3, 'Decentred rotation':3},
+                        'czarny_physical': {'Translation':3, 'Rotation':3, 'Decentred rotation':3},
+                        'czarny_pseudo_cartesian': {'Translation':3, 'Rotation':3, 'Decentred rotation':3},
+                        'discrete': {'Translation':3, 'Rotation':3, 'Decentred rotation':3}
+                        }
+                  }
 
 
 
@@ -98,16 +117,19 @@ Errors_by_fct = [[err[j] for err in total_Errors] for j in range(nb_fct)]
 
 
 # Check the convergence order -----------------------------------
-for index in range(48):
+for index in range(nb_fct):
     Coeffs = np.polyfit(np.log(Order),np.log(Errors_by_fct[index]),1)
     slope = Coeffs[0]
 
-    print(">" + (fct_names[index][:2]).upper() +fct_names[index][2:] + f" : \n      order = {round(slope,3)} ({order_expected[index]} expected).")
+    problem_type, time_interation_method, mapping = get_fct_name_key(fct_names[index])
+
+    theoretical_order = order_expected[time_interation_method][mapping][problem_type]
+    print(f">{fct_names[index]} : \n      order = {round(slope,3)} ({theoretical_order} expected).")
 
     # Order expected:
-    if (slope < order_expected[index] - 0.25):
-        print(fct_names[index] + f" has not the right convergence order: get {slope}, expected {order_expected[index] - 0.25}.")
-    assert (slope > order_expected[index] - 0.25)
+    if (slope < theoretical_order - 0.25):
+        print(fct_names[index] + f" has not the right convergence order: got {slope}, expected {theoretical_order - 0.25}.")
+    assert (slope > theoretical_order - 0.25)
 
 
 
@@ -162,7 +184,7 @@ if if_plot:
                      "Czarny mapping and pseudo Cartesian domain",
                      "Discrete mapping and pseudo Cartesian domain"]
 
-    for i in range(48//3):
+    for i in range(nb_fct//3):
         index = i + 1
         set_subplot(index, 3*i, names_mapping[i//4] + " \n " + names_method[i%4])
 

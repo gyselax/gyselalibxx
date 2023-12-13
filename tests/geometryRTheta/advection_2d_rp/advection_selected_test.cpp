@@ -204,16 +204,22 @@ int main(int argc, char** argv)
     CircularToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping;
     CircularToCartesian<RDimX, RDimY, RDimR, RDimP> mapping;
     AdvectionPhysicalDomain advection_domain(analytical_mapping);
+    std::string const mapping_name = "CIRCULAR";
+    std::string const domain_name = "PHYSICAL";
 
 #elif defined(CZARNY_MAPPING_PHYSICAL)
     CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> mapping(czarny_e, czarny_epsilon);
     AdvectionPhysicalDomain advection_domain(analytical_mapping);
+    std::string const mapping_name = "CZARNY";
+    std::string const domain_name = "PHYSICAL";
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> mapping(czarny_e, czarny_epsilon);
     AdvectionPseudoCartesianDomain advection_domain(mapping);
+    std::string const mapping_name = "CZARNY";
+    std::string const domain_name = "PSEUDO CARTESIAN";
 
 #elif defined(DISCRETE_MAPPING)
     CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping(czarny_e, czarny_epsilon);
@@ -221,6 +227,8 @@ int main(int argc, char** argv)
             = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>::
                     analytical_to_discrete(analytical_mapping, builder, spline_evaluator_extrapol);
     AdvectionPseudoCartesianDomain advection_domain(mapping);
+    std::string const mapping_name = "DISCRETE";
+    std::string const domain_name = "PSEUDO CARTESIAN";
 #endif
 
 
@@ -228,31 +236,40 @@ int main(int argc, char** argv)
     // SELECTION OF THE TIME INTEGRATION METHOD.
 #if defined(EULER_METHOD)
     Euler<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>> time_stepper(grid);
+    std::string const method_name = "EULER";
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
     CrankNicolson<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>>
             time_stepper(grid, 20, epsilon_CN);
+    std::string const method_name = "CRANK NICOLSON";
 
 #elif defined(RK3_METHOD)
     RK3<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>> time_stepper(grid);
+    std::string const method_name = "RK3";
 
 #elif defined(RK4_METHOD)
     RK4<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>> time_stepper(grid);
+    std::string const method_name = "RK4";
 #endif
 
 
     // SELECTION OF THE SIMULATION.
 #if defined(TRANSLATION_SIMULATION)
     TranslationSimulation simulation(mapping, rmin, rmax);
+    std::string const simu_type = " TRANSLATION : ";
 
 #elif defined(ROTATION_SIMULATION)
     RotationSimulation simulation(mapping, rmin, rmax);
+    std::string const simu_type = " ROTATION : ";
 
 #elif defined(DECENTRED_ROTATION_SIMULATION)
     DecentredRotationSimulation simulation(mapping);
+    std::string const simu_type = " DECENTRED ROTATION : ";
 #endif
 
+    std::cout << mapping_name << " MAPPING - " << domain_name << " DOMAIN - " << method_name
+              << " - " << simu_type << std::endl;
     simulate(
             mapping,
             analytical_mapping,

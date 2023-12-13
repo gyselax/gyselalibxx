@@ -16,71 +16,43 @@
 #                                                                                                       #
 #                                                                                                       #
 #########################################################################################################
-    
-# EXAMPLE TEST N°1 --------------------------------------------------------------------------------------
-set(MAPPING_TYPE "DISCRETE_MAPPING")
+
 set(TIME_METHOD "CRANK_NICOLSON_METHOD")
-set(SIMULATION "DECENTRED_ROTATION_SIMULATION")
-  	
-set(test_name "advection_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}")
-add_executable("${test_name}"
-	test_cases.hpp
-	advection_selected_test.cpp
-)
-target_compile_features("${test_name}" PUBLIC cxx_std_17)
-target_link_libraries("${test_name}"
-	PUBLIC
-		DDC::DDC
-		DDC::PDI_Wrapper
-		paraconf::paraconf
-		PDI::pdi
-		Eigen3::Eigen
-		
-		sll::splines
-		
-		gslx::paraconfpp
-		gslx::interpolation_2D_rp
-		gslx::geometry_RTheta
-		gslx::advection_rp
-		gslx::quadrature
-		gslx::utils
-		gslx::timestepper
-)
-target_compile_definitions("${test_name}" PUBLIC -D${MAPPING_TYPE} -D${TIME_METHOD} -D${SIMULATION} -D${MESH})    
 
+foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING_PHYSICAL" "CZARNY_MAPPING_PSEUDO_CARTESIAN" "DISCRETE_MAPPING")
+    foreach(SIMULATION "TRANSLATION_SIMULATION" "ROTATION_SIMULATION" "DECENTRED_ROTATION_SIMULATION")
+        set(test_name "advection_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}")
+        add_executable("${test_name}"
+            test_cases.hpp
+            advection_selected_test.cpp
+        )
+        target_compile_features("${test_name}" PUBLIC cxx_std_17)
+        target_link_libraries("${test_name}"
+            PUBLIC
+                DDC::DDC
+                DDC::PDI_Wrapper
+                paraconf::paraconf
+                PDI::pdi
+                Eigen3::Eigen
 
-# EXAMPLE TEST N°2 --------------------------------------------------------------------------------------
-set(MAPPING_TYPE "CZARNY_MAPPING_PSEUDO_CARTESIAN")
-set(TIME_METHOD "CRANK_NICOLSON_METHOD")
-set(SIMULATION "TRANSLATION_SIMULATION")
-  
-set(test_name "advection_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}")
-add_executable("${test_name}"
-	test_cases.hpp
-	advection_selected_test.cpp
-)
-target_compile_features("${test_name}" PUBLIC cxx_std_17)
-target_link_libraries("${test_name}"
-	PUBLIC
-		DDC::DDC
-		DDC::PDI_Wrapper
-		paraconf::paraconf
-		PDI::pdi
-		Eigen3::Eigen
-		
-		sll::splines
-		
-		gslx::paraconfpp
-		gslx::interpolation_2D_rp
-		gslx::geometry_RTheta
-		gslx::advection_rp
-		gslx::quadrature
-		gslx::utils
-		gslx::timestepper
-)
-target_compile_definitions("${test_name}" PUBLIC -D${MAPPING_TYPE} -D${TIME_METHOD} -D${SIMULATION} -D${MESH}) 
+                sll::splines
 
-
+                gslx::paraconfpp
+                gslx::interpolation_2D_rp
+                gslx::geometry_RTheta
+                gslx::advection_rp
+                gslx::quadrature
+                gslx::utils
+                gslx::timestepper
+        )
+        target_compile_definitions("${test_name}" PUBLIC -D${MAPPING_TYPE} -D${TIME_METHOD} -D${SIMULATION} -D${MESH})
+        # CONVERGENCE ORDER TEST: ----------------------------------------
+        add_test(NAME TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}
+               COMMAND "$<TARGET_FILE:Python3::Interpreter>" "${CMAKE_CURRENT_SOURCE_DIR}/display_all_errors_for_gtest.py"
+                    "$<TARGET_FILE:advection_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}>")
+        set_property(TEST TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION} PROPERTY TIMEOUT 20)
+    endforeach()
+endforeach()
 
 
 
@@ -118,10 +90,5 @@ target_compile_definitions(advection_ALL PUBLIC)
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
-# CONVERGENCE ORDER TEST: ----------------------------------------
-add_test(NAME TestAdvectionRPConvergence
-       COMMAND "$<TARGET_FILE:Python3::Interpreter>" "${CMAKE_CURRENT_SOURCE_DIR}/display_all_errors_for_gtest.py"
-            "$<TARGET_FILE:advection_ALL>")
-set_property(TEST TestAdvectionRPConvergence PROPERTY TIMEOUT 10000)
 
 
