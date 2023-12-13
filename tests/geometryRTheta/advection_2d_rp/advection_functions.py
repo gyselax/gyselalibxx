@@ -225,11 +225,38 @@ def get_full_fct_names(var_out):
         A list of string containing the names of the test cases.
     """
     out_lines = var_out.split('\n')
-    out_words = [line.split(' - ') for line in out_lines[1:] if "MAPPING" in line and "DOMAIN" in line]
-    fct_names = [line[3][1].upper() + line[3][2:-3].lower() + " with " + line[2].lower() + " on "
+    out_words = [[l.strip(' :') for l in line.split(' - ')] for line in out_lines[1:] if "MAPPING" in line and "DOMAIN" in line]
+    fct_names = [line[3].capitalize() + " with " + line[2].lower() + " on "
                  + line[0].lower() + " and " + line[1].lower()  for line in out_words]
     return fct_names
 
+def get_fct_name_key(full_name):
+    """
+    Get the keys which identify the test case from its full name.
+
+    Parameters
+    ----------
+    full_name : str
+        The full name of the case as outputted by get_full_fct_names.
+
+    Returns
+    -------
+    problem_type : str
+        The key describing the problem type ['Translation'|'Rotation'|'Decentered rotation'].
+    time_integration_method : str
+        The time integration method used to solve the problem ['euler', 'crank nicolson', 'rk3', 'rk4'].
+    mapping : str
+        The mapping which was examined in the test ['circular', 'czarny_physical', 'czarny_pseudo_cart', 'discrete'].
+    """
+    problem_type, s = full_name.split(' with ')
+    time_integration_method, s = s.split(' on ')
+    mapping, domain = s.split(' and ')
+    mapping, _ = mapping.split(' mapping')
+    if mapping == 'czarny':
+        domain, _ = domain.split(' domain')
+        domain = domain.replace(' ','_').lower()
+        mapping = f'{mapping}_{domain}'
+    return problem_type, time_integration_method, mapping
 
 
 def treatment(namefile):
