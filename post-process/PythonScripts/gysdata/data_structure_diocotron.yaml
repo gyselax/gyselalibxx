@@ -1,0 +1,81 @@
+# SPDX-License-Identifier: MIT
+
+density:
+  # the list of HDF5 datasets where this field can be found (this can also be a single dict)
+  path:
+    # file regex, in the regex we capture values that can be used in filename_coord (?P<NAME>CAPTURE)
+    file: 'VOICEXX_\d+.h5'
+    # dataset regex
+    dataset: 'density'
+  dimensions:
+  # ordered set of dimension_name -> how to get the coordinates of this dimension
+  - &timed
+    # get the coordinates of this dimension from a scalar in the file
+    time:    { local_coord: [ 'time' ] }
+  - &rd
+    r:       { global_coord: [ &initialization "VOICEXX_initstate.h5",  r_coords] }
+  - &pd
+    p:       { global_coord: [ *initialization,  p_coords] }
+
+
+density_eq:
+  dimensions: [ *rd , *pd ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'density_eq' }
+
+
+electrical_potential:
+  dimensions: [ *timed , *rd , *pd ]
+  path: { file: 'VOICEXX_\d+.h5', dataset: 'electrical_potential' }
+  
+  
+electrical_potential_eq:
+  dimensions: [ *rd , *pd ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'electrical_potential_eq' }
+ 
+
+
+x_coords:
+  dimensions: [ *rd , *pd ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'x_coords' }
+
+y_coords:
+  dimensions: [ *rd , *pd ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'y_coords' }
+  
+jacobian:
+  dimensions: [ *rd , *pd ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'jacobian' }
+  
+
+
+delta_t:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'delta_t' }
+
+  
+final_T:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'final_T' }
+
+time_step_diag:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'time_step_diag' } 
+
+
+
+r_size:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'r_size' }
+  
+p_size:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'p_size' }  
+  
+  
+
+slope:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'slope' } 
+
+
+ 

@@ -216,7 +216,7 @@ if __name__ == '__main__':
         suggested_expressions.sort(key=lambda expr: (expr.start_pos.line, expr.start_pos.char))
 
         if n_math_blocks > 50:
-            print(f"File contains {n_math_blocks} math blocks but GitLab will only render 50. Some equations may not show up correctly on GitLab", file=sys.stderr)
+            print(f"File contains {n_math_blocks} math blocks but GitLab will only render 50. Some equations may not show up correctly on GitLab. ({file})", file=sys.stderr)
             warnings = True
 
         if args.fix:
