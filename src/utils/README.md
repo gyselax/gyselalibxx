@@ -13,6 +13,6 @@ Finally the classes VectorField and VectorFieldSpan provide a way to represent a
 
 ## Utility tools
 
-The utils_tools.hpp file contains functions computing the infinity norm. For now, it computes the infinity norm of 
-- a double: $ \Vert x \Vert_{\infty} = x $; 
-- a coordinate: $ \Vert x \Vert_{\infty} = \max_{i} (|x_i|) $.
+The utils\_tools.hpp file contains functions computing the infinity norm. For now, it computes the infinity norm of 
+- a double: $`\Vert x \Vert_{\infty} = x`$; 
+- a coordinate: $`\Vert x \Vert_{\infty} = \max_{i} (|x_i|)`$.
