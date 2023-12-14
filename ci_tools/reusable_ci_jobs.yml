@@ -19,7 +19,8 @@ setup_env_push:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   before_script:
     - set -x
-    - git log -1 --format=%H | git diff --name-only" > changed_files.txt
+    - git config --global --add safe.directory $(pwd)
+    - git log -1 --format=%H | git diff --name-only > changed_files.txt
 
 setup_env_mr:
   extends: .setup_env
@@ -27,7 +28,6 @@ setup_env_mr:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   before_script:
     - set -x
-    - ${GIT_DIFF_COMMAND} > changed_files.txt
     - git config --global --add safe.directory $(pwd)
     - git fetch --no-recurse-submodules origin ${CI_MERGE_REQUEST_DIFF_BASE_SHA}
     - git diff --name-only ${CI_MERGE_REQUEST_DIFF_BASE_SHA} > changed_files.txt
