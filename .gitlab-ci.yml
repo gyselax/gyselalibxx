@@ -181,3 +181,21 @@ documentation:
     git diff origin/${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}..HEAD --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
     python3 ci_tools/check_readme_presence.py pull_new_files.txt
   allow_failure: true
+
+markdown_best_practices:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  stage: test
+  needs: []
+  image: ghcr.io/gyselax/gyselalibxx_env
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  script: |
+    MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
+    MARKDOWN_FILES="$MARKDOWN_FILES $(find ./vendor/sll/ -name '*.md')"
+    echo $MARKDOWN_FILES
+    set +e
+    python3 ci_tools/markdown_linter.py ${MARKDOWN_FILES}
+  allow_failure:
+    exit_codes: 2
