@@ -99,7 +99,7 @@ private:
     SplineRPBuilder const& m_rhs_builder;
     SplineRPEvaluator const& m_rhs_evaluator;
 
-    PolarSplineEvaluator<PolarBSplinesRP> m_polar_spline_evaluator;
+    PolarSplineEvaluator<PolarBSplinesRP> const m_polar_spline_evaluator;
 
     PolarSplineFEMPoissonSolver const& m_poisson_solver;
 
