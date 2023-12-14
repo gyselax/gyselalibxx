@@ -52,15 +52,9 @@ var NAVTREE =
       [ "Branches", "docs_Using_git.html#docs_Using_git__Branches", null ],
       [ "Submodules", "docs_Using_git.html#docs_Using_git__Submodules", null ]
     ] ],
-    [ "Sheath simulations", "simulations_geometryXVx_sheath.html", [
-      [ "Description", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Description", null ],
-      [ "Usage", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Usage", null ],
-      [ "Recommended parameters", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Recommended_parameters", null ],
-      [ "Verification of the simulation", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Verification_of_the_simulation", null ],
-      [ "References", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__References", null ]
-    ] ],
+    [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
     [ "Gyselalib++ contents", "src.html", "src" ],
-    [ "Tests : Geometry (r, theta)", "tests_geometryRTheta.html", "tests_geometryRTheta" ],
+    [ "Tests", "tests.html", "tests" ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]
@@ -70,11 +64,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCurvilinear2DToCartesian.html#afbc01889defa456fd0f757435bcdfc61",
-"classMatrix__Banded.html#af664e9b8322a6fb2e47619fffcc8201b",
-"classRK4.html#a63289a986749f2cffeb0180bb37b8cfa",
-"classdeprecated_1_1BSplines.html#a252b828716d1b96f7d546f9298536885",
-"geometryXYVxVy_2poisson_2ipoissonsolver_8hpp_source.html"
+"classCurvilinear2DToCartesian.html#a5f611cc3888f47ec1c78450a7c202a25",
+"classManufacturedPoissonTest.html#a9aac013116d3c04b11cdef64cd870315",
+"classPreallocatableSplineInterpolatorBatched.html#a78cc9eeba93f21bbedbedabe073e8032",
+"classVectorFieldSpan.html#a079197433ab9d4fca858fbb82a46fb93",
+"femperiodicpoissonsolver_8hpp_source.html",
+"utils__tools_8hpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rhs_925',['RHS',['../src_geometryXVx_rhs.html',1,'src_geometryXVx']]]
+  ['quadrature_20methods_963',['Quadrature Methods',['../src_quadrature.html',1,'src']]]
 ];

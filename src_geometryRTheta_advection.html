@@ -105,14 +105,14 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_advection.html','')
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="src_geometryRTheta_advection__Advection_operator"></a>
 Advection operator</h1>
-<h3><a class="anchor" id="autotoc_md20"></a>
+<h3><a class="anchor" id="autotoc_md26"></a>
 Studied equation</h3>
 <p>The studied equation is the following 2D transport equation type : </p><p class="formulaDsp">
 \[\partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0, \]
 </p>
 <p> with \(f(0,x,y) = f_0(x,y)\) and \(A\) the advection field.</p>
 <p><b>We want to solve it on a polar grid.</b></p>
-<h3><a class="anchor" id="autotoc_md21"></a>
+<h3><a class="anchor" id="autotoc_md27"></a>
 Backward Semi-Lagrangian method</h3>
 <p>The method used to solve the equation is a Backward Semi-Lagrangian method (BSL). It uses the conservation along the characteristics property: </p><p class="formulaDsp">
 \[\forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y)) \]
@@ -124,7 +124,7 @@ Backward Semi-Lagrangian method</h3>
 <li>we compute the characteristic feet \(X(t^n; t^{n+1}, x_i, y_j)\) and \(Y(t^n; t^{n+1}, x_i, y_j)\) for each mesh points \((x_i, y_j)\) with a time integration method ;</li>
 <li>we interpolate the function \(f(t = t^n)\) on the characteristic feet. The proprety ensures that the interpolation gives the function at the next time step \(f(t = t^{n+1})\).</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md22"></a>
+<h3><a class="anchor" id="autotoc_md28"></a>
 Time integration methods</h3>
 <p>There are multiple time integration methods available which are implemented in the <a class="el" href="classITimeStepper.html">ITimeStepper</a> child classes. For example:</p><ul>
 <li>Explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> method: <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a>;</li>
@@ -134,19 +134,19 @@ Time integration methods</h3>
 </ul>
 <p>We are listing the different schemes for this equation \(\partial_t X (t) = A_x(t, X(t),Y(t))\).</p>
 <p>We write \(X (t) = X (t; s, x, y)\), \(X^n = X(t^n)\) and \(A^n(X) = A(t^n, X)\) for a time discretisation \(\{t^n; t^n &gt; t^{n-1}, \forall n\}_n\).</p>
-<h4><a class="anchor" id="autotoc_md23"></a>
+<h4><a class="anchor" id="autotoc_md29"></a>
 Explicit Euler method</h4>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - dt A^{n+1}(X^{n+1})\)</li>
 <li>Convergence order : 1.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md24"></a>
+<h4><a class="anchor" id="autotoc_md30"></a>
 Crank-Nicolson method</h4>
 <ul>
 <li>Scheme: \(X^{k+1} = X^{n+1} - \frac{dt}{2} \left( A^{n+1}(X^{n+1}) + A^k(X^k) \right)\) and \(X^{n+1} = X^{k+1}\) once converged.</li>
 <li>Convergence order : 2.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md25"></a>
+<h4><a class="anchor" id="autotoc_md31"></a>
 RK3 method</h4>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - \frac{dt}{6} \left( k_1 + 4 k_2 + k_3 \right)\)<ul>
@@ -160,7 +160,7 @@ RK3 method</h4>
 </li>
 <li>Convergence order : 3.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md26"></a>
+<h4><a class="anchor" id="autotoc_md32"></a>
 RK4 method</h4>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - \frac{dt}{6} \left( k_1 + 2 k_2 + 2 k_3 + k_4\right)\)<ul>
@@ -175,7 +175,7 @@ RK4 method</h4>
 </li>
 <li>Convergence order : 4.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md27"></a>
+<h3><a class="anchor" id="autotoc_md33"></a>
 Advection domain</h3>
 <p>There are two advection domains implemented:</p><ul>
 <li>the physical domain: <a class="el" href="classAdvectionPhysicalDomain.html" title="Define the physical domain for the advection.">AdvectionPhysicalDomain</a>;</li>
