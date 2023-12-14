@@ -109,9 +109,9 @@ The Poisson equation</h1>
 in the 5D GYSELA Code". December 2022.)</p>
 <p>The equation we are solving here is</p>
 <p class="formulaDsp">
-\[L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\]
+\[L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho \]
 </p>
-<p>with the boundary condition \(\phi = 0\), on \(\partial \Omega\).</p>
+<p> with the boundary condition \(\phi = 0\), on \(\partial \Omega\).</p>
 <p>To solve this equation, the <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a> uses a finite element method on the B-splines.</p>
 <h3><a class="anchor" id="autotoc_md28"></a>
 B-splines FEM</h3>
@@ -119,7 +119,7 @@ B-splines FEM</h3>
 The B-splines</h4>
 <p>We introduce a basis of B-splines \(\{B_l\}_l\), cross-product of two 1D B-splines basis:</p>
 <p class="formulaDsp">
-\[\{B_l\}_l = \{b_{i,r} b_{j,\theta}\}_{i n_{n,\theta} +j}.\]
+\[\{B_l\}_l = \{b_{i,r} b_{j,\theta}\}_{i n_{n,\theta} +j}. \]
 </p>
 <h4><a class="anchor" id="autotoc_md30"></a>
 Treatment of the O-point</h4>
@@ -131,14 +131,14 @@ Treatment of the O-point</h4>
 Weak formulation</h4>
 <p>The Poisson equation is solved by solving its weak form:</p>
 <p class="formulaDsp">
-\[\int_{\Omega} \lbrack \beta(r) \phi(r,\theta) \hat{B}_l(r,\theta) + \alpha(r) \nabla \phi(r,\theta) \cdot \nabla \hat{B}_l(r,\theta) \rbrack |det(J_{\mathcal{F}}(r,\theta))| dr d\theta = \int_{\Omega} \rho(r,\theta) \hat{B}_l(r,\theta) |det(J_{\mathcal{F}}(r,\theta))| dr d\theta\]
+\[\int_{\Omega} \lbrack \beta(r) \phi(r,\theta) \hat{B}_l(r,\theta) + \alpha(r) \nabla \phi(r,\theta) \cdot \nabla \hat{B}_l(r,\theta) \rbrack |det(J_{\mathcal{F}}(r,\theta))| dr d\theta = \int_{\Omega} \rho(r,\theta) \hat{B}_l(r,\theta) |det(J_{\mathcal{F}}(r,\theta))| dr d\theta \]
 </p>
-<p>with \(\{\hat{B}_l\}_l\) the B-splines basis.</p>
+<p> with \(\{\hat{B}_l\}_l\) the B-splines basis.</p>
 <p>Written as matrix form, it gives</p>
 <p class="formulaDsp">
-\[(M + S) \hat{\phi} = M \hat{\rho},\]
+\[(M + S) \hat{\phi} = M \hat{\rho}, \]
 </p>
-<p>with</p><ul>
+<p> with</p><ul>
 <li>the mass matrix, \(M_{i,j} = \int_{\Omega} \beta(r,\theta) \hat{B}_i(r,\theta)\hat{B}_j(r,\theta) |det(J_{\mathcal{F}}(r,\theta))| dr d\theta\),</li>
 <li>the stiffness matrix, \(S_{i,j} = \int_{\Omega} \alpha(r) \left[\sum_{\xi_1\in[r,\theta]} \sum_{\xi_2\in[r,\theta]} \partial_{\xi_1}\hat{B}_i(r,\theta) \partial_{\xi_2}\hat{B}_j(r,\theta) g^{\xi_1, \xi_2}\right] |det(J_{\mathcal{F}}(r,\theta))| dr d\theta\)<ul>
 <li>with \(g^{\xi_1, \xi_2}\), the scalar product between the unit vector in \(\xi_1\) and the unit vector in \(\xi_2\).</li>
@@ -154,22 +154,19 @@ Evaluation of electric field</h1>
 <p>(See for more details, Edoardo Zoni's article, <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a> .)</p>
 <p>We write in this section \(\nabla_{r,\theta}\) the gradient in the logical coordinates \((r, \theta)\) and \(\nabla_{x,y}\) the gradient in the physical coordinates \((x, y)\).</p>
 <p>Coupled with the Vlasov equation </p><p class="formulaDsp">
-\[\partial_t \rho - E_y \partial_x \rho + E_x \partial_y\rho = 0,\]
+\[\partial_t \rho - E_y \partial_x \rho + E_x \partial_y\rho = 0, \]
 </p>
-<p>the <a class="el" href="classVlasovPoissonSolver.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">VlasovPoissonSolver</a> also computes the electric field \(E\) in the physical domain from the solution of <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a>.</p>
+<p> the <a class="el" href="classVlasovPoissonSolver.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">VlasovPoissonSolver</a> also computes the electric field \(E\) in the physical domain from the solution of <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a>.</p>
 <p>The electric field is given by \(E = -\nabla \phi\). The solution of the Poisson solver is defined on the logical domain, so we can easily compute \(\nabla_{r,\theta} \phi\). From that, we use the Jacobian matrix of the mapping \(\mathcal{F}\):</p>
 <p class="formulaDsp">
-\[ E_r e_r + E_\theta e_\theta = -\nabla_{r,\theta} \phi, \]
+\[E_r e_r + E_\theta e_\theta = -\nabla_{r,\theta} \phi,\\ E_x e_x + E_y e_y = J_{\mathcal{F}}(r,\theta)) (E_r e_r + E_\theta e_\theta), \]
 </p>
-<p class="formulaDsp">
-\[ E_x e_x + E_y e_y = J_{\mathcal{F}}(r,\theta)) (E_r e_r + E_\theta e_\theta), \]
-</p>
-<p>with \(e_i = \partial_{x_i}x\) the unnormalized local contravariant base.</p>
+<p> with \(e_i = \partial_{x_i}x\) the unnormalized local contravariant base.</p>
 <p>However the inverse Jacobian matrix \(J_{\mathcal{F}}\) can be ill-defined at the O-point. In Edoardo Zoni's article, they suggest to linearize around the O-point:</p>
 <p>for \(r &lt; \varepsilon\), </p><p class="formulaDsp">
-\[E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right) E(0, \theta) + \frac{r}{\varepsilon} E(\varepsilon, \theta)\]
+\[E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right) E(0, \theta) + \frac{r}{\varepsilon} E(\varepsilon, \theta) \]
 </p>
-<p>with \(E(0, \theta)\) computed thanks to</p><ul>
+<p> with \(E(0, \theta)\) computed thanks to</p><ul>
 <li>\(\partial_r \phi (0, \theta_1) = \left[\partial_r x \partial_x \phi + \partial_r y \partial_y \phi \right] (0, \theta_1)\), and</li>
 <li>\(\partial_r \phi (0, \theta_2) = \left[\partial_r x \partial_x \phi + \partial_r y \partial_y \phi \right] (0, \theta_2)\),</li>
 <li>where \(\theta_1\) and \(\theta_2\) correspond to linearly independent directions.</li>

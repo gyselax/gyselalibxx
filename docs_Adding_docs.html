@@ -189,7 +189,12 @@ Documenting functions</h1>
 Mathematical notation in documentation</h1>
 <p>Mathematical notation can be used in Doxygen output.</p>
 <p>In Markdown files it should be blocked with <code>$</code> commands. E.g: </p><div class="fragment"><div class="line">$a \ne b$</div>
-</div><!-- fragment --><p>An equation can also be printed on its own line using <code>$$</code> commands.</p>
+</div><!-- fragment --><p> However if the equation includes characters which are used for markdown highlighting it is safer to use the following syntax: </p><div class="fragment"><div class="line">$`a \ne b`$</div>
+</div><!-- fragment --><p>An equation can also be printed on its own line using <code>$$</code> commands. The syntax must be one of the following: </p><div class="fragment"><div class="line">$$a \ne b$$</div>
+</div><!-- fragment --><p> or </p><div class="fragment"><div class="line">$$</div>
+<div class="line">a \ne b</div>
+<div class="line">$$</div>
+</div><!-- fragment --><p> The first syntax can be used when the expression fits in one line and doesn't use markdown special characters. The second syntax can be used in all contexts.</p>
 <p>In C++ header files it should be blocked with Doxagen syntax, i.e. <code>@f$</code> instead of <code>$</code>, and <code>@f[</code> and <code>@f]</code> instead of <code>$$</code>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

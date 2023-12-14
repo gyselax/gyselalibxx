@@ -108,22 +108,19 @@ Advection operator</h1>
 <h3><a class="anchor" id="autotoc_md20"></a>
 Studied equation</h3>
 <p>The studied equation is the following 2D transport equation type : </p><p class="formulaDsp">
-\[\partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0,\]
+\[\partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0, \]
 </p>
-<p>with \(f(0,x,y) = f_0(x,y)\) and \(A\) the advection field.</p>
+<p> with \(f(0,x,y) = f_0(x,y)\) and \(A\) the advection field.</p>
 <p><b>We want to solve it on a polar grid.</b></p>
 <h3><a class="anchor" id="autotoc_md21"></a>
 Backward Semi-Lagrangian method</h3>
 <p>The method used to solve the equation is a Backward Semi-Lagrangian method (BSL). It uses the conservation along the characteristics property: </p><p class="formulaDsp">
-\[ \forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y)) \]
+\[\forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y)) \]
 </p>
-<p>with</p><ul>
-<li>\(\partial_t X (t; s, x, y) = A_x(t,X(t; s, x, y),Y(t; s, x, y))\),</li>
-<li>\(\partial_t Y (t; s, x, y) = A_y(t,X(t; s, x, y),Y(t; s, x, y))\),</li>
-<li>\(X(s; s, x, y) = x\),</li>
-<li>\(Y(s; s, x, y) = y\).</li>
-</ul>
-<p>So to compute the advected function at the next time step,</p><ul>
+<p> with: </p><p class="formulaDsp">
+\[\partial_t X (t; s, x, y) = A_x(t,X(t; s, x, y),Y(t; s, x, y)),\\ \partial_t Y (t; s, x, y) = A_y(t,X(t; s, x, y),Y(t; s, x, y)),\\ X(s; s, x, y) = x,\\ Y(s; s, x, y) = y. \]
+</p>
+<p> So to compute the advected function at the next time step,</p><ul>
 <li>we compute the characteristic feet \(X(t^n; t^{n+1}, x_i, y_j)\) and \(Y(t^n; t^{n+1}, x_i, y_j)\) for each mesh points \((x_i, y_j)\) with a time integration method ;</li>
 <li>we interpolate the function \(f(t = t^n)\) on the characteristic feet. The proprety ensures that the interpolation gives the function at the next time step \(f(t = t^{n+1})\).</li>
 </ul>
@@ -187,7 +184,7 @@ Advection domain</h3>
 <p>It seems logical to use the <b>physical domain</b>, where the studied equation is given, as the advection domain.</p>
 <p>However, we want to solve this equation on a polar grid. So before advecting, we have to compute the mesh points in the physical domain using a mapping function \(\mathcal{F}\):</p>
 <p class="formulaDsp">
-\[ \mathcal{F} : (r,\theta)_{i,j} \mapsto (x,y)_{i,j}. \]
+\[\mathcal{F} : (r,\theta)_{i,j} \mapsto (x,y)_{i,j}. \]
 </p>
 <p>This adds some steps to the advection operator, we now have to compute</p><ul>
 <li>the mesh points in the physical domain using \(\mathcal{F}\);</li>
@@ -200,7 +197,7 @@ Advection domain</h3>
 <p class="formulaDsp">
 \[ \mathcal{G} : (r,\theta)_{i,j} \mapsto (x,y)_{i,j} = (r\cos(\theta), r\sin(\theta))_{i,j}. \]
 </p>
-<p>Then the four previous steps become</p><ul>
+<p> Then the four previous steps become</p><ul>
 <li>calculate the mesh points in the pseudo-Cartesian domain using \(\mathcal{G}\);</li>
 <li>calculate the advection field \(A\) in the pseudo-Cartesian domain using the Jacobian matrix of \((\mathcal{F}\circ\mathcal{G}^{-1})^{-1}\);</li>
 <li>calculate the characteristic feet in the pseudo_Cartesian domain;</li>
