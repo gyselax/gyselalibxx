@@ -5,9 +5,11 @@
 ### Studied equation 
 
 The studied equation is the following 2D transport equation type : 
-$$\partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0,$$
+```math
+\partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0,
+```
 
-with $f(0,x,y) = f_0(x,y)$ and $A$ the advection field. 
+with $`f(0,x,y) = f_0(x,y)`$ and $A$ the advection field. 
 
 **We want to solve it on a polar grid.** 
 
@@ -16,17 +18,21 @@ with $f(0,x,y) = f_0(x,y)$ and $A$ the advection field.
 
 The method used to solve the equation is a Backward Semi-Lagrangian method (BSL). 
 It uses the conservation along the characteristics property: 
-$$ \forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y)) $$
+```math
+\forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y))
+```
 
-with 
-* $\partial_t X (t; s, x, y) = A_x(t,X(t; s, x, y),Y(t; s, x, y))$,
-* $\partial_t Y (t; s, x, y) = A_y(t,X(t; s, x, y),Y(t; s, x, y))$,
-* $X(s; s, x, y) = x$,
-* $Y(s; s, x, y) = y$.
+with:
+```math
+\partial_t X (t; s, x, y) = A_x(t,X(t; s, x, y),Y(t; s, x, y)),\\
+\partial_t Y (t; s, x, y) = A_y(t,X(t; s, x, y),Y(t; s, x, y)),\\
+X(s; s, x, y) = x,\\
+Y(s; s, x, y) = y.
+```
 
 So to compute the advected function at the next time step, 
- - we compute the characteristic feet $X(t^n; t^{n+1}, x_i, y_j)$ and  $Y(t^n; t^{n+1}, x_i, y_j)$ 
- for each mesh points $(x_i, y_j)$ with a time integration method ; 
+ - we compute the characteristic feet $`X(t^n; t^{n+1}, x_i, y_j)`$ and  $`Y(t^n; t^{n+1}, x_i, y_j)`$ 
+ for each mesh points $`(x_i, y_j)`$ with a time integration method ; 
  - we interpolate the function $f(t = t^n)$ on the characteristic feet. 
  The proprety ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
 
@@ -42,9 +48,9 @@ There are multiple time integration methods available which are implemented in t
 
  
  
-We are listing the different schemes for this equation $\partial_t X (t) = A_x(t, X(t),Y(t))$. 
+We are listing the different schemes for this equation $`\partial_t X (t) = A_x(t, X(t),Y(t))`$. 
 
-We write $X (t) = X (t; s, x, y)$,  $X^n = X(t^n)$ and $A^n(X) = A(t^n, X)$ for a time discretisation $\{t^n; t^n > t^{n-1},  \forall n\}_n$. 
+We write $X (t) = X (t; s, x, y)$,  $X^n = X(t^n)$ and $A^n(X) = A(t^n, X)$ for a time discretisation $`\{t^n; t^n > t^{n-1},  \forall n\}_n`$. 
 
  
 #### Explicit Euler method
@@ -67,11 +73,11 @@ $X^{n+1} = X^{k+1}$ once converged.
 #### RK3 method
 
 - Scheme: 
-$X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)$
+$`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)`$
 	- with 
-		- $k_1 =  A^{n+1}(X^{n+1})$, 
-		- $k_2 =  A(t^{n+1/2}, X^{n+1} - \frac{dt}{2} k_1)$, 
-		- $k_3 =  A(t^{n+1/2}, X^{n+1} - dt( 2k_2 - k_1))$.
+		- $`k_1 =  A^{n+1}(X^{n+1})`$, 
+		- $`k_2 =  A(t^{n+1/2}, X^{n+1} - \frac{dt}{2} k_1)`$, 
+		- $`k_3 =  A(t^{n+1/2}, X^{n+1} - dt( 2k_2 - k_1))`$.
 
 - Convergence order : 3.
 
@@ -80,12 +86,12 @@ $X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)$
 #### RK4 method
 
 - Scheme: 
-$X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)$
+$`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)`$
 	- with 
-		- $k_1 =  A^{n+1}(X^{n+1})$, 
-		- $k_2 =  A(t^{n+1/2}, X^{n+1} - \frac{dt}{2} k_1)$, 
-		- $k_3 =  A(t^{n+1/2}, X^{n+1}   \frac{dt}{2} k_2)$, 
-		- $k_4 =  A(t^{n}, X^{n+1} - dt k_3)$.
+		- $`k_1 =  A^{n+1}(X^{n+1})`$, 
+		- $`k_2 =  A(t^{n+1/2}, X^{n+1} - \frac{dt}{2} k_1)`$, 
+		- $`k_3 =  A(t^{n+1/2}, X^{n+1}   \frac{dt}{2} k_2)`$, 
+		- $`k_4 =  A(t^{n}, X^{n+1} - dt k_3)`$.
 
 - Convergence order : 4.
 
@@ -102,7 +108,9 @@ It seems logical to use the **physical domain**, where the studied equation is g
 However, we want to solve this equation on a polar grid. So before advecting, we have to 
 compute the mesh points in the physical domain using a mapping function $\mathcal{F}$:
 
-$$ \mathcal{F} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j}. $$
+```math
+\mathcal{F} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j}.
+```
 
 
 This adds some steps to the advection operator, we now have to compute 
@@ -118,17 +126,19 @@ It is not impossible but the computations can be costly.
 That is why, we introduce the **pseudo-Cartesian domain**. 
 We use another mapping function $\mathcal{G}$ such that:
 
-$$ \mathcal{G} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j} = (r\cos(\theta), r\sin(\theta))_{i,j}. $$
+```math
+ \mathcal{G} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j} = (r\cos(\theta), r\sin(\theta))_{i,j}. 
+```
 
 Then the four previous steps become
  - calculate the mesh points in the pseudo-Cartesian domain using $\mathcal{G}$; 
  - calculate the advection field $A$ in the pseudo-Cartesian domain using the Jacobian matrix of $(\mathcal{F}\circ\mathcal{G}^{-1})^{-1}$; 
- - calculate the characteristic feet in the pseudo_Cartesian domain; 
+ - calculate the characteristic feet in the pseudo\_Cartesian domain; 
  - calculate the characteristic feet in the logical domain (polar grid) using $\mathcal{G}^{-1}$; 
  - interpolate the advection function at the  characteristic feet in the logical domain. 
 
 Here, $\mathcal{G}$ is analytically invertible (we can fix  $\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)$) 
-and  $(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}$ is well-defined. The details are given in Edoardo Zoni's article [1]. 
+and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in Edoardo Zoni's article [1]. 
 
 
 **Remark 1:** if $\mathcal{F}$ is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same. 
@@ -139,7 +149,7 @@ and  $(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}$ is well-defined. The details a
 ## Unit tests
 
 The test of the advection operator are implemented in the `tests/geometryRTheta/advection_2d_rp/` folder 
-([advection_2d_rp](./../../../tests/geometryRTheta/advection_2d_rp/README.md)).
+([advection\_2d\_rp](./../../../tests/geometryRTheta/advection_2d_rp/README.md)).
 
 
 It tests: 
@@ -151,22 +161,22 @@ It tests:
  	- Discrete mapping of the Czarny mapping in the pseudo-Cartesian domain. 
  - on 3 different simulations: 
  	- simulation 1: translation of Gaussian function 
- 		- $f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)$, 
- 		- $A(t, x, y) = (v_x, v_y)$ . 
+ 		- $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
+ 		- $`A(t, x, y) = (v_x, v_y)`$ . 
  	- simulation 2: rotation of Gaussian function 
- 		- $f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)$, 
- 		- $A(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)$. 
+ 		- $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
+ 		- $`A(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)`$. 
  	- simulation 3: decentred rotation (test given in Edoardo Zoni's article [1]). 
- 	 	- $f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)$,
+ 	 	- $`f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)`$,
  	 		- with 
- 	 			- $G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r<a}(r)$, 
- 	 			- $r_1(x, y) = \sqrt{(x-x_0)^2 + 8(y-y_0)^2}$ 
- 	 			- $r_2(x, y) = \sqrt{8(x-x_0)^2 + (y-y_0)^2}$ 
- 		- $A(t, x, y) = \omega(y_c - y, x - x_c)$. 
+ 	 			- $`G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r<a}(r)`$, 
+ 	 			- $`r_1(x, y) = \sqrt{(x-x_0)^2 + 8(y-y_0)^2}`$ 
+ 	 			- $`r_2(x, y) = \sqrt{8(x-x_0)^2 + (y-y_0)^2}`$ 
+ 		- $`A(t, x, y) = \omega(y_c - y, x - x_c)`$. 
 
 The tests of the convergence order are made for constant CFL which means it checks the slope of the errors 
 (infinity norm of the difference at the final time)  
-for $(N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)$ and then $(n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)$
+for $`(N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)`$ and then $`(n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)`$
 for $n = 1, 2, 4, 8,  ...$. 
 
 
@@ -181,11 +191,11 @@ Journal of Computational Physics (2019).
 ## Contents
 
 This folder contains:
- - advection_domain.hpp : define the different advection domains (AdvectionDomain). 
+ - advection\_domain.hpp : define the different advection domains (AdvectionDomain). 
  - iadvectionrp.hpp : define the base class for advection operator (IAdvectionRP): 
- 	- bsl_advection_rp.hpp : define the advection operator described just before (BslAdvectionRP); 
- - foot_finder.hpp : solve the characteristic equation thanks to a given time integration method (IFootFinder): 
- - maths_tools.hpp : useful functions used in several files.  
+ 	- bsl\_advection\_rp.hpp : define the advection operator described just before (BslAdvectionRP); 
+ - foot\_finder.hpp : solve the characteristic equation thanks to a given time integration method (IFootFinder): 
+ - maths\_tools.hpp : useful functions used in several files.  
 
 
 

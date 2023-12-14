@@ -18,7 +18,7 @@ Coordinates can have 1 or more dimension. E.g. the coordinate of a position on a
 
 If the value of the coordinate needs to be used in a mathematical expression, the scalar (`double`) quantity stored in one of the dimensions of a coordinate can be extracted using `ddc::get<RDimOfInterest>(my_coord)`.
 
-It is also possible to extract a coordinate on a subset of the original dimensions using `ddc::select<RDimOfInterest>(my_coord)`. For example if we want to get the position of an object on a radial slice $(r,\theta)$, but we are given the coordinate in the full vector space $(r, \theta, \varphi, v_\parallel, \mu)$ then we can do:
+It is also possible to extract a coordinate on a subset of the original dimensions using `ddc::select<RDimOfInterest>(my_coord)`. For example if we want to get the position of an object on a radial slice $(r,\theta)$, but we are given the coordinate in the full vector space $`(r, \theta, \varphi, v_\parallel, \mu)`$ then we can do:
 ```cpp
 ddc::Coordinate<RDimR, RDimP, RDimT, RDimV, RDimM> full_coord(...);
 ddc::Coordinate<RDimR, RDimP> slice_coord = ddc::select<RDimR, RDimP>(full_coord);
@@ -50,7 +50,7 @@ DDC provides multiple types to represent the concepts required to interact with 
 
 ### PointSampling
 
-The points $\{x_0, ..., x_N\}$ are a point sampling. This sampling can either be uniform or non-uniform. Accordingly DDC provides the 2 classes:
+The points $`\{x_0, ..., x_N\}`$ are a point sampling. This sampling can either be uniform or non-uniform. Accordingly DDC provides the 2 classes:
 - UniformPointSampling
 - NonUniformPointSampling
 
@@ -112,14 +112,14 @@ Each subdomain is described by:
 -   An origin : This is the `ddc::DiscreteElement` which indicates the first point in the domain.
 -   A size : This is a `ddc::DiscreteVector` indicating the number of elements in each dimension.
 
-For example if we consider the 2D domain: $[x_0, ..., x_N] \times [y_0, ... y_M]$, the domain would be described as:
+For example if we consider the 2D domain: $`[x_0, ..., x_N] \times [y_0, ... y_M]`$, the domain would be described as:
 ```cpp
 ddc::DiscreteElement<IDimX, IDimY> origin(0, 0);
 ddc::DiscreteVector<IDimX, IDimY> size(N, M);
 ddc::DiscreteDomain<IDimX, IDimY> domain(origin, size);
 ```
 
-Similarly the sub-domain: $[x_i, ..., x_j] \times [y_k, ... y_l]$ would be described as:
+Similarly the sub-domain: $`[x_i, ..., x_j] \times [y_k, ... y_l]`$ would be described as:
 ```cpp
 ddc::DiscreteElement<IDimX> i_index(i);
 ddc::DiscreteElement<IDimX> j_index(j);
@@ -149,7 +149,7 @@ It is also common to need to iterate over a sub-domain. Sub-domains can be creat
 - `take_last(ddc::DiscreteVector<..> n)` : Returns a sub-domain, restricted to the last n elements.
 - `remove_first(ddc::DiscreteVector<..> n)` : Returns a sub-domain, containing all elements except the first n elements.
 - `remove_last(ddc::DiscreteVector<..> n)` : Returns a sub-domain, containing all elements except the last n elements.
-- `remove(ddc::DiscreteVector<..> n_first, ddc::DiscreteVector<..> n_last)` : Returns a sub-domain, containing all elements except the first n_first elements and the last n_last elements.
+- `remove(ddc::DiscreteVector<..> n_first, ddc::DiscreteVector<..> n_last)` : Returns a sub-domain, containing all elements except the first n\_first elements and the last n\_last elements.
 
 It is also possible to extract a sub-domain on a subset of the original dimensions using `ddc::select<IDimOfInterest>(my_nd_domain)`.
 
@@ -198,7 +198,7 @@ This is particularly useful if we don't know the layout order of the data and wi
 
 Copying a `ddc::Chunk` is potentially costly. In order to avoid accidental copying DDC is structured such that the only way to copy data from one `ddc::Chunk` to another is using the function `ddc::deepcopy`. Using an assignment or initialising from another `ddc::Chunk` will result in a compiler error.
 
-To avoid copying data unnecessarily, DDC provides the type `ddc::ChunkSpan`. This can be thought of as a reference to a `ddc::Chunk`. However it is slightly more complex than this as a `ddc::ChunkSpan` does not have to reference the entire domain stored in the `ddc::Chunk`. The `[]` operator can be passed a `ddc::DiscreteDomain` to create a `ddc::ChunkSpan` which only references part of the `ddc::Chunk`. This is especially useful for accessing slices. In this case a simpler syntax exists, where we only need to pass the index of the slice. For example, if we wish to get a $(r, \theta)$ slice from a distribution function defined in $(r, \theta, \varphi, v_\parallel, \mu)$ we would do the following:
+To avoid copying data unnecessarily, DDC provides the type `ddc::ChunkSpan`. This can be thought of as a reference to a `ddc::Chunk`. However it is slightly more complex than this as a `ddc::ChunkSpan` does not have to reference the entire domain stored in the `ddc::Chunk`. The `[]` operator can be passed a `ddc::DiscreteDomain` to create a `ddc::ChunkSpan` which only references part of the `ddc::Chunk`. This is especially useful for accessing slices. In this case a simpler syntax exists, where we only need to pass the index of the slice. For example, if we wish to get a $(r, \theta)$ slice from a distribution function defined in $`(r, \theta, \varphi, v_\parallel, \mu)`$ we would do the following:
 ```cpp
 ddc::ChunkSpan<double, ddc::DiscreteDomain<IDimR, IDimP>> get_slice(ddc::Chunk<double, ddc::DiscreteDomain<IDimR, IDimP, IDimT, IDimV, IDimM>>& distribution_function, ddc::DiscreteElement<IDimT, IDimV, IDimM> index)
 {
@@ -216,7 +216,7 @@ SpanXVx<double> distribution_function_2d_ref(distribution_function_2d);
 
 As for `ddc::Chunk` an additional alias `DSpanX` is defined to simplify the notation for doubles.
 
-Finally we also define the aliases `ViewX` and `DViewX` to represent constant versions of `SpanX` and `DSpanX`. These objects are used for function arguments when the contents of the array must not be altered. As they are aliases, not new objects, all the same functions that work for `ddc::ChunkSpan` can also be used for `ddc::ChunkView`. For example, if we wish to get a $(r, \theta)$ constant slice from a distribution function defined in $(r, \theta, \varphi, v_\parallel, \mu)$ we would do the following:
+Finally we also define the aliases `ViewX` and `DViewX` to represent constant versions of `SpanX` and `DSpanX`. These objects are used for function arguments when the contents of the array must not be altered. As they are aliases, not new objects, all the same functions that work for `ddc::ChunkSpan` can also be used for `ddc::ChunkView`. For example, if we wish to get a $(r, \theta)$ constant slice from a distribution function defined in $`(r, \theta, \varphi, v_\parallel, \mu)`$ we would do the following:
 ```cpp
 ddc::ChunkView<double, ddc::DiscreteDomain<IDimR, IDimP>> get_slice(ddc::Chunk<double, ddc::DiscreteDomain<IDimR, IDimP, IDimT, IDimV, IDimM>>& distribution_function, ddc::DiscreteElement<IDimT, IDimV, IDimM> index)
 {
@@ -249,9 +249,9 @@ struct RDimVx {
 }
 ```
 
-We also need types to define the discrete domain on which the simulation will evolve. The distribution function $f_s(t,x,v)$ will evolve over the discrete domain $[i, e]\times[x_0,...,x_N]\times[v_0,...,v_{N_v}]$. Point samplings are required to define the positions of the grid points in each of the three dimensions:
-- The object $[x_0,...,x_N]$ is defined with a point sampling and will be denoted $IDimX$.
-- The object $[v_0,...,v_{N_v}]$ is defined with a point sampling and will be denoted $IDimVx$.
+We also need types to define the discrete domain on which the simulation will evolve. The distribution function $`f_s(t,x,v)`$ will evolve over the discrete domain $`[i, e]\times[x_0,...,x_N]\times[v_0,...,v_{N_v}]`$. Point samplings are required to define the positions of the grid points in each of the three dimensions:
+- The object $`[x_0,...,x_N]`$ is defined with a point sampling and will be denoted $IDimX$.
+- The object $`[v_0,...,v_{N_v}]`$ is defined with a point sampling and will be denoted $IDimVx$.
 - The object $['i', 'e']$ is defined as a `SpeciesInformation` collection and will be denoted $IDimSp$.
 
 With these objects defined, the domain(s) can then be created. The domain for the distribution function has the type: `ddc::DiscreteDomain<IDimSp, IDimX, IDimVx>` however for simplicity it is denoted `DomainSpXVx`. The electric potential $\phi$ has a smaller domain with the type `ddc::DiscreteDomain<IDimX>` denoted `DomainX`.

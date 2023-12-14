@@ -13,6 +13,6 @@ The current mappings implemented are:
 		-  $y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} },$
 		 with $\xi = 1/\sqrt{1 - \epsilon^2 /4}$ and $e$ and $\epsilon$ given as parameters.
 - Discrete mappings defined on bsplines (DiscreteToCartesian):
-	-  $x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),$
-	-  $y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).$
+	-  $`x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),`$
+	-  $`y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).`$
 - Refined discrete mappings defined on bsplines (RefinedDiscreteToCartesian): a version of DiscreteToCartesian mapping built on a refined grid.  

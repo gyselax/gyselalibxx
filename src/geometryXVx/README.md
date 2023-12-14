@@ -7,5 +7,5 @@ The `geometryXVx` folder contains all the code describing methods which are spec
 - [initialization](./initialization/README.md) : Initialization methods for the distribution function. 
 - [poisson](./poisson/README.md) : Code describing the polar Poisson solver.
 - [rhs](./rhs/README.md) : Code describing the operators on the right hand side of the Boltzmann equation; namely sources, sinks and collisions.
-- [time_integration](./time_integration/README.md) : Time integrators for a Boltzmann-Poisson system of equations. 
+- [time\_integration](./time_integration/README.md) : Time integrators for a Boltzmann-Poisson system of equations. 
 - [utils](./utils/README.md) : Miscellaneous utility functions.

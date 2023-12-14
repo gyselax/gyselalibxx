@@ -121,7 +121,21 @@ In Markdown files it should be blocked with `$` commands. E.g:
 ```
 $a \ne b$
 ```
+However if the equation includes characters which are used for markdown highlighting it is safer to use the following syntax:
+```
+$`a \ne b`$
+```
 
-An equation can also be printed on its own line using `$$` commands.
+An equation can also be printed on its own line using `$$` commands. The syntax must be one of the following:
+```
+$$a \ne b$$
+```
+or
+```
+$$
+a \ne b
+$$
+```
+The first syntax can be used when the expression fits in one line and doesn't use markdown special characters. The second syntax can be used in all contexts.
 
 In C++ header files it should be blocked with Doxagen syntax, i.e. `@f$` instead of `$`, and `@f[` and `@f]` instead of `$$`.

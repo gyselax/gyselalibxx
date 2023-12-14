@@ -25,11 +25,11 @@ ctest --output-on-failure
 
 Then, just have a look at `tests/landau/growthrate_t0.0to45.0.png`:
 
-![tests/landau/fft/growthrate_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release "Landau damping rate")
+![tests/landau/fft/growthrate\_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release "Landau damping rate")
 
 and `tests/landau/frequency_t0.0to45.0.png`:
 
-![tests/landau/fft/frequency_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release "Landau damping frequency")
+![tests/landau/fft/frequency\_t0.0to45.0.png](https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release "Landau damping frequency")
 
 ## Dependencies
 

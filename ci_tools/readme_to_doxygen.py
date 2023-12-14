@@ -5,7 +5,9 @@ import os
 import re
 
 # '$', not preceded by '$' or followed by '$'
-single_math_tag = re.compile(r'(?<!\$)\$(?!\$)')
+single_math_start_tag = re.compile(r'(?<!\$)\$\`(?!\$)')
+single_math_end_tag = re.compile(r'(?<!\$)\`\$(?!\$)')
+single_math_tag = re.compile(r'(?<!@f)(?<!\$)\$(?!\$)')
 # '$$', not preceded by '$' or followed by '$'
 multiline_math_tag = re.compile(r'(?<!\$)\$\$(?!\$)')
 reference_tag = re.compile(r'(\[[^\]]*\])(\([^\)]*\))')
@@ -172,20 +174,23 @@ if __name__ == '__main__':
             elif in_math_code:
                 body.append('@f]')
                 in_math_code = False
+                line_index += 1
                 continue
             elif stripped == '```math':
                 body.append('@f[')
                 in_math_code = True
+                line_index += 1
                 continue
             else:
                 in_code = True
-        elif not in_code:
+        elif not in_code and not in_math_code:
             if line.startswith('##') and line[2] != '#':
                 sec_title = line[2:].strip()
                 sec_tag = get_compatible_tag(sec_title)
                 line = f"\n@section {tag}__{sec_tag} {sec_title}\n"
             else:
                 # Replace inline math with Doxygen tag
+                line, _ = format_equations(line, single_math_start_tag, single_math_end_tag, "@f$", "@f$")
                 line, _ = format_equations(line, single_math_tag, single_math_tag, "@f$", "@f$")
                 line, line_index = format_equations(line, multiline_math_tag, multiline_math_tag, "@f[", "@f]", contents, line_index)
 
