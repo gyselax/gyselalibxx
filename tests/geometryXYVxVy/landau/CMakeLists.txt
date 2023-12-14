@@ -11,3 +11,4 @@ add_test(NAME TestSimulationLandauFFT_XYVxVy
         "$<TARGET_FILE:Python3::Interpreter>"
         "fft")
 set_property(TEST TestSimulationLandauFFT_XYVxVy PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationLandauFFT_XYVxVy PROPERTY COST 100)

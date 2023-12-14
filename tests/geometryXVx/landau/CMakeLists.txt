@@ -11,6 +11,7 @@ add_test(NAME TestSimulationLandauFFT_XVx
         "$<TARGET_FILE:Python3::Interpreter>"
         "fft")
 set_property(TEST TestSimulationLandauFFT_XVx PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationLandauFFT_XVx PROPERTY COST 100)
 
 add_test(NAME TestSimulationLandauRestartFFT_XVx
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau_restart.sh"
@@ -18,6 +19,7 @@ add_test(NAME TestSimulationLandauRestartFFT_XVx
         "$<TARGET_FILE:landau_fft>"
         "restart")
 set_property(TEST TestSimulationLandauRestartFFT_XVx PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationLandauRestartFFT_XVx PROPERTY COST 100)
 set_tests_properties(TestSimulationLandauRestartFFT_XVx PROPERTIES LABELS "ResultsNotTested" )
 
 add_test(NAME TestSimulationLandauFemUniform_xperiod_vx
@@ -27,6 +29,7 @@ add_test(NAME TestSimulationLandauFemUniform_xperiod_vx
         "$<TARGET_FILE:Python3::Interpreter>"
         "fem")
 set_property(TEST TestSimulationLandauFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationLandauFemUniform_xperiod_vx PROPERTY COST 100)
 
 add_test(NAME TestSimulationLandauRestartFemUniform_xperiod_vx
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau_restart.sh"
@@ -34,4 +37,5 @@ add_test(NAME TestSimulationLandauRestartFemUniform_xperiod_vx
         "$<TARGET_FILE:landau_fem_uniform_xperiod_vx>"
         "restart")
 set_property(TEST TestSimulationLandauRestartFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationLandauRestartFemUniform_xperiod_vx PROPERTY COST 100)
 set_tests_properties(TestSimulationLandauRestartFemUniform_xperiod_vx PROPERTIES LABELS "ResultsNotTested" )

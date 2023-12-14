@@ -11,6 +11,7 @@ add_test(NAME TestSimulationBumpontailFFT
         "$<TARGET_FILE:Python3::Interpreter>"
         "fft")
 set_property(TEST TestSimulationBumpontailFFT PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationBumpontailFFT PROPERTY COST 100)
 
 add_test(NAME TestSimulationBumpontailRestartFFT_XVx
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_bumpontail_restart.sh"
@@ -18,6 +19,7 @@ add_test(NAME TestSimulationBumpontailRestartFFT_XVx
         "$<TARGET_FILE:bumpontail_fft>"
         "restart")
 set_property(TEST TestSimulationBumpontailRestartFFT_XVx PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationBumpontailRestartFFT_XVx PROPERTY COST 100)
 set_tests_properties(TestSimulationBumpontailRestartFFT_XVx PROPERTIES LABELS "ResultsNotTested" )
 
 add_test(NAME TestSimulationBumpontailFemUniform_xperiod_vx
@@ -27,6 +29,7 @@ add_test(NAME TestSimulationBumpontailFemUniform_xperiod_vx
         "$<TARGET_FILE:Python3::Interpreter>"
         "fem")
 set_property(TEST TestSimulationBumpontailFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationBumpontailFemUniform_xperiod_vx PROPERTY COST 100)
 
 add_test(NAME TestSimulationBumpontailRestartFemUniform_xperiod_vx
     COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_bumpontail_restart.sh"
@@ -34,4 +37,5 @@ add_test(NAME TestSimulationBumpontailRestartFemUniform_xperiod_vx
         "$<TARGET_FILE:bumpontail_fem_uniform_xperiod_vx>"
         "restart")
 set_property(TEST TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTY COST 100)
 set_tests_properties(TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTIES LABELS "ResultsNotTested" )

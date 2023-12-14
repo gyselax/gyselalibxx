@@ -51,6 +51,7 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING_PHYSICAL" "CZARNY_MAPPIN
                COMMAND "$<TARGET_FILE:Python3::Interpreter>" "${CMAKE_CURRENT_SOURCE_DIR}/display_all_errors_for_gtest.py"
                     "$<TARGET_FILE:advection_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}>")
         set_property(TEST TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION} PROPERTY TIMEOUT 20)
+        set_property(TEST TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION} PROPERTY COST 10)
     endforeach()
 endforeach()
 
@@ -89,6 +90,3 @@ target_link_libraries(advection_ALL
 target_compile_definitions(advection_ALL PUBLIC)
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
-
-
-

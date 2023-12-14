@@ -1,0 +1,47 @@
+.setup_env:
+  stage: .pre
+  image: ghcr.io/gyselax/gyselalibxx_env
+  needs: []
+  timeout: 10 mins
+  script:
+    - FOUND_SLL=$(grep "vendor/sll/.*" -x changed_files.txt || true)
+    - if [ -z "$FOUND_SLL" ]; then echo "SLL_BUILD_TESTING=OFF" >> build.env; else echo "SLL_BUILD_TESTING=ON" >> build.env; fi
+    - FOUND_POISSON_2D=$(grep "src/geometryRTheta/poisson/.*" -x changed_files.txt || true)
+    - if [ -z "$FOUND_POISSON_2D" ]; then echo "POISSON_2D_BUILD_TESTING=OFF" >> build.env; else echo "POISSON_2D_BUILD_TESTING=ON" >> build.env; fi
+  artifacts:
+    expire_in: 1 week
+    reports:
+      dotenv: build.env
+
+setup_env_push:
+  extends: .setup_env
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - set -x
+    - git log -1 --format=%H | git diff --name-only" > changed_files.txt
+
+setup_env_mr:
+  extends: .setup_env
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  before_script:
+    - set -x
+    - ${GIT_DIFF_COMMAND} > changed_files.txt
+    - git config --global --add safe.directory $(pwd)
+    - git fetch --no-recurse-submodules origin ${CI_MERGE_REQUEST_DIFF_BASE_SHA}
+    - git diff --name-only ${CI_MERGE_REQUEST_DIFF_BASE_SHA} > changed_files.txt
+
+
+.cmake_tests:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      needs: [ setup_env_push ]
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+      needs: [ setup_env_mr ]
+  stage: test
+  timeout: 2 hours
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GENERAL_CMAKE_OPTIONS: "-DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 -DSLL_BUILD_TESTING=$SLL_BUILD_TESTING -DPOISSON_2D_BUILD_TESTING=$POISSON_2D_BUILD_TESTING"

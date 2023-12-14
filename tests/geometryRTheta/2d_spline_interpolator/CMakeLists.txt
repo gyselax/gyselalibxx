@@ -26,3 +26,4 @@ add_test(NAME Test_2d_spline_interpolator_Convergence
            "$<TARGET_FILE:${test_name}>")
            
 set_property(TEST Test_2d_spline_interpolator_Convergence PROPERTY TIMEOUT 200)
+set_property(TEST Test_2d_spline_interpolator_Convergence PROPERTY COST 100)

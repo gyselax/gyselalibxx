@@ -8,4 +8,5 @@ add_test(NAME TestSimulationSheathRestart_xperiod_vx
         "$<TARGET_FILE:sheath_xperiod_vx>"
         "restart")
 set_property(TEST TestSimulationSheathRestart_xperiod_vx PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationSheathRestart_xperiod_vx PROPERTY COST 100)
 set_tests_properties(TestSimulationSheathRestart_xperiod_vx PROPERTIES LABEL "ResultsNotTested" )
