@@ -15,14 +15,20 @@
 #include "geometry.hpp"
 
 /**
- * @brief Define a polar Poisson solver.
+* @brief Define a polar Poisson solver.
  *
  * Solve the following Poisson equation
  *
  * (1) @f$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho @f$, in  @f$ \Omega@f$,
  *
  * @f$  \phi = 0 @f$, on  @f$ \partial \Omega@f$,
- *
+ * 
+ * As finite element basis functions we will use polar b-splines which are divided into two types:
+ * 1) Basis splines that can be written as a tensor product of 1d basis splines
+ *    ("non-singular bsplines")
+ * 2) Basis splines that cover the centre point and are defined as a linear combination
+ *    of basis splines of type 1 ("singular bsplines")
+ * 
  * (see in Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
  * in the 5D GYSELA Code". December 2022.)
  *
@@ -138,10 +144,15 @@ private:
 private:
     static constexpr int n_gauss_legendre_r = BSplinesR::degree() + 1;
     static constexpr int n_gauss_legendre_p = BSplinesP::degree() + 1;
+    // The number of cells (in the radial direction) in which both types of basis splines can be found
     static constexpr int n_overlap_cells = PolarBSplinesRP::continuity + 1;
 
+    // Number of cells over which a radial B-splines has its support
+    // This is the case for b-splines which are not affected by the higher knot multiplicity at the boundary.
     static constexpr ddc::DiscreteVector<RBasisSubset> n_non_zero_bases_r
             = ddc::DiscreteVector<RBasisSubset>(BSplinesR::degree() + 1);
+
+    // Number of cells over which a poloidal B-splines has its support
     static constexpr ddc::DiscreteVector<PBasisSubset> n_non_zero_bases_p
             = ddc::DiscreteVector<PBasisSubset>(BSplinesP::degree() + 1);
 
@@ -322,9 +333,12 @@ public:
         ddc::for_each(quadrature_domain_singular, [&](QuadratureIndexRP const irp) {
             std::array<double, PolarBSplinesRP::n_singular_basis()> singular_data;
             std::array<double, n_non_zero_bases_r * n_non_zero_bases_p> data;
+            // Values of the polar basis splines around the singular point
+            // at a given coordinate
             DSpan1D singular_vals(singular_data.data(), PolarBSplinesRP::n_singular_basis());
+            // Values of the polar basis splines, that do not cover the singular point,
+            // at a given coordinate
             DSpan2D vals(data.data(), n_non_zero_bases_r, n_non_zero_bases_p);
-
             QuadratureIndexR ir = ddc::select<QDimRMesh>(irp);
             QuadratureIndexP ip = ddc::select<QDimPMesh>(irp);
 
@@ -366,13 +380,19 @@ public:
                 g_null_boundary_2d<BSplinesR, BSplinesP>,
                 g_null_boundary_2d<BSplinesR, BSplinesP>);
 
+        // Number of elements in the matrix that correspond to the splines
+        // that cover the singular point
         constexpr int n_elements_singular
                 = PolarBSplinesRP::n_singular_basis() * PolarBSplinesRP::n_singular_basis();
+        // Number of non-zero elements in the matrix corresponding to the inner product of
+        // polar splines at the singular point and the other splines
         const int n_elements_overlap
                 = 2 * (PolarBSplinesRP::n_singular_basis() * BSplinesR::degree() * nbasis_p);
         const int n_stencil_p = nbasis_p * min(int(1 + 2 * BSplinesP::degree()), nbasis_p);
         const int n_stencil_r = nbasis_r * (1 + 2 * BSplinesR::degree())
                                 - (1 + BSplinesR::degree()) * BSplinesR::degree();
+        // Number of non-zero elements in the matrix corresponding to the inner product of
+        // non-central splines. These have a tensor product structure
         const int n_elements_stencil = n_stencil_r * n_stencil_p;
 
         // Matrix size is equal to the number Polar bspline
@@ -848,6 +868,15 @@ private:
         gradient = {basis.radial_derivative, basis.poloidal_derivative};
     }
 
+    /**
+     * @brief Computes a quadrature summand corresponding to the 
+     *        inner product
+     * 
+     * The inner product of the test and trial spline is computed using a 
+     * quadrature. This function returns one summand of the quadrature for 
+     * the quadrature point given by the indices.
+     */
+
     template <class Mapping, class TestValDerivType, class TrialValDerivType>
     double templated_weak_integral_element(
             QuadratureIndexR ir,
@@ -900,6 +929,10 @@ private:
                   + beta * basis_val_test_space * basis_val_trial_space);
     }
 
+    /**
+     * @brief Computes the matrix element corresponding to two tensor product splines
+     *        with index idx_test and idx_trial
+     */
     template <class Mapping>
     double get_matrix_stencil_element(
             IDimBSpline2D idx_test,

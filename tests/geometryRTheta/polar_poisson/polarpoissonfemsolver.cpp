@@ -116,7 +116,7 @@ int main(int argc, char** argv)
 
     auto dom_bsplinesRP = builder.spline_domain();
 
-    DFieldRP coeff_alpha(grid);
+    DFieldRP coeff_alpha(grid); // values of the coefficent alpha
     DFieldRP coeff_beta(grid);
     DFieldRP x(grid);
     DFieldRP y(grid);
@@ -136,7 +136,8 @@ int main(int argc, char** argv)
     Spline2D coeff_alpha_spline(dom_bsplinesRP);
     Spline2D coeff_beta_spline(dom_bsplinesRP);
 
-    builder(coeff_alpha_spline, coeff_alpha);
+    builder(coeff_alpha_spline, coeff_alpha); // coeff_alpha_spline are the coefficients
+            // of the spline representation of the values given by coeff_alpha.
     builder(coeff_beta_spline, coeff_beta);
 
     Spline2D x_spline_representation(dom_bsplinesRP);
@@ -170,10 +171,14 @@ int main(int argc, char** argv)
                 ddc::coordinate(ddc::select<IDimP>(irp)));
     });
     if (discrete_rhs) {
+        // Build the spline approximation of the rhs
+
         Spline2D rhs_spline(dom_bsplinesRP);
         DFieldRP rhs_vals(grid);
         ddc::for_each(grid, [&](IndexRP const irp) { rhs_vals(irp) = rhs(coords(irp)); });
         builder(rhs_spline, rhs_vals);
+
+
 
         start_time = std::chrono::system_clock::now();
         SplineEvaluator2D
