@@ -53,18 +53,25 @@ public:
                 BcMin != BCond::PERIODIC,
                 "PERIODIC Boundary condition is not supported yet in LagrangeInterpolatorBatched.");
 
-        auto a = ddc::remove_dims_of(inout_data.domain(), inout_data.template domain<DDimI>());
-        using IndexBatched = typename decltype(a)::discrete_element_type;
         int const deg = m_degree;
         auto const ghost = m_ghost;
+        auto inout_data_tmp_alloc
+                = ddc::create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), inout_data);
+        auto inout_data_tmp = inout_data_tmp_alloc.span_view();
+        auto batch_domain
+                = ddc::remove_dims_of(inout_data.domain(), inout_data.template domain<DDimI>());
         ddc::for_each(
                 ddc::policies::parallel_device,
-                coordinates.domain(),
-                DDC_LAMBDA(ddc::DiscreteElement<DDim...> const i) {
-                    auto const slice = inout_data[IndexBatched(i)];
-                    Lagrange<Kokkos::DefaultExecutionSpace, DDimI, BcMin, BcMax>
-                            evaluator(deg, slice, slice.domain(), ghost);
-                    inout_data(i) = evaluator.evaluate(coordinates(i));
+                batch_domain,
+                DDC_LAMBDA(typename decltype(batch_domain)::discrete_element_type const i) {
+                    Lagrange<Kokkos::DefaultExecutionSpace, DDimI, BcMin, BcMax> evaluator(
+                            deg,
+                            inout_data_tmp[i],
+                            inout_data.template domain<DDimI>(),
+                            ghost);
+                    for (ddc::DiscreteElement<DDimI> j : inout_data.template domain<DDimI>()) {
+                        inout_data(i, j) = evaluator.evaluate(coordinates(i, j));
+                    }
                 });
         return inout_data;
     }
