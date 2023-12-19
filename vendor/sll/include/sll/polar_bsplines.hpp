@@ -272,6 +272,9 @@ public:
             return discrete_domain_type(discrete_element_type {0}, discrete_vector_type {nbasis()});
         }
 
+        /**
+         * @brief Returns the ddc::DiscreteDomain containing the indices of the non-singular b-splines.
+         */
         discrete_domain_type non_singular_domain() const noexcept
         {
             return full_domain().remove_first(discrete_vector_type {n_singular_basis()});
