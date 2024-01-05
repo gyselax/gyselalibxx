@@ -95,7 +95,7 @@ jobs:
         shell: bash
       - name: Check for new errors
         run: |
-          git config --global --add safe.directory /__w/gyselalibxx/gyselalibxx
+          git config --global --add safe.directory $(pwd)
           # Get files which have changed in this merge request
           git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} --no-indent-heuristic --unified=0 --output=pull_diff.txt --no-color
           # Filter documentation messages to only complain about modified files
