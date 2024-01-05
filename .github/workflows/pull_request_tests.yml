@@ -62,11 +62,11 @@ jobs:
   Documentation:
     name: Doxygen generation
     runs-on: ubuntu-latest
+    container: ghcr.io/gyselax/gyselalibxx_env
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v4
       - name: Make documenation
         run: |
           # Make docs
