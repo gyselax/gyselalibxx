@@ -50,8 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: true
-      - name: Run pylint
+          fetch-depth: 0
         run: |
           pylint $(find tests -iname *.py)
           pylint $(find doc -iname *.py)
@@ -66,7 +65,6 @@ jobs:
           # Get pylint errors without failing
           pylint ${POST_PROCESS_PYTHON_FILES} > post_process_errors.txt || true
           # Filter errors on changed files
-          git fetch origin main
           for f in $(git diff origin/main --name-only); do grep $f post_process_errors.txt || true; done | tee filtered_errors.txt
           # Raise an error if post-process in filtered errors
           ! grep "post-process" filtered_errors.txt >/dev/null
