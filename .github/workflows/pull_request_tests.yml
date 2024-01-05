@@ -92,12 +92,20 @@ jobs:
           cmake -DBUILD_DOCUMENTATION=ON ..
           make doc
           cd ..
+        shell: bash
       - name: Check for new errors
         run: |
+          git branch
+          git branch -r
+          echo "1"
           # Get files which have changed in this merge request
           git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} --no-indent-heuristic --unified=0 --output=pull_diff.txt --no-color --no-index
+          echo "2"
           # Filter documentation messages to only complain about modified files
           python3 ci_tools/check_documentation.py pull_diff.txt build/docs/doxygen.log
+          echo "3"
           git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A --no-index
+          echo "4"
           python3 ci_tools/check_readme_presence.py pull_new_files.txt
+        shell: bash
 
