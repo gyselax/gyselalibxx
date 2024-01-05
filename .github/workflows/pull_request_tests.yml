@@ -16,6 +16,7 @@ jobs:
 
   Markdown:
     name: Markdown format check
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -34,6 +35,7 @@ jobs:
 
   Python:
     name: Python Best Practices
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -63,6 +65,7 @@ jobs:
 
   Documentation:
     name: Doxygen generation
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
