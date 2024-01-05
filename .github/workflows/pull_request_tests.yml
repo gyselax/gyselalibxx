@@ -65,7 +65,7 @@ jobs:
           # Get pylint errors without failing
           pylint ${POST_PROCESS_PYTHON_FILES} > post_process_errors.txt || true
           # Filter errors on changed files
-          for f in $(git diff origin/main --name-only); do grep $f post_process_errors.txt || true; done | tee filtered_errors.txt
+          for f in $(git diff ${{ github.event.pull_request.base.sha }} --name-only); do grep $f post_process_errors.txt || true; done | tee filtered_errors.txt
           # Raise an error if post-process in filtered errors
           ! grep "post-process" filtered_errors.txt >/dev/null
         shell: bash
