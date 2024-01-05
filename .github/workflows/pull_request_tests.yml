@@ -46,6 +46,8 @@ jobs:
       options: --user root
     steps:
       - uses: actions/checkout@v3
+        with:
+          recursive: true
       - name: Run pylint
         run: |
           pylint $(find tests -iname *.py)
