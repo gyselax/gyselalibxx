@@ -32,10 +32,11 @@ jobs:
           MARKDOWN_FILES="$MARKDOWN_FILES $(find ./vendor/sll/ -name '*.md')"
           echo $MARKDOWN_FILES
           python3 ci_tools/markdown_linter.py ${MARKDOWN_FILES}
+          echo "EXIT_CODE=$?" >> $GITHUB_OUTPUT
       - name: Check error code
         shell: python
         run: |
-          assert ${{ steps.markdown.outcome }} in (0, 2)
+          assert ${{ steps.markdown.outputs.EXIT_CODE }} in (0, 2)
 
   Python:
     name: Python Best Practices
