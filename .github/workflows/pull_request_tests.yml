@@ -96,9 +96,9 @@ jobs:
       - name: Check for new errors
         run: |
           # Get files which have changed in this merge request
-          git diff ${{ github.event.pull_request.base.sha }}..HEAD --no-indent-heuristic --unified=0 --output=pull_diff.txt --no-color
+          git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.head.sha }} --no-indent-heuristic --unified=0 --output=pull_diff.txt --no-color
           # Filter documentation messages to only complain about modified files
           python3 ci_tools/check_documentation.py pull_diff.txt build/docs/doxygen.log
-          git diff ${{ github.event.pull_request.base.sha }}..HEAD --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
+          git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.head.sha }} --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
           python3 ci_tools/check_readme_presence.py pull_new_files.txt
 
