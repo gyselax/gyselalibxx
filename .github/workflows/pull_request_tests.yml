@@ -50,8 +50,9 @@ jobs:
           pylint $(find doc -iname *.py)
           pylint $(find ci_tools -iname *.py)
         shell: bash
+        env:
+          PYTHONPATH: ./post-process/PythonScripts
       - name: Run filtered pylint
-        shell: bash
         run: |
           # Find all files with no extension or a .py extension in post-process/PythonScripts/
           POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
@@ -62,6 +63,9 @@ jobs:
           for f in $(git diff origin/main --name-only); do grep $f post_process_errors.txt || true; done | tee filtered_errors.txt
           # Raise an error if post-process in filtered errors
           ! grep "post-process" filtered_errors.txt >/dev/null
+        shell: bash
+        env:
+          PYTHONPATH: ./post-process/PythonScripts
 
   Documentation:
     name: Doxygen generation
@@ -73,6 +77,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          recursive: true
       - name: Make documenation
         run: |
           # Make docs
