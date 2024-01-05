@@ -95,6 +95,7 @@ jobs:
         shell: bash
       - name: Check for new errors
         run: |
+          git config --global --add safe.directory /__w/gyselalibxx/gyselalibxx
           git branch
           git branch -r
           echo "1"
