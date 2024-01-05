@@ -23,6 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
+      - name: Get Python dependencies
+        run: |
+          pip install numpy
       - name: Check files
         id: markdown
         continue-on-error: true
