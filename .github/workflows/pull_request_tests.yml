@@ -37,14 +37,9 @@ jobs:
   Python:
     name: Python Best Practices
     runs-on: ubuntu-latest
+    container: ghcr.io/gyselax/gyselalibxx_env
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-      - name: Install python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install pylint
-        shell: bash
       - name: Run pylint
         run: |
           pylint $(find tests -iname *.py)
