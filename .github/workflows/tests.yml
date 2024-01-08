@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/gyselax/gyselalibxx_env
-      options: --user=1001
+      options: --user=1001 # Use runner id as indicated here: https://github.com/actions/runner/issues/2033#issuecomment-1598547465
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
