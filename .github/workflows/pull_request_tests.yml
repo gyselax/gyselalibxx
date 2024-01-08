@@ -6,7 +6,10 @@ on:
 jobs:
   Indentation:
     name: Clang Formatting Check
-    container: ghcr.io/gyselax/gyselalibxx_env
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/gyselax/gyselalibxx_env
+      options: --user root
     steps:
       - uses: actions/checkout@v3
       - shell: bash
@@ -15,10 +18,15 @@ jobs:
 
   Markdown:
     name: Markdown format check
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
+      - name: Get Python dependencies
+        run: |
+          pip install numpy
       - name: Check files
+        id: markdown
         continue-on-error: true
         shell: bash
         run: |
@@ -26,47 +34,55 @@ jobs:
           MARKDOWN_FILES="$MARKDOWN_FILES $(find ./vendor/sll/ -name '*.md')"
           echo $MARKDOWN_FILES
           python3 ci_tools/markdown_linter.py ${MARKDOWN_FILES}
+          echo "EXIT_CODE=$?" >> $GITHUB_OUTPUT
       - name: Check error code
         shell: python
         run: |
-          assert ${{ steps.markdown.outcome }} in (0, 2)
+          assert ${{ steps.markdown.outputs.EXIT_CODE }} in (0, 2)
 
   Python:
     name: Python Best Practices
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/gyselax/gyselalibxx_env
+      options: --user root
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-      - name: Install python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install pylint
-        shell: bash
+        with:
+          fetch-depth: 0
       - name: Run pylint
         run: |
           pylint $(find tests -iname *.py)
           pylint $(find doc -iname *.py)
           pylint $(find ci_tools -iname *.py)
         shell: bash
+        env:
+          PYTHONPATH: ./post-process/PythonScripts
       - name: Run filtered pylint
-        shell: bash
         run: |
           # Find all files with no extension or a .py extension in post-process/PythonScripts/
           POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
           # Get pylint errors without failing
           pylint ${POST_PROCESS_PYTHON_FILES} > post_process_errors.txt || true
           # Filter errors on changed files
-          git fetch origin main
-          for f in $(git diff origin/main --name-only); do grep $f post_process_errors.txt || true; done | tee filtered_errors.txt
+          for f in $(git diff ${{ github.event.pull_request.base.sha }} --name-only); do grep $f post_process_errors.txt || true; done | tee filtered_errors.txt
           # Raise an error if post-process in filtered errors
           ! grep "post-process" filtered_errors.txt >/dev/null
+        shell: bash
+        env:
+          PYTHONPATH: ./post-process/PythonScripts
 
   Documentation:
     name: Doxygen generation
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/gyselax/gyselalibxx_env
+      options: --user root
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v4
+          submodules: true
       - name: Make documenation
         run: |
           # Make docs
@@ -75,12 +91,15 @@ jobs:
           cmake -DBUILD_DOCUMENTATION=ON ..
           make doc
           cd ..
+        shell: bash
       - name: Check for new errors
         run: |
+          git config --global --add safe.directory $(pwd)
           # Get files which have changed in this merge request
-          git diff ${{ github.event.pull_request.base.sha }}..HEAD --no-indent-heuristic --unified=0 --output=pull_diff.txt --no-color
+          git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} --no-indent-heuristic --unified=0 --output=pull_diff.txt --no-color
           # Filter documentation messages to only complain about modified files
           python3 ci_tools/check_documentation.py pull_diff.txt build/docs/doxygen.log
-          git diff ${{ github.event.pull_request.base.sha }}..HEAD --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
+          git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
           python3 ci_tools/check_readme_presence.py pull_new_files.txt
+        shell: bash
 
