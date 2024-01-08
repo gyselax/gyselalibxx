@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/gyselax/gyselalibxx_env
-      options: --user root
+      options: --user="$(id --user):$(id --group)"
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
