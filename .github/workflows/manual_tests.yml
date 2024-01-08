@@ -24,8 +24,8 @@ jobs:
             base_sha=$(git log main -1 --format=%H)
           fi
           echo "base_sha = ${base_sha}"
-          echo "BASE=${base_sha}" >> $GITHUB_OUTPUTS
-        shell: bash
+          echo "BASE=${base_sha}" >> $GITHUB_OUTPUT
+        shell: 'bash -e {0}'
         env:
           GH_TOKEN: ${{ github.token }}
 
