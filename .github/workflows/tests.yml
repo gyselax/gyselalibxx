@@ -51,8 +51,8 @@ jobs:
               -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING} \
               ..
         env:
-          SLL_BUILD_TESTING: ${{ inputs.filter_tests && steps.changes.outputs.sll || 'ON' }}
-          POISSON_2D_TESTING: ${{ inputs.filter_tests && steps.changes.outputs.poisson_2d || 'ON' }}
+          SLL_BUILD_TESTING: ${{ inputs.filter_tests_base && steps.changes.outputs.sll || 'ON' }}
+          POISSON_2D_TESTING: ${{ inputs.filter_tests_base && steps.changes.outputs.poisson_2d || 'ON' }}
         shell: bash
         working-directory: ./build
       - name: 'Compilation'
