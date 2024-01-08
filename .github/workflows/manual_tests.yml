@@ -20,6 +20,8 @@ jobs:
           echo "base_sha = ${base_sha}"
           echo "BASE=${base_sha}" >> $GITHUB_OUTPUTS
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
 
   tests_Debug:
     needs: Setup
