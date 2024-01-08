@@ -14,7 +14,9 @@ jobs:
           fetch-depth: 0
       - name: Get base for PR
         run: |
-          pr_id=$(gh pr view test_pr --json number -q '.["number"]')
+          current_branch=$(git branch --show-current)
+          echo "Currently on ${current_branch}"
+          pr_id=$(gh pr view ${current_branch} --json number -q '.["number"]')
           echo "PR_ID = $pr_id"
           if [ "$?" -eq "0" ]; then
             base_sha=$(gh api -H "Accept: application/vnd.github+json" \
