@@ -13,6 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Get base for PR
+        id: get_base
         run: |
           current_branch=$(git branch --show-current)
           echo "Currently on ${current_branch}"
