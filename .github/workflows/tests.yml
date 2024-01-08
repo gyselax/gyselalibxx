@@ -16,11 +16,11 @@ on:
       filter_tests:
         description: 'Indicates whether tests should be filtered to reduce the quantity'
         required: true
-        type: bool
+        type: boolean
       manual:
         description: 'Indicates whether tests should be triggered manually'
         required: true
-        type: bool
+        type: boolean
 
 jobs:
   tests:
