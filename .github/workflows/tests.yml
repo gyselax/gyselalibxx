@@ -44,6 +44,7 @@ jobs:
         run: |
           mkdir build
           if [ -z "${{ inputs.filter_tests_base }}" ]
+          then
             echo "SLL_BUILD_TESTING=ON" >> $GITHUB_ENV
             echo "POISSON_2D_TESTING=ON" >> $GITHUB_ENV
           else
