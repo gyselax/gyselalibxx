@@ -32,6 +32,7 @@ jobs:
       - name: Set safe directories
         run: |
           git config --global --add safe.directory .
+          git branch --show-current
         shell: bash
       - uses: dorny/paths-filter@v2
         id: changes
