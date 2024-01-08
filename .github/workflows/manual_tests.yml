@@ -33,17 +33,27 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
+  tmp:
+    needs: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: |
+          echo ${{ needs.Setup.outputs.base_sha }}
+        shell: bash
+
+
   tests_Debug:
     needs: Setup
     uses: ./.github/workflows/tests.yml
     with:
       additional_cmake_commands: -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON
       ctest_commands: -LE test_on_Release_only
-      filter_tests_base: ${{ needs.Setup.output.base_sha }}
+      filter_tests_base: ${{ needs.Setup.outputs.base_sha }}
 
   tests_Release:
     needs: Setup
     uses: ./.github/workflows/tests.yml
     with:
       additional_cmake_commands: -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release
-      filter_tests_base: ${{ needs.Setup.output.base_sha }}
+      filter_tests_base: ${{ needs.Setup.outputs.base_sha }}
