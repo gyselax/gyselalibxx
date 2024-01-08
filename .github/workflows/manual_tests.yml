@@ -27,7 +27,7 @@ jobs:
           fi
           echo "base_sha = ${base_sha}"
           echo "BASE=${base_sha}" >> $GITHUB_OUTPUT
-        shell: 'bash -e {0}'
+        shell: 'bash +e {0}'
         env:
           GH_TOKEN: ${{ github.token }}
 
