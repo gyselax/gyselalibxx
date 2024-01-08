@@ -23,7 +23,7 @@ on:
         type: bool
 
 jobs:
-    tests:
+  tests:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/gyselax/gyselalibxx_env
