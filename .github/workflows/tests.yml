@@ -13,14 +13,10 @@ on:
         default: ''
         required: false
         type: string
-      filter_tests:
-        description: 'Indicates whether tests should be filtered to reduce the quantity'
-        required: true
-        type: bool
-      manual:
-        description: 'Indicates whether tests should be triggered manually'
-        required: true
-        type: bool
+      filter_tests_base:
+        description: 'Indicates the base against which a filter should be applied'
+        required: false
+        type: string
 
 jobs:
   tests:
@@ -29,18 +25,6 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env
       options: --user root
     steps:
-      - name: Auto-cancel manual tests
-        if: inputs.manual && github.run_attempt == 1
-        run: |
-          # GitHub CLI api https://cli.github.com/manual/gh_api
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: bash
       - name: Checkout gyselalibxx
         uses: actions/checkout@v3
         with:
@@ -53,6 +37,7 @@ jobs:
               - 'vendor/sll/**'
             poisson_2d:
               - 'src/geometryRTheta/poisson/**'
+          base: ${{ inputs.filter_tests_base }}
       - name: 'Setup'
         run:
           mkdir build
@@ -63,17 +48,23 @@ jobs:
               -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
               -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 \
               -DSLL_BUILD_TESTING=${SLL_BUILD_TESTING} \
-              -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING}
+              -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING} \
+              ..
         env:
           SLL_BUILD_TESTING: ${{ inputs.filter_tests && steps.changes.outputs.sll || 'ON' }}
           POISSON_2D_TESTING: ${{ inputs.filter_tests && steps.changes.outputs.poisson_2d || 'ON' }}
         shell: bash
+        working-directory: ./build
       - name: 'Compilation'
         run: |
           make -j VERBOSE=1
+        shell: bash
+        working-directory: ./build
       - name: 'Run tests'
         run: |
           ctest --output-on-failure --timeout 5 --output-junit tests.xml ${{ inputs.ctest_commands }}
+        shell: bash
+        working-directory: ./build
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails

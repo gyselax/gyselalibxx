@@ -1,0 +1,39 @@
+name: Manual functionality tests
+on:
+  workflow_dispatch:
+
+jobs:
+  Setup:
+    runs-on: ubuntu-latest
+    outputs:
+      base_sha: ${{ steps.get_base.outputs.BASE }}
+    steps:
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v3
+      - name: Get base for PR
+        run: |
+          pr_id=$(gh pr view test_pr --json number -q '.["number"]')
+          echo "PR_ID = $pr_id"
+          base_sha=$(gh api -H "Accept: application/vnd.github+json" \
+                            -H "X-GitHub-Api-Version: 2022-11-28" \
+                            /repos/${{ github.repository }}/pulls/${pr_id} -q '.["base"]["sha"]')
+          echo "base_sha = ${base_sha}"
+          echo "BASE=${base_sha}" >> $GITHUB_OUTPUTS
+        shell: bash
+
+  tests_Debug:
+    needs: Setup
+    uses: ./.github/workflows/tests.yml
+    with:
+      additional_cmake_commands: -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON
+      ctest_commands: -LE test_on_Release_only
+      filter_tests_base: ${{ needs.Setup.output.base_sha }}
+      manual: true
+
+  tests_Release:
+    needs: Setup
+    uses: ./.github/workflows/tests.yml
+    with:
+      additional_cmake_commands: -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release
+      filter_tests_base: ${{ needs.Setup.output.base_sha }}
+      manual: true
