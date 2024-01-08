@@ -72,7 +72,7 @@ jobs:
           pylint $(find tests -iname *.py)
           pylint $(find doc -iname *.py)
           pylint $(find ci_tools -iname *.py)
-        hell: bash
+        shell: bash
         env:
           PYTHONPATH: ./post-process/PythonScripts
       - name: Run filtered pylint
