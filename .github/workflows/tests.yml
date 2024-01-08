@@ -1,49 +1,44 @@
-name: docker
+name: Docker update and test
 
 on:
   push:
     branches:
     - 'main'
-  pull_request: 
+  pull_request:
+
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-    -
-      name: Checkout
-      uses: actions/checkout@v3
-    -
-      name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
-    -
-      name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    -
-      name: Login to GitHub Container Registry
-      uses: docker/login-action@v2
-      with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    -
-      name: Build and push to tag
-      uses: docker/build-push-action@v3
-      with:
-        context: ./docker/gyselalibxx_env
-        cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
-        pull: true
-        push: true
-        tags: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
-    -
-      name: Build and push latest
-      if: github.event_name == 'push' && github.ref_name == 'main'
-      uses: docker/build-push-action@v3
-      with:
-        context: ./docker/gyselalibxx_env
-        cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
-        pull: true
-        push: true
-        tags: ghcr.io/gyselax/gyselalibxx_env:latest
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push to tag
+        uses: docker/build-push-action@v3
+        with:
+          context: ./docker/gyselalibxx_env
+          cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
+          pull: true
+          push: true
+          tags: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
+      - name: Build and push latest
+        if: github.event_name == 'push' && github.ref_name == 'main'
+        uses: docker/build-push-action@v3
+        with:
+          context: ./docker/gyselalibxx_env
+          cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
+          pull: true
+          push: true
+          tags: ghcr.io/gyselax/gyselalibxx_env:latest
 
   tests:
     runs-on: ubuntu-latest
@@ -52,18 +47,16 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
       options: --user root
     steps:
-    - 
-      name: Checkout gyselalibxx
-      uses: actions/checkout@v3
-      with: { submodules: recursive }
-    - 
-      name: Run tests
-      run: |
-        mkdir build
-        cd build
-        cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
-        make -j 2 VERBOSE=1
-        ctest --output-on-failure --timeout 5 -LE test_on_Release_only
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v3
+        with: { submodules: recursive }
+      - name: Run tests
+        run: |
+          mkdir build
+          cd build
+          cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
+          make -j 2 VERBOSE=1
+          ctest --output-on-failure --timeout 5 -LE test_on_Release_only
 
   tests_Release:
     runs-on: ubuntu-latest
@@ -72,18 +65,16 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
       options: --user root
     steps:
-    - 
-      name: Checkout gyselalibxx
-      uses: actions/checkout@v3
-      with: { submodules: recursive }
-    - 
-      name: Run tests
-      run: |
-        mkdir build
-        cd build
-        cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
-        make -j 2 VERBOSE=1
-        ctest --output-on-failure --timeout 5
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v3
+        with: { submodules: recursive }
+      - name: Run tests
+        run: |
+          mkdir build
+          cd build
+          cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
+          make -j 2 VERBOSE=1
+          ctest --output-on-failure --timeout 5
 
   Docs:
     if: github.event_name == 'push' && github.ref_name == 'main'
