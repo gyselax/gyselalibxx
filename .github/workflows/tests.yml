@@ -29,6 +29,10 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env
       options: --user root
     steps:
+      - name: Setup
+        run: |
+          sudo apt install curl.
+        shell: bash
       - name: Auto-cancel manual tests
         if: inputs.manual && github.run_attempt == 1
         run: |
