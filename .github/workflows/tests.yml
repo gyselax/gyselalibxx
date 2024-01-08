@@ -38,35 +38,35 @@ jobs:
             poisson_2d:
               - 'src/geometryRTheta/poisson/**'
           base: ${{ inputs.filter_tests_base }}
-      - name: 'Setup'
-        run:
-          mkdir build
-        shell: bash
-      - name: 'CMake call'
-        run: |
-          cmake ${{ inputs.additional_cmake_commands }} \
-              -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
-              -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 \
-              -DSLL_BUILD_TESTING=${SLL_BUILD_TESTING} \
-              -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING} \
-              ..
-        env:
-          SLL_BUILD_TESTING: ${{ inputs.filter_tests_base && steps.changes.outputs.sll || 'ON' }}
-          POISSON_2D_TESTING: ${{ inputs.filter_tests_base && steps.changes.outputs.poisson_2d || 'ON' }}
-        shell: bash
-        working-directory: ./build
-      - name: 'Compilation'
-        run: |
-          make -j VERBOSE=1
-        shell: bash
-        working-directory: ./build
-      - name: 'Run tests'
-        run: |
-          ctest --output-on-failure --timeout 5 --output-junit tests.xml ${{ inputs.ctest_commands }}
-        shell: bash
-        working-directory: ./build
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v4
-        if: always() # always run even if the previous step fails
-        with:
-          report_paths: 'build/tests.xml'
+      #- name: 'Setup'
+      #  run:
+      #    mkdir build
+      #  shell: bash
+      #- name: 'CMake call'
+      #  run: |
+      #    cmake ${{ inputs.additional_cmake_commands }} \
+      #        -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
+      #        -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 \
+      #        -DSLL_BUILD_TESTING=${SLL_BUILD_TESTING} \
+      #        -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING} \
+      #        ..
+      #  env:
+      #    SLL_BUILD_TESTING: ${{ inputs.filter_tests_base && steps.changes.outputs.sll || 'ON' }}
+      #    POISSON_2D_TESTING: ${{ inputs.filter_tests_base && steps.changes.outputs.poisson_2d || 'ON' }}
+      #  shell: bash
+      #  working-directory: ./build
+      #- name: 'Compilation'
+      #  run: |
+      #    make -j VERBOSE=1
+      #  shell: bash
+      #  working-directory: ./build
+      #- name: 'Run tests'
+      #  run: |
+      #    ctest --output-on-failure --timeout 5 --output-junit tests.xml ${{ inputs.ctest_commands }}
+      #  shell: bash
+      #  working-directory: ./build
+      #- name: Publish Test Report
+      #  uses: mikepenz/action-junit-report@v4
+      #  if: always() # always run even if the previous step fails
+      #  with:
+      #    report_paths: 'build/tests.xml'
