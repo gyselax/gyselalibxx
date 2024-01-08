@@ -29,14 +29,11 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env
       options: --user root
     steps:
-      - name: Setup
-        run: |
-          sudo apt-get update
-          sudo apt-get install curl
-        shell: bash
       - name: Auto-cancel manual tests
         if: inputs.manual && github.run_attempt == 1
         run: |
+          apt-get update
+          apt-get install curl
           # GitHub CLI api https://cli.github.com/manual/gh_api
           curl -L \
             -X POST \
