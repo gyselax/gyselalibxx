@@ -66,7 +66,8 @@ jobs:
               -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
               -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 \
               -DSLL_BUILD_TESTING=${SLL_BUILD_TESTING} \
-              -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING}
+              -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING} \
+              ..
         env:
           SLL_BUILD_TESTING: ${{ inputs.filter_tests && steps.changes.outputs.sll || 'ON' }}
           POISSON_2D_TESTING: ${{ inputs.filter_tests && steps.changes.outputs.poisson_2d || 'ON' }}
