@@ -11,6 +11,7 @@ jobs:
       additional_cmake_commands: -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON
       ctest_commands: -LE test_on_Release_only
       filter_tests: true
+      manual: true
 
   tests_Release:
     if: ${{ github.run_attempt }} > 1
@@ -18,6 +19,7 @@ jobs:
     with:
       additional_cmake_commands: -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release
       filter_tests: true
+      manual: true
 
   Indentation:
     name: Clang Formatting Check

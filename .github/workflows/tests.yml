@@ -17,6 +17,10 @@ on:
         description: 'Indicates whether tests should be filtered to reduce the quantity'
         required: true
         type: bool
+      manual:
+        description: 'Indicates whether tests should be triggered manually'
+        required: true
+        type: bool
 
 jobs:
     tests:
@@ -25,6 +29,18 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env
       options: --user root
     steps:
+      - name: Auto-cancel manual tests
+        if: inputs.manual && github.run_attempt == 1
+        run: |
+          # GitHub CLI api https://cli.github.com/manual/gh_api
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
       - name: Checkout gyselalibxx
         uses: actions/checkout@v3
         with:
