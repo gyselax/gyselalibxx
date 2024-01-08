@@ -31,7 +31,8 @@ jobs:
     steps:
       - name: Setup
         run: |
-          apt install curl.
+          sudo apt-get update
+          sudo apt-get install curl
         shell: bash
       - name: Auto-cancel manual tests
         if: inputs.manual && github.run_attempt == 1
