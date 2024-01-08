@@ -6,7 +6,7 @@ on:
 jobs:
   tests_Debug:
     if: ${{ github.run_attempt }} > 1
-    uses: ./.github/workflows/filtered_tests.yml
+    uses: ./.github/workflows/tests.yml
     with:
       additional_cmake_commands: -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON
       ctest_commands: -LE test_on_Release_only
@@ -15,7 +15,7 @@ jobs:
 
   tests_Release:
     if: ${{ github.run_attempt }} > 1
-    uses: ./.github/workflows/filtered_tests.yml
+    uses: ./.github/workflows/tests.yml
     with:
       additional_cmake_commands: -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release
       filter_tests: true
