@@ -41,8 +41,15 @@ jobs:
               - 'src/geometryRTheta/poisson/**'
           base: ${{ inputs.filter_tests_base }}
       - name: 'Setup'
-        run:
+        run: |
           mkdir build
+          if [ -z "${{ inputs.filter_tests_base }}" ]
+            echo "SLL_BUILD_TESTING=ON" >> $GITHUB_ENV
+            echo "POISSON_2D_TESTING=ON" >> $GITHUB_ENV
+          else
+            echo "SLL_BUILD_TESTING=${{ steps.changes.outputs.sll }}" >> $GITHUB_ENV
+            echo "POISSON_2D_TESTING=${{ steps.changes.outputs.poisson_2d }}" >> $GITHUB_ENV
+          fi
         shell: bash
       - name: 'CMake call'
         run: |
@@ -52,9 +59,6 @@ jobs:
               -DSLL_BUILD_TESTING=${SLL_BUILD_TESTING} \
               -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING} \
               ..
-        env:
-          SLL_BUILD_TESTING: ${{ inputs.filter_tests_base != '' && steps.changes.outputs.sll || 'ON' }}
-          POISSON_2D_TESTING: ${{ inputs.filter_tests_base != '' && steps.changes.outputs.poisson_2d || 'ON' }}
         shell: bash
         working-directory: ./build
       - name: 'Compilation'
