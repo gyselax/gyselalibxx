@@ -26,9 +26,10 @@ jobs:
       options: --user root
     steps:
       - name: Checkout gyselalibxx
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
+          set-safe-directory: true
       - uses: dorny/paths-filter@v2
         id: changes
         with:
