@@ -84,7 +84,7 @@ public:
             ddc::for_each(
                     ddc::policies::parallel_device,
                     c_dom,
-                    DDC_LAMBDA(DElemC const ic) {
+                    KOKKOS_LAMBDA(DElemC const ic) {
                         DElemSpatial const ix(ic);
                         // compute the displacement
                         double const dvx
