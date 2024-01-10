@@ -175,7 +175,7 @@ $(document).ready(function(){initNavTree('bsl__advection__vx__batched_8hpp_sourc
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            ddc::for_each(</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    ddc::policies::parallel_device,</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    c_dom,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    DDC_LAMBDA(DElemC <span class="keyword">const</span> ic) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    KOKKOS_LAMBDA(DElemC <span class="keyword">const</span> ic) {</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        DElemSpatial <span class="keyword">const</span> ix(ic);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                        <span class="comment">// compute the displacement</span></div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                        <span class="keywordtype">double</span> <span class="keyword">const</span> dvx</div>

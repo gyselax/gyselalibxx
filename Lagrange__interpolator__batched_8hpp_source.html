@@ -148,7 +148,7 @@ $(document).ready(function(){initNavTree('Lagrange__interpolator__batched_8hpp_s
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        ddc::for_each(</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                ddc::policies::parallel_device,</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                batch_domain,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                DDC_LAMBDA(<span class="keyword">typename</span> decltype(batch_domain)::discrete_element_type <span class="keyword">const</span> i) {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                KOKKOS_LAMBDA(<span class="keyword">typename</span> decltype(batch_domain)::discrete_element_type <span class="keyword">const</span> i) {</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <a class="code" href="classLagrange.html">Lagrange&lt;Kokkos::DefaultExecutionSpace, DDimI, BcMin, BcMax&gt;</a> evaluator(</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                            deg,</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                            inout_data_tmp[i],</div>
