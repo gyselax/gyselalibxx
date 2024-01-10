@@ -49,7 +49,7 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
     ddc::for_each(
             ddc::policies::parallel_device,
             ddc::get_domain<IDimSp, IDimX>(allfdistribu),
-            DDC_LAMBDA(IndexSpX const ispx) {
+            KOKKOS_LAMBDA(IndexSpX const ispx) {
                 IndexSp isp(ddc::select<IDimSp>(ispx));
                 IndexX ix(ddc::select<IDimX>(ispx));
                 double particle_flux(0);
@@ -90,7 +90,7 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
     ddc::for_each(
             ddc::policies::parallel_device,
             allfdistribu.domain(),
-            DDC_LAMBDA(IndexSpXVx const ispxvx) {
+            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 IndexSp isp(ddc::select<IDimSp>(ispxvx));
                 IndexX ix(ddc::select<IDimX>(ispxvx));
                 IndexVx ivx(ddc::select<IDimVx>(ispxvx));
@@ -109,7 +109,7 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
     ddc::for_each(
             ddc::policies::parallel_device,
             allfdistribu.domain(),
-            DDC_LAMBDA(IndexSpXVx const ispxvx) {
+            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 IndexSp isp(ddc::select<IDimSp>(ispxvx));
                 IndexX ix(ddc::select<IDimX>(ispxvx));
                 IndexVx ivx(ddc::select<IDimVx>(ispxvx));

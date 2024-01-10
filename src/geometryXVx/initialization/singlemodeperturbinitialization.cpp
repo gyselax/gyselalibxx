@@ -59,7 +59,7 @@ void SingleModePerturbInitialization::perturbation_initialization(
     ddc::for_each(
             ddc::policies::parallel_device,
             gridx,
-            DDC_LAMBDA(IndexX const ix) {
+            KOKKOS_LAMBDA(IndexX const ix) {
                 CoordX const x = ddc::coordinate(ix);
                 perturbation(ix) = perturb_amplitude * Kokkos::cos(kx * x);
             });

@@ -33,7 +33,7 @@ device_t<DSpanSpVx> BumpontailEquilibrium::operator()(
         ddc::for_each(
                 ddc::policies::parallel_device,
                 gridvx,
-                DDC_LAMBDA(IndexVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
+                KOKKOS_LAMBDA(IndexVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
     });
     return allfequilibrium;
 }
@@ -50,7 +50,7 @@ void BumpontailEquilibrium::compute_twomaxwellian(
     ddc::for_each(
             ddc::policies::parallel_device,
             gridvx,
-            DDC_LAMBDA(IndexVx const ivx) {
+            KOKKOS_LAMBDA(IndexVx const ivx) {
                 CoordVx const vx = ddc::coordinate(ivx);
                 // bulk plasma particles
                 double const f1_v = (1. - epsilon_bot) * inv_sqrt_2pi * Kokkos::exp(-0.5 * vx * vx);
