@@ -63,7 +63,7 @@ public:
         ddc::for_each(
                 ddc::policies::parallel_device,
                 batch_domain,
-                DDC_LAMBDA(typename decltype(batch_domain)::discrete_element_type const i) {
+                KOKKOS_LAMBDA(typename decltype(batch_domain)::discrete_element_type const i) {
                     Lagrange<Kokkos::DefaultExecutionSpace, DDimI, BcMin, BcMax> evaluator(
                             deg,
                             inout_data_tmp[i],

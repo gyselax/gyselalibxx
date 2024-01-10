@@ -62,7 +62,7 @@ device_t<DSpanSpXVx> KineticSource::operator()(
     ddc::for_each(
             ddc::policies::parallel_device,
             allfdistribu.domain(),
-            DDC_LAMBDA(IndexSpXVx const ispxvx) {
+            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 double const df(
                         amplitude * spatial_extent_device(ddc::select<IDimX>(ispxvx))
                         * velocity_shape_device(ddc::select<IDimVx>(ispxvx)) * dt);
