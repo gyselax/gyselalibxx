@@ -37,12 +37,17 @@ using DDimT = ddc::UniformPointSampling<T>;
 
 //! [display]
 /** A function to pretty print the temperature
- * @param time the time at which the output is made
- * @param temp the temperature at this time-step
+ * @tparam ChunkType The type of chunk span. This way the template parameters are avoided,
+ *                   should be deduced by the compiler.
+ * @param time The time at which the output is made.
+ * @param temp The temperature at this time-step.
  */
 template <class ChunkType>
 void display(double time, ChunkType temp)
 {
+    // For `Chunk`/`ChunkSpan`, the ()-operator is used to access stored values with a single `DiscreteElement` as
+    // input. So it is used here as a function that maps indices of the temperature domain
+    // to the temperature value at that point
     double const mean_temp = ddc::transform_reduce(
                                      temp.domain(),
                                      0.,
@@ -191,11 +196,13 @@ int main(int argc, char** argv)
             .5 / (kx * invdx2_max + ky * invdy2_max)};
 
     // number of time intervals required to reach the end time
+    // The + .2 is used to make sure it is rounded to the correct number of steps
     ddc::DiscreteVector<DDimT> const nb_time_steps {
             std::ceil((end_time - start_time) / max_dt) + .2};
     // Initialization of the global domain in time:
     // - the number of discrete time-points is equal to the number of
     //   steps + 1
+    // `init` takes required information to initialize the attributes of the dimension.
     ddc::DiscreteDomain<DDimT> const time_domain
             = ddc::init_discrete_space(
                     DDimT::
@@ -215,6 +222,7 @@ int main(int argc, char** argv)
             ddc::DeviceAllocator<double>());
 
     // - once for time-step being computed
+    // The `DeviceAllocator` is responsible for allocating memory on the default memory space.
     ddc::Chunk ghosted_next_temp(
             "ghosted_next_temp",
             ddc::DiscreteDomain<
@@ -224,13 +232,15 @@ int main(int argc, char** argv)
     //! [data allocation]
 
     //! [initial-conditions]
+    // The const qualifier makes it clear that ghosted_initial_temp always references
+    // the same chunk, `ghosted_last_temp` in this case
     ddc::ChunkSpan const ghosted_initial_temp
             = ghosted_last_temp.span_view();
     // Initialize the temperature on the main domain
     ddc::for_each(
             ddc::policies::parallel_device,
             ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
-            DDC_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
+            KOKKOS_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                 double const x
                         = ddc::coordinate(ddc::select<DDimX>(ixy));
                 double const y
@@ -254,7 +264,7 @@ int main(int argc, char** argv)
     display(ddc::coordinate(time_domain.front()),
             ghosted_temp[x_domain][y_domain]);
     // time of the iteration where the last output happened
-    ddc::DiscreteElement<DDimT> last_output = time_domain.front();
+    ddc::DiscreteElement<DDimT> last_output_iter = time_domain.front();
     //! [initial output]
 
     //! [time iteration]
@@ -284,7 +294,8 @@ int main(int argc, char** argv)
         ddc::ChunkSpan const next_temp {
                 ghosted_next_temp[x_domain][y_domain]};
         // a read-only view of the temperature at the previous time-step
-        ddc::ChunkSpan const last_temp {ghosted_last_temp.span_view()};
+        // span_cview returns a read-only ChunkSpan
+        ddc::ChunkSpan const last_temp {ghosted_last_temp.span_cview()};
         //! [manipulated views]
 
         //! [numerical scheme]
@@ -292,7 +303,7 @@ int main(int argc, char** argv)
         ddc::for_each(
                 ddc::policies::parallel_device,
                 next_temp.domain(),
-                DDC_LAMBDA(
+                KOKKOS_LAMBDA(
                         ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                     ddc::DiscreteElement<DDimX> const ix
                             = ddc::select<DDimX>(ixy);
@@ -321,8 +332,8 @@ int main(int argc, char** argv)
         //! [numerical scheme]
 
         //! [output]
-        if (iter - last_output >= t_output_period) {
-            last_output = iter;
+        if (iter - last_output_iter >= t_output_period) {
+            last_output_iter = iter;
             ddc::deepcopy(ghosted_temp, ghosted_last_temp);
             display(ddc::coordinate(iter),
                     ghosted_temp[x_domain][y_domain]);
@@ -336,7 +347,7 @@ int main(int argc, char** argv)
     }
 
     //! [final output]
-    if (last_output < time_domain.back()) {
+    if (last_output_iter < time_domain.back()) {
         ddc::deepcopy(ghosted_temp, ghosted_last_temp);
         display(ddc::coordinate(time_domain.back()),
                 ghosted_temp[x_domain][y_domain]);

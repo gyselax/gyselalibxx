@@ -186,7 +186,7 @@ int main(int argc, char** argv)
     ddc::for_each(
             ddc::policies::parallel_device,
             x_mesh,
-            DDC_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
+            KOKKOS_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                 double const x
                         = ddc::coordinate(ddc::select<DDimX>(ixy));
                 double const y
@@ -244,10 +244,10 @@ int main(int argc, char** argv)
         ddc::for_each(
                 ddc::policies::parallel_device,
                 k_mesh,
-                DDC_LAMBDA(ddc::DiscreteElement<
-                           ddc::PeriodicSampling<ddc::Fourier<X>>,
-                           ddc::PeriodicSampling<ddc::Fourier<Y>>> const
-                                   ikxky) {
+                KOKKOS_LAMBDA(ddc::DiscreteElement<
+                              ddc::PeriodicSampling<ddc::Fourier<X>>,
+                              ddc::PeriodicSampling<
+                                      ddc::Fourier<Y>>> const ikxky) {
                     ddc::DiscreteElement<
                             ddc::PeriodicSampling<ddc::Fourier<X>>> const
                             ikx

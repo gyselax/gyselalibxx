@@ -170,7 +170,7 @@ static void PeriodicitySplineBuilderTest()
     ddc::for_each(
             ddc::policies::policy(exec_space),
             coords_eval.domain(),
-            DDC_LAMBDA(Index<IDim<X>> const e) {
+            KOKKOS_LAMBDA(Index<IDim<X>> const e) {
                 coords_eval(e) = ddc::coordinate(e) + Coord<X>(1.5);
             }); // Translate function 1.5x domain width to the right.
 
@@ -188,7 +188,7 @@ static void PeriodicitySplineBuilderTest()
             spline_eval.domain(),
             0.,
             ddc::reducer::max<double>(),
-            DDC_LAMBDA(Index<IDim<X>> const e) {
+            KOKKOS_LAMBDA(Index<IDim<X>> const e) {
                 return Kokkos::abs(
                         spline_eval(e)
                         - (-vals(e))); // Because function is even, we get f_eval = -f

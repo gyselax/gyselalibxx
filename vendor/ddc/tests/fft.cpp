@@ -45,7 +45,7 @@ static void test_fft()
     ddc::for_each(
             ddc::policies::policy(exec_space),
             f.domain(),
-            DDC_LAMBDA(DElem<DDim<X>...> const e) {
+            KOKKOS_LAMBDA(DElem<DDim<X>...> const e) {
                 ddc::Real const xn2
                         = (Kokkos::pow(ddc::coordinate(ddc::select<DDim<X>>(e)), 2) + ...);
                 f(e) = Kokkos::exp(-xn2 / 2);
@@ -80,7 +80,7 @@ static void test_fft()
     ddc::ChunkSpan FFf_host = FFf_host_alloc.span_view();
     ddc::deepcopy(FFf_host, FFf);
 
-    auto const pow2 = DDC_LAMBDA(double x)
+    auto const pow2 = KOKKOS_LAMBDA(double x)
     {
         return x * x;
     };
@@ -132,7 +132,7 @@ static void test_fft_norm(ddc::FFT_Normalization const norm)
     ddc::for_each(
             ddc::policies::policy(exec_space),
             f.domain(),
-            DDC_LAMBDA(DElem<DDim<X>> const e) { f(e) = static_cast<Tin>(1); });
+            KOKKOS_LAMBDA(DElem<DDim<X>> const e) { f(e) = static_cast<Tin>(1); });
 
 
     ddc::Chunk f_bis_alloc = ddc::Chunk(f.domain(), ddc::KokkosAllocator<Tin, MemorySpace>());
