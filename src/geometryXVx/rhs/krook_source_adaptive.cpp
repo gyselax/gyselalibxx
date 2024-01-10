@@ -97,7 +97,7 @@ void KrookSourceAdaptive::get_amplitudes(
     ddc::for_each(
             ddc::policies::parallel_device,
             ddc::get_domain<IDimX>(allfdistribu),
-            DDC_LAMBDA(IndexX const ix) {
+            KOKKOS_LAMBDA(IndexX const ix) {
                 amplitudes(IndexSpX(iion, ix)) = amplitude;
                 double density_ion = 0.;
                 double density_electron = 0.;
@@ -146,7 +146,7 @@ void KrookSourceAdaptive::get_derivative(
     ddc::for_each(
             ddc::policies::parallel_device,
             allfdistribu_device.domain(),
-            DDC_LAMBDA(IndexSpXVx const ispxvx) {
+            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 IndexSp isp(ddc::select<IDimSp>(ispxvx));
                 IndexX ix(ddc::select<IDimX>(ispxvx));
                 IndexVx ivx(ddc::select<IDimVx>(ispxvx));

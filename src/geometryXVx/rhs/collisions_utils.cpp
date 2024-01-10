@@ -76,7 +76,7 @@ void compute_collfreq_ab(
     ddc::for_each(
             ddc::policies::parallel_device,
             collfreq_ab.domain<IDimX>(),
-            DDC_LAMBDA(IndexX const ix) {
+            KOKKOS_LAMBDA(IndexX const ix) {
                 double const collfreq_elec(
                         nustar_profile(ielec(), ix) * density(ielec(), ix)
                         / Kokkos::pow(temperature(ielec(), ix), 1.5));
@@ -121,7 +121,7 @@ void compute_momentum_energy_exchange(
     ddc::for_each(
             ddc::policies::parallel_device,
             collfreq_ab.domain<IDimX>(),
-            DDC_LAMBDA(IndexX const ix) {
+            KOKKOS_LAMBDA(IndexX const ix) {
                 // momentum exchange terms
                 momentum_exchange_ab(ielec(), ix)
                         = -collfreq_ab(ielec(), ix) * density(ielec(), ix)

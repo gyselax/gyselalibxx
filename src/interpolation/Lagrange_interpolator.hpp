@@ -60,7 +60,7 @@ public:
         ddc::for_each(
                 ddc::policies::serial_host,
                 coordinates.domain(),
-                DDC_LAMBDA(ddc::DiscreteElement<DDim> const ix) {
+                KOKKOS_LAMBDA(ddc::DiscreteElement<DDim> const ix) {
                     inout_data(ix) = evaluator.evaluate(coordinates(ix));
                 });
 

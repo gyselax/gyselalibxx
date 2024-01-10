@@ -33,7 +33,7 @@ device_t<DSpanSpVx> MaxwellianEquilibrium::operator()(
         ddc::for_each(
                 ddc::policies::parallel_device,
                 gridvx,
-                DDC_LAMBDA(IndexVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
+                KOKKOS_LAMBDA(IndexVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
     });
     return allfequilibrium;
 }
@@ -49,7 +49,7 @@ void MaxwellianEquilibrium::compute_maxwellian(
     ddc::for_each(
             ddc::policies::parallel_device,
             gridvx,
-            DDC_LAMBDA(IndexVx const ivx) {
+            KOKKOS_LAMBDA(IndexVx const ivx) {
                 CoordVx const vx = ddc::coordinate(ivx);
                 fMaxwellian(ivx) = density * inv_sqrt_2piT
                                    * Kokkos::exp(

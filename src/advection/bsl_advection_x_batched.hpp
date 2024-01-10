@@ -81,7 +81,7 @@ public:
             ddc::for_each(
                     ddc::policies::parallel_device,
                     c_dom,
-                    DDC_LAMBDA(DElemC const ic) {
+                    KOKKOS_LAMBDA(DElemC const ic) {
                         for (DElemV const iv : v_dom) {
                             // compute the displacement
                             double const dx = sqrt_me_on_mspecies * dt * ddc::coordinate(iv);
