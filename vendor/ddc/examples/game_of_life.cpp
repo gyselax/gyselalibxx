@@ -26,7 +26,7 @@ void blinker_init(
     ddc::for_each(
             ddc::policies::parallel_device,
             domain,
-            DDC_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
+            KOKKOS_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                 ddc::DiscreteElement<DDimX> const ix
                         = ddc::select<DDimX>(ixy);
                 ddc::DiscreteElement<DDimY> const iy
@@ -99,7 +99,7 @@ int main()
         ddc::for_each(
                 ddc::policies::parallel_device,
                 inner_domain_xy,
-                DDC_LAMBDA(
+                KOKKOS_LAMBDA(
                         ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                     ddc::DiscreteElement<DDimX> const ix
                             = ddc::select<DDimX>(ixy);

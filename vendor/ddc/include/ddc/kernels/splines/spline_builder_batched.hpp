@@ -60,13 +60,11 @@ private:
 public:
     SplineBuilderBatched(
             vals_domain_type const& vals_domain,
-            std::optional<int> cols_per_par_chunk = std::nullopt,
-            std::optional<int> par_chunks_per_seq_chunk = std::nullopt,
+            std::optional<int> cols_per_chunk = std::nullopt,
             std::optional<unsigned int> preconditionner_max_block_size = std::nullopt)
         : spline_builder(
                 ddc::select<interpolation_mesh_type>(vals_domain),
-                cols_per_par_chunk,
-                par_chunks_per_seq_chunk,
+                cols_per_chunk,
                 preconditionner_max_block_size)
         , m_vals_domain(vals_domain)
     {
@@ -145,7 +143,7 @@ void SplineBuilderBatched<SplineBuilder, IDimX...>::operator()(
     ddc::for_each(
             ddc::policies::policy(exec_space()),
             batch_domain(),
-            DDC_LAMBDA(typename batch_domain_type::discrete_element_type j) {
+            KOKKOS_LAMBDA(typename batch_domain_type::discrete_element_type j) {
                 for (int i = nbc_xmin; i < nbc_xmin + offset_proxy; ++i) {
                     spline(ddc::DiscreteElement<bsplines_type>(i), j) = 0.0;
                 }
@@ -162,7 +160,7 @@ void SplineBuilderBatched<SplineBuilder, IDimX...>::operator()(
     ddc::for_each(
             ddc::policies::policy(exec_space()),
             batch_domain(),
-            DDC_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
+            KOKKOS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                 for (int i = 0; i < nbasis_proxy; i++) {
                     spline_tr(ddc::DiscreteElement<bsplines_type>(i), j)
                             = spline(ddc::DiscreteElement<bsplines_type>(i + offset_proxy), j);
@@ -179,7 +177,7 @@ void SplineBuilderBatched<SplineBuilder, IDimX...>::operator()(
     ddc::for_each(
             ddc::policies::policy(exec_space()),
             batch_domain(),
-            DDC_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
+            KOKKOS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                 for (int i = 0; i < nbasis_proxy; i++) {
                     spline(ddc::DiscreteElement<bsplines_type>(i + offset_proxy), j)
                             = spline_tr(ddc::DiscreteElement<bsplines_type>(i), j);
@@ -191,7 +189,7 @@ void SplineBuilderBatched<SplineBuilder, IDimX...>::operator()(
         ddc::for_each(
                 ddc::policies::policy(exec_space()),
                 batch_domain(),
-                DDC_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
+                KOKKOS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     if (offset_proxy != 0) {
                         for (int i = 0; i < offset_proxy; ++i) {
                             spline(ddc::DiscreteElement<bsplines_type>(i), j) = spline(

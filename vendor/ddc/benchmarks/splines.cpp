@@ -95,7 +95,7 @@ static void characteristics_advection(benchmark::State& state)
     ddc::for_each(
             ddc::policies::parallel_device,
             x_mesh,
-            DDC_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
+            KOKKOS_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                 double const x = ddc::coordinate(ddc::select<DDimX>(ixy));
                 double const y = ddc::coordinate(ddc::select<DDimY>(ixy));
                 density(ixy) = 9.999 * Kokkos::exp(-(x * x + y * y) / 0.1 / 2);
@@ -111,7 +111,7 @@ static void characteristics_advection(benchmark::State& state)
                     ddc::BoundCond::PERIODIC>,
             DDimX,
             DDimY>
-            spline_builder(x_mesh, state.range(2), state.range(3), state.range(4));
+            spline_builder(x_mesh, state.range(2), state.range(3));
     ddc::SplineEvaluatorBatched<
             ddc::SplineEvaluator<
                     Kokkos::DefaultExecutionSpace,
@@ -140,7 +140,7 @@ static void characteristics_advection(benchmark::State& state)
         ddc::for_each(
                 ddc::policies::parallel_device,
                 feet_coords.domain(),
-                DDC_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const e) {
+                KOKKOS_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const e) {
                     feet_coords(e) = ddc::Coordinate<X, Y>(
                             ddc::coordinate(ddc::select<DDimX>(e))
                                     - ddc::Coordinate<X>(0.0176429863),
@@ -179,18 +179,15 @@ static void characteristics_advection(benchmark::State& state)
 
 #ifdef KOKKOS_ENABLE_CUDA
 std::string chip = "gpu";
-int cols_per_par_chunk_ref = 65535;
-int par_chunks_per_seq_chunk_ref = 1;
+int cols_per_chunk_ref = 65535;
 unsigned int preconditionner_max_block_size_ref = 1u;
 #elif defined(KOKKOS_ENABLE_OPENMP)
 std::string chip = "cpu";
-int cols_per_par_chunk_ref = 256;
-int par_chunks_per_seq_chunk_ref = Kokkos::OpenMP().concurrency();
+int cols_per_chunk_ref = 8192;
 unsigned int preconditionner_max_block_size_ref = 32u;
 #elif defined(KOKKOS_ENABLE_SERIAL)
 std::string chip = "cpu";
-int cols_per_par_chunk_ref = 256;
-int par_chunks_per_seq_chunk_ref = 1;
+int cols_per_chunk_ref = 8192;
 unsigned int preconditionner_max_block_size_ref = 32u;
 #endif
 
@@ -198,27 +195,21 @@ BENCHMARK(characteristics_advection)
         ->RangeMultiplier(2)
         ->Ranges(
                 {{64, 1024},
-                 {100, 500000},
-                 {cols_per_par_chunk_ref, cols_per_par_chunk_ref},
-                 {par_chunks_per_seq_chunk_ref, par_chunks_per_seq_chunk_ref},
+                 {100, 200000},
+                 {cols_per_chunk_ref, cols_per_chunk_ref},
                  {preconditionner_max_block_size_ref, preconditionner_max_block_size_ref}})
-        ->MinTime(3)->UseRealTime();
+        ->MinTime(3)
+        ->UseRealTime();
 /*
 BENCHMARK(characteristics_advection)
         ->RangeMultiplier(2)
-        ->Ranges({{64, 1024}, {100000, 100000}, {64,65535}, {par_chunks_per_seq_chunk_ref, par_chunks_per_seq_chunk_ref}, {preconditionner_max_block_size_ref, preconditionner_max_block_size_ref}})
-        ->MinTime(3)->UseRealTime();
-*/
-/*
-BENCHMARK(characteristics_advection)
-        ->RangeMultiplier(2)
-        ->Ranges({{64, 1024}, {100000, 100000}, {cols_per_par_chunk_ref, cols_per_par_chunk_ref}, {1, 10000}, {preconditionner_max_block_size_ref, preconditionner_max_block_size_ref}})
+        ->Ranges({{64, 1024}, {100000, 100000}, {64,65535}, {preconditionner_max_block_size_ref, preconditionner_max_block_size_ref}})
         ->MinTime(3)->UseRealTime();
 */
 /*
 BENCHMARK(characteristics_advection)
         ->RangeMultiplier(2)
-        ->Ranges({{64, 1024}, {100000, 100000}, {cols_per_par_chunk_ref, cols_per_par_chunk_ref}, {par_chunks_per_seq_chunk_ref, par_chunks_per_seq_chunk_ref}, {1, 32}})
+        ->Ranges({{64, 1024}, {100000, 100000}, {cols_per_chunk_ref, cols_per_chunk_ref}, {1, 32}})
         ->MinTime(3)->UseRealTime();
 */
 
@@ -226,10 +217,7 @@ int main(int argc, char** argv)
 {
     ::benchmark::Initialize(&argc, argv);
     ::benchmark::AddCustomContext("chip", chip);
-    ::benchmark::AddCustomContext("cols_per_par_chunk_ref", std::to_string(cols_per_par_chunk_ref));
-    ::benchmark::AddCustomContext(
-            "par_chunks_per_seq_chunk_ref",
-            std::to_string(par_chunks_per_seq_chunk_ref));
+    ::benchmark::AddCustomContext("cols_per_chunk_ref", std::to_string(cols_per_chunk_ref));
     ::benchmark::AddCustomContext(
             "preconditionner_max_block_size_ref",
             std::to_string(preconditionner_max_block_size_ref));
