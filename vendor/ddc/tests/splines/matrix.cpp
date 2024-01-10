@@ -7,6 +7,8 @@
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_DualView.hpp>
+
 #include "ddc/kernels/splines/view.hpp"
 
 #include "test_utils.hpp"
@@ -64,7 +66,7 @@ TEST_P(MatrixSizesFixture, Sparse)
 
 
     std::unique_ptr<ddc::detail::Matrix> matrix
-            = ddc::detail::MatrixMaker::make_new_sparse<Kokkos::DefaultHostExecutionSpace>(N);
+            = ddc::detail::MatrixMaker::make_new_sparse<Kokkos::DefaultExecutionSpace>(N);
 
     std::vector<double> val_ptr(N * N);
     ddc::DSpan2D val(val_ptr.data(), N, N);
@@ -83,11 +85,15 @@ TEST_P(MatrixSizesFixture, Sparse)
     }
     // copy_matrix(val, matrix); // copy_matrix is not available for sparse matrix because of a limitation of Ginkgo API (get_element is not implemented). The workaround is to fill val directly in the loop
 
-    std::vector<double> inv_ptr(N * N);
-    ddc::DSpan2D inv(inv_ptr.data(), N, N);
+    Kokkos::DualView<double*> inv_ptr("inv_ptr", N * N);
+    ddc::DSpan2D inv(inv_ptr.h_view.data(), N, N);
     fill_identity(inv);
+    inv_ptr.modify_host();
+    inv_ptr.sync_device();
     matrix->factorize();
-    matrix->solve_multiple_inplace(inv);
+    matrix->solve_multiple_inplace(ddc::DSpan2D(inv_ptr.d_view.data(), N, N));
+    inv_ptr.modify_device();
+    inv_ptr.sync_host();
     check_inverse(val, inv);
 }
 

@@ -23,23 +23,35 @@ template <typename ExecSpace>
 inline std::shared_ptr<gko::Executor> create_gko_exec()
 {
 #ifdef KOKKOS_ENABLE_SERIAL
-    if (std::is_same_v<ExecSpace, Kokkos::Serial>) {
+    if constexpr (std::is_same_v<ExecSpace, Kokkos::Serial>) {
         return gko::ReferenceExecutor::create();
     }
 #endif
 #ifdef KOKKOS_ENABLE_OPENMP
-    if (std::is_same_v<ExecSpace, Kokkos::OpenMP>) {
+    if constexpr (std::is_same_v<ExecSpace, Kokkos::OpenMP>) {
         return gko::OmpExecutor::create();
     }
 #endif
 #ifdef KOKKOS_ENABLE_CUDA
-    if (std::is_same_v<ExecSpace, Kokkos::Cuda>) {
-        return gko::CudaExecutor::create(0, create_default_host_executor());
+    if constexpr (std::is_same_v<ExecSpace, Kokkos::Cuda>) {
+        ExecSpace exec_space;
+        return gko::CudaExecutor::
+                create(exec_space.cuda_device(),
+                       create_default_host_executor(),
+                       false,
+                       gko::default_cuda_alloc_mode,
+                       exec_space.cuda_stream());
     }
 #endif
 #ifdef KOKKOS_ENABLE_HIP
-    if (std::is_same_v<ExecSpace, Kokkos::HIP>) {
-        return gko::HipExecutor::create(0, create_default_host_executor());
+    if constexpr (std::is_same_v<ExecSpace, Kokkos::HIP>) {
+        ExecSpace exec_space;
+        return gko::HipExecutor::
+                create(exec_space.hip_device(),
+                       create_default_host_executor(),
+                       false,
+                       gko::default_hip_alloc_mode,
+                       exec_space.hip_stream());
     }
 #endif
 }

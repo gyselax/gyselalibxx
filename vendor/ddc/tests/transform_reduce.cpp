@@ -143,14 +143,14 @@ static void TestTransformReduceParallelDeviceZeroDimension()
     ddc::for_each(
             ddc::policies::parallel_device,
             dom,
-            DDC_LAMBDA(DElem0D const i) { chunk(i) = Kokkos::atomic_fetch_add(&count(), 1); });
+            KOKKOS_LAMBDA(DElem0D const i) { chunk(i) = Kokkos::atomic_fetch_add(&count(), 1); });
     EXPECT_EQ(
             ddc::transform_reduce(
                     ddc::policies::parallel_device,
                     dom,
                     0,
                     ddc::reducer::sum<int>(),
-                    DDC_LAMBDA(DElem0D const i) { return chunk(i); }),
+                    KOKKOS_LAMBDA(DElem0D const i) { return chunk(i); }),
             dom.size() * (dom.size() - 1) / 2);
 }
 
@@ -169,14 +169,14 @@ static void TestTransformReduceParallelDeviceOneDimension()
     ddc::for_each(
             ddc::policies::parallel_device,
             dom,
-            DDC_LAMBDA(DElemX const ix) { chunk(ix) = Kokkos::atomic_fetch_add(&count(), 1); });
+            KOKKOS_LAMBDA(DElemX const ix) { chunk(ix) = Kokkos::atomic_fetch_add(&count(), 1); });
     EXPECT_EQ(
             ddc::transform_reduce(
                     ddc::policies::parallel_device,
                     dom,
                     0,
                     ddc::reducer::sum<int>(),
-                    DDC_LAMBDA(DElemX const ix) { return chunk(ix); }),
+                    KOKKOS_LAMBDA(DElemX const ix) { return chunk(ix); }),
             dom.size() * (dom.size() - 1) / 2);
 }
 
@@ -195,14 +195,16 @@ static void TestTransformReduceParallelDeviceTwoDimensions()
     ddc::for_each(
             ddc::policies::parallel_device,
             dom,
-            DDC_LAMBDA(DElemXY const ixy) { chunk(ixy) = Kokkos::atomic_fetch_add(&count(), 1); });
+            KOKKOS_LAMBDA(DElemXY const ixy) {
+                chunk(ixy) = Kokkos::atomic_fetch_add(&count(), 1);
+            });
     EXPECT_EQ(
             ddc::transform_reduce(
                     ddc::policies::parallel_device,
                     dom,
                     0,
                     ddc::reducer::sum<int>(),
-                    DDC_LAMBDA(DElemXY const ixy) { return chunk(ixy); }),
+                    KOKKOS_LAMBDA(DElemXY const ixy) { return chunk(ixy); }),
             dom.size() * (dom.size() - 1) / 2);
 }
 
