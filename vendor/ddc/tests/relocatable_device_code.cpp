@@ -13,11 +13,11 @@ std::pair<ddc::Coordinate<rdc::DimX>, ddc::Coordinate<rdc::DimX>> read_from_devi
     ddc::for_each(
             ddc::policies::parallel_device,
             dom_x.take_first(rdc::DVectX(1)),
-            DDC_LAMBDA(rdc::DElemX const ix) { array(ix) = ddc::origin<rdc::DDimX>(); });
+            KOKKOS_LAMBDA(rdc::DElemX const ix) { array(ix) = ddc::origin<rdc::DDimX>(); });
     ddc::for_each(
             ddc::policies::parallel_device,
             dom_x.take_last(rdc::DVectX(1)),
-            DDC_LAMBDA(rdc::DElemX const ix) { array(ix) = ddc::step<rdc::DDimX>(); });
+            KOKKOS_LAMBDA(rdc::DElemX const ix) { array(ix) = ddc::step<rdc::DDimX>(); });
     ddc::Chunk allocation_h(dom_x, ddc::HostAllocator<double>());
     ddc::deepcopy(allocation_h, allocation_d);
     return std::pair<

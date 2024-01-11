@@ -189,7 +189,7 @@ public:
         ddc::for_each(
                 ddc::policies::policy(exec_space()),
                 batch_domain(),
-                DDC_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
+                KOKKOS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     integrals(j) = 0;
                     for (typename bsplines_domain_type::discrete_element_type const i :
                          values.domain()) {

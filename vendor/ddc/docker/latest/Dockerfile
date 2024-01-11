@@ -24,7 +24,7 @@ RUN chmod +x /bin/bash_run \
     wget \
  && if [ "xhip" = "x${BACKEND}" ] \
   ; then echo 'deb [arch=amd64] https://repo.radeon.com/amdgpu/latest/ubuntu jammy main' > /etc/apt/sources.list.d/amdgpu.list \
-      && echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/latest jammy main' > /etc/apt/sources.list.d/rocm.list \
+      && echo 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/5.7.3 jammy main' > /etc/apt/sources.list.d/rocm.list \
       && wget -q -O /etc/apt/trusted.gpg.d/rocm.asc https://repo.radeon.com/rocm/rocm.gpg.key \
       && echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' > /etc/apt/preferences.d/rocm-pin-600 \
  ;  fi \
