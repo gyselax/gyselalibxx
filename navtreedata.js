@@ -67,9 +67,9 @@ var NAVTREEINDEX =
 "classCurvilinear2DToCartesian.html#a5f611cc3888f47ec1c78450a7c202a25",
 "classManufacturedPoissonTest.html#a9aac013116d3c04b11cdef64cd870315",
 "classPreallocatableSplineInterpolatorBatched.html#a78cc9eeba93f21bbedbedabe073e8032",
-"classVectorFieldSpan.html#a079197433ab9d4fca858fbb82a46fb93",
-"femperiodicpoissonsolver_8hpp_source.html",
-"utils__tools_8hpp.html"
+"classVectorFieldSpan.html#a159b7fcc46c877cd175b88be6b47d2d3",
+"fluid__moments_8hpp_source.html",
+"trapezoid__quadrature_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

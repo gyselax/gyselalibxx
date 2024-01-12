@@ -858,7 +858,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 <p>\( x(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{x, k} B_k{r,\theta} \),</p>
 <p>\( y(r,\theta) = \sum_{k=0}^{N_r\times N_{\theta}-1} c_{y, k} B_k{r,\theta} \),</p>
 <p>where \( N_r\times N_{\theta} \) is the number of B-splines.</p>
-<p>The control points can be obtained by interpolating the mapping on interpolation points (see <a class="el" href="classGrevilleInterpolationPoints.html" title="A class which provides helper functions to initialise the Greville points from a B-Spline definition.">GrevilleInterpolationPoints</a> or <a class="el" href="classKnotsAsInterpolationPoints.html">KnotsAsInterpolationPoints</a>). We can also note that the first control points \( \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} \) are equal to the pole \( (c_{x,k}, c_{y,k}) = (x_0,y_0) \), \( \forall k = 0, ..., N_{\theta}-1 \) where \( x(0,\theta), y(0,\theta) = (x_0,y_0) \) \( \forall \theta \).</p>
+<p>The control points can be obtained by interpolating the mapping on interpolation points (see <a class="el" href="classGrevilleInterpolationPoints.html" title="A class which provides helper functions to initialise the Greville points from a B-Spline definition.">GrevilleInterpolationPoints</a> or <a class="el" href="classKnotsAsInterpolationPoints.html" title="Helper class for the initialisation of the mesh of interpolation points.">KnotsAsInterpolationPoints</a>). We can also note that the first control points \( \{(c_{x,k}, c_{y,k})\}_{k=0}^{N_{\theta}} \) are equal to the pole \( (c_{x,k}, c_{y,k}) = (x_0,y_0) \), \( \forall k = 0, ..., N_{\theta}-1 \) where \( x(0,\theta), y(0,\theta) = (x_0,y_0) \) \( \forall \theta \).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">el</td><td>The number of the control point.</td></tr>
@@ -868,7 +868,7 @@ template&lt;class DimX , class DimY , class SplineBuilder &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>The el-th control point.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classGrevilleInterpolationPoints.html" title="A class which provides helper functions to initialise the Greville points from a B-Spline definition.">GrevilleInterpolationPoints</a> </dd>
 <dd>
-<a class="el" href="classKnotsAsInterpolationPoints.html">KnotsAsInterpolationPoints</a> </dd></dl>
+<a class="el" href="classKnotsAsInterpolationPoints.html" title="Helper class for the initialisation of the mesh of interpolation points.">KnotsAsInterpolationPoints</a> </dd></dl>
 
 </div>
 </div>

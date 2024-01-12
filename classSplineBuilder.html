@@ -153,6 +153,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2d211caa5dd227dd6d05947484d1b6e9"><td class="memItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; BSplines &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9">spline_domain</a> () const noexcept</td></tr>
 <tr class="memdesc:a2d211caa5dd227dd6d05947484d1b6e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the domain on which the approximation is defined.  <a href="classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9">More...</a><br /></td></tr>
 <tr class="separator:a2d211caa5dd227dd6d05947484d1b6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab66639ab2f9529f4430ce60320eb9e17"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classMatrix.html">Matrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#ab66639ab2f9529f4430ce60320eb9e17">get_interpolation_matrix</a> () const noexcept</td></tr>
+<tr class="memdesc:ab66639ab2f9529f4430ce60320eb9e17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the interpolation matrix.  <a href="classSplineBuilder.html#ab66639ab2f9529f4430ce60320eb9e17">More...</a><br /></td></tr>
+<tr class="separator:ab66639ab2f9529f4430ce60320eb9e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adce1a4d93d232bc29f6c8482d7ecdd06"><td class="memTemplParams" colspan="2">template&lt;class IDim &gt; </td></tr>
 <tr class="memitem:adce1a4d93d232bc29f6c8482d7ecdd06"><td class="memTemplItemLeft" align="right" valign="top">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06">quadrature_coefficients</a> (ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain) const noexcept</td></tr>
 <tr class="memdesc:adce1a4d93d232bc29f6c8482d7ecdd06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients.  <a href="classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06">More...</a><br /></td></tr>
@@ -446,6 +449,37 @@ template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, B
 <p>Get the domain on which the approximation is defined. </p>
 <p>Get the domain of the basis-splines for which the coefficients of the spline approximation must be calculated.</p>
 <dl class="section return"><dt>Returns</dt><dd>The domain for the splines. </dd></dl>
+
+</div>
+</div>
+<a id="ab66639ab2f9529f4430ce60320eb9e17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab66639ab2f9529f4430ce60320eb9e17">&#9670;&nbsp;</a></span>get_interpolation_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BSplines , class interpolation_mesh_type , BoundCond BcXmin, BoundCond BcXmax&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classMatrix.html">Matrix</a>&amp; <a class="el" href="classSplineBuilder.html">SplineBuilder</a>&lt; BSplines, interpolation_mesh_type, BcXmin, BcXmax &gt;::get_interpolation_matrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the interpolation matrix. </p>
+<p>Get the interpolation matrix. This can be useful for debugging (as it allows one to print the matrix) or for more complex quadrature schemes.</p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the interpolation matrix. </dd></dl>
 
 </div>
 </div>

@@ -12,5 +12,6 @@ var classSplineBuilder =
     [ "operator()", "classSplineBuilder.html#a60ece27168e990dd396dd059ce238267", null ],
     [ "interpolation_domain", "classSplineBuilder.html#aea5b09d866bfabd34f93dc7244061e51", null ],
     [ "spline_domain", "classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9", null ],
+    [ "get_interpolation_matrix", "classSplineBuilder.html#ab66639ab2f9529f4430ce60320eb9e17", null ],
     [ "quadrature_coefficients", "classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06", null ]
 ];

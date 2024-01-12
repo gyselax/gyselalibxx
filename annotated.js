@@ -156,7 +156,6 @@ var annotated =
     [ "SplineBoundaryValue2D", "classSplineBoundaryValue2D.html", "classSplineBoundaryValue2D" ],
     [ "SplineBuilder", "classSplineBuilder.html", "classSplineBuilder" ],
     [ "SplineBuilder2D", "classSplineBuilder2D.html", "classSplineBuilder2D" ],
-    [ "SplineChargeDensityCalculator", "classSplineChargeDensityCalculator.html", "classSplineChargeDensityCalculator" ],
     [ "SplineErrorBounds", "classSplineErrorBounds.html", "classSplineErrorBounds" ],
     [ "SplineEvaluator", "classSplineEvaluator.html", "classSplineEvaluator" ],
     [ "SplineEvaluator2D", "classSplineEvaluator2D.html", "classSplineEvaluator2D" ],
