@@ -12,10 +12,12 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "chargedensitycalculator.hpp"
 #include "femperiodicpoissonsolver.hpp"
 #include "geometry.hpp"
+#include "neumann_spline_quadrature.hpp"
+#include "quadrature.hpp"
 #include "species_info.hpp"
-#include "splinechargedensitycalculator.hpp"
 
 TEST(FemPeriodicPoissonSolver, CosineSource)
 {
@@ -75,7 +77,9 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
             std::move(init_perturb_amplitude),
             std::move(init_perturb_mode));
 
-    SplineChargeDensityCalculator rhs(builder_vx, spline_vx_evaluator);
+    DFieldVx const quadrature_coeffs = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
+    Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
+    ChargeDensityCalculator rhs(integrate_v);
     FemPeriodicPoissonSolver poisson(builder_x, spline_x_evaluator, rhs);
 
     DFieldX electrostatic_potential(gridx);

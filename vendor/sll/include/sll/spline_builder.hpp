@@ -203,6 +203,19 @@ public:
     }
 
     /**
+     * @brief Get the interpolation matrix.
+     *
+     * Get the interpolation matrix. This can be useful for debugging (as it allows
+     * one to print the matrix) or for more complex quadrature schemes.
+     *
+     * @return A reference to the interpolation matrix.
+     */
+    const Matrix& get_interpolation_matrix() const noexcept
+    {
+        return *matrix;
+    }
+
+    /**
      * @brief Get the spline quadrature coefficients.
      *
      * To integrate a function with a spline quadrature, we use:
@@ -237,6 +250,7 @@ public:
     ddc::Chunk<double, ddc::DiscreteDomain<IDim>> quadrature_coefficients(
             ddc::DiscreteDomain<IDim> const& domain) const noexcept
     {
+        static_assert(s_nbe_xmin == 0 && s_nbe_xmax == 0);
         ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
 
         // Vector of integrals of B-splines
