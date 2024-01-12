@@ -35,7 +35,7 @@ using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
  * @param[in] builder
  *      The spline builder used for the quadrature coefficients.
  *
- * @return The quadrature coefficients for the trapezoid method defined on the provided domain.
+ * @return The quadrature coefficients for the method defined on the provided domain.
  */
 template <class IDim, class SplineBuilder>
 ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(

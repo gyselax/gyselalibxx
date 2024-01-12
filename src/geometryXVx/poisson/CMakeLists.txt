@@ -3,7 +3,6 @@
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("poisson_${GEOMETRY_VARIANT}" STATIC
-    splinechargedensitycalculator.cpp
     chargedensitycalculator.cpp
     electricfield.cpp
     nullpoissonsolver.cpp

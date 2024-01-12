@@ -38,19 +38,17 @@
 #include "krook_source_adaptive.hpp"
 #include "krook_source_constant.hpp"
 #include "maxwellianequilibrium.hpp"
+#include "neumann_spline_quadrature.hpp"
 #include "paraconfpp.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
 #include "quadrature.hpp"
 #include "restartinitialization.hpp"
 #include "sheath.yaml.hpp"
-#include "simpson_quadrature.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
 #include "spline_interpolator.hpp"
 #include "spline_interpolator_batched.hpp"
-#include "spline_quadrature.hpp"
-#include "splinechargedensitycalculator.hpp"
 #include "splitrighthandsidesolver.hpp"
 #include "splitvlasovsolver.hpp"
 
@@ -316,15 +314,13 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
     SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);
 
-    DFieldVx const quadrature_coeffs
-            = simpson_quadrature_coefficients_1d(allfdistribu.domain<IDimVx>());
+    DFieldVx const quadrature_coeffs = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
     Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
+    ChargeDensityCalculator rhs(integrate_v);
 #ifdef PERIODIC_RDIMX
     ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXVx));
-    ChargeDensityCalculator rhs(integrate_v);
     FftPoissonSolver const poisson(builder_x, spline_x_evaluator, rhs);
 #else
-    SplineChargeDensityCalculator rhs(builder_vx, spline_vx_evaluator);
     FemNonPeriodicPoissonSolver const poisson(builder_x, spline_x_evaluator, rhs);
 #endif
 

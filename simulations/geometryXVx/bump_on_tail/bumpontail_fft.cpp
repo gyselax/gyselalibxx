@@ -20,17 +20,19 @@
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "bumpontailequilibrium.hpp"
+#include "chargedensitycalculator.hpp"
 #include "fftpoissonsolver.hpp"
 #include "geometry.hpp"
+#include "neumann_spline_quadrature.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
+#include "quadrature.hpp"
 #include "restartinitialization.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
 #include "spline_interpolator.hpp"
-#include "splinechargedensitycalculator.hpp"
 #include "splitvlasovsolver.hpp"
 
 using std::cerr;
@@ -220,7 +222,9 @@ int main(int argc, char** argv)
     }
 
     ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXVx));
-    SplineChargeDensityCalculator rhs(builder_vx, spline_vx_evaluator);
+    DFieldVx const quadrature_coeffs = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
+    Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
+    ChargeDensityCalculator rhs(integrate_v);
     FftPoissonSolver const poisson(builder_x, spline_x_evaluator, rhs);
 
     PredCorr const predcorr(vlasov, poisson);

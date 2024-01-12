@@ -18,8 +18,6 @@ is solved.
 
 The charge density is calculated by integrating the distribution function. The simplest way of doing this is using the ChargeDensityCalculator class which takes a quadrature method.
 
-For historical reasons the class SplineChargeDensityCalculator also exists. This class creates an intermediate representation of a spline and integrates that representation. This is equivalent to using ChargeDensityCalculator and providing a spline quadrature. The quadrature method should be preferred as the numerical cost is significantly smaller.
-
 ## Poisson Solver
 
 The Poisson equation can be solved with a variety of different methods. Here we have implemented:
