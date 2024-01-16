@@ -116,13 +116,13 @@ $(document).ready(function(){initNavTree('geometryXVx_2poisson_2ipoissonsolver_8
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIPoissonSolver.html">IPoissonSolver</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classIPoissonSolver.html#a2819621d345ddde4acad30a47c8fd7f9">   27</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classIPoissonSolver.html#a2819621d345ddde4acad30a47c8fd7f9">operator()</a>(</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            DSpanX electrostatic_potential,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            DSpanX electric_field,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DViewSpXVx allfdistribu) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classIPoissonSolver.html#a2e103a767415b050081cd0243ae4e505">   27</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classIPoissonSolver.html#a2e103a767415b050081cd0243ae4e505">operator()</a>(</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            device_t&lt;DSpanX&gt; electrostatic_potential_device,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            device_t&lt;DSpanX&gt; electric_field_device,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            device_t&lt;DViewSpXVx&gt; allfdistribu_device) <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
 <div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">Base class for Poisson solver.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:13</div></div>
-<div class="ttc" id="aclassIPoissonSolver_html_a2819621d345ddde4acad30a47c8fd7f9"><div class="ttname"><a href="classIPoissonSolver.html#a2819621d345ddde4acad30a47c8fd7f9">IPoissonSolver::operator()</a></div><div class="ttdeci">virtual void operator()(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const =0</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
+<div class="ttc" id="aclassIPoissonSolver_html_a2e103a767415b050081cd0243ae4e505"><div class="ttname"><a href="classIPoissonSolver.html#a2e103a767415b050081cd0243ae4e505">IPoissonSolver::operator()</a></div><div class="ttdeci">virtual void operator()(device_t&lt; DSpanX &gt; electrostatic_potential_device, device_t&lt; DSpanX &gt; electric_field_device, device_t&lt; DViewSpXVx &gt; allfdistribu_device) const =0</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

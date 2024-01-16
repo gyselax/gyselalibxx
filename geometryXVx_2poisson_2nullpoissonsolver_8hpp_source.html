@@ -110,20 +110,20 @@ $(document).ready(function(){initNavTree('geometryXVx_2poisson_2nullpoissonsolve
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ipoissonsolver.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classNullPoissonSolver.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a> : <span class="keyword">public</span> <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    ~<a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classNullPoissonSolver.html#a8ead589aede36fcfb7ba42858993dc63">   16</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNullPoissonSolver.html#a8ead589aede36fcfb7ba42858993dc63">operator()</a>(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu)</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classNullPoissonSolver.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a> : <span class="keyword">public</span> <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    ~<a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classNullPoissonSolver.html#a326a5fd68b100c7ee26ff04f9650cde5">   28</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNullPoissonSolver.html#a326a5fd68b100c7ee26ff04f9650cde5">operator()</a>(</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            device_t&lt;DSpanX&gt; <span class="keyword">const</span> electrostatic_potential_device,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            device_t&lt;DSpanX&gt; <span class="keyword">const</span> electric_field_device,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            device_t&lt;DViewSpXVx&gt; <span class="keyword">const</span> allfdistribu_device) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
 <div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">Base class for Poisson solver.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:13</div></div>
-<div class="ttc" id="aclassNullPoissonSolver_html"><div class="ttname"><a href="classNullPoissonSolver.html">NullPoissonSolver</a></div><div class="ttdef"><b>Definition:</b> nullpoissonsolver.hpp:10</div></div>
-<div class="ttc" id="aclassNullPoissonSolver_html_a8ead589aede36fcfb7ba42858993dc63"><div class="ttname"><a href="classNullPoissonSolver.html#a8ead589aede36fcfb7ba42858993dc63">NullPoissonSolver::operator()</a></div><div class="ttdeci">void operator()(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const override</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
+<div class="ttc" id="aclassNullPoissonSolver_html"><div class="ttname"><a href="classNullPoissonSolver.html">NullPoissonSolver</a></div><div class="ttdoc">Null operator.</div><div class="ttdef"><b>Definition:</b> nullpoissonsolver.hpp:16</div></div>
+<div class="ttc" id="aclassNullPoissonSolver_html_a326a5fd68b100c7ee26ff04f9650cde5"><div class="ttname"><a href="classNullPoissonSolver.html#a326a5fd68b100c7ee26ff04f9650cde5">NullPoissonSolver::operator()</a></div><div class="ttdeci">void operator()(device_t&lt; DSpanX &gt; const electrostatic_potential_device, device_t&lt; DSpanX &gt; const electric_field_device, device_t&lt; DViewSpXVx &gt; const allfdistribu_device) const override</div><div class="ttdoc">The operator which does not solves the equation.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
