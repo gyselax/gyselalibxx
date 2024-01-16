@@ -178,11 +178,14 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
 // with Lagrangian multipliers
 //----------------------------------------------------------------------------
 void FemNonPeriodicPoissonSolver::operator()(
-        DSpanX const electrostatic_potential,
-        DSpanX const electric_field,
-        DViewSpXVx const allfdistribu) const
+        device_t<DSpanX> electrostatic_potential_device,
+        device_t<DSpanX> electric_field_device,
+        device_t<DViewSpXVx> allfdistribu_device) const
 {
     Kokkos::Profiling::pushRegion("PoissonSolver");
+    auto electrostatic_potential = ddc::create_mirror_and_copy(electrostatic_potential_device);
+    auto electric_field = ddc::create_mirror_and_copy(electric_field_device);
+    auto allfdistribu = ddc::create_mirror_and_copy(allfdistribu_device);
     assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
     IDomainX const dom_x = electrostatic_potential.domain();
 
@@ -202,5 +205,7 @@ void FemNonPeriodicPoissonSolver::operator()(
         electrostatic_potential(ix) = m_spline_x_nu_evaluator(ddc::coordinate(ix), phi_spline_coef);
         electric_field(ix) = -m_spline_x_nu_evaluator.deriv(ddc::coordinate(ix), phi_spline_coef);
     });
+    ddc::deepcopy(electrostatic_potential_device, electrostatic_potential);
+    ddc::deepcopy(electric_field_device, electric_field);
     Kokkos::Profiling::popRegion();
 }

@@ -36,16 +36,13 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
-
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
-
     ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
     ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
     ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
     ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
 
     SplineXBuilder const builder_x(interpolation_domain_x);
-
     SplineVxBuilder const builder_vx(interpolation_domain_vx);
 
     IDomainX const gridx = builder_x.interpolation_domain();
@@ -95,11 +92,18 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
             }
         }
     }
+    device_t<DFieldX> electrostatic_potential_device(gridx);
+    device_t<DFieldX> electric_field_device(gridx);
+    device_t<DFieldSpXVx> allfdistribu_device(mesh);
 
-    poisson(electrostatic_potential, electric_field, allfdistribu);
+    ddc::deepcopy(allfdistribu_device, allfdistribu);
+    poisson(electrostatic_potential_device, electric_field_device, allfdistribu_device);
+    ddc::deepcopy(electric_field, electric_field_device);
+    ddc::deepcopy(electrostatic_potential, electrostatic_potential_device);
 
     double error_pot = 0.0;
     double error_field = 0.0;
+
 
     for (IndexX const ix : gridx) {
         double const exact_pot = cos(ddc::coordinate(ix));
