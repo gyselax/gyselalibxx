@@ -29,48 +29,63 @@ FftPoissonSolver::FftPoissonSolver(
 // 1- Inner solvers shall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
 void FftPoissonSolver::operator()(
-        DSpanX const electrostatic_potential,
-        DSpanX const electric_field,
-        DViewSpXVx const allfdistribu) const
+        device_t<DSpanX> const electrostatic_potential,
+        device_t<DSpanX> const electric_field,
+        device_t<DViewSpXVx> const allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("PoissonSolver");
     assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
     IDomainX const x_dom = electrostatic_potential.domain();
-
     // Compute the RHS of the Poisson equation.
-    ddc::Chunk<double, IDomainX> rho(x_dom);
-    DFieldVx contiguous_slice_vx(allfdistribu.domain<IDimVx>());
-    m_compute_rho(rho, allfdistribu);
+    DFieldX rho_host(x_dom);
+    auto allfdistribu_host = ddc::create_mirror_and_copy(allfdistribu);
+
+    m_compute_rho(rho_host, allfdistribu_host);
+    device_t<DFieldX> rho(x_dom);
+    ddc::deepcopy(rho, rho_host);
 
     // Build a mesh in the fourier space, for N points
     IDomainFx const k_mesh = ddc::FourierMesh(x_dom, false);
-
-    ddc::Chunk<Kokkos::complex<double>, IDomainFx> intermediate_chunk
-            = ddc::Chunk(k_mesh, ddc::HostAllocator<Kokkos::complex<double>>());
-
+    device_t<ddc::Chunk<Kokkos::complex<double>, IDomainFx>> intermediate_chunk_alloc(k_mesh);
+    ddc::ChunkSpan intermediate_chunk = intermediate_chunk_alloc.span_view();
     // Compute FFT(rho)
     ddc::FFT_Normalization norm = ddc::FFT_Normalization::BACKWARD;
     ddc::
-            fft(Kokkos::DefaultHostExecutionSpace(),
-                intermediate_chunk.span_view(),
+            fft(Kokkos::DefaultExecutionSpace(),
+                intermediate_chunk,
                 rho.span_view(),
                 ddc::kwArgs_fft {norm});
 
     // Solve Poisson's equation -d2Phi/dx2 = rho
-    //   in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))
-    intermediate_chunk(k_mesh.front()) = 0.;
-    ddc::for_each(k_mesh.remove_first(IVectFx(1)), [&](IndexFx const ikx) {
-        intermediate_chunk(ikx) = intermediate_chunk(ikx) / (coordinate(ikx) * coordinate(ikx));
-    });
+    // in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))
 
+    // First, 0 mode of Phi is set to 0 to avoid divergency. Note: to allow writing in the GPU memory, starting a device kernel is necessary which is performed by iterating on a 0D domain (single element).
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            ddc::DiscreteDomain<>(),
+            KOKKOS_LAMBDA(ddc::DiscreteElement<>) {
+                intermediate_chunk(k_mesh.front()) = Kokkos::complex<double>(0.);
+            });
+
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            k_mesh.remove_first(IVectFx(1)),
+            KOKKOS_LAMBDA(IndexFx const ikx) {
+                intermediate_chunk(ikx)
+                        = intermediate_chunk(ikx) / (coordinate(ikx) * coordinate(ikx));
+            });
     // Perform the inverse 1D FFT of the solution to deduce the electrostatic potential
     ddc::
-            ifft(Kokkos::DefaultHostExecutionSpace(),
+            ifft(Kokkos::DefaultExecutionSpace(),
                  electrostatic_potential.span_view(),
-                 intermediate_chunk.span_view(),
+                 intermediate_chunk,
                  ddc::kwArgs_fft {norm});
 
     // Compute efield = -dPhi/dx where Phi is the electrostatic potential
-    m_electric_field(electric_field, electrostatic_potential);
+    DFieldX electrostatic_potential_host(x_dom);
+    DFieldX electric_field_host(x_dom);
+    ddc::deepcopy(electrostatic_potential_host, electrostatic_potential);
+    m_electric_field(electric_field_host, electrostatic_potential_host);
+    ddc::deepcopy(electric_field, electric_field_host);
     Kokkos::Profiling::popRegion();
 }

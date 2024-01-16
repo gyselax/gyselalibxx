@@ -56,9 +56,6 @@ target_link_libraries(unit_tests_lagrange
 gtest_discover_tests(unit_tests_lagrange 
     TEST_SUFFIX "_${lagrange}")
 
-
-
-
 target_sources(unit_tests_xperiod_vx
     PRIVATE
         femperiodicpoissonsolver.cpp

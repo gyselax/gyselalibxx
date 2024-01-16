@@ -27,14 +27,15 @@ device_t<DSpanSpXVx> PredCorr::operator()(
 
     // electrostatic potential and electric field (depending only on x)
     DFieldX electrostatic_potential(allfdistribu.domain<IDimX>());
-    DFieldX electric_field(allfdistribu.domain<IDimX>());
+    device_t<DFieldX> electrostatic_potential_device(allfdistribu.domain<IDimX>());
+
     device_t<DFieldX> electric_field_device(allfdistribu.domain<IDimX>());
 
     // a 2D chunk of the same size as fdistribu
     DFieldSpXVx allfdistribu_half_t(allfdistribu.domain());
     device_t<DFieldSpXVx> allfdistribu_half_t_device(allfdistribu_device.domain());
 
-    m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
+    m_poisson_solver(electrostatic_potential_device, electric_field_device, allfdistribu_device);
 
     int iter = 0;
     for (; iter < steps; ++iter) {
@@ -42,9 +43,13 @@ device_t<DSpanSpXVx> PredCorr::operator()(
 
         // computation of the electrostatic potential at time tn and
         // the associated electric field
+        m_poisson_solver(
+                electrostatic_potential_device,
+                electric_field_device,
+                allfdistribu_device);
+        // copies necessary to PDI
         ddc::deepcopy(allfdistribu, allfdistribu_device);
-        m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
-
+        ddc::deepcopy(electrostatic_potential, electrostatic_potential_device);
         ddc::PdiEvent("iteration")
                 .with("iter", iter)
                 .and_with("time_saved", iter_time)
@@ -53,23 +58,25 @@ device_t<DSpanSpXVx> PredCorr::operator()(
 
         // copy fdistribu
         ddc::deepcopy(allfdistribu_half_t_device, allfdistribu_device);
-        ddc::deepcopy(electric_field_device, electric_field);
 
         // predictor
         m_boltzmann_solver(allfdistribu_half_t_device, electric_field_device, dt / 2);
 
         // computation of the electrostatic potential at time tn+1/2
         // and the associated electric field
-        ddc::deepcopy(allfdistribu_half_t, allfdistribu_half_t_device);
-        m_poisson_solver(electrostatic_potential, electric_field, allfdistribu_half_t);
+        m_poisson_solver(
+                electrostatic_potential_device,
+                electric_field_device,
+                allfdistribu_half_t_device);
         // correction on a dt
-        ddc::deepcopy(electric_field_device, electric_field);
         m_boltzmann_solver(allfdistribu_device, electric_field_device, dt);
     }
 
     double const final_time = time_start + iter * dt;
+    m_poisson_solver(electrostatic_potential_device, electric_field_device, allfdistribu_device);
+    //copies necessary to PDI
     ddc::deepcopy(allfdistribu, allfdistribu_device);
-    m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
+    ddc::deepcopy(electrostatic_potential, electrostatic_potential_device);
     ddc::PdiEvent("last_iteration")
             .with("iter", iter)
             .and_with("time_saved", final_time)
