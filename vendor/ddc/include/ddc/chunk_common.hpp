@@ -59,7 +59,7 @@ inline constexpr bool is_writable_chunk_v
  * @return the domain of view in the queried dimensions
  */
 template <class... QueryDDims, class ChunkType>
-auto get_domain(ChunkType const& chunk) noexcept
+KOKKOS_FUNCTION auto get_domain(ChunkType const& chunk) noexcept
 {
     static_assert(is_chunk_v<ChunkType>, "Not a chunk span type");
     return chunk.template domain<QueryDDims...>();

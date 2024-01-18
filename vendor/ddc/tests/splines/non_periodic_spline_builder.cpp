@@ -17,10 +17,22 @@
 
 struct DimX
 {
-    static constexpr bool PERIODIC = true;
+    static constexpr bool PERIODIC = false;
 };
 
 static constexpr std::size_t s_degree_x = DEGREE_X;
+
+#if defined(BCL_GREVILLE)
+static constexpr ddc::BoundCond s_bcl = ddc::BoundCond::GREVILLE;
+#elif defined(BCL_HERMITE)
+static constexpr ddc::BoundCond s_bcl = ddc::BoundCond::HERMITE;
+#endif
+
+#if defined(BCR_GREVILLE)
+static constexpr ddc::BoundCond s_bcr = ddc::BoundCond::GREVILLE;
+#elif defined(BCR_HERMITE)
+static constexpr ddc::BoundCond s_bcr = ddc::BoundCond::HERMITE;
+#endif
 
 #if defined(BSPLINES_TYPE_UNIFORM)
 using BSplinesX = ddc::UniformBSplines<DimX, s_degree_x>;
@@ -28,25 +40,30 @@ using BSplinesX = ddc::UniformBSplines<DimX, s_degree_x>;
 using BSplinesX = ddc::NonUniformBSplines<DimX, s_degree_x>;
 #endif
 
-using GrevillePoints = ddc::
-        GrevilleInterpolationPoints<BSplinesX, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
+using GrevillePoints = ddc::GrevilleInterpolationPoints<BSplinesX, s_bcl, s_bcr>;
 
 using IDimX = GrevillePoints::interpolation_mesh_type;
 
+#if defined(EVALUATOR_COSINE)
 using evaluator_type = CosineEvaluator::Evaluator<IDimX>;
+#elif defined(EVALUATOR_POLYNOMIAL)
+using evaluator_type = PolynomialEvaluator::Evaluator<IDimX, s_degree_x>;
+#endif
 
 using IndexX = ddc::DiscreteElement<IDimX>;
 using DVectX = ddc::DiscreteVector<IDimX>;
 using BsplIndexX = ddc::DiscreteElement<BSplinesX>;
+using SplineX = ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX>>;
+using FieldX = ddc::Chunk<double, ddc::DiscreteDomain<IDimX>>;
 using CoordX = ddc::Coordinate<DimX>;
 
 // Checks that when evaluating the spline at interpolation points one
 // recovers values that were used to build the spline
-TEST(PeriodicSplineBuilderTest, Identity)
+TEST(NonPeriodicSplineBuilderTest, Identity)
 {
     CoordX constexpr x0(0.);
     CoordX constexpr xN(1.);
-    std::size_t constexpr ncells = 10; // TODO : restore 10
+    std::size_t constexpr ncells = 100;
 
     // 1. Create BSplines
     {
@@ -79,23 +96,44 @@ TEST(PeriodicSplineBuilderTest, Identity)
             Kokkos::HostSpace,
             BSplinesX,
             IDimX,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC>
+            s_bcl,
+            s_bcr>
             spline_builder(interpolation_domain);
 
     // 5. Allocate and fill a chunk over the interpolation domain
     ddc::Chunk yvals(interpolation_domain, ddc::KokkosAllocator<double, Kokkos::HostSpace>());
     evaluator_type evaluator(interpolation_domain);
-    evaluator(yvals);
+    evaluator(yvals.span_view());
+
+    int constexpr shift = s_degree_x % 2; // shift = 0 for even order, 1 for odd order
+    std::array<double, s_degree_x / 2> Sderiv_lhs_data;
+    ddc::DSpan1D Sderiv_lhs(Sderiv_lhs_data.data(), Sderiv_lhs_data.size());
+    std::optional<ddc::DSpan1D> deriv_l;
+    if (s_bcl == ddc::BoundCond::HERMITE) {
+        for (std::size_t ii = 0; ii < Sderiv_lhs.extent(0); ++ii) {
+            Sderiv_lhs(ii) = evaluator.deriv(x0, ii + shift);
+        }
+        deriv_l = Sderiv_lhs;
+    }
+
+    std::array<double, s_degree_x / 2> Sderiv_rhs_data;
+    ddc::DSpan1D Sderiv_rhs(Sderiv_rhs_data.data(), Sderiv_rhs_data.size());
+    std::optional<ddc::DSpan1D> deriv_r;
+    if (s_bcr == ddc::BoundCond::HERMITE) {
+        for (std::size_t ii = 0; ii < Sderiv_rhs.extent(0); ++ii) {
+            Sderiv_rhs(ii) = evaluator.deriv(xN, ii + shift);
+        }
+        deriv_r = Sderiv_rhs;
+    }
 
     // 6. Finally build the spline by filling `coef`
-    spline_builder(coef.span_view(), yvals.span_cview());
+    spline_builder(coef.span_view(), yvals.span_cview(), deriv_l, deriv_r);
 
     // 7. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
     ddc::SplineEvaluator<Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesX, IDimX>
             spline_evaluator(ddc::g_null_boundary<BSplinesX>, ddc::g_null_boundary<BSplinesX>);
 
-    ddc::Chunk<CoordX, ddc::DiscreteDomain<IDimX>> coords_eval(interpolation_domain);
+    ddc::Chunk<ddc::Coordinate<DimX>, ddc::DiscreteDomain<IDimX>> coords_eval(interpolation_domain);
     for (IndexX const ix : interpolation_domain) {
         coords_eval(ix) = ddc::coordinate(ix);
     }
@@ -110,7 +148,6 @@ TEST(PeriodicSplineBuilderTest, Identity)
             .deriv(spline_eval_deriv.span_view(), coords_eval.span_cview(), coef.span_cview());
 
     // 8. Checking errors
-    std::cout << "---------- TEST ----------\n";
     double max_norm_error = 0.;
     double max_norm_error_diff = 0.;
     for (IndexX const ix : interpolation_domain) {
@@ -127,20 +164,26 @@ TEST(PeriodicSplineBuilderTest, Identity)
     double const max_norm_error_integ = std::fabs(
             spline_evaluator.integrate(coef.span_cview()) - evaluator.deriv(xN, -1)
             + evaluator.deriv(x0, -1));
-
     double const max_norm = evaluator.max_norm();
     double const max_norm_diff = evaluator.max_norm(1);
     double const max_norm_int = evaluator.max_norm(-1);
-
-    SplineErrorBounds<evaluator_type> error_bounds(evaluator);
-    const double h = (xN - x0) / ncells;
-    EXPECT_LE(
-            max_norm_error,
-            std::max(error_bounds.error_bound(h, s_degree_x), 1.0e-14 * max_norm));
-    EXPECT_LE(
-            max_norm_error_diff,
-            std::max(error_bounds.error_bound_on_deriv(h, s_degree_x), 1e-12 * max_norm_diff));
-    EXPECT_LE(
-            max_norm_error_integ,
-            std::max(error_bounds.error_bound_on_int(h, s_degree_x), 1.0e-14 * max_norm_int));
+    if constexpr (std::is_same_v<
+                          evaluator_type,
+                          PolynomialEvaluator::Evaluator<IDimX, s_degree_x>>) {
+        EXPECT_LE(max_norm_error / max_norm, 1.0e-14);
+        EXPECT_LE(max_norm_error_diff / max_norm_diff, 1.0e-12);
+        EXPECT_LE(max_norm_error_integ / max_norm_int, 1.0e-14);
+    } else {
+        SplineErrorBounds<evaluator_type> error_bounds(evaluator);
+        const double h = (xN - x0) / ncells;
+        EXPECT_LE(
+                max_norm_error,
+                std::max(error_bounds.error_bound(h, s_degree_x), 1.0e-14 * max_norm));
+        EXPECT_LE(
+                max_norm_error_diff,
+                std::max(error_bounds.error_bound_on_deriv(h, s_degree_x), 1e-12 * max_norm_diff));
+        EXPECT_LE(
+                max_norm_error_integ,
+                std::max(error_bounds.error_bound_on_int(h, s_degree_x), 1.0e-14 * max_norm_int));
+    }
 }
