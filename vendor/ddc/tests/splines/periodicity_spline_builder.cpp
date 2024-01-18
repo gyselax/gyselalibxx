@@ -68,14 +68,14 @@ static constexpr Coord<X> xN()
 
 // Templated function giving step of the mesh in given dimension.
 template <typename X>
-static constexpr double dx(double ncells)
+static constexpr double dx(std::size_t ncells)
 {
     return (xN<X>() - x0<X>()) / ncells;
 }
 
 // Templated function giving break points of mesh in given dimension for non-uniform case.
 template <typename X>
-static constexpr std::vector<Coord<X>> breaks(double ncells)
+static std::vector<Coord<X>> breaks(std::size_t ncells)
 {
     std::vector<Coord<X>> out(ncells + 1);
     for (int i(0); i < ncells + 1; ++i) {
@@ -153,7 +153,7 @@ static void PeriodicitySplineBuilderTest()
     ddc::ChunkSpan coef = coef_alloc.span_view();
 
     // Finally compute the spline by filling `coef`
-    spline_builder(coef, vals);
+    spline_builder(coef, vals.span_cview());
 
     // Instantiate a SplineEvaluator over interest dimension and batched along other dimensions
     ddc::SplineEvaluatorBatched<
