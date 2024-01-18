@@ -60,19 +60,15 @@ public:
 
 
 private:
-    SplineEvaluator spline_evaluator;
-    const spline_domain_type m_spline_domain; // Necessary ?
+    const spline_domain_type m_spline_domain;
 
 
 public:
-    SplineEvaluatorBatched() = delete;
-
     explicit SplineEvaluatorBatched(
             spline_domain_type const& spline_domain,
-            SplineBoundaryValue<bsplines_type> const& left_bc,
+            SplineBoundaryValue<bsplines_type> const& left_bc, // Unused, to be restored in next MR
             SplineBoundaryValue<bsplines_type> const& right_bc)
-        : spline_evaluator(left_bc, right_bc)
-        , m_spline_domain(spline_domain) // Necessary ?
+        : m_spline_domain(spline_domain)
     {
     }
 
@@ -104,7 +100,7 @@ public:
     }
 
     template <class Layout, class... CoordsDims>
-    double operator()(
+    KOKKOS_FUNCTION double operator()(
             ddc::Coordinate<CoordsDims...> const& coord_eval,
             ddc::ChunkSpan<double const, spline_domain_type, Layout, memory_space> const
                     spline_coef) const
@@ -138,7 +134,7 @@ public:
     }
 
     template <class Layout, class... CoordsDims>
-    double deriv(
+    KOKKOS_FUNCTION double deriv(
             ddc::Coordinate<CoordsDims...> const& coord_eval,
             ddc::ChunkSpan<double const, bsplines_domain_type, Layout, memory_space> const
                     spline_coef) const

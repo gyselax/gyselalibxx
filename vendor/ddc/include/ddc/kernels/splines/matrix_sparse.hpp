@@ -148,7 +148,7 @@ public:
         std::shared_ptr const gko_exec = m_matrix_sparse->get_executor();
         // Create the solver factory
         std::shared_ptr const residual_criterion
-                = gko::stop::ResidualNorm<double>::build().with_reduction_factor(1e-20).on(
+                = gko::stop::ResidualNorm<double>::build().with_reduction_factor(1e-19).on(
                         gko_exec);
 
         std::shared_ptr const iterations_criterion

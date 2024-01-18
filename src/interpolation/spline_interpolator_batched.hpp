@@ -87,7 +87,7 @@ public:
             derivs_max = ddc::CDSpan1D(m_derivs_max_alloc.data(), m_derivs_max_alloc.size());
         }
         // m_builder(m_coefs.span_view(), inout_data, derivs_min, derivs_max);
-        m_builder(m_coefs.span_view(), inout_data);
+        m_builder(m_coefs.span_view(), inout_data.span_cview());
         m_evaluator(inout_data, coordinates, m_coefs.span_cview());
         return inout_data;
     }

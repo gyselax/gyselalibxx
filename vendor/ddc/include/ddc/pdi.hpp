@@ -75,7 +75,13 @@ public:
                 !(access & PDI_IN) || (default_access_v<Arithmetic> & PDI_IN),
                 "Invalid access for constant data");
         using value_type = std::remove_cv_t<std::remove_reference_t<Arithmetic>>;
-        PDI_share(name.c_str(), const_cast<value_type*>(&data), access);
+        value_type* data_ptr = const_cast<value_type*>(&data);
+        // for read-only data, we share a copy instead of the data itself in case we received a ref on a temporary,
+        if constexpr (!(access & PDI_IN)) {
+            data_ptr = std::pmr::polymorphic_allocator<value_type>(&m_metadata).allocate(1);
+            *data_ptr = data;
+        }
+        PDI_share(name.c_str(), data_ptr, access);
         m_names.push_back(name);
         return *this;
     }

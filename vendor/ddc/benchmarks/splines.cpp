@@ -148,7 +148,7 @@ static void characteristics_advection(benchmark::State& state)
                 });
         Kokkos::Profiling::popRegion();
         Kokkos::Profiling::pushRegion("SplineBuilder");
-        spline_builder(coef, density);
+        spline_builder(coef, density.span_cview());
         Kokkos::Profiling::popRegion();
         Kokkos::Profiling::pushRegion("SplineEvaluator");
         spline_evaluator(density, feet_coords.span_cview(), coef.span_cview());

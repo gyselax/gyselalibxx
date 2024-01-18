@@ -32,7 +32,7 @@ struct PolynomialEvaluator
             }
         }
 
-        double operator()(double const x) const noexcept
+        KOKKOS_FUNCTION double operator()(double const x) const noexcept
         {
             return eval(x, 0);
         }
@@ -46,7 +46,7 @@ struct PolynomialEvaluator
             }
         }
 
-        double deriv(double const x, int const derivative) const noexcept
+        KOKKOS_FUNCTION double deriv(double const x, int const derivative) const noexcept
         {
             return eval(x, derivative);
         }
@@ -61,24 +61,25 @@ struct PolynomialEvaluator
             }
         }
 
-        double max_norm(int diff = 0) const
+        KOKKOS_FUNCTION double max_norm(int diff = 0) const
         {
-            return std::abs(deriv(m_xN, diff));
+            return Kokkos::abs(deriv(m_xN, diff));
         }
 
     private:
-        double eval(double const x, int const derivative) const
+        KOKKOS_FUNCTION double eval(double const x, int const derivative) const
         {
             double result(0.0);
             int start = derivative < 0 ? 0 : derivative;
             for (int i(start); i < m_degree + 1; ++i) {
-                double v = double(falling_factorial(i, derivative)) * std::pow(x, i - derivative);
+                double v
+                        = double(falling_factorial(i, derivative)) * Kokkos::pow(x, i - derivative);
                 result += m_coeffs[i] * v;
             }
             return result;
         }
 
-        double falling_factorial(int i, int d) const
+        KOKKOS_FUNCTION double falling_factorial(int i, int d) const
         {
             double c = 1.0;
             if (d >= 0) {

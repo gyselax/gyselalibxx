@@ -271,7 +271,7 @@ int main(int argc, char** argv)
                                       vx * ddc::step<DDimT>());
                 });
         // Interpolate the values at feets on the grid
-        spline_builder(coef, last_density);
+        spline_builder(coef, last_density.span_cview());
         spline_evaluator(
                 next_density,
                 feet_coords.span_cview(),
