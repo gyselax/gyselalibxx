@@ -39,10 +39,13 @@ jobs:
   tmp:
     needs: Setup
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/gyselax/gyselalibxx_env
+      options: --user 1001
     steps:
       - name: Test
-        run: |
-          echo ${{ needs.Setup.outputs.base_sha }}
+        run:
+          pwd
         shell: bash
 
 
