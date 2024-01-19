@@ -8,6 +8,9 @@ jobs:
     outputs:
       base_sha: ${{ steps.get_base.outputs.BASE }}
     steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@v1.2.0
+        with: { tool-cache: true, large-packages: false }
       - name: Checkout gyselalibxx
         uses: actions/checkout@v3
         with:
