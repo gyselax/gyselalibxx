@@ -27,6 +27,11 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env
       options: --user=1001 # Use runner id as indicated here: https://github.com/actions/runner/issues/2033#issuecomment-1598547465
     steps:
+      - name: Create sudo
+        run: |
+          echo "exec \"$1\"" > sudo
+          chmod +x sudo
+        shell: bash
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.2.0
         with: { tool-cache: true, large-packages: false }
