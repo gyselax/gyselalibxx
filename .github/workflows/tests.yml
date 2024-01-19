@@ -58,6 +58,7 @@ jobs:
           image: ghcr.io/gyselax/gyselalibxx_env
           options: --user=1001 # Use runner id as indicated here: https://github.com/actions/runner/issues/2033#issuecomment-1598547465
           run: |
+            cd build
             cmake ${{ inputs.additional_cmake_commands }} \
                 -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
                 -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 \
@@ -67,7 +68,6 @@ jobs:
             make -j VERBOSE=1
             ctest --output-on-failure --timeout 5 --output-junit tests.xml ${{ inputs.ctest_commands }}
           shell: bash
-          working-directory: ./build
       #- name: Publish Test Report
       #  uses: mikepenz/action-junit-report@v4
       #  if: steps.compilation.outcome != 'success'
