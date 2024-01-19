@@ -29,8 +29,9 @@ jobs:
     steps:
       - name: Create sudo
         run: |
-          echo "exec \"$1\"" > sudo
+          echo "\$@" > sudo
           chmod +x sudo
+            echo "$(pwd)" >> $GITHUB_PATH
         shell: bash
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.2.0
