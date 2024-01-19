@@ -23,16 +23,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    container:
-      image: ghcr.io/gyselax/gyselalibxx_env
-      options: --user=1001 # Use runner id as indicated here: https://github.com/actions/runner/issues/2033#issuecomment-1598547465
     steps:
-      - name: Create sudo
-        run: |
-          echo "\$@" > sudo
-          chmod +x sudo
-            echo "$(pwd)" >> $GITHUB_PATH
-        shell: bash
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.2.0
         with: { tool-cache: true, large-packages: false }
@@ -61,27 +52,22 @@ jobs:
             echo "POISSON_2D_TESTING=${{ steps.changes.outputs.poisson_2d }}" >> $GITHUB_ENV
           fi
         shell: bash
-      - name: 'CMake call'
-        run: |
-          cmake ${{ inputs.additional_cmake_commands }} \
-              -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
-              -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 \
-              -DSLL_BUILD_TESTING=${SLL_BUILD_TESTING} \
-              -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING} \
-              ..
-        shell: bash
-        working-directory: ./build
-      - name: 'Compilation'
-        id: compilation
-        run: |
-          make -j VERBOSE=1
-        shell: bash
-        working-directory: ./build
-      - name: 'Run tests'
-        run: |
-          ctest --output-on-failure --timeout 5 --output-junit tests.xml ${{ inputs.ctest_commands }}
-        shell: bash
-        working-directory: ./build
+      - name: Run the build process with Docker # https://aschmelyun.com/blog/using-docker-run-inside-of-github-actions/
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/gyselax/gyselalibxx_env
+          options: --user=1001 # Use runner id as indicated here: https://github.com/actions/runner/issues/2033#issuecomment-1598547465
+          run: |
+            cmake ${{ inputs.additional_cmake_commands }} \
+                -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
+                -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 \
+                -DSLL_BUILD_TESTING=${SLL_BUILD_TESTING} \
+                -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING} \
+                ..
+            make -j VERBOSE=1
+            ctest --output-on-failure --timeout 5 --output-junit tests.xml ${{ inputs.ctest_commands }}
+          shell: bash
+          working-directory: ./build
       #- name: Publish Test Report
       #  uses: mikepenz/action-junit-report@v4
       #  if: steps.compilation.outcome != 'success'
