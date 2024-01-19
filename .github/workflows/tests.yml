@@ -50,6 +50,7 @@ jobs:
             echo "SLL_BUILD_TESTING=${{ steps.changes.outputs.sll }}" >> $GITHUB_ENV
             echo "POISSON_2D_TESTING=${{ steps.changes.outputs.poisson_2d }}" >> $GITHUB_ENV
           fi
+          mkdir build
         shell: bash
       - name: Run the build process with Docker
         run: |
