@@ -62,7 +62,7 @@ jobs:
                 -DSLL_BUILD_TESTING=${SLL_BUILD_TESTING} \
                 -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING} \
                 /src
-            make -j VERBOSE=1
+            make -j 2 VERBOSE=1
             ctest --output-on-failure --timeout 5 --output-junit tests.xml ${{ inputs.ctest_commands }}
           EOF
           docker run -v ${PWD}:/src ghcr.io/gyselax/voicexx_env bash /src/run.sh -e "SLL_BUILD_TESTING" -e "POISSON_2D_TESTING"
