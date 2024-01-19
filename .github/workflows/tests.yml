@@ -69,6 +69,8 @@ jobs:
             ctest --output-on-failure --timeout 5 --output-junit tests.xml ${{ inputs.ctest_commands }}
           EOF
           docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env bash /src/run.sh --user 1001 -e "SLL_BUILD_TESTING" -e "POISSON_2D_TESTING"
+        shell: bash
+        working-directory: build
         continue-on-error: true
 
       #- name: Publish Test Report
