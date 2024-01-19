@@ -42,7 +42,6 @@ jobs:
           base: ${{ inputs.filter_tests_base }}
       - name: 'Setup'
         run: |
-          mkdir build
           if [ -z "${{ inputs.filter_tests_base }}" ]
           then
             echo "SLL_BUILD_TESTING=ON" >> $GITHUB_ENV
@@ -51,21 +50,17 @@ jobs:
             echo "SLL_BUILD_TESTING=${{ steps.changes.outputs.sll }}" >> $GITHUB_ENV
             echo "POISSON_2D_TESTING=${{ steps.changes.outputs.poisson_2d }}" >> $GITHUB_ENV
           fi
-          pwd
-          ls
-          echo ${{ github.workspace }}
         shell: bash
       - name: Run the build process with Docker
         run: |
           cat<<-EOF > run.sh
             set -xe
-            cd /src/build
             cmake ${{ inputs.additional_cmake_commands }} \
                 -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
                 -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 \
                 -DSLL_BUILD_TESTING=${SLL_BUILD_TESTING} \
                 -DPOISSON_2D_BUILD_TESTING=${POISSON_2D_TESTING} \
-                ..
+                /src
             make -j VERBOSE=1
             ctest --output-on-failure --timeout 5 --output-junit tests.xml ${{ inputs.ctest_commands }}
           EOF
