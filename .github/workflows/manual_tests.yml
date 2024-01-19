@@ -36,18 +36,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
-  tmp:
-    needs: Setup
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/gyselax/gyselalibxx_env
-      options: --user 1001
-    steps:
-      - name: Test
-        run:
-          pwd
-        shell: bash
-
 
   tests_Debug:
     needs: Setup
