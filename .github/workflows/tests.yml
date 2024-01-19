@@ -53,14 +53,15 @@ jobs:
           fi
           pwd
           ls
+          echo ${{ github.workspace }}
         shell: bash
       - name: Run the build process with Docker # https://aschmelyun.com/blog/using-docker-run-inside-of-github-actions/
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/gyselax/gyselalibxx_env
-          options: -v ${{ github.workspace }} -e
+          options: -v ${{ github.workspace }}:/work -e
           run: |
-            cd build
+            cd /work/build
             cmake ${{ inputs.additional_cmake_commands }} \
                 -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
                 -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 \
