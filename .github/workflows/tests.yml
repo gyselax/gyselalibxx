@@ -51,13 +51,16 @@ jobs:
             echo "SLL_BUILD_TESTING=${{ steps.changes.outputs.sll }}" >> $GITHUB_ENV
             echo "POISSON_2D_TESTING=${{ steps.changes.outputs.poisson_2d }}" >> $GITHUB_ENV
           fi
+          pwd
+          ls
         shell: bash
       - name: Run the build process with Docker # https://aschmelyun.com/blog/using-docker-run-inside-of-github-actions/
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/gyselax/gyselalibxx_env
-          options: --user=1001 # Use runner id as indicated here: https://github.com/actions/runner/issues/2033#issuecomment-1598547465
           run: |
+            pwd
+            ls
             cd build
             cmake ${{ inputs.additional_cmake_commands }} \
                 -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
