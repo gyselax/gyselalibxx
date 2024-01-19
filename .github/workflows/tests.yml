@@ -59,6 +59,7 @@ jobs:
         run: |
           cat<<-EOF > run.sh
             set -xe
+            cd build
             cmake ${{ inputs.additional_cmake_commands }} \
                 -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
                 -DSLL_SPLINES_TEST_DEGREE_MIN=1 -DSLL_SPLINES_TEST_DEGREE_MAX=7 \
@@ -70,7 +71,6 @@ jobs:
           EOF
           docker run -v ${PWD}:/src:ro ghcr.io/gyselax/voicexx_env bash /src/run.sh --user 1001 -e "SLL_BUILD_TESTING" -e "POISSON_2D_TESTING"
         shell: bash
-        working-directory: build
         continue-on-error: true
 
       #- name: Publish Test Report
