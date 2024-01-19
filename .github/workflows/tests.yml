@@ -58,6 +58,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/gyselax/gyselalibxx_env
+          options: -v ${{ github.workspace }}:/work -e
           run: |
             pwd
             ls
