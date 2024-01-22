@@ -80,7 +80,7 @@ class Store(object):
         data_dir = Path(data_dir).resolve()
 
         if data_structure is None:
-            data_structure = Path('data_structure.yaml')
+            data_structure = Path('data_structure_XVx.yaml')
         if not data_structure.is_absolute():
             if (data_dir / data_structure).is_file():
                 data_structure = data_dir/data_structure
