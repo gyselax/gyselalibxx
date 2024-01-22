@@ -118,30 +118,22 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2fftpoissonsol
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> <span class="keyword">const</span>&amp; m_compute_rho;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="classElectricField.html">ElectricField</a> m_electric_field;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classFftPoissonSolver.html#a2a0f63ce7dc6d5f579f8aa4449c476cf">   38</a></span>&#160;    <a class="code" href="classFftPoissonSolver.html#a2a0f63ce7dc6d5f579f8aa4449c476cf">FftPoissonSolver</a>(</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <a class="code" href="classSplineBuilder2D.html">SplineXYBuilder</a> <span class="keyword">const</span>&amp; spline_xy_builder,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineXYEvaluator</a> <span class="keyword">const</span>&amp; spline_xy_evaluator,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> <span class="keyword">const</span>&amp; compute_rho);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    ~<a class="code" href="classFftPoissonSolver.html">FftPoissonSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classFftPoissonSolver.html#a39d2b32d21f00f96f2c9f1625211eb98">   53</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFftPoissonSolver.html#a39d2b32d21f00f96f2c9f1625211eb98">operator()</a>(</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            DSpanXY electrostatic_potential,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            DSpanXY electric_field_x,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            DSpanXY electric_field_y,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            DViewSpXYVxVy allfdistribu) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="ttc" id="aclassElectricField_html"><div class="ttname"><a href="classElectricField.html">ElectricField</a></div><div class="ttdef"><b>Definition:</b> electricfield.hpp:15</div></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd">   34</a></span>&#160;    <a class="code" href="classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd">FftPoissonSolver</a>(<a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> <span class="keyword">const</span>&amp; compute_rho);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ~<a class="code" href="classFftPoissonSolver.html">FftPoissonSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classFftPoissonSolver.html#a39d2b32d21f00f96f2c9f1625211eb98">   46</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFftPoissonSolver.html#a39d2b32d21f00f96f2c9f1625211eb98">operator()</a>(</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            DSpanXY electrostatic_potential,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            DSpanXY electric_field_x,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            DSpanXY electric_field_y,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            DViewSpXYVxVy allfdistribu) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
 <div class="ttc" id="aclassFftPoissonSolver_html"><div class="ttname"><a href="classFftPoissonSolver.html">FftPoissonSolver</a></div><div class="ttdoc">An operator which solves the Poisson equation using a fast Fourier transform.</div><div class="ttdef"><b>Definition:</b> fftpoissonsolver.hpp:25</div></div>
-<div class="ttc" id="aclassFftPoissonSolver_html_a2a0f63ce7dc6d5f579f8aa4449c476cf"><div class="ttname"><a href="classFftPoissonSolver.html#a2a0f63ce7dc6d5f579f8aa4449c476cf">FftPoissonSolver::FftPoissonSolver</a></div><div class="ttdeci">FftPoissonSolver(SplineXYBuilder const &amp;spline_xy_builder, SplineXYEvaluator const &amp;spline_xy_evaluator, IChargeDensityCalculator const &amp;compute_rho)</div><div class="ttdoc">Construct the FftPoissonSolver operator.</div></div>
 <div class="ttc" id="aclassFftPoissonSolver_html_a39d2b32d21f00f96f2c9f1625211eb98"><div class="ttname"><a href="classFftPoissonSolver.html#a39d2b32d21f00f96f2c9f1625211eb98">FftPoissonSolver::operator()</a></div><div class="ttdeci">void operator()(DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const override</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
+<div class="ttc" id="aclassFftPoissonSolver_html_af21fa1248a4a7b73e8e8caf1f339f4fd"><div class="ttname"><a href="classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd">FftPoissonSolver::FftPoissonSolver</a></div><div class="ttdeci">FftPoissonSolver(IChargeDensityCalculator const &amp;compute_rho)</div><div class="ttdoc">Construct the FftPoissonSolver operator.</div></div>
 <div class="ttc" id="aclassIChargeDensityCalculator_html"><div class="ttname"><a href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></div><div class="ttdoc">A class which calculates the charge density.</div><div class="ttdef"><b>Definition:</b> ichargedensitycalculator.hpp:19</div></div>
 <div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">Base class for Poisson solver.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:13</div></div>
-<div class="ttc" id="aclassSplineBuilder2D_html"><div class="ttname"><a href="classSplineBuilder2D.html">SplineBuilder2D</a></div><div class="ttdoc">A class for creating a 2D spline approximation of a function.</div><div class="ttdef"><b>Definition:</b> spline_builder_2d.hpp:15</div></div>
-<div class="ttc" id="aclassSplineEvaluator2D_html"><div class="ttname"><a href="classSplineEvaluator2D.html">SplineEvaluator2D&lt; BSplinesX, BSplinesY &gt;</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
