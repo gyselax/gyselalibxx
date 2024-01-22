@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: MIT
 
+#include <algorithm>
+#include <vector>
+
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
@@ -35,7 +38,7 @@ TEST(Fill, OneDimension)
 {
     DDomX const dom(lbound_x, nelems_x);
     std::vector<int> storage(dom.size(), 0);
-    ddc::ChunkSpan<int, DDomX> view(storage.data(), dom);
+    ddc::ChunkSpan<int, DDomX> const view(storage.data(), dom);
     ddc::fill(view, 1);
     EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
 }
@@ -44,7 +47,7 @@ TEST(Fill, TwoDimensions)
 {
     DDomXY const dom(lbound_x_y, nelems_x_y);
     std::vector<int> storage(dom.size(), 0);
-    ddc::ChunkSpan<int, DDomXY> view(storage.data(), dom);
+    ddc::ChunkSpan<int, DDomXY> const view(storage.data(), dom);
     ddc::fill(view, 1);
     EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
 }
