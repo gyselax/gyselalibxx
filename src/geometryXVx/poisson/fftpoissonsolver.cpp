@@ -17,12 +17,8 @@
 
 #include "fftpoissonsolver.hpp"
 
-FftPoissonSolver::FftPoissonSolver(
-        SplineXBuilder const& spline_x_builder,
-        SplineEvaluator<BSplinesX> const& spline_x_evaluator,
-        IChargeDensityCalculator const& compute_rho)
+FftPoissonSolver::FftPoissonSolver(IChargeDensityCalculator const& compute_rho)
     : m_compute_rho(compute_rho)
-    , m_electric_field(spline_x_builder, spline_x_evaluator)
 {
 }
 
@@ -57,7 +53,7 @@ void FftPoissonSolver::operator()(
                 ddc::kwArgs_fft {norm});
 
     // Solve Poisson's equation -d2Phi/dx2 = rho
-    // in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))
+    //   in Fourier space as kx*kx*FFT(Phi)=FFT(rho)
 
     // First, 0 mode of Phi is set to 0 to avoid divergency. Note: to allow writing in the GPU memory, starting a device kernel is necessary which is performed by iterating on a 0D domain (single element).
     ddc::for_each(
@@ -74,18 +70,34 @@ void FftPoissonSolver::operator()(
                 intermediate_chunk(ikx)
                         = intermediate_chunk(ikx) / (coordinate(ikx) * coordinate(ikx));
             });
+
+    // Find the electric field in Fourier space
+    // FFT(efield) = -kx*i*FFT(Phi)
+    Kokkos::Profiling::pushRegion("ElectricField");
+    Kokkos::complex<double> imaginary_unit(0.0, 1.0);
+    device_t<ddc::Chunk<Kokkos::complex<double>, IDomainFx>> fourier_efield_alloc(k_mesh);
+    ddc::ChunkSpan fourier_efield = fourier_efield_alloc.span_view();
+
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            k_mesh,
+            KOKKOS_LAMBDA(IndexFx const ikx) {
+                fourier_efield(ikx) = -imaginary_unit * coordinate(ikx) * intermediate_chunk(ikx);
+            });
+
+    // Perform the inverse 1D FFT of the solution to deduce the electric field
+    ddc::
+            ifft(Kokkos::DefaultExecutionSpace(),
+                 electric_field,
+                 fourier_efield,
+                 ddc::kwArgs_fft {norm});
+    Kokkos::Profiling::popRegion();
+
     // Perform the inverse 1D FFT of the solution to deduce the electrostatic potential
     ddc::
             ifft(Kokkos::DefaultExecutionSpace(),
                  electrostatic_potential.span_view(),
                  intermediate_chunk,
                  ddc::kwArgs_fft {norm});
-
-    // Compute efield = -dPhi/dx where Phi is the electrostatic potential
-    DFieldX electrostatic_potential_host(x_dom);
-    DFieldX electric_field_host(x_dom);
-    ddc::deepcopy(electrostatic_potential_host, electrostatic_potential);
-    m_electric_field(electric_field_host, electrostatic_potential_host);
-    ddc::deepcopy(electric_field, electric_field_host);
     Kokkos::Profiling::popRegion();
 }

@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.15)
 add_executable(unit_tests_xy_vxvy
     ../main.cpp
     quadrature.cpp
+    fft_poisson.cpp
 )
 target_compile_features(unit_tests_xy_vxvy PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_xy_vxvy
@@ -16,6 +17,7 @@ target_link_libraries(unit_tests_xy_vxvy
         gslx::geometry_xyvxvy
         sll::splines
         gslx::advection
+        gslx::poisson_xy
         gslx::quadrature
 )
 

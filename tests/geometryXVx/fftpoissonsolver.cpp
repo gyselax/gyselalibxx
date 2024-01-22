@@ -45,13 +45,10 @@ TEST(FftPoissonSolver, CosineSource)
     ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
     ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
 
-    SplineBuilder<BSplinesX, IDimX, BoundCond::PERIODIC, BoundCond::PERIODIC> const builder_x(
-            interpolation_domain_x);
-
     SplineVxBuilder const builder_vx(interpolation_domain_vx);
 
-    IDomainX const gridx = builder_x.interpolation_domain();
-    IDomainVx const gridvx = builder_vx.interpolation_domain();
+    IDomainX const gridx = interpolation_domain_x;
+    IDomainVx const gridvx = interpolation_domain_vx;
     IDomainSp const gridsp = IDomainSp(my_iion, IVectSp(1));
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
@@ -59,13 +56,6 @@ TEST(FftPoissonSolver, CosineSource)
     ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(mesh));
 
     // Creating operators
-
-    SplineEvaluator<BSplinesX> const
-            spline_x_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);
-
-
-    SplineEvaluator<BSplinesVx> const
-            spline_vx_evaluator(g_null_boundary<BSplinesVx>, g_null_boundary<BSplinesVx>);
 
     FieldSp<int> charges(dom_sp);
     charges(my_ielec) = -1;
@@ -87,7 +77,7 @@ TEST(FftPoissonSolver, CosineSource)
     DFieldVx const quadrature_coeffs = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
     Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
     ChargeDensityCalculator rhs(integrate_v);
-    FftPoissonSolver poisson(builder_x, spline_x_evaluator, rhs);
+    FftPoissonSolver poisson(rhs);
 
     DFieldX electrostatic_potential(gridx);
     DFieldX electric_field(gridx);
