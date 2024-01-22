@@ -51,7 +51,7 @@ cmake_tests_Release_GPU:
   before_script: |
     . /data/gyselarunner/spack-0.20.0/share/spack/setup-env.sh
     spack load gcc@11
-    spack env activate voicexx-env-omp-cuda
+    spack env activate gyselalibxx-env-omp-cuda
   script: |
     set -x
     export OMP_PROC_BIND=spread

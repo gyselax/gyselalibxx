@@ -394,7 +394,6 @@ void core(
             fftw_execute(plan);
             fftw_destroy_plan(plan);
         }
-        // std::cout << "performed with fftw";
     }
 #endif
 #if fftw_omp_AVAIL
@@ -427,7 +426,6 @@ void core(
             fftw_execute(plan);
             fftw_destroy_plan(plan);
         }
-        // std::cout << "performed with fftw_omp";
     }
 #endif
 #if cufft_AVAIL
@@ -467,7 +465,6 @@ void core(
                 reinterpret_cast<typename _cufft_type<Tout>::type*>(out_data));
         if (cufft_rt != CUFFT_SUCCESS)
             throw std::runtime_error("cufftExec failed");
-        // std::cout << "performed with cufft";
     }
 #endif
 #if hipfft_AVAIL
@@ -507,7 +504,6 @@ void core(
                 reinterpret_cast<typename _hipfft_type<Tout>::type*>(out_data));
         if (hipfft_rt != HIPFFT_SUCCESS)
             throw std::runtime_error("hipfftExec failed");
-        // std::cout << "performed with hipfft";
     }
 #endif
 
