@@ -38,8 +38,7 @@ inline std::shared_ptr<gko::Executor> create_gko_exec()
         return gko::CudaExecutor::
                 create(exec_space.cuda_device(),
                        create_default_host_executor(),
-                       false,
-                       gko::default_cuda_alloc_mode,
+                       std::make_shared<gko::CudaAllocator>(),
                        exec_space.cuda_stream());
     }
 #endif
@@ -49,8 +48,7 @@ inline std::shared_ptr<gko::Executor> create_gko_exec()
         return gko::HipExecutor::
                 create(exec_space.hip_device(),
                        create_default_host_executor(),
-                       false,
-                       gko::default_hip_alloc_mode,
+                       std::make_shared<gko::HipAllocator>(),
                        exec_space.hip_stream());
     }
 #endif

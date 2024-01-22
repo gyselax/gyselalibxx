@@ -34,7 +34,7 @@ RUN chmod +x /bin/bash_run \
     git \
     graphviz \
     texlive \
- && git clone -b v1.6.0 https://github.com/ginkgo-project/ginkgo.git \
+ && git clone -b v1.7.0 https://github.com/ginkgo-project/ginkgo.git \
  && cd ginkgo \
  && cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DGINKGO_BUILD_OMP=OFF -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF \
  && cmake --build build \
