@@ -25,20 +25,13 @@ class FftPoissonSolver : public IPoissonSolver
 {
     IChargeDensityCalculator const& m_compute_rho;
 
-    ElectricField m_electric_field;
-
 public:
     /**
      * Construct the FftPoissonSolver operator.
      *
-     * @param spline_xy_builder A spline builder which calculates the coefficients of a spline representation.
-     * @param spline_xy_evaluator A spline evaluator which provides the value of a spline representation from its coefficients.
      * @param compute_rho The operator which calculates the charge density, the right hand side of the equation.
      */
-    FftPoissonSolver(
-            SplineXYBuilder const& spline_xy_builder,
-            SplineXYEvaluator const& spline_xy_evaluator,
-            IChargeDensityCalculator const& compute_rho);
+    FftPoissonSolver(IChargeDensityCalculator const& compute_rho);
 
     ~FftPoissonSolver() override = default;
 

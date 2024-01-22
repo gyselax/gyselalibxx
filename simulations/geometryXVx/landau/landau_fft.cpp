@@ -229,7 +229,7 @@ int main(int argc, char** argv)
     DFieldVx const quadrature_coeffs = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
     Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
     ChargeDensityCalculator rhs(integrate_v);
-    FftPoissonSolver const poisson(builder_x, spline_x_evaluator, rhs);
+    FftPoissonSolver const poisson(rhs);
 
     PredCorr const predcorr(vlasov, poisson);
 

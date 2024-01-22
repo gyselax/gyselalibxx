@@ -319,7 +319,7 @@ int main(int argc, char** argv)
     ChargeDensityCalculator rhs(integrate_v);
 #ifdef PERIODIC_RDIMX
     ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXVx));
-    FftPoissonSolver const poisson(builder_x, spline_x_evaluator, rhs);
+    FftPoissonSolver const poisson(rhs);
 #else
     FemNonPeriodicPoissonSolver const poisson(builder_x, spline_x_evaluator, rhs);
 #endif
