@@ -27,5 +27,3 @@ The Poisson equation can be solved with a variety of different methods. Here we 
 -   FemPeriodicPoissonSolver
 
 These classes return the electric potential $\phi$ and the electric field $\frac{d \phi}{dx}$.
-
-The FftPoissonSolver does not calculate the electric field using the Fourier modes. Rather it uses a spline interpolation to approximate this value. This interpolation is calculated by the operator ElectricField.
