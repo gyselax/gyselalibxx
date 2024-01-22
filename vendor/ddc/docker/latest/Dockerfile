@@ -57,7 +57,7 @@ RUN chmod +x /bin/bash_run \
       apt-get install -y --no-install-recommends \
       rocm-hip-sdk \
  ;; esac \
- && git clone -b v1.6.0 https://github.com/ginkgo-project/ginkgo.git \
+ && git clone -b v1.7.0 https://github.com/ginkgo-project/ginkgo.git \
  && cd ginkgo \
  && case "${BACKEND}" in \
     "cpu") \

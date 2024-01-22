@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+
 #include <array>
 #include <sstream>
 #include <vector>
@@ -29,53 +30,54 @@ struct DimY;
 using DDimX = ddc::NonUniformPointSampling<DimX>;
 using DDimY = ddc::NonUniformPointSampling<DimY>;
 
-std::array<double, 4> const array_points_x VALUES_X;
-std::vector<double> const vector_points_x VALUES_X;
+static std::array<double, 4> const array_points_x VALUES_X;
+static std::vector<double> const vector_points_x VALUES_X;
 
-std::vector<double> const vector_points_y VALUES_Y;
+static std::vector<double> const vector_points_y VALUES_Y;
 
-ddc::DiscreteElement<DDimX> constexpr point_ix(2);
-ddc::Coordinate<DimX> constexpr point_rx(0.3);
+static ddc::DiscreteElement<DDimX> constexpr point_ix(2);
+static ddc::Coordinate<DimX> constexpr point_rx(0.3);
 
-ddc::DiscreteElement<DDimY> constexpr point_iy(1);
-ddc::Coordinate<DimY> constexpr point_ry(0.2);
+static ddc::DiscreteElement<DDimY> constexpr point_iy(1);
+static ddc::Coordinate<DimY> constexpr point_ry(0.2);
 
-ddc::DiscreteElement<DDimX, DDimY> constexpr point_ixy(2, 1);
-ddc::Coordinate<DimX, DimY> constexpr point_rxy(0.3, 0.2);
+static ddc::DiscreteElement<DDimX, DDimY> constexpr point_ixy(2, 1);
+static ddc::Coordinate<DimX, DimY> constexpr point_rxy(0.3, 0.2);
 
 } // namespace
 
 TEST(NonUniformPointSamplingTest, ListConstructor)
 {
-    DDimX::Impl<Kokkos::HostSpace> ddim_x(VALUES_X);
+    DDimX::Impl<Kokkos::HostSpace> const ddim_x(VALUES_X);
     EXPECT_EQ(ddim_x.size(), 4);
     EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
 TEST(NonUniformPointSamplingTest, ArrayConstructor)
 {
-    DDimX::Impl<Kokkos::HostSpace> ddim_x(array_points_x);
+    DDimX::Impl<Kokkos::HostSpace> const ddim_x(array_points_x);
     EXPECT_EQ(ddim_x.size(), array_points_x.size());
     EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
 TEST(NonUniformPointSamplingTest, VectorConstructor)
 {
-    DDimX::Impl<Kokkos::HostSpace> ddim_x(vector_points_x);
+    DDimX::Impl<Kokkos::HostSpace> const ddim_x(vector_points_x);
     EXPECT_EQ(ddim_x.size(), vector_points_x.size());
     EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
 TEST(NonUniformPointSamplingTest, IteratorConstructor)
 {
-    DDimX::Impl<Kokkos::HostSpace> ddim_x(vector_points_x.begin(), vector_points_x.end());
+    DDimX::Impl<Kokkos::HostSpace> const ddim_x(vector_points_x.begin(), vector_points_x.end());
     EXPECT_EQ(ddim_x.size(), vector_points_x.size());
     EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
 TEST(NonUniformPointSampling, Formatting)
 {
-    DDimX::Impl<Kokkos::HostSpace> ddim_x({ddc::Coordinate<DimX>(0.1), ddc::Coordinate<DimX>(0.4)});
+    DDimX::Impl<Kokkos::HostSpace> const ddim_x(
+            {ddc::Coordinate<DimX>(0.1), ddc::Coordinate<DimX>(0.4)});
     std::stringstream oss;
     oss << ddim_x;
     EXPECT_EQ(oss.str(), "NonUniformPointSampling(2)");

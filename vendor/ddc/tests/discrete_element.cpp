@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
-#include <iosfwd>
-#include <memory>
+
+#include <cstddef>
 
 #include <ddc/ddc.hpp>
 

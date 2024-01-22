@@ -1,6 +1,4 @@
 // SPDX-License-Identifier: MIT
-#include <iosfwd>
-#include <memory>
 
 #include <ddc/ddc.hpp>
 
@@ -74,13 +72,13 @@ static DVectXZ constexpr nelems_x_z(nelems_x, nelems_z);
 
 TEST(ProductMDomainTest, Constructor)
 {
-    DDomXY const dom_x_y = DDomXY(lbound_x_y, nelems_x_y);
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
     EXPECT_EQ(dom_x_y.extents(), nelems_x_y);
     EXPECT_EQ(dom_x_y.front(), lbound_x_y);
     EXPECT_EQ(dom_x_y.back(), ubound_x_y);
     EXPECT_EQ(dom_x_y.size(), nelems_x.value() * nelems_y.value());
 
-    DDomX const dom_x = DDomX(lbound_x, nelems_x);
+    DDomX const dom_x(lbound_x, nelems_x);
     EXPECT_EQ(dom_x.size(), nelems_x);
     EXPECT_EQ(dom_x.empty(), false);
     EXPECT_EQ(dom_x[0], lbound_x);
@@ -112,7 +110,7 @@ TEST(ProductMDomainTest, EmptyDomain)
 
 TEST(ProductMDomainTest, Subdomain)
 {
-    DDomXY const dom_x_y = DDomXY(lbound_x_y, nelems_x_y);
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
     ddc::DiscreteElement<DDimX> const lbound_subdomain_x(lbound_x + 1);
     ddc::DiscreteVector<DDimX> const npoints_subdomain_x(nelems_x - 2);
     DDomX const subdomain_x(lbound_subdomain_x, npoints_subdomain_x);
@@ -125,7 +123,7 @@ TEST(ProductMDomainTest, Subdomain)
 
 TEST(ProductMDomainTest, RangeFor)
 {
-    DDomX const dom = DDomX(lbound_x, nelems_x);
+    DDomX const dom(lbound_x, nelems_x);
     DElemX ii = lbound_x;
     for (DElemX ix : dom) {
         EXPECT_LE(lbound_x, ix);
@@ -153,9 +151,9 @@ TEST(ProductMDomainTest, Diff)
 
 TEST(ProductMDomainTest, Replace)
 {
-    DDomXY const dom_x_y = DDomXY(lbound_x_y, nelems_x_y);
-    DDomZ const dom_z = DDomZ(lbound_z, nelems_z);
-    DDomXZ const dom_x_z = DDomXZ(lbound_x_z, nelems_x_z);
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
+    DDomZ const dom_z(lbound_z, nelems_z);
+    DDomXZ const dom_x_z(lbound_x_z, nelems_x_z);
     auto const subdomain = ddc::replace_dim_of<DDimY, DDimZ>(dom_x_y, dom_z);
     EXPECT_EQ(subdomain, dom_x_z);
 }
