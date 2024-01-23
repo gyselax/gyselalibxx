@@ -163,7 +163,7 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
  - diocotron.cpp : runs a diocotron instability simulation.
  - params.yaml : defines the parameters of the simulation. 
  
- Python files: (in `post_process/PythonScripts/geometryRTheta/diocotron` folder)
+ Python files: (in `post_process/PythonScripts/geometryRTheta` folder)
  - animation\_rho\_phi.py : plot and save the density and electrical potential function in time. 
  - display\_L2\_norms.py : plot the L2 norms of the perturbation of the density and electrical potential function in time. 
  - mass\_conservation.py : plot the relative errors of the mass of the particles. 
