@@ -2,8 +2,6 @@
 
 #pragma once
 
-#include <functional>
-
 #include <sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_to_cartesian.hpp>

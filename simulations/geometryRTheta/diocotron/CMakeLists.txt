@@ -37,6 +37,7 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
 	        gslx::quadrature
 	        gslx::utils
 	        gslx::diocotron_init_eq
+			gslx::simulation_utils
 	)
 	target_compile_definitions("${test_name}" PUBLIC -D${TIME_METHOD} -D${PREDCORR_METHOD})    
 endfunction()
