@@ -3,3 +3,4 @@
 add_subdirectory(geometryXVx)
 add_subdirectory(geometryRTheta)
 add_subdirectory(geometryXYVxVy)
+add_subdirectory(utilities)

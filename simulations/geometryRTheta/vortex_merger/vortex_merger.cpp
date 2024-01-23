@@ -3,6 +3,7 @@
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <functional>
 #include <iostream>
 
 #include <ddc/ddc.hpp>
@@ -26,7 +27,6 @@
 #include "bsl_predcorr_second_order_implicit.hpp"
 #include "compute_norms.hpp"
 #include "crank_nicolson.hpp"
-#include "diocotron_initialization_equilibrium.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
@@ -43,22 +43,22 @@
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "vlasovpoissonsolver.hpp"
-
+#include "vortex_merger_equilibrium.hpp"
+#include "vortex_merger_initialization.hpp"
 
 
 namespace {
 using PoissonSolver = PolarSplineFEMPoissonSolver;
 using DiscreteMapping = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>;
-using Mapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
+using CircularMapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
 
 using Evaluator = SplineEvaluator2D<BSplinesR, BSplinesP>;
 using Builder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
 using Interpolator = SplineInterpolatorRP;
 
-namespace fs = std::filesystem;
-
 } // end namespace
 
+namespace fs = std::filesystem;
 
 
 int main(int argc, char** argv)
@@ -97,13 +97,8 @@ int main(int argc, char** argv)
     double const dt(PCpp_double(conf_gyselalibxx, ".Time.delta_t"));
     double const final_T(PCpp_double(conf_gyselalibxx, ".Time.final_T"));
 
-    double const W1(PCpp_double(conf_gyselalibxx, ".Mesh.r_min"));
-    double const R1(PCpp_double(conf_gyselalibxx, ".Mesh.r_minus"));
-    double const R2(PCpp_double(conf_gyselalibxx, ".Mesh.r_plus"));
-    double const W2(PCpp_double(conf_gyselalibxx, ".Mesh.r_max"));
-
-    CoordR const r_min(W1);
-    CoordR const r_max(W2);
+    CoordR const r_min(PCpp_double(conf_gyselalibxx, ".Mesh.r_min"));
+    CoordR const r_max(PCpp_double(conf_gyselalibxx, ".Mesh.r_max"));
     IVectR const r_size(Nr);
 
     CoordP const p_min(0.0);
@@ -161,7 +156,7 @@ int main(int argc, char** argv)
             g_null_boundary_2d<BSplinesR, BSplinesP>,
             g_null_boundary_2d<BSplinesR, BSplinesP>);
 
-    const Mapping mapping;
+    const CircularMapping mapping;
     DiscreteMapping const discrete_mapping
             = DiscreteMapping::analytical_to_discrete(mapping, builder, spline_evaluator_extrapol);
 
@@ -171,21 +166,7 @@ int main(int argc, char** argv)
 
 
     // --- Time integration method --------------------------------------------------------------------
-#if defined(EULER_METHOD)
     Euler<FieldRP<CoordRP>, VectorDFieldRP<RDimX, RDimY>> const time_stepper(grid);
-
-#elif defined(CRANK_NICOLSON_METHOD)
-    double const epsilon_CN = 1e-8;
-    CrankNicolson<FieldRP<CoordRP>, VectorDFieldRP<RDimX, RDimY>> const
-            time_stepper(grid, 20, epsilon_CN);
-
-#elif defined(RK3_METHOD)
-    RK3<FieldRP<CoordRP>, VectorDFieldRP<RDimX, RDimY>> const time_stepper(grid);
-
-#elif defined(RK4_METHOD)
-    RK4<FieldRP<CoordRP>, VectorDFieldRP<RDimX, RDimY>> const time_stepper(grid);
-
-#endif
 
 
     // --- Advection operator -------------------------------------------------------------------------
@@ -225,25 +206,6 @@ int main(int argc, char** argv)
     PoissonSolver poisson_solver(coeff_alpha_spline, coeff_beta_spline, discrete_mapping);
 
     // --- Predictor corrector operator ---------------------------------------------------------------
-#if defined(PREDCORR)
-    BslPredCorrRP predcorr_operator(
-            advection_domain,
-            mapping,
-            advection_operator,
-            builder,
-            spline_evaluator,
-            poisson_solver);
-#elif defined(EXPLICIT_PREDCORR)
-    BslExplicitPredCorrRP predcorr_operator(
-            advection_domain,
-            mapping,
-            advection_operator,
-            grid,
-            builder,
-            spline_evaluator,
-            poisson_solver,
-            spline_evaluator_extrapol);
-#elif defined(IMPLICIT_PREDCORR)
     BslImplicitPredCorrRP predcorr_operator(
             advection_domain,
             mapping,
@@ -253,17 +215,18 @@ int main(int argc, char** argv)
             spline_evaluator,
             poisson_solver,
             spline_evaluator_extrapol);
-#endif
+
+
 
     // ================================================================================================
     // SIMULATION DATA                                                                                 |
     // ================================================================================================
-    double const Q(PCpp_double(
-            conf_gyselalibxx,
-            ".Perturbation.charge_Q")); // no charge carried by the inner conductor r = W1.
-    int const l(PCpp_int(conf_gyselalibxx, ".Perturbation.l_mode"));
     double const eps(PCpp_double(conf_gyselalibxx, ".Perturbation.eps"));
-    DiocotronDensitySolution exact_rho(W1, R1, R2, W2, Q, l, eps);
+    const double sigma(PCpp_double(conf_gyselalibxx, ".Perturbation.sigma"));
+    const double x_star_1(PCpp_double(conf_gyselalibxx, ".Perturbation.x_star_1"));
+    const double y_star_1(PCpp_double(conf_gyselalibxx, ".Perturbation.y_star_1"));
+    const double x_star_2(PCpp_double(conf_gyselalibxx, ".Perturbation.x_star_2"));
+    const double y_star_2(PCpp_double(conf_gyselalibxx, ".Perturbation.y_star_2"));
 
     // --- Time parameters ----------------------------------------------------------------------------
     int const iter_nb = final_T * int(1 / dt);
@@ -288,9 +251,6 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("final_T", final_T);
     ddc::expose_to_pdi("time_step_diag", PCpp_int(conf_gyselalibxx, ".Output.time_step_diag"));
 
-    ddc::expose_to_pdi("slope", exact_rho.get_slope());
-
-
 
     // ================================================================================================
     // INITIALISATION                                                                                 |
@@ -306,16 +266,20 @@ int main(int argc, char** argv)
         jacobian(irp) = mapping.jacobian(ddc::coordinate(irp));
     });
 
+    double const tau(1e-10);
+    double const phi_max(1.);
 
 
-    DFieldRP rho(grid);
+    VortexMergerEquilibria equilibrium(mapping, grid, builder, spline_evaluator, poisson_solver);
+    std::function<double(double const)> const function = [&](double const x) { return x * x; };
     DFieldRP rho_eq(grid);
+    equilibrium.set_equilibrium(rho_eq, function, phi_max, tau);
 
-    // Initialize rho and rho equilibrium ****************************
-    for_each(grid, [&](IndexRP const irp) {
-        rho(irp) = exact_rho.initialisation(coords(irp));
-        rho_eq(irp) = exact_rho.equilibrium(coords(irp));
-    });
+
+    VortexMergerDensitySolution solution(mapping);
+    DFieldRP rho(grid);
+    solution.set_initialisation(rho, rho_eq, eps, sigma, x_star_1, y_star_1, x_star_2, y_star_2);
+
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
     DFieldRP phi_eq(grid);
@@ -332,6 +296,7 @@ int main(int argc, char** argv)
             .and_with("jacobian", jacobian)
             .and_with("density_eq", rho_eq)
             .and_with("electrical_potential_eq", phi_eq);
+
 
 
     // ================================================================================================

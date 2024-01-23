@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: MIT
+
+#pragma once
+
+constexpr char const* const params_yaml = R"PDI_CFG(Mesh:
+  r_size: 128
+  p_size: 256
+  r_min: 0.0
+  r_max: 1.0 
+
+Time:
+  delta_t: 0.1
+  final_T: 10.0
+  
+Perturbation:
+  eps: 0.0001
+  x_star_1: 0.08
+  y_star_1: -0.14
+  x_star_2: -0.08
+  y_star_2: 0.14
+  sigma: 0.08
+  
+Output:
+  time_step_diag: 5
+)PDI_CFG";
