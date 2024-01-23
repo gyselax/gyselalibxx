@@ -175,5 +175,7 @@ var annotated =
     [ "VectorField", "classVectorField.html", "classVectorField" ],
     [ "VectorFieldCommon", "classVectorFieldCommon.html", null ],
     [ "VectorFieldSpan", "classVectorFieldSpan.html", "classVectorFieldSpan" ],
-    [ "VlasovPoissonSolver", "classVlasovPoissonSolver.html", "classVlasovPoissonSolver" ]
+    [ "VlasovPoissonSolver", "classVlasovPoissonSolver.html", "classVlasovPoissonSolver" ],
+    [ "VortexMergerDensitySolution", "classVortexMergerDensitySolution.html", "classVortexMergerDensitySolution" ],
+    [ "VortexMergerEquilibria", "classVortexMergerEquilibria.html", "classVortexMergerEquilibria" ]
 ];

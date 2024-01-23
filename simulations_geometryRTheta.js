@@ -27,5 +27,12 @@ var simulations_geometryRTheta =
       [ "Test case - diocotron instability", "simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Test_case_-_diocotron_instability", null ],
       [ "References", "simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__References", null ],
       [ "Contents", "simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Contents", null ]
+    ] ],
+    [ "Vortex merger", "simulations_geometryRTheta_vortex_merger.html", [
+      [ "Studied problem", "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Studied_problem", null ],
+      [ "Test case - vortex merger", "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Test_case_-_vortex_merger", null ],
+      [ "References", "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__References", null ],
+      [ "Useful references", "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Useful_references", null ],
+      [ "Contents", "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Contents", null ]
     ] ]
 ];

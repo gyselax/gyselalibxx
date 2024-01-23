@@ -16,6 +16,7 @@ var src_geometryRTheta =
     ] ],
     [ "Initialization", "src_geometryRTheta_initialization.html", [
       [ "Diocotron instability", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Diocotron_instability", null ],
+      [ "Vortex merger", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Vortex_merger", null ],
       [ "Contents", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Contents", null ]
     ] ],
     [ "Predictor-corrector methods", "src_geometryRTheta_time_solver.html", [

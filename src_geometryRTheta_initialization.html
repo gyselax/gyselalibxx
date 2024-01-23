@@ -107,9 +107,9 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_initialization.html
  For more details on each simulation, see <a class="el" href="simulations.html">Gyselalib++ simulations</a>.</p>
 <h1><a class="anchor" id="src_geometryRTheta_initialization__Diocotron_instability"></a>
 Diocotron instability</h1>
-<p>More details about the diocotron simulaton are given in <a class="el" href="simulations_geometryRTheta_diocotron.html">Diocotron instability</a>.</p>
+<p>More details about the diocotron simulation are given in <a class="el" href="simulations_geometryRTheta_diocotron.html">Diocotron instability</a>.</p>
 <p>The initializatrion and equilibrium fonctions are defined in the <a class="el" href="classDiocotronDensitySolution.html" title="The diocotron exact solution of the density .">DiocotronDensitySolution</a> class.</p>
-<h3><a class="anchor" id="autotoc_md34"></a>
+<h3><a class="anchor" id="autotoc_md39"></a>
 Initialization</h3>
 <p>We suppose as perturbed initial condition</p><ul>
 <li>\(\rho(0,r, \theta) = ( 1 + \epsilon \cos(l\theta)) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }\)</li>
@@ -120,7 +120,7 @@ Initialization</h3>
 </li>
 </ul>
 <p>with \(p = 50\), \(\bar{r} = \frac{R_1 + R_2}{2}\) and \(d = \frac{R_2 - R_1}{2}\). This last version is implemented in the code.</p>
-<h3><a class="anchor" id="autotoc_md35"></a>
+<h3><a class="anchor" id="autotoc_md40"></a>
 Equilibirum</h3>
 <p>The associated equilibrium is</p><ul>
 <li>\(\rho_0(r) = \mathbb{I}_{ R_1 \leq r \leq R_2 }\)</li>
@@ -128,7 +128,7 @@ Equilibirum</h3>
 <p>or</p><ul>
 <li>\(\rho_0(r) = \exp\left(- \left(\frac{r - \bar{r}}{d}\right)^p\right) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }\) in Edoardo Zoni's article [1].</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md36"></a>
+<h3><a class="anchor" id="autotoc_md41"></a>
 Dispersion relation</h3>
 <p>The <a class="el" href="classDiocotronDensitySolution.html" title="The diocotron exact solution of the density .">DiocotronDensitySolution</a> also solves the dispersion relation:</p>
 <p class="formulaDsp">
@@ -141,14 +141,37 @@ Dispersion relation</h3>
 \[ c_l \left( 1 - \frac{W_1^{2l}}{W_2^{2l}} \right) = l^2 \frac{\omega_q }{\omega_D} \left[1 - \frac{R_1^2}{R_2^2} + \frac{\omega_q }{\omega_D} \frac{R_1^2}{R_2^2}\right]\left( 1 - \frac{W_1^{2l}}{W_2^{2l}} \right) -l \frac{\omega_q }{\omega_D} \left( 1 - \frac{W_1^{2l}}{R_2^{2l}} \right)\left( 1 - \frac{R_2^{2l}}{W_2^{2l}} \right) \\ \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad + l \left[1 - \frac{R_1^2}{R_2^2} + \frac{\omega_q }{\omega_D} \frac{R_1^2}{R_2^2} \right]\left( 1 - \frac{R_1^{2l}}{W_2^{2l}} \right) \left( 1 - \frac{W_1^{2l}}{R_1^{2l}} \right) - \left( 1 - \frac{R_2^{2l}}{W_2^{2l}} \right) \left( 1 - \frac{W_1^{2l}}{R_1^{2l}} \right) \left( 1 - \frac{R_1^{2l}}{R_2^{2l}} \right) \]
 </p>
 <p> The imaginary part of the dispersion relation solution is given by <a class="el" href="classDiocotronDensitySolution.html#a59c17bab82ed59b39b68750be2f81b62" title="Get the slope of the perturbation.">DiocotronDensitySolution::get_slope()</a> and its real part by <a class="el" href="classDiocotronDensitySolution.html#a9a485619ee6cbd2ff396ae8fe2a0a1bd" title="Get the frequency of the perturbation.">DiocotronDensitySolution::get_frequency()</a>. The imaginary part of the dispersion relation solution corresponds to the slope of the L2-norm perturbation in the linear phase ( \(t \in [20, 50]\) s for the default parameters).</p>
-<h3><a class="anchor" id="autotoc_md37"></a>
+<h1><a class="anchor" id="src_geometryRTheta_initialization__Vortex_merger"></a>
+Vortex merger</h1>
+<p>More details about the diocotron simulation are given in <a class="el" href="simulations_geometryRTheta_vortex_merger.html">Vortex merger</a>.</p>
+<h3><a class="anchor" id="autotoc_md42"></a>
+Equilibirum</h3>
+<p>The equilibrium is determined by the eigenvalue problem of finding \((\sigma, \phi)\) such that</p>
+<p class="formulaDsp">
+\[ - \nabla \cdot \nabla \phi = \sigma f(\phi), \]
+</p>
+<p> with given \(f\) such that \(f&#39;(\phi) \neq 0\). See Edoardo Zoni's article [1] for more details.</p>
+<p>The algorithm for given initial data \((\sigma^0, \phi^0)\) is the following:</p><ul>
+<li>compute the density: \(\rho^{i} = \sigma^{i-1} f(\phi^{i-1})\),</li>
+<li>compute a temporary electrical potential: \(- \nabla\cdot\nabla \phi_*^{i} = \rho^i\),</li>
+<li>compute the coefficient:<ul>
+<li>if the maximum value \(\phi_{\text{max}}\) is given: \(c^i = \frac{\phi_{\text{max}}}{\Vert\phi_*^i\Vert_{\mathcal{L}^\infty}}\),</li>
+</ul>
+</li>
+<li>update the data: \((\sigma^i, \phi^i) = c^i (\sigma^{i-1}, \phi_*^i)\).</li>
+</ul>
+<p>Then, we repeat all the steps until \(|\sigma^i - \sigma^{i-1}| \leq \tau\) for a given tolerance.</p>
+<p>For the vortex merger simulation, we choose \(f(\phi)= \phi^2\) and \(\phi_{\text{max}} = 1\).</p>
+<h3><a class="anchor" id="autotoc_md43"></a>
 References</h3>
 <p>[1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
 method of characteristics and spline finite elements", <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>, Journal of Computational Physics, 2019.</p>
 <h1><a class="anchor" id="src_geometryRTheta_initialization__Contents"></a>
 Contents</h1>
 <ul>
-<li><a class="el" href="diocotron__initialization__equilibrium_8hpp_source.html">diocotron_initialization_equilibrium.hpp</a> : defines an <a class="el" href="classDiocotronDensitySolution.html" title="The diocotron exact solution of the density .">DiocotronDensitySolution</a> class which computes the initialization and equilibrium fonctions. </li>
+<li><a class="el" href="diocotron__initialization__equilibrium_8hpp_source.html">diocotron_initialization_equilibrium.hpp</a> : defines a <a class="el" href="classDiocotronDensitySolution.html" title="The diocotron exact solution of the density .">DiocotronDensitySolution</a> class which computes the initialization and equilibrium fonctions.</li>
+<li><a class="el" href="vortex__merger__equilibrium_8hpp_source.html">vortex_merger_equilibrium.hpp</a> : defines a <a class="el" href="classVortexMergerEquilibria.html" title="Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates.">VortexMergerEquilibria</a> class which computes the equilibrium fonction.</li>
+<li><a class="el" href="vortex__merger__initialization_8hpp_source.html">vortex_merger_initialization.hpp</a> : defines a <a class="el" href="classVortexMergerDensitySolution.html" title="Initial condition for the vortex merger simulation.">VortexMergerDensitySolution</a> class which computes the initialization fonction. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
