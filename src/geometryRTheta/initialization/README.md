@@ -5,7 +5,7 @@ For more details on each simulation, see [simulations](./../../../simulations/RE
 
 ## Diocotron instability
 
-More details about the diocotron simulaton are given in [diocotron](./../../../simulations/geometryRTheta/diocotron/README.md).
+More details about the diocotron simulation are given in [diocotron](./../../../simulations/geometryRTheta/diocotron/README.md).
 
 The initializatrion and equilibrium fonctions are defined in the DiocotronDensitySolution class. 
 
@@ -53,11 +53,41 @@ The imaginary part of the dispersion relation solution is given by DiocotronDens
 and its real part by DiocotronDensitySolution::get\_frequency(). The imaginary part of the dispersion relation solution 
 corresponds to the slope of the L2-norm perturbation in the linear phase ($t \in [20, 50]$ s for the default parameters).
  
+
+
+## Vortex merger
+
+More details about the diocotron simulation are given in [vortex\_merger](./../../../simulations/geometryRTheta/vortex_merger/README.md).
  
+### Equilibirum
+The equilibrium is determined by the eigenvalue problem of finding $(\sigma, \phi)$ such that 
+
+```math
+    - \nabla \cdot \nabla \phi = \sigma f(\phi),
+```
+
+with given $f$  such that $f'(\phi) \neq 0$. See Edoardo Zoni's article [1] for more details. 
+
+The algorithm for given initial data $(\sigma^0, \phi^0)$ is the following: 
+* compute the density: $\rho^{i} = \sigma^{i-1} f(\phi^{i-1})$, 
+* compute a temporary electrical potential: $`- \nabla\cdot\nabla \phi_*^{i} = \rho^i`$, 
+* compute the coefficient: 
+    * if the maximum value $`\phi_{\text{max}}`$ is given: $`c^i = \frac{\phi_{\text{max}}}{\Vert\phi_*^i\Vert_{\mathcal{L}^\infty}}`$, 
+* update the data: $`(\sigma^i, \phi^i) = c^i (\sigma^{i-1}, \phi_*^i)`$. 
+
+Then, we repeat all the steps until $|\sigma^i - \sigma^{i-1}| \leq \tau$ for a given tolerance. 
+
+For the vortex merger simulation, we choose $`f(\phi)= \phi^2`$ and $`\phi_{\text{max}} = 1`$. 
+
+
 ### References
 [1]    Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
 method of characteristics and spline finite elements", https://doi.org/10.1016/j.jcp.2019.108889, Journal of Computational Physics, 2019.
 
 ## Contents 
 
-* diocotron\_initialization\_equilibrium.hpp : defines an DiocotronDensitySolution class which computes the initialization and equilibrium fonctions. 
+* diocotron\_initialization\_equilibrium.hpp : defines a DiocotronDensitySolution class which computes the initialization and equilibrium fonctions. 
+* vortex\_merger\_equilibrium.hpp : defines a VortexMergerEquilibria class which computes the equilibrium fonction. 
+* vortex\_merger\_initialization.hpp : defines a VortexMergerDensitySolution class which computes the initialization fonction. 
+
+
