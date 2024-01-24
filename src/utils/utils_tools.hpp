@@ -20,7 +20,7 @@
  * @return A double containing the value of the infinty norm.
  */
 template <class... Tags>
-double norm_inf(ddc::Coordinate<Tags...> coord)
+KOKKOS_FUNCTION double norm_inf(ddc::Coordinate<Tags...> coord)
 {
     double result = 0.0;
     ((result = std::max(result, fabs(coord.template get<Tags>()))), ...);
@@ -39,7 +39,7 @@ double norm_inf(ddc::Coordinate<Tags...> coord)
  *
  * @return A double containing the value of the infinty norm.
  */
-inline double norm_inf(double const coord)
+KOKKOS_FUNCTION inline double norm_inf(double const coord)
 {
     return coord;
 };
