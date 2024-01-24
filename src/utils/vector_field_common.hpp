@@ -80,42 +80,36 @@ public:
 protected:
     static constexpr std::size_t NDims = sizeof...(DDims);
 
-private:
     std::array<ChunkType, NDims> m_values;
 
 protected:
     /// Empty Chunk
-    VectorFieldCommon() = default;
+    KOKKOS_DEFAULTED_FUNCTION VectorFieldCommon() = default;
 
     /// Construct a Chunk on a domain with uninitialized values
     template <
             class... Chunks,
-            class = std::enable_if_t<std::conjunction_v<std::is_same<Chunks, ChunkType>...>>>
+            class = std::enable_if_t<std::conjunction_v<std::is_same<Chunks, ChunkType>...>>,
+            std::enable_if_t<
+                    !std::conjunction_v<std::bool_constant<ddc::is_borrowed_chunk_v<Chunks>>...>,
+                    int> = 0>
     explicit VectorFieldCommon(Chunks&&... chunks) : m_values {std::move(chunks)...}
     {
     }
 
+    /// Construct a Chunk on a domain with uninitialized values
+    template <
+            class... Chunks,
+            class = std::enable_if_t<std::conjunction_v<std::is_same<Chunks, ChunkType>...>>,
+            std::enable_if_t<
+                    std::conjunction_v<std::bool_constant<ddc::is_borrowed_chunk_v<Chunks>>...>,
+                    int> = 0>
+    KOKKOS_FUNCTION explicit VectorFieldCommon(Chunks&&... chunks)
+        : m_values {std::forward<Chunks>(chunks)...}
+    {
+    }
+
 public:
-    /** Element access using a list of DiscreteElement
-     * @param delems 1D discrete coordinates
-     * @return copy of this element
-     */
-    template <class... ODDims>
-    element_type operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
-    {
-        return element_type((this->get<DDims>()(delems...))...);
-    }
-
-    /** Element access using a multi-dimensional DiscreteElement
-     * @param delems discrete coordinates
-     * @return copy of this element
-     */
-    template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    element_type operator()(ddc::DiscreteElement<ODDims...> const& delems) const noexcept
-    {
-        return element_type((this->get<DDims>()(delems))...);
-    }
-
     constexpr mdomain_type domain() const noexcept
     {
         return m_values[0].domain();

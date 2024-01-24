@@ -146,7 +146,7 @@ public:
 
 
         // Solve the characteristic equation
-        m_time_stepper.update(feet, dt, dy, update_function);
+        m_time_stepper.update(Kokkos::Serial(), feet, dt, dy, update_function);
 
         is_unified(feet);
     }
