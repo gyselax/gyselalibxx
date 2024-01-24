@@ -4,6 +4,7 @@ Utility functions for geometryXVx post-process scripts.
 """
 
 import os
+import numpy as np
 import yaml
 import xarray as xr
 
@@ -86,3 +87,70 @@ def compute_kinetic_source(diskstore):
         print('Info: no kinetic source in simulation:', e)
         return xr.zeros_like(diskstore['fdistribu'])
 
+
+def compute_collinter_collision_frequency(diskstore, density, temperature):
+    '''Computes the interspecies collision frequency
+    '''
+
+    charges = diskstore['fdistribu_charges']
+    masses = diskstore['fdistribu_masses']
+    charges_pow4 = charges**4
+    collfreq_onespec = diskstore['collinter_nustar0'] * charges_pow4 \
+        * np.sqrt(masses.sel(species='electrons')/masses) \
+        / diskstore['Lx'] * density / np.power(temperature, 1.5)
+
+    density_flipped = density.copy()
+    density_flipped.coords['species'] = density.coords['species'][::-1]
+    density_ratio = density/density_flipped
+
+    temperature_flipped = temperature.copy()
+    temperature_flipped.coords['species'] = temperature.coords['species'][::-1]
+    temperature_ratio = temperature/temperature_flipped
+
+    charges_ratio = charges/charges.values[::-1]
+    masses_ratio = masses/masses.values[::-1]
+
+    collfreq_bothspecies = collfreq_onespec * np.sqrt(2.) / (charges_ratio * charges_ratio) \
+        * (1. + masses_ratio) / density_ratio \
+        / np.power(1. + masses_ratio/temperature_ratio, 1.5)
+
+    return collfreq_bothspecies
+
+
+def compute_collinter_momentum_exchange(diskstore, density, fluid_velocity, temperature):
+    '''Computes the interspecies collision operator expression of the 
+    momentum exchange term
+    '''
+    try:
+        collfreq = compute_collinter_collision_frequency(diskstore, density, temperature)
+        masses = diskstore['fdistribu_masses']
+        masses_ratio = masses/masses.values[::-1]
+        fluid_velocity_flipped = fluid_velocity.copy()
+        fluid_velocity_flipped.coords['species'] = fluid_velocity_flipped.coords['species'][::-1]
+        momentum_term = -collfreq*density * (fluid_velocity - np.sqrt(masses_ratio) \
+                                    * fluid_velocity_flipped)
+        return momentum_term
+    except KeyError as e:
+        print('Info: no inter_species collisions in simulation:', e)
+        return xr.zeros_like(diskstore['electrostatic_potential'])
+
+
+def compute_collinter_energy_exchange(diskstore, density, temperature):
+    '''Computes the interspecies collision operator expression of the 
+    energy exchange term
+    '''
+    try:
+        temperature_flipped = temperature.copy()
+        temperature_flipped.coords['species'] = temperature_flipped.coords['species'][::-1]
+
+        masses = diskstore['fdistribu_masses']
+        masses_flipped = masses.copy()
+        masses_flipped.coords['species'] = masses_flipped.coords['species'][::-1]
+        ma_on_ma_mb = masses/(masses + masses_flipped)
+        collfreq = compute_collinter_collision_frequency(diskstore, density, temperature)
+
+        return -3*collfreq*density*ma_on_ma_mb*(temperature - temperature_flipped)
+
+    except KeyError as e:
+        print('Info: no inter_species collisions in simulation:', e)
+        return xr.zeros_like(diskstore['electrostatic_potential'])

@@ -17,6 +17,7 @@ from gysdata import DiskStore
 from plot_utils import plot_field1d, plot_field2d
 from math_utils import compute_moment, differentiate
 from geometryXVx.utils import compute_krook_sink_constant, compute_krook_sink_adaptive, compute_kinetic_source
+from geometryXVx.utils import compute_collinter_momentum_exchange, compute_temperature
 
 
 if __name__ == '__main__':
@@ -47,6 +48,7 @@ if __name__ == '__main__':
     density = compute_moment(fdistribu, 'v_x', moment_order=0)
     particle_flux = compute_moment(fdistribu, 'v_x', moment_order=1)
     momentum_flux = compute_moment(fdistribu, 'v_x', moment_order=2)
+    temperature = compute_temperature(density, particle_flux, momentum_flux)
 
     particle_flux = particle_flux.chunk({'time': len(particle_flux['time'])})
     dgamma_dt = differentiate(particle_flux, 'time')
@@ -54,7 +56,8 @@ if __name__ == '__main__':
     force_term = density*charge/np.sqrt(mass)*electric_field
     momentum_source = compute_moment(compute_krook_sink_constant(ds), 'v_x', moment_order=1) \
             + compute_moment(compute_krook_sink_adaptive(ds, density), 'v_x', moment_order=1) \
-            + compute_moment(compute_kinetic_source(ds), 'v_x', moment_order=1)
+            + compute_moment(compute_kinetic_source(ds), 'v_x', moment_order=1) \
+            + compute_collinter_momentum_exchange(ds, density, particle_flux/density, temperature)
     error = dgamma_dt + grad_flux_over_m - momentum_source - force_term
 
     time_diag = fdistribu.coords['time'].values[args.itime]
