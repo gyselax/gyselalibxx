@@ -9,6 +9,7 @@ metadata:
   time_saved : double
   nbstep_diag: int
   iter_saved : int
+  Lx : double
   MeshX_extents: { type: array, subtype: int64, size: 1 }
   MeshX:
     type: array
@@ -36,6 +37,7 @@ metadata:
     subtype: double
     size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]' ]
   collintra_nustar0 : double
+  collinter_nustar0 : double
 
   krook_sink_adaptive_extent : double
   krook_sink_adaptive_stiffness : double
@@ -118,8 +120,10 @@ plugins:
         - Nvx
         - MeshX
         - MeshVx
+        - Lx
         - nbstep_diag
         - collintra_nustar0
+        - collinter_nustar0
         - Nkinspecies
         - fdistribu_charges
         - fdistribu_masses
