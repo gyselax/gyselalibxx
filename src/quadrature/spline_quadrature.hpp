@@ -26,16 +26,37 @@ using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
 
 
 /**
- * @brief Get the spline quadrature coefficients in 1D.
+ * @brief Get the spline quadrature coefficients.
  *
- * This function mainly uses the SplineBuilder::quadrature_coefficients function.
+ * To integrate a function with a spline quadrature, we use:
+ *
+ * @f$ \int_a^b f(x)dx
+ * \simeq \sum_{i = 0}^{N_{\text{basis}} -1 } c_i  \int_a^b b_{i,d}()x dx @f$,
+ *
+ * which rewritten gives
+ *
+ * @f$ \int_a^b f(x)dx
+ * \simeq \sum_{i = 0}^{N_{\text{basis}} - 1} q_i f_i @f$,
+ *
+ * with
+ *  - @f$\{ f_i\}_i @f$ the values of the function at the interpolation points;
+ *  - @f$ q = \{ q_i\}_i @f$ the quadrature coefficients we compute thanks to
+ *  @f$ q B^T = I_b @f$,
+ *      - with @f$ B @f$ the matrix of B-splines @f$ B_{ij} = b_{j,d}(x_i)@f$,
+ *      - and @f$ I_b = \int_a^b b_{i,d}(x)dx @f$ the integrated B-splines.
+ *
+ * More details are given in Emily Bourne's thesis
+ * "Non-Uniform Numerical Schemes for the Modelling of Turbulence
+ * in the 5D GYSELA Code". December 2022.
+ *
  *
  * @param[in] domain
- *      The domain on which the splines quadrature will be carried out.
+ *      The domain where the functions we want to integrate
+ *      are defined.
  * @param[in] builder
- *      The spline builder used for the quadrature coefficients.
+ *      The spline builder describing the way in which splines would be constructed.
  *
- * @return The quadrature coefficients for the method defined on the provided domain.
+ * @return A chunk with the quadrature coefficients @f$ q @f$.
  */
 template <class IDim, class SplineBuilder>
 ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
@@ -50,7 +71,28 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
             SplineBuilder::s_nbe_xmax == 0,
             "The spline quadrature requires a builder which can construct the coefficients using "
             "only the values at the interpolation points.");
-    return builder.quadrature_coefficients(domain);
+
+    using bsplines_type = typename SplineBuilder::bsplines_type;
+
+    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
+
+    // Vector of integrals of B-splines
+    ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines(
+            builder.spline_domain());
+    ddc::discrete_space<bsplines_type>().integrals(integral_bsplines);
+
+    // Coefficients of quadrature in integral_bsplines
+    ddc::DiscreteDomain<bsplines_type> slice = builder.spline_domain().take_first(
+            ddc::DiscreteVector<bsplines_type> {ddc::discrete_space<bsplines_type>().nbasis()});
+
+    Kokkos::deep_copy(
+            coefficients.allocation_kokkos_view(),
+            integral_bsplines[slice].allocation_kokkos_view());
+
+    // Solve matrix equation
+    builder.get_interpolation_matrix().solve_transpose_inplace(coefficients.allocation_mdspan());
+
+    return coefficients;
 }
 
 
