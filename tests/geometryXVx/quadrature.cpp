@@ -7,6 +7,9 @@
 #include "quadrature.hpp"
 #include "simpson_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
+
+namespace {
+
 struct RDimXPeriod
 {
     static bool constexpr PERIODIC = true;
@@ -169,3 +172,5 @@ TEST(QuadratureTest, SimpsonUniformConverge)
         EXPECT_LE(order_error, 1e-2);
     }
 }
+
+} // namespace

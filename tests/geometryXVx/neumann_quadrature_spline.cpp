@@ -10,6 +10,8 @@
 #include "neumann_spline_quadrature.hpp"
 #include "quadrature.hpp"
 
+namespace {
+
 TEST(NeumannSplineQuadratureTest, ExactForConstantFunc)
 {
     CoordVx const vx_min(0.0);
@@ -56,8 +58,8 @@ double compute_error(int n_elems)
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = ddc::Chunk<double, IDomainY>;
 
-    ddc::Coordinate<Y<N>> const y_min(0.0);
-    ddc::Coordinate<Y<N>> const y_max(M_PI);
+    ddc::Coordinate<Y<N>> const y_min(-1.0);
+    ddc::Coordinate<Y<N>> const y_max(1.0);
 
     ddc::init_discrete_space<BSplinesY>(y_min, y_max, n_elems);
 
@@ -72,10 +74,11 @@ double compute_error(int n_elems)
     DFieldY values(gridy);
 
     ddc::for_each(gridy, [&](ddc::DiscreteElement<IDimY> const idx) {
-        values(idx) = cos(ddc::coordinate(idx));
+        double x = ddc::coordinate(idx);
+        values(idx) = (x + 1) * (x + 1) * (x + 1) * (x - 1) * (x - 1);
     });
     double integral = integrate(values);
-    return std::abs(2 - integral);
+    return std::abs(16.0 / 15.0 - integral);
 }
 
 template <std::size_t... Is>
@@ -97,3 +100,5 @@ TEST(NeumannSplineQuadratureTest, UniformConverge)
         EXPECT_LE(order_error, 5e-2);
     }
 }
+
+} // namespace

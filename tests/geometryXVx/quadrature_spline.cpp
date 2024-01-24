@@ -9,6 +9,8 @@
 #include "quadrature.hpp"
 #include "spline_quadrature.hpp"
 
+namespace {
+
 TEST(SplineQuadratureTest, ExactForConstantFunc)
 {
     CoordX const x_min(0.0);
@@ -97,3 +99,5 @@ TEST(SplineQuadratureTest, UniformConverge)
         EXPECT_LE(order_error, 5e-2);
     }
 }
+
+} // namespace
