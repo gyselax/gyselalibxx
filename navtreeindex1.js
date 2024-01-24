@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"classCurvilinear2DToCartesian.html#a58d230e4f91cb40b45f1fb0759fabea0":[11,34,8],
+"classCurvilinear2DToCartesian.html#a5d1a1f488cffb8a5e11c9a94dee2036a":[11,34,23],
 "classCurvilinear2DToCartesian.html#a5f611cc3888f47ec1c78450a7c202a25":[11,34,11],
 "classCurvilinear2DToCartesian.html#a703838ae69a4b6118cbc5fa1beb7d09b":[11,34,13],
 "classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35":[11,34,12],
@@ -91,7 +93,8 @@ var NAVTREEINDEX1 =
 "classElectricField.html#ab069fed5776e2d2f8024e93cfcf9b147":[11,42,4],
 "classElectricField.html#ad0ea427ec25cf0c1722a462dab6aeb70":[11,42,3],
 "classEuler.html":[11,43],
-"classEuler.html#a38769dab3aaec635edbde16cedcccd17":[11,43,2],
+"classEuler.html#a20ceb8499822225f00079922405d9dad":[11,43,2],
+"classEuler.html#a5af55f31f2b26e3122ef42c6fce49b14":[11,43,3],
 "classEuler.html#a8019703dccd8358b9b221818fa51bdcb":[11,43,0],
 "classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8":[11,43,1],
 "classFemNonPeriodicPoissonSolver.html":[11,45],
@@ -162,8 +165,8 @@ var NAVTREEINDEX1 =
 "classIChargeDensityCalculator.html#a720c2444f9f9f61cf70755b592f53c7b":[11,63,1],
 "classIChargeDensityCalculator.html#a94853ddecb41d04c60155fdc18f9fcf3":[11,63,0],
 "classIEquilibrium.html":[11,64],
-"classIEquilibrium.html#a7244af05e0e1176c0c02212cee0cfb43":[11,64,1],
 "classIEquilibrium.html#a7244af05e0e1176c0c02212cee0cfb43":[11,64,0],
+"classIEquilibrium.html#a7244af05e0e1176c0c02212cee0cfb43":[11,64,1],
 "classIEquilibrium.html#aa9cde57feac60ee82ae09fc61c86c807":[11,64,3],
 "classIEquilibrium.html#aafc91262c3d3a5c87aa80707ad1ec5dc":[11,64,2],
 "classIFootFinder.html":[11,65],
@@ -207,8 +210,8 @@ var NAVTREEINDEX1 =
 "classIRightHandSide.html#a745d5bae7b23395d9dc7a0fd8a4b687f":[11,76,1],
 "classITimeSolver.html":[11,77],
 "classITimeSolver.html#a08927c53d2c33753c80fccfcb51e0047":[11,77,3],
-"classITimeSolver.html#a0b6b8b4a38bfe8eb0763c65268a10379":[11,77,1],
 "classITimeSolver.html#a0b6b8b4a38bfe8eb0763c65268a10379":[11,77,0],
+"classITimeSolver.html#a0b6b8b4a38bfe8eb0763c65268a10379":[11,77,1],
 "classITimeSolver.html#a7c34ee67eeac399e7296a27db629fd1a":[11,77,2],
 "classITimeSolverRP.html":[11,78],
 "classITimeSolverRP.html#a09f0355c26469ef4adf7693fc1956ab5":[11,78,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "classLagrangeInterpolatorBatched.html":[11,87],
 "classLagrangeInterpolatorBatched.html#a3544c6327e64a7297406a53892b281c6":[11,87,2],
 "classLagrangeInterpolatorBatched.html#a3e33453b70a8caa24acc2a8a8957db12":[11,87,1],
-"classLagrangeInterpolatorBatched.html#a7428000bb0e4008f0faaae57bb6ce517":[11,87,0],
-"classManufacturedPoissonTest.html":[11,88],
-"classManufacturedPoissonTest.html#a2882eef1431cf9ca3ff4504e2060890b":[11,88,1],
-"classManufacturedPoissonTest.html#a7349fe81c3343867df59d8e72a110736":[11,88,0]
+"classLagrangeInterpolatorBatched.html#a7428000bb0e4008f0faaae57bb6ce517":[11,87,0]
 };

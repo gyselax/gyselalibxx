@@ -126,6 +126,10 @@ Public Types</h2></td></tr>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a1403b2b999f37027f7dc54e056ad5c0e">chunk_type</a> = ddc::ChunkSpan&lt; ElementType, Domain, LayoutStridedPolicy, MemorySpace &gt;</td></tr>
 <tr class="memdesc:a1403b2b999f37027f7dc54e056ad5c0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type describing the object which can be extracted from this <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> using the get&lt;&gt; function. <br /></td></tr>
 <tr class="separator:a1403b2b999f37027f7dc54e056ad5c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2068672157fb033bbdb9a634f8e678a0"><td class="memItemLeft" align="right" valign="top"><a id="a2068672157fb033bbdb9a634f8e678a0"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a2068672157fb033bbdb9a634f8e678a0">element_type</a> = typename base_type::element_type</td></tr>
+<tr class="memdesc:a2068672157fb033bbdb9a634f8e678a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an element in one of the ChunkSpans comprising the <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>. <br /></td></tr>
+<tr class="separator:a2068672157fb033bbdb9a634f8e678a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a159b7fcc46c877cd175b88be6b47d2d3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a159b7fcc46c877cd175b88be6b47d2d3">span_type</a> = <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;</td></tr>
 <tr class="memdesc:a159b7fcc46c877cd175b88be6b47d2d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a modifiable reference to a <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>.  <a href="classVectorFieldSpan.html#a159b7fcc46c877cd175b88be6b47d2d3">More...</a><br /></td></tr>
 <tr class="separator:a159b7fcc46c877cd175b88be6b47d2d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,47 +144,63 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a02615c4513fb510c9fdc12db6d776df4">mdomain_type</a> = typename base_type::mdomain_type</td></tr>
 <tr class="memdesc:a02615c4513fb510c9fdc12db6d776df4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the domain on which the field is defined. <br /></td></tr>
 <tr class="separator:a02615c4513fb510c9fdc12db6d776df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a58d951bcf7190337944ef8a3789e1c"><td class="memItemLeft" align="right" valign="top"><a id="a7a58d951bcf7190337944ef8a3789e1c"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a7a58d951bcf7190337944ef8a3789e1c">memory_space</a> = typename chunk_type::memory_space</td></tr>
+<tr class="memdesc:a7a58d951bcf7190337944ef8a3789e1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the memory space where the field is saved (CPU vs GPU). <br /></td></tr>
+<tr class="separator:a7a58d951bcf7190337944ef8a3789e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acaf8031f57887bcc42fbb14db6e5c131"><td class="memItemLeft" align="right" valign="top"><a id="acaf8031f57887bcc42fbb14db6e5c131"></a>
-constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#acaf8031f57887bcc42fbb14db6e5c131">VectorFieldSpan</a> ()=default</td></tr>
-<tr class="memdesc:acaf8031f57887bcc42fbb14db6e5c131"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>. <br /></td></tr>
-<tr class="separator:acaf8031f57887bcc42fbb14db6e5c131"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97f241c812732305c4e65db67e3a7de4"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a97f241c812732305c4e65db67e3a7de4">VectorFieldSpan</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> const &amp;other)=default</td></tr>
-<tr class="memdesc:a97f241c812732305c4e65db67e3a7de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> by copy, yields a new view to the same data.  <a href="classVectorFieldSpan.html#a97f241c812732305c4e65db67e3a7de4">More...</a><br /></td></tr>
-<tr class="separator:a97f241c812732305c4e65db67e3a7de4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6293c5e31f3a9860d949787c90e06ba4"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a6293c5e31f3a9860d949787c90e06ba4">VectorFieldSpan</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> &amp;&amp;other)=default</td></tr>
-<tr class="memdesc:a6293c5e31f3a9860d949787c90e06ba4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> by move.  <a href="classVectorFieldSpan.html#a6293c5e31f3a9860d949787c90e06ba4">More...</a><br /></td></tr>
-<tr class="separator:a6293c5e31f3a9860d949787c90e06ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a784fed8faf92d927f429955b8e63e5f0"><td class="memTemplParams" colspan="2">template&lt;class OElementType , class Allocator &gt; </td></tr>
-<tr class="memitem:a784fed8faf92d927f429955b8e63e5f0"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a784fed8faf92d927f429955b8e63e5f0">VectorFieldSpan</a> (<a class="el" href="classVectorField.html">VectorField</a>&lt; OElementType, Domain, NDTag, Allocator &gt; &amp;other) noexcept</td></tr>
-<tr class="memdesc:a784fed8faf92d927f429955b8e63e5f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> from a <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>, yields a new view to the same data.  <a href="classVectorFieldSpan.html#a784fed8faf92d927f429955b8e63e5f0">More...</a><br /></td></tr>
-<tr class="separator:a784fed8faf92d927f429955b8e63e5f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01fe991573f5ce086459b79b0a9593fd"><td class="memTemplParams" colspan="2">template&lt;class OElementType , class SFINAEElementType  = ElementType, class  = std::enable_if_t&lt;std::is_const_v&lt;SFINAEElementType&gt;&gt;, class Allocator &gt; </td></tr>
-<tr class="memitem:a01fe991573f5ce086459b79b0a9593fd"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a01fe991573f5ce086459b79b0a9593fd">VectorFieldSpan</a> (<a class="el" href="classVectorField.html">VectorField</a>&lt; OElementType, Domain, NDTag, Allocator &gt; const &amp;other) noexcept</td></tr>
-<tr class="memdesc:a01fe991573f5ce086459b79b0a9593fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> from a <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>, yields a new view to the same data.  <a href="classVectorFieldSpan.html#a01fe991573f5ce086459b79b0a9593fd">More...</a><br /></td></tr>
-<tr class="separator:a01fe991573f5ce086459b79b0a9593fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad91197873d342a5ae7d61f8b029903e1"><td class="memTemplParams" colspan="2">template&lt;class OElementType &gt; </td></tr>
-<tr class="memitem:ad91197873d342a5ae7d61f8b029903e1"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#ad91197873d342a5ae7d61f8b029903e1">VectorFieldSpan</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; OElementType, <a class="el" href="classVectorFieldSpan.html#a02615c4513fb510c9fdc12db6d776df4">mdomain_type</a>, NDTag, LayoutStridedPolicy, MemorySpace &gt; const &amp;other) noexcept</td></tr>
-<tr class="memdesc:ad91197873d342a5ae7d61f8b029903e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> by copy of a chunk, yields a new view to the same data.  <a href="classVectorFieldSpan.html#ad91197873d342a5ae7d61f8b029903e1">More...</a><br /></td></tr>
-<tr class="separator:ad91197873d342a5ae7d61f8b029903e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d875ae345120eb5680622cd3400c2fd"><td class="memTemplParams" colspan="2">template&lt;class... OElementType, class  = std::enable_if_t&lt;                    std::conjunction_v&lt;std::is_same&lt;OElementType, ElementType&gt;...&gt;&gt;, class  = std::enable_if_t&lt;sizeof...(OElementType) == base_type::NDims&gt;&gt; </td></tr>
-<tr class="memitem:a6d875ae345120eb5680622cd3400c2fd"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a6d875ae345120eb5680622cd3400c2fd">VectorFieldSpan</a> (<a class="el" href="classVectorFieldSpan.html#a02615c4513fb510c9fdc12db6d776df4">mdomain_type</a> const &amp;domain, OElementType *... ptr)</td></tr>
-<tr class="memdesc:a6d875ae345120eb5680622cd3400c2fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> from scratch.  <a href="classVectorFieldSpan.html#a6d875ae345120eb5680622cd3400c2fd">More...</a><br /></td></tr>
-<tr class="separator:a6d875ae345120eb5680622cd3400c2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b0dcc2e155106a249271f0cdfda332a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a3b0dcc2e155106a249271f0cdfda332a">operator=</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> const &amp;other)=default</td></tr>
-<tr class="memdesc:a3b0dcc2e155106a249271f0cdfda332a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns a new value to this <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>, yields a new view to the same data.  <a href="classVectorFieldSpan.html#a3b0dcc2e155106a249271f0cdfda332a">More...</a><br /></td></tr>
-<tr class="separator:a3b0dcc2e155106a249271f0cdfda332a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a079197433ab9d4fca858fbb82a46fb93"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a079197433ab9d4fca858fbb82a46fb93">operator=</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> &amp;&amp;other)=default</td></tr>
-<tr class="memdesc:a079197433ab9d4fca858fbb82a46fb93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns a new value to this <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>.  <a href="classVectorFieldSpan.html#a079197433ab9d4fca858fbb82a46fb93">More...</a><br /></td></tr>
-<tr class="separator:a079197433ab9d4fca858fbb82a46fb93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a496be86209bed2fe0c4637c2068f2e9d"><td class="memItemLeft" align="right" valign="top"><a id="a496be86209bed2fe0c4637c2068f2e9d"></a>
+constexpr KOKKOS_DEFAULTED_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a496be86209bed2fe0c4637c2068f2e9d">VectorFieldSpan</a> ()=default</td></tr>
+<tr class="memdesc:a496be86209bed2fe0c4637c2068f2e9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>. <br /></td></tr>
+<tr class="separator:a496be86209bed2fe0c4637c2068f2e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89cfd62b5379f8ecddc0034a95a7087b"><td class="memItemLeft" align="right" valign="top"><a id="a89cfd62b5379f8ecddc0034a95a7087b"></a>
+KOKKOS_DEFAULTED_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a89cfd62b5379f8ecddc0034a95a7087b">~VectorFieldSpan</a> ()=default</td></tr>
+<tr class="memdesc:a89cfd62b5379f8ecddc0034a95a7087b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> destructor. <br /></td></tr>
+<tr class="separator:a89cfd62b5379f8ecddc0034a95a7087b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae15150e6af873478dfe5132a30fe168a"><td class="memItemLeft" align="right" valign="top">constexpr KOKKOS_DEFAULTED_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#ae15150e6af873478dfe5132a30fe168a">VectorFieldSpan</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> const &amp;other)=default</td></tr>
+<tr class="memdesc:ae15150e6af873478dfe5132a30fe168a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> by copy, yields a new view to the same data.  <a href="classVectorFieldSpan.html#ae15150e6af873478dfe5132a30fe168a">More...</a><br /></td></tr>
+<tr class="separator:ae15150e6af873478dfe5132a30fe168a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4aea470e10596cd64dbb912ac9c9dfb"><td class="memItemLeft" align="right" valign="top">constexpr KOKKOS_DEFAULTED_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#aa4aea470e10596cd64dbb912ac9c9dfb">VectorFieldSpan</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:aa4aea470e10596cd64dbb912ac9c9dfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> by move.  <a href="classVectorFieldSpan.html#aa4aea470e10596cd64dbb912ac9c9dfb">More...</a><br /></td></tr>
+<tr class="separator:aa4aea470e10596cd64dbb912ac9c9dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4f77f6e758b991a7c18bb9b25c0ae30"><td class="memTemplParams" colspan="2">template&lt;class OElementType , class Allocator &gt; </td></tr>
+<tr class="memitem:aa4f77f6e758b991a7c18bb9b25c0ae30"><td class="memTemplItemLeft" align="right" valign="top">constexpr KOKKOS_FUNCTION&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#aa4f77f6e758b991a7c18bb9b25c0ae30">VectorFieldSpan</a> (<a class="el" href="classVectorField.html">VectorField</a>&lt; OElementType, Domain, NDTag, Allocator &gt; &amp;other) noexcept</td></tr>
+<tr class="memdesc:aa4f77f6e758b991a7c18bb9b25c0ae30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> from a <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>, yields a new view to the same data.  <a href="classVectorFieldSpan.html#aa4f77f6e758b991a7c18bb9b25c0ae30">More...</a><br /></td></tr>
+<tr class="separator:aa4f77f6e758b991a7c18bb9b25c0ae30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab10f4b73b4233a02e5f25c2b4afcb6b8"><td class="memTemplParams" colspan="2">template&lt;class OElementType , class SFINAEElementType  = ElementType, class  = std::enable_if_t&lt;std::is_const_v&lt;SFINAEElementType&gt;&gt;, class Allocator &gt; </td></tr>
+<tr class="memitem:ab10f4b73b4233a02e5f25c2b4afcb6b8"><td class="memTemplItemLeft" align="right" valign="top">constexpr KOKKOS_FUNCTION&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#ab10f4b73b4233a02e5f25c2b4afcb6b8">VectorFieldSpan</a> (<a class="el" href="classVectorField.html">VectorField</a>&lt; OElementType, Domain, NDTag, Allocator &gt; const &amp;other) noexcept</td></tr>
+<tr class="memdesc:ab10f4b73b4233a02e5f25c2b4afcb6b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> from a <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>, yields a new view to the same data.  <a href="classVectorFieldSpan.html#ab10f4b73b4233a02e5f25c2b4afcb6b8">More...</a><br /></td></tr>
+<tr class="separator:ab10f4b73b4233a02e5f25c2b4afcb6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d06815cd2394ffa4549a154ee796280"><td class="memTemplParams" colspan="2">template&lt;class OElementType &gt; </td></tr>
+<tr class="memitem:a6d06815cd2394ffa4549a154ee796280"><td class="memTemplItemLeft" align="right" valign="top">constexpr KOKKOS_FUNCTION&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a6d06815cd2394ffa4549a154ee796280">VectorFieldSpan</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; OElementType, <a class="el" href="classVectorFieldSpan.html#a02615c4513fb510c9fdc12db6d776df4">mdomain_type</a>, NDTag, LayoutStridedPolicy, MemorySpace &gt; const &amp;other) noexcept</td></tr>
+<tr class="memdesc:a6d06815cd2394ffa4549a154ee796280"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> by copy of a chunk, yields a new view to the same data.  <a href="classVectorFieldSpan.html#a6d06815cd2394ffa4549a154ee796280">More...</a><br /></td></tr>
+<tr class="separator:a6d06815cd2394ffa4549a154ee796280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9abf5d8db080b9e814bdf95d56fa9e9"><td class="memTemplParams" colspan="2">template&lt;class... OElementType, class  = std::enable_if_t&lt;                    std::conjunction_v&lt;std::is_same&lt;OElementType, ElementType&gt;...&gt;&gt;, class  = std::enable_if_t&lt;sizeof...(OElementType) == base_type::NDims&gt;&gt; </td></tr>
+<tr class="memitem:ab9abf5d8db080b9e814bdf95d56fa9e9"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#ab9abf5d8db080b9e814bdf95d56fa9e9">VectorFieldSpan</a> (<a class="el" href="classVectorFieldSpan.html#a02615c4513fb510c9fdc12db6d776df4">mdomain_type</a> const &amp;domain, OElementType *... ptr)</td></tr>
+<tr class="memdesc:ab9abf5d8db080b9e814bdf95d56fa9e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> from scratch.  <a href="classVectorFieldSpan.html#ab9abf5d8db080b9e814bdf95d56fa9e9">More...</a><br /></td></tr>
+<tr class="separator:ab9abf5d8db080b9e814bdf95d56fa9e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3abef65badf2ce5915d6b9b86b0ebdc"><td class="memItemLeft" align="right" valign="top">constexpr KOKKOS_DEFAULTED_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#ad3abef65badf2ce5915d6b9b86b0ebdc">operator=</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> const &amp;other)=default</td></tr>
+<tr class="memdesc:ad3abef65badf2ce5915d6b9b86b0ebdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns a new value to this <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>, yields a new view to the same data.  <a href="classVectorFieldSpan.html#ad3abef65badf2ce5915d6b9b86b0ebdc">More...</a><br /></td></tr>
+<tr class="separator:ad3abef65badf2ce5915d6b9b86b0ebdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a433af9f5d44cbce08babed67ef482945"><td class="memItemLeft" align="right" valign="top">constexpr KOKKOS_DEFAULTED_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a433af9f5d44cbce08babed67ef482945">operator=</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:a433af9f5d44cbce08babed67ef482945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns a new value to this <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>.  <a href="classVectorFieldSpan.html#a433af9f5d44cbce08babed67ef482945">More...</a><br /></td></tr>
+<tr class="separator:a433af9f5d44cbce08babed67ef482945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9835c4b3c61102263bc404c948c551c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classVectorFieldSpan.html#ae3ef9487bd121b575f80db5989536a2f">view_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#ac9835c4b3c61102263bc404c948c551c">span_cview</a> () const</td></tr>
 <tr class="memdesc:ac9835c4b3c61102263bc404c948c551c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant reference to the vector field referred to by this vector field span.  <a href="classVectorFieldSpan.html#ac9835c4b3c61102263bc404c948c551c">More...</a><br /></td></tr>
 <tr class="separator:ac9835c4b3c61102263bc404c948c551c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc499084ae93b3118644c458e16b3549"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classVectorFieldSpan.html#a159b7fcc46c877cd175b88be6b47d2d3">span_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#acc499084ae93b3118644c458e16b3549">span_view</a> () const</td></tr>
 <tr class="memdesc:acc499084ae93b3118644c458e16b3549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a modifiable reference to the vector field referred to by this vector field span.  <a href="classVectorFieldSpan.html#acc499084ae93b3118644c458e16b3549">More...</a><br /></td></tr>
 <tr class="separator:acc499084ae93b3118644c458e16b3549"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e427b749f6b250678072c3717f8af51"><td class="memTemplParams" colspan="2">template&lt;class... ODDims&gt; </td></tr>
+<tr class="memitem:a0e427b749f6b250678072c3717f8af51"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classVectorFieldSpan.html#a2068672157fb033bbdb9a634f8e678a0">element_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a0e427b749f6b250678072c3717f8af51">operator()</a> (ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) const noexcept</td></tr>
+<tr class="memdesc:a0e427b749f6b250678072c3717f8af51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a list of DiscreteElement.  <a href="classVectorFieldSpan.html#a0e427b749f6b250678072c3717f8af51">More...</a><br /></td></tr>
+<tr class="separator:a0e427b749f6b250678072c3717f8af51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40c96027d4f5d45385ede1a672e98db4"><td class="memTemplParams" colspan="2">template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt; </td></tr>
+<tr class="memitem:a40c96027d4f5d45385ede1a672e98db4"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classVectorFieldSpan.html#a2068672157fb033bbdb9a634f8e678a0">element_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a40c96027d4f5d45385ede1a672e98db4">operator()</a> (ddc::DiscreteElement&lt; ODDims... &gt; const &amp;delems) const noexcept</td></tr>
+<tr class="memdesc:a40c96027d4f5d45385ede1a672e98db4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a multi-dimensional DiscreteElement.  <a href="classVectorFieldSpan.html#a40c96027d4f5d45385ede1a672e98db4">More...</a><br /></td></tr>
+<tr class="separator:a40c96027d4f5d45385ede1a672e98db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad70b8f79a45666e097299ac974f76046"><td class="memTemplParams" colspan="2">template&lt;class... QueryDDims&gt; </td></tr>
 <tr class="memitem:ad70b8f79a45666e097299ac974f76046"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#ad70b8f79a45666e097299ac974f76046">operator[]</a> (ddc::DiscreteElement&lt; QueryDDims... &gt; const &amp;slice_spec)</td></tr>
 <tr class="memdesc:ad70b8f79a45666e097299ac974f76046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice out some dimensions.  <a href="classVectorFieldSpan.html#ad70b8f79a45666e097299ac974f76046">More...</a><br /></td></tr>
@@ -235,8 +255,8 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a97f241c812732305c4e65db67e3a7de4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97f241c812732305c4e65db67e3a7de4">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[1/6]</span></h2>
+<a id="ae15150e6af873478dfe5132a30fe168a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae15150e6af873478dfe5132a30fe168a">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[1/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,7 +267,7 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
+          <td class="memname">constexpr KOKKOS_DEFAULTED_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt; const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -271,8 +291,8 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
 
 </div>
 </div>
-<a id="a6293c5e31f3a9860d949787c90e06ba4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6293c5e31f3a9860d949787c90e06ba4">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[2/6]</span></h2>
+<a id="aa4aea470e10596cd64dbb912ac9c9dfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4aea470e10596cd64dbb912ac9c9dfb">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[2/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -283,7 +303,7 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
+          <td class="memname">constexpr KOKKOS_DEFAULTED_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -307,8 +327,8 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
 
 </div>
 </div>
-<a id="a784fed8faf92d927f429955b8e63e5f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a784fed8faf92d927f429955b8e63e5f0">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[3/6]</span></h2>
+<a id="aa4f77f6e758b991a7c18bb9b25c0ae30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4f77f6e758b991a7c18bb9b25c0ae30">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[3/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -321,7 +341,7 @@ template&lt;class OElementType , class Allocator &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
+          <td class="memname">constexpr KOKKOS_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; OElementType, Domain, NDTag, Allocator &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -345,8 +365,8 @@ template&lt;class OElementType , class Allocator &gt; </div>
 
 </div>
 </div>
-<a id="a01fe991573f5ce086459b79b0a9593fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01fe991573f5ce086459b79b0a9593fd">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[4/6]</span></h2>
+<a id="ab10f4b73b4233a02e5f25c2b4afcb6b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab10f4b73b4233a02e5f25c2b4afcb6b8">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[4/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -359,7 +379,7 @@ template&lt;class OElementType , class SFINAEElementType  = ElementType, class  
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
+          <td class="memname">constexpr KOKKOS_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; OElementType, Domain, NDTag, Allocator &gt; const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -383,8 +403,8 @@ template&lt;class OElementType , class SFINAEElementType  = ElementType, class  
 
 </div>
 </div>
-<a id="ad91197873d342a5ae7d61f8b029903e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad91197873d342a5ae7d61f8b029903e1">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[5/6]</span></h2>
+<a id="a6d06815cd2394ffa4549a154ee796280"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d06815cd2394ffa4549a154ee796280">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[5/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -397,7 +417,7 @@ template&lt;class OElementType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
+          <td class="memname">constexpr KOKKOS_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; OElementType, <a class="el" href="classVectorFieldSpan.html#a02615c4513fb510c9fdc12db6d776df4">mdomain_type</a>, NDTag, LayoutStridedPolicy, MemorySpace &gt; const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -421,8 +441,8 @@ template&lt;class OElementType &gt; </div>
 
 </div>
 </div>
-<a id="a6d875ae345120eb5680622cd3400c2fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d875ae345120eb5680622cd3400c2fd">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[6/6]</span></h2>
+<a id="ab9abf5d8db080b9e814bdf95d56fa9e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9abf5d8db080b9e814bdf95d56fa9e9">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[6/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -435,7 +455,7 @@ template&lt;class... OElementType, class  = std::enable_if_t&lt;                
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classVectorFieldSpan.html#a02615c4513fb510c9fdc12db6d776df4">mdomain_type</a> const &amp;&#160;</td>
           <td class="paramname"><em>domain</em>, </td>
@@ -471,8 +491,8 @@ template&lt;class... OElementType, class  = std::enable_if_t&lt;                
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3b0dcc2e155106a249271f0cdfda332a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b0dcc2e155106a249271f0cdfda332a">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="ad3abef65badf2ce5915d6b9b86b0ebdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3abef65badf2ce5915d6b9b86b0ebdc">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -483,7 +503,7 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&amp; <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::operator= </td>
+          <td class="memname">constexpr KOKKOS_DEFAULTED_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&amp; <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt; const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -508,8 +528,8 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
 
 </div>
 </div>
-<a id="a079197433ab9d4fca858fbb82a46fb93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a079197433ab9d4fca858fbb82a46fb93">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a433af9f5d44cbce08babed67ef482945"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a433af9f5d44cbce08babed67ef482945">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -520,7 +540,7 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&amp; <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::operator= </td>
+          <td class="memname">constexpr KOKKOS_DEFAULTED_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&amp; <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -602,6 +622,84 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
 
 <p>Get a modifiable reference to the vector field referred to by this vector field span. </p>
 <dl class="section return"><dt>Returns</dt><dd>A constant reference to the vector field. </dd></dl>
+
+</div>
+</div>
+<a id="a0e427b749f6b250678072c3717f8af51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e427b749f6b250678072c3717f8af51">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ElementType , class Domain , class NDTag , class LayoutStridedPolicy , class MemorySpace &gt; </div>
+<div class="memtemplate">
+template&lt;class... ODDims&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classVectorFieldSpan.html#a2068672157fb033bbdb9a634f8e678a0">element_type</a> <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">ddc::DiscreteElement&lt; ODDims &gt; const &amp;...&#160;</td>
+          <td class="paramname"><em>delems</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Element access using a list of DiscreteElement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delems</td><td>1D discrete coordinates </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>copy of this element </dd></dl>
+
+</div>
+</div>
+<a id="a40c96027d4f5d45385ede1a672e98db4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40c96027d4f5d45385ede1a672e98db4">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ElementType , class Domain , class NDTag , class LayoutStridedPolicy , class MemorySpace &gt; </div>
+<div class="memtemplate">
+template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classVectorFieldSpan.html#a2068672157fb033bbdb9a634f8e678a0">element_type</a> <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">ddc::DiscreteElement&lt; ODDims... &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>delems</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Element access using a multi-dimensional DiscreteElement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delems</td><td>discrete coordinates </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>copy of this element </dd></dl>
 
 </div>
 </div>

@@ -1,9 +1,11 @@
 var classVectorField =
 [
     [ "chunk_type", "classVectorField.html#a17028a562655b6e58926450f8849b066", null ],
+    [ "element_type", "classVectorField.html#a7d71d064cda609eb5a4bd7a5b8ca870d", null ],
     [ "span_type", "classVectorField.html#a94d0034047dacae6e8a7f87d8b21fc41", null ],
     [ "view_type", "classVectorField.html#a3ec69912b7bbe42bf8302013b4ee3bcd", null ],
     [ "mdomain_type", "classVectorField.html#ab896e267b63db730e4344e1e15f2956f", null ],
+    [ "memory_space", "classVectorField.html#a7df5bf4cd762372ba4ae06c99b6ed478", null ],
     [ "VectorField", "classVectorField.html#affcf9abd0e02dde4aa553233de0b57c8", null ],
     [ "VectorField", "classVectorField.html#a9355ed87913f63a941e03f6b61a4c9e0", null ],
     [ "VectorField", "classVectorField.html#a8e6b67ec99341f76401f77a27575cbfc", null ],
@@ -15,6 +17,8 @@ var classVectorField =
     [ "span_cview", "classVectorField.html#ae5421322e080a9f2ae63ff7796da6ed3", null ],
     [ "span_view", "classVectorField.html#acb9821e3a1405005d7251bfbfea66f89", null ],
     [ "span_view", "classVectorField.html#a40800a9ffc0b36a09ae8154aac00759b", null ],
+    [ "operator()", "classVectorField.html#acb1058aa8ea2bd2cc6e2449c3b5c3eb6", null ],
+    [ "operator()", "classVectorField.html#a06536f7ec56093a9b87f4ee0c1d5b64c", null ],
     [ "operator[]", "classVectorField.html#a925526e030fc6967c04e66771fc13e2a", null ],
     [ "operator[]", "classVectorField.html#a86ea12473bc7ea9364085826a7c5d512", null ],
     [ "operator[]", "classVectorField.html#a4db1434ddd534be7882315c50bb25396", null ],

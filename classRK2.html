@@ -127,9 +127,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa215475ac2ff63e25d2451175cff5759"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</td></tr>
 <tr class="memdesc:aa215475ac2ff63e25d2451175cff5759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Runge-Kutta scheme.  <a href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">More...</a><br /></td></tr>
 <tr class="separator:aa215475ac2ff63e25d2451175cff5759"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1cd05ca1c4acfa3e15876eec0e18678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRK2.html#ae1cd05ca1c4acfa3e15876eec0e18678">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update) const</td></tr>
-<tr class="memdesc:ae1cd05ca1c4acfa3e15876eec0e18678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Runge-Kutta scheme.  <a href="classRK2.html#ae1cd05ca1c4acfa3e15876eec0e18678">More...</a><br /></td></tr>
-<tr class="separator:ae1cd05ca1c4acfa3e15876eec0e18678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44c1f10dc1b14ad6dbad54cd596704f4"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
+<tr class="memitem:a44c1f10dc1b14ad6dbad54cd596704f4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRK2.html#a44c1f10dc1b14ad6dbad54cd596704f4">update</a> (ExecSpace const &amp;exec_space, ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</td></tr>
+<tr class="memdesc:a44c1f10dc1b14ad6dbad54cd596704f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Runge-Kutta scheme.  <a href="classRK2.html#a44c1f10dc1b14ad6dbad54cd596704f4">More...</a><br /></td></tr>
+<tr class="separator:a44c1f10dc1b14ad6dbad54cd596704f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af634097606b3d5f2b54ca3311561ecc1"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
+<tr class="memitem:af634097606b3d5f2b54ca3311561ecc1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRK2.html#af634097606b3d5f2b54ca3311561ecc1">update</a> (ExecSpace const &amp;exec_space, ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update) const</td></tr>
+<tr class="memdesc:af634097606b3d5f2b54ca3311561ecc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Runge-Kutta scheme.  <a href="classRK2.html#af634097606b3d5f2b54ca3311561ecc1">More...</a><br /></td></tr>
+<tr class="separator:af634097606b3d5f2b54ca3311561ecc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class ValChunk, class DerivChunk = ValChunk&gt;<br />
@@ -183,7 +188,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa215475ac2ff63e25d2451175cff5759"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa215475ac2ff63e25d2451175cff5759">&#9670;&nbsp;</a></span>update() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa215475ac2ff63e25d2451175cff5759">&#9670;&nbsp;</a></span>update() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,13 +242,15 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 
 </div>
 </div>
-<a id="ae1cd05ca1c4acfa3e15876eec0e18678"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1cd05ca1c4acfa3e15876eec0e18678">&#9670;&nbsp;</a></span>update() <span class="overload">[2/2]</span></h2>
+<a id="a44c1f10dc1b14ad6dbad54cd596704f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44c1f10dc1b14ad6dbad54cd596704f4">&#9670;&nbsp;</a></span>update() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
+<div class="memtemplate">
+template&lt;class ExecSpace &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -251,6 +258,76 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classRK2.html">RK2</a>&lt; ValChunk, DerivChunk &gt;::update </td>
           <td>(</td>
+          <td class="paramtype">ExecSpace const &amp;&#160;</td>
+          <td class="paramname"><em>exec_space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ValSpan&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(DerivSpan, ValView)&gt;&#160;</td>
+          <td class="paramname"><em>dy</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Carry out one step of the Runge-Kutta scheme. </p>
+<p>This function is a wrapper around the update function below. The values of the function are updated using the trivial method $f += df * dt$. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">exec_space</td><td>The space on which the function is executed (CPU/GPU). </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">y</td><td>The value(s) which should be evolved over time defined on each of the dimensions at each point of the domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The time step over which the values should be evolved. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dy</td><td>The function describing how the derivative of the evolve function is calculated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af634097606b3d5f2b54ca3311561ecc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af634097606b3d5f2b54ca3311561ecc1">&#9670;&nbsp;</a></span>update() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
+<div class="memtemplate">
+template&lt;class ExecSpace &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRK2.html">RK2</a>&lt; ValChunk, DerivChunk &gt;::update </td>
+          <td>(</td>
+          <td class="paramtype">ExecSpace const &amp;&#160;</td>
+          <td class="paramname"><em>exec_space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">ValSpan&#160;</td>
           <td class="paramname"><em>y</em>, </td>
         </tr>
@@ -288,6 +365,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 <p>Carry out one step of the Runge-Kutta scheme. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">exec_space</td><td>The space on which the function is executed (CPU/GPU). </td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">y</td><td>The value(s) which should be evolved over time defined on each of the dimensions at each point of the domain. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The time step over which the values should be evolved. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dy</td><td>The function describing how the derivative of the evolve function is calculated. </td></tr>

@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('advection__domain_8hpp_source.html',''
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            CoordXY <span class="keyword">const</span> feet_xy = coord_xy - dt * advection_field(irp);</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c">norm_inf</a>(feet_xy - coord_center) &lt; 1e-15) {</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(feet_xy - coord_center) &lt; 1e-15) {</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                feet_coords_rp(irp) = CoordRP(0, 0);</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                feet_coords_rp(irp) = m_mapping(feet_xy);</div>
@@ -229,7 +229,7 @@ $(document).ready(function(){initNavTree('advection__domain_8hpp_source.html',''
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;            <a class="code" href="classAdvectionPseudoCartesianDomain.html#a6f41e47d28f2b78e657fafb7d45c4aa1">CoordXY_adv</a> <span class="keyword">const</span> feet_xy_pseudo_cart</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                    = coord_xy_pseudo_cart - dt * advection_field(irp);</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c">norm_inf</a>(feet_xy_pseudo_cart - center_xy_pseudo_cart) &lt; 1e-15) {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(feet_xy_pseudo_cart - center_xy_pseudo_cart) &lt; 1e-15) {</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                feet_coords_rp(irp) = CoordRP(0, 0);</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                feet_coords_rp(irp) = pseudo_Cartesian_mapping(feet_xy_pseudo_cart);</div>
@@ -326,7 +326,7 @@ $(document).ready(function(){initNavTree('advection__domain_8hpp_source.html',''
 <div class="ttc" id="astructRDimX_html"><div class="ttname"><a href="structRDimX.html">RDimX</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:435</div></div>
 <div class="ttc" id="astructRDimY_html"><div class="ttname"><a href="structRDimY.html">RDimY</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:648</div></div>
 <div class="ttc" id="autils__tools_8hpp_html"><div class="ttname"><a href="utils__tools_8hpp.html">utils_tools.hpp</a></div><div class="ttdoc">File Describing useful functions.</div></div>
-<div class="ttc" id="autils__tools_8hpp_html_a611dfcf6e3f686331e7a6f112ea93d8c"><div class="ttname"><a href="utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c">norm_inf</a></div><div class="ttdeci">double norm_inf(ddc::Coordinate&lt; Tags... &gt; coord)</div><div class="ttdoc">Compute the infinity norm.</div><div class="ttdef"><b>Definition:</b> utils_tools.hpp:23</div></div>
+<div class="ttc" id="autils__tools_8hpp_html_a939e3995d29bdb32c073e38494563009"><div class="ttname"><a href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a></div><div class="ttdeci">KOKKOS_FUNCTION double norm_inf(ddc::Coordinate&lt; Tags... &gt; coord)</div><div class="ttdoc">Compute the infinity norm.</div><div class="ttdef"><b>Definition:</b> utils_tools.hpp:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

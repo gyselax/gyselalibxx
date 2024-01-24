@@ -126,6 +126,10 @@ Public Types</h2></td></tr>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a17028a562655b6e58926450f8849b066">chunk_type</a> = ddc::Chunk&lt; ElementType, Domain, Allocator &gt;</td></tr>
 <tr class="memdesc:a17028a562655b6e58926450f8849b066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type describing the object which can be extracted from this <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a> using the get&lt;&gt; function. <br /></td></tr>
 <tr class="separator:a17028a562655b6e58926450f8849b066"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d71d064cda609eb5a4bd7a5b8ca870d"><td class="memItemLeft" align="right" valign="top"><a id="a7d71d064cda609eb5a4bd7a5b8ca870d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a7d71d064cda609eb5a4bd7a5b8ca870d">element_type</a> = typename base_type::element_type</td></tr>
+<tr class="memdesc:a7d71d064cda609eb5a4bd7a5b8ca870d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an element in one of the Chunks comprising the <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>. <br /></td></tr>
+<tr class="separator:a7d71d064cda609eb5a4bd7a5b8ca870d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94d0034047dacae6e8a7f87d8b21fc41"><td class="memItemLeft" align="right" valign="top"><a id="a94d0034047dacae6e8a7f87d8b21fc41"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a94d0034047dacae6e8a7f87d8b21fc41">span_type</a> = <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, std::experimental::layout_right, typename Allocator::memory_space &gt;</td></tr>
 <tr class="memdesc:a94d0034047dacae6e8a7f87d8b21fc41"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a reference to this <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>. <br /></td></tr>
@@ -138,6 +142,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#ab896e267b63db730e4344e1e15f2956f">mdomain_type</a> = typename base_type::mdomain_type</td></tr>
 <tr class="memdesc:ab896e267b63db730e4344e1e15f2956f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the domain on which the field is defined. <br /></td></tr>
 <tr class="separator:ab896e267b63db730e4344e1e15f2956f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7df5bf4cd762372ba4ae06c99b6ed478"><td class="memItemLeft" align="right" valign="top"><a id="a7df5bf4cd762372ba4ae06c99b6ed478"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a7df5bf4cd762372ba4ae06c99b6ed478">memory_space</a> = typename chunk_type::memory_space</td></tr>
+<tr class="memdesc:a7df5bf4cd762372ba4ae06c99b6ed478"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the memory space where the field is saved (CPU vs GPU). <br /></td></tr>
+<tr class="separator:a7df5bf4cd762372ba4ae06c99b6ed478"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -174,6 +182,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a40800a9ffc0b36a09ae8154aac00759b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorField.html#a94d0034047dacae6e8a7f87d8b21fc41">span_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a40800a9ffc0b36a09ae8154aac00759b">span_view</a> ()</td></tr>
 <tr class="memdesc:a40800a9ffc0b36a09ae8154aac00759b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a modifiable reference to this vector field.  <a href="classVectorField.html#a40800a9ffc0b36a09ae8154aac00759b">More...</a><br /></td></tr>
 <tr class="separator:a40800a9ffc0b36a09ae8154aac00759b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb1058aa8ea2bd2cc6e2449c3b5c3eb6"><td class="memTemplParams" colspan="2">template&lt;class... ODDims&gt; </td></tr>
+<tr class="memitem:acb1058aa8ea2bd2cc6e2449c3b5c3eb6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVectorField.html#a7d71d064cda609eb5a4bd7a5b8ca870d">element_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#acb1058aa8ea2bd2cc6e2449c3b5c3eb6">operator()</a> (ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) const noexcept</td></tr>
+<tr class="memdesc:acb1058aa8ea2bd2cc6e2449c3b5c3eb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a list of DiscreteElement.  <a href="classVectorField.html#acb1058aa8ea2bd2cc6e2449c3b5c3eb6">More...</a><br /></td></tr>
+<tr class="separator:acb1058aa8ea2bd2cc6e2449c3b5c3eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06536f7ec56093a9b87f4ee0c1d5b64c"><td class="memTemplParams" colspan="2">template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt; </td></tr>
+<tr class="memitem:a06536f7ec56093a9b87f4ee0c1d5b64c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVectorField.html#a7d71d064cda609eb5a4bd7a5b8ca870d">element_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a06536f7ec56093a9b87f4ee0c1d5b64c">operator()</a> (ddc::DiscreteElement&lt; ODDims... &gt; const &amp;delems) const noexcept</td></tr>
+<tr class="memdesc:a06536f7ec56093a9b87f4ee0c1d5b64c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a multi-dimensional DiscreteElement.  <a href="classVectorField.html#a06536f7ec56093a9b87f4ee0c1d5b64c">More...</a><br /></td></tr>
+<tr class="separator:a06536f7ec56093a9b87f4ee0c1d5b64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a925526e030fc6967c04e66771fc13e2a"><td class="memTemplParams" colspan="2">template&lt;class... QueryDDims&gt; </td></tr>
 <tr class="memitem:a925526e030fc6967c04e66771fc13e2a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a925526e030fc6967c04e66771fc13e2a">operator[]</a> (ddc::DiscreteElement&lt; QueryDDims... &gt; const &amp;slice_spec) const</td></tr>
 <tr class="memdesc:a925526e030fc6967c04e66771fc13e2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice out some dimensions.  <a href="classVectorField.html#a925526e030fc6967c04e66771fc13e2a">More...</a><br /></td></tr>
@@ -482,6 +498,84 @@ template&lt;class ElementType , class Domain , class NDTag , class Allocator &gt
 
 <p>Get a modifiable reference to this vector field. </p>
 <dl class="section return"><dt>Returns</dt><dd>A modifiable reference to this vector field. </dd></dl>
+
+</div>
+</div>
+<a id="acb1058aa8ea2bd2cc6e2449c3b5c3eb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb1058aa8ea2bd2cc6e2449c3b5c3eb6">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ElementType , class Domain , class NDTag , class Allocator &gt; </div>
+<div class="memtemplate">
+template&lt;class... ODDims&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classVectorField.html#a7d71d064cda609eb5a4bd7a5b8ca870d">element_type</a> <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, Domain, NDTag, Allocator &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">ddc::DiscreteElement&lt; ODDims &gt; const &amp;...&#160;</td>
+          <td class="paramname"><em>delems</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Element access using a list of DiscreteElement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delems</td><td>1D discrete coordinates </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>copy of this element </dd></dl>
+
+</div>
+</div>
+<a id="a06536f7ec56093a9b87f4ee0c1d5b64c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06536f7ec56093a9b87f4ee0c1d5b64c">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ElementType , class Domain , class NDTag , class Allocator &gt; </div>
+<div class="memtemplate">
+template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classVectorField.html#a7d71d064cda609eb5a4bd7a5b8ca870d">element_type</a> <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, Domain, NDTag, Allocator &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">ddc::DiscreteElement&lt; ODDims... &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>delems</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Element access using a multi-dimensional DiscreteElement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delems</td><td>discrete coordinates </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>copy of this element </dd></dl>
 
 </div>
 </div>

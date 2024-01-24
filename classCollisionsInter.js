@@ -4,5 +4,5 @@ var classCollisionsInter =
     [ "~CollisionsInter", "classCollisionsInter.html#a576e68e313ffd859043c3b3f290f781b", null ],
     [ "operator()", "classCollisionsInter.html#a49902dd08b9767eb54de0e4cff866dd3", null ],
     [ "get_nustar0", "classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac", null ],
-    [ "get_derivative", "classCollisionsInter.html#a42683cdfbd5476e2d01c0b0b6c4d9fcc", null ]
+    [ "get_derivative", "classCollisionsInter.html#acd76b630be8591301f9e0395532bb683", null ]
 ];

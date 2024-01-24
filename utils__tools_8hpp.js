@@ -1,5 +1,5 @@
 var utils__tools_8hpp =
 [
-    [ "norm_inf", "utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c", null ],
-    [ "norm_inf", "utils__tools_8hpp.html#a8c5a1de1b27561eb7e33276fe08c8154", null ]
+    [ "norm_inf", "utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009", null ],
+    [ "norm_inf", "utils__tools_8hpp.html#a74cd2065291900b963fdc775ae5aec8d", null ]
 ];

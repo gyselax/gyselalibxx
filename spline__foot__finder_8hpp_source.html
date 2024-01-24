@@ -194,7 +194,7 @@ $(document).ready(function(){initNavTree('spline__foot__finder_8hpp_source.html'
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="comment">// Solve the characteristic equation</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        m_time_stepper.update(feet, dt, dy, update_function);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        m_time_stepper.update(Kokkos::Serial(), feet, dt, dy, update_function);</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        is_unified(feet);</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }</div>
@@ -209,7 +209,7 @@ $(document).ready(function(){initNavTree('spline__foot__finder_8hpp_source.html'
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> theta_domain = ddc::get_domain&lt;IDimP&gt;(values);</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="keywordflow">if</span> (std::fabs(ddc::coordinate(r_domain.front())) &lt; 1e-15) {</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            ddc::for_each(theta_domain, [&amp;](<span class="keyword">const</span> IndexP ip) {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c">norm_inf</a>(</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                            values(r_domain.front(), ip)</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                            - values(r_domain.front(), theta_domain.front()))</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                    &gt; 1e-15) {</div>
@@ -244,8 +244,8 @@ $(document).ready(function(){initNavTree('spline__foot__finder_8hpp_source.html'
 <div class="ttc" id="aclassSplineFootFinder_html_a6c99a3c797b8e49db511bee6d62e051d"><div class="ttname"><a href="classSplineFootFinder.html#a6c99a3c797b8e49db511bee6d62e051d">SplineFootFinder::operator()</a></div><div class="ttdeci">void operator()(SpanRP&lt; CoordRP &gt; feet, VectorDViewRP&lt; RDimX, RDimY &gt; advection_field, double dt) const final</div><div class="ttdoc">Advect the feet over .</div><div class="ttdef"><b>Definition:</b> spline_foot_finder.hpp:97</div></div>
 <div class="ttc" id="aclassVectorFieldSpan_html"><div class="ttname"><a href="classVectorFieldSpan.html">VectorFieldSpan</a></div><div class="ttdoc">Pre-declaration of VectorFieldSpan.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:45</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">Pre-declaration of VectorField.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:34</div></div>
-<div class="ttc" id="aclassVectorField_html_acb9821e3a1405005d7251bfbfea66f89"><div class="ttname"><a href="classVectorField.html#acb9821e3a1405005d7251bfbfea66f89">VectorField::span_view</a></div><div class="ttdeci">view_type span_view() const</div><div class="ttdoc">Get a constant reference to this vector field.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:171</div></div>
-<div class="ttc" id="autils__tools_8hpp_html_a611dfcf6e3f686331e7a6f112ea93d8c"><div class="ttname"><a href="utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c">norm_inf</a></div><div class="ttdeci">double norm_inf(ddc::Coordinate&lt; Tags... &gt; coord)</div><div class="ttdoc">Compute the infinity norm.</div><div class="ttdef"><b>Definition:</b> utils_tools.hpp:23</div></div>
+<div class="ttc" id="aclassVectorField_html_acb9821e3a1405005d7251bfbfea66f89"><div class="ttname"><a href="classVectorField.html#acb9821e3a1405005d7251bfbfea66f89">VectorField::span_view</a></div><div class="ttdeci">view_type span_view() const</div><div class="ttdoc">Get a constant reference to this vector field.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:192</div></div>
+<div class="ttc" id="autils__tools_8hpp_html_a939e3995d29bdb32c073e38494563009"><div class="ttname"><a href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a></div><div class="ttdeci">KOKKOS_FUNCTION double norm_inf(ddc::Coordinate&lt; Tags... &gt; coord)</div><div class="ttdoc">Compute the infinity norm.</div><div class="ttdef"><b>Definition:</b> utils_tools.hpp:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -215,27 +215,32 @@ $(document).ready(function(){initNavTree('bsl__predcorr_8hpp_source.html',''); i
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        start_time = std::chrono::system_clock::now();</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> iter(0); iter &lt; steps; ++iter) {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            time_stepper.<a class="code" href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">update</a>(allfdistribu, dt, define_advection_field, advect_allfdistribu);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            DFieldRP electrical_potential(grid);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <a class="code" href="classVectorField.html">VectorDFieldRP&lt;RDimX, RDimY&gt;</a> electric_field(grid);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            m_vlasov_poisson_solver(electrical_potential, electric_field, allfdistribu);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            ddc::PdiEvent(<span class="stringliteral">&quot;iteration&quot;</span>)</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                    .with(<span class="stringliteral">&quot;iter&quot;</span>, iter + 1)</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                    .and_with(<span class="stringliteral">&quot;time&quot;</span>, iter * dt)</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                    .and_with(<span class="stringliteral">&quot;density&quot;</span>, allfdistribu)</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                    .and_with(<span class="stringliteral">&quot;electrical_potential&quot;</span>, electrical_potential);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        end_time = std::chrono::system_clock::now();</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <a class="code" href="classITimeSolverRP.html#aa9b8aa593b80793bd9b8586a6c50dd2a">display_time_difference</a>(<span class="stringliteral">&quot;Iterations time: &quot;</span>, start_time, end_time);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    }</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;};</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            time_stepper</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                    .<a class="code" href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">update</a>(Kokkos::Serial(),</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                            allfdistribu,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                            dt,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                            define_advection_field,</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                            advect_allfdistribu);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            DFieldRP electrical_potential(grid);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <a class="code" href="classVectorField.html">VectorDFieldRP&lt;RDimX, RDimY&gt;</a> electric_field(grid);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            m_vlasov_poisson_solver(electrical_potential, electric_field, allfdistribu);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            ddc::PdiEvent(<span class="stringliteral">&quot;iteration&quot;</span>)</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                    .with(<span class="stringliteral">&quot;iter&quot;</span>, iter + 1)</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                    .and_with(<span class="stringliteral">&quot;time&quot;</span>, iter * dt)</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                    .and_with(<span class="stringliteral">&quot;density&quot;</span>, allfdistribu)</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                    .and_with(<span class="stringliteral">&quot;electrical_potential&quot;</span>, electrical_potential);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        end_time = std::chrono::system_clock::now();</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <a class="code" href="classITimeSolverRP.html#aa9b8aa593b80793bd9b8586a6c50dd2a">display_time_difference</a>(<span class="stringliteral">&quot;Iterations time: &quot;</span>, start_time, end_time);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;};</div>
 <div class="ttc" id="aclassAdvectionDomain_html"><div class="ttname"><a href="classAdvectionDomain.html">AdvectionDomain</a></div><div class="ttdoc">Define a domain for the advection.</div><div class="ttdef"><b>Definition:</b> advection_domain.hpp:41</div></div>
 <div class="ttc" id="aclassBslAdvectionRP_html"><div class="ttname"><a href="classBslAdvectionRP.html">BslAdvectionRP</a></div><div class="ttdoc">Define an advection operator on 2D  domain.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:61</div></div>
 <div class="ttc" id="aclassBslPredCorrRP_html"><div class="ttname"><a href="classBslPredCorrRP.html">BslPredCorrRP</a></div><div class="ttdoc">Predictor-corrector for the Vlasov-Poisson equations.</div><div class="ttdef"><b>Definition:</b> bsl_predcorr.hpp:62</div></div>
@@ -244,8 +249,8 @@ $(document).ready(function(){initNavTree('bsl__predcorr_8hpp_source.html',''); i
 <div class="ttc" id="aclassITimeSolverRP_html"><div class="ttname"><a href="classITimeSolverRP.html">ITimeSolverRP</a></div><div class="ttdoc">Base class for the time solvers.</div><div class="ttdef"><b>Definition:</b> itimesolver.hpp:11</div></div>
 <div class="ttc" id="aclassITimeSolverRP_html_aa9b8aa593b80793bd9b8586a6c50dd2a"><div class="ttname"><a href="classITimeSolverRP.html#aa9b8aa593b80793bd9b8586a6c50dd2a">ITimeSolverRP::display_time_difference</a></div><div class="ttdeci">void display_time_difference(std::string const &amp;title, std::chrono::time_point&lt; std::chrono::system_clock &gt; const &amp;start_time, std::chrono::time_point&lt; std::chrono::system_clock &gt; const &amp;end_time) const</div><div class="ttdoc">Displays the time difference between two given times and a title.</div><div class="ttdef"><b>Definition:</b> itimesolver.hpp:45</div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonSolver_html"><div class="ttname"><a href="classPolarSplineFEMPoissonSolver.html">PolarSplineFEMPoissonSolver</a></div><div class="ttdoc">Define a polar Poisson solver.</div><div class="ttdef"><b>Definition:</b> polarpoissonsolver.hpp:37</div></div>
-<div class="ttc" id="aclassRK2_html"><div class="ttname"><a href="classRK2.html">RK2</a></div><div class="ttdoc">A class which provides an implementation of a second-order Runge-Kutta method.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:31</div></div>
-<div class="ttc" id="aclassRK2_html_aa215475ac2ff63e25d2451175cff5759"><div class="ttname"><a href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">RK2::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:75</div></div>
+<div class="ttc" id="aclassRK2_html"><div class="ttname"><a href="classRK2.html">RK2</a></div><div class="ttdoc">A class which provides an implementation of a second-order Runge-Kutta method.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:32</div></div>
+<div class="ttc" id="aclassRK2_html_aa215475ac2ff63e25d2451175cff5759"><div class="ttname"><a href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">RK2::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:76</div></div>
 <div class="ttc" id="aclassSplineBuilder2D_html"><div class="ttname"><a href="classSplineBuilder2D.html">SplineBuilder2D</a></div><div class="ttdoc">A class for creating a 2D spline approximation of a function.</div><div class="ttdef"><b>Definition:</b> spline_builder_2d.hpp:15</div></div>
 <div class="ttc" id="aclassSplineEvaluator2D_html"><div class="ttname"><a href="classSplineEvaluator2D.html">SplineEvaluator2D&lt; BSplinesR, BSplinesP &gt;</a></div></div>
 <div class="ttc" id="aclassVectorFieldSpan_html"><div class="ttname"><a href="classVectorFieldSpan.html">VectorFieldSpan</a></div><div class="ttdoc">Pre-declaration of VectorFieldSpan.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:45</div></div>

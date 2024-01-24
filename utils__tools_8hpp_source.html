@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('utils__tools_8hpp_source.html',''); in
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... Tags&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c">   23</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c">norm_inf</a>(ddc::Coordinate&lt;Tags...&gt; coord)</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">   23</a></span>&#160;KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code" href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(ddc::Coordinate&lt;Tags...&gt; coord)</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">double</span> result = 0.0;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    ((result = std::max(result, fabs(coord.template get&lt;Tags&gt;()))), ...);</div>
@@ -118,11 +118,11 @@ $(document).ready(function(){initNavTree('utils__tools_8hpp_source.html',''); in
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="utils__tools_8hpp.html#a8c5a1de1b27561eb7e33276fe08c8154">   42</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c">norm_inf</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> coord)</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="utils__tools_8hpp.html#a74cd2065291900b963fdc775ae5aec8d">   42</a></span>&#160;KOKKOS_FUNCTION <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> coord)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> coord;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
-<div class="ttc" id="autils__tools_8hpp_html_a611dfcf6e3f686331e7a6f112ea93d8c"><div class="ttname"><a href="utils__tools_8hpp.html#a611dfcf6e3f686331e7a6f112ea93d8c">norm_inf</a></div><div class="ttdeci">double norm_inf(ddc::Coordinate&lt; Tags... &gt; coord)</div><div class="ttdoc">Compute the infinity norm.</div><div class="ttdef"><b>Definition:</b> utils_tools.hpp:23</div></div>
+<div class="ttc" id="autils__tools_8hpp_html_a939e3995d29bdb32c073e38494563009"><div class="ttname"><a href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a></div><div class="ttdeci">KOKKOS_FUNCTION double norm_inf(ddc::Coordinate&lt; Tags... &gt; coord)</div><div class="ttdoc">Compute the infinity norm.</div><div class="ttdef"><b>Definition:</b> utils_tools.hpp:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
