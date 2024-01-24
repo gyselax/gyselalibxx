@@ -24,15 +24,14 @@ CollisionsInter::CollisionsInter(IDomainSpXVx const& mesh, double nustar0)
     ddc::expose_to_pdi("collinter_nustar0", m_nustar0);
 }
 
-void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfdistribu) const
+void CollisionsInter::get_derivative(
+        device_t<DSpanSpXVx> const df,
+        device_t<DViewSpXVx> const allfdistribu) const
 {
-    auto allfdistribu_device_alloc = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu.span_view());
-    auto allfdistribu_device = allfdistribu_device_alloc.span_view();
-
-    device_t<DFieldSpX> density_f(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    device_t<DFieldSpX> fluid_velocity_f(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    device_t<DFieldSpX> temperature_f(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    IDomainSpX grid_sp_x = allfdistribu.domain<IDimSp, IDimX>();
+    device_t<DFieldSpX> density_f(grid_sp_x);
+    device_t<DFieldSpX> fluid_velocity_f(grid_sp_x);
+    device_t<DFieldSpX> temperature_f(grid_sp_x);
     auto density = density_f.span_view();
     auto fluid_velocity = fluid_velocity_f.span_view();
     auto temperature = temperature_f.span_view();
@@ -48,7 +47,7 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
     ddc::fill(density, 0.);
     ddc::for_each(
             ddc::policies::parallel_device,
-            ddc::get_domain<IDimSp, IDimX>(allfdistribu),
+            grid_sp_x,
             KOKKOS_LAMBDA(IndexSpX const ispx) {
                 IndexSp isp(ddc::select<IDimSp>(ispx));
                 IndexX ix(ddc::select<IDimX>(ispx));
@@ -56,8 +55,7 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
                 double momentum_flux(0);
                 for (IndexVx ivx : allfdistribu.domain<IDimVx>()) {
                     CoordVx const coordv = ddc::coordinate(ivx);
-                    double const val(
-                            quadrature_coeffs_device(ivx) * allfdistribu_device(isp, ix, ivx));
+                    double const val(quadrature_coeffs_device(ivx) * allfdistribu(isp, ix, ivx));
                     density(isp, ix) += val;
                     particle_flux += val * coordv;
                     momentum_flux += val * coordv * coordv;
@@ -69,11 +67,11 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
 
 
     //Collision frequencies, momentum and energy exchange terms
-    device_t<DFieldSpX> nustar_profile(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    device_t<DFieldSpX> nustar_profile(grid_sp_x);
     ddc::deepcopy(nustar_profile, m_nustar_profile);
-    device_t<DFieldSpX> collfreq_ab(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    device_t<DFieldSpX> momentum_exchange_ab_f(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    device_t<DFieldSpX> energy_exchange_ab_f(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    device_t<DFieldSpX> collfreq_ab(grid_sp_x);
+    device_t<DFieldSpX> momentum_exchange_ab_f(grid_sp_x);
+    device_t<DFieldSpX> energy_exchange_ab_f(grid_sp_x);
     auto momentum_exchange_ab = momentum_exchange_ab_f.span_view();
     auto energy_exchange_ab = energy_exchange_ab_f.span_view();
     compute_collfreq_ab(collfreq_ab.span_view(), nustar_profile, density, temperature);
@@ -103,8 +101,6 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
                                   / (2. * temperature(isp, ix)));
             });
 
-    device_t<DFieldSpXVx> df_device_f(allfdistribu.domain());
-    auto df_device = df_device_f.span_view();
 
     ddc::for_each(
             ddc::policies::parallel_device,
@@ -115,13 +111,12 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
                 IndexVx ivx(ddc::select<IDimVx>(ispxvx));
                 double const coordv = ddc::coordinate(ivx);
                 double const term_v(coordv - fluid_velocity(isp, ix));
-                df_device(isp, ix, ivx)
-                        = (2. * energy_exchange_ab(isp, ix)
-                                   * (0.5 / temperature(isp, ix) * term_v * term_v - 0.5)
-                           + momentum_exchange_ab(isp, ix) * term_v)
-                          * fmaxwellian(isp, ix, ivx) / (density(isp, ix) * temperature(isp, ix));
+                df(isp, ix, ivx) = (2. * energy_exchange_ab(isp, ix)
+                                            * (0.5 / temperature(isp, ix) * term_v * term_v - 0.5)
+                                    + momentum_exchange_ab(isp, ix) * term_v)
+                                   * fmaxwellian(isp, ix, ivx)
+                                   / (density(isp, ix) * temperature(isp, ix));
             });
-    ddc::deepcopy(df, df_device);
 }
 
 
@@ -130,13 +125,13 @@ device_t<DSpanSpXVx> CollisionsInter::operator()(
         double dt) const
 {
     Kokkos::Profiling::pushRegion("CollisionsInter");
-    auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
-    ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
-    RK2<DFieldSpXVx> timestepper(allfdistribu.domain());
-    timestepper.update(allfdistribu, dt, [&](DSpanSpXVx dy, DViewSpXVx y) {
-        get_derivative(dy, y);
-    });
-    ddc::deepcopy(allfdistribu_device, allfdistribu);
+    RK2<device_t<DFieldSpXVx>> timestepper(allfdistribu_device.domain());
+
+    timestepper
+            .update(allfdistribu_device, dt, [&](device_t<DSpanSpXVx> dy, device_t<DViewSpXVx> y) {
+                get_derivative(dy, y);
+            });
+
     Kokkos::Profiling::popRegion();
     return allfdistribu_device;
 }

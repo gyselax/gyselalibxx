@@ -53,6 +53,10 @@ private:
     using base_type = VectorFieldCommon<chunk_type, NDTag>;
 
 public:
+    /// The type of an element in one of the ChunkSpans comprising the VectorFieldSpan
+    using element_type = typename base_type::element_type;
+
+public:
     /**
      * @brief A type which can hold a modifiable reference to a VectorField.
      *
@@ -79,12 +83,17 @@ public:
      */
     using mdomain_type = typename base_type::mdomain_type;
 
+    /**
+     * @brief The type of the memory space where the field is saved (CPU vs GPU).
+     */
+    using memory_space = typename chunk_type::memory_space;
+
 private:
     template <class, class, class, class, class>
     friend class VectorFieldSpan;
 
     template <class OElementType, class Allocator, std::size_t... Is>
-    constexpr VectorFieldSpan(
+    KOKKOS_FUNCTION constexpr VectorFieldSpan(
             VectorField<OElementType, Domain, NDTag, Allocator>& other,
             std::index_sequence<Is...> const&) noexcept
         : base_type((chunk_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
@@ -101,7 +110,7 @@ private:
             class SFINAEElementType = ElementType,
             class = std::enable_if_t<std::is_const_v<SFINAEElementType>>,
             class Allocator>
-    constexpr VectorFieldSpan(
+    KOKKOS_FUNCTION constexpr VectorFieldSpan(
             VectorField<OElementType, Domain, NDTag, Allocator> const& other,
             std::index_sequence<Is...> const&) noexcept
         : base_type((chunk_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
@@ -111,7 +120,7 @@ private:
     template <
             class... Chunks,
             class = std::enable_if_t<std::conjunction_v<std::is_same<Chunks, chunk_type>...>>>
-    constexpr VectorFieldSpan(Chunks&&... chunks) : base_type(std::move(chunks)...)
+    KOKKOS_FUNCTION constexpr VectorFieldSpan(Chunks&&... chunks) : base_type(std::move(chunks)...)
     {
     }
 
@@ -119,7 +128,7 @@ private:
      * @param other the VectorFieldSpan to move
      */
     template <class OElementType, std::size_t... Is>
-    constexpr VectorFieldSpan(
+    KOKKOS_FUNCTION constexpr VectorFieldSpan(
             VectorFieldSpan<
                     OElementType,
                     mdomain_type,
@@ -145,25 +154,41 @@ private:
                 typename ChunkType::memory_space>(std::move(std::get<Is>(chunk_slices))...);
     }
 
+    /** Element access using a multi-dimensional DiscreteElement
+     * @param delems discrete coordinates
+     * @return copy of this element
+     */
+    template <class... ODDims, typename T, T... ints>
+    KOKKOS_FUNCTION element_type operator()(
+            ddc::DiscreteElement<ODDims...> const& delems,
+            std::integer_sequence<T, ints...>) const noexcept
+    {
+        return element_type((base_type::m_values[ints](delems))...);
+    }
+
 public:
     /// Empty VectorFieldSpan
-    constexpr VectorFieldSpan() = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr VectorFieldSpan() = default;
+
+    /// VectorFieldSpan destructor
+    KOKKOS_DEFAULTED_FUNCTION ~VectorFieldSpan() = default;
 
     /** Constructs a new VectorFieldSpan by copy, yields a new view to the same data
      * @param other the VectorFieldSpan to copy
      */
-    constexpr VectorFieldSpan(VectorFieldSpan const& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr VectorFieldSpan(VectorFieldSpan const& other) = default;
 
     /** Constructs a new VectorFieldSpan by move
      * @param other the VectorFieldSpan to move
      */
-    constexpr VectorFieldSpan(VectorFieldSpan&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr VectorFieldSpan(VectorFieldSpan&& other) = default;
 
     /** Constructs a new VectorFieldSpan from a VectorField, yields a new view to the same data
      * @param other the VectorField to view
      */
     template <class OElementType, class Allocator>
-    constexpr VectorFieldSpan(VectorField<OElementType, Domain, NDTag, Allocator>& other) noexcept
+    KOKKOS_FUNCTION constexpr VectorFieldSpan(
+            VectorField<OElementType, Domain, NDTag, Allocator>& other) noexcept
         : VectorFieldSpan(other, std::make_index_sequence<base_type::NDims> {})
     {
     }
@@ -177,7 +202,7 @@ public:
             class SFINAEElementType = ElementType,
             class = std::enable_if_t<std::is_const_v<SFINAEElementType>>,
             class Allocator>
-    constexpr VectorFieldSpan(
+    KOKKOS_FUNCTION constexpr VectorFieldSpan(
             VectorField<OElementType, Domain, NDTag, Allocator> const& other) noexcept
         : VectorFieldSpan(other, std::make_index_sequence<base_type::NDims> {})
     {
@@ -187,12 +212,12 @@ public:
      * @param other the VectorFieldSpan to move
      */
     template <class OElementType>
-    constexpr VectorFieldSpan(VectorFieldSpan<
-                              OElementType,
-                              mdomain_type,
-                              NDTag,
-                              LayoutStridedPolicy,
-                              MemorySpace> const& other) noexcept
+    KOKKOS_FUNCTION constexpr VectorFieldSpan(VectorFieldSpan<
+                                              OElementType,
+                                              mdomain_type,
+                                              NDTag,
+                                              LayoutStridedPolicy,
+                                              MemorySpace> const& other) noexcept
         : VectorFieldSpan(other, std::make_index_sequence<base_type::NDims> {})
     {
     }
@@ -206,7 +231,7 @@ public:
             class = std::enable_if_t<
                     std::conjunction_v<std::is_same<OElementType, ElementType>...>>,
             class = std::enable_if_t<sizeof...(OElementType) == base_type::NDims>>
-    VectorFieldSpan(mdomain_type const& domain, OElementType*... ptr)
+    KOKKOS_FUNCTION VectorFieldSpan(mdomain_type const& domain, OElementType*... ptr)
         : base_type((chunk_type(ptr, domain))...)
     {
     }
@@ -215,13 +240,15 @@ public:
      * @param other the VectorFieldSpan to copy
      * @return *this
      */
-    constexpr VectorFieldSpan& operator=(VectorFieldSpan const& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr VectorFieldSpan& operator=(VectorFieldSpan const& other)
+            = default;
 
     /** Move-assigns a new value to this VectorFieldSpan
      * @param other the VectorFieldSpan to move
      * @return *this
      */
-    constexpr VectorFieldSpan& operator=(VectorFieldSpan&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr VectorFieldSpan& operator=(VectorFieldSpan&& other)
+            = default;
 
     /**
      * Get a constant reference to the vector field referred to by this vector field span.
@@ -242,6 +269,31 @@ public:
     {
         return *this;
     }
+
+    /** Element access using a list of DiscreteElement
+     * @param delems 1D discrete coordinates
+     * @return copy of this element
+     */
+    template <class... ODDims>
+    KOKKOS_FUNCTION element_type
+    operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
+    {
+        ddc::DiscreteElement<ODDims...> delem_idx(delems...);
+        return this->
+        operator()(delem_idx, std::make_integer_sequence<int, element_type::size()> {});
+    }
+
+    /** Element access using a multi-dimensional DiscreteElement
+     * @param delems discrete coordinates
+     * @return copy of this element
+     */
+    template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
+    KOKKOS_FUNCTION element_type
+    operator()(ddc::DiscreteElement<ODDims...> const& delems) const noexcept
+    {
+        return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
+    }
+
 
     /**
      * @brief Slice out some dimensions.

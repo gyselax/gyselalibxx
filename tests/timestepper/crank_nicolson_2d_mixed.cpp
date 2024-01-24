@@ -99,6 +99,7 @@ TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
 
         for (int i(0); i < Nt; ++i) {
             crank_nicolson.update(
+                    Kokkos::Serial(),
                     vals,
                     dt,
                     [yc, xc, &dom, omega](AdvectionFieldSpan dy, ChunkView<CoordXY, IDomainXY> y) {
