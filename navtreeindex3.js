@@ -88,7 +88,6 @@ var NAVTREEINDEX3 =
 "classSplineBuilder.html#aa1c79d6ada6f3253febfc994b9a2d55e":[11,139,3],
 "classSplineBuilder.html#ab66639ab2f9529f4430ce60320eb9e17":[11,139,12],
 "classSplineBuilder.html#ad62a92276f053ebdfcc38f1ede5b7198":[11,139,5],
-"classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06":[11,139,13],
 "classSplineBuilder.html#aea5b09d866bfabd34f93dc7244061e51":[11,139,10],
 "classSplineBuilder.html#aec9bd498c486b22848aeb026de467fcf":[11,139,2],
 "classSplineBuilder.html#aff30d3c9ee7e83246b37719a0866874c":[11,139,4],
@@ -181,8 +180,8 @@ var NAVTREEINDEX3 =
 "classSplitRightHandSideSolver.html#a2e6bd2d8daa2dc2d7883c1dd47cb9b4a":[11,148,1],
 "classSplitRightHandSideSolver.html#abca48ccdc85301e026a1fbb5ab017376":[11,148,2],
 "classSplitVlasovSolver.html":[11,149],
-"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[11,149,1],
 "classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[11,149,3],
+"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[11,149,1],
 "classSplitVlasovSolver.html#a3ae6624950e6d8126e848ee52eab8a22":[11,149,5],
 "classSplitVlasovSolver.html#a8a0d9e743da738c69f549c68e1696267":[11,149,2],
 "classSplitVlasovSolver.html#a9750a4caa7978424c5ef5952770b2944":[11,149,4],
@@ -249,5 +248,6 @@ var NAVTREEINDEX3 =
 "classVectorFieldSpan.html#a01fe991573f5ce086459b79b0a9593fd":[11,159,9],
 "classVectorFieldSpan.html#a02615c4513fb510c9fdc12db6d776df4":[11,159,4],
 "classVectorFieldSpan.html#a079197433ab9d4fca858fbb82a46fb93":[11,159,13],
-"classVectorFieldSpan.html#a1403b2b999f37027f7dc54e056ad5c0e":[11,159,0]
+"classVectorFieldSpan.html#a1403b2b999f37027f7dc54e056ad5c0e":[11,159,0],
+"classVectorFieldSpan.html#a159b7fcc46c877cd175b88be6b47d2d3":[11,159,1]
 };

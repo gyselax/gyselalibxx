@@ -1,6 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"docs_Using_git.html#autotoc_md18":[15,0],
 "docs_Using_git.html#autotoc_md19":[15,1],
 "docs_Using_git.html#docs_Using_git__Branches":[6,0],
 "docs_Using_git.html#docs_Using_git__Submodules":[6,1],
@@ -249,5 +248,6 @@ var NAVTREEINDEX5 =
 "structRefinedDiscreteToCartesian_1_1RDimPRefined.html":[11,129,0],
 "structRefinedDiscreteToCartesian_1_1RDimRRefined.html":[11,129,1],
 "structRefinedDiscreteToCartesian_1_1RDimXRefined.html":[11,129,2],
-"structRefinedDiscreteToCartesian_1_1RDimYRefined.html":[11,129,3]
+"structRefinedDiscreteToCartesian_1_1RDimYRefined.html":[11,129,3],
+"structcartesian__product__impl_3_01std_1_1tuple_3_01std_1_1tuple_3_01HeadArgs_8_8_8_01_4_00_01Ta2e54ffdefaa524ceede7a120148cdbe5.html":[11,22]
 };

@@ -1,6 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classVectorFieldSpan.html#a159b7fcc46c877cd175b88be6b47d2d3":[11,159,1],
 "classVectorFieldSpan.html#a3b0dcc2e155106a249271f0cdfda332a":[11,159,12],
 "classVectorFieldSpan.html#a6293c5e31f3a9860d949787c90e06ba4":[11,159,7],
 "classVectorFieldSpan.html#a6d875ae345120eb5680622cd3400c2fd":[11,159,11],
@@ -249,5 +248,6 @@ var NAVTREEINDEX4 =
 "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Data_Storage":[5,2],
 "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Domain":[5,1],
 "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Example":[5,3],
-"docs_Using_git.html":[6]
+"docs_Using_git.html":[6],
+"docs_Using_git.html#autotoc_md18":[15,0]
 };

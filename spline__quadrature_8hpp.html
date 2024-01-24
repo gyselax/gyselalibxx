@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('spline__quadrature_8hpp.html',''); ini
 Functions</h2></td></tr>
 <tr class="memitem:aa3abf38dc419ac6e23450295ca023e8b"><td class="memTemplParams" colspan="2">template&lt;class IDim , class SplineBuilder &gt; </td></tr>
 <tr class="memitem:aa3abf38dc419ac6e23450295ca023e8b"><td class="memTemplItemLeft" align="right" valign="top">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b">spline_quadrature_coefficients_1d</a> (ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain, <a class="el" href="classSplineBuilder.html">SplineBuilder</a> const &amp;builder)</td></tr>
-<tr class="memdesc:aa3abf38dc419ac6e23450295ca023e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in 1D.  <a href="spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b">More...</a><br /></td></tr>
+<tr class="memdesc:aa3abf38dc419ac6e23450295ca023e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients.  <a href="spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b">More...</a><br /></td></tr>
 <tr class="separator:aa3abf38dc419ac6e23450295ca023e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8ac1fec63f5a595332f7adf4ca2e769"><td class="memTemplParams" colspan="2">template&lt;class... DDims, class... SplineBuilders&gt; </td></tr>
 <tr class="memitem:ac8ac1fec63f5a595332f7adf4ca2e769"><td class="memTemplItemLeft" align="right" valign="top">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims... &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769">spline_quadrature_coefficients</a> (ddc::DiscreteDomain&lt; DDims... &gt; const &amp;domain, SplineBuilders const &amp;... builders)</td></tr>
@@ -160,16 +160,29 @@ template&lt;class IDim , class SplineBuilder &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Get the spline quadrature coefficients in 1D. </p>
-<p>This function mainly uses the <a class="el" href="classSplineBuilder.html#adce1a4d93d232bc29f6c8482d7ecdd06" title="Get the spline quadrature coefficients.">SplineBuilder::quadrature_coefficients</a> function.</p>
+<p>Get the spline quadrature coefficients. </p>
+<p>To integrate a function with a spline quadrature, we use:</p>
+<p>\( \int_a^b f(x)dx \simeq \sum_{i = 0}^{N_{\text{basis}} -1 } c_i \int_a^b b_{i,d}()x dx \),</p>
+<p>which rewritten gives</p>
+<p>\( \int_a^b f(x)dx \simeq \sum_{i = 0}^{N_{\text{basis}} - 1} q_i f_i \),</p>
+<p>with</p><ul>
+<li>\(\{ f_i\}_i \) the values of the function at the interpolation points;</li>
+<li>\( q = \{ q_i\}_i \) the quadrature coefficients we compute thanks to \( q B^T = I_b \),<ul>
+<li>with \( B \) the matrix of B-splines \( B_{ij} = b_{j,d}(x_i)\),</li>
+<li>and \( I_b = \int_a^b b_{i,d}(x)dx \) the integrated B-splines.</li>
+</ul>
+</li>
+</ul>
+<p>More details are given in Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
+in the 5D GYSELA Code". December 2022.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">domain</td><td>The domain on which the splines quadrature will be carried out. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">builder</td><td>The spline builder used for the quadrature coefficients.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">domain</td><td>The domain where the functions we want to integrate are defined. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">builder</td><td>The spline builder describing the way in which splines would be constructed.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The quadrature coefficients for the method defined on the provided domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A chunk with the quadrature coefficients \( q \). </dd></dl>
 
 </div>
 </div>
