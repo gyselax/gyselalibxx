@@ -37,6 +37,14 @@ fdistribu_eq:
   dimensions: [ *speciesd , *vxd ]
   path: { file: 'VOICEXX_initstate.h5', dataset: 'fdistribu_eq' }
 
+collinter_nustar0:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'collinter_nustar0' }
+
+Lx:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'Lx' }
+
 krook_sink_constant_amplitude:
   dimensions: [ ]
   path: { file: 'VOICEXX_initstate.h5', dataset: 'krook_sink_constant_amplitude' }

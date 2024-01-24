@@ -332,6 +332,7 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("Nvx", vx_size.value());
     ddc::expose_to_pdi("MeshX", meshX_coord);
     ddc::expose_to_pdi("MeshVx", meshVx_coord);
+    ddc::expose_to_pdi("Lx", ddcHelper::total_interval_length(gridx));
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
     ddc::expose_to_pdi("Nkinspecies", nb_kinspecies.value());
     ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
