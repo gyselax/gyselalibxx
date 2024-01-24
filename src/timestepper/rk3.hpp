@@ -73,15 +73,56 @@ public:
      */
     void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy) const
     {
+        using ExecSpace = typename ValChunk::memory_space::execution_space;
+        update(ExecSpace(), y, dt, dy);
+    }
+
+    /**
+     * @brief Carry out one step of the Runge-Kutta scheme.
+     *
+     * This function is a wrapper around the update function below. The values of the function are
+     * updated using the trivial method $f += df * dt$. This is the standard method however some
+     * cases may need a more complex update function which is why the more explicit method is
+     * also provided.
+     *
+     * @param[in] exec_space
+     *     The space on which the function is executed (CPU/GPU).
+     * @param[inout] y
+     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
+     *     of the domain.
+     * @param[in] dt
+     *     The time step over which the values should be evolved.
+     * @param[in] dy
+     *     The function describing how the derivative of the evolve function is calculated.
+     */
+    template <class ExecSpace>
+    void update(
+            ExecSpace const& exec_space,
+            ValSpan y,
+            double dt,
+            std::function<void(DerivSpan, ValView)> dy) const
+    {
+        static_assert(
+                Kokkos::SpaceAccessibility<ExecSpace, typename ValChunk::memory_space>::accessible,
+                "MemorySpace has to be accessible for ExecutionSpace.");
+        static_assert(
+                Kokkos::SpaceAccessibility<ExecSpace, typename DerivChunk::memory_space>::
+                        accessible,
+                "MemorySpace has to be accessible for ExecutionSpace.");
         static_assert(ddc::is_chunk_v<ValChunk>);
-        update(y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
-            ddc::for_each(y.domain(), [&](Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
+        update(exec_space, y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
+            ddc::for_each(
+                    ddc::policies::policy(exec_space),
+                    y.domain(),
+                    KOKKOS_LAMBDA(Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
         });
     }
 
     /**
      * @brief Carry out one step of the Runge-Kutta scheme.
      *
+     * @param[in] exec_space
+     *     The space on which the function is executed (CPU/GPU).
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
      *     of the domain.
@@ -92,17 +133,32 @@ public:
      * @param[in] y_update
      *     The function describing how the value(s) are updated using the derivative.
      */
+    template <class ExecSpace>
     void update(
+            ExecSpace const& exec_space,
             ValSpan y,
             double dt,
             std::function<void(DerivSpan, ValView)> dy,
             std::function<void(ValSpan, DerivView, double)> y_update) const
     {
-        ValChunk m_y_prime(m_dom);
-        DerivChunk m_k1(m_dom);
-        DerivChunk m_k2(m_dom);
-        DerivChunk m_k3(m_dom);
-        DerivChunk m_k_total(m_dom);
+        static_assert(
+                Kokkos::SpaceAccessibility<ExecSpace, typename ValChunk::memory_space>::accessible,
+                "MemorySpace has to be accessible for ExecutionSpace.");
+        static_assert(
+                Kokkos::SpaceAccessibility<ExecSpace, typename DerivChunk::memory_space>::
+                        accessible,
+                "MemorySpace has to be accessible for ExecutionSpace.");
+
+        ValChunk m_y_prime_alloc(m_dom);
+        DerivChunk m_k1_alloc(m_dom);
+        DerivChunk m_k2_alloc(m_dom);
+        DerivChunk m_k3_alloc(m_dom);
+        DerivChunk m_k_total_alloc(m_dom);
+        ValSpan m_y_prime = m_y_prime_alloc.span_view();
+        DerivSpan m_k1 = m_k1_alloc.span_view();
+        DerivSpan m_k2 = m_k2_alloc.span_view();
+        DerivSpan m_k3 = m_k3_alloc.span_view();
+        DerivSpan m_k_total = m_k_total_alloc.span_view();
 
         // Save initial conditions
         copy(m_y_prime, y);
@@ -120,14 +176,23 @@ public:
 
         // --------- Calculate k3 ------------
         // Calculation of step
-        ddc::for_each(m_k_total.domain(), [&](Index const i) {
-            // k_total = 2 * k2 - k1
-            if constexpr (is_field_v<DerivChunk>) {
-                fill_k_total(i, m_k_total, 2 * m_k2(i) - m_k1(i));
-            } else {
-                m_k_total(i) = 2 * m_k2(i) - m_k1(i);
-            }
-        });
+        if constexpr (is_field_v<DerivChunk>) {
+            ddc::for_each(
+                    ddc::policies::policy(exec_space),
+                    m_k_total.domain(),
+                    KOKKOS_CLASS_LAMBDA(Index const i) {
+                        // k_total = 2 * k2 - k1
+                        fill_k_total(i, m_k_total, 2 * m_k2(i) - m_k1(i));
+                    });
+        } else {
+            ddc::for_each(
+                    ddc::policies::policy(exec_space),
+                    m_k_total.domain(),
+                    KOKKOS_LAMBDA(Index const i) {
+                        // k_total = 2 * k2 - k1
+                        m_k_total(i) = 2 * m_k2(i) - m_k1(i);
+                    });
+        }
 
         // Collect initial conditions
         copy(m_y_prime, y);
@@ -140,14 +205,23 @@ public:
 
         // --------- Update y ------------
         // Calculation of step
-        ddc::for_each(m_k_total.domain(), [&](Index const i) {
-            // k_total = k1 + 4 * k2 + k3
-            if constexpr (is_field_v<DerivChunk>) {
-                fill_k_total(i, m_k_total, m_k1(i) + 4 * m_k2(i) + m_k3(i));
-            } else {
-                m_k_total(i) = m_k1(i) + 4 * m_k2(i) + m_k3(i);
-            }
-        });
+        if constexpr (is_field_v<DerivChunk>) {
+            ddc::for_each(
+                    ddc::policies::policy(exec_space),
+                    m_k_total.domain(),
+                    KOKKOS_CLASS_LAMBDA(Index const i) {
+                        // k_total = k1 + 4 * k2 + k3
+                        fill_k_total(i, m_k_total, m_k1(i) + 4 * m_k2(i) + m_k3(i));
+                    });
+        } else {
+            ddc::for_each(
+                    ddc::policies::policy(exec_space),
+                    m_k_total.domain(),
+                    KOKKOS_LAMBDA(Index const i) {
+                        // k_total = k1 + 4 * k2 + k3
+                        m_k_total(i) = m_k1(i) + 4 * m_k2(i) + m_k3(i);
+                    });
+        }
 
         // Calculate y_{n+1} := y_n + (k1 + 4 * k2 + k3) * h/6
         y_update(y, m_k_total, dt / 6.);
@@ -164,7 +238,10 @@ private:
     }
 
     template <class... DDims>
-    void fill_k_total(Index i, DerivSpan m_k_total, ddc::Coordinate<DDims...> new_val) const
+    KOKKOS_FUNCTION void fill_k_total(
+            Index i,
+            DerivSpan m_k_total,
+            ddc::Coordinate<DDims...> new_val) const
     {
         ((ddcHelper::get<DDims>(m_k_total)(i) = ddc::get<DDims>(new_val)), ...);
     }

@@ -42,6 +42,10 @@ private:
     using base_type = VectorFieldCommon<chunk_type, NDTag>;
 
 public:
+    /// The type of an element in one of the Chunks comprising the VectorField
+    using element_type = typename base_type::element_type;
+
+public:
     /**
      * @brief A type which can hold a reference to this VectorField.
      */
@@ -66,6 +70,11 @@ public:
      * @brief The type of the domain on which the field is defined.
      */
     using mdomain_type = typename base_type::mdomain_type;
+
+    /**
+     * @brief The type of the memory space where the field is saved (CPU vs GPU).
+     */
+    using memory_space = typename chunk_type::memory_space;
 
 private:
     /// Construct a VectorField on a domain with uninitialized values
@@ -96,6 +105,18 @@ private:
             std::index_sequence<Is...> const&)
         : base_type(chunk_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(field_span))...)
     {
+    }
+
+    /** Element access using a multi-dimensional DiscreteElement
+     * @param delems discrete coordinates
+     * @return copy of this element
+     */
+    template <class... ODDims, typename T, T... ints>
+    element_type operator()(
+            ddc::DiscreteElement<ODDims...> const& delems,
+            std::integer_sequence<T, ints...>) const noexcept
+    {
+        return element_type((base_type::m_values[ints](delems))...);
     }
 
 public:
@@ -182,6 +203,29 @@ public:
     {
         return span_type(*this);
     }
+
+    /** Element access using a list of DiscreteElement
+     * @param delems 1D discrete coordinates
+     * @return copy of this element
+     */
+    template <class... ODDims>
+    element_type operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
+    {
+        ddc::DiscreteElement<ODDims...> delem_idx(delems...);
+        return this->
+        operator()(delem_idx, std::make_integer_sequence<int, element_type::size()> {});
+    }
+
+    /** Element access using a multi-dimensional DiscreteElement
+     * @param delems discrete coordinates
+     * @return copy of this element
+     */
+    template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
+    element_type operator()(ddc::DiscreteElement<ODDims...> const& delems) const noexcept
+    {
+        return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
+    }
+
 
     /**
      * @brief Slice out some dimensions.

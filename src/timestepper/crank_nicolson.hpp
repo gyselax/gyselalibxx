@@ -86,15 +86,56 @@ public:
      */
     void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy) const
     {
+        using ExecSpace = typename ValChunk::memory_space::execution_space;
+        update(ExecSpace(), y, dt, dy);
+    }
+
+    /**
+     * @brief Carry out one step of the Crank-Nicolson scheme.
+     *
+     * This function is a wrapper around the update function below. The values of the function are
+     * updated using the trivial method $f += df * dt$. This is the standard method however some
+     * cases may need a more complex update function which is why the more explicit method is
+     * also provided.
+     *
+     * @param[in] exec_space
+     *     The space on which the function is executed (CPU/GPU).
+     * @param[inout] y
+     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
+     *     of the domain.
+     * @param[in] dt
+     *     The time step over which the values should be evolved.
+     * @param[in] dy
+     *     The function describing how the derivative of the evolve function is calculated.
+     */
+    template <class ExecSpace>
+    void update(
+            ExecSpace const& exec_space,
+            ValSpan y,
+            double dt,
+            std::function<void(DerivSpan, ValView)> dy) const
+    {
         static_assert(ddc::is_chunk_v<ValChunk>);
-        update(y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
-            ddc::for_each(y.domain(), [&](Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
+        static_assert(
+                Kokkos::SpaceAccessibility<ExecSpace, typename ValChunk::memory_space>::accessible,
+                "MemorySpace has to be accessible for ExecutionSpace.");
+        static_assert(
+                Kokkos::SpaceAccessibility<ExecSpace, typename DerivChunk::memory_space>::
+                        accessible,
+                "MemorySpace has to be accessible for ExecutionSpace.");
+        update(exec_space, y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
+            ddc::for_each(
+                    ddc::policies::policy(exec_space),
+                    y.domain(),
+                    KOKKOS_LAMBDA(Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
         });
     }
 
     /**
      * @brief Carry out one step of the Crank-Nicolson scheme.
      *
+     * @param[in] exec_space
+     *     The space on which the function is executed (CPU/GPU).
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
      *     of the domain.
@@ -105,17 +146,31 @@ public:
      * @param[in] y_update
      *     The function describing how the value(s) are updated using the derivative.
      */
+    template <class ExecSpace>
     void update(
+            ExecSpace const& exec_space,
             ValSpan y,
             double dt,
             std::function<void(DerivSpan, ValView)> dy,
             std::function<void(ValSpan, DerivView, double)> y_update) const
     {
-        ValChunk m_y_init(m_dom);
-        ValChunk m_y_old(m_dom);
-        DerivChunk m_k1(m_dom);
-        DerivChunk m_k_new(m_dom);
-        DerivChunk m_k_total(m_dom);
+        static_assert(
+                Kokkos::SpaceAccessibility<ExecSpace, typename ValChunk::memory_space>::accessible,
+                "MemorySpace has to be accessible for ExecutionSpace.");
+        static_assert(
+                Kokkos::SpaceAccessibility<ExecSpace, typename DerivChunk::memory_space>::
+                        accessible,
+                "MemorySpace has to be accessible for ExecutionSpace.");
+        ValChunk m_y_init_alloc(m_dom);
+        ValChunk m_y_old_alloc(m_dom);
+        DerivChunk m_k1_alloc(m_dom);
+        DerivChunk m_k_new_alloc(m_dom);
+        DerivChunk m_k_total_alloc(m_dom);
+        ValSpan m_y_init = m_y_init_alloc.span_view();
+        ValSpan m_y_old = m_y_old_alloc.span_view();
+        DerivSpan m_k1 = m_k1_alloc.span_view();
+        DerivSpan m_k_new = m_k_new_alloc.span_view();
+        DerivSpan m_k_total = m_k_total_alloc.span_view();
 
 
         copy(m_y_init, y);
@@ -134,14 +189,23 @@ public:
             dy(m_k_new, y);
 
             // Calculation of step
-            ddc::for_each(m_k_total.domain(), [&](Index const i) {
-                // k_total = k1 + k_new
-                if constexpr (is_field_v<DerivChunk>) {
-                    fill_k_total(i, m_k_total, m_k1(i) + m_k_new(i));
-                } else {
-                    m_k_total(i) = m_k1(i) + m_k_new(i);
-                }
-            });
+            if constexpr (is_field_v<DerivChunk>) {
+                ddc::for_each(
+                        ddc::policies::policy(exec_space),
+                        m_k_total.domain(),
+                        KOKKOS_CLASS_LAMBDA(Index const i) {
+                            // k_total = k1 + k_new
+                            fill_k_total(i, m_k_total, m_k1(i) + m_k_new(i));
+                        });
+            } else {
+                ddc::for_each(
+                        ddc::policies::policy(exec_space),
+                        m_k_total.domain(),
+                        KOKKOS_CLASS_LAMBDA(Index const i) {
+                            // k_total = k1 + k_new
+                            m_k_total(i) = m_k1(i) + m_k_new(i);
+                        });
+            }
 
             // Save the old characteristic feet
             copy(m_y_old, y);
@@ -154,11 +218,50 @@ public:
 
 
             // Check convergence
-            not_converged = not have_converged(m_y_old, y);
+            not_converged = not have_converged(exec_space, m_y_old, y);
 
 
         } while (not_converged and (counter < m_max_counter));
     };
+
+
+    /**
+     * Check if the relative difference of the function between
+     * two time steps is below epsilon.
+     *
+     * This function should be private. It is not due to the inclusion of a KOKKOS_LAMBDA
+     * function.
+     *
+     * @param[in] exec_space
+     *     The space on which the function is executed (CPU/GPU).
+     * @param[in] y_old
+     *     The value of the function at the previous time step.
+     * @param[in] y_new
+     *     The updated value of the function at the new time step.
+     * @returns
+     *     True if converged, False otherwise.
+     */
+    template <class ExecSpace>
+    bool have_converged(ExecSpace const& exec_space, ValView y_old, ValView y_new) const
+    {
+        auto const dom = y_old.domain();
+
+        double norm_old = ddc::transform_reduce(
+                ddc::policies::policy(exec_space),
+                dom,
+                0.,
+                ddc::reducer::max<double>(),
+                KOKKOS_LAMBDA(Index const idx) { return norm_inf(y_old(idx)); });
+
+        double max_diff = ddc::transform_reduce(
+                ddc::policies::policy(exec_space),
+                dom,
+                0.,
+                ddc::reducer::max<double>(),
+                KOKKOS_LAMBDA(Index const idx) { return norm_inf(y_old(idx) - y_new(idx)); });
+
+        return (max_diff / norm_old) < m_epsilon;
+    }
 
 private:
     void copy(ValSpan copy_to, ValView copy_from) const
@@ -171,30 +274,11 @@ private:
     }
 
     template <class... DDims>
-    void fill_k_total(Index i, DerivSpan m_k_total, ddc::Coordinate<DDims...> new_val) const
+    KOKKOS_FUNCTION void fill_k_total(
+            Index i,
+            DerivSpan m_k_total,
+            ddc::Coordinate<DDims...> new_val) const
     {
         ((ddcHelper::get<DDims>(m_k_total)(i) = ddc::get<DDims>(new_val)), ...);
-    }
-
-
-    // Check if the relative difference of the function between
-    // two times steps is below epsilon.
-    bool have_converged(ValView y_old, ValView y_new) const
-    {
-        auto const dom = y_old.domain();
-
-        double norm_old = 0.;
-        ddc::for_each(dom, [&](Index const idx) {
-            const double abs_val = norm_inf(y_old(idx));
-            norm_old = norm_old > abs_val ? norm_old : abs_val;
-        });
-
-        double max_diff = 0.;
-        ddc::for_each(dom, [&](Index const idx) {
-            const double abs_diff = norm_inf(y_old(idx) - y_new(idx));
-            max_diff = max_diff > abs_diff ? max_diff : abs_diff;
-        });
-
-        return (max_diff / norm_old) < m_epsilon;
     }
 };

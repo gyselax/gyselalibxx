@@ -69,5 +69,5 @@ public:
      * @param[inout] df The time derivative.
      * @param[in] allfdistribu The distribution function.
      */
-    void get_derivative(DSpanSpXVx df, DViewSpXVx allfdistribu) const;
+    void get_derivative(device_t<DSpanSpXVx> df, device_t<DViewSpXVx> allfdistribu) const;
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include <type_traits>
 
 #include <ddc_helper.hpp>
 #include <vector_field_common.hpp>
@@ -74,15 +75,56 @@ public:
      */
     void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy) const
     {
+        using ExecSpace = typename ValChunk::memory_space::execution_space;
+        update(ExecSpace(), y, dt, dy);
+    }
+
+    /**
+     * @brief Carry out one step of the Runge-Kutta scheme.
+     *
+     * This function is a wrapper around the update function below. The values of the function are
+     * updated using the trivial method $f += df * dt$. This is the standard method however some
+     * cases may need a more complex update function which is why the more explicit method is
+     * also provided.
+     *
+     * @param[in] exec_space
+     *     The space on which the function is executed (CPU/GPU).
+     * @param[inout] y
+     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
+     *     of the domain.
+     * @param[in] dt
+     *     The time step over which the values should be evolved.
+     * @param[in] dy
+     *     The function describing how the derivative of the evolve function is calculated.
+     */
+    template <class ExecSpace>
+    void update(
+            ExecSpace const& exec_space,
+            ValSpan y,
+            double dt,
+            std::function<void(DerivSpan, ValView)> dy) const
+    {
         static_assert(ddc::is_chunk_v<ValChunk>);
-        update(y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
-            ddc::for_each(y.domain(), [&](Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
+        static_assert(
+                Kokkos::SpaceAccessibility<ExecSpace, typename ValChunk::memory_space>::accessible,
+                "MemorySpace has to be accessible for ExecutionSpace.");
+        static_assert(
+                Kokkos::SpaceAccessibility<ExecSpace, typename DerivChunk::memory_space>::
+                        accessible,
+                "MemorySpace has to be accessible for ExecutionSpace.");
+        update(exec_space, y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
+            ddc::for_each(
+                    ddc::policies::policy(exec_space),
+                    y.domain(),
+                    KOKKOS_LAMBDA(Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
         });
     }
 
     /**
      * @brief Carry out one step of the Runge-Kutta scheme.
      *
+     * @param[in] exec_space
+     *     The space on which the function is executed (CPU/GPU).
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
      *     of the domain.
@@ -93,7 +135,9 @@ public:
      * @param[in] y_update
      *     The function describing how the value(s) are updated using the derivative.
      */
+    template <class ExecSpace>
     void update(
+            ExecSpace const& exec_space,
             ValSpan y,
             double dt,
             std::function<void(DerivSpan, ValView)> dy,
