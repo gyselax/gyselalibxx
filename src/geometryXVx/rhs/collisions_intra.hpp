@@ -53,34 +53,6 @@ public:
     };
 
 private:
-    static ddc::Coordinate<GhostedVx> ghosted_from_coord(ddc::Coordinate<RDimVx> const& coord)
-    {
-        return ddc::Coordinate<GhostedVx>(ddc::get<RDimVx>(coord));
-    }
-    static ddc::Coordinate<RDimVx> coord_from_ghosted(ddc::Coordinate<GhostedVx> const& coord)
-    {
-        return ddc::Coordinate<RDimVx>(ddc::get<GhostedVx>(coord));
-    }
-    static ddc::Coordinate<GhostedVxStaggered> ghosted_staggered_from_coord(
-            ddc::Coordinate<RDimVx> const& coord)
-    {
-        return ddc::Coordinate<GhostedVxStaggered>(ddc::get<RDimVx>(coord));
-    }
-    static ddc::Coordinate<RDimVx> coord_from_ghosted_staggered(
-            ddc::Coordinate<GhostedVxStaggered> const& coord)
-    {
-        return ddc::Coordinate<RDimVx>(ddc::get<GhostedVxStaggered>(coord));
-    }
-
-    static IndexVx index_from_ghosted(ddc::DiscreteElement<GhostedVx> const& index_ghosted)
-    {
-        return IndexVx(index_ghosted.uid() - 1);
-    }
-    static ddc::DiscreteElement<GhostedVx> ghosted_from_index(IndexVx const& index)
-    {
-        return ddc::DiscreteElement<GhostedVx>(index.uid() + 1);
-    }
-
     static constexpr bool uniform_edge_v
             = std::is_same_v<IDimVx, ddc::UniformPointSampling<RDimVx>>;
 
@@ -132,6 +104,39 @@ public:
      */
     using IndexSpXVx_ghosted_staggered
             = ddc::DiscreteElement<IDimSp, IDimX, ghosted_vx_staggered_point_sampling>;
+
+
+private:
+    static ddc::Coordinate<GhostedVx> ghosted_from_coord(ddc::Coordinate<RDimVx> const& coord)
+    {
+        return ddc::Coordinate<GhostedVx>(ddc::get<RDimVx>(coord));
+    }
+    static ddc::Coordinate<RDimVx> coord_from_ghosted(ddc::Coordinate<GhostedVx> const& coord)
+    {
+        return ddc::Coordinate<RDimVx>(ddc::get<GhostedVx>(coord));
+    }
+    static ddc::Coordinate<GhostedVxStaggered> ghosted_staggered_from_coord(
+            ddc::Coordinate<RDimVx> const& coord)
+    {
+        return ddc::Coordinate<GhostedVxStaggered>(ddc::get<RDimVx>(coord));
+    }
+    static ddc::Coordinate<RDimVx> coord_from_ghosted_staggered(
+            ddc::Coordinate<GhostedVxStaggered> const& coord)
+    {
+        return ddc::Coordinate<RDimVx>(ddc::get<GhostedVxStaggered>(coord));
+    }
+    static IndexVx index_from_ghosted(ddc::DiscreteElement<GhostedVx> const& index_ghosted)
+    {
+        return IndexVx(index_ghosted.uid() - 1);
+    }
+    static IndexVx_ghosted ghosted_from_index(IndexVx const& index)
+    {
+        return IndexVx_ghosted(index.uid() + 1);
+    }
+    static IndexVx_ghosted_staggered ghosted_staggered_from_index(IndexVx const& index)
+    {
+        return IndexVx_ghosted_staggered(index.uid() + 1);
+    }
 
 private:
     double m_nustar0;

@@ -113,8 +113,9 @@ void CollisionsIntra::compute_matrix_coeff(
         IndexSp const isp = ddc::select<IDimSp>(ispxvx);
         IndexX const ix = ddc::select<IDimX>(ispxvx);
 
-        IndexVx_ghosted ivx_ghosted(ddc::select<IDimVx>(ispxvx).uid() + 1);
-        IndexVx_ghosted_staggered ivx_ghosted_staggered(ddc::select<IDimVx>(ispxvx).uid() + 1);
+        IndexVx_ghosted ivx_ghosted(ghosted_from_index(ddc::select<IDimVx>(ispxvx)));
+        IndexVx_ghosted_staggered ivx_ghosted_staggered(
+                ghosted_staggered_from_index(ddc::select<IDimVx>(ispxvx)));
         IndexVx_ghosted ivx_next_ghosted(ivx_ghosted + 1);
         IndexVx_ghosted ivx_prev_ghosted(ivx_ghosted - 1);
         IndexVx_ghosted_staggered ivx_prev_ghosted_staggered(ivx_ghosted_staggered - 1);
