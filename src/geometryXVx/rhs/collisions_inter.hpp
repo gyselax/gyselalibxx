@@ -24,7 +24,8 @@ class CollisionsInter : public IRightHandSide
 {
 private:
     double m_nustar0;
-    DFieldSpX m_nustar_profile;
+    device_t<DFieldSpX> m_nustar_profile_alloc;
+    device_t<DSpanSpX> m_nustar_profile;
 
 public:
     /**

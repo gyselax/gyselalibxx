@@ -105,8 +105,9 @@ TEST(CollisionsInter, CollisionsInter)
         FluidMoments moments(integrate);
 
         auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
-        DFieldSpX nustar_profile(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-        compute_nustar_profile(nustar_profile.span_view(), nustar0);
+        device_t<DFieldSpX> nustar_profile_alloc(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+        device_t<DSpanSpX> nustar_profile = nustar_profile_alloc.span_view();
+        compute_nustar_profile(nustar_profile, nustar0);
 
         int const nbiter(100);
         for (int iter(0); iter < nbiter; iter++) {
@@ -133,10 +134,6 @@ TEST(CollisionsInter, CollisionsInter)
         });
 
         //Collision frequencies, momentum and energy exchange terms
-        auto nustar_profile_device_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                nustar_profile.span_view());
-        auto nustar_profile_device = nustar_profile_device_alloc.span_view();
         device_t<DFieldSpX> collfreq_ab_device(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
         auto density_device_alloc = ddc::
                 create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density.span_view());
@@ -147,7 +144,7 @@ TEST(CollisionsInter, CollisionsInter)
         auto temperature_device = temperature_device_alloc.span_view();
         compute_collfreq_ab(
                 collfreq_ab_device.span_view(),
-                nustar_profile_device,
+                nustar_profile,
                 density_device,
                 temperature_device);
         auto collfreq_ab = ddc::create_mirror_view_and_copy(collfreq_ab_device.span_view());
