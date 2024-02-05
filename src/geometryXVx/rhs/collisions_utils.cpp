@@ -36,28 +36,47 @@ IndexSp find_ion(IDomainSp const dom_sp)
  * but could be space dependent (for instance to have no collisions in some specific
  * parts of the simulation box).
  */
-void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0)
+void compute_nustar_profile(device_t<DSpanSpX> nustar_profile, double nustar0)
 {
     double const Lx = ddcHelper::total_interval_length(ddc::get_domain<IDimX>(nustar_profile));
-    ddc::for_each(nustar_profile.domain(), [&](IndexSpX const ispx) {
-        double const coeff = std::sqrt(mass(ielec()) / mass(ddc::select<IDimSp>(ispx)))
-                             * std::pow(charge(ddc::select<IDimSp>(ispx)), 4) / Lx;
-        nustar_profile(ispx) = coeff * nustar0;
-    });
+
+    auto masses_alloc = create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            ddc::host_discrete_space<SpeciesInformation>().masses());
+    auto masses(masses_alloc.span_view());
+
+    auto charges_alloc = create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            ddc::host_discrete_space<SpeciesInformation>().charges());
+    auto charges(charges_alloc.span_view());
+
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            nustar_profile.domain(),
+            KOKKOS_LAMBDA(IndexSpX const ispx) {
+                double const coeff
+                        = Kokkos::sqrt(masses(ielec()) / masses(ddc::select<IDimSp>(ispx)))
+                          * Kokkos::pow(charges(ddc::select<IDimSp>(ispx)), 4) / Lx;
+                nustar_profile(ispx) = coeff * nustar0;
+            });
 }
 
 /**
  * Computes the space and species dependent collision frequency collfreq.
  */
 void compute_collfreq(
-        DSpanSpX collfreq,
-        DViewSpX nustar_profile,
-        DViewSpX density,
-        DViewSpX temperature)
+        device_t<DSpanSpX> collfreq,
+        device_t<DViewSpX> nustar_profile,
+        device_t<DViewSpX> density,
+        device_t<DViewSpX> temperature)
 {
-    ddc::for_each(collfreq.domain(), [&](IndexSpX const ispx) {
-        collfreq(ispx) = nustar_profile(ispx) * density(ispx) / std::pow(temperature(ispx), 1.5);
-    });
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            collfreq.domain(),
+            KOKKOS_LAMBDA(IndexSpX const ispx) {
+                collfreq(ispx) = nustar_profile(ispx) * density(ispx)
+                                 / Kokkos::pow(temperature(ispx), 1.5);
+            });
 }
 
 /**
@@ -81,7 +100,7 @@ void compute_collfreq_ab(
                         nustar_profile(ielec(), ix) * density(ielec(), ix)
                         / Kokkos::pow(temperature(ielec(), ix), 1.5));
 
-                collfreq_ab(ielec(), ix) = std::sqrt(2.) * charge_ratio * charge_ratio
+                collfreq_ab(ielec(), ix) = Kokkos::sqrt(2.) * charge_ratio * charge_ratio
                                            * collfreq_elec * density(iion, ix)
                                            / density(ielec(), ix) * (1. + me_on_mi)
                                            / Kokkos::
