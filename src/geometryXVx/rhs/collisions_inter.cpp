@@ -10,7 +10,7 @@
 
 CollisionsInter::CollisionsInter(IDomainSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
-    , m_nustar_profile(ddc::select<IDimSp, IDimX>(mesh))
+    , m_nustar_profile_alloc(ddc::select<IDimSp, IDimX>(mesh))
 {
     // validity checks
     if (ddc::select<IDimSp>(mesh).size() != 2) {
@@ -20,7 +20,8 @@ CollisionsInter::CollisionsInter(IDomainSpXVx const& mesh, double nustar0)
         throw std::invalid_argument("Collision operator should not be used with nustar0=0.");
     }
 
-    compute_nustar_profile(m_nustar_profile.span_view(), m_nustar0);
+    m_nustar_profile = m_nustar_profile_alloc.span_view();
+    compute_nustar_profile(m_nustar_profile, m_nustar0);
     ddc::expose_to_pdi("collinter_nustar0", m_nustar0);
 }
 
