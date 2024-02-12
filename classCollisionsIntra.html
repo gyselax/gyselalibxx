@@ -185,12 +185,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2d0d4a6ef673d1b08771b589e1522be0"><td class="memItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; <a class="el" href="classSpeciesInformation.html">IDimSp</a>, IDimX, <a class="el" href="classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524">ghosted_vx_point_sampling</a> &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a2d0d4a6ef673d1b08771b589e1522be0">get_mesh_ghosted</a> () const</td></tr>
 <tr class="memdesc:a2d0d4a6ef673d1b08771b589e1522be0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a mesh containing the species, spatial and the ghosted vx mesh.  <a href="classCollisionsIntra.html#a2d0d4a6ef673d1b08771b589e1522be0">More...</a><br /></td></tr>
 <tr class="separator:a2d0d4a6ef673d1b08771b589e1522be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4792b1f4327c52726ab740f4c475bc40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a4792b1f4327c52726ab740f4c475bc40">compute_rhs_vector</a> (DSpanSpXVx RR, DViewSpXVx AA, DViewSpXVx BB, DViewSpXVx CC, DViewSpXVx allfdistribu, double fthresh) const</td></tr>
-<tr class="memdesc:a4792b1f4327c52726ab740f4c475bc40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the right-hand-side of the collision operator linear system.  <a href="classCollisionsIntra.html#a4792b1f4327c52726ab740f4c475bc40">More...</a><br /></td></tr>
-<tr class="separator:a4792b1f4327c52726ab740f4c475bc40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba3de8398fe37309ba275597262a31a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#aba3de8398fe37309ba275597262a31a0">compute_matrix_coeff</a> (DSpanSpXVx AA, DSpanSpXVx BB, DSpanSpXVx CC, ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e">IDomainSpXVx_ghosted</a> &gt; Dcoll, ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a4d4250ba0b147a7cef591f7c59d3dfdb">IDomainSpXVx_ghosted_staggered</a> &gt; Dcoll_staggered, ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e">IDomainSpXVx_ghosted</a> &gt; Nucoll, double deltat) const</td></tr>
-<tr class="memdesc:aba3de8398fe37309ba275597262a31a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the coefficients of the tridiagonal matrix of the collision operator linear system.  <a href="classCollisionsIntra.html#aba3de8398fe37309ba275597262a31a0">More...</a><br /></td></tr>
-<tr class="separator:aba3de8398fe37309ba275597262a31a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6de1a352a36fab1a7649b54f9e8894a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#aa6de1a352a36fab1a7649b54f9e8894a">compute_rhs_vector</a> (device_t&lt; DSpanSpXVx &gt; RR, device_t&lt; DViewSpXVx &gt; AA, device_t&lt; DViewSpXVx &gt; BB, device_t&lt; DViewSpXVx &gt; CC, device_t&lt; DViewSpXVx &gt; allfdistribu, double fthresh) const</td></tr>
+<tr class="memdesc:aa6de1a352a36fab1a7649b54f9e8894a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the right-hand-side of the collision operator linear system.  <a href="classCollisionsIntra.html#aa6de1a352a36fab1a7649b54f9e8894a">More...</a><br /></td></tr>
+<tr class="separator:aa6de1a352a36fab1a7649b54f9e8894a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc83cb9aa83a7f886c0aa95f4f295dbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#abc83cb9aa83a7f886c0aa95f4f295dbe">compute_matrix_coeff</a> (device_t&lt; DSpanSpXVx &gt; AA, device_t&lt; DSpanSpXVx &gt; BB, device_t&lt; DSpanSpXVx &gt; CC, device_t&lt; ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e">IDomainSpXVx_ghosted</a> &gt;&gt; Dcoll, device_t&lt; ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a4d4250ba0b147a7cef591f7c59d3dfdb">IDomainSpXVx_ghosted_staggered</a> &gt;&gt; Dcoll_staggered, device_t&lt; ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e">IDomainSpXVx_ghosted</a> &gt;&gt; Nucoll, double deltat) const</td></tr>
+<tr class="memdesc:abc83cb9aa83a7f886c0aa95f4f295dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the coefficients of the tridiagonal matrix of the collision operator linear system.  <a href="classCollisionsIntra.html#abc83cb9aa83a7f886c0aa95f4f295dbe">More...</a><br /></td></tr>
+<tr class="separator:abc83cb9aa83a7f886c0aa95f4f295dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a030ed88a896325bca0ad3b249af1a264"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a030ed88a896325bca0ad3b249af1a264">fill_matrix_with_coeff</a> (<a class="el" href="classMatrix__Banded.html">Matrix_Banded</a> &amp;matrix, DViewVx AA, DViewVx BB, DViewVx CC) const</td></tr>
 <tr class="memdesc:a030ed88a896325bca0ad3b249af1a264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill the tridiagonal matrix of the collision operator linear system with the required coefficients.  <a href="classCollisionsIntra.html#a030ed88a896325bca0ad3b249af1a264">More...</a><br /></td></tr>
 <tr class="separator:a030ed88a896325bca0ad3b249af1a264"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -399,8 +399,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4792b1f4327c52726ab740f4c475bc40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4792b1f4327c52726ab740f4c475bc40">&#9670;&nbsp;</a></span>compute_rhs_vector()</h2>
+<a id="aa6de1a352a36fab1a7649b54f9e8894a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6de1a352a36fab1a7649b54f9e8894a">&#9670;&nbsp;</a></span>compute_rhs_vector()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -408,31 +408,31 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void CollisionsIntra::compute_rhs_vector </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">device_t&lt; DSpanSpXVx &gt;&#160;</td>
           <td class="paramname"><em>RR</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">device_t&lt; DViewSpXVx &gt;&#160;</td>
           <td class="paramname"><em>AA</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">device_t&lt; DViewSpXVx &gt;&#160;</td>
           <td class="paramname"><em>BB</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">device_t&lt; DViewSpXVx &gt;&#160;</td>
           <td class="paramname"><em>CC</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">device_t&lt; DViewSpXVx &gt;&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
@@ -465,8 +465,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aba3de8398fe37309ba275597262a31a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba3de8398fe37309ba275597262a31a0">&#9670;&nbsp;</a></span>compute_matrix_coeff()</h2>
+<a id="abc83cb9aa83a7f886c0aa95f4f295dbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc83cb9aa83a7f886c0aa95f4f295dbe">&#9670;&nbsp;</a></span>compute_matrix_coeff()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -474,37 +474,37 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void CollisionsIntra::compute_matrix_coeff </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">device_t&lt; DSpanSpXVx &gt;&#160;</td>
           <td class="paramname"><em>AA</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">device_t&lt; DSpanSpXVx &gt;&#160;</td>
           <td class="paramname"><em>BB</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">device_t&lt; DSpanSpXVx &gt;&#160;</td>
           <td class="paramname"><em>CC</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e">IDomainSpXVx_ghosted</a> &gt;&#160;</td>
+          <td class="paramtype">device_t&lt; ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e">IDomainSpXVx_ghosted</a> &gt;&gt;&#160;</td>
           <td class="paramname"><em>Dcoll</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a4d4250ba0b147a7cef591f7c59d3dfdb">IDomainSpXVx_ghosted_staggered</a> &gt;&#160;</td>
+          <td class="paramtype">device_t&lt; ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a4d4250ba0b147a7cef591f7c59d3dfdb">IDomainSpXVx_ghosted_staggered</a> &gt;&gt;&#160;</td>
           <td class="paramname"><em>Dcoll_staggered</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e">IDomainSpXVx_ghosted</a> &gt;&#160;</td>
+          <td class="paramtype">device_t&lt; ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e">IDomainSpXVx_ghosted</a> &gt;&gt;&#160;</td>
           <td class="paramname"><em>Nucoll</em>, </td>
         </tr>
         <tr>

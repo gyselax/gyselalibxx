@@ -119,19 +119,20 @@ $(document).ready(function(){initNavTree('collisions__inter_8hpp_source.html',''
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">double</span> m_nustar0;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    DFieldSpX m_nustar_profile;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classCollisionsInter.html#a17b3fd2997376d30a7d7474bf675b647">   36</a></span>&#160;    <a class="code" href="classCollisionsInter.html#a17b3fd2997376d30a7d7474bf675b647">CollisionsInter</a>(IDomainSpXVx <span class="keyword">const</span>&amp; mesh, <span class="keywordtype">double</span> nustar0);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    ~<a class="code" href="classCollisionsInter.html">CollisionsInter</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classCollisionsInter.html#a49902dd08b9767eb54de0e4cff866dd3">   53</a></span>&#160;    device_t&lt;DSpanSpXVx&gt; <a class="code" href="classCollisionsInter.html#a49902dd08b9767eb54de0e4cff866dd3">operator()</a>(device_t&lt;DSpanSpXVx&gt; allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac">   60</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac">get_nustar0</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classCollisionsInter.html#acd76b630be8591301f9e0395532bb683">   72</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsInter.html#acd76b630be8591301f9e0395532bb683">get_derivative</a>(device_t&lt;DSpanSpXVx&gt; df, device_t&lt;DViewSpXVx&gt; allfdistribu) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    device_t&lt;DFieldSpX&gt; m_nustar_profile_alloc;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    device_t&lt;DSpanSpX&gt; m_nustar_profile;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classCollisionsInter.html#a17b3fd2997376d30a7d7474bf675b647">   37</a></span>&#160;    <a class="code" href="classCollisionsInter.html#a17b3fd2997376d30a7d7474bf675b647">CollisionsInter</a>(IDomainSpXVx <span class="keyword">const</span>&amp; mesh, <span class="keywordtype">double</span> nustar0);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    ~<a class="code" href="classCollisionsInter.html">CollisionsInter</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classCollisionsInter.html#a49902dd08b9767eb54de0e4cff866dd3">   54</a></span>&#160;    device_t&lt;DSpanSpXVx&gt; <a class="code" href="classCollisionsInter.html#a49902dd08b9767eb54de0e4cff866dd3">operator()</a>(device_t&lt;DSpanSpXVx&gt; allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac">   61</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac">get_nustar0</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classCollisionsInter.html#acd76b630be8591301f9e0395532bb683">   73</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsInter.html#acd76b630be8591301f9e0395532bb683">get_derivative</a>(device_t&lt;DSpanSpXVx&gt; df, device_t&lt;DViewSpXVx&gt; allfdistribu) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
 <div class="ttc" id="aclassCollisionsInter_html"><div class="ttname"><a href="classCollisionsInter.html">CollisionsInter</a></div><div class="ttdoc">Class describing the inter-species collision operator.</div><div class="ttdef"><b>Definition:</b> collisions_inter.hpp:24</div></div>
 <div class="ttc" id="aclassCollisionsInter_html_a0de983fd5f398b17fc7b5c6137f8e8ac"><div class="ttname"><a href="classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac">CollisionsInter::get_nustar0</a></div><div class="ttdeci">double get_nustar0() const</div><div class="ttdoc">Get the collision coefficient.</div></div>
 <div class="ttc" id="aclassCollisionsInter_html_a17b3fd2997376d30a7d7474bf675b647"><div class="ttname"><a href="classCollisionsInter.html#a17b3fd2997376d30a7d7474bf675b647">CollisionsInter::CollisionsInter</a></div><div class="ttdeci">CollisionsInter(IDomainSpXVx const &amp;mesh, double nustar0)</div><div class="ttdoc">The constructor for the operator.</div></div>
