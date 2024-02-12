@@ -7,6 +7,18 @@
 #include "spline_boundary_conditions.hpp"
 
 namespace ddc {
+
+/**
+ * @brief Helper class for the initialisation of the mesh of interpolation points.
+ *
+ * A helper class for the initialisation of the mesh of interpolation points. This
+ * class should be used when the interpolation points should be located at the
+ * knots of the spline. This is possible with any kind of boundary condition except
+ * Greville boundary conditions (as there will not be enough interpolation points).
+ * In the case of strongly non-uniform splines this choice may result in a less
+ * well conditioned problem, however most mathematical stability results are proven
+ * with this choice of interpolation points.
+ */
 template <class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax>
 class KnotsAsInterpolationPoints
 {
@@ -16,17 +28,22 @@ class KnotsAsInterpolationPoints
     using tag_type = typename BSplines::tag_type;
 
 public:
+    /**
+     * Get the sampling of interpolation points.
+     *
+     * @return sampling The DDC point sampling of the interpolation points.
+     */
     template <typename U = BSplines>
     static auto get_sampling()
     {
         if constexpr (U::is_uniform()) {
             using Sampling = ddc::UniformPointSampling<tag_type>;
-            using SamplingImpl = typename Sampling::template Impl<Kokkos::HostSpace>;
-            return SamplingImpl(
-                    ddc::discrete_space<BSplines>().rmin(),
-                    ddc::discrete_space<BSplines>().rmax(),
-                    ddc::DiscreteVector<ddc::UniformPointSampling<tag_type>>(
-                            ddc::discrete_space<BSplines>().ncells() + 1));
+            return std::get<0>(
+                    Sampling::
+                            init(ddc::discrete_space<BSplines>().rmin(),
+                                 ddc::discrete_space<BSplines>().rmax(),
+                                 ddc::DiscreteVector<ddc::UniformPointSampling<tag_type>>(
+                                         ddc::discrete_space<BSplines>().ncells() + 1)));
         } else {
             using Sampling = ddc::NonUniformPointSampling<tag_type>;
             using SamplingImpl = typename Sampling::template Impl<Kokkos::HostSpace>;
@@ -38,8 +55,14 @@ public:
         }
     }
 
+    /// The DDC type of the sampling for the interpolation points.
     using interpolation_mesh_type = typename decltype(get_sampling())::discrete_dimension_type;
 
+    /**
+     * Get the domain which can be used to access the interpolation points in the sampling.
+     *
+     * @return domain The discrete domain which maps to the sampling of interpolation points.
+     */
     static ddc::DiscreteDomain<interpolation_mesh_type> get_domain()
     {
         int const npoints = ddc::discrete_space<BSplines>().ncells() + !BSplines::is_periodic();

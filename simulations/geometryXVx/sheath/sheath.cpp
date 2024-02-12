@@ -12,6 +12,7 @@
 #include <vector>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines/periodic_extrapolation_rule.hpp>
 
 #include <sll/constant_extrapolation_boundary_value.hpp>
 #include <sll/spline_evaluator.hpp>
@@ -200,14 +201,14 @@ int main(int argc, char** argv)
 
     NullBoundaryValue<BSplinesX> bv_x_min_poisson = g_null_boundary<BSplinesX>;
     NullBoundaryValue<BSplinesX> bv_x_max_poisson = g_null_boundary<BSplinesX>;
-    ddc::NullBoundaryValue<ddcBSplinesX> bv_x_min = ddc::g_null_boundary<ddcBSplinesX>;
-    ddc::NullBoundaryValue<ddcBSplinesX> bv_x_max = ddc::g_null_boundary<ddcBSplinesX>;
 
     // Creating batched operators
     SplineXEvaluator const spline_x_evaluator(bv_x_min_poisson, bv_x_max_poisson);
 #ifdef PERIODIC_RDIMX
-    SplineXEvaluatorBatched const
-            spline_x_evaluator_batched(builder_x_batched.spline_domain(), bv_x_min, bv_x_max);
+    SplineXEvaluatorBatched const spline_x_evaluator_batched(
+            builder_x_batched.spline_domain(),
+            ddc::PeriodicExtrapolationRule<RDimX>(),
+            ddc::PeriodicExtrapolationRule<RDimX>());
     PreallocatableSplineInterpolatorBatched const
             spline_x_interpolator(builder_x_batched, spline_x_evaluator_batched);
 #else

@@ -2,7 +2,12 @@
 
 #pragma once
 
+#include <ostream>
+#include <type_traits>
+#include <utility>
+
 #include "ddc/coordinate.hpp"
+#include "ddc/discrete_domain.hpp"
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_space.hpp"
 

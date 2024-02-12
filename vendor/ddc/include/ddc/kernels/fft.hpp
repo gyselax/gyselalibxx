@@ -2,22 +2,33 @@
 
 #pragma once
 
-#include <memory>
+#include <type_traits>
+#include <utility>
 
 #include <experimental/mdspan>
 
 #include <ddc/ddc.hpp>
+
+#include <Kokkos_Core.hpp>
 
 #if fftw_AVAIL
 #include <fftw3.h>
 #endif
 
 #if cufft_AVAIL
+#include <functional>
+#include <memory>
+#include <stdexcept>
+
+#include <cuda_runtime_api.h>
 #include <cufft.h>
 #endif
 
 #if hipfft_AVAIL
-#include <hip/hip_runtime.h>
+#include <functional>
+#include <memory>
+#include <stdexcept>
+
 #include <hip/hip_runtime_api.h>
 #include <hipfft/hipfft.h>
 #endif

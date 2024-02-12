@@ -2,14 +2,10 @@
 
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <type_traits>
 #include <utility>
 
 #include <Kokkos_Core.hpp>
-
-#include "ddc/detail/macros.hpp"
 
 #if defined(__CUDACC__)
 #include <cuda.h>
