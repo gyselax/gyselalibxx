@@ -139,7 +139,7 @@ template <typename X>
 static std::vector<Coord<X>> breaks(std::size_t ncells)
 {
     std::vector<Coord<X>> out(ncells + 1);
-    for (int i(0); i < ncells + 1; ++i) {
+    for (std::size_t i(0); i < ncells + 1; ++i) {
         out[i] = x0<X>() + i * dx<X>(ncells);
     }
     return out;
@@ -182,8 +182,8 @@ template <typename ExecSpace, typename MemorySpace, typename I, typename... X>
 static void BatchedSplineTest()
 {
     // Instantiate execution spaces and initialize spaces
-    Kokkos::DefaultHostExecutionSpace host_exec_space = Kokkos::DefaultHostExecutionSpace();
-    ExecSpace exec_space = ExecSpace();
+    Kokkos::DefaultHostExecutionSpace const host_exec_space;
+    ExecSpace const exec_space;
 
     std::size_t constexpr ncells = 10;
     DimsInitializer<IDim<I, I>, BatchDims<IDim<I, I>, IDim<X, I>...>> dims_initializer;
@@ -192,8 +192,7 @@ static void BatchedSplineTest()
     // Create the values domain (mesh)
     ddc::DiscreteDomain<IDim<I, I>> interpolation_domain
             = GrevillePoints<BSplines<I>>::get_domain();
-    ddc::DiscreteDomain<IDim<X, void>...> const dom_vals_tmp = ddc::DiscreteDomain<
-            IDim<X, void>...>(
+    auto const dom_vals_tmp = ddc::DiscreteDomain<IDim<X, void>...>(
             ddc::DiscreteDomain<
                     IDim<X, void>>(Index<IDim<X, void>>(0), DVect<IDim<X, void>>(ncells))...);
     ddc::DiscreteDomain<IDim<X, I>...> const dom_vals
@@ -206,9 +205,15 @@ static void BatchedSplineTest()
     auto const dom_derivs = ddc::replace_dim_of<IDim<I, I>, ddc::Deriv<I>>(dom_vals, derivs_domain);
 #endif
 
-    // Create a SplineBuilderBatched over BSplines<I> and batched along other dimensions using some boundary conditions
-    ddc::SplineBuilderBatched<
-            ddc::SplineBuilder<ExecSpace, MemorySpace, BSplines<I>, IDim<I, I>, s_bcl, s_bcr>,
+    // Create a SplineBuilder over BSplines<I> and batched along other dimensions using some boundary conditions
+    ddc::SplineBuilder<
+            ExecSpace,
+            MemorySpace,
+            BSplines<I>,
+            IDim<I, I>,
+            s_bcl,
+            s_bcr,
+            ddc::SplineSolver::GINKGO,
             IDim<X, I>...>
             spline_builder(dom_vals);
 
@@ -301,13 +306,29 @@ static void BatchedSplineTest()
 #endif
 
     // Instantiate a SplineEvaluator over interest dimension and batched along other dimensions
-    ddc::SplineEvaluatorBatched<
-            ddc::SplineEvaluator<ExecSpace, MemorySpace, BSplines<I>, IDim<I, I>>,
+    ddc::SplineEvaluator<
+            ExecSpace,
+            MemorySpace,
+            BSplines<I>,
+            IDim<I, I>,
+#if defined(BC_PERIODIC)
+            ddc::PeriodicExtrapolationRule<I>,
+            ddc::PeriodicExtrapolationRule<I>,
+#else
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule,
+#endif
             IDim<X, I>...>
             spline_evaluator_batched(
                     coef.domain(),
-                    ddc::g_null_boundary<BSplines<I>>,
-                    ddc::g_null_boundary<BSplines<I>>);
+#if defined(BC_PERIODIC)
+                    ddc::PeriodicExtrapolationRule<I>(),
+                    ddc::PeriodicExtrapolationRule<I>()
+#else
+                    ddc::NullExtrapolationRule(),
+                    ddc::NullExtrapolationRule()
+#endif
+            );
 
     // Instantiate chunk of coordinates of dom_interpolation
     ddc::Chunk coords_eval_alloc(dom_vals, ddc::KokkosAllocator<Coord<X...>, MemorySpace>());

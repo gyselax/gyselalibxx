@@ -5,8 +5,6 @@
 #include <ddc/ddc.hpp>
 
 #include "Kokkos_Macros.hpp"
-#include "spline_boundary_value.hpp"
-#include "spline_evaluator.hpp"
 #include "view.hpp"
 
 namespace ddc {
@@ -18,8 +16,12 @@ template <
         class BSplinesType2,
         class interpolation_mesh_type1,
         class interpolation_mesh_type2,
+        class LeftExtrapolationRule1,
+        class RightExtrapolationRule1,
+        class LeftExtrapolationRule2,
+        class RightExtrapolationRule2,
         class... IDimX>
-class SplineEvaluator2DBatched
+class SplineEvaluator2D
 {
 private:
     // Tags to determine what to evaluate
@@ -31,18 +33,16 @@ private:
     {
     };
 
+    using tag_type1 = typename BSplinesType1::tag_type;
+    using tag_type2 = typename BSplinesType2::tag_type;
+
 public:
     using exec_space = ExecSpace;
 
     using memory_space = MemorySpace;
 
-    using evaluator_type1
-            = ddc::SplineEvaluator<ExecSpace, MemorySpace, BSplinesType1, interpolation_mesh_type1>;
-    using evaluator_type2
-            = ddc::SplineEvaluator<ExecSpace, MemorySpace, BSplinesType2, interpolation_mesh_type2>;
-
-    using bsplines_type1 = typename evaluator_type1::bsplines_type;
-    using bsplines_type2 = typename evaluator_type2::bsplines_type;
+    using bsplines_type1 = BSplinesType1;
+    using bsplines_type2 = BSplinesType2;
 
     using interpolation_domain_type1 = ddc::DiscreteDomain<interpolation_mesh_type1>;
     using interpolation_domain_type2 = ddc::DiscreteDomain<interpolation_mesh_type2>;
@@ -76,28 +76,104 @@ public:
 private:
     spline_domain_type m_spline_domain;
 
+    LeftExtrapolationRule1 m_left1_bc;
+
+    RightExtrapolationRule1 m_right1_bc;
+
+    LeftExtrapolationRule2 m_left2_bc;
+
+    RightExtrapolationRule2 m_right2_bc;
 
 public:
-    explicit SplineEvaluator2DBatched(
+    static_assert(
+            std::is_same_v<LeftExtrapolationRule1,
+                            typename ddc::PeriodicExtrapolationRule<
+                                    tag_type1>> == bsplines_type1::is_periodic()
+                    && std::is_same_v<
+                               RightExtrapolationRule1,
+                               typename ddc::PeriodicExtrapolationRule<
+                                       tag_type1>> == bsplines_type1::is_periodic()
+                    && std::is_same_v<
+                               LeftExtrapolationRule2,
+                               typename ddc::PeriodicExtrapolationRule<
+                                       tag_type2>> == bsplines_type2::is_periodic()
+                    && std::is_same_v<
+                               RightExtrapolationRule2,
+                               typename ddc::PeriodicExtrapolationRule<
+                                       tag_type2>> == bsplines_type2::is_periodic(),
+            "PeriodicExtrapolationRule has to be used if and only if dimension is periodic");
+    static_assert(
+            std::is_invocable_r_v<
+                    double,
+                    LeftExtrapolationRule1,
+                    ddc::Coordinate<tag_type1>,
+                    ddc::ChunkSpan<
+                            double const,
+                            bsplines_domain_type,
+                            std::experimental::layout_right,
+                            memory_space>>,
+            "LeftExtrapolationRule1::operator() has to be callable "
+            "with usual arguments.");
+    static_assert(
+            std::is_invocable_r_v<
+                    double,
+                    RightExtrapolationRule1,
+                    ddc::Coordinate<tag_type1>,
+                    ddc::ChunkSpan<
+                            double const,
+                            bsplines_domain_type,
+                            std::experimental::layout_right,
+                            memory_space>>,
+            "RightExtrapolationRule1::operator() has to be callable "
+            "with usual arguments.");
+    static_assert(
+            std::is_invocable_r_v<
+                    double,
+                    LeftExtrapolationRule2,
+                    ddc::Coordinate<tag_type2>,
+                    ddc::ChunkSpan<
+                            double const,
+                            bsplines_domain_type,
+                            std::experimental::layout_right,
+                            memory_space>>,
+            "LeftExtrapolationRule2::operator() has to be callable "
+            "with usual arguments.");
+    static_assert(
+            std::is_invocable_r_v<
+                    double,
+                    RightExtrapolationRule2,
+                    ddc::Coordinate<tag_type2>,
+                    ddc::ChunkSpan<
+                            double const,
+                            bsplines_domain_type,
+                            std::experimental::layout_right,
+                            memory_space>>,
+            "RightExtrapolationRule2::operator() has to be callable "
+            "with usual arguments.");
+
+    explicit SplineEvaluator2D(
             spline_domain_type const& spline_domain,
-            [[maybe_unused]] SplineBoundaryValue<bsplines_type1> const&
-                    left1_bc, // Unused, to be restored in next MR
-            [[maybe_unused]] SplineBoundaryValue<bsplines_type1> const& right1_bc,
-            [[maybe_unused]] SplineBoundaryValue<bsplines_type2> const& left2_bc,
-            [[maybe_unused]] SplineBoundaryValue<bsplines_type2> const& right2_bc)
+            LeftExtrapolationRule1 const& left_extrap_rule1,
+            RightExtrapolationRule1 const& right_extrap_rule1,
+            LeftExtrapolationRule2 const& left_extrap_rule2,
+            RightExtrapolationRule2 const& right_extrap_rule2)
         : m_spline_domain(spline_domain)
+        , m_left1_bc(left_extrap_rule1)
+        , m_right1_bc(right_extrap_rule1)
+        , m_left2_bc(left_extrap_rule2)
+        , m_right2_bc(right_extrap_rule2)
     {
     }
 
-    SplineEvaluator2DBatched(SplineEvaluator2DBatched const& x) = default;
+    SplineEvaluator2D(SplineEvaluator2D const& x) = default;
 
-    SplineEvaluator2DBatched(SplineEvaluator2DBatched&& x) = default;
+    SplineEvaluator2D(SplineEvaluator2D&& x) = default;
 
-    ~SplineEvaluator2DBatched() = default;
+    ~SplineEvaluator2D() = default;
 
-    SplineEvaluator2DBatched& operator=(SplineEvaluator2DBatched const& x) = default;
+    SplineEvaluator2D& operator=(SplineEvaluator2D const& x) = default;
 
-    SplineEvaluator2DBatched& operator=(SplineEvaluator2DBatched&& x) = default;
+    SplineEvaluator2D& operator=(SplineEvaluator2D&& x) = default;
 
 
 
@@ -121,7 +197,7 @@ public:
     template <class Layout, class... CoordsDims>
     KOKKOS_FUNCTION double operator()(
             ddc::Coordinate<CoordsDims...> const& coord_eval,
-            ddc::ChunkSpan<double const, spline_domain_type, Layout, memory_space> const
+            ddc::ChunkSpan<double const, bsplines_domain_type, Layout, memory_space> const
                     spline_coef) const
     {
         return eval(coord_eval, spline_coef);
@@ -427,6 +503,13 @@ private:
                                    / ddc::discrete_space<bsplines_type1>().length())
                            * ddc::discrete_space<bsplines_type1>().length();
             }
+        } else {
+            if (coord_eval_interpolation1 < ddc::discrete_space<bsplines_type1>().rmin()) {
+                return m_left1_bc(coord_eval, spline_coef);
+            }
+            if (coord_eval_interpolation1 > ddc::discrete_space<bsplines_type1>().rmax()) {
+                return m_right1_bc(coord_eval, spline_coef);
+            }
         }
         if constexpr (bsplines_type2::is_periodic()) {
             if (coord_eval_interpolation2 < ddc::discrete_space<bsplines_type2>().rmin()
@@ -437,6 +520,13 @@ private:
                                     - ddc::discrete_space<bsplines_type2>().rmin())
                                    / ddc::discrete_space<bsplines_type2>().length())
                            * ddc::discrete_space<bsplines_type2>().length();
+            }
+        } else {
+            if (coord_eval_interpolation2 < ddc::discrete_space<bsplines_type2>().rmin()) {
+                return m_left2_bc(coord_eval, spline_coef);
+            }
+            if (coord_eval_interpolation2 > ddc::discrete_space<bsplines_type2>().rmax()) {
+                return m_right2_bc(coord_eval, spline_coef);
             }
         }
         return eval_no_bc<eval_type, eval_type>(

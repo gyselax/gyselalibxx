@@ -1,8 +1,9 @@
 #pragma once
 
+#include <functional>
 #include <map>
-#include <memory>
 #include <optional>
+#include <string>
 
 #include <Kokkos_Core.hpp>
 

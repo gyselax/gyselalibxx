@@ -3,10 +3,11 @@
 #pragma once
 
 #include <cassert>
-#include <cstdint>
+#include <cstddef>
+#include <iterator>
 #include <tuple>
+#include <type_traits>
 
-#include "ddc/coordinate.hpp"
 #include "ddc/detail/type_seq.hpp"
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_vector.hpp"

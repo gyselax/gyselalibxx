@@ -2,14 +2,16 @@
 
 #pragma once
 
+#include <array>
 #include <cassert>
-#include <memory>
+#include <cstddef>
 #include <type_traits>
-#include <vector>
+#include <utility>
 
 #include <experimental/mdspan>
 
 #include "ddc/chunk_common.hpp"
+#include "ddc/detail/kokkos.hpp"
 #include "ddc/discrete_domain.hpp"
 #include "ddc/discrete_element.hpp"
 

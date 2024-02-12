@@ -6,7 +6,7 @@
 
 #include <Kokkos_Core.hpp>
 
-#include "ddc/chunk_span.hpp"
+#include "ddc/chunk_common.hpp"
 
 namespace ddc {
 

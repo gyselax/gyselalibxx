@@ -2,9 +2,10 @@
 
 #pragma once
 
+#include <type_traits>
+
 #include "ddc/coordinate.hpp"
 #include "ddc/discrete_element.hpp"
-#include "ddc/discrete_space.hpp"
 
 namespace ddc {
 

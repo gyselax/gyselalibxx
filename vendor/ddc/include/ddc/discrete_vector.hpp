@@ -5,6 +5,7 @@
 #include <array>
 #include <cstddef>
 #include <ostream>
+#include <type_traits>
 #include <utility>
 
 #include <Kokkos_Core.hpp>

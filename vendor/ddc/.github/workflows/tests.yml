@@ -44,8 +44,9 @@ jobs:
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin || true
         docker pull ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}} || true
-        docker build \
+        DOCKER_BUILDKIT=1 docker build \
           --build-arg BACKEND=${{matrix.backend}} \
+          --build-arg BUILDKIT_INLINE_CACHE=1 \
           --cache-from ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}} \
           -t ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}} \
           -t ghcr.io/cexa-project/ddc/${{matrix.image}}_${{matrix.backend}}:${GITHUB_SHA:0:7} \

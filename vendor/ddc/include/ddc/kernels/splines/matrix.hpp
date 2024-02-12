@@ -77,6 +77,18 @@ public:
         return bx;
     }
 
+    virtual ddc::DSpan2D solve_multiple_transpose_inplace(ddc::DSpan2D const bx) const
+    {
+        assert(int(bx.extent(1)) == m_n);
+        int const info = solve_inplace_method(bx.data_handle(), 'T', bx.extent(0));
+
+        if (info < 0) {
+            std::cerr << -info << "-th argument had an illegal value" << std::endl;
+            // TODO: Add LOG_FATAL_ERROR
+        }
+        return bx;
+    }
+
     template <class... Args>
     Kokkos::View<double**, Args...> solve_batch_inplace(
             Kokkos::View<double**, Args...> const bx) const

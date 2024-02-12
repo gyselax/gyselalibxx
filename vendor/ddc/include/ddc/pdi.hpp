@@ -5,12 +5,12 @@
 #include <memory_resource>
 #include <string>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 #include <pdi.h>
 
-#include "ddc/chunk_span.hpp"
-#include "ddc/discrete_domain.hpp"
+#include "ddc/chunk_common.hpp"
 
 namespace ddc {
 

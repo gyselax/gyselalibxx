@@ -77,10 +77,30 @@ foreach(BCL "BCL_GREVILLE" "BCL_HERMITE")
   endforeach()
 endforeach()
 
+foreach(BC "BC_PERIODIC" "BC_GREVILLE")
+  foreach(DEGREE_X RANGE "${SPLINES_TEST_DEGREE_MIN}" "${SPLINES_TEST_DEGREE_MAX}")
+    foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
+      foreach(ER "ER_NULL" "ER_CONSTANT")
+        set(test_name "splines_tests_DEGREE_X_${DEGREE_X}_${BSPLINES_TYPE}_${EVALUATOR}_${BC}_${ER}")
+        add_executable("${test_name}" ../main.cpp extrapolation_rule.cpp)
+        target_compile_features("${test_name}" PUBLIC cxx_std_17)
+        target_link_libraries("${test_name}"
+          PUBLIC
+          GTest::gtest
+          DDC::DDC
+        )
+	    target_compile_definitions("${test_name}" PUBLIC -DDEGREE=${DEGREE_X} -D${BSPLINES_TYPE} -D${EVALUATOR} -D${BC} -D${ER})
+        # add_test("${test_name}" "${test_name}")
+        gtest_discover_tests("${test_name}")
+      endforeach()
+    endforeach()
+  endforeach()
+endforeach()
+
 foreach(BC "BC_PERIODIC" "BC_GREVILLE" "BC_HERMITE")
   foreach(DEGREE_X RANGE "${SPLINES_TEST_DEGREE_MIN}" "${SPLINES_TEST_DEGREE_MAX}")
     foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
-      set(test_name "splines_tests_BATCHED_DEGREE_X_${DEGREE_X}_${BSPLINES_TYPE}_bc_${BC}")
+      set(test_name "splines_tests_BATCHED_DEGREE_X_${DEGREE_X}_${BSPLINES_TYPE}_${BC}")
       add_executable("${test_name}" ../main.cpp batched_spline_builder.cpp)
       target_compile_features("${test_name}" PUBLIC cxx_std_17)
       target_link_libraries("${test_name}"

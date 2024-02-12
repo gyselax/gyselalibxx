@@ -1,6 +1,5 @@
 #pragma once
 
-#include <limits>
 #include <utility>
 
 #include <Kokkos_Core.hpp>

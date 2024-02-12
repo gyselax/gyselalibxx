@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <cstddef>
+#include <type_traits>
 #include <utility>
 
 #include <Kokkos_Core.hpp>

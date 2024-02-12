@@ -88,7 +88,7 @@ using BSplines = ddc::UniformBSplines<X, s_degree>;
 // Gives discrete dimension. In the dimension of interest, it is deduced from the BSplines type. In the other dimensions, it has to be newly defined. In practice both types coincide in the test, but it may not be the case.
 template <typename X, typename I1, typename I2>
 using IDim = std::conditional_t<
-        std::disjunction_v<std::is_same<X, I1>, std::is_same<X, I2>>,
+        std::is_same_v<X, I1> || std::is_same_v<X, I2>,
         typename GrevillePoints<BSplines<X>>::interpolation_mesh_type,
         ddc::UniformPointSampling<X>>;
 
@@ -98,7 +98,7 @@ using BSplines = ddc::NonUniformBSplines<X, s_degree>;
 
 template <typename X, typename I1, typename I2>
 using IDim = std::conditional_t<
-        std::disjunction_v<std::is_same<X, I1>, std::is_same<X, I2>>,
+        std::is_same_v<X, I1> || std::is_same_v<X, I2>,
         typename GrevillePoints<BSplines<X>>::interpolation_mesh_type,
         ddc::NonUniformPointSampling<X>>;
 #endif
@@ -148,10 +148,10 @@ static constexpr double dx(std::size_t ncells)
 
 // Templated function giving break points of mesh in given dimension for non-uniform case.
 template <typename X>
-static constexpr std::vector<Coord<X>> breaks(std::size_t ncells)
+static std::vector<Coord<X>> breaks(std::size_t ncells)
 {
     std::vector<Coord<X>> out(ncells + 1);
-    for (int i(0); i < ncells + 1; ++i) {
+    for (std::size_t i(0); i < ncells + 1; ++i) {
         out[i] = x0<X>() + i * dx<X>(ncells);
     }
     return out;
@@ -203,8 +203,8 @@ template <typename ExecSpace, typename MemorySpace, typename I1, typename I2, ty
 static void Batched2dSplineTest()
 {
     // Instantiate execution spaces and initialize spaces
-    Kokkos::DefaultHostExecutionSpace host_exec_space = Kokkos::DefaultHostExecutionSpace();
-    ExecSpace exec_space = ExecSpace();
+    Kokkos::DefaultHostExecutionSpace const host_exec_space;
+    ExecSpace const exec_space;
     std::size_t constexpr ncells = 10;
     DimsInitializer<
             IDim<I1, I1, I2>,
@@ -223,8 +223,7 @@ static void Batched2dSplineTest()
     auto interpolation_domain = ddc::DiscreteDomain<IDim<I1, I1, I2>, IDim<I2, I1, I2>>(
             GrevillePoints<BSplines<I1>>::get_domain(),
             GrevillePoints<BSplines<I2>>::get_domain());
-    ddc::DiscreteDomain<IDim<X, void, void>...> const dom_vals_tmp = ddc::DiscreteDomain<
-            IDim<X, void, void>...>(
+    auto const dom_vals_tmp = ddc::DiscreteDomain<IDim<X, void, void>...>(
             ddc::DiscreteDomain<IDim<
                     X,
                     void,
@@ -253,8 +252,8 @@ static void Batched2dSplineTest()
             = ddc::replace_dim_of<IDim<I2, I1, I2>, ddc::Deriv<I2>>(dom_derivs1, derivs_domain2);
 #endif
 
-    // Create a SplineBuilderBatched over BSplines<I> and batched along other dimensions using some boundary conditions
-    ddc::SplineBuilder2DBatched<
+    // Create a SplineBuilder over BSplines<I> and batched along other dimensions using some boundary conditions
+    ddc::SplineBuilder2D<
             ExecSpace,
             MemorySpace,
             BSplines<I1>,
@@ -265,6 +264,7 @@ static void Batched2dSplineTest()
             s_bcr,
             s_bcl,
             s_bcr,
+            ddc::SplineSolver::GINKGO,
             IDim<X, I1, I2>...>
             spline_builder(dom_vals);
 
@@ -449,8 +449,11 @@ static void Batched2dSplineTest()
         ddc::Chunk Sderiv_mixed_rhs_rhs1_cpu_alloc(derivs_domain, ddc::HostAllocator<double>());
         ddc::ChunkSpan Sderiv_mixed_rhs_rhs1_cpu = Sderiv_mixed_rhs_rhs1_cpu_alloc.span_view();
 
-        for (int ii = 1; ii < derivs_domain.template extent<ddc::Deriv<I1>>() + 1; ++ii) {
-            for (std::size_t jj = 1; jj < derivs_domain.template extent<ddc::Deriv<I2>>() + 1;
+        for (std::size_t ii = 1;
+             ii < (std::size_t)derivs_domain.template extent<ddc::Deriv<I1>>() + 1;
+             ++ii) {
+            for (std::size_t jj = 1;
+                 jj < (std::size_t)derivs_domain.template extent<ddc::Deriv<I2>>() + 1;
                  ++jj) {
                 Sderiv_mixed_lhs_lhs1_cpu(
                         typename decltype(derivs_domain)::discrete_element_type(ii, jj))
@@ -524,20 +527,39 @@ static void Batched2dSplineTest()
     spline_builder(coef, vals.span_cview());
 #endif
     // Instantiate a SplineEvaluator over interest dimension and batched along other dimensions
-    ddc::SplineEvaluator2DBatched<
+    ddc::SplineEvaluator2D<
             ExecSpace,
             MemorySpace,
             BSplines<I1>,
             BSplines<I2>,
             IDim<I1, I1, I2>,
             IDim<I2, I1, I2>,
+#if defined(BC_PERIODIC)
+            ddc::PeriodicExtrapolationRule<I1>,
+            ddc::PeriodicExtrapolationRule<I1>,
+            ddc::PeriodicExtrapolationRule<I2>,
+            ddc::PeriodicExtrapolationRule<I2>,
+#else
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule,
+#endif
             IDim<X, I1, I2>...>
-            spline_evaluator_batched(
+            spline_evaluator(
                     coef.domain(),
-                    ddc::g_null_boundary<BSplines<I1>>,
-                    ddc::g_null_boundary<BSplines<I1>>,
-                    ddc::g_null_boundary<BSplines<I2>>,
-                    ddc::g_null_boundary<BSplines<I2>>);
+#if defined(BC_PERIODIC)
+                    ddc::PeriodicExtrapolationRule<I1>(),
+                    ddc::PeriodicExtrapolationRule<I1>(),
+                    ddc::PeriodicExtrapolationRule<I2>(),
+                    ddc::PeriodicExtrapolationRule<I2>()
+#else
+                    ddc::NullExtrapolationRule(),
+                    ddc::NullExtrapolationRule(),
+                    ddc::NullExtrapolationRule(),
+                    ddc::NullExtrapolationRule()
+#endif
+            );
 
     // Instantiate chunk of coordinates of dom_interpolation
     ddc::Chunk coords_eval_alloc(dom_vals, ddc::KokkosAllocator<Coord<X...>, MemorySpace>());
@@ -561,12 +583,12 @@ static void Batched2dSplineTest()
     ddc::ChunkSpan spline_eval_deriv12 = spline_eval_deriv12_alloc.span_view();
 
     // Call spline_evaluator on the same mesh we started with
-    spline_evaluator_batched(spline_eval, coords_eval.span_cview(), coef.span_cview());
-    spline_evaluator_batched
+    spline_evaluator(spline_eval, coords_eval.span_cview(), coef.span_cview());
+    spline_evaluator
             .template deriv<I1>(spline_eval_deriv1, coords_eval.span_cview(), coef.span_cview());
-    spline_evaluator_batched
+    spline_evaluator
             .template deriv<I2>(spline_eval_deriv2, coords_eval.span_cview(), coef.span_cview());
-    spline_evaluator_batched.template deriv2<
+    spline_evaluator.template deriv2<
             I1,
             I2>(spline_eval_deriv12, coords_eval.span_cview(), coef.span_cview());
 

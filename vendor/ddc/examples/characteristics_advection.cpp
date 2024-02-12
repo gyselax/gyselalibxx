@@ -202,29 +202,30 @@ int main(int argc, char** argv)
     //! [initial output]
 
     //! [instantiate solver]
-    ddc::SplineBuilderBatched<
-            ddc::SplineBuilder<
-                    Kokkos::DefaultExecutionSpace,
-                    Kokkos::DefaultExecutionSpace::memory_space,
-                    BSplinesX,
-                    DDimX,
-                    ddc::BoundCond::PERIODIC,
-                    ddc::BoundCond::PERIODIC>,
+    ddc::SplineBuilder<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplinesX,
+            DDimX,
+            ddc::BoundCond::PERIODIC,
+            ddc::BoundCond::PERIODIC,
+            ddc::SplineSolver::GINKGO,
             DDimX,
             DDimY>
             spline_builder(x_mesh);
-    ddc::SplineEvaluatorBatched<
-            ddc::SplineEvaluator<
-                    Kokkos::DefaultExecutionSpace,
-                    Kokkos::DefaultExecutionSpace::memory_space,
-                    BSplinesX,
-                    DDimX>,
+    ddc::SplineEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplinesX,
+            DDimX,
+            ddc::PeriodicExtrapolationRule<X>,
+            ddc::PeriodicExtrapolationRule<X>,
             DDimX,
             DDimY>
             spline_evaluator(
                     spline_builder.spline_domain(),
-                    ddc::g_null_boundary<BSplinesX>,
-                    ddc::g_null_boundary<BSplinesX>);
+                    ddc::PeriodicExtrapolationRule<X>(),
+                    ddc::PeriodicExtrapolationRule<X>());
     //! [instantiate solver]
 
     //! [instantiate intermediate chunks]
