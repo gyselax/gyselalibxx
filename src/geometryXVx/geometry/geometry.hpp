@@ -114,22 +114,23 @@ using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXB
 using SplineXEvaluator = SplineEvaluator<BSplinesX>;
 using SplineVxEvaluator = SplineEvaluator<BSplinesVx>;
 #ifdef PERIODIC_RDIMX
-using SplineXBuilderBatched = ddc::SplineBuilderBatched<
-        ddc::SplineBuilder<
-                Kokkos::DefaultExecutionSpace,
-                Kokkos::DefaultExecutionSpace::memory_space,
-                ddcBSplinesX,
-                IDimX,
-                ddc::BoundCond::PERIODIC,
-                ddc::BoundCond::PERIODIC>,
+using SplineXBuilderBatched = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        ddcBSplinesX,
+        IDimX,
+        ddc::BoundCond::PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        ddc::SplineSolver::GINKGO,
         IDimX,
         IDimVx>;
-using SplineXEvaluatorBatched = ddc::SplineEvaluatorBatched<
-        ddc::SplineEvaluator<
-                Kokkos::DefaultExecutionSpace,
-                Kokkos::DefaultExecutionSpace::memory_space,
-                ddcBSplinesX,
-                IDimX>,
+using SplineXEvaluatorBatched = ddc::SplineEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        ddcBSplinesX,
+        IDimX,
+        ddc::PeriodicExtrapolationRule<RDimX>,
+        ddc::PeriodicExtrapolationRule<RDimX>,
         IDimX,
         IDimVx>;
 #endif

@@ -2,14 +2,16 @@
 
 #pragma once
 
-#include <cassert>
+#include <cstddef>
+#include <initializer_list>
+#include <ostream>
 #include <type_traits>
 #include <vector>
 
 #include <Kokkos_Core.hpp>
 
 #include "ddc/coordinate.hpp"
-#include "ddc/detail/macros.hpp"
+#include "ddc/discrete_domain.hpp"
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_space.hpp"
 #include "ddc/discrete_vector.hpp"

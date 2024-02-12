@@ -5,6 +5,8 @@
 
 #include <ginkgo/ginkgo.hpp>
 
+#include <Kokkos_Core.hpp>
+
 inline std::shared_ptr<gko::Executor> create_default_host_executor()
 {
 #ifdef KOKKOS_ENABLE_SERIAL

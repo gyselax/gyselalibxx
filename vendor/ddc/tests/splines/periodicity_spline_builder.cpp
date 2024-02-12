@@ -78,7 +78,7 @@ template <typename X>
 static std::vector<Coord<X>> breaks(std::size_t ncells)
 {
     std::vector<Coord<X>> out(ncells + 1);
-    for (int i(0); i < ncells + 1; ++i) {
+    for (std::size_t i(0); i < ncells + 1; ++i) {
         out[i] = x0<X>() + i * dx<X>(ncells);
     }
     return out;
@@ -111,8 +111,8 @@ template <typename ExecSpace, typename MemorySpace, typename X>
 static void PeriodicitySplineBuilderTest()
 {
     // Instantiate execution spaces and initialize spaces
-    Kokkos::DefaultHostExecutionSpace host_exec_space = Kokkos::DefaultHostExecutionSpace();
-    ExecSpace exec_space = ExecSpace();
+    Kokkos::DefaultHostExecutionSpace const host_exec_space;
+    ExecSpace const exec_space;
 
     std::size_t constexpr ncells = 10;
     DimsInitializer<IDim<X>> dims_initializer;
@@ -122,15 +122,15 @@ static void PeriodicitySplineBuilderTest()
     ddc::DiscreteDomain<IDim<X>> const dom_vals
             = ddc::DiscreteDomain<IDim<X>>(GrevillePoints<BSplines<X>>::get_domain());
 
-    // Create a SplineBuilderBatched over BSplines<I> and batched along other dimensions using some boundary conditions
-    ddc::SplineBuilderBatched<
-            ddc::SplineBuilder<
-                    ExecSpace,
-                    MemorySpace,
-                    BSplines<X>,
-                    IDim<X>,
-                    ddc::BoundCond::PERIODIC,
-                    ddc::BoundCond::PERIODIC>,
+    // Create a SplineBuilder over BSplines<I> and batched along other dimensions using some boundary conditions
+    ddc::SplineBuilder<
+            ExecSpace,
+            MemorySpace,
+            BSplines<X>,
+            IDim<X>,
+            ddc::BoundCond::PERIODIC,
+            ddc::BoundCond::PERIODIC,
+            ddc::SplineSolver::GINKGO,
             IDim<X>>
             spline_builder(dom_vals);
 
@@ -156,13 +156,18 @@ static void PeriodicitySplineBuilderTest()
     spline_builder(coef, vals.span_cview());
 
     // Instantiate a SplineEvaluator over interest dimension and batched along other dimensions
-    ddc::SplineEvaluatorBatched<
-            ddc::SplineEvaluator<ExecSpace, MemorySpace, BSplines<X>, IDim<X>>,
+    ddc::SplineEvaluator<
+            ExecSpace,
+            MemorySpace,
+            BSplines<X>,
+            IDim<X>,
+            ddc::PeriodicExtrapolationRule<X>,
+            ddc::PeriodicExtrapolationRule<X>,
             IDim<X>>
-            spline_evaluator_batched(
+            spline_evaluator(
                     coef.domain(),
-                    ddc::g_null_boundary<BSplines<X>>,
-                    ddc::g_null_boundary<BSplines<X>>);
+                    ddc::PeriodicExtrapolationRule<X>(),
+                    ddc::PeriodicExtrapolationRule<X>());
 
     // Instantiate chunk of coordinates of dom_interpolation
     ddc::Chunk coords_eval_alloc(dom_vals, ddc::KokkosAllocator<Coord<X>, MemorySpace>());
@@ -180,7 +185,7 @@ static void PeriodicitySplineBuilderTest()
     ddc::ChunkSpan spline_eval = spline_eval_alloc.span_view();
 
     // Call spline_evaluator on the same mesh we started with
-    spline_evaluator_batched(spline_eval, coords_eval.span_cview(), coef.span_cview());
+    spline_evaluator(spline_eval, coords_eval.span_cview(), coef.span_cview());
 
     // Checking errors (we recover the initial values)
     double max_norm_error = ddc::transform_reduce(

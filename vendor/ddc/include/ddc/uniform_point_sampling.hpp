@@ -3,12 +3,14 @@
 #pragma once
 
 #include <cassert>
+#include <ostream>
+#include <tuple>
 #include <type_traits>
+#include <utility>
 
 #include <Kokkos_Core.hpp>
 
 #include "ddc/coordinate.hpp"
-#include "ddc/detail/macros.hpp"
 #include "ddc/discrete_domain.hpp"
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_space.hpp"

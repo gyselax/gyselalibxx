@@ -6,9 +6,7 @@
 
 // TODO: create splines.hpp
 #include <ddc/kernels/splines/spline_builder.hpp>
-#include <ddc/kernels/splines/spline_builder_batched.hpp>
 #include <ddc/kernels/splines/spline_evaluator.hpp>
-#include <ddc/kernels/splines/spline_evaluator_batched.hpp>
 
 /**
  * @brief A class for interpolating a function using splines.
@@ -25,21 +23,28 @@
 template <class DDimI, class BSplines, ddc::BoundCond BcMin, ddc::BoundCond BcMax, class... DDim>
 class SplineInterpolatorBatched : public IInterpolatorBatched<DDimI, DDim...>
 {
-    using BuilderType = ddc::SplineBuilderBatched<
-            ddc::SplineBuilder<
-                    Kokkos::DefaultExecutionSpace,
-                    Kokkos::DefaultExecutionSpace::memory_space,
-                    BSplines,
-                    DDimI,
-                    BcMin,
-                    BcMax>,
+    using BuilderType = ddc::SplineBuilder<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplines,
+            DDimI,
+            BcMin,
+            BcMax,
+            ddc::SplineSolver::GINKGO,
             DDim...>;
-    using EvaluatorType = ddc::SplineEvaluatorBatched<
-            ddc::SplineEvaluator<
-                    Kokkos::DefaultExecutionSpace,
-                    Kokkos::DefaultExecutionSpace::memory_space,
-                    BSplines,
-                    DDimI>,
+    using EvaluatorType = ddc::SplineEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplines,
+            DDimI,
+            std::conditional_t<
+                    DDimI::continuous_dimension_type::PERIODIC,
+                    ddc::PeriodicExtrapolationRule<typename DDimI::continuous_dimension_type>,
+                    ddc::ConstantExtrapolationRule<typename DDimI::continuous_dimension_type>>,
+            std::conditional_t<
+                    DDimI::continuous_dimension_type::PERIODIC,
+                    ddc::PeriodicExtrapolationRule<typename DDimI::continuous_dimension_type>,
+                    ddc::ConstantExtrapolationRule<typename DDimI::continuous_dimension_type>>,
             DDim...>;
 
 private:
@@ -65,8 +70,8 @@ public:
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_coefs(builder.spline_domain())
-        , m_derivs_min_alloc(BuilderType::builder_type::s_nbe_xmin, 0.)
-        , m_derivs_max_alloc(BuilderType::builder_type::s_nbe_xmax, 0.)
+        , m_derivs_min_alloc(BuilderType::s_nbe_xmin, 0.)
+        , m_derivs_max_alloc(BuilderType::s_nbe_xmax, 0.)
     {
     }
 
@@ -104,21 +109,28 @@ template <class DDimI, class BSplines, ddc::BoundCond BcMin, ddc::BoundCond BcMa
 class PreallocatableSplineInterpolatorBatched
     : public IPreallocatableInterpolatorBatched<DDimI, DDim...>
 {
-    using BuilderType = ddc::SplineBuilderBatched<
-            ddc::SplineBuilder<
-                    Kokkos::DefaultExecutionSpace,
-                    Kokkos::DefaultExecutionSpace::memory_space,
-                    BSplines,
-                    DDimI,
-                    BcMin,
-                    BcMax>,
+    using BuilderType = ddc::SplineBuilder<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplines,
+            DDimI,
+            BcMin,
+            BcMax,
+            ddc::SplineSolver::GINKGO,
             DDim...>;
-    using EvaluatorType = ddc::SplineEvaluatorBatched<
-            ddc::SplineEvaluator<
-                    Kokkos::DefaultExecutionSpace,
-                    Kokkos::DefaultExecutionSpace::memory_space,
-                    BSplines,
-                    DDimI>,
+    using EvaluatorType = ddc::SplineEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplines,
+            DDimI,
+            std::conditional_t<
+                    DDimI::continuous_dimension_type::PERIODIC,
+                    ddc::PeriodicExtrapolationRule<typename DDimI::continuous_dimension_type>,
+                    ddc::ConstantExtrapolationRule<typename DDimI::continuous_dimension_type>>,
+            std::conditional_t<
+                    DDimI::continuous_dimension_type::PERIODIC,
+                    ddc::PeriodicExtrapolationRule<typename DDimI::continuous_dimension_type>,
+                    ddc::ConstantExtrapolationRule<typename DDimI::continuous_dimension_type>>,
             DDim...>;
 
     BuilderType const& m_builder;
