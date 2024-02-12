@@ -2,16 +2,15 @@
 
 #pragma once
 
+#include <array>
 #include <cassert>
-#include <memory>
 #include <type_traits>
-#include <vector>
+#include <utility>
 
 #include <experimental/mdspan>
 
 #include <Kokkos_Core.hpp>
 
-#include "ddc/detail/kokkos.hpp"
 #include "ddc/detail/macros.hpp"
 #include "ddc/discrete_domain.hpp"
 

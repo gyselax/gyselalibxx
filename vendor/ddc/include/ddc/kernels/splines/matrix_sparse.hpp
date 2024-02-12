@@ -102,6 +102,7 @@ private:
     std::shared_ptr<matrix_sparse_type> m_matrix_sparse;
 
     std::shared_ptr<gko::solver::Bicgstab<double>> m_solver;
+    std::shared_ptr<gko::LinOp> m_solver_tr;
 
     int m_cols_per_chunk; // Maximum number of columns of B to be passed to a Ginkgo solver
 
@@ -144,8 +145,8 @@ public:
         m_matrix_dense.reset();
         matrix_data.remove_zeros();
         m_matrix_sparse->read(matrix_data);
-
         std::shared_ptr const gko_exec = m_matrix_sparse->get_executor();
+
         // Create the solver factory
         std::shared_ptr const residual_criterion
                 = gko::stop::ResidualNorm<double>::build().with_reduction_factor(1e-19).on(
@@ -166,6 +167,7 @@ public:
                           .on(gko_exec);
 
         m_solver = solver_factory->generate(m_matrix_sparse);
+        m_solver_tr = m_solver->transpose();
         gko_exec->synchronize();
 
         return 0;
@@ -173,10 +175,6 @@ public:
 
     virtual int solve_inplace_method(double* b, char transpose, int n_equations) const override
     {
-        if (transpose != 'N') {
-            throw std::domain_error("transpose");
-        }
-
         std::shared_ptr const gko_exec = m_solver->get_executor();
 
         int const main_chunk_size = std::min(m_cols_per_chunk, n_equations);
@@ -199,7 +197,18 @@ public:
 
             Kokkos::deep_copy(x_subview, b_subview);
 
-            m_solver->apply(to_gko_dense(gko_exec, b_subview), to_gko_dense(gko_exec, x_subview));
+            if (transpose == 'N') {
+                m_solver
+                        ->apply(to_gko_dense(gko_exec, b_subview),
+                                to_gko_dense(gko_exec, x_subview));
+            } else if (transpose == 'T') {
+                m_solver_tr
+                        ->apply(to_gko_dense(gko_exec, b_subview),
+                                to_gko_dense(gko_exec, x_subview));
+            } else {
+                throw std::domain_error("transpose option not recognized");
+            }
+
 
             Kokkos::deep_copy(b_subview, x_subview);
         }
