@@ -123,25 +123,36 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     EXPECT_EQ(charge(ielec()), -1);
 
     // nustar profile
-    DFieldSpX nustar_profile(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    compute_nustar_profile(nustar_profile.span_view(), nustar0);
+    device_t<DFieldSpX> nustar_profile_alloc(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    device_t<DSpanSpX> nustar_profile(nustar_profile_alloc.span_view());
+    compute_nustar_profile(nustar_profile, nustar0);
+
+    DFieldSpX nustar_profile_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    ddc::deepcopy(nustar_profile_host, nustar_profile);
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
         if (charge(ddc::select<IDimSp>(ispx)) < 0.) {
             double const pred(1 / x_max * nustar0);
-            EXPECT_LE(std::fabs(nustar_profile(ispx) - pred), 1e-12);
+            EXPECT_LE(std::fabs(nustar_profile_host(ispx) - pred), 1e-12);
         } else {
             double const pred(1 / (std::sqrt(mass_ion) * x_max) * nustar0);
-            EXPECT_LE(std::fabs(nustar_profile(ispx) - pred), 1e-12);
+            EXPECT_LE(std::fabs(nustar_profile_host(ispx) - pred), 1e-12);
         }
     });
 
     //collfreq
+    device_t<DFieldSpX> collfreq_f(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    auto collfreq_device = collfreq_f.span_view();
+
+    device_t<DFieldSpX> density_init_device(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    ddc::deepcopy(density_init_device, density_init);
+
+    device_t<DFieldSpX> temperature_init_device(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    ddc::deepcopy(temperature_init_device, temperature_init);
+
+    compute_collfreq(collfreq_device, nustar_profile, density_init_device, temperature_init_device);
+
     DFieldSpX collfreq(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    compute_collfreq(
-            collfreq.span_view(),
-            nustar_profile.span_cview(),
-            density_init.span_cview(),
-            temperature_init.span_cview());
+    ddc::deepcopy(collfreq, collfreq_device);
 
     ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
         if (charge(ddc::select<IDimSp>(ispx)) < 0.) {
@@ -158,35 +169,44 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     });
 
     // diffusion coefficient
-    ddc::Chunk<
+    device_t<ddc::Chunk<
             double,
-            ddc::DiscreteDomain<IDimSp, IDimX, CollisionsIntra::ghosted_vx_point_sampling>>
-            Dcoll(collisions.get_mesh_ghosted());
+            ddc::DiscreteDomain<IDimSp, IDimX, CollisionsIntra::ghosted_vx_point_sampling>>>
+            Dcoll_f(collisions.get_mesh_ghosted());
+    auto Dcoll_device = Dcoll_f.span_view();
     compute_Dcoll<CollisionsIntra::ghosted_vx_point_sampling>(
-            Dcoll.span_view(),
-            collfreq.span_cview(),
-            density_init.span_cview(),
-            temperature_init.span_cview());
+            Dcoll_device,
+            collfreq_device,
+            density_init_device,
+            temperature_init_device);
 
-    ddc::Chunk<
+    device_t<ddc::Chunk<
             double,
-            ddc::DiscreteDomain<IDimSp, IDimX, CollisionsIntra::ghosted_vx_point_sampling>>
-            dvDcoll(collisions.get_mesh_ghosted());
+            ddc::DiscreteDomain<IDimSp, IDimX, CollisionsIntra::ghosted_vx_point_sampling>>>
+            dvDcoll_f(collisions.get_mesh_ghosted());
+    auto dvDcoll_device = dvDcoll_f.span_view();
     compute_dvDcoll<CollisionsIntra::ghosted_vx_point_sampling>(
-            dvDcoll.span_view(),
-            collfreq.span_cview(),
-            density_init.span_cview(),
-            temperature_init.span_cview());
+            dvDcoll_device,
+            collfreq_device,
+            density_init_device,
+            temperature_init_device);
 
     // kernel maxwellian fluid moments
+    device_t<DFieldSpX> Vcoll_f(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    device_t<DFieldSpX> Tcoll_f(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    auto Vcoll_device = Vcoll_f.span_view();
+    auto Tcoll_device = Tcoll_f.span_view();
+    compute_Vcoll_Tcoll<CollisionsIntra::ghosted_vx_point_sampling>(
+            Vcoll_device,
+            Tcoll_device,
+            allfdistribu_device,
+            Dcoll_device,
+            dvDcoll_device);
+
     DFieldSpX Vcoll(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     DFieldSpX Tcoll(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    compute_Vcoll_Tcoll(
-            Vcoll.span_view(),
-            Tcoll.span_view(),
-            allfdistribu.span_cview(),
-            Dcoll.span_cview(),
-            dvDcoll.span_cview());
+    ddc::deepcopy(Vcoll, Vcoll_device);
+    ddc::deepcopy(Tcoll, Tcoll_device);
 
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
         EXPECT_LE(std::fabs(Vcoll(ispx) - mean_velocity_init(ispx)), 1e-12);
@@ -289,7 +309,6 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
         EXPECT_GE(std::fabs(temperature_res(ielec(), ix) - Tcoll(ielec(), ix)), 1.e-4);
     });
 
-
     int const nbsteps = 300;
     for (int iter = 0; iter < nbsteps; ++iter) {
         collisions(allfdistribu_device, deltat);
@@ -297,30 +316,26 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     ddc::deepcopy(allfdistribu, allfdistribu_device);
 
     // Vcoll and Tcoll calculation
-    compute_collfreq(
-            collfreq.span_view(),
-            nustar_profile.span_cview(),
-            density_init.span_cview(),
-            temperature_init.span_cview());
+    compute_collfreq(collfreq_device, nustar_profile, density_init_device, temperature_init_device);
 
     compute_Dcoll<CollisionsIntra::ghosted_vx_point_sampling>(
-            Dcoll.span_view(),
-            collfreq.span_cview(),
-            density_init.span_cview(),
-            temperature_init.span_cview());
+            Dcoll_device,
+            collfreq_device,
+            density_init_device,
+            temperature_init_device);
 
     compute_dvDcoll<CollisionsIntra::ghosted_vx_point_sampling>(
-            dvDcoll.span_view(),
-            collfreq.span_cview(),
-            density_init.span_cview(),
-            temperature_init.span_cview());
+            dvDcoll_device,
+            collfreq_device,
+            density_init_device,
+            temperature_init_device);
 
-    compute_Vcoll_Tcoll(
-            Vcoll.span_view(),
-            Tcoll.span_view(),
-            allfdistribu.span_cview(),
-            Dcoll.span_cview(),
-            dvDcoll.span_cview());
+    compute_Vcoll_Tcoll<CollisionsIntra::ghosted_vx_point_sampling>(
+            Vcoll_device,
+            Tcoll_device,
+            allfdistribu_device,
+            Dcoll_device,
+            dvDcoll_device);
 
     moments(density_res.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);
     moments(mean_velocity_res.span_view(),
@@ -332,6 +347,9 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
             density_res.span_cview(),
             mean_velocity_res.span_cview(),
             FluidMoments::s_temperature);
+
+    ddc::deepcopy(Vcoll, Vcoll_device);
+    ddc::deepcopy(Tcoll, Tcoll_device);
 
     ddc::for_each(ddc::get_domain<IDimX>(allfdistribu), [&](IndexX const ix) {
         EXPECT_LE(std::fabs(mean_velocity_res(ielec(), ix) - Vcoll(ielec(), ix)), 1.e-4);

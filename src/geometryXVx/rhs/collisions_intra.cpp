@@ -10,7 +10,7 @@
 CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
     , m_fthresh(1.e-30)
-    , m_nustar_profile(ddc::select<IDimSp, IDimX>(mesh))
+    , m_nustar_profile_alloc(ddc::select<IDimSp, IDimX>(mesh))
     , m_gridvx_ghosted(
               ddc::DiscreteElement<ghosted_vx_point_sampling>(0),
               ddc::DiscreteVector<ghosted_vx_point_sampling>(ddc::select<IDimVx>(mesh).size() + 2))
@@ -78,7 +78,8 @@ CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
         ddc::init_discrete_space<ddc::NonUniformPointSampling<GhostedVxStaggered>>(breaks);
     }
 
-    compute_nustar_profile(m_nustar_profile.span_view(), m_nustar0);
+    m_nustar_profile = m_nustar_profile_alloc.span_view();
+    compute_nustar_profile(m_nustar_profile, m_nustar0);
     ddc::expose_to_pdi("collintra_nustar0", m_nustar0);
 }
 
@@ -101,55 +102,62 @@ CollisionsIntra::get_mesh_ghosted() const
 }
 
 void CollisionsIntra::compute_matrix_coeff(
-        DSpanSpXVx AA,
-        DSpanSpXVx BB,
-        DSpanSpXVx CC,
-        ddc::ChunkSpan<double, IDomainSpXVx_ghosted> Dcoll,
-        ddc::ChunkSpan<double, IDomainSpXVx_ghosted_staggered> Dcoll_staggered,
-        ddc::ChunkSpan<double, IDomainSpXVx_ghosted> Nucoll,
+        device_t<DSpanSpXVx> AA,
+        device_t<DSpanSpXVx> BB,
+        device_t<DSpanSpXVx> CC,
+        device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Dcoll,
+        device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted_staggered>> Dcoll_staggered,
+        device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Nucoll,
         double deltat) const
 {
-    ddc::for_each(AA.domain(), [&](IndexSpXVx const ispxvx) {
-        IndexSp const isp = ddc::select<IDimSp>(ispxvx);
-        IndexX const ix = ddc::select<IDimX>(ispxvx);
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            AA.domain(),
+            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+                IndexSp const isp = ddc::select<IDimSp>(ispxvx);
+                IndexX const ix = ddc::select<IDimX>(ispxvx);
+                IndexVx const ivx = ddc::select<IDimVx>(ispxvx);
 
-        IndexVx_ghosted ivx_ghosted(ddc::select<IDimVx>(ispxvx).uid() + 1);
-        IndexVx_ghosted_staggered ivx_ghosted_staggered(ddc::select<IDimVx>(ispxvx).uid() + 1);
-        IndexVx_ghosted ivx_next_ghosted(ivx_ghosted + 1);
-        IndexVx_ghosted ivx_prev_ghosted(ivx_ghosted - 1);
-        IndexVx_ghosted_staggered ivx_prev_ghosted_staggered(ivx_ghosted_staggered - 1);
+                IndexVx_ghosted ivx_ghosted(ghosted_from_index(ivx));
+                IndexVx_ghosted_staggered ivx_ghosted_staggered(ghosted_staggered_from_index(ivx));
+                IndexVx_ghosted ivx_next_ghosted(ivx_ghosted + 1);
+                IndexVx_ghosted ivx_prev_ghosted(ivx_ghosted - 1);
+                IndexVx_ghosted_staggered ivx_prev_ghosted_staggered(ivx_ghosted_staggered - 1);
 
-        double const dv_i = ddc::coordinate(ivx_next_ghosted) - ddc::coordinate(ivx_ghosted);
-        double const delta_i
-                = dv_i / (ddc::coordinate(ivx_ghosted) - ddc::coordinate(ivx_prev_ghosted));
+                double const dv_i
+                        = ddc::coordinate(ivx_next_ghosted) - ddc::coordinate(ivx_ghosted);
+                double const delta_i
+                        = dv_i / (ddc::coordinate(ivx_ghosted) - ddc::coordinate(ivx_prev_ghosted));
 
-        double const alpha_i = deltat / (dv_i * dv_i * (1. + delta_i));
-        double const beta_i = deltat / (2. * dv_i * (1. + delta_i));
+                double const alpha_i = deltat / (dv_i * dv_i * (1. + delta_i));
+                double const beta_i = deltat / (2. * dv_i * (1. + delta_i));
 
-        double const coeffa
-                = alpha_i
-                          * (Dcoll_staggered(isp, ix, ivx_prev_ghosted_staggered) * delta_i
-                                     * delta_i * delta_i
-                             - Dcoll(isp, ix, ivx_ghosted) * delta_i * delta_i * (delta_i - 1.))
-                  + beta_i * Nucoll(isp, ix, ivx_prev_ghosted) * delta_i * delta_i;
+                double const coeffa
+                        = alpha_i
+                                  * (Dcoll_staggered(isp, ix, ivx_prev_ghosted_staggered) * delta_i
+                                             * delta_i * delta_i
+                                     - Dcoll(isp, ix, ivx_ghosted) * delta_i * delta_i
+                                               * (delta_i - 1.))
+                          + beta_i * Nucoll(isp, ix, ivx_prev_ghosted) * delta_i * delta_i;
 
-        double const coeffb = -alpha_i
-                                      * (-Dcoll_staggered(isp, ix, ivx_ghosted_staggered)
-                                         - Dcoll_staggered(isp, ix, ivx_prev_ghosted_staggered)
-                                                   * delta_i * delta_i * delta_i
-                                         + Dcoll(isp, ix, ivx_ghosted) * (delta_i - 1.)
-                                                   * (delta_i * delta_i - 1.))
-                              + beta_i * Nucoll(isp, ix, ivx_ghosted) * (delta_i * delta_i - 1.);
+                double const coeffb
+                        = -alpha_i
+                                  * (-Dcoll_staggered(isp, ix, ivx_ghosted_staggered)
+                                     - Dcoll_staggered(isp, ix, ivx_prev_ghosted_staggered)
+                                               * delta_i * delta_i * delta_i
+                                     + Dcoll(isp, ix, ivx_ghosted) * (delta_i - 1.)
+                                               * (delta_i * delta_i - 1.))
+                          + beta_i * Nucoll(isp, ix, ivx_ghosted) * (delta_i * delta_i - 1.);
 
-        double const coeffc = alpha_i
-                                      * (Dcoll_staggered(isp, ix, ivx_ghosted_staggered)
-                                         + Dcoll(isp, ix, ivx_ghosted) * (delta_i - 1.))
-                              - beta_i * Nucoll(isp, ix, ivx_next_ghosted);
+                double const coeffc = alpha_i
+                                              * (Dcoll_staggered(isp, ix, ivx_ghosted_staggered)
+                                                 + Dcoll(isp, ix, ivx_ghosted) * (delta_i - 1.))
+                                      - beta_i * Nucoll(isp, ix, ivx_next_ghosted);
 
-        AA(ispxvx) = -coeffa;
-        BB(ispxvx) = 1. + coeffb;
-        CC(ispxvx) = -coeffc;
-    });
+                AA(ispxvx) = -coeffa;
+                BB(ispxvx) = 1. + coeffb;
+                CC(ispxvx) = -coeffc;
+            });
 }
 
 void CollisionsIntra::fill_matrix_with_coeff(
@@ -175,158 +183,161 @@ void CollisionsIntra::fill_matrix_with_coeff(
 }
 
 void CollisionsIntra::compute_rhs_vector(
-        DSpanSpXVx RR,
-        DViewSpXVx AA,
-        DViewSpXVx BB,
-        DViewSpXVx CC,
-        DViewSpXVx allfdistribu,
+        device_t<DSpanSpXVx> RR,
+        device_t<DViewSpXVx> AA,
+        device_t<DViewSpXVx> BB,
+        device_t<DViewSpXVx> CC,
+        device_t<DViewSpXVx> allfdistribu,
         double fthresh) const
 {
-    ddc::for_each(RR.domain(), [&](IndexSpXVx const ispxvx) {
-        IndexSp const isp = ddc::select<IDimSp>(ispxvx);
-        IndexX const ix = ddc::select<IDimX>(ispxvx);
-        IndexVx const ivx = ddc::select<IDimVx>(ispxvx);
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            RR.domain(),
+            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+                IndexSp const isp = ddc::select<IDimSp>(ispxvx);
+                IndexX const ix = ddc::select<IDimX>(ispxvx);
+                IndexVx const ivx = ddc::select<IDimVx>(ispxvx);
 
-        IndexVx const ivx_next = ivx + 1;
-        IndexVx const ivx_prev = ivx - 1;
+                IndexVx const ivx_next = ivx + 1;
+                IndexVx const ivx_prev = ivx - 1;
 
-        if (ivx == ddc::get_domain<IDimVx>(AA).front()) {
-            RR(isp, ix, ivx) = (2. - BB(isp, ix, ivx)) * allfdistribu(isp, ix, ivx)
-                               + (-CC(isp, ix, ivx)) * allfdistribu(isp, ix, ivx_next)
-                               - 2. * AA(isp, ix, ivx) * fthresh;
+                if (ivx == AA.domain<IDimVx>().front()) {
+                    RR(isp, ix, ivx) = (2. - BB(isp, ix, ivx)) * allfdistribu(isp, ix, ivx)
+                                       + (-CC(isp, ix, ivx)) * allfdistribu(isp, ix, ivx_next)
+                                       - 2. * AA(isp, ix, ivx) * fthresh;
 
-        } else if (ivx == ddc::get_domain<IDimVx>(AA).back()) {
-            RR(isp, ix, ivx) = (2. - BB(isp, ix, ivx)) * allfdistribu(isp, ix, ivx)
-                               + (-AA(isp, ix, ivx)) * allfdistribu(isp, ix, ivx_prev)
-                               - 2. * CC(isp, ix, ivx) * fthresh;
+                } else if (ivx == AA.domain<IDimVx>().back()) {
+                    RR(isp, ix, ivx) = (2. - BB(isp, ix, ivx)) * allfdistribu(isp, ix, ivx)
+                                       + (-AA(isp, ix, ivx)) * allfdistribu(isp, ix, ivx_prev)
+                                       - 2. * CC(isp, ix, ivx) * fthresh;
 
-        } else {
-            RR(isp, ix, ivx) = -AA(isp, ix, ivx) * allfdistribu(isp, ix, ivx_prev)
-                               + (2. - BB(isp, ix, ivx)) * allfdistribu(isp, ix, ivx)
-                               - CC(isp, ix, ivx) * allfdistribu(isp, ix, ivx_next);
-        }
-    });
+                } else {
+                    RR(isp, ix, ivx) = -AA(isp, ix, ivx) * allfdistribu(isp, ix, ivx_prev)
+                                       + (2. - BB(isp, ix, ivx)) * allfdistribu(isp, ix, ivx)
+                                       - CC(isp, ix, ivx) * allfdistribu(isp, ix, ivx_next);
+                }
+            });
 }
 
 
 
-device_t<DSpanSpXVx> CollisionsIntra::operator()(
-        device_t<DSpanSpXVx> allfdistribu_device,
-        double dt) const
+device_t<DSpanSpXVx> CollisionsIntra::operator()(device_t<DSpanSpXVx> allfdistribu, double dt) const
 {
     Kokkos::Profiling::pushRegion("CollisionsIntra");
-    auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
-    ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
+    auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
+    ddc::ChunkSpan allfdistribu_host = allfdistribu_alloc.span_view();
+
+    IDomainSpX grid_sp_x(allfdistribu.domain<IDimSp, IDimX>());
     // density and temperature
-    DFieldSpX density(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX mean_velocity(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX temperature(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    device_t<DFieldSpX> density_alloc(grid_sp_x);
+    device_t<DFieldSpX> fluid_velocity_alloc(grid_sp_x);
+    device_t<DFieldSpX> temperature_alloc(grid_sp_x);
+    auto density = density_alloc.span_view();
+    auto fluid_velocity = fluid_velocity_alloc.span_view();
+    auto temperature = temperature_alloc.span_view();
 
-    DFieldVx const quadrature_coeffs
-            = trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu));
-    Quadrature<IDimVx> integrate(quadrature_coeffs);
-    FluidMoments moments(integrate);
+    DFieldVx const quadrature_coeffs_host(
+            trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu)));
+    auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs_host.span_view());
+    auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
 
-    moments(density.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);
-    moments(mean_velocity.span_view(),
-            allfdistribu.span_cview(),
-            density.span_cview(),
-            FluidMoments::s_velocity);
-    moments(temperature.span_view(),
-            allfdistribu.span_cview(),
-            density.span_cview(),
-            mean_velocity.span_cview(),
-            FluidMoments::s_temperature);
+    //Moments computation
+    ddc::fill(density, 0.);
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            grid_sp_x,
+            KOKKOS_LAMBDA(IndexSpX const ispx) {
+                double particle_flux(0);
+                double momentum_flux(0);
+                for (IndexVx const ivx : allfdistribu.domain<IDimVx>()) {
+                    CoordVx const coordv = ddc::coordinate(ivx);
+                    double const val(quadrature_coeffs(ivx) * allfdistribu(ispx, ivx));
+                    density(ispx) += val;
+                    particle_flux += val * coordv;
+                    momentum_flux += val * coordv * coordv;
+                }
+                fluid_velocity(ispx) = particle_flux / density(ispx);
+                temperature(ispx)
+                        = (momentum_flux - particle_flux * fluid_velocity(ispx)) / density(ispx);
+            });
 
     // collision frequency
-    DFieldSpX collfreq(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    compute_collfreq(
-            collfreq.span_view(),
-            m_nustar_profile.span_cview(),
-            density.span_cview(),
-            temperature.span_cview());
+    device_t<DFieldSpX> collfreq_alloc(grid_sp_x);
+    auto collfreq = collfreq_alloc.span_view();
+    device_t<DFieldSpX> nustar_profile(grid_sp_x);
+    ddc::deepcopy(nustar_profile, m_nustar_profile);
+    compute_collfreq(collfreq, nustar_profile, density, temperature);
 
     // diffusion coefficient
-    ddc::Chunk<double, IDomainSpXVx_ghosted> Dcoll(m_mesh_ghosted);
-    compute_Dcoll<ghosted_vx_point_sampling>(
-            Dcoll.span_view(),
-            collfreq.span_cview(),
-            density.span_cview(),
-            temperature.span_cview());
+    device_t<ddc::Chunk<double, IDomainSpXVx_ghosted>> Dcoll_alloc(m_mesh_ghosted);
+    auto Dcoll = Dcoll_alloc.span_view();
+    compute_Dcoll<ghosted_vx_point_sampling>(Dcoll, collfreq, density, temperature);
 
-    ddc::Chunk<double, IDomainSpXVx_ghosted> dvDcoll(m_mesh_ghosted);
-    compute_dvDcoll<ghosted_vx_point_sampling>(
-            dvDcoll.span_view(),
-            collfreq.span_cview(),
-            density.span_cview(),
-            temperature.span_cview());
+    device_t<ddc::Chunk<double, IDomainSpXVx_ghosted>> dvDcoll_alloc(m_mesh_ghosted);
+    auto dvDcoll = dvDcoll_alloc.span_view();
+    compute_dvDcoll<ghosted_vx_point_sampling>(dvDcoll, collfreq, density, temperature);
 
-    ddc::Chunk<double, IDomainSpXVx_ghosted_staggered> Dcoll_staggered(m_mesh_ghosted_staggered);
-    compute_Dcoll<ghosted_vx_staggered_point_sampling>(
-            Dcoll_staggered.span_view(),
-            collfreq.span_cview(),
-            density.span_cview(),
-            temperature.span_cview());
+    device_t<ddc::Chunk<double, IDomainSpXVx_ghosted_staggered>> Dcoll_staggered_alloc(
+            m_mesh_ghosted_staggered);
+    auto Dcoll_staggered = Dcoll_staggered_alloc.span_view();
+    compute_Dcoll<
+            ghosted_vx_staggered_point_sampling>(Dcoll_staggered, collfreq, density, temperature);
 
     // kernel maxwellian fluid moments
-    DFieldSpX Vcoll(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX Tcoll(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    compute_Vcoll_Tcoll(
-            Vcoll.span_view(),
-            Tcoll.span_view(),
-            allfdistribu.span_cview(),
-            Dcoll.span_cview(),
-            dvDcoll.span_cview());
+    device_t<DFieldSpX> Vcoll_alloc(grid_sp_x);
+    device_t<DFieldSpX> Tcoll_alloc(grid_sp_x);
+    auto Vcoll = Vcoll_alloc.span_view();
+    auto Tcoll = Tcoll_alloc.span_view();
+    compute_Vcoll_Tcoll<ghosted_vx_point_sampling>(Vcoll, Tcoll, allfdistribu, Dcoll, dvDcoll);
 
     // convection coefficient Nucoll
-    ddc::Chunk<double, IDomainSpXVx_ghosted> Nucoll(m_mesh_ghosted);
-    compute_Nucoll<ghosted_vx_point_sampling>(
-            Nucoll.span_view(),
-            Dcoll.span_view(),
-            Vcoll.span_cview(),
-            Tcoll.span_cview());
+    device_t<ddc::Chunk<double, IDomainSpXVx_ghosted>> Nucoll_alloc(m_mesh_ghosted);
+    auto Nucoll = Nucoll_alloc.span_view();
+    compute_Nucoll<ghosted_vx_point_sampling>(Nucoll, Dcoll, Vcoll, Tcoll);
 
     // matrix coefficients
-    DFieldSpXVx AA(allfdistribu.domain());
-    DFieldSpXVx BB(allfdistribu.domain());
-    DFieldSpXVx CC(allfdistribu.domain());
-    compute_matrix_coeff(
-            AA.span_view(),
-            BB.span_view(),
-            CC.span_view(),
-            Dcoll.span_view(),
-            Dcoll_staggered.span_view(),
-            Nucoll.span_view(),
-            dt);
+    device_t<DFieldSpXVx> AA_alloc(allfdistribu.domain());
+    device_t<DFieldSpXVx> BB_alloc(allfdistribu.domain());
+    device_t<DFieldSpXVx> CC_alloc(allfdistribu.domain());
+    auto AA = AA_alloc.span_view();
+    auto BB = BB_alloc.span_view();
+    auto CC = CC_alloc.span_view();
+    compute_matrix_coeff(AA, BB, CC, Dcoll, Dcoll_staggered, Nucoll, dt);
+
 
     // rhs vector coefficient
-    DFieldSpXVx RR(allfdistribu.domain());
-    compute_rhs_vector(
-            RR.span_view(),
-            AA.span_cview(),
-            BB.span_cview(),
-            CC.span_cview(),
-            allfdistribu.span_cview(),
-            m_fthresh);
+    device_t<DFieldSpXVx> RR_alloc(allfdistribu.domain());
+    auto RR = RR_alloc.span_view();
+    compute_rhs_vector(RR, AA, BB, CC, allfdistribu, m_fthresh);
 
+    DFieldSpXVx AA_host(allfdistribu.domain());
+    DFieldSpXVx BB_host(allfdistribu.domain());
+    DFieldSpXVx CC_host(allfdistribu.domain());
+    DFieldSpXVx RR_host(allfdistribu.domain());
+    ddc::deepcopy(AA_host, AA);
+    ddc::deepcopy(BB_host, BB);
+    ddc::deepcopy(CC_host, CC);
+    ddc::deepcopy(RR_host, RR);
 
-    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+    ddc::for_each(grid_sp_x, [&](IndexSpX const ispx) {
         Matrix_Banded matrix(ddc::get_domain<IDimVx>(allfdistribu).size(), 1, 1);
         fill_matrix_with_coeff(
                 matrix,
-                AA[ispx].span_cview(),
-                BB[ispx].span_cview(),
-                CC[ispx].span_cview());
+                AA_host[ispx].span_cview(),
+                BB_host[ispx].span_cview(),
+                CC_host[ispx].span_cview());
 
         DSpan1D RR_Span1D(
-                RR[ispx].allocation_mdspan().data_handle(),
+                RR_host[ispx].allocation_mdspan().data_handle(),
                 ddc::get_domain<IDimVx>(allfdistribu).size());
         matrix.factorize();
         matrix.solve_inplace(RR_Span1D);
-        ddc::deepcopy(allfdistribu[ispx], RR[ispx]);
+        ddc::deepcopy(allfdistribu_host[ispx], RR_host[ispx]);
     });
 
-    ddc::deepcopy(allfdistribu_device, allfdistribu);
+    ddc::deepcopy(allfdistribu, allfdistribu_host);
     Kokkos::Profiling::popRegion();
-    return allfdistribu_device;
+    return allfdistribu;
 }

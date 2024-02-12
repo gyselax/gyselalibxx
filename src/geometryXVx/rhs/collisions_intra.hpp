@@ -53,34 +53,6 @@ public:
     };
 
 private:
-    static ddc::Coordinate<GhostedVx> ghosted_from_coord(ddc::Coordinate<RDimVx> const& coord)
-    {
-        return ddc::Coordinate<GhostedVx>(ddc::get<RDimVx>(coord));
-    }
-    static ddc::Coordinate<RDimVx> coord_from_ghosted(ddc::Coordinate<GhostedVx> const& coord)
-    {
-        return ddc::Coordinate<RDimVx>(ddc::get<GhostedVx>(coord));
-    }
-    static ddc::Coordinate<GhostedVxStaggered> ghosted_staggered_from_coord(
-            ddc::Coordinate<RDimVx> const& coord)
-    {
-        return ddc::Coordinate<GhostedVxStaggered>(ddc::get<RDimVx>(coord));
-    }
-    static ddc::Coordinate<RDimVx> coord_from_ghosted_staggered(
-            ddc::Coordinate<GhostedVxStaggered> const& coord)
-    {
-        return ddc::Coordinate<RDimVx>(ddc::get<GhostedVxStaggered>(coord));
-    }
-
-    static IndexVx index_from_ghosted(ddc::DiscreteElement<GhostedVx> const& index_ghosted)
-    {
-        return IndexVx(index_ghosted.uid() - 1);
-    }
-    static ddc::DiscreteElement<GhostedVx> ghosted_from_index(IndexVx const& index)
-    {
-        return ddc::DiscreteElement<GhostedVx>(index.uid() + 1);
-    }
-
     static constexpr bool uniform_edge_v
             = std::is_same_v<IDimVx, ddc::UniformPointSampling<RDimVx>>;
 
@@ -133,10 +105,45 @@ public:
     using IndexSpXVx_ghosted_staggered
             = ddc::DiscreteElement<IDimSp, IDimX, ghosted_vx_staggered_point_sampling>;
 
+
+private:
+    static ddc::Coordinate<GhostedVx> ghosted_from_coord(ddc::Coordinate<RDimVx> const& coord)
+    {
+        return ddc::Coordinate<GhostedVx>(ddc::get<RDimVx>(coord));
+    }
+    static ddc::Coordinate<RDimVx> coord_from_ghosted(ddc::Coordinate<GhostedVx> const& coord)
+    {
+        return ddc::Coordinate<RDimVx>(ddc::get<GhostedVx>(coord));
+    }
+    static ddc::Coordinate<GhostedVxStaggered> ghosted_staggered_from_coord(
+            ddc::Coordinate<RDimVx> const& coord)
+    {
+        return ddc::Coordinate<GhostedVxStaggered>(ddc::get<RDimVx>(coord));
+    }
+    static ddc::Coordinate<RDimVx> coord_from_ghosted_staggered(
+            ddc::Coordinate<GhostedVxStaggered> const& coord)
+    {
+        return ddc::Coordinate<RDimVx>(ddc::get<GhostedVxStaggered>(coord));
+    }
+    static IndexVx index_from_ghosted(ddc::DiscreteElement<GhostedVx> const& index_ghosted)
+    {
+        return IndexVx(index_ghosted.uid() - 1);
+    }
+    KOKKOS_FUNCTION static IndexVx_ghosted ghosted_from_index(IndexVx const& index)
+    {
+        return IndexVx_ghosted(index.uid() + 1);
+    }
+    KOKKOS_FUNCTION static IndexVx_ghosted_staggered ghosted_staggered_from_index(
+            IndexVx const& index)
+    {
+        return IndexVx_ghosted_staggered(index.uid() + 1);
+    }
+
 private:
     double m_nustar0;
     double m_fthresh;
-    DFieldSpX m_nustar_profile;
+    device_t<DFieldSpX> m_nustar_profile_alloc;
+    device_t<DSpanSpX> m_nustar_profile;
 
     ddc::DiscreteDomain<ghosted_vx_point_sampling> m_gridvx_ghosted;
     ddc::DiscreteDomain<ghosted_vx_staggered_point_sampling> m_gridvx_ghosted_staggered;
@@ -209,11 +216,11 @@ public:
      * @param[in] fthresh A constant value used for imposing Dirichlet boundary condition to solve the linear system.  
      */
     void compute_rhs_vector(
-            DSpanSpXVx RR,
-            DViewSpXVx AA,
-            DViewSpXVx BB,
-            DViewSpXVx CC,
-            DViewSpXVx allfdistribu,
+            device_t<DSpanSpXVx> RR,
+            device_t<DViewSpXVx> AA,
+            device_t<DViewSpXVx> BB,
+            device_t<DViewSpXVx> CC,
+            device_t<DViewSpXVx> allfdistribu,
             double fthresh) const;
     /**
      * @brief Compute the coefficients of the tridiagonal matrix of the collision operator linear system.
@@ -226,12 +233,12 @@ public:
      * @param[in] deltat The time step.
      */
     void compute_matrix_coeff(
-            DSpanSpXVx AA,
-            DSpanSpXVx BB,
-            DSpanSpXVx CC,
-            ddc::ChunkSpan<double, IDomainSpXVx_ghosted> Dcoll,
-            ddc::ChunkSpan<double, IDomainSpXVx_ghosted_staggered> Dcoll_staggered,
-            ddc::ChunkSpan<double, IDomainSpXVx_ghosted> Nucoll,
+            device_t<DSpanSpXVx> AA,
+            device_t<DSpanSpXVx> BB,
+            device_t<DSpanSpXVx> CC,
+            device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Dcoll,
+            device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted_staggered>> Dcoll_staggered,
+            device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Nucoll,
             double deltat) const;
 
     /**
