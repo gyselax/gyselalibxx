@@ -40,23 +40,12 @@ void compute_nustar_profile(device_t<DSpanSpX> nustar_profile, double nustar0)
 {
     double const Lx = ddcHelper::total_interval_length(ddc::get_domain<IDimX>(nustar_profile));
 
-    auto masses_alloc = create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            ddc::host_discrete_space<SpeciesInformation>().masses());
-    auto masses(masses_alloc.span_view());
-
-    auto charges_alloc = create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            ddc::host_discrete_space<SpeciesInformation>().charges());
-    auto charges(charges_alloc.span_view());
-
     ddc::for_each(
             ddc::policies::parallel_device,
             nustar_profile.domain(),
             KOKKOS_LAMBDA(IndexSpX const ispx) {
-                double const coeff
-                        = Kokkos::sqrt(masses(ielec()) / masses(ddc::select<IDimSp>(ispx)))
-                          * Kokkos::pow(charges(ddc::select<IDimSp>(ispx)), 4) / Lx;
+                double const coeff = Kokkos::sqrt(mass(ielec()) / mass(ddc::select<IDimSp>(ispx)))
+                                     * Kokkos::pow(charge(ddc::select<IDimSp>(ispx)), 4) / Lx;
                 nustar_profile(ispx) = coeff * nustar0;
             });
 }
