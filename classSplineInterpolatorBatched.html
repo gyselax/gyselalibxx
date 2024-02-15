@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: SplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt; Class Template Reference</title>
+<title>Gyselalib++: SplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,34 +103,34 @@ $(document).ready(function(){initNavTree('classSplineInterpolatorBatched.html','
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classSplineInterpolatorBatched-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">SplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt; Class Template Reference</div>  </div>
+<div class="title">SplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class for interpolating a function using splines.  
  <a href="classSplineInterpolatorBatched.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for SplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt;:</div>
+Inheritance diagram for SplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classSplineInterpolatorBatched.png" usemap="#SplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20DDim_20_3E_map" alt=""/>
-  <map id="SplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20DDim_20_3E_map" name="SplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20DDim_20_3E_map">
-<area href="classIInterpolatorBatched.html" alt="IInterpolatorBatched&lt; DDimI, DDim... &gt;" shape="rect" coords="0,0,404,24"/>
+  <img src="classSplineInterpolatorBatched.png" usemap="#SplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20LeftExtrapolationRule_2C_20RightExtrapolationRule_2C_20Solver_2C_20DDim_20_3E_map" alt=""/>
+  <map id="SplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20LeftExtrapolationRule_2C_20RightExtrapolationRule_2C_20Solver_2C_20DDim_20_3E_map" name="SplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20LeftExtrapolationRule_2C_20RightExtrapolationRule_2C_20Solver_2C_20DDim_20_3E_map">
+<area href="classIInterpolatorBatched.html" alt="IInterpolatorBatched&lt; DDimI, DDim... &gt;" shape="rect" coords="0,0,713,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acfa0a8320083b26270aa0af55fed3514"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolatorBatched.html#acfa0a8320083b26270aa0af55fed3514">SplineInterpolatorBatched</a> (BuilderType const &amp;builder, EvaluatorType const &amp;evaluator)</td></tr>
-<tr class="memdesc:acfa0a8320083b26270aa0af55fed3514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a spline interpolator object.  <a href="classSplineInterpolatorBatched.html#acfa0a8320083b26270aa0af55fed3514">More...</a><br /></td></tr>
-<tr class="separator:acfa0a8320083b26270aa0af55fed3514"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9d7455ad2eae945776e5c9c91836f5e"><td class="memItemLeft" align="right" valign="top">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolatorBatched.html#ac9d7455ad2eae945776e5c9c91836f5e">operator()</a> (device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const coordinates) const override</td></tr>
-<tr class="memdesc:ac9d7455ad2eae945776e5c9c91836f5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classSplineInterpolatorBatched.html#ac9d7455ad2eae945776e5c9c91836f5e">More...</a><br /></td></tr>
-<tr class="separator:ac9d7455ad2eae945776e5c9c91836f5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21f161c7fb12708a1f6fbee8bef67709"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolatorBatched.html#a21f161c7fb12708a1f6fbee8bef67709">SplineInterpolatorBatched</a> (BuilderType const &amp;builder, EvaluatorType const &amp;evaluator)</td></tr>
+<tr class="memdesc:a21f161c7fb12708a1f6fbee8bef67709"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a spline interpolator object.  <a href="classSplineInterpolatorBatched.html#a21f161c7fb12708a1f6fbee8bef67709">More...</a><br /></td></tr>
+<tr class="separator:a21f161c7fb12708a1f6fbee8bef67709"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a2ef90b471abac961d071f993d027a0"><td class="memItemLeft" align="right" valign="top">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolatorBatched.html#a4a2ef90b471abac961d071f993d027a0">operator()</a> (device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const coordinates) const override</td></tr>
+<tr class="memdesc:a4a2ef90b471abac961d071f993d027a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classSplineInterpolatorBatched.html#a4a2ef90b471abac961d071f993d027a0">More...</a><br /></td></tr>
+<tr class="separator:a4a2ef90b471abac961d071f993d027a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class DDimI, class BSplines, ddc::BoundCond BcMin, ddc::BoundCond BcMax, class... DDim&gt;<br />
-class SplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt;</h3>
+<div class="textblock"><h3>template&lt;class DDimI, class BSplines, ddc::BoundCond BcMin, ddc::BoundCond BcMax, class LeftExtrapolationRule, class RightExtrapolationRule, ddc::SplineSolver Solver, class... DDim&gt;<br />
+class SplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;</h3>
 
 <p>A class for interpolating a function using splines. </p>
 <p>The class is parametrised by multiple template parameters. Please note that CTAD will deduce all these template parameters from the Builder and Evaluator passed as constructor arguments.</p>
@@ -145,19 +145,19 @@ class SplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt;</h3
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="acfa0a8320083b26270aa0af55fed3514"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfa0a8320083b26270aa0af55fed3514">&#9670;&nbsp;</a></span>SplineInterpolatorBatched()</h2>
+<a id="a21f161c7fb12708a1f6fbee8bef67709"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21f161c7fb12708a1f6fbee8bef67709">&#9670;&nbsp;</a></span>SplineInterpolatorBatched()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DDimI , class BSplines , ddc::BoundCond BcMin, ddc::BoundCond BcMax, class... DDim&gt; </div>
+template&lt;class DDimI , class BSplines , ddc::BoundCond BcMin, ddc::BoundCond BcMax, class LeftExtrapolationRule , class RightExtrapolationRule , ddc::SplineSolver Solver, class... DDim&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a>&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt;::<a class="el" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a> </td>
+          <td class="memname"><a class="el" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a>&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;::<a class="el" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a> </td>
           <td>(</td>
           <td class="paramtype">BuilderType const &amp;&#160;</td>
           <td class="paramname"><em>builder</em>, </td>
@@ -193,19 +193,19 @@ template&lt;class DDimI , class BSplines , ddc::BoundCond BcMin, ddc::BoundCond 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac9d7455ad2eae945776e5c9c91836f5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9d7455ad2eae945776e5c9c91836f5e">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a4a2ef90b471abac961d071f993d027a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a2ef90b471abac961d071f993d027a0">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DDimI , class BSplines , ddc::BoundCond BcMin, ddc::BoundCond BcMax, class... DDim&gt; </div>
+template&lt;class DDimI , class BSplines , ddc::BoundCond BcMin, ddc::BoundCond BcMax, class LeftExtrapolationRule , class RightExtrapolationRule , ddc::SplineSolver Solver, class... DDim&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">device_t&lt;ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim...&gt; &gt; &gt; <a class="el" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a>&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt;::operator() </td>
+          <td class="memname">device_t&lt;ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim...&gt; &gt; &gt; <a class="el" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a>&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const&#160;</td>
           <td class="paramname"><em>inout_data</em>, </td>

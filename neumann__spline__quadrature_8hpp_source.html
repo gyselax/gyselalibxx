@@ -111,111 +111,106 @@ $(document).ready(function(){initNavTree('neumann__spline__quadrature_8hpp_sourc
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;sll/bsplines_non_uniform.hpp&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;sll/matrix.hpp&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;sll/null_boundary_value.hpp&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;sll/spline_builder.hpp&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;sll/spline_evaluator.hpp&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim&gt;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">using</span> CoefficientChunk1D = ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt;;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim, <span class="keyword">class</span> SplineBuilder&gt;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d">   47</a></span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt; <a class="code" href="neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d">neumann_spline_quadrature_coefficients_1d</a>(</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; domain,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classSplineBuilder.html">SplineBuilder</a> <span class="keyword">const</span>&amp; builder)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    constexpr <span class="keywordtype">int</span> nbe_xmin = <a class="code" href="classSplineBuilder.html#a6e27acbbf2fc5f1400ce4a08c810d52e">SplineBuilder::s_nbe_xmin</a>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    constexpr <span class="keywordtype">int</span> nbe_xmax = <a class="code" href="classSplineBuilder.html#ac37e871f135ba9da956d8faacff00032">SplineBuilder::s_nbe_xmax</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;sll/matrix.hpp&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">using</span> CoefficientChunk1D = ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt;;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim, <span class="keyword">class</span> SplineBuilder&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d">   43</a></span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt; <a class="code" href="neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d">neumann_spline_quadrature_coefficients_1d</a>(</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; domain,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classSplineBuilder.html">SplineBuilder</a> <span class="keyword">const</span>&amp; builder)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    constexpr <span class="keywordtype">int</span> nbe_xmin = <a class="code" href="classSplineBuilder.html#a6e27acbbf2fc5f1400ce4a08c810d52e">SplineBuilder::s_nbe_xmin</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    constexpr <span class="keywordtype">int</span> nbe_xmax = <a class="code" href="classSplineBuilder.html#ac37e871f135ba9da956d8faacff00032">SplineBuilder::s_nbe_xmax</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <a class="code" href="classSplineBuilder.html#a4d5e60f3a4050a4a54415835b65d03c8">SplineBuilder::s_bc_xmin</a> == ddc::BoundCond::HERMITE,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="stringliteral">&quot;The neumann spline quadrature requires a builder which uses Hermite boundary &quot;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="stringliteral">&quot;conditions.&quot;</span>);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="classSplineBuilder.html#a4d5e60f3a4050a4a54415835b65d03c8">SplineBuilder::s_bc_xmin</a> == BoundCond::HERMITE,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="classSplineBuilder.html#aecdea9406e7d85496bf6ed4c479d064d">SplineBuilder::s_bc_xmax</a> == ddc::BoundCond::HERMITE,</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="stringliteral">&quot;The neumann spline quadrature requires a builder which uses Hermite boundary &quot;</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="stringliteral">&quot;conditions.&quot;</span>);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <a class="code" href="classSplineBuilder.html#aecdea9406e7d85496bf6ed4c479d064d">SplineBuilder::s_bc_xmax</a> == BoundCond::HERMITE,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="stringliteral">&quot;The neumann spline quadrature requires a builder which uses Hermite boundary &quot;</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="stringliteral">&quot;conditions.&quot;</span>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            nbe_xmin == 1,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="stringliteral">&quot;The neumann spline quadrature requires a builder which uses the value of the &quot;</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="stringliteral">&quot;derivative.&quot;</span>);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            nbe_xmin == 1,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            nbe_xmax == 1,</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="stringliteral">&quot;The neumann spline quadrature requires a builder which uses the value of the &quot;</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="stringliteral">&quot;derivative.&quot;</span>);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            nbe_xmax == 1,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="stringliteral">&quot;The neumann spline quadrature requires a builder which uses the value of the &quot;</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="stringliteral">&quot;derivative.&quot;</span>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">using</span> bsplines_type = <span class="keyword">typename</span> <a class="code" href="classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8">SplineBuilder::bsplines_type</a>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> length = ddc::discrete_space&lt;bsplines_type&gt;().nbasis() - nbe_xmin - nbe_xmax;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    assert(domain.size() == length);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">// Vector of integrals of B-splines</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;bsplines_type&gt;&gt; integral_bsplines(</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            builder.<a class="code" href="classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9">spline_domain</a>());</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    ddc::discrete_space&lt;bsplines_type&gt;().integrals(integral_bsplines);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">using</span> bsplines_type = <span class="keyword">typename</span> <a class="code" href="classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8">SplineBuilder::bsplines_type</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> length = ddc::discrete_space&lt;bsplines_type&gt;().nbasis() - nbe_xmin - nbe_xmax;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    assert(domain.size() == length);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">// Vector of integrals of B-splines</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;bsplines_type&gt;&gt; integral_bsplines(</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            builder.bsplines_domain());</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    ddc::discrete_space&lt;bsplines_type&gt;().integrals(integral_bsplines.span_view());</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// Solve matrix equation</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    builder.<a class="code" href="classSplineBuilder.html#ab66639ab2f9529f4430ce60320eb9e17">get_interpolation_matrix</a>().solve_transpose_inplace(</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            integral_bsplines.allocation_mdspan());</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">// Solve matrix equation</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    builder.<a class="code" href="classSplineBuilder.html#ab66639ab2f9529f4430ce60320eb9e17">get_interpolation_matrix</a>().solve_transpose_inplace(</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            integral_bsplines.allocation_mdspan());</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt; coefficients(domain);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="comment">// Coefficients of quadrature in integral_bsplines (values which would always be multiplied</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="comment">// by f&#39;(x)=0 are removed</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    ddc::DiscreteDomain&lt;bsplines_type&gt; slice</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            = builder.<a class="code" href="classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9">spline_domain</a>()</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                      .remove(ddc::DiscreteVector&lt;bsplines_type&gt; {nbe_xmin},</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                              ddc::DiscreteVector&lt;bsplines_type&gt; {nbe_xmax});</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt; coefficients(domain);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">// Coefficients of quadrature in integral_bsplines (values which would always be multiplied</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// by f&#39;(x)=0 are removed</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    ddc::DiscreteDomain&lt;bsplines_type&gt; slice</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            = builder.bsplines_domain()</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                      .remove(ddc::DiscreteVector&lt;bsplines_type&gt; {nbe_xmin},</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                              ddc::DiscreteVector&lt;bsplines_type&gt; {nbe_xmax});</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    Kokkos::deep_copy(</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            coefficients.allocation_kokkos_view(),</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            integral_bsplines[slice].allocation_kokkos_view());</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    Kokkos::deep_copy(</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            coefficients.allocation_kokkos_view(),</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            integral_bsplines[slice].allocation_kokkos_view());</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... DDims, <span class="keyword">class</span>... SplineBuilders&gt;</div>
-<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="neumann__spline__quadrature_8hpp.html#a145fedb902adc371aa405919d8f4bdb4">  117</a></span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt;&gt; <a class="code" href="neumann__spline__quadrature_8hpp.html#a145fedb902adc371aa405919d8f4bdb4">neumann_spline_quadrature_coefficients</a>(</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        ddc::DiscreteDomain&lt;DDims...&gt; <span class="keyword">const</span>&amp; domain,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        SplineBuilders <span class="keyword">const</span>&amp;... builders)</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    assert((std::is_same_v&lt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                    <span class="keyword">typename</span> DDims::continuous_dimension_type,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    <span class="keyword">typename</span> SplineBuilders::bsplines_type::tag_type&gt; and ...));</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... DDims, <span class="keyword">class</span>... SplineBuilders&gt;</div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="neumann__spline__quadrature_8hpp.html#a145fedb902adc371aa405919d8f4bdb4">  113</a></span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt;&gt; <a class="code" href="neumann__spline__quadrature_8hpp.html#a145fedb902adc371aa405919d8f4bdb4">neumann_spline_quadrature_coefficients</a>(</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        ddc::DiscreteDomain&lt;DDims...&gt; <span class="keyword">const</span>&amp; domain,</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        SplineBuilders <span class="keyword">const</span>&amp;... builders)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    assert((std::is_same_v&lt;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                    <span class="keyword">typename</span> DDims::continuous_dimension_type,</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                    <span class="keyword">typename</span> SplineBuilders::bsplines_type::tag_type&gt; and ...));</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="comment">// Get coefficients for each dimension</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    std::tuple&lt;CoefficientChunk1D&lt;DDims&gt;...&gt; current_dim_coeffs(</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <a class="code" href="neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d">neumann_spline_quadrature_coefficients_1d</a>(ddc::select&lt;DDims&gt;(domain), builders)...);</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="comment">// Get coefficients for each dimension</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    std::tuple&lt;CoefficientChunk1D&lt;DDims&gt;...&gt; current_dim_coeffs(</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <a class="code" href="neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d">neumann_spline_quadrature_coefficients_1d</a>(ddc::select&lt;DDims&gt;(domain), builders)...);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="comment">// Allocate ND coefficients</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt;&gt; coefficients(domain);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    ddc::for_each(domain, [&amp;](ddc::DiscreteElement&lt;DDims...&gt; <span class="keyword">const</span> idim) {</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="comment">// multiply the 1D coefficients by one another</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        coefficients(idim)</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                = (std::get&lt;CoefficientChunk1D&lt;DDims&gt;&gt;(current_dim_coeffs)(ddc::select&lt;DDims&gt;(idim))</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                   * ... * 1);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    });</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="comment">// Allocate ND coefficients</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt;&gt; coefficients(domain);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    ddc::for_each(domain, [&amp;](ddc::DiscreteElement&lt;DDims...&gt; <span class="keyword">const</span> idim) {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="comment">// multiply the 1D coefficients by one another</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        coefficients(idim)</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                = (std::get&lt;CoefficientChunk1D&lt;DDims&gt;&gt;(current_dim_coeffs)(ddc::select&lt;DDims&gt;(idim))</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                   * ... * 1);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    });</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
 <div class="ttc" id="aclassSplineBuilder_html"><div class="ttname"><a href="classSplineBuilder.html">SplineBuilder</a></div><div class="ttdoc">A class for creating a spline approximation of a function.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:42</div></div>
-<div class="ttc" id="aclassSplineBuilder_html_a2d211caa5dd227dd6d05947484d1b6e9"><div class="ttname"><a href="classSplineBuilder.html#a2d211caa5dd227dd6d05947484d1b6e9">SplineBuilder::spline_domain</a></div><div class="ttdeci">ddc::DiscreteDomain&lt; BSplines &gt; spline_domain() const noexcept</div><div class="ttdoc">Get the domain on which the approximation is defined.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:200</div></div>
 <div class="ttc" id="aclassSplineBuilder_html_a4d5e60f3a4050a4a54415835b65d03c8"><div class="ttname"><a href="classSplineBuilder.html#a4d5e60f3a4050a4a54415835b65d03c8">SplineBuilder::s_bc_xmin</a></div><div class="ttdeci">static constexpr BoundCond s_bc_xmin</div><div class="ttdoc">The boundary condition implemented at the lower bound.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:106</div></div>
 <div class="ttc" id="aclassSplineBuilder_html_a6e27acbbf2fc5f1400ce4a08c810d52e"><div class="ttname"><a href="classSplineBuilder.html#a6e27acbbf2fc5f1400ce4a08c810d52e">SplineBuilder::s_nbe_xmin</a></div><div class="ttdeci">static constexpr int s_nbe_xmin</div><div class="ttdoc">The number of equations which define the boundary conditions at the lower bound.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:78</div></div>
 <div class="ttc" id="aclassSplineBuilder_html_a8e306ff751612410e7c80db1eeabd0c8"><div class="ttname"><a href="classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8">SplineBuilder::bsplines_type</a></div><div class="ttdeci">BSplines bsplines_type</div><div class="ttdoc">The type of the BSplines which are compatible with this class.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:57</div></div>
 <div class="ttc" id="aclassSplineBuilder_html_ab66639ab2f9529f4430ce60320eb9e17"><div class="ttname"><a href="classSplineBuilder.html#ab66639ab2f9529f4430ce60320eb9e17">SplineBuilder::get_interpolation_matrix</a></div><div class="ttdeci">const Matrix &amp; get_interpolation_matrix() const noexcept</div><div class="ttdoc">Get the interpolation matrix.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:213</div></div>
 <div class="ttc" id="aclassSplineBuilder_html_ac37e871f135ba9da956d8faacff00032"><div class="ttname"><a href="classSplineBuilder.html#ac37e871f135ba9da956d8faacff00032">SplineBuilder::s_nbe_xmax</a></div><div class="ttdeci">static constexpr int s_nbe_xmax</div><div class="ttdoc">The number of equations which define the boundary conditions at the upper bound.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:83</div></div>
 <div class="ttc" id="aclassSplineBuilder_html_aecdea9406e7d85496bf6ed4c479d064d"><div class="ttname"><a href="classSplineBuilder.html#aecdea9406e7d85496bf6ed4c479d064d">SplineBuilder::s_bc_xmax</a></div><div class="ttdeci">static constexpr BoundCond s_bc_xmax</div><div class="ttdoc">The boundary condition implemented at the upper bound.</div><div class="ttdef"><b>Definition:</b> spline_builder.hpp:110</div></div>
-<div class="ttc" id="aneumann__spline__quadrature_8hpp_html_a145fedb902adc371aa405919d8f4bdb4"><div class="ttname"><a href="neumann__spline__quadrature_8hpp.html#a145fedb902adc371aa405919d8f4bdb4">neumann_spline_quadrature_coefficients</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims... &gt; &gt; neumann_spline_quadrature_coefficients(ddc::DiscreteDomain&lt; DDims... &gt; const &amp;domain, SplineBuilders const &amp;... builders)</div><div class="ttdoc">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.</div><div class="ttdef"><b>Definition:</b> neumann_spline_quadrature.hpp:117</div></div>
-<div class="ttc" id="aneumann__spline__quadrature_8hpp_html_aa424bfd56a3d732e3e796e60125ca31d"><div class="ttname"><a href="neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d">neumann_spline_quadrature_coefficients_1d</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt; neumann_spline_quadrature_coefficients_1d(ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain, SplineBuilder const &amp;builder)</div><div class="ttdoc">Get the spline quadrature coefficients in 1D.</div><div class="ttdef"><b>Definition:</b> neumann_spline_quadrature.hpp:47</div></div>
+<div class="ttc" id="aneumann__spline__quadrature_8hpp_html_a145fedb902adc371aa405919d8f4bdb4"><div class="ttname"><a href="neumann__spline__quadrature_8hpp.html#a145fedb902adc371aa405919d8f4bdb4">neumann_spline_quadrature_coefficients</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims... &gt; &gt; neumann_spline_quadrature_coefficients(ddc::DiscreteDomain&lt; DDims... &gt; const &amp;domain, SplineBuilders const &amp;... builders)</div><div class="ttdoc">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.</div><div class="ttdef"><b>Definition:</b> neumann_spline_quadrature.hpp:113</div></div>
+<div class="ttc" id="aneumann__spline__quadrature_8hpp_html_aa424bfd56a3d732e3e796e60125ca31d"><div class="ttname"><a href="neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d">neumann_spline_quadrature_coefficients_1d</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt; neumann_spline_quadrature_coefficients_1d(ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain, SplineBuilder const &amp;builder)</div><div class="ttdoc">Get the spline quadrature coefficients in 1D.</div><div class="ttdef"><b>Definition:</b> neumann_spline_quadrature.hpp:43</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

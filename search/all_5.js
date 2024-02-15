@@ -1,8 +1,8 @@
 var searchData=
 [
   ['fdistribuddom_132',['FdistribuDDom',['../classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90',1,'GeometryXYVxVy::FdistribuDDom()'],['../classGeometryXVx.html#a01dd11ecfb6414512e1f8cbaf204c5cd',1,'GeometryXVx::FdistribuDDom()']]],
-  ['femnonperiodicpoissonsolver_133',['FemNonPeriodicPoissonSolver',['../classFemNonPeriodicPoissonSolver.html',1,'FemNonPeriodicPoissonSolver'],['../classFemNonPeriodicPoissonSolver.html#af921493cf49bc87d9da03f41d9f857fa',1,'FemNonPeriodicPoissonSolver::FemNonPeriodicPoissonSolver()']]],
-  ['femperiodicpoissonsolver_134',['FemPeriodicPoissonSolver',['../classFemPeriodicPoissonSolver.html',1,'FemPeriodicPoissonSolver'],['../classFemPeriodicPoissonSolver.html#a9e92800dd60cee9ab3898f55ce08e82f',1,'FemPeriodicPoissonSolver::FemPeriodicPoissonSolver()']]],
+  ['femnonperiodicpoissonsolver_133',['FemNonPeriodicPoissonSolver',['../classFemNonPeriodicPoissonSolver.html',1,'FemNonPeriodicPoissonSolver'],['../classFemNonPeriodicPoissonSolver.html#ac4823c397f9cfc7a2904da3e6cbb13a4',1,'FemNonPeriodicPoissonSolver::FemNonPeriodicPoissonSolver()']]],
+  ['femperiodicpoissonsolver_134',['FemPeriodicPoissonSolver',['../classFemPeriodicPoissonSolver.html',1,'FemPeriodicPoissonSolver'],['../classFemPeriodicPoissonSolver.html#a6daece15bbe984f1062593a31b2a478a',1,'FemPeriodicPoissonSolver::FemPeriodicPoissonSolver()']]],
   ['fftpoissonsolver_135',['FftPoissonSolver',['../classFftPoissonSolver.html',1,'FftPoissonSolver'],['../classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd',1,'FftPoissonSolver::FftPoissonSolver(IChargeDensityCalculator const &amp;compute_rho)'],['../classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd',1,'FftPoissonSolver::FftPoissonSolver(IChargeDensityCalculator const &amp;compute_rho)']]],
   ['fill_5fmatrix_5fwith_5fcoeff_136',['fill_matrix_with_coeff',['../classCollisionsIntra.html#a030ed88a896325bca0ad3b249af1a264',1,'CollisionsIntra']]],
   ['find_5fequilibrium_137',['find_equilibrium',['../classVortexMergerEquilibria.html#a8761babf41d8e77ecf9159f142a10091',1,'VortexMergerEquilibria']]],

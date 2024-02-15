@@ -107,37 +107,37 @@ $(document).ready(function(){initNavTree('spline__interpolator__batched_8hpp_sou
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;i_interpolator_batched.hpp&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/kernels/splines.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// TODO: create splines.hpp</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;ddc/kernels/splines/spline_builder.hpp&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;ddc/kernels/splines/spline_evaluator.hpp&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class </span>DDimI, <span class="keyword">class </span>BSplines, ddc::BoundCond BcMin, ddc::BoundCond BcMax, <span class="keyword">class</span>... DDim&gt;</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classSplineInterpolatorBatched.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a> : <span class="keyword">public</span> <a class="code" href="classIInterpolatorBatched.html">IInterpolatorBatched</a>&lt;DDimI, DDim...&gt;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">using</span> BuilderType = ddc::SplineBuilder&lt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            Kokkos::DefaultExecutionSpace,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            Kokkos::DefaultExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            BSplines,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DDimI,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            BcMin,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            BcMax,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            ddc::SplineSolver::GINKGO,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            DDim...&gt;;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">using</span> EvaluatorType = ddc::SplineEvaluator&lt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            Kokkos::DefaultExecutionSpace,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            Kokkos::DefaultExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            BSplines,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            DDimI,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            std::conditional_t&lt;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                    DDimI::continuous_dimension_type::PERIODIC,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    ddc::PeriodicExtrapolationRule&lt;typename DDimI::continuous_dimension_type&gt;,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                    ddc::ConstantExtrapolationRule&lt;typename DDimI::continuous_dimension_type&gt;&gt;,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            std::conditional_t&lt;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    DDimI::continuous_dimension_type::PERIODIC,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    ddc::PeriodicExtrapolationRule&lt;typename DDimI::continuous_dimension_type&gt;,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    ddc::ConstantExtrapolationRule&lt;typename DDimI::continuous_dimension_type&gt;&gt;,</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;i_interpolator_batched.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span> &lt;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">class </span>DDimI,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">class </span>BSplines,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        ddc::BoundCond BcMin,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        ddc::BoundCond BcMax,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">class </span>LeftExtrapolationRule,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">class </span>RightExtrapolationRule,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        ddc::SplineSolver Solver,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">class</span>... DDim&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classSplineInterpolatorBatched.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a> : <span class="keyword">public</span> <a class="code" href="classIInterpolatorBatched.html">IInterpolatorBatched</a>&lt;DDimI, DDim...&gt;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">using</span> BuilderType = ddc::SplineBuilder&lt;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            Kokkos::DefaultExecutionSpace,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            Kokkos::DefaultExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            BSplines,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            DDimI,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            BcMin,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            BcMax,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            Solver,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            DDim...&gt;;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> EvaluatorType = ddc::SplineEvaluator&lt;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            Kokkos::DefaultExecutionSpace,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            Kokkos::DefaultExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            BSplines,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            DDimI,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            LeftExtrapolationRule,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            RightExtrapolationRule,</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            DDim...&gt;;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">private</span>:</div>
@@ -149,69 +149,69 @@ $(document).ready(function(){initNavTree('spline__interpolator__batched_8hpp_sou
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            Chunk&lt;double, typename BuilderType::spline_domain_type, ddc::DeviceAllocator&lt;double&gt;&gt;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    m_coefs;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::vector&lt;double&gt; m_derivs_min_alloc;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    std::vector&lt;double&gt; m_derivs_max_alloc;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classSplineInterpolatorBatched.html#acfa0a8320083b26270aa0af55fed3514">   69</a></span>&#160;    <a class="code" href="classSplineInterpolatorBatched.html#acfa0a8320083b26270aa0af55fed3514">SplineInterpolatorBatched</a>(BuilderType <span class="keyword">const</span>&amp; builder, EvaluatorType <span class="keyword">const</span>&amp; evaluator)</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        : m_builder(builder)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        , m_evaluator(evaluator)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        , m_coefs(builder.spline_domain())</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        , m_derivs_min_alloc(BuilderType::s_nbe_xmin, 0.)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        , m_derivs_max_alloc(BuilderType::s_nbe_xmax, 0.)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    ~<a class="code" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classSplineInterpolatorBatched.html#ac9d7455ad2eae945776e5c9c91836f5e">   80</a></span>&#160;    device_t&lt;ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; <a class="code" href="classSplineInterpolatorBatched.html#ac9d7455ad2eae945776e5c9c91836f5e">operator()</a>(</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; <span class="keyword">const</span> inout_data,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keyword">const</span> ddc::Coordinate&lt;typename DDimI::continuous_dimension_type&gt;,</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; <span class="keyword">const</span> coordinates)<span class="keyword"> const override</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        std::optional&lt;ddc::CDSpan1D&gt; derivs_min;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        std::optional&lt;ddc::CDSpan1D&gt; derivs_max;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span> constexpr (BcMin == ddc::BoundCond::HERMITE) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            derivs_min = ddc::CDSpan1D(m_derivs_min_alloc.data(), m_derivs_min_alloc.size());</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">if</span> constexpr (BcMax == ddc::BoundCond::HERMITE) {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            derivs_max = ddc::CDSpan1D(m_derivs_max_alloc.data(), m_derivs_max_alloc.size());</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="comment">// m_builder(m_coefs.span_view(), inout_data, derivs_min, derivs_max);</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        m_builder(m_coefs.span_view(), inout_data.span_cview());</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        m_evaluator(inout_data, coordinates, m_coefs.span_cview());</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">return</span> inout_data;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class </span>DDimI, <span class="keyword">class </span>BSplines, ddc::BoundCond BcMin, ddc::BoundCond BcMax, <span class="keyword">class</span>... DDim&gt;</div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorBatched.html">  109</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    : <span class="keyword">public</span> <a class="code" href="classIPreallocatableInterpolatorBatched.html">IPreallocatableInterpolatorBatched</a>&lt;DDimI, DDim...&gt;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;{</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">using</span> BuilderType = ddc::SplineBuilder&lt;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            Kokkos::DefaultExecutionSpace,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            Kokkos::DefaultExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            BSplines,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            DDimI,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            BcMin,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            BcMax,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            ddc::SplineSolver::GINKGO,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            DDim...&gt;;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">using</span> EvaluatorType = ddc::SplineEvaluator&lt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            Kokkos::DefaultExecutionSpace,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            Kokkos::DefaultExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            BSplines,</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            DDimI,</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            std::conditional_t&lt;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                    DDimI::continuous_dimension_type::PERIODIC,</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                    ddc::PeriodicExtrapolationRule&lt;typename DDimI::continuous_dimension_type&gt;,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                    ddc::ConstantExtrapolationRule&lt;typename DDimI::continuous_dimension_type&gt;&gt;,</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            std::conditional_t&lt;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                    DDimI::continuous_dimension_type::PERIODIC,</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                    ddc::PeriodicExtrapolationRule&lt;typename DDimI::continuous_dimension_type&gt;,</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                    ddc::ConstantExtrapolationRule&lt;typename DDimI::continuous_dimension_type&gt;&gt;,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    ddc::Chunk&lt;double, typename BuilderType::derivs_domain_type, ddc::DeviceAllocator&lt;double&gt;&gt;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            m_derivs_min_alloc;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    ddc::Chunk&lt;double, typename BuilderType::derivs_domain_type, ddc::DeviceAllocator&lt;double&gt;&gt;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            m_derivs_max_alloc;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classSplineInterpolatorBatched.html#a21f161c7fb12708a1f6fbee8bef67709">   70</a></span>&#160;    <a class="code" href="classSplineInterpolatorBatched.html#a21f161c7fb12708a1f6fbee8bef67709">SplineInterpolatorBatched</a>(BuilderType <span class="keyword">const</span>&amp; builder, EvaluatorType <span class="keyword">const</span>&amp; evaluator)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        : m_builder(builder)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        , m_evaluator(evaluator)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        , m_coefs(builder.spline_domain())</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        , m_derivs_min_alloc(builder.derivs_xmin_domain())</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        , m_derivs_max_alloc(builder.derivs_xmax_domain())</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        ddc::fill(m_derivs_min_alloc, 0.);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        ddc::fill(m_derivs_max_alloc, 0.);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    ~<a class="code" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classSplineInterpolatorBatched.html#a4a2ef90b471abac961d071f993d027a0">   83</a></span>&#160;    device_t&lt;ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; <a class="code" href="classSplineInterpolatorBatched.html#a4a2ef90b471abac961d071f993d027a0">operator()</a>(</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; <span class="keyword">const</span> inout_data,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    <span class="keyword">const</span> ddc::Coordinate&lt;typename DDimI::continuous_dimension_type&gt;,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; <span class="keyword">const</span> coordinates)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        m_builder(</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                m_coefs.span_view(),</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                inout_data.span_cview(),</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                std::optional(m_derivs_min_alloc.span_cview()),</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                std::optional(m_derivs_max_alloc.span_cview()));</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        m_evaluator(inout_data, coordinates, m_coefs.span_cview());</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">return</span> inout_data;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">template</span> &lt;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keyword">class </span>DDimI,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keyword">class </span>BSplines,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        ddc::BoundCond BcMin,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        ddc::BoundCond BcMax,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keyword">class </span>LeftExtrapolationRule,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keyword">class </span>RightExtrapolationRule,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        ddc::SplineSolver Solver,</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">class</span>... DDim&gt;</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorBatched.html">  115</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    : <span class="keyword">public</span> <a class="code" href="classIPreallocatableInterpolatorBatched.html">IPreallocatableInterpolatorBatched</a>&lt;DDimI, DDim...&gt;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;{</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">using</span> BuilderType = ddc::SplineBuilder&lt;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            Kokkos::DefaultExecutionSpace,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            Kokkos::DefaultExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            BSplines,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            DDimI,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            BcMin,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            BcMax,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            Solver,</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            DDim...&gt;;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">using</span> EvaluatorType = ddc::SplineEvaluator&lt;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            Kokkos::DefaultExecutionSpace,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            Kokkos::DefaultExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            BSplines,</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            DDimI,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            LeftExtrapolationRule,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            RightExtrapolationRule,</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            DDim...&gt;;</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    BuilderType <span class="keyword">const</span>&amp; m_builder;</div>
@@ -219,7 +219,7 @@ $(document).ready(function(){initNavTree('spline__interpolator__batched_8hpp_sou
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    EvaluatorType <span class="keyword">const</span>&amp; m_evaluator;</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorBatched.html#a3d74f0fdf53276e58a4cefef38a701ca">  146</a></span>&#160;    <a class="code" href="classPreallocatableSplineInterpolatorBatched.html#a3d74f0fdf53276e58a4cefef38a701ca">PreallocatableSplineInterpolatorBatched</a>(</div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorBatched.html#ae12babd8b0e5f5b6ff573c3c52ffcd10">  146</a></span>&#160;    <a class="code" href="classPreallocatableSplineInterpolatorBatched.html#ae12babd8b0e5f5b6ff573c3c52ffcd10">PreallocatableSplineInterpolatorBatched</a>(</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            BuilderType <span class="keyword">const</span>&amp; builder,</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            EvaluatorType <span class="keyword">const</span>&amp; evaluator)</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        : m_builder(builder)</div>
@@ -229,24 +229,27 @@ $(document).ready(function(){initNavTree('spline__interpolator__batched_8hpp_sou
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    ~<a class="code" href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorBatched.html#a78cc9eeba93f21bbedbedabe073e8032">  161</a></span>&#160;    std::unique_ptr&lt;<a class="code" href="classIInterpolatorBatched.html">IInterpolatorBatched</a>&lt;DDimI, DDim...&gt;&gt; <a class="code" href="classPreallocatableSplineInterpolatorBatched.html#a78cc9eeba93f21bbedbedabe073e8032">preallocate</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorBatched.html#ac33e5d7cca5000696a996e7891e668c0">  161</a></span>&#160;    std::unique_ptr&lt;<a class="code" href="classIInterpolatorBatched.html">IInterpolatorBatched</a>&lt;DDimI, DDim...&gt;&gt; <a class="code" href="classPreallocatableSplineInterpolatorBatched.html#ac33e5d7cca5000696a996e7891e668c0">preallocate</a>()<span class="keyword"> const override</span></div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;<a class="code" href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a>&lt;</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                DDimI,</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                BSplines,</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                BcMin,</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                BcMax,</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                DDim...&gt;&gt;(m_builder, m_evaluator);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    }</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;};</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                LeftExtrapolationRule,</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                RightExtrapolationRule,</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                Solver,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                DDim...&gt;&gt;(m_builder, m_evaluator);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    }</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;};</div>
 <div class="ttc" id="aclassIInterpolatorBatched_html"><div class="ttname"><a href="classIInterpolatorBatched.html">IInterpolatorBatched</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> i_interpolator_batched.hpp:50</div></div>
 <div class="ttc" id="aclassIPreallocatableInterpolatorBatched_html"><div class="ttname"><a href="classIPreallocatableInterpolatorBatched.html">IPreallocatableInterpolatorBatched</a></div><div class="ttdoc">A class which provides access to an interpolating function which can be preallocated where useful.</div><div class="ttdef"><b>Definition:</b> i_interpolator_batched.hpp:94</div></div>
-<div class="ttc" id="aclassPreallocatableSplineInterpolatorBatched_html"><div class="ttname"><a href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a></div><div class="ttdoc">A class which stores information necessary to create an instance of the SplineInterpolatorBatched cla...</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:111</div></div>
-<div class="ttc" id="aclassPreallocatableSplineInterpolatorBatched_html_a3d74f0fdf53276e58a4cefef38a701ca"><div class="ttname"><a href="classPreallocatableSplineInterpolatorBatched.html#a3d74f0fdf53276e58a4cefef38a701ca">PreallocatableSplineInterpolatorBatched::PreallocatableSplineInterpolatorBatched</a></div><div class="ttdeci">PreallocatableSplineInterpolatorBatched(BuilderType const &amp;builder, EvaluatorType const &amp;evaluator)</div><div class="ttdoc">Create an object capable of creating SplineInterpolatorBatched objects.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:146</div></div>
-<div class="ttc" id="aclassPreallocatableSplineInterpolatorBatched_html_a78cc9eeba93f21bbedbedabe073e8032"><div class="ttname"><a href="classPreallocatableSplineInterpolatorBatched.html#a78cc9eeba93f21bbedbedabe073e8032">PreallocatableSplineInterpolatorBatched::preallocate</a></div><div class="ttdeci">std::unique_ptr&lt; IInterpolatorBatched&lt; DDimI, DDim... &gt; &gt; preallocate() const override</div><div class="ttdoc">Create an instance of the SplineInterpolatorBatched class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:161</div></div>
-<div class="ttc" id="aclassSplineInterpolatorBatched_html"><div class="ttname"><a href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a></div><div class="ttdoc">A class for interpolating a function using splines.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:25</div></div>
-<div class="ttc" id="aclassSplineInterpolatorBatched_html_ac9d7455ad2eae945776e5c9c91836f5e"><div class="ttname"><a href="classSplineInterpolatorBatched.html#ac9d7455ad2eae945776e5c9c91836f5e">SplineInterpolatorBatched::operator()</a></div><div class="ttdeci">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt; operator()(device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const coordinates) const override</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:80</div></div>
-<div class="ttc" id="aclassSplineInterpolatorBatched_html_acfa0a8320083b26270aa0af55fed3514"><div class="ttname"><a href="classSplineInterpolatorBatched.html#acfa0a8320083b26270aa0af55fed3514">SplineInterpolatorBatched::SplineInterpolatorBatched</a></div><div class="ttdeci">SplineInterpolatorBatched(BuilderType const &amp;builder, EvaluatorType const &amp;evaluator)</div><div class="ttdoc">Create a spline interpolator object.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:69</div></div>
+<div class="ttc" id="aclassPreallocatableSplineInterpolatorBatched_html"><div class="ttname"><a href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a></div><div class="ttdoc">A class which stores information necessary to create an instance of the SplineInterpolatorBatched cla...</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:117</div></div>
+<div class="ttc" id="aclassPreallocatableSplineInterpolatorBatched_html_ac33e5d7cca5000696a996e7891e668c0"><div class="ttname"><a href="classPreallocatableSplineInterpolatorBatched.html#ac33e5d7cca5000696a996e7891e668c0">PreallocatableSplineInterpolatorBatched::preallocate</a></div><div class="ttdeci">std::unique_ptr&lt; IInterpolatorBatched&lt; DDimI, DDim... &gt; &gt; preallocate() const override</div><div class="ttdoc">Create an instance of the SplineInterpolatorBatched class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:161</div></div>
+<div class="ttc" id="aclassPreallocatableSplineInterpolatorBatched_html_ae12babd8b0e5f5b6ff573c3c52ffcd10"><div class="ttname"><a href="classPreallocatableSplineInterpolatorBatched.html#ae12babd8b0e5f5b6ff573c3c52ffcd10">PreallocatableSplineInterpolatorBatched::PreallocatableSplineInterpolatorBatched</a></div><div class="ttdeci">PreallocatableSplineInterpolatorBatched(BuilderType const &amp;builder, EvaluatorType const &amp;evaluator)</div><div class="ttdoc">Create an object capable of creating SplineInterpolatorBatched objects.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:146</div></div>
+<div class="ttc" id="aclassSplineInterpolatorBatched_html"><div class="ttname"><a href="classSplineInterpolatorBatched.html">SplineInterpolatorBatched</a></div><div class="ttdoc">A class for interpolating a function using splines.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:31</div></div>
+<div class="ttc" id="aclassSplineInterpolatorBatched_html_a21f161c7fb12708a1f6fbee8bef67709"><div class="ttname"><a href="classSplineInterpolatorBatched.html#a21f161c7fb12708a1f6fbee8bef67709">SplineInterpolatorBatched::SplineInterpolatorBatched</a></div><div class="ttdeci">SplineInterpolatorBatched(BuilderType const &amp;builder, EvaluatorType const &amp;evaluator)</div><div class="ttdoc">Create a spline interpolator object.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:70</div></div>
+<div class="ttc" id="aclassSplineInterpolatorBatched_html_a4a2ef90b471abac961d071f993d027a0"><div class="ttname"><a href="classSplineInterpolatorBatched.html#a4a2ef90b471abac961d071f993d027a0">SplineInterpolatorBatched::operator()</a></div><div class="ttdeci">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt; operator()(device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const coordinates) const override</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div><div class="ttdef"><b>Definition:</b> spline_interpolator_batched.hpp:83</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

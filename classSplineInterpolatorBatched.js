@@ -1,6 +1,6 @@
 var classSplineInterpolatorBatched =
 [
-    [ "SplineInterpolatorBatched", "classSplineInterpolatorBatched.html#acfa0a8320083b26270aa0af55fed3514", null ],
-    [ "~SplineInterpolatorBatched", "classSplineInterpolatorBatched.html#ac8b1c90e32c50debe2131a82e0f5b007", null ],
-    [ "operator()", "classSplineInterpolatorBatched.html#ac9d7455ad2eae945776e5c9c91836f5e", null ]
+    [ "SplineInterpolatorBatched", "classSplineInterpolatorBatched.html#a21f161c7fb12708a1f6fbee8bef67709", null ],
+    [ "~SplineInterpolatorBatched", "classSplineInterpolatorBatched.html#a4eedf1335800a86cf9a037be58a1903e", null ],
+    [ "operator()", "classSplineInterpolatorBatched.html#a4a2ef90b471abac961d071f993d027a0", null ]
 ];

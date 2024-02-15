@@ -1,7 +1,7 @@
 var searchData=
 [
   ['e_120',['e',['../classCzarnyToCartesian.html#a4b4f1725b24004e0b0edc124b66396f5',1,'CzarnyToCartesian']]],
-  ['electricfield_121',['ElectricField',['../classElectricField.html',1,'']]],
+  ['electricfield_121',['ElectricField',['../classElectricField.html',1,'ElectricField'],['../classElectricField.html#a125d3aed94fbcc1adcd2274f29587c5b',1,'ElectricField::ElectricField()']]],
   ['element_5ftype_122',['element_type',['../classVectorField.html#a7d71d064cda609eb5a4bd7a5b8ca870d',1,'VectorField::element_type()'],['../classVectorFieldSpan.html#a2068672157fb033bbdb9a634f8e678a0',1,'VectorFieldSpan::element_type()']]],
   ['epsilon_123',['epsilon',['../classCzarnyToCartesian.html#a9e4ad729fd290d47759637b69b9aa30a',1,'CzarnyToCartesian']]],
   ['epsilon_5fbot_124',['epsilon_bot',['../classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c',1,'BumpontailEquilibrium']]],

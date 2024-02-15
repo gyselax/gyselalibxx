@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: PreallocatableSplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt; Class Template Reference</title>
+<title>Gyselalib++: PreallocatableSplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,56 +103,56 @@ $(document).ready(function(){initNavTree('classPreallocatableSplineInterpolatorB
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classPreallocatableSplineInterpolatorBatched-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">PreallocatableSplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt; Class Template Reference</div>  </div>
+<div class="title">PreallocatableSplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class which stores information necessary to create an instance of the <a class="el" href="classSplineInterpolatorBatched.html" title="A class for interpolating a function using splines.">SplineInterpolatorBatched</a> class.  
  <a href="classPreallocatableSplineInterpolatorBatched.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for PreallocatableSplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt;:</div>
+Inheritance diagram for PreallocatableSplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classPreallocatableSplineInterpolatorBatched.png" usemap="#PreallocatableSplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20DDim_20_3E_map" alt=""/>
-  <map id="PreallocatableSplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20DDim_20_3E_map" name="PreallocatableSplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20DDim_20_3E_map">
-<area href="classIPreallocatableInterpolatorBatched.html" alt="IPreallocatableInterpolatorBatched&lt; DDimI, DDim... &gt;" shape="rect" coords="0,56,485,80"/>
-<area href="classIInterpolatorBatched.html" alt="IInterpolatorBatched&lt; DDimI, DDim... &gt;" shape="rect" coords="0,0,485,24"/>
+  <img src="classPreallocatableSplineInterpolatorBatched.png" usemap="#PreallocatableSplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20LeftExtrapolationRule_2C_20RightExtrapolationRule_2C_20Solver_2C_20DDim_20_3E_map" alt=""/>
+  <map id="PreallocatableSplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20LeftExtrapolationRule_2C_20RightExtrapolationRule_2C_20Solver_2C_20DDim_20_3E_map" name="PreallocatableSplineInterpolatorBatched_3C_20DDimI_2C_20BSplines_2C_20BcMin_2C_20BcMax_2C_20LeftExtrapolationRule_2C_20RightExtrapolationRule_2C_20Solver_2C_20DDim_20_3E_map">
+<area href="classIPreallocatableInterpolatorBatched.html" alt="IPreallocatableInterpolatorBatched&lt; DDimI, DDim... &gt;" shape="rect" coords="0,56,794,80"/>
+<area href="classIInterpolatorBatched.html" alt="IInterpolatorBatched&lt; DDimI, DDim... &gt;" shape="rect" coords="0,0,794,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3d74f0fdf53276e58a4cefef38a701ca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreallocatableSplineInterpolatorBatched.html#a3d74f0fdf53276e58a4cefef38a701ca">PreallocatableSplineInterpolatorBatched</a> (BuilderType const &amp;builder, EvaluatorType const &amp;evaluator)</td></tr>
-<tr class="memdesc:a3d74f0fdf53276e58a4cefef38a701ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an object capable of creating <a class="el" href="classSplineInterpolatorBatched.html" title="A class for interpolating a function using splines.">SplineInterpolatorBatched</a> objects.  <a href="classPreallocatableSplineInterpolatorBatched.html#a3d74f0fdf53276e58a4cefef38a701ca">More...</a><br /></td></tr>
-<tr class="separator:a3d74f0fdf53276e58a4cefef38a701ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78cc9eeba93f21bbedbedabe073e8032"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classIInterpolatorBatched.html">IInterpolatorBatched</a>&lt; DDimI, DDim... &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreallocatableSplineInterpolatorBatched.html#a78cc9eeba93f21bbedbedabe073e8032">preallocate</a> () const override</td></tr>
-<tr class="memdesc:a78cc9eeba93f21bbedbedabe073e8032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an instance of the <a class="el" href="classSplineInterpolatorBatched.html" title="A class for interpolating a function using splines.">SplineInterpolatorBatched</a> class.  <a href="classPreallocatableSplineInterpolatorBatched.html#a78cc9eeba93f21bbedbedabe073e8032">More...</a><br /></td></tr>
-<tr class="separator:a78cc9eeba93f21bbedbedabe073e8032"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae12babd8b0e5f5b6ff573c3c52ffcd10"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreallocatableSplineInterpolatorBatched.html#ae12babd8b0e5f5b6ff573c3c52ffcd10">PreallocatableSplineInterpolatorBatched</a> (BuilderType const &amp;builder, EvaluatorType const &amp;evaluator)</td></tr>
+<tr class="memdesc:ae12babd8b0e5f5b6ff573c3c52ffcd10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an object capable of creating <a class="el" href="classSplineInterpolatorBatched.html" title="A class for interpolating a function using splines.">SplineInterpolatorBatched</a> objects.  <a href="classPreallocatableSplineInterpolatorBatched.html#ae12babd8b0e5f5b6ff573c3c52ffcd10">More...</a><br /></td></tr>
+<tr class="separator:ae12babd8b0e5f5b6ff573c3c52ffcd10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac33e5d7cca5000696a996e7891e668c0"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classIInterpolatorBatched.html">IInterpolatorBatched</a>&lt; DDimI, DDim... &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreallocatableSplineInterpolatorBatched.html#ac33e5d7cca5000696a996e7891e668c0">preallocate</a> () const override</td></tr>
+<tr class="memdesc:ac33e5d7cca5000696a996e7891e668c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an instance of the <a class="el" href="classSplineInterpolatorBatched.html" title="A class for interpolating a function using splines.">SplineInterpolatorBatched</a> class.  <a href="classPreallocatableSplineInterpolatorBatched.html#ac33e5d7cca5000696a996e7891e668c0">More...</a><br /></td></tr>
+<tr class="separator:ac33e5d7cca5000696a996e7891e668c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classIPreallocatableInterpolatorBatched"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIPreallocatableInterpolatorBatched')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIPreallocatableInterpolatorBatched.html">IPreallocatableInterpolatorBatched&lt; DDimI, DDim... &gt;</a></td></tr>
 <tr class="memitem:a4b23b4ee8b129eedb674cdec540621b5 inherit pub_methods_classIPreallocatableInterpolatorBatched"><td class="memItemLeft" align="right" valign="top">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPreallocatableInterpolatorBatched.html#a4b23b4ee8b129eedb674cdec540621b5">operator()</a> (device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const coordinates) const override</td></tr>
 <tr class="memdesc:a4b23b4ee8b129eedb674cdec540621b5 inherit pub_methods_classIPreallocatableInterpolatorBatched"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points by temporarily preallocating an <a class="el" href="classIInterpolatorBatched.html" title="A class which provides an interpolating function.">IInterpolatorBatched</a>.  <a href="classIPreallocatableInterpolatorBatched.html#a4b23b4ee8b129eedb674cdec540621b5">More...</a><br /></td></tr>
 <tr class="separator:a4b23b4ee8b129eedb674cdec540621b5 inherit pub_methods_classIPreallocatableInterpolatorBatched"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class DDimI, class BSplines, ddc::BoundCond BcMin, ddc::BoundCond BcMax, class... DDim&gt;<br />
-class PreallocatableSplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt;</h3>
+<div class="textblock"><h3>template&lt;class DDimI, class BSplines, ddc::BoundCond BcMin, ddc::BoundCond BcMax, class LeftExtrapolationRule, class RightExtrapolationRule, ddc::SplineSolver Solver, class... DDim&gt;<br />
+class PreallocatableSplineInterpolatorBatched&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;</h3>
 
 <p>A class which stores information necessary to create an instance of the <a class="el" href="classSplineInterpolatorBatched.html" title="A class for interpolating a function using splines.">SplineInterpolatorBatched</a> class. </p>
 <p>This class allows an instance of the <a class="el" href="classSplineInterpolatorBatched.html" title="A class for interpolating a function using splines.">SplineInterpolatorBatched</a> class where necessary. This allows the memory allocated in the private members of the <a class="el" href="classSplineInterpolatorBatched.html" title="A class for interpolating a function using splines.">SplineInterpolatorBatched</a> to be freed when the object is not in use. These objects are: m_coefs, m_derivs_min_alloc, m_derivs_max_alloc. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3d74f0fdf53276e58a4cefef38a701ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d74f0fdf53276e58a4cefef38a701ca">&#9670;&nbsp;</a></span>PreallocatableSplineInterpolatorBatched()</h2>
+<a id="ae12babd8b0e5f5b6ff573c3c52ffcd10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae12babd8b0e5f5b6ff573c3c52ffcd10">&#9670;&nbsp;</a></span>PreallocatableSplineInterpolatorBatched()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DDimI , class BSplines , ddc::BoundCond BcMin, ddc::BoundCond BcMax, class... DDim&gt; </div>
+template&lt;class DDimI , class BSplines , ddc::BoundCond BcMin, ddc::BoundCond BcMax, class LeftExtrapolationRule , class RightExtrapolationRule , ddc::SplineSolver Solver, class... DDim&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a>&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt;::<a class="el" href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a> </td>
+          <td class="memname"><a class="el" href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a>&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;::<a class="el" href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a> </td>
           <td>(</td>
           <td class="paramtype">BuilderType const &amp;&#160;</td>
           <td class="paramname"><em>builder</em>, </td>
@@ -188,19 +188,19 @@ template&lt;class DDimI , class BSplines , ddc::BoundCond BcMin, ddc::BoundCond 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a78cc9eeba93f21bbedbedabe073e8032"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78cc9eeba93f21bbedbedabe073e8032">&#9670;&nbsp;</a></span>preallocate()</h2>
+<a id="ac33e5d7cca5000696a996e7891e668c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac33e5d7cca5000696a996e7891e668c0">&#9670;&nbsp;</a></span>preallocate()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DDimI , class BSplines , ddc::BoundCond BcMin, ddc::BoundCond BcMax, class... DDim&gt; </div>
+template&lt;class DDimI , class BSplines , ddc::BoundCond BcMin, ddc::BoundCond BcMax, class LeftExtrapolationRule , class RightExtrapolationRule , ddc::SplineSolver Solver, class... DDim&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt;<a class="el" href="classIInterpolatorBatched.html">IInterpolatorBatched</a>&lt;DDimI, DDim...&gt; &gt; <a class="el" href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a>&lt; DDimI, BSplines, BcMin, BcMax, DDim &gt;::preallocate </td>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classIInterpolatorBatched.html">IInterpolatorBatched</a>&lt;DDimI, DDim...&gt; &gt; <a class="el" href="classPreallocatableSplineInterpolatorBatched.html">PreallocatableSplineInterpolatorBatched</a>&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;::preallocate </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
