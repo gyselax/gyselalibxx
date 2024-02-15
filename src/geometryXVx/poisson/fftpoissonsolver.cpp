@@ -8,11 +8,6 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/fft.hpp>
 
-#include <sll/bsplines_uniform.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
-
 #include <geometry.hpp>
 
 #include "fftpoissonsolver.hpp"

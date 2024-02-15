@@ -6,13 +6,6 @@
 #include <ddc/kernels/fft.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/bsplines_non_uniform.hpp>
-#include <sll/bsplines_uniform.hpp>
-#include <sll/greville_interpolation_points.hpp>
-#include <sll/spline_boundary_conditions.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
-
 #include <ddc_helper.hpp>
 #include <species_info.hpp>
 
@@ -71,26 +64,23 @@ bool constexpr BsplineOnUniformCellsVx = true;
 
 using BSplinesX = std::conditional_t<
         BsplineOnUniformCellsX,
-        UniformBSplines<RDimX, BSDegreeX>,
-        NonUniformBSplines<RDimX, BSDegreeX>>;
-using ddcBSplinesX = std::conditional_t< // Temporary alias for ddc:: version of BSplinesX
-        BsplineOnUniformCellsX,
         ddc::UniformBSplines<RDimX, BSDegreeX>,
         ddc::NonUniformBSplines<RDimX, BSDegreeX>>;
 using BSplinesVx = std::conditional_t<
         BsplineOnUniformCellsVx,
-        UniformBSplines<RDimVx, BSDegreeVx>,
-        NonUniformBSplines<RDimVx, BSDegreeVx>>;
+        ddc::UniformBSplines<RDimVx, BSDegreeVx>,
+        ddc::NonUniformBSplines<RDimVx, BSDegreeVx>>;
 
-auto constexpr SplineXBoundary = RDimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
-auto constexpr SplineVxBoundary = BoundCond::HERMITE;
+auto constexpr SplineXBoundary
+        = RDimX::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
+auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
 
-bool constexpr UniformMeshX = is_spline_interpolation_mesh_uniform(
+bool constexpr UniformMeshX = ddc::is_spline_interpolation_mesh_uniform(
         BsplineOnUniformCellsX,
         SplineXBoundary,
         SplineXBoundary,
         BSDegreeX);
-bool constexpr UniformMeshVx = is_spline_interpolation_mesh_uniform(
+bool constexpr UniformMeshVx = ddc::is_spline_interpolation_mesh_uniform(
         BsplineOnUniformCellsVx,
         SplineVxBoundary,
         SplineVxBoundary,
@@ -106,35 +96,92 @@ using IDimVx = std::conditional_t<
         ddc::NonUniformPointSampling<RDimVx>>;
 
 using SplineInterpPointsX
-        = GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
 using SplineInterpPointsVx
-        = GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
 
-using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;
-using SplineXEvaluator = SplineEvaluator<BSplinesX>;
-using SplineVxEvaluator = SplineEvaluator<BSplinesVx>;
-#ifdef PERIODIC_RDIMX
-using SplineXBuilderBatched = ddc::SplineBuilder<
+using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        ddcBSplinesX,
+        BSplinesX,
         IDimX,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
+        SplineXBoundary,
+        SplineXBoundary,
         ddc::SplineSolver::GINKGO,
         IDimX,
         IDimVx>;
-using SplineXEvaluatorBatched = ddc::SplineEvaluator<
+using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        ddcBSplinesX,
+        BSplinesX,
         IDimX,
+#ifdef PERIODIC_RDIMX
         ddc::PeriodicExtrapolationRule<RDimX>,
         ddc::PeriodicExtrapolationRule<RDimX>,
+#else
+        ddc::ConstantExtrapolationRule<RDimX>,
+        ddc::ConstantExtrapolationRule<RDimX>,
+#endif
         IDimX,
         IDimVx>;
+using SplineVxBuilder = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVx,
+        IDimVx,
+        SplineVxBoundary,
+        SplineVxBoundary,
+        ddc::SplineSolver::GINKGO,
+        IDimX,
+        IDimVx>;
+using SplineVxEvaluator = ddc::SplineEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVx,
+        IDimVx,
+        ddc::ConstantExtrapolationRule<RDimVx>,
+        ddc::ConstantExtrapolationRule<RDimVx>,
+        IDimX,
+        IDimVx>;
+using SplineXBuilder_1d = ddc::SplineBuilder<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        BSplinesX,
+        IDimX,
+        SplineXBoundary,
+        SplineXBoundary,
+        ddc::SplineSolver::GINKGO,
+        IDimX>;
+using SplineXEvaluator_1d = ddc::SplineEvaluator<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        BSplinesX,
+        IDimX,
+#ifdef PERIODIC_RDIMX
+        ddc::PeriodicExtrapolationRule<RDimX>,
+        ddc::PeriodicExtrapolationRule<RDimX>,
+#else
+        ddc::ConstantExtrapolationRule<RDimX>,
+        ddc::ConstantExtrapolationRule<RDimX>,
 #endif
-using SplineVxBuilder = SplineBuilder<BSplinesVx, IDimVx, SplineVxBoundary, SplineVxBoundary>;
+        IDimX>;
+using SplineVxBuilder_1d = ddc::SplineBuilder<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        BSplinesVx,
+        IDimVx,
+        SplineVxBoundary,
+        SplineVxBoundary,
+        ddc::SplineSolver::GINKGO,
+        IDimVx>;
+using SplineVxEvaluator_1d = ddc::SplineEvaluator<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        BSplinesVx,
+        IDimVx,
+        ddc::ConstantExtrapolationRule<RDimVx>,
+        ddc::ConstantExtrapolationRule<RDimVx>,
+        IDimVx>;
 
 // Species dimension
 using IDimSp = SpeciesInformation;
