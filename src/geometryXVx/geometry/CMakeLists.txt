@@ -11,7 +11,6 @@ target_include_directories("geometry_${GEOMETRY_VARIANT}"
 )
 target_link_libraries("geometry_${GEOMETRY_VARIANT}" INTERFACE
     DDC::DDC
-    sll::splines
     gslx::speciesinfo
     gslx::utils
 )

@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
+#include <sll/gauss_legendre_integration.hpp>
+#include <sll/matrix.hpp>
 
 #include <geometry.hpp>
 
@@ -38,9 +38,9 @@ private:
     static int constexpr s_npts_gauss = BSplinesX::degree() + 1;
 
 private:
-    SplineXBuilder const& m_spline_x_builder;
+    SplineXBuilder_1d const& m_spline_x_builder;
 
-    SplineEvaluator<BSplinesX> m_spline_x_evaluator;
+    SplineXEvaluator_1d m_spline_x_evaluator;
 
     IChargeDensityCalculator const& m_compute_rho;
 
@@ -74,8 +74,8 @@ public:
      * @param compute_rho The operator which calculates the charge density, the right hand side of the equation.
      */
     FemPeriodicPoissonSolver(
-            SplineXBuilder const& spline_x_builder,
-            SplineEvaluator<BSplinesX> const& spline_x_evaluator,
+            SplineXBuilder_1d const& spline_x_builder,
+            SplineXEvaluator_1d const& spline_x_evaluator,
             IChargeDensityCalculator const& compute_rho);
 
     /**

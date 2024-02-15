@@ -2,11 +2,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/constant_extrapolation_boundary_value.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -45,7 +40,7 @@ TEST(FftPoissonSolver, CosineSource)
     ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
     ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
 
-    SplineVxBuilder const builder_vx(interpolation_domain_vx);
+    SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
 
     IDomainX const gridx = interpolation_domain_x;
     IDomainVx const gridvx = interpolation_domain_vx;

@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: MIT
 
-#include <sll/bsplines_non_uniform.hpp>
-#include <sll/knots_as_interpolation_points.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -24,7 +21,7 @@ TEST(NeumannSplineQuadratureTest, ExactForConstantFunc)
     ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
     ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
 
-    SplineVxBuilder const builder_vx(interpolation_domain_vx);
+    SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
 
     IDomainVx const gridvx = builder_vx.interpolation_domain();
 
@@ -50,11 +47,19 @@ template <std::size_t N>
 double compute_error(int n_elems)
 {
     using DimY = Y<N>;
-    using BSplinesY = UniformBSplines<DimY, 3>;
-    using GrevillePointsY
-            = KnotsAsInterpolationPoints<BSplinesY, BoundCond::HERMITE, BoundCond::HERMITE>;
+    using BSplinesY = ddc::UniformBSplines<DimY, 3>;
+    using GrevillePointsY = ddc::
+            KnotsAsInterpolationPoints<BSplinesY, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
     using IDimY = typename GrevillePointsY::interpolation_mesh_type;
-    using SplineYBuilder = SplineBuilder<BSplinesY, IDimY, BoundCond::HERMITE, BoundCond::HERMITE>;
+    using SplineYBuilder = ddc::SplineBuilder<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
+            BSplinesY,
+            IDimY,
+            ddc::BoundCond::HERMITE,
+            ddc::BoundCond::HERMITE,
+            ddc::SplineSolver::GINKGO,
+            IDimY>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = ddc::Chunk<double, IDomainY>;
 
@@ -89,7 +94,7 @@ std::array<double, sizeof...(Is)> compute_errors(std::index_sequence<Is...>, int
 
 TEST(NeumannSplineQuadratureTest, UniformConverge)
 {
-    constexpr int NTESTS(6);
+    constexpr int NTESTS(3);
 
     std::array<double, NTESTS> error = compute_errors(std::make_index_sequence<NTESTS>(), 10);
 

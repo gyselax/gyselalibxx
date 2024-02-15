@@ -20,7 +20,6 @@ target_include_directories("poisson_${GEOMETRY_VARIANT}"
 target_link_libraries("poisson_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
-        sll::splines
         gslx::quadrature
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::speciesinfo
