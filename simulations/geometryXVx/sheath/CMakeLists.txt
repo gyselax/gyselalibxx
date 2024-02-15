@@ -19,7 +19,6 @@ target_link_libraries(sheath_${GEOMETRY_VARIANT}
   gslx::rhs_${GEOMETRY_VARIANT}
   PDI::pdi
   paraconf::paraconf
-  sll::splines
   )
 
 install(TARGETS sheath_${GEOMETRY_VARIANT})

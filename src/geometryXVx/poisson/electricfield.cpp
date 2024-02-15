@@ -2,14 +2,11 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/gauss_legendre_integration.hpp>
-#include <sll/spline_evaluator.hpp>
-
 #include "electricfield.hpp"
 
 ElectricField::ElectricField(
-        SplineXBuilder const& spline_x_builder,
-        SplineEvaluator<BSplinesX> const& spline_x_evaluator)
+        SplineXBuilder_1d const& spline_x_builder,
+        SplineXEvaluator_1d const& spline_x_evaluator)
     : m_spline_x_builder(spline_x_builder)
     , m_spline_x_evaluator(spline_x_evaluator)
 {
@@ -33,8 +30,8 @@ void ElectricField::operator()(DSpanX const electric_field, DViewX const electro
         const
 {
     Kokkos::Profiling::pushRegion("ElectricField");
-    ddc::Chunk<double, BSDomainX> elecpot_spline_coef(m_spline_x_builder.spline_domain());
-    m_spline_x_builder(elecpot_spline_coef, electrostatic_potential);
+    ddc::Chunk<double, BSDomainX> elecpot_spline_coef(m_spline_x_builder.bsplines_domain());
+    m_spline_x_builder(elecpot_spline_coef.span_view(), electrostatic_potential);
     (*this)(electric_field, elecpot_spline_coef);
     Kokkos::Profiling::popRegion();
 }

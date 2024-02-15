@@ -1,5 +1,4 @@
 # SPDX-License-Identifier: MIT
-
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("rhs_${GEOMETRY_VARIANT}" STATIC
@@ -25,6 +24,7 @@ target_link_libraries("rhs_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         DDC::PDI_Wrapper
+        sll::splines
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::quadrature
         gslx::speciesinfo

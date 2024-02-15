@@ -2,11 +2,9 @@
 
 #pragma once
 
-#include "i_interpolator_batched.hpp"
+#include <ddc/kernels/splines.hpp>
 
-// TODO: create splines.hpp
-#include <ddc/kernels/splines/spline_builder.hpp>
-#include <ddc/kernels/splines/spline_evaluator.hpp>
+#include "i_interpolator_batched.hpp"
 
 /**
  * @brief A class for interpolating a function using splines.
@@ -20,7 +18,15 @@
  * @tparam BcMax The boundary condition at the upper boundary.
  * @tparam DDim... All the dimensions of the interpolation problem (batched + interpolated).
  */
-template <class DDimI, class BSplines, ddc::BoundCond BcMin, ddc::BoundCond BcMax, class... DDim>
+template <
+        class DDimI,
+        class BSplines,
+        ddc::BoundCond BcMin,
+        ddc::BoundCond BcMax,
+        class LeftExtrapolationRule,
+        class RightExtrapolationRule,
+        ddc::SplineSolver Solver,
+        class... DDim>
 class SplineInterpolatorBatched : public IInterpolatorBatched<DDimI, DDim...>
 {
     using BuilderType = ddc::SplineBuilder<
@@ -30,21 +36,15 @@ class SplineInterpolatorBatched : public IInterpolatorBatched<DDimI, DDim...>
             DDimI,
             BcMin,
             BcMax,
-            ddc::SplineSolver::GINKGO,
+            Solver,
             DDim...>;
     using EvaluatorType = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
             BSplines,
             DDimI,
-            std::conditional_t<
-                    DDimI::continuous_dimension_type::PERIODIC,
-                    ddc::PeriodicExtrapolationRule<typename DDimI::continuous_dimension_type>,
-                    ddc::ConstantExtrapolationRule<typename DDimI::continuous_dimension_type>>,
-            std::conditional_t<
-                    DDimI::continuous_dimension_type::PERIODIC,
-                    ddc::PeriodicExtrapolationRule<typename DDimI::continuous_dimension_type>,
-                    ddc::ConstantExtrapolationRule<typename DDimI::continuous_dimension_type>>,
+            LeftExtrapolationRule,
+            RightExtrapolationRule,
             DDim...>;
 
 private:
@@ -56,9 +56,10 @@ private:
             Chunk<double, typename BuilderType::spline_domain_type, ddc::DeviceAllocator<double>>
                     m_coefs;
 
-    std::vector<double> m_derivs_min_alloc;
-
-    std::vector<double> m_derivs_max_alloc;
+    ddc::Chunk<double, typename BuilderType::derivs_domain_type, ddc::DeviceAllocator<double>>
+            m_derivs_min_alloc;
+    ddc::Chunk<double, typename BuilderType::derivs_domain_type, ddc::DeviceAllocator<double>>
+            m_derivs_max_alloc;
 
 public:
     /**
@@ -70,9 +71,11 @@ public:
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_coefs(builder.spline_domain())
-        , m_derivs_min_alloc(BuilderType::s_nbe_xmin, 0.)
-        , m_derivs_max_alloc(BuilderType::s_nbe_xmax, 0.)
+        , m_derivs_min_alloc(builder.derivs_xmin_domain())
+        , m_derivs_max_alloc(builder.derivs_xmax_domain())
     {
+        ddc::fill(m_derivs_min_alloc, 0.);
+        ddc::fill(m_derivs_max_alloc, 0.);
     }
 
     ~SplineInterpolatorBatched() override = default;
@@ -83,16 +86,11 @@ public:
                     const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
                     ddc::DiscreteDomain<DDim...>>> const coordinates) const override
     {
-        std::optional<ddc::CDSpan1D> derivs_min;
-        std::optional<ddc::CDSpan1D> derivs_max;
-        if constexpr (BcMin == ddc::BoundCond::HERMITE) {
-            derivs_min = ddc::CDSpan1D(m_derivs_min_alloc.data(), m_derivs_min_alloc.size());
-        }
-        if constexpr (BcMax == ddc::BoundCond::HERMITE) {
-            derivs_max = ddc::CDSpan1D(m_derivs_max_alloc.data(), m_derivs_max_alloc.size());
-        }
-        // m_builder(m_coefs.span_view(), inout_data, derivs_min, derivs_max);
-        m_builder(m_coefs.span_view(), inout_data.span_cview());
+        m_builder(
+                m_coefs.span_view(),
+                inout_data.span_cview(),
+                std::optional(m_derivs_min_alloc.span_cview()),
+                std::optional(m_derivs_max_alloc.span_cview()));
         m_evaluator(inout_data, coordinates, m_coefs.span_cview());
         return inout_data;
     }
@@ -105,7 +103,15 @@ public:
  * memory allocated in the private members of the SplineInterpolatorBatched to be freed when the object is not in use.
  * These objects are: m_coefs, m_derivs_min_alloc, m_derivs_max_alloc.
  */
-template <class DDimI, class BSplines, ddc::BoundCond BcMin, ddc::BoundCond BcMax, class... DDim>
+template <
+        class DDimI,
+        class BSplines,
+        ddc::BoundCond BcMin,
+        ddc::BoundCond BcMax,
+        class LeftExtrapolationRule,
+        class RightExtrapolationRule,
+        ddc::SplineSolver Solver,
+        class... DDim>
 class PreallocatableSplineInterpolatorBatched
     : public IPreallocatableInterpolatorBatched<DDimI, DDim...>
 {
@@ -116,21 +122,15 @@ class PreallocatableSplineInterpolatorBatched
             DDimI,
             BcMin,
             BcMax,
-            ddc::SplineSolver::GINKGO,
+            Solver,
             DDim...>;
     using EvaluatorType = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
             BSplines,
             DDimI,
-            std::conditional_t<
-                    DDimI::continuous_dimension_type::PERIODIC,
-                    ddc::PeriodicExtrapolationRule<typename DDimI::continuous_dimension_type>,
-                    ddc::ConstantExtrapolationRule<typename DDimI::continuous_dimension_type>>,
-            std::conditional_t<
-                    DDimI::continuous_dimension_type::PERIODIC,
-                    ddc::PeriodicExtrapolationRule<typename DDimI::continuous_dimension_type>,
-                    ddc::ConstantExtrapolationRule<typename DDimI::continuous_dimension_type>>,
+            LeftExtrapolationRule,
+            RightExtrapolationRule,
             DDim...>;
 
     BuilderType const& m_builder;
@@ -165,6 +165,9 @@ public:
                 BSplines,
                 BcMin,
                 BcMax,
+                LeftExtrapolationRule,
+                RightExtrapolationRule,
+                Solver,
                 DDim...>>(m_builder, m_evaluator);
     }
 };

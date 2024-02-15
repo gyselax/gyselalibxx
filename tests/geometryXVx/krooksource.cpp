@@ -6,10 +6,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -54,8 +50,8 @@ TEST(KrookSource, Adaptive)
     IDomainX gridx(SplineInterpPointsX::get_domain());
     IDomainVx gridvx(SplineInterpPointsVx::get_domain());
 
-    SplineXBuilder const builder_x(gridx);
-    SplineVxBuilder const builder_vx(gridvx);
+    SplineXBuilder_1d const builder_x(gridx);
+    SplineVxBuilder_1d const builder_vx(gridvx);
 
     IDomainSp const gridsp = dom_sp;
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
@@ -203,8 +199,8 @@ TEST(KrookSource, Constant)
     IDomainX gridx(SplineInterpPointsX::get_domain());
     IDomainVx gridvx(SplineInterpPointsVx::get_domain());
 
-    SplineXBuilder const builder_x(gridx);
-    SplineVxBuilder const builder_vx(gridvx);
+    SplineXBuilder_1d const builder_x(gridx);
+    SplineVxBuilder_1d const builder_vx(gridvx);
 
     IDomainSp const gridsp = dom_sp;
 

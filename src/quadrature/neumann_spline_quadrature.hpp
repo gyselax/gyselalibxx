@@ -11,11 +11,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/bsplines_non_uniform.hpp>
 #include <sll/matrix.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
 
 
 
@@ -51,11 +47,11 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
     constexpr int nbe_xmin = SplineBuilder::s_nbe_xmin;
     constexpr int nbe_xmax = SplineBuilder::s_nbe_xmax;
     static_assert(
-            SplineBuilder::s_bc_xmin == BoundCond::HERMITE,
+            SplineBuilder::s_bc_xmin == ddc::BoundCond::HERMITE,
             "The neumann spline quadrature requires a builder which uses Hermite boundary "
             "conditions.");
     static_assert(
-            SplineBuilder::s_bc_xmax == BoundCond::HERMITE,
+            SplineBuilder::s_bc_xmax == ddc::BoundCond::HERMITE,
             "The neumann spline quadrature requires a builder which uses Hermite boundary "
             "conditions.");
     static_assert(
@@ -74,8 +70,8 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
 
     // Vector of integrals of B-splines
     ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines(
-            builder.spline_domain());
-    ddc::discrete_space<bsplines_type>().integrals(integral_bsplines);
+            builder.bsplines_domain());
+    ddc::discrete_space<bsplines_type>().integrals(integral_bsplines.span_view());
 
     // Solve matrix equation
     builder.get_interpolation_matrix().solve_transpose_inplace(
@@ -86,7 +82,7 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
     // Coefficients of quadrature in integral_bsplines (values which would always be multiplied
     // by f'(x)=0 are removed
     ddc::DiscreteDomain<bsplines_type> slice
-            = builder.spline_domain()
+            = builder.bsplines_domain()
                       .remove(ddc::DiscreteVector<bsplines_type> {nbe_xmin},
                               ddc::DiscreteVector<bsplines_type> {nbe_xmax});
 

@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MIT
 
-#include <sll/bsplines_non_uniform.hpp>
+#include <sll/bsplines_uniform.hpp>
+#include <sll/greville_interpolation_points.hpp>
+#include <sll/spline_boundary_conditions.hpp>
+#include <sll/spline_builder.hpp>
+#include <sll/spline_evaluator.hpp>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -18,19 +22,29 @@ TEST(SplineQuadratureTest, ExactForConstantFunc)
     IVectX const x_size(10);
 
     // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    using sllBSplinesX = UniformBSplines<RDimX, 3>;
+    auto constexpr sllSplineXBoundary = RDimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
+    using sllGrevillePointsX
+            = GrevilleInterpolationPoints<sllBSplinesX, sllSplineXBoundary, sllSplineXBoundary>;
+    using sllIDimX = typename sllGrevillePointsX::interpolation_mesh_type;
+    using sllSplineXBuilder
+            = SplineBuilder<sllBSplinesX, sllIDimX, sllSplineXBoundary, sllSplineXBoundary>;
+    using sllIDomainX = ddc::DiscreteDomain<sllIDimX>;
+    using sllDFieldX = ddc::Chunk<double, sllIDomainX>;
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
+    ddc::init_discrete_space<sllBSplinesX>(x_min, x_max, x_size);
 
-    SplineXBuilder const builder_x(interpolation_domain_x);
+    ddc::init_discrete_space<sllIDimX>(sllGrevillePointsX::get_sampling());
+    sllIDomainX interpolation_domain_x(sllGrevillePointsX::get_domain());
 
-    IDomainX const gridx = builder_x.interpolation_domain();
+    sllSplineXBuilder const builder_x(interpolation_domain_x);
 
-    DFieldX const quadrature_coeffs = spline_quadrature_coefficients(gridx, builder_x);
+    sllIDomainX const gridx = builder_x.interpolation_domain();
+
+    sllDFieldX const quadrature_coeffs = spline_quadrature_coefficients(gridx, builder_x);
     Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    DFieldX values(gridx);
+    sllDFieldX values(gridx);
 
     ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);

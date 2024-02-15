@@ -29,7 +29,7 @@ TEST(Maxwellian, Moments)
 
     IDomainVx interpolation_domain_vx(InterpPointsVx::get_domain());
 
-    SplineVxBuilder const builder_vx(interpolation_domain_vx);
+    SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
 
     IDomainVx const gridvx = builder_vx.interpolation_domain();
 

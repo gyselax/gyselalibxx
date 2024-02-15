@@ -6,10 +6,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -31,10 +27,18 @@ TEST(Masks, Ordering)
 
     IDomainX gridx(SplineInterpPointsX::get_domain());
 
-    SplineXBuilder const builder_x(gridx);
+    SplineXBuilder_1d const builder_x(gridx);
 
-    SplineEvaluator<BSplinesX> const
-            spline_x_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);
+    SplineXEvaluator_1d const spline_x_evaluator(
+            builder_x.spline_domain(),
+#ifdef PERIODIC_RDIMX
+            ddc::PeriodicExtrapolationRule<RDimX>(),
+            ddc::PeriodicExtrapolationRule<RDimX>()
+#else
+            ddc::ConstantExtrapolationRule<RDimX>(x_min),
+            ddc::ConstantExtrapolationRule<RDimX>(x_max)
+#endif
+    );
 
     double const extent = 0.25;
     double const stiffness = 1e-2;

@@ -2,10 +2,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -42,8 +38,8 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
     ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
     ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
 
-    SplineXBuilder const builder_x(interpolation_domain_x);
-    SplineVxBuilder const builder_vx(interpolation_domain_vx);
+    SplineXBuilder_1d const builder_x(interpolation_domain_x);
+    SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
 
     IDomainX const gridx = builder_x.interpolation_domain();
     IDomainVx const gridvx = builder_vx.interpolation_domain();
@@ -51,12 +47,15 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    SplineEvaluator<BSplinesX> const
-            spline_x_evaluator(g_null_boundary<BSplinesX>, g_null_boundary<BSplinesX>);
+    SplineXEvaluator_1d const spline_x_evaluator(
+            builder_x.spline_domain(),
+            ddc::PeriodicExtrapolationRule<RDimX>(),
+            ddc::PeriodicExtrapolationRule<RDimX>());
 
-    SplineEvaluator<BSplinesVx> const
-            spline_vx_evaluator(g_null_boundary<BSplinesVx>, g_null_boundary<BSplinesVx>);
-
+    SplineVxEvaluator_1d const spline_vx_evaluator(
+            builder_vx.spline_domain(),
+            ddc::ConstantExtrapolationRule<RDimVx>(vx_min),
+            ddc::ConstantExtrapolationRule<RDimVx>(vx_max));
     FieldSp<int> charges(dom_sp);
     charges(my_ielec) = -1;
     charges(my_iion) = 1;

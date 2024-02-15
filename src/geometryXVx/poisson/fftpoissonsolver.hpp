@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
-
 #include "electricfield.hpp"
 #include "ichargedensitycalculator.hpp"
 #include "ipoissonsolver.hpp"
