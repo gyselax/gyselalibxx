@@ -10,7 +10,6 @@ target_link_libraries(landau_fem_uniform_${GEOMETRY_VARIANT}
         DDC::PDI_Wrapper
         paraconf::paraconf
         PDI::pdi
-        sll::splines
         gslx::initialization_${GEOMETRY_VARIANT}
         gslx::interpolation
         gslx::paraconfpp
@@ -33,7 +32,6 @@ target_link_libraries(landau_fft
         DDC::PDI_Wrapper
         paraconf::paraconf
         PDI::pdi
-        sll::splines
         gslx::initialization_xperiod_vx
         gslx::interpolation
         gslx::paraconfpp

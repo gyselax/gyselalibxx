@@ -2,17 +2,26 @@
 
 #pragma once
 
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
+#include <sll/gauss_legendre_integration.hpp>
+#include <sll/matrix.hpp>
 
 #include <geometry.hpp>
 
 #include "ichargedensitycalculator.hpp"
 #include "ipoissonsolver.hpp"
 
-using NUBSplinesX = NonUniformBSplines<RDimX, BSDegreeX>;
+using NUBSplinesX = ddc::NonUniformBSplines<RDimX, BSDegreeX>;
 using NUBSDomainX = ddc::DiscreteDomain<NUBSplinesX>;
-using UBSplinesX = UniformBSplines<RDimX, BSDegreeX>;
+using UBSplinesX = ddc::UniformBSplines<RDimX, BSDegreeX>;
+
+using NUBSplineXEvaluator_1d = ddc::SplineEvaluator<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        NUBSplinesX,
+        IDimX,
+        ddc::NullExtrapolationRule,
+        ddc::NullExtrapolationRule,
+        IDimX>;
 
 /**
  * @brief An operator which solves the Poisson equation using Finite
@@ -46,11 +55,11 @@ private:
     static int constexpr s_npts_gauss = BSplinesX::degree() + 1;
 
 private:
-    SplineXBuilder const& m_spline_x_builder;
+    SplineXBuilder_1d const& m_spline_x_builder;
 
-    SplineEvaluator<BSplinesX> m_spline_x_evaluator;
+    SplineXEvaluator_1d m_spline_x_evaluator;
 
-    SplineEvaluator<NUBSplinesX> m_spline_x_nu_evaluator;
+    NUBSplineXEvaluator_1d m_spline_x_nu_evaluator;
 
     IChargeDensityCalculator const& m_compute_rho;
 
@@ -84,8 +93,8 @@ public:
      * @param compute_rho The operator which calculates the charge density, the right hand side of the equation.
      */
     FemNonPeriodicPoissonSolver(
-            SplineXBuilder const& spline_x_builder,
-            SplineEvaluator<BSplinesX> const& spline_x_evaluator,
+            SplineXBuilder_1d const& spline_x_builder,
+            SplineXEvaluator_1d const& spline_x_evaluator,
             IChargeDensityCalculator const& compute_rho);
 
     /**

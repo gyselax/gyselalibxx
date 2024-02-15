@@ -47,9 +47,9 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     IDomainX interpolation_domain_x(SplineInterpPointsX::get_domain());
     IDomainVx interpolation_domain_vx(SplineInterpPointsVx::get_domain());
 
-    SplineXBuilder const builder_x(interpolation_domain_x);
+    SplineXBuilder_1d const builder_x(interpolation_domain_x);
 
-    SplineVxBuilder const builder_vx(interpolation_domain_vx);
+    SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
 
     IDomainX const gridx = builder_x.interpolation_domain();
     IDomainVx const gridvx = builder_vx.interpolation_domain();
