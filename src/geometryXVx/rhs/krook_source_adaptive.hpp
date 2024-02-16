@@ -30,8 +30,8 @@ private:
     double m_amplitude;
     double m_density;
     double m_temperature;
-    DFieldX m_mask;
-    DFieldVx m_ftarget;
+    device_t<DFieldX> m_mask;
+    device_t<DFieldVx> m_ftarget;
 
 public:
     /**
@@ -100,5 +100,6 @@ public:
      * @param[in] f The distribution function.
      * @param[in] f0 An optional parameter.
      */
-    void get_derivative(DSpanSpXVx df, DViewSpXVx f, DViewSpXVx f0) const;
+    void get_derivative(device_t<DSpanSpXVx> df, device_t<DViewSpXVx> f, device_t<DViewSpXVx> f0)
+            const;
 };
