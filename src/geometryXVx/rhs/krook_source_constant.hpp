@@ -28,8 +28,8 @@ private:
     double m_amplitude;
     double m_density;
     double m_temperature;
-    DFieldX m_mask;
-    DFieldVx m_ftarget;
+    device_t<DFieldX> m_mask;
+    device_t<DFieldVx> m_ftarget;
 
 public:
     /**
