@@ -248,7 +248,7 @@ Example</h1>
 </div><!-- fragment --><p>We also need types to define the discrete domain on which the simulation will evolve. The distribution function \(f_s(t,x,v)\) will evolve over the discrete domain \([i, e]\times[x_0,...,x_N]\times[v_0,...,v_{N_v}]\). Point samplings are required to define the positions of the grid points in each of the three dimensions:</p><ul>
 <li>The object \([x_0,...,x_N]\) is defined with a point sampling and will be denoted \(IDimX\).</li>
 <li>The object \([v_0,...,v_{N_v}]\) is defined with a point sampling and will be denoted \(IDimVx\).</li>
-<li>The object \([&#39;i&#39;, &#39;e&#39;]\) is defined as a <code><a class="el" href="classSpeciesInformation.html">SpeciesInformation</a></code> collection and will be denoted \(IDimSp\).</li>
+<li>The object \([&#39;i&#39;, &#39;e&#39;]\) is defined as a <code><a class="el" href="classSpeciesInformation.html" title="Species discrete dimension to access constant attributes related to species.">SpeciesInformation</a></code> collection and will be denoted \(IDimSp\).</li>
 </ul>
 <p>With these objects defined, the domain(s) can then be created. The domain for the distribution function has the type: <code>ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimVx&gt;</code> however for simplicity it is denoted <code>DomainSpXVx</code>. The electric potential \(\phi\) has a smaller domain with the type <code>ddc::DiscreteDomain&lt;IDimX&gt;</code> denoted <code>DomainX</code>.</p>
 <p>Other domains may be useful to work on slices of data or on subdomains (e.g. if we distribute our function using MPI).</p>

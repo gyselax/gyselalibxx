@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['qdimx_323',['QDimX',['../classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX',1,'FemNonPeriodicPoissonSolver::QDimX'],['../classFemPeriodicPoissonSolver.html#structFemPeriodicPoissonSolver_1_1QDimX',1,'FemPeriodicPoissonSolver::QDimX']]],
-  ['quadrature_324',['Quadrature',['../classQuadrature.html',1,'Quadrature&lt; IDim &gt;'],['../classQuadrature.html#a6b8f04ab1b97b80a55b478085a276755',1,'Quadrature::Quadrature()']]],
-  ['quadrature_20methods_325',['Quadrature Methods',['../src_quadrature.html',1,'src']]],
-  ['quadrature_3c_20idimvx_20_3e_326',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]],
-  ['quadrature_5fcoeffs_5fnd_327',['quadrature_coeffs_nd',['../quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d',1,'quadrature_coeffs_nd.hpp']]],
-  ['quadrature_5fcoeffs_5fnd_2ehpp_328',['quadrature_coeffs_nd.hpp',['../quadrature__coeffs__nd_8hpp.html',1,'']]]
+  ['qdimx_334',['QDimX',['../classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX',1,'FemNonPeriodicPoissonSolver::QDimX'],['../classFemPeriodicPoissonSolver.html#structFemPeriodicPoissonSolver_1_1QDimX',1,'FemPeriodicPoissonSolver::QDimX']]],
+  ['quadrature_335',['Quadrature',['../classQuadrature.html',1,'Quadrature&lt; IDim &gt;'],['../classQuadrature.html#a6b8f04ab1b97b80a55b478085a276755',1,'Quadrature::Quadrature()']]],
+  ['quadrature_20methods_336',['Quadrature Methods',['../src_quadrature.html',1,'src']]],
+  ['quadrature_3c_20idimvx_20_3e_337',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]],
+  ['quadrature_5fcoeffs_5fnd_338',['quadrature_coeffs_nd',['../quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d',1,'quadrature_coeffs_nd.hpp']]],
+  ['quadrature_5fcoeffs_5fnd_2ehpp_339',['quadrature_coeffs_nd.hpp',['../quadrature__coeffs__nd_8hpp.html',1,'']]]
 ];
