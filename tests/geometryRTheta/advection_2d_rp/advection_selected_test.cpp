@@ -45,7 +45,7 @@
 #include <rk3.hpp>
 #include <rk4.hpp>
 
-#include "advection_maths_tools.hpp"
+#include "advection_simulation_utils.hpp"
 #include "itimestepper.hpp"
 #include "spline_foot_finder.hpp"
 
@@ -54,7 +54,7 @@
 namespace fs = std::filesystem;
 
 namespace {
-#if defined(CIRCULAR_MAPPING)
+#if defined(CIRCULAR_MAPPING_PHYSICAL)
 using RDimX_adv = typename AdvectionPhysicalDomain<
         CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>::RDimX_adv;
 using RDimY_adv = typename AdvectionPhysicalDomain<
@@ -71,7 +71,7 @@ using RDimX_adv = typename AdvectionPseudoCartesianDomain<
 using RDimY_adv = typename AdvectionPseudoCartesianDomain<
         CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>::RDimY_adv;
 
-#elif defined(DISCRETE_MAPPING)
+#elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
 using RDimX_adv = typename AdvectionPseudoCartesianDomain<
         DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>>::RDimX_adv;
 using RDimY_adv = typename AdvectionPseudoCartesianDomain<
@@ -109,14 +109,14 @@ int main(int argc, char** argv)
     int const Nt = PCpp_int(conf_voicexx, ".Mesh.p_size");
     double const dt = PCpp_double(conf_voicexx, ".Mesh.time_step");
     double const final_time = PCpp_double(conf_voicexx, ".Mesh.final_time");
-    bool const if_save_curves = PCpp_bool(conf_voicexx, ".Mesh.save_curves");
-    bool const if_save_feet = PCpp_bool(conf_voicexx, ".Mesh.save_feet");
+    bool const save_curves = PCpp_bool(conf_voicexx, ".Mesh.save_curves");
+    bool const save_feet = PCpp_bool(conf_voicexx, ".Mesh.save_feet");
     PC_tree_destroy(&conf_voicexx);
 
-    if (if_save_curves or if_save_feet) {
+    if (save_curves or save_feet) {
         fs::create_directory("output");
     }
-    if (if_save_curves) {
+    if (save_curves) {
         fs::create_directory("output/curves");
     }
 
@@ -195,24 +195,28 @@ int main(int argc, char** argv)
             g_null_boundary_2d<BSplinesR, BSplinesP>);
 
 
-
-    double const czarny_e = 0.3;
-    double const czarny_epsilon = 1.4;
+    std::string key;
 
     // SELECTION OF THE MAPPING AND THE ADVECTION DOMAIN.
-#if defined(CIRCULAR_MAPPING)
+#if defined(CIRCULAR_MAPPING_PHYSICAL)
     CircularToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping;
     CircularToCartesian<RDimX, RDimY, RDimR, RDimP> mapping;
     AdvectionPhysicalDomain advection_domain(analytical_mapping);
     std::string const mapping_name = "CIRCULAR";
     std::string const domain_name = "PHYSICAL";
+    key += "circular_physical";
+#else
 
-#elif defined(CZARNY_MAPPING_PHYSICAL)
+    double const czarny_e = 0.3;
+    double const czarny_epsilon = 1.4;
+
+#if defined(CZARNY_MAPPING_PHYSICAL)
     CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> mapping(czarny_e, czarny_epsilon);
     AdvectionPhysicalDomain advection_domain(analytical_mapping);
     std::string const mapping_name = "CZARNY";
     std::string const domain_name = "PHYSICAL";
+    key += "czarny_physical";
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping(czarny_e, czarny_epsilon);
@@ -220,8 +224,9 @@ int main(int argc, char** argv)
     AdvectionPseudoCartesianDomain advection_domain(mapping);
     std::string const mapping_name = "CZARNY";
     std::string const domain_name = "PSEUDO CARTESIAN";
+    key += "czarny_pseudo_cartesian";
 
-#elif defined(DISCRETE_MAPPING)
+#elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping(czarny_e, czarny_epsilon);
     DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder> mapping
             = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>::
@@ -229,47 +234,62 @@ int main(int argc, char** argv)
     AdvectionPseudoCartesianDomain advection_domain(mapping);
     std::string const mapping_name = "DISCRETE";
     std::string const domain_name = "PSEUDO CARTESIAN";
+    key += "discrete_pseudo_cartesian";
+#endif
 #endif
 
-
+    key += "-";
 
     // SELECTION OF THE TIME INTEGRATION METHOD.
 #if defined(EULER_METHOD)
     Euler<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>> time_stepper(grid);
     std::string const method_name = "EULER";
+    key += "euler";
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
     CrankNicolson<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>>
             time_stepper(grid, 20, epsilon_CN);
     std::string const method_name = "CRANK NICOLSON";
+    key += "crank_nicolson";
 
 #elif defined(RK3_METHOD)
     RK3<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>> time_stepper(grid);
     std::string const method_name = "RK3";
+    key += "rk3";
 
 #elif defined(RK4_METHOD)
     RK4<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>> time_stepper(grid);
     std::string const method_name = "RK4";
+    key += "rk4";
 #endif
 
+    key += "-";
 
     // SELECTION OF THE SIMULATION.
 #if defined(TRANSLATION_SIMULATION)
     TranslationSimulation simulation(mapping, rmin, rmax);
-    std::string const simu_type = " TRANSLATION : ";
+    std::string const simu_type = "TRANSLATION";
+    key += "Translation";
 
 #elif defined(ROTATION_SIMULATION)
     RotationSimulation simulation(mapping, rmin, rmax);
-    std::string const simu_type = " ROTATION : ";
+    std::string const simu_type = "ROTATION";
+    key += "Rotation";
 
 #elif defined(DECENTRED_ROTATION_SIMULATION)
     DecentredRotationSimulation simulation(mapping);
-    std::string const simu_type = " DECENTRED ROTATION : ";
+    std::string const simu_type = "DECENTRED ROTATION";
+    key += "Decentred_rotation";
 #endif
 
+    std::string output_folder = key + "_output";
+    if (save_curves or save_feet) {
+        fs::create_directory(output_folder);
+    }
+
     std::cout << mapping_name << " MAPPING - " << domain_name << " DOMAIN - " << method_name
-              << " - " << simu_type << std::endl;
+              << " - " << simu_type << " : " << std::endl;
     simulate(
             mapping,
             analytical_mapping,
@@ -282,7 +302,7 @@ int main(int argc, char** argv)
             spline_evaluator_extrapol,
             final_time,
             dt,
-            if_save_curves,
-            if_save_feet,
-            -1);
+            save_curves,
+            save_feet,
+            output_folder);
 }

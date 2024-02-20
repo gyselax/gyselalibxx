@@ -2,13 +2,16 @@
 Define all the functions needed in the python files of the advection_2d_rp folder.
 """
 
+import argparse
+import os
 import subprocess
 
-import argparse
+from collections import namedtuple
 
 import numpy as np
+import yaml
 
-
+SimulationResults = namedtuple('SimulationResults', ('name', 'l_inf_error', 'l_2_error'))
 
 def set_input(rmin_def, rmax_def, Nr_def, Nth_def, dt_def, T_def, curves_def=False, feet_def=False):
     """
@@ -71,70 +74,27 @@ def set_input(rmin_def, rmax_def, Nr_def, Nth_def, dt_def, T_def, curves_def=Fal
                         help=f'Boolean to select if the feet are saved. By default, feet = {"True"*feet_def + "False"*(not feet_def)}.')
 
     parser.add_argument('--plot', action='store_true', help='Plot the results.')
-
-    print("")
+    parser.add_argument('--verbose', action='store_true', help='Output information about the execution.')
 
     args = parser.parse_args()
 
-    rmin = args.rmin
-    rmax = args.rmax
-    Nr = args.Nr
-    Nth = args.Nth
-    dt = args.dt
-    T = args.T
-    curves = args.curves
-    feet = args.feet
-    if_plot = args.plot
+    yaml_parameters = {
+            'r_min': args.rmin,
+            'r_max': args.rmax,
+            'r_size': args.Nr,
+            'p_size': args.Nth,
+            'time_step': args.dt,
+            'final_time': args.T,
+            'save_curves': args.curves,
+            'save_feet': args.feet
+            }
 
     executable = args.executable[0]
 
-    return executable, rmin, rmax, Nr, Nth, dt, T, curves, feet, if_plot
+    return executable, yaml_parameters, args.plot, args.verbose
 
 
-
-def params_file(rmin, rmax, Nr, Nth, dt, T, curves=False, feet=False):
-    """
-    Fill in the params.yaml parameters file with the correct inputs.
-
-    Parameters
-    ----------
-    rmin : float
-        Minimum value of the r values.
-
-    rmax : float
-        Maximum value of the r values.
-
-    Nr : int
-        Number of break points in r dimension
-
-    Nth : int
-        Number of break points in theta dimension
-
-    dt : float
-        Time step.
-
-    T : float
-        Final time.
-
-    curves : bool
-        Boolean to select if the values of the advected function are saved.
-
-    feet : bool
-        Boolean to select if the characteristic feet are saved.
-    """
-    with open("params.yaml", "w", encoding="utf-8") as f:
-        print("Mesh:", file=f)
-        print(f"  r_min: {rmin}", file=f)
-        print(f"  r_max: {rmax}", file=f)
-        print(f"  r_size: {Nr}", file=f)
-        print(f"  p_size: {Nth}", file=f)
-        print(f"  time_step: {dt}", file=f)
-        print(f"  final_time: {T}", file=f)
-        print("  save_curves: "+"true"*curves + "false"*(not curves), file=f)
-        print("  save_feet: "+"true"*feet + "false"*(not feet), file=f)
-
-
-def execute(executable, rmin, rmax, Nr, Nth, dt, T, curves=False, feet=False, print_out=True):
+def execute(executable, yaml_parameters, print_out=True):
     """
     Launch the executable given as input.
 
@@ -143,29 +103,8 @@ def execute(executable, rmin, rmax, Nr, Nth, dt, T, curves=False, feet=False, pr
     executable : string
         Path the executable of the test we want to launch.
 
-    rmin : float
-        Minimum value of the r values.
-
-    rmax : float
-        Maximum value of the r values.
-
-    Nr : int
-        Number of break points in r dimension
-
-    Nth : int
-        Number of break points in theta dimension
-
-    dt : float
-        Time step.
-
-    T : float
-        Final time.
-
-    curves : bool
-        Boolean to select if the values of the advected function are saved.
-
-    feet : bool
-        Boolean to select if the characteristic feet are saved.
+    yaml_parameters : dict
+        A dictionary describing the simulation parameters.
 
     print_out : bool
         Boolean to select if the output are printed in the console.
@@ -174,89 +113,90 @@ def execute(executable, rmin, rmax, Nr, Nth, dt, T, curves=False, feet=False, pr
     -------
         The output of the executable.
     """
-    params_file(rmin, rmax, Nr, Nth, dt, T, curves, feet)
+    params_file = executable+"_params.yaml"
+    with open(params_file, "w", encoding="utf-8") as f:
+        print(yaml.dump({'Mesh':yaml_parameters}), file=f)
 
-    with subprocess.Popen([executable, "params.yaml"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as p:
+    with subprocess.Popen([executable, params_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as p:
         out, err = p.communicate()
+        if err:
+            print(err)
         assert p.returncode == 0
 
     if print_out:
         print(out)
-    if err:
-        print(err)
-    if print_out:
         print("")
 
     return out
 
-
-
-def get_fct_names(var_out):
+def get_simulation_config(executable_file):
     """
-    Get the reduced names of all the test cases from the output.
-    The names are reduced to the name of the simulation (no mapping,
-    no advection domain, no method).
+    Get the keys which identify the simulation from the executable name.
 
     Parameters
     ----------
-    var_out : string
-        The output of the executable.
+    executable_file : str
+        The location of the executable.
 
     Returns
     -------
-        A list of string containing the names of the test cases.
-    """
-    out_lines = var_out.split('\n')
-    out_words = [line.split(' - ') for line in out_lines[1:] if "MAPPING" in line and "DOMAIN" in line]
-    fct_names = [line[3][:-3].lower() for line in out_words]
-    return fct_names
-
-def get_full_fct_names(var_out):
-    """
-    Get the full names of all the test cases from the output.
-
-    Parameters
-    ----------
-    var_out : string
-        The output of the executable.
-
-    Returns
-    -------
-        A list of string containing the names of the test cases.
-    """
-    out_lines = var_out.split('\n')
-    out_words = [[l.strip(' :') for l in line.split(' - ')] for line in out_lines[1:] if "MAPPING" in line and "DOMAIN" in line]
-    fct_names = [line[3].capitalize() + " with " + line[2].lower() + " on "
-                 + line[0].lower() + " and " + line[1].lower()  for line in out_words]
-    return fct_names
-
-def get_fct_name_key(full_name):
-    """
-    Get the keys which identify the test case from its full name.
-
-    Parameters
-    ----------
-    full_name : str
-        The full name of the case as outputted by get_full_fct_names.
-
-    Returns
-    -------
-    problem_type : str
-        The key describing the problem type ['Translation'|'Rotation'|'Decentered rotation'].
-    time_integration_method : str
-        The time integration method used to solve the problem ['euler', 'crank nicolson', 'rk3', 'rk4'].
     mapping : str
-        The mapping which was examined in the test ['circular', 'czarny_physical', 'czarny_pseudo_cart', 'discrete'].
+        The key which identifies the mapping (and domain).
+    method : str
+        The key which identifies the numerical method.
+    domain : str
+        The key which identifies the domain (physical/pseudo cartesian).
+    simulation : str
+        The key which identifies the simulation.
+    description : str
+        The description of the simulation.
     """
-    problem_type, s = full_name.split(' with ')
-    time_integration_method, s = s.split(' on ')
-    mapping, domain = s.split(' and ')
-    mapping, _ = mapping.split(' mapping')
-    if mapping == 'czarny':
-        domain, _ = domain.split(' domain')
-        domain = domain.replace(' ','_').lower()
-        mapping = f'{mapping}_{domain}'
-    return problem_type, time_integration_method, mapping
+    executable_name = os.path.basename(executable_file)
+    mapping, method, simulation = executable_name.replace('advection_', '').split('__')
+    mapping, domain = mapping.lower().split('_mapping_')
+    method = method.replace('_METHOD', '').lower()
+    simulation = simulation.replace('_SIMULATION', '').capitalize()
+    description = f'{simulation.capitalize()} with {method} on {mapping} and {domain}'
+    return mapping, method, domain, simulation, description
+
+def extract_simulation_results(var_out):
+    """
+    Get the results of a set of simulations.
+
+    Parameters
+    ----------
+    var_out : list[str]
+        A list containing the output of each simulation that was run.
+
+    Returns
+    -------
+    dict[tuple[str, str, str], SimulationResults]
+        A dictionary whose keys are a 3-tuple describing the numerical method, the mapping, and the
+        simulation that was run, and whose values are SimulationResults tuples containing the values
+        for the different errors and a descriptive name for the simulation.
+    """
+    out_lines = [o.split('\n') for o in var_out]
+
+    # Extract lines which describe the simulation
+    # E.g:     CIRCULAR MAPPING - PHYSICAL DOMAIN - CRANK NICOLSON - DECENTRED ROTATION :
+    simulation_description = [[l.strip(' :').lower() for l in line.split(' - ')] for line in out_lines[0]
+                                         if "MAPPING" in line and "DOMAIN" in line]
+
+    # Build a readable description of the simulation
+    simulation_names = [f'{simu.capitalize()} with {method} on {mapping} and {domain}'
+                        for mapping, domain, method, simu in simulation_description]
+
+    simulation_keys = [(method, mapping.replace(" mapping","")+" "+domain.replace(" domain",""), simu.capitalize())
+                        for mapping, domain, method, simu in simulation_description]
+
+    l_inf_errors = [[float(line.split()[-1]) for line in o if "Max absolute error" in line] for o in out_lines]
+    l_2_errors = [[float(line.split()[-1]) for line in o if "Relative L2 norm error" in line] for o in out_lines]
+
+    simulation_results = {key: SimulationResults(name, linf_err, l2_err)
+                  for key, name, linf_err, l2_err
+                    in zip(simulation_keys, simulation_names, zip(*l_inf_errors), zip(*l_2_errors))}
+
+    return simulation_results
 
 
 def treatment(namefile):
@@ -273,13 +213,13 @@ def treatment(namefile):
         Lists of the function values; coordinates in r;
         coordinates in theta; coordinates in x; coordinates in y.
     """
-    File = np.loadtxt(namefile)
+    File = np.loadtxt(namefile, float)
     #Ir, Ip, IVr, IVp = [], [], [], []
-    CoordR = File[:, 4]
-    CoordP = File[:, 5]
-    CoordX = File[:, 6]
-    CoordY = File[:, 7]
-    list_F = File[:, 8]
+    CoordR = File[:, 2]
+    CoordP = File[:, 3]
+    CoordX = File[:, 4]
+    CoordY = File[:, 5]
+    list_F = File[:, 6]
     return list_F, CoordR, CoordP,  CoordX, CoordY
 
 
