@@ -122,9 +122,9 @@ Inheritance diagram for FunctionToBeAdvected:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a540952f6d722f6764c6fcf3bfdcb1655"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFunctionToBeAdvected.html#a540952f6d722f6764c6fcf3bfdcb1655">operator()</a> (double r, double th)=0</td></tr>
-<tr class="memdesc:a540952f6d722f6764c6fcf3bfdcb1655"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function.  <a href="classFunctionToBeAdvected.html#a540952f6d722f6764c6fcf3bfdcb1655">More...</a><br /></td></tr>
-<tr class="separator:a540952f6d722f6764c6fcf3bfdcb1655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e0e7566e363527e72d3c1100ecbcbac"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFunctionToBeAdvected.html#a4e0e7566e363527e72d3c1100ecbcbac">operator()</a> (CoordRP coord)=0</td></tr>
+<tr class="memdesc:a4e0e7566e363527e72d3c1100ecbcbac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function.  <a href="classFunctionToBeAdvected.html#a4e0e7566e363527e72d3c1100ecbcbac">More...</a><br /></td></tr>
+<tr class="separator:a4e0e7566e363527e72d3c1100ecbcbac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for the test functions for the 2D polar advection operator. </p>
@@ -132,8 +132,8 @@ Public Member Functions</h2></td></tr>
 <dd>
 <a class="el" href="classAdvectionSimulation.html" title="Base class for the tests simulation of the 2D polar advection operator.">AdvectionSimulation</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a540952f6d722f6764c6fcf3bfdcb1655"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a540952f6d722f6764c6fcf3bfdcb1655">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a4e0e7566e363527e72d3c1100ecbcbac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e0e7566e363527e72d3c1100ecbcbac">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,19 +144,9 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual double FunctionToBeAdvected::operator() </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>r</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">CoordRP&#160;</td>
+          <td class="paramname"><em>coord</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>th</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -169,14 +159,13 @@ Public Member Functions</h2></td></tr>
 <p>Get the value of the function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>First dimension of the coordinate where we want to evaluate the function. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">th</td><td>Second dimension of the coordinate where we want to evaluate the function.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we want to evaluate the function.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of the function at (r, th). </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the function at the coordinate. </dd></dl>
 
-<p>Implemented in <a class="el" href="classFunctionToBeAdvected__gaussian.html#a82ee3169fb8dfba7b186c0f9a8c43a64">FunctionToBeAdvected_gaussian&lt; Mapping &gt;</a>, and <a class="el" href="classFunctionToBeAdvected__cos__4__elipse.html#a436bec34b188b8b08030212608046cfa">FunctionToBeAdvected_cos_4_elipse&lt; Mapping &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classFunctionToBeAdvected__gaussian.html#a2335fa595256b93cfebca7b15195d518">FunctionToBeAdvected_gaussian&lt; Mapping &gt;</a>, and <a class="el" href="classFunctionToBeAdvected__cos__4__elipse.html#a257423f6b03723cea9accbed1041fe71">FunctionToBeAdvected_cos_4_elipse&lt; Mapping &gt;</a>.</p>
 
 </div>
 </div>

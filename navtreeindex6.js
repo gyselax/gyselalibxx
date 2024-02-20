@@ -1,13 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"test__utils_8hpp_source.html":[12,2,0,1,4],
-"tests.html":[9],
-"tests_geometryRTheta.html":[9,0],
-"tests_geometryRTheta_2d_spline_interpolator.html":[9,0,1],
-"tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md48":[24],
-"tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md49":[25],
-"tests_geometryRTheta_advection_2d_rp.html":[9,0,0],
-"tests_geometryRTheta_advection_2d_rp.html#autotoc_md50":[21],
 "tests_geometryRTheta_advection_2d_rp.html#autotoc_md51":[22],
 "tests_geometryRTheta_advection_2d_rp.html#autotoc_md52":[23],
 "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Contents":[9,0,0,3],

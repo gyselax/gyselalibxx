@@ -124,18 +124,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aff8b4a078b9e417ae46bb6571790c7ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#aff8b4a078b9e417ae46bb6571790c7ba">AdvectionField_rotation</a> (CoordVr vr, CoordVp vp)</td></tr>
 <tr class="memdesc:aff8b4a078b9e417ae46bb6571790c7ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an <a class="el" href="classAdvectionField__rotation.html" title="Advection field for the tests of the 2D polar advection operator.">AdvectionField_rotation</a> advection field.  <a href="classAdvectionField__rotation.html#aff8b4a078b9e417ae46bb6571790c7ba">More...</a><br /></td></tr>
 <tr class="separator:aff8b4a078b9e417ae46bb6571790c7ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab3fcc86f0f202c295a73eb4ec2cfaa4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#aab3fcc86f0f202c295a73eb4ec2cfaa4">x_value</a> (double const x, double const y, double const t) const final</td></tr>
-<tr class="memdesc:aab3fcc86f0f202c295a73eb4ec2cfaa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the first component in the physical domain of the advection field.  <a href="classAdvectionField__rotation.html#aab3fcc86f0f202c295a73eb4ec2cfaa4">More...</a><br /></td></tr>
-<tr class="separator:aab3fcc86f0f202c295a73eb4ec2cfaa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf563d4f90feccec08d220ff1c626aee"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#acf563d4f90feccec08d220ff1c626aee">y_value</a> (double const x, double const y, double const t) const final</td></tr>
-<tr class="memdesc:acf563d4f90feccec08d220ff1c626aee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the second component in the physical domain of the advection field.  <a href="classAdvectionField__rotation.html#acf563d4f90feccec08d220ff1c626aee">More...</a><br /></td></tr>
-<tr class="separator:acf563d4f90feccec08d220ff1c626aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5afdcb8a308af4351a08ffb844183789"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#a5afdcb8a308af4351a08ffb844183789">exact_feet_x</a> (double const x, double const y, double const t) const final</td></tr>
-<tr class="memdesc:a5afdcb8a308af4351a08ffb844183789"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the first component in the physical domain of the characteristic feet.  <a href="classAdvectionField__rotation.html#a5afdcb8a308af4351a08ffb844183789">More...</a><br /></td></tr>
-<tr class="separator:a5afdcb8a308af4351a08ffb844183789"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6836c956252eaceb70d71639815fafff"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#a6836c956252eaceb70d71639815fafff">exact_feet_y</a> (double const x, double const y, double const t) const final</td></tr>
-<tr class="memdesc:a6836c956252eaceb70d71639815fafff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the second component in the physical domain of the characteristic feet.  <a href="classAdvectionField__rotation.html#a6836c956252eaceb70d71639815fafff">More...</a><br /></td></tr>
-<tr class="separator:a6836c956252eaceb70d71639815fafff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dc539810d2d10aa68104841574802cf"><td class="memItemLeft" align="right" valign="top">CoordXY&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#a4dc539810d2d10aa68104841574802cf">operator()</a> (CoordXY const coord, double const t) const final</td></tr>
+<tr class="memdesc:a4dc539810d2d10aa68104841574802cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the advection field in the physical domain.  <a href="classAdvectionField__rotation.html#a4dc539810d2d10aa68104841574802cf">More...</a><br /></td></tr>
+<tr class="separator:a4dc539810d2d10aa68104841574802cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c60e8cc5684b7c0394b42a5746bd23e"><td class="memItemLeft" align="right" valign="top">CoordXY&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#a3c60e8cc5684b7c0394b42a5746bd23e">exact_feet</a> (CoordXY coord_xy, double const t) const final</td></tr>
+<tr class="memdesc:a3c60e8cc5684b7c0394b42a5746bd23e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the characteristic feet in the physical domain.  <a href="classAdvectionField__rotation.html#a3c60e8cc5684b7c0394b42a5746bd23e">More...</a><br /></td></tr>
+<tr class="separator:a3c60e8cc5684b7c0394b42a5746bd23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Advection field for the tests of the 2D polar advection operator. </p>
@@ -198,8 +192,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aab3fcc86f0f202c295a73eb4ec2cfaa4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab3fcc86f0f202c295a73eb4ec2cfaa4">&#9670;&nbsp;</a></span>x_value()</h2>
+<a id="a4dc539810d2d10aa68104841574802cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dc539810d2d10aa68104841574802cf">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -208,16 +202,10 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double AdvectionField_rotation::x_value </td>
+          <td class="memname">CoordXY AdvectionField_rotation::operator() </td>
           <td>(</td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
+          <td class="paramtype">CoordXY const&#160;</td>
+          <td class="paramname"><em>coord</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -238,23 +226,22 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the first component in the physical domain of the advection field. </p>
+<p>Get the advection field in the physical domain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>First component of the coordinate in the physical domain. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>Second component of the coordinate in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate in the physical domain. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Time component.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of the first component in the physical domain of the advection field. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The advection field in the physical domain. </dd></dl>
 
-<p>Implements <a class="el" href="classAdvectionField.html#a39c4558588dfd350cbffecb16278096b">AdvectionField</a>.</p>
+<p>Implements <a class="el" href="classAdvectionField.html#ad83cd6e152724ab1c8e91be077eb5727">AdvectionField</a>.</p>
 
 </div>
 </div>
-<a id="acf563d4f90feccec08d220ff1c626aee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf563d4f90feccec08d220ff1c626aee">&#9670;&nbsp;</a></span>y_value()</h2>
+<a id="a3c60e8cc5684b7c0394b42a5746bd23e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c60e8cc5684b7c0394b42a5746bd23e">&#9670;&nbsp;</a></span>exact_feet()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -263,16 +250,10 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double AdvectionField_rotation::y_value </td>
+          <td class="memname">CoordXY AdvectionField_rotation::exact_feet </td>
           <td>(</td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
+          <td class="paramtype">CoordXY&#160;</td>
+          <td class="paramname"><em>coord</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -293,128 +274,17 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the second component in the physical domain of the advection field. </p>
+<p>Get the characteristic feet in the physical domain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>First component of the coordinate in the physical domain. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>Second component of the coordinate in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The original coordinate in the physical domain. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Time component.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of the second component in the physical domain of the advection field. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The characteristic feet in the physical domain. </dd></dl>
 
-<p>Implements <a class="el" href="classAdvectionField.html#a2ec45f7db2a92e2bc9b1abff72cfebb2">AdvectionField</a>.</p>
-
-</div>
-</div>
-<a id="a5afdcb8a308af4351a08ffb844183789"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5afdcb8a308af4351a08ffb844183789">&#9670;&nbsp;</a></span>exact_feet_x()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double AdvectionField_rotation::exact_feet_x </td>
-          <td>(</td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>r</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>th</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>t</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the first component in the physical domain of the characteristic feet. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>First component of the coordinate in the logical domain. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">th</td><td>Second component of the coordinate in the logical domain. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Time component.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of the first component in the physical domain of the characteristic feet. </dd></dl>
-
-<p>Implements <a class="el" href="classAdvectionField.html#a47445274220587dcc310cb39a6d729a1">AdvectionField</a>.</p>
-
-</div>
-</div>
-<a id="a6836c956252eaceb70d71639815fafff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6836c956252eaceb70d71639815fafff">&#9670;&nbsp;</a></span>exact_feet_y()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double AdvectionField_rotation::exact_feet_y </td>
-          <td>(</td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>r</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>th</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>t</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the second component in the physical domain of the characteristic feet. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>First component of the coordinate in the logical domain. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">th</td><td>Second component of the coordinate in the logical domain. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Time component.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of the second component in the physical domain of the characteristic feet. </dd></dl>
-
-<p>Implements <a class="el" href="classAdvectionField.html#a98edc064564938a301c27057159c1dc7">AdvectionField</a>.</p>
+<p>Implements <a class="el" href="classAdvectionField.html#ab0c285eac8fe3ebe600c740149dbdd8c">AdvectionField</a>.</p>
 
 </div>
 </div>

@@ -1,13 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"classPreallocatableSplineInterpolator.html#ace33f4ec317493b8f2a36eedf6521b93":[11,115,0],
-"classPreallocatableSplineInterpolatorBatched.html":[11,116],
-"classPreallocatableSplineInterpolatorBatched.html#ac33e5d7cca5000696a996e7891e668c0":[11,116,2],
-"classPreallocatableSplineInterpolatorBatched.html#ae12babd8b0e5f5b6ff573c3c52ffcd10":[11,116,0],
-"classPreallocatableSplineInterpolatorBatched.html#af55e09b147f251625df95db35da7a516":[11,116,1],
-"classPreallocatableSplineInterpolatorRP.html":[11,117],
-"classPreallocatableSplineInterpolatorRP.html#a415bb619fad457874e41e7afd7895ac5":[11,117,1],
-"classPreallocatableSplineInterpolatorRP.html#a96c0faf84015ec3b49d8d98b3eeef938":[11,117,2],
 "classPreallocatableSplineInterpolatorRP.html#ade36aac246ed7b8003ec0e227ca95b7e":[11,117,0],
 "classPredCorr.html":[11,118],
 "classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d":[11,118,0],
@@ -249,5 +241,13 @@ var NAVTREEINDEX3 =
 "classVectorFieldSpan.html#a433af9f5d44cbce08babed67ef482945":[11,159,16],
 "classVectorFieldSpan.html#a496be86209bed2fe0c4637c2068f2e9d":[11,159,7],
 "classVectorFieldSpan.html#a6d06815cd2394ffa4549a154ee796280":[11,159,13],
-"classVectorFieldSpan.html#a7a58d951bcf7190337944ef8a3789e1c":[11,159,6]
+"classVectorFieldSpan.html#a7a58d951bcf7190337944ef8a3789e1c":[11,159,6],
+"classVectorFieldSpan.html#a84b7f478c286e75b21ae9ae58d033572":[11,159,22],
+"classVectorFieldSpan.html#a89cfd62b5379f8ecddc0034a95a7087b":[11,159,8],
+"classVectorFieldSpan.html#a8d34d973cb0a047387a78440a182756b":[11,159,23],
+"classVectorFieldSpan.html#aa4aea470e10596cd64dbb912ac9c9dfb":[11,159,10],
+"classVectorFieldSpan.html#aa4f77f6e758b991a7c18bb9b25c0ae30":[11,159,11],
+"classVectorFieldSpan.html#ab10f4b73b4233a02e5f25c2b4afcb6b8":[11,159,12],
+"classVectorFieldSpan.html#ab9abf5d8db080b9e814bdf95d56fa9e9":[11,159,14],
+"classVectorFieldSpan.html#ac9835c4b3c61102263bc404c948c551c":[11,159,17]
 };

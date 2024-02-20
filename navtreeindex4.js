@@ -1,13 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classVectorFieldSpan.html#a84b7f478c286e75b21ae9ae58d033572":[11,159,22],
-"classVectorFieldSpan.html#a89cfd62b5379f8ecddc0034a95a7087b":[11,159,8],
-"classVectorFieldSpan.html#a8d34d973cb0a047387a78440a182756b":[11,159,23],
-"classVectorFieldSpan.html#aa4aea470e10596cd64dbb912ac9c9dfb":[11,159,10],
-"classVectorFieldSpan.html#aa4f77f6e758b991a7c18bb9b25c0ae30":[11,159,11],
-"classVectorFieldSpan.html#ab10f4b73b4233a02e5f25c2b4afcb6b8":[11,159,12],
-"classVectorFieldSpan.html#ab9abf5d8db080b9e814bdf95d56fa9e9":[11,159,14],
-"classVectorFieldSpan.html#ac9835c4b3c61102263bc404c948c551c":[11,159,17],
 "classVectorFieldSpan.html#acc499084ae93b3118644c458e16b3549":[11,159,18],
 "classVectorFieldSpan.html#ad3abef65badf2ce5915d6b9b86b0ebdc":[11,159,15],
 "classVectorFieldSpan.html#ad70b8f79a45666e097299ac974f76046":[11,159,21],
@@ -249,5 +241,13 @@ var NAVTREEINDEX4 =
 "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Domain":[5,1],
 "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Example":[5,3],
 "docs_Using_git.html":[6],
-"docs_Using_git.html#autotoc_md18":[15,0]
+"docs_Using_git.html#autotoc_md18":[15,0],
+"docs_Using_git.html#autotoc_md19":[15,1],
+"docs_Using_git.html#docs_Using_git__Branches":[6,0],
+"docs_Using_git.html#docs_Using_git__Submodules":[6,1],
+"euler_8hpp_source.html":[12,0,8,1],
+"evaluator__2d_8hpp_source.html":[12,2,0,1,1],
+"femnonperiodicpoissonsolver_8hpp_source.html":[12,0,2,3,2],
+"femperiodicpoissonsolver_8hpp_source.html":[12,0,2,3,3],
+"files.html":[12]
 };

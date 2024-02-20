@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aef3eeccf31077b83bd59c4d83d5ab360"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFunctionToBeAdvected__gaussian.html#aef3eeccf31077b83bd59c4d83d5ab360">FunctionToBeAdvected_gaussian</a> (Mapping const &amp;mapping, double const constant, double const x0, double const y0, double const sig_x, double const sig_y, double const rmin, double const rmax)</td></tr>
 <tr class="memdesc:aef3eeccf31077b83bd59c4d83d5ab360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classFunctionToBeAdvected__gaussian.html" title="Test function for the 2D polar advection operator.">FunctionToBeAdvected_gaussian</a> function.  <a href="classFunctionToBeAdvected__gaussian.html#aef3eeccf31077b83bd59c4d83d5ab360">More...</a><br /></td></tr>
 <tr class="separator:aef3eeccf31077b83bd59c4d83d5ab360"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82ee3169fb8dfba7b186c0f9a8c43a64"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFunctionToBeAdvected__gaussian.html#a82ee3169fb8dfba7b186c0f9a8c43a64">operator()</a> (double r, double th) final</td></tr>
-<tr class="memdesc:a82ee3169fb8dfba7b186c0f9a8c43a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function.  <a href="classFunctionToBeAdvected__gaussian.html#a82ee3169fb8dfba7b186c0f9a8c43a64">More...</a><br /></td></tr>
-<tr class="separator:a82ee3169fb8dfba7b186c0f9a8c43a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2335fa595256b93cfebca7b15195d518"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFunctionToBeAdvected__gaussian.html#a2335fa595256b93cfebca7b15195d518">operator()</a> (CoordRP coord_rp) final</td></tr>
+<tr class="memdesc:a2335fa595256b93cfebca7b15195d518"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function.  <a href="classFunctionToBeAdvected__gaussian.html#a2335fa595256b93cfebca7b15195d518">More...</a><br /></td></tr>
+<tr class="separator:a2335fa595256b93cfebca7b15195d518"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Mapping&gt;<br />
@@ -226,8 +226,8 @@ template&lt;class Mapping &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a82ee3169fb8dfba7b186c0f9a8c43a64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82ee3169fb8dfba7b186c0f9a8c43a64">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a2335fa595256b93cfebca7b15195d518"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2335fa595256b93cfebca7b15195d518">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,19 +240,9 @@ template&lt;class Mapping &gt; </div>
         <tr>
           <td class="memname">double <a class="el" href="classFunctionToBeAdvected__gaussian.html">FunctionToBeAdvected_gaussian</a>&lt; Mapping &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>r</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">CoordRP&#160;</td>
+          <td class="paramname"><em>coord</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>th</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -265,14 +255,13 @@ template&lt;class Mapping &gt; </div>
 <p>Get the value of the function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>First dimension of the coordinate where we want to evaluate the function. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">th</td><td>Second dimension of the coordinate where we want to evaluate the function.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we want to evaluate the function.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of the function at (r, th). </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the function at the coordinate. </dd></dl>
 
-<p>Implements <a class="el" href="classFunctionToBeAdvected.html#a540952f6d722f6764c6fcf3bfdcb1655">FunctionToBeAdvected</a>.</p>
+<p>Implements <a class="el" href="classFunctionToBeAdvected.html#a4e0e7566e363527e72d3c1100ecbcbac">FunctionToBeAdvected</a>.</p>
 
 </div>
 </div>
