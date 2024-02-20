@@ -67,17 +67,9 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     double const mass_ion(400), mass_elec(1);
     masses(my_ielec) = mass_elec;
     masses(my_iion) = mass_ion;
-    FieldSp<int> init_perturb_mode(dom_sp);
-    ddc::fill(init_perturb_mode, 0);
-    DFieldSp init_perturb_amplitude(dom_sp);
-    ddc::fill(init_perturb_amplitude, 0);
 
     // Initialization of the distribution function as a maxwellian
-    ddc::init_discrete_space<IDimSp>(
-            std::move(charges),
-            std::move(masses),
-            std::move(init_perturb_amplitude),
-            std::move(init_perturb_mode));
+    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
     device_t<DFieldSpXVx> allfdistribu_device(mesh);
 
     // Initialization of the distribution function as a maxwellian with
