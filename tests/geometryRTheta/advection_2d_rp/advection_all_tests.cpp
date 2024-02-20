@@ -42,7 +42,7 @@
 #include <vector_field_span.hpp>
 
 #include "advection_domain.hpp"
-#include "advection_maths_tools.hpp"
+#include "advection_simulation_utils.hpp"
 #include "bsl_advection_rp.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
@@ -175,7 +175,6 @@ struct GeneralParameters
     double final_time;
     bool if_save_curves;
     bool if_save_feet;
-    int counter_function;
 };
 
 template <int i_map = 0, int i_feet = 0, class SimulationTuple>
@@ -189,10 +188,15 @@ void run_simulations_with_methods(
     Numerics methods(sim.advection_domain, num_params);
     auto& num = std::get<i_feet>(methods.numerics);
 
-    std::ostringstream ss;
-    ss << sim.mapping_name << " MAPPING - " << sim.domain_name << " DOMAIN - " << num.method_name
-       << " - ";
-    std::string simulation_name = ss.str();
+    std::ostringstream name_stream;
+    name_stream << sim.mapping_name << " MAPPING - " << sim.domain_name << " DOMAIN - "
+                << num.method_name << " - ";
+    std::string simulation_name = name_stream.str();
+
+    std::ostringstream output_stream;
+    output_stream << to_lower(sim.mapping_name) << "_" << to_lower(sim.domain_name) << "-"
+                  << to_lower(num.method_name) << "-";
+    std::string output_stem = output_stream.str();
 
     simulate_the_3_simulations(
             sim.mapping,
@@ -207,7 +211,7 @@ void run_simulations_with_methods(
             num.time_step,
             params.if_save_curves,
             params.if_save_feet,
-            params.counter_function,
+            output_stem,
             simulation_name);
 
     if constexpr (i_feet < methods.size_tuple - 1) {
@@ -371,7 +375,6 @@ int main(int argc, char** argv)
 
     // SIMULATION: ==========================================================================
 
-    int counter_function(0);
     GeneralParameters params
             = {grid,
                interpolator,
@@ -379,8 +382,7 @@ int main(int argc, char** argv)
                spline_evaluator_extrapol,
                final_time,
                if_save_curves,
-               if_save_feet,
-               counter_function};
+               if_save_feet};
     run_simulations_with_methods(simulations, num_params, params);
 
     end_full_simulation = std::chrono::system_clock::now();

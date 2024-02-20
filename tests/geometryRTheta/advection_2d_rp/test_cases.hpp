@@ -40,14 +40,12 @@ public:
     /**
      * @brief Get the value of the function.
      *
-     * @param[in] r
-     *      First dimension of the coordinate where we want to evaluate the function.
-     * @param[in] th
-     *      Second dimension of the coordinate where we want to evaluate the function.
+     * @param[in] coord
+     *      The coordinate where we want to evaluate the function.
      *
-     * @return The value of the function at (r, th).
+     * @return The value of the function at the coordinate.
      */
-    virtual double operator()(double r, double th) = 0;
+    virtual double operator()(CoordRP coord) = 0;
 };
 
 
@@ -81,9 +79,9 @@ public:
     FunctionToBeAdvected_cos_4_elipse(Mapping const& mapping) : m_mapping(mapping) {};
     ~FunctionToBeAdvected_cos_4_elipse() {};
 
-    double operator()(double r, double th) final
+    double operator()(CoordRP coord_rp) final
     {
-        CoordXY const coord_xy(m_mapping(CoordRP(r, th)));
+        CoordXY const coord_xy(m_mapping(coord_rp));
         double const x = ddc::get<RDimX>(coord_xy);
         double const y = ddc::get<RDimY>(coord_xy);
 
@@ -163,12 +161,13 @@ public:
         , m_rmax(rmax) {};
     ~FunctionToBeAdvected_gaussian() {};
 
-    double operator()(double r, double th) final
+    double operator()(CoordRP coord_rp) final
     {
         // Gaussian centered in (x0, y0):
-        CoordXY const coord_xy(m_mapping(CoordRP(r, th)));
+        CoordXY const coord_xy(m_mapping(coord_rp));
         double const x = ddc::get<RDimX>(coord_xy);
         double const y = ddc::get<RDimY>(coord_xy);
+        double const r = ddc::get<RDimR>(coord_rp);
         if ((m_rmin <= r) and (r <= m_rmax)) {
             return m_constant
                    * std::exp(
@@ -196,68 +195,28 @@ public:
     virtual ~AdvectionField() = default;
 
     /**
-     * @brief Get the first component in the physical domain of the
-     * advection field.
+     * @brief Get the advection field in the physical domain.
      *
-     * @param[in] x
-     *      First component of the coordinate in the physical domain.
-     * @param[in] y
-     *      Second component of the coordinate in the physical domain.
+     * @param[in] coord
+     *      The coordinate in the physical domain.
      * @param[in] t
      *      Time component.
      *
-     * @return The value of the first component in the physical domain of the
-     * advection field.
+     * @return The advection field in the physical domain.
      */
-    virtual double x_value(double const x, double const y, double const t = 0.) const = 0;
+    virtual CoordXY operator()(CoordXY const coord, double const t = 0.) const = 0;
 
     /**
-     * @brief Get the second component in the physical domain of the
-     * advection field.
+     * @brief Get the characteristic feet in the physical domain.
      *
-     * @param[in] x
-     *      First component of the coordinate in the physical domain.
-     * @param[in] y
-     *      Second component of the coordinate in the physical domain.
+     * @param[in] coord
+     *      The original coordinate in the physical domain.
      * @param[in] t
      *      Time component.
      *
-     * @return The value of the second component in the physical domain of the
-     * advection field.
+     * @return The characteristic feet in the physical domain.
      */
-    virtual double y_value(double const x, double const y, double const t = 0.) const = 0;
-
-    /**
-     * @brief Get the first component in the physical domain of the
-     * characteristic feet.
-     *
-     * @param[in] r
-     *      First component of the coordinate in the logical domain.
-     * @param[in] th
-     *      Second component of the coordinate in the logical domain.
-     * @param[in] t
-     *      Time component.
-     *
-     * @return The value of the first component in the physical domain of the
-     * characteristic feet.
-     */
-    virtual double exact_feet_x(double r, double th, double t) const = 0;
-
-    /**
-     * @brief Get the second component in the physical domain of the
-     * characteristic feet.
-     *
-     * @param[in] r
-     *      First component of the coordinate in the logical domain.
-     * @param[in] th
-     *      Second component of the coordinate in the logical domain.
-     * @param[in] t
-     *      Time component.
-     *
-     * @return The value of the second component in the physical domain of the
-     * characteristic feet.
-     */
-    virtual double exact_feet_y(double r, double th, double t) const = 0;
+    virtual CoordXY exact_feet(CoordXY coord, double t) const = 0;
 };
 
 
@@ -297,24 +256,22 @@ public:
         , m_y_bar(0.) {};
     ~AdvectionField_decentred_rotation() {};
 
-    double x_value(double const x, double const y, double const t) const final
+    CoordXY operator()(CoordXY const coord, double const t) const final
     {
-        return m_omega * (m_yc - y);
+        double const x = m_omega * (m_yc - ddc::get<RDimY>(coord));
+        double const y = m_omega * (ddc::get<RDimX>(coord) - m_xc);
+        return CoordXY(x, y);
     };
 
-    double y_value(double const x, double const y, double const t) const final
+    CoordXY exact_feet(CoordXY coord, double const t) const final
     {
-        return m_omega * (x - m_xc);
-    };
-
-    double exact_feet_x(double const x, double const y, double const t) const final
-    {
-        return m_xc + (x - m_xc) * std::cos(m_omega * -t) - (y - m_yc) * std::sin(m_omega * -t);
-    };
-
-    double exact_feet_y(double const x, double const y, double const t) const final
-    {
-        return m_yc + (x - m_xc) * std::sin(m_omega * -t) + (y - m_yc) * std::cos(m_omega * -t);
+        double const x = ddc::get<RDimX>(coord);
+        double const y = ddc::get<RDimY>(coord);
+        double const foot_x
+                = m_xc + (x - m_xc) * std::cos(m_omega * -t) - (y - m_yc) * std::sin(m_omega * -t);
+        double const foot_y
+                = m_yc + (x - m_xc) * std::sin(m_omega * -t) + (y - m_yc) * std::cos(m_omega * -t);
+        return CoordXY(foot_x, foot_y);
     };
 };
 
@@ -338,8 +295,7 @@ public:
 class AdvectionField_translation : public AdvectionField
 {
 private:
-    double const m_vx;
-    double const m_vy;
+    CoordXY const m_velocity;
 
 public:
     /**
@@ -350,27 +306,18 @@ public:
      * @param[in] vy
      *      The constant second component of the advection field in the physical domain.
      */
-    AdvectionField_translation(CoordVx vx, CoordVy vy) : m_vx(vx), m_vy(vy) {};
+    AdvectionField_translation(CoordVx vx, CoordVy vy)
+        : m_velocity(ddc::get<RDimVx>(vx), ddc::get<RDimVy>(vy)) {};
     ~AdvectionField_translation() {};
 
-    double x_value(double const x, double const y, double const t) const final
+    CoordXY operator()(CoordXY const coord, double const t) const final
     {
-        return m_vx;
+        return m_velocity;
     };
 
-    double y_value(double const x, double const y, double const t) const final
+    CoordXY exact_feet(CoordXY coord, double const t) const final
     {
-        return m_vy;
-    };
-
-    double exact_feet_x(double const x, double const y, double const t) const final
-    {
-        return x - t * m_vx;
-    };
-
-    double exact_feet_y(double const x, double const y, double const t) const final
-    {
-        return y - t * m_vy;
+        return coord - t * m_velocity;
     };
 };
 
@@ -414,36 +361,21 @@ public:
     AdvectionField_rotation(CoordVr vr, CoordVp vp) : m_vr(vr), m_vp(vp), m_mapping() {};
     ~AdvectionField_rotation() {};
 
-    double x_value(double const x, double const y, double const t) const final
+    CoordXY operator()(CoordXY const coord, double const t) const final
     {
-        CoordRP const coord_rp(m_mapping(CoordXY(x, y)));
-        double const vx
-                = m_vr * m_mapping.jacobian_11(coord_rp) + m_vp * m_mapping.jacobian_12(coord_rp);
-        return vx;
+        CoordRP const coord_rp(m_mapping(coord));
+        std::array<std::array<double, 2>, 2> jacobian;
+        m_mapping.jacobian_matrix(coord_rp, jacobian);
+        double const vx = m_vr * jacobian[0][0] + m_vp * jacobian[0][1];
+        double const vy = m_vr * jacobian[1][0] + m_vp * jacobian[1][1];
+        return CoordXY(vx, vy);
     };
 
-    double y_value(double const x, double const y, double const t) const final
+    CoordXY exact_feet(CoordXY coord_xy, double const t) const final
     {
-        CoordRP const coord_rp(m_mapping(CoordXY(x, y)));
-        double const vy
-                = m_vr * m_mapping.jacobian_21(coord_rp) + m_vp * m_mapping.jacobian_22(coord_rp);
-        return vy;
-    };
-
-    double exact_feet_x(double const x, double const y, double const t) const final
-    {
-        CoordRP const coord_rp(m_mapping(CoordXY(x, y)));
-        double const r = ddc::get<RDimR>(coord_rp) - t * m_vr;
-        double const theta = ddc::get<RDimP>(coord_rp) - t * m_vp;
-        return ddc::get<RDimX>(CoordXY(m_mapping(CoordRP(r, theta))));
-    };
-
-    double exact_feet_y(double const x, double const y, double const t) const final
-    {
-        CoordRP const coord_rp(m_mapping(CoordXY(x, y)));
-        double const r = ddc::get<RDimR>(coord_rp) - t * m_vr;
-        double const theta = ddc::get<RDimP>(coord_rp) - t * m_vp;
-        return ddc::get<RDimY>(CoordXY(m_mapping(CoordRP(r, theta))));
+        CoordRP const coord_rp(m_mapping(coord_xy));
+        CoordRP const velocity(m_vr, m_vp);
+        return m_mapping(coord_rp - t * velocity);
     };
 };
 
@@ -493,21 +425,21 @@ public:
     /**
      * @brief Get the advection field of the simulation.
      *
-     * @return A pointer to the advection field created in the AdvectionSimulation child class.
+     * @return A constant reference to the advection field created in the AdvectionSimulation child class.
      */
-    std::unique_ptr<AdvectionField> get_advection_field()
+    AdvectionField const& get_advection_field() const
     {
-        return std::make_unique<AdvectionField>(m_advection_field);
+        return m_advection_field;
     };
 
     /**
      * @brief Get the test function of the simulation.
      *
-     * @return A pointer to the test function created in the AdvectionSimulation child class.
+     * @return A constant reference to the test function created in the AdvectionSimulation child class.
      */
-    std::unique_ptr<FunctionToBeAdvected> get_test_function()
+    FunctionToBeAdvected const& get_test_function() const
     {
-        return std::make_unique<FunctionToBeAdvected>(m_function);
+        return m_function;
     };
 };
 

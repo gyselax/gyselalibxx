@@ -56,7 +56,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-from advection_functions import set_input, execute, params_file, treatment_feet, distance
+from advection_functions import set_input, execute, treatment_feet, distance, get_simulation_config
 
 
 # Definition of functions ---------------------------------------
@@ -177,13 +177,14 @@ def set_plot_imshow(index, Values_list, title):
 
 
 # Get the inputs ------------------------------------------------
-executable, rmin, rmax, Nr, Nt, dt0, T, curves, feet, _ = set_input(0, 1, 40, 80, 0.1, 0.8,  False, True)
+executable, yaml_parameters, _, verbose = set_input(0, 1, 40, 80, 0.1, 0.8,  False, True)
 
 executable_name = os.path.basename(executable)
 if executable_name == "advection_ALL" :
     print("Choose an executable of one simulation, not advection_ALL which launches severals simulations.")
 assert(executable_name != "advection_ALL")
 
+dt0 = yaml_parameters['time_step']
 max_pow = 9
 DT = [dt0 * 2**(-i) for i in range(0,max_pow)]
 
@@ -193,14 +194,21 @@ ERR_d = []
 ERR_d_init_end = []
 L_exact_Fr, L_exact_Fp, L_computed_Fr, L_computed_Fp  = [], [], [], []
 for dt in DT:
+    yaml_parameters['time_step'] = dt
     # Execute the test file given as input in the command -------
-    execute(executable, rmin, rmax, Nr, Nt, dt, T, curves, True)
+    out = execute(executable, yaml_parameters, verbose)
 
-    namefile1 = "output/feet_computed_-1.txt"
-    namefile2 = "output/feet_exact_-1.txt"
+    mapping, method, domain, simulation, name = get_simulation_config(executable)
+
+    output_folder = f'{mapping.replace(" ","_")}_{domain}-{method.replace(" ","_")}-{simulation}_output'
+    namefile1 = os.path.join(output_folder, "feet_computed.txt")
+    namefile2 = os.path.join(output_folder, "feet_exact.txt")
 
     _, _, Cr, Cp, _, _, computed_Fr, computed_Fp, computed_Fx, computed_Fy  = treatment_feet(namefile1)
     _, _, _, _, _, _,  exact_Fr, exact_Fp, exact_Fx, exact_Fy = treatment_feet(namefile2)
+
+    Nr = yaml_parameters['r_size']
+    Nt = yaml_parameters['p_size']
 
     # --- Plot type 1 : the convergence order
     ERR_d += [compute_max_distance_error(Nr+3, Nt, computed_Fx, computed_Fy, exact_Fx, exact_Fy)]
@@ -217,22 +225,9 @@ for dt in DT:
 
 
 
-
-# Put "False" the savings of files for the next launch ----------
-params_file(rmin, rmax, Nr, Nt, dt0, T)
-
-
-# Name of the figure --------------------------------------------
-executable_name = os.path.basename(executable)
-name = executable_name.lower().split('__')
-fct_names = name[2].lower().replace("_", " ")
-fct_names += " with " + name[1].lower().replace("_", " ")
-fct_names += " on " + ' '.join(name[0].split("_")[1:]).lower()
-fct_names = fct_names[0].upper() + fct_names[1:]
-
 # Plot the feet -------------------------------------------------
 fig = plt.figure(figsize = (20,20))
-fig.suptitle(fct_names, fontsize=16)
+fig.suptitle(name, fontsize=16)
 
 
 set_plot_slope(341, ERR_d,  f"Time errors on distance between \n exact and computed ({Nr}x{Nt})")
