@@ -35,14 +35,6 @@ public:
         // mass of the particles of all kinetic species
         ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> m_mass;
 
-        // Initial perturbation amplitude of all kinetic species
-        ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
-                m_perturb_amplitude;
-
-        // Initial perturbation mode of all kinetic species
-        ddc::Chunk<int, discrete_domain_type, ddc::KokkosAllocator<int, MemorySpace>>
-                m_perturb_mode;
-
         // workaround to access charges on the device
         ddc::ChunkView<int, discrete_domain_type, std::experimental::layout_right, MemorySpace>
                 m_charge_view;
@@ -65,36 +57,24 @@ public:
         explicit Impl(Impl<OMemorySpace> const& impl)
             : m_charge(impl.m_charge.domain())
             , m_mass(impl.m_mass.domain())
-            , m_perturb_amplitude(impl.m_perturb_amplitude.domain())
-            , m_perturb_mode(impl.m_perturb_mode.domain())
             , m_ielec(impl.m_ielec)
         {
             m_charge_view = m_charge.span_cview();
             m_mass_view = m_mass.span_cview();
             ddc::deepcopy(m_charge, impl.m_charge);
             ddc::deepcopy(m_mass, impl.m_mass);
-            ddc::deepcopy(m_perturb_amplitude, impl.m_perturb_amplitude);
-            ddc::deepcopy(m_perturb_mode, impl.m_perturb_mode);
         }
 
         /**
          * @brief Main constructor taking all attributes
          * @param[in] charge array storing both kinetic and adiabatic charges
          * @param[in] mass array storing both kinetic and adiabatic masses
-         * @param[in] perturb_amplitude array storing kinetic pertubation amplitudes
-         * @param[in] perturb_mode array storing kinetic pertubation modes
          */
         Impl(ddc::Chunk<int, discrete_domain_type, ddc::KokkosAllocator<int, MemorySpace>> charge,
              ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
-                     mass,
-             ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
-                     perturb_amplitude,
-             ddc::Chunk<int, discrete_domain_type, ddc::KokkosAllocator<int, MemorySpace>>
-                     perturb_mode)
+                     mass)
             : m_charge(std::move(charge))
             , m_mass(std::move(mass))
-            , m_perturb_amplitude(std::move(perturb_amplitude))
-            , m_perturb_mode(std::move(perturb_mode))
         {
             m_charge_view = m_charge.span_cview();
             m_mass_view = m_mass.span_cview();
@@ -145,18 +125,6 @@ public:
         auto masses() const
         {
             return m_mass.span_view();
-        }
-
-        /// @return kinetic perturbation amplitudes array
-        auto perturb_amplitudes() const
-        {
-            return m_perturb_amplitude.span_view();
-        }
-
-        /// @return kinetic perturbation modes array
-        auto perturb_modes() const
-        {
-            return m_perturb_mode.span_view();
         }
     };
 };

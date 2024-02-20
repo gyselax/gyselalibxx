@@ -59,12 +59,12 @@ import matplotlib.pyplot as plt
 
 from matplotlib.animation import FuncAnimation
 
-from advection_functions import set_input, execute, params_file, treatment, get_full_fct_names
+from advection_functions import set_input, execute, treatment, get_simulation_config
 
 
 
 # ---------------------------------------------------------------------------
-def animate (iter_nb, file_name, test_name, function_number):
+def animate (iter_nb, file_name, test_name, output_folder):
     """
     Save an animated version of the selected advection simulations.
 
@@ -79,10 +79,6 @@ def animate (iter_nb, file_name, test_name, function_number):
 
     test_name : string
         The title of the test simulation.
-
-    function_number : int
-        The number refering to the selected test case.
-        (See explanations string.)
     """
     iter_nb_lim = 100
     if iter_nb < iter_nb_lim:
@@ -93,7 +89,7 @@ def animate (iter_nb, file_name, test_name, function_number):
 
     zarray = []
     for idx in iter_numbers:
-        namefile = f"output/curves_{function_number}/after_{idx}.txt"
+        namefile = os.path.join(output_folder, f"after_{idx}.txt")
         list_F, _, _,  CoordX, CoordY = treatment(namefile)
 
         zarray += [[CoordX, CoordY, list_F]]
@@ -187,15 +183,12 @@ explanations  = """
 
 
 # Get the inputs -----------------------------------------------
-executable, rmin, rmax, Nr, Nt, dt, T, curves, feet, _ = set_input(0, 1, 60, 120, 0.01, 0.8,  True, False)
+executable, yaml_parameters, _, verbose = set_input(0, 1, 60, 120, 0.01, 0.8,  True, False)
 
 executable_name = os.path.basename(executable)
 
-if os.path.isdir("output"):
-    answer1 = input("Do you want to launch the executable? [y/n]: ")
-    ask_execute = (answer1=="y")
-else :
-    ask_execute = True
+answer1 = input("Do you want to launch the executable? [y/n]: ")
+ask_execute = (answer1=="y")
 
 
 if executable_name == "advection_ALL":
@@ -207,16 +200,7 @@ ask_remove = (answer3=="y")
 
 if ask_execute :
     # Execute the test file given as input in the command ----------
-    out = execute(executable, rmin, rmax, Nr, Nt, dt, T, True, feet)
-    fct_names = get_full_fct_names(out)
-
-    # Put "False" the savings of files for the next launch ---------
-    params_file(rmin, rmax, Nr, Nt, dt, T)
-
-else :
-    out = execute(executable, rmin, rmax, 4, 4, T, T, False, feet, False)
-    fct_names = get_full_fct_names(out)
-
+    out = execute(executable, yaml_parameters, verbose)
 
 
 # Display the curves --------------------------------------------
@@ -231,26 +215,31 @@ if executable_name == "advection_ALL":
             else :
                 [a, b] = el.split("-")
                 selected_test += list(range(int(a), int(b) + 1))
+    possible_output_folder_names = [d for d in os.listdir() if d.endswith('_output') and d.count('-')==2]
+    output_folder_names = [possible_output_folder_names[s] for s in selected_test]
+    keys = [folder.replace('_output','').split('-') for folder in output_folder_names]
+    fct_names = [f'{simulation.capitalize()} with {method.replace("_"," ")} on {mapping.replace("_", " ")}'
+                 for mapping, method, simulation in keys]
 else :
-    name = executable_name.lower().split('__')
-    fct_names = [name[2].lower().replace("_", " ") ]
-    fct_names[0] += " with " + name[1].lower().replace("_", " ")
-    fct_names[0] += " on " + ' '.join(name[0].split("_")[1:]).lower()
-    fct_names[0] = fct_names[0][0].upper() + fct_names[0][1:]
+    mapping, method, domain, simulation, name = get_simulation_config(executable)
+    output_folder_names = [f'{mapping.replace(" ","_")}_{domain}-{method.replace(" ","_")}-{simulation}_output']
+    fct_names = [name]
     selected_test = [-1]
 
-
-if executable_name == "advection_ALL":
-    DT = ([dt/10] * 3 + [dt] * 9)*4
-else:
-    DT = [dt]
-
+rmin = yaml_parameters['r_min']
+rmax = yaml_parameters['r_max']
+Nr = yaml_parameters['r_size']
+Nt = yaml_parameters['p_size']
+dt0 = yaml_parameters['time_step']
+T = yaml_parameters['final_time']
 details1 = f"_{Nr}x{Nt}_[{rmin}_{rmax}]"
-for s in selected_test:
-    dt = DT[s]
+for i, (name, folder) in enumerate(zip(fct_names, output_folder_names)):
+    dt = dt0
+    if 'euler' in folder:
+        dt *= 0.1
     iter_nb = int(T/dt)
     details2 = f"\n $NrxNt$ = {Nr}x{Nt}; [$rmin$,$rmax$] = [{rmin},{rmax}]; dt = {dt}"
-    animate(iter_nb, fct_names[s].replace(" ", "_")+details1, fct_names[s]+details2, s)
+    animate(iter_nb, name.replace(" ", "_")+details1, name+details2, folder)
 
     if executable_name == "advection_ALL":
         print(f"The animation of the {selected_test} test case have been saved in ./animations/ folder.")
@@ -261,7 +250,9 @@ for s in selected_test:
 
 
 if ask_remove:
-    shutil.rmtree("output")
-    print("The ./output/ folder has been removed.")
+    delete_folders = possible_output_folder_names if executable_name == "advection_ALL" else output_folder_names
+    for folder in delete_folders:
+        shutil.rmtree(folder)
+        print(f"The {folder} folder has been removed.")
 
 

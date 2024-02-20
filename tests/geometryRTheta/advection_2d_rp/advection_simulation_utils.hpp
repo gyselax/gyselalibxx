@@ -48,6 +48,47 @@
 
 namespace fs = std::filesystem;
 
+std::string to_lower(std::string s)
+{
+    std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) {
+        if (c == ' ') {
+            return '_';
+        } else {
+            return static_cast<char>(std::tolower(c));
+        }
+    });
+    return s;
+}
+
+/**
+ * Print the grid position to a file.
+ *
+ * @param[inout] out_file
+ *      The stream to which the output is printed.
+ * @param[in] coord_rp
+ *      The coordinate to be printed.
+ * @param[in] mapping
+ *      The mapping function from the logical domain to the physical domain.
+ * @param[in] p_dom
+ *      The domain to which the poloidal coordinate should be restricted.
+ */
+template <class Mapping>
+void print_coordinate(
+        std::ofstream& out_file,
+        CoordRP coord_rp,
+        Mapping const& mapping,
+        IDomainP p_dom)
+{
+    double const r = ddc::get<RDimR>(coord_rp);
+    double const th = ddcHelper::restrict_to_domain(ddc::select<RDimP>(coord_rp), p_dom);
+
+    CoordXY coord_xy(mapping(coord_rp));
+    double const x = ddc::get<RDimX>(coord_xy);
+    double const y = ddc::get<RDimY>(coord_xy);
+
+    out_file << std::setw(25) << r << std::setw(25) << th << std::setw(25) << x << std::setw(25)
+             << y;
+}
 
 /**
  * @brief Save the characteristic feet in the logical domain
@@ -70,36 +111,21 @@ void save_feet(
         SpanRP<CoordRP> const& feet_coords_rp,
         std::string const& name)
 {
-    FILE* file_feet_ptr = fopen(name.c_str(), "w");
+    std::ofstream file_feet(name, std::ofstream::out);
+    file_feet << std::fixed << std::setprecision(16);
     ddc::for_each(rp_dom, [&](IndexRP const irp) {
-        double const r = coordinate(ddc::select<IDimR>(irp));
-        double const th = coordinate(ddc::select<IDimP>(irp));
+        IDomainP p_dom = ddc::select<IDimP>(rp_dom);
 
-        CoordXY coord_xy(mapping(CoordRP(r, th)));
-        double const x = ddc::get<RDimX>(coord_xy);
-        double const y = ddc::get<RDimY>(coord_xy);
+        IndexR const ir(ddc::select<IDimR>(irp));
+        IndexP const ip(ddc::select<IDimP>(irp));
 
-        double const feet_r = ddc::get<RDimR>(feet_coords_rp(irp));
-        double const feet_th = ddcHelper::
-                restrict_to_domain(ddc::select<RDimP>(feet_coords_rp(irp)), IDomainP(rp_dom));
-
-        CoordXY feet_xy(mapping(CoordRP(feet_r, feet_th)));
-        double const feet_x = ddc::get<RDimX>(feet_xy);
-        double const feet_y = ddc::get<RDimY>(feet_xy);
-
-
-        fprintf(file_feet_ptr, "%10.0f", double(ddc::select<IDimR>(irp).uid()));
-        fprintf(file_feet_ptr, "   %10.0f", double(ddc::select<IDimP>(irp).uid()));
-        fprintf(file_feet_ptr, "   %10.16f", r);
-        fprintf(file_feet_ptr, "   %10.16f", th);
-        fprintf(file_feet_ptr, "   %10.16f", x);
-        fprintf(file_feet_ptr, "   %10.16f", y);
-        fprintf(file_feet_ptr, "   %10.16f", feet_r);
-        fprintf(file_feet_ptr, "   %10.16f", feet_th);
-        fprintf(file_feet_ptr, "   %10.16f", feet_x);
-        fprintf(file_feet_ptr, "   %10.16f\n", feet_y);
+        file_feet << std::setw(15) << ddc::select<IDimR>(irp).uid() << std::setw(15)
+                  << ddc::select<IDimP>(irp).uid();
+        print_coordinate(file_feet, ddc::coordinate(irp), mapping, p_dom);
+        print_coordinate(file_feet, feet_coords_rp(irp), mapping, p_dom);
+        file_feet << std::endl;
     });
-    fclose(file_feet_ptr);
+    file_feet.close();
 };
 
 
@@ -117,32 +143,22 @@ void save_feet(
 template <class Mapping>
 void saving_computed(Mapping const& mapping, DSpanRP function, std::string const& name)
 {
-    auto const grid = ddc::get_domain<IDimR, IDimP>(function);
+    IDomainRP const grid = function.domain();
+    std::ofstream out_file(name, std::ofstream::out);
+    out_file << std::fixed << std::setprecision(16);
 
-
-    FILE* file_ptr = fopen(name.c_str(), "w");
     for_each(grid, [&](IndexRP const irp) {
-        double const r = ddc::coordinate(ddc::select<IDimR>(irp));
-        double const th = ddc::coordinate(ddc::select<IDimP>(irp));
-
-        CoordXY coord_xy(mapping(CoordRP(r, th)));
-        double const x = ddc::get<RDimX>(coord_xy);
-        double const y = ddc::get<RDimY>(coord_xy);
+        IDomainP p_dom = ddc::select<IDimP>(grid);
 
         IndexR const ir(ddc::select<IDimR>(irp));
         IndexP const ip(ddc::select<IDimP>(irp));
 
-        fprintf(file_ptr, "%10.0f", double(ir.uid()));
-        fprintf(file_ptr, "   %10.0f", double(ip.uid()));
-        fprintf(file_ptr, "   %10.0f", 0.);
-        fprintf(file_ptr, "   %10.0f", 0.);
-        fprintf(file_ptr, "   %10.16f", r);
-        fprintf(file_ptr, "   %10.16f", th);
-        fprintf(file_ptr, "   %10.16f", x);
-        fprintf(file_ptr, "   %10.16f", y);
-        fprintf(file_ptr, "   %10.16f \n", function(irp));
+        out_file << std::setw(15) << ir.uid() << std::setw(15) << ip.uid();
+        print_coordinate(out_file, ddc::coordinate(irp), mapping, p_dom);
+        out_file << std::setw(25) << function(irp);
+        out_file << std::endl;
     });
-    fclose(file_ptr);
+    out_file.close();
 }
 
 /**
@@ -169,20 +185,14 @@ FieldRP<CoordRP> compute_exact_feet_rp(
         AdvectionField const& advection_field,
         double const time)
 {
-    assert(typeid(mapping) != typeid(DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>));
+    static_assert(!std::is_same_v<Mapping, DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>>);
 
     FieldRP<CoordRP> feet_coords_rp(rp_dom);
     CoordXY const coord_xy_center = CoordXY(mapping(CoordRP(0, 0)));
 
     ddc::for_each(rp_dom, [&](IndexRP const irp) {
         CoordRP const coord_rp = ddc::coordinate(irp);
-        CoordXY coord_xy = mapping(coord_rp);
-        double const x = ddc::get<RDimX>(coord_xy);
-        double const y = ddc::get<RDimY>(coord_xy);
-
-        double const feet_x = advection_field.exact_feet_x(x, y, time);
-        double const feet_y = advection_field.exact_feet_y(x, y, time);
-        coord_xy = CoordXY(feet_x, feet_y);
+        CoordXY const coord_xy = advection_field.exact_feet(mapping(coord_rp), time);
 
         CoordXY const coord_diff = coord_xy - coord_xy_center;
         if (norm_inf(coord_diff) < 1e-15) {
@@ -226,9 +236,7 @@ double compute_difference_L2_norm(
 {
     DFieldRP exact_function(grid);
     ddc::for_each(grid, [&](IndexRP const irp) {
-        double const feet_r = ddc::get<RDimR>(feet_coord(irp));
-        double const feet_th = ddc::get<RDimP>(feet_coord(irp));
-        exact_function(irp) = function_to_be_advected(feet_r, feet_th);
+        exact_function(irp) = function_to_be_advected(feet_coord(irp));
     });
 
     DFieldRP quadrature_coeffs
@@ -298,10 +306,10 @@ void display_time(
  *      The final time of the simulation.
  * @param[in] dt
  *      The time step.
- * @param[in] if_save_curves
+ * @param[in] save_curves
  *      A boolean to select if the values of the function are saved in a text file
  *      for each time step. True: save in output folder; False: do not save.
- * @param[in] if_save_feet
+ * @param[in] save_feet
  *      A boolean to select if the values of the characteristic for the last time step
  *      are saved in a text file. True: save in output folder; False: do not save.
  * @param[in] counter_function
@@ -341,17 +349,10 @@ void simulate(
         SplineRPEvaluator& advection_evaluator,
         double const final_time,
         double const dt,
-        bool const& if_save_curves,
-        bool const& if_save_feet,
-        int const& counter_function)
+        bool if_save_curves,
+        bool if_save_feet,
+        std::string const& output_folder)
 {
-    if (if_save_curves or if_save_feet) {
-        fs::create_directory("output");
-    }
-    if (if_save_curves) {
-        fs::create_directory("output/curves_" + std::to_string(counter_function));
-    }
-
     SplineFootFinder<TimeStepper, AdvectionDomain> const foot_finder(
             time_stepper,
             advection_domain,
@@ -360,8 +361,8 @@ void simulate(
             advection_evaluator);
 
     BslAdvectionRP advection_operator(function_interpolator, foot_finder);
-    auto function_to_be_advected_test = *(simulation.get_test_function());
-    auto advection_field_test = *(simulation.get_advection_field());
+    auto function_to_be_advected_test = simulation.get_test_function();
+    auto advection_field_test = simulation.get_advection_field();
 
 
 
@@ -387,12 +388,11 @@ void simulate(
 
     // Initialization of the advected function:
     for_each(grid, [&](IndexRP const irp) {
-        double const r = coordinate(ddc::select<IDimR>(irp));
-        double th = coordinate(ddc::select<IDimP>(irp));
-        if (r <= 1e-15) {
-            th = 0;
+        CoordRP coord = coordinate(irp);
+        if (ddc::get<RDimR>(coord) <= 1e-15) {
+            ddc::get<RDimP>(coord) = 0;
         }
-        allfdistribu_test(irp) = function_to_be_advected_test(r, th);
+        allfdistribu_test(irp) = function_to_be_advected_test(coord);
     });
 
 
@@ -401,14 +401,11 @@ void simulate(
     for_each(grid, [&](IndexRP const irp) {
         // Moving the coordinates in the physical domain:
         CoordXY const coord_xy = mapping(ddc::coordinate(irp));
-        double const x = ddc::get<RDimX>(coord_xy);
-        double const y = ddc::get<RDimY>(coord_xy);
+        CoordXY const advection_field = advection_field_test(coord_xy, 0.);
 
         // Define the advection field on the physical domain:
-        ddcHelper::get<RDimX>(advection_field_test_vec)(irp)
-                = advection_field_test.x_value(x, y, 0.);
-        ddcHelper::get<RDimY>(advection_field_test_vec)(irp)
-                = advection_field_test.y_value(x, y, 0.);
+        ddcHelper::get<RDimX>(advection_field_test_vec)(irp) = ddc::get<RDimX>(advection_field);
+        ddcHelper::get<RDimY>(advection_field_test_vec)(irp) = ddc::get<RDimY>(advection_field);
     });
 
 
@@ -420,8 +417,7 @@ void simulate(
 
         // Save the advected function for each iteration:
         if (if_save_curves) {
-            std::string const name = "output/curves_" + std::to_string(counter_function) + "/after_"
-                                     + std::to_string(i + 1) + ".txt";
+            std::string const name = output_folder + "/after_" + std::to_string(i + 1) + ".txt";
             saving_computed(mapping, allfdistribu_advected_test.span_view(), name);
         }
     }
@@ -440,13 +436,9 @@ void simulate(
     // Compute the maximal absolute error on the space at the end of the simulation:
     double max_err = 0.;
     for_each(grid, [&](IndexRP const irp) {
-        double const feet_r = ddc::get<RDimR>(feet_coords_rp_end_time(irp));
-        double const feet_th = ddcHelper::restrict_to_domain(
-                ddc::select<RDimP>(feet_coords_rp_end_time(irp)),
-                ddc::get_domain<IDimP>(feet_coords_rp_end_time));
-
-        double const err = fabs(
-                allfdistribu_advected_test(irp) - function_to_be_advected_test(feet_r, feet_th));
+        double const err
+                = fabs(allfdistribu_advected_test(irp)
+                       - function_to_be_advected_test(feet_coords_rp_end_time(irp)));
         max_err = max_err > err ? max_err : err;
     });
 
@@ -478,30 +470,25 @@ void simulate(
     // Save the computed characteristic feet:
     if (if_save_feet) {
         FieldRP<CoordRP> feet(grid);
+        for_each(grid, [&](const IndexRP irp) { feet(irp) = ddc::coordinate(irp); });
         foot_finder(feet.span_view(), advection_field_test_vec, dt);
-        std::string const name
-                = "output/feet_computed_" + std::to_string(counter_function) + ".txt";
+        std::string const name = output_folder + "/feet_computed.txt";
         save_feet(mapping, grid, feet.span_view(), name);
     }
 
     // Save the values of the exact function at the initial and final states:
     if (if_save_curves) {
-        std::string const name_0 = "output/curves_" + std::to_string(counter_function) + "/after_"
-                                   + std::to_string(0) + ".txt";
-        std::string const name_1 = "output/curves_" + std::to_string(counter_function) + "/after_"
-                                   + std::to_string(iteration_number) + "_exact.txt";
+        std::string const name_0 = output_folder + "/after_" + std::to_string(0) + ".txt";
+        std::string const name_1
+                = output_folder + "/after_" + std::to_string(iteration_number) + "_exact.txt";
 
         DFieldRP initial_function(grid);
         DFieldRP end_function(grid);
         for_each(grid, [&](const IndexRP irp) {
-            double const r = coordinate(ddc::select<IDimR>(irp));
-            double const th = coordinate(ddc::select<IDimP>(irp));
-            initial_function(irp) = function_to_be_advected_test(r, th);
+            initial_function(irp) = function_to_be_advected_test(ddc::coordinate(irp));
 
             // Exact final state
-            double const feet_r = ddc::get<RDimR>(feet_coords_rp_end_time(irp));
-            double const feet_th = ddc::get<RDimP>(feet_coords_rp_end_time(irp));
-            end_function(irp) = function_to_be_advected_test(feet_r, feet_th);
+            end_function(irp) = function_to_be_advected_test(feet_coords_rp_end_time(irp));
         });
         saving_computed(mapping, initial_function.span_view(), name_0);
         saving_computed(mapping, end_function.span_view(), name_1);
@@ -511,7 +498,7 @@ void simulate(
 
     // Save the exact characteristic feet for a displacement on dt:
     if (if_save_feet) {
-        std::string const name = "output/feet_exact_" + std::to_string(counter_function) + ".txt";
+        std::string const name = output_folder + "/feet_exact.txt";
         save_feet(mapping, grid, feet_coords_rp_dt.span_view(), name);
     }
 
@@ -550,10 +537,10 @@ void simulate(
  *      The final time of the simulation.
  * @param[in] dt
  *      The time step.
- * @param[in] if_save_curves
+ * @param[in] save_curves
  *      A boolean to select if the values of the function are saved in a text file
  *      for each time step. True: save in output folder; False: do not save.
- * @param[in] if_save_feet
+ * @param[in] save_feet
  *      A boolean to select if the values of the characteristic for the last time step
  *      are saved in a text file. True: save in output folder; False: do not save.
  * @param[in] counter_function
@@ -578,9 +565,9 @@ void simulate_the_3_simulations(
         SplineRPEvaluator& advection_evaluator,
         double const final_time,
         double const dt,
-        bool const& if_save_curves,
-        bool const& if_save_feet,
-        int& counter_function,
+        bool const& save_curves,
+        bool const& save_feet,
+        std::string const& output_stem,
         std::string const& title)
 {
     auto const r_domain = ddc::select<IDimR>(grid);
@@ -595,7 +582,10 @@ void simulate_the_3_simulations(
     std::string const title_simu_2 = " ROTATION : ";
     std::string const title_simu_3 = " DECENTRED ROTATION : ";
 
-
+    std::string output_folder = output_stem + "Translation_output";
+    if (save_curves or save_feet) {
+        fs::create_directory(output_folder);
+    }
     std::cout << title + title_simu_1 << std::endl;
     simulate(
             mapping,
@@ -609,10 +599,14 @@ void simulate_the_3_simulations(
             advection_evaluator,
             final_time,
             dt,
-            if_save_curves,
-            if_save_feet,
-            counter_function++);
+            save_curves,
+            save_feet,
+            output_folder);
 
+    output_folder = output_stem + "Rotation_output";
+    if (save_curves or save_feet) {
+        fs::create_directory(output_folder);
+    }
     std::cout << title + title_simu_2 << std::endl;
     simulate(
             mapping,
@@ -626,10 +620,14 @@ void simulate_the_3_simulations(
             advection_evaluator,
             final_time,
             dt,
-            if_save_curves,
-            if_save_feet,
-            counter_function++);
+            save_curves,
+            save_feet,
+            output_folder);
 
+    output_folder = output_stem + "Decentred_rotation_output";
+    if (save_curves or save_feet) {
+        fs::create_directory(output_folder);
+    }
     std::cout << title + title_simu_3 << std::endl;
     simulate(
             mapping,
@@ -643,7 +641,7 @@ void simulate_the_3_simulations(
             advection_evaluator,
             final_time,
             dt,
-            if_save_curves,
-            if_save_feet,
-            counter_function++);
+            save_curves,
+            save_feet,
+            output_folder);
 }

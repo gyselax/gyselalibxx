@@ -55,7 +55,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-from advection_functions import set_input, execute, params_file, treatment
+from advection_functions import set_input, execute, treatment, get_simulation_config
 
 # Definition of functions ---------------------------------------
 def set_axis(ax, x_label, y_label, z_label, ax_label):
@@ -124,7 +124,7 @@ def set_surface(fig, nb_x, nb_y, n_idx, X, Y, Z, elev, azim, roll):
     return ax
 
 
-def display(iter_nb, dt, title, subtitle):
+def display(iter_nb, dt, title, subtitle, output_folder):
     """
     Plot the advected function for different time steps.
 
@@ -145,7 +145,7 @@ def display(iter_nb, dt, title, subtitle):
     Idx_list = [0]+[min(i*(iter_nb//9) + 1,iter_nb) for i in range(9)] + [iter_nb]
     for n_idx in range(9 + 2):
         idx = Idx_list[n_idx]
-        namefile = f"output/curves/after_{idx}.txt"
+        namefile = os.path.join(output_folder, f"after_{idx}.txt")
         list_F, _, _, CoordX, CoordY = treatment(namefile)
 
         X = np.array(CoordX)
@@ -155,17 +155,17 @@ def display(iter_nb, dt, title, subtitle):
         ax = set_surface(fig, 3, 5, n_idx, X, Y, Z, 90, -90, 0)
 
         if idx == 0 :
-            plt.title(f"Initial condition\n (maximum = {max(Z)}) ")
+            plt.title(f"Initial condition\n (maximum = {max(Z):.3}) ")
         elif idx <iter_nb-1:
-            plt.title(f"Advected {idx} time"+"s"*(idx!=1)+f" (dt = {dt})\n (maximum = { max(Z)}) ")
+            plt.title(f"Advected {idx} time"+"s"*(idx!=1)+f" (dt = {dt:.3})\n (maximum = {max(Z):.3}) ")
         else:
-            plt.title(f"Final state ({iter_nb} times)\n (maximum = { max(Z)}) ")
+            plt.title(f"Final state ({iter_nb} times)\n (maximum = {max(Z):.3}) ")
 
         set_axis(ax, "x", "y", "z", "equal")
 
 
-    namefile_final = f"output/curves/after_{iter_nb}.txt"
-    namefile_exact = f"output/curves/after_{iter_nb}_exact.txt"
+    namefile_final = os.path.join(output_folder, f"after_{iter_nb}.txt")
+    namefile_exact = os.path.join(output_folder, f"after_{iter_nb}_exact.txt")
     list_F_final, _, _, CoordX, CoordY = treatment(namefile_final)
     list_F_exact, _, _, CoordX, CoordY = treatment(namefile_exact)
 
@@ -181,16 +181,16 @@ def display(iter_nb, dt, title, subtitle):
     set_axis(ax, "x", "y", "z", "equal")
 
     ax = set_surface(fig, 3, 5, 12, X, Y, Z, 90, -90, 0)
-    plt.title(f"Difference (=exact-advected)\n max error = {max(abs(Z))} ")
+    plt.title(f"Difference (=exact-advected)\n max error = {max(abs(Z)):.3} ")
     set_axis(ax, "x", "y", "z", "equal")
 
     ax = set_surface(fig, 3, 5, 13, X, Y, Z, 45, -45, 0)
-    plt.title(f"Difference (=exact-advected)\n max error = {max(abs(Z))} ")
+    plt.title(f"Difference (=exact-advected)\n max error = {max(abs(Z)):.3} ")
     set_axis(ax, "x", "y", "z", "on")
 
 
     ax = set_surface(fig, 3, 5, 14, X, Y, -Z, 45, -45, 0)
-    plt.title(f"Difference (=-(exact-advected))\n max error = {max(abs(Z))} ")
+    plt.title(f"Difference (=-(exact-advected))\n max error = {max(abs(Z)):.3} ")
     set_axis(ax, "x", "y", "-z", "on")
 
 
@@ -201,7 +201,7 @@ def display(iter_nb, dt, title, subtitle):
 
 
 # Get the inputs -----------------------------------------------
-executable, rmin, rmax, Nr, Nth, dt, T, curves, feet, _ = set_input(0, 1, 60, 120, 0.01, 0.8,  True, False)
+executable, yaml_parameters, _, verbose = set_input(0, 1, 60, 120, 0.01, 0.8,  True, False)
 
 executable_name = os.path.basename(executable)
 if executable_name == "advection_ALL" :
@@ -210,23 +210,22 @@ assert(executable_name != "advection_ALL")
 
 
 # Execute the test file given as input in the command ----------
-execute(executable, rmin, rmax, Nr, Nth, dt, T, True, feet)
-
-# Put "False" the savings of file for the next launch ----------
-params_file(rmin, rmax, Nr, Nth, dt, T)
+out = execute(executable, yaml_parameters, verbose)
 
 
 # Display the curves --------------------------------------------
-fct_names = [executable_name.lower()]
-fct_names[0].replace("__", " with ", 1)
-fct_names[0].replace("__", " of ", 1)
-fct_names[0].replace("_", " ")
-fct_names[0][0].upper()
+mapping, method, domain, simulation, name = get_simulation_config(executable)
 
-
+rmin = yaml_parameters['r_min']
+rmax = yaml_parameters['r_max']
+Nr = yaml_parameters['r_size']
+Nth = yaml_parameters['p_size']
+dt = yaml_parameters['time_step']
+T = yaml_parameters['final_time']
 iter_nb = int(T/dt)
 details = f"\n $NrxNt$ = {Nr}x{Nth}; [$rmin$,$rmax$] = [{rmin},{rmax}]."
-display(iter_nb, dt, executable_name, fct_names+details)
+output_folder = f'{mapping.replace(" ","_")}_{domain}-{method.replace(" ","_")}-{simulation}_output'
+display(iter_nb, dt, executable_name, name, output_folder)
 
 
 
