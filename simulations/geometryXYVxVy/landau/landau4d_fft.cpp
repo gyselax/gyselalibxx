@@ -179,11 +179,7 @@ int main(int argc, char** argv)
     }
 
     // Initialization of the distribution function
-    ddc::init_discrete_space<IDimSp>(
-            std::move(charges),
-            std::move(masses),
-            std::move(init_perturb_amplitude),
-            std::move(init_perturb_mode));
+    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
     DFieldSpVxVy allfequilibrium(meshSpVxVy);
     MaxwellianEquilibrium const init_fequilibrium(
             std::move(density_eq),
@@ -193,8 +189,8 @@ int main(int argc, char** argv)
     DFieldSpXYVxVy allfdistribu(meshSpXYVxVy);
     SingleModePerturbInitialization const
             init(allfequilibrium,
-                 ddc::host_discrete_space<IDimSp>().perturb_modes(),
-                 ddc::host_discrete_space<IDimSp>().perturb_amplitudes());
+                 init_perturb_mode.span_cview(),
+                 init_perturb_amplitude.span_cview());
     init(allfdistribu);
 
     // --> Algorithm info

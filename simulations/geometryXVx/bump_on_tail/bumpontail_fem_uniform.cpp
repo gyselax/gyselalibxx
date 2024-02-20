@@ -143,11 +143,7 @@ int main(int argc, char** argv)
     }
 
     // Initialization of the distribution function
-    ddc::init_discrete_space<IDimSp>(
-            std::move(charges),
-            std::move(masses),
-            std::move(init_perturb_amplitude),
-            std::move(init_perturb_mode));
+    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
     device_t<DFieldSpVx> allfequilibrium_device(meshSpVx);
     BumpontailEquilibrium const init_fequilibrium(
             std::move(epsilon_bot),
@@ -162,8 +158,8 @@ int main(int argc, char** argv)
     if (iter_start == 0) {
         SingleModePerturbInitialization const
                 init(allfequilibrium_device,
-                     ddc::host_discrete_space<IDimSp>().perturb_modes(),
-                     ddc::host_discrete_space<IDimSp>().perturb_amplitudes());
+                     init_perturb_mode.span_cview(),
+                     init_perturb_amplitude.span_cview());
         init(allfdistribu_device);
     } else {
         RestartInitialization const restart(iter_start, time_start);

@@ -63,24 +63,14 @@ TEST(KrookSource, Adaptive)
 
     FieldSp<int> charges(dom_sp);
     DFieldSp masses(dom_sp);
-    FieldSp<int> init_perturb_mode(dom_sp);
-    DFieldSp init_perturb_amplitude(dom_sp);
     IndexSp my_iion(dom_sp.front());
     IndexSp my_ielec(dom_sp.back());
     charges(my_iion) = 1;
     charges(my_ielec) = -1;
-    ddc::for_each(dom_sp, [&](IndexSp const isp) {
-        masses(isp) = 1.0;
-        init_perturb_mode(isp) = 0;
-        init_perturb_amplitude(isp) = 0.0;
-    });
+    ddc::for_each(dom_sp, [&](IndexSp const isp) { masses(isp) = 1.0; });
 
     // Initialization of the distribution function
-    ddc::init_discrete_space<IDimSp>(
-            std::move(charges),
-            std::move(masses),
-            std::move(init_perturb_amplitude),
-            std::move(init_perturb_mode));
+    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
 
     double const extent = 0.5;
     double const stiffness = 0.01;
@@ -208,22 +198,12 @@ TEST(KrookSource, Constant)
 
     FieldSp<int> charges(dom_sp);
     DFieldSp masses(dom_sp);
-    FieldSp<int> init_perturb_mode(dom_sp);
-    DFieldSp init_perturb_amplitude(dom_sp);
     charges(dom_sp.front()) = 1;
     charges(dom_sp.back()) = -1;
-    ddc::for_each(dom_sp, [&](IndexSp const isp) {
-        masses(isp) = 1.0;
-        init_perturb_mode(isp) = 0;
-        init_perturb_amplitude(isp) = 0.0;
-    });
+    ddc::for_each(dom_sp, [&](IndexSp const isp) { masses(isp) = 1.0; });
 
     // Initialization of the distribution function
-    ddc::init_discrete_space<IDimSp>(
-            std::move(charges),
-            std::move(masses),
-            std::move(init_perturb_amplitude),
-            std::move(init_perturb_mode));
+    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
 
     double const extent = 0.25;
     double const stiffness = 0.01;

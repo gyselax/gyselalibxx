@@ -73,16 +73,8 @@ TEST(FftPoissonSolver, CosineSource)
     charges(my_iion) = 1;
     DFieldSp masses(dom_sp);
     ddc::fill(masses, 1);
-    FieldSp<int> init_perturb_mode(dom_sp);
-    ddc::fill(init_perturb_mode, 0);
-    DFieldSp init_perturb_amplitude(dom_sp);
-    ddc::fill(init_perturb_amplitude, 0);
 
-    ddc::init_discrete_space<IDimSp>(
-            std::move(charges),
-            std::move(masses),
-            std::move(init_perturb_amplitude),
-            std::move(init_perturb_mode));
+    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
 
     ChargeDensityCalculator rhs(builder_vx_vy, evaluator_vx_vy);
     FftPoissonSolver poisson(rhs);
