@@ -23,8 +23,8 @@ KrookSourceConstant::KrookSourceConstant(
     , m_amplitude(amplitude)
     , m_density(density)
     , m_temperature(temperature)
-    , m_ftarget(gridvx)
     , m_mask(gridx)
+    , m_ftarget(gridvx)
 {
     // mask that defines the region where the operator is active
     DFieldX mask_host(gridx);
