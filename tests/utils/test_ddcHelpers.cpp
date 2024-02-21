@@ -17,7 +17,7 @@ public:
 
 using Coord = Coordinate<Tag>;
 
-}; // namespace
+} // namespace
 
 TEST(DDCHelper, UniformPeriodicRestriction)
 {

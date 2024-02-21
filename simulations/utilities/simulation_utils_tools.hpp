@@ -22,4 +22,4 @@ void display_time_difference(
             = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
     std::cout << title << time_h << "h " << time_min - time_h * 60 << "min "
               << time_s - time_min * 60 << "s " << time_ms - time_s * 1000 << "ms " << std::endl;
-};
+}
