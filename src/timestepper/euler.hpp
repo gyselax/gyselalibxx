@@ -147,5 +147,5 @@ public:
         // ----------- Update y --------------
         // Calculate y_new := y_n + h*k_1
         y_update(y, m_k1, dt);
-    };
+    }
 };

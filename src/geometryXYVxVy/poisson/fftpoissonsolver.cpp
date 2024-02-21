@@ -50,7 +50,7 @@ void FftPoissonSolver::operator()(
             fft(Kokkos::DefaultHostExecutionSpace(),
                 intermediate_chunk.span_view(),
                 rho.span_view(),
-                (ddc::kwArgs_fft) {.normalization = norm});
+                ddc::kwArgs_fft {norm});
 
     // Solve Poisson's equation -d2Phi/dx2 = rho
     //   in Fourier space as -kx*kx*FFT(Phi)=FFT(rho))
@@ -84,7 +84,7 @@ void FftPoissonSolver::operator()(
             ifft(Kokkos::DefaultHostExecutionSpace(),
                  electric_field_x.span_view(),
                  fourier_efield.span_view(),
-                 ddc::kwArgs_fft {.normalization = norm});
+                 ddc::kwArgs_fft {norm});
 
     // Calculate y component
     ddc::for_each(k_mesh, [&](IndexFxFy const ikxky) {
@@ -97,7 +97,7 @@ void FftPoissonSolver::operator()(
             ifft(Kokkos::DefaultHostExecutionSpace(),
                  electric_field_y.span_view(),
                  fourier_efield.span_view(),
-                 ddc::kwArgs_fft {.normalization = norm});
+                 ddc::kwArgs_fft {norm});
     Kokkos::Profiling::popRegion();
 
     // Perform the inverse 1D FFT of the solution to deduce the electrostatic potential
@@ -105,7 +105,7 @@ void FftPoissonSolver::operator()(
             ifft(Kokkos::DefaultHostExecutionSpace(),
                  electrostatic_potential.span_view(),
                  intermediate_chunk.span_view(),
-                 (ddc::kwArgs_fft) {.normalization = norm});
+                 ddc::kwArgs_fft {norm});
 
     Kokkos::Profiling::popRegion();
 }
