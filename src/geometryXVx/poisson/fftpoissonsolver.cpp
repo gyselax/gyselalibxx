@@ -28,12 +28,9 @@ void FftPoissonSolver::operator()(
     assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
     IDomainX const x_dom = electrostatic_potential.domain();
     // Compute the RHS of the Poisson equation.
-    DFieldX rho_host(x_dom);
-    auto allfdistribu_host = ddc::create_mirror_and_copy(allfdistribu);
-
-    m_compute_rho(rho_host, allfdistribu_host);
     device_t<DFieldX> rho(x_dom);
-    ddc::deepcopy(rho, rho_host);
+
+    m_compute_rho(rho, allfdistribu);
 
     // Build a mesh in the fourier space, for N points
     IDomainFx const k_mesh = ddc::FourierMesh(x_dom, false);

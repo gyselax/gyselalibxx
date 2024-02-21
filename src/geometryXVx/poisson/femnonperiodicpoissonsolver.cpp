@@ -182,13 +182,14 @@ void FemNonPeriodicPoissonSolver::operator()(
     Kokkos::Profiling::pushRegion("PoissonSolver");
     auto electrostatic_potential = ddc::create_mirror_and_copy(electrostatic_potential_device);
     auto electric_field = ddc::create_mirror_and_copy(electric_field_device);
-    auto allfdistribu = ddc::create_mirror_and_copy(allfdistribu_device);
-    assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
+    assert(electrostatic_potential_device.domain() == ddc::get_domain<IDimX>(allfdistribu_device));
     IDomainX const dom_x = electrostatic_potential.domain();
 
     // Compute the RHS of the Poisson equation
     ddc::Chunk<double, IDomainX> rho(dom_x);
-    m_compute_rho(rho, allfdistribu);
+    device_t<ddc::Chunk<double, IDomainX>> rho_device(dom_x);
+    m_compute_rho(rho_device, allfdistribu_device);
+    ddc::deepcopy(rho, rho_device);
 
     //
     ddc::Chunk<double, BSDomainX> rho_spline_coef(m_spline_x_builder.spline_domain());

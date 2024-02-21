@@ -23,5 +23,6 @@ public:
      *
      * @return rho The charge density.
      */
-    virtual DSpanX operator()(DSpanX rho, DViewSpXVx allfdistribu) const = 0;
+    virtual device_t<DSpanX> operator()(device_t<DSpanX> rho, device_t<DViewSpXVx> allfdistribu)
+            const = 0;
 };
