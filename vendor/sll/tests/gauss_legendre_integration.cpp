@@ -91,7 +91,7 @@ int test_integrate()
     }
 
     return test_passed;
-};
+}
 
 /// This test integrates polynomials of the form x^p for p <= 2*order-1
 /// where order is the order of the GaussLegendre integration method.
@@ -168,7 +168,7 @@ int test_compute_points_and_weights()
     }
 
     return test_passed;
-};
+}
 
 TEST(GaussLegendre, IntegrateDouble)
 {

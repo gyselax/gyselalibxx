@@ -145,7 +145,7 @@ void Interpolation_on_random_coord(
     } else {
         std::cout << "  FAILED" << std::endl;
     }
-};
+}
 
 /**
  * @brief A class of function on polar coordinates.

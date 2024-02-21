@@ -225,7 +225,7 @@ public:
 
         // Calculate y_{n+1} := y_n + (k1 + 4 * k2 + k3) * h/6
         y_update(y, m_k_total, dt / 6.);
-    };
+    }
 
 private:
     void copy(ValSpan copy_to, ValView copy_from) const

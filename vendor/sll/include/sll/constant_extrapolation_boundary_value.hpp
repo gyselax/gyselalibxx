@@ -162,7 +162,9 @@ public:
             coord_type_no_bc const eval_pos_no_bc_max)
         : m_eval_pos_bc(eval_pos_bc)
         , m_eval_pos_no_bc_min(eval_pos_no_bc_min)
-        , m_eval_pos_no_bc_max(eval_pos_no_bc_max) {};
+        , m_eval_pos_no_bc_max(eval_pos_no_bc_max)
+    {
+    }
 
     /**
      * @brief Instantiate a ConstantExtrapolationBoundaryValue2D with periodic splines
@@ -181,7 +183,9 @@ public:
     explicit ConstantExtrapolationBoundaryValue2D(coord_type_bc const eval_pos_bc)
         : m_eval_pos_bc(eval_pos_bc)
         , m_eval_pos_no_bc_min(coord_type_no_bc(0.))
-        , m_eval_pos_no_bc_max(coord_type_no_bc(0.)) {};
+        , m_eval_pos_no_bc_max(coord_type_no_bc(0.))
+    {
+    }
 
 
     ~ConstantExtrapolationBoundaryValue2D() override = default;

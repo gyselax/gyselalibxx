@@ -25,7 +25,7 @@ KOKKOS_FUNCTION double norm_inf(ddc::Coordinate<Tags...> coord)
     double result = 0.0;
     ((result = std::max(result, fabs(coord.template get<Tags>()))), ...);
     return result;
-};
+}
 
 
 /**
@@ -42,4 +42,4 @@ KOKKOS_FUNCTION double norm_inf(ddc::Coordinate<Tags...> coord)
 KOKKOS_FUNCTION inline double norm_inf(double const coord)
 {
     return coord;
-};
+}

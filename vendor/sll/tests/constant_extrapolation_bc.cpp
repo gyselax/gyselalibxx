@@ -426,7 +426,7 @@ void Evaluate_on_outside_coord(IDomainRP const& grid, Function& exact_function, 
 
     // Compare the obtained values with the exact function. ----------------------------------
     check_constant_outside_domain(function_evaluated, exact_function, coords, outside_coords, TOL);
-};
+}
 
 
 
@@ -499,7 +499,7 @@ void Evaluate_on_outside_coord(IDomainXY const& grid, Function& exact_function, 
 
     // Compare the obtained values with the exact function. ----------------------------------
     check_constant_outside_domain(function_evaluated, exact_function, coords, outside_coords, TOL);
-};
+}
 
 
 

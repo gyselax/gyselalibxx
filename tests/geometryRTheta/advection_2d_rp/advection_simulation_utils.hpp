@@ -126,7 +126,7 @@ void save_feet(
         file_feet << std::endl;
     });
     file_feet.close();
-};
+}
 
 
 /**
