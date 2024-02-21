@@ -65,8 +65,7 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
 
     using bsplines_type = typename SplineBuilder::bsplines_type;
 
-    int const length = ddc::discrete_space<bsplines_type>().nbasis() - nbe_xmin - nbe_xmax;
-    assert(domain.size() == length);
+    assert(domain.size() == ddc::discrete_space<bsplines_type>().nbasis() - nbe_xmin - nbe_xmax);
 
     // Vector of integrals of B-splines
     ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines(
