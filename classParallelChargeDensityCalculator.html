@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: IChargeDensityCalculator Class Reference</title>
+<title>Gyselalib++: ParallelChargeDensityCalculator Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classIChargeDensityCalculator.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classParallelChargeDensityCalculator.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -101,43 +101,43 @@ $(document).ready(function(){initNavTree('classIChargeDensityCalculator.html',''
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classIChargeDensityCalculator-members.html">List of all members</a>  </div>
+<a href="classParallelChargeDensityCalculator-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">IChargeDensityCalculator Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">ParallelChargeDensityCalculator Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A class which calculates the charge density.  
- <a href="classIChargeDensityCalculator.html#details">More...</a></p>
+<p>A class which computes charges density with Kokkos.  
+ <a href="classParallelChargeDensityCalculator.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for IChargeDensityCalculator:</div>
+Inheritance diagram for ParallelChargeDensityCalculator:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classIChargeDensityCalculator.png" usemap="#IChargeDensityCalculator_map" alt=""/>
-  <map id="IChargeDensityCalculator_map" name="IChargeDensityCalculator_map">
-<area href="classChargeDensityCalculator.html" title="A class which computes charges density." alt="ChargeDensityCalculator" shape="rect" coords="0,56,197,80"/>
-<area href="classChargeDensityCalculator.html" title="A class which computes charges density." alt="ChargeDensityCalculator" shape="rect" coords="207,56,404,80"/>
-<area href="classParallelChargeDensityCalculator.html" title="A class which computes charges density with Kokkos." alt="ParallelChargeDensityCalculator" shape="rect" coords="414,56,611,80"/>
+  <img src="classParallelChargeDensityCalculator.png" usemap="#ParallelChargeDensityCalculator_map" alt=""/>
+  <map id="ParallelChargeDensityCalculator_map" name="ParallelChargeDensityCalculator_map">
+<area href="classIChargeDensityCalculator.html" title="A class which calculates the charge density." alt="IChargeDensityCalculator" shape="rect" coords="0,0,197,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6bd138c5a16a45ee1d4ecddda8734575"><td class="memItemLeft" align="right" valign="top">virtual device_t&lt; DSpanX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIChargeDensityCalculator.html#a6bd138c5a16a45ee1d4ecddda8734575">operator()</a> (device_t&lt; DSpanX &gt; rho, device_t&lt; DViewSpXVx &gt; allfdistribu) const =0</td></tr>
-<tr class="memdesc:a6bd138c5a16a45ee1d4ecddda8734575"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the charge density rho from the distribution function.  <a href="classIChargeDensityCalculator.html#a6bd138c5a16a45ee1d4ecddda8734575">More...</a><br /></td></tr>
-<tr class="separator:a6bd138c5a16a45ee1d4ecddda8734575"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a720c2444f9f9f61cf70755b592f53c7b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIChargeDensityCalculator.html#a720c2444f9f9f61cf70755b592f53c7b">operator()</a> (DSpanXY rho, DViewSpXYVxVy allfdistribu) const =0</td></tr>
-<tr class="memdesc:a720c2444f9f9f61cf70755b592f53c7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the charge density rho from the distribution function.  <a href="classIChargeDensityCalculator.html#a720c2444f9f9f61cf70755b592f53c7b">More...</a><br /></td></tr>
-<tr class="separator:a720c2444f9f9f61cf70755b592f53c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19f3b7a3a047b56902b0df63b3215860"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParallelChargeDensityCalculator.html#a19f3b7a3a047b56902b0df63b3215860">ParallelChargeDensityCalculator</a> (const ChunkViewType &amp;coeffs)</td></tr>
+<tr class="memdesc:a19f3b7a3a047b56902b0df63b3215860"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classParallelChargeDensityCalculator.html" title="A class which computes charges density with Kokkos.">ParallelChargeDensityCalculator</a> object.  <a href="classParallelChargeDensityCalculator.html#a19f3b7a3a047b56902b0df63b3215860">More...</a><br /></td></tr>
+<tr class="separator:a19f3b7a3a047b56902b0df63b3215860"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28dc1445adb779176b531415ab0c9759"><td class="memItemLeft" align="right" valign="top">device_t&lt; DSpanX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParallelChargeDensityCalculator.html#a28dc1445adb779176b531415ab0c9759">operator()</a> (device_t&lt; DSpanX &gt; rho, device_t&lt; DViewSpXVx &gt; allfdistribu) const final</td></tr>
+<tr class="memdesc:a28dc1445adb779176b531415ab0c9759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the charge density rho from the distribution function.  <a href="classParallelChargeDensityCalculator.html#a28dc1445adb779176b531415ab0c9759">More...</a><br /></td></tr>
+<tr class="separator:a28dc1445adb779176b531415ab0c9759"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classIChargeDensityCalculator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIChargeDensityCalculator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></td></tr>
+<tr class="memitem:a720c2444f9f9f61cf70755b592f53c7b inherit pub_methods_classIChargeDensityCalculator"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIChargeDensityCalculator.html#a720c2444f9f9f61cf70755b592f53c7b">operator()</a> (DSpanXY rho, DViewSpXYVxVy allfdistribu) const =0</td></tr>
+<tr class="memdesc:a720c2444f9f9f61cf70755b592f53c7b inherit pub_methods_classIChargeDensityCalculator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the charge density rho from the distribution function.  <a href="classIChargeDensityCalculator.html#a720c2444f9f9f61cf70755b592f53c7b">More...</a><br /></td></tr>
+<tr class="separator:a720c2444f9f9f61cf70755b592f53c7b inherit pub_methods_classIChargeDensityCalculator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A class which calculates the charge density. </p>
-<p>A class which computes charges density.</p>
-<p>A class which calculates the charge density. This is then used as the right hand side of the Poisson equation.</p>
+<div class="textblock"><p>A class which computes charges density with Kokkos. </p>
 <p>A class which computes charges density by solving the equation: \( \int_{v} q_s f_s(x,v) dv \) where \( q_s \) is the charge of the species \( s \) and \( f_s(x,v) \) is the distribution function. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6bd138c5a16a45ee1d4ecddda8734575"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6bd138c5a16a45ee1d4ecddda8734575">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a19f3b7a3a047b56902b0df63b3215860"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19f3b7a3a047b56902b0df63b3215860">&#9670;&nbsp;</a></span>ParallelChargeDensityCalculator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -146,7 +146,42 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual device_t&lt;DSpanX&gt; IChargeDensityCalculator::operator() </td>
+          <td class="memname">ParallelChargeDensityCalculator::ParallelChargeDensityCalculator </td>
+          <td>(</td>
+          <td class="paramtype">const ChunkViewType &amp;&#160;</td>
+          <td class="paramname"><em>coeffs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a <a class="el" href="classParallelChargeDensityCalculator.html" title="A class which computes charges density with Kokkos.">ParallelChargeDensityCalculator</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">coeffs</td><td>The coefficients of the quadrature. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a28dc1445adb779176b531415ab0c9759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28dc1445adb779176b531415ab0c9759">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">device_t&lt;DSpanX&gt; ParallelChargeDensityCalculator::operator() </td>
           <td>(</td>
           <td class="paramtype">device_t&lt; DSpanX &gt;&#160;</td>
           <td class="paramname"><em>rho</em>, </td>
@@ -165,82 +200,34 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Calculate the charge density rho from the distribution function. </p>
+<p>Computes the charge density rho from the distribution function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">rho</td><td>The charge density. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The distribution function.</td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">rho</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td></td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>rho The charge density. </dd></dl>
 
-<p>Implemented in <a class="el" href="classParallelChargeDensityCalculator.html#a28dc1445adb779176b531415ab0c9759">ParallelChargeDensityCalculator</a>, and <a class="el" href="classChargeDensityCalculator.html#a1d290b71e1f3e63af9f570a299523051">ChargeDensityCalculator</a>.</p>
-
-</div>
-</div>
-<a id="a720c2444f9f9f61cf70755b592f53c7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a720c2444f9f9f61cf70755b592f53c7b">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void IChargeDensityCalculator::operator() </td>
-          <td>(</td>
-          <td class="paramtype">DSpanXY&#160;</td>
-          <td class="paramname"><em>rho</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DViewSpXYVxVy&#160;</td>
-          <td class="paramname"><em>allfdistribu</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Calculate the charge density rho from the distribution function. </p>
-<p>Calculate the charge density by calculating the spline representation of slices of the distribution function at each spatial point along the velocity direction. This representation is then integrated and multiplied by the charge to find the charge density.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">rho</td><td>The charge density. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The distribution function. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="classChargeDensityCalculator.html#aa171397828c246922b136642e0295e26">ChargeDensityCalculator</a>.</p>
+<p>Implements <a class="el" href="classIChargeDensityCalculator.html#a6bd138c5a16a45ee1d4ecddda8734575">IChargeDensityCalculator</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="geometryXVx_2poisson_2ichargedensitycalculator_8hpp_source.html">ichargedensitycalculator.hpp</a></li>
+<li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="parallelchargedensitycalculator_8hpp_source.html">parallelchargedensitycalculator.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></li>
+    <li class="navelem"><a class="el" href="classParallelChargeDensityCalculator.html">ParallelChargeDensityCalculator</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
