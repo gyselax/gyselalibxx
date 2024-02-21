@@ -169,5 +169,5 @@ public:
         // ----------- Update y --------------
         // Calculate y_{n+1} := y_n + h*k_2
         y_update(y, m_k2, dt);
-    };
+    }
 };

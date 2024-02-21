@@ -222,7 +222,7 @@ public:
 
 
         } while (not_converged and (counter < m_max_counter));
-    };
+    }
 
 
     /**

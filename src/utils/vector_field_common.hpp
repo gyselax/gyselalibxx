@@ -60,7 +60,7 @@ inline constexpr typename ChunkType::view_type get(
 }
 
 
-}; // namespace ddcHelper
+} // namespace ddcHelper
 
 template <class ChunkType, class... DDims>
 class VectorFieldCommon<ChunkType, ddc::detail::TypeSeq<DDims...>>

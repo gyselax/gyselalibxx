@@ -254,7 +254,7 @@ public:
     double to_pseudo_cartesian_jacobian_11_center(Domain const& grid) const
     {
         return 1.;
-    };
+    }
 
     /**
      * @brief Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
@@ -272,7 +272,7 @@ public:
     double to_pseudo_cartesian_jacobian_12_center(Domain const& grid) const
     {
         return 0.;
-    };
+    }
 
     /**
      * @brief Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
@@ -290,7 +290,7 @@ public:
     double to_pseudo_cartesian_jacobian_21_center(Domain const& grid) const
     {
         return 0.;
-    };
+    }
 
     /**
      * @brief Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
@@ -308,5 +308,5 @@ public:
     double to_pseudo_cartesian_jacobian_22_center(Domain const& grid) const
     {
         return 1.;
-    };
+    }
 };

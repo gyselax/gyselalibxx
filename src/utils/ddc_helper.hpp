@@ -104,7 +104,7 @@ restrict_to_domain(
         coord -= length;
     return coord;
 }
-}; // namespace ddcHelper
+} // namespace ddcHelper
 
 namespace detail {
 
