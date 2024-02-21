@@ -35,7 +35,9 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
 )
 
 gtest_discover_tests(unit_tests_${GEOMETRY_VARIANT}
-    TEST_SUFFIX "_${GEOMETRY_VARIANT}")
+    TEST_SUFFIX "_${GEOMETRY_VARIANT}"
+    PROPERTIES TIMEOUT 10
+)
 
 endforeach()
 
