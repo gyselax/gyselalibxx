@@ -16,16 +16,15 @@
 
 #include "bsl_advection_vx_batched.hpp"
 #include "bsl_advection_x_batched.hpp"
+#include "chargedensitycalculator.hpp"
 #include "fftpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "paraconfpp.hpp"
-#include "parallelchargedensitycalculator.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
-#include "quadrature.hpp"
 #include "restartinitialization.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
@@ -217,7 +216,7 @@ int main(int argc, char** argv)
     auto quadrature_coeffs_device = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs.span_view());
-    ParallelChargeDensityCalculator rhs(quadrature_coeffs_device);
+    ChargeDensityCalculator rhs(quadrature_coeffs_device);
     FftPoissonSolver const poisson(rhs);
 
     PredCorr const predcorr(vlasov, poisson);

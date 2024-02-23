@@ -12,8 +12,6 @@
 #include "fftpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "neumann_spline_quadrature.hpp"
-#include "parallelchargedensitycalculator.hpp"
-#include "quadrature.hpp"
 #include "species_info.hpp"
 
 TEST(FftPoissonSolver, CosineSource)
@@ -63,8 +61,10 @@ TEST(FftPoissonSolver, CosineSource)
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
 
     DFieldVx const quadrature_coeffs = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
-    Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
-    ChargeDensityCalculator rhs(integrate_v);
+    auto const quadrature_coeffs_device = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs.span_view());
+    ChargeDensityCalculator rhs(quadrature_coeffs_device);
     FftPoissonSolver poisson(rhs);
 
     DFieldX electrostatic_potential(gridx);
@@ -152,7 +152,7 @@ TEST(FftPoissonSolver, CosineSourceParallel)
     device_t<DFieldVx> quadrature_coeffs_device(quadrature_coeffs.domain());
 
     ddc::deepcopy(quadrature_coeffs_device, quadrature_coeffs);
-    ParallelChargeDensityCalculator rhs(quadrature_coeffs_device);
+    ChargeDensityCalculator rhs(quadrature_coeffs_device);
     FftPoissonSolver poisson(rhs);
 
     DFieldX electrostatic_potential(gridx);
