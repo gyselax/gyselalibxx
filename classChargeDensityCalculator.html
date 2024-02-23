@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('classChargeDensityCalculator.html','')
 </div><!--header-->
 <div class="contents">
 
-<p>A class which computes charges density.  
+<p>A class which computes charges density with Kokkos.  
  <a href="classChargeDensityCalculator.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for ChargeDensityCalculator:</div>
@@ -122,9 +122,9 @@ Inheritance diagram for ChargeDensityCalculator:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aed12a305287ed4637657cc3e8b71c0ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeDensityCalculator.html#aed12a305287ed4637657cc3e8b71c0ab">ChargeDensityCalculator</a> (const <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IDimVx &gt; &amp;quad)</td></tr>
-<tr class="memdesc:aed12a305287ed4637657cc3e8b71c0ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classChargeDensityCalculator.html" title="A class which computes charges density.">ChargeDensityCalculator</a> object.  <a href="classChargeDensityCalculator.html#aed12a305287ed4637657cc3e8b71c0ab">More...</a><br /></td></tr>
-<tr class="separator:aed12a305287ed4637657cc3e8b71c0ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b209db47e420d108fbb6f329a65bbdf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeDensityCalculator.html#a9b209db47e420d108fbb6f329a65bbdf">ChargeDensityCalculator</a> (const ChunkViewType &amp;coeffs)</td></tr>
+<tr class="memdesc:a9b209db47e420d108fbb6f329a65bbdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classChargeDensityCalculator.html" title="A class which computes charges density with Kokkos.">ChargeDensityCalculator</a> object.  <a href="classChargeDensityCalculator.html#a9b209db47e420d108fbb6f329a65bbdf">More...</a><br /></td></tr>
+<tr class="separator:a9b209db47e420d108fbb6f329a65bbdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d290b71e1f3e63af9f570a299523051"><td class="memItemLeft" align="right" valign="top">device_t&lt; DSpanX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeDensityCalculator.html#a1d290b71e1f3e63af9f570a299523051">operator()</a> (device_t&lt; DSpanX &gt; rho, device_t&lt; DViewSpXVx &gt; allfdistribu) const final</td></tr>
 <tr class="memdesc:a1d290b71e1f3e63af9f570a299523051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the charge density rho from the distribution function.  <a href="classChargeDensityCalculator.html#a1d290b71e1f3e63af9f570a299523051">More...</a><br /></td></tr>
 <tr class="separator:a1d290b71e1f3e63af9f570a299523051"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,31 +136,40 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa171397828c246922b136642e0295e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A class which computes charges density. </p>
+<div class="textblock"><p>A class which computes charges density with Kokkos. </p>
+<p>A class which computes charges density.</p>
 <p>A class which computes charges density by solving the equation: \( \int_{v} q_s f_s(x,v) dv \) where \( q_s \) is the charge of the species \( s \) and \( f_s(x,v) \) is the distribution function.</p>
 <p>A class which computes charges density by solving the equation: \( \int_{v} q_s f_s(x,v) dv \) where \( q_s \) is the charge of the species \( s \) and \( f_s(x,v) \) is the distribution function.</p>
 <p>This equation is solved using an intermediate spline representation. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aed12a305287ed4637657cc3e8b71c0ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed12a305287ed4637657cc3e8b71c0ab">&#9670;&nbsp;</a></span>ChargeDensityCalculator() <span class="overload">[1/2]</span></h2>
+<a id="a9b209db47e420d108fbb6f329a65bbdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b209db47e420d108fbb6f329a65bbdf">&#9670;&nbsp;</a></span>ChargeDensityCalculator() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">ChargeDensityCalculator::ChargeDensityCalculator </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IDimVx &gt; &amp;&#160;</td>
-          <td class="paramname"><em>quad</em></td><td>)</td>
+          <td class="paramtype">const ChunkViewType &amp;&#160;</td>
+          <td class="paramname"><em>coeffs</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Create a <a class="el" href="classChargeDensityCalculator.html" title="A class which computes charges density.">ChargeDensityCalculator</a> object. </p>
+<p>Create a <a class="el" href="classChargeDensityCalculator.html" title="A class which computes charges density with Kokkos.">ChargeDensityCalculator</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">quad</td><td>The quadrature method which should be used. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coeffs</td><td>The coefficients of the quadrature. </td></tr>
   </table>
   </dd>
 </dl>

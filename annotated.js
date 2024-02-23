@@ -115,7 +115,6 @@ var annotated =
     [ "NullBoundaryValue", "classNullBoundaryValue.html", "classNullBoundaryValue" ],
     [ "NullBoundaryValue2D", "classNullBoundaryValue2D.html", "classNullBoundaryValue2D" ],
     [ "NullPoissonSolver", "classNullPoissonSolver.html", "classNullPoissonSolver" ],
-    [ "ParallelChargeDensityCalculator", "classParallelChargeDensityCalculator.html", "classParallelChargeDensityCalculator" ],
     [ "PoissonRHSFunction", "classPoissonRHSFunction.html", "classPoissonRHSFunction" ],
     [ "PoissonSolution", "classPoissonSolution.html", "classPoissonSolution" ],
     [ "PolarBSplines", "classPolarBSplines.html", "classPolarBSplines" ],
