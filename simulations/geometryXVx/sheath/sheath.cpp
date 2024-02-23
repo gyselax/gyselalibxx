@@ -20,7 +20,6 @@
 
 #include "bsl_advection_vx_batched.hpp"
 #include "bsl_advection_x_batched.hpp"
-#include "chargedensitycalculator.hpp"
 #include "collisions_intra.hpp"
 #ifdef PERIODIC_RDIMX
 #include "femperiodicpoissonsolver.hpp"
@@ -28,6 +27,7 @@
 #include "femnonperiodicpoissonsolver.hpp"
 #endif
 #include "Lagrange_interpolator_batched.hpp"
+#include "chargedensitycalculator.hpp"
 #include "fftpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
@@ -39,7 +39,6 @@
 #include "paraconfpp.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
-#include "quadrature.hpp"
 #include "restartinitialization.hpp"
 #include "sheath.yaml.hpp"
 #include "singlemodeperturbinitialization.hpp"
@@ -304,8 +303,10 @@ int main(int argc, char** argv)
     DFieldVx const quadrature_coeffs
             = neumann_spline_quadrature_coefficients(gridvx, builder_vx_poisson);
 
-    Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
-    ChargeDensityCalculator rhs(integrate_v);
+    auto const quadrature_coeffs_device = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs.span_view());
+    ChargeDensityCalculator rhs(quadrature_coeffs_device);
 #ifdef PERIODIC_RDIMX
     ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXVx));
     FftPoissonSolver const poisson(rhs);
