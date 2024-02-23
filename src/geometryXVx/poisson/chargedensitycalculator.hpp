@@ -7,11 +7,9 @@
 #include <geometry.hpp>
 
 #include "ichargedensitycalculator.hpp"
-#include "quadrature.hpp"
-#include "simpson_quadrature.hpp"
 
 /**
- * @brief A class which computes charges density.
+ * @brief A class which computes charges density with Kokkos.
  *
  * A class which computes charges density by solving the equation:
  * @f$ \int_{v} q_s f_s(x,v) dv @f$
@@ -20,15 +18,17 @@
  */
 class ChargeDensityCalculator : public IChargeDensityCalculator
 {
-    const Quadrature<IDimVx>& m_quad;
+private:
+    using ChunkViewType = device_t<DViewVx>;
+    ChunkViewType m_coefficients;
 
 public:
     /**
      * @brief Create a ChargeDensityCalculator object.
-     *
-     * @param quad The quadrature method which should be used.
+     * @param[in] coeffs
+     *            The coefficients of the quadrature.
      */
-    ChargeDensityCalculator(const Quadrature<IDimVx>& quad);
+    explicit ChargeDensityCalculator(const ChunkViewType& coeffs);
 
     /**
      * @brief Computes the charge density rho from the distribution function.

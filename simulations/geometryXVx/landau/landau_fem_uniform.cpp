@@ -28,7 +28,6 @@
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
-#include "quadrature.hpp"
 #include "restartinitialization.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
@@ -222,8 +221,10 @@ int main(int argc, char** argv)
 #endif
     DFieldVx const quadrature_coeffs
             = neumann_spline_quadrature_coefficients(gridvx, builder_vx_poisson);
-    Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
-    ChargeDensityCalculator rhs(integrate_v);
+    auto const quadrature_coeffs_device = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs.span_view());
+    ChargeDensityCalculator rhs(quadrature_coeffs_device);
     FemPoissonSolverX const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 
     PredCorr const predcorr(vlasov, poisson);
