@@ -126,6 +126,16 @@ add_subdirectory("vendor/ddc/" "ddc")
 ## Use selalib's splines from `vendor/`
 add_subdirectory("vendor/sll/" "sll")
 
+## Use the kokkos-tools for profiling purpose from `vendor/`
+include(vendor/kokkos-tools/cmake/utils.cmake)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/vendor/kokkos-tools/common ${CMAKE_CURRENT_SOURCE_DIR}/vendor/kokkos-tools/profiling/all)
+configure_file(vendor/kokkos-tools/common/kp_config.hpp.in kokkos-tools/profiling/simple-kernel-timer/kp_config.hpp)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/kokkos-tools/profiling/simple-kernel-timer) # Weird trick to get access to kp_config.hpp
+set(BUILD_SHARED_LIBS_DUMP "${BUILD_SHARED_LIBS}")
+set(BUILD_SHARED_LIBS ON) #Needed to get libkp_kernel_timer.so
+add_subdirectory("vendor/kokkos-tools/profiling/simple-kernel-timer/" "kokkos-tools/profiling/simple-kernel-timer")
+set(BUILD_SHARED_LIBS "${BUILD_SHARED_LIBS_DUMP}")
+add_compile_definitions(KP_KERNEL_TIMER_PATH="${CMAKE_CURRENT_BINARY_DIR}/kokkos-tools/profiling/simple-kernel-timer/libkp_kernel_timer.so")
 
 # Our project code
 
