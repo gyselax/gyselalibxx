@@ -14,3 +14,6 @@
 [submodule "vendor/eigen"]
 	path = vendor/eigen
 	url = https://gitlab.com/libeigen/eigen.git
+[submodule "vendor/kokkos-tools"]
+	path = vendor/kokkos-tools
+	url = https://github.com/kokkos/kokkos-tools.git
