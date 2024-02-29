@@ -55,6 +55,10 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
+    // Environments variables for profiling
+    setenv("KOKKOS_TOOLS_LIBS", KP_KERNEL_TIMER_PATH, false);
+    setenv("KOKKOS_TOOLS_TIMER_JSON", "true", false);
+
     ddc::ScopeGuard scope(argc, argv);
 
     long int iter_start(0);
