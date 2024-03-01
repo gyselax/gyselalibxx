@@ -33,14 +33,14 @@ TEST(Maxwellian, Moments)
 
     IDomainVx const gridvx = builder_vx.interpolation_domain();
 
-    DFieldVx const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
+    host_t<DFieldVx> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
     Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
 
     double const density = 1.e-5;
     double const mean_velocity = 0.5;
     double const temperature = 0.5;
 
-    DFieldVx fdistribu(gridvx);
+    host_t<DFieldVx> fdistribu(gridvx);
     MaxwellianEquilibrium::
             compute_maxwellian(fdistribu.span_view(), density, temperature, mean_velocity);
 
@@ -48,7 +48,7 @@ TEST(Maxwellian, Moments)
     double const density_res = integrate_v(fdistribu);
 
     // mean velocity
-    DFieldVx integrand(gridvx);
+    host_t<DFieldVx> integrand(gridvx);
     ddc::for_each(gridvx, [&](IndexVx const ivx) {
         integrand(ivx) = ddc::coordinate(ivx) * fdistribu(ivx);
     });

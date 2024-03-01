@@ -100,14 +100,12 @@ public:
     /**
      * The operator which solves the equation using the method described by the class.
      *
-     * @param[out] electrostatic_potential_device The electrostatic potential, the result of the poisson solver.
-     * @param[out] electric_field_device The electric field, the derivative of the electrostatic potential.
-     * @param[in] allfdistribu_device The distribution function.
+     * @param[out] electrostatic_potential The electrostatic potential, the result of the poisson solver.
+     * @param[out] electric_field The electric field, the derivative of the electrostatic potential.
+     * @param[in] allfdistribu The distribution function.
      */
-    void operator()(
-            device_t<DSpanX> electrostatic_potential_device,
-            device_t<DSpanX> electric_field_device,
-            device_t<DViewSpXVx> allfdistribu_device) const override;
+    void operator()(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu)
+            const override;
 
 private:
     void build_matrix();

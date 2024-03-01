@@ -38,7 +38,7 @@ public:
      * @param[out] electric_field The electric_field, the result of the operation.
      * @param[out] electrostatic_potential The electrostatic potential, the input of the operator.
      */
-    void operator()(DSpanX electric_field, DViewX electrostatic_potential) const;
+    void operator()(host_t<DSpanX> electric_field, host_t<DViewX> electrostatic_potential) const;
 
     /**
      * The operator which solves the equation using the method described by the class.
@@ -46,5 +46,5 @@ public:
      * @param[out] electric_field The electric_field, the result of the operation.
      * @param[out] electrostatic_potential The electrostatic potential, the input of the operator.
      */
-    void operator()(DSpanX electric_field, DBSViewX electrostatic_potential) const;
+    void operator()(host_t<DSpanX> electric_field, host_t<DBSViewX> electrostatic_potential) const;
 };

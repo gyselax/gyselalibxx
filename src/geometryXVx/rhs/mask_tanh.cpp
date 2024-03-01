@@ -9,14 +9,14 @@
 
 #include "mask_tanh.hpp"
 
-DFieldX mask_tanh(
+host_t<DFieldX> mask_tanh(
         IDomainX const& gridx,
         double const extent,
         double const stiffness,
         MaskType const type,
         bool const normalized)
 {
-    DFieldX mask(gridx);
+    host_t<DFieldX> mask(gridx);
 
     IVectX const Nx(gridx.size());
     CoordX const x_min(ddc::coordinate(gridx.front()));
@@ -46,7 +46,7 @@ DFieldX mask_tanh(
     }
 
     if (normalized) {
-        DFieldX const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
+        host_t<DFieldX> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
         Quadrature<IDimX> const integrate_x(quadrature_coeffs);
         double const coeff_norm = integrate_x(mask);
         ddc::for_each(gridx, [&](IndexX const ix) { mask(ix) = mask(ix) / coeff_norm; });

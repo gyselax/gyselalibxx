@@ -51,8 +51,5 @@ public:
      * @param[in] dt The timestep. 
      * @return The distribution function after solving the Vlasov equation.
      */
-    device_t<DSpanSpXVx> operator()(
-            device_t<DSpanSpXVx> allfdistribu,
-            device_t<DViewX> electric_field,
-            double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_field, double dt) const override;
 };
