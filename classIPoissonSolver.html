@@ -130,9 +130,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2e07de086727dd87d194d5132517e8a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver.html#a2e07de086727dd87d194d5132517e8a5">operator()</a> (DSpanRP electrostatic_potential, <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; double, IDomainRP, NDTag&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt;&gt; electric_field, DViewRP allfdistribu) const =0</td></tr>
 <tr class="memdesc:a2e07de086727dd87d194d5132517e8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the electrical potential and the electric field from the Poisson equation.  <a href="classIPoissonSolver.html#a2e07de086727dd87d194d5132517e8a5">More...</a><br /></td></tr>
 <tr class="separator:a2e07de086727dd87d194d5132517e8a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e103a767415b050081cd0243ae4e505"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver.html#a2e103a767415b050081cd0243ae4e505">operator()</a> (device_t&lt; DSpanX &gt; electrostatic_potential_device, device_t&lt; DSpanX &gt; electric_field_device, device_t&lt; DViewSpXVx &gt; allfdistribu_device) const =0</td></tr>
-<tr class="memdesc:a2e103a767415b050081cd0243ae4e505"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classIPoissonSolver.html#a2e103a767415b050081cd0243ae4e505">More...</a><br /></td></tr>
-<tr class="separator:a2e103a767415b050081cd0243ae4e505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2819621d345ddde4acad30a47c8fd7f9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver.html#a2819621d345ddde4acad30a47c8fd7f9">operator()</a> (DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const =0</td></tr>
+<tr class="memdesc:a2819621d345ddde4acad30a47c8fd7f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classIPoissonSolver.html#a2819621d345ddde4acad30a47c8fd7f9">More...</a><br /></td></tr>
+<tr class="separator:a2819621d345ddde4acad30a47c8fd7f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc648976a27e0b36daf0615d7b8eebd6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6">operator()</a> (DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const =0</td></tr>
 <tr class="memdesc:acc648976a27e0b36daf0615d7b8eebd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6">More...</a><br /></td></tr>
 <tr class="separator:acc648976a27e0b36daf0615d7b8eebd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -198,8 +198,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2e103a767415b050081cd0243ae4e505"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e103a767415b050081cd0243ae4e505">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/3]</span></h2>
+<a id="a2819621d345ddde4acad30a47c8fd7f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2819621d345ddde4acad30a47c8fd7f9">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,20 +210,20 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void IPoissonSolver::operator() </td>
           <td>(</td>
-          <td class="paramtype">device_t&lt; DSpanX &gt;&#160;</td>
-          <td class="paramname"><em>electrostatic_potential_device</em>, </td>
+          <td class="paramtype">DSpanX&#160;</td>
+          <td class="paramname"><em>electrostatic_potential</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">device_t&lt; DSpanX &gt;&#160;</td>
-          <td class="paramname"><em>electric_field_device</em>, </td>
+          <td class="paramtype">DSpanX&#160;</td>
+          <td class="paramname"><em>electric_field</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">device_t&lt; DViewSpXVx &gt;&#160;</td>
-          <td class="paramname"><em>allfdistribu_device</em>&#160;</td>
+          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -241,14 +241,14 @@ Public Member Functions</h2></td></tr>
 <p>The operator which solves the equation using the method described by the class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">electrostatic_potential_device</td><td>The electrostatic potential, the result of the poisson solver. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field_device</td><td>The electric field, the derivative of the electrostatic potential. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu_device</td><td>The distribution function. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">electrostatic_potential</td><td>The electrostatic potential, the result of the poisson solver. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field</td><td>The electric field, the derivative of the electrostatic potential. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The distribution function. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classFemPeriodicPoissonSolver.html#ad4956088f1ee27d71cd451b7450f416b">FemPeriodicPoissonSolver</a>, <a class="el" href="classFemNonPeriodicPoissonSolver.html#aab4a613cf57eeff7a597c0a81c6d82e3">FemNonPeriodicPoissonSolver</a>, <a class="el" href="classFftPoissonSolver.html#a0826f648927ced27cc64ed3991e0d198">FftPoissonSolver</a>, and <a class="el" href="classNullPoissonSolver.html#a326a5fd68b100c7ee26ff04f9650cde5">NullPoissonSolver</a>.</p>
+<p>Implemented in <a class="el" href="classFftPoissonSolver.html#a58e99a7d9c0110c9174edee83ac3025b">FftPoissonSolver</a>, <a class="el" href="classFemPeriodicPoissonSolver.html#a29947ba0529fe6de504b85780a0d741e">FemPeriodicPoissonSolver</a>, <a class="el" href="classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66">FemNonPeriodicPoissonSolver</a>, and <a class="el" href="classNullPoissonSolver.html#a9f96957959d01b15de007812bdd513af">NullPoissonSolver</a>.</p>
 
 </div>
 </div>

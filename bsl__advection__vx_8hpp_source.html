@@ -136,17 +136,17 @@ $(document).ready(function(){initNavTree('bsl__advection__vx_8hpp_source.html','
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    ~<a class="code" href="classBslAdvectionVelocity.html">BslAdvectionVelocity</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classBslAdvectionVelocity.html#aee5c9d680408e71e0564cc9d4ddd37ee">   48</a></span>&#160;    device_t&lt;ddc::ChunkSpan&lt;double, FdistribuDDom&gt;&gt; <a class="code" href="classBslAdvectionVelocity.html#aee5c9d680408e71e0564cc9d4ddd37ee">operator()</a>(</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;double, FdistribuDDom&gt;&gt; <span class="keyword">const</span> allfdistribu_device,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;const double, SpatialDDom&gt;&gt; <span class="keyword">const</span> electric_field_device,</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classBslAdvectionVelocity.html#a456d5d8c006ca4d2b46177ee1456fdd2">   48</a></span>&#160;    device_t&lt;ddc::ChunkSpan&lt;double, FdistribuDDom&gt;&gt; <a class="code" href="classBslAdvectionVelocity.html#a456d5d8c006ca4d2b46177ee1456fdd2">operator()</a>(</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;double, FdistribuDDom&gt;&gt; <span class="keyword">const</span> allfdistribu,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;const double, SpatialDDom&gt;&gt; <span class="keyword">const</span> electric_field,</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> dt)<span class="keyword"> const override</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        Kokkos::Profiling::pushRegion(<span class="stringliteral">&quot;BslAdvectionVelocity&quot;</span>);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">auto</span> allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">auto</span> electric_field_alloc = ddc::create_mirror_view_and_copy(electric_field_device);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        ddc::ChunkSpan electric_field = electric_field_alloc.span_view();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">auto</span> allfdistribu_host_alloc = ddc::create_mirror_view_and_copy(allfdistribu);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        ddc::ChunkSpan allfdistribu_host = allfdistribu_host_alloc.span_view();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">auto</span> electric_field_host_alloc = ddc::create_mirror_view_and_copy(electric_field);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        ddc::ChunkSpan electric_field_host = electric_field_host_alloc.span_view();</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        FdistribuDDom <span class="keyword">const</span> dom = allfdistribu.domain();</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        ddc::DiscreteDomain&lt;DDimV&gt; <span class="keyword">const</span> v_dom = ddc::select&lt;DDimV&gt;(dom);</div>
@@ -173,33 +173,34 @@ $(document).ready(function(){initNavTree('bsl__advection__vx_8hpp_source.html','
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                ddc::for_each(spatial_dom, [&amp;](DElemSpatial <span class="keyword">const</span> ix) {</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    <span class="comment">// compute the displacement</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> dvx = charge(isp) * sqrt_me_on_mspecies * dt * electric_field(ix);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <span class="comment">// compute the coordinates of the feet</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    ddc::for_each(v_dom, [&amp;](DElemV <span class="keyword">const</span> iv) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                        feet_coords(iv) = ddc::Coordinate&lt;CDimV&gt;(ddc::coordinate(iv) - dvx);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    });</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    <span class="comment">// copy the slice in contiguous memory</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    ddc::deepcopy(contiguous_slice, allfdistribu[ic][isp][ix]);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    <span class="comment">// build a spline representation of the data</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    interpolator_v(contiguous_slice, feet_coords.span_cview());</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    <span class="comment">// copy back</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    ddc::deepcopy(allfdistribu[ic][isp][ix], contiguous_slice);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                });</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            });</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        });</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        ddc::deepcopy(allfdistribu_device, allfdistribu);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        Kokkos::Profiling::popRegion();</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">return</span> allfdistribu_device;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> dvx</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                            = charge(isp) * sqrt_me_on_mspecies * dt * electric_field_host(ix);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    <span class="comment">// compute the coordinates of the feet</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    ddc::for_each(v_dom, [&amp;](DElemV <span class="keyword">const</span> iv) {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                        feet_coords(iv) = ddc::Coordinate&lt;CDimV&gt;(ddc::coordinate(iv) - dvx);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    });</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    <span class="comment">// copy the slice in contiguous memory</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    ddc::deepcopy(contiguous_slice, allfdistribu_host[ic][isp][ix]);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    <span class="comment">// build a spline representation of the data</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    interpolator_v(contiguous_slice, feet_coords.span_cview());</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    <span class="comment">// copy back</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                    ddc::deepcopy(allfdistribu_host[ic][isp][ix], contiguous_slice);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                });</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            });</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        });</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        ddc::deepcopy(allfdistribu, allfdistribu_host);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        Kokkos::Profiling::popRegion();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
 <div class="ttc" id="aclassBslAdvectionVelocity_html"><div class="ttname"><a href="classBslAdvectionVelocity.html">BslAdvectionVelocity</a></div><div class="ttdoc">A class which computes the velocity advection along the dimension of interest DDimV.</div><div class="ttdef"><b>Definition:</b> bsl_advection_vx.hpp:18</div></div>
 <div class="ttc" id="aclassBslAdvectionVelocity_html_a3bcf9219f616d77072dab71e04b35e70"><div class="ttname"><a href="classBslAdvectionVelocity.html#a3bcf9219f616d77072dab71e04b35e70">BslAdvectionVelocity::BslAdvectionVelocity</a></div><div class="ttdeci">BslAdvectionVelocity(IPreallocatableInterpolator&lt; DDimV &gt; const &amp;interpolator_v)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> bsl_advection_vx.hpp:34</div></div>
-<div class="ttc" id="aclassBslAdvectionVelocity_html_aee5c9d680408e71e0564cc9d4ddd37ee"><div class="ttname"><a href="classBslAdvectionVelocity.html#aee5c9d680408e71e0564cc9d4ddd37ee">BslAdvectionVelocity::operator()</a></div><div class="ttdeci">device_t&lt; ddc::ChunkSpan&lt; double, FdistribuDDom &gt; &gt; operator()(device_t&lt; ddc::ChunkSpan&lt; double, FdistribuDDom &gt;&gt; const allfdistribu_device, device_t&lt; ddc::ChunkSpan&lt; const double, SpatialDDom &gt;&gt; const electric_field_device, double const dt) const override</div><div class="ttdoc">Advects fdistribu along DDimV for a duration dt.</div><div class="ttdef"><b>Definition:</b> bsl_advection_vx.hpp:48</div></div>
+<div class="ttc" id="aclassBslAdvectionVelocity_html_a456d5d8c006ca4d2b46177ee1456fdd2"><div class="ttname"><a href="classBslAdvectionVelocity.html#a456d5d8c006ca4d2b46177ee1456fdd2">BslAdvectionVelocity::operator()</a></div><div class="ttdeci">device_t&lt; ddc::ChunkSpan&lt; double, FdistribuDDom &gt; &gt; operator()(device_t&lt; ddc::ChunkSpan&lt; double, FdistribuDDom &gt;&gt; const allfdistribu, device_t&lt; ddc::ChunkSpan&lt; const double, SpatialDDom &gt;&gt; const electric_field, double const dt) const override</div><div class="ttdoc">Advects fdistribu along DDimV for a duration dt.</div><div class="ttdef"><b>Definition:</b> bsl_advection_vx.hpp:48</div></div>
 <div class="ttc" id="aclassIAdvectionVelocity_html"><div class="ttname"><a href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div><div class="ttdoc">A class which provides an advection operator.</div><div class="ttdef"><b>Definition:</b> iadvectionvx.hpp:17</div></div>
 <div class="ttc" id="aclassIInterpolator_html"><div class="ttname"><a href="classIInterpolator.html">IInterpolator</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> i_interpolator.hpp:18</div></div>
 <div class="ttc" id="aclassIPreallocatableInterpolator_html"><div class="ttname"><a href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator&lt; DDimV &gt;</a></div></div>

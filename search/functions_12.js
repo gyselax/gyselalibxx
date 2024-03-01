@@ -2,7 +2,7 @@ var searchData=
 [
   ['set_5fequilibrium_842',['set_equilibrium',['../classVortexMergerEquilibria.html#a53ee133eae7bbe78998ff78e0988ab0a',1,'VortexMergerEquilibria']]],
   ['set_5finitialisation_843',['set_initialisation',['../classVortexMergerDensitySolution.html#a3a24dd7ac0324005ca912ac05b54d0d6',1,'VortexMergerDensitySolution']]],
-  ['singlemodeperturbinitialization_844',['SingleModePerturbInitialization',['../classSingleModePerturbInitialization.html#adb062b4a4a260854ef16eac6e2e8b8af',1,'SingleModePerturbInitialization']]],
+  ['singlemodeperturbinitialization_844',['SingleModePerturbInitialization',['../classSingleModePerturbInitialization.html#ad7471b3f7288ab5653f379d558fa25fb',1,'SingleModePerturbInitialization']]],
   ['solution_5fat_5fpole_845',['solution_at_pole',['../classManufacturedPoissonTest.html#a9aac013116d3c04b11cdef64cd870315',1,'ManufacturedPoissonTest']]],
   ['span_5fcview_846',['span_cview',['../classVectorField.html#ae5421322e080a9f2ae63ff7796da6ed3',1,'VectorField::span_cview()'],['../classVectorFieldSpan.html#ac9835c4b3c61102263bc404c948c551c',1,'VectorFieldSpan::span_cview()']]],
   ['span_5fview_847',['span_view',['../classVectorField.html#acb9821e3a1405005d7251bfbfea66f89',1,'VectorField::span_view() const'],['../classVectorField.html#a40800a9ffc0b36a09ae8154aac00759b',1,'VectorField::span_view()'],['../classVectorFieldSpan.html#acc499084ae93b3118644c458e16b3549',1,'VectorFieldSpan::span_view()']]],

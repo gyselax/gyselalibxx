@@ -1,10 +1,10 @@
 var searchData=
 [
   ['get_5fadvection_5ffield_766',['get_advection_field',['../classAdvectionSimulation.html#a754d22f275182e9571c7d12414fd7f6f',1,'AdvectionSimulation']]],
-  ['get_5famplitudes_767',['get_amplitudes',['../classKrookSourceAdaptive.html#a33d92ab924cca3d91c5838ff55985d58',1,'KrookSourceAdaptive']]],
+  ['get_5famplitudes_767',['get_amplitudes',['../classKrookSourceAdaptive.html#a8a429dd473078201e0879422899414c0',1,'KrookSourceAdaptive']]],
   ['get_5fbuilder_5f1_768',['get_builder_1',['../classSplineBuilder2D.html#ab9e9788616d4be20d309ec04da8e25fe',1,'SplineBuilder2D']]],
   ['get_5fbuilder_5f2_769',['get_builder_2',['../classSplineBuilder2D.html#a5a406c6bc3f47c2895963a66c40e5cee',1,'SplineBuilder2D']]],
-  ['get_5fderivative_770',['get_derivative',['../classCollisionsInter.html#acd76b630be8591301f9e0395532bb683',1,'CollisionsInter::get_derivative()'],['../classKrookSourceAdaptive.html#ae2e63a36f8428d569cd119b1624b0ccb',1,'KrookSourceAdaptive::get_derivative()']]],
+  ['get_5fderivative_770',['get_derivative',['../classCollisionsInter.html#a42683cdfbd5476e2d01c0b0b6c4d9fcc',1,'CollisionsInter::get_derivative()'],['../classKrookSourceAdaptive.html#a9b406e47034bbf02b16a3a0a43a7207e',1,'KrookSourceAdaptive::get_derivative()']]],
   ['get_5fdomain_771',['get_domain',['../classGrevilleInterpolationPoints.html#a3127b5d6b1760431fa385c1d1c11e605',1,'GrevilleInterpolationPoints::get_domain()'],['../classKnotsAsInterpolationPoints.html#a1546bfe0c37a3a8387219c7f2006798c',1,'KnotsAsInterpolationPoints::get_domain()']]],
   ['get_5ffrequency_772',['get_frequency',['../classDiocotronDensitySolution.html#a9a485619ee6cbd2ff396ae8fe2a0a1bd',1,'DiocotronDensitySolution']]],
   ['get_5fgridvx_5fghosted_773',['get_gridvx_ghosted',['../classCollisionsIntra.html#a4d0cc51fe8429d6f21e5174b8e3f47b3',1,'CollisionsIntra']]],

@@ -111,13 +111,13 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;quadrature.hpp&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> compute_nustar_profile(device_t&lt;DSpanSpX&gt; nustar_profile, <span class="keywordtype">double</span> nustar0);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> compute_nustar_profile(DSpanSpX nustar_profile, <span class="keywordtype">double</span> nustar0);</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span> compute_collfreq(</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        device_t&lt;DSpanSpX&gt; collfreq,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        device_t&lt;DViewSpX&gt; nustar_profile,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        device_t&lt;DViewSpX&gt; density,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        device_t&lt;DViewSpX&gt; temperature);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        DSpanSpX collfreq,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        DViewSpX nustar_profile,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        DViewSpX density,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        DViewSpX temperature);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDimension&gt;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> compute_Dcoll(</div>
@@ -126,9 +126,9 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimension&gt;,</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                std::experimental::layout_right,</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; Dcoll,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        device_t&lt;DViewSpX&gt; collfreq,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        device_t&lt;DViewSpX&gt; density,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        device_t&lt;DViewSpX&gt; temperature)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        DViewSpX collfreq,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        DViewSpX density,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        DViewSpX temperature)</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ddc::for_each(</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            ddc::policies::parallel_device,</div>
@@ -167,9 +167,9 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimension&gt;,</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                std::experimental::layout_right,</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; dvDcoll,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        device_t&lt;DViewSpX&gt; collfreq,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        device_t&lt;DViewSpX&gt; density,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        device_t&lt;DViewSpX&gt; temperature)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        DViewSpX collfreq,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        DViewSpX density,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        DViewSpX temperature)</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    ddc::for_each(</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            ddc::policies::parallel_device,</div>
@@ -208,9 +208,9 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDimension&gt;</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keywordtype">void</span> compute_Vcoll_Tcoll(</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        device_t&lt;DSpanSpX&gt; Vcoll,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        device_t&lt;DSpanSpX&gt; Tcoll,</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        device_t&lt;DViewSpXVx&gt; allfdistribu,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        DSpanSpX Vcoll,</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        DSpanSpX Tcoll,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        DViewSpXVx allfdistribu,</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        ddc::ChunkSpan&lt;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                <span class="keywordtype">double</span>,</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimension&gt;,</div>
@@ -222,7 +222,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                std::experimental::layout_right,</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; dvDcoll)</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;{</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    DFieldVx <span class="keyword">const</span> quadrature_coeffs_host(</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    host_t&lt;DFieldVx&gt; <span class="keyword">const</span> quadrature_coeffs_host(</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <a class="code" href="trapezoid__quadrature_8hpp.html#a9b37968b97363d75ad6401309016c8f9">trapezoid_quadrature_coefficients</a>(ddc::get_domain&lt;IDimVx&gt;(allfdistribu)));</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keyword">auto</span> quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
@@ -230,11 +230,11 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keyword">auto</span> quadrature_coeffs = quadrature_coeffs_alloc.span_view();</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="comment">// computation of the integrands</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    device_t&lt;DFieldSpXVx&gt; I0mean_integrand_alloc(allfdistribu.domain());</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    device_t&lt;DFieldSpXVx&gt; I1mean_integrand_alloc(allfdistribu.domain());</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    device_t&lt;DFieldSpXVx&gt; I2mean_integrand_alloc(allfdistribu.domain());</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    device_t&lt;DFieldSpXVx&gt; I3mean_integrand_alloc(allfdistribu.domain());</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    device_t&lt;DFieldSpXVx&gt; I4mean_integrand_alloc(allfdistribu.domain());</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    DFieldSpXVx I0mean_integrand_alloc(allfdistribu.domain());</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    DFieldSpXVx I1mean_integrand_alloc(allfdistribu.domain());</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    DFieldSpXVx I2mean_integrand_alloc(allfdistribu.domain());</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    DFieldSpXVx I3mean_integrand_alloc(allfdistribu.domain());</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    DFieldSpXVx I4mean_integrand_alloc(allfdistribu.domain());</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keyword">auto</span> I0mean_integrand = I0mean_integrand_alloc.span_view();</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keyword">auto</span> I1mean_integrand = I1mean_integrand_alloc.span_view();</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">auto</span> I2mean_integrand = I2mean_integrand_alloc.span_view();</div>
@@ -260,11 +260,11 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="comment">// computation of the integrals over the Vx direction</span></div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    IDomainSpX grid_sp_x(allfdistribu.domain&lt;<a class="code" href="classSpeciesInformation.html">IDimSp</a>, IDimX&gt;());</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    device_t&lt;DFieldSpX&gt; I0mean_alloc(grid_sp_x);</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    device_t&lt;DFieldSpX&gt; I1mean_alloc(grid_sp_x);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    device_t&lt;DFieldSpX&gt; I2mean_alloc(grid_sp_x);</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    device_t&lt;DFieldSpX&gt; I3mean_alloc(grid_sp_x);</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    device_t&lt;DFieldSpX&gt; I4mean_alloc(grid_sp_x);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    DFieldSpX I0mean_alloc(grid_sp_x);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    DFieldSpX I1mean_alloc(grid_sp_x);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    DFieldSpX I2mean_alloc(grid_sp_x);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    DFieldSpX I3mean_alloc(grid_sp_x);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    DFieldSpX I4mean_alloc(grid_sp_x);</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keyword">auto</span> I0mean = I0mean_alloc.span_view();</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keyword">auto</span> I1mean = I1mean_alloc.span_view();</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keyword">auto</span> I2mean = I2mean_alloc.span_view();</div>
@@ -309,8 +309,8 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimension&gt;,</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                std::experimental::layout_right,</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; Dcoll,</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        device_t&lt;DViewSpX&gt; Vcoll,</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        device_t&lt;DViewSpX&gt; Tcoll)</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        DViewSpX Vcoll,</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        DViewSpX Tcoll)</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;{</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    ddc::for_each(</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            ddc::policies::parallel_device,</div>
@@ -324,18 +324,18 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;}</div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="keywordtype">void</span> compute_collfreq_ab(</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        device_t&lt;DSpanSpX&gt; collfreq_ab,</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        device_t&lt;DViewSpX&gt; nustar_profile,</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        device_t&lt;DViewSpX&gt; density,</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        device_t&lt;DViewSpX&gt; temperature);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        DSpanSpX collfreq_ab,</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        DViewSpX nustar_profile,</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        DViewSpX density,</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        DViewSpX temperature);</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="keywordtype">void</span> compute_momentum_energy_exchange(</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        device_t&lt;DSpanSpX&gt; momentum_exchange_ab,</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        device_t&lt;DSpanSpX&gt; energy_exchange_ab,</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        device_t&lt;DViewSpX&gt; collfreq_ab,</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        device_t&lt;DViewSpX&gt; density,</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        device_t&lt;DViewSpX&gt; mean_velocity,</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        device_t&lt;DViewSpX&gt; temperature);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        DSpanSpX momentum_exchange_ab,</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        DSpanSpX energy_exchange_ab,</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        DViewSpX collfreq_ab,</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        DViewSpX density,</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        DViewSpX mean_velocity,</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        DViewSpX temperature);</div>
 <div class="ttc" id="aclassSpeciesInformation_html"><div class="ttname"><a href="classSpeciesInformation.html">SpeciesInformation</a></div><div class="ttdoc">Species discrete dimension to access constant attributes related to species.</div><div class="ttdef"><b>Definition:</b> species_info.hpp:9</div></div>
 <div class="ttc" id="atrapezoid__quadrature_8hpp_html"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a></div><div class="ttdoc">File providing quadrature coefficients via the trapezoidal method.</div></div>
 <div class="ttc" id="atrapezoid__quadrature_8hpp_html_a9b37968b97363d75ad6401309016c8f9"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#a9b37968b97363d75ad6401309016c8f9">trapezoid_quadrature_coefficients</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; ODims... &gt; &gt; trapezoid_quadrature_coefficients(ddc::DiscreteDomain&lt; ODims... &gt; const &amp;domain)</div><div class="ttdoc">Get the trapezoid coefficients in ND.</div><div class="ttdef"><b>Definition:</b> trapezoid_quadrature.hpp:54</div></div>

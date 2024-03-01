@@ -327,27 +327,27 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="keyword">using</span> FieldX = ddc::Chunk&lt;ElementType, IDomainX&gt;;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="keyword">using</span> FieldX = device_t&lt;ddc::Chunk&lt;ElementType, IDomainX&gt;&gt;;</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">using</span> FieldVx = ddc::Chunk&lt;ElementType, IDomainVx&gt;;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">using</span> FieldVx = device_t&lt;ddc::Chunk&lt;ElementType, IDomainVx&gt;&gt;;</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="keyword">using</span> FieldSp = ddc::Chunk&lt;ElementType, IDomainSp&gt;;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="keyword">using</span> FieldSp = device_t&lt;ddc::Chunk&lt;ElementType, IDomainSp&gt;&gt;;</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="keyword">using</span> FieldSpX = ddc::Chunk&lt;ElementType, IDomainSpX&gt;;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="keyword">using</span> FieldSpX = device_t&lt;ddc::Chunk&lt;ElementType, IDomainSpX&gt;&gt;;</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keyword">using</span> FieldSpVx = ddc::Chunk&lt;ElementType, IDomainSpVx&gt;;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keyword">using</span> FieldSpVx = device_t&lt;ddc::Chunk&lt;ElementType, IDomainSpVx&gt;&gt;;</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="keyword">using</span> FieldSpXVx = ddc::Chunk&lt;ElementType, IDomainSpXVx&gt;;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="keyword">using</span> FieldSpXVx = device_t&lt;ddc::Chunk&lt;ElementType, IDomainSpXVx&gt;&gt;;</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> DomainType&gt;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keyword">using</span> DField = ddc::Chunk&lt;double, DomainType&gt;;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keyword">using</span> DField = device_t&lt;ddc::Chunk&lt;double, DomainType&gt;&gt;;</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="keyword">using</span> DFieldX = FieldX&lt;double&gt;;</div>
@@ -364,30 +364,30 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="keyword">using</span> SpanSp = ddc::ChunkSpan&lt;ElementType, IDomainSp&gt;;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="keyword">using</span> SpanSp = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainSp&gt;&gt;;</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="keyword">using</span> SpanSpX = ddc::ChunkSpan&lt;ElementType, IDomainSpX&gt;;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="keyword">using</span> SpanSpX = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainSpX&gt;&gt;;</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="keyword">using</span> SpanX = ddc::ChunkSpan&lt;ElementType, IDomainX&gt;;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="keyword">using</span> SpanX = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainX&gt;&gt;;</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="keyword">using</span> SpanSpX = ddc::ChunkSpan&lt;ElementType, IDomainSpX&gt;;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="keyword">using</span> SpanSpX = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainSpX&gt;&gt;;</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="keyword">using</span> SpanVx = ddc::ChunkSpan&lt;ElementType, IDomainVx&gt;;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="keyword">using</span> SpanVx = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainVx&gt;&gt;;</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="keyword">using</span> SpanSpXVx = ddc::ChunkSpan&lt;ElementType, IDomainSpXVx&gt;;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="keyword">using</span> SpanSpXVx = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainSpXVx&gt;&gt;;</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="keyword">using</span> SpanSpVx = ddc::ChunkSpan&lt;ElementType, IDomainSpVx&gt;;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="keyword">using</span> SpanSpVx = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainSpVx&gt;&gt;;</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> DomainType&gt;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="keyword">using</span> DSpan = ddc::ChunkSpan&lt;double, DomainType&gt;;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="keyword">using</span> DSpan = device_t&lt;ddc::ChunkSpan&lt;double, DomainType&gt;&gt;;</div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="keyword">using</span> DSpanSp = SpanSp&lt;double&gt;;</div>
@@ -405,30 +405,30 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keyword">using</span> ViewX = ddc::ChunkSpan&lt;ElementType const, IDomainX&gt;;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keyword">using</span> ViewX = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainX&gt;&gt;;</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="keyword">using</span> ViewVx = ddc::ChunkSpan&lt;ElementType const, IDomainVx&gt;;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="keyword">using</span> ViewVx = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainVx&gt;&gt;;</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="keyword">using</span> ViewSp = ddc::ChunkSpan&lt;ElementType const, IDomainSp&gt;;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="keyword">using</span> ViewSp = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainSp&gt;&gt;;</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="keyword">using</span> ViewSpX = ddc::ChunkSpan&lt;ElementType const, IDomainSpX&gt;;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="keyword">using</span> ViewSpX = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainSpX&gt;&gt;;</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="keyword">using</span> ViewSpVx = ddc::ChunkSpan&lt;ElementType const, IDomainSpVx&gt;;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="keyword">using</span> ViewSpVx = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainSpVx&gt;&gt;;</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="keyword">using</span> ViewSpXVx = ddc::ChunkSpan&lt;ElementType const, IDomainSpXVx&gt;;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="keyword">using</span> ViewSpXVx = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainSpXVx&gt;&gt;;</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="keyword">using</span> BSViewX = ddc::ChunkSpan&lt;ElementType const, BSDomainX&gt;;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="keyword">using</span> BSViewX = device_t&lt;ddc::ChunkSpan&lt;ElementType const, BSDomainX&gt;&gt;;</div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> DomainType&gt;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="keyword">using</span> DView = ddc::ChunkSpan&lt;double const, DomainType&gt;;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="keyword">using</span> DView = device_t&lt;ddc::ChunkSpan&lt;double const, DomainType&gt;&gt;;</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="keyword">using</span> DViewX = ViewX&lt;double&gt;;</div>

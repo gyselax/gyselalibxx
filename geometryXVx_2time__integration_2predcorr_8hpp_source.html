@@ -126,18 +126,15 @@ $(document).ready(function(){initNavTree('geometryXVx_2time__integration_2predco
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ~<a class="code" href="classPredCorr.html">PredCorr</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classPredCorr.html#afd69c0eb2605008c0d4ecbd70e0ccbd0">   49</a></span>&#160;    device_t&lt;DSpanSpXVx&gt; <a class="code" href="classPredCorr.html#afd69c0eb2605008c0d4ecbd70e0ccbd0">operator()</a>(</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            device_t&lt;DSpanSpXVx&gt; allfdistribu,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordtype">double</span> time_start,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordtype">double</span> dt,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordtype">int</span> steps = 1) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">   49</a></span>&#160;    DSpanSpXVx <a class="code" href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">operator()</a>(DSpanSpXVx allfdistribu, <span class="keywordtype">double</span> time_start, <span class="keywordtype">double</span> dt, <span class="keywordtype">int</span> steps = 1)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
 <div class="ttc" id="aclassIBoltzmannSolver_html"><div class="ttname"><a href="classIBoltzmannSolver.html">IBoltzmannSolver</a></div><div class="ttdoc">An abstract class for solving a Boltzmann equation.</div><div class="ttdef"><b>Definition:</b> iboltzmannsolver.hpp:11</div></div>
 <div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">Base class for Poisson solver.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:13</div></div>
 <div class="ttc" id="aclassITimeSolver_html"><div class="ttname"><a href="classITimeSolver.html">ITimeSolver</a></div><div class="ttdoc">An abstract class for solving a Boltzmann-Poisson system of equations.</div><div class="ttdef"><b>Definition:</b> itimesolver.hpp:11</div></div>
 <div class="ttc" id="aclassPredCorr_html"><div class="ttname"><a href="classPredCorr.html">PredCorr</a></div><div class="ttdoc">A class that solves a Boltzmann-Poisson system of equations using a predictor-corrector scheme.</div><div class="ttdef"><b>Definition:</b> predcorr.hpp:23</div></div>
 <div class="ttc" id="aclassPredCorr_html_a2456246c1a302aea3302ae4ea8521b4d"><div class="ttname"><a href="classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d">PredCorr::PredCorr</a></div><div class="ttdeci">PredCorr(IBoltzmannSolver const &amp;boltzmann_solver, IPoissonSolver const &amp;poisson_solver)</div><div class="ttdoc">Creates an instance of the predictor-corrector class.</div></div>
-<div class="ttc" id="aclassPredCorr_html_afd69c0eb2605008c0d4ecbd70e0ccbd0"><div class="ttname"><a href="classPredCorr.html#afd69c0eb2605008c0d4ecbd70e0ccbd0">PredCorr::operator()</a></div><div class="ttdeci">device_t&lt; DSpanSpXVx &gt; operator()(device_t&lt; DSpanSpXVx &gt; allfdistribu, double time_start, double dt, int steps=1) const override</div><div class="ttdoc">Solves the Boltzmann-Poisson system.</div></div>
+<div class="ttc" id="aclassPredCorr_html_a5916671433abd2af3ee5e0ed3b8eae60"><div class="ttname"><a href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">PredCorr::operator()</a></div><div class="ttdeci">DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double time_start, double dt, int steps=1) const override</div><div class="ttdoc">Solves the Boltzmann-Poisson system.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

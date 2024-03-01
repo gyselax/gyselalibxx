@@ -4,7 +4,7 @@ var searchData=
   ['electricfield_127',['ElectricField',['../classElectricField.html',1,'ElectricField'],['../classElectricField.html#a125d3aed94fbcc1adcd2274f29587c5b',1,'ElectricField::ElectricField()']]],
   ['element_5ftype_128',['element_type',['../classVectorField.html#a7d71d064cda609eb5a4bd7a5b8ca870d',1,'VectorField::element_type()'],['../classVectorFieldSpan.html#a2068672157fb033bbdb9a634f8e678a0',1,'VectorFieldSpan::element_type()']]],
   ['epsilon_129',['epsilon',['../classCzarnyToCartesian.html#a9e4ad729fd290d47759637b69b9aa30a',1,'CzarnyToCartesian']]],
-  ['epsilon_5fbot_130',['epsilon_bot',['../classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c',1,'BumpontailEquilibrium']]],
+  ['epsilon_5fbot_130',['epsilon_bot',['../classBumpontailEquilibrium.html#a364f262c4b5d89461566bf23c6ec6e70',1,'BumpontailEquilibrium']]],
   ['equilibrium_131',['equilibrium',['../classDiocotronDensitySolution.html#addb4e4b9e22583a0922b16b770841c47',1,'DiocotronDensitySolution']]],
   ['euler_132',['Euler',['../classEuler.html',1,'Euler&lt; ValChunk, DerivChunk &gt;'],['../classEuler.html#a8019703dccd8358b9b221818fa51bdcb',1,'Euler::Euler()']]],
   ['evaluate_133',['evaluate',['../classLagrange.html#ad527b811b643d250343f3cf19de2be7d',1,'Lagrange']]],

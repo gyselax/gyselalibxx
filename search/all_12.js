@@ -16,7 +16,7 @@ var searchData=
   ['sheath_20simulations_374',['Sheath simulations',['../simulations_geometryXVx_sheath.html',1,'simulations_geometryXVx']]],
   ['simulations_20in_20_28r_2c_20theta_29_20geometry_375',['Simulations in (r, theta) geometry',['../simulations_geometryRTheta.html',1,'simulations']]],
   ['simulations_20in_20_28x_2c_20vx_29_20geometry_376',['Simulations in (x, vx) geometry',['../simulations_geometryXVx.html',1,'simulations']]],
-  ['singlemodeperturbinitialization_377',['SingleModePerturbInitialization',['../classSingleModePerturbInitialization.html',1,'SingleModePerturbInitialization'],['../classSingleModePerturbInitialization.html#adb062b4a4a260854ef16eac6e2e8b8af',1,'SingleModePerturbInitialization::SingleModePerturbInitialization()']]],
+  ['singlemodeperturbinitialization_377',['SingleModePerturbInitialization',['../classSingleModePerturbInitialization.html',1,'SingleModePerturbInitialization'],['../classSingleModePerturbInitialization.html#ad7471b3f7288ab5653f379d558fa25fb',1,'SingleModePerturbInitialization::SingleModePerturbInitialization()']]],
   ['solution_5fat_5fpole_378',['solution_at_pole',['../classManufacturedPoissonTest.html#a9aac013116d3c04b11cdef64cd870315',1,'ManufacturedPoissonTest']]],
   ['span_5fcview_379',['span_cview',['../classVectorFieldSpan.html#ac9835c4b3c61102263bc404c948c551c',1,'VectorFieldSpan::span_cview()'],['../classVectorField.html#ae5421322e080a9f2ae63ff7796da6ed3',1,'VectorField::span_cview() const']]],
   ['span_5ftype_380',['span_type',['../classVectorField.html#a94d0034047dacae6e8a7f87d8b21fc41',1,'VectorField::span_type()'],['../classVectorFieldSpan.html#a159b7fcc46c877cd175b88be6b47d2d3',1,'VectorFieldSpan::span_type()']]],

@@ -125,9 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9b209db47e420d108fbb6f329a65bbdf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeDensityCalculator.html#a9b209db47e420d108fbb6f329a65bbdf">ChargeDensityCalculator</a> (const ChunkViewType &amp;coeffs)</td></tr>
 <tr class="memdesc:a9b209db47e420d108fbb6f329a65bbdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classChargeDensityCalculator.html" title="A class which computes charges density with Kokkos.">ChargeDensityCalculator</a> object.  <a href="classChargeDensityCalculator.html#a9b209db47e420d108fbb6f329a65bbdf">More...</a><br /></td></tr>
 <tr class="separator:a9b209db47e420d108fbb6f329a65bbdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d290b71e1f3e63af9f570a299523051"><td class="memItemLeft" align="right" valign="top">device_t&lt; DSpanX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeDensityCalculator.html#a1d290b71e1f3e63af9f570a299523051">operator()</a> (device_t&lt; DSpanX &gt; rho, device_t&lt; DViewSpXVx &gt; allfdistribu) const final</td></tr>
-<tr class="memdesc:a1d290b71e1f3e63af9f570a299523051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the charge density rho from the distribution function.  <a href="classChargeDensityCalculator.html#a1d290b71e1f3e63af9f570a299523051">More...</a><br /></td></tr>
-<tr class="separator:a1d290b71e1f3e63af9f570a299523051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7440f208cab363eef9c4374da155fea"><td class="memItemLeft" align="right" valign="top">DSpanX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeDensityCalculator.html#ad7440f208cab363eef9c4374da155fea">operator()</a> (DSpanX rho, DViewSpXVx allfdistribu) const final</td></tr>
+<tr class="memdesc:ad7440f208cab363eef9c4374da155fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the charge density rho from the distribution function.  <a href="classChargeDensityCalculator.html#ad7440f208cab363eef9c4374da155fea">More...</a><br /></td></tr>
+<tr class="separator:ad7440f208cab363eef9c4374da155fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d97d4f1d146845b2ec7f54f83344089"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeDensityCalculator.html#a2d97d4f1d146845b2ec7f54f83344089">ChargeDensityCalculator</a> (<a class="el" href="classSplineBuilder2D.html">SplineVxVyBuilder</a> const &amp;spline_vxvy_builder, <a class="el" href="classSplineEvaluator2D.html">SplineVxVyEvaluator</a> const &amp;spline_vxvy_evaluator)</td></tr>
 <tr class="memdesc:a2d97d4f1d146845b2ec7f54f83344089"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of SplineChargeDensityCalculator.  <a href="classChargeDensityCalculator.html#a2d97d4f1d146845b2ec7f54f83344089">More...</a><br /></td></tr>
 <tr class="separator:a2d97d4f1d146845b2ec7f54f83344089"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -214,8 +214,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1d290b71e1f3e63af9f570a299523051"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d290b71e1f3e63af9f570a299523051">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="ad7440f208cab363eef9c4374da155fea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7440f208cab363eef9c4374da155fea">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,15 +224,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">device_t&lt;DSpanX&gt; ChargeDensityCalculator::operator() </td>
+          <td class="memname">DSpanX ChargeDensityCalculator::operator() </td>
           <td>(</td>
-          <td class="paramtype">device_t&lt; DSpanX &gt;&#160;</td>
+          <td class="paramtype">DSpanX&#160;</td>
           <td class="paramname"><em>rho</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">device_t&lt; DViewSpXVx &gt;&#160;</td>
+          <td class="paramtype">DViewSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>&#160;</td>
         </tr>
         <tr>
@@ -258,7 +258,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>rho The charge density. </dd></dl>
 
-<p>Implements <a class="el" href="classIChargeDensityCalculator.html#a6bd138c5a16a45ee1d4ecddda8734575">IChargeDensityCalculator</a>.</p>
+<p>Implements <a class="el" href="classIChargeDensityCalculator.html#a94853ddecb41d04c60155fdc18f9fcf3">IChargeDensityCalculator</a>.</p>
 
 </div>
 </div>

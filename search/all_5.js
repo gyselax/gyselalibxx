@@ -4,7 +4,7 @@ var searchData=
   ['femnonperiodicpoissonsolver_138',['FemNonPeriodicPoissonSolver',['../classFemNonPeriodicPoissonSolver.html',1,'FemNonPeriodicPoissonSolver'],['../classFemNonPeriodicPoissonSolver.html#ac4823c397f9cfc7a2904da3e6cbb13a4',1,'FemNonPeriodicPoissonSolver::FemNonPeriodicPoissonSolver()']]],
   ['femperiodicpoissonsolver_139',['FemPeriodicPoissonSolver',['../classFemPeriodicPoissonSolver.html',1,'FemPeriodicPoissonSolver'],['../classFemPeriodicPoissonSolver.html#a6daece15bbe984f1062593a31b2a478a',1,'FemPeriodicPoissonSolver::FemPeriodicPoissonSolver()']]],
   ['fftpoissonsolver_140',['FftPoissonSolver',['../classFftPoissonSolver.html',1,'FftPoissonSolver'],['../classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd',1,'FftPoissonSolver::FftPoissonSolver(IChargeDensityCalculator const &amp;compute_rho)'],['../classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd',1,'FftPoissonSolver::FftPoissonSolver(IChargeDensityCalculator const &amp;compute_rho)']]],
-  ['fill_5fmatrix_5fwith_5fcoeff_141',['fill_matrix_with_coeff',['../classCollisionsIntra.html#a030ed88a896325bca0ad3b249af1a264',1,'CollisionsIntra']]],
+  ['fill_5fmatrix_5fwith_5fcoeff_141',['fill_matrix_with_coeff',['../classCollisionsIntra.html#ad0dc6d2a1b8acb82d9ec60592ef72e6c',1,'CollisionsIntra']]],
   ['find_5fequilibrium_142',['find_equilibrium',['../classVortexMergerEquilibria.html#a8761babf41d8e77ecf9159f142a10091',1,'VortexMergerEquilibria']]],
   ['fluidmoments_143',['FluidMoments',['../classFluidMoments.html',1,'FluidMoments'],['../classFluidMoments.html#a349bb1bca93f384ceea5ce4df7457443',1,'FluidMoments::FluidMoments()']]],
   ['for_5feach_5ftuple_5fcat_144',['for_each_tuple_cat',['../structfor__each__tuple__cat.html',1,'']]],

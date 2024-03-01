@@ -1,10 +1,10 @@
 var classBumpontailEquilibrium =
 [
-    [ "BumpontailEquilibrium", "classBumpontailEquilibrium.html#a06a0b54f9b731073cf23f94839b2e57b", null ],
+    [ "BumpontailEquilibrium", "classBumpontailEquilibrium.html#a3d08f6633ffa3867429c946e9ec19db5", null ],
     [ "~BumpontailEquilibrium", "classBumpontailEquilibrium.html#a3c79c23553031c7a766db33feb02050d", null ],
-    [ "compute_twomaxwellian", "classBumpontailEquilibrium.html#af3f0eca1b7309fc06eadfc2968be7eb5", null ],
-    [ "operator()", "classBumpontailEquilibrium.html#a9180339254411a4fe68d6c08aad9f785", null ],
-    [ "epsilon_bot", "classBumpontailEquilibrium.html#ad8e352123b6d60f8b8409244ab209a8c", null ],
-    [ "temperature_bot", "classBumpontailEquilibrium.html#ac27c5a2a94df6fd896e7f60d429a02e3", null ],
-    [ "mean_velocity_bot", "classBumpontailEquilibrium.html#a816fff8b884de64b09953986507eebb5", null ]
+    [ "compute_twomaxwellian", "classBumpontailEquilibrium.html#a8b3d639a3f0cc35ac93ec19818bbd86e", null ],
+    [ "operator()", "classBumpontailEquilibrium.html#a4cd4ddf29a44f068db013ed7dc2a0215", null ],
+    [ "epsilon_bot", "classBumpontailEquilibrium.html#a364f262c4b5d89461566bf23c6ec6e70", null ],
+    [ "temperature_bot", "classBumpontailEquilibrium.html#aa96295ff0b0e3f60f29c53eb2c5c9fe8", null ],
+    [ "mean_velocity_bot", "classBumpontailEquilibrium.html#a92c189484ec209d152b6f5beb3c9387e", null ]
 ];

@@ -118,8 +118,8 @@ $(document).ready(function(){initNavTree('kinetic__source_8hpp_source.html','');
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">double</span> m_density;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">double</span> m_energy;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">double</span> m_temperature;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    DFieldX m_spatial_extent;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    DFieldVx m_velocity_shape;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    host_t&lt;DFieldX&gt; m_spatial_extent;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    host_t&lt;DFieldVx&gt; m_velocity_shape;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classKineticSource.html#a361b8d5b34373ff17f657c9df6067f88">   53</a></span>&#160;    <a class="code" href="classKineticSource.html#a361b8d5b34373ff17f657c9df6067f88">KineticSource</a>(</div>
@@ -134,12 +134,12 @@ $(document).ready(function(){initNavTree('kinetic__source_8hpp_source.html','');
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    ~<a class="code" href="classKineticSource.html">KineticSource</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classKineticSource.html#a99ebcf6c9cdcefdfbec763a937ef03fc">   76</a></span>&#160;    device_t&lt;DSpanSpXVx&gt; <a class="code" href="classKineticSource.html#a99ebcf6c9cdcefdfbec763a937ef03fc">operator()</a>(device_t&lt;DSpanSpXVx&gt; allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classKineticSource.html#ab3425fe8d56c34d35fe15a4378e97a6a">   76</a></span>&#160;    DSpanSpXVx <a class="code" href="classKineticSource.html#ab3425fe8d56c34d35fe15a4378e97a6a">operator()</a>(DSpanSpXVx allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
 <div class="ttc" id="aclassIRightHandSide_html"><div class="ttname"><a href="classIRightHandSide.html">IRightHandSide</a></div><div class="ttdoc">An abstract class representing a source in Boltzmann equation.</div><div class="ttdef"><b>Definition:</b> irighthandside.hpp:16</div></div>
 <div class="ttc" id="aclassKineticSource_html"><div class="ttname"><a href="classKineticSource.html">KineticSource</a></div><div class="ttdoc">A class that describes a source of particles.</div><div class="ttdef"><b>Definition:</b> kinetic_source.hpp:32</div></div>
 <div class="ttc" id="aclassKineticSource_html_a361b8d5b34373ff17f657c9df6067f88"><div class="ttname"><a href="classKineticSource.html#a361b8d5b34373ff17f657c9df6067f88">KineticSource::KineticSource</a></div><div class="ttdeci">KineticSource(IDomainX const &amp;gridx, IDomainVx const &amp;gridv, double extent, double stiffness, double amplitude, double density, double energy, double temperature)</div><div class="ttdoc">Creates an instance of the KineticSource class.</div></div>
-<div class="ttc" id="aclassKineticSource_html_a99ebcf6c9cdcefdfbec763a937ef03fc"><div class="ttname"><a href="classKineticSource.html#a99ebcf6c9cdcefdfbec763a937ef03fc">KineticSource::operator()</a></div><div class="ttdeci">device_t&lt; DSpanSpXVx &gt; operator()(device_t&lt; DSpanSpXVx &gt; allfdistribu, double dt) const override</div><div class="ttdoc">Update the distribution function following the KineticSource operator.</div></div>
+<div class="ttc" id="aclassKineticSource_html_ab3425fe8d56c34d35fe15a4378e97a6a"><div class="ttname"><a href="classKineticSource.html#ab3425fe8d56c34d35fe15a4378e97a6a">KineticSource::operator()</a></div><div class="ttdeci">DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override</div><div class="ttdoc">Update the distribution function following the KineticSource operator.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
