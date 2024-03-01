@@ -30,7 +30,7 @@ enum class MaskType { Normal, Inverted };
  * @param[in] normalized A boolean that equals true if the integral of the mask must be equal to one.
  * @returns A Dfield containing the mask. 
  */
-DFieldX mask_tanh(
+host_t<DFieldX> mask_tanh(
         IDomainX const& gridx,
         double extent,
         double stiffness,

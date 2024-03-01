@@ -40,5 +40,5 @@ public:
      *                          read from an external file.
      * @return The initialized distribution function.
      */
-    device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu) const override;
 };

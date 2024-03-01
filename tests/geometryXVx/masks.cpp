@@ -51,22 +51,22 @@ TEST(Masks, Ordering)
     // with x_left = x_min + Lx*extent
     //      x_right = x_min + Lx - Lx*extent
     //      Lx = gridx total length
-    DFieldX mask = mask_tanh(gridx, extent, stiffness, MaskType::Normal, false);
+    host_t<DFieldX> mask = mask_tanh(gridx, extent, stiffness, MaskType::Normal, false);
     EXPECT_LE(std::fabs(mask(middle) - 1.0), tolerance);
     EXPECT_LE(std::fabs(mask(tenth)), tolerance);
 
     // same but with a mask that is zero inside [x_left, x_right]
-    DFieldX mask_inverted = mask_tanh(gridx, extent, stiffness, MaskType::Inverted, false);
+    host_t<DFieldX> mask_inverted = mask_tanh(gridx, extent, stiffness, MaskType::Inverted, false);
     EXPECT_LE(std::fabs(mask_inverted(middle)), tolerance);
     EXPECT_LE(std::fabs(mask_inverted(tenth) - 1.0), tolerance);
 
     // tests if integral of normalized mask equals 1
-    DFieldX const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
+    host_t<DFieldX> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
     Quadrature<IDimX> const integrate_x(quadrature_coeffs);
 
-    DFieldX mask_normalized = mask_tanh(gridx, extent, stiffness, MaskType::Normal, true);
+    host_t<DFieldX> mask_normalized = mask_tanh(gridx, extent, stiffness, MaskType::Normal, true);
     EXPECT_LE(std::fabs(integrate_x(mask_normalized) - 1.0), tolerance);
-    DFieldX mask_normalized_inverted
+    host_t<DFieldX> mask_normalized_inverted
             = mask_tanh(gridx, extent, stiffness, MaskType::Inverted, true);
     EXPECT_LE(std::fabs(integrate_x(mask_normalized_inverted) - 1.0), tolerance);
 }

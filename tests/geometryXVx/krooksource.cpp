@@ -56,13 +56,13 @@ TEST(KrookSource, Adaptive)
     IDomainSp const gridsp = dom_sp;
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    DFieldX const quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
-    DFieldVx const quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
+    host_t<DFieldX> const quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
+    host_t<DFieldVx> const quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
     Quadrature<IDimX> const integrate_x(quadrature_coeffs_x);
     Quadrature<IDimVx> const integrate_v(quadrature_coeffs_vx);
 
-    FieldSp<int> charges(dom_sp);
-    DFieldSp masses(dom_sp);
+    host_t<FieldSp<int>> charges(dom_sp);
+    host_t<DFieldSp> masses(dom_sp);
     IndexSp my_iion(dom_sp.front());
     IndexSp my_ielec(dom_sp.back());
     charges(my_iion) = 1;
@@ -92,32 +92,32 @@ TEST(KrookSource, Adaptive)
     double const density_init_ion = 1.;
     double const density_init_elec = 2.;
     double const temperature_init = 1.;
-    device_t<DFieldSpXVx> allfdistribu_device(mesh);
+    DFieldSpXVx allfdistribu(mesh);
     ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
-        device_t<DFieldVx> finit_device(gridvx);
+        DFieldVx finit(gridvx);
         if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
             MaxwellianEquilibrium::
-                    compute_maxwellian(finit_device, density_init_ion, temperature_init, 0.);
+                    compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
         } else {
             MaxwellianEquilibrium::
-                    compute_maxwellian(finit_device, density_init_elec, temperature_init, 0.);
+                    compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
         }
-        auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
-        ddc::deepcopy(allfdistribu_device[ispx], finit);
+        auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
+        ddc::deepcopy(allfdistribu[ispx], finit_host);
     });
 
     // error with a given deltat
     double const deltat = 0.1;
-    rhs_krook(allfdistribu_device, deltat);
-    auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
+    rhs_krook(allfdistribu, deltat);
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
 
-    DFieldSpX densities(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    host_t<DFieldSpX> densities(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        densities(ispx) = integrate_v(allfdistribu[ispx]);
+        densities(ispx) = integrate_v(allfdistribu_host[ispx]);
     });
 
     // the charge should be conserved by the operator
-    DFieldX error(ddc::get_domain<IDimX>(allfdistribu));
+    host_t<DFieldX> error(ddc::get_domain<IDimX>(allfdistribu_host));
     ddc::for_each(ddc::get_domain<IDimX>(allfdistribu), [&](IndexX const ix) {
         error(ix) = std::fabs(
                 charge(my_iion) * (densities(my_iion, ix) - density_init_ion)
@@ -126,23 +126,23 @@ TEST(KrookSource, Adaptive)
 
     // reinitialization of the distribution function
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        device_t<DFieldVx> finit_device(gridvx);
+        DFieldVx finit(gridvx);
         if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
             MaxwellianEquilibrium::
-                    compute_maxwellian(finit_device, density_init_ion, temperature_init, 0.);
+                    compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
         } else {
             MaxwellianEquilibrium::
-                    compute_maxwellian(finit_device, density_init_elec, temperature_init, 0.);
+                    compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
         }
-        auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
-        ddc::deepcopy(allfdistribu_device[ispx], finit);
+        auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
+        ddc::deepcopy(allfdistribu[ispx], finit_host);
     });
 
     // error with a deltat 10 times smaller
-    rhs_krook(allfdistribu_device, 0.01);
-    ddc::deepcopy(allfdistribu, allfdistribu_device);
+    rhs_krook(allfdistribu, 0.01);
+    ddc::deepcopy(allfdistribu_host, allfdistribu);
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        densities(ispx) = integrate_v(allfdistribu[ispx]);
+        densities(ispx) = integrate_v(allfdistribu_host[ispx]);
     });
 
     // the rk2 scheme used in the krook operator should be of order 2
@@ -196,8 +196,8 @@ TEST(KrookSource, Constant)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    FieldSp<int> charges(dom_sp);
-    DFieldSp masses(dom_sp);
+    host_t<FieldSp<int>> charges(dom_sp);
+    host_t<DFieldSp> masses(dom_sp);
     charges(dom_sp.front()) = 1;
     charges(dom_sp.back()) = -1;
     ddc::for_each(dom_sp, [&](IndexSp const isp) { masses(isp) = 1.0; });
@@ -222,7 +222,7 @@ TEST(KrookSource, Constant)
             temperature_target);
 
     // compute the krook mask (spatial extent)
-    DFieldX mask = mask_tanh(gridx, extent, stiffness, MaskType::Inverted, false);
+    host_t<DFieldX> mask = mask_tanh(gridx, extent, stiffness, MaskType::Inverted, false);
 
     // simulation
     double const deltat = 1.;
@@ -230,35 +230,35 @@ TEST(KrookSource, Constant)
     // Initialization of the distribution function : maxwellian
     double const density_init = 1.;
     double const temperature_init = 1.;
-    device_t<DFieldVx> finit_device(gridvx);
-    MaxwellianEquilibrium::compute_maxwellian(finit_device, density_init, temperature_init, 0.);
-    auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
-    device_t<DFieldSpXVx> allfdistribu_device(mesh);
+    DFieldVx finit(gridvx);
+    MaxwellianEquilibrium::compute_maxwellian(finit, density_init, temperature_init, 0.);
+    auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
+    DFieldSpXVx allfdistribu(mesh);
     ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
-        ddc::deepcopy(allfdistribu_device[ispx], finit);
+        ddc::deepcopy(allfdistribu[ispx], finit_host);
     });
 
     int const nbsteps = 100;
     for (int iter = 0; iter < nbsteps; ++iter) {
-        rhs_krook(allfdistribu_device, deltat);
+        rhs_krook(allfdistribu, deltat);
     };
-    auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
 
     // tests if distribution function matches theoretical prediction
-    device_t<DFieldVx> ftarget_device(gridvx);
-    MaxwellianEquilibrium::
-            compute_maxwellian(ftarget_device, density_target, temperature_target, 0.);
-    auto ftarget = ddc::create_mirror_view_and_copy(ftarget_device.span_view());
+    DFieldVx ftarget(gridvx);
+    MaxwellianEquilibrium::compute_maxwellian(ftarget, density_target, temperature_target, 0.);
+    auto ftarget_host = ddc::create_mirror_view_and_copy(ftarget.span_view());
 
     ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
         // predicted distribution function value
         double const allfdistribu_pred
-                = ftarget(ddc::select<IDimVx>(ispxvx))
-                  + (finit(ddc::select<IDimVx>(ispxvx)) - ftarget(ddc::select<IDimVx>(ispxvx)))
+                = ftarget_host(ddc::select<IDimVx>(ispxvx))
+                  + (finit_host(ddc::select<IDimVx>(ispxvx))
+                     - ftarget_host(ddc::select<IDimVx>(ispxvx)))
                             * std::exp(
                                     -amplitude * mask(ddc::select<IDimX>(ispxvx)) * deltat
                                     * nbsteps);
-        double const error = std::fabs(allfdistribu(ispxvx) - allfdistribu_pred);
+        double const error = std::fabs(allfdistribu_host(ispxvx) - allfdistribu_pred);
 
         EXPECT_LE(error, 1e-13);
     });
