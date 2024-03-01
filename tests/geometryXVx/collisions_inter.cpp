@@ -55,17 +55,17 @@ TEST(CollisionsInter, CollisionsInter)
     IDomainVx const gridvx = builder_vx.interpolation_domain();
     IDomainSpXVx const mesh(dom_sp, gridx, gridvx);
 
-    FieldSp<int> charges(dom_sp);
+    host_t<FieldSp<int>> charges(dom_sp);
     charges(my_ielec) = -1;
     charges(my_iion) = 1;
-    DFieldSp masses(dom_sp);
+    host_t<DFieldSp> masses(dom_sp);
     double const mass_ion(400.), mass_elec(1.);
     masses(my_ielec) = mass_elec;
     masses(my_iion) = mass_ion;
 
     // Initialization of the distribution function as a maxwellian
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
-    device_t<DFieldSpXVx> allfdistribu_device(mesh);
+    DFieldSpXVx allfdistribu(mesh);
 
     std::vector<double> deltat_list = {0.1, 0.01};
     std::vector<double> error_deltat;
@@ -73,82 +73,80 @@ TEST(CollisionsInter, CollisionsInter)
         // Initialization of the distribution function as a maxwellian with a
         // different electron and ion temperatures
         double const density_init(1.);
-        DFieldSp temperature_init(dom_sp);
+        host_t<DFieldSp> temperature_init(dom_sp);
         temperature_init(my_iion) = 1.;
         temperature_init(my_ielec) = 1.2;
         double const fluid_velocity_init(0.);
         ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
-            device_t<DFieldVx> finit_device(gridvx);
+            DFieldVx finit(gridvx);
             MaxwellianEquilibrium::compute_maxwellian(
-                    finit_device.span_view(),
+                    finit.span_view(),
                     density_init,
                     temperature_init(ddc::select<IDimSp>(ispx)),
                     fluid_velocity_init);
-            auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
-            ddc::deepcopy(allfdistribu_device[ispx], finit);
+            auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
+            ddc::deepcopy(allfdistribu[ispx], finit_host);
         });
 
 
         double const nustar0(0.1);
         CollisionsInter collisions(mesh, nustar0);
 
-        DFieldVx const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
+        host_t<DFieldVx> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
         Quadrature<IDimVx> integrate(quadrature_coeffs);
         FluidMoments moments(integrate);
 
-        auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
-        device_t<DFieldSpX> nustar_profile_alloc(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-        device_t<DSpanSpX> nustar_profile = nustar_profile_alloc.span_view();
+        auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
+        DFieldSpX nustar_profile_alloc(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+        DSpanSpX nustar_profile = nustar_profile_alloc.span_view();
         compute_nustar_profile(nustar_profile, nustar0);
 
         int const nbiter(100);
         for (int iter(0); iter < nbiter; iter++) {
-            collisions(allfdistribu_device, deltat);
+            collisions(allfdistribu, deltat);
         }
-        ddc::deepcopy(allfdistribu, allfdistribu_device);
+        ddc::deepcopy(allfdistribu_host, allfdistribu);
 
         double error_L1(0);
-        DFieldSpX density(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-        DFieldSpX fluid_velocity(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-        DFieldSpX temperature(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+        host_t<DFieldSpX> density_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+        host_t<DFieldSpX> fluid_velocity_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+        host_t<DFieldSpX> temperature_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
 
-        ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-            moments(density(ispx), allfdistribu[ispx], FluidMoments::s_density);
-            moments(fluid_velocity(ispx),
-                    allfdistribu[ispx],
-                    density(ispx),
+        ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
+            moments(density_host(ispx), allfdistribu_host[ispx], FluidMoments::s_density);
+            moments(fluid_velocity_host(ispx),
+                    allfdistribu_host[ispx],
+                    density_host(ispx),
                     FluidMoments::s_velocity);
-            moments(temperature(ispx),
-                    allfdistribu[ispx],
-                    density(ispx),
-                    fluid_velocity(ispx),
+            moments(temperature_host(ispx),
+                    allfdistribu_host[ispx],
+                    density_host(ispx),
+                    fluid_velocity_host(ispx),
                     FluidMoments::s_temperature);
         });
 
         //Collision frequencies, momentum and energy exchange terms
-        device_t<DFieldSpX> collfreq_ab_device(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-        auto density_device_alloc = ddc::
-                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density.span_view());
-        auto density_device = density_device_alloc.span_view();
-        auto temperature_device_alloc = ddc::create_mirror_view_and_copy(
+        DFieldSpX collfreq_ab(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+        auto density_alloc = ddc::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
-                temperature.span_view());
-        auto temperature_device = temperature_device_alloc.span_view();
-        compute_collfreq_ab(
-                collfreq_ab_device.span_view(),
-                nustar_profile,
-                density_device,
-                temperature_device);
-        auto collfreq_ab = ddc::create_mirror_view_and_copy(collfreq_ab_device.span_view());
+                density_host.span_view());
+        auto density = density_alloc.span_view();
+        auto temperature_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                temperature_host.span_view());
+        auto temperature = temperature_alloc.span_view();
+        compute_collfreq_ab(collfreq_ab.span_view(), nustar_profile, density, temperature);
+        auto collfreq_ab_host = ddc::create_mirror_view_and_copy(collfreq_ab.span_view());
 
         double const me_on_memi(mass(my_ielec) / (mass(my_ielec) + mass(my_iion)));
         ddc::for_each(gridx, [&](IndexX const ix) {
             // test : dlog(T_e - T_i)/dt = -12nu_ei*m_e/(m_e+m_b)
             // should be verified
             double const error = std::fabs(
-                    std::log(std::fabs(temperature(my_ielec, ix) - temperature(my_iion, ix)))
+                    std::log(std::fabs(
+                            temperature_host(my_ielec, ix) - temperature_host(my_iion, ix)))
                     - std::log(std::fabs(temperature_init(my_ielec) - temperature_init(my_iion)))
-                    + 12 * collfreq_ab(my_ielec, ix) * me_on_memi * nbiter * deltat);
+                    + 12 * collfreq_ab_host(my_ielec, ix) * me_on_memi * nbiter * deltat);
             error_L1 += error;
         });
         error_L1 = error_L1 / x_size;

@@ -25,10 +25,11 @@ TEST(NeumannSplineQuadratureTest, ExactForConstantFunc)
 
     IDomainVx const gridvx = builder_vx.interpolation_domain();
 
-    DFieldVx const quadrature_coeffs = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
+    host_t<DFieldVx> const quadrature_coeffs
+            = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
     Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    DFieldVx values(gridvx);
+    host_t<DFieldVx> values(gridvx);
 
     ddc::for_each(gridvx, [&](ddc::DiscreteElement<IDimVx> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);
@@ -61,7 +62,7 @@ double compute_error(int n_elems)
             ddc::SplineSolver::GINKGO,
             IDimY>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
-    using DFieldY = ddc::Chunk<double, IDomainY>;
+    using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
 
     ddc::Coordinate<Y<N>> const y_min(-1.0);
     ddc::Coordinate<Y<N>> const y_max(1.0);
@@ -73,10 +74,11 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    DFieldY const quadrature_coeffs = neumann_spline_quadrature_coefficients(gridy, builder_y);
+    host_t<DFieldY> const quadrature_coeffs
+            = neumann_spline_quadrature_coefficients(gridy, builder_y);
     Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    DFieldY values(gridy);
+    host_t<DFieldY> values(gridy);
 
     ddc::for_each(gridy, [&](ddc::DiscreteElement<IDimY> const idx) {
         double x = ddc::coordinate(idx);

@@ -19,13 +19,13 @@
 class BumpontailEquilibrium : public IEquilibrium
 {
     /**Density of the bump-on-tail part for all kinetic species*/
-    FieldSp<double> m_epsilon_bot;
+    host_t<DFieldSp> m_epsilon_bot;
 
     /**Temperature of the bump-on-tail for all kinetic species*/
-    FieldSp<double> m_temperature_bot;
+    host_t<DFieldSp> m_temperature_bot;
 
     /**Mean velocity of the bump-on-tail for all kinetic species*/
-    FieldSp<double> m_mean_velocity_bot;
+    host_t<DFieldSp> m_mean_velocity_bot;
 
 public:
     /**
@@ -41,7 +41,7 @@ public:
      * @param[in] mean_velocity_bot A parameter that represents the mean velocity of the bump-on-tail Maxwellian. 
      */
     void compute_twomaxwellian(
-            device_t<DSpanVx> fMaxwellian,
+            DSpanVx fMaxwellian,
             double epsilon_bot,
             double temperature_bot,
             double mean_velocity_bot) const;
@@ -51,7 +51,10 @@ public:
      * @param[in] temperature_bot A parameter that represents the temperature of the bump-on-tail Maxwellian for each species. 
      * @param[in] mean_velocity_bot A parameter that represents the mean velocity of the bump-on-tail Maxwellian for each species. 
      */
-    BumpontailEquilibrium(DViewSp epsilon_bot, DViewSp temperature_bot, DViewSp mean_velocity_bot);
+    BumpontailEquilibrium(
+            host_t<DViewSp> epsilon_bot,
+            host_t<DViewSp> temperature_bot,
+            host_t<DViewSp> mean_velocity_bot);
 
     ~BumpontailEquilibrium() override = default;
 
@@ -60,13 +63,13 @@ public:
      * @param[out] allfequilibrium The initialized distribution function.
      * @return The initialized distribution function.
      */
-    device_t<DSpanSpVx> operator()(device_t<DSpanSpVx> allfequilibrium) const override;
+    DSpanSpVx operator()(DSpanSpVx allfequilibrium) const override;
 
     /**
      * @brief A method for accessing the m_epsilon_bot member variable of the class.
      * @return a View containing the m_epsilon_bot variable.
      */
-    ViewSp<double> epsilon_bot() const
+    host_t<DViewSp> epsilon_bot() const
     {
         return m_epsilon_bot;
     }
@@ -75,7 +78,7 @@ public:
      * @brief A method for accessing the m_temperature_bot member variable of the class.
      * @return a View containing the m_temperature_bot variable.
      */
-    ViewSp<double> temperature_bot() const
+    host_t<DViewSp> temperature_bot() const
     {
         return m_temperature_bot;
     }
@@ -84,7 +87,7 @@ public:
      * @brief A method for accessing the m_mean_velocity_bot member variable of the class.
      * @return a View containing the m_velocity_bot variable.
      */
-    ViewSp<double> mean_velocity_bot() const
+    host_t<DViewSp> mean_velocity_bot() const
     {
         return m_mean_velocity_bot;
     }

@@ -51,21 +51,21 @@ TEST(Physics, FluidMoments)
     IDomainVx const gridvx = builder_vx.interpolation_domain();
     IDomainSpXVx const mesh(IDomainSp(my_iion, IVectSp(1)), gridx, gridvx);
 
-    FieldSp<int> charges(dom_sp);
+    host_t<FieldSp<int>> charges(dom_sp);
     charges(my_ielec) = -1;
     charges(my_iion) = 1;
-    DFieldSp masses(dom_sp);
+    host_t<DFieldSp> masses(dom_sp);
     ddc::fill(masses, 1);
 
     // Initialization of the distribution function as a maxwellian
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
-    DFieldSpXVx allfdistribu(mesh);
+    host_t<DFieldSpXVx> allfdistribu(mesh);
 
     // Initialization of the distribution function as a maxwellian with
     // moments depending on space
-    DFieldSpX density_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX mean_velocity_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX temperature_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    host_t<DFieldSpX> density_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    host_t<DFieldSpX> mean_velocity_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    host_t<DFieldSpX> temperature_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
         double const density = 1.;
         double const density_ampl = 0.1;
@@ -85,22 +85,22 @@ TEST(Physics, FluidMoments)
         temperature_init(ispx)
                 = temperature
                   + temperature_ampl * std::sin(2 * M_PI * coordx / ddc::coordinate(gridx.back()));
-        device_t<DFieldVx> finit_device(gridvx);
+        DFieldVx finit(gridvx);
         MaxwellianEquilibrium::compute_maxwellian(
-                finit_device.span_view(),
+                finit.span_view(),
                 density_init(ispx),
                 temperature_init(ispx),
                 mean_velocity_init(ispx));
 
-        auto finit = ddc::create_mirror_view_and_copy(finit_device.span_view());
-        ddc::deepcopy(allfdistribu[ispx], finit);
+        auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
+        ddc::deepcopy(allfdistribu[ispx], finit_host);
     });
 
     // density and temperature
-    DFieldSpX density_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX mean_velocity_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldSpX temperature_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    DFieldVx const quadrature_coeffs
+    host_t<DFieldSpX> density_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    host_t<DFieldSpX> mean_velocity_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    host_t<DFieldSpX> temperature_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
+    host_t<DFieldVx> const quadrature_coeffs
             = trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu));
     Quadrature<IDimVx> integrate(quadrature_coeffs);
     FluidMoments moments(integrate);

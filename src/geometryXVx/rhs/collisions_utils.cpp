@@ -36,7 +36,7 @@ IndexSp find_ion(IDomainSp const dom_sp)
  * but could be space dependent (for instance to have no collisions in some specific
  * parts of the simulation box).
  */
-void compute_nustar_profile(device_t<DSpanSpX> nustar_profile, double nustar0)
+void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0)
 {
     double const Lx = ddcHelper::total_interval_length(ddc::get_domain<IDimX>(nustar_profile));
 
@@ -54,10 +54,10 @@ void compute_nustar_profile(device_t<DSpanSpX> nustar_profile, double nustar0)
  * Computes the space and species dependent collision frequency collfreq.
  */
 void compute_collfreq(
-        device_t<DSpanSpX> collfreq,
-        device_t<DViewSpX> nustar_profile,
-        device_t<DViewSpX> density,
-        device_t<DViewSpX> temperature)
+        DSpanSpX collfreq,
+        DViewSpX nustar_profile,
+        DViewSpX density,
+        DViewSpX temperature)
 {
     ddc::for_each(
             ddc::policies::parallel_device,
@@ -72,10 +72,10 @@ void compute_collfreq(
  * Computes the two species collision frequency collfreq_ei
  */
 void compute_collfreq_ab(
-        device_t<DSpanSpX> collfreq_ab,
-        device_t<DViewSpX> nustar_profile,
-        device_t<DViewSpX> density,
-        device_t<DViewSpX> temperature)
+        DSpanSpX collfreq_ab,
+        DViewSpX nustar_profile,
+        DViewSpX density,
+        DViewSpX temperature)
 {
     IndexSp const iion = find_ion(density.domain<IDimSp>());
     double const charge_ratio(charge(iion) / charge(ielec()));
@@ -116,12 +116,12 @@ void compute_collfreq_ab(
  * Computes the momentum and energy exchange terms between ions and electrons
  */
 void compute_momentum_energy_exchange(
-        device_t<DSpanSpX> momentum_exchange_ab,
-        device_t<DSpanSpX> energy_exchange_ab,
-        device_t<DViewSpX> collfreq_ab,
-        device_t<DViewSpX> density,
-        device_t<DViewSpX> mean_velocity,
-        device_t<DViewSpX> temperature)
+        DSpanSpX momentum_exchange_ab,
+        DSpanSpX energy_exchange_ab,
+        DViewSpX collfreq_ab,
+        DViewSpX density,
+        DViewSpX mean_velocity,
+        DViewSpX temperature)
 {
     IndexSp const iion = find_ion(density.domain<IDimSp>());
     double const mass_ratio(mass(ielec()) / mass(iion));

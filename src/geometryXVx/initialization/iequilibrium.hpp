@@ -18,5 +18,5 @@ public:
      *                                 On output: the initialized distribution function.
      * @return The initialized distribution function.
      */
-    virtual device_t<DSpanSpVx> operator()(device_t<DSpanSpVx> allfequilibrium) const = 0;
+    virtual DSpanSpVx operator()(DSpanSpVx allfequilibrium) const = 0;
 };

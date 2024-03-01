@@ -27,7 +27,7 @@ KrookSourceConstant::KrookSourceConstant(
     , m_ftarget(gridvx)
 {
     // mask that defines the region where the operator is active
-    DFieldX mask_host(gridx);
+    host_t<DFieldX> mask_host(gridx);
     switch (m_type) {
     case RhsType::Source:
         // the mask equals one in the interval [x_left, x_right]
@@ -66,9 +66,7 @@ KrookSourceConstant::KrookSourceConstant(
     }
 }
 
-device_t<DSpanSpXVx> KrookSourceConstant::operator()(
-        device_t<DSpanSpXVx> const allfdistribu,
-        double const dt) const
+DSpanSpXVx KrookSourceConstant::operator()(DSpanSpXVx const allfdistribu, double const dt) const
 {
     Kokkos::Profiling::pushRegion("KrookSource");
 

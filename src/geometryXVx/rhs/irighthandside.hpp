@@ -28,5 +28,5 @@ public:
      * @param[in] dt The timestep.
      * @return The distribution function after solving the source evolution equation.
      */
-    virtual device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu, double dt) const = 0;
+    virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const = 0;
 };

@@ -10,11 +10,10 @@ RestartInitialization::RestartInitialization(int iter_start, double& time_start)
 {
 }
 
-device_t<DSpanSpXVx> RestartInitialization::operator()(
-        device_t<DSpanSpXVx> const allfdistribu_device) const
+DSpanSpXVx RestartInitialization::operator()(DSpanSpXVx const allfdistribu) const
 {
-    auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
-    ddc::PdiEvent("restart").with("time_saved", m_time_start).with("fdistribu", allfdistribu);
-    ddc::deepcopy(allfdistribu_device, allfdistribu);
-    return allfdistribu_device;
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
+    ddc::PdiEvent("restart").with("time_saved", m_time_start).with("fdistribu", allfdistribu_host);
+    ddc::deepcopy(allfdistribu, allfdistribu_host);
+    return allfdistribu;
 }

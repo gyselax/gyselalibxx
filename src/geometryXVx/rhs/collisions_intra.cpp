@@ -102,9 +102,9 @@ CollisionsIntra::get_mesh_ghosted() const
 }
 
 void CollisionsIntra::compute_matrix_coeff(
-        device_t<DSpanSpXVx> AA,
-        device_t<DSpanSpXVx> BB,
-        device_t<DSpanSpXVx> CC,
+        DSpanSpXVx AA,
+        DSpanSpXVx BB,
+        DSpanSpXVx CC,
         device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Dcoll,
         device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted_staggered>> Dcoll_staggered,
         device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Nucoll,
@@ -162,9 +162,9 @@ void CollisionsIntra::compute_matrix_coeff(
 
 void CollisionsIntra::fill_matrix_with_coeff(
         Matrix_Banded& matrix,
-        DViewVx AA,
-        DViewVx BB,
-        DViewVx CC) const
+        host_t<DViewVx> AA,
+        host_t<DViewVx> BB,
+        host_t<DViewVx> CC) const
 {
     matrix.set_element(0, 0, BB(IndexVx(0)));
     matrix.set_element(0, 1, CC(IndexVx(0)));
@@ -183,11 +183,11 @@ void CollisionsIntra::fill_matrix_with_coeff(
 }
 
 void CollisionsIntra::compute_rhs_vector(
-        device_t<DSpanSpXVx> RR,
-        device_t<DViewSpXVx> AA,
-        device_t<DViewSpXVx> BB,
-        device_t<DViewSpXVx> CC,
-        device_t<DViewSpXVx> allfdistribu,
+        DSpanSpXVx RR,
+        DViewSpXVx AA,
+        DViewSpXVx BB,
+        DViewSpXVx CC,
+        DViewSpXVx allfdistribu,
         double fthresh) const
 {
     ddc::for_each(
@@ -221,7 +221,7 @@ void CollisionsIntra::compute_rhs_vector(
 
 
 
-device_t<DSpanSpXVx> CollisionsIntra::operator()(device_t<DSpanSpXVx> allfdistribu, double dt) const
+DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
 {
     Kokkos::Profiling::pushRegion("CollisionsIntra");
     auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
@@ -229,14 +229,14 @@ device_t<DSpanSpXVx> CollisionsIntra::operator()(device_t<DSpanSpXVx> allfdistri
 
     IDomainSpX grid_sp_x(allfdistribu.domain<IDimSp, IDimX>());
     // density and temperature
-    device_t<DFieldSpX> density_alloc(grid_sp_x);
-    device_t<DFieldSpX> fluid_velocity_alloc(grid_sp_x);
-    device_t<DFieldSpX> temperature_alloc(grid_sp_x);
+    DFieldSpX density_alloc(grid_sp_x);
+    DFieldSpX fluid_velocity_alloc(grid_sp_x);
+    DFieldSpX temperature_alloc(grid_sp_x);
     auto density = density_alloc.span_view();
     auto fluid_velocity = fluid_velocity_alloc.span_view();
     auto temperature = temperature_alloc.span_view();
 
-    DFieldVx const quadrature_coeffs_host(
+    host_t<DFieldVx> const quadrature_coeffs_host(
             trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu)));
     auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
@@ -264,9 +264,9 @@ device_t<DSpanSpXVx> CollisionsIntra::operator()(device_t<DSpanSpXVx> allfdistri
             });
 
     // collision frequency
-    device_t<DFieldSpX> collfreq_alloc(grid_sp_x);
+    DFieldSpX collfreq_alloc(grid_sp_x);
     auto collfreq = collfreq_alloc.span_view();
-    device_t<DFieldSpX> nustar_profile(grid_sp_x);
+    DFieldSpX nustar_profile(grid_sp_x);
     ddc::deepcopy(nustar_profile, m_nustar_profile);
     compute_collfreq(collfreq, nustar_profile, density, temperature);
 
@@ -286,8 +286,8 @@ device_t<DSpanSpXVx> CollisionsIntra::operator()(device_t<DSpanSpXVx> allfdistri
             ghosted_vx_staggered_point_sampling>(Dcoll_staggered, collfreq, density, temperature);
 
     // kernel maxwellian fluid moments
-    device_t<DFieldSpX> Vcoll_alloc(grid_sp_x);
-    device_t<DFieldSpX> Tcoll_alloc(grid_sp_x);
+    DFieldSpX Vcoll_alloc(grid_sp_x);
+    DFieldSpX Tcoll_alloc(grid_sp_x);
     auto Vcoll = Vcoll_alloc.span_view();
     auto Tcoll = Tcoll_alloc.span_view();
     compute_Vcoll_Tcoll<ghosted_vx_point_sampling>(Vcoll, Tcoll, allfdistribu, Dcoll, dvDcoll);
@@ -298,9 +298,9 @@ device_t<DSpanSpXVx> CollisionsIntra::operator()(device_t<DSpanSpXVx> allfdistri
     compute_Nucoll<ghosted_vx_point_sampling>(Nucoll, Dcoll, Vcoll, Tcoll);
 
     // matrix coefficients
-    device_t<DFieldSpXVx> AA_alloc(allfdistribu.domain());
-    device_t<DFieldSpXVx> BB_alloc(allfdistribu.domain());
-    device_t<DFieldSpXVx> CC_alloc(allfdistribu.domain());
+    DFieldSpXVx AA_alloc(allfdistribu.domain());
+    DFieldSpXVx BB_alloc(allfdistribu.domain());
+    DFieldSpXVx CC_alloc(allfdistribu.domain());
     auto AA = AA_alloc.span_view();
     auto BB = BB_alloc.span_view();
     auto CC = CC_alloc.span_view();
@@ -308,14 +308,14 @@ device_t<DSpanSpXVx> CollisionsIntra::operator()(device_t<DSpanSpXVx> allfdistri
 
 
     // rhs vector coefficient
-    device_t<DFieldSpXVx> RR_alloc(allfdistribu.domain());
+    DFieldSpXVx RR_alloc(allfdistribu.domain());
     auto RR = RR_alloc.span_view();
     compute_rhs_vector(RR, AA, BB, CC, allfdistribu, m_fthresh);
 
-    DFieldSpXVx AA_host(allfdistribu.domain());
-    DFieldSpXVx BB_host(allfdistribu.domain());
-    DFieldSpXVx CC_host(allfdistribu.domain());
-    DFieldSpXVx RR_host(allfdistribu.domain());
+    host_t<DFieldSpXVx> AA_host(allfdistribu.domain());
+    host_t<DFieldSpXVx> BB_host(allfdistribu.domain());
+    host_t<DFieldSpXVx> CC_host(allfdistribu.domain());
+    host_t<DFieldSpXVx> RR_host(allfdistribu.domain());
     ddc::deepcopy(AA_host, AA);
     ddc::deepcopy(BB_host, BB);
     ddc::deepcopy(CC_host, CC);

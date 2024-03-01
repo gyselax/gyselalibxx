@@ -28,8 +28,8 @@ private:
     double m_amplitude;
     double m_density;
     double m_temperature;
-    device_t<DFieldX> m_mask;
-    device_t<DFieldVx> m_ftarget;
+    DFieldX m_mask;
+    DFieldVx m_ftarget;
 
 public:
     /**
@@ -73,5 +73,5 @@ public:
      *
      * @return A span referencing the distribution function passed as argument.
      */
-    device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu, double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
 };

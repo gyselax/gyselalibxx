@@ -21,8 +21,5 @@ public:
      * @param[in] dt The timestep.
      * @return The distribution function after solving the Boltzmann equation.
      */
-    virtual device_t<DSpanSpXVx> operator()(
-            device_t<DSpanSpXVx> allfdistribu,
-            device_t<DViewX> efield,
-            double dt) const = 0;
+    virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX efield, double dt) const = 0;
 };

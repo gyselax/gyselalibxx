@@ -24,8 +24,8 @@ class CollisionsInter : public IRightHandSide
 {
 private:
     double m_nustar0;
-    device_t<DFieldSpX> m_nustar_profile_alloc;
-    device_t<DSpanSpX> m_nustar_profile;
+    DFieldSpX m_nustar_profile_alloc;
+    DSpanSpX m_nustar_profile;
 
 public:
     /**
@@ -51,7 +51,7 @@ public:
      *
      * @return A span referencing the distribution function passed as argument.
      */
-    device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu, double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
 
     /**
      * @brief Get the collision coefficient.
@@ -70,5 +70,5 @@ public:
      * @param[inout] df The time derivative.
      * @param[in] allfdistribu The distribution function.
      */
-    void get_derivative(device_t<DSpanSpXVx> df, device_t<DViewSpXVx> allfdistribu) const;
+    void get_derivative(DSpanSpXVx df, DViewSpXVx allfdistribu) const;
 };

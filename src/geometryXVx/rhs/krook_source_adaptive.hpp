@@ -30,8 +30,8 @@ private:
     double m_amplitude;
     double m_density;
     double m_temperature;
-    device_t<DFieldX> m_mask;
-    device_t<DFieldVx> m_ftarget;
+    DFieldX m_mask;
+    DFieldVx m_ftarget;
 
 public:
     /**
@@ -75,7 +75,7 @@ public:
      *
      * @return A span referencing the distribution function passed as argument.
      */
-    device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu, double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
 
 public:
     /**
@@ -88,7 +88,7 @@ public:
      *                         coefficients for each species. 
      * @param[in] allfdistribu The distribution function.
      */
-    void get_amplitudes(device_t<DSpanSpX> amplitudes, device_t<DViewSpXVx> allfdistribu) const;
+    void get_amplitudes(DSpanSpX amplitudes, DViewSpXVx allfdistribu) const;
 
     /**
      * @brief Computes the expression of the time derivative of the distribution function. 
@@ -100,6 +100,5 @@ public:
      * @param[in] f The distribution function.
      * @param[in] f0 An optional parameter.
      */
-    void get_derivative(device_t<DSpanSpXVx> df, device_t<DViewSpXVx> f, device_t<DViewSpXVx> f0)
-            const;
+    void get_derivative(DSpanSpXVx df, DViewSpXVx f, DViewSpXVx f0) const;
 };

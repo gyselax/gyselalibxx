@@ -19,7 +19,7 @@
 class ChargeDensityCalculator : public IChargeDensityCalculator
 {
 private:
-    using ChunkViewType = device_t<DViewVx>;
+    using ChunkViewType = DViewVx;
     ChunkViewType m_coefficients;
 
 public:
@@ -37,6 +37,5 @@ public:
      *
      * @return rho The charge density.
      */
-    device_t<DSpanX> operator()(device_t<DSpanX> rho, device_t<DViewSpXVx> allfdistribu)
-            const final;
+    DSpanX operator()(DSpanX rho, DViewSpXVx allfdistribu) const final;
 };

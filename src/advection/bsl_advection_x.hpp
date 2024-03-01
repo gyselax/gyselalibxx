@@ -42,17 +42,17 @@ public:
 
     /**
      * @brief Advects fdistribu along DDimX for a duration dt.
-     * @param[in, out] allfdistribu_device Reference to the whole distribution function for one species, allocated on the device (ie it lets the choice of the location depend on the build configuration).
+     * @param[in, out] allfdistribu Reference to the whole distribution function for one species, allocated on the device (ie it lets the choice of the location depend on the build configuration).
      * @param[in] dt  time step
      * @return A reference to the allfdistribu array containing the value of the function at the coordinates.
      */
     device_t<ddc::ChunkSpan<double, DDom>> operator()(
-            device_t<ddc::ChunkSpan<double, DDom>> const allfdistribu_device,
+            device_t<ddc::ChunkSpan<double, DDom>> const allfdistribu,
             double const dt) const override
     {
         Kokkos::Profiling::pushRegion("BslAdvectionSpatial");
-        auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
-        ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
+        auto allfdistribu_host_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
+        ddc::ChunkSpan allfdistribu_host = allfdistribu_host_alloc.span_view();
 
         DDom const dom = allfdistribu.domain();
         ddc::DiscreteDomain<DDimX> const x_dom = ddc::select<DDimX>(dom);
@@ -85,19 +85,19 @@ public:
                     });
 
                     // copy the slice in contiguous memory
-                    ddc::deepcopy(contiguous_slice, allfdistribu[ic][isp][iv]);
+                    ddc::deepcopy(contiguous_slice, allfdistribu_host[ic][isp][iv]);
 
                     // interpolate the function at the feet using the provided interpolator
                     interpolator_x(contiguous_slice, feet_coords.span_cview());
 
                     // copy back
-                    ddc::deepcopy(allfdistribu[ic][isp][iv], contiguous_slice);
+                    ddc::deepcopy(allfdistribu_host[ic][isp][iv], contiguous_slice);
                 });
             });
         });
 
-        ddc::deepcopy(allfdistribu_device, allfdistribu);
+        ddc::deepcopy(allfdistribu_host, allfdistribu);
         Kokkos::Profiling::popRegion();
-        return allfdistribu_device;
+        return allfdistribu;
     }
 };

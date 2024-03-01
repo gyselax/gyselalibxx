@@ -175,37 +175,37 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
 // with Lagrangian multipliers
 //----------------------------------------------------------------------------
 void FemNonPeriodicPoissonSolver::operator()(
-        device_t<DSpanX> electrostatic_potential_device,
-        device_t<DSpanX> electric_field_device,
-        device_t<DViewSpXVx> allfdistribu_device) const
+        DSpanX electrostatic_potential,
+        DSpanX electric_field,
+        DViewSpXVx allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("PoissonSolver");
-    auto electrostatic_potential = ddc::create_mirror_and_copy(electrostatic_potential_device);
-    auto electric_field = ddc::create_mirror_and_copy(electric_field_device);
-    assert(electrostatic_potential_device.domain() == ddc::get_domain<IDimX>(allfdistribu_device));
+    auto electrostatic_potential_host = ddc::create_mirror_and_copy(electrostatic_potential);
+    auto electric_field_host = ddc::create_mirror_and_copy(electric_field);
+    assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
     IDomainX const dom_x = electrostatic_potential.domain();
 
     // Compute the RHS of the Poisson equation
-    ddc::Chunk<double, IDomainX> rho(dom_x);
-    device_t<ddc::Chunk<double, IDomainX>> rho_device(dom_x);
-    m_compute_rho(rho_device, allfdistribu_device);
-    ddc::deepcopy(rho, rho_device);
+    host_t<DFieldX> rho_host(dom_x);
+    DFieldX rho(dom_x);
+    m_compute_rho(rho, allfdistribu);
+    ddc::deepcopy(rho_host, rho);
 
     //
     ddc::Chunk<double, BSDomainX> rho_spline_coef(m_spline_x_builder.spline_domain());
-    m_spline_x_builder(rho_spline_coef.span_view(), rho.span_cview());
+    m_spline_x_builder(rho_spline_coef.span_view(), rho_host.span_cview());
     ddc::Chunk<double, NUBSDomainX> phi_spline_coef(
             ddc::discrete_space<NUBSplinesX>().full_domain());
     solve_matrix_system(phi_spline_coef, rho_spline_coef);
 
     //
     ddc::for_each(dom_x, [&](IndexX const ix) {
-        electrostatic_potential(ix)
+        electrostatic_potential_host(ix)
                 = m_spline_x_nu_evaluator(ddc::coordinate(ix), phi_spline_coef.span_cview());
-        electric_field(ix)
+        electric_field_host(ix)
                 = -m_spline_x_nu_evaluator.deriv(ddc::coordinate(ix), phi_spline_coef.span_cview());
     });
-    ddc::deepcopy(electrostatic_potential_device, electrostatic_potential);
-    ddc::deepcopy(electric_field_device, electric_field);
+    ddc::deepcopy(electrostatic_potential, electrostatic_potential_host);
+    ddc::deepcopy(electric_field, electric_field_host);
     Kokkos::Profiling::popRegion();
 }

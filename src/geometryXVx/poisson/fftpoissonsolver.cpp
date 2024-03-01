@@ -20,15 +20,15 @@ FftPoissonSolver::FftPoissonSolver(IChargeDensityCalculator const& compute_rho)
 // 1- Inner solvers shall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
 void FftPoissonSolver::operator()(
-        device_t<DSpanX> const electrostatic_potential,
-        device_t<DSpanX> const electric_field,
-        device_t<DViewSpXVx> const allfdistribu) const
+        DSpanX const electrostatic_potential,
+        DSpanX const electric_field,
+        DViewSpXVx const allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("PoissonSolver");
     assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
     IDomainX const x_dom = electrostatic_potential.domain();
     // Compute the RHS of the Poisson equation.
-    device_t<DFieldX> rho(x_dom);
+    DFieldX rho(x_dom);
 
     m_compute_rho(rho, allfdistribu);
 

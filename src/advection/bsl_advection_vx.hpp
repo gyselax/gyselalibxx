@@ -40,22 +40,22 @@ public:
 
     /**
      * @brief Advects fdistribu along DDimV for a duration dt.
-     * @param[in, out] allfdistribu_device Reference to the whole distribution function for one species, allocated on the device (ie it lets the choice of the location depend on the build configuration).
-     * @param[in] electric_field_device Reference to the electric field which derives from electrostatic potential, allocated on the device.
+     * @param[in, out] allfdistribu Reference to the whole distribution function for one species, allocated on the device (ie it lets the choice of the location depend on the build configuration).
+     * @param[in] electric_field Reference to the electric field which derives from electrostatic potential, allocated on the device.
      * @param[in] dt Time step
      * @return A reference to the allfdistribu array containing the value of the function at the coordinates.
      */
     device_t<ddc::ChunkSpan<double, FdistribuDDom>> operator()(
-            device_t<ddc::ChunkSpan<double, FdistribuDDom>> const allfdistribu_device,
-            device_t<ddc::ChunkSpan<const double, SpatialDDom>> const electric_field_device,
+            device_t<ddc::ChunkSpan<double, FdistribuDDom>> const allfdistribu,
+            device_t<ddc::ChunkSpan<const double, SpatialDDom>> const electric_field,
             double const dt) const override
     {
         Kokkos::Profiling::pushRegion("BslAdvectionVelocity");
 
-        auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu_device);
-        ddc::ChunkSpan allfdistribu = allfdistribu_alloc.span_view();
-        auto electric_field_alloc = ddc::create_mirror_view_and_copy(electric_field_device);
-        ddc::ChunkSpan electric_field = electric_field_alloc.span_view();
+        auto allfdistribu_host_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
+        ddc::ChunkSpan allfdistribu_host = allfdistribu_host_alloc.span_view();
+        auto electric_field_host_alloc = ddc::create_mirror_view_and_copy(electric_field);
+        ddc::ChunkSpan electric_field_host = electric_field_host_alloc.span_view();
 
         FdistribuDDom const dom = allfdistribu.domain();
         ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
@@ -82,7 +82,8 @@ public:
 
                 ddc::for_each(spatial_dom, [&](DElemSpatial const ix) {
                     // compute the displacement
-                    double const dvx = charge(isp) * sqrt_me_on_mspecies * dt * electric_field(ix);
+                    double const dvx
+                            = charge(isp) * sqrt_me_on_mspecies * dt * electric_field_host(ix);
 
                     // compute the coordinates of the feet
                     ddc::for_each(v_dom, [&](DElemV const iv) {
@@ -90,19 +91,19 @@ public:
                     });
 
                     // copy the slice in contiguous memory
-                    ddc::deepcopy(contiguous_slice, allfdistribu[ic][isp][ix]);
+                    ddc::deepcopy(contiguous_slice, allfdistribu_host[ic][isp][ix]);
 
                     // build a spline representation of the data
                     interpolator_v(contiguous_slice, feet_coords.span_cview());
 
                     // copy back
-                    ddc::deepcopy(allfdistribu[ic][isp][ix], contiguous_slice);
+                    ddc::deepcopy(allfdistribu_host[ic][isp][ix], contiguous_slice);
                 });
             });
         });
 
-        ddc::deepcopy(allfdistribu_device, allfdistribu);
+        ddc::deepcopy(allfdistribu, allfdistribu_host);
         Kokkos::Profiling::popRegion();
-        return allfdistribu_device;
+        return allfdistribu;
     }
 };

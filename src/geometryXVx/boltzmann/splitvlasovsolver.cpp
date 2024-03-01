@@ -12,9 +12,9 @@ SplitVlasovSolver::SplitVlasovSolver(
 {
 }
 
-device_t<DSpanSpXVx> SplitVlasovSolver::operator()(
-        device_t<DSpanSpXVx> const allfdistribu,
-        device_t<DViewX> const electric_field,
+DSpanSpXVx SplitVlasovSolver::operator()(
+        DSpanSpXVx const allfdistribu,
+        DViewX const electric_field,
         double const dt) const
 {
     m_advec_x(allfdistribu, dt / 2);

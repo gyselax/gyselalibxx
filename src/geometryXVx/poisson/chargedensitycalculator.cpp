@@ -9,9 +9,7 @@ ChargeDensityCalculator::ChargeDensityCalculator(const ChunkViewType& coeffs)
 {
 }
 
-device_t<DSpanX> ChargeDensityCalculator::operator()(
-        device_t<DSpanX> const rho,
-        device_t<DViewSpXVx> const allfdistribu) const
+DSpanX ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
     IndexSp const last_kin_species = allfdistribu.domain<IDimSp>().back();
@@ -26,8 +24,8 @@ device_t<DSpanX> ChargeDensityCalculator::operator()(
             = allfdistribu.allocation_kokkos_view();
     Kokkos::View<double*, Kokkos::LayoutRight> const rho_view = rho.allocation_kokkos_view();
 
-    ViewSp<int> const charges = ddc::host_discrete_space<IDimSp>().charges();
-    ViewSp<int> const kinetic_charges = charges[allfdistribu.domain<IDimSp>()];
+    host_t<ViewSp<int>> const charges = ddc::host_discrete_space<IDimSp>().charges();
+    host_t<ViewSp<int>> const kinetic_charges = charges[allfdistribu.domain<IDimSp>()];
 
     auto charges_alloc
             = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), kinetic_charges);

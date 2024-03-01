@@ -31,6 +31,8 @@
 * static member variables names begin with an `s_` prefix
 * we don't use single letter variables
 * we don't rely on case to distinguish between variables
+* there are two types of DDC objects representing a multidimensional array : `ddc::Chunk` (which possesses the data) and `ddc::ChunkSpan` (which does not own the data but can be captured by `KOKKOS_LAMBDA`). We suffix `Chunk` with `_alloc` if both variables are needed locally.
+* if a variable is mirrored between host (CPU) and device (GPU) memories, the variable representing data on host is `_host` suffixed
 
 ## Style
 * We use the style specified by the `.clang-format` file using clang-format 10

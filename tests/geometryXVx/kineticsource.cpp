@@ -50,23 +50,23 @@ TEST(KineticSource, Moments)
     IDomainVx const gridvx = builder_vx.interpolation_domain();
     IDomainSpXVx const mesh(IDomainSp(my_iion, IVectSp(1)), gridx, gridvx);
 
-    DFieldX quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
-    DFieldVx quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
+    host_t<DFieldX> quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
+    host_t<DFieldVx> quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
     Quadrature<IDimX> const integrate_x(quadrature_coeffs_x);
     Quadrature<IDimVx> const integrate_v(quadrature_coeffs_vx);
 
-    FieldSp<int> charges(dom_sp);
+    host_t<FieldSp<int>> charges(dom_sp);
     charges(my_ielec) = -1;
     charges(my_iion) = 1;
-    DFieldSp masses(dom_sp);
+    host_t<DFieldSp> masses(dom_sp);
     ddc::fill(masses, 1);
 
     // Initialization of the distribution function
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
-    device_t<DFieldSpXVx> allfdistribu_device(mesh);
+    DFieldSpXVx allfdistribu(mesh);
 
     // Initialization of the distribution function
-    ddc::fill(allfdistribu_device, 0.);
+    ddc::fill(allfdistribu, 0.);
 
     // Maxwellian source test
     double const px_source = 0.2;
@@ -89,19 +89,19 @@ TEST(KineticSource, Moments)
             energy_amplitude,
             temperature_source);
 
-    kinetic_source(allfdistribu_device, deltat);
-    auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
+    kinetic_source(allfdistribu, deltat);
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
 
-    DFieldX density(gridx);
-    DFieldX fluid_velocity(gridx);
-    DFieldX temperature(gridx);
+    host_t<DFieldX> density(gridx);
+    host_t<DFieldX> fluid_velocity(gridx);
+    host_t<DFieldX> temperature(gridx);
 
-    DFieldVx values_density(gridvx);
-    DFieldVx values_fluid_velocity(gridvx);
-    DFieldVx values_temperature(gridvx);
+    host_t<DFieldVx> values_density(gridvx);
+    host_t<DFieldVx> values_fluid_velocity(gridvx);
+    host_t<DFieldVx> values_temperature(gridvx);
     ddc::for_each(gridx, [&](IndexX const ix) {
         // density
-        ddc::deepcopy(values_density, allfdistribu[dom_sp.front()][ix]);
+        ddc::deepcopy(values_density, allfdistribu_host[dom_sp.front()][ix]);
         density(ix) = integrate_v(values_density);
 
         // fluid velocity

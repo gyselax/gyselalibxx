@@ -22,8 +22,8 @@ public:
      * @param[in] steps The number of iterations to be performed by the solver.
      * @return The distribution function after solving the system.
      */
-    virtual device_t<DSpanSpXVx> operator()(
-            device_t<DSpanSpXVx> allfdistribu,
+    virtual DSpanSpXVx operator()(
+            DSpanSpXVx allfdistribu,
             double time_start,
             double dt,
             int steps = 1) const = 0;

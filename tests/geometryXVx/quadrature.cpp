@@ -97,7 +97,7 @@ double compute_error(int n_elems, Method meth)
     using DimY = Y<N>;
     using IDimY = ddc::NonUniformPointSampling<DimY>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
-    using DFieldY = ddc::Chunk<double, IDomainY>;
+    using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
 
     ddc::Coordinate<DimY> const y_min(0.0);
     ddc::Coordinate<DimY> const y_max(M_PI);
@@ -114,7 +114,7 @@ double compute_error(int n_elems, Method meth)
     ddc::DiscreteVector<IDimY> npoints(n_elems);
     ddc::DiscreteDomain<IDimY> gridy(lbound, npoints);
 
-    DFieldY quadrature_coeffs;
+    host_t<DFieldY> quadrature_coeffs;
     switch (meth) {
     case Method::TRAPEZ:
         quadrature_coeffs = trapezoid_quadrature_coefficients(gridy);
@@ -123,7 +123,7 @@ double compute_error(int n_elems, Method meth)
     }
 
     Quadrature<IDimY> const integrate(quadrature_coeffs);
-    DFieldY values(gridy);
+    host_t<DFieldY> values(gridy);
 
     ddc::for_each(gridy, [&](ddc::DiscreteElement<IDimY> const idx) {
         values(idx) = sin(ddc::coordinate(idx));

@@ -16,11 +16,11 @@
  */
 class SingleModePerturbInitialization : public IInitialization
 {
-    device_t<DViewSpVx> m_fequilibrium;
+    DViewSpVx m_fequilibrium;
 
-    ViewSp<int> m_init_perturb_mode;
+    host_t<ViewSp<int>> m_init_perturb_mode;
 
-    DViewSp m_init_perturb_amplitude;
+    host_t<DViewSp> m_init_perturb_amplitude;
 
 public:
     /**
@@ -31,10 +31,7 @@ public:
      * @param[in] mode The mode of the perturbation. 
      * @param[in] perturb_amplitude The amplitude of the perturbation. 
      */
-    void perturbation_initialization(
-            device_t<DSpanX> perturbation,
-            int mode,
-            double perturb_amplitude) const;
+    void perturbation_initialization(DSpanX perturbation, int mode, double perturb_amplitude) const;
 
     /**
      * @brief Creates an instance of the SingleModePerturbInitialization class.
@@ -43,9 +40,9 @@ public:
      * @param[in] init_perturb_amplitude The perturbation amplitude. 
      */
     SingleModePerturbInitialization(
-            device_t<DViewSpVx> fequilibrium,
-            ViewSp<int> init_perturb_mode,
-            DViewSp init_perturb_amplitude);
+            DViewSpVx fequilibrium,
+            host_t<ViewSp<int>> init_perturb_mode,
+            host_t<DViewSp> init_perturb_amplitude);
 
     ~SingleModePerturbInitialization() override = default;
 
@@ -54,5 +51,5 @@ public:
      * @param[in, out] allfdistribu The initialized distribution function.
      * @return The initialized distribution function.
      */
-    device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu) const override;
 };

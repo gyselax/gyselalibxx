@@ -42,20 +42,18 @@ KineticSource::KineticSource(
     ddc::expose_to_pdi("kinetic_source_spatial_extent", m_spatial_extent);
 }
 
-device_t<DSpanSpXVx> KineticSource::operator()(
-        device_t<DSpanSpXVx> const allfdistribu,
-        double const dt) const
+DSpanSpXVx KineticSource::operator()(DSpanSpXVx const allfdistribu, double const dt) const
 {
     Kokkos::Profiling::pushRegion("KineticSource");
-    auto velocity_shape_device_alloc = ddc::create_mirror_view_and_copy(
+    auto velocity_shape_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             m_velocity_shape.span_view());
-    auto velocity_shape_device = velocity_shape_device_alloc.span_view();
+    auto velocity_shape = velocity_shape_alloc.span_view();
 
-    auto spatial_extent_device_alloc = ddc::create_mirror_view_and_copy(
+    auto spatial_extent_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             m_spatial_extent.span_view());
-    auto spatial_extent_device = spatial_extent_device_alloc.span_view();
+    auto spatial_extent = spatial_extent_alloc.span_view();
 
     auto const& amplitude = m_amplitude;
 
@@ -64,8 +62,8 @@ device_t<DSpanSpXVx> KineticSource::operator()(
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 double const df(
-                        amplitude * spatial_extent_device(ddc::select<IDimX>(ispxvx))
-                        * velocity_shape_device(ddc::select<IDimVx>(ispxvx)) * dt);
+                        amplitude * spatial_extent(ddc::select<IDimX>(ispxvx))
+                        * velocity_shape(ddc::select<IDimVx>(ispxvx)) * dt);
                 allfdistribu(ispxvx) += df;
             });
 

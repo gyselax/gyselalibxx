@@ -11,7 +11,10 @@ FluidMoments::FluidMoments(Quadrature<IDimVx> integrate_v) : m_integrate_v(integ
 /*
  * Computes the density of fdistribu
 */
-void FluidMoments::operator()(double& density, DViewVx const fdistribu, FluidMoments::MomentDensity)
+void FluidMoments::operator()(
+        double& density,
+        host_t<DViewVx> const fdistribu,
+        FluidMoments::MomentDensity)
 {
     density = m_integrate_v(fdistribu);
 }
@@ -20,8 +23,8 @@ void FluidMoments::operator()(double& density, DViewVx const fdistribu, FluidMom
  * Computes the density of allfdistribu
 */
 void FluidMoments::operator()(
-        DSpanSpX const density,
-        DViewSpXVx const allfdistribu,
+        host_t<DSpanSpX> const density,
+        host_t<DViewSpXVx> const allfdistribu,
         FluidMoments::MomentDensity)
 {
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
@@ -34,11 +37,11 @@ void FluidMoments::operator()(
 */
 void FluidMoments::operator()(
         double& mean_velocity,
-        DViewVx const fdistribu,
+        host_t<DViewVx> const fdistribu,
         double density,
         FluidMoments::MomentVelocity)
 {
-    DFieldVx integrand(fdistribu.domain());
+    host_t<DFieldVx> integrand(fdistribu.domain());
     ddc::for_each(fdistribu.domain(), [&](IndexVx const ivx) {
         CoordVx const coordv = ddc::coordinate(ivx);
         integrand(ivx) = coordv * fdistribu(ivx);
@@ -50,12 +53,12 @@ void FluidMoments::operator()(
  * Computes the mean_velocity of allfdistribu, using its density
 */
 void FluidMoments::operator()(
-        DSpanSpX const mean_velocity,
-        DViewSpXVx const allfdistribu,
-        DViewSpX const density,
+        host_t<DSpanSpX> const mean_velocity,
+        host_t<DViewSpXVx> const allfdistribu,
+        host_t<DViewSpX> const density,
         FluidMoments::MomentVelocity)
 {
-    DFieldSpXVx integrand(allfdistribu.domain());
+    host_t<DFieldSpXVx> integrand(allfdistribu.domain());
     ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
         CoordVx const coordv = ddc::coordinate(ddc::select<IDimVx>(ispxvx));
         integrand(ispxvx) = coordv * allfdistribu(ispxvx);
@@ -71,12 +74,12 @@ void FluidMoments::operator()(
 */
 void FluidMoments::operator()(
         double& temperature,
-        DViewVx const fdistribu,
+        host_t<DViewVx> const fdistribu,
         double density,
         double mean_velocity,
         FluidMoments::MomentTemperature)
 {
-    DFieldVx integrand(fdistribu.domain());
+    host_t<DFieldVx> integrand(fdistribu.domain());
     ddc::for_each(fdistribu.domain(), [&](IndexVx const ivx) {
         double const coeff = ddc::coordinate(ddc::select<IDimVx>(ivx)) - mean_velocity;
         integrand(ivx) = coeff * coeff * fdistribu(ivx);
@@ -88,13 +91,13 @@ void FluidMoments::operator()(
  * Computes the temperature of allfdistribu, using its density and mean velocity
 */
 void FluidMoments::operator()(
-        DSpanSpX const temperature,
-        DViewSpXVx const allfdistribu,
-        DViewSpX const density,
-        DViewSpX const mean_velocity,
+        host_t<DSpanSpX> const temperature,
+        host_t<DViewSpXVx> const allfdistribu,
+        host_t<DViewSpX> const density,
+        host_t<DViewSpX> const mean_velocity,
         FluidMoments::MomentTemperature)
 {
-    DFieldSpXVx integrand(allfdistribu.domain());
+    host_t<DFieldSpXVx> integrand(allfdistribu.domain());
     ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
         double const coeff = ddc::coordinate(ddc::select<IDimVx>(ispxvx))
                              - mean_velocity(ddc::select<IDimSp, IDimX>(ispxvx));

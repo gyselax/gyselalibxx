@@ -6,24 +6,23 @@
 #include "singlemodeperturbinitialization.hpp"
 
 SingleModePerturbInitialization::SingleModePerturbInitialization(
-        device_t<DViewSpVx> fequilibrium,
-        ViewSp<int> const init_perturb_mode,
-        DViewSp const init_perturb_amplitude)
+        DViewSpVx fequilibrium,
+        host_t<ViewSp<int>> const init_perturb_mode,
+        host_t<DViewSp> const init_perturb_amplitude)
     : m_fequilibrium(fequilibrium)
     , m_init_perturb_mode(init_perturb_mode)
     , m_init_perturb_amplitude(init_perturb_amplitude)
 {
 }
 
-device_t<DSpanSpXVx> SingleModePerturbInitialization::operator()(
-        device_t<DSpanSpXVx> const allfdistribu) const
+DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdistribu) const
 {
     IDomainSp const gridsp = allfdistribu.domain<IDimSp>();
     IDomainX const gridx = allfdistribu.domain<IDimX>();
     IDomainXVx const gridxvx = allfdistribu.domain<IDimX, IDimVx>();
 
     // Initialization of the perturbation
-    device_t<DFieldX> perturbation_alloc(gridx);
+    DFieldX perturbation_alloc(gridx);
     ddc::ChunkSpan perturbation = perturbation_alloc.span_view();
     ddc::for_each(gridsp, [&](IndexSp const isp) {
         perturbation_initialization(
@@ -48,7 +47,7 @@ device_t<DSpanSpXVx> SingleModePerturbInitialization::operator()(
 }
 
 void SingleModePerturbInitialization::perturbation_initialization(
-        device_t<DSpanX> const perturbation,
+        DSpanX const perturbation,
         int const mode,
         double const perturb_amplitude) const
 {

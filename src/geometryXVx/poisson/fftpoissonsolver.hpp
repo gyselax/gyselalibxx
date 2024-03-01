@@ -39,8 +39,6 @@ public:
      * @param[out] electric_field The electric field, the derivative of the electrostatic potential.
      * @param[in] allfdistribu The distribution function.
      */
-    void operator()(
-            device_t<DSpanX> electrostatic_potential,
-            device_t<DSpanX> electric_field,
-            device_t<DViewSpXVx> allfdistribu) const override;
+    void operator()(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu)
+            const override;
 };

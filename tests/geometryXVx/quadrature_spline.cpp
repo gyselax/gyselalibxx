@@ -30,7 +30,7 @@ TEST(SplineQuadratureTest, ExactForConstantFunc)
     using sllSplineXBuilder
             = SplineBuilder<sllBSplinesX, sllIDimX, sllSplineXBoundary, sllSplineXBoundary>;
     using sllIDomainX = ddc::DiscreteDomain<sllIDimX>;
-    using sllDFieldX = ddc::Chunk<double, sllIDomainX>;
+    using sllDFieldX = device_t<ddc::Chunk<double, sllIDomainX>>;
 
     ddc::init_discrete_space<sllBSplinesX>(x_min, x_max, x_size);
 
@@ -41,10 +41,10 @@ TEST(SplineQuadratureTest, ExactForConstantFunc)
 
     sllIDomainX const gridx = builder_x.interpolation_domain();
 
-    sllDFieldX const quadrature_coeffs = spline_quadrature_coefficients(gridx, builder_x);
+    host_t<sllDFieldX> const quadrature_coeffs = spline_quadrature_coefficients(gridx, builder_x);
     Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    sllDFieldX values(gridx);
+    host_t<sllDFieldX> values(gridx);
 
     ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);
@@ -70,7 +70,7 @@ double compute_error(int n_elems)
     using SplineYBuilder
             = SplineBuilder<BSplinesY, IDimY, BoundCond::GREVILLE, BoundCond::GREVILLE>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
-    using DFieldY = ddc::Chunk<double, IDomainY>;
+    using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
 
     ddc::Coordinate<Y<N>> const y_min(0.0);
     ddc::Coordinate<Y<N>> const y_max(M_PI);
@@ -82,10 +82,10 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    DFieldY const quadrature_coeffs = spline_quadrature_coefficients(gridy, builder_y);
+    host_t<DFieldY> const quadrature_coeffs = spline_quadrature_coefficients(gridy, builder_y);
     Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    DFieldY values(gridy);
+    host_t<DFieldY> values(gridy);
 
     ddc::for_each(gridy, [&](ddc::DiscreteElement<IDimY> const idx) {
         values(idx) = sin(ddc::coordinate(idx));

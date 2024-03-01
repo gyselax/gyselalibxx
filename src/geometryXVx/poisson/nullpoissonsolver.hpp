@@ -21,12 +21,12 @@ public:
     /**
      * The operator which does not solves the equation.
      *
-     * @param[out] electrostatic_potential_device The electrostatic potential, the result of the poisson solver.
-     * @param[out] electric_field_device The electric field, the derivative of the electrostatic potential.
-     * @param[in] allfdistribu_device The distribution function.
+     * @param[out] electrostatic_potential The electrostatic potential, the result of the poisson solver.
+     * @param[out] electric_field The electric field, the derivative of the electrostatic potential.
+     * @param[in] allfdistribu The distribution function.
      */
     void operator()(
-            device_t<DSpanX> const electrostatic_potential_device,
-            device_t<DSpanX> const electric_field_device,
-            device_t<DViewSpXVx> const allfdistribu_device) const override;
+            DSpanX const electrostatic_potential,
+            DSpanX const electric_field,
+            DViewSpXVx const allfdistribu) const override;
 };

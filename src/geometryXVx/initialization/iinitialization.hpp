@@ -18,5 +18,5 @@ public:
      *                                 On output: the initialized distribution function.
      * @return The initialized distribution function.
      */
-    virtual device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu) const = 0;
+    virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu) const = 0;
 };
