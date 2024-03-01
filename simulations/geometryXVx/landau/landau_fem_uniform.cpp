@@ -104,13 +104,13 @@ int main(int argc, char** argv)
     SplineVxBuilder const builder_vx(meshXVx);
     SplineVxBuilder_1d const builder_vx_poisson(interpolation_domain_vx);
 
-    FieldSp<int> kinetic_charges(dom_kinsp);
-    DFieldSp masses(dom_kinsp);
-    DFieldSp density_eq(dom_kinsp);
-    DFieldSp temperature_eq(dom_kinsp);
-    DFieldSp mean_velocity_eq(dom_kinsp);
-    DFieldSp init_perturb_amplitude(dom_kinsp);
-    FieldSp<int> init_perturb_mode(dom_kinsp);
+    host_t<FieldSp<int>> kinetic_charges(dom_kinsp);
+    host_t<DFieldSp> masses(dom_kinsp);
+    host_t<DFieldSp> density_eq(dom_kinsp);
+    host_t<DFieldSp> temperature_eq(dom_kinsp);
+    host_t<DFieldSp> mean_velocity_eq(dom_kinsp);
+    host_t<DFieldSp> init_perturb_amplitude(dom_kinsp);
+    host_t<FieldSp<int>> init_perturb_mode(dom_kinsp);
     int nb_elec_adiabspecies = 1;
     int nb_ion_adiabspecies = 1;
 
@@ -136,7 +136,7 @@ int main(int argc, char** argv)
     // Create the domain of all species including kinetic species + adiabatic species (if existing)
     IDomainSp const
             dom_allsp(IndexSp(0), nb_kinspecies + nb_elec_adiabspecies + nb_ion_adiabspecies);
-    FieldSp<int> charges(dom_allsp);
+    host_t<FieldSp<int>> charges(dom_allsp);
     for (IndexSp isp : dom_kinsp) {
         charges(isp) = kinetic_charges(isp);
     }
@@ -146,29 +146,29 @@ int main(int argc, char** argv)
 
     // Initialization of the distribution function
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
-    device_t<DFieldSpVx> allfequilibrium_device(meshSpVx);
+    DFieldSpVx allfequilibrium(meshSpVx);
     MaxwellianEquilibrium const init_fequilibrium(
             std::move(density_eq),
             std::move(temperature_eq),
             std::move(mean_velocity_eq));
-    init_fequilibrium(allfequilibrium_device);
+    init_fequilibrium(allfequilibrium);
 
     ddc::expose_to_pdi("iter_start", iter_start);
 
-    device_t<DFieldSpXVx> allfdistribu_device(meshSpXVx);
+    DFieldSpXVx allfdistribu(meshSpXVx);
     double time_start(0);
     if (iter_start == 0) {
         SingleModePerturbInitialization const
-                init(allfequilibrium_device,
+                init(allfequilibrium,
                      init_perturb_mode.span_cview(),
                      init_perturb_amplitude.span_cview());
-        init(allfdistribu_device);
+        init(allfdistribu);
     } else {
         RestartInitialization const restart(iter_start, time_start);
-        restart(allfdistribu_device);
+        restart(allfdistribu);
     }
-    auto allfequilibrium = ddc::create_mirror_view_and_copy(allfequilibrium_device.span_view());
-    auto allfdistribu = ddc::create_mirror_view_and_copy(allfdistribu_device.span_view());
+    auto allfequilibrium_host = ddc::create_mirror_view_and_copy(allfequilibrium.span_view());
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
 
     // --> Algorithm info
     double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
@@ -205,13 +205,13 @@ int main(int argc, char** argv)
 
     // Creating of mesh for output saving
     IDomainX const gridx = ddc::select<IDimX>(meshSpXVx);
-    FieldX<CoordX> meshX_coord(gridx);
+    host_t<FieldX<CoordX>> meshX_coord(gridx);
     for (IndexX const ix : gridx) {
         meshX_coord(ix) = ddc::coordinate(ix);
     }
 
     IDomainVx const gridvx = ddc::select<IDimVx>(meshSpXVx);
-    FieldVx<CoordVx> meshVx_coord(gridvx);
+    host_t<FieldVx<CoordVx>> meshVx_coord(gridvx);
     for (IndexVx const ivx : gridvx) {
         meshVx_coord(ivx) = ddc::coordinate(ivx);
     }
@@ -223,12 +223,12 @@ int main(int argc, char** argv)
 #else
     using FemPoissonSolverX = FemNonPeriodicPoissonSolver;
 #endif
-    DFieldVx const quadrature_coeffs
+    host_t<DFieldVx> const quadrature_coeffs_host
             = neumann_spline_quadrature_coefficients(gridvx, builder_vx_poisson);
-    auto const quadrature_coeffs_device = ddc::create_mirror_view_and_copy(
+    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs.span_view());
-    ChargeDensityCalculator rhs(quadrature_coeffs_device);
+            quadrature_coeffs_host.span_view());
+    ChargeDensityCalculator rhs(quadrature_coeffs);
     FemPoissonSolverX const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 
     PredCorr const predcorr(vlasov, poisson);
@@ -242,11 +242,11 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("Nkinspecies", nb_kinspecies.value());
     ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
     ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[dom_kinsp]);
-    ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium);
+    ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
 
     steady_clock::time_point const start = steady_clock::now();
 
-    predcorr(allfdistribu_device, time_start, deltat, nbiter);
+    predcorr(allfdistribu, time_start, deltat, nbiter);
 
     steady_clock::time_point const end = steady_clock::now();
 

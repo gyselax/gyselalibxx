@@ -11,7 +11,7 @@
 * @param[inout] nustar_profile The collisionality profile.
 * @param[in] nustar0 normalized collisionality coefficient.
 */
-void compute_nustar_profile(device_t<DSpanSpX> nustar_profile, double nustar0);
+void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0);
 
 /**
 * @brief Compute the collision frequency for each species.
@@ -21,10 +21,10 @@ void compute_nustar_profile(device_t<DSpanSpX> nustar_profile, double nustar0);
 * @param[in] temperature The temperature of each species.
 */
 void compute_collfreq(
-        device_t<DSpanSpX> collfreq,
-        device_t<DViewSpX> nustar_profile,
-        device_t<DViewSpX> density,
-        device_t<DViewSpX> temperature);
+        DSpanSpX collfreq,
+        DViewSpX nustar_profile,
+        DViewSpX density,
+        DViewSpX temperature);
 
 /**
 * @brief Compute the intra species collision operator diffusion coefficient.
@@ -40,9 +40,9 @@ void compute_Dcoll(
                 ddc::DiscreteDomain<IDimSp, IDimX, IDimension>,
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> Dcoll,
-        device_t<DViewSpX> collfreq,
-        device_t<DViewSpX> density,
-        device_t<DViewSpX> temperature)
+        DViewSpX collfreq,
+        DViewSpX density,
+        DViewSpX temperature)
 {
     ddc::for_each(
             ddc::policies::parallel_device,
@@ -88,9 +88,9 @@ void compute_dvDcoll(
                 ddc::DiscreteDomain<IDimSp, IDimX, IDimension>,
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> dvDcoll,
-        device_t<DViewSpX> collfreq,
-        device_t<DViewSpX> density,
-        device_t<DViewSpX> temperature)
+        DViewSpX collfreq,
+        DViewSpX density,
+        DViewSpX temperature)
 {
     ddc::for_each(
             ddc::policies::parallel_device,
@@ -152,9 +152,9 @@ void compute_dvDcoll(
 */
 template <class IDimension>
 void compute_Vcoll_Tcoll(
-        device_t<DSpanSpX> Vcoll,
-        device_t<DSpanSpX> Tcoll,
-        device_t<DViewSpXVx> allfdistribu,
+        DSpanSpX Vcoll,
+        DSpanSpX Tcoll,
+        DViewSpXVx allfdistribu,
         ddc::ChunkSpan<
                 double,
                 ddc::DiscreteDomain<IDimSp, IDimX, IDimension>,
@@ -166,7 +166,7 @@ void compute_Vcoll_Tcoll(
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> dvDcoll)
 {
-    DFieldVx const quadrature_coeffs_host(
+    host_t<DFieldVx> const quadrature_coeffs_host(
             trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu)));
     auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
@@ -174,11 +174,11 @@ void compute_Vcoll_Tcoll(
     auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
 
     // computation of the integrands
-    device_t<DFieldSpXVx> I0mean_integrand_alloc(allfdistribu.domain());
-    device_t<DFieldSpXVx> I1mean_integrand_alloc(allfdistribu.domain());
-    device_t<DFieldSpXVx> I2mean_integrand_alloc(allfdistribu.domain());
-    device_t<DFieldSpXVx> I3mean_integrand_alloc(allfdistribu.domain());
-    device_t<DFieldSpXVx> I4mean_integrand_alloc(allfdistribu.domain());
+    DFieldSpXVx I0mean_integrand_alloc(allfdistribu.domain());
+    DFieldSpXVx I1mean_integrand_alloc(allfdistribu.domain());
+    DFieldSpXVx I2mean_integrand_alloc(allfdistribu.domain());
+    DFieldSpXVx I3mean_integrand_alloc(allfdistribu.domain());
+    DFieldSpXVx I4mean_integrand_alloc(allfdistribu.domain());
     auto I0mean_integrand = I0mean_integrand_alloc.span_view();
     auto I1mean_integrand = I1mean_integrand_alloc.span_view();
     auto I2mean_integrand = I2mean_integrand_alloc.span_view();
@@ -204,11 +204,11 @@ void compute_Vcoll_Tcoll(
 
     // computation of the integrals over the Vx direction
     IDomainSpX grid_sp_x(allfdistribu.domain<IDimSp, IDimX>());
-    device_t<DFieldSpX> I0mean_alloc(grid_sp_x);
-    device_t<DFieldSpX> I1mean_alloc(grid_sp_x);
-    device_t<DFieldSpX> I2mean_alloc(grid_sp_x);
-    device_t<DFieldSpX> I3mean_alloc(grid_sp_x);
-    device_t<DFieldSpX> I4mean_alloc(grid_sp_x);
+    DFieldSpX I0mean_alloc(grid_sp_x);
+    DFieldSpX I1mean_alloc(grid_sp_x);
+    DFieldSpX I2mean_alloc(grid_sp_x);
+    DFieldSpX I3mean_alloc(grid_sp_x);
+    DFieldSpX I4mean_alloc(grid_sp_x);
     auto I0mean = I0mean_alloc.span_view();
     auto I1mean = I1mean_alloc.span_view();
     auto I2mean = I2mean_alloc.span_view();
@@ -260,8 +260,8 @@ void compute_Nucoll(
                 ddc::DiscreteDomain<IDimSp, IDimX, IDimension>,
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> Dcoll,
-        device_t<DViewSpX> Vcoll,
-        device_t<DViewSpX> Tcoll)
+        DViewSpX Vcoll,
+        DViewSpX Tcoll)
 {
     ddc::for_each(
             ddc::policies::parallel_device,
@@ -282,10 +282,10 @@ void compute_Nucoll(
 * @param[in] temperature The temperature of each species.
 */
 void compute_collfreq_ab(
-        device_t<DSpanSpX> collfreq_ab,
-        device_t<DViewSpX> nustar_profile,
-        device_t<DViewSpX> density,
-        device_t<DViewSpX> temperature);
+        DSpanSpX collfreq_ab,
+        DViewSpX nustar_profile,
+        DViewSpX density,
+        DViewSpX temperature);
 
 /**
 * @brief Compute the momentum and energy exchange terms between species a and b.
@@ -297,9 +297,9 @@ void compute_collfreq_ab(
 * @param[in] temperature The temperature of each species.
 */
 void compute_momentum_energy_exchange(
-        device_t<DSpanSpX> momentum_exchange_ab,
-        device_t<DSpanSpX> energy_exchange_ab,
-        device_t<DViewSpX> collfreq_ab,
-        device_t<DViewSpX> density,
-        device_t<DViewSpX> mean_velocity,
-        device_t<DViewSpX> temperature);
+        DSpanSpX momentum_exchange_ab,
+        DSpanSpX energy_exchange_ab,
+        DViewSpX collfreq_ab,
+        DViewSpX density,
+        DViewSpX mean_velocity,
+        DViewSpX temperature);

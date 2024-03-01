@@ -5,23 +5,22 @@
 #include "bumpontailequilibrium.hpp"
 
 BumpontailEquilibrium::BumpontailEquilibrium(
-        DViewSp const epsilon_bot,
-        DViewSp const temperature_bot,
-        DViewSp const mean_velocity_bot)
+        host_t<DViewSp> const epsilon_bot,
+        host_t<DViewSp> const temperature_bot,
+        host_t<DViewSp> const mean_velocity_bot)
     : m_epsilon_bot(epsilon_bot)
     , m_temperature_bot(temperature_bot)
     , m_mean_velocity_bot(mean_velocity_bot)
 {
 }
 
-device_t<DSpanSpVx> BumpontailEquilibrium::operator()(
-        device_t<DSpanSpVx> const allfequilibrium) const
+DSpanSpVx BumpontailEquilibrium::operator()(DSpanSpVx const allfequilibrium) const
 {
     IDomainVx const gridvx = allfequilibrium.domain<IDimVx>();
     IDomainSp const gridsp = allfequilibrium.domain<IDimSp>();
 
     // Initialization of the maxwellian
-    device_t<DFieldVx> maxwellian_alloc(gridvx);
+    DFieldVx maxwellian_alloc(gridvx);
     ddc::ChunkSpan maxwellian = maxwellian_alloc.span_view();
     ddc::for_each(gridsp, [&](IndexSp const isp) {
         compute_twomaxwellian(
@@ -39,7 +38,7 @@ device_t<DSpanSpVx> BumpontailEquilibrium::operator()(
 }
 
 void BumpontailEquilibrium::compute_twomaxwellian(
-        device_t<DSpanVx> const fMaxwellian,
+        DSpanVx const fMaxwellian,
         double const epsilon_bot,
         double const temperature_bot,
         double const mean_velocity_bot) const

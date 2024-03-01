@@ -142,8 +142,8 @@ private:
 private:
     double m_nustar0;
     double m_fthresh;
-    device_t<DFieldSpX> m_nustar_profile_alloc;
-    device_t<DSpanSpX> m_nustar_profile;
+    DFieldSpX m_nustar_profile_alloc;
+    DSpanSpX m_nustar_profile;
 
     ddc::DiscreteDomain<ghosted_vx_point_sampling> m_gridvx_ghosted;
     ddc::DiscreteDomain<ghosted_vx_staggered_point_sampling> m_gridvx_ghosted_staggered;
@@ -175,7 +175,7 @@ public:
      *
      * @return A span referencing the distribution function passed as argument.
      */
-    device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu, double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
 
     /**
      * @brief Get the collision coefficient.
@@ -216,11 +216,11 @@ public:
      * @param[in] fthresh A constant value used for imposing Dirichlet boundary condition to solve the linear system.  
      */
     void compute_rhs_vector(
-            device_t<DSpanSpXVx> RR,
-            device_t<DViewSpXVx> AA,
-            device_t<DViewSpXVx> BB,
-            device_t<DViewSpXVx> CC,
-            device_t<DViewSpXVx> allfdistribu,
+            DSpanSpXVx RR,
+            DViewSpXVx AA,
+            DViewSpXVx BB,
+            DViewSpXVx CC,
+            DViewSpXVx allfdistribu,
             double fthresh) const;
     /**
      * @brief Compute the coefficients of the tridiagonal matrix of the collision operator linear system.
@@ -233,9 +233,9 @@ public:
      * @param[in] deltat The time step.
      */
     void compute_matrix_coeff(
-            device_t<DSpanSpXVx> AA,
-            device_t<DSpanSpXVx> BB,
-            device_t<DSpanSpXVx> CC,
+            DSpanSpXVx AA,
+            DSpanSpXVx BB,
+            DSpanSpXVx CC,
             device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Dcoll,
             device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted_staggered>> Dcoll_staggered,
             device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Nucoll,
@@ -248,5 +248,9 @@ public:
      * @param[in] BB A vector containing the diagonal coefficients of the matrix.
      * @param[in] CC A vector containing the upper diagonal coefficients of the matrix.
      */
-    void fill_matrix_with_coeff(Matrix_Banded& matrix, DViewVx AA, DViewVx BB, DViewVx CC) const;
+    void fill_matrix_with_coeff(
+            Matrix_Banded& matrix,
+            host_t<DViewVx> AA,
+            host_t<DViewVx> BB,
+            host_t<DViewVx> CC) const;
 };

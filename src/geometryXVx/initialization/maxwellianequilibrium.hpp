@@ -13,13 +13,13 @@
 class MaxwellianEquilibrium : public IEquilibrium
 {
     /**Equilibrium density of all kinetic species*/
-    FieldSp<double> m_density_eq;
+    host_t<DFieldSp> m_density_eq;
 
     /**Equilibrium temperature of all kinetic species*/
-    FieldSp<double> m_temperature_eq;
+    host_t<DFieldSp> m_temperature_eq;
 
     /**Equilibrium mean velocity of all kinetic species*/
-    FieldSp<double> m_mean_velocity_eq;
+    host_t<DFieldSp> m_mean_velocity_eq;
 
 public:
     /**
@@ -28,7 +28,10 @@ public:
      * @param[in] temperature_eq The temperature of the Maxwellian
      * @param[in] mean_velocity_eq The mean velocity of the Maxwellian
      */
-    MaxwellianEquilibrium(DFieldSp density_eq, DFieldSp temperature_eq, DFieldSp mean_velocity_eq);
+    MaxwellianEquilibrium(
+            host_t<DFieldSp> density_eq,
+            host_t<DFieldSp> temperature_eq,
+            host_t<DFieldSp> mean_velocity_eq);
 
     ~MaxwellianEquilibrium() override = default;
 
@@ -37,7 +40,7 @@ public:
      * @param[out] allfequilibrium A Span containing a Maxwellian distribution function.
      * @return A Span containing a Maxwellian distribution function.
      */
-    device_t<DSpanSpVx> operator()(device_t<DSpanSpVx> allfequilibrium) const override;
+    DSpanSpVx operator()(DSpanSpVx allfequilibrium) const override;
 
     /**
      * @brief Compute a Maxwellian distribution function.
@@ -51,7 +54,7 @@ public:
      * @param[in] mean_velocity A parameter that represents the mean velocity of Maxwellian. 
      */
     static void compute_maxwellian(
-            device_t<DSpanVx> const fMaxwellian,
+            DSpanVx const fMaxwellian,
             double const density,
             double const temperature,
             double const mean_velocity);
@@ -60,7 +63,7 @@ public:
      * @brief A method for accessing the m_density_eq member variable of the class.
      * @return A view containing the m_density_eq value. 
      */
-    ViewSp<double> density_eq() const
+    host_t<DViewSp> density_eq() const
     {
         return m_density_eq;
     }
@@ -69,7 +72,7 @@ public:
      * @brief A method for accessing the m_temperature_eq member variable of the class.
      * @return A view containing the m_temperature_eq value. 
      */
-    ViewSp<double> temperature_eq() const
+    host_t<DViewSp> temperature_eq() const
     {
         return m_temperature_eq;
     }
@@ -78,7 +81,7 @@ public:
      * @brief A method for accessing the m_mean_velocity_eq member variable of the class.
      * @return A view containing the m_velocity_eq value. 
      */
-    ViewSp<double> mean_velocity_eq() const
+    host_t<DViewSp> mean_velocity_eq() const
     {
         return m_mean_velocity_eq;
     }

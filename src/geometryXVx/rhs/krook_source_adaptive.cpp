@@ -33,7 +33,7 @@ KrookSourceAdaptive::KrookSourceAdaptive(
     , m_ftarget(gridvx)
 {
     // mask that defines the region where the operator is active
-    DFieldX mask_host(gridx);
+    host_t<DFieldX> mask_host(gridx);
     switch (m_type) {
     case RhsType::Source:
         // the mask equals one in the interval [x_left, x_right]
@@ -72,9 +72,7 @@ KrookSourceAdaptive::KrookSourceAdaptive(
     }
 }
 
-void KrookSourceAdaptive::get_amplitudes(
-        device_t<DSpanSpX> amplitudes,
-        device_t<DViewSpXVx> const allfdistribu) const
+void KrookSourceAdaptive::get_amplitudes(DSpanSpX amplitudes, DViewSpXVx const allfdistribu) const
 {
     IDomainSp const dom_sp(ddc::get_domain<IDimSp>(allfdistribu));
     assert(dom_sp.size() == 2);
@@ -87,7 +85,7 @@ void KrookSourceAdaptive::get_amplitudes(
     }
     IndexSp iion(iion_opt.value());
     IDomainVx const gridvx = allfdistribu.domain<IDimVx>();
-    DFieldVx const quadrature_coeffs_host(trapezoid_quadrature_coefficients(gridvx));
+    host_t<DFieldVx> const quadrature_coeffs_host(trapezoid_quadrature_coefficients(gridvx));
     auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
@@ -113,13 +111,13 @@ void KrookSourceAdaptive::get_amplitudes(
 }
 
 void KrookSourceAdaptive::get_derivative(
-        device_t<DSpanSpXVx> df,
-        device_t<DViewSpXVx> allfdistribu,
-        device_t<DViewSpXVx> allfdistribu_start) const
+        DSpanSpXVx df,
+        DViewSpXVx allfdistribu,
+        DViewSpXVx allfdistribu_start) const
 {
     IDomainSpX grid_sp_x(allfdistribu.domain<IDimSp, IDimX>());
 
-    device_t<DFieldSpX> amplitudes_alloc(grid_sp_x);
+    DFieldSpX amplitudes_alloc(grid_sp_x);
     auto amplitudes = amplitudes_alloc.span_view();
     get_amplitudes(amplitudes, allfdistribu);
 
@@ -138,14 +136,12 @@ void KrookSourceAdaptive::get_derivative(
             });
 }
 
-device_t<DSpanSpXVx> KrookSourceAdaptive::operator()(
-        device_t<DSpanSpXVx> const allfdistribu,
-        double const dt) const
+DSpanSpXVx KrookSourceAdaptive::operator()(DSpanSpXVx const allfdistribu, double const dt) const
 {
     Kokkos::Profiling::pushRegion("KrookSource");
-    RK2<device_t<DFieldSpXVx>> timestepper(allfdistribu.domain());
+    RK2<DFieldSpXVx> timestepper(allfdistribu.domain());
 
-    timestepper.update(allfdistribu, dt, [&](device_t<DSpanSpXVx> df, device_t<DViewSpXVx> f) {
+    timestepper.update(allfdistribu, dt, [&](DSpanSpXVx df, DViewSpXVx f) {
         get_derivative(df, f, allfdistribu);
     });
     Kokkos::Profiling::popRegion();

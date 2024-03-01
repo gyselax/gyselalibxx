@@ -56,43 +56,44 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
             builder_vx.spline_domain(),
             ddc::ConstantExtrapolationRule<RDimVx>(vx_min),
             ddc::ConstantExtrapolationRule<RDimVx>(vx_max));
-    FieldSp<int> charges(dom_sp);
+    host_t<FieldSp<int>> charges(dom_sp);
     charges(my_ielec) = -1;
     charges(my_iion) = 1;
-    DFieldSp masses(dom_sp);
+    host_t<DFieldSp> masses(dom_sp);
     ddc::fill(masses, 1);
 
     // Initialization of the distribution function
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
 
-    DFieldVx const quadrature_coeffs = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
-    auto const quadrature_coeffs_device = ddc::create_mirror_view_and_copy(
+    host_t<DFieldVx> const quadrature_coeffs_host
+            = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
+    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs.span_view());
-    ChargeDensityCalculator rhs(quadrature_coeffs_device);
+            quadrature_coeffs_host.span_view());
+    ChargeDensityCalculator rhs(quadrature_coeffs);
     FemPeriodicPoissonSolver poisson(builder_x, spline_x_evaluator, rhs);
 
-    DFieldX electrostatic_potential(gridx);
-    DFieldX electric_field(gridx);
-    DFieldSpXVx allfdistribu(mesh);
+    host_t<DFieldX> electrostatic_potential_host(gridx);
+    host_t<DFieldX> electric_field_host(gridx);
+    host_t<DFieldSpXVx> allfdistribu_host(mesh);
 
     // Initialization of the distribution function --> fill values
     for (IndexSp const isp : gridsp) {
         for (IndexX const ix : gridx) {
             double fdistribu_val = cos(ddc::coordinate(ix));
             for (IndexVx const iv : gridvx) {
-                allfdistribu(isp, ix, iv) = fdistribu_val;
+                allfdistribu_host(isp, ix, iv) = fdistribu_val;
             }
         }
     }
-    device_t<DFieldX> electrostatic_potential_device(gridx);
-    device_t<DFieldX> electric_field_device(gridx);
-    device_t<DFieldSpXVx> allfdistribu_device(mesh);
+    DFieldX electrostatic_potential(gridx);
+    DFieldX electric_field(gridx);
+    DFieldSpXVx allfdistribu(mesh);
 
-    ddc::deepcopy(allfdistribu_device, allfdistribu);
-    poisson(electrostatic_potential_device, electric_field_device, allfdistribu_device);
-    ddc::deepcopy(electric_field, electric_field_device);
-    ddc::deepcopy(electrostatic_potential, electrostatic_potential_device);
+    ddc::deepcopy(allfdistribu, allfdistribu_host);
+    poisson(electrostatic_potential, electric_field, allfdistribu);
+    ddc::deepcopy(electric_field_host, electric_field);
+    ddc::deepcopy(electrostatic_potential_host, electrostatic_potential);
 
     double error_pot = 0.0;
     double error_field = 0.0;
@@ -100,9 +101,9 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
 
     for (IndexX const ix : gridx) {
         double const exact_pot = cos(ddc::coordinate(ix));
-        error_pot = fmax(fabs(electrostatic_potential(ix) - exact_pot), error_pot);
+        error_pot = fmax(fabs(electrostatic_potential_host(ix) - exact_pot), error_pot);
         double const exact_field = sin(ddc::coordinate(ix));
-        error_field = fmax(fabs(electric_field(ix) - exact_field), error_field);
+        error_field = fmax(fabs(electric_field_host(ix) - exact_field), error_field);
     }
     EXPECT_LE(error_pot, 1e-8);
     EXPECT_LE(error_field, 1e-6);

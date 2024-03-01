@@ -35,8 +35,8 @@ private:
     double m_density;
     double m_energy;
     double m_temperature;
-    DFieldX m_spatial_extent;
-    DFieldVx m_velocity_shape;
+    host_t<DFieldX> m_spatial_extent;
+    host_t<DFieldVx> m_velocity_shape;
 
 public:
     /**
@@ -73,5 +73,5 @@ public:
      *
      * @return A span referencing the distribution function passed as argument.
      */
-    device_t<DSpanSpXVx> operator()(device_t<DSpanSpXVx> allfdistribu, double dt) const override;
+    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
 };
