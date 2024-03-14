@@ -1,16 +1,16 @@
-Mesh:
+SplineMesh:
   x_min: 0.0
   x_max: 12.56637061435917
-  x_size: 64
+  x_ncells: 64
   y_min: 0.0
   y_max: 12.56637061435917
-  y_size : 64
+  y_ncells : 64
   vx_min: -6.0
   vx_max: +6.0
-  vx_size: 127
+  vx_ncells: 127
   vy_min: -6.0
   vy_max: +6.0
-  vy_size: 127
+  vy_ncells: 127
 
 SpeciesInfo:
 - charge: -1

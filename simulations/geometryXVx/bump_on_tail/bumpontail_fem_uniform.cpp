@@ -76,17 +76,17 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    CoordX const x_min(PCpp_double(conf_voicexx, ".Mesh.x_min"));
-    CoordX const x_max(PCpp_double(conf_voicexx, ".Mesh.x_max"));
-    IVectX const x_size(PCpp_int(conf_voicexx, ".Mesh.x_size"));
-    CoordVx const vx_min(PCpp_double(conf_voicexx, ".Mesh.vx_min"));
-    CoordVx const vx_max(PCpp_double(conf_voicexx, ".Mesh.vx_max"));
-    IVectVx const vx_size(PCpp_int(conf_voicexx, ".Mesh.vx_size"));
+    CoordX const x_min(PCpp_double(conf_voicexx, ".SplineMesh.x_min"));
+    CoordX const x_max(PCpp_double(conf_voicexx, ".SplineMesh.x_max"));
+    IVectX const x_ncells(PCpp_int(conf_voicexx, ".SplineMesh.x_ncells"));
+    CoordVx const vx_min(PCpp_double(conf_voicexx, ".SplineMesh.vx_min"));
+    CoordVx const vx_max(PCpp_double(conf_voicexx, ".SplineMesh.vx_max"));
+    IVectVx const vx_ncells(PCpp_int(conf_voicexx, ".SplineMesh.vx_ncells"));
 
     // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_ncells);
 
-    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
+    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
 
     ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
     ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
@@ -235,8 +235,8 @@ int main(int argc, char** argv)
     PredCorr const predcorr(vlasov, poisson);
 
     // Starting the code
-    ddc::expose_to_pdi("Nx", x_size.value());
-    ddc::expose_to_pdi("Nvx", vx_size.value());
+    ddc::expose_to_pdi("Nx_spline_cells", x_ncells.value());
+    ddc::expose_to_pdi("Nvx_spline_cells", vx_ncells.value());
     ddc::expose_to_pdi("MeshX", meshX_coord);
     ddc::expose_to_pdi("MeshVx", meshVx_coord);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
