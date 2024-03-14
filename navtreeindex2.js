@@ -1,6 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"classMatrix.html#a135d09d05b6e7430fdfa2c135afc4fae":[11,89,3],
 "classMatrix.html#a15badbcf214a7842a0a654f9210f39a1":[11,89,8],
 "classMatrix.html#a1d3dd4ae5b28f0f1ec3e64ae17998944":[11,89,4],
 "classMatrix.html#a490ec31dfcf14765beb1cce24ba3b985":[11,89,9],
@@ -249,5 +248,6 @@ var NAVTREEINDEX2 =
 "classPreallocatableSplineInterpolatorBatched.html#af55e09b147f251625df95db35da7a516":[11,116,1],
 "classPreallocatableSplineInterpolatorRP.html":[11,117],
 "classPreallocatableSplineInterpolatorRP.html#a415bb619fad457874e41e7afd7895ac5":[11,117,1],
-"classPreallocatableSplineInterpolatorRP.html#a96c0faf84015ec3b49d8d98b3eeef938":[11,117,2]
+"classPreallocatableSplineInterpolatorRP.html#a96c0faf84015ec3b49d8d98b3eeef938":[11,117,2],
+"classPreallocatableSplineInterpolatorRP.html#ade36aac246ed7b8003ec0e227ca95b7e":[11,117,0]
 };

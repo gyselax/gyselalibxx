@@ -120,8 +120,8 @@ $(document).ready(function(){initNavTree('femnonperiodicpoissonsolver_8hpp_sourc
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using</span> UBSplinesX = ddc::UniformBSplines&lt;RDimX, BSDegreeX&gt;;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">using</span> NUBSplineXEvaluator_1d = ddc::SplineEvaluator&lt;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        Kokkos::DefaultHostExecutionSpace,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        Kokkos::DefaultHostExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        Kokkos::DefaultExecutionSpace,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        Kokkos::DefaultExecutionSpace::memory_space,</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        NUBSplinesX,</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        IDimX,</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        ddc::NullExtrapolationRule,</div>
@@ -137,61 +137,65 @@ $(document).ready(function(){initNavTree('femnonperiodicpoissonsolver_8hpp_sourc
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">using</span> QMeshX = ddc::NonUniformPointSampling&lt;QDimX&gt;;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// Spline degree in x direction</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr s_degree = BSplinesX::degree();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">// Gauss points used for integration computation</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr s_npts_gauss = BSplinesX::degree() + 1;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    SplineXBuilder_1d <span class="keyword">const</span>&amp; m_spline_x_builder;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    SplineXEvaluator_1d m_spline_x_evaluator;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">using</span> DQFieldX = device_t&lt;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;QMeshX&gt;&gt;&gt;;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">using</span> DNUBSSpanX = device_t&lt;ddc::ChunkSpan&lt;double, NUBSDomainX&gt;&gt;;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// Spline degree in x direction</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr s_degree = BSplinesX::degree();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// Gauss points used for integration computation</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr s_npts_gauss = BSplinesX::degree() + 1;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    SplineXBuilder_1d <span class="keyword">const</span>&amp; m_spline_x_builder;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    NUBSplineXEvaluator_1d m_spline_x_nu_evaluator;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    SplineXEvaluator_1d m_spline_x_evaluator;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> <span class="keyword">const</span>&amp; m_compute_rho;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    NUBSplineXEvaluator_1d m_spline_x_nu_evaluator;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// Number of spline basis in x direction</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">int</span> m_nbasis;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// Number of cells in x direction</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">int</span> m_ncells;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;QMeshX&gt;&gt; m_quad_coef;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> <span class="keyword">const</span>&amp; m_compute_rho;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// Number of spline basis in x direction</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">int</span> m_nbasis;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">// Number of cells in x direction</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">int</span> m_ncells;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    std::unique_ptr&lt;Matrix&gt; m_fem_matrix;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    DQFieldX m_quad_coef_alloc;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">static</span> ddc::Coordinate&lt;QDimX&gt; quad_point_from_coord(ddc::Coordinate&lt;RDimX&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;QDimX&gt;(ddc::get&lt;RDimX&gt;(coord));</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">static</span> ddc::Coordinate&lt;RDimX&gt; coord_from_quad_point(ddc::Coordinate&lt;QDimX&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimX&gt;(ddc::get&lt;QDimX&gt;(coord));</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classFemNonPeriodicPoissonSolver.html#ac4823c397f9cfc7a2904da3e6cbb13a4">   95</a></span>&#160;    <a class="code" href="classFemNonPeriodicPoissonSolver.html#ac4823c397f9cfc7a2904da3e6cbb13a4">FemNonPeriodicPoissonSolver</a>(</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            SplineXBuilder_1d <span class="keyword">const</span>&amp; spline_x_builder,</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            SplineXEvaluator_1d <span class="keyword">const</span>&amp; spline_x_evaluator,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> <span class="keyword">const</span>&amp; compute_rho);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66">  107</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66">operator()</a>(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu)</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">void</span> build_matrix();</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">void</span> solve_matrix_system(</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            ddc::ChunkSpan&lt;double, NUBSDomainX&gt; phi_spline_coef,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            ddc::ChunkSpan&lt;double, BSDomainX&gt; rho_spline_coef) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    std::unique_ptr&lt;Matrix&gt; m_fem_matrix;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">static</span> KOKKOS_FUNCTION ddc::Coordinate&lt;QDimX&gt; quad_point_from_coord(</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            ddc::Coordinate&lt;RDimX&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;QDimX&gt;(ddc::get&lt;RDimX&gt;(coord));</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">static</span> KOKKOS_FUNCTION ddc::Coordinate&lt;RDimX&gt; coord_from_quad_point(</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            ddc::Coordinate&lt;QDimX&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimX&gt;(ddc::get&lt;QDimX&gt;(coord));</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classFemNonPeriodicPoissonSolver.html#ac4823c397f9cfc7a2904da3e6cbb13a4">   99</a></span>&#160;    <a class="code" href="classFemNonPeriodicPoissonSolver.html#ac4823c397f9cfc7a2904da3e6cbb13a4">FemNonPeriodicPoissonSolver</a>(</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            SplineXBuilder_1d <span class="keyword">const</span>&amp; spline_x_builder,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            SplineXEvaluator_1d <span class="keyword">const</span>&amp; spline_x_evaluator,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> <span class="keyword">const</span>&amp; compute_rho);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66">  111</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66">operator()</a>(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">void</span> build_matrix();</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classFemNonPeriodicPoissonSolver.html#abaa0734fbede404207a0d0d86f4877a3">  124</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFemNonPeriodicPoissonSolver.html#abaa0734fbede404207a0d0d86f4877a3">solve_matrix_system</a>(DNUBSSpanX phi_spline_coef, DBSViewX rho_spline_coef) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;};</div>
 <div class="ttc" id="aclassFemNonPeriodicPoissonSolver_html"><div class="ttname"><a href="classFemNonPeriodicPoissonSolver.html">FemNonPeriodicPoissonSolver</a></div><div class="ttdoc">An operator which solves the Poisson equation using Finite Elements on a non-periodic domain.</div><div class="ttdef"><b>Definition:</b> femnonperiodicpoissonsolver.hpp:37</div></div>
+<div class="ttc" id="aclassFemNonPeriodicPoissonSolver_html_abaa0734fbede404207a0d0d86f4877a3"><div class="ttname"><a href="classFemNonPeriodicPoissonSolver.html#abaa0734fbede404207a0d0d86f4877a3">FemNonPeriodicPoissonSolver::solve_matrix_system</a></div><div class="ttdeci">void solve_matrix_system(DNUBSSpanX phi_spline_coef, DBSViewX rho_spline_coef) const</div><div class="ttdoc">[SHOULD BE PRIVATE (Kokkos limitation)]</div></div>
 <div class="ttc" id="aclassFemNonPeriodicPoissonSolver_html_ac4823c397f9cfc7a2904da3e6cbb13a4"><div class="ttname"><a href="classFemNonPeriodicPoissonSolver.html#ac4823c397f9cfc7a2904da3e6cbb13a4">FemNonPeriodicPoissonSolver::FemNonPeriodicPoissonSolver</a></div><div class="ttdeci">FemNonPeriodicPoissonSolver(SplineXBuilder_1d const &amp;spline_x_builder, SplineXEvaluator_1d const &amp;spline_x_evaluator, IChargeDensityCalculator const &amp;compute_rho)</div><div class="ttdoc">Construct the FemNonPeriodicPoissonSolver operator.</div></div>
 <div class="ttc" id="aclassFemNonPeriodicPoissonSolver_html_ae81c12b0b37dd2f2bf3f4f24d7d7bf66"><div class="ttname"><a href="classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66">FemNonPeriodicPoissonSolver::operator()</a></div><div class="ttdeci">void operator()(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const override</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
 <div class="ttc" id="aclassFemNonPeriodicPoissonSolver_html_structFemNonPeriodicPoissonSolver_1_1QDimX"><div class="ttname"><a href="classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX">FemNonPeriodicPoissonSolver::QDimX</a></div><div class="ttdoc">A tag to represent the dimension where the quadrature points are defined.</div><div class="ttdef"><b>Definition:</b> femnonperiodicpoissonsolver.hpp:44</div></div>

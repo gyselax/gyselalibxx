@@ -12,11 +12,10 @@ var NAVTREEINDEX5 =
 "geometryXVx_2initialization_2maxwellianequilibrium_8hpp_source.html":[12,0,2,2,3],
 "geometryXVx_2initialization_2singlemodeperturbinitialization_8hpp_source.html":[12,0,2,2,5],
 "geometryXVx_2poisson_2chargedensitycalculator_8hpp_source.html":[12,0,2,3,0],
-"geometryXVx_2poisson_2electricfield_8hpp_source.html":[12,0,2,3,1],
-"geometryXVx_2poisson_2fftpoissonsolver_8hpp_source.html":[12,0,2,3,4],
-"geometryXVx_2poisson_2ichargedensitycalculator_8hpp_source.html":[12,0,2,3,5],
-"geometryXVx_2poisson_2ipoissonsolver_8hpp_source.html":[12,0,2,3,6],
-"geometryXVx_2poisson_2nullpoissonsolver_8hpp_source.html":[12,0,2,3,7],
+"geometryXVx_2poisson_2fftpoissonsolver_8hpp_source.html":[12,0,2,3,3],
+"geometryXVx_2poisson_2ichargedensitycalculator_8hpp_source.html":[12,0,2,3,4],
+"geometryXVx_2poisson_2ipoissonsolver_8hpp_source.html":[12,0,2,3,5],
+"geometryXVx_2poisson_2nullpoissonsolver_8hpp_source.html":[12,0,2,3,6],
 "geometryXVx_2time__integration_2itimesolver_8hpp_source.html":[12,0,2,5,0],
 "geometryXVx_2time__integration_2predcorr_8hpp_source.html":[12,0,2,5,1],
 "geometryXYVxVy_2geometry_2geometry_8hpp_source.html":[12,0,3,0,0],
@@ -25,7 +24,6 @@ var NAVTREEINDEX5 =
 "geometryXYVxVy_2initialization_2maxwellianequilibrium_8hpp_source.html":[12,0,3,1,2],
 "geometryXYVxVy_2initialization_2singlemodeperturbinitialization_8hpp_source.html":[12,0,3,1,3],
 "geometryXYVxVy_2poisson_2chargedensitycalculator_8hpp_source.html":[12,0,3,2,0],
-"geometryXYVxVy_2poisson_2electricfield_8hpp_source.html":[12,0,3,2,1],
 "geometryXYVxVy_2poisson_2fftpoissonsolver_8hpp_source.html":[12,0,3,2,2],
 "geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp_source.html":[12,0,3,2,3],
 "geometryXYVxVy_2poisson_2ipoissonsolver_8hpp_source.html":[12,0,3,2,4],
@@ -249,5 +247,7 @@ var NAVTREEINDEX5 =
 "tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md48":[24],
 "tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md49":[25],
 "tests_geometryRTheta_advection_2d_rp.html":[9,0,0],
-"tests_geometryRTheta_advection_2d_rp.html#autotoc_md50":[21]
+"tests_geometryRTheta_advection_2d_rp.html#autotoc_md50":[21],
+"tests_geometryRTheta_advection_2d_rp.html#autotoc_md51":[22],
+"tests_geometryRTheta_advection_2d_rp.html#autotoc_md52":[23]
 };

@@ -1,6 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classVectorFieldSpan.html#acc499084ae93b3118644c458e16b3549":[11,159,18],
 "classVectorFieldSpan.html#ad3abef65badf2ce5915d6b9b86b0ebdc":[11,159,15],
 "classVectorFieldSpan.html#ad70b8f79a45666e097299ac974f76046":[11,159,21],
 "classVectorFieldSpan.html#ae15150e6af873478dfe5132a30fe168a":[11,159,9],
@@ -245,9 +244,10 @@ var NAVTREEINDEX4 =
 "docs_Using_git.html#autotoc_md19":[15,1],
 "docs_Using_git.html#docs_Using_git__Branches":[6,0],
 "docs_Using_git.html#docs_Using_git__Submodules":[6,1],
+"electricfield_8hpp_source.html":[12,0,3,2,1],
 "euler_8hpp_source.html":[12,0,8,1],
 "evaluator__2d_8hpp_source.html":[12,2,0,1,1],
-"femnonperiodicpoissonsolver_8hpp_source.html":[12,0,2,3,2],
-"femperiodicpoissonsolver_8hpp_source.html":[12,0,2,3,3],
+"femnonperiodicpoissonsolver_8hpp_source.html":[12,0,2,3,1],
+"femperiodicpoissonsolver_8hpp_source.html":[12,0,2,3,2],
 "files.html":[12]
 };

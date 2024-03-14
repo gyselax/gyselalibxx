@@ -1,7 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"tests_geometryRTheta_advection_2d_rp.html#autotoc_md51":[22],
-"tests_geometryRTheta_advection_2d_rp.html#autotoc_md52":[23],
 "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Contents":[9,0,0,3],
 "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Python_tests":[9,0,0,1],
 "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__References":[9,0,0,2],

@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2electricfield_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('electricfield_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -112,29 +112,27 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2electricfield
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Compute efield = -dPhi/dx where Phi is the electrostatic potential</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//  input : Phi values</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//===========================================================================</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="classElectricField.html">ElectricField</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classElectricField.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="classElectricField.html">ElectricField</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="classSplineBuilder2D.html">SplineXYBuilder</a> <span class="keyword">const</span>&amp; m_spline_xy_builder;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classSplineEvaluator2D.html">SplineXYEvaluator</a> m_spline_xy_evaluator;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classElectricField.html#a125d3aed94fbcc1adcd2274f29587c5b">ElectricField</a>(</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classElectricField.html">ElectricField</a>(</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <a class="code" href="classSplineBuilder2D.html">SplineXYBuilder</a> <span class="keyword">const</span>&amp; spline_xy_builder,</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineXYEvaluator</a> <span class="keyword">const</span>&amp; spline_xy_evaluator);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classElectricField.html#ad420b6103ee2bca963abd59aae8c57a6">operator()</a>(</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> operator()(</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            DSpanXY electric_field_x,</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            DSpanXY electric_field_y,</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            DBSViewXY electrostatic_potential) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classElectricField.html#ad420b6103ee2bca963abd59aae8c57a6">operator()</a>(</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> operator()(</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            DSpanXY electric_field_x,</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            DSpanXY electric_field_y,</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            DViewXY electrostatic_potential) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
-<div class="ttc" id="aclassElectricField_html"><div class="ttname"><a href="classElectricField.html">ElectricField</a></div><div class="ttdoc">An operator which computes the electric field using splines derivation.</div><div class="ttdef"><b>Definition:</b> electricfield.hpp:19</div></div>
-<div class="ttc" id="aclassElectricField_html_a125d3aed94fbcc1adcd2274f29587c5b"><div class="ttname"><a href="classElectricField.html#a125d3aed94fbcc1adcd2274f29587c5b">ElectricField::ElectricField</a></div><div class="ttdeci">ElectricField(SplineXBuilder_1d const &amp;spline_x_builder, SplineXEvaluator_1d const &amp;spline_x_evaluator)</div><div class="ttdoc">Construct the ElectricField operator.</div></div>
-<div class="ttc" id="aclassElectricField_html_ad420b6103ee2bca963abd59aae8c57a6"><div class="ttname"><a href="classElectricField.html#ad420b6103ee2bca963abd59aae8c57a6">ElectricField::operator()</a></div><div class="ttdeci">void operator()(host_t&lt; DSpanX &gt; electric_field, host_t&lt; DViewX &gt; electrostatic_potential) const</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
+<div class="ttc" id="aclassElectricField_html"><div class="ttname"><a href="classElectricField.html">ElectricField</a></div><div class="ttdef"><b>Definition:</b> electricfield.hpp:11</div></div>
 <div class="ttc" id="aclassSplineBuilder2D_html"><div class="ttname"><a href="classSplineBuilder2D.html">SplineBuilder2D</a></div><div class="ttdoc">A class for creating a 2D spline approximation of a function.</div><div class="ttdef"><b>Definition:</b> spline_builder_2d.hpp:15</div></div>
 <div class="ttc" id="aclassSplineEvaluator2D_html"><div class="ttname"><a href="classSplineEvaluator2D.html">SplineEvaluator2D&lt; BSplinesX, BSplinesY &gt;</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -147,6 +147,7 @@ Naming</h1>
 <li>we don't rely on case to distinguish between variables</li>
 <li>there are two types of DDC objects representing a multidimensional array : <code>ddc::Chunk</code> (which possesses the data) and <code>ddc::ChunkSpan</code> (which does not own the data but can be captured by <code>KOKKOS_LAMBDA</code>). We suffix <code>Chunk</code> with <code>_alloc</code> if both variables are needed locally.</li>
 <li>if a variable is mirrored between host (CPU) and device (GPU) memories, the variable representing data on host is <code>_host</code> suffixed</li>
+<li>capturing classes members through <code>KOKKOS_LAMBDA</code> or <code>KOKKOS_CLASS_LAMBDA</code> may be complicated, we often need to copy-by-reference the member to a local variable, which must be <code>_proxy</code> suffixed</li>
 </ul>
 <h1><a class="anchor" id="docs_CODING_STANDARD__Style"></a>
 Style</h1>

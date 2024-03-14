@@ -106,21 +106,9 @@ $(document).ready(function(){initNavTree('classElectricField.html',''); initResi
 <div class="title">ElectricField Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>An operator which computes the electric field using splines derivation.  
- <a href="classElectricField.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a125d3aed94fbcc1adcd2274f29587c5b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElectricField.html#a125d3aed94fbcc1adcd2274f29587c5b">ElectricField</a> (SplineXBuilder_1d const &amp;spline_x_builder, SplineXEvaluator_1d const &amp;spline_x_evaluator)</td></tr>
-<tr class="memdesc:a125d3aed94fbcc1adcd2274f29587c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the <a class="el" href="classElectricField.html" title="An operator which computes the electric field using splines derivation.">ElectricField</a> operator.  <a href="classElectricField.html#a125d3aed94fbcc1adcd2274f29587c5b">More...</a><br /></td></tr>
-<tr class="separator:a125d3aed94fbcc1adcd2274f29587c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad420b6103ee2bca963abd59aae8c57a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElectricField.html#ad420b6103ee2bca963abd59aae8c57a6">operator()</a> (host_t&lt; DSpanX &gt; electric_field, host_t&lt; DViewX &gt; electrostatic_potential) const</td></tr>
-<tr class="memdesc:ad420b6103ee2bca963abd59aae8c57a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classElectricField.html#ad420b6103ee2bca963abd59aae8c57a6">More...</a><br /></td></tr>
-<tr class="separator:ad420b6103ee2bca963abd59aae8c57a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21009a5e62f882999a61148c84d2b776"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElectricField.html#a21009a5e62f882999a61148c84d2b776">operator()</a> (host_t&lt; DSpanX &gt; electric_field, host_t&lt; DBSViewX &gt; electrostatic_potential) const</td></tr>
-<tr class="memdesc:a21009a5e62f882999a61148c84d2b776"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classElectricField.html#a21009a5e62f882999a61148c84d2b776">More...</a><br /></td></tr>
-<tr class="separator:a21009a5e62f882999a61148c84d2b776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf0e4c00872edb73e11720086cda5da0"><td class="memItemLeft" align="right" valign="top"><a id="aaf0e4c00872edb73e11720086cda5da0"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ElectricField</b> (<a class="el" href="classSplineBuilder2D.html">SplineXYBuilder</a> const &amp;spline_xy_builder, <a class="el" href="classSplineEvaluator2D.html">SplineXYEvaluator</a> const &amp;spline_xy_evaluator)</td></tr>
 <tr class="separator:aaf0e4c00872edb73e11720086cda5da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,124 +119,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpan
 void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanXY electric_field_x, DSpanXY electric_field_y, DViewXY electrostatic_potential) const</td></tr>
 <tr class="separator:a63f4ae725259235a0c2451a1b70ec39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An operator which computes the electric field using splines derivation. </p>
-<p>An operator which computes the electric field: \( E = - \frac{d\phi}{dx} \) where Phi is the electrostatic potential. This operator uses spline derivation. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a125d3aed94fbcc1adcd2274f29587c5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a125d3aed94fbcc1adcd2274f29587c5b">&#9670;&nbsp;</a></span>ElectricField()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ElectricField::ElectricField </td>
-          <td>(</td>
-          <td class="paramtype">SplineXBuilder_1d const &amp;&#160;</td>
-          <td class="paramname"><em>spline_x_builder</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SplineXEvaluator_1d const &amp;&#160;</td>
-          <td class="paramname"><em>spline_x_evaluator</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Construct the <a class="el" href="classElectricField.html" title="An operator which computes the electric field using splines derivation.">ElectricField</a> operator. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">spline_x_builder</td><td>A spline builder which calculates the coefficients of a spline representation. </td></tr>
-    <tr><td class="paramname">spline_x_evaluator</td><td>A spline evaluator which provides the value of a spline representation from its coefficients. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad420b6103ee2bca963abd59aae8c57a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad420b6103ee2bca963abd59aae8c57a6">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ElectricField::operator() </td>
-          <td>(</td>
-          <td class="paramtype">host_t&lt; DSpanX &gt;&#160;</td>
-          <td class="paramname"><em>electric_field</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">host_t&lt; DViewX &gt;&#160;</td>
-          <td class="paramname"><em>electrostatic_potential</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The operator which solves the equation using the method described by the class. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field</td><td>The electric_field, the result of the operation. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">electrostatic_potential</td><td>The electrostatic potential, the input of the operator. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a21009a5e62f882999a61148c84d2b776"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21009a5e62f882999a61148c84d2b776">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ElectricField::operator() </td>
-          <td>(</td>
-          <td class="paramtype">host_t&lt; DSpanX &gt;&#160;</td>
-          <td class="paramname"><em>electric_field</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">host_t&lt; DBSViewX &gt;&#160;</td>
-          <td class="paramname"><em>electrostatic_potential</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The operator which solves the equation using the method described by the class. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field</td><td>The electric_field, the result of the operation. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">electrostatic_potential</td><td>The electrostatic potential, the input of the operator. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="geometryXVx_2poisson_2electricfield_8hpp_source.html">electricfield.hpp</a></li>
+<li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/<a class="el" href="electricfield_8hpp_source.html">electricfield.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
