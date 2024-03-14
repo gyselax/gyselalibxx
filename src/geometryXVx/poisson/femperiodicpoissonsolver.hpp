@@ -29,6 +29,7 @@ public:
 
 private:
     using QMeshX = ddc::NonUniformPointSampling<QDimX>;
+    using DQFieldX = device_t<ddc::Chunk<double, ddc::DiscreteDomain<QMeshX>>>;
 
 private:
     // Spline degree in x direction
@@ -50,17 +51,19 @@ private:
     // Number of cells in x direction
     int m_ncells;
 
-    ddc::Chunk<double, ddc::DiscreteDomain<QMeshX>> m_quad_coef;
+    DQFieldX m_quad_coef_alloc;
 
     std::unique_ptr<Matrix> m_fem_matrix;
 
 private:
-    static ddc::Coordinate<QDimX> quad_point_from_coord(ddc::Coordinate<RDimX> const& coord)
+    static KOKKOS_FUNCTION ddc::Coordinate<QDimX> quad_point_from_coord(
+            ddc::Coordinate<RDimX> const& coord)
     {
         return ddc::Coordinate<QDimX>(ddc::get<RDimX>(coord));
     }
 
-    static ddc::Coordinate<RDimX> coord_from_quad_point(ddc::Coordinate<QDimX> const& coord)
+    static KOKKOS_FUNCTION ddc::Coordinate<RDimX> coord_from_quad_point(
+            ddc::Coordinate<QDimX> const& coord)
     {
         return ddc::Coordinate<RDimX>(ddc::get<QDimX>(coord));
     }
@@ -91,7 +94,12 @@ public:
 private:
     void build_matrix();
 
-    void solve_matrix_system(
-            ddc::ChunkSpan<double, BSDomainX> phi_spline_coef,
-            ddc::ChunkSpan<double, BSDomainX> rho_spline_coef) const;
+public:
+    /**
+     * [SHOULD BE PRIVATE (Kokkos limitation)]
+     *
+     * @param[out] phi_spline_coef
+     * @param[in] rho_spline_coef
+     */
+    void solve_matrix_system(DBSSpanX phi_spline_coef, DBSViewX rho_spline_coef) const;
 };
