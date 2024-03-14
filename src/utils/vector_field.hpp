@@ -87,13 +87,6 @@ private:
     {
     }
 
-    template <std::size_t... Is>
-    VectorField(VectorField&& other, std::index_sequence<Is...> const&)
-        : base_type(
-                chunk_type(std::move(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
-    {
-    }
-
     /**
      * Construct a VectorField from a deepcopy of a VectorFieldSpan
      *
@@ -153,10 +146,7 @@ public:
      * Constructs a new VectorField by move
      * @param other the VectorField to move
      */
-    VectorField(VectorField&& other)
-        : VectorField(std::move(other), std::make_index_sequence<base_type::NDims> {})
-    {
-    }
+    VectorField(VectorField&& other) = default;
 
     /**
      * Copy-assigns a new value to this VectorFieldSpan, yields a new view to the same data
