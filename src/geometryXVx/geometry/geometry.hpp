@@ -144,8 +144,8 @@ using SplineVxEvaluator = ddc::SplineEvaluator<
         IDimX,
         IDimVx>;
 using SplineXBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         IDimX,
         SplineXBoundary,
@@ -153,8 +153,8 @@ using SplineXBuilder_1d = ddc::SplineBuilder<
         ddc::SplineSolver::GINKGO,
         IDimX>;
 using SplineXEvaluator_1d = ddc::SplineEvaluator<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         IDimX,
 #ifdef PERIODIC_RDIMX
@@ -297,6 +297,9 @@ using SpanSpXVx = device_t<ddc::ChunkSpan<ElementType, IDomainSpXVx>>;
 template <class ElementType>
 using SpanSpVx = device_t<ddc::ChunkSpan<ElementType, IDomainSpVx>>;
 
+template <class ElementType>
+using BSSpanX = device_t<ddc::ChunkSpan<ElementType, BSDomainX>>;
+
 
 
 template <class DomainType>
@@ -315,6 +318,7 @@ using DSpanSpXVx = SpanSpXVx<double>;
 
 using DSpanSpVx = SpanSpVx<double>;
 
+using DBSSpanX = BSSpanX<double>;
 
 
 template <class ElementType>

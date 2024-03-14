@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "electricfield.hpp"
 #include "ichargedensitycalculator.hpp"
 #include "ipoissonsolver.hpp"
 

@@ -33,6 +33,7 @@
 * we don't rely on case to distinguish between variables
 * there are two types of DDC objects representing a multidimensional array : `ddc::Chunk` (which possesses the data) and `ddc::ChunkSpan` (which does not own the data but can be captured by `KOKKOS_LAMBDA`). We suffix `Chunk` with `_alloc` if both variables are needed locally.
 * if a variable is mirrored between host (CPU) and device (GPU) memories, the variable representing data on host is `_host` suffixed
+* capturing classes members through `KOKKOS_LAMBDA` or `KOKKOS_CLASS_LAMBDA` may be complicated, we often need to copy-by-reference the member to a local variable, which must be `_proxy` suffixed
 
 ## Style
 * We use the style specified by the `.clang-format` file using clang-format 10
