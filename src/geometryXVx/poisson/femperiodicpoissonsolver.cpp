@@ -18,7 +18,7 @@ FemPeriodicPoissonSolver::FemPeriodicPoissonSolver(
     , m_compute_rho(compute_rho)
     , m_nbasis(ddc::discrete_space<BSplinesX>().nbasis())
     , m_ncells(ddc::discrete_space<BSplinesX>().ncells())
-    , m_quad_coef(ddc::DiscreteDomain<QMeshX>(
+    , m_quad_coef_alloc(ddc::DiscreteDomain<QMeshX>(
               ddc::DiscreteElement<QMeshX>(0),
               ddc::DiscreteVector<QMeshX>(s_npts_gauss * m_ncells)))
 {
@@ -35,10 +35,12 @@ FemPeriodicPoissonSolver::FemPeriodicPoissonSolver(
 
     // Calculate the integration coefficients
     GaussLegendre<QDimX> const gl(s_npts_gauss);
-    std::vector<ddc::Coordinate<QDimX>> eval_pts_data(m_quad_coef.domain().size());
+    std::vector<ddc::Coordinate<QDimX>> eval_pts_data(m_quad_coef_alloc.domain().size());
     ddc::ChunkSpan<ddc::Coordinate<QDimX>, ddc::DiscreteDomain<QMeshX>> const
-            eval_pts(eval_pts_data.data(), m_quad_coef.domain());
-    gl.compute_points_and_weights_on_mesh(eval_pts, m_quad_coef.span_view(), knots.span_cview());
+            eval_pts(eval_pts_data.data(), m_quad_coef_alloc.domain());
+    auto quad_coef_host = ddc::create_mirror_and_copy(m_quad_coef_alloc.span_view());
+    gl.compute_points_and_weights_on_mesh(eval_pts, quad_coef_host.span_view(), knots.span_cview());
+    ddc::deepcopy(m_quad_coef_alloc, quad_coef_host);
 
     ddc::init_discrete_space<QMeshX>(eval_pts_data);
 
@@ -65,9 +67,11 @@ void FemPeriodicPoissonSolver::build_matrix()
             positive_definite_symmetric,
             n_lower_diags);
 
+    auto quad_coef_host = ddc::create_mirror_and_copy(m_quad_coef_alloc.span_cview());
+
     // Fill the banded part of the matrix
     std::array<double, s_degree + 1> derivs;
-    ddc::for_each(m_quad_coef.domain(), [&](ddc::DiscreteElement<QMeshX> const ix) {
+    ddc::for_each(m_quad_coef_alloc.domain(), [&](ddc::DiscreteElement<QMeshX> const ix) {
         ddc::Coordinate<RDimX> const coord = coord_from_quad_point(ddc::coordinate(ix));
         ddc::DiscreteElement<BSplinesX> const jmin
                 = ddc::discrete_space<BSplinesX>().eval_deriv(derivs, coord);
@@ -77,7 +81,7 @@ void FemPeriodicPoissonSolver::build_matrix()
                 int const k_idx = (k + jmin.uid()) % m_nbasis;
                 double a_jk = m_fem_matrix->get_element(j_idx, k_idx);
                 // Update element
-                a_jk = a_jk + derivs[j] * derivs[k] * m_quad_coef(ix);
+                a_jk += derivs[j] * derivs[k] * quad_coef_host(ix);
 
                 m_fem_matrix->set_element(j_idx, k_idx, a_jk);
             }
@@ -107,39 +111,50 @@ void FemPeriodicPoissonSolver::build_matrix()
 //               Solve the Poisson equation
 //---------------------------------------------------------------------------
 void FemPeriodicPoissonSolver::solve_matrix_system(
-        ddc::ChunkSpan<double, BSDomainX> const phi_spline_coef,
-        ddc::ChunkSpan<double, BSDomainX> const rho_spline_coef) const
+        DBSSpanX const phi_spline_coef,
+        DBSViewX const rho_spline_coef) const
 {
-    std::array<double, s_degree + 1> values;
+    ddc::fill(phi_spline_coef, 0.0);
 
     int const rhs_size = m_nbasis + 1;
-    DSpan1D const phi_rhs(phi_spline_coef.data_handle(), rhs_size);
-    for (int i(0); i < rhs_size; ++i) {
-        phi_rhs(i) = 0.0;
-    }
+    int const nbasis_proxy = m_nbasis;
+    SplineXEvaluator_1d spline_x_evaluator_proxy = m_spline_x_evaluator;
+    ddc::ChunkSpan quad_coef = m_quad_coef_alloc.span_view();
 
     // Fill phi_rhs(i) with \int rho(x) b_i(x) dx
     // Rk: phi_rhs no longer contains spline coefficients, but is the
     //     RHS of the matrix equation
-    ddc::for_each(m_quad_coef.domain(), [&](ddc::DiscreteElement<QMeshX> const ix) {
-        ddc::Coordinate<RDimX> const coord = coord_from_quad_point(ddc::coordinate(ix));
-        ddc::DiscreteElement<BSplinesX> const jmin
-                = ddc::discrete_space<BSplinesX>().eval_basis(values, coord);
-        double const rho_val = m_spline_x_evaluator(coord, rho_spline_coef.span_cview());
-        for (int j = 0; j < s_degree + 1; ++j) {
-            int const j_idx = (jmin.uid() + j) % m_nbasis;
-            phi_rhs(j_idx) = phi_rhs(j_idx) + rho_val * values[j] * m_quad_coef(ix);
-        }
-    });
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            m_quad_coef_alloc.domain(),
+            KOKKOS_LAMBDA(ddc::DiscreteElement<QMeshX> const ix) {
+                ddc::Coordinate<RDimX> const coord = coord_from_quad_point(ddc::coordinate(ix));
+                std::array<double, s_degree + 1> values;
+                ddc::DiscreteElement<BSplinesX> const jmin
+                        = ddc::discrete_space<BSplinesX>().eval_basis(values, coord);
+                double const rho_val
+                        = spline_x_evaluator_proxy(coord, rho_spline_coef.span_cview());
+                for (int j = 0; j < s_degree + 1; ++j) {
+                    int const j_idx = (jmin.uid() + j) % nbasis_proxy;
+                    Kokkos::atomic_fetch_add(
+                            &phi_spline_coef(ddc::DiscreteElement<BSplinesX>(j_idx)),
+                            rho_val * values[j] * quad_coef(ix));
+                }
+            });
+
+    auto phi_spline_coef_host = ddc::create_mirror_and_copy(phi_spline_coef);
+    DSpan1D const phi_rhs_host(phi_spline_coef_host.data_handle(), rhs_size);
 
     // Solve the matrix equation to find the spline coefficients of phi
-    m_fem_matrix->solve_inplace(phi_rhs);
+    m_fem_matrix->solve_inplace(phi_rhs_host);
 
     // Copy the first d coefficients into the last d coefficients
     // These coefficients refer to the same BSplines which cross the boundaries
     for (int i = 0; i < s_degree; i++) {
-        phi_spline_coef(ddc::DiscreteElement<BSplinesX>(m_nbasis + i)) = phi_rhs(i);
+        phi_spline_coef_host(ddc::DiscreteElement<BSplinesX>(m_nbasis + i)) = phi_rhs_host(i);
     }
+
+    ddc::deepcopy(phi_spline_coef, phi_spline_coef_host);
 }
 
 
@@ -165,8 +180,6 @@ void FemPeriodicPoissonSolver::operator()(
         DViewSpXVx allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("PoissonSolver");
-    auto electrostatic_potential_host = ddc::create_mirror_and_copy(electrostatic_potential);
-    auto electric_field_host = ddc::create_mirror_and_copy(electric_field);
     assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
     IDomainX const dom_x = electrostatic_potential.domain();
 
@@ -174,22 +187,24 @@ void FemPeriodicPoissonSolver::operator()(
     host_t<DFieldX> rho_host(dom_x);
     DFieldX rho(dom_x);
     m_compute_rho(rho, allfdistribu);
-    ddc::deepcopy(rho_host, rho);
 
     //
-    ddc::Chunk<double, BSDomainX> rho_spline_coef(m_spline_x_builder.spline_domain());
-    m_spline_x_builder(rho_spline_coef.span_view(), rho_host.span_cview());
-    ddc::Chunk<double, BSDomainX> phi_spline_coef(m_spline_x_builder.spline_domain());
-    solve_matrix_system(phi_spline_coef, rho_spline_coef);
+    ddc::Chunk rho_spline_coef(m_spline_x_builder.spline_domain(), ddc::DeviceAllocator<double>());
+    m_spline_x_builder(rho_spline_coef.span_view(), rho.span_cview());
+    ddc::Chunk phi_spline_coef(m_spline_x_builder.spline_domain(), ddc::DeviceAllocator<double>());
+    solve_matrix_system(phi_spline_coef, rho_spline_coef.span_cview());
 
     //
-    ddc::for_each(dom_x, [&](IndexX const ix) {
-        electrostatic_potential_host(ix)
-                = m_spline_x_evaluator(ddc::coordinate(ix), phi_spline_coef.span_cview());
-        electric_field_host(ix)
-                = -m_spline_x_evaluator.deriv(ddc::coordinate(ix), phi_spline_coef.span_cview());
-    });
-    ddc::deepcopy(electrostatic_potential, electrostatic_potential_host);
-    ddc::deepcopy(electric_field, electric_field_host);
+    SplineXEvaluator_1d spline_x_evaluator_proxy = m_spline_x_evaluator;
+    ddc::ChunkSpan phi_spline_coef_view = phi_spline_coef.span_cview();
+    ddc::for_each(
+            ddc::policies::parallel_device,
+            dom_x,
+            KOKKOS_LAMBDA(IndexX const ix) {
+                electrostatic_potential(ix)
+                        = spline_x_evaluator_proxy(ddc::coordinate(ix), phi_spline_coef_view);
+                electric_field(ix) = -spline_x_evaluator_proxy
+                                              .deriv(ddc::coordinate(ix), phi_spline_coef_view);
+            });
     Kokkos::Profiling::popRegion();
 }
