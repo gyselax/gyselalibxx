@@ -2,13 +2,13 @@
 
 #pragma once
 
-constexpr char const* const params_yaml = R"PDI_CFG(Mesh:
+constexpr char const* const params_yaml = R"PDI_CFG(SplineMesh:
   x_min: 0.0
   x_max: 50.
-  x_size: 256
+  x_ncells: 256
   vx_min: -8.0
   vx_max: +8.0
-  vx_size: 127
+  vx_ncells: 127
 
 SpeciesInfo:
 - charge: -1
