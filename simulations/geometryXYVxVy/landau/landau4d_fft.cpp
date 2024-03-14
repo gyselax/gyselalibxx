@@ -82,29 +82,29 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    CoordX const x_min(PCpp_double(conf_voicexx, ".Mesh.x_min"));
-    CoordX const x_max(PCpp_double(conf_voicexx, ".Mesh.x_max"));
-    IVectX const x_size(PCpp_int(conf_voicexx, ".Mesh.x_size"));
+    CoordX const x_min(PCpp_double(conf_voicexx, ".SplineMesh.x_min"));
+    CoordX const x_max(PCpp_double(conf_voicexx, ".SplineMesh.x_max"));
+    IVectX const x_ncells(PCpp_int(conf_voicexx, ".SplineMesh.x_ncells"));
 
-    CoordY const y_min(PCpp_double(conf_voicexx, ".Mesh.y_min"));
-    CoordY const y_max(PCpp_double(conf_voicexx, ".Mesh.y_max"));
-    IVectY const y_size(PCpp_int(conf_voicexx, ".Mesh.y_size"));
+    CoordY const y_min(PCpp_double(conf_voicexx, ".SplineMesh.y_min"));
+    CoordY const y_max(PCpp_double(conf_voicexx, ".SplineMesh.y_max"));
+    IVectY const y_ncells(PCpp_int(conf_voicexx, ".SplineMesh.y_ncells"));
 
-    CoordVx const vx_min(PCpp_double(conf_voicexx, ".Mesh.vx_min"));
-    CoordVx const vx_max(PCpp_double(conf_voicexx, ".Mesh.vx_max"));
-    IVectVx const vx_size(PCpp_int(conf_voicexx, ".Mesh.vx_size"));
+    CoordVx const vx_min(PCpp_double(conf_voicexx, ".SplineMesh.vx_min"));
+    CoordVx const vx_max(PCpp_double(conf_voicexx, ".SplineMesh.vx_max"));
+    IVectVx const vx_ncells(PCpp_int(conf_voicexx, ".SplineMesh.vx_ncells"));
 
-    CoordVy const vy_min(PCpp_double(conf_voicexx, ".Mesh.vy_min"));
-    CoordVy const vy_max(PCpp_double(conf_voicexx, ".Mesh.vy_max"));
-    IVectVy const vy_size(PCpp_int(conf_voicexx, ".Mesh.vy_size"));
+    CoordVy const vy_min(PCpp_double(conf_voicexx, ".SplineMesh.vy_min"));
+    CoordVy const vy_max(PCpp_double(conf_voicexx, ".SplineMesh.vy_max"));
+    IVectVy const vy_ncells(PCpp_int(conf_voicexx, ".SplineMesh.vy_ncells"));
 
     // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_ncells);
     ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
     ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
     SplineXBuilder const builder_x(interpolation_domain_x);
 
-    ddc::init_discrete_space<BSplinesY>(y_min, y_max, y_size);
+    ddc::init_discrete_space<BSplinesY>(y_min, y_max, y_ncells);
     ddc::init_discrete_space<IDimY>(SplineInterpPointsY::get_sampling());
     ddc::DiscreteDomain<IDimY> interpolation_domain_y(SplineInterpPointsY::get_domain());
     SplineYBuilder const builder_y(interpolation_domain_y);
@@ -113,12 +113,12 @@ int main(int argc, char** argv)
             interpolation_domain_xy(interpolation_domain_x, interpolation_domain_y);
     SplineXYBuilder const builder_xy(interpolation_domain_xy);
 
-    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
+    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
     ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
     ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
     SplineVxBuilder const builder_vx(interpolation_domain_vx);
 
-    ddc::init_discrete_space<BSplinesVy>(vy_min, vy_max, vy_size);
+    ddc::init_discrete_space<BSplinesVy>(vy_min, vy_max, vy_ncells);
     ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling());
     ddc::DiscreteDomain<IDimVy> interpolation_domain_vy(SplineInterpPointsVy::get_domain());
     SplineVyBuilder const builder_vy(interpolation_domain_vy);
@@ -278,10 +278,10 @@ int main(int argc, char** argv)
     }
 
     // Starting the code
-    ddc::expose_to_pdi("Nx", x_size.value());
-    ddc::expose_to_pdi("Ny", y_size.value());
-    ddc::expose_to_pdi("Nvx", vx_size.value());
-    ddc::expose_to_pdi("Nvy", vy_size.value());
+    ddc::expose_to_pdi("Nx_spline_cells", x_ncells.value());
+    ddc::expose_to_pdi("Ny_spline_cells", y_ncells.value());
+    ddc::expose_to_pdi("Nvx_spline_cells", vx_ncells.value());
+    ddc::expose_to_pdi("Nvy_spline_cells", vy_ncells.value());
     ddc::expose_to_pdi("MeshX", meshX_coord);
     ddc::expose_to_pdi("MeshY", meshY_coord);
     ddc::expose_to_pdi("MeshVx", meshVx_coord);

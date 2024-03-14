@@ -2,13 +2,13 @@
 
 #pragma once
 
-constexpr char const* const params_yaml = R"PARAMS_CFG(Mesh:
+constexpr char const* const params_yaml = R"PARAMS_CFG(SplineMesh:
   x_min: 0.0
   x_max: 50
-  x_size: 512
+  x_ncells: 512
   vx_min: -6.0
   vx_max: +6.0
-  vx_size: 256
+  vx_ncells: 256
 
 SpeciesInfo:
 - charge: -1

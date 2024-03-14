@@ -2,8 +2,8 @@
 
 constexpr char const* const PDI_CFG = R"PDI_CFG(
 metadata:
-  Nx : int
-  Nvx : int
+  Nx_spline_cells : int
+  Nvx_spline_cells : int
   iter : int
   iter_start : int
   time_saved : double
@@ -116,8 +116,8 @@ plugins:
       on_event: [initial_state]
       collision_policy: replace_and_warn
       write:
-        - Nx
-        - Nvx
+        - Nx_spline_cells
+        - Nvx_spline_cells
         - MeshX
         - MeshVx
         - Lx

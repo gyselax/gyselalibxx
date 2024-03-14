@@ -2,8 +2,8 @@
 
 constexpr char const* const PDI_CFG = R"PDI_CFG(
 metadata:
-  Nx : int
-  Nvx : int
+  Nx_spline_cells : int
+  Nvx_spline_cells : int
   iter : int
   iter_start : int
   time_saved : double
@@ -63,7 +63,7 @@ plugins:
     - file: 'VOICEXX_initstate.h5'
       on_event: [initial_state]
       collision_policy: replace_and_warn
-      write: [Nx, Nvx, MeshX, MeshVx, nbstep_diag, Nkinspecies, fdistribu_charges, fdistribu_masses, fdistribu_eq]
+      write: [Nx_spline_cells, Nvx_spline_cells, MeshX, MeshVx, nbstep_diag, Nkinspecies, fdistribu_charges, fdistribu_masses, fdistribu_eq]
     - file: 'VOICEXX_${iter_saved:05}.h5'
       on_event: [iteration, last_iteration]
       when: '${iter} % ${nbstep_diag} = 0'
