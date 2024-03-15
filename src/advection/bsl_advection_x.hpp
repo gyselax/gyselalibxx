@@ -96,7 +96,7 @@ public:
             });
         });
 
-        ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
+        ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
         Kokkos::Profiling::popRegion();
         return allfdistribu;
     }
