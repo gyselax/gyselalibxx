@@ -14,6 +14,6 @@ DSpanSpXVx RestartInitialization::operator()(DSpanSpXVx const allfdistribu) cons
 {
     auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
     ddc::PdiEvent("restart").with("time_saved", m_time_start).with("fdistribu", allfdistribu_host);
-    ddc::deepcopy(allfdistribu, allfdistribu_host);
+    ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
     return allfdistribu;
 }

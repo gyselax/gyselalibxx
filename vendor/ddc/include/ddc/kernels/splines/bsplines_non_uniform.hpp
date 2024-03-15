@@ -88,7 +88,8 @@ public:
 
     private:
         ddc::DiscreteDomain<mesh_type> m_domain;
-        const int m_nknots;
+
+        int m_nknots;
 
     public:
         using discrete_dimension_type = NonUniformBSplines;

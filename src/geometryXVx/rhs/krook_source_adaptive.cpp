@@ -44,7 +44,7 @@ KrookSourceAdaptive::KrookSourceAdaptive(
         mask_host = mask_tanh(gridx, m_extent, m_stiffness, MaskType::Inverted, false);
         break;
     }
-    ddc::deepcopy(m_mask.span_view(), mask_host);
+    ddc::parallel_deepcopy(m_mask.span_view(), mask_host);
 
     // target distribution function
     MaxwellianEquilibrium::compute_maxwellian(m_ftarget.span_view(), m_density, m_temperature, 0.);
@@ -93,8 +93,8 @@ void KrookSourceAdaptive::get_amplitudes(DSpanSpX amplitudes, DViewSpXVx const a
 
     auto const& amplitude = m_amplitude;
     auto const& density = m_density;
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             ddc::get_domain<IDimX>(allfdistribu),
             KOKKOS_LAMBDA(IndexX const ix) {
                 amplitudes(IndexSpX(iion, ix)) = amplitude;
@@ -124,8 +124,8 @@ void KrookSourceAdaptive::get_derivative(
     auto ftarget(m_ftarget.span_view());
     auto mask(m_mask.span_view());
 
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 IndexSp isp(ddc::select<IDimSp>(ispxvx));

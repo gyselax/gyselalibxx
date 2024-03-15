@@ -78,8 +78,8 @@ public:
 
         for (DElemSp const isp : sp_dom) {
             double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
-            ddc::for_each(
-                    ddc::policies::parallel_device,
+            ddc::parallel_for_each(
+                    Kokkos::DefaultExecutionSpace(),
                     c_dom,
                     KOKKOS_LAMBDA(DElemC const ic) {
                         for (DElemV const iv : v_dom) {

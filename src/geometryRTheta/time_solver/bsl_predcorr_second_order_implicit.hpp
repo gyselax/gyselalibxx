@@ -174,7 +174,7 @@ public:
                 ddcHelper::get<RDimX>(advection_field)(idx)
                         = -ddcHelper::get<RDimY>(electric_field)(idx);
             });
-            ddc::deepcopy(
+            ddc::parallel_deepcopy(
                     ddcHelper::get<RDimY>(advection_field),
                     ddcHelper::get<RDimX>(electric_field));
 
@@ -229,7 +229,7 @@ public:
             // X^P = X^n - dt/2 * ( E^n(X^n) + E^n(X^P) )/2:
             // --- Copy phi^n because it will be modified:
             DFieldRP allfdistribu_predicted(grid);
-            ddc::deepcopy(allfdistribu_predicted, allfdistribu);
+            ddc::parallel_deepcopy(allfdistribu_predicted, allfdistribu);
             m_advection_solver(
                     allfdistribu_predicted.span_view(),
                     advection_field_k_tot.span_cview(),
@@ -250,7 +250,7 @@ public:
                 ddcHelper::get<RDimX>(advection_field)(idx)
                         = -ddcHelper::get<RDimY>(electric_field)(idx);
             });
-            ddc::deepcopy(
+            ddc::parallel_deepcopy(
                     ddcHelper::get<RDimY>(advection_field),
                     ddcHelper::get<RDimX>(electric_field));
 
@@ -369,7 +369,7 @@ private:
             });
 
             // X^{k-1} = X^k:
-            ddc::deepcopy(feet_coords_tmp, feet_coords);
+            ddc::parallel_deepcopy(feet_coords_tmp, feet_coords);
 
             // X^k = X^n - dt* X^k:
             ddc::for_each(grid, [&](IndexRP const irp) {

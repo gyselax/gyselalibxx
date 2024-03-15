@@ -111,8 +111,8 @@ public:
                 "MemorySpace has to be accessible for ExecutionSpace.");
         static_assert(ddc::is_chunk_v<ValChunk>);
         update(exec_space, y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
-            ddc::for_each(
-                    ddc::policies::policy(exec_space),
+            ddc::parallel_for_each(
+                    exec_space,
                     y.domain(),
                     KOKKOS_LAMBDA(Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
         });
@@ -177,16 +177,16 @@ public:
         // --------- Calculate k3 ------------
         // Calculation of step
         if constexpr (is_field_v<DerivChunk>) {
-            ddc::for_each(
-                    ddc::policies::policy(exec_space),
+            ddc::parallel_for_each(
+                    exec_space,
                     m_k_total.domain(),
                     KOKKOS_CLASS_LAMBDA(Index const i) {
                         // k_total = 2 * k2 - k1
                         fill_k_total(i, m_k_total, 2 * m_k2(i) - m_k1(i));
                     });
         } else {
-            ddc::for_each(
-                    ddc::policies::policy(exec_space),
+            ddc::parallel_for_each(
+                    exec_space,
                     m_k_total.domain(),
                     KOKKOS_LAMBDA(Index const i) {
                         // k_total = 2 * k2 - k1
@@ -206,16 +206,16 @@ public:
         // --------- Update y ------------
         // Calculation of step
         if constexpr (is_field_v<DerivChunk>) {
-            ddc::for_each(
-                    ddc::policies::policy(exec_space),
+            ddc::parallel_for_each(
+                    exec_space,
                     m_k_total.domain(),
                     KOKKOS_CLASS_LAMBDA(Index const i) {
                         // k_total = k1 + 4 * k2 + k3
                         fill_k_total(i, m_k_total, m_k1(i) + 4 * m_k2(i) + m_k3(i));
                     });
         } else {
-            ddc::for_each(
-                    ddc::policies::policy(exec_space),
+            ddc::parallel_for_each(
+                    exec_space,
                     m_k_total.domain(),
                     KOKKOS_LAMBDA(Index const i) {
                         // k_total = k1 + 4 * k2 + k3
@@ -233,7 +233,7 @@ private:
         if constexpr (is_field_v<ValSpan>) {
             ddcHelper::deepcopy(copy_to, copy_from);
         } else {
-            ddc::deepcopy(copy_to, copy_from);
+            ddc::parallel_deepcopy(copy_to, copy_from);
         }
     }
 

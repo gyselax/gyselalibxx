@@ -103,7 +103,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
                 temperature_init_host(ispx),
                 mean_velocity_init_host(ispx));
         auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
-        ddc::deepcopy(allfdistribu[ispx], finit_host);
+        ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
     });
     auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
 
@@ -120,7 +120,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     compute_nustar_profile(nustar_profile, nustar0);
 
     host_t<DFieldSpX> nustar_profile_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    ddc::deepcopy(nustar_profile_host, nustar_profile);
+    ddc::parallel_deepcopy(nustar_profile_host, nustar_profile);
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
         if (charge(ddc::select<IDimSp>(ispx)) < 0.) {
             double const pred(1 / x_max * nustar0);
@@ -136,15 +136,15 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     auto collfreq = collfreq_f.span_view();
 
     DFieldSpX density_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    ddc::deepcopy(density_init, density_init_host);
+    ddc::parallel_deepcopy(density_init, density_init_host);
 
     DFieldSpX temperature_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    ddc::deepcopy(temperature_init, temperature_init_host);
+    ddc::parallel_deepcopy(temperature_init, temperature_init_host);
 
     compute_collfreq(collfreq, nustar_profile, density_init, temperature_init);
 
     host_t<DFieldSpX> collfreq_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    ddc::deepcopy(collfreq_host, collfreq);
+    ddc::parallel_deepcopy(collfreq_host, collfreq);
 
     ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
         if (charge(ddc::select<IDimSp>(ispx)) < 0.) {
@@ -189,8 +189,8 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
 
     host_t<DFieldSpX> Vcoll_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
     host_t<DFieldSpX> Tcoll_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    ddc::deepcopy(Vcoll_host, Vcoll);
-    ddc::deepcopy(Tcoll_host, Tcoll);
+    ddc::parallel_deepcopy(Vcoll_host, Vcoll);
+    ddc::parallel_deepcopy(Tcoll_host, Tcoll);
 
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
         EXPECT_LE(std::fabs(Vcoll_host(ispx) - mean_velocity_init_host(ispx)), 1e-12);
@@ -198,7 +198,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     });
 
     collisions(allfdistribu, deltat);
-    ddc::deepcopy(allfdistribu_host, allfdistribu);
+    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
     // collision operator should not change densiy, mean_velocity and temperature
     host_t<DFieldSpX> density_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
@@ -254,7 +254,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
                 temperature_loc,
                 mean_velocity_loc);
         auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
-        ddc::deepcopy(allfdistribu_host[ispx], finit_host);
+        ddc::parallel_deepcopy(allfdistribu_host[ispx], finit_host);
     });
 
     // initial perturbation
@@ -271,7 +271,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
 
         allfdistribu_host(ispxvx) = allfdistribu_host(ispxvx) + perturb;
     });
-    ddc::deepcopy(allfdistribu, allfdistribu_host);
+    ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
 
     // before the collisions the perturbed distribution should have T != Tcoll and V != Vcoll
     // this test is performed on electrons since the largest error is made for them
@@ -297,7 +297,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     for (int iter = 0; iter < nbsteps; ++iter) {
         collisions(allfdistribu, deltat);
     };
-    ddc::deepcopy(allfdistribu_host, allfdistribu);
+    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
     // Vcoll and Tcoll calculation
     compute_collfreq(collfreq, nustar_profile, density_init, temperature_init);
@@ -324,8 +324,8 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
             mean_velocity_res.span_cview(),
             FluidMoments::s_temperature);
 
-    ddc::deepcopy(Vcoll_host, Vcoll);
-    ddc::deepcopy(Tcoll_host, Tcoll);
+    ddc::parallel_deepcopy(Vcoll_host, Vcoll);
+    ddc::parallel_deepcopy(Tcoll_host, Tcoll);
 
     ddc::for_each(ddc::get_domain<IDimX>(allfdistribu_host), [&](IndexX const ix) {
         EXPECT_LE(std::fabs(mean_velocity_res(ielec(), ix) - Vcoll_host(ielec(), ix)), 1.e-4);

@@ -113,8 +113,8 @@ public:
                         accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
         update(exec_space, y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
-            ddc::for_each(
-                    ddc::policies::policy(exec_space),
+            ddc::parallel_for_each(
+                    exec_space,
                     y.domain(),
                     KOKKOS_LAMBDA(Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
         });
@@ -152,7 +152,7 @@ public:
         if constexpr (is_field_v<ValChunk>) {
             ddcHelper::deepcopy(m_y_prime, y);
         } else {
-            ddc::deepcopy(m_y_prime, y);
+            ddc::parallel_deepcopy(m_y_prime, y);
         }
 
         // --------- Calculate k1 ------------

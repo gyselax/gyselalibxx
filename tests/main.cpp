@@ -16,7 +16,8 @@ int main(int argc, char** argv)
         // a Cuda/Hip/etc. enabled DDC with no device available
         return RUN_ALL_TESTS();
     } else {
-        ::ddc::ScopeGuard scope(argc, argv);
+        ::Kokkos::ScopeGuard kokkos_scope(argc, argv);
+        ::ddc::ScopeGuard ddc_scope(argc, argv);
         return RUN_ALL_TESTS();
     }
 }

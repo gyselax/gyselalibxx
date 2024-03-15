@@ -177,10 +177,10 @@ public:
     {
         auto const rp_dom = advection_field.domain();
 
-        ddc::deepcopy(
+        ddc::parallel_deepcopy(
                 ddcHelper::get<RDimX_adv>(advection_field_physical),
                 ddcHelper::get<RDimX>(advection_field));
-        ddc::deepcopy(
+        ddc::parallel_deepcopy(
                 ddcHelper::get<RDimY_adv>(advection_field_physical),
                 ddcHelper::get<RDimY>(advection_field));
         ;

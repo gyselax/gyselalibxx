@@ -5,13 +5,14 @@ project(DDC VERSION 0.0.0 LANGUAGES CXX)
 
 # List of options
 
-option(BUILD_FFT_KERNEL      "Build DDC kernel for FFT" ON)
-option(BUILD_SPLINES_KERNEL  "Build DDC kernel for splines" ON)
-option(BUILD_BENCHMARKS      "Build DDC benchmarks." OFF)
-option(BUILD_DOCUMENTATION   "Build DDC documentation/website" OFF)
-option(BUILD_EXAMPLES        "Build DDC examples" ON)
-option(DDC_BUILD_PDI_WRAPPER "Build DDC PDI wrapper" ON)
-option(DDC_ENABLE_DOUBLE     "Build DDC with double precision support, float is used otherwise" ON)
+option(DDC_BUILD_BENCHMARKS       "Build DDC benchmarks." OFF)
+option(DDC_BUILD_DOCUMENTATION    "Build DDC documentation/website" OFF)
+option(DDC_BUILD_DOUBLE_PRECISION "Build DDC with double precision support, float is used otherwise" ON)
+option(DDC_BUILD_EXAMPLES         "Build DDC examples" ON)
+option(DDC_BUILD_KERNELS_FFT      "Build DDC kernels for FFT" ON)
+option(DDC_BUILD_KERNELS_SPLINES  "Build DDC kernels for splines" ON)
+option(DDC_BUILD_PDI_WRAPPER      "Build DDC PDI wrapper" ON)
+option(DDC_BUILD_TESTS            "Build DDC tests if BUILD_TESTING is enabled" ON)
 
 # Dependencies
 
@@ -30,7 +31,7 @@ set(DDC_mdspan_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `mdspan
 set_property(CACHE DDC_mdspan_DEPENDENCY_POLICY PROPERTY STRINGS "${DDC_DEPENDENCY_POLICIES}")
 if("${DDC_mdspan_DEPENDENCY_POLICY}" STREQUAL "AUTO")
 	if(NOT TARGET std::mdspan)
-		find_package(mdspan CONFIG QUIET)
+		find_package(mdspan 0.6.0 EXACT CONFIG QUIET)
 		if(NOT mdspan_FOUND)
 			add_subdirectory(vendor/mdspan)
 		endif()
@@ -38,7 +39,7 @@ if("${DDC_mdspan_DEPENDENCY_POLICY}" STREQUAL "AUTO")
 elseif("${DDC_mdspan_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
 	add_subdirectory(vendor/mdspan)
 elseif("${DDC_mdspan_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
-	find_package(mdspan CONFIG REQUIRED)
+	find_package(mdspan 0.6.0 EXACT CONFIG REQUIRED)
 endif()
 
 ## kokkos
@@ -92,14 +93,14 @@ endif()
 
 # FFTW
 list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ) # Maybe not specific to FFTW
-if("${BUILD_FFT_KERNEL}" AND NOT FFTW_FOUND)
+if("${DDC_BUILD_KERNELS_FFT}" AND NOT FFTW_FOUND)
 	find_package( FFTW MODULE REQUIRED )
 endif()
 
 ## CUDA + CUDAToolkit
-if("${BUILD_FFT_KERNEL}" AND "${Kokkos_ENABLE_CUDA}")
+if("${DDC_BUILD_KERNELS_FFT}" AND "${Kokkos_ENABLE_CUDA}")
 	find_package( CUDAToolkit MODULE REQUIRED )
-	if( NOT(CUDAToolkit_FOUND) ) 
+	if( NOT(CUDAToolkit_FOUND) )
 	  message(FATAL_ERROR "CUDAToolkit not found." )
 	endif()
 endif()
@@ -116,7 +117,7 @@ endif()
 
 ## GoogleTest
 
-if("${BUILD_TESTING}")
+if("${BUILD_TESTING}" AND "${DDC_BUILD_TESTS}")
 	set(DDC_GTest_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `GTest` package. Options: ${DDC_DEPENDENCY_POLICIES}")
 	set_property(CACHE DDC_GTest_DEPENDENCY_POLICY PROPERTY STRINGS ${DDC_DEPENDENCY_POLICIES})
 	set(GOOGLETEST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vendor/googletest" CACHE PATH "Path to the googletest library source")
@@ -150,7 +151,7 @@ endif()
 
 ## Google Benchmark
 
-if("${BUILD_BENCHMARKS}")
+if("${DDC_BUILD_BENCHMARKS}")
 	set(DDC_benchmark_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `benchmark` package. Options: ${DDC_DEPENDENCY_POLICIES}")
 	set_property(CACHE DDC_benchmark_DEPENDENCY_POLICY PROPERTY STRINGS ${DDC_DEPENDENCY_POLICIES})
 	option(BENCHMARK_ENABLE_TESTING "Enable testing of the benchmark library." OFF)
@@ -173,7 +174,7 @@ endif()
 
 ## Doxygen
 
-if("${BUILD_DOCUMENTATION}")
+if("${DDC_BUILD_DOCUMENTATION}")
 	find_package(Doxygen 1.8.13 REQUIRED OPTIONAL_COMPONENTS dot)
 endif()
 
@@ -201,8 +202,8 @@ target_compile_definitions(DDC
 	INTERFACE
 		MDSPAN_USE_PAREN_OPERATOR=1
 )
-if("${DDC_ENABLE_DOUBLE}")
-	target_compile_definitions(DDC INTERFACE DDC_ENABLE_DOUBLE)
+if("${DDC_BUILD_DOUBLE_PRECISION}")
+	target_compile_definitions(DDC INTERFACE DDC_BUILD_DOUBLE_PRECISION)
 endif()
 add_library(DDC::DDC ALIAS DDC)
 install(
@@ -212,32 +213,32 @@ install(
 
 # Link library to DDC
 
-if( FFTW_FOUND ) 
+if( FFTW_FOUND )
 	target_link_libraries( DDC INTERFACE FFTW::Float )
 	target_link_libraries( DDC INTERFACE FFTW::Double )
 	target_compile_definitions(DDC INTERFACE fftw_AVAIL)
 endif()
 
-if( FFTW_FOUND AND "${Kokkos_ENABLE_OPENMP}") 
+if( FFTW_FOUND AND "${Kokkos_ENABLE_OPENMP}")
 	target_link_libraries( DDC INTERFACE FFTW::FloatOpenMP )
 	target_link_libraries( DDC INTERFACE FFTW::DoubleOpenMP )
 	target_compile_definitions(DDC INTERFACE fftw_omp_AVAIL)
 endif()
 
-if( CUDAToolkit_FOUND ) 
-	target_link_libraries( DDC INTERFACE CUDA::cufft )	
+if( CUDAToolkit_FOUND )
+	target_link_libraries( DDC INTERFACE CUDA::cufft )
 	target_compile_definitions(DDC INTERFACE cufft_AVAIL)
 endif()
 
 if("${Kokkos_ENABLE_HIP}")
 	find_package( hipfft REQUIRED ) # Not compatible with nvidia
-	target_link_libraries( DDC INTERFACE hip::hipfft )	
+	target_link_libraries( DDC INTERFACE hip::hipfft )
 	target_compile_definitions(DDC INTERFACE hipfft_AVAIL)
 endif()
 
-if("${BUILD_SPLINES_KERNEL}")
+if("${DDC_BUILD_KERNELS_SPLINES}")
   # Ginkgo
-  find_package(Ginkgo 1.7.0 REQUIRED)
+  find_package(Ginkgo 1.7.0 EXACT REQUIRED)
   target_link_libraries(DDC INTERFACE Ginkgo::ginkgo)
   target_compile_definitions(DDC INTERFACE ginkgo_AVAIL)
 endif()
@@ -269,27 +270,27 @@ endif()
 
 ## if examples are enabled, build them
 
-if("${BUILD_EXAMPLES}")
+if("${DDC_BUILD_EXAMPLES}")
 	add_subdirectory(examples/)
 endif()
 
 
 ## if tests are enabled, build them
 
-if("${BUILD_TESTING}")
+if("${BUILD_TESTING}" AND "${DDC_BUILD_TESTS}")
 	add_subdirectory(tests/)
 endif()
 
 ## if benchmarks are enabled, build them
 
-if("${BUILD_BENCHMARKS}")
+if("${DDC_BUILD_BENCHMARKS}")
 	add_subdirectory(benchmarks/)
 endif()
 
 
 ## if documentation is enabled, build it
 
-if("${BUILD_DOCUMENTATION}")
+if("${DDC_BUILD_DOCUMENTATION}")
 	add_subdirectory(docs/)
 endif()
 
