@@ -177,18 +177,18 @@ $(document).ready(function(){initNavTree('bsl__advection__x_8hpp_source.html',''
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    });</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <span class="comment">// copy the slice in contiguous memory</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    ddc::deepcopy(contiguous_slice, allfdistribu_host[ic][isp][iv]);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    ddc::parallel_deepcopy(contiguous_slice, allfdistribu_host[ic][isp][iv]);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    <span class="comment">// interpolate the function at the feet using the provided interpolator</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    interpolator_x(contiguous_slice, feet_coords.span_cview());</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    <span class="comment">// copy back</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    ddc::deepcopy(allfdistribu_host[ic][isp][iv], contiguous_slice);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    ddc::parallel_deepcopy(allfdistribu_host[ic][isp][iv], contiguous_slice);</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                });</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            });</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        });</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        ddc::deepcopy(allfdistribu_host, allfdistribu);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        Kokkos::Profiling::popRegion();</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>

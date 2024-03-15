@@ -1,6 +1,6 @@
 var classBumpontailEquilibrium =
 [
-    [ "BumpontailEquilibrium", "classBumpontailEquilibrium.html#a3d08f6633ffa3867429c946e9ec19db5", null ],
+    [ "BumpontailEquilibrium", "classBumpontailEquilibrium.html#ae9e416e1ecca5bbacacb03e68e6c8dfe", null ],
     [ "~BumpontailEquilibrium", "classBumpontailEquilibrium.html#a3c79c23553031c7a766db33feb02050d", null ],
     [ "compute_twomaxwellian", "classBumpontailEquilibrium.html#a8b3d639a3f0cc35ac93ec19818bbd86e", null ],
     [ "operator()", "classBumpontailEquilibrium.html#a4cd4ddf29a44f068db013ed7dc2a0215", null ],

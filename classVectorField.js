@@ -8,7 +8,6 @@ var classVectorField =
     [ "memory_space", "classVectorField.html#a7df5bf4cd762372ba4ae06c99b6ed478", null ],
     [ "VectorField", "classVectorField.html#affcf9abd0e02dde4aa553233de0b57c8", null ],
     [ "VectorField", "classVectorField.html#a9355ed87913f63a941e03f6b61a4c9e0", null ],
-    [ "VectorField", "classVectorField.html#a8e6b67ec99341f76401f77a27575cbfc", null ],
     [ "VectorField", "classVectorField.html#a4838971fca188dc404dc50d8af9ef3d9", null ],
     [ "VectorField", "classVectorField.html#ae23926389df672431636ef26e20f7780", null ],
     [ "~VectorField", "classVectorField.html#a0a1908a2429ba38ef8d891567cbc22c9", null ],

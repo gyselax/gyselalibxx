@@ -157,8 +157,8 @@ $(document).ready(function(){initNavTree('rk4_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                        accessible,</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <a class="code" href="classRK4.html#a46286b1d28894b90593a2aee6dca725d">update</a>(exec_space, y, dt, dy, [&amp;](ValSpan y, DerivView dy, <span class="keywordtype">double</span> dt) {</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            ddc::for_each(</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                    ddc::policies::policy(exec_space),</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            ddc::parallel_for_each(</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                    exec_space,</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                    y.domain(),</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                    KOKKOS_LAMBDA(Index <span class="keyword">const</span> idx) { y(idx) = y(idx) + dy(idx) * dt; });</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        });</div>
@@ -230,16 +230,16 @@ $(document).ready(function(){initNavTree('rk4_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="comment">// --------- Update y ------------</span></div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="comment">// Calculation of step</span></div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">if</span> constexpr (is_field_v&lt;DerivChunk&gt;) {</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            ddc::for_each(</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                    ddc::policies::policy(exec_space),</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            ddc::parallel_for_each(</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                    exec_space,</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                    m_k_total.domain(),</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                    KOKKOS_CLASS_LAMBDA(Index <span class="keyword">const</span> i) {</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;                        <span class="comment">// k_total = k1 + 4 * k2 + k3</span></div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                        fill_k_total(i, m_k_total, m_k1(i) + 2 * m_k2(i) + 2 * m_k3(i) + m_k4(i));</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;                    });</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            ddc::for_each(</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                    ddc::policies::policy(exec_space),</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            ddc::parallel_for_each(</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                    exec_space,</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                    m_k_total.domain(),</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                    KOKKOS_LAMBDA(Index <span class="keyword">const</span> i) {</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                        <span class="comment">// k_total = k1 + 4 * k2 + k3</span></div>
@@ -257,7 +257,7 @@ $(document).ready(function(){initNavTree('rk4_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="keywordflow">if</span> constexpr (is_field_v&lt;ValSpan&gt;) {</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            ddcHelper::deepcopy(copy_to, copy_from);</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            ddc::deepcopy(copy_to, copy_from);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            ddc::parallel_deepcopy(copy_to, copy_from);</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        }</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    }</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>

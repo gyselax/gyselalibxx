@@ -165,8 +165,8 @@ $(document).ready(function(){initNavTree('crank__nicolson_8hpp_source.html','');
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                        accessible,</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <a class="code" href="classCrankNicolson.html#a32ec24437204217997fa7f7da514bcb2">update</a>(exec_space, y, dt, dy, [&amp;](ValSpan y, DerivView dy, <span class="keywordtype">double</span> dt) {</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            ddc::for_each(</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                    ddc::policies::policy(exec_space),</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            ddc::parallel_for_each(</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                    exec_space,</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                    y.domain(),</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                    KOKKOS_LAMBDA(Index <span class="keyword">const</span> idx) { y(idx) = y(idx) + dy(idx) * dt; });</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        });</div>
@@ -216,16 +216,16 @@ $(document).ready(function(){initNavTree('crank__nicolson_8hpp_source.html','');
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            <span class="comment">// Calculation of step</span></div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keywordflow">if</span> constexpr (is_field_v&lt;DerivChunk&gt;) {</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                ddc::for_each(</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                        ddc::policies::policy(exec_space),</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                ddc::parallel_for_each(</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                        exec_space,</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                        m_k_total.domain(),</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                        KOKKOS_CLASS_LAMBDA(Index <span class="keyword">const</span> i) {</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                            <span class="comment">// k_total = k1 + k_new</span></div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                            fill_k_total(i, m_k_total, m_k1(i) + m_k_new(i));</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                        });</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                ddc::for_each(</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                        ddc::policies::policy(exec_space),</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                ddc::parallel_for_each(</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                        exec_space,</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                        m_k_total.domain(),</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                        KOKKOS_CLASS_LAMBDA(Index <span class="keyword">const</span> i) {</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                            <span class="comment">// k_total = k1 + k_new</span></div>
@@ -256,15 +256,15 @@ $(document).ready(function(){initNavTree('crank__nicolson_8hpp_source.html','');
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> dom = y_old.domain();</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordtype">double</span> norm_old = ddc::transform_reduce(</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                ddc::policies::policy(exec_space),</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordtype">double</span> norm_old = ddc::parallel_transform_reduce(</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                exec_space,</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                dom,</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                0.,</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                ddc::reducer::max&lt;double&gt;(),</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                KOKKOS_LAMBDA(Index <span class="keyword">const</span> idx) { <span class="keywordflow">return</span> <a class="code" href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(y_old(idx)); });</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keywordtype">double</span> max_diff = ddc::transform_reduce(</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                ddc::policies::policy(exec_space),</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keywordtype">double</span> max_diff = ddc::parallel_transform_reduce(</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                exec_space,</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                dom,</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                0.,</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                ddc::reducer::max&lt;double&gt;(),</div>
@@ -279,7 +279,7 @@ $(document).ready(function(){initNavTree('crank__nicolson_8hpp_source.html','');
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keywordflow">if</span> constexpr (is_field_v&lt;ValSpan&gt;) {</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            ddcHelper::deepcopy(copy_to, copy_from);</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            ddc::deepcopy(copy_to, copy_from);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            ddc::parallel_deepcopy(copy_to, copy_from);</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        }</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    }</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>

@@ -155,8 +155,8 @@ $(document).ready(function(){initNavTree('species__info_8hpp_source.html',''); i
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        {</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            m_charge_view = m_charge.span_cview();</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            m_mass_view = m_mass.span_cview();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            ddc::deepcopy(m_charge, impl.m_charge);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            ddc::deepcopy(m_mass, impl.m_mass);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            ddc::parallel_deepcopy(m_charge, impl.m_charge);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            ddc::parallel_deepcopy(m_mass, impl.m_mass);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classSpeciesInformation_1_1Impl.html#a6db1244e4fe5d4e27526bb44ee4d7389">   73</a></span>&#160;        <a class="code" href="classSpeciesInformation_1_1Impl.html#a6db1244e4fe5d4e27526bb44ee4d7389">Impl</a>(ddc::Chunk&lt;<span class="keywordtype">int</span>, <a class="code" href="classSpeciesInformation.html#a31f68f10d7b75908ecb398bdf109bec9">discrete_domain_type</a>, ddc::KokkosAllocator&lt;int, MemorySpace&gt;&gt; <a class="code" href="classSpeciesInformation_1_1Impl.html#af259b7e3f75193999f7580368dc92093">charge</a>,</div>

@@ -330,7 +330,7 @@ $(document).ready(function(){initNavTree('spline__builder__2d_8hpp_source.html',
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        <span class="comment">// Get interpolated values</span></div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        ddc::Chunk&lt;double, interpolation_domain_type1&gt; vals1(</div>
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                spline_builder1.interpolation_domain());</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        ddc::deepcopy(vals1, vals[i]);</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        ddc::parallel_deepcopy(vals1, vals[i]);</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <span class="comment">// Get interpolated derivatives</span></div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        const std::optional&lt;CDSpan1D&gt; deriv_l(</div>

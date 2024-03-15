@@ -217,7 +217,7 @@ $(document).ready(function(){initNavTree('bsl__predcorr__second__order__implicit
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                ddcHelper::get&lt;RDimX&gt;(advection_field)(idx)</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                        = -ddcHelper::get&lt;RDimY&gt;(electric_field)(idx);</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            });</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            ddc::deepcopy(</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            ddc::parallel_deepcopy(</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                    ddcHelper::get&lt;RDimY&gt;(advection_field),</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                    ddcHelper::get&lt;RDimX&gt;(electric_field));</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
@@ -272,7 +272,7 @@ $(document).ready(function(){initNavTree('bsl__predcorr__second__order__implicit
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="comment">// X^P = X^n - dt/2 * ( E^n(X^n) + E^n(X^P) )/2:</span></div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            <span class="comment">// --- Copy phi^n because it will be modified:</span></div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            DFieldRP allfdistribu_predicted(grid);</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            ddc::deepcopy(allfdistribu_predicted, allfdistribu);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            ddc::parallel_deepcopy(allfdistribu_predicted, allfdistribu);</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            m_advection_solver(</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                    allfdistribu_predicted.span_view(),</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                    advection_field_k_tot.<a class="code" href="classVectorField.html#ae5421322e080a9f2ae63ff7796da6ed3">span_cview</a>(),</div>
@@ -293,7 +293,7 @@ $(document).ready(function(){initNavTree('bsl__predcorr__second__order__implicit
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                ddcHelper::get&lt;RDimX&gt;(advection_field)(idx)</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                        = -ddcHelper::get&lt;RDimY&gt;(electric_field)(idx);</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            });</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            ddc::deepcopy(</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            ddc::parallel_deepcopy(</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                    ddcHelper::get&lt;RDimY&gt;(advection_field),</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                    ddcHelper::get&lt;RDimX&gt;(electric_field));</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
@@ -412,7 +412,7 @@ $(document).ready(function(){initNavTree('bsl__predcorr__second__order__implicit
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;            });</div>
 <div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            <span class="comment">// X^{k-1} = X^k:</span></div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            ddc::deepcopy(feet_coords_tmp, feet_coords);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            ddc::parallel_deepcopy(feet_coords_tmp, feet_coords);</div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            <span class="comment">// X^k = X^n - dt* X^k:</span></div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            ddc::for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
@@ -451,7 +451,7 @@ $(document).ready(function(){initNavTree('bsl__predcorr__second__order__implicit
 <div class="ttc" id="aclassSplineInterpolatorRP_html"><div class="ttname"><a href="classSplineInterpolatorRP.html">SplineInterpolatorRP</a></div><div class="ttdoc">A class for interpolating a function using splines in polar coordinates.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:16</div></div>
 <div class="ttc" id="aclassVectorFieldSpan_html"><div class="ttname"><a href="classVectorFieldSpan.html">VectorFieldSpan</a></div><div class="ttdoc">Pre-declaration of VectorFieldSpan.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:45</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">Pre-declaration of VectorField.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:34</div></div>
-<div class="ttc" id="aclassVectorField_html_ae5421322e080a9f2ae63ff7796da6ed3"><div class="ttname"><a href="classVectorField.html#ae5421322e080a9f2ae63ff7796da6ed3">VectorField::span_cview</a></div><div class="ttdeci">view_type span_cview() const</div><div class="ttdoc">Get a constant reference to this vector field.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:172</div></div>
+<div class="ttc" id="aclassVectorField_html_ae5421322e080a9f2ae63ff7796da6ed3"><div class="ttname"><a href="classVectorField.html#ae5421322e080a9f2ae63ff7796da6ed3">VectorField::span_cview</a></div><div class="ttdeci">view_type span_cview() const</div><div class="ttdoc">Get a constant reference to this vector field.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:147</div></div>
 <div class="ttc" id="aclassVlasovPoissonSolver_html"><div class="ttname"><a href="classVlasovPoissonSolver.html">VlasovPoissonSolver</a></div><div class="ttdoc">Solve the Poisson equation and return the electric field for the coupled Vlasov equation.</div><div class="ttdef"><b>Definition:</b> vlasovpoissonsolver.hpp:89</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

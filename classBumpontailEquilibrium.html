@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b3d639a3f0cc35ac93ec19818bbd86e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#a8b3d639a3f0cc35ac93ec19818bbd86e">compute_twomaxwellian</a> (DSpanVx fMaxwellian, double <a class="el" href="classBumpontailEquilibrium.html#a364f262c4b5d89461566bf23c6ec6e70">epsilon_bot</a>, double <a class="el" href="classBumpontailEquilibrium.html#aa96295ff0b0e3f60f29c53eb2c5c9fe8">temperature_bot</a>, double <a class="el" href="classBumpontailEquilibrium.html#a92c189484ec209d152b6f5beb3c9387e">mean_velocity_bot</a>) const</td></tr>
 <tr class="memdesc:a8b3d639a3f0cc35ac93ec19818bbd86e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a distribution function defined as a sum of two Maxwellians.  <a href="classBumpontailEquilibrium.html#a8b3d639a3f0cc35ac93ec19818bbd86e">More...</a><br /></td></tr>
 <tr class="separator:a8b3d639a3f0cc35ac93ec19818bbd86e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d08f6633ffa3867429c946e9ec19db5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#a3d08f6633ffa3867429c946e9ec19db5">BumpontailEquilibrium</a> (host_t&lt; DViewSp &gt; <a class="el" href="classBumpontailEquilibrium.html#a364f262c4b5d89461566bf23c6ec6e70">epsilon_bot</a>, host_t&lt; DViewSp &gt; <a class="el" href="classBumpontailEquilibrium.html#aa96295ff0b0e3f60f29c53eb2c5c9fe8">temperature_bot</a>, host_t&lt; DViewSp &gt; <a class="el" href="classBumpontailEquilibrium.html#a92c189484ec209d152b6f5beb3c9387e">mean_velocity_bot</a>)</td></tr>
-<tr class="memdesc:a3d08f6633ffa3867429c946e9ec19db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classBumpontailEquilibrium.html" title="A class that initializes the distribution function as a sum of two Maxwellian functions.">BumpontailEquilibrium</a> class.  <a href="classBumpontailEquilibrium.html#a3d08f6633ffa3867429c946e9ec19db5">More...</a><br /></td></tr>
-<tr class="separator:a3d08f6633ffa3867429c946e9ec19db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9e416e1ecca5bbacacb03e68e6c8dfe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#ae9e416e1ecca5bbacacb03e68e6c8dfe">BumpontailEquilibrium</a> (host_t&lt; DFieldSp &gt; <a class="el" href="classBumpontailEquilibrium.html#a364f262c4b5d89461566bf23c6ec6e70">epsilon_bot</a>, host_t&lt; DFieldSp &gt; <a class="el" href="classBumpontailEquilibrium.html#aa96295ff0b0e3f60f29c53eb2c5c9fe8">temperature_bot</a>, host_t&lt; DFieldSp &gt; <a class="el" href="classBumpontailEquilibrium.html#a92c189484ec209d152b6f5beb3c9387e">mean_velocity_bot</a>)</td></tr>
+<tr class="memdesc:ae9e416e1ecca5bbacacb03e68e6c8dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classBumpontailEquilibrium.html" title="A class that initializes the distribution function as a sum of two Maxwellian functions.">BumpontailEquilibrium</a> class.  <a href="classBumpontailEquilibrium.html#ae9e416e1ecca5bbacacb03e68e6c8dfe">More...</a><br /></td></tr>
+<tr class="separator:ae9e416e1ecca5bbacacb03e68e6c8dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cd4ddf29a44f068db013ed7dc2a0215"><td class="memItemLeft" align="right" valign="top">DSpanSpVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#a4cd4ddf29a44f068db013ed7dc2a0215">operator()</a> (DSpanSpVx allfequilibrium) const override</td></tr>
 <tr class="memdesc:a4cd4ddf29a44f068db013ed7dc2a0215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the distribution function as the sum of a bulk and a bump-on-tail Maxwellians.  <a href="classBumpontailEquilibrium.html#a4cd4ddf29a44f068db013ed7dc2a0215">More...</a><br /></td></tr>
 <tr class="separator:a4cd4ddf29a44f068db013ed7dc2a0215"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,8 +148,8 @@ virtual DSpanSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operat
 <div class="textblock"><p>A class that initializes the distribution function as a sum of two Maxwellian functions. </p>
 <p>This class initializes the distribution function as a sum of two Maxwellian, enabling the study of the so-called bump-on-tail instability. One of the Maxwellians represents the bulk of the distribution function that has no mean velocity, and the other Maxwellian corresponds to high velocity particles. The second Maxwellian is referred to as the "bump-on-tail" Maxwellian. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3d08f6633ffa3867429c946e9ec19db5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d08f6633ffa3867429c946e9ec19db5">&#9670;&nbsp;</a></span>BumpontailEquilibrium()</h2>
+<a id="ae9e416e1ecca5bbacacb03e68e6c8dfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9e416e1ecca5bbacacb03e68e6c8dfe">&#9670;&nbsp;</a></span>BumpontailEquilibrium()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -157,19 +157,19 @@ virtual DSpanSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operat
         <tr>
           <td class="memname">BumpontailEquilibrium::BumpontailEquilibrium </td>
           <td>(</td>
-          <td class="paramtype">host_t&lt; DViewSp &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldSp &gt;&#160;</td>
           <td class="paramname"><em>epsilon_bot</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">host_t&lt; DViewSp &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldSp &gt;&#160;</td>
           <td class="paramname"><em>temperature_bot</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">host_t&lt; DViewSp &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldSp &gt;&#160;</td>
           <td class="paramname"><em>mean_velocity_bot</em>&#160;</td>
         </tr>
         <tr>

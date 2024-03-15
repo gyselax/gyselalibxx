@@ -1,6 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Contents":[9,0,0,3],
 "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Python_tests":[9,0,0,1],
 "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__References":[9,0,0,2],
 "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Tests_on_the_2D_polar_advection_operator":[9,0,0,0],

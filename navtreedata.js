@@ -67,9 +67,9 @@ var NAVTREEINDEX =
 "classCurvilinear2DToCartesian.html#aaf43cce0853afcd23bbd60a9563c50f4",
 "classMatrix.html#a15badbcf214a7842a0a654f9210f39a1",
 "classPredCorr.html",
-"classVectorFieldSpan.html#ad3abef65badf2ce5915d6b9b86b0ebdc",
-"fluid__moments_8hpp_source.html",
-"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Contents"
+"classVectorFieldSpan.html#ad70b8f79a45666e097299ac974f76046",
+"gauss__legendre__integration_8hpp_source.html",
+"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Python_tests"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

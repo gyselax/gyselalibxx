@@ -172,8 +172,8 @@ $(document).ready(function(){initNavTree('bsl__advection__vx__batched_8hpp_sourc
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> charge_proxy</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    = charge(isp); <span class="comment">// TODO: consider proper way to access charge from device</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            ddc::for_each(</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    ddc::policies::parallel_device,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            ddc::parallel_for_each(</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    Kokkos::DefaultExecutionSpace(),</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    c_dom,</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    KOKKOS_LAMBDA(DElemC <span class="keyword">const</span> ic) {</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        DElemSpatial <span class="keyword">const</span> ix(ic);</div>
