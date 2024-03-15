@@ -123,12 +123,8 @@ public:
      */
     VectorField(VectorField&& other) = default;
 
-    /**
-     * Copy-assigns a new value to this VectorFieldSpan, yields a new view to the same data
-     * @param other the VectorFieldSpan to copy
-     * @return *this
-     */
-    VectorField& operator=(VectorField const& other) = default;
+    /// Deleted: use deepcopy instead
+    VectorField& operator=(VectorField const& other) = delete;
 
     /**
      * Move-assigns a new value to this VectorFieldSpan
