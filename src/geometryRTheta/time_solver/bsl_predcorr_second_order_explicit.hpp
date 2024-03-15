@@ -186,7 +186,7 @@ public:
                 ddcHelper::get<RDimX>(advection_field)(idx)
                         = -ddcHelper::get<RDimY>(electric_field)(idx);
             });
-            ddc::deepcopy(
+            ddc::parallel_deepcopy(
                     ddcHelper::get<RDimY>(advection_field),
                     ddcHelper::get<RDimX>(electric_field));
 
@@ -194,7 +194,7 @@ public:
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
             // --- Copy rho^n because it will be modified:
             DFieldRP allfdistribu_predicted(grid);
-            ddc::deepcopy(allfdistribu_predicted.span_view(), allfdistribu);
+            ddc::parallel_deepcopy(allfdistribu_predicted.span_view(), allfdistribu);
             m_advection_solver(allfdistribu_predicted.span_view(), advection_field.span_view(), dt);
 
             // --- advect also the feet because it is needed for the next step
@@ -216,7 +216,7 @@ public:
                 ddcHelper::get<RDimX>(advection_field_predicted)(idx)
                         = -ddcHelper::get<RDimY>(electric_field_predicted)(idx);
             });
-            ddc::deepcopy(
+            ddc::parallel_deepcopy(
                     ddcHelper::get<RDimY>(advection_field_predicted),
                     ddcHelper::get<RDimX>(electric_field_predicted));
 

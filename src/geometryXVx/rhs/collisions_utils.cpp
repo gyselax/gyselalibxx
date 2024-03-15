@@ -40,8 +40,8 @@ void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0)
 {
     double const Lx = ddcHelper::total_interval_length(ddc::get_domain<IDimX>(nustar_profile));
 
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             nustar_profile.domain(),
             KOKKOS_LAMBDA(IndexSpX const ispx) {
                 double const coeff = Kokkos::sqrt(mass(ielec()) / mass(ddc::select<IDimSp>(ispx)))
@@ -59,8 +59,8 @@ void compute_collfreq(
         DViewSpX density,
         DViewSpX temperature)
 {
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             collfreq.domain(),
             KOKKOS_LAMBDA(IndexSpX const ispx) {
                 collfreq(ispx) = nustar_profile(ispx) * density(ispx)
@@ -81,8 +81,8 @@ void compute_collfreq_ab(
     double const charge_ratio(charge(iion) / charge(ielec()));
     double const me_on_mi(mass(ielec()) / mass(iion));
 
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             collfreq_ab.domain<IDimX>(),
             KOKKOS_LAMBDA(IndexX const ix) {
                 double const collfreq_elec(
@@ -126,8 +126,8 @@ void compute_momentum_energy_exchange(
     IndexSp const iion = find_ion(density.domain<IDimSp>());
     double const mass_ratio(mass(ielec()) / mass(iion));
     double const me_on_memi(mass(ielec()) / (mass(ielec()) + mass(iion)));
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             collfreq_ab.domain<IDimX>(),
             KOKKOS_LAMBDA(IndexX const ix) {
                 // momentum exchange terms

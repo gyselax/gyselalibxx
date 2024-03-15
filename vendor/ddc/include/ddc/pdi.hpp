@@ -25,7 +25,7 @@ static constexpr PDI_inout_t chunk_default_access_v = is_writable_chunk_v<T> ? P
 
 class PdiEvent
 {
-    std::string m_event;
+    std::string m_event_name;
 
     std::vector<std::string> m_names;
 
@@ -33,7 +33,23 @@ class PdiEvent
     std::pmr::monotonic_buffer_resource m_metadata;
 
 public:
-    PdiEvent(std::string const& event_name) : m_event(event_name) {}
+    explicit PdiEvent(std::string const& event_name) : m_event_name(event_name) {}
+
+    PdiEvent(PdiEvent const& rhs) = delete;
+
+    PdiEvent(PdiEvent&& rhs) noexcept = delete;
+
+    ~PdiEvent() noexcept
+    {
+        PDI_event(m_event_name.c_str());
+        for (std::string const& one_name : m_names) {
+            PDI_reclaim(one_name.c_str());
+        }
+    }
+
+    PdiEvent& operator=(PdiEvent const& rhs) = delete;
+
+    PdiEvent& operator=(PdiEvent&& rhs) noexcept = delete;
 
     /// @{
     /// API with access argument
@@ -48,13 +64,13 @@ public:
                 !(access & PDI_IN) || (chunk_default_access_v<BorrowedChunk> & PDI_IN),
                 "Invalid access for constant data");
         auto extents = detail::array(data.domain().extents());
-        size_t& rank = *std::pmr::polymorphic_allocator<size_t>(&m_metadata).allocate(1);
+        std::size_t& rank = *std::pmr::polymorphic_allocator<std::size_t>(&m_metadata).allocate(1);
         rank = extents.size();
         PDI_share((name + "_rank").c_str(), &rank, PDI_OUT);
         m_names.push_back(name + "_rank");
         PDI_share(
                 (name + "_extents").c_str(),
-                std::pmr::vector<size_t>(extents.begin(), extents.end(), &m_metadata).data(),
+                std::pmr::vector<std::size_t>(extents.begin(), extents.end(), &m_metadata).data(),
                 PDI_OUT);
         m_names.push_back(name + "_extents");
         PDI_share(
@@ -120,14 +136,6 @@ public:
     }
 
     /// @}
-
-    ~PdiEvent()
-    {
-        PDI_event(m_event.c_str());
-        for (std::string const& one_name : m_names) {
-            PDI_reclaim(one_name.c_str());
-        }
-    }
 };
 
 template <PDI_inout_t access, class DataType>
@@ -141,6 +149,5 @@ void expose_to_pdi(std::string const& name, DataType&& data)
 {
     PdiEvent(name).with(name, std::forward<DataType>(data));
 }
-
 
 } // namespace ddc

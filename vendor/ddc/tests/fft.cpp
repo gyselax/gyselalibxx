@@ -45,8 +45,8 @@ static void test_fft()
 
     ddc::Chunk f_alloc(x_mesh, ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan const f = f_alloc.span_view();
-    ddc::for_each(
-            ddc::policies::policy(exec_space),
+    ddc::parallel_for_each(
+            exec_space,
             f.domain(),
             KOKKOS_LAMBDA(DElem<DDim<X>...> const e) {
                 ddc::Real const xn2
@@ -55,7 +55,7 @@ static void test_fft()
             });
     ddc::Chunk f_bis_alloc(f.domain(), ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan const f_bis = f_bis_alloc.span_view();
-    ddc::deepcopy(f_bis, f);
+    ddc::parallel_deepcopy(f_bis, f);
 
     ddc::Chunk Ff_alloc(k_mesh, ddc::KokkosAllocator<Tout, MemorySpace>());
     ddc::ChunkSpan const Ff = Ff_alloc.span_view();
@@ -65,7 +65,7 @@ static void test_fft()
     // deepcopy of Ff because FFT C2R overwrites the input
     ddc::Chunk Ff_bis_alloc(Ff.domain(), ddc::KokkosAllocator<Tout, MemorySpace>());
     ddc::ChunkSpan const Ff_bis = Ff_bis_alloc.span_view();
-    ddc::deepcopy(Ff_bis, Ff);
+    ddc::parallel_deepcopy(Ff_bis, Ff);
 
     ddc::Chunk FFf_alloc(f.domain(), ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan const FFf = FFf_alloc.span_view();
@@ -73,15 +73,15 @@ static void test_fft()
 
     ddc::Chunk f_host_alloc(f.domain(), ddc::HostAllocator<Tin>());
     ddc::ChunkSpan const f_host = f_host_alloc.span_view();
-    ddc::deepcopy(f_host, f);
+    ddc::parallel_deepcopy(f_host, f);
 
     ddc::Chunk Ff_host_alloc(Ff.domain(), ddc::HostAllocator<Tout>());
     ddc::ChunkSpan const Ff_host = Ff_host_alloc.span_view();
-    ddc::deepcopy(Ff_host, Ff);
+    ddc::parallel_deepcopy(Ff_host, Ff);
 
     ddc::Chunk FFf_host_alloc(FFf.domain(), ddc::HostAllocator<Tin>());
     ddc::ChunkSpan const FFf_host = FFf_host_alloc.span_view();
-    ddc::deepcopy(FFf_host, FFf);
+    ddc::parallel_deepcopy(FFf_host, FFf);
 
     auto const pow2 = KOKKOS_LAMBDA(double x)
     {
@@ -132,11 +132,11 @@ static void test_fft_norm(ddc::FFT_Normalization const norm)
 
     ddc::Chunk f_alloc = ddc::Chunk(x_mesh, ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan const f = f_alloc.span_view();
-    ddc::fill(f, Tin(1));
+    ddc::parallel_fill(f, Tin(1));
 
     ddc::Chunk f_bis_alloc(f.domain(), ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan const f_bis = f_bis_alloc.span_view();
-    ddc::deepcopy(f_bis, f);
+    ddc::parallel_deepcopy(f_bis, f);
 
     ddc::Chunk Ff_alloc(k_mesh, ddc::KokkosAllocator<Tout, MemorySpace>());
     ddc::ChunkSpan const Ff = Ff_alloc.span_view();
@@ -146,7 +146,7 @@ static void test_fft_norm(ddc::FFT_Normalization const norm)
     // deepcopy of Ff because FFT C2R overwrites the input
     ddc::Chunk Ff_bis_alloc(Ff.domain(), ddc::KokkosAllocator<Tout, MemorySpace>());
     ddc::ChunkSpan const Ff_bis = Ff_bis_alloc.span_view();
-    ddc::deepcopy(Ff_bis, Ff);
+    ddc::parallel_deepcopy(Ff_bis, Ff);
 
     ddc::Chunk FFf_alloc(x_mesh, ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan const FFf = FFf_alloc.span_view();

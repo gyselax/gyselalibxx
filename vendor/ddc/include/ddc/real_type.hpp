@@ -4,7 +4,7 @@
 
 namespace ddc {
 
-#ifdef DDC_ENABLE_DOUBLE
+#ifdef DDC_BUILD_DOUBLE_PRECISION
 
 using Real = double;
 

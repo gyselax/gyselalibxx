@@ -19,10 +19,13 @@ add_executable(ddc_tests
     rectilinear_domain.cpp
     uniform_domain.cpp
     for_each.cpp
-    fill.cpp
+    parallel_fill.cpp
     discrete_element.cpp
     discrete_vector.cpp
     discrete_space.cpp
+    parallel_for_each.cpp
+    parallel_deepcopy.cpp
+    parallel_transform_reduce.cpp
 )
 target_compile_features(ddc_tests PUBLIC cxx_std_17)
 target_link_libraries(ddc_tests
@@ -31,7 +34,7 @@ target_link_libraries(ddc_tests
         DDC::DDC
 )
 gtest_discover_tests(ddc_tests)
-if("${BUILD_FFT_KERNEL}")
+if("${DDC_BUILD_KERNELS_FFT}")
   add_executable(fft_tests main.cpp fft.cpp)
   target_compile_features(fft_tests PUBLIC cxx_std_17)
   target_link_libraries(fft_tests
@@ -41,7 +44,7 @@ if("${BUILD_FFT_KERNEL}")
   )
   gtest_discover_tests(fft_tests)
 endif()
-if("${BUILD_SPLINES_KERNEL}")
+if("${DDC_BUILD_KERNELS_SPLINES}")
   add_subdirectory(splines)
 endif()
 

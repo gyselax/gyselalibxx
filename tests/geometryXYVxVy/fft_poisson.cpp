@@ -72,7 +72,7 @@ TEST(FftPoissonSolver, CosineSource)
     charges(my_ielec) = -1;
     charges(my_iion) = 1;
     DFieldSp masses(dom_sp);
-    ddc::fill(masses, 1);
+    ddc::parallel_fill(masses, 1);
 
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
 

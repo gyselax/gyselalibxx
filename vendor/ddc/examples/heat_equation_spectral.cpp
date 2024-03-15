@@ -60,7 +60,6 @@ void display(double time, ChunkType temp)
     std::cout << "  * temperature[y:"
               << ddc::get_domain<DDimY>(temp).size() / 2 << "] = {";
     ddc::for_each(
-            ddc::policies::serial_host,
             ddc::get_domain<DDimX>(temp),
             [=](ddc::DiscreteElement<DDimX> const ix) {
                 std::cout << std::setw(6) << temp_slice(ix);
@@ -72,7 +71,8 @@ void display(double time, ChunkType temp)
 //! [main-start]
 int main(int argc, char** argv)
 {
-    ddc::ScopeGuard scope(argc, argv);
+    Kokkos::ScopeGuard const kokkos_scope(argc, argv);
+    ddc::ScopeGuard const ddc_scope(argc, argv);
 
     // some parameters that would typically be read from some form of
     // configuration file in a more realistic code
@@ -183,8 +183,7 @@ int main(int argc, char** argv)
     // Initialize the temperature on the main domain
     ddc::DiscreteDomain<DDimX, DDimY> x_mesh
             = ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain);
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
             x_mesh,
             KOKKOS_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                 double const x
@@ -203,7 +202,7 @@ int main(int argc, char** argv)
 
     //! [initial output]
     // display the initial data
-    ddc::deepcopy(_host_temp, _last_temp);
+    ddc::parallel_deepcopy(_host_temp, _last_temp);
     display(ddc::coordinate(time_domain.front()),
             _host_temp[x_domain][y_domain]);
     // time of the iteration where the last output happened
@@ -241,8 +240,7 @@ int main(int argc, char** argv)
         // Stencil computation on the main domain
         ddc::FFT_Normalization norm = ddc::FFT_Normalization::BACKWARD;
         ddc::fft(Kokkos::DefaultExecutionSpace(), Ff, last_temp, {norm});
-        ddc::for_each(
-                ddc::policies::parallel_device,
+        ddc::parallel_for_each(
                 k_mesh,
                 KOKKOS_LAMBDA(ddc::DiscreteElement<
                               ddc::PeriodicSampling<ddc::Fourier<X>>,
@@ -277,7 +275,7 @@ int main(int argc, char** argv)
         //! [output]
         if (iter - last_output >= t_output_period) {
             last_output = iter;
-            ddc::deepcopy(_host_temp, _last_temp);
+            ddc::parallel_deepcopy(_host_temp, _last_temp);
             display(ddc::coordinate(iter),
                     _host_temp[x_domain][y_domain]);
         }
@@ -291,7 +289,7 @@ int main(int argc, char** argv)
 
     //! [final output]
     if (last_output < time_domain.back()) {
-        ddc::deepcopy(_host_temp, _last_temp);
+        ddc::parallel_deepcopy(_host_temp, _last_temp);
         display(ddc::coordinate(time_domain.back()),
                 _host_temp[x_domain][y_domain]);
     }

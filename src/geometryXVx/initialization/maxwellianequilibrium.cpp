@@ -29,8 +29,8 @@ DSpanSpVx MaxwellianEquilibrium::operator()(DSpanSpVx const allfequilibrium) con
                 m_temperature_eq(isp),
                 m_mean_velocity_eq(isp));
 
-        ddc::for_each(
-                ddc::policies::parallel_device,
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
                 gridvx,
                 KOKKOS_LAMBDA(IndexVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
     });
@@ -45,8 +45,8 @@ void MaxwellianEquilibrium::compute_maxwellian(
 {
     double const inv_sqrt_2piT = 1. / Kokkos::sqrt(2. * M_PI * temperature);
     IDomainVx const gridvx = fMaxwellian.domain();
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             gridvx,
             KOKKOS_LAMBDA(IndexVx const ivx) {
                 CoordVx const vx = ddc::coordinate(ivx);
