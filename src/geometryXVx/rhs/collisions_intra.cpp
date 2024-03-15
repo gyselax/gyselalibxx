@@ -110,8 +110,8 @@ void CollisionsIntra::compute_matrix_coeff(
         device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Nucoll,
         double deltat) const
 {
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             AA.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 IndexSp const isp = ddc::select<IDimSp>(ispxvx);
@@ -190,8 +190,8 @@ void CollisionsIntra::compute_rhs_vector(
         DViewSpXVx allfdistribu,
         double fthresh) const
 {
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             RR.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 IndexSp const isp = ddc::select<IDimSp>(ispxvx);
@@ -244,9 +244,9 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
     auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
 
     //Moments computation
-    ddc::fill(density, 0.);
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_fill(density, 0.);
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             grid_sp_x,
             KOKKOS_LAMBDA(IndexSpX const ispx) {
                 double particle_flux(0);
@@ -267,7 +267,7 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
     DFieldSpX collfreq_alloc(grid_sp_x);
     auto collfreq = collfreq_alloc.span_view();
     DFieldSpX nustar_profile(grid_sp_x);
-    ddc::deepcopy(nustar_profile, m_nustar_profile);
+    ddc::parallel_deepcopy(nustar_profile, m_nustar_profile);
     compute_collfreq(collfreq, nustar_profile, density, temperature);
 
     // diffusion coefficient
@@ -316,10 +316,10 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
     host_t<DFieldSpXVx> BB_host(allfdistribu.domain());
     host_t<DFieldSpXVx> CC_host(allfdistribu.domain());
     host_t<DFieldSpXVx> RR_host(allfdistribu.domain());
-    ddc::deepcopy(AA_host, AA);
-    ddc::deepcopy(BB_host, BB);
-    ddc::deepcopy(CC_host, CC);
-    ddc::deepcopy(RR_host, RR);
+    ddc::parallel_deepcopy(AA_host, AA);
+    ddc::parallel_deepcopy(BB_host, BB);
+    ddc::parallel_deepcopy(CC_host, CC);
+    ddc::parallel_deepcopy(RR_host, RR);
 
     ddc::for_each(grid_sp_x, [&](IndexSpX const ispx) {
         Matrix_Banded matrix(ddc::get_domain<IDimVx>(allfdistribu).size(), 1, 1);
@@ -334,10 +334,10 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
                 ddc::get_domain<IDimVx>(allfdistribu).size());
         matrix.factorize();
         matrix.solve_inplace(RR_Span1D);
-        ddc::deepcopy(allfdistribu_host[ispx], RR_host[ispx]);
+        ddc::parallel_deepcopy(allfdistribu_host[ispx], RR_host[ispx]);
     });
 
-    ddc::deepcopy(allfdistribu, allfdistribu_host);
+    ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
     Kokkos::Profiling::popRegion();
     return allfdistribu;
 }

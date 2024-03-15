@@ -141,7 +141,7 @@ auto extract_after(Tuple&& t, std::index_sequence<Ids...>)
 } // namespace detail
 
 /** Initialize (emplace) a global singleton discrete space
- * 
+ *
  * @param args the constructor arguments
  */
 template <class DDim, class... Args>
@@ -168,7 +168,7 @@ void init_discrete_space(Args&&... args)
 }
 
 /** Move construct a global singleton discrete space and pass through the other argument
- * 
+ *
  * @param a - the discrete space to move at index 0
  *          - the arguments to pass through at index 1
  */
@@ -181,7 +181,7 @@ Arg init_discrete_space(std::tuple<DDimImpl, Arg>&& a)
 }
 
 /** Move construct a global singleton discrete space and pass through remaining arguments
- * 
+ *
  * @param a - the discrete space to move at index 0
  *          - the (2+) arguments to pass through in other indices
  */
@@ -194,6 +194,12 @@ std::enable_if_t<2 <= sizeof...(Args), std::tuple<Args...>> init_discrete_space(
     return detail::extract_after(std::move(a), std::index_sequence_for<Args...>());
 }
 
+/**
+ * @tparam DDim a discrete dimension
+ * @return the discrete space instance associated with `DDim`.
+ * This function must be called from a `KOKKOS_FUNCTION`.
+ * Call `ddc::host_discrete_space` for a host-only function instead.
+ */
 template <class DDim, class MemorySpace = DDC_CURRENT_KOKKOS_SPACE>
 KOKKOS_FORCEINLINE_FUNCTION detail::ddim_impl_t<DDim, MemorySpace> const& discrete_space()
 {

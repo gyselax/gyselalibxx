@@ -55,7 +55,7 @@ void ChargeDensityCalculator::operator()(DSpanXY const rho, DViewSpXYVxVy const 
         IndexY const iy = ddc::select<IDimY>(ixy);
         rho(ix, iy) = chargedens_adiabspecies;
         ddc::for_each(ddc::get_domain<IDimSp>(allfdistribu), [&](IndexSp const isp) {
-            ddc::deepcopy(f_vxvy_slice, allfdistribu[isp][ix][iy]);
+            ddc::parallel_deepcopy(f_vxvy_slice, allfdistribu[isp][ix][iy]);
             m_spline_vxvy_builder(
                     vxvy_spline_coef.span_view(),
                     f_vxvy_slice.span_cview(),

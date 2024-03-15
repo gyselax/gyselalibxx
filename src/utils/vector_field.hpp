@@ -87,19 +87,6 @@ private:
     {
     }
 
-    /**
-     * Construct a VectorField from a deepcopy of a VectorFieldSpan
-     *
-     * @param[inout] field_span
-     */
-    template <class OElementType, class LayoutDomain, class MemorySpace, std::size_t... Is>
-    explicit VectorField(
-            VectorFieldSpan<OElementType, Domain, NDTag, LayoutDomain, MemorySpace> field_span,
-            std::index_sequence<Is...> const&)
-        : base_type(chunk_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(field_span))...)
-    {
-    }
-
     /** Element access using a multi-dimensional DiscreteElement
      * @param delems discrete coordinates
      * @return copy of this element
@@ -124,18 +111,6 @@ public:
      */
     explicit VectorField(mdomain_type const& domain, Allocator allocator = Allocator())
         : VectorField(domain, allocator, std::make_index_sequence<base_type::NDims> {})
-    {
-    }
-
-    /**
-     * Construct a VectorField from a deepcopy of a VectorFieldSpan
-     *
-     * @param[inout] field_span A reference to another vector field.
-     */
-    template <class OElementType, class LayoutDomain, class MemorySpace>
-    explicit VectorField(
-            VectorFieldSpan<OElementType, Domain, NDTag, LayoutDomain, MemorySpace> field_span)
-        : VectorField(field_span, std::make_index_sequence<base_type::NDims> {})
     {
     }
 

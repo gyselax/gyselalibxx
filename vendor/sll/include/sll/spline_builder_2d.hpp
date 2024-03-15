@@ -382,7 +382,7 @@ void SplineBuilder2D<SplineBuilder1, SplineBuilder2>::operator()(
         // Get interpolated values
         ddc::Chunk<double, interpolation_domain_type1> vals1(
                 spline_builder1.interpolation_domain());
-        ddc::deepcopy(vals1, vals[i]);
+        ddc::parallel_deepcopy(vals1, vals[i]);
 
         // Get interpolated derivatives
         const std::optional<CDSpan1D> deriv_l(

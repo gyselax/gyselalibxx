@@ -216,8 +216,8 @@ public:
     {
         interpolation_domain_type1 const interpolation_domain1(spline_eval.domain());
         interpolation_domain_type2 const interpolation_domain2(spline_eval.domain());
-        ddc::for_each(
-                ddc::policies::policy(exec_space()),
+        ddc::parallel_for_each(
+                exec_space(),
                 batch_domain(),
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     const auto spline_eval_2D = spline_eval[j];
@@ -312,8 +312,8 @@ public:
     {
         interpolation_domain_type1 const interpolation_domain1(spline_eval.domain());
         interpolation_domain_type2 const interpolation_domain2(spline_eval.domain());
-        ddc::for_each(
-                ddc::policies::policy(exec_space()),
+        ddc::parallel_for_each(
+                exec_space(),
                 batch_domain(),
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     const auto spline_eval_2D = spline_eval[j];
@@ -342,8 +342,8 @@ public:
     {
         interpolation_domain_type1 const interpolation_domain1(spline_eval.domain());
         interpolation_domain_type2 const interpolation_domain2(spline_eval.domain());
-        ddc::for_each(
-                ddc::policies::policy(exec_space()),
+        ddc::parallel_for_each(
+                exec_space(),
                 batch_domain(),
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     const auto spline_eval_2D = spline_eval[j];
@@ -372,8 +372,8 @@ public:
     {
         interpolation_domain_type1 const interpolation_domain1(spline_eval.domain());
         interpolation_domain_type2 const interpolation_domain2(spline_eval.domain());
-        ddc::for_each(
-                ddc::policies::policy(exec_space()),
+        ddc::parallel_for_each(
+                exec_space(),
                 batch_domain(),
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     const auto spline_eval_2D = spline_eval[j];
@@ -467,8 +467,8 @@ public:
                     ddc::discrete_space<bsplines_type2>().integrals(values2);
                 });
 
-        ddc::for_each(
-                ddc::policies::policy(exec_space()),
+        ddc::parallel_for_each(
+                exec_space(),
                 batch_domain(),
                 KOKKOS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     integrals(j) = 0;

@@ -9,8 +9,8 @@
 
 #include "ddc/chunk_common.hpp"
 #include "ddc/chunk_span.hpp"
-#include "ddc/deepcopy.hpp"
 #include "ddc/kokkos_allocator.hpp"
+#include "ddc/parallel_deepcopy.hpp"
 
 namespace ddc {
 
@@ -104,12 +104,12 @@ public:
 
     /// Construct a Chunk from a deepcopy of a ChunkSpan
     template <class OElementType, class... ODDims, class LayoutType>
-    explicit Chunk(
+    [[deprecated("Use 'ddc::create_mirror_and_copy' instead")]] explicit Chunk(
             ChunkSpan<OElementType, DiscreteDomain<ODDims...>, LayoutType> chunk_span,
             Allocator allocator = Allocator())
         : Chunk(chunk_span.domain(), std::move(allocator))
     {
-        deepcopy(span_view(), chunk_span);
+        parallel_deepcopy(span_view(), chunk_span);
     }
 
     /// Deleted: use deepcopy instead
@@ -256,10 +256,10 @@ public:
         return base_type::allocation_mdspan();
     }
 
-    /** Provide a mdspan on the memory allocation
-     * @return allocation mdspan
+    /** Provide an unmanaged `Kokkos::View` on the memory allocation
+     * @return allocation `Kokkos::View`
      */
-    constexpr auto allocation_kokkos_view()
+    auto allocation_kokkos_view()
     {
         auto s = this->allocation_mdspan();
         auto kokkos_layout = detail::build_kokkos_layout(
@@ -272,10 +272,10 @@ public:
                 typename Allocator::memory_space>(s.data_handle(), kokkos_layout);
     }
 
-    /** Provide a mdspan on the memory allocation
-     * @return allocation mdspan
+    /** Provide an unmanaged `Kokkos::View` on the memory allocation
+     * @return read-only allocation `Kokkos::View`
      */
-    constexpr auto allocation_kokkos_view() const
+    auto allocation_kokkos_view() const
     {
         auto s = this->allocation_mdspan();
         auto kokkos_layout = detail::build_kokkos_layout(

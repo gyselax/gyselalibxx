@@ -67,7 +67,8 @@ int main(int argc, char** argv)
     fs::create_directory("output");
 
     // Get the parameters of the grid from the grid_size.yaml. ----------------------------------------
-    ::ddc::ScopeGuard scope(argc, argv);
+    ::Kokkos::ScopeGuard kokkos_scope(argc, argv);
+    ::ddc::ScopeGuard ddc_scope(argc, argv);
 
     PC_tree_t conf_gyselalibxx;
     if (argc == 2) {

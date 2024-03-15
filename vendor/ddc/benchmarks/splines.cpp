@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <cstring>
 #include <iosfwd>
+#include <thread>
 #include <vector>
 
 #include <ddc/ddc.hpp>
@@ -92,8 +93,7 @@ static void characteristics_advection(benchmark::State& state)
     // Initialize the density on the main domain
     ddc::DiscreteDomain<DDimX, DDimY> x_mesh
             = ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain);
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
             x_mesh,
             KOKKOS_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                 double const x = ddc::coordinate(ddc::select<DDimX>(ixy));
@@ -138,8 +138,7 @@ static void characteristics_advection(benchmark::State& state)
 
     for (auto _ : state) {
         Kokkos::Profiling::pushRegion("FeetCharacteristics");
-        ddc::for_each(
-                ddc::policies::parallel_device,
+        ddc::parallel_for_each(
                 feet_coords.domain(),
                 KOKKOS_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const e) {
                     feet_coords(e) = ddc::Coordinate<X, Y>(
@@ -226,7 +225,8 @@ int main(int argc, char** argv)
         return 1;
     }
     {
-        ddc::ScopeGuard const guard;
+        Kokkos::ScopeGuard const kokkos_scope(argc, argv);
+        ddc::ScopeGuard const ddc_scope(argc, argv);
         ::benchmark::RunSpecifiedBenchmarks();
     }
     ::benchmark::Shutdown();

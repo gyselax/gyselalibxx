@@ -34,20 +34,42 @@ static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
 
 } // namespace
 
-TEST(Fill, OneDimension)
+TEST(ParallelFill, OneDimension)
 {
     DDomX const dom(lbound_x, nelems_x);
     std::vector<int> storage(dom.size(), 0);
     ddc::ChunkSpan<int, DDomX> const view(storage.data(), dom);
-    ddc::fill(view, 1);
+    ddc::parallel_fill(view, 1);
     EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
 }
 
-TEST(Fill, TwoDimensions)
+TEST(ParallelFill, TwoDimensions)
 {
     DDomXY const dom(lbound_x_y, nelems_x_y);
     std::vector<int> storage(dom.size(), 0);
     ddc::ChunkSpan<int, DDomXY> const view(storage.data(), dom);
-    ddc::fill(view, 1);
+    ddc::parallel_fill(view, 1);
+    EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
+}
+
+TEST(ParallelFill, OneDimensionWithExecutionSpace)
+{
+    DDomX const dom(lbound_x, nelems_x);
+    std::vector<int> storage(dom.size(), 0);
+    ddc::ChunkSpan<int, DDomX> const view(storage.data(), dom);
+    Kokkos::DefaultHostExecutionSpace const exec_space;
+    ddc::parallel_fill(exec_space, view, 1);
+    exec_space.fence();
+    EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
+}
+
+TEST(ParallelFill, TwoDimensionsWithExecutionSpace)
+{
+    DDomXY const dom(lbound_x_y, nelems_x_y);
+    std::vector<int> storage(dom.size(), 0);
+    ddc::ChunkSpan<int, DDomXY> const view(storage.data(), dom);
+    Kokkos::DefaultHostExecutionSpace const exec_space;
+    ddc::parallel_fill(exec_space, view, 1);
+    exec_space.fence();
     EXPECT_EQ(std::count(storage.begin(), storage.end(), 1), dom.size());
 }

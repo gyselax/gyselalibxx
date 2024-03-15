@@ -38,7 +38,7 @@ KrookSourceConstant::KrookSourceConstant(
         mask_host = mask_tanh(gridx, m_extent, m_stiffness, MaskType::Inverted, false);
         break;
     }
-    ddc::deepcopy(m_mask.span_view(), mask_host);
+    ddc::parallel_deepcopy(m_mask.span_view(), mask_host);
 
     // target distribution function
     MaxwellianEquilibrium::compute_maxwellian(m_ftarget.span_view(), m_density, m_temperature, 0.);
@@ -74,8 +74,8 @@ DSpanSpXVx KrookSourceConstant::operator()(DSpanSpXVx const allfdistribu, double
     auto mask = m_mask.span_view();
     auto const& amplitude = m_amplitude;
 
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 allfdistribu(ispxvx)

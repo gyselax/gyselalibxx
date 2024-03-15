@@ -30,8 +30,8 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
                 m_init_perturb_mode(isp),
                 m_init_perturb_amplitude(isp));
         // Initialization of the distribution function --> fill values
-        ddc::for_each(
-                ddc::policies::parallel_device,
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
                 gridxvx,
                 KOKKOS_CLASS_LAMBDA(IndexXVx const ixvx) {
                     IndexX const ix = ddc::select<IDimX>(ixvx);
@@ -55,8 +55,8 @@ void SingleModePerturbInitialization::perturbation_initialization(
     double const Lx = ddcHelper::total_interval_length(gridx);
 
     double const kx = mode * 2. * M_PI / Lx;
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             gridx,
             KOKKOS_LAMBDA(IndexX const ix) {
                 CoordX const x = ddc::coordinate(ix);

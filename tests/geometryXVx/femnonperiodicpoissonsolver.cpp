@@ -64,7 +64,7 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     charges(my_ielec) = -1;
     charges(my_iion) = 1;
     host_t<DFieldSp> masses(dom_sp);
-    ddc::fill(masses, 1);
+    ddc::parallel_fill(masses, 1);
 
     // Initialization of the distribution function
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
@@ -94,10 +94,10 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     DFieldX electric_field(gridx);
     DFieldSpXVx allfdistribu(mesh);
 
-    ddc::deepcopy(allfdistribu, allfdistribu_host);
+    ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
     poisson(electrostatic_potential, electric_field, allfdistribu);
-    ddc::deepcopy(electric_field_host, electric_field);
-    ddc::deepcopy(electrostatic_potential_host, electrostatic_potential);
+    ddc::parallel_deepcopy(electric_field_host, electric_field);
+    ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
 
     double error_pot = 0.0;
     double error_field = 0.0;

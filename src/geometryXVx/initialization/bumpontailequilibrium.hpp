@@ -52,9 +52,9 @@ public:
      * @param[in] mean_velocity_bot A parameter that represents the mean velocity of the bump-on-tail Maxwellian for each species. 
      */
     BumpontailEquilibrium(
-            host_t<DViewSp> epsilon_bot,
-            host_t<DViewSp> temperature_bot,
-            host_t<DViewSp> mean_velocity_bot);
+            host_t<DFieldSp> epsilon_bot,
+            host_t<DFieldSp> temperature_bot,
+            host_t<DFieldSp> mean_velocity_bot);
 
     ~BumpontailEquilibrium() override = default;
 

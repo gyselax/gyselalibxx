@@ -225,7 +225,8 @@ void run_simulations_with_methods(
 
 int main(int argc, char** argv)
 {
-    ::ddc::ScopeGuard scope(argc, argv);
+    ::Kokkos::ScopeGuard kokkos_scope(argc, argv);
+    ::ddc::ScopeGuard ddc_scope(argc, argv);
 
 
     PC_tree_t conf_voicexx;
