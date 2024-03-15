@@ -228,7 +228,9 @@ public:
         {
             for (std::size_t i = 0; i < m_singular_basis_elements.size(); ++i) {
                 m_singular_basis_elements[i] = Spline2D(impl.m_singular_basis_elements[i].domain());
-                ddc::deepcopy(m_singular_basis_elements[i], impl.m_singular_basis_elements[i]);
+                ddc::parallel_deepcopy(
+                        m_singular_basis_elements[i],
+                        impl.m_singular_basis_elements[i]);
             }
         }
 

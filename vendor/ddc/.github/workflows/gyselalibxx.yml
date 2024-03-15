@@ -5,14 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout gyselalibxx
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: gyselax/gyselalibxx
         submodules: recursive
     - name: rm ddc
       run: rm -rf vendor/ddc
     - name: Checkout ddc
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
         path: vendor/ddc
@@ -31,14 +31,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout gyselalibxx
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: gyselax/gyselalibxx
         submodules: recursive
     - name: rm ddc
       run: rm -rf vendor/ddc
     - name: Checkout ddc
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
         path: vendor/ddc

@@ -23,8 +23,7 @@ void blinker_init(
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> cells)
 {
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
             domain,
             KOKKOS_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                 ddc::DiscreteElement<DDimX> const ix
@@ -61,7 +60,8 @@ std::ostream& print_2DChunk(
 
 int main()
 {
-    ddc::ScopeGuard scope;
+    Kokkos::ScopeGuard const kokkos_scope;
+    ddc::ScopeGuard const ddc_scope;
 
     ddc::DiscreteDomain<DDimX, DDimY> const domain_xy(
             ddc::DiscreteElement<DDimX, DDimY>(0, 0),
@@ -93,11 +93,10 @@ int main()
 
     std::size_t iter = 0;
     for (; iter < nt; ++iter) {
-        ddc::deepcopy(cells_in_host_alloc, cells_in);
+        ddc::parallel_deepcopy(cells_in_host_alloc, cells_in);
         print_2DChunk(std::cout, cells_in_host_alloc.span_cview())
                 << "\n";
-        ddc::for_each(
-                ddc::policies::parallel_device,
+        ddc::parallel_for_each(
                 inner_domain_xy,
                 KOKKOS_LAMBDA(
                         ddc::DiscreteElement<DDimX, DDimY> const ixy) {
@@ -125,9 +124,9 @@ int main()
                             cells_out(ixy) = true;
                     }
                 });
-        ddc::deepcopy(cells_in, cells_out);
+        ddc::parallel_deepcopy(cells_in, cells_out);
     }
-    ddc::deepcopy(cells_in_host_alloc, cells_in);
+    ddc::parallel_deepcopy(cells_in_host_alloc, cells_in);
     print_2DChunk(std::cout, cells_in_host_alloc.span_cview()) << "\n";
 
     return 0;

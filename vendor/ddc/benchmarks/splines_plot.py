@@ -35,8 +35,8 @@ for benchmark in data["benchmarks"]:
 plt.figure(figsize=(8, 6))
 for nx, group_data in data_groups.items():
     ny = group_data["ny"]
-    bandwidth = [group_data["bytes_per_second"][i] for i in range(len(ny))]
-    plt.plot(ny, bandwidth, marker='o', markersize=5, label=f'nx={nx}')
+    throughput = [group_data["bytes_per_second"][i] for i in range(len(ny))]
+    plt.plot(ny, throughput, marker='o', markersize=5, label=f'nx={nx}')
 
 x = np.linspace(min(ny), 20*min(ny))
 plt.plot(x, np.mean([data_groups[nx]["bytes_per_second"][0] for nx in nx_values])/min(ny)*x, linestyle='--', color='black', label='perfect scaling')
@@ -45,10 +45,10 @@ plt.plot(x, np.mean([data_groups[nx]["bytes_per_second"][0] for nx in nx_values]
 plt.grid()
 plt.xscale("log")
 plt.xlabel("ny")
-plt.ylabel("Bandwidth [B/s]")
-plt.title("Bandwidth on "+str.upper(data["context"]["chip"]));
+plt.ylabel("Throughput [B/s]")
+plt.title("Throughput on "+str.upper(data["context"]["chip"]));
 plt.legend()
-plt.savefig("bandwidth_ny.png")
+plt.savefig("throughput_ny.png")
 
 #gpu_mem
 plt.figure(figsize=(8, 6))
@@ -74,8 +74,8 @@ plt.savefig("gpu_mem_occupancy.png")
 plt.figure(figsize=(8, 6))
 for nx, group_data in data_groups.items():
     cols_per_chunk = group_data["cols_per_chunk"]
-    bandwidth = [group_data["bytes_per_second"][i] for i in range(len(cols_per_chunk))]
-    plt.plot(cols_per_chunk, bandwidth, marker='o', markersize=5, label=f'nx={nx}')
+    throughput = [group_data["bytes_per_second"][i] for i in range(len(cols_per_chunk))]
+    plt.plot(cols_per_chunk, throughput, marker='o', markersize=5, label=f'nx={nx}')
 
 x = [(int)(data["context"]["cols_per_chunk_ref"]), (int)(data["context"]["cols_per_chunk_ref"])*1.001];
 plt.plot(x, [0.99*min([min(group_data["bytes_per_second"]) for nx, group_data in data_groups.items()]), 1.01*max([max(group_data["bytes_per_second"]) for nx, group_data in data_groups.items()])], linestyle='dotted', color='black', label='reference config')
@@ -84,10 +84,10 @@ plt.plot(x, [0.99*min([min(group_data["bytes_per_second"]) for nx, group_data in
 plt.grid()
 plt.xscale("log")
 plt.xlabel("cols_per_chunk")
-plt.ylabel("Bandwidth [B/s]")
-plt.title("Bandwidth on "+str.upper(data["context"]["chip"])+" (with ny=100000)");
+plt.ylabel("Throughput [B/s]")
+plt.title("Throughput on "+str.upper(data["context"]["chip"])+" (with ny=100000)");
 plt.legend()
-plt.savefig("bandwidth_cols.png")
+plt.savefig("throughput_cols.png")
 
 #####################
 ## preconditionner ##
@@ -97,8 +97,8 @@ plt.savefig("bandwidth_cols.png")
 plt.figure(figsize=(8, 6))
 for nx, group_data in data_groups.items():
     preconditionner_max_block_size = group_data["preconditionner_max_block_size"]
-    bandwidth = [group_data["bytes_per_second"][i] for i in range(len(preconditionner_max_block_size))]
-    plt.plot(preconditionner_max_block_size, bandwidth, marker='o', markersize=5, label=f'nx={nx}')
+    throughput = [group_data["bytes_per_second"][i] for i in range(len(preconditionner_max_block_size))]
+    plt.plot(preconditionner_max_block_size, throughput, marker='o', markersize=5, label=f'nx={nx}')
 
 x = [(int)(data["context"]["preconditionner_max_block_size_ref"]), (int)(data["context"]["preconditionner_max_block_size_ref"])*1.001];
 plt.plot(x, [0.99*min([min(group_data["bytes_per_second"]) for nx, group_data in data_groups.items()]), 1.01*max([max(group_data["bytes_per_second"]) for nx, group_data in data_groups.items()])], linestyle='dotted', color='black', label='reference config')
@@ -107,9 +107,9 @@ plt.plot(x, [0.99*min([min(group_data["bytes_per_second"]) for nx, group_data in
 plt.grid()
 plt.xscale("log")
 plt.xlabel("preconditionner_max_block_size")
-plt.ylabel("Bandwidth [B/s]")
-plt.title("Bandwidth on "+str.upper(data["context"]["chip"])+" (with ny=100000)");
+plt.ylabel("Throughput [B/s]")
+plt.title("Throughput on "+str.upper(data["context"]["chip"])+" (with ny=100000)");
 plt.legend()
-plt.savefig("bandwidth_precond.png")
+plt.savefig("throughput_precond.png")
 
 plt.close();

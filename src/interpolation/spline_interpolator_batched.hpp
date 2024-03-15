@@ -74,8 +74,8 @@ public:
         , m_derivs_min_alloc(builder.derivs_xmin_domain())
         , m_derivs_max_alloc(builder.derivs_xmax_domain())
     {
-        ddc::fill(m_derivs_min_alloc, 0.);
-        ddc::fill(m_derivs_max_alloc, 0.);
+        ddc::parallel_fill(m_derivs_min_alloc, 0.);
+        ddc::parallel_fill(m_derivs_max_alloc, 0.);
     }
 
     ~SplineInterpolatorBatched() override = default;

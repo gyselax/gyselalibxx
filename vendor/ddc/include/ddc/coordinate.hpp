@@ -13,7 +13,7 @@ namespace ddc {
 using CoordinateElement = Real;
 
 /** A Coordinate represents a coordinate in the continuous space
- * 
+ *
  * It is tagged by its dimensions.
  */
 

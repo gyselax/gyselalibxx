@@ -81,8 +81,8 @@ public:
             double const charge_proxy
                     = charge(isp); // TODO: consider proper way to access charge from device
             double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
-            ddc::for_each(
-                    ddc::policies::parallel_device,
+            ddc::parallel_for_each(
+                    Kokkos::DefaultExecutionSpace(),
                     c_dom,
                     KOKKOS_LAMBDA(DElemC const ic) {
                         DElemSpatial const ix(ic);

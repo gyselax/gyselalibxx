@@ -61,8 +61,8 @@ public:
         {
             m_charge_view = m_charge.span_cview();
             m_mass_view = m_mass.span_cview();
-            ddc::deepcopy(m_charge, impl.m_charge);
-            ddc::deepcopy(m_mass, impl.m_mass);
+            ddc::parallel_deepcopy(m_charge, impl.m_charge);
+            ddc::parallel_deepcopy(m_mass, impl.m_mass);
         }
 
         /**

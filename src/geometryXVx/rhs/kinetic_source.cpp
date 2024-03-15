@@ -57,8 +57,8 @@ DSpanSpXVx KineticSource::operator()(DSpanSpXVx const allfdistribu, double const
 
     auto const& amplitude = m_amplitude;
 
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 double const df(

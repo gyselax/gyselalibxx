@@ -100,7 +100,7 @@ public:
         }
 
         /** Constructs a BSpline basis with n equidistant knots over \f$[a, b]\f$
-         * 
+         *
          * @param rmin    the real ddc::coordinate of the first knot
          * @param rmax    the real ddc::coordinate of the last knot
          * @param n_knots the number of knots
@@ -230,7 +230,7 @@ KOKKOS_INLINE_FUNCTION ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSpl
         Impl<MemorySpace>::eval_basis(
                 std::array<double, Size>& values,
                 ddc::Coordinate<Tag> const& x,
-                std::size_t const deg) const
+                [[maybe_unused]] std::size_t const deg) const
 {
     assert(values.size() == deg + 1);
 
@@ -243,7 +243,7 @@ KOKKOS_INLINE_FUNCTION ddc::DiscreteElement<UniformBSplines<Tag, D>> UniformBSpl
     // 3. Compute values of aforementioned B-splines
     double xx, temp, saved;
     values[0] = 1.0;
-    for (std::size_t j = 1; j < deg + 1; ++j) {
+    for (std::size_t j = 1; j < Size; ++j) {
         xx = -offset;
         saved = 0.0;
         for (std::size_t r = 0; r < j; ++r) {

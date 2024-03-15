@@ -5,12 +5,12 @@
 #include "bumpontailequilibrium.hpp"
 
 BumpontailEquilibrium::BumpontailEquilibrium(
-        host_t<DViewSp> const epsilon_bot,
-        host_t<DViewSp> const temperature_bot,
-        host_t<DViewSp> const mean_velocity_bot)
-    : m_epsilon_bot(epsilon_bot)
-    , m_temperature_bot(temperature_bot)
-    , m_mean_velocity_bot(mean_velocity_bot)
+        host_t<DFieldSp> epsilon_bot,
+        host_t<DFieldSp> temperature_bot,
+        host_t<DFieldSp> mean_velocity_bot)
+    : m_epsilon_bot(std::move(epsilon_bot))
+    , m_temperature_bot(std::move(temperature_bot))
+    , m_mean_velocity_bot(std::move(mean_velocity_bot))
 {
 }
 
@@ -29,8 +29,8 @@ DSpanSpVx BumpontailEquilibrium::operator()(DSpanSpVx const allfequilibrium) con
                 m_temperature_bot(isp),
                 m_mean_velocity_bot(isp));
 
-        ddc::for_each(
-                ddc::policies::parallel_device,
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
                 gridvx,
                 KOKKOS_LAMBDA(IndexVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
     });
@@ -46,8 +46,8 @@ void BumpontailEquilibrium::compute_twomaxwellian(
     double const inv_sqrt_2pi = 1. / sqrt(2. * M_PI);
     double const norm_f2 = inv_sqrt_2pi / sqrt(temperature_bot);
     IDomainVx const gridvx = fMaxwellian.domain();
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             gridvx,
             KOKKOS_LAMBDA(IndexVx const ivx) {
                 CoordVx const vx = ddc::coordinate(ivx);

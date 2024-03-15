@@ -59,14 +59,14 @@ TEST(KineticSource, Moments)
     charges(my_ielec) = -1;
     charges(my_iion) = 1;
     host_t<DFieldSp> masses(dom_sp);
-    ddc::fill(masses, 1);
+    ddc::parallel_fill(masses, 1);
 
     // Initialization of the distribution function
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
     DFieldSpXVx allfdistribu(mesh);
 
     // Initialization of the distribution function
-    ddc::fill(allfdistribu, 0.);
+    ddc::parallel_fill(allfdistribu, 0.);
 
     // Maxwellian source test
     double const px_source = 0.2;
@@ -101,7 +101,7 @@ TEST(KineticSource, Moments)
     host_t<DFieldVx> values_temperature(gridvx);
     ddc::for_each(gridx, [&](IndexX const ix) {
         // density
-        ddc::deepcopy(values_density, allfdistribu_host[dom_sp.front()][ix]);
+        ddc::parallel_deepcopy(values_density, allfdistribu_host[dom_sp.front()][ix]);
         density(ix) = integrate_v(values_density);
 
         // fluid velocity

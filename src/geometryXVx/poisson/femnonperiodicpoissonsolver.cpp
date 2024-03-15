@@ -72,7 +72,7 @@ FemNonPeriodicPoissonSolver::FemNonPeriodicPoissonSolver(
             eval_pts(eval_pts_data.data(), m_quad_coef_alloc.domain());
     auto quad_coef_host = ddc::create_mirror_and_copy(m_quad_coef_alloc.span_view());
     gl.compute_points_and_weights_on_mesh(eval_pts, quad_coef_host.span_view(), knots.span_cview());
-    ddc::deepcopy(m_quad_coef_alloc, quad_coef_host);
+    ddc::parallel_deepcopy(m_quad_coef_alloc, quad_coef_host);
 
     ddc::init_discrete_space<QMeshX>(eval_pts_data);
 
@@ -132,7 +132,7 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
         DNUBSSpanX const phi_spline_coef,
         DBSViewX const rho_spline_coef) const
 {
-    ddc::fill(phi_spline_coef, 0.0);
+    ddc::parallel_fill(phi_spline_coef, 0.0);
 
     int const rhs_size = m_nbasis - 2;
     int const nbasis_proxy = m_nbasis;
@@ -142,8 +142,8 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
     // Fill phi_rhs(i) with \int rho(x) b_i(x) dx
     // Rk: phi_rhs no longer contains spline coefficients, but is the
     //     RHS of the matrix equation
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             m_quad_coef_alloc.domain(),
             KOKKOS_LAMBDA(ddc::DiscreteElement<QMeshX> const ix) {
                 ddc::Coordinate<RDimX> const coord = coord_from_quad_point(ddc::coordinate(ix));
@@ -168,7 +168,7 @@ void FemNonPeriodicPoissonSolver::solve_matrix_system(
     // Solve the matrix equation to find the spline coefficients of phi
     m_fem_matrix->solve_inplace(phi_rhs_host);
 
-    ddc::deepcopy(phi_spline_coef, phi_spline_coef_host);
+    ddc::parallel_deepcopy(phi_spline_coef, phi_spline_coef_host);
 }
 
 
@@ -212,8 +212,8 @@ void FemNonPeriodicPoissonSolver::operator()(
     //
     NUBSplineXEvaluator_1d spline_x_nu_evaluator_proxy = m_spline_x_nu_evaluator;
     ddc::ChunkSpan phi_spline_coef_view = phi_spline_coef.span_cview();
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             dom_x,
             KOKKOS_LAMBDA(IndexX const ix) {
                 electrostatic_potential(ix)

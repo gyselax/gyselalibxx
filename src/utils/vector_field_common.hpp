@@ -132,7 +132,7 @@ public:
     template <class FieldSrc>
     void deepcopy(FieldSrc const& src)
     {
-        ((ddc::deepcopy(this->get<DDims>(), src.template get<DDims>())), ...);
+        ((ddc::parallel_deepcopy(this->get<DDims>(), src.template get<DDims>())), ...);
     }
 
     template <class QueryTag>

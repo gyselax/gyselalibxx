@@ -85,7 +85,7 @@ TEST(CollisionsInter, CollisionsInter)
                     temperature_init(ddc::select<IDimSp>(ispx)),
                     fluid_velocity_init);
             auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
-            ddc::deepcopy(allfdistribu[ispx], finit_host);
+            ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
         });
 
 
@@ -105,7 +105,7 @@ TEST(CollisionsInter, CollisionsInter)
         for (int iter(0); iter < nbiter; iter++) {
             collisions(allfdistribu, deltat);
         }
-        ddc::deepcopy(allfdistribu_host, allfdistribu);
+        ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
         double error_L1(0);
         host_t<DFieldSpX> density_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));

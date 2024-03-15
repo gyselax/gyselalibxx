@@ -58,7 +58,6 @@ public:
                 evaluator(m_degree, inout_data, m_domain, m_ghost);
 
         ddc::for_each(
-                ddc::policies::serial_host,
                 coordinates.domain(),
                 KOKKOS_LAMBDA(ddc::DiscreteElement<DDim> const ix) {
                     inout_data(ix) = evaluator.evaluate(coordinates(ix));

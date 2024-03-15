@@ -124,8 +124,8 @@ public:
                         accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
         update(exec_space, y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
-            ddc::for_each(
-                    ddc::policies::policy(exec_space),
+            ddc::parallel_for_each(
+                    exec_space,
                     y.domain(),
                     KOKKOS_LAMBDA(Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
         });
@@ -190,16 +190,16 @@ public:
 
             // Calculation of step
             if constexpr (is_field_v<DerivChunk>) {
-                ddc::for_each(
-                        ddc::policies::policy(exec_space),
+                ddc::parallel_for_each(
+                        exec_space,
                         m_k_total.domain(),
                         KOKKOS_CLASS_LAMBDA(Index const i) {
                             // k_total = k1 + k_new
                             fill_k_total(i, m_k_total, m_k1(i) + m_k_new(i));
                         });
             } else {
-                ddc::for_each(
-                        ddc::policies::policy(exec_space),
+                ddc::parallel_for_each(
+                        exec_space,
                         m_k_total.domain(),
                         KOKKOS_CLASS_LAMBDA(Index const i) {
                             // k_total = k1 + k_new
@@ -246,15 +246,15 @@ public:
     {
         auto const dom = y_old.domain();
 
-        double norm_old = ddc::transform_reduce(
-                ddc::policies::policy(exec_space),
+        double norm_old = ddc::parallel_transform_reduce(
+                exec_space,
                 dom,
                 0.,
                 ddc::reducer::max<double>(),
                 KOKKOS_LAMBDA(Index const idx) { return norm_inf(y_old(idx)); });
 
-        double max_diff = ddc::transform_reduce(
-                ddc::policies::policy(exec_space),
+        double max_diff = ddc::parallel_transform_reduce(
+                exec_space,
                 dom,
                 0.,
                 ddc::reducer::max<double>(),
@@ -269,7 +269,7 @@ private:
         if constexpr (is_field_v<ValSpan>) {
             ddcHelper::deepcopy(copy_to, copy_from);
         } else {
-            ddc::deepcopy(copy_to, copy_from);
+            ddc::parallel_deepcopy(copy_to, copy_from);
         }
     }
 

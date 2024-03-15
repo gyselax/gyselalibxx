@@ -145,7 +145,7 @@ public:
                           ddcHelper::get<RDimX>(advection_field)(idx)
                                   = -ddcHelper::get<RDimY>(electric_field)(idx);
                       });
-                      ddc::deepcopy(
+                      ddc::parallel_deepcopy(
                               ddcHelper::get<RDimY>(advection_field),
                               ddcHelper::get<RDimX>(electric_field));
                   };

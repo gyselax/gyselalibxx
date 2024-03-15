@@ -45,8 +45,8 @@ DSpanSpXVx PredCorr::operator()(
         // the associated electric field
         m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
         // copies necessary to PDI
-        ddc::deepcopy(allfdistribu_host, allfdistribu);
-        ddc::deepcopy(electrostatic_potential_host, electrostatic_potential);
+        ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
+        ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
         ddc::PdiEvent("iteration")
                 .with("iter", iter)
                 .and_with("time_saved", iter_time)
@@ -54,7 +54,7 @@ DSpanSpXVx PredCorr::operator()(
                 .and_with("electrostatic_potential", electrostatic_potential_host);
 
         // copy fdistribu
-        ddc::deepcopy(allfdistribu_half_t, allfdistribu);
+        ddc::parallel_deepcopy(allfdistribu_half_t, allfdistribu);
 
         // predictor
         m_boltzmann_solver(allfdistribu_half_t, electric_field, dt / 2);
@@ -69,8 +69,8 @@ DSpanSpXVx PredCorr::operator()(
     double const final_time = time_start + iter * dt;
     m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
     //copies necessary to PDI
-    ddc::deepcopy(allfdistribu_host, allfdistribu);
-    ddc::deepcopy(electrostatic_potential_host, electrostatic_potential);
+    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
+    ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
     ddc::PdiEvent("last_iteration")
             .with("iter", iter)
             .and_with("time_saved", final_time)

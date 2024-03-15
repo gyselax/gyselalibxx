@@ -7,7 +7,7 @@ target_link_libraries(ddc_benchmark_deepcopy
 		DDC::DDC
 )
 
-if("${BUILD_SPLINES_KERNEL}")
+if("${DDC_BUILD_KERNELS_SPLINES}")
   add_executable(ddc_benchmark_splines splines.cpp)
   target_link_libraries(ddc_benchmark_splines
 	  PUBLIC

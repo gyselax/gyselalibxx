@@ -316,12 +316,12 @@ public:
         return m_values;
     }
 
-    KOKKOS_FUNCTION constexpr ElementType& operator[](size_t pos)
+    KOKKOS_FUNCTION constexpr ElementType& operator[](std::size_t pos)
     {
         return m_values[pos];
     }
 
-    KOKKOS_FUNCTION constexpr ElementType const& operator[](size_t pos) const
+    KOKKOS_FUNCTION constexpr ElementType const& operator[](std::size_t pos) const
     {
         return m_values[pos];
     }

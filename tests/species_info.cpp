@@ -28,7 +28,7 @@ TEST(SpeciesInfo, Ielec)
     FieldSp<double> masses(dom_sp);
     charges(my_ielec) = -1;
     charges(my_iion) = 1;
-    ddc::fill(masses, 1.);
+    ddc::parallel_fill(masses, 1.);
 
     // Initialization of the distribution function
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));

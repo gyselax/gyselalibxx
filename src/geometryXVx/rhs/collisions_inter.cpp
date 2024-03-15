@@ -43,9 +43,9 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
     auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
 
     //Moments computation
-    ddc::fill(density, 0.);
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_fill(density, 0.);
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             grid_sp_x,
             KOKKOS_LAMBDA(IndexSpX const ispx) {
                 IndexSp isp(ddc::select<IDimSp>(ispx));
@@ -67,7 +67,7 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
 
     //Collision frequencies, momentum and energy exchange terms
     DFieldSpX nustar_profile(grid_sp_x);
-    ddc::deepcopy(nustar_profile, m_nustar_profile);
+    ddc::parallel_deepcopy(nustar_profile, m_nustar_profile);
     DFieldSpX collfreq_ab(grid_sp_x);
     DFieldSpX momentum_exchange_ab_f(grid_sp_x);
     DFieldSpX energy_exchange_ab_f(grid_sp_x);
@@ -84,8 +84,8 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
 
     DFieldSpXVx fmaxwellian_f(allfdistribu.domain());
     auto fmaxwellian = fmaxwellian_f.span_view();
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 IndexSp isp(ddc::select<IDimSp>(ispxvx));
@@ -101,8 +101,8 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
             });
 
 
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 IndexSp isp(ddc::select<IDimSp>(ispxvx));

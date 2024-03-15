@@ -48,15 +48,15 @@ void FftPoissonSolver::operator()(
     //   in Fourier space as kx*kx*FFT(Phi)=FFT(rho)
 
     // First, 0 mode of Phi is set to 0 to avoid divergency. Note: to allow writing in the GPU memory, starting a device kernel is necessary which is performed by iterating on a 0D domain (single element).
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             ddc::DiscreteDomain<>(),
             KOKKOS_LAMBDA(ddc::DiscreteElement<>) {
                 intermediate_chunk(k_mesh.front()) = Kokkos::complex<double>(0.);
             });
 
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             k_mesh.remove_first(IVectFx(1)),
             KOKKOS_LAMBDA(IndexFx const ikx) {
                 intermediate_chunk(ikx)
@@ -70,8 +70,8 @@ void FftPoissonSolver::operator()(
     device_t<ddc::Chunk<Kokkos::complex<double>, IDomainFx>> fourier_efield_alloc(k_mesh);
     ddc::ChunkSpan fourier_efield = fourier_efield_alloc.span_view();
 
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             k_mesh,
             KOKKOS_LAMBDA(IndexFx const ikx) {
                 fourier_efield(ikx) = -imaginary_unit * coordinate(ikx) * intermediate_chunk(ikx);

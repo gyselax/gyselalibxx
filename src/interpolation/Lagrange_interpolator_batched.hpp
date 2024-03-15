@@ -60,8 +60,8 @@ public:
         auto inout_data_tmp = inout_data_tmp_alloc.span_view();
         auto batch_domain
                 = ddc::remove_dims_of(inout_data.domain(), inout_data.template domain<DDimI>());
-        ddc::for_each(
-                ddc::policies::parallel_device,
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
                 batch_domain,
                 KOKKOS_LAMBDA(typename decltype(batch_domain)::discrete_element_type const i) {
                     Lagrange<Kokkos::DefaultExecutionSpace, DDimI, BcMin, BcMax> evaluator(

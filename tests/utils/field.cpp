@@ -115,37 +115,6 @@ TEST(VectorField1DTest, LayoutType)
 // \}
 // Functions implemented in VectorField 1D (and free functions specific to it) \{
 
-TEST(VectorField0DTest, VectorFieldSpanConversionConstructor)
-{
-    Coord constexpr factor(1.391, 2.444);
-    VectorField0D<double> chunk(dom_0d);
-    ddcHelper::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
-    ddcHelper::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
-
-    VectorField0D<double> chunk2(chunk.span_view());
-    EXPECT_EQ(chunk2.domain(), dom_0d);
-    EXPECT_DOUBLE_EQ(factor.get<Tag1>(), chunk2().get<Tag1>());
-    EXPECT_DOUBLE_EQ(factor.get<Tag2>(), chunk2().get<Tag2>());
-}
-
-TEST(VectorField1DTest, VectorFieldSpanConversionConstructor)
-{
-    Coord constexpr factor(1.391, 2.444);
-    VectorFieldX<double> chunk(dom_x);
-    for (auto&& ix : chunk.domain()) {
-        Coord val = double(ix.uid()) * factor;
-        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
-    }
-
-    VectorFieldX<double> chunk2(chunk.span_view());
-    EXPECT_EQ(chunk2.domain(), dom_x);
-    for (auto&& ix : chunk2.domain()) {
-        EXPECT_DOUBLE_EQ(ddc::get<Tag1>(factor) * ix.uid(), ddc::get<Tag1>(chunk2(ix)));
-        EXPECT_DOUBLE_EQ(ddc::get<Tag2>(factor) * ix.uid(), ddc::get<Tag2>(chunk2(ix)));
-    }
-}
-
 TEST(VectorField0DTest, MoveConstructor)
 {
     Coord constexpr factor(1.391, 2.444);

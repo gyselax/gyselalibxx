@@ -25,7 +25,7 @@ AlwaysBreakBeforeMultilineStrings:              false
 AlwaysBreakTemplateDeclarations:                Yes
 BinPackArguments:                               false
 BinPackParameters:                              false
-BraceWrapping:                                  
+BraceWrapping:
   AfterCaseLabel:                               false
   AfterClass:                                   true
   AfterControlStatement:                        false # Never !!!requires clang 10

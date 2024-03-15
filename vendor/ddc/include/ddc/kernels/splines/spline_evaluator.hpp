@@ -160,8 +160,8 @@ public:
                     spline_coef) const
     {
         interpolation_domain_type const interpolation_domain(spline_eval.domain());
-        ddc::for_each(
-                ddc::policies::policy(exec_space()),
+        ddc::parallel_for_each(
+                exec_space(),
                 batch_domain(),
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     const auto spline_eval_1D = spline_eval[j];
@@ -194,8 +194,8 @@ public:
                     spline_coef) const
     {
         interpolation_domain_type const interpolation_domain(spline_eval.domain());
-        ddc::for_each(
-                ddc::policies::policy(exec_space()),
+        ddc::parallel_for_each(
+                exec_space(),
                 batch_domain(),
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     const auto spline_eval_1D = spline_eval[j];
@@ -222,8 +222,8 @@ public:
                 Kokkos::RangePolicy<exec_space>(0, 1),
                 KOKKOS_LAMBDA(int) { ddc::discrete_space<bsplines_type>().integrals(values); });
 
-        ddc::for_each(
-                ddc::policies::policy(exec_space()),
+        ddc::parallel_for_each(
+                exec_space(),
                 batch_domain(),
                 KOKKOS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     integrals(j) = 0;

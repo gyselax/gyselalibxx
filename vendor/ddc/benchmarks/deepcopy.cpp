@@ -63,7 +63,7 @@ static void deepcopy_1d(benchmark::State& state)
     ChunkSpanX<double> src(src_data.data(), dom);
     ChunkSpanX<double> dst(dst_data.data(), dom);
     for (auto _ : state) {
-        ddc::deepcopy(dst, src);
+        ddc::parallel_deepcopy(dst, src);
     }
     state.SetBytesProcessed(int64_t(state.iterations()) * int64_t(state.range(0) * sizeof(double)));
 }
@@ -93,7 +93,7 @@ static void deepcopy_2d(benchmark::State& state)
     ChunkSpanXY<double> src(src_data.data(), dom);
     ChunkSpanXY<double> dst(dst_data.data(), dom);
     for (auto _ : state) {
-        ddc::deepcopy(dst, src);
+        ddc::parallel_deepcopy(dst, src);
     }
     state.SetBytesProcessed(
             int64_t(state.iterations())
@@ -111,7 +111,7 @@ static void deepcopy_subchunk_2d(benchmark::State& state)
         for (DElemX i : ddc::select<DDimX>(dom)) {
             auto&& dst_i = dst[i];
             auto&& src_i = src[i];
-            ddc::deepcopy(dst_i, src_i);
+            ddc::parallel_deepcopy(dst_i, src_i);
         }
     }
     state.SetBytesProcessed(
@@ -140,7 +140,8 @@ int main(int argc, char** argv)
         return 1;
     }
     {
-        ddc::ScopeGuard const guard;
+        Kokkos::ScopeGuard const kokkos_scope(argc, argv);
+        ddc::ScopeGuard const ddc_scope(argc, argv);
         ::benchmark::RunSpecifiedBenchmarks();
     }
     ::benchmark::Shutdown();

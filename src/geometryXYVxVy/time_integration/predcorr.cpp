@@ -46,7 +46,7 @@ DSpanSpXYVxVy PredCorr::operator()(
                 .and_with("electrostatic_potential", electrostatic_potential);
 
         // copy fdistribu
-        ddc::deepcopy(allfdistribu_half_t, allfdistribu);
+        ddc::parallel_deepcopy(allfdistribu_half_t, allfdistribu);
 
         // predictor
         m_vlasov_solver(allfdistribu_half_t, electric_field_x, electric_field_y, dt / 2);

@@ -103,7 +103,7 @@ TEST(KrookSource, Adaptive)
                     compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
         }
         auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
-        ddc::deepcopy(allfdistribu[ispx], finit_host);
+        ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
     });
 
     // error with a given deltat
@@ -135,12 +135,12 @@ TEST(KrookSource, Adaptive)
                     compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
         }
         auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
-        ddc::deepcopy(allfdistribu[ispx], finit_host);
+        ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
     });
 
     // error with a deltat 10 times smaller
     rhs_krook(allfdistribu, 0.01);
-    ddc::deepcopy(allfdistribu_host, allfdistribu);
+    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
         densities(ispx) = integrate_v(allfdistribu_host[ispx]);
     });
@@ -235,7 +235,7 @@ TEST(KrookSource, Constant)
     auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
     DFieldSpXVx allfdistribu(mesh);
     ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
-        ddc::deepcopy(allfdistribu[ispx], finit_host);
+        ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
     });
 
     int const nbsteps = 100;

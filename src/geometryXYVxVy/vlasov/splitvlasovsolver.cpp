@@ -40,6 +40,6 @@ DSpanSpXYVxVy SplitVlasovSolver::operator()(
     m_advec_y(allfdistribu, dt / 2);
     m_advec_x(allfdistribu, dt / 2);
 
-    ddc::deepcopy(allfdistribu_host, allfdistribu);
+    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     return allfdistribu_host;
 }

@@ -396,7 +396,7 @@ TEST(Chunk1DTest, Deepcopy)
         chunk(ix) = 1.001 * ix.uid();
     }
     ChunkX<double> chunk2(chunk.domain());
-    ddc::deepcopy(chunk2, chunk);
+    ddc::parallel_deepcopy(chunk2, chunk);
     for (auto&& ix : chunk.domain()) {
         // we expect exact equality, not EXPECT_DOUBLE_EQ: these are copy
         EXPECT_EQ(chunk2(ix), chunk(ix));
@@ -583,7 +583,7 @@ TEST(Chunk2DTest, Deepcopy)
         }
     }
     ChunkXY<double> chunk2(chunk.domain());
-    ddc::deepcopy(chunk2, chunk);
+    ddc::parallel_deepcopy(chunk2, chunk);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
@@ -603,7 +603,7 @@ TEST(Chunk2DTest, DeepcopyReordered)
     ChunkYX<double> chunk2(ddc::select<DDimY, DDimX>(chunk.domain()));
     ddc::ChunkSpan<double, DDomXY, std::experimental::layout_left> const
             chunk2_view(chunk2.data_handle(), chunk.domain());
-    ddc::deepcopy(chunk2_view, chunk);
+    ddc::parallel_deepcopy(chunk2_view, chunk);
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
@@ -635,7 +635,7 @@ TEST(Chunk3DTest, AccessFromDiscreteElements)
 TEST(Chunk2DTest, Mirror)
 {
     ChunkXY<double> chunk(dom_x_y);
-    ddc::fill(chunk, 1.4);
+    ddc::parallel_fill(chunk, 1.4);
     auto const chunk2 = ddc::create_mirror_and_copy(chunk.span_cview());
     for (auto&& ix : chunk.domain<DDimX>()) {
         for (auto&& iy : chunk.domain<DDimY>()) {

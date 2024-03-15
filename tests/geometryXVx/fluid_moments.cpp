@@ -55,7 +55,7 @@ TEST(Physics, FluidMoments)
     charges(my_ielec) = -1;
     charges(my_iion) = 1;
     host_t<DFieldSp> masses(dom_sp);
-    ddc::fill(masses, 1);
+    ddc::parallel_fill(masses, 1);
 
     // Initialization of the distribution function as a maxwellian
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
@@ -93,7 +93,7 @@ TEST(Physics, FluidMoments)
                 mean_velocity_init(ispx));
 
         auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
-        ddc::deepcopy(allfdistribu[ispx], finit_host);
+        ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
     });
 
     // density and temperature

@@ -44,8 +44,8 @@ void compute_Dcoll(
         DViewSpX density,
         DViewSpX temperature)
 {
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             Dcoll.domain(),
             KOKKOS_LAMBDA(ddc::DiscreteElement<IDimSp, IDimX, IDimension> const ispxdimx) {
                 double const vT(
@@ -92,8 +92,8 @@ void compute_dvDcoll(
         DViewSpX density,
         DViewSpX temperature)
 {
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             dvDcoll.domain(),
             KOKKOS_LAMBDA(ddc::DiscreteElement<IDimSp, IDimX, IDimension> const ispxdimx) {
                 double const vT(
@@ -185,8 +185,8 @@ void compute_Vcoll_Tcoll(
     auto I3mean_integrand = I3mean_integrand_alloc.span_view();
     auto I4mean_integrand = I4mean_integrand_alloc.span_view();
 
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
                 ddc::DiscreteElement<IDimension> const idimx(ddc::select<IDimVx>(ispxvx).uid() + 1);
@@ -214,14 +214,14 @@ void compute_Vcoll_Tcoll(
     auto I2mean = I2mean_alloc.span_view();
     auto I3mean = I3mean_alloc.span_view();
     auto I4mean = I4mean_alloc.span_view();
-    ddc::fill(I0mean, 0.);
-    ddc::fill(I1mean, 0.);
-    ddc::fill(I2mean, 0.);
-    ddc::fill(I3mean, 0.);
-    ddc::fill(I4mean, 0.);
+    ddc::parallel_fill(I0mean, 0.);
+    ddc::parallel_fill(I1mean, 0.);
+    ddc::parallel_fill(I2mean, 0.);
+    ddc::parallel_fill(I3mean, 0.);
+    ddc::parallel_fill(I4mean, 0.);
 
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             grid_sp_x,
             KOKKOS_LAMBDA(IndexSpX const ispx) {
                 for (IndexVx const ivx : allfdistribu.domain<IDimVx>()) {
@@ -263,8 +263,8 @@ void compute_Nucoll(
         DViewSpX Vcoll,
         DViewSpX Tcoll)
 {
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             Dcoll.domain(),
             KOKKOS_LAMBDA(ddc::DiscreteElement<IDimSp, IDimX, IDimension> const ispxdimx) {
                 double const coordv(ddc::coordinate(ddc::select<IDimension>(ispxdimx)));

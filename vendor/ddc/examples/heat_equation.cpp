@@ -64,7 +64,6 @@ void display(double time, ChunkType temp)
     std::cout << "  * temperature[y:"
               << ddc::get_domain<DDimY>(temp).size() / 2 << "] = {";
     ddc::for_each(
-            ddc::policies::serial_host,
             ddc::get_domain<DDimX>(temp),
             [=](ddc::DiscreteElement<DDimX> const ix) {
                 std::cout << std::setw(6) << temp_slice(ix);
@@ -88,7 +87,8 @@ int main(int argc, char** argv)
     auto pdi_conf = PC_parse_string("");
     PDI_init(pdi_conf);
 #endif
-    ddc::ScopeGuard scope(argc, argv);
+    Kokkos::ScopeGuard const kokkos_scope(argc, argv);
+    ddc::ScopeGuard const ddc_scope(argc, argv);
 
     // some parameters that would typically be read from some form of
     // configuration file in a more realistic code
@@ -237,8 +237,7 @@ int main(int argc, char** argv)
     ddc::ChunkSpan const ghosted_initial_temp
             = ghosted_last_temp.span_view();
     // Initialize the temperature on the main domain
-    ddc::for_each(
-            ddc::policies::parallel_device,
+    ddc::parallel_for_each(
             ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
             KOKKOS_LAMBDA(ddc::DiscreteElement<DDimX, DDimY> const ixy) {
                 double const x
@@ -260,7 +259,7 @@ int main(int argc, char** argv)
 
     //! [initial output]
     // display the initial data
-    ddc::deepcopy(ghosted_temp, ghosted_last_temp);
+    ddc::parallel_deepcopy(ghosted_temp, ghosted_last_temp);
     display(ddc::coordinate(time_domain.front()),
             ghosted_temp[x_domain][y_domain]);
     // time of the iteration where the last output happened
@@ -274,16 +273,16 @@ int main(int argc, char** argv)
 
         //! [boundary conditions]
         // Periodic boundary conditions
-        ddc::deepcopy(
+        ddc::parallel_deepcopy(
                 ghosted_last_temp[x_pre_ghost][y_domain],
                 ghosted_last_temp[y_domain][x_domain_end]);
-        ddc::deepcopy(
+        ddc::parallel_deepcopy(
                 ghosted_last_temp[y_domain][x_post_ghost],
                 ghosted_last_temp[y_domain][x_domain_begin]);
-        ddc::deepcopy(
+        ddc::parallel_deepcopy(
                 ghosted_last_temp[x_domain][y_pre_ghost],
                 ghosted_last_temp[x_domain][y_domain_end]);
-        ddc::deepcopy(
+        ddc::parallel_deepcopy(
                 ghosted_last_temp[x_domain][y_post_ghost],
                 ghosted_last_temp[x_domain][y_domain_begin]);
         //! [boundary conditions]
@@ -300,8 +299,7 @@ int main(int argc, char** argv)
 
         //! [numerical scheme]
         // Stencil computation on the main domain
-        ddc::for_each(
-                ddc::policies::parallel_device,
+        ddc::parallel_for_each(
                 next_temp.domain(),
                 KOKKOS_LAMBDA(
                         ddc::DiscreteElement<DDimX, DDimY> const ixy) {
@@ -334,7 +332,7 @@ int main(int argc, char** argv)
         //! [output]
         if (iter - last_output_iter >= t_output_period) {
             last_output_iter = iter;
-            ddc::deepcopy(ghosted_temp, ghosted_last_temp);
+            ddc::parallel_deepcopy(ghosted_temp, ghosted_last_temp);
             display(ddc::coordinate(iter),
                     ghosted_temp[x_domain][y_domain]);
         }
@@ -348,7 +346,7 @@ int main(int argc, char** argv)
 
     //! [final output]
     if (last_output_iter < time_domain.back()) {
-        ddc::deepcopy(ghosted_temp, ghosted_last_temp);
+        ddc::parallel_deepcopy(ghosted_temp, ghosted_last_temp);
         display(ddc::coordinate(time_domain.back()),
                 ghosted_temp[x_domain][y_domain]);
     }

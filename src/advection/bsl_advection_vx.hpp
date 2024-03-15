@@ -91,18 +91,18 @@ public:
                     });
 
                     // copy the slice in contiguous memory
-                    ddc::deepcopy(contiguous_slice, allfdistribu_host[ic][isp][ix]);
+                    ddc::parallel_deepcopy(contiguous_slice, allfdistribu_host[ic][isp][ix]);
 
                     // build a spline representation of the data
                     interpolator_v(contiguous_slice, feet_coords.span_cview());
 
                     // copy back
-                    ddc::deepcopy(allfdistribu_host[ic][isp][ix], contiguous_slice);
+                    ddc::parallel_deepcopy(allfdistribu_host[ic][isp][ix], contiguous_slice);
                 });
             });
         });
 
-        ddc::deepcopy(allfdistribu, allfdistribu_host);
+        ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
         Kokkos::Profiling::popRegion();
         return allfdistribu;
     }

@@ -5,16 +5,12 @@
 #include <optional>
 #include <string>
 
-#include <Kokkos_Core.hpp>
-
 #include "discrete_space.hpp"
 
 namespace ddc {
 
 class ScopeGuard
 {
-    Kokkos::ScopeGuard m_kokkos_scope_guard;
-
     void discretization_store_initialization() const
     {
         detail::g_discretization_store
@@ -27,7 +23,7 @@ public:
         discretization_store_initialization();
     }
 
-    ScopeGuard(int argc, char**& argv) : m_kokkos_scope_guard(argc, argv)
+    ScopeGuard([[maybe_unused]] int argc, [[maybe_unused]] char**& argv)
     {
         discretization_store_initialization();
     }
