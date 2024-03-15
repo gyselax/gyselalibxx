@@ -163,9 +163,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae23926389df672431636ef26e20f7780"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#ae23926389df672431636ef26e20f7780">VectorField</a> (<a class="el" href="classVectorField.html">VectorField</a> &amp;&amp;other)=default</td></tr>
 <tr class="memdesc:ae23926389df672431636ef26e20f7780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a> by move.  <a href="classVectorField.html#ae23926389df672431636ef26e20f7780">More...</a><br /></td></tr>
 <tr class="separator:ae23926389df672431636ef26e20f7780"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31bf11f64d085382acf099a2454fa9bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorField.html">VectorField</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a31bf11f64d085382acf099a2454fa9bf">operator=</a> (<a class="el" href="classVectorField.html">VectorField</a> const &amp;other)=default</td></tr>
-<tr class="memdesc:a31bf11f64d085382acf099a2454fa9bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns a new value to this <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>, yields a new view to the same data.  <a href="classVectorField.html#a31bf11f64d085382acf099a2454fa9bf">More...</a><br /></td></tr>
-<tr class="separator:a31bf11f64d085382acf099a2454fa9bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae367dbe4c6643fb0fed766b1157b85a0"><td class="memItemLeft" align="right" valign="top"><a id="ae367dbe4c6643fb0fed766b1157b85a0"></a>
+<a class="el" href="classVectorField.html">VectorField</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#ae367dbe4c6643fb0fed766b1157b85a0">operator=</a> (<a class="el" href="classVectorField.html">VectorField</a> const &amp;other)=delete</td></tr>
+<tr class="memdesc:ae367dbe4c6643fb0fed766b1157b85a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deleted: use deepcopy instead. <br /></td></tr>
+<tr class="separator:ae367dbe4c6643fb0fed766b1157b85a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b839128727925cdffed6fbfca8da63e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorField.html">VectorField</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a4b839128727925cdffed6fbfca8da63e">operator=</a> (<a class="el" href="classVectorField.html">VectorField</a> &amp;&amp;other)=default</td></tr>
 <tr class="memdesc:a4b839128727925cdffed6fbfca8da63e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns a new value to this <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>.  <a href="classVectorField.html#a4b839128727925cdffed6fbfca8da63e">More...</a><br /></td></tr>
 <tr class="separator:a4b839128727925cdffed6fbfca8da63e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -295,45 +296,8 @@ template&lt;class ElementType , class Domain , class NDTag , class Allocator &gt
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a31bf11f64d085382acf099a2454fa9bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31bf11f64d085382acf099a2454fa9bf">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ElementType , class Domain , class NDTag , class Allocator &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classVectorField.html">VectorField</a>&amp; <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, Domain, NDTag, Allocator &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, Domain, NDTag, Allocator &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Copy-assigns a new value to this <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>, yields a new view to the same data. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">other</td><td>the <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> to copy </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>*this </dd></dl>
-
-</div>
-</div>
 <a id="a4b839128727925cdffed6fbfca8da63e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b839128727925cdffed6fbfca8da63e">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b839128727925cdffed6fbfca8da63e">&#9670;&nbsp;</a></span>operator=()</h2>
 
 <div class="memitem">
 <div class="memproto">

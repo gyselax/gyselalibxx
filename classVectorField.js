@@ -11,7 +11,7 @@ var classVectorField =
     [ "VectorField", "classVectorField.html#a4838971fca188dc404dc50d8af9ef3d9", null ],
     [ "VectorField", "classVectorField.html#ae23926389df672431636ef26e20f7780", null ],
     [ "~VectorField", "classVectorField.html#a0a1908a2429ba38ef8d891567cbc22c9", null ],
-    [ "operator=", "classVectorField.html#a31bf11f64d085382acf099a2454fa9bf", null ],
+    [ "operator=", "classVectorField.html#ae367dbe4c6643fb0fed766b1157b85a0", null ],
     [ "operator=", "classVectorField.html#a4b839128727925cdffed6fbfca8da63e", null ],
     [ "span_cview", "classVectorField.html#ae5421322e080a9f2ae63ff7796da6ed3", null ],
     [ "span_view", "classVectorField.html#acb9821e3a1405005d7251bfbfea66f89", null ],
