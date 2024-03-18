@@ -4,6 +4,7 @@
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/fft.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <sll/bsplines_non_uniform.hpp>
 #include <sll/bsplines_uniform.hpp>
@@ -95,11 +96,23 @@ using BSplinesVy = std::conditional_t<
         BsplineOnUniformCellsVy,
         UniformBSplines<RDimVy, BSDegreeVy>,
         NonUniformBSplines<RDimVy, BSDegreeVy>>;
+using DDCBSplinesVx = std::conditional_t<
+        BsplineOnUniformCellsVx,
+        ddc::UniformBSplines<RDimVx, BSDegreeVx>,
+        ddc::NonUniformBSplines<RDimVx, BSDegreeVx>>;
+using DDCBSplinesVy = std::conditional_t<
+        BsplineOnUniformCellsVy,
+        ddc::UniformBSplines<RDimVy, BSDegreeVy>,
+        ddc::NonUniformBSplines<RDimVy, BSDegreeVy>>;
 
 BoundCond constexpr SplineXBoundary = BoundCond::PERIODIC;
 BoundCond constexpr SplineYBoundary = BoundCond::PERIODIC;
 BoundCond constexpr SplineVxBoundary = BoundCond::HERMITE;
 BoundCond constexpr SplineVyBoundary = BoundCond::HERMITE;
+ddc::BoundCond constexpr DDCSplineXBoundary = ddc::BoundCond::PERIODIC;
+ddc::BoundCond constexpr DDCSplineYBoundary = ddc::BoundCond::PERIODIC;
+ddc::BoundCond constexpr DDCSplineVxBoundary = ddc::BoundCond::HERMITE;
+ddc::BoundCond constexpr DDCSplineVyBoundary = ddc::BoundCond::HERMITE;
 
 bool constexpr UniformMeshX = is_spline_interpolation_mesh_uniform(
         BsplineOnUniformCellsX,
@@ -160,6 +173,25 @@ using SplineVyBuilder = SplineBuilder<BSplinesVy, IDimVy, SplineVyBoundary, Spli
 using SplineVxVyBuilder = SplineBuilder2D<SplineVxBuilder, SplineVyBuilder>;
 using SplineXYEvaluator = SplineEvaluator2D<BSplinesX, BSplinesY>;
 using SplineVxVyEvaluator = SplineEvaluator2D<BSplinesVx, BSplinesVy>;
+
+using SplineVxBuilder_1d = ddc::SplineBuilder<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        DDCBSplinesVx,
+        IDimVx,
+        DDCSplineVxBoundary,
+        DDCSplineVxBoundary,
+        ddc::SplineSolver::GINKGO,
+        IDimVx>;
+using SplineVyBuilder_1d = ddc::SplineBuilder<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        DDCBSplinesVy,
+        IDimVy,
+        DDCSplineVyBoundary,
+        DDCSplineVyBoundary,
+        ddc::SplineSolver::GINKGO,
+        IDimVy>;
 
 using BSDomainX = ddc::DiscreteDomain<BSplinesX>;
 using BSDomainY = ddc::DiscreteDomain<BSplinesY>;
@@ -288,6 +320,10 @@ using ViewVx = ddc::ChunkSpan<ElementType const, IDomainVx>;
 
 template <class ElementType>
 using ViewVy = ddc::ChunkSpan<ElementType const, IDomainVy>;
+
+template <class ElementType>
+using ViewVxVy = ddc::ChunkSpan<ElementType const, IDomainVxVy>;
+using DViewVxVy = ViewVxVy<double>;
 
 template <class ElementType>
 using ViewSpVxVy = ddc::ChunkSpan<ElementType const, IDomainSpVxVy>;

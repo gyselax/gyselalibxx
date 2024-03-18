@@ -15,6 +15,7 @@ target_link_libraries(landau4d_fft
         gslx::advection
         gslx::vlasov_xyvxvy
         gslx::poisson_xy
+        gslx::quadrature
         gslx::time_integration_xyvxvy
         gslx::utils
 )

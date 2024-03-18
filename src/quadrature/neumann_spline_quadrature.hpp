@@ -10,6 +10,7 @@
 #include <cassert>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <sll/matrix.hpp>
 

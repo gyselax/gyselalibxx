@@ -16,7 +16,7 @@ is solved.
 
 ## Charge Density
 
-The charge density is calculated by integrating the distribution function. Currently this is done by creating an intermediate representation of a spline and integrating that representation. This is costly and should be replaced by a ChargeDensityCalculator which uses a spline quadrature.
+The charge density is calculated by integrating the distribution function.
 
 ## Poisson Solver
 

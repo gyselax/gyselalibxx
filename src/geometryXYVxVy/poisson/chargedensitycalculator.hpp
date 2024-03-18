@@ -4,51 +4,37 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
+#include <ddc_helper.hpp>
+#include <geometry.hpp>
+
 #include "ichargedensitycalculator.hpp"
 
 /**
- * @brief A class which computes charges density.
+ * @brief A class which computes charges density with Kokkos.
  *
  * A class which computes charges density by solving the equation:
- * @f$ \int_{v} q_s f_s(x,v) dv @f$
+ * @f$ \int_{vx} \int_{vy} q_s f_s(x,y,vx,vy) dvx dvy @f$
  * where @f$ q_s @f$ is the charge of the species @f$ s @f$ and
- * @f$ f_s(x,v) @f$ is the distribution function.
- *
- * This equation is solved using an intermediate spline representation.
+ * @f$ f_s(x,y,vx,vy) @f$ is the distribution function.
  */
 class ChargeDensityCalculator : public IChargeDensityCalculator
 {
-    SplineVxVyBuilder const& m_spline_vxvy_builder;
-
-    SplineVxVyEvaluator m_spline_vxvy_evaluator;
-
-    int m_nbc_Vx;
-    int m_nbc_Vy;
-    int m_interp_dom_size_Vx;
-    int m_interp_dom_size_Vy;
+private:
+    using ChunkViewType = device_t<DViewVxVy>;
+    ChunkViewType m_coefficients;
 
 public:
     /**
-     * Constructor of SplineChargeDensityCalculator
-     *
-     * @param spline_vxvy_builder A spline builder which calculates the coefficients of a spline representation.
-     * @param spline_vxvy_evaluator A spline evaluator which provides the value of a spline representation from its coefficients.
+     * @brief Create a ChargeDensityCalculator object.
+     * @param[in] coeffs
+     *            The coefficients of the quadrature.
      */
-    ChargeDensityCalculator(
-            SplineVxVyBuilder const& spline_vxvy_builder,
-            SplineVxVyEvaluator const& spline_vxvy_evaluator);
+    explicit ChargeDensityCalculator(const ChunkViewType& coeffs);
 
     /**
-     * Calculate the charge density rho from the distribution function.
-     *
-     * Calculate the charge density by calculating the spline representation of slices
-     * of the distribution function at each spatial point along the velocity direction.
-     * This representation is then integrated and multiplied by the charge to find the
-     * charge density.
-     *
-     * @param[out] rho The charge density.
-     * @param[in] allfdistribu The distribution function.
+     * @brief Computes the charge density rho from the distribution function.
+     * @param[in, out] rho
+     * @param[in] allfdistribu 
      */
     void operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu) const final;
 };

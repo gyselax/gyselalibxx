@@ -2,26 +2,22 @@
 
 #include <ddc/ddc.hpp>
 
+#include <ddc_helper.hpp>
+#include <species_info.hpp>
+
 #include "chargedensitycalculator.hpp"
 
-ChargeDensityCalculator::ChargeDensityCalculator(
-        SplineVxVyBuilder const& spline_vxvy_builder,
-        SplineVxVyEvaluator const& spline_vxvy_evaluator)
-    : m_spline_vxvy_builder(spline_vxvy_builder)
-    , m_spline_vxvy_evaluator(spline_vxvy_evaluator)
-    , m_nbc_Vx(BSplinesVx::degree() / 2)
-    , m_nbc_Vy(BSplinesVy::degree() / 2)
-    , m_interp_dom_size_Vx(m_spline_vxvy_builder.interpolation_domain1().size())
-    , m_interp_dom_size_Vy(m_spline_vxvy_builder.interpolation_domain2().size())
+ChargeDensityCalculator::ChargeDensityCalculator(const ChunkViewType& coeffs)
+    : m_coefficients(coeffs)
 {
 }
 
-void ChargeDensityCalculator::operator()(DSpanXY const rho, DViewSpXYVxVy const allfdistribu) const
+void ChargeDensityCalculator::operator()(DSpanXY rho_host, DViewSpXYVxVy allfdistribu_host) const
 {
+    auto rho = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), rho_host);
+    auto allfdistribu
+            = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
     Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
-    DFieldVxVy f_vxvy_slice(allfdistribu.domain<IDimVx, IDimVy>());
-    ddc::Chunk<double, BSDomainVxVy> vxvy_spline_coef(m_spline_vxvy_builder.spline_domain());
-
     IndexSp const last_kin_species = allfdistribu.domain<IDimSp>().back();
     IndexSp const last_species = ddc::discrete_space<IDimSp>().charges().domain().back();
     double chargedens_adiabspecies = 0.;
@@ -29,47 +25,64 @@ void ChargeDensityCalculator::operator()(DSpanXY const rho, DViewSpXYVxVy const 
         chargedens_adiabspecies = double(charge(last_species));
     }
 
-    // Compute the derivatives at boundaries
-    // TODO: Compute the derivatives instead of imposing value = 0 (see 2d_spline_builder.cpp)
-    std::vector<double> deriv_vxmin_data_Vx(m_nbc_Vx * m_interp_dom_size_Vy, 0.);
-    std::vector<double> deriv_vxmax_data_Vx(m_nbc_Vx * m_interp_dom_size_Vy, 0.);
-    DSpan2D deriv_vxmin(deriv_vxmin_data_Vx.data(), m_interp_dom_size_Vy, m_nbc_Vx);
-    DSpan2D deriv_vxmax(deriv_vxmax_data_Vx.data(), m_interp_dom_size_Vy, m_nbc_Vx);
+    // reduction over species and velocity space
+    Kokkos::View<const double*****, Kokkos::LayoutRight> const allfdistribu_view
+            = allfdistribu.allocation_kokkos_view();
+    Kokkos::View<double**, Kokkos::LayoutRight> const rho_view = rho.allocation_kokkos_view();
 
-    std::vector<double> deriv_vymin_data_Vy(m_nbc_Vy * m_interp_dom_size_Vx, 0.);
-    std::vector<double> deriv_vymax_data_Vy(m_nbc_Vy * m_interp_dom_size_Vx, 0.);
-    DSpan2D deriv_vymin(deriv_vymin_data_Vy.data(), m_interp_dom_size_Vx, m_nbc_Vy);
-    DSpan2D deriv_vymax(deriv_vymax_data_Vy.data(), m_interp_dom_size_Vx, m_nbc_Vy);
+    ViewSp<int> const charges_host = ddc::host_discrete_space<IDimSp>().charges();
+    ViewSp<int> const kinetic_charges_host = charges_host[allfdistribu.domain<IDimSp>()];
 
-    std::vector<double> mixed_deriv_vxmin_vymin_data(m_nbc_Vx * m_nbc_Vy);
-    std::vector<double> mixed_deriv_vxmin_vymax_data(m_nbc_Vx * m_nbc_Vy);
-    std::vector<double> mixed_deriv_vxmax_vymin_data(m_nbc_Vx * m_nbc_Vy);
-    std::vector<double> mixed_deriv_vxmax_vymax_data(m_nbc_Vx * m_nbc_Vy);
-    DSpan2D mixed_deriv_vxmin_vymin(mixed_deriv_vxmin_vymin_data.data(), m_nbc_Vx, m_nbc_Vy);
-    DSpan2D mixed_deriv_vxmin_vymax(mixed_deriv_vxmin_vymax_data.data(), m_nbc_Vx, m_nbc_Vy);
-    DSpan2D mixed_deriv_vxmax_vymin(mixed_deriv_vxmax_vymin_data.data(), m_nbc_Vx, m_nbc_Vy);
-    DSpan2D mixed_deriv_vxmax_vymax(mixed_deriv_vxmax_vymax_data.data(), m_nbc_Vx, m_nbc_Vy);
+    auto charges_alloc
+            = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), kinetic_charges_host);
 
-    ddc::for_each(rho.domain(), [&](IndexXY const ixy) {
-        IndexX const ix = ddc::select<IDimX>(ixy);
-        IndexY const iy = ddc::select<IDimY>(ixy);
-        rho(ix, iy) = chargedens_adiabspecies;
-        ddc::for_each(ddc::get_domain<IDimSp>(allfdistribu), [&](IndexSp const isp) {
-            ddc::parallel_deepcopy(f_vxvy_slice, allfdistribu[isp][ix][iy]);
-            m_spline_vxvy_builder(
-                    vxvy_spline_coef.span_view(),
-                    f_vxvy_slice.span_cview(),
-                    deriv_vxmin,
-                    deriv_vxmax,
-                    deriv_vymin,
-                    deriv_vymax,
-                    mixed_deriv_vxmin_vymin,
-                    mixed_deriv_vxmin_vymax,
-                    mixed_deriv_vxmax_vymin,
-                    mixed_deriv_vxmax_vymax);
-            rho(ix, iy) += charge(isp)
-                           * m_spline_vxvy_evaluator.integrate(vxvy_spline_coef.span_cview());
-        });
-    });
+    Kokkos::View<const int*, Kokkos::LayoutRight> const charges
+            = charges_alloc.span_cview().allocation_kokkos_view();
+
+    Kokkos::View<const double**, Kokkos::LayoutRight> const coef_view
+            = m_coefficients.allocation_kokkos_view();
+
+    std::size_t const nsp = allfdistribu_view.extent(0);
+    std::size_t const nx = allfdistribu_view.extent(1);
+    std::size_t const ny = allfdistribu_view.extent(2);
+    std::size_t const nvx = allfdistribu_view.extent(3);
+    std::size_t const nvy = allfdistribu_view.extent(4);
+
+    Kokkos::parallel_for(
+            Kokkos::TeamPolicy<>(nx * ny, Kokkos::AUTO),
+            KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                const int idx = team.league_rank();
+                const int ix = idx / ny;
+                const int iy = idx % ny;
+                double teamSum = 0;
+                Kokkos::parallel_reduce(
+                        Kokkos::TeamThreadRange(team, nsp * nvx * nvy),
+                        [&](int thread_idx, double& sum) {
+                            int isp = thread_idx / (nvx * nvy);
+                            thread_idx -= isp * (nvx * nvy);
+                            int ivx = thread_idx / nvy;
+                            int ivy = thread_idx % nvy;
+                            sum += static_cast<double>(charges(isp)) * coef_view(ivx, ivy)
+                                   * allfdistribu_view(isp, ix, iy, ivx, ivy);
+                        },
+                        teamSum);
+                /*
+                 * The code below is cleaner but currently only works on kokkos's develop branch (as of 15/03/24)
+                 * The associated issue is : https://github.com/kokkos/kokkos/issues/6530
+                 * After the next release of Kokkos this code should be uncommented to replace the more
+                 * verbose version above.
+                 *
+                Kokkos::parallel_reduce(
+                        Kokkos::TeamThreadMDRange(team, nsp, nvx, nvy),
+                        [&](int isp, int ivx, int ivy, double& sum) {
+                            sum += static_cast<double>(charges(isp)) * coef_view(ivx, ivy)
+                                   * allfdistribu_view(isp, ix, iy, ivx, ivy);
+                        },
+                        teamSum);
+                */
+                rho_view(ix, iy) = chargedens_adiabspecies + teamSum;
+            });
     Kokkos::Profiling::popRegion();
+
+    ddc::parallel_deepcopy(rho_host, rho);
 }
