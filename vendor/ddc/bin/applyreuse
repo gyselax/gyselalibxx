@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Copyright (C) The DDC development team, see COPYRIGHT.md file
+#
+# SPDX-License-Identifier: MIT
+
+cd "$(dirname "$0")"
+cd ..
+
+if [ $# -lt 1 ]
+then
+    echo "Usage: $0 FILES..."
+    exit 1
+fi
+
+reuse annotate --copyright-style string-c -c 'The DDC development team, see COPYRIGHT.md file' -l 'MIT' --merge-copyrights --exclude-year -r --skip-unrecognised "$@"
