@@ -1,10 +1,10 @@
-# - Find the FFTW library
+# Copyright (C) 2015, Wenzel Jakob
+# Copyright (C) 2017, Patrick Bos
+# Copyright (C) The DDC development team, see COPYRIGHT.md file
 #
-# Original version of this file:
-#   Copyright (c) 2015, Wenzel Jakob
-#   https://github.com/wjakob/layerlab/blob/master/cmake/FindFFTW.cmake, commit 4d58bfdc28891b4f9373dfe46239dda5a0b561c6
-# Modifications:
-#   Copyright (c) 2017, Patrick Bos
+# SPDX-License-Identifier: BSD-3-Clause
+
+# - Find the FFTW library
 #
 # Usage:
 #   find_package(FFTW [REQUIRED] [QUIET] [COMPONENTS component1 ... componentX] )
