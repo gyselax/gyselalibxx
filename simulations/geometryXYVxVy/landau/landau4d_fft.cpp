@@ -22,6 +22,7 @@
 #include "bsl_advection_x.hpp"
 #include "fftpoissonsolver.hpp"
 #include "maxwellianequilibrium.hpp"
+#include "neumann_spline_quadrature.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
@@ -115,18 +116,19 @@ int main(int argc, char** argv)
     SplineXYBuilder const builder_xy(interpolation_domain_xy);
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
+    ddc::init_discrete_space<DDCBSplinesVx>(vx_min, vx_max, vx_ncells);
     ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
     ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
     SplineVxBuilder const builder_vx(interpolation_domain_vx);
 
     ddc::init_discrete_space<BSplinesVy>(vy_min, vy_max, vy_ncells);
+    ddc::init_discrete_space<DDCBSplinesVy>(vy_min, vy_max, vy_ncells);
     ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling());
     ddc::DiscreteDomain<IDimVy> interpolation_domain_vy(SplineInterpPointsVy::get_domain());
     SplineVyBuilder const builder_vy(interpolation_domain_vy);
 
-    ddc::DiscreteDomain<IDimVx, IDimVy>
-            interpolation_domain_vxvy(interpolation_domain_vx, interpolation_domain_vy);
-    SplineVxVyBuilder const builder_vxvy(interpolation_domain_vxvy);
+    SplineVxBuilder_1d const builder_vx_1d(interpolation_domain_vx);
+    SplineVyBuilder_1d const builder_vy_1d(interpolation_domain_vy);
 
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
@@ -142,6 +144,8 @@ int main(int argc, char** argv)
             dom_kinsp,
             builder_vx.interpolation_domain(),
             builder_vy.interpolation_domain());
+
+    IDomainVxVy const interpolation_domain_vxvy(interpolation_domain_vx, interpolation_domain_vy);
 
     FieldSp<int> kinetic_charges(dom_kinsp);
     DFieldSp masses(dom_kinsp);
@@ -235,12 +239,6 @@ int main(int argc, char** argv)
             g_null_boundary_2d<BSplinesX, BSplinesY>,
             g_null_boundary_2d<BSplinesX, BSplinesY>);
 
-    SplineVxVyEvaluator const spline_vxvy_evaluator(
-            g_null_boundary_2d<BSplinesVx, BSplinesVy>,
-            g_null_boundary_2d<BSplinesVx, BSplinesVy>,
-            g_null_boundary_2d<BSplinesVx, BSplinesVy>,
-            g_null_boundary_2d<BSplinesVx, BSplinesVy>);
-
     // Create advection operator
     BslAdvectionX const advection_x(spline_x_interpolator);
     BslAdvectionY const advection_y(spline_y_interpolator);
@@ -251,30 +249,37 @@ int main(int argc, char** argv)
 
     ddc::init_fourier_space<RDimX, RDimY>(ddc::select<IDimX, IDimY>(meshSpXYVxVy));
 
-    ChargeDensityCalculator const rhs(builder_vxvy, spline_vxvy_evaluator);
+    host_t<DFieldVxVy> const quadrature_coeffs_host = neumann_spline_quadrature_coefficients(
+            interpolation_domain_vxvy,
+            builder_vx_1d,
+            builder_vy_1d);
+    auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs_host.span_view());
+    ChargeDensityCalculator const rhs(quadrature_coeffs);
     FftPoissonSolver const poisson(rhs);
 
     // Create predcorr operator
     PredCorr const predcorr(vlasov, poisson);
 
     // Creating of mesh for output saving
-    IDomainX const gridx = ddc::select<IDimX>(meshSpXYVxVy);
-    FieldX<CoordX> meshX_coord(gridx);
-    ddc::for_each(gridx, [&](IndexX const ix) { meshX_coord(ix) = ddc::coordinate(ix); });
+    FieldX<CoordX> meshX_coord(interpolation_domain_x);
+    ddc::for_each(interpolation_domain_x, [&](IndexX const ix) {
+        meshX_coord(ix) = ddc::coordinate(ix);
+    });
 
-    IDomainY const gridy = ddc::select<IDimY>(meshSpXYVxVy);
-    FieldY<CoordY> meshY_coord(gridy);
-    ddc::for_each(gridy, [&](IndexY const iy) { meshY_coord(iy) = ddc::coordinate(iy); });
+    FieldY<CoordY> meshY_coord(interpolation_domain_y);
+    ddc::for_each(interpolation_domain_y, [&](IndexY const iy) {
+        meshY_coord(iy) = ddc::coordinate(iy);
+    });
 
-    IDomainVx const gridvx = ddc::select<IDimVx>(meshSpVxVy);
-    FieldVx<CoordVx> meshVx_coord(gridvx);
-    for (IndexVx const ivx : gridvx) {
+    FieldVx<CoordVx> meshVx_coord(interpolation_domain_vx);
+    for (IndexVx const ivx : interpolation_domain_vx) {
         meshVx_coord(ivx) = ddc::coordinate(ivx);
     }
 
-    IDomainVy const gridvy = ddc::select<IDimVy>(meshSpVxVy);
-    FieldVy<CoordVy> meshVy_coord(gridvy);
-    for (IndexVy const ivy : gridvy) {
+    FieldVy<CoordVy> meshVy_coord(interpolation_domain_vy);
+    for (IndexVy const ivy : interpolation_domain_vy) {
         meshVy_coord(ivy) = ddc::coordinate(ivy);
     }
 

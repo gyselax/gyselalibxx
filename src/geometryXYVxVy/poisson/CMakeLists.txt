@@ -22,6 +22,7 @@ target_link_libraries("poisson_xy"
         sll::splines
         gslx::geometry_xyvxvy
         gslx::speciesinfo
+        gslx::utils
 )
 
 add_library("gslx::poisson_xy" ALIAS "poisson_xy")
