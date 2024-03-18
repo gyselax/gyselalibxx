@@ -8,6 +8,8 @@
 #include "chargedensitycalculator.hpp"
 #include "fftpoissonsolver.hpp"
 #include "geometry.hpp"
+#include "neumann_spline_quadrature.hpp"
+#include "quadrature.hpp"
 #include "species_info.hpp"
 
 TEST(FftPoissonSolver, CosineSource)
@@ -36,6 +38,8 @@ TEST(FftPoissonSolver, CosineSource)
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
     ddc::init_discrete_space<BSplinesVy>(vy_min, vy_max, vy_size);
+    ddc::init_discrete_space<DDCBSplinesVx>(vx_min, vx_max, vx_size);
+    ddc::init_discrete_space<DDCBSplinesVy>(vy_min, vy_max, vy_size);
 
     ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
     ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling());
@@ -65,6 +69,9 @@ TEST(FftPoissonSolver, CosineSource)
             g_null_boundary_2d<BSplinesVx, BSplinesVy>,
             g_null_boundary_2d<BSplinesVx, BSplinesVy>);
 
+    SplineVxBuilder_1d const builder_vx_1d(gridvx);
+    SplineVyBuilder_1d const builder_vy_1d(gridvy);
+
     IDomainSpXYVxVy const mesh(gridsp, gridxy, gridvxvy);
 
     // Initialise infomation about species
@@ -76,7 +83,12 @@ TEST(FftPoissonSolver, CosineSource)
 
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
 
-    ChargeDensityCalculator rhs(builder_vx_vy, evaluator_vx_vy);
+    host_t<DFieldVxVy> const quadrature_coeffs_host
+            = neumann_spline_quadrature_coefficients(gridvxvy, builder_vx_1d, builder_vy_1d);
+    auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs_host.span_view());
+    ChargeDensityCalculator rhs(quadrature_coeffs);
     FftPoissonSolver poisson(rhs);
 
     DFieldXY electrostatic_potential(gridxy);
