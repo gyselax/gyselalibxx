@@ -1,3 +1,5 @@
+// Copyright (C) The DDC development team, see COPYRIGHT.md file
+//
 // SPDX-License-Identifier: MIT
 
 #pragma once
@@ -33,7 +35,7 @@ template <
         class BinaryReductionOp,
         class UnaryTransformOp,
         class... DCoords>
-inline T transform_reduce_serial(
+T transform_reduce_serial(
         DiscreteDomain<DDims...> const& domain,
         [[maybe_unused]] T const neutral,
         BinaryReductionOp const& reduce,
@@ -67,7 +69,7 @@ inline T transform_reduce_serial(
  *            range. The return type must be acceptable as input to reduce
  */
 template <class... DDims, class T, class BinaryReductionOp, class UnaryTransformOp>
-inline T transform_reduce(
+T transform_reduce(
         DiscreteDomain<DDims...> const& domain,
         T neutral,
         BinaryReductionOp&& reduce,

@@ -1,3 +1,5 @@
+// Copyright (C) The DDC development team, see COPYRIGHT.md file
+//
 // SPDX-License-Identifier: MIT
 
 #pragma once
@@ -44,7 +46,7 @@ public:
     }
 
     template <class MemorySpace>
-    KOKKOS_FORCEINLINE_FUNCTION typename DDim::template Impl<MemorySpace> const& get()
+    KOKKOS_FUNCTION typename DDim::template Impl<MemorySpace> const& get()
     {
         if constexpr (std::is_same_v<MemorySpace, Kokkos::HostSpace>) {
             return m_host;
@@ -63,12 +65,12 @@ public:
         }
     }
 
-    KOKKOS_FORCEINLINE_FUNCTION DDimImplHost const& get_host()
+    KOKKOS_FUNCTION DDimImplHost const& get_host()
     {
         return m_host;
     }
 
-    KOKKOS_FORCEINLINE_FUNCTION DDimImplDevice const& get_device()
+    KOKKOS_FUNCTION DDimImplDevice const& get_device()
     {
 #if defined(__CUDACC__) || defined(__HIPCC__)
         return m_device_on_host;

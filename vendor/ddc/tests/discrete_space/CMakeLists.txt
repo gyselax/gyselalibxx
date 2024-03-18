@@ -1,3 +1,7 @@
+# Copyright (C) The DDC development team, see COPYRIGHT.md file
+#
+# SPDX-License-Identifier: MIT
+
 add_library(discrete_space_tests_lib STATIC discrete_space.cpp)
 target_link_libraries(discrete_space_tests_lib
     PUBLIC

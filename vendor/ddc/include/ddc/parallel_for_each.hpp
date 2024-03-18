@@ -1,3 +1,5 @@
+// Copyright (C) The DDC development team, see COPYRIGHT.md file
+//
 // SPDX-License-Identifier: MIT
 
 #pragma once
@@ -31,13 +33,13 @@ public:
     explicit ForEachKokkosLambdaAdapter(F const& f) : m_f(f) {}
 
     template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N == 0), bool> = true>
-    KOKKOS_IMPL_FORCEINLINE void operator()([[maybe_unused]] index_type<void> unused_id) const
+    void operator()([[maybe_unused]] index_type<void> unused_id) const
     {
         m_f(DiscreteElement<>());
     }
 
     template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N == 0), bool> = true>
-    KOKKOS_FORCEINLINE_FUNCTION void operator()(
+    KOKKOS_FUNCTION void operator()(
             use_annotated_operator,
             [[maybe_unused]] index_type<void> unused_id) const
     {
@@ -45,21 +47,20 @@ public:
     }
 
     template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N > 0), bool> = true>
-    KOKKOS_IMPL_FORCEINLINE void operator()(index_type<DDims>... ids) const
+    void operator()(index_type<DDims>... ids) const
     {
         m_f(DiscreteElement<DDims...>(ids...));
     }
 
     template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N > 0), bool> = true>
-    KOKKOS_FORCEINLINE_FUNCTION void operator()(use_annotated_operator, index_type<DDims>... ids)
-            const
+    KOKKOS_FUNCTION void operator()(use_annotated_operator, index_type<DDims>... ids) const
     {
         m_f(DiscreteElement<DDims...>(ids...));
     }
 };
 
 template <class ExecSpace, class Functor>
-inline void for_each_kokkos(
+void for_each_kokkos(
         ExecSpace const& execution_space,
         [[maybe_unused]] DiscreteDomain<> const& domain,
         Functor const& f) noexcept
@@ -76,7 +77,7 @@ inline void for_each_kokkos(
 }
 
 template <class ExecSpace, class Functor, class DDim0>
-inline void for_each_kokkos(
+void for_each_kokkos(
         ExecSpace const& execution_space,
         DiscreteDomain<DDim0> const& domain,
         Functor const& f) noexcept
@@ -97,7 +98,7 @@ inline void for_each_kokkos(
 }
 
 template <class ExecSpace, class Functor, class DDim0, class DDim1, class... DDims>
-inline void for_each_kokkos(
+void for_each_kokkos(
         ExecSpace const& execution_space,
         DiscreteDomain<DDim0, DDim1, DDims...> const& domain,
         Functor const& f) noexcept
@@ -140,7 +141,7 @@ inline void for_each_kokkos(
  * @param[in] f      a functor taking an index as parameter
  */
 template <class ExecSpace, class... DDims, class Functor>
-inline void parallel_for_each(
+void parallel_for_each(
         ExecSpace const& execution_space,
         DiscreteDomain<DDims...> const& domain,
         Functor&& f) noexcept
@@ -153,7 +154,7 @@ inline void parallel_for_each(
  * @param[in] f      a functor taking an index as parameter
  */
 template <class... DDims, class Functor>
-inline void parallel_for_each(DiscreteDomain<DDims...> const& domain, Functor&& f) noexcept
+void parallel_for_each(DiscreteDomain<DDims...> const& domain, Functor&& f) noexcept
 {
     parallel_for_each(Kokkos::DefaultExecutionSpace(), domain, std::forward<Functor>(f));
 }

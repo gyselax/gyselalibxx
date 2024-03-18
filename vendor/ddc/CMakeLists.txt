@@ -1,3 +1,5 @@
+# Copyright (C) The DDC development team, see COPYRIGHT.md file
+#
 # SPDX-License-Identifier: MIT
 
 cmake_minimum_required(VERSION 3.15)
@@ -216,7 +218,10 @@ install(
 if( FFTW_FOUND )
 	target_link_libraries( DDC INTERFACE FFTW::Float )
 	target_link_libraries( DDC INTERFACE FFTW::Double )
-	target_compile_definitions(DDC INTERFACE fftw_AVAIL)
+endif()
+
+if( FFTW_FOUND AND "${Kokkos_ENABLE_SERIAL}")
+	target_compile_definitions(DDC INTERFACE fftw_serial_AVAIL)
 endif()
 
 if( FFTW_FOUND AND "${Kokkos_ENABLE_OPENMP}")
