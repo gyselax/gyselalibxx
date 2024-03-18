@@ -1,3 +1,5 @@
+# Copyright (C) The DDC development team, see COPYRIGHT.md file
+#
 # SPDX-License-Identifier: MIT
 
 add_executable(heat_equation heat_equation.cpp)

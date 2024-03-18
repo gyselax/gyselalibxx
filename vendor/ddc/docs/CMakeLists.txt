@@ -1,4 +1,7 @@
+# Copyright (C) The DDC development team, see COPYRIGHT.md file
+#
 # SPDX-License-Identifier: MIT
+
 cmake_minimum_required(VERSION 3.15)
 
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html")

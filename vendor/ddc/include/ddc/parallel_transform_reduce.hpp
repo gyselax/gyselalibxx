@@ -1,3 +1,5 @@
+// Copyright (C) The DDC development team, see COPYRIGHT.md file
+//
 // SPDX-License-Identifier: MIT
 
 #pragma once
@@ -101,15 +103,14 @@ public:
     }
 
     template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N == 0), bool> = true>
-    KOKKOS_IMPL_FORCEINLINE void operator()(
-            [[maybe_unused]] index_type<void> unused_id,
-            typename Reducer::value_type& a) const
+    void operator()([[maybe_unused]] index_type<void> unused_id, typename Reducer::value_type& a)
+            const
     {
         a = reducer(a, functor(DiscreteElement<>()));
     }
 
     template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N == 0), bool> = true>
-    KOKKOS_FORCEINLINE_FUNCTION void operator()(
+    KOKKOS_FUNCTION void operator()(
             use_annotated_operator,
             [[maybe_unused]] index_type<void> unused_id,
             typename Reducer::value_type& a) const
@@ -119,16 +120,14 @@ public:
     }
 
     template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N > 0), bool> = true>
-    KOKKOS_IMPL_FORCEINLINE void operator()(
-            index_type<DDims>... ids,
-            typename Reducer::value_type& a) const
+    void operator()(index_type<DDims>... ids, typename Reducer::value_type& a) const
     {
         a = reducer(a, functor(DiscreteElement<DDims...>(ids...)));
     }
 
 
     template <std::size_t N = sizeof...(DDims), std::enable_if_t<(N > 0), bool> = true>
-    KOKKOS_FORCEINLINE_FUNCTION void operator()(
+    KOKKOS_FUNCTION void operator()(
             use_annotated_operator,
             index_type<DDims>... ids,
             typename Reducer::value_type& a) const
@@ -147,7 +146,7 @@ public:
  *            range. The return type must be acceptable as input to reduce
  */
 template <class ExecSpace, class T, class BinaryReductionOp, class UnaryTransformOp>
-inline T transform_reduce_kokkos(
+T transform_reduce_kokkos(
         ExecSpace const& execution_space,
         [[maybe_unused]] DiscreteDomain<> const& domain,
         T neutral,
@@ -183,7 +182,7 @@ inline T transform_reduce_kokkos(
  *            range. The return type must be acceptable as input to reduce
  */
 template <class ExecSpace, class DDim0, class T, class BinaryReductionOp, class UnaryTransformOp>
-inline T transform_reduce_kokkos(
+T transform_reduce_kokkos(
         ExecSpace const& execution_space,
         DiscreteDomain<DDim0> const& domain,
         T neutral,
@@ -232,7 +231,7 @@ template <
         class T,
         class BinaryReductionOp,
         class UnaryTransformOp>
-inline T transform_reduce_kokkos(
+T transform_reduce_kokkos(
         ExecSpace const& execution_space,
         DiscreteDomain<DDim0, DDim1, DDims...> const& domain,
         T neutral,
@@ -289,7 +288,7 @@ inline T transform_reduce_kokkos(
  *            range. The return type must be acceptable as input to reduce
  */
 template <class ExecSpace, class... DDims, class T, class BinaryReductionOp, class UnaryTransformOp>
-inline T parallel_transform_reduce(
+T parallel_transform_reduce(
         ExecSpace const& execution_space,
         DiscreteDomain<DDims...> const& domain,
         T neutral,
@@ -313,7 +312,7 @@ inline T parallel_transform_reduce(
  *            range. The return type must be acceptable as input to reduce
  */
 template <class... DDims, class T, class BinaryReductionOp, class UnaryTransformOp>
-inline T parallel_transform_reduce(
+T parallel_transform_reduce(
         DiscreteDomain<DDims...> const& domain,
         T neutral,
         BinaryReductionOp&& reduce,

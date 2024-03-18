@@ -1,3 +1,5 @@
+// Copyright (C) The DDC development team, see COPYRIGHT.md file
+//
 // SPDX-License-Identifier: MIT
 
 #pragma once
@@ -11,7 +13,7 @@
 
 #include <Kokkos_Core.hpp>
 
-#if fftw_AVAIL
+#if fftw_serial_AVAIL || fftw_omp_AVAIL
 #include <fftw3.h>
 #endif
 
@@ -33,7 +35,7 @@
 #include <hipfft/hipfft.h>
 #endif
 
-#if fftw_AVAIL
+#if fftw_serial_AVAIL || fftw_omp_AVAIL
 static_assert(sizeof(fftwf_complex) == sizeof(Kokkos::complex<float>));
 static_assert(alignof(fftwf_complex) <= alignof(Kokkos::complex<float>));
 
@@ -143,7 +145,7 @@ struct transform_type<Kokkos::complex<T1>, Kokkos::complex<T2>>
 template <typename T1, typename T2>
 constexpr TransformType transform_type_v = transform_type<T1, T2>::value;
 
-#if fftw_AVAIL
+#if fftw_serial_AVAIL || fftw_omp_AVAIL
 // _fftw_type : compatible with both single and double precision
 template <typename T>
 struct _fftw_type
@@ -382,7 +384,7 @@ void core(
 
     if constexpr (false) {
     } // Trick to get only else if
-#if fftw_AVAIL
+#if fftw_serial_AVAIL
     else if constexpr (std::is_same_v<ExecSpace, Kokkos::Serial>) {
         _fftw_plan<Tin> plan = _fftw_plan_many_dft<Tin, Tout>(
                 kwargs.direction == ddc::FFT_Direction::FORWARD ? FFTW_FORWARD : FFTW_BACKWARD,

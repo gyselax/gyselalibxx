@@ -1,3 +1,5 @@
+// Copyright (C) The DDC development team, see COPYRIGHT.md file
+//
 // SPDX-License-Identifier: MIT
 
 #include <cstddef>
@@ -189,6 +191,7 @@ struct RDimX;
 struct RDimY;
 struct RDimZ;
 
+#if fftw_serial_AVAIL
 TEST(FFTNorm, OFF)
 {
     test_fft_norm<
@@ -266,6 +269,7 @@ TEST(FFTSerialHost, R2C_3D)
             RDimY,
             RDimZ>();
 }
+#endif
 
 #if fftw_omp_AVAIL
 TEST(FFTParallelHost, R2C_1D)
@@ -330,6 +334,7 @@ TEST(FFTParallelDevice, R2C_3D)
             RDimZ>();
 }
 
+#if fftw_serial_AVAIL
 TEST(FFTSerialHost, C2C_1D)
 {
     test_fft<
@@ -362,6 +367,7 @@ TEST(FFTSerialHost, C2C_3D)
             RDimY,
             RDimZ>();
 }
+#endif
 
 #if fftw_omp_AVAIL
 TEST(FFTParallelHost, C2C_1D)
@@ -431,6 +437,7 @@ TEST(FFTParallelDevice, C2C_3D)
             RDimZ>();
 }
 
+#if fftw_serial_AVAIL
 TEST(FFTSerialHost, D2Z_1D)
 {
     test_fft<
@@ -463,6 +470,7 @@ TEST(FFTSerialHost, D2Z_3D)
             RDimY,
             RDimZ>();
 }
+#endif
 
 #if fftw_omp_AVAIL
 TEST(FFTParallelHost, D2Z_1D)
@@ -532,6 +540,7 @@ TEST(FFTParallelDevice, D2Z_3D)
             RDimZ>();
 }
 
+#if fftw_serial_AVAIL
 TEST(FFTSerialHost, Z2Z_1D)
 {
     test_fft<
@@ -564,6 +573,7 @@ TEST(FFTSerialHost, Z2Z_3D)
             RDimY,
             RDimZ>();
 }
+#endif
 
 #if fftw_omp_AVAIL
 TEST(FFTParallelHost, Z2Z_1D)

@@ -1,3 +1,7 @@
+# Copyright (C) The DDC development team, see COPYRIGHT.md file
+#
+# SPDX-License-Identifier: MIT
+
 # First execute :
 # ./benchmarks/ddc_benchmark_splines --benchmark_format=json --benchmark_out=splines_bench.json
 # then execute this code will be able to plot results:

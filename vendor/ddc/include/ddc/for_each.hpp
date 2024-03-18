@@ -1,3 +1,5 @@
+// Copyright (C) The DDC development team, see COPYRIGHT.md file
+//
 // SPDX-License-Identifier: MIT
 
 #pragma once
@@ -20,7 +22,7 @@ namespace ddc {
 namespace detail {
 
 template <class RetType, class Element, std::size_t N, class Functor, class... Is>
-inline void for_each_serial(
+void for_each_serial(
         std::array<Element, N> const& begin,
         std::array<Element, N> const& end,
         Functor const& f,
@@ -43,7 +45,7 @@ inline void for_each_serial(
  * @param[in] f      a functor taking an index as parameter
  */
 template <class... DDims, class Functor>
-inline void for_each(DiscreteDomain<DDims...> const& domain, Functor&& f) noexcept
+void for_each(DiscreteDomain<DDims...> const& domain, Functor&& f) noexcept
 {
     DiscreteElement<DDims...> const ddc_begin = domain.front();
     DiscreteElement<DDims...> const ddc_end = domain.front() + domain.extents();

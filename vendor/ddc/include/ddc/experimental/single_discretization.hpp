@@ -1,3 +1,5 @@
+// Copyright (C) The DDC development team, see COPYRIGHT.md file
+//
 // SPDX-License-Identifier: MIT
 
 #pragma once
@@ -50,20 +52,18 @@ public:
     public:
         using discrete_dimension_type = SingleDiscretization;
 
-        inline constexpr Impl(continuous_element_type origin) noexcept : m_point(std::move(origin))
-        {
-        }
+        constexpr Impl(continuous_element_type origin) noexcept : m_point(std::move(origin)) {}
 
         Impl(Impl const& other) = delete;
 
         constexpr Impl(Impl&& other) = delete;
 
-        inline constexpr continuous_element_type origin() const noexcept
+        constexpr continuous_element_type origin() const noexcept
         {
             return m_point;
         }
 
-        inline constexpr continuous_element_type coordinate(
+        constexpr continuous_element_type coordinate(
                 [[maybe_unused]] discrete_element_type icoord) const noexcept
         {
             assert(icoord == discrete_element_type(0));
