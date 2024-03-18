@@ -109,33 +109,26 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2chargedensity
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ichargedensitycalculator.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;ddc_helper.hpp&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;ichargedensitycalculator.hpp&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">class </span><a class="code" href="classChargeDensityCalculator.html">ChargeDensityCalculator</a> : <span class="keyword">public</span> <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classSplineBuilder2D.html">SplineVxVyBuilder</a> <span class="keyword">const</span>&amp; m_spline_vxvy_builder;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classSplineEvaluator2D.html">SplineVxVyEvaluator</a> m_spline_vxvy_evaluator;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">using</span> ChunkViewType = device_t&lt;DViewVxVy&gt;;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    ChunkViewType m_coefficients;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">int</span> m_nbc_Vx;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> m_nbc_Vy;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> m_interp_dom_size_Vx;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> m_interp_dom_size_Vy;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classChargeDensityCalculator.html#a2d97d4f1d146845b2ec7f54f83344089">   38</a></span>&#160;    <a class="code" href="classChargeDensityCalculator.html#a2d97d4f1d146845b2ec7f54f83344089">ChargeDensityCalculator</a>(</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <a class="code" href="classSplineBuilder2D.html">SplineVxVyBuilder</a> <span class="keyword">const</span>&amp; spline_vxvy_builder,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineVxVyEvaluator</a> <span class="keyword">const</span>&amp; spline_vxvy_evaluator);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classChargeDensityCalculator.html#aa171397828c246922b136642e0295e26">   53</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classChargeDensityCalculator.html#aa171397828c246922b136642e0295e26">operator()</a>(DSpanXY rho, DViewSpXYVxVy allfdistribu) <span class="keyword">const</span> <span class="keyword">final</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classChargeDensityCalculator.html#a9b209db47e420d108fbb6f329a65bbdf">   32</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classChargeDensityCalculator.html#a9b209db47e420d108fbb6f329a65bbdf">ChargeDensityCalculator</a>(<span class="keyword">const</span> ChunkViewType&amp; coeffs);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classChargeDensityCalculator.html#aa171397828c246922b136642e0295e26">   39</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classChargeDensityCalculator.html#aa171397828c246922b136642e0295e26">operator()</a>(DSpanXY rho, DViewSpXYVxVy allfdistribu) <span class="keyword">const</span> <span class="keyword">final</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
 <div class="ttc" id="aclassChargeDensityCalculator_html"><div class="ttname"><a href="classChargeDensityCalculator.html">ChargeDensityCalculator</a></div><div class="ttdoc">A class which computes charges density with Kokkos.</div><div class="ttdef"><b>Definition:</b> chargedensitycalculator.hpp:20</div></div>
-<div class="ttc" id="aclassChargeDensityCalculator_html_a2d97d4f1d146845b2ec7f54f83344089"><div class="ttname"><a href="classChargeDensityCalculator.html#a2d97d4f1d146845b2ec7f54f83344089">ChargeDensityCalculator::ChargeDensityCalculator</a></div><div class="ttdeci">ChargeDensityCalculator(SplineVxVyBuilder const &amp;spline_vxvy_builder, SplineVxVyEvaluator const &amp;spline_vxvy_evaluator)</div><div class="ttdoc">Constructor of SplineChargeDensityCalculator.</div></div>
-<div class="ttc" id="aclassChargeDensityCalculator_html_aa171397828c246922b136642e0295e26"><div class="ttname"><a href="classChargeDensityCalculator.html#aa171397828c246922b136642e0295e26">ChargeDensityCalculator::operator()</a></div><div class="ttdeci">void operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu) const final</div><div class="ttdoc">Calculate the charge density rho from the distribution function.</div></div>
+<div class="ttc" id="aclassChargeDensityCalculator_html_a9b209db47e420d108fbb6f329a65bbdf"><div class="ttname"><a href="classChargeDensityCalculator.html#a9b209db47e420d108fbb6f329a65bbdf">ChargeDensityCalculator::ChargeDensityCalculator</a></div><div class="ttdeci">ChargeDensityCalculator(const ChunkViewType &amp;coeffs)</div><div class="ttdoc">Create a ChargeDensityCalculator object.</div></div>
+<div class="ttc" id="aclassChargeDensityCalculator_html_aa171397828c246922b136642e0295e26"><div class="ttname"><a href="classChargeDensityCalculator.html#aa171397828c246922b136642e0295e26">ChargeDensityCalculator::operator()</a></div><div class="ttdeci">void operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu) const final</div><div class="ttdoc">Computes the charge density rho from the distribution function.</div></div>
 <div class="ttc" id="aclassIChargeDensityCalculator_html"><div class="ttname"><a href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></div><div class="ttdoc">A class which calculates the charge density.</div><div class="ttdef"><b>Definition:</b> ichargedensitycalculator.hpp:16</div></div>
-<div class="ttc" id="aclassSplineBuilder2D_html"><div class="ttname"><a href="classSplineBuilder2D.html">SplineBuilder2D</a></div><div class="ttdoc">A class for creating a 2D spline approximation of a function.</div><div class="ttdef"><b>Definition:</b> spline_builder_2d.hpp:15</div></div>
-<div class="ttc" id="aclassSplineEvaluator2D_html"><div class="ttname"><a href="classSplineEvaluator2D.html">SplineEvaluator2D&lt; BSplinesVx, BSplinesVy &gt;</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
