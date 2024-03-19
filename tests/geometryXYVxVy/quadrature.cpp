@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: MIT
 
-#include <sll/bsplines_non_uniform.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -31,10 +29,10 @@ TEST(QuadratureTest, ExactForConstantFunc)
 
     IDomainXY const gridxy(gridx, gridy);
 
-    DFieldXY const quadrature_coeffs = trapezoid_quadrature_coefficients(gridxy);
+    host_t<DFieldXY> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridxy);
     Quadrature<IDimX, IDimY> const integrate(quadrature_coeffs);
 
-    DFieldXY values(gridxy);
+    host_t<DFieldXY> values(gridxy);
 
     ddc::for_each(gridxy, [&](ddc::DiscreteElement<IDimX, IDimY> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);
@@ -59,12 +57,16 @@ double compute_error(int n_elems)
 {
     using DimX = X<N>;
     using DimY = Y<N>;
-    using BSplinesX = UniformBSplines<DimX, 3>;
-    using BSplinesY = UniformBSplines<DimY, 3>;
-    using GrevillePointsX
-            = GrevilleInterpolationPoints<BSplinesX, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-    using GrevillePointsY
-            = GrevilleInterpolationPoints<BSplinesY, BoundCond::GREVILLE, BoundCond::GREVILLE>;
+    using BSplinesX = ddc::UniformBSplines<DimX, 3>;
+    using BSplinesY = ddc::UniformBSplines<DimY, 3>;
+    using GrevillePointsX = ddc::GrevilleInterpolationPoints<
+            BSplinesX,
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::GREVILLE>;
+    using GrevillePointsY = ddc::GrevilleInterpolationPoints<
+            BSplinesY,
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::GREVILLE>;
     using IDimX = typename GrevillePointsX::interpolation_mesh_type;
     using IDimY = typename GrevillePointsY::interpolation_mesh_type;
     using IDomainX = ddc::DiscreteDomain<IDimX>;
@@ -87,10 +89,10 @@ double compute_error(int n_elems)
     IDomainY const gridy(GrevillePointsY::get_domain());
     IDomainXY const gridxy(gridx, gridy);
 
-    DFieldXY const quadrature_coeffs = trapezoid_quadrature_coefficients(gridxy);
+    host_t<DFieldXY> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridxy);
     Quadrature<IDimX, IDimY> const integrate(quadrature_coeffs);
 
-    DFieldXY values(gridxy);
+    host_t<DFieldXY> values(gridxy);
 
     ddc::for_each(gridxy, [&](ddc::DiscreteElement<IDimX, IDimY> const idx) {
         double const y_cos = cos(ddc::get<DimY>(ddc::coordinate(idx)));
