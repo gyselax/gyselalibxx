@@ -53,7 +53,6 @@ var annotated =
     [ "DimY_pC", "structDimY__pC.html", null ],
     [ "DiocotronDensitySolution", "classDiocotronDensitySolution.html", "classDiocotronDensitySolution" ],
     [ "DiscreteToCartesian", "classDiscreteToCartesian.html", "classDiscreteToCartesian" ],
-    [ "ElectricField", "classElectricField.html", "classElectricField" ],
     [ "Euler", "classEuler.html", "classEuler" ],
     [ "Evaluator2D", "structEvaluator2D.html", [
       [ "Evaluator", "classEvaluator2D_1_1Evaluator.html", "classEvaluator2D_1_1Evaluator" ]

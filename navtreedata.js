@@ -65,11 +65,11 @@ var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCurvilinear2DToCartesian.html#aaf43cce0853afcd23bbd60a9563c50f4",
-"classMatrix.html#a15badbcf214a7842a0a654f9210f39a1",
-"classPredCorr.html",
-"classVectorFieldSpan.html#ad70b8f79a45666e097299ac974f76046",
-"gauss__legendre__integration_8hpp_source.html",
-"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Python_tests"
+"classMatrix.html#a687d05d0c6cb4e1a8dc1a40e4926e9a3",
+"classPredCorr.html#a7f99203dc020f4337fc4c11c04d2d0ed",
+"classVectorFieldSpan.html#afb64624cf289a427bf7e964b58d7d6cb",
+"geometryXVx_2boltzmann_2splitvlasovsolver_8hpp_source.html",
+"tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__Contents"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
