@@ -9,7 +9,7 @@ target_include_directories("geometry_xyvxvy"
 )
 target_link_libraries("geometry_xyvxvy" INTERFACE
     DDC::DDC
-    sll::splines
     gslx::speciesinfo
+    gslx::utils
 )
 add_library("gslx::geometry_xyvxvy" ALIAS "geometry_xyvxvy")

@@ -10,17 +10,13 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/constant_extrapolation_boundary_value.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_evaluator.hpp>
-
-#include <geometry.hpp>
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_vx.hpp"
-#include "bsl_advection_x.hpp"
+#include "bsl_advection_vx_batched.hpp"
+#include "bsl_advection_x_batched.hpp"
 #include "fftpoissonsolver.hpp"
+#include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "paraconfpp.hpp"
@@ -29,32 +25,13 @@
 #include "predcorr.hpp"
 #include "singlemodeperturbinitialization.hpp"
 //#include "species_info.hpp"
-#include "spline_interpolator.hpp"
+#include "spline_interpolator_batched.hpp"
 #include "splitvlasovsolver.hpp"
 
 using std::cerr;
 using std::endl;
 using std::chrono::steady_clock;
 namespace fs = std::filesystem;
-
-using PreallocatableSplineInterpolatorX
-        = PreallocatableSplineInterpolator<IDimX, BSplinesX, SplineXBoundary, SplineXBoundary>;
-using PreallocatableSplineInterpolatorY
-        = PreallocatableSplineInterpolator<IDimY, BSplinesY, SplineYBoundary, SplineYBoundary>;
-using PreallocatableSplineInterpolatorVx = PreallocatableSplineInterpolator<
-        IDimVx,
-        BSplinesVx,
-        BoundCond::HERMITE,
-        BoundCond::HERMITE>;
-using PreallocatableSplineInterpolatorVy = PreallocatableSplineInterpolator<
-        IDimVy,
-        BSplinesVy,
-        BoundCond::HERMITE,
-        BoundCond::HERMITE>;
-using BslAdvectionX = BslAdvectionSpatial<GeometryXYVxVy, IDimX>;
-using BslAdvectionY = BslAdvectionSpatial<GeometryXYVxVy, IDimY>;
-using BslAdvectionVx = BslAdvectionVelocity<GeometryXYVxVy, IDimVx>;
-using BslAdvectionVy = BslAdvectionVelocity<GeometryXYVxVy, IDimVy>;
 
 int main(int argc, char** argv)
 {
@@ -102,58 +79,46 @@ int main(int argc, char** argv)
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_ncells);
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
-    SplineXBuilder const builder_x(interpolation_domain_x);
-
     ddc::init_discrete_space<BSplinesY>(y_min, y_max, y_ncells);
-    ddc::init_discrete_space<IDimY>(SplineInterpPointsY::get_sampling());
-    ddc::DiscreteDomain<IDimY> interpolation_domain_y(SplineInterpPointsY::get_domain());
-    SplineYBuilder const builder_y(interpolation_domain_y);
-
-    ddc::DiscreteDomain<IDimX, IDimY>
-            interpolation_domain_xy(interpolation_domain_x, interpolation_domain_y);
-    SplineXYBuilder const builder_xy(interpolation_domain_xy);
-
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
-    ddc::init_discrete_space<DDCBSplinesVx>(vx_min, vx_max, vx_ncells);
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
-    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
-    SplineVxBuilder const builder_vx(interpolation_domain_vx);
-
     ddc::init_discrete_space<BSplinesVy>(vy_min, vy_max, vy_ncells);
-    ddc::init_discrete_space<DDCBSplinesVy>(vy_min, vy_max, vy_ncells);
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimY>(SplineInterpPointsY::get_sampling());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
     ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling());
-    ddc::DiscreteDomain<IDimVy> interpolation_domain_vy(SplineInterpPointsVy::get_domain());
-    SplineVyBuilder const builder_vy(interpolation_domain_vy);
-
-    SplineVxBuilder_1d const builder_vx_1d(interpolation_domain_vx);
-    SplineVyBuilder_1d const builder_vy_1d(interpolation_domain_vy);
 
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
 
-    IDomainSpXYVxVy const meshSpXYVxVy(
-            dom_kinsp,
-            builder_x.interpolation_domain(),
-            builder_y.interpolation_domain(),
-            builder_vx.interpolation_domain(),
-            builder_vy.interpolation_domain());
+    IDomainX interpolation_domain_x(SplineInterpPointsX::get_domain());
+    IDomainY interpolation_domain_y(SplineInterpPointsY::get_domain());
+    IDomainVx interpolation_domain_vx(SplineInterpPointsVx::get_domain());
+    IDomainVy interpolation_domain_vy(SplineInterpPointsVy::get_domain());
+    IDomainVxVy interpolation_domain_vxvy(interpolation_domain_vx, interpolation_domain_vy);
 
-    IDomainSpVxVy const meshSpVxVy(
-            dom_kinsp,
-            builder_vx.interpolation_domain(),
-            builder_vy.interpolation_domain());
+    IDomainXYVxVy meshXYVxVy(
+            interpolation_domain_x,
+            interpolation_domain_y,
+            interpolation_domain_vx,
+            interpolation_domain_vy);
+    IDomainSpVxVy const meshSpVxVy(dom_kinsp, interpolation_domain_vx, interpolation_domain_vy);
+    IDomainSpXYVxVy const meshSpXYVxVy(dom_kinsp, meshXYVxVy);
 
-    IDomainVxVy const interpolation_domain_vxvy(interpolation_domain_vx, interpolation_domain_vy);
+    SplineXBuilder const builder_x(meshXYVxVy);
+    SplineYBuilder const builder_y(meshXYVxVy);
+    SplineVxBuilder const builder_vx(meshXYVxVy);
+    SplineVyBuilder const builder_vy(meshXYVxVy);
+    SplineVxBuilder_1d const builder_vx_1d(interpolation_domain_vx);
+    SplineVyBuilder_1d const builder_vy_1d(interpolation_domain_vy);
 
-    FieldSp<int> kinetic_charges(dom_kinsp);
-    DFieldSp masses(dom_kinsp);
-    DFieldSp density_eq(dom_kinsp);
-    DFieldSp temperature_eq(dom_kinsp);
-    DFieldSp mean_velocity_eq(dom_kinsp);
-    DFieldSp init_perturb_amplitude(dom_kinsp);
-    FieldSp<int> init_perturb_mode(dom_kinsp);
+    host_t<FieldSp<int>> kinetic_charges(dom_kinsp);
+    host_t<DFieldSp> masses(dom_kinsp);
+    host_t<DFieldSp> density_eq(dom_kinsp);
+    host_t<DFieldSp> temperature_eq(dom_kinsp);
+    host_t<DFieldSp> mean_velocity_eq(dom_kinsp);
+    host_t<DFieldSp> init_perturb_amplitude(dom_kinsp);
+    host_t<FieldSp<int>> init_perturb_mode(dom_kinsp);
+
     int nb_elec_adiabspecies = 1;
     int nb_ion_adiabspecies = 1;
 
@@ -179,7 +144,7 @@ int main(int argc, char** argv)
     // Create the domain of all species including kinetic species + adiabatic species (if existing)
     IDomainSp const
             dom_allsp(IndexSp(0), nb_kinspecies + nb_elec_adiabspecies + nb_ion_adiabspecies);
-    FieldSp<int> charges(dom_allsp);
+    host_t<FieldSp<int>> charges(dom_allsp);
     for (IndexSp isp : dom_kinsp) {
         charges(isp) = kinetic_charges(isp);
     }
@@ -201,6 +166,7 @@ int main(int argc, char** argv)
                  init_perturb_mode.span_cview(),
                  init_perturb_amplitude.span_cview());
     init(allfdistribu);
+    auto allfequilibrium_host = ddc::create_mirror_view_and_copy(allfequilibrium.span_view());
 
     // --> Algorithm info
     double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
@@ -211,39 +177,39 @@ int main(int argc, char** argv)
     int const nbstep_diag = int(time_diag / deltat);
 
     // Create spline evaluator
-    ConstantExtrapolationBoundaryValue<BSplinesX> bv_x_min(x_min);
-    ConstantExtrapolationBoundaryValue<BSplinesX> bv_x_max(x_max);
-    SplineEvaluator<BSplinesX> const spline_x_evaluator(bv_x_min, bv_x_max);
-    PreallocatableSplineInterpolatorX const spline_x_interpolator(builder_x, spline_x_evaluator);
+    ddc::PeriodicExtrapolationRule<RDimX> bv_x_min;
+    ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
+    SplineXEvaluator const spline_x_evaluator(builder_x.spline_domain(), bv_x_min, bv_x_max);
 
-    ConstantExtrapolationBoundaryValue<BSplinesY> bv_y_min(y_min);
-    ConstantExtrapolationBoundaryValue<BSplinesY> bv_y_max(y_max);
-    SplineEvaluator<BSplinesY> const spline_y_evaluator(bv_y_min, bv_y_max);
-    PreallocatableSplineInterpolatorY const spline_y_interpolator(builder_y, spline_y_evaluator);
+    PreallocatableSplineInterpolatorBatched const
+            spline_x_interpolator(builder_x, spline_x_evaluator);
 
-    ConstantExtrapolationBoundaryValue<BSplinesVx> bv_vx_min(vx_min);
-    ConstantExtrapolationBoundaryValue<BSplinesVx> bv_vx_max(vx_max);
-    SplineEvaluator<BSplinesVx> const spline_vx_evaluator(bv_vx_min, bv_vx_max);
-    PreallocatableSplineInterpolatorVx const
+    ddc::PeriodicExtrapolationRule<RDimY> bv_y_min;
+    ddc::PeriodicExtrapolationRule<RDimY> bv_y_max;
+    SplineYEvaluator const spline_y_evaluator(builder_y.spline_domain(), bv_y_min, bv_y_max);
+
+    PreallocatableSplineInterpolatorBatched const
+            spline_y_interpolator(builder_y, spline_y_evaluator);
+
+    ddc::ConstantExtrapolationRule<RDimVx> bv_vx_min(vx_min);
+    ddc::ConstantExtrapolationRule<RDimVx> bv_vx_max(vx_max);
+    SplineVxEvaluator const spline_vx_evaluator(builder_vx.spline_domain(), bv_vx_min, bv_vx_max);
+
+    PreallocatableSplineInterpolatorBatched const
             spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
-    ConstantExtrapolationBoundaryValue<BSplinesVy> bv_vy_min(vy_min);
-    ConstantExtrapolationBoundaryValue<BSplinesVy> bv_vy_max(vy_max);
-    SplineEvaluator<BSplinesVy> const spline_vy_evaluator(bv_vy_min, bv_vy_max);
-    PreallocatableSplineInterpolatorVy const
+    ddc::ConstantExtrapolationRule<RDimVy> bv_vy_min(vy_min);
+    ddc::ConstantExtrapolationRule<RDimVy> bv_vy_max(vy_max);
+    SplineVyEvaluator const spline_vy_evaluator(builder_vy.spline_domain(), bv_vy_min, bv_vy_max);
+
+    PreallocatableSplineInterpolatorBatched const
             spline_vy_interpolator(builder_vy, spline_vy_evaluator);
 
-    SplineXYEvaluator const spline_xy_evaluator(
-            g_null_boundary_2d<BSplinesX, BSplinesY>,
-            g_null_boundary_2d<BSplinesX, BSplinesY>,
-            g_null_boundary_2d<BSplinesX, BSplinesY>,
-            g_null_boundary_2d<BSplinesX, BSplinesY>);
-
     // Create advection operator
-    BslAdvectionX const advection_x(spline_x_interpolator);
-    BslAdvectionY const advection_y(spline_y_interpolator);
-    BslAdvectionVx const advection_vx(spline_vx_interpolator);
-    BslAdvectionVy const advection_vy(spline_vy_interpolator);
+    BslAdvectionSpatialBatched<GeometryXYVxVy, IDimX> const advection_x(spline_x_interpolator);
+    BslAdvectionSpatialBatched<GeometryXYVxVy, IDimY> const advection_y(spline_y_interpolator);
+    BslAdvectionVelocityBatched<GeometryXYVxVy, IDimVx> const advection_vx(spline_vx_interpolator);
+    BslAdvectionVelocityBatched<GeometryXYVxVy, IDimVy> const advection_vy(spline_vy_interpolator);
 
     SplitVlasovSolver const vlasov(advection_x, advection_y, advection_vx, advection_vy);
 
@@ -263,22 +229,22 @@ int main(int argc, char** argv)
     PredCorr const predcorr(vlasov, poisson);
 
     // Creating of mesh for output saving
-    FieldX<CoordX> meshX_coord(interpolation_domain_x);
+    host_t<FieldX<CoordX>> meshX_coord(interpolation_domain_x);
     ddc::for_each(interpolation_domain_x, [&](IndexX const ix) {
         meshX_coord(ix) = ddc::coordinate(ix);
     });
 
-    FieldY<CoordY> meshY_coord(interpolation_domain_y);
+    host_t<FieldY<CoordY>> meshY_coord(interpolation_domain_y);
     ddc::for_each(interpolation_domain_y, [&](IndexY const iy) {
         meshY_coord(iy) = ddc::coordinate(iy);
     });
 
-    FieldVx<CoordVx> meshVx_coord(interpolation_domain_vx);
+    host_t<FieldVx<CoordVx>> meshVx_coord(interpolation_domain_vx);
     for (IndexVx const ivx : interpolation_domain_vx) {
         meshVx_coord(ivx) = ddc::coordinate(ivx);
     }
 
-    FieldVy<CoordVy> meshVy_coord(interpolation_domain_vy);
+    host_t<FieldVy<CoordVy>> meshVy_coord(interpolation_domain_vy);
     for (IndexVy const ivy : interpolation_domain_vy) {
         meshVy_coord(ivy) = ddc::coordinate(ivy);
     }
@@ -296,11 +262,11 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("Nkinspecies", nb_kinspecies.value());
     ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
     ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[dom_kinsp]);
-    ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium);
+    ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
 
     steady_clock::time_point const start = steady_clock::now();
 
-    predcorr(allfdistribu, deltat, nbiter);
+    predcorr(allfdistribu.span_view(), deltat, nbiter);
 
     steady_clock::time_point const end = steady_clock::now();
 

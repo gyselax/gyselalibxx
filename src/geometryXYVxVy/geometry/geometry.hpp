@@ -6,14 +6,7 @@
 #include <ddc/kernels/fft.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/bsplines_non_uniform.hpp>
-#include <sll/bsplines_uniform.hpp>
-#include <sll/greville_interpolation_points.hpp>
-#include <sll/spline_boundary_conditions.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator_2d.hpp>
-
+#include <ddc_helper.hpp>
 #include <species_info.hpp>
 
 /**
@@ -81,38 +74,26 @@ bool constexpr BsplineOnUniformCellsVy = true;
 
 using BSplinesX = std::conditional_t<
         BsplineOnUniformCellsX,
-        UniformBSplines<RDimX, BSDegreeX>,
-        NonUniformBSplines<RDimX, BSDegreeX>>;
+        ddc::UniformBSplines<RDimX, BSDegreeX>,
+        ddc::NonUniformBSplines<RDimX, BSDegreeX>>;
 using BSplinesY = std::conditional_t<
         BsplineOnUniformCellsY,
-        UniformBSplines<RDimY, BSDegreeY>,
-        NonUniformBSplines<RDimY, BSDegreeY>>;
+        ddc::UniformBSplines<RDimY, BSDegreeY>,
+        ddc::NonUniformBSplines<RDimY, BSDegreeY>>;
 
 using BSplinesVx = std::conditional_t<
         BsplineOnUniformCellsVx,
-        UniformBSplines<RDimVx, BSDegreeVx>,
-        NonUniformBSplines<RDimVx, BSDegreeVx>>;
-using BSplinesVy = std::conditional_t<
-        BsplineOnUniformCellsVy,
-        UniformBSplines<RDimVy, BSDegreeVy>,
-        NonUniformBSplines<RDimVy, BSDegreeVy>>;
-using DDCBSplinesVx = std::conditional_t<
-        BsplineOnUniformCellsVx,
         ddc::UniformBSplines<RDimVx, BSDegreeVx>,
         ddc::NonUniformBSplines<RDimVx, BSDegreeVx>>;
-using DDCBSplinesVy = std::conditional_t<
+using BSplinesVy = std::conditional_t<
         BsplineOnUniformCellsVy,
         ddc::UniformBSplines<RDimVy, BSDegreeVy>,
         ddc::NonUniformBSplines<RDimVy, BSDegreeVy>>;
 
-BoundCond constexpr SplineXBoundary = BoundCond::PERIODIC;
-BoundCond constexpr SplineYBoundary = BoundCond::PERIODIC;
-BoundCond constexpr SplineVxBoundary = BoundCond::HERMITE;
-BoundCond constexpr SplineVyBoundary = BoundCond::HERMITE;
-ddc::BoundCond constexpr DDCSplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr DDCSplineYBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr DDCSplineVxBoundary = ddc::BoundCond::HERMITE;
-ddc::BoundCond constexpr DDCSplineVyBoundary = ddc::BoundCond::HERMITE;
+ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
+ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
+ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+ddc::BoundCond constexpr SplineVyBoundary = ddc::BoundCond::HERMITE;
 
 bool constexpr UniformMeshX = is_spline_interpolation_mesh_uniform(
         BsplineOnUniformCellsX,
@@ -156,40 +137,124 @@ using IDimVy = std::conditional_t<
 
 // IDim initialisers
 using SplineInterpPointsX
-        = GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
 using SplineInterpPointsY
-        = GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
 using SplineInterpPointsVx
-        = GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
 using SplineInterpPointsVy
-        = GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
 
 // SplineBuilder and SplineEvaluator definition
-using SplineXBuilder = SplineBuilder<BSplinesX, IDimX, SplineXBoundary, SplineXBoundary>;
-using SplineYBuilder = SplineBuilder<BSplinesY, IDimY, SplineYBoundary, SplineYBoundary>;
-using SplineXYBuilder = SplineBuilder2D<SplineXBuilder, SplineYBuilder>;
-using SplineVxBuilder = SplineBuilder<BSplinesVx, IDimVx, SplineVxBoundary, SplineVxBoundary>;
-using SplineVyBuilder = SplineBuilder<BSplinesVy, IDimVy, SplineVyBoundary, SplineVyBoundary>;
-using SplineVxVyBuilder = SplineBuilder2D<SplineVxBuilder, SplineVyBuilder>;
-using SplineXYEvaluator = SplineEvaluator2D<BSplinesX, BSplinesY>;
-using SplineVxVyEvaluator = SplineEvaluator2D<BSplinesVx, BSplinesVy>;
+using SplineXBuilder = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesX,
+        IDimX,
+        SplineXBoundary,
+        SplineXBoundary,
+        ddc::SplineSolver::GINKGO,
+        IDimX,
+        IDimY,
+        IDimVx,
+        IDimVy>;
+using SplineXEvaluator = ddc::SplineEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesX,
+        IDimX,
+        ddc::PeriodicExtrapolationRule<RDimX>,
+        ddc::PeriodicExtrapolationRule<RDimX>,
+        IDimX,
+        IDimY,
+        IDimVx,
+        IDimVy>;
+using SplineYBuilder = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesY,
+        IDimY,
+        SplineYBoundary,
+        SplineYBoundary,
+        ddc::SplineSolver::GINKGO,
+        IDimX,
+        IDimY,
+        IDimVx,
+        IDimVy>;
+using SplineYEvaluator = ddc::SplineEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesY,
+        IDimY,
+        ddc::PeriodicExtrapolationRule<RDimY>,
+        ddc::PeriodicExtrapolationRule<RDimY>,
+        IDimX,
+        IDimY,
+        IDimVx,
+        IDimVy>;
+using SplineVxBuilder = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVx,
+        IDimVx,
+        SplineVxBoundary,
+        SplineVxBoundary,
+        ddc::SplineSolver::GINKGO,
+        IDimX,
+        IDimY,
+        IDimVx,
+        IDimVy>;
+using SplineVxEvaluator = ddc::SplineEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVx,
+        IDimVx,
+        ddc::ConstantExtrapolationRule<RDimVx>,
+        ddc::ConstantExtrapolationRule<RDimVx>,
+        IDimX,
+        IDimY,
+        IDimVx,
+        IDimVy>;
+using SplineVyBuilder = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVy,
+        IDimVy,
+        SplineVyBoundary,
+        SplineVyBoundary,
+        ddc::SplineSolver::GINKGO,
+        IDimX,
+        IDimY,
+        IDimVx,
+        IDimVy>;
+using SplineVyEvaluator = ddc::SplineEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVy,
+        IDimVy,
+        ddc::ConstantExtrapolationRule<RDimVy>,
+        ddc::ConstantExtrapolationRule<RDimVy>,
+        IDimX,
+        IDimY,
+        IDimVx,
+        IDimVy>;
 
 using SplineVxBuilder_1d = ddc::SplineBuilder<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
-        DDCBSplinesVx,
+        BSplinesVx,
         IDimVx,
-        DDCSplineVxBoundary,
-        DDCSplineVxBoundary,
+        SplineVxBoundary,
+        SplineVxBoundary,
         ddc::SplineSolver::GINKGO,
         IDimVx>;
 using SplineVyBuilder_1d = ddc::SplineBuilder<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
-        DDCBSplinesVy,
+        BSplinesVy,
         IDimVy,
-        DDCSplineVyBoundary,
-        DDCSplineVyBoundary,
+        SplineVyBoundary,
+        SplineVyBoundary,
         ddc::SplineSolver::GINKGO,
         IDimVy>;
 
@@ -201,7 +266,7 @@ using BSDomainVy = ddc::DiscreteDomain<BSplinesVy>;
 using BSDomainVxVy = ddc::DiscreteDomain<BSplinesVx, BSplinesVy>;
 
 template <class ElementType>
-using BSViewXY = ddc::ChunkSpan<ElementType const, BSDomainXY>;
+using BSViewXY = device_t<ddc::ChunkSpan<ElementType const, BSDomainXY>>;
 using DBSViewXY = BSViewXY<double>;
 
 // Index
@@ -211,7 +276,9 @@ using IndexY = ddc::DiscreteElement<IDimY>;
 using IndexXY = ddc::DiscreteElement<IDimX, IDimY>;
 using IndexVx = ddc::DiscreteElement<IDimVx>;
 using IndexVy = ddc::DiscreteElement<IDimVy>;
+using IndexVxVy = ddc::DiscreteElement<IDimVx, IDimVy>;
 using IndexXYVxVy = ddc::DiscreteElement<IDimX, IDimY, IDimVx, IDimVy>;
+using IndexSpXYVxVy = ddc::DiscreteElement<IDimSp, IDimX, IDimY, IDimVx, IDimVy>;
 
 // IVect definition
 using IVectSp = ddc::DiscreteVector<IDimSp>;
@@ -234,103 +301,107 @@ using IDomainSpXYVxVy = ddc::DiscreteDomain<IDimSp, IDimX, IDimY, IDimVx, IDimVy
 
 // Field definition
 template <class ElementType>
-using FieldSp = ddc::Chunk<ElementType, IDomainSp>;
+using FieldSp = device_t<ddc::Chunk<ElementType, IDomainSp>>;
 using DFieldSp = FieldSp<double>;
 
 template <class ElementType>
-using FieldX = ddc::Chunk<ElementType, IDomainX>;
+using FieldX = device_t<ddc::Chunk<ElementType, IDomainX>>;
 using DFieldX = FieldX<double>;
 
 template <class ElementType>
-using FieldY = ddc::Chunk<ElementType, IDomainY>;
+using FieldY = device_t<ddc::Chunk<ElementType, IDomainY>>;
 using DFieldY = FieldY<double>;
 
 template <class ElementType>
-using FieldXY = ddc::Chunk<ElementType, IDomainXY>;
+using FieldXY = device_t<ddc::Chunk<ElementType, IDomainXY>>;
 using DFieldXY = FieldXY<double>;
 
 template <class ElementType>
-using FieldVx = ddc::Chunk<ElementType, IDomainVx>;
+using FieldVx = device_t<ddc::Chunk<ElementType, IDomainVx>>;
 
 template <class ElementType>
-using FieldVy = ddc::Chunk<ElementType, IDomainVy>;
+using FieldVy = device_t<ddc::Chunk<ElementType, IDomainVy>>;
 
 template <class ElementType>
-using FieldVxVy = ddc::Chunk<ElementType, IDomainVxVy>;
+using FieldVxVy = device_t<ddc::Chunk<ElementType, IDomainVxVy>>;
 using DFieldVxVy = FieldVxVy<double>;
 
 template <class ElementType>
-using FieldSpVxVy = ddc::Chunk<ElementType, IDomainSpVxVy>;
+using FieldXYVxVy = device_t<ddc::Chunk<ElementType, IDomainXYVxVy>>;
+using DFieldXYVxVy = FieldXYVxVy<double>;
+
+template <class ElementType>
+using FieldSpVxVy = device_t<ddc::Chunk<ElementType, IDomainSpVxVy>>;
 using DFieldSpVxVy = FieldSpVxVy<double>;
 
 template <class ElementType>
-using FieldSpXYVxVy = ddc::Chunk<ElementType, IDomainSpXYVxVy>;
+using FieldSpXYVxVy = device_t<ddc::Chunk<ElementType, IDomainSpXYVxVy>>;
 using DFieldSpXYVxVy = FieldSpXYVxVy<double>;
 
 //  Span definition
 template <class ElementType>
-using SpanX = ddc::ChunkSpan<ElementType, IDomainX>;
+using SpanX = device_t<ddc::ChunkSpan<ElementType, IDomainX>>;
 using DSpanX = SpanX<double>;
 
 template <class ElementType>
-using SpanY = ddc::ChunkSpan<ElementType, IDomainY>;
+using SpanY = device_t<ddc::ChunkSpan<ElementType, IDomainY>>;
 using DSpanY = SpanY<double>;
 
 template <class ElementType>
-using SpanXY = ddc::ChunkSpan<ElementType, IDomainXY>;
+using SpanXY = device_t<ddc::ChunkSpan<ElementType, IDomainXY>>;
 using DSpanXY = SpanXY<double>;
 
 template <class ElementType>
-using SpanVx = ddc::ChunkSpan<ElementType, IDomainVx>;
+using SpanVx = device_t<ddc::ChunkSpan<ElementType, IDomainVx>>;
 using DSpanVx = SpanVx<double>;
 
 template <class ElementType>
-using SpanVy = ddc::ChunkSpan<ElementType, IDomainVy>;
+using SpanVy = device_t<ddc::ChunkSpan<ElementType, IDomainVy>>;
 using DSpanVy = SpanVy<double>;
 
 template <class ElementType>
-using SpanVxVy = ddc::ChunkSpan<ElementType, IDomainVxVy>;
+using SpanVxVy = device_t<ddc::ChunkSpan<ElementType, IDomainVxVy>>;
 using DSpanVxVy = SpanVxVy<double>;
 
 template <class ElementType>
-using SpanSpVxVy = ddc::ChunkSpan<ElementType, IDomainSpVxVy>;
+using SpanSpVxVy = device_t<ddc::ChunkSpan<ElementType, IDomainSpVxVy>>;
 using DSpanSpVxVy = SpanSpVxVy<double>;
 
 template <class ElementType>
-using SpanSpXYVxVy = ddc::ChunkSpan<ElementType, IDomainSpXYVxVy>;
+using SpanSpXYVxVy = device_t<ddc::ChunkSpan<ElementType, IDomainSpXYVxVy>>;
 using DSpanSpXYVxVy = SpanSpXYVxVy<double>;
 
 // View definition
 template <class ElementType>
-using ViewSp = ddc::ChunkSpan<ElementType const, IDomainSp>;
+using ViewSp = device_t<ddc::ChunkSpan<ElementType const, IDomainSp>>;
 using DViewSp = ViewSp<double>;
 
 template <class ElementType>
-using ViewX = ddc::ChunkSpan<ElementType const, IDomainX>;
+using ViewX = device_t<ddc::ChunkSpan<ElementType const, IDomainX>>;
 
 template <class ElementType>
-using ViewY = ddc::ChunkSpan<ElementType const, IDomainY>;
+using ViewY = device_t<ddc::ChunkSpan<ElementType const, IDomainY>>;
 
 template <class ElementType>
-using ViewXY = ddc::ChunkSpan<ElementType const, IDomainXY>;
+using ViewXY = device_t<ddc::ChunkSpan<ElementType const, IDomainXY>>;
 using DViewXY = ViewXY<double>;
 
 template <class ElementType>
-using ViewVx = ddc::ChunkSpan<ElementType const, IDomainVx>;
+using ViewVx = device_t<ddc::ChunkSpan<ElementType const, IDomainVx>>;
 
 template <class ElementType>
-using ViewVy = ddc::ChunkSpan<ElementType const, IDomainVy>;
+using ViewVy = device_t<ddc::ChunkSpan<ElementType const, IDomainVy>>;
 
 template <class ElementType>
-using ViewVxVy = ddc::ChunkSpan<ElementType const, IDomainVxVy>;
+using ViewVxVy = device_t<ddc::ChunkSpan<ElementType const, IDomainVxVy>>;
 using DViewVxVy = ViewVxVy<double>;
 
 template <class ElementType>
-using ViewSpVxVy = ddc::ChunkSpan<ElementType const, IDomainSpVxVy>;
+using ViewSpVxVy = device_t<ddc::ChunkSpan<ElementType const, IDomainSpVxVy>>;
 using DViewSpVxVy = ViewSpVxVy<double>;
 
 template <class ElementType>
-using ViewSpXYVxVy = ddc::ChunkSpan<ElementType const, IDomainSpXYVxVy>;
+using ViewSpXYVxVy = device_t<ddc::ChunkSpan<ElementType const, IDomainSpXYVxVy>>;
 using DViewSpXYVxVy = ViewSpXYVxVy<double>;
 
 // For Fourier

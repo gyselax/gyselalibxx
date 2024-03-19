@@ -12,7 +12,9 @@
 #include "quadrature.hpp"
 #include "species_info.hpp"
 
-TEST(FftPoissonSolver, CosineSource)
+namespace {
+
+static void TestFftPoissonSolverCosineSource()
 {
     CoordX const x_min(0.0);
     CoordX const x_max(2.0 * M_PI);
@@ -38,8 +40,6 @@ TEST(FftPoissonSolver, CosineSource)
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
     ddc::init_discrete_space<BSplinesVy>(vy_min, vy_max, vy_size);
-    ddc::init_discrete_space<DDCBSplinesVx>(vx_min, vx_max, vx_size);
-    ddc::init_discrete_space<DDCBSplinesVy>(vy_min, vy_max, vy_size);
 
     ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
     ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling());
@@ -59,26 +59,21 @@ TEST(FftPoissonSolver, CosineSource)
 
     IDomainVxVy gridvxvy(gridvx, gridvy);
 
-    ddc::init_fourier_space<RDimX>(gridx);
-    ddc::init_fourier_space<RDimY>(gridy);
-
-    SplineVxVyBuilder const builder_vx_vy(gridvxvy);
-    SplineVxVyEvaluator const evaluator_vx_vy(
-            g_null_boundary_2d<BSplinesVx, BSplinesVy>,
-            g_null_boundary_2d<BSplinesVx, BSplinesVy>,
-            g_null_boundary_2d<BSplinesVx, BSplinesVy>,
-            g_null_boundary_2d<BSplinesVx, BSplinesVy>);
+    IDomainXYVxVy const meshxyvxvy(gridxy, gridvxvy);
 
     SplineVxBuilder_1d const builder_vx_1d(gridvx);
     SplineVyBuilder_1d const builder_vy_1d(gridvy);
 
-    IDomainSpXYVxVy const mesh(gridsp, gridxy, gridvxvy);
+    IDomainSpXYVxVy const mesh(gridsp, meshxyvxvy);
+
+    ddc::init_fourier_space<RDimX>(gridx);
+    ddc::init_fourier_space<RDimY>(gridy);
 
     // Initialise infomation about species
-    FieldSp<int> charges(dom_sp);
+    host_t<FieldSp<int>> charges(dom_sp);
     charges(my_ielec) = -1;
     charges(my_iion) = 1;
-    DFieldSp masses(dom_sp);
+    host_t<DFieldSp> masses(dom_sp);
     ddc::parallel_fill(masses, 1);
 
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
@@ -91,41 +86,72 @@ TEST(FftPoissonSolver, CosineSource)
     ChargeDensityCalculator rhs(quadrature_coeffs);
     FftPoissonSolver poisson(rhs);
 
-    DFieldXY electrostatic_potential(gridxy);
-    DFieldXY electric_field_x(gridxy);
-    DFieldXY electric_field_y(gridxy);
-    DFieldSpXYVxVy allfdistribu(mesh);
+    DFieldXY electrostatic_potential_alloc(gridxy);
+    DFieldXY electric_field_x_alloc(gridxy);
+    DFieldXY electric_field_y_alloc(gridxy);
+    DFieldSpXYVxVy allfdistribu_alloc(mesh);
+
+    DSpanXY electrostatic_potential = electrostatic_potential_alloc.span_view();
+    DSpanXY electric_field_x = electric_field_x_alloc.span_view();
+    DSpanXY electric_field_y = electric_field_y_alloc.span_view();
+    DSpanSpXYVxVy allfdistribu = allfdistribu_alloc.span_view();
 
     // Initialization of the distribution function --> fill values
-    auto c_dom = ddc::remove_dims_of(mesh, gridxy);
-    ddc::for_each(gridxy, [&](IndexXY const ixy) {
-        IndexX ix = ddc::select<IDimX>(ixy);
-        IndexY iy = ddc::select<IDimY>(ixy);
-        double x = ddc::coordinate(ix);
-        double y = ddc::coordinate(iy);
-        double fdistribu_val = cos(x) + cos(y);
-        ddc::for_each(c_dom, [&](auto const ispvxvy) {
-            allfdistribu(ixy, ispvxvy) = fdistribu_val;
-        });
-    });
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            mesh,
+            KOKKOS_LAMBDA(IndexSpXYVxVy const ispxyvxvy) {
+                IndexX ix = ddc::select<IDimX>(ispxyvxvy);
+                IndexY iy = ddc::select<IDimY>(ispxyvxvy);
+                double x = ddc::coordinate(ix);
+                double y = ddc::coordinate(iy);
+                double fdistribu_val = Kokkos::cos(x) + Kokkos::cos(y);
+                allfdistribu(ispxyvxvy) = fdistribu_val;
+            });
 
     poisson(electrostatic_potential, electric_field_x, electric_field_y, allfdistribu);
 
-    double error_pot = 0.0;
-    double error_field_x = 0.0;
-    double error_field_y = 0.0;
+    double error_pot = ddc::parallel_transform_reduce(
+            Kokkos::DefaultExecutionSpace(),
+            gridxy,
+            0.,
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(IndexXY const ixy) {
+                IndexX ix = ddc::select<IDimX>(ixy);
+                IndexY iy = ddc::select<IDimY>(ixy);
+                double const exact_pot
+                        = Kokkos::cos(ddc::coordinate(ix)) + Kokkos::cos(ddc::coordinate(iy));
+                return Kokkos::abs(electrostatic_potential(ixy) - exact_pot);
+            });
+    double error_field_x = ddc::parallel_transform_reduce(
+            Kokkos::DefaultExecutionSpace(),
+            gridxy,
+            0.,
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(IndexXY const ixy) {
+                IndexX ix = ddc::select<IDimX>(ixy);
+                double const exact_field_x = Kokkos::sin(ddc::coordinate(ix));
+                return Kokkos::abs(electric_field_x(ixy) - exact_field_x);
+            });
+    double error_field_y = ddc::parallel_transform_reduce(
+            Kokkos::DefaultExecutionSpace(),
+            gridxy,
+            0.,
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(IndexXY const ixy) {
+                IndexY iy = ddc::select<IDimY>(ixy);
+                double const exact_field_y = Kokkos::sin(ddc::coordinate(iy));
+                return Kokkos::abs(electric_field_y(ixy) - exact_field_y);
+            });
 
-    ddc::for_each(gridxy, [&](IndexXY const ixy) {
-        IndexX ix = ddc::select<IDimX>(ixy);
-        IndexY iy = ddc::select<IDimY>(ixy);
-        double const exact_pot = cos(ddc::coordinate(ix)) + cos(ddc::coordinate(iy));
-        error_pot = fmax(fabs(electrostatic_potential(ixy) - exact_pot), error_pot);
-        double const exact_field_x = sin(ddc::coordinate(ix));
-        double const exact_field_y = sin(ddc::coordinate(iy));
-        error_field_x = fmax(fabs(electric_field_x(ixy) - exact_field_x), error_field_x);
-        error_field_y = fmax(fabs(electric_field_y(ixy) - exact_field_y), error_field_y);
-    });
     EXPECT_LE(error_pot, 1e-12);
     EXPECT_LE(error_field_x, 1e-10);
     EXPECT_LE(error_field_y, 1e-10);
+}
+
+} // namespace
+
+TEST(FftPoissonSolver, CosineSource)
+{
+    TestFftPoissonSolverCosineSource();
 }

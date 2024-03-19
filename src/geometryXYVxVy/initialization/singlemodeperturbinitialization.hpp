@@ -12,25 +12,39 @@ class SingleModePerturbInitialization : public IInitialization
 {
     DViewSpVxVy m_fequilibrium;
 
-    ViewSp<int> m_init_perturb_mode;
+    host_t<ViewSp<int>> m_init_perturb_mode;
 
-    DViewSp m_init_perturb_amplitude;
+    host_t<DViewSp> m_init_perturb_amplitude;
 
-private:
-    /*
-      Initialization of the perturbation
-    */
+public:
+    /**
+     * @brief Initialization of the perturbation.
+     * @param[in, out] perturbation On input: an uninitialized array
+     *                              On output: an array containing a values that has a 
+     *                              sinusoidal variation with given amplitude and mode. 
+     * @param[in] mode The mode of the perturbation. 
+     * @param[in] perturb_amplitude The amplitude of the perturbation. 
+     */
     void perturbation_initialization(DSpanXY perturbation, int mode, double perturb_amplitude)
             const;
 
-public:
-    // Warning: all variables shall remain valid until the last call to `operator()`
+    /**
+     * @brief Creates an instance of the SingleModePerturbInitialization class.
+     * @param[in] fequilibrium A Maxwellian. 
+     * @param[in] init_perturb_mode The perturbation mode. 
+     * @param[in] init_perturb_amplitude The perturbation amplitude. 
+     */
     SingleModePerturbInitialization(
             DViewSpVxVy fequilibrium,
-            ViewSp<int> init_perturb_mode,
-            DViewSp init_perturb_amplitude);
+            host_t<ViewSp<int>> init_perturb_mode,
+            host_t<DViewSp> init_perturb_amplitude);
 
     ~SingleModePerturbInitialization() override = default;
 
+    /**
+     * @brief Initializes the distribution function as as a perturbed Maxwellian. 
+     * @param[in, out] allfdistribu The initialized distribution function.
+     * @return The initialized distribution function.
+     */
     DSpanSpXYVxVy operator()(DSpanSpXYVxVy allfdistribu) const override;
 };

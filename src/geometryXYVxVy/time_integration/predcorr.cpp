@@ -21,15 +21,24 @@ DSpanSpXYVxVy PredCorr::operator()(
         double const dt,
         int const steps) const
 {
+    auto allfdistribu_host_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
+    ddc::ChunkSpan allfdistribu_host = allfdistribu_host_alloc.span_view();
+
     // electrostatic potential and electric field (depending only on x)
     DFieldXY electrostatic_potential(allfdistribu.domain<IDimX, IDimY>());
     DFieldXY electric_field_x(allfdistribu.domain<IDimX, IDimY>());
     DFieldXY electric_field_y(allfdistribu.domain<IDimX, IDimY>());
 
+    host_t<DFieldXY> electrostatic_potential_host(allfdistribu.domain<IDimX, IDimY>());
+
     // a 2D chunck of the same size as fdistribu
     DFieldSpXYVxVy allfdistribu_half_t(allfdistribu.domain());
 
-    m_poisson_solver(electrostatic_potential, electric_field_x, electric_field_y, allfdistribu);
+    m_poisson_solver(
+            electrostatic_potential,
+            electric_field_x,
+            electric_field_y,
+            allfdistribu.span_cview());
 
     int iter = 0;
     for (; iter < steps; ++iter) {
@@ -37,13 +46,19 @@ DSpanSpXYVxVy PredCorr::operator()(
 
         // computation of the electrostatic potential at time tn and
         // the associated electric field
-        m_poisson_solver(electrostatic_potential, electric_field_x, electric_field_y, allfdistribu);
-
+        m_poisson_solver(
+                electrostatic_potential,
+                electric_field_x,
+                electric_field_y,
+                allfdistribu.span_cview());
+        // copies necessary to PDI
+        ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
+        ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
         ddc::PdiEvent("iteration")
                 .with("iter", iter)
                 .and_with("time_saved", iter_time)
-                .and_with("fdistribu", allfdistribu)
-                .and_with("electrostatic_potential", electrostatic_potential);
+                .and_with("fdistribu", allfdistribu_host)
+                .and_with("electrostatic_potential", electrostatic_potential_host);
 
         // copy fdistribu
         ddc::parallel_deepcopy(allfdistribu_half_t, allfdistribu);
@@ -65,11 +80,15 @@ DSpanSpXYVxVy PredCorr::operator()(
 
     double const final_time = iter * dt;
     m_poisson_solver(electrostatic_potential, electric_field_x, electric_field_y, allfdistribu);
+
+    //copies necessary to PDI
+    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
+    ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
     ddc::PdiEvent("last_iteration")
             .with("iter", iter)
             .and_with("time_saved", final_time)
-            .and_with("fdistribu", allfdistribu)
-            .and_with("electrostatic_potential", electrostatic_potential);
+            .and_with("fdistribu", allfdistribu_host)
+            .and_with("electrostatic_potential", electrostatic_potential_host);
 
     return allfdistribu;
 }
