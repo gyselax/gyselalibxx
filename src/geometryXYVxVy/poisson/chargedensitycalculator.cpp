@@ -12,11 +12,8 @@ ChargeDensityCalculator::ChargeDensityCalculator(const ChunkViewType& coeffs)
 {
 }
 
-void ChargeDensityCalculator::operator()(DSpanXY rho_host, DViewSpXYVxVy allfdistribu_host) const
+void ChargeDensityCalculator::operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu) const
 {
-    auto rho = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), rho_host);
-    auto allfdistribu
-            = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
     Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
     IndexSp const last_kin_species = allfdistribu.domain<IDimSp>().back();
     IndexSp const last_species = ddc::discrete_space<IDimSp>().charges().domain().back();
@@ -30,8 +27,8 @@ void ChargeDensityCalculator::operator()(DSpanXY rho_host, DViewSpXYVxVy allfdis
             = allfdistribu.allocation_kokkos_view();
     Kokkos::View<double**, Kokkos::LayoutRight> const rho_view = rho.allocation_kokkos_view();
 
-    ViewSp<int> const charges_host = ddc::host_discrete_space<IDimSp>().charges();
-    ViewSp<int> const kinetic_charges_host = charges_host[allfdistribu.domain<IDimSp>()];
+    host_t<ViewSp<int>> const charges_host = ddc::host_discrete_space<IDimSp>().charges();
+    host_t<ViewSp<int>> const kinetic_charges_host = charges_host[allfdistribu.domain<IDimSp>()];
 
     auto charges_alloc
             = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), kinetic_charges_host);
@@ -83,6 +80,4 @@ void ChargeDensityCalculator::operator()(DSpanXY rho_host, DViewSpXYVxVy allfdis
                 rho_view(ix, iy) = chargedens_adiabspecies + teamSum;
             });
     Kokkos::Profiling::popRegion();
-
-    ddc::parallel_deepcopy(rho_host, rho);
 }

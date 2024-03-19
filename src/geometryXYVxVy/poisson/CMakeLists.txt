@@ -2,7 +2,6 @@
 
 add_library("poisson_xy" STATIC
     chargedensitycalculator.cpp
-    electricfield.cpp
     nullpoissonsolver.cpp
     fftpoissonsolver.cpp
 )
