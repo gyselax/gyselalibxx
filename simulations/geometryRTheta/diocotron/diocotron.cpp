@@ -42,7 +42,6 @@
 #include "spline_interpolator_2d_rp.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
-#include "vlasovpoissonsolver.hpp"
 
 
 
@@ -200,10 +199,9 @@ int main(int argc, char** argv)
 
     AdvectionPhysicalDomain advection_domain(mapping);
 
-    SplineFootFinder
-            find_feet(time_stepper, advection_domain, grid, builder, spline_evaluator_extrapol);
+    SplineFootFinder find_feet(time_stepper, advection_domain, builder, spline_evaluator_extrapol);
 
-    BslAdvectionRP advection_operator(interpolator, find_feet);
+    BslAdvectionRP advection_operator(interpolator, find_feet, mapping);
 
 
 

@@ -14,6 +14,7 @@
 #include "sll/spline_evaluator_2d.hpp"
 
 #include "advection_domain.hpp"
+#include "advection_field_rp.hpp"
 #include "bsl_advection_rp.hpp"
 #include "geometry.hpp"
 #include "itimesolver.hpp"
@@ -21,7 +22,7 @@
 #include "polarpoissonsolver.hpp"
 #include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
-#include "vlasovpoissonsolver.hpp"
+
 
 
 /**
@@ -41,13 +42,15 @@
  * for @f$ n \geq 0 @f$,
  *
  * First, it predicts:
- * - 1. & 2. From @f$\rho^n@f$, it computes @f$\phi^n@f$ and  @f$E^n@f$ with a VlasovPoissonSolver;
+ * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonSolver;
+ * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
  * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes implicitly @f$\rho^P@f$ with a BslAdvectionRP on @f$ \frac{dt}{4} @f$:
  *      - the characteristic feet @f$X^P@f$ is such that @f$X^P = X^k@f$ with @f$X^k@f$ the result of the implicit method:
  *          - @f$ X^k = X^n - \frac{dt}{4} \partial_t X^k@f$.
  *
  * Secondly, it corrects:
- * - 4. & 5. From @f$\rho^P@f$, it computes @f$\phi^P@f$ and @f$E^P@f$ with a VlasovPoissonSolver;
+ * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarSplineFEMPoissonSolver;
+ * - 5. From @f$\phi^P@f$, it computes @f$A^P@f$ with a AdvectionFieldFinder;
  * - 6. From @f$\rho^n@f$ and @f$ A^{P} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRP on @f$ \frac{dt}{2} @f$.
  *      - the characteristic feet @f$X^C@f$ is such that @f$X^C = X^k@f$ with @f$X^k@f$ the result of the implicit method:
  *          - @f$\partial_t X^k = A^P(X^n) + A^P(X^{k-1}) @f$,
@@ -76,12 +79,13 @@ private:
 
     Mapping const& m_mapping;
 
-    BslAdvectionRP<SplineFootFinder<EulerMethod, AdvectionDomain>> const& m_advection_solver;
+    BslAdvectionRP<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping> const&
+            m_advection_solver;
 
     EulerMethod const m_euler;
     SplineFootFinder<EulerMethod, AdvectionDomain> const m_foot_finder;
 
-    VlasovPoissonSolver<Mapping> const m_vlasov_poisson_solver;
+    PolarSplineFEMPoissonSolver const& m_poisson_solver;
 
     Builder const& m_builder;
     Evaluator const& m_evaluator;
@@ -116,7 +120,8 @@ public:
     BslImplicitPredCorrRP(
             AdvectionDomain const& advection_domain,
             Mapping const& mapping,
-            BslAdvectionRP<SplineFootFinder<EulerMethod, AdvectionDomain>> const& advection_solver,
+            BslAdvectionRP<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping> const&
+                    advection_solver,
             IDomainRP const& grid,
             SplineRPBuilder const& builder,
             SplineRPEvaluator const& rhs_evaluator,
@@ -126,8 +131,8 @@ public:
         , m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_euler(grid)
-        , m_foot_finder(m_euler, advection_domain, grid, builder, advection_evaluator)
-        , m_vlasov_poisson_solver(mapping, builder, rhs_evaluator, poisson_solver)
+        , m_foot_finder(m_euler, advection_domain, builder, advection_evaluator)
+        , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)
 
@@ -148,20 +153,43 @@ public:
         // Grid. ------------------------------------------------------------------------------------------
         IDomainRP const grid(allfdistribu.domain<IDimR, IDimP>());
 
+        FieldRP<CoordRP> coords(grid);
+        ddc::for_each(grid, [&](IndexRP const irp) { coords(irp) = ddc::coordinate(irp); });
+
+        BSDomainR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
+                ddc::DiscreteVector<BSplinesR> {PolarBSplinesRP::continuity + 1}));
+        BSDomainP polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
 
         // --- Electrostatic potential (phi). -------------------------------------------------------------
         DFieldRP electrical_potential(grid);
 
+        SplinePolar electrostatic_potential_coef(
+                PolarBSplinesRP::singular_domain(),
+                BSDomainRP(radial_bsplines, polar_domain));
+
+        PolarSplineEvaluator<PolarBSplinesRP> polar_spline_evaluator(
+                g_polar_null_boundary_2d<PolarBSplinesRP>);
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
         VectorDFieldRP<RDimX, RDimY> electric_field(grid);
         VectorDFieldRP<RDimX, RDimY> advection_field(grid);
 
+        AdvectionFieldFinder advection_field_computer(m_mapping);
+
+
 
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
-            // STEP 1&2: From rho^n, we compute E^n: Poisson equation + derivatives
-            m_vlasov_poisson_solver(electrical_potential, electric_field, allfdistribu);
+            // STEP 1: From rho^n, we compute phi^n: Poisson equation
+            Spline2D allfdistribu_coef(m_builder.spline_domain());
+            m_builder(allfdistribu_coef, allfdistribu);
+            PoissonRHSFunction const charge_density_coord_1(allfdistribu_coef, m_evaluator);
+            m_poisson_solver(charge_density_coord_1, electrostatic_potential_coef);
+
+            polar_spline_evaluator(
+                    electrical_potential.span_view(),
+                    coords.span_cview(),
+                    electrostatic_potential_coef);
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
@@ -169,14 +197,9 @@ public:
                     .and_with("density", allfdistribu)
                     .and_with("electrical_potential", electrical_potential);
 
-            // --- compute advection field $A^n$ from electric field $E^n$:
-            ddc::for_each(advection_field.domain(), [&](IndexRP const idx) {
-                ddcHelper::get<RDimX>(advection_field)(idx)
-                        = -ddcHelper::get<RDimY>(electric_field)(idx);
-            });
-            ddc::parallel_deepcopy(
-                    ddcHelper::get<RDimY>(advection_field),
-                    ddcHelper::get<RDimX>(electric_field));
+
+            // STEP 2: From phi^n, we compute A^n:
+            advection_field_computer(electrostatic_potential_coef, advection_field);
 
 
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
@@ -242,17 +265,13 @@ public:
             m_foot_finder(feet_coords.span_view(), advection_field_k_tot.span_cview(), dt / 2.);
 
 
-            // STEP 4&5: From rho^P, we compute E^P: Poisson equation + derivatives
-            m_vlasov_poisson_solver(electrical_potential, electric_field, allfdistribu_predicted);
+            // STEP 4: From rho^P, we compute phi^P: Poisson equation
+            m_builder(allfdistribu_coef, allfdistribu);
+            PoissonRHSFunction const charge_density_coord_4(allfdistribu_coef, m_evaluator);
+            m_poisson_solver(charge_density_coord_4, electrostatic_potential_coef);
 
-            // --- compute advection field A^P from electric field E^P:
-            ddc::for_each(advection_field.domain(), [&](IndexRP const idx) {
-                ddcHelper::get<RDimX>(advection_field)(idx)
-                        = -ddcHelper::get<RDimY>(electric_field)(idx);
-            });
-            ddc::parallel_deepcopy(
-                    ddcHelper::get<RDimY>(advection_field),
-                    ddcHelper::get<RDimX>(electric_field));
+            // STEP 5: From phi^P, we compute A^P:
+            advection_field_computer(electrostatic_potential_coef, advection_field);
 
 
             // STEP 6: From rho^n and A^P, we compute rho^{n+1}: Vlasov equation
@@ -296,8 +315,11 @@ public:
             m_advection_solver(allfdistribu, advection_field_k_tot.span_cview(), dt);
         }
 
-        // STEP 1&2: From rho^n, we compute E^n: Poisson equation + derivatives
-        m_vlasov_poisson_solver(electrical_potential, electric_field, allfdistribu);
+        // STEP 1: From rho^n, we compute phi^n: Poisson equation
+        Spline2D allfdistribu_coef(m_builder.spline_domain());
+        m_builder(allfdistribu_coef, allfdistribu);
+        PoissonRHSFunction const charge_density_coord(allfdistribu_coef, m_evaluator);
+        m_poisson_solver(charge_density_coord, coords, electrical_potential);
 
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)
@@ -389,6 +411,5 @@ private:
             });
 
         } while ((square_difference_feet > tau * tau) and (count < max_count));
-        //std::cout << ">>> diff = " << square_difference_feet << std::endl;
     }
 };

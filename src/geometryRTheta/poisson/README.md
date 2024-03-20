@@ -69,49 +69,6 @@ So we compute the solution B-splines coefficients $`\{\phi_l\}_l`$ by solving th
 
 
 
-
-## Evaluation of electric field
-
-(See for more details, Edoardo Zoni's article, https://doi.org/10.1016/j.jcp.2019.108889 .)
-
-We write in this section $`\nabla_{r,\theta}`$ the gradient in the logical coordinates $(r, \theta)$ 
-and $`\nabla_{x,y}`$ the gradient in the physical coordinates $(x, y)$. 
-
-Coupled with the Vlasov equation 
-```math
-\partial_t \rho - E_y \partial_x \rho + E_x \partial_y\rho = 0,
-```
-
-the VlasovPoissonSolver also computes the electric field $E$ in the physical domain from the solution of PolarSplineFEMPoissonSolver. 
-
-The electric field is given by $E = -\nabla \phi$. The solution of the Poisson solver is defined
-on the logical domain, so we can easily compute $`\nabla_{r,\theta} \phi`$. From that, we use the Jacobian
-matrix of the mapping $\mathcal{F}$: 
-
-```math
-E_r e_r + E_\theta e_\theta = -\nabla_{r,\theta} \phi,\\
-E_x e_x + E_y e_y  =  J_{\mathcal{F}}(r,\theta)) (E_r e_r + E_\theta e_\theta),
-```
-
-with $`e_i = \partial_{x_i}x`$ the unnormalized local contravariant base.
-
-However the inverse Jacobian matrix $`J_{\mathcal{F}}`$ can be ill-defined at the O-point. In 
-Edoardo Zoni's article, they suggest to linearize around the O-point: 
-
-for $`r < \varepsilon`$,
-```math
-E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E(0, \theta) + \frac{r}{\varepsilon} E(\varepsilon, \theta)
-```
-
-with $E(0, \theta)$ computed thanks to 
-* $`\partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_1)`$, and
-* $`\partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_2)`$, 
-* where $`\theta_1`$ and $`\theta_2`$  correspond to linearly independent directions. 
-
-
-(In the code, we chose $`\theta_1 = \frac{\pi}{4}`$ and $`\theta_2  = - \frac{\pi}{4}`$, and $\varepsilon = 10^{-12}$.)
-
-
 ## Unit tests 
 
 The test are implemented in the `tests/geometryRTheta/polar_poisson/` folder 
@@ -129,8 +86,6 @@ The PolarSplineFEMPoissonSolver is tested on a circular mapping (CircularToCarte
  	* cartesian solution: $\phi(x,y) = C (1+r(x,y))^6  (1 - r(x,y))^6 \cos(2\pi x) \sin(2\pi y)$, 
  		* with  $C = 2^{12}1e-4$. 
  		
- The VlasovPoissonSolver is tested on a circular mapping (CircularToCartesian) and on a Czarny mapping (CzarnyToCartesian) 
- with the same Poisson coeffiecients and for the cartesian solution. 
 
 
 ## References 
@@ -146,5 +101,3 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
  * ipoissonsolver.hpp : Define a base class for the Poisson solvers: IPoissonSolver.
  * polarpoissonsolver.hpp : Define a Poisson solver using FEM on B-splines: PolarSplineFEMPoissonSolver. 
  * poisson\_rhs\_function.hpp : Define a rhs object (PoissonRHSFunction) for the Poisson equation (mainly used for vlasovpoissonsolver.hpp): PoissonRHSFunction. 
- * vlasovpoissonsolver.hpp : Define a class which solves the Poisson equation and computes the electric field: VlasovPoissonSolver. 
-

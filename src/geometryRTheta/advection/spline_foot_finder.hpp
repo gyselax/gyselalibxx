@@ -47,8 +47,6 @@ public:
      * @param[in] advection_domain
      *      An AdvectionDomain object which defines in which domain we
      *      advect the characteristics.
-     * @param[in] dom
-     *      The domain on which the feet are defined.
      * @param[in] builder_advection_field
      *      The spline builder which computes the spline representation
      *      of the advection field.
@@ -65,7 +63,6 @@ public:
     SplineFootFinder(
             TimeStepper const& time_stepper,
             AdvectionDomain const& advection_domain,
-            IDomainRP const& dom,
             SplineRPBuilder const& builder_advection_field,
             SplineRPEvaluator const& evaluator_advection_field)
         : m_time_stepper(time_stepper)
