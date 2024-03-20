@@ -1,20 +1,17 @@
 # Advection operator
 
-## Advection operator
-
-### Studied equation 
+## Studied equation 
 
 The studied equation is the following 2D transport equation type : 
 ```math
 \partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0,
 ```
 
-with $`f(0,x,y) = f_0(x,y)`$ and $A$ the advection field. 
+with $`f(0,x,y) = f_0(x,y)`$ and *A* the advection field. 
 
-**We want to solve it on a polar grid.** 
+**We want to solve it on a polar grid so we have:**  $`(t,x,y) = (t,x(r,\theta),y(r,\theta))`$. 
 
-
-### Backward Semi-Lagrangian method
+## Backward Semi-Lagrangian method
 
 The method used to solve the equation is a Backward Semi-Lagrangian method (BSL). 
 It uses the conservation along the characteristics property: 
@@ -38,7 +35,7 @@ So to compute the advected function at the next time step,
 
 
 
-### Time integration methods
+## Time integration methods
 
 There are multiple time integration methods available which are implemented in the ITimeStepper child classes. For example: 
  - Explicit Euler method: Euler; 
@@ -53,7 +50,7 @@ We are listing the different schemes for this equation $`\partial_t X (t) = A_x(
 We write $X (t) = X (t; s, x, y)$,  $X^n = X(t^n)$ and $A^n(X) = A(t^n, X)$ for a time discretisation $`\{t^n; t^n > t^{n-1},  \forall n\}_n`$. 
 
  
-#### Explicit Euler method
+### Explicit Euler method
 
 - Scheme: 
 $X^n = X^{n+1} - dt A^{n+1}(X^{n+1})$
@@ -61,7 +58,7 @@ $X^n = X^{n+1} - dt A^{n+1}(X^{n+1})$
 - Convergence order : 1.
 
 
-#### Crank-Nicolson method
+### Crank-Nicolson method
 
 - Scheme: 
 $X^{k+1} = X^{n+1} - \frac{dt}{2} \left( A^{n+1}(X^{n+1}) + A^k(X^k) \right)$ and 
@@ -70,7 +67,7 @@ $X^{n+1} = X^{k+1}$ once converged.
 - Convergence order : 2. 
 
 
-#### RK3 method
+### RK3 method
 
 - Scheme: 
 $`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)`$
@@ -83,7 +80,7 @@ $`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)`$
 
 
 
-#### RK4 method
+### RK4 method
 
 - Scheme: 
 $`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)`$
@@ -97,7 +94,7 @@ $`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)`$
 
 
 
-### Advection domain 
+## Advection domain 
 
 There are two advection domains implemented: 
  - the physical domain: AdvectionPhysicalDomain; 
@@ -146,7 +143,124 @@ and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details
 **Remark 2:** if the mapping function is analytically invertible, it is less costly to advect in the physical domain. 
 
 
-## Unit tests
+
+## Advection Field
+
+In the studied equation, the advection field is given along the physical domain axis: 
+```math
+\partial_t f + A_x \partial_x f + A_y \partial_y f = 0.
+```
+
+The BslAdvectionRP operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis,
+```math
+A = (A_x, A_y) \quad \text{or} \quad A = (A_r, A_\theta).
+```
+
+The advection field can be computed thanks to the AdvectionFieldFinder operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see [advection\_field\_rp](./../advection_field/README.md)).
+
+* If the advection field is directly given along the physical domain axes, no treatment is needed in the BslAdvectionRP operator. 
+
+* If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain. 
+
+**In the guiding-center case**, the advection field is computed from the electric field, 
+```math
+A = - E \wedge e_z = -\nabla \phi \wedge e_z.
+```
+
+In [the documentation for the advection field](./../advection_field/README.md), we show that 
+```math
+\nabla_{xy} \phi = J D_{G}^{-1}\nabla_{r\theta} \phi,
+```
+
+with *J* the Jacobian matrix and the following diagonal matrix 
+```math
+D_{G} 
+= 
+\begin{bmatrix}
+    \sqrt{g_{11}} & 0 \\
+    0 & \sqrt{g_{22}} \\
+\end{bmatrix}
+```
+
+with the metric tensor $`G = J^TJ = [g_{ij}]_{ij}`$. 
+
+It gives the following relation for the electric field
+```math
+\begin{bmatrix}
+    E_x \\
+    E_y \\
+\end{bmatrix} 
+= 
+J D_{G}^{-1}
+\begin{bmatrix}
+    E_r \\
+    E_\theta \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    \frac{j_{11}}{\sqrt{g_{11}}} & \frac{j_{12}}{\sqrt{g_{22}}} \\
+    \frac{j_{21}}{\sqrt{g_{11}}} & \frac{j_{22}}{\sqrt{g_{22}}} \\
+\end{bmatrix}
+\begin{bmatrix}
+    E_r \\
+    E_\theta \\
+\end{bmatrix}.
+```
+
+
+We deduce that 
+```math
+\begin{bmatrix}
+	A_x \\
+	A_y 
+\end{bmatrix}
+= 
+\begin{bmatrix}
+	- Ey \\
+	E_x 
+\end{bmatrix}
+= 
+\begin{bmatrix}
+	- \frac{j_{21}}{\sqrt{g_{11}}}E_r - \frac{j_{22}}{\sqrt{g_{22}}} E_\theta\\
+	\frac{j_{11}}{\sqrt{g_{11}}}E_r + \frac{j_{12}}{\sqrt{g_{22}}} E_\theta \\
+\end{bmatrix}
+= 
+\begin{bmatrix}
+	\frac{j_{22}}{\sqrt{g_{22}}}  & - \frac{j_{21}}{\sqrt{g_{11}}} \\
+	- \frac{j_{12}}{\sqrt{g_{22}}} & \frac{j_{11}}{\sqrt{g_{11}}}
+\end{bmatrix}
+\begin{bmatrix}
+	- E_\theta \\
+	E_r
+\end{bmatrix}
+= 
+\det(JD_{G}^{-1}) ((JD_{G}^{-1})^{-1})^{T}
+\begin{bmatrix}
+	- E_\theta \\
+	E_r
+\end{bmatrix}
+= 
+\det(J) (J^{-1})^{T} det(D_{G}^{-1}) D_G 
+\begin{bmatrix}
+	A_r \\
+	A_\theta
+\end{bmatrix}.
+```
+
+So, from the advection field along the logical domain axis, we multiply by 
+```math
+\det(J) det(D_{G}^{-1})  (J^{-1})^{T} D_G
+= 
+\begin{bmatrix}
+	\frac{j_{22}}{\sqrt{g_{22}}}  & - \frac{j_{21}}{\sqrt{g_{11}}} \\
+	- \frac{j_{12}}{\sqrt{g_{22}}} & \frac{j_{11}}{\sqrt{g_{11}}}
+\end{bmatrix},
+```
+
+to get the advection field along the physical domain axis. 
+
+
+# Unit tests
 
 The test of the advection operator are implemented in the `tests/geometryRTheta/advection_2d_rp/` folder 
 ([advection\_2d\_rp](./../../../tests/geometryRTheta/advection_2d_rp/README.md)).
@@ -181,14 +295,14 @@ for $n = 1, 2, 4, 8,  ...$.
 
 
 
-## References
+# References
 [1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped 
 disk-like domains with the method of characteristics and spline finite elements". 
 ([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889).)
 Journal of Computational Physics (2019).
 
  
-## Contents
+# Contents
 
 This folder contains:
  - advection\_domain.hpp : define the different advection domains (AdvectionDomain). 
