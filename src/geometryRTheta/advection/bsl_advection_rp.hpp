@@ -56,13 +56,15 @@
  * @see AdvectionDomain
  *
  */
-template <class FootFinder>
+template <class FootFinder, class Mapping>
 class BslAdvectionRP : public IAdvectionRP
 {
 private:
     PreallocatableSplineInterpolatorRP const& m_interpolator;
 
     FootFinder const& m_find_feet;
+
+    Mapping const& m_mapping;
 
 
 public:
@@ -74,15 +76,20 @@ public:
      *      characteristic computed.
      * @param[in] foot_finder
      *      An IFootFinder which computes the characteristic feet.
+     * @param[in] mapping
+     *      The mapping function from the logical domain to the physical
+     *      domain. 
      *
      * @tparam IFootFinder
      *      A child class of IFootFinder.
      */
     BslAdvectionRP(
             PreallocatableSplineInterpolatorRP const& function_interpolator,
-            FootFinder const& foot_finder)
+            FootFinder const& foot_finder,
+            Mapping const& mapping)
         : m_interpolator(function_interpolator)
         , m_find_feet(foot_finder)
+        , m_mapping(mapping)
     {
     }
 
@@ -94,28 +101,102 @@ public:
      *
      * @param [in, out] allfdistribu
      *      A ChunkSpan containing the values of the function we want to advect.
-     * @param [in] advection_field
+     * @param [in] advection_field_xy
      *      A VectorDViewRP containing the values of the advection field
-     *      in the physical domain.
+     *      on the physical domain axes.
      * @param [in] dt
      *      A time step used.
      *
      * @return A ChunkSpan to allfdistribu advected on the time step given.
      */
-    DSpanRP operator()(DSpanRP allfdistribu, VectorDViewRP<RDimX, RDimY> advection_field, double dt)
-            const
+    DSpanRP operator()(
+            DSpanRP allfdistribu,
+            VectorDViewRP<RDimX, RDimY> advection_field_xy,
+            double dt) const
     {
         // Pre-allocate some memory to prevent allocation later in loop
         std::unique_ptr<IInterpolatorRP> const interpolator_ptr = m_interpolator.preallocate();
 
-        // Initialisation the feet
-        FieldRP<CoordRP> feet_rp(advection_field.domain());
-        ddc::for_each(advection_field.domain(), [&](IndexRP const irp) {
+        // Initialise the feet
+        FieldRP<CoordRP> feet_rp(advection_field_xy.domain());
+        ddc::for_each(advection_field_xy.domain(), [&](IndexRP const irp) {
             feet_rp(irp) = ddc::coordinate(irp);
         });
 
         // Compute the characteristic feet at tn ----------------------------------------------------
-        m_find_feet(feet_rp.span_view(), advection_field, dt);
+        m_find_feet(feet_rp.span_view(), advection_field_xy, dt);
+
+        // Interpolate the function on the characteristic feet. -------------------------------------
+        (*interpolator_ptr)(allfdistribu, feet_rp.span_cview());
+
+        return allfdistribu;
+    }
+
+
+    /**
+     * @brief Allocate a ChunkSpan to the advected function.
+     *
+     * @param [in, out] allfdistribu
+     *      A ChunkSpan containing the values of the function we want to advect.
+     * @param [in] advection_field_rp
+     *      A VectorDViewRP containing the values of the advection field
+     *      on the logical domain axis.
+     * @param [in] advection_field_xy_center
+     *      A CoordXY containing the value of the advection field on the 
+     *      physical domain axis at the O-point. 
+     * @param [in] dt
+     *      A time step used.
+     *
+     * @return A ChunkSpan to allfdistribu advected on the time step given.
+     */
+    DSpanRP operator()(
+            DSpanRP allfdistribu,
+            VectorDViewRP<RDimR, RDimP> advection_field_rp,
+            CoordXY const& advection_field_xy_center,
+            double dt) const
+    {
+        IDomainRP grid(allfdistribu.domain<IDimR, IDimP>());
+
+        const int npoints_p = IDomainP(grid).size();
+        IDomainRP const grid_without_Opoint(grid.remove_first(IVectRP(1, 0)));
+        IDomainRP const Opoint_grid(grid.take_first(IVectRP(1, npoints_p)));
+
+
+        // Convert advection field on RP to advection field on XY
+        VectorDFieldRP<RDimX, RDimY> advection_field_xy(grid);
+
+        ddc::for_each(grid_without_Opoint, [&](IndexRP const irp) {
+            CoordRP const coord_rp(ddc::coordinate(irp));
+
+            std::array<std::array<double, 2>, 2> J; // Jacobian matrix
+            m_mapping.jacobian_matrix(coord_rp, J);
+            std::array<std::array<double, 2>, 2> G; // Metric tensor
+            m_mapping.metric_tensor(coord_rp, G);
+
+            ddcHelper::get<RDimX>(advection_field_xy)(irp)
+                    = ddcHelper::get<RDimR>(advection_field_rp)(irp) * J[1][1] / std::sqrt(G[1][1])
+                      + ddcHelper::get<RDimP>(advection_field_rp)(irp) * -J[1][0]
+                                / std::sqrt(G[0][0]);
+            ddcHelper::get<RDimY>(advection_field_xy)(irp)
+                    = ddcHelper::get<RDimR>(advection_field_rp)(irp) * -J[0][1] / std::sqrt(G[1][1])
+                      + ddcHelper::get<RDimP>(advection_field_rp)(irp) * J[0][0]
+                                / std::sqrt(G[0][0]);
+        });
+
+        ddc::for_each(Opoint_grid, [&](IndexRP const irp) {
+            ddcHelper::get<RDimX>(advection_field_xy)(irp) = CoordX(advection_field_xy_center);
+            ddcHelper::get<RDimY>(advection_field_xy)(irp) = CoordY(advection_field_xy_center);
+        });
+
+        // Pre-allocate some memory to prevent allocation later in loop
+        std::unique_ptr<IInterpolatorRP> const interpolator_ptr = m_interpolator.preallocate();
+
+        // Initialise the feet
+        FieldRP<CoordRP> feet_rp(grid);
+        ddc::for_each(grid, [&](IndexRP const irp) { feet_rp(irp) = ddc::coordinate(irp); });
+
+        // Compute the characteristic feet at tn ----------------------------------------------------
+        m_find_feet(feet_rp.span_view(), advection_field_xy, dt);
 
         // Interpolate the function on the characteristic feet. -------------------------------------
         (*interpolator_ptr)(allfdistribu, feet_rp.span_cview());

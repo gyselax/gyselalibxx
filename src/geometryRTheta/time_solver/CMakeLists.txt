@@ -17,6 +17,7 @@ target_link_libraries(time_integration_rp
         gslx::advection_rp
         gslx::utils
         gslx::timestepper
+        gslx::advection_field_RTheta
 )
 add_library(gslx::time_integration_rp ALIAS time_integration_rp)
 
