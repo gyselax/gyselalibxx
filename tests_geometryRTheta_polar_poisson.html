@@ -127,7 +127,7 @@ Polar Poisson solver</h1>
 </ul>
 </li>
 </ul>
-<p>The <a class="el" href="classVlasovPoissonSolver.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">VlasovPoissonSolver</a> is also tested on a circular mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>) and on a Czarny mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>) for the same Poisson equation with the Cartesian solution.</p>
+<p>The VlasovPoissonSolver is also tested on a circular mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>) and on a Czarny mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>) for the same Poisson equation with the Cartesian solution.</p>
 <h1><a class="anchor" id="tests_geometryRTheta_polar_poisson__References"></a>
 References</h1>
 <p>[1] Emily Bourne, "Non-Uniform Numerical Schemes for the Modelling of Turbulence in the 5D GYSELA Code". December 2022.</p>
@@ -136,7 +136,7 @@ Contents</h1>
 <ul>
 <li>polarpoissonfemsolver.cpp : it tests the <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a>. It solves the Poisson equation for a selected test case.</li>
 <li>test_cases.hpp : it defines RHS (<a class="el" href="classManufacturedPoissonTest.html" title="Defining the corresponding RHS of the Poisson equation for a given exact solution.">ManufacturedPoissonTest</a>) and exact solutions (<a class="el" href="classPoissonSolution.html" title="Base class for the exact solutions of the Poisson equation.">PoissonSolution</a>) of the Poisson equation.</li>
-<li>vlasovpoissonsolver.cpp : it tests the <a class="el" href="classVlasovPoissonSolver.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">VlasovPoissonSolver</a>. It solves the Poisson equation for a selected test case and computes the electric field in the physical domain.</li>
+<li>vlasovpoissonsolver.cpp : it tests the VlasovPoissonSolver. It solves the Poisson equation for a selected test case and computes the electric field in the physical domain.</li>
 <li>poisson.yaml : the parameters of the tests.</li>
 <li>test_poisson.py : it launches twice polarpoissonfemsolver.cpp test and checks the convergence order of the solution. <br  />
 </li>

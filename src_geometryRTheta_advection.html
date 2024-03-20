@@ -103,17 +103,15 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_advection.html','')
 <div class="title">Advection operator </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="src_geometryRTheta_advection__Advection_operator"></a>
-Advection operator</h1>
-<h3><a class="anchor" id="autotoc_md31"></a>
-Studied equation</h3>
+<div class="textblock"><h1><a class="anchor" id="src_geometryRTheta_advection__Studied_equation"></a>
+Studied equation</h1>
 <p>The studied equation is the following 2D transport equation type : </p><p class="formulaDsp">
 \[\partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0, \]
 </p>
-<p> with \(f(0,x,y) = f_0(x,y)\) and \(A\) the advection field.</p>
-<p><b>We want to solve it on a polar grid.</b></p>
-<h3><a class="anchor" id="autotoc_md32"></a>
-Backward Semi-Lagrangian method</h3>
+<p> with \(f(0,x,y) = f_0(x,y)\) and <em>A</em> the advection field.</p>
+<p><b>We want to solve it on a polar grid so we have:</b> \((t,x,y) = (t,x(r,\theta),y(r,\theta))\).</p>
+<h1><a class="anchor" id="src_geometryRTheta_advection__Backward_Semi-Lagrangian_method"></a>
+Backward Semi-Lagrangian method</h1>
 <p>The method used to solve the equation is a Backward Semi-Lagrangian method (BSL). It uses the conservation along the characteristics property: </p><p class="formulaDsp">
 \[\forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y)) \]
 </p>
@@ -124,8 +122,8 @@ Backward Semi-Lagrangian method</h3>
 <li>we compute the characteristic feet \(X(t^n; t^{n+1}, x_i, y_j)\) and \(Y(t^n; t^{n+1}, x_i, y_j)\) for each mesh points \((x_i, y_j)\) with a time integration method ;</li>
 <li>we interpolate the function \(f(t = t^n)\) on the characteristic feet. The proprety ensures that the interpolation gives the function at the next time step \(f(t = t^{n+1})\).</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md33"></a>
-Time integration methods</h3>
+<h1><a class="anchor" id="src_geometryRTheta_advection__Time_integration_methods"></a>
+Time integration methods</h1>
 <p>There are multiple time integration methods available which are implemented in the <a class="el" href="classITimeStepper.html">ITimeStepper</a> child classes. For example:</p><ul>
 <li>Explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> method: <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a>;</li>
 <li>Crank-Nicolson method: <a class="el" href="classCrankNicolson.html" title="A class which provides an implementation of a Crank-Nicolson method.">CrankNicolson</a>;</li>
@@ -134,20 +132,20 @@ Time integration methods</h3>
 </ul>
 <p>We are listing the different schemes for this equation \(\partial_t X (t) = A_x(t, X(t),Y(t))\).</p>
 <p>We write \(X (t) = X (t; s, x, y)\), \(X^n = X(t^n)\) and \(A^n(X) = A(t^n, X)\) for a time discretisation \(\{t^n; t^n &gt; t^{n-1}, \forall n\}_n\).</p>
-<h4><a class="anchor" id="autotoc_md34"></a>
-Explicit Euler method</h4>
+<h3><a class="anchor" id="autotoc_md31"></a>
+Explicit Euler method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - dt A^{n+1}(X^{n+1})\)</li>
 <li>Convergence order : 1.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md35"></a>
-Crank-Nicolson method</h4>
+<h3><a class="anchor" id="autotoc_md32"></a>
+Crank-Nicolson method</h3>
 <ul>
 <li>Scheme: \(X^{k+1} = X^{n+1} - \frac{dt}{2} \left( A^{n+1}(X^{n+1}) + A^k(X^k) \right)\) and \(X^{n+1} = X^{k+1}\) once converged.</li>
 <li>Convergence order : 2.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md36"></a>
-RK3 method</h4>
+<h3><a class="anchor" id="autotoc_md33"></a>
+RK3 method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - \frac{dt}{6} \left( k_1 + 4 k_2 + k_3 \right)\)<ul>
 <li>with<ul>
@@ -160,8 +158,8 @@ RK3 method</h4>
 </li>
 <li>Convergence order : 3.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md37"></a>
-RK4 method</h4>
+<h3><a class="anchor" id="autotoc_md34"></a>
+RK4 method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - \frac{dt}{6} \left( k_1 + 2 k_2 + 2 k_3 + k_4\right)\)<ul>
 <li>with<ul>
@@ -175,8 +173,8 @@ RK4 method</h4>
 </li>
 <li>Convergence order : 4.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md38"></a>
-Advection domain</h3>
+<h1><a class="anchor" id="src_geometryRTheta_advection__Advection_domain"></a>
+Advection domain</h1>
 <p>There are two advection domains implemented:</p><ul>
 <li>the physical domain: <a class="el" href="classAdvectionPhysicalDomain.html" title="Define the physical domain for the advection.">AdvectionPhysicalDomain</a>;</li>
 <li>the pseudo-Cartesian domain: <a class="el" href="classAdvectionPhysicalDomain.html" title="Define the physical domain for the advection.">AdvectionPhysicalDomain</a>.</li>
@@ -207,7 +205,40 @@ Advection domain</h3>
 <p>Here, \(\mathcal{G}\) is analytically invertible (we can fix \(\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)\)) and \((J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}\) is well-defined. The details are given in Edoardo Zoni's article [1].</p>
 <p><b>Remark 1:</b> if \(\mathcal{F}\) is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same.</p>
 <p><b>Remark 2:</b> if the mapping function is analytically invertible, it is less costly to advect in the physical domain.</p>
-<h1><a class="anchor" id="src_geometryRTheta_advection__Unit_tests"></a>
+<h1><a class="anchor" id="src_geometryRTheta_advection__Advection_Field"></a>
+Advection Field</h1>
+<p>In the studied equation, the advection field is given along the physical domain axis: </p><p class="formulaDsp">
+\[\partial_t f + A_x \partial_x f + A_y \partial_y f = 0. \]
+</p>
+<p> The <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis, </p><p class="formulaDsp">
+\[A = (A_x, A_y) \quad \text{or} \quad A = (A_r, A_\theta). \]
+</p>
+<p> The advection field can be computed thanks to the <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see <a class="el" href="src_geometryRTheta_advection_field.html">Advection Field finder</a>).</p>
+<ul>
+<li>If the advection field is directly given along the physical domain axes, no treatment is needed in the <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> operator.</li>
+<li>If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain.</li>
+</ul>
+<p><b>In the guiding-center case</b>, the advection field is computed from the electric field, </p><p class="formulaDsp">
+\[A = - E \wedge e_z = -\nabla \phi \wedge e_z. \]
+</p>
+<p> In <a class="el" href="src_geometryRTheta_advection_field.html">Advection Field finder</a>, we show that </p><p class="formulaDsp">
+\[\nabla_{xy} \phi = J D_{G}^{-1}\nabla_{r\theta} \phi, \]
+</p>
+<p> with <em>J</em> the Jacobian matrix and the following diagonal matrix </p><p class="formulaDsp">
+\[D_{G} = \begin{bmatrix} \sqrt{g_{11}} &amp; 0 \\ 0 &amp; \sqrt{g_{22}} \\ \end{bmatrix} \]
+</p>
+<p> with the metric tensor \(G = J^TJ = [g_{ij}]_{ij}\).</p>
+<p>It gives the following relation for the electric field </p><p class="formulaDsp">
+\[\begin{bmatrix} E_x \\ E_y \\ \end{bmatrix} = J D_{G}^{-1} \begin{bmatrix} E_r \\ E_\theta \\ \end{bmatrix} = \begin{bmatrix} \frac{j_{11}}{\sqrt{g_{11}}} &amp; \frac{j_{12}}{\sqrt{g_{22}}} \\ \frac{j_{21}}{\sqrt{g_{11}}} &amp; \frac{j_{22}}{\sqrt{g_{22}}} \\ \end{bmatrix} \begin{bmatrix} E_r \\ E_\theta \\ \end{bmatrix}. \]
+</p>
+<p>We deduce that </p><p class="formulaDsp">
+\[\begin{bmatrix} A_x \\ A_y \end{bmatrix} = \begin{bmatrix} - Ey \\ E_x \end{bmatrix} = \begin{bmatrix} - \frac{j_{21}}{\sqrt{g_{11}}}E_r - \frac{j_{22}}{\sqrt{g_{22}}} E_\theta\\ \frac{j_{11}}{\sqrt{g_{11}}}E_r + \frac{j_{12}}{\sqrt{g_{22}}} E_\theta \\ \end{bmatrix} = \begin{bmatrix} \frac{j_{22}}{\sqrt{g_{22}}} &amp; - \frac{j_{21}}{\sqrt{g_{11}}} \\ - \frac{j_{12}}{\sqrt{g_{22}}} &amp; \frac{j_{11}}{\sqrt{g_{11}}} \end{bmatrix} \begin{bmatrix} - E_\theta \\ E_r \end{bmatrix} = \det(JD_{G}^{-1}) ((JD_{G}^{-1})^{-1})^{T} \begin{bmatrix} - E_\theta \\ E_r \end{bmatrix} = \det(J) (J^{-1})^{T} det(D_{G}^{-1}) D_G \begin{bmatrix} A_r \\ A_\theta \end{bmatrix}. \]
+</p>
+<p> So, from the advection field along the logical domain axis, we multiply by </p><p class="formulaDsp">
+\[\det(J) det(D_{G}^{-1}) (J^{-1})^{T} D_G = \begin{bmatrix} \frac{j_{22}}{\sqrt{g_{22}}} &amp; - \frac{j_{21}}{\sqrt{g_{11}}} \\ - \frac{j_{12}}{\sqrt{g_{22}}} &amp; \frac{j_{11}}{\sqrt{g_{11}}} \end{bmatrix}, \]
+</p>
+<p> to get the advection field along the physical domain axis.</p>
+<h1><a class="anchor" id="autotoc_md35"></a>
 Unit tests</h1>
 <p>The test of the advection operator are implemented in the <code>tests/geometryRTheta/advection_2d_rp/</code> folder (<a class="el" href="tests_geometryRTheta_advection_2d_rp.html">Tests on the 2D polar advection operator</a>).</p>
 <p>It tests:</p><ul>
@@ -248,11 +279,11 @@ Unit tests</h1>
 </ul>
 <p>The tests of the convergence order are made for constant CFL which means it checks the slope of the errors (infinity norm of the difference at the final time) <br  />
  for \((N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)\) and then \((n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)\) for \(n = 1, 2, 4, 8, ...\).</p>
-<h1><a class="anchor" id="src_geometryRTheta_advection__References"></a>
+<h1><a class="anchor" id="autotoc_md36"></a>
 References</h1>
 <p>[1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped 
 disk-like domains with the method of characteristics and spline finite elements". (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>.) Journal of Computational Physics (2019).</p>
-<h1><a class="anchor" id="src_geometryRTheta_advection__Contents"></a>
+<h1><a class="anchor" id="autotoc_md37"></a>
 Contents</h1>
 <p>This folder contains:</p><ul>
 <li><a class="el" href="advection__domain_8hpp_source.html">advection_domain.hpp</a> : define the different advection domains (<a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a>).</li>
