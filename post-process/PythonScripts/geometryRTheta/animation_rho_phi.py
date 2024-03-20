@@ -12,7 +12,7 @@ from RTheta_tool_functions import animate
 # ---------------------------------------------------------------------------
 current_folder = Path(__file__).parent
 
-perturb_defaults = {'dioctotron':False, 'vortex_merger':True}
+perturb_defaults = {'diocotron':False, 'vortex_merger':True}
 
 parser = argparse.ArgumentParser(description="Plot and save the density and the electrical potential solutions of a given output folder.")
 
