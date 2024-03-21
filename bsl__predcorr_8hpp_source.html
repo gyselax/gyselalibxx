@@ -232,7 +232,7 @@ $(document).ready(function(){initNavTree('bsl__predcorr_8hpp_source.html',''); i
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        start_time = std::chrono::system_clock::now();</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> iter(0); iter &lt; steps; ++iter) {</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            time_stepper</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                    .<a class="code" href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">update</a>(Kokkos::Serial(),</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                    .<a class="code" href="classRK2.html#aa215475ac2ff63e25d2451175cff5759">update</a>(Kokkos::DefaultHostExecutionSpace(),</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                            allfdistribu,</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                            dt,</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                            define_advection_field,</div>
