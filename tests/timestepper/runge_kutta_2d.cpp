@@ -139,7 +139,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
 
         for (int i(0); i < Nt; ++i) {
             runge_kutta.update(
-                    Kokkos::Serial(),
+                    Kokkos::DefaultHostExecutionSpace(),
                     vals,
                     dt,
                     [yc, xc, &dom, omega](AdvectionFieldSpan dy, AdvectionFieldView y) {

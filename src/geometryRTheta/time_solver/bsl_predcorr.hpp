@@ -180,7 +180,7 @@ public:
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             time_stepper
-                    .update(Kokkos::Serial(),
+                    .update(Kokkos::DefaultHostExecutionSpace(),
                             allfdistribu,
                             dt,
                             define_advection_field,
