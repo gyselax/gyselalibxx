@@ -99,7 +99,7 @@ TEST(Euler2DFixtureMixedTypes, Euler2DOrderMixedTypes)
 
         for (int i(0); i < Nt; ++i) {
             euler.update(
-                    Kokkos::Serial(),
+                    Kokkos::DefaultHostExecutionSpace(),
                     vals,
                     dt,
                     [yc, xc, &dom, omega](AdvectionFieldSpan dy, ChunkView<CoordXY, IDomainXY> y) {
