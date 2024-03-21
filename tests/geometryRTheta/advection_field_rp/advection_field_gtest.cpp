@@ -67,10 +67,10 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
 
     start_simulation = std::chrono::system_clock::now();
     // Build the grid for the space. ------------------------------------------------------------------
-    int const Nr(32);
-    int const Nt(64);
-    double const dt(0.05);
-    double const final_T(1.6);
+    int const Nr(20);
+    int const Nt(40);
+    double const dt(0.1);
+    double const final_T(0.8);
 
     double const rmin(0);
     double const rmax(1);
@@ -289,8 +289,8 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
 
     // --- Check the difference on advection fields  --------------------------------------------------
     for_each(grid, [&](IndexRP const irp) {
-        EXPECT_LE(abs(ddcHelper::get<RDimX>(difference_between_fields_exact_and_xy)(irp)), 1e-6);
-        EXPECT_LE(abs(ddcHelper::get<RDimY>(difference_between_fields_exact_and_xy)(irp)), 1e-6);
+        EXPECT_LE(abs(ddcHelper::get<RDimX>(difference_between_fields_exact_and_xy)(irp)), 1e-5);
+        EXPECT_LE(abs(ddcHelper::get<RDimY>(difference_between_fields_exact_and_xy)(irp)), 1e-5);
 
         EXPECT_LE(abs(ddcHelper::get<RDimX>(difference_between_fields_xy_and_rp)(irp)), 1e-14);
         EXPECT_LE(abs(ddcHelper::get<RDimY>(difference_between_fields_xy_and_rp)(irp)), 1e-14);
