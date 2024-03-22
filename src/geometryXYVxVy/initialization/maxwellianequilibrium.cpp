@@ -61,10 +61,8 @@ void MaxwellianEquilibrium::compute_maxwellian(
                 double const vy = ddc::coordinate(ddc::select<IDimVy>(ivxvy));
                 fMaxwellian(ivxvy) = density * inv_2pi
                                      * Kokkos::exp(
-                                             -((vx - Kokkos::sqrt(mean_velocity))
-                                                       * (vx - Kokkos::sqrt(mean_velocity))
-                                               + (vy - Kokkos::sqrt(mean_velocity))
-                                                         * (vy - Kokkos::sqrt(mean_velocity)))
+                                             -((vx - mean_velocity) * (vx - mean_velocity)
+                                               + (vy - mean_velocity) * (vy - mean_velocity))
                                              / (2. * temperature));
             });
 }
