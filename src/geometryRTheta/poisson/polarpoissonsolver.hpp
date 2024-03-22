@@ -223,7 +223,7 @@ public:
         : nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - n_overlap_cells - 1)
         , nbasis_p(ddc::discrete_space<BSplinesP>().nbasis())
         , fem_non_singular_domain(
-                  ddc::discrete_space<PolarBSplinesRP>().non_singular_domain().remove_last(
+                  ddc::discrete_space<PolarBSplinesRP>().tensor_bspline_domain().remove_last(
                           ddc::DiscreteVector<PolarBSplinesRP> {nbasis_p}))
         , radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                   ddc::DiscreteVector<BSplinesR> {n_overlap_cells}))
