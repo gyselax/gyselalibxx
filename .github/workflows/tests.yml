@@ -22,7 +22,7 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 180
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.2.0
@@ -65,7 +65,7 @@ jobs:
             make -j 2 VERBOSE=1
             ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml ${{ inputs.ctest_commands }}
           EOF
-          docker run -v ${PWD}:/src ghcr.io/gyselax/voicexx_env bash /src/run.sh -e "SLL_BUILD_TESTING" -e "POISSON_2D_TESTING"
+          docker run -v ${PWD}:/src ghcr.io/gyselax/gyselalibxx_env bash /src/run.sh -e "SLL_BUILD_TESTING" -e "POISSON_2D_TESTING"
         shell: bash
 
       #- name: Publish Test Report
