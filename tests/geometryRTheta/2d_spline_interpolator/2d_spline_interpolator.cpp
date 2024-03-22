@@ -27,9 +27,6 @@
 
 
 namespace {
-using Evaluator = SplineEvaluator2D<BSplinesR, BSplinesP>;
-using Builder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
-using Interpolator = SplineInterpolatorRP;
 
 
 /**
@@ -67,7 +64,7 @@ void Interpolation_on_random_coord(
 
 
     // Build the decomposition of the function on Bsplines. ----------------------------------
-    Builder const builder(grid);
+    SplineRPBuilder const builder(grid);
 
 
     // Build a "random" grid to test the interpolator. ---------------------------------------
@@ -123,14 +120,14 @@ void Interpolation_on_random_coord(
 
 
     // Interpolate the function on Bsplines on the "random" grid. ----------------------------
-    Evaluator spline_evaluator(
+    SplineRPEvaluator spline_evaluator(
             g_null_boundary_2d<BSplinesR, BSplinesP>,
             g_null_boundary_2d<BSplinesR, BSplinesP>,
             g_null_boundary_2d<BSplinesR, BSplinesP>,
             g_null_boundary_2d<BSplinesR, BSplinesP>);
 
     DSpanRP function_interpolated;
-    Interpolator interpolator(builder, spline_evaluator);
+    SplineInterpolatorRP interpolator(builder, spline_evaluator);
     function_interpolated = interpolator(function_evaluated, random_coords);
 
     // Compare the obtained values with the exact function. ----------------------------------

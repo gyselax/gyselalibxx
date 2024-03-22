@@ -374,7 +374,7 @@ public:
             int_volume(ir, ip) = abs(mapping.jacobian(coord)) * weights_r(ir) * weights_p(ip);
         });
 
-        SplineEvaluator2D<BSplinesR, BSplinesP> spline_evaluator(
+        SplineRPEvaluator spline_evaluator(
                 g_null_boundary_2d<BSplinesR, BSplinesP>,
                 g_null_boundary_2d<BSplinesR, BSplinesP>,
                 g_null_boundary_2d<BSplinesR, BSplinesP>,
@@ -751,7 +751,7 @@ private:
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator,
+            SplineRPEvaluator const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -776,7 +776,7 @@ private:
             EvalDeriv1DType const& trial_bspline_val_and_deriv_p,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator,
+            SplineRPEvaluator const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -801,7 +801,7 @@ private:
             EvalDeriv1DType const& test_bspline_val_and_deriv_p,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator,
+            SplineRPEvaluator const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -827,7 +827,7 @@ private:
             EvalDeriv1DType const& trial_bspline_val_and_deriv_p,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator,
+            SplineRPEvaluator const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -882,7 +882,7 @@ private:
             TrialValDerivType const& trial_bspline_val_and_deriv_p,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineEvaluator2D<BSplinesR, BSplinesP> const& spline_evaluator,
+            SplineRPEvaluator const& spline_evaluator,
             Mapping const& mapping)
     {
         static_assert(
@@ -934,7 +934,7 @@ private:
             IDimBSpline2D idx_trial,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator,
+            SplineRPEvaluator const& evaluator,
             Mapping const& mapping)
     {
         // 0 <= r_idx_test < 8
