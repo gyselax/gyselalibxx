@@ -62,10 +62,6 @@ template <class Mapping, class AdvectionDomain, class FootFinder>
 class BslPredCorrRP : public ITimeSolverRP
 {
 private:
-    using Evaluator = SplineEvaluator2D<BSplinesR, BSplinesP>;
-    using Builder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
-
-
     AdvectionDomain const& m_advection_domain;
 
     Mapping const& m_mapping;

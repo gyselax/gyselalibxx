@@ -68,10 +68,6 @@ template <class Mapping, class AdvectionDomain>
 class BslExplicitPredCorrRP : public ITimeSolverRP
 {
 private:
-    using Evaluator = SplineEvaluator2D<BSplinesR, BSplinesP>;
-    using Builder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
-    using Interpolator = SplineInterpolatorRP;
-
     using EulerMethod = Euler<FieldRP<CoordRP>, VectorDFieldRP<RDimX, RDimY>>;
 
 
@@ -87,8 +83,8 @@ private:
 
     PolarSplineFEMPoissonSolver const& m_poisson_solver;
 
-    Builder const& m_builder;
-    Evaluator const& m_evaluator;
+    SplineRPBuilder const& m_builder;
+    SplineRPEvaluator const& m_evaluator;
 
 
 

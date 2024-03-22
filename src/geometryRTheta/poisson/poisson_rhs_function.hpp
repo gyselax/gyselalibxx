@@ -16,7 +16,7 @@ class PoissonRHSFunction
 {
 private:
     Spline2DView const m_coefs;
-    SplineEvaluator2D<BSplinesR, BSplinesP> const& m_evaluator;
+    SplineRPEvaluator const& m_evaluator;
 
 public:
     /**
@@ -27,7 +27,7 @@ public:
 	 * @param[in] evaluator
 	 *      Evaluator on bsplines.
 	 */
-    PoissonRHSFunction(Spline2DView coefs, SplineEvaluator2D<BSplinesR, BSplinesP> const& evaluator)
+    PoissonRHSFunction(Spline2DView coefs, SplineRPEvaluator const& evaluator)
         : m_coefs(coefs)
         , m_evaluator(evaluator)
     {

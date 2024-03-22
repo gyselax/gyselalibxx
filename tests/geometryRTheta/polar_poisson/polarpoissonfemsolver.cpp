@@ -105,7 +105,7 @@ int main(int argc, char** argv)
 #elif defined(CZARNY_MAPPING)
     const Mapping mapping(0.3, 1.4);
 #endif
-    SplineEvaluator2D<BSplinesR, BSplinesP> evaluator(
+    SplineRPEvaluator evaluator(
             g_null_boundary_2d<BSplinesR, BSplinesP>,
             g_null_boundary_2d<BSplinesR, BSplinesP>,
             g_null_boundary_2d<BSplinesR, BSplinesP>,
@@ -182,7 +182,7 @@ int main(int argc, char** argv)
 
 
         start_time = std::chrono::system_clock::now();
-        SplineEvaluator2D
+        SplineRPEvaluator
                 eval(g_null_boundary_2d<BSplinesR, BSplinesP>,
                      g_null_boundary_2d<BSplinesR, BSplinesP>,
                      g_null_boundary_2d<BSplinesR, BSplinesP>,
