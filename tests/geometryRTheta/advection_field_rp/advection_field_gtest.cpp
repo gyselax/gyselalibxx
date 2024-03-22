@@ -119,12 +119,6 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
     IDomainRP const Opoint_grid(grid.take_first(IVectRP(1, npoints_p)));
 
 
-    // Build domains for polar B-splines. -------------------------------------------------------------
-    BSDomainR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-            ddc::DiscreteVector<BSplinesR> {PolarBSplinesRP::continuity + 1}));
-    BSDomainP polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
-
-
     // OPERATORS ======================================================================================
     SplineRBuilder const r_builder(interpolation_domain_R);
     SplinePBuilder const p_builder(interpolation_domain_P);
@@ -151,8 +145,6 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
             = DiscreteMapping::analytical_to_discrete(mapping, builder, spline_evaluator_extrapol);
 
     ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping, r_builder, p_builder);
-
-    BSDomainRP const dom_bsplinesRP = builder.spline_domain();
 
 
     // --- Advection operator -------------------------------------------------------------------------

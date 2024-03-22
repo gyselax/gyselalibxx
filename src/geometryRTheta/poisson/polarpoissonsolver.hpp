@@ -415,7 +415,6 @@ public:
                                 [&](QuadratureIndexRP const quad_idx) {
                                     QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
                                     QuadratureIndexP const ip = ddc::select<QDimPMesh>(quad_idx);
-                                    std::optional<std::array<double, 3>> null(std::nullopt);
                                     return weak_integral_element(
                                             ir,
                                             ip,
@@ -435,10 +434,6 @@ public:
                 radial_bsplines.take_first(ddc::DiscreteVector<BSplinesR> {BSplinesR::degree()}));
 
         BSDomainRP non_singular_domain_near_centre(central_radial_bspline_domain, polar_bsplines);
-
-        const ddc::DiscreteDomain<RCellDim> r_cells_near_centre(
-                ddc::DiscreteElement<RCellDim> {0},
-                ddc::DiscreteVector<RCellDim> {n_overlap_cells});
 
         // Calculate the matrix elements where bspline products overlap the bsplines which cover the singular point
         ddc::for_each(singular_domain, [&](IDimPolarBspl const idx_test) {

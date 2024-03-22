@@ -22,11 +22,9 @@
 namespace {
 struct DimX
 {
-    static bool constexpr PERIODIC = false;
 };
 struct DimY
 {
-    static bool constexpr PERIODIC = false;
 };
 struct DimR
 {
