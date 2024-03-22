@@ -160,6 +160,7 @@ static void PeriodicitySplineBuilderTest()
     spline_builder(coef, vals.span_cview());
 
     // Instantiate a SplineEvaluator over interest dimension and batched along other dimensions
+    ddc::PeriodicExtrapolationRule<X> extrapolation_rule;
     ddc::SplineEvaluator<
             ExecSpace,
             MemorySpace,
@@ -168,10 +169,7 @@ static void PeriodicitySplineBuilderTest()
             ddc::PeriodicExtrapolationRule<X>,
             ddc::PeriodicExtrapolationRule<X>,
             IDim<X>>
-            spline_evaluator(
-                    coef.domain(),
-                    ddc::PeriodicExtrapolationRule<X>(),
-                    ddc::PeriodicExtrapolationRule<X>());
+            spline_evaluator(extrapolation_rule, extrapolation_rule);
 
     // Instantiate chunk of coordinates of dom_interpolation
     ddc::Chunk coords_eval_alloc(dom_vals, ddc::KokkosAllocator<Coord<X>, MemorySpace>());

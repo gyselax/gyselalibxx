@@ -183,14 +183,14 @@ int main(int argc, char** argv)
 #endif
 
     // Creating operators
-    SplineXEvaluator const spline_x_evaluator(builder_x.spline_domain(), bv_x_min, bv_x_max);
+    SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
     PreallocatableSplineInterpolatorBatched const
             spline_x_interpolator(builder_x, spline_x_evaluator);
 
     ddc::ConstantExtrapolationRule<RDimVx> bv_v_min(vx_min);
     ddc::ConstantExtrapolationRule<RDimVx> bv_v_max(vx_max);
 
-    SplineVxEvaluator const spline_vx_evaluator(builder_vx.spline_domain(), bv_v_min, bv_v_max);
+    SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
     PreallocatableSplineInterpolatorBatched const
             spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
