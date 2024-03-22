@@ -50,10 +50,6 @@ using PoissonSolver = PolarSplineFEMPoissonSolver;
 using DiscreteMapping = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>;
 using Mapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
 
-using Evaluator = SplineEvaluator2D<BSplinesR, BSplinesP>;
-using Builder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
-using Interpolator = SplineInterpolatorRP;
-
 namespace fs = std::filesystem;
 
 } // end namespace
@@ -189,7 +185,7 @@ int main(int argc, char** argv)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    Evaluator spline_evaluator(
+    SplineRPEvaluator spline_evaluator(
             g_null_boundary_2d<BSplinesR, BSplinesP>,
             g_null_boundary_2d<BSplinesR, BSplinesP>,
             g_null_boundary_2d<BSplinesR, BSplinesP>,
