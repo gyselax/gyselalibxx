@@ -100,6 +100,32 @@ TEST(Chunk1DTest, LayoutType)
 // \}
 // Functions implemented in Chunk 1D (and free functions specific to it) \{
 
+TEST(Chunk0DTest, ChunkSpanConversionConstructor)
+{
+    double const factor = 1.391;
+    Chunk0D<double> chunk(dom_0d);
+    chunk() = factor;
+
+    Chunk0D<double> chunk2(chunk.span_view());
+    EXPECT_EQ(chunk2.domain(), dom_0d);
+    EXPECT_DOUBLE_EQ(factor, chunk2());
+}
+
+TEST(Chunk1DTest, ChunkSpanConversionConstructor)
+{
+    double const factor = 1.391;
+    ChunkX<double> chunk(dom_x);
+    for (auto&& ix : chunk.domain()) {
+        chunk(ix) = factor * ix.uid();
+    }
+
+    ChunkX<double> const chunk2(chunk.span_view());
+    EXPECT_EQ(chunk2.domain(), dom_x);
+    for (auto&& ix : chunk2.domain()) {
+        EXPECT_DOUBLE_EQ(factor * ix.uid(), chunk2(ix));
+    }
+}
+
 TEST(Chunk0DTest, MoveConstructor)
 {
     double const factor = 1.391;

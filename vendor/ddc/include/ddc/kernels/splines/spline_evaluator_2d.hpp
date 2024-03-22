@@ -48,11 +48,6 @@ public:
     using bsplines_type1 = BSplinesType1;
     using bsplines_type2 = BSplinesType2;
 
-    using left_extrapolation_rule_1_type = LeftExtrapolationRule1;
-    using right_extrapolation_rule_1_type = RightExtrapolationRule1;
-    using left_extrapolation_rule_2_type = LeftExtrapolationRule2;
-    using right_extrapolation_rule_2_type = RightExtrapolationRule2;
-
     using interpolation_domain_type1 = ddc::DiscreteDomain<interpolation_mesh_type1>;
     using interpolation_domain_type2 = ddc::DiscreteDomain<interpolation_mesh_type2>;
     using interpolation_domain_type
@@ -83,13 +78,15 @@ public:
 
 
 private:
-    LeftExtrapolationRule1 m_left_extrap_rule_1;
+    spline_domain_type m_spline_domain;
 
-    RightExtrapolationRule1 m_right_extrap_rule_1;
+    LeftExtrapolationRule1 m_left1_bc;
 
-    LeftExtrapolationRule2 m_left_extrap_rule_2;
+    RightExtrapolationRule1 m_right1_bc;
 
-    RightExtrapolationRule2 m_right_extrap_rule_2;
+    LeftExtrapolationRule2 m_left2_bc;
+
+    RightExtrapolationRule2 m_right2_bc;
 
 public:
     static_assert(
@@ -159,14 +156,16 @@ public:
             "with usual arguments.");
 
     explicit SplineEvaluator2D(
+            spline_domain_type const& spline_domain,
             LeftExtrapolationRule1 const& left_extrap_rule1,
             RightExtrapolationRule1 const& right_extrap_rule1,
             LeftExtrapolationRule2 const& left_extrap_rule2,
             RightExtrapolationRule2 const& right_extrap_rule2)
-        : m_left_extrap_rule_1(left_extrap_rule1)
-        , m_right_extrap_rule_1(right_extrap_rule1)
-        , m_left_extrap_rule_2(left_extrap_rule2)
-        , m_right_extrap_rule_2(right_extrap_rule2)
+        : m_spline_domain(spline_domain)
+        , m_left1_bc(left_extrap_rule1)
+        , m_right1_bc(right_extrap_rule1)
+        , m_left2_bc(left_extrap_rule2)
+        , m_right2_bc(right_extrap_rule2)
     {
     }
 
@@ -182,24 +181,21 @@ public:
 
 
 
-    left_extrapolation_rule_1_type left_extrapolation_rule_dim_1() const
+    KOKKOS_FUNCTION spline_domain_type spline_domain() const noexcept
     {
-        return m_left_extrap_rule_1;
+        return m_spline_domain;
     }
 
-    right_extrapolation_rule_1_type right_extrapolation_rule_dim_1() const
+    KOKKOS_FUNCTION bsplines_domain_type bsplines_domain() const noexcept // TODO : clarify name
     {
-        return m_right_extrap_rule_1;
+        return bsplines_domain_type(
+                ddc::discrete_space<bsplines_type1>().full_domain(),
+                ddc::discrete_space<bsplines_type2>().full_domain());
     }
 
-    left_extrapolation_rule_2_type left_extrapolation_rule_dim_2() const
+    KOKKOS_FUNCTION batch_domain_type batch_domain() const noexcept
     {
-        return m_left_extrap_rule_2;
-    }
-
-    right_extrapolation_rule_2_type right_extrapolation_rule_dim_2() const
-    {
-        return m_right_extrap_rule_2;
+        return ddc::remove_dims_of(spline_domain(), bsplines_domain());
     }
 
     template <class Layout, class... CoordsDims>
@@ -222,12 +218,11 @@ public:
             ddc::ChunkSpan<double const, spline_domain_type, Layout3, memory_space> const
                     spline_coef) const
     {
-        batch_domain_type batch_domain(coords_eval.domain());
         interpolation_domain_type1 const interpolation_domain1(spline_eval.domain());
         interpolation_domain_type2 const interpolation_domain2(spline_eval.domain());
         ddc::parallel_for_each(
                 exec_space(),
-                batch_domain,
+                batch_domain(),
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     const auto spline_eval_2D = spline_eval[j];
                     const auto coords_eval_2D = coords_eval[j];
@@ -319,12 +314,11 @@ public:
             ddc::ChunkSpan<double const, spline_domain_type, Layout3, memory_space> const
                     spline_coef) const
     {
-        batch_domain_type batch_domain(coords_eval.domain());
         interpolation_domain_type1 const interpolation_domain1(spline_eval.domain());
         interpolation_domain_type2 const interpolation_domain2(spline_eval.domain());
         ddc::parallel_for_each(
                 exec_space(),
-                batch_domain,
+                batch_domain(),
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     const auto spline_eval_2D = spline_eval[j];
                     const auto coords_eval_2D = coords_eval[j];
@@ -350,12 +344,11 @@ public:
             ddc::ChunkSpan<double const, spline_domain_type, Layout3, memory_space> const
                     spline_coef) const
     {
-        batch_domain_type batch_domain(coords_eval.domain());
         interpolation_domain_type1 const interpolation_domain1(spline_eval.domain());
         interpolation_domain_type2 const interpolation_domain2(spline_eval.domain());
         ddc::parallel_for_each(
                 exec_space(),
-                batch_domain,
+                batch_domain(),
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     const auto spline_eval_2D = spline_eval[j];
                     const auto coords_eval_2D = coords_eval[j];
@@ -381,12 +374,11 @@ public:
             ddc::ChunkSpan<double const, spline_domain_type, Layout3, memory_space> const
                     spline_coef) const
     {
-        batch_domain_type batch_domain(coords_eval.domain());
         interpolation_domain_type1 const interpolation_domain1(spline_eval.domain());
         interpolation_domain_type2 const interpolation_domain2(spline_eval.domain());
         ddc::parallel_for_each(
                 exec_space(),
-                batch_domain,
+                batch_domain(),
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     const auto spline_eval_2D = spline_eval[j];
                     const auto coords_eval_2D = coords_eval[j];
@@ -464,7 +456,6 @@ public:
             ddc::ChunkSpan<double const, spline_domain_type, Layout2, memory_space> const
                     spline_coef) const
     {
-        batch_domain_type batch_domain(integrals.domain());
         ddc::Chunk values1_alloc(
                 ddc::DiscreteDomain<bsplines_type1>(spline_coef.domain()),
                 ddc::KokkosAllocator<double, memory_space>());
@@ -482,7 +473,7 @@ public:
 
         ddc::parallel_for_each(
                 exec_space(),
-                batch_domain,
+                batch_domain(),
                 KOKKOS_LAMBDA(typename batch_domain_type::discrete_element_type const j) {
                     integrals(j) = 0;
                     for (typename bsplines_domain_type1::discrete_element_type const i1 :
@@ -518,10 +509,10 @@ private:
             }
         } else {
             if (coord_eval_interpolation1 < ddc::discrete_space<bsplines_type1>().rmin()) {
-                return m_left_extrap_rule_1(coord_eval, spline_coef);
+                return m_left1_bc(coord_eval, spline_coef);
             }
             if (coord_eval_interpolation1 > ddc::discrete_space<bsplines_type1>().rmax()) {
-                return m_right_extrap_rule_1(coord_eval, spline_coef);
+                return m_right1_bc(coord_eval, spline_coef);
             }
         }
         if constexpr (bsplines_type2::is_periodic()) {
@@ -536,10 +527,10 @@ private:
             }
         } else {
             if (coord_eval_interpolation2 < ddc::discrete_space<bsplines_type2>().rmin()) {
-                return m_left_extrap_rule_2(coord_eval, spline_coef);
+                return m_left2_bc(coord_eval, spline_coef);
             }
             if (coord_eval_interpolation2 > ddc::discrete_space<bsplines_type2>().rmax()) {
-                return m_right_extrap_rule_2(coord_eval, spline_coef);
+                return m_right2_bc(coord_eval, spline_coef);
             }
         }
         return eval_no_bc<eval_type, eval_type>(

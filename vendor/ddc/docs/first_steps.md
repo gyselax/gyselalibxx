@@ -1,9 +1,10 @@
-# Commented example: the heat equation {#first_steps}
 <!--
 Copyright (C) The DDC development team, see COPYRIGHT.md file
 
 SPDX-License-Identifier: MIT
 -->
+
+# Commented example: the heat equation {#first_steps}
 
 In \subpage heat_equation "examples/heat_equation.cpp" is a DDC example implementing a forward
 finite-difference solver for the heat equation over a rectangle 2D domain with periodic boundary

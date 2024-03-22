@@ -214,7 +214,6 @@ int main(int argc, char** argv)
             DDimX,
             DDimY>
             spline_builder(x_mesh);
-    ddc::PeriodicExtrapolationRule<X> periodic_extrapolation;
     ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
@@ -225,8 +224,9 @@ int main(int argc, char** argv)
             DDimX,
             DDimY>
             spline_evaluator(
-                    periodic_extrapolation,
-                    periodic_extrapolation);
+                    spline_builder.spline_domain(),
+                    ddc::PeriodicExtrapolationRule<X>(),
+                    ddc::PeriodicExtrapolationRule<X>());
     //! [instantiate solver]
 
     //! [instantiate intermediate chunks]
