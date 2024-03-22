@@ -1,10 +1,9 @@
+# The discrete domain computation library (DDC)
 <!--
 Copyright (C) The DDC development team, see COPYRIGHT.md file
 
 SPDX-License-Identifier: MIT
 -->
-
-# The discrete domain computation library (DDC)
 
 See https://ddc.mdls.fr/
 

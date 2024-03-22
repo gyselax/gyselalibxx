@@ -531,6 +531,13 @@ static void Batched2dSplineTest()
     spline_builder(coef, vals.span_cview());
 #endif
     // Instantiate a SplineEvaluator over interest dimension and batched along other dimensions
+#if defined(BC_PERIODIC)
+    ddc::PeriodicExtrapolationRule<I1> extrapolation_rule_1;
+    ddc::PeriodicExtrapolationRule<I2> extrapolation_rule_2;
+#else
+    ddc::NullExtrapolationRule extrapolation_rule_1;
+    ddc::NullExtrapolationRule extrapolation_rule_2;
+#endif
     ddc::SplineEvaluator2D<
             ExecSpace,
             MemorySpace,
@@ -551,19 +558,10 @@ static void Batched2dSplineTest()
 #endif
             IDim<X, I1, I2>...>
             spline_evaluator(
-                    coef.domain(),
-#if defined(BC_PERIODIC)
-                    ddc::PeriodicExtrapolationRule<I1>(),
-                    ddc::PeriodicExtrapolationRule<I1>(),
-                    ddc::PeriodicExtrapolationRule<I2>(),
-                    ddc::PeriodicExtrapolationRule<I2>()
-#else
-                    ddc::NullExtrapolationRule(),
-                    ddc::NullExtrapolationRule(),
-                    ddc::NullExtrapolationRule(),
-                    ddc::NullExtrapolationRule()
-#endif
-            );
+                    extrapolation_rule_1,
+                    extrapolation_rule_1,
+                    extrapolation_rule_2,
+                    extrapolation_rule_2);
 
     // Instantiate chunk of coordinates of dom_interpolation
     ddc::Chunk coords_eval_alloc(dom_vals, ddc::KokkosAllocator<Coord<X...>, MemorySpace>());

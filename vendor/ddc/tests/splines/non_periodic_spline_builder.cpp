@@ -148,6 +148,7 @@ TEST(NonPeriodicSplineBuilderTest, Identity)
     spline_builder(coef.span_view(), yvals.span_cview(), deriv_l, deriv_r);
 
     // 7. Create a SplineEvaluator to evaluate the spline at any point in the domain of the BSplines
+    ddc::NullExtrapolationRule extrapolation_rule;
     ddc::SplineEvaluator<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::HostSpace,
@@ -156,10 +157,7 @@ TEST(NonPeriodicSplineBuilderTest, Identity)
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             IDimX>
-            spline_evaluator(
-                    coef.domain(),
-                    ddc::NullExtrapolationRule(),
-                    ddc::NullExtrapolationRule());
+            spline_evaluator(extrapolation_rule, extrapolation_rule);
 
     ddc::Chunk<ddc::Coordinate<DimX>, ddc::DiscreteDomain<IDimX>> coords_eval(interpolation_domain);
     for (IndexX const ix : interpolation_domain) {

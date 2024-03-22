@@ -202,10 +202,9 @@ int main(int argc, char** argv)
 #endif
 
     // Creating batched operators
-    SplineXEvaluator const spline_x_evaluator(builder_x.spline_domain(), bv_x_min, bv_x_max);
+    SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
 #ifndef PERIODIC_RDIMX
-    SplineXEvaluator_1d const
-            spline_x_evaluator_poisson(builder_x.bsplines_domain(), bv_x_min, bv_x_max);
+    SplineXEvaluator_1d const spline_x_evaluator_poisson(bv_x_min, bv_x_max);
 #endif
     PreallocatableSplineInterpolatorBatched const
             spline_x_interpolator(builder_x, spline_x_evaluator);

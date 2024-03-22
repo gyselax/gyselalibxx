@@ -50,15 +50,16 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    SplineXEvaluator_1d const spline_x_evaluator(
-            builder_x.spline_domain(),
-            ddc::ConstantExtrapolationRule<RDimX>(x_min),
-            ddc::ConstantExtrapolationRule<RDimX>(x_max));
+    ddc::ConstantExtrapolationRule<RDimX> x_extrapolation_rule_min(x_min);
+    ddc::ConstantExtrapolationRule<RDimX> x_extrapolation_rule_max(x_min);
+    ddc::ConstantExtrapolationRule<RDimVx> vx_extrapolation_rule_min(vx_min);
+    ddc::ConstantExtrapolationRule<RDimVx> vx_extrapolation_rule_max(vx_min);
 
-    SplineVxEvaluator_1d const spline_vx_evaluator(
-            builder_vx.spline_domain(),
-            ddc::ConstantExtrapolationRule<RDimVx>(vx_min),
-            ddc::ConstantExtrapolationRule<RDimVx>(vx_min));
+    SplineXEvaluator_1d const
+            spline_x_evaluator(x_extrapolation_rule_min, x_extrapolation_rule_max);
+
+    SplineVxEvaluator_1d const
+            spline_vx_evaluator(vx_extrapolation_rule_min, vx_extrapolation_rule_max);
 
     host_t<FieldSp<int>> charges(dom_sp);
     charges(my_ielec) = -1;
