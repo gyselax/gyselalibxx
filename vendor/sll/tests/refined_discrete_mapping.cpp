@@ -21,11 +21,9 @@
 namespace {
 struct RDimX
 {
-    static bool constexpr PERIODIC = false;
 };
 struct RDimY
 {
-    static bool constexpr PERIODIC = false;
 };
 struct RDimR
 {

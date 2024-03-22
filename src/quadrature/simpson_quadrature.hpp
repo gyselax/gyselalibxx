@@ -23,8 +23,6 @@ ddc::Chunk<
 simpson_quadrature_coefficients_1d(ExecSpace const& space, ddc::DiscreteDomain<IDim> const& domain)
 {
     ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
-    ddc::DiscreteDomain<IDim> middle_domain
-            = domain.remove(ddc::DiscreteVector<IDim>(1), ddc::DiscreteVector<IDim>(1));
 
     coefficients(domain.front()) = 1. / 3. * distance_at_right(domain.front());
 

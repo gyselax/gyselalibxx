@@ -184,7 +184,6 @@ int main(int argc, char** argv)
         restart(allfdistribu);
     }
     auto allfequilibrium_host = ddc::create_mirror_view_and_copy(allfequilibrium.span_view());
-    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
 
     // --> Algorithm info
     double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");

@@ -116,9 +116,6 @@ void save_feet(
     ddc::for_each(rp_dom, [&](IndexRP const irp) {
         IDomainP p_dom = ddc::select<IDimP>(rp_dom);
 
-        IndexR const ir(ddc::select<IDimR>(irp));
-        IndexP const ip(ddc::select<IDimP>(irp));
-
         file_feet << std::setw(15) << ddc::select<IDimR>(irp).uid() << std::setw(15)
                   << ddc::select<IDimP>(irp).uid();
         print_coordinate(file_feet, ddc::coordinate(irp), mapping, p_dom);

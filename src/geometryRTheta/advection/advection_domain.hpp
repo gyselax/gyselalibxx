@@ -175,8 +175,6 @@ public:
             VectorDViewRP<RDimX, RDimY> advection_field,
             VectorDSpanRP<RDimX_adv, RDimY_adv> advection_field_physical) const
     {
-        auto const rp_dom = advection_field.domain();
-
         ddc::parallel_deepcopy(
                 ddcHelper::get<RDimX_adv>(advection_field_physical),
                 ddcHelper::get<RDimX>(advection_field));

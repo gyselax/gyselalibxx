@@ -742,9 +742,6 @@ TEST_P(ConstantExtrapolationBCEvaluator2D, PolarDomain)
     CoordP const p_max(2.0 * M_PI);
     IVectP const p_size(Nt);
 
-    IndexR const r_start(0); // with the singular point.
-    IndexP const p_start(0);
-
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
 
@@ -824,9 +821,6 @@ TEST_P(ConstantExtrapolationBCEvaluator2D, CartesianDomain)
     CoordY const y_min(-1.0);
     CoordY const y_max(1.0);
     IVectY const y_size(Ny);
-
-    IndexX const x_start(0); // with the singular point.
-    IndexX const y_start(0);
 
     double const dx((x_max - x_min) / x_size);
     double const dy((y_max - y_min) / y_size);
