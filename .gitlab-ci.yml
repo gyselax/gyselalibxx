@@ -12,7 +12,7 @@ cmake_tests:
     rm -rf build || true
     mkdir build
     cd build
-    cmake -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON $GENERAL_CMAKE_OPTIONS ..
+    cmake -DCMAKE_CXX_FLAGS="-Wall -Werror=unused-variable -Wno-sign-compare" -DBUILD_BENCHMARKS=ON $GENERAL_CMAKE_OPTIONS ..
     make -j 4
     ctest -j 2 --output-on-failure --timeout 5 -LE test_on_Release_only --output-junit tests.xml
   artifacts:
