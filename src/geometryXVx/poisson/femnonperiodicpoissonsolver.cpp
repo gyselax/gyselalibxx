@@ -28,12 +28,7 @@ NUBSplineXEvaluator_1d jit_build_nubsplinesx(SplineXEvaluator_1d const& spline_x
         ddc::init_discrete_space<NUBSplinesX>(knots);
     }
     // Boundary values are never evaluated
-    return NUBSplineXEvaluator_1d(
-            ddc::replace_dim_of<typename SplineXEvaluator_1d::bsplines_type, NUBSplinesX>(
-                    spline_x_evaluator.bsplines_domain(),
-                    ddc::discrete_space<NUBSplinesX>().full_domain()),
-            ddc::NullExtrapolationRule(),
-            ddc::NullExtrapolationRule());
+    return NUBSplineXEvaluator_1d(ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule());
 }
 
 } // namespace

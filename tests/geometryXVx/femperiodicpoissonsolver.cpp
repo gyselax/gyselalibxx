@@ -47,15 +47,15 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    SplineXEvaluator_1d const spline_x_evaluator(
-            builder_x.spline_domain(),
-            ddc::PeriodicExtrapolationRule<RDimX>(),
-            ddc::PeriodicExtrapolationRule<RDimX>());
+    ddc::PeriodicExtrapolationRule<RDimX> x_extrapolation_rule_min;
+    ddc::PeriodicExtrapolationRule<RDimX> x_extrapolation_rule_max;
+    ddc::ConstantExtrapolationRule<RDimVx> vx_extrapolation_rule_min(vx_min);
+    ddc::ConstantExtrapolationRule<RDimVx> vx_extrapolation_rule_max(vx_max);
+    SplineXEvaluator_1d const
+            spline_x_evaluator(x_extrapolation_rule_min, x_extrapolation_rule_max);
 
-    SplineVxEvaluator_1d const spline_vx_evaluator(
-            builder_vx.spline_domain(),
-            ddc::ConstantExtrapolationRule<RDimVx>(vx_min),
-            ddc::ConstantExtrapolationRule<RDimVx>(vx_max));
+    SplineVxEvaluator_1d const
+            spline_vx_evaluator(vx_extrapolation_rule_min, vx_extrapolation_rule_max);
     host_t<FieldSp<int>> charges(dom_sp);
     charges(my_ielec) = -1;
     charges(my_iion) = 1;

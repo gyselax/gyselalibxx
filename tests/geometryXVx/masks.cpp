@@ -29,16 +29,14 @@ TEST(Masks, Ordering)
 
     SplineXBuilder_1d const builder_x(gridx);
 
-    SplineXEvaluator_1d const spline_x_evaluator(
-            builder_x.spline_domain(),
 #ifdef PERIODIC_RDIMX
-            ddc::PeriodicExtrapolationRule<RDimX>(),
-            ddc::PeriodicExtrapolationRule<RDimX>()
+    ddc::PeriodicExtrapolationRule<RDimX> extrapolation_rule_min;
+    ddc::PeriodicExtrapolationRule<RDimX> extrapolation_rule_max;
 #else
-            ddc::ConstantExtrapolationRule<RDimX>(x_min),
-            ddc::ConstantExtrapolationRule<RDimX>(x_max)
+    ddc::ConstantExtrapolationRule<RDimX> extrapolation_rule_min(x_min);
+    ddc::ConstantExtrapolationRule<RDimX> extrapolation_rule_max(x_max);
 #endif
-    );
+    SplineXEvaluator_1d const spline_x_evaluator(extrapolation_rule_min, extrapolation_rule_max);
 
     double const extent = 0.25;
     double const stiffness = 1e-2;
