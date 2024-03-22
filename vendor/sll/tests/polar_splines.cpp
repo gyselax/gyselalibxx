@@ -124,18 +124,7 @@ TEST(PolarSplineTest, ConstantEval)
             = DiscreteMapping::analytical_to_discrete(coord_changer, builder_rp, evaluator_rp);
     ddc::init_discrete_space<BSplines>(mapping, builder_r, builder_p);
 
-    ddc::DiscreteDomain<BSplines> const dom_bsplines_singular(
-            ddc::DiscreteElement<BSplines>(0),
-            ddc::DiscreteVector<BSplines>(BSplines::n_singular_basis()));
-    ddc::DiscreteDomain<BSplinesR> const r_domain(
-            ddc::DiscreteElement<BSplinesR>(continuity + 1),
-            ddc::DiscreteVector<BSplinesR>(ddc::discrete_space<BSplinesR>().size()));
-    ddc::DiscreteDomain<BSplinesP> const p_domain(
-            ddc::DiscreteElement<BSplinesP>(0),
-            ddc::DiscreteVector<BSplinesP>(ddc::discrete_space<BSplinesP>().size()));
-    ddc::DiscreteDomain<BSplinesR, BSplinesP> const dom_2d_bsplines(r_domain, p_domain);
-
-    Spline coef(dom_bsplines_singular, dom_2d_bsplines);
+    Spline coef(builder_rp.spline_domain());
 
     ddc::for_each(coef.singular_spline_coef.domain(), [&](ddc::DiscreteElement<BSplines> const i) {
         coef.singular_spline_coef(i) = 1.0;
@@ -162,6 +151,21 @@ TEST(PolarSplineTest, ConstantEval)
             EXPECT_LE(fabs(deriv_2), 1.0e-13);
         }
     }
+
+    Spline integrals(builder_rp.spline_domain());
+    ddc::discrete_space<BSplines>().integrals(integrals);
+    double area = ddc::transform_reduce(
+                          integrals.singular_spline_coef.domain(),
+                          0.0,
+                          ddc::reducer::sum<double>(),
+                          [&](auto idx) { return integrals.singular_spline_coef(idx); })
+                  + ddc::transform_reduce(
+                          integrals.spline_coef.domain(),
+                          0.0,
+                          ddc::reducer::sum<double>(),
+                          [&](auto idx) { return integrals.spline_coef(idx); });
+
+    EXPECT_NEAR(area, 2 * M_PI, 1e-10);
 }
 
 int main(int argc, char** argv)

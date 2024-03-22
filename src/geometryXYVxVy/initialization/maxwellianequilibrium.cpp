@@ -17,8 +17,6 @@ MaxwellianEquilibrium::MaxwellianEquilibrium(
 DSpanSpVxVy MaxwellianEquilibrium::operator()(DSpanSpVxVy const allfequilibrium) const
 {
     IDomainSp const gridsp = allfequilibrium.domain<IDimSp>();
-    IDomainVx const gridvx = allfequilibrium.domain<IDimVx>();
-    IDomainVy const gridvy = allfequilibrium.domain<IDimVy>();
     IDomainVxVy const gridvxvy = allfequilibrium.domain<IDimVx, IDimVy>();
 
     // Initialization of the maxwellian
