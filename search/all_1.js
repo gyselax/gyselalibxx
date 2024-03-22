@@ -17,8 +17,8 @@ var searchData=
   ['bslimplicitpredcorrrp_38',['BslImplicitPredCorrRP',['../classBslImplicitPredCorrRP.html',1,'BslImplicitPredCorrRP&lt; Mapping, AdvectionDomain &gt;'],['../classBslImplicitPredCorrRP.html#a85e452a6d8a3bfcbbd94e671179135ab',1,'BslImplicitPredCorrRP::BslImplicitPredCorrRP()']]],
   ['bslpredcorrrp_39',['BslPredCorrRP',['../classBslPredCorrRP.html',1,'BslPredCorrRP&lt; Mapping, AdvectionDomain, FootFinder &gt;'],['../classBslPredCorrRP.html#ac8df230a8c4f9fee4b97eac47f49cbb5',1,'BslPredCorrRP::BslPredCorrRP()']]],
   ['bspline_40',['BSpline',['../structBSpline.html',1,'']]],
-  ['bsplinep_41',['BSplineP',['../classDiscreteToCartesian.html#aabeacc8cb7637a03d010696e2b7645ed',1,'DiscreteToCartesian']]],
-  ['bspliner_42',['BSplineR',['../classDiscreteToCartesian.html#a56a6643d010d176c4ebe807e8d44624f',1,'DiscreteToCartesian']]],
+  ['bsplinep_41',['BSplineP',['../classDiscreteToCartesian.html#aabeacc8cb7637a03d010696e2b7645ed',1,'DiscreteToCartesian::BSplineP()'],['../structPolarSpline.html#af77ce2f18c9c86d7ac8e44606331d9d2',1,'PolarSpline::BSplineP()'],['../structPolarSplineSpan.html#a67ed148eab2a4e83e22cfb918c79d9a5',1,'PolarSplineSpan::BSplineP()'],['../structPolarSplineView.html#a773dd7a09763add9ac7ed3a1863ffd48',1,'PolarSplineView::BSplineP()']]],
+  ['bspliner_42',['BSplineR',['../classDiscreteToCartesian.html#a56a6643d010d176c4ebe807e8d44624f',1,'DiscreteToCartesian::BSplineR()'],['../structPolarSpline.html#ad26033ae149504208d160b5ac474d613',1,'PolarSpline::BSplineR()'],['../structPolarSplineSpan.html#afb33d14b81a474947f471003644fcc49',1,'PolarSplineSpan::BSplineR()'],['../structPolarSplineView.html#a48f3bbf282210df43e1c8f87cadbe8b8',1,'PolarSplineView::BSplineR()']]],
   ['bsplines_43',['BSplines',['../classdeprecated_1_1BSplines.html',1,'deprecated']]],
   ['bsplines1_5fis_5fperiodic_44',['BSplines1_is_periodic',['../classConstantExtrapolationBoundaryValue2D.html#ae0efdcf994a473793187c15d457644ac',1,'ConstantExtrapolationBoundaryValue2D']]],
   ['bsplines2_5fis_5fperiodic_45',['BSplines2_is_periodic',['../classConstantExtrapolationBoundaryValue2D.html#a919241d1d62db14ce4b9eabe93b23469',1,'ConstantExtrapolationBoundaryValue2D']]],
@@ -27,8 +27,10 @@ var searchData=
   ['bsplines_5ftype2_48',['bsplines_type2',['../classSplineBuilder2D.html#ad1c9fafdefd9b45835b8b89573571900',1,'SplineBuilder2D::bsplines_type2()'],['../classSplineEvaluator2D.html#a20ef11c270ad545361a8b3f683a724d8',1,'SplineEvaluator2D::bsplines_type2()']]],
   ['bsplinesnobc_5fis_5fperiodic_49',['BSplinesNoBC_is_periodic',['../classConstantExtrapolationBoundaryValue2D.html#adaa000f80443f67449caf90ced1ecc50',1,'ConstantExtrapolationBoundaryValue2D']]],
   ['bsplinesp_50',['BSplinesP',['../classPolarSplineEvaluator.html#a21c225b744962b5b83476156e737b46f',1,'PolarSplineEvaluator']]],
-  ['bsplinesr_51',['BSplinesR',['../classPolarSplineEvaluator.html#af95eaa07f8890667fe4feade36d50423',1,'PolarSplineEvaluator']]],
-  ['builder_5ftype1_52',['builder_type1',['../classSplineBuilder2D.html#a32fa22d267cdeb0722572c33fd6c6e11',1,'SplineBuilder2D']]],
-  ['builder_5ftype2_53',['builder_type2',['../classSplineBuilder2D.html#a0a33a10b79cf3d7273c5f20337727dff',1,'SplineBuilder2D']]],
-  ['bumpontailequilibrium_54',['BumpontailEquilibrium',['../classBumpontailEquilibrium.html#ae9e416e1ecca5bbacacb03e68e6c8dfe',1,'BumpontailEquilibrium::BumpontailEquilibrium()'],['../classBumpontailEquilibrium.html',1,'BumpontailEquilibrium']]]
+  ['bsplinesp_5ftag_51',['BSplinesP_tag',['../classPolarBSplines.html#a00c59661715ccfa45c849ab6e0a5e169',1,'PolarBSplines']]],
+  ['bsplinesr_52',['BSplinesR',['../classPolarSplineEvaluator.html#af95eaa07f8890667fe4feade36d50423',1,'PolarSplineEvaluator']]],
+  ['bsplinesr_5ftag_53',['BSplinesR_tag',['../classPolarBSplines.html#ae85f7d8e49f34f2ba35a41702439012d',1,'PolarBSplines']]],
+  ['builder_5ftype1_54',['builder_type1',['../classSplineBuilder2D.html#a32fa22d267cdeb0722572c33fd6c6e11',1,'SplineBuilder2D']]],
+  ['builder_5ftype2_55',['builder_type2',['../classSplineBuilder2D.html#a0a33a10b79cf3d7273c5f20337727dff',1,'SplineBuilder2D']]],
+  ['bumpontailequilibrium_56',['BumpontailEquilibrium',['../classBumpontailEquilibrium.html#ae9e416e1ecca5bbacacb03e68e6c8dfe',1,'BumpontailEquilibrium::BumpontailEquilibrium()'],['../classBumpontailEquilibrium.html',1,'BumpontailEquilibrium']]]
 ];

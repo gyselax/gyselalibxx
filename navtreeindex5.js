@@ -1,5 +1,8 @@
 var NAVTREEINDEX5 =
 {
+"docs_Adding_docs.html#autotoc_md2":[2],
+"docs_Adding_docs.html#autotoc_md3":[3],
+"docs_Adding_docs.html#autotoc_md4":[4],
 "docs_Adding_docs.html#autotoc_md5":[5],
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_code_structures":[3,0],
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_general_methods":[3,1],
@@ -246,8 +249,5 @@ var NAVTREEINDEX5 =
 "src_interpolation.html":[8,4],
 "src_interpolation.html#src_interpolation__Memory_concerns":[8,4,1],
 "src_interpolation.html#src_interpolation__Spline_Interpolation":[8,4,0],
-"src_quadrature.html":[8,5],
-"src_timestepper.html":[8,6],
-"src_utils.html":[8,7],
-"src_utils.html#src_utils__Utility_tools":[8,7,1]
+"src_quadrature.html":[8,5]
 };

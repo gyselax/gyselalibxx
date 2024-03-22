@@ -1,5 +1,8 @@
 var NAVTREEINDEX4 =
 {
+"classUniformBSplines_1_1Impl.html#ae89a55de902590b4f758069e27af4eff":[11,164,0,9],
+"classUniformBSplines_1_1Impl.html#af2e32bbd9bf5ed8e5946ae7008a1e64d":[11,164,0,14],
+"classUniformBSplines_1_1Impl.html#afbb52253d31711933be3c5b0c950a398":[11,164,0,17],
 "classVectorField.html":[11,165],
 "classVectorField.html#a06536f7ec56093a9b87f4ee0c1d5b64c":[11,165,17],
 "classVectorField.html#a0a1908a2429ba38ef8d891567cbc22c9":[11,165,10],
@@ -246,8 +249,5 @@ var NAVTREEINDEX4 =
 "discrete__mapping__to__cartesian_8hpp_source.html":[12,2,0,0,0,29,5],
 "docs_Adding_docs.html":[3],
 "docs_Adding_docs.html#autotoc_md0":[0],
-"docs_Adding_docs.html#autotoc_md1":[1],
-"docs_Adding_docs.html#autotoc_md2":[2],
-"docs_Adding_docs.html#autotoc_md3":[3],
-"docs_Adding_docs.html#autotoc_md4":[4]
+"docs_Adding_docs.html#autotoc_md1":[1]
 };

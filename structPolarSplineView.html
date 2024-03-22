@@ -108,31 +108,86 @@ $(document).ready(function(){initNavTree('structPolarSplineView.html',''); initR
 <div class="title">PolarSplineView&lt; PolarBSplinesType &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A structure containing the two ChunkViews necessary to define a constant reference to a spline on a set of polar basis splines.  
+ <a href="structPolarSplineView.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a48f3bbf282210df43e1c8f87cadbe8b8"><td class="memItemLeft" align="right" valign="top"><a id="a48f3bbf282210df43e1c8f87cadbe8b8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplineR</b> = typename PolarBSplinesType::BSplinesR_tag</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSplineView.html#a48f3bbf282210df43e1c8f87cadbe8b8">BSplineR</a> = typename PolarBSplinesType::BSplinesR_tag</td></tr>
+<tr class="memdesc:a48f3bbf282210df43e1c8f87cadbe8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The radial bspline from which the polar bsplines are constructed. <br /></td></tr>
 <tr class="separator:a48f3bbf282210df43e1c8f87cadbe8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a773dd7a09763add9ac7ed3a1863ffd48"><td class="memItemLeft" align="right" valign="top"><a id="a773dd7a09763add9ac7ed3a1863ffd48"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplineP</b> = typename PolarBSplinesType::BSplinesP_tag</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSplineView.html#a773dd7a09763add9ac7ed3a1863ffd48">BSplineP</a> = typename PolarBSplinesType::BSplinesP_tag</td></tr>
+<tr class="memdesc:a773dd7a09763add9ac7ed3a1863ffd48"><td class="mdescLeft">&#160;</td><td class="mdescRight">The poloidal bspline from which the polar bsplines are constructed. <br /></td></tr>
 <tr class="separator:a773dd7a09763add9ac7ed3a1863ffd48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3bd2580a82278b6ee520ce8ddd67c33d"><td class="memItemLeft" align="right" valign="top"><a id="a3bd2580a82278b6ee520ce8ddd67c33d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PolarSplineView</b> (<a class="el" href="structPolarSpline.html">PolarSpline</a>&lt; PolarBSplinesType &gt; const &amp;spl)</td></tr>
+<tr class="memitem:a3bd2580a82278b6ee520ce8ddd67c33d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSplineView.html#a3bd2580a82278b6ee520ce8ddd67c33d">PolarSplineView</a> (<a class="el" href="structPolarSpline.html">PolarSpline</a>&lt; PolarBSplinesType &gt; const &amp;spl)</td></tr>
+<tr class="memdesc:a3bd2580a82278b6ee520ce8ddd67c33d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a constant reference to a <a class="el" href="structPolarSpline.html" title="A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.">PolarSpline</a>.  <a href="structPolarSplineView.html#a3bd2580a82278b6ee520ce8ddd67c33d">More...</a><br /></td></tr>
 <tr class="separator:a3bd2580a82278b6ee520ce8ddd67c33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ab933a819e8bfa5e4263970082c083890"><td class="memItemLeft" align="right" valign="top"><a id="ab933a819e8bfa5e4263970082c083890"></a>
-ddc::ChunkSpan&lt; double const, ddc::DiscreteDomain&lt; BSplineR, BSplineP &gt; &gt; const&#160;</td><td class="memItemRight" valign="bottom"><b>spline_coef</b></td></tr>
+ddc::ChunkSpan&lt; double const, ddc::DiscreteDomain&lt; <a class="el" href="structPolarSplineView.html#a48f3bbf282210df43e1c8f87cadbe8b8">BSplineR</a>, <a class="el" href="structPolarSplineView.html#a773dd7a09763add9ac7ed3a1863ffd48">BSplineP</a> &gt; &gt; const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSplineView.html#ab933a819e8bfa5e4263970082c083890">spline_coef</a></td></tr>
+<tr class="memdesc:ab933a819e8bfa5e4263970082c083890"><td class="mdescLeft">&#160;</td><td class="mdescRight">A ChunkView containing the coefficients in front of the b-spline elements which can be expressed as a tensor product of 1D bsplines. <br /></td></tr>
 <tr class="separator:ab933a819e8bfa5e4263970082c083890"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bb22b7a2d02c40118e23b6239a8d456"><td class="memItemLeft" align="right" valign="top"><a id="a1bb22b7a2d02c40118e23b6239a8d456"></a>
-ddc::ChunkSpan&lt; double const, ddc::DiscreteDomain&lt; PolarBSplinesType &gt; &gt; const&#160;</td><td class="memItemRight" valign="bottom"><b>singular_spline_coef</b></td></tr>
+ddc::ChunkSpan&lt; double const, ddc::DiscreteDomain&lt; PolarBSplinesType &gt; &gt; const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSplineView.html#a1bb22b7a2d02c40118e23b6239a8d456">singular_spline_coef</a></td></tr>
+<tr class="memdesc:a1bb22b7a2d02c40118e23b6239a8d456"><td class="mdescLeft">&#160;</td><td class="mdescRight">A ChunkView containing the coefficients in front of the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D bsplines. <br /></td></tr>
 <tr class="separator:a1bb22b7a2d02c40118e23b6239a8d456"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class PolarBSplinesType&gt;<br />
+struct PolarSplineView&lt; PolarBSplinesType &gt;</h3>
+
+<p>A structure containing the two ChunkViews necessary to define a constant reference to a spline on a set of polar basis splines. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PolarBSplinesType</td><td>The type of the polar bsplines on which this spline is defined. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3bd2580a82278b6ee520ce8ddd67c33d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bd2580a82278b6ee520ce8ddd67c33d">&#9670;&nbsp;</a></span>PolarSplineView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class PolarBSplinesType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType &gt;::<a class="el" href="structPolarSplineView.html">PolarSplineView</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structPolarSpline.html">PolarSpline</a>&lt; PolarBSplinesType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>spl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a constant reference to a <a class="el" href="structPolarSpline.html" title="A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.">PolarSpline</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">spl</td><td>The <a class="el" href="structPolarSpline.html" title="A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.">PolarSpline</a> being referenced. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/<a class="el" href="polar__spline_8hpp_source.html">polar_spline.hpp</a></li>
 </ul>

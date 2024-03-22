@@ -108,31 +108,137 @@ $(document).ready(function(){initNavTree('structPolarSpline.html',''); initResiz
 <div class="title">PolarSpline&lt; PolarBSplinesType &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.  
+ <a href="structPolarSpline.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:ad26033ae149504208d160b5ac474d613"><td class="memItemLeft" align="right" valign="top"><a id="ad26033ae149504208d160b5ac474d613"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplineR</b> = typename PolarBSplinesType::BSplinesR_tag</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSpline.html#ad26033ae149504208d160b5ac474d613">BSplineR</a> = typename PolarBSplinesType::BSplinesR_tag</td></tr>
+<tr class="memdesc:ad26033ae149504208d160b5ac474d613"><td class="mdescLeft">&#160;</td><td class="mdescRight">The radial bspline from which the polar bsplines are constructed. <br /></td></tr>
 <tr class="separator:ad26033ae149504208d160b5ac474d613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af77ce2f18c9c86d7ac8e44606331d9d2"><td class="memItemLeft" align="right" valign="top"><a id="af77ce2f18c9c86d7ac8e44606331d9d2"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplineP</b> = typename PolarBSplinesType::BSplinesP_tag</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSpline.html#af77ce2f18c9c86d7ac8e44606331d9d2">BSplineP</a> = typename PolarBSplinesType::BSplinesP_tag</td></tr>
+<tr class="memdesc:af77ce2f18c9c86d7ac8e44606331d9d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The poloidal bspline from which the polar bsplines are constructed. <br /></td></tr>
 <tr class="separator:af77ce2f18c9c86d7ac8e44606331d9d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5e897bf683cacc651e57af9dc4d3f477"><td class="memItemLeft" align="right" valign="top"><a id="a5e897bf683cacc651e57af9dc4d3f477"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PolarSpline</b> (ddc::DiscreteDomain&lt; PolarBSplinesType &gt; singular_domain, ddc::DiscreteDomain&lt; BSplineR, BSplineP &gt; domain)</td></tr>
+<tr class="memitem:a89343478d4d570638a82ad70777231b4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSpline.html#a89343478d4d570638a82ad70777231b4">PolarSpline</a> (ddc::DiscreteDomain&lt; <a class="el" href="structPolarSpline.html#ad26033ae149504208d160b5ac474d613">BSplineR</a>, <a class="el" href="structPolarSpline.html#af77ce2f18c9c86d7ac8e44606331d9d2">BSplineP</a> &gt; domain)</td></tr>
+<tr class="memdesc:a89343478d4d570638a82ad70777231b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the <a class="el" href="structPolarSpline.html" title="A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.">PolarSpline</a>.  <a href="structPolarSpline.html#a89343478d4d570638a82ad70777231b4">More...</a><br /></td></tr>
+<tr class="separator:a89343478d4d570638a82ad70777231b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e897bf683cacc651e57af9dc4d3f477"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSpline.html#a5e897bf683cacc651e57af9dc4d3f477">PolarSpline</a> (ddc::DiscreteDomain&lt; PolarBSplinesType &gt; singular_domain, ddc::DiscreteDomain&lt; <a class="el" href="structPolarSpline.html#ad26033ae149504208d160b5ac474d613">BSplineR</a>, <a class="el" href="structPolarSpline.html#af77ce2f18c9c86d7ac8e44606331d9d2">BSplineP</a> &gt; domain)</td></tr>
+<tr class="memdesc:a5e897bf683cacc651e57af9dc4d3f477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the Chunks containing the coefficients of the spline representation.  <a href="structPolarSpline.html#a5e897bf683cacc651e57af9dc4d3f477">More...</a><br /></td></tr>
 <tr class="separator:a5e897bf683cacc651e57af9dc4d3f477"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a2b1c84a55d531de61300bbf9bcd838bc"><td class="memItemLeft" align="right" valign="top"><a id="a2b1c84a55d531de61300bbf9bcd838bc"></a>
-ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; BSplineR, BSplineP &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>spline_coef</b></td></tr>
+ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; <a class="el" href="structPolarSpline.html#ad26033ae149504208d160b5ac474d613">BSplineR</a>, <a class="el" href="structPolarSpline.html#af77ce2f18c9c86d7ac8e44606331d9d2">BSplineP</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSpline.html#a2b1c84a55d531de61300bbf9bcd838bc">spline_coef</a></td></tr>
+<tr class="memdesc:a2b1c84a55d531de61300bbf9bcd838bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Chunk containing the coefficients in front of the b-spline elements which can be expressed as a tensor product of 1D bsplines. <br /></td></tr>
 <tr class="separator:a2b1c84a55d531de61300bbf9bcd838bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f45100e4b9b9983843edd05fae6fd60"><td class="memItemLeft" align="right" valign="top"><a id="a8f45100e4b9b9983843edd05fae6fd60"></a>
-ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; PolarBSplinesType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>singular_spline_coef</b></td></tr>
+ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; PolarBSplinesType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSpline.html#a8f45100e4b9b9983843edd05fae6fd60">singular_spline_coef</a></td></tr>
+<tr class="memdesc:a8f45100e4b9b9983843edd05fae6fd60"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Chunk containing the coefficients in front of the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D bsplines. <br /></td></tr>
 <tr class="separator:a8f45100e4b9b9983843edd05fae6fd60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class PolarBSplinesType&gt;<br />
+struct PolarSpline&lt; PolarBSplinesType &gt;</h3>
+
+<p>A structure containing the two Chunks necessary to define a spline on a set of polar basis splines. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PolarBSplinesType</td><td>The type of the polar bsplines on which this spline is defined. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a89343478d4d570638a82ad70777231b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89343478d4d570638a82ad70777231b4">&#9670;&nbsp;</a></span>PolarSpline() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class PolarBSplinesType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPolarSpline.html">PolarSpline</a>&lt; PolarBSplinesType &gt;::<a class="el" href="structPolarSpline.html">PolarSpline</a> </td>
+          <td>(</td>
+          <td class="paramtype">ddc::DiscreteDomain&lt; <a class="el" href="structPolarSpline.html#ad26033ae149504208d160b5ac474d613">BSplineR</a>, <a class="el" href="structPolarSpline.html#af77ce2f18c9c86d7ac8e44606331d9d2">BSplineP</a> &gt;&#160;</td>
+          <td class="paramname"><em>domain</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A constructor for the <a class="el" href="structPolarSpline.html" title="A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.">PolarSpline</a>. </p>
+<p>A constructor for the <a class="el" href="structPolarSpline.html" title="A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.">PolarSpline</a> which takes a 2D domain of bsplines. This domain is then split into the domains which are relevant for a polar bspline constructed from these 2D bsplines. These new domains are then used to create the chunks which define the spline.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domain</td><td>A 2D domain of bsplines. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5e897bf683cacc651e57af9dc4d3f477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e897bf683cacc651e57af9dc4d3f477">&#9670;&nbsp;</a></span>PolarSpline() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class PolarBSplinesType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPolarSpline.html">PolarSpline</a>&lt; PolarBSplinesType &gt;::<a class="el" href="structPolarSpline.html">PolarSpline</a> </td>
+          <td>(</td>
+          <td class="paramtype">ddc::DiscreteDomain&lt; PolarBSplinesType &gt;&#160;</td>
+          <td class="paramname"><em>singular_domain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ddc::DiscreteDomain&lt; <a class="el" href="structPolarSpline.html#ad26033ae149504208d160b5ac474d613">BSplineR</a>, <a class="el" href="structPolarSpline.html#af77ce2f18c9c86d7ac8e44606331d9d2">BSplineP</a> &gt;&#160;</td>
+          <td class="paramname"><em>domain</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialise the Chunks containing the coefficients of the spline representation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">singular_domain</td><td>The domain for the coefficients in front of the b-spline elements near the singular point. These are the elements which cannot be expressed as a tensor product of 1D bsplines. </td></tr>
+    <tr><td class="paramname">domain</td><td>The domain for the coefficients in front of the b-spline elements which can be expressed as a tensor product of 1D bsplines. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>/__w/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/<a class="el" href="polar__spline_8hpp_source.html">polar_spline.hpp</a></li>
 </ul>

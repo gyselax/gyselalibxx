@@ -66,10 +66,10 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCrankNicolson.html#a2b58f2e418530fa5218d4631b00faa4f",
 "classIVlasovSolver.html#a45c170f305e21ec904c0ff8f6dd1d658",
-"classPolarSplineEvaluator.html#a6e40a306765075a23ffc64f56a823605",
-"classVectorField.html",
-"docs_Adding_docs.html#autotoc_md5",
-"src_utils.html#src_utils__VectorField"
+"classPolarSplineEvaluator.html#a41bb228d256a0785988519f9683b100c",
+"classUniformBSplines_1_1Impl.html#ae89a55de902590b4f758069e27af4eff",
+"docs_Adding_docs.html#autotoc_md2",
+"src_timestepper.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

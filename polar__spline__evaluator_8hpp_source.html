@@ -247,13 +247,13 @@ $(document).ready(function(){initNavTree('polar__spline__evaluator_8hpp_source.h
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keywordtype">double</span> y = 0.;</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        ddc::for_each(</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                spline_coef.singular_spline_coef.domain(),</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                spline_coef.<a class="code" href="structPolarSplineView.html#a1bb22b7a2d02c40118e23b6239a8d456">singular_spline_coef</a>.domain(),</div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                [=](ddc::DiscreteElement&lt;PolarBSplinesType&gt; <span class="keyword">const</span> i) {</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                    y += spline_coef.singular_spline_coef(i) * singular_vals(i)</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                         * mapping.determinant(i);</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                });</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        ddc::for_each(</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                spline_coef.spline_coef.domain(),</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                spline_coef.<a class="code" href="structPolarSplineView.html#ab933a819e8bfa5e4263970082c083890">spline_coef</a>.domain(),</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                [=](ddc::DiscreteElement&lt;BSplinesR, BSplinesP&gt; <span class="keyword">const</span> i) {</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                    y += spline_coef.spline_coef(i)</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                         * vals(ddc::select&lt;BSplinesR&gt;(i), ddc::select&lt;BSplinesP&gt;(i))</div>
@@ -319,7 +319,7 @@ $(document).ready(function(){initNavTree('polar__spline__evaluator_8hpp_source.h
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <span class="keywordtype">double</span> y = 0.0;</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="keywordflow">for</span> (std::size_t i = 0; i &lt; PolarBSplinesType::n_singular_basis(); ++i) {</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;            y += spline_coef.singular_spline_coef(ddc::DiscreteElement&lt;PolarBSplinesType&gt;(i))</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;            y += spline_coef.<a class="code" href="structPolarSplineView.html#a1bb22b7a2d02c40118e23b6239a8d456">singular_spline_coef</a>(ddc::DiscreteElement&lt;PolarBSplinesType&gt;(i))</div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;                 * singular_vals(i);</div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        }</div>
 <div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        ddc::DiscreteElement&lt;BSplinesR&gt; jmin_r = ddc::select&lt;BSplinesR&gt;(jmin);</div>
@@ -331,7 +331,7 @@ $(document).ready(function(){initNavTree('polar__spline__evaluator_8hpp_source.h
 <div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        }</div>
 <div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nr; ++i) {</div>
 <div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;            <span class="keywordflow">for</span> (std::size_t j = 0; j &lt; BSplinesP::degree() + 1; ++j) {</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;                y += spline_coef.spline_coef(jmin_r + i, jmin_p + j) * vals(i, j);</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;                y += spline_coef.<a class="code" href="structPolarSplineView.html#ab933a819e8bfa5e4263970082c083890">spline_coef</a>(jmin_r + i, jmin_p + j) * vals(i, j);</div>
 <div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            }</div>
 <div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        }</div>
 <div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        <span class="keywordflow">return</span> y;</div>
@@ -359,7 +359,9 @@ $(document).ready(function(){initNavTree('polar__spline__evaluator_8hpp_source.h
 <div class="ttc" id="aclassPolarSplineEvaluator_html_aacce24543106f51ca08ce5d8fc96cb21"><div class="ttname"><a href="classPolarSplineEvaluator.html#aacce24543106f51ca08ce5d8fc96cb21">PolarSplineEvaluator::integrate</a></div><div class="ttdeci">double integrate(PolarSplineView&lt; PolarBSplinesType &gt; const spline_coef, Mapping const mapping) const</div><div class="ttdoc">Get the in integral of a spline function over the domain.</div><div class="ttdef"><b>Definition:</b> polar_spline_evaluator.hpp:305</div></div>
 <div class="ttc" id="aclassPolarSplineEvaluator_html_ad16dac26ccca13b143d00d7aa53febcf"><div class="ttname"><a href="classPolarSplineEvaluator.html#ad16dac26ccca13b143d00d7aa53febcf">PolarSplineEvaluator::PolarSplineEvaluator</a></div><div class="ttdeci">PolarSplineEvaluator(PolarSplineBoundaryValue2D&lt; PolarBSplinesType &gt; const &amp;outer_bc)</div><div class="ttdoc">Instantiate a PolarSplineEvaluator with boundary evaluation conditions.</div><div class="ttdef"><b>Definition:</b> polar_spline_evaluator.hpp:91</div></div>
 <div class="ttc" id="aclassPolarSplineEvaluator_html_af95eaa07f8890667fe4feade36d50423"><div class="ttname"><a href="classPolarSplineEvaluator.html#af95eaa07f8890667fe4feade36d50423">PolarSplineEvaluator::BSplinesR</a></div><div class="ttdeci">typename PolarBSplinesType::BSplinesR_tag BSplinesR</div><div class="ttdoc">Tag the type of first dimension B-splines.</div><div class="ttdef"><b>Definition:</b> polar_spline_evaluator.hpp:53</div></div>
-<div class="ttc" id="astructPolarSplineView_html"><div class="ttname"><a href="structPolarSplineView.html">PolarSplineView</a></div><div class="ttdef"><b>Definition:</b> polar_spline.hpp:48</div></div>
+<div class="ttc" id="astructPolarSplineView_html"><div class="ttname"><a href="structPolarSplineView.html">PolarSplineView</a></div><div class="ttdoc">A structure containing the two ChunkViews necessary to define a constant reference to a spline on a s...</div><div class="ttdef"><b>Definition:</b> polar_spline.hpp:122</div></div>
+<div class="ttc" id="astructPolarSplineView_html_a1bb22b7a2d02c40118e23b6239a8d456"><div class="ttname"><a href="structPolarSplineView.html#a1bb22b7a2d02c40118e23b6239a8d456">PolarSplineView::singular_spline_coef</a></div><div class="ttdeci">ddc::ChunkSpan&lt; double const, ddc::DiscreteDomain&lt; PolarBSplinesType &gt; &gt; const singular_spline_coef</div><div class="ttdoc">A ChunkView containing the coefficients in front of the b-spline elements near the singular point whi...</div><div class="ttdef"><b>Definition:</b> polar_spline.hpp:140</div></div>
+<div class="ttc" id="astructPolarSplineView_html_ab933a819e8bfa5e4263970082c083890"><div class="ttname"><a href="structPolarSplineView.html#ab933a819e8bfa5e4263970082c083890">PolarSplineView::spline_coef</a></div><div class="ttdeci">ddc::ChunkSpan&lt; double const, ddc::DiscreteDomain&lt; BSplineR, BSplineP &gt; &gt; const spline_coef</div><div class="ttdoc">A ChunkView containing the coefficients in front of the b-spline elements which can be expressed as a...</div><div class="ttdef"><b>Definition:</b> polar_spline.hpp:134</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

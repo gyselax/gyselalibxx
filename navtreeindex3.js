@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"classPolarSplineEvaluator.html#a41bb228d256a0785988519f9683b100c":[11,114,14],
+"classPolarSplineEvaluator.html#a60de03671b33a0daf678b6df31cc9206":[11,114,13],
+"classPolarSplineEvaluator.html#a6d98892294bafa10455c71f68c0cfb12":[11,114,4],
 "classPolarSplineEvaluator.html#a6e40a306765075a23ffc64f56a823605":[11,114,19],
 "classPolarSplineEvaluator.html#a6e5b5a439964fa71862689834cf5c1eb":[11,114,10],
 "classPolarSplineEvaluator.html#a85c09157c0eb1a996e201d256f289a5c":[11,114,5],
@@ -204,8 +207,8 @@ var NAVTREEINDEX3 =
 "classSplitRightHandSideSolver.html#a2e6bd2d8daa2dc2d7883c1dd47cb9b4a":[11,155,1],
 "classSplitRightHandSideSolver.html#a83cc73ba72845154b30ac9fd8cc376e6":[11,155,2],
 "classSplitVlasovSolver.html":[11,156],
-"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[11,156,3],
 "classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[11,156,1],
+"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[11,156,3],
 "classSplitVlasovSolver.html#a3ae6624950e6d8126e848ee52eab8a22":[11,156,5],
 "classSplitVlasovSolver.html#a8a0d9e743da738c69f549c68e1696267":[11,156,2],
 "classSplitVlasovSolver.html#ad4843f29aef761e78933df55034e7aa3":[11,156,4],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "classUniformBSplines_1_1Impl.html#ac909268e7b4b5410d8febcf74b9bd412":[11,164,0,1],
 "classUniformBSplines_1_1Impl.html#ace2f1fc78a496b71bb22baa456742a38":[11,164,0,15],
 "classUniformBSplines_1_1Impl.html#ada0089187d6a1c4eb42c76ca58ce34f6":[11,164,0,4],
-"classUniformBSplines_1_1Impl.html#ae2c9aec041a35f7e2d0a7dca00d2840f":[11,164,0,2],
-"classUniformBSplines_1_1Impl.html#ae89a55de902590b4f758069e27af4eff":[11,164,0,9],
-"classUniformBSplines_1_1Impl.html#af2e32bbd9bf5ed8e5946ae7008a1e64d":[11,164,0,14],
-"classUniformBSplines_1_1Impl.html#afbb52253d31711933be3c5b0c950a398":[11,164,0,17]
+"classUniformBSplines_1_1Impl.html#ae2c9aec041a35f7e2d0a7dca00d2840f":[11,164,0,2]
 };
