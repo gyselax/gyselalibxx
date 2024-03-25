@@ -22,6 +22,12 @@ set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ spec
 
 set(GYSELALIBXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
 
+# Set default DDC options when included in GYSELA
+option(DDC_BUILD_BENCHMARKS       "Build DDC benchmarks." OFF)
+option(DDC_BUILD_DOCUMENTATION    "Build DDC documentation/website" OFF)
+option(DDC_BUILD_EXAMPLES         "Build DDC examples" OFF)
+option(DDC_BUILD_TESTS            "Build DDC tests if BUILD_TESTING is enabled" OFF)
+
 # Our dependencies
 
 ## Use CTest for running tests
