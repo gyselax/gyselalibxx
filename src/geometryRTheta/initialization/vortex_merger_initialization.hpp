@@ -82,7 +82,7 @@ public:
         IDomainRP grid = ddc::get_domain<IDimR, IDimP>(rho_init);
 
         // Initialisation:
-        for_each(grid, [&](IndexRP const irp) {
+        ddc::for_each(grid, [&](IndexRP const irp) {
             const CoordRP coord_rp(ddc::coordinate(irp));
             const CoordXY coord_xy(m_mapping(coord_rp));
             const double x = ddc::get<RDimX>(coord_xy);
