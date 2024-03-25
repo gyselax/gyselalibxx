@@ -57,7 +57,7 @@ void Interpolation_on_random_coord(
 
     // Evaluation of the function on the grid. -----------------------------------------------
     DFieldRP function_evaluated(grid);
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         CoordRP coord(coordinate(ddc::select<IDimR>(irp)), coordinate(ddc::select<IDimP>(irp)));
         function_evaluated(irp) = exact_function(coord);
     });
@@ -75,7 +75,7 @@ void Interpolation_on_random_coord(
     int number_p(0);
     double random_factor_r;
     double random_factor_p;
-    for_each(random_grid, [&](IndexRP const irp) {
+    ddc::for_each(random_grid, [&](IndexRP const irp) {
         CoordR coord_r(coordinate(ddc::select<IDimR>(irp)));
         CoordP coord_p(coordinate(ddc::select<IDimP>(irp)));
 
@@ -132,7 +132,7 @@ void Interpolation_on_random_coord(
 
     // Compare the obtained values with the exact function. ----------------------------------
     double max_err(0.0);
-    for_each(random_coords.domain(), [&](IndexRP const irp) {
+    ddc::for_each(random_coords.domain(), [&](IndexRP const irp) {
         double err = fabs(function_interpolated(irp) - exact_function(random_coords(irp)));
         max_err = max_err > err ? max_err : err;
     });

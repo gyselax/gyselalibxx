@@ -306,7 +306,7 @@ int main(int argc, char** argv)
     DFieldRP rho_eq(grid);
 
     // Initialize rho and rho equilibrium ****************************
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         rho(irp) = exact_rho.initialisation(coords(irp));
         rho_eq(irp) = exact_rho.equilibrium(coords(irp));
     });
