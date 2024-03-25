@@ -89,15 +89,9 @@ jobs:
     if: github.event_name == 'push' && github.ref_name == 'main'
     needs: docker
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
-      options: --user root
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          path: code_branch
-          submodules: recursive
       - name: Checkout documentation
         uses: actions/checkout@v3
         with:
@@ -107,7 +101,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DBUILD_DOCUMENTATION=ON ../code_branch
+          cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DBUILD_DOCUMENTATION=1 ../code_branch
           make doc
         shell: bash
       - name: Update documentation

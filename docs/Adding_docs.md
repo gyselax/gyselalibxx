@@ -1,8 +1,20 @@
 # Adding Documentation
 
-There are two types of documentation:
+There are two types of documentation which are described in detail below:
 1.  Documentation describing code structures
 2.  Documentation describing general methods
+
+## Building documentation locally
+
+The documentation can be built locally by running the following commands from the root directory:
+```
+cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DBUILD_DOCUMENTATION=1 -B build-docs .
+cmake --build build-docs
+```
+The option `-DGYSELALIBXX_COMPILE_SOURCE=OFF` ensures that the C++ code is not built, thereby avoiding the need to have all the C++ dependencies installed on your system.
+If this option is not used then `make docs` should be used to build only the documentation.
+
+In order to view the docs the file `build-docs/docs/html/index.html` should be opened in a browser (e.g. Firefox).
 
 ## Documentation describing code structures
 
