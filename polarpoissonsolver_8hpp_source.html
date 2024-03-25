@@ -383,7 +383,7 @@ $(document).ready(function(){initNavTree('polarpoissonsolver_8hpp_source.html','
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            int_volume(ir, ip) = abs(mapping.jacobian(coord)) * weights_r(ir) * weights_p(ip);</div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        });</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        <a class="code" href="classSplineEvaluator2D.html">SplineEvaluator2D&lt;BSplinesR, BSplinesP&gt;</a> spline_evaluator(</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        <a class="code" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> spline_evaluator(</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;,</div>
 <div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;,</div>
 <div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                g_null_boundary_2d&lt;BSplinesR, BSplinesP&gt;,</div>
@@ -732,7 +732,7 @@ $(document).ready(function(){initNavTree('polarpoissonsolver_8hpp_source.html','
 <div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;            EvalDeriv2DType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv,</div>
 <div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;            Spline2DView coeff_alpha,</div>
 <div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;            Spline2DView coeff_beta,</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineEvaluator2D&lt;BSplinesR, BSplinesP&gt;</a> <span class="keyword">const</span>&amp; evaluator,</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> <span class="keyword">const</span>&amp; evaluator,</div>
 <div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;    {</div>
 <div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;        <span class="keywordflow">return</span> templated_weak_integral_element(</div>
@@ -757,7 +757,7 @@ $(document).ready(function(){initNavTree('polarpoissonsolver_8hpp_source.html','
 <div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;            EvalDeriv1DType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv_p,</div>
 <div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;            Spline2DView coeff_alpha,</div>
 <div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;            Spline2DView coeff_beta,</div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineEvaluator2D&lt;BSplinesR, BSplinesP&gt;</a> <span class="keyword">const</span>&amp; evaluator,</div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> <span class="keyword">const</span>&amp; evaluator,</div>
 <div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;    {</div>
 <div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;        <span class="keywordflow">return</span> templated_weak_integral_element(</div>
@@ -782,7 +782,7 @@ $(document).ready(function(){initNavTree('polarpoissonsolver_8hpp_source.html','
 <div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;            EvalDeriv1DType <span class="keyword">const</span>&amp; test_bspline_val_and_deriv_p,</div>
 <div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;            Spline2DView coeff_alpha,</div>
 <div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;            Spline2DView coeff_beta,</div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineEvaluator2D&lt;BSplinesR, BSplinesP&gt;</a> <span class="keyword">const</span>&amp; evaluator,</div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> <span class="keyword">const</span>&amp; evaluator,</div>
 <div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;    {</div>
 <div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;        <span class="keywordflow">return</span> templated_weak_integral_element(</div>
@@ -808,7 +808,7 @@ $(document).ready(function(){initNavTree('polarpoissonsolver_8hpp_source.html','
 <div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;            EvalDeriv1DType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv_p,</div>
 <div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;            Spline2DView coeff_alpha,</div>
 <div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;            Spline2DView coeff_beta,</div>
-<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineEvaluator2D&lt;BSplinesR, BSplinesP&gt;</a> <span class="keyword">const</span>&amp; evaluator,</div>
+<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> <span class="keyword">const</span>&amp; evaluator,</div>
 <div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;    {</div>
 <div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;        <span class="keywordflow">return</span> templated_weak_integral_element(</div>
@@ -854,7 +854,7 @@ $(document).ready(function(){initNavTree('polarpoissonsolver_8hpp_source.html','
 <div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;            TrialValDerivType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv_p,</div>
 <div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160;            Spline2DView coeff_alpha,</div>
 <div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160;            Spline2DView coeff_beta,</div>
-<div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineEvaluator2D&lt;BSplinesR, BSplinesP&gt;</a> <span class="keyword">const</span>&amp; spline_evaluator,</div>
+<div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> <span class="keyword">const</span>&amp; spline_evaluator,</div>
 <div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160;    {</div>
 <div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160;        static_assert(</div>
@@ -902,7 +902,7 @@ $(document).ready(function(){initNavTree('polarpoissonsolver_8hpp_source.html','
 <div class="line"><a name="l00934"></a><span class="lineno">  934</span>&#160;            IDimBSpline2D idx_trial,</div>
 <div class="line"><a name="l00935"></a><span class="lineno">  935</span>&#160;            Spline2DView coeff_alpha,</div>
 <div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;            Spline2DView coeff_beta,</div>
-<div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineEvaluator2D&lt;BSplinesR, BSplinesP&gt;</a> <span class="keyword">const</span>&amp; evaluator,</div>
+<div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;            <a class="code" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> <span class="keyword">const</span>&amp; evaluator,</div>
 <div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;    {</div>
 <div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;        <span class="comment">// 0 &lt;= r_idx_test &lt; 8</span></div>
@@ -1048,7 +1048,7 @@ $(document).ready(function(){initNavTree('polarpoissonsolver_8hpp_source.html','
 <div class="ttc" id="aclassPolarSplineFEMPoissonSolver_html_structPolarSplineFEMPoissonSolver_1_1PCellDim"><div class="ttname"><a href="classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1PCellDim">PolarSplineFEMPoissonSolver::PCellDim</a></div><div class="ttdef"><b>Definition:</b> polarpoissonsolver.hpp:49</div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonSolver_html_structPolarSplineFEMPoissonSolver_1_1RBasisSubset"><div class="ttname"><a href="classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1RBasisSubset">PolarSplineFEMPoissonSolver::RBasisSubset</a></div><div class="ttdef"><b>Definition:</b> polarpoissonsolver.hpp:40</div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonSolver_html_structPolarSplineFEMPoissonSolver_1_1RCellDim"><div class="ttname"><a href="classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1RCellDim">PolarSplineFEMPoissonSolver::RCellDim</a></div><div class="ttdef"><b>Definition:</b> polarpoissonsolver.hpp:46</div></div>
-<div class="ttc" id="aclassSplineEvaluator2D_html"><div class="ttname"><a href="classSplineEvaluator2D.html">SplineEvaluator2D&lt; BSplinesR, BSplinesP &gt;</a></div></div>
+<div class="ttc" id="aclassSplineEvaluator2D_html"><div class="ttname"><a href="classSplineEvaluator2D.html">SplineEvaluator2D</a></div><div class="ttdoc">Define an evaluator 2D on B-splines.</div><div class="ttdef"><b>Definition:</b> spline_evaluator_2d.hpp:15</div></div>
 <div class="ttc" id="astructPolarSpline_html"><div class="ttname"><a href="structPolarSpline.html">PolarSpline</a></div><div class="ttdoc">A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.</div><div class="ttdef"><b>Definition:</b> polar_spline.hpp:13</div></div>
 <div class="ttc" id="astructPolarSpline_html_a2b1c84a55d531de61300bbf9bcd838bc"><div class="ttname"><a href="structPolarSpline.html#a2b1c84a55d531de61300bbf9bcd838bc">PolarSpline::spline_coef</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; BSplineR, BSplineP &gt; &gt; spline_coef</div><div class="ttdoc">A Chunk containing the coefficients in front of the b-spline elements which can be expressed as a ten...</div><div class="ttdef"><b>Definition:</b> polar_spline.hpp:25</div></div>
 <div class="ttc" id="astructPolarSpline_html_a8f45100e4b9b9983843edd05fae6fd60"><div class="ttname"><a href="structPolarSpline.html#a8f45100e4b9b9983843edd05fae6fd60">PolarSpline::singular_spline_coef</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; PolarBSplinesType &gt; &gt; singular_spline_coef</div><div class="ttdoc">A Chunk containing the coefficients in front of the b-spline elements near the singular point which c...</div><div class="ttdef"><b>Definition:</b> polar_spline.hpp:31</div></div>
