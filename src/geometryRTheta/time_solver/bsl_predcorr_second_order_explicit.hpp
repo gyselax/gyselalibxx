@@ -71,8 +71,6 @@ private:
     using EulerMethod = Euler<FieldRP<CoordRP>, VectorDFieldRP<RDimX, RDimY>>;
 
 
-    AdvectionDomain const& m_advection_domain;
-
     Mapping const& m_mapping;
 
     BslAdvectionRP<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping> const&
@@ -123,8 +121,7 @@ public:
             SplineRPEvaluator const& rhs_evaluator,
             PolarSplineFEMPoissonSolver const& poisson_solver,
             SplineRPEvaluator const& advection_evaluator)
-        : m_advection_domain(advection_domain)
-        , m_mapping(mapping)
+        : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_euler(grid)
         , m_find_feet(m_euler, advection_domain, builder, advection_evaluator)
