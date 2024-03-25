@@ -222,7 +222,6 @@ int main(int argc, char** argv)
     // --- Predictor corrector operator ---------------------------------------------------------------
 #if defined(PREDCORR)
     BslPredCorrRP predcorr_operator(
-            advection_domain,
             mapping,
             advection_operator,
             builder,

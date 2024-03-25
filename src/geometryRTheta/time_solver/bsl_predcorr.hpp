@@ -52,18 +52,14 @@
  *
  * @tparam Mapping
  *      A Curvilinear2DToCartesian class or one of its child classes.
- * @tparam AdvectionDomain
- *      An AdvectionDomain class.
  * @tparam FootFinder
  *      A IFootFinder class.
  *
  */
-template <class Mapping, class AdvectionDomain, class FootFinder>
+template <class Mapping, class FootFinder>
 class BslPredCorrRP : public ITimeSolverRP
 {
 private:
-    AdvectionDomain const& m_advection_domain;
-
     Mapping const& m_mapping;
 
     BslAdvectionRP<FootFinder, Mapping> const& m_advection_solver;
@@ -78,9 +74,6 @@ public:
     /**
      * @brief Instantiate a BslPredCorrRP.
      *
-     * @param[in] advection_domain
-     *      An AdvectionDomain object which gives the information
-     *      in which domain we advect.
      * @param[in] mapping
      *      The mapping function from the logical domain to the
      *      physical domain.
@@ -96,14 +89,12 @@ public:
      *      potential.
      */
     BslPredCorrRP(
-            AdvectionDomain const& advection_domain,
             Mapping const& mapping,
             BslAdvectionRP<FootFinder, Mapping> const& advection_solver,
             SplineRPBuilder const& builder,
             SplineRPEvaluator const& rhs_evaluator,
             PolarSplineFEMPoissonSolver const& poisson_solver)
-        : m_advection_domain(advection_domain)
-        , m_mapping(mapping)
+        : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
