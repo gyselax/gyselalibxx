@@ -212,7 +212,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    std::ofstream out_file(name, std::ofstream::out);</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    out_file &lt;&lt; std::fixed &lt;&lt; std::setprecision(16);</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    ddc::for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        IDomainP p_dom = ddc::select&lt;IDimP&gt;(grid);</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        IndexR <span class="keyword">const</span> ir(ddc::select&lt;IDimR&gt;(irp));</div>
@@ -345,7 +345,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    start_simulation = std::chrono::system_clock::now();</div>
 <div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; </div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="comment">// Initialization of the advected function:</span></div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    ddc::for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        CoordRP coord = coordinate(irp);</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        <span class="keywordflow">if</span> (ddc::get&lt;RDimR&gt;(coord) &lt;= 1e-15) {</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;            ddc::get&lt;RDimP&gt;(coord) = 0;</div>
@@ -356,7 +356,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="comment">// Definition of advection field:</span></div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    ddc::for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
 <div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="comment">// Moving the coordinates in the physical domain:</span></div>
 <div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        CoordXY <span class="keyword">const</span> coord_xy = mapping(ddc::coordinate(irp));</div>
 <div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        CoordXY <span class="keyword">const</span> advection_field = advection_field_test(coord_xy, 0.);</div>
@@ -393,7 +393,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    <span class="comment">// Compute the maximal absolute error on the space at the end of the simulation:</span></div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    <span class="keywordtype">double</span> max_err = 0.;</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    ddc::for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
 <div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        <span class="keywordtype">double</span> <span class="keyword">const</span> err</div>
 <div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;                = fabs(allfdistribu_advected_test(irp)</div>
 <div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;                       - function_to_be_advected_test(feet_coords_rp_end_time(irp)));</div>
@@ -428,7 +428,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    <span class="comment">// Save the computed characteristic feet:</span></div>
 <div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    <span class="keywordflow">if</span> (if_save_feet) {</div>
 <div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;        FieldRP&lt;CoordRP&gt; feet(grid);</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        for_each(grid, [&amp;](<span class="keyword">const</span> IndexRP irp) { feet(irp) = ddc::coordinate(irp); });</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        ddc::for_each(grid, [&amp;](<span class="keyword">const</span> IndexRP irp) { feet(irp) = ddc::coordinate(irp); });</div>
 <div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;        foot_finder(feet.span_view(), advection_field_test_vec, dt);</div>
 <div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        std::string <span class="keyword">const</span> name = output_folder + <span class="stringliteral">&quot;/feet_computed.txt&quot;</span>;</div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;        save_feet(mapping, grid, feet.span_view(), name);</div>
@@ -442,7 +442,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; </div>
 <div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;        DFieldRP initial_function(grid);</div>
 <div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;        DFieldRP end_function(grid);</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;        for_each(grid, [&amp;](<span class="keyword">const</span> IndexRP irp) {</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;        ddc::for_each(grid, [&amp;](<span class="keyword">const</span> IndexRP irp) {</div>
 <div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;            initial_function(irp) = function_to_be_advected_test(ddc::coordinate(irp));</div>
 <div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; </div>
 <div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;            <span class="comment">// Exact final state</span></div>

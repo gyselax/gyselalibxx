@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('vortex__merger__initialization_8hpp_so
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        IDomainRP grid = ddc::get_domain&lt;IDimR, IDimP&gt;(rho_init);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="comment">// Initialisation:</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        ddc::for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keyword">const</span> CoordRP coord_rp(ddc::coordinate(irp));</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keyword">const</span> CoordXY coord_xy(m_mapping(coord_rp));</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> x = ddc::get&lt;RDimX&gt;(coord_xy);</div>

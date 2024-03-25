@@ -235,7 +235,7 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        DFieldRP sigma_0(grid);</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        DFieldRP phi_eq(grid);</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> sig = 0.3;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        ddc::for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="keyword">const</span> CoordRP coord_rp(ddc::coordinate(irp));</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="keyword">const</span> CoordXY coord_xy(m_mapping(coord_rp));</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> x = ddc::get&lt;RDimX&gt;(coord_xy);</div>
