@@ -190,7 +190,7 @@ void check_constant_outside_domain(
     auto r_domain = ddc::get_domain<IDimR>(coords);
     double r_max = ddc::coordinate(r_domain.back());
     double max_err(0.0);
-    for_each(outside_coords.domain(), [&](IndexRP const irp) {
+    ddc::for_each(outside_coords.domain(), [&](IndexRP const irp) {
         CoordRP coords_edge(r_max, ddc::get<DimP>(outside_coords(irp)));
         const double err = fabs(function_evaluated(irp) - exact_function(coords_edge));
         max_err = max_err > err ? max_err : err;
@@ -230,7 +230,7 @@ void check_constant_outside_domain(
     const double y_max = ddc::coordinate(y_domain.back());
     const double y_min = ddc::coordinate(y_domain.front());
     double max_err(0.0);
-    for_each(outside_coords.domain(), [&](IndexXY const ixy) {
+    ddc::for_each(outside_coords.domain(), [&](IndexXY const ixy) {
         const double x = ddc::get<DimX>(outside_coords(ixy));
         const double y = ddc::get<DimY>(outside_coords(ixy));
         const double coord_x = std::max(x_min, std::min(x_max, x));
@@ -266,7 +266,7 @@ void build_outside_grid(IDomainRP const& grid, FieldRP<CoordRP>& outside_coords)
     CoordR const r_min(ddc::coordinate(ir_min));
     CoordR const r_max(ddc::coordinate(ir_max));
 
-    for_each(outside_coords.domain(), [&](IndexRP const irp) {
+    ddc::for_each(outside_coords.domain(), [&](IndexRP const irp) {
         CoordR const coord_r(coordinate(ddc::select<IDimR>(irp)));
         CoordP const coord_p(coordinate(ddc::select<IDimP>(irp)));
 
@@ -321,7 +321,7 @@ void build_outside_grid(IDomainXY const& grid, FieldXY<CoordXY>& outside_coords)
     CoordY const y_min(ddc::coordinate(iy_min));
     CoordY const y_max(ddc::coordinate(iy_max));
 
-    for_each(outside_coords.domain(), [&](IndexXY const ixy) {
+    ddc::for_each(outside_coords.domain(), [&](IndexXY const ixy) {
         CoordX const coord_x(coordinate(ddc::select<IDimX>(ixy)));
         CoordY const coord_y(coordinate(ddc::select<IDimY>(ixy)));
 
@@ -387,14 +387,14 @@ void Evaluate_on_outside_coord(IDomainRP const& grid, Function& exact_function, 
 {
     // Coordinates on the grid. --------------------------------------------------------------
     FieldRP<CoordRP> coords(grid);
-    for_each(grid, [&](IndexRP const irp) { coords(irp) = ddc::coordinate(irp); });
+    ddc::for_each(grid, [&](IndexRP const irp) { coords(irp) = ddc::coordinate(irp); });
 
 
     // Build the decomposition of the function on B-splines. ---------------------------------
     SplineRPBuilder const builder(grid);
     ddc::Chunk<double, BSDomainRP> function_coefs(builder.spline_domain());
     DFieldRP function_evaluated(grid);
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         function_evaluated(irp) = exact_function(coords(irp));
     });
     builder(function_coefs, function_evaluated);
@@ -449,7 +449,7 @@ void Evaluate_on_outside_coord(IDomainXY const& grid, Function& exact_function, 
 {
     // Coordinates on the grid. --------------------------------------------------------------
     FieldXY<CoordXY> coords(grid);
-    for_each(grid, [&](IndexXY const ixy) {
+    ddc::for_each(grid, [&](IndexXY const ixy) {
         CoordXY coord(ddc::coordinate(ixy));
         coords(ixy) = coord;
     });
@@ -459,7 +459,7 @@ void Evaluate_on_outside_coord(IDomainXY const& grid, Function& exact_function, 
     SplineXYBuilder const builder(grid);
     ddc::Chunk<double, BSDomainXY> function_coefs(builder.spline_domain());
     DFieldXY function_evaluated(grid);
-    for_each(grid, [&](IndexXY const ixy) {
+    ddc::for_each(grid, [&](IndexXY const ixy) {
         CoordXY coord = coords(ixy);
         function_evaluated(ixy) = exact_function(coord);
     });

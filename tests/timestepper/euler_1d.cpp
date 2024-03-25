@@ -50,13 +50,13 @@ TEST(EulerFixture, EulerOrder)
     DChunkX result(dom);
 
     double exp_val = exp(5.0 * dt * Nt);
-    for_each(dom, [&](IndexX ix) {
+    ddc::for_each(dom, [&](IndexX ix) {
         double const C = (double(ix.uid()) - 0.6);
         result(ix) = C * exp_val + 0.6;
     });
 
     for (int j(0); j < Ntests; ++j) {
-        for_each(dom, [&](IndexX ix) { vals(ix) = double(ix.uid()); });
+        ddc::for_each(dom, [&](IndexX ix) { vals(ix) = double(ix.uid()); });
 
         for (int i(0); i < Nt; ++i) {
             euler
@@ -64,12 +64,12 @@ TEST(EulerFixture, EulerOrder)
                             dt,
                             [&](ChunkSpan<double, IDomainX> dy,
                                 ChunkSpan<double const, IDomainX> y) {
-                                for_each(dom, [&](IndexX ix) { dy(ix) = 5.0 * y(ix) - 3.0; });
+                                ddc::for_each(dom, [&](IndexX ix) { dy(ix) = 5.0 * y(ix) - 3.0; });
                             });
         }
 
         double linf_err = 0.0;
-        for_each(dom, [&](IndexX ix) {
+        ddc::for_each(dom, [&](IndexX ix) {
             double const err = abs(result(ix) - vals(ix));
             linf_err = err > linf_err ? err : linf_err;
         });

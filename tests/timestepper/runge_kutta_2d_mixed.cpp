@@ -129,7 +129,7 @@ TYPED_TEST(RungeKutta2DFixtureMixedTypes, RungeKutta2DOrderMixedTypes)
 
     double cos_val = std::cos(omega * dt * Nt);
     double sin_val = std::sin(omega * dt * Nt);
-    for_each(dom, [&](IndexXY ixy) {
+    ddc::for_each(dom, [&](IndexXY ixy) {
         double const dist_x = (coordinate(select<IDimX>(ixy)) - xc);
         double const dist_y = (coordinate(select<IDimY>(ixy)) - yc);
 
@@ -138,7 +138,7 @@ TYPED_TEST(RungeKutta2DFixtureMixedTypes, RungeKutta2DOrderMixedTypes)
     });
 
     for (int j(0); j < Ntests; ++j) {
-        for_each(dom, [&](IndexXY ixy) { vals(ixy) = coordinate(ixy); });
+        ddc::for_each(dom, [&](IndexXY ixy) { vals(ixy) = coordinate(ixy); });
 
         for (int i(0); i < Nt; ++i) {
             runge_kutta.update(
@@ -146,18 +146,18 @@ TYPED_TEST(RungeKutta2DFixtureMixedTypes, RungeKutta2DOrderMixedTypes)
                     vals,
                     dt,
                     [yc, xc, &dom, omega](AdvectionFieldSpan dy, ChunkView<CoordXY, IDomainXY> y) {
-                        for_each(dom, [&](IndexXY ixy) {
+                        ddc::for_each(dom, [&](IndexXY ixy) {
                             ddcHelper::get<RDimX>(dy)(ixy) = omega * (yc - ddc::get<RDimY>(y(ixy)));
                             ddcHelper::get<RDimY>(dy)(ixy) = omega * (ddc::get<RDimX>(y(ixy)) - xc);
                         });
                     },
                     [&dom](ChunkSpan<CoordXY, IDomainXY> y, AdvectionFieldView dy, double dt) {
-                        for_each(dom, [&](IndexXY ixy) { y(ixy) += dt * dy(ixy); });
+                        ddc::for_each(dom, [&](IndexXY ixy) { y(ixy) += dt * dy(ixy); });
                     });
         }
 
         double linf_err = 0.0;
-        for_each(dom, [&](IndexXY ixy) {
+        ddc::for_each(dom, [&](IndexXY ixy) {
             double const err_x = ddc::get<RDimX>(result(ixy) - vals(ixy));
             double const err_y = ddc::get<RDimY>(result(ixy) - vals(ixy));
             double const err = std::sqrt(err_x * err_x + err_y * err_y);

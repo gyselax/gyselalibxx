@@ -199,7 +199,7 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
     auto function = simulation.get_test_function();
     auto phi_function = simulation.get_electrostatique_potential();
     auto advection_field = simulation.get_advection_field();
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         CoordRP const coord_rp(ddc::coordinate(irp));
         CoordXY const coord_xy(mapping(coord_rp));
 
@@ -224,7 +224,7 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
     // Compare advection fields ---
     VectorDFieldRP<RDimX, RDimY> difference_between_fields_exact_and_xy(grid);
     // > Compare the advection field computed on XY to the exact advection field
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         ddcHelper::get<RDimX>(difference_between_fields_exact_and_xy)(irp)
                 = ddcHelper::get<RDimX>(advection_field_exact)(irp)
                   - ddcHelper::get<RDimX>(advection_field_xy)(irp);
@@ -236,7 +236,7 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
 
     // > Compare the advection field computed on RP to the advection field computed on XY
     VectorDFieldRP<RDimX, RDimY> difference_between_fields_xy_and_rp(grid);
-    for_each(grid_without_Opoint, [&](IndexRP const irp) {
+    ddc::for_each(grid_without_Opoint, [&](IndexRP const irp) {
         CoordRP const coord_rp(ddc::coordinate(irp));
 
         std::array<std::array<double, 2>, 2> J; // Jacobian matrix
@@ -261,7 +261,7 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
                   - ddcHelper::get<RDimY>(advection_field_xy)(irp);
     });
 
-    for_each(Opoint_grid, [&](IndexRP const irp) {
+    ddc::for_each(Opoint_grid, [&](IndexRP const irp) {
         // computation made in BslAdvectionRP operator:
         ddcHelper::get<RDimX>(advection_field_xy_from_rp)(irp) = CoordX(advection_field_xy_center);
         ddcHelper::get<RDimY>(advection_field_xy_from_rp)(irp) = CoordY(advection_field_xy_center);
@@ -276,7 +276,7 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
     });
 
     // --- Check the difference on advection fields  --------------------------------------------------
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         EXPECT_LE(abs(ddcHelper::get<RDimX>(difference_between_fields_exact_and_xy)(irp)), 1e-5);
         EXPECT_LE(abs(ddcHelper::get<RDimY>(difference_between_fields_exact_and_xy)(irp)), 1e-5);
 
@@ -293,7 +293,7 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
         advection_operator(allfdistribu_xy, advection_field_xy, dt);
 
         // Check the advected functions ---
-        for_each(grid, [&](IndexRP const irp) {
+        ddc::for_each(grid, [&](IndexRP const irp) {
             EXPECT_NEAR(allfdistribu_rp(irp), allfdistribu_xy(irp), 1e-13);
         });
     }

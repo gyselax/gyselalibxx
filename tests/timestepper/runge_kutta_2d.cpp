@@ -123,7 +123,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
 
     double cos_val = std::cos(omega * dt * Nt);
     double sin_val = std::sin(omega * dt * Nt);
-    for_each(dom, [&](IndexXY ixy) {
+    ddc::for_each(dom, [&](IndexXY ixy) {
         double const dist_x = (coordinate(select<IDimX>(ixy)) - xc);
         double const dist_y = (coordinate(select<IDimY>(ixy)) - yc);
 
@@ -132,7 +132,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
     });
 
     for (int j(0); j < Ntests; ++j) {
-        for_each(dom, [&](IndexXY ixy) {
+        ddc::for_each(dom, [&](IndexXY ixy) {
             ddcHelper::get<RDimX>(vals)(ixy) = coordinate(select<IDimX>(ixy));
             ddcHelper::get<RDimY>(vals)(ixy) = coordinate(select<IDimY>(ixy));
         });
@@ -143,7 +143,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
                     vals,
                     dt,
                     [yc, xc, &dom, omega](AdvectionFieldSpan dy, AdvectionFieldView y) {
-                        for_each(dom, [&](IndexXY ixy) {
+                        ddc::for_each(dom, [&](IndexXY ixy) {
                             ddcHelper::get<RDimX>(dy)(ixy)
                                     = omega * (yc - ddcHelper::get<RDimY>(y)(ixy));
                             ddcHelper::get<RDimY>(dy)(ixy)
@@ -151,7 +151,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
                         });
                     },
                     [&dom](AdvectionFieldSpan y, AdvectionFieldView dy, double dt) {
-                        for_each(dom, [&](IndexXY ixy) {
+                        ddc::for_each(dom, [&](IndexXY ixy) {
                             ddcHelper::get<RDimX>(y)(ixy) += ddcHelper::get<RDimX>(dy)(ixy) * dt;
                             ddcHelper::get<RDimY>(y)(ixy) += ddcHelper::get<RDimY>(dy)(ixy) * dt;
                         });
@@ -159,7 +159,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
         }
 
         double linf_err = 0.0;
-        for_each(dom, [&](IndexXY ixy) {
+        ddc::for_each(dom, [&](IndexXY ixy) {
             double const err_x
                     = ddcHelper::get<RDimX>(result)(ixy) - ddcHelper::get<RDimX>(vals)(ixy);
             double const err_y

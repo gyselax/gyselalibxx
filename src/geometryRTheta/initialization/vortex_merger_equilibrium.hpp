@@ -202,7 +202,7 @@ public:
         DFieldRP sigma_0(grid);
         DFieldRP phi_eq(grid);
         const double sig = 0.3;
-        for_each(grid, [&](IndexRP const irp) {
+        ddc::for_each(grid, [&](IndexRP const irp) {
             const CoordRP coord_rp(ddc::coordinate(irp));
             const CoordXY coord_xy(m_mapping(coord_rp));
             const double x = ddc::get<RDimX>(coord_xy);

@@ -144,7 +144,7 @@ void saving_computed(Mapping const& mapping, DSpanRP function, std::string const
     std::ofstream out_file(name, std::ofstream::out);
     out_file << std::fixed << std::setprecision(16);
 
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         IDomainP p_dom = ddc::select<IDimP>(grid);
 
         IndexR const ir(ddc::select<IDimR>(irp));
@@ -380,7 +380,7 @@ void simulate(
     start_simulation = std::chrono::system_clock::now();
 
     // Initialization of the advected function:
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         CoordRP coord = coordinate(irp);
         if (ddc::get<RDimR>(coord) <= 1e-15) {
             ddc::get<RDimP>(coord) = 0;
@@ -391,7 +391,7 @@ void simulate(
 
 
     // Definition of advection field:
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         // Moving the coordinates in the physical domain:
         CoordXY const coord_xy = mapping(ddc::coordinate(irp));
         CoordXY const advection_field = advection_field_test(coord_xy, 0.);
@@ -428,7 +428,7 @@ void simulate(
 
     // Compute the maximal absolute error on the space at the end of the simulation:
     double max_err = 0.;
-    for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IndexRP const irp) {
         double const err
                 = fabs(allfdistribu_advected_test(irp)
                        - function_to_be_advected_test(feet_coords_rp_end_time(irp)));
@@ -463,7 +463,7 @@ void simulate(
     // Save the computed characteristic feet:
     if (if_save_feet) {
         FieldRP<CoordRP> feet(grid);
-        for_each(grid, [&](const IndexRP irp) { feet(irp) = ddc::coordinate(irp); });
+        ddc::for_each(grid, [&](const IndexRP irp) { feet(irp) = ddc::coordinate(irp); });
         foot_finder(feet.span_view(), advection_field_test_vec, dt);
         std::string const name = output_folder + "/feet_computed.txt";
         save_feet(mapping, grid, feet.span_view(), name);
@@ -477,7 +477,7 @@ void simulate(
 
         DFieldRP initial_function(grid);
         DFieldRP end_function(grid);
-        for_each(grid, [&](const IndexRP irp) {
+        ddc::for_each(grid, [&](const IndexRP irp) {
             initial_function(irp) = function_to_be_advected_test(ddc::coordinate(irp));
 
             // Exact final state
