@@ -18,6 +18,7 @@ set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are re
 option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
 option(BUILD_DOCUMENTATION "Build the documentation." OFF)
 option(GYSELALIBXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
+option(GYSELALIBXX_COMPILE_SOURCE "Enable compilation of the source code (this should be set to off to build documentation without the C++ dependencies)" ON)
 set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Voice++")
 
 set(GYSELALIBXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
@@ -27,6 +28,27 @@ option(DDC_BUILD_BENCHMARKS       "Build DDC benchmarks." OFF)
 option(DDC_BUILD_DOCUMENTATION    "Build DDC documentation/website" OFF)
 option(DDC_BUILD_EXAMPLES         "Build DDC examples" OFF)
 option(DDC_BUILD_TESTS            "Build DDC tests if BUILD_TESTING is enabled" OFF)
+
+###############################################################################################
+#                                  Build documentation
+###############################################################################################
+
+## if documentation is enabled, build it
+if("${BUILD_DOCUMENTATION}")
+  ## Look for a pre-installed Doxygen
+  find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
+
+  add_subdirectory(docs/)
+endif()
+
+## Turn off documentation for subpackages
+set(BUILD_DOCUMENTATION OFF)
+
+###############################################################################################
+#                                     Get dependencies
+###############################################################################################
+
+if ("${GYSELALIBXX_COMPILE_SOURCE}")
 
 # Our dependencies
 
@@ -100,17 +122,6 @@ elseif("${GYSELALIBXX_mdspan_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
   find_package(mdspan "0.3" REQUIRED)
 endif()
 
-## if documentation is enabled, build it
-if("${BUILD_DOCUMENTATION}")
-  ## Look for a pre-installed Doxygen
-  find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
-
-  add_subdirectory(docs/)
-endif()
-
-## Turn off documentation for subpackages
-set(BUILD_DOCUMENTATION OFF)
-
 ## Use Kokkos from `vendor/`
 if("${Kokkos_ENABLE_CUDA}")
   option(Kokkos_ENABLE_CUDA_CONSTEXPR "Whether to activate experimental relaxed constexpr functions" ON)
@@ -143,6 +154,9 @@ add_subdirectory("vendor/kokkos-tools/profiling/simple-kernel-timer/" "kokkos-to
 set(BUILD_SHARED_LIBS "${BUILD_SHARED_LIBS_DUMP}")
 add_compile_definitions(KP_KERNEL_TIMER_PATH="${CMAKE_CURRENT_BINARY_DIR}/kokkos-tools/profiling/simple-kernel-timer/libkp_kernel_timer.so")
 
+###############################################################################################
+#                              Build libraries and executables
+###############################################################################################
 # Our project code
 
 ## Change the C++ flags to the voice specific ones
@@ -160,3 +174,5 @@ add_subdirectory(simulations/)
 if("${BUILD_TESTING}")
     add_subdirectory(tests/)
 endif()
+
+endif() # GYSELALIBXX_COMPILE_SOURCE
