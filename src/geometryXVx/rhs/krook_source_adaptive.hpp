@@ -19,7 +19,7 @@
  * - amplitude(electrons, x, t) = m_amplitude (density_ions(x,t) - m_density) / (density_electrons(x,t) - m_density)  
  * so that the operator conserves locally the charge. 
  * 
- * The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/main/src/geometryXVx/rhs/doc/krook_source.pdf). 
+ * The complete description of the operator can be found in [rhs docs](https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/krook_source.pdf). 
  */
 class KrookSourceAdaptive : public IRightHandSide
 {
