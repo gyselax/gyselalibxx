@@ -11,6 +11,8 @@
 
 #include <Kokkos_Core.hpp>
 
+namespace ddc::detail {
+
 inline std::shared_ptr<gko::Executor> create_default_host_executor()
 {
 #ifdef KOKKOS_ENABLE_SERIAL
@@ -59,3 +61,5 @@ std::shared_ptr<gko::Executor> create_gko_exec()
     }
 #endif
 }
+
+} // namespace ddc::detail
