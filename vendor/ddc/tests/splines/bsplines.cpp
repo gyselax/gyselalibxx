@@ -35,7 +35,8 @@ using periodicity = std::integer_sequence<bool, true, false>;
 
 using Cases = tuple_to_types_t<cartesian_product_t<degrees, ncells, periodicity>>;
 
-TYPED_TEST_SUITE(BSplinesFixture, Cases);
+// Trailing comma is needed to avoid spurious `gnu-zero-variadic-macro-arguments` warning with clang
+TYPED_TEST_SUITE(BSplinesFixture, Cases, );
 
 TYPED_TEST(BSplinesFixture, PartitionOfUnity_Uniform)
 {

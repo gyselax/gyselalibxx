@@ -13,6 +13,12 @@ struct ConstantExtrapolationRule
 {
 };
 
+/**
+ * @brief A functor for describing a spline boundary value by a constant extrapolation for 1D evaluator.
+ *
+ * To define the value of a function on B-splines out of the domain, we here use a constant
+ * extrapolation on the edge.
+ */
 template <class DimI>
 struct ConstantExtrapolationRule<DimI>
 {
@@ -20,8 +26,26 @@ private:
     ddc::Coordinate<DimI> m_eval_pos;
 
 public:
+    /**
+     * @brief Instantiate a ConstantExtrapolationRule.
+     *
+     * The boundary value will be the same as at the coordinate eval_pos given.
+     *
+     * @param[in] eval_pos
+     * 			Coordinate inside the domain where we will evaluate each points outside the domain.
+     */
     explicit ConstantExtrapolationRule(ddc::Coordinate<DimI> eval_pos) : m_eval_pos(eval_pos) {}
 
+    /**
+     * @brief Get the value of the function on B-splines at a coordinate outside the domain.
+     *
+     * @param[in] pos
+     * 			The coordinate where we want to evaluate the function on B-splines.
+     * @param[in] spline_coef
+     *			The coefficients of the function on B-splines.
+     *
+     * @return A double with the value of the function on B-splines evaluated at the coordinate.
+     */
     template <class CoordType, class BSplines, class Layout, class MemorySpace>
     KOKKOS_FUNCTION double operator()(
             CoordType,
@@ -43,6 +67,12 @@ public:
     }
 };
 
+/**
+ * @brief A functor for describing a spline boundary value by a constant extrapolation for 2D evaluator.
+ *
+ * To define the value of a function on B-splines out of the domain, we here use a constant
+ * extrapolation on the edge.
+ */
 template <class DimI, class DimNI>
 struct ConstantExtrapolationRule<DimI, DimNI>
 {
@@ -52,6 +82,23 @@ private:
     ddc::Coordinate<DimNI> m_eval_pos_not_interest_max;
 
 public:
+    /**
+     * @brief Instantiate a ConstantExtrapolationRule.
+     *
+     * The boundary value will be the same as at the coordinate given in a dimension given.
+     * The dimension of the input defines the dimension of the boundary condition.
+     * The second and the third parameters are needed in case of non-periodic splines on the
+     * dimension off-interest (the complementary dimension of the boundary condition),
+     * because the evaluator can receive coordinates outside the domain in both dimension.
+     *
+     * @param[in] eval_pos_bc
+     * 			Coordinate in the dimension given inside the domain where we will evaluate
+     * 			each points outside the domain.
+     * @param[in] eval_pos_not_interest_min
+     * 			The minimum coordinate inside the domain on the complementary dimension of the boundary condition.
+     * @param[in] eval_pos_not_interest_max
+     * 			The maximum coordinate inside the domain on the complementary dimension of the boundary condition.
+     */
     explicit ConstantExtrapolationRule(
             ddc::Coordinate<DimI> eval_pos,
             ddc::Coordinate<DimNI> eval_pos_not_interest_min,
@@ -62,6 +109,18 @@ public:
     {
     }
 
+    /**
+     * @brief Instantiate a ConstantExtrapolationRule.
+     *
+     * The boundary value will be the same as at the coordinate given in a dimension given.
+     * The dimension of the input defines the dimension of the boundary condition.
+     * No second and third parameters are needed in case of periodic splines on the
+     * dimension off-interest (the complementary dimension of the boundary condition).
+     *
+     * @param[in] eval_pos_bc
+     * 			Coordinate in the dimension given inside the domain where we will evaluate
+     * 			each points outside the domain.
+     */
     template <class DimNI_sfinae = DimNI, std::enable_if_t<DimNI_sfinae::PERIODIC, int> = 0>
     explicit ConstantExtrapolationRule(ddc::Coordinate<DimI> eval_pos)
         : m_eval_pos(eval_pos)
@@ -70,6 +129,23 @@ public:
     {
     }
 
+    /**
+     * @brief Get the value of the function on B-splines at a coordinate outside the domain.
+     *
+     * In the dimension defined in the constructor Dim1 (or Dim2), it sets the coordinate pos_1 (or pos_2)
+     * given at the m_eval_pos coordinate if it is outside the domain.
+     * If the coordinate on the complementary dimension of the boundary condition dimension ddc::select<DimNI>(coord_extrap) is
+     * outside the domain, then it also sets the coordinate at eval_pos_not_interest_min
+     * (if ddc::select<DimNI>(coord_extrap) @f$ < @f$ eval_pos_not_interest_min) or
+     * at eval_pos_not_interest_max (if ddc::select<DimNI>(coord_extrap) @f$ > @f$ eval_pos_not_interest_max).
+     *
+     * @param[in] coord_extrap
+     * 			The coordinates where we want to evaluate the function on B-splines
+     * @param[in] spline_coef
+     *			The coefficients of the function on B-splines.
+     *
+     *@return A double with the value of the function on B-splines evaluated at the coordinate.
+     */
     template <class CoordType, class BSplines1, class BSplines2, class Layout, class MemorySpace>
     KOKKOS_FUNCTION double operator()(
             CoordType coord_extrap,

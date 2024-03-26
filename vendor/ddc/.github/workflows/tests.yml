@@ -17,6 +17,9 @@ jobs:
         exclude: ''
         extensions: 'hpp,cpp'
         clangFormatVersion: 12
+    - name: REUSE Compliance Check
+      if: always()
+      uses: fsfe/reuse-action@v3
 
   id_repo:
     runs-on: ubuntu-latest
@@ -133,12 +136,10 @@ jobs:
             export CC=hipcc
             export CXX=hipcc
             EXTRA_CMAKE_FLAGS="-DKokkos_ENABLE_HIP=ON -DKokkos_ARCH_VEGA90A=ON -DCMAKE_PREFIX_PATH=/opt/rocm"
-            CMAKE_CXX_FLAGS="-Wno-gnu-zero-variadic-macro-arguments"
           ;;
           'cpu-clang')
             export CC=clang
             export CXX=clang++
-            CMAKE_CXX_FLAGS="-Wno-gnu-zero-variadic-macro-arguments"
           ;;
           'cpu-gcc')
             export CC=gcc
@@ -154,7 +155,6 @@ jobs:
             -DCMAKE_BUILD_TYPE=${{matrix.cmake_build_type}} \
             -DCMAKE_CXX_STANDARD=${{matrix.cxx_version}} \
             -DMDSPAN_CXX_STANDARD=${{matrix.cxx_version}} \
-            -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF \
             -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF \
             -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
             -DCMAKE_CXX_FLAGS="\
@@ -218,7 +218,6 @@ jobs:
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_CXX_STANDARD=17 \
         -DMDSPAN_CXX_STANDARD=17 \
-        -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF \
         -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF \
         -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
         -S /src \

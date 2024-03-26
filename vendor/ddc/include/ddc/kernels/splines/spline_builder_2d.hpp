@@ -8,6 +8,14 @@
 
 namespace ddc {
 
+/**
+ * @brief A class for creating a 2D spline approximation of a function.
+ *
+ * A class which contains an operator () which can be used to build a 2D spline approximation
+ * of a function. A 2D spline approximation uses a cross-product between two 1D spline builder.
+ *
+ * @see SplineBuilder
+ */
 template <
         class ExecSpace,
         class MemorySpace,
@@ -60,21 +68,48 @@ public:
                     IDimX>...>;
 
 private:
+    /**
+     * @brief Tag the dimension of the first 1D SplineBuilder.
+     */
     using tag_type1 = typename builder_type1::bsplines_type::tag_type;
+    /**
+     * @brief Tag the dimension of the second 1D SplineBuilder.
+     */
     using tag_type2 = typename builder_type2::bsplines_type::tag_type;
 
 public:
+    /**
+     * @brief The type of the BSplines in the first dimension which are compatible with this class.
+     */
     using bsplines_type1 = typename builder_type1::bsplines_type;
+    /**
+     * @brief The type of the BSplines in the second dimension which are compatible with this class.
+     */
     using bsplines_type2 = typename builder_type2::bsplines_type;
 
     using deriv_type1 = typename builder_type1::deriv_type;
     using deriv_type2 = typename builder_type2::deriv_type;
 
+    /**
+     * @brief The type of the interpolation mesh in the first dimension used by this class.
+     */
     using interpolation_mesh_type1 = typename builder_type1::interpolation_mesh_type;
+    /**
+     * @brief The type of the interpolation mesh in the second dimension used by this class.
+     */
     using interpolation_mesh_type2 = typename builder_type2::interpolation_mesh_type;
 
+    /**
+     * @brief The type of the domain for the interpolation mesh is the first dimension used by this class.
+     */
     using interpolation_domain_type1 = typename builder_type1::interpolation_mesh_type;
+    /**
+     * @brief The type of the domain for the interpolation mesh is the second dimension used by this class.
+     */
     using interpolation_domain_type2 = typename builder_type2::interpolation_mesh_type;
+    /**
+     * @brief The type of the domain for the interpolation mesh is the 2D dimension used by this class.
+     */
     using interpolation_domain_type
             = ddc::DiscreteDomain<interpolation_mesh_type1, interpolation_mesh_type2>;
 
@@ -109,6 +144,13 @@ private:
     builder_type2 m_spline_builder2;
 
 public:
+    /**
+     * @brief Create a new SplineBuilder2D.
+     *
+     * @param interpolation_domain
+     *      The 2D domain on which points will be provided in order to
+     *      create the 2D spline approximation.
+     */
     explicit SplineBuilder2D(
             vals_domain_type const& vals_domain,
             std::optional<int> cols_per_chunk = std::nullopt,
@@ -126,14 +168,34 @@ public:
     {
     }
 
+    /**
+     * @brief Create a new SplineBuilder2D by copy
+     *
+     * @param x
+     *      The SplineBuilder2D being copied.
+     */
     SplineBuilder2D(SplineBuilder2D const& x) = delete;
 
+    /**
+     * @brief Create a new SplineBuilder2D by copy
+     *
+     * @param x
+     *      The temporary SplineBuilder2D being copied.
+     */
     SplineBuilder2D(SplineBuilder2D&& x) = default;
 
     ~SplineBuilder2D() = default;
 
     SplineBuilder2D& operator=(SplineBuilder2D const& x) = delete;
 
+
+    /**
+     * @brief Copy a SplineBuilder2D.
+     *
+     * @param x
+     *      The temporary SplineBuilder2D being copied.
+     * @returns A reference to this object.
+     */
     SplineBuilder2D& operator=(SplineBuilder2D&& x) = default;
 
     vals_domain_type vals_domain() const noexcept
@@ -141,6 +203,14 @@ public:
         return m_spline_builder1.vals_domain();
     }
 
+    /**
+     * @brief Get the 2D dimension domain from which the approximation is defined.
+     *
+     * Get the 2D dimension  domain on which values of the function must be provided in order
+     * to build a spline approximation of the function.
+     *
+     * @return The 2D dimension domain for the grid points.
+     */
     interpolation_domain_type interpolation_domain() const noexcept
     {
         return ddc::DiscreteDomain<interpolation_domain_type1, interpolation_domain_type2>(
@@ -153,6 +223,14 @@ public:
         return ddc::remove_dims_of(vals_domain(), interpolation_domain());
     }
 
+    /**
+     * @brief Get the 2D domain on which the approximation is defined.
+     *
+     * Get the 2D domain of the basis-splines for which the coefficients of the spline
+     * approximation must be calculated.
+     *
+     * @return The 2D domain for the splines.
+     */
     ddc::DiscreteDomain<bsplines_type1, bsplines_type2> bsplines_domain()
             const noexcept // TODO : clarify name
     {
@@ -170,6 +248,42 @@ public:
                 bsplines_domain());
     }
 
+    /**
+     * @brief Build a 2D spline approximation of a function.
+     *
+     * Use the values of a function at known grid points (as specified by
+     * SplineBuilder2D::interpolation_domain_type) and the derivatives of the
+     * function at the boundaries (if necessary for the chosen boundary
+     * conditions) to calculate a 2D spline approximation of a function.
+     *
+     * The spline approximation is stored as a ChunkSpan of coefficients
+     * associated with basis-splines.
+     *
+     * @param[out] spline
+     *      The coefficients of the spline calculated by the function.
+     * @param[in] vals
+     *      The values of the function at the grid points.
+     * @param[in] derivs_xmin
+     *      The values of the derivatives at the lower boundary in the first dimension.
+     * @param[in] derivs_xmax
+     *      The values of the derivatives at the upper boundary in the first dimension.
+     * @param[in] derivs_ymin
+     *      The values of the derivatives at the lower boundary in the second dimension.
+     * @param[in] derivs_ymax
+     *      The values of the derivatives at the upper boundary in the second dimension.
+     * @param[in] mixed_derivs_xmin_ymin
+     *      The values of the the cross-derivatives at the lower boundary in the first dimension
+     *      and the lower boundary in the second dimension.
+     * @param[in] mixed_derivs_xmax_ymin
+     *      The values of the the cross-derivatives at the upper boundary in the first dimension
+     *      and the lower boundary in the second dimension.
+     * @param[in] mixed_derivs_xmin_ymax
+     *      The values of the the cross-derivatives at the lower boundary in the first dimension
+     *      and the upper boundary in the second dimension.
+     * @param[in] mixed_derivs_xmax_ymax
+     *      The values of the the cross-derivatives at the upper boundary in the first dimension
+     *      and the upper boundary in the second dimension.
+     */
     template <class Layout>
     void operator()(
             ddc::ChunkSpan<double, spline_domain_type, Layout, memory_space> spline,
