@@ -26,6 +26,15 @@ constexpr bool is_spline_interpolation_mesh_uniform(
     return is_uniform && ((N_BE_MIN != 0 && N_BE_MAX != 0) || is_periodic);
 }
 
+/**
+ * @brief A class for creating a spline approximation of a function.
+ *
+ * A class which contains an operator () which can be used to build a spline approximation
+ * of a function. A spline approximation is represented by coefficients stored in a Chunk
+ * of BSplines. The spline is constructed such that it respects the boundary conditions
+ * BcXmin and BcXmax, and it interpolates the function at the points on the interpolation_mesh
+ * associated with interpolation_mesh_type.
+ */
 template <
         class ExecSpace,
         class MemorySpace,
@@ -52,12 +61,21 @@ public:
 
     using memory_space = MemorySpace;
 
+    /**
+     * @brief The type of the interpolation mesh used by this class.
+     */
     using interpolation_mesh_type = InterpolationMesh;
 
+    /**
+     * @brief The type of the BSplines which are compatible with this class.
+     */
     using bsplines_type = BSplines;
 
     using deriv_type = ddc::Deriv<tag_type>;
 
+    /**
+     * @brief The type of the domain for the interpolation mesh used by this class.
+     */
     using interpolation_domain_type = ddc::DiscreteDomain<interpolation_mesh_type>;
 
     using vals_domain_type = ddc::DiscreteDomain<IDimX...>;
@@ -90,13 +108,47 @@ public:
                     ddc::detail::TypeSeq<interpolation_mesh_type>,
                     ddc::detail::TypeSeq<deriv_type>>>;
 
+    /**
+     * @brief Indicates if the degree of the splines is odd or even.
+     */
     static constexpr bool s_odd = BSplines::degree() % 2;
+
+    /**
+     * @brief The number of equations which define the boundary conditions at the lower bound.
+     */
     static constexpr int s_nbe_xmin = n_boundary_equations(BcXmin, BSplines::degree());
+
+    /**
+     * @brief The number of equations which define the boundary conditions at the upper bound.
+     */
     static constexpr int s_nbe_xmax = n_boundary_equations(BcXmax, BSplines::degree());
+
+    /**
+     * @brief The number of boundary conditions which must be provided by the user at the lower bound.
+     *
+     * This value is usually equal to s_nbe_xmin, but it may be difference if the chosen boundary
+     * conditions impose a specific value (e.g. no values need to be provided for Dirichlet boundary
+     * conditions).
+     */
     static constexpr int s_nbc_xmin = n_user_input(BcXmin, BSplines::degree());
+
+    /**
+     * @brief The number of boundary conditions which must be provided by the user at the upper bound.
+     *
+     * This value is usually equal to s_nbe_xmin, but it may be difference if the chosen boundary
+     * conditions impose a specific value (e.g. no values need to be provided for Dirichlet boundary
+     * conditions).
+     */
     static constexpr int s_nbc_xmax = n_user_input(BcXmax, BSplines::degree());
 
+    /**
+     * @brief The boundary condition implemented at the lower bound.
+     */
     static constexpr ddc::BoundCond s_bc_xmin = BcXmin;
+
+    /**
+     * @brief The boundary condition implemented at the upper bound.
+     */
     static constexpr ddc::BoundCond s_bc_xmax = BcXmax;
 
 private:
@@ -141,12 +193,23 @@ public:
 
     SplineBuilder(SplineBuilder const& x) = delete;
 
+    /**
+     * @brief Create a new SplineBuilder by copy
+     *
+     * @param x The SplineBuilder being copied.
+     */
     SplineBuilder(SplineBuilder&& x) = default;
 
     ~SplineBuilder() = default;
 
     SplineBuilder& operator=(SplineBuilder const& x) = delete;
 
+    /**
+     * @brief Copy a SplineBuilder.
+     *
+     * @param x The SplineBuilder being copied.
+     * @returns A reference to this object.
+     */
     SplineBuilder& operator=(SplineBuilder&& x) = default;
 
     vals_domain_type vals_domain() const noexcept
@@ -154,6 +217,14 @@ public:
         return m_vals_domain;
     }
 
+    /**
+     * @brief Get the domain from which the approximation is defined.
+     *
+     * Get the domain on which values of the function must be provided in order
+     * to build a spline approximation of the function.
+     *
+     * @return The domain for the grid points.
+     */
     interpolation_domain_type interpolation_domain() const noexcept
     {
         return interpolation_domain_type(vals_domain());
@@ -169,6 +240,14 @@ public:
         return ddc::discrete_space<bsplines_type>().full_domain();
     }
 
+    /**
+     * @brief Get the domain on which the approximation is defined.
+     *
+     * Get the domain of the basis-splines for which the coefficients of the spline
+     * approximation must be calculated.
+     *
+     * @return The domain for the splines.
+     */
     spline_domain_type spline_domain() const noexcept
     {
         return ddc::replace_dim_of<
@@ -212,6 +291,22 @@ public:
         return *matrix;
     }
 
+    /**
+     * @brief Build a spline approximation of a function.
+     *
+     * Use the values of a function at known grid points (as specified by
+     * SplineBuilder::interpolation_domain) and the derivatives of the
+     * function at the boundaries (if necessary for the chosen boundary
+     * conditions) to calculate a spline approximation of a function.
+     *
+     * The spline approximation is stored as a ChunkSpan of coefficients
+     * associated with basis-splines.
+     *
+     * @param[out] spline The coefficients of the spline calculated by the function.
+     * @param[in] vals The values of the function at the grid points.
+     * @param[in] derivs_xmin The values of the derivatives at the lower boundary.
+     * @param[in] derivs_xmax The values of the derivatives at the upper boundary.
+     */
     template <class Layout>
     void operator()(
             ddc::ChunkSpan<double, spline_domain_type, Layout, memory_space> spline,
