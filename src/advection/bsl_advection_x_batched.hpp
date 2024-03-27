@@ -23,6 +23,7 @@ class BslAdvectionSpatialBatched : public IAdvectionSpatial<Geometry, DDimX>
     using DElemSp = ddc::DiscreteElement<DDimSp>;
     using DElemSpV = ddc::DiscreteElement<DDimSp, DDimV>;
     using CDimX = typename DDimX::continuous_dimension_type;
+    using CDimV = typename DDimV::continuous_dimension_type;
 
 private:
     using PreallocatableInterpolatorType = interpolator_on_domain_t<
@@ -71,9 +72,7 @@ public:
         std::unique_ptr<InterpolatorType> const interpolator_x_ptr = m_interpolator_x.preallocate();
         InterpolatorType const& interpolator_x = *interpolator_x_ptr;
 
-        auto c_dom = ddc::remove_dims_of(
-                dom,
-                ddc::DiscreteDomain<DDimSp, DDimX, DDimV>(sp_dom, x_dom, v_dom));
+        auto c_dom = ddc::remove_dims_of(dom, ddc::DiscreteDomain<DDimSp, DDimX>(sp_dom, x_dom));
         using DElemC = typename decltype(c_dom)::discrete_element_type;
 
         for (DElemSp const isp : sp_dom) {
@@ -82,15 +81,14 @@ public:
                     Kokkos::DefaultExecutionSpace(),
                     c_dom,
                     KOKKOS_LAMBDA(DElemC const ic) {
-                        for (DElemV const iv : v_dom) {
-                            // compute the displacement
-                            double const dx = sqrt_me_on_mspecies * dt * ddc::coordinate(iv);
+                        // compute the displacement
+                        DElemV const iv(ic);
+                        ddc::Coordinate<CDimV> const coord_iv = ddc::coordinate(iv);
+                        double const dx = sqrt_me_on_mspecies * dt * coord_iv;
 
-                            // compute the coordinates of the feet
-                            for (DElemX const ix : x_dom) {
-                                feet_coords(ix, iv, ic)
-                                        = ddc::Coordinate<CDimX>(ddc::coordinate(ix) - dx);
-                            }
+                        // compute the coordinates of the feet
+                        for (DElemX const ix : x_dom) {
+                            feet_coords(ix, ic) = ddc::Coordinate<CDimX>(ddc::coordinate(ix) - dx);
                         }
                     });
             interpolator_x(allfdistribu[isp], feet_coords.span_cview());
