@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
-    
-add_library("utils" INTERFACE)
+
+add_library("utils" STATIC
+            assert.cpp)
 
 target_compile_features("utils"
     INTERFACE
