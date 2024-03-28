@@ -29,6 +29,7 @@ var NAVTREE =
     [ "Execution", "index.html#__Execution", null ],
     [ "Dependencies", "index.html#__Dependencies", null ],
     [ "Adding Documentation", "docs_Adding_docs.html", [
+      [ "Building documentation locally", "docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally", null ],
       [ "Documentation describing code structures", "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_code_structures", null ],
       [ "Documentation describing general methods", "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_general_methods", null ],
       [ "Documenting functions", "docs_Adding_docs.html#docs_Adding_docs__Documenting_functions", null ],
@@ -54,7 +55,18 @@ var NAVTREE =
     ] ],
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
     [ "Gyselalib++ contents", "src.html", "src" ],
+    [ "Collisions", "src_geometry5D_rhs_collisions.html", null ],
     [ "Tests", "tests.html", "tests" ],
+    [ "Script to automise :", "tests_geometry5D_collisions.html", [
+      [ "- the creation of the initial restart file with the python script <tt>init_distribution.py</tt>", "tests_geometry5D_collisions.html#autotoc_md53", null ],
+      [ "- the creation of the input YAML file required as input of the C++ simulation <tt>testcollision</tt>", "tests_geometry5D_collisions.html#autotoc_md54", null ],
+      [ "For instance, the following command", "tests_geometry5D_collisions.html#autotoc_md55", null ],
+      [ "create the folder <tt>D_INPUT_PARAMS_ION_1X1X1X128X64.YAML</tt> containing:", "tests_geometry5D_collisions.html#autotoc_md56", null ],
+      [ "- <tt>GysX_rst_00000.h5</tt> : output of the python script <tt>init_distribution.py</tt>", "tests_geometry5D_collisions.html#autotoc_md57", null ],
+      [ "- <tt>GysX_rst_00001.h5</tt> : output of the C++ collision executable", "tests_geometry5D_collisions.html#autotoc_md58", null ],
+      [ "- <tt>coll_ref.yml</tt> : input for C++ collision executable automatically created by the bash script <tt>testcollision.sh</tt>", "tests_geometry5D_collisions.html#autotoc_md59", null ],
+      [ "- <tt>diff_f_vpar_mu_itor1eq0_itor2eq0_itor3eq0_ispeq0.png</tt> : output figure to compare the results between <tt>GysX_rst_00000.h5</tt> and <tt>GysX_rst_00001.h5</tt>", "tests_geometry5D_collisions.html#autotoc_md60", null ]
+    ] ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]
@@ -64,12 +76,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCrankNicolson.html#a2b58f2e418530fa5218d4631b00faa4f",
-"classIVlasovSolver.html#a45c170f305e21ec904c0ff8f6dd1d658",
-"classPolarSplineEvaluator.html#a41bb228d256a0785988519f9683b100c",
-"classUniformBSplines_1_1Impl.html#ae89a55de902590b4f758069e27af4eff",
-"docs_Adding_docs.html#autotoc_md2",
-"src_timestepper.html"
+"classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVxStaggered",
+"classIPreallocatableInterpolatorBatched.html#a46f50f9b73b8c96034fb5d22e67d98a2",
+"classPolarBSplines_1_1Impl.html#ad4c9c75d6336374631bf5f339eb477dd",
+"classUniformBSplines_1_1Impl.html#a1b2b1baf55ddc98ab5cf3d5256957a58",
+"dir_831f43445894a06c32ca53e744f921f4.html",
+"src_geometryRTheta_poisson.html#autotoc_md49"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

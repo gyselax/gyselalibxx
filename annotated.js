@@ -39,6 +39,8 @@ var annotated =
     [ "CartesianToBarycentricCoordinates", "classCartesianToBarycentricCoordinates.html", "classCartesianToBarycentricCoordinates" ],
     [ "ChargeDensityCalculator", "classChargeDensityCalculator.html", "classChargeDensityCalculator" ],
     [ "CircularToCartesian", "classCircularToCartesian.html", "classCircularToCartesian" ],
+    [ "Collisions", "classCollisions.html", "classCollisions" ],
+    [ "CollisionsGuard", "classCollisionsGuard.html", "classCollisionsGuard" ],
     [ "CollisionsInter", "classCollisionsInter.html", "classCollisionsInter" ],
     [ "CollisionsIntra", "classCollisionsIntra.html", "classCollisionsIntra" ],
     [ "ConstantExtrapolationBoundaryValue", "classConstantExtrapolationBoundaryValue.html", "classConstantExtrapolationBoundaryValue" ],
@@ -116,6 +118,7 @@ var annotated =
     [ "Matrix_PDS_Tridiag", "classMatrix__PDS__Tridiag.html", "classMatrix__PDS__Tridiag" ],
     [ "Matrix_Periodic_Banded", "classMatrix__Periodic__Banded.html", "classMatrix__Periodic__Banded" ],
     [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html", "classMaxwellianEquilibrium" ],
+    [ "Mu", "structMu.html", null ],
     [ "NonUniformBSplines", "classNonUniformBSplines.html", "classNonUniformBSplines" ],
     [ "NullAdvectionVelocity", "classNullAdvectionVelocity.html", "classNullAdvectionVelocity" ],
     [ "NullBoundaryValue", "classNullBoundaryValue.html", "classNullBoundaryValue" ],
@@ -175,6 +178,9 @@ var annotated =
     [ "to_tuple", "structto__tuple.html", "structto__tuple" ],
     [ "to_tuple< std::integer_sequence< T, Ints... > >", "structto__tuple_3_01std_1_1integer__sequence_3_01T_00_01Ints_8_8_8_01_4_01_4.html", "structto__tuple_3_01std_1_1integer__sequence_3_01T_00_01Ints_8_8_8_01_4_01_4" ],
     [ "to_tuple< std::pair< T, U > >", "structto__tuple_3_01std_1_1pair_3_01T_00_01U_01_4_01_4.html", "structto__tuple_3_01std_1_1pair_3_01T_00_01U_01_4_01_4" ],
+    [ "Tor1", "structTor1.html", null ],
+    [ "Tor2", "structTor2.html", null ],
+    [ "Tor3", "structTor3.html", null ],
     [ "TranslationAdvectionFieldSimulation", "classTranslationAdvectionFieldSimulation.html", "classTranslationAdvectionFieldSimulation" ],
     [ "TranslationSimulation", "classTranslationSimulation.html", "classTranslationSimulation" ],
     [ "tuple_to_types", "structtuple__to__types.html", "structtuple__to__types" ],
@@ -184,5 +190,6 @@ var annotated =
     [ "VectorFieldCommon", "classVectorFieldCommon.html", null ],
     [ "VectorFieldSpan", "classVectorFieldSpan.html", "classVectorFieldSpan" ],
     [ "VortexMergerDensitySolution", "classVortexMergerDensitySolution.html", "classVortexMergerDensitySolution" ],
-    [ "VortexMergerEquilibria", "classVortexMergerEquilibria.html", "classVortexMergerEquilibria" ]
+    [ "VortexMergerEquilibria", "classVortexMergerEquilibria.html", "classVortexMergerEquilibria" ],
+    [ "Vpar", "structVpar.html", null ]
 ];

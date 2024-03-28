@@ -115,7 +115,7 @@ Coordinate</h1>
 <p>It is also possible to extract a coordinate on a subset of the original dimensions using <code>ddc::select&lt;RDimOfInterest&gt;(my_coord)</code>. For example if we want to get the position of an object on a radial slice \((r,\theta)\), but we are given the coordinate in the full vector space \((r, \theta, \varphi, v_\parallel, \mu)\) then we can do: </p><div class="fragment"><div class="line">ddc::Coordinate&lt;RDimR, RDimP, RDimT, RDimV, RDimM&gt; full_coord(...);</div>
 <div class="line">ddc::Coordinate&lt;RDimR, RDimP&gt; slice_coord = ddc::select&lt;RDimR, RDimP&gt;(full_coord);</div>
 </div><!-- fragment --><p>Coordinates can be combined using operators. For example, let us consider three vectors \(P\), \(Q\), and \(R\) defined on a cartesian space \((x,y)\):</p>
-<p><img src="/__w/gyselalibxx/gyselalibxx/code_branch/docs/images/Coordinate_operations.jpg" alt="Vector Image" class="inline"/></p>
+<p><img src="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/docs/images/Coordinate_operations.jpg" alt="Vector Image" class="inline"/></p>
 <p>The vector \(Q\) can be written as \(Q=R-P\). Similarly in the code, we would have: </p><div class="fragment"><div class="line">ddc::Coordinate&lt;RDimX, RDimY&gt; P(5.0, 2.0);</div>
 <div class="line">ddc::Coordinate&lt;RDimX, RDimY&gt; R(7.0, 6.0);</div>
 <div class="line">ddc::Coordinate&lt;RDimX, RDimY&gt; Q = R - P;</div>

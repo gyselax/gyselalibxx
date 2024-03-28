@@ -199,7 +199,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Class describing the intra-species collision operator. </p>
 <p>The intra-species collision operator can be written as \( C_{aa} = d/dv (Dcoll df_a/dv - Nucoll f_a) \) Where Dcoll and Nucoll are the collision operator diffusion and advection coefficients that depend on the absolute value of the velocity and possibly on space. f_a is the distribution function. The Nucoll and Dcoll coefficients are adjusted at each time and spatial position so that the collision operator conserves the density, momentum and energy of the considered species it acts on.</p>
 <p>The evolution equation for the collisions \( df_a/dt = C_{aa} \) is solved using a Crank-Nicolson finite difference scheme adapted for non-uniform meshes. The derivatives are computed using centered second-order finite differences. To use the same derivatives formula at the edges of the vx mesh, we introduce a ghosted vx mesh with additional points at the edges. To further improve the accuracy of the computations of the derivatives, we also introduce another vx mesh that is staggered with respect to the initial mesh. The points of the staggered mesh lie at the middle of the cells of the initial vx mesh (where a cell is defined by two adjacent points). The Crank-Nicolson scheme leads to the formulation of a linear system that needs to be resolved at each spatial position of the simulation box. Note that this linear system depends on the considered spatial position.</p>
-<p>The complete description of the operator can be found in <a href="https://github.com/gyselax/gyselalibxx/blob/main/src/geometryXVx/rhs/doc/collisions_intra_inter.pdf">rhs docs</a>. </p>
+<p>The complete description of the operator can be found in <a href="https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/collisions_intra_inter.pdf">rhs docs</a>. </p>
 </div><hr/><h2 class="groupheader">Class Documentation</h2>
 <a name="structCollisionsIntra_1_1GhostedVx" id="structCollisionsIntra_1_1GhostedVx"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#structCollisionsIntra_1_1GhostedVx">&#9670;&nbsp;</a></span>CollisionsIntra::GhostedVx</h2>
@@ -589,7 +589,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/__w/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/<a class="el" href="collisions__intra_8hpp_source.html">collisions_intra.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/<a class="el" href="collisions__intra_8hpp_source.html">collisions_intra.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

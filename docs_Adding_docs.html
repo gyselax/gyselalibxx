@@ -103,10 +103,16 @@ $(document).ready(function(){initNavTree('docs_Adding_docs.html',''); initResiza
 <div class="title">Adding Documentation </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>There are two types of documentation:</p><ol type="1">
+<div class="textblock"><p>There are two types of documentation which are described in detail below:</p><ol type="1">
 <li>Documentation describing code structures</li>
 <li>Documentation describing general methods</li>
 </ol>
+<h1><a class="anchor" id="docs_Adding_docs__Building_documentation_locally"></a>
+Building documentation locally</h1>
+<p>The documentation can be built locally by running the following commands from the root directory: </p><div class="fragment"><div class="line">cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DBUILD_DOCUMENTATION=1 -B build-docs .</div>
+<div class="line">cmake --build build-docs</div>
+</div><!-- fragment --><p> The option <code>-DGYSELALIBXX_COMPILE_SOURCE=OFF</code> ensures that the C++ code is not built, thereby avoiding the need to have all the C++ dependencies installed on your system. If this option is not used then <code>make docs</code> should be used to build only the documentation.</p>
+<p>In order to view the docs the file <code>build-docs/docs/html/index.html</code> should be opened in a browser (e.g. Firefox).</p>
 <h1><a class="anchor" id="docs_Adding_docs__Documentation_describing_code_structures"></a>
 Documentation describing code structures</h1>
 <p>This documentation should be added next to the code it is describing.</p>
