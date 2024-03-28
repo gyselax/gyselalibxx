@@ -17,7 +17,9 @@
 
 #include <Kokkos_Core.hpp>
 
+#include "ddc/detail/dual_discretization.hpp"
 #include "ddc/detail/macros.hpp"
+
 #if defined(__CUDACC__)
 #include <sstream>
 
@@ -29,7 +31,6 @@
 #include <hip/hip_runtime.h>
 #endif
 
-#include "ddc/dual_discretization.hpp"
 
 namespace ddc {
 

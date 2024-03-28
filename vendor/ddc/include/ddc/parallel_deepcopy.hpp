@@ -8,7 +8,7 @@
 
 #include <Kokkos_Core.hpp>
 
-#include "ddc/chunk_common.hpp"
+#include "ddc/chunk_traits.hpp"
 
 namespace ddc {
 

@@ -15,10 +15,10 @@
 #include "ddc/aligned_allocator.hpp"
 #include "ddc/chunk.hpp"
 #include "ddc/chunk_span.hpp"
+#include "ddc/chunk_traits.hpp"
 #include "ddc/kokkos_allocator.hpp"
 
 // Discretizations
-#include "ddc/coordinate_md.hpp"
 #include "ddc/discrete_domain.hpp"
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_space.hpp"

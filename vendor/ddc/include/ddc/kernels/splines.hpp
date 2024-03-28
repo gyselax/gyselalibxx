@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include "splines/bspline.hpp"
 #include "splines/bsplines_non_uniform.hpp"
 #include "splines/bsplines_uniform.hpp"
 #include "splines/constant_extrapolation_rule.hpp"
