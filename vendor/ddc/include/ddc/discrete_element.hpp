@@ -10,7 +10,6 @@
 #include <type_traits>
 #include <utility>
 
-#include "ddc/coordinate.hpp"
 #include "ddc/detail/macros.hpp"
 #include "ddc/detail/type_seq.hpp"
 #include "ddc/discrete_vector.hpp"
@@ -21,17 +20,17 @@ template <class...>
 class DiscreteElement;
 
 template <class T>
-struct IsDiscreteElement : std::false_type
+struct is_discrete_element : std::false_type
 {
 };
 
 template <class... Tags>
-struct IsDiscreteElement<DiscreteElement<Tags...>> : std::true_type
+struct is_discrete_element<DiscreteElement<Tags...>> : std::true_type
 {
 };
 
 template <class T>
-inline constexpr bool is_discrete_element_v = IsDiscreteElement<T>::value;
+inline constexpr bool is_discrete_element_v = is_discrete_element<T>::value;
 
 
 namespace detail {
@@ -442,14 +441,5 @@ KOKKOS_FUNCTION constexpr DiscreteVector<Tags...> operator-(
     static_assert(type_seq_same_v<detail::TypeSeq<Tags...>, detail::TypeSeq<OTags...>>);
     return DiscreteVector<Tags...>((uid<Tags>(lhs) - uid<Tags>(rhs))...);
 }
-
-// Gives access to the type of the coordinates of a discrete element
-// Example usage : "using Coords = coordinate_of_t<DElem>;"
-template <class... DDims>
-struct coordinate_of<ddc::DiscreteElement<DDims...>>
-{
-    // maybe a static_assert on DDims ?
-    using type = Coordinate<typename DDims::continuous_dimension_type...>;
-};
 
 } // namespace ddc

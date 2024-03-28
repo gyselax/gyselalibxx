@@ -651,47 +651,47 @@ private:
      */
     template <class Layout, class... CoordsDims>
     KOKKOS_INLINE_FUNCTION double eval(
-            ddc::Coordinate<CoordsDims...> const& coord_eval,
+            ddc::Coordinate<CoordsDims...> coord_eval,
             ddc::ChunkSpan<double const, bsplines_domain_type, Layout, memory_space> const
                     spline_coef) const
     {
-        ddc::Coordinate<typename interpolation_mesh_type1::continuous_dimension_type>
-                coord_eval_interpolation1(coord_eval);
-        ddc::Coordinate<typename interpolation_mesh_type2::continuous_dimension_type>
-                coord_eval_interpolation2(coord_eval);
+        using Dim1 = typename interpolation_mesh_type1::continuous_dimension_type;
+        using Dim2 = typename interpolation_mesh_type2::continuous_dimension_type;
         if constexpr (bsplines_type1::is_periodic()) {
-            if (coord_eval_interpolation1 < ddc::discrete_space<bsplines_type1>().rmin()
-                || coord_eval_interpolation1 > ddc::discrete_space<bsplines_type1>().rmax()) {
-                coord_eval_interpolation1
+            if (ddc::get<Dim1>(coord_eval) < ddc::discrete_space<bsplines_type1>().rmin()
+                || ddc::get<Dim1>(coord_eval) > ddc::discrete_space<bsplines_type1>().rmax()) {
+                ddc::get<Dim1>(coord_eval)
                         -= Kokkos::floor(
-                                   (coord_eval_interpolation1
+                                   (ddc::get<Dim1>(coord_eval)
                                     - ddc::discrete_space<bsplines_type1>().rmin())
                                    / ddc::discrete_space<bsplines_type1>().length())
                            * ddc::discrete_space<bsplines_type1>().length();
             }
-        } else {
-            if (coord_eval_interpolation1 < ddc::discrete_space<bsplines_type1>().rmin()) {
-                return m_left_extrap_rule_1(coord_eval, spline_coef);
-            }
-            if (coord_eval_interpolation1 > ddc::discrete_space<bsplines_type1>().rmax()) {
-                return m_right_extrap_rule_1(coord_eval, spline_coef);
-            }
         }
         if constexpr (bsplines_type2::is_periodic()) {
-            if (coord_eval_interpolation2 < ddc::discrete_space<bsplines_type2>().rmin()
-                || coord_eval_interpolation2 > ddc::discrete_space<bsplines_type2>().rmax()) {
-                coord_eval_interpolation2
+            if (ddc::get<Dim2>(coord_eval) < ddc::discrete_space<bsplines_type2>().rmin()
+                || ddc::get<Dim2>(coord_eval) > ddc::discrete_space<bsplines_type2>().rmax()) {
+                ddc::get<Dim2>(coord_eval)
                         -= Kokkos::floor(
-                                   (coord_eval_interpolation2
+                                   (ddc::get<Dim2>(coord_eval)
                                     - ddc::discrete_space<bsplines_type2>().rmin())
                                    / ddc::discrete_space<bsplines_type2>().length())
                            * ddc::discrete_space<bsplines_type2>().length();
             }
-        } else {
-            if (coord_eval_interpolation2 < ddc::discrete_space<bsplines_type2>().rmin()) {
+        }
+        if constexpr (!bsplines_type1::is_periodic()) {
+            if (ddc::get<Dim1>(coord_eval) < ddc::discrete_space<bsplines_type1>().rmin()) {
+                return m_left_extrap_rule_1(coord_eval, spline_coef);
+            }
+            if (ddc::get<Dim1>(coord_eval) > ddc::discrete_space<bsplines_type1>().rmax()) {
+                return m_right_extrap_rule_1(coord_eval, spline_coef);
+            }
+        }
+        if constexpr (!bsplines_type2::is_periodic()) {
+            if (ddc::get<Dim2>(coord_eval) < ddc::discrete_space<bsplines_type2>().rmin()) {
                 return m_left_extrap_rule_2(coord_eval, spline_coef);
             }
-            if (coord_eval_interpolation2 > ddc::discrete_space<bsplines_type2>().rmax()) {
+            if (ddc::get<Dim2>(coord_eval) > ddc::discrete_space<bsplines_type2>().rmax()) {
                 return m_right_extrap_rule_2(coord_eval, spline_coef);
             }
         }
@@ -699,28 +699,22 @@ private:
                 ddc::Coordinate<
                         typename interpolation_mesh_type1::continuous_dimension_type,
                         typename interpolation_mesh_type2::continuous_dimension_type>(
-                        coord_eval_interpolation1,
-                        coord_eval_interpolation2),
+                        ddc::get<Dim1>(coord_eval),
+                        ddc::get<Dim2>(coord_eval)),
                 spline_coef);
     }
 
     /**
      * @brief Evaluate the function or its derivative at the coordinate given.
      *
-     * @param[in] coord_eval1
-     * 			The coordinate on the first dimension where we want to evaluate.
-     * @param[in] coord_eval2
-     * 			The coordinate on the second dimension where we want to evaluate.
+     * @param[in] coord_eval
+     * 			The coordinate where we want to evaluate.
      * @param[in] splne_coef
      * 			The B-splines coefficients of the function we want to evaluate.
-     * @param[out] vals1
-     * 			A ChunkSpan with the not-null values of each function of the spline in the first dimension.
-     * @param[out] vals2
-     * 			A ChunkSpan with the not-null values of each function of the spline in the second dimension.
-     * @param[in] eval_type_1
+     * @tparam EvalType1
      * 			A flag indicating if we evaluate the function or its derivative in the first dimension.
      * 			The type of this object is either `eval_type` or `eval_deriv_type`.
-     * @param[in] eval_type_2
+     * @tparam EvalType2
      * 			A flag indicating if we evaluate the function or its derivative in the second dimension.
      *          The type of this object is either `eval_type` or `eval_deriv_type`.
      */

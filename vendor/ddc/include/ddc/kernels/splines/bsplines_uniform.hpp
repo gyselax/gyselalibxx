@@ -10,7 +10,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include "bspline.hpp"
 #include "math_tools.hpp"
 #include "view.hpp"
 
@@ -45,8 +44,6 @@ public:
 
 public:
     using tag_type = Tag;
-
-    using continuous_dimension_type = BSpline<Tag>;
 
 
     using discrete_dimension_type = UniformBSplines;

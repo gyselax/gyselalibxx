@@ -31,6 +31,7 @@ jobs:
         echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin || true
         docker pull ghcr.io/cexa-project/ddc/doxygen || true
         DOCKER_BUILDKIT=1 docker build \
+          --build-arg BUILDKIT_INLINE_CACHE=1 \
           --cache-from ghcr.io/cexa-project/ddc/doxygen \
           -t ghcr.io/cexa-project/ddc/doxygen \
           -t ghcr.io/cexa-project/ddc/doxygen:${GITHUB_SHA:0:7} \
