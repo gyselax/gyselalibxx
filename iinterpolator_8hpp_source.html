@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolator.hpp Source File</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/iinterpolator.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('i__interpolator_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('iinterpolator_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('i__interpolator_8hpp_source.html','');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">i_interpolator.hpp</div>  </div>
+<div class="title">iinterpolator.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
@@ -143,17 +143,17 @@ $(document).ready(function(){initNavTree('i__interpolator_8hpp_source.html','');
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> (*<a class="code" href="classIPreallocatableInterpolator.html#aceaa10e332a925c432a9f2f1ca1b7110">preallocate</a>())(inout_data, coordinates);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;};</div>
-<div class="ttc" id="aclassIInterpolator_html"><div class="ttname"><a href="classIInterpolator.html">IInterpolator</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> i_interpolator.hpp:18</div></div>
+<div class="ttc" id="aclassIInterpolator_html"><div class="ttname"><a href="classIInterpolator.html">IInterpolator</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> iinterpolator.hpp:18</div></div>
 <div class="ttc" id="aclassIInterpolator_html_a5321defe083a5f46ab01233ead86ed6a"><div class="ttname"><a href="classIInterpolator.html#a5321defe083a5f46ab01233ead86ed6a">IInterpolator::operator()</a></div><div class="ttdeci">virtual ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt; &gt; operator()(ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; inout_data, ddc::ChunkSpan&lt; const ddc::Coordinate&lt; CDim &gt;, ddc::DiscreteDomain&lt; DDim &gt;&gt; coordinates) const =0</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div></div>
-<div class="ttc" id="aclassIPreallocatableInterpolator_html"><div class="ttname"><a href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a></div><div class="ttdoc">A class which provides access to an interpolating function which can be preallocated where useful.</div><div class="ttdef"><b>Definition:</b> i_interpolator.hpp:63</div></div>
-<div class="ttc" id="aclassIPreallocatableInterpolator_html_a0dfd6aa6ea6c1d6a85cf40a6c9f77a09"><div class="ttname"><a href="classIPreallocatableInterpolator.html#a0dfd6aa6ea6c1d6a85cf40a6c9f77a09">IPreallocatableInterpolator::operator()</a></div><div class="ttdeci">ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt; &gt; operator()(ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; const inout_data, ddc::ChunkSpan&lt; const ddc::Coordinate&lt; CDim &gt;, ddc::DiscreteDomain&lt; DDim &gt;&gt; const coordinates) const override</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div><div class="ttdef"><b>Definition:</b> i_interpolator.hpp:91</div></div>
+<div class="ttc" id="aclassIPreallocatableInterpolator_html"><div class="ttname"><a href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a></div><div class="ttdoc">A class which provides access to an interpolating function which can be preallocated where useful.</div><div class="ttdef"><b>Definition:</b> iinterpolator.hpp:63</div></div>
+<div class="ttc" id="aclassIPreallocatableInterpolator_html_a0dfd6aa6ea6c1d6a85cf40a6c9f77a09"><div class="ttname"><a href="classIPreallocatableInterpolator.html#a0dfd6aa6ea6c1d6a85cf40a6c9f77a09">IPreallocatableInterpolator::operator()</a></div><div class="ttdeci">ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt; &gt; operator()(ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; const inout_data, ddc::ChunkSpan&lt; const ddc::Coordinate&lt; CDim &gt;, ddc::DiscreteDomain&lt; DDim &gt;&gt; const coordinates) const override</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div><div class="ttdef"><b>Definition:</b> iinterpolator.hpp:91</div></div>
 <div class="ttc" id="aclassIPreallocatableInterpolator_html_aceaa10e332a925c432a9f2f1ca1b7110"><div class="ttname"><a href="classIPreallocatableInterpolator.html#aceaa10e332a925c432a9f2f1ca1b7110">IPreallocatableInterpolator::preallocate</a></div><div class="ttdeci">virtual std::unique_ptr&lt; IInterpolator&lt; DDim &gt; &gt; preallocate() const =0</div><div class="ttdoc">Allocate an instance of an InterpolatorProxy to use as an IInterpolator.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_ce24321f9c558a1bad9461427b2f6e52.html">interpolation</a></li><li class="navelem"><b>i_interpolator.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_ce24321f9c558a1bad9461427b2f6e52.html">interpolation</a></li><li class="navelem"><b>iinterpolator.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

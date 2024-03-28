@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolator_batched.hpp Source File</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/iinterpolator_batched.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('i__interpolator__batched_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('iinterpolator__batched_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('i__interpolator__batched_8hpp_source.h
 
 <div class="header">
   <div class="headertitle">
-<div class="title">i_interpolator_batched.hpp</div>  </div>
+<div class="title">iinterpolator_batched.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
@@ -158,19 +158,19 @@ $(document).ready(function(){initNavTree('i__interpolator__batched_8hpp_source.h
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">return</span> (*<a class="code" href="classIPreallocatableInterpolatorBatched.html#a46f50f9b73b8c96034fb5d22e67d98a2">preallocate</a>())(inout_data, coordinates);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;};</div>
-<div class="ttc" id="aclassIInterpolatorBatched_html"><div class="ttname"><a href="classIInterpolatorBatched.html">IInterpolatorBatched</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> i_interpolator_batched.hpp:50</div></div>
+<div class="ttc" id="aclassIInterpolatorBatched_html"><div class="ttname"><a href="classIInterpolatorBatched.html">IInterpolatorBatched</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> iinterpolator_batched.hpp:50</div></div>
 <div class="ttc" id="aclassIInterpolatorBatched_html_a251833e322c41c7bdb91de9a4fb0270c"><div class="ttname"><a href="classIInterpolatorBatched.html#a251833e322c41c7bdb91de9a4fb0270c">IInterpolatorBatched::operator()</a></div><div class="ttdeci">virtual device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt; operator()(device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; coordinates) const =0</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div></div>
-<div class="ttc" id="aclassIPreallocatableInterpolatorBatched_html"><div class="ttname"><a href="classIPreallocatableInterpolatorBatched.html">IPreallocatableInterpolatorBatched</a></div><div class="ttdoc">A class which provides access to an interpolating function which can be preallocated where useful.</div><div class="ttdef"><b>Definition:</b> i_interpolator_batched.hpp:94</div></div>
+<div class="ttc" id="aclassIPreallocatableInterpolatorBatched_html"><div class="ttname"><a href="classIPreallocatableInterpolatorBatched.html">IPreallocatableInterpolatorBatched</a></div><div class="ttdoc">A class which provides access to an interpolating function which can be preallocated where useful.</div><div class="ttdef"><b>Definition:</b> iinterpolator_batched.hpp:94</div></div>
 <div class="ttc" id="aclassIPreallocatableInterpolatorBatched_html_a46f50f9b73b8c96034fb5d22e67d98a2"><div class="ttname"><a href="classIPreallocatableInterpolatorBatched.html#a46f50f9b73b8c96034fb5d22e67d98a2">IPreallocatableInterpolatorBatched::preallocate</a></div><div class="ttdeci">virtual std::unique_ptr&lt; IInterpolatorBatched&lt; DDimI, DDim... &gt; &gt; preallocate() const =0</div><div class="ttdoc">Allocate an instance of an InterpolatorProxy to use as an IInterpolatorBatched.</div></div>
-<div class="ttc" id="aclassIPreallocatableInterpolatorBatched_html_a4b23b4ee8b129eedb674cdec540621b5"><div class="ttname"><a href="classIPreallocatableInterpolatorBatched.html#a4b23b4ee8b129eedb674cdec540621b5">IPreallocatableInterpolatorBatched::operator()</a></div><div class="ttdeci">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt; operator()(device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const coordinates) const override</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div><div class="ttdef"><b>Definition:</b> i_interpolator_batched.hpp:120</div></div>
-<div class="ttc" id="astructinterpolator__on__domain_3_01Interp_00_01DDimI_00_01ddc_1_1DiscreteDomain_3_01DDim_8_8_8_01_4_01_4_html_a01b41fecaeb84e4397c995d4bcfca4f7"><div class="ttname"><a href="structinterpolator__on__domain_3_01Interp_00_01DDimI_00_01ddc_1_1DiscreteDomain_3_01DDim_8_8_8_01_4_01_4.html#a01b41fecaeb84e4397c995d4bcfca4f7">interpolator_on_domain&lt; Interp, DDimI, ddc::DiscreteDomain&lt; DDim... &gt; &gt;::type</a></div><div class="ttdeci">Interp&lt; DDimI, DDim... &gt; type</div><div class="ttdoc">The type of the interpolator.</div><div class="ttdef"><b>Definition:</b> i_interpolator_batched.hpp:28</div></div>
-<div class="ttc" id="astructinterpolator__on__domain_html"><div class="ttname"><a href="structinterpolator__on__domain.html">interpolator_on_domain</a></div><div class="ttdef"><b>Definition:</b> i_interpolator_batched.hpp:14</div></div>
+<div class="ttc" id="aclassIPreallocatableInterpolatorBatched_html_a4b23b4ee8b129eedb674cdec540621b5"><div class="ttname"><a href="classIPreallocatableInterpolatorBatched.html#a4b23b4ee8b129eedb674cdec540621b5">IPreallocatableInterpolatorBatched::operator()</a></div><div class="ttdeci">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt; operator()(device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; const coordinates) const override</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div><div class="ttdef"><b>Definition:</b> iinterpolator_batched.hpp:120</div></div>
+<div class="ttc" id="astructinterpolator__on__domain_3_01Interp_00_01DDimI_00_01ddc_1_1DiscreteDomain_3_01DDim_8_8_8_01_4_01_4_html_a01b41fecaeb84e4397c995d4bcfca4f7"><div class="ttname"><a href="structinterpolator__on__domain_3_01Interp_00_01DDimI_00_01ddc_1_1DiscreteDomain_3_01DDim_8_8_8_01_4_01_4.html#a01b41fecaeb84e4397c995d4bcfca4f7">interpolator_on_domain&lt; Interp, DDimI, ddc::DiscreteDomain&lt; DDim... &gt; &gt;::type</a></div><div class="ttdeci">Interp&lt; DDimI, DDim... &gt; type</div><div class="ttdoc">The type of the interpolator.</div><div class="ttdef"><b>Definition:</b> iinterpolator_batched.hpp:28</div></div>
+<div class="ttc" id="astructinterpolator__on__domain_html"><div class="ttname"><a href="structinterpolator__on__domain.html">interpolator_on_domain</a></div><div class="ttdef"><b>Definition:</b> iinterpolator_batched.hpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_ce24321f9c558a1bad9461427b2f6e52.html">interpolation</a></li><li class="navelem"><b>i_interpolator_batched.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_ce24321f9c558a1bad9461427b2f6e52.html">interpolation</a></li><li class="navelem"><b>iinterpolator_batched.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
