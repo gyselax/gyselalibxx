@@ -5,7 +5,7 @@
 #include <sll/spline_builder.hpp>
 #include <sll/spline_evaluator.hpp>
 
-#include "i_interpolator.hpp"
+#include "iinterpolator.hpp"
 
 /**
  * @brief A class for interpolating a function using splines.
