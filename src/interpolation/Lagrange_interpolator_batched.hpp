@@ -3,7 +3,7 @@
 #include <ddc/ddc.hpp>
 
 #include "Lagrange.hpp"
-#include "i_interpolator_batched.hpp"
+#include "iinterpolator_batched.hpp"
 
 /**
  * @brief A class for interpolating a function using Lagrange polynomials.
