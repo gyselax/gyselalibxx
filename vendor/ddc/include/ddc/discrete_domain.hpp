@@ -23,17 +23,17 @@ template <class... DDims>
 class DiscreteDomain;
 
 template <class T>
-struct IsDiscreteDomain : std::false_type
+struct is_discrete_domain : std::false_type
 {
 };
 
 template <class... Tags>
-struct IsDiscreteDomain<DiscreteDomain<Tags...>> : std::true_type
+struct is_discrete_domain<DiscreteDomain<Tags...>> : std::true_type
 {
 };
 
 template <class T>
-inline constexpr bool is_discrete_domain_v = IsDiscreteDomain<T>::value;
+inline constexpr bool is_discrete_domain_v = is_discrete_domain<T>::value;
 
 
 namespace detail {

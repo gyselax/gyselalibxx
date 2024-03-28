@@ -21,17 +21,17 @@ template <class...>
 class DiscreteVector;
 
 template <class T>
-struct IsDiscreteVector : std::false_type
+struct is_discrete_vector : std::false_type
 {
 };
 
 template <class... Tags>
-struct IsDiscreteVector<DiscreteVector<Tags...>> : std::true_type
+struct is_discrete_vector<DiscreteVector<Tags...>> : std::true_type
 {
 };
 
 template <class T>
-inline constexpr bool is_discrete_vector_v = IsDiscreteVector<T>::value;
+inline constexpr bool is_discrete_vector_v = is_discrete_vector<T>::value;
 
 
 namespace detail {
@@ -205,13 +205,15 @@ KOKKOS_FUNCTION constexpr auto const& take(HeadDVect const& head, TailDVects con
     DDC_IF_NVCC_THEN_POP
 }
 
+namespace detail {
+
 template <class T>
-class ConversionOperators
+class DiscreteVectorConversionOperators
 {
 };
 
 template <class Tag>
-class ConversionOperators<DiscreteVector<Tag>>
+class DiscreteVectorConversionOperators<DiscreteVector<Tag>>
 {
 public:
     KOKKOS_FUNCTION constexpr operator DiscreteVectorElement const &() const noexcept
@@ -224,8 +226,6 @@ public:
         return static_cast<DiscreteVector<Tag>*>(this)->m_values[0];
     }
 };
-
-namespace detail {
 
 /// Returns a reference to the underlying `std::array`
 template <class... Tags>
@@ -250,9 +250,9 @@ KOKKOS_FUNCTION constexpr std::array<DiscreteVectorElement, sizeof...(Tags)> con
  * Each is tagged by its associated dimensions.
  */
 template <class... Tags>
-class DiscreteVector : public ConversionOperators<DiscreteVector<Tags...>>
+class DiscreteVector : public detail::DiscreteVectorConversionOperators<DiscreteVector<Tags...>>
 {
-    friend class ConversionOperators<DiscreteVector<Tags...>>;
+    friend class detail::DiscreteVectorConversionOperators<DiscreteVector<Tags...>>;
 
     friend KOKKOS_FUNCTION constexpr std::array<DiscreteVectorElement, sizeof...(Tags)>& detail::
             array<Tags...>(DiscreteVector<Tags...>& v) noexcept;
