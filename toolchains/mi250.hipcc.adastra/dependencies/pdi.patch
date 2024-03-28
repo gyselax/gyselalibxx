@@ -1,0 +1,26 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 75e97739..cf778b3b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -473,7 +473,7 @@ if("${BUILD_DECL_HDF5_PLUGIN}" OR "${BUILD_DECL_NETCDF_PLUGIN}")
+ 			${HDF5_CONFIGURE_OPTS}
+ 	)
+ 	if("${HDF5_FOUND}")
+-		if(1.10 VERSION_GREATER "${HDF5_VERSION}")
++		if("${HDF5_VERSION}" AND (1.10 VERSION_GREATER "${HDF5_VERSION}"))
+ 			message(FATAL_ERROR "HDF5 version ${HDF5_VERSION} found less than required 1.10.0")
+ 		endif()
+ 		if("${BUILD_HDF5_PARALLEL}" AND NOT "${HDF5_IS_PARALLEL}")
+diff --git a/plugins/decl_hdf5/CMakeLists.txt b/plugins/decl_hdf5/CMakeLists.txt
+index b9fb692a..be92b588 100644
+--- a/plugins/decl_hdf5/CMakeLists.txt
++++ b/plugins/decl_hdf5/CMakeLists.txt
+@@ -56,7 +56,7 @@ endif()
+ set(HDF5_USE_STATIC_LIBRARIES OFF)
+ set(HDF5_PREFER_PARALLEL "${BUILD_HDF5_PARALLEL}")
+ find_package(HDF5 REQUIRED COMPONENTS C)
+-if("${HDF5_VERSION}" VERSION_LESS "1.10.0")
++if("${HDF5_VERSION}" AND "${HDF5_VERSION}" VERSION_LESS "1.10.0")
+ 	message(FATAL_ERROR "HDF5 version 1.10.0 at least required, HDF5 ${HDF5_VERSION} found.")
+ endif()
+ if("${BUILD_HDF5_PARALLEL}" AND NOT "${HDF5_IS_PARALLEL}")

@@ -47,20 +47,20 @@ lagrange_test.cpp
 )
 
 target_compile_features(unit_tests_lagrange PUBLIC cxx_std_17)
-target_link_libraries(unit_tests_lagrange 
+target_link_libraries(unit_tests_lagrange
     PUBLIC
         GTest::gtest
         GTest::gmock
         gslx::interpolation
 
 )
-gtest_discover_tests(unit_tests_lagrange 
+gtest_discover_tests(unit_tests_lagrange
     TEST_SUFFIX "_${lagrange}")
 
 target_sources(unit_tests_xperiod_vx
     PRIVATE
         femperiodicpoissonsolver.cpp
-        fftpoissonsolver.cpp     
+        fftpoissonsolver.cpp
 )
 
 
@@ -89,7 +89,7 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 	        gslx::quadrature
 	        gslx::geometry_${GEOMETRY_VARIANT}
 	)
-	
+
 	gtest_discover_tests(spline_quadrature_tests_${GEOMETRY_VARIANT}
 	    TEST_SUFFIX "_${GEOMETRY_VARIANT}")
 endforeach()
