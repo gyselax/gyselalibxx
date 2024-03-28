@@ -5,7 +5,7 @@
 #include <ddc/ddc.hpp>
 
 #include <ddc_helper.hpp>
-#include <i_interpolator_batched.hpp>
+#include <iinterpolator_batched.hpp>
 #include <species_info.hpp>
 
 #include "iadvectionvx.hpp"
