@@ -11,6 +11,7 @@
 
 #include "ddc/chunk_common.hpp"
 #include "ddc/chunk_span.hpp"
+#include "ddc/chunk_traits.hpp"
 #include "ddc/kokkos_allocator.hpp"
 #include "ddc/parallel_deepcopy.hpp"
 
