@@ -1,8 +1,7 @@
 #!/bin/bash
 set -xe
 
-if [ $# -ne 4 ]
-then
+if [ $# -ne 4 ]; then
     echo "Usage: $0 <VOICEXX_SRCDIR> <VOICEXX_EXEC> <PYTHON3_EXE> <SIMULATION_NAME>"
     exit 1
 fi
@@ -15,7 +14,7 @@ OUTDIR="${PWD}/${SIMULATION_NAME}"
 
 TMPDIR="$(mktemp -p "${PWD}" -d run-XXXXXXXXXX)"
 function finish {
-  rm -rf "${TMPDIR}"
+    rm -rf "${TMPDIR}"
 }
 trap finish EXIT QUIT ABRT KILL SEGV TERM STOP
 
@@ -31,11 +30,9 @@ cd "${TMPDIR}"
 growthrate_theory=-0.153
 frequency_theory=1.4156
 
-export PYTHONPATH="${VOICEXX_SRCDIR}/post-process/PythonScripts"
+export PYTHONPATH="${VOICEXX_SRCDIR}/post-process/PythonScripts:${PYTHONPATH}"
 "${PYTHON3_EXE}" -B "${VOICEXX_SRCDIR}/tests/check_growthrate_freq.py" . -g ${growthrate_theory} -f ${frequency_theory}
-if [ ! -d ${OUTDIR} ]
-then
+if [ ! -d ${OUTDIR} ]; then
     mkdir "${OUTDIR}"
 fi
 cp *.png "${OUTDIR}"
-

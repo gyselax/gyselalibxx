@@ -1,0 +1,35 @@
+Mesh:
+  ncell_tor1: 1       # number of cells in the radial direction
+  ncell_tor2: 1       # number of cells in the poloidal direction
+  ncell_tor3: 1       # number of cells in the toroidal direction
+  ncell_vpar: 128     # number of cells in the parallel velocity direction
+  ncell_mu: 64        # number of cells in the adiabatic invariant direction
+
+  min_tor1: 0.0
+  max_tor1: 1.0
+  min_tor2: 0.0
+  max_tor2: 6.283185307179586476925286766559005768394
+  min_tor3: 0.0
+  max_tor3: 6.283185307179586476925286766559005768394
+  max_vpar: 5.0
+  max_mu: 12.0
+
+Geometry:
+  aspect_ratio : 4.0  # major radius / minor radius
+  kappa : 0.0         # Elongation
+  delta : 0.0         # Triangularity
+  q0 : 1.0            # safety factor on the magnetic axis (parabolic profile)
+  qa : 2.0            # safety factor at the edge (parabolic profile)
+  beta : 0.001        # beta = p*mu0 / B**2
+  
+SpeciesInfo:
+  - name: 'electron'
+    charge: -1
+    mass: 0.0005
+    N_min : 0.2      # minimum density, assuming a parabolic decreasing profile
+    T_min : 0.5      # minimum temperature, assuming a parabolic decreasing profile
+  - name: 'ion'
+    charge: 1
+    mass: 1.
+    N_min : 0.2      # minimum density, assuming a parabolic decreasing profile
+    T_min : 0.5      # minimum temperature, assuming a parabolic decreasing profile 
