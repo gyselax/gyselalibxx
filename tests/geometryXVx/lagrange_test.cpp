@@ -7,7 +7,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "Lagrange_interpolator.hpp"
+#include "Lagrange_interpolator_batched.hpp"
 // Here Z stands to specify that we use ad hoc geometry
 struct RDimZ
 {
@@ -57,35 +57,43 @@ public:
         ddc::DiscreteVector<IDimZ> npoints(x_size);
         ddc::DiscreteDomain<IDimZ> interpolation_domain_x(lbound, npoints);
 
-        ddc::Chunk Essai_alloc(interpolation_domain_x, ddc::HostAllocator<double>());
-        ddc::ChunkSpan Essai = Essai_alloc.span_view();
-        ddc::for_each(Essai.domain(), [&](DElemZ const ix) {
-            Essai(ix) = fpol(ddc::coordinate(ix).value(), deg);
+        ddc::Chunk Essai_host_alloc(interpolation_domain_x, ddc::HostAllocator<double>());
+        ddc::ChunkSpan Essai_host = Essai_host_alloc.span_view();
+        ddc::for_each(Essai_host.domain(), [&](DElemZ const ix) {
+            Essai_host(ix) = fpol(ddc::coordinate(ix).value(), deg);
         });
         int cpt = 1;
         std::default_random_engine generator;
         std::uniform_real_distribution<double> unif_distr(-1, 1);
-        ddc::Chunk<ddc::Coordinate<CDim>, ddc::DiscreteDomain<IDimZ>> Sample(
+        ddc::Chunk<ddc::Coordinate<CDim>, ddc::DiscreteDomain<IDimZ>> Sample_host(
                 interpolation_domain_x);
 
-        ddc::for_each(Sample.domain(), [&](DElemZ const ix) {
+        ddc::for_each(Sample_host.domain(), [&](DElemZ const ix) {
             if (cpt % int(0.1 * x_size) == 0) {
-                Sample(ix) = ddc::Coordinate<CDim>(
+                Sample_host(ix) = ddc::Coordinate<CDim>(
                         ddc::coordinate(ix).value()
                         + (cpt > 0.1 * x_size) * (cpt < 0.9 * x_size) * perturb
                                   * unif_distr(generator) / x_size);
             } else {
-                Sample(ix) = ddc::Coordinate<CDim>(ddc::coordinate(ix).value());
+                Sample_host(ix) = ddc::Coordinate<CDim>(ddc::coordinate(ix).value());
             }
             cpt++;
         });
         ddc::DiscreteVector<IDimZ> static constexpr gwx {0};
 
-        LagrangeInterpolator<IDimZ, BCond::DIRICHLET, BCond::DIRICHLET>
-                Test_Interpolator(deg, Essai.domain(), gwx);
-        Test_Interpolator(Essai, Sample);
+        LagrangeInterpolatorBatched<IDimZ, BCond::DIRICHLET, BCond::DIRICHLET, IDimZ>
+                Test_Interpolator(deg, gwx);
+        auto Essai = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                Essai_host.span_view());
+        auto Sample = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                Sample_host.span_view());
+        Test_Interpolator(Essai.span_view(), Sample.span_cview());
+        ddc::parallel_deepcopy(Essai_host, Essai);
+        ddc::parallel_deepcopy(Sample_host, Sample);
         ddc::for_each(interpolation_domain_x, [&](DElemZ const ix) {
-            Erreur.push_back(std::abs(Essai(ix) - fpol(Sample(ix), deg)));
+            Erreur.push_back(std::abs(Essai_host(ix) - fpol(Sample_host(ix), deg)));
         });
         double s = std::transform_reduce(
                 std::begin(Erreur),
