@@ -28,7 +28,6 @@
 #include "restartinitialization.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
-#include "spline_interpolator.hpp"
 #include "spline_interpolator_batched.hpp"
 #include "splitvlasovsolver.hpp"
 
