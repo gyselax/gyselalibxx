@@ -106,18 +106,18 @@ $(document).ready(function(){initNavTree('src_interpolation.html',''); initResiz
 <div class="textblock"><p>Interpolation methods are any methods which, given values \(f_j=f(x_j)\), allow the construction of an interpolating function \(\phi(x)\) such that:</p>
 <p>\(\phi(x_j)=f_j=f(x_j)\)</p>
 <p>and return the value of that interpolating function \(\phi(x)\) at the desired coordinates.</p>
-<p>The general interface for this method is defined via <a class="el" href="classIInterpolator.html" title="A class which provides an interpolating function.">IInterpolator</a>.</p>
+<p>The general interface for this method is defined via IInterpolator.</p>
 <p>The interpolation methods implemented are:</p><ul>
-<li><a class="el" href="classSplineInterpolator.html" title="A class for interpolating a function using splines.">SplineInterpolator</a></li>
+<li>SplineInterpolator</li>
 </ul>
 <h1><a class="anchor" id="src_interpolation__Spline_Interpolation"></a>
 Spline Interpolation</h1>
-<p>Interpolation by a spline interpolating function is implemented in the class <a class="el" href="classSplineInterpolator.html" title="A class for interpolating a function using splines.">SplineInterpolator</a>. In this case the interpolating function \(\phi(x)\) is a spline. The basis splines are passed as a template parameter, it is these that determine the order of the spline interpolation.</p>
+<p>Interpolation by a spline interpolating function is implemented in the class SplineInterpolator. In this case the interpolating function \(\phi(x)\) is a spline. The basis splines are passed as a template parameter, it is these that determine the order of the spline interpolation.</p>
 <p>In order for the interpolation to function correctly the values \(f_j=f(x_j)\) provided must be located at the points \(x_j\) identified as the spline interpolation points.</p>
 <p>The spline interpolation method is based entirely on the <a class="el" href="classSplineBuilder.html" title="A class for creating a spline approximation of a function.">SplineBuilder</a> and <a class="el" href="classSplineEvaluator.html">SplineEvaluator</a> classes which are found in <a href="../../vendor/sll">sll</a>.</p>
 <h1><a class="anchor" id="src_interpolation__Memory_concerns"></a>
 Memory concerns</h1>
-<p><a class="el" href="classSplineInterpolator.html" title="A class for interpolating a function using splines.">SplineInterpolator</a> contains a 1D array of spline coefficients. These are unused in most of the code but are used repeatedly in advections. As a result the class <a class="el" href="classPreallocatableSplineInterpolator.html" title="A class which stores information necessary to create an instance of the SplineInterpolator class.">PreallocatableSplineInterpolator</a> exists (which inherits from the more general <a class="el" href="classIPreallocatableInterpolator.html" title="A class which provides access to an interpolating function which can be preallocated where useful.">IPreallocatableInterpolator</a>). This class allows a <a class="el" href="classSplineInterpolator.html" title="A class for interpolating a function using splines.">SplineInterpolator</a> to be allocated locally. It is stored in an InterpolatorProxy which means it is deallocated once it goes out of scope. This ensures that the 1D array is not occupying memory during the execution of the rest of the code, but also that the array is only allocated once in each advection operator. </p>
+<p>SplineInterpolator contains a 1D array of spline coefficients. These are unused in most of the code but are used repeatedly in advections. As a result the class PreallocatableSplineInterpolator exists (which inherits from the more general IPreallocatableInterpolator). This class allows a SplineInterpolator to be allocated locally. It is stored in an InterpolatorProxy which means it is deallocated once it goes out of scope. This ensures that the 1D array is not occupying memory during the execution of the rest of the code, but also that the array is only allocated once in each advection operator. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
