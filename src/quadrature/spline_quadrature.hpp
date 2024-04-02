@@ -11,11 +11,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/bsplines_non_uniform.hpp>
 #include <sll/matrix.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
 
 
 
@@ -79,7 +75,7 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
     // Vector of integrals of B-splines
     ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines(
             builder.spline_domain());
-    ddc::discrete_space<bsplines_type>().integrals(integral_bsplines);
+    ddc::discrete_space<bsplines_type>().integrals(integral_bsplines.span_view());
 
     // Coefficients of quadrature in integral_bsplines
     ddc::DiscreteDomain<bsplines_type> slice = builder.spline_domain().take_first(

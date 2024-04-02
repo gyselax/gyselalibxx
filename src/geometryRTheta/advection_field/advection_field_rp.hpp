@@ -97,9 +97,10 @@ public:
 private:
     Mapping const& m_mapping;
 
-    PolarSplineEvaluator<PolarBSplinesRP> const m_polar_spline_evaluator;
+    PolarSplineEvaluator<PolarBSplinesRP, ddc::NullExtrapolationRule> const
+            m_polar_spline_evaluator;
 
-    SplineRPEvaluator const m_spline_evaluator;
+    SplineRPEvaluatorNullBound const m_spline_evaluator;
 
     double const m_epsilon;
 
@@ -117,12 +118,8 @@ public:
      */
     AdvectionFieldFinder(Mapping const& mapping, double const epsilon = 1e-12)
         : m_mapping(mapping)
-        , m_polar_spline_evaluator(g_polar_null_boundary_2d<PolarBSplinesRP>)
-        , m_spline_evaluator(
-                  g_null_boundary_2d<BSplinesR, BSplinesP>,
-                  g_null_boundary_2d<BSplinesR, BSplinesP>,
-                  g_null_boundary_2d<BSplinesR, BSplinesP>,
-                  g_null_boundary_2d<BSplinesR, BSplinesP>)
+        , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
+        , m_spline_evaluator {ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule(), ddc::PeriodicExtrapolationRule<RDimP>(), ddc::PeriodicExtrapolationRule<RDimP>()}
         , m_epsilon(epsilon) {};
 
     ~AdvectionFieldFinder() {};
@@ -153,7 +150,7 @@ public:
         SplineRPBuilder const builder(grid);
         BSDomainRP const dom_bsplinesRP = builder.spline_domain();
         Spline2D electrostatic_potential_coef(dom_bsplinesRP);
-        builder(electrostatic_potential_coef, electrostatic_potential);
+        builder(electrostatic_potential_coef.span_view(), electrostatic_potential.span_cview());
 
         (*this)(electrostatic_potential_coef.span_view(), advection_field_xy);
     }
@@ -217,13 +214,15 @@ private:
             SplineType& electrostatic_potential_coef,
             VectorFieldSpan<double, IDomainRP, NDTag<RDimX, RDimY>> advection_field_xy) const
     {
-        assert((std::is_same_v<
-                        Evaluator,
-                        SplineRPEvaluator> && std::is_same_v<SplineType, Spline2DSpan>)
-               || (std::is_same_v<
-                           Evaluator,
-                           PolarSplineEvaluator<
-                                   PolarBSplinesRP>> && std::is_same_v<SplineType, SplinePolar>));
+        static_assert(
+                (std::is_same_v<
+                         Evaluator,
+                         SplineRPEvaluatorNullBound> && std::is_same_v<SplineType, Spline2DSpan>)
+                || (std::is_same_v<
+                            Evaluator,
+                            PolarSplineEvaluator<
+                                    PolarBSplinesRP,
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, SplinePolar>));
 
         IDomainRP const grid = advection_field_xy.domain();
         VectorDFieldRP<RDimX, RDimY> electric_field(grid);
@@ -238,11 +237,11 @@ private:
         evaluator.deriv_dim_1(
                 deriv_r_phi.span_view(),
                 coords.span_cview(),
-                electrostatic_potential_coef);
+                electrostatic_potential_coef.span_cview());
         evaluator.deriv_dim_2(
                 deriv_p_phi.span_view(),
                 coords.span_cview(),
-                electrostatic_potential_coef);
+                electrostatic_potential_coef.span_cview());
 
         // > computation of the electric field
         ddc::for_each(grid, [&](IndexRP const irp) {
@@ -280,10 +279,12 @@ private:
                 double const dr_x_2 = m_mapping.jacobian_11(coord_2_0); // dr_x (0, th2)
                 double const dr_y_2 = m_mapping.jacobian_21(coord_2_0); // dr_y (0, th2)
 
-                double deriv_r_phi_1
-                        = evaluator.deriv_dim_1(coord_1_0, electrostatic_potential_coef);
-                double deriv_r_phi_2
-                        = evaluator.deriv_dim_1(coord_2_0, electrostatic_potential_coef);
+                double deriv_r_phi_1 = evaluator.deriv_dim_1(
+                        coord_1_0,
+                        electrostatic_potential_coef.span_cview());
+                double deriv_r_phi_2 = evaluator.deriv_dim_1(
+                        coord_2_0,
+                        electrostatic_potential_coef.span_cview());
 
                 double const determinant = dr_x_1 * dr_y_2 - dr_x_2 * dr_y_1;
 
@@ -304,10 +305,12 @@ private:
                 Matrix_2x2 inv_J_eps; // Jacobian matrix
                 m_mapping.inv_jacobian_matrix(coord_rp_epsilon, inv_J_eps);
 
-                double const deriv_r_phi_epsilon
-                        = evaluator.deriv_dim_1(coord_rp_epsilon, electrostatic_potential_coef);
-                double const deriv_p_phi_epsilon
-                        = evaluator.deriv_dim_2(coord_rp_epsilon, electrostatic_potential_coef);
+                double const deriv_r_phi_epsilon = evaluator.deriv_dim_1(
+                        coord_rp_epsilon,
+                        electrostatic_potential_coef.span_cview());
+                double const deriv_p_phi_epsilon = evaluator.deriv_dim_2(
+                        coord_rp_epsilon,
+                        electrostatic_potential_coef.span_cview());
 
                 // Gradiant of phi in the physical domain (Cartesian domain)
                 double const deriv_x_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][0]
@@ -367,7 +370,7 @@ public:
         SplineRPBuilder const builder(grid);
         BSDomainRP const dom_bsplinesRP = builder.spline_domain();
         Spline2D electrostatic_potential_coef(dom_bsplinesRP);
-        builder(electrostatic_potential_coef, electrostatic_potential);
+        builder(electrostatic_potential_coef.span_view(), electrostatic_potential.span_cview());
 
         (*this)(electrostatic_potential_coef.span_view(),
                 advection_field_rp,
@@ -445,13 +448,15 @@ private:
             VectorFieldSpan<double, IDomainRP, NDTag<RDimR, RDimP>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
-        assert((std::is_same_v<
-                        Evaluator,
-                        SplineRPEvaluator> && std::is_same_v<SplineType, Spline2DSpan>)
-               || (std::is_same_v<
-                           Evaluator,
-                           PolarSplineEvaluator<
-                                   PolarBSplinesRP>> && std::is_same_v<SplineType, SplinePolar>));
+        static_assert(
+                (std::is_same_v<
+                         Evaluator,
+                         SplineRPEvaluatorNullBound> && std::is_same_v<SplineType, Spline2DSpan>)
+                || (std::is_same_v<
+                            Evaluator,
+                            PolarSplineEvaluator<
+                                    PolarBSplinesRP,
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, SplinePolar>));
 
         IDomainRP const grid_without_Opoint = advection_field_rp.domain();
 
@@ -467,11 +472,11 @@ private:
         evaluator.deriv_dim_1(
                 deriv_r_phi.span_view(),
                 coords.span_cview(),
-                electrostatic_potential_coef);
+                electrostatic_potential_coef.span_cview());
         evaluator.deriv_dim_2(
                 deriv_p_phi.span_view(),
                 coords.span_cview(),
-                electrostatic_potential_coef);
+                electrostatic_potential_coef.span_cview());
 
         // > computation of the advection field
         ddc::for_each(grid_without_Opoint, [&](IndexRP const irp) {
@@ -512,8 +517,10 @@ private:
         double const dr_x_2 = m_mapping.jacobian_11(coord_2_0); // dr_x (0, th2)
         double const dr_y_2 = m_mapping.jacobian_21(coord_2_0); // dr_y (0, th2)
 
-        double const deriv_r_phi_1 = evaluator.deriv_dim_1(coord_1_0, electrostatic_potential_coef);
-        double const deriv_r_phi_2 = evaluator.deriv_dim_1(coord_2_0, electrostatic_potential_coef);
+        double const deriv_r_phi_1
+                = evaluator.deriv_dim_1(coord_1_0, electrostatic_potential_coef.span_cview());
+        double const deriv_r_phi_2
+                = evaluator.deriv_dim_1(coord_2_0, electrostatic_potential_coef.span_cview());
 
         double const determinant = dr_x_1 * dr_y_2 - dr_x_2 * dr_y_1;
 

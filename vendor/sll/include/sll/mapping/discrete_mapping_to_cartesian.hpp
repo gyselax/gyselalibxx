@@ -1,11 +1,9 @@
 #pragma once
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator_2d.hpp>
 
 
 /**
@@ -22,7 +20,7 @@
  *
  * @see Curvilinear2DToCartesian
  */
-template <class DimX, class DimY, class SplineBuilder>
+template <class DimX, class DimY, class SplineBuilder, class SplineEvaluator>
 class DiscreteToCartesian
     : public Curvilinear2DToCartesian<
               DimX,
@@ -76,10 +74,15 @@ private:
     using interpolation_domain = typename SplineBuilder::interpolation_domain_type;
     using spline_domain = ddc::DiscreteDomain<BSplineR, BSplineP>;
 
+    using SplineType = ddc::Chunk<
+            double,
+            spline_domain,
+            ddc::KokkosAllocator<double, typename SplineBuilder::memory_space>>;
+
 private:
-    ddc::Chunk<double, spline_domain> x_spline_representation;
-    ddc::Chunk<double, spline_domain> y_spline_representation;
-    SplineEvaluator2D<BSplineR, BSplineP> const& spline_evaluator;
+    SplineType x_spline_representation;
+    SplineType y_spline_representation;
+    SplineEvaluator const& spline_evaluator;
 
 public:
     /**
@@ -110,9 +113,9 @@ public:
      * @see SplineBoundaryValue
      */
     DiscreteToCartesian(
-            ddc::Chunk<double, spline_domain>&& curvilinear_to_x,
-            ddc::Chunk<double, spline_domain>&& curvilinear_to_y,
-            SplineEvaluator2D<BSplineR, BSplineP> const& evaluator)
+            SplineType&& curvilinear_to_x,
+            SplineType&& curvilinear_to_y,
+            SplineEvaluator const& evaluator)
         : x_spline_representation(std::move(curvilinear_to_x))
         , y_spline_representation(std::move(curvilinear_to_y))
         , spline_evaluator(evaluator)
@@ -135,8 +138,8 @@ public:
     ddc::Coordinate<DimX, DimY> operator()(
             ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord) const final
     {
-        const double x = spline_evaluator(coord, x_spline_representation);
-        const double y = spline_evaluator(coord, y_spline_representation);
+        const double x = spline_evaluator(coord, x_spline_representation.span_cview());
+        const double y = spline_evaluator(coord, y_spline_representation.span_cview());
         return ddc::Coordinate<DimX, DimY>(x, y);
     }
 
@@ -162,10 +165,10 @@ public:
             ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord,
             Matrix_2x2& matrix) const final
     {
-        matrix[0][0] = spline_evaluator.deriv_dim_1(coord, x_spline_representation);
-        matrix[0][1] = spline_evaluator.deriv_dim_2(coord, x_spline_representation);
-        matrix[1][0] = spline_evaluator.deriv_dim_1(coord, y_spline_representation);
-        matrix[1][1] = spline_evaluator.deriv_dim_2(coord, y_spline_representation);
+        matrix[0][0] = spline_evaluator.deriv_dim_1(coord, x_spline_representation.span_cview());
+        matrix[0][1] = spline_evaluator.deriv_dim_2(coord, x_spline_representation.span_cview());
+        matrix[1][0] = spline_evaluator.deriv_dim_1(coord, y_spline_representation.span_cview());
+        matrix[1][1] = spline_evaluator.deriv_dim_2(coord, y_spline_representation.span_cview());
     }
 
     /**
@@ -186,7 +189,7 @@ public:
      */
     double jacobian_11(ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord) const final
     {
-        return spline_evaluator.deriv_dim_1(coord, x_spline_representation);
+        return spline_evaluator.deriv_dim_1(coord, x_spline_representation.span_cview());
     }
 
     /**
@@ -207,7 +210,7 @@ public:
      */
     double jacobian_12(ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord) const final
     {
-        return spline_evaluator.deriv_dim_2(coord, x_spline_representation);
+        return spline_evaluator.deriv_dim_2(coord, x_spline_representation.span_cview());
     }
 
     /**
@@ -228,7 +231,7 @@ public:
      */
     double jacobian_21(ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord) const final
     {
-        return spline_evaluator.deriv_dim_1(coord, y_spline_representation);
+        return spline_evaluator.deriv_dim_1(coord, y_spline_representation.span_cview());
     }
 
     /**
@@ -249,7 +252,7 @@ public:
      */
     double jacobian_22(ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord) const final
     {
-        return spline_evaluator.deriv_dim_2(coord, y_spline_representation);
+        return spline_evaluator.deriv_dim_2(coord, y_spline_representation.span_cview());
     }
 
 
@@ -314,12 +317,14 @@ public:
         ddc::for_each(theta_domain, [&](auto const ip) {
             const double th = ddc::coordinate(ip);
             ddc::Coordinate<circular_tag_r, circular_tag_p> const coord(0, th);
-            double const deriv_1_x = spline_evaluator.deriv_dim_1(coord, x_spline_representation);
+            double const deriv_1_x
+                    = spline_evaluator.deriv_dim_1(coord, x_spline_representation.span_cview());
             double const deriv_1_2_x
-                    = spline_evaluator.deriv_1_and_2(coord, x_spline_representation);
-            double const deriv_1_y = spline_evaluator.deriv_dim_1(coord, y_spline_representation);
+                    = spline_evaluator.deriv_1_and_2(coord, x_spline_representation.span_cview());
+            double const deriv_1_y
+                    = spline_evaluator.deriv_dim_1(coord, y_spline_representation.span_cview());
             double const deriv_1_2_y
-                    = spline_evaluator.deriv_1_and_2(coord, y_spline_representation);
+                    = spline_evaluator.deriv_1_and_2(coord, y_spline_representation.span_cview());
 
             // Matrix from pseudo-Cart domain to physical domain by logical domain
             double const j11 = deriv_1_x * std::cos(th) - deriv_1_2_x * std::sin(th);
@@ -473,21 +478,23 @@ public:
      * 			The spline builder on the B-splines on which we want to decompose the mapping.
      * @param[in] evaluator
      * 			The spline evaluator with which we want to evaluate the mapping.
+     * @tparam Mapping
+     * 			The analytical mapping described by this discrete mapping.
      *
      * @return A DiscreteToCartesian version of the analytical mapping.
      *
-     * @see SplineBuilder2D
-     * @see SplineEvaluator2D
+     * @see ddc::SplineBuilder2D
+     * @see ddc::SplineEvaluator2D
      */
-    template <class Mapping, class Builder2D, class Evaluator2D>
+    template <class Mapping>
     static DiscreteToCartesian analytical_to_discrete(
             Mapping const& analytical_mapping,
-            Builder2D const& builder,
-            Evaluator2D const& evaluator)
+            SplineBuilder const& builder,
+            SplineEvaluator const& evaluator)
     {
-        using Domain = typename Builder2D::interpolation_domain_type;
-        ddc::Chunk<double, spline_domain> curvilinear_to_x_spline(builder.spline_domain());
-        ddc::Chunk<double, spline_domain> curvilinear_to_y_spline(builder.spline_domain());
+        using Domain = typename SplineBuilder::interpolation_domain_type;
+        SplineType curvilinear_to_x_spline(builder.spline_domain());
+        SplineType curvilinear_to_y_spline(builder.spline_domain());
         ddc::Chunk<double, Domain> curvilinear_to_x_vals(builder.interpolation_domain());
         ddc::Chunk<double, Domain> curvilinear_to_y_vals(builder.interpolation_domain());
         ddc::for_each(
@@ -499,8 +506,8 @@ public:
                     curvilinear_to_x_vals(el) = ddc::select<DimX>(cart_coord);
                     curvilinear_to_y_vals(el) = ddc::select<DimY>(cart_coord);
                 });
-        builder(curvilinear_to_x_spline, curvilinear_to_x_vals);
-        builder(curvilinear_to_y_spline, curvilinear_to_y_vals);
+        builder(curvilinear_to_x_spline.span_view(), curvilinear_to_x_vals.span_cview());
+        builder(curvilinear_to_y_spline.span_view(), curvilinear_to_y_vals.span_cview());
         return DiscreteToCartesian(
                 std::move(curvilinear_to_x_spline),
                 std::move(curvilinear_to_y_spline),

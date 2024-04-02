@@ -3,13 +3,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/constant_extrapolation_boundary_value.hpp>
 #include <sll/math_tools.hpp>
-#include <sll/null_boundary_value.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator_2d.hpp>
 
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
@@ -27,12 +23,6 @@
 #include <stdio.h>
 // ...
 
-
-#include <sll/bsplines_non_uniform.hpp>
-#include <sll/bsplines_uniform.hpp>
-#include <sll/greville_interpolation_points.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
 
 #include <directional_tag.hpp>
 #include <vector_field.hpp>
@@ -182,7 +172,9 @@ FieldRP<CoordRP> compute_exact_feet_rp(
         AdvectionField const& advection_field,
         double const time)
 {
-    static_assert(!std::is_same_v<Mapping, DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>>);
+    static_assert(!std::is_same_v<
+                  Mapping,
+                  DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>>);
 
     FieldRP<CoordRP> feet_coords_rp(rp_dom);
     CoordXY const coord_xy_center = CoordXY(mapping(CoordRP(0, 0)));
@@ -341,9 +333,9 @@ void simulate(
         TimeStepper const& time_stepper,
         AdvectionDomain& advection_domain,
         Simulation& simulation,
-        PreallocatableSplineInterpolatorRP const& function_interpolator,
+        PreallocatableSplineInterpolatorRP<ddc::NullExtrapolationRule> const& function_interpolator,
         SplineRPBuilder const& advection_builder,
-        SplineRPEvaluator& advection_evaluator,
+        SplineRPEvaluatorConstBound& advection_evaluator,
         double const final_time,
         double const dt,
         bool if_save_curves,
@@ -553,9 +545,9 @@ void simulate_the_3_simulations(
         IDomainRP const& grid,
         TimeStepper& time_stepper,
         AdvectionDomain& advection_domain,
-        PreallocatableSplineInterpolatorRP const& function_interpolator,
+        PreallocatableSplineInterpolatorRP<ddc::NullExtrapolationRule> const& function_interpolator,
         SplineRPBuilder const& advection_builder,
-        SplineRPEvaluator& advection_evaluator,
+        SplineRPEvaluatorConstBound& advection_evaluator,
         double const final_time,
         double const dt,
         bool const& save_curves,

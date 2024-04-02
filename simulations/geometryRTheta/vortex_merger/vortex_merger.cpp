@@ -8,13 +8,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/constant_extrapolation_boundary_value.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_to_cartesian.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator_2d.hpp>
 
 #include <paraconf.h>
 #include <pdi.h>
@@ -48,7 +44,8 @@
 
 namespace {
 using PoissonSolver = PolarSplineFEMPoissonSolver;
-using DiscreteMapping = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>;
+using DiscreteMapping
+        = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>;
 using CircularMapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
 
 } // end namespace
@@ -141,16 +138,14 @@ int main(int argc, char** argv)
     SplineRPBuilder const builder(grid);
 
     // --- Define the mapping. ------------------------------------------------------------------------
-    ConstantExtrapolationBoundaryValue2D<BSplinesR, BSplinesP, RDimR> boundary_condition_r_left(
-            r_min);
-    ConstantExtrapolationBoundaryValue2D<BSplinesR, BSplinesP, RDimR> boundary_condition_r_right(
-            r_max);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(r_min);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(r_max);
 
-    SplineRPEvaluator spline_evaluator_extrapol(
+    SplineRPEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+            ddc::PeriodicExtrapolationRule<RDimP>(),
+            ddc::PeriodicExtrapolationRule<RDimP>());
 
     const CircularMapping mapping;
     DiscreteMapping const discrete_mapping
@@ -166,11 +161,13 @@ int main(int argc, char** argv)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    SplineRPEvaluator spline_evaluator(
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
+    SplineRPEvaluatorNullBound spline_evaluator(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            p_extrapolation_rule,
+            p_extrapolation_rule);
 
     PreallocatableSplineInterpolatorRP interpolator(builder, spline_evaluator);
 
@@ -195,8 +192,8 @@ int main(int argc, char** argv)
     Spline2D coeff_alpha_spline(dom_bsplinesRP);
     Spline2D coeff_beta_spline(dom_bsplinesRP);
 
-    builder(coeff_alpha_spline, coeff_alpha);
-    builder(coeff_beta_spline, coeff_beta);
+    builder(coeff_alpha_spline.span_view(), coeff_alpha.span_cview());
+    builder(coeff_beta_spline.span_view(), coeff_beta.span_cview());
 
     PoissonSolver poisson_solver(coeff_alpha_spline, coeff_beta_spline, discrete_mapping);
 
@@ -279,8 +276,8 @@ int main(int argc, char** argv)
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
     DFieldRP phi_eq(grid);
     Spline2D rho_coef_eq(dom_bsplinesRP);
-    builder(rho_coef_eq, rho_eq);
-    PoissonRHSFunction poisson_rhs_eq(rho_coef_eq, spline_evaluator);
+    builder(rho_coef_eq.span_view(), rho_eq.span_cview());
+    PoissonRHSFunction poisson_rhs_eq(rho_coef_eq.span_view(), spline_evaluator);
     poisson_solver(poisson_rhs_eq, coords.span_cview(), phi_eq.span_view());
 
 

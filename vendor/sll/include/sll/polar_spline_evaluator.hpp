@@ -1,13 +1,14 @@
 #pragma once
 
 #include <sll/polar_spline.hpp>
+#include <sll/view.hpp>
 
 /**
  * @brief Define an evaluator on polar B-splines.
  *
  * @see PolarBSplines
  */
-template <class PolarBSplinesType>
+template <class PolarBSplinesType, class OuterExtrapolationRule>
 class PolarSplineEvaluator
 {
 private:
@@ -72,7 +73,7 @@ public:
     static int constexpr continuity = PolarBSplinesType::continuity;
 
 private:
-    PolarSplineBoundaryValue2D<PolarBSplinesType> const& m_outer_bc;
+    OuterExtrapolationRule m_outer_bc;
 
 public:
     PolarSplineEvaluator() = delete;
@@ -88,10 +89,7 @@ public:
      *      A class containing an operator which can be called to provide a boundary value to
      *      evaluate a point lying outside the domain.
      */
-    explicit PolarSplineEvaluator(PolarSplineBoundaryValue2D<PolarBSplinesType> const& outer_bc)
-        : m_outer_bc(outer_bc)
-    {
-    }
+    explicit PolarSplineEvaluator(OuterExtrapolationRule const& outer_bc) : m_outer_bc(outer_bc) {}
 
     /**
      * @brief Instantiate a PolarSplineEvaluator from another.
@@ -339,7 +337,7 @@ private:
         const double coord_eval1 = ddc::get<DimR>(coord_eval);
         double coord_eval2 = ddc::get<DimP>(coord_eval);
         if (coord_eval1 > ddc::discrete_space<BSplinesR>().rmax()) {
-            return m_outer_bc(coord_eval1, coord_eval2, spline_coef);
+            return m_outer_bc(coord_eval, spline_coef);
         }
         if (coord_eval2 < ddc::discrete_space<BSplinesP>().rmin()
             || coord_eval2 > ddc::discrete_space<BSplinesP>().rmax()) {
@@ -348,10 +346,7 @@ private:
                                    / ddc::discrete_space<BSplinesP>().length())
                            * ddc::discrete_space<BSplinesP>().length();
         }
-        return eval_no_bc(
-                ddc::Coordinate<DimR, DimP>(coord_eval1, coord_eval2),
-                spline_coef,
-                eval_type());
+        return eval_no_bc(coord_eval, spline_coef, eval_type());
     }
 
     template <class EvalType>

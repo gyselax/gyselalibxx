@@ -5,14 +5,9 @@
 #include <ddc/ddc.hpp>
 
 #include <sll/bernstein.hpp>
-#include <sll/bspline.hpp>
 #include <sll/mapping/barycentric_coordinates.hpp>
 #include <sll/mapping/discrete_mapping_to_cartesian.hpp>
-#include <sll/null_boundary_value.hpp>
 #include <sll/polar_spline.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator_2d.hpp>
 #include <sll/view.hpp>
 
 /**
@@ -230,12 +225,16 @@ public:
          * @param spline_builder_r          A class which can be used to construct the coefficients of a radial bspline.
          * @param spline_builder_p          A class which can be used to construct the coefficients of a poloidal bspline.
          */
-        template <class DimX, class DimY, class SplineBuilderR, class SplineBuilderP>
-        Impl(const DiscreteToCartesian<DimX, DimY, SplineBuilder2D<SplineBuilderR, SplineBuilderP>>&
-                     curvilinear_to_cartesian,
+        template <class DiscreteMapping, class SplineBuilderR, class SplineBuilderP>
+        Impl(const DiscreteMapping& curvilinear_to_cartesian,
              SplineBuilderR const& spline_builder_r,
              SplineBuilderP const& spline_builder_p)
         {
+            using DimX = typename DiscreteMapping::cartesian_tag_x;
+            using DimY = typename DiscreteMapping::cartesian_tag_y;
+            using mapping_tensor_product_discrete_element_type = ddc::DiscreteElement<
+                    typename DiscreteMapping::BSplineR,
+                    typename DiscreteMapping::BSplineP>;
             if constexpr (C > -1) {
                 const ddc::Coordinate<DimX, DimY> pole
                         = curvilinear_to_cartesian(ddc::Coordinate<DimR, DimP>(0.0, 0.0));
@@ -245,7 +244,7 @@ public:
                 for (std::size_t i(0); i < ddc::discrete_space<BSplinesP>().size(); ++i) {
                     const ddc::Coordinate<DimX, DimY> point
                             = curvilinear_to_cartesian.control_point(
-                                    tensor_product_discrete_element_type(1, i));
+                                    mapping_tensor_product_discrete_element_type(1, i));
 
                     const double c_x = ddc::get<DimX>(point);
                     const double c_y = ddc::get<DimY>(point);
@@ -313,7 +312,7 @@ public:
                          spline_builder_p.spline_domain().take_first(np_in_singular)) {
                         const ddc::Coordinate<DimX, DimY> point
                                 = curvilinear_to_cartesian.control_point(
-                                        tensor_product_discrete_element_type(ir, ip));
+                                        mapping_tensor_product_discrete_element_type(ir, ip));
                         ddc::Chunk<double, ddc::DiscreteDomain<BernsteinBasis>> bernstein_vals(
                                 bernstein_domain);
                         ddc::discrete_space<BernsteinBasis>().eval_basis(bernstein_vals, point);
@@ -601,10 +600,8 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
     std::size_t constexpr nr = BSplinesR::degree() + 1;
     std::size_t constexpr np = BSplinesP::degree() + 1;
 
-    std::array<double, nr> vals_r_data;
-    std::array<double, np> vals_p_data;
-    DSpan1D vals_r(vals_r_data.data(), nr);
-    DSpan1D vals_p(vals_p_data.data(), np);
+    std::array<double, nr> vals_r;
+    std::array<double, np> vals_p;
 
     if constexpr (std::is_same_v<EvalTypeR, eval_type>) {
         jmin_r = ddc::discrete_space<BSplinesR>().eval_basis(vals_r, ddc::select<DimR>(coord_eval));
@@ -626,7 +623,7 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
             for (std::size_t i(0); i < nr_done; ++i) {
                 for (std::size_t j(0); j < np; ++j) {
                     singular_values(k.uid()) += m_singular_basis_elements(k, jmin_r + i, jmin_p + j)
-                                                * vals_r(i) * vals_p(j);
+                                                * vals_r[i] * vals_p[j];
                 }
             }
         }
@@ -638,7 +635,7 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
 
     for (std::size_t i(0); i < nr - nr_done; ++i) {
         for (std::size_t j(0); j < np; ++j) {
-            values(i, j) = vals_r(i + nr_done) * vals_p(j);
+            values(i, j) = vals_r[i + nr_done] * vals_p[j];
         }
     }
     for (std::size_t i(nr - nr_done); i < nr; ++i) {
@@ -664,12 +661,14 @@ void PolarBSplines<BSplinesR, BSplinesP, C>::Impl<MemorySpace>::integrals(
     assert(int_vals.spline_coef.domain().template extent<BSplinesP>() == p_bspl_space.nbasis()
            || int_vals.spline_coef.domain().template extent<BSplinesP>() == p_bspl_space.size());
 
-    ddc::Chunk<double, typename BSplinesR::discrete_domain_type> r_integrals(
+    ddc::Chunk<double, typename BSplinesR::discrete_domain_type> r_integrals_alloc(
             r_bspl_space.full_domain().take_first(
                     typename BSplinesR::discrete_vector_type {r_bspl_space.nbasis()}));
-    ddc::Chunk<double, typename BSplinesP::discrete_domain_type> p_integrals(
+    ddc::Chunk<double, typename BSplinesP::discrete_domain_type> p_integrals_alloc(
             p_bspl_space.full_domain().take_first(
                     typename BSplinesP::discrete_vector_type {p_bspl_space.size()}));
+    ddc::ChunkSpan r_integrals = r_integrals_alloc.span_view();
+    ddc::ChunkSpan p_integrals = p_integrals_alloc.span_view();
 
     r_bspl_space.integrals(r_integrals);
     p_bspl_space.integrals(p_integrals);

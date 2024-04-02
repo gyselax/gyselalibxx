@@ -60,7 +60,7 @@ template <class FootFinder, class Mapping>
 class BslAdvectionRP : public IAdvectionRP
 {
 private:
-    PreallocatableSplineInterpolatorRP const& m_interpolator;
+    PreallocatableSplineInterpolatorRP<ddc::NullExtrapolationRule> const& m_interpolator;
 
     FootFinder const& m_find_feet;
 
@@ -84,7 +84,8 @@ public:
      *      A child class of IFootFinder.
      */
     BslAdvectionRP(
-            PreallocatableSplineInterpolatorRP const& function_interpolator,
+            PreallocatableSplineInterpolatorRP<ddc::NullExtrapolationRule> const&
+                    function_interpolator,
             FootFinder const& foot_finder,
             Mapping const& mapping)
         : m_interpolator(function_interpolator)

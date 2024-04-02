@@ -24,7 +24,7 @@ target_link_libraries("rhs_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         DDC::PDI_Wrapper
-        sll::splines
+        sll::SLL
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::quadrature
         gslx::speciesinfo

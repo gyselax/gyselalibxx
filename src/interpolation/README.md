@@ -17,7 +17,7 @@ Interpolation by a spline interpolating function is implemented in the class Spl
 
 In order for the interpolation to function correctly the values $`f_j=f(x_j)`$ provided must be located at the points $`x_j`$ identified as the spline interpolation points.
 
-The spline interpolation method is based entirely on the SplineBuilder and SplineEvaluator classes which are found in [sll](../../vendor/sll).
+The spline interpolation method is based entirely on the SplineBuilder and SplineEvaluator classes which are found in DDC.
 
 ## Memory concerns
 

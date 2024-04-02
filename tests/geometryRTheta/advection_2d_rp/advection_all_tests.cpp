@@ -12,23 +12,14 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/bsplines_non_uniform.hpp>
-#include <sll/bsplines_uniform.hpp>
-#include <sll/constant_extrapolation_boundary_value.hpp>
-#include <sll/greville_interpolation_points.hpp>
 #include <sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
-#include <sll/null_boundary_value.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator.hpp>
-#include <sll/spline_evaluator_2d.hpp>
 
 #include <crank_nicolson.hpp>
 #include <directional_tag.hpp>
@@ -61,7 +52,8 @@ using AnalyticalInvertibleMapping
         = AnalyticalInvertibleCurvilinear2DToCartesian<RDimX, RDimY, RDimR, RDimP>;
 using CircularMapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
 using CzarnyMapping = CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>;
-using DiscreteMapping = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>;
+using DiscreteMapping
+        = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>;
 
 
 } // end namespace
@@ -169,9 +161,9 @@ public:
 struct GeneralParameters
 {
     IDomainRP grid;
-    PreallocatableSplineInterpolatorRP const& interpolator;
+    PreallocatableSplineInterpolatorRP<ddc::NullExtrapolationRule> const& interpolator;
     SplineRPBuilder const& advection_builder;
-    SplineRPEvaluator& advection_evaluator;
+    SplineRPEvaluatorConstBound& advection_evaluator;
     double final_time;
     bool if_save_curves;
     bool if_save_feet;
@@ -302,27 +294,27 @@ int main(int argc, char** argv)
     SplineRPBuilder const builder(grid);
 
     // --- Evaluator for the test function:
-    SplineRPEvaluator spline_evaluator(
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
+    SplineRPEvaluatorNullBound spline_evaluator(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            p_extrapolation_rule,
+            p_extrapolation_rule);
 
     PreallocatableSplineInterpolatorRP interpolator(builder, spline_evaluator);
 
 
     // --- Evaluator for the test advection field:
-    ConstantExtrapolationBoundaryValue2D<BSplinesR, BSplinesP, RDimR> boundary_condition_r_left(
-            r_min);
-    ConstantExtrapolationBoundaryValue2D<BSplinesR, BSplinesP, RDimR> boundary_condition_r_right(
-            r_max);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(r_min);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(r_max);
 
 
-    SplineRPEvaluator spline_evaluator_extrapol(
+    SplineRPEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+            ddc::PeriodicExtrapolationRule<RDimP>(),
+            ddc::PeriodicExtrapolationRule<RDimP>());
 
 
 

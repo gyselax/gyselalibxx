@@ -13,7 +13,7 @@ target_link_libraries(vortex_merger
 	        
 	    Eigen3::Eigen
 	        
-	    sll::splines
+	    sll::SLL
 	    gslx::paraconfpp
 	       
 	    gslx::poisson_RTheta

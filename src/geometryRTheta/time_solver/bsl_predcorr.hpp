@@ -12,8 +12,6 @@
 #include <geometry.hpp>
 #include <utils_tools.hpp>
 
-#include "sll/spline_evaluator_2d.hpp"
-
 #include "advection_domain.hpp"
 #include "advection_field_rp.hpp"
 #include "bsl_advection_rp.hpp"
@@ -67,7 +65,7 @@ private:
     PolarSplineFEMPoissonSolver const& m_poisson_solver;
 
     SplineRPBuilder const& m_builder;
-    SplineRPEvaluator const& m_spline_evaluator;
+    SplineRPEvaluatorNullBound const& m_spline_evaluator;
 
 
 public:
@@ -92,7 +90,7 @@ public:
             Mapping const& mapping,
             BslAdvectionRP<FootFinder, Mapping> const& advection_solver,
             SplineRPBuilder const& builder,
-            SplineRPEvaluator const& rhs_evaluator,
+            SplineRPEvaluatorNullBound const& rhs_evaluator,
             PolarSplineFEMPoissonSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
@@ -126,15 +124,17 @@ public:
         SplinePolar electrostatic_potential_coef(
                 PolarBSplinesRP::singular_domain(),
                 BSDomainRP(radial_bsplines, polar_domain));
-        PolarSplineEvaluator<PolarBSplinesRP> polar_spline_evaluator(
-                g_polar_null_boundary_2d<PolarBSplinesRP>);
+        ddc::NullExtrapolationRule extrapolation_rule;
+        PolarSplineEvaluator<PolarBSplinesRP, ddc::NullExtrapolationRule> polar_spline_evaluator(
+                extrapolation_rule);
 
 
         DFieldRP electrical_potential0(grid);
 
         Spline2D allfdistribu_coef(m_builder.spline_domain());
-        m_builder(allfdistribu_coef, allfdistribu);
-        PoissonRHSFunction const charge_density_coord(allfdistribu_coef, m_spline_evaluator);
+        m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
+        PoissonRHSFunction const
+                charge_density_coord(allfdistribu_coef.span_cview(), m_spline_evaluator);
         m_poisson_solver(charge_density_coord, coords, electrical_potential0);
 
         ddc::PdiEvent("iteration")
@@ -148,9 +148,10 @@ public:
                 = [&](VectorDSpanRP<RDimX, RDimY> advection_field, DViewRP allfdistribu) {
                       // --- compute electrostatic potential:
                       Spline2D allfdistribu_coef(m_builder.spline_domain());
-                      m_builder(allfdistribu_coef, allfdistribu);
-                      PoissonRHSFunction const
-                              charge_density_coord(allfdistribu_coef, m_spline_evaluator);
+                      m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
+                      PoissonRHSFunction const charge_density_coord(
+                              allfdistribu_coef.span_cview(),
+                              m_spline_evaluator);
                       m_poisson_solver(charge_density_coord, electrostatic_potential_coef);
 
                       // --- compute advection field:
@@ -175,8 +176,9 @@ public:
 
             DFieldRP electrical_potential(grid);
             Spline2D allfdistribu_coef(m_builder.spline_domain());
-            m_builder(allfdistribu_coef, allfdistribu);
-            PoissonRHSFunction const charge_density_coord(allfdistribu_coef, m_spline_evaluator);
+            m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
+            PoissonRHSFunction const
+                    charge_density_coord(allfdistribu_coef.span_cview(), m_spline_evaluator);
             m_poisson_solver(charge_density_coord, coords, electrical_potential);
 
             ddc::PdiEvent("iteration")

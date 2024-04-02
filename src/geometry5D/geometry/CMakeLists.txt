@@ -7,7 +7,7 @@ target_include_directories("geometry5D"
 )
 target_link_libraries("geometry5D" INTERFACE
     DDC::DDC
-    sll::splines
+    sll::SLL
     gslx::speciesinfo
     gslx::utils
 )

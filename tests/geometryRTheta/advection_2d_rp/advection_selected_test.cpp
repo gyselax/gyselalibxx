@@ -4,13 +4,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/constant_extrapolation_boundary_value.hpp>
 #include <sll/math_tools.hpp>
-#include <sll/null_boundary_value.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator_2d.hpp>
 
 #include "advection_domain.hpp"
 #include "bsl_advection_rp.hpp"
@@ -28,15 +24,10 @@
 #include <stdio.h>
 // ...
 
-#include <sll/bsplines_non_uniform.hpp>
-#include <sll/bsplines_uniform.hpp>
-#include <sll/greville_interpolation_points.hpp>
 #include <sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_to_cartesian.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
 
 #include <crank_nicolson.hpp>
 #include <ddc_helper.hpp>
@@ -73,9 +64,9 @@ using RDimY_adv = typename AdvectionPseudoCartesianDomain<
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
 using RDimX_adv = typename AdvectionPseudoCartesianDomain<
-        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>>::RDimX_adv;
+        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>>::RDimX_adv;
 using RDimY_adv = typename AdvectionPseudoCartesianDomain<
-        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>>::RDimY_adv;
+        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>>::RDimY_adv;
 #endif
 
 } //end namespace
@@ -174,26 +165,26 @@ int main(int argc, char** argv)
     SplineRPBuilder const builder(grid);
 
     // --- Evaluator for the test function:
-    SplineRPEvaluator spline_evaluator(
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
+    SplineRPEvaluatorNullBound spline_evaluator(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            p_extrapolation_rule,
+            p_extrapolation_rule);
 
     PreallocatableSplineInterpolatorRP interpolator(builder, spline_evaluator);
 
 
     // --- Evaluator for the test advection field:
-    ConstantExtrapolationBoundaryValue2D<BSplinesR, BSplinesP, RDimR> boundary_condition_r_left(
-            r_min);
-    ConstantExtrapolationBoundaryValue2D<BSplinesR, BSplinesP, RDimR> boundary_condition_r_right(
-            r_max);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(r_min);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(r_max);
 
-    SplineRPEvaluator spline_evaluator_extrapol(
+    SplineRPEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+            ddc::PeriodicExtrapolationRule<RDimP>(),
+            ddc::PeriodicExtrapolationRule<RDimP>());
 
 
     std::string key;
@@ -229,8 +220,8 @@ int main(int argc, char** argv)
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping(czarny_e, czarny_epsilon);
-    DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder> mapping
-            = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>::
+    DiscreteToCartesian mapping
+            = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>::
                     analytical_to_discrete(analytical_mapping, builder, spline_evaluator_extrapol);
     AdvectionPseudoCartesianDomain advection_domain(mapping);
     std::string const mapping_name = "DISCRETE";

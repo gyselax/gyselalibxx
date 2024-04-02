@@ -10,7 +10,7 @@ target_include_directories("geometry_RTheta"
 )
 target_link_libraries("geometry_RTheta" INTERFACE
     DDC::DDC
-    sll::splines
+    sll::SLL
     gslx::speciesinfo
     gslx::utils
 )

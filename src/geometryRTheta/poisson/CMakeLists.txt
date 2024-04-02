@@ -8,7 +8,7 @@ target_include_directories(poisson_RTheta
 )
 target_link_libraries(poisson_RTheta INTERFACE
         DDC::DDC
-        sll::splines
+        sll::SLL
         gslx::geometry_RTheta
         gslx::speciesinfo
         gslx::utils

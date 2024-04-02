@@ -9,6 +9,6 @@ target_include_directories(speciesinfo
 )
 target_link_libraries(speciesinfo INTERFACE
     DDC::DDC
-    sll::splines
+    sll::SLL
 )
 add_library(gslx::speciesinfo ALIAS speciesinfo)

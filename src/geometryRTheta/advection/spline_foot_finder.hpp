@@ -33,7 +33,7 @@ private:
     AdvectionDomain const& m_advection_domain;
 
     SplineRPBuilder const& m_builder_advection_field;
-    SplineRPEvaluator const& m_evaluator_advection_field;
+    SplineRPEvaluatorConstBound const& m_evaluator_advection_field;
 
 
 public:
@@ -64,7 +64,7 @@ public:
             TimeStepper const& time_stepper,
             AdvectionDomain const& advection_domain,
             SplineRPBuilder const& builder_advection_field,
-            SplineRPEvaluator const& evaluator_advection_field)
+            SplineRPEvaluatorConstBound const& evaluator_advection_field)
         : m_time_stepper(time_stepper)
         , m_advection_domain(advection_domain)
         , m_builder_advection_field(builder_advection_field)
@@ -105,10 +105,10 @@ public:
         // Get the coefficients of the advection field in the advection domain.
         m_builder_advection_field(
                 ddcHelper::get<RDimX_adv>(advection_field_in_adv_dom_coefs),
-                ddcHelper::get<RDimX_adv>(advection_field_in_adv_dom));
+                ddcHelper::get<RDimX_adv>(advection_field_in_adv_dom.span_cview()));
         m_builder_advection_field(
                 ddcHelper::get<RDimY_adv>(advection_field_in_adv_dom_coefs),
-                ddcHelper::get<RDimY_adv>(advection_field_in_adv_dom));
+                ddcHelper::get<RDimY_adv>(advection_field_in_adv_dom.span_cview()));
 
 
         // The function describing how the derivative of the evolve function is calculated.

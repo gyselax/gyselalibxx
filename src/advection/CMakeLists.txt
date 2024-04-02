@@ -14,7 +14,7 @@ target_include_directories("advection"
 target_link_libraries("advection"
     INTERFACE
         DDC::DDC
-        sll::splines
+        sll::SLL
         gslx::interpolation
         gslx::speciesinfo
         gslx::utils

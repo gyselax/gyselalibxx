@@ -8,7 +8,7 @@ target_include_directories("advection_field_RTheta"
 )
 target_link_libraries("advection_field_RTheta" INTERFACE
     DDC::DDC
-    sll::splines
+    sll::SLL
     gslx::speciesinfo
     gslx::utils
     gslx::poisson_RTheta

@@ -6,9 +6,6 @@
 
 #include <geometry.hpp>
 
-#include "sll/spline_builder_2d.hpp"
-#include "sll/spline_evaluator_2d.hpp"
-
 #include "poisson_rhs_function.hpp"
 #include "polarpoissonsolver.hpp"
 #include "utils_tools.hpp"
@@ -28,7 +25,7 @@ private:
     Mapping const& m_mapping;
     IDomainRP const& m_grid;
     SplineRPBuilder const& m_builder;
-    SplineRPEvaluator const& m_evaluator;
+    SplineRPEvaluatorNullBound const& m_evaluator;
     PolarSplineFEMPoissonSolver const& m_poisson_solver;
 
 public:
@@ -53,7 +50,7 @@ public:
             Mapping const& mapping,
             IDomainRP const& grid,
             SplineRPBuilder const& builder,
-            SplineRPEvaluator const& evaluator,
+            SplineRPEvaluatorNullBound const& evaluator,
             PolarSplineFEMPoissonSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_grid(grid)
@@ -128,7 +125,7 @@ public:
 
 
             // STEP 2: compute phi_star^i with Poisson solver
-            m_builder(rho_coef, rho_eq);
+            m_builder(rho_coef.span_view(), rho_eq.span_cview());
             PoissonRHSFunction poisson_rhs(rho_coef, m_evaluator);
             m_poisson_solver(poisson_rhs, coords.span_cview(), phi_star.span_view());
 

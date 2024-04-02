@@ -12,7 +12,7 @@ target_compile_features(2d_spline_interpolator_tests PUBLIC cxx_std_17)
 target_link_libraries(2d_spline_interpolator_tests
     PUBLIC
         DDC::DDC
-        sll::splines
+        sll::SLL
         gslx::geometry_RTheta
         gslx::interpolation_2D_rp
         gslx::paraconfpp

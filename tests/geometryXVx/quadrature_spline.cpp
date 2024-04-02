@@ -1,11 +1,5 @@
 // SPDX-License-Identifier: MIT
 
-#include <sll/bsplines_uniform.hpp>
-#include <sll/greville_interpolation_points.hpp>
-#include <sll/spline_boundary_conditions.hpp>
-#include <sll/spline_builder.hpp>
-#include <sll/spline_evaluator.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -22,29 +16,37 @@ TEST(SplineQuadratureTest, ExactForConstantFunc)
     IVectX const x_size(10);
 
     // Creating mesh & supports
-    using sllBSplinesX = UniformBSplines<RDimX, 3>;
-    auto constexpr sllSplineXBoundary = RDimX::PERIODIC ? BoundCond::PERIODIC : BoundCond::GREVILLE;
-    using sllGrevillePointsX
-            = GrevilleInterpolationPoints<sllBSplinesX, sllSplineXBoundary, sllSplineXBoundary>;
-    using sllIDimX = typename sllGrevillePointsX::interpolation_mesh_type;
-    using sllSplineXBuilder
-            = SplineBuilder<sllBSplinesX, sllIDimX, sllSplineXBoundary, sllSplineXBoundary>;
-    using sllIDomainX = ddc::DiscreteDomain<sllIDimX>;
-    using sllDFieldX = device_t<ddc::Chunk<double, sllIDomainX>>;
+    using BSplinesX = ddc::UniformBSplines<RDimX, 3>;
+    auto constexpr SplineXBoundary
+            = RDimX::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
+    using GrevillePointsX
+            = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+    using IDimX = typename GrevillePointsX::interpolation_mesh_type;
+    using SplineXBuilder = ddc::SplineBuilder<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
+            BSplinesX,
+            IDimX,
+            SplineXBoundary,
+            SplineXBoundary,
+            ddc::SplineSolver::GINKGO,
+            IDimX>;
+    using IDomainX = ddc::DiscreteDomain<IDimX>;
+    using DFieldX = device_t<ddc::Chunk<double, IDomainX>>;
 
-    ddc::init_discrete_space<sllBSplinesX>(x_min, x_max, x_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    ddc::init_discrete_space<sllIDimX>(sllGrevillePointsX::get_sampling());
-    sllIDomainX interpolation_domain_x(sllGrevillePointsX::get_domain());
+    ddc::init_discrete_space<IDimX>(GrevillePointsX::get_sampling());
+    IDomainX interpolation_domain_x(GrevillePointsX::get_domain());
 
-    sllSplineXBuilder const builder_x(interpolation_domain_x);
+    SplineXBuilder const builder_x(interpolation_domain_x);
 
-    sllIDomainX const gridx = builder_x.interpolation_domain();
+    IDomainX const gridx = builder_x.interpolation_domain();
 
-    host_t<sllDFieldX> const quadrature_coeffs = spline_quadrature_coefficients(gridx, builder_x);
+    host_t<DFieldX> const quadrature_coeffs = spline_quadrature_coefficients(gridx, builder_x);
     Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    host_t<sllDFieldX> values(gridx);
+    host_t<DFieldX> values(gridx);
 
     ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);
@@ -63,12 +65,20 @@ template <std::size_t N>
 double compute_error(int n_elems)
 {
     using DimY = Y<N>;
-    using BSplinesY = UniformBSplines<DimY, 3>;
+    using BSplinesY = ddc::UniformBSplines<DimY, 3>;
+    auto constexpr SplineYBoundary = ddc::BoundCond::GREVILLE;
     using GrevillePointsY
-            = GrevilleInterpolationPoints<BSplinesY, BoundCond::GREVILLE, BoundCond::GREVILLE>;
+            = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
     using IDimY = typename GrevillePointsY::interpolation_mesh_type;
-    using SplineYBuilder
-            = SplineBuilder<BSplinesY, IDimY, BoundCond::GREVILLE, BoundCond::GREVILLE>;
+    using SplineYBuilder = ddc::SplineBuilder<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
+            BSplinesY,
+            IDimY,
+            SplineYBoundary,
+            SplineYBoundary,
+            ddc::SplineSolver::GINKGO,
+            IDimY>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
 

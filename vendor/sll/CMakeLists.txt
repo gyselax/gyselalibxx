@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.15)
-project(splines CXX)
+project(SLL CXX)
 
 # Our project
 option(SLL_BUILD_TESTING "Build sll tests" ON)
 
 ## The library itself
-add_library(splines STATIC
+add_library(SLL STATIC
     src/matrix.cpp
     src/matrix_dense.cpp
     src/matrix_banded.cpp
@@ -15,34 +15,22 @@ add_library(splines STATIC
     src/matrix_pds_tridiag.cpp
     src/gauss_legendre_integration.cpp
 )
-if(GYSELALIBXX_ENABLE_DEPRECATED)
-    target_sources(splines
-	    PRIVATE
-	      src/deprecated/bsplines.cpp
-        src/deprecated/bsplines_uniform.cpp
-        src/deprecated/bsplines_non_uniform.cpp
-        src/deprecated/spline_1d.cpp
-        src/deprecated/spline_2d.cpp
-        src/deprecated/spline_builder_1d.cpp
-        src/deprecated/spline_builder_2d.cpp
-    )
-endif()
-target_compile_features(splines PUBLIC cxx_std_17)
-target_include_directories(splines
+target_compile_features(SLL PUBLIC cxx_std_17)
+target_include_directories(SLL
     PUBLIC
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
 )
-target_link_libraries(splines
+target_link_libraries(SLL
     PUBLIC
         DDC::DDC
 				std::mdspan
 )
 if(CMAKE_VERSION GREATER_EQUAL 3.18)
-    target_link_libraries(splines PRIVATE LAPACK::LAPACK)
+    target_link_libraries(SLL PRIVATE LAPACK::LAPACK)
 else()
-    target_link_libraries(splines PRIVATE ${LAPACK_LIBRARIES})
+    target_link_libraries(SLL PRIVATE ${LAPACK_LIBRARIES})
 endif()
-add_library(sll::splines ALIAS splines)
+add_library(sll::SLL ALIAS SLL)
 
 ## if tests are enabled, build the tests in `tests/`
 if("${BUILD_TESTING}" AND "${SLL_BUILD_TESTING}")

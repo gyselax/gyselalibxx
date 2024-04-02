@@ -3,12 +3,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/bsplines_non_uniform.hpp>
-#include <sll/greville_interpolation_points.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator_2d.hpp>
-
 #include "sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp"
 #include "sll/mapping/circular_to_cartesian.hpp"
 #include "sll/mapping/curvilinear2d_to_cartesian.hpp"
@@ -42,20 +36,45 @@ using CoordRP = ddc::Coordinate<DimR, DimP>;
 
 int constexpr BSDegree = 3;
 
-using BSplinesR = NonUniformBSplines<DimR, BSDegree>;
-using BSplinesP = NonUniformBSplines<DimP, BSDegree>;
+using BSplinesR = ddc::NonUniformBSplines<DimR, BSDegree>;
+using BSplinesP = ddc::NonUniformBSplines<DimP, BSDegree>;
 
-using InterpPointsR
-        = GrevilleInterpolationPoints<BSplinesR, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-using InterpPointsP
-        = GrevilleInterpolationPoints<BSplinesP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+using InterpPointsR = ddc::
+        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
+using InterpPointsP = ddc::
+        GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
 using IDimR = typename InterpPointsR::interpolation_mesh_type;
 using IDimP = typename InterpPointsP::interpolation_mesh_type;
 
-using SplineRBuilder = SplineBuilder<BSplinesR, IDimR, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-using SplinePBuilder = SplineBuilder<BSplinesP, IDimP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
-using SplineRPBuilder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
+using SplineRPBuilder = ddc::SplineBuilder2D<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        BSplinesR,
+        BSplinesP,
+        IDimR,
+        IDimP,
+        ddc::BoundCond::GREVILLE,
+        ddc::BoundCond::GREVILLE,
+        ddc::BoundCond::PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        ddc::SplineSolver::GINKGO,
+        IDimR,
+        IDimP>;
+
+using SplineRPEvaluator = ddc::SplineEvaluator2D<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        BSplinesR,
+        BSplinesP,
+        IDimR,
+        IDimP,
+        ddc::NullExtrapolationRule,
+        ddc::NullExtrapolationRule,
+        ddc::PeriodicExtrapolationRule<DimP>,
+        ddc::PeriodicExtrapolationRule<DimP>,
+        IDimR,
+        IDimP>;
 
 using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
 using BSDomainP = ddc::DiscreteDomain<BSplinesP>;
@@ -283,13 +302,15 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
     IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
 
     SplineRPBuilder builder(grid);
-    SplineEvaluator2D<BSplinesR, BSplinesP> evaluator(
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
-    DiscreteToCartesian<DimX, DimY, SplineRPBuilder> mapping
-            = DiscreteToCartesian<DimX, DimY, SplineRPBuilder>::
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<DimP> p_extrapolation_rule;
+    SplineRPEvaluator evaluator(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            p_extrapolation_rule,
+            p_extrapolation_rule);
+    DiscreteToCartesian mapping
+            = DiscreteToCartesian<DimX, DimY, SplineRPBuilder, SplineRPEvaluator>::
                     analytical_to_discrete(analytical_mapping, builder, evaluator);
 
     // Test for each coordinates if the coefficients defined by the coefficients functions

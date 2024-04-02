@@ -8,7 +8,7 @@ target_include_directories(advection_rp
 target_link_libraries(advection_rp 
     INTERFACE
         DDC::DDC
-        sll::splines
+        sll::SLL
         Eigen3::Eigen
         gslx::interpolation_2D_rp
         gslx::geometry_RTheta

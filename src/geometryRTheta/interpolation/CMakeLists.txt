@@ -1,23 +1,22 @@
 # SPDX-License-Identifier: MIT
 
 
-add_library("interpolation_2D_rp" STATIC
-    spline_interpolator_2d_rp.cpp
+add_library("interpolation_2D_rp" INTERFACE
 )
 
 target_compile_features("interpolation_2D_rp"
-    PUBLIC
+    INTERFACE
         cxx_std_17
 )
 
 target_include_directories("interpolation_2D_rp"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
 target_link_libraries("interpolation_2D_rp"
-    PUBLIC
+    INTERFACE
         DDC::DDC
-        sll::splines
+        sll::SLL
         gslx::geometry_RTheta
 )
 

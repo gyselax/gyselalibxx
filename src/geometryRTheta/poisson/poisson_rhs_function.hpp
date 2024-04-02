@@ -2,8 +2,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/spline_evaluator_2d.hpp>
-
 #include "geometry.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 
@@ -11,12 +9,30 @@
 
 /**
  * @brief Type of right-hand side (rhs) function of the Poisson equation.
+ * @tparam RadialExtrapolationRule The extrapolation rule applied at the outer radial bound.
  */
+template <class RadialExtrapolationRule>
 class PoissonRHSFunction
 {
+public:
+    /// The type of the 2D Spline Evaluator used by this class
+    using evaluator_type = ddc::SplineEvaluator2D<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
+            BSplinesR,
+            BSplinesP,
+            IDimR,
+            IDimP,
+            RadialExtrapolationRule,
+            RadialExtrapolationRule,
+            ddc::PeriodicExtrapolationRule<RDimP>,
+            ddc::PeriodicExtrapolationRule<RDimP>,
+            IDimR,
+            IDimP>;
+
 private:
     Spline2DView const m_coefs;
-    SplineRPEvaluator const& m_evaluator;
+    evaluator_type const& m_evaluator;
 
 public:
     /**
@@ -27,7 +43,7 @@ public:
 	 * @param[in] evaluator
 	 *      Evaluator on bsplines.
 	 */
-    PoissonRHSFunction(Spline2DView coefs, SplineRPEvaluator const& evaluator)
+    PoissonRHSFunction(Spline2DView coefs, evaluator_type const& evaluator)
         : m_coefs(coefs)
         , m_evaluator(evaluator)
     {

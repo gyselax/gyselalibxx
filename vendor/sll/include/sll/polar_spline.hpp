@@ -2,6 +2,12 @@
 
 #include <ddc/ddc.hpp>
 
+template <class PolarBSplinesType>
+struct PolarSplineSpan;
+
+template <class PolarBSplinesType>
+struct PolarSplineView;
+
 /**
  * @brief A structure containing the two Chunks necessary to define a spline on a set of
  * polar basis splines.
@@ -68,6 +74,26 @@ public:
                   ddc::DiscreteVector<PolarBSplinesType>(PolarBSplinesType::n_singular_basis())))
     {
     }
+
+    /**
+     * Get a modifiable reference to this polar spline.
+     *
+     * @return A modifiable reference to this polar spline.
+     */
+    PolarSplineSpan<PolarBSplinesType> span_view()
+    {
+        return PolarSplineSpan<PolarBSplinesType>(*this);
+    }
+
+    /**
+     * Get a constant reference to this polar spline view.
+     *
+     * @return A constant reference to this polar spline.
+     */
+    PolarSplineView<PolarBSplinesType> span_cview()
+    {
+        return PolarSplineView<PolarBSplinesType>(*this);
+    }
 };
 
 /**
@@ -109,6 +135,26 @@ public:
         , singular_spline_coef(spl.singular_spline_coef.span_view())
     {
     }
+
+    /**
+     * Get a modifiable reference to the polar spline referenced by this polar spline view.
+     *
+     * @return A modifiable reference to a polar spline.
+     */
+    PolarSplineSpan<PolarBSplinesType> span_view()
+    {
+        return *this;
+    }
+
+    /**
+     * Get a constant reference to the polar spline referenced by this polar spline view.
+     *
+     * @return A constant reference to a polar spline.
+     */
+    PolarSplineView<PolarBSplinesType> span_cview()
+    {
+        return PolarSplineView<PolarBSplinesType>(*this);
+    }
 };
 
 /**
@@ -149,5 +195,36 @@ public:
         : spline_coef(spl.spline_coef.span_cview())
         , singular_spline_coef(spl.singular_spline_coef.span_cview())
     {
+    }
+
+    /**
+     * Construct a constant reference to a PolarSpline from a PolarSplineSpan
+     *
+     * @param spl The PolarSpline being referenced.
+     */
+    PolarSplineView<PolarBSplinesType>(PolarSplineSpan<PolarBSplinesType> const& spl)
+        : spline_coef(spl.spline_coef.span_cview())
+        , singular_spline_coef(spl.singular_spline_coef.span_cview())
+    {
+    }
+
+    /**
+     * Get a reference to the polar spline referenced by this polar spline view.
+     *
+     * @return A reference to a polar spline.
+     */
+    PolarSplineSpan<PolarBSplinesType> span_view()
+    {
+        return *this;
+    }
+
+    /**
+     * Get a constant reference to the polar spline referenced by this polar spline view.
+     *
+     * @return A constant reference to a polar spline.
+     */
+    PolarSplineView<PolarBSplinesType> span_cview()
+    {
+        return *this;
     }
 };

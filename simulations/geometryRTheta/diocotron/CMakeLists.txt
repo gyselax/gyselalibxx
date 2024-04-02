@@ -26,7 +26,7 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
 	        
 	        Eigen3::Eigen
 	        
-	        sll::splines
+	        sll::SLL
 	        gslx::paraconfpp
 	       
 	        gslx::poisson_RTheta
