@@ -147,9 +147,11 @@ public:
     /**
      * @brief Create a new SplineBuilder2D.
      *
-     * @param interpolation_domain
+     * @param vals_domain
      *      The 2D domain on which points will be provided in order to
      *      create the 2D spline approximation.
+     * @param cols_per_chunk The number of columns in the rhs passed to the underlying linear solver.
+     * @param preconditionner_max_block_size The block size of in the block Jacobi preconditioner.
      */
     explicit SplineBuilder2D(
             vals_domain_type const& vals_domain,
@@ -263,24 +265,24 @@ public:
      *      The coefficients of the spline calculated by the function.
      * @param[in] vals
      *      The values of the function at the grid points.
-     * @param[in] derivs_xmin
+     * @param[in] derivs_min1
      *      The values of the derivatives at the lower boundary in the first dimension.
-     * @param[in] derivs_xmax
+     * @param[in] derivs_max1
      *      The values of the derivatives at the upper boundary in the first dimension.
-     * @param[in] derivs_ymin
+     * @param[in] derivs_min2
      *      The values of the derivatives at the lower boundary in the second dimension.
-     * @param[in] derivs_ymax
+     * @param[in] derivs_max2
      *      The values of the derivatives at the upper boundary in the second dimension.
-     * @param[in] mixed_derivs_xmin_ymin
+     * @param[in] mixed_derivs_min1_min2
      *      The values of the the cross-derivatives at the lower boundary in the first dimension
      *      and the lower boundary in the second dimension.
-     * @param[in] mixed_derivs_xmax_ymin
+     * @param[in] mixed_derivs_max1_min2
      *      The values of the the cross-derivatives at the upper boundary in the first dimension
      *      and the lower boundary in the second dimension.
-     * @param[in] mixed_derivs_xmin_ymax
+     * @param[in] mixed_derivs_min1_max2
      *      The values of the the cross-derivatives at the lower boundary in the first dimension
      *      and the upper boundary in the second dimension.
-     * @param[in] mixed_derivs_xmax_ymax
+     * @param[in] mixed_derivs_max1_max2
      *      The values of the the cross-derivatives at the upper boundary in the first dimension
      *      and the upper boundary in the second dimension.
      */

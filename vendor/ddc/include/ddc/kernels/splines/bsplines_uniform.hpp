@@ -104,7 +104,7 @@ public:
          *
          * @param rmin    the real ddc::coordinate of the first knot
          * @param rmax    the real ddc::coordinate of the last knot
-         * @param n_knots the number of knots
+         * @param ncells the number of cells in the range [rmin, rmax]
          */
         explicit Impl(ddc::Coordinate<Tag> rmin, ddc::Coordinate<Tag> rmax, std::size_t ncells)
             : m_domain(
