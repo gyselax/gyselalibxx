@@ -27,7 +27,8 @@ using Mapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
 #elif defined(CZARNY_MAPPING)
 using Mapping = CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>;
 #endif
-using DiscreteMapping = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>;
+using DiscreteMapping
+        = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorNullBound>;
 
 #if defined(CURVILINEAR_SOLUTION)
 using LHSFunction = CurvilinearSolution<Mapping>;
@@ -105,11 +106,11 @@ int main(int argc, char** argv)
 #elif defined(CZARNY_MAPPING)
     const Mapping mapping(0.3, 1.4);
 #endif
-    SplineRPEvaluator evaluator(
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+    ddc::NullExtrapolationRule bv_r_min;
+    ddc::NullExtrapolationRule bv_r_max;
+    ddc::PeriodicExtrapolationRule<RDimP> bv_p_min;
+    ddc::PeriodicExtrapolationRule<RDimP> bv_p_max;
+    SplineRPEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
     DiscreteMapping const discrete_mapping
             = DiscreteMapping::analytical_to_discrete(mapping, builder, evaluator);
 
@@ -137,15 +138,16 @@ int main(int argc, char** argv)
     Spline2D coeff_alpha_spline(dom_bsplinesRP);
     Spline2D coeff_beta_spline(dom_bsplinesRP);
 
-    builder(coeff_alpha_spline, coeff_alpha); // coeff_alpha_spline are the coefficients
-            // of the spline representation of the values given by coeff_alpha.
-    builder(coeff_beta_spline, coeff_beta);
+    builder(coeff_alpha_spline.span_view(),
+            coeff_alpha.span_cview()); // coeff_alpha_spline are the coefficients
+    // of the spline representation of the values given by coeff_alpha.
+    builder(coeff_beta_spline.span_view(), coeff_beta.span_cview());
 
     Spline2D x_spline_representation(dom_bsplinesRP);
     Spline2D y_spline_representation(dom_bsplinesRP);
 
-    builder(x_spline_representation, x);
-    builder(y_spline_representation, y);
+    builder(x_spline_representation.span_view(), x.span_cview());
+    builder(y_spline_representation.span_view(), y.span_cview());
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Setup time : "
@@ -177,17 +179,19 @@ int main(int argc, char** argv)
         Spline2D rhs_spline(dom_bsplinesRP);
         DFieldRP rhs_vals(grid);
         ddc::for_each(grid, [&](IndexRP const irp) { rhs_vals(irp) = rhs(coords(irp)); });
-        builder(rhs_spline, rhs_vals);
+        builder(rhs_spline.span_view(), rhs_vals.span_cview());
 
 
 
         start_time = std::chrono::system_clock::now();
-        SplineRPEvaluator
-                eval(g_null_boundary_2d<BSplinesR, BSplinesP>,
-                     g_null_boundary_2d<BSplinesR, BSplinesP>,
-                     g_null_boundary_2d<BSplinesR, BSplinesP>,
-                     g_null_boundary_2d<BSplinesR, BSplinesP>);
-        solver([&](CoordRP const& coord) { return eval(coord, rhs_spline); },
+        ddc::NullExtrapolationRule r_extrapolation_rule;
+        ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
+        SplineRPEvaluatorNullBound
+                eval(r_extrapolation_rule,
+                     r_extrapolation_rule,
+                     p_extrapolation_rule,
+                     p_extrapolation_rule);
+        solver([&](CoordRP const& coord) { return eval(coord, rhs_spline.span_cview()); },
                coords.span_cview(),
                result.span_view());
         end_time = std::chrono::system_clock::now();

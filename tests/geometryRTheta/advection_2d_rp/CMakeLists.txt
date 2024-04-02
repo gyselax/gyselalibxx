@@ -35,7 +35,7 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
                 PDI::pdi
                 Eigen3::Eigen
 
-                sll::splines
+                sll::SLL
 
                 gslx::paraconfpp
                 gslx::interpolation_2D_rp
@@ -75,7 +75,7 @@ target_link_libraries(advection_ALL
 		PDI::pdi
 		Eigen3::Eigen
 		
-		sll::splines
+		sll::SLL
 		
 		gslx::paraconfpp
 		gslx::interpolation_2D_rp

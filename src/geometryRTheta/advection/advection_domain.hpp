@@ -315,7 +315,7 @@ public:
             VectorDViewRP<RDimX_adv, RDimY_adv> const& advection_field,
             double const dt) const
     {
-        assert(typeid(m_mapping) != typeid(CircularToCartesian<RDimX, RDimY, RDimR, RDimP>));
+        static_assert(!std::is_same_v<Mapping, CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>);
         auto const rp_dom = advection_field.domain();
 
         CircularToCartesian<RDimX_adv, RDimY_adv, RDimR, RDimP> const pseudo_Cartesian_mapping;
@@ -357,7 +357,7 @@ public:
             VectorDViewRP<RDimX, RDimY> advection_field,
             VectorDSpanRP<RDimX_adv, RDimY_adv> advection_field_pseudo_Cart) const
     {
-        assert(typeid(m_mapping) != typeid(CircularToCartesian<RDimX, RDimY, RDimR, RDimP>));
+        static_assert(!std::is_same_v<Mapping, CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>);
 
         IDomainRP const rp_dom = advection_field.domain();
         CircularToCartesian<RDimX_adv, RDimY_adv, RDimR, RDimP> const pseudo_Cartesian_mapping;

@@ -14,7 +14,7 @@ target_include_directories("interpolation"
 target_link_libraries("interpolation"
     INTERFACE
         DDC::DDC
-        sll::splines
+        sll::SLL
         gslx::utils
 )
 

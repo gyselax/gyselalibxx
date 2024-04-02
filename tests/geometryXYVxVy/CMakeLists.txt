@@ -15,7 +15,7 @@ target_link_libraries(unit_tests_xy_vxvy
         GTest::gmock
         paraconf::paraconf
         gslx::geometry_xyvxvy
-        sll::splines
+        sll::SLL
         gslx::advection
         gslx::poisson_xy
         gslx::quadrature
