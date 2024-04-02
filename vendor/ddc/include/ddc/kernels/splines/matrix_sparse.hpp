@@ -14,8 +14,7 @@
 
 #include <Kokkos_Core.hpp>
 
-#include "ddc/misc/ginkgo_executors.hpp"
-
+#include "ginkgo_executors.hpp"
 #include "matrix.hpp"
 
 namespace ddc::detail {
@@ -78,7 +77,7 @@ unsigned int default_preconditionner_max_block_size() noexcept
 #endif
 #ifdef KOKKOS_ENABLE_OPENMP
     if (std::is_same_v<ExecSpace, Kokkos::OpenMP>) {
-        return 32u;
+        return 1u;
     }
 #endif
 #ifdef KOKKOS_ENABLE_CUDA
@@ -105,7 +104,7 @@ private:
 
     std::shared_ptr<matrix_sparse_type> m_matrix_sparse;
 
-    std::shared_ptr<gko::solver::Bicgstab<double>> m_solver;
+    std::shared_ptr<gko::solver::Gmres<double>> m_solver;
     std::shared_ptr<gko::LinOp> m_solver_tr;
 
     int m_cols_per_chunk; // Maximum number of columns of B to be passed to a Ginkgo solver
@@ -153,7 +152,7 @@ public:
 
         // Create the solver factory
         std::shared_ptr const residual_criterion
-                = gko::stop::ResidualNorm<double>::build().with_reduction_factor(1e-19).on(
+                = gko::stop::ResidualNorm<double>::build().with_reduction_factor(1e-16).on(
                         gko_exec);
 
         std::shared_ptr const iterations_criterion
@@ -165,7 +164,7 @@ public:
                           .on(gko_exec);
 
         std::unique_ptr const solver_factory
-                = gko::solver::Bicgstab<double>::build()
+                = gko::solver::Gmres<double>::build()
                           .with_preconditioner(preconditioner)
                           .with_criteria(residual_criterion, iterations_criterion)
                           .on(gko_exec);
