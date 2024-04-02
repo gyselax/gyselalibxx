@@ -1,6 +1,7 @@
 var classPoissonRHSFunction =
 [
-    [ "PoissonRHSFunction", "classPoissonRHSFunction.html#a2287f1a0481b7e8dd07d24a902743876", null ],
-    [ "~PoissonRHSFunction", "classPoissonRHSFunction.html#a329db95bfd1a7edd920d4e73c137c75c", null ],
-    [ "operator()", "classPoissonRHSFunction.html#a98c05540209406a0c79c53c43767314f", null ]
+    [ "evaluator_type", "classPoissonRHSFunction.html#aa1f52a141ac086564a6cd00ddaa6f01b", null ],
+    [ "PoissonRHSFunction", "classPoissonRHSFunction.html#a1d014ed759a8fbee81a13893e1980171", null ],
+    [ "~PoissonRHSFunction", "classPoissonRHSFunction.html#abc02c25855c00ab2bdb16916f1aabea2", null ],
+    [ "operator()", "classPoissonRHSFunction.html#a62cc8e961e80992b062179ec78e8685f", null ]
 ];

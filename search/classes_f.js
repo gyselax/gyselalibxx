@@ -1,25 +1,11 @@
 var searchData=
 [
-  ['singlemodeperturbinitialization_688',['SingleModePerturbInitialization',['../classSingleModePerturbInitialization.html',1,'']]],
-  ['speciesinformation_689',['SpeciesInformation',['../classSpeciesInformation.html',1,'']]],
-  ['spline1d_690',['Spline1D',['../classdeprecated_1_1Spline1D.html',1,'deprecated']]],
-  ['spline2d_691',['Spline2D',['../classdeprecated_1_1Spline2D.html',1,'deprecated']]],
-  ['splineboundaryvalue_692',['SplineBoundaryValue',['../classSplineBoundaryValue.html',1,'']]],
-  ['splineboundaryvalue2d_693',['SplineBoundaryValue2D',['../classSplineBoundaryValue2D.html',1,'']]],
-  ['splineboundaryvalue2d_3c_20bspliner_2c_20bsplinep_20_3e_694',['SplineBoundaryValue2D&lt; BSplineR, BSplineP &gt;',['../classSplineBoundaryValue2D.html',1,'']]],
-  ['splineboundaryvalue2d_3c_20bsplinestype1_2c_20bsplinestype2_20_3e_695',['SplineBoundaryValue2D&lt; BSplinesType1, BSplinesType2 &gt;',['../classSplineBoundaryValue2D.html',1,'']]],
-  ['splineboundaryvalue_3c_20bsplinestype_20_3e_696',['SplineBoundaryValue&lt; BSplinesType &gt;',['../classSplineBoundaryValue.html',1,'']]],
-  ['splinebuilder_697',['SplineBuilder',['../classSplineBuilder.html',1,'']]],
-  ['splinebuilder1d_698',['SplineBuilder1D',['../classdeprecated_1_1SplineBuilder1D.html',1,'deprecated']]],
-  ['splinebuilder2d_699',['SplineBuilder2D',['../classdeprecated_1_1SplineBuilder2D.html',1,'deprecated::SplineBuilder2D'],['../classSplineBuilder2D.html',1,'SplineBuilder2D&lt; SplineBuilder1, SplineBuilder2 &gt;']]],
-  ['splineerrorbounds_700',['SplineErrorBounds',['../classSplineErrorBounds.html',1,'']]],
-  ['splineevaluator_701',['SplineEvaluator',['../classSplineEvaluator.html',1,'']]],
-  ['splineevaluator2d_702',['SplineEvaluator2D',['../classSplineEvaluator2D.html',1,'']]],
-  ['splineevaluator2d_3c_20bspliner_2c_20bsplinep_20_3e_703',['SplineEvaluator2D&lt; BSplineR, BSplineP &gt;',['../classSplineEvaluator2D.html',1,'']]],
-  ['splinefootfinder_704',['SplineFootFinder',['../classSplineFootFinder.html',1,'']]],
-  ['splinefootfinder_3c_20euler_2c_20advectiondomain_20_3e_705',['SplineFootFinder&lt; Euler, AdvectionDomain &gt;',['../classSplineFootFinder.html',1,'']]],
-  ['splineinterpolatorbatched_706',['SplineInterpolatorBatched',['../classSplineInterpolatorBatched.html',1,'']]],
-  ['splineinterpolatorrp_707',['SplineInterpolatorRP',['../classSplineInterpolatorRP.html',1,'']]],
-  ['splitrighthandsidesolver_708',['SplitRightHandSideSolver',['../classSplitRightHandSideSolver.html',1,'']]],
-  ['splitvlasovsolver_709',['SplitVlasovSolver',['../classSplitVlasovSolver.html',1,'']]]
+  ['singlemodeperturbinitialization_603',['SingleModePerturbInitialization',['../classSingleModePerturbInitialization.html',1,'']]],
+  ['speciesinformation_604',['SpeciesInformation',['../classSpeciesInformation.html',1,'']]],
+  ['splinefootfinder_605',['SplineFootFinder',['../classSplineFootFinder.html',1,'']]],
+  ['splinefootfinder_3c_20euler_2c_20advectiondomain_20_3e_606',['SplineFootFinder&lt; Euler, AdvectionDomain &gt;',['../classSplineFootFinder.html',1,'']]],
+  ['splineinterpolatorbatched_607',['SplineInterpolatorBatched',['../classSplineInterpolatorBatched.html',1,'']]],
+  ['splineinterpolatorrp_608',['SplineInterpolatorRP',['../classSplineInterpolatorRP.html',1,'']]],
+  ['splitrighthandsidesolver_609',['SplitRightHandSideSolver',['../classSplitRightHandSideSolver.html',1,'']]],
+  ['splitvlasovsolver_610',['SplitVlasovSolver',['../classSplitVlasovSolver.html',1,'']]]
 ];

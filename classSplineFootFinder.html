@@ -121,9 +121,9 @@ Inheritance diagram for SplineFootFinder&lt; TimeStepper, AdvectionDomain &gt;:<
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2250f61945c089d58d3d30cb555aa739"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#a2250f61945c089d58d3d30cb555aa739">SplineFootFinder</a> (TimeStepper const &amp;time_stepper, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;advection_domain, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a> const &amp;builder_advection_field, <a class="el" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> const &amp;evaluator_advection_field)</td></tr>
-<tr class="memdesc:a2250f61945c089d58d3d30cb555aa739"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <a href="classSplineFootFinder.html#a2250f61945c089d58d3d30cb555aa739">More...</a><br /></td></tr>
-<tr class="separator:a2250f61945c089d58d3d30cb555aa739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3da5df4e45c0771002568987d24f922c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#a3da5df4e45c0771002568987d24f922c">SplineFootFinder</a> (TimeStepper const &amp;time_stepper, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;advection_domain, SplineRPBuilder const &amp;builder_advection_field, SplineRPEvaluatorConstBound const &amp;evaluator_advection_field)</td></tr>
+<tr class="memdesc:a3da5df4e45c0771002568987d24f922c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <a href="classSplineFootFinder.html#a3da5df4e45c0771002568987d24f922c">More...</a><br /></td></tr>
+<tr class="separator:a3da5df4e45c0771002568987d24f922c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c99a3c797b8e49db511bee6d62e051d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#a6c99a3c797b8e49db511bee6d62e051d">operator()</a> (SpanRP&lt; CoordRP &gt; feet, <a class="el" href="classVectorFieldSpan.html">VectorDViewRP</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt; advection_field, double dt) const final</td></tr>
 <tr class="memdesc:a6c99a3c797b8e49db511bee6d62e051d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <a href="classSplineFootFinder.html#a6c99a3c797b8e49db511bee6d62e051d">More...</a><br /></td></tr>
 <tr class="separator:a6c99a3c797b8e49db511bee6d62e051d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,8 +142,8 @@ class SplineFootFinder&lt; TimeStepper, AdvectionDomain &gt;</h3>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2250f61945c089d58d3d30cb555aa739"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2250f61945c089d58d3d30cb555aa739">&#9670;&nbsp;</a></span>SplineFootFinder()</h2>
+<a id="a3da5df4e45c0771002568987d24f922c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3da5df4e45c0771002568987d24f922c">&#9670;&nbsp;</a></span>SplineFootFinder()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,13 +168,13 @@ template&lt;class TimeStepper , class AdvectionDomain &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a> const &amp;&#160;</td>
+          <td class="paramtype">SplineRPBuilder const &amp;&#160;</td>
           <td class="paramname"><em>builder_advection_field</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> const &amp;&#160;</td>
+          <td class="paramtype">SplineRPEvaluatorConstBound const &amp;&#160;</td>
           <td class="paramname"><em>evaluator_advection_field</em>&#160;</td>
         </tr>
         <tr>

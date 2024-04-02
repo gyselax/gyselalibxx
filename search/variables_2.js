@@ -1,20 +1,4 @@
 var searchData=
 [
-  ['m_5fadvection_5ffield_942',['m_advection_field',['../classAdvectionFieldSimulation.html#a0b507af92d3d444543a372d8b265dc15',1,'AdvectionFieldSimulation::m_advection_field()'],['../classAdvectionSimulation.html#a1f56e396c183f4811c21b0fdb10fe2bb',1,'AdvectionSimulation::m_advection_field()']]],
-  ['m_5fb_5fnorm_943',['m_B_norm',['../classCollisions.html#a8511215c1884f50c3d689983d2b7303c',1,'Collisions']]],
-  ['m_5fbstar_5fs_944',['m_Bstar_s',['../classCollisions.html#a90e619814468ac7ac68c78c849d77a02',1,'Collisions']]],
-  ['m_5fcomb_5fmat_945',['m_comb_mat',['../classCollisions.html#ab1fda5469726b5ae4acaea9848deb49b',1,'Collisions']]],
-  ['m_5fcoordinate_5fconverter_946',['m_coordinate_converter',['../classPoissonSolution.html#a85694a84b02f52d5dacdf98dda53fba0',1,'PoissonSolution']]],
-  ['m_5felectrostatical_5fpotential_947',['m_electrostatical_potential',['../classAdvectionFieldSimulation.html#a49aa5c7af88d71b84e4cc0b5a92a36ed',1,'AdvectionFieldSimulation']]],
-  ['m_5ffunction_948',['m_function',['../classAdvectionSimulation.html#ac63008bb3c1c8634a0dc992dfed41bca',1,'AdvectionSimulation::m_function()'],['../classAdvectionFieldSimulation.html#a24cdebe5ef2c03b345a742b097bd4259',1,'AdvectionFieldSimulation::m_function()']]],
-  ['m_5fhat_5fas_949',['m_hat_As',['../classCollisions.html#af03302549e2a96417cf558882c1b0a47',1,'Collisions']]],
-  ['m_5fhat_5fzs_950',['m_hat_Zs',['../classCollisions.html#abe6c025bdc57076121328fd62aacc7d0',1,'Collisions']]],
-  ['m_5fmask_5fbuffer_5fr_951',['m_mask_buffer_r',['../classCollisions.html#a578e1b5da086721b0671febbcc98b491',1,'Collisions']]],
-  ['m_5fmask_5flim_952',['m_mask_LIM',['../classCollisions.html#a6ca012950263c99778465fbcbcce4c10',1,'Collisions']]],
-  ['m_5fmug_953',['m_mug',['../classCollisions.html#a2f967b8420ff2b82b3182ecb6aa33126',1,'Collisions']]],
-  ['m_5fncells_954',['m_ncells',['../classdeprecated_1_1BSplines.html#ae6644ef87cc1a18daf0bdac1ec059697',1,'deprecated::BSplines']]],
-  ['m_5foperator_5fhandle_955',['m_operator_handle',['../classCollisions.html#a9361514c14f7cf4473c876d4ced201d9',1,'Collisions']]],
-  ['m_5fq_5fr_956',['m_q_r',['../classCollisions.html#a1c651f047ac3850c30d107ca64fef9e0',1,'Collisions']]],
-  ['m_5frg_957',['m_rg',['../classCollisions.html#a9c31fadf7d2cb83137ce344b20bf3aa7',1,'Collisions']]],
-  ['m_5fvparg_958',['m_vparg',['../classCollisions.html#a44d05d14935ba8eff16f5c2c93cb7e7f',1,'Collisions']]]
+  ['periodic_837',['PERIODIC',['../structRDimVp.html#ab8adf3e4980f2cf15945ad3602d41091',1,'RDimVp::PERIODIC()'],['../structRefinedDiscreteToCartesian_1_1RDimYRefined.html#a0f50a9073257f594f7c0e7cd0ebdaa23',1,'RefinedDiscreteToCartesian::RDimYRefined::PERIODIC()'],['../structRefinedDiscreteToCartesian_1_1RDimXRefined.html#a5541d5de608d7fd975e314d933af9d72',1,'RefinedDiscreteToCartesian::RDimXRefined::PERIODIC()'],['../structRefinedDiscreteToCartesian_1_1RDimPRefined.html#ad514de051dbba29c434430eff517006e',1,'RefinedDiscreteToCartesian::RDimPRefined::PERIODIC()'],['../structRefinedDiscreteToCartesian_1_1RDimRRefined.html#a6383c5fd3f13ecc58c08b8aa0b2283ca',1,'RefinedDiscreteToCartesian::RDimRRefined::PERIODIC()'],['../structRDimT.html#ac518ba935033dd7ec6e36a2860a5ee68',1,'RDimT::PERIODIC()'],['../structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd',1,'RDimVy::PERIODIC()'],['../structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74',1,'RDimY::PERIODIC()'],['../structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78',1,'RDimVx::PERIODIC()'],['../structRDimX.html#a8cb720efb33235cee3371843279ea9ab',1,'RDimX::PERIODIC()'],['../structTor1.html#a62028f8731a8a591e5b97e93bf0dffa0',1,'Tor1::PERIODIC()'],['../structRDimVr.html#a1e8890fa598572b69d07d3869c5f5e09',1,'RDimVr::PERIODIC()'],['../structRDimP.html#ace2d48a5928bd5274bd7c75144aa6c78',1,'RDimP::PERIODIC()'],['../structRDimR.html#ad387eb1164fd90dea9833ba4bf856cad',1,'RDimR::PERIODIC()'],['../structDimY__pC.html#a1fcc51d25d5dbf1e1939cb4b908a1760',1,'DimY_pC::PERIODIC()'],['../structDimX__pC.html#a7d5e2f4b22e1efa830db069a41122e24',1,'DimX_pC::PERIODIC()'],['../structMu.html#ad044685c30893649b870991b5f0e592a',1,'Mu::PERIODIC()'],['../structVpar.html#a463f771232ce1d607bf477d8c395eafe',1,'Vpar::PERIODIC()'],['../structTor3.html#a491f63f0705c1c71b52485fc172469f6',1,'Tor3::PERIODIC()'],['../structTor2.html#ace83f98401e5275f4164472205a202ba',1,'Tor2::PERIODIC()']]]
 ];

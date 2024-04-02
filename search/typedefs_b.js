@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['rdimx_5fadv_1034',['RDimX_adv',['../classAdvectionPhysicalDomain.html#a77b189d95314b128a28c1cc16cb82812',1,'AdvectionPhysicalDomain::RDimX_adv()'],['../classAdvectionPseudoCartesianDomain.html#a76a522695ce2d2704583afb7a91f218a',1,'AdvectionPseudoCartesianDomain::RDimX_adv()']]],
-  ['rdimy_5fadv_1035',['RDimY_adv',['../classAdvectionPhysicalDomain.html#ade892d96a026786816cc72679b18e496',1,'AdvectionPhysicalDomain::RDimY_adv()'],['../classAdvectionPseudoCartesianDomain.html#a761b8ac4b157cce005008ca24ba11c2b',1,'AdvectionPseudoCartesianDomain::RDimY_adv()']]]
+  ['tensor_5fproduct_5fdiscrete_5fdomain_5ftype_891',['tensor_product_discrete_domain_type',['../classPolarBSplines.html#a80fbb43730f6b755755d7641f727a93d',1,'PolarBSplines']]],
+  ['tensor_5fproduct_5fdiscrete_5felement_5ftype_892',['tensor_product_discrete_element_type',['../classPolarBSplines.html#a702d43d6d57622232401eca237f82bfe',1,'PolarBSplines']]],
+  ['tensor_5fproduct_5fdiscrete_5fvector_5ftype_893',['tensor_product_discrete_vector_type',['../classPolarBSplines.html#a94827b147e44e22abf6169d1aaf131a6',1,'PolarBSplines']]],
+  ['type_894',['type',['../structinterpolator__on__domain_3_01Interp_00_01DDimI_00_01ddc_1_1DiscreteDomain_3_01DDim_8_8_8_01_4_01_4.html#a01b41fecaeb84e4397c995d4bcfca4f7',1,'interpolator_on_domain&lt; Interp, DDimI, ddc::DiscreteDomain&lt; DDim... &gt; &gt;']]]
 ];

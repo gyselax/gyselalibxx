@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: PoissonRHSFunction Class Reference</title>
+<title>Gyselalib++: PoissonRHSFunction&lt; RadialExtrapolationRule &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,39 +100,58 @@ $(document).ready(function(){initNavTree('classPoissonRHSFunction.html',''); ini
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classPoissonRHSFunction-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">PoissonRHSFunction Class Reference</div>  </div>
+<div class="title">PoissonRHSFunction&lt; RadialExtrapolationRule &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Type of right-hand side (rhs) function of the Poisson equation.  
  <a href="classPoissonRHSFunction.html#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aa1f52a141ac086564a6cd00ddaa6f01b"><td class="memItemLeft" align="right" valign="top"><a id="aa1f52a141ac086564a6cd00ddaa6f01b"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonRHSFunction.html#aa1f52a141ac086564a6cd00ddaa6f01b">evaluator_type</a> = ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::DefaultHostExecutionSpace::memory_space, BSplinesR, BSplinesP, IDimR, IDimP, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a class="el" href="structRDimP.html">RDimP</a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a class="el" href="structRDimP.html">RDimP</a> &gt;, IDimR, IDimP &gt;</td></tr>
+<tr class="memdesc:aa1f52a141ac086564a6cd00ddaa6f01b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the 2D Spline Evaluator used by this class. <br /></td></tr>
+<tr class="separator:aa1f52a141ac086564a6cd00ddaa6f01b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2287f1a0481b7e8dd07d24a902743876"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonRHSFunction.html#a2287f1a0481b7e8dd07d24a902743876">PoissonRHSFunction</a> (Spline2DView coefs, <a class="el" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> const &amp;evaluator)</td></tr>
-<tr class="memdesc:a2287f1a0481b7e8dd07d24a902743876"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPoissonRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonRHSFunction</a>.  <a href="classPoissonRHSFunction.html#a2287f1a0481b7e8dd07d24a902743876">More...</a><br /></td></tr>
-<tr class="separator:a2287f1a0481b7e8dd07d24a902743876"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98c05540209406a0c79c53c43767314f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonRHSFunction.html#a98c05540209406a0c79c53c43767314f">operator()</a> (CoordRP const &amp;coord_rp) const</td></tr>
-<tr class="memdesc:a98c05540209406a0c79c53c43767314f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function at a given coordinate.  <a href="classPoissonRHSFunction.html#a98c05540209406a0c79c53c43767314f">More...</a><br /></td></tr>
-<tr class="separator:a98c05540209406a0c79c53c43767314f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d014ed759a8fbee81a13893e1980171"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonRHSFunction.html#a1d014ed759a8fbee81a13893e1980171">PoissonRHSFunction</a> (Spline2DView coefs, <a class="el" href="classPoissonRHSFunction.html#aa1f52a141ac086564a6cd00ddaa6f01b">evaluator_type</a> const &amp;evaluator)</td></tr>
+<tr class="memdesc:a1d014ed759a8fbee81a13893e1980171"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPoissonRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonRHSFunction</a>.  <a href="classPoissonRHSFunction.html#a1d014ed759a8fbee81a13893e1980171">More...</a><br /></td></tr>
+<tr class="separator:a1d014ed759a8fbee81a13893e1980171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62cc8e961e80992b062179ec78e8685f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonRHSFunction.html#a62cc8e961e80992b062179ec78e8685f">operator()</a> (CoordRP const &amp;coord_rp) const</td></tr>
+<tr class="memdesc:a62cc8e961e80992b062179ec78e8685f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function at a given coordinate.  <a href="classPoissonRHSFunction.html#a62cc8e961e80992b062179ec78e8685f">More...</a><br /></td></tr>
+<tr class="separator:a62cc8e961e80992b062179ec78e8685f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Type of right-hand side (rhs) function of the Poisson equation. </p>
+<div class="textblock"><h3>template&lt;class RadialExtrapolationRule&gt;<br />
+class PoissonRHSFunction&lt; RadialExtrapolationRule &gt;</h3>
+
+<p>Type of right-hand side (rhs) function of the Poisson equation. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">RadialExtrapolationRule</td><td>The extrapolation rule applied at the outer radial bound. </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2287f1a0481b7e8dd07d24a902743876"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2287f1a0481b7e8dd07d24a902743876">&#9670;&nbsp;</a></span>PoissonRHSFunction()</h2>
+<a id="a1d014ed759a8fbee81a13893e1980171"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d014ed759a8fbee81a13893e1980171">&#9670;&nbsp;</a></span>PoissonRHSFunction()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class RadialExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">PoissonRHSFunction::PoissonRHSFunction </td>
+          <td class="memname"><a class="el" href="classPoissonRHSFunction.html">PoissonRHSFunction</a>&lt; RadialExtrapolationRule &gt;::<a class="el" href="classPoissonRHSFunction.html">PoissonRHSFunction</a> </td>
           <td>(</td>
           <td class="paramtype">Spline2DView&#160;</td>
           <td class="paramname"><em>coefs</em>, </td>
@@ -140,7 +159,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classSplineEvaluator2D.html">SplineRPEvaluator</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classPoissonRHSFunction.html#aa1f52a141ac086564a6cd00ddaa6f01b">evaluator_type</a> const &amp;&#160;</td>
           <td class="paramname"><em>evaluator</em>&#160;</td>
         </tr>
         <tr>
@@ -168,17 +187,19 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a98c05540209406a0c79c53c43767314f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98c05540209406a0c79c53c43767314f">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a62cc8e961e80992b062179ec78e8685f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62cc8e961e80992b062179ec78e8685f">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class RadialExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PoissonRHSFunction::operator() </td>
+          <td class="memname">double <a class="el" href="classPoissonRHSFunction.html">PoissonRHSFunction</a>&lt; RadialExtrapolationRule &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">CoordRP const &amp;&#160;</td>
           <td class="paramname"><em>coord_rp</em></td><td>)</td>

@@ -1,15 +1,8 @@
 var dir_040b90264b67cd95a975364a9a6adb0b =
 [
-    [ "deprecated", "dir_bf05ee1a50b262d9ca6db6046de9e516.html", "dir_bf05ee1a50b262d9ca6db6046de9e516" ],
     [ "mapping", "dir_401f8b249764c6753d0f677d3a20782c.html", "dir_401f8b249764c6753d0f677d3a20782c" ],
     [ "bernstein.hpp", "bernstein_8hpp_source.html", null ],
-    [ "bspline.hpp", "bspline_8hpp_source.html", null ],
-    [ "bsplines_non_uniform.hpp", "bsplines__non__uniform_8hpp_source.html", null ],
-    [ "bsplines_uniform.hpp", "bsplines__uniform_8hpp_source.html", null ],
-    [ "constant_extrapolation_boundary_value.hpp", "constant__extrapolation__boundary__value_8hpp_source.html", null ],
     [ "gauss_legendre_integration.hpp", "gauss__legendre__integration_8hpp_source.html", null ],
-    [ "greville_interpolation_points.hpp", "greville__interpolation__points_8hpp_source.html", null ],
-    [ "knots_as_interpolation_points.hpp", "knots__as__interpolation__points_8hpp_source.html", null ],
     [ "math_tools.hpp", "math__tools_8hpp_source.html", null ],
     [ "matrix.hpp", "matrix_8hpp_source.html", null ],
     [ "matrix_banded.hpp", "matrix__banded_8hpp_source.html", null ],
@@ -18,15 +11,8 @@ var dir_040b90264b67cd95a975364a9a6adb0b =
     [ "matrix_dense.hpp", "matrix__dense_8hpp_source.html", null ],
     [ "matrix_pds_tridiag.hpp", "matrix__pds__tridiag_8hpp_source.html", null ],
     [ "matrix_periodic_banded.hpp", "matrix__periodic__banded_8hpp_source.html", null ],
-    [ "null_boundary_value.hpp", "null__boundary__value_8hpp_source.html", null ],
     [ "polar_bsplines.hpp", "polar__bsplines_8hpp_source.html", null ],
     [ "polar_spline.hpp", "polar__spline_8hpp_source.html", null ],
     [ "polar_spline_evaluator.hpp", "polar__spline__evaluator_8hpp_source.html", null ],
-    [ "spline_boundary_conditions.hpp", "spline__boundary__conditions_8hpp_source.html", null ],
-    [ "spline_boundary_value.hpp", "spline__boundary__value_8hpp_source.html", null ],
-    [ "spline_builder.hpp", "spline__builder_8hpp_source.html", null ],
-    [ "spline_builder_2d.hpp", "spline__builder__2d_8hpp_source.html", null ],
-    [ "spline_evaluator.hpp", "spline__evaluator_8hpp_source.html", null ],
-    [ "spline_evaluator_2d.hpp", "spline__evaluator__2d_8hpp_source.html", null ],
     [ "view.hpp", "view_8hpp_source.html", null ]
 ];

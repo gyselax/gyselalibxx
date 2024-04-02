@@ -1,14 +1,10 @@
 var searchData=
 [
-  ['bsplinep_972',['BSplineP',['../structPolarSpline.html#af77ce2f18c9c86d7ac8e44606331d9d2',1,'PolarSpline::BSplineP()'],['../structPolarSplineSpan.html#a67ed148eab2a4e83e22cfb918c79d9a5',1,'PolarSplineSpan::BSplineP()'],['../structPolarSplineView.html#a773dd7a09763add9ac7ed3a1863ffd48',1,'PolarSplineView::BSplineP()'],['../classDiscreteToCartesian.html#aabeacc8cb7637a03d010696e2b7645ed',1,'DiscreteToCartesian::BSplineP()']]],
-  ['bspliner_973',['BSplineR',['../classDiscreteToCartesian.html#a56a6643d010d176c4ebe807e8d44624f',1,'DiscreteToCartesian::BSplineR()'],['../structPolarSpline.html#ad26033ae149504208d160b5ac474d613',1,'PolarSpline::BSplineR()'],['../structPolarSplineSpan.html#afb33d14b81a474947f471003644fcc49',1,'PolarSplineSpan::BSplineR()'],['../structPolarSplineView.html#a48f3bbf282210df43e1c8f87cadbe8b8',1,'PolarSplineView::BSplineR()']]],
-  ['bsplines_5ftype_974',['bsplines_type',['../classPolarSplineEvaluator.html#a26a1961933d750d08fb027e9142cb6ba',1,'PolarSplineEvaluator::bsplines_type()'],['../classSplineBuilder.html#a8e306ff751612410e7c80db1eeabd0c8',1,'SplineBuilder::bsplines_type()']]],
-  ['bsplines_5ftype1_975',['bsplines_type1',['../classSplineBuilder2D.html#aceec329f2770bef48e3d35871ae01502',1,'SplineBuilder2D::bsplines_type1()'],['../classSplineEvaluator2D.html#a61d223c29a716634e15dca19daa41955',1,'SplineEvaluator2D::bsplines_type1()']]],
-  ['bsplines_5ftype2_976',['bsplines_type2',['../classSplineBuilder2D.html#ad1c9fafdefd9b45835b8b89573571900',1,'SplineBuilder2D::bsplines_type2()'],['../classSplineEvaluator2D.html#a20ef11c270ad545361a8b3f683a724d8',1,'SplineEvaluator2D::bsplines_type2()']]],
-  ['bsplinesp_977',['BSplinesP',['../classPolarSplineEvaluator.html#a21c225b744962b5b83476156e737b46f',1,'PolarSplineEvaluator']]],
-  ['bsplinesp_5ftag_978',['BSplinesP_tag',['../classPolarBSplines.html#a00c59661715ccfa45c849ab6e0a5e169',1,'PolarBSplines']]],
-  ['bsplinesr_979',['BSplinesR',['../classPolarSplineEvaluator.html#af95eaa07f8890667fe4feade36d50423',1,'PolarSplineEvaluator']]],
-  ['bsplinesr_5ftag_980',['BSplinesR_tag',['../classPolarBSplines.html#ae85f7d8e49f34f2ba35a41702439012d',1,'PolarBSplines']]],
-  ['builder_5ftype1_981',['builder_type1',['../classSplineBuilder2D.html#a32fa22d267cdeb0722572c33fd6c6e11',1,'SplineBuilder2D']]],
-  ['builder_5ftype2_982',['builder_type2',['../classSplineBuilder2D.html#a0a33a10b79cf3d7273c5f20337727dff',1,'SplineBuilder2D']]]
+  ['bsplinep_843',['BSplineP',['../classDiscreteToCartesian.html#a5a62d9f5bba1aae83ab17068764dbc96',1,'DiscreteToCartesian::BSplineP()'],['../structPolarSpline.html#af77ce2f18c9c86d7ac8e44606331d9d2',1,'PolarSpline::BSplineP()'],['../structPolarSplineSpan.html#a67ed148eab2a4e83e22cfb918c79d9a5',1,'PolarSplineSpan::BSplineP()'],['../structPolarSplineView.html#a773dd7a09763add9ac7ed3a1863ffd48',1,'PolarSplineView::BSplineP()']]],
+  ['bspliner_844',['BSplineR',['../classDiscreteToCartesian.html#a8cc25d288b46b3e30dce665d9930b6e6',1,'DiscreteToCartesian::BSplineR()'],['../structPolarSpline.html#ad26033ae149504208d160b5ac474d613',1,'PolarSpline::BSplineR()'],['../structPolarSplineSpan.html#afb33d14b81a474947f471003644fcc49',1,'PolarSplineSpan::BSplineR()'],['../structPolarSplineView.html#a48f3bbf282210df43e1c8f87cadbe8b8',1,'PolarSplineView::BSplineR()']]],
+  ['bsplines_5ftype_845',['bsplines_type',['../classPolarSplineEvaluator.html#a4fda8acef6472fb27ffe42d078943f26',1,'PolarSplineEvaluator']]],
+  ['bsplinesp_846',['BSplinesP',['../classPolarSplineEvaluator.html#a372867a0573a0adaf9a9006a2d78f30c',1,'PolarSplineEvaluator']]],
+  ['bsplinesp_5ftag_847',['BSplinesP_tag',['../classPolarBSplines.html#a00c59661715ccfa45c849ab6e0a5e169',1,'PolarBSplines']]],
+  ['bsplinesr_848',['BSplinesR',['../classPolarSplineEvaluator.html#af825f47ac1278302e5dd3ac0d906f09c',1,'PolarSplineEvaluator']]],
+  ['bsplinesr_5ftag_849',['BSplinesR_tag',['../classPolarBSplines.html#ae85f7d8e49f34f2ba35a41702439012d',1,'PolarBSplines']]]
 ];

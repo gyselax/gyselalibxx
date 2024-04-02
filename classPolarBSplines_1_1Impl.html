@@ -133,10 +133,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aaed9f0037acefbb5acdecff592114967"><td class="memTemplParams" colspan="2">template&lt;class DimX , class DimY , class SplineBuilderR , class SplineBuilderP &gt; </td></tr>
-<tr class="memitem:aaed9f0037acefbb5acdecff592114967"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#aaed9f0037acefbb5acdecff592114967">Impl</a> (const <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; DimX, DimY, <a class="el" href="classSplineBuilder2D.html">SplineBuilder2D</a>&lt; SplineBuilderR, SplineBuilderP &gt;&gt; &amp;curvilinear_to_cartesian, SplineBuilderR const &amp;spline_builder_r, SplineBuilderP const &amp;spline_builder_p)</td></tr>
-<tr class="memdesc:aaed9f0037acefbb5acdecff592114967"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#aaed9f0037acefbb5acdecff592114967">More...</a><br /></td></tr>
-<tr class="separator:aaed9f0037acefbb5acdecff592114967"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f6c28472809eb95951c92a5d8a21541"><td class="memTemplParams" colspan="2">template&lt;class DiscreteMapping , class SplineBuilderR , class SplineBuilderP &gt; </td></tr>
+<tr class="memitem:a4f6c28472809eb95951c92a5d8a21541"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a4f6c28472809eb95951c92a5d8a21541">Impl</a> (const DiscreteMapping &amp;curvilinear_to_cartesian, SplineBuilderR const &amp;spline_builder_r, SplineBuilderP const &amp;spline_builder_p)</td></tr>
+<tr class="memdesc:a4f6c28472809eb95951c92a5d8a21541"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#a4f6c28472809eb95951c92a5d8a21541">More...</a><br /></td></tr>
+<tr class="separator:a4f6c28472809eb95951c92a5d8a21541"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dd5ab4233bbd69675345f083a271b7d"><td class="memTemplParams" colspan="2">template&lt;class OriginMemorySpace &gt; </td></tr>
 <tr class="memitem:a2dd5ab4233bbd69675345f083a271b7d"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a2dd5ab4233bbd69675345f083a271b7d">Impl</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; OriginMemorySpace &gt; const &amp;impl)</td></tr>
 <tr class="memdesc:a2dd5ab4233bbd69675345f083a271b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#a2dd5ab4233bbd69675345f083a271b7d">More...</a><br /></td></tr>
@@ -254,8 +254,8 @@ struct PolarBSplines&lt; BSplinesR, BSplinesP, C &gt;::Impl&lt; MemorySpace &gt;
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aaed9f0037acefbb5acdecff592114967"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaed9f0037acefbb5acdecff592114967">&#9670;&nbsp;</a></span>Impl() <span class="overload">[1/4]</span></h2>
+<a id="a4f6c28472809eb95951c92a5d8a21541"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f6c28472809eb95951c92a5d8a21541">&#9670;&nbsp;</a></span>Impl() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -264,7 +264,7 @@ template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class MemorySpace &gt; </div>
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class SplineBuilderR , class SplineBuilderP &gt; </div>
+template&lt;class DiscreteMapping , class SplineBuilderR , class SplineBuilderP &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -272,7 +272,7 @@ template&lt;class DimX , class DimY , class SplineBuilderR , class SplineBuilder
         <tr>
           <td class="memname"><a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; BSplinesR, BSplinesP, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; MemorySpace &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; DimX, DimY, <a class="el" href="classSplineBuilder2D.html">SplineBuilder2D</a>&lt; SplineBuilderR, SplineBuilderP &gt;&gt; &amp;&#160;</td>
+          <td class="paramtype">const DiscreteMapping &amp;&#160;</td>
           <td class="paramname"><em>curvilinear_to_cartesian</em>, </td>
         </tr>
         <tr>

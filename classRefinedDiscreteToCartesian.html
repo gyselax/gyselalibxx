@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBuilder, Nr, Nt &gt; Class Template Reference</title>
+<title>Gyselalib++: RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,18 +105,18 @@ $(document).ready(function(){initNavTree('classRefinedDiscreteToCartesian.html',
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classRefinedDiscreteToCartesian-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBuilder, Nr, Nt &gt; Class Template Reference</div>  </div>
+<div class="title">RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class for describing refined discrete 2D mappings from the logical domain to the physical domain.  
  <a href="classRefinedDiscreteToCartesian.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBuilder, Nr, Nt &gt;:</div>
+Inheritance diagram for RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classRefinedDiscreteToCartesian.png" usemap="#RefinedDiscreteToCartesian_3C_20RDimX_2C_20RDimY_2C_20SplineRPBuilder_2C_20Nr_2C_20Nt_20_3E_map" alt=""/>
-  <map id="RefinedDiscreteToCartesian_3C_20RDimX_2C_20RDimY_2C_20SplineRPBuilder_2C_20Nr_2C_20Nt_20_3E_map" name="RefinedDiscreteToCartesian_3C_20RDimX_2C_20RDimY_2C_20SplineRPBuilder_2C_20Nr_2C_20Nt_20_3E_map">
+  <img src="classRefinedDiscreteToCartesian.png" usemap="#RefinedDiscreteToCartesian_3C_20RDimX_2C_20RDimY_2C_20SplineRPBuilder_2C_20SplineRPEvaluator_2C_20Nr_2C_20Nt_20_3E_map" alt=""/>
+  <map id="RefinedDiscreteToCartesian_3C_20RDimX_2C_20RDimY_2C_20SplineRPBuilder_2C_20SplineRPEvaluator_2C_20Nr_2C_20Nt_20_3E_map" name="RefinedDiscreteToCartesian_3C_20RDimX_2C_20RDimY_2C_20SplineRPBuilder_2C_20SplineRPEvaluator_2C_20Nr_2C_20Nt_20_3E_map">
 <area href="classCurvilinear2DToCartesian.html" alt="Curvilinear2DToCartesian&lt; RDimX, RDimY, SplineRPBuilder::bsplines_type1::tag_type, SplineRPBuilder::bsplines_type2::tag_type &gt;" shape="rect" coords="0,0,756,24"/>
   </map>
 </div></div>
@@ -138,45 +138,45 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a71cf6ce493ab0b2d2648bbf37fe0a1b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a71cf6ce493ab0b2d2648bbf37fe0a1b0">RefinedDiscreteToCartesian</a> (<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> &amp;&amp;x)=default</td></tr>
-<tr class="memdesc:a71cf6ce493ab0b2d2648bbf37fe0a1b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> from another <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a>.  <a href="classRefinedDiscreteToCartesian.html#a71cf6ce493ab0b2d2648bbf37fe0a1b0">More...</a><br /></td></tr>
-<tr class="separator:a71cf6ce493ab0b2d2648bbf37fe0a1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad15636dc573eac8f0822134b87be904a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#ad15636dc573eac8f0822134b87be904a">RefinedDiscreteToCartesian</a> (<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> const &amp;x)=default</td></tr>
-<tr class="memdesc:ad15636dc573eac8f0822134b87be904a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> from another temporary <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a>.  <a href="classRefinedDiscreteToCartesian.html#ad15636dc573eac8f0822134b87be904a">More...</a><br /></td></tr>
-<tr class="separator:ad15636dc573eac8f0822134b87be904a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2bd385b85af4de24b2b551ad7d08395"><td class="memItemLeft" align="right" valign="top">ddc::Coordinate&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#ab2bd385b85af4de24b2b551ad7d08395">operator()</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:ab2bd385b85af4de24b2b551ad7d08395"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the physical coordinates from the logical coordinates.  <a href="classRefinedDiscreteToCartesian.html#ab2bd385b85af4de24b2b551ad7d08395">More...</a><br /></td></tr>
-<tr class="separator:ab2bd385b85af4de24b2b551ad7d08395"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa1403f0c31addf1ddc2a32546e95968"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#afa1403f0c31addf1ddc2a32546e95968">jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const final</td></tr>
-<tr class="memdesc:afa1403f0c31addf1ddc2a32546e95968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <a href="classRefinedDiscreteToCartesian.html#afa1403f0c31addf1ddc2a32546e95968">More...</a><br /></td></tr>
-<tr class="separator:afa1403f0c31addf1ddc2a32546e95968"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92814d6e27ac7ea37614afebb77b948c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a92814d6e27ac7ea37614afebb77b948c">jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a92814d6e27ac7ea37614afebb77b948c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <a href="classRefinedDiscreteToCartesian.html#a92814d6e27ac7ea37614afebb77b948c">More...</a><br /></td></tr>
-<tr class="separator:a92814d6e27ac7ea37614afebb77b948c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e3a54843420a1bb60def2673e76f6b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a9e3a54843420a1bb60def2673e76f6b5">jacobian_12</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a9e3a54843420a1bb60def2673e76f6b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the Jacobian matrix.  <a href="classRefinedDiscreteToCartesian.html#a9e3a54843420a1bb60def2673e76f6b5">More...</a><br /></td></tr>
-<tr class="separator:a9e3a54843420a1bb60def2673e76f6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3566dfb3c96667eb21a1f2bf7cef9e20"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a3566dfb3c96667eb21a1f2bf7cef9e20">jacobian_21</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a3566dfb3c96667eb21a1f2bf7cef9e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the Jacobian matrix.  <a href="classRefinedDiscreteToCartesian.html#a3566dfb3c96667eb21a1f2bf7cef9e20">More...</a><br /></td></tr>
-<tr class="separator:a3566dfb3c96667eb21a1f2bf7cef9e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadcec35fb2e9e3d3374319c2083252ac"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#aadcec35fb2e9e3d3374319c2083252ac">jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:aadcec35fb2e9e3d3374319c2083252ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the Jacobian matrix.  <a href="classRefinedDiscreteToCartesian.html#aadcec35fb2e9e3d3374319c2083252ac">More...</a><br /></td></tr>
-<tr class="separator:aadcec35fb2e9e3d3374319c2083252ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad036c1e505c4f6aff7c898f8780b4aae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#ad036c1e505c4f6aff7c898f8780b4aae">to_pseudo_cartesian_jacobian_center_matrix</a> (ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid, Matrix_2x2 &amp;matrix) const</td></tr>
-<tr class="memdesc:ad036c1e505c4f6aff7c898f8780b4aae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <a href="classRefinedDiscreteToCartesian.html#ad036c1e505c4f6aff7c898f8780b4aae">More...</a><br /></td></tr>
-<tr class="separator:ad036c1e505c4f6aff7c898f8780b4aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a416da5763f9fbc1102116d87a9d16406"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a416da5763f9fbc1102116d87a9d16406">to_pseudo_cartesian_jacobian_11_center</a> (ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</td></tr>
-<tr class="memdesc:a416da5763f9fbc1102116d87a9d16406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classRefinedDiscreteToCartesian.html#a416da5763f9fbc1102116d87a9d16406">More...</a><br /></td></tr>
-<tr class="separator:a416da5763f9fbc1102116d87a9d16406"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc5ed6dcc2450da218198df4ce5d99db"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#afc5ed6dcc2450da218198df4ce5d99db">to_pseudo_cartesian_jacobian_12_center</a> (ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</td></tr>
-<tr class="memdesc:afc5ed6dcc2450da218198df4ce5d99db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classRefinedDiscreteToCartesian.html#afc5ed6dcc2450da218198df4ce5d99db">More...</a><br /></td></tr>
-<tr class="separator:afc5ed6dcc2450da218198df4ce5d99db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae2b4b51ccbf6904311b898cf6294697"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#aae2b4b51ccbf6904311b898cf6294697">to_pseudo_cartesian_jacobian_21_center</a> (ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</td></tr>
-<tr class="memdesc:aae2b4b51ccbf6904311b898cf6294697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classRefinedDiscreteToCartesian.html#aae2b4b51ccbf6904311b898cf6294697">More...</a><br /></td></tr>
-<tr class="separator:aae2b4b51ccbf6904311b898cf6294697"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed3ea390d002eebaa27fde9077fd9fc8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#aed3ea390d002eebaa27fde9077fd9fc8">to_pseudo_cartesian_jacobian_22_center</a> (ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</td></tr>
-<tr class="memdesc:aed3ea390d002eebaa27fde9077fd9fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classRefinedDiscreteToCartesian.html#aed3ea390d002eebaa27fde9077fd9fc8">More...</a><br /></td></tr>
-<tr class="separator:aed3ea390d002eebaa27fde9077fd9fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5bba01bd6c921ef16dc603188003936"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#ae5bba01bd6c921ef16dc603188003936">RefinedDiscreteToCartesian</a> (<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:ae5bba01bd6c921ef16dc603188003936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> from another <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a>.  <a href="classRefinedDiscreteToCartesian.html#ae5bba01bd6c921ef16dc603188003936">More...</a><br /></td></tr>
+<tr class="separator:ae5bba01bd6c921ef16dc603188003936"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae29f077f94f09fc84bd19d45f8e7e225"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#ae29f077f94f09fc84bd19d45f8e7e225">RefinedDiscreteToCartesian</a> (<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> const &amp;x)=default</td></tr>
+<tr class="memdesc:ae29f077f94f09fc84bd19d45f8e7e225"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> from another temporary <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a>.  <a href="classRefinedDiscreteToCartesian.html#ae29f077f94f09fc84bd19d45f8e7e225">More...</a><br /></td></tr>
+<tr class="separator:ae29f077f94f09fc84bd19d45f8e7e225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f901e23b2dfd8a35174d35fdd7ba4b5"><td class="memItemLeft" align="right" valign="top">ddc::Coordinate&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a0f901e23b2dfd8a35174d35fdd7ba4b5">operator()</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a0f901e23b2dfd8a35174d35fdd7ba4b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the physical coordinates from the logical coordinates.  <a href="classRefinedDiscreteToCartesian.html#a0f901e23b2dfd8a35174d35fdd7ba4b5">More...</a><br /></td></tr>
+<tr class="separator:a0f901e23b2dfd8a35174d35fdd7ba4b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaedfa0d22464f78665eb0065a985edd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#aaedfa0d22464f78665eb0065a985edd3">jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const final</td></tr>
+<tr class="memdesc:aaedfa0d22464f78665eb0065a985edd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <a href="classRefinedDiscreteToCartesian.html#aaedfa0d22464f78665eb0065a985edd3">More...</a><br /></td></tr>
+<tr class="separator:aaedfa0d22464f78665eb0065a985edd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c1f98fdaf4b64cb7084909773a85664"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a1c1f98fdaf4b64cb7084909773a85664">jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a1c1f98fdaf4b64cb7084909773a85664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <a href="classRefinedDiscreteToCartesian.html#a1c1f98fdaf4b64cb7084909773a85664">More...</a><br /></td></tr>
+<tr class="separator:a1c1f98fdaf4b64cb7084909773a85664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c5f9aada92d9fdb721f49963ed4c931"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a7c5f9aada92d9fdb721f49963ed4c931">jacobian_12</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a7c5f9aada92d9fdb721f49963ed4c931"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the Jacobian matrix.  <a href="classRefinedDiscreteToCartesian.html#a7c5f9aada92d9fdb721f49963ed4c931">More...</a><br /></td></tr>
+<tr class="separator:a7c5f9aada92d9fdb721f49963ed4c931"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a308b497ac063952739c487bdce48145c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a308b497ac063952739c487bdce48145c">jacobian_21</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a308b497ac063952739c487bdce48145c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the Jacobian matrix.  <a href="classRefinedDiscreteToCartesian.html#a308b497ac063952739c487bdce48145c">More...</a><br /></td></tr>
+<tr class="separator:a308b497ac063952739c487bdce48145c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac688e376939b25dae506045883181fb5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#ac688e376939b25dae506045883181fb5">jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:ac688e376939b25dae506045883181fb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the Jacobian matrix.  <a href="classRefinedDiscreteToCartesian.html#ac688e376939b25dae506045883181fb5">More...</a><br /></td></tr>
+<tr class="separator:ac688e376939b25dae506045883181fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a188b82d80a44d2d7cdda04c6dce91690"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690">to_pseudo_cartesian_jacobian_center_matrix</a> (ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid, Matrix_2x2 &amp;matrix) const</td></tr>
+<tr class="memdesc:a188b82d80a44d2d7cdda04c6dce91690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <a href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690">More...</a><br /></td></tr>
+<tr class="separator:a188b82d80a44d2d7cdda04c6dce91690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2db78ed9508f2ba5653cbbae7a5fe0b1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a2db78ed9508f2ba5653cbbae7a5fe0b1">to_pseudo_cartesian_jacobian_11_center</a> (ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</td></tr>
+<tr class="memdesc:a2db78ed9508f2ba5653cbbae7a5fe0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classRefinedDiscreteToCartesian.html#a2db78ed9508f2ba5653cbbae7a5fe0b1">More...</a><br /></td></tr>
+<tr class="separator:a2db78ed9508f2ba5653cbbae7a5fe0b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ccad9ea32431d2129672501ef9ae453"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a9ccad9ea32431d2129672501ef9ae453">to_pseudo_cartesian_jacobian_12_center</a> (ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</td></tr>
+<tr class="memdesc:a9ccad9ea32431d2129672501ef9ae453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classRefinedDiscreteToCartesian.html#a9ccad9ea32431d2129672501ef9ae453">More...</a><br /></td></tr>
+<tr class="separator:a9ccad9ea32431d2129672501ef9ae453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f14e02728459802da5197828535c1e2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a0f14e02728459802da5197828535c1e2">to_pseudo_cartesian_jacobian_21_center</a> (ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</td></tr>
+<tr class="memdesc:a0f14e02728459802da5197828535c1e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classRefinedDiscreteToCartesian.html#a0f14e02728459802da5197828535c1e2">More...</a><br /></td></tr>
+<tr class="separator:a0f14e02728459802da5197828535c1e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663d2043b6fd23ddbb86815f70f8edf4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a663d2043b6fd23ddbb86815f70f8edf4">to_pseudo_cartesian_jacobian_22_center</a> (ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</td></tr>
+<tr class="memdesc:a663d2043b6fd23ddbb86815f70f8edf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classRefinedDiscreteToCartesian.html#a663d2043b6fd23ddbb86815f70f8edf4">More...</a><br /></td></tr>
+<tr class="separator:a663d2043b6fd23ddbb86815f70f8edf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classCurvilinear2DToCartesian"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classCurvilinear2DToCartesian')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian&lt; RDimX, RDimY, SplineRPBuilder::bsplines_type1::tag_type, SplineRPBuilder::bsplines_type2::tag_type &gt;</a></td></tr>
 <tr class="memitem:a39cdb71fcfd111b9be3679922f99af4d inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a39cdb71fcfd111b9be3679922f99af4d">Curvilinear2DToCartesian</a> (<a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> const &amp;other)=default</td></tr>
 <tr class="memdesc:a39cdb71fcfd111b9be3679922f99af4d inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> (lvalue).  <a href="classCurvilinear2DToCartesian.html#a39cdb71fcfd111b9be3679922f99af4d">More...</a><br /></td></tr>
@@ -238,10 +238,10 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a436c63b85e409010d739f613a1d69741"><td class="memTemplParams" colspan="2">template&lt;class Mapping &gt; </td></tr>
-<tr class="memitem:a436c63b85e409010d739f613a1d69741"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a436c63b85e409010d739f613a1d69741">analytical_to_refined</a> (Mapping const &amp;analytical_mapping, ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;domain)</td></tr>
-<tr class="memdesc:a436c63b85e409010d739f613a1d69741"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> mapping from an analytical mapping.  <a href="classRefinedDiscreteToCartesian.html#a436c63b85e409010d739f613a1d69741">More...</a><br /></td></tr>
-<tr class="separator:a436c63b85e409010d739f613a1d69741"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b3349bb1ae9dd6fd6f9e92ee058646f"><td class="memTemplParams" colspan="2">template&lt;class Mapping &gt; </td></tr>
+<tr class="memitem:a0b3349bb1ae9dd6fd6f9e92ee058646f"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRefinedDiscreteToCartesian.html#a0b3349bb1ae9dd6fd6f9e92ee058646f">analytical_to_refined</a> (Mapping const &amp;analytical_mapping, ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;domain)</td></tr>
+<tr class="memdesc:a0b3349bb1ae9dd6fd6f9e92ee058646f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a <a class="el" href="classRefinedDiscreteToCartesian.html" title="A class for describing refined discrete 2D mappings from the logical domain to the physical domain.">RefinedDiscreteToCartesian</a> mapping from an analytical mapping.  <a href="classRefinedDiscreteToCartesian.html#a0b3349bb1ae9dd6fd6f9e92ee058646f">More...</a><br /></td></tr>
+<tr class="separator:a0b3349bb1ae9dd6fd6f9e92ee058646f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -268,8 +268,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="separator:ad0f61c18363bff817f9c34f2b03e8d4c inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class RDimX, class RDimY, class SplineRPBuilder, int Nr, int Nt&gt;<br />
-class RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBuilder, Nr, Nt &gt;</h3>
+<div class="textblock"><h3>template&lt;class RDimX, class RDimY, class SplineRPBuilder, class SplineRPEvaluator, int Nr, int Nt&gt;<br />
+class RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;</h3>
 
 <p>A class for describing refined discrete 2D mappings from the logical domain to the physical domain. </p>
 <p>The mapping is a <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> mapping but built on a different grid. To be independent of errors due to the use of a discrete mapping, it could be interesting to work with a discrete mapping built on a refined grid.</p>
@@ -278,21 +278,21 @@ class RefinedDiscreteToCartesian&lt; RDimX, RDimY, SplineRPBuilder, Nr, Nt &gt;<
 <dd>
 <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a71cf6ce493ab0b2d2648bbf37fe0a1b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71cf6ce493ab0b2d2648bbf37fe0a1b0">&#9670;&nbsp;</a></span>RefinedDiscreteToCartesian() <span class="overload">[1/2]</span></h2>
+<a id="ae5bba01bd6c921ef16dc603188003936"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5bba01bd6c921ef16dc603188003936">&#9670;&nbsp;</a></span>RefinedDiscreteToCartesian() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> </td>
+          <td class="memname"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -314,21 +314,21 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 
 </div>
 </div>
-<a id="ad15636dc573eac8f0822134b87be904a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad15636dc573eac8f0822134b87be904a">&#9670;&nbsp;</a></span>RefinedDiscreteToCartesian() <span class="overload">[2/2]</span></h2>
+<a id="ae29f077f94f09fc84bd19d45f8e7e225"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae29f077f94f09fc84bd19d45f8e7e225">&#9670;&nbsp;</a></span>RefinedDiscreteToCartesian() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> </td>
+          <td class="memname"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::<a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt; const &amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -351,19 +351,19 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab2bd385b85af4de24b2b551ad7d08395"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2bd385b85af4de24b2b551ad7d08395">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a0f901e23b2dfd8a35174d35fdd7ba4b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f901e23b2dfd8a35174d35fdd7ba4b5">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ddc::Coordinate&lt;<a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>&gt; <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::operator() </td>
+          <td class="memname">ddc::Coordinate&lt;<a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>&gt; <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -378,7 +378,7 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 </div><div class="memdoc">
 
 <p>Compute the physical coordinates from the logical coordinates. </p>
-<p>It evaluates the decomposed mapping on B-splines at the coordinate point with a <a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a>.</p>
+<p>It evaluates the decomposed mapping on B-splines at the coordinate point with a SplineEvaluator2D.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinates in the initial logical domain.</td></tr>
@@ -388,23 +388,23 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 <dl class="section return"><dt>Returns</dt><dd>The coordinates of the mapping in the initial physical domain.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> </dd>
 <dd>
-<a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
+SplineEvaluator2D </dd></dl>
 
 </div>
 </div>
-<a id="afa1403f0c31addf1ddc2a32546e95968"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa1403f0c31addf1ddc2a32546e95968">&#9670;&nbsp;</a></span>jacobian_matrix()</h2>
+<a id="aaedfa0d22464f78665eb0065a985edd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaedfa0d22464f78665eb0065a985edd3">&#9670;&nbsp;</a></span>jacobian_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::jacobian_matrix </td>
+          <td class="memname">void <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::jacobian_matrix </td>
           <td>(</td>
           <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em>, </td>
@@ -449,19 +449,19 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 
 </div>
 </div>
-<a id="a92814d6e27ac7ea37614afebb77b948c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92814d6e27ac7ea37614afebb77b948c">&#9670;&nbsp;</a></span>jacobian_11()</h2>
+<a id="a1c1f98fdaf4b64cb7084909773a85664"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c1f98fdaf4b64cb7084909773a85664">&#9670;&nbsp;</a></span>jacobian_11()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::jacobian_11 </td>
+          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::jacobian_11 </td>
           <td>(</td>
           <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -485,23 +485,23 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the Jacobian matrix.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> </dd>
 <dd>
-<a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
+SplineEvaluator2D </dd></dl>
 
 </div>
 </div>
-<a id="a9e3a54843420a1bb60def2673e76f6b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e3a54843420a1bb60def2673e76f6b5">&#9670;&nbsp;</a></span>jacobian_12()</h2>
+<a id="a7c5f9aada92d9fdb721f49963ed4c931"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c5f9aada92d9fdb721f49963ed4c931">&#9670;&nbsp;</a></span>jacobian_12()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::jacobian_12 </td>
+          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::jacobian_12 </td>
           <td>(</td>
           <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -525,23 +525,23 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the Jacobian matrix.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> </dd>
 <dd>
-<a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
+SplineEvaluator2D </dd></dl>
 
 </div>
 </div>
-<a id="a3566dfb3c96667eb21a1f2bf7cef9e20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3566dfb3c96667eb21a1f2bf7cef9e20">&#9670;&nbsp;</a></span>jacobian_21()</h2>
+<a id="a308b497ac063952739c487bdce48145c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a308b497ac063952739c487bdce48145c">&#9670;&nbsp;</a></span>jacobian_21()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::jacobian_21 </td>
+          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::jacobian_21 </td>
           <td>(</td>
           <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -565,23 +565,23 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the Jacobian matrix.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> </dd>
 <dd>
-<a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
+SplineEvaluator2D </dd></dl>
 
 </div>
 </div>
-<a id="aadcec35fb2e9e3d3374319c2083252ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadcec35fb2e9e3d3374319c2083252ac">&#9670;&nbsp;</a></span>jacobian_22()</h2>
+<a id="ac688e376939b25dae506045883181fb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac688e376939b25dae506045883181fb5">&#9670;&nbsp;</a></span>jacobian_22()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::jacobian_22 </td>
+          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::jacobian_22 </td>
           <td>(</td>
           <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -605,23 +605,23 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the Jacobian matrix.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> </dd>
 <dd>
-<a class="el" href="classSplineEvaluator2D.html" title="Define an evaluator 2D on B-splines.">SplineEvaluator2D</a> </dd></dl>
+SplineEvaluator2D </dd></dl>
 
 </div>
 </div>
-<a id="ad036c1e505c4f6aff7c898f8780b4aae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad036c1e505c4f6aff7c898f8780b4aae">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_center_matrix()</h2>
+<a id="a188b82d80a44d2d7cdda04c6dce91690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a188b82d80a44d2d7cdda04c6dce91690">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_center_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::to_pseudo_cartesian_jacobian_center_matrix </td>
+          <td class="memname">void <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::to_pseudo_cartesian_jacobian_center_matrix </td>
           <td>(</td>
           <td class="paramtype">ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;&#160;</td>
           <td class="paramname"><em>grid</em>, </td>
@@ -646,7 +646,7 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 </div><div class="memdoc">
 
 <p>Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point. </p>
-<p>Call the <a class="el" href="classDiscreteToCartesian.html#ac835fa42f73cd1018f7d3b40bce558b2" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">DiscreteToCartesian::to_pseudo_cartesian_jacobian_center_matrix()</a> function.</p>
+<p>Call the <a class="el" href="classDiscreteToCartesian.html#a096a8b63f61587613c8022ebadbdda0e" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">DiscreteToCartesian::to_pseudo_cartesian_jacobian_center_matrix()</a> function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">grid</td><td>The domain where the mapping is defined. </td></tr>
@@ -662,19 +662,19 @@ BslAdvection </dd>
 
 </div>
 </div>
-<a id="a416da5763f9fbc1102116d87a9d16406"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a416da5763f9fbc1102116d87a9d16406">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_11_center()</h2>
+<a id="a2db78ed9508f2ba5653cbbae7a5fe0b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2db78ed9508f2ba5653cbbae7a5fe0b1">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_11_center()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::to_pseudo_cartesian_jacobian_11_center </td>
+          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::to_pseudo_cartesian_jacobian_11_center </td>
           <td>(</td>
           <td class="paramtype">ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;&#160;</td>
           <td class="paramname"><em>grid</em></td><td>)</td>
@@ -696,23 +696,23 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRefinedDiscreteToCartesian.html#ad036c1e505c4f6aff7c898f8780b4aae" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 </div>
 </div>
-<a id="afc5ed6dcc2450da218198df4ce5d99db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc5ed6dcc2450da218198df4ce5d99db">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_12_center()</h2>
+<a id="a9ccad9ea32431d2129672501ef9ae453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ccad9ea32431d2129672501ef9ae453">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_12_center()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::to_pseudo_cartesian_jacobian_12_center </td>
+          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::to_pseudo_cartesian_jacobian_12_center </td>
           <td>(</td>
           <td class="paramtype">ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;&#160;</td>
           <td class="paramname"><em>grid</em></td><td>)</td>
@@ -738,19 +738,19 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
 
 </div>
 </div>
-<a id="aae2b4b51ccbf6904311b898cf6294697"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae2b4b51ccbf6904311b898cf6294697">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_21_center()</h2>
+<a id="a0f14e02728459802da5197828535c1e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f14e02728459802da5197828535c1e2">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_21_center()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::to_pseudo_cartesian_jacobian_21_center </td>
+          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::to_pseudo_cartesian_jacobian_21_center </td>
           <td>(</td>
           <td class="paramtype">ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;&#160;</td>
           <td class="paramname"><em>grid</em></td><td>)</td>
@@ -772,23 +772,23 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRefinedDiscreteToCartesian.html#ad036c1e505c4f6aff7c898f8780b4aae" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 </div>
 </div>
-<a id="aed3ea390d002eebaa27fde9077fd9fc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed3ea390d002eebaa27fde9077fd9fc8">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_22_center()</h2>
+<a id="a663d2043b6fd23ddbb86815f70f8edf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a663d2043b6fd23ddbb86815f70f8edf4">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_22_center()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::to_pseudo_cartesian_jacobian_22_center </td>
+          <td class="memname">double <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::to_pseudo_cartesian_jacobian_22_center </td>
           <td>(</td>
           <td class="paramtype">ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;&#160;</td>
           <td class="paramname"><em>grid</em></td><td>)</td>
@@ -810,17 +810,17 @@ template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&g
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRefinedDiscreteToCartesian.html#ad036c1e505c4f6aff7c898f8780b4aae" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 </div>
 </div>
-<a id="a436c63b85e409010d739f613a1d69741"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a436c63b85e409010d739f613a1d69741">&#9670;&nbsp;</a></span>analytical_to_refined()</h2>
+<a id="a0b3349bb1ae9dd6fd6f9e92ee058646f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b3349bb1ae9dd6fd6f9e92ee058646f">&#9670;&nbsp;</a></span>analytical_to_refined()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class RDimX , class RDimY , class SplineRPBuilder , int Nr, int Nt&gt; </div>
+template&lt;class RDimX , class RDimY , class SplineRPBuilder , class SplineRPEvaluator , int Nr, int Nt&gt; </div>
 <div class="memtemplate">
 template&lt;class Mapping &gt; </div>
 <table class="mlabels">
@@ -828,7 +828,7 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, <a class="el" href="classSplineBuilder2D.html">SplineRPBuilder</a>, Nr, Nt &gt;::analytical_to_refined </td>
+          <td class="memname">static <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a>, SplineRPBuilder, SplineRPEvaluator, Nr, Nt &gt;::analytical_to_refined </td>
           <td>(</td>
           <td class="paramtype">Mapping const &amp;&#160;</td>
           <td class="paramname"><em>analytical_mapping</em>, </td>
