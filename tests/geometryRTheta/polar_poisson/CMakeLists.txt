@@ -13,7 +13,7 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
             DDC::PDI_Wrapper
             paraconf::paraconf
             PDI::pdi
-            sll::splines
+            sll::SLL
             gslx::poisson_RTheta
             gslx::paraconfpp
             Eigen3::Eigen

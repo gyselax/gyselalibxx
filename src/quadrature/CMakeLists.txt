@@ -7,7 +7,7 @@ target_include_directories(quadrature
 )
 target_link_libraries(quadrature INTERFACE
     DDC::DDC
-    sll::splines
+    sll::SLL
 )
 
 add_library(gslx::quadrature ALIAS quadrature)

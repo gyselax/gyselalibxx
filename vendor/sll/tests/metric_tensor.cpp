@@ -1,6 +1,4 @@
 /// Test of the metric tensor and its inverse: (singular point avoided)
-#include <sll/bsplines_non_uniform.hpp>
-#include <sll/greville_interpolation_points.hpp>
 #include <sll/polar_bsplines.hpp>
 
 #include "sll/mapping/circular_to_cartesian.hpp"
@@ -32,14 +30,14 @@ using CoordRP = ddc::Coordinate<DimR, DimP>;
 
 int constexpr BSDegree = 3;
 
-using BSplinesR = NonUniformBSplines<DimR, BSDegree>;
-using BSplinesP = NonUniformBSplines<DimP, BSDegree>;
+using BSplinesR = ddc::NonUniformBSplines<DimR, BSDegree>;
+using BSplinesP = ddc::NonUniformBSplines<DimP, BSDegree>;
 using PolarBSplinesRP = PolarBSplines<BSplinesR, BSplinesP, 1>;
 
-using InterpPointsR
-        = GrevilleInterpolationPoints<BSplinesR, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-using InterpPointsP
-        = GrevilleInterpolationPoints<BSplinesP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+using InterpPointsR = ddc::
+        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
+using InterpPointsP = ddc::
+        GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
 using IDimR = typename InterpPointsR::interpolation_mesh_type;
 using IDimP = typename InterpPointsP::interpolation_mesh_type;

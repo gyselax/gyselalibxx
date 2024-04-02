@@ -3,10 +3,7 @@
 #include <cstdlib>
 
 #include <ddc/ddc.hpp>
-
-#include <sll/bsplines_non_uniform.hpp>
-#include <sll/greville_interpolation_points.hpp>
-#include <sll/spline_builder_2d.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include "sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp"
 #include "sll/mapping/circular_to_cartesian.hpp"
@@ -43,22 +40,46 @@ using CoordXY = ddc::Coordinate<RDimX, RDimY>;
 
 int constexpr BSDegree = 3;
 
-using BSplinesR = NonUniformBSplines<RDimR, BSDegree>;
-using BSplinesP = NonUniformBSplines<RDimP, BSDegree>;
+using BSplinesR = ddc::NonUniformBSplines<RDimR, BSDegree>;
+using BSplinesP = ddc::NonUniformBSplines<RDimP, BSDegree>;
 
-using SplineInterpPointsR
-        = GrevilleInterpolationPoints<BSplinesR, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-using SplineInterpPointsP
-        = GrevilleInterpolationPoints<BSplinesP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+
+using SplineInterpPointsR = ddc::
+        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
+using SplineInterpPointsP = ddc::
+        GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
 using IDimR = typename SplineInterpPointsR::interpolation_mesh_type;
 using IDimP = typename SplineInterpPointsP::interpolation_mesh_type;
 
-using SplineRBuilder = SplineBuilder<BSplinesR, IDimR, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-using SplinePBuilder = SplineBuilder<BSplinesP, IDimP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
-using SplineRPBuilder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
+using SplineRPBuilder = ddc::SplineBuilder2D<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        BSplinesR,
+        BSplinesP,
+        IDimR,
+        IDimP,
+        ddc::BoundCond::GREVILLE,
+        ddc::BoundCond::GREVILLE,
+        ddc::BoundCond::PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        ddc::SplineSolver::GINKGO,
+        IDimR,
+        IDimP>;
 
-using SplineRPEvaluator = SplineEvaluator2D<BSplinesR, BSplinesP>;
+using SplineRPEvaluator = ddc::SplineEvaluator2D<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        BSplinesR,
+        BSplinesP,
+        IDimR,
+        IDimP,
+        ddc::ConstantExtrapolationRule<RDimR, RDimP>,
+        ddc::ConstantExtrapolationRule<RDimR, RDimP>,
+        ddc::PeriodicExtrapolationRule<RDimP>,
+        ddc::PeriodicExtrapolationRule<RDimP>,
+        IDimR,
+        IDimP>;
 
 using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
 using BSDomainP = ddc::DiscreteDomain<BSplinesP>;
@@ -219,9 +240,15 @@ double test_on_grid_and_not_on_grid(
         int const Nr,
         int const Nt,
         Mapping const& analytical_mapping,
-        RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, refined_Nr, refined_Nt> const&
-                refined_mapping,
-        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder> const& discrete_mapping,
+        RefinedDiscreteToCartesian<
+                RDimX,
+                RDimY,
+                SplineRPBuilder,
+                SplineRPEvaluator,
+                refined_Nr,
+                refined_Nt> const& refined_mapping,
+        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluator> const&
+                discrete_mapping,
         IDomainRP const& grid)
 {
     std::cout << std::endl
@@ -371,9 +398,15 @@ double test_Jacobian(
         int const Nr,
         int const Nt,
         Mapping const& analytical_mapping,
-        RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, refined_Nr, refined_Nt> const&
-                refined_mapping,
-        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder> const& discrete_mapping,
+        RefinedDiscreteToCartesian<
+                RDimX,
+                RDimY,
+                SplineRPBuilder,
+                SplineRPEvaluator,
+                refined_Nr,
+                refined_Nt> const& refined_mapping,
+        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluator> const&
+                discrete_mapping,
         IDomainRP const& grid)
 {
     std::cout << std::endl
@@ -443,9 +476,15 @@ double test_pseudo_Cart(
         int const Nr,
         int const Nt,
         Mapping const& analytical_mapping,
-        RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, refined_Nr, refined_Nt> const&
-                refined_mapping,
-        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder> const& discrete_mapping,
+        RefinedDiscreteToCartesian<
+                RDimX,
+                RDimY,
+                SplineRPBuilder,
+                SplineRPEvaluator,
+                refined_Nr,
+                refined_Nt> const& refined_mapping,
+        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluator> const&
+                discrete_mapping,
         IDomainRP const& grid)
 {
     std::cout << std::endl
@@ -515,36 +554,38 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
 
     // Operators ---
     SplineRPBuilder builder(grid);
-    ConstantExtrapolationBoundaryValue2D<BSplinesR, BSplinesP, RDimR> boundary_condition_r_left(
-            r_min);
-    ConstantExtrapolationBoundaryValue2D<BSplinesR, BSplinesP, RDimR> boundary_condition_r_right(
-            r_max);
-    SplineRPEvaluator evaluator(
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(r_min);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(r_max);
+    SplineRPEvaluator spline_evaluator(
             boundary_condition_r_left,
             boundary_condition_r_right,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+            ddc::PeriodicExtrapolationRule<RDimP>(),
+            ddc::PeriodicExtrapolationRule<RDimP>());
 
 
     // Tests ---
     std::array<double, 3> results;
 
-    DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder> discrete_mapping
-            = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>::
-                    analytical_to_discrete(analytical_mapping, builder, evaluator);
+    DiscreteToCartesian discrete_mapping
+            = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluator>::
+                    analytical_to_discrete(analytical_mapping, builder, spline_evaluator);
 
-    RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, 16, 32> refined_mapping_16x32
-            = RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, 16, 32>::
+    RefinedDiscreteToCartesian refined_mapping_16x32
+            = RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluator, 16, 32>::
                     analytical_to_refined(analytical_mapping, grid);
 
-    RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, 32, 64> refined_mapping_32x64
-            = RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, 32, 64>::
+    RefinedDiscreteToCartesian refined_mapping_32x64
+            = RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluator, 32, 64>::
                     analytical_to_refined(analytical_mapping, grid);
 
 
-    RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, 64, 128> refined_mapping_64x128
-            = RefinedDiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, 64, 128>::
-                    analytical_to_refined(analytical_mapping, grid);
+    RefinedDiscreteToCartesian refined_mapping_64x128 = RefinedDiscreteToCartesian<
+            RDimX,
+            RDimY,
+            SplineRPBuilder,
+            SplineRPEvaluator,
+            64,
+            128>::analytical_to_refined(analytical_mapping, grid);
 
 
     std::cout << std::endl
