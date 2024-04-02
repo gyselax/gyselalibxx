@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 cd ..
 
 rm -rf vendor/ddc
-git clone --depth 1 https://github.com/Maison-de-la-Simulation/ddc.git vendor/ddc
+git clone --depth 1 https://github.com/CExA-project/ddc.git vendor/ddc
 rm -rf vendor/ddc/.git
 
 if [ '(' "x$1" = "x--push" -o "x$1" = "x--commit" ')' -a -n "$(git status --porcelain)" ]
