@@ -48,7 +48,7 @@ public:
      */
     template <class CoordType, class BSplines, class Layout, class MemorySpace>
     KOKKOS_FUNCTION double operator()(
-            CoordType,
+            [[maybe_unused]] CoordType pos,
             ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplines>, Layout, MemorySpace> const
                     spline_coef) const
     {
@@ -91,7 +91,7 @@ public:
      * dimension off-interest (the complementary dimension of the boundary condition),
      * because the evaluator can receive coordinates outside the domain in both dimension.
      *
-     * @param[in] eval_pos_bc
+     * @param[in] eval_pos
      * 			Coordinate in the dimension given inside the domain where we will evaluate
      * 			each points outside the domain.
      * @param[in] eval_pos_not_interest_min
@@ -117,7 +117,7 @@ public:
      * No second and third parameters are needed in case of periodic splines on the
      * dimension off-interest (the complementary dimension of the boundary condition).
      *
-     * @param[in] eval_pos_bc
+     * @param[in] eval_pos
      * 			Coordinate in the dimension given inside the domain where we will evaluate
      * 			each points outside the domain.
      */

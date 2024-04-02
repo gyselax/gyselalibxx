@@ -586,11 +586,10 @@ public:
 
     /**
      * @brief Get the the integral of the function on B-splines on the domain.
-     *
+     * @param[out] integrals
+     * 			The integrals of the function
      * @param[in] spline_coef
      * 			The B-splines coefficients of the function we want to integrate.
-     *
-     * @return A double with the value of the integral of the function.
      */
     template <class Layout1, class Layout2>
     void integrate(

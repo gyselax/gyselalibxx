@@ -84,13 +84,11 @@ jobs:
           export CXX=clang++
           cmake \
               -DDDC_BUILD_DOCUMENTATION=ON \
-              -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
               -DCMAKE_CXX_STANDARD=20 \
               -DMDSPAN_CXX_STANDARD=20 \
               -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
-              -DCMAKE_CXX_FLAGS="-Wno-gnu-zero-variadic-macro-arguments -Wno-unused-command-line-argument" \
               /src
-          make VERBOSE=1 doc
+          cmake --build . --verbose --target doc
           mv docs/html /src/docs_out
         EOF
         mkdir docs_out

@@ -29,8 +29,8 @@
 #include "ddc/uniform_point_sampling.hpp"
 
 // Algorithms
+#include "ddc/create_mirror.hpp"
 #include "ddc/for_each.hpp"
-#include "ddc/mirror.hpp"
 #include "ddc/parallel_deepcopy.hpp"
 #include "ddc/parallel_fill.hpp"
 #include "ddc/parallel_for_each.hpp"
@@ -41,8 +41,4 @@
 // PDI wrapper
 #if defined(DDC_BUILD_PDI_WRAPPER)
 #include "ddc/pdi.hpp"
-#endif
-
-#if ginkgo_AVAIL
-#include "misc/ginkgo_executors.hpp"
 #endif
