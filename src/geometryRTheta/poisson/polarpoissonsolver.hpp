@@ -6,7 +6,6 @@
 
 #include <sll/gauss_legendre_integration.hpp>
 #include <sll/math_tools.hpp>
-#include <sll/null_boundary_value.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
 
@@ -111,6 +110,14 @@ private:
      */
     using QuadratureLengthP = ddc::DiscreteVector<QDimPMesh>;
 
+    using BSplinesR_Polar = PolarBSplinesRP::BSplinesR_tag;
+    using BSplinesP_Polar = PolarBSplinesRP::BSplinesP_tag;
+
+    using IDimBSpline2D_Polar = ddc::DiscreteElement<BSplinesR_Polar, BSplinesP_Polar>;
+
+    using BSDomainR_Polar = ddc::DiscreteDomain<BSplinesR_Polar>;
+    using BSDomainP_Polar = ddc::DiscreteDomain<BSplinesP_Polar>;
+
     /**
      * @brief Object storing a value and a value of the derivative
      * of a 1D function.
@@ -142,19 +149,19 @@ private:
     using MatrixElement = Eigen::Triplet<double>;
 
 private:
-    static constexpr int n_gauss_legendre_r = BSplinesR::degree() + 1;
-    static constexpr int n_gauss_legendre_p = BSplinesP::degree() + 1;
+    static constexpr int n_gauss_legendre_r = BSplinesR_Polar::degree() + 1;
+    static constexpr int n_gauss_legendre_p = BSplinesP_Polar::degree() + 1;
     // The number of cells (in the radial direction) in which both types of basis splines can be found
     static constexpr int n_overlap_cells = PolarBSplinesRP::continuity + 1;
 
     // Number of cells over which a radial B-splines has its support
     // This is the case for b-splines which are not affected by the higher knot multiplicity at the boundary.
     static constexpr ddc::DiscreteVector<RBasisSubset> n_non_zero_bases_r
-            = ddc::DiscreteVector<RBasisSubset>(BSplinesR::degree() + 1);
+            = ddc::DiscreteVector<RBasisSubset>(BSplinesR_Polar::degree() + 1);
 
     // Number of cells over which a poloidal B-splines has its support
     static constexpr ddc::DiscreteVector<PBasisSubset> n_non_zero_bases_p
-            = ddc::DiscreteVector<PBasisSubset>(BSplinesP::degree() + 1);
+            = ddc::DiscreteVector<PBasisSubset>(BSplinesP_Polar::degree() + 1);
 
     static constexpr ddc::DiscreteDomain<RBasisSubset> non_zero_bases_r = ddc::DiscreteDomain<
             RBasisSubset>(ddc::DiscreteElement<RBasisSubset> {0}, n_non_zero_bases_r);
@@ -166,8 +173,8 @@ private:
 
     // Domains
     BSDomainPolar fem_non_singular_domain;
-    BSDomainR radial_bsplines;
-    BSDomainP polar_bsplines;
+    BSDomainR_Polar radial_bsplines;
+    BSDomainP_Polar polar_bsplines;
 
     QuadratureDomainR quadrature_domain_r;
     QuadratureDomainP quadrature_domain_p;
@@ -189,7 +196,7 @@ private:
 
     ddc::Chunk<double, QuadratureDomainRP> int_volume;
 
-    PolarSplineEvaluator<PolarBSplinesRP> m_polar_spline_evaluator;
+    PolarSplineEvaluator<PolarBSplinesRP, ddc::NullExtrapolationRule> m_polar_spline_evaluator;
 
     Eigen::SimplicialLDLT<Eigen::SparseMatrix<double>> m_matrix;
 
@@ -220,23 +227,23 @@ public:
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
             Mapping const& mapping)
-        : nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - n_overlap_cells - 1)
-        , nbasis_p(ddc::discrete_space<BSplinesP>().nbasis())
+        : nbasis_r(ddc::discrete_space<BSplinesR_Polar>().nbasis() - n_overlap_cells - 1)
+        , nbasis_p(ddc::discrete_space<BSplinesP_Polar>().nbasis())
         , fem_non_singular_domain(
                   ddc::discrete_space<PolarBSplinesRP>().tensor_bspline_domain().remove_last(
                           ddc::DiscreteVector<PolarBSplinesRP> {nbasis_p}))
-        , radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                  ddc::DiscreteVector<BSplinesR> {n_overlap_cells}))
-        , polar_bsplines(ddc::discrete_space<BSplinesP>().full_domain().take_first(
-                  ddc::DiscreteVector<BSplinesP> {nbasis_p}))
+        , radial_bsplines(ddc::discrete_space<BSplinesR_Polar>().full_domain().remove_first(
+                  ddc::DiscreteVector<BSplinesR_Polar> {n_overlap_cells}))
+        , polar_bsplines(ddc::discrete_space<BSplinesP_Polar>().full_domain().take_first(
+                  ddc::DiscreteVector<BSplinesP_Polar> {nbasis_p}))
         , quadrature_domain_r(
                   ddc::DiscreteElement<QDimRMesh>(0),
                   ddc::DiscreteVector<QDimRMesh>(
-                          n_gauss_legendre_r * ddc::discrete_space<BSplinesR>().ncells()))
+                          n_gauss_legendre_r * ddc::discrete_space<BSplinesR_Polar>().ncells()))
         , quadrature_domain_p(
                   ddc::DiscreteElement<QDimPMesh>(0),
                   ddc::DiscreteVector<QDimPMesh>(
-                          n_gauss_legendre_p * ddc::discrete_space<BSplinesP>().ncells()))
+                          n_gauss_legendre_p * ddc::discrete_space<BSplinesP_Polar>().ncells()))
         , quadrature_domain_singular(
                   quadrature_domain_r.take_first(
                           ddc::DiscreteVector<QDimRMesh> {n_overlap_cells * n_gauss_legendre_r}),
@@ -256,10 +263,10 @@ public:
                                   PBasisSubset,
                                   QDimPMesh>(non_zero_bases_p, quadrature_domain_p))
         , int_volume(QuadratureDomainRP(quadrature_domain_r, quadrature_domain_p))
-        , m_polar_spline_evaluator(g_polar_null_boundary_2d<PolarBSplinesRP>)
+        , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
     {
-        const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
-        const std::size_t ncells_p = ddc::discrete_space<BSplinesP>().ncells();
+        const std::size_t ncells_r = ddc::discrete_space<BSplinesR_Polar>().ncells();
+        const std::size_t ncells_p = ddc::discrete_space<BSplinesP_Polar>().ncells();
 
         // Get break points
         ddc::DiscreteDomain<RCellDim> r_edges_dom(
@@ -273,11 +280,11 @@ public:
 
         ddc::for_each(r_edges_dom, [&](ddc::DiscreteElement<RCellDim> i) {
             breaks_r(i) = ddc::Coordinate<QDimR>(
-                    ddc::get<RDimR>(ddc::discrete_space<BSplinesR>().get_knot(i.uid())));
+                    ddc::get<RDimR>(ddc::discrete_space<BSplinesR_Polar>().get_knot(i.uid())));
         });
         ddc::for_each(p_edges_dom, [&](ddc::DiscreteElement<PCellDim> i) {
             breaks_p(i) = ddc::Coordinate<QDimP>(
-                    ddc::get<RDimP>(ddc::discrete_space<BSplinesP>().get_knot(i.uid())));
+                    ddc::get<RDimP>(ddc::discrete_space<BSplinesP_Polar>().get_knot(i.uid())));
         });
 
         // Define quadrature points and weights
@@ -309,7 +316,8 @@ public:
         ddc::for_each(quadrature_domain_r, [&](QuadratureIndexR const ir) {
             std::array<double, 2 * n_non_zero_bases_r> data;
             DSpan2D vals(data.data(), n_non_zero_bases_r, 2);
-            ddc::discrete_space<BSplinesR>().eval_basis_and_n_derivs(vals, get_coordinate(ir), 1);
+            ddc::discrete_space<BSplinesR_Polar>()
+                    .eval_basis_and_n_derivs(vals, get_coordinate(ir), 1);
             for (auto ib : non_zero_bases_r) {
                 r_basis_vals_and_derivs(ib, ir).value = vals(ib.uid(), 0);
                 r_basis_vals_and_derivs(ib, ir).derivative = vals(ib.uid(), 1);
@@ -320,7 +328,8 @@ public:
         ddc::for_each(quadrature_domain_p, [&](QuadratureIndexP const ip) {
             std::array<double, 2 * n_non_zero_bases_p> data;
             DSpan2D vals(data.data(), n_non_zero_bases_p, 2);
-            ddc::discrete_space<BSplinesP>().eval_basis_and_n_derivs(vals, get_coordinate(ip), 1);
+            ddc::discrete_space<BSplinesP_Polar>()
+                    .eval_basis_and_n_derivs(vals, get_coordinate(ip), 1);
             for (auto ib : non_zero_bases_p) {
                 p_basis_vals_and_derivs(ib, ip).value = vals(ib.uid(), 0);
                 p_basis_vals_and_derivs(ib, ip).derivative = vals(ib.uid(), 1);
@@ -374,11 +383,13 @@ public:
             int_volume(ir, ip) = abs(mapping.jacobian(coord)) * weights_r(ir) * weights_p(ip);
         });
 
-        SplineRPEvaluator spline_evaluator(
-                g_null_boundary_2d<BSplinesR, BSplinesP>,
-                g_null_boundary_2d<BSplinesR, BSplinesP>,
-                g_null_boundary_2d<BSplinesR, BSplinesP>,
-                g_null_boundary_2d<BSplinesR, BSplinesP>);
+        ddc::NullExtrapolationRule r_extrapolation_rule;
+        ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
+        SplineRPEvaluatorNullBound spline_evaluator(
+                r_extrapolation_rule,
+                r_extrapolation_rule,
+                p_extrapolation_rule,
+                p_extrapolation_rule);
 
         // Number of elements in the matrix that correspond to the splines
         // that cover the singular point
@@ -387,10 +398,10 @@ public:
         // Number of non-zero elements in the matrix corresponding to the inner product of
         // polar splines at the singular point and the other splines
         const int n_elements_overlap
-                = 2 * (PolarBSplinesRP::n_singular_basis() * BSplinesR::degree() * nbasis_p);
-        const int n_stencil_p = nbasis_p * min(int(1 + 2 * BSplinesP::degree()), nbasis_p);
-        const int n_stencil_r = nbasis_r * (1 + 2 * BSplinesR::degree())
-                                - (1 + BSplinesR::degree()) * BSplinesR::degree();
+                = 2 * (PolarBSplinesRP::n_singular_basis() * BSplinesR_Polar::degree() * nbasis_p);
+        const int n_stencil_p = nbasis_p * min(int(1 + 2 * BSplinesP_Polar::degree()), nbasis_p);
+        const int n_stencil_r = nbasis_r * (1 + 2 * BSplinesR_Polar::degree())
+                                - (1 + BSplinesR_Polar::degree()) * BSplinesR_Polar::degree();
         // Number of non-zero elements in the matrix corresponding to the inner product of
         // non-central splines. These have a tensor product structure
         const int n_elements_stencil = n_stencil_r * n_stencil_p;
@@ -430,93 +441,108 @@ public:
         assert(matrix_idx == n_elements_singular);
 
         // Create domains associated with the 2D splines
-        BSDomainR central_radial_bspline_domain(
-                radial_bsplines.take_first(ddc::DiscreteVector<BSplinesR> {BSplinesR::degree()}));
+        BSDomainR central_radial_bspline_domain(radial_bsplines.take_first(
+                ddc::DiscreteVector<BSplinesR_Polar> {BSplinesR_Polar::degree()}));
 
         BSDomainRP non_singular_domain_near_centre(central_radial_bspline_domain, polar_bsplines);
 
         // Calculate the matrix elements where bspline products overlap the bsplines which cover the singular point
         ddc::for_each(singular_domain, [&](IDimPolarBspl const idx_test) {
-            ddc::for_each(non_singular_domain_near_centre, [&](IDimBSpline2D const idx_trial) {
-                const IDimPolarBspl polar_idx_trial(PolarBSplinesRP::get_polar_index(idx_trial));
-                const ddc::DiscreteElement<BSplinesR> r_idx_trial(
-                        ddc::select<BSplinesR>(idx_trial));
-                const ddc::DiscreteElement<BSplinesP> p_idx_trial(
-                        ddc::select<BSplinesP>(idx_trial));
+            ddc::for_each(
+                    non_singular_domain_near_centre,
+                    [&](IDimBSpline2D_Polar const idx_trial) {
+                        const IDimPolarBspl polar_idx_trial(
+                                PolarBSplinesRP::get_polar_index(idx_trial));
+                        const ddc::DiscreteElement<BSplinesR_Polar> r_idx_trial(
+                                ddc::select<BSplinesR_Polar>(idx_trial));
+                        const ddc::DiscreteElement<BSplinesP_Polar> p_idx_trial(
+                                ddc::select<BSplinesP_Polar>(idx_trial));
 
-                // Find the domain covering the cells where both the test and trial functions are non-zero
-                const ddc::DiscreteElement<RCellDim> first_overlap_element_r(
-                        r_idx_trial.uid() < BSplinesR::degree()
-                                ? 0
-                                : r_idx_trial.uid() - BSplinesR::degree());
-                const ddc::DiscreteElement<PCellDim> first_overlap_element_p(
-                        pmod(p_idx_trial.uid() - BSplinesP::degree()));
+                        // Find the domain covering the cells where both the test and trial functions are non-zero
+                        const ddc::DiscreteElement<RCellDim> first_overlap_element_r(
+                                r_idx_trial.uid() < BSplinesR_Polar::degree()
+                                        ? 0
+                                        : r_idx_trial.uid() - BSplinesR_Polar::degree());
+                        const ddc::DiscreteElement<PCellDim> first_overlap_element_p(
+                                pmod(p_idx_trial.uid() - BSplinesP_Polar::degree()));
 
-                const ddc::DiscreteVector<RCellDim> n_overlap_r(
-                        n_overlap_cells - first_overlap_element_r.uid());
-                const ddc::DiscreteVector<PCellDim> n_overlap_p(BSplinesP::degree() + 1);
+                        const ddc::DiscreteVector<RCellDim> n_overlap_r(
+                                n_overlap_cells - first_overlap_element_r.uid());
+                        const ddc::DiscreteVector<PCellDim> n_overlap_p(
+                                BSplinesP_Polar::degree() + 1);
 
-                const ddc::DiscreteDomain<RCellDim> r_cells(first_overlap_element_r, n_overlap_r);
-                const ddc::DiscreteDomain<PCellDim> p_cells(first_overlap_element_p, n_overlap_p);
-                const ddc::DiscreteDomain<RCellDim, PCellDim> non_zero_cells(r_cells, p_cells);
+                        const ddc::DiscreteDomain<RCellDim>
+                                r_cells(first_overlap_element_r, n_overlap_r);
+                        const ddc::DiscreteDomain<PCellDim>
+                                p_cells(first_overlap_element_p, n_overlap_p);
+                        const ddc::DiscreteDomain<RCellDim, PCellDim>
+                                non_zero_cells(r_cells, p_cells);
 
-                if (n_overlap_r > 0) {
-                    double element = 0.0;
+                        if (n_overlap_r > 0) {
+                            double element = 0.0;
 
-                    ddc::for_each(non_zero_cells, [&](CellIndex const cell_idx) {
-                        const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
-                        const int cell_idx_p(pmod(ddc::select<PCellDim>(cell_idx).uid()));
+                            ddc::for_each(non_zero_cells, [&](CellIndex const cell_idx) {
+                                const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
+                                const int cell_idx_p(pmod(ddc::select<PCellDim>(cell_idx).uid()));
 
-                        const QuadratureDomainRP cell_quad_points(
-                                get_quadrature_points_in_cell(cell_idx_r, cell_idx_p));
-                        // Find the column where the non-zero data is stored
-                        ddc::DiscreteElement<RBasisSubset> ib_trial_r(
-                                r_idx_trial.uid() - cell_idx_r);
-                        ddc::DiscreteElement<PBasisSubset> ib_trial_p(
-                                pmod(p_idx_trial.uid() - cell_idx_p));
-                        // Calculate the weak integral
-                        element += ddc::transform_reduce(
-                                cell_quad_points,
-                                0.0,
-                                ddc::reducer::sum<double>(),
-                                [&](QuadratureIndexRP const quad_idx) {
-                                    QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
-                                    QuadratureIndexP const ip = ddc::select<QDimPMesh>(quad_idx);
-                                    return weak_integral_element<Mapping>(
-                                            ir,
-                                            ip,
-                                            singular_basis_vals_and_derivs(idx_test, ir, ip),
-                                            r_basis_vals_and_derivs(ib_trial_r, ir),
-                                            p_basis_vals_and_derivs(ib_trial_p, ip),
-                                            coeff_alpha,
-                                            coeff_beta,
-                                            spline_evaluator,
-                                            mapping);
-                                });
+                                const QuadratureDomainRP cell_quad_points(
+                                        get_quadrature_points_in_cell(cell_idx_r, cell_idx_p));
+                                // Find the column where the non-zero data is stored
+                                ddc::DiscreteElement<RBasisSubset> ib_trial_r(
+                                        r_idx_trial.uid() - cell_idx_r);
+                                ddc::DiscreteElement<PBasisSubset> ib_trial_p(
+                                        pmod(p_idx_trial.uid() - cell_idx_p));
+                                // Calculate the weak integral
+                                element += ddc::transform_reduce(
+                                        cell_quad_points,
+                                        0.0,
+                                        ddc::reducer::sum<double>(),
+                                        [&](QuadratureIndexRP const quad_idx) {
+                                            QuadratureIndexR const ir
+                                                    = ddc::select<QDimRMesh>(quad_idx);
+                                            QuadratureIndexP const ip
+                                                    = ddc::select<QDimPMesh>(quad_idx);
+                                            return weak_integral_element<Mapping>(
+                                                    ir,
+                                                    ip,
+                                                    singular_basis_vals_and_derivs(
+                                                            idx_test,
+                                                            ir,
+                                                            ip),
+                                                    r_basis_vals_and_derivs(ib_trial_r, ir),
+                                                    p_basis_vals_and_derivs(ib_trial_p, ip),
+                                                    coeff_alpha,
+                                                    coeff_beta,
+                                                    spline_evaluator,
+                                                    mapping);
+                                        });
+                            });
+                            matrix_elements[matrix_idx++]
+                                    = MatrixElement(idx_test.uid(), polar_idx_trial.uid(), element);
+                            matrix_elements[matrix_idx++]
+                                    = MatrixElement(polar_idx_trial.uid(), idx_test.uid(), element);
+                        }
                     });
-                    matrix_elements[matrix_idx++]
-                            = MatrixElement(idx_test.uid(), polar_idx_trial.uid(), element);
-                    matrix_elements[matrix_idx++]
-                            = MatrixElement(polar_idx_trial.uid(), idx_test.uid(), element);
-                }
-            });
         });
         assert(matrix_idx == n_elements_singular + n_elements_overlap);
 
         // Calculate the matrix elements following a stencil
         ddc::for_each(fem_non_singular_domain, [&](IDimPolarBspl const polar_idx_test) {
-            const IDimBSpline2D idx_test(PolarBSplinesRP::get_2d_index(polar_idx_test));
-            const std::size_t r_idx_test(ddc::select<BSplinesR>(idx_test).uid());
-            const std::size_t p_idx_test(ddc::select<BSplinesP>(idx_test).uid());
+            const IDimBSpline2D_Polar idx_test(PolarBSplinesRP::get_2d_index(polar_idx_test));
+            const std::size_t r_idx_test(
+                    ddc::select<PolarBSplinesRP::BSplinesR_tag>(idx_test).uid());
+            const std::size_t p_idx_test(
+                    ddc::select<PolarBSplinesRP::BSplinesP_tag>(idx_test).uid());
 
             // Calculate the index of the elements that are already filled
-            BSDomainP remaining_p(
-                    ddc::DiscreteElement<BSplinesP> {p_idx_test},
-                    ddc::DiscreteVector<BSplinesP> {BSplinesP::degree() + 1});
+            BSDomainP_Polar remaining_p(
+                    ddc::DiscreteElement<BSplinesP_Polar> {p_idx_test},
+                    ddc::DiscreteVector<BSplinesP_Polar> {BSplinesP_Polar::degree() + 1});
             ddc::for_each(remaining_p, [&](auto const p_idx_trial) {
-                IDimBSpline2D idx_trial(ddc::DiscreteElement<BSplinesR>(r_idx_test), p_idx_trial);
+                IDimBSpline2D_Polar
+                        idx_trial(ddc::DiscreteElement<BSplinesR_Polar>(r_idx_test), p_idx_trial);
                 IDimPolarBspl polar_idx_trial(PolarBSplinesRP::get_polar_index(
-                        IDimBSpline2D(r_idx_test, pmod(p_idx_trial.uid()))));
+                        IDimBSpline2D_Polar(r_idx_test, pmod(p_idx_trial.uid()))));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -536,23 +562,23 @@ public:
                 }
             });
             BSDomainR remaining_r(
-                    ddc::select<BSplinesR>(idx_test) + 1,
-                    ddc::DiscreteVector<BSplinesR> {
-                            min(BSplinesR::degree(),
-                                ddc::discrete_space<BSplinesR>().nbasis() - 2 - r_idx_test)});
-            BSDomainP relevant_p(
-                    ddc::DiscreteElement<BSplinesP> {
-                            p_idx_test + ddc::discrete_space<BSplinesP>().nbasis()
-                            - BSplinesP::degree()},
-                    ddc::DiscreteVector<BSplinesP> {2 * BSplinesP::degree() + 1});
+                    ddc::select<BSplinesR_Polar>(idx_test) + 1,
+                    ddc::DiscreteVector<BSplinesR_Polar> {
+                            min(BSplinesR_Polar::degree(),
+                                ddc::discrete_space<BSplinesR_Polar>().nbasis() - 2 - r_idx_test)});
+            BSDomainP_Polar relevant_p(
+                    ddc::DiscreteElement<BSplinesP_Polar> {
+                            p_idx_test + ddc::discrete_space<BSplinesP_Polar>().nbasis()
+                            - BSplinesP_Polar::degree()},
+                    ddc::DiscreteVector<BSplinesP_Polar> {2 * BSplinesP_Polar::degree() + 1});
 
             BSDomainRP trial_domain(remaining_r, relevant_p);
 
-            ddc::for_each(trial_domain, [&](IDimBSpline2D const idx_trial) {
-                const int r_idx_trial(ddc::select<BSplinesR>(idx_trial).uid());
-                const int p_idx_trial(ddc::select<BSplinesP>(idx_trial).uid());
+            ddc::for_each(trial_domain, [&](IDimBSpline2D_Polar const idx_trial) {
+                const int r_idx_trial(ddc::select<PolarBSplinesRP::BSplinesR_tag>(idx_trial).uid());
+                const int p_idx_trial(ddc::select<PolarBSplinesRP::BSplinesP_tag>(idx_trial).uid());
                 IDimPolarBspl polar_idx_trial(PolarBSplinesRP::get_polar_index(
-                        IDimBSpline2D(r_idx_trial, pmod(p_idx_trial))));
+                        IDimBSpline2D_Polar(r_idx_trial, pmod(p_idx_trial))));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -595,7 +621,7 @@ public:
     {
         Eigen::VectorXd b(
                 ddc::discrete_space<PolarBSplinesRP>().nbasis()
-                - ddc::discrete_space<BSplinesP>().nbasis());
+                - ddc::discrete_space<BSplinesP_Polar>().nbasis());
 
         // Fill b
         ddc::for_each(PolarBSplinesRP::singular_domain(), [&](IDimPolarBspl const idx) {
@@ -611,22 +637,22 @@ public:
                                * int_volume(ir, ip);
                     });
         });
-        const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
+        const std::size_t ncells_r = ddc::discrete_space<BSplinesR_Polar>().ncells();
         ddc::for_each(fem_non_singular_domain, [&](IDimPolarBspl const idx) {
-            const IDimBSpline2D idx_2d(PolarBSplinesRP::get_2d_index(idx));
-            const std::size_t r_idx(ddc::select<BSplinesR>(idx_2d).uid());
-            const std::size_t p_idx(ddc::select<BSplinesP>(idx_2d).uid());
+            const IDimBSpline2D_Polar idx_2d(PolarBSplinesRP::get_2d_index(idx));
+            const std::size_t r_idx(ddc::select<PolarBSplinesRP::BSplinesR_tag>(idx_2d).uid());
+            const std::size_t p_idx(ddc::select<PolarBSplinesRP::BSplinesP_tag>(idx_2d).uid());
 
             // Find the cells on which the bspline is non-zero
-            int first_cell_r(r_idx - BSplinesR::degree());
-            int first_cell_p(p_idx - BSplinesP::degree());
+            int first_cell_r(r_idx - BSplinesR_Polar::degree());
+            int first_cell_p(p_idx - BSplinesP_Polar::degree());
             std::size_t last_cell_r(r_idx + 1);
             if (first_cell_r < 0)
                 first_cell_r = 0;
             if (last_cell_r > ncells_r)
                 last_cell_r = ncells_r;
             ddc::DiscreteVector<RCellDim> const r_length(last_cell_r - first_cell_r);
-            ddc::DiscreteVector<PCellDim> const p_length(BSplinesP::degree() + 1);
+            ddc::DiscreteVector<PCellDim> const p_length(BSplinesP_Polar::degree() + 1);
 
 
             ddc::DiscreteElement<RCellDim> const start_r(first_cell_r);
@@ -667,13 +693,10 @@ public:
         // Solve the matrix equation
         Eigen::VectorXd x = m_matrix.solve(b);
 
-        BSDomainRP non_singular_2d_domain(
-                radial_bsplines.remove_last(ddc::DiscreteVector<BSplinesR> {1}),
-                polar_bsplines);
         BSDomainRP dirichlet_boundary_domain(
-                radial_bsplines.take_last(ddc::DiscreteVector<BSplinesR> {1}),
+                radial_bsplines.take_last(ddc::DiscreteVector<BSplinesR_Polar> {1}),
                 polar_bsplines);
-        BSDomainP polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
+        BSDomainP_Polar polar_domain(ddc::discrete_space<BSplinesP_Polar>().full_domain());
 
 
         // Fill the spline
@@ -681,24 +704,26 @@ public:
             spline.singular_spline_coef(idx) = x(idx.uid());
         });
         ddc::for_each(fem_non_singular_domain, [&](IDimPolarBspl const idx) {
-            const IDimBSpline2D idx_2d(PolarBSplinesRP::get_2d_index(idx));
+            const IDimBSpline2D_Polar idx_2d(PolarBSplinesRP::get_2d_index(idx));
             spline.spline_coef(idx_2d) = x(idx.uid());
         });
-        ddc::for_each(dirichlet_boundary_domain, [&](IDimBSpline2D const idx) {
+        ddc::for_each(dirichlet_boundary_domain, [&](IDimBSpline2D_Polar const idx) {
             spline.spline_coef(idx) = 0.0;
         });
 
         // Copy the periodic elements
         BSDomainRP copy_domain(
                 radial_bsplines,
-                polar_domain.remove_first(
-                        ddc::DiscreteVector<BSplinesP>(ddc::discrete_space<BSplinesP>().nbasis())));
-        ddc::for_each(copy_domain, [&](IDimBSpline2D const idx_2d) {
-            spline.spline_coef(ddc::select<BSplinesR>(idx_2d), ddc::select<BSplinesP>(idx_2d))
+                polar_domain.remove_first(ddc::DiscreteVector<BSplinesP_Polar>(
+                        ddc::discrete_space<BSplinesP_Polar>().nbasis())));
+        ddc::for_each(copy_domain, [&](IDimBSpline2D_Polar const idx_2d) {
+            spline.spline_coef(
+                    ddc::select<BSplinesR_Polar>(idx_2d),
+                    ddc::select<BSplinesP_Polar>(idx_2d))
                     = spline.spline_coef(
-                            ddc::select<BSplinesR>(idx_2d),
-                            ddc::select<BSplinesP>(idx_2d)
-                                    - ddc::discrete_space<BSplinesP>().nbasis());
+                            ddc::select<BSplinesR_Polar>(idx_2d),
+                            ddc::select<BSplinesP_Polar>(idx_2d)
+                                    - ddc::discrete_space<BSplinesP_Polar>().nbasis());
         });
     }
 
@@ -721,7 +746,7 @@ public:
     template <class RHSFunction>
     void operator()(RHSFunction const& rhs, ViewRP<CoordRP> const coords_eval, DSpanRP result) const
     {
-        BSDomainP polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
+        BSDomainP_Polar polar_domain(ddc::discrete_space<BSplinesP_Polar>().full_domain());
         SplinePolar
                 spline(PolarBSplinesRP::singular_domain(),
                        BSDomainRP(radial_bsplines, polar_domain));
@@ -751,7 +776,7 @@ private:
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineRPEvaluator const& evaluator,
+            SplineRPEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -776,7 +801,7 @@ private:
             EvalDeriv1DType const& trial_bspline_val_and_deriv_p,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineRPEvaluator const& evaluator,
+            SplineRPEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -801,7 +826,7 @@ private:
             EvalDeriv1DType const& test_bspline_val_and_deriv_p,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineRPEvaluator const& evaluator,
+            SplineRPEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -827,7 +852,7 @@ private:
             EvalDeriv1DType const& trial_bspline_val_and_deriv_p,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineRPEvaluator const& evaluator,
+            SplineRPEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -882,7 +907,7 @@ private:
             TrialValDerivType const& trial_bspline_val_and_deriv_p,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineRPEvaluator const& spline_evaluator,
+            SplineRPEvaluatorNullBound const& spline_evaluator,
             Mapping const& mapping)
     {
         static_assert(
@@ -930,50 +955,50 @@ private:
      */
     template <class Mapping>
     double get_matrix_stencil_element(
-            IDimBSpline2D idx_test,
-            IDimBSpline2D idx_trial,
+            IDimBSpline2D_Polar idx_test,
+            IDimBSpline2D_Polar idx_trial,
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
-            SplineRPEvaluator const& evaluator,
+            SplineRPEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         // 0 <= r_idx_test < 8
         // 0 <= r_idx_trial < 8
         // r_idx_test < r_idx_trial
-        const int r_idx_test(ddc::select<BSplinesR>(idx_test).uid());
-        const int r_idx_trial(ddc::select<BSplinesR>(idx_trial).uid());
+        const int r_idx_test(ddc::select<BSplinesR_Polar>(idx_test).uid());
+        const int r_idx_trial(ddc::select<BSplinesR_Polar>(idx_trial).uid());
         // 0 <= p_idx_test < 8
         // 0 <= p_idx_trial < 8
-        int p_idx_test(pmod(ddc::select<BSplinesP>(idx_test).uid()));
-        int p_idx_trial(pmod(ddc::select<BSplinesP>(idx_trial).uid()));
+        int p_idx_test(pmod(ddc::select<BSplinesP_Polar>(idx_test).uid()));
+        int p_idx_trial(pmod(ddc::select<BSplinesP_Polar>(idx_trial).uid()));
 
-        const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
-        const std::size_t nbasis_p = ddc::discrete_space<BSplinesP>().nbasis();
+        const std::size_t ncells_r = ddc::discrete_space<BSplinesR_Polar>().ncells();
+        const std::size_t nbasis_p = ddc::discrete_space<BSplinesP_Polar>().nbasis();
 
         // 0<= r_offset <= degree_r
         // -degree_p <= p_offset <= degree_p
         const int r_offset = r_idx_trial - r_idx_test;
         int p_offset = pmod(p_idx_trial - p_idx_test);
-        if (p_offset >= int(nbasis_p - BSplinesP::degree())) {
+        if (p_offset >= int(nbasis_p - BSplinesP_Polar::degree())) {
             p_offset -= nbasis_p;
         }
         assert(r_offset >= 0);
-        assert(r_offset <= int(BSplinesR::degree()));
-        assert(p_offset >= -int(BSplinesP::degree()));
-        assert(p_offset <= int(BSplinesP::degree()));
+        assert(r_offset <= int(BSplinesR_Polar::degree()));
+        assert(p_offset >= -int(BSplinesP_Polar::degree()));
+        assert(p_offset <= int(BSplinesP_Polar::degree()));
 
         // Find the domain covering the cells where both the test and trial functions are non-zero
-        int n_overlap_stencil_r(BSplinesR::degree() + 1 - r_offset);
-        int first_overlap_r(r_idx_trial - BSplinesR::degree());
+        int n_overlap_stencil_r(BSplinesR_Polar::degree() + 1 - r_offset);
+        int first_overlap_r(r_idx_trial - BSplinesR_Polar::degree());
 
         int first_overlap_p;
         int n_overlap_stencil_p;
         if (p_offset > 0) {
-            n_overlap_stencil_p = BSplinesP::degree() + 1 - p_offset;
-            first_overlap_p = pmod(p_idx_trial - BSplinesP::degree());
+            n_overlap_stencil_p = BSplinesP_Polar::degree() + 1 - p_offset;
+            first_overlap_p = pmod(p_idx_trial - BSplinesP_Polar::degree());
         } else {
-            n_overlap_stencil_p = BSplinesP::degree() + 1 + p_offset;
-            first_overlap_p = pmod(p_idx_test - BSplinesP::degree());
+            n_overlap_stencil_p = BSplinesP_Polar::degree() + 1 + p_offset;
+            first_overlap_p = pmod(p_idx_test - BSplinesP_Polar::degree());
         }
 
         if (first_overlap_r < 0) {
@@ -1015,10 +1040,10 @@ private:
                     ddc::DiscreteElement<RBasisSubset> ib_trial_r(r_idx_trial - cell_idx_r);
                     ddc::DiscreteElement<PBasisSubset> ib_trial_p(pmod(ib_trial_p_idx));
 
-                    assert(ib_test_r.uid() < BSplinesR::degree() + 1);
-                    assert(ib_test_p.uid() < BSplinesP::degree() + 1);
-                    assert(ib_trial_r.uid() < BSplinesR::degree() + 1);
-                    assert(ib_trial_p.uid() < BSplinesP::degree() + 1);
+                    assert(ib_test_r.uid() < BSplinesR_Polar::degree() + 1);
+                    assert(ib_test_p.uid() < BSplinesP_Polar::degree() + 1);
+                    assert(ib_trial_r.uid() < BSplinesR_Polar::degree() + 1);
+                    assert(ib_trial_p.uid() < BSplinesP_Polar::degree() + 1);
 
                     // Calculate the weak integral
                     return ddc::transform_reduce(
@@ -1055,7 +1080,7 @@ private:
 
     static int pmod(int idx_p)
     {
-        int ncells_p = ddc::discrete_space<BSplinesP>().ncells();
+        int ncells_p = ddc::discrete_space<BSplinesP_Polar>().ncells();
         while (idx_p < 0)
             idx_p += ncells_p;
         while (idx_p >= ncells_p)

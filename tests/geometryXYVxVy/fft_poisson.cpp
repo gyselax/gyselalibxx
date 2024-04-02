@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: MIT
 
-#include <sll/null_boundary_value.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 

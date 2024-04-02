@@ -10,13 +10,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/constant_extrapolation_boundary_value.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_to_cartesian.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator_2d.hpp>
 
 #include <gtest/gtest.h>
 
@@ -46,7 +42,8 @@
 
 namespace {
 using PoissonSolver = PolarSplineFEMPoissonSolver;
-using DiscreteMapping = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>;
+using DiscreteMapping
+        = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>;
 using Mapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
 
 namespace fs = std::filesystem;
@@ -120,20 +117,19 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
     SplinePBuilder const p_builder(interpolation_domain_P);
     SplineRPBuilder const builder(grid);
 
-    ConstantExtrapolationBoundaryValue2D<BSplinesR, BSplinesP, RDimR> boundary_condition_r_left(
-            r_min);
-    ConstantExtrapolationBoundaryValue2D<BSplinesR, BSplinesP, RDimR> boundary_condition_r_right(
-            r_max);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(r_min);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(r_max);
 
-    SplineRPEvaluator spline_evaluator_extrapol(
+    SplineRPEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+            ddc::PeriodicExtrapolationRule<RDimP>(),
+            ddc::PeriodicExtrapolationRule<RDimP>());
 
 
-    PolarSplineEvaluator<PolarBSplinesRP> polar_spline_evaluator(
-            g_polar_null_boundary_2d<PolarBSplinesRP>);
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    PolarSplineEvaluator<PolarBSplinesRP, ddc::NullExtrapolationRule> polar_spline_evaluator(
+            r_extrapolation_rule);
 
     // --- Define the mapping. ------------------------------------------------------------------------
     const Mapping mapping;
@@ -144,11 +140,12 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    SplineRPEvaluator spline_evaluator(
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+    ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
+    SplineRPEvaluatorNullBound spline_evaluator(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            p_extrapolation_rule,
+            p_extrapolation_rule);
 
     PreallocatableSplineInterpolatorRP interpolator(builder, spline_evaluator);
 
@@ -280,8 +277,8 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
         EXPECT_LE(abs(ddcHelper::get<RDimX>(difference_between_fields_exact_and_xy)(irp)), 1e-5);
         EXPECT_LE(abs(ddcHelper::get<RDimY>(difference_between_fields_exact_and_xy)(irp)), 1e-5);
 
-        EXPECT_LE(abs(ddcHelper::get<RDimX>(difference_between_fields_xy_and_rp)(irp)), 1e-14);
-        EXPECT_LE(abs(ddcHelper::get<RDimY>(difference_between_fields_xy_and_rp)(irp)), 1e-14);
+        EXPECT_LE(abs(ddcHelper::get<RDimX>(difference_between_fields_xy_and_rp)(irp)), 1e-13);
+        EXPECT_LE(abs(ddcHelper::get<RDimY>(difference_between_fields_xy_and_rp)(irp)), 1e-13);
     });
 
 

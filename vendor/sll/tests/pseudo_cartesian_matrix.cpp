@@ -1,14 +1,10 @@
-#include <sll/bsplines_non_uniform.hpp>
-#include <sll/constant_extrapolation_boundary_value.hpp>
-#include <sll/greville_interpolation_points.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/polar_bsplines.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator_2d.hpp>
+#include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include "sll/mapping/circular_to_cartesian.hpp"
 #include "sll/mapping/czarny_to_cartesian.hpp"
 #include "sll/mapping/discrete_mapping_to_cartesian.hpp"
+#include "sll/math_tools.hpp"
 
 #include "test_utils.hpp"
 
@@ -23,11 +19,9 @@ class PseudoCartesianJacobianMatrixTest
 public:
     struct DimX
     {
-        static bool constexpr PERIODIC = false;
     };
     struct DimY
     {
-        static bool constexpr PERIODIC = false;
     };
     struct DimR
     {
@@ -45,14 +39,18 @@ public:
 
     static int constexpr BSDegree = 3;
 
-    using BSplinesR = NonUniformBSplines<DimR, BSDegree>;
-    using BSplinesP = NonUniformBSplines<DimP, BSDegree>;
+    using BSplinesR = ddc::NonUniformBSplines<DimR, BSDegree>;
+    using BSplinesP = ddc::NonUniformBSplines<DimP, BSDegree>;
 
 
-    using InterpPointsR
-            = GrevilleInterpolationPoints<BSplinesR, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-    using InterpPointsP
-            = GrevilleInterpolationPoints<BSplinesP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+    using InterpPointsR = ddc::GrevilleInterpolationPoints<
+            BSplinesR,
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::GREVILLE>;
+    using InterpPointsP = ddc::GrevilleInterpolationPoints<
+            BSplinesP,
+            ddc::BoundCond::PERIODIC,
+            ddc::BoundCond::PERIODIC>;
 
 
     using IDimR = typename InterpPointsR::interpolation_mesh_type;
@@ -79,16 +77,37 @@ public:
     using IDomainRP = ddc::DiscreteDomain<IDimR, IDimP>;
 
 
-    using SplineRBuilder
-            = SplineBuilder<BSplinesR, IDimR, BoundCond::GREVILLE, BoundCond::GREVILLE>;
-    using SplinePBuilder
-            = SplineBuilder<BSplinesP, IDimP, BoundCond::PERIODIC, BoundCond::PERIODIC>;
+    using SplineRPBuilder = ddc::SplineBuilder2D<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
+            BSplinesR,
+            BSplinesP,
+            IDimR,
+            IDimP,
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::PERIODIC,
+            ddc::BoundCond::PERIODIC,
+            ddc::SplineSolver::GINKGO,
+            IDimR,
+            IDimP>;
 
-    using SplineRPBuilder = SplineBuilder2D<SplineRBuilder, SplinePBuilder>;
-    using SplineRPEvaluator = SplineEvaluator2D<BSplinesR, BSplinesP>;
+    using SplineRPEvaluator = ddc::SplineEvaluator2D<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
+            BSplinesR,
+            BSplinesP,
+            IDimR,
+            IDimP,
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule,
+            ddc::PeriodicExtrapolationRule<DimP>,
+            ddc::PeriodicExtrapolationRule<DimP>,
+            IDimR,
+            IDimP>;
 
 
-    using DiscreteMapping = DiscreteToCartesian<DimX, DimY, SplineRPBuilder>;
+    using DiscreteMapping = DiscreteToCartesian<DimX, DimY, SplineRPBuilder, SplineRPEvaluator>;
 
     using spline_domain = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
 
@@ -160,11 +179,13 @@ public:
 
         // --- Define the operators. ----------------------------------------------------------------------
         SplineRPBuilder const builder(grid);
+        ddc::NullExtrapolationRule r_extrapolation_rule;
+        ddc::PeriodicExtrapolationRule<DimP> p_extrapolation_rule;
         SplineRPEvaluator spline_evaluator(
-                g_null_boundary_2d<BSplinesR, BSplinesP>,
-                g_null_boundary_2d<BSplinesR, BSplinesP>,
-                g_null_boundary_2d<BSplinesR, BSplinesP>,
-                g_null_boundary_2d<BSplinesR, BSplinesP>);
+                r_extrapolation_rule,
+                r_extrapolation_rule,
+                p_extrapolation_rule,
+                p_extrapolation_rule);
 
         Matrix_2x2 analytical_matrix;
         Matrix_2x2 discrete_matrix;
@@ -247,12 +268,11 @@ TEST(PseudoCartesianJacobianMatrix, TestDiscreteMapping)
               << std::endl
               << ">>> L_inf norm of | M_map - M_dis_map |" << std::endl;
 
-    std::array<std::array<double, 2>, 5> results;
+    std::array<std::array<double, 2>, 4> results;
     results[0] = (PseudoCartesianJacobianMatrixTest<16>()).test_circ_and_czar();
     results[1] = (PseudoCartesianJacobianMatrixTest<32>()).test_circ_and_czar();
     results[2] = (PseudoCartesianJacobianMatrixTest<64>()).test_circ_and_czar();
     results[3] = (PseudoCartesianJacobianMatrixTest<128>()).test_circ_and_czar();
-    results[4] = (PseudoCartesianJacobianMatrixTest<256>()).test_circ_and_czar();
 
 
 

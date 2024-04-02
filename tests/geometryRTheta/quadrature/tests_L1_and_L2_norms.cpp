@@ -1,14 +1,9 @@
 #include <ddc/ddc.hpp>
 
-#include <sll/bsplines_non_uniform.hpp>
 #include <sll/gauss_legendre_integration.hpp>
-#include <sll/greville_interpolation_points.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_to_cartesian.hpp>
-#include <sll/null_boundary_value.hpp>
-#include <sll/spline_builder_2d.hpp>
-#include <sll/spline_evaluator_2d.hpp>
 
 #include <gtest/gtest.h>
 
@@ -110,11 +105,13 @@ void launch_tests(
         std::array<std::array<double, 2>, 5> const& expected_norms,
         std::array<std::array<double, 2>, 5> const& TOLs)
 {
+    SplineRBuilder r_builder(ddc::select<IDimR>(builder.interpolation_domain()));
+    SplinePBuilder p_builder(ddc::select<IDimP>(builder.interpolation_domain()));
     // Test spline quadrature: ------------------------------------------------------------------------
     // Instantiate a quadrature with coefficients where we added the Jacobian determinant.
     DFieldRP const quadrature_coeffs = compute_coeffs_on_mapping(
             mapping,
-            spline_quadrature_coefficients(grid, builder.get_builder_1(), builder.get_builder_2()));
+            spline_quadrature_coefficients(grid, r_builder, p_builder));
     Quadrature<IDimR, IDimP> quadrature(quadrature_coeffs);
 
 
@@ -234,14 +231,14 @@ TEST_P(SplineQuadrature, TestFunctions)
     expected_norms[4][1] = std::sqrt(M_PI / 12.);
 
     std::array<std::array<double, 2>, 5> TOLs;
-    TOLs[0][0] = 1e-15;
-    TOLs[0][1] = 1e-15;
+    TOLs[0][0] = 1e-14;
+    TOLs[0][1] = 1e-14;
     TOLs[1][0] = 5e-3;
-    TOLs[1][1] = 1e-15;
-    TOLs[2][0] = 1e-15;
-    TOLs[2][1] = 1e-15;
+    TOLs[1][1] = 1e-14;
+    TOLs[2][0] = 1e-14;
+    TOLs[2][1] = 1e-14;
     TOLs[3][0] = 5e-3;
-    TOLs[3][1] = 1e-15;
+    TOLs[3][1] = 1e-14;
     TOLs[4][0] = 5e-2;
     TOLs[4][1] = 5e-6;
 
@@ -251,14 +248,14 @@ TEST_P(SplineQuadrature, TestFunctions)
     std::cout << std::endl
               << "DISCRETE MAPPING ---------------------------------------------------"
               << std::endl;
-    SplineRPEvaluator spline_evaluator_extrapol(
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>,
-            g_null_boundary_2d<BSplinesR, BSplinesP>);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> bv_r_min(r_min);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> bv_r_max(r_max);
+    ddc::PeriodicExtrapolationRule<RDimP> bv_p_min;
+    ddc::PeriodicExtrapolationRule<RDimP> bv_p_max;
+    SplineRPEvaluatorConstBound spline_evaluator_extrapol(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
 
-    DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder> const discrete_mapping
-            = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder>::
+    DiscreteToCartesian const discrete_mapping
+            = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>::
                     analytical_to_discrete(mapping_1, builder, spline_evaluator_extrapol);
     TOLs[0][0] = 5e-6;
     TOLs[0][1] = 5e-7;

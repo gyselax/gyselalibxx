@@ -85,7 +85,7 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 	        GTest::gtest
 	        GTest::gmock
 	        paraconf::paraconf
-	        sll::splines
+	        sll::SLL
 	        gslx::quadrature
 	        gslx::geometry_${GEOMETRY_VARIANT}
 	)
