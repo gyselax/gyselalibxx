@@ -113,8 +113,6 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
 
 
     // OPERATORS ======================================================================================
-    SplineRBuilder const r_builder(interpolation_domain_R);
-    SplinePBuilder const p_builder(interpolation_domain_P);
     SplineRPBuilder const builder(grid);
 
     ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(r_min);
@@ -136,7 +134,7 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
     DiscreteMapping const discrete_mapping
             = DiscreteMapping::analytical_to_discrete(mapping, builder, spline_evaluator_extrapol);
 
-    ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping, r_builder, p_builder);
+    ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping);
 
 
     // --- Advection operator -------------------------------------------------------------------------

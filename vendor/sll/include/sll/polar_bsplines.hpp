@@ -222,13 +222,9 @@ public:
          * @param curvilinear_to_cartesian  A mapping from curvilinear to cartesian coordinates. This is used to find the
          *                                  singular point and determine the Barycentric coordinates which are used to define
          *                                  the new basis splines which cross the singular point.
-         * @param spline_builder_r          A class which can be used to construct the coefficients of a radial bspline.
-         * @param spline_builder_p          A class which can be used to construct the coefficients of a poloidal bspline.
          */
-        template <class DiscreteMapping, class SplineBuilderR, class SplineBuilderP>
-        Impl(const DiscreteMapping& curvilinear_to_cartesian,
-             SplineBuilderR const& spline_builder_r,
-             SplineBuilderP const& spline_builder_p)
+        template <class DiscreteMapping>
+        Impl(const DiscreteMapping& curvilinear_to_cartesian)
         {
             using DimX = typename DiscreteMapping::cartesian_tag_x;
             using DimY = typename DiscreteMapping::cartesian_tag_y;
@@ -307,9 +303,11 @@ public:
                         ddc::DiscreteElement<BernsteinBasis> {0},
                         ddc::DiscreteVector<BernsteinBasis> {n_singular_basis()});
 
+                ddc::DiscreteDomain<BSplinesP> poloidal_spline_domain
+                        = ddc::discrete_space<BSplinesP>().full_domain();
+
                 for (IndexR const ir : ddc::DiscreteDomain<BSplinesR>(IndexR(0), LengthR(C + 1))) {
-                    for (IndexP const ip :
-                         spline_builder_p.spline_domain().take_first(np_in_singular)) {
+                    for (IndexP const ip : poloidal_spline_domain.take_first(np_in_singular)) {
                         const ddc::Coordinate<DimX, DimY> point
                                 = curvilinear_to_cartesian.control_point(
                                         mapping_tensor_product_discrete_element_type(ir, ip));
@@ -323,8 +321,8 @@ public:
                         }
                     }
                     for (discrete_element_type k : singular_domain()) {
-                        for (IndexP const ip : spline_builder_p.spline_domain().take_first(
-                                     LengthP {BSplinesP::degree()})) {
+                        for (IndexP const ip :
+                             poloidal_spline_domain.take_first(LengthP {BSplinesP::degree()})) {
                             m_singular_basis_elements(k, ir, ip + np_in_singular)
                                     = m_singular_basis_elements(k, ir, ip);
                         }
