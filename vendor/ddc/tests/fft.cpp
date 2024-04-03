@@ -42,7 +42,9 @@ static void test_fft()
                                              init(ddc::Coordinate<X>(a + (b - a) / Nx / 2),
                                                   ddc::Coordinate<X>(b - (b - a) / Nx / 2),
                                                   DVect<DDim<X>>(Nx)))...);
-    ddc::init_fourier_space<X...>(x_mesh);
+    (ddc::init_discrete_space<ddc::PeriodicSampling<ddc::Fourier<X>>>(
+             ddc::init_fourier_space(ddc::DiscreteDomain<DDim<X>>(x_mesh))),
+     ...);
     DDom<DFDim<ddc::Fourier<X>>...> const k_mesh = ddc::FourierMesh(x_mesh, full_fft);
 
     ddc::Chunk f_alloc(x_mesh, ddc::KokkosAllocator<Tin, MemorySpace>());
@@ -129,7 +131,8 @@ static void test_fft_norm(ddc::FFT_Normalization const norm)
                                                                   init(ddc::Coordinate<X>(-1. / 4),
                                                                        ddc::Coordinate<X>(1. / 4),
                                                                        DVect<DDim<X>>(2)));
-    ddc::init_fourier_space<X>(x_mesh);
+    ddc::init_discrete_space<ddc::PeriodicSampling<ddc::Fourier<X>>>(
+            ddc::init_fourier_space<X>(x_mesh));
     DDom<DFDim<ddc::Fourier<X>>> const k_mesh = ddc::FourierMesh(x_mesh, full_fft);
 
     ddc::Chunk f_alloc = ddc::Chunk(x_mesh, ddc::KokkosAllocator<Tin, MemorySpace>());

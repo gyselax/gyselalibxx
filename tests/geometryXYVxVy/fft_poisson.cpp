@@ -64,8 +64,8 @@ static void TestFftPoissonSolverCosineSource()
 
     IDomainSpXYVxVy const mesh(gridsp, meshxyvxvy);
 
-    ddc::init_fourier_space<RDimX>(gridx);
-    ddc::init_fourier_space<RDimY>(gridy);
+    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<RDimX>(gridx));
+    ddc::init_discrete_space<IDimFy>(ddc::init_fourier_space<RDimY>(gridy));
 
     // Initialise infomation about species
     host_t<FieldSp<int>> charges(dom_sp);
