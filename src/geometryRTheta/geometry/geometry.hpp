@@ -92,24 +92,6 @@ using SplineInterpPointsR
 using SplineInterpPointsP
         = ddc::GrevilleInterpolationPoints<BSplinesP, SplinePBoundary, SplinePBoundary>;
 
-using SplineRBuilder = ddc::SplineBuilder<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
-        BSplinesR,
-        IDimR,
-        SplineRBoundary, // boundary at r=0
-        SplineRBoundary, // boundary at rmax
-        ddc::SplineSolver::GINKGO,
-        IDimR>;
-using SplinePBuilder = ddc::SplineBuilder<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
-        BSplinesP,
-        IDimP,
-        SplinePBoundary,
-        SplinePBoundary,
-        ddc::SplineSolver::GINKGO,
-        IDimP>;
 using SplineRPBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,

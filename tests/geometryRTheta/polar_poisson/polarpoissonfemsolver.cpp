@@ -97,8 +97,6 @@ int main(int argc, char** argv)
     IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain());
     IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
 
-    SplineRBuilder const r_builder(interpolation_domain_R);
-    SplinePBuilder const p_builder(interpolation_domain_P);
     SplineRPBuilder const builder(grid);
 
 #if defined(CIRCULAR_MAPPING)
@@ -114,7 +112,7 @@ int main(int argc, char** argv)
     DiscreteMapping const discrete_mapping
             = DiscreteMapping::analytical_to_discrete(mapping, builder, evaluator);
 
-    ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping, r_builder, p_builder);
+    ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping);
 
     auto dom_bsplinesRP = builder.spline_domain();
 
