@@ -105,6 +105,25 @@ void launch_tests(
         std::array<std::array<double, 2>, 5> const& expected_norms,
         std::array<std::array<double, 2>, 5> const& TOLs)
 {
+    using SplineRBuilder = ddc::SplineBuilder<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
+            BSplinesR,
+            IDimR,
+            ddc::BoundCond::GREVILLE, // boundary at r=0
+            ddc::BoundCond::GREVILLE, // boundary at rmax
+            ddc::SplineSolver::GINKGO,
+            IDimR>;
+    using SplinePBuilder = ddc::SplineBuilder<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
+            BSplinesP,
+            IDimP,
+            ddc::BoundCond::PERIODIC,
+            ddc::BoundCond::PERIODIC,
+            ddc::SplineSolver::GINKGO,
+            IDimP>;
+
     SplineRBuilder r_builder(ddc::select<IDimR>(builder.interpolation_domain()));
     SplinePBuilder p_builder(ddc::select<IDimP>(builder.interpolation_domain()));
     // Test spline quadrature: ------------------------------------------------------------------------

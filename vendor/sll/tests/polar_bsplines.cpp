@@ -78,24 +78,6 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     using BSplinesR = typename TestFixture::BSplineR;
     using BSplinesP = typename TestFixture::BSplineP;
     using CircToCart = CircularToCartesian<DimX, DimY, DimR, DimP>;
-    using BuilderR = ddc::SplineBuilder<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
-            BSplinesR,
-            IDimR,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::SplineSolver::GINKGO,
-            IDimR>;
-    using BuilderP = ddc::SplineBuilder<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
-            BSplinesP,
-            IDimP,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::GINKGO,
-            IDimP>;
     using SplineRPBuilder = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
@@ -165,8 +147,6 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     ddc::DiscreteDomain<IDimR, IDimP>
             interpolation_domain(interpolation_domain_R, interpolation_domain_P);
 
-    BuilderR builder_r(interpolation_domain_R);
-    BuilderP builder_p(interpolation_domain_P);
     SplineRPBuilder builder_rp(interpolation_domain);
 
     ddc::NullExtrapolationRule r_extrapolation_rule;
@@ -180,7 +160,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     const CircToCart coord_changer;
     DiscreteMapping const mapping
             = DiscreteMapping::analytical_to_discrete(coord_changer, builder_rp, evaluator_rp);
-    ddc::init_discrete_space<BSplines>(mapping, builder_r, builder_p);
+    ddc::init_discrete_space<BSplines>(mapping);
 
     int const n_eval = (BSplinesR::degree() + 1) * (BSplinesP::degree() + 1);
     std::size_t const n_test_points = 100;
