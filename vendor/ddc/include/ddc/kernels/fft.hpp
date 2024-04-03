@@ -578,10 +578,13 @@ void core(
                 KOKKOS_LAMBDA(const int& i) { out_data[i] = out_data[i] * norm_coef; });
     }
 }
+} // namespace ddc::detail::fft
+
+namespace ddc {
 
 template <typename X>
-typename ddc::PeriodicSampling<ddc::Fourier<X>>::template Impl<Kokkos::HostSpace> FourierSampling(
-        ddc::DiscreteDomain<ddc::UniformPointSampling<X>> x_mesh)
+typename ddc::PeriodicSampling<ddc::Fourier<X>>::template Impl<Kokkos::HostSpace>
+init_fourier_space(ddc::DiscreteDomain<ddc::UniformPointSampling<X>> x_mesh)
 {
     auto [impl, ddom] = ddc::PeriodicSampling<ddc::Fourier<X>>::
             init(ddc::Coordinate<ddc::Fourier<X>>(0),
@@ -594,18 +597,6 @@ typename ddc::PeriodicSampling<ddc::Fourier<X>>::template Impl<Kokkos::HostSpace
                  ddc::DiscreteVector<ddc::PeriodicSampling<ddc::Fourier<X>>>(
                          ddc::detail::fft::N<X>(x_mesh)));
     return std::move(impl);
-}
-} // namespace ddc::detail::fft
-
-namespace ddc {
-
-template <typename... X>
-void init_fourier_space(ddc::DiscreteDomain<ddc::UniformPointSampling<X>...> x_mesh)
-{
-    return (ddc::init_discrete_space<ddc::PeriodicSampling<ddc::Fourier<X>>>(
-                    ddc::detail::fft::FourierSampling(
-                            ddc::select<ddc::UniformPointSampling<X>>(x_mesh))),
-            ...);
 }
 
 // FourierMesh, first element corresponds to mode 0

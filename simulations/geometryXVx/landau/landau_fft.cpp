@@ -211,7 +211,7 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXVx));
+    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXVx)));
 
     host_t<DFieldVx> const quadrature_coeffs_host
             = neumann_spline_quadrature_coefficients(gridvx, builder_vx_poisson);

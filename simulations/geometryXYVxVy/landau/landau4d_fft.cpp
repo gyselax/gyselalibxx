@@ -213,7 +213,10 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_y, advection_vx, advection_vy);
 
-    ddc::init_fourier_space<RDimX, RDimY>(ddc::select<IDimX, IDimY>(meshSpXYVxVy));
+    ddc::init_discrete_space<IDimFx>(
+            ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXYVxVy)));
+    ddc::init_discrete_space<IDimFy>(
+            ddc::init_fourier_space<RDimY>(ddc::select<IDimY>(meshSpXYVxVy)));
 
     host_t<DFieldVxVy> const quadrature_coeffs_host = neumann_spline_quadrature_coefficients(
             interpolation_domain_vxvy,
