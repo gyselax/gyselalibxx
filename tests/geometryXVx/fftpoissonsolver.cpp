@@ -47,7 +47,7 @@ TEST(FftPoissonSolver, CosineSource)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(mesh));
+    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(mesh)));
 
     // Creating operators
 
@@ -136,7 +136,7 @@ TEST(FftPoissonSolver, CosineSourceParallel)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(mesh));
+    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(mesh)));
 
     // Creating operators
 
