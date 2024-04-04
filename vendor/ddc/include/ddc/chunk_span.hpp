@@ -191,14 +191,21 @@ public:
             allocation_mdspan_type allocation_mdspan,
             mdomain_type const& domain)
     {
+        assert(((allocation_mdspan.extent(type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)
+                 == static_cast<std::size_t>(domain.template extent<DDims>().value()))
+                && ...));
         namespace stdex = std::experimental;
-        extents_type extents_s((front<DDims>(domain) + extents<DDims>(domain)).uid()...);
-        std::array<std::size_t, sizeof...(DDims)> strides_s {allocation_mdspan.mapping().stride(
-                type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
-        stdex::layout_stride::mapping<extents_type> mapping_s(extents_s, strides_s);
-        this->m_internal_mdspan = internal_mdspan_type(
-                allocation_mdspan.data_handle() - mapping_s(front<DDims>(domain).uid()...),
-                mapping_s);
+        if (!domain.empty()) {
+            extents_type extents_s((front<DDims>(domain) + extents<DDims>(domain)).uid()...);
+            std::array<std::size_t, sizeof...(DDims)> strides_s {allocation_mdspan.mapping().stride(
+                    type_seq_rank_v<DDims, detail::TypeSeq<DDims...>>)...};
+            stdex::layout_stride::mapping<extents_type> mapping_s(extents_s, strides_s);
+            this->m_internal_mdspan = internal_mdspan_type(
+                    allocation_mdspan.data_handle() - mapping_s(front<DDims>(domain).uid()...),
+                    mapping_s);
+        } else {
+            this->m_internal_mdspan = allocation_mdspan;
+        }
         this->m_domain = domain;
     }
 

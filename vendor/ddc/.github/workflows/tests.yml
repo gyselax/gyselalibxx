@@ -186,6 +186,66 @@ jobs:
       with:
         report_paths: '/home/runner/work/ddc/ddc/tests.xml'
 
+  test-with-sanitizer-undefined:
+    runs-on: ubuntu-latest
+    needs: [docker-build, id_repo]
+    steps:
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@v1.3.1
+      with: { tool-cache: true, large-packages: false }
+    - name: Checkout built branch
+      uses: actions/checkout@v4
+      with: { submodules: recursive }
+    - name: Collect image artifact
+      if: needs.id_repo.outputs.in_base_repo == 'false'
+      uses: actions/download-artifact@v3
+      with:
+        name: latest_cpu-artifact
+    - name: Load image artifact into docker
+      if: needs.id_repo.outputs.in_base_repo == 'false'
+      run: |
+        docker load < latest_cpu.tar
+        rm latest_cpu.tar
+    - name: Test
+      id: test
+      run: |
+        cat<<-'UBSAN_EOF' > ubsan.supp
+          vptr:ginkgo/core/solver/solver_base.hpp
+        UBSAN_EOF
+        cat<<-'EOF' > run.sh
+          set -xe
+          git config --global --add safe.directory '*'
+          export CC=clang
+          export CXX=clang++
+          cmake \
+            -DDDC_BUILD_BENCHMARKS=ON \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_CXX_STANDARD=17 \
+            -DMDSPAN_CXX_STANDARD=17 \
+            -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF \
+            -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF \
+            -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
+            -DCMAKE_CXX_FLAGS="-fsanitize=undefined -fno-omit-frame-pointer" \
+            /src
+          make -j 2
+          export UBSAN_OPTIONS=print_stacktrace=1,halt_on_error=1,suppressions=/src/ubsan.supp
+          ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
+        EOF
+        docker run \
+          --cidfile='docker.cid' \
+          -v ${PWD}:/src:ro \
+          ghcr.io/cexa-project/ddc/latest_cpu:${GITHUB_SHA:0:7} \
+          bash /src/run.sh
+        if docker cp "$(cat docker.cid)":/data/tests.xml /home/runner/work/ddc/ddc/tests.xml
+        then echo "with_report=true" >> "$GITHUB_OUTPUT"
+        else echo "with_report=false" >> "$GITHUB_OUTPUT"
+        fi
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v4
+      if: ( success() || failure() ) && steps.test.outputs.with_report == 'true' # always run even if the previous step fails
+      with:
+        report_paths: '/home/runner/work/ddc/ddc/tests.xml'
+
   clang-tidy-test:
     runs-on: ubuntu-latest
     needs: [docker-build, id_repo]
