@@ -19,6 +19,18 @@ target_link_libraries(bsplines_tests_sll
 
 gtest_discover_tests(bsplines_tests_sll)
 
+add_executable(matrix_tests_sll
+  main.cpp
+	matrix.cpp
+)
+target_compile_features(matrix_tests_sll PUBLIC cxx_std_17)
+target_link_libraries(matrix_tests_sll
+    PUBLIC
+        GTest::gtest
+        sll::SLL
+)
+gtest_discover_tests(matrix_tests_sll)
+
 add_executable(bernstein_tests_sll
   main.cpp
 	bernstein.cpp
