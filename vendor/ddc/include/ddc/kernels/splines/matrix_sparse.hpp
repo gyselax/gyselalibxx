@@ -152,7 +152,7 @@ public:
 
         // Create the solver factory
         std::shared_ptr const residual_criterion
-                = gko::stop::ResidualNorm<double>::build().with_reduction_factor(1e-16).on(
+                = gko::stop::ResidualNorm<double>::build().with_reduction_factor(1e-15).on(
                         gko_exec);
 
         std::shared_ptr const iterations_criterion

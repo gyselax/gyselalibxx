@@ -198,3 +198,29 @@ TEST(ProductMDomainTest, Remove)
             dom_x_y.remove(DVectXY(1, 4), DVectXY(1, 1)),
             DDomXY(dom_x_y.front() + DVectXY(1, 4), dom_x_y.extents() - DVectXY(2, 5)));
 }
+
+TEST(ProductMDomainTest, SliceDomainXTooearly)
+{
+    [[maybe_unused]] DDomX const subdomain_x(lbound_x - 1, nelems_x);
+
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
+#ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
+    // the error message is checked with clang & gcc only
+    EXPECT_DEATH(
+            dom_x_y.restrict(subdomain_x),
+            R"rgx([Aa]ssert.*uid<ODDims>\(m_element_begin\).*uid<ODDims>\(odomain\.m_element_begin\))rgx");
+#endif
+}
+
+TEST(ProductMDomainTest, SliceDomainXToolate)
+{
+    [[maybe_unused]] DDomX const subdomain_x(lbound_x, nelems_x + 1);
+
+    DDomXY const dom_x_y(lbound_x_y, nelems_x_y);
+#ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
+    // the error message is checked with clang & gcc only
+    EXPECT_DEATH(
+            dom_x_y.restrict(subdomain_x),
+            R"rgx([Aa]ssert.*uid<ODDims>\(m_element_end\).*uid<ODDims>\(odomain\.m_element_end\).*)rgx");
+#endif
+}
