@@ -98,13 +98,22 @@ template <class ExecSpace>
 class Matrix_Sparse : public Matrix
 {
     using matrix_sparse_type = gko::matrix::Csr<double, int>;
+#ifdef KOKKOS_ENABLE_OPENMP
+    using solver_type = std::conditional_t<
+            std::is_same_v<ExecSpace, Kokkos::OpenMP>,
+            gko::solver::Gmres<double>,
+            gko::solver::Bicgstab<double>>;
+#else
+    using solver_type = gko::solver::Bicgstab<double>;
+#endif
+
 
 private:
     std::unique_ptr<gko::matrix::Dense<double>> m_matrix_dense;
 
     std::shared_ptr<matrix_sparse_type> m_matrix_sparse;
 
-    std::shared_ptr<gko::solver::Gmres<double>> m_solver;
+    std::shared_ptr<solver_type> m_solver;
     std::shared_ptr<gko::LinOp> m_solver_tr;
 
     int m_cols_per_chunk; // Maximum number of columns of B to be passed to a Ginkgo solver
@@ -152,7 +161,7 @@ public:
 
         // Create the solver factory
         std::shared_ptr const residual_criterion
-                = gko::stop::ResidualNorm<double>::build().with_reduction_factor(1e-16).on(
+                = gko::stop::ResidualNorm<double>::build().with_reduction_factor(1e-15).on(
                         gko_exec);
 
         std::shared_ptr const iterations_criterion
@@ -164,7 +173,7 @@ public:
                           .on(gko_exec);
 
         std::unique_ptr const solver_factory
-                = gko::solver::Gmres<double>::build()
+                = solver_type::build()
                           .with_preconditioner(preconditioner)
                           .with_criteria(residual_criterion, iterations_criterion)
                           .on(gko_exec);
