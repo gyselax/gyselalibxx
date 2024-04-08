@@ -12,7 +12,7 @@ cmake_tests:
     rm -rf build || true
     mkdir build
     cd build
-    cmake -DCMAKE_CXX_FLAGS="-Wall -Werror=unused-variable -Wno-sign-compare" -DBUILD_BENCHMARKS=ON $GENERAL_CMAKE_OPTIONS ..
+    cmake -DCMAKE_CXX_FLAGS="-Wall -Werror=unused-variable -Wno-sign-compare" -DBUILD_BENCHMARKS=ON $GENERAL_CMAKE_OPTIONS -DKokkos_ENABLE_SERIAL=ON ..
     make -j 4
     ctest -j 2 --output-on-failure --timeout 5 -LE test_on_Release_only --output-junit tests.xml
   artifacts:
@@ -30,9 +30,32 @@ cmake_tests_Release:
     rm -rf build || true
     mkdir build
     cd build
-    cmake -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release $GENERAL_CMAKE_OPTIONS ..
+    cmake -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release $GENERAL_CMAKE_OPTIONS -DKokkos_ENABLE_SERIAL=ON ..
     make -j 4
     ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
+    ls ./tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png
+    ls ./tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png
+  artifacts:
+    when: always
+    expire_in: 1 day
+    paths:
+      - ./build/tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png
+      - ./build/tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png
+    reports:
+      junit: ./build/tests.xml
+
+cmake_tests_Release_OMP:
+  extends: .cmake_tests
+  image: ghcr.io/gyselax/gyselalibxx_env
+  script: |
+    set -x
+    git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
+    rm -rf build || true
+    mkdir build
+    cd build
+    cmake -DCMAKE_CXX_FLAGS="-Wall -Wno-sign-compare" -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release $GENERAL_CMAKE_OPTIONS -DKokkos_ENABLE_OPENMP=ON ..
+    make -j 4
+    OMP_NUM_THREADS=2 ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
     ls ./tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png
     ls ./tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png
   artifacts:
