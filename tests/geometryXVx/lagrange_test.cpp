@@ -7,7 +7,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "Lagrange_interpolator_batched.hpp"
+#include "Lagrange_interpolator.hpp"
 // Here Z stands to specify that we use ad hoc geometry
 struct RDimZ
 {
@@ -81,7 +81,7 @@ public:
         });
         ddc::DiscreteVector<IDimZ> static constexpr gwx {0};
 
-        LagrangeInterpolatorBatched<IDimZ, BCond::DIRICHLET, BCond::DIRICHLET, IDimZ>
+        LagrangeInterpolator<IDimZ, BCond::DIRICHLET, BCond::DIRICHLET, IDimZ>
                 Test_Interpolator(deg, gwx);
         auto Essai = ddc::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
