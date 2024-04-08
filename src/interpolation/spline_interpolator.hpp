@@ -4,7 +4,7 @@
 
 #include <ddc/kernels/splines.hpp>
 
-#include "iinterpolator_batched.hpp"
+#include "iinterpolator.hpp"
 
 /**
  * @brief A class for interpolating a function using splines.
@@ -27,7 +27,7 @@ template <
         class RightExtrapolationRule,
         ddc::SplineSolver Solver,
         class... DDim>
-class SplineInterpolatorBatched : public IInterpolatorBatched<DDimI, DDim...>
+class SplineInterpolator : public IInterpolator<DDimI, DDim...>
 {
     using BuilderType = ddc::SplineBuilder<
             Kokkos::DefaultExecutionSpace,
@@ -67,7 +67,7 @@ public:
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    SplineInterpolatorBatched(BuilderType const& builder, EvaluatorType const& evaluator)
+    SplineInterpolator(BuilderType const& builder, EvaluatorType const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_coefs(builder.spline_domain())
@@ -78,7 +78,7 @@ public:
         ddc::parallel_fill(m_derivs_max_alloc, 0.);
     }
 
-    ~SplineInterpolatorBatched() override = default;
+    ~SplineInterpolator() override = default;
 
     device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> operator()(
             device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> const inout_data,
@@ -97,10 +97,10 @@ public:
 };
 
 /**
- * @brief A class which stores information necessary to create an instance of the SplineInterpolatorBatched class.
+ * @brief A class which stores information necessary to create an instance of the SplineInterpolator class.
  *
- * This class allows an instance of the SplineInterpolatorBatched class where necessary. This allows the
- * memory allocated in the private members of the SplineInterpolatorBatched to be freed when the object is not in use.
+ * This class allows an instance of the SplineInterpolator class where necessary. This allows the
+ * memory allocated in the private members of the SplineInterpolator to be freed when the object is not in use.
  * These objects are: m_coefs, m_derivs_min_alloc, m_derivs_max_alloc.
  */
 template <
@@ -112,8 +112,7 @@ template <
         class RightExtrapolationRule,
         ddc::SplineSolver Solver,
         class... DDim>
-class PreallocatableSplineInterpolatorBatched
-    : public IPreallocatableInterpolatorBatched<DDimI, DDim...>
+class PreallocatableSplineInterpolator : public IPreallocatableInterpolator<DDimI, DDim...>
 {
     using BuilderType = ddc::SplineBuilder<
             Kokkos::DefaultExecutionSpace,
@@ -139,28 +138,26 @@ class PreallocatableSplineInterpolatorBatched
 
 public:
     /**
-     * @brief Create an object capable of creating SplineInterpolatorBatched objects.
+     * @brief Create an object capable of creating SplineInterpolator objects.
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    PreallocatableSplineInterpolatorBatched(
-            BuilderType const& builder,
-            EvaluatorType const& evaluator)
+    PreallocatableSplineInterpolator(BuilderType const& builder, EvaluatorType const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)
     {
     }
 
-    ~PreallocatableSplineInterpolatorBatched() override = default;
+    ~PreallocatableSplineInterpolator() override = default;
 
     /**
-     * Create an instance of the SplineInterpolatorBatched class.
+     * Create an instance of the SplineInterpolator class.
      *
-     * @return A unique pointer to an instance of the SplineInterpolatorBatched class.
+     * @return A unique pointer to an instance of the SplineInterpolator class.
      */
-    std::unique_ptr<IInterpolatorBatched<DDimI, DDim...>> preallocate() const override
+    std::unique_ptr<IInterpolator<DDimI, DDim...>> preallocate() const override
     {
-        return std::make_unique<SplineInterpolatorBatched<
+        return std::make_unique<SplineInterpolator<
                 DDimI,
                 BSplines,
                 BcMin,

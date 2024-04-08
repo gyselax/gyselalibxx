@@ -18,15 +18,15 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_vx_batched.hpp"
-#include "bsl_advection_x_batched.hpp"
+#include "bsl_advection_vx.hpp"
+#include "bsl_advection_x.hpp"
 #include "collisions_intra.hpp"
 #ifdef PERIODIC_RDIMX
 #include "femperiodicpoissonsolver.hpp"
 #else
 #include "femnonperiodicpoissonsolver.hpp"
 #endif
-#include "Lagrange_interpolator_batched.hpp"
+#include "Lagrange_interpolator.hpp"
 #include "chargedensitycalculator.hpp"
 #include "fftpoissonsolver.hpp"
 #include "geometry.hpp"
@@ -43,7 +43,7 @@
 #include "sheath.yaml.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
-#include "spline_interpolator_batched.hpp"
+#include "spline_interpolator.hpp"
 #include "splitrighthandsidesolver.hpp"
 #include "splitvlasovsolver.hpp"
 
@@ -200,26 +200,25 @@ int main(int argc, char** argv)
     ddc::ConstantExtrapolationRule<RDimX> bv_x_max(x_max);
 #endif
 
-    // Creating batched operators
+    // Creating operators
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
 #ifndef PERIODIC_RDIMX
     SplineXEvaluator_1d const spline_x_evaluator_poisson(bv_x_min, bv_x_max);
 #endif
-    PreallocatableSplineInterpolatorBatched const
-            spline_x_interpolator(builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
 
     IVectVx static constexpr gwvx {0};
-    LagrangeInterpolatorBatched<IDimVx, BCond::DIRICHLET, BCond::DIRICHLET, IDimX, IDimVx> const
+    LagrangeInterpolator<IDimVx, BCond::DIRICHLET, BCond::DIRICHLET, IDimX, IDimVx> const
             lagrange_vx_non_preallocatable_interpolator(3, gwvx);
-    PreallocatableLagrangeInterpolatorBatched<
+    PreallocatableLagrangeInterpolator<
             IDimVx,
             BCond::DIRICHLET,
             BCond::DIRICHLET,
             IDimX,
             IDimVx> const lagrange_vx_interpolator(lagrange_vx_non_preallocatable_interpolator);
 
-    BslAdvectionSpatialBatched<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
-    BslAdvectionVelocityBatched<GeometryXVx, IDimVx> const advection_vx(lagrange_vx_interpolator);
+    BslAdvectionSpatial<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
+    BslAdvectionVelocity<GeometryXVx, IDimVx> const advection_vx(lagrange_vx_interpolator);
 
     // Creating of mesh for output saving
     IDomainX const gridx = ddc::select<IDimX>(meshSpXVx);
