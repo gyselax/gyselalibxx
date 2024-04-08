@@ -3,7 +3,7 @@
 #include <ddc/ddc.hpp>
 
 #include "Lagrange.hpp"
-#include "iinterpolator_batched.hpp"
+#include "iinterpolator.hpp"
 
 /**
  * @brief A class for interpolating a function using Lagrange polynomials.
@@ -11,7 +11,7 @@
  *
  */
 template <class DDimI, BCond BcMin, BCond BcMax, class... DDim>
-class LagrangeInterpolatorBatched : public IInterpolatorBatched<DDimI, DDim...>
+class LagrangeInterpolator : public IInterpolator<DDimI, DDim...>
 {
     using CDim = typename DDimI::continuous_dimension_type;
 
@@ -21,17 +21,17 @@ private:
 
 public:
     /**
-     * @brief Create a Batched Lagrange interpolator object.
+     * @brief Create a  Lagrange interpolator object.
      * @param[in] degree Degree of polynomials
      * @param[in] ghost  Discrete vector which gives the number of ghost points. By default choose 2.
     */
-    LagrangeInterpolatorBatched(int degree, ddc::DiscreteVector<DDimI> ghost)
+    LagrangeInterpolator(int degree, ddc::DiscreteVector<DDimI> ghost)
         : m_degree(degree)
         , m_ghost(ghost)
     {
     }
 
-    ~LagrangeInterpolatorBatched() override = default;
+    ~LagrangeInterpolator() override = default;
 
     /**
      * @brief Approximate the value of a function at a set of coordinates using the
@@ -51,7 +51,7 @@ public:
     {
         static_assert(
                 BcMin != BCond::PERIODIC,
-                "PERIODIC Boundary condition is not supported yet in LagrangeInterpolatorBatched.");
+                "PERIODIC Boundary condition is not supported yet in LagrangeInterpolator.");
 
         int const deg = m_degree;
         auto const ghost = m_ghost;
@@ -78,38 +78,36 @@ public:
 };
 
 /**
- * @brief A class which stores information necessary to create an instance of the LagrangeInterpolatorBatched class.
+ * @brief A class which stores information necessary to create an instance of the LagrangeInterpolator class.
  *
- * This class allows an instance of the LagrangeInterpolatorBatched class where necessary. This allows the
- * memory allocated in the private members of the InterpolatorBatched to be freed when the object is not in use.
+ * This class allows an instance of the LagrangeInterpolator class where necessary. This allows the
+ * memory allocated in the private members of the Interpolator to be freed when the object is not in use.
  */
 template <class DDimI, BCond BcMin, BCond BcMax, class... DDim>
-class PreallocatableLagrangeInterpolatorBatched
-    : public IPreallocatableInterpolatorBatched<DDimI, DDim...>
+class PreallocatableLagrangeInterpolator : public IPreallocatableInterpolator<DDimI, DDim...>
 {
-    LagrangeInterpolatorBatched<DDimI, BcMin, BcMax, DDim...> const& m_evaluator;
+    LagrangeInterpolator<DDimI, BcMin, BcMax, DDim...> const& m_evaluator;
 
 public:
     /**
-     * @brief Create an object capable of creating LagrangeInterpolatorBatched objects.
+     * @brief Create an object capable of creating LagrangeInterpolator objects.
      * @param[in] evaluator An operator which evaluates the value of the interpolation polynomial at requested coordinates.
      */
-    explicit PreallocatableLagrangeInterpolatorBatched(
-            LagrangeInterpolatorBatched<DDimI, BcMin, BcMax, DDim...> const& evaluator)
+    explicit PreallocatableLagrangeInterpolator(
+            LagrangeInterpolator<DDimI, BcMin, BcMax, DDim...> const& evaluator)
         : m_evaluator(evaluator)
     {
     }
 
-    ~PreallocatableLagrangeInterpolatorBatched() override = default;
+    ~PreallocatableLagrangeInterpolator() override = default;
 
     /**
-     * Create an instance of the LagrangeInterpolatorBatched class.
+     * Create an instance of the LagrangeInterpolator class.
      *
-     * @return A unique pointer to an instance of the LagrangeInterpolatorBatched class.
+     * @return A unique pointer to an instance of the LagrangeInterpolator class.
      */
-    std::unique_ptr<IInterpolatorBatched<DDimI, DDim...>> preallocate() const override
+    std::unique_ptr<IInterpolator<DDimI, DDim...>> preallocate() const override
     {
-        return std::make_unique<LagrangeInterpolatorBatched<DDimI, BcMin, BcMax, DDim...>>(
-                m_evaluator);
+        return std::make_unique<LagrangeInterpolator<DDimI, BcMin, BcMax, DDim...>>(m_evaluator);
     }
 };

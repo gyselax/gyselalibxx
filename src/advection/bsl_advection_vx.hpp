@@ -5,7 +5,7 @@
 #include <ddc/ddc.hpp>
 
 #include <ddc_helper.hpp>
-#include <iinterpolator_batched.hpp>
+#include <iinterpolator.hpp>
 #include <species_info.hpp>
 
 #include "iadvectionvx.hpp"
@@ -14,7 +14,7 @@
  * @brief A class which computes the velocity advection along the dimension of interest DDimV. Working for every cartesian geometry.
  */
 template <class Geometry, class DDimV>
-class BslAdvectionVelocityBatched : public IAdvectionVelocity<Geometry, DDimV>
+class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, DDimV>
 {
     using DDimSp = typename Geometry::DDimSp;
     using FdistribuDDom = typename Geometry::FdistribuDDom;
@@ -25,11 +25,11 @@ class BslAdvectionVelocityBatched : public IAdvectionVelocity<Geometry, DDimV>
 
 private:
     using PreallocatableInterpolatorType = interpolator_on_domain_t<
-            IPreallocatableInterpolatorBatched,
+            IPreallocatableInterpolator,
             DDimV,
             ddc::cartesian_prod_t<typename Geometry::SpatialDDom, typename Geometry::VelocityDDom>>;
     using InterpolatorType = interpolator_on_domain_t<
-            IInterpolatorBatched,
+            IInterpolator,
             DDimV,
             ddc::cartesian_prod_t<typename Geometry::SpatialDDom, typename Geometry::VelocityDDom>>;
     PreallocatableInterpolatorType const& m_interpolator_v;
@@ -39,12 +39,12 @@ public:
      * @brief Constructor 
      * @param[in] interpolator_v interpolator along the DDimV direction which refers to the velocity space.  
      */
-    explicit BslAdvectionVelocityBatched(PreallocatableInterpolatorType const& interpolator_v)
+    explicit BslAdvectionVelocity(PreallocatableInterpolatorType const& interpolator_v)
         : m_interpolator_v(interpolator_v)
     {
     }
 
-    ~BslAdvectionVelocityBatched() override = default;
+    ~BslAdvectionVelocity() override = default;
 
     /**
      * @brief Advects fdistribu along DDimV for a duration dt.

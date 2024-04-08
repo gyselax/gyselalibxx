@@ -13,8 +13,8 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_vx_batched.hpp"
-#include "bsl_advection_x_batched.hpp"
+#include "bsl_advection_vx.hpp"
+#include "bsl_advection_x.hpp"
 #include "fftpoissonsolver.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
@@ -25,7 +25,7 @@
 #include "predcorr.hpp"
 #include "singlemodeperturbinitialization.hpp"
 //#include "species_info.hpp"
-#include "spline_interpolator_batched.hpp"
+#include "spline_interpolator.hpp"
 #include "splitvlasovsolver.hpp"
 
 using std::cerr;
@@ -181,35 +181,31 @@ int main(int argc, char** argv)
     ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolatorBatched const
-            spline_x_interpolator(builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
 
     ddc::PeriodicExtrapolationRule<RDimY> bv_y_min;
     ddc::PeriodicExtrapolationRule<RDimY> bv_y_max;
     SplineYEvaluator const spline_y_evaluator(bv_y_min, bv_y_max);
 
-    PreallocatableSplineInterpolatorBatched const
-            spline_y_interpolator(builder_y, spline_y_evaluator);
+    PreallocatableSplineInterpolator const spline_y_interpolator(builder_y, spline_y_evaluator);
 
     ddc::ConstantExtrapolationRule<RDimVx> bv_vx_min(vx_min);
     ddc::ConstantExtrapolationRule<RDimVx> bv_vx_max(vx_max);
     SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
 
-    PreallocatableSplineInterpolatorBatched const
-            spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
     ddc::ConstantExtrapolationRule<RDimVy> bv_vy_min(vy_min);
     ddc::ConstantExtrapolationRule<RDimVy> bv_vy_max(vy_max);
     SplineVyEvaluator const spline_vy_evaluator(bv_vy_min, bv_vy_max);
 
-    PreallocatableSplineInterpolatorBatched const
-            spline_vy_interpolator(builder_vy, spline_vy_evaluator);
+    PreallocatableSplineInterpolator const spline_vy_interpolator(builder_vy, spline_vy_evaluator);
 
     // Create advection operator
-    BslAdvectionSpatialBatched<GeometryXYVxVy, IDimX> const advection_x(spline_x_interpolator);
-    BslAdvectionSpatialBatched<GeometryXYVxVy, IDimY> const advection_y(spline_y_interpolator);
-    BslAdvectionVelocityBatched<GeometryXYVxVy, IDimVx> const advection_vx(spline_vx_interpolator);
-    BslAdvectionVelocityBatched<GeometryXYVxVy, IDimVy> const advection_vy(spline_vy_interpolator);
+    BslAdvectionSpatial<GeometryXYVxVy, IDimX> const advection_x(spline_x_interpolator);
+    BslAdvectionSpatial<GeometryXYVxVy, IDimY> const advection_y(spline_y_interpolator);
+    BslAdvectionVelocity<GeometryXYVxVy, IDimVx> const advection_vx(spline_vx_interpolator);
+    BslAdvectionVelocity<GeometryXYVxVy, IDimVy> const advection_vy(spline_vy_interpolator);
 
     SplitVlasovSolver const vlasov(advection_x, advection_y, advection_vx, advection_vy);
 

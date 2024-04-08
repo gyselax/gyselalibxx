@@ -14,8 +14,8 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_vx_batched.hpp"
-#include "bsl_advection_x_batched.hpp"
+#include "bsl_advection_vx.hpp"
+#include "bsl_advection_x.hpp"
 #include "bumpontailequilibrium.hpp"
 #include "chargedensitycalculator.hpp"
 #include "fftpoissonsolver.hpp"
@@ -28,7 +28,7 @@
 #include "restartinitialization.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
-#include "spline_interpolator_batched.hpp"
+#include "spline_interpolator.hpp"
 #include "splitvlasovsolver.hpp"
 
 using std::cerr;
@@ -183,18 +183,16 @@ int main(int argc, char** argv)
 
     // Creating operators
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-    PreallocatableSplineInterpolatorBatched const
-            spline_x_interpolator(builder_x, spline_x_evaluator);
+    PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
 
     ddc::ConstantExtrapolationRule<RDimVx> bv_v_min(vx_min);
     ddc::ConstantExtrapolationRule<RDimVx> bv_v_max(vx_max);
 
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
-    PreallocatableSplineInterpolatorBatched const
-            spline_vx_interpolator(builder_vx, spline_vx_evaluator);
+    PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
-    BslAdvectionSpatialBatched<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
-    BslAdvectionVelocityBatched<GeometryXVx, IDimVx> const advection_vx(spline_vx_interpolator);
+    BslAdvectionSpatial<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
+    BslAdvectionVelocity<GeometryXVx, IDimVx> const advection_vx(spline_vx_interpolator);
 
     // Creating of mesh for output saving
     IDomainX const gridx = ddc::select<IDimX>(meshSpXVx);
