@@ -12,8 +12,8 @@ var searchData=
   ['polarsplinespan_570',['PolarSplineSpan',['../structPolarSplineSpan.html',1,'']]],
   ['polarsplineview_571',['PolarSplineView',['../structPolarSplineView.html',1,'']]],
   ['polynomialevaluator_572',['PolynomialEvaluator',['../structPolynomialEvaluator.html',1,'']]],
-  ['preallocatablelagrangeinterpolatorbatched_573',['PreallocatableLagrangeInterpolatorBatched',['../classPreallocatableLagrangeInterpolatorBatched.html',1,'']]],
-  ['preallocatablesplineinterpolatorbatched_574',['PreallocatableSplineInterpolatorBatched',['../classPreallocatableSplineInterpolatorBatched.html',1,'']]],
+  ['preallocatablelagrangeinterpolator_573',['PreallocatableLagrangeInterpolator',['../classPreallocatableLagrangeInterpolator.html',1,'']]],
+  ['preallocatablesplineinterpolator_574',['PreallocatableSplineInterpolator',['../classPreallocatableSplineInterpolator.html',1,'']]],
   ['preallocatablesplineinterpolatorrp_575',['PreallocatableSplineInterpolatorRP',['../classPreallocatableSplineInterpolatorRP.html',1,'']]],
   ['preallocatablesplineinterpolatorrp_3c_20ddc_3a_3anullextrapolationrule_20_3e_576',['PreallocatableSplineInterpolatorRP&lt; ddc::NullExtrapolationRule &gt;',['../classPreallocatableSplineInterpolatorRP.html',1,'']]],
   ['predcorr_577',['PredCorr',['../classPredCorr.html',1,'']]]

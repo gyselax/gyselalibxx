@@ -77,7 +77,7 @@ var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCurvilinear2DToCartesian.html#a58d230e4f91cb40b45f1fb0759fabea0",
-"classLagrangeInterpolatorBatched.html#a3e33453b70a8caa24acc2a8a8957db12",
+"classLagrangeInterpolator.html#a9415391fbca3749e2ebaeae6dc8aa9e5",
 "classRotationSimulation.html#a24cab55207f4b65feffd1255545b92dd",
 "ivlasovsolver_8hpp_source.html"
 ];

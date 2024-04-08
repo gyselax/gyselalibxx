@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('src_advection.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>The <code>advection/</code> folder gathers the backward semi lagrangian scheme classes. There are two main classes, AdvectionSpatial and AdvectionVelocity. Implementing these operators separately makes sense, since we are using time splitting.</p>
-<p>Two implementations of the operators are available. For both cases the feet of the characteristic curves are used to interpolate the updated distribution function on mesh points. The sequential version uses classical interpolators and needs to iterate over a slice of interest in the phase space. The parallel one has the suffix "batched". It uses batched interpolators so the interpolation step is done over the whole distribution function.</p>
+<p>The feet of the characteristic curves are used to interpolate the updated distribution function on mesh points. It uses batched interpolators so the interpolation step is done over the whole distribution function.</p>
 <h1><a class="anchor" id="src_advection__Spatial_advection"></a>
 Spatial advection</h1>
 <p>Here the purpose is the advection along a direction on the physical space dimension of the phase space. The dynamics of the motion on the spatial dimension are governed by the following equation.</p>
