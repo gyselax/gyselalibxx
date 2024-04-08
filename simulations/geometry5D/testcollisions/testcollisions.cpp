@@ -227,12 +227,16 @@ int main(int argc, char** argv)
     // Collision operator initialisation
     DFieldTor1 nustar0_r(dom_tor1);
     ddc::parallel_fill(nustar0_r, 0.0);
-    DFieldVpar const coeff_intdvpar = simpson_quadrature_coefficients_1d(
+    host_t<DFieldVpar> const coeff_intdvpar_host
+            = simpson_quadrature_coefficients_1d(allfdistribu.domain<GridVpar>());
+    host_t<DFieldMu> const coeff_intdmu_host
+            = simpson_quadrature_coefficients_1d(allfdistribu.domain<GridMu>());
+    auto coeff_intdvpar = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            allfdistribu.domain<GridVpar>());
-    DFieldMu const coeff_intdmu = simpson_quadrature_coefficients_1d(
+            coeff_intdvpar_host.span_cview());
+    auto coeff_intdmu = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            allfdistribu.domain<GridMu>());
+            coeff_intdmu_host.span_cview());
 
     Collisions collision_operator(dom_sp_tor3D_v2D, coeff_intdmu, coeff_intdvpar, nustar0_r);
 
