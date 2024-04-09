@@ -28,9 +28,13 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         paraconf::paraconf
         gslx::advection
         gslx::boltzmann_${GEOMETRY_VARIANT}
-        gslx::initialization_${GEOMETRY_VARIANT}
+        gslx::fluidinitialization_${GEOMETRY_VARIANT}
+        gslx::fluidsolver_${GEOMETRY_VARIANT}
+        gslx::moments
         gslx::poisson_${GEOMETRY_VARIANT}
         gslx::quadrature
+        gslx::speciesinfo
+        gslx::time_integration_${GEOMETRY_VARIANT}
         gslx::utils_${GEOMETRY_VARIANT}
 )
 
@@ -63,10 +67,11 @@ target_sources(unit_tests_xperiod_vx
         fftpoissonsolver.cpp
 )
 
-
 target_sources(unit_tests_xnonperiod_vx PRIVATE femnonperiodicpoissonsolver.cpp)
 
 add_subdirectory(bump_on_tail)
+
+add_subdirectory(geometryMX)
 
 add_subdirectory(landau)
 
