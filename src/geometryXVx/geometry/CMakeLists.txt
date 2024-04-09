@@ -12,6 +12,7 @@ target_include_directories("geometry_${GEOMETRY_VARIANT}"
 target_link_libraries("geometry_${GEOMETRY_VARIANT}" INTERFACE
     DDC::DDC
     gslx::speciesinfo
+    gslx::moments
     gslx::utils
 )
 add_library("gslx::geometry_${GEOMETRY_VARIANT}" ALIAS "geometry_${GEOMETRY_VARIANT}")
