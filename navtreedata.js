@@ -56,6 +56,7 @@ var NAVTREE =
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
     [ "Gyselalib++ contents", "src.html", "src" ],
     [ "Collisions", "src_geometry5D_rhs_collisions.html", null ],
+    [ "Time integration hybrid", "src_geometryXVx_time_integration_hybrid.html", null ],
     [ "Tests", "tests.html", "tests" ],
     [ "Script to automise :", "tests_geometry5D_collisions.html", [
       [ "- the creation of the initial restart file with the python script <tt>init_distribution.py</tt>", "tests_geometry5D_collisions.html#autotoc_md53", null ],
@@ -76,10 +77,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCurvilinear2DToCartesian.html#a58d230e4f91cb40b45f1fb0759fabea0",
-"classLagrangeInterpolator.html#a9415391fbca3749e2ebaeae6dc8aa9e5",
-"classRotationSimulation.html#a24cab55207f4b65feffd1255545b92dd",
-"ivlasovsolver_8hpp_source.html"
+"classCurvilinear2DToCartesian.html#a39cdb71fcfd111b9be3679922f99af4d",
+"classKrookSourceAdaptive.html#a9b406e47034bbf02b16a3a0a43a7207e",
+"classRefinedDiscreteToCartesian.html",
+"geometryXYVxVy_2initialization_2iequilibrium_8hpp_source.html",
+"tests_geometry5D_collisions.html#autotoc_md57"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
