@@ -46,19 +46,19 @@ sed -i 's/^  nbiter: .*/  nbiter: 2/' sheath_restart.yaml
 sed -i 's/^  time_diag: .*/  time_diag: 0.5/' sheath_restart.yaml
 
 h5ls -d ${PWD}/VOICEXX_00005.h5/time_saved ${RSTDIR}/VOICEXX_00005.h5/time_saved
-command="h5diff -r ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 time_saved"
+command="h5diff --use-system-epsilon -r ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 time_saved"
 eval $command
 if [ $? -ne 0 ]; then
     exit 1
 fi
 
-command="h5diff -r ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 electrostatic_potential"
+command="h5diff --use-system-epsilon -r ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 electrostatic_potential"
 eval $command
 if [ $? -ne 0 ]; then
     exit 1
 fi
 
-command="h5diff -r ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 fdistribu"
+command="h5diff --use-system-epsilon -r ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 fdistribu"
 eval $command
 if [ $? -ne 0 ]; then
     exit 1
