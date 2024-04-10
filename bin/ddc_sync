@@ -8,18 +8,19 @@ cd ..
 
 rm -rf vendor/ddc
 git clone --depth 1 https://github.com/CExA-project/ddc.git vendor/ddc
+DDC_VERSION="$(git -C vendor/ddc rev-parse --short HEAD)"
+if [ 0 -eq "$(git config user.email | wc -c )" ]
+then export GIT_COMMITTER_EMAIL="$(git -C vendor/ddc show -s --format='%ae' HEAD)"
+fi
+if [ 0 -eq "$(git config user.name | wc -c )" ]
+then export GIT_COMMITTER_NAME="$(git -C vendor/ddc show -s --format='%an' HEAD)"
+fi
 rm -rf vendor/ddc/.git
 
 if [ '(' "x$1" = "x--push" -o "x$1" = "x--commit" ')' -a -n "$(git status --porcelain)" ]
 then
-	if [ 0 -eq "$(git config user.email | wc -c )" ]
-	then export GIT_COMMITTER_EMAIL="$(git -C vendor/ddc show -s --format='%ae' HEAD)"
-	fi
-	if [ 0 -eq "$(git config user.name | wc -c )" ]
-	then export GIT_COMMITTER_NAME="$(git -C vendor/ddc show -s --format='%an' HEAD)"
-	fi
 	git add -A vendor/ddc
-	git commit -m "Sync DDC version $(git -C vendor/ddc rev-parse --short HEAD)"
+	git commit -m "Sync DDC version $DDC_VERSION"
 	if [ "x$1" = "x--push" ]
 	then git push
 	fi
