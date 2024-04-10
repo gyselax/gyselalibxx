@@ -97,7 +97,7 @@ TEST(GeometryXM, KineticFluidSpecies)
             EXPECT_EQ(ddc::discrete_space<IDimSp>().charges()(isp), kinetic_charges(isp));
             EXPECT_EQ(ddc::discrete_space<IDimSp>().masses()(isp), kinetic_masses(isp));
 
-        } else if (nb_kinspecies + 1 <= isp.uid() < nb_kinspecies + nb_fluidspecies) {
+        } else if (nb_kinspecies + 1 <= isp.uid() && isp.uid() < nb_kinspecies + nb_fluidspecies) {
             EXPECT_EQ(ddc::discrete_space<IDimSp>().charges()(isp), fluid_charges(isp));
             EXPECT_EQ(ddc::discrete_space<IDimSp>().masses()(isp), fluid_masses(isp));
         }
