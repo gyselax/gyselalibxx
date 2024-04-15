@@ -20,3 +20,6 @@
 [submodule "vendor/kokkos-tools"]
 	path = vendor/kokkos-tools
 	url = https://github.com/kokkos/kokkos-tools.git
+[submodule "vendor/kokkos-kernels"]
+	path = vendor/kokkos-kernels
+	url = https://github.com/kokkos/kokkos-kernels.git
