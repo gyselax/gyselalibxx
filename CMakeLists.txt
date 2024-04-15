@@ -129,6 +129,12 @@ if("${Kokkos_ENABLE_CUDA}")
 endif()
 add_subdirectory("vendor/kokkos/" "kokkos") # SYSTEM)
 
+# NOTE: Do not forget to keep Kokkos and Kokkos-kernels in sync !
+set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF BOOL "")
+set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON BOOL "")
+set(KokkosKernels_ENABLE_COMPONENT_BLAS ON BOOL "")
+add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels") # SYSTEM)
+
 find_package (Eigen3 3.3 NO_MODULE)
 
 if (NOT EIGEN3_FOUND)
@@ -143,9 +149,9 @@ add_subdirectory("vendor/ddc/" "ddc") # SYSTEM)
 ## Use selalib's splines from `vendor/`
 add_subdirectory("vendor/sll/" "sll") # SYSTEM)
 
-# TODO(Etienne M): We may have to handle kokkos kernel in the same way.
-set(koliop_ENABLE_Kokkos "SUBDIRECTORY" CACHE STRING "")
 set(koliop_BUILD_TESTING OFF CACHE BOOL "")
+set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
+set(koliop_ENABLE_KokkosKernels "SUBDIRECTORY" CACHE STRING "")
 add_subdirectory("vendor/koliop/" "koliop") # SYSTEM)
 
 ## Use the kokkos-tools for profiling purpose from `vendor/`
