@@ -1,14 +1,15 @@
 #!/bin/bash
 set -xe
 
-if [ $# -ne 3 ]
+if [ $# -ne 4 ]
 then
-    echo "Usage: $0 <VOICEXX_SRCDIR> <VOICEXX_EXEC> <SIMULATION_NAME>"
+    echo "Usage: $0 <VOICEXX_SRCDIR> <VOICEXX_EXEC> <PYTHON3_EXE> <SIMULATION_NAME>"
     exit 1
 fi
 VOICEXX_SRCDIR="$1"
 VOICEXX_EXEC="$2"
-SIMULATION_NAME="$3"
+PYTHON3_EXE="$3"
+SIMULATION_NAME="$4"
 
 OUTDIR="${PWD}/${SIMULATION_NAME}"
 
@@ -45,21 +46,18 @@ cp "${RSTDIR}/bumpontail.yaml" bumpontail_restart.yaml
 sed -i 's/^  nbiter: .*/  nbiter: 2/' bumpontail_restart.yaml
 sed -i 's/^  time_diag: .*/  time_diag: 0.5/' bumpontail_restart.yaml
 
-h5ls -d ${PWD}/VOICEXX_00006.h5/time_saved ${RSTDIR}/VOICEXX_00005.h5/time_saved
-command="h5diff ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 time_saved"
-eval $command
+h5ls -d ${PWD}/VOICEXX_00005.h5/time_saved ${RSTDIR}/VOICEXX_00005.h5/time_saved
+${PYTHON3_EXE} ${VOICEXX_SRCDIR}/post-process/PythonScripts/compare_hdf5_results.py ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 time_saved -R ${RELATIVE_RESTART_TOLERANCE} -A ${ABSOLUTE_RESTART_TOLERANCE}
 if [ $? -ne 0 ]; then
     exit 1
 fi
 
-command="h5diff ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 electrostatic_potential"
-eval $command
+${PYTHON3_EXE} ${VOICEXX_SRCDIR}/post-process/PythonScripts/compare_hdf5_results.py ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 electrostatic_potential -R ${RELATIVE_RESTART_TOLERANCE} -A ${ABSOLUTE_RESTART_TOLERANCE}
 if [ $? -ne 0 ]; then
     exit 1
 fi
 
-command="h5diff ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 fdistribu"
-eval $command
+${PYTHON3_EXE} ${VOICEXX_SRCDIR}/post-process/PythonScripts/compare_hdf5_results.py ${PWD}/VOICEXX_00005.h5 ${RSTDIR}/VOICEXX_00005.h5 fdistribu -R ${RELATIVE_RESTART_TOLERANCE} -A ${ABSOLUTE_RESTART_TOLERANCE}
 if [ $? -ne 0 ]; then
     exit 1
 fi
