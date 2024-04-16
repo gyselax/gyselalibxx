@@ -6,6 +6,9 @@ cmake_tests:
   extends: .cmake_tests
   image: ghcr.io/gyselax/gyselalibxx_env
   timeout: 2 hours
+  variables:
+    RELATIVE_RESTART_TOLERANCE: '0.0'
+    ABSOLUTE_RESTART_TOLERANCE: '0.0'
   script: |
     set -x
     git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
@@ -24,6 +27,9 @@ cmake_tests:
 cmake_tests_Release:
   extends: .cmake_tests
   image: ghcr.io/gyselax/gyselalibxx_env
+  variables:
+    RELATIVE_RESTART_TOLERANCE: '0.0'
+    ABSOLUTE_RESTART_TOLERANCE: '0.0'
   script: |
     set -x
     git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
@@ -47,6 +53,9 @@ cmake_tests_Release:
 cmake_tests_Release_OMP:
   extends: .cmake_tests
   image: ghcr.io/gyselax/gyselalibxx_env
+  variables:
+    RELATIVE_RESTART_TOLERANCE: '1e-14'
+    ABSOLUTE_RESTART_TOLERANCE: '1e-14'
   script: |
     set -x
     git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
@@ -71,6 +80,9 @@ cmake_tests_Release_GPU:
   extends: .cmake_tests
   tags:
     - persee
+  variables:
+    RELATIVE_RESTART_TOLERANCE: '1e-14'
+    ABSOLUTE_RESTART_TOLERANCE: '1e-14'
   before_script: |
     . /data/gyselarunner/spack-0.20.0/share/spack/setup-env.sh
     spack load gcc@11
