@@ -5,6 +5,17 @@ include(GoogleTest)
 set(SLL_SPLINES_TEST_DEGREE_MIN 3 CACHE STRING "Minimum degree to test splines.")
 set(SLL_SPLINES_TEST_DEGREE_MAX 3 CACHE STRING "Maximum degree to test splines.")
 
+add_executable(misc_tests_sll
+    main.cpp
+    view.cpp
+    gauss_legendre_integration.cpp
+)
+target_compile_features(misc_tests_sll PUBLIC cxx_std_17)
+target_link_libraries(misc_tests_sll
+    PUBLIC
+        GTest::gtest
+        sll::SLL
+)
 
 add_executable(bsplines_tests_sll
 	main.cpp
