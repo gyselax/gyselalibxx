@@ -16,7 +16,9 @@ add_test(NAME TestSimulationLandauRestartFFT_XVx
         "${PROJECT_SOURCE_DIR}"
         "$<TARGET_FILE:landau_fft>"
         "$<TARGET_FILE:Python3::Interpreter>"
-        "restart")
+        "restart"
+        "${RELATIVE_RESTART_TOLERANCE}"
+        "${ABSOLUTE_RESTART_TOLERANCE}")
 set_property(TEST TestSimulationLandauRestartFFT_XVx PROPERTY TIMEOUT 200)
 set_property(TEST TestSimulationLandauRestartFFT_XVx PROPERTY COST 100)
 set_tests_properties(TestSimulationLandauRestartFFT_XVx PROPERTIES LABELS "ResultsNotTested" )
@@ -35,7 +37,9 @@ add_test(NAME TestSimulationLandauRestartFemUniform_xperiod_vx
         "${PROJECT_SOURCE_DIR}"
         "$<TARGET_FILE:landau_fem_uniform_xperiod_vx>"
         "$<TARGET_FILE:Python3::Interpreter>"
-        "restart")
+        "restart"
+        "${RELATIVE_RESTART_TOLERANCE}"
+        "${ABSOLUTE_RESTART_TOLERANCE}")
 set_property(TEST TestSimulationLandauRestartFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
 set_property(TEST TestSimulationLandauRestartFemUniform_xperiod_vx PROPERTY COST 100)
 set_tests_properties(TestSimulationLandauRestartFemUniform_xperiod_vx PROPERTIES LABELS "ResultsNotTested" )

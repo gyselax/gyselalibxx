@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.15)
-
 include(GoogleTest)
 
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
@@ -68,6 +66,18 @@ target_sources(unit_tests_xperiod_vx
 )
 
 target_sources(unit_tests_xnonperiod_vx PRIVATE femnonperiodicpoissonsolver.cpp)
+
+# Set variables for restart tests
+if (DEFINED ENV{RELATIVE_RESTART_TOLERANCE})
+    set(RELATIVE_RESTART_TOLERANCE $ENV{RELATIVE_RESTART_TOLERANCE})
+else()
+    set(RELATIVE_RESTART_TOLERANCE "1e-14")
+endif()
+if (DEFINED ENV{ABSOLUTE_RESTART_TOLERANCE})
+    set(ABSOLUTE_RESTART_TOLERANCE $ENV{ABSOLUTE_RESTART_TOLERANCE})
+else()
+    set(ABSOLUTE_RESTART_TOLERANCE "1e-14")
+endif()
 
 add_subdirectory(bump_on_tail)
 
