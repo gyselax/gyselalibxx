@@ -1,15 +1,23 @@
 #!/bin/bash
 set -xe
 
-if [ $# -ne 4 ]
+if [ $# -lt 4 ] || [ $# -gt 6 ]
 then
-    echo "Usage: $0 <VOICEXX_SRCDIR> <VOICEXX_EXEC> <PYTHON3_EXE> <SIMULATION_NAME>"
+    echo "Usage: $0 <VOICEXX_SRCDIR> <VOICEXX_EXEC> <PYTHON3_EXE> <SIMULATION_NAME> [<RELATIVE_RESTART_TOLERANCE> <ABSOLUTE_RESTART_TOLERANCE>]"
     exit 1
 fi
 VOICEXX_SRCDIR="$1"
 VOICEXX_EXEC="$2"
 PYTHON3_EXE="$3"
 SIMULATION_NAME="$4"
+if [ -n "$5" ]
+then
+  RELATIVE_RESTART_TOLERANCE="$5"
+fi
+if [ -n "$6" ]
+then
+  ABSOLUTE_RESTART_TOLERANCE="$6"
+fi
 
 OUTDIR="${PWD}/${SIMULATION_NAME}"
 

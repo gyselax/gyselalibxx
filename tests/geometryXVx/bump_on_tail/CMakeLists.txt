@@ -16,7 +16,9 @@ add_test(NAME TestSimulationBumpontailRestartFFT_XVx
         "${PROJECT_SOURCE_DIR}"
         "$<TARGET_FILE:bumpontail_fft>"
         "$<TARGET_FILE:Python3::Interpreter>"
-        "restart")
+        "restart"
+        "${RELATIVE_RESTART_TOLERANCE}"
+        "${ABSOLUTE_RESTART_TOLERANCE}")
 set_property(TEST TestSimulationBumpontailRestartFFT_XVx PROPERTY TIMEOUT 200)
 set_property(TEST TestSimulationBumpontailRestartFFT_XVx PROPERTY COST 100)
 set_tests_properties(TestSimulationBumpontailRestartFFT_XVx PROPERTIES LABELS "ResultsNotTested" )
@@ -35,7 +37,9 @@ add_test(NAME TestSimulationBumpontailRestartFemUniform_xperiod_vx
         "${PROJECT_SOURCE_DIR}"
         "$<TARGET_FILE:bumpontail_fem_uniform_xperiod_vx>"
         "$<TARGET_FILE:Python3::Interpreter>"
-        "restart")
+        "restart"
+        "${RELATIVE_RESTART_TOLERANCE}"
+        "${ABSOLUTE_RESTART_TOLERANCE}")
 set_property(TEST TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
 set_property(TEST TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTY COST 100)
 set_tests_properties(TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTIES LABELS "ResultsNotTested" )
