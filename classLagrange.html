@@ -112,12 +112,12 @@ $(document).ready(function(){initNavTree('classLagrange.html',''); initResizable
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0768122bb54bed3ee47c4e751984784c"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrange.html#a0768122bb54bed3ee47c4e751984784c">Lagrange</a> (int order, ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDimI &gt;, std::experimental::layout_right, typename Execspace::memory_space &gt; x_nodes_fnodes, ddc::DiscreteDomain&lt; DDimI &gt; domain, ddc::DiscreteVector&lt; DDimI &gt; ghost)</td></tr>
-<tr class="memdesc:a0768122bb54bed3ee47c4e751984784c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usual Constructor.  <a href="classLagrange.html#a0768122bb54bed3ee47c4e751984784c">More...</a><br /></td></tr>
-<tr class="separator:a0768122bb54bed3ee47c4e751984784c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad527b811b643d250343f3cf19de2be7d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrange.html#ad527b811b643d250343f3cf19de2be7d">evaluate</a> (double x_interp) const</td></tr>
-<tr class="memdesc:ad527b811b643d250343f3cf19de2be7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the approximated value of a function on a point current values at a known set of interpolation points.  <a href="classLagrange.html#ad527b811b643d250343f3cf19de2be7d">More...</a><br /></td></tr>
-<tr class="separator:ad527b811b643d250343f3cf19de2be7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafc94eabc2d229ba7a927673fcc41b98"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrange.html#aafc94eabc2d229ba7a927673fcc41b98">Lagrange</a> (int degree, ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDimI &gt;, std::experimental::layout_right, typename Execspace::memory_space &gt; x_nodes_fnodes, ddc::DiscreteDomain&lt; DDimI &gt; domain, DVectI ghost)</td></tr>
+<tr class="memdesc:aafc94eabc2d229ba7a927673fcc41b98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usual Constructor.  <a href="classLagrange.html#aafc94eabc2d229ba7a927673fcc41b98">More...</a><br /></td></tr>
+<tr class="separator:aafc94eabc2d229ba7a927673fcc41b98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf78fd7159c8739f6d5441d2ac354aab"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrange.html#aaf78fd7159c8739f6d5441d2ac354aab">evaluate</a> (CoordDimI x_interp) const</td></tr>
+<tr class="memdesc:aaf78fd7159c8739f6d5441d2ac354aab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the approximated value of a function on a point current values at a known set of interpolation points.  <a href="classLagrange.html#aaf78fd7159c8739f6d5441d2ac354aab">More...</a><br /></td></tr>
+<tr class="separator:aaf78fd7159c8739f6d5441d2ac354aab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Execspace, class DDimI, BCond BcMin, BCond BcMax&gt;<br />
@@ -126,8 +126,8 @@ class Lagrange&lt; Execspace, DDimI, BcMin, BcMax &gt;</h3>
 <p>A class which implements <a class="el" href="classLagrange.html" title="A class which implements Lagrange polynomials.">Lagrange</a> polynomials. </p>
 <p>A simple class which provides the possibility to evaluate an interpolation of a function known only over a restricted set of nodes. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a0768122bb54bed3ee47c4e751984784c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0768122bb54bed3ee47c4e751984784c">&#9670;&nbsp;</a></span>Lagrange()</h2>
+<a id="aafc94eabc2d229ba7a927673fcc41b98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafc94eabc2d229ba7a927673fcc41b98">&#9670;&nbsp;</a></span>Lagrange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +141,7 @@ template&lt;class Execspace , class DDimI , BCond BcMin, BCond BcMax&gt; </div>
           <td class="memname">KOKKOS_FUNCTION <a class="el" href="classLagrange.html">Lagrange</a>&lt; Execspace, DDimI, BcMin, BcMax &gt;::<a class="el" href="classLagrange.html">Lagrange</a> </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>order</em>, </td>
+          <td class="paramname"><em>degree</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -158,7 +158,7 @@ template&lt;class Execspace , class DDimI , BCond BcMin, BCond BcMax&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::DiscreteVector&lt; DDimI &gt;&#160;</td>
+          <td class="paramtype">DVectI&#160;</td>
           <td class="paramname"><em>ghost</em>&#160;</td>
         </tr>
         <tr>
@@ -177,7 +177,7 @@ template&lt;class Execspace , class DDimI , BCond BcMin, BCond BcMax&gt; </div>
 <p>Usual Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">order</td><td>integer which correspond to the degree of interpolation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">degree</td><td>integer which correspond to the degree of interpolation. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x_nodes_fnodes</td><td>Chunkspan of nodes and associated values of the function. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">domain</td><td>along interest direction, usedful in periodic case </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ghost</td><td>DiscretVector which gives the number of ghosted points </td></tr>
@@ -188,8 +188,8 @@ template&lt;class Execspace , class DDimI , BCond BcMin, BCond BcMax&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad527b811b643d250343f3cf19de2be7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad527b811b643d250343f3cf19de2be7d">&#9670;&nbsp;</a></span>evaluate()</h2>
+<a id="aaf78fd7159c8739f6d5441d2ac354aab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf78fd7159c8739f6d5441d2ac354aab">&#9670;&nbsp;</a></span>evaluate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,7 +199,7 @@ template&lt;typename Execspace , class DDimI , BCond BcMin, BCond BcMax&gt; </di
         <tr>
           <td class="memname">KOKKOS_INLINE_FUNCTION double <a class="el" href="classLagrange.html">Lagrange</a>&lt; Execspace, DDimI, BcMin, BcMax &gt;::evaluate </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">CoordDimI&#160;</td>
           <td class="paramname"><em>x_interp</em></td><td>)</td>
           <td> const</td>
         </tr>

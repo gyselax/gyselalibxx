@@ -118,172 +118,174 @@ $(document).ready(function(){initNavTree('Lagrange_8hpp_source.html',''); initRe
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classLagrange.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classLagrange.html">Lagrange</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    static_assert((BcMin == BCond::PERIODIC) == (BcMax == BCond::PERIODIC));</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    ddc::DiscreteDomain&lt;DDimI&gt; m_domain;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">int</span> m_deg;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">int</span> m_n;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> m_ghost;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            double,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            ddc::DiscreteDomain&lt;DDimI&gt;,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            std::experimental::layout_right,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keyword">typename</span> Execspace::memory_space&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            m_ChunkSpan;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">double</span> m_left_bound;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">double</span> m_right_bound;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classLagrange.html#a0768122bb54bed3ee47c4e751984784c">   46</a></span>&#160;    KOKKOS_FUNCTION <a class="code" href="classLagrange.html#a0768122bb54bed3ee47c4e751984784c">Lagrange</a>(</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordtype">int</span> order,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    <span class="keywordtype">double</span>,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    ddc::DiscreteDomain&lt;DDimI&gt;,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    std::experimental::layout_right,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    <span class="keyword">typename</span> Execspace::memory_space&gt; x_nodes_fnodes,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            ddc::DiscreteDomain&lt;DDimI&gt; domain,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            ddc::DiscreteVector&lt;DDimI&gt; ghost)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        : m_domain(domain)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        , m_deg(order)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        , m_n(x_nodes_fnodes.domain().size())</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        , m_ghost(ghost.value())</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        , m_ChunkSpan(x_nodes_fnodes)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        m_left_bound = ddc::coordinate(ddc::DiscreteElement&lt;DDimI&gt;(m_ghost));</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        m_right_bound = ddc::coordinate(ddc::DiscreteElement&lt;DDimI&gt;(m_n + m_ghost - 1));</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    };</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code" href="classLagrange.html#ad527b811b643d250343f3cf19de2be7d">evaluate</a>(<span class="keywordtype">double</span> x_interp) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">auto</span> getclosest(<span class="keywordtype">double</span> value) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">int</span> getclosest_binsearch(<span class="keywordtype">double</span> value) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">using</span> DElemI = ddc::DiscreteElement&lt;DDimI&gt;;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">using</span> DVectI = ddc::DiscreteVector&lt;DDimI&gt;;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">using</span> CoordDimI = ddc::Coordinate&lt;typename DDimI::continuous_dimension_type&gt;;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    ddc::DiscreteDomain&lt;DDimI&gt; m_domain;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    ddc::DiscreteDomain&lt;DDimI&gt; m_inner_domain;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    ddc::ChunkSpan&lt;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            double,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            ddc::DiscreteDomain&lt;DDimI&gt;,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            std::experimental::layout_right,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keyword">typename</span> Execspace::memory_space&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            m_ChunkSpan;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    CoordDimI m_left_bound;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    CoordDimI m_right_bound;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    DVectI m_poly_support;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classLagrange.html#aafc94eabc2d229ba7a927673fcc41b98">   49</a></span>&#160;    KOKKOS_FUNCTION <a class="code" href="classLagrange.html#aafc94eabc2d229ba7a927673fcc41b98">Lagrange</a>(</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordtype">int</span> degree,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            ddc::ChunkSpan&lt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    <span class="keywordtype">double</span>,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    ddc::DiscreteDomain&lt;DDimI&gt;,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    std::experimental::layout_right,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    <span class="keyword">typename</span> Execspace::memory_space&gt; x_nodes_fnodes,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            ddc::DiscreteDomain&lt;DDimI&gt; domain,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            DVectI ghost)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        : m_domain(domain)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        , m_inner_domain(domain.remove(ghost, ghost))</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        , m_ChunkSpan(x_nodes_fnodes)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        , m_left_bound(ddc::coordinate(m_inner_domain.front()))</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        , m_right_bound(ddc::coordinate(m_inner_domain.back()))</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        , m_poly_support(degree + 1)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code" href="classLagrange.html#aaf78fd7159c8739f6d5441d2ac354aab">evaluate</a>(CoordDimI x_interp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    DElemI getclosest(CoordDimI value) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">double</span> evaluate_lagrange(<span class="keywordtype">double</span> x_interp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    KOKKOS_FUNCTION DElemI getclosest_binsearch(CoordDimI value) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">double</span> apply_bc(<span class="keywordtype">double</span> x_interp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">double</span> evaluate_lagrange(CoordDimI x_interp) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">double</span> compute_basis(</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordtype">double</span> x_interp,</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            ddc::DiscreteElement&lt;DDimI&gt; j,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            ddc::DiscreteDomain&lt;DDimI&gt; polynom_subdomain) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">auto</span> <a class="code" href="classLagrange.html">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::getclosest</a>(<span class="keywordtype">double</span> value)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    assert(value &gt;= m_left_bound &amp;&amp; value &lt;= m_right_bound);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">auto</span> it = std::min_element(m_domain.begin(), m_domain.end(), [=](<span class="keyword">auto</span> x, <span class="keyword">auto</span> y) {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        return std::abs(ddc::coordinate(x) - value) &lt; std::abs(ddc::coordinate(y) - value);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    });</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">return</span> *it - m_ChunkSpan.domain().front();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keywordtype">int</span> <a class="code" href="classLagrange.html">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::getclosest_binsearch</a>(</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordtype">double</span> x_interp)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    std::size_t begin = m_domain.front().uid();</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    std::size_t end = m_domain.back().uid();</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    std::size_t icell = (begin + end) / 2;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">while</span> (x_interp &lt; ddc::coordinate(ddc::DiscreteElement&lt;DDimI&gt;(icell))</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;           || x_interp &gt; ddc::coordinate(ddc::DiscreteElement&lt;DDimI&gt;(icell + 1))) {</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">if</span> (x_interp &lt; ddc::coordinate((ddc::DiscreteElement&lt;DDimI&gt;(icell)))) {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            end = icell;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            begin = icell;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        icell = (begin + end) / 2;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">double</span> apply_bc(CoordDimI x_interp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">double</span> compute_basis(</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            CoordDimI x_interp,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            DElemI j,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            ddc::DiscreteDomain&lt;DDimI&gt; polynom_subdomain) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;ddc::DiscreteElement&lt;DDimI&gt; <a class="code" href="classLagrange.html">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::getclosest</a>(</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        CoordDimI value)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    assert(value &gt;= m_left_bound &amp;&amp; value &lt;= m_right_bound);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">auto</span> it = std::min_element(m_domain.begin(), m_domain.end(), [=](DElemI x, DElemI y) {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        return std::abs(ddc::coordinate(x) - value) &lt; std::abs(ddc::coordinate(y) - value);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    });</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span> *it;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;KOKKOS_INLINE_FUNCTION ddc::DiscreteElement&lt;DDimI&gt; <a class="code" href="classLagrange.html">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::</a></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<a class="code" href="classLagrange.html">        getclosest_binsearch</a>(CoordDimI x_interp)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    assert(x_interp &gt;= m_left_bound &amp;&amp; x_interp &lt;= m_right_bound);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    DElemI begin = m_domain.front();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    DElemI end = m_domain.back();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    DElemI elm_cell = begin + (end - begin) / 2;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">while</span> (x_interp &lt; ddc::coordinate(elm_cell)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;           || x_interp &gt; ddc::coordinate(elm_cell + DVectI(1))) {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">if</span> (x_interp &lt; ddc::coordinate(elm_cell)) {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            end = elm_cell;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            begin = elm_cell;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        }</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">return</span> icell;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keywordtype">double</span> <a class="code" href="classLagrange.html">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::compute_basis</a>(</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordtype">double</span> x_interp,</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        ddc::DiscreteElement&lt;DDimI&gt; j,</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        ddc::DiscreteDomain&lt;DDimI&gt; polynom_subdomain)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordtype">double</span> w(1);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    ddc::Coordinate&lt;typename DDimI::continuous_dimension_type&gt; coord_j = ddc::coordinate(j);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">for</span> (ddc::DiscreteElement&lt;DDimI&gt; <span class="keyword">const</span> i : polynom_subdomain) {</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        ddc::Coordinate&lt;typename DDimI::continuous_dimension_type&gt; coord_i = ddc::coordinate(i);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keywordflow">if</span> (coord_i != coord_j) {</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            w *= (x_interp - coord_i) / (coord_j - coord_i);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        }</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    }</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordflow">return</span> w;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keywordtype">double</span> <a class="code" href="classLagrange.html">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::apply_bc</a>(</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordtype">double</span> x_interp)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordtype">double</span> bc_val = x_interp;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span> d = std::abs(m_right_bound - m_left_bound);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">if</span> constexpr (BcMin == BCond::PERIODIC) {</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        bc_val -= std::floor((x_interp - m_left_bound) / d) * d;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keywordflow">if</span> (x_interp &lt; m_left_bound &amp;&amp; BcMin == BCond::DIRICHLET) {</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            bc_val = m_left_bound;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (x_interp &gt; m_right_bound &amp;&amp; BcMax == BCond::DIRICHLET) {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            bc_val = m_right_bound;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        }</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    }</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordflow">return</span> evaluate_lagrange(bc_val);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;}</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
-<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="classLagrange.html#ad527b811b643d250343f3cf19de2be7d">  166</a></span>&#160;KOKKOS_INLINE_FUNCTION <span class="keywordtype">double</span> <a class="code" href="classLagrange.html#ad527b811b643d250343f3cf19de2be7d">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::evaluate</a>(</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keywordtype">double</span> x_interp)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordtype">double</span> interpol_val = x_interp;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">if</span> (x_interp &lt; m_left_bound || m_right_bound &lt; x_interp) {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        interpol_val = apply_bc(x_interp);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        interpol_val = evaluate_lagrange(x_interp);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    }</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">return</span> interpol_val;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;}</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keywordtype">double</span> <a class="code" href="classLagrange.html">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::evaluate_lagrange</a>(</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordtype">double</span> x_intern)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordtype">int</span> begin, end;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordtype">int</span> mid = getclosest_binsearch(x_intern);</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordflow">if</span> (mid &gt;= <span class="keywordtype">int</span>(m_domain.size()) - 1 - 2 * m_ghost &amp;&amp; BcMax == BCond::PERIODIC) {</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        begin = mid - int(0.5 * m_deg);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        end = std::min(<span class="keywordtype">int</span>(m_domain.size()) - 1, begin + m_deg);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (mid &lt;= m_ghost + 1 &amp;&amp; BcMin == BCond::PERIODIC) {</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        begin = std::max(0, mid - <span class="keywordtype">int</span>(0.5 * m_deg));</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        end = begin + m_deg;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        begin = std::max(m_ghost, mid - <span class="keywordtype">int</span>(0.5 * m_deg));</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        end = std::min(m_n, begin + m_deg + 1);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">if</span> (end == <span class="keywordtype">int</span>(m_domain.size()) - 1)</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        begin = end - m_deg;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    ddc::DiscreteElement&lt;DDimI&gt; lbound_subdom(begin);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    ddc::DiscreteVector&lt;DDimI&gt; npoints_subdomain(end - begin);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    ddc::DiscreteDomain&lt;DDimI&gt; subdomain(lbound_subdom, npoints_subdomain);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordtype">double</span> p = 0;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">for</span> (ddc::DiscreteElement&lt;DDimI&gt; <span class="keyword">const</span> ix : subdomain) {</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        p += compute_basis(x_intern, ix, subdomain) * m_ChunkSpan(ix);</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    }</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordflow">return</span> p;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;}</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        elm_cell = begin + (end - begin) / 2;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">return</span> elm_cell;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keywordtype">double</span> <a class="code" href="classLagrange.html">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::compute_basis</a>(</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        CoordDimI x_interp,</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        DElemI j,</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        ddc::DiscreteDomain&lt;DDimI&gt; polynom_subdomain)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordtype">double</span> w(1);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    CoordDimI coord_j = ddc::coordinate(j);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">for</span> (DElemI <span class="keyword">const</span> i : polynom_subdomain) {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        CoordDimI coord_i = ddc::coordinate(i);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keywordflow">if</span> (coord_i != coord_j) {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            w *= (x_interp - coord_i) / (coord_j - coord_i);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        }</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">return</span> w;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;}</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keywordtype">double</span> <a class="code" href="classLagrange.html">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::apply_bc</a>(</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        CoordDimI x_interp)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    CoordDimI bc_val = x_interp;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span> d = m_right_bound - m_left_bound;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">if</span> constexpr (BcMin == BCond::PERIODIC) {</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        bc_val -= std::floor((x_interp - m_left_bound) / d) * d;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keywordflow">if</span> (x_interp &lt; m_left_bound &amp;&amp; BcMin == BCond::DIRICHLET) {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            bc_val = m_left_bound;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (x_interp &gt; m_right_bound &amp;&amp; BcMax == BCond::DIRICHLET) {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            bc_val = m_right_bound;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">return</span> evaluate_lagrange(bc_val);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="classLagrange.html#aaf78fd7159c8739f6d5441d2ac354aab">  168</a></span>&#160;KOKKOS_INLINE_FUNCTION <span class="keywordtype">double</span> <a class="code" href="classLagrange.html#aaf78fd7159c8739f6d5441d2ac354aab">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::evaluate</a>(</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        CoordDimI x_interp)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordflow">if</span> (x_interp &lt; m_left_bound || m_right_bound &lt; x_interp) {</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="keywordflow">return</span> apply_bc(x_interp);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="keywordflow">return</span> evaluate_lagrange(x_interp);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    }</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;}</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Execspace, <span class="keyword">class</span> DDimI, BCond BcMin, BCond BcMax&gt;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keywordtype">double</span> <a class="code" href="classLagrange.html">Lagrange&lt;Execspace, DDimI, BcMin, BcMax&gt;::evaluate_lagrange</a>(</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        CoordDimI x_intern)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    assert(x_intern &gt;= m_left_bound &amp;&amp; x_intern &lt;= m_right_bound);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    DElemI begin, end;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    DElemI icell = getclosest_binsearch(x_intern);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    DElemI mid = icell;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">if</span> (mid &gt;= m_inner_domain.back() &amp;&amp; BcMax == BCond::PERIODIC) {</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        begin = mid - m_poly_support / 2;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        end = std::min(m_inner_domain.back(), begin + m_poly_support);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (mid &lt;= m_inner_domain.front() &amp;&amp; BcMin == BCond::PERIODIC) {</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        begin = std::max(m_domain.front(), mid - m_poly_support / 2);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        end = begin + m_poly_support;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">if</span> (m_inner_domain.front() + m_poly_support / 2 &gt; mid) {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            begin = m_inner_domain.front();</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            begin = mid - m_poly_support / 2;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        }</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        end = std::min(m_domain.back() + DVectI(1), begin + m_poly_support);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    }</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">if</span> (end == m_domain.back())</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        begin = end - m_poly_support;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    DVectI npoints_subdomain(end - begin);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    ddc::DiscreteDomain&lt;DDimI&gt; subdomain(begin, npoints_subdomain);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordtype">double</span> p = 0;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">for</span> (DElemI <span class="keyword">const</span> ix : subdomain) {</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        p += compute_basis(x_intern, ix, subdomain) * m_ChunkSpan(ix);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">return</span> p;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;}</div>
 <div class="ttc" id="aclassLagrange_html"><div class="ttname"><a href="classLagrange.html">Lagrange</a></div><div class="ttdoc">A class which implements Lagrange polynomials.</div><div class="ttdef"><b>Definition:</b> Lagrange.hpp:20</div></div>
-<div class="ttc" id="aclassLagrange_html_a0768122bb54bed3ee47c4e751984784c"><div class="ttname"><a href="classLagrange.html#a0768122bb54bed3ee47c4e751984784c">Lagrange::Lagrange</a></div><div class="ttdeci">KOKKOS_FUNCTION Lagrange(int order, ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDimI &gt;, std::experimental::layout_right, typename Execspace::memory_space &gt; x_nodes_fnodes, ddc::DiscreteDomain&lt; DDimI &gt; domain, ddc::DiscreteVector&lt; DDimI &gt; ghost)</div><div class="ttdoc">Usual Constructor.</div><div class="ttdef"><b>Definition:</b> Lagrange.hpp:46</div></div>
-<div class="ttc" id="aclassLagrange_html_ad527b811b643d250343f3cf19de2be7d"><div class="ttname"><a href="classLagrange.html#ad527b811b643d250343f3cf19de2be7d">Lagrange::evaluate</a></div><div class="ttdeci">KOKKOS_FUNCTION double evaluate(double x_interp) const</div><div class="ttdoc">Evaluates the approximated value of a function on a point current values at a known set of interpolat...</div><div class="ttdef"><b>Definition:</b> Lagrange.hpp:166</div></div>
+<div class="ttc" id="aclassLagrange_html_aaf78fd7159c8739f6d5441d2ac354aab"><div class="ttname"><a href="classLagrange.html#aaf78fd7159c8739f6d5441d2ac354aab">Lagrange::evaluate</a></div><div class="ttdeci">KOKKOS_FUNCTION double evaluate(CoordDimI x_interp) const</div><div class="ttdoc">Evaluates the approximated value of a function on a point current values at a known set of interpolat...</div><div class="ttdef"><b>Definition:</b> Lagrange.hpp:168</div></div>
+<div class="ttc" id="aclassLagrange_html_aafc94eabc2d229ba7a927673fcc41b98"><div class="ttname"><a href="classLagrange.html#aafc94eabc2d229ba7a927673fcc41b98">Lagrange::Lagrange</a></div><div class="ttdeci">KOKKOS_FUNCTION Lagrange(int degree, ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDimI &gt;, std::experimental::layout_right, typename Execspace::memory_space &gt; x_nodes_fnodes, ddc::DiscreteDomain&lt; DDimI &gt; domain, DVectI ghost)</div><div class="ttdoc">Usual Constructor.</div><div class="ttdef"><b>Definition:</b> Lagrange.hpp:49</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
