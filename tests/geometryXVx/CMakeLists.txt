@@ -59,6 +59,26 @@ target_link_libraries(unit_tests_lagrange
 gtest_discover_tests(unit_tests_lagrange
     TEST_SUFFIX "_${lagrange}")
 
+add_executable(unit_tests_advection
+    velocityadvection.cpp
+    spatialadvection.cpp
+    ../main.cpp
+)
+
+target_compile_features(unit_tests_advection PUBLIC cxx_std_17)
+target_link_libraries(unit_tests_advection	 
+    PUBLIC
+        GTest::gtest
+        GTest::gmock
+        gslx::interpolation
+	gslx::advection
+	gslx::geometry_xperiod_vx
+
+)
+gtest_discover_tests(unit_tests_advection 
+    TEST_SUFFIX "_${advection}")
+
+
 target_sources(unit_tests_xperiod_vx
     PRIVATE
         femperiodicpoissonsolver.cpp
