@@ -47,13 +47,15 @@ fi
 
 PREPARE_BUILD_GENERATOR="Unix Makefiles"
 
+echo "[PREPARE] Sourcing environment file: '${PREPARE_TOOLCHAIN_PATH}/environment.sh'."
+
+source -- "${PREPARE_TOOLCHAIN_PATH}/environment.sh"
+
 if which ninja >/dev/null 2>&1; then
     PREPARE_BUILD_GENERATOR="Ninja"
 fi
 
 echo "[PREPARE] Using build system: '${PREPARE_BUILD_GENERATOR}'."
-
-source -- "${PREPARE_TOOLCHAIN_PATH}/environment.sh"
 
 PREPARE_BUILD_CMAKE_FLAG="${@:4}"
 
