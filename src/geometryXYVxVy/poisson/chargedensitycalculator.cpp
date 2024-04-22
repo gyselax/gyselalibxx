@@ -45,15 +45,17 @@ void ChargeDensityCalculator::operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu
     std::size_t const nvx = allfdistribu_view.extent(3);
     std::size_t const nvy = allfdistribu_view.extent(4);
 
+    using TeamHandle = Kokkos::TeamPolicy<>::member_type;
+
     Kokkos::parallel_for(
             Kokkos::TeamPolicy<>(nx * ny, Kokkos::AUTO),
-            KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+            KOKKOS_LAMBDA(const TeamHandle& team) {
                 const int idx = team.league_rank();
                 const int ix = idx / ny;
                 const int iy = idx % ny;
                 double teamSum = 0;
                 Kokkos::parallel_reduce(
-                        Kokkos::TeamThreadMDRange(team, nsp, nvx, nvy),
+                        Kokkos::TeamThreadMDRange<Kokkos::Rank<3>, TeamHandle>(team, nsp, nvx, nvy),
                         [&](int isp, int ivx, int ivy, double& sum) {
                             sum += static_cast<double>(charges(isp)) * coef_view(ivx, ivy)
                                    * allfdistribu_view(isp, ix, iy, ivx, ivy);
