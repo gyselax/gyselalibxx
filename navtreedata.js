@@ -79,9 +79,9 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCurvilinear2DToCartesian.html#a39cdb71fcfd111b9be3679922f99af4d",
 "classKrookSourceAdaptive.html#a9b406e47034bbf02b16a3a0a43a7207e",
-"classRefinedDiscreteToCartesian.html",
-"geometryXYVxVy_2initialization_2iequilibrium_8hpp_source.html",
-"tests_geometry5D_collisions.html#autotoc_md57"
+"classRK3.html#a95b8128c3df2bf35ec9634e83c505aa9",
+"geometryXVx_2poisson_2chargedensitycalculator_8hpp_source.html",
+"structcartesian__product__impl_3_01std_1_1tuple_3_01std_1_1tuple_3_01HeadArgs_8_8_8_01_4_00_01Ta2e54ffdefaa524ceede7a120148cdbe5.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

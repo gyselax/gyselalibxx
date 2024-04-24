@@ -101,6 +101,7 @@ var annotated =
     [ "Matrix_Dense", "classMatrix__Dense.html", "classMatrix__Dense" ],
     [ "Matrix_PDS_Tridiag", "classMatrix__PDS__Tridiag.html", "classMatrix__PDS__Tridiag" ],
     [ "Matrix_Periodic_Banded", "classMatrix__Periodic__Banded.html", "classMatrix__Periodic__Banded" ],
+    [ "MatrixBatch", "classMatrixBatch.html", "classMatrixBatch" ],
     [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html", "classMaxwellianEquilibrium" ],
     [ "Moments", "classMoments.html", "classMoments" ],
     [ "Mu", "structMu.html", null ],
