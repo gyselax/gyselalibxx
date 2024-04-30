@@ -110,6 +110,15 @@ $(document).ready(function(){initNavTree('classMatrixBatch.html',''); initResiza
 
 <p><a class="el" href="classMatrixBatch.html" title="MatrixBatch superclass for managing a collection of linear systems.">MatrixBatch</a> superclass for managing a collection of linear systems.  
  <a href="classMatrixBatch.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for MatrixBatch&lt; ExecSpace &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classMatrixBatch.png" usemap="#MatrixBatch_3C_20ExecSpace_20_3E_map" alt=""/>
+  <map id="MatrixBatch_3C_20ExecSpace_20_3E_map" name="MatrixBatch_3C_20ExecSpace_20_3E_map">
+<area href="classMatrixBatchTridiag.html" title="A structure for solving a set of independant tridiagonal systems using a direct method." alt="MatrixBatchTridiag&lt; ExecSpace &gt;" shape="rect" coords="0,56,206,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -127,9 +136,9 @@ Public Member Functions</h2></td></tr>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c">factorize</a> ()=0</td></tr>
 <tr class="memdesc:a7f9441c3e43c3af6e7d4c0485770a11c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function which could be used by children classes to execute class specific implementation details. <br /></td></tr>
 <tr class="separator:a7f9441c3e43c3af6e7d4c0485770a11c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2442f26d27c1ae2085b86f7cc34bb792"><td class="memItemLeft" align="right" valign="top">virtual DKokosView2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a2442f26d27c1ae2085b86f7cc34bb792">solve_inplace</a> (DKokosView2D b) const =0</td></tr>
-<tr class="memdesc:a2442f26d27c1ae2085b86f7cc34bb792"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function which solves the collection of linear problems.  <a href="classMatrixBatch.html#a2442f26d27c1ae2085b86f7cc34bb792">More...</a><br /></td></tr>
-<tr class="separator:a2442f26d27c1ae2085b86f7cc34bb792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d886a5d1ca27e0f158eacd9e90999b7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a5d886a5d1ca27e0f158eacd9e90999b7">solve_inplace</a> (<a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> b) const =0</td></tr>
+<tr class="memdesc:a5d886a5d1ca27e0f158eacd9e90999b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function which solves the collection of linear problems.  <a href="classMatrixBatch.html#a5d886a5d1ca27e0f158eacd9e90999b7">More...</a><br /></td></tr>
+<tr class="separator:a5d886a5d1ca27e0f158eacd9e90999b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a889b3707cfafa8ec09ce5a25fc95614d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">get_size</a> () const</td></tr>
 <tr class="memdesc:a889b3707cfafa8ec09ce5a25fc95614d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for matrix size.  <a href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">More...</a><br /></td></tr>
 <tr class="separator:a889b3707cfafa8ec09ce5a25fc95614d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,8 +208,8 @@ template&lt;typename ExecSpace &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2442f26d27c1ae2085b86f7cc34bb792"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2442f26d27c1ae2085b86f7cc34bb792">&#9670;&nbsp;</a></span>solve_inplace()</h2>
+<a id="a5d886a5d1ca27e0f158eacd9e90999b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d886a5d1ca27e0f158eacd9e90999b7">&#9670;&nbsp;</a></span>solve_inplace()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,9 +220,9 @@ template&lt;typename ExecSpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual DKokosView2D <a class="el" href="classMatrixBatch.html">MatrixBatch</a>&lt; ExecSpace &gt;::solve_inplace </td>
+          <td class="memname">virtual <a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> <a class="el" href="classMatrixBatch.html">MatrixBatch</a>&lt; ExecSpace &gt;::solve_inplace </td>
           <td>(</td>
-          <td class="paramtype">DKokosView2D&#160;</td>
+          <td class="paramtype"><a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a>&#160;</td>
           <td class="paramname"><em>b</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -233,6 +242,8 @@ template&lt;typename ExecSpace &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The computation result, stored in b. </dd></dl>
+
+<p>Implemented in <a class="el" href="classMatrixBatchTridiag.html#aa306ac76a84be295b3bc4e0a12b2c20d">MatrixBatchTridiag&lt; ExecSpace &gt;</a>.</p>
 
 </div>
 </div>

@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classMatrixBatch.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classMatrixBatchTridiag.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,19 +100,20 @@ $(document).ready(function(){initNavTree('classMatrixBatch.html',''); initResiza
 
 <div class="header">
   <div class="headertitle">
-<div class="title">MatrixBatch&lt; ExecSpace &gt; Member List</div>  </div>
+<div class="title">MatrixBatchTridiag&lt; ExecSpace &gt; Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="classMatrixBatchTridiag.html">MatrixBatchTridiag&lt; ExecSpace &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> typedef</td><td class="entry"><a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c">factorize</a>()=0</td><td class="entry"><a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classMatrixBatchTridiag.html#a5951ed8d2a582543b1962b6f0ecfe490">check_stability</a>() const</td><td class="entry"><a class="el" href="classMatrixBatchTridiag.html">MatrixBatchTridiag&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classMatrixBatchTridiag.html#a7a53446a0a79c099986468f6a6cf4e7b">factorize</a>() final</td><td class="entry"><a class="el" href="classMatrixBatchTridiag.html">MatrixBatchTridiag&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classMatrixBatch.html#a6794abdadab47bff32062668682e0fab">get_batch_size</a>() const</td><td class="entry"><a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">get_size</a>() const</td><td class="entry"><a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">MatrixBatch</a>(int batch_size, int mat_size)</td><td class="entry"><a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classMatrixBatch.html#a5d886a5d1ca27e0f158eacd9e90999b7">solve_inplace</a>(DKokkosView2D b) const =0</td><td class="entry"><a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~MatrixBatch</b>()=default (defined in <a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a>)</td><td class="entry"><a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classMatrixBatchTridiag.html#a8a5d2103f1c49bf4c23f61a330587c03">MatrixBatchTridiag</a>(const int batch_size, const int mat_size, DKokkosView2D const aa, DKokkosView2D const bb, DKokkosView2D const cc)</td><td class="entry"><a class="el" href="classMatrixBatchTridiag.html">MatrixBatchTridiag&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classMatrixBatchTridiag.html#aa306ac76a84be295b3bc4e0a12b2c20d">solve_inplace</a>(DKokkosView2D const rhs_view) const</td><td class="entry"><a class="el" href="classMatrixBatchTridiag.html">MatrixBatchTridiag&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~MatrixBatch</b>()=default (defined in <a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a>)</td><td class="entry"><a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

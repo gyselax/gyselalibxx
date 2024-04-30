@@ -1,5 +1,11 @@
 var NAVTREEINDEX5 =
 {
+"structRefinedDiscreteToCartesian_1_1RDimXRefined.html":[14,129,2],
+"structRefinedDiscreteToCartesian_1_1RDimYRefined.html":[14,129,3],
+"structTor1.html":[14,146],
+"structTor2.html":[14,147],
+"structTor3.html":[14,148],
+"structVpar.html":[14,158],
 "structcartesian__product__impl_3_01std_1_1tuple_3_01std_1_1tuple_3_01HeadArgs_8_8_8_01_4_00_01Ta2e54ffdefaa524ceede7a120148cdbe5.html":[14,20],
 "test__cases__adv__field_8hpp_source.html":[15,1,0,2,0],
 "test__utils_8hpp_source.html":[15,2,0,1,3],
@@ -42,7 +48,7 @@ var NAVTREEINDEX5 =
 "vector__field__span_8hpp_source.html":[15,0,10,7],
 "vendor_sll.html":[13],
 "vendor_sll_include_sll_mapping.html":[13,0],
-"view_8hpp_source.html":[15,2,0,0,0,15],
+"view_8hpp_source.html":[15,2,0,0,0,16],
 "vortex__merger__equilibrium_8hpp_source.html":[15,0,2,3,1],
 "vortex__merger__initialization_8hpp_source.html":[15,0,2,3,2]
 };

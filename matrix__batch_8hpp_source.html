@@ -105,44 +105,46 @@ $(document).ready(function(){initNavTree('matrix__batch_8hpp_source.html',''); i
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;sll/view.hpp&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;Kokkos_Core.hpp&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ExecSpace&gt;</div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classMatrixBatch.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMatrixBatch.html">MatrixBatch</a></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">   27</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            = Kokkos::View&lt;double**, Kokkos::LayoutRight, typename ExecSpace::memory_space&gt;;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">   35</a></span>&#160;    <a class="code" href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">MatrixBatch</a>(<span class="keywordtype">int</span> batch_size, <span class="keywordtype">int</span> mat_size) : m_batch_size(batch_size), m_matrix_size(mat_size) {}</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classMatrixBatch.html">MatrixBatch</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c">   42</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c">factorize</a>() = 0;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#a2442f26d27c1ae2085b86f7cc34bb792">   49</a></span>&#160;    <span class="keyword">virtual</span> DKokosView2D <a class="code" href="classMatrixBatch.html#a2442f26d27c1ae2085b86f7cc34bb792">solve_inplace</a>(DKokosView2D b) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">   55</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">get_size</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> m_matrix_size;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#a6794abdadab47bff32062668682e0fab">   64</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classMatrixBatch.html#a6794abdadab47bff32062668682e0fab">get_batch_size</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> m_batch_size;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> m_batch_size;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> m_matrix_size;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="ttc" id="aclassMatrixBatch_html"><div class="ttname"><a href="classMatrixBatch.html">MatrixBatch</a></div><div class="ttdoc">MatrixBatch superclass for managing a collection of linear systems.</div><div class="ttdef"><b>Definition:</b> matrix_batch.hpp:22</div></div>
-<div class="ttc" id="aclassMatrixBatch_html_a2442f26d27c1ae2085b86f7cc34bb792"><div class="ttname"><a href="classMatrixBatch.html#a2442f26d27c1ae2085b86f7cc34bb792">MatrixBatch::solve_inplace</a></div><div class="ttdeci">virtual DKokosView2D solve_inplace(DKokosView2D b) const =0</div><div class="ttdoc">A function which solves the collection of linear problems.</div></div>
-<div class="ttc" id="aclassMatrixBatch_html_a6475f75dadb9320f4fb6ef6235584a18"><div class="ttname"><a href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">MatrixBatch::DKokkosView2D</a></div><div class="ttdeci">Kokkos::View&lt; double **, Kokkos::LayoutRight, typename ExecSpace::memory_space &gt; DKokkosView2D</div><div class="ttdoc">Alias for 2D double Kokkos views, LayoutRight is specified.</div><div class="ttdef"><b>Definition:</b> matrix_batch.hpp:28</div></div>
-<div class="ttc" id="aclassMatrixBatch_html_a6794abdadab47bff32062668682e0fab"><div class="ttname"><a href="classMatrixBatch.html#a6794abdadab47bff32062668682e0fab">MatrixBatch::get_batch_size</a></div><div class="ttdeci">int get_batch_size() const</div><div class="ttdoc">Getter function for batch size, ie the number of linear systems to solve.</div><div class="ttdef"><b>Definition:</b> matrix_batch.hpp:64</div></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;sll/view.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ExecSpace&gt;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classMatrixBatch.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMatrixBatch.html">MatrixBatch</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">   29</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            = Kokkos::View&lt;double**, Kokkos::LayoutRight, typename ExecSpace::memory_space&gt;;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">   37</a></span>&#160;    <a class="code" href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">MatrixBatch</a>(<span class="keywordtype">int</span> batch_size, <span class="keywordtype">int</span> mat_size) : m_batch_size(batch_size), m_matrix_size(mat_size) {}</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classMatrixBatch.html">MatrixBatch</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c">   44</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c">factorize</a>() = 0;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#a5d886a5d1ca27e0f158eacd9e90999b7">   51</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> <a class="code" href="classMatrixBatch.html#a5d886a5d1ca27e0f158eacd9e90999b7">solve_inplace</a>(<a class="code" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> b) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">   57</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">get_size</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> m_matrix_size;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classMatrixBatch.html#a6794abdadab47bff32062668682e0fab">   66</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classMatrixBatch.html#a6794abdadab47bff32062668682e0fab">get_batch_size</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> m_batch_size;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> m_batch_size;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> m_matrix_size;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
+<div class="ttc" id="aclassMatrixBatch_html"><div class="ttname"><a href="classMatrixBatch.html">MatrixBatch</a></div><div class="ttdoc">MatrixBatch superclass for managing a collection of linear systems.</div><div class="ttdef"><b>Definition:</b> matrix_batch.hpp:24</div></div>
+<div class="ttc" id="aclassMatrixBatch_html_a5d886a5d1ca27e0f158eacd9e90999b7"><div class="ttname"><a href="classMatrixBatch.html#a5d886a5d1ca27e0f158eacd9e90999b7">MatrixBatch::solve_inplace</a></div><div class="ttdeci">virtual DKokkosView2D solve_inplace(DKokkosView2D b) const =0</div><div class="ttdoc">A function which solves the collection of linear problems.</div></div>
+<div class="ttc" id="aclassMatrixBatch_html_a6475f75dadb9320f4fb6ef6235584a18"><div class="ttname"><a href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">MatrixBatch::DKokkosView2D</a></div><div class="ttdeci">Kokkos::View&lt; double **, Kokkos::LayoutRight, typename ExecSpace::memory_space &gt; DKokkosView2D</div><div class="ttdoc">Alias for 2D double Kokkos views, LayoutRight is specified.</div><div class="ttdef"><b>Definition:</b> matrix_batch.hpp:30</div></div>
+<div class="ttc" id="aclassMatrixBatch_html_a6794abdadab47bff32062668682e0fab"><div class="ttname"><a href="classMatrixBatch.html#a6794abdadab47bff32062668682e0fab">MatrixBatch::get_batch_size</a></div><div class="ttdeci">int get_batch_size() const</div><div class="ttdoc">Getter function for batch size, ie the number of linear systems to solve.</div><div class="ttdef"><b>Definition:</b> matrix_batch.hpp:66</div></div>
 <div class="ttc" id="aclassMatrixBatch_html_a7f9441c3e43c3af6e7d4c0485770a11c"><div class="ttname"><a href="classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c">MatrixBatch::factorize</a></div><div class="ttdeci">virtual void factorize()=0</div><div class="ttdoc">Generic function which could be used by children classes to execute class specific implementation det...</div></div>
-<div class="ttc" id="aclassMatrixBatch_html_a889b3707cfafa8ec09ce5a25fc95614d"><div class="ttname"><a href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">MatrixBatch::get_size</a></div><div class="ttdeci">int get_size() const</div><div class="ttdoc">Getter function for matrix size.</div><div class="ttdef"><b>Definition:</b> matrix_batch.hpp:55</div></div>
-<div class="ttc" id="aclassMatrixBatch_html_aa43133aab812e00cb47c1c36cf45c112"><div class="ttname"><a href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">MatrixBatch::MatrixBatch</a></div><div class="ttdeci">MatrixBatch(int batch_size, int mat_size)</div><div class="ttdoc">The constructor for MatrixBatch class.</div><div class="ttdef"><b>Definition:</b> matrix_batch.hpp:35</div></div>
+<div class="ttc" id="aclassMatrixBatch_html_a889b3707cfafa8ec09ce5a25fc95614d"><div class="ttname"><a href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">MatrixBatch::get_size</a></div><div class="ttdeci">int get_size() const</div><div class="ttdoc">Getter function for matrix size.</div><div class="ttdef"><b>Definition:</b> matrix_batch.hpp:57</div></div>
+<div class="ttc" id="aclassMatrixBatch_html_aa43133aab812e00cb47c1c36cf45c112"><div class="ttname"><a href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">MatrixBatch::MatrixBatch</a></div><div class="ttdeci">MatrixBatch(int batch_size, int mat_size)</div><div class="ttdoc">The constructor for MatrixBatch class.</div><div class="ttdef"><b>Definition:</b> matrix_batch.hpp:37</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
