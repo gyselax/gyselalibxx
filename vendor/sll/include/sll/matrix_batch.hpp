@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Kokkos_Core.hpp>
+
 #include "sll/view.hpp"
 
 
@@ -46,7 +48,7 @@ public:
     * @param[inout] b 2d Kokkos view which stores the right hand side, 
     * @return  The computation result, stored in b.
     */
-    virtual DKokosView2D solve_inplace(DKokosView2D b) const = 0;
+    virtual DKokkosView2D solve_inplace(DKokkosView2D b) const = 0;
 
     /**
     * @brief Getter function for matrix size.

@@ -32,7 +32,8 @@ gtest_discover_tests(bsplines_tests_sll)
 
 add_executable(matrix_tests_sll
   main.cpp
-	matrix.cpp
+  matrix.cpp
+  matrix_batch_tridiag.cpp
 )
 target_compile_features(matrix_tests_sll PUBLIC cxx_std_17)
 target_link_libraries(matrix_tests_sll
@@ -120,8 +121,6 @@ target_link_libraries(refined_discrete_mapping_test
         sll::SLL
 )
 gtest_discover_tests(refined_discrete_mapping_test)
-
-
 
 foreach(CONTINUITY RANGE -1 1)
   math(EXPR MIN_DEGREE "${CONTINUITY}+1")
