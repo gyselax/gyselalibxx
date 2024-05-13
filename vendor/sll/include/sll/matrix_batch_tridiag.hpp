@@ -97,10 +97,10 @@ public:
                 "DiagDominant",
                 batch_policy,
                 KOKKOS_LAMBDA(int batch_idx, int k, bool& check_diag_dom) {
-                    check_diag_dom
-                            = (Kokkos::abs(subdiag_proxy(batch_idx, k))
-                                       + Kokkos::abs(uppdiag_proxy(batch_idx, k))
-                               <= Kokkos::abs(diag_proxy(batch_idx, k)));
+                    check_diag_dom = check_diag_dom
+                                     && (Kokkos::abs(subdiag_proxy(batch_idx, k))
+                                                 + Kokkos::abs(uppdiag_proxy(batch_idx, k))
+                                         <= Kokkos::abs(diag_proxy(batch_idx, k)));
                 },
                 Kokkos::LAnd<bool>(is_diagdom));
         Kokkos::parallel_reduce(
@@ -108,9 +108,10 @@ public:
                 batch_policy,
                 KOKKOS_LAMBDA(int batch_idx, int k, bool& check_sym) {
                     check_sym
-                            = (Kokkos::abs(
-                                       subdiag_proxy(batch_idx, k) - uppdiag_proxy(batch_idx, k))
-                               < 1e-16);
+                            = check_sym
+                              && (Kokkos::abs(
+                                          subdiag_proxy(batch_idx, k) - uppdiag_proxy(batch_idx, k))
+                                  < 1e-16);
                 },
                 Kokkos::LAnd<bool>(is_symmetric));
 
