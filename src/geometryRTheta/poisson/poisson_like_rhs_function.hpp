@@ -12,7 +12,7 @@
  * @tparam RadialExtrapolationRule The extrapolation rule applied at the outer radial bound.
  */
 template <class RadialExtrapolationRule>
-class PoissonRHSFunction
+class PoissonLikeRHSFunction
 {
 public:
     /// The type of the 2D Spline Evaluator used by this class
@@ -36,20 +36,20 @@ private:
 
 public:
     /**
-	 * @brief Instantiate a PoissonRHSFunction.
+	 * @brief Instantiate a PoissonLikeRHSFunction.
 	 *
 	 * @param[in] coefs
 	 *      The bsplines coefficients of the right-hand side function.
 	 * @param[in] evaluator
 	 *      Evaluator on bsplines.
 	 */
-    PoissonRHSFunction(Spline2DView coefs, evaluator_type const& evaluator)
+    PoissonLikeRHSFunction(Spline2DView coefs, evaluator_type const& evaluator)
         : m_coefs(coefs)
         , m_evaluator(evaluator)
     {
     }
 
-    ~PoissonRHSFunction() {};
+    ~PoissonLikeRHSFunction() {};
 
     /**
 	 * @brief Get the value of the function at a given coordinate.

@@ -13,7 +13,7 @@
 /**
  * @brief Base class for the exact solutions of the Poisson equation.
  *
- * @see PolarSplineFEMPoissonSolver
+ * @see PolarSplineFEMPoissonLikeSolver
  * @see VlasovPoissonSolver
  */
 template <class CurvilinearToCartesian>
