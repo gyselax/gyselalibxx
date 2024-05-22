@@ -6,8 +6,8 @@
 
 #include <geometry.hpp>
 
-#include "poisson_rhs_function.hpp"
-#include "polarpoissonsolver.hpp"
+#include "poisson_like_rhs_function.hpp"
+#include "polarpoissonlikesolver.hpp"
 #include "utils_tools.hpp"
 
 
@@ -26,7 +26,7 @@ private:
     IDomainRP const& m_grid;
     SplineRPBuilder const& m_builder;
     SplineRPEvaluatorNullBound const& m_evaluator;
-    PolarSplineFEMPoissonSolver const& m_poisson_solver;
+    PolarSplineFEMPoissonLikeSolver const& m_poisson_solver;
 
 public:
     /**
@@ -39,19 +39,19 @@ public:
      *      The domain where the equilibrium is defined.
      * @param[in] builder
      *      A spline builder to get the spline representation
-     *      of the RHS of the Poisson equation.
+     *      of the RHS of the PDE.
      * @param[in] evaluator
      *      The evaluator of B-splines for the RHS of the
-     *      Poisson equation.
+     *      PDE.
      * @param[in] poisson_solver
-     *      The Poisson solver which computes the electrical potential.
+     *      The PDE solver which computes the electrical potential.
      */
     VortexMergerEquilibria(
             Mapping const& mapping,
             IDomainRP const& grid,
             SplineRPBuilder const& builder,
             SplineRPEvaluatorNullBound const& evaluator,
-            PolarSplineFEMPoissonSolver const& poisson_solver)
+            PolarSplineFEMPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_grid(grid)
         , m_builder(builder)
@@ -124,9 +124,9 @@ public:
             });
 
 
-            // STEP 2: compute phi_star^i with Poisson solver
+            // STEP 2: compute phi_star^i with PDE solver
             m_builder(rho_coef.span_view(), rho_eq.span_cview());
-            PoissonRHSFunction poisson_rhs(rho_coef, m_evaluator);
+            PoissonLikeRHSFunction poisson_rhs(rho_coef, m_evaluator);
             m_poisson_solver(poisson_rhs, coords.span_cview(), phi_star.span_view());
 
             // STEP 3: compute c^i

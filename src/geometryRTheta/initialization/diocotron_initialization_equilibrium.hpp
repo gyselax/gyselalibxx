@@ -12,8 +12,8 @@
  *
  * The equations of the diocotron simulation are the Vlasov-Poisson equations
  *
- * - @f$  \partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0 @f$,
- * - @f$ \Delta \phi = \rho @f$,
+ * - @f$ \partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0 @f$,
+ * - @f$ L \phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho @f$,
  * - @f$ E = -\nabla \phi @f$.
  *
  * The DiocotronDensitySolution provides an initial perturbed solution @f$ \rho_0 @f$ for

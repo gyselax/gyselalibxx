@@ -1,7 +1,7 @@
 # Polar Poisson solver
 
 
-## The Poisson equation 
+## The Poisson-like equation 
 
 (For more details, see Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
 in the 5D GYSELA Code". December 2022.)
@@ -15,7 +15,7 @@ L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho
 with the boundary condition $\phi = 0$, on  $\partial \Omega$. 
 
 
-To solve this equation, the PolarSplineFEMPoissonSolver uses a finite element method on the B-splines. 
+To solve this equation, the PolarSplineFEMPoissonLikeSolver uses a finite element method on the B-splines. 
 
 ### B-splines FEM
 
@@ -41,7 +41,7 @@ The B-splines with the treatment of the O-point, are called PolarBSplines and ar
 
 
 #### Weak formulation
-The Poisson equation is solved by solving its weak form: 
+The Poisson-like equation is solved by solving its weak form: 
 
 ```math
 \int_{\Omega} \lbrack \beta(r) \phi(r,\theta) \hat{B}_l(r,\theta) + \alpha(r) \nabla \phi(r,\theta) \cdot  \nabla \hat{B}_l(r,\theta) \rbrack |det(J_{\mathcal{F}}(r,\theta))| dr d\theta =  \int_{\Omega} \rho(r,\theta) \hat{B}_l(r,\theta) |det(J_{\mathcal{F}}(r,\theta))| dr d\theta
@@ -74,7 +74,7 @@ So we compute the solution B-splines coefficients $`\{\phi_l\}_l`$ by solving th
 The test are implemented in the `tests/geometryRTheta/polar_poisson/` folder 
 ([polar\_poisson](./../../../tests/geometryRTheta/polar_poisson/README.md)).
 
-The PolarSplineFEMPoissonSolver is tested on a circular mapping (CircularToCartesian) and on a Czarny mapping (CzarnyToCartesian) with
+The PolarSplineFEMPoissonLikeSolver is tested on a circular mapping (CircularToCartesian) and on a Czarny mapping (CzarnyToCartesian) with
 (the test cases are given in Emily Bourne's thesis [1])
  
  * the Poisson coefficients: 
@@ -98,6 +98,6 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
 
 ## Contents
 
- * ipoissonsolver.hpp : Define a base class for the Poisson solvers: IPoissonSolver.
- * polarpoissonsolver.hpp : Define a Poisson solver using FEM on B-splines: PolarSplineFEMPoissonSolver. 
- * poisson\_rhs\_function.hpp : Define a rhs object (PoissonRHSFunction) for the Poisson equation (mainly used for vlasovpoissonsolver.hpp): PoissonRHSFunction. 
+ * iqnsolver.hpp : Define a base class for the Quasi-Neutrality solvers: IQNSolver.
+ * polarpoissonlikesolver.hpp : Define a Poisson-like solver using FEM on B-splines: PolarSplineFEMPoissonLikeSolver. 
+ * poisson\_rhs\_function.hpp : Define a rhs object (PoissonLikeRHSFunction) for the Poisson-like equation (mainly used for vlasovpoissonsolver.hpp): PoissonLikeRHSFunction. 

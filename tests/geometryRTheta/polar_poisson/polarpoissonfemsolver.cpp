@@ -17,10 +17,10 @@
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "polarpoissonsolver.hpp"
+#include "polarpoissonlikesolver.hpp"
 #include "test_cases.hpp"
 
-using PoissonSolver = PolarSplineFEMPoissonSolver;
+using PoissonSolver = PolarSplineFEMPoissonLikeSolver;
 
 #if defined(CIRCULAR_MAPPING)
 using Mapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;

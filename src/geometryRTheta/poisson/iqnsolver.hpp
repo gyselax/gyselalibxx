@@ -7,23 +7,23 @@
 #include <geometry.hpp>
 
 /**
- * @brief Base class for Poisson solver.
+ * @brief Base class for a Quasi-Neutrality solver.
  */
-class IPoissonSolver
+class IQNSolver
 {
 public:
-    virtual ~IPoissonSolver() = default;
+    virtual ~IQNSolver() = default;
 
     /**
      * @brief Compute the electrical potential and
-     * the electric field from the Poisson equation.
+     * the electric field from the Quasi-Neutrality equation.
      *
      * @param[out] electrostatic_potential
-     *      The solution of the Poisson equation.
+     *      The solution of the Quasi-Neutrality equation.
      * @param[out] electric_field
      *      The electric field @f$E = -\nabla \phi@f$.
      * @param[in] allfdistribu
-     *      The rhs of the Poisson equation.
+     *      The rhs of the Quasi-Neutrality equation.
      */
     virtual void operator()(
             DSpanRP electrostatic_potential,
