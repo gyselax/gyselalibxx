@@ -41,7 +41,7 @@
 
 
 namespace {
-using PoissonSolver = PolarSplineFEMPoissonSolver;
+using PoissonSolver = PolarSplineFEMPoissonLikeSolver;
 using DiscreteMapping
         = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>;
 using Mapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;

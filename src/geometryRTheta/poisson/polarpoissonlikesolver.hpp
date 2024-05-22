@@ -14,9 +14,9 @@
 #include "geometry.hpp"
 
 /**
-* @brief Define a polar Poisson solver.
+* @brief Define a polar PDE solver for a Poisson-like equation.
  *
- * Solve the following Poisson equation
+ * Solve the following Partial Differential Equation
  *
  * (1) @f$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho @f$, in  @f$ \Omega@f$,
  *
@@ -32,7 +32,7 @@
  * in the 5D GYSELA Code". December 2022.)
  *
  */
-class PolarSplineFEMPoissonSolver
+class PolarSplineFEMPoissonLikeSolver
 {
 public:
     struct RBasisSubset
@@ -202,7 +202,7 @@ private:
 
 public:
     /**
-     * @brief Instantiate a polar Poisson solver using FEM with B-splines.
+     * @brief Instantiate a polar Poisson-like solver using FEM with B-splines.
      *
      * The equation we are studying:
      *
@@ -212,10 +212,10 @@ public:
      *
      * @param[in] coeff_alpha
      *      The spline representation of the @f$ \alpha @f$ function in the
-     *      definition of the Poisson equation.
+     *      definition of the Poisson-like equation.
      * @param[in] coeff_beta
      *      The spline representation of the  @f$ \beta @f$ function in the
-     *      definition of the Poisson equation.
+     *      definition of the Poisson-like equation.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -223,7 +223,7 @@ public:
      * @tparam Mapping A Curvilinear2DToCartesian class.
      */
     template <class Mapping>
-    PolarSplineFEMPoissonSolver(
+    PolarSplineFEMPoissonLikeSolver(
             Spline2DView coeff_alpha,
             Spline2DView coeff_beta,
             Mapping const& mapping)
@@ -604,14 +604,14 @@ public:
 
 
     /**
-     * @brief Solve the Poisson equation.
+     * @brief Solve the Poisson-like equation.
      *
      * This operator returns the coefficients associated with the B-Splines
      * of the solution @f$\phi@f$.
      *
      * @param[in] rhs
-     *      The rhs @f$ \rho@f$ of the Poisson equation.
-     *      The type is templated but we can use the PoissonRHSFunction
+     *      The rhs @f$ \rho@f$ of the Poisson-like equation.
+     *      The type is templated but we can use the PoissonLikeRHSFunction
      *      class.
      * @param[out] spline
      *      The spline representation of the solution @f$\phi@f$.
@@ -729,14 +729,14 @@ public:
 
 
     /**
-     * @brief Solve the Poisson equation.
+     * @brief Solve the Poisson-like equation.
      *
      * This operator uses the other operator () and returns the values on
      * the grid of the solution @f$\phi@f$.
      *
      * @param[in] rhs
-     *      The rhs @f$ \rho@f$ of the Poisson equation.
-     *      The type is templated but we can use the PoissonRHSFunction
+     *      The rhs @f$ \rho@f$ of the Poisson-like equation.
+     *      The type is templated but we can use the PoissonLikeRHSFunction
      *      class.
      * @param[in] coords_eval
      *      A Chunk of coordinates where we want to compute the solution.

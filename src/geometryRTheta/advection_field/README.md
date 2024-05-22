@@ -20,12 +20,12 @@ E = - \nabla  \phi, \\
 
 with $`\rho`$ the density, $`\phi`$ the electrostatic potential and $`E`$ the electrical field. 
 
-The AdvectionFieldFinder computes the advection field $`A`$ from the electrical field $`\phi`$ returned by the PolarSplineFEMPoissonSolver. 
+The AdvectionFieldFinder computes the advection field $`A`$ from the electrical field $`\phi`$ returned by the PolarSplineFEMPoissonLikeSolver. 
 It has two types of `operator()`: 
 * one returning the advection field along the axis of the physical domain: $`A = (A_x, A_y)`$
 * and the another returning the advection field along the axis of the logical domain: $`A = (A_r, A_\theta)`$. 
 
-The PolarSplineFEMPoissonSolver can return the solution $`\phi`$ of the Poisson equation under two forms:
+The PolarSplineFEMPoissonLikeSolver can return the solution $`\phi`$ of the PDE under two forms:
 * a Chunk of values of the solution on the mesh points of the grid; 
 * a PolarSpline representation of the solution. 
 
