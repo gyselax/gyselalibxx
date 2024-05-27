@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['have_5fconverged_198',['have_converged',['../classCrankNicolson.html#a0be1faf244dffbe3dbe2af27f1444e6d',1,'CrankNicolson']]],
-  ['hiddennubsplinesx_199',['HiddenNUBSplinesX',['../structHiddenNUBSplinesX.html',1,'']]]
+  ['have_5fconverged_197',['have_converged',['../classCrankNicolson.html#a0be1faf244dffbe3dbe2af27f1444e6d',1,'CrankNicolson']]],
+  ['hiddennubsplinesx_198',['HiddenNUBSplinesX',['../structHiddenNUBSplinesX.html',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Poisson Solver</title>
+<title>Gyselalib++: Quasi-Neutrality Solver</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,10 +100,10 @@ $(document).ready(function(){initNavTree('src_geometryXYVxVy_poisson.html',''); 
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Poisson Solver </div>  </div>
+<div class="title">Quasi-Neutrality Solver </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The Poisson solver is designed to solve the following Poisson equation:</p>
+<div class="textblock"><p>The Quasi-Neutrality solver is designed to solve the following Quasi-Neutrality equation:</p>
 <p class="formulaDsp">
 \[ -\Delta \phi(x) = \sum_s \int q_s f_s(x,y,v_x,v_y) dv_x dv_y \]
 </p>
@@ -119,14 +119,14 @@ $(document).ready(function(){initNavTree('src_geometryXYVxVy_poisson.html',''); 
 <h1><a class="anchor" id="src_geometryXYVxVy_poisson__Charge_Density"></a>
 Charge Density</h1>
 <p>The charge density is calculated by integrating the distribution function.</p>
-<h1><a class="anchor" id="src_geometryXYVxVy_poisson__Poisson_Solver"></a>
-Poisson Solver</h1>
-<p>The Poisson equation can be solved with a variety of different methods. Here we have implemented:</p>
+<h1><a class="anchor" id="src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver"></a>
+Quasi-Neutrality Solver</h1>
+<p>The Quasi-Neutrality equation can be solved with a variety of different methods. Here we have implemented:</p>
 <ul>
-<li><a class="el" href="classFftPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform.">FftPoissonSolver</a></li>
+<li><a class="el" href="classFftQNSolver.html" title="An operator which solves the Quasi-Neutrality equation using a fast Fourier transform.">FftQNSolver</a></li>
 </ul>
 <p>These classes return the electric potential \(\phi\) and the electric field \(\frac{d \phi}{dx}\).</p>
-<p>The <a class="el" href="classFftPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform.">FftPoissonSolver</a> does not calculate the electric field using the Fourier modes. Rather it uses a spline interpolation to approximate this value. This interpolation is calculated by the operator ElectricField. </p>
+<p>The <a class="el" href="classFftQNSolver.html" title="An operator which solves the Quasi-Neutrality equation using a fast Fourier transform.">FftQNSolver</a> does not calculate the electric field using the Fourier modes. Rather it uses a spline interpolation to approximate this value. This interpolation is calculated by the operator ElectricField. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

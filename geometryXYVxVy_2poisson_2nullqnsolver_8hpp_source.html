@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/ipoissonsolver.hpp Source File</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/nullqnsolver.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('ipoissonsolver_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2nullqnsolver_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,36 +100,39 @@ $(document).ready(function(){initNavTree('ipoissonsolver_8hpp_source.html',''); 
 
 <div class="header">
   <div class="headertitle">
-<div class="title">ipoissonsolver.hpp</div>  </div>
+<div class="title">nullqnsolver.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;iqnsolver.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classIPoissonSolver.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIPoissonSolver.html">IPoissonSolver</a></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIPoissonSolver.html">IPoissonSolver</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6">   31</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6">operator()</a>(</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            DSpanXY electrostatic_potential,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            DSpanXY electric_field_x,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            DSpanXY electric_field_y,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            DViewSpXYVxVy allfdistribu) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
-<div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">An operator which solves the Poisson equation using a fast Fourier transform.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:19</div></div>
-<div class="ttc" id="aclassIPoissonSolver_html_acc648976a27e0b36daf0615d7b8eebd6"><div class="ttname"><a href="classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6">IPoissonSolver::operator()</a></div><div class="ttdeci">virtual void operator()(DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const =0</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">class </span><a class="code" href="classNullQNSolver.html">NullQNSolver</a> : <span class="keyword">public</span> <a class="code" href="classIQNSolver.html">IQNSolver</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classNullQNSolver.html">NullQNSolver</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    ~<a class="code" href="classNullQNSolver.html">NullQNSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classNullQNSolver.html#a229ccb682685dc26ff6de9583d31b3b6">   27</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNullQNSolver.html#a229ccb682685dc26ff6de9583d31b3b6">operator()</a>(</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            DSpanXY electrostatic_potential,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            DSpanXY electric_field_x,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DSpanXY electric_field_y,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            DViewSpXYVxVy allfdistribu) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="ttc" id="aclassIQNSolver_html"><div class="ttname"><a href="classIQNSolver.html">IQNSolver</a></div><div class="ttdoc">Base class for a Quasi-Neutrality solver.</div><div class="ttdef"><b>Definition:</b> iqnsolver.hpp:13</div></div>
+<div class="ttc" id="aclassNullQNSolver_html"><div class="ttname"><a href="classNullQNSolver.html">NullQNSolver</a></div><div class="ttdoc">Null operator.</div><div class="ttdef"><b>Definition:</b> nullqnsolver.hpp:16</div></div>
+<div class="ttc" id="aclassNullQNSolver_html_a229ccb682685dc26ff6de9583d31b3b6"><div class="ttname"><a href="classNullQNSolver.html#a229ccb682685dc26ff6de9583d31b3b6">NullQNSolver::operator()</a></div><div class="ttdeci">void operator()(DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const override</div><div class="ttdoc">A QN Solver which does nothing.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_5f726612e6f7feddf1426504728ece79.html">geometryXYVxVy</a></li><li class="navelem"><a class="el" href="dir_1565b715753ffeaa27b85f9d3e8ee903.html">poisson</a></li><li class="navelem"><b>ipoissonsolver.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_5f726612e6f7feddf1426504728ece79.html">geometryXYVxVy</a></li><li class="navelem"><a class="el" href="dir_1565b715753ffeaa27b85f9d3e8ee903.html">poisson</a></li><li class="navelem"><b>nullqnsolver.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

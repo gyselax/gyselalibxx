@@ -116,6 +116,7 @@ Inheritance diagram for FftQNSolver:</div>
   <img src="classFftQNSolver.png" usemap="#FftQNSolver_map" alt=""/>
   <map id="FftQNSolver_map" name="FftQNSolver_map">
 <area href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver." alt="IQNSolver" shape="rect" coords="0,0,83,24"/>
+<area href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver." alt="IQNSolver" shape="rect" coords="93,0,176,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -127,6 +128,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad40974052f1e86255918853229d4d396"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFftQNSolver.html#ad40974052f1e86255918853229d4d396">operator()</a> (DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const override</td></tr>
 <tr class="memdesc:ad40974052f1e86255918853229d4d396"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classFftQNSolver.html#ad40974052f1e86255918853229d4d396">More...</a><br /></td></tr>
 <tr class="separator:ad40974052f1e86255918853229d4d396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17da2725a6f7b10371a89b1652c663b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFftQNSolver.html#a17da2725a6f7b10371a89b1652c663b0">FftQNSolver</a> (<a class="el" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> const &amp;compute_rho)</td></tr>
+<tr class="memdesc:a17da2725a6f7b10371a89b1652c663b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the <a class="el" href="classFftQNSolver.html" title="An operator which solves the Quasi-Neutrality equation using a fast Fourier transform.">FftQNSolver</a> operator.  <a href="classFftQNSolver.html#a17da2725a6f7b10371a89b1652c663b0">More...</a><br /></td></tr>
+<tr class="separator:a17da2725a6f7b10371a89b1652c663b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0dcc5100a97f1594e5b3277f1c89901"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFftQNSolver.html#ad0dcc5100a97f1594e5b3277f1c89901">operator()</a> (DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const override</td></tr>
+<tr class="memdesc:ad0dcc5100a97f1594e5b3277f1c89901"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classFftQNSolver.html#ad0dcc5100a97f1594e5b3277f1c89901">More...</a><br /></td></tr>
+<tr class="separator:ad0dcc5100a97f1594e5b3277f1c89901"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classIQNSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIQNSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIQNSolver.html">IQNSolver</a></td></tr>
 <tr class="memitem:a219b1144fffdc7059467315c9de5b1da inherit pub_methods_classIQNSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIQNSolver.html#a219b1144fffdc7059467315c9de5b1da">operator()</a> (DSpanRP electrostatic_potential, <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; double, IDomainRP, NDTag&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt;&gt; electric_field, DViewRP allfdistribu) const =0</td></tr>
 <tr class="memdesc:a219b1144fffdc7059467315c9de5b1da inherit pub_methods_classIQNSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the electrical potential and the electric field from the Quasi-Neutrality equation.  <a href="classIQNSolver.html#a219b1144fffdc7059467315c9de5b1da">More...</a><br /></td></tr>
@@ -138,7 +145,33 @@ Public Member Functions</h2></td></tr>
 <p>The electric field, \( \frac{d \phi}{dx} \) is calculated using a spline interpolation implemented in ElectricField. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a17da2725a6f7b10371a89b1652c663b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17da2725a6f7b10371a89b1652c663b0">&#9670;&nbsp;</a></span>FftQNSolver()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a17da2725a6f7b10371a89b1652c663b0">&#9670;&nbsp;</a></span>FftQNSolver() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FftQNSolver::FftQNSolver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> const &amp;&#160;</td>
+          <td class="paramname"><em>compute_rho</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct the <a class="el" href="classFftQNSolver.html" title="An operator which solves the Quasi-Neutrality equation using a fast Fourier transform.">FftQNSolver</a> operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">compute_rho</td><td>The operator which calculates the charge density, the right hand side of the equation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a17da2725a6f7b10371a89b1652c663b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17da2725a6f7b10371a89b1652c663b0">&#9670;&nbsp;</a></span>FftQNSolver() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,7 +198,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad40974052f1e86255918853229d4d396"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad40974052f1e86255918853229d4d396">&#9670;&nbsp;</a></span>operator()()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad40974052f1e86255918853229d4d396">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -218,8 +251,69 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ad0dcc5100a97f1594e5b3277f1c89901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0dcc5100a97f1594e5b3277f1c89901">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FftQNSolver::operator() </td>
+          <td>(</td>
+          <td class="paramtype">DSpanXY&#160;</td>
+          <td class="paramname"><em>electrostatic_potential</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DSpanXY&#160;</td>
+          <td class="paramname"><em>electric_field_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DSpanXY&#160;</td>
+          <td class="paramname"><em>electric_field_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DViewSpXYVxVy&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The operator which solves the equation using the method described by the class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">electrostatic_potential</td><td>The electrostatic potential, the result of the poisson solver. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field_x</td><td>The x-component of the electric field, the gradient of the electrostatic potential. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field_y</td><td>The y-component of the electric field, the gradient of the electrostatic potential. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classIQNSolver.html#a7bf697cc0f8e1080738a5ea089af17fb">IQNSolver</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="fftqnsolver_8hpp_source.html">fftqnsolver.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="geometryXVx_2poisson_2fftqnsolver_8hpp_source.html">fftqnsolver.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
