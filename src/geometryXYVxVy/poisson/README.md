@@ -1,6 +1,6 @@
-# Poisson Solver
+# Quasi-Neutrality Solver
 
-The Poisson solver is designed to solve the following Poisson equation:
+The Quasi-Neutrality solver is designed to solve the following Quasi-Neutrality equation:
 
 $$ -\Delta \phi(x) = \sum_s \int q_s f_s(x,y,v_x,v_y) dv_x dv_y $$
 
@@ -18,13 +18,13 @@ is solved.
 
 The charge density is calculated by integrating the distribution function.
 
-## Poisson Solver
+## Quasi-Neutrality Solver
 
-The Poisson equation can be solved with a variety of different methods. Here we have implemented:
+The Quasi-Neutrality equation can be solved with a variety of different methods. Here we have implemented:
 
--   FftPoissonSolver
+-   FftQNSolver
 
 These classes return the electric potential $\phi$ and the electric field $\frac{d \phi}{dx}$.
 
-The FftPoissonSolver does not calculate the electric field using the Fourier modes. Rather it uses a spline interpolation to approximate this value. This interpolation is calculated by the operator ElectricField.
+The FftQNSolver does not calculate the electric field using the Fourier modes. Rather it uses a spline interpolation to approximate this value. This interpolation is calculated by the operator ElectricField.
 

@@ -5,12 +5,12 @@
 
 #include <ddc/ddc.hpp>
 
-#include <ipoissonsolver.hpp>
+#include <iqnsolver.hpp>
 #include <ivlasovsolver.hpp>
 
 #include "predcorr.hpp"
 
-PredCorr::PredCorr(IVlasovSolver const& vlasov_solver, IPoissonSolver const& poisson_solver)
+PredCorr::PredCorr(IVlasovSolver const& vlasov_solver, IQNSolver const& poisson_solver)
     : m_vlasov_solver(vlasov_solver)
     , m_poisson_solver(poisson_solver)
 {
