@@ -9,13 +9,13 @@
 #include <pdi.h>
 
 #include "chargedensitycalculator.hpp"
-#include "femperiodicpoissonsolver.hpp"
+#include "femperiodicqnsolver.hpp"
 #include "geometry.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
 
-TEST(FemPeriodicPoissonSolver, CosineSource)
+TEST(FemPeriodicQNSolver, CosineSource)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(2.0 * M_PI);
@@ -71,7 +71,7 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
-    FemPeriodicPoissonSolver poisson(builder_x, spline_x_evaluator, rhs);
+    FemPeriodicQNSolver poisson(builder_x, spline_x_evaluator, rhs);
 
     host_t<DFieldX> electrostatic_potential_host(gridx);
     host_t<DFieldX> electric_field_host(gridx);

@@ -12,7 +12,7 @@
  * @brief A class which computes charges density with Kokkos.
  *
  * A class which computes charges density by solving the equation:
- * @f$ \int_{v} q_s f_s(x,v) dv @f$
+ * @f$ \sum_s \int_{v} q_s f_s(x,v) dv @f$
  * where @f$ q_s @f$ is the charge of the species @f$ s @f$ and
  * @f$ f_s(x,v) @f$ is the distribution function.
  */

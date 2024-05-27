@@ -22,13 +22,13 @@
 #include "bsl_advection_x.hpp"
 #include "collisions_intra.hpp"
 #ifdef PERIODIC_RDIMX
-#include "femperiodicpoissonsolver.hpp"
+#include "femperiodicqnsolver.hpp"
 #else
-#include "femnonperiodicpoissonsolver.hpp"
+#include "femnonperiodicqnsolver.hpp"
 #endif
 #include "Lagrange_interpolator.hpp"
 #include "chargedensitycalculator.hpp"
-#include "fftpoissonsolver.hpp"
+#include "fftqnsolver.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "kinetic_source.hpp"
@@ -311,9 +311,9 @@ int main(int argc, char** argv)
 #ifdef PERIODIC_RDIMX
     ddc::init_discrete_space<IDimFx>(
             ddc::init_fourier_space<IDimFx>(ddc::select<IDimX>(meshSpXVx)));
-    FftPoissonSolver const poisson(rhs);
+    FftQNSolver const poisson(rhs);
 #else
-    FemNonPeriodicPoissonSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
+    FemNonPeriodicQNSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 #endif
 
 

@@ -9,7 +9,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <femperiodicpoissonsolver.hpp>
+#include <femperiodicqnsolver.hpp>
 #include <geometry.hpp>
 #include <irighthandside.hpp>
 #include <krook_source_adaptive.hpp>
