@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('tests_geometryRTheta_polar_poisson.htm
 <div class="textblock"><p>The tests implemented in this folder test the 2D polar poisson solver implemented in the <code>src/geometryRTheta/poisson/</code> folder ( <a class="el" href="src_geometryRTheta_poisson.html">Polar Poisson solver</a> ).</p>
 <h1><a class="anchor" id="tests_geometryRTheta_polar_poisson__Polar_Poisson_solver"></a>
 Polar Poisson solver</h1>
-<p>The <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a> is tested on a circular mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>) and on a Czarny mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>) with (the test cases are given in Emily Bourne's thesis [1]).</p>
+<p>The <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a> is tested on a circular mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>) and on a Czarny mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>) with (the test cases are given in Emily Bourne's thesis [1]).</p>
 <p>The studied equation is</p>
 <p class="formulaDsp">
 \[L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho, \]
@@ -134,7 +134,7 @@ References</h1>
 <h1><a class="anchor" id="tests_geometryRTheta_polar_poisson__Contents"></a>
 Contents</h1>
 <ul>
-<li>polarpoissonfemsolver.cpp : it tests the <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a>. It solves the Poisson equation for a selected test case.</li>
+<li>polarpoissonfemsolver.cpp : it tests the <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a>. It solves the Poisson equation for a selected test case.</li>
 <li>test_cases.hpp : it defines RHS (<a class="el" href="classManufacturedPoissonTest.html" title="Defining the corresponding RHS of the Poisson equation for a given exact solution.">ManufacturedPoissonTest</a>) and exact solutions (<a class="el" href="classPoissonSolution.html" title="Base class for the exact solutions of the Poisson equation.">PoissonSolution</a>) of the Poisson equation.</li>
 <li>vlasovpoissonsolver.cpp : it tests the VlasovPoissonSolver. It solves the Poisson equation for a selected test case and computes the electric field in the physical domain.</li>
 <li>poisson.yaml : the parameters of the tests.</li>

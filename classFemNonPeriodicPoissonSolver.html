@@ -116,7 +116,7 @@ Inheritance diagram for FemNonPeriodicPoissonSolver:</div>
  <div class="center">
   <img src="classFemNonPeriodicPoissonSolver.png" usemap="#FemNonPeriodicPoissonSolver_map" alt=""/>
   <map id="FemNonPeriodicPoissonSolver_map" name="FemNonPeriodicPoissonSolver_map">
-<area href="classIPoissonSolver.html" title="Base class for Poisson solver." alt="IPoissonSolver" shape="rect" coords="0,0,187,24"/>
+<area href="classIPoissonSolver.html" title="An operator which solves the Poisson equation." alt="IPoissonSolver" shape="rect" coords="0,0,187,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -125,6 +125,8 @@ Classes</h2></td></tr>
 <tr class="memitem:structFemNonPeriodicPoissonSolver_1_1QDimX"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX">QDimX</a></td></tr>
 <tr class="memdesc:structFemNonPeriodicPoissonSolver_1_1QDimX"><td class="mdescLeft">&#160;</td><td class="mdescRight">A tag to represent the dimension where the quadrature points are defined.  <a href="classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX">More...</a><br /></td></tr>
 <tr class="separator:structFemNonPeriodicPoissonSolver_1_1QDimX"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFemNonPeriodicPoissonSolver_1_1QMeshX.html">QMeshX</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -138,9 +140,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:abaa0734fbede404207a0d0d86f4877a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">[SHOULD BE PRIVATE (Kokkos limitation)]  <a href="classFemNonPeriodicPoissonSolver.html#abaa0734fbede404207a0d0d86f4877a3">More...</a><br /></td></tr>
 <tr class="separator:abaa0734fbede404207a0d0d86f4877a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classIPoissonSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIPoissonSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIPoissonSolver.html">IPoissonSolver</a></td></tr>
-<tr class="memitem:a2e07de086727dd87d194d5132517e8a5 inherit pub_methods_classIPoissonSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver.html#a2e07de086727dd87d194d5132517e8a5">operator()</a> (DSpanRP electrostatic_potential, <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; double, IDomainRP, NDTag&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt;&gt; electric_field, DViewRP allfdistribu) const =0</td></tr>
-<tr class="memdesc:a2e07de086727dd87d194d5132517e8a5 inherit pub_methods_classIPoissonSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the electrical potential and the electric field from the Poisson equation.  <a href="classIPoissonSolver.html#a2e07de086727dd87d194d5132517e8a5">More...</a><br /></td></tr>
-<tr class="separator:a2e07de086727dd87d194d5132517e8a5 inherit pub_methods_classIPoissonSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc648976a27e0b36daf0615d7b8eebd6 inherit pub_methods_classIPoissonSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6">operator()</a> (DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const =0</td></tr>
 <tr class="memdesc:acc648976a27e0b36daf0615d7b8eebd6 inherit pub_methods_classIPoissonSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6">More...</a><br /></td></tr>
 <tr class="separator:acc648976a27e0b36daf0615d7b8eebd6 inherit pub_methods_classIPoissonSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>

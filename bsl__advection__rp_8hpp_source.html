@@ -180,7 +180,7 @@ $(document).ready(function(){initNavTree('bsl__advection__rp_8hpp_source.html','
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            CoordXY <span class="keyword">const</span>&amp; advection_field_xy_center,</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordtype">double</span> dt)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        IDomainRP grid(allfdistribu.domain&lt;IDimR, IDimP&gt;());</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        IDomainRP grid(allfdistribu.domain&lt;<a class="code" href="structIDimR.html">IDimR</a>, <a class="code" href="structIDimP.html">IDimP</a>&gt;());</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> npoints_p = IDomainP(grid).size();</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        IDomainRP <span class="keyword">const</span> grid_without_Opoint(grid.remove_first(IVectRP(1, 0)));</div>
@@ -238,6 +238,8 @@ $(document).ready(function(){initNavTree('bsl__advection__rp_8hpp_source.html','
 <div class="ttc" id="aclassPreallocatableSplineInterpolatorRP_html_aedfcd0cff398fd0d6766aeac6b6bb366"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRP.html#aedfcd0cff398fd0d6766aeac6b6bb366">PreallocatableSplineInterpolatorRP::preallocate</a></div><div class="ttdeci">std::unique_ptr&lt; IInterpolatorRP &gt; preallocate() const override</div><div class="ttdoc">Create a pointer to an instance of the SplineInterpolatorRP class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:146</div></div>
 <div class="ttc" id="aclassVectorFieldSpan_html"><div class="ttname"><a href="classVectorFieldSpan.html">VectorFieldSpan</a></div><div class="ttdoc">Pre-declaration of VectorFieldSpan.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:45</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">Pre-declaration of VectorField.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:34</div></div>
+<div class="ttc" id="astructIDimP_html"><div class="ttname"><a href="structIDimP.html">IDimP</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:101</div></div>
+<div class="ttc" id="astructIDimR_html"><div class="ttname"><a href="structIDimR.html">IDimR</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:94</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

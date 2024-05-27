@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: BernsteinPolynomialBasis&lt; Tag1, Tag2, Corner1Tag, Corner2Tag, Corner3Tag, D &gt;::Impl&lt; MemorySpace &gt; Class Template Reference</title>
+<title>Gyselalib++: BernsteinPolynomialBasis&lt; Tag1, Tag2, Corner1Tag, Corner2Tag, Corner3Tag, D &gt;::Impl&lt; DDim, MemorySpace &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,40 +104,49 @@ $(document).ready(function(){initNavTree('classBernsteinPolynomialBasis_1_1Impl.
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classBernsteinPolynomialBasis_1_1Impl-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">BernsteinPolynomialBasis&lt; Tag1, Tag2, Corner1Tag, Corner2Tag, Corner3Tag, D &gt;::Impl&lt; MemorySpace &gt; Class Template Reference</div>  </div>
+<div class="title">BernsteinPolynomialBasis&lt; Tag1, Tag2, Corner1Tag, Corner2Tag, Corner3Tag, D &gt;::Impl&lt; DDim, MemorySpace &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a28f1e7162a1619afe5d52fbd46359767"><td class="memItemLeft" align="right" valign="top"><a id="a28f1e7162a1619afe5d52fbd46359767"></a>
+<tr class="memitem:a2dc15332deff3c8cb706faec7dc738e2"><td class="memItemLeft" align="right" valign="top"><a id="a2dc15332deff3c8cb706faec7dc738e2"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_dimension_type</b> = <a class="el" href="classBernsteinPolynomialBasis.html">BernsteinPolynomialBasis</a></td></tr>
-<tr class="separator:a28f1e7162a1619afe5d52fbd46359767"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a2dc15332deff3c8cb706faec7dc738e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12ab7fd55ce096910e818cda23f65616"><td class="memItemLeft" align="right" valign="top"><a id="a12ab7fd55ce096910e818cda23f65616"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_element_type</b> = ddc::DiscreteElement&lt; DDim &gt;</td></tr>
+<tr class="separator:a12ab7fd55ce096910e818cda23f65616"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0467a0ac002cc84fb5846675a9c7135"><td class="memItemLeft" align="right" valign="top"><a id="ae0467a0ac002cc84fb5846675a9c7135"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_domain_type</b> = ddc::DiscreteDomain&lt; DDim &gt;</td></tr>
+<tr class="separator:ae0467a0ac002cc84fb5846675a9c7135"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53debb37a30efb42ca5178d70abf0b4f"><td class="memItemLeft" align="right" valign="top"><a id="a53debb37a30efb42ca5178d70abf0b4f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_vector_type</b> = ddc::DiscreteVector&lt; DDim &gt;</td></tr>
+<tr class="separator:a53debb37a30efb42ca5178d70abf0b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aeed25ab4397c08b7f5c964eb7b073e59"><td class="memItemLeft" align="right" valign="top"><a id="aeed25ab4397c08b7f5c964eb7b073e59"></a>
+<tr class="memitem:a8e5a3a47e333bf70fcf17535d990edf8"><td class="memItemLeft" align="right" valign="top"><a id="a8e5a3a47e333bf70fcf17535d990edf8"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Impl</b> (<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; Tag1, Tag2, Corner1Tag, Corner2Tag, Corner3Tag &gt; const &amp;coord_changer)</td></tr>
-<tr class="separator:aeed25ab4397c08b7f5c964eb7b073e59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37801588769e4999b66200d4f6195207"><td class="memTemplParams" colspan="2"><a id="a37801588769e4999b66200d4f6195207"></a>
+<tr class="separator:a8e5a3a47e333bf70fcf17535d990edf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9257d54ebf91fd684c216ef6f0d2663"><td class="memTemplParams" colspan="2"><a id="ac9257d54ebf91fd684c216ef6f0d2663"></a>
 template&lt;class OriginMemorySpace &gt; </td></tr>
-<tr class="memitem:a37801588769e4999b66200d4f6195207"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Impl</b> (<a class="el" href="classBernsteinPolynomialBasis_1_1Impl.html">Impl</a>&lt; OriginMemorySpace &gt; const &amp;impl)</td></tr>
-<tr class="separator:a37801588769e4999b66200d4f6195207"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab2040142dd0f2e0d8962596ea04f814"><td class="memItemLeft" align="right" valign="top"><a id="aab2040142dd0f2e0d8962596ea04f814"></a>
+<tr class="memitem:ac9257d54ebf91fd684c216ef6f0d2663"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Impl</b> (<a class="el" href="classBernsteinPolynomialBasis_1_1Impl.html">Impl</a>&lt; DDim, OriginMemorySpace &gt; const &amp;impl)</td></tr>
+<tr class="separator:ac9257d54ebf91fd684c216ef6f0d2663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ddadbb06ca67c5ec407a3e7c797fc52"><td class="memItemLeft" align="right" valign="top"><a id="a2ddadbb06ca67c5ec407a3e7c797fc52"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Impl</b> (<a class="el" href="classBernsteinPolynomialBasis_1_1Impl.html">Impl</a> const &amp;x)=default</td></tr>
-<tr class="separator:aab2040142dd0f2e0d8962596ea04f814"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd09906752719a3f02a7ba19c29769d8"><td class="memItemLeft" align="right" valign="top"><a id="abd09906752719a3f02a7ba19c29769d8"></a>
+<tr class="separator:a2ddadbb06ca67c5ec407a3e7c797fc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3249a68119db220e72862de8727d08ab"><td class="memItemLeft" align="right" valign="top"><a id="a3249a68119db220e72862de8727d08ab"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Impl</b> (<a class="el" href="classBernsteinPolynomialBasis_1_1Impl.html">Impl</a> &amp;&amp;x)=default</td></tr>
-<tr class="separator:abd09906752719a3f02a7ba19c29769d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51f62ddf8395f3e9f6a30a0c14f51aa9"><td class="memItemLeft" align="right" valign="top"><a id="a51f62ddf8395f3e9f6a30a0c14f51aa9"></a>
+<tr class="separator:a3249a68119db220e72862de8727d08ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeabfa2acaa85f2081c699255d3bfb3e6"><td class="memItemLeft" align="right" valign="top"><a id="aeabfa2acaa85f2081c699255d3bfb3e6"></a>
 <a class="el" href="classBernsteinPolynomialBasis_1_1Impl.html">Impl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBernsteinPolynomialBasis_1_1Impl.html">Impl</a> const &amp;x)=default</td></tr>
-<tr class="separator:a51f62ddf8395f3e9f6a30a0c14f51aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae222940b856815febedd8651326217fc"><td class="memItemLeft" align="right" valign="top"><a id="ae222940b856815febedd8651326217fc"></a>
+<tr class="separator:aeabfa2acaa85f2081c699255d3bfb3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56673d515ee43eab62b776684410529a"><td class="memItemLeft" align="right" valign="top"><a id="a56673d515ee43eab62b776684410529a"></a>
 <a class="el" href="classBernsteinPolynomialBasis_1_1Impl.html">Impl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBernsteinPolynomialBasis_1_1Impl.html">Impl</a> &amp;&amp;x)=default</td></tr>
-<tr class="separator:ae222940b856815febedd8651326217fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19993b476d9b54f7aba6d92c9648f5ae"><td class="memItemLeft" align="right" valign="top"><a id="a19993b476d9b54f7aba6d92c9648f5ae"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>eval_basis</b> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; <a class="el" href="classBernsteinPolynomialBasis.html">BernsteinPolynomialBasis</a> &gt;&gt; values, ddc::Coordinate&lt; Tag1, Tag2 &gt; const &amp;x) const</td></tr>
-<tr class="separator:a19993b476d9b54f7aba6d92c9648f5ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a56673d515ee43eab62b776684410529a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fd14113464c6c6491917e6953fdad65"><td class="memItemLeft" align="right" valign="top"><a id="a2fd14113464c6c6491917e6953fdad65"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>eval_basis</b> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; values, ddc::Coordinate&lt; Tag1, Tag2 &gt; const &amp;x) const</td></tr>
+<tr class="separator:a2fd14113464c6c6491917e6953fdad65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/<a class="el" href="bernstein_8hpp_source.html">bernstein.hpp</a></li>

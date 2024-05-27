@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['span_5ftype_928',['span_type',['../classVectorField.html#a94d0034047dacae6e8a7f87d8b21fc41',1,'VectorField::span_type()'],['../classVectorFieldSpan.html#a159b7fcc46c877cd175b88be6b47d2d3',1,'VectorFieldSpan::span_type()']]],
-  ['spatial_5fdim_5ffor_929',['spatial_dim_for',['../classGeometryXVx.html#ab25a8b2541d4cb66330b480e41b252f9',1,'GeometryXVx']]],
-  ['spatialddom_930',['SpatialDDom',['../classGeometryXVx.html#aae0be9b78f75cf231259785f2ffd4862',1,'GeometryXVx::SpatialDDom()'],['../classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad',1,'GeometryXYVxVy::SpatialDDom()']]]
+  ['tensor_5fproduct_5fdiscrete_5fdomain_5ftype_1009',['tensor_product_discrete_domain_type',['../classPolarBSplines.html#a80fbb43730f6b755755d7641f727a93d',1,'PolarBSplines']]],
+  ['tensor_5fproduct_5fdiscrete_5felement_5ftype_1010',['tensor_product_discrete_element_type',['../classPolarBSplines.html#a702d43d6d57622232401eca237f82bfe',1,'PolarBSplines']]],
+  ['tensor_5fproduct_5fdiscrete_5fvector_5ftype_1011',['tensor_product_discrete_vector_type',['../classPolarBSplines.html#a94827b147e44e22abf6169d1aaf131a6',1,'PolarBSplines']]],
+  ['type_1012',['type',['../structinterpolator__on__domain_3_01Interp_00_01DDimI_00_01ddc_1_1DiscreteDomain_3_01DDim_8_8_8_01_4_01_4.html#a01b41fecaeb84e4397c995d4bcfca4f7',1,'interpolator_on_domain&lt; Interp, DDimI, ddc::DiscreteDomain&lt; DDim... &gt; &gt;']]]
 ];

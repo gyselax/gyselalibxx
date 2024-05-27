@@ -1,11 +1,25 @@
 var searchData=
 [
-  ['singlemodeperturbinitialization_632',['SingleModePerturbInitialization',['../classSingleModePerturbInitialization.html',1,'']]],
-  ['speciesinformation_633',['SpeciesInformation',['../classSpeciesInformation.html',1,'']]],
-  ['splinefootfinder_634',['SplineFootFinder',['../classSplineFootFinder.html',1,'']]],
-  ['splinefootfinder_3c_20euler_2c_20advectiondomain_20_3e_635',['SplineFootFinder&lt; Euler, AdvectionDomain &gt;',['../classSplineFootFinder.html',1,'']]],
-  ['splineinterpolator_636',['SplineInterpolator',['../classSplineInterpolator.html',1,'']]],
-  ['splineinterpolatorrp_637',['SplineInterpolatorRP',['../classSplineInterpolatorRP.html',1,'']]],
-  ['splitrighthandsidesolver_638',['SplitRightHandSideSolver',['../classSplitRightHandSideSolver.html',1,'']]],
-  ['splitvlasovsolver_639',['SplitVlasovSolver',['../classSplitVlasovSolver.html',1,'']]]
+  ['rbasissubset_691',['RBasisSubset',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset',1,'PolarSplineFEMPoissonLikeSolver']]],
+  ['rcelldim_692',['RCellDim',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RCellDim',1,'PolarSplineFEMPoissonLikeSolver']]],
+  ['rdimp_693',['RDimP',['../structRDimP.html',1,'']]],
+  ['rdimprefined_694',['RDimPRefined',['../structRefinedDiscreteToCartesian_1_1RDimPRefined.html',1,'RefinedDiscreteToCartesian']]],
+  ['rdimr_695',['RDimR',['../structRDimR.html',1,'']]],
+  ['rdimrrefined_696',['RDimRRefined',['../structRefinedDiscreteToCartesian_1_1RDimRRefined.html',1,'RefinedDiscreteToCartesian']]],
+  ['rdimt_697',['RDimT',['../structRDimT.html',1,'']]],
+  ['rdimvp_698',['RDimVp',['../structRDimVp.html',1,'']]],
+  ['rdimvr_699',['RDimVr',['../structRDimVr.html',1,'']]],
+  ['rdimvx_700',['RDimVx',['../structRDimVx.html',1,'']]],
+  ['rdimvy_701',['RDimVy',['../structRDimVy.html',1,'']]],
+  ['rdimx_702',['RDimX',['../structRDimX.html',1,'']]],
+  ['rdimxrefined_703',['RDimXRefined',['../structRefinedDiscreteToCartesian_1_1RDimXRefined.html',1,'RefinedDiscreteToCartesian']]],
+  ['rdimy_704',['RDimY',['../structRDimY.html',1,'']]],
+  ['rdimyrefined_705',['RDimYRefined',['../structRefinedDiscreteToCartesian_1_1RDimYRefined.html',1,'RefinedDiscreteToCartesian']]],
+  ['refineddiscretetocartesian_706',['RefinedDiscreteToCartesian',['../classRefinedDiscreteToCartesian.html',1,'']]],
+  ['restartinitialization_707',['RestartInitialization',['../classRestartInitialization.html',1,'']]],
+  ['rk2_708',['RK2',['../classRK2.html',1,'']]],
+  ['rk3_709',['RK3',['../classRK3.html',1,'']]],
+  ['rk4_710',['RK4',['../classRK4.html',1,'']]],
+  ['rotationadvectionfieldsimulation_711',['RotationAdvectionFieldSimulation',['../classRotationAdvectionFieldSimulation.html',1,'']]],
+  ['rotationsimulation_712',['RotationSimulation',['../classRotationSimulation.html',1,'']]]
 ];

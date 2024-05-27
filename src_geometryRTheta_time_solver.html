@@ -119,15 +119,14 @@ Predictor-corrector</h1>
 <p>This method is a Runge-Kutta 2 method: for \(n\geq 0\),</p>
 <p>Advect on a half time step:</p>
 <ol type="1">
-<li>From \(\rho^n\), we compute \(\phi^n\) with the Poisson equation (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
-<li>From \(\phi^n\), we compute \(E^n\) by deriving (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
+<li>From \(\rho^n\), we compute \(\phi^n\) with the Poisson-like equation (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
+<li>From \(\phi^n\), we compute \(E^n\) by deriving (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
 <li>From \(\rho^n \text{ and } A^n\), we compute \(\rho^{n+1/2}\) by advecting (<a class="el" href="classIAdvectionRP.html" title="Define the base class of 2D advection operators in polar domain.">IAdvectionRP</a>) on \(\frac{dt}{2}\) with one of the selected time integration methods (<a class="el" href="classITimeStepper.html">ITimeStepper</a>);</li>
 </ol>
-<p>Advect on a full time step: <br  />
-</p>
+<p>Advect on a full time step:</p>
 <ol type="1">
-<li>From \(\rho^{n+1/2}\), we compute \(\phi^{n+1/2}\) with the Poisson equation (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
-<li>From \(\phi^{n+1/2}\), we compute \(E^{n+1/2}\) by deriving (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
+<li>From \(\rho^{n+1/2}\), we compute \(\phi^{n+1/2}\) with the Poisson-like equation (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
+<li>From \(\phi^{n+1/2}\), we compute \(E^{n+1/2}\) by deriving (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
 <li>From \(\rho^n \text{ and } A^{n+1/2}\), we compute \(\rho^{n+1}\) by advecting (<a class="el" href="classIAdvectionRP.html" title="Define the base class of 2D advection operators in polar domain.">IAdvectionRP</a>) on \(dt\) with one of the selected time integration methods (<a class="el" href="classITimeStepper.html">ITimeStepper</a>).</li>
 </ol>
 <h1><a class="anchor" id="src_geometryRTheta_time_solver__Explicit_predictor-corrector"></a>
@@ -135,8 +134,8 @@ Explicit predictor-corrector</h1>
 <p>This method is a second order explicit predictor-corrector: for \(n\geq 0\),</p>
 <p>Prediction:</p>
 <ol type="1">
-<li>From \(\rho^n\), we compute \(\phi^n\) with the Poisson equation (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
-<li>From \(\phi^n\), we compute \(E^n\) by deriving (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
+<li>From \(\rho^n\), we compute \(\phi^n\) with the Poisson-like equation (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
+<li>From \(\phi^n\), we compute \(E^n\) by deriving (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
 <li>From \(\rho^n \text{ and } A^n\), we compute \(\rho^P\) by advecting (<a class="el" href="classIAdvectionRP.html" title="Define the base class of 2D advection operators in polar domain.">IAdvectionRP</a>) on \(dt\);<ul>
 <li>We write \(X^P\) the characteristic feet such that \(\partial_t X^P = A^n(X^n)\).</li>
 </ul>
@@ -144,8 +143,8 @@ Explicit predictor-corrector</h1>
 </ol>
 <p>Correction:</p>
 <ol type="1">
-<li>From \(\rho^{P}\), we compute \(\phi^{P}\) with the Poisson equation (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
-<li>From \(\phi^{P}\), we compute \(E^{P}\) by deriving (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
+<li>From \(\rho^{P}\), we compute \(\phi^{P}\) with the Poisson-like equation (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
+<li>From \(\phi^{P}\), we compute \(E^{P}\) by deriving (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
 <li>From \(\rho^n \text{ and } \frac{A^{P}(X^n) + A^n(X^P)}{2}\), we compute \(\rho^{C} = \rho^{n+1}\) by advecting (<a class="el" href="classIAdvectionRP.html" title="Define the base class of 2D advection operators in polar domain.">IAdvectionRP</a>) on \(dt\).</li>
 </ol>
 <h1><a class="anchor" id="src_geometryRTheta_time_solver__Implicit_predictor-corrector"></a>
@@ -153,8 +152,8 @@ Implicit predictor-corrector</h1>
 <p>This method is a second order implicit predictor-corrector: for \(n\geq 0\),</p>
 <p>Prediction:</p>
 <ol type="1">
-<li>From \(\rho^n\), we compute \(\phi^n\) with the Poisson equation (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
-<li>From \(\phi^n\), we compute \(E^n\) by deriving (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
+<li>From \(\rho^n\), we compute \(\phi^n\) with the Poisson-like equation (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
+<li>From \(\phi^n\), we compute \(E^n\) by deriving (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
 <li>From \(\rho^n \text{ and } A^n\), we compute \(\rho^P\) by advecting (<a class="el" href="classIAdvectionRP.html" title="Define the base class of 2D advection operators in polar domain.">IAdvectionRP</a>) on \(\frac{dt}{2}\);<ul>
 <li>We write \(X^P\) the characteristic feet such that it is the result of the implicit method: <p class="formulaDsp">
 \[\partial_t X^k = \frac{A^n(X^n) + A^n(X^{k-1})}{2}, \qquad X^k = X^n - \frac{dt}{2} \partial_t X^k. \]
@@ -165,8 +164,8 @@ Implicit predictor-corrector</h1>
 </ol>
 <p>Correction:</p>
 <ol type="1">
-<li>From \(\rho^{P}\), we compute \(\phi^{P}\) with the Poisson equation (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
-<li>From \(\phi^{P}\), we compute \(E^{P}\) by deriving (<a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>);</li>
+<li>From \(\rho^{P}\), we compute \(\phi^{P}\) with the Poisson-like equation (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
+<li>From \(\phi^{P}\), we compute \(E^{P}\) by deriving (<a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>);</li>
 <li>From \(\rho^n \text{ and } A^{P}\), we compute \(\rho^{C} = \rho^{n+1}\) by advecting (<a class="el" href="classIAdvectionRP.html" title="Define the base class of 2D advection operators in polar domain.">IAdvectionRP</a>) on \(dt\).<ul>
 <li>We write \(X^C\) the characteristic feet such that it is the result of the implicit method: <p class="formulaDsp">
 \[\partial_t X^k = \frac{A^P(X^n) + A^P(X^{k-1})}{2}, \qquad X^k = X^n - dt \partial_t X^k. \]
@@ -177,7 +176,7 @@ Implicit predictor-corrector</h1>
 </ol>
 <h1><a class="anchor" id="src_geometryRTheta_time_solver__References"></a>
 References</h1>
-<p>[1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
+<p>[1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the
 method of characteristics and spline finite elements", <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>, Journal of Computational Physics, 2019.</p>
 <h1><a class="anchor" id="src_geometryRTheta_time_solver__Contents"></a>
 Contents</h1>

@@ -6,9 +6,6 @@ var classPolarBSplines =
     [ "DimR", "classPolarBSplines.html#a36f25fbe8494742d19c56b2940498c8d", null ],
     [ "DimP", "classPolarBSplines.html#a07b201e46fe1f666019ca6a9f85b5c1a", null ],
     [ "discrete_dimension_type", "classPolarBSplines.html#ad482878a50c6e37c0d5b453a93a7e4da", null ],
-    [ "discrete_element_type", "classPolarBSplines.html#a916799a5095e2fe849b9ac43ff7541c6", null ],
-    [ "discrete_domain_type", "classPolarBSplines.html#a9a888a2594104eb3856635483b02eef4", null ],
-    [ "discrete_vector_type", "classPolarBSplines.html#af310fcd36f0c590def11db28f5dab54d", null ],
     [ "tensor_product_discrete_element_type", "classPolarBSplines.html#a702d43d6d57622232401eca237f82bfe", null ],
     [ "tensor_product_discrete_domain_type", "classPolarBSplines.html#a80fbb43730f6b755755d7641f727a93d", null ],
     [ "tensor_product_discrete_vector_type", "classPolarBSplines.html#a94827b147e44e22abf6169d1aaf131a6", null ]

@@ -114,15 +114,11 @@ $(document).ready(function(){initNavTree('classGeometryXYVxVy.html',''); initRes
 Public Types</h2></td></tr>
 <tr class="memitem:a9478473d2c2f743cbd876536fb40fcc0"><td class="memTemplParams" colspan="2"><a id="a9478473d2c2f743cbd876536fb40fcc0"></a>
 template&lt;class T &gt; </td></tr>
-<tr class="memitem:a9478473d2c2f743cbd876536fb40fcc0"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">velocity_dim_for</a> = std::conditional_t&lt; std::is_same_v&lt; T, IDimX &gt;, IDimVx, std::conditional_t&lt; std::is_same_v&lt; T, IDimY &gt;, IDimVy, void &gt; &gt;</td></tr>
+<tr class="memitem:a9478473d2c2f743cbd876536fb40fcc0"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">velocity_dim_for</a> = std::conditional_t&lt; std::is_same_v&lt; T, <a class="el" href="structIDimX.html">IDimX</a> &gt;, <a class="el" href="structIDimVx.html">IDimVx</a>, std::conditional_t&lt; std::is_same_v&lt; T, <a class="el" href="structIDimY.html">IDimY</a> &gt;, <a class="el" href="structIDimVy.html">IDimVy</a>, void &gt; &gt;</td></tr>
 <tr class="memdesc:a9478473d2c2f743cbd876536fb40fcc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A templated type giving the velocity discrete dimension type associated to a spatial discrete dimension type. <br /></td></tr>
 <tr class="separator:a9478473d2c2f743cbd876536fb40fcc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9be0f111d79a4e10d3bc86050fc28f57"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometryXYVxVy.html#a9be0f111d79a4e10d3bc86050fc28f57">DDimSp</a> = <a class="el" href="classSpeciesInformation.html">IDimSp</a></td></tr>
-<tr class="memdesc:a9be0f111d79a4e10d3bc86050fc28f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">A templated type giving the spatial discrete dimension type associated to a velocity discrete dimension type.  <a href="classGeometryXYVxVy.html#a9be0f111d79a4e10d3bc86050fc28f57">More...</a><br /></td></tr>
-<tr class="separator:a9be0f111d79a4e10d3bc86050fc28f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93e46a882dc277945ed3d50d7cb892ad"><td class="memItemLeft" align="right" valign="top"><a id="a93e46a882dc277945ed3d50d7cb892ad"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">SpatialDDom</a> = IDomainXY</td></tr>
-<tr class="memdesc:a93e46a882dc277945ed3d50d7cb892ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">An alias for the spatial discrete domain type. <br /></td></tr>
+<tr class="memitem:a93e46a882dc277945ed3d50d7cb892ad"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">SpatialDDom</a> = IDomainXY</td></tr>
+<tr class="memdesc:a93e46a882dc277945ed3d50d7cb892ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">A templated type giving the spatial discrete dimension type associated to a velocity discrete dimension type.  <a href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">More...</a><br /></td></tr>
 <tr class="separator:a93e46a882dc277945ed3d50d7cb892ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32ca2463cf7921342f7816c97121eddb"><td class="memItemLeft" align="right" valign="top"><a id="a32ca2463cf7921342f7816c97121eddb"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometryXYVxVy.html#a32ca2463cf7921342f7816c97121eddb">VelocityDDom</a> = IDomainVxVy</td></tr>
@@ -146,29 +142,12 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">GeometryXYVxVy::velocity_dim_for</a> =  std::conditional_t&lt; std::is_same_v&lt;T, IDimX&gt;, IDimVx, std::conditional_t&lt;std::is_same_v&lt;T, IDimY&gt;, IDimVy, void&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">GeometryXYVxVy::velocity_dim_for</a> =  std::conditional_t&lt; std::is_same_v&lt;T, <a class="el" href="structIDimX.html">IDimX</a>&gt;, <a class="el" href="structIDimVx.html">IDimVx</a>, std::conditional_t&lt;std::is_same_v&lt;T, <a class="el" href="structIDimY.html">IDimY</a>&gt;, <a class="el" href="structIDimVy.html">IDimVy</a>, void&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>A templated type giving the velocity discrete dimension type associated to a spatial discrete dimension type. </p>
-
-</div>
-</div>
-<a id="a9be0f111d79a4e10d3bc86050fc28f57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9be0f111d79a4e10d3bc86050fc28f57">&#9670;&nbsp;</a></span>DDimSp</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classGeometryXYVxVy.html#a9be0f111d79a4e10d3bc86050fc28f57">GeometryXYVxVy::DDimSp</a> =  <a class="el" href="classSpeciesInformation.html">IDimSp</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A templated type giving the spatial discrete dimension type associated to a velocity discrete dimension type. </p>
-<p>An alias for species "discrete dimension" type. </p>
 
 </div>
 </div>
@@ -184,6 +163,7 @@ template&lt;class T &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>A templated type giving the spatial discrete dimension type associated to a velocity discrete dimension type. </p>
 <p>An alias for the spatial discrete domain type. </p>
 
 </div>

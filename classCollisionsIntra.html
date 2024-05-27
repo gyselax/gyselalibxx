@@ -123,6 +123,12 @@ Inheritance diagram for CollisionsIntra:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCollisionsIntra_1_1ghosted__vx__point__sampling.html">ghosted_vx_point_sampling</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A conditional type representing either a uniform or a non-uniform ghosted vx mesh.  <a href="structCollisionsIntra_1_1ghosted__vx__point__sampling.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCollisionsIntra_1_1ghosted__vx__staggered__point__sampling.html">ghosted_vx_staggered_point_sampling</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A conditional type representing either a uniform or a non-uniform ghosted staggered vx mesh.  <a href="structCollisionsIntra_1_1ghosted__vx__staggered__point__sampling.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:structCollisionsIntra_1_1GhostedVx"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx">GhostedVx</a></td></tr>
 <tr class="memdesc:structCollisionsIntra_1_1GhostedVx"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct representing a tag to construct a mesh with ghosted points.  <a href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx">More...</a><br /></td></tr>
 <tr class="separator:structCollisionsIntra_1_1GhostedVx"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,36 +138,28 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a48b47bcef17a6eacebe77247026b8524"><td class="memItemLeft" align="right" valign="top"><a id="a48b47bcef17a6eacebe77247026b8524"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524">ghosted_vx_point_sampling</a> = std::conditional_t&lt; uniform_edge_v, ddc::UniformPointSampling&lt; <a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx">GhostedVx</a> &gt;, ddc::NonUniformPointSampling&lt; <a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx">GhostedVx</a> &gt; &gt;</td></tr>
-<tr class="memdesc:a48b47bcef17a6eacebe77247026b8524"><td class="mdescLeft">&#160;</td><td class="mdescRight">A conditional type representing either a uniform or a non-uniform ghosted vx mesh. <br /></td></tr>
-<tr class="separator:a48b47bcef17a6eacebe77247026b8524"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10027e09096499cca4d7b2dda2afa60d"><td class="memItemLeft" align="right" valign="top"><a id="a10027e09096499cca4d7b2dda2afa60d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a10027e09096499cca4d7b2dda2afa60d">ghosted_vx_staggered_point_sampling</a> = std::conditional_t&lt; uniform_edge_v, ddc::UniformPointSampling&lt; <a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVxStaggered">GhostedVxStaggered</a> &gt;, ddc::NonUniformPointSampling&lt; <a class="el" href="classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVxStaggered">GhostedVxStaggered</a> &gt; &gt;</td></tr>
-<tr class="memdesc:a10027e09096499cca4d7b2dda2afa60d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A conditional type representing either a uniform or a non-uniform ghosted staggered vx mesh. <br /></td></tr>
-<tr class="separator:a10027e09096499cca4d7b2dda2afa60d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b9b6393f5916d8c0800619c8e61f72e"><td class="memItemLeft" align="right" valign="top"><a id="a0b9b6393f5916d8c0800619c8e61f72e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e">IDomainSpXVx_ghosted</a> = ddc::DiscreteDomain&lt; <a class="el" href="classSpeciesInformation.html">IDimSp</a>, IDimX, <a class="el" href="classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524">ghosted_vx_point_sampling</a> &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e">IDomainSpXVx_ghosted</a> = ddc::DiscreteDomain&lt; <a class="el" href="structIDimSp.html">IDimSp</a>, <a class="el" href="structIDimX.html">IDimX</a>, <a class="el" href="structCollisionsIntra_1_1ghosted__vx__point__sampling.html">ghosted_vx_point_sampling</a> &gt;</td></tr>
 <tr class="memdesc:a0b9b6393f5916d8c0800619c8e61f72e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a mesh for species, space and ghosted vx mesh. <br /></td></tr>
 <tr class="separator:a0b9b6393f5916d8c0800619c8e61f72e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d4250ba0b147a7cef591f7c59d3dfdb"><td class="memItemLeft" align="right" valign="top"><a id="a4d4250ba0b147a7cef591f7c59d3dfdb"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a4d4250ba0b147a7cef591f7c59d3dfdb">IDomainSpXVx_ghosted_staggered</a> = ddc::DiscreteDomain&lt; <a class="el" href="classSpeciesInformation.html">IDimSp</a>, IDimX, <a class="el" href="classCollisionsIntra.html#a10027e09096499cca4d7b2dda2afa60d">ghosted_vx_staggered_point_sampling</a> &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a4d4250ba0b147a7cef591f7c59d3dfdb">IDomainSpXVx_ghosted_staggered</a> = ddc::DiscreteDomain&lt; <a class="el" href="structIDimSp.html">IDimSp</a>, <a class="el" href="structIDimX.html">IDimX</a>, <a class="el" href="structCollisionsIntra_1_1ghosted__vx__staggered__point__sampling.html">ghosted_vx_staggered_point_sampling</a> &gt;</td></tr>
 <tr class="memdesc:a4d4250ba0b147a7cef591f7c59d3dfdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a mesh for species, space and ghosted staggered vx mesh. <br /></td></tr>
 <tr class="separator:a4d4250ba0b147a7cef591f7c59d3dfdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafd4699b36713534bcb92d914a0aa858"><td class="memItemLeft" align="right" valign="top"><a id="aafd4699b36713534bcb92d914a0aa858"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#aafd4699b36713534bcb92d914a0aa858">IndexVx_ghosted</a> = ddc::DiscreteElement&lt; <a class="el" href="classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524">ghosted_vx_point_sampling</a> &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#aafd4699b36713534bcb92d914a0aa858">IndexVx_ghosted</a> = ddc::DiscreteElement&lt; <a class="el" href="structCollisionsIntra_1_1ghosted__vx__point__sampling.html">ghosted_vx_point_sampling</a> &gt;</td></tr>
 <tr class="memdesc:aafd4699b36713534bcb92d914a0aa858"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a ghosted vx index. <br /></td></tr>
 <tr class="separator:aafd4699b36713534bcb92d914a0aa858"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c4e465ab60fe9da737ad3730965a3bd"><td class="memItemLeft" align="right" valign="top"><a id="a3c4e465ab60fe9da737ad3730965a3bd"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a3c4e465ab60fe9da737ad3730965a3bd">IndexVx_ghosted_staggered</a> = ddc::DiscreteElement&lt; <a class="el" href="classCollisionsIntra.html#a10027e09096499cca4d7b2dda2afa60d">ghosted_vx_staggered_point_sampling</a> &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a3c4e465ab60fe9da737ad3730965a3bd">IndexVx_ghosted_staggered</a> = ddc::DiscreteElement&lt; <a class="el" href="structCollisionsIntra_1_1ghosted__vx__staggered__point__sampling.html">ghosted_vx_staggered_point_sampling</a> &gt;</td></tr>
 <tr class="memdesc:a3c4e465ab60fe9da737ad3730965a3bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a ghosted staggered vx index. <br /></td></tr>
 <tr class="separator:a3c4e465ab60fe9da737ad3730965a3bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03cc4113e786ec36151aa361cb1b1945"><td class="memItemLeft" align="right" valign="top"><a id="a03cc4113e786ec36151aa361cb1b1945"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a03cc4113e786ec36151aa361cb1b1945">IndexSpXVx_ghosted</a> = ddc::DiscreteElement&lt; <a class="el" href="classSpeciesInformation.html">IDimSp</a>, IDimX, <a class="el" href="classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524">ghosted_vx_point_sampling</a> &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a03cc4113e786ec36151aa361cb1b1945">IndexSpXVx_ghosted</a> = ddc::DiscreteElement&lt; <a class="el" href="structIDimSp.html">IDimSp</a>, <a class="el" href="structIDimX.html">IDimX</a>, <a class="el" href="structCollisionsIntra_1_1ghosted__vx__point__sampling.html">ghosted_vx_point_sampling</a> &gt;</td></tr>
 <tr class="memdesc:a03cc4113e786ec36151aa361cb1b1945"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a species, space and ghosted vx index. <br /></td></tr>
 <tr class="separator:a03cc4113e786ec36151aa361cb1b1945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c6cb4669bc2fc8a808ec91866d06625"><td class="memItemLeft" align="right" valign="top"><a id="a4c6cb4669bc2fc8a808ec91866d06625"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a4c6cb4669bc2fc8a808ec91866d06625">IndexSpXVx_ghosted_staggered</a> = ddc::DiscreteElement&lt; <a class="el" href="classSpeciesInformation.html">IDimSp</a>, IDimX, <a class="el" href="classCollisionsIntra.html#a10027e09096499cca4d7b2dda2afa60d">ghosted_vx_staggered_point_sampling</a> &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a4c6cb4669bc2fc8a808ec91866d06625">IndexSpXVx_ghosted_staggered</a> = ddc::DiscreteElement&lt; <a class="el" href="structIDimSp.html">IDimSp</a>, <a class="el" href="structIDimX.html">IDimX</a>, <a class="el" href="structCollisionsIntra_1_1ghosted__vx__staggered__point__sampling.html">ghosted_vx_staggered_point_sampling</a> &gt;</td></tr>
 <tr class="memdesc:a4c6cb4669bc2fc8a808ec91866d06625"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a species, space and ghosted staggered vx index. <br /></td></tr>
 <tr class="separator:a4c6cb4669bc2fc8a808ec91866d06625"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -176,13 +174,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6b18fb17a213025672de06d8d6b7cee8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8">get_nustar0</a> () const</td></tr>
 <tr class="memdesc:a6b18fb17a213025672de06d8d6b7cee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the collision coefficient.  <a href="classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8">More...</a><br /></td></tr>
 <tr class="separator:a6b18fb17a213025672de06d8d6b7cee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d0cc51fe8429d6f21e5174b8e3f47b3"><td class="memItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; <a class="el" href="classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524">ghosted_vx_point_sampling</a> &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a4d0cc51fe8429d6f21e5174b8e3f47b3">get_gridvx_ghosted</a> () const</td></tr>
+<tr class="memitem:a4d0cc51fe8429d6f21e5174b8e3f47b3"><td class="memItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; <a class="el" href="structCollisionsIntra_1_1ghosted__vx__point__sampling.html">ghosted_vx_point_sampling</a> &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a4d0cc51fe8429d6f21e5174b8e3f47b3">get_gridvx_ghosted</a> () const</td></tr>
 <tr class="memdesc:a4d0cc51fe8429d6f21e5174b8e3f47b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ghosted vx mesh used for computing finite differences centered derivatives.  <a href="classCollisionsIntra.html#a4d0cc51fe8429d6f21e5174b8e3f47b3">More...</a><br /></td></tr>
 <tr class="separator:a4d0cc51fe8429d6f21e5174b8e3f47b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a112f2e8ef15375f41b2e5b3b13574532"><td class="memItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; <a class="el" href="classCollisionsIntra.html#a10027e09096499cca4d7b2dda2afa60d">ghosted_vx_staggered_point_sampling</a> &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a112f2e8ef15375f41b2e5b3b13574532">get_gridvx_ghosted_staggered</a> () const</td></tr>
+<tr class="memitem:a112f2e8ef15375f41b2e5b3b13574532"><td class="memItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; <a class="el" href="structCollisionsIntra_1_1ghosted__vx__staggered__point__sampling.html">ghosted_vx_staggered_point_sampling</a> &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a112f2e8ef15375f41b2e5b3b13574532">get_gridvx_ghosted_staggered</a> () const</td></tr>
 <tr class="memdesc:a112f2e8ef15375f41b2e5b3b13574532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ghosted and staggered vx mesh used for computing finite differences centered derivatives.  <a href="classCollisionsIntra.html#a112f2e8ef15375f41b2e5b3b13574532">More...</a><br /></td></tr>
 <tr class="separator:a112f2e8ef15375f41b2e5b3b13574532"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d0d4a6ef673d1b08771b589e1522be0"><td class="memItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; <a class="el" href="classSpeciesInformation.html">IDimSp</a>, IDimX, <a class="el" href="classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524">ghosted_vx_point_sampling</a> &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a2d0d4a6ef673d1b08771b589e1522be0">get_mesh_ghosted</a> () const</td></tr>
+<tr class="memitem:a2d0d4a6ef673d1b08771b589e1522be0"><td class="memItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; <a class="el" href="structIDimSp.html">IDimSp</a>, <a class="el" href="structIDimX.html">IDimX</a>, <a class="el" href="structCollisionsIntra_1_1ghosted__vx__point__sampling.html">ghosted_vx_point_sampling</a> &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a2d0d4a6ef673d1b08771b589e1522be0">get_mesh_ghosted</a> () const</td></tr>
 <tr class="memdesc:a2d0d4a6ef673d1b08771b589e1522be0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a mesh containing the species, spatial and the ghosted vx mesh.  <a href="classCollisionsIntra.html#a2d0d4a6ef673d1b08771b589e1522be0">More...</a><br /></td></tr>
 <tr class="separator:a2d0d4a6ef673d1b08771b589e1522be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4792b1f4327c52726ab740f4c475bc40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a4792b1f4327c52726ab740f4c475bc40">compute_rhs_vector</a> (DSpanSpXVx RR, DViewSpXVx AA, DViewSpXVx BB, DViewSpXVx CC, DViewSpXVx allfdistribu, double fthresh) const</td></tr>
@@ -346,7 +344,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ddc::DiscreteDomain&lt;<a class="el" href="classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524">ghosted_vx_point_sampling</a>&gt; const&amp; CollisionsIntra::get_gridvx_ghosted </td>
+          <td class="memname">ddc::DiscreteDomain&lt;<a class="el" href="structCollisionsIntra_1_1ghosted__vx__point__sampling.html">ghosted_vx_point_sampling</a>&gt; const&amp; CollisionsIntra::get_gridvx_ghosted </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -366,7 +364,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ddc::DiscreteDomain&lt;<a class="el" href="classCollisionsIntra.html#a10027e09096499cca4d7b2dda2afa60d">ghosted_vx_staggered_point_sampling</a>&gt; const&amp; CollisionsIntra::get_gridvx_ghosted_staggered </td>
+          <td class="memname">ddc::DiscreteDomain&lt;<a class="el" href="structCollisionsIntra_1_1ghosted__vx__staggered__point__sampling.html">ghosted_vx_staggered_point_sampling</a>&gt; const&amp; CollisionsIntra::get_gridvx_ghosted_staggered </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -386,7 +384,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ddc::DiscreteDomain&lt;<a class="el" href="classSpeciesInformation.html">IDimSp</a>, IDimX, <a class="el" href="classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524">ghosted_vx_point_sampling</a>&gt; const&amp; CollisionsIntra::get_mesh_ghosted </td>
+          <td class="memname">ddc::DiscreteDomain&lt;<a class="el" href="structIDimSp.html">IDimSp</a>, <a class="el" href="structIDimX.html">IDimX</a>, <a class="el" href="structCollisionsIntra_1_1ghosted__vx__point__sampling.html">ghosted_vx_point_sampling</a>&gt; const&amp; CollisionsIntra::get_mesh_ghosted </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

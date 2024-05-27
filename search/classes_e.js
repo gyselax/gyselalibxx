@@ -1,25 +1,11 @@
 var searchData=
 [
-  ['rbasissubset_610',['RBasisSubset',['../classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1RBasisSubset',1,'PolarSplineFEMPoissonSolver']]],
-  ['rcelldim_611',['RCellDim',['../classPolarSplineFEMPoissonSolver.html#structPolarSplineFEMPoissonSolver_1_1RCellDim',1,'PolarSplineFEMPoissonSolver']]],
-  ['rdimp_612',['RDimP',['../structRDimP.html',1,'']]],
-  ['rdimprefined_613',['RDimPRefined',['../structRefinedDiscreteToCartesian_1_1RDimPRefined.html',1,'RefinedDiscreteToCartesian']]],
-  ['rdimr_614',['RDimR',['../structRDimR.html',1,'']]],
-  ['rdimrrefined_615',['RDimRRefined',['../structRefinedDiscreteToCartesian_1_1RDimRRefined.html',1,'RefinedDiscreteToCartesian']]],
-  ['rdimt_616',['RDimT',['../structRDimT.html',1,'']]],
-  ['rdimvp_617',['RDimVp',['../structRDimVp.html',1,'']]],
-  ['rdimvr_618',['RDimVr',['../structRDimVr.html',1,'']]],
-  ['rdimvx_619',['RDimVx',['../structRDimVx.html',1,'']]],
-  ['rdimvy_620',['RDimVy',['../structRDimVy.html',1,'']]],
-  ['rdimx_621',['RDimX',['../structRDimX.html',1,'']]],
-  ['rdimxrefined_622',['RDimXRefined',['../structRefinedDiscreteToCartesian_1_1RDimXRefined.html',1,'RefinedDiscreteToCartesian']]],
-  ['rdimy_623',['RDimY',['../structRDimY.html',1,'']]],
-  ['rdimyrefined_624',['RDimYRefined',['../structRefinedDiscreteToCartesian_1_1RDimYRefined.html',1,'RefinedDiscreteToCartesian']]],
-  ['refineddiscretetocartesian_625',['RefinedDiscreteToCartesian',['../classRefinedDiscreteToCartesian.html',1,'']]],
-  ['restartinitialization_626',['RestartInitialization',['../classRestartInitialization.html',1,'']]],
-  ['rk2_627',['RK2',['../classRK2.html',1,'']]],
-  ['rk3_628',['RK3',['../classRK3.html',1,'']]],
-  ['rk4_629',['RK4',['../classRK4.html',1,'']]],
-  ['rotationadvectionfieldsimulation_630',['RotationAdvectionFieldSimulation',['../classRotationAdvectionFieldSimulation.html',1,'']]],
-  ['rotationsimulation_631',['RotationSimulation',['../classRotationSimulation.html',1,'']]]
+  ['qdimp_683',['QDimP',['../structPolarSplineFEMPoissonLikeSolver_1_1QDimP.html',1,'PolarSplineFEMPoissonLikeSolver']]],
+  ['qdimpmesh_684',['QDimPMesh',['../structPolarSplineFEMPoissonLikeSolver_1_1QDimPMesh.html',1,'PolarSplineFEMPoissonLikeSolver']]],
+  ['qdimr_685',['QDimR',['../structPolarSplineFEMPoissonLikeSolver_1_1QDimR.html',1,'PolarSplineFEMPoissonLikeSolver']]],
+  ['qdimrmesh_686',['QDimRMesh',['../structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html',1,'PolarSplineFEMPoissonLikeSolver']]],
+  ['qdimx_687',['QDimX',['../classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX',1,'FemNonPeriodicPoissonSolver::QDimX'],['../classFemPeriodicPoissonSolver.html#structFemPeriodicPoissonSolver_1_1QDimX',1,'FemPeriodicPoissonSolver::QDimX']]],
+  ['qmeshx_688',['QMeshX',['../structFemNonPeriodicPoissonSolver_1_1QMeshX.html',1,'FemNonPeriodicPoissonSolver::QMeshX'],['../structFemPeriodicPoissonSolver_1_1QMeshX.html',1,'FemPeriodicPoissonSolver::QMeshX']]],
+  ['quadrature_689',['Quadrature',['../classQuadrature.html',1,'']]],
+  ['quadrature_3c_20idimvx_20_3e_690',['Quadrature&lt; IDimVx &gt;',['../classQuadrature.html',1,'']]]
 ];

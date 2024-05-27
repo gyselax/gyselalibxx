@@ -259,7 +259,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="comment">// computation of the integrals over the Vx direction</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    IDomainSpX grid_sp_x(allfdistribu.domain&lt;<a class="code" href="classSpeciesInformation.html">IDimSp</a>, IDimX&gt;());</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    IDomainSpX grid_sp_x(allfdistribu.domain&lt;<a class="code" href="structIDimSp.html">IDimSp</a>, <a class="code" href="structIDimX.html">IDimX</a>&gt;());</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    DFieldSpX I0mean_alloc(grid_sp_x);</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    DFieldSpX I1mean_alloc(grid_sp_x);</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    DFieldSpX I2mean_alloc(grid_sp_x);</div>
@@ -280,7 +280,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            grid_sp_x,</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            KOKKOS_LAMBDA(IndexSpX <span class="keyword">const</span> ispx) {</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                <span class="keywordflow">for</span> (IndexVx <span class="keyword">const</span> ivx : allfdistribu.domain&lt;IDimVx&gt;()) {</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                <span class="keywordflow">for</span> (IndexVx <span class="keyword">const</span> ivx : allfdistribu.domain&lt;<a class="code" href="structIDimVx.html">IDimVx</a>&gt;()) {</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                    I0mean(ispx) += quadrature_coeffs(ivx) * I0mean_integrand(ispx, ivx);</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                    I1mean(ispx) += quadrature_coeffs(ivx) * I1mean_integrand(ispx, ivx);</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                    I2mean(ispx) += quadrature_coeffs(ivx) * I2mean_integrand(ispx, ivx);</div>
@@ -336,7 +336,9 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        DViewSpX density,</div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        DViewSpX mean_velocity,</div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        DViewSpX temperature);</div>
-<div class="ttc" id="aclassSpeciesInformation_html"><div class="ttname"><a href="classSpeciesInformation.html">SpeciesInformation</a></div><div class="ttdoc">Species discrete dimension to access constant attributes related to species.</div><div class="ttdef"><b>Definition:</b> species_info.hpp:9</div></div>
+<div class="ttc" id="astructIDimSp_html"><div class="ttname"><a href="structIDimSp.html">IDimSp</a></div><div class="ttdef"><b>Definition:</b> species_info.hpp:138</div></div>
+<div class="ttc" id="astructIDimVx_html"><div class="ttname"><a href="structIDimVx.html">IDimVx</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:596</div></div>
+<div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:589</div></div>
 <div class="ttc" id="atrapezoid__quadrature_8hpp_html"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a></div><div class="ttdoc">File providing quadrature coefficients via the trapezoidal method.</div></div>
 <div class="ttc" id="atrapezoid__quadrature_8hpp_html_a9b37968b97363d75ad6401309016c8f9"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#a9b37968b97363d75ad6401309016c8f9">trapezoid_quadrature_coefficients</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; ODims... &gt; &gt; trapezoid_quadrature_coefficients(ddc::DiscreteDomain&lt; ODims... &gt; const &amp;domain)</div><div class="ttdoc">Get the trapezoid coefficients in ND.</div><div class="ttdef"><b>Definition:</b> trapezoid_quadrature.hpp:54</div></div>
 </div><!-- fragment --></div><!-- contents -->

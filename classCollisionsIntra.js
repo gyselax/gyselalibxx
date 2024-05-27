@@ -1,9 +1,9 @@
 var classCollisionsIntra =
 [
+    [ "ghosted_vx_point_sampling", "structCollisionsIntra_1_1ghosted__vx__point__sampling.html", null ],
+    [ "ghosted_vx_staggered_point_sampling", "structCollisionsIntra_1_1ghosted__vx__staggered__point__sampling.html", null ],
     [ "GhostedVx", "classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVx", null ],
     [ "GhostedVxStaggered", "classCollisionsIntra.html#structCollisionsIntra_1_1GhostedVxStaggered", null ],
-    [ "ghosted_vx_point_sampling", "classCollisionsIntra.html#a48b47bcef17a6eacebe77247026b8524", null ],
-    [ "ghosted_vx_staggered_point_sampling", "classCollisionsIntra.html#a10027e09096499cca4d7b2dda2afa60d", null ],
     [ "IDomainSpXVx_ghosted", "classCollisionsIntra.html#a0b9b6393f5916d8c0800619c8e61f72e", null ],
     [ "IDomainSpXVx_ghosted_staggered", "classCollisionsIntra.html#a4d4250ba0b147a7cef591f7c59d3dfdb", null ],
     [ "IndexVx_ghosted", "classCollisionsIntra.html#aafd4699b36713534bcb92d914a0aa858", null ],

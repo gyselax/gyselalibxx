@@ -22,7 +22,7 @@ var src_geometryRTheta =
     ] ],
     [ "Spline interpolator in polar coordinates", "src_geometryRTheta_interpolation.html", null ],
     [ "Polar Poisson solver", "src_geometryRTheta_poisson.html", [
-      [ "The Poisson equation", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__The_Poisson_equation", null ],
+      [ "The Poisson-like equation", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__The_Poisson-like_equation", null ],
       [ "Unit tests", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Unit_tests", null ],
       [ "References", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__References", null ],
       [ "Contents", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Contents", null ]

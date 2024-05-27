@@ -113,15 +113,15 @@ Guiding center case</h1>
 \[\partial_t \rho + A\cdot\nabla \rho = 0, \\ A = E \wedge e_z, \\ E = - \nabla \phi, \\ - \nabla \cdot \nabla \phi = \rho, \]
 </p>
 <p> with \(\rho\) the density, \(\phi\) the electrostatic potential and \(E\) the electrical field.</p>
-<p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> computes the advection field \(A\) from the electrical field \(\phi\) returned by the <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a>. It has two types of <code>operator()</code>:</p><ul>
+<p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> computes the advection field \(A\) from the electrical field \(\phi\) returned by the <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a>. It has two types of <code>operator()</code>:</p><ul>
 <li>one returning the advection field along the axis of the physical domain: \(A = (A_x, A_y)\)</li>
 <li>and the another returning the advection field along the axis of the logical domain: \(A = (A_r, A_\theta)\).</li>
 </ul>
-<p>The <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a> can return the solution \(\phi\) of the Poisson equation under two forms:</p><ul>
+<p>The <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a> can return the solution \(\phi\) of the PDE under two forms:</p><ul>
 <li>a Chunk of values of the solution on the mesh points of the grid;</li>
 <li>a <a class="el" href="structPolarSpline.html" title="A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.">PolarSpline</a> representation of the solution.</li>
 </ul>
-<p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> can handle as input the two forms. If a Chunk is given as input, it computes the spline representation (on the cross-product of two 1D bases) using a SplineBuilder2D. The spline representation is needed to compute the derivatives of the function \(\phi\). If the <a class="el" href="structPolarSpline.html" title="A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.">PolarSpline</a> representation is given as input, it can directly compute the derivatives of the function \(\phi\).</p>
+<p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> can handle as input the two forms. If a Chunk is given as input, it computes the spline representation (on the cross-product of two 1D bases) using a SplineBuilder2D. The spline representation is needed to compute the derivatives of the function \(\phi\). If the <a class="el" href="structPolarSpline.html" title="A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.">PolarSpline</a> representation is given as input, it can directly compute the derivatives of the function \(\phi\).</p>
 <p>Once the advection field computed, it is given as input to the <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> operator to advect the density \(\rho\) function. The <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> operator can handle the advection with an advection field along \((x,y)\) and with an advection field along \((r,\theta)\). But as the <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> operator advects in the physical domain, it is recommend to work with the advection field along \((x,y)\).</p>
 <h3><a class="anchor" id="autotoc_md38"></a>
 Advection field along the physical domain axis</h3>
@@ -206,7 +206,7 @@ method of characteristics and spline finite elements", <a href="https://doi.org/
 <h1><a class="anchor" id="autotoc_md43"></a>
 Contents</h1>
 <ul>
-<li><a class="el" href="advection__field__rp_8hpp_source.html">advection_field_rp.hpp</a> : containing <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> with the advection field computation for the guiding center simulation. </li>
+<li><a class="el" href="advection__field__rp_8hpp_source.html">advection_field_rp.hpp</a> : containing <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> with the advection field computation for the guiding center simulation. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

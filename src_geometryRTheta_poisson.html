@@ -103,8 +103,8 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_poisson.html',''); 
 <div class="title">Polar Poisson solver </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="src_geometryRTheta_poisson__The_Poisson_equation"></a>
-The Poisson equation</h1>
+<div class="textblock"><h1><a class="anchor" id="src_geometryRTheta_poisson__The_Poisson-like_equation"></a>
+The Poisson-like equation</h1>
 <p>(For more details, see Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
 in the 5D GYSELA Code". December 2022.)</p>
 <p>The equation we are solving here is</p>
@@ -112,7 +112,7 @@ in the 5D GYSELA Code". December 2022.)</p>
 \[L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho \]
 </p>
 <p> with the boundary condition \(\phi = 0\), on \(\partial \Omega\).</p>
-<p>To solve this equation, the <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a> uses a finite element method on the B-splines.</p>
+<p>To solve this equation, the <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a> uses a finite element method on the B-splines.</p>
 <h3><a class="anchor" id="autotoc_md49"></a>
 B-splines FEM</h3>
 <h4><a class="anchor" id="autotoc_md50"></a>
@@ -129,7 +129,7 @@ Treatment of the O-point</h4>
 <p>The B-splines with the treatment of the O-point, are called <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a> and are written \(\{\hat{B}_l\}_l\).</p>
 <h4><a class="anchor" id="autotoc_md52"></a>
 Weak formulation</h4>
-<p>The Poisson equation is solved by solving its weak form:</p>
+<p>The Poisson-like equation is solved by solving its weak form:</p>
 <p class="formulaDsp">
 \[\int_{\Omega} \lbrack \beta(r) \phi(r,\theta) \hat{B}_l(r,\theta) + \alpha(r) \nabla \phi(r,\theta) \cdot \nabla \hat{B}_l(r,\theta) \rbrack |det(J_{\mathcal{F}}(r,\theta))| dr d\theta = \int_{\Omega} \rho(r,\theta) \hat{B}_l(r,\theta) |det(J_{\mathcal{F}}(r,\theta))| dr d\theta \]
 </p>
@@ -152,7 +152,7 @@ Weak formulation</h4>
 <h1><a class="anchor" id="src_geometryRTheta_poisson__Unit_tests"></a>
 Unit tests</h1>
 <p>The test are implemented in the <code>tests/geometryRTheta/polar_poisson/</code> folder (<a class="el" href="tests_geometryRTheta_polar_poisson.html">Tests on the 2D polar poisson solver</a>).</p>
-<p>The <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a> is tested on a circular mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>) and on a Czarny mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>) with (the test cases are given in Emily Bourne's thesis [1])</p>
+<p>The <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a> is tested on a circular mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>) and on a Czarny mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>) with (the test cases are given in Emily Bourne's thesis [1])</p>
 <ul>
 <li>the Poisson coefficients:<ul>
 <li>\(\alpha(r) = \exp\left( - \tanh\left( \frac{r - r_p}{\delta_r} \right) \right)\), with \(r_p = 0.7\) and \(\delta_r = 0.05\),</li>
@@ -179,9 +179,9 @@ method of characteristics and spline finite elements", <a href="https://doi.org/
 <h1><a class="anchor" id="src_geometryRTheta_poisson__Contents"></a>
 Contents</h1>
 <ul>
-<li>ipoissonsolver.hpp : Define a base class for the Poisson solvers: <a class="el" href="classIPoissonSolver.html" title="Base class for Poisson solver.">IPoissonSolver</a>.</li>
-<li><a class="el" href="polarpoissonsolver_8hpp_source.html">polarpoissonsolver.hpp</a> : Define a Poisson solver using FEM on B-splines: <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a>.</li>
-<li><a class="el" href="poisson__rhs__function_8hpp_source.html">poisson_rhs_function.hpp</a> : Define a rhs object (<a class="el" href="classPoissonRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonRHSFunction</a>) for the Poisson equation (mainly used for vlasovpoissonsolver.hpp): <a class="el" href="classPoissonRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonRHSFunction</a>. </li>
+<li><a class="el" href="iqnsolver_8hpp_source.html">iqnsolver.hpp</a> : Define a base class for the Quasi-Neutrality solvers: <a class="el" href="classIQNSolver.html" title="Base class for a Quasi-Neutrality solver.">IQNSolver</a>.</li>
+<li><a class="el" href="polarpoissonlikesolver_8hpp_source.html">polarpoissonlikesolver.hpp</a> : Define a Poisson-like solver using FEM on B-splines: <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a>.</li>
+<li>poisson_rhs_function.hpp : Define a rhs object (<a class="el" href="classPoissonLikeRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonLikeRHSFunction</a>) for the Poisson-like equation (mainly used for vlasovpoissonsolver.hpp): <a class="el" href="classPoissonLikeRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonLikeRHSFunction</a>. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

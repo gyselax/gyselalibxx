@@ -121,9 +121,9 @@ Inheritance diagram for BslImplicitPredCorrRP&lt; Mapping, AdvectionDomain &gt;:
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad068d165e927773fc85c5b06c267ea2f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslImplicitPredCorrRP.html#ad068d165e927773fc85c5b06c267ea2f">BslImplicitPredCorrRP</a> (<a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;advection_domain, Mapping const &amp;mapping, <a class="el" href="classBslAdvectionRP.html">BslAdvectionRP</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; <a class="el" href="classEuler.html">EulerMethod</a>, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> &gt;, Mapping &gt; const &amp;advection_solver, IDomainRP const &amp;grid, SplineRPBuilder const &amp;builder, SplineRPEvaluatorNullBound const &amp;rhs_evaluator, <a class="el" href="classPolarSplineFEMPoissonSolver.html">PolarSplineFEMPoissonSolver</a> const &amp;poisson_solver, SplineRPEvaluatorConstBound const &amp;advection_evaluator)</td></tr>
-<tr class="memdesc:ad068d165e927773fc85c5b06c267ea2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classBslImplicitPredCorrRP.html" title="A second order implicit predictor-corrector for the Vlasov-Poisson equations.">BslImplicitPredCorrRP</a>.  <a href="classBslImplicitPredCorrRP.html#ad068d165e927773fc85c5b06c267ea2f">More...</a><br /></td></tr>
-<tr class="separator:ad068d165e927773fc85c5b06c267ea2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a500a260a92558a96592b8d63f2188f2f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslImplicitPredCorrRP.html#a500a260a92558a96592b8d63f2188f2f">BslImplicitPredCorrRP</a> (<a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;advection_domain, Mapping const &amp;mapping, <a class="el" href="classBslAdvectionRP.html">BslAdvectionRP</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; <a class="el" href="classEuler.html">EulerMethod</a>, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> &gt;, Mapping &gt; const &amp;advection_solver, IDomainRP const &amp;grid, SplineRPBuilder const &amp;builder, SplineRPEvaluatorNullBound const &amp;rhs_evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a> const &amp;poisson_solver, SplineRPEvaluatorConstBound const &amp;advection_evaluator)</td></tr>
+<tr class="memdesc:a500a260a92558a96592b8d63f2188f2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classBslImplicitPredCorrRP.html" title="A second order implicit predictor-corrector for the Vlasov-Poisson equations.">BslImplicitPredCorrRP</a>.  <a href="classBslImplicitPredCorrRP.html#a500a260a92558a96592b8d63f2188f2f">More...</a><br /></td></tr>
+<tr class="separator:a500a260a92558a96592b8d63f2188f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95d2b3c32e65fa9d2e08fcf2a05c83fb"><td class="memItemLeft" align="right" valign="top">DSpanRP&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslImplicitPredCorrRP.html#a95d2b3c32e65fa9d2e08fcf2a05c83fb">operator()</a> (DSpanRP allfdistribu, double const dt, int const steps) const</td></tr>
 <tr class="memdesc:a95d2b3c32e65fa9d2e08fcf2a05c83fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves on \( T = dt*N \) the equations system.  <a href="classBslImplicitPredCorrRP.html#a95d2b3c32e65fa9d2e08fcf2a05c83fb">More...</a><br /></td></tr>
 <tr class="separator:a95d2b3c32e65fa9d2e08fcf2a05c83fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,8 +150,8 @@ class BslImplicitPredCorrRP&lt; Mapping, AdvectionDomain &gt;</h3>
 <p>The second order implicit predictor-corrector is also detailed in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <p>for \( n \geq 0 \),</p>
 <p>First, it predicts:</p><ul>
-<li>1. From \(\rho^n\), it computes \(\phi^n\) with a <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a>;</li>
-<li>2. From \(\phi^n\), it computes \(A^n\) with a <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a>;</li>
+<li>1. From \(\rho^n\), it computes \(\phi^n\) with a <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a>;</li>
+<li>2. From \(\phi^n\), it computes \(A^n\) with a <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a>;</li>
 <li>3. From \(\rho^n\) and \(A^n\), it computes implicitly \(\rho^P\) with a <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> on \( \frac{dt}{4} \):<ul>
 <li>the characteristic feet \(X^P\) is such that \(X^P = X^k\) with \(X^k\) the result of the implicit method:<ul>
 <li>\( X^k = X^n - \frac{dt}{4} \partial_t X^k\).</li>
@@ -161,8 +161,8 @@ class BslImplicitPredCorrRP&lt; Mapping, AdvectionDomain &gt;</h3>
 </li>
 </ul>
 <p>Secondly, it corrects:</p><ul>
-<li>4. From \(\rho^P\), it computes \(\phi^P\) with a <a class="el" href="classPolarSplineFEMPoissonSolver.html" title="Define a polar Poisson solver.">PolarSplineFEMPoissonSolver</a>;</li>
-<li>5. From \(\phi^P\), it computes \(A^P\) with a <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a>;</li>
+<li>4. From \(\rho^P\), it computes \(\phi^P\) with a <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a>;</li>
+<li>5. From \(\phi^P\), it computes \(A^P\) with a <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a>;</li>
 <li>6. From \(\rho^n\) and \( A^{P} \), it computes \(\rho^{n+1}\) with a <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> on \( \frac{dt}{2} \).<ul>
 <li>the characteristic feet \(X^C\) is such that \(X^C = X^k\) with \(X^k\) the result of the implicit method:<ul>
 <li>\(\partial_t X^k = A^P(X^n) + A^P(X^{k-1}) \),</li>
@@ -181,8 +181,8 @@ class BslImplicitPredCorrRP&lt; Mapping, AdvectionDomain &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad068d165e927773fc85c5b06c267ea2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad068d165e927773fc85c5b06c267ea2f">&#9670;&nbsp;</a></span>BslImplicitPredCorrRP()</h2>
+<a id="a500a260a92558a96592b8d63f2188f2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a500a260a92558a96592b8d63f2188f2f">&#9670;&nbsp;</a></span>BslImplicitPredCorrRP()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -231,7 +231,7 @@ template&lt;class Mapping , class AdvectionDomain &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPolarSplineFEMPoissonSolver.html">PolarSplineFEMPoissonSolver</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a> const &amp;&#160;</td>
           <td class="paramname"><em>poisson_solver</em>, </td>
         </tr>
         <tr>
@@ -262,7 +262,7 @@ template&lt;class Mapping , class AdvectionDomain &gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">grid</td><td>The domain on which the functions are defined. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">builder</td><td>A spline builder to get the spline representation of the advection field and the rhs. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">rhs_evaluator</td><td>The evaluator of B-splines for the rhs. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">poisson_solver</td><td>The Poisson solver which computes the electrical potential. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">poisson_solver</td><td>The PDE solver which computes the electrical potential. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">advection_evaluator</td><td>An evaluator of B-splines for the spline advection field. </td></tr>
   </table>
   </dd>

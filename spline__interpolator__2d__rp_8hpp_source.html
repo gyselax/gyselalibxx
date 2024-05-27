@@ -115,16 +115,16 @@ $(document).ready(function(){initNavTree('spline__interpolator__2d__rp_8hpp_sour
 <div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classSplineInterpolatorRP.html#abe963c4d63a8d95b2d5401699305787f">   16</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classSplineInterpolatorRP.html#abe963c4d63a8d95b2d5401699305787f">evaluator_type</a> = ddc::SplineEvaluator2D&lt;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            Kokkos::DefaultHostExecutionSpace,</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            Kokkos::DefaultHostExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            BSplinesR,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            BSplinesP,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            IDimR,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            IDimP,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <a class="code" href="structBSplinesR.html">BSplinesR</a>,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <a class="code" href="structBSplinesP.html">BSplinesP</a>,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <a class="code" href="structIDimR.html">IDimR</a>,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <a class="code" href="structIDimP.html">IDimP</a>,</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            RadialExtrapolationRule,</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            RadialExtrapolationRule,</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            ddc::PeriodicExtrapolationRule&lt;RDimP&gt;,</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            ddc::PeriodicExtrapolationRule&lt;RDimP&gt;,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            IDimR,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            IDimP&gt;;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <a class="code" href="structIDimR.html">IDimR</a>,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <a class="code" href="structIDimP.html">IDimP</a>&gt;;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    SplineRPBuilder <span class="keyword">const</span>&amp; m_builder;</div>
@@ -180,16 +180,16 @@ $(document).ready(function(){initNavTree('spline__interpolator__2d__rp_8hpp_sour
 <div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorRP.html#abdf68fc355d1eb8329a511896febde4c">  106</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classPreallocatableSplineInterpolatorRP.html#abdf68fc355d1eb8329a511896febde4c">evaluator_type</a> = ddc::SplineEvaluator2D&lt;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            Kokkos::DefaultHostExecutionSpace,</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            Kokkos::DefaultHostExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            BSplinesR,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            BSplinesP,</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            IDimR,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            IDimP,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <a class="code" href="structBSplinesR.html">BSplinesR</a>,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <a class="code" href="structBSplinesP.html">BSplinesP</a>,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <a class="code" href="structIDimR.html">IDimR</a>,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <a class="code" href="structIDimP.html">IDimP</a>,</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            RadialExtrapolationRule,</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            RadialExtrapolationRule,</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            ddc::PeriodicExtrapolationRule&lt;RDimP&gt;,</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            ddc::PeriodicExtrapolationRule&lt;RDimP&gt;,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            IDimR,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            IDimP&gt;;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <a class="code" href="structIDimR.html">IDimR</a>,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <a class="code" href="structIDimP.html">IDimP</a>&gt;;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    SplineRPBuilder <span class="keyword">const</span>&amp; m_builder;</div>
@@ -223,6 +223,10 @@ $(document).ready(function(){initNavTree('spline__interpolator__2d__rp_8hpp_sour
 <div class="ttc" id="aclassSplineInterpolatorRP_html_a2963c57f391e96345b0ac6b4d44cbaf1"><div class="ttname"><a href="classSplineInterpolatorRP.html#a2963c57f391e96345b0ac6b4d44cbaf1">SplineInterpolatorRP::operator()</a></div><div class="ttdeci">DSpanRP operator()(DSpanRP const inout_data, ddc::ChunkSpan&lt; CoordRP const, IDomainRP &gt; const coordinates) const override</div><div class="ttdoc">Approximate the value of a function at a set of polar coordinates using the current values at a known...</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:68</div></div>
 <div class="ttc" id="aclassSplineInterpolatorRP_html_a527491e617038baf55192cd315f08187"><div class="ttname"><a href="classSplineInterpolatorRP.html#a527491e617038baf55192cd315f08187">SplineInterpolatorRP::SplineInterpolatorRP</a></div><div class="ttdeci">SplineInterpolatorRP(SplineRPBuilder const &amp;builder, evaluator_type const &amp;evaluator)</div><div class="ttdoc">Create a spline interpolator object.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:47</div></div>
 <div class="ttc" id="aclassSplineInterpolatorRP_html_abe963c4d63a8d95b2d5401699305787f"><div class="ttname"><a href="classSplineInterpolatorRP.html#abe963c4d63a8d95b2d5401699305787f">SplineInterpolatorRP::evaluator_type</a></div><div class="ttdeci">ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::DefaultHostExecutionSpace::memory_space, BSplinesR, BSplinesP, IDimR, IDimP, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; RDimP &gt;, ddc::PeriodicExtrapolationRule&lt; RDimP &gt;, IDimR, IDimP &gt; evaluator_type</div><div class="ttdoc">The type of the 2D Spline Evaluator used by this class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:28</div></div>
+<div class="ttc" id="astructBSplinesP_html"><div class="ttname"><a href="structBSplinesP.html">BSplinesP</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:69</div></div>
+<div class="ttc" id="astructBSplinesR_html"><div class="ttname"><a href="structBSplinesR.html">BSplinesR</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:62</div></div>
+<div class="ttc" id="astructIDimP_html"><div class="ttname"><a href="structIDimP.html">IDimP</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:101</div></div>
+<div class="ttc" id="astructIDimR_html"><div class="ttname"><a href="structIDimR.html">IDimR</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:94</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
