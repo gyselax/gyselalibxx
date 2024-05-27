@@ -29,7 +29,9 @@ using VectorField0D = VectorField<Datatype, DDom0D, Direction>;
 template <class Datatype>
 using VectorFieldSpan0D = VectorFieldSpan<Datatype, DDom0D, Direction>;
 
-struct DDimX;
+struct DDimX
+{
+};
 using DElemX = ddc::DiscreteElement<DDimX>;
 using DVectX = ddc::DiscreteVector<DDimX>;
 using DDomX = ddc::DiscreteDomain<DDimX>;
@@ -40,7 +42,9 @@ template <class Datatype>
 using VectorFieldSpanX = VectorFieldSpan<Datatype, DDomX, Direction>;
 
 
-struct DDimY;
+struct DDimY
+{
+};
 using DElemY = ddc::DiscreteElement<DDimY>;
 using DVectY = ddc::DiscreteVector<DDimY>;
 using DDomY = ddc::DiscreteDomain<DDimY>;
@@ -51,7 +55,9 @@ template <class Datatype>
 using VectorFieldSpanY = VectorFieldSpan<Datatype, DDomY, Direction>;
 
 
-struct DDimZ;
+struct DDimZ
+{
+};
 using DElemZ = ddc::DiscreteElement<DDimZ>;
 using DVectZ = ddc::DiscreteVector<DDimZ>;
 using DDomZ = ddc::DiscreteDomain<DDimZ>;

@@ -21,10 +21,14 @@
 
 namespace ddc {
 
+struct UniformPointSamplingBase
+{
+};
+
 /** UniformPointSampling models a uniform discretization of the provided continuous dimension
  */
 template <class CDim>
-class UniformPointSampling
+class UniformPointSampling : UniformPointSamplingBase
 {
 public:
     using continuous_dimension_type = CDim;
@@ -34,17 +38,11 @@ public:
 
     using discrete_dimension_type = UniformPointSampling;
 
-    using discrete_element_type = DiscreteElement<UniformPointSampling>;
-
-    using discrete_domain_type = DiscreteDomain<UniformPointSampling>;
-
-    using discrete_vector_type = DiscreteVector<UniformPointSampling>;
-
 public:
-    template <class MemorySpace>
+    template <class DDim, class MemorySpace>
     class Impl
     {
-        template <class OMemorySpace>
+        template <class ODDim, class OMemorySpace>
         friend class Impl;
 
     private:
@@ -55,12 +53,18 @@ public:
     public:
         using discrete_dimension_type = UniformPointSampling;
 
+        using discrete_domain_type = DiscreteDomain<DDim>;
+
+        using discrete_element_type = DiscreteElement<DDim>;
+
+        using discrete_vector_type = DiscreteVector<DDim>;
+
         Impl() = default;
 
         Impl(Impl const&) = delete;
 
         template <class OriginMemorySpace>
-        explicit Impl(Impl<OriginMemorySpace> const& impl)
+        explicit Impl(Impl<DDim, OriginMemorySpace> const& impl)
             : m_origin(impl.m_origin)
             , m_step(impl.m_step)
         {
@@ -113,15 +117,15 @@ public:
      * @param b coordinate of the last point of the domain
      * @param n number of points to map on the segment \f$[a, b]\f$ including a & b
      */
-    static std::tuple<Impl<Kokkos::HostSpace>, discrete_domain_type> init(
-            continuous_element_type a,
-            continuous_element_type b,
-            discrete_vector_type n)
+    template <class DDim>
+    static std::tuple<typename DDim::template Impl<DDim, Kokkos::HostSpace>, DiscreteDomain<DDim>>
+    init(Coordinate<CDim> a, Coordinate<CDim> b, DiscreteVector<DDim> n)
     {
         assert(a < b);
         assert(n > 1);
-        Impl<Kokkos::HostSpace> disc(a, continuous_element_type {(b - a) / (n - 1)});
-        discrete_domain_type domain {disc.front(), n};
+        typename DDim::template Impl<DDim, Kokkos::HostSpace>
+                disc(a, Coordinate<CDim> {(b - a) / (n - 1)});
+        DiscreteDomain<DDim> domain {disc.front(), n};
         return std::make_tuple(std::move(disc), std::move(domain));
     }
 
@@ -134,24 +138,25 @@ public:
      * @param n_ghosts_before number of additional "ghost" points before the segment
      * @param n_ghosts_after number of additional "ghost" points after the segment
      */
+    template <class DDim>
     static std::tuple<
-            Impl<Kokkos::HostSpace>,
-            discrete_domain_type,
-            discrete_domain_type,
-            discrete_domain_type,
-            discrete_domain_type>
+            typename DDim::template Impl<DDim, Kokkos::HostSpace>,
+            DiscreteDomain<DDim>,
+            DiscreteDomain<DDim>,
+            DiscreteDomain<DDim>,
+            DiscreteDomain<DDim>>
     init_ghosted(
-            continuous_element_type a,
-            continuous_element_type b,
-            discrete_vector_type n,
-            discrete_vector_type n_ghosts_before,
-            discrete_vector_type n_ghosts_after)
+            Coordinate<CDim> a,
+            Coordinate<CDim> b,
+            DiscreteVector<DDim> n,
+            DiscreteVector<DDim> n_ghosts_before,
+            DiscreteVector<DDim> n_ghosts_after)
     {
-        using discrete_domain_type = discrete_domain_type;
+        using discrete_domain_type = DiscreteDomain<DDim>;
         assert(a < b);
         assert(n > 1);
         Real discretization_step {(b - a) / (n - 1)};
-        Impl<Kokkos::HostSpace>
+        typename DDim::template Impl<DDim, Kokkos::HostSpace>
                 disc(a - n_ghosts_before.value() * discretization_step, discretization_step);
         discrete_domain_type ghosted_domain
                 = discrete_domain_type(disc.front(), n + n_ghosts_before + n_ghosts_after);
@@ -177,35 +182,30 @@ public:
      * @param n the number of points to map the segment \f$[a, b]\f$ including a & b
      * @param n_ghosts number of additional "ghost" points before and after the segment
      */
+    template <class DDim>
     static std::tuple<
-            Impl<Kokkos::HostSpace>,
-            discrete_domain_type,
-            discrete_domain_type,
-            discrete_domain_type,
-            discrete_domain_type>
+            typename DDim::template Impl<DDim, Kokkos::HostSpace>,
+            DiscreteDomain<DDim>,
+            DiscreteDomain<DDim>,
+            DiscreteDomain<DDim>,
+            DiscreteDomain<DDim>>
     init_ghosted(
-            continuous_element_type a,
-            continuous_element_type b,
-            discrete_vector_type n,
-            discrete_vector_type n_ghosts)
+            Coordinate<CDim> a,
+            Coordinate<CDim> b,
+            DiscreteVector<DDim> n,
+            DiscreteVector<DDim> n_ghosts)
     {
         return init_ghosted(a, b, n, n_ghosts, n_ghosts);
     }
 };
 
-template <class>
-struct is_uniform_sampling : public std::false_type
-{
-};
-
-template <class CDim>
-struct is_uniform_sampling<UniformPointSampling<CDim>> : public std::true_type
+template <class DDim>
+struct is_uniform_sampling : public std::is_base_of<UniformPointSamplingBase, DDim>
 {
 };
 
 template <class DDim>
 constexpr bool is_uniform_sampling_v = is_uniform_sampling<DDim>::value;
-
 
 template <
         class DDimImpl,
@@ -218,24 +218,26 @@ std::ostream& operator<<(std::ostream& out, DDimImpl const& mesh)
                << " )";
 }
 
-template <class CDim>
-KOKKOS_FUNCTION Coordinate<CDim> coordinate(DiscreteElement<UniformPointSampling<CDim>> const& c)
+template <class DDim, std::enable_if_t<is_uniform_sampling_v<DDim>, int> = 0>
+KOKKOS_FUNCTION constexpr Coordinate<typename DDim::continuous_dimension_type> coordinate(
+        DiscreteElement<DDim> const& c)
 {
-    return discrete_space<UniformPointSampling<CDim>>().coordinate(c);
+    return discrete_space<DDim>().coordinate(c);
 }
 
 /// @brief Lower bound index of the mesh
 template <class DDim>
-KOKKOS_FUNCTION std::
-        enable_if_t<is_uniform_sampling_v<DDim>, typename DDim::continuous_element_type>
-        origin() noexcept
+KOKKOS_FUNCTION std::enable_if_t<
+        is_uniform_sampling_v<DDim>,
+        Coordinate<typename DDim::continuous_dimension_type>>
+origin() noexcept
 {
     return discrete_space<DDim>().origin();
 }
 
 /// @brief Lower bound index of the mesh
 template <class DDim>
-KOKKOS_FUNCTION std::enable_if_t<is_uniform_sampling_v<DDim>, typename DDim::discrete_element_type>
+KOKKOS_FUNCTION std::enable_if_t<is_uniform_sampling_v<DDim>, DiscreteElement<DDim>>
 front() noexcept
 {
     return discrete_space<DDim>().front();
@@ -248,48 +250,39 @@ KOKKOS_FUNCTION std::enable_if_t<is_uniform_sampling_v<DDim>, Real> step() noexc
     return discrete_space<DDim>().step();
 }
 
-template <class CDim>
-KOKKOS_FUNCTION Coordinate<CDim> distance_at_left(DiscreteElement<UniformPointSampling<CDim>>)
+template <class DDim, std::enable_if_t<is_uniform_sampling_v<DDim>, int> = 0>
+KOKKOS_FUNCTION Coordinate<typename DDim::continuous_dimension_type> distance_at_left(
+        DiscreteElement<DDim>)
 {
-    return Coordinate<CDim>(step<UniformPointSampling<CDim>>());
+    return Coordinate<typename DDim::continuous_dimension_type>(step<DDim>());
 }
 
-template <class CDim>
-KOKKOS_FUNCTION Coordinate<CDim> distance_at_right(DiscreteElement<UniformPointSampling<CDim>>)
+template <class DDim, std::enable_if_t<is_uniform_sampling_v<DDim>, int> = 0>
+KOKKOS_FUNCTION Coordinate<typename DDim::continuous_dimension_type> distance_at_right(
+        DiscreteElement<DDim>)
 {
-    return Coordinate<CDim>(step<UniformPointSampling<CDim>>());
+    return Coordinate<typename DDim::continuous_dimension_type>(step<DDim>());
 }
 
-template <class CDim>
-KOKKOS_FUNCTION Coordinate<CDim> rmin(DiscreteDomain<UniformPointSampling<CDim>> const& d)
+template <class DDim, std::enable_if_t<is_uniform_sampling_v<DDim>, int> = 0>
+KOKKOS_FUNCTION Coordinate<typename DDim::continuous_dimension_type> rmin(
+        DiscreteDomain<DDim> const& d)
 {
     return coordinate(d.front());
 }
 
-template <class CDim>
-KOKKOS_FUNCTION Coordinate<CDim> rmax(DiscreteDomain<UniformPointSampling<CDim>> const& d)
+template <class DDim, std::enable_if_t<is_uniform_sampling_v<DDim>, int> = 0>
+KOKKOS_FUNCTION Coordinate<typename DDim::continuous_dimension_type> rmax(
+        DiscreteDomain<DDim> const& d)
 {
     return coordinate(d.back());
 }
 
-template <class CDim>
-KOKKOS_FUNCTION Coordinate<CDim> rlength(DiscreteDomain<UniformPointSampling<CDim>> const& d)
+template <class DDim, std::enable_if_t<is_uniform_sampling_v<DDim>, int> = 0>
+KOKKOS_FUNCTION Coordinate<typename DDim::continuous_dimension_type> rlength(
+        DiscreteDomain<DDim> const& d)
 {
     return rmax(d) - rmin(d);
 }
-
-template <class T>
-struct is_uniform_domain : std::false_type
-{
-};
-
-template <class... DDims>
-struct is_uniform_domain<DiscreteDomain<DDims...>>
-    : std::conditional_t<(is_uniform_sampling_v<DDims> && ...), std::true_type, std::false_type>
-{
-};
-
-template <class T>
-constexpr bool is_uniform_domain_v = is_uniform_domain<T>::value;
 
 } // namespace ddc

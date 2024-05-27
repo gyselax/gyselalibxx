@@ -135,7 +135,7 @@ jobs:
           'hip')
             export CC=hipcc
             export CXX=hipcc
-            EXTRA_CMAKE_FLAGS="-DKokkos_ENABLE_HIP=ON -DKokkos_ARCH_VEGA90A=ON -DCMAKE_PREFIX_PATH=/opt/rocm"
+            EXTRA_CMAKE_FLAGS="-DKokkos_ENABLE_HIP=ON -DKokkos_ENABLE_ROCTHRUST=OFF -DKokkos_ARCH_VEGA90A=ON -DCMAKE_PREFIX_PATH=/opt/rocm"
           ;;
           'cpu-clang')
             export CC=clang

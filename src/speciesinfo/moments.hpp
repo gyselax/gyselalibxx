@@ -11,10 +11,10 @@ public:
 
 public:
     /// @brief Impl object storing attributes in `MemorySpace`.
-    template <class MemorySpace>
+    template <class DDim, class MemorySpace>
     class Impl
     {
-        template <class OMemorySpace>
+        template <class ODDim, class OMemorySpace>
         friend class Impl;
 
     public:
@@ -26,7 +26,7 @@ public:
          * @param[in] impl object from `OMemorySpace` that will be used to initialize this object on `MemorySpace`
          */
         template <class OMemorySpace>
-        explicit Impl(Impl<OMemorySpace> const& impl)
+        explicit Impl(Impl<DDim, OMemorySpace> const& impl)
         {
         }
 

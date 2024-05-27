@@ -25,6 +25,12 @@ struct BSplinesFixture<std::tuple<
     {
         static constexpr bool PERIODIC = periodic;
     };
+    struct UBSplinesX : ddc::UniformBSplines<DimX, D>
+    {
+    };
+    struct NUBSplinesX : ddc::NonUniformBSplines<DimX, D>
+    {
+    };
     static constexpr std::size_t spline_degree = D;
     static constexpr std::size_t ncells = Nc;
 };
@@ -42,11 +48,12 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_Uniform)
 {
     std::size_t constexpr degree = TestFixture::spline_degree;
     using DimX = typename TestFixture::DimX;
+    using BSplinesX = typename TestFixture::UBSplinesX;
     using CoordX = ddc::Coordinate<DimX>;
     static constexpr CoordX xmin = CoordX(0.0);
     static constexpr CoordX xmax = CoordX(0.2);
     static constexpr std::size_t ncells = TestFixture::ncells;
-    ddc::init_discrete_space<ddc::UniformBSplines<DimX, degree>>(xmin, xmax, ncells);
+    ddc::init_discrete_space<BSplinesX>(xmin, xmax, ncells);
 
     std::array<double, degree + 1> values;
 
@@ -55,7 +62,7 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_Uniform)
 
     for (std::size_t i(0); i < n_test_points; ++i) {
         CoordX test_point(xmin + dx * i);
-        ddc::discrete_space<ddc::UniformBSplines<DimX, degree>>().eval_basis(values, test_point);
+        ddc::discrete_space<BSplinesX>().eval_basis(values, test_point);
         double sum = 0.0;
         for (std::size_t j(0); j < degree + 1; ++j) {
             sum += values[j];
@@ -68,6 +75,7 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_NonUniform)
 {
     std::size_t constexpr degree = TestFixture::spline_degree;
     using DimX = typename TestFixture::DimX;
+    using BSplinesX = typename TestFixture::NUBSplinesX;
     using CoordX = ddc::Coordinate<DimX>;
     static constexpr CoordX xmin = CoordX(0.0);
     static constexpr CoordX xmax = CoordX(0.2);
@@ -77,7 +85,7 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_NonUniform)
     for (std::size_t i(0); i < ncells + 1; ++i) {
         breaks[i] = CoordX(xmin + i * dx);
     }
-    ddc::init_discrete_space<ddc::NonUniformBSplines<DimX, degree>>(breaks);
+    ddc::init_discrete_space<BSplinesX>(breaks);
 
     std::array<double, degree + 1> values;
 
@@ -86,7 +94,7 @@ TYPED_TEST(BSplinesFixture, PartitionOfUnity_NonUniform)
 
     for (std::size_t i(0); i < n_test_points; ++i) {
         CoordX test_point(xmin + dx * i);
-        ddc::discrete_space<ddc::NonUniformBSplines<DimX, degree>>().eval_basis(values, test_point);
+        ddc::discrete_space<BSplinesX>().eval_basis(values, test_point);
         double sum = 0.0;
         for (std::size_t j(0); j < degree + 1; ++j) {
             sum += values[j];

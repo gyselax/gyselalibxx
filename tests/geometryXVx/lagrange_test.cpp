@@ -14,8 +14,6 @@ struct RDimZ
     static bool constexpr PERIODIC = false;
 };
 
-template <std::size_t N>
-struct CDimZ;
 using CoordZ = ddc::Coordinate<RDimZ>;
 
 
@@ -23,9 +21,13 @@ using CoordZ = ddc::Coordinate<RDimZ>;
 template <std::size_t N>
 class LagrangeTest
 {
-    using IDimZ = ddc::NonUniformPointSampling<CDimZ<N>>;
+public:
+    struct IDimZ : ddc::NonUniformPointSampling<RDimZ>
+    {
+    };
+
+private:
     using IVectZ = ddc::DiscreteVector<IDimZ>;
-    using CDim = typename IDimZ::continuous_dimension_type;
     using DElemZ = ddc::DiscreteElement<IDimZ>;
     const IVectZ x_size;
     const CoordZ x_min;
@@ -65,17 +67,17 @@ public:
         int cpt = 1;
         std::default_random_engine generator;
         std::uniform_real_distribution<double> unif_distr(-1, 1);
-        ddc::Chunk<ddc::Coordinate<CDim>, ddc::DiscreteDomain<IDimZ>> Sample_host(
+        ddc::Chunk<ddc::Coordinate<RDimZ>, ddc::DiscreteDomain<IDimZ>> Sample_host(
                 interpolation_domain_x);
 
         ddc::for_each(Sample_host.domain(), [&](DElemZ const ix) {
             if (cpt % int(0.1 * x_size) == 0) {
-                Sample_host(ix) = ddc::Coordinate<CDim>(
+                Sample_host(ix) = ddc::Coordinate<RDimZ>(
                         ddc::coordinate(ix).value()
                         + (cpt > 0.1 * x_size) * (cpt < 0.9 * x_size) * perturb
                                   * unif_distr(generator) / x_size);
             } else {
-                Sample_host(ix) = ddc::Coordinate<CDim>(ddc::coordinate(ix).value());
+                Sample_host(ix) = ddc::Coordinate<RDimZ>(ddc::coordinate(ix).value());
             }
             cpt++;
         });

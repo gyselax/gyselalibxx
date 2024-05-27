@@ -8,15 +8,17 @@
 
 #include <Kokkos_Core.hpp>
 
-namespace {
+namespace ddcexp = ddc::experimental;
 
-using ddc::experimental::SingleDiscretization;
+namespace {
 
 class DimX;
 
 using CoordX = ddc::Coordinate<DimX>;
 
-using DDimX = SingleDiscretization<DimX>;
+struct DDimX : ddcexp::SingleDiscretization<DimX>
+{
+};
 
 using DElemX = ddc::DiscreteElement<DDimX>;
 
@@ -24,14 +26,21 @@ using DElemX = ddc::DiscreteElement<DDimX>;
 
 TEST(SingleDiscretization, ClassSize)
 {
-    EXPECT_EQ(sizeof(DDimX::Impl<Kokkos::HostSpace>), sizeof(double));
+    EXPECT_EQ(sizeof(DDimX::Impl<DDimX, Kokkos::HostSpace>), sizeof(double));
 }
 
 TEST(SingleDiscretization, Constructor)
 {
     CoordX const x(1.);
 
-    SingleDiscretization<DimX>::Impl<Kokkos::HostSpace> const ddim_x(x);
+    ddcexp::SingleDiscretization<DimX>::Impl<DDimX, Kokkos::HostSpace> const ddim_x(x);
 
     EXPECT_EQ(ddim_x.coordinate(DElemX(0)), x);
+}
+
+TEST(SingleDiscretization, Coordinate)
+{
+    CoordX const x(1.);
+    ddc::init_discrete_space<DDimX>(x);
+    EXPECT_EQ(ddcexp::coordinate(DElemX(0)), x);
 }

@@ -33,11 +33,17 @@ static constexpr std::size_t spline_r_degree = DEGREE_R;
 static constexpr std::size_t spline_p_degree = DEGREE_P;
 static constexpr int continuity = CONTINUITY;
 
-using BSplinesR = ddc::NonUniformBSplines<DimR, spline_r_degree>;
+struct BSplinesR : ddc::NonUniformBSplines<DimR, spline_r_degree>
+{
+};
 #if defined(BSPLINES_TYPE_UNIFORM)
-using BSplinesP = ddc::UniformBSplines<DimP, spline_p_degree>;
+struct BSplinesP : ddc::UniformBSplines<DimP, spline_p_degree>
+{
+};
 #elif defined(BSPLINES_TYPE_NON_UNIFORM)
-using BSplinesP = ddc::NonUniformBSplines<DimP, spline_p_degree>;
+struct BSplinesP : ddc::NonUniformBSplines<DimP, spline_p_degree>
+{
+};
 #endif
 
 using GrevillePointsR = ddc::
@@ -45,8 +51,15 @@ using GrevillePointsR = ddc::
 using GrevillePointsP = ddc::
         GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
-using IDimR = GrevillePointsR::interpolation_mesh_type;
-using IDimP = GrevillePointsP::interpolation_mesh_type;
+struct IDimR : GrevillePointsR::interpolation_mesh_type
+{
+};
+struct IDimP : GrevillePointsP::interpolation_mesh_type
+{
+};
+struct BSplines : PolarBSplines<BSplinesR, BSplinesP, continuity>
+{
+};
 
 #if defined(CIRCULAR_MAPPING)
 using CircToCart = CircularToCartesian<DimX, DimY, DimR, DimP>;
@@ -57,7 +70,6 @@ using CircToCart = CzarnyToCartesian<DimX, DimY, DimR, DimP>;
 TEST(PolarSplineTest, ConstantEval)
 {
     using PolarCoord = ddc::Coordinate<DimR, DimP>;
-    using BSplines = PolarBSplines<BSplinesR, BSplinesP, continuity>;
     using CoordR = ddc::Coordinate<DimR>;
     using CoordP = ddc::Coordinate<DimP>;
     using Spline = PolarSpline<BSplines>;
@@ -120,10 +132,10 @@ TEST(PolarSplineTest, ConstantEval)
 #endif
     }
 
-    ddc::init_discrete_space<IDimR>(GrevillePointsR::get_sampling());
-    ddc::init_discrete_space<IDimP>(GrevillePointsP::get_sampling());
-    ddc::DiscreteDomain<IDimR> interpolation_domain_R(GrevillePointsR::get_domain());
-    ddc::DiscreteDomain<IDimP> interpolation_domain_P(GrevillePointsP::get_domain());
+    ddc::init_discrete_space<IDimR>(GrevillePointsR::get_sampling<IDimR>());
+    ddc::init_discrete_space<IDimP>(GrevillePointsP::get_sampling<IDimP>());
+    ddc::DiscreteDomain<IDimR> interpolation_domain_R(GrevillePointsR::get_domain<IDimR>());
+    ddc::DiscreteDomain<IDimP> interpolation_domain_P(GrevillePointsP::get_domain<IDimP>());
     ddc::DiscreteDomain<IDimR, IDimP>
             interpolation_domain(interpolation_domain_R, interpolation_domain_P);
 

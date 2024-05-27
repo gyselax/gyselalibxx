@@ -10,8 +10,12 @@
 using cell = bool;
 
 // Name of the axis
-struct DDimX;
-struct DDimY;
+struct DDimX
+{
+};
+struct DDimY
+{
+};
 
 static unsigned nt = 10;
 static unsigned length = 5;

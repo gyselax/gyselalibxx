@@ -39,8 +39,12 @@ public:
     };
     using CoordX = Coordinate<RDimX>;
     using CoordY = Coordinate<RDimY>;
-    using IDimX = UniformPointSampling<RDimX>;
-    using IDimY = UniformPointSampling<RDimY>;
+    struct IDimX : UniformPointSampling<RDimX>
+    {
+    };
+    struct IDimY : UniformPointSampling<RDimY>
+    {
+    };
     using IndexX = DiscreteElement<IDimX>;
     using IndexY = DiscreteElement<IDimY>;
     using IVectX = DiscreteVector<IDimX>;
@@ -109,9 +113,9 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
     std::array<double, Ntests> error;
     std::array<double, Ntests - 1> order;
 
-    init_discrete_space(IDimX::init(x_min, x_max, x_size));
+    init_discrete_space<IDimX>(IDimX::init(x_min, x_max, x_size));
     IDomainX dom_x(start_x, x_size);
-    init_discrete_space(IDimY::init(y_min, y_max, y_size));
+    init_discrete_space<IDimY>(IDimY::init(y_min, y_max, y_size));
     IDomainY dom_y(start_y, y_size);
 
     IDomainXY dom(dom_x, dom_y);
