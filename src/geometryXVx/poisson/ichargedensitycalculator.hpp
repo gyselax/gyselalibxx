@@ -10,7 +10,7 @@
  * A class which calculates the charge density.
  *
  * A class which calculates the charge density. This is then used as
- * the right hand side of the Poisson equation.
+ * the right hand side of the Quasi-Neutrality equation.
  */
 class IChargeDensityCalculator
 {

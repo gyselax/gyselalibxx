@@ -4,7 +4,7 @@ The `boltzmann` folder contains methods for solving a Boltzmann-Poisson coupled 
 
 $`\partial_t f + v \partial_x f + E/m\partial_v f = S(f)`$
 
-Where $f$ is the distribution function, $x$ and $v$ are the space and velocity variables respectively, $E$ is the electric field and $m$ is the mass of the considered plasma species. The $S(f)$ operator refers to any source terms (including collisions). A Poisson equation is of the form 
+Where $f$ is the distribution function, $x$ and $v$ are the space and velocity variables respectively, $E$ is the electric field and $m$ is the mass of the considered plasma species. The $S(f)$ operator refers to any source terms (including collisions). A Quasi-Neutrality equation is of the form 
 
 $`-\varepsilon_0 \nabla E = \rho`$
 
