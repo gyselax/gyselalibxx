@@ -59,6 +59,9 @@ struct BernsteinFixture<std::tuple<std::integral_constant<std::size_t, D>>> : pu
     {
     };
     static constexpr std::size_t poly_degree = D;
+    struct Bernstein : BernsteinPolynomialBasis<DimX, DimY, Corner1, Corner2, Corner3, poly_degree>
+    {
+    };
 };
 
 using degrees = std::integer_sequence<std::size_t, 0, 1, 2, 3>;
@@ -69,14 +72,13 @@ TYPED_TEST_SUITE(BernsteinFixture, Cases);
 
 TYPED_TEST(BernsteinFixture, PartitionOfUnity)
 {
-    std::size_t constexpr degree = TestFixture::poly_degree;
     using DimX = typename TestFixture::DimX;
     using DimY = typename TestFixture::DimY;
     using Corner1 = typename TestFixture::Corner1;
     using Corner2 = typename TestFixture::Corner2;
     using Corner3 = typename TestFixture::Corner3;
+    using Bernstein = typename TestFixture::Bernstein;
     using CoordXY = ddc::Coordinate<DimX, DimY>;
-    using Bernstein = BernsteinPolynomialBasis<DimX, DimY, Corner1, Corner2, Corner3, degree>;
 
     const CoordXY c1(-1.0, -1.0);
     const CoordXY c2(0.0, 1.0);

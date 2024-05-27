@@ -67,7 +67,7 @@ void hip_throw_on_error(T const err, const char* const func, const char* const f
 #endif
 
 template <class DDim, class MemorySpace>
-using ddim_impl_t = typename DDim::template Impl<MemorySpace>;
+using ddim_impl_t = typename DDim::template Impl<DDim, MemorySpace>;
 
 template <class T>
 class gpu_proxy
@@ -150,6 +150,9 @@ auto extract_after(Tuple&& t, std::index_sequence<Ids...>)
 template <class DDim, class... Args>
 void init_discrete_space(Args&&... args)
 {
+    static_assert(
+            !std::is_same_v<DDim, typename DDim::discrete_dimension_type>,
+            "Discrete dimensions should inherit from the discretization, not use an alias");
     if (detail::g_discrete_space_dual<DDim>) {
         throw std::runtime_error("Discrete space function already initialized.");
     }
@@ -175,10 +178,9 @@ void init_discrete_space(Args&&... args)
  * @param a - the discrete space to move at index 0
  *          - the arguments to pass through at index 1
  */
-template <class DDimImpl, class Arg0>
+template <class DDim, class DDimImpl, class Arg0>
 Arg0 init_discrete_space(std::tuple<DDimImpl, Arg0>&& a)
 {
-    using DDim = typename DDimImpl::discrete_dimension_type;
     init_discrete_space<DDim>(std::move(std::get<0>(a)));
     return std::get<1>(a);
 }
@@ -188,10 +190,9 @@ Arg0 init_discrete_space(std::tuple<DDimImpl, Arg0>&& a)
  * @param a - the discrete space to move at index 0
  *          - the (2+) arguments to pass through in other indices
  */
-template <class DDimImpl, class Arg0, class Arg1, class... Args>
+template <class DDim, class DDimImpl, class Arg0, class Arg1, class... Args>
 std::tuple<Arg0, Arg1, Args...> init_discrete_space(std::tuple<DDimImpl, Arg0, Arg1, Args...>&& a)
 {
-    using DDim = typename DDimImpl::discrete_dimension_type;
     init_discrete_space<DDim>(std::move(std::get<0>(a)));
     return detail::extract_after(std::move(a), std::index_sequence_for<Arg0, Arg1, Args...>());
 }

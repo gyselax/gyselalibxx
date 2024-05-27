@@ -37,20 +37,17 @@ public:
      *
      * @return sampling The DDC point sampling of the interpolation points.
      */
-    template <typename U = BSplines>
+    template <typename Sampling, typename U = BSplines>
     static auto get_sampling()
     {
         if constexpr (U::is_uniform()) {
-            using Sampling = ddc::UniformPointSampling<tag_type>;
-            return std::get<0>(
-                    Sampling::
-                            init(ddc::discrete_space<BSplines>().rmin(),
-                                 ddc::discrete_space<BSplines>().rmax(),
-                                 ddc::DiscreteVector<ddc::UniformPointSampling<tag_type>>(
-                                         ddc::discrete_space<BSplines>().ncells() + 1)));
+            return std::get<0>(Sampling::
+                                       init(ddc::discrete_space<BSplines>().rmin(),
+                                            ddc::discrete_space<BSplines>().rmax(),
+                                            ddc::DiscreteVector<Sampling>(
+                                                    ddc::discrete_space<BSplines>().ncells() + 1)));
         } else {
-            using Sampling = ddc::NonUniformPointSampling<tag_type>;
-            using SamplingImpl = typename Sampling::template Impl<Kokkos::HostSpace>;
+            using SamplingImpl = typename Sampling::template Impl<Sampling, Kokkos::HostSpace>;
             std::vector<double> knots(ddc::discrete_space<BSplines>().npoints());
             for (int i(0); i < ddc::discrete_space<BSplines>().npoints(); ++i) {
                 knots[i] = ddc::discrete_space<BSplines>().get_knot(i);
@@ -60,19 +57,23 @@ public:
     }
 
     /// The DDC type of the sampling for the interpolation points.
-    using interpolation_mesh_type = typename decltype(get_sampling())::discrete_dimension_type;
+    using interpolation_mesh_type = std::conditional_t<
+            is_uniform_bsplines_v<BSplines>,
+            ddc::UniformPointSampling<tag_type>,
+            ddc::NonUniformPointSampling<tag_type>>;
 
     /**
      * Get the domain which can be used to access the interpolation points in the sampling.
      *
      * @return domain The discrete domain which maps to the sampling of interpolation points.
      */
-    static ddc::DiscreteDomain<interpolation_mesh_type> get_domain()
+    template <typename Sampling>
+    static ddc::DiscreteDomain<Sampling> get_domain()
     {
         int const npoints = ddc::discrete_space<BSplines>().ncells() + !BSplines::is_periodic();
-        return ddc::DiscreteDomain<interpolation_mesh_type>(
-                ddc::DiscreteElement<interpolation_mesh_type>(0),
-                ddc::DiscreteVector<interpolation_mesh_type>(npoints));
+        return ddc::DiscreteDomain<Sampling>(
+                ddc::DiscreteElement<Sampling>(0),
+                ddc::DiscreteVector<Sampling>(npoints));
     }
 };
 } // namespace ddc

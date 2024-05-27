@@ -38,9 +38,16 @@ struct PolarBsplineFixture<std::tuple<
     };
     static constexpr std::size_t spline_degree = D;
     static constexpr int continuity = C;
-    using BSplineR = ddc::NonUniformBSplines<DimR, D>;
-    using BSplineP = std::
-            conditional_t<Uniform, ddc::UniformBSplines<DimP, D>, ddc::NonUniformBSplines<DimP, D>>;
+    struct BSplineR : ddc::NonUniformBSplines<DimR, D>
+    {
+    };
+    struct BSplineP
+        : std::conditional_t<
+                  Uniform,
+                  ddc::UniformBSplines<DimP, D>,
+                  ddc::NonUniformBSplines<DimP, D>>
+    {
+    };
 
     using GrevillePointsR = ddc::GrevilleInterpolationPoints<
             BSplineR,
@@ -51,8 +58,15 @@ struct PolarBsplineFixture<std::tuple<
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC>;
 
-    using IDimR = typename GrevillePointsR::interpolation_mesh_type;
-    using IDimP = typename GrevillePointsP::interpolation_mesh_type;
+    struct IDimR : GrevillePointsR::interpolation_mesh_type
+    {
+    };
+    struct IDimP : GrevillePointsP::interpolation_mesh_type
+    {
+    };
+    struct BSplines : PolarBSplines<BSplineR, BSplineP, continuity>
+    {
+    };
 };
 
 using degrees = std::integer_sequence<std::size_t, 1, 2, 3>;
@@ -65,7 +79,6 @@ TYPED_TEST_SUITE(PolarBsplineFixture, Cases);
 
 TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
 {
-    int constexpr continuity = TestFixture::continuity;
     using DimR = typename TestFixture::DimR;
     using IDimR = typename TestFixture::IDimR;
     using DVectR = ddc::DiscreteVector<IDimR>;
@@ -106,7 +119,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             IDimR,
             IDimP>;
     using DiscreteMapping = DiscreteToCartesian<DimX, DimY, SplineRPBuilder, SplineRPEvaluator>;
-    using BSplines = PolarBSplines<BSplinesR, BSplinesP, continuity>;
+    using BSplines = typename TestFixture::BSplines;
     using CoordR = ddc::Coordinate<DimR>;
     using CoordP = ddc::Coordinate<DimP>;
     using GrevillePointsR = typename TestFixture::GrevillePointsR;
@@ -140,10 +153,12 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
         ddc::init_discrete_space<BSplinesP>(breaks);
     }
 
-    ddc::init_discrete_space<IDimR>(GrevillePointsR::get_sampling());
-    ddc::init_discrete_space<IDimP>(GrevillePointsP::get_sampling());
-    ddc::DiscreteDomain<IDimR> interpolation_domain_R(GrevillePointsR::get_domain());
-    ddc::DiscreteDomain<IDimP> interpolation_domain_P(GrevillePointsP::get_domain());
+    ddc::init_discrete_space<IDimR>(GrevillePointsR::template get_sampling<IDimR>());
+    ddc::init_discrete_space<IDimP>(GrevillePointsP::template get_sampling<IDimP>());
+    ddc::DiscreteDomain<IDimR> interpolation_domain_R(
+            GrevillePointsR::template get_domain<IDimR>());
+    ddc::DiscreteDomain<IDimP> interpolation_domain_P(
+            GrevillePointsP::template get_domain<IDimP>());
     ddc::DiscreteDomain<IDimR, IDimP>
             interpolation_domain(interpolation_domain_R, interpolation_domain_P);
 

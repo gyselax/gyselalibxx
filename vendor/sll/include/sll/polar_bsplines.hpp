@@ -70,15 +70,6 @@ public:
      */
     using discrete_dimension_type = PolarBSplines;
 
-    /// The type of an index associated with a PolarBSpline.
-    using discrete_element_type = ddc::DiscreteElement<PolarBSplines>;
-
-    /// The type of a domain of PolarBSplines.
-    using discrete_domain_type = ddc::DiscreteDomain<PolarBSplines>;
-
-    /// The type of a vector associated with a PolarBSpline.
-    using discrete_vector_type = ddc::DiscreteVector<PolarBSplines>;
-
     /**
      * The type of a 2D index for the subset of the polar bsplines which can be expressed as a tensor
      * product of 1D bsplines.
@@ -98,17 +89,6 @@ public:
     using tensor_product_discrete_vector_type = ddc::DiscreteVector<BSplinesR, BSplinesP>;
 
 private:
-    /**
-     * The type of the domain for the linear combinations defining the bsplines which traverse the singular point.
-     *
-     * The bsplines which traverse the singular O-point are constructed from a linear combination of 2D
-     * bsplines. These 2D bsplines can be expressed as a tensor product of 1D bsplines. This type
-     * describes the domain on which the coefficients of these linear combinations are defined. There is
-     * an index for the polar bspline being constructed, and 2 indices for the 2D bspline.
-     */
-    using singular_basis_linear_combination_domain_type
-            = ddc::DiscreteDomain<PolarBSplines, BSplinesR, BSplinesP>;
-
     using IndexR = ddc::DiscreteElement<BSplinesR>;
     using IndexP = ddc::DiscreteElement<BSplinesP>;
     using LengthR = ddc::DiscreteVector<BSplinesR>;
@@ -133,11 +113,12 @@ public:
      * @returns The ddc::DiscreteDomain containing the indices of the b-splines which traverse
      * the singular point.
      */
-    static constexpr discrete_domain_type singular_domain()
+    template <class DDim>
+    static constexpr ddc::DiscreteDomain<DDim> singular_domain()
     {
-        return discrete_domain_type(
-                discrete_element_type {0},
-                discrete_vector_type {n_singular_basis()});
+        return ddc::DiscreteDomain<DDim>(
+                ddc::DiscreteElement<DDim> {0},
+                ddc::DiscreteVector<DDim> {n_singular_basis()});
     }
 
     /**
@@ -148,13 +129,15 @@ public:
      *
      * @returns The index of the basis spline in the PolarBSpline domain.
      */
-    static discrete_element_type get_polar_index(tensor_product_discrete_element_type const& idx)
+    template <class DDim>
+    static ddc::DiscreteElement<DDim> get_polar_index(
+            tensor_product_discrete_element_type const& idx)
     {
         int const r_idx = ddc::select<BSplinesR>(idx).uid();
         int const p_idx = ddc::select<BSplinesP>(idx).uid();
         assert(r_idx >= C + 1);
         int local_idx((r_idx - C - 1) * ddc::discrete_space<BSplinesP>().nbasis() + p_idx);
-        return discrete_element_type(n_singular_basis() + local_idx);
+        return ddc::DiscreteElement<DDim>(n_singular_basis() + local_idx);
     }
 
     /**
@@ -165,7 +148,8 @@ public:
      *
      * @returns The index of the equivalent 2D BSpline expressed as a 2D tensor product of 1D BSplines.
      */
-    static tensor_product_discrete_element_type get_2d_index(discrete_element_type const& idx)
+    template <class DDim>
+    static tensor_product_discrete_element_type get_2d_index(ddc::DiscreteElement<DDim> const& idx)
     {
         assert(idx.uid() >= n_singular_basis());
         int const idx_2d = idx.uid() - n_singular_basis();
@@ -186,13 +170,24 @@ public:
      *
      * @tparam MemorySpace Indicates where the object is saved. This is either on the host or the device.
      */
-    template <class MemorySpace>
+    template <class DDim, class MemorySpace>
     class Impl
     {
-        template <class OMemorySpace>
+        template <class ODDim, class OMemorySpace>
         friend class Impl;
 
     private:
+        /**
+         * The type of the domain for the linear combinations defining the bsplines which traverse the singular point.
+         *
+         * The bsplines which traverse the singular O-point are constructed from a linear combination of 2D
+         * bsplines. These 2D bsplines can be expressed as a tensor product of 1D bsplines. This type
+         * describes the domain on which the coefficients of these linear combinations are defined. There is
+         * an index for the polar bspline being constructed, and 2 indices for the 2D bspline.
+         */
+        using singular_basis_linear_combination_domain_type
+                = ddc::DiscreteDomain<DDim, BSplinesR, BSplinesP>;
+
         ddc::Chunk<
                 double,
                 singular_basis_linear_combination_domain_type,
@@ -213,8 +208,29 @@ public:
         {
         };
 
+        template <class DiscreteMapping>
+        struct IntermediateBernsteinBasis
+            : BernsteinPolynomialBasis<
+                      typename DiscreteMapping::cartesian_tag_x,
+                      typename DiscreteMapping::cartesian_tag_y,
+                      Corner1Tag,
+                      Corner2Tag,
+                      Corner3Tag,
+                      C>
+        {
+        };
+
         /// The tag which should be used to create a Chunk whose contents are each associated with a PolarBSpline.
         using discrete_dimension_type = PolarBSplines;
+
+        /// The type of an index associated with a PolarBSpline.
+        using discrete_element_type = ddc::DiscreteElement<DDim>;
+
+        /// The type of a domain of PolarBSplines.
+        using discrete_domain_type = ddc::DiscreteDomain<DDim>;
+
+        /// The type of a vector associated with a PolarBSpline.
+        using discrete_vector_type = ddc::DiscreteVector<DDim>;
 
         /**
          * A constructor for the PolarBSplines.
@@ -266,13 +282,9 @@ public:
                         Corner2Tag,
                         Corner3Tag>
                         barycentric_coordinate_converter(corner1, corner2, corner3);
-                using BernsteinBasis = BernsteinPolynomialBasis<
-                        DimX,
-                        DimY,
-                        Corner1Tag,
-                        Corner2Tag,
-                        Corner3Tag,
-                        C>;
+
+                using BernsteinBasis = IntermediateBernsteinBasis<DiscreteMapping>;
+
                 ddc::init_discrete_space<BernsteinBasis>(barycentric_coordinate_converter);
 
                 // The number of radial bases used to construct the bsplines traversing the singular point.
@@ -296,7 +308,7 @@ public:
                 m_singular_basis_elements
                         = ddc::Chunk<double, singular_basis_linear_combination_domain_type>(
                                 singular_basis_linear_combination_domain_type(
-                                        singular_domain(),
+                                        singular_domain<DDim>(),
                                         dom_bsplines_inner));
 
                 ddc::DiscreteDomain<BernsteinBasis> bernstein_domain(
@@ -320,7 +332,7 @@ public:
                                     = bernstein_vals(k);
                         }
                     }
-                    for (discrete_element_type k : singular_domain()) {
+                    for (discrete_element_type k : singular_domain<DDim>()) {
                         for (IndexP const ip :
                              poloidal_spline_domain.take_first(LengthP {BSplinesP::degree()})) {
                             m_singular_basis_elements(k, ir, ip + np_in_singular)
@@ -336,7 +348,7 @@ public:
                 m_singular_basis_elements
                         = ddc::Chunk<double, singular_basis_linear_combination_domain_type>(
                                 singular_basis_linear_combination_domain_type(
-                                        singular_domain(),
+                                        singular_domain<DDim>(),
                                         empty_dom_bsplines));
             }
         }
@@ -347,7 +359,7 @@ public:
          * @param impl The PolarBSplines being copied.
          */
         template <class OriginMemorySpace>
-        explicit Impl(Impl<OriginMemorySpace> const& impl)
+        explicit Impl(Impl<DDim, OriginMemorySpace> const& impl)
             : m_singular_basis_elements(impl.m_singular_basis_elements.domain())
         {
             ddc::parallel_deepcopy(
@@ -482,7 +494,7 @@ public:
          *
          * @param[out] int_vals The integrals of the basis splines.
          */
-        void integrals(PolarSplineSpan<PolarBSplines> int_vals) const;
+        void integrals(PolarSplineSpan<DDim> int_vals) const;
 
         /**
          * Get the total number of basis functions.
@@ -530,9 +542,9 @@ public:
 };
 
 template <class BSplinesR, class BSplinesP, int C>
-template <class MemorySpace>
+template <class DDim, class MemorySpace>
 ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
-        Impl<MemorySpace>::eval_basis(
+        Impl<DDim, MemorySpace>::eval_basis(
                 DSpan1D singular_values,
                 DSpan2D values,
                 ddc::Coordinate<DimR, DimP> p) const
@@ -541,9 +553,9 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
 }
 
 template <class BSplinesR, class BSplinesP, int C>
-template <class MemorySpace>
+template <class DDim, class MemorySpace>
 ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
-        Impl<MemorySpace>::eval_deriv_r(
+        Impl<DDim, MemorySpace>::eval_deriv_r(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
                 ddc::Coordinate<DimR, DimP> p) const
@@ -552,9 +564,9 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
 }
 
 template <class BSplinesR, class BSplinesP, int C>
-template <class MemorySpace>
+template <class DDim, class MemorySpace>
 ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
-        Impl<MemorySpace>::eval_deriv_p(
+        Impl<DDim, MemorySpace>::eval_deriv_p(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
                 ddc::Coordinate<DimR, DimP> p) const
@@ -563,9 +575,9 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
 }
 
 template <class BSplinesR, class BSplinesP, int C>
-template <class MemorySpace>
+template <class DDim, class MemorySpace>
 ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
-        Impl<MemorySpace>::eval_deriv_r_and_p(
+        Impl<DDim, MemorySpace>::eval_deriv_r_and_p(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
                 ddc::Coordinate<DimR, DimP> p) const
@@ -574,10 +586,10 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
 }
 
 template <class BSplinesR, class BSplinesP, int C>
-template <class MemorySpace>
+template <class DDim, class MemorySpace>
 template <class EvalTypeR, class EvalTypeP>
 ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
-        Impl<MemorySpace>::eval(
+        Impl<DDim, MemorySpace>::eval(
                 DSpan1D singular_values,
                 DSpan2D values,
                 ddc::Coordinate<DimR, DimP> coord_eval,
@@ -616,7 +628,7 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
 
     if (jmin_r.uid() < C + 1) {
         nr_done = C + 1 - jmin_r.uid();
-        for (discrete_element_type k : singular_domain()) {
+        for (discrete_element_type k : singular_domain<DDim>()) {
             singular_values(k.uid()) = 0.0;
             for (std::size_t i(0); i < nr_done; ++i) {
                 for (std::size_t j(0); j < np; ++j) {
@@ -645,9 +657,9 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
 }
 
 template <class BSplinesR, class BSplinesP, int C>
-template <class MemorySpace>
-void PolarBSplines<BSplinesR, BSplinesP, C>::Impl<MemorySpace>::integrals(
-        PolarSplineSpan<PolarBSplines<BSplinesR, BSplinesP, C>> int_vals) const
+template <class DDim, class MemorySpace>
+void PolarBSplines<BSplinesR, BSplinesP, C>::Impl<DDim, MemorySpace>::integrals(
+        PolarSplineSpan<DDim> int_vals) const
 {
     auto r_bspl_space = ddc::discrete_space<BSplinesR>();
     auto p_bspl_space = ddc::discrete_space<BSplinesP>();
@@ -659,19 +671,19 @@ void PolarBSplines<BSplinesR, BSplinesP, C>::Impl<MemorySpace>::integrals(
     assert(int_vals.spline_coef.domain().template extent<BSplinesP>() == p_bspl_space.nbasis()
            || int_vals.spline_coef.domain().template extent<BSplinesP>() == p_bspl_space.size());
 
-    ddc::Chunk<double, typename BSplinesR::discrete_domain_type> r_integrals_alloc(
+    ddc::Chunk<double, ddc::DiscreteDomain<BSplinesR>> r_integrals_alloc(
             r_bspl_space.full_domain().take_first(
-                    typename BSplinesR::discrete_vector_type {r_bspl_space.nbasis()}));
-    ddc::Chunk<double, typename BSplinesP::discrete_domain_type> p_integrals_alloc(
+                    ddc::DiscreteVector<BSplinesR> {r_bspl_space.nbasis()}));
+    ddc::Chunk<double, ddc::DiscreteDomain<BSplinesP>> p_integrals_alloc(
             p_bspl_space.full_domain().take_first(
-                    typename BSplinesP::discrete_vector_type {p_bspl_space.size()}));
+                    ddc::DiscreteVector<BSplinesP> {p_bspl_space.size()}));
     ddc::ChunkSpan r_integrals = r_integrals_alloc.span_view();
     ddc::ChunkSpan p_integrals = p_integrals_alloc.span_view();
 
     r_bspl_space.integrals(r_integrals);
     p_bspl_space.integrals(p_integrals);
 
-    ddc::for_each(singular_domain(), [&](auto k) {
+    ddc::for_each(singular_domain<DDim>(), [&](auto k) {
         int_vals.singular_spline_coef(k) = ddc::transform_reduce(
                 ddc::select<BSplinesR, BSplinesP>(m_singular_basis_elements.domain()),
                 0.0,
@@ -696,7 +708,7 @@ void PolarBSplines<BSplinesR, BSplinesP, C>::Impl<MemorySpace>::integrals(
 
     if (int_vals.spline_coef.domain().template extent<BSplinesP>() == p_bspl_space.size()) {
         ddc::DiscreteDomain<BSplinesP> periodic_points(p_integrals.domain().take_last(
-                typename BSplinesP::discrete_vector_type {BSplinesP::degree()}));
+                ddc::DiscreteVector<BSplinesP> {BSplinesP::degree()}));
         tensor_product_discrete_domain_type repeat_domain(r_tensor_product_dom, periodic_points);
         ddc::for_each(repeat_domain, [&](auto idx) { int_vals.spline_coef(idx) = 0.0; });
     }

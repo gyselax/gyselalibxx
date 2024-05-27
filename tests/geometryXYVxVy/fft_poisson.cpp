@@ -39,11 +39,11 @@ static void TestFftPoissonSolverCosineSource()
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
     ddc::init_discrete_space<BSplinesVy>(vy_min, vy_max, vy_size);
 
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
-    ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling<IDimVy>());
 
-    ddc::init_discrete_space(IDimX::init(x_min, x_max, x_size + 1));
-    ddc::init_discrete_space(IDimY::init(y_min, y_max, y_size + 1));
+    ddc::init_discrete_space<IDimX>(IDimX::init<IDimX>(x_min, x_max, x_size + 1));
+    ddc::init_discrete_space<IDimY>(IDimY::init<IDimY>(y_min, y_max, y_size + 1));
 
     IDomainSp const gridsp = IDomainSp(my_iion, IVectSp(1));
 
@@ -52,8 +52,8 @@ static void TestFftPoissonSolverCosineSource()
 
     IDomainXY gridxy(gridx, gridy);
 
-    IDomainVx gridvx = SplineInterpPointsVx::get_domain();
-    IDomainVy gridvy = SplineInterpPointsVy::get_domain();
+    IDomainVx gridvx = SplineInterpPointsVx::get_domain<IDimVx>();
+    IDomainVy gridvy = SplineInterpPointsVy::get_domain<IDimVy>();
 
     IDomainVxVy gridvxvy(gridvx, gridvy);
 
@@ -64,8 +64,8 @@ static void TestFftPoissonSolverCosineSource()
 
     IDomainSpXYVxVy const mesh(gridsp, meshxyvxvy);
 
-    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<RDimX>(gridx));
-    ddc::init_discrete_space<IDimFy>(ddc::init_fourier_space<RDimY>(gridy));
+    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<IDimFx>(gridx));
+    ddc::init_discrete_space<IDimFy>(ddc::init_fourier_space<IDimFy>(gridy));
 
     // Initialise infomation about species
     host_t<FieldSp<int>> charges(dom_sp);

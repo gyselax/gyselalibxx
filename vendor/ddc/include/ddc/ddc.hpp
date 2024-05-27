@@ -25,7 +25,6 @@
 #include "ddc/discrete_vector.hpp"
 #include "ddc/non_uniform_point_sampling.hpp"
 #include "ddc/periodic_sampling.hpp"
-#include "ddc/rectilinear_domain.hpp"
 #include "ddc/uniform_point_sampling.hpp"
 
 // Algorithms

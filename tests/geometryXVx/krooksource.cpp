@@ -44,11 +44,11 @@ TEST(KrookSource, Adaptive)
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
 
-    IDomainX gridx(SplineInterpPointsX::get_domain());
-    IDomainVx gridvx(SplineInterpPointsVx::get_domain());
+    IDomainX gridx(SplineInterpPointsX::get_domain<IDimX>());
+    IDomainVx gridvx(SplineInterpPointsVx::get_domain<IDimVx>());
 
     SplineXBuilder_1d const builder_x(gridx);
     SplineVxBuilder_1d const builder_vx(gridvx);
@@ -183,11 +183,11 @@ TEST(KrookSource, Constant)
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
 
-    IDomainX gridx(SplineInterpPointsX::get_domain());
-    IDomainVx gridvx(SplineInterpPointsVx::get_domain());
+    IDomainX gridx(SplineInterpPointsX::get_domain<IDimX>());
+    IDomainVx gridvx(SplineInterpPointsVx::get_domain<IDimVx>());
 
     SplineXBuilder_1d const builder_x(gridx);
     SplineVxBuilder_1d const builder_vx(gridvx);

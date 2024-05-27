@@ -41,12 +41,11 @@ CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
     int const ncells(ddc::select<IDimVx>(mesh).size() - 1);
     if constexpr (uniform_edge_v) {
         double const step(ddc::step<IDimVx>());
-        ddc::init_discrete_space(
-                ddc::UniformPointSampling<GhostedVx>::
+        ddc::init_discrete_space<ghosted_vx_point_sampling>(
+                ghosted_vx_point_sampling::
                         init(ddc::Coordinate<GhostedVx>(vx0 - step),
                              ddc::Coordinate<GhostedVx>(vxN + step),
-                             ddc::DiscreteVector<ddc::UniformPointSampling<GhostedVx>>(
-                                     ncells + 3)));
+                             ddc::DiscreteVector<ghosted_vx_point_sampling>(ncells + 3)));
     } else {
         int const npoints(ncells + 3);
         std::vector<ddc::Coordinate<GhostedVx>> breaks(npoints);
@@ -55,17 +54,16 @@ CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
         ddc::for_each(ddc::select<IDimVx>(mesh), [&](IndexVx const ivx) {
             breaks[ghosted_from_index(ivx).uid()] = ghosted_from_coord(ddc::coordinate(ivx));
         });
-        ddc::init_discrete_space<ddc::NonUniformPointSampling<GhostedVx>>(breaks);
+        ddc::init_discrete_space<ghosted_vx_point_sampling>(breaks);
     }
 
     if constexpr (uniform_edge_v) {
         double const step(ddc::step<IDimVx>());
-        ddc::init_discrete_space(
-                ddc::UniformPointSampling<GhostedVxStaggered>::
+        ddc::init_discrete_space<ghosted_vx_staggered_point_sampling>(
+                ghosted_vx_staggered_point_sampling::
                         init(ddc::Coordinate<GhostedVxStaggered>(vx0 - step / 2),
                              ddc::Coordinate<GhostedVxStaggered>(vxN + step / 2),
-                             ddc::DiscreteVector<ddc::UniformPointSampling<GhostedVxStaggered>>(
-                                     ncells + 2)));
+                             ddc::DiscreteVector<ghosted_vx_staggered_point_sampling>(ncells + 2)));
     } else {
         int const npoints(ncells + 2);
         std::vector<ddc::Coordinate<GhostedVxStaggered>> breaks(npoints);
@@ -76,7 +74,7 @@ CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
             breaks[ivx.uid() + 1] = CollisionsIntra::ghosted_staggered_from_coord(
                     CoordVx((ddc::coordinate(ivx) + ddc::coordinate(ivx + 1)) / 2.));
         });
-        ddc::init_discrete_space<ddc::NonUniformPointSampling<GhostedVxStaggered>>(breaks);
+        ddc::init_discrete_space<ghosted_vx_staggered_point_sampling>(breaks);
     }
 
     m_nustar_profile = m_nustar_profile_alloc.span_view();

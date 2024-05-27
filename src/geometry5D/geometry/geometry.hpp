@@ -10,7 +10,7 @@
  *
  */
 
-using Species = SpeciesInformation;
+using Species = IDimSp;
 using IdxSp = ddc::DiscreteElement<Species>;
 using DVecSp = ddc::DiscreteVector<Species>;
 using DDomSp = ddc::DiscreteDomain<Species>;
@@ -93,11 +93,21 @@ using CoordVpar = ddc::Coordinate<Vpar>;
 using CoordMu = ddc::Coordinate<Mu>;
 using CoordV2D = ddc::Coordinate<Mu, Vpar>;
 
-using GridTor1 = ddc::NonUniformPointSampling<Tor1>;
-using GridTor2 = ddc::NonUniformPointSampling<Tor2>;
-using GridTor3 = ddc::NonUniformPointSampling<Tor3>;
-using GridVpar = ddc::NonUniformPointSampling<Vpar>;
-using GridMu = ddc::NonUniformPointSampling<Mu>;
+struct GridTor1 : ddc::NonUniformPointSampling<Tor1>
+{
+};
+struct GridTor2 : ddc::NonUniformPointSampling<Tor2>
+{
+};
+struct GridTor3 : ddc::NonUniformPointSampling<Tor3>
+{
+};
+struct GridVpar : ddc::NonUniformPointSampling<Vpar>
+{
+};
+struct GridMu : ddc::NonUniformPointSampling<Mu>
+{
+};
 
 using IdxTor1 = ddc::DiscreteElement<GridTor1>;
 using IdxTor2 = ddc::DiscreteElement<GridTor2>;
