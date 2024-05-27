@@ -7,14 +7,14 @@
 
 #include <iboltzmannsolver.hpp>
 #include <ifluidsolver.hpp>
-#include <ipoissonsolver.hpp>
+#include <iqnsolver.hpp>
 
 #include "predcorr_hybrid.hpp"
 
 PredCorrHybrid::PredCorrHybrid(
         IBoltzmannSolver const& boltzmann_solver,
         IFluidSolver const& fluid_solver,
-        IPoissonSolver const& poisson_solver)
+        IQNSolver const& poisson_solver)
     : m_boltzmann_solver(boltzmann_solver)
     , m_fluid_solver(fluid_solver)
     , m_poisson_solver(poisson_solver)

@@ -8,7 +8,7 @@
 #include <geometry.hpp>
 
 #include "ichargedensitycalculator.hpp"
-#include "ipoissonsolver.hpp"
+#include "iqnsolver.hpp"
 
 struct HiddenNUBSplinesX : ddc::NonUniformBSplines<RDimX, BSDegreeX>
 {
@@ -27,16 +27,16 @@ using NUBSplineXEvaluator_1d = ddc::SplineEvaluator<
         IDimX>;
 
 /**
- * @brief An operator which solves the Poisson equation using Finite
+ * @brief An operator which solves the Quasi-Neutrality equation using Finite
  * Elements on a non-periodic domain.
  *
- * An operator which solves the Poisson equation:
+ * An operator which solves the Quasi-Neutrality equation:
  * @f$ - \frac{d^2 \phi}{dx^2} = \rho @f$
  * using Finite Elements on a non-periodic domain.
  * This solver uses spline basis elements and imposes Dirichlet boundary
  * conditions.
  */
-class FemNonPeriodicPoissonSolver : public IPoissonSolver
+class FemNonPeriodicQNSolver : public IQNSolver
 {
 public:
     /**
@@ -96,13 +96,13 @@ private:
 
 public:
     /**
-     * Construct the FemNonPeriodicPoissonSolver operator.
+     * Construct the FemNonPeriodicQNSolver operator.
      *
      * @param spline_x_builder A spline builder which calculates the coefficients of a spline representation.
      * @param spline_x_evaluator A spline evaluator which provides the value of a spline representation from its coefficients.
      * @param compute_rho The operator which calculates the charge density, the right hand side of the equation.
      */
-    FemNonPeriodicPoissonSolver(
+    FemNonPeriodicQNSolver(
             SplineXBuilder_1d const& spline_x_builder,
             SplineXEvaluator_1d const& spline_x_evaluator,
             IChargeDensityCalculator const& compute_rho);

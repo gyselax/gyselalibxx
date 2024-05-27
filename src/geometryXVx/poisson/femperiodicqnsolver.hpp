@@ -8,19 +8,19 @@
 #include <geometry.hpp>
 
 #include "ichargedensitycalculator.hpp"
-#include "ipoissonsolver.hpp"
+#include "iqnsolver.hpp"
 
 /**
- * @brief An operator which solves the Poisson equation using Finite
+ * @brief An operator which solves the Quasi-Neutrality equation using Finite
  * Elements on a periodic domain.
  *
- * An operator which solves the Poisson equation:
+ * An operator which solves the Quasi-Neutrality equation:
  * @f$ - \frac{d^2 \phi}{dx^2} = \rho @f$
  * using Finite Elements on a periodic domain.
  * This solver uses spline basis elements and imposes Dirichlet boundary
  * conditions.
  */
-class FemPeriodicPoissonSolver : public IPoissonSolver
+class FemPeriodicQNSolver : public IQNSolver
 {
 public:
     struct QDimX
@@ -73,13 +73,13 @@ private:
 
 public:
     /**
-     * Construct the FemPeriodicPoissonSolver operator.
+     * Construct the FemPeriodicQNSolver operator.
      *
      * @param spline_x_builder A spline builder which calculates the coefficients of a spline representation.
      * @param spline_x_evaluator A spline evaluator which provides the value of a spline representation from its coefficients.
      * @param compute_rho The operator which calculates the charge density, the right hand side of the equation.
      */
-    FemPeriodicPoissonSolver(
+    FemPeriodicQNSolver(
             SplineXBuilder_1d const& spline_x_builder,
             SplineXEvaluator_1d const& spline_x_evaluator,
             IChargeDensityCalculator const& compute_rho);

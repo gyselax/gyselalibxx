@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 
-#include "nullpoissonsolver.hpp"
+#include "nullqnsolver.hpp"
 
-void NullPoissonSolver::operator()(
+void NullQNSolver::operator()(
         DSpanX const electrostatic_potential,
         DSpanX const electric_field,
         DViewSpXVx const allfdistribu) const

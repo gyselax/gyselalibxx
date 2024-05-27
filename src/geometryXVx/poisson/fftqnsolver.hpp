@@ -3,13 +3,13 @@
 #pragma once
 
 #include "ichargedensitycalculator.hpp"
-#include "ipoissonsolver.hpp"
+#include "iqnsolver.hpp"
 
 /**
- * @brief An operator which solves the Poisson equation using a fast
+ * @brief An operator which solves the Quasi-Neutrality equation using a fast
  * Fourier transform.
  *
- * An operator which solves the Poisson equation:
+ * An operator which solves the Quasi-Neutrality equation:
  * @f$ - \frac{d^2 \phi}{dx^2} = \rho @f$
  * using a fast Fourier transform on a periodic domain.
  * This operator only works for equidistant points.
@@ -17,19 +17,19 @@
  * The electric field, @f$ \frac{d \phi}{dx} @f$ is calculated using
  * a spline interpolation implemented in ElectricField.
  */
-class FftPoissonSolver : public IPoissonSolver
+class FftQNSolver : public IQNSolver
 {
     IChargeDensityCalculator const& m_compute_rho;
 
 public:
     /**
-     * Construct the FftPoissonSolver operator.
+     * Construct the FftQNSolver operator.
      *
      * @param compute_rho The operator which calculates the charge density, the right hand side of the equation.
      */
-    FftPoissonSolver(IChargeDensityCalculator const& compute_rho);
+    FftQNSolver(IChargeDensityCalculator const& compute_rho);
 
-    ~FftPoissonSolver() override = default;
+    ~FftQNSolver() override = default;
 
     /**
      * The operator which solves the equation using the method described by the class.

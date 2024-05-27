@@ -15,12 +15,12 @@
 #include "chargedensitycalculator.hpp"
 #include "constantfluidinitialization.hpp"
 #ifdef PERIODIC_RDIMX
-#include "femperiodicpoissonsolver.hpp"
+#include "femperiodicqnsolver.hpp"
 #else
-#include "femnonperiodicpoissonsolver.hpp"
+#include "femnonperiodicqnsolver.hpp"
 #endif
 #include "Lagrange_interpolator.hpp"
-#include "fftpoissonsolver.hpp"
+#include "fftqnsolver.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "maxwellianequilibrium.hpp"
@@ -224,9 +224,9 @@ TEST(GeometryXM, PredCorrHybrid)
     IDomainSpXVx const meshSpXVx(dom_kinsp, meshXVx);
     ddc::init_discrete_space<IDimFx>(
             ddc::init_fourier_space<IDimFx>(ddc::select<IDimX>(meshSpXVx)));
-    FftPoissonSolver const poisson(rhs);
+    FftQNSolver const poisson(rhs);
 #else
-    FemNonPeriodicPoissonSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
+    FemNonPeriodicQNSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 #endif
 
     // construction of predcorr without fluid species

@@ -17,7 +17,7 @@
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
-#include "fftpoissonsolver.hpp"
+#include "fftqnsolver.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
@@ -219,7 +219,7 @@ int main(int argc, char** argv)
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
-    FftPoissonSolver const poisson(rhs);
+    FftQNSolver const poisson(rhs);
 
     PredCorr const predcorr(vlasov, poisson);
 

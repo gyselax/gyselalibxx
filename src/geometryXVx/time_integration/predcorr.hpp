@@ -6,7 +6,7 @@
 
 #include "itimesolver.hpp"
 
-class IPoissonSolver;
+class IQNSolver;
 class IBoltzmannSolver;
 
 /**
@@ -24,15 +24,15 @@ class PredCorr : public ITimeSolver
 private:
     IBoltzmannSolver const& m_boltzmann_solver;
 
-    IPoissonSolver const& m_poisson_solver;
+    IQNSolver const& m_poisson_solver;
 
 public:
     /**
      * @brief Creates an instance of the predictor-corrector class.
      * @param[in] boltzmann_solver A solver for a Boltzmann equation.
-     * @param[in] poisson_solver A solver for a Poisson equation.
+     * @param[in] poisson_solver A solver for a Quasi-Neutrality equation.
      */
-    PredCorr(IBoltzmannSolver const& boltzmann_solver, IPoissonSolver const& poisson_solver);
+    PredCorr(IBoltzmannSolver const& boltzmann_solver, IQNSolver const& poisson_solver);
 
     ~PredCorr() override = default;
 

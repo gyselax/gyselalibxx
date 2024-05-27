@@ -16,9 +16,9 @@
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #ifdef PERIODIC_RDIMX
-#include "femperiodicpoissonsolver.hpp"
+#include "femperiodicqnsolver.hpp"
 #else
-#include "femnonperiodicpoissonsolver.hpp"
+#include "femnonperiodicqnsolver.hpp"
 #endif
 #include "chargedensitycalculator.hpp"
 #include "geometry.hpp"
@@ -215,9 +215,9 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
 #ifdef PERIODIC_RDIMX
-    using FemPoissonSolverX = FemPeriodicPoissonSolver;
+    using FemQNSolverX = FemPeriodicQNSolver;
 #else
-    using FemPoissonSolverX = FemNonPeriodicPoissonSolver;
+    using FemQNSolverX = FemNonPeriodicQNSolver;
 #endif
     host_t<DFieldVx> const quadrature_coeffs_host
             = neumann_spline_quadrature_coefficients(gridvx, builder_vx_poisson);
@@ -225,7 +225,7 @@ int main(int argc, char** argv)
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
-    FemPoissonSolverX const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
+    FemQNSolverX const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 
     PredCorr const predcorr(vlasov, poisson);
 

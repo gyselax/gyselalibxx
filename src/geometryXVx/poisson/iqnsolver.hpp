@@ -7,15 +7,15 @@
 #include <geometry.hpp>
 
 /**
- * @brief An operator which solves the Poisson equation.
+ * @brief An operator which solves the Quasi-Neutrality equation.
  *
- * An operator which solves the Poisson equation:
+ * An operator which solves the Quasi-Neutrality equation:
  * @f$ - \frac{d^2 \phi}{dx^2} = \rho @f$
  */
-class IPoissonSolver
+class IQNSolver
 {
 public:
-    virtual ~IPoissonSolver() = default;
+    virtual ~IQNSolver() = default;
 
     /**
      * The operator which solves the equation using the method described by the class.

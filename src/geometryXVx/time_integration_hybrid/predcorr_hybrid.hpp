@@ -6,7 +6,7 @@
 
 #include "itimesolver_hybrid.hpp"
 
-class IPoissonSolver;
+class IQNSolver;
 class IBoltzmannSolver;
 class IFluidSolver;
 
@@ -28,19 +28,19 @@ private:
 
     IFluidSolver const& m_fluid_solver;
 
-    IPoissonSolver const& m_poisson_solver;
+    IQNSolver const& m_poisson_solver;
 
 public:
     /**
      * @brief Creates an instance of the predictor-corrector class.
      * @param[in] boltzmann_solver A solver for a Boltzmann equation.
      * @param[in] fluid_solver A solver for a fluid model.
-     * @param[in] poisson_solver A solver for a Poisson equation.
+     * @param[in] poisson_solver A solver for a Quasi-Neutrality equation.
      */
     PredCorrHybrid(
             IBoltzmannSolver const& boltzmann_solver,
             IFluidSolver const& fluid_solver,
-            IPoissonSolver const& poisson_solver);
+            IQNSolver const& poisson_solver);
 
     ~PredCorrHybrid() override = default;
 

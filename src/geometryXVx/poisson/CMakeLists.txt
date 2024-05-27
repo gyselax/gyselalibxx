@@ -4,7 +4,7 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("poisson_${GEOMETRY_VARIANT}" STATIC
     chargedensitycalculator.cpp
-    nullpoissonsolver.cpp
+    nullqnsolver.cpp
 )
 
 target_compile_features("poisson_${GEOMETRY_VARIANT}"
@@ -30,11 +30,11 @@ endforeach()
 
 target_sources(poisson_xperiod_vx
     PRIVATE
-        fftpoissonsolver.cpp
-        femperiodicpoissonsolver.cpp
+        fftqnsolver.cpp
+        femperiodicqnsolver.cpp
 )
 
 target_sources(poisson_xnonperiod_vx
     PRIVATE
-        femnonperiodicpoissonsolver.cpp
+        femnonperiodicqnsolver.cpp
 )
