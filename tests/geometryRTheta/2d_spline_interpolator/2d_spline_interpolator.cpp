@@ -316,11 +316,11 @@ int main(int argc, char** argv)
     ddc::init_discrete_space<BSplinesR>(r_knots);
     ddc::init_discrete_space<BSplinesP>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling());
-    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling());
+    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling<IDimR>());
+    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling<IDimP>());
 
-    IDomainR interpolation_domain_R(SplineInterpPointsR::get_domain());
-    IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain());
+    IDomainR interpolation_domain_R(SplineInterpPointsR::get_domain<IDimR>());
+    IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain<IDimP>());
     IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
 
 

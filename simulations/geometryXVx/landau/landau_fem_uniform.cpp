@@ -87,10 +87,10 @@ int main(int argc, char** argv)
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
-    IDomainX interpolation_domain_x(SplineInterpPointsX::get_domain());
-    IDomainVx interpolation_domain_vx(SplineInterpPointsVx::get_domain());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    IDomainX interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
+    IDomainVx interpolation_domain_vx(SplineInterpPointsVx::get_domain<IDimVx>());
     IDomainXVx meshXVx(interpolation_domain_x, interpolation_domain_vx);
 
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));

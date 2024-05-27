@@ -33,7 +33,7 @@ void FftPoissonSolver::operator()(
     m_compute_rho(rho, allfdistribu);
 
     // Build a mesh in the fourier space, for N points
-    IDomainFx const k_mesh = ddc::FourierMesh(x_dom, false);
+    IDomainFx const k_mesh = ddc::FourierMesh<IDimFx>(x_dom, false);
     device_t<ddc::Chunk<Kokkos::complex<double>, IDomainFx>> intermediate_chunk_alloc(k_mesh);
     ddc::ChunkSpan intermediate_chunk = intermediate_chunk_alloc.span_view();
     // Compute FFT(rho)

@@ -14,7 +14,9 @@
 
 namespace {
 
-struct DDimX;
+struct DDimX
+{
+};
 using DElemX = ddc::DiscreteElement<DDimX>;
 using DVectX = ddc::DiscreteVector<DDimX>;
 using DDomX = ddc::DiscreteDomain<DDimX>;
@@ -23,7 +25,9 @@ template <class Datatype>
 using ChunkSpanX = ddc::ChunkSpan<Datatype, DDomX>;
 
 
-struct DDimY;
+struct DDimY
+{
+};
 
 
 using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;

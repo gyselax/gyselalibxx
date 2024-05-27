@@ -19,21 +19,27 @@ struct X;
 
 //! [X-discretization]
 /// A uniform discretization of X
-using DDimX = ddc::UniformPointSampling<X>;
+struct DDimX : ddc::UniformPointSampling<X>
+{
+};
 //! [X-discretization]
 
 //! [Y-space]
 // Our second continuous dimension
 struct Y;
 // Its uniform discretization
-using DDimY = ddc::UniformPointSampling<Y>;
+struct DDimY : ddc::UniformPointSampling<Y>
+{
+};
 //! [Y-space]
 
 //! [time-space]
 // Our simulated time dimension
 struct T;
 // Its uniform discretization
-using DDimT = ddc::UniformPointSampling<T>;
+struct DDimT : ddc::UniformPointSampling<T>
+{
+};
 //! [time-space]
 
 
@@ -130,7 +136,7 @@ int main(int argc, char** argv)
     // Initialization of the global domain in X with gwx ghost points on
     // each side
     auto const [x_domain, ghosted_x_domain, x_pre_ghost, x_post_ghost]
-            = ddc::init_discrete_space(DDimX::init_ghosted(
+            = ddc::init_discrete_space<DDimX>(DDimX::init_ghosted<DDimX>(
                     ddc::Coordinate<X>(x_start),
                     ddc::Coordinate<X>(x_end),
                     ddc::DiscreteVector<DDimX>(nb_x_points),
@@ -156,7 +162,7 @@ int main(int argc, char** argv)
     // Initialization of the global domain in Y with gwy ghost points on
     // each side
     auto const [y_domain, ghosted_y_domain, y_pre_ghost, y_post_ghost]
-            = ddc::init_discrete_space(DDimY::init_ghosted(
+            = ddc::init_discrete_space<DDimY>(DDimY::init_ghosted<DDimY>(
                     ddc::Coordinate<Y>(y_start),
                     ddc::Coordinate<Y>(y_end),
                     ddc::DiscreteVector<DDimY>(nb_y_points),
@@ -206,11 +212,10 @@ int main(int argc, char** argv)
     //   steps + 1
     // `init` takes required information to initialize the attributes of the dimension.
     ddc::DiscreteDomain<DDimT> const time_domain
-            = ddc::init_discrete_space(
-                    DDimT::
-                            init(ddc::Coordinate<T>(start_time),
-                                 ddc::Coordinate<T>(end_time),
-                                 nb_time_steps + 1));
+            = ddc::init_discrete_space<DDimT>(DDimT::init<DDimT>(
+                    ddc::Coordinate<T>(start_time),
+                    ddc::Coordinate<T>(end_time),
+                    nb_time_steps + 1));
     //! [time-domains]
 
     //! [data allocation]

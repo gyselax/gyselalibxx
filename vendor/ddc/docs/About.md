@@ -1,10 +1,10 @@
+\mainpage About
+
 <!--
 Copyright (C) The DDC development team, see COPYRIGHT.md file
 
 SPDX-License-Identifier: MIT
 -->
-
-\mainpage About
 
 %DDC is the discrete domain computation library, a C++-17 library that aims to offer to the C++/MPI
 world an equivalent to the

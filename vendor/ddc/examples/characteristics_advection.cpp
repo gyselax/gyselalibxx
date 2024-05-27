@@ -25,26 +25,34 @@ struct X
 
 //! [X-discretization]
 /// A uniform discretization of X
-using BSplinesX = ddc::UniformBSplines<X, s_degree_x>;
+struct BSplinesX : ddc::UniformBSplines<X, s_degree_x>
+{
+};
 using GrevillePoints = ddc::GrevilleInterpolationPoints<
         BSplinesX,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC>;
-using DDimX = GrevillePoints::interpolation_mesh_type;
+struct DDimX : GrevillePoints::interpolation_mesh_type
+{
+};
 //! [X-discretization]
 
 //! [Y-space]
 // Our second continuous dimension
 struct Y;
 // Its uniform discretization
-using DDimY = ddc::UniformPointSampling<Y>;
+struct DDimY : ddc::UniformPointSampling<Y>
+{
+};
 //! [Y-space]
 
 //! [time-space]
 // Our simulated time dimension
 struct T;
 // Its uniform discretization
-using DDimT = ddc::UniformPointSampling<T>;
+struct DDimT : ddc::UniformPointSampling<T>
+{
+};
 //! [time-space]
 
 //! [display]
@@ -125,19 +133,19 @@ int main(int argc, char** argv)
             ddc::GrevilleInterpolationPoints<
                     BSplinesX,
                     ddc::BoundCond::PERIODIC,
-                    ddc::BoundCond::PERIODIC>::get_sampling());
+                    ddc::BoundCond::PERIODIC>::get_sampling<DDimX>());
 
     auto const x_domain = ddc::GrevilleInterpolationPoints<
             BSplinesX,
             ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC>::get_domain();
+            ddc::BoundCond::PERIODIC>::get_domain<DDimX>();
     //! [X-global-domain]
     // Initialization of the global domain in Y
-    auto const y_domain = ddc::init_discrete_space(
-            DDimY::
-                    init(ddc::Coordinate<Y>(y_start),
-                         ddc::Coordinate<Y>(y_end),
-                         ddc::DiscreteVector<DDimY>(nb_y_points)));
+    auto const y_domain
+            = ddc::init_discrete_space<DDimY>(DDimY::init<DDimY>(
+                    ddc::Coordinate<Y>(y_start),
+                    ddc::Coordinate<Y>(y_end),
+                    ddc::DiscreteVector<DDimY>(nb_y_points)));
 
     //! [time-domains]
 
@@ -148,11 +156,10 @@ int main(int argc, char** argv)
     // - the number of discrete time-points is equal to the number of
     //   steps + 1
     ddc::DiscreteDomain<DDimT> const time_domain
-            = ddc::init_discrete_space(
-                    DDimT::
-                            init(ddc::Coordinate<T>(start_time),
-                                 ddc::Coordinate<T>(end_time),
-                                 nb_time_steps + 1));
+            = ddc::init_discrete_space<DDimT>(DDimT::init<DDimT>(
+                    ddc::Coordinate<T>(start_time),
+                    ddc::Coordinate<T>(end_time),
+                    nb_time_steps + 1));
     //! [time-domains]
 
     //! [data allocation]

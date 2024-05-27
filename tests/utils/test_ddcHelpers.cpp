@@ -17,21 +17,28 @@ public:
 
 using Coord = Coordinate<Tag>;
 
+struct IDimUniform : UniformPointSampling<Tag>
+{
+};
+
+struct IDimNonUniform : NonUniformPointSampling<Tag>
+{
+};
+
 } // namespace
 
 TEST(DDCHelper, UniformPeriodicRestriction)
 {
-    using IDim = UniformPointSampling<Tag>;
-    using Index = DiscreteElement<IDim>;
-    using IVect = DiscreteVector<IDim>;
-    using IDomain = DiscreteDomain<IDim>;
+    using Index = DiscreteElement<IDimUniform>;
+    using IVect = DiscreteVector<IDimUniform>;
+    using IDomain = DiscreteDomain<IDimUniform>;
 
     Coord x_min(-1.0);
     Coord x_max(1.0);
     IVect x_size(5);
     double x_len = x_max - x_min;
 
-    init_discrete_space(IDim::init(x_min, x_max, x_size + 1));
+    init_discrete_space<IDimUniform>(IDimUniform::init(x_min, x_max, x_size + 1));
 
     IDomain dom(Index(0), x_size);
 
@@ -63,10 +70,9 @@ TEST(DDCHelper, UniformPeriodicRestriction)
 
 TEST(DDCHelper, NonUniformPeriodicRestriction)
 {
-    using IDim = NonUniformPointSampling<Tag>;
-    using Index = DiscreteElement<IDim>;
-    using IVect = DiscreteVector<IDim>;
-    using IDomain = DiscreteDomain<IDim>;
+    using Index = DiscreteElement<IDimNonUniform>;
+    using IVect = DiscreteVector<IDimNonUniform>;
+    using IDomain = DiscreteDomain<IDimNonUniform>;
 
     Coord x_min(-1.0);
     Coord x_max(1.0);
@@ -79,7 +85,7 @@ TEST(DDCHelper, NonUniformPeriodicRestriction)
     }
     nu_points[5] = x_max;
 
-    init_discrete_space<IDim>(nu_points);
+    init_discrete_space<IDimNonUniform>(nu_points);
 
     IDomain dom(Index(0), x_size);
 

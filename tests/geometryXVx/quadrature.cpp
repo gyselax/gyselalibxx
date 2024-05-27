@@ -15,7 +15,9 @@ struct RDimXPeriod
     static bool constexpr PERIODIC = true;
 };
 
-using IDimXPeriod = ddc::NonUniformPointSampling<RDimXPeriod>;
+struct IDimXPeriod : ddc::NonUniformPointSampling<RDimXPeriod>
+{
+};
 using IDomXPeriod = ddc::DiscreteDomain<IDimXPeriod>;
 using CoordXPeriod = ddc::Coordinate<RDimXPeriod>;
 
@@ -83,9 +85,15 @@ TEST(QuadratureTest, SimpsonExactForConstantFunc)
 }
 
 template <std::size_t N>
-struct Y
+struct ComputeErrorTraits
 {
-    static bool constexpr PERIODIC = false;
+    struct Y
+    {
+        static bool constexpr PERIODIC = false;
+    };
+    struct IDimY : ddc::NonUniformPointSampling<Y>
+    {
+    };
 };
 
 
@@ -94,8 +102,8 @@ enum Method { TRAPEZ, SIMPSON };
 template <std::size_t N>
 double compute_error(int n_elems, Method meth)
 {
-    using DimY = Y<N>;
-    using IDimY = ddc::NonUniformPointSampling<DimY>;
+    using DimY = typename ComputeErrorTraits<N>::Y;
+    using IDimY = typename ComputeErrorTraits<N>::IDimY;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
 

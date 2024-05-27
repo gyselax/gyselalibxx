@@ -11,7 +11,9 @@
 #include <gtest/gtest.h>
 
 template <typename X>
-using DDim = ddc::UniformPointSampling<X>;
+struct DDim : ddc::UniformPointSampling<X>
+{
+};
 
 template <typename... DDim>
 using DElem = ddc::DiscreteElement<DDim...>;
@@ -23,7 +25,9 @@ template <typename... DDim>
 using DDom = ddc::DiscreteDomain<DDim...>;
 
 template <typename Kx>
-using DFDim = ddc::PeriodicSampling<Kx>;
+struct DFDim : ddc::PeriodicSampling<Kx>
+{
+};
 
 // TODO:
 // - FFT multidim but according to a subset of dimensions
@@ -37,15 +41,15 @@ static void test_fft()
     double const b = 10;
     std::size_t const Nx = 64; // Optimal value is (b-a)^2/(2*pi)
 
-    DDom<DDim<X>...> const x_mesh(
-            ddc::init_discrete_space(DDim<X>::
-                                             init(ddc::Coordinate<X>(a + (b - a) / Nx / 2),
-                                                  ddc::Coordinate<X>(b - (b - a) / Nx / 2),
-                                                  DVect<DDim<X>>(Nx)))...);
-    (ddc::init_discrete_space<ddc::PeriodicSampling<ddc::Fourier<X>>>(
-             ddc::init_fourier_space(ddc::DiscreteDomain<DDim<X>>(x_mesh))),
+    DDom<DDim<X>...> const x_mesh(ddc::init_discrete_space<DDim<X>>(DDim<X>::template init<DDim<X>>(
+            ddc::Coordinate<X>(a + (b - a) / Nx / 2),
+            ddc::Coordinate<X>(b - (b - a) / Nx / 2),
+            DVect<DDim<X>>(Nx)))...);
+    (ddc::init_discrete_space<DFDim<ddc::Fourier<X>>>(
+             ddc::init_fourier_space<DFDim<ddc::Fourier<X>>>(ddc::DiscreteDomain<DDim<X>>(x_mesh))),
      ...);
-    DDom<DFDim<ddc::Fourier<X>>...> const k_mesh = ddc::FourierMesh(x_mesh, full_fft);
+    DDom<DFDim<ddc::Fourier<X>>...> const k_mesh(
+            ddc::FourierMesh<DFDim<ddc::Fourier<X>>...>(x_mesh, full_fft));
 
     ddc::Chunk f_alloc(x_mesh, ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan const f = f_alloc.span_view();
@@ -127,13 +131,14 @@ static void test_fft_norm(ddc::FFT_Normalization const norm)
     bool const full_fft
             = ddc::detail::fft::is_complex_v<Tin> && ddc::detail::fft::is_complex_v<Tout>;
 
-    DDom<DDim<X>> const x_mesh = ddc::init_discrete_space(DDim<X>::
-                                                                  init(ddc::Coordinate<X>(-1. / 4),
-                                                                       ddc::Coordinate<X>(1. / 4),
-                                                                       DVect<DDim<X>>(2)));
-    ddc::init_discrete_space<ddc::PeriodicSampling<ddc::Fourier<X>>>(
-            ddc::init_fourier_space<X>(x_mesh));
-    DDom<DFDim<ddc::Fourier<X>>> const k_mesh = ddc::FourierMesh(x_mesh, full_fft);
+    DDom<DDim<X>> const x_mesh(ddc::init_discrete_space<DDim<X>>(DDim<X>::template init<DDim<X>>(
+            ddc::Coordinate<X>(-1. / 4),
+            ddc::Coordinate<X>(1. / 4),
+            DVect<DDim<X>>(2))));
+    ddc::init_discrete_space<DFDim<ddc::Fourier<X>>>(
+            ddc::init_fourier_space<DFDim<ddc::Fourier<X>>>(x_mesh));
+    DDom<DFDim<ddc::Fourier<X>>> const k_mesh
+            = ddc::FourierMesh<DFDim<ddc::Fourier<X>>>(x_mesh, full_fft);
 
     ddc::Chunk f_alloc = ddc::Chunk(x_mesh, ddc::KokkosAllocator<Tin, MemorySpace>());
     ddc::ChunkSpan const f = f_alloc.span_view();

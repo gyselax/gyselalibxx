@@ -15,13 +15,12 @@
 template <class Geometry, class DDimX>
 class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, DDimX>
 {
-    using DDimSp = typename Geometry::DDimSp;
     using DDimV = typename Geometry::template velocity_dim_for<DDimX>;
     using DDom = typename Geometry::FdistribuDDom;
     using DElemX = ddc::DiscreteElement<DDimX>;
     using DElemV = ddc::DiscreteElement<DDimV>;
-    using DElemSp = ddc::DiscreteElement<DDimSp>;
-    using DElemSpV = ddc::DiscreteElement<DDimSp, DDimV>;
+    using DElemSp = ddc::DiscreteElement<IDimSp>;
+    using DElemSpV = ddc::DiscreteElement<IDimSp, DDimV>;
     using CDimX = typename DDimX::continuous_dimension_type;
     using CDimV = typename DDimV::continuous_dimension_type;
 
@@ -62,7 +61,7 @@ public:
         DDom const dom = allfdistribu.domain();
         ddc::DiscreteDomain<DDimX> const x_dom = ddc::select<DDimX>(dom);
         ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
-        ddc::DiscreteDomain<DDimSp> const sp_dom = ddc::select<DDimSp>(dom);
+        ddc::DiscreteDomain<IDimSp> const sp_dom = ddc::select<IDimSp>(dom);
 
         // pre-allocate some memory to prevent allocation later in loop
         ddc::Chunk feet_coords_alloc(
@@ -72,7 +71,7 @@ public:
         std::unique_ptr<InterpolatorType> const interpolator_x_ptr = m_interpolator_x.preallocate();
         InterpolatorType const& interpolator_x = *interpolator_x_ptr;
 
-        auto c_dom = ddc::remove_dims_of(dom, ddc::DiscreteDomain<DDimSp, DDimX>(sp_dom, x_dom));
+        auto c_dom = ddc::remove_dims_of(dom, ddc::DiscreteDomain<IDimSp, DDimX>(sp_dom, x_dom));
         using DElemC = typename decltype(c_dom)::discrete_element_type;
 
         for (DElemSp const isp : sp_dom) {

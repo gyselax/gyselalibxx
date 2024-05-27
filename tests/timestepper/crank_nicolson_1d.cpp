@@ -18,10 +18,13 @@ struct RDimX
     bool PERIODIC = false;
 };
 
+struct IDimX : UniformPointSampling<RDimX>
+{
+};
+
 TEST(CrankNicolsonFixture, CrankNicolsonOrder)
 {
     using CoordX = Coordinate<RDimX>;
-    using IDimX = UniformPointSampling<RDimX>;
     using IndexX = DiscreteElement<IDimX>;
     using IVectX = DiscreteVector<IDimX>;
     using IDomainX = DiscreteDomain<IDimX>;
@@ -41,7 +44,7 @@ TEST(CrankNicolsonFixture, CrankNicolsonOrder)
     std::array<double, Ntests> error;
     std::array<double, Ntests - 1> order;
 
-    init_discrete_space(IDimX::init(x_min, x_max, x_size));
+    init_discrete_space<IDimX>(IDimX::init(x_min, x_max, x_size));
     IDomainX dom(start, x_size);
 
     CrankNicolson<DChunkX> crank_nicolson(dom);

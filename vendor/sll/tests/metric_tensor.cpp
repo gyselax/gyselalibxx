@@ -30,17 +30,27 @@ using CoordRP = ddc::Coordinate<DimR, DimP>;
 
 int constexpr BSDegree = 3;
 
-using BSplinesR = ddc::NonUniformBSplines<DimR, BSDegree>;
-using BSplinesP = ddc::NonUniformBSplines<DimP, BSDegree>;
-using PolarBSplinesRP = PolarBSplines<BSplinesR, BSplinesP, 1>;
+struct BSplinesR : ddc::NonUniformBSplines<DimR, BSDegree>
+{
+};
+struct BSplinesP : ddc::NonUniformBSplines<DimP, BSDegree>
+{
+};
+struct PolarBSplinesRP : PolarBSplines<BSplinesR, BSplinesP, 1>
+{
+};
 
 using InterpPointsR = ddc::
         GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
 using InterpPointsP = ddc::
         GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
-using IDimR = typename InterpPointsR::interpolation_mesh_type;
-using IDimP = typename InterpPointsP::interpolation_mesh_type;
+struct IDimR : InterpPointsR::interpolation_mesh_type
+{
+};
+struct IDimP : InterpPointsP::interpolation_mesh_type
+{
+};
 
 using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
 using BSDomainP = ddc::DiscreteDomain<BSplinesP>;

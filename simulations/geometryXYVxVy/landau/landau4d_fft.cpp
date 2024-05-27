@@ -82,18 +82,18 @@ int main(int argc, char** argv)
     ddc::init_discrete_space<BSplinesY>(y_min, y_max, y_ncells);
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
     ddc::init_discrete_space<BSplinesVy>(vy_min, vy_max, vy_ncells);
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::init_discrete_space<IDimY>(SplineInterpPointsY::get_sampling());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
-    ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<IDimY>(SplineInterpPointsY::get_sampling<IDimY>());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling<IDimVy>());
 
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
 
-    IDomainX interpolation_domain_x(SplineInterpPointsX::get_domain());
-    IDomainY interpolation_domain_y(SplineInterpPointsY::get_domain());
-    IDomainVx interpolation_domain_vx(SplineInterpPointsVx::get_domain());
-    IDomainVy interpolation_domain_vy(SplineInterpPointsVy::get_domain());
+    IDomainX interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
+    IDomainY interpolation_domain_y(SplineInterpPointsY::get_domain<IDimY>());
+    IDomainVx interpolation_domain_vx(SplineInterpPointsVx::get_domain<IDimVx>());
+    IDomainVy interpolation_domain_vy(SplineInterpPointsVy::get_domain<IDimVy>());
     IDomainVxVy interpolation_domain_vxvy(interpolation_domain_vx, interpolation_domain_vy);
 
     IDomainXYVxVy meshXYVxVy(
@@ -210,9 +210,9 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_y, advection_vx, advection_vy);
 
     ddc::init_discrete_space<IDimFx>(
-            ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXYVxVy)));
+            ddc::init_fourier_space<IDimFx>(ddc::select<IDimX>(meshSpXYVxVy)));
     ddc::init_discrete_space<IDimFy>(
-            ddc::init_fourier_space<RDimY>(ddc::select<IDimY>(meshSpXYVxVy)));
+            ddc::init_fourier_space<IDimFy>(ddc::select<IDimY>(meshSpXYVxVy)));
 
     host_t<DFieldVxVy> const quadrature_coeffs_host = neumann_spline_quadrature_coefficients(
             interpolation_domain_vxvy,

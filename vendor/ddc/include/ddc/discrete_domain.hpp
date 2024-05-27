@@ -255,7 +255,7 @@ public:
         return 0;
     }
 
-    constexpr DiscreteDomain() = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr DiscreteDomain() = default;
 
     // Construct a DiscreteDomain from a reordered copy of `domain`
     template <class... ODDims>
@@ -427,6 +427,20 @@ KOKKOS_FUNCTION constexpr auto remove_dims_of(
     return detail::convert_type_seq_to_discrete_domain<type_seq_r>(DDom_a);
 }
 
+//! Remove the dimensions DDimsB from DDom_a
+//! @param[in] DDom_a The discrete domain on which to remove dimensions
+//! @return The discrete domain without DDimsB dimensions
+template <class... DDimsB, class DDomA>
+KOKKOS_FUNCTION constexpr auto remove_dims_of(DDomA const& DDom_a) noexcept
+{
+    using TagSeqA = typename detail::ToTypeSeq<DDomA>::type;
+    using TagSeqB = detail::TypeSeq<DDimsB...>;
+
+    using type_seq_r = type_seq_remove_t<TagSeqA, TagSeqB>;
+    return detail::convert_type_seq_to_discrete_domain<type_seq_r>(DDom_a);
+}
+
+namespace detail {
 
 // Checks if dimension of DDom_a is DDim1. If not, returns restriction to DDim2 of DDom_b. May not be usefull in its own, it helps for replace_dim_of
 template <typename DDim1, typename DDim2, typename DDimA, typename... DDimsB>
@@ -445,6 +459,8 @@ replace_dim_of_1d(
     }
 }
 
+} // namespace detail
+
 // Replace in DDom_a the dimension Dim1 by the dimension Dim2 of DDom_b
 template <typename DDim1, typename DDim2, typename... DDimsA, typename... DDimsB>
 KOKKOS_FUNCTION constexpr auto replace_dim_of(
@@ -458,7 +474,7 @@ KOKKOS_FUNCTION constexpr auto replace_dim_of(
 
     using type_seq_r = ddc::type_seq_replace_t<TagSeqA, TagSeqB, TagSeqC>;
     return ddc::detail::convert_type_seq_to_discrete_domain<type_seq_r>(
-            replace_dim_of_1d<
+            detail::replace_dim_of_1d<
                     DDim1,
                     DDim2,
                     DDimsA,

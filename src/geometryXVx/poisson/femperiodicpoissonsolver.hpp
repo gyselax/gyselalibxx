@@ -27,8 +27,11 @@ public:
     {
     };
 
+    struct QMeshX : ddc::NonUniformPointSampling<QDimX>
+    {
+    };
+
 private:
-    using QMeshX = ddc::NonUniformPointSampling<QDimX>;
     using DQFieldX = device_t<ddc::Chunk<double, ddc::DiscreteDomain<QMeshX>>>;
 
 private:

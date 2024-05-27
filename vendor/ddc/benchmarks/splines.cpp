@@ -23,13 +23,19 @@ struct X
     static constexpr bool PERIODIC = true;
 };
 
-using BSplinesX = ddc::UniformBSplines<X, s_degree_x>;
+struct BSplinesX : ddc::UniformBSplines<X, s_degree_x>
+{
+};
 using GrevillePoints = ddc::
         GrevilleInterpolationPoints<BSplinesX, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
-using DDimX = GrevillePoints::interpolation_mesh_type;
+struct DDimX : GrevillePoints::interpolation_mesh_type
+{
+};
 
 struct Y;
-using DDimY = ddc::UniformPointSampling<Y>;
+struct DDimY : ddc::UniformPointSampling<Y>
+{
+};
 
 
 } // namespace
@@ -78,17 +84,16 @@ static void characteristics_advection(benchmark::State& state)
     ddc::init_discrete_space<DDimX>(ddc::GrevilleInterpolationPoints<
                                     BSplinesX,
                                     ddc::BoundCond::PERIODIC,
-                                    ddc::BoundCond::PERIODIC>::get_sampling());
-    ddc::DiscreteDomain<DDimY> y_domain
-            = ddc::init_discrete_space(DDimY::
-                                               init(ddc::Coordinate<Y>(-1.),
-                                                    ddc::Coordinate<Y>(1.),
-                                                    ddc::DiscreteVector<DDimY>(state.range(1))));
+                                    ddc::BoundCond::PERIODIC>::get_sampling<DDimX>());
+    ddc::DiscreteDomain<DDimY> y_domain = ddc::init_discrete_space<DDimY>(DDimY::init<DDimY>(
+            ddc::Coordinate<Y>(-1.),
+            ddc::Coordinate<Y>(1.),
+            ddc::DiscreteVector<DDimY>(state.range(1))));
 
     auto const x_domain = ddc::GrevilleInterpolationPoints<
             BSplinesX,
             ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC>::get_domain();
+            ddc::BoundCond::PERIODIC>::get_domain<DDimX>();
     ddc::Chunk density_alloc(
             ddc::DiscreteDomain<DDimX, DDimY>(x_domain, y_domain),
             ddc::DeviceAllocator<double>());
@@ -170,7 +175,7 @@ static void characteristics_advection(benchmark::State& state)
     /// variables, which is always a bad idea.       ///
     ////////////////////////////////////////////////////
     ddc::detail::g_discrete_space_dual<BSplinesX>.reset();
-    ddc::detail::g_discrete_space_dual<BSplinesX::mesh_type>.reset();
+    ddc::detail::g_discrete_space_dual<ddc::UniformBsplinesKnots<BSplinesX>>.reset();
     ddc::detail::g_discrete_space_dual<DDimX>.reset();
     ddc::detail::g_discrete_space_dual<DDimY>.reset();
     ////////////////////////////////////////////////////

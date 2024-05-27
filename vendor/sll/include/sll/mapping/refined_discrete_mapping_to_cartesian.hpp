@@ -121,15 +121,21 @@ public:
         static bool constexpr PERIODIC = false;
     };
 
-private:
-    using BSplineRRefined = std::conditional_t<
-            BSplineR_uniform,
-            ddc::UniformBSplines<RDimRRefined, BSDegreeRRefined>,
-            ddc::NonUniformBSplines<RDimRRefined, BSDegreeRRefined>>;
-    using BSplinePRefined = std::conditional_t<
-            BSplineP_uniform,
-            ddc::UniformBSplines<RDimPRefined, BSDegreePRefined>,
-            ddc::NonUniformBSplines<RDimPRefined, BSDegreePRefined>>;
+public:
+    struct BSplineRRefined
+        : std::conditional_t<
+                  BSplineR_uniform,
+                  ddc::UniformBSplines<RDimRRefined, BSDegreeRRefined>,
+                  ddc::NonUniformBSplines<RDimRRefined, BSDegreeRRefined>>
+    {
+    };
+    struct BSplinePRefined
+        : std::conditional_t<
+                  BSplineP_uniform,
+                  ddc::UniformBSplines<RDimPRefined, BSDegreePRefined>,
+                  ddc::NonUniformBSplines<RDimPRefined, BSDegreePRefined>>
+    {
+    };
 
     static auto constexpr SplineRBoundaryRefined_min = SplineRPBuilder::builder_type1::s_bc_xmin;
     static auto constexpr SplineRBoundaryRefined_max = SplineRPBuilder::builder_type1::s_bc_xmax;
@@ -143,14 +149,20 @@ private:
             = ddc::is_uniform_sampling_v<typename SplineRPBuilder::interpolation_mesh_type2>;
 
 
-    using IDimRRefined = std::conditional_t<
-            UniformMeshR,
-            ddc::UniformPointSampling<RDimRRefined>,
-            ddc::NonUniformPointSampling<RDimRRefined>>;
-    using IDimPRefined = std::conditional_t<
-            UniformMeshP,
-            ddc::UniformPointSampling<RDimPRefined>,
-            ddc::NonUniformPointSampling<RDimPRefined>>;
+    struct IDimRRefined
+        : std::conditional_t<
+                  UniformMeshR,
+                  ddc::UniformPointSampling<RDimRRefined>,
+                  ddc::NonUniformPointSampling<RDimRRefined>>
+    {
+    };
+    struct IDimPRefined
+        : std::conditional_t<
+                  UniformMeshP,
+                  ddc::UniformPointSampling<RDimPRefined>,
+                  ddc::NonUniformPointSampling<RDimPRefined>>
+    {
+    };
 
 
     using REvalBoundary = ddc::ConstantExtrapolationRule<RDimRRefined, RDimPRefined>;
@@ -627,11 +639,15 @@ public:
             ddc::init_discrete_space<BSplinePRefined>(p_knots);
         }
 
-        ddc::init_discrete_space<IDimRRefined>(SplineInterpPointsRRefined::get_sampling());
-        ddc::init_discrete_space<IDimPRefined>(SplineInterpPointsPRefined::get_sampling());
+        ddc::init_discrete_space<IDimRRefined>(
+                SplineInterpPointsRRefined::template get_sampling<IDimRRefined>());
+        ddc::init_discrete_space<IDimPRefined>(
+                SplineInterpPointsPRefined::template get_sampling<IDimPRefined>());
 
-        IDomainRRefined const interpolation_domain_R(SplineInterpPointsRRefined::get_domain());
-        IDomainPRefined const interpolation_domain_P(SplineInterpPointsPRefined::get_domain());
+        IDomainRRefined const interpolation_domain_R(
+                SplineInterpPointsRRefined::template get_domain<IDimRRefined>());
+        IDomainPRefined const interpolation_domain_P(
+                SplineInterpPointsPRefined::template get_domain<IDimPRefined>());
         IDomainRPRefined const refined_domain(interpolation_domain_R, interpolation_domain_P);
 
         // Operators on the refined grid

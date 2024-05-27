@@ -326,37 +326,44 @@ struct kwArgs_core
 };
 
 // N,a,b from x_mesh
-template <typename Dim, typename... X>
-int N(ddc::DiscreteDomain<ddc::UniformPointSampling<X>...> x_mesh)
+template <typename DDim, typename... DDimX>
+int N(ddc::DiscreteDomain<DDimX...> x_mesh)
 {
-    return ddc::get<ddc::UniformPointSampling<Dim>>(x_mesh.extents());
+    static_assert(
+            (is_uniform_sampling_v<DDimX> && ...),
+            "DDimX dimensions should derive from UniformPointSampling");
+    return ddc::get<DDim>(x_mesh.extents());
 }
 
-template <typename Dim, typename... X>
-double a(ddc::DiscreteDomain<ddc::UniformPointSampling<X>...> x_mesh)
+template <typename DDim, typename... DDimX>
+double a(ddc::DiscreteDomain<DDimX...> x_mesh)
 {
-    return ((2 * N<Dim>(x_mesh) - 1)
-                    * coordinate(ddc::select<ddc::UniformPointSampling<Dim>>(x_mesh).front())
-            - coordinate(ddc::select<ddc::UniformPointSampling<Dim>>(x_mesh).back()))
-           / 2 / (N<Dim>(x_mesh) - 1);
+    static_assert(
+            (is_uniform_sampling_v<DDimX> && ...),
+            "DDimX dimensions should derive from UniformPointSampling");
+    return ((2 * N<DDim>(x_mesh) - 1) * coordinate(ddc::select<DDim>(x_mesh).front())
+            - coordinate(ddc::select<DDim>(x_mesh).back()))
+           / 2 / (N<DDim>(x_mesh) - 1);
 }
 
-template <typename Dim, typename... X>
-double b(ddc::DiscreteDomain<ddc::UniformPointSampling<X>...> x_mesh)
+template <typename DDim, typename... DDimX>
+double b(ddc::DiscreteDomain<DDimX...> x_mesh)
 {
-    return ((2 * N<Dim>(x_mesh) - 1)
-                    * coordinate(ddc::select<ddc::UniformPointSampling<Dim>>(x_mesh).back())
-            - coordinate(ddc::select<ddc::UniformPointSampling<Dim>>(x_mesh).front()))
-           / 2 / (N<Dim>(x_mesh) - 1);
+    static_assert(
+            (is_uniform_sampling_v<DDimX> && ...),
+            "DDimX dimensions should derive from UniformPointSampling");
+    return ((2 * N<DDim>(x_mesh) - 1) * coordinate(ddc::select<DDim>(x_mesh).back())
+            - coordinate(ddc::select<DDim>(x_mesh).front()))
+           / 2 / (N<DDim>(x_mesh) - 1);
 }
 
 // core
-template <typename Tin, typename Tout, typename ExecSpace, typename MemorySpace, typename... X>
+template <typename Tin, typename Tout, typename ExecSpace, typename MemorySpace, typename... DDimX>
 void core(
         ExecSpace const& execSpace,
         Tout* out_data,
         Tin* in_data,
-        ddc::DiscreteDomain<ddc::UniformPointSampling<X>...> mesh,
+        ddc::DiscreteDomain<DDimX...> mesh,
         const kwArgs_core& kwargs)
 {
     static_assert(
@@ -368,16 +375,18 @@ void core(
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible,
             "MemorySpace has to be accessible for ExecutionSpace.");
+    static_assert(
+            (is_uniform_sampling_v<DDimX> && ...),
+            "DDimX dimensions should derive from UniformPointSampling");
 
-    std::array<int, sizeof...(X)> n
-            = {(int)ddc::get<ddc::UniformPointSampling<X>>(mesh.extents())...};
+    std::array<int, sizeof...(DDimX)> n = {(int)ddc::get<DDimX>(mesh.extents())...};
     int idist = 1;
     int odist = 1;
-    for (std::size_t i = 0; i < sizeof...(X); i++) {
-        idist = transform_type_v<Tin, Tout> == TransformType::C2R && i == sizeof...(X) - 1
+    for (std::size_t i = 0; i < sizeof...(DDimX); i++) {
+        idist = transform_type_v<Tin, Tout> == TransformType::C2R && i == sizeof...(DDimX) - 1
                         ? idist * (n[i] / 2 + 1)
                         : idist * n[i];
-        odist = transform_type_v<Tin, Tout> == TransformType::R2C && i == sizeof...(X) - 1
+        odist = transform_type_v<Tin, Tout> == TransformType::R2C && i == sizeof...(DDimX) - 1
                         ? odist * (n[i] / 2 + 1)
                         : odist * n[i];
     }
@@ -389,7 +398,7 @@ void core(
         _fftw_plan<Tin> plan = _fftw_plan_many_dft<Tin, Tout>(
                 kwargs.direction == ddc::FFT_Direction::FORWARD ? FFTW_FORWARD : FFTW_BACKWARD,
                 FFTW_ESTIMATE,
-                (int)sizeof...(X),
+                (int)sizeof...(DDimX),
                 n.data(),
                 1,
                 reinterpret_cast<typename _fftw_type<Tin>::type*>(in_data),
@@ -421,7 +430,7 @@ void core(
         _fftw_plan<Tin> plan = _fftw_plan_many_dft<Tin, Tout>(
                 kwargs.direction == ddc::FFT_Direction::FORWARD ? FFTW_FORWARD : FFTW_BACKWARD,
                 FFTW_ESTIMATE,
-                (int)sizeof...(X),
+                (int)sizeof...(DDimX),
                 n.data(),
                 1,
                 reinterpret_cast<typename _fftw_type<Tin>::type*>(in_data),
@@ -457,7 +466,7 @@ void core(
         cufftSetStream(unmanaged_plan, stream);
         cufft_rt = cufftPlanMany(
                 &unmanaged_plan, // plan handle
-                sizeof...(X),
+                sizeof...(DDimX),
                 n.data(), // Nx, Ny...
                 NULL,
                 1,
@@ -496,7 +505,7 @@ void core(
         hipfftSetStream(unmanaged_plan, stream);
         hipfft_rt = hipfftPlanMany(
                 &unmanaged_plan, // plan handle
-                sizeof...(X),
+                sizeof...(DDimX),
                 n.data(), // Nx, Ny...
                 NULL,
                 1,
@@ -526,40 +535,31 @@ void core(
         case ddc::FFT_Normalization::OFF:
             break;
         case ddc::FFT_Normalization::FORWARD:
-            norm_coef
-                    = kwargs.direction == ddc::FFT_Direction::FORWARD
-                              ? 1. / (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) * ...)
-                              : 1.;
+            norm_coef = kwargs.direction == ddc::FFT_Direction::FORWARD
+                                ? 1. / (ddc::get<DDimX>(mesh.extents()) * ...)
+                                : 1.;
             break;
         case ddc::FFT_Normalization::BACKWARD:
-            norm_coef
-                    = kwargs.direction == ddc::FFT_Direction::BACKWARD
-                              ? 1. / (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) * ...)
-                              : 1.;
+            norm_coef = kwargs.direction == ddc::FFT_Direction::BACKWARD
+                                ? 1. / (ddc::get<DDimX>(mesh.extents()) * ...)
+                                : 1.;
             break;
         case ddc::FFT_Normalization::ORTHO:
-            norm_coef = 1.
-                        / Kokkos::sqrt(
-                                (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) * ...));
+            norm_coef = 1. / Kokkos::sqrt((ddc::get<DDimX>(mesh.extents()) * ...));
             break;
         case ddc::FFT_Normalization::FULL:
-            norm_coef
-                    = kwargs.direction == ddc::FFT_Direction::FORWARD
-                              ? (((coordinate(
-                                           ddc::select<ddc::UniformPointSampling<X>>(mesh).back())
-                                   - coordinate(
-                                           ddc::select<ddc::UniformPointSampling<X>>(mesh).front()))
-                                  / (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) - 1)
-                                  / Kokkos::sqrt(2 * Kokkos::numbers::pi))
-                                 * ...)
-                              : ((Kokkos::sqrt(2 * Kokkos::numbers::pi)
-                                  / (coordinate(
-                                             ddc::select<ddc::UniformPointSampling<X>>(mesh).back())
-                                     - coordinate(ddc::select<ddc::UniformPointSampling<X>>(mesh)
-                                                          .front()))
-                                  * (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) - 1)
-                                  / ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()))
-                                 * ...);
+            norm_coef = kwargs.direction == ddc::FFT_Direction::FORWARD
+                                ? (((coordinate(ddc::select<DDimX>(mesh).back())
+                                     - coordinate(ddc::select<DDimX>(mesh).front()))
+                                    / (ddc::get<DDimX>(mesh.extents()) - 1)
+                                    / Kokkos::sqrt(2 * Kokkos::numbers::pi))
+                                   * ...)
+                                : ((Kokkos::sqrt(2 * Kokkos::numbers::pi)
+                                    / (coordinate(ddc::select<DDimX>(mesh).back())
+                                       - coordinate(ddc::select<DDimX>(mesh).front()))
+                                    * (ddc::get<DDimX>(mesh.extents()) - 1)
+                                    / ddc::get<DDimX>(mesh.extents()))
+                                   * ...);
             break;
         }
 
@@ -568,13 +568,11 @@ void core(
                         execSpace,
                         0,
                         is_complex_v<Tout> && transform_type_v<Tin, Tout> != TransformType::C2C
-                                ? (LastSelector<double, X, X...>(
-                                           ddc::get<ddc::UniformPointSampling<X>>(mesh.extents())
-                                                           / 2
-                                                   + 1,
-                                           ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()))
+                                ? (LastSelector<double, DDimX, DDimX...>(
+                                           ddc::get<DDimX>(mesh.extents()) / 2 + 1,
+                                           ddc::get<DDimX>(mesh.extents()))
                                    * ...)
-                                : (ddc::get<ddc::UniformPointSampling<X>>(mesh.extents()) * ...)),
+                                : (ddc::get<DDimX>(mesh.extents()) * ...)),
                 KOKKOS_LAMBDA(const int& i) { out_data[i] = out_data[i] * norm_coef; });
     }
 }
@@ -582,37 +580,44 @@ void core(
 
 namespace ddc {
 
-template <typename X>
-typename ddc::PeriodicSampling<ddc::Fourier<X>>::template Impl<Kokkos::HostSpace>
-init_fourier_space(ddc::DiscreteDomain<ddc::UniformPointSampling<X>> x_mesh)
+template <typename DDimFx, typename DDimX>
+typename DDimFx::template Impl<DDimFx, Kokkos::HostSpace> init_fourier_space(
+        ddc::DiscreteDomain<DDimX> x_mesh)
 {
-    auto [impl, ddom] = ddc::PeriodicSampling<ddc::Fourier<X>>::
-            init(ddc::Coordinate<ddc::Fourier<X>>(0),
-                 ddc::Coordinate<ddc::Fourier<X>>(
-                         2 * (ddc::detail::fft::N<X>(x_mesh) - 1)
-                         / (ddc::detail::fft::b<X>(x_mesh) - ddc::detail::fft::a<X>(x_mesh))
-                         * Kokkos::numbers::pi),
-                 ddc::DiscreteVector<ddc::PeriodicSampling<ddc::Fourier<X>>>(
-                         ddc::detail::fft::N<X>(x_mesh)),
-                 ddc::DiscreteVector<ddc::PeriodicSampling<ddc::Fourier<X>>>(
-                         ddc::detail::fft::N<X>(x_mesh)));
+    static_assert(
+            is_uniform_sampling_v<DDimX>,
+            "DDimX dimensions should derive from UniformPointSampling");
+    static_assert(
+            is_periodic_sampling_v<DDimFx>,
+            "DDimFx dimensions should derive from PeriodicPointSampling");
+    auto [impl, ddom] = DDimFx::template init<DDimFx>(
+            ddc::Coordinate<typename DDimFx::continuous_dimension_type>(0),
+            ddc::Coordinate<typename DDimFx::continuous_dimension_type>(
+                    2 * (ddc::detail::fft::N<DDimX>(x_mesh) - 1)
+                    / (ddc::detail::fft::b<DDimX>(x_mesh) - ddc::detail::fft::a<DDimX>(x_mesh))
+                    * Kokkos::numbers::pi),
+            ddc::DiscreteVector<DDimFx>(ddc::detail::fft::N<DDimX>(x_mesh)),
+            ddc::DiscreteVector<DDimFx>(ddc::detail::fft::N<DDimX>(x_mesh)));
     return std::move(impl);
 }
 
 // FourierMesh, first element corresponds to mode 0
-template <typename... X>
-ddc::DiscreteDomain<ddc::PeriodicSampling<ddc::Fourier<X>>...> FourierMesh(
-        ddc::DiscreteDomain<ddc::UniformPointSampling<X>...> x_mesh,
-        bool C2C)
+template <typename... DDimFx, typename... DDimX>
+ddc::DiscreteDomain<DDimFx...> FourierMesh(ddc::DiscreteDomain<DDimX...> x_mesh, bool C2C)
 {
-    return ddc::DiscreteDomain<ddc::PeriodicSampling<ddc::Fourier<X>>...>(
-            ddc::DiscreteDomain<ddc::PeriodicSampling<ddc::Fourier<X>>>(
-                    ddc::DiscreteElement<ddc::PeriodicSampling<ddc::Fourier<X>>>(0),
-                    ddc::DiscreteVector<ddc::PeriodicSampling<ddc::Fourier<X>>>(
-                            (C2C ? ddc::detail::fft::N<X>(x_mesh)
-                                 : ddc::detail::fft::LastSelector<double, X, X...>(
-                                         ddc::detail::fft::N<X>(x_mesh) / 2 + 1,
-                                         ddc::detail::fft::N<X>(x_mesh)))))...);
+    static_assert(
+            (is_uniform_sampling_v<DDimX> && ...),
+            "DDimX dimensions should derive from UniformPointSampling");
+    static_assert(
+            (is_periodic_sampling_v<DDimFx> && ...),
+            "DDimFx dimensions should derive from PeriodicPointSampling");
+    return ddc::DiscreteDomain<DDimFx...>(ddc::DiscreteDomain<DDimFx>(
+            ddc::DiscreteElement<DDimFx>(0),
+            ddc::DiscreteVector<DDimFx>(
+                    (C2C ? ddc::detail::fft::N<DDimX>(x_mesh)
+                         : ddc::detail::fft::LastSelector<double, DDimX, DDimX...>(
+                                 ddc::detail::fft::N<DDimX>(x_mesh) / 2 + 1,
+                                 ddc::detail::fft::N<DDimX>(x_mesh)))))...);
 }
 
 struct kwArgs_fft
@@ -624,23 +629,16 @@ struct kwArgs_fft
 template <
         typename Tin,
         typename Tout,
-        typename... X,
+        typename... DDimFx,
+        typename... DDimX,
         typename ExecSpace,
         typename MemorySpace,
         typename layout_in,
         typename layout_out>
 void fft(
         ExecSpace const& execSpace,
-        ddc::ChunkSpan<
-                Tout,
-                ddc::DiscreteDomain<ddc::PeriodicSampling<ddc::Fourier<X>>...>,
-                layout_out,
-                MemorySpace> out,
-        ddc::ChunkSpan<
-                Tin,
-                ddc::DiscreteDomain<ddc::UniformPointSampling<X>...>,
-                layout_in,
-                MemorySpace> in,
+        ddc::ChunkSpan<Tout, ddc::DiscreteDomain<DDimFx...>, layout_out, MemorySpace> out,
+        ddc::ChunkSpan<Tin, ddc::DiscreteDomain<DDimX...>, layout_in, MemorySpace> in,
         ddc::kwArgs_fft kwargs = {ddc::FFT_Normalization::OFF})
 {
     static_assert(
@@ -649,8 +647,14 @@ void fft(
                     std::experimental::
                             layout_right> && std::is_same_v<layout_out, std::experimental::layout_right>,
             "Layouts must be right-handed");
+    static_assert(
+            (is_uniform_sampling_v<DDimX> && ...),
+            "DDimX dimensions should derive from UniformPointSampling");
+    static_assert(
+            (is_periodic_sampling_v<DDimFx> && ...),
+            "DDimFx dimensions should derive from PeriodicPointSampling");
 
-    ddc::detail::fft::core<Tin, Tout, ExecSpace, MemorySpace, X...>(
+    ddc::detail::fft::core<Tin, Tout, ExecSpace, MemorySpace, DDimX...>(
             execSpace,
             out.data_handle(),
             in.data_handle(),
@@ -662,23 +666,16 @@ void fft(
 template <
         typename Tin,
         typename Tout,
-        typename... X,
+        typename... DDimX,
+        typename... DDimFx,
         typename ExecSpace,
         typename MemorySpace,
         typename layout_in,
         typename layout_out>
 void ifft(
         ExecSpace const& execSpace,
-        ddc::ChunkSpan<
-                Tout,
-                ddc::DiscreteDomain<ddc::UniformPointSampling<X>...>,
-                layout_out,
-                MemorySpace> out,
-        ddc::ChunkSpan<
-                Tin,
-                ddc::DiscreteDomain<ddc::PeriodicSampling<ddc::Fourier<X>>...>,
-                layout_in,
-                MemorySpace> in,
+        ddc::ChunkSpan<Tout, ddc::DiscreteDomain<DDimX...>, layout_out, MemorySpace> out,
+        ddc::ChunkSpan<Tin, ddc::DiscreteDomain<DDimFx...>, layout_in, MemorySpace> in,
         ddc::kwArgs_fft kwargs = {ddc::FFT_Normalization::OFF})
 {
     static_assert(
@@ -687,8 +684,14 @@ void ifft(
                     std::experimental::
                             layout_right> && std::is_same_v<layout_out, std::experimental::layout_right>,
             "Layouts must be right-handed");
+    static_assert(
+            (is_uniform_sampling_v<DDimX> && ...),
+            "DDimX dimensions should derive from UniformPointSampling");
+    static_assert(
+            (is_periodic_sampling_v<DDimFx> && ...),
+            "DDimFx dimensions should derive from PeriodicPointSampling");
 
-    ddc::detail::fft::core<Tin, Tout, ExecSpace, MemorySpace, X...>(
+    ddc::detail::fft::core<Tin, Tout, ExecSpace, MemorySpace, DDimX...>(
             execSpace,
             out.data_handle(),
             in.data_handle(),

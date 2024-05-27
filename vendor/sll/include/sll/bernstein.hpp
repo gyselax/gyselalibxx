@@ -15,13 +15,8 @@ template <
 class BernsteinPolynomialBasis
 {
 public:
-    using discrete_element_type = ddc::DiscreteElement<BernsteinPolynomialBasis>;
+    using discrete_dimension_type = BernsteinPolynomialBasis;
 
-    using discrete_domain_type = ddc::DiscreteDomain<BernsteinPolynomialBasis>;
-
-    using discrete_vector_type = ddc::DiscreteVector<BernsteinPolynomialBasis>;
-
-public:
     static constexpr std::size_t rank()
     {
         return 2;
@@ -37,10 +32,10 @@ public:
         return (D + 1) * (D + 2) / 2;
     }
 
-    template <class MemorySpace>
+    template <class DDim, class MemorySpace>
     class Impl
     {
-        template <class OMemorySpace>
+        template <class ODDim, class OMemorySpace>
         friend class Impl;
 
     private:
@@ -49,6 +44,12 @@ public:
 
     public:
         using discrete_dimension_type = BernsteinPolynomialBasis;
+
+        using discrete_element_type = ddc::DiscreteElement<DDim>;
+
+        using discrete_domain_type = ddc::DiscreteDomain<DDim>;
+
+        using discrete_vector_type = ddc::DiscreteVector<DDim>;
 
         Impl(CartesianToBarycentricCoordinates<
                 Tag1,
@@ -61,7 +62,8 @@ public:
         }
 
         template <class OriginMemorySpace>
-        explicit Impl(Impl<OriginMemorySpace> const& impl) : m_coord_changer(impl.m_coord_changer)
+        explicit Impl(Impl<DDim, OriginMemorySpace> const& impl)
+            : m_coord_changer(impl.m_coord_changer)
         {
         }
 
@@ -76,7 +78,7 @@ public:
         Impl& operator=(Impl&& x) = default;
 
         void eval_basis(
-                ddc::ChunkSpan<double, ddc::DiscreteDomain<BernsteinPolynomialBasis>> values,
+                ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> values,
                 ddc::Coordinate<Tag1, Tag2> const& x) const;
     };
 };
@@ -88,10 +90,10 @@ template <
         class Corner2Tag,
         class Corner3Tag,
         std::size_t D>
-template <class MemorySpace>
+template <class DDim, class MemorySpace>
 void BernsteinPolynomialBasis<Tag1, Tag2, Corner1Tag, Corner2Tag, Corner3Tag, D>::
-        Impl<MemorySpace>::eval_basis(
-                ddc::ChunkSpan<double, ddc::DiscreteDomain<BernsteinPolynomialBasis>> values,
+        Impl<DDim, MemorySpace>::eval_basis(
+                ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> values,
                 ddc::Coordinate<Tag1, Tag2> const& x) const
 {
     const ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag> bary_coords = m_coord_changer(x);
@@ -100,7 +102,7 @@ void BernsteinPolynomialBasis<Tag1, Tag2, Corner1Tag, Corner2Tag, Corner3Tag, D>
     const double l3 = ddc::get<Corner3Tag>(bary_coords);
     assert(values.size() == nbasis());
 
-    ddc::DiscreteElement<BernsteinPolynomialBasis> idx(0);
+    ddc::DiscreteElement<DDim> idx(0);
     for (std::size_t i(0); i < D + 1; ++i) {
         for (std::size_t j(0); j < D + 1 - i; ++j, ++idx) {
             const int k = D - i - j;

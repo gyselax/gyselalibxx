@@ -8,7 +8,7 @@
 
 namespace {
 
-using IDimSp = SpeciesInformation;
+
 using IVectSp = ddc::DiscreteVector<IDimSp>;
 using IndexSp = ddc::DiscreteElement<IDimSp>;
 using IDomainSp = ddc::DiscreteDomain<IDimSp>;

@@ -28,9 +28,9 @@ TEST(GeometryXM, KineticFluidSpecies)
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
 
-    IDomainX meshX(SplineInterpPointsX::get_domain());
+    IDomainX meshX(SplineInterpPointsX::get_domain<IDimX>());
     SplineXBuilder_1d const builder_x(meshX);
 
     // Kinetic species domain initialization
@@ -116,9 +116,9 @@ TEST(GeometryXM, KineticFluidAdiabaticSpecies)
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
 
-    IDomainX meshX(SplineInterpPointsX::get_domain());
+    IDomainX meshX(SplineInterpPointsX::get_domain<IDimX>());
     SplineXBuilder_1d const builder_x(meshX);
 
     // Kinetic species domain initialization

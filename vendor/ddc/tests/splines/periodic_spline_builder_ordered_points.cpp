@@ -22,12 +22,16 @@ struct DimX
 
 static constexpr std::size_t s_degree_x = DEGREE_X;
 
-using BSplinesX = ddc::NonUniformBSplines<DimX, s_degree_x>;
+struct BSplinesX : ddc::NonUniformBSplines<DimX, s_degree_x>
+{
+};
 
 using GrevillePoints = ddc::
         GrevilleInterpolationPoints<BSplinesX, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
-using IDimX = GrevillePoints::interpolation_mesh_type;
+struct IDimX : GrevillePoints::interpolation_mesh_type
+{
+};
 
 using IndexX = ddc::DiscreteElement<IDimX>;
 using DVectX = ddc::DiscreteVector<IDimX>;
@@ -50,8 +54,8 @@ TEST(PeriodicSplineBuilderOrderTest, OrderedPoints)
     ddc::init_discrete_space<BSplinesX>(breaks);
 
     // 2. Create the interpolation domain
-    ddc::init_discrete_space<IDimX>(GrevillePoints::get_sampling());
-    ddc::DiscreteDomain<IDimX> interpolation_domain(GrevillePoints::get_domain());
+    ddc::init_discrete_space<IDimX>(GrevillePoints::get_sampling<IDimX>());
+    ddc::DiscreteDomain<IDimX> interpolation_domain(GrevillePoints::get_domain<IDimX>());
 
     double last(ddc::coordinate(interpolation_domain.front()));
     double current;

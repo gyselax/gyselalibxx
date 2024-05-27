@@ -61,14 +61,20 @@ int constexpr BSDegreeVx = 3;
 bool constexpr BsplineOnUniformCellsX = true;
 bool constexpr BsplineOnUniformCellsVx = true;
 
-using BSplinesX = std::conditional_t<
-        BsplineOnUniformCellsX,
-        ddc::UniformBSplines<RDimX, BSDegreeX>,
-        ddc::NonUniformBSplines<RDimX, BSDegreeX>>;
-using BSplinesVx = std::conditional_t<
-        BsplineOnUniformCellsVx,
-        ddc::UniformBSplines<RDimVx, BSDegreeVx>,
-        ddc::NonUniformBSplines<RDimVx, BSDegreeVx>>;
+struct BSplinesX
+    : std::conditional_t<
+              BsplineOnUniformCellsX,
+              ddc::UniformBSplines<RDimX, BSDegreeX>,
+              ddc::NonUniformBSplines<RDimX, BSDegreeX>>
+{
+};
+struct BSplinesVx
+    : std::conditional_t<
+              BsplineOnUniformCellsVx,
+              ddc::UniformBSplines<RDimVx, BSDegreeVx>,
+              ddc::NonUniformBSplines<RDimVx, BSDegreeVx>>
+{
+};
 
 auto constexpr SplineXBoundary
         = RDimX::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
@@ -85,14 +91,20 @@ bool constexpr UniformMeshVx = ddc::is_spline_interpolation_mesh_uniform(
         SplineVxBoundary,
         BSDegreeVx);
 
-using IDimX = std::conditional_t<
-        UniformMeshX,
-        ddc::UniformPointSampling<RDimX>,
-        ddc::NonUniformPointSampling<RDimX>>;
-using IDimVx = std::conditional_t<
-        UniformMeshVx,
-        ddc::UniformPointSampling<RDimVx>,
-        ddc::NonUniformPointSampling<RDimVx>>;
+struct IDimX
+    : std::conditional_t<
+              UniformMeshX,
+              ddc::UniformPointSampling<RDimX>,
+              ddc::NonUniformPointSampling<RDimX>>
+{
+};
+struct IDimVx
+    : std::conditional_t<
+              UniformMeshVx,
+              ddc::UniformPointSampling<RDimVx>,
+              ddc::NonUniformPointSampling<RDimVx>>
+{
+};
 
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
@@ -182,10 +194,9 @@ using SplineVxEvaluator_1d = ddc::SplineEvaluator<
         ddc::ConstantExtrapolationRule<RDimVx>,
         IDimVx>;
 
-// Species dimension
-using IDimSp = SpeciesInformation;
-
-using IDimM = Moments;
+struct IDimM : Moments
+{
+};
 
 using IndexM = ddc::DiscreteElement<IDimM>;
 
@@ -413,7 +424,9 @@ using DViewSpXVx = ViewSpXVx<double>;
 
 using RDimFx = ddc::Fourier<RDimX>;
 using CoordFx = ddc::Coordinate<RDimFx>;
-using IDimFx = ddc::PeriodicSampling<RDimFx>;
+struct IDimFx : ddc::PeriodicSampling<RDimFx>
+{
+};
 using IndexFx = ddc::DiscreteElement<IDimFx>;
 using IVectFx = ddc::DiscreteVector<IDimFx>;
 using IDomainFx = ddc::DiscreteDomain<IDimFx>;
@@ -435,11 +448,6 @@ public:
      */
     template <class T>
     using spatial_dim_for = std::conditional_t<std::is_same_v<T, IDimVx>, IDimX, void>;
-
-    /**
-     * @brief An alias for species "discrete dimension" type.
-     */
-    using DDimSp = IDimSp;
 
     /**
      * @brief An alias for the spatial discrete domain type.

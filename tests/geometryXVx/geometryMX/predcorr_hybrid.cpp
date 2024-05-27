@@ -59,11 +59,11 @@ TEST(GeometryXM, PredCorrHybrid)
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
 
-    IDomainX meshX(SplineInterpPointsX::get_domain());
-    IDomainVx meshVx(SplineInterpPointsVx::get_domain());
+    IDomainX meshX(SplineInterpPointsX::get_domain<IDimX>());
+    IDomainVx meshVx(SplineInterpPointsVx::get_domain<IDimVx>());
     IDomainXVx meshXVx(meshX, meshVx);
 
     SplineXBuilder const builder_x(meshXVx);
@@ -222,7 +222,8 @@ TEST(GeometryXM, PredCorrHybrid)
     ChargeDensityCalculator rhs(quadrature_coeffs);
 #ifdef PERIODIC_RDIMX
     IDomainSpXVx const meshSpXVx(dom_kinsp, meshXVx);
-    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(meshSpXVx)));
+    ddc::init_discrete_space<IDimFx>(
+            ddc::init_fourier_space<IDimFx>(ddc::select<IDimX>(meshSpXVx)));
     FftPoissonSolver const poisson(rhs);
 #else
     FemNonPeriodicPoissonSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);

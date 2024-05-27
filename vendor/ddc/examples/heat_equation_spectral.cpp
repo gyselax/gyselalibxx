@@ -21,21 +21,35 @@ struct X;
 
 //! [X-discretization]
 /// A uniform discretization of X
-using DDimX = ddc::UniformPointSampling<X>;
+struct DDimX : ddc::UniformPointSampling<X>
+{
+};
 //! [X-discretization]
+
+struct DDimFx : ddc::PeriodicSampling<ddc::Fourier<X>>
+{
+};
 
 //! [Y-space]
 // Our second continuous dimension
 struct Y;
 // Its uniform discretization
-using DDimY = ddc::UniformPointSampling<Y>;
+struct DDimY : ddc::UniformPointSampling<Y>
+{
+};
+
+struct DDimFy : ddc::PeriodicSampling<ddc::Fourier<Y>>
+{
+};
 //! [Y-space]
 
 //! [time-space]
 // Our simulated time dimension
 struct T;
 // Its uniform discretization
-using DDimT = ddc::UniformPointSampling<T>;
+struct DDimT : ddc::UniformPointSampling<T>
+{
+};
 //! [time-space]
 
 //! [display]
@@ -110,20 +124,20 @@ int main(int argc, char** argv)
     //! [X-global-domain]
     // Initialization of the global domain in X with gwx ghost points on
     // each side
-    auto const x_domain = ddc::init_discrete_space(
-            DDimX::
-                    init(ddc::Coordinate<X>(x_start),
-                         ddc::Coordinate<X>(x_end),
-                         ddc::DiscreteVector<DDimX>(nb_x_points)));
+    auto const x_domain
+            = ddc::init_discrete_space<DDimX>(DDimX::init<DDimX>(
+                    ddc::Coordinate<X>(x_start),
+                    ddc::Coordinate<X>(x_end),
+                    ddc::DiscreteVector<DDimX>(nb_x_points)));
     //! [X-global-domain]
 
     // Initialization of the global domain in Y with gwy ghost points on
     // each side
-    auto const y_domain = ddc::init_discrete_space(
-            DDimY::
-                    init(ddc::Coordinate<Y>(y_start),
-                         ddc::Coordinate<Y>(y_end),
-                         ddc::DiscreteVector<DDimY>(nb_y_points)));
+    auto const y_domain
+            = ddc::init_discrete_space<DDimY>(DDimY::init<DDimY>(
+                    ddc::Coordinate<Y>(y_start),
+                    ddc::Coordinate<Y>(y_end),
+                    ddc::DiscreteVector<DDimY>(nb_y_points)));
 
     //! [time-domains]
     // max(1/dx^2)
@@ -158,12 +172,10 @@ int main(int argc, char** argv)
     // - the number of discrete time-points is equal to the number of
     //   steps + 1
     ddc::DiscreteDomain<DDimT> const time_domain
-            = ddc::init_discrete_space(
-                    DDimT::
-                            init(ddc::Coordinate<T>(start_time),
-                                 ddc::Coordinate<T>(end_time),
-                                 nb_time_steps + 1));
-    //! [time-domains]
+            = ddc::init_discrete_space<DDimT>(DDimT::init<DDimT>(
+                    ddc::Coordinate<T>(start_time),
+                    ddc::Coordinate<T>(end_time),
+                    nb_time_steps + 1));
 
     //! [data allocation]
     // Maps temperature into the full domain (including ghosts) twice:
@@ -211,16 +223,12 @@ int main(int argc, char** argv)
     ddc::DiscreteElement<DDimT> last_output = time_domain.front();
     //! [initial output]
 
-    ddc::init_discrete_space<ddc::PeriodicSampling<ddc::Fourier<X>>>(
-            ddc::init_fourier_space(
-                    ddc::DiscreteDomain<DDimX>(initial_temp.domain())));
-    ddc::init_discrete_space<ddc::PeriodicSampling<ddc::Fourier<Y>>>(
-            ddc::init_fourier_space(
-                    ddc::DiscreteDomain<DDimY>(initial_temp.domain())));
-    ddc::DiscreteDomain<
-            ddc::PeriodicSampling<ddc::Fourier<X>>,
-            ddc::PeriodicSampling<ddc::Fourier<Y>>> const k_mesh
-            = ddc::FourierMesh(initial_temp.domain(), false);
+    ddc::init_discrete_space<DDimFx>(ddc::init_fourier_space<DDimFx>(
+            ddc::DiscreteDomain<DDimX>(initial_temp.domain())));
+    ddc::init_discrete_space<DDimFy>(ddc::init_fourier_space<DDimFy>(
+            ddc::DiscreteDomain<DDimY>(initial_temp.domain())));
+    ddc::DiscreteDomain<DDimFx, DDimFy> const k_mesh = ddc::
+            FourierMesh<DDimFx, DDimFy>(initial_temp.domain(), false);
     ddc::Chunk Ff_allocation = ddc::
             Chunk("Ff_allocation",
                   k_mesh,
@@ -249,20 +257,12 @@ int main(int argc, char** argv)
         ddc::fft(Kokkos::DefaultExecutionSpace(), Ff, last_temp, {norm});
         ddc::parallel_for_each(
                 k_mesh,
-                KOKKOS_LAMBDA(ddc::DiscreteElement<
-                              ddc::PeriodicSampling<ddc::Fourier<X>>,
-                              ddc::PeriodicSampling<
-                                      ddc::Fourier<Y>>> const ikxky) {
-                    ddc::DiscreteElement<
-                            ddc::PeriodicSampling<ddc::Fourier<X>>> const
-                            ikx
-                            = ddc::select<ddc::PeriodicSampling<
-                                    ddc::Fourier<X>>>(ikxky);
-                    ddc::DiscreteElement<
-                            ddc::PeriodicSampling<ddc::Fourier<Y>>> const
-                            iky
-                            = ddc::select<ddc::PeriodicSampling<
-                                    ddc::Fourier<Y>>>(ikxky);
+                KOKKOS_LAMBDA(ddc::DiscreteElement<DDimFx, DDimFy> const
+                                      ikxky) {
+                    ddc::DiscreteElement<DDimFx> const ikx
+                            = ddc::select<DDimFx>(ikxky);
+                    ddc::DiscreteElement<DDimFy> const iky
+                            = ddc::select<DDimFy>(ikxky);
                     Ff(ikx, iky)
                             = Ff(ikx, iky)
                               * (1

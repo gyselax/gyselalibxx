@@ -29,8 +29,13 @@ namespace {
 struct DimX;
 struct DimY;
 
-using DDimX = ddc::NonUniformPointSampling<DimX>;
-using DDimY = ddc::NonUniformPointSampling<DimY>;
+struct DDimX : ddc::NonUniformPointSampling<DimX>
+{
+};
+
+struct DDimY : ddc::NonUniformPointSampling<DimY>
+{
+};
 
 static std::array<double, 4> const array_points_x VALUES_X;
 static std::vector<double> const vector_points_x VALUES_X;
@@ -50,35 +55,36 @@ static ddc::Coordinate<DimX, DimY> constexpr point_rxy(0.3, 0.2);
 
 TEST(NonUniformPointSamplingTest, ListConstructor)
 {
-    DDimX::Impl<Kokkos::HostSpace> const ddim_x(VALUES_X);
+    DDimX::Impl<DDimX, Kokkos::HostSpace> const ddim_x(VALUES_X);
     EXPECT_EQ(ddim_x.size(), 4);
     EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
 TEST(NonUniformPointSamplingTest, ArrayConstructor)
 {
-    DDimX::Impl<Kokkos::HostSpace> const ddim_x(array_points_x);
+    DDimX::Impl<DDimX, Kokkos::HostSpace> const ddim_x(array_points_x);
     EXPECT_EQ(ddim_x.size(), array_points_x.size());
     EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
 TEST(NonUniformPointSamplingTest, VectorConstructor)
 {
-    DDimX::Impl<Kokkos::HostSpace> const ddim_x(vector_points_x);
+    DDimX::Impl<DDimX, Kokkos::HostSpace> const ddim_x(vector_points_x);
     EXPECT_EQ(ddim_x.size(), vector_points_x.size());
     EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
 TEST(NonUniformPointSamplingTest, IteratorConstructor)
 {
-    DDimX::Impl<Kokkos::HostSpace> const ddim_x(vector_points_x.begin(), vector_points_x.end());
+    DDimX::Impl<DDimX, Kokkos::HostSpace> const
+            ddim_x(vector_points_x.begin(), vector_points_x.end());
     EXPECT_EQ(ddim_x.size(), vector_points_x.size());
     EXPECT_EQ(ddim_x.coordinate(point_ix), point_rx);
 }
 
 TEST(NonUniformPointSampling, Formatting)
 {
-    DDimX::Impl<Kokkos::HostSpace> const ddim_x(
+    DDimX::Impl<DDimX, Kokkos::HostSpace> const ddim_x(
             {ddc::Coordinate<DimX>(0.1), ddc::Coordinate<DimX>(0.4)});
     std::stringstream oss;
     oss << ddim_x;

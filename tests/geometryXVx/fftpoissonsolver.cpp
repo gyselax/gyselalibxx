@@ -34,10 +34,10 @@ TEST(FftPoissonSolver, CosineSource)
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
-    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
-    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
+    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain<IDimVx>());
 
     SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
 
@@ -47,7 +47,7 @@ TEST(FftPoissonSolver, CosineSource)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(mesh)));
+    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<IDimFx>(ddc::select<IDimX>(mesh)));
 
     // Creating operators
 
@@ -123,10 +123,10 @@ TEST(FftPoissonSolver, CosineSourceParallel)
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
-    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain());
-    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
+    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain<IDimVx>());
 
     SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
 
@@ -136,7 +136,7 @@ TEST(FftPoissonSolver, CosineSourceParallel)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<RDimX>(ddc::select<IDimX>(mesh)));
+    ddc::init_discrete_space<IDimFx>(ddc::init_fourier_space<IDimFx>(ddc::select<IDimX>(mesh)));
 
     // Creating operators
 

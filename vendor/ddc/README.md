@@ -28,7 +28,8 @@ If you want to know more, join un on [Slack](https://join.slack.com/t/ddc-lib/sh
 ## Getting the code and basic configuration
 
 ```bash
-git clone --recurse-submodules -j8 https://github.com/CExA-project/ddc.git
+git clone --recurse-submodules -j4 https://github.com/CExA-project/ddc.git
 cd ddc
 cmake -B build -D DDC_BUILD_KERNELS_FFT=OFF -D DDC_BUILD_KERNELS_SPLINES=OFF -D DDC_BUILD_PDI_WRAPPER=OFF
+cmake --build build
 ```

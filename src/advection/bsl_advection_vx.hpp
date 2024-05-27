@@ -16,11 +16,10 @@
 template <class Geometry, class DDimV>
 class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, DDimV>
 {
-    using DDimSp = typename Geometry::DDimSp;
     using FdistribuDDom = typename Geometry::FdistribuDDom;
     using SpatialDDom = typename Geometry::SpatialDDom;
     using DElemV = ddc::DiscreteElement<DDimV>;
-    using DElemSp = ddc::DiscreteElement<DDimSp>;
+    using DElemSp = ddc::DiscreteElement<IDimSp>;
     using CDimV = typename DDimV::continuous_dimension_type;
 
 private:
@@ -61,7 +60,7 @@ public:
         Kokkos::Profiling::pushRegion("BslAdvectionVelocity");
         FdistribuDDom const dom = allfdistribu.domain();
         ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
-        ddc::DiscreteDomain<DDimSp> const sp_dom = ddc::select<DDimSp>(dom);
+        ddc::DiscreteDomain<IDimSp> const sp_dom = ddc::select<IDimSp>(dom);
 
         // pre-allocate some memory to prevent allocation later in loop
         ddc::Chunk feet_coords_alloc(

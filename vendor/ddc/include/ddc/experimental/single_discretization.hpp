@@ -13,9 +13,11 @@
 #include "ddc/discrete_element.hpp"
 #include "ddc/discrete_space.hpp"
 
-namespace ddc {
+namespace ddc::experimental {
 
-namespace experimental {
+struct SingleDiscretizationBase
+{
+};
 
 /** Experimental concept representing a discretization with a single point.
  *
@@ -23,7 +25,7 @@ namespace experimental {
  * loose track of the real position.
  */
 template <class CDim>
-class SingleDiscretization
+class SingleDiscretization : SingleDiscretizationBase
 {
 public:
     using continuous_dimension_type = CDim;
@@ -33,16 +35,11 @@ public:
 
     using discrete_dimension_type = SingleDiscretization;
 
-    using discrete_domain_type = DiscreteDomain<SingleDiscretization>;
-
-    using discrete_element_type = DiscreteElement<SingleDiscretization>;
-
-    using discrete_vector_type = DiscreteVector<SingleDiscretization>;
-
-    template <class MemorySpace>
+public:
+    template <class DDim, class MemorySpace>
     class Impl
     {
-        template <class OMemorySpace>
+        template <class ODDim, class OMemorySpace>
         friend class Impl;
 
     private:
@@ -52,19 +49,30 @@ public:
     public:
         using discrete_dimension_type = SingleDiscretization;
 
-        constexpr Impl(continuous_element_type origin) noexcept : m_point(std::move(origin)) {}
+        using discrete_domain_type = DiscreteDomain<DDim>;
+
+        using discrete_element_type = DiscreteElement<DDim>;
+
+        using discrete_vector_type = DiscreteVector<DDim>;
+
+        Impl(continuous_element_type origin) noexcept : m_point(std::move(origin)) {}
 
         Impl(Impl const& other) = delete;
 
-        constexpr Impl(Impl&& other) = delete;
+        Impl(Impl&& other) = delete;
 
-        constexpr continuous_element_type origin() const noexcept
+        template <class OriginMemorySpace>
+        explicit Impl(Impl<DDim, OriginMemorySpace> const& impl) : m_point(impl.m_point)
+        {
+        }
+
+        KOKKOS_FUNCTION continuous_element_type origin() const noexcept
         {
             return m_point;
         }
 
-        constexpr continuous_element_type coordinate(
-                [[maybe_unused]] discrete_element_type icoord) const noexcept
+        KOKKOS_FUNCTION continuous_element_type
+        coordinate([[maybe_unused]] discrete_element_type icoord) const noexcept
         {
             assert(icoord == discrete_element_type(0));
             return m_point;
@@ -72,58 +80,55 @@ public:
     };
 };
 
-template <class Tag>
-std::ostream& operator<<(std::ostream& out, SingleDiscretization<Tag> const& dom)
-{
-    return out << "SingleDiscretization( at=" << dom.origin() << " )";
-}
-
-} // namespace experimental
-
-template <class>
-struct is_single_discretization : public std::false_type
-{
-};
-
-template <class CDim>
-struct is_single_discretization<experimental::SingleDiscretization<CDim>> : public std::true_type
+template <class DDim>
+struct is_single_discretization : public std::is_base_of<SingleDiscretizationBase, DDim>
 {
 };
 
 template <class DDim>
 constexpr bool is_single_discretization_v = is_single_discretization<DDim>::value;
 
+template <class Tag>
+std::ostream& operator<<(std::ostream& out, SingleDiscretization<Tag> const& dom)
+{
+    return out << "SingleDiscretization( at=" << dom.origin() << " )";
+}
 
 /// @brief coordinate of the mesh
 template <class DDim>
-std::enable_if_t<is_single_discretization_v<DDim>, typename DDim::continuous_element_type>
-origin() noexcept
+KOKKOS_FUNCTION std::
+        enable_if_t<is_single_discretization_v<DDim>, typename DDim::continuous_element_type>
+        origin() noexcept
 {
     return discrete_space<DDim>().origin();
 }
 
-template <class CDim>
-ddc::Coordinate<CDim> coordinate(DiscreteElement<experimental::SingleDiscretization<CDim>> const& c)
+template <class DDim, std::enable_if_t<is_single_discretization_v<DDim>, int> = 0>
+KOKKOS_FUNCTION ddc::Coordinate<typename DDim::continuous_dimension_type> coordinate(
+        DiscreteElement<DDim> const& c)
 {
-    return discrete_space<experimental::SingleDiscretization<CDim>>().coordinate(c);
+    return discrete_space<DDim>().coordinate(c);
 }
 
-template <class CDim>
-ddc::Coordinate<CDim> rmin(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
+template <class DDim, std::enable_if_t<is_single_discretization_v<DDim>, int> = 0>
+KOKKOS_FUNCTION ddc::Coordinate<typename DDim::continuous_dimension_type> rmin(
+        DiscreteDomain<DDim> const& d)
 {
     return coordinate(d.front());
 }
 
-template <class CDim>
-ddc::Coordinate<CDim> rmax(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
+template <class DDim, std::enable_if_t<is_single_discretization_v<DDim>, int> = 0>
+KOKKOS_FUNCTION ddc::Coordinate<typename DDim::continuous_dimension_type> rmax(
+        DiscreteDomain<DDim> const& d)
 {
     return coordinate(d.back());
 }
 
-template <class CDim>
-ddc::Coordinate<CDim> rlength(DiscreteDomain<experimental::SingleDiscretization<CDim>> const& d)
+template <class DDim, std::enable_if_t<is_single_discretization_v<DDim>, int> = 0>
+KOKKOS_FUNCTION ddc::Coordinate<typename DDim::continuous_dimension_type> rlength(
+        DiscreteDomain<DDim> const& d)
 {
     return rmax(d) - rmin(d);
 }
 
-} // namespace ddc
+} // namespace ddc::experimental

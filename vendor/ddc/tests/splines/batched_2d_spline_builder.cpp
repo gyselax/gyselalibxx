@@ -87,24 +87,36 @@ using GrevillePoints = ddc::GrevilleInterpolationPoints<BSpX, s_bcl, s_bcr>;
 
 #if defined(BSPLINES_TYPE_UNIFORM)
 template <typename X>
-using BSplines = ddc::UniformBSplines<X, s_degree>;
+struct BSplines : ddc::UniformBSplines<X, s_degree>
+{
+};
 
 // Gives discrete dimension. In the dimension of interest, it is deduced from the BSplines type. In the other dimensions, it has to be newly defined. In practice both types coincide in the test, but it may not be the case.
+template <class X, bool B>
+struct IDim_
+    : std::conditional_t<
+              B,
+              typename GrevillePoints<BSplines<X>>::interpolation_mesh_type,
+              ddc::UniformPointSampling<X>>
+{
+};
+
 template <typename X, typename I1, typename I2>
-using IDim = std::conditional_t<
-        std::is_same_v<X, I1> || std::is_same_v<X, I2>,
-        typename GrevillePoints<BSplines<X>>::interpolation_mesh_type,
-        ddc::UniformPointSampling<X>>;
+using IDim = IDim_<X, std::is_same_v<X, I1> || std::is_same_v<X, I2>>;
 
 #elif defined(BSPLINES_TYPE_NON_UNIFORM)
 template <typename X>
-using BSplines = ddc::NonUniformBSplines<X, s_degree>;
+struct BSplines : ddc::NonUniformBSplines<X, s_degree>
+{
+};
+
+template <class X>
+struct IDim_ : ddc::NonUniformPointSampling<X>
+{
+};
 
 template <typename X, typename I1, typename I2>
-using IDim = std::conditional_t<
-        std::is_same_v<X, I1> || std::is_same_v<X, I2>,
-        typename GrevillePoints<BSplines<X>>::interpolation_mesh_type,
-        ddc::NonUniformPointSampling<X>>;
+using IDim = IDim_<X>;
 #endif
 
 #if defined(BC_PERIODIC)
@@ -171,10 +183,10 @@ struct DimsInitializer<IDimI1, IDimI2, ddc::detail::TypeSeq<IDimX...>>
     void operator()(std::size_t const ncells)
     {
 #if defined(BSPLINES_TYPE_UNIFORM)
-        (ddc::init_discrete_space(IDimX::
-                                          init(x0<typename IDimX::continuous_dimension_type>(),
-                                               xN<typename IDimX::continuous_dimension_type>(),
-                                               DVect<IDimX>(ncells))),
+        (ddc::init_discrete_space<IDimX>(IDimX::template init<IDimX>(
+                 x0<typename IDimX::continuous_dimension_type>(),
+                 xN<typename IDimX::continuous_dimension_type>(),
+                 DVect<IDimX>(ncells))),
          ...);
         ddc::init_discrete_space<BSplines<typename IDimI1::continuous_dimension_type>>(
                 x0<typename IDimI1::continuous_dimension_type>(),
@@ -193,11 +205,11 @@ struct DimsInitializer<IDimI1, IDimI2, ddc::detail::TypeSeq<IDimX...>>
                 breaks<typename IDimI2::continuous_dimension_type>(ncells));
 #endif
         ddc::init_discrete_space<IDimI1>(
-                GrevillePoints<
-                        BSplines<typename IDimI1::continuous_dimension_type>>::get_sampling());
+                GrevillePoints<BSplines<typename IDimI1::continuous_dimension_type>>::
+                        template get_sampling<IDimI1>());
         ddc::init_discrete_space<IDimI2>(
-                GrevillePoints<
-                        BSplines<typename IDimI2::continuous_dimension_type>>::get_sampling());
+                GrevillePoints<BSplines<typename IDimI2::continuous_dimension_type>>::
+                        template get_sampling<IDimI2>());
     }
 };
 
@@ -219,14 +231,14 @@ static void Batched2dSplineTest()
 
     // Create the values domain (mesh)
 #if defined(BC_HERMITE)
-    auto interpolation_domain1
-            = ddc::DiscreteDomain<IDim<I1, I1, I2>>(GrevillePoints<BSplines<I1>>::get_domain());
-    auto interpolation_domain2
-            = ddc::DiscreteDomain<IDim<I2, I1, I2>>(GrevillePoints<BSplines<I2>>::get_domain());
+    auto interpolation_domain1 = ddc::DiscreteDomain<IDim<I1, I1, I2>>(
+            GrevillePoints<BSplines<I1>>::template get_domain<IDim<I1, I1, I2>>());
+    auto interpolation_domain2 = ddc::DiscreteDomain<IDim<I2, I1, I2>>(
+            GrevillePoints<BSplines<I2>>::template get_domain<IDim<I2, I1, I2>>());
 #endif
     auto interpolation_domain = ddc::DiscreteDomain<IDim<I1, I1, I2>, IDim<I2, I1, I2>>(
-            GrevillePoints<BSplines<I1>>::get_domain(),
-            GrevillePoints<BSplines<I2>>::get_domain());
+            GrevillePoints<BSplines<I1>>::template get_domain<IDim<I1, I1, I2>>(),
+            GrevillePoints<BSplines<I2>>::template get_domain<IDim<I2, I1, I2>>());
     auto const dom_vals_tmp = ddc::DiscreteDomain<IDim<X, void, void>...>(
             ddc::DiscreteDomain<IDim<
                     X,
