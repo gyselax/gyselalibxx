@@ -2,8 +2,8 @@
 
 add_library("poisson_xy" STATIC
     chargedensitycalculator.cpp
-    nullpoissonsolver.cpp
-    fftpoissonsolver.cpp
+    nullqnsolver.cpp
+    fftqnsolver.cpp
 )
 
 target_compile_features("poisson_xy"

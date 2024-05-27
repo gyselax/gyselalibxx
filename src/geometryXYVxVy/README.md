@@ -4,7 +4,7 @@ The `geoemtryXYVxVy` folder contains all the code describing methods which are s
 
 - [geometry](./geometry/README.md)  --> - All the dimension tags used for a simulation in the geoemtry.
 <!-- - [initialization](./initialization/README.md) - -->
-- [poisson](./poisson/README.md) - Code describing the polar Poisson solver.
+- [poisson](./poisson/README.md) - Code describing the Quasi-Neutrality solver.
 <!-- - [time\_integration](./time_integration/README.md) - -->
 <!-- - [vlasov](./vlasov/README.md) - -->
 

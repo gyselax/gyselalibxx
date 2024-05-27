@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 
 #include "chargedensitycalculator.hpp"
-#include "fftpoissonsolver.hpp"
+#include "fftqnsolver.hpp"
 #include "geometry.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "quadrature.hpp"
@@ -12,7 +12,7 @@
 
 namespace {
 
-static void TestFftPoissonSolverCosineSource()
+static void TestFftQNSolverCosineSource()
 {
     CoordX const x_min(0.0);
     CoordX const x_max(2.0 * M_PI);
@@ -82,7 +82,7 @@ static void TestFftPoissonSolverCosineSource()
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
-    FftPoissonSolver poisson(rhs);
+    FftQNSolver poisson(rhs);
 
     DFieldXY electrostatic_potential_alloc(gridxy);
     DFieldXY electric_field_x_alloc(gridxy);
@@ -149,7 +149,7 @@ static void TestFftPoissonSolverCosineSource()
 
 } // namespace
 
-TEST(FftPoissonSolver, CosineSource)
+TEST(FftQNSolver, CosineSource)
 {
-    TestFftPoissonSolverCosineSource();
+    TestFftQNSolverCosineSource();
 }

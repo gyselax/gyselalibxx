@@ -7,18 +7,18 @@
 #include <geometry.hpp>
 
 /**
- * @brief An operator which solves the Poisson equation using a fast
+ * @brief An operator which solves the Quasi-Neutrality equation using a fast
  * Fourier transform.
  *
- * An operator which solves the Poisson equation:
+ * An operator which solves the Quasi-Neutrality equation:
  * @f$ - \frac{d^2 \phi}{dx^2} = \rho @f$
  * using a fast Fourier transform on a periodic domain.
  * This operator only works for equidistant points.
  */
-class IPoissonSolver
+class IQNSolver
 {
 public:
-    virtual ~IPoissonSolver() = default;
+    virtual ~IQNSolver() = default;
 
     /**
      * The operator which solves the equation using the method described by the class.

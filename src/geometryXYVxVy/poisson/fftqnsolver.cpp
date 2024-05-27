@@ -9,26 +9,25 @@
 
 #include <geometry.hpp>
 
-#include "fftpoissonsolver.hpp"
+#include "fftqnsolver.hpp"
 
-FftPoissonSolver::FftPoissonSolver(IChargeDensityCalculator const& compute_rho)
-    : m_compute_rho(compute_rho)
+FftQNSolver::FftQNSolver(IChargeDensityCalculator const& compute_rho) : m_compute_rho(compute_rho)
 {
 }
 
 // 1- Inner solvers shall be passed in the constructor
 // 2- Should it take an array of distribution functions ?
-void FftPoissonSolver::operator()(
+void FftQNSolver::operator()(
         DSpanXY const electrostatic_potential,
         DSpanXY const electric_field_x,
         DSpanXY const electric_field_y,
         DViewSpXYVxVy const allfdistribu) const
 {
-    Kokkos::Profiling::pushRegion("PoissonSolver");
+    Kokkos::Profiling::pushRegion("QNSolver");
     assert((electrostatic_potential.domain() == ddc::get_domain<IDimX, IDimY>(allfdistribu)));
     IDomainXY const xy_dom = electrostatic_potential.domain();
 
-    // Compute the RHS of the Poisson equation.
+    // Compute the RHS of the Quasi-Neutrality equation.
     DFieldXY rho(xy_dom);
     DFieldVxVy contiguous_slice_vxvy(allfdistribu.domain<IDimVx, IDimVy>());
     m_compute_rho(rho, allfdistribu);
