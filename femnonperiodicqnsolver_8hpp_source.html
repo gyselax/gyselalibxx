@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/femnonperiodicpoissonsolver.hpp Source File</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/femnonperiodicqnsolver.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('femnonperiodicpoissonsolver_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('femnonperiodicqnsolver_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('femnonperiodicpoissonsolver_8hpp_sourc
 
 <div class="header">
   <div class="headertitle">
-<div class="title">femnonperiodicpoissonsolver.hpp</div>  </div>
+<div class="title">femnonperiodicqnsolver.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
@@ -113,7 +113,7 @@ $(document).ready(function(){initNavTree('femnonperiodicpoissonsolver_8hpp_sourc
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;ichargedensitycalculator.hpp&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;ipoissonsolver.hpp&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;iqnsolver.hpp&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structHiddenNUBSplinesX.html">   13</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structHiddenNUBSplinesX.html">HiddenNUBSplinesX</a> : ddc::NonUniformBSplines&lt;RDimX, BSDegreeX&gt;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
@@ -131,14 +131,14 @@ $(document).ready(function(){initNavTree('femnonperiodicpoissonsolver_8hpp_sourc
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        ddc::NullExtrapolationRule,</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="structIDimX.html">IDimX</a>&gt;;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classFemNonPeriodicPoissonSolver.html">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFemNonPeriodicPoissonSolver.html">FemNonPeriodicPoissonSolver</a> : <span class="keyword">public</span> <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classFemNonPeriodicQNSolver.html">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFemNonPeriodicQNSolver.html">FemNonPeriodicQNSolver</a> : <span class="keyword">public</span> <a class="code" href="classIQNSolver.html">IQNSolver</a></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classFemNonPeriodicPoissonSolver.html">   46</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX">QDimX</a></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classFemNonPeriodicQNSolver.html">   46</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="classFemNonPeriodicQNSolver.html#structFemNonPeriodicQNSolver_1_1QDimX">QDimX</a></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    };</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="structFemNonPeriodicPoissonSolver_1_1QMeshX.html">   50</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structFemNonPeriodicPoissonSolver_1_1QMeshX.html">QMeshX</a> : ddc::NonUniformPointSampling&lt;QDimX&gt;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="structFemNonPeriodicQNSolver_1_1QMeshX.html">   50</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structFemNonPeriodicQNSolver_1_1QMeshX.html">QMeshX</a> : ddc::NonUniformPointSampling&lt;QDimX&gt;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    {</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    };</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
@@ -186,37 +186,37 @@ $(document).ready(function(){initNavTree('femnonperiodicpoissonsolver_8hpp_sourc
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classFemNonPeriodicPoissonSolver.html#ac4823c397f9cfc7a2904da3e6cbb13a4">  105</a></span>&#160;    <a class="code" href="classFemNonPeriodicPoissonSolver.html#ac4823c397f9cfc7a2904da3e6cbb13a4">FemNonPeriodicPoissonSolver</a>(</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classFemNonPeriodicQNSolver.html#a82f938b03fbea6dcc68c2ac7c99d2352">  105</a></span>&#160;    <a class="code" href="classFemNonPeriodicQNSolver.html#a82f938b03fbea6dcc68c2ac7c99d2352">FemNonPeriodicQNSolver</a>(</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            SplineXBuilder_1d <span class="keyword">const</span>&amp; spline_x_builder,</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            SplineXEvaluator_1d <span class="keyword">const</span>&amp; spline_x_evaluator,</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> <span class="keyword">const</span>&amp; compute_rho);</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66">  117</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66">operator()</a>(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu)</div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classFemNonPeriodicQNSolver.html#a6c3265713efa76f6cea308bf377f2894">  117</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFemNonPeriodicQNSolver.html#a6c3265713efa76f6cea308bf377f2894">operator()</a>(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu)</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">void</span> build_matrix();</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classFemNonPeriodicPoissonSolver.html#abaa0734fbede404207a0d0d86f4877a3">  130</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFemNonPeriodicPoissonSolver.html#abaa0734fbede404207a0d0d86f4877a3">solve_matrix_system</a>(DNUBSSpanX phi_spline_coef, DBSViewX rho_spline_coef) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classFemNonPeriodicQNSolver.html#ab598d90f9bc0307aee9b260dc10991fb">  130</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFemNonPeriodicQNSolver.html#ab598d90f9bc0307aee9b260dc10991fb">solve_matrix_system</a>(DNUBSSpanX phi_spline_coef, DBSViewX rho_spline_coef) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;};</div>
-<div class="ttc" id="aclassFemNonPeriodicPoissonSolver_html"><div class="ttname"><a href="classFemNonPeriodicPoissonSolver.html">FemNonPeriodicPoissonSolver</a></div><div class="ttdoc">An operator which solves the Poisson equation using Finite Elements on a non-periodic domain.</div><div class="ttdef"><b>Definition:</b> femnonperiodicpoissonsolver.hpp:40</div></div>
-<div class="ttc" id="aclassFemNonPeriodicPoissonSolver_html_abaa0734fbede404207a0d0d86f4877a3"><div class="ttname"><a href="classFemNonPeriodicPoissonSolver.html#abaa0734fbede404207a0d0d86f4877a3">FemNonPeriodicPoissonSolver::solve_matrix_system</a></div><div class="ttdeci">void solve_matrix_system(DNUBSSpanX phi_spline_coef, DBSViewX rho_spline_coef) const</div><div class="ttdoc">[SHOULD BE PRIVATE (Kokkos limitation)]</div></div>
-<div class="ttc" id="aclassFemNonPeriodicPoissonSolver_html_ac4823c397f9cfc7a2904da3e6cbb13a4"><div class="ttname"><a href="classFemNonPeriodicPoissonSolver.html#ac4823c397f9cfc7a2904da3e6cbb13a4">FemNonPeriodicPoissonSolver::FemNonPeriodicPoissonSolver</a></div><div class="ttdeci">FemNonPeriodicPoissonSolver(SplineXBuilder_1d const &amp;spline_x_builder, SplineXEvaluator_1d const &amp;spline_x_evaluator, IChargeDensityCalculator const &amp;compute_rho)</div><div class="ttdoc">Construct the FemNonPeriodicPoissonSolver operator.</div></div>
-<div class="ttc" id="aclassFemNonPeriodicPoissonSolver_html_ae81c12b0b37dd2f2bf3f4f24d7d7bf66"><div class="ttname"><a href="classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66">FemNonPeriodicPoissonSolver::operator()</a></div><div class="ttdeci">void operator()(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const override</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
-<div class="ttc" id="aclassFemNonPeriodicPoissonSolver_html_structFemNonPeriodicPoissonSolver_1_1QDimX"><div class="ttname"><a href="classFemNonPeriodicPoissonSolver.html#structFemNonPeriodicPoissonSolver_1_1QDimX">FemNonPeriodicPoissonSolver::QDimX</a></div><div class="ttdoc">A tag to represent the dimension where the quadrature points are defined.</div><div class="ttdef"><b>Definition:</b> femnonperiodicpoissonsolver.hpp:47</div></div>
+<div class="ttc" id="aclassFemNonPeriodicQNSolver_html"><div class="ttname"><a href="classFemNonPeriodicQNSolver.html">FemNonPeriodicQNSolver</a></div><div class="ttdoc">An operator which solves the Quasi-Neutrality equation using Finite Elements on a non-periodic domain...</div><div class="ttdef"><b>Definition:</b> femnonperiodicqnsolver.hpp:40</div></div>
+<div class="ttc" id="aclassFemNonPeriodicQNSolver_html_a6c3265713efa76f6cea308bf377f2894"><div class="ttname"><a href="classFemNonPeriodicQNSolver.html#a6c3265713efa76f6cea308bf377f2894">FemNonPeriodicQNSolver::operator()</a></div><div class="ttdeci">void operator()(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const override</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
+<div class="ttc" id="aclassFemNonPeriodicQNSolver_html_a82f938b03fbea6dcc68c2ac7c99d2352"><div class="ttname"><a href="classFemNonPeriodicQNSolver.html#a82f938b03fbea6dcc68c2ac7c99d2352">FemNonPeriodicQNSolver::FemNonPeriodicQNSolver</a></div><div class="ttdeci">FemNonPeriodicQNSolver(SplineXBuilder_1d const &amp;spline_x_builder, SplineXEvaluator_1d const &amp;spline_x_evaluator, IChargeDensityCalculator const &amp;compute_rho)</div><div class="ttdoc">Construct the FemNonPeriodicQNSolver operator.</div></div>
+<div class="ttc" id="aclassFemNonPeriodicQNSolver_html_ab598d90f9bc0307aee9b260dc10991fb"><div class="ttname"><a href="classFemNonPeriodicQNSolver.html#ab598d90f9bc0307aee9b260dc10991fb">FemNonPeriodicQNSolver::solve_matrix_system</a></div><div class="ttdeci">void solve_matrix_system(DNUBSSpanX phi_spline_coef, DBSViewX rho_spline_coef) const</div><div class="ttdoc">[SHOULD BE PRIVATE (Kokkos limitation)]</div></div>
+<div class="ttc" id="aclassFemNonPeriodicQNSolver_html_structFemNonPeriodicQNSolver_1_1QDimX"><div class="ttname"><a href="classFemNonPeriodicQNSolver.html#structFemNonPeriodicQNSolver_1_1QDimX">FemNonPeriodicQNSolver::QDimX</a></div><div class="ttdoc">A tag to represent the dimension where the quadrature points are defined.</div><div class="ttdef"><b>Definition:</b> femnonperiodicqnsolver.hpp:47</div></div>
 <div class="ttc" id="aclassIChargeDensityCalculator_html"><div class="ttname"><a href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></div><div class="ttdoc">A class which calculates the charge density.</div><div class="ttdef"><b>Definition:</b> ichargedensitycalculator.hpp:16</div></div>
-<div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">An operator which solves the Poisson equation.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:16</div></div>
+<div class="ttc" id="aclassIQNSolver_html"><div class="ttname"><a href="classIQNSolver.html">IQNSolver</a></div><div class="ttdoc">Base class for a Quasi-Neutrality solver.</div><div class="ttdef"><b>Definition:</b> iqnsolver.hpp:13</div></div>
 <div class="ttc" id="astructBSplinesX_html"><div class="ttname"><a href="structBSplinesX.html">BSplinesX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:558</div></div>
-<div class="ttc" id="astructFemNonPeriodicPoissonSolver_1_1QMeshX_html"><div class="ttname"><a href="structFemNonPeriodicPoissonSolver_1_1QMeshX.html">FemNonPeriodicPoissonSolver::QMeshX</a></div><div class="ttdef"><b>Definition:</b> femnonperiodicpoissonsolver.hpp:51</div></div>
-<div class="ttc" id="astructHiddenNUBSplinesX_html"><div class="ttname"><a href="structHiddenNUBSplinesX.html">HiddenNUBSplinesX</a></div><div class="ttdef"><b>Definition:</b> femnonperiodicpoissonsolver.hpp:14</div></div>
+<div class="ttc" id="astructFemNonPeriodicQNSolver_1_1QMeshX_html"><div class="ttname"><a href="structFemNonPeriodicQNSolver_1_1QMeshX.html">FemNonPeriodicQNSolver::QMeshX</a></div><div class="ttdef"><b>Definition:</b> femnonperiodicqnsolver.hpp:51</div></div>
+<div class="ttc" id="astructHiddenNUBSplinesX_html"><div class="ttname"><a href="structHiddenNUBSplinesX.html">HiddenNUBSplinesX</a></div><div class="ttdef"><b>Definition:</b> femnonperiodicqnsolver.hpp:14</div></div>
 <div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:589</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_a2bb6054debc127821c0784e49f1530c.html">geometryXVx</a></li><li class="navelem"><a class="el" href="dir_37c8df5729473ef02021306da35712e0.html">poisson</a></li><li class="navelem"><b>femnonperiodicpoissonsolver.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_a2bb6054debc127821c0784e49f1530c.html">geometryXVx</a></li><li class="navelem"><a class="el" href="dir_37c8df5729473ef02021306da35712e0.html">poisson</a></li><li class="navelem"><b>femnonperiodicqnsolver.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

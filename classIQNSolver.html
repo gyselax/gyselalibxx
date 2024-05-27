@@ -109,18 +109,35 @@ $(document).ready(function(){initNavTree('classIQNSolver.html',''); initResizabl
 
 <p>Base class for a Quasi-Neutrality solver.  
  <a href="classIQNSolver.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for IQNSolver:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classIQNSolver.png" usemap="#IQNSolver_map" alt=""/>
+  <map id="IQNSolver_map" name="IQNSolver_map">
+<area href="classFemNonPeriodicQNSolver.html" title="An operator which solves the Quasi-Neutrality equation using Finite Elements on a non-periodic domain..." alt="FemNonPeriodicQNSolver" shape="rect" coords="0,56,162,80"/>
+<area href="classFemPeriodicQNSolver.html" title="An operator which solves the Quasi-Neutrality equation using Finite Elements on a periodic domain." alt="FemPeriodicQNSolver" shape="rect" coords="172,56,334,80"/>
+<area href="classFftQNSolver.html" title="An operator which solves the Quasi-Neutrality equation using a fast Fourier transform." alt="FftQNSolver" shape="rect" coords="344,56,506,80"/>
+<area href="classNullQNSolver.html" title="Null operator." alt="NullQNSolver" shape="rect" coords="516,56,678,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a219b1144fffdc7059467315c9de5b1da"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIQNSolver.html#a219b1144fffdc7059467315c9de5b1da">operator()</a> (DSpanRP electrostatic_potential, <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; double, IDomainRP, NDTag&lt; <a class="el" href="structRDimX.html">RDimX</a>, <a class="el" href="structRDimY.html">RDimY</a> &gt;&gt; electric_field, DViewRP allfdistribu) const =0</td></tr>
 <tr class="memdesc:a219b1144fffdc7059467315c9de5b1da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the electrical potential and the electric field from the Quasi-Neutrality equation.  <a href="classIQNSolver.html#a219b1144fffdc7059467315c9de5b1da">More...</a><br /></td></tr>
 <tr class="separator:a219b1144fffdc7059467315c9de5b1da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20410c1561e641ac9ba617081c3da1b9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIQNSolver.html#a20410c1561e641ac9ba617081c3da1b9">operator()</a> (DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const =0</td></tr>
+<tr class="memdesc:a20410c1561e641ac9ba617081c3da1b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classIQNSolver.html#a20410c1561e641ac9ba617081c3da1b9">More...</a><br /></td></tr>
+<tr class="separator:a20410c1561e641ac9ba617081c3da1b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for a Quasi-Neutrality solver. </p>
+<p>An operator which solves the Quasi-Neutrality equation.</p>
+<p>An operator which solves the Quasi-Neutrality equation: \( - \frac{d^2 \phi}{dx^2} = \rho \) </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a219b1144fffdc7059467315c9de5b1da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a219b1144fffdc7059467315c9de5b1da">&#9670;&nbsp;</a></span>operator()()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a219b1144fffdc7059467315c9de5b1da">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,8 +188,62 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a20410c1561e641ac9ba617081c3da1b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20410c1561e641ac9ba617081c3da1b9">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void IQNSolver::operator() </td>
+          <td>(</td>
+          <td class="paramtype">DSpanX&#160;</td>
+          <td class="paramname"><em>electrostatic_potential</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DSpanX&#160;</td>
+          <td class="paramname"><em>electric_field</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The operator which solves the equation using the method described by the class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">electrostatic_potential</td><td>The electrostatic potential, the result of the poisson solver. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field</td><td>The electric field, the derivative of the electrostatic potential. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classFftQNSolver.html#ad40974052f1e86255918853229d4d396">FftQNSolver</a>, <a class="el" href="classFemPeriodicQNSolver.html#a11fcdad7553ae008c46b370a4cc056a1">FemPeriodicQNSolver</a>, <a class="el" href="classFemNonPeriodicQNSolver.html#a6c3265713efa76f6cea308bf377f2894">FemNonPeriodicQNSolver</a>, and <a class="el" href="classNullQNSolver.html#a580bdaa94cf60ff245501a2e0893ad20">NullQNSolver</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/<a class="el" href="iqnsolver_8hpp_source.html">iqnsolver.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/<a class="el" href="geometryRTheta_2poisson_2iqnsolver_8hpp_source.html">iqnsolver.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

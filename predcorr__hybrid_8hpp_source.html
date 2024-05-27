@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('predcorr__hybrid_8hpp_source.html','')
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;itimesolver_hybrid.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span><a class="code" href="classIPoissonSolver.html">IPoissonSolver</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span><a class="code" href="classIQNSolver.html">IQNSolver</a>;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a>;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="classIFluidSolver.html">IFluidSolver</a>;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
@@ -122,13 +122,13 @@ $(document).ready(function(){initNavTree('predcorr__hybrid_8hpp_source.html','')
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="classIFluidSolver.html">IFluidSolver</a> <span class="keyword">const</span>&amp; m_fluid_solver;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a> <span class="keyword">const</span>&amp; m_poisson_solver;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classIQNSolver.html">IQNSolver</a> <span class="keyword">const</span>&amp; m_poisson_solver;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classPredCorrHybrid.html#afdb932ed507094c27926560af8944801">   40</a></span>&#160;    <a class="code" href="classPredCorrHybrid.html#afdb932ed507094c27926560af8944801">PredCorrHybrid</a>(</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classPredCorrHybrid.html#aae7782821ebc9c68e3f3c4bb26302c25">   40</a></span>&#160;    <a class="code" href="classPredCorrHybrid.html#aae7782821ebc9c68e3f3c4bb26302c25">PredCorrHybrid</a>(</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; boltzmann_solver,</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <a class="code" href="classIFluidSolver.html">IFluidSolver</a> <span class="keyword">const</span>&amp; fluid_solver,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a> <span class="keyword">const</span>&amp; poisson_solver);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <a class="code" href="classIQNSolver.html">IQNSolver</a> <span class="keyword">const</span>&amp; poisson_solver);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    ~<a class="code" href="classPredCorrHybrid.html">PredCorrHybrid</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
@@ -141,11 +141,11 @@ $(document).ready(function(){initNavTree('predcorr__hybrid_8hpp_source.html','')
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
 <div class="ttc" id="aclassIBoltzmannSolver_html"><div class="ttname"><a href="classIBoltzmannSolver.html">IBoltzmannSolver</a></div><div class="ttdoc">An abstract class for solving a Boltzmann equation.</div><div class="ttdef"><b>Definition:</b> iboltzmannsolver.hpp:11</div></div>
 <div class="ttc" id="aclassIFluidSolver_html"><div class="ttname"><a href="classIFluidSolver.html">IFluidSolver</a></div><div class="ttdoc">An abstract class for solving a fluid model.</div><div class="ttdef"><b>Definition:</b> ifluidsolver.hpp:11</div></div>
-<div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">An operator which solves the Poisson equation.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:16</div></div>
+<div class="ttc" id="aclassIQNSolver_html"><div class="ttname"><a href="classIQNSolver.html">IQNSolver</a></div><div class="ttdoc">Base class for a Quasi-Neutrality solver.</div><div class="ttdef"><b>Definition:</b> iqnsolver.hpp:13</div></div>
 <div class="ttc" id="aclassITimeSolverHybrid_html"><div class="ttname"><a href="classITimeSolverHybrid.html">ITimeSolverHybrid</a></div><div class="ttdoc">An abstract class for solving a Boltzmann-Poisson system of equations coupled to a fluid model.</div><div class="ttdef"><b>Definition:</b> itimesolver_hybrid.hpp:11</div></div>
 <div class="ttc" id="aclassPredCorrHybrid_html"><div class="ttname"><a href="classPredCorrHybrid.html">PredCorrHybrid</a></div><div class="ttdoc">A class that solves a Boltzmann-Poisson system of equations coupled to a fluid particles model using ...</div><div class="ttdef"><b>Definition:</b> predcorr_hybrid.hpp:25</div></div>
 <div class="ttc" id="aclassPredCorrHybrid_html_a4247e382ebf03258bc1ad34171d297a9"><div class="ttname"><a href="classPredCorrHybrid.html#a4247e382ebf03258bc1ad34171d297a9">PredCorrHybrid::operator()</a></div><div class="ttdeci">DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DSpanSpMX fluid_moments, double time_start, double dt, int steps=1) const override</div><div class="ttdoc">Solves the Boltzmann-Poisson-fluid system.</div></div>
-<div class="ttc" id="aclassPredCorrHybrid_html_afdb932ed507094c27926560af8944801"><div class="ttname"><a href="classPredCorrHybrid.html#afdb932ed507094c27926560af8944801">PredCorrHybrid::PredCorrHybrid</a></div><div class="ttdeci">PredCorrHybrid(IBoltzmannSolver const &amp;boltzmann_solver, IFluidSolver const &amp;fluid_solver, IPoissonSolver const &amp;poisson_solver)</div><div class="ttdoc">Creates an instance of the predictor-corrector class.</div></div>
+<div class="ttc" id="aclassPredCorrHybrid_html_aae7782821ebc9c68e3f3c4bb26302c25"><div class="ttname"><a href="classPredCorrHybrid.html#aae7782821ebc9c68e3f3c4bb26302c25">PredCorrHybrid::PredCorrHybrid</a></div><div class="ttdeci">PredCorrHybrid(IBoltzmannSolver const &amp;boltzmann_solver, IFluidSolver const &amp;fluid_solver, IQNSolver const &amp;poisson_solver)</div><div class="ttdoc">Creates an instance of the predictor-corrector class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

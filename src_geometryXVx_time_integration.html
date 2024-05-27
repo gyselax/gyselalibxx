@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('src_geometryXVx_time_integration.html'
 <div class="contents">
 <div class="textblock"><p>The <code>boltzmann</code> folder contains methods for solving a Boltzmann-Poisson coupled system. equation. Such methods typically take the distribution function and the electric field computed at a given time \(t\), and return the value of the distribution function and the electric field at a time \(t+dt\), where \(dt\) is the timestep of the simulation. A Boltzmann equation refers to an advection equation in phase space with sources. In the simplified 1D geometry in space and velocity it has the general form</p>
 <p>\(\partial_t f + v \partial_x f + E/m\partial_v f = S(f)\)</p>
-<p>Where \(f\) is the distribution function, \(x\) and \(v\) are the space and velocity variables respectively, \(E\) is the electric field and \(m\) is the mass of the considered plasma species. The \(S(f)\) operator refers to any source terms (including collisions). A Poisson equation is of the form</p>
+<p>Where \(f\) is the distribution function, \(x\) and \(v\) are the space and velocity variables respectively, \(E\) is the electric field and \(m\) is the mass of the considered plasma species. The \(S(f)\) operator refers to any source terms (including collisions). A Quasi-Neutrality equation is of the form</p>
 <p>\(-\varepsilon_0 \nabla E = \rho\)</p>
 <p>Where \(\rho\) is the charge density.</p>
 <p>The implemented time integrators are:</p><ul>

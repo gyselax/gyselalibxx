@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('classIPoissonSolver.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
-<p>An operator which solves the Poisson equation.  
+<p>An operator which solves the Poisson equation using a fast Fourier transform.  
  <a href="classIPoissonSolver.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for IPoissonSolver:</div>
@@ -115,86 +115,23 @@ Inheritance diagram for IPoissonSolver:</div>
  <div class="center">
   <img src="classIPoissonSolver.png" usemap="#IPoissonSolver_map" alt=""/>
   <map id="IPoissonSolver_map" name="IPoissonSolver_map">
-<area href="classFemNonPeriodicPoissonSolver.html" title="An operator which solves the Poisson equation using Finite Elements on a non-periodic domain." alt="FemNonPeriodicPoissonSolver" shape="rect" coords="0,56,187,80"/>
-<area href="classFemPeriodicPoissonSolver.html" title="An operator which solves the Poisson equation using Finite Elements on a periodic domain." alt="FemPeriodicPoissonSolver" shape="rect" coords="197,56,384,80"/>
-<area href="classFftPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform." alt="FftPoissonSolver" shape="rect" coords="394,56,581,80"/>
-<area href="classFftPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform." alt="FftPoissonSolver" shape="rect" coords="591,56,778,80"/>
-<area href="classNullPoissonSolver.html" title="Null operator." alt="NullPoissonSolver" shape="rect" coords="788,56,975,80"/>
-<area href="classNullPoissonSolver.html" title="Null operator." alt="NullPoissonSolver" shape="rect" coords="985,56,1172,80"/>
+<area href="classFftPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform." alt="FftPoissonSolver" shape="rect" coords="0,56,115,80"/>
+<area href="classNullPoissonSolver.html" alt="NullPoissonSolver" shape="rect" coords="125,56,240,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2819621d345ddde4acad30a47c8fd7f9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver.html#a2819621d345ddde4acad30a47c8fd7f9">operator()</a> (DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const =0</td></tr>
-<tr class="memdesc:a2819621d345ddde4acad30a47c8fd7f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classIPoissonSolver.html#a2819621d345ddde4acad30a47c8fd7f9">More...</a><br /></td></tr>
-<tr class="separator:a2819621d345ddde4acad30a47c8fd7f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc648976a27e0b36daf0615d7b8eebd6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6">operator()</a> (DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const =0</td></tr>
 <tr class="memdesc:acc648976a27e0b36daf0615d7b8eebd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classIPoissonSolver.html#acc648976a27e0b36daf0615d7b8eebd6">More...</a><br /></td></tr>
 <tr class="separator:acc648976a27e0b36daf0615d7b8eebd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An operator which solves the Poisson equation. </p>
-<p>An operator which solves the Poisson equation using a fast Fourier transform.</p>
-<p>An operator which solves the Poisson equation: \( - \frac{d^2 \phi}{dx^2} = \rho \)</p>
+<div class="textblock"><p>An operator which solves the Poisson equation using a fast Fourier transform. </p>
 <p>An operator which solves the Poisson equation: \( - \frac{d^2 \phi}{dx^2} = \rho \) using a fast Fourier transform on a periodic domain. This operator only works for equidistant points. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2819621d345ddde4acad30a47c8fd7f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2819621d345ddde4acad30a47c8fd7f9">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void IPoissonSolver::operator() </td>
-          <td>(</td>
-          <td class="paramtype">DSpanX&#160;</td>
-          <td class="paramname"><em>electrostatic_potential</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DSpanX&#160;</td>
-          <td class="paramname"><em>electric_field</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
-          <td class="paramname"><em>allfdistribu</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The operator which solves the equation using the method described by the class. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">electrostatic_potential</td><td>The electrostatic potential, the result of the poisson solver. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field</td><td>The electric field, the derivative of the electrostatic potential. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The distribution function. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="classFftPoissonSolver.html#a58e99a7d9c0110c9174edee83ac3025b">FftPoissonSolver</a>, <a class="el" href="classFemPeriodicPoissonSolver.html#a29947ba0529fe6de504b85780a0d741e">FemPeriodicPoissonSolver</a>, <a class="el" href="classFemNonPeriodicPoissonSolver.html#ae81c12b0b37dd2f2bf3f4f24d7d7bf66">FemNonPeriodicPoissonSolver</a>, and <a class="el" href="classNullPoissonSolver.html#a9f96957959d01b15de007812bdd513af">NullPoissonSolver</a>.</p>
-
-</div>
-</div>
 <a id="acc648976a27e0b36daf0615d7b8eebd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc648976a27e0b36daf0615d7b8eebd6">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acc648976a27e0b36daf0615d7b8eebd6">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,7 +192,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="geometryXVx_2poisson_2ipoissonsolver_8hpp_source.html">ipoissonsolver.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/<a class="el" href="ipoissonsolver_8hpp_source.html">ipoissonsolver.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

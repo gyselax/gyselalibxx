@@ -60,9 +60,10 @@ var annotated =
     [ "Evaluator2D", "structEvaluator2D.html", [
       [ "Evaluator", "classEvaluator2D_1_1Evaluator.html", "classEvaluator2D_1_1Evaluator" ]
     ] ],
-    [ "FemNonPeriodicPoissonSolver", "classFemNonPeriodicPoissonSolver.html", "classFemNonPeriodicPoissonSolver" ],
-    [ "FemPeriodicPoissonSolver", "classFemPeriodicPoissonSolver.html", "classFemPeriodicPoissonSolver" ],
+    [ "FemNonPeriodicQNSolver", "classFemNonPeriodicQNSolver.html", "classFemNonPeriodicQNSolver" ],
+    [ "FemPeriodicQNSolver", "classFemPeriodicQNSolver.html", "classFemPeriodicQNSolver" ],
     [ "FftPoissonSolver", "classFftPoissonSolver.html", "classFftPoissonSolver" ],
+    [ "FftQNSolver", "classFftQNSolver.html", "classFftQNSolver" ],
     [ "FluidMoments", "classFluidMoments.html", "classFluidMoments" ],
     [ "for_each_tuple_cat", "structfor__each__tuple__cat.html", null ],
     [ "for_each_tuple_cat< std::tuple< Tuples... >, Tuple >", "structfor__each__tuple__cat_3_01std_1_1tuple_3_01Tuples_8_8_8_01_4_00_01Tuple_01_4.html", "structfor__each__tuple__cat_3_01std_1_1tuple_3_01Tuples_8_8_8_01_4_00_01Tuple_01_4" ],
@@ -136,6 +137,7 @@ var annotated =
     [ "NullAdvectionVelocity", "classNullAdvectionVelocity.html", "classNullAdvectionVelocity" ],
     [ "NullFluidSolver", "classNullFluidSolver.html", "classNullFluidSolver" ],
     [ "NullPoissonSolver", "classNullPoissonSolver.html", "classNullPoissonSolver" ],
+    [ "NullQNSolver", "classNullQNSolver.html", "classNullQNSolver" ],
     [ "PoissonLikeRHSFunction", "classPoissonLikeRHSFunction.html", "classPoissonLikeRHSFunction" ],
     [ "PoissonSolution", "classPoissonSolution.html", "classPoissonSolution" ],
     [ "PolarBSplines", "classPolarBSplines.html", "classPolarBSplines" ],

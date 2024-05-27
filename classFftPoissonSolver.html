@@ -115,19 +115,12 @@ Inheritance diagram for FftPoissonSolver:</div>
  <div class="center">
   <img src="classFftPoissonSolver.png" usemap="#FftPoissonSolver_map" alt=""/>
   <map id="FftPoissonSolver_map" name="FftPoissonSolver_map">
-<area href="classIPoissonSolver.html" title="An operator which solves the Poisson equation." alt="IPoissonSolver" shape="rect" coords="0,0,108,24"/>
-<area href="classIPoissonSolver.html" title="An operator which solves the Poisson equation." alt="IPoissonSolver" shape="rect" coords="118,0,226,24"/>
+<area href="classIPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform." alt="IPoissonSolver" shape="rect" coords="0,0,108,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af21fa1248a4a7b73e8e8caf1f339f4fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd">FftPoissonSolver</a> (<a class="el" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> const &amp;compute_rho)</td></tr>
-<tr class="memdesc:af21fa1248a4a7b73e8e8caf1f339f4fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the <a class="el" href="classFftPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform.">FftPoissonSolver</a> operator.  <a href="classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd">More...</a><br /></td></tr>
-<tr class="separator:af21fa1248a4a7b73e8e8caf1f339f4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58e99a7d9c0110c9174edee83ac3025b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFftPoissonSolver.html#a58e99a7d9c0110c9174edee83ac3025b">operator()</a> (DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const override</td></tr>
-<tr class="memdesc:a58e99a7d9c0110c9174edee83ac3025b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classFftPoissonSolver.html#a58e99a7d9c0110c9174edee83ac3025b">More...</a><br /></td></tr>
-<tr class="separator:a58e99a7d9c0110c9174edee83ac3025b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af21fa1248a4a7b73e8e8caf1f339f4fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd">FftPoissonSolver</a> (<a class="el" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> const &amp;compute_rho)</td></tr>
 <tr class="memdesc:af21fa1248a4a7b73e8e8caf1f339f4fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the <a class="el" href="classFftPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform.">FftPoissonSolver</a> operator.  <a href="classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd">More...</a><br /></td></tr>
 <tr class="separator:af21fa1248a4a7b73e8e8caf1f339f4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,33 +134,7 @@ Public Member Functions</h2></td></tr>
 <p>The electric field, \( \frac{d \phi}{dx} \) is calculated using a spline interpolation implemented in ElectricField. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af21fa1248a4a7b73e8e8caf1f339f4fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af21fa1248a4a7b73e8e8caf1f339f4fd">&#9670;&nbsp;</a></span>FftPoissonSolver() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">FftPoissonSolver::FftPoissonSolver </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> const &amp;&#160;</td>
-          <td class="paramname"><em>compute_rho</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Construct the <a class="el" href="classFftPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform.">FftPoissonSolver</a> operator. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">compute_rho</td><td>The operator which calculates the charge density, the right hand side of the equation. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="af21fa1248a4a7b73e8e8caf1f339f4fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af21fa1248a4a7b73e8e8caf1f339f4fd">&#9670;&nbsp;</a></span>FftPoissonSolver() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af21fa1248a4a7b73e8e8caf1f339f4fd">&#9670;&nbsp;</a></span>FftPoissonSolver()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,62 +160,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a58e99a7d9c0110c9174edee83ac3025b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58e99a7d9c0110c9174edee83ac3025b">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void FftPoissonSolver::operator() </td>
-          <td>(</td>
-          <td class="paramtype">DSpanX&#160;</td>
-          <td class="paramname"><em>electrostatic_potential</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DSpanX&#160;</td>
-          <td class="paramname"><em>electric_field</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
-          <td class="paramname"><em>allfdistribu</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The operator which solves the equation using the method described by the class. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">electrostatic_potential</td><td>The electrostatic potential, the result of the poisson solver. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field</td><td>The electric field, the derivative of the electrostatic potential. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The distribution function. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="classIPoissonSolver.html#a2819621d345ddde4acad30a47c8fd7f9">IPoissonSolver</a>.</p>
-
-</div>
-</div>
 <a id="a39d2b32d21f00f96f2c9f1625211eb98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39d2b32d21f00f96f2c9f1625211eb98">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a39d2b32d21f00f96f2c9f1625211eb98">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,7 +222,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="geometryXVx_2poisson_2fftpoissonsolver_8hpp_source.html">fftpoissonsolver.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/<a class="el" href="fftpoissonsolver_8hpp_source.html">fftpoissonsolver.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

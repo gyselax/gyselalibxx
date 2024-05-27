@@ -106,89 +106,25 @@ $(document).ready(function(){initNavTree('classNullPoissonSolver.html',''); init
 <div class="title">NullPoissonSolver Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Null operator.  
- <a href="classNullPoissonSolver.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for NullPoissonSolver:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classNullPoissonSolver.png" usemap="#NullPoissonSolver_map" alt=""/>
   <map id="NullPoissonSolver_map" name="NullPoissonSolver_map">
-<area href="classIPoissonSolver.html" title="An operator which solves the Poisson equation." alt="IPoissonSolver" shape="rect" coords="0,0,115,24"/>
-<area href="classIPoissonSolver.html" title="An operator which solves the Poisson equation." alt="IPoissonSolver" shape="rect" coords="125,0,240,24"/>
+<area href="classIPoissonSolver.html" title="An operator which solves the Poisson equation using a fast Fourier transform." alt="IPoissonSolver" shape="rect" coords="0,0,115,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9f96957959d01b15de007812bdd513af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNullPoissonSolver.html#a9f96957959d01b15de007812bdd513af">operator()</a> (DSpanX const electrostatic_potential, DSpanX const electric_field, DViewSpXVx const allfdistribu) const override</td></tr>
-<tr class="memdesc:a9f96957959d01b15de007812bdd513af"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which does not solves the equation.  <a href="classNullPoissonSolver.html#a9f96957959d01b15de007812bdd513af">More...</a><br /></td></tr>
-<tr class="separator:a9f96957959d01b15de007812bdd513af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c62eaa48fd2e9dcf304c3e0fa50b9ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNullPoissonSolver.html#a8c62eaa48fd2e9dcf304c3e0fa50b9ec">operator()</a> (DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const override</td></tr>
 <tr class="memdesc:a8c62eaa48fd2e9dcf304c3e0fa50b9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classNullPoissonSolver.html#a8c62eaa48fd2e9dcf304c3e0fa50b9ec">More...</a><br /></td></tr>
 <tr class="separator:a8c62eaa48fd2e9dcf304c3e0fa50b9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Null operator. </p>
-<p>An operator which does not solve any equation. It could be passed in operators which needs it, and used when solving poisson equation not relevant for the physics to study. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9f96957959d01b15de007812bdd513af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f96957959d01b15de007812bdd513af">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NullPoissonSolver::operator() </td>
-          <td>(</td>
-          <td class="paramtype">DSpanX const&#160;</td>
-          <td class="paramname"><em>electrostatic_potential</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DSpanX const&#160;</td>
-          <td class="paramname"><em>electric_field</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DViewSpXVx const&#160;</td>
-          <td class="paramname"><em>allfdistribu</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The operator which does not solves the equation. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">electrostatic_potential</td><td>The electrostatic potential, the result of the poisson solver. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">electric_field</td><td>The electric field, the derivative of the electrostatic potential. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>The distribution function. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="classIPoissonSolver.html#a2819621d345ddde4acad30a47c8fd7f9">IPoissonSolver</a>.</p>
-
-</div>
-</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8c62eaa48fd2e9dcf304c3e0fa50b9ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c62eaa48fd2e9dcf304c3e0fa50b9ec">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c62eaa48fd2e9dcf304c3e0fa50b9ec">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,7 +185,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/<a class="el" href="geometryXVx_2poisson_2nullpoissonsolver_8hpp_source.html">nullpoissonsolver.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/<a class="el" href="nullpoissonsolver_8hpp_source.html">nullpoissonsolver.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

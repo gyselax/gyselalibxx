@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2fftpoissonsolver_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('fftpoissonsolver_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2fftpoissonsol
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;chargedensitycalculator.hpp&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ipoissonsolver.hpp&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">class </span><a class="code" href="classFftPoissonSolver.html">FftPoissonSolver</a> : <span class="keyword">public</span> <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classFftPoissonSolver.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFftPoissonSolver.html">FftPoissonSolver</a> : <span class="keyword">public</span> <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> <span class="keyword">const</span>&amp; m_compute_rho;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2fftpoissonsol
 <div class="ttc" id="aclassFftPoissonSolver_html_a39d2b32d21f00f96f2c9f1625211eb98"><div class="ttname"><a href="classFftPoissonSolver.html#a39d2b32d21f00f96f2c9f1625211eb98">FftPoissonSolver::operator()</a></div><div class="ttdeci">void operator()(DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const override</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
 <div class="ttc" id="aclassFftPoissonSolver_html_af21fa1248a4a7b73e8e8caf1f339f4fd"><div class="ttname"><a href="classFftPoissonSolver.html#af21fa1248a4a7b73e8e8caf1f339f4fd">FftPoissonSolver::FftPoissonSolver</a></div><div class="ttdeci">FftPoissonSolver(IChargeDensityCalculator const &amp;compute_rho)</div><div class="ttdoc">Construct the FftPoissonSolver operator.</div></div>
 <div class="ttc" id="aclassIChargeDensityCalculator_html"><div class="ttname"><a href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></div><div class="ttdoc">A class which calculates the charge density.</div><div class="ttdef"><b>Definition:</b> ichargedensitycalculator.hpp:16</div></div>
-<div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">An operator which solves the Poisson equation.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:16</div></div>
+<div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">An operator which solves the Poisson equation using a fast Fourier transform.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:19</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

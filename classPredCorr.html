@@ -122,9 +122,9 @@ Inheritance diagram for PredCorr:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2456246c1a302aea3302ae4ea8521b4d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d">PredCorr</a> (<a class="el" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> const &amp;boltzmann_solver, <a class="el" href="classIPoissonSolver.html">IPoissonSolver</a> const &amp;poisson_solver)</td></tr>
-<tr class="memdesc:a2456246c1a302aea3302ae4ea8521b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the predictor-corrector class.  <a href="classPredCorr.html#a2456246c1a302aea3302ae4ea8521b4d">More...</a><br /></td></tr>
-<tr class="separator:a2456246c1a302aea3302ae4ea8521b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c82ebed9dc0ae86a59c279053287061"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#a1c82ebed9dc0ae86a59c279053287061">PredCorr</a> (<a class="el" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> const &amp;boltzmann_solver, <a class="el" href="classIQNSolver.html">IQNSolver</a> const &amp;poisson_solver)</td></tr>
+<tr class="memdesc:a1c82ebed9dc0ae86a59c279053287061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the predictor-corrector class.  <a href="classPredCorr.html#a1c82ebed9dc0ae86a59c279053287061">More...</a><br /></td></tr>
+<tr class="separator:a1c82ebed9dc0ae86a59c279053287061"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5916671433abd2af3ee5e0ed3b8eae60"><td class="memItemLeft" align="right" valign="top">DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">operator()</a> (DSpanSpXVx allfdistribu, double time_start, double dt, int steps=1) const override</td></tr>
 <tr class="memdesc:a5916671433abd2af3ee5e0ed3b8eae60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Boltzmann-Poisson system.  <a href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">More...</a><br /></td></tr>
 <tr class="separator:a5916671433abd2af3ee5e0ed3b8eae60"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,8 +139,8 @@ DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</
 <div class="textblock"><p>A class that solves a Boltzmann-Poisson system of equations using a predictor-corrector scheme. </p>
 <p>A class that solves a Boltzmann-Poisson system with a predictor corrector scheme. This scheme consists in estimating the electric potential after a time interval of a half-timestep. This potential is then used to compute the value of the distribution function at time t+dt, where dt is the timestep. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2456246c1a302aea3302ae4ea8521b4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2456246c1a302aea3302ae4ea8521b4d">&#9670;&nbsp;</a></span>PredCorr()</h2>
+<a id="a1c82ebed9dc0ae86a59c279053287061"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c82ebed9dc0ae86a59c279053287061">&#9670;&nbsp;</a></span>PredCorr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,7 +154,7 @@ DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classIPoissonSolver.html">IPoissonSolver</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classIQNSolver.html">IQNSolver</a> const &amp;&#160;</td>
           <td class="paramname"><em>poisson_solver</em>&#160;</td>
         </tr>
         <tr>
@@ -169,7 +169,7 @@ DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">boltzmann_solver</td><td>A solver for a Boltzmann equation. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">poisson_solver</td><td>A solver for a Poisson equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">poisson_solver</td><td>A solver for a Quasi-Neutrality equation. </td></tr>
   </table>
   </dd>
 </dl>

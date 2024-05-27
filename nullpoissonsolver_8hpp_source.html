@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2nullpoissonsolver_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('nullpoissonsolver_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2nullpoissonso
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ipoissonsolver.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span><a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a> : <span class="keyword">public</span> <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classNullPoissonSolver.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a> : <span class="keyword">public</span> <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="classNullPoissonSolver.html">NullPoissonSolver</a>() = <span class="keywordflow">default</span>;</div>
@@ -124,8 +124,8 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2nullpoissonso
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            DSpanXY electric_field_y,</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            DViewSpXYVxVy allfdistribu) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
-<div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">An operator which solves the Poisson equation.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:16</div></div>
-<div class="ttc" id="aclassNullPoissonSolver_html"><div class="ttname"><a href="classNullPoissonSolver.html">NullPoissonSolver</a></div><div class="ttdoc">Null operator.</div><div class="ttdef"><b>Definition:</b> nullpoissonsolver.hpp:16</div></div>
+<div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdoc">An operator which solves the Poisson equation using a fast Fourier transform.</div><div class="ttdef"><b>Definition:</b> ipoissonsolver.hpp:19</div></div>
+<div class="ttc" id="aclassNullPoissonSolver_html"><div class="ttname"><a href="classNullPoissonSolver.html">NullPoissonSolver</a></div><div class="ttdef"><b>Definition:</b> nullpoissonsolver.hpp:10</div></div>
 <div class="ttc" id="aclassNullPoissonSolver_html_a8c62eaa48fd2e9dcf304c3e0fa50b9ec"><div class="ttname"><a href="classNullPoissonSolver.html#a8c62eaa48fd2e9dcf304c3e0fa50b9ec">NullPoissonSolver::operator()</a></div><div class="ttdeci">void operator()(DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const override</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
