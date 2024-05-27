@@ -15,15 +15,15 @@ namespace {
 NUBSplineXEvaluator_1d jit_build_nubsplinesx(SplineXEvaluator_1d const& spline_x_evaluator)
 {
     static_assert(
-            std::is_same_v<
-                    typename SplineXEvaluator_1d::bsplines_type,
-                    UBSplinesX> || std::is_same_v<typename SplineXEvaluator_1d::bsplines_type, NUBSplinesX>);
-    if constexpr (std::is_same_v<typename SplineXEvaluator_1d::bsplines_type, UBSplinesX>) {
-        int const ncells = ddc::discrete_space<UBSplinesX>().ncells();
+            ddc::is_uniform_bsplines_v<
+                    typename SplineXEvaluator_1d::
+                            bsplines_type> || ddc::is_non_uniform_bsplines_v<typename SplineXEvaluator_1d::bsplines_type>);
+    if constexpr (ddc::is_uniform_bsplines_v<typename SplineXEvaluator_1d::bsplines_type>) {
+        int const ncells = ddc::discrete_space<BSplinesX>().ncells();
         std::vector<CoordX> knots(ncells + 1);
 
         for (int i(0); i < ncells + 1; ++i) {
-            knots[i] = CoordX(ddc::discrete_space<UBSplinesX>().get_knot(i));
+            knots[i] = CoordX(ddc::discrete_space<BSplinesX>().get_knot(i));
         }
         ddc::init_discrete_space<NUBSplinesX>(knots);
     }

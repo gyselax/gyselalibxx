@@ -10,9 +10,12 @@
 #include "ichargedensitycalculator.hpp"
 #include "ipoissonsolver.hpp"
 
-using NUBSplinesX = ddc::NonUniformBSplines<RDimX, BSDegreeX>;
+struct HiddenNUBSplinesX : ddc::NonUniformBSplines<RDimX, BSDegreeX>
+{
+};
+using NUBSplinesX
+        = std::conditional_t<ddc::is_uniform_bsplines_v<BSplinesX>, HiddenNUBSplinesX, BSplinesX>;
 using NUBSDomainX = ddc::DiscreteDomain<NUBSplinesX>;
-using UBSplinesX = ddc::UniformBSplines<RDimX, BSDegreeX>;
 
 using NUBSplineXEvaluator_1d = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
@@ -44,8 +47,11 @@ public:
     {
     };
 
+    struct QMeshX : ddc::NonUniformPointSampling<QDimX>
+    {
+    };
+
 private:
-    using QMeshX = ddc::NonUniformPointSampling<QDimX>;
     using DQFieldX = device_t<ddc::Chunk<double, ddc::DiscreteDomain<QMeshX>>>;
     using DNUBSSpanX = device_t<ddc::ChunkSpan<double, NUBSDomainX>>;
 

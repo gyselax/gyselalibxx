@@ -19,10 +19,10 @@ std::pair<ddc::DiscreteDomain<IDimX>, ddc::DiscreteDomain<IDimVx>> Init_domain_v
 {
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
-    ddc::DiscreteDomain<IDimX> x_dom = SplineInterpPointsX::get_domain();
-    ddc::DiscreteDomain<IDimVx> vx_dom = SplineInterpPointsVx::get_domain();
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::DiscreteDomain<IDimX> x_dom = SplineInterpPointsX::get_domain<IDimX>();
+    ddc::DiscreteDomain<IDimVx> vx_dom = SplineInterpPointsVx::get_domain<IDimVx>();
     return {x_dom, vx_dom};
 }
 

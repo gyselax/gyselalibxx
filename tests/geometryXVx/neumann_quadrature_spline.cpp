@@ -18,8 +18,8 @@ TEST(NeumannSplineQuadratureTest, ExactForConstantFunc)
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling());
-    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain());
+    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain<IDimVx>());
 
     SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
 
@@ -39,19 +39,29 @@ TEST(NeumannSplineQuadratureTest, ExactForConstantFunc)
 
 
 template <std::size_t N>
-struct Y
+struct ComputeErrorTraits
 {
-    static bool constexpr PERIODIC = false;
+    struct Y
+    {
+        static bool constexpr PERIODIC = false;
+    };
+    struct BSplinesY : ddc::UniformBSplines<Y, 3>
+    {
+    };
+    using GrevillePointsY = ddc::
+            KnotsAsInterpolationPoints<BSplinesY, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
+    struct IDimY : GrevillePointsY::interpolation_mesh_type
+    {
+    };
 };
 
 template <std::size_t N>
 double compute_error(int n_elems)
 {
-    using DimY = Y<N>;
-    using BSplinesY = ddc::UniformBSplines<DimY, 3>;
-    using GrevillePointsY = ddc::
-            KnotsAsInterpolationPoints<BSplinesY, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
-    using IDimY = typename GrevillePointsY::interpolation_mesh_type;
+    using DimY = typename ComputeErrorTraits<N>::Y;
+    using BSplinesY = typename ComputeErrorTraits<N>::BSplinesY;
+    using GrevillePointsY = typename ComputeErrorTraits<N>::GrevillePointsY;
+    using IDimY = typename ComputeErrorTraits<N>::IDimY;
     using SplineYBuilder = ddc::SplineBuilder<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
@@ -64,13 +74,13 @@ double compute_error(int n_elems)
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
 
-    ddc::Coordinate<Y<N>> const y_min(-1.0);
-    ddc::Coordinate<Y<N>> const y_max(1.0);
+    ddc::Coordinate<DimY> const y_min(-1.0);
+    ddc::Coordinate<DimY> const y_max(1.0);
 
     ddc::init_discrete_space<BSplinesY>(y_min, y_max, n_elems);
 
-    ddc::init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
-    IDomainY const gridy(GrevillePointsY::get_domain());
+    ddc::init_discrete_space<IDimY>(GrevillePointsY::template get_sampling<IDimY>());
+    IDomainY const gridy(GrevillePointsY::template get_domain<IDimY>());
 
     SplineYBuilder const builder_y(gridy);
 

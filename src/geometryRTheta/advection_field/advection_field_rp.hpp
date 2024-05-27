@@ -11,21 +11,21 @@
 #include <vector_field.hpp>
 #include <vector_field_span.hpp>
 
-#include "ipoissonsolver.hpp"
-#include "poisson_rhs_function.hpp"
-#include "polarpoissonsolver.hpp"
+#include "iqnsolver.hpp"
+#include "poisson_like_rhs_function.hpp"
+#include "polarpoissonlikesolver.hpp"
 
 
 
 /**
- * @brief Solve the Poisson equation and return the electric
+ * @brief Solve the Poisson-like equation and return the electric
  * field for the coupled Vlasov equation.
  *
  * The Vlasov-Poisson equations are given by
  *
  * - (1) @f$ \partial_t \rho - E_y \partial_x \rho + E_x \partial_y\rho = 0 @f$,
  *
- * - (2) @f$ - \Delta \phi = \rho  @f$,
+ * - (2) @f$ - L \phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho  @f$,
  *
  * - (3) and @f$ E = -\nabla \phi  @f$.
  *
@@ -82,7 +82,7 @@
  * @tparam Mapping A Curvilinear2DToCartesian class.
  *
  *
- * @see PolarSplineFEMPoissonSolver
+ * @see PolarSplineFEMPoissonLikeSolver
  *
  */
 template <class Mapping>
@@ -136,7 +136,7 @@ public:
      * @brief Compute the advection field from a Chunk of @f$\phi@f$ values.
      *
      * @param[in] electrostatic_potential
-     *      The values of the solution @f$\phi@f$ of the Poisson equation (2).
+     *      The values of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_xy
      *      The advection field on the physical axis. 
      */
@@ -162,7 +162,7 @@ public:
      * The B-splines basis used is the cross-product of two 1D B-splines basis. 
      *
      * @param[in] electrostatic_potential_coef
-     *      The spline representation of the solution @f$\phi@f$ of the Poisson equation (2).
+     *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_xy
      *      The advection field on the physical axis. 
      */
@@ -178,11 +178,11 @@ public:
 
 
     /**
-     * @brief Compute the advection field from the Poisson equation solution.
+     * @brief Compute the advection field from the Poisson-like equation solution.
      * The B-splines basis used is the polar B-splines (PolarSpline). 
      *
      * @param[in] electrostatic_potential_coef
-     *      The polar spline representation of the solution @f$\phi@f$ of the Poisson equation (2).
+     *      The polar spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_xy
      *      The advection field on the physical axis. 
      */
@@ -204,7 +204,7 @@ private:
      * @param[in] evaluator 
      *      The spline evaluator used to evaluated electrostatic_potential_coef.
      * @param[in] electrostatic_potential_coef
-     *      The spline representation of the solution @f$\phi@f$ of the Poisson equation (2).
+     *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_xy
      *      The advection field on the physical axis. 
      */
@@ -353,7 +353,7 @@ public:
      * @brief Compute the advection field from a Chunk of @f$\phi@f$ values.
      *
      * @param[in] electrostatic_potential
-     *      The values of the solution @f$\phi@f$ of the Poisson equation (2).
+     *      The values of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rp
      *      The advection field on the logical axis. 
      * @param[out] advection_field_xy_center
@@ -384,7 +384,7 @@ public:
      * The B-splines basis used is the cross-product of two 1D B-splines basis. 
      *
      * @param[in] electrostatic_potential_coef
-     *      The spline representation of the solution @f$\phi@f$ of the Poisson equation (2).
+     *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rp
      *      The advection field on the logical axis. 
      * @param[out] advection_field_xy_center
@@ -404,11 +404,11 @@ public:
 
 
     /**
-     * @brief Compute the advection field from the Poisson equation.
+     * @brief Compute the advection field from the Poisson-like equation.
      * The B-splines basis used is the polar B-splines (PolarSpline). 
      *
      * @param[in] electrostatic_potential_coef
-     *      The polar spline representation of the solution @f$\phi@f$ of the Poisson equation (2).
+     *      The polar spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rp
      *      The advection field on the logical axis. 
      * @param[out] advection_field_xy_center
@@ -435,7 +435,7 @@ private:
      * @param[in] evaluator 
      *      The spline evaluator used to evaluated electrostatic_potential_coef.
      * @param[in] electrostatic_potential_coef
-     *      The spline representation of the solution @f$\phi@f$ of the Poisson equation (2).
+     *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rp
      *      The advection field on the logical axis on a domain without O-point. 
      * @param[out] advection_field_xy_center

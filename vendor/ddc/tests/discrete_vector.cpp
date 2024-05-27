@@ -10,15 +10,21 @@
 
 namespace {
 
-struct DDimX;
+struct DDimX
+{
+};
 using DVectX = ddc::DiscreteVector<DDimX>;
 
 
-struct DDimY;
+struct DDimY
+{
+};
 using DVectY = ddc::DiscreteVector<DDimY>;
 
 
-struct DDimZ;
+struct DDimZ
+{
+};
 using DVectZ = ddc::DiscreteVector<DDimZ>;
 
 

@@ -19,8 +19,6 @@ add_executable(ddc_tests
     type_seq.cpp
     uniform_point_sampling.cpp
     transform_reduce.cpp
-    rectilinear_domain.cpp
-    uniform_domain.cpp
     for_each.cpp
     parallel_fill.cpp
     discrete_element.cpp
@@ -29,6 +27,7 @@ add_executable(ddc_tests
     parallel_for_each.cpp
     parallel_deepcopy.cpp
     parallel_transform_reduce.cpp
+    multiple_discrete_dimensions.cpp
 )
 target_compile_features(ddc_tests PUBLIC cxx_std_17)
 target_link_libraries(ddc_tests

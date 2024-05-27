@@ -7,7 +7,7 @@ The tests implemented in this folder test the 2D polar poisson solver implemente
 
 ## Polar Poisson solver
 
-The PolarSplineFEMPoissonSolver is tested on a circular mapping (CircularToCartesian) and on a Czarny mapping (CzarnyToCartesian) with
+The PolarSplineFEMPoissonLikeSolver is tested on a circular mapping (CircularToCartesian) and on a Czarny mapping (CzarnyToCartesian) with
 (the test cases are given in Emily Bourne's thesis [1]). 
 
 The studied equation is
@@ -43,7 +43,7 @@ for the same Poisson equation with the Cartesian solution.
 
 ## Contents
 
- * polarpoissonfemsolver.cpp : it tests the PolarSplineFEMPoissonSolver. It solves the Poisson equation for a selected test case.
+ * polarpoissonfemsolver.cpp : it tests the PolarSplineFEMPoissonLikeSolver. It solves the Poisson equation for a selected test case.
  * test\_cases.hpp : it defines RHS (ManufacturedPoissonTest) and exact solutions (PoissonSolution) of the Poisson equation. 
  * vlasovpoissonsolver.cpp : it tests the VlasovPoissonSolver. It solves the Poisson equation for a selected test case and computes the electric field in the physical domain.
  * poisson.yaml : the parameters of the tests.

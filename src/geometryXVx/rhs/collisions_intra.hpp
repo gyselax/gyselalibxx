@@ -53,25 +53,30 @@ public:
     };
 
 private:
-    static constexpr bool uniform_edge_v
-            = std::is_same_v<IDimVx, ddc::UniformPointSampling<RDimVx>>;
+    static constexpr bool uniform_edge_v = ddc::is_uniform_sampling_v<IDimVx>;
 
 public:
     /**
      * A conditional type representing either a uniform or a non-uniform ghosted vx mesh. 
      */
-    using ghosted_vx_point_sampling = std::conditional_t<
-            uniform_edge_v,
-            ddc::UniformPointSampling<GhostedVx>,
-            ddc::NonUniformPointSampling<GhostedVx>>;
+    struct ghosted_vx_point_sampling
+        : std::conditional_t<
+                  uniform_edge_v,
+                  ddc::UniformPointSampling<GhostedVx>,
+                  ddc::NonUniformPointSampling<GhostedVx>>
+    {
+    };
 
     /**
      * A conditional type representing either a uniform or a non-uniform ghosted staggered vx mesh. 
      */
-    using ghosted_vx_staggered_point_sampling = std::conditional_t<
-            uniform_edge_v,
-            ddc::UniformPointSampling<GhostedVxStaggered>,
-            ddc::NonUniformPointSampling<GhostedVxStaggered>>;
+    struct ghosted_vx_staggered_point_sampling
+        : std::conditional_t<
+                  uniform_edge_v,
+                  ddc::UniformPointSampling<GhostedVxStaggered>,
+                  ddc::NonUniformPointSampling<GhostedVxStaggered>>
+    {
+    };
 
     /**
      * A type representing a mesh for species, space and ghosted vx mesh. 

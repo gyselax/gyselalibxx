@@ -39,8 +39,12 @@ public:
 
     static int constexpr BSDegree = 3;
 
-    using BSplinesR = ddc::NonUniformBSplines<DimR, BSDegree>;
-    using BSplinesP = ddc::NonUniformBSplines<DimP, BSDegree>;
+    struct BSplinesR : ddc::NonUniformBSplines<DimR, BSDegree>
+    {
+    };
+    struct BSplinesP : ddc::NonUniformBSplines<DimP, BSDegree>
+    {
+    };
 
 
     using InterpPointsR = ddc::GrevilleInterpolationPoints<
@@ -53,8 +57,12 @@ public:
             ddc::BoundCond::PERIODIC>;
 
 
-    using IDimR = typename InterpPointsR::interpolation_mesh_type;
-    using IDimP = typename InterpPointsP::interpolation_mesh_type;
+    struct IDimR : InterpPointsR::interpolation_mesh_type
+    {
+    };
+    struct IDimP : InterpPointsP::interpolation_mesh_type
+    {
+    };
 
 
     using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
@@ -170,11 +178,11 @@ public:
         ddc::init_discrete_space<BSplinesR>(r_knots);
         ddc::init_discrete_space<BSplinesP>(p_knots);
 
-        ddc::init_discrete_space<IDimR>(InterpPointsR::get_sampling());
-        ddc::init_discrete_space<IDimP>(InterpPointsP::get_sampling());
+        ddc::init_discrete_space<IDimR>(InterpPointsR::template get_sampling<IDimR>());
+        ddc::init_discrete_space<IDimP>(InterpPointsP::template get_sampling<IDimP>());
 
-        IDomainR interpolation_domain_R(InterpPointsR::get_domain());
-        IDomainP interpolation_domain_P(InterpPointsP::get_domain());
+        IDomainR interpolation_domain_R(InterpPointsR::template get_domain<IDimR>());
+        IDomainP interpolation_domain_P(InterpPointsP::template get_domain<IDimP>());
         IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
 
         // --- Define the operators. ----------------------------------------------------------------------

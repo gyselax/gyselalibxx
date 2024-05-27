@@ -21,11 +21,11 @@ namespace ddc::detail {
 template <class DDim>
 class DualDiscretization
 {
-    using DDimImplHost = typename DDim::template Impl<Kokkos::HostSpace>;
+    using DDimImplHost = typename DDim::template Impl<DDim, Kokkos::HostSpace>;
 #if defined(__CUDACC__)
-    using DDimImplDevice = typename DDim::template Impl<Kokkos::CudaSpace>;
+    using DDimImplDevice = typename DDim::template Impl<DDim, Kokkos::CudaSpace>;
 #elif defined(__HIPCC__)
-    using DDimImplDevice = typename DDim::template Impl<Kokkos::HIPSpace>;
+    using DDimImplDevice = typename DDim::template Impl<DDim, Kokkos::HIPSpace>;
 #else
     using DDimImplDevice = DDimImplHost;
 #endif
@@ -46,7 +46,7 @@ public:
     }
 
     template <class MemorySpace>
-    KOKKOS_FUNCTION typename DDim::template Impl<MemorySpace> const& get()
+    KOKKOS_FUNCTION typename DDim::template Impl<DDim, MemorySpace> const& get()
     {
         if constexpr (std::is_same_v<MemorySpace, Kokkos::HostSpace>) {
             return m_host;

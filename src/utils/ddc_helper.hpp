@@ -33,11 +33,13 @@ total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
  *
  * @return The length of the domain.
  */
-template <class RDim>
-constexpr std::enable_if_t<RDim::PERIODIC, double> total_interval_length(
-        ddc::DiscreteDomain<ddc::UniformPointSampling<RDim>> const& dom)
+template <class IDim>
+constexpr std::enable_if_t<
+        IDim::continuous_dimension_type::PERIODIC && ddc::is_uniform_sampling_v<IDim>,
+        double>
+total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
 {
-    return std::fabs(ddc::rlength(dom) + ddc::step<ddc::UniformPointSampling<RDim>>());
+    return std::fabs(ddc::rlength(dom) + ddc::step<IDim>());
 }
 
 //TODO: this should be directly handled by ddc::Discretization really,
@@ -49,11 +51,12 @@ constexpr std::enable_if_t<RDim::PERIODIC, double> total_interval_length(
  *
  * @return The length of the domain.
  */
-template <class RDim>
-constexpr std::enable_if_t<RDim::PERIODIC, double> total_interval_length(
-        ddc::DiscreteDomain<ddc::NonUniformPointSampling<RDim>> const& dom)
+template <class IDim>
+constexpr std::enable_if_t<
+        IDim::continuous_dimension_type::PERIODIC && ddc::is_non_uniform_sampling_v<IDim>,
+        double>
+total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
 {
-    using IDim = ddc::NonUniformPointSampling<RDim>;
     ddc::DiscreteDomain<IDim> dom_periodic(dom.front(), dom.extents() + 1);
     return std::fabs(ddc::rlength(dom_periodic));
 }

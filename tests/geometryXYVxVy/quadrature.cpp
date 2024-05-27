@@ -21,11 +21,11 @@ TEST(QuadratureTest, ExactForConstantFunc)
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
     ddc::init_discrete_space<BSplinesY>(y_min, y_max, y_size);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling());
-    ddc::init_discrete_space<IDimY>(SplineInterpPointsY::get_sampling());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<IDimY>(SplineInterpPointsY::get_sampling<IDimY>());
 
-    IDomainX const gridx(SplineInterpPointsX::get_domain());
-    IDomainY const gridy(SplineInterpPointsY::get_domain());
+    IDomainX const gridx(SplineInterpPointsX::get_domain<IDimX>());
+    IDomainY const gridy(SplineInterpPointsY::get_domain<IDimY>());
 
     IDomainXY const gridxy(gridx, gridy);
 
@@ -41,24 +41,22 @@ TEST(QuadratureTest, ExactForConstantFunc)
 }
 
 template <std::size_t N>
-struct X
+struct ComputeErrorTraits
 {
-    static bool constexpr PERIODIC = false;
-};
-
-template <std::size_t N>
-struct Y
-{
-    static bool constexpr PERIODIC = false;
-};
-
-template <std::size_t N>
-double compute_error(int n_elems)
-{
-    using DimX = X<N>;
-    using DimY = Y<N>;
-    using BSplinesX = ddc::UniformBSplines<DimX, 3>;
-    using BSplinesY = ddc::UniformBSplines<DimY, 3>;
+    struct X
+    {
+        static bool constexpr PERIODIC = false;
+    };
+    struct Y
+    {
+        static bool constexpr PERIODIC = false;
+    };
+    struct BSplinesX : ddc::UniformBSplines<X, 3>
+    {
+    };
+    struct BSplinesY : ddc::UniformBSplines<Y, 3>
+    {
+    };
     using GrevillePointsX = ddc::GrevilleInterpolationPoints<
             BSplinesX,
             ddc::BoundCond::GREVILLE,
@@ -67,8 +65,25 @@ double compute_error(int n_elems)
             BSplinesY,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE>;
-    using IDimX = typename GrevillePointsX::interpolation_mesh_type;
-    using IDimY = typename GrevillePointsY::interpolation_mesh_type;
+    struct IDimX : GrevillePointsX::interpolation_mesh_type
+    {
+    };
+    struct IDimY : GrevillePointsY::interpolation_mesh_type
+    {
+    };
+};
+
+template <std::size_t N>
+double compute_error(int n_elems)
+{
+    using DimX = typename ComputeErrorTraits<N>::X;
+    using DimY = typename ComputeErrorTraits<N>::Y;
+    using BSplinesX = typename ComputeErrorTraits<N>::BSplinesX;
+    using BSplinesY = typename ComputeErrorTraits<N>::BSplinesY;
+    using GrevillePointsX = typename ComputeErrorTraits<N>::GrevillePointsX;
+    using GrevillePointsY = typename ComputeErrorTraits<N>::GrevillePointsY;
+    using IDimX = typename ComputeErrorTraits<N>::IDimX;
+    using IDimY = typename ComputeErrorTraits<N>::IDimY;
     using IDomainX = ddc::DiscreteDomain<IDimX>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
@@ -83,10 +98,10 @@ double compute_error(int n_elems)
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, n_elems);
     ddc::init_discrete_space<BSplinesY>(y_min, y_max, n_elems);
 
-    ddc::init_discrete_space<IDimX>(GrevillePointsX::get_sampling());
-    ddc::init_discrete_space<IDimY>(GrevillePointsY::get_sampling());
-    IDomainX const gridx(GrevillePointsX::get_domain());
-    IDomainY const gridy(GrevillePointsY::get_domain());
+    ddc::init_discrete_space<IDimX>(GrevillePointsX::template get_sampling<IDimX>());
+    ddc::init_discrete_space<IDimY>(GrevillePointsY::template get_sampling<IDimY>());
+    IDomainX const gridx(GrevillePointsX::template get_domain<IDimX>());
+    IDomainY const gridy(GrevillePointsY::template get_domain<IDimY>());
     IDomainXY const gridxy(gridx, gridy);
 
     host_t<DFieldXY> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridxy);

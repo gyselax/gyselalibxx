@@ -18,8 +18,8 @@
 #include "geometry.hpp"
 #include "ifoot_finder.hpp"
 #include "itimesolver.hpp"
-#include "poisson_rhs_function.hpp"
-#include "polarpoissonsolver.hpp"
+#include "poisson_like_rhs_function.hpp"
+#include "polarpoissonlikesolver.hpp"
 #include "rk2.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 
@@ -39,12 +39,12 @@
  * for @f$ n \geq 0 @f$,
  *
  * First, it advects on a half time step:
- * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonSolver;
+ * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
  * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^{n+1/2}@f$ with a BslAdvectionRP on @f$\frac{dt}{2}@f$;
  *
  * Secondly, it advects on a full time step:
- * - 4. From @f$\rho^{n+1/2}@f$, it computes @f$\phi^{n+1/2}@f$ with a PolarSplineFEMPoissonSolver;
+ * - 4. From @f$\rho^{n+1/2}@f$, it computes @f$\phi^{n+1/2}@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 5. From @f$\phi^{n+1/2}@f$, it computes @f$A^{n+1/2}@f$ with a AdvectionFieldFinder;
  * - 6. From @f$\rho^n@f$ and @f$A^{n+1/2}@f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRP on @f$dt@f$.
  *
@@ -62,7 +62,7 @@ private:
 
     BslAdvectionRP<FootFinder, Mapping> const& m_advection_solver;
 
-    PolarSplineFEMPoissonSolver const& m_poisson_solver;
+    PolarSplineFEMPoissonLikeSolver const& m_poisson_solver;
 
     SplineRPBuilder const& m_builder;
     SplineRPEvaluatorNullBound const& m_spline_evaluator;
@@ -83,7 +83,7 @@ public:
      * @param[in] rhs_evaluator
      *      The evaluator of B-splines for the RHS.
      * @param[in] poisson_solver
-     *      The Poisson solver which computes the electrical
+     *      The PDE solver which computes the electrical
      *      potential.
      */
     BslPredCorrRP(
@@ -91,7 +91,7 @@ public:
             BslAdvectionRP<FootFinder, Mapping> const& advection_solver,
             SplineRPBuilder const& builder,
             SplineRPEvaluatorNullBound const& rhs_evaluator,
-            PolarSplineFEMPoissonSolver const& poisson_solver)
+            PolarSplineFEMPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_poisson_solver(poisson_solver)
@@ -122,7 +122,7 @@ public:
         BSDomainP polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
 
         SplinePolar electrostatic_potential_coef(
-                PolarBSplinesRP::singular_domain(),
+                PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
                 BSDomainRP(radial_bsplines, polar_domain));
         ddc::NullExtrapolationRule extrapolation_rule;
         PolarSplineEvaluator<PolarBSplinesRP, ddc::NullExtrapolationRule> polar_spline_evaluator(
@@ -133,7 +133,7 @@ public:
 
         Spline2D allfdistribu_coef(m_builder.spline_domain());
         m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
-        PoissonRHSFunction const
+        PoissonLikeRHSFunction const
                 charge_density_coord(allfdistribu_coef.span_cview(), m_spline_evaluator);
         m_poisson_solver(charge_density_coord, coords, electrical_potential0);
 
@@ -149,7 +149,7 @@ public:
                       // --- compute electrostatic potential:
                       Spline2D allfdistribu_coef(m_builder.spline_domain());
                       m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
-                      PoissonRHSFunction const charge_density_coord(
+                      PoissonLikeRHSFunction const charge_density_coord(
                               allfdistribu_coef.span_cview(),
                               m_spline_evaluator);
                       m_poisson_solver(charge_density_coord, electrostatic_potential_coef);
@@ -177,7 +177,7 @@ public:
             DFieldRP electrical_potential(grid);
             Spline2D allfdistribu_coef(m_builder.spline_domain());
             m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
-            PoissonRHSFunction const
+            PoissonLikeRHSFunction const
                     charge_density_coord(allfdistribu_coef.span_cview(), m_spline_evaluator);
             m_poisson_solver(charge_density_coord, coords, electrical_potential);
 

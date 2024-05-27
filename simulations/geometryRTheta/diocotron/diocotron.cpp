@@ -28,8 +28,8 @@
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
-#include "poisson_rhs_function.hpp"
-#include "polarpoissonsolver.hpp"
+#include "poisson_like_rhs_function.hpp"
+#include "polarpoissonlikesolver.hpp"
 #include "quadrature.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
@@ -42,7 +42,7 @@
 
 
 namespace {
-using PoissonSolver = PolarSplineFEMPoissonSolver;
+using PoissonSolver = PolarSplineFEMPoissonLikeSolver;
 using DiscreteMapping
         = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>;
 using Mapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
@@ -126,11 +126,11 @@ int main(int argc, char** argv)
     ddc::init_discrete_space<BSplinesR>(r_knots);
     ddc::init_discrete_space<BSplinesP>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling());
-    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling());
+    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling<IDimR>());
+    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling<IDimP>());
 
-    IDomainR const interpolation_domain_R(SplineInterpPointsR::get_domain());
-    IDomainP const interpolation_domain_P(SplineInterpPointsP::get_domain());
+    IDomainR const interpolation_domain_R(SplineInterpPointsR::get_domain<IDimR>());
+    IDomainP const interpolation_domain_P(SplineInterpPointsP::get_domain<IDimP>());
     IDomainRP const grid(interpolation_domain_R, interpolation_domain_P);
 
     FieldRP<CoordRP> coords(grid);
@@ -310,7 +310,7 @@ int main(int argc, char** argv)
     DFieldRP phi_eq(grid);
     Spline2D rho_coef_eq(dom_bsplinesRP);
     builder(rho_coef_eq.span_view(), rho_eq.span_cview());
-    PoissonRHSFunction poisson_rhs_eq(rho_coef_eq, spline_evaluator);
+    PoissonLikeRHSFunction poisson_rhs_eq(rho_coef_eq, spline_evaluator);
     poisson_solver(poisson_rhs_eq, coords.span_cview(), phi_eq.span_view());
 
 

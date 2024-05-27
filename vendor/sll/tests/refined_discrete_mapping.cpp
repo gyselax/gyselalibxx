@@ -40,8 +40,12 @@ using CoordXY = ddc::Coordinate<RDimX, RDimY>;
 
 int constexpr BSDegree = 3;
 
-using BSplinesR = ddc::NonUniformBSplines<RDimR, BSDegree>;
-using BSplinesP = ddc::NonUniformBSplines<RDimP, BSDegree>;
+struct BSplinesR : ddc::NonUniformBSplines<RDimR, BSDegree>
+{
+};
+struct BSplinesP : ddc::NonUniformBSplines<RDimP, BSDegree>
+{
+};
 
 
 using SplineInterpPointsR = ddc::
@@ -49,8 +53,12 @@ using SplineInterpPointsR = ddc::
 using SplineInterpPointsP = ddc::
         GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
-using IDimR = typename SplineInterpPointsR::interpolation_mesh_type;
-using IDimP = typename SplineInterpPointsP::interpolation_mesh_type;
+struct IDimR : SplineInterpPointsR::interpolation_mesh_type
+{
+};
+struct IDimP : SplineInterpPointsP::interpolation_mesh_type
+{
+};
 
 using SplineRPBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace,
@@ -544,11 +552,11 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     ddc::init_discrete_space<BSplinesR>(r_knots);
     ddc::init_discrete_space<BSplinesP>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling());
-    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling());
+    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling<IDimR>());
+    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling<IDimP>());
 
-    IDomainR interpolation_domain_R(SplineInterpPointsR::get_domain());
-    IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain());
+    IDomainR interpolation_domain_R(SplineInterpPointsR::get_domain<IDimR>());
+    IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain<IDimP>());
     IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
 
 
