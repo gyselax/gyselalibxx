@@ -4,7 +4,7 @@
 
 #include <geometry.hpp>
 
-#include "ipoissonsolver.hpp"
+#include "iqnsolver.hpp"
 /**
  * @brief Null operator.
  *
@@ -12,12 +12,12 @@
  * It could be passed in operators which needs it, and used when solving poisson 
  * equation not relevant for the physics to study.
  */
-class NullPoissonSolver : public IPoissonSolver
+class NullQNSolver : public IQNSolver
 {
 public:
-    NullPoissonSolver() = default;
+    NullQNSolver() = default;
 
-    ~NullPoissonSolver() override = default;
+    ~NullQNSolver() override = default;
     /**
      * The operator which does not solves the equation.
      *

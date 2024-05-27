@@ -6,7 +6,7 @@ The `geometryXVx` folder contains all the code describing methods which are spec
 - [geometry](./geometry/README.md) : All the dimension tags used for a simulation in the geometry.
 - [geometryMX](./geometryMX/README.md) : Code describing a geometry with a single spatial dimension and a single fluid moment dimension.
 - [initialization](./initialization/README.md) : Initialization methods for the distribution function. 
-- [poisson](./poisson/README.md) : Code describing the polar Poisson solver.
+- [poisson](./poisson/README.md) : Code describing the Quasi-Neutrality solver.
 - [rhs](./rhs/README.md) : Code describing the operators on the right hand side of the Boltzmann equation; namely sources, sinks and collisions.
 - [time\_integration](./time_integration/README.md) : Time integrators for a Boltzmann-Poisson system of equations. 
 - [time\_integration\_neutrals](./time_integration_neutrals/README.md) : Time integrators for a Boltzmann-Poisson system of equations, with a fluid neutral species. 

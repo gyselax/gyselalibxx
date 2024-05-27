@@ -9,12 +9,12 @@
 #include <pdi.h>
 
 #include "chargedensitycalculator.hpp"
-#include "fftpoissonsolver.hpp"
+#include "fftqnsolver.hpp"
 #include "geometry.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "species_info.hpp"
 
-TEST(FftPoissonSolver, CosineSource)
+TEST(FftQNSolver, CosineSource)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(2.0 * M_PI);
@@ -66,7 +66,7 @@ TEST(FftPoissonSolver, CosineSource)
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
-    FftPoissonSolver poisson(rhs);
+    FftQNSolver poisson(rhs);
 
     host_t<DFieldX> electrostatic_potential_host(gridx);
     host_t<DFieldX> electric_field_host(gridx);
@@ -103,7 +103,7 @@ TEST(FftPoissonSolver, CosineSource)
     EXPECT_LE(error_field, 1e-6);
 }
 
-TEST(FftPoissonSolver, CosineSourceParallel)
+TEST(FftQNSolver, CosineSourceParallel)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(2.0 * M_PI);
@@ -155,7 +155,7 @@ TEST(FftPoissonSolver, CosineSourceParallel)
 
     ddc::parallel_deepcopy(quadrature_coeffs, quadrature_coeffs_host);
     ChargeDensityCalculator rhs(quadrature_coeffs);
-    FftPoissonSolver poisson(rhs);
+    FftQNSolver poisson(rhs);
 
     host_t<DFieldX> electrostatic_potential_host(gridx);
     host_t<DFieldX> electric_field_host(gridx);
