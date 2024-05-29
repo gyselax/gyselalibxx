@@ -283,6 +283,9 @@ using FieldVx = device_t<ddc::Chunk<ElementType, IDomainVx>>;
 template <class ElementType>
 using FieldX = device_t<ddc::Chunk<ElementType, IDomainX>>;
 
+template <class ElementType>
+using BSFieldX = device_t<ddc::Chunk<ElementType, BSDomainX>>;
+
 
 template <class ElementType>
 using FieldSpM = device_t<ddc::Chunk<ElementType, IDomainSpM>>;
@@ -309,6 +312,8 @@ using DFieldSp = FieldSp<double>;
 using DFieldVx = FieldVx<double>;
 
 using DFieldX = FieldX<double>;
+
+using DBSFieldX = BSFieldX<double>;
 
 
 using DFieldSpM = FieldSpM<double>;
