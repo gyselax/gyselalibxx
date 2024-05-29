@@ -11,6 +11,7 @@ add_executable(unit_tests_geometryMX_${GEOMETRY_VARIANT}
     fluidspecies.cpp
     moments.cpp
     predcorr_hybrid.cpp
+    diffusiveneutrals.cpp
 )
 
 target_compile_features(unit_tests_geometryMX_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
