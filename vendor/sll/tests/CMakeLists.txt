@@ -33,6 +33,7 @@ gtest_discover_tests(bsplines_tests_sll)
 add_executable(matrix_tests_sll
   main.cpp
   matrix.cpp
+  matrix_batch_sparse.cpp
   matrix_batch_tridiag.cpp
 )
 target_compile_features(matrix_tests_sll PUBLIC cxx_std_17)
@@ -67,9 +68,8 @@ target_link_libraries(metric_tensor_tests_sll
 )
 gtest_discover_tests(metric_tensor_tests_sll)
 
-
 add_executable(jacobian_mapping_tests_sll
-  	main.cpp
+  main.cpp
 	mapping_jacobian.cpp
 )
 target_compile_features(jacobian_mapping_tests_sll PUBLIC cxx_std_17)
@@ -80,9 +80,8 @@ target_link_libraries(jacobian_mapping_tests_sll
 )
 gtest_discover_tests(jacobian_mapping_tests_sll)
 
-
 add_executable(jacobian_mapping_matrix_coef_tests_sll
-  	main.cpp
+  main.cpp
 	mapping_jacobian_matrix_coef.cpp
 )
 target_compile_features(jacobian_mapping_matrix_coef_tests_sll PUBLIC cxx_std_17)
@@ -93,11 +92,8 @@ target_link_libraries(jacobian_mapping_matrix_coef_tests_sll
 )
 gtest_discover_tests(jacobian_mapping_matrix_coef_tests_sll)
 
-
-
-
 add_executable(pseudo_cartesian_tests_sll
-  	main.cpp
+  main.cpp
 	pseudo_cartesian_matrix.cpp
 )
 target_compile_features(pseudo_cartesian_tests_sll PUBLIC cxx_std_17)
@@ -108,10 +104,8 @@ target_link_libraries(pseudo_cartesian_tests_sll
 )
 gtest_discover_tests(pseudo_cartesian_tests_sll)
 
-
-
 add_executable(refined_discrete_mapping_test
-  	main.cpp
+  main.cpp
 	refined_discrete_mapping.cpp
 )
 target_compile_features(refined_discrete_mapping_test PUBLIC cxx_std_17)
