@@ -56,6 +56,7 @@ var NAVTREE =
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
     [ "Gyselalib++ contents", "src.html", "src" ],
     [ "Collisions", "src_geometry5D_rhs_collisions.html", null ],
+    [ "Reaction rates", "src_geometryXVx_geometryMX_reactionrates.html", null ],
     [ "Time integration hybrid", "src_geometryXVx_time_integration_hybrid.html", null ],
     [ "Tests", "tests.html", "tests" ],
     [ "Script to automise :", "tests_geometry5D_collisions.html", [
@@ -77,11 +78,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCurvilinear2DToCartesian.html#a4a0be88153c07cdab1f6e4dcd9c9133d",
-"classKrookSourceAdaptive.html#abf1debbb6437f7a5b9fe6656e39dee27",
-"classPredCorrHybrid.html#ac1f39a97a786b52bee7c942b4eebdb30",
-"docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally",
-"src_speciesinfo.html"
+"classCurvilinear2DToCartesian.html#a2a2a127c36b9f0e5d141d893bde33237",
+"classIVlasovSolver.html",
+"classPreallocatableLagrangeInterpolator.html#a34dd082893c1f3bcafb527c74214ca3f",
+"dir_b86eb6ee3885e87525bd9b83b3ef95ba.html",
+"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Implicit_predictor-corrector"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

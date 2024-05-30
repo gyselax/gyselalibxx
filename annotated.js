@@ -39,6 +39,7 @@ var annotated =
     [ "CollisionsInter", "classCollisionsInter.html", "classCollisionsInter" ],
     [ "CollisionsIntra", "classCollisionsIntra.html", "classCollisionsIntra" ],
     [ "ConstantFluidInitialization", "classConstantFluidInitialization.html", "classConstantFluidInitialization" ],
+    [ "ConstantRate", "classConstantRate.html", "classConstantRate" ],
     [ "CosineEvaluator", "structCosineEvaluator.html", [
       [ "Evaluator", "classCosineEvaluator_1_1Evaluator.html", "classCosineEvaluator_1_1Evaluator" ]
     ] ],
@@ -48,6 +49,7 @@ var annotated =
     [ "CzarnyToCartesian", "classCzarnyToCartesian.html", "classCzarnyToCartesian" ],
     [ "DecentredRotationAdvectionFieldSimulation", "classDecentredRotationAdvectionFieldSimulation.html", "classDecentredRotationAdvectionFieldSimulation" ],
     [ "DecentredRotationSimulation", "classDecentredRotationSimulation.html", "classDecentredRotationSimulation" ],
+    [ "DiffusiveNeutralSolver", "classDiffusiveNeutralSolver.html", "classDiffusiveNeutralSolver" ],
     [ "DimX_pC", "structDimX__pC.html", null ],
     [ "DimY_pC", "structDimY__pC.html", null ],
     [ "DiocotronDensitySolution", "classDiocotronDensitySolution.html", "classDiocotronDensitySolution" ],
@@ -108,6 +110,7 @@ var annotated =
     [ "IPreallocatableInterpolator", "classIPreallocatableInterpolator.html", "classIPreallocatableInterpolator" ],
     [ "IPreallocatableInterpolatorRP", "classIPreallocatableInterpolatorRP.html", "classIPreallocatableInterpolatorRP" ],
     [ "IQNSolver", "classIQNSolver.html", "classIQNSolver" ],
+    [ "IReactionRate", "classIReactionRate.html", "classIReactionRate" ],
     [ "IRightHandSide", "classIRightHandSide.html", "classIRightHandSide" ],
     [ "ITimeSolver", "classITimeSolver.html", "classITimeSolver" ],
     [ "ITimeSolverHybrid", "classITimeSolverHybrid.html", "classITimeSolverHybrid" ],
@@ -128,6 +131,7 @@ var annotated =
     [ "Matrix_PDS_Tridiag", "classMatrix__PDS__Tridiag.html", "classMatrix__PDS__Tridiag" ],
     [ "Matrix_Periodic_Banded", "classMatrix__Periodic__Banded.html", "classMatrix__Periodic__Banded" ],
     [ "MatrixBatch", "classMatrixBatch.html", "classMatrixBatch" ],
+    [ "MatrixBatchSparse", "classMatrixBatchSparse.html", "classMatrixBatchSparse" ],
     [ "MatrixBatchTridiag", "classMatrixBatchTridiag.html", "classMatrixBatchTridiag" ],
     [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html", "classMaxwellianEquilibrium" ],
     [ "Moments", "classMoments.html", "classMoments" ],
