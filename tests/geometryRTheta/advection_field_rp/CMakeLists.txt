@@ -42,7 +42,7 @@ function (advection_field_test_executable SIMULATION)
             gslx::simulation_utils
     )
     target_compile_definitions("${test_name_gtest}" PUBLIC -D${SIMULATION})    
-    gtest_discover_tests("${test_name_gtest}" )
+    gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 endfunction()
 
 # Select the parameters of the simulation: 

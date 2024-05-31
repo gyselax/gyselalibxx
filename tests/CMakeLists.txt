@@ -13,7 +13,7 @@ target_link_libraries(unit_tests_common
         gslx::speciesinfo
 )
 
-gtest_discover_tests(unit_tests_common)
+gtest_discover_tests(unit_tests_common DISCOVERY_MODE PRE_TEST)
 
 add_subdirectory(geometryXVx)
 add_subdirectory(geometryXYVxVy)
