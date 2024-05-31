@@ -74,7 +74,7 @@ using DSpanZXY = ddc::ChunkSpan<double, IDomainZXY>;
 using DSpanZYX = ddc::ChunkSpan<double, IDomainZYX>;
 
 template <class IDim>
-typename IDim::continuous_element_type get_coordinate(ddc::DiscreteElement<IDim> x)
+KOKKOS_FUNCTION typename IDim::continuous_element_type get_coordinate(ddc::DiscreteElement<IDim> x)
 {
     using RDim = typename IDim::continuous_dimension_type;
     CoordXYZ const origin(-1.0, 10.0, 100.0);
