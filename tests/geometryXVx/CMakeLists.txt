@@ -39,6 +39,7 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
 gtest_discover_tests(unit_tests_${GEOMETRY_VARIANT}
     TEST_SUFFIX "_${GEOMETRY_VARIANT}"
     PROPERTIES TIMEOUT 10
+    DISCOVERY_MODE PRE_TEST
 )
 
 endforeach()
@@ -57,7 +58,8 @@ target_link_libraries(unit_tests_lagrange
 
 )
 gtest_discover_tests(unit_tests_lagrange
-    TEST_SUFFIX "_${lagrange}")
+    TEST_SUFFIX "_${lagrange}"
+    DISCOVERY_MODE PRE_TEST)
 
 add_executable(unit_tests_advection
     velocityadvection.cpp
@@ -76,7 +78,8 @@ target_link_libraries(unit_tests_advection
 
 )
 gtest_discover_tests(unit_tests_advection 
-    TEST_SUFFIX "_${advection}")
+    TEST_SUFFIX "_${advection}"
+    DISCOVERY_MODE PRE_TEST)
 
 
 target_sources(unit_tests_xperiod_vx
@@ -126,5 +129,6 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 	)
 
 	gtest_discover_tests(spline_quadrature_tests_${GEOMETRY_VARIANT}
-	    TEST_SUFFIX "_${GEOMETRY_VARIANT}")
+	    TEST_SUFFIX "_${GEOMETRY_VARIANT}"
+        DISCOVERY_MODE PRE_TEST)
 endforeach()
