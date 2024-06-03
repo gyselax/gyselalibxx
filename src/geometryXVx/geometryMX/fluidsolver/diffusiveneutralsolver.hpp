@@ -70,7 +70,7 @@ private:
     SplineXBuilder_1d const& m_spline_x_builder;
     SplineXEvaluator_1d const& m_spline_x_evaluator;
 
-    DViewVx const& m_quadrature_coeffs;
+    DViewVx const m_quadrature_coeffs;
 
     IndexSp find_ion(IDomainSp const dom_kinsp) const;
 

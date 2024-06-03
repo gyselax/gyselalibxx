@@ -207,7 +207,7 @@ DSpanSpMX DiffusiveNeutralSolver::operator()(
     DSpanSpX velocity = velocity_alloc.span_view();
     DSpanSpX temperature = temperature_alloc.span_view();
 
-    DViewVx quadrature_coeffs = m_quadrature_coeffs.span_view();
+    DViewVx quadrature_coeffs = m_quadrature_coeffs;
 
     // fluid moments computation
     ddc::parallel_fill(density, 0.);

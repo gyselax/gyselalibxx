@@ -404,7 +404,7 @@ int main(int argc, char** argv)
             normalization_coeff,
             spline_x_builder_neutrals,
             spline_x_evaluator_neutrals,
-            quadrature_coeffs_neutrals);
+            quadrature_coeffs_neutrals.span_cview());
 
     PredCorrHybrid const predcorr(boltzmann, neutralsolver, poisson);
 
