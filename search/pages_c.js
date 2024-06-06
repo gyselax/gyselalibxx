@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['tests_1071',['Tests',['../tests.html',1,'']]],
-  ['tests_20_3a_20geometry_20_28r_2c_20theta_29_1072',['Tests : Geometry (r, theta)',['../tests_geometryRTheta.html',1,'tests']]],
-  ['tests_20on_20spline_20interpolator_20in_20polar_20coordinates_1073',['Tests on spline interpolator in polar coordinates',['../tests_geometryRTheta_2d_spline_interpolator.html',1,'tests_geometryRTheta']]],
-  ['tests_20on_20the_202d_20polar_20advection_20operator_1074',['Tests on the 2D polar advection operator',['../tests_geometryRTheta_advection_2d_rp.html',1,'tests_geometryRTheta']]],
-  ['tests_20on_20the_202d_20polar_20poisson_20solver_1075',['Tests on the 2D polar poisson solver',['../tests_geometryRTheta_polar_poisson.html',1,'tests_geometryRTheta']]],
-  ['time_20integration_1076',['Time integration',['../src_geometryXVx_time_integration.html',1,'src_geometryXVx']]],
-  ['time_20integration_20hybrid_1077',['Time integration hybrid',['../src_geometryXVx_time_integration_hybrid.html',1,'']]],
-  ['time_20stepping_20methods_1078',['Time Stepping Methods',['../src_timestepper.html',1,'src']]]
+  ['script_20to_20automise_20_3a_1066',['Script to automise :',['../tests_geometry5D_collisions.html',1,'']]],
+  ['selalib_2b_2b_1067',['Selalib++',['../vendor_sll.html',1,'']]],
+  ['sheath_20simulations_1068',['Sheath simulations',['../simulations_geometryXVx_sheath.html',1,'simulations_geometryXVx']]],
+  ['simulations_20in_20_28r_2c_20theta_29_20geometry_1069',['Simulations in (r, theta) geometry',['../simulations_geometryRTheta.html',1,'simulations']]],
+  ['simulations_20in_20_28x_2c_20vx_29_20geometry_1070',['Simulations in (x, vx) geometry',['../simulations_geometryXVx.html',1,'simulations']]],
+  ['speciesinfo_20_28x_2c_20v_5fx_29_1071',['SpeciesInfo (x, v_x)',['../src_speciesinfo.html',1,'src']]],
+  ['spline_20interpolator_20in_20polar_20coordinates_1072',['Spline interpolator in polar coordinates',['../src_geometryRTheta_interpolation.html',1,'src_geometryRTheta']]]
 ];

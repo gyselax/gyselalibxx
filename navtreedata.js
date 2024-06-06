@@ -54,6 +54,10 @@ var NAVTREE =
       [ "Submodules", "docs_Using_git.html#docs_Using_git__Submodules", null ]
     ] ],
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
+    [ "Neutral simulations", "simulations_geometryXVx_neutrals.html", [
+      [ "Description", "simulations_geometryXVx_neutrals.html#simulations_geometryXVx_neutrals__Description", null ],
+      [ "Usage", "simulations_geometryXVx_neutrals.html#simulations_geometryXVx_neutrals__Usage", null ]
+    ] ],
     [ "Gyselalib++ contents", "src.html", "src" ],
     [ "Collisions", "src_geometry5D_rhs_collisions.html", null ],
     [ "Reaction rates", "src_geometryXVx_geometryMX_reactionrates.html", null ],
@@ -82,7 +86,7 @@ var NAVTREEINDEX =
 "classIVlasovSolver.html",
 "classPreallocatableLagrangeInterpolator.html#a34dd082893c1f3bcafb527c74214ca3f",
 "dir_b86eb6ee3885e87525bd9b83b3ef95ba.html",
-"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Implicit_predictor-corrector"
+"src_geometryRTheta_time_solver.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

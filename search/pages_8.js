@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['polar_20poisson_20solver_1058',['Polar Poisson solver',['../src_geometryRTheta_poisson.html',1,'src_geometryRTheta']]],
-  ['predictor_2dcorrector_20methods_1059',['Predictor-corrector methods',['../src_geometryRTheta_time_solver.html',1,'src_geometryRTheta']]]
+  ['neutral_20simulations_1059',['Neutral simulations',['../simulations_geometryXVx_neutrals.html',1,'']]]
 ];
