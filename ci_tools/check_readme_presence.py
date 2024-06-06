@@ -15,10 +15,12 @@ diff = get_diff_as_json(args.diff_file)
 
 missing_readme = False
 
-for diff_file in diff:
-    if 'src' not in diff_file.parts:
+modified_folders = set(diff_file.parents[0] for diff_file in diff)
+
+for folder in modified_folders:
+    if 'src' not in folder.parts:
         continue
-    expected_readme = diff_file.parents[0].joinpath('README.md')
+    expected_readme = folder.joinpath('README.md')
     if not os.path.exists(expected_readme):
         missing_readme = True
         print("Cannot find README.md file : ", expected_readme)
