@@ -194,6 +194,7 @@ DSpanSpMX DiffusiveNeutralSolver::operator()(
         DViewX const efield,
         double const dt) const
 {
+    Kokkos::Profiling::pushRegion("DiffusiveNeutralSolver");
     RK2<DFieldSpMX> timestepper(neutrals.domain());
 
     // moments computation
@@ -206,7 +207,7 @@ DSpanSpMX DiffusiveNeutralSolver::operator()(
     DSpanSpX velocity = velocity_alloc.span_view();
     DSpanSpX temperature = temperature_alloc.span_view();
 
-    DViewVx quadrature_coeffs = m_quadrature_coeffs.span_view();
+    DViewVx quadrature_coeffs = m_quadrature_coeffs;
 
     // fluid moments computation
     ddc::parallel_fill(density, 0.);
@@ -231,5 +232,6 @@ DSpanSpMX DiffusiveNeutralSolver::operator()(
     timestepper.update(neutrals, dt, [&](DSpanSpMX dn, DViewSpMX n) {
         get_derivative(dn, n, density, velocity, temperature);
     });
+    Kokkos::Profiling::popRegion();
     return neutrals;
 }

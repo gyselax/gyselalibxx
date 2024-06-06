@@ -22,7 +22,8 @@ target_link_libraries(unit_tests_xy_vxvy
 )
 
 gtest_discover_tests(unit_tests_xy_vxvy
-    TEST_SUFFIX "_xy_vxvy")
+    TEST_SUFFIX "_xy_vxvy"
+    DISCOVERY_MODE PRE_TEST)
 
 
 add_subdirectory(landau)

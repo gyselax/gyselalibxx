@@ -20,4 +20,4 @@ target_link_libraries(unit_tests_utils
         gslx::utils
 )
 
-gtest_discover_tests(unit_tests_utils)
+gtest_discover_tests(unit_tests_utils DISCOVERY_MODE PRE_TEST)
