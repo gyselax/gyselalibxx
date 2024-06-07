@@ -15,7 +15,7 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
-#include "fftqnsolver.hpp"
+#include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
@@ -23,6 +23,7 @@
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
+#include "qnsolver.hpp"
 #include "singlemodeperturbinitialization.hpp"
 //#include "species_info.hpp"
 #include "spline_interpolator.hpp"
@@ -92,6 +93,7 @@ int main(int argc, char** argv)
 
     IDomainX interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
     IDomainY interpolation_domain_y(SplineInterpPointsY::get_domain<IDimY>());
+    IDomainXY interpolation_domain_xy(interpolation_domain_x, interpolation_domain_y);
     IDomainVx interpolation_domain_vx(SplineInterpPointsVx::get_domain<IDimVx>());
     IDomainVy interpolation_domain_vy(SplineInterpPointsVy::get_domain<IDimVy>());
     IDomainVxVy interpolation_domain_vxvy(interpolation_domain_vx, interpolation_domain_vy);
@@ -209,11 +211,6 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_y, advection_vx, advection_vy);
 
-    ddc::init_discrete_space<IDimFx>(
-            ddc::init_fourier_space<IDimFx>(ddc::select<IDimX>(meshSpXYVxVy)));
-    ddc::init_discrete_space<IDimFy>(
-            ddc::init_fourier_space<IDimFy>(ddc::select<IDimY>(meshSpXYVxVy)));
-
     host_t<DFieldVxVy> const quadrature_coeffs_host = neumann_spline_quadrature_coefficients(
             interpolation_domain_vxvy,
             builder_vx_1d,
@@ -221,8 +218,10 @@ int main(int argc, char** argv)
     auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
+    FFTPoissonSolver<IDomainXY, IDomainXY, Kokkos::DefaultExecutionSpace> fft_poisson_solver(
+            interpolation_domain_xy);
     ChargeDensityCalculator const rhs(quadrature_coeffs);
-    FftQNSolver const poisson(rhs);
+    QNSolver const poisson(fft_poisson_solver, rhs);
 
     // Create predcorr operator
     PredCorr const predcorr(vlasov, poisson);
