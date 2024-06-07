@@ -28,7 +28,7 @@
 #endif
 #include "Lagrange_interpolator.hpp"
 #include "chargedensitycalculator.hpp"
-#include "fftqnsolver.hpp"
+#include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "kinetic_source.hpp"
@@ -39,6 +39,7 @@
 #include "paraconfpp.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
+#include "qnsolver.hpp"
 #include "restartinitialization.hpp"
 #include "sheath.yaml.hpp"
 #include "singlemodeperturbinitialization.hpp"
@@ -309,9 +310,9 @@ int main(int argc, char** argv)
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
 #ifdef PERIODIC_RDIMX
-    ddc::init_discrete_space<IDimFx>(
-            ddc::init_fourier_space<IDimFx>(ddc::select<IDimX>(meshSpXVx)));
-    FftQNSolver const poisson(rhs);
+    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(
+            interpolation_domain_x);
+    QNSolver const poisson(fft_poisson_solver, rhs);
 #else
     FemNonPeriodicQNSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 #endif

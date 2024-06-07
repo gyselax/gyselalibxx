@@ -18,6 +18,5 @@ The shortcuts defined in the geometry file represent:
 13. The type of a span of doubles defined on each of the domains (e.g. DSpanX).
 12. The templated type of a field view defined on each of the domains (e.g. ViewX<ElementType>). A view is very similar to a span. The only difference is that a view is constant. In other words, the data in the underlying field cannot be modified using a view.
 13. The type of a view of doubles defined on each of the domains (e.g. DViewX).
-14. A dimension in real space representing the Fourier mode of the X-dimension (RDimFx).
 15. Types representing coordinates, and the grid points as well as their indices, distances and domains for the Fourier mode.
 16. A class GeometryXVx detailing some of the above types in a generic way which allows them to be accessed from a context where the final geometry selected is unknown.

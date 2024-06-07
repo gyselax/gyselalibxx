@@ -117,13 +117,6 @@ private:
     {
     }
 
-    template <
-            class... Chunks,
-            class = std::enable_if_t<std::conjunction_v<std::is_same<Chunks, chunk_type>...>>>
-    KOKKOS_FUNCTION constexpr VectorFieldSpan(Chunks&&... chunks) : base_type(std::move(chunks)...)
-    {
-    }
-
     /** Constructs a new VectorFieldSpan by copy of a chunk, yields a new view to the same data
      * @param other the VectorFieldSpan to move
      */
@@ -233,6 +226,16 @@ public:
             class = std::enable_if_t<sizeof...(OElementType) == base_type::NDims>>
     KOKKOS_FUNCTION VectorFieldSpan(mdomain_type const& domain, OElementType*... ptr)
         : base_type((chunk_type(ptr, domain))...)
+    {
+    }
+
+    /** Constructs a new VectorFieldSpan containing references to ChunkSpans.
+     * @param chunks The ChunkSpans.
+     */
+    template <
+            class... ChunkSpan,
+            class = std::enable_if_t<std::conjunction_v<std::is_same<ChunkSpan, chunk_type>...>>>
+    KOKKOS_FUNCTION constexpr VectorFieldSpan(ChunkSpan... chunks) : base_type(std::move(chunks)...)
     {
     }
 

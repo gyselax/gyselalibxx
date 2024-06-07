@@ -17,7 +17,7 @@
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
-#include "fftqnsolver.hpp"
+#include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
@@ -25,6 +25,7 @@
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
+#include "qnsolver.hpp"
 #include "restartinitialization.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
@@ -209,9 +210,6 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    ddc::init_discrete_space<IDimFx>(
-            ddc::init_fourier_space<IDimFx>(ddc::select<IDimX>(meshSpXVx)));
-
     host_t<DFieldVx> const quadrature_coeffs_host
             = neumann_spline_quadrature_coefficients(gridvx, builder_vx_poisson);
 
@@ -219,7 +217,9 @@ int main(int argc, char** argv)
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
-    FftQNSolver const poisson(rhs);
+    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(
+            interpolation_domain_x);
+    QNSolver const poisson(fft_poisson_solver, rhs);
 
     PredCorr const predcorr(vlasov, poisson);
 

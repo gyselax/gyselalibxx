@@ -20,7 +20,7 @@
 #include "femnonperiodicqnsolver.hpp"
 #endif
 #include "Lagrange_interpolator.hpp"
-#include "fftqnsolver.hpp"
+#include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "maxwellianequilibrium.hpp"
@@ -28,6 +28,7 @@
 #include "nullfluidsolver.hpp"
 #include "predcorr.hpp"
 #include "predcorr_hybrid.hpp"
+#include "qnsolver.hpp"
 #include "quadrature.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
@@ -221,10 +222,8 @@ TEST(GeometryXM, PredCorrHybrid)
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
 #ifdef PERIODIC_RDIMX
-    IDomainSpXVx const meshSpXVx(dom_kinsp, meshXVx);
-    ddc::init_discrete_space<IDimFx>(
-            ddc::init_fourier_space<IDimFx>(ddc::select<IDimX>(meshSpXVx)));
-    FftQNSolver const poisson(rhs);
+    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(meshX);
+    QNSolver const poisson(fft_poisson_solver, rhs);
 #else
     FemNonPeriodicQNSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 #endif

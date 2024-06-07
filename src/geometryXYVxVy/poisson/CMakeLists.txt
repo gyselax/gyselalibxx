@@ -3,7 +3,7 @@
 add_library("poisson_xy" STATIC
     chargedensitycalculator.cpp
     nullqnsolver.cpp
-    fftqnsolver.cpp
+    qnsolver.cpp
 )
 
 target_compile_features("poisson_xy"
@@ -20,6 +20,7 @@ target_link_libraries("poisson_xy"
         DDC::DDC
         sll::SLL
         gslx::geometry_xyvxvy
+        gslx::pde_solvers
         gslx::speciesinfo
         gslx::utils
 )

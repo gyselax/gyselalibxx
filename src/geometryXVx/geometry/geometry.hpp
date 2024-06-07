@@ -427,15 +427,6 @@ using DViewSpVx = ViewSpVx<double>;
 using DViewSpXVx = ViewSpXVx<double>;
 
 
-using RDimFx = ddc::Fourier<RDimX>;
-using CoordFx = ddc::Coordinate<RDimFx>;
-struct IDimFx : ddc::PeriodicSampling<RDimFx>
-{
-};
-using IndexFx = ddc::DiscreteElement<IDimFx>;
-using IVectFx = ddc::DiscreteVector<IDimFx>;
-using IDomainFx = ddc::DiscreteDomain<IDimFx>;
-
 /**
  * @brief A class providing aliases for useful subdomains of the geometry. It is used as template parameter for generic dimensionality-agnostic operators such as advections.
  */
