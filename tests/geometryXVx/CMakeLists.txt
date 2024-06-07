@@ -85,7 +85,6 @@ gtest_discover_tests(unit_tests_advection
 target_sources(unit_tests_xperiod_vx
     PRIVATE
         femperiodicpoissonsolver.cpp
-        fftpoissonsolver.cpp
 )
 
 target_sources(unit_tests_xnonperiod_vx PRIVATE femnonperiodicpoissonsolver.cpp)

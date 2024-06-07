@@ -427,27 +427,6 @@ template <class ElementType>
 using ViewSpXYVxVy = device_t<ddc::ChunkSpan<ElementType const, IDomainSpXYVxVy>>;
 using DViewSpXYVxVy = ViewSpXYVxVy<double>;
 
-// For Fourier
-using RDimFx = ddc::Fourier<RDimX>;
-using RDimFy = ddc::Fourier<RDimY>;
-using CoordFx = ddc::Coordinate<RDimFx>;
-using CoordFy = ddc::Coordinate<RDimFy>;
-struct IDimFx : ddc::PeriodicSampling<RDimFx>
-{
-};
-struct IDimFy : ddc::PeriodicSampling<RDimFy>
-{
-};
-using IndexFx = ddc::DiscreteElement<IDimFx>;
-using IndexFy = ddc::DiscreteElement<IDimFy>;
-using IndexFxFy = ddc::DiscreteElement<IDimFx, IDimFy>;
-using IVectFx = ddc::DiscreteVector<IDimFx>;
-using IVectFy = ddc::DiscreteVector<IDimFy>;
-using IVectFxFy = ddc::DiscreteVector<IDimFx, IDimFy>;
-using IDomainFx = ddc::DiscreteDomain<IDimFx>;
-using IDomainFy = ddc::DiscreteDomain<IDimFy>;
-using IDomainFxFy = ddc::DiscreteDomain<IDimFx, IDimFy>;
-
 /**
  * @brief A class providing aliases for useful subdomains of the geometry. It is used as template parameter for generic dimensionality-agnostic operat
 ors such as advections.

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "ichargedensitycalculator.hpp"
+#include "ipoisson_solver.hpp"
 #include "iqnsolver.hpp"
 
 /**
@@ -17,19 +18,26 @@
  * The electric field, @f$ \frac{d \phi}{dx} @f$ is calculated using
  * a spline interpolation implemented in ElectricField.
  */
-class FftQNSolver : public IQNSolver
+class QNSolver : public IQNSolver
 {
+    using PoissonSolver = IPoissonSolver<
+            IDomainX,
+            IDomainX,
+            std::experimental::layout_right,
+            typename Kokkos::DefaultExecutionSpace::memory_space>;
+    PoissonSolver const& m_solve_poisson;
     IChargeDensityCalculator const& m_compute_rho;
 
 public:
     /**
      * Construct the FftQNSolver operator.
      *
+     * @param solve_poisson The operator which solves the Poisson solver.
      * @param compute_rho The operator which calculates the charge density, the right hand side of the equation.
      */
-    FftQNSolver(IChargeDensityCalculator const& compute_rho);
+    QNSolver(PoissonSolver const& solve_poisson, IChargeDensityCalculator const& compute_rho);
 
-    ~FftQNSolver() override = default;
+    ~QNSolver() override = default;
 
     /**
      * The operator which solves the equation using the method described by the class.
