@@ -155,3 +155,12 @@ using host_t = on_memory_space_t<Kokkos::HostSpace, C>;
  */
 template <class C>
 using device_t = on_memory_space_t<Kokkos::DefaultExecutionSpace::memory_space, C>;
+
+namespace ddcHelper {
+/// A helper to determine the number of tags in a type sequence.
+template <class TypeSeq>
+constexpr std::size_t type_seq_length_v = std::numeric_limits<std::size_t>::max();
+
+template <class... Tags>
+constexpr std::size_t type_seq_length_v<ddc::detail::TypeSeq<Tags...>> = sizeof...(Tags);
+} // namespace ddcHelper

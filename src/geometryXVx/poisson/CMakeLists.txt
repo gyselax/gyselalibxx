@@ -19,8 +19,9 @@ target_include_directories("poisson_${GEOMETRY_VARIANT}"
 target_link_libraries("poisson_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
-        gslx::quadrature
         gslx::geometry_${GEOMETRY_VARIANT}
+        gslx::pde_solvers
+        gslx::quadrature
         gslx::speciesinfo
 )
 
@@ -30,7 +31,7 @@ endforeach()
 
 target_sources(poisson_xperiod_vx
     PRIVATE
-        fftqnsolver.cpp
+        qnsolver.cpp
         femperiodicqnsolver.cpp
 )
 
