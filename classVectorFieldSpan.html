@@ -181,6 +181,10 @@ KOKKOS_DEFAULTED_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a 
 <tr class="memitem:ab9abf5d8db080b9e814bdf95d56fa9e9"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#ab9abf5d8db080b9e814bdf95d56fa9e9">VectorFieldSpan</a> (<a class="el" href="classVectorFieldSpan.html#a02615c4513fb510c9fdc12db6d776df4">mdomain_type</a> const &amp;domain, OElementType *... ptr)</td></tr>
 <tr class="memdesc:ab9abf5d8db080b9e814bdf95d56fa9e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> from scratch.  <a href="classVectorFieldSpan.html#ab9abf5d8db080b9e814bdf95d56fa9e9">More...</a><br /></td></tr>
 <tr class="separator:ab9abf5d8db080b9e814bdf95d56fa9e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c66487090ddafd592ac486324924561"><td class="memTemplParams" colspan="2">template&lt;class... ChunkSpan, class  = std::enable_if_t&lt;std::conjunction_v&lt;std::is_same&lt;ChunkSpan, chunk_type&gt;...&gt;&gt;&gt; </td></tr>
+<tr class="memitem:a9c66487090ddafd592ac486324924561"><td class="memTemplItemLeft" align="right" valign="top">constexpr KOKKOS_FUNCTION&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#a9c66487090ddafd592ac486324924561">VectorFieldSpan</a> (ChunkSpan... chunks)</td></tr>
+<tr class="memdesc:a9c66487090ddafd592ac486324924561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> containing references to ChunkSpans.  <a href="classVectorFieldSpan.html#a9c66487090ddafd592ac486324924561">More...</a><br /></td></tr>
+<tr class="separator:a9c66487090ddafd592ac486324924561"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3abef65badf2ce5915d6b9b86b0ebdc"><td class="memItemLeft" align="right" valign="top">constexpr KOKKOS_DEFAULTED_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldSpan.html#ad3abef65badf2ce5915d6b9b86b0ebdc">operator=</a> (<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> const &amp;other)=default</td></tr>
 <tr class="memdesc:ad3abef65badf2ce5915d6b9b86b0ebdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns a new value to this <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a>, yields a new view to the same data.  <a href="classVectorFieldSpan.html#ad3abef65badf2ce5915d6b9b86b0ebdc">More...</a><br /></td></tr>
 <tr class="separator:ad3abef65badf2ce5915d6b9b86b0ebdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -256,7 +260,7 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae15150e6af873478dfe5132a30fe168a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae15150e6af873478dfe5132a30fe168a">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae15150e6af873478dfe5132a30fe168a">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -292,7 +296,7 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
 </div>
 </div>
 <a id="aa4aea470e10596cd64dbb912ac9c9dfb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4aea470e10596cd64dbb912ac9c9dfb">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4aea470e10596cd64dbb912ac9c9dfb">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[2/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -328,7 +332,7 @@ template&lt;class ElementType , class Domain , class NDTag , class LayoutStrided
 </div>
 </div>
 <a id="aa4f77f6e758b991a7c18bb9b25c0ae30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4f77f6e758b991a7c18bb9b25c0ae30">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4f77f6e758b991a7c18bb9b25c0ae30">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +370,7 @@ template&lt;class OElementType , class Allocator &gt; </div>
 </div>
 </div>
 <a id="ab10f4b73b4233a02e5f25c2b4afcb6b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab10f4b73b4233a02e5f25c2b4afcb6b8">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab10f4b73b4233a02e5f25c2b4afcb6b8">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -404,7 +408,7 @@ template&lt;class OElementType , class SFINAEElementType  = ElementType, class  
 </div>
 </div>
 <a id="a6d06815cd2394ffa4549a154ee796280"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d06815cd2394ffa4549a154ee796280">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[5/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d06815cd2394ffa4549a154ee796280">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -442,7 +446,7 @@ template&lt;class OElementType &gt; </div>
 </div>
 </div>
 <a id="ab9abf5d8db080b9e814bdf95d56fa9e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9abf5d8db080b9e814bdf95d56fa9e9">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[6/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9abf5d8db080b9e814bdf95d56fa9e9">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[6/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -484,6 +488,44 @@ template&lt;class... OElementType, class  = std::enable_if_t&lt;                
   <table class="params">
     <tr><td class="paramname">ptr</td><td>the allocation pointer to the data </td></tr>
     <tr><td class="paramname">domain</td><td>the domain that sustains the view </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9c66487090ddafd592ac486324924561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c66487090ddafd592ac486324924561">&#9670;&nbsp;</a></span>VectorFieldSpan() <span class="overload">[7/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ElementType , class Domain , class NDTag , class LayoutStridedPolicy , class MemorySpace &gt; </div>
+<div class="memtemplate">
+template&lt;class... ChunkSpan, class  = std::enable_if_t&lt;std::conjunction_v&lt;std::is_same&lt;ChunkSpan, chunk_type&gt;...&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr KOKKOS_FUNCTION <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt;::<a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a> </td>
+          <td>(</td>
+          <td class="paramtype">ChunkSpan...&#160;</td>
+          <td class="paramname"><em>chunks</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a new <a class="el" href="classVectorFieldSpan.html" title="Pre-declaration of VectorFieldSpan.">VectorFieldSpan</a> containing references to ChunkSpans. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chunks</td><td>The ChunkSpans. </td></tr>
   </table>
   </dd>
 </dl>

@@ -12,6 +12,9 @@ var src =
       [ "Spline Interpolation", "src_interpolation.html#src_interpolation__Spline_Interpolation", null ],
       [ "Memory concerns", "src_interpolation.html#src_interpolation__Memory_concerns", null ]
     ] ],
+    [ "PDE Solvers", "src_pde_solvers.html", [
+      [ "'s_equation Poisson's equation", "src_pde_solvers.html#src_pde_solvers__Poisson", null ]
+    ] ],
     [ "Quadrature Methods", "src_quadrature.html", null ],
     [ "SpeciesInfo (x, v_x)", "src_speciesinfo.html", null ],
     [ "Time Stepping Methods", "src_timestepper.html", null ],

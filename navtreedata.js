@@ -83,10 +83,10 @@ var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCurvilinear2DToCartesian.html#a2a2a127c36b9f0e5d141d893bde33237",
-"classIVlasovSolver.html",
-"classPreallocatableLagrangeInterpolator.html#a34dd082893c1f3bcafb527c74214ca3f",
-"dir_b86eb6ee3885e87525bd9b83b3ef95ba.html",
-"src_geometryRTheta_time_solver.html"
+"classIQNSolver.html",
+"classPolarSplineEvaluator.html#a452214ac565140c42c611324dbc8ca5c",
+"dir_0b94a1bc260289a82ecb53162f2bb9d0.html",
+"src_geometryRTheta_advection.html#autotoc_md33"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

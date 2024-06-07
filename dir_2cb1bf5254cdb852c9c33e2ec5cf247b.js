@@ -7,6 +7,7 @@ var dir_2cb1bf5254cdb852c9c33e2ec5cf247b =
     [ "geometryXYVxVy", "dir_5f726612e6f7feddf1426504728ece79.html", "dir_5f726612e6f7feddf1426504728ece79" ],
     [ "interpolation", "dir_ce24321f9c558a1bad9461427b2f6e52.html", "dir_ce24321f9c558a1bad9461427b2f6e52" ],
     [ "paraconfpp", "dir_2c0ad391030bc4839817fbcc879b28f0.html", "dir_2c0ad391030bc4839817fbcc879b28f0" ],
+    [ "pde_solvers", "dir_115e60596e2d00727777ec90d6d12217.html", "dir_115e60596e2d00727777ec90d6d12217" ],
     [ "quadrature", "dir_42e0d6fcfa69cb3b4e97936052cc6ddf.html", "dir_42e0d6fcfa69cb3b4e97936052cc6ddf" ],
     [ "speciesinfo", "dir_198f4eba1c2ed3c02ad3281d01a546ac.html", "dir_198f4eba1c2ed3c02ad3281d01a546ac" ],
     [ "timestepper", "dir_c7a0b91bcf91439da6df51c1440e23ec.html", "dir_c7a0b91bcf91439da6df51c1440e23ec" ],

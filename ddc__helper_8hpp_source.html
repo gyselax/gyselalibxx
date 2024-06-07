@@ -213,6 +213,14 @@ $(document).ready(function(){initNavTree('ddc__helper_8hpp_source.html',''); ini
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> C&gt;</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keyword">using</span> device_t = on_memory_space_t&lt;Kokkos::DefaultExecutionSpace::memory_space, C&gt;;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="keyword">namespace </span>ddcHelper {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> TypeSeq&gt;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;constexpr std::size_t type_seq_length_v = std::numeric_limits&lt;std::size_t&gt;::max();</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... Tags&gt;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;constexpr std::size_t type_seq_length_v&lt;ddc::detail::TypeSeq&lt;Tags...&gt;&gt; = <span class="keyword">sizeof</span>...(Tags);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;} <span class="comment">// namespace ddcHelper</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

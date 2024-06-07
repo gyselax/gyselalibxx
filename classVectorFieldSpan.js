@@ -15,6 +15,7 @@ var classVectorFieldSpan =
     [ "VectorFieldSpan", "classVectorFieldSpan.html#ab10f4b73b4233a02e5f25c2b4afcb6b8", null ],
     [ "VectorFieldSpan", "classVectorFieldSpan.html#a6d06815cd2394ffa4549a154ee796280", null ],
     [ "VectorFieldSpan", "classVectorFieldSpan.html#ab9abf5d8db080b9e814bdf95d56fa9e9", null ],
+    [ "VectorFieldSpan", "classVectorFieldSpan.html#a9c66487090ddafd592ac486324924561", null ],
     [ "operator=", "classVectorFieldSpan.html#ad3abef65badf2ce5915d6b9b86b0ebdc", null ],
     [ "operator=", "classVectorFieldSpan.html#a433af9f5d44cbce08babed67ef482945", null ],
     [ "span_cview", "classVectorFieldSpan.html#ac9835c4b3c61102263bc404c948c551c", null ],
