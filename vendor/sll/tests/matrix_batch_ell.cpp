@@ -1,7 +1,7 @@
 #include <ddc/ddc.hpp>
 
 #include <sll/math_tools.hpp>
-#include <sll/matrix_batch_sparse.hpp>
+#include <sll/matrix_batch_ell.hpp>
 
 #include <gtest/gtest.h>
 
@@ -21,13 +21,13 @@ void fill_values(Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::DefaultExecutio
 
 
 
-class MatrixBatchSparseFixture : public ::testing::Test
+class MatrixBatchEllFixture : public ::testing::Test
 {
 protected:
-    MatrixBatchSparse<Kokkos::DefaultExecutionSpace> matrix_batch_test;
+    MatrixBatchEll<Kokkos::DefaultExecutionSpace> matrix_batch_test;
 };
 
-TEST(MatrixBatchSparseFixture, Init)
+TEST(MatrixBatchEllFixture, Init)
 {
     int const batch_size = 2;
     int const mat_size = 4;
@@ -46,14 +46,13 @@ TEST(MatrixBatchSparseFixture, Init)
             values_view(values, values_layout);
     Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::DefaultExecutionSpace>
             idx_view(col_idxs, mat_size, non_zero_per_col);
-    MatrixBatchSparse<Kokkos::DefaultExecutionSpace>
-            test_instance(idx_view, values_view, 1000, 0.001);
+    MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 0.001);
     ASSERT_EQ(test_instance.get_batch_size(), batch_size);
     ASSERT_EQ(test_instance.get_size(), mat_size);
 }
 
 
-TEST(MatrixBatchSparseFixture, SetGetElement)
+TEST(MatrixBatchEllFixture, SetGetElement)
 {
     int const batch_size = 2;
     int const mat_size = 4;
@@ -71,8 +70,7 @@ TEST(MatrixBatchSparseFixture, SetGetElement)
             values_view(values, values_layout);
     Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::DefaultExecutionSpace>
             idx_view(col_idx, mat_size, non_zero_per_col);
-    MatrixBatchSparse<Kokkos::DefaultExecutionSpace>
-            test_instance(idx_view, values_view, 1000, 1e-8);
+    MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 1e-8);
     auto [idx, vals] = test_instance.get_batch_idx_and_vals();
 
     test_instance.set_ell_element(0, 3, 0, 42);
@@ -80,7 +78,7 @@ TEST(MatrixBatchSparseFixture, SetGetElement)
 }
 
 
-TEST(MatrixBatchSparseFixture, GetIdxAndVals)
+TEST(MatrixBatchEllFixture, GetIdxAndVals)
 {
     int const batch_size = 2;
     int const mat_size = 4;
@@ -104,8 +102,7 @@ TEST(MatrixBatchSparseFixture, GetIdxAndVals)
             idx_host(col_idx, mat_size, non_zero_per_col);
     Kokkos::deep_copy(idx_view, idx_host);
     Kokkos::deep_copy(values_view, values_host);
-    MatrixBatchSparse<Kokkos::DefaultExecutionSpace>
-            test_instance(idx_view, values_view, 1000, 1e-8);
+    MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 1e-8);
     auto [idx, vals] = test_instance.get_batch_idx_and_vals();
 
     Kokkos::deep_copy(idx_host, idx);
@@ -125,7 +122,7 @@ TEST(MatrixBatchSparseFixture, GetIdxAndVals)
     ASSERT_EQ(values_host(1, 3, 0), 8.0);
 }
 
-TEST(MatrixBatchSparseFixture, SolveDiagonal)
+TEST(MatrixBatchEllFixture, SolveDiagonal)
 {
     int const batch_size = 2;
     int const mat_size = 4;
@@ -161,8 +158,7 @@ TEST(MatrixBatchSparseFixture, SolveDiagonal)
     Kokkos::deep_copy(values_view, values_host);
     Kokkos::deep_copy(res_view, res_host);
 
-    MatrixBatchSparse<Kokkos::DefaultExecutionSpace>
-            test_instance(idx_view, values_view, 1000, 1e-6);
+    MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 1e-6);
     test_instance.factorize();
     test_instance.solve_inplace(res_view);
 
@@ -177,7 +173,7 @@ TEST(MatrixBatchSparseFixture, SolveDiagonal)
     ASSERT_FLOAT_EQ(res_host(1, 3), solution[7]);
 }
 
-TEST(MatrixBatchSparseFixture, SolveSparse)
+TEST(MatrixBatchEllFixture, SolveSparse)
 {
     int const batch_size = 2;
     int const mat_size = 5;
@@ -243,8 +239,7 @@ TEST(MatrixBatchSparseFixture, SolveSparse)
     Kokkos::deep_copy(idx_view, idx_host);
     Kokkos::deep_copy(values_view, values_host);
     Kokkos::deep_copy(res_view, 1.);
-    MatrixBatchSparse<Kokkos::DefaultExecutionSpace>
-            test_instance(idx_view, values_view, 1000, 1e-12);
+    MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 1e-12);
     test_instance.factorize();
     test_instance.solve_inplace(res_view);
     ASSERT_EQ(test_instance.norm(0), 7);
