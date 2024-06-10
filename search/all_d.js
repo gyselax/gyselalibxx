@@ -8,7 +8,7 @@ var searchData=
   ['neumann_5fspline_5fquadrature_5fcoefficients_5f1d_350',['neumann_spline_quadrature_coefficients_1d',['../neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d',1,'neumann_spline_quadrature.hpp']]],
   ['neutral_20simulations_351',['Neutral simulations',['../simulations_geometryXVx_neutrals.html',1,'']]],
   ['non_5fsingular_5fsolution_352',['non_singular_solution',['../classManufacturedPoissonTest.html#af7bed860a32f8678d1128795b614d6de',1,'ManufacturedPoissonTest']]],
-  ['norm_353',['norm',['../classMatrixBatchSparse.html#a3f3587cd6d39d60466c98adbe737a3a3',1,'MatrixBatchSparse']]],
+  ['norm_353',['norm',['../classMatrixBatchEll.html#a972e124276cf81e393a6590d53986a41',1,'MatrixBatchEll']]],
   ['norm_5finf_354',['norm_inf',['../utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009',1,'norm_inf(ddc::Coordinate&lt; Tags... &gt; coord):&#160;utils_tools.hpp'],['../utils__tools_8hpp.html#a74cd2065291900b963fdc775ae5aec8d',1,'norm_inf(double const coord):&#160;utils_tools.hpp']]],
   ['nulladvectionvelocity_355',['NullAdvectionVelocity',['../classNullAdvectionVelocity.html',1,'']]],
   ['nullfluidsolver_356',['NullFluidSolver',['../classNullFluidSolver.html',1,'NullFluidSolver'],['../classNullFluidSolver.html#ae0d835e311caf4c28ce0149100872122',1,'NullFluidSolver::NullFluidSolver()']]],

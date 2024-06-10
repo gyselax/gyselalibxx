@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['factorize_855',['factorize',['../classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c',1,'MatrixBatch::factorize()'],['../classMatrixBatchSparse.html#ae10bd2d9b30b531f3fcd50bd0f70f0d6',1,'MatrixBatchSparse::factorize()'],['../classMatrixBatchTridiag.html#a7a53446a0a79c099986468f6a6cf4e7b',1,'MatrixBatchTridiag::factorize()']]],
+  ['factorize_855',['factorize',['../classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c',1,'MatrixBatch::factorize()'],['../classMatrixBatchEll.html#ade9b19aa5be23b68a1f9d8df6a4244bb',1,'MatrixBatchEll::factorize()'],['../classMatrixBatchTridiag.html#a7a53446a0a79c099986468f6a6cf4e7b',1,'MatrixBatchTridiag::factorize()']]],
   ['femnonperiodicqnsolver_856',['FemNonPeriodicQNSolver',['../classFemNonPeriodicQNSolver.html#a82f938b03fbea6dcc68c2ac7c99d2352',1,'FemNonPeriodicQNSolver']]],
   ['femperiodicqnsolver_857',['FemPeriodicQNSolver',['../classFemPeriodicQNSolver.html#ade4cf4696a5ef7acb206eeb96c4e64c5',1,'FemPeriodicQNSolver']]],
   ['fftpoissonsolver_858',['FFTPoissonSolver',['../classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html#ad5e9a864bbb0dd8dc764e4a5edc746bf',1,'FFTPoissonSolver&lt; ddc::DiscreteDomain&lt; DDims... &gt;, FullDomain, ExecSpace, LayoutSpace &gt;']]],

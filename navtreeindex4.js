@@ -159,7 +159,7 @@ var NAVTREEINDEX4 =
 "matrix_8hpp_source.html":[17,2,0,0,0,4],
 "matrix__banded_8hpp_source.html":[17,2,0,0,0,5],
 "matrix__batch_8hpp_source.html":[17,2,0,0,0,6],
-"matrix__batch__sparse_8hpp_source.html":[17,2,0,0,0,7],
+"matrix__batch__ell_8hpp_source.html":[17,2,0,0,0,7],
 "matrix__batch__tridiag_8hpp_source.html":[17,2,0,0,0,8],
 "matrix__center__block_8hpp_source.html":[17,2,0,0,0,9],
 "matrix__corner__block_8hpp_source.html":[17,2,0,0,0,10],

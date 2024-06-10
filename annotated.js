@@ -132,7 +132,7 @@ var annotated =
     [ "Matrix_PDS_Tridiag", "classMatrix__PDS__Tridiag.html", "classMatrix__PDS__Tridiag" ],
     [ "Matrix_Periodic_Banded", "classMatrix__Periodic__Banded.html", "classMatrix__Periodic__Banded" ],
     [ "MatrixBatch", "classMatrixBatch.html", "classMatrixBatch" ],
-    [ "MatrixBatchSparse", "classMatrixBatchSparse.html", "classMatrixBatchSparse" ],
+    [ "MatrixBatchEll", "classMatrixBatchEll.html", "classMatrixBatchEll" ],
     [ "MatrixBatchTridiag", "classMatrixBatchTridiag.html", "classMatrixBatchTridiag" ],
     [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html", "classMaxwellianEquilibrium" ],
     [ "Moments", "classMoments.html", "classMoments" ],

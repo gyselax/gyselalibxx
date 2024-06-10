@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['factorize_149',['factorize',['../classMatrixBatchTridiag.html#a7a53446a0a79c099986468f6a6cf4e7b',1,'MatrixBatchTridiag::factorize()'],['../classMatrixBatchSparse.html#ae10bd2d9b30b531f3fcd50bd0f70f0d6',1,'MatrixBatchSparse::factorize()'],['../classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c',1,'MatrixBatch::factorize()']]],
+  ['factorize_149',['factorize',['../classMatrixBatchTridiag.html#a7a53446a0a79c099986468f6a6cf4e7b',1,'MatrixBatchTridiag::factorize()'],['../classMatrixBatchEll.html#ade9b19aa5be23b68a1f9d8df6a4244bb',1,'MatrixBatchEll::factorize()'],['../classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c',1,'MatrixBatch::factorize()']]],
   ['fdistribuddom_150',['FdistribuDDom',['../classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90',1,'GeometryXYVxVy::FdistribuDDom()'],['../classGeometryXVx.html#a01dd11ecfb6414512e1f8cbaf204c5cd',1,'GeometryXVx::FdistribuDDom()']]],
   ['femnonperiodicqnsolver_151',['FemNonPeriodicQNSolver',['../classFemNonPeriodicQNSolver.html',1,'FemNonPeriodicQNSolver'],['../classFemNonPeriodicQNSolver.html#a82f938b03fbea6dcc68c2ac7c99d2352',1,'FemNonPeriodicQNSolver::FemNonPeriodicQNSolver()']]],
   ['femperiodicqnsolver_152',['FemPeriodicQNSolver',['../classFemPeriodicQNSolver.html',1,'FemPeriodicQNSolver'],['../classFemPeriodicQNSolver.html#ade4cf4696a5ef7acb206eeb96c4e64c5',1,'FemPeriodicQNSolver::FemPeriodicQNSolver()']]],

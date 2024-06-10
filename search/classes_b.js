@@ -9,7 +9,7 @@ var searchData=
   ['matrix_5fpds_5ftridiag_687',['Matrix_PDS_Tridiag',['../classMatrix__PDS__Tridiag.html',1,'']]],
   ['matrix_5fperiodic_5fbanded_688',['Matrix_Periodic_Banded',['../classMatrix__Periodic__Banded.html',1,'']]],
   ['matrixbatch_689',['MatrixBatch',['../classMatrixBatch.html',1,'']]],
-  ['matrixbatchsparse_690',['MatrixBatchSparse',['../classMatrixBatchSparse.html',1,'']]],
+  ['matrixbatchell_690',['MatrixBatchEll',['../classMatrixBatchEll.html',1,'']]],
   ['matrixbatchtridiag_691',['MatrixBatchTridiag',['../classMatrixBatchTridiag.html',1,'']]],
   ['maxwellianequilibrium_692',['MaxwellianEquilibrium',['../classMaxwellianEquilibrium.html',1,'']]],
   ['momentdensity_693',['MomentDensity',['../classFluidMoments.html#structFluidMoments_1_1MomentDensity',1,'FluidMoments']]],
