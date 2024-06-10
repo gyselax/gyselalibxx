@@ -30,10 +30,13 @@ var dir_9d829b76e0b2402759f669528b36515e =
       [ "Treatment of the O-point", "src_geometryRTheta_poisson.html#autotoc_md51", null ],
       [ "Weak formulation", "src_geometryRTheta_poisson.html#autotoc_md52", null ]
     ] ],
-    [ "- The mapping and the domain used for the advection:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md63", null ],
-    [ "- The time integration method used to solve the characteristic equation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md64", null ],
-    [ "- The test simulation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md65", null ],
-    [ "Functions tests:", "tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md61", null ],
-    [ "Python scripts", "tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md62", null ],
+    [ "Multi-patch domain", "src_multipatch_interfaces.html#autotoc_md53", null ],
+    [ "Edges", "src_multipatch_interfaces.html#autotoc_md54", null ],
+    [ "Sticking and Coordinate Transformation", "src_multipatch_interfaces.html#autotoc_md55", null ],
+    [ "- The mapping and the domain used for the advection:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md66", null ],
+    [ "- The time integration method used to solve the characteristic equation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md67", null ],
+    [ "- The test simulation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md68", null ],
+    [ "Functions tests:", "tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md64", null ],
+    [ "Python scripts", "tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md65", null ],
     [ "collisions.hpp", "collisions_8hpp_source.html", null ]
 ];

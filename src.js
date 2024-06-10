@@ -12,6 +12,7 @@ var src =
       [ "Spline Interpolation", "src_interpolation.html#src_interpolation__Spline_Interpolation", null ],
       [ "Memory concerns", "src_interpolation.html#src_interpolation__Memory_concerns", null ]
     ] ],
+    [ "Multipatch", "src_multipatch.html", "src_multipatch" ],
     [ "PDE Solvers", "src_pde_solvers.html", [
       [ "'s_equation Poisson's equation", "src_pde_solvers.html#src_pde_solvers__Poisson", null ]
     ] ],
