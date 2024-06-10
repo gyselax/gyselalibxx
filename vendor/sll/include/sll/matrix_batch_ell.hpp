@@ -61,7 +61,7 @@ std::vector<std::unique_ptr<typename InputType::unbatch_type>> unbatch(
  * The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace
  */
 template <class ExecSpace>
-class MatrixBatchSparse : public MatrixBatch<ExecSpace>
+class MatrixBatchEll : public MatrixBatch<ExecSpace>
 {
     using batch_sparse_type = gko::batch::matrix::Ell<double, int>;
     using bicgstab = gko::batch::solver::Bicgstab<double>;
@@ -80,7 +80,7 @@ public:
     using MatrixBatch<ExecSpace>::get_size;
     using MatrixBatch<ExecSpace>::get_batch_size;
     /**
-     * @brief The constructor for MatrixBatchSparse class.
+     * @brief The constructor for MatrixBatchEll class.
      *
      * @param[in] batch_size Number of linear systems to solve.
      * @param[in] mat_size Common matrix size for all the systems.
@@ -90,7 +90,7 @@ public:
      * provided here, will be used as "implicit residual" in ginkgo solver.
      * @param[in] logger boolean parameter for saving log informations such residual and interations count.
     */
-    MatrixBatchSparse(
+    MatrixBatchEll(
             const int batch_size,
             const int mat_size,
             const int non_zeros_per_row,
@@ -111,7 +111,7 @@ public:
     }
 
     /**
-     * @brief Constructor for MatrixBatchSparse class.
+     * @brief Constructor for MatrixBatchEll class.
      *
      * @param[in] cols_idx  A Kokkos view which stores the column indices of non-zero components.
      * @param[in] batch_values A Kokkos view which stores the values of non-zero elements.
@@ -121,7 +121,7 @@ public:
      * Default value is set to 1e-15.
      * @param[in] logger bolean parameter to save logger information. Default value false.
      */
-    MatrixBatchSparse(
+    MatrixBatchEll(
             Kokkos::View<int**, Kokkos::LayoutLeft, ExecSpace> cols_idx,
             Kokkos::View<double***, Kokkos::LayoutStride, ExecSpace> batch_values,
             std::optional<int> max_iter = std::nullopt,
