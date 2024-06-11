@@ -382,7 +382,7 @@ int main(int argc, char** argv)
     FemNonPeriodicQNSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 #endif
 
-    ConstantRate chargexchange(1.);
+    ConstantRate charge_exchange(1.);
     ConstantRate ionization(0.001);
     ConstantRate recombination(0.001);
     double const neutral_temperature(1.);
@@ -397,7 +397,7 @@ int main(int argc, char** argv)
             quadrature_coeffs_neutrals_host.span_view());
 
     DiffusiveNeutralSolver const neutralsolver(
-            chargexchange,
+            charge_exchange,
             ionization,
             recombination,
             neutral_temperature,
