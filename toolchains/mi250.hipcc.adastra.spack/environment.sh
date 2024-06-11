@@ -23,6 +23,8 @@ module load \
     gcc/12.1/zen3/paraconf/1.0.0 \
     gcc/12.1/zen3/pdi/1.6.0 \
     gcc/12.1/zen3/pdiplugin-decl-hdf5/1.6.0 \
+    gcc/12.1/zen3/pdiplugin-set-value/1.6.0 \
+    gcc/12.1/zen3/pdiplugin-trace/1.6.0 \
     gcc/12.1/zen3/ginkgo/1.7.0 \
     gcc/12.1/zen3/eigen/3.4.0 \
     gcc/12.1/zen3/cmake/3.27.7 \
