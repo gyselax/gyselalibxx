@@ -1,0 +1,61 @@
+# SPDX-License-Identifier: MIT
+
+fdistribu:
+  # the list of HDF5 datasets where this field can be found (this can also be a single dict)
+  path:
+    # file regex, in the regex we capture values that can be used in filename_coord (?P<NAME>CAPTURE)
+    file: 'VOICEXX_\d+.h5'
+    # dataset regex
+    dataset: 'fdistribu'
+  dimensions:
+  - &timed
+    time:    { local_coord: [ 'time_saved' ] }
+  - &speciesd
+    species: { constant_coord: [ 'electrons', 'ions' ] }
+  - &xd
+    x:       { global_coord: [ &initstate "VOICEXX_initstate.h5", MeshX ] }
+  - &vxd
+    v_x: { global_coord: ['VOICEXX_initstate.h5', 'MeshVx'] }
+
+fluid_moments:
+  # the list of HDF5 datasets where this field can be found (this can also be a single dict)
+  path:
+    # file regex, in the regex we capture values that can be used in filename_coord (?P<NAME>CAPTURE)
+    file: 'VOICEXX_\d+.h5'
+    # dataset regex
+    dataset: 'fluid_moments'
+  dimensions:
+  - *timed
+  - &speciesnd
+    speciesn: { constant_coord: [ 'neutrals' ] }
+  - &momentd
+    moment: { constant_coord: [ 'density' ] }
+  - *xd
+
+fdistribu_masses:
+  dimensions: [ *speciesd ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'fdistribu_masses' }
+
+neutrals_masses:
+  dimensions: [ *speciesnd ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'neutrals_masses' }
+
+charge_exchange:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'charge_exchange' }
+
+ionization:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'ionization' }
+
+recombination:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'recombination' }
+
+normalization_coeff_neutrals:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'normalization_coeff_neutrals' }
+
+neutrals_temperature:
+  dimensions: [ ]
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'neutrals_temperature' }
