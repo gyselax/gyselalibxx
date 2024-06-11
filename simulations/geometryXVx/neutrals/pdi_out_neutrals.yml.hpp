@@ -43,6 +43,11 @@ metadata:
     size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]' ]
   collintra_nustar0 : double
   collinter_nustar0 : double
+  charge_exchange : double
+  ionization : double
+  recombination : double
+  neutrals_temperature : double
+  normalization_coeff_neutrals : double
 
   krook_sink_adaptive_extent : double
   krook_sink_adaptive_stiffness : double
@@ -134,6 +139,11 @@ plugins:
         - nbstep_diag
         - collintra_nustar0
         - collinter_nustar0
+        - charge_exchange
+        - ionization
+        - recombination
+        - neutrals_temperature
+        - normalization_coeff_neutrals
         - Nkinspecies
         - fdistribu_charges
         - fdistribu_masses
