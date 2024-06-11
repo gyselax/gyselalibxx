@@ -60,7 +60,7 @@
 class DiffusiveNeutralSolver : public IFluidSolver
 {
 private:
-    IReactionRate const& m_chargexchange;
+    IReactionRate const& m_charge_exchange;
     IReactionRate const& m_ionization;
     IReactionRate const& m_recombination;
 
@@ -77,7 +77,7 @@ private:
 public:
     /**
      * @brief Creates an instance of the DiffusiveNeutralSolver class.
-     * @param[in] chargexchange An object that represents charge-exchange reaction rate.
+     * @param[in] charge_exchange An object that represents charge-exchange reaction rate.
      * @param[in] ionization An object that represents ionization reaction rate.
      * @param[in] recombination An object that represents recombination reaction rate.
      * @param[in] temperature The constant temperature of neutrals.
@@ -87,7 +87,7 @@ public:
      * @param[in] quadrature_coeffs A View referencing coefficients for a quadrature.
      */
     DiffusiveNeutralSolver(
-            IReactionRate const& chargexchange,
+            IReactionRate const& charge_exchange,
             IReactionRate const& ionization,
             IReactionRate const& recombination,
             double const temperature,
