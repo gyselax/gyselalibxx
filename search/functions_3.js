@@ -9,7 +9,7 @@ var searchData=
   ['deriv_5fdim_5f2_854',['deriv_dim_2',['../classPolarSplineEvaluator.html#ab1d9832c70778fabd91dcf990a481001',1,'PolarSplineEvaluator::deriv_dim_2(ddc::Coordinate&lt; DimR, DimP &gt; coord_eval, PolarSplineView&lt; PolarBSplinesType &gt; const spline_coef) const'],['../classPolarSplineEvaluator.html#af5de8a13917331a541a20a989b1564a0',1,'PolarSplineEvaluator::deriv_dim_2(ddc::ChunkSpan&lt; double, Domain &gt; const spline_eval, ddc::ChunkSpan&lt; ddc::Coordinate&lt; DimR, DimP &gt; const, Domain &gt; const coords_eval, PolarSplineView&lt; PolarBSplinesType &gt; const spline_coef) const']]],
   ['derivative_5fx_855',['derivative_x',['../classCartesianSolution.html#a451cd0cae3b100165ad5e7850f0572a8',1,'CartesianSolution']]],
   ['derivative_5fy_856',['derivative_y',['../classCartesianSolution.html#a6b7df1d82066dec5c620bddb7369e969',1,'CartesianSolution']]],
-  ['diffusiveneutralsolver_857',['DiffusiveNeutralSolver',['../classDiffusiveNeutralSolver.html#a4e8da82c0223e1338581b8e0889c7644',1,'DiffusiveNeutralSolver']]],
+  ['diffusiveneutralsolver_857',['DiffusiveNeutralSolver',['../classDiffusiveNeutralSolver.html#a59c3999309be8830fd85c7e1c4ef0aac',1,'DiffusiveNeutralSolver']]],
   ['diocotrondensitysolution_858',['DiocotronDensitySolution',['../classDiocotronDensitySolution.html#a241c1b873cf5fd34a13d79a149fa5734',1,'DiocotronDensitySolution']]],
   ['discretetocartesian_859',['DiscreteToCartesian',['../classDiscreteToCartesian.html#aab258ec1dcafc8ee5e162daa5c0ee756',1,'DiscreteToCartesian']]],
   ['display_5ftime_5fdifference_860',['display_time_difference',['../classITimeSolverRP.html#aa9b8aa593b80793bd9b8586a6c50dd2a',1,'ITimeSolverRP']]]

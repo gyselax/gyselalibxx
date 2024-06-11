@@ -65,7 +65,7 @@ var NAVTREEINDEX1 =
 "classDecentredRotationSimulation.html":[16,46],
 "classDecentredRotationSimulation.html#a94d97e6be53cae16d5458fd5c05e46e8":[16,46,0],
 "classDiffusiveNeutralSolver.html":[16,47],
-"classDiffusiveNeutralSolver.html#a4e8da82c0223e1338581b8e0889c7644":[16,47,0],
+"classDiffusiveNeutralSolver.html#a59c3999309be8830fd85c7e1c4ef0aac":[16,47,0],
 "classDiffusiveNeutralSolver.html#abfa7ed6b9809fc0338cd689b7d8dd37e":[16,47,2],
 "classDiffusiveNeutralSolver.html#ae5ebfe3292a4555f0c0df1cdd2a0fa6a":[16,47,3],
 "classDiffusiveNeutralSolver.html#af85115e532382e213d94d67cba76b058":[16,47,1],

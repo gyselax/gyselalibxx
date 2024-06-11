@@ -121,9 +121,9 @@ Inheritance diagram for DiffusiveNeutralSolver:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4e8da82c0223e1338581b8e0889c7644"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiffusiveNeutralSolver.html#a4e8da82c0223e1338581b8e0889c7644">DiffusiveNeutralSolver</a> (<a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;chargexchange, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;ionization, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;recombination, double const temperature, double const normalization_coeff, SplineXBuilder_1d const &amp;spline_x_builder, SplineXEvaluator_1d const &amp;spline_x_evaluator, DViewVx const &amp;quadrature_coeffs)</td></tr>
-<tr class="memdesc:a4e8da82c0223e1338581b8e0889c7644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classDiffusiveNeutralSolver.html" title="A class that solves a so-called &quot;pressure-diffusive&quot; fluid neutral model.">DiffusiveNeutralSolver</a> class.  <a href="classDiffusiveNeutralSolver.html#a4e8da82c0223e1338581b8e0889c7644">More...</a><br /></td></tr>
-<tr class="separator:a4e8da82c0223e1338581b8e0889c7644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59c3999309be8830fd85c7e1c4ef0aac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiffusiveNeutralSolver.html#a59c3999309be8830fd85c7e1c4ef0aac">DiffusiveNeutralSolver</a> (<a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;charge_exchange, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;ionization, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;recombination, double const temperature, double const normalization_coeff, SplineXBuilder_1d const &amp;spline_x_builder, SplineXEvaluator_1d const &amp;spline_x_evaluator, DViewVx const &amp;quadrature_coeffs)</td></tr>
+<tr class="memdesc:a59c3999309be8830fd85c7e1c4ef0aac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classDiffusiveNeutralSolver.html" title="A class that solves a so-called &quot;pressure-diffusive&quot; fluid neutral model.">DiffusiveNeutralSolver</a> class.  <a href="classDiffusiveNeutralSolver.html#a59c3999309be8830fd85c7e1c4ef0aac">More...</a><br /></td></tr>
+<tr class="separator:a59c3999309be8830fd85c7e1c4ef0aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfa7ed6b9809fc0338cd689b7d8dd37e"><td class="memItemLeft" align="right" valign="top">DSpanSpMX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiffusiveNeutralSolver.html#abfa7ed6b9809fc0338cd689b7d8dd37e">operator()</a> (DSpanSpMX neutrals, DViewSpXVx allfdistribu, DViewX efield, double dt) const override</td></tr>
 <tr class="memdesc:abfa7ed6b9809fc0338cd689b7d8dd37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the neutral fluid moments according to the pressure-diffusive neutral model.  <a href="classDiffusiveNeutralSolver.html#abfa7ed6b9809fc0338cd689b7d8dd37e">More...</a><br /></td></tr>
 <tr class="separator:abfa7ed6b9809fc0338cd689b7d8dd37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,8 +157,8 @@ Public Member Functions</h2></td></tr>
 <p>Where \(\alpha_0\) is a normalization coefficient equal to \(\alpha_0 = \omega_{pe0}/(n_0 K_0)\). All the terms that appear in this normalized equation keep the same expression as when writing the dimensional form of the model, except that quantities involved are normalized.</p>
 <p>The pressure-diffusive model is solved using a <a class="el" href="classRK2.html" title="A class which provides an implementation of a second-order Runge-Kutta method.">RK2</a> time integrator. Spatial derivatives are computed using splines polynomials. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a4e8da82c0223e1338581b8e0889c7644"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e8da82c0223e1338581b8e0889c7644">&#9670;&nbsp;</a></span>DiffusiveNeutralSolver()</h2>
+<a id="a59c3999309be8830fd85c7e1c4ef0aac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59c3999309be8830fd85c7e1c4ef0aac">&#9670;&nbsp;</a></span>DiffusiveNeutralSolver()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -167,7 +167,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">DiffusiveNeutralSolver::DiffusiveNeutralSolver </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>chargexchange</em>, </td>
+          <td class="paramname"><em>charge_exchange</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -222,7 +222,7 @@ Public Member Functions</h2></td></tr>
 <p>Creates an instance of the <a class="el" href="classDiffusiveNeutralSolver.html" title="A class that solves a so-called &quot;pressure-diffusive&quot; fluid neutral model.">DiffusiveNeutralSolver</a> class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">chargexchange</td><td>An object that represents charge-exchange reaction rate. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">charge_exchange</td><td>An object that represents charge-exchange reaction rate. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ionization</td><td>An object that represents ionization reaction rate. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">recombination</td><td>An object that represents recombination reaction rate. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">temperature</td><td>The constant temperature of neutrals. </td></tr>
