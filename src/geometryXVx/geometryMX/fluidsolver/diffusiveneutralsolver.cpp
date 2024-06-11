@@ -8,7 +8,7 @@
 
 
 DiffusiveNeutralSolver::DiffusiveNeutralSolver(
-        IReactionRate const& chargexchange,
+        IReactionRate const& charge_exchange,
         IReactionRate const& ionization,
         IReactionRate const& recombination,
         double const temperature,
@@ -16,7 +16,7 @@ DiffusiveNeutralSolver::DiffusiveNeutralSolver(
         SplineXBuilder_1d const& spline_x_builder,
         SplineXEvaluator_1d const& spline_x_evaluator,
         DViewVx const& quadrature_coeffs)
-    : m_chargexchange(chargexchange)
+    : m_charge_exchange(charge_exchange)
     , m_ionization(ionization)
     , m_recombination(recombination)
     , m_temperature(temperature)
@@ -55,15 +55,15 @@ void DiffusiveNeutralSolver::get_derivative(
     IDomainSpX dom_fluidspx(ddc::get_domain<IDimSp, IDimX>(neutrals));
 
     // building reaction rates
-    DFieldSpX chargexchange_rate_alloc(dom_fluidspx);
+    DFieldSpX charge_exchange_rate_alloc(dom_fluidspx);
     DFieldSpX ionization_rate_alloc(dom_fluidspx);
     DFieldSpX recombination_rate_alloc(dom_fluidspx);
 
-    DSpanSpX chargexchange_rate = chargexchange_rate_alloc.span_view();
+    DSpanSpX charge_exchange_rate = charge_exchange_rate_alloc.span_view();
     DSpanSpX ionization_rate = ionization_rate_alloc.span_view();
     DSpanSpX recombination_rate = recombination_rate_alloc.span_view();
 
-    m_chargexchange(chargexchange_rate, density, temperature);
+    m_charge_exchange(charge_exchange_rate, density, temperature);
     m_ionization(ionization_rate, density, temperature);
     m_recombination(recombination_rate, density, temperature);
 
@@ -88,13 +88,13 @@ void DiffusiveNeutralSolver::get_derivative(
                 IndexSp const isp(ddc::select<IDimSp>(ifspx));
                 IndexX const ix(ddc::select<IDimX>(ifspx));
 
-                double const denom = density(iion, ix) * chargexchange_rate(ifspx)
+                double const denom = density(iion, ix) * charge_exchange_rate(ifspx)
                                      + density(ielec(), ix) * ionization_rate(ifspx);
 
                 density_equilibrium_velocity(ifspx)
                         = (density(ielec(), ix) * density(iion, ix) * recombination_rate(ifspx)
                            + neutrals(ifspx, ineutral_density) * density(iion, ix)
-                                     * chargexchange_rate(ifspx))
+                                     * charge_exchange_rate(ifspx))
                           * velocity(iion, ix) * Kokkos::sqrt(mass_ratio) / denom;
 
                 diffusion_temperature(ifspx)

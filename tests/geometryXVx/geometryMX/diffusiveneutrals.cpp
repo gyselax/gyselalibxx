@@ -130,7 +130,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     ddc::ConstantExtrapolationRule<RDimX> bv_x_max(x_max);
 #endif
 
-    ConstantRate chargexchange(charge_exchange_val);
+    ConstantRate charge_exchange(charge_exchange_val);
     ConstantRate ionization(ionization_val);
     ConstantRate recombination(recombination_val);
 
@@ -143,7 +143,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
             quadrature_coeffs_host.span_view());
 
     DiffusiveNeutralSolver const neutralsolver(
-            chargexchange,
+            charge_exchange,
             ionization,
             recombination,
             temperature_neutrals,
