@@ -51,18 +51,28 @@ if __name__ == '__main__':
                         help='end time index')
     args = parser.parse_args()
 
-    data_structure_name = 'data_structure_XVx.yaml'
-    multid = False
+    data_structure_name = ''
+    geo = ''
+    if 'XVx' in str(args.data_dir):
+        data_structure_name = 'data_structure_XVx.yaml'
+        geo = 'XVx'
 
-    if 'XYVxVy' in str(args.data_dir):
+    elif 'XYVxVy' in str(args.data_dir):
         data_structure_name='data_structure_XYVxVy.yaml'
-        multid = True
+        geo= 'XYVxVy'
+
+    else:
+        raise NotImplementedError(f"Geometry {args.data_dir} is not handled")
 
     # Load data
     ds = DiskStore(args.data_dir,data_structure=Path(data_structure_name))
-    if not multid:
+    # Separate treatement depending on number of dimensions
+    if geo=='XVx':
         epot = ds['electrostatic_potential']
-        epot = epot.isel(x=int(epot.sizes["x"] / 2))
+        epot = epot.integrate('x')
+    if geo=='XYVxVy':
+        two_dim_epot = ds['electrostatic_potential']
+        epot = two_dim_epot.integrate('x').integrate('y')
 
     epot = epot.isel(time=slice(args.start, args.end))
 
