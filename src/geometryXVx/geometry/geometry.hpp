@@ -80,36 +80,17 @@ auto constexpr SplineXBoundary
         = RDimX::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
 auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
 
-bool constexpr UniformMeshX = ddc::is_spline_interpolation_mesh_uniform(
-        BsplineOnUniformCellsX,
-        SplineXBoundary,
-        SplineXBoundary,
-        BSDegreeX);
-bool constexpr UniformMeshVx = ddc::is_spline_interpolation_mesh_uniform(
-        BsplineOnUniformCellsVx,
-        SplineVxBoundary,
-        SplineVxBoundary,
-        BSDegreeVx);
-
-struct IDimX
-    : std::conditional_t<
-              UniformMeshX,
-              ddc::UniformPointSampling<RDimX>,
-              ddc::NonUniformPointSampling<RDimX>>
-{
-};
-struct IDimVx
-    : std::conditional_t<
-              UniformMeshVx,
-              ddc::UniformPointSampling<RDimVx>,
-              ddc::NonUniformPointSampling<RDimVx>>
-{
-};
-
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
 using SplineInterpPointsVx
         = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+
+struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+{
+};
+struct IDimVx : SplineInterpPointsVx::interpolation_mesh_type
+{
+};
 
 using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
