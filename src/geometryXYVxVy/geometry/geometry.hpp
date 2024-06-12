@@ -107,57 +107,6 @@ ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
 ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
 ddc::BoundCond constexpr SplineVyBoundary = ddc::BoundCond::HERMITE;
 
-bool constexpr UniformMeshX = is_spline_interpolation_mesh_uniform(
-        BsplineOnUniformCellsX,
-        SplineXBoundary,
-        SplineXBoundary,
-        BSDegreeX);
-bool constexpr UniformMeshY = is_spline_interpolation_mesh_uniform(
-        BsplineOnUniformCellsY,
-        SplineYBoundary,
-        SplineYBoundary,
-        BSDegreeY);
-bool constexpr UniformMeshVx = is_spline_interpolation_mesh_uniform(
-        BsplineOnUniformCellsVx,
-        SplineVxBoundary,
-        SplineVxBoundary,
-        BSDegreeVx);
-bool constexpr UniformMeshVy = is_spline_interpolation_mesh_uniform(
-        BsplineOnUniformCellsVy,
-        SplineVyBoundary,
-        SplineVyBoundary,
-        BSDegreeVy);
-
-// IDim definition
-struct IDimX
-    : std::conditional_t<
-              UniformMeshX,
-              ddc::UniformPointSampling<RDimX>,
-              ddc::NonUniformPointSampling<RDimX>>
-{
-};
-struct IDimY
-    : std::conditional_t<
-              UniformMeshY,
-              ddc::UniformPointSampling<RDimY>,
-              ddc::NonUniformPointSampling<RDimY>>
-{
-};
-struct IDimVx
-    : std::conditional_t<
-              UniformMeshVx,
-              ddc::UniformPointSampling<RDimVx>,
-              ddc::NonUniformPointSampling<RDimVx>>
-{
-};
-struct IDimVy
-    : std::conditional_t<
-              UniformMeshVy,
-              ddc::UniformPointSampling<RDimVy>,
-              ddc::NonUniformPointSampling<RDimVy>>
-{
-};
-
 // IDim initialisers
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
@@ -167,6 +116,20 @@ using SplineInterpPointsVx
         = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
 using SplineInterpPointsVy
         = ddc::GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
+
+// IDim definition
+struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+{
+};
+struct IDimY : SplineInterpPointsY::interpolation_mesh_type
+{
+};
+struct IDimVx : SplineInterpPointsVx::interpolation_mesh_type
+{
+};
+struct IDimVy : SplineInterpPointsVy::interpolation_mesh_type
+{
+};
 
 // SplineBuilder and SplineEvaluator definition
 using SplineXBuilder = ddc::SplineBuilder<
