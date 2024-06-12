@@ -40,7 +40,7 @@ if __name__ == '__main__':
     # Compute and plot the growth (or damping) rate
     (fitted_values, fit,growthrate_computed, valid_growthrate) = Ediag.compute_growthrate(mean_pot,args.growthrate)
     growthrate_outfile = Path(f'growthrate_t{epot.coords["time"].values[0]}'f'to{epot.coords["time"].values[-1]}.png')
-    Ediag.plot_growthrate(growthrate_outfile,mean_pot, fitted_values, fit,
+    Ediag.plot_growthrate(growthrate_outfile,abs(mean_pot), fitted_values, fit,
                           growthrate_computed, args.growthrate)
 
     # Compute and plot the frequency
