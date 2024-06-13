@@ -62,6 +62,7 @@ var NAVTREE =
     [ "Collisions", "src_geometry5D_rhs_collisions.html", null ],
     [ "Reaction rates", "src_geometryXVx_geometryMX_reactionrates.html", null ],
     [ "Time integration hybrid", "src_geometryXVx_time_integration_hybrid.html", null ],
+    [ "Functions used for input and output.", "src_io.html", null ],
     [ "Tests", "tests.html", "tests" ],
     [ "Script to automise :", "tests_geometry5D_collisions.html", [
       [ "- the creation of the initial restart file with the python script <tt>init_distribution.py</tt>", "tests_geometry5D_collisions.html#autotoc_md56", null ],
@@ -86,7 +87,7 @@ var NAVTREEINDEX =
 "classIPreallocatableInterpolatorRP.html",
 "classPolarSplineEvaluator.html#a26c51eff107663001aee27e8285da70d",
 "ddc__helper_8hpp_source.html",
-"src_advection.html#src_advection__Velocity_advection"
+"src_advection.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
