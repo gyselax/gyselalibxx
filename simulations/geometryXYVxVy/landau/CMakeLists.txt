@@ -12,6 +12,7 @@ target_link_libraries(landau4d_fft
         gslx::geometry_xyvxvy
         gslx::initialization_xyvxvy
         gslx::interpolation
+        gslx::io
         gslx::advection
         gslx::vlasov_xyvxvy
         gslx::poisson_xy

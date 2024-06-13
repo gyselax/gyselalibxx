@@ -17,6 +17,7 @@ target_link_libraries(sheath_${GEOMETRY_VARIANT}
   gslx::advection
   gslx::paraconfpp
   gslx::rhs_${GEOMETRY_VARIANT}
+  gslx::io
   PDI::pdi
   paraconf::paraconf
   )
