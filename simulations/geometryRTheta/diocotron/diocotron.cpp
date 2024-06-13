@@ -25,6 +25,7 @@
 #include "diocotron_initialization_equilibrium.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
+#include "input.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -86,52 +87,17 @@ int main(int argc, char** argv)
     start_simulation = std::chrono::system_clock::now();
 
     // Build the mesh_rp for the space. ------------------------------------------------------------------
-    int const Nr(PCpp_int(conf_gyselalibxx, ".Mesh.r_size"));
-    int const Nt(PCpp_int(conf_gyselalibxx, ".Mesh.p_size"));
+    IDomainR const mesh_r = init_pseudo_uniform_spline_dependent_domain<
+            IDimR,
+            BSplinesR,
+            SplineInterpPointsR>(conf_gyselalibxx, "r");
+    IDomainP const mesh_p = init_pseudo_uniform_spline_dependent_domain<
+            IDimP,
+            BSplinesP,
+            SplineInterpPointsP>(conf_gyselalibxx, "p");
     double const dt(PCpp_double(conf_gyselalibxx, ".Time.delta_t"));
     double const final_T(PCpp_double(conf_gyselalibxx, ".Time.final_T"));
 
-    double const W1(PCpp_double(conf_gyselalibxx, ".Mesh.r_min"));
-    double const R1(PCpp_double(conf_gyselalibxx, ".Mesh.r_minus"));
-    double const R2(PCpp_double(conf_gyselalibxx, ".Mesh.r_plus"));
-    double const W2(PCpp_double(conf_gyselalibxx, ".Mesh.r_max"));
-
-    CoordR const r_min(W1);
-    CoordR const r_max(W2);
-    IVectR const r_size(Nr);
-
-    CoordP const p_min(0.0);
-    CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(Nt);
-
-    std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordP> p_knots(p_size + 1);
-
-    double const dr((r_max - r_min) / r_size);
-    double const dp((p_max - p_min) / p_size);
-
-    r_knots[0] = r_min;
-    for (int i(1); i < r_size; ++i) {
-        r_knots[i] = r_min + i * dr;
-    }
-    r_knots[r_size] = r_max;
-
-    p_knots[p_size] = p_min;
-    for (int i(1); i < p_size; ++i) {
-        p_knots[i] = CoordP(p_min + i * dp);
-    }
-    p_knots[p_size] = p_max;
-
-
-    // Creating mesh & supports:
-    ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesP>(p_knots);
-
-    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling<IDimR>());
-    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling<IDimP>());
-
-    IDomainR const mesh_r(SplineInterpPointsR::get_domain<IDimR>());
-    IDomainP const mesh_p(SplineInterpPointsP::get_domain<IDimP>());
     IDomainRP const mesh_rp(mesh_r, mesh_p);
 
     FieldRP<CoordRP> coords(mesh_rp);
@@ -142,8 +108,10 @@ int main(int argc, char** argv)
     SplineRPBuilder const builder(mesh_rp);
 
     // --- Define the mapping. ------------------------------------------------------------------------
-    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(r_min);
-    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(r_max);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(
+            ddc::coordinate(mesh_r.front()));
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(
+            ddc::coordinate(mesh_r.back()));
 
     SplineRPEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
@@ -253,14 +221,23 @@ int main(int argc, char** argv)
             ".Perturbation.charge_Q")); // no charge carried by the inner conductor r = W1.
     int const l(PCpp_int(conf_gyselalibxx, ".Perturbation.l_mode"));
     double const eps(PCpp_double(conf_gyselalibxx, ".Perturbation.eps"));
-    DiocotronDensitySolution exact_rho(W1, R1, R2, W2, Q, l, eps);
+    CoordR const R1(PCpp_double(conf_gyselalibxx, ".Perturbation.r_min"));
+    CoordR const R2(PCpp_double(conf_gyselalibxx, ".Perturbation.r_max"));
+    DiocotronDensitySolution exact_rho(
+            ddc::coordinate(mesh_r.front()),
+            R1,
+            R2,
+            ddc::coordinate(mesh_r.back()),
+            Q,
+            l,
+            eps);
 
     // --- Time parameters ----------------------------------------------------------------------------
     int const iter_nb = final_T * int(1 / dt);
 
     // --- save simulation data
-    ddc::expose_to_pdi("r_size", Nr);
-    ddc::expose_to_pdi("p_size", Nt);
+    ddc::expose_to_pdi("r_size", ddc::discrete_space<BSplinesR>().ncells());
+    ddc::expose_to_pdi("p_size", ddc::discrete_space<BSplinesP>().ncells());
 
     expose_mesh_to_pdi("r_coords", mesh_r);
     expose_mesh_to_pdi("p_coords", mesh_p);

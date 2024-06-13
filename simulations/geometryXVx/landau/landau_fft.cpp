@@ -19,6 +19,7 @@
 #include "chargedensitycalculator.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
+#include "input.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "output.hpp"
@@ -74,22 +75,15 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    CoordX const x_min(PCpp_double(conf_voicexx, ".SplineMesh.x_min"));
-    CoordX const x_max(PCpp_double(conf_voicexx, ".SplineMesh.x_max"));
-    IVectX const x_ncells(PCpp_int(conf_voicexx, ".SplineMesh.x_ncells"));
-    CoordVx const vx_min(PCpp_double(conf_voicexx, ".SplineMesh.vx_min"));
-    CoordVx const vx_max(PCpp_double(conf_voicexx, ".SplineMesh.vx_max"));
-    IVectVx const vx_ncells(PCpp_int(conf_voicexx, ".SplineMesh.vx_ncells"));
-
-    // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_ncells);
-    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
-
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
-    IDomainX mesh_x(SplineInterpPointsX::get_domain<IDimX>());
-    IDomainVx mesh_vx(SplineInterpPointsVx::get_domain<IDimVx>());
-    IDomainXVx meshXVx(mesh_x, mesh_vx);
+    IDomainX const mesh_x = init_spline_dependent_domain<
+            IDimX,
+            BSplinesX,
+            SplineInterpPointsX>(conf_voicexx, "x");
+    IDomainVx const mesh_vx = init_spline_dependent_domain<
+            IDimVx,
+            BSplinesVx,
+            SplineInterpPointsVx>(conf_voicexx, "vx");
+    IDomainXVx const meshXVx(mesh_x, mesh_vx);
 
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
@@ -178,16 +172,16 @@ int main(int argc, char** argv)
     ddc::PeriodicExtrapolationRule<RDimX> bv_x_min;
     ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
 #else
-    ddc::ConstantExtrapolationRule<RDimX> bv_x_min(x_min);
-    ddc::ConstantExtrapolationRule<RDimX> bv_x_max(x_max);
+    ddc::ConstantExtrapolationRule<RDimX> bv_x_min(ddc::coordinate(mesh_x.front()));
+    ddc::ConstantExtrapolationRule<RDimX> bv_x_max(ddc::coordinate(mesh_x.back()));
 #endif
 
     // Creating operators
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
     PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
 
-    ddc::ConstantExtrapolationRule<RDimVx> bv_v_min(vx_min);
-    ddc::ConstantExtrapolationRule<RDimVx> bv_v_max(vx_max);
+    ddc::ConstantExtrapolationRule<RDimVx> bv_v_min(ddc::coordinate(mesh_vx.front()));
+    ddc::ConstantExtrapolationRule<RDimVx> bv_v_max(ddc::coordinate(mesh_vx.back()));
 
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
     PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
@@ -210,8 +204,8 @@ int main(int argc, char** argv)
     PredCorr const predcorr(vlasov, poisson);
 
     // Starting the code
-    ddc::expose_to_pdi("Nx_spline_cells", x_ncells.value());
-    ddc::expose_to_pdi("Nvx_spline_cells", vx_ncells.value());
+    ddc::expose_to_pdi("Nx_spline_cells", ddc::discrete_space<BSplinesX>().ncells());
+    ddc::expose_to_pdi("Nvx_spline_cells", ddc::discrete_space<BSplinesVx>().ncells());
     expose_mesh_to_pdi("MeshX", mesh_x);
     expose_mesh_to_pdi("MeshVx", mesh_vx);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
