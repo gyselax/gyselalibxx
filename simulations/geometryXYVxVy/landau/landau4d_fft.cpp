@@ -19,6 +19,7 @@
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
+#include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
@@ -91,27 +92,23 @@ int main(int argc, char** argv)
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
 
-    IDomainX interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
-    IDomainY interpolation_domain_y(SplineInterpPointsY::get_domain<IDimY>());
-    IDomainXY interpolation_domain_xy(interpolation_domain_x, interpolation_domain_y);
-    IDomainVx interpolation_domain_vx(SplineInterpPointsVx::get_domain<IDimVx>());
-    IDomainVy interpolation_domain_vy(SplineInterpPointsVy::get_domain<IDimVy>());
-    IDomainVxVy interpolation_domain_vxvy(interpolation_domain_vx, interpolation_domain_vy);
+    IDomainX mesh_x(SplineInterpPointsX::get_domain<IDimX>());
+    IDomainY mesh_y(SplineInterpPointsY::get_domain<IDimY>());
+    IDomainXY mesh_xy(mesh_x, mesh_y);
+    IDomainVx mesh_vx(SplineInterpPointsVx::get_domain<IDimVx>());
+    IDomainVy mesh_vy(SplineInterpPointsVy::get_domain<IDimVy>());
+    IDomainVxVy mesh_vxvy(mesh_vx, mesh_vy);
 
-    IDomainXYVxVy meshXYVxVy(
-            interpolation_domain_x,
-            interpolation_domain_y,
-            interpolation_domain_vx,
-            interpolation_domain_vy);
-    IDomainSpVxVy const meshSpVxVy(dom_kinsp, interpolation_domain_vx, interpolation_domain_vy);
+    IDomainXYVxVy meshXYVxVy(mesh_x, mesh_y, mesh_vx, mesh_vy);
+    IDomainSpVxVy const meshSpVxVy(dom_kinsp, mesh_vx, mesh_vy);
     IDomainSpXYVxVy const meshSpXYVxVy(dom_kinsp, meshXYVxVy);
 
     SplineXBuilder const builder_x(meshXYVxVy);
     SplineYBuilder const builder_y(meshXYVxVy);
     SplineVxBuilder const builder_vx(meshXYVxVy);
     SplineVyBuilder const builder_vy(meshXYVxVy);
-    SplineVxBuilder_1d const builder_vx_1d(interpolation_domain_vx);
-    SplineVyBuilder_1d const builder_vy_1d(interpolation_domain_vy);
+    SplineVxBuilder_1d const builder_vx_1d(mesh_vx);
+    SplineVyBuilder_1d const builder_vy_1d(mesh_vy);
 
     host_t<FieldSp<int>> kinetic_charges(dom_kinsp);
     host_t<DFieldSp> masses(dom_kinsp);
@@ -211,51 +208,28 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_y, advection_vx, advection_vy);
 
-    host_t<DFieldVxVy> const quadrature_coeffs_host = neumann_spline_quadrature_coefficients(
-            interpolation_domain_vxvy,
-            builder_vx_1d,
-            builder_vy_1d);
+    host_t<DFieldVxVy> const quadrature_coeffs_host
+            = neumann_spline_quadrature_coefficients(mesh_vxvy, builder_vx_1d, builder_vy_1d);
     auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
     FFTPoissonSolver<IDomainXY, IDomainXY, Kokkos::DefaultExecutionSpace> fft_poisson_solver(
-            interpolation_domain_xy);
+            mesh_xy);
     ChargeDensityCalculator const rhs(quadrature_coeffs);
     QNSolver const poisson(fft_poisson_solver, rhs);
 
     // Create predcorr operator
     PredCorr const predcorr(vlasov, poisson);
 
-    // Creating of mesh for output saving
-    host_t<FieldX<CoordX>> meshX_coord(interpolation_domain_x);
-    ddc::for_each(interpolation_domain_x, [&](IndexX const ix) {
-        meshX_coord(ix) = ddc::coordinate(ix);
-    });
-
-    host_t<FieldY<CoordY>> meshY_coord(interpolation_domain_y);
-    ddc::for_each(interpolation_domain_y, [&](IndexY const iy) {
-        meshY_coord(iy) = ddc::coordinate(iy);
-    });
-
-    host_t<FieldVx<CoordVx>> meshVx_coord(interpolation_domain_vx);
-    for (IndexVx const ivx : interpolation_domain_vx) {
-        meshVx_coord(ivx) = ddc::coordinate(ivx);
-    }
-
-    host_t<FieldVy<CoordVy>> meshVy_coord(interpolation_domain_vy);
-    for (IndexVy const ivy : interpolation_domain_vy) {
-        meshVy_coord(ivy) = ddc::coordinate(ivy);
-    }
-
     // Starting the code
     ddc::expose_to_pdi("Nx_spline_cells", x_ncells.value());
     ddc::expose_to_pdi("Ny_spline_cells", y_ncells.value());
     ddc::expose_to_pdi("Nvx_spline_cells", vx_ncells.value());
     ddc::expose_to_pdi("Nvy_spline_cells", vy_ncells.value());
-    ddc::expose_to_pdi("MeshX", meshX_coord);
-    ddc::expose_to_pdi("MeshY", meshY_coord);
-    ddc::expose_to_pdi("MeshVx", meshVx_coord);
-    ddc::expose_to_pdi("MeshVy", meshVy_coord);
+    expose_mesh_to_pdi("MeshX", mesh_x);
+    expose_mesh_to_pdi("MeshY", mesh_y);
+    expose_mesh_to_pdi("MeshVx", mesh_vx);
+    expose_mesh_to_pdi("MeshVy", mesh_vy);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
     ddc::expose_to_pdi("Nkinspecies", nb_kinspecies.value());
     ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
