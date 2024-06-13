@@ -7,11 +7,12 @@ target_link_libraries(testcollisions
   PUBLIC
   DDC::DDC
   DDC::PDI_Wrapper
-  gslx::speciesinfo
+  gslx::collisions_rhs_5D
   gslx::geometry5D
+  gslx::io
   gslx::paraconfpp
   gslx::quadrature
-  gslx::collisions_rhs_5D
+  gslx::speciesinfo
   PDI::pdi
   paraconf::paraconf
   )

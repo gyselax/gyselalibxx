@@ -24,6 +24,7 @@
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
+#include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
@@ -89,20 +90,20 @@ int main(int argc, char** argv)
 
     ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
     ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
-    IDomainX interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
-    IDomainVx interpolation_domain_vx(SplineInterpPointsVx::get_domain<IDimVx>());
-    IDomainXVx meshXVx(interpolation_domain_x, interpolation_domain_vx);
+    IDomainX mesh_x(SplineInterpPointsX::get_domain<IDimX>());
+    IDomainVx mesh_vx(SplineInterpPointsVx::get_domain<IDimVx>());
+    IDomainXVx meshXVx(mesh_x, mesh_vx);
 
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
 
     IDomainSpXVx const meshSpXVx(dom_kinsp, meshXVx);
-    IDomainSpVx const meshSpVx(dom_kinsp, interpolation_domain_vx);
+    IDomainSpVx const meshSpVx(dom_kinsp, mesh_vx);
 
     SplineXBuilder const builder_x(meshXVx);
-    SplineXBuilder_1d const builder_x_poisson(interpolation_domain_x);
+    SplineXBuilder_1d const builder_x_poisson(mesh_x);
     SplineVxBuilder const builder_vx(meshXVx);
-    SplineVxBuilder_1d const builder_vx_poisson(interpolation_domain_vx);
+    SplineVxBuilder_1d const builder_vx_poisson(mesh_vx);
 
     host_t<FieldSp<int>> kinetic_charges(dom_kinsp);
     host_t<DFieldSp> masses(dom_kinsp);
@@ -199,19 +200,6 @@ int main(int argc, char** argv)
     BslAdvectionSpatial<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
     BslAdvectionVelocity<GeometryXVx, IDimVx> const advection_vx(spline_vx_interpolator);
 
-    // Creating of mesh for output saving
-    IDomainX const gridx = ddc::select<IDimX>(meshSpXVx);
-    host_t<FieldX<CoordX>> meshX_coord(gridx);
-    for (IndexX const ix : gridx) {
-        meshX_coord(ix) = ddc::coordinate(ix);
-    }
-
-    IDomainVx const gridvx = ddc::select<IDimVx>(meshSpXVx);
-    host_t<FieldVx<CoordVx>> meshVx_coord(gridvx);
-    for (IndexVx const ivx : gridvx) {
-        meshVx_coord(ivx) = ddc::coordinate(ivx);
-    }
-
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
 #ifdef PERIODIC_RDIMX
@@ -220,7 +208,7 @@ int main(int argc, char** argv)
     using FemQNSolverX = FemNonPeriodicQNSolver;
 #endif
     host_t<DFieldVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(gridvx, builder_vx_poisson);
+            = neumann_spline_quadrature_coefficients(mesh_vx, builder_vx_poisson);
     auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
@@ -232,8 +220,8 @@ int main(int argc, char** argv)
     // Starting the code
     ddc::expose_to_pdi("Nx_spline_cells", x_ncells.value());
     ddc::expose_to_pdi("Nvx_spline_cells", vx_ncells.value());
-    ddc::expose_to_pdi("MeshX", meshX_coord);
-    ddc::expose_to_pdi("MeshVx", meshVx_coord);
+    expose_mesh_to_pdi("MeshX", mesh_x);
+    expose_mesh_to_pdi("MeshVx", mesh_vx);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
     ddc::expose_to_pdi("Nkinspecies", nb_kinspecies.value());
     ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
