@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.15)
 
 add_subdirectory(utils)
 add_subdirectory(speciesinfo)
+add_subdirectory(io)
 add_subdirectory(paraconfpp)
 add_subdirectory(quadrature)
 add_subdirectory(geometry5D)
