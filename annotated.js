@@ -34,10 +34,10 @@ var annotated =
     [ "CartesianToBarycentricCoordinates", "classCartesianToBarycentricCoordinates.html", "classCartesianToBarycentricCoordinates" ],
     [ "ChargeDensityCalculator", "classChargeDensityCalculator.html", "classChargeDensityCalculator" ],
     [ "CircularToCartesian", "classCircularToCartesian.html", "classCircularToCartesian" ],
-    [ "Collisions", "classCollisions.html", "classCollisions" ],
     [ "CollisionsGuard", "classCollisionsGuard.html", "classCollisionsGuard" ],
     [ "CollisionsInter", "classCollisionsInter.html", "classCollisionsInter" ],
     [ "CollisionsIntra", "classCollisionsIntra.html", "classCollisionsIntra" ],
+    [ "CollisionSpVparMu", "classCollisionSpVparMu.html", "classCollisionSpVparMu" ],
     [ "ConstantFluidInitialization", "classConstantFluidInitialization.html", "classConstantFluidInitialization" ],
     [ "ConstantRate", "classConstantRate.html", "classConstantRate" ],
     [ "CosineEvaluator", "structCosineEvaluator.html", [

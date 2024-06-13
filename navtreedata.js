@@ -59,7 +59,7 @@ var NAVTREE =
       [ "Usage", "simulations_geometryXVx_neutrals.html#simulations_geometryXVx_neutrals__Usage", null ]
     ] ],
     [ "Gyselalib++ contents", "src.html", "src" ],
-    [ "Collisions", "src_geometry5D_rhs_collisions.html", null ],
+    [ "Collisions", "src_collision.html", null ],
     [ "Reaction rates", "src_geometryXVx_geometryMX_reactionrates.html", null ],
     [ "Time integration hybrid", "src_geometryXVx_time_integration_hybrid.html", null ],
     [ "Functions used for input and output.", "src_io.html", null ],
@@ -83,11 +83,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCurvilinear2DToCartesian.html#a2a2a127c36b9f0e5d141d893bde33237",
-"classIPreallocatableInterpolatorRP.html",
-"classPolarSplineEvaluator.html#a26c51eff107663001aee27e8285da70d",
-"ddc__helper_8hpp_source.html",
-"src_advection.html"
+"classCrankNicolson.html#a32ec24437204217997fa7f7da514bcb2",
+"classIPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01ODims_8_8_8_01_4_00_01FullDomain_00_01LayoutSpace_00_01MemorySpace_01_4.html#af648c5c187b5cb1810c39a2979f397d8",
+"classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner3Tag",
+"cosine__evaluator_8hpp_source.html",
+"spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
