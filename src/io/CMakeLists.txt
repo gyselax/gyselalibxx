@@ -14,6 +14,7 @@ target_include_directories("io"
 target_link_libraries("io"
     INTERFACE
         DDC::DDC
+        gslx::paraconfpp
 )
 
 add_library("gslx::io" ALIAS "io")

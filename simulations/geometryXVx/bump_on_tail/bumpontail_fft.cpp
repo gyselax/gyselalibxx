@@ -20,6 +20,7 @@
 #include "chargedensitycalculator.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
+#include "input.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"

@@ -25,6 +25,7 @@
 #include "crank_nicolson.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
+#include "input.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
@@ -90,43 +91,15 @@ int main(int argc, char** argv)
     double const dt(PCpp_double(conf_gyselalibxx, ".Time.delta_t"));
     double const final_T(PCpp_double(conf_gyselalibxx, ".Time.final_T"));
 
-    CoordR const r_min(PCpp_double(conf_gyselalibxx, ".Mesh.r_min"));
-    CoordR const r_max(PCpp_double(conf_gyselalibxx, ".Mesh.r_max"));
-    IVectR const r_size(Nr);
-
-    CoordP const p_min(0.0);
-    CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(Nt);
-
-    std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordP> p_knots(p_size + 1);
-
-    double const dr((r_max - r_min) / r_size);
-    double const dp((p_max - p_min) / p_size);
-
-    r_knots[0] = r_min;
-    for (int i(1); i < r_size; ++i) {
-        r_knots[i] = r_min + i * dr;
-    }
-    r_knots[r_size] = r_max;
-
-    p_knots[p_size] = p_min;
-    for (int i(1); i < p_size; ++i) {
-        p_knots[i] = CoordP(p_min + i * dp);
-    }
-    p_knots[p_size] = p_max;
-
-
-    // Creating mesh & supports:
-    ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesP>(p_knots);
-
-    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling<IDimR>());
-    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling<IDimP>());
-
-    IDomainR const interpolation_domain_R(SplineInterpPointsR::get_domain<IDimR>());
-    IDomainP const interpolation_domain_P(SplineInterpPointsP::get_domain<IDimP>());
-    IDomainRP const grid(interpolation_domain_R, interpolation_domain_P);
+    IDomainR const mesh_r = init_pseudo_uniform_spline_dependent_domain<
+            IDimR,
+            BSplinesR,
+            SplineInterpPointsR>(conf_gyselalibxx, "r");
+    IDomainP const mesh_p = init_pseudo_uniform_spline_dependent_domain<
+            IDimP,
+            BSplinesP,
+            SplineInterpPointsP>(conf_gyselalibxx, "p");
+    IDomainRP const grid(mesh_r, mesh_p);
 
     FieldRP<CoordRP> coords(grid);
     ddc::for_each(grid, [&](IndexRP const irp) { coords(irp) = ddc::coordinate(irp); });
@@ -136,8 +109,10 @@ int main(int argc, char** argv)
     SplineRPBuilder const builder(grid);
 
     // --- Define the mapping. ------------------------------------------------------------------------
-    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(r_min);
-    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(r_max);
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(
+            ddc::coordinate(mesh_r.front()));
+    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(
+            ddc::coordinate(mesh_r.back()));
 
     SplineRPEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,

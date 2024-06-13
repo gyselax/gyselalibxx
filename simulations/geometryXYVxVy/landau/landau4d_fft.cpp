@@ -17,6 +17,7 @@
 #include "bsl_advection_x.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
+#include "input.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "output.hpp"
@@ -63,43 +64,29 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    CoordX const x_min(PCpp_double(conf_voicexx, ".SplineMesh.x_min"));
-    CoordX const x_max(PCpp_double(conf_voicexx, ".SplineMesh.x_max"));
-    IVectX const x_ncells(PCpp_int(conf_voicexx, ".SplineMesh.x_ncells"));
-
-    CoordY const y_min(PCpp_double(conf_voicexx, ".SplineMesh.y_min"));
-    CoordY const y_max(PCpp_double(conf_voicexx, ".SplineMesh.y_max"));
-    IVectY const y_ncells(PCpp_int(conf_voicexx, ".SplineMesh.y_ncells"));
-
-    CoordVx const vx_min(PCpp_double(conf_voicexx, ".SplineMesh.vx_min"));
-    CoordVx const vx_max(PCpp_double(conf_voicexx, ".SplineMesh.vx_max"));
-    IVectVx const vx_ncells(PCpp_int(conf_voicexx, ".SplineMesh.vx_ncells"));
-
-    CoordVy const vy_min(PCpp_double(conf_voicexx, ".SplineMesh.vy_min"));
-    CoordVy const vy_max(PCpp_double(conf_voicexx, ".SplineMesh.vy_max"));
-    IVectVy const vy_ncells(PCpp_int(conf_voicexx, ".SplineMesh.vy_ncells"));
-
-    // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_ncells);
-    ddc::init_discrete_space<BSplinesY>(y_min, y_max, y_ncells);
-    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
-    ddc::init_discrete_space<BSplinesVy>(vy_min, vy_max, vy_ncells);
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
-    ddc::init_discrete_space<IDimY>(SplineInterpPointsY::get_sampling<IDimY>());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
-    ddc::init_discrete_space<IDimVy>(SplineInterpPointsVy::get_sampling<IDimVy>());
+    IDomainX const mesh_x = init_spline_dependent_domain<
+            IDimX,
+            BSplinesX,
+            SplineInterpPointsX>(conf_voicexx, "x");
+    IDomainY const mesh_y = init_spline_dependent_domain<
+            IDimY,
+            BSplinesY,
+            SplineInterpPointsY>(conf_voicexx, "y");
+    IDomainVx const mesh_vx = init_spline_dependent_domain<
+            IDimVx,
+            BSplinesVx,
+            SplineInterpPointsVx>(conf_voicexx, "vx");
+    IDomainVy const mesh_vy = init_spline_dependent_domain<
+            IDimVy,
+            BSplinesVy,
+            SplineInterpPointsVy>(conf_voicexx, "vy");
+    IDomainXY const mesh_xy(mesh_x, mesh_y);
+    IDomainVxVy mesh_vxvy(mesh_vx, mesh_vy);
+    IDomainXYVxVy const meshXYVxVy(mesh_x, mesh_y, mesh_vx, mesh_vy);
 
     IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
 
-    IDomainX mesh_x(SplineInterpPointsX::get_domain<IDimX>());
-    IDomainY mesh_y(SplineInterpPointsY::get_domain<IDimY>());
-    IDomainXY mesh_xy(mesh_x, mesh_y);
-    IDomainVx mesh_vx(SplineInterpPointsVx::get_domain<IDimVx>());
-    IDomainVy mesh_vy(SplineInterpPointsVy::get_domain<IDimVy>());
-    IDomainVxVy mesh_vxvy(mesh_vx, mesh_vy);
-
-    IDomainXYVxVy meshXYVxVy(mesh_x, mesh_y, mesh_vx, mesh_vy);
     IDomainSpVxVy const meshSpVxVy(dom_kinsp, mesh_vx, mesh_vy);
     IDomainSpXYVxVy const meshSpXYVxVy(dom_kinsp, meshXYVxVy);
 
@@ -188,14 +175,14 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolator const spline_y_interpolator(builder_y, spline_y_evaluator);
 
-    ddc::ConstantExtrapolationRule<RDimVx> bv_vx_min(vx_min);
-    ddc::ConstantExtrapolationRule<RDimVx> bv_vx_max(vx_max);
+    ddc::ConstantExtrapolationRule<RDimVx> bv_vx_min(ddc::coordinate(mesh_vx.front()));
+    ddc::ConstantExtrapolationRule<RDimVx> bv_vx_max(ddc::coordinate(mesh_vx.back()));
     SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
 
     PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
-    ddc::ConstantExtrapolationRule<RDimVy> bv_vy_min(vy_min);
-    ddc::ConstantExtrapolationRule<RDimVy> bv_vy_max(vy_max);
+    ddc::ConstantExtrapolationRule<RDimVy> bv_vy_min(ddc::coordinate(mesh_vy.front()));
+    ddc::ConstantExtrapolationRule<RDimVy> bv_vy_max(ddc::coordinate(mesh_vy.back()));
     SplineVyEvaluator const spline_vy_evaluator(bv_vy_min, bv_vy_max);
 
     PreallocatableSplineInterpolator const spline_vy_interpolator(builder_vy, spline_vy_evaluator);
@@ -222,10 +209,10 @@ int main(int argc, char** argv)
     PredCorr const predcorr(vlasov, poisson);
 
     // Starting the code
-    ddc::expose_to_pdi("Nx_spline_cells", x_ncells.value());
-    ddc::expose_to_pdi("Ny_spline_cells", y_ncells.value());
-    ddc::expose_to_pdi("Nvx_spline_cells", vx_ncells.value());
-    ddc::expose_to_pdi("Nvy_spline_cells", vy_ncells.value());
+    ddc::expose_to_pdi("Nx_spline_cells", ddc::discrete_space<BSplinesX>().ncells());
+    ddc::expose_to_pdi("Ny_spline_cells", ddc::discrete_space<BSplinesY>().ncells());
+    ddc::expose_to_pdi("Nvx_spline_cells", ddc::discrete_space<BSplinesVx>().ncells());
+    ddc::expose_to_pdi("Nvy_spline_cells", ddc::discrete_space<BSplinesVy>().ncells());
     expose_mesh_to_pdi("MeshX", mesh_x);
     expose_mesh_to_pdi("MeshY", mesh_y);
     expose_mesh_to_pdi("MeshVx", mesh_vx);
