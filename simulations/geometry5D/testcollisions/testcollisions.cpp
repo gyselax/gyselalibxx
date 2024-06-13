@@ -13,7 +13,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "collisions.hpp"
+#include "CollisionSpVparMu.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "pdi_out.yml.hpp"
@@ -226,7 +226,10 @@ int main(int argc, char** argv)
 
     // Collision operator initialisation
     DFieldTor1 nustar0_r(dom_tor1);
-    ddc::parallel_fill(nustar0_r, 0.0);
+    ddc::parallel_fill(nustar0_r, 0.0); //ATTENTION: Must be changed
+    DDomTorCS dom_tor1_tor2(dom_tor2, dom_tor1);
+    DFieldTorCS B_norm(dom_tor1_tor2);
+    ddc::parallel_fill(B_norm, 1.0);
     host_t<DFieldVpar> const coeff_intdvpar_host
             = simpson_quadrature_coefficients_1d(allfdistribu.domain<GridVpar>());
     host_t<DFieldMu> const coeff_intdmu_host
@@ -238,7 +241,12 @@ int main(int argc, char** argv)
             Kokkos::DefaultExecutionSpace(),
             coeff_intdmu_host.span_cview());
 
-    Collisions collision_operator(dom_sp_tor3D_v2D, coeff_intdmu, coeff_intdvpar, nustar0_r);
+    CollisionSpVparMu collision_operator(
+            dom_sp_tor3D_v2D,
+            coeff_intdmu.span_cview(),
+            coeff_intdvpar.span_cview(),
+            nustar0_r.span_view(),
+            B_norm.span_view());
 
     steady_clock::time_point const start = steady_clock::now();
 
