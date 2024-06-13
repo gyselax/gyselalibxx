@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b":[18,0,11,5,0],
 "spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769":[18,0,11,5,1],
 "spline__quadrature_8hpp_source.html":[18,0,11,5],
 "splitrighthandsidesolver_8hpp_source.html":[18,0,4,0,1],
