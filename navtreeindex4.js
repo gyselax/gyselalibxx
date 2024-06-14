@@ -246,8 +246,8 @@ var NAVTREEINDEX4 =
 "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Usage":[7,1,0,1],
 "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Verification_of_the_simulation":[7,1,0,3],
 "species__info_8hpp_source.html":[18,0,12,1],
+"species__init_8hpp_source.html":[18,0,12,2],
 "spline__foot__finder_8hpp_source.html":[18,0,3,0,5],
 "spline__interpolator_8hpp_source.html":[18,0,6,3],
-"spline__interpolator__2d__rp_8hpp_source.html":[18,0,3,4,1],
-"spline__quadrature_8hpp.html":[18,0,11,5]
+"spline__interpolator__2d__rp_8hpp_source.html":[18,0,3,4,1]
 };

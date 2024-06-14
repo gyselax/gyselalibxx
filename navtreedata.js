@@ -87,7 +87,7 @@ var NAVTREEINDEX =
 "classIPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01ODims_8_8_8_01_4_00_01FullDomain_00_01LayoutSpace_00_01MemorySpace_01_4.html#af648c5c187b5cb1810c39a2979f397d8",
 "classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner3Tag",
 "cosine__evaluator_8hpp_source.html",
-"spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b"
+"spline__quadrature_8hpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
