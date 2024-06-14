@@ -15,6 +15,7 @@
 
 #include "CollisionSpVparMu.hpp"
 #include "geometry.hpp"
+#include "input.hpp"
 #include "paraconfpp.hpp"
 #include "pdi_out.yml.hpp"
 #include "simpson_quadrature.hpp"
@@ -32,27 +33,9 @@ int main(int argc, char** argv)
     ddc::ScopeGuard ddc_scope(argc, argv);
     CollisionsGuard a_collision_guard {8, 0};
 
-    long int iter_start(0);
+    long int iter_start;
     PC_tree_t conf_gyselax;
-    if (argc == 2) {
-        conf_gyselax = PC_parse_path(fs::path(argv[1]).c_str());
-    } else if (argc == 3) {
-        if (argv[1] == std::string_view("--dump-config")) {
-            std::fstream file(argv[2], std::fstream::out);
-            file << params_yaml;
-            return EXIT_SUCCESS;
-        }
-    } else if (argc == 4) {
-        if (argv[1] == std::string_view("--iter-restart")) {
-            iter_start = std::strtol(argv[2], NULL, 10);
-            conf_gyselax = PC_parse_path(fs::path(argv[3]).c_str());
-        }
-    } else {
-        cerr << "usage: " << argv[0] << " [--dump-config] <config_file.yml>" << endl;
-        cerr << "or to perform a restart" << argv[0] << " [--iter-restart] <iter> <config_file.yml>"
-             << endl;
-        return EXIT_FAILURE;
-    }
+    parse_executable_arguments(conf_gyselax, iter_start, argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
     PDI_init(conf_pdi);
