@@ -1,8 +1,37 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <ddc/ddc.hpp>
+
 #include <paraconf.h>
 
 #include "paraconfpp.hpp"
+
+/**
+ * @brief Extract the paraconf configuration and the restart iteration from the executable arguments.
+ *
+ * @param[out] conf_voicexx The paraconf configuration describing the simulation.
+ * @param[out] iter_start The index of the iteration from which the simulation should restart.
+ * @param[in] argc The number of arguments passed to the executable.
+ * @param[in] argv The arguments passed to the executable.
+ * @param[in] params_yaml The default parameters for the yaml file.
+ */
+void parse_executable_arguments(
+        PC_tree_t& conf_voicexx,
+        long int& iter_start,
+        int argc,
+        char** argv,
+        char const* const params_yaml);
+
+/**
+ * @brief Extract the paraconf configuration from the executable arguments.
+ *
+ * @param[in] argc The number of arguments passed to the executable.
+ * @param[in] argv The arguments passed to the executable.
+ * @param[in] params_yaml The default parameters for the yaml file.
+ *
+ * @returns The paraconf configuration describing the simulation.
+ */
+PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const params_yaml);
 
 /**
  * Initialise a domain which will serve as an interpolation domain for splines.
