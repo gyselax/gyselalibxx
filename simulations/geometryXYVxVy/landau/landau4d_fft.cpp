@@ -27,7 +27,8 @@
 #include "predcorr.hpp"
 #include "qnsolver.hpp"
 #include "singlemodeperturbinitialization.hpp"
-//#include "species_info.hpp"
+#include "species_info.hpp"
+#include "species_init.hpp"
 #include "spline_interpolator.hpp"
 #include "splitvlasovsolver.hpp"
 
@@ -72,8 +73,7 @@ int main(int argc, char** argv)
     IDomainVxVy mesh_vxvy(mesh_vx, mesh_vy);
     IDomainXYVxVy const meshXYVxVy(mesh_x, mesh_y, mesh_vx, mesh_vy);
 
-    IVectSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
-    IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
+    IDomainSp const dom_kinsp = init_species(conf_voicexx);
 
     IDomainSpVxVy const meshSpVxVy(dom_kinsp, mesh_vx, mesh_vy);
     IDomainSpXYVxVy const meshSpXYVxVy(dom_kinsp, meshXYVxVy);
@@ -85,29 +85,15 @@ int main(int argc, char** argv)
     SplineVxBuilder_1d const builder_vx_1d(mesh_vx);
     SplineVyBuilder_1d const builder_vy_1d(mesh_vy);
 
-    host_t<FieldSp<int>> kinetic_charges(dom_kinsp);
-    host_t<DFieldSp> masses(dom_kinsp);
     host_t<DFieldSp> density_eq(dom_kinsp);
     host_t<DFieldSp> temperature_eq(dom_kinsp);
     host_t<DFieldSp> mean_velocity_eq(dom_kinsp);
     host_t<DFieldSp> init_perturb_amplitude(dom_kinsp);
     host_t<FieldSp<int>> init_perturb_mode(dom_kinsp);
 
-    int nb_elec_adiabspecies = 1;
-    int nb_ion_adiabspecies = 1;
-
     for (IndexSp const isp : dom_kinsp) {
-        // --> SpeciesInfo info
         PC_tree_t const conf_isp = PCpp_get(conf_voicexx, ".SpeciesInfo[%d]", isp.uid());
 
-        kinetic_charges(isp) = static_cast<int>(PCpp_int(conf_isp, ".charge"));
-        if (kinetic_charges(isp) == -1) {
-            nb_elec_adiabspecies = 0;
-        } else {
-            nb_ion_adiabspecies = 0;
-        }
-
-        masses(isp) = PCpp_double(conf_isp, ".mass");
         density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
         temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
         mean_velocity_eq(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
@@ -115,19 +101,7 @@ int main(int argc, char** argv)
         init_perturb_mode(isp) = PCpp_double(conf_isp, ".perturb_mode");
     }
 
-    // Create the domain of all species including kinetic species + adiabatic species (if existing)
-    IDomainSp const
-            dom_allsp(IndexSp(0), nb_kinspecies + nb_elec_adiabspecies + nb_ion_adiabspecies);
-    host_t<FieldSp<int>> charges(dom_allsp);
-    for (IndexSp isp : dom_kinsp) {
-        charges(isp) = kinetic_charges(isp);
-    }
-    if (nb_elec_adiabspecies + nb_ion_adiabspecies > 0) {
-        charges(dom_kinsp.back() + 1) = nb_ion_adiabspecies - nb_elec_adiabspecies;
-    }
-
     // Initialization of the distribution function
-    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
     DFieldSpVxVy allfequilibrium(meshSpVxVy);
     MaxwellianEquilibrium const init_fequilibrium(
             std::move(density_eq),
@@ -206,7 +180,7 @@ int main(int argc, char** argv)
     expose_mesh_to_pdi("MeshVx", mesh_vx);
     expose_mesh_to_pdi("MeshVy", mesh_vy);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
-    ddc::expose_to_pdi("Nkinspecies", nb_kinspecies.value());
+    ddc::expose_to_pdi("Nkinspecies", dom_kinsp.size());
     ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
     ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[dom_kinsp]);
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
