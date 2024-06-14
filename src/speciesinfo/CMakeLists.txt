@@ -1,15 +1,15 @@
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.15)
-
-add_library(speciesinfo INTERFACE)
-target_include_directories(speciesinfo
-    INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+add_library(speciesinfo STATIC
+    species_init.cpp
 )
-target_link_libraries(speciesinfo INTERFACE
+target_include_directories(speciesinfo
+    PUBLIC
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>")
+target_link_libraries(speciesinfo 
     DDC::DDC
-    sll::SLL
+    gslx::paraconfpp
+    gslx::utils
 )
 add_library(gslx::speciesinfo ALIAS speciesinfo)
 
