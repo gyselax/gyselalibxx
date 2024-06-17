@@ -4,6 +4,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <ddc_helper.hpp>
+
 /// @brief Species discrete dimension to access constant attributes related to species.
 class SpeciesInformation
 {
@@ -161,3 +163,20 @@ KOKKOS_INLINE_FUNCTION double mass(ddc::DiscreteElement<IDimSp> const isp)
 {
     return ddc::discrete_space<IDimSp>().mass(isp);
 }
+
+using IndexSp = ddc::DiscreteElement<IDimSp>;
+using IDomainSp = ddc::DiscreteDomain<IDimSp>; // --> Should be DomSp
+using IVectSp = ddc::DiscreteVector<IDimSp>; // --> Should be VectSp or VecSp
+
+template <class ElementType>
+using FieldSp = ddc::Chunk<ElementType, IDomainSp>;
+using DFieldSp = FieldSp<double>;
+using IFieldSp = device_t<ddc::Chunk<int, IDomainSp>>;
+
+template <class ElementType>
+using ViewSp = ddc::ChunkView<ElementType const, IDomainSp>;
+using DViewSp = ViewSp<double>;
+
+template <class ElementType>
+using SpanSp = device_t<ddc::ChunkSpan<ElementType, IDomainSp>>;
+using DSpanSp = SpanSp<double>;

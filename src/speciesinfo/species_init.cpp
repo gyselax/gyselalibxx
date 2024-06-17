@@ -17,12 +17,6 @@ void init_all_species(
         int nb_kinspecies,
         int nb_fluidspecies)
 {
-    using IndexSp = ddc::DiscreteElement<IDimSp>;
-    using IDomainSp = ddc::DiscreteDomain<IDimSp>;
-    using IVectSp = ddc::DiscreteVector<IDimSp>;
-    using DFieldSp = device_t<ddc::Chunk<double, IDomainSp>>;
-    using IFieldSp = device_t<ddc::Chunk<int, IDomainSp>>;
-
     // Define the domain for kinetic species
     dom_kinsp = IDomainSp(IndexSp(0), IVectSp(nb_kinspecies));
     host_t<IFieldSp> kinetic_charges(dom_kinsp);

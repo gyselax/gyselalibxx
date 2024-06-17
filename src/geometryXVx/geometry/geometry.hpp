@@ -181,8 +181,6 @@ struct IDimM : Moments
 
 using IndexM = ddc::DiscreteElement<IDimM>;
 
-using IndexSp = ddc::DiscreteElement<IDimSp>;
-
 using IndexVx = ddc::DiscreteElement<IDimVx>;
 
 using IndexX = ddc::DiscreteElement<IDimX>;
@@ -203,8 +201,6 @@ using IndexXVx = ddc::DiscreteElement<IDimX, IDimVx>;
 
 
 using IVectM = ddc::DiscreteVector<IDimM>;
-
-using IVectSp = ddc::DiscreteVector<IDimSp>;
 
 using IVectVx = ddc::DiscreteVector<IDimVx>;
 
@@ -233,13 +229,9 @@ using BSDomainVx = ddc::DiscreteDomain<BSplinesVx>;
 
 using IDomainM = ddc::DiscreteDomain<IDimM>;
 
-using IDomainSp = ddc::DiscreteDomain<IDimSp>;
-
 using IDomainVx = ddc::DiscreteDomain<IDimVx>;
 
 using IDomainX = ddc::DiscreteDomain<IDimX>;
-
-
 
 using IDomainSpM = ddc::DiscreteDomain<IDimSp, IDimM>;
 
@@ -253,10 +245,6 @@ using IDomainSpXVx = ddc::DiscreteDomain<IDimSp, IDimX, IDimVx>;
 
 using IDomainXVx = ddc::DiscreteDomain<IDimX, IDimVx>;
 
-
-
-template <class ElementType>
-using FieldSp = device_t<ddc::Chunk<ElementType, IDomainSp>>;
 
 template <class ElementType>
 using FieldVx = device_t<ddc::Chunk<ElementType, IDomainVx>>;
@@ -288,8 +276,6 @@ using FieldSpXVx = device_t<ddc::Chunk<ElementType, IDomainSpXVx>>;
 template <class DomainType>
 using DField = device_t<ddc::Chunk<double, DomainType>>;
 
-using DFieldSp = FieldSp<double>;
-
 using DFieldVx = FieldVx<double>;
 
 using DFieldX = FieldX<double>;
@@ -311,9 +297,6 @@ using DFieldSpXVx = FieldSpXVx<double>;
 
 template <class ElementType>
 using BSSpanX = device_t<ddc::ChunkSpan<ElementType, BSDomainX>>;
-
-template <class ElementType>
-using SpanSp = device_t<ddc::ChunkSpan<ElementType, IDomainSp>>;
 
 template <class ElementType>
 using SpanX = device_t<ddc::ChunkSpan<ElementType, IDomainX>>;
@@ -339,8 +322,6 @@ using DSpan = device_t<ddc::ChunkSpan<double, DomainType>>;
 
 using DBSSpanX = BSSpanX<double>;
 
-using DSpanSp = SpanSp<double>;
-
 using DSpanVx = SpanVx<double>;
 
 using DSpanX = SpanX<double>;
@@ -353,10 +334,6 @@ using DSpanSpX = SpanSpX<double>;
 
 using DSpanSpXVx = SpanSpXVx<double>;
 
-
-
-template <class ElementType>
-using ViewSp = device_t<ddc::ChunkSpan<ElementType const, IDomainSp>>;
 
 template <class ElementType>
 using ViewVx = device_t<ddc::ChunkSpan<ElementType const, IDomainVx>>;
@@ -387,8 +364,6 @@ using ViewSpXVx = device_t<ddc::ChunkSpan<ElementType const, IDomainSpXVx>>;
 
 template <class DomainType>
 using DView = device_t<ddc::ChunkSpan<double const, DomainType>>;
-
-using DViewSp = ViewSp<double>;
 
 using DViewVx = ViewVx<double>;
 

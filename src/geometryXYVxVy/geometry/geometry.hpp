@@ -256,7 +256,6 @@ using BSViewXY = device_t<ddc::ChunkSpan<ElementType const, BSDomainXY>>;
 using DBSViewXY = BSViewXY<double>;
 
 // Index
-using IndexSp = ddc::DiscreteElement<IDimSp>;
 using IndexX = ddc::DiscreteElement<IDimX>;
 using IndexY = ddc::DiscreteElement<IDimY>;
 using IndexXY = ddc::DiscreteElement<IDimX, IDimY>;
@@ -267,14 +266,12 @@ using IndexXYVxVy = ddc::DiscreteElement<IDimX, IDimY, IDimVx, IDimVy>;
 using IndexSpXYVxVy = ddc::DiscreteElement<IDimSp, IDimX, IDimY, IDimVx, IDimVy>;
 
 // IVect definition
-using IVectSp = ddc::DiscreteVector<IDimSp>;
 using IVectX = ddc::DiscreteVector<IDimX>;
 using IVectY = ddc::DiscreteVector<IDimY>;
 using IVectVx = ddc::DiscreteVector<IDimVx>;
 using IVectVy = ddc::DiscreteVector<IDimVy>;
 
 // Idomain definition
-using IDomainSp = ddc::DiscreteDomain<IDimSp>;
 using IDomainX = ddc::DiscreteDomain<IDimX>;
 using IDomainY = ddc::DiscreteDomain<IDimY>;
 using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
@@ -284,11 +281,6 @@ using IDomainXYVxVy = ddc::DiscreteDomain<IDimX, IDimY, IDimVx, IDimVy>;
 using IDomainVxVy = ddc::DiscreteDomain<IDimVx, IDimVy>;
 using IDomainSpVxVy = ddc::DiscreteDomain<IDimSp, IDimVx, IDimVy>;
 using IDomainSpXYVxVy = ddc::DiscreteDomain<IDimSp, IDimX, IDimY, IDimVx, IDimVy>;
-
-// Field definition
-template <class ElementType>
-using FieldSp = device_t<ddc::Chunk<ElementType, IDomainSp>>;
-using DFieldSp = FieldSp<double>;
 
 template <class ElementType>
 using FieldX = device_t<ddc::Chunk<ElementType, IDomainX>>;
@@ -358,10 +350,6 @@ using SpanSpXYVxVy = device_t<ddc::ChunkSpan<ElementType, IDomainSpXYVxVy>>;
 using DSpanSpXYVxVy = SpanSpXYVxVy<double>;
 
 // View definition
-template <class ElementType>
-using ViewSp = device_t<ddc::ChunkSpan<ElementType const, IDomainSp>>;
-using DViewSp = ViewSp<double>;
-
 template <class ElementType>
 using ViewX = device_t<ddc::ChunkSpan<ElementType const, IDomainX>>;
 

@@ -6,17 +6,6 @@
 
 #include <species_info.hpp>
 
-namespace {
-
-
-using IVectSp = ddc::DiscreteVector<IDimSp>;
-using IndexSp = ddc::DiscreteElement<IDimSp>;
-using IDomainSp = ddc::DiscreteDomain<IDimSp>;
-template <class ElementType>
-using FieldSp = ddc::Chunk<ElementType, IDomainSp>;
-
-} // namespace
-
 TEST(SpeciesInfo, Ielec)
 {
     IVectSp const nb_kinspecies(2);
