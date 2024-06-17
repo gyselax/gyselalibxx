@@ -337,179 +337,167 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2geometry_2geometry_8hp
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="keyword">using</span> DBSViewXY = BSViewXY&lt;double&gt;;</div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">// Index</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="keyword">using</span> IndexSp = ddc::DiscreteElement&lt;IDimSp&gt;;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="keyword">using</span> IndexX = ddc::DiscreteElement&lt;IDimX&gt;;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="keyword">using</span> IndexY = ddc::DiscreteElement&lt;IDimY&gt;;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="keyword">using</span> IndexXY = ddc::DiscreteElement&lt;IDimX, IDimY&gt;;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keyword">using</span> IndexVx = ddc::DiscreteElement&lt;IDimVx&gt;;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="keyword">using</span> IndexVy = ddc::DiscreteElement&lt;IDimVy&gt;;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="keyword">using</span> IndexVxVy = ddc::DiscreteElement&lt;IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="keyword">using</span> IndexXYVxVy = ddc::DiscreteElement&lt;IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keyword">using</span> IndexSpXYVxVy = ddc::DiscreteElement&lt;IDimSp, IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">// IVect definition</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="keyword">using</span> IVectSp = ddc::DiscreteVector&lt;IDimSp&gt;;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="keyword">using</span> IVectX = ddc::DiscreteVector&lt;IDimX&gt;;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="keyword">using</span> IVectY = ddc::DiscreteVector&lt;IDimY&gt;;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="keyword">using</span> IVectVx = ddc::DiscreteVector&lt;IDimVx&gt;;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="keyword">using</span> IVectVy = ddc::DiscreteVector&lt;IDimVy&gt;;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">// Idomain definition</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="keyword">using</span> IDomainSp = ddc::DiscreteDomain&lt;IDimSp&gt;;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="keyword">using</span> IDomainX = ddc::DiscreteDomain&lt;IDimX&gt;;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="keyword">using</span> IDomainY = ddc::DiscreteDomain&lt;IDimY&gt;;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="keyword">using</span> IDomainXY = ddc::DiscreteDomain&lt;IDimX, IDimY&gt;;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="keyword">using</span> IDomainVx = ddc::DiscreteDomain&lt;IDimVx&gt;;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="keyword">using</span> IDomainVy = ddc::DiscreteDomain&lt;IDimVy&gt;;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="keyword">using</span> IDomainXYVxVy = ddc::DiscreteDomain&lt;IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="keyword">using</span> IDomainVxVy = ddc::DiscreteDomain&lt;IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="keyword">using</span> IDomainSpVxVy = ddc::DiscreteDomain&lt;IDimSp, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="keyword">using</span> IDomainSpXYVxVy = ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">// Field definition</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="keyword">using</span> IndexX = ddc::DiscreteElement&lt;IDimX&gt;;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="keyword">using</span> IndexY = ddc::DiscreteElement&lt;IDimY&gt;;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="keyword">using</span> IndexXY = ddc::DiscreteElement&lt;IDimX, IDimY&gt;;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="keyword">using</span> IndexVx = ddc::DiscreteElement&lt;IDimVx&gt;;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keyword">using</span> IndexVy = ddc::DiscreteElement&lt;IDimVy&gt;;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="keyword">using</span> IndexVxVy = ddc::DiscreteElement&lt;IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="keyword">using</span> IndexXYVxVy = ddc::DiscreteElement&lt;IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="keyword">using</span> IndexSpXYVxVy = ddc::DiscreteElement&lt;IDimSp, IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">// IVect definition</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="keyword">using</span> IVectX = ddc::DiscreteVector&lt;IDimX&gt;;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="keyword">using</span> IVectY = ddc::DiscreteVector&lt;IDimY&gt;;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="keyword">using</span> IVectVx = ddc::DiscreteVector&lt;IDimVx&gt;;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="keyword">using</span> IVectVy = ddc::DiscreteVector&lt;IDimVy&gt;;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">// Idomain definition</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="keyword">using</span> IDomainX = ddc::DiscreteDomain&lt;IDimX&gt;;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="keyword">using</span> IDomainY = ddc::DiscreteDomain&lt;IDimY&gt;;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="keyword">using</span> IDomainXY = ddc::DiscreteDomain&lt;IDimX, IDimY&gt;;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="keyword">using</span> IDomainVx = ddc::DiscreteDomain&lt;IDimVx&gt;;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="keyword">using</span> IDomainVy = ddc::DiscreteDomain&lt;IDimVy&gt;;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="keyword">using</span> IDomainXYVxVy = ddc::DiscreteDomain&lt;IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="keyword">using</span> IDomainVxVy = ddc::DiscreteDomain&lt;IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="keyword">using</span> IDomainSpVxVy = ddc::DiscreteDomain&lt;IDimSp, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="keyword">using</span> IDomainSpXYVxVy = ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="keyword">using</span> FieldX = device_t&lt;ddc::Chunk&lt;ElementType, IDomainX&gt;&gt;;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="keyword">using</span> DFieldX = FieldX&lt;double&gt;;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="keyword">using</span> FieldSp = device_t&lt;ddc::Chunk&lt;ElementType, IDomainSp&gt;&gt;;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="keyword">using</span> DFieldSp = FieldSp&lt;double&gt;;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="keyword">using</span> FieldY = device_t&lt;ddc::Chunk&lt;ElementType, IDomainY&gt;&gt;;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="keyword">using</span> DFieldY = FieldY&lt;double&gt;;</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="keyword">using</span> FieldX = device_t&lt;ddc::Chunk&lt;ElementType, IDomainX&gt;&gt;;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="keyword">using</span> DFieldX = FieldX&lt;double&gt;;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="keyword">using</span> FieldXY = device_t&lt;ddc::Chunk&lt;ElementType, IDomainXY&gt;&gt;;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="keyword">using</span> DFieldXY = FieldXY&lt;double&gt;;</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="keyword">using</span> FieldY = device_t&lt;ddc::Chunk&lt;ElementType, IDomainY&gt;&gt;;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="keyword">using</span> DFieldY = FieldY&lt;double&gt;;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="keyword">using</span> FieldXY = device_t&lt;ddc::Chunk&lt;ElementType, IDomainXY&gt;&gt;;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="keyword">using</span> DFieldXY = FieldXY&lt;double&gt;;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="keyword">using</span> FieldVx = device_t&lt;ddc::Chunk&lt;ElementType, IDomainVx&gt;&gt;;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="keyword">using</span> FieldVy = device_t&lt;ddc::Chunk&lt;ElementType, IDomainVy&gt;&gt;;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="keyword">using</span> FieldVx = device_t&lt;ddc::Chunk&lt;ElementType, IDomainVx&gt;&gt;;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="keyword">using</span> FieldVy = device_t&lt;ddc::Chunk&lt;ElementType, IDomainVy&gt;&gt;;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="keyword">using</span> FieldVxVy = device_t&lt;ddc::Chunk&lt;ElementType, IDomainVxVy&gt;&gt;;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="keyword">using</span> DFieldVxVy = FieldVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="keyword">using</span> FieldXYVxVy = device_t&lt;ddc::Chunk&lt;ElementType, IDomainXYVxVy&gt;&gt;;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="keyword">using</span> DFieldXYVxVy = FieldXYVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="keyword">using</span> FieldVxVy = device_t&lt;ddc::Chunk&lt;ElementType, IDomainVxVy&gt;&gt;;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="keyword">using</span> DFieldVxVy = FieldVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="keyword">using</span> FieldSpVxVy = device_t&lt;ddc::Chunk&lt;ElementType, IDomainSpVxVy&gt;&gt;;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="keyword">using</span> DFieldSpVxVy = FieldSpVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="keyword">using</span> FieldXYVxVy = device_t&lt;ddc::Chunk&lt;ElementType, IDomainXYVxVy&gt;&gt;;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="keyword">using</span> DFieldXYVxVy = FieldXYVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="keyword">using</span> FieldSpXYVxVy = device_t&lt;ddc::Chunk&lt;ElementType, IDomainSpXYVxVy&gt;&gt;;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="keyword">using</span> DFieldSpXYVxVy = FieldSpXYVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="keyword">using</span> FieldSpVxVy = device_t&lt;ddc::Chunk&lt;ElementType, IDomainSpVxVy&gt;&gt;;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keyword">using</span> DFieldSpVxVy = FieldSpVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="keyword">using</span> FieldSpXYVxVy = device_t&lt;ddc::Chunk&lt;ElementType, IDomainSpXYVxVy&gt;&gt;;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="keyword">using</span> DFieldSpXYVxVy = FieldSpXYVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">//  Span definition</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">//  Span definition</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keyword">using</span> SpanX = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainX&gt;&gt;;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="keyword">using</span> DSpanX = SpanX&lt;double&gt;;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="keyword">using</span> SpanY = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainY&gt;&gt;;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="keyword">using</span> DSpanY = SpanY&lt;double&gt;;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="keyword">using</span> SpanX = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainX&gt;&gt;;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="keyword">using</span> DSpanX = SpanX&lt;double&gt;;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="keyword">using</span> SpanXY = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainXY&gt;&gt;;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="keyword">using</span> DSpanXY = SpanXY&lt;double&gt;;</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="keyword">using</span> SpanY = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainY&gt;&gt;;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="keyword">using</span> DSpanY = SpanY&lt;double&gt;;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="keyword">using</span> SpanVx = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainVx&gt;&gt;;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="keyword">using</span> DSpanVx = SpanVx&lt;double&gt;;</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="keyword">using</span> SpanXY = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainXY&gt;&gt;;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="keyword">using</span> DSpanXY = SpanXY&lt;double&gt;;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="keyword">using</span> SpanVy = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainVy&gt;&gt;;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="keyword">using</span> DSpanVy = SpanVy&lt;double&gt;;</div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="keyword">using</span> SpanVx = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainVx&gt;&gt;;</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="keyword">using</span> DSpanVx = SpanVx&lt;double&gt;;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="keyword">using</span> SpanVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainVxVy&gt;&gt;;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="keyword">using</span> DSpanVxVy = SpanVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="keyword">using</span> SpanVy = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainVy&gt;&gt;;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="keyword">using</span> DSpanVy = SpanVy&lt;double&gt;;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="keyword">using</span> SpanSpVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainSpVxVy&gt;&gt;;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="keyword">using</span> DSpanSpVxVy = SpanSpVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="keyword">using</span> SpanVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainVxVy&gt;&gt;;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="keyword">using</span> DSpanVxVy = SpanVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="keyword">using</span> SpanSpXYVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainSpXYVxVy&gt;&gt;;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="keyword">using</span> DSpanSpXYVxVy = SpanSpXYVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="keyword">using</span> SpanSpVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainSpVxVy&gt;&gt;;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="keyword">using</span> DSpanSpVxVy = SpanSpVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">// View definition</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="keyword">using</span> ViewX = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainX&gt;&gt;;</div>
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="keyword">using</span> SpanSpXYVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType, IDomainSpXYVxVy&gt;&gt;;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="keyword">using</span> DSpanSpXYVxVy = SpanSpXYVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">// View definition</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="keyword">using</span> ViewSp = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainSp&gt;&gt;;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="keyword">using</span> DViewSp = ViewSp&lt;double&gt;;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="keyword">using</span> ViewX = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainX&gt;&gt;;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="keyword">using</span> ViewY = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainY&gt;&gt;;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="keyword">using</span> ViewXY = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainXY&gt;&gt;;</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="keyword">using</span> DViewXY = ViewXY&lt;double&gt;;</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="keyword">using</span> ViewVx = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainVx&gt;&gt;;</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="keyword">using</span> ViewVy = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainVy&gt;&gt;;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="keyword">using</span> ViewY = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainY&gt;&gt;;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="keyword">using</span> ViewXY = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainXY&gt;&gt;;</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="keyword">using</span> DViewXY = ViewXY&lt;double&gt;;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="keyword">using</span> ViewVx = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainVx&gt;&gt;;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="keyword">using</span> ViewVy = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainVy&gt;&gt;;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="keyword">using</span> ViewVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainVxVy&gt;&gt;;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="keyword">using</span> DViewVxVy = ViewVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="keyword">using</span> ViewSpVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainSpVxVy&gt;&gt;;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="keyword">using</span> DViewSpVxVy = ViewSpVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="keyword">using</span> ViewSpXYVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainSpXYVxVy&gt;&gt;;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="keyword">using</span> DViewSpXYVxVy = ViewSpXYVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="keyword">using</span> ViewVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainVxVy&gt;&gt;;</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="keyword">using</span> DViewVxVy = ViewVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="keyword">using</span> ViewSpVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainSpVxVy&gt;&gt;;</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="keyword">using</span> DViewSpVxVy = ViewSpVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="keyword">using</span> ViewSpXYVxVy = device_t&lt;ddc::ChunkSpan&lt;ElementType const, IDomainSpXYVxVy&gt;&gt;;</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="keyword">using</span> DViewSpXYVxVy = ViewSpXYVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
-<div class="line"><a name="l00397"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html">  397</a></span>&#160;<span class="keyword">class </span><a class="code" href="classGeometryXYVxVy.html">GeometryXYVxVy</a></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;{</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00404"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">  404</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">velocity_dim_for</a> = std::conditional_t&lt;</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            std::is_same_v&lt;T, IDimX&gt;,</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            <a class="code" href="structIDimVx.html">IDimVx</a>,</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;            std::conditional_t&lt;std::is_same_v&lt;T, IDimY&gt;, <a class="code" href="structIDimVy.html">IDimVy</a>, <span class="keywordtype">void</span>&gt;&gt;;</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160; </div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    <span class="comment">// template &lt;class T&gt;</span></div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <span class="comment">// using spatial_dim_for = std::conditional_t&lt;std::is_same_v&lt;T, IDimVx&gt;, IDimX, std::conditional_t&lt;std::is_same_v&lt;T, IDimVy&gt;, IDimY, void&gt;&gt;;</span></div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
-<div class="line"><a name="l00418"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">  418</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">SpatialDDom</a> = IDomainXY;</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; </div>
-<div class="line"><a name="l00423"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a32ca2463cf7921342f7816c97121eddb">  423</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a32ca2463cf7921342f7816c97121eddb">VelocityDDom</a> = IDomainVxVy;</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160; </div>
-<div class="line"><a name="l00428"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90">  428</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90">FdistribuDDom</a> = IDomainSpXYVxVy;</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;};</div>
-<div class="ttc" id="aclassGeometryXYVxVy_html"><div class="ttname"><a href="classGeometryXYVxVy.html">GeometryXYVxVy</a></div><div class="ttdoc">A class providing aliases for useful subdomains of the geometry.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:398</div></div>
-<div class="ttc" id="aclassGeometryXYVxVy_html_a32ca2463cf7921342f7816c97121eddb"><div class="ttname"><a href="classGeometryXYVxVy.html#a32ca2463cf7921342f7816c97121eddb">GeometryXYVxVy::VelocityDDom</a></div><div class="ttdeci">IDomainVxVy VelocityDDom</div><div class="ttdoc">An alias for the velocity discrete domain type.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:423</div></div>
-<div class="ttc" id="aclassGeometryXYVxVy_html_a78e6b9a2d43d06e94d551cc736801e90"><div class="ttname"><a href="classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90">GeometryXYVxVy::FdistribuDDom</a></div><div class="ttdeci">IDomainSpXYVxVy FdistribuDDom</div><div class="ttdoc">An alias for the whole distribution function discrete domain type.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:428</div></div>
-<div class="ttc" id="aclassGeometryXYVxVy_html_a93e46a882dc277945ed3d50d7cb892ad"><div class="ttname"><a href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">GeometryXYVxVy::SpatialDDom</a></div><div class="ttdeci">IDomainXY SpatialDDom</div><div class="ttdoc">A templated type giving the spatial discrete dimension type associated to a velocity discrete dimensi...</div><div class="ttdef"><b>Definition:</b> geometry.hpp:418</div></div>
-<div class="ttc" id="aclassGeometryXYVxVy_html_a9478473d2c2f743cbd876536fb40fcc0"><div class="ttname"><a href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">GeometryXYVxVy::velocity_dim_for</a></div><div class="ttdeci">std::conditional_t&lt; std::is_same_v&lt; T, IDimX &gt;, IDimVx, std::conditional_t&lt; std::is_same_v&lt; T, IDimY &gt;, IDimVy, void &gt; &gt; velocity_dim_for</div><div class="ttdoc">A templated type giving the velocity discrete dimension type associated to a spatial discrete dimensi...</div><div class="ttdef"><b>Definition:</b> geometry.hpp:407</div></div>
+<div class="line"><a name="l00385"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html">  385</a></span>&#160;<span class="keyword">class </span><a class="code" href="classGeometryXYVxVy.html">GeometryXYVxVy</a></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;{</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00392"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">  392</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">velocity_dim_for</a> = std::conditional_t&lt;</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;            std::is_same_v&lt;T, IDimX&gt;,</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;            <a class="code" href="structIDimVx.html">IDimVx</a>,</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;            std::conditional_t&lt;std::is_same_v&lt;T, IDimY&gt;, <a class="code" href="structIDimVy.html">IDimVy</a>, <span class="keywordtype">void</span>&gt;&gt;;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <span class="comment">// template &lt;class T&gt;</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <span class="comment">// using spatial_dim_for = std::conditional_t&lt;std::is_same_v&lt;T, IDimVx&gt;, IDimX, std::conditional_t&lt;std::is_same_v&lt;T, IDimVy&gt;, IDimY, void&gt;&gt;;</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
+<div class="line"><a name="l00406"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">  406</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">SpatialDDom</a> = IDomainXY;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
+<div class="line"><a name="l00411"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a32ca2463cf7921342f7816c97121eddb">  411</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a32ca2463cf7921342f7816c97121eddb">VelocityDDom</a> = IDomainVxVy;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
+<div class="line"><a name="l00416"></a><span class="lineno"><a class="line" href="classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90">  416</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90">FdistribuDDom</a> = IDomainSpXYVxVy;</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;};</div>
+<div class="ttc" id="aclassGeometryXYVxVy_html"><div class="ttname"><a href="classGeometryXYVxVy.html">GeometryXYVxVy</a></div><div class="ttdoc">A class providing aliases for useful subdomains of the geometry.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:386</div></div>
+<div class="ttc" id="aclassGeometryXYVxVy_html_a32ca2463cf7921342f7816c97121eddb"><div class="ttname"><a href="classGeometryXYVxVy.html#a32ca2463cf7921342f7816c97121eddb">GeometryXYVxVy::VelocityDDom</a></div><div class="ttdeci">IDomainVxVy VelocityDDom</div><div class="ttdoc">An alias for the velocity discrete domain type.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:411</div></div>
+<div class="ttc" id="aclassGeometryXYVxVy_html_a78e6b9a2d43d06e94d551cc736801e90"><div class="ttname"><a href="classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90">GeometryXYVxVy::FdistribuDDom</a></div><div class="ttdeci">IDomainSpXYVxVy FdistribuDDom</div><div class="ttdoc">An alias for the whole distribution function discrete domain type.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:416</div></div>
+<div class="ttc" id="aclassGeometryXYVxVy_html_a93e46a882dc277945ed3d50d7cb892ad"><div class="ttname"><a href="classGeometryXYVxVy.html#a93e46a882dc277945ed3d50d7cb892ad">GeometryXYVxVy::SpatialDDom</a></div><div class="ttdeci">IDomainXY SpatialDDom</div><div class="ttdoc">A templated type giving the spatial discrete dimension type associated to a velocity discrete dimensi...</div><div class="ttdef"><b>Definition:</b> geometry.hpp:406</div></div>
+<div class="ttc" id="aclassGeometryXYVxVy_html_a9478473d2c2f743cbd876536fb40fcc0"><div class="ttname"><a href="classGeometryXYVxVy.html#a9478473d2c2f743cbd876536fb40fcc0">GeometryXYVxVy::velocity_dim_for</a></div><div class="ttdeci">std::conditional_t&lt; std::is_same_v&lt; T, IDimX &gt;, IDimVx, std::conditional_t&lt; std::is_same_v&lt; T, IDimY &gt;, IDimVy, void &gt; &gt; velocity_dim_for</div><div class="ttdoc">A templated type giving the velocity discrete dimension type associated to a spatial discrete dimensi...</div><div class="ttdef"><b>Definition:</b> geometry.hpp:395</div></div>
 <div class="ttc" id="astructBSplinesVx_html"><div class="ttname"><a href="structBSplinesVx.html">BSplinesVx</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:527</div></div>
 <div class="ttc" id="astructBSplinesVy_html"><div class="ttname"><a href="structBSplinesVy.html">BSplinesVy</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:102</div></div>
 <div class="ttc" id="astructBSplinesX_html"><div class="ttname"><a href="structBSplinesX.html">BSplinesX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:520</div></div>
 <div class="ttc" id="astructBSplinesY_html"><div class="ttname"><a href="structBSplinesY.html">BSplinesY</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:87</div></div>
 <div class="ttc" id="astructIDimVx_html"><div class="ttname"><a href="structIDimVx.html">IDimVx</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:544</div></div>
-<div class="ttc" id="astructIDimVy_html"><div class="ttname"><a href="structIDimVy.html">IDimVy</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:740</div></div>
+<div class="ttc" id="astructIDimVy_html"><div class="ttname"><a href="structIDimVy.html">IDimVy</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:708</div></div>
 <div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:541</div></div>
-<div class="ttc" id="astructIDimY_html"><div class="ttname"><a href="structIDimY.html">IDimY</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:737</div></div>
+<div class="ttc" id="astructIDimY_html"><div class="ttname"><a href="structIDimY.html">IDimY</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:705</div></div>
 <div class="ttc" id="astructRDimVx_html"><div class="ttname"><a href="structRDimVx.html">RDimVx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:495</div></div>
 <div class="ttc" id="astructRDimVx_html_a11bf97b66f066f6e9b062e8742f6cc78"><div class="ttname"><a href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">RDimVx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:500</div></div>
-<div class="ttc" id="astructRDimVy_html"><div class="ttname"><a href="structRDimVy.html">RDimVy</a></div><div class="ttdoc">Define non periodic real Y velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:695</div></div>
-<div class="ttc" id="astructRDimVy_html_ac3acad5786a7c7b748997dba2c7dbcdd"><div class="ttname"><a href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">RDimVy::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:700</div></div>
+<div class="ttc" id="astructRDimVy_html"><div class="ttname"><a href="structRDimVy.html">RDimVy</a></div><div class="ttdoc">Define non periodic real Y velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:663</div></div>
+<div class="ttc" id="astructRDimVy_html_ac3acad5786a7c7b748997dba2c7dbcdd"><div class="ttname"><a href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">RDimVy::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:668</div></div>
 <div class="ttc" id="astructRDimX_html"><div class="ttname"><a href="structRDimX.html">RDimX</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:484</div></div>
 <div class="ttc" id="astructRDimX_html_a8cb720efb33235cee3371843279ea9ab"><div class="ttname"><a href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">RDimX::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:489</div></div>
-<div class="ttc" id="astructRDimY_html"><div class="ttname"><a href="structRDimY.html">RDimY</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:684</div></div>
-<div class="ttc" id="astructRDimY_html_a48a27c572829350ae0f5b47bf6e13f74"><div class="ttname"><a href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">RDimY::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:689</div></div>
+<div class="ttc" id="astructRDimY_html"><div class="ttname"><a href="structRDimY.html">RDimY</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:652</div></div>
+<div class="ttc" id="astructRDimY_html_a48a27c572829350ae0f5b47bf6e13f74"><div class="ttname"><a href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">RDimY::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:657</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

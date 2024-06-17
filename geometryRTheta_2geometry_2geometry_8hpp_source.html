@@ -595,425 +595,392 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;{</div>
 <div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;};</div>
 <div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160; </div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160; </div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160; </div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="keyword">using</span> IndexX = ddc::DiscreteElement&lt;IDimX&gt;;</div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="keyword">using</span> IndexVx = ddc::DiscreteElement&lt;IDimVx&gt;;</div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="keyword">using</span> IndexXVx = ddc::DiscreteElement&lt;IDimX, IDimVx&gt;;</div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160; </div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="keyword">using</span> IndexSp = ddc::DiscreteElement&lt;IDimSp&gt;;</div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;<span class="keyword">using</span> IndexSpX = ddc::DiscreteElement&lt;IDimSp, IDimX&gt;;</div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;<span class="keyword">using</span> IndexSpVx = ddc::DiscreteElement&lt;IDimSp, IDimVx&gt;;</div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;<span class="keyword">using</span> IndexSpXVx = ddc::DiscreteElement&lt;IDimSp, IDimX, IDimVx&gt;;</div>
-<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160; </div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="keyword">using</span> IndexX = ddc::DiscreteElement&lt;IDimX&gt;;</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="keyword">using</span> IndexVx = ddc::DiscreteElement&lt;IDimVx&gt;;</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="keyword">using</span> IndexXVx = ddc::DiscreteElement&lt;IDimX, IDimVx&gt;;</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160; </div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="keyword">using</span> IndexSpX = ddc::DiscreteElement&lt;IDimSp, IDimX&gt;;</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="keyword">using</span> IndexSpVx = ddc::DiscreteElement&lt;IDimSp, IDimVx&gt;;</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="keyword">using</span> IndexSpXVx = ddc::DiscreteElement&lt;IDimSp, IDimX, IDimVx&gt;;</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160; </div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;<span class="keyword">using</span> IVectX = ddc::DiscreteVector&lt;IDimX&gt;;</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;<span class="keyword">using</span> IVectVx = ddc::DiscreteVector&lt;IDimVx&gt;;</div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;<span class="keyword">using</span> IVectXVx = ddc::DiscreteVector&lt;IDimX, IDimVx&gt;;</div>
 <div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160; </div>
-<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160; </div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;<span class="keyword">using</span> IVectX = ddc::DiscreteVector&lt;IDimX&gt;;</div>
-<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="keyword">using</span> IVectVx = ddc::DiscreteVector&lt;IDimVx&gt;;</div>
-<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="keyword">using</span> IVectXVx = ddc::DiscreteVector&lt;IDimX, IDimVx&gt;;</div>
-<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160; </div>
-<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="keyword">using</span> IVectSp = ddc::DiscreteVector&lt;IDimSp&gt;;</div>
-<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;<span class="keyword">using</span> IVectSpX = ddc::DiscreteVector&lt;IDimSp, IDimX&gt;;</div>
-<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="keyword">using</span> IVectSpVx = ddc::DiscreteVector&lt;IDimSp, IDimVx&gt;;</div>
-<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="keyword">using</span> IVectSpXVx = ddc::DiscreteVector&lt;IDimSp, IDimX, IDimVx&gt;;</div>
-<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160; </div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;<span class="keyword">using</span> IVectSpX = ddc::DiscreteVector&lt;IDimSp, IDimX&gt;;</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;<span class="keyword">using</span> IVectSpVx = ddc::DiscreteVector&lt;IDimSp, IDimVx&gt;;</div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="keyword">using</span> IVectSpXVx = ddc::DiscreteVector&lt;IDimSp, IDimX, IDimVx&gt;;</div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160; </div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;<span class="keyword">using</span> BSDomainX = ddc::DiscreteDomain&lt;BSplinesX&gt;;</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="keyword">using</span> BSDomainVx = ddc::DiscreteDomain&lt;BSplinesVx&gt;;</div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160; </div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="keyword">using</span> IDomainX = ddc::DiscreteDomain&lt;IDimX&gt;;</div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="keyword">using</span> IDomainVx = ddc::DiscreteDomain&lt;IDimVx&gt;;</div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;<span class="keyword">using</span> IDomainXVx = ddc::DiscreteDomain&lt;IDimX, IDimVx&gt;;</div>
 <div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160; </div>
-<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160; </div>
-<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="keyword">using</span> BSDomainX = ddc::DiscreteDomain&lt;BSplinesX&gt;;</div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="keyword">using</span> BSDomainVx = ddc::DiscreteDomain&lt;BSplinesVx&gt;;</div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;<span class="keyword">using</span> IDomainSpX = ddc::DiscreteDomain&lt;IDimSp, IDimX&gt;;</div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="keyword">using</span> IDomainSpVx = ddc::DiscreteDomain&lt;IDimSp, IDimVx&gt;;</div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="keyword">using</span> IDomainSpXVx = ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimVx&gt;;</div>
 <div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160; </div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;<span class="keyword">using</span> IDomainX = ddc::DiscreteDomain&lt;IDimX&gt;;</div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="keyword">using</span> IDomainVx = ddc::DiscreteDomain&lt;IDimVx&gt;;</div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="keyword">using</span> IDomainXVx = ddc::DiscreteDomain&lt;IDimX, IDimVx&gt;;</div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160; </div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="keyword">using</span> FieldX = ddc::Chunk&lt;ElementType, IDomainX&gt;;</div>
 <div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160; </div>
-<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="keyword">using</span> IDomainSp = ddc::DiscreteDomain&lt;IDimSp&gt;;</div>
-<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="keyword">using</span> IDomainSpX = ddc::DiscreteDomain&lt;IDimSp, IDimX&gt;;</div>
-<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;<span class="keyword">using</span> IDomainSpVx = ddc::DiscreteDomain&lt;IDimSp, IDimVx&gt;;</div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="keyword">using</span> IDomainSpXVx = ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimVx&gt;;</div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160; </div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="keyword">using</span> FieldVx = ddc::Chunk&lt;ElementType, IDomainVx&gt;;</div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160; </div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="keyword">using</span> FieldSpX = ddc::Chunk&lt;ElementType, IDomainSpX&gt;;</div>
 <div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160; </div>
-<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160; </div>
-<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;<span class="keyword">using</span> FieldX = ddc::Chunk&lt;ElementType, IDomainX&gt;;</div>
-<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160; </div>
-<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;<span class="keyword">using</span> FieldVx = ddc::Chunk&lt;ElementType, IDomainVx&gt;;</div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160; </div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;<span class="keyword">using</span> FieldSp = ddc::Chunk&lt;ElementType, IDomainSp&gt;;</div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160; </div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;<span class="keyword">using</span> FieldSpX = ddc::Chunk&lt;ElementType, IDomainSpX&gt;;</div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="keyword">using</span> FieldSpVx = ddc::Chunk&lt;ElementType, IDomainSpVx&gt;;</div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160; </div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="keyword">using</span> FieldSpXVx = ddc::Chunk&lt;ElementType, IDomainSpXVx&gt;;</div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160; </div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;<span class="keyword">using</span> DFieldX = FieldX&lt;double&gt;;</div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;<span class="keyword">using</span> DFieldVx = FieldVx&lt;double&gt;;</div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160; </div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;<span class="keyword">using</span> DFieldSpX = FieldSpX&lt;double&gt;;</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;<span class="keyword">using</span> DFieldSpVx = FieldSpVx&lt;double&gt;;</div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;<span class="keyword">using</span> DFieldSpXVx = FieldSpXVx&lt;double&gt;;</div>
 <div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160; </div>
 <div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;<span class="keyword">using</span> FieldSpVx = ddc::Chunk&lt;ElementType, IDomainSpVx&gt;;</div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;<span class="keyword">using</span> SpanX = ddc::ChunkSpan&lt;ElementType, IDomainX&gt;;</div>
 <div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160; </div>
 <div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;<span class="keyword">using</span> FieldSpXVx = ddc::Chunk&lt;ElementType, IDomainSpXVx&gt;;</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;<span class="keyword">using</span> SpanVx = ddc::ChunkSpan&lt;ElementType, IDomainVx&gt;;</div>
 <div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160; </div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160; </div>
-<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160; </div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;<span class="keyword">using</span> DFieldX = FieldX&lt;double&gt;;</div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;<span class="keyword">using</span> DFieldVx = FieldVx&lt;double&gt;;</div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160; </div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;<span class="keyword">using</span> DFieldSp = FieldSp&lt;double&gt;;</div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="keyword">using</span> DFieldSpX = FieldSpX&lt;double&gt;;</div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="keyword">using</span> DFieldSpVx = FieldSpVx&lt;double&gt;;</div>
-<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="keyword">using</span> DFieldSpXVx = FieldSpXVx&lt;double&gt;;</div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160; </div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160; </div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;<span class="keyword">using</span> SpanSpX = ddc::ChunkSpan&lt;ElementType, IDomainSpX&gt;;</div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160; </div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;<span class="keyword">using</span> SpanSpVx = ddc::ChunkSpan&lt;ElementType, IDomainSpVx&gt;;</div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160; </div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="keyword">using</span> SpanSpXVx = ddc::ChunkSpan&lt;ElementType, IDomainSpXVx&gt;;</div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160; </div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="keyword">using</span> DSpanX = SpanX&lt;double&gt;;</div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;<span class="keyword">using</span> DSpanVx = SpanVx&lt;double&gt;;</div>
 <div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160; </div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="keyword">using</span> SpanX = ddc::ChunkSpan&lt;ElementType, IDomainX&gt;;</div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160; </div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;<span class="keyword">using</span> SpanVx = ddc::ChunkSpan&lt;ElementType, IDomainVx&gt;;</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160; </div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="keyword">using</span> SpanSp = ddc::ChunkSpan&lt;ElementType, IDomainSp&gt;;</div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160; </div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="keyword">using</span> SpanSpX = ddc::ChunkSpan&lt;ElementType, IDomainSpX&gt;;</div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160; </div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;<span class="keyword">using</span> SpanSpVx = ddc::ChunkSpan&lt;ElementType, IDomainSpVx&gt;;</div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160; </div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;<span class="keyword">using</span> SpanSpXVx = ddc::ChunkSpan&lt;ElementType, IDomainSpXVx&gt;;</div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160; </div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;<span class="keyword">using</span> DSpanSpX = SpanSpX&lt;double&gt;;</div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="keyword">using</span> DSpanSpVx = SpanSpVx&lt;double&gt;;</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;<span class="keyword">using</span> DSpanSpXVx = SpanSpXVx&lt;double&gt;;</div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160; </div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;<span class="keyword">using</span> ViewX = ddc::ChunkSpan&lt;ElementType const, IDomainX&gt;;</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160; </div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;<span class="keyword">using</span> ViewVx = ddc::ChunkSpan&lt;ElementType const, IDomainVx&gt;;</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160; </div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;<span class="keyword">using</span> ViewSpX = ddc::ChunkSpan&lt;ElementType const, IDomainSpX&gt;;</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160; </div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;<span class="keyword">using</span> ViewSpVx = ddc::ChunkSpan&lt;ElementType const, IDomainSpVx&gt;;</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160; </div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;<span class="keyword">using</span> ViewSpXVx = ddc::ChunkSpan&lt;ElementType const, IDomainSpXVx&gt;;</div>
 <div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160; </div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160; </div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="keyword">using</span> DSpanX = SpanX&lt;double&gt;;</div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;<span class="keyword">using</span> DSpanVx = SpanVx&lt;double&gt;;</div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160; </div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;<span class="keyword">using</span> DSpanSp = SpanSp&lt;double&gt;;</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;<span class="keyword">using</span> DSpanSpX = SpanSpX&lt;double&gt;;</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;<span class="keyword">using</span> DSpanSpVx = SpanSpVx&lt;double&gt;;</div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;<span class="keyword">using</span> DSpanSpXVx = SpanSpXVx&lt;double&gt;;</div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160; </div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="keyword">using</span> BSViewX = ddc::ChunkSpan&lt;ElementType const, BSDomainX&gt;;</div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160; </div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;<span class="keyword">using</span> DViewX = ViewX&lt;double&gt;;</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;<span class="keyword">using</span> DViewVx = ViewVx&lt;double&gt;;</div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160; </div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;<span class="keyword">using</span> DViewSpX = ViewSpX&lt;double&gt;;</div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;<span class="keyword">using</span> DViewSpVx = ViewSpVx&lt;double&gt;;</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;<span class="keyword">using</span> DViewSpXVx = ViewSpXVx&lt;double&gt;;</div>
 <div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160; </div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160; </div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="keyword">using</span> ViewX = ddc::ChunkSpan&lt;ElementType const, IDomainX&gt;;</div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160; </div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="keyword">using</span> ViewVx = ddc::ChunkSpan&lt;ElementType const, IDomainVx&gt;;</div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160; </div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="keyword">using</span> ViewSp = ddc::ChunkSpan&lt;ElementType const, IDomainSp&gt;;</div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160; </div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="keyword">using</span> ViewSpX = ddc::ChunkSpan&lt;ElementType const, IDomainSpX&gt;;</div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160; </div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;<span class="keyword">using</span> ViewSpVx = ddc::ChunkSpan&lt;ElementType const, IDomainSpVx&gt;;</div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160; </div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="keyword">using</span> ViewSpXVx = ddc::ChunkSpan&lt;ElementType const, IDomainSpXVx&gt;;</div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160; </div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="keyword">using</span> BSViewX = ddc::ChunkSpan&lt;ElementType const, BSDomainX&gt;;</div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160; </div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160; </div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160; </div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="keyword">using</span> DViewX = ViewX&lt;double&gt;;</div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="keyword">using</span> DViewVx = ViewVx&lt;double&gt;;</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="keyword">using</span> DBSViewX = BSViewX&lt;double&gt;;</div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160; </div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160; </div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;<span class="comment">// -- Y DIMENSION ---------------------------------------------------</span></div>
+<div class="line"><a name="l00651"></a><span class="lineno"><a class="line" href="structRDimY.html">  651</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structRDimY.html">RDimY</a></div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;{</div>
+<div class="line"><a name="l00657"></a><span class="lineno"><a class="line" href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">  657</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;};</div>
+<div class="line"><a name="l00662"></a><span class="lineno"><a class="line" href="structRDimVy.html">  662</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimVy.html">RDimVy</a></div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;{</div>
+<div class="line"><a name="l00668"></a><span class="lineno"><a class="line" href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">  668</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;};</div>
 <div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160; </div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="keyword">using</span> DViewSp = ViewSp&lt;double&gt;;</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="keyword">using</span> DViewSpX = ViewSpX&lt;double&gt;;</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="keyword">using</span> DViewSpVx = ViewSpVx&lt;double&gt;;</div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="keyword">using</span> DViewSpXVx = ViewSpXVx&lt;double&gt;;</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160; </div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="keyword">using</span> CoordY = ddc::Coordinate&lt;RDimY&gt;;</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="keyword">using</span> CoordVy = ddc::Coordinate&lt;RDimVy&gt;;</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="keyword">using</span> CoordYVy = ddc::Coordinate&lt;RDimY, RDimVy&gt;;</div>
 <div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160; </div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="keyword">using</span> DBSViewX = BSViewX&lt;double&gt;;</div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160; </div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="keywordtype">int</span> constexpr BSDegreeY = 3;</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="keywordtype">int</span> constexpr BSDegreeVy = 3;</div>
 <div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160; </div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="comment">// -- Y DIMENSION ---------------------------------------------------</span></div>
-<div class="line"><a name="l00683"></a><span class="lineno"><a class="line" href="structRDimY.html">  683</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structRDimY.html">RDimY</a></div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;{</div>
-<div class="line"><a name="l00689"></a><span class="lineno"><a class="line" href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">  689</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;};</div>
-<div class="line"><a name="l00694"></a><span class="lineno"><a class="line" href="structRDimVy.html">  694</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimVy.html">RDimVy</a></div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;{</div>
-<div class="line"><a name="l00700"></a><span class="lineno"><a class="line" href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">  700</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;};</div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160; </div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160; </div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsY = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsVy = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160; </div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="keyword">using</span> <a class="code" href="structBSplinesY.html">BSplinesY</a> = std::conditional_t&lt;</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;        BsplineOnUniformCellsY,</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;        ddc::UniformBSplines&lt;RDimY, BSDegreeY&gt;,</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;        ddc::NonUniformBSplines&lt;RDimY, BSDegreeY&gt;&gt;;</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160; </div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="keyword">using</span> <a class="code" href="structBSplinesVy.html">BSplinesVy</a> = std::conditional_t&lt;</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;        BsplineOnUniformCellsVy,</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;        ddc::UniformBSplines&lt;RDimVy, BSDegreeVy&gt;,</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;        ddc::NonUniformBSplines&lt;RDimVy, BSDegreeVy&gt;&gt;;</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160; </div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160; </div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160; </div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="keyword">auto</span> constexpr SplineYBoundary</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;        = <a class="code" href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">RDimY::PERIODIC</a> ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="keyword">auto</span> constexpr SplineVyBoundary = ddc::BoundCond::HERMITE;</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160; </div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="keyword">using</span> SplineInterpPointsY</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesY, SplineYBoundary, SplineYBoundary&gt;;</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="keyword">using</span> SplineInterpPointsVy</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesVy, SplineVyBoundary, SplineVyBoundary&gt;;</div>
 <div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160; </div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="keyword">using</span> CoordY = ddc::Coordinate&lt;RDimY&gt;;</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="keyword">using</span> CoordVy = ddc::Coordinate&lt;RDimVy&gt;;</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="keyword">using</span> CoordYVy = ddc::Coordinate&lt;RDimY, RDimVy&gt;;</div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160; </div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="keywordtype">int</span> constexpr BSDegreeY = 3;</div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="keywordtype">int</span> constexpr BSDegreeVy = 3;</div>
+<div class="line"><a name="l00704"></a><span class="lineno"><a class="line" href="structIDimY.html">  704</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimY.html">IDimY</a> : SplineInterpPointsY::interpolation_mesh_type</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;{</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;};</div>
+<div class="line"><a name="l00707"></a><span class="lineno"><a class="line" href="structIDimVy.html">  707</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimVy.html">IDimVy</a> : SplineInterpPointsVy::interpolation_mesh_type</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;{</div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;};</div>
 <div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160; </div>
 <div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160; </div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsY = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsVy = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160; </div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="keyword">using</span> <a class="code" href="structBSplinesY.html">BSplinesY</a> = std::conditional_t&lt;</div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;        BsplineOnUniformCellsY,</div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;        ddc::UniformBSplines&lt;RDimY, BSDegreeY&gt;,</div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;        ddc::NonUniformBSplines&lt;RDimY, BSDegreeY&gt;&gt;;</div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160; </div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="keyword">using</span> <a class="code" href="structBSplinesVy.html">BSplinesVy</a> = std::conditional_t&lt;</div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;        BsplineOnUniformCellsVy,</div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;        ddc::UniformBSplines&lt;RDimVy, BSDegreeVy&gt;,</div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;        ddc::NonUniformBSplines&lt;RDimVy, BSDegreeVy&gt;&gt;;</div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160; </div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160; </div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="comment">// Species dimension</span></div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="keyword">using</span> IndexY = ddc::DiscreteElement&lt;IDimY&gt;;</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="keyword">using</span> IndexVy = ddc::DiscreteElement&lt;IDimVy&gt;;</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="keyword">using</span> IndexYVy = ddc::DiscreteElement&lt;IDimY, IDimVy&gt;;</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160; </div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="keyword">using</span> IndexSpY = ddc::DiscreteElement&lt;IDimSp, IDimY&gt;;</div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="keyword">using</span> IndexSpVy = ddc::DiscreteElement&lt;IDimSp, IDimVy&gt;;</div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="keyword">using</span> IndexSpYVy = ddc::DiscreteElement&lt;IDimSp, IDimY, IDimVy&gt;;</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160; </div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160; </div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160; </div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="keyword">using</span> IVectY = ddc::DiscreteVector&lt;IDimY&gt;;</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="keyword">using</span> IVectVy = ddc::DiscreteVector&lt;IDimVy&gt;;</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="keyword">using</span> IVectYVy = ddc::DiscreteVector&lt;IDimY, IDimVy&gt;;</div>
 <div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160; </div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="keyword">auto</span> constexpr SplineYBoundary</div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;        = <a class="code" href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">RDimY::PERIODIC</a> ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;</div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="keyword">auto</span> constexpr SplineVyBoundary = ddc::BoundCond::HERMITE;</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="keyword">using</span> IVectSpY = ddc::DiscreteVector&lt;IDimSp, IDimY&gt;;</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="keyword">using</span> IVectSpVy = ddc::DiscreteVector&lt;IDimSp, IDimVy&gt;;</div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="keyword">using</span> IVectSpYVy = ddc::DiscreteVector&lt;IDimSp, IDimY, IDimVy&gt;;</div>
 <div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160; </div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="keyword">using</span> SplineInterpPointsY</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesY, SplineYBoundary, SplineYBoundary&gt;;</div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="keyword">using</span> SplineInterpPointsVy</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesVy, SplineVyBoundary, SplineVyBoundary&gt;;</div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160; </div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160; </div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="keyword">using</span> BSDomainY = ddc::DiscreteDomain&lt;BSplinesY&gt;;</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="keyword">using</span> BSDomainVy = ddc::DiscreteDomain&lt;BSplinesVy&gt;;</div>
 <div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160; </div>
-<div class="line"><a name="l00736"></a><span class="lineno"><a class="line" href="structIDimY.html">  736</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimY.html">IDimY</a> : SplineInterpPointsY::interpolation_mesh_type</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;{</div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;};</div>
-<div class="line"><a name="l00739"></a><span class="lineno"><a class="line" href="structIDimVy.html">  739</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimVy.html">IDimVy</a> : SplineInterpPointsVy::interpolation_mesh_type</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;{</div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;};</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160; </div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="keyword">using</span> IDomainY = ddc::DiscreteDomain&lt;IDimY&gt;;</div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="keyword">using</span> IDomainVy = ddc::DiscreteDomain&lt;IDimVy&gt;;</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="keyword">using</span> IDomainYVy = ddc::DiscreteDomain&lt;IDimY, IDimVy&gt;;</div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160; </div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="keyword">using</span> IDomainSpY = ddc::DiscreteDomain&lt;IDimSp, IDimY&gt;;</div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="keyword">using</span> IDomainSpVy = ddc::DiscreteDomain&lt;IDimSp, IDimVy&gt;;</div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;<span class="keyword">using</span> IDomainSpYVy = ddc::DiscreteDomain&lt;IDimSp, IDimY, IDimVy&gt;;</div>
 <div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160; </div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="comment">// Species dimension</span></div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="keyword">using</span> IndexY = ddc::DiscreteElement&lt;IDimY&gt;;</div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="keyword">using</span> IndexVy = ddc::DiscreteElement&lt;IDimVy&gt;;</div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="keyword">using</span> IndexYVy = ddc::DiscreteElement&lt;IDimY, IDimVy&gt;;</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160; </div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160; </div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="keyword">using</span> FieldY = ddc::Chunk&lt;ElementType, IDomainY&gt;;</div>
 <div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160; </div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="keyword">using</span> IndexSpY = ddc::DiscreteElement&lt;IDimSp, IDimY&gt;;</div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="keyword">using</span> IndexSpVy = ddc::DiscreteElement&lt;IDimSp, IDimVy&gt;;</div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="keyword">using</span> IndexSpYVy = ddc::DiscreteElement&lt;IDimSp, IDimY, IDimVy&gt;;</div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160; </div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160; </div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="keyword">using</span> FieldVy = ddc::Chunk&lt;ElementType, IDomainVy&gt;;</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160; </div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;<span class="keyword">using</span> FieldSpY = ddc::Chunk&lt;ElementType, IDomainSpY&gt;;</div>
 <div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160; </div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="keyword">using</span> IVectY = ddc::DiscreteVector&lt;IDimY&gt;;</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="keyword">using</span> IVectVy = ddc::DiscreteVector&lt;IDimVy&gt;;</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;<span class="keyword">using</span> IVectYVy = ddc::DiscreteVector&lt;IDimY, IDimVy&gt;;</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160; </div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="keyword">using</span> IVectSpY = ddc::DiscreteVector&lt;IDimSp, IDimY&gt;;</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="keyword">using</span> IVectSpVy = ddc::DiscreteVector&lt;IDimSp, IDimVy&gt;;</div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="keyword">using</span> IVectSpYVy = ddc::DiscreteVector&lt;IDimSp, IDimY, IDimVy&gt;;</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="keyword">using</span> FieldSpVy = ddc::Chunk&lt;ElementType, IDomainSpVy&gt;;</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160; </div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="keyword">using</span> FieldSpYVy = ddc::Chunk&lt;ElementType, IDomainSpYVy&gt;;</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160; </div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160; </div>
 <div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160; </div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160; </div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160; </div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;<span class="keyword">using</span> BSDomainY = ddc::DiscreteDomain&lt;BSplinesY&gt;;</div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;<span class="keyword">using</span> BSDomainVy = ddc::DiscreteDomain&lt;BSplinesVy&gt;;</div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160; </div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="keyword">using</span> IDomainY = ddc::DiscreteDomain&lt;IDimY&gt;;</div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="keyword">using</span> IDomainVy = ddc::DiscreteDomain&lt;IDimVy&gt;;</div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="keyword">using</span> IDomainYVy = ddc::DiscreteDomain&lt;IDimY, IDimVy&gt;;</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="keyword">using</span> DFieldY = FieldY&lt;double&gt;;</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;<span class="keyword">using</span> DFieldVy = FieldVy&lt;double&gt;;</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160; </div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;<span class="keyword">using</span> DFieldSpY = FieldSpY&lt;double&gt;;</div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="keyword">using</span> DFieldSpVy = FieldSpVy&lt;double&gt;;</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="keyword">using</span> DFieldSpYVy = FieldSpYVy&lt;double&gt;;</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160; </div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160; </div>
 <div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160; </div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="keyword">using</span> IDomainSpY = ddc::DiscreteDomain&lt;IDimSp, IDimY&gt;;</div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;<span class="keyword">using</span> IDomainSpVy = ddc::DiscreteDomain&lt;IDimSp, IDimVy&gt;;</div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="keyword">using</span> IDomainSpYVy = ddc::DiscreteDomain&lt;IDimSp, IDimY, IDimVy&gt;;</div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160; </div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160; </div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;<span class="keyword">using</span> SpanY = ddc::ChunkSpan&lt;ElementType, IDomainY&gt;;</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160; </div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="keyword">using</span> SpanVy = ddc::ChunkSpan&lt;ElementType, IDomainVy&gt;;</div>
 <div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160; </div>
 <div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="keyword">using</span> FieldY = ddc::Chunk&lt;ElementType, IDomainY&gt;;</div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="keyword">using</span> SpanSpY = ddc::ChunkSpan&lt;ElementType, IDomainSpY&gt;;</div>
 <div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160; </div>
 <div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="keyword">using</span> FieldVy = ddc::Chunk&lt;ElementType, IDomainVy&gt;;</div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="keyword">using</span> SpanSpVy = ddc::ChunkSpan&lt;ElementType, IDomainSpVy&gt;;</div>
 <div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160; </div>
 <div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="keyword">using</span> FieldSpY = ddc::Chunk&lt;ElementType, IDomainSpY&gt;;</div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="keyword">using</span> SpanSpYVy = ddc::ChunkSpan&lt;ElementType, IDomainSpYVy&gt;;</div>
 <div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160; </div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;<span class="keyword">using</span> FieldSpVy = ddc::Chunk&lt;ElementType, IDomainSpVy&gt;;</div>
-<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160; </div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="keyword">using</span> FieldSpYVy = ddc::Chunk&lt;ElementType, IDomainSpYVy&gt;;</div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160; </div>
-<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160; </div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160; </div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="keyword">using</span> DFieldY = FieldY&lt;double&gt;;</div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="keyword">using</span> DFieldVy = FieldVy&lt;double&gt;;</div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160; </div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160; </div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;<span class="keyword">using</span> DSpanY = SpanY&lt;double&gt;;</div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="keyword">using</span> DSpanVy = SpanVy&lt;double&gt;;</div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160; </div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="keyword">using</span> DSpanSpY = SpanSpY&lt;double&gt;;</div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;<span class="keyword">using</span> DSpanSpVy = SpanSpVy&lt;double&gt;;</div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="keyword">using</span> DSpanSpYVy = SpanSpYVy&lt;double&gt;;</div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160; </div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160; </div>
 <div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160; </div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="keyword">using</span> DFieldSpY = FieldSpY&lt;double&gt;;</div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="keyword">using</span> DFieldSpVy = FieldSpVy&lt;double&gt;;</div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;<span class="keyword">using</span> DFieldSpYVy = FieldSpYVy&lt;double&gt;;</div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160; </div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160; </div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="keyword">using</span> ViewY = ddc::ChunkSpan&lt;ElementType const, IDomainY&gt;;</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160; </div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="keyword">using</span> ViewVy = ddc::ChunkSpan&lt;ElementType const, IDomainVy&gt;;</div>
 <div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160; </div>
 <div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="keyword">using</span> SpanY = ddc::ChunkSpan&lt;ElementType, IDomainY&gt;;</div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="keyword">using</span> ViewSpY = ddc::ChunkSpan&lt;ElementType const, IDomainSpY&gt;;</div>
 <div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160; </div>
 <div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="keyword">using</span> SpanVy = ddc::ChunkSpan&lt;ElementType, IDomainVy&gt;;</div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="keyword">using</span> ViewSpVy = ddc::ChunkSpan&lt;ElementType const, IDomainSpVy&gt;;</div>
 <div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160; </div>
 <div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="keyword">using</span> SpanSpY = ddc::ChunkSpan&lt;ElementType, IDomainSpY&gt;;</div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="keyword">using</span> ViewSpYVy = ddc::ChunkSpan&lt;ElementType const, IDomainSpYVy&gt;;</div>
 <div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160; </div>
 <div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;<span class="keyword">using</span> SpanSpVy = ddc::ChunkSpan&lt;ElementType, IDomainSpVy&gt;;</div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;<span class="keyword">using</span> BSViewY = ddc::ChunkSpan&lt;ElementType const, BSDomainY&gt;;</div>
 <div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160; </div>
-<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="keyword">using</span> SpanSpYVy = ddc::ChunkSpan&lt;ElementType, IDomainSpYVy&gt;;</div>
-<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160; </div>
-<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160; </div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160; </div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160; </div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="keyword">using</span> DViewY = ViewY&lt;double&gt;;</div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;<span class="keyword">using</span> DViewVy = ViewVy&lt;double&gt;;</div>
 <div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160; </div>
-<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="keyword">using</span> DSpanY = SpanY&lt;double&gt;;</div>
-<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="keyword">using</span> DSpanVy = SpanVy&lt;double&gt;;</div>
-<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160; </div>
-<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="keyword">using</span> DSpanSpY = SpanSpY&lt;double&gt;;</div>
-<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;<span class="keyword">using</span> DSpanSpVy = SpanSpVy&lt;double&gt;;</div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="keyword">using</span> DSpanSpYVy = SpanSpYVy&lt;double&gt;;</div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="keyword">using</span> DViewSpY = ViewSpY&lt;double&gt;;</div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="keyword">using</span> DViewSpVy = ViewSpVy&lt;double&gt;;</div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;<span class="keyword">using</span> DViewSpYVy = ViewSpYVy&lt;double&gt;;</div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160; </div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;<span class="keyword">using</span> DBSViewY = BSViewY&lt;double&gt;;</div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160; </div>
 <div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160; </div>
 <div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160; </div>
-<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160; </div>
-<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;<span class="keyword">using</span> ViewY = ddc::ChunkSpan&lt;ElementType const, IDomainY&gt;;</div>
-<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160; </div>
-<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;<span class="keyword">using</span> ViewVy = ddc::ChunkSpan&lt;ElementType const, IDomainVy&gt;;</div>
-<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160; </div>
-<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;<span class="keyword">using</span> ViewSpY = ddc::ChunkSpan&lt;ElementType const, IDomainSpY&gt;;</div>
-<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160; </div>
-<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;<span class="keyword">using</span> ViewSpVy = ddc::ChunkSpan&lt;ElementType const, IDomainSpVy&gt;;</div>
-<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160; </div>
-<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160;<span class="keyword">using</span> ViewSpYVy = ddc::ChunkSpan&lt;ElementType const, IDomainSpYVy&gt;;</div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;<span class="comment">// -- X Y DIMENSIONS ------------------------------------------------</span></div>
+<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;<span class="keyword">using</span> CoordXY = ddc::Coordinate&lt;RDimX, RDimY&gt;;</div>
+<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;<span class="keyword">using</span> CoordVxVy = ddc::Coordinate&lt;RDimVx, RDimVy&gt;;</div>
+<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;<span class="keyword">using</span> CoordXYVxVy = ddc::Coordinate&lt;RDimX, RDimY, RDimVx, RDimVy&gt;;</div>
+<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160; </div>
+<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160; </div>
+<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;<span class="comment">// Species dimension</span></div>
+<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;<span class="keyword">using</span> IndexXY = ddc::DiscreteElement&lt;IDimX, IDimY&gt;;</div>
+<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;<span class="keyword">using</span> IndexVxVy = ddc::DiscreteElement&lt;IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;<span class="keyword">using</span> IndexXYVxVy = ddc::DiscreteElement&lt;IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160; </div>
+<div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;<span class="keyword">using</span> IndexSpXY = ddc::DiscreteElement&lt;IDimSp, IDimX, IDimY&gt;;</div>
+<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;<span class="keyword">using</span> IndexSpVxVy = ddc::DiscreteElement&lt;IDimSp, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;<span class="keyword">using</span> IndexSpXYVxVy = ddc::DiscreteElement&lt;IDimSp, IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160; </div>
 <div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160; </div>
-<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;<span class="keyword">using</span> BSViewY = ddc::ChunkSpan&lt;ElementType const, BSDomainY&gt;;</div>
-<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160; </div>
-<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160; </div>
+<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160; </div>
+<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;<span class="keyword">using</span> IVectXY = ddc::DiscreteVector&lt;IDimX, IDimY&gt;;</div>
+<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;<span class="keyword">using</span> IVectVxVy = ddc::DiscreteVector&lt;IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;<span class="keyword">using</span> IVectXYVxVy = ddc::DiscreteVector&lt;IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
 <div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160; </div>
-<div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;<span class="keyword">using</span> DViewY = ViewY&lt;double&gt;;</div>
-<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;<span class="keyword">using</span> DViewVy = ViewVy&lt;double&gt;;</div>
-<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160; </div>
-<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160;<span class="keyword">using</span> DViewSpY = ViewSpY&lt;double&gt;;</div>
-<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;<span class="keyword">using</span> DViewSpVy = ViewSpVy&lt;double&gt;;</div>
-<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;<span class="keyword">using</span> DViewSpYVy = ViewSpYVy&lt;double&gt;;</div>
-<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160; </div>
-<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;<span class="keyword">using</span> DBSViewY = BSViewY&lt;double&gt;;</div>
+<div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;<span class="keyword">using</span> IVectSpXY = ddc::DiscreteVector&lt;IDimSp, IDimX, IDimY&gt;;</div>
+<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;<span class="keyword">using</span> IVectSpVxVy = ddc::DiscreteVector&lt;IDimSp, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;<span class="keyword">using</span> IVectSpXYVxVy = ddc::DiscreteVector&lt;IDimSp, IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160; </div>
+<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160; </div>
+<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160; </div>
+<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;<span class="keyword">using</span> BSDomainXY = ddc::DiscreteDomain&lt;BSplinesX, BSplinesY&gt;;</div>
+<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;<span class="keyword">using</span> BSDomainVxVy = ddc::DiscreteDomain&lt;BSplinesVx, BSplinesVy&gt;;</div>
 <div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160; </div>
-<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160; </div>
-<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160; </div>
-<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;<span class="comment">// -- X Y DIMENSIONS ------------------------------------------------</span></div>
-<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;<span class="keyword">using</span> CoordXY = ddc::Coordinate&lt;RDimX, RDimY&gt;;</div>
-<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;<span class="keyword">using</span> CoordVxVy = ddc::Coordinate&lt;RDimVx, RDimVy&gt;;</div>
-<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;<span class="keyword">using</span> CoordXYVxVy = ddc::Coordinate&lt;RDimX, RDimY, RDimVx, RDimVy&gt;;</div>
-<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160; </div>
+<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;<span class="keyword">using</span> IDomainXY = ddc::DiscreteDomain&lt;IDimX, IDimY&gt;;</div>
+<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;<span class="keyword">using</span> IDomainVxVy = ddc::DiscreteDomain&lt;IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;<span class="keyword">using</span> IDomainXYVxVy = ddc::DiscreteDomain&lt;IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160; </div>
+<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;<span class="keyword">using</span> IDomainSpXY = ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimY&gt;;</div>
+<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;<span class="keyword">using</span> IDomainSpVxVy = ddc::DiscreteDomain&lt;IDimSp, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;<span class="keyword">using</span> IDomainSpXYVxVy = ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
 <div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160; </div>
-<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;<span class="comment">// Species dimension</span></div>
-<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;<span class="keyword">using</span> IndexXY = ddc::DiscreteElement&lt;IDimX, IDimY&gt;;</div>
-<div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160;<span class="keyword">using</span> IndexVxVy = ddc::DiscreteElement&lt;IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;<span class="keyword">using</span> IndexXYVxVy = ddc::DiscreteElement&lt;IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160; </div>
+<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160; </div>
+<div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;<span class="keyword">using</span> FieldXY = ddc::Chunk&lt;ElementType, IDomainXY&gt;;</div>
 <div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160; </div>
-<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;<span class="keyword">using</span> IndexSpXY = ddc::DiscreteElement&lt;IDimSp, IDimX, IDimY&gt;;</div>
-<div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160;<span class="keyword">using</span> IndexSpVxVy = ddc::DiscreteElement&lt;IDimSp, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160;<span class="keyword">using</span> IndexSpXYVxVy = ddc::DiscreteElement&lt;IDimSp, IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160; </div>
-<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160; </div>
+<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160;<span class="keyword">using</span> FieldVxVy = ddc::Chunk&lt;ElementType, IDomainVxVy&gt;;</div>
+<div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160; </div>
+<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;<span class="keyword">using</span> FieldSpXY = ddc::Chunk&lt;ElementType, IDomainSpXY&gt;;</div>
 <div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160; </div>
-<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160;<span class="keyword">using</span> IVectXY = ddc::DiscreteVector&lt;IDimX, IDimY&gt;;</div>
-<div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160;<span class="keyword">using</span> IVectVxVy = ddc::DiscreteVector&lt;IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160;<span class="keyword">using</span> IVectXYVxVy = ddc::DiscreteVector&lt;IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160; </div>
-<div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;<span class="keyword">using</span> IVectSpXY = ddc::DiscreteVector&lt;IDimSp, IDimX, IDimY&gt;;</div>
-<div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160;<span class="keyword">using</span> IVectSpVxVy = ddc::DiscreteVector&lt;IDimSp, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160;<span class="keyword">using</span> IVectSpXYVxVy = ddc::DiscreteVector&lt;IDimSp, IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
+<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160;<span class="keyword">using</span> FieldSpVxVy = ddc::Chunk&lt;ElementType, IDomainSpVxVy&gt;;</div>
+<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160; </div>
+<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;<span class="keyword">using</span> FieldSpXYVxVy = ddc::Chunk&lt;ElementType, IDomainSpXYVxVy&gt;;</div>
+<div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160; </div>
+<div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160; </div>
 <div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160; </div>
-<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160; </div>
-<div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160; </div>
-<div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160;<span class="keyword">using</span> BSDomainXY = ddc::DiscreteDomain&lt;BSplinesX, BSplinesY&gt;;</div>
-<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160;<span class="keyword">using</span> BSDomainVxVy = ddc::DiscreteDomain&lt;BSplinesVx, BSplinesVy&gt;;</div>
-<div class="line"><a name="l00890"></a><span class="lineno">  890</span>&#160; </div>
-<div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160;<span class="keyword">using</span> IDomainXY = ddc::DiscreteDomain&lt;IDimX, IDimY&gt;;</div>
-<div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160;<span class="keyword">using</span> IDomainVxVy = ddc::DiscreteDomain&lt;IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160;<span class="keyword">using</span> IDomainXYVxVy = ddc::DiscreteDomain&lt;IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160; </div>
-<div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;<span class="keyword">using</span> IDomainSpXY = ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimY&gt;;</div>
-<div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;<span class="keyword">using</span> IDomainSpVxVy = ddc::DiscreteDomain&lt;IDimSp, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;<span class="keyword">using</span> IDomainSpXYVxVy = ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimY, IDimVx, IDimVy&gt;;</div>
-<div class="line"><a name="l00898"></a><span class="lineno">  898</span>&#160; </div>
+<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160;<span class="keyword">using</span> DFieldXY = FieldXY&lt;double&gt;;</div>
+<div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160;<span class="keyword">using</span> DFieldVxVy = FieldVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160; </div>
+<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160;<span class="keyword">using</span> DFieldSpVxVy = FieldSpVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00890"></a><span class="lineno">  890</span>&#160;<span class="keyword">using</span> DFieldSpXYVxVy = FieldSpXYVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160; </div>
+<div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160; </div>
+<div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160; </div>
+<div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;<span class="keyword">using</span> SpanXY = ddc::ChunkSpan&lt;ElementType, IDomainXY&gt;;</div>
+<div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160; </div>
+<div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00898"></a><span class="lineno">  898</span>&#160;<span class="keyword">using</span> SpanVxVy = ddc::ChunkSpan&lt;ElementType, IDomainVy&gt;;</div>
 <div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160; </div>
-<div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160; </div>
-<div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;<span class="keyword">using</span> FieldXY = ddc::Chunk&lt;ElementType, IDomainXY&gt;;</div>
-<div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160; </div>
-<div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;<span class="keyword">using</span> FieldVxVy = ddc::Chunk&lt;ElementType, IDomainVxVy&gt;;</div>
-<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160; </div>
-<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;<span class="keyword">using</span> FieldSpXY = ddc::Chunk&lt;ElementType, IDomainSpXY&gt;;</div>
+<div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;<span class="keyword">using</span> SpanSpXY = ddc::ChunkSpan&lt;ElementType, IDomainSpXY&gt;;</div>
+<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160; </div>
+<div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;<span class="keyword">using</span> SpanSpVxVy = ddc::ChunkSpan&lt;ElementType, IDomainSpVy&gt;;</div>
+<div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160; </div>
+<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;<span class="keyword">using</span> SpanSpXYVxVy = ddc::ChunkSpan&lt;ElementType, IDomainSpXYVxVy&gt;;</div>
+<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160; </div>
 <div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160; </div>
-<div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;<span class="keyword">using</span> FieldSpVxVy = ddc::Chunk&lt;ElementType, IDomainSpVxVy&gt;;</div>
-<div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160; </div>
-<div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160;<span class="keyword">using</span> FieldSpXYVxVy = ddc::Chunk&lt;ElementType, IDomainSpXYVxVy&gt;;</div>
-<div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160; </div>
-<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160; </div>
+<div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160; </div>
+<div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;<span class="keyword">using</span> DSpanXY = SpanXY&lt;double&gt;;</div>
+<div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;<span class="keyword">using</span> DSpanVxVy = SpanVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160; </div>
+<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160;<span class="keyword">using</span> DSpanSpXY = SpanSpXY&lt;double&gt;;</div>
+<div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160;<span class="keyword">using</span> DSpanSpVxVy = SpanSpVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;<span class="keyword">using</span> DSpanSpXYVxVy = SpanSpXYVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160; </div>
-<div class="line"><a name="l00918"></a><span class="lineno">  918</span>&#160;<span class="keyword">using</span> DFieldXY = FieldXY&lt;double&gt;;</div>
-<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;<span class="keyword">using</span> DFieldVxVy = FieldVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160; </div>
-<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;<span class="keyword">using</span> DFieldSpVxVy = FieldSpVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;<span class="keyword">using</span> DFieldSpXYVxVy = FieldSpXYVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160; </div>
-<div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160; </div>
+<div class="line"><a name="l00918"></a><span class="lineno">  918</span>&#160; </div>
+<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160; </div>
+<div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;<span class="keyword">using</span> ViewXY = ddc::ChunkSpan&lt;ElementType const, IDomainXY&gt;;</div>
+<div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160; </div>
+<div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160;<span class="keyword">using</span> ViewVxVy = ddc::ChunkSpan&lt;ElementType const, IDomainVxVy&gt;;</div>
 <div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160; </div>
 <div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;<span class="keyword">using</span> SpanXY = ddc::ChunkSpan&lt;ElementType, IDomainXY&gt;;</div>
+<div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;<span class="keyword">using</span> ViewSpXY = ddc::ChunkSpan&lt;ElementType const, IDomainSpXY&gt;;</div>
 <div class="line"><a name="l00928"></a><span class="lineno">  928</span>&#160; </div>
 <div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;<span class="keyword">using</span> SpanVxVy = ddc::ChunkSpan&lt;ElementType, IDomainVy&gt;;</div>
+<div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;<span class="keyword">using</span> ViewSpVxVy = ddc::ChunkSpan&lt;ElementType const, IDomainSpVxVy&gt;;</div>
 <div class="line"><a name="l00931"></a><span class="lineno">  931</span>&#160; </div>
 <div class="line"><a name="l00932"></a><span class="lineno">  932</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00933"></a><span class="lineno">  933</span>&#160;<span class="keyword">using</span> SpanSpXY = ddc::ChunkSpan&lt;ElementType, IDomainSpXY&gt;;</div>
+<div class="line"><a name="l00933"></a><span class="lineno">  933</span>&#160;<span class="keyword">using</span> ViewSpXYVxVy = ddc::ChunkSpan&lt;ElementType const, IDomainSpXYVxVy&gt;;</div>
 <div class="line"><a name="l00934"></a><span class="lineno">  934</span>&#160; </div>
 <div class="line"><a name="l00935"></a><span class="lineno">  935</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;<span class="keyword">using</span> SpanSpVxVy = ddc::ChunkSpan&lt;ElementType, IDomainSpVy&gt;;</div>
+<div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;<span class="keyword">using</span> BSViewXY = ddc::ChunkSpan&lt;ElementType const, BSDomainXY&gt;;</div>
 <div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160; </div>
-<div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;<span class="keyword">using</span> SpanSpXYVxVy = ddc::ChunkSpan&lt;ElementType, IDomainSpXYVxVy&gt;;</div>
-<div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160; </div>
+<div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160; </div>
+<div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;<span class="keyword">using</span> DViewXY = ViewXY&lt;double&gt;;</div>
+<div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;<span class="keyword">using</span> DViewVxVy = ViewVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160; </div>
-<div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160; </div>
-<div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160;<span class="keyword">using</span> DSpanXY = SpanXY&lt;double&gt;;</div>
-<div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160;<span class="keyword">using</span> DSpanVxVy = SpanVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;<span class="keyword">using</span> DViewSpXY = ViewSpXY&lt;double&gt;;</div>
+<div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160;<span class="keyword">using</span> DViewSpVxVy = ViewSpVxVy&lt;double&gt;;</div>
+<div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160;<span class="keyword">using</span> DViewSpXYVxVy = ViewSpXYVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160; </div>
-<div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;<span class="keyword">using</span> DSpanSpXY = SpanSpXY&lt;double&gt;;</div>
-<div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;<span class="keyword">using</span> DSpanSpVxVy = SpanSpVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;<span class="keyword">using</span> DSpanSpXYVxVy = SpanSpXYVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160; </div>
-<div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160; </div>
-<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160; </div>
-<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;<span class="keyword">using</span> ViewXY = ddc::ChunkSpan&lt;ElementType const, IDomainXY&gt;;</div>
-<div class="line"><a name="l00954"></a><span class="lineno">  954</span>&#160; </div>
-<div class="line"><a name="l00955"></a><span class="lineno">  955</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00956"></a><span class="lineno">  956</span>&#160;<span class="keyword">using</span> ViewVxVy = ddc::ChunkSpan&lt;ElementType const, IDomainVxVy&gt;;</div>
-<div class="line"><a name="l00957"></a><span class="lineno">  957</span>&#160; </div>
-<div class="line"><a name="l00958"></a><span class="lineno">  958</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00959"></a><span class="lineno">  959</span>&#160;<span class="keyword">using</span> ViewSpXY = ddc::ChunkSpan&lt;ElementType const, IDomainSpXY&gt;;</div>
-<div class="line"><a name="l00960"></a><span class="lineno">  960</span>&#160; </div>
-<div class="line"><a name="l00961"></a><span class="lineno">  961</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00962"></a><span class="lineno">  962</span>&#160;<span class="keyword">using</span> ViewSpVxVy = ddc::ChunkSpan&lt;ElementType const, IDomainSpVxVy&gt;;</div>
-<div class="line"><a name="l00963"></a><span class="lineno">  963</span>&#160; </div>
-<div class="line"><a name="l00964"></a><span class="lineno">  964</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00965"></a><span class="lineno">  965</span>&#160;<span class="keyword">using</span> ViewSpXYVxVy = ddc::ChunkSpan&lt;ElementType const, IDomainSpXYVxVy&gt;;</div>
-<div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160; </div>
-<div class="line"><a name="l00967"></a><span class="lineno">  967</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00968"></a><span class="lineno">  968</span>&#160;<span class="keyword">using</span> BSViewXY = ddc::ChunkSpan&lt;ElementType const, BSDomainXY&gt;;</div>
-<div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160; </div>
-<div class="line"><a name="l00970"></a><span class="lineno">  970</span>&#160; </div>
-<div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160; </div>
-<div class="line"><a name="l00972"></a><span class="lineno">  972</span>&#160;<span class="keyword">using</span> DViewXY = ViewXY&lt;double&gt;;</div>
-<div class="line"><a name="l00973"></a><span class="lineno">  973</span>&#160;<span class="keyword">using</span> DViewVxVy = ViewVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00974"></a><span class="lineno">  974</span>&#160; </div>
-<div class="line"><a name="l00975"></a><span class="lineno">  975</span>&#160;<span class="keyword">using</span> DViewSpXY = ViewSpXY&lt;double&gt;;</div>
-<div class="line"><a name="l00976"></a><span class="lineno">  976</span>&#160;<span class="keyword">using</span> DViewSpVxVy = ViewSpVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00977"></a><span class="lineno">  977</span>&#160;<span class="keyword">using</span> DViewSpXYVxVy = ViewSpXYVxVy&lt;double&gt;;</div>
-<div class="line"><a name="l00978"></a><span class="lineno">  978</span>&#160; </div>
-<div class="line"><a name="l00979"></a><span class="lineno">  979</span>&#160;<span class="keyword">using</span> DBSViewXY = BSViewXY&lt;double&gt;;</div>
+<div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;<span class="keyword">using</span> DBSViewXY = BSViewXY&lt;double&gt;;</div>
 <div class="ttc" id="aclassPolarBSplines_html"><div class="ttname"><a href="classPolarBSplines.html">PolarBSplines</a></div><div class="ttdoc">A class containing all information describing polar bsplines.</div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:28</div></div>
 <div class="ttc" id="aclassVectorFieldSpan_html"><div class="ttname"><a href="classVectorFieldSpan.html">VectorFieldSpan</a></div><div class="ttdoc">Pre-declaration of VectorFieldSpan.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:45</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">Pre-declaration of VectorField.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:34</div></div>
@@ -1030,9 +997,9 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="ttc" id="astructIDimVp_html"><div class="ttname"><a href="structIDimVp.html">IDimVp</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:306</div></div>
 <div class="ttc" id="astructIDimVr_html"><div class="ttname"><a href="structIDimVr.html">IDimVr</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:303</div></div>
 <div class="ttc" id="astructIDimVx_html"><div class="ttname"><a href="structIDimVx.html">IDimVx</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:544</div></div>
-<div class="ttc" id="astructIDimVy_html"><div class="ttname"><a href="structIDimVy.html">IDimVy</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:740</div></div>
+<div class="ttc" id="astructIDimVy_html"><div class="ttname"><a href="structIDimVy.html">IDimVy</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:708</div></div>
 <div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:541</div></div>
-<div class="ttc" id="astructIDimY_html"><div class="ttname"><a href="structIDimY.html">IDimY</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:737</div></div>
+<div class="ttc" id="astructIDimY_html"><div class="ttname"><a href="structIDimY.html">IDimY</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:705</div></div>
 <div class="ttc" id="astructPolarBSplinesRP_html"><div class="ttname"><a href="structPolarBSplinesRP.html">PolarBSplinesRP</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:72</div></div>
 <div class="ttc" id="astructPolarSpline_html"><div class="ttname"><a href="structPolarSpline.html">PolarSpline</a></div><div class="ttdoc">A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.</div><div class="ttdef"><b>Definition:</b> polar_spline.hpp:19</div></div>
 <div class="ttc" id="astructRDimP_html"><div class="ttname"><a href="structRDimP.html">RDimP</a></div><div class="ttdoc">Define periodic real Theta dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:39</div></div>
@@ -1045,12 +1012,12 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="ttc" id="astructRDimVr_html_a1e8890fa598572b69d07d3869c5f5e09"><div class="ttname"><a href="structRDimVr.html#a1e8890fa598572b69d07d3869c5f5e09">RDimVr::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:249</div></div>
 <div class="ttc" id="astructRDimVx_html"><div class="ttname"><a href="structRDimVx.html">RDimVx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:495</div></div>
 <div class="ttc" id="astructRDimVx_html_a11bf97b66f066f6e9b062e8742f6cc78"><div class="ttname"><a href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">RDimVx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:500</div></div>
-<div class="ttc" id="astructRDimVy_html"><div class="ttname"><a href="structRDimVy.html">RDimVy</a></div><div class="ttdoc">Define non periodic real Y velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:695</div></div>
-<div class="ttc" id="astructRDimVy_html_ac3acad5786a7c7b748997dba2c7dbcdd"><div class="ttname"><a href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">RDimVy::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:700</div></div>
+<div class="ttc" id="astructRDimVy_html"><div class="ttname"><a href="structRDimVy.html">RDimVy</a></div><div class="ttdoc">Define non periodic real Y velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:663</div></div>
+<div class="ttc" id="astructRDimVy_html_ac3acad5786a7c7b748997dba2c7dbcdd"><div class="ttname"><a href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">RDimVy::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:668</div></div>
 <div class="ttc" id="astructRDimX_html"><div class="ttname"><a href="structRDimX.html">RDimX</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:484</div></div>
 <div class="ttc" id="astructRDimX_html_a8cb720efb33235cee3371843279ea9ab"><div class="ttname"><a href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">RDimX::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:489</div></div>
-<div class="ttc" id="astructRDimY_html"><div class="ttname"><a href="structRDimY.html">RDimY</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:684</div></div>
-<div class="ttc" id="astructRDimY_html_a48a27c572829350ae0f5b47bf6e13f74"><div class="ttname"><a href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">RDimY::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:689</div></div>
+<div class="ttc" id="astructRDimY_html"><div class="ttname"><a href="structRDimY.html">RDimY</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:652</div></div>
+<div class="ttc" id="astructRDimY_html_a48a27c572829350ae0f5b47bf6e13f74"><div class="ttname"><a href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">RDimY::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:657</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
