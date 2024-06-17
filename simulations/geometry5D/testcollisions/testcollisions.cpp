@@ -145,8 +145,8 @@ int main(int argc, char** argv)
     DDomVpar dom_vpar(IdxVpar(0), DVecVpar(grid_vpar.size()));
     ddc::init_discrete_space<GridMu>(grid_mu);
     DDomMu dom_mu(IdxMu(0), DVecMu(grid_mu.size()));
-    DVecSp const kinspecies(charges.size());
-    DDomSp const dom_kinsp(IdxSp(0), kinspecies);
+    IVectSp const kinspecies(charges.size());
+    IDomainSp const dom_kinsp(IndexSp(0), kinspecies);
 
     DFieldTor1 field_grid_tor1(dom_tor1);
     ddc::parallel_deepcopy(field_grid_tor1, DViewTor1(grid_tor1.data(), dom_tor1));
