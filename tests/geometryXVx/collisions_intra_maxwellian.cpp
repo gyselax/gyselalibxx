@@ -161,31 +161,22 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     });
 
     // diffusion coefficient
-    device_t<ddc::Chunk<
-            double,
-            ddc::DiscreteDomain<IDimSp, IDimX, CollisionsIntra::ghosted_vx_point_sampling>>>
+    device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDimSp, IDimX, CollisionsIntra::GhostedVx>>>
             Dcoll_f(collisions.get_mesh_ghosted());
     auto Dcoll = Dcoll_f.span_view();
-    compute_Dcoll<
-            CollisionsIntra::
-                    ghosted_vx_point_sampling>(Dcoll, collfreq, density_init, temperature_init);
+    compute_Dcoll<CollisionsIntra::GhostedVx>(Dcoll, collfreq, density_init, temperature_init);
 
-    device_t<ddc::Chunk<
-            double,
-            ddc::DiscreteDomain<IDimSp, IDimX, CollisionsIntra::ghosted_vx_point_sampling>>>
+    device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDimSp, IDimX, CollisionsIntra::GhostedVx>>>
             dvDcoll_f(collisions.get_mesh_ghosted());
     auto dvDcoll = dvDcoll_f.span_view();
-    compute_dvDcoll<
-            CollisionsIntra::
-                    ghosted_vx_point_sampling>(dvDcoll, collfreq, density_init, temperature_init);
+    compute_dvDcoll<CollisionsIntra::GhostedVx>(dvDcoll, collfreq, density_init, temperature_init);
 
     // kernel maxwellian fluid moments
     DFieldSpX Vcoll_f(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
     DFieldSpX Tcoll_f(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
     auto Vcoll = Vcoll_f.span_view();
     auto Tcoll = Tcoll_f.span_view();
-    compute_Vcoll_Tcoll<
-            CollisionsIntra::ghosted_vx_point_sampling>(Vcoll, Tcoll, allfdistribu, Dcoll, dvDcoll);
+    compute_Vcoll_Tcoll<CollisionsIntra::GhostedVx>(Vcoll, Tcoll, allfdistribu, Dcoll, dvDcoll);
 
     host_t<DFieldSpX> Vcoll_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
     host_t<DFieldSpX> Tcoll_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
@@ -302,16 +293,11 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     // Vcoll and Tcoll calculation
     compute_collfreq(collfreq, nustar_profile, density_init, temperature_init);
 
-    compute_Dcoll<
-            CollisionsIntra::
-                    ghosted_vx_point_sampling>(Dcoll, collfreq, density_init, temperature_init);
+    compute_Dcoll<CollisionsIntra::GhostedVx>(Dcoll, collfreq, density_init, temperature_init);
 
-    compute_dvDcoll<
-            CollisionsIntra::
-                    ghosted_vx_point_sampling>(dvDcoll, collfreq, density_init, temperature_init);
+    compute_dvDcoll<CollisionsIntra::GhostedVx>(dvDcoll, collfreq, density_init, temperature_init);
 
-    compute_Vcoll_Tcoll<
-            CollisionsIntra::ghosted_vx_point_sampling>(Vcoll, Tcoll, allfdistribu, Dcoll, dvDcoll);
+    compute_Vcoll_Tcoll<CollisionsIntra::GhostedVx>(Vcoll, Tcoll, allfdistribu, Dcoll, dvDcoll);
 
     moments(density_res.span_view(), allfdistribu_host.span_cview(), FluidMoments::s_density);
     moments(mean_velocity_res.span_view(),
