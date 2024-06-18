@@ -68,10 +68,10 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     // collision operator
     double const nustar0(1.);
     CollisionsIntra collisions(mesh, nustar0);
-    ddc::DiscreteDomain<CollisionsIntra::ghosted_vx_point_sampling> gridvx_ghosted
+    ddc::DiscreteDomain<CollisionsIntra::GhostedVx> gridvx_ghosted
             = collisions.get_gridvx_ghosted();
-    ddc::DiscreteDomain<CollisionsIntra::ghosted_vx_staggered_point_sampling>
-            gridvx_ghosted_staggered = collisions.get_gridvx_ghosted_staggered();
+    ddc::DiscreteDomain<CollisionsIntra::GhostedVxStaggered> gridvx_ghosted_staggered
+            = collisions.get_gridvx_ghosted_staggered();
 
     double const npoints(gridvx.size());
     std::vector<double> gridvx_ghosted_pred(npoints + 2);

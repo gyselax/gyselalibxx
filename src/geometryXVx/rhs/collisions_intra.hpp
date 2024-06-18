@@ -37,21 +37,6 @@
  */
 class CollisionsIntra : public IRightHandSide
 {
-public:
-    /**
-     * @brief A struct representing a tag to construct a mesh with ghosted points. 
-     */
-    struct GhostedVx
-    {
-    };
-
-    /**
-     * @brief A struct representing a tag to construct a mesh with ghosted and staggered points. 
-     */
-    struct GhostedVxStaggered
-    {
-    };
-
 private:
     static constexpr bool uniform_edge_v = ddc::is_uniform_sampling_v<IDimVx>;
 
@@ -59,81 +44,57 @@ public:
     /**
      * A conditional type representing either a uniform or a non-uniform ghosted vx mesh. 
      */
-    struct ghosted_vx_point_sampling
+    struct GhostedVx
         : std::conditional_t<
                   uniform_edge_v,
-                  ddc::UniformPointSampling<GhostedVx>,
-                  ddc::NonUniformPointSampling<GhostedVx>>
+                  ddc::UniformPointSampling<RDimVx>,
+                  ddc::NonUniformPointSampling<RDimVx>>
     {
     };
 
     /**
      * A conditional type representing either a uniform or a non-uniform ghosted staggered vx mesh. 
      */
-    struct ghosted_vx_staggered_point_sampling
+    struct GhostedVxStaggered
         : std::conditional_t<
                   uniform_edge_v,
-                  ddc::UniformPointSampling<GhostedVxStaggered>,
-                  ddc::NonUniformPointSampling<GhostedVxStaggered>>
+                  ddc::UniformPointSampling<RDimVx>,
+                  ddc::NonUniformPointSampling<RDimVx>>
     {
     };
 
     /**
      * A type representing a mesh for species, space and ghosted vx mesh. 
      */
-    using IDomainSpXVx_ghosted = ddc::DiscreteDomain<IDimSp, IDimX, ghosted_vx_point_sampling>;
+    using IDomainSpXVx_ghosted = ddc::DiscreteDomain<IDimSp, IDimX, GhostedVx>;
 
     /**
      * A type representing a mesh for species, space and ghosted staggered vx mesh. 
      */
-    using IDomainSpXVx_ghosted_staggered
-            = ddc::DiscreteDomain<IDimSp, IDimX, ghosted_vx_staggered_point_sampling>;
+    using IDomainSpXVx_ghosted_staggered = ddc::DiscreteDomain<IDimSp, IDimX, GhostedVxStaggered>;
 
     /**
      * A type representing a ghosted vx index. 
      */
-    using IndexVx_ghosted = ddc::DiscreteElement<ghosted_vx_point_sampling>;
+    using IndexVx_ghosted = ddc::DiscreteElement<GhostedVx>;
 
     /**
      * A type representing a ghosted staggered vx index. 
      */
-    using IndexVx_ghosted_staggered = ddc::DiscreteElement<ghosted_vx_staggered_point_sampling>;
+    using IndexVx_ghosted_staggered = ddc::DiscreteElement<GhostedVxStaggered>;
 
     /**
      * A type representing a species, space and ghosted vx index. 
      */
-    using IndexSpXVx_ghosted = ddc::DiscreteElement<IDimSp, IDimX, ghosted_vx_point_sampling>;
+    using IndexSpXVx_ghosted = ddc::DiscreteElement<IDimSp, IDimX, GhostedVx>;
 
     /**
      * A type representing a species, space and ghosted staggered vx index. 
      */
-    using IndexSpXVx_ghosted_staggered
-            = ddc::DiscreteElement<IDimSp, IDimX, ghosted_vx_staggered_point_sampling>;
+    using IndexSpXVx_ghosted_staggered = ddc::DiscreteElement<IDimSp, IDimX, GhostedVxStaggered>;
 
 
 private:
-    static ddc::Coordinate<GhostedVx> ghosted_from_coord(ddc::Coordinate<RDimVx> const& coord)
-    {
-        return ddc::Coordinate<GhostedVx>(ddc::get<RDimVx>(coord));
-    }
-    static ddc::Coordinate<RDimVx> coord_from_ghosted(ddc::Coordinate<GhostedVx> const& coord)
-    {
-        return ddc::Coordinate<RDimVx>(ddc::get<GhostedVx>(coord));
-    }
-    static ddc::Coordinate<GhostedVxStaggered> ghosted_staggered_from_coord(
-            ddc::Coordinate<RDimVx> const& coord)
-    {
-        return ddc::Coordinate<GhostedVxStaggered>(ddc::get<RDimVx>(coord));
-    }
-    static ddc::Coordinate<RDimVx> coord_from_ghosted_staggered(
-            ddc::Coordinate<GhostedVxStaggered> const& coord)
-    {
-        return ddc::Coordinate<RDimVx>(ddc::get<GhostedVxStaggered>(coord));
-    }
-    static IndexVx index_from_ghosted(ddc::DiscreteElement<GhostedVx> const& index_ghosted)
-    {
-        return IndexVx(index_ghosted.uid() - 1);
-    }
     KOKKOS_FUNCTION static IndexVx_ghosted ghosted_from_index(IndexVx const& index)
     {
         return IndexVx_ghosted(index.uid() + 1);
@@ -150,8 +111,8 @@ private:
     DFieldSpX m_nustar_profile_alloc;
     DSpanSpX m_nustar_profile;
 
-    ddc::DiscreteDomain<ghosted_vx_point_sampling> m_gridvx_ghosted;
-    ddc::DiscreteDomain<ghosted_vx_staggered_point_sampling> m_gridvx_ghosted_staggered;
+    ddc::DiscreteDomain<GhostedVx> m_gridvx_ghosted;
+    ddc::DiscreteDomain<GhostedVxStaggered> m_gridvx_ghosted_staggered;
 
     IDomainSpXVx_ghosted m_mesh_ghosted;
     IDomainSpXVx_ghosted_staggered m_mesh_ghosted_staggered;
@@ -194,22 +155,21 @@ public:
      *
      * @return The ghosted vx mesh.
      */
-    ddc::DiscreteDomain<ghosted_vx_point_sampling> const& get_gridvx_ghosted() const;
+    ddc::DiscreteDomain<GhostedVx> const& get_gridvx_ghosted() const;
 
     /**
      * @brief Get the ghosted and staggered vx mesh used for computing finite differences centered derivatives.
      *
      * @return The ghosted and staggered vx mesh.
      */
-    ddc::DiscreteDomain<ghosted_vx_staggered_point_sampling> const& get_gridvx_ghosted_staggered()
-            const;
+    ddc::DiscreteDomain<GhostedVxStaggered> const& get_gridvx_ghosted_staggered() const;
 
     /**
      * @brief Get a mesh containing the species, spatial and the ghosted vx mesh.
      *
      * @return The species, spatial, and ghosted vx mesh.
      */
-    ddc::DiscreteDomain<IDimSp, IDimX, ghosted_vx_point_sampling> const& get_mesh_ghosted() const;
+    ddc::DiscreteDomain<IDimSp, IDimX, GhostedVx> const& get_mesh_ghosted() const;
 
     /**
      * @brief Compute the right-hand-side of the collision operator linear system.
