@@ -1,7 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner3Tag":[17,141,0,2],
-"classPolarSplineEvaluator.html":[17,144],
 "classPolarSplineEvaluator.html#a050a2b7f7baeaccdfeddbbe571580bb5":[17,144,10],
 "classPolarSplineEvaluator.html#a0dace1c41499a5500a1f1c10e01794d1":[17,144,20],
 "classPolarSplineEvaluator.html#a13c5887c37f94a933cdd431c122a0124":[17,144,7],
@@ -58,8 +56,8 @@ var NAVTREEINDEX3 =
 "classPredCorrHybrid.html#aae7782821ebc9c68e3f3c4bb26302c25":[17,153,0],
 "classPredCorrHybrid.html#ac1f39a97a786b52bee7c942b4eebdb30":[17,153,1],
 "classQNSolver.html":[17,154],
-"classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[17,154,0],
 "classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[17,154,2],
+"classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[17,154,0],
 "classQNSolver.html#aa468e237e8cb2c752e45171eddaf8d75":[17,154,5],
 "classQNSolver.html#aed8063537a8c1803a2fa92bac6e9c3fe":[17,154,4],
 "classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[17,154,1],
@@ -249,5 +247,7 @@ var NAVTREEINDEX3 =
 "compute__norms_8hpp_source.html":[18,0,11,0],
 "constantfluidinitialization_8hpp_source.html":[18,0,4,2,0,31],
 "constantrate_8hpp_source.html":[18,0,4,2,2,0],
-"coord__transformation_8hpp_source.html":[18,0,8,0,0]
+"coord__transformation_8hpp_source.html":[18,0,8,0,0],
+"cosine__evaluator_8hpp_source.html":[18,2,0,1,0],
+"crank__nicolson_8hpp_source.html":[18,0,13,0]
 };

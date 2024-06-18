@@ -1,7 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"spline__quadrature_8hpp.html":[18,0,11,5],
-"spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b":[18,0,11,5,0],
 "spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769":[18,0,11,5,1],
 "spline__quadrature_8hpp_source.html":[18,0,11,5],
 "splitrighthandsidesolver_8hpp_source.html":[18,0,4,0,1],
@@ -107,8 +105,8 @@ var NAVTREEINDEX5 =
 "structBSplinesVy.html":[17,23],
 "structBSplinesX.html":[17,24],
 "structBSplinesY.html":[17,25],
-"structCollisionsIntra_1_1ghosted__vx__point__sampling.html":[17,36,0],
-"structCollisionsIntra_1_1ghosted__vx__staggered__point__sampling.html":[17,36,1],
+"structCollisionsIntra_1_1GhostedVx.html":[17,36,0],
+"structCollisionsIntra_1_1GhostedVxStaggered.html":[17,36,1],
 "structDimX__pC.html":[17,48],
 "structDimY__pC.html":[17,49],
 "structFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSbc37f4b78518f7a0186f12a5712ba102.html":[17,63,0],

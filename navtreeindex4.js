@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"cosine__evaluator_8hpp_source.html":[18,2,0,1,0],
-"crank__nicolson_8hpp_source.html":[18,0,13,0],
 "curvilinear2d__to__cartesian_8hpp_source.html":[18,2,0,0,0,0,3],
 "czarny__to__cartesian_8hpp_source.html":[18,2,0,0,0,0,4],
 "ddc__helper_8hpp_source.html":[18,0,14,1],
@@ -249,5 +247,7 @@ var NAVTREEINDEX4 =
 "species__init_8hpp_source.html":[18,0,12,2],
 "spline__foot__finder_8hpp_source.html":[18,0,3,0,5],
 "spline__interpolator_8hpp_source.html":[18,0,6,3],
-"spline__interpolator__2d__rp_8hpp_source.html":[18,0,3,4,1]
+"spline__interpolator__2d__rp_8hpp_source.html":[18,0,3,4,1],
+"spline__quadrature_8hpp.html":[18,0,11,5],
+"spline__quadrature_8hpp.html#aa3abf38dc419ac6e23450295ca023e8b":[18,0,11,5,0]
 };

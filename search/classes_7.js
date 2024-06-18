@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hiddennubsplinesx_652',['HiddenNUBSplinesX',['../structHiddenNUBSplinesX.html',1,'']]]
+  ['hiddennubsplinesx_648',['HiddenNUBSplinesX',['../structHiddenNUBSplinesX.html',1,'']]]
 ];
