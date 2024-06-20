@@ -101,6 +101,7 @@ $(document).ready(function(){initNavTree('classSingleModePerturbInitialization.h
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classSingleModePerturbInitialization-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">SingleModePerturbInitialization Class Reference</div>  </div>
@@ -122,12 +123,12 @@ Inheritance diagram for SingleModePerturbInitialization:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae765597410a9ba3ca138985cc0c4365a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSingleModePerturbInitialization.html#ae765597410a9ba3ca138985cc0c4365a">perturbation_initialization</a> (DSpanX perturbation, int mode, double perturb_amplitude) const</td></tr>
-<tr class="memdesc:ae765597410a9ba3ca138985cc0c4365a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the perturbation.  <a href="classSingleModePerturbInitialization.html#ae765597410a9ba3ca138985cc0c4365a">More...</a><br /></td></tr>
-<tr class="separator:ae765597410a9ba3ca138985cc0c4365a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7471b3f7288ab5653f379d558fa25fb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSingleModePerturbInitialization.html#ad7471b3f7288ab5653f379d558fa25fb">SingleModePerturbInitialization</a> (DViewSpVx fequilibrium, host_t&lt; ViewSp&lt; int &gt;&gt; init_perturb_mode, host_t&lt; DViewSp &gt; init_perturb_amplitude)</td></tr>
-<tr class="memdesc:ad7471b3f7288ab5653f379d558fa25fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classSingleModePerturbInitialization.html" title="A class that initializes the distribution function as a perturbed Maxwellian.">SingleModePerturbInitialization</a> class.  <a href="classSingleModePerturbInitialization.html#ad7471b3f7288ab5653f379d558fa25fb">More...</a><br /></td></tr>
-<tr class="separator:ad7471b3f7288ab5653f379d558fa25fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12b957e21a1c22a62339d1e23bfe09e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSingleModePerturbInitialization.html#a12b957e21a1c22a62339d1e23bfe09e4">perturbation_initialization</a> (DSpanX perturbation, int const perturb_mode, double const perturb_amplitude) const</td></tr>
+<tr class="memdesc:a12b957e21a1c22a62339d1e23bfe09e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the perturbation.  <a href="classSingleModePerturbInitialization.html#a12b957e21a1c22a62339d1e23bfe09e4">More...</a><br /></td></tr>
+<tr class="separator:a12b957e21a1c22a62339d1e23bfe09e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0a7fd3c22979240d8ef3a38ddcad4a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSingleModePerturbInitialization.html#ae0a7fd3c22979240d8ef3a38ddcad4a4">SingleModePerturbInitialization</a> (DViewSpVx fequilibrium, host_t&lt; IFieldSp &gt; init_perturb_mode, host_t&lt; DFieldSp &gt; init_perturb_amplitude)</td></tr>
+<tr class="memdesc:ae0a7fd3c22979240d8ef3a38ddcad4a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classSingleModePerturbInitialization.html" title="A class that initializes the distribution function as a perturbed Maxwellian.">SingleModePerturbInitialization</a> class.  <a href="classSingleModePerturbInitialization.html#ae0a7fd3c22979240d8ef3a38ddcad4a4">More...</a><br /></td></tr>
+<tr class="separator:ae0a7fd3c22979240d8ef3a38ddcad4a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac351dadf3c630ae1b2e70c0d281e9ac8"><td class="memItemLeft" align="right" valign="top">DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSingleModePerturbInitialization.html#ac351dadf3c630ae1b2e70c0d281e9ac8">operator()</a> (DSpanSpXVx allfdistribu) const override</td></tr>
 <tr class="memdesc:ac351dadf3c630ae1b2e70c0d281e9ac8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the distribution function as as a perturbed Maxwellian.  <a href="classSingleModePerturbInitialization.html#ac351dadf3c630ae1b2e70c0d281e9ac8">More...</a><br /></td></tr>
 <tr class="separator:ac351dadf3c630ae1b2e70c0d281e9ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,14 +141,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7000b61f058ed580a8c2a5d1df85313b"><td class="memItemLeft" align="right" valign="top">DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSingleModePerturbInitialization.html#a7000b61f058ed580a8c2a5d1df85313b">operator()</a> (DSpanSpXYVxVy allfdistribu) const override</td></tr>
 <tr class="memdesc:a7000b61f058ed580a8c2a5d1df85313b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the distribution function as as a perturbed Maxwellian.  <a href="classSingleModePerturbInitialization.html#a7000b61f058ed580a8c2a5d1df85313b">More...</a><br /></td></tr>
 <tr class="separator:a7000b61f058ed580a8c2a5d1df85313b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a3689d38f7c520b48e2e417b8b8f3aa52"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classSingleModePerturbInitialization.html">SingleModePerturbInitialization</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSingleModePerturbInitialization.html#a3689d38f7c520b48e2e417b8b8f3aa52">init_from_input</a> (DViewSpVx allfequilibrium, IDomainSp dom_kinsp, PC_tree_t const &amp;yaml_input_file)</td></tr>
+<tr class="memdesc:a3689d38f7c520b48e2e417b8b8f3aa52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read init_perturb_mode and init_perturb amplitude in a YAML input file to initialize the perturbation.  <a href="classSingleModePerturbInitialization.html#a3689d38f7c520b48e2e417b8b8f3aa52">More...</a><br /></td></tr>
+<tr class="separator:a3689d38f7c520b48e2e417b8b8f3aa52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that initializes the distribution function as a perturbed Maxwellian. </p>
 <p>Initialization operator with a sinusoidal perturbation of a Maxwellian. This initializes all species.</p>
 <p>A class that initializes the distribution function as a perturbed Maxwellian defined as $f = f_{maxw}(v) * (1 + perturb(x))$, where $f_{maxw}(v)$ is a Maxwellian, and $perturb(x)$ is a sinusoidal perturbation. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad7471b3f7288ab5653f379d558fa25fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7471b3f7288ab5653f379d558fa25fb">&#9670;&nbsp;</a></span>SingleModePerturbInitialization() <span class="overload">[1/2]</span></h2>
+<a id="ae0a7fd3c22979240d8ef3a38ddcad4a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0a7fd3c22979240d8ef3a38ddcad4a4">&#9670;&nbsp;</a></span>SingleModePerturbInitialization() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -161,13 +168,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">host_t&lt; ViewSp&lt; int &gt;&gt;&#160;</td>
+          <td class="paramtype">host_t&lt; IFieldSp &gt;&#160;</td>
           <td class="paramname"><em>init_perturb_mode</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">host_t&lt; DViewSp &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldSp &gt;&#160;</td>
           <td class="paramname"><em>init_perturb_amplitude</em>&#160;</td>
         </tr>
         <tr>
@@ -235,8 +242,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae765597410a9ba3ca138985cc0c4365a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae765597410a9ba3ca138985cc0c4365a">&#9670;&nbsp;</a></span>perturbation_initialization() <span class="overload">[1/2]</span></h2>
+<a id="a12b957e21a1c22a62339d1e23bfe09e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12b957e21a1c22a62339d1e23bfe09e4">&#9670;&nbsp;</a></span>perturbation_initialization() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -250,13 +257,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>mode</em>, </td>
+          <td class="paramtype">int const&#160;</td>
+          <td class="paramname"><em>perturb_mode</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">double const&#160;</td>
           <td class="paramname"><em>perturb_amplitude</em>&#160;</td>
         </tr>
         <tr>
@@ -271,11 +278,64 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">perturbation</td><td>On input: an uninitialized array On output: an array containing a values that has a sinusoidal variation with given amplitude and mode. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mode</td><td>The mode of the perturbation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">perturb_mode</td><td>The mode of the perturbation. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">perturb_amplitude</td><td>The amplitude of the perturbation. </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a3689d38f7c520b48e2e417b8b8f3aa52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3689d38f7c520b48e2e417b8b8f3aa52">&#9670;&nbsp;</a></span>init_from_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classSingleModePerturbInitialization.html">SingleModePerturbInitialization</a> SingleModePerturbInitialization::init_from_input </td>
+          <td>(</td>
+          <td class="paramtype">DViewSpVx&#160;</td>
+          <td class="paramname"><em>allfequilibrium</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IDomainSp&#160;</td>
+          <td class="paramname"><em>dom_kinsp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PC_tree_t const &amp;&#160;</td>
+          <td class="paramname"><em>yaml_input_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read init_perturb_mode and init_perturb amplitude in a YAML input file to initialize the perturbation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">allfequilibrium</td><td>equilibrium distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom_kinsp</td><td>Discrete Domain for the kinetic species. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">yaml_input_file</td><td>YAML input file. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an instance of <a class="el" href="classSingleModePerturbInitialization.html" title="A class that initializes the distribution function as a perturbed Maxwellian.">SingleModePerturbInitialization</a> class. </dd></dl>
 
 </div>
 </div>

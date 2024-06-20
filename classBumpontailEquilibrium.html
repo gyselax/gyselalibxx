@@ -101,6 +101,7 @@ $(document).ready(function(){initNavTree('classBumpontailEquilibrium.html',''); 
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classBumpontailEquilibrium-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">BumpontailEquilibrium Class Reference</div>  </div>
@@ -143,6 +144,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa9cde57feac60ee82ae09fc61c86c807 inherit pub_methods_classIEquilibrium"><td class="memItemLeft" align="right" valign="top"><a id="aa9cde57feac60ee82ae09fc61c86c807"></a>
 virtual DSpanSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpVxVy allfequilibrium) const =0</td></tr>
 <tr class="separator:aa9cde57feac60ee82ae09fc61c86c807 inherit pub_methods_classIEquilibrium"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a3b9827deb998c9cfad5dbe18b8ad52fb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classBumpontailEquilibrium.html">BumpontailEquilibrium</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBumpontailEquilibrium.html#a3b9827deb998c9cfad5dbe18b8ad52fb">init_from_input</a> (IDomainSp dom_kinsp, PC_tree_t const &amp;yaml_input_file)</td></tr>
+<tr class="memdesc:a3b9827deb998c9cfad5dbe18b8ad52fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the density, temperature and mean velocity required to initialize the bump-on-tail Maxwellian in a YAML input file.  <a href="classBumpontailEquilibrium.html#a3b9827deb998c9cfad5dbe18b8ad52fb">More...</a><br /></td></tr>
+<tr class="separator:a3b9827deb998c9cfad5dbe18b8ad52fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that initializes the distribution function as a sum of two Maxwellian functions. </p>
@@ -241,6 +248,52 @@ virtual DSpanSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operat
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a3b9827deb998c9cfad5dbe18b8ad52fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b9827deb998c9cfad5dbe18b8ad52fb">&#9670;&nbsp;</a></span>init_from_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classBumpontailEquilibrium.html">BumpontailEquilibrium</a> BumpontailEquilibrium::init_from_input </td>
+          <td>(</td>
+          <td class="paramtype">IDomainSp&#160;</td>
+          <td class="paramname"><em>dom_kinsp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PC_tree_t const &amp;&#160;</td>
+          <td class="paramname"><em>yaml_input_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the density, temperature and mean velocity required to initialize the bump-on-tail Maxwellian in a YAML input file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom_kinsp</td><td>Discrete Domain for the kinetic species </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">yaml_input_file</td><td>YAML input file </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an instance of Maxwellian distribution function. </dd></dl>
 
 </div>
 </div>
