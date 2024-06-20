@@ -3,9 +3,11 @@
 #pragma once
 
 #include <geometry.hpp>
+#include <paraconf.h>
 #include <species_info.hpp>
 
 #include "iequilibrium.hpp"
+#include "paraconfpp.hpp"
 
 /**
  * @brief A class that initializes the distribution function as a sum of two Maxwellian functions.
@@ -57,6 +59,16 @@ public:
             host_t<DFieldSp> mean_velocity_bot);
 
     ~BumpontailEquilibrium() override = default;
+
+    /**
+     * @brief Read the density, temperature and mean velocity required to initialize the bump-on-tail Maxwellian in a YAML input file.
+     * @param[in] dom_kinsp Discrete Domain for the kinetic species
+     * @param[in] yaml_input_file YAML input file
+     * @return an instance of Maxwellian distribution function.
+     */
+    static BumpontailEquilibrium init_from_input(
+            IDomainSp dom_kinsp,
+            PC_tree_t const& yaml_input_file);
 
     /**
      * @brief Initializes the distribution function as the sum of a bulk and a bump-on-tail Maxwellians. 

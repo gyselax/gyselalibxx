@@ -37,6 +37,29 @@ DSpanSpVx BumpontailEquilibrium::operator()(DSpanSpVx const allfequilibrium) con
     return allfequilibrium;
 }
 
+BumpontailEquilibrium BumpontailEquilibrium::init_from_input(
+        IDomainSp dom_kinsp,
+        PC_tree_t const& yaml_input_file)
+{
+    host_t<DFieldSp> epsilon_bot(dom_kinsp);
+    host_t<DFieldSp> temperature_bot(dom_kinsp);
+    host_t<DFieldSp> mean_velocity_bot(dom_kinsp);
+
+    for (IndexSp const isp : dom_kinsp) {
+        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
+
+        epsilon_bot(isp) = PCpp_double(conf_isp, ".epsilon_bot");
+        temperature_bot(isp) = PCpp_double(conf_isp, ".temperature_bot");
+        mean_velocity_bot(isp) = PCpp_double(conf_isp, ".mean_velocity_bot");
+    }
+
+    return BumpontailEquilibrium(
+            std::move(epsilon_bot),
+            std::move(temperature_bot),
+            std::move(mean_velocity_bot));
+}
+
+
 void BumpontailEquilibrium::compute_twomaxwellian(
         DSpanVx const fMaxwellian,
         double const epsilon_bot,
