@@ -158,9 +158,7 @@ TEST(GeometryXM, PredCorrHybrid)
     ddc::parallel_fill(init_perturb_amplitude, 0.1);
 
     SingleModePerturbInitialization const
-            init(allfequilibrium,
-                 init_perturb_mode.span_cview(),
-                 init_perturb_amplitude.span_cview());
+            init(allfequilibrium, std::move(init_perturb_mode), std::move(init_perturb_amplitude));
     init(allfdistribu);
 
     // Moments domain initialization
