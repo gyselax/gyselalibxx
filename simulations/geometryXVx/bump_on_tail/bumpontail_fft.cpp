@@ -85,28 +85,10 @@ int main(int argc, char** argv)
     SplineVxBuilder const builder_vx(meshXVx);
     SplineVxBuilder_1d const builder_vx_poisson(mesh_vx);
 
-    host_t<DFieldSp> epsilon_bot(dom_kinsp);
-    host_t<DFieldSp> temperature_bot(dom_kinsp);
-    host_t<DFieldSp> mean_velocity_bot(dom_kinsp);
-    host_t<DFieldSp> init_perturb_amplitude(dom_kinsp);
-    host_t<FieldSp<int>> init_perturb_mode(dom_kinsp);
-
-    for (IndexSp const isp : dom_kinsp) {
-        PC_tree_t const conf_isp = PCpp_get(conf_voicexx, ".SpeciesInfo[%d]", isp.uid());
-
-        epsilon_bot(isp) = PCpp_double(conf_isp, ".epsilon_bot");
-        temperature_bot(isp) = PCpp_double(conf_isp, ".temperature_bot");
-        mean_velocity_bot(isp) = PCpp_double(conf_isp, ".mean_velocity_bot");
-        init_perturb_amplitude(isp) = PCpp_double(conf_isp, ".perturb_amplitude");
-        init_perturb_mode(isp) = static_cast<int>(PCpp_int(conf_isp, ".perturb_mode"));
-    }
-
     // Initialization of the distribution function
     DFieldSpVx allfequilibrium(meshSpVx);
-    BumpontailEquilibrium const init_fequilibrium(
-            std::move(epsilon_bot),
-            std::move(temperature_bot),
-            std::move(mean_velocity_bot));
+    BumpontailEquilibrium const init_fequilibrium
+            = BumpontailEquilibrium::init_from_input(dom_kinsp, conf_voicexx);
     init_fequilibrium(allfequilibrium);
 
     ddc::expose_to_pdi("iter_start", iter_start);
@@ -114,10 +96,8 @@ int main(int argc, char** argv)
     DFieldSpXVx allfdistribu(meshSpXVx);
     double time_start(0);
     if (iter_start == 0) {
-        SingleModePerturbInitialization const
-                init(allfequilibrium,
-                     init_perturb_mode.span_cview(),
-                     init_perturb_amplitude.span_cview());
+        SingleModePerturbInitialization const init = SingleModePerturbInitialization::
+                init_from_input(allfequilibrium, dom_kinsp, conf_voicexx);
         init(allfdistribu);
     } else {
         RestartInitialization const restart(iter_start, time_start);
