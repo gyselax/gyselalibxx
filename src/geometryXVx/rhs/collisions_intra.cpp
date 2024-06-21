@@ -8,6 +8,80 @@
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
 
+template <class TargetDim>
+KOKKOS_FUNCTION ddc::DiscreteElement<TargetDim> CollisionsIntra::to_index(
+        ddc::DiscreteElement<IDimVx> const& index)
+{
+    static_assert(
+            std::is_same_v<TargetDim, GhostedVx> || std::is_same_v<TargetDim, GhostedVxStaggered>);
+    if constexpr (std::is_same_v<TargetDim, GhostedVx>) {
+        return ddc::DiscreteElement<GhostedVx>(index.uid() + 1);
+    } else {
+        return ddc::DiscreteElement<GhostedVxStaggered>(index.uid() + 1);
+    }
+}
+
+template <class VDim>
+std::enable_if_t<!ddc::is_uniform_sampling_v<VDim>> CollisionsIntra::
+        build_ghosted_staggered_vx_point_sampling(ddc::DiscreteDomain<VDim> const& dom)
+{
+    static_assert(
+            std::is_same_v<VDim, IDimVx>,
+            "The function is only designed to work with the IDimVx dimension");
+
+    CoordVx const v0 = ddc::coordinate(dom.front());
+    CoordVx const v1 = ddc::coordinate(dom.front() + 1);
+    CoordVx const vN = ddc::coordinate(dom.back());
+    CoordVx const vNm1 = ddc::coordinate(dom.back() - 1);
+    int const ncells(dom.size() - 1);
+
+    // ghosted points
+    int const npoints(ncells + 3);
+    std::vector<CoordVx> breaks(npoints);
+    breaks[0] = v0 - (v1 - v0);
+    breaks[npoints - 1] = vN + (vN - vNm1);
+    ddc::for_each(dom, [&](IndexVx const iv) {
+        breaks[to_index<GhostedVx>(iv).uid()] = ddc::coordinate(iv);
+    });
+    ddc::init_discrete_space<GhostedVx>(breaks);
+
+    // ghosted staggered points
+    int const npoints_stag(ncells + 2);
+    std::vector<CoordVx> breaks_stag(npoints_stag);
+    breaks_stag[0] = v0 - (v1 - v0) / 2.;
+    breaks_stag[npoints_stag - 1] = vN + (vN - vNm1) / 2.;
+    IDomainVx const gridv_less(dom.remove_last(IVectVx(1)));
+    ddc::for_each(gridv_less, [&](IndexVx const iv) {
+        breaks_stag[iv.uid() + 1] = CoordVx((ddc::coordinate(iv) + ddc::coordinate(iv + 1)) / 2.);
+    });
+    ddc::init_discrete_space<GhostedVxStaggered>(breaks_stag);
+}
+
+template <class VDim>
+std::enable_if_t<ddc::is_uniform_sampling_v<VDim>> CollisionsIntra::
+        build_ghosted_staggered_vx_point_sampling(ddc::DiscreteDomain<VDim> const& dom)
+{
+    static_assert(
+            std::is_same_v<VDim, IDimVx>,
+            "The function is only designed to work with the IDimVx dimension");
+
+    CoordVx const v0 = ddc::coordinate(dom.front());
+    CoordVx const vN = ddc::coordinate(dom.back());
+    int const ncells(dom.size() - 1);
+    double const step(ddc::step<VDim>());
+
+    // ghosted points
+    ddc::init_discrete_space<GhostedVx>(
+            GhostedVx::init(v0 - step, vN + step, ddc::DiscreteVector<GhostedVx>(ncells + 3)));
+
+    // ghosted staggered points
+    ddc::init_discrete_space<GhostedVxStaggered>(
+            GhostedVxStaggered::
+                    init(v0 - step / 2,
+                         vN + step / 2,
+                         ddc::DiscreteVector<GhostedVxStaggered>(ncells + 2)));
+}
+
 CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
     , m_fthresh(1.e-30)
@@ -33,45 +107,7 @@ CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
         throw std::invalid_argument("Collision operator should not be used with nustar0=0.");
     }
 
-    CoordVx const vx0 = ddc::coordinate(ddc::select<IDimVx>(mesh).front());
-    CoordVx const vx1 = ddc::coordinate(ddc::select<IDimVx>(mesh).front() + 1);
-    CoordVx const vxN = ddc::coordinate(ddc::select<IDimVx>(mesh).back());
-    CoordVx const vxNm1 = ddc::coordinate(ddc::select<IDimVx>(mesh).back() - 1);
-    int const ncells(ddc::select<IDimVx>(mesh).size() - 1);
-    if constexpr (uniform_edge_v) {
-        double const step(ddc::step<IDimVx>());
-        ddc::init_discrete_space<GhostedVx>(
-                GhostedVx::
-                        init(vx0 - step, vxN + step, ddc::DiscreteVector<GhostedVx>(ncells + 3)));
-    } else {
-        int const npoints(ncells + 3);
-        std::vector<CoordVx> breaks(npoints);
-        breaks[0] = vx0 - (vx1 - vx0);
-        breaks[npoints - 1] = vxN + (vxN - vxNm1);
-        ddc::for_each(ddc::select<IDimVx>(mesh), [&](IndexVx const ivx) {
-            breaks[ghosted_from_index(ivx).uid()] = ddc::coordinate(ivx);
-        });
-        ddc::init_discrete_space<GhostedVx>(breaks);
-    }
-
-    if constexpr (uniform_edge_v) {
-        double const step(ddc::step<IDimVx>());
-        ddc::init_discrete_space<GhostedVxStaggered>(
-                GhostedVxStaggered::
-                        init(vx0 - step / 2,
-                             vxN + step / 2,
-                             ddc::DiscreteVector<GhostedVxStaggered>(ncells + 2)));
-    } else {
-        int const npoints(ncells + 2);
-        std::vector<CoordVx> breaks(npoints);
-        breaks[0] = vx0 - (vx1 - vx0) / 2.;
-        breaks[npoints - 1] = vxN + (vxN - vxNm1) / 2.;
-        IDomainVx const gridvx_less(ddc::select<IDimVx>(mesh).remove_last(IVectVx(1)));
-        ddc::for_each(gridvx_less, [&](IndexVx const ivx) {
-            breaks[ivx.uid() + 1] = CoordVx((ddc::coordinate(ivx) + ddc::coordinate(ivx + 1)) / 2.);
-        });
-        ddc::init_discrete_space<GhostedVxStaggered>(breaks);
-    }
+    build_ghosted_staggered_vx_point_sampling(ddc::select<IDimVx>(mesh));
 
     m_nustar_profile = m_nustar_profile_alloc.span_view();
     compute_nustar_profile(m_nustar_profile, m_nustar0);
@@ -112,8 +148,8 @@ void CollisionsIntra::compute_matrix_coeff(
                 IndexX const ix = ddc::select<IDimX>(ispxvx);
                 IndexVx const ivx = ddc::select<IDimVx>(ispxvx);
 
-                IndexVx_ghosted ivx_ghosted(ghosted_from_index(ivx));
-                IndexVx_ghosted_staggered ivx_ghosted_staggered(ghosted_staggered_from_index(ivx));
+                IndexVx_ghosted ivx_ghosted(to_index<GhostedVx>(ivx));
+                IndexVx_ghosted_staggered ivx_ghosted_staggered(to_index<GhostedVxStaggered>(ivx));
                 IndexVx_ghosted ivx_next_ghosted(ivx_ghosted + 1);
                 IndexVx_ghosted ivx_prev_ghosted(ivx_ghosted - 1);
                 IndexVx_ghosted_staggered ivx_prev_ghosted_staggered(ivx_ghosted_staggered - 1);

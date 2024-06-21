@@ -95,17 +95,18 @@ public:
 
 
 private:
-    KOKKOS_FUNCTION static IndexVx_ghosted ghosted_from_index(IndexVx const& index)
-    {
-        return IndexVx_ghosted(index.uid() + 1);
-    }
-    KOKKOS_FUNCTION static IndexVx_ghosted_staggered ghosted_staggered_from_index(
-            IndexVx const& index)
-    {
-        return IndexVx_ghosted_staggered(index.uid() + 1);
-    }
+    template <class TargetDim>
+    KOKKOS_FUNCTION static ddc::DiscreteElement<TargetDim> to_index(
+            ddc::DiscreteElement<IDimVx> const& index);
 
-private:
+    template <class VDim>
+    std::enable_if_t<!ddc::is_uniform_sampling_v<VDim>> build_ghosted_staggered_vx_point_sampling(
+            ddc::DiscreteDomain<VDim> const& dom);
+
+    template <class VDim>
+    std::enable_if_t<ddc::is_uniform_sampling_v<VDim>> build_ghosted_staggered_vx_point_sampling(
+            ddc::DiscreteDomain<VDim> const& dom);
+
     double m_nustar0;
     double m_fthresh;
     DFieldSpX m_nustar_profile_alloc;
