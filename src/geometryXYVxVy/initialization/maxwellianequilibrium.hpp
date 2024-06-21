@@ -2,10 +2,12 @@
 
 #pragma once
 
+#include <paraconf.h>
 #include <species_info.hpp>
 
 #include "geometry.hpp"
 #include "iequilibrium.hpp"
+#include "paraconfpp.hpp"
 
 /// Equilibrium operator as Maxwellian. This initializes all species.
 class MaxwellianEquilibrium : public IEquilibrium
@@ -32,6 +34,16 @@ public:
             host_t<DFieldSp> mean_velocity_eq);
 
     ~MaxwellianEquilibrium() override = default;
+
+    /**
+     * @brief Read the density, temperature and mean velocity required to initialize the Maxwellian in a YAML input file.
+     * @param[in] dom_kinsp Discrete Domain for the kinetic species
+     * @param[in] yaml_input_file YAML input file
+     * @return an instance of Maxwellian distribution function.
+     */
+    static MaxwellianEquilibrium init_from_input(
+            IDomainSp dom_kinsp,
+            PC_tree_t const& yaml_input_file);
 
     /**
      * @brief Initializes allfequilibrium as a Maxwellian.

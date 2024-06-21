@@ -85,34 +85,14 @@ int main(int argc, char** argv)
     SplineVxBuilder_1d const builder_vx_1d(mesh_vx);
     SplineVyBuilder_1d const builder_vy_1d(mesh_vy);
 
-    host_t<DFieldSp> density_eq(dom_kinsp);
-    host_t<DFieldSp> temperature_eq(dom_kinsp);
-    host_t<DFieldSp> mean_velocity_eq(dom_kinsp);
-    host_t<DFieldSp> init_perturb_amplitude(dom_kinsp);
-    host_t<FieldSp<int>> init_perturb_mode(dom_kinsp);
-
-    for (IndexSp const isp : dom_kinsp) {
-        PC_tree_t const conf_isp = PCpp_get(conf_voicexx, ".SpeciesInfo[%d]", isp.uid());
-
-        density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
-        temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
-        mean_velocity_eq(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
-        init_perturb_amplitude(isp) = PCpp_double(conf_isp, ".perturb_amplitude");
-        init_perturb_mode(isp) = PCpp_double(conf_isp, ".perturb_mode");
-    }
-
     // Initialization of the distribution function
     DFieldSpVxVy allfequilibrium(meshSpVxVy);
-    MaxwellianEquilibrium const init_fequilibrium(
-            std::move(density_eq),
-            std::move(temperature_eq),
-            std::move(mean_velocity_eq));
+    MaxwellianEquilibrium const init_fequilibrium
+            = MaxwellianEquilibrium::init_from_input(dom_kinsp, conf_voicexx);
     init_fequilibrium(allfequilibrium);
     DFieldSpXYVxVy allfdistribu(meshSpXYVxVy);
-    SingleModePerturbInitialization const
-            init(allfequilibrium,
-                 init_perturb_mode.span_cview(),
-                 init_perturb_amplitude.span_cview());
+    SingleModePerturbInitialization const init = SingleModePerturbInitialization::
+            init_from_input(allfequilibrium, dom_kinsp, conf_voicexx);
     init(allfdistribu);
     auto allfequilibrium_host = ddc::create_mirror_view_and_copy(allfequilibrium.span_view());
 
