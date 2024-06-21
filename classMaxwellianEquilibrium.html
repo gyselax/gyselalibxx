@@ -162,6 +162,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3e23dd1e866fe57900314cca7f6c1ec9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a3e23dd1e866fe57900314cca7f6c1ec9">compute_maxwellian</a> (DSpanVx const fMaxwellian, double const density, double const temperature, double const mean_velocity)</td></tr>
 <tr class="memdesc:a3e23dd1e866fe57900314cca7f6c1ec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a Maxwellian distribution function.  <a href="classMaxwellianEquilibrium.html#a3e23dd1e866fe57900314cca7f6c1ec9">More...</a><br /></td></tr>
 <tr class="separator:a3e23dd1e866fe57900314cca7f6c1ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a77fb0773e84dba996858d9c2ea33fd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a9a77fb0773e84dba996858d9c2ea33fd">init_from_input</a> (IDomainSp dom_kinsp, PC_tree_t const &amp;yaml_input_file)</td></tr>
+<tr class="memdesc:a9a77fb0773e84dba996858d9c2ea33fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the density, temperature and mean velocity required to initialize the Maxwellian in a YAML input file.  <a href="classMaxwellianEquilibrium.html#a9a77fb0773e84dba996858d9c2ea33fd">More...</a><br /></td></tr>
+<tr class="separator:a9a77fb0773e84dba996858d9c2ea33fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72f9f23f4753028c745d92b6512afd0e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a72f9f23f4753028c745d92b6512afd0e">compute_maxwellian</a> (DSpanVxVy const fMaxwellian, double const density, double const temperature, double const mean_velocity)</td></tr>
 <tr class="memdesc:a72f9f23f4753028c745d92b6512afd0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a Maxwellian distribution function.  <a href="classMaxwellianEquilibrium.html#a72f9f23f4753028c745d92b6512afd0e">More...</a><br /></td></tr>
 <tr class="separator:a72f9f23f4753028c745d92b6512afd0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -260,7 +263,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a9a77fb0773e84dba996858d9c2ea33fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a77fb0773e84dba996858d9c2ea33fd">&#9670;&nbsp;</a></span>init_from_input()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a77fb0773e84dba996858d9c2ea33fd">&#9670;&nbsp;</a></span>init_from_input() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -482,6 +485,52 @@ Static Public Member Functions</h2></td></tr>
 
 <p>A method for accessing the m_mean_velocity_eq member variable of the class. </p>
 <dl class="section return"><dt>Returns</dt><dd>A view containing the m_velocity_eq value. </dd></dl>
+
+</div>
+</div>
+<a id="a9a77fb0773e84dba996858d9c2ea33fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a77fb0773e84dba996858d9c2ea33fd">&#9670;&nbsp;</a></span>init_from_input() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a> MaxwellianEquilibrium::init_from_input </td>
+          <td>(</td>
+          <td class="paramtype">IDomainSp&#160;</td>
+          <td class="paramname"><em>dom_kinsp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PC_tree_t const &amp;&#160;</td>
+          <td class="paramname"><em>yaml_input_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the density, temperature and mean velocity required to initialize the Maxwellian in a YAML input file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom_kinsp</td><td>Discrete Domain for the kinetic species </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">yaml_input_file</td><td>YAML input file </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an instance of Maxwellian distribution function. </dd></dl>
 
 </div>
 </div>
