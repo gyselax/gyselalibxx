@@ -153,65 +153,66 @@ $(document).ready(function(){initNavTree('collisions__intra_8hpp_source.html',''
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    KOKKOS_FUNCTION <span class="keyword">static</span> <a class="code" href="classCollisionsIntra.html#aef98b800bcc7c91230459cf2c002171d">IndexVx_ghosted</a> ghosted_from_index(IndexVx <span class="keyword">const</span>&amp; index)</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    {</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCollisionsIntra.html#aef98b800bcc7c91230459cf2c002171d">IndexVx_ghosted</a>(index.uid() + 1);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    KOKKOS_FUNCTION <span class="keyword">static</span> <a class="code" href="classCollisionsIntra.html#a80af17978ef4b947bc145086117a0fcb">IndexVx_ghosted_staggered</a> ghosted_staggered_from_index(</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            IndexVx <span class="keyword">const</span>&amp; index)</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCollisionsIntra.html#a80af17978ef4b947bc145086117a0fcb">IndexVx_ghosted_staggered</a>(index.uid() + 1);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">double</span> m_nustar0;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">double</span> m_fthresh;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    DFieldSpX m_nustar_profile_alloc;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    DSpanSpX m_nustar_profile;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    ddc::DiscreteDomain&lt;GhostedVx&gt; m_gridvx_ghosted;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    ddc::DiscreteDomain&lt;GhostedVxStaggered&gt; m_gridvx_ghosted_staggered;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <a class="code" href="classCollisionsIntra.html#aff0857de965458f4e769e289ee89b287">IDomainSpXVx_ghosted</a> m_mesh_ghosted;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="classCollisionsIntra.html#a062065443c6d3cbda588cf5221e35872">IDomainSpXVx_ghosted_staggered</a> m_mesh_ghosted_staggered;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a7cb44d72275a33044fe1e71f2f4a1d34">  127</a></span>&#160;    <a class="code" href="classCollisionsIntra.html#a7cb44d72275a33044fe1e71f2f4a1d34">CollisionsIntra</a>(IDomainSpXVx <span class="keyword">const</span>&amp; mesh, <span class="keywordtype">double</span> nustar0);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    ~<a class="code" href="classCollisionsIntra.html">CollisionsIntra</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a84754937b848935dba4e2d4f01a39dd4">  144</a></span>&#160;    DSpanSpXVx <a class="code" href="classCollisionsIntra.html#a84754937b848935dba4e2d4f01a39dd4">operator()</a>(DSpanSpXVx allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8">  151</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8">get_nustar0</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#ad611212032beab6cb9512adca7de596b">  158</a></span>&#160;    ddc::DiscreteDomain&lt;GhostedVx&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#ad611212032beab6cb9512adca7de596b">get_gridvx_ghosted</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a55d9192a2790d6be4885aa563204c4f7">  165</a></span>&#160;    ddc::DiscreteDomain&lt;GhostedVxStaggered&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#a55d9192a2790d6be4885aa563204c4f7">get_gridvx_ghosted_staggered</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a2560ebb9ff19bcd8f3626dddece5780d">  172</a></span>&#160;    ddc::DiscreteDomain&lt;IDimSp, IDimX, GhostedVx&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#a2560ebb9ff19bcd8f3626dddece5780d">get_mesh_ghosted</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a4792b1f4327c52726ab740f4c475bc40">  183</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#a4792b1f4327c52726ab740f4c475bc40">compute_rhs_vector</a>(</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            DSpanSpXVx RR,</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            DViewSpXVx AA,</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            DViewSpXVx BB,</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            DViewSpXVx CC,</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            DViewSpXVx allfdistribu,</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <span class="keywordtype">double</span> fthresh) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#ac6d702b34d456ecbcb98a6bad2c2efb0">  200</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#ac6d702b34d456ecbcb98a6bad2c2efb0">compute_matrix_coeff</a>(</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            DSpanSpXVx AA,</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            DSpanSpXVx BB,</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            DSpanSpXVx CC,</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;double, IDomainSpXVx_ghosted&gt;&gt; Dcoll,</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;double, IDomainSpXVx_ghosted_staggered&gt;&gt; Dcoll_staggered,</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;double, IDomainSpXVx_ghosted&gt;&gt; Nucoll,</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="keywordtype">double</span> deltat) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#ad0dc6d2a1b8acb82d9ec60592ef72e6c">  216</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#ad0dc6d2a1b8acb82d9ec60592ef72e6c">fill_matrix_with_coeff</a>(</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            <a class="code" href="classMatrix__Banded.html">Matrix_Banded</a>&amp; matrix,</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            host_t&lt;DViewVx&gt; AA,</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            host_t&lt;DViewVx&gt; BB,</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            host_t&lt;DViewVx&gt; CC) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;};</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> TargetDim&gt;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    KOKKOS_FUNCTION <span class="keyword">static</span> ddc::DiscreteElement&lt;TargetDim&gt; to_index(</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            ddc::DiscreteElement&lt;IDimVx&gt; <span class="keyword">const</span>&amp; index);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> VDim&gt;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    std::enable_if_t&lt;!ddc::is_uniform_sampling_v&lt;VDim&gt;&gt; build_ghosted_staggered_vx_point_sampling(</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            ddc::DiscreteDomain&lt;VDim&gt; <span class="keyword">const</span>&amp; dom);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> VDim&gt;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    std::enable_if_t&lt;ddc::is_uniform_sampling_v&lt;VDim&gt;&gt; build_ghosted_staggered_vx_point_sampling(</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            ddc::DiscreteDomain&lt;VDim&gt; <span class="keyword">const</span>&amp; dom);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">double</span> m_nustar0;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">double</span> m_fthresh;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    DFieldSpX m_nustar_profile_alloc;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    DSpanSpX m_nustar_profile;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    ddc::DiscreteDomain&lt;GhostedVx&gt; m_gridvx_ghosted;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    ddc::DiscreteDomain&lt;GhostedVxStaggered&gt; m_gridvx_ghosted_staggered;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="classCollisionsIntra.html#aff0857de965458f4e769e289ee89b287">IDomainSpXVx_ghosted</a> m_mesh_ghosted;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <a class="code" href="classCollisionsIntra.html#a062065443c6d3cbda588cf5221e35872">IDomainSpXVx_ghosted_staggered</a> m_mesh_ghosted_staggered;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a7cb44d72275a33044fe1e71f2f4a1d34">  128</a></span>&#160;    <a class="code" href="classCollisionsIntra.html#a7cb44d72275a33044fe1e71f2f4a1d34">CollisionsIntra</a>(IDomainSpXVx <span class="keyword">const</span>&amp; mesh, <span class="keywordtype">double</span> nustar0);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    ~<a class="code" href="classCollisionsIntra.html">CollisionsIntra</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a84754937b848935dba4e2d4f01a39dd4">  145</a></span>&#160;    DSpanSpXVx <a class="code" href="classCollisionsIntra.html#a84754937b848935dba4e2d4f01a39dd4">operator()</a>(DSpanSpXVx allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8">  152</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8">get_nustar0</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#ad611212032beab6cb9512adca7de596b">  159</a></span>&#160;    ddc::DiscreteDomain&lt;GhostedVx&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#ad611212032beab6cb9512adca7de596b">get_gridvx_ghosted</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a55d9192a2790d6be4885aa563204c4f7">  166</a></span>&#160;    ddc::DiscreteDomain&lt;GhostedVxStaggered&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#a55d9192a2790d6be4885aa563204c4f7">get_gridvx_ghosted_staggered</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a2560ebb9ff19bcd8f3626dddece5780d">  173</a></span>&#160;    ddc::DiscreteDomain&lt;IDimSp, IDimX, GhostedVx&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#a2560ebb9ff19bcd8f3626dddece5780d">get_mesh_ghosted</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a4792b1f4327c52726ab740f4c475bc40">  184</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#a4792b1f4327c52726ab740f4c475bc40">compute_rhs_vector</a>(</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            DSpanSpXVx RR,</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            DViewSpXVx AA,</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            DViewSpXVx BB,</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            DViewSpXVx CC,</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            DViewSpXVx allfdistribu,</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <span class="keywordtype">double</span> fthresh) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#ac6d702b34d456ecbcb98a6bad2c2efb0">  201</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#ac6d702b34d456ecbcb98a6bad2c2efb0">compute_matrix_coeff</a>(</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            DSpanSpXVx AA,</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            DSpanSpXVx BB,</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            DSpanSpXVx CC,</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;double, IDomainSpXVx_ghosted&gt;&gt; Dcoll,</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;double, IDomainSpXVx_ghosted_staggered&gt;&gt; Dcoll_staggered,</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;double, IDomainSpXVx_ghosted&gt;&gt; Nucoll,</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordtype">double</span> deltat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#ad0dc6d2a1b8acb82d9ec60592ef72e6c">  217</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#ad0dc6d2a1b8acb82d9ec60592ef72e6c">fill_matrix_with_coeff</a>(</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            <a class="code" href="classMatrix__Banded.html">Matrix_Banded</a>&amp; matrix,</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            host_t&lt;DViewVx&gt; AA,</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            host_t&lt;DViewVx&gt; BB,</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            host_t&lt;DViewVx&gt; CC) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;};</div>
 <div class="ttc" id="aclassCollisionsIntra_html"><div class="ttname"><a href="classCollisionsIntra.html">CollisionsIntra</a></div><div class="ttdoc">Class describing the intra-species collision operator.</div><div class="ttdef"><b>Definition:</b> collisions_intra.hpp:39</div></div>
 <div class="ttc" id="aclassCollisionsIntra_html_a044247f1df17e2dd5ea432d312f2eed8"><div class="ttname"><a href="classCollisionsIntra.html#a044247f1df17e2dd5ea432d312f2eed8">CollisionsIntra::IndexSpXVx_ghosted_staggered</a></div><div class="ttdeci">ddc::DiscreteElement&lt; IDimSp, IDimX, GhostedVxStaggered &gt; IndexSpXVx_ghosted_staggered</div><div class="ttdoc">A type representing a species, space and ghosted staggered vx index.</div><div class="ttdef"><b>Definition:</b> collisions_intra.hpp:94</div></div>
 <div class="ttc" id="aclassCollisionsIntra_html_a062065443c6d3cbda588cf5221e35872"><div class="ttname"><a href="classCollisionsIntra.html#a062065443c6d3cbda588cf5221e35872">CollisionsIntra::IDomainSpXVx_ghosted_staggered</a></div><div class="ttdeci">ddc::DiscreteDomain&lt; IDimSp, IDimX, GhostedVxStaggered &gt; IDomainSpXVx_ghosted_staggered</div><div class="ttdoc">A type representing a mesh for species, space and ghosted staggered vx mesh.</div><div class="ttdef"><b>Definition:</b> collisions_intra.hpp:74</div></div>
