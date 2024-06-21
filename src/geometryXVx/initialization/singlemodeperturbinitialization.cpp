@@ -25,10 +25,10 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
     // Initialization of the perturbation
     DFieldX perturbation_alloc(gridx);
     ddc::ChunkSpan fequilibrium_proxy = m_fequilibrium.span_view();
-    ddc::ChunkSpan perturbation = perturbation_alloc.span_view();
+    ddc::ChunkSpan perturbation_proxy = perturbation_alloc.span_view();
     ddc::for_each(gridsp, [&](IndexSp const isp) {
         perturbation_initialization(
-                perturbation,
+                perturbation_proxy,
                 m_init_perturb_mode(isp),
                 m_init_perturb_amplitude(isp));
         // Initialization of the distribution function --> fill values
@@ -38,7 +38,8 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
                 KOKKOS_LAMBDA(IndexXVx const ixvx) {
                     IndexX const ix = ddc::select<IDimX>(ixvx);
                     IndexVx const ivx = ddc::select<IDimVx>(ixvx);
-                    double fdistribu_val = fequilibrium_proxy(isp, ivx) * (1. + perturbation(ix));
+                    double fdistribu_val
+                            = fequilibrium_proxy(isp, ivx) * (1. + perturbation_proxy(ix));
                     if (fdistribu_val < 1.e-60) {
                         fdistribu_val = 1.e-60;
                     }

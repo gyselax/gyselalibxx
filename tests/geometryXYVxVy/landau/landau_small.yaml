@@ -19,7 +19,7 @@ SpeciesInfo:
   temperature_eq: 1.
   mean_velocity_eq: 0.
   perturb_amplitude: 0.05
-  perturb_mode: 0.5
+  perturb_mode: 1
 
 Algorithm:
   deltat: 0.0625

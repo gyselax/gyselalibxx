@@ -39,6 +39,30 @@ DSpanSpVxVy MaxwellianEquilibrium::operator()(DSpanSpVxVy const allfequilibrium)
     return allfequilibrium;
 }
 
+
+MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
+        IDomainSp dom_kinsp,
+        PC_tree_t const& yaml_input_file)
+{
+    host_t<DFieldSp> density_eq(dom_kinsp);
+    host_t<DFieldSp> temperature_eq(dom_kinsp);
+    host_t<DFieldSp> mean_velocity_eq(dom_kinsp);
+
+    for (IndexSp const isp : dom_kinsp) {
+        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
+
+        density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
+        temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
+        mean_velocity_eq(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
+    }
+
+    return MaxwellianEquilibrium(
+            std::move(density_eq),
+            std::move(temperature_eq),
+            std::move(mean_velocity_eq));
+}
+
+
 /*
  Computing the Maxwellian function as
   fM(vx,vy) = n/(2*PI*T)*exp(-(vx**2+vy**2)/(2*T))
