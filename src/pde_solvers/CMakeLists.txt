@@ -15,6 +15,7 @@ target_link_libraries("pde_solvers"
     INTERFACE
         DDC::DDC
         sll::SLL
+        gslx::data_types
         gslx::utils
 )
 
