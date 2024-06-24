@@ -109,8 +109,54 @@ restrict_to_domain(
 }
 } // namespace ddcHelper
 
+//-----------------------------------------------------------------------------
+
 namespace detail {
 
+/**
+ * @brief A helper structure to determine the type when combining tags across containers.
+ *
+ * E.g. Combine<DiscreteElement<Tag1>, DiscreteElement<Tag2>>::type == DiscreteElement<Tag1, Tag2>
+ *
+ * @tparam Containers The containers that should be combined. They should differ only in the tags.
+ */
+template <class... Containers>
+struct Combine;
+
+template <class Container>
+struct Combine<Container>
+{
+    using type = Container;
+};
+
+template <
+        template <typename...>
+        class Container,
+        class... Tags,
+        class... OTags,
+        class... TailContainers>
+struct Combine<Container<Tags...>, Container<OTags...>, TailContainers...>
+{
+    using type = Combine<Container<Tags..., OTags...>, TailContainers...>;
+};
+} // namespace detail
+
+namespace ddcHelper {
+/**
+ * @brief A helper structure to determine the type when combining tags across containers.
+ *
+ * E.g. combine_t<DiscreteElement<Tag1>, DiscreteElement<Tag2>> == DiscreteElement<Tag1, Tag2>
+ *
+ * @tparam Containers The containers that should be combined. They should differ only in the tags.
+ */
+template <class... Containers>
+using combine_t = typename detail::Combine<Containers...>::type;
+
+} // namespace ddcHelper
+
+//-----------------------------------------------------------------------------
+
+namespace detail {
 /// \cond
 template <class, class>
 struct OnMemorySpace

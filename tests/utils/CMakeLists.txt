@@ -5,7 +5,6 @@ cmake_minimum_required(VERSION 3.15)
 include(GoogleTest)
 
 add_executable(unit_tests_utils
-    field.cpp
     test_ddcHelpers.cpp
     transpose.cpp
     ../main.cpp

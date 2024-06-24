@@ -30,11 +30,12 @@ auto get_domain(FieldType const& field) noexcept
     return field.template domain<QueryDDims...>();
 }
 
-template <class FieldDst, class FieldSrc>
+template <
+        class FieldDst,
+        class FieldSrc,
+        class = std::enable_if_t<is_borrowed_field_v<FieldDst> && is_borrowed_field_v<FieldSrc>>>
 auto deepcopy(FieldDst&& dst, FieldSrc&& src)
 {
-    static_assert(is_borrowed_field_v<FieldDst>);
-    static_assert(is_borrowed_field_v<FieldSrc>);
     static_assert(std::is_same_v<
                   typename std::remove_reference_t<FieldDst>::NDTypeTag,
                   typename std::remove_reference_t<FieldSrc>::NDTypeTag>);
