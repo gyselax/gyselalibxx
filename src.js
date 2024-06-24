@@ -20,7 +20,6 @@ var src =
     [ "SpeciesInfo (x, v_x)", "src_speciesinfo.html", null ],
     [ "Time Stepping Methods", "src_timestepper.html", null ],
     [ "Utility Functions", "src_utils.html", [
-      [ "VectorField", "src_utils.html#src_utils__VectorField", null ],
       [ "Utility tools", "src_utils.html#src_utils__Utility_tools", null ]
     ] ]
 ];

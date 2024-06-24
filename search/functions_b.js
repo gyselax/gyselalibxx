@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['lagrange_940',['Lagrange',['../classLagrange.html#aafc94eabc2d229ba7a927673fcc41b98',1,'Lagrange']]],
-  ['lagrangeinterpolator_941',['LagrangeInterpolator',['../classLagrangeInterpolator.html#a6a8d1539af23c57f709d74a8456f1c07',1,'LagrangeInterpolator']]]
+  ['lagrange_1037',['Lagrange',['../classLagrange.html#aafc94eabc2d229ba7a927673fcc41b98',1,'Lagrange']]],
+  ['lagrangeinterpolator_1038',['LagrangeInterpolator',['../classLagrangeInterpolator.html#a6a8d1539af23c57f709d74a8456f1c07',1,'LagrangeInterpolator']]]
 ];

@@ -60,6 +60,10 @@ var NAVTREE =
     ] ],
     [ "Gyselalib++ contents", "src.html", "src" ],
     [ "Collisions", "src_collision.html", null ],
+    [ "Utility Functions", "src_data_types.html", [
+      [ "VectorField", "src_data_types.html#src_data_types__VectorField", null ],
+      [ "DerivField", "src_data_types.html#src_data_types__DerivField", null ]
+    ] ],
     [ "Reaction rates", "src_geometryXVx_geometryMX_reactionrates.html", null ],
     [ "Time integration hybrid", "src_geometryXVx_time_integration_hybrid.html", null ],
     [ "Functions used for input and output.", "src_io.html", null ],
@@ -84,10 +88,11 @@ var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCrankNicolson.html#a55cb75c920e5ee4791900c1f7f71bc7f",
-"classIPreallocatableInterpolator.html#a5ec208afd0ebf5696b75962ab9a3af18",
-"classPolarSplineEvaluator.html#a050a2b7f7baeaccdfeddbbe571580bb5",
-"curvilinear2d__to__cartesian_8hpp_source.html",
-"spline__quadrature_8hpp.html#ac8ac1fec63f5a595332f7adf4ca2e769"
+"classFemNonPeriodicQNSolver.html",
+"classMatrix__Corner__Block.html#afd674000287386818ce4e1a149a36ef3",
+"classSpeciesInformation_1_1Impl.html#ade8f1e1c64db40ed7edf425dcb165dd3",
+"i__interpolator__2d__rp_8hpp_source.html",
+"structGridTor2.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
