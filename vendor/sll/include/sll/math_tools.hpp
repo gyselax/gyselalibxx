@@ -52,7 +52,7 @@ inline T modulo(T x, T y)
     return x - y * std::floor(double(x) / y);
 }
 
-inline double ipow(double a, std::size_t i)
+constexpr inline double ipow(double a, std::size_t i)
 {
     double r(1.0);
     for (std::size_t j(0); j < i; ++j) {
