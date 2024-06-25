@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classSpeciesInformation_1_1Impl.html#aec6f1661184ffda483c7c00de7bd0198":[18,183,0,1],
-"classSplineFootFinder.html":[18,184],
 "classSplineFootFinder.html#a318c630fd5384ed0093581774239c9df":[18,184,1],
 "classSplineFootFinder.html#a3da5df4e45c0771002568987d24f922c":[18,184,0],
 "classSplineFootFinder.html#a6c99a3c797b8e49db511bee6d62e051d":[18,184,2],
@@ -249,5 +247,7 @@ var NAVTREEINDEX4 =
 "geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source.html":[19,0,6,4,1],
 "geometry__pseudo__cartesian_8hpp_source.html":[19,0,4,0,2],
 "i__interpolator__2d__rp_8hpp_source.html":[19,0,4,4,0],
-"iadvectionrp_8hpp_source.html":[19,0,4,0,3]
+"iadvectionrp_8hpp_source.html":[19,0,4,0,3],
+"iadvectionvx_8hpp_source.html":[19,0,0,2],
+"iadvectionx_8hpp_source.html":[19,0,0,3]
 };

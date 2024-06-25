@@ -1,7 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"structGridVpar.html":[18,86],
-"structHiddenNUBSplinesX.html":[18,87],
 "structIDimM.html":[18,93],
 "structIDimP.html":[18,94],
 "structIDimR.html":[18,95],
@@ -29,10 +27,8 @@ var NAVTREEINDEX6 =
 "structPolarSpline.html#a8f45100e4b9b9983843edd05fae6fd60":[18,153,7],
 "structPolarSpline.html#ad26033ae149504208d160b5ac474d613":[18,153,0],
 "structPolarSpline.html#af77ce2f18c9c86d7ac8e44606331d9d2":[18,153,1],
-"structPolarSplineFEMPoissonLikeSolver_1_1QDimP.html":[18,155,3],
-"structPolarSplineFEMPoissonLikeSolver_1_1QDimPMesh.html":[18,155,4],
-"structPolarSplineFEMPoissonLikeSolver_1_1QDimR.html":[18,155,5],
-"structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html":[18,155,6],
+"structPolarSplineFEMPoissonLikeSolver_1_1QDimPMesh.html":[18,155,2],
+"structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html":[18,155,3],
 "structPolarSplineSpan.html":[18,156],
 "structPolarSplineSpan.html#a45eb7d04a2d06b64b271833860501b1c":[18,156,2],
 "structPolarSplineSpan.html#a67ed148eab2a4e83e22cfb918c79d9a5":[18,156,1],

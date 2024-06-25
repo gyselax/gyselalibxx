@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['boltzmann_20solver_1267',['Boltzmann solver',['../src_geometryXVx_boltzmann.html',1,'src_geometryXVx']]]
+  ['boltzmann_20solver_1257',['Boltzmann solver',['../src_geometryXVx_boltzmann.html',1,'src_geometryXVx']]]
 ];

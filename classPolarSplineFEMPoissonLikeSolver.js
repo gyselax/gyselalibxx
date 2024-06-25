@@ -1,13 +1,8 @@
 var classPolarSplineFEMPoissonLikeSolver =
 [
-    [ "InternalTagGenerator", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1InternalTagGenerator", [
-      [ "tag", "classPolarSplineFEMPoissonLikeSolver.html#a2813fb2feb0aa859d8d83f600fe9b134", null ]
-    ] ],
     [ "PBasisSubset", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1PBasisSubset", null ],
     [ "PCellDim", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1PCellDim", null ],
-    [ "QDimP", "structPolarSplineFEMPoissonLikeSolver_1_1QDimP.html", null ],
     [ "QDimPMesh", "structPolarSplineFEMPoissonLikeSolver_1_1QDimPMesh.html", null ],
-    [ "QDimR", "structPolarSplineFEMPoissonLikeSolver_1_1QDimR.html", null ],
     [ "QDimRMesh", "structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html", null ],
     [ "RBasisSubset", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset", null ],
     [ "RCellDim", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RCellDim", null ],

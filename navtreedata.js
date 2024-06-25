@@ -90,9 +90,9 @@ var NAVTREEINDEX =
 "classCrankNicolson.html#a55cb75c920e5ee4791900c1f7f71bc7f",
 "classFemNonPeriodicQNSolver.html",
 "classMatrix__Dense.html#a2738310b5ae0c4357127d5275ea7cadd",
-"classSpeciesInformation_1_1Impl.html#aec6f1661184ffda483c7c00de7bd0198",
-"iadvectionvx_8hpp_source.html",
-"structGridVpar.html"
+"classSplineFootFinder.html#a318c630fd5384ed0093581774239c9df",
+"iboltzmannsolver_8hpp_source.html",
+"structIDimM.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -113,21 +113,12 @@ $(document).ready(function(){initNavTree('classPolarSplineFEMPoissonLikeSolver.h
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:structPolarSplineFEMPoissonLikeSolver_1_1InternalTagGenerator"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1InternalTagGenerator">InternalTagGenerator</a></td></tr>
-<tr class="memdesc:structPolarSplineFEMPoissonLikeSolver_1_1InternalTagGenerator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This struct is used to provide alternative tags.  <a href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1InternalTagGenerator">More...</a><br /></td></tr>
-<tr class="separator:structPolarSplineFEMPoissonLikeSolver_1_1InternalTagGenerator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:structPolarSplineFEMPoissonLikeSolver_1_1PBasisSubset"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1PBasisSubset">PBasisSubset</a></td></tr>
 <tr class="separator:structPolarSplineFEMPoissonLikeSolver_1_1PBasisSubset"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:structPolarSplineFEMPoissonLikeSolver_1_1PCellDim"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1PCellDim">PCellDim</a></td></tr>
 <tr class="separator:structPolarSplineFEMPoissonLikeSolver_1_1PCellDim"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSplineFEMPoissonLikeSolver_1_1QDimP.html">QDimP</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the second dimension for the quadrature.  <a href="structPolarSplineFEMPoissonLikeSolver_1_1QDimP.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSplineFEMPoissonLikeSolver_1_1QDimPMesh.html">QDimPMesh</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the second dimension for the quadrature mesh.  <a href="structPolarSplineFEMPoissonLikeSolver_1_1QDimPMesh.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSplineFEMPoissonLikeSolver_1_1QDimR.html">QDimR</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the first dimension for the quadrature.  <a href="structPolarSplineFEMPoissonLikeSolver_1_1QDimR.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html">QDimRMesh</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the first dimension for the quadrature mesh.  <a href="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html#details">More...</a><br /></td></tr>
@@ -161,34 +152,6 @@ Public Member Functions</h2></td></tr>
 <p>(see in Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
  in the 5D GYSELA Code". December 2022.) </p>
 </div><hr/><h2 class="groupheader">Class Documentation</h2>
-<a name="structPolarSplineFEMPoissonLikeSolver_1_1InternalTagGenerator" id="structPolarSplineFEMPoissonLikeSolver_1_1InternalTagGenerator"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#structPolarSplineFEMPoissonLikeSolver_1_1InternalTagGenerator">&#9670;&nbsp;</a></span>PolarSplineFEMPoissonLikeSolver::InternalTagGenerator</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct PolarSplineFEMPoissonLikeSolver::InternalTagGenerator</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="textblock"><h3>template&lt;class T&gt;<br />
-struct PolarSplineFEMPoissonLikeSolver::InternalTagGenerator&lt; T &gt;</h3>
-
-<p>This struct is used to provide alternative tags. </p>
-<p>It is used to create new meshes. This is necessary because in DDC we can only create a single mesh for a tagged dimension. </p>
-</div><table class="fieldtable">
-<tr><th colspan="3">Class Members</th></tr>
-<tr><td class="fieldtype">
-<a id="a2813fb2feb0aa859d8d83f600fe9b134"></a>typedef T</td>
-<td class="fieldname">
-tag</td>
-<td class="fielddoc">
-</td></tr>
-</table>
-
-</div>
-</div>
 <a name="structPolarSplineFEMPoissonLikeSolver_1_1PBasisSubset" id="structPolarSplineFEMPoissonLikeSolver_1_1PBasisSubset"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#structPolarSplineFEMPoissonLikeSolver_1_1PBasisSubset">&#9670;&nbsp;</a></span>PolarSplineFEMPoissonLikeSolver::PBasisSubset</h2>
 
