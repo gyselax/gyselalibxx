@@ -1,7 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"structGridTor2.html":[18,84],
-"structGridTor3.html":[18,85],
 "structGridVpar.html":[18,86],
 "structHiddenNUBSplinesX.html":[18,87],
 "structIDimM.html":[18,93],

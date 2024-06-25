@@ -1,15 +1,13 @@
 var NAVTREEINDEX2 =
 {
 "classFemNonPeriodicQNSolver.html":[18,68],
-"classFemNonPeriodicQNSolver.html#a6c3265713efa76f6cea308bf377f2894":[18,68,3],
-"classFemNonPeriodicQNSolver.html#a82f938b03fbea6dcc68c2ac7c99d2352":[18,68,2],
-"classFemNonPeriodicQNSolver.html#ab598d90f9bc0307aee9b260dc10991fb":[18,68,4],
-"classFemNonPeriodicQNSolver.html#structFemNonPeriodicQNSolver_1_1QDimX":[18,68,0],
+"classFemNonPeriodicQNSolver.html#a6c3265713efa76f6cea308bf377f2894":[18,68,2],
+"classFemNonPeriodicQNSolver.html#a82f938b03fbea6dcc68c2ac7c99d2352":[18,68,1],
+"classFemNonPeriodicQNSolver.html#ab598d90f9bc0307aee9b260dc10991fb":[18,68,3],
 "classFemPeriodicQNSolver.html":[18,69],
-"classFemPeriodicQNSolver.html#a11fcdad7553ae008c46b370a4cc056a1":[18,69,3],
-"classFemPeriodicQNSolver.html#a3eeacd2f75d5e77d7e673c2330487a50":[18,69,4],
-"classFemPeriodicQNSolver.html#ade4cf4696a5ef7acb206eeb96c4e64c5":[18,69,2],
-"classFemPeriodicQNSolver.html#structFemPeriodicQNSolver_1_1QDimX":[18,69,0],
+"classFemPeriodicQNSolver.html#a11fcdad7553ae008c46b370a4cc056a1":[18,69,2],
+"classFemPeriodicQNSolver.html#a3eeacd2f75d5e77d7e673c2330487a50":[18,69,3],
+"classFemPeriodicQNSolver.html#ade4cf4696a5ef7acb206eeb96c4e64c5":[18,69,1],
 "classFluidMoments.html":[18,72],
 "classFluidMoments.html#a1627a95ed02643b0dc08c2f64dbf5ae8":[18,72,4],
 "classFluidMoments.html#a349bb1bca93f384ceea5ce4df7457443":[18,72,3],
@@ -249,5 +247,7 @@ var NAVTREEINDEX2 =
 "classMatrix__Corner__Block.html#acb697f1f5f3fa7094b311b16e68c72c8":[18,136,10],
 "classMatrix__Corner__Block.html#ae41b9a3f53786f953cd30242aad91641":[18,136,14],
 "classMatrix__Corner__Block.html#ae4272c855b07fbdf88cc781702145ab0":[18,136,13],
-"classMatrix__Corner__Block.html#af19beee83d0007747a3d47bbea2371b2":[18,136,16]
+"classMatrix__Corner__Block.html#af19beee83d0007747a3d47bbea2371b2":[18,136,16],
+"classMatrix__Corner__Block.html#afd674000287386818ce4e1a149a36ef3":[18,136,19],
+"classMatrix__Dense.html":[18,137]
 };
