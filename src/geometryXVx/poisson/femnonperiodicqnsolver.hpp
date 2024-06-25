@@ -39,15 +39,8 @@ using NUBSplineXEvaluator_1d = ddc::SplineEvaluator<
 class FemNonPeriodicQNSolver : public IQNSolver
 {
 public:
-    /**
-     * A tag to represent the dimension where the quadrature points
-     * are defined.
-     */
-    struct QDimX
-    {
-    };
-
-    struct QMeshX : ddc::NonUniformPointSampling<QDimX>
+    /// The discrete dimension of the quadrature points.
+    struct QMeshX : ddc::NonUniformPointSampling<RDimX>
     {
     };
 
@@ -82,16 +75,16 @@ private:
     std::unique_ptr<Matrix> m_fem_matrix;
 
 private:
-    static KOKKOS_FUNCTION ddc::Coordinate<QDimX> quad_point_from_coord(
+    static KOKKOS_FUNCTION ddc::Coordinate<RDimX> quad_point_from_coord(
             ddc::Coordinate<RDimX> const& coord)
     {
-        return ddc::Coordinate<QDimX>(ddc::get<RDimX>(coord));
+        return ddc::Coordinate<RDimX>(ddc::get<RDimX>(coord));
     }
 
     static KOKKOS_FUNCTION ddc::Coordinate<RDimX> coord_from_quad_point(
-            ddc::Coordinate<QDimX> const& coord)
+            ddc::Coordinate<RDimX> const& coord)
     {
-        return ddc::Coordinate<RDimX>(ddc::get<QDimX>(coord));
+        return ddc::Coordinate<RDimX>(ddc::get<RDimX>(coord));
     }
 
 public:
