@@ -31,7 +31,7 @@ RUN chmod +x /bin/bash_run \
     cmake-data \
     git \
     libfftw3-dev \
-    liblapack-dev \
+    liblapacke-dev \
     openssh-client \
     pdidev-archive-keyring \
     hdf5-tools \
