@@ -48,41 +48,18 @@ public:
     {
     };
 
-    /**
-    * @brief This struct is used to provide alternative tags.
-    *
-    * It is used to create new meshes. This is necessary because
-    * in DDC we can only create a single mesh for a tagged dimension.
-    */
-    template <class T>
-    struct InternalTagGenerator
-    {
-        using tag = T;
-    };
 
 public:
     /**
-     * @brief Tag the first dimension for the quadrature.
-     */
-    struct QDimR : InternalTagGenerator<RDimR>
-    {
-    };
-    /**
-     * @brief Tag the second dimension for the quadrature.
-     */
-    struct QDimP : InternalTagGenerator<RDimP>
-    {
-    };
-    /**
      * @brief Tag the first dimension for the quadrature mesh.
      */
-    struct QDimRMesh : ddc::NonUniformPointSampling<QDimR>
+    struct QDimRMesh : ddc::NonUniformPointSampling<RDimR>
     {
     };
     /**
      * @brief Tag the second dimension for the quadrature mesh.
      */
-    struct QDimPMesh : ddc::NonUniformPointSampling<QDimP>
+    struct QDimPMesh : ddc::NonUniformPointSampling<RDimP>
     {
     };
 
@@ -191,8 +168,8 @@ private:
     QuadratureDomainRP quadrature_domain_singular;
 
     // Gauss-Legendre points and weights
-    ddc::Chunk<ddc::Coordinate<QDimR>, QuadratureDomainR> points_r;
-    ddc::Chunk<ddc::Coordinate<QDimP>, QuadratureDomainP> points_p;
+    ddc::Chunk<ddc::Coordinate<RDimR>, QuadratureDomainR> points_r;
+    ddc::Chunk<ddc::Coordinate<RDimP>, QuadratureDomainP> points_p;
     ddc::Chunk<double, QuadratureDomainR> weights_r;
     ddc::Chunk<double, QuadratureDomainP> weights_p;
 
@@ -285,21 +262,21 @@ public:
         ddc::DiscreteDomain<PCellDim> p_edges_dom(
                 ddc::DiscreteElement<PCellDim>(0),
                 ddc::DiscreteVector<PCellDim>(ncells_p + 1));
-        ddc::Chunk<ddc::Coordinate<QDimR>, ddc::DiscreteDomain<RCellDim>> breaks_r(r_edges_dom);
-        ddc::Chunk<ddc::Coordinate<QDimP>, ddc::DiscreteDomain<PCellDim>> breaks_p(p_edges_dom);
+        ddc::Chunk<ddc::Coordinate<RDimR>, ddc::DiscreteDomain<RCellDim>> breaks_r(r_edges_dom);
+        ddc::Chunk<ddc::Coordinate<RDimP>, ddc::DiscreteDomain<PCellDim>> breaks_p(p_edges_dom);
 
         ddc::for_each(r_edges_dom, [&](ddc::DiscreteElement<RCellDim> i) {
-            breaks_r(i) = ddc::Coordinate<QDimR>(
+            breaks_r(i) = ddc::Coordinate<RDimR>(
                     ddc::get<RDimR>(ddc::discrete_space<BSplinesR_Polar>().get_knot(i.uid())));
         });
         ddc::for_each(p_edges_dom, [&](ddc::DiscreteElement<PCellDim> i) {
-            breaks_p(i) = ddc::Coordinate<QDimP>(
+            breaks_p(i) = ddc::Coordinate<RDimP>(
                     ddc::get<RDimP>(ddc::discrete_space<BSplinesP_Polar>().get_knot(i.uid())));
         });
 
         // Define quadrature points and weights
-        GaussLegendre<QDimR> gl_coeffs_r(n_gauss_legendre_r);
-        GaussLegendre<QDimP> gl_coeffs_p(n_gauss_legendre_p);
+        GaussLegendre<RDimR> gl_coeffs_r(n_gauss_legendre_r);
+        GaussLegendre<RDimP> gl_coeffs_p(n_gauss_legendre_p);
         gl_coeffs_r.compute_points_and_weights_on_mesh(
                 points_r.span_view(),
                 weights_r.span_view(),
@@ -327,7 +304,7 @@ public:
             std::array<double, 2 * n_non_zero_bases_r> data;
             DSpan2D vals(data.data(), n_non_zero_bases_r, 2);
             ddc::discrete_space<BSplinesR_Polar>()
-                    .eval_basis_and_n_derivs(vals, get_coordinate(ir), 1);
+                    .eval_basis_and_n_derivs(vals, ddc::coordinate(ir), 1);
             for (auto ib : non_zero_bases_r) {
                 r_basis_vals_and_derivs(ib, ir).value = vals(ib.uid(), 0);
                 r_basis_vals_and_derivs(ib, ir).derivative = vals(ib.uid(), 1);
@@ -339,7 +316,7 @@ public:
             std::array<double, 2 * n_non_zero_bases_p> data;
             DSpan2D vals(data.data(), n_non_zero_bases_p, 2);
             ddc::discrete_space<BSplinesP_Polar>()
-                    .eval_basis_and_n_derivs(vals, get_coordinate(ip), 1);
+                    .eval_basis_and_n_derivs(vals, ddc::coordinate(ip), 1);
             for (auto ib : non_zero_bases_p) {
                 p_basis_vals_and_derivs(ib, ip).value = vals(ib.uid(), 0);
                 p_basis_vals_and_derivs(ib, ip).derivative = vals(ib.uid(), 1);
@@ -361,7 +338,7 @@ public:
             QuadratureIndexR ir = ddc::select<QDimRMesh>(irp);
             QuadratureIndexP ip = ddc::select<QDimPMesh>(irp);
 
-            const CoordRP coord(get_coordinate(irp));
+            const CoordRP coord(ddc::coordinate(irp));
 
             // Calculate the value
             ddc::discrete_space<PolarBSplinesRP>().eval_basis(singular_vals, vals, coord);
@@ -389,7 +366,7 @@ public:
         ddc::for_each(all_quad_points, [&](QuadratureIndexRP const irp) {
             QuadratureIndexR const ir = ddc::select<QDimRMesh>(irp);
             QuadratureIndexP const ip = ddc::select<QDimPMesh>(irp);
-            CoordRP coord(get_coordinate(ir), get_coordinate(ip));
+            CoordRP coord(ddc::coordinate(ir), ddc::coordinate(ip));
             int_volume(ir, ip) = abs(mapping.jacobian(coord)) * weights_r(ir) * weights_p(ip);
         });
 
@@ -644,7 +621,7 @@ public:
                             [&](QuadratureIndexRP const quad_idx) {
                                 QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
                                 QuadratureIndexP const ip = ddc::select<QDimPMesh>(quad_idx);
-                                CoordRP coord(get_coordinate(ir), get_coordinate(ip));
+                                CoordRP coord(ddc::coordinate(quad_idx));
                                 return rhs(coord)
                                        * singular_basis_vals_and_derivs(idx, ir, ip).value
                                        * int_volume(ir, ip);
@@ -694,7 +671,7 @@ public:
                         [&](QuadratureIndexRP const quad_idx) {
                             QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
                             QuadratureIndexP const ip = ddc::select<QDimPMesh>(quad_idx);
-                            CoordRP coord(get_coordinate(ir), get_coordinate(ip));
+                            CoordRP coord(ddc::coordinate(quad_idx));
                             double rb = r_basis_vals_and_derivs(ib_r, ir).value;
                             double pb = p_basis_vals_and_derivs(ib_p, ip).value;
                             return rhs(coord) * rb * pb * int_volume(ir, ip);
@@ -933,7 +910,7 @@ private:
                         EvalDeriv1DType> || std::is_same_v<TrialValDerivType, EvalDeriv2DType>);
 
         // Calculate coefficients at quadrature point
-        CoordRP coord(get_coordinate(ir), get_coordinate(ip));
+        CoordRP coord(ddc::coordinate(ir), ddc::coordinate(ip));
         const double alpha = spline_evaluator(coord, coeff_alpha);
         const double beta = spline_evaluator(coord, coeff_beta);
 
@@ -1079,16 +1056,6 @@ private:
                                         mapping);
                             });
                 });
-    }
-
-    template <class... QueryDDims>
-    static ddc::Coordinate<typename QueryDDims::continuous_dimension_type::tag...> get_coordinate(
-            ddc::DiscreteElement<QueryDDims...> mesh_idx)
-    {
-        ddc::Coordinate<typename QueryDDims::continuous_dimension_type...> coord(
-                ddc::coordinate(ddc::select<QueryDDims>(mesh_idx))...);
-        return ddc::Coordinate<typename QueryDDims::continuous_dimension_type::tag...>(
-                ddc::get<typename QueryDDims::continuous_dimension_type>(coord)...);
     }
 
     static int pmod(int idx_p)
