@@ -54,16 +54,16 @@ FemNonPeriodicQNSolver::FemNonPeriodicQNSolver(
     BSDomainX const
             domain(ddc::DiscreteElement<BSplinesX>(0),
                    ddc::DiscreteVector<BSplinesX>(m_ncells + 1));
-    ddc::Chunk<ddc::Coordinate<QDimX>, BSDomainX> knots(domain);
+    ddc::Chunk<ddc::Coordinate<RDimX>, BSDomainX> knots(domain);
 
     for (ddc::DiscreteElement<BSplinesX> const i : domain) {
         knots(i) = quad_point_from_coord(ddc::discrete_space<NUBSplinesX>().get_knot(i.uid()));
     }
 
     // Calculate the integration coefficients
-    GaussLegendre<QDimX> const gl(s_npts_gauss);
-    std::vector<ddc::Coordinate<QDimX>> eval_pts_data(m_quad_coef_alloc.domain().size());
-    ddc::ChunkSpan<ddc::Coordinate<QDimX>, ddc::DiscreteDomain<QMeshX>> const
+    GaussLegendre<RDimX> const gl(s_npts_gauss);
+    std::vector<ddc::Coordinate<RDimX>> eval_pts_data(m_quad_coef_alloc.domain().size());
+    ddc::ChunkSpan<ddc::Coordinate<RDimX>, ddc::DiscreteDomain<QMeshX>> const
             eval_pts(eval_pts_data.data(), m_quad_coef_alloc.domain());
     auto quad_coef_host = ddc::create_mirror_and_copy(m_quad_coef_alloc.span_view());
     gl.compute_points_and_weights_on_mesh(eval_pts, quad_coef_host.span_view(), knots.span_cview());
