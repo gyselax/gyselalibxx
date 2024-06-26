@@ -17,6 +17,7 @@ target_link_libraries("advection"
         sll::SLL
         gslx::interpolation
         gslx::speciesinfo
+        gslx::timestepper
         gslx::utils
 )
 
