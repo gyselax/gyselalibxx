@@ -123,7 +123,7 @@ Guiding center case</h1>
 </ul>
 <p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> can handle as input the two forms. If a Chunk is given as input, it computes the spline representation (on the cross-product of two 1D bases) using a SplineBuilder2D. The spline representation is needed to compute the derivatives of the function \(\phi\). If the <a class="el" href="structPolarSpline.html" title="A structure containing the two Chunks necessary to define a spline on a set of polar basis splines.">PolarSpline</a> representation is given as input, it can directly compute the derivatives of the function \(\phi\).</p>
 <p>Once the advection field computed, it is given as input to the <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> operator to advect the density \(\rho\) function. The <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> operator can handle the advection with an advection field along \((x,y)\) and with an advection field along \((r,\theta)\). But as the <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> operator advects in the physical domain, it is recommend to work with the advection field along \((x,y)\).</p>
-<h3><a class="anchor" id="autotoc_md38"></a>
+<h3><a class="anchor" id="autotoc_md40"></a>
 Advection field along the physical domain axis</h3>
 <p>Thanks to the spline representation, the derivatives \(\partial_r \phi\) and \(\partial_\theta \phi\) are computed. The computation of the electrical field can be ill-defined around the O-point so we treat this area separately.</p>
 <ul>
@@ -154,10 +154,10 @@ Advection field along the physical domain axis</h3>
 <p> (In the code, we chose \(\theta_1 = \frac{\pi}{4}\) and \(\theta_2 = - \frac{\pi}{4}\), and \(\varepsilon = 10^{-12}\).)</p>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md39"></a>
+<h3><a class="anchor" id="autotoc_md41"></a>
 Advection field along the logical domain axis</h3>
 <p>Firstly, the derivatives \(\partial_r \phi\) and \(\partial_\theta \phi\) are also computed here.</p>
-<h4><a class="anchor" id="autotoc_md40"></a>
+<h4><a class="anchor" id="autotoc_md42"></a>
 General coordinates system</h4>
 <ul>
 <li><p class="startli">In <b>general coordinates system</b>, the gradiant of a function is given by</p>
@@ -184,7 +184,7 @@ General coordinates system</h4>
 \[\nabla_{y_1, y_2} f = J D_{G}^{-1} \nabla_{x_1, x_2} f, \]
 </p>
 <p> with \(\nabla_{y_1, y_2} f = [\partial_{y_1} f, \partial_{y_2} f]^T\) and \(\nabla_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j\).</p>
-<h4><a class="anchor" id="autotoc_md41"></a>
+<h4><a class="anchor" id="autotoc_md43"></a>
 Aplication to the advection field</h4>
 <ul>
 <li>In our case, we use this formula to compute the electric field along the logical axis: <p class="formulaDsp">
@@ -199,11 +199,11 @@ Aplication to the advection field</h4>
 \[(G^{-1})^{T} = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; \frac{1}{r^2} \\ \end{bmatrix}. \]
 </p>
 <p> In the code, the O-point is differently treated. The domain is splitted between a domain without the O-point ( \((0,\theta), \forall \theta\)) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the <em>Advection field along the physical domain axis</em> section.</p>
-<h1><a class="anchor" id="autotoc_md42"></a>
+<h1><a class="anchor" id="autotoc_md44"></a>
 References</h1>
 <p>[1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
 method of characteristics and spline finite elements", <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>, Journal of Computational Physics, 2019.</p>
-<h1><a class="anchor" id="autotoc_md43"></a>
+<h1><a class="anchor" id="autotoc_md45"></a>
 Contents</h1>
 <ul>
 <li><a class="el" href="advection__field__rp_8hpp_source.html">advection_field_rp.hpp</a> : containing <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> with the advection field computation for the guiding center simulation. </li>

@@ -2,7 +2,8 @@ var src =
 [
     [ "Advection methods", "src_advection.html", [
       [ "Spatial advection", "src_advection.html#src_advection__Spatial_advection", null ],
-      [ "Velocity advection", "src_advection.html#src_advection__Velocity_advection", null ]
+      [ "Velocity advection", "src_advection.html#src_advection__Velocity_advection", null ],
+      [ "1D advection with a given advection field", "src_advection.html#src_advection__1D_advection_with_a_given_advection_field", null ]
     ] ],
     [ "Geometry (r, theta)", "src_geometryRTheta.html", "src_geometryRTheta" ],
     [ "Geometry (x, v_x)", "src_geometryXVx.html", "src_geometryXVx" ],

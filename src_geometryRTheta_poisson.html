@@ -113,21 +113,21 @@ in the 5D GYSELA Code". December 2022.)</p>
 </p>
 <p> with the boundary condition \(\phi = 0\), on \(\partial \Omega\).</p>
 <p>To solve this equation, the <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a> uses a finite element method on the B-splines.</p>
-<h3><a class="anchor" id="autotoc_md49"></a>
+<h3><a class="anchor" id="autotoc_md51"></a>
 B-splines FEM</h3>
-<h4><a class="anchor" id="autotoc_md50"></a>
+<h4><a class="anchor" id="autotoc_md52"></a>
 The B-splines</h4>
 <p>We introduce a basis of B-splines \(\{B_l\}_l\), cross-product of two 1D B-splines basis:</p>
 <p class="formulaDsp">
 \[\{B_l\}_l = \{b_{i,r} b_{j,\theta}\}_{i n_{n,\theta} +j}. \]
 </p>
-<h4><a class="anchor" id="autotoc_md51"></a>
+<h4><a class="anchor" id="autotoc_md53"></a>
 Treatment of the O-point</h4>
 <p>To conserve \(\mathcal{C}^k\) property at the O-point, the B-splines basis is modified.</p>
 <p>The \(\frac{(k+1)(k+2)}{2}\) first elements in the 1D B-splines basis in the \(r\) dimension are removed, and replaced by 3 functions, linear combinations of these removed B-splines. (See (2.34) in Emily Bourne's thesis.)</p>
 <p>The linear composition uses as coefficients, the Berstein polynomials defined from barycentric coordinates.</p>
 <p>The B-splines with the treatment of the O-point, are called <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a> and are written \(\{\hat{B}_l\}_l\).</p>
-<h4><a class="anchor" id="autotoc_md52"></a>
+<h4><a class="anchor" id="autotoc_md54"></a>
 Weak formulation</h4>
 <p>The Poisson-like equation is solved by solving its weak form:</p>
 <p class="formulaDsp">

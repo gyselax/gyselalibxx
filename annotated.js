@@ -12,6 +12,7 @@ var annotated =
     [ "AdvectionSimulation", "classAdvectionSimulation.html", "classAdvectionSimulation" ],
     [ "AnalyticalInvertibleCurvilinear2DToCartesian", "classAnalyticalInvertibleCurvilinear2DToCartesian.html", "classAnalyticalInvertibleCurvilinear2DToCartesian" ],
     [ "BernsteinPolynomialBasis", "classBernsteinPolynomialBasis.html", "classBernsteinPolynomialBasis" ],
+    [ "BslAdvection1D", "classBslAdvection1D.html", "classBslAdvection1D" ],
     [ "BslAdvectionRP", "classBslAdvectionRP.html", "classBslAdvectionRP" ],
     [ "BslAdvectionSpatial", "classBslAdvectionSpatial.html", "classBslAdvectionSpatial" ],
     [ "BslAdvectionVelocity", "classBslAdvectionVelocity.html", "classBslAdvectionVelocity" ],

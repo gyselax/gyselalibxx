@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Tests on spline interpolator in polar coordinates</title>
+<title>Gyselalib++: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('tests_geometryRTheta_2d_spline_interpolator.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classBslAdvection1D.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -98,35 +98,18 @@ $(document).ready(function(){initNavTree('tests_geometryRTheta_2d_spline_interpo
 </iframe>
 </div>
 
-<div class="PageDoc"><div class="header">
+<div class="header">
   <div class="headertitle">
-<div class="title">Tests on spline interpolator in polar coordinates </div>  </div>
+<div class="title">BslAdvection1D&lt; IDimInterest, AdvectionDomain, FunctionDomain, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt; Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h3><a class="anchor" id="autotoc_md70"></a>
-Functions tests:</h3>
-<ul>
-<li>\((r,\theta) \mapsto r^p\) with \(0\leq p&lt;4\): interpolation with cubic bsplines supposed to be exact.</li>
-<li>\((r,\theta) \mapsto r^p\) with \(p \geq 4\): interpolation with cubic bsplines supposed to be order 4.</li>
-<li>\((r,\theta) \mapsto r \cos(\theta)\) and \((r,\theta) \mapsto \exp\left(- \frac{(x(r,\theta) - x_0)^2}{2\sigma_x^2} - \frac{(y(r,\theta) - y_0)^2}{2\sigma_y^2} \right)\) : added and interpolation with cubic bsplines supposed to be order 4.</li>
-</ul>
-<p>Test the interpolator on mesh points where the errors are supposed to be exact (machine error) and test the interpolator on "pseudo-random" points where the errors are supposed to be order 4 with a cubic bsplines basis.</p>
-<h3><a class="anchor" id="autotoc_md71"></a>
-Python scripts</h3>
-<ul>
-<li><code>test_convergence.py</code> : compute the convergence order in space for the tests where the errors are not supposed to be exact.<ul>
-<li>launch the executable for a 64x64 grid and for a 128x128 grid to compare the errors.</li>
-<li>possibility of changing the default sizes by adding the two new sizes (N for NxN grid) at this end of the command (see <code>--help</code>).</li>
-<li>Command to launch the test in this folder: <code>python3 test_convergence.py ../../../build/tests/geometryRTheta/2d_spline_interpolator/2d_spline_interpolator_tests</code> (<code>N0</code>) (<code>N1</code>)</li>
-</ul>
-</li>
-<li><code>display_curves.py</code> : display errors for several grid sizes and compute the slope of the errors for each function.<ul>
-<li>Command to launch the test in this folder: <code>python3 display_curves.py ./../../build/tests/geometryRTheta/2d_spline_interpolator/2d_spline_interpolator_tests</code> </li>
-</ul>
-</li>
-</ul>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+
+<p>This is the complete list of members for <a class="el" href="classBslAdvection1D.html">BslAdvection1D&lt; IDimInterest, AdvectionDomain, FunctionDomain, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="classBslAdvection1D.html#aff5c03a458a3a3cf78a7288feebfa047">BslAdvection1D</a>(FunctionPreallocatableInterpolatorType const &amp;function_interpolator, AdvectionFieldBuilder const &amp;adv_field_builder, AdvectionFieldEvaluator const &amp;adv_field_evaluator, TimeStepper const &amp;time_stepper)</td><td class="entry"><a class="el" href="classBslAdvection1D.html">BslAdvection1D&lt; IDimInterest, AdvectionDomain, FunctionDomain, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classBslAdvection1D.html#ab1d8bc9d409c4fc5a140d502bf9f5015">operator()</a>(FunctionSpan const allfdistribu, AdvecFieldSpan const advection_field, double const dt, std::optional&lt; AdvecFieldDerivView &gt; const advection_field_derivatives_min=std::nullopt, std::optional&lt; AdvecFieldDerivView &gt; const advection_field_derivatives_max=std::nullopt) const</td><td class="entry"><a class="el" href="classBslAdvection1D.html">BslAdvection1D&lt; IDimInterest, AdvectionDomain, FunctionDomain, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~BslAdvection1D</b>()=default (defined in <a class="el" href="classBslAdvection1D.html">BslAdvection1D&lt; IDimInterest, AdvectionDomain, FunctionDomain, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;</a>)</td><td class="entry"><a class="el" href="classBslAdvection1D.html">BslAdvection1D&lt; IDimInterest, AdvectionDomain, FunctionDomain, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;</a></td><td class="entry"></td></tr>
+</table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
