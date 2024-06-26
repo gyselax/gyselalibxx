@@ -15,6 +15,7 @@ target_link_libraries(unit_tests_common
 
 gtest_discover_tests(unit_tests_common DISCOVERY_MODE PRE_TEST)
 
+add_subdirectory(advection)
 add_subdirectory(data_types)
 add_subdirectory(geometryXVx)
 add_subdirectory(geometryXYVxVy)
