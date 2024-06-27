@@ -21,7 +21,7 @@ struct IDimXPeriod : ddc::NonUniformPointSampling<RDimXPeriod>
 using IDomXPeriod = ddc::DiscreteDomain<IDimXPeriod>;
 using CoordXPeriod = ddc::Coordinate<RDimXPeriod>;
 
-TEST(QuadratureTest, TrapezExactForConstantFunc)
+TEST(TrapezoidUniformPeriodicQuadrature1D, ExactForConstantFunc)
 {
     CoordXPeriod const x_min(0.0);
     CoordXPeriod const x_max(M_PI);
@@ -53,7 +53,7 @@ TEST(QuadratureTest, TrapezExactForConstantFunc)
     EXPECT_LE(abs(integral - expected_val), 1e-9);
 }
 
-TEST(QuadratureTest, SimpsonExactForConstantFunc)
+TEST(SimpsonUniformPeriodicQuadrature1D, ExactForConstantFunc)
 {
     CoordXPeriod const x_min(0.0);
     CoordXPeriod const x_max(M_PI);
@@ -151,7 +151,7 @@ std::array<double, sizeof...(Is)> compute_errors_simpson(std::index_sequence<Is.
     return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2, Method::SIMPSON)...};
 }
 
-TEST(QuadratureTest, TrapezUniformConverge)
+TEST(TrapezoidUniformPeriodicQuadrature1D, Convergence)
 {
     constexpr int NTESTS(10);
 
@@ -166,7 +166,7 @@ TEST(QuadratureTest, TrapezUniformConverge)
 }
 
 
-TEST(QuadratureTest, SimpsonUniformConverge)
+TEST(SimpsonUniformPeriodicQuadrature1D, Convergence)
 {
     constexpr int NTESTS(10);
 
