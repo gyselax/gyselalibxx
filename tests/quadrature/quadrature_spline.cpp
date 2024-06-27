@@ -3,13 +3,45 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "geometry.hpp"
+#include "ddc/ddc.hpp"
+#include "ddc/kernels/splines.hpp"
+
+#include "ddc_helper.hpp"
 #include "quadrature.hpp"
 #include "spline_quadrature.hpp"
 
 namespace {
 
-TEST(SplineQuadratureTest, ExactForConstantFunc)
+struct X
+{
+#ifdef PERIODIC_RDIMX
+    static bool constexpr PERIODIC = true;
+#else
+    static bool constexpr PERIODIC = false;
+#endif
+};
+
+using CoordX = ddc::Coordinate<X>;
+
+struct BSplinesX : ddc::UniformBSplines<X, 3>
+{
+};
+
+auto constexpr SplineXBoundary = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
+
+using SplineInterpPointsX
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+
+struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+{
+};
+
+using IVectX = ddc::DiscreteVector<X>;
+using IDomainX = ddc::DiscreteDomain<IDimX>;
+using DFieldX = device_t<ddc::Chunk<double, IDomainX>>;
+
+
+TEST(SplineUniformQuadrature, ExactForConstantFunc)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(M_PI);
@@ -24,8 +56,6 @@ TEST(SplineQuadratureTest, ExactForConstantFunc)
             SplineXBoundary,
             ddc::SplineSolver::GINKGO,
             IDimX>;
-    using IDomainX = ddc::DiscreteDomain<IDimX>;
-    using DFieldX = device_t<ddc::Chunk<double, IDomainX>>;
 
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
@@ -115,7 +145,7 @@ std::array<double, sizeof...(Is)> compute_errors(std::index_sequence<Is...>, int
     return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2)...};
 }
 
-TEST(SplineQuadratureTest, UniformConverge)
+TEST(SplineUniformQuadrature, Convergence)
 {
     constexpr int NTESTS(6);
 

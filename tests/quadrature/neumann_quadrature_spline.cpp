@@ -3,37 +3,71 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "geometry.hpp"
+#include "ddc_helper.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "quadrature.hpp"
 
 namespace {
 
-TEST(NeumannSplineQuadratureTest, ExactForConstantFunc)
+struct X
 {
-    CoordVx const vx_min(0.0);
-    CoordVx const vx_max(M_PI);
-    IVectVx const vx_size(10);
+    static bool constexpr PERIODIC = false;
+};
+
+using CoordX = ddc::Coordinate<X>;
+
+struct BSplinesX : ddc::UniformBSplines<X, 3>
+{
+};
+
+auto constexpr SplineXBoundary = ddc::BoundCond::HERMITE;
+
+using SplineInterpPointsX
+        = ddc::KnotsAsInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+
+struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+{
+};
+
+using SplineXBuilder_1d = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesX,
+        IDimX,
+        SplineXBoundary,
+        SplineXBoundary,
+        ddc::SplineSolver::GINKGO,
+        IDimX>;
+
+using IVectX = ddc::DiscreteVector<IDimX>;
+using IDomainX = ddc::DiscreteDomain<IDimX>;
+
+using DFieldX = ddc::Chunk<double, IDomainX>;
+
+TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFunc)
+{
+    CoordX const x_min(0.0);
+    CoordX const x_max(M_PI);
+    IVectX const x_size(10);
 
     // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
-    ddc::DiscreteDomain<IDimVx> interpolation_domain_vx(SplineInterpPointsVx::get_domain<IDimVx>());
+    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
 
-    SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
+    SplineXBuilder_1d const builder_x(interpolation_domain_x);
 
-    IDomainVx const gridvx = builder_vx.interpolation_domain();
+    IDomainX const gridx = builder_x.interpolation_domain();
 
-    host_t<DFieldVx> const quadrature_coeffs
-            = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
+    DFieldX const quadrature_coeffs = neumann_spline_quadrature_coefficients(gridx, builder_x);
     Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    host_t<DFieldVx> values(gridvx);
+    DFieldX values(gridx);
 
-    ddc::for_each(gridvx, [&](ddc::DiscreteElement<IDimVx> const idx) { values(idx) = 1.0; });
+    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);
-    double expected_val = vx_max - vx_min;
+    double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-15);
 }
 
@@ -104,7 +138,7 @@ std::array<double, sizeof...(Is)> compute_errors(std::index_sequence<Is...>, int
     return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2)...};
 }
 
-TEST(NeumannSplineQuadratureTest, UniformConverge)
+TEST(NeumannSplineUniformQuadrature1D, Convergence)
 {
     constexpr int NTESTS(3);
 
