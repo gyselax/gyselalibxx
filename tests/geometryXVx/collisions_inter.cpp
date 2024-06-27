@@ -92,7 +92,7 @@ TEST(CollisionsInter, CollisionsInter)
         double const nustar0(0.1);
         CollisionsInter collisions(mesh, nustar0);
 
-        host_t<DFieldVx> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
+        host_t<DFieldVx> const quadrature_coeffs = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx);
         Quadrature<IDimVx> integrate(quadrature_coeffs);
         FluidMoments moments(integrate);
 

@@ -35,12 +35,12 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
     auto fluid_velocity = fluid_velocity_f.span_view();
     auto temperature = temperature_f.span_view();
 
-    host_t<DFieldVx> const quadrature_coeffs_host(
-            trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu)));
-    auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
+    DFieldVx const quadrature_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(ddc::get_domain<IDimVx>(allfdistribu)));
+    /*auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
-    auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
+            quadrature_coeffs_host.span_view());*/
+   // auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
 
     //Moments computation
     ddc::parallel_fill(density, 0.);

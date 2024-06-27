@@ -167,7 +167,7 @@ void compute_Vcoll_Tcoll(
                 Kokkos::DefaultExecutionSpace::memory_space> dvDcoll)
 {
     host_t<DFieldVx> const quadrature_coeffs_host(
-            trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu)));
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(ddc::get_domain<IDimVx>(allfdistribu)));
     auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());

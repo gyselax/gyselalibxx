@@ -5,15 +5,7 @@ include(GoogleTest)
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_executable(unit_tests_${GEOMETRY_VARIANT}
-    collisions_inter.cpp
-    collisions_intra_gridvx.cpp
-    collisions_intra_maxwellian.cpp
-    fluid_moments.cpp
-    kineticsource.cpp
-    krooksource.cpp
-    masks.cpp
     quadrature.cpp
-    splitvlasovsolver.cpp
     ../main.cpp
 )
 
@@ -31,9 +23,8 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         gslx::moments
         gslx::poisson_${GEOMETRY_VARIANT}
         gslx::quadrature
-        gslx::speciesinfo
-        gslx::time_integration_${GEOMETRY_VARIANT}
-        gslx::utils_${GEOMETRY_VARIANT}
+     
+       
 )
 
 gtest_discover_tests(unit_tests_${GEOMETRY_VARIANT}

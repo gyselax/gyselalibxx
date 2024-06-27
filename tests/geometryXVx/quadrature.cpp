@@ -42,7 +42,7 @@ TEST(QuadratureTest, TrapezExactForConstantFunc)
     ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
     ddc::Chunk<double, IDomXPeriod> const quadrature_coeffs
-            = trapezoid_quadrature_coefficients(gridx);
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
     Quadrature<IDimXPeriod> const integrate(quadrature_coeffs);
 
     ddc::Chunk<double, IDomXPeriod> values(gridx);
@@ -125,7 +125,7 @@ double compute_error(int n_elems, Method meth)
     host_t<DFieldY> quadrature_coeffs;
     switch (meth) {
     case Method::TRAPEZ:
-        quadrature_coeffs = trapezoid_quadrature_coefficients(gridy);
+        quadrature_coeffs = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridy);
     case Method::SIMPSON:
         quadrature_coeffs = simpson_quadrature_coefficients_1d(gridy);
     }
