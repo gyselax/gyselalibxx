@@ -32,6 +32,7 @@ RUN chmod +x /bin/bash_run \
     git \
     libfftw3-dev \
     liblapacke-dev \
+    libopenmpi-dev \
     openssh-client \
     pdidev-archive-keyring \
     hdf5-tools \
