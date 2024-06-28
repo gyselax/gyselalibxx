@@ -17,6 +17,7 @@ target_link_libraries(unit_tests_quadrature
         gslx::quadrature
         gslx::utils
 )
+gtest_discover_tests(unit_tests_quadrature)
 target_compile_definitions(unit_tests_quadrature PUBLIC)
 
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
