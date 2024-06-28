@@ -15,12 +15,11 @@
  *
  * @return The quadrature coefficients for the Simpson method defined on the provided domain.
  */
-template <class IDim>
-ddc::Chunk<double, ddc::DiscreteDomain<IDim>> simpson_quadrature_coefficients_1d(
-        ddc::DiscreteDomain<IDim> const& domain)
+template <class ExecSpace, class IDim>
+ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>> simpson_quadrature_coefficients_1d(
+        ddc::DiscreteDomain<IDim> const& domain,
+        ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>> coefficients)
 {
-    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
-
     coefficients(domain.front()) = 1. / 3. * distance_at_right(domain.front());
 
     for (auto it = domain.begin() + 1; it < domain.end() - 1; it += 2) {

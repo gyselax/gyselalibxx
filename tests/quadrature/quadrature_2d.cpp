@@ -57,7 +57,9 @@ TEST(TrapezoidUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
 
     IDomainXY const gridxy(gridx, gridy);
 
-    host_t<DFieldXY> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridxy);
+    ddc::Chunk<double, IDomainXY> quadrature_coeffs(gridxy);
+    trapezoid_quadrature_coefficients<
+            Kokkos::DefaultHostExecutionSpace>(gridxy, quadrature_coeffs.span_view());
     Quadrature<IDimX, IDimY> const integrate(quadrature_coeffs);
 
     host_t<DFieldXY> values(gridxy);
@@ -115,7 +117,8 @@ double compute_error(int n_elems)
             = ddc::init_discrete_space<IDimY>(IDimY::template init<IDimY>(y_min, y_max, y_size));
     IDomainXY const gridxy(gridx, gridy);
 
-    host_t<DFieldXY> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridxy);
+    host_t<ddc::ChunkSpan<double, IDomainXY>> const quadrature_coeffs
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridxy);
     Quadrature<IDimX, IDimY> const integrate(quadrature_coeffs);
 
     host_t<DFieldXY> values(gridxy);

@@ -41,9 +41,10 @@ TEST(TrapezoidUniformPeriodicQuadrature1D, ExactForConstantFunc)
     ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
     ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-    ddc::Chunk<double, IDomXPeriod> const quadrature_coeffs
-            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
-    Quadrature<IDimXPeriod> const integrate(quadrature_coeffs);
+    host_t<ddc::Chunk<double, IDomXPeriod>> quadrature_coeffs_alloc(gridx);
+    trapezoid_quadrature_coefficients_1d<
+            Kokkos::DefaultHostExecutionSpace>(gridx, quadrature_coeffs_alloc.span_view());
+    Quadrature<IDimXPeriod> const integrate(quadrature_coeffs_alloc.span_view());
 
     ddc::Chunk<double, IDomXPeriod> values(gridx);
 
@@ -72,9 +73,10 @@ TEST(SimpsonUniformPeriodicQuadrature1D, ExactForConstantFunc)
     ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
     ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-    ddc::Chunk<double, IDomXPeriod> const quadrature_coeffs
-            = simpson_quadrature_coefficients_1d(gridx);
-    Quadrature<IDimXPeriod> const integrate(quadrature_coeffs);
+    host_t<ddc::Chunk<double, IDomXPeriod>> quadrature_coeffs_host(gridx);
+    simpson_quadrature_coefficients_1d<
+            Kokkos::DefaultHostExecutionSpace>(gridx, quadrature_coeffs_host.span_view());
+    Quadrature<IDimXPeriod> const integrate(quadrature_coeffs_host);
     ddc::Chunk<double, IDomXPeriod> values(gridx);
 
     ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimXPeriod> const idx) { values(idx) = 1.0; });
@@ -95,7 +97,6 @@ struct ComputeErrorTraits
     {
     };
 };
-
 
 enum Method { TRAPEZ, SIMPSON };
 
@@ -122,16 +123,18 @@ double compute_error(int n_elems, Method meth)
     ddc::DiscreteVector<IDimY> npoints(n_elems);
     ddc::DiscreteDomain<IDimY> gridy(lbound, npoints);
 
-    host_t<DFieldY> quadrature_coeffs;
+    host_t<ddc::Chunk<double, IDomainY>> quadrature_coeffs_host(gridy);
     switch (meth) {
     case Method::TRAPEZ:
-        quadrature_coeffs = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridy);
+        trapezoid_quadrature_coefficients_1d<
+                Kokkos::DefaultHostExecutionSpace>(gridy, quadrature_coeffs_host.span_view());
     case Method::SIMPSON:
-        quadrature_coeffs = simpson_quadrature_coefficients_1d(gridy);
+        simpson_quadrature_coefficients_1d<
+                Kokkos::DefaultHostExecutionSpace>(gridy, quadrature_coeffs_host.span_view());
     }
 
-    Quadrature<IDimY> const integrate(quadrature_coeffs);
-    host_t<DFieldY> values(gridy);
+    Quadrature<IDimY> const integrate(quadrature_coeffs_host.span_view());
+    host_t<ddc::Chunk<double, IDomainY>> values(gridy);
 
     ddc::for_each(gridy, [&](ddc::DiscreteElement<IDimY> const idx) {
         values(idx) = sin(ddc::coordinate(idx));
@@ -151,7 +154,7 @@ std::array<double, sizeof...(Is)> compute_errors_simpson(std::index_sequence<Is.
     return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2, Method::SIMPSON)...};
 }
 
-TEST(TrapezoidUniformPeriodicQuadrature1D, Convergence)
+TEST(TrapezoidUniformNonPeriodicQuadrature1D, Convergence)
 {
     constexpr int NTESTS(10);
 
@@ -165,8 +168,7 @@ TEST(TrapezoidUniformPeriodicQuadrature1D, Convergence)
     }
 }
 
-
-TEST(SimpsonUniformPeriodicQuadrature1D, Convergence)
+TEST(SimpsonUniformNonPeriodicQuadrature1D, Convergence)
 {
     constexpr int NTESTS(10);
 

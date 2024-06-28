@@ -11,7 +11,9 @@
 namespace {
 template <class IDim>
 using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
-}
+template <class IDim>
+using CoefficientChunkSpan1D = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>;
+} // namespace
 
 /**
  * @brief Helper function which creates ND dimensions from N 1D quadrature coefficient functions.
@@ -23,24 +25,24 @@ using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
  *
  * @returns The coefficients which define the quadrature method in ND.
  */
-template <class... DDims>
-ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> quadrature_coeffs_nd(
+template <class ExecSpace, class... DDims>
+ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims...>> quadrature_coeffs_nd(
         ddc::DiscreteDomain<DDims...> const& domain,
-        std::function<ddc::Chunk<double, ddc::DiscreteDomain<DDims>>(
-                ddc::DiscreteDomain<DDims>)>... funcs)
+        ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims...>> coefficients,
+        std::function<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>(
+                ddc::DiscreteDomain<DDims>,
+                ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>)>... funcs)
 {
     // Get coefficients for each dimension
-    std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs(
-            funcs(ddc::select<DDims>(domain))...);
-
-    // Allocate ND coefficients
-    ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients(domain);
+    std::tuple<CoefficientChunkSpan1D<DDims>...> current_dim_coeffs(
+            funcs(coefficients(ddc::select<DDims>(domain)), ddc::select<DDims>(domain))...);
 
     ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
         // multiply the 1D coefficients by one another
-        coefficients(idim)
-                = (std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs)(ddc::select<DDims>(idim))
-                   * ... * 1);
+
+        (std::get<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>>(current_dim_coeffs)(
+                 ddc::select<DDims>(idim))
+         * ... * 1);
     });
 
     return coefficients;
