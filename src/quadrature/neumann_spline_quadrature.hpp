@@ -18,7 +18,7 @@
 
 namespace {
 template <class IDim>
-using CoefficientChunkSpan1D = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>;
+using CoefficientChunkSpan1D = device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>>;
 }
 
 
@@ -128,9 +128,10 @@ neumann_spline_quadrature_coefficients(
             neumann_spline_quadrature_coefficients_1d(ddc::select<DDims>(domain), builders)...);
 
     // Allocate ND coefficients
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients(domain);
+    device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients_alloc(domain);
+    ddc::ChunkSpan coefficients=coefficients_alloc.span_view();
 
-    ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
+    ddc::parallel_for_each( Kokkos::DefaultExecutionSpace(),domain, KOKKOS_LAMBDA(ddc::DiscreteElement<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients(idim)
                 = (std::get<CoefficientChunkSpan1D<DDims>>(current_dim_coeffs)(
@@ -138,5 +139,5 @@ neumann_spline_quadrature_coefficients(
                    * ... * 1);
     });
 
-    return coefficients.span_view();
+    return coefficients;
 }
