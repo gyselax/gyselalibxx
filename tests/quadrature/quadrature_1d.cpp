@@ -20,6 +20,8 @@ struct IDimXPeriod : ddc::NonUniformPointSampling<RDimXPeriod>
 };
 using IDomXPeriod = ddc::DiscreteDomain<IDimXPeriod>;
 using CoordXPeriod = ddc::Coordinate<RDimXPeriod>;
+using DFieldX = device_t<ddc::Chunk<double, IDomXPeriod>>;
+
 
 TEST(TrapezoidUniformPeriodicQuadrature1D, ExactForConstantFunc)
 {
@@ -41,13 +43,13 @@ TEST(TrapezoidUniformPeriodicQuadrature1D, ExactForConstantFunc)
     ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
     ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-    device_t<ddc::Chunk<double, IDomXPeriod>> quadrature_coeffs_alloc(gridx);
-    trapezoid_quadrature_coefficients_1d<
+    DFieldX quadrature_coeffs_alloc(gridx);
+    trapezoid_quadrature_coefficients<
             Kokkos::DefaultExecutionSpace>(gridx, quadrature_coeffs_alloc.span_view());
     Quadrature<Kokkos::DefaultExecutionSpace, IDimXPeriod> const integrate(
             quadrature_coeffs_alloc.span_view());
 
-    device_t<ddc::Chunk<double, IDomXPeriod>> values_alloc(gridx);
+    DFieldX values_alloc(gridx);
     ddc::ChunkSpan values = values_alloc.span_view();
     Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
     double integral = integrate(values);
@@ -74,14 +76,13 @@ TEST(SimpsonUniformPeriodicQuadrature1D, ExactForConstantFunc)
     ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
     ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-
-    device_t<ddc::Chunk<double, IDomXPeriod>> quadrature_coeffs_alloc(gridx);
-    simpson_quadrature_coefficients_1d<
+    DFieldX quadrature_coeffs_alloc(gridx);
+    simpson_quadrature_coefficients<
             Kokkos::DefaultExecutionSpace>(gridx, quadrature_coeffs_alloc.span_view());
     Quadrature<Kokkos::DefaultExecutionSpace, IDimXPeriod> const integrate(
             quadrature_coeffs_alloc.span_view());
 
-    device_t<ddc::Chunk<double, IDomXPeriod>> values_alloc(gridx);
+    DFieldX values_alloc(gridx);
     ddc::ChunkSpan values = values_alloc.span_view();
     Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
     double integral = integrate(values);
@@ -130,11 +131,13 @@ double compute_error(int n_elems, Method meth)
     device_t<ddc::Chunk<double, IDomainY>> quadrature_coeffs_alloc(gridy);
     switch (meth) {
     case Method::TRAPEZ:
-        trapezoid_quadrature_coefficients_1d<
-                Kokkos::DefaultExecutionSpace>(gridy, quadrature_coeffs_alloc.span_view());
+        trapezoid_quadrature_coefficients<
+                Kokkos::DefaultExecutionSpace,
+                IDimY>(gridy, quadrature_coeffs_alloc.span_view());
     case Method::SIMPSON:
-        simpson_quadrature_coefficients_1d<
-                Kokkos::DefaultExecutionSpace>(gridy, quadrature_coeffs_alloc.span_view());
+        simpson_quadrature_coefficients<
+                Kokkos::DefaultExecutionSpace,
+                IDimY>(gridy, quadrature_coeffs_alloc.span_view());
     }
 
     Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(
