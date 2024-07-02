@@ -59,15 +59,15 @@ device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>> trapezoid_quadrature
  * @return The quadrature coefficients for the trapezoid method defined on the provided domain.
  */
 template <class ExecSpace, class... ODims>
-ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims...>> trapezoid_quadrature_coefficients(
+device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims...>>> trapezoid_quadrature_coefficients(
         ddc::DiscreteDomain<ODims...> const& domain,
-        ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims...>> coeffs)
+        device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims...>>> coeffs)
 {
     return quadrature_coeffs_nd<ExecSpace, ODims...>(
             domain,
             coeffs,
-            (std::function<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims>>(
+            (std::function<device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims>>>(
                      ddc::DiscreteDomain<ODims>,
-                     ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims>>)>(
+                     device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims>>>)>(
                     trapezoid_quadrature_coefficients_1d<ExecSpace, ODims>))...);
 }

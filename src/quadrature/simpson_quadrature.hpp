@@ -5,6 +5,9 @@
 
 #include <ddc_helper.hpp>
 
+#include "quadrature_coeffs_nd.hpp"
+
+
 /**
  * @brief Get the Simpson coefficients in 1D.
  *
@@ -43,4 +46,29 @@ device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>> simpson_quadrature_c
                 }
             });
     return coefficients;
+}
+
+
+/**
+ * @brief Get the Simpson coefficients in ND.
+ *
+ * Calculate the quadrature coefficients for the Simpson method defined on the provided domain.
+ *
+ * @param[in] domain
+ * 	The domain on which the quadrature will be carried out.
+ *
+ * @return The quadrature coefficients for the Simpson method defined on the provided domain.
+ */
+template <class ExecSpace, class... ODims>
+device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims...>>> simpson_quadrature_coefficients(
+        ddc::DiscreteDomain<ODims...> const& domain,
+        device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims...>>> coeffs)
+{
+    return quadrature_coeffs_nd<ExecSpace, ODims...>(
+            domain,
+            coeffs,
+            (std::function<device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims>>>(
+                     ddc::DiscreteDomain<ODims>,
+                     device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims>>>)>(
+                    simpson_quadrature_coefficients_1d<ExecSpace, ODims>))...);
 }

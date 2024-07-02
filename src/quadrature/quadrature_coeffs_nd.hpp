@@ -10,9 +10,7 @@
 
 namespace {
 template <class IDim>
-using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
-template <class IDim>
-using CoefficientChunkSpan1D = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>;
+using CoefficientChunkSpan1D = device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>>;
 } // namespace
 
 /**
@@ -26,25 +24,28 @@ using CoefficientChunkSpan1D = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>
  * @returns The coefficients which define the quadrature method in ND.
  */
 template <class ExecSpace, class... DDims>
-ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims...>> quadrature_coeffs_nd(
+device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims...>>> quadrature_coeffs_nd(
         ddc::DiscreteDomain<DDims...> const& domain,
-        ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims...>> coefficients,
-        std::function<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>(
+        device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims...>>> coefficients,
+        std::function<device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>>(
                 ddc::DiscreteDomain<DDims>,
-                ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>)>... funcs)
+                device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>>)>... funcs)
 {
     // Get coefficients for each dimension
     std::tuple<CoefficientChunkSpan1D<DDims>...> current_dim_coeffs(
-            funcs(ddc::select<DDims>(domain), coefficients)...);
+            funcs(ddc::select<DDims>(domain), coefficients[ddc::select<DDims>(domain)])...);
 
-    ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
-        // multiply the 1D coefficients by one another
+    ddc::parallel_for_each(
+            ExecSpace(),
+            domain,
+            KOKKOS_LAMBDA(ddc::DiscreteElement<DDims...> const idim) {
+                // multiply the 1D coefficients by one another
 
-        coefficients(idim)
-                = (std::get<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>>(current_dim_coeffs)(
-                           ddc::select<DDims>(idim))
-                   * ... * 1);
-    });
+                coefficients(idim)
+                        = (std::get<device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>>>(
+                                   current_dim_coeffs)(ddc::select<DDims>(idim))
+                           * ... * 1);
+            });
 
     return coefficients;
 }
