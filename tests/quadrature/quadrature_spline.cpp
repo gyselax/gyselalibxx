@@ -48,8 +48,8 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
     IVectX const x_size(10);
 
     using SplineXBuilder = ddc::SplineBuilder<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesX,
             IDimX,
             SplineXBoundary,
@@ -66,12 +66,11 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
 
     IDomainX const gridx = builder_x.interpolation_domain();
 
-    host_t<DFieldX> const quadrature_coeffs = spline_quadrature_coefficients(gridx, builder_x);
-    Quadrature const integrate(quadrature_coeffs.span_cview());
+    DFieldX quadrature_coeffs = spline_quadrature_coefficients_1d(gridx, builder_x);
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimX> const integrate(quadrature_coeffs.span_view());
+    DFieldX values(gridx);
+    Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
 
-    host_t<DFieldX> values(gridx);
-
-    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
     double integral = integrate(values);
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-15);
@@ -106,8 +105,8 @@ double compute_error(int n_elems)
     using IDimY = typename ComputeErrorTraits<N>::IDimY;
     auto constexpr SplineYBoundary = ddc::BoundCond::GREVILLE;
     using SplineYBuilder = ddc::SplineBuilder<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesY,
             IDimY,
             SplineYBoundary,
@@ -127,14 +126,17 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    host_t<DFieldY> const quadrature_coeffs = spline_quadrature_coefficients(gridy, builder_y);
-    Quadrature const integrate(quadrature_coeffs.span_cview());
+    DFieldY quadrature_coeffs = spline_quadrature_coefficients_1d(gridy, builder_y);
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(quadrature_coeffs.span_view());
 
-    host_t<DFieldY> values(gridy);
+    DFieldY values_alloc(gridy);
+    ddc::ChunkSpan values = values_alloc.span_view();
 
-    ddc::for_each(gridy, [&](ddc::DiscreteElement<IDimY> const idx) {
-        values(idx) = sin(ddc::coordinate(idx));
-    });
+    ddc::parallel_for_each(
+            gridy,
+            KOKKOS_LAMBDA(ddc::DiscreteElement<IDimY> const idx) {
+                values(idx) = sin(ddc::coordinate(idx));
+            });
     double integral = integrate(values);
     return std::abs(2 - integral);
 }

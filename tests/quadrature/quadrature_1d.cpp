@@ -41,14 +41,15 @@ TEST(TrapezoidUniformPeriodicQuadrature1D, ExactForConstantFunc)
     ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
     ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-    host_t<ddc::Chunk<double, IDomXPeriod>> quadrature_coeffs_alloc(gridx);
+    device_t<ddc::Chunk<double, IDomXPeriod>> quadrature_coeffs_alloc(gridx);
     trapezoid_quadrature_coefficients_1d<
-            Kokkos::DefaultHostExecutionSpace>(gridx, quadrature_coeffs_alloc.span_view());
-    Quadrature<IDimXPeriod> const integrate(quadrature_coeffs_alloc.span_view());
+            Kokkos::DefaultExecutionSpace>(gridx, quadrature_coeffs_alloc.span_view());
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimXPeriod> const integrate(
+            quadrature_coeffs_alloc.span_view());
 
-    ddc::Chunk<double, IDomXPeriod> values(gridx);
-
-    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimXPeriod> const idx) { values(idx) = 1.0; });
+    device_t<ddc::Chunk<double, IDomXPeriod>> values_alloc(gridx);
+    ddc::ChunkSpan values = values_alloc.span_view();
+    Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
     double integral = integrate(values);
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-9);
@@ -73,13 +74,16 @@ TEST(SimpsonUniformPeriodicQuadrature1D, ExactForConstantFunc)
     ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
     ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-    host_t<ddc::Chunk<double, IDomXPeriod>> quadrature_coeffs_host(gridx);
-    simpson_quadrature_coefficients_1d<
-            Kokkos::DefaultHostExecutionSpace>(gridx, quadrature_coeffs_host.span_view());
-    Quadrature<IDimXPeriod> const integrate(quadrature_coeffs_host);
-    ddc::Chunk<double, IDomXPeriod> values(gridx);
 
-    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimXPeriod> const idx) { values(idx) = 1.0; });
+    device_t<ddc::Chunk<double, IDomXPeriod>> quadrature_coeffs_alloc(gridx);
+    simpson_quadrature_coefficients_1d<
+            Kokkos::DefaultExecutionSpace>(gridx, quadrature_coeffs_alloc.span_view());
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimXPeriod> const integrate(
+            quadrature_coeffs_alloc.span_view());
+
+    device_t<ddc::Chunk<double, IDomXPeriod>> values_alloc(gridx);
+    ddc::ChunkSpan values = values_alloc.span_view();
+    Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
     double integral = integrate(values);
     double expected_val = x_max - x_min;
 
@@ -123,22 +127,28 @@ double compute_error(int n_elems, Method meth)
     ddc::DiscreteVector<IDimY> npoints(n_elems);
     ddc::DiscreteDomain<IDimY> gridy(lbound, npoints);
 
-    host_t<ddc::Chunk<double, IDomainY>> quadrature_coeffs_host(gridy);
+    device_t<ddc::Chunk<double, IDomainY>> quadrature_coeffs_alloc(gridy);
     switch (meth) {
     case Method::TRAPEZ:
         trapezoid_quadrature_coefficients_1d<
-                Kokkos::DefaultHostExecutionSpace>(gridy, quadrature_coeffs_host.span_view());
+                Kokkos::DefaultExecutionSpace>(gridy, quadrature_coeffs_alloc.span_view());
     case Method::SIMPSON:
         simpson_quadrature_coefficients_1d<
-                Kokkos::DefaultHostExecutionSpace>(gridy, quadrature_coeffs_host.span_view());
+                Kokkos::DefaultExecutionSpace>(gridy, quadrature_coeffs_alloc.span_view());
     }
 
-    Quadrature<IDimY> const integrate(quadrature_coeffs_host.span_view());
-    host_t<ddc::Chunk<double, IDomainY>> values(gridy);
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(
+            quadrature_coeffs_alloc.span_view());
+    device_t<ddc::Chunk<double, IDomainY>> values_alloc(gridy);
+    ddc::ChunkSpan values = values_alloc.span_view();
 
-    ddc::for_each(gridy, [&](ddc::DiscreteElement<IDimY> const idx) {
-        values(idx) = sin(ddc::coordinate(idx));
-    });
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            gridy,
+            KOKKOS_LAMBDA(ddc::DiscreteElement<IDimY> const idx) {
+                values(idx) = sin(ddc::coordinate(idx));
+            });
+
     double integral = integrate(values);
     return std::abs(2 - integral);
 }
@@ -148,6 +158,7 @@ std::array<double, sizeof...(Is)> compute_errors_trpz(std::index_sequence<Is...>
 {
     return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2, Method::TRAPEZ)...};
 }
+
 template <std::size_t... Is>
 std::array<double, sizeof...(Is)> compute_errors_simpson(std::index_sequence<Is...>, int n_elems)
 {

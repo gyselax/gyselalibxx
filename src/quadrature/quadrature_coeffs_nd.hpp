@@ -35,14 +35,15 @@ ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims...>> quadrature_coeffs_nd(
 {
     // Get coefficients for each dimension
     std::tuple<CoefficientChunkSpan1D<DDims>...> current_dim_coeffs(
-            funcs(coefficients(ddc::select<DDims>(domain)), ddc::select<DDims>(domain))...);
+            funcs(ddc::select<DDims>(domain), coefficients)...);
 
     ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
         // multiply the 1D coefficients by one another
 
-        (std::get<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>>(current_dim_coeffs)(
-                 ddc::select<DDims>(idim))
-         * ... * 1);
+        coefficients(idim)
+                = (std::get<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims>>>(current_dim_coeffs)(
+                           ddc::select<DDims>(idim))
+                   * ... * 1);
     });
 
     return coefficients;

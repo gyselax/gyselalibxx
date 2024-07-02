@@ -55,7 +55,7 @@ using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
  * @return A chunk with the quadrature coefficients @f$ q @f$.
  */
 template <class IDim, class SplineBuilder>
-ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
+device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> spline_quadrature_coefficients_1d(
         ddc::DiscreteDomain<IDim> const& domain,
         SplineBuilder const& builder)
 {
@@ -70,24 +70,26 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
 
     using bsplines_type = typename SplineBuilder::bsplines_type;
 
-    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
+    device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> coefficients(domain);
 
     // Vector of integrals of B-splines
-    ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines(
+    ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines_host(
             builder.spline_domain());
-    ddc::discrete_space<bsplines_type>().integrals(integral_bsplines.span_view());
+    ddc::discrete_space<bsplines_type>().integrals(integral_bsplines_host.span_view());
 
     // Coefficients of quadrature in integral_bsplines
     ddc::DiscreteDomain<bsplines_type> slice = builder.spline_domain().take_first(
             ddc::DiscreteVector<bsplines_type> {ddc::discrete_space<bsplines_type>().nbasis()});
+    auto integral_bsplines = ddc::create_mirror_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            integral_bsplines_host.span_view());
 
+    // Solve matrix equation
+    builder.get_interpolation_matrix().solve_transpose_inplace(
+            integral_bsplines.allocation_mdspan());
     Kokkos::deep_copy(
             coefficients.allocation_kokkos_view(),
             integral_bsplines[slice].allocation_kokkos_view());
-
-    // Solve matrix equation
-    builder.get_interpolation_matrix().solve_transpose_inplace(coefficients.allocation_mdspan());
-
     return coefficients;
 }
 
