@@ -60,9 +60,9 @@ TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFunc)
 
     IDomainX const gridx = builder_x.interpolation_domain();
 
-    DFieldX quadrature_coeffs_alloc = neumann_spline_quadrature_coefficients_1d(gridx, builder_x);
+    DFieldX quadrature_coeffs_alloc(gridx);
     auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
-
+    quadrature_coeffs = neumann_spline_quadrature_coefficients(gridx, builder_x);
     Quadrature<Kokkos::DefaultExecutionSpace, IDimX> const integrate(quadrature_coeffs);
 
     DFieldX values_alloc(gridx);
@@ -73,7 +73,7 @@ TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFunc)
     EXPECT_LE(abs(integral - expected_val), 1e-15);
 }
 
-/*
+
 template <std::size_t N>
 struct ComputeErrorTraits
 {
@@ -120,18 +120,20 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    host_t<DFieldY>  quadrature_coeffs_alloc_host
-            = neumann_spline_quadrature_coefficients(gridy, builder_y);
-    auto  quadrature_coeffs=ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(),quadrature_coeffs_alloc_host.span_view());       
-    Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(quadrature_coeffs.span_view());
+    DFieldY quadrature_coeffs_alloc(gridy);
+    auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
+    quadrature_coeffs = neumann_spline_quadrature_coefficients(gridy, builder_y);
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(quadrature_coeffs);
 
     DFieldY values_alloc(gridy);
     ddc::ChunkSpan values = values_alloc.span_view();
 
-    ddc::parallel_for_each(gridy, KOKKOS_LAMBDA(ddc::DiscreteElement<IDimY> const idx) {
-        double x = ddc::coordinate(idx);
-        values(idx) = (x + 1) * (x + 1) * (x + 1) * (x - 1) * (x - 1);
-    });
+    ddc::parallel_for_each(
+            gridy,
+            KOKKOS_LAMBDA(ddc::DiscreteElement<IDimY> const idx) {
+                double x = ddc::coordinate(idx);
+                values(idx) = (x + 1) * (x + 1) * (x + 1) * (x - 1) * (x - 1);
+            });
     double integral = integrate(values);
     return std::abs(16.0 / 15.0 - integral);
 }
@@ -155,5 +157,5 @@ TEST(NeumannSplineUniformQuadrature1D, Convergence)
         EXPECT_LE(order_error, 5e-2);
     }
 }
-*/
+
 } // namespace

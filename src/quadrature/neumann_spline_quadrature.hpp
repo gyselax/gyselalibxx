@@ -18,7 +18,7 @@
 
 namespace {
 template <class IDim>
-using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
+using CoefficientChunkSpan1D = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>;
 }
 
 
@@ -41,7 +41,8 @@ using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
  * @return The quadrature coefficients for the method defined on the provided domain.
  */
 template <class IDim, class SplineBuilder>
-device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> neumann_spline_quadrature_coefficients_1d(
+device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>>
+neumann_spline_quadrature_coefficients_1d(
         ddc::DiscreteDomain<IDim> const& domain,
         SplineBuilder const& builder)
 {
@@ -93,7 +94,7 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> neumann_spline_quadratur
             coefficients.allocation_kokkos_view(),
             integral_bsplines[slice].allocation_kokkos_view());
 
-    return coefficients;
+    return coefficients.span_view();
 }
 
 
@@ -113,7 +114,8 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> neumann_spline_quadratur
  * @return The coefficients which define the spline quadrature method in ND.
  */
 template <class... DDims, class... SplineBuilders>
-ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> neumann_spline_quadrature_coefficients(
+device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDims...>>>
+neumann_spline_quadrature_coefficients(
         ddc::DiscreteDomain<DDims...> const& domain,
         SplineBuilders const&... builders)
 {
@@ -122,18 +124,19 @@ ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> neumann_spline_quadrature_coef
                     typename SplineBuilders::bsplines_type::tag_type> and ...));
 
     // Get coefficients for each dimension
-    std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs(
+    std::tuple<CoefficientChunkSpan1D<DDims>...> current_dim_coeffs(
             neumann_spline_quadrature_coefficients_1d(ddc::select<DDims>(domain), builders)...);
 
     // Allocate ND coefficients
-    ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients(domain);
+    device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients(domain);
 
     ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients(idim)
-                = (std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs)(ddc::select<DDims>(idim))
+                = (std::get<CoefficientChunkSpan1D<DDims>>(current_dim_coeffs)(
+                           ddc::select<DDims>(idim))
                    * ... * 1);
     });
 
-    return coefficients;
+    return coefficients.span_view();
 }
