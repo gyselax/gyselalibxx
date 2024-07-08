@@ -45,12 +45,12 @@ simpson_quadrature_coefficients_1d(ddc::DiscreteDomain<IDim> const& domain)
                     idx += ddc::DiscreteVector<IDim>(1);
                     coefficients(idx) = 1. / 3. * (distance_at_left(idx) + distance_at_right(idx));
                 }
-                if constexpr (IDim::continuous_dimension_type::PERIODIC) {
+                if  (IDim::continuous_dimension_type::PERIODIC) {
                     coefficients(domain.front()) += 2. / 3. * distance_at_left(domain.back());
                     coefficients(domain.back()) += 2. / 3. * distance_at_right(domain.front());
                 }
             });
-    return coefficients_alloc;
+    return std::move(coefficients_alloc);
 }
 
 
