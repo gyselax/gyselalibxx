@@ -60,10 +60,8 @@ TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFunc)
 
     IDomainX const gridx = builder_x.interpolation_domain();
 
-    DFieldX quadrature_coeffs_alloc(gridx);
-    auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
-    quadrature_coeffs = neumann_spline_quadrature_coefficients(gridx, builder_x);
-    Quadrature<Kokkos::DefaultExecutionSpace, IDimX> const integrate(quadrature_coeffs);
+    DFieldX quadrature_coeffs = neumann_spline_quadrature_coefficients(gridx, builder_x);
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimX> const integrate(quadrature_coeffs.span_view());
 
     DFieldX values_alloc(gridx);
     ddc::ChunkSpan values = values_alloc.span_view();
@@ -99,8 +97,8 @@ double compute_error(int n_elems)
     using GrevillePointsY = typename ComputeErrorTraits<N>::GrevillePointsY;
     using IDimY = typename ComputeErrorTraits<N>::IDimY;
     using SplineYBuilder = ddc::SplineBuilder<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesY,
             IDimY,
             ddc::BoundCond::HERMITE,
@@ -120,10 +118,8 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    DFieldY quadrature_coeffs_alloc(gridy);
-    auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
-    quadrature_coeffs = neumann_spline_quadrature_coefficients(gridy, builder_y);
-    Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(quadrature_coeffs);
+    DFieldY quadrature_coeffs = neumann_spline_quadrature_coefficients(gridy, builder_y);
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(quadrature_coeffs.span_view());
 
     DFieldY values_alloc(gridy);
     ddc::ChunkSpan values = values_alloc.span_view();

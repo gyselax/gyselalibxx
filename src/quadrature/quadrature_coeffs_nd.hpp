@@ -11,6 +11,8 @@
 namespace {
 template <class IDim>
 using CoefficientChunk1D = device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>>;
+template <class IDim>
+using CoefficientChunkSpan1D = device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>>;
 } // namespace
 
 /**
@@ -32,15 +34,21 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> quadrature_coeffs_nd
     device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients_alloc(domain);
     ddc::ChunkSpan coefficients = coefficients_alloc.span_view();
     // Get coefficients for each dimension
-    std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs(
+    std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs_alloc(
             funcs(ddc::select<DDims>(domain))...);
+    std::tuple<CoefficientChunkSpan1D<DDims>...> current_dim_coeffs(
+            std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs_alloc).span_view()...);
 
-    ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
-        // multiply the 1D coefficients by one another
+    ddc::parallel_for_each(
+            ExecSpace(),
+            domain,
+            KOKKOS_LAMBDA(ddc::DiscreteElement<DDims...> const idim) {
+                // multiply the 1D coefficients by one another
 
-        coefficients(idim)
-                = (std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs)(ddc::select<DDims>(idim))
-                   * ... * 1);
-    });
-    return coefficients_alloc;
+                coefficients(idim)
+                        = (std::get<CoefficientChunkSpan1D<DDims>>(current_dim_coeffs)(
+                                   ddc::select<DDims>(idim))
+                           * ... * 1);
+            });
+    return std::move(coefficients_alloc);
 }

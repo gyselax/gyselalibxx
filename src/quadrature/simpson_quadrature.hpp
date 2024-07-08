@@ -24,9 +24,6 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> simpson_quadrature_coeff
 {
     device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> coefficients_alloc(domain);
     ddc::ChunkSpan coefficients = coefficients_alloc.span_view();
-    ddc::DiscreteDomain<IDim> middle_domain
-            = domain.remove(ddc::DiscreteVector<IDim>(1), ddc::DiscreteVector<IDim>(1));
-
     double const dx_l = distance_at_left(domain.back());
     double const dx_r = distance_at_right(domain.front());
     Kokkos::parallel_for(
@@ -46,7 +43,7 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> simpson_quadrature_coeff
                     coefficients(domain.back()) += 2. / 3. * distance_at_right(domain.front());
                 }
             });
-    return std::move(coefficients_alloc);
+    return coefficients_alloc;
 }
 
 
