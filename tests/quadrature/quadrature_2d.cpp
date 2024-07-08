@@ -159,8 +159,7 @@ double compute_error(int n_elems)
             quadrature_coeffs.span_view());
 
     DFieldXY values(gridxy);
-    DFieldXY values_host(gridxy);
-
+    host_t<DFieldXY> values_host(gridxy);
 
     ddc::for_each(gridxy, [&](ddc::DiscreteElement<IDimX, IDimY> const idx) {
         double const y_cos = cos(ddc::get<DimY>(ddc::coordinate(idx)));
