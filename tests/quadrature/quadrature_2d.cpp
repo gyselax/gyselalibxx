@@ -57,22 +57,19 @@ TEST(TrapezoidUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
 
     IDomainXY const gridxy(gridx, gridy);
 
-    ddc::Chunk<double, IDomainXY> quadrature_coeffs_alloc(gridxy);
-    ddc::ChunkSpan quadrature_coeffs = quadrature_coeffs_alloc.span_view();
-    trapezoid_quadrature_coefficients<
-            Kokkos::DefaultHostExecutionSpace,
-            IDimX,
-            IDimY>(gridxy, quadrature_coeffs);
-    /* Quadrature<Kokkos::DefaultHostExecutionSpace,IDimX, IDimY> const integrate(quadrature_coeffs);
+    DFieldXY quadrature_coeffs_alloc
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimX, IDimY> const integrate(
+            quadrature_coeffs_alloc.span_view());
 
-    host_t<DFieldXY> values(gridxy);
+    DFieldXY values(gridxy);
 
-    ddc::for_each(gridxy, [&](ddc::DiscreteElement<IDimX, IDimY> const idx) { values(idx) = 1.0; });
+    Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
     double integral = integrate(values);
     double expected_val = (x_max - x_min) * (y_max - y_min);
-    EXPECT_LE(abs(integral - expected_val), 1e-9);*/
+    EXPECT_LE(abs(integral - expected_val), 1e-9);
 }
-/*
+
 template <std::size_t N>
 struct ComputeErrorTraits
 {
@@ -104,7 +101,7 @@ double compute_error(int n_elems)
     using IDomainX = ddc::DiscreteDomain<IDimX>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
-    using DFieldXY = ddc::Chunk<double, IDomainXY>;
+    using DFieldXY = device_t<ddc::Chunk<double, IDomainXY>>;
 
     ddc::Coordinate<DimX> const x_min(0.0);
     ddc::Coordinate<DimX> const x_max(M_PI);
@@ -120,12 +117,13 @@ double compute_error(int n_elems)
             = ddc::init_discrete_space<IDimY>(IDimY::template init<IDimY>(y_min, y_max, y_size));
     IDomainXY const gridxy(gridx, gridy);
 
-    host_t<ddc::Chunk<double , IDomainXY>> const quadrature_coeffs_alloc(gridxy);
-    ddc::ChunkSpan quadrature_coeffs=quadrature_coeffs_alloc.span_view();
-    trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace,IDimX,IDimY>(gridxy,quadrature_coeffs);
-    Quadrature<Kokkos::DefaultHostExecutionSpace,IDimX, IDimY> const integrate(quadrature_coeffs);
+    DFieldXY quadrature_coeffs_alloc
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimX, IDimY>(
+                    gridxy);
+    ddc::ChunkSpan quadrature_coeffs = quadrature_coeffs_alloc.span_view();
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimX, IDimY> const integrate(quadrature_coeffs);
 
-    host_t<DFieldXY> values(gridxy);
+    DFieldXY values(gridxy);
 
     ddc::for_each(gridxy, [&](ddc::DiscreteElement<IDimX, IDimY> const idx) {
         double const y_cos = cos(ddc::get<DimY>(ddc::coordinate(idx)));
@@ -153,5 +151,5 @@ TEST(TrapezoidUniformNonPeriodicQuadrature2D, Convergence)
         double order_error = abs(2 - order);
         EXPECT_LE(order_error, 1e-1);
     }
-}*/
+}
 } // namespace

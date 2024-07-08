@@ -43,11 +43,10 @@ TEST(TrapezoidUniformPeriodicQuadrature1D, ExactForConstantFunc)
     ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
     ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-    DFieldX quadrature_coeffs_alloc(gridx);
-    trapezoid_quadrature_coefficients<
-            Kokkos::DefaultExecutionSpace>(gridx, quadrature_coeffs_alloc.span_view());
-    Quadrature<Kokkos::DefaultExecutionSpace, IDimXPeriod> const integrate(
-            quadrature_coeffs_alloc.span_view());
+    DFieldX quadrature_coeffs_alloc
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimXPeriod>(gridx);
+    ddc::ChunkSpan quadrature_coeffs = quadrature_coeffs_alloc.span_view();
+    Quadrature<Kokkos::DefaultExecutionSpace, IDimXPeriod> const integrate(quadrature_coeffs);
 
     DFieldX values_alloc(gridx);
     ddc::ChunkSpan values = values_alloc.span_view();
@@ -76,9 +75,8 @@ TEST(SimpsonUniformPeriodicQuadrature1D, ExactForConstantFunc)
     ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
     ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-    DFieldX quadrature_coeffs_alloc(gridx);
-    simpson_quadrature_coefficients<
-            Kokkos::DefaultExecutionSpace>(gridx, quadrature_coeffs_alloc.span_view());
+    DFieldX quadrature_coeffs_alloc
+            = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimXPeriod>(gridx);
     Quadrature<Kokkos::DefaultExecutionSpace, IDimXPeriod> const integrate(
             quadrature_coeffs_alloc.span_view());
 
@@ -128,21 +126,19 @@ double compute_error(int n_elems, Method meth)
     ddc::DiscreteVector<IDimY> npoints(n_elems);
     ddc::DiscreteDomain<IDimY> gridy(lbound, npoints);
 
-    device_t<ddc::Chunk<double, IDomainY>> quadrature_coeffs_alloc(gridy);
+    DFieldY quadrature_coeffs_alloc(gridy);
     switch (meth) {
     case Method::TRAPEZ:
-        trapezoid_quadrature_coefficients<
-                Kokkos::DefaultExecutionSpace,
-                IDimY>(gridy, quadrature_coeffs_alloc.span_view());
+        quadrature_coeffs_alloc
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimY>(gridy);
     case Method::SIMPSON:
-        simpson_quadrature_coefficients<
-                Kokkos::DefaultExecutionSpace,
-                IDimY>(gridy, quadrature_coeffs_alloc.span_view());
+        quadrature_coeffs_alloc
+                = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimY>(gridy);
     }
 
     Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(
             quadrature_coeffs_alloc.span_view());
-    device_t<ddc::Chunk<double, IDomainY>> values_alloc(gridy);
+    DFieldY values_alloc(gridy);
     ddc::ChunkSpan values = values_alloc.span_view();
 
     ddc::parallel_for_each(

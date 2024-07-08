@@ -18,7 +18,7 @@
 
 namespace {
 template <class IDim>
-using CoefficientChunkSpan1D = device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>>;
+using CoefficientChunk1D = device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>>;
 }
 
 
@@ -124,20 +124,23 @@ neumann_spline_quadrature_coefficients(
                     typename SplineBuilders::bsplines_type::tag_type> and ...));
 
     // Get coefficients for each dimension
-    std::tuple<CoefficientChunkSpan1D<DDims>...> current_dim_coeffs(
+    std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs(
             neumann_spline_quadrature_coefficients_1d(ddc::select<DDims>(domain), builders)...);
 
     // Allocate ND coefficients
     device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients_alloc(domain);
-    ddc::ChunkSpan coefficients=coefficients_alloc.span_view();
+    ddc::ChunkSpan coefficients = coefficients_alloc.span_view();
 
-    ddc::parallel_for_each( Kokkos::DefaultExecutionSpace(),domain, KOKKOS_LAMBDA(ddc::DiscreteElement<DDims...> const idim) {
-        // multiply the 1D coefficients by one another
-        coefficients(idim)
-                = (std::get<CoefficientChunkSpan1D<DDims>>(current_dim_coeffs)(
-                           ddc::select<DDims>(idim))
-                   * ... * 1);
-    });
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            domain,
+            KOKKOS_LAMBDA(ddc::DiscreteElement<DDims...> const idim) {
+                // multiply the 1D coefficients by one another
+                coefficients(idim)
+                        = (std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs)(
+                                   ddc::select<DDims>(idim))
+                           * ... * 1);
+            });
 
     return coefficients;
 }

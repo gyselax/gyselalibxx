@@ -19,10 +19,11 @@
  * @return The quadrature coefficients for the Simpson method defined on the provided domain.
  */
 template <class ExecSpace, class IDim>
-device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>> simpson_quadrature_coefficients_1d(
-        ddc::DiscreteDomain<IDim> const& domain,
-        device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>> coefficients)
+device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> simpson_quadrature_coefficients_1d(
+        ddc::DiscreteDomain<IDim> const& domain)
 {
+    device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> coefficients_alloc(domain);
+    ddc::ChunkSpan coefficients = coefficients_alloc.span_view();
     ddc::DiscreteDomain<IDim> middle_domain
             = domain.remove(ddc::DiscreteVector<IDim>(1), ddc::DiscreteVector<IDim>(1));
 
@@ -45,7 +46,7 @@ device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>> simpson_quadrature_c
                     coefficients(domain.back()) += 2. / 3. * distance_at_right(domain.front());
                 }
             });
-    return coefficients;
+    return std::move(coefficients_alloc);
 }
 
 
@@ -60,15 +61,12 @@ device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>> simpson_quadrature_c
  * @return The quadrature coefficients for the Simpson method defined on the provided domain.
  */
 template <class ExecSpace, class... ODims>
-device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims...>>> simpson_quadrature_coefficients(
-        ddc::DiscreteDomain<ODims...> const& domain,
-        device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims...>>> coeffs)
+device_t<ddc::Chunk<double, ddc::DiscreteDomain<ODims...>>> simpson_quadrature_coefficients(
+        ddc::DiscreteDomain<ODims...> const& domain)
 {
     return quadrature_coeffs_nd<ExecSpace, ODims...>(
             domain,
-            coeffs,
-            (std::function<device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims>>>(
-                     ddc::DiscreteDomain<ODims>,
-                     device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<ODims>>>)>(
+            (std::function<device_t<ddc::Chunk<double, ddc::DiscreteDomain<ODims>>>(
+                     ddc::DiscreteDomain<ODims>)>(
                     simpson_quadrature_coefficients_1d<ExecSpace, ODims>))...);
 }
