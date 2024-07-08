@@ -142,7 +142,6 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> neumann_spline_quadr
                         = (std::get<CoefficientChunkSpan1D<DDims>>(current_dim_coeffs)(
                                    ddc::select<DDims>(idim))
                            * ... * 1);
-                Kokkos::printf("coeff %f\n", coefficients(idim));
             });
 
     return coefficients_alloc;
