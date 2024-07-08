@@ -19,10 +19,17 @@
  * @return The quadrature coefficients for the trapezoid method defined on the provided domain.
  */
 template <class ExecSpace, class IDim>
-device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> trapezoid_quadrature_coefficients_1d(
-        ddc::DiscreteDomain<IDim> const& domain)
+ddc::Chunk<
+        double,
+        ddc::DiscreteDomain<IDim>,
+        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+trapezoid_quadrature_coefficients_1d(ddc::DiscreteDomain<IDim> const& domain)
 {
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> coefficients_alloc(domain);
+    ddc::Chunk<
+            double,
+            ddc::DiscreteDomain<IDim>,
+            ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+            coefficients_alloc(domain);
     ddc::ChunkSpan coefficients = coefficients_alloc.span_view();
     ddc::DiscreteDomain<IDim> middle_domain
             = domain.remove(ddc::DiscreteVector<IDim>(1), ddc::DiscreteVector<IDim>(1));

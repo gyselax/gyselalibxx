@@ -19,10 +19,17 @@
  * @return The quadrature coefficients for the Simpson method defined on the provided domain.
  */
 template <class ExecSpace, class IDim>
-device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> simpson_quadrature_coefficients_1d(
-        ddc::DiscreteDomain<IDim> const& domain)
+ddc::Chunk<
+        double,
+        ddc::DiscreteDomain<IDim>,
+        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+simpson_quadrature_coefficients_1d(ddc::DiscreteDomain<IDim> const& domain)
 {
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> coefficients_alloc(domain);
+    ddc::Chunk<
+            double,
+            ddc::DiscreteDomain<IDim>,
+            ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+            coefficients_alloc(domain);
     ddc::ChunkSpan coefficients = coefficients_alloc.span_view();
     double const dx_l = distance_at_left(domain.back());
     double const dx_r = distance_at_right(domain.front());
@@ -58,12 +65,18 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> simpson_quadrature_coeff
  * @return The quadrature coefficients for the Simpson method defined on the provided domain.
  */
 template <class ExecSpace, class... ODims>
-device_t<ddc::Chunk<double, ddc::DiscreteDomain<ODims...>>> simpson_quadrature_coefficients(
-        ddc::DiscreteDomain<ODims...> const& domain)
+ddc::Chunk<
+        double,
+        ddc::DiscreteDomain<ODims...>,
+        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+simpson_quadrature_coefficients(ddc::DiscreteDomain<ODims...> const& domain)
 {
     return quadrature_coeffs_nd<ExecSpace, ODims...>(
             domain,
-            (std::function<device_t<ddc::Chunk<double, ddc::DiscreteDomain<ODims>>>(
+            (std::function<ddc::Chunk<
+                     double,
+                     ddc::DiscreteDomain<ODims>,
+                     ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>(
                      ddc::DiscreteDomain<ODims>)>(
                     simpson_quadrature_coefficients_1d<ExecSpace, ODims>))...);
 }
