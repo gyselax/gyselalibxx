@@ -8,6 +8,7 @@ The `src/` folder contains all the code necessary to build a gyrokinetic semi-La
 - [geometry5D](./geometry5D/README.md) - Code describing methods which are specific to a simulation with 3 spatial dimensions and 2 velocity dimension. This will be the general geometry used for GyselaX++ development.
 - [geometryRTheta](./geometryRTheta/README.md) - Code describing methods which are specific to a 2D curvilinear geometry containing a singular point.
 - [geometryXVx](./geometryXVx/README.md) - Code describing methods which are specific to a simulation with 1 spatial dimension and 1 velocity dimension.
+- [geometryXY](./geometryXY/README.md) - Code describing methods which are specific to a simulation with 2 spatial dimensions.
 - [geometryXYVxVy](./geometryXYVxVy/README.md) - Code describing methods which are specific to a simulation with 2 spatial dimensions and 2 velocity dimension.
 - [interpolation](./interpolation/README.md) - Code describing interpolation methods.
 - [io](./io/README.md)
