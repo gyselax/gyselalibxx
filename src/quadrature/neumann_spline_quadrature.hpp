@@ -18,9 +18,9 @@
 
 namespace {
 template <class IDim>
-using CoefficientChunk1D = device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>>;
+using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
 template <class IDim>
-using CoefficientChunkSpan1D = device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>>;
+using CoefficientChunkSpan1D = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>;
 
 } // namespace
 
@@ -44,7 +44,7 @@ using CoefficientChunkSpan1D = device_t<ddc::ChunkSpan<double, ddc::DiscreteDoma
  * @return The quadrature coefficients for the method defined on the provided domain.
  */
 template <class IDim, class SplineBuilder>
-device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> neumann_spline_quadrature_coefficients_1d(
+ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coefficients_1d(
         ddc::DiscreteDomain<IDim> const& domain,
         SplineBuilder const& builder)
 {
@@ -83,7 +83,7 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> neumann_spline_quadratur
     builder.get_interpolation_matrix().solve_transpose_inplace(
             integral_bsplines.allocation_mdspan());
 
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> coefficients(domain);
+    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
 
     // Coefficients of quadrature in integral_bsplines (values which would always be multiplied
     // by f'(x)=0 are removed
@@ -131,18 +131,18 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> neumann_spline_quadr
             std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs_alloc).span_view()...);
     // Allocate ND coefficients
     device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients_alloc(domain);
-    ddc::ChunkSpan coefficients = coefficients_alloc.span_view();
+ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients_alloc_host(domain);
 
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            domain,
-            KOKKOS_LAMBDA(ddc::DiscreteElement<DDims...> const idim) {
+    ddc::ChunkSpan coefficients = coefficients_alloc_host.span_view();
+
+    ddc::for_each(            domain,
+            [&](ddc::DiscreteElement<DDims...> const idim) {
                 // multiply the 1D coefficients by one another
                 coefficients(idim)
                         = (std::get<CoefficientChunkSpan1D<DDims>>(current_dim_coeffs)(
                                    ddc::select<DDims>(idim))
                            * ... * 1);
             });
-
+Kokkos::deep_copy(coefficients_alloc.allocation_kokkos_view(),coefficients_alloc_host.allocation_kokkos_view());
     return coefficients_alloc;
 }
