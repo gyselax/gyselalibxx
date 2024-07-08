@@ -54,29 +54,17 @@ var NAVTREE =
       [ "Submodules", "docs_Using_git.html#docs_Using_git__Submodules", null ]
     ] ],
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
-    [ "Neutral simulations", "simulations_geometryXVx_neutrals.html", [
-      [ "Description", "simulations_geometryXVx_neutrals.html#simulations_geometryXVx_neutrals__Description", null ],
-      [ "Usage", "simulations_geometryXVx_neutrals.html#simulations_geometryXVx_neutrals__Usage", null ]
-    ] ],
     [ "Gyselalib++ contents", "src.html", "src" ],
-    [ "Collisions", "src_collision.html", null ],
-    [ "Utility Functions", "src_data_types.html", [
-      [ "VectorField", "src_data_types.html#src_data_types__VectorField", null ],
-      [ "DerivField", "src_data_types.html#src_data_types__DerivField", null ]
-    ] ],
-    [ "Reaction rates", "src_geometryXVx_geometryMX_reactionrates.html", null ],
-    [ "Time integration hybrid", "src_geometryXVx_time_integration_hybrid.html", null ],
-    [ "Functions used for input and output.", "src_io.html", null ],
     [ "Tests", "tests.html", "tests" ],
     [ "Script to automise :", "tests_geometry5D_collisions.html", [
-      [ "- the creation of the initial restart file with the python script <tt>init_distribution.py</tt>", "tests_geometry5D_collisions.html#autotoc_md62", null ],
-      [ "- the creation of the input YAML file required as input of the C++ simulation <tt>testcollision</tt>", "tests_geometry5D_collisions.html#autotoc_md63", null ],
-      [ "For instance, the following command", "tests_geometry5D_collisions.html#autotoc_md64", null ],
-      [ "create the folder <tt>D_INPUT_PARAMS_ION_1X1X1X128X64.YAML</tt> containing:", "tests_geometry5D_collisions.html#autotoc_md65", null ],
-      [ "- <tt>GysX_rst_00000.h5</tt> : output of the python script <tt>init_distribution.py</tt>", "tests_geometry5D_collisions.html#autotoc_md66", null ],
-      [ "- <tt>GysX_rst_00001.h5</tt> : output of the C++ collision executable", "tests_geometry5D_collisions.html#autotoc_md67", null ],
-      [ "- <tt>coll_ref.yml</tt> : input for C++ collision executable automatically created by the bash script <tt>testcollision.sh</tt>", "tests_geometry5D_collisions.html#autotoc_md68", null ],
-      [ "- <tt>diff_f_vpar_mu_itor1eq0_itor2eq0_itor3eq0_ispeq0.png</tt> : output figure to compare the results between <tt>GysX_rst_00000.h5</tt> and <tt>GysX_rst_00001.h5</tt>", "tests_geometry5D_collisions.html#autotoc_md69", null ]
+      [ "- the creation of the initial restart file with the python script <tt>init_distribution.py</tt>", "tests_geometry5D_collisions.html#autotoc_md69", null ],
+      [ "- the creation of the input YAML file required as input of the C++ simulation <tt>testcollision</tt>", "tests_geometry5D_collisions.html#autotoc_md70", null ],
+      [ "For instance, the following command", "tests_geometry5D_collisions.html#autotoc_md71", null ],
+      [ "create the folder <tt>D_INPUT_PARAMS_ION_1X1X1X128X64.YAML</tt> containing:", "tests_geometry5D_collisions.html#autotoc_md72", null ],
+      [ "- <tt>GysX_rst_00000.h5</tt> : output of the python script <tt>init_distribution.py</tt>", "tests_geometry5D_collisions.html#autotoc_md73", null ],
+      [ "- <tt>GysX_rst_00001.h5</tt> : output of the C++ collision executable", "tests_geometry5D_collisions.html#autotoc_md74", null ],
+      [ "- <tt>coll_ref.yml</tt> : input for C++ collision executable automatically created by the bash script <tt>testcollision.sh</tt>", "tests_geometry5D_collisions.html#autotoc_md75", null ],
+      [ "- <tt>diff_f_vpar_mu_itor1eq0_itor2eq0_itor3eq0_ispeq0.png</tt> : output figure to compare the results between <tt>GysX_rst_00000.h5</tt> and <tt>GysX_rst_00001.h5</tt>", "tests_geometry5D_collisions.html#autotoc_md76", null ]
     ] ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
     [ "API reference", "annotated.html", "annotated" ],
@@ -89,10 +77,10 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCrankNicolson.html",
 "classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html#ad5e9a864bbb0dd8dc764e4a5edc746bf",
-"classMatrix__Corner__Block.html#ae41b9a3f53786f953cd30242aad91641",
-"classSpeciesInformation_1_1Impl.html#adcaf2527acc2c7a0a18f741240082b56",
-"geometry__pseudo__cartesian_8hpp_source.html",
-"structFemPeriodicQNSolver_1_1QMeshX.html"
+"classMatrix__Corner__Block.html#aaf8dcc6cde4f47c3aea20101d3f9d451",
+"classSpeciesInformation.html",
+"geometryXYVxVy_2initialization_2iequilibrium_8hpp_source.html",
+"structBSplinesVy.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

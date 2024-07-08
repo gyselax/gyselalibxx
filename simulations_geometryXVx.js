@@ -6,5 +6,9 @@ var simulations_geometryXVx =
       [ "Recommended parameters", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Recommended_parameters", null ],
       [ "Verification of the simulation", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__Verification_of_the_simulation", null ],
       [ "References", "simulations_geometryXVx_sheath.html#simulations_geometryXVx_sheath__References", null ]
+    ] ],
+    [ "Neutral simulations", "simulations_geometryXVx_neutrals.html", [
+      [ "Description", "simulations_geometryXVx_neutrals.html#simulations_geometryXVx_neutrals__Description", null ],
+      [ "Usage", "simulations_geometryXVx_neutrals.html#simulations_geometryXVx_neutrals__Usage", null ]
     ] ]
 ];

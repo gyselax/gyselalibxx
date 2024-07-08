@@ -10,5 +10,6 @@ var src_geometryXVx =
     ] ],
     [ "RHS", "src_geometryXVx_rhs.html", null ],
     [ "Time integration", "src_geometryXVx_time_integration.html", null ],
+    [ "Time integration hybrid", "src_geometryXVx_time_integration_hybrid.html", null ],
     [ "Utils", "src_geometryXVx_utils.html", null ]
 ];

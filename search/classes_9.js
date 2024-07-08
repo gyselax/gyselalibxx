@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['kineticsource_775',['KineticSource',['../classKineticSource.html',1,'']]],
-  ['krooksourceadaptive_776',['KrookSourceAdaptive',['../classKrookSourceAdaptive.html',1,'']]],
-  ['krooksourceconstant_777',['KrookSourceConstant',['../classKrookSourceConstant.html',1,'']]]
+  ['kelvinhelmholtzinstabilityinitialization_782',['KelvinHelmholtzInstabilityInitialization',['../classKelvinHelmholtzInstabilityInitialization.html',1,'']]],
+  ['kineticsource_783',['KineticSource',['../classKineticSource.html',1,'']]],
+  ['krooksourceadaptive_784',['KrookSourceAdaptive',['../classKrookSourceAdaptive.html',1,'']]],
+  ['krooksourceconstant_785',['KrookSourceConstant',['../classKrookSourceConstant.html',1,'']]]
 ];
