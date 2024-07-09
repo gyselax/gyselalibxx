@@ -1,5 +1,10 @@
 var NAVTREEINDEX5 =
 {
+"geometryXVx_2poisson_2nullqnsolver_8hpp_source.html":[12,0,5,4,5],
+"geometryXVx_2poisson_2qnsolver_8hpp_source.html":[12,0,5,4,6],
+"geometryXVx_2time__integration_2itimesolver_8hpp_source.html":[12,0,5,6,0],
+"geometryXVx_2time__integration_2predcorr_8hpp_source.html":[12,0,5,6,1],
+"geometryXYVxVy_2geometry_2geometry_8hpp_source.html":[12,0,7,0,0],
 "geometryXYVxVy_2initialization_2iequilibrium_8hpp_source.html":[12,0,7,1,0],
 "geometryXYVxVy_2initialization_2iinitialization_8hpp_source.html":[12,0,7,1,1],
 "geometryXYVxVy_2initialization_2maxwellianequilibrium_8hpp_source.html":[12,0,7,1,2],
@@ -53,6 +58,7 @@ var NAVTREEINDEX5 =
 "matrix__pds__tridiag_8hpp_source.html":[12,2,0,0,0,12],
 "matrix__periodic__banded_8hpp_source.html":[12,2,0,0,0,13],
 "moments_8hpp_source.html":[12,0,14,0],
+"multipatch__spline__builder_8hpp_source.html":[12,0,10,1,0],
 "neumann__spline__quadrature_8hpp.html":[12,0,13,1],
 "neumann__spline__quadrature_8hpp.html#a145fedb902adc371aa405919d8f4bdb4":[12,0,13,1,1],
 "neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d":[12,0,13,1,0],
@@ -240,14 +246,8 @@ var NAVTREEINDEX5 =
 "src_multipatch_interfaces.html#src_multipatch_interfaces__Contents":[8,10,0,2],
 "src_multipatch_interfaces.html#src_multipatch_interfaces__References":[8,10,0,1],
 "src_multipatch_interfaces.html#src_multipatch_interfaces__Sticking_of_Two_Edges":[8,10,0,0],
-"src_pde_solvers.html":[8,11],
-"src_pde_solvers.html#src_pde_solvers__Poisson_s_equation":[8,11,0],
-"src_quadrature.html":[8,12],
-"src_speciesinfo.html":[8,13],
-"src_timestepper.html":[8,14],
-"src_utils.html":[8,15],
-"src_utils.html#src_utils__Utility_tools":[8,15,0],
-"structBSplinesP.html":[11,19],
-"structBSplinesR.html":[11,20],
-"structBSplinesVx.html":[11,21]
+"src_multipatch_spline.html":[8,10,1],
+"src_multipatch_spline.html#autotoc_md65":[11],
+"src_multipatch_spline.html#src_multipatch_spline__Spline_builder":[8,10,1,0],
+"src_pde_solvers.html":[8,11]
 };

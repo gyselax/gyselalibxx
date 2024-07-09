@@ -68,9 +68,9 @@ var NAVTREEINDEX =
 "classCrankNicolson.html",
 "classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html#ad5e9a864bbb0dd8dc764e4a5edc746bf",
 "classMatrix__Corner__Block.html#aaf8dcc6cde4f47c3aea20101d3f9d451",
-"classSpeciesInformation.html",
-"geometryXYVxVy_2initialization_2iequilibrium_8hpp_source.html",
-"structBSplinesVy.html"
+"classSingleModePerturbInitialization.html#a7000b61f058ed580a8c2a5d1df85313b",
+"geometryXVx_2poisson_2nullqnsolver_8hpp_source.html",
+"src_pde_solvers.html#src_pde_solvers__Poisson_s_equation"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

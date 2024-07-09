@@ -148,6 +148,7 @@ var annotated =
     [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html", "classMaxwellianEquilibrium" ],
     [ "Moments", "classMoments.html", "classMoments" ],
     [ "Mu", "structMu.html", null ],
+    [ "MultipatchSplineBuilder", "classMultipatchSplineBuilder.html", "classMultipatchSplineBuilder" ],
     [ "NullAdvectionVelocity", "classNullAdvectionVelocity.html", "classNullAdvectionVelocity" ],
     [ "NullFluidSolver", "classNullFluidSolver.html", "classNullFluidSolver" ],
     [ "NullQNSolver", "classNullQNSolver.html", "classNullQNSolver" ],
