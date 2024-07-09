@@ -1,4 +1,4 @@
-# Tests
+# Gyselalib++ tests
 
 The `tests` folder contains the tests of the different elements implemented in the `src` folder. 
 It is broken up into the following sub-folders:

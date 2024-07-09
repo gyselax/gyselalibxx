@@ -10,7 +10,6 @@ target_link_libraries("geometry_RTheta" INTERFACE
     DDC::DDC
     sll::SLL
     gslx::data_types
-    gslx::speciesinfo
     gslx::utils
 )
 add_library("gslx::geometry_RTheta" ALIAS "geometry_RTheta")
