@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.15)
 
 include(GoogleTest)
 
@@ -14,7 +13,6 @@ add_executable(unit_tests_geometryMX_${GEOMETRY_VARIANT}
     diffusiveneutrals.cpp
 )
 
-target_compile_features(unit_tests_geometryMX_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_geometryMX_${GEOMETRY_VARIANT}
     PUBLIC
         GTest::gtest

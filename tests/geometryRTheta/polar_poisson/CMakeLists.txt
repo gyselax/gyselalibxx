@@ -6,7 +6,6 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
         test_cases.cpp
         polarpoissonfemsolver.cpp
     )
-    target_compile_features("${test_name}" PUBLIC cxx_std_17)
     target_link_libraries("${test_name}"
         PUBLIC
         DDC::DDC
