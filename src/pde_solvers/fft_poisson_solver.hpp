@@ -8,6 +8,9 @@
 
 #include "ipoisson_solver.hpp"
 
+/**
+ * See @ref FFTPoissonSolverImplementation.
+ */
 template <
         class LaplacianDomain,
         class FullDomain,
@@ -16,9 +19,12 @@ template <
 class FFTPoissonSolver;
 
 /**
- * A class solve the follwing equation:
+ * @brief A class solve the following equation:
  * @f$ -\Delta \phi = \rho @f$
  * using a Fourier transform.
+ *
+ * The implementation of this class can be found at FFTPoissonSolver< ddc::DiscreteDomain<DDims...>, FullDomain, ExecSpace, LayoutSpace >.
+ * @anchor FFTPoissonSolverImplementation
  *
  * @tparam LaplacianDomain The domain on which the equation is defined.
  * @tparam FullDomain The domain on which the operator() acts. This is equal to the
