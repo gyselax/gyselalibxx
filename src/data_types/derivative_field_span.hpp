@@ -35,8 +35,9 @@ namespace ddcHelper {
 template <
         class FieldDst,
         class FieldSrc,
-        class = std::enable_if_t<
-                is_borrowed_deriv_field_v<FieldDst> && is_borrowed_deriv_field_v<FieldSrc>>>
+        std::enable_if_t<
+                is_borrowed_deriv_field_v<FieldDst> && is_borrowed_deriv_field_v<FieldSrc>,
+                bool> = true>
 auto deepcopy(FieldDst&& dst, FieldSrc&& src)
 {
     assert(dst.get_values_span().domain().extents() == src.get_values_span().domain().extents());
