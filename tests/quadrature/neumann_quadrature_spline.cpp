@@ -30,8 +30,8 @@ struct IDimX : SplineInterpPointsX::interpolation_mesh_type
 };
 
 using SplineXBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesX,
         IDimX,
         SplineXBoundary,
