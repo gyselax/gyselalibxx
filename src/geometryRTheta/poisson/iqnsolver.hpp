@@ -27,6 +27,6 @@ public:
      */
     virtual void operator()(
             DSpanRP electrostatic_potential,
-            VectorFieldSpan<double, IDomainRP, NDTag<RDimX, RDimY>> electric_field,
+            VectorDSpanRP<RDimX, RDimY> electric_field,
             DViewRP allfdistribu) const = 0;
 };

@@ -1,6 +1,6 @@
 # Geometry XY
 
-The geometry folder contains a helper file `geometry.hpp` which provides shortcuts to the types needed to define the specific geometry. In this case the geometry is a simulation with 2 spatial dimensions (denoted `X` adn `Y`).
+The geometry folder contains a helper file `geometry.hpp` which provides shortcuts to the types needed to define the specific geometry. In this case the geometry is a simulation with 2 spatial dimensions (denoted `X` and `Y`).
 
 In this geometry $`x`$ and $`y`$ are supposed **periodic** and the splines are supposed cubic. 
 

@@ -1,44 +1,38 @@
 
 #include <chrono>
-#include <typeinfo>
-
-#include <ddc/ddc.hpp>
-
-#include <sll/math_tools.hpp>
-#include <sll/polar_spline.hpp>
-#include <sll/polar_spline_evaluator.hpp>
-
-#include "advection_domain.hpp"
-#include "bsl_advection_rp.hpp"
-#include "geometry.hpp"
-#include "paraconfpp.hpp"
-#include "params.yaml.hpp"
-#include "test_cases.hpp"
-
-// ...
 #include <cstring>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <typeinfo>
 
-#include <stdio.h>
-// ...
+#include <ddc/ddc.hpp>
 
 #include <sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_to_cartesian.hpp>
+#include <sll/math_tools.hpp>
+#include <sll/polar_spline.hpp>
+#include <sll/polar_spline_evaluator.hpp>
 
-#include <crank_nicolson.hpp>
-#include <ddc_helper.hpp>
-#include <euler.hpp>
-#include <rk2.hpp>
-#include <rk3.hpp>
-#include <rk4.hpp>
+#include <stdio.h>
 
+#include "advection_domain.hpp"
 #include "advection_simulation_utils.hpp"
+#include "bsl_advection_rp.hpp"
+#include "crank_nicolson.hpp"
+#include "ddc_helper.hpp"
+#include "euler.hpp"
+#include "geometry.hpp"
 #include "itimestepper.hpp"
+#include "paraconfpp.hpp"
+#include "params.yaml.hpp"
+#include "rk2.hpp"
+#include "rk3.hpp"
+#include "rk4.hpp"
 #include "spline_foot_finder.hpp"
+#include "test_cases.hpp"
 
 
 

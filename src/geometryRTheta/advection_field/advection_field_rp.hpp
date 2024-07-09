@@ -140,9 +140,8 @@ public:
      * @param[out] advection_field_xy
      *      The advection field on the physical axis. 
      */
-    void operator()(
-            DSpanRP electrostatic_potential,
-            VectorFieldSpan<double, IDomainRP, NDTag<RDimX, RDimY>> advection_field_xy) const
+    void operator()(DSpanRP electrostatic_potential, VectorDSpanRP<RDimX, RDimY> advection_field_xy)
+            const
     {
         auto const grid = advection_field_xy.domain();
 
@@ -168,7 +167,7 @@ public:
      */
     void operator()(
             Spline2DSpan electrostatic_potential_coef,
-            VectorFieldSpan<double, IDomainRP, NDTag<RDimX, RDimY>> advection_field_xy) const
+            VectorDSpanRP<RDimX, RDimY> advection_field_xy) const
     {
         compute_advection_field_XY(
                 m_spline_evaluator,
@@ -188,7 +187,7 @@ public:
      */
     void operator()(
             SplinePolar& electrostatic_potential_coef,
-            VectorFieldSpan<double, IDomainRP, NDTag<RDimX, RDimY>> advection_field_xy) const
+            VectorDSpanRP<RDimX, RDimY> advection_field_xy) const
     {
         compute_advection_field_XY(
                 m_polar_spline_evaluator,
@@ -212,7 +211,7 @@ private:
     void compute_advection_field_XY(
             Evaluator evaluator,
             SplineType& electrostatic_potential_coef,
-            VectorFieldSpan<double, IDomainRP, NDTag<RDimX, RDimY>> advection_field_xy) const
+            VectorDSpanRP<RDimX, RDimY> advection_field_xy) const
     {
         static_assert(
                 (std::is_same_v<
@@ -361,7 +360,7 @@ public:
      */
     void operator()(
             DSpanRP electrostatic_potential,
-            VectorFieldSpan<double, IDomainRP, NDTag<RDimR, RDimP>> advection_field_rp,
+            VectorDSpanRP<RDimR, RDimP> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         auto const grid = electrostatic_potential.domain();
@@ -392,7 +391,7 @@ public:
      */
     void operator()(
             Spline2DSpan electrostatic_potential_coef,
-            VectorFieldSpan<double, IDomainRP, NDTag<RDimR, RDimP>> advection_field_rp,
+            VectorDSpanRP<RDimR, RDimP> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         compute_advection_field_RP(
@@ -416,7 +415,7 @@ public:
      */
     void operator()(
             SplinePolar& electrostatic_potential_coef,
-            VectorFieldSpan<double, IDomainRP, NDTag<RDimR, RDimP>> advection_field_rp,
+            VectorDSpanRP<RDimR, RDimP> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         compute_advection_field_RP(
@@ -445,7 +444,7 @@ private:
     void compute_advection_field_RP(
             Evaluator evaluator,
             SplineType& electrostatic_potential_coef,
-            VectorFieldSpan<double, IDomainRP, NDTag<RDimR, RDimP>> advection_field_rp,
+            VectorDSpanRP<RDimR, RDimP> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         static_assert(

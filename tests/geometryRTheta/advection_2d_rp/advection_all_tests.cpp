@@ -21,26 +21,25 @@
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
 
-#include <crank_nicolson.hpp>
-#include <directional_tag.hpp>
-#include <euler.hpp>
-#include <rk2.hpp>
-#include <rk3.hpp>
-#include <rk4.hpp>
-#include <species_info.hpp>
 #include <stdio.h>
-#include <vector_field.hpp>
-#include <vector_field_span.hpp>
 
 #include "advection_domain.hpp"
 #include "advection_simulation_utils.hpp"
 #include "bsl_advection_rp.hpp"
+#include "crank_nicolson.hpp"
+#include "directional_tag.hpp"
+#include "euler.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
+#include "rk2.hpp"
+#include "rk3.hpp"
+#include "rk4.hpp"
 #include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 #include "test_cases.hpp"
+#include "vector_field.hpp"
+#include "vector_field_span.hpp"
 
 
 namespace {
