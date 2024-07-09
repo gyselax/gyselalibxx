@@ -16,7 +16,6 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
     add_executable("${test_name}"
          diocotron.cpp
     )
-    target_compile_features("${test_name}" PUBLIC cxx_std_17)
     target_link_libraries("${test_name}"
         PUBLIC
             DDC::DDC

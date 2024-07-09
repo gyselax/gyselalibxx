@@ -6,7 +6,6 @@ add_executable(unit_tests_common
     main.cpp
     species_info.cpp
 )
-target_compile_features(unit_tests_common PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_common
     PUBLIC
         GTest::gmock

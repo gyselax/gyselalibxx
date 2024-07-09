@@ -9,7 +9,6 @@ add_executable("${test_name_gtest}"
         coord_transformation.cpp
         ../main.cpp
 )
-target_compile_features("${test_name_gtest}" PUBLIC cxx_std_17)
 target_link_libraries("${test_name_gtest}"
 PUBLIC
         DDC::DDC

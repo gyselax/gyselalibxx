@@ -4,11 +4,6 @@ add_library("time_integration_xyvxvy" STATIC
     predcorr.cpp
 )
 
-target_compile_features("time_integration_xyvxvy"
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories("time_integration_xyvxvy"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )
