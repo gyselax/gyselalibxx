@@ -55,7 +55,7 @@ var NAVTREE =
     ] ],
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
     [ "Gyselalib++ contents", "src.html", "src" ],
-    [ "Tests", "tests.html", "tests" ],
+    [ "Gyselalib++ tests", "tests.html", "tests" ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]

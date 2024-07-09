@@ -148,14 +148,14 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsX = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsVx = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesX.html">BSplinesX</a></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="structBSplinesX.html">   64</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesX.html">BSplinesX</a></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    : std::conditional_t&lt;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;              BsplineOnUniformCellsX,</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;              ddc::UniformBSplines&lt;RDimX, BSDegreeX&gt;,</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;              ddc::NonUniformBSplines&lt;RDimX, BSDegreeX&gt;&gt;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesVx.html">BSplinesVx</a></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="structBSplinesVx.html">   71</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesVx.html">BSplinesVx</a></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    : std::conditional_t&lt;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;              BsplineOnUniformCellsVx,</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;              ddc::UniformBSplines&lt;RDimVx, BSDegreeVx&gt;,</div>
@@ -172,10 +172,10 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">using</span> SplineInterpPointsVx</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesVx, SplineVxBoundary, SplineVxBoundary&gt;;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimX.html">IDimX</a> : SplineInterpPointsX::interpolation_mesh_type</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="structIDimX.html">   88</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimX.html">IDimX</a> : SplineInterpPointsX::interpolation_mesh_type</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimVx.html">IDimVx</a> : SplineInterpPointsVx::interpolation_mesh_type</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="structIDimVx.html">   91</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimVx.html">IDimVx</a> : SplineInterpPointsVx::interpolation_mesh_type</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
@@ -494,17 +494,17 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="ttc" id="aclassGeometryXVx_html_aae0be9b78f75cf231259785f2ffd4862"><div class="ttname"><a href="classGeometryXVx.html#aae0be9b78f75cf231259785f2ffd4862">GeometryXVx::SpatialDDom</a></div><div class="ttdeci">IDomainX SpatialDDom</div><div class="ttdoc">An alias for the spatial discrete domain type.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:407</div></div>
 <div class="ttc" id="aclassGeometryXVx_html_ab25a8b2541d4cb66330b480e41b252f9"><div class="ttname"><a href="classGeometryXVx.html#ab25a8b2541d4cb66330b480e41b252f9">GeometryXVx::spatial_dim_for</a></div><div class="ttdeci">std::conditional_t&lt; std::is_same_v&lt; T, IDimVx &gt;, IDimX, void &gt; spatial_dim_for</div><div class="ttdoc">A templated type giving the spatial discrete dimension type associated to a velocity discrete dimensi...</div><div class="ttdef"><b>Definition:</b> geometry.hpp:402</div></div>
 <div class="ttc" id="aclassMoments_html"><div class="ttname"><a href="classMoments.html">Moments</a></div><div class="ttdoc">Moments discrete dimension to access constant attributes related to fluid moments.</div><div class="ttdef"><b>Definition:</b> moments.hpp:7</div></div>
-<div class="ttc" id="astructBSplinesVx_html"><div class="ttname"><a href="structBSplinesVx.html">BSplinesVx</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:527</div></div>
-<div class="ttc" id="astructBSplinesX_html"><div class="ttname"><a href="structBSplinesX.html">BSplinesX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:520</div></div>
+<div class="ttc" id="astructBSplinesVx_html"><div class="ttname"><a href="structBSplinesVx.html">BSplinesVx</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:76</div></div>
+<div class="ttc" id="astructBSplinesX_html"><div class="ttname"><a href="structBSplinesX.html">BSplinesX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:69</div></div>
 <div class="ttc" id="astructIDimM_html"><div class="ttname"><a href="structIDimM.html">IDimM</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:179</div></div>
-<div class="ttc" id="astructIDimVx_html"><div class="ttname"><a href="structIDimVx.html">IDimVx</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:544</div></div>
-<div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:541</div></div>
+<div class="ttc" id="astructIDimVx_html"><div class="ttname"><a href="structIDimVx.html">IDimVx</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:92</div></div>
+<div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:89</div></div>
 <div class="ttc" id="astructRDimT_html"><div class="ttname"><a href="structRDimT.html">RDimT</a></div><div class="ttdoc">A class which describes the real space in the temporal direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:43</div></div>
 <div class="ttc" id="astructRDimT_html_ac518ba935033dd7ec6e36a2860a5ee68"><div class="ttname"><a href="structRDimT.html#ac518ba935033dd7ec6e36a2860a5ee68">RDimT::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">A boolean indicating if the dimension is periodic.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:47</div></div>
-<div class="ttc" id="astructRDimVx_html"><div class="ttname"><a href="structRDimVx.html">RDimVx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:495</div></div>
-<div class="ttc" id="astructRDimVx_html_a11bf97b66f066f6e9b062e8742f6cc78"><div class="ttname"><a href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">RDimVx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:500</div></div>
-<div class="ttc" id="astructRDimX_html"><div class="ttname"><a href="structRDimX.html">RDimX</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:484</div></div>
-<div class="ttc" id="astructRDimX_html_a8cb720efb33235cee3371843279ea9ab"><div class="ttname"><a href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">RDimX::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:489</div></div>
+<div class="ttc" id="astructRDimVx_html"><div class="ttname"><a href="structRDimVx.html">RDimVx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:302</div></div>
+<div class="ttc" id="astructRDimVx_html_a11bf97b66f066f6e9b062e8742f6cc78"><div class="ttname"><a href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">RDimVx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:307</div></div>
+<div class="ttc" id="astructRDimX_html"><div class="ttname"><a href="structRDimX.html">RDimX</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:279</div></div>
+<div class="ttc" id="astructRDimX_html_a8cb720efb33235cee3371843279ea9ab"><div class="ttname"><a href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">RDimX::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:284</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

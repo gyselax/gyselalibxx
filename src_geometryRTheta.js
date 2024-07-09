@@ -41,6 +41,9 @@ var src_geometryRTheta =
       [ "References", "src_geometryRTheta_advection_field.html#autotoc_md51", null ],
       [ "Contents", "src_geometryRTheta_advection_field.html#autotoc_md52", null ]
     ] ],
+    [ "Geometry RTheta", "src_geometryRTheta_geometry.html", [
+      [ "Shortcuts", "src_geometryRTheta_geometry.html#src_geometryRTheta_geometry__Shortcuts", null ]
+    ] ],
     [ "Initialization", "src_geometryRTheta_initialization.html", [
       [ "Diocotron instability", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Diocotron_instability", null ],
       [ "Vortex merger", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Vortex_merger", null ],
