@@ -195,9 +195,10 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     host_t<DFieldSpX> density_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
     host_t<DFieldSpX> mean_velocity_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
     host_t<DFieldSpX> temperature_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    host_t<DFieldVx> const quadrature_coeffs
-            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(ddc::get_domain<IDimVx>(allfdistribu_host));
-    Quadrature<IDimVx> integrate(quadrature_coeffs);
+    host_t<DFieldVx> quadrature_coeffs
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(
+                    ddc::get_domain<IDimVx>(allfdistribu_host));
+    Quadrature<Kokkos::DefaultHostExecutionSpace, IDimVx> integrate(quadrature_coeffs.span_view());
     FluidMoments moments(integrate);
 
     moments(density_res.span_view(), allfdistribu_host.span_cview(), FluidMoments::s_density);

@@ -46,8 +46,11 @@ host_t<DFieldX> mask_tanh(
     }
 
     if (normalized) {
-        host_t<DFieldX> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
-        Quadrature<IDimX> const integrate_x(quadrature_coeffs);
+        host_t<DFieldX> quadrature_coeffs
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace, IDimX>(
+                        gridx);
+        Quadrature<Kokkos::DefaultHostExecutionSpace, IDimX> const integrate_x(
+                quadrature_coeffs.span_view());
         double const coeff_norm = integrate_x(mask);
         ddc::for_each(gridx, [&](IndexX const ix) { mask(ix) = mask(ix) / coeff_norm; });
     }

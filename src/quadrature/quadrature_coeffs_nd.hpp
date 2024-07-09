@@ -7,6 +7,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <ddc_helper.hpp>
+
 
 namespace {
 template <class IDim>

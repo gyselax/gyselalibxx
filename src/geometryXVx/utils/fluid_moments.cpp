@@ -6,7 +6,10 @@
 #include <quadrature.hpp>
 #include <trapezoid_quadrature.hpp>
 
-FluidMoments::FluidMoments(Quadrature<IDimVx> integrate_v) : m_integrate_v(integrate_v) {}
+FluidMoments::FluidMoments(Quadrature<Kokkos::DefaultHostExecutionSpace, IDimVx> integrate_v)
+    : m_integrate_v(integrate_v)
+{
+}
 
 /*
  * Computes the density of fdistribu

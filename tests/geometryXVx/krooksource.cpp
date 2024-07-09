@@ -56,10 +56,14 @@ TEST(KrookSource, Adaptive)
     IDomainSp const gridsp = dom_sp;
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    host_t<DFieldX> const quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
-    host_t<DFieldVx> const quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
-    Quadrature<IDimX> const integrate_x(quadrature_coeffs_x);
-    Quadrature<IDimVx> const integrate_v(quadrature_coeffs_vx);
+    host_t<DFieldX> quadrature_coeffs_x
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
+    host_t<DFieldVx> quadrature_coeffs_vx
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridvx);
+    Quadrature<Kokkos::DefaultHostExecutionSpace, IDimX> const integrate_x(
+            quadrature_coeffs_x.span_view());
+    Quadrature<Kokkos::DefaultHostExecutionSpace, IDimVx> const integrate_v(
+            quadrature_coeffs_vx.span_view());
 
     host_t<FieldSp<int>> charges(dom_sp);
     host_t<DFieldSp> masses(dom_sp);

@@ -266,12 +266,10 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
     auto fluid_velocity = fluid_velocity_alloc.span_view();
     auto temperature = temperature_alloc.span_view();
 
-    host_t<DFieldVx> const quadrature_coeffs_host(
-            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(ddc::get_domain<IDimVx>(allfdistribu)));
-    auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
-    auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
+    DFieldVx const quadrature_coeffs_alloc(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
+                    ddc::get_domain<IDimVx>(allfdistribu)));
+    ddc::ChunkSpan quadrature_coeffs = quadrature_coeffs_alloc.span_view();
 
     //Moments computation
     ddc::parallel_fill(density, 0.);

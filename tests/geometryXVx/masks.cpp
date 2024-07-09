@@ -59,8 +59,10 @@ TEST(Masks, Ordering)
     EXPECT_LE(std::fabs(mask_inverted(tenth) - 1.0), tolerance);
 
     // tests if integral of normalized mask equals 1
-    host_t<DFieldX> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
-    Quadrature<IDimX> const integrate_x(quadrature_coeffs);
+    host_t<DFieldX> quadrature_coeffs
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
+    Quadrature<Kokkos::DefaultHostExecutionSpace, IDimX> const integrate_x(
+            quadrature_coeffs.span_view());
 
     host_t<DFieldX> mask_normalized = mask_tanh(gridx, extent, stiffness, MaskType::Normal, true);
     EXPECT_LE(std::fabs(integrate_x(mask_normalized) - 1.0), tolerance);

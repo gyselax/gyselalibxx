@@ -265,11 +265,9 @@ int main(int argc, char** argv)
     SplineXBuilder_1d const spline_x_builder_neutrals(mesh_x);
     SplineXEvaluator_1d const spline_x_evaluator_neutrals(bv_x_min, bv_x_max);
 
-    host_t<DFieldVx> const quadrature_coeffs_neutrals_host(
-            trapezoid_quadrature_coefficients(mesh_vx));
-    auto const quadrature_coeffs_neutrals = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_neutrals_host.span_view());
+    DFieldVx const quadrature_coeffs_neutrals_alloc(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(mesh_vx));
+    ddc::ChunkSpan const quadrature_coeffs_neutrals = quadrature_coeffs_neutrals_alloc.span_view();
 
     DiffusiveNeutralSolver const neutralsolver(
             charge_exchange,

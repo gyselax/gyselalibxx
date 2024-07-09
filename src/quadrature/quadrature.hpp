@@ -42,8 +42,8 @@ public:
      *
      * @returns The integral of the function over the domain.
      */
-    double operator()(ddc::ChunkSpan<
-                      const double,
+    double operator()(ddc::ChunkView<
+                      double,
                       ddc::DiscreteDomain<IDim...>,
                       std::experimental::layout_right,
                       typename ExecSpace::memory_space> const values) const

@@ -166,12 +166,10 @@ void compute_Vcoll_Tcoll(
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> dvDcoll)
 {
-    host_t<DFieldVx> const quadrature_coeffs_host(
-            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(ddc::get_domain<IDimVx>(allfdistribu)));
-    auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
-    auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
+    DFieldVx const quadrature_coeffs_alloc(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
+                    ddc::get_domain<IDimVx>(allfdistribu)));
+    ddc::ChunkSpan quadrature_coeffs = quadrature_coeffs_alloc.span_view();
 
     // computation of the integrands
     DFieldSpXVx I0mean_integrand_alloc(allfdistribu.domain());

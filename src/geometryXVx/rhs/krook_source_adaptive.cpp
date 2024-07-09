@@ -85,10 +85,8 @@ void KrookSourceAdaptive::get_amplitudes(DSpanSpX amplitudes, DViewSpXVx const a
     }
     IndexSp iion(iion_opt.value());
     IDomainVx const gridvx = allfdistribu.domain<IDimVx>();
-    host_t<DFieldVx> const quadrature_coeffs_host(trapezoid_quadrature_coefficients(gridvx));
-    auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
+    DFieldVx const quadrature_coeffs_alloc(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx));
     auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
 
     auto const& amplitude = m_amplitude;

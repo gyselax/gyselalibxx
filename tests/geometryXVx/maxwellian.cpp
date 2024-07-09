@@ -33,8 +33,10 @@ TEST(Maxwellian, Moments)
 
     IDomainVx const gridvx = builder_vx.interpolation_domain();
 
-    host_t<DFieldVx> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
-    Quadrature<IDimVx> const integrate_v(quadrature_coeffs);
+    host_t<DFieldVx> quadrature_coeffs
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace, >(gridvx);
+    Quadrature<Kokkos::DefaultHostExecutionSpace, IDimVx> const integrate_v(
+            quadrature_coeffs.span_view());
 
     double const density = 1.e-5;
     double const mean_velocity = 0.5;
