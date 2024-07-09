@@ -33,7 +33,9 @@ auto get_domain(FieldType const& field) noexcept
 template <
         class FieldDst,
         class FieldSrc,
-        class = std::enable_if_t<is_borrowed_field_v<FieldDst> && is_borrowed_field_v<FieldSrc>>>
+        std::enable_if_t<
+                is_borrowed_field_v<FieldDst> && is_borrowed_field_v<FieldSrc>,
+                bool> = true>
 auto deepcopy(FieldDst&& dst, FieldSrc&& src)
 {
     static_assert(std::is_same_v<

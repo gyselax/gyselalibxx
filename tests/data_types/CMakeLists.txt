@@ -6,6 +6,7 @@ include(GoogleTest)
 
 add_executable(unit_tests_data_types
     deriv_field.cpp
+    device_host_t.cpp
     field.cpp
     ../main.cpp
 )
