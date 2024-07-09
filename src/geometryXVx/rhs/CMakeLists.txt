@@ -11,11 +11,6 @@ add_library("rhs_${GEOMETRY_VARIANT}" STATIC
     mask_tanh.cpp
 )
 
-target_compile_features("rhs_${GEOMETRY_VARIANT}"
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories("rhs_${GEOMETRY_VARIANT}"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )

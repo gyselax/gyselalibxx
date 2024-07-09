@@ -2,11 +2,6 @@
 
 add_library("pde_solvers" INTERFACE)
 
-target_compile_features("pde_solvers"
-    INTERFACE
-        cxx_std_17
-)
-
 target_include_directories("pde_solvers"
     INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
 )

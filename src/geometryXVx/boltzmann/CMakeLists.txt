@@ -7,11 +7,6 @@ add_library("boltzmann_${GEOMETRY_VARIANT}" STATIC
     splitrighthandsidesolver.cpp
 )
 
-target_compile_features("boltzmann_${GEOMETRY_VARIANT}"
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories("boltzmann_${GEOMETRY_VARIANT}"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )
