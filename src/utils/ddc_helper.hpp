@@ -7,6 +7,11 @@
 
 #include <ddc/ddc.hpp>
 
+#include "directional_tag.hpp"
+#include "vector_field.hpp"
+#include "vector_field_span.hpp"
+
+
 namespace ddcHelper {
 //TODO: this should be directly handled by ddc::Discretization really,
 //      in the meantime, we do it ourselves
@@ -157,12 +162,19 @@ using combine_t = typename detail::Combine<Containers...>::type;
 //-----------------------------------------------------------------------------
 
 namespace detail {
-/// \cond
 template <class, class>
 struct OnMemorySpace
 {
 };
 
+/**
+ * @brief Set a `ddc::Chunk` on a given NewMemorySpace.
+ * @tparam NewMemorySpace The new memory space. 
+ * @tparam ElementType Type of the elememts in the ddc::Chunk.
+ * @tparam SupportType Type of the domain of the ddc::Chunk.
+ * @tparam Allocator Allocator type (see ddc::KokkosAllocator).
+ * @see ddc::Chunk
+ */
 template <class NewMemorySpace, class ElementType, class SupportType, class Allocator>
 struct OnMemorySpace<NewMemorySpace, ddc::Chunk<ElementType, SupportType, Allocator>>
 {
@@ -170,6 +182,16 @@ struct OnMemorySpace<NewMemorySpace, ddc::Chunk<ElementType, SupportType, Alloca
             Chunk<ElementType, SupportType, ddc::KokkosAllocator<ElementType, NewMemorySpace>>;
 };
 
+/**
+ * @brief Get a new `ddc::ChunkSpan` type with the same parametrisation
+ * except in the memory space which is set to NewMemorySpace.
+ * @tparam NewMemorySpace The new memory space. 
+ * @tparam ElementType Type of the elememts in the ddc::Chunk.
+ * @tparam SupportType Type of the domain of the ddc::Chunk.
+ * @tparam Layout Layout tag (see Kokkos).
+ * @tparam MemorySpace The original memory space of the chunk.
+ * @see ddc::ChunkSpan
+ */
 template <
         class NewMemorySpace,
         class ElementType,
@@ -180,27 +202,78 @@ struct OnMemorySpace<NewMemorySpace, ddc::ChunkSpan<ElementType, SupportType, La
 {
     using type = typename ddc::ChunkSpan<ElementType, SupportType, Layout, NewMemorySpace>;
 };
-/// \endcond
+
+
+/**
+ * @brief Set a `VectorField` on a given NewMemorySpace.
+ * @tparam NewMemorySpace The new memory space. 
+ * @tparam ElementType Type of the elememts in the ddc::Chunk of the VectorField.
+ * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorField.
+ * @tparam NDTag NDTag object storing the dimensions along which the VectorField is defined.
+ *               The dimensions refer to the dimensions of the arrival domain of the VectorField. 
+ * @tparam Allocator Allocator type (see ddc::KokkosAllocator).
+ * @see VectorField
+ */
+template <class NewMemorySpace, class ElementType, class SupportType, class NDTag, class Allocator>
+struct OnMemorySpace<NewMemorySpace, VectorField<ElementType, SupportType, NDTag, Allocator>>
+{
+    using type = VectorField<
+            ElementType,
+            SupportType,
+            NDTag,
+            ddc::KokkosAllocator<ElementType, NewMemorySpace>>;
+};
+
+/**
+ * @brief Get a new `VectorFieldSpan` type with the same parametrisation
+ * except in the memory space which is set to NewMemorySpace.
+ * @tparam NewMemorySpace The new memory space. 
+ * @tparam ElementType Type of the elememts in the ddc::Chunk of the VectorField.
+ * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorField.
+ * @tparam NDTag NDTag object storing directions of the VectorField as dimensions. 
+ *               The dimensions refer to the dimensions of the arrival domain of the VectorField. 
+ * @tparam Layout Layout tag (see Kokkos).
+ * @tparam MemorySpace The original memory space of the chunk of the VectorField.
+ * @see VectorFieldSpan
+ */
+template <
+        class NewMemorySpace,
+        class ElementType,
+        class SupportType,
+        class NDTag,
+        class Layout,
+        class MemorySpace>
+struct OnMemorySpace<
+        NewMemorySpace,
+        VectorFieldSpan<ElementType, SupportType, NDTag, Layout, MemorySpace>>
+{
+    using type = VectorFieldSpan<ElementType, SupportType, NDTag, Layout, NewMemorySpace>;
+};
 
 } // namespace detail
 
 /**
- * @brief Alias template helper returning the of a `ddc::Chunk` or a `ddc::Chunkspan` on a MemorySpace
+ * @brief Alias template helper returning the type of a `ddc::Chunk`, a `ddc::ChunkSpan`, a `VectorField`
+ * or a `VectorFieldSpan` on a MemorySpace.
  */
 template <class MemorySpace, class C>
 using on_memory_space_t = typename detail::OnMemorySpace<MemorySpace, C>::type;
 
 /**
- * @brief Alias template helper returning the "host" version of a `ddc::Chunk` or a `ddc::Chunkspan`
+ * @brief Alias template helper returning the "host" version of a `ddc::Chunk`, a `ddc::ChunkSpan`,
+ * a `VectorField` or a `VectorFieldSpan`.
  */
 template <class C>
 using host_t = on_memory_space_t<Kokkos::HostSpace, C>;
 
 /**
- * @brief Alias template helper returning the "device" version of a `ddc::Chunk` or a `ddc::Chunkspan`
+ * @brief Alias template helper returning the "device" version of a `ddc::Chunk`, a `ddc::ChunkSpan`,
+ * a `VectorField` or a `VectorFieldSpan`.
  */
 template <class C>
 using device_t = on_memory_space_t<Kokkos::DefaultExecutionSpace::memory_space, C>;
+
+
 
 namespace ddcHelper {
 /// A helper to determine the number of tags in a type sequence.
