@@ -9,6 +9,9 @@
 template <class, class, int, class>
 class DerivField;
 
+/**
+ * See @ref DerivFieldSpanImplementation
+ */
 template <
         class ElementType,
         class SupportType,
@@ -80,6 +83,8 @@ auto deepcopy(ExecSpace const& execution_space, FieldDst&& dst, FieldSrc&& src)
  *
  * The values of the field and the derivatives may be defined on different domains, but
  * the underlying mesh must be the same for both.
+ *
+ * @anchor DerivFieldSpanImplementation
  *
  * @tparam ElementType The type of the elements inside the chunks.
  * @tparam ddc::DiscreteDomain<DDims...> The domain on which the internal chunks are defined.
