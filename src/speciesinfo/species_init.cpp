@@ -47,7 +47,7 @@ void init_all_species(
     // Define the domain of fluid species
     dom_fluidsp = IDomainSp(IndexSp(nb_kinspecies), IVectSp(nb_fluidspecies));
     host_t<IFieldSp> fluid_charges(dom_fluidsp);
-    host_t<DFieldSp> fluid_masses(dom_kinsp);
+    host_t<DFieldSp> fluid_masses(dom_fluidsp);
     for (IndexSp const isp : dom_fluidsp) {
         PC_tree_t const conf_nisp = PCpp_get(
                 conf_voicexx,
