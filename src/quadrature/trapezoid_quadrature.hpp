@@ -46,14 +46,13 @@ trapezoid_quadrature_coefficients_1d(ddc::DiscreteDomain<IDim> const& domain)
             "bounds",
             Kokkos::RangePolicy<ExecSpace>(0, 1),
             KOKKOS_LAMBDA(const int i) {
-                coefficients(domain.front()) = 0.5 * dx_r; // distance_at_right(domain.front());
-                coefficients(domain.back()) = 0.5 * dx_l; //distance_at_left(domain.back());
+                coefficients(domain.front()) = 0.5 * dx_r;
+                coefficients(domain.back()) = 0.5 * dx_l;
                 if constexpr (IDim::continuous_dimension_type::PERIODIC) {
-                    coefficients(domain.front()) += 0.5 * distance_at_left(domain.back());
-                    coefficients(domain.back()) += 0.5 * distance_at_right(domain.front());
+                    coefficients(domain.front()) += 0.5 * dx_l;
+                    coefficients(domain.back()) += 0.5 * dx_r;
                 }
             });
-    std::cout << "trapez size coeff " << coefficients.size() << std::endl;
 
     return std::move(coefficients_alloc);
 }

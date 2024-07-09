@@ -43,8 +43,18 @@ double constant_func_check_1d(Method quad_method)
     ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
     ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
 
-    DFieldX quadrature_coeffs_alloc
-            = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimXPeriod>(gridx);
+    DFieldX quadrature_coeffs_alloc(gridx);
+    if (quad_method == Method::TRAPEZ) {
+        quadrature_coeffs_alloc
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimXPeriod>(
+                        gridx);
+    }
+    if (quad_method == Method::SIMPSON) {
+        quadrature_coeffs_alloc
+                = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimXPeriod>(
+                        gridx);
+    }
+
     Quadrature<Kokkos::DefaultExecutionSpace, IDimXPeriod> const integrate(
             quadrature_coeffs_alloc.span_view());
 
@@ -70,7 +80,7 @@ struct ComputeErrorTraits
 };
 
 template <std::size_t N>
-double compute_error(int n_elems, Method meth)
+double compute_error(int n_elems, Method quad_method)
 {
     using DimY = typename ComputeErrorTraits<N>::Y;
     using IDimY = typename ComputeErrorTraits<N>::IDimY;
@@ -93,11 +103,11 @@ double compute_error(int n_elems, Method meth)
     ddc::DiscreteDomain<IDimY> gridy(lbound, npoints);
 
     DFieldY quadrature_coeffs_alloc(gridy);
-    switch (meth) {
-    case Method::TRAPEZ:
+    if (quad_method == Method::TRAPEZ) {
         quadrature_coeffs_alloc
                 = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimY>(gridy);
-    case Method::SIMPSON:
+    }
+    if (quad_method == Method::SIMPSON) {
         quadrature_coeffs_alloc
                 = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimY>(gridy);
     }

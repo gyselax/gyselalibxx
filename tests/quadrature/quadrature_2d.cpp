@@ -157,7 +157,7 @@ std::array<double, sizeof...(Is)> compute_simpson_errors(std::index_sequence<Is.
 
 TEST(TrapezoidUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
 {
-    EXPECT_LE(constant_func_check(Method::TRAPEZ), 1e-9);
+    EXPECT_LE(constant_func_check_2d(Method::TRAPEZ), 1e-9);
 }
 
 TEST(SimpsonUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
