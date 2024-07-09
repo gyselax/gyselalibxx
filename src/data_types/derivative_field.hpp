@@ -7,6 +7,9 @@
 #include "derivative_field_common.hpp"
 #include "derivative_field_span.hpp"
 
+/**
+ * See @ref DerivFieldImplementation
+ */
 template <
         class ElementType,
         class Domain,
@@ -24,6 +27,8 @@ inline constexpr bool
  *
  * The values of the field and the derivatives may be defined on different domains, but
  * the underlying mesh must be the same for both.
+ *
+ * @anchor DerivFieldImplementation
  *
  * @tparam ElementType The type of the elements inside the chunks.
  * @tparam ddc::DiscreteDomain<DDims...> The domain on which the internal chunks are defined.
