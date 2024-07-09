@@ -6,7 +6,7 @@ var src =
       [ "1D advection with a given advection field", "src_advection.html#src_advection__1D_advection_with_a_given_advection_field", null ]
     ] ],
     [ "Collisions", "src_collision.html", null ],
-    [ "Utility Functions", "src_data_types.html", [
+    [ "Data Storage Types", "src_data_types.html", [
       [ "VectorField", "src_data_types.html#src_data_types__VectorField", null ],
       [ "DerivField", "src_data_types.html#src_data_types__DerivField", null ]
     ] ],
@@ -22,7 +22,7 @@ var src =
     [ "Functions used for input and output.", "src_io.html", null ],
     [ "Multipatch", "src_multipatch.html", "src_multipatch" ],
     [ "PDE Solvers", "src_pde_solvers.html", [
-      [ "'s_equation Poisson's equation", "src_pde_solvers.html#src_pde_solvers__Poisson", null ]
+      [ "Poisson's equation", "src_pde_solvers.html#src_pde_solvers__Poisson_s_equation", null ]
     ] ],
     [ "Quadrature Methods", "src_quadrature.html", null ],
     [ "SpeciesInfo (x, v_x)", "src_speciesinfo.html", null ],

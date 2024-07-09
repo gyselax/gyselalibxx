@@ -133,11 +133,11 @@ class PredCorrRK2XY&lt; PoissonSolver, AdvectionX, AdvectionY &gt;</h3>
 <p>This method is mainly a Runge-Kutta 2 method:</p>
 <p>for \( n \geq 0 \),</p>
 <p>First, it advects on a half time step:</p><ul>
-<li>1./2. From \(f^n\), it computes \(E^n\) with a <a class="el" href="classFFTPoissonSolver.html">FFTPoissonSolver</a>;</li>
+<li>1./2. From \(f^n\), it computes \(E^n\) with a <a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a>;</li>
 <li>3. From \(f^n\) and \(E^n\), it computes \(f^{n+1/2}\) with a <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a> on \(\frac{dt}{2}\);</li>
 </ul>
 <p>Secondly, it advects on a full time step:</p><ul>
-<li>4./5. From \(f^{n+1/2}\), it computes \(E^{n+1/2}\) with a <a class="el" href="classFFTPoissonSolver.html">FFTPoissonSolver</a>;</li>
+<li>4./5. From \(f^{n+1/2}\), it computes \(E^{n+1/2}\) with a <a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a>;</li>
 <li>6. From \(f^n\) and \(E^{n+1/2}\), it computes \(f^{n+1}\) with a <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> on \(dt\).</li>
 </ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>

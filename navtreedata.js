@@ -56,16 +56,6 @@ var NAVTREE =
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
     [ "Gyselalib++ contents", "src.html", "src" ],
     [ "Tests", "tests.html", "tests" ],
-    [ "Script to automise :", "tests_geometry5D_collisions.html", [
-      [ "- the creation of the initial restart file with the python script <tt>init_distribution.py</tt>", "tests_geometry5D_collisions.html#autotoc_md69", null ],
-      [ "- the creation of the input YAML file required as input of the C++ simulation <tt>testcollision</tt>", "tests_geometry5D_collisions.html#autotoc_md70", null ],
-      [ "For instance, the following command", "tests_geometry5D_collisions.html#autotoc_md71", null ],
-      [ "create the folder <tt>D_INPUT_PARAMS_ION_1X1X1X128X64.YAML</tt> containing:", "tests_geometry5D_collisions.html#autotoc_md72", null ],
-      [ "- <tt>GysX_rst_00000.h5</tt> : output of the python script <tt>init_distribution.py</tt>", "tests_geometry5D_collisions.html#autotoc_md73", null ],
-      [ "- <tt>GysX_rst_00001.h5</tt> : output of the C++ collision executable", "tests_geometry5D_collisions.html#autotoc_md74", null ],
-      [ "- <tt>coll_ref.yml</tt> : input for C++ collision executable automatically created by the bash script <tt>testcollision.sh</tt>", "tests_geometry5D_collisions.html#autotoc_md75", null ],
-      [ "- <tt>diff_f_vpar_mu_itor1eq0_itor2eq0_itor3eq0_ispeq0.png</tt> : output figure to compare the results between <tt>GysX_rst_00000.h5</tt> and <tt>GysX_rst_00001.h5</tt>", "tests_geometry5D_collisions.html#autotoc_md76", null ]
-    ] ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]

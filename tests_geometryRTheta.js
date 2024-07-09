@@ -24,9 +24,9 @@ var tests_geometryRTheta =
           [ "Multi-patch domain", "src_multipatch_interfaces.html#autotoc_md62", null ],
           [ "Edges", "src_multipatch_interfaces.html#autotoc_md63", null ],
           [ "Sticking and Coordinate Transformation", "src_multipatch_interfaces.html#autotoc_md64", null ],
-          [ "- The mapping and the domain used for the advection:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md79", null ],
-          [ "- The time integration method used to solve the characteristic equation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md80", null ],
-          [ "- The test simulation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md81", null ]
+          [ "- The mapping and the domain used for the advection:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md71", null ],
+          [ "- The time integration method used to solve the characteristic equation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md72", null ],
+          [ "- The test simulation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md73", null ]
         ] ]
       ] ],
       [ "Python tests", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Python_tests", null ],

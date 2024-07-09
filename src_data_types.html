@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Utility Functions</title>
+<title>Gyselalib++: Data Storage Types</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('src_data_types.html',''); initResizabl
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Utility Functions </div>  </div>
+<div class="title">Data Storage Types </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="src_data_types__VectorField"></a>
@@ -110,8 +110,8 @@ VectorField</h1>
 <p>In order to facilitate the usage of <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a> the utility functions <code>ddcHelper::get_domain</code>, <code>ddcHelper::deepcopy</code>, and <code>ddcHelper::get</code> are provided. However for the best access it is advised to retrieve the ChunkSpan and use this directly.</p>
 <h1><a class="anchor" id="src_data_types__DerivField"></a>
 DerivField</h1>
-<p>The classes <a class="el" href="classDerivField.html">DerivField</a> and <a class="el" href="classDerivFieldSpan.html">DerivFieldSpan</a> provide a way to represent a field with its associated derivatives. The two classes are required as <a class="el" href="classDerivField.html">DerivField</a> contains ddc::Chunk objects while <a class="el" href="classDerivFieldSpan.html">DerivFieldSpan</a> contains ddc::ChunkSpan objects.</p>
-<p>The values and the different combinations of derivatives are each stored in their own chunk as these objects usually have different domains. The chunk itself can be accessed using slicing methods (<code>operator[]</code>). The values additionally have a helper method <code>get_values_span</code>. When slicing a <a class="el" href="classDerivField.html">DerivField</a>, you can use either domains or elements. These describe the derivatives which should appear in the chunk of interest and any additional information necessary to obtain a ddc::ChunkSpan. If a dimension is not described then it is assumed that the derivative in this direction is not of interest.</p>
+<p>The classes <a class="el" href="classDerivField.html" title="See DerivFieldImplementation.">DerivField</a> and <a class="el" href="classDerivFieldSpan.html" title="See DerivFieldSpanImplementation.">DerivFieldSpan</a> provide a way to represent a field with its associated derivatives. The two classes are required as <a class="el" href="classDerivField.html" title="See DerivFieldImplementation.">DerivField</a> contains ddc::Chunk objects while <a class="el" href="classDerivFieldSpan.html" title="See DerivFieldSpanImplementation.">DerivFieldSpan</a> contains ddc::ChunkSpan objects.</p>
+<p>The values and the different combinations of derivatives are each stored in their own chunk as these objects usually have different domains. The chunk itself can be accessed using slicing methods (<code>operator[]</code>). The values additionally have a helper method <code>get_values_span</code>. When slicing a <a class="el" href="classDerivField.html" title="See DerivFieldImplementation.">DerivField</a>, you can use either domains or elements. These describe the derivatives which should appear in the chunk of interest and any additional information necessary to obtain a ddc::ChunkSpan. If a dimension is not described then it is assumed that the derivative in this direction is not of interest.</p>
 <p>Beware: A ddc::ChunkSpan cannot store data defined on a non-contiguous domain (e.g. a <a class="el" href="classDiscreteSubDomain.html" title="A class which describes a collection of ddc::DiscreteElements which form a subdomain.">DiscreteSubDomain</a>) so when accessing derivatives the position of the derivative must also be included in the slice index.</p>
 <p>As for <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a> it is advised to use this object for storage and to interact with the underlying chunks directly. However the utility function <code>ddcHelper::deepcopy</code> is nevertheless provided. </p>
 </div></div><!-- contents -->
