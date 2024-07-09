@@ -13,10 +13,12 @@
  *
  * Calculate the quadrature coefficients for the Simpson method defined on the provided domain.
  *
- * @param[in] domain
- * 	The domain on which the quadrature will be carried out.
+ * @tparam ExecSpace Execution space, depends on Kokkos.
+ *
+ * @param[in] domain The domain on which the quadrature will be carried out.
  *
  * @return The quadrature coefficients for the Simpson method defined on the provided domain.
+ *         The allocation place (host or device ) will depend on the ExecSpace.
  */
 template <class ExecSpace, class IDim>
 ddc::Chunk<
@@ -58,10 +60,13 @@ simpson_quadrature_coefficients_1d(ddc::DiscreteDomain<IDim> const& domain)
  *
  * Calculate the quadrature coefficients for the Simpson method defined on the provided domain.
  *
+ * @tparam ExecSpace Execution space, depends on Kokkos.
+ *
  * @param[in] domain
  * 	The domain on which the quadrature will be carried out.
  *
  * @return The quadrature coefficients for the Simpson method defined on the provided domain.
+ *         The allocation place (host or device ) will depend on the ExecSpace.
  */
 template <class ExecSpace, class... ODims>
 ddc::Chunk<
