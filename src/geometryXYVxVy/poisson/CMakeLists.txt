@@ -6,11 +6,6 @@ add_library("poisson_xy" STATIC
     qnsolver.cpp
 )
 
-target_compile_features("poisson_xy"
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories("poisson_xy"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )

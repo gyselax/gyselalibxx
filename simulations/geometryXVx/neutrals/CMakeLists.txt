@@ -3,7 +3,6 @@
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_executable(neutrals_${GEOMETRY_VARIANT} neutrals.cpp)
-target_compile_features(neutrals_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
 target_link_libraries(neutrals_${GEOMETRY_VARIANT}
     PUBLIC
         DDC::DDC

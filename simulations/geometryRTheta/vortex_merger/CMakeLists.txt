@@ -3,7 +3,6 @@
 add_executable(vortex_merger
      vortex_merger.cpp
 )
-target_compile_features(vortex_merger PUBLIC cxx_std_17)
 target_link_libraries(vortex_merger
     PUBLIC
         DDC::DDC

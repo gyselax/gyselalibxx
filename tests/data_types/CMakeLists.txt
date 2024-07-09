@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.15)
 
 include(GoogleTest)
 
@@ -10,7 +9,6 @@ add_executable(unit_tests_data_types
     field.cpp
     ../main.cpp
 )
-target_compile_features(unit_tests_data_types PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_data_types
     PUBLIC
         GTest::gtest

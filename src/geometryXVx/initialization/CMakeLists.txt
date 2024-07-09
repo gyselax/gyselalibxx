@@ -9,11 +9,6 @@ add_library("initialization_${GEOMETRY_VARIANT}" STATIC
     singlemodeperturbinitialization.cpp
 )
 
-target_compile_features("initialization_${GEOMETRY_VARIANT}"
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories("initialization_${GEOMETRY_VARIANT}"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )

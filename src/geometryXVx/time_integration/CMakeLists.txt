@@ -6,11 +6,6 @@ add_library("time_integration_${GEOMETRY_VARIANT}" STATIC
     predcorr.cpp
 )
 
-target_compile_features("time_integration_${GEOMETRY_VARIANT}"
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories("time_integration_${GEOMETRY_VARIANT}"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )

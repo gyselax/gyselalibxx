@@ -4,11 +4,6 @@ add_library("vlasov_xyvxvy" STATIC
     splitvlasovsolver.cpp
 )
 
-target_compile_features("vlasov_xyvxvy"
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories("vlasov_xyvxvy"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )

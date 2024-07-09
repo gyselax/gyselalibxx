@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.15)
 
 set(test_name "2d_spline_interpolator_tests")
 
@@ -8,7 +7,6 @@ set(test_name "2d_spline_interpolator_tests")
 add_executable(2d_spline_interpolator_tests
 	2d_spline_interpolator.cpp
 )
-target_compile_features(2d_spline_interpolator_tests PUBLIC cxx_std_17)
 target_link_libraries(2d_spline_interpolator_tests
     PUBLIC
         DDC::DDC

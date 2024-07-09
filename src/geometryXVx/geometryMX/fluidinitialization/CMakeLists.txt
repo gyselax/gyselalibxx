@@ -6,11 +6,6 @@ add_library("fluidinitialization_${GEOMETRY_VARIANT}" STATIC
     constantfluidinitialization.cpp
 )
 
-target_compile_features("fluidinitialization_${GEOMETRY_VARIANT}"
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories("fluidinitialization_${GEOMETRY_VARIANT}"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )

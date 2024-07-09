@@ -26,7 +26,6 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
             test_cases.hpp
             advection_selected_test.cpp
         )
-        target_compile_features("${test_name}" PUBLIC cxx_std_17)
         target_link_libraries("${test_name}"
             PUBLIC
                 DDC::DDC
@@ -66,7 +65,6 @@ add_executable(advection_ALL
 	test_cases.hpp
 	advection_all_tests.cpp
 )
-target_compile_features(advection_ALL PUBLIC cxx_std_17)
 target_link_libraries(advection_ALL
     PUBLIC
 		DDC::DDC

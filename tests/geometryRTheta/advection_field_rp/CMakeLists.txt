@@ -15,7 +15,6 @@ function (advection_field_test_executable SIMULATION)
             test_cases_adv_field.hpp
             ../../main.cpp
     )
-    target_compile_features("${test_name_gtest}" PUBLIC cxx_std_17)
     target_link_libraries("${test_name_gtest}"
     PUBLIC
             DDC::DDC

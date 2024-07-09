@@ -11,7 +11,6 @@ add_executable(1d_advection
     velocity_advection_1d.cpp
     ../main.cpp
 )
-target_compile_features(1d_advection PUBLIC cxx_std_17)
 target_link_libraries(1d_advection
     PUBLIC
         DDC::DDC

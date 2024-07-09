@@ -7,11 +7,6 @@ add_library("fluidsolver_${GEOMETRY_VARIANT}" STATIC
     nullfluidsolver.cpp
 )
 
-target_compile_features("fluidsolver_${GEOMETRY_VARIANT}"
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories("fluidsolver_${GEOMETRY_VARIANT}"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )
