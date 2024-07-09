@@ -18,7 +18,6 @@
 
 #include <paraconf.h>
 #include <pdi.h>
-#include <utils_tools.hpp>
 
 #include "advection_domain.hpp"
 #include "bsl_advection_rp.hpp"
@@ -38,6 +37,7 @@
 #include "spline_quadrature.hpp"
 #include "test_cases_adv_field.hpp"
 #include "trapezoid_quadrature.hpp"
+#include "utils_tools.hpp"
 
 
 namespace {

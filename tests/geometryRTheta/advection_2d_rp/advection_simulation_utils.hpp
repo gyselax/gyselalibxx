@@ -1,4 +1,8 @@
 #include <chrono>
+#include <cstring>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 #include <typeinfo>
 
 #include <ddc/ddc.hpp>
@@ -7,34 +11,22 @@
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
 
-#include "geometry.hpp"
-#include "paraconfpp.hpp"
-#include "params.yaml.hpp"
-#include "spline_interpolator_2d_rp.hpp"
-#include "utils_tools.hpp"
-
-
-// ...
-#include <cstring>
-#include <filesystem>
-#include <fstream>
-#include <iostream>
-
 #include <stdio.h>
-// ...
-
-
-#include <directional_tag.hpp>
-#include <vector_field.hpp>
-#include <vector_field_span.hpp>
 
 #include "bsl_advection_rp.hpp"
 #include "compute_norms.hpp"
+#include "directional_tag.hpp"
+#include "geometry.hpp"
+#include "paraconfpp.hpp"
+#include "params.yaml.hpp"
 #include "quadrature.hpp"
+#include "spline_interpolator_2d_rp.hpp"
 #include "spline_quadrature.hpp"
 #include "test_cases.hpp"
 #include "trapezoid_quadrature.hpp"
-
+#include "utils_tools.hpp"
+#include "vector_field.hpp"
+#include "vector_field_span.hpp"
 
 namespace fs = std::filesystem;
 
