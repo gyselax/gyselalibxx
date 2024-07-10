@@ -21,7 +21,7 @@ using CoefficientChunkSpan1D = ddc::ChunkSpan<
         double,
         ddc::DiscreteDomain<IDim>,
         std::experimental::layout_right,
-        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>;
+        typename ExecSpace::memory_space>;
 } // namespace
 
 /**
@@ -47,7 +47,11 @@ quadrature_coeffs_nd(
                 ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>(
                 ddc::DiscreteDomain<DDims>)>... funcs)
 {
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients_alloc(domain);
+    ddc::Chunk<
+            double,
+            ddc::DiscreteDomain<DDims...>,
+            ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+            coefficients_alloc(domain);
     ddc::ChunkSpan coefficients = coefficients_alloc.span_view();
     // Get coefficients for each dimension
     std::tuple<CoefficientChunk1D<ExecSpace, DDims>...> current_dim_coeffs_alloc(
