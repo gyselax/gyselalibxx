@@ -51,7 +51,7 @@ public:
         assert(ddc::get_domain<IDim...>(values) == ddc::get_domain<IDim...>(m_coefficients));
         auto coeff_proxy = m_coefficients;
         return ddc::parallel_transform_reduce(
-                Kokkos::DefaultExecutionSpace(),
+                ExecSpace(),
                 values.domain(),
                 0.0,
                 ddc::reducer::sum<double>(),
