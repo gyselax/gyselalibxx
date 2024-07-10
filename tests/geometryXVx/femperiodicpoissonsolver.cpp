@@ -65,11 +65,7 @@ TEST(FemPeriodicQNSolver, CosineSource)
     // Initialization of the distribution function
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
 
-    host_t<DFieldVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(gridvx, builder_vx);
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
+    DFieldVx const quadrature_coeffs(neumann_spline_quadrature_coefficients(gridvx, builder_vx));
     ChargeDensityCalculator rhs(quadrature_coeffs);
     FemPeriodicQNSolver poisson(builder_x, spline_x_evaluator, rhs);
 

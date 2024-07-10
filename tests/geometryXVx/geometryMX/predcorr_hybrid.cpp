@@ -212,12 +212,8 @@ TEST(GeometryXM, PredCorrHybrid)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    host_t<DFieldVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(meshVx, builder_vx_poisson);
-
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
+    DFieldVx const quadrature_coeffs(
+            neumann_spline_quadrature_coefficients(meshVx, builder_vx_poisson));
     ChargeDensityCalculator rhs(quadrature_coeffs);
 #ifdef PERIODIC_RDIMX
     FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(meshX);
@@ -261,7 +257,6 @@ TEST(GeometryXM, PredCorrHybrid)
                 std::fabs(allfdistribu_host(ispxvx) - allfdistribu_predcorr_host(ispxvx)),
                 tolerance);
     });
-
     PC_tree_destroy(&conf_pdi);
     PDI_finalize();
 }
