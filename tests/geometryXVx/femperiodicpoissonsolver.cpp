@@ -65,8 +65,9 @@ TEST(FemPeriodicQNSolver, CosineSource)
     // Initialization of the distribution function
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
 
-    DFieldVx const quadrature_coeffs(neumann_spline_quadrature_coefficients(gridvx, builder_vx));
-    ChargeDensityCalculator rhs(quadrature_coeffs);
+    DFieldVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                     Kokkos::DefaultExecutionSpace>(gridvx, builder_vx));
+    ChargeDensityCalculator rhs(quadrature_coeffs.span_view());
     FemPeriodicQNSolver poisson(builder_x, spline_x_evaluator, rhs);
 
     host_t<DFieldX> electrostatic_potential_host(gridx);

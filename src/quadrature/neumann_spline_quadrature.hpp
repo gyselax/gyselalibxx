@@ -17,14 +17,11 @@
 
 
 namespace {
-template <class IDim>
-using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
-template <class IDim>
-using CoefficientChunkSpan1D = ddc::ChunkSpan<
-        double,
-        ddc::DiscreteDomain<IDim>,
-        std::experimental::layout_right,
-        typename Kokkos::DefaultHostExecutionSpace::memory_space>;
+template <class ExecSpace, class IDim>
+using CoefficientChunk1D_h = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
+template <class ExecSpace, class IDim>
+using CoefficientChunkSpan1D_h
+        = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>, std::experimental::layout_right>;
 
 } // namespace
 
@@ -85,7 +82,7 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
             integral_bsplines_host.span_view());
     // Solve matrix equation
     builder.get_interpolation_matrix().solve_transpose_inplace(
-            integral_bsplines.allocation_mdspan());
+            integral_bsplines_host.allocation_mdspan());
 
     ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
 
@@ -119,7 +116,7 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
  *
  * @return The coefficients which define the spline quadrature method in ND.
  */
-template <class... DDims, class... SplineBuilders>
+template <class ExecSpace, class... DDims, class... SplineBuilders>
 device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> neumann_spline_quadrature_coefficients(
         ddc::DiscreteDomain<DDims...> const& domain,
         SplineBuilders const&... builders)
@@ -129,10 +126,11 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> neumann_spline_quadr
                     typename SplineBuilders::bsplines_type::tag_type> and ...));
 
     // Get coefficients for each dimension
-    std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs_alloc(
+    std::tuple<CoefficientChunk1D_h<ExecSpace, DDims>...> current_dim_coeffs_alloc(
             neumann_spline_quadrature_coefficients_1d(ddc::select<DDims>(domain), builders)...);
-    std::tuple<CoefficientChunkSpan1D<DDims>...> current_dim_coeffs(
-            std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs_alloc).span_view()...);
+    std::tuple<CoefficientChunkSpan1D_h<ExecSpace, DDims>...> current_dim_coeffs(
+            std::get<CoefficientChunk1D_h<ExecSpace, DDims>>(current_dim_coeffs_alloc)
+                    .span_view()...);
     // Allocate ND coefficients
     device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients_alloc(domain);
     ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients_alloc_host(domain);
@@ -141,7 +139,7 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> neumann_spline_quadr
     ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients(idim)
-                = (std::get<CoefficientChunkSpan1D<DDims>>(current_dim_coeffs)(
+                = (std::get<CoefficientChunkSpan1D_h<ExecSpace, DDims>>(current_dim_coeffs)(
                            ddc::select<DDims>(idim))
                    * ... * 1);
     });
