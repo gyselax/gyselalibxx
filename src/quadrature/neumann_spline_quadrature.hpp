@@ -20,7 +20,11 @@ namespace {
 template <class IDim>
 using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
 template <class IDim>
-using CoefficientChunkSpan1D = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>;
+using CoefficientChunkSpan1D = ddc::ChunkSpan<
+        double,
+        ddc::DiscreteDomain<IDim>,
+        std::experimental::layout_right,
+        typename Kokkos::DefaultHostExecutionSpace::memory_space>;
 
 } // namespace
 
@@ -131,18 +135,18 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> neumann_spline_quadr
             std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs_alloc).span_view()...);
     // Allocate ND coefficients
     device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients_alloc(domain);
-ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients_alloc_host(domain);
-
+    ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients_alloc_host(domain);
     ddc::ChunkSpan coefficients = coefficients_alloc_host.span_view();
 
-    ddc::for_each(            domain,
-            [&](ddc::DiscreteElement<DDims...> const idim) {
-                // multiply the 1D coefficients by one another
-                coefficients(idim)
-                        = (std::get<CoefficientChunkSpan1D<DDims>>(current_dim_coeffs)(
-                                   ddc::select<DDims>(idim))
-                           * ... * 1);
-            });
-Kokkos::deep_copy(coefficients_alloc.allocation_kokkos_view(),coefficients_alloc_host.allocation_kokkos_view());
-    return coefficients_alloc;
+    ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
+        // multiply the 1D coefficients by one another
+        coefficients(idim)
+                = (std::get<CoefficientChunkSpan1D<DDims>>(current_dim_coeffs)(
+                           ddc::select<DDims>(idim))
+                   * ... * 1);
+    });
+    Kokkos::deep_copy(
+            coefficients_alloc.allocation_kokkos_view(),
+            coefficients_alloc_host.allocation_kokkos_view());
+    return std::move(coefficients_alloc);
 }
