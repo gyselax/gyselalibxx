@@ -220,13 +220,10 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
     SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);
 
-    host_t<DFieldVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(mesh_vx, builder_vx_poisson);
+    DFieldVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                     Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
 
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
-    ChargeDensityCalculator rhs(quadrature_coeffs);
+    ChargeDensityCalculator rhs(quadrature_coeffs.span_view());
 #ifdef PERIODIC_RDIMX
     FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(mesh_x);
     QNSolver const poisson(fft_poisson_solver, rhs);

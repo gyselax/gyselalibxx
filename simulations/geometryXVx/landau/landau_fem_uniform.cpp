@@ -137,12 +137,10 @@ int main(int argc, char** argv)
 #else
     using FemQNSolverX = FemNonPeriodicQNSolver;
 #endif
-    host_t<DFieldVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(mesh_vx, builder_vx_poisson);
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
-    ChargeDensityCalculator rhs(quadrature_coeffs);
+    DFieldVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                     Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
+
+    ChargeDensityCalculator rhs(quadrature_coeffs.span_view());
     FemQNSolverX const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 
     PredCorr const predcorr(vlasov, poisson);

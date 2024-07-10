@@ -238,12 +238,9 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
     SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);
 
-    host_t<DFieldVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(mesh_vx, builder_vx_poisson);
+    DFieldVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                     Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
 
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
 #ifdef PERIODIC_RDIMX
     FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(mesh_x);
@@ -265,9 +262,8 @@ int main(int argc, char** argv)
     SplineXBuilder_1d const spline_x_builder_neutrals(mesh_x);
     SplineXEvaluator_1d const spline_x_evaluator_neutrals(bv_x_min, bv_x_max);
 
-    DFieldVx const quadrature_coeffs_neutrals_alloc(
-            trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(mesh_vx));
-    ddc::ChunkSpan const quadrature_coeffs_neutrals = quadrature_coeffs_neutrals_alloc.span_view();
+    DFieldVx const quadrature_coeffs_neutrals(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(mesh_vx));
 
     DiffusiveNeutralSolver const neutralsolver(
             charge_exchange,
@@ -277,7 +273,7 @@ int main(int argc, char** argv)
             normalization_coeff,
             spline_x_builder_neutrals,
             spline_x_evaluator_neutrals,
-            quadrature_coeffs_neutrals.span_cview());
+            quadrature_coeffs_neutrals.span_view());
 
     PredCorrHybrid const predcorr(boltzmann, neutralsolver, poisson);
 
