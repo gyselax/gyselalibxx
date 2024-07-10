@@ -25,7 +25,6 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 	    ../main.cpp
 	    quadrature_spline.cpp
 	)
-	target_compile_features(spline_quadrature_tests_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
 	target_link_libraries(spline_quadrature_tests_${GEOMETRY_VARIANT}
 	    PUBLIC
             DDC::DDC

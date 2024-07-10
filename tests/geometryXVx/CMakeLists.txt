@@ -16,7 +16,6 @@ add_executable(unit_tests_${GEOMETRY_VARIANT}
     ../main.cpp
 )
 
-target_compile_features(unit_tests_${GEOMETRY_VARIANT} PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
     PUBLIC
         DDC::PDI_Wrapper
@@ -47,7 +46,6 @@ lagrange_test.cpp
     ../main.cpp
 )
 
-target_compile_features(unit_tests_lagrange PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_lagrange
     PUBLIC
         GTest::gtest
@@ -65,7 +63,6 @@ add_executable(unit_tests_advection
     ../main.cpp
 )
 
-target_compile_features(unit_tests_advection PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_advection	 
     PUBLIC
         GTest::gtest

@@ -4,11 +4,6 @@ add_library(diocotron_init_eq STATIC
     diocotron_initialization_equilibrium.cpp
 )
 
-target_compile_features(diocotron_init_eq
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories(diocotron_init_eq
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )

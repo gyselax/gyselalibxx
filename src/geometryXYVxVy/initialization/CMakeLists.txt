@@ -5,11 +5,6 @@ add_library("initialization_xyvxvy" STATIC
     singlemodeperturbinitialization.cpp
 )
 
-target_compile_features("initialization_xyvxvy"
-    PUBLIC
-        cxx_std_17
-)
-
 target_include_directories("initialization_xyvxvy"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )
