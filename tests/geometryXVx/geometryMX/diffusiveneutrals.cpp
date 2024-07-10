@@ -137,9 +137,8 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     SplineXBuilder_1d const spline_x_builder_neutrals(meshX);
     SplineXEvaluator_1d const spline_x_evaluator_neutrals(bv_x_min, bv_x_max);
 
-    DFieldVx quadrature_coeffs_alloc(meshVx);
-    quadrature_coeffs_alloc
-            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(meshVx);
+    DFieldVx quadrature_coeffs_alloc(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(meshVx));
     ddc::ChunkSpan const quadrature_coeffs = quadrature_coeffs_alloc.span_view();
 
     DiffusiveNeutralSolver const neutralsolver(
