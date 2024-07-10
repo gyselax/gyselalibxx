@@ -158,8 +158,8 @@ using SplineXEvaluator_1d = ddc::SplineEvaluator<
 #endif
         IDimX>;
 using SplineVxBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesVx,
         IDimVx,
         SplineVxBoundary,
@@ -167,8 +167,8 @@ using SplineVxBuilder_1d = ddc::SplineBuilder<
         ddc::SplineSolver::GINKGO,
         IDimVx>;
 using SplineVxEvaluator_1d = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesVx,
         IDimVx,
         ddc::ConstantExtrapolationRule<RDimVx>,

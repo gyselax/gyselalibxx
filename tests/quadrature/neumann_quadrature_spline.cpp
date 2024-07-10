@@ -60,7 +60,8 @@ TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFunc)
 
     IDomainX const gridx = builder_x.interpolation_domain();
 
-    DFieldX quadrature_coeffs = neumann_spline_quadrature_coefficients(gridx, builder_x);
+    DFieldX quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                              Kokkos::DefaultExecutionSpace>(gridx, builder_x));
     Quadrature<Kokkos::DefaultExecutionSpace, IDimX> const integrate(quadrature_coeffs.span_view());
 
     DFieldX values_alloc(gridx);
@@ -118,7 +119,8 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    DFieldY quadrature_coeffs = neumann_spline_quadrature_coefficients(gridy, builder_y);
+    DFieldY quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                              Kokkos::DefaultExecutionSpace>(gridy, builder_y));
     Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(quadrature_coeffs.span_view());
 
     DFieldY values_alloc(gridy);
