@@ -503,109 +503,111 @@ $(document).ready(function(){initNavTree('polar__bsplines_8hpp_source.html','');
 <div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;    std::size_t constexpr nr = BSplinesR::degree() + 1;</div>
 <div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;    std::size_t constexpr np = BSplinesP::degree() + 1;</div>
 <div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160; </div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;    std::array&lt;double, nr&gt; vals_r;</div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    std::array&lt;double, np&gt; vals_p;</div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160; </div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalTypeR, eval_type&gt;) {</div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_basis(vals_r, ddc::select&lt;DimR&gt;(coord_eval));</div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalTypeR, eval_deriv_type&gt;) {</div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_deriv(vals_r, ddc::select&lt;DimR&gt;(coord_eval));</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;    }</div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalTypeP, eval_type&gt;) {</div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;        jmin_p = ddc::discrete_space&lt;BSplinesP&gt;().eval_basis(vals_p, ddc::select&lt;DimP&gt;(coord_eval));</div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalTypeP, eval_deriv_type&gt;) {</div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;        jmin_p = ddc::discrete_space&lt;BSplinesP&gt;().eval_deriv(vals_p, ddc::select&lt;DimP&gt;(coord_eval));</div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;    }</div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160; </div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;    std::size_t nr_done = 0;</div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;    std::array&lt;double, nr&gt; vals_r_ptr;</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    std::array&lt;double, np&gt; vals_p_ptr;</div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;    DSpan1D <span class="keyword">const</span> vals_r(vals_r_ptr.data(), nr);</div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;    DSpan1D <span class="keyword">const</span> vals_p(vals_p_ptr.data(), np);</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160; </div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalTypeR, eval_type&gt;) {</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_basis(vals_r, ddc::select&lt;DimR&gt;(coord_eval));</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalTypeR, eval_deriv_type&gt;) {</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_deriv(vals_r, ddc::select&lt;DimR&gt;(coord_eval));</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;    }</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalTypeP, eval_type&gt;) {</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;        jmin_p = ddc::discrete_space&lt;BSplinesP&gt;().eval_basis(vals_p, ddc::select&lt;DimP&gt;(coord_eval));</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;EvalTypeP, eval_deriv_type&gt;) {</div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;        jmin_p = ddc::discrete_space&lt;BSplinesP&gt;().eval_deriv(vals_p, ddc::select&lt;DimP&gt;(coord_eval));</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;    }</div>
 <div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160; </div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;    <span class="keywordflow">if</span> (jmin_r.uid() &lt; C + 1) {</div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;        nr_done = C + 1 - jmin_r.uid();</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;        <span class="keywordflow">for</span> (discrete_element_type k : singular_domain&lt;DDim&gt;()) {</div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;            singular_values(k.uid()) = 0.0;</div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;            <span class="keywordflow">for</span> (std::size_t i(0); i &lt; nr_done; ++i) {</div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;                <span class="keywordflow">for</span> (std::size_t j(0); j &lt; np; ++j) {</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;                    singular_values(k.uid()) += m_singular_basis_elements(k, jmin_r + i, jmin_p + j)</div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;                                                * vals_r[i] * vals_p[j];</div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;                }</div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;            }</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;        }</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;        <span class="keywordflow">for</span> (std::size_t k(0); k &lt; n_singular_basis(); ++k) {</div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;            singular_values(k) = 0.0;</div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;        }</div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;    }</div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160; </div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;    <span class="keywordflow">for</span> (std::size_t i(0); i &lt; nr - nr_done; ++i) {</div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;        <span class="keywordflow">for</span> (std::size_t j(0); j &lt; np; ++j) {</div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;            values(i, j) = vals_r[i + nr_done] * vals_p[j];</div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;        }</div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;    }</div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;    <span class="keywordflow">for</span> (std::size_t i(nr - nr_done); i &lt; nr; ++i) {</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;        <span class="keywordflow">for</span> (std::size_t j(0); j &lt; np; ++j) {</div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;            values(i, j) = 0.0;</div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;        }</div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;    }</div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;    <span class="keywordflow">return</span> ddc::DiscreteElement&lt;BSplinesR, BSplinesP&gt;(jmin_r, jmin_p);</div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;}</div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160; </div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesP, <span class="keywordtype">int</span> C&gt;</div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a name="l00661"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a8f35ac954fcfde1c487211b1994fff6e">  661</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesP, C&gt;::Impl&lt;DDim, MemorySpace&gt;::integrals</a>(</div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;        <a class="code" href="structPolarSplineSpan.html">PolarSplineSpan&lt;DDim&gt;</a> int_vals)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;    <span class="keyword">auto</span> r_bspl_space = ddc::discrete_space&lt;BSplinesR&gt;();</div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;    <span class="keyword">auto</span> p_bspl_space = ddc::discrete_space&lt;BSplinesP&gt;();</div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160; </div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;    assert(int_vals.<a class="code" href="structPolarSplineSpan.html#a872d8a78e91be044b0756f8b171ca19e">singular_spline_coef</a>.domain().extents() == n_singular_basis());</div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;    assert(int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain().front().template uid&lt;BSplinesR&gt;() == C + 1);</div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;    assert(int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain().back().template uid&lt;BSplinesR&gt;()</div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;           == r_bspl_space.nbasis() - 1);</div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;    assert(int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain().template extent&lt;BSplinesP&gt;() == p_bspl_space.nbasis()</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;           || int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain().template extent&lt;BSplinesP&gt;() == p_bspl_space.size());</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160; </div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;BSplinesR&gt;&gt; r_integrals_alloc(</div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;            r_bspl_space.full_domain().take_first(</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;                    ddc::DiscreteVector&lt;BSplinesR&gt; {r_bspl_space.nbasis()}));</div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;BSplinesP&gt;&gt; p_integrals_alloc(</div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;            p_bspl_space.full_domain().take_first(</div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;                    ddc::DiscreteVector&lt;BSplinesP&gt; {p_bspl_space.size()}));</div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;    ddc::ChunkSpan r_integrals = r_integrals_alloc.span_view();</div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;    ddc::ChunkSpan p_integrals = p_integrals_alloc.span_view();</div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160; </div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    r_bspl_space.integrals(r_integrals);</div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;    p_bspl_space.integrals(p_integrals);</div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160; </div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;    ddc::for_each(singular_domain&lt;DDim&gt;(), [&amp;](<span class="keyword">auto</span> k) {</div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;        int_vals.<a class="code" href="structPolarSplineSpan.html#a872d8a78e91be044b0756f8b171ca19e">singular_spline_coef</a>(k) = ddc::transform_reduce(</div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;                ddc::select&lt;BSplinesR, BSplinesP&gt;(m_singular_basis_elements.domain()),</div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;                0.0,</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;                ddc::reducer::sum&lt;double&gt;(),</div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;                [&amp;](<a class="code" href="classPolarBSplines.html#a702d43d6d57622232401eca237f82bfe">tensor_product_discrete_element_type</a> <span class="keyword">const</span> idx) {</div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;                    IndexR i = ddc::select&lt;BSplinesR&gt;(idx);</div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;                    IndexP j = ddc::select&lt;BSplinesP&gt;(idx);</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;                    return m_singular_basis_elements(k, i, j) * r_integrals(i) * p_integrals(j);</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;                });</div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;    });</div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160; </div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;    ddc::DiscreteDomain&lt;BSplinesR&gt; r_tensor_product_dom(</div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;            ddc::select&lt;BSplinesR&gt;(int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain()));</div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160; </div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;    <a class="code" href="classPolarBSplines.html#a80fbb43730f6b755755d7641f727a93d">tensor_product_discrete_domain_type</a></div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;            tensor_bspline_domain(r_tensor_product_dom, p_integrals.domain());</div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160; </div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    ddc::for_each(tensor_bspline_domain, [&amp;](<span class="keyword">auto</span> idx) {</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;        int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>(idx) = r_integrals(ddc::select&lt;BSplinesR&gt;(idx))</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;                                    * p_integrals(ddc::select&lt;BSplinesP&gt;(idx));</div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;    });</div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160; </div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;    <span class="keywordflow">if</span> (int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain().template extent&lt;BSplinesP&gt;() == p_bspl_space.size()) {</div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;        ddc::DiscreteDomain&lt;BSplinesP&gt; periodic_points(p_integrals.domain().take_last(</div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;                ddc::DiscreteVector&lt;BSplinesP&gt; {BSplinesP::degree()}));</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;        <a class="code" href="classPolarBSplines.html#a80fbb43730f6b755755d7641f727a93d">tensor_product_discrete_domain_type</a> repeat_domain(r_tensor_product_dom, periodic_points);</div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;        ddc::for_each(repeat_domain, [&amp;](<span class="keyword">auto</span> idx) { int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>(idx) = 0.0; });</div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    }</div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;}</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;    std::size_t nr_done = 0;</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160; </div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;    <span class="keywordflow">if</span> (jmin_r.uid() &lt; C + 1) {</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;        nr_done = C + 1 - jmin_r.uid();</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;        <span class="keywordflow">for</span> (discrete_element_type k : singular_domain&lt;DDim&gt;()) {</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;            singular_values(k.uid()) = 0.0;</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;            <span class="keywordflow">for</span> (std::size_t i(0); i &lt; nr_done; ++i) {</div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;                <span class="keywordflow">for</span> (std::size_t j(0); j &lt; np; ++j) {</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;                    singular_values(k.uid()) += m_singular_basis_elements(k, jmin_r + i, jmin_p + j)</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;                                                * vals_r[i] * vals_p[j];</div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;                }</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;            }</div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;        }</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;        <span class="keywordflow">for</span> (std::size_t k(0); k &lt; n_singular_basis(); ++k) {</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;            singular_values(k) = 0.0;</div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;        }</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;    }</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160; </div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;    <span class="keywordflow">for</span> (std::size_t i(0); i &lt; nr - nr_done; ++i) {</div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;        <span class="keywordflow">for</span> (std::size_t j(0); j &lt; np; ++j) {</div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;            values(i, j) = vals_r[i + nr_done] * vals_p[j];</div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;        }</div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;    }</div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;    <span class="keywordflow">for</span> (std::size_t i(nr - nr_done); i &lt; nr; ++i) {</div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;        <span class="keywordflow">for</span> (std::size_t j(0); j &lt; np; ++j) {</div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;            values(i, j) = 0.0;</div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;        }</div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;    }</div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;    <span class="keywordflow">return</span> ddc::DiscreteElement&lt;BSplinesR, BSplinesP&gt;(jmin_r, jmin_p);</div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;}</div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160; </div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesP, <span class="keywordtype">int</span> C&gt;</div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a name="l00663"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a8f35ac954fcfde1c487211b1994fff6e">  663</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesP, C&gt;::Impl&lt;DDim, MemorySpace&gt;::integrals</a>(</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;        <a class="code" href="structPolarSplineSpan.html">PolarSplineSpan&lt;DDim&gt;</a> int_vals)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;    <span class="keyword">auto</span> r_bspl_space = ddc::discrete_space&lt;BSplinesR&gt;();</div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;    <span class="keyword">auto</span> p_bspl_space = ddc::discrete_space&lt;BSplinesP&gt;();</div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160; </div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;    assert(int_vals.<a class="code" href="structPolarSplineSpan.html#a872d8a78e91be044b0756f8b171ca19e">singular_spline_coef</a>.domain().extents() == n_singular_basis());</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;    assert(int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain().front().template uid&lt;BSplinesR&gt;() == C + 1);</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;    assert(int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain().back().template uid&lt;BSplinesR&gt;()</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;           == r_bspl_space.nbasis() - 1);</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;    assert(int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain().template extent&lt;BSplinesP&gt;() == p_bspl_space.nbasis()</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;           || int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain().template extent&lt;BSplinesP&gt;() == p_bspl_space.size());</div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160; </div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;BSplinesR&gt;&gt; r_integrals_alloc(</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;            r_bspl_space.full_domain().take_first(</div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;                    ddc::DiscreteVector&lt;BSplinesR&gt; {r_bspl_space.nbasis()}));</div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;BSplinesP&gt;&gt; p_integrals_alloc(</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;            p_bspl_space.full_domain().take_first(</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;                    ddc::DiscreteVector&lt;BSplinesP&gt; {p_bspl_space.size()}));</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;    ddc::ChunkSpan r_integrals = r_integrals_alloc.span_view();</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    ddc::ChunkSpan p_integrals = p_integrals_alloc.span_view();</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160; </div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;    r_bspl_space.integrals(r_integrals);</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;    p_bspl_space.integrals(p_integrals);</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160; </div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;    ddc::for_each(singular_domain&lt;DDim&gt;(), [&amp;](<span class="keyword">auto</span> k) {</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;        int_vals.<a class="code" href="structPolarSplineSpan.html#a872d8a78e91be044b0756f8b171ca19e">singular_spline_coef</a>(k) = ddc::transform_reduce(</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;                ddc::select&lt;BSplinesR, BSplinesP&gt;(m_singular_basis_elements.domain()),</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;                0.0,</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;                ddc::reducer::sum&lt;double&gt;(),</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;                [&amp;](<a class="code" href="classPolarBSplines.html#a702d43d6d57622232401eca237f82bfe">tensor_product_discrete_element_type</a> <span class="keyword">const</span> idx) {</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;                    IndexR i = ddc::select&lt;BSplinesR&gt;(idx);</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;                    IndexP j = ddc::select&lt;BSplinesP&gt;(idx);</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;                    return m_singular_basis_elements(k, i, j) * r_integrals(i) * p_integrals(j);</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;                });</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;    });</div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160; </div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;    ddc::DiscreteDomain&lt;BSplinesR&gt; r_tensor_product_dom(</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;            ddc::select&lt;BSplinesR&gt;(int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain()));</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160; </div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;    <a class="code" href="classPolarBSplines.html#a80fbb43730f6b755755d7641f727a93d">tensor_product_discrete_domain_type</a></div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;            tensor_bspline_domain(r_tensor_product_dom, p_integrals.domain());</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160; </div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;    ddc::for_each(tensor_bspline_domain, [&amp;](<span class="keyword">auto</span> idx) {</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;        int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>(idx) = r_integrals(ddc::select&lt;BSplinesR&gt;(idx))</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;                                    * p_integrals(ddc::select&lt;BSplinesP&gt;(idx));</div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;    });</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160; </div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;    <span class="keywordflow">if</span> (int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>.domain().template extent&lt;BSplinesP&gt;() == p_bspl_space.size()) {</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;        ddc::DiscreteDomain&lt;BSplinesP&gt; periodic_points(p_integrals.domain().take_last(</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;                ddc::DiscreteVector&lt;BSplinesP&gt; {BSplinesP::degree()}));</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;        <a class="code" href="classPolarBSplines.html#a80fbb43730f6b755755d7641f727a93d">tensor_product_discrete_domain_type</a> repeat_domain(r_tensor_product_dom, periodic_points);</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;        ddc::for_each(repeat_domain, [&amp;](<span class="keyword">auto</span> idx) { int_vals.<a class="code" href="structPolarSplineSpan.html#aec0ae274776277e3c756e60479652ddc">spline_coef</a>(idx) = 0.0; });</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;    }</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;}</div>
 <div class="ttc" id="aclassBernsteinPolynomialBasis_html"><div class="ttname"><a href="classBernsteinPolynomialBasis.html">BernsteinPolynomialBasis</a></div><div class="ttdef"><b>Definition:</b> bernstein.hpp:16</div></div>
 <div class="ttc" id="aclassCartesianToBarycentricCoordinates_html"><div class="ttname"><a href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a></div><div class="ttdef"><b>Definition:</b> barycentric_coordinates.hpp:7</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html">PolarBSplines::Impl</a></div><div class="ttdoc">The Impl class holds the implementation of the PolarBSplines.</div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:175</div></div>
@@ -622,7 +624,7 @@ $(document).ready(function(){initNavTree('polar__bsplines_8hpp_source.html','');
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a643dbd16f0e27d86e46a2be64c2e03bc"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a643dbd16f0e27d86e46a2be64c2e03bc">PolarBSplines::Impl::nbasis</a></div><div class="ttdeci">std::size_t nbasis() const noexcept</div><div class="ttdoc">Get the total number of basis functions.</div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:504</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a69daea6ba6a3e7bcb43879ac7b80beff"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a69daea6ba6a3e7bcb43879ac7b80beff">PolarBSplines::Impl::full_domain</a></div><div class="ttdeci">discrete_domain_type full_domain() const noexcept</div><div class="ttdoc">Returns the domain containing the indices of all the polar b-splines.</div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:516</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a6f9b27e73714abf74148cf4e6bd63b06"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a6f9b27e73714abf74148cf4e6bd63b06">PolarBSplines::Impl::operator=</a></div><div class="ttdeci">Impl &amp; operator=(Impl &amp;&amp;x)=default</div><div class="ttdoc">A copy operator for the PolarBSplines taking a temporary r-value.</div></div>
-<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a8f35ac954fcfde1c487211b1994fff6e"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a8f35ac954fcfde1c487211b1994fff6e">PolarBSplines::Impl::integrals</a></div><div class="ttdeci">void integrals(PolarSplineSpan&lt; DDim &gt; int_vals) const</div><div class="ttdoc">Calculate the integrals of each of the basis splines.</div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:661</div></div>
+<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a8f35ac954fcfde1c487211b1994fff6e"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a8f35ac954fcfde1c487211b1994fff6e">PolarBSplines::Impl::integrals</a></div><div class="ttdeci">void integrals(PolarSplineSpan&lt; DDim &gt; int_vals) const</div><div class="ttdoc">Calculate the integrals of each of the basis splines.</div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:663</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a995cd28a6f3fea33f2682500796ef701"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a995cd28a6f3fea33f2682500796ef701">PolarBSplines::Impl::eval_deriv_r_and_p</a></div><div class="ttdeci">tensor_product_discrete_element_type eval_deriv_r_and_p(DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; DimR, DimP &gt; p) const</div><div class="ttdoc">Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions...</div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:580</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a9aba9970c6086409d40c6965dab44ed5"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a9aba9970c6086409d40c6965dab44ed5">PolarBSplines::Impl::Impl</a></div><div class="ttdeci">Impl(const DiscreteMapping &amp;curvilinear_to_cartesian)</div><div class="ttdoc">A constructor for the PolarBSplines.</div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:243</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a9e32ed464f0d504472c05a788d96d757"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a9e32ed464f0d504472c05a788d96d757">PolarBSplines::Impl::discrete_domain_type</a></div><div class="ttdeci">ddc::DiscreteDomain&lt; DDim &gt; discrete_domain_type</div><div class="ttdoc">The type of a domain of PolarBSplines.</div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:230</div></div>

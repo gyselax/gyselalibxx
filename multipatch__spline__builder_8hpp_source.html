@@ -120,13 +120,13 @@ $(document).ready(function(){initNavTree('multipatch__spline__builder_8hpp_sourc
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">using</span> BuilderTuple = std::tuple&lt;Builders <span class="keyword">const</span>&amp;...&gt;;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> SplineTuple = std::tuple&lt;ddc::ChunkSpan&lt;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            double,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keyword">typename</span> Builders::spline_domain_type,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keyword">typename</span> Builders::batched_spline_domain_type,</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            std::experimental::layout_right,</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keyword">typename</span> Builders::memory_space&gt;...&gt;;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// For PERIODIC or GREVILLE boundary conditions</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> ValuesTuple = std::tuple&lt;ddc::ChunkSpan&lt;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            double,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keyword">typename</span> Builders::vals_domain_type,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keyword">typename</span> Builders::batched_interpolation_domain_type,</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            std::experimental::layout_right,</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keyword">typename</span> Builders::memory_space&gt;...&gt;;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
