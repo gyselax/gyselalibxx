@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.22)
 project(DDC VERSION 0.0.0 LANGUAGES CXX)
 
 # List of options
@@ -93,8 +93,10 @@ elseif("${DDC_Kokkos_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
 	find_package(Kokkos CONFIG REQUIRED)
 endif()
 
+# Custom cmake modules
+list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" )
+
 # FFTW
-list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ) # Maybe not specific to FFTW
 if("${DDC_BUILD_KERNELS_FFT}" AND NOT FFTW_FOUND)
 	find_package( FFTW MODULE REQUIRED )
 endif()
@@ -246,6 +248,11 @@ if("${DDC_BUILD_KERNELS_SPLINES}")
   find_package(Ginkgo 1.7.0 EXACT REQUIRED)
   target_link_libraries(DDC INTERFACE Ginkgo::ginkgo)
   target_compile_definitions(DDC INTERFACE ginkgo_AVAIL)
+
+  # Lapacke
+  find_package(LAPACKE REQUIRED)
+  target_link_libraries(DDC INTERFACE ${LAPACKE_LIBRARIES})
+  target_include_directories(DDC INTERFACE ${LAPACKE_INCLUDE_DIRS})
 endif()
 
 ## The PDI wrapper

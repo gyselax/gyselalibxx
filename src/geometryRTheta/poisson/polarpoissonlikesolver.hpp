@@ -105,6 +105,8 @@ private:
     using BSDomainR_Polar = ddc::DiscreteDomain<BSplinesR_Polar>;
     using BSDomainP_Polar = ddc::DiscreteDomain<BSplinesP_Polar>;
 
+    using KnotsR = ddc::NonUniformBsplinesKnots<BSplinesR_Polar>;
+    using KnotsP = ddc::NonUniformBsplinesKnots<BSplinesP_Polar>;
     /**
      * @brief Object storing a value and a value of the derivative
      * of a 1D function.
@@ -252,26 +254,19 @@ public:
         , int_volume(QuadratureDomainRP(quadrature_domain_r, quadrature_domain_p))
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
     {
-        const std::size_t ncells_r = ddc::discrete_space<BSplinesR_Polar>().ncells();
-        const std::size_t ncells_p = ddc::discrete_space<BSplinesP_Polar>().ncells();
-
         // Get break points
-        ddc::DiscreteDomain<RCellDim> r_edges_dom(
-                ddc::DiscreteElement<RCellDim>(0),
-                ddc::DiscreteVector<RCellDim>(ncells_r + 1));
-        ddc::DiscreteDomain<PCellDim> p_edges_dom(
-                ddc::DiscreteElement<PCellDim>(0),
-                ddc::DiscreteVector<PCellDim>(ncells_p + 1));
-        ddc::Chunk<ddc::Coordinate<RDimR>, ddc::DiscreteDomain<RCellDim>> breaks_r(r_edges_dom);
-        ddc::Chunk<ddc::Coordinate<RDimP>, ddc::DiscreteDomain<PCellDim>> breaks_p(p_edges_dom);
+        ddc::DiscreteDomain<KnotsR> r_edges_dom
+                = ddc::discrete_space<BSplinesR_Polar>().break_point_domain();
+        ddc::DiscreteDomain<KnotsP> p_edges_dom
+                = ddc::discrete_space<BSplinesP_Polar>().break_point_domain();
+        ddc::Chunk<ddc::Coordinate<RDimR>, ddc::DiscreteDomain<KnotsR>> breaks_r(r_edges_dom);
+        ddc::Chunk<ddc::Coordinate<RDimP>, ddc::DiscreteDomain<KnotsP>> breaks_p(p_edges_dom);
 
-        ddc::for_each(r_edges_dom, [&](ddc::DiscreteElement<RCellDim> i) {
-            breaks_r(i) = ddc::Coordinate<RDimR>(
-                    ddc::get<RDimR>(ddc::discrete_space<BSplinesR_Polar>().get_knot(i.uid())));
+        ddc::for_each(r_edges_dom, [&](ddc::DiscreteElement<KnotsR> i) {
+            breaks_r(i) = ddc::coordinate(i);
         });
-        ddc::for_each(p_edges_dom, [&](ddc::DiscreteElement<PCellDim> i) {
-            breaks_p(i) = ddc::Coordinate<RDimP>(
-                    ddc::get<RDimP>(ddc::discrete_space<BSplinesP_Polar>().get_knot(i.uid())));
+        ddc::for_each(p_edges_dom, [&](ddc::DiscreteElement<KnotsP> i) {
+            breaks_p(i) = ddc::coordinate(i);
         });
 
         // Define quadrature points and weights
@@ -366,7 +361,7 @@ public:
         ddc::for_each(all_quad_points, [&](QuadratureIndexRP const irp) {
             QuadratureIndexR const ir = ddc::select<QDimRMesh>(irp);
             QuadratureIndexP const ip = ddc::select<QDimPMesh>(irp);
-            CoordRP coord(ddc::coordinate(ir), ddc::coordinate(ip));
+            CoordRP coord(ddc::coordinate(irp));
             int_volume(ir, ip) = abs(mapping.jacobian(coord)) * weights_r(ir) * weights_p(ip);
         });
 

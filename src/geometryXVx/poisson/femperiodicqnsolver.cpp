@@ -24,13 +24,11 @@ FemPeriodicQNSolver::FemPeriodicQNSolver(
 {
     static_assert(SplineXBuilder::bsplines_type::is_periodic());
 
-    BSDomainX const
-            domain(ddc::DiscreteElement<BSplinesX>(0),
-                   ddc::DiscreteVector<BSplinesX>(m_ncells + 1));
-    ddc::Chunk<ddc::Coordinate<RDimX>, BSDomainX> knots(domain);
-
-    for (ddc::DiscreteElement<BSplinesX> const i : domain) {
-        knots(i) = quad_point_from_coord(ddc::discrete_space<BSplinesX>().get_knot(i.uid()));
+    ddc::Chunk<ddc::Coordinate<RDimX>, ddc::DiscreteDomain<ddc::UniformBsplinesKnots<BSplinesX>>>
+            break_points(ddc::discrete_space<BSplinesX>().break_point_domain());
+    for (ddc::DiscreteElement<ddc::UniformBsplinesKnots<BSplinesX>> const i :
+         break_points.domain()) {
+        break_points(i) = ddc::coordinate(i);
     }
 
     // Calculate the integration coefficients
@@ -39,7 +37,10 @@ FemPeriodicQNSolver::FemPeriodicQNSolver(
     ddc::ChunkSpan<ddc::Coordinate<RDimX>, ddc::DiscreteDomain<QMeshX>> const
             eval_pts(eval_pts_data.data(), m_quad_coef_alloc.domain());
     auto quad_coef_host = ddc::create_mirror_and_copy(m_quad_coef_alloc.span_view());
-    gl.compute_points_and_weights_on_mesh(eval_pts, quad_coef_host.span_view(), knots.span_cview());
+    gl.compute_points_and_weights_on_mesh(
+            eval_pts,
+            quad_coef_host.span_view(),
+            break_points.span_cview());
     ddc::parallel_deepcopy(m_quad_coef_alloc, quad_coef_host);
 
     ddc::init_discrete_space<QMeshX>(eval_pts_data);
@@ -70,7 +71,8 @@ void FemPeriodicQNSolver::build_matrix()
     auto quad_coef_host = ddc::create_mirror_and_copy(m_quad_coef_alloc.span_cview());
 
     // Fill the banded part of the matrix
-    std::array<double, s_degree + 1> derivs;
+    std::array<double, s_degree + 1> derivs_ptr;
+    DSpan1D const derivs(derivs_ptr.data(), s_degree + 1);
     ddc::for_each(m_quad_coef_alloc.domain(), [&](ddc::DiscreteElement<QMeshX> const ix) {
         ddc::Coordinate<RDimX> const coord = coord_from_quad_point(ddc::coordinate(ix));
         ddc::DiscreteElement<BSplinesX> const jmin
@@ -129,7 +131,8 @@ void FemPeriodicQNSolver::solve_matrix_system(
             m_quad_coef_alloc.domain(),
             KOKKOS_LAMBDA(ddc::DiscreteElement<QMeshX> const ix) {
                 ddc::Coordinate<RDimX> const coord = coord_from_quad_point(ddc::coordinate(ix));
-                std::array<double, s_degree + 1> values;
+                std::array<double, s_degree + 1> values_ptr;
+                DSpan1D const values(values_ptr.data(), s_degree + 1);
                 ddc::DiscreteElement<BSplinesX> const jmin
                         = ddc::discrete_space<BSplinesX>().eval_basis(values, coord);
                 double const rho_val

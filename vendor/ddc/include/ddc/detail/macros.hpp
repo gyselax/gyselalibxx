@@ -43,3 +43,12 @@
 #else
 #define DDC_CURRENT_KOKKOS_SPACE Kokkos::HostSpace
 #endif
+
+#if defined(__HIPCC__)
+#define DDC_HIP_5_7_ANONYMOUS_NAMESPACE_WORKAROUND(NAME)                                           \
+    DDC_NAMESPACE_##NAME {}                                                                        \
+    using namespace DDC_NAMESPACE_##NAME;                                                          \
+    namespace DDC_NAMESPACE_##NAME
+#else
+#define DDC_HIP_5_7_ANONYMOUS_NAMESPACE_WORKAROUND(NAME)
+#endif

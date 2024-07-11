@@ -231,14 +231,18 @@ static void BatchedSplineTest()
             IDim<I, I>,
             s_bcl,
             s_bcr,
+#if defined(SOLVER_LAPACK)
+            ddc::SplineSolver::LAPACK,
+#elif defined(SOLVER_GINKGO)
             ddc::SplineSolver::GINKGO,
+#endif
             IDim<X, I>...>
             spline_builder(dom_vals);
 
     // Compute usefull domains (dom_interpolation, dom_batch, dom_bsplines and dom_spline)
     ddc::DiscreteDomain<IDim<I, I>> const dom_interpolation = spline_builder.interpolation_domain();
     auto const dom_batch = spline_builder.batch_domain();
-    auto const dom_spline = spline_builder.spline_domain();
+    auto const dom_spline = spline_builder.batched_spline_domain();
 
     // Allocate and fill a chunk containing values to be passed as input to spline_builder. Those are values of cosine along interest dimension duplicated along batch dimensions
     ddc::Chunk vals1_cpu_alloc(
@@ -416,18 +420,30 @@ static void BatchedSplineTest()
                         1.0e-14 * max_norm_int));
 }
 
-#if defined(BC_PERIODIC) && defined(BSPLINES_TYPE_UNIFORM)
-#define SUFFIX(name) name##Periodic##Uniform
-#elif defined(BC_PERIODIC) && defined(BSPLINES_TYPE_NON_UNIFORM)
-#define SUFFIX(name) name##Periodic##NonUniform
-#elif defined(BC_GREVILLE) && defined(BSPLINES_TYPE_UNIFORM)
-#define SUFFIX(name) name##Greville##Uniform
-#elif defined(BC_GREVILLE) && defined(BSPLINES_TYPE_NON_UNIFORM)
-#define SUFFIX(name) name##Greville##NonUniform
-#elif defined(BC_HERMITE) && defined(BSPLINES_TYPE_UNIFORM)
-#define SUFFIX(name) name##Hermite##Uniform
-#elif defined(BC_HERMITE) && defined(BSPLINES_TYPE_NON_UNIFORM)
-#define SUFFIX(name) name##Hermite##NonUniform
+#if defined(BC_PERIODIC) && defined(BSPLINES_TYPE_UNIFORM) && defined(SOLVER_LAPACK)
+#define SUFFIX(name) name##Lapack##Periodic##Uniform
+#elif defined(BC_PERIODIC) && defined(BSPLINES_TYPE_NON_UNIFORM) && defined(SOLVER_LAPACK)
+#define SUFFIX(name) name##Lapack##Periodic##NonUniform
+#elif defined(BC_GREVILLE) && defined(BSPLINES_TYPE_UNIFORM) && defined(SOLVER_LAPACK)
+#define SUFFIX(name) name##Lapack##Greville##Uniform
+#elif defined(BC_GREVILLE) && defined(BSPLINES_TYPE_NON_UNIFORM) && defined(SOLVER_LAPACK)
+#define SUFFIX(name) name##Lapack##Greville##NonUniform
+#elif defined(BC_HERMITE) && defined(BSPLINES_TYPE_UNIFORM) && defined(SOLVER_LAPACK)
+#define SUFFIX(name) name##Lapack##Hermite##Uniform
+#elif defined(BC_HERMITE) && defined(BSPLINES_TYPE_NON_UNIFORM) && defined(SOLVER_LAPACK)
+#define SUFFIX(name) name##Lapack##Hermite##NonUniform
+#elif defined(BC_PERIODIC) && defined(BSPLINES_TYPE_UNIFORM) && defined(SOLVER_GINKGO)
+#define SUFFIX(name) name##Ginkgo##Periodic##Uniform
+#elif defined(BC_PERIODIC) && defined(BSPLINES_TYPE_NON_UNIFORM) && defined(SOLVER_GINKGO)
+#define SUFFIX(name) name##Ginkgo##Periodic##NonUniform
+#elif defined(BC_GREVILLE) && defined(BSPLINES_TYPE_UNIFORM) && defined(SOLVER_GINKGO)
+#define SUFFIX(name) name##Ginkgo##Greville##Uniform
+#elif defined(BC_GREVILLE) && defined(BSPLINES_TYPE_NON_UNIFORM) && defined(SOLVER_GINKGO)
+#define SUFFIX(name) name##Ginkgo##Greville##NonUniform
+#elif defined(BC_HERMITE) && defined(BSPLINES_TYPE_UNIFORM) && defined(SOLVER_GINKGO)
+#define SUFFIX(name) name##Ginkgo##Hermite##Uniform
+#elif defined(BC_HERMITE) && defined(BSPLINES_TYPE_NON_UNIFORM) && defined(SOLVER_GINKGO)
+#define SUFFIX(name) name##Ginkgo##Hermite##NonUniform
 #endif
 
 TEST(SUFFIX(BatchedSplineHost), 1DX)

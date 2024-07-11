@@ -11,40 +11,40 @@
 
 #include <gtest/gtest.h>
 
-namespace {
-
-using DElem0D = ddc::DiscreteElement<>;
-using DVect0D = ddc::DiscreteVector<>;
-using DDom0D = ddc::DiscreteDomain<>;
-
-struct DDimX
+namespace DDC_HIP_5_7_ANONYMOUS_NAMESPACE_WORKAROUND(FOR_EACH_CPP)
 {
-};
-using DElemX = ddc::DiscreteElement<DDimX>;
-using DVectX = ddc::DiscreteVector<DDimX>;
-using DDomX = ddc::DiscreteDomain<DDimX>;
+    using DElem0D = ddc::DiscreteElement<>;
+    using DVect0D = ddc::DiscreteVector<>;
+    using DDom0D = ddc::DiscreteDomain<>;
 
-struct DDimY
-{
-};
-using DElemY = ddc::DiscreteElement<DDimY>;
-using DVectY = ddc::DiscreteVector<DDimY>;
-using DDomY = ddc::DiscreteDomain<DDimY>;
+    struct DDimX
+    {
+    };
+    using DElemX = ddc::DiscreteElement<DDimX>;
+    using DVectX = ddc::DiscreteVector<DDimX>;
+    using DDomX = ddc::DiscreteDomain<DDimX>;
 
-using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;
-using DVectXY = ddc::DiscreteVector<DDimX, DDimY>;
-using DDomXY = ddc::DiscreteDomain<DDimX, DDimY>;
+    struct DDimY
+    {
+    };
+    using DElemY = ddc::DiscreteElement<DDimY>;
+    using DVectY = ddc::DiscreteVector<DDimY>;
+    using DDomY = ddc::DiscreteDomain<DDimY>;
 
-static DElemX constexpr lbound_x(0);
-static DVectX constexpr nelems_x(10);
+    using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;
+    using DVectXY = ddc::DiscreteVector<DDimX, DDimY>;
+    using DDomXY = ddc::DiscreteDomain<DDimX, DDimY>;
 
-static DElemY constexpr lbound_y(0);
-static DVectY constexpr nelems_y(12);
+    static DElemX constexpr lbound_x(0);
+    static DVectX constexpr nelems_x(10);
 
-static DElemXY constexpr lbound_x_y(lbound_x, lbound_y);
-static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
+    static DElemY constexpr lbound_y(0);
+    static DVectY constexpr nelems_y(12);
 
-} // namespace
+    static DElemXY constexpr lbound_x_y(lbound_x, lbound_y);
+    static DVectXY constexpr nelems_x_y(nelems_x, nelems_y);
+
+} // namespace )
 
 TEST(ForEachSerialHost, Empty)
 {
