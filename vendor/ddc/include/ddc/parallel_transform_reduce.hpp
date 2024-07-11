@@ -5,6 +5,7 @@
 #pragma once
 
 #include <cstddef>
+#include <string>
 #include <type_traits>
 #include <utility>
 
@@ -137,6 +138,7 @@ public:
 };
 
 /** A parallel reduction over a nD domain using the default Kokkos execution space
+ * @param[in] label  name for easy identification of the parallel_for_each algorithm
  * @param[in] execution_space a Kokkos execution space where the loop will be executed on
  * @param[in] domain the range over which to apply the algorithm
  * @param[in] neutral the neutral element of the reduction operation
@@ -147,6 +149,7 @@ public:
  */
 template <class ExecSpace, class T, class BinaryReductionOp, class UnaryTransformOp>
 T transform_reduce_kokkos(
+        std::string const& label,
         ExecSpace const& execution_space,
         [[maybe_unused]] DiscreteDomain<> const& domain,
         T neutral,
@@ -156,6 +159,7 @@ T transform_reduce_kokkos(
     T result = neutral;
     if constexpr (need_annotated_operator<ExecSpace>()) {
         Kokkos::parallel_reduce(
+                label,
                 Kokkos::RangePolicy<ExecSpace, use_annotated_operator>(execution_space, 0, 1),
                 TransformReducerKokkosLambdaAdapter<
                         BinaryReductionOp,
@@ -163,6 +167,7 @@ T transform_reduce_kokkos(
                 ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
     } else {
         Kokkos::parallel_reduce(
+                label,
                 Kokkos::RangePolicy<ExecSpace>(execution_space, 0, 1),
                 TransformReducerKokkosLambdaAdapter<
                         BinaryReductionOp,
@@ -173,6 +178,7 @@ T transform_reduce_kokkos(
 }
 
 /** A parallel reduction over a nD domain using the default Kokkos execution space
+ * @param[in] label  name for easy identification of the parallel_for_each algorithm
  * @param[in] execution_space a Kokkos execution space where the loop will be executed on
  * @param[in] domain the range over which to apply the algorithm
  * @param[in] neutral the neutral element of the reduction operation
@@ -183,6 +189,7 @@ T transform_reduce_kokkos(
  */
 template <class ExecSpace, class DDim0, class T, class BinaryReductionOp, class UnaryTransformOp>
 T transform_reduce_kokkos(
+        std::string const& label,
         ExecSpace const& execution_space,
         DiscreteDomain<DDim0> const& domain,
         T neutral,
@@ -192,6 +199,7 @@ T transform_reduce_kokkos(
     T result = neutral;
     if constexpr (need_annotated_operator<ExecSpace>()) {
         Kokkos::parallel_reduce(
+                label,
                 Kokkos::RangePolicy<ExecSpace, use_annotated_operator>(
                         execution_space,
                         domain.front().uid(),
@@ -203,6 +211,7 @@ T transform_reduce_kokkos(
                 ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
     } else {
         Kokkos::parallel_reduce(
+                label,
                 Kokkos::RangePolicy<
                         ExecSpace>(execution_space, domain.front().uid(), domain.back().uid() + 1),
                 TransformReducerKokkosLambdaAdapter<
@@ -215,6 +224,7 @@ T transform_reduce_kokkos(
 }
 
 /** A parallel reduction over a nD domain using the default Kokkos execution space
+ * @param[in] label  name for easy identification of the parallel_for_each algorithm
  * @param[in] execution_space a Kokkos execution space where the loop will be executed on
  * @param[in] domain the range over which to apply the algorithm
  * @param[in] neutral the neutral element of the reduction operation
@@ -232,6 +242,7 @@ template <
         class BinaryReductionOp,
         class UnaryTransformOp>
 T transform_reduce_kokkos(
+        std::string const& label,
         ExecSpace const& execution_space,
         DiscreteDomain<DDim0, DDim1, DDims...> const& domain,
         T neutral,
@@ -249,6 +260,7 @@ T transform_reduce_kokkos(
                  (select<DDims>(domain).back().uid() + 1)...};
     if constexpr (need_annotated_operator<ExecSpace>()) {
         Kokkos::parallel_reduce(
+                label,
                 Kokkos::MDRangePolicy<
                         ExecSpace,
                         Kokkos::Rank<2 + sizeof...(DDims)>,
@@ -262,6 +274,7 @@ T transform_reduce_kokkos(
                 ddc_to_kokkos_reducer_t<BinaryReductionOp>(result));
     } else {
         Kokkos::parallel_reduce(
+                label,
                 Kokkos::MDRangePolicy<
                         ExecSpace,
                         Kokkos::Rank<2 + sizeof...(DDims)>>(execution_space, begin, end),
@@ -279,6 +292,7 @@ T transform_reduce_kokkos(
 } // namespace detail
 
 /** A reduction over a nD domain using a given `Kokkos` execution space
+ * @param[in] label  name for easy identification of the parallel_for_each algorithm
  * @param[in] execution_space a Kokkos execution space where the loop will be executed on
  * @param[in] domain the range over which to apply the algorithm
  * @param[in] neutral the neutral element of the reduction operation
@@ -289,6 +303,7 @@ T transform_reduce_kokkos(
  */
 template <class ExecSpace, class... DDims, class T, class BinaryReductionOp, class UnaryTransformOp>
 T parallel_transform_reduce(
+        std::string const& label,
         ExecSpace const& execution_space,
         DiscreteDomain<DDims...> const& domain,
         T neutral,
@@ -296,7 +311,60 @@ T parallel_transform_reduce(
         UnaryTransformOp&& transform) noexcept
 {
     return detail::transform_reduce_kokkos(
+            label,
             execution_space,
+            domain,
+            neutral,
+            std::forward<BinaryReductionOp>(reduce),
+            std::forward<UnaryTransformOp>(transform));
+}
+
+/** A reduction over a nD domain using a given `Kokkos` execution space
+ * @param[in] execution_space a Kokkos execution space where the loop will be executed on
+ * @param[in] domain the range over which to apply the algorithm
+ * @param[in] neutral the neutral element of the reduction operation
+ * @param[in] reduce a binary FunctionObject that will be applied in unspecified order to the
+ *            results of transform, the results of other reduce and neutral.
+ * @param[in] transform a unary FunctionObject that will be applied to each element of the input
+ *            range. The return type must be acceptable as input to reduce
+ */
+template <class ExecSpace, class... DDims, class T, class BinaryReductionOp, class UnaryTransformOp>
+std::enable_if_t<Kokkos::is_execution_space_v<ExecSpace>, T> parallel_transform_reduce(
+        ExecSpace const& execution_space,
+        DiscreteDomain<DDims...> const& domain,
+        T neutral,
+        BinaryReductionOp&& reduce,
+        UnaryTransformOp&& transform) noexcept
+{
+    return detail::transform_reduce_kokkos(
+            "ddc_parallel_transform_reduce_default",
+            execution_space,
+            domain,
+            neutral,
+            std::forward<BinaryReductionOp>(reduce),
+            std::forward<UnaryTransformOp>(transform));
+}
+
+/** A reduction over a nD domain using the `Kokkos` default execution space
+ * @param[in] label  name for easy identification of the parallel_for_each algorithm
+ * @param[in] domain the range over which to apply the algorithm
+ * @param[in] neutral the neutral element of the reduction operation
+ * @param[in] reduce a binary FunctionObject that will be applied in unspecified order to the
+ *            results of transform, the results of other reduce and neutral.
+ * @param[in] transform a unary FunctionObject that will be applied to each element of the input
+ *            range. The return type must be acceptable as input to reduce
+ */
+template <class... DDims, class T, class BinaryReductionOp, class UnaryTransformOp>
+T parallel_transform_reduce(
+        std::string const& label,
+        DiscreteDomain<DDims...> const& domain,
+        T neutral,
+        BinaryReductionOp&& reduce,
+        UnaryTransformOp&& transform) noexcept
+{
+    return parallel_transform_reduce(
+            label,
+            Kokkos::DefaultExecutionSpace(),
             domain,
             neutral,
             std::forward<BinaryReductionOp>(reduce),
@@ -319,6 +387,7 @@ T parallel_transform_reduce(
         UnaryTransformOp&& transform) noexcept
 {
     return parallel_transform_reduce(
+            "ddc_parallel_transform_reduce_default",
             Kokkos::DefaultExecutionSpace(),
             domain,
             neutral,

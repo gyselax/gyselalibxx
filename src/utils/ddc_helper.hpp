@@ -40,7 +40,7 @@ total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
  */
 template <class IDim>
 constexpr std::enable_if_t<
-        IDim::continuous_dimension_type::PERIODIC && ddc::is_uniform_sampling_v<IDim>,
+        IDim::continuous_dimension_type::PERIODIC && ddc::is_uniform_point_sampling_v<IDim>,
         double>
 total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
 {
@@ -58,7 +58,7 @@ total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
  */
 template <class IDim>
 constexpr std::enable_if_t<
-        IDim::continuous_dimension_type::PERIODIC && ddc::is_non_uniform_sampling_v<IDim>,
+        IDim::continuous_dimension_type::PERIODIC && ddc::is_non_uniform_point_sampling_v<IDim>,
         double>
 total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
 {

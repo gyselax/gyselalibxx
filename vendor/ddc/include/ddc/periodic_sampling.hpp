@@ -22,14 +22,18 @@
 
 namespace ddc {
 
+namespace detail {
+
 struct PeriodicSamplingBase
 {
 };
 
+} // namespace detail
+
 /** PeriodicSampling models a periodic discretization of the provided continuous dimension
  */
 template <class CDim>
-class PeriodicSampling : PeriodicSamplingBase
+class PeriodicSampling : detail::PeriodicSamplingBase
 {
 public:
     using continuous_dimension_type = CDim;
@@ -231,7 +235,7 @@ public:
 };
 
 template <class DDim>
-struct is_periodic_sampling : public std::is_base_of<PeriodicSamplingBase, DDim>
+struct is_periodic_sampling : public std::is_base_of<detail::PeriodicSamplingBase, DDim>
 {
 };
 

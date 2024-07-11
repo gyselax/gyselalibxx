@@ -224,11 +224,13 @@ public:
 
 
         // Initialization of the derivatives of the advection field
-        DDerivFieldSpX advection_field_derivatives_min_alloc(builder_vx.derivs_xmin_domain());
+        DDerivFieldSpX advection_field_derivatives_min_alloc(
+                builder_vx.batched_derivs_xmin_domain());
         DDerivSpanSpX advection_field_derivatives_min
                 = advection_field_derivatives_min_alloc.span_view();
 
-        DDerivFieldSpX advection_field_derivatives_max_alloc(builder_vx.derivs_xmax_domain());
+        DDerivFieldSpX advection_field_derivatives_max_alloc(
+                builder_vx.batched_derivs_xmax_domain());
         DDerivSpanSpX advection_field_derivatives_max
                 = advection_field_derivatives_max_alloc.span_view();
 

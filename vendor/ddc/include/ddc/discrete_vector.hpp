@@ -301,21 +301,6 @@ public:
     KOKKOS_DEFAULTED_FUNCTION constexpr DiscreteVector& operator=(DiscreteVector&& other) = default;
 
     template <class... OTags>
-    KOKKOS_FUNCTION constexpr DiscreteVector& operator=(
-            DiscreteVector<OTags...> const& other) noexcept
-    {
-        m_values = other.m_values;
-        return *this;
-    }
-
-    template <class... OTags>
-    KOKKOS_FUNCTION constexpr DiscreteVector& operator=(DiscreteVector<OTags...>&& other) noexcept
-    {
-        m_values = std::move(other.m_values);
-        return *this;
-    }
-
-    template <class... OTags>
     KOKKOS_FUNCTION constexpr bool operator==(DiscreteVector<OTags...> const& rhs) const noexcept
     {
         return ((m_values[type_seq_rank_v<Tags, tags_seq>] == rhs.template get<Tags>()) && ...);
@@ -381,7 +366,7 @@ public:
     template <std::size_t N = sizeof...(Tags), class = std::enable_if_t<N == 1>>
     KOKKOS_FUNCTION constexpr DiscreteVector& operator--()
     {
-        ++m_values[0];
+        --m_values[0];
         return *this;
     }
 
@@ -389,7 +374,7 @@ public:
     KOKKOS_FUNCTION constexpr DiscreteVector operator--(int)
     {
         DiscreteVector const tmp = *this;
-        ++m_values[0];
+        --m_values[0];
         return tmp;
     }
 

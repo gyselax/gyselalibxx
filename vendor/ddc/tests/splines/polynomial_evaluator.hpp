@@ -22,16 +22,13 @@ struct PolynomialEvaluator
 
     private:
         std::array<double, Degree + 1> m_coeffs;
-        int const m_degree;
         double const m_xN;
 
     public:
         template <class Domain>
-        Evaluator(Domain domain)
-            : m_degree(Degree)
-            , m_xN(std::max(std::abs(rmin(domain)), std::abs(rmax(domain))))
+        Evaluator(Domain domain) : m_xN(std::max(std::abs(rmin(domain)), std::abs(rmax(domain))))
         {
-            for (int i(0); i < m_degree + 1; ++i) {
+            for (int i(0); i < Degree + 1; ++i) {
                 m_coeffs[i] = double(rand() % 100) / 100.0;
             }
         }
@@ -75,7 +72,7 @@ struct PolynomialEvaluator
         {
             double result(0.0);
             int start = derivative < 0 ? 0 : derivative;
-            for (int i(start); i < m_degree + 1; ++i) {
+            for (int i(start); i < Degree + 1; ++i) {
                 double v
                         = double(falling_factorial(i, derivative)) * Kokkos::pow(x, i - derivative);
                 result += m_coeffs[i] * v;

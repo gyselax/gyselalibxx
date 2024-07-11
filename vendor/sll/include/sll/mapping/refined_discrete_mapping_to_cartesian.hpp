@@ -144,9 +144,9 @@ public:
 
 
     static bool constexpr UniformMeshR
-            = ddc::is_uniform_sampling_v<typename SplineRPBuilder::interpolation_mesh_type1>;
+            = ddc::is_uniform_point_sampling_v<typename SplineRPBuilder::interpolation_mesh_type1>;
     static bool constexpr UniformMeshP
-            = ddc::is_uniform_sampling_v<typename SplineRPBuilder::interpolation_mesh_type2>;
+            = ddc::is_uniform_point_sampling_v<typename SplineRPBuilder::interpolation_mesh_type2>;
 
 
     struct IDimRRefined

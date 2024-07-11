@@ -30,13 +30,13 @@ class MultipatchSplineBuilder
     using BuilderTuple = std::tuple<Builders const&...>;
     using SplineTuple = std::tuple<ddc::ChunkSpan<
             double,
-            typename Builders::spline_domain_type,
+            typename Builders::batched_spline_domain_type,
             std::experimental::layout_right,
             typename Builders::memory_space>...>;
     // For PERIODIC or GREVILLE boundary conditions
     using ValuesTuple = std::tuple<ddc::ChunkSpan<
             double,
-            typename Builders::vals_domain_type,
+            typename Builders::batched_interpolation_domain_type,
             std::experimental::layout_right,
             typename Builders::memory_space>...>;
 

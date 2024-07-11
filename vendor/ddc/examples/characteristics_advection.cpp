@@ -239,13 +239,13 @@ int main(int argc, char** argv)
     //! [instantiate intermediate chunks]
     // Instantiate chunk of spline coefs to receive output of spline_builder
     ddc::Chunk coef_alloc(
-            spline_builder.spline_domain(),
+            spline_builder.batched_spline_domain(),
             ddc::DeviceAllocator<double>());
     ddc::ChunkSpan coef = coef_alloc.span_view();
 
     // Instantiate chunk to receive feet coords
     ddc::Chunk feet_coords_alloc(
-            spline_builder.vals_domain(),
+            spline_builder.batched_interpolation_domain(),
             ddc::DeviceAllocator<ddc::Coordinate<X>>());
     ddc::ChunkSpan feet_coords = feet_coords_alloc.span_view();
     //! [instantiate intermediate chunks]

@@ -34,9 +34,10 @@ private:
 
     mutable ddc::Chunk<double, BSDomainRP> m_coefs;
 
-    using r_deriv_type = ddc::ChunkSpan<double const, SplineRPBuilder::derivs_domain_type1>;
-    using p_deriv_type = ddc::ChunkSpan<double const, SplineRPBuilder::derivs_domain_type2>;
-    using mixed_deriv_type = ddc::ChunkSpan<double const, SplineRPBuilder::derivs_domain_type>;
+    using r_deriv_type = ddc::ChunkSpan<double const, SplineRPBuilder::batched_derivs_domain_type1>;
+    using p_deriv_type = ddc::ChunkSpan<double const, SplineRPBuilder::batched_derivs_domain_type2>;
+    using mixed_deriv_type
+            = ddc::ChunkSpan<double const, SplineRPBuilder::batched_derivs_domain_type>;
 
 public:
     /**

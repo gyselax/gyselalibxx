@@ -19,6 +19,7 @@ Julien Bigot - CEA (julien.bigot@cea.fr)
 
 Emily Bourne - CEA (emily.bourne@cea.fr)
 * Work on splines and matrices
+* Work on documentation requirements in CI
 
 Thomas Padioleau - CEA (thomas.padioleau@cea.fr)
 * Maintainer
@@ -28,3 +29,7 @@ Thomas Padioleau - CEA (thomas.padioleau@cea.fr)
 
 Baptiste Legouix - CEA (baptiste.legouix@cea.fr)
 * GPU port (batching & call to Ginkgo backend)
+
+Thierry Antoun - CEA (thierry.antoun@cea.fr)
+* Work on Documentation
+* Work on adding new features 

@@ -4,6 +4,11 @@
 
 #pragma once
 
+//! @brief The top-level namespace of DDC.
+//! All DDC symbols are defined either in this namespace or in a nested namespace.
+namespace ddc {
+}
+
 // Misc
 #include "ddc/detail/macros.hpp"
 #include "ddc/detail/tagged_vector.hpp"

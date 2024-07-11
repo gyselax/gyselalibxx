@@ -330,7 +330,7 @@ template <typename DDim, typename... DDimX>
 int N(ddc::DiscreteDomain<DDimX...> x_mesh)
 {
     static_assert(
-            (is_uniform_sampling_v<DDimX> && ...),
+            (is_uniform_point_sampling_v<DDimX> && ...),
             "DDimX dimensions should derive from UniformPointSampling");
     return ddc::get<DDim>(x_mesh.extents());
 }
@@ -339,7 +339,7 @@ template <typename DDim, typename... DDimX>
 double a(ddc::DiscreteDomain<DDimX...> x_mesh)
 {
     static_assert(
-            (is_uniform_sampling_v<DDimX> && ...),
+            (is_uniform_point_sampling_v<DDimX> && ...),
             "DDimX dimensions should derive from UniformPointSampling");
     return ((2 * N<DDim>(x_mesh) - 1) * coordinate(ddc::select<DDim>(x_mesh).front())
             - coordinate(ddc::select<DDim>(x_mesh).back()))
@@ -350,7 +350,7 @@ template <typename DDim, typename... DDimX>
 double b(ddc::DiscreteDomain<DDimX...> x_mesh)
 {
     static_assert(
-            (is_uniform_sampling_v<DDimX> && ...),
+            (is_uniform_point_sampling_v<DDimX> && ...),
             "DDimX dimensions should derive from UniformPointSampling");
     return ((2 * N<DDim>(x_mesh) - 1) * coordinate(ddc::select<DDim>(x_mesh).back())
             - coordinate(ddc::select<DDim>(x_mesh).front()))
@@ -376,10 +376,10 @@ void core(
             Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible,
             "MemorySpace has to be accessible for ExecutionSpace.");
     static_assert(
-            (is_uniform_sampling_v<DDimX> && ...),
+            (is_uniform_point_sampling_v<DDimX> && ...),
             "DDimX dimensions should derive from UniformPointSampling");
 
-    std::array<int, sizeof...(DDimX)> n = {(int)ddc::get<DDimX>(mesh.extents())...};
+    std::array<int, sizeof...(DDimX)> n = {static_cast<int>(ddc::get<DDimX>(mesh.extents()))...};
     int idist = 1;
     int odist = 1;
     for (std::size_t i = 0; i < sizeof...(DDimX); i++) {
@@ -398,15 +398,15 @@ void core(
         _fftw_plan<Tin> plan = _fftw_plan_many_dft<Tin, Tout>(
                 kwargs.direction == ddc::FFT_Direction::FORWARD ? FFTW_FORWARD : FFTW_BACKWARD,
                 FFTW_ESTIMATE,
-                (int)sizeof...(DDimX),
+                static_cast<int>(sizeof...(DDimX)),
                 n.data(),
                 1,
                 reinterpret_cast<typename _fftw_type<Tin>::type*>(in_data),
-                (int*)NULL,
+                static_cast<int*>(nullptr),
                 1,
                 idist,
                 reinterpret_cast<typename _fftw_type<Tout>::type*>(out_data),
-                (int*)NULL,
+                static_cast<int*>(nullptr),
                 1,
                 odist);
         if constexpr (std::is_same_v<real_type_t<Tin>, float>) {
@@ -430,15 +430,15 @@ void core(
         _fftw_plan<Tin> plan = _fftw_plan_many_dft<Tin, Tout>(
                 kwargs.direction == ddc::FFT_Direction::FORWARD ? FFTW_FORWARD : FFTW_BACKWARD,
                 FFTW_ESTIMATE,
-                (int)sizeof...(DDimX),
+                static_cast<int>(sizeof...(DDimX)),
                 n.data(),
                 1,
                 reinterpret_cast<typename _fftw_type<Tin>::type*>(in_data),
-                (int*)NULL,
+                static_cast<int*>(nullptr),
                 1,
                 idist,
                 reinterpret_cast<typename _fftw_type<Tout>::type*>(out_data),
-                (int*)NULL,
+                static_cast<int*>(nullptr),
                 1,
                 odist);
         if constexpr (std::is_same_v<real_type_t<Tin>, float>) {
@@ -468,10 +468,10 @@ void core(
                 &unmanaged_plan, // plan handle
                 sizeof...(DDimX),
                 n.data(), // Nx, Ny...
-                NULL,
+                nullptr,
                 1,
                 idist,
-                NULL,
+                nullptr,
                 1,
                 odist,
                 cufft_transform_type<Tin, Tout>(),
@@ -507,10 +507,10 @@ void core(
                 &unmanaged_plan, // plan handle
                 sizeof...(DDimX),
                 n.data(), // Nx, Ny...
-                NULL,
+                nullptr,
                 1,
                 idist,
-                NULL,
+                nullptr,
                 1,
                 odist,
                 hipfft_transform_type<Tin, Tout>(),
@@ -564,6 +564,7 @@ void core(
         }
 
         Kokkos::parallel_for(
+                "ddc_fft_normalization",
                 Kokkos::RangePolicy<ExecSpace>(
                         execSpace,
                         0,
@@ -585,7 +586,7 @@ typename DDimFx::template Impl<DDimFx, Kokkos::HostSpace> init_fourier_space(
         ddc::DiscreteDomain<DDimX> x_mesh)
 {
     static_assert(
-            is_uniform_sampling_v<DDimX>,
+            is_uniform_point_sampling_v<DDimX>,
             "DDimX dimensions should derive from UniformPointSampling");
     static_assert(
             is_periodic_sampling_v<DDimFx>,
@@ -606,7 +607,7 @@ template <typename... DDimFx, typename... DDimX>
 ddc::DiscreteDomain<DDimFx...> FourierMesh(ddc::DiscreteDomain<DDimX...> x_mesh, bool C2C)
 {
     static_assert(
-            (is_uniform_sampling_v<DDimX> && ...),
+            (is_uniform_point_sampling_v<DDimX> && ...),
             "DDimX dimensions should derive from UniformPointSampling");
     static_assert(
             (is_periodic_sampling_v<DDimFx> && ...),
@@ -648,7 +649,7 @@ void fft(
                             layout_right> && std::is_same_v<layout_out, std::experimental::layout_right>,
             "Layouts must be right-handed");
     static_assert(
-            (is_uniform_sampling_v<DDimX> && ...),
+            (is_uniform_point_sampling_v<DDimX> && ...),
             "DDimX dimensions should derive from UniformPointSampling");
     static_assert(
             (is_periodic_sampling_v<DDimFx> && ...),
@@ -685,7 +686,7 @@ void ifft(
                             layout_right> && std::is_same_v<layout_out, std::experimental::layout_right>,
             "Layouts must be right-handed");
     static_assert(
-            (is_uniform_sampling_v<DDimX> && ...),
+            (is_uniform_point_sampling_v<DDimX> && ...),
             "DDimX dimensions should derive from UniformPointSampling");
     static_assert(
             (is_periodic_sampling_v<DDimFx> && ...),

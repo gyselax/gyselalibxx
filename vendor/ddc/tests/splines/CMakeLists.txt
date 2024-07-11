@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.22)
 
 include(GoogleTest)
 
@@ -20,7 +20,7 @@ target_link_libraries(splines_tests
         GTest::gtest
 		DDC::DDC
 )
-gtest_discover_tests(splines_tests)
+gtest_discover_tests(splines_tests DISCOVERY_MODE PRE_TEST)
 
 add_executable(bsplines_tests
 	../main.cpp
@@ -43,7 +43,7 @@ target_link_libraries(matrix_tests
         GTest::gtest
         DDC::DDC
 )
-gtest_discover_tests(matrix_tests)
+gtest_discover_tests(matrix_tests DISCOVERY_MODE PRE_TEST)
 
 foreach(DEGREE_X RANGE "${SPLINES_TEST_DEGREE_MIN}" "${SPLINES_TEST_DEGREE_MAX}")
   foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
@@ -95,16 +95,17 @@ foreach(BC "BC_PERIODIC" "BC_GREVILLE")
         )
 	    target_compile_definitions("${test_name}" PUBLIC -DDEGREE=${DEGREE_X} -D${BSPLINES_TYPE} -D${EVALUATOR} -D${BC} -D${ER})
         # add_test("${test_name}" "${test_name}")
-        gtest_discover_tests("${test_name}")
+        gtest_discover_tests("${test_name}" DISCOVERY_MODE PRE_TEST)
       endforeach()
     endforeach()
   endforeach()
 endforeach()
 
+# LAPACK
 foreach(BC "BC_PERIODIC" "BC_GREVILLE" "BC_HERMITE")
   foreach(DEGREE_X RANGE "${SPLINES_TEST_DEGREE_MIN}" "${SPLINES_TEST_DEGREE_MAX}")
     foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
-      set(test_name "splines_tests_BATCHED_DEGREE_X_${DEGREE_X}_${BSPLINES_TYPE}_${BC}")
+      set(test_name "splines_tests_BATCHED_DEGREE_X_${DEGREE_X}_${BSPLINES_TYPE}_${BC}_LAPACK")
       add_executable("${test_name}" ../main.cpp batched_spline_builder.cpp)
       target_compile_features("${test_name}" PUBLIC cxx_std_17)
       target_link_libraries("${test_name}"
@@ -112,9 +113,28 @@ foreach(BC "BC_PERIODIC" "BC_GREVILLE" "BC_HERMITE")
         GTest::gtest
         DDC::DDC
       )
-      target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -D${BSPLINES_TYPE} -D${BC})
+      target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -D${BSPLINES_TYPE} -D${BC} -DSOLVER_LAPACK)
       # add_test("${test_name}" "${test_name}")
-      gtest_discover_tests("${test_name}")
+      gtest_discover_tests("${test_name}" DISCOVERY_MODE PRE_TEST)
+    endforeach()
+  endforeach()
+endforeach()
+
+# GINKGO
+foreach(BC "BC_PERIODIC" "BC_GREVILLE" "BC_HERMITE")
+  foreach(DEGREE_X RANGE "${SPLINES_TEST_DEGREE_MIN}" "${SPLINES_TEST_DEGREE_MAX}")
+    foreach(BSPLINES_TYPE "BSPLINES_TYPE_UNIFORM" "BSPLINES_TYPE_NON_UNIFORM")
+      set(test_name "splines_tests_BATCHED_DEGREE_X_${DEGREE_X}_${BSPLINES_TYPE}_${BC}_GINKGO")
+      add_executable("${test_name}" ../main.cpp batched_spline_builder.cpp)
+      target_compile_features("${test_name}" PUBLIC cxx_std_17)
+      target_link_libraries("${test_name}"
+        PUBLIC
+        GTest::gtest
+        DDC::DDC
+      )
+    target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -D${BSPLINES_TYPE} -D${BC} -DSOLVER_GINKGO)
+      # add_test("${test_name}" "${test_name}")
+      gtest_discover_tests("${test_name}" DISCOVERY_MODE PRE_TEST)
     endforeach()
   endforeach()
 endforeach()
@@ -144,7 +164,7 @@ foreach(DEGREE_X RANGE "${SPLINES_TEST_DEGREE_MIN}" "${SPLINES_TEST_DEGREE_MAX}"
     )
 	target_compile_definitions("${test_name}" PUBLIC -DDEGREE_X=${DEGREE_X} -D${BSPLINES_TYPE})
 	# add_test("${test_name}" "${test_name}")
-	gtest_discover_tests("${test_name}")
+	gtest_discover_tests("${test_name}" DISCOVERY_MODE PRE_TEST)
   endforeach()
 endforeach()
 
@@ -162,7 +182,7 @@ foreach(BC "BC_PERIODIC" "BC_GREVILLE" "BC_HERMITE")
             )
             target_compile_definitions("${test_name}" PUBLIC -DDEGREE=${DEGREE} -D${BSPLINES_TYPE} -D${EVALUATOR} -D${BC})
 			# add_test("${test_name}" "${test_name}")
-			gtest_discover_tests("${test_name}")
+			gtest_discover_tests("${test_name}" DISCOVERY_MODE PRE_TEST)
           endforeach()
         endforeach()
       endforeach()

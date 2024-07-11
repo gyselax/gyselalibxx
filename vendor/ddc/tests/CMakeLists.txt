@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.22)
 
 add_subdirectory(discrete_space)
 
@@ -35,7 +35,7 @@ target_link_libraries(ddc_tests
         GTest::gtest
         DDC::DDC
 )
-gtest_discover_tests(ddc_tests)
+gtest_discover_tests(ddc_tests DISCOVERY_MODE PRE_TEST)
 if("${DDC_BUILD_KERNELS_FFT}")
   add_executable(fft_tests main.cpp fft.cpp)
   target_compile_features(fft_tests PUBLIC cxx_std_17)
@@ -44,7 +44,7 @@ if("${DDC_BUILD_KERNELS_FFT}")
 		  GTest::gtest
 		  DDC::DDC
   )
-  gtest_discover_tests(fft_tests)
+  gtest_discover_tests(fft_tests DISCOVERY_MODE PRE_TEST)
 endif()
 if("${DDC_BUILD_KERNELS_SPLINES}")
   add_subdirectory(splines)

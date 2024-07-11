@@ -4,8 +4,20 @@
 
 add_executable(heat_equation heat_equation.cpp)
 target_link_libraries(heat_equation PUBLIC DDC::DDC)
+
+add_executable(uniform_heat_equation uniform_heat_equation.cpp)
+add_executable(non_uniform_heat_equation non_uniform_heat_equation.cpp)
+
+target_link_libraries(uniform_heat_equation PUBLIC DDC::DDC)
+target_link_libraries(non_uniform_heat_equation PUBLIC DDC::DDC)
+target_link_libraries(uniform_heat_equation PUBLIC DDC::DDC)
+
+
 if("${DDC_BUILD_PDI_WRAPPER}")
   target_link_libraries(heat_equation PUBLIC DDC::PDI_Wrapper)
+  target_link_libraries(uniform_heat_equation PUBLIC DDC::PDI_Wrapper)
+  target_link_libraries(non_uniform_heat_equation PUBLIC DDC::PDI_Wrapper)
+
 endif()
 if("${DDC_BUILD_KERNELS_FFT}")
   add_executable(heat_equation_spectral heat_equation_spectral.cpp)

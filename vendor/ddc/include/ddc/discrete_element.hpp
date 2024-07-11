@@ -192,21 +192,6 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION DiscreteElement& operator=(DiscreteElement&& other) = default;
 
-    template <class... OTags>
-    KOKKOS_FUNCTION constexpr DiscreteElement& operator=(
-            DiscreteElement<OTags...> const& other) noexcept
-    {
-        m_values = other.m_values;
-        return *this;
-    }
-
-    template <class... OTags>
-    KOKKOS_FUNCTION constexpr DiscreteElement& operator=(DiscreteElement<OTags...>&& other) noexcept
-    {
-        m_values = std::move(other.m_values);
-        return *this;
-    }
-
     template <class QueryTag>
     KOKKOS_FUNCTION constexpr value_type const& uid_or(value_type const& default_value) const&
     {
@@ -265,7 +250,7 @@ public:
     template <std::size_t N = sizeof...(Tags), class = std::enable_if_t<N == 1>>
     KOKKOS_FUNCTION constexpr DiscreteElement& operator--()
     {
-        ++m_values[0];
+        --m_values[0];
         return *this;
     }
 
@@ -273,7 +258,7 @@ public:
     KOKKOS_FUNCTION constexpr DiscreteElement operator--(int)
     {
         DiscreteElement const tmp = *this;
-        ++m_values[0];
+        --m_values[0];
         return tmp;
     }
 

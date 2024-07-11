@@ -8,32 +8,32 @@
 
 #include <gtest/gtest.h>
 
-namespace {
-
-struct DDimX
+namespace DDC_HIP_5_7_ANONYMOUS_NAMESPACE_WORKAROUND(DISCRETE_VECTOR_CPP)
 {
-};
-using DVectX = ddc::DiscreteVector<DDimX>;
+    struct DDimX
+    {
+    };
+    using DVectX = ddc::DiscreteVector<DDimX>;
 
 
-struct DDimY
-{
-};
-using DVectY = ddc::DiscreteVector<DDimY>;
+    struct DDimY
+    {
+    };
+    using DVectY = ddc::DiscreteVector<DDimY>;
 
 
-struct DDimZ
-{
-};
-using DVectZ = ddc::DiscreteVector<DDimZ>;
+    struct DDimZ
+    {
+    };
+    using DVectZ = ddc::DiscreteVector<DDimZ>;
 
 
-using DVectXZ = ddc::DiscreteVector<DDimX, DDimZ>;
+    using DVectXZ = ddc::DiscreteVector<DDimX, DDimZ>;
 
 
-using DVectXYZ = ddc::DiscreteVector<DDimX, DDimY, DDimZ>;
+    using DVectXYZ = ddc::DiscreteVector<DDimX, DDimY, DDimZ>;
 
-} // namespace
+} // namespace )
 
 TEST(DiscreteVectorXYZTest, ConstructorFromDiscreteVectors)
 {
@@ -46,6 +46,42 @@ TEST(DiscreteVectorXYZTest, ConstructorFromDiscreteVectors)
     EXPECT_EQ(ixyz.get<DDimX>(), dv_x);
     EXPECT_EQ(ixyz.get<DDimY>(), dv_y);
     EXPECT_EQ(ixyz.get<DDimZ>(), dv_z);
+}
+
+TEST(DiscreteVectorXTest, PreIncrement)
+{
+    DVectX const ix0(3);
+    DVectX ix1(ix0);
+    DVectX const ix2 = ++ix1;
+    EXPECT_EQ(ix1, ix0 + 1);
+    EXPECT_EQ(ix2, ix0 + 1);
+}
+
+TEST(DiscreteVectorXTest, PostIncrement)
+{
+    DVectX const ix0(3);
+    DVectX ix1(ix0);
+    DVectX const ix2 = ix1++;
+    EXPECT_EQ(ix1, ix0 + 1);
+    EXPECT_EQ(ix2, ix0);
+}
+
+TEST(DiscreteVectorXTest, PreDecrement)
+{
+    DVectX const ix0(3);
+    DVectX ix1(ix0);
+    DVectX const ix2 = --ix1;
+    EXPECT_EQ(ix1, ix0 - 1);
+    EXPECT_EQ(ix2, ix0 - 1);
+}
+
+TEST(DiscreteVectorXTest, PostDecrement)
+{
+    DVectX const ix0(3);
+    DVectX ix1(ix0);
+    DVectX const ix2 = ix1--;
+    EXPECT_EQ(ix1, ix0 - 1);
+    EXPECT_EQ(ix2, ix0);
 }
 
 TEST(DiscreteVectorTest, ExternalBinaryOperatorPlus)

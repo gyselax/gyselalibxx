@@ -6,12 +6,15 @@ name: test
 on:
   push: { branches: [ main ] }
   pull_request:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref == github.ref_protected && github.run_id || github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: DoozyX/clang-format-lint-action@v0.13
+    - uses: DoozyX/clang-format-lint-action@v0.17
       with:
         source: 'include/ddc/ tests/ examples/'
         exclude: ''
@@ -37,8 +40,8 @@ jobs:
         image: ['oldest', 'latest']
         backend: ['cpu', 'cuda', 'hip']
         exclude:
-        - image: 'oldest'
-          backend: 'cuda'
+        - image: 'latest' # no ppa yet for hip in noble image
+          backend: 'hip'
     needs: id_repo
     runs-on: ubuntu-latest
     steps:
@@ -87,17 +90,15 @@ jobs:
         cxx_version:  ['17', '20', '23']
         cmake_build_type: ['Debug', 'Release']
         exclude:
-        - image: 'oldest' # image not available
+        - image: 'oldest' # nvcc 11 only supports C++-17
           backend: 'cuda'
-        - image: 'oldest' # no compiler supports C++-23 in oldest
+          cxx_version: '20'
+        - image: 'oldest' # nvcc 11 only supports C++-17
+          backend: 'cuda'
           cxx_version: '23'
-        - image: 'oldest' # clang does not support C++-20 in oldest
-          backend: 'cpu-clang'
-          cxx_version: '20'
-        - image: 'latest' # nvcc only supports C++-17
-          backend: 'cuda'
-          cxx_version: '20'
-        - image: 'latest' # nvcc only supports C++-17
+        - image: 'latest' # no ppa yet for hip in noble image
+          backend: 'hip'
+        - image: 'latest' # nvcc 12 only supports C++-20
           backend: 'cuda'
           cxx_version: '23'
     runs-on: ubuntu-20.04
@@ -130,44 +131,98 @@ jobs:
           'cuda')
             export CC=${CUDA_GCC}
             export CXX=${CUDA_GXX}
-            EXTRA_CMAKE_FLAGS="-DKokkos_ENABLE_CUDA=ON -DKokkos_ARCH_AMPERE80=ON -DKokkos_ENABLE_LIBDL=OFF"
+            EXTRA_CMAKE_FLAGS="-DKokkos_ENABLE_CUDA=ON -DKokkos_ENABLE_CUDA_CONSTEXPR=ON -DKokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE=ON -DKokkos_ARCH_AMPERE80=ON"
           ;;
           'hip')
             export CC=hipcc
             export CXX=hipcc
-            EXTRA_CMAKE_FLAGS="-DKokkos_ENABLE_HIP=ON -DKokkos_ENABLE_ROCTHRUST=OFF -DKokkos_ARCH_VEGA90A=ON -DCMAKE_PREFIX_PATH=/opt/rocm"
+            export CMAKE_PREFIX_PATH=/opt/rocm
+            EXTRA_CMAKE_FLAGS="-DKokkos_ENABLE_HIP=ON -DKokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE=ON -DKokkos_ENABLE_ROCTHRUST=OFF -DKokkos_ARCH_AMD_GFX90A=ON"
           ;;
           'cpu-clang')
             export CC=clang
             export CXX=clang++
+            DDC_CMAKE_CXX_FLAGS="-Wextra-semi -Wextra-semi-stmt -Wold-style-cast"
           ;;
           'cpu-gcc')
             export CC=gcc
             export CXX=g++
+            DDC_CMAKE_CXX_FLAGS="-Wextra-semi -Wold-style-cast"
             if [ 'xDebug' = 'x${{matrix.cmake_build_type}}' ]
             then
-              CMAKE_CXX_FLAGS="-fno-omit-frame-pointer -fsanitize=address"
+              DDC_CMAKE_CXX_FLAGS="${DDC_CMAKE_CXX_FLAGS} -fno-omit-frame-pointer -fsanitize=address"
             fi
           ;;
           esac
+
+          export benchmark_ROOT=$PWD/opt/benchmark
+          export GTest_ROOT=$PWD/opt/gtest
+          export Kokkos_ROOT=$PWD/opt/kokkos
+          export mdspan_ROOT=$PWD/opt/mdspan
+
           cmake \
-            -DDDC_BUILD_BENCHMARKS=ON \
+            -DCMAKE_BUILD_TYPE=${{matrix.cmake_build_type}} \
+            -DCMAKE_CXX_STANDARD=${{matrix.cxx_version}} \
+            -DBENCHMARK_ENABLE_GTEST_TESTS=OFF \
+            -DBENCHMARK_ENABLE_TESTING=OFF \
+            -DBENCHMARK_INSTALL_DOCS=OFF \
+            -DBENCHMARK_USE_BUNDLED_GTEST=OFF \
+            -B build \
+            -S /src/vendor/benchmark
+          cmake --build build --parallel 2
+          cmake --install build --prefix $benchmark_ROOT
+          rm -rf build
+
+          cmake \
+            -DCMAKE_BUILD_TYPE=${{matrix.cmake_build_type}} \
+            -DCMAKE_CXX_STANDARD=${{matrix.cxx_version}} \
+            -B build \
+            -S /src/vendor/googletest
+          cmake --build build --parallel 2
+          cmake --install build --prefix $GTest_ROOT
+          rm -rf build
+
+          cmake \
+            -DCMAKE_BUILD_TYPE=${{matrix.cmake_build_type}} \
+            -DCMAKE_CXX_STANDARD=${{matrix.cxx_version}} \
+            -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF \
+            -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
+            -DKokkos_ENABLE_SERIAL=ON \
+            ${EXTRA_CMAKE_FLAGS} \
+            -B build \
+            -S /src/vendor/kokkos
+          cmake --build build --parallel 2
+          cmake --install build --prefix $Kokkos_ROOT
+          rm -rf build
+
+          cmake \
             -DCMAKE_BUILD_TYPE=${{matrix.cmake_build_type}} \
             -DCMAKE_CXX_STANDARD=${{matrix.cxx_version}} \
             -DMDSPAN_CXX_STANDARD=${{matrix.cxx_version}} \
-            -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF \
-            -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
+            -B build \
+            -S /src/vendor/mdspan
+          cmake --build build --parallel 2
+          cmake --install build --prefix $mdspan_ROOT
+          rm -rf build
+
+          cmake \
+            -DCMAKE_BUILD_TYPE=${{matrix.cmake_build_type}} \
             -DCMAKE_CXX_FLAGS="\
-              -Wall -Wextra -Wpedantic -Wno-sign-compare \
-              -Werror=vla \
-              -Werror=implicit-fallthrough \
-              ${CMAKE_CXX_FLAGS}" \
-            ${EXTRA_CMAKE_FLAGS} \
-            /src
-          make -j 2
+              -Werror -Wall -Wextra -Wpedantic -Wno-sign-compare -pedantic-errors \
+              ${DDC_CMAKE_CXX_FLAGS}" \
+            -DCMAKE_CXX_STANDARD=${{matrix.cxx_version}} \
+            -DDDC_BUILD_BENCHMARKS=ON \
+            -DDDC_benchmark_DEPENDENCY_POLICY=INSTALLED \
+            -DDDC_GTest_DEPENDENCY_POLICY=INSTALLED \
+            -DDDC_Kokkos_DEPENDENCY_POLICY=INSTALLED \
+            -DDDC_mdspan_DEPENDENCY_POLICY=INSTALLED \
+            -B build \
+            -S /src
+          cmake --build build --parallel 2
+
           case "${{matrix.backend}}" in
           'cpu-'*)
-            ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
+            ctest --test-dir build --parallel 2 --output-on-failure --timeout 5 --output-junit tests.xml
           ;;
           esac
         EOF
@@ -200,12 +255,12 @@ jobs:
       if: needs.id_repo.outputs.in_base_repo == 'false'
       uses: actions/download-artifact@v3
       with:
-        name: latest_cpu-artifact
+        name: oldest_cpu-artifact
     - name: Load image artifact into docker
       if: needs.id_repo.outputs.in_base_repo == 'false'
       run: |
-        docker load < latest_cpu.tar
-        rm latest_cpu.tar
+        docker load < oldest_cpu.tar
+        rm oldest_cpu.tar
     - name: Test
       id: test
       run: |
@@ -226,15 +281,16 @@ jobs:
             -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF \
             -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
             -DCMAKE_CXX_FLAGS="-fsanitize=undefined -fno-omit-frame-pointer" \
-            /src
-          make -j 2
+            -B build \
+            -S /src
+          cmake --build build --parallel 2
           export UBSAN_OPTIONS=print_stacktrace=1,halt_on_error=1,suppressions=/src/ubsan.supp
-          ctest -j 2 --output-on-failure --timeout 5 --output-junit tests.xml
+          ctest --test-dir build --parallel 2 --output-on-failure --timeout 5 --output-junit tests.xml
         EOF
         docker run \
           --cidfile='docker.cid' \
           -v ${PWD}:/src:ro \
-          ghcr.io/cexa-project/ddc/latest_cpu:${GITHUB_SHA:0:7} \
+          ghcr.io/cexa-project/ddc/oldest_cpu:${GITHUB_SHA:0:7} \
           bash /src/run.sh
         if docker cp "$(cat docker.cid)":/data/tests.xml /home/runner/work/ddc/ddc/tests.xml
         then echo "with_report=true" >> "$GITHUB_OUTPUT"
@@ -259,12 +315,12 @@ jobs:
     - name: Collect image artifact
       if: needs.id_repo.outputs.in_base_repo == 'false'
       uses: actions/download-artifact@v3
-      with: { name: 'latest_cpu-artifact' }
+      with: { name: 'oldest_cpu-artifact' }
     - name: Load image artifact into docker
       if: needs.id_repo.outputs.in_base_repo == 'false'
       run: |
-        docker load < latest_cpu-artifact.tar
-        rm latest_cpu-artifact.tar
+        docker load < oldest_cpu-artifact.tar
+        rm oldest_cpu-artifact.tar
     - name: clang-tidy
       run: |
         cat<<-'EOF' > run.sh
@@ -280,10 +336,10 @@ jobs:
         -DMDSPAN_CXX_STANDARD=17 \
         -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF \
         -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF \
-        -S /src \
-        -B build
+        -B build \
+        -S /src
         find /src/benchmarks /src/examples /src/tests -name '*.cpp' -exec clang-tidy-14 -p build -header-filter="(/src/include/ddc/.*|/src/tests/.*)" '{}' '+'
         EOF
         docker run \
-          -v ${PWD}:/src:ro ghcr.io/cexa-project/ddc/latest_cpu:${GITHUB_SHA:0:7} \
+          -v ${PWD}:/src:ro ghcr.io/cexa-project/ddc/oldest_cpu:${GITHUB_SHA:0:7} \
           bash /src/run.sh

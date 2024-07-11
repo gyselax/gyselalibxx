@@ -13,6 +13,9 @@
 
 namespace ddc::detail {
 
+/**
+ * @brief A helper returning a ginkgo executor associated to Kokkos::DefaultHostExecutionSpace().
+ */
 inline std::shared_ptr<gko::Executor> create_default_host_executor()
 {
 #ifdef KOKKOS_ENABLE_SERIAL
@@ -27,6 +30,9 @@ inline std::shared_ptr<gko::Executor> create_default_host_executor()
 #endif
 } // Comes from "Basic Kokkos Extension" Ginkgo MR
 
+/**
+ * @brief A helper returning a ginkgo executor associated to Kokkos::DefaultExecutionSpace().
+ */
 template <typename ExecSpace>
 std::shared_ptr<gko::Executor> create_gko_exec()
 {

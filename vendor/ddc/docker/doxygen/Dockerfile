@@ -1,4 +1,4 @@
-FROM ubuntu:lunar
+FROM ubuntu:noble
 
 # Copyright (C) The DDC development team, see COPYRIGHT.md file
 #
@@ -19,30 +19,28 @@ RUN chmod +x /bin/bash_run \
     apt-utils \
     ca-certificates \
     wget \
- && echo "deb [ arch=amd64 ] https://raw.githubusercontent.com/pdidev/repo/ubuntu lunar main" > /etc/apt/sources.list.d/pdi.list \
- && wget -q -O /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg https://raw.githubusercontent.com/pdidev/repo/ubuntu/pdidev-archive-keyring.gpg \
- && chmod -R a+r /etc/apt/trusted.gpg.d/ \
+ && mkdir --parents --mode=0755 /etc/apt/keyrings \
+ && echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/pdidev-archive-keyring.gpg] https://raw.githubusercontent.com/pdidev/repo/ubuntu noble main" > /etc/apt/sources.list.d/pdi.list \
+ && wget -q -O /etc/apt/keyrings/pdidev-archive-keyring.gpg https://raw.githubusercontent.com/pdidev/repo/ubuntu/pdidev-archive-keyring.gpg \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
     clang \
+    cm-super-minimal \
     cmake \
-    doxygen \
-    pkg-config \
     cmake-data \
     libfftw3-dev \
+    liblapacke-dev \
     libpdi-dev \
-    doxygen \
-    doxygen-latex \
+    ghostscript \
     git \
     graphviz \
-    texlive \
+    pkg-config \
+    doxygen-latex \
  && git clone -b v1.7.0 https://github.com/ginkgo-project/ginkgo.git \
- && cd ginkgo \
- && cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DGINKGO_BUILD_OMP=OFF -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF \
- && cmake --build build \
- && cmake --install build \
- && cd .. \
+ && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DGINKGO_BUILD_OMP=OFF -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF -B build-ginkgo -S ginkgo \
+ && cmake --build build-ginkgo \
+ && cmake --install build-ginkgo \
  && rm -rf ginkgo \
  && apt-get purge -y \
     apt-transport-https \

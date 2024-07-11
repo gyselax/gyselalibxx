@@ -290,22 +290,6 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION TaggedVector& operator=(TaggedVector&& other) = default;
 
-    template <class... OTags>
-    KOKKOS_FUNCTION constexpr TaggedVector& operator=(
-            TaggedVector<ElementType, OTags...> const& other) noexcept
-    {
-        ((this->get<Tags>() = other.template get<Tags>()), ...);
-        return *this;
-    }
-
-    template <class... OTags>
-    KOKKOS_FUNCTION constexpr TaggedVector& operator=(
-            TaggedVector<ElementType, OTags...>&& other) noexcept
-    {
-        ((this->get<Tags>() = std::move(other.template get<Tags>())), ...);
-        return *this;
-    }
-
     /// Returns a reference to the underlying `std::array`
     KOKKOS_FUNCTION constexpr std::array<ElementType, sizeof...(Tags)>& array() noexcept
     {

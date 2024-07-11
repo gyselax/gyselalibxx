@@ -24,34 +24,34 @@
                 ddc::Coordinate<DimY>(0.4)                                                         \
     }
 
-namespace {
-
-struct DimX;
-struct DimY;
-
-struct DDimX : ddc::NonUniformPointSampling<DimX>
+namespace DDC_HIP_5_7_ANONYMOUS_NAMESPACE_WORKAROUND(NON_UNIFORM_POINT_SAMPLING_CPP)
 {
-};
+    struct DimX;
+    struct DimY;
 
-struct DDimY : ddc::NonUniformPointSampling<DimY>
-{
-};
+    struct DDimX : ddc::NonUniformPointSampling<DimX>
+    {
+    };
 
-static std::array<double, 4> const array_points_x VALUES_X;
-static std::vector<double> const vector_points_x VALUES_X;
+    struct DDimY : ddc::NonUniformPointSampling<DimY>
+    {
+    };
 
-static std::vector<double> const vector_points_y VALUES_Y;
+    static std::array<double, 4> const array_points_x VALUES_X;
+    static std::vector<double> const vector_points_x VALUES_X;
 
-static ddc::DiscreteElement<DDimX> constexpr point_ix(2);
-static ddc::Coordinate<DimX> constexpr point_rx(0.3);
+    static std::vector<double> const vector_points_y VALUES_Y;
 
-static ddc::DiscreteElement<DDimY> constexpr point_iy(1);
-static ddc::Coordinate<DimY> constexpr point_ry(0.2);
+    static ddc::DiscreteElement<DDimX> constexpr point_ix(2);
+    static ddc::Coordinate<DimX> constexpr point_rx(0.3);
 
-static ddc::DiscreteElement<DDimX, DDimY> constexpr point_ixy(2, 1);
-static ddc::Coordinate<DimX, DimY> constexpr point_rxy(0.3, 0.2);
+    static ddc::DiscreteElement<DDimY> constexpr point_iy(1);
+    static ddc::Coordinate<DimY> constexpr point_ry(0.2);
 
-} // namespace
+    static ddc::DiscreteElement<DDimX, DDimY> constexpr point_ixy(2, 1);
+    static ddc::Coordinate<DimX, DimY> constexpr point_rxy(0.3, 0.2);
+
+} // namespace )
 
 TEST(NonUniformPointSamplingTest, ListConstructor)
 {
