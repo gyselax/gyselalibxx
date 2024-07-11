@@ -8,17 +8,17 @@
 
 #include <gtest/gtest.h>
 
-namespace {
+namespace DDC_HIP_5_7_ANONYMOUS_NAMESPACE_WORKAROUND(TYPE_SED_CPP)
+{
+    struct a;
+    struct b;
+    struct c;
+    struct d;
+    struct e;
+    struct y;
+    struct z;
 
-struct a;
-struct b;
-struct c;
-struct d;
-struct e;
-struct y;
-struct z;
-
-} // namespace
+} // namespace )
 
 TEST(TypeSeqTest, Rank)
 {

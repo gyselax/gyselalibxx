@@ -84,7 +84,7 @@ private:
     using FunctionSpan = device_t<ddc::ChunkSpan<double, FunctionDomain>>;
 
     // Type for spline representation of the advection field
-    using BSAdvectionDomain = typename AdvectionFieldBuilder::spline_domain_type;
+    using BSAdvectionDomain = typename AdvectionFieldBuilder::batched_spline_domain_type;
     using AdvecFieldSplineChunk = device_t<ddc::Chunk<double, BSAdvectionDomain>>;
     using AdvecFieldSplineSpan = device_t<ddc::ChunkSpan<double, BSAdvectionDomain>>;
 
@@ -178,7 +178,8 @@ public:
 
 
         // Build spline representation of the advection field ....................................
-        AdvecFieldSplineChunk advection_field_coefs_alloc(m_adv_field_builder.spline_domain());
+        AdvecFieldSplineChunk advection_field_coefs_alloc(
+                m_adv_field_builder.batched_spline_domain());
         AdvecFieldSplineSpan advection_field_coefs = advection_field_coefs_alloc.span_view();
 
         m_adv_field_builder(

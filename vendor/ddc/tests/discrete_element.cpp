@@ -8,41 +8,41 @@
 
 #include <gtest/gtest.h>
 
-namespace {
-
-struct DDimX
+namespace DDC_HIP_5_7_ANONYMOUS_NAMESPACE_WORKAROUND(DISCRETE_ELEMENT_CPP)
 {
-};
-using DElemX = ddc::DiscreteElement<DDimX>;
-using DVectX = ddc::DiscreteVector<DDimX>;
+    struct DDimX
+    {
+    };
+    using DElemX = ddc::DiscreteElement<DDimX>;
+    using DVectX = ddc::DiscreteVector<DDimX>;
 
 
-struct DDimY
-{
-};
-using DElemY = ddc::DiscreteElement<DDimY>;
-using DVectY = ddc::DiscreteVector<DDimY>;
+    struct DDimY
+    {
+    };
+    using DElemY = ddc::DiscreteElement<DDimY>;
+    using DVectY = ddc::DiscreteVector<DDimY>;
 
 
-struct DDimZ
-{
-};
-using DElemZ = ddc::DiscreteElement<DDimZ>;
-using DVectZ = ddc::DiscreteVector<DDimZ>;
+    struct DDimZ
+    {
+    };
+    using DElemZ = ddc::DiscreteElement<DDimZ>;
+    using DVectZ = ddc::DiscreteVector<DDimZ>;
 
 
-using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;
-using DVectXY = ddc::DiscreteVector<DDimX, DDimY>;
+    using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;
+    using DVectXY = ddc::DiscreteVector<DDimX, DDimY>;
 
 
-using DElemYX = ddc::DiscreteElement<DDimY, DDimX>;
-using DVectYX = ddc::DiscreteVector<DDimY, DDimX>;
+    using DElemYX = ddc::DiscreteElement<DDimY, DDimX>;
+    using DVectYX = ddc::DiscreteVector<DDimY, DDimX>;
 
 
-using DElemXYZ = ddc::DiscreteElement<DDimX, DDimY, DDimZ>;
-using DVectXYZ = ddc::DiscreteVector<DDimX, DDimY, DDimZ>;
+    using DElemXYZ = ddc::DiscreteElement<DDimX, DDimY, DDimZ>;
+    using DVectXYZ = ddc::DiscreteVector<DDimX, DDimY, DDimZ>;
 
-} // namespace
+} // namespace )
 
 TEST(DiscreteElementXYZTest, ConstructorFromDiscreteElements)
 {
@@ -55,6 +55,55 @@ TEST(DiscreteElementXYZTest, ConstructorFromDiscreteElements)
     EXPECT_EQ(ixyz.uid<DDimX>(), uid_x);
     EXPECT_EQ(ixyz.uid<DDimY>(), uid_y);
     EXPECT_EQ(ixyz.uid<DDimZ>(), uid_z);
+}
+
+TEST(DiscreteElementXYZTest, CopyAssignment)
+{
+    std::size_t const uid_x = 7;
+    std::size_t const uid_y = 13;
+    std::size_t const uid_z = 4;
+    DElemXYZ const ixyz(uid_x, uid_y, uid_z);
+    DElemXYZ ixyz2(0, 0, 0);
+    ixyz2 = ixyz;
+    EXPECT_EQ(ixyz2.uid<DDimX>(), uid_x);
+    EXPECT_EQ(ixyz2.uid<DDimY>(), uid_y);
+    EXPECT_EQ(ixyz2.uid<DDimZ>(), uid_z);
+}
+
+TEST(DiscreteElementXTest, PreIncrement)
+{
+    DElemX const ix0(3);
+    DElemX ix1(ix0);
+    DElemX const ix2 = ++ix1;
+    EXPECT_EQ(ix1, ix0 + 1);
+    EXPECT_EQ(ix2, ix0 + 1);
+}
+
+TEST(DiscreteElementXTest, PostIncrement)
+{
+    DElemX const ix0(3);
+    DElemX ix1(ix0);
+    DElemX const ix2 = ix1++;
+    EXPECT_EQ(ix1, ix0 + 1);
+    EXPECT_EQ(ix2, ix0);
+}
+
+TEST(DiscreteElementXTest, PreDecrement)
+{
+    DElemX const ix0(3);
+    DElemX ix1(ix0);
+    DElemX const ix2 = --ix1;
+    EXPECT_EQ(ix1, ix0 - 1);
+    EXPECT_EQ(ix2, ix0 - 1);
+}
+
+TEST(DiscreteElementXTest, PostDecrement)
+{
+    DElemX const ix0(3);
+    DElemX ix1(ix0);
+    DElemX const ix2 = ix1--;
+    EXPECT_EQ(ix1, ix0 - 1);
+    EXPECT_EQ(ix2, ix0);
 }
 
 TEST(DiscreteElementXTest, RightExternalBinaryOperatorPlus)

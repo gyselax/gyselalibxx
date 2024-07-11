@@ -60,11 +60,11 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
         SplineBuilder const& builder)
 {
     static_assert(
-            SplineBuilder::s_nbe_xmin == 0,
+            SplineBuilder::s_nbc_xmin == 0,
             "The spline quadrature requires a builder which can construct the coefficients using "
             "only the values at the interpolation points.");
     static_assert(
-            SplineBuilder::s_nbe_xmax == 0,
+            SplineBuilder::s_nbc_xmax == 0,
             "The spline quadrature requires a builder which can construct the coefficients using "
             "only the values at the interpolation points.");
 
@@ -86,7 +86,12 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
             integral_bsplines[slice].allocation_kokkos_view());
 
     // Solve matrix equation
-    builder.get_interpolation_matrix().solve_transpose_inplace(coefficients.allocation_mdspan());
+    builder.get_interpolation_matrix()
+            .solve(Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>(
+                           coefficients.data_handle(),
+                           coefficients.size(),
+                           1),
+                   true);
 
     return coefficients;
 }

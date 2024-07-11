@@ -103,13 +103,17 @@ public:
     template <class... ODims>
     KOKKOS_FUNCTION constexpr bool operator==(DiscreteDomain<ODims...> const& other) const
     {
+        if (empty() && other.empty()) {
+            return true;
+        }
         return m_element_begin == other.m_element_begin && m_element_end == other.m_element_end;
     }
 
 #if __cplusplus <= 201703L
     // Shall not be necessary anymore in C++20
     // `a!=b` shall be translated by the compiler to `!(a==b)`
-    KOKKOS_FUNCTION constexpr bool operator!=(DiscreteDomain const& other) const
+    template <class... ODims>
+    KOKKOS_FUNCTION constexpr bool operator!=(DiscreteDomain<ODims...> const& other) const
     {
         return !(*this == other);
     }

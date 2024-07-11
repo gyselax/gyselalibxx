@@ -10,6 +10,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include "bsplines_non_uniform.hpp"
+#include "bsplines_uniform.hpp"
 #include "spline_boundary_conditions.hpp"
 
 namespace ddc {
@@ -67,14 +69,21 @@ class GrevilleInterpolationPoints
                 = ddc::discrete_space<BSplines>().full_domain().take_first(
                         ddc::DiscreteVector<BSplines>(ddc::discrete_space<BSplines>().nbasis()));
 
+        ddc::DiscreteVector<NonUniformBsplinesKnots<BSplines>> n_points_in_average(
+                BSplines::degree());
+
+        ddc::DiscreteElement<BSplines> ib0(bspline_domain.front());
+
         ddc::for_each(bspline_domain, [&](ddc::DiscreteElement<BSplines> ib) {
             // Define the Greville points from the bspline knots
-            greville_points[ib.uid()] = 0.0;
-            for (std::size_t i(0); i < BSplines::degree(); ++i) {
-                greville_points[ib.uid()]
-                        += ddc::discrete_space<BSplines>().get_support_knot_n(ib, i + 1);
-            }
-            greville_points[ib.uid()] /= BSplines::degree();
+            greville_points[ib - ib0] = 0.0;
+            ddc::DiscreteDomain<NonUniformBsplinesKnots<BSplines>> sub_domain(
+                    ddc::discrete_space<BSplines>().get_first_support_knot(ib) + 1,
+                    n_points_in_average);
+            ddc::for_each(sub_domain, [&](auto ik) {
+                greville_points[ib - ib0] += ddc::coordinate(ik);
+            });
+            greville_points[ib - ib0] /= n_points_in_average.value();
         });
 
         std::vector<double> temp_knots(BSplines::degree());
@@ -118,6 +127,8 @@ public:
      * when uniform splines are used with an odd degree and with boundary conditions which
      * do not introduce additional interpolation points.
      *
+     * @tparam Sampling The discrete dimension supporting the Greville points.
+     *
      * @returns The mesh of uniform Greville points.
      */
     template <
@@ -133,6 +144,8 @@ public:
 
     /**
      * Get the NonUniformPointSampling defining the Greville points.
+     *
+     * @tparam Sampling The discrete dimension supporting the Greville points.
      *
      * @returns The mesh of non-uniform Greville points.
      */
@@ -157,11 +170,17 @@ public:
                 for (std::size_t i(0); i < BSplines::degree() / 2 + 1; ++i) {
                     points_with_bcs[i]
                             = (BSplines::degree() - i) * ddc::discrete_space<BSplines>().rmin();
-                    for (std::size_t j(0); j < i; ++j) {
-                        points_with_bcs[i] += ddc::discrete_space<BSplines>().get_support_knot_n(
-                                ddc::DiscreteElement<BSplines>(i),
-                                BSplines::degree() - j);
-                    }
+                    ddc::DiscreteElement<BSplines> spline_idx(i);
+                    ddc::DiscreteVector<UniformBsplinesKnots<BSplines>> n_knots_in_domain(i);
+                    ddc::DiscreteDomain<UniformBsplinesKnots<BSplines>> sub_domain(
+                            ddc::discrete_space<BSplines>().get_last_support_knot(spline_idx)
+                                    - n_knots_in_domain,
+                            n_knots_in_domain);
+                    ddc::for_each(
+                            sub_domain,
+                            [&](DiscreteElement<UniformBsplinesKnots<BSplines>> ik) {
+                                points_with_bcs[i] += ddc::coordinate(ik);
+                            });
                     points_with_bcs[i] /= BSplines::degree();
                 }
             } else {
@@ -172,13 +191,13 @@ public:
             int const n_start
                     = (BcXmin == ddc::BoundCond::GREVILLE) ? BSplines::degree() / 2 + 1 : 1;
             int const domain_size = n_break_points - 2;
+            ddc::DiscreteElement<IntermediateSampling> domain_start(1);
             ddc::DiscreteDomain<IntermediateSampling> const
-                    domain(ddc::DiscreteElement<IntermediateSampling>(1),
-                           ddc::DiscreteVector<IntermediateSampling>(domain_size));
+                    domain(domain_start, ddc::DiscreteVector<IntermediateSampling>(domain_size));
 
             // Copy central points
             ddc::for_each(domain, [&](auto ip) {
-                points_with_bcs[ip.uid() + n_start - 1] = points_wo_bcs.coordinate(ip);
+                points_with_bcs[ip - domain_start + n_start] = points_wo_bcs.coordinate(ip);
             });
 
             // Construct Greville-like points at the edge
@@ -186,13 +205,17 @@ public:
                 for (std::size_t i(0); i < BSplines::degree() / 2 + 1; ++i) {
                     points_with_bcs[npoints - 1 - i]
                             = (BSplines::degree() - i) * ddc::discrete_space<BSplines>().rmax();
-                    for (std::size_t j(0); j < i; ++j) {
-                        points_with_bcs[npoints - 1 - i]
-                                += ddc::discrete_space<BSplines>().get_support_knot_n(
-                                        ddc::DiscreteElement<BSplines>(
-                                                ddc::discrete_space<BSplines>().nbasis() - 1 - i),
-                                        j + 1);
-                    }
+                    ddc::DiscreteElement<BSplines> spline_idx(
+                            ddc::discrete_space<BSplines>().nbasis() - 1 - i);
+                    ddc::DiscreteVector<UniformBsplinesKnots<BSplines>> n_knots_in_domain(i);
+                    ddc::DiscreteDomain<UniformBsplinesKnots<BSplines>> sub_domain(
+                            ddc::discrete_space<BSplines>().get_first_support_knot(spline_idx) + 1,
+                            n_knots_in_domain);
+                    ddc::for_each(
+                            sub_domain,
+                            [&](DiscreteElement<UniformBsplinesKnots<BSplines>> ik) {
+                                points_with_bcs[npoints - 1 - i] += ddc::coordinate(ik);
+                            });
                     points_with_bcs[npoints - 1 - i] /= BSplines::degree();
                 }
             } else {
@@ -214,13 +237,13 @@ public:
 
                 using length = ddc::DiscreteVector<IntermediateSampling>;
 
+                ddc::DiscreteElement<IntermediateSampling> domain_start(n_start);
                 ddc::DiscreteDomain<IntermediateSampling> const
-                        domain(ddc::DiscreteElement<IntermediateSampling>(n_start),
-                               length(points_with_bcs.size()));
+                        domain(domain_start, length(points_with_bcs.size()));
 
                 points_with_bcs[0] = points_wo_bcs.coordinate(domain.front());
                 ddc::for_each(domain.remove(length(1), length(1)), [&](auto ip) {
-                    points_with_bcs[ip.uid() - n_start] = points_wo_bcs.coordinate(ip);
+                    points_with_bcs[ip - domain_start] = points_wo_bcs.coordinate(ip);
                 });
                 points_with_bcs[points_with_bcs.size() - 1]
                         = points_wo_bcs.coordinate(domain.back());
@@ -242,6 +265,8 @@ public:
 
     /**
      * Get the domain which gives us access to all of the Greville points.
+     *
+     * @tparam Sampling The discrete dimension supporting the Greville points.
      *
      * @returns The domain of the Greville points.
      */

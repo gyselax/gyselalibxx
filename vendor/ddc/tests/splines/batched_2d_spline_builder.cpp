@@ -287,7 +287,7 @@ static void Batched2dSplineTest()
     // Compute usefull domains (dom_interpolation, dom_batch, dom_bsplines and dom_spline)
     ddc::DiscreteDomain<IDim<I1, I1, I2>, IDim<I2, I1, I2>> const dom_interpolation
             = spline_builder.interpolation_domain();
-    auto const dom_spline = spline_builder.spline_domain();
+    auto const dom_spline = spline_builder.batched_spline_domain();
 
     // Allocate and fill a chunk containing values to be passed as input to spline_builder. Those are values of cosine along interest dimension duplicated along batch dimensions
     ddc::Chunk vals1_cpu_alloc(
@@ -466,10 +466,10 @@ static void Batched2dSplineTest()
         ddc::ChunkSpan Sderiv_mixed_rhs_rhs1_cpu = Sderiv_mixed_rhs_rhs1_cpu_alloc.span_view();
 
         for (std::size_t ii = 1;
-             ii < (std::size_t)derivs_domain.template extent<ddc::Deriv<I1>>() + 1;
+             ii < static_cast<std::size_t>(derivs_domain.template extent<ddc::Deriv<I1>>()) + 1;
              ++ii) {
             for (std::size_t jj = 1;
-                 jj < (std::size_t)derivs_domain.template extent<ddc::Deriv<I2>>() + 1;
+                 jj < static_cast<std::size_t>(derivs_domain.template extent<ddc::Deriv<I2>>()) + 1;
                  ++jj) {
                 Sderiv_mixed_lhs_lhs1_cpu(
                         typename decltype(derivs_domain)::discrete_element_type(ii, jj))

@@ -14,31 +14,32 @@
 
 #include <benchmark/benchmark.h>
 
-namespace {
-
-static constexpr std::size_t s_degree_x = 3;
-
-struct X
+namespace DDC_HIP_5_7_ANONYMOUS_NAMESPACE_WORKAROUND(SPLINES_CPP)
 {
-    static constexpr bool PERIODIC = true;
-};
+    static constexpr std::size_t s_degree_x = 3;
 
-struct BSplinesX : ddc::UniformBSplines<X, s_degree_x>
-{
-};
-using GrevillePoints = ddc::
-        GrevilleInterpolationPoints<BSplinesX, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
-struct DDimX : GrevillePoints::interpolation_mesh_type
-{
-};
+    struct X
+    {
+        static constexpr bool PERIODIC = true;
+    };
 
-struct Y;
-struct DDimY : ddc::UniformPointSampling<Y>
-{
-};
+    struct BSplinesX : ddc::UniformBSplines<X, s_degree_x>
+    {
+    };
+    using GrevillePoints = ddc::GrevilleInterpolationPoints<
+            BSplinesX,
+            ddc::BoundCond::PERIODIC,
+            ddc::BoundCond::PERIODIC>;
+    struct DDimX : GrevillePoints::interpolation_mesh_type
+    {
+    };
 
+    struct Y;
+    struct DDimY : ddc::UniformPointSampling<Y>
+    {
+    };
 
-} // namespace
+} // namespace )
 
 // Function to monitor GPU memory asynchronously
 void monitorMemoryAsync(std::mutex& mutex, bool& monitorFlag, size_t& maxUsedMem)
@@ -132,11 +133,11 @@ static void characteristics_advection(benchmark::State& state)
             DDimY>
             spline_evaluator(periodic_extrapolation, periodic_extrapolation);
     ddc::Chunk coef_alloc(
-            spline_builder.spline_domain(),
+            spline_builder.batched_spline_domain(),
             ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>());
     ddc::ChunkSpan coef = coef_alloc.span_view();
     ddc::Chunk feet_coords_alloc(
-            spline_builder.vals_domain(),
+            spline_builder.batched_interpolation_domain(),
             ddc::KokkosAllocator<
                     ddc::Coordinate<X, Y>,
                     Kokkos::DefaultExecutionSpace::memory_space>());
@@ -185,15 +186,15 @@ static void characteristics_advection(benchmark::State& state)
 
 #ifdef KOKKOS_ENABLE_CUDA
 std::string chip = "gpu";
-int cols_per_chunk_ref = 65535;
+std::size_t cols_per_chunk_ref = 65535;
 unsigned int preconditionner_max_block_size_ref = 1u;
 #elif defined(KOKKOS_ENABLE_OPENMP)
 std::string chip = "cpu";
-int cols_per_chunk_ref = 8192;
+std::size_t cols_per_chunk_ref = 8192;
 unsigned int preconditionner_max_block_size_ref = 32u;
 #elif defined(KOKKOS_ENABLE_SERIAL)
 std::string chip = "cpu";
-int cols_per_chunk_ref = 8192;
+std::size_t cols_per_chunk_ref = 8192;
 unsigned int preconditionner_max_block_size_ref = 32u;
 #endif
 
