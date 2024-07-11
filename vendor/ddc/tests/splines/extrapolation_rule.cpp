@@ -244,7 +244,7 @@ static void ExtrapolationRuleSplineTest()
     // Compute usefull domains (dom_interpolation, dom_batch, dom_bsplines and dom_spline)
     ddc::DiscreteDomain<IDim<I1, I1, I2>, IDim<I2, I1, I2>> const dom_interpolation
             = spline_builder.interpolation_domain();
-    auto const dom_spline = spline_builder.spline_domain();
+    auto const dom_spline = spline_builder.batched_spline_domain();
 
     // Allocate and fill a chunk containing values to be passed as input to spline_builder. Those are values of cosine along interest dimension duplicated along batch dimensions
     ddc::Chunk vals1_cpu_alloc(
@@ -374,10 +374,6 @@ static void ExtrapolationRuleSplineTest()
                         vals.domain(),
                         vals.template domain<IDim<I1, I1, I2>>()))::discrete_element_type
                         e_without_interest(e);
-                typename decltype(ddc::remove_dims_of(
-                        vals.domain(),
-                        vals.template domain<IDim<I1, I1, I2>, IDim<I2, I1, I2>>()))::
-                        discrete_element_type e_batch(e);
                 double tmp;
                 if (ddc::select<I2>(coords_eval(e)) > xN<I2>()) {
 #if defined(BC_PERIODIC)
@@ -385,6 +381,10 @@ static void ExtrapolationRuleSplineTest()
                             vals.template domain<IDim<I1, I1, I2>>().back(),
                             e_without_interest));
 #else
+                    typename decltype(ddc::remove_dims_of(
+                            vals.domain(),
+                            vals.template domain<IDim<I1, I1, I2>, IDim<I2, I1, I2>>()))::
+                            discrete_element_type e_batch(e);
                     tmp = vals(ddc::DiscreteElement<IDim<X, I1, I2>...>(
                             vals.template domain<IDim<I1, I1, I2>>().back(),
                             vals.template domain<IDim<I2, I1, I2>>().back(),

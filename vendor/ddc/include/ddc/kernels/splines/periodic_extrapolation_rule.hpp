@@ -4,6 +4,10 @@
 
 #pragma once
 
+#include <cassert>
+
+#include <Kokkos_Core.hpp>
+
 #include "view.hpp"
 
 namespace ddc {

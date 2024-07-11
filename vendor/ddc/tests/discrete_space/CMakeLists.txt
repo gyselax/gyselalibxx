@@ -17,4 +17,4 @@ target_link_libraries(discrete_space_tests
         DDC::DDC
 )
 
-gtest_discover_tests(discrete_space_tests)
+gtest_discover_tests(discrete_space_tests DISCOVERY_MODE PRE_TEST)

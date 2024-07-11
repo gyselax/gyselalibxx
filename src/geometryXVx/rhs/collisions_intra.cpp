@@ -22,7 +22,7 @@ KOKKOS_FUNCTION ddc::DiscreteElement<TargetDim> CollisionsIntra::to_index(
 }
 
 template <class VDim>
-std::enable_if_t<!ddc::is_uniform_sampling_v<VDim>> CollisionsIntra::
+std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
         build_ghosted_staggered_vx_point_sampling(ddc::DiscreteDomain<VDim> const& dom)
 {
     static_assert(
@@ -58,7 +58,7 @@ std::enable_if_t<!ddc::is_uniform_sampling_v<VDim>> CollisionsIntra::
 }
 
 template <class VDim>
-std::enable_if_t<ddc::is_uniform_sampling_v<VDim>> CollisionsIntra::
+std::enable_if_t<ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
         build_ghosted_staggered_vx_point_sampling(ddc::DiscreteDomain<VDim> const& dom)
 {
     static_assert(

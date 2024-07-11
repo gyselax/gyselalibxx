@@ -9,6 +9,8 @@
 
 #include <experimental/mdspan>
 
+#include <Kokkos_Core.hpp>
+
 namespace ddc::detail {
 template <typename T>
 KOKKOS_INLINE_FUNCTION T sum(T* array, int size)

@@ -12,44 +12,44 @@
 
 #include <benchmark/benchmark.h>
 
-namespace {
-
-struct DDimX
+namespace DDC_HIP_5_7_ANONYMOUS_NAMESPACE_WORKAROUND(DEEPCOPY_CPP)
 {
-};
-using DElemX = ddc::DiscreteElement<DDimX>;
-using DVectX = ddc::DiscreteVector<DDimX>;
-using DDomX = ddc::DiscreteDomain<DDimX>;
+    struct DDimX
+    {
+    };
+    using DElemX = ddc::DiscreteElement<DDimX>;
+    using DVectX = ddc::DiscreteVector<DDimX>;
+    using DDomX = ddc::DiscreteDomain<DDimX>;
 
-template <class Datatype>
-using ChunkSpanX = ddc::ChunkSpan<Datatype, DDomX>;
-
-
-struct DDimY
-{
-};
+    template <class Datatype>
+    using ChunkSpanX = ddc::ChunkSpan<Datatype, DDomX>;
 
 
-using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;
-using DVectXY = ddc::DiscreteVector<DDimX, DDimY>;
-using DDomXY = ddc::DiscreteDomain<DDimX, DDimY>;
-
-template <class Datatype>
-using ChunkSpanXY = ddc::ChunkSpan<Datatype, DDomXY>;
+    struct DDimY
+    {
+    };
 
 
-// Let say 1MB cache
-static std::size_t constexpr small_dim1_2D = 400;
-static std::size_t constexpr small_dim2_2D = small_dim1_2D;
+    using DElemXY = ddc::DiscreteElement<DDimX, DDimY>;
+    using DVectXY = ddc::DiscreteVector<DDimX, DDimY>;
+    using DDomXY = ddc::DiscreteDomain<DDimX, DDimY>;
 
-static std::size_t constexpr small_dim1_1D = small_dim1_2D * small_dim1_2D;
+    template <class Datatype>
+    using ChunkSpanXY = ddc::ChunkSpan<Datatype, DDomXY>;
 
-static std::size_t constexpr large_dim1_2D = 2000;
-static std::size_t constexpr large_dim2_2D = large_dim1_2D;
 
-static std::size_t constexpr large_dim1_1D = large_dim1_2D * large_dim1_2D;
+    // Let say 1MB cache
+    static std::size_t constexpr small_dim1_2D = 400;
+    static std::size_t constexpr small_dim2_2D = small_dim1_2D;
 
-} // namespace
+    static std::size_t constexpr small_dim1_1D = small_dim1_2D * small_dim1_2D;
+
+    static std::size_t constexpr large_dim1_2D = 2000;
+    static std::size_t constexpr large_dim2_2D = large_dim1_2D;
+
+    static std::size_t constexpr large_dim1_1D = large_dim1_2D * large_dim1_2D;
+
+} // namespace )
 
 
 static void memcpy_1d(benchmark::State& state)

@@ -610,8 +610,10 @@ ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C
     std::size_t constexpr nr = BSplinesR::degree() + 1;
     std::size_t constexpr np = BSplinesP::degree() + 1;
 
-    std::array<double, nr> vals_r;
-    std::array<double, np> vals_p;
+    std::array<double, nr> vals_r_ptr;
+    std::array<double, np> vals_p_ptr;
+    DSpan1D const vals_r(vals_r_ptr.data(), nr);
+    DSpan1D const vals_p(vals_p_ptr.data(), np);
 
     if constexpr (std::is_same_v<EvalTypeR, eval_type>) {
         jmin_r = ddc::discrete_space<BSplinesR>().eval_basis(vals_r, ddc::select<DimR>(coord_eval));

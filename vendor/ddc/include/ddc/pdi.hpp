@@ -14,6 +14,8 @@
 
 #include "ddc/chunk_traits.hpp"
 
+#include "chunk_span.hpp"
+
 namespace ddc {
 
 template <class T>
