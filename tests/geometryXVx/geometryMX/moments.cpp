@@ -116,6 +116,7 @@ TEST(GeometryXM, MomentsInitialization)
 
     ConstantFluidInitialization fluid_init(moments_init);
     fluid_init(neutrals);
+    Kokkos::DefaultExecutionSpace().fence();
 
     auto neutrals_host
             = ddc::create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), neutrals);
