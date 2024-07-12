@@ -12,10 +12,12 @@ jobs:
     -
       name: Env check
       run: |
+        source ~/.bash_profile
+        rm -rf build
         mkdir build
-        hostname
-        pwd
-        touch build/test.tx
+        hostname >build/hsotname.out
+        pwd > build/pwd.out
+        touch build/test.out
         module av gcc
         echo "Working?"
 
