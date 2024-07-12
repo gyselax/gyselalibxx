@@ -104,10 +104,11 @@ $(document).ready(function(){initNavTree('src_geometryXVx_geometryMX_reactionrat
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>The <code>reactionrates</code> folder contains all the code describing reactions within the <code>geometryMX</code> framework.</p>
-<p>The interface IReactionRates describes reaction rate that only depend on the temperature. Existing reaction rates that implements such interface are :</p><ul>
-<li>ConstantIonizationRate</li>
-<li>ConstantRecombinationRate</li>
-<li>ConstantChargeExchangeRate </li>
+<p>The interface IReactionRates describes reaction rate that depend on density and temperature. Existing reaction rates that implements such interface are:</p><ul>
+<li><a class="el" href="classConstantRate.html" title="A class that describes a reaction rate that is constant.">ConstantRate</a></li>
+<li>ChargeExchange</li>
+<li>Ionization</li>
+<li>Recombination </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
