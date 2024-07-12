@@ -308,60 +308,59 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keyword">using</span> <a class="code" href="structPolarSpline.html">SplinePolar</a> = <a class="code" href="structPolarSpline.html">PolarSpline&lt;PolarBSplinesRP&gt;</a>;</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="keyword">using</span> IDimBSpline2D = ddc::DiscreteElement&lt;BSplinesR, BSplinesP&gt;;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="keyword">using</span> IDimPolarBspl = ddc::DiscreteElement&lt;PolarBSplinesRP&gt;;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="keyword">using</span> IndexPolarBspl = ddc::DiscreteElement&lt;PolarBSplinesRP&gt;;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">// --- VectorField definitions</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorField.html">VectorDFieldRP</a> = <a class="code" href="classVectorField.html">VectorField&lt;double, IDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">// --- VectorField definitions</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorField.html">VectorDFieldRP</a> = <a class="code" href="classVectorField.html">VectorField&lt;double, IDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorFieldSpan.html">VectorDSpanRP</a> = <a class="code" href="classVectorFieldSpan.html">VectorFieldSpan&lt;double, IDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorFieldSpan.html">VectorDSpanRP</a> = <a class="code" href="classVectorFieldSpan.html">VectorFieldSpan&lt;double, IDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorFieldSpan.html">VectorDViewRP</a> = <a class="code" href="classVectorFieldSpan.html">VectorFieldView&lt;double, IDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorFieldSpan.html">VectorDViewRP</a> = <a class="code" href="classVectorFieldSpan.html">VectorFieldView&lt;double, IDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorField.html">VectorSpline2D</a> = <a class="code" href="classVectorField.html">VectorField&lt;double, BSDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorField.html">VectorSpline2D</a> = <a class="code" href="classVectorField.html">VectorField&lt;double, BSDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorFieldSpan.html">VectorSpline2DSpan</a> = <a class="code" href="classVectorFieldSpan.html">VectorFieldSpan&lt;double, BSDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorFieldSpan.html">VectorSpline2DSpan</a> = <a class="code" href="classVectorFieldSpan.html">VectorFieldSpan&lt;double, BSDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorFieldSpan.html">VectorSpline2DView</a> = <a class="code" href="classVectorFieldSpan.html">VectorFieldView&lt;double, BSDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="keyword">using</span> <a class="code" href="classVectorFieldSpan.html">VectorSpline2DView</a> = <a class="code" href="classVectorFieldSpan.html">VectorFieldView&lt;double, BSDomainRP, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">// CARTESIAN SPACE AND VELOCITY ------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">// --- Continuous dimensions</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="structRDimX.html">  278</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structRDimX.html">RDimX</a></div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;{</div>
-<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">  284</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;};</div>
-<div class="line"><a name="l00289"></a><span class="lineno"><a class="line" href="structRDimY.html">  289</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimY.html">RDimY</a></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;{</div>
-<div class="line"><a name="l00295"></a><span class="lineno"><a class="line" href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">  295</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;};</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno"><a class="line" href="structRDimVx.html">  301</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimVx.html">RDimVx</a></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;{</div>
-<div class="line"><a name="l00307"></a><span class="lineno"><a class="line" href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">  307</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;};</div>
-<div class="line"><a name="l00312"></a><span class="lineno"><a class="line" href="structRDimVy.html">  312</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimVy.html">RDimVy</a></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;{</div>
-<div class="line"><a name="l00318"></a><span class="lineno"><a class="line" href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">  318</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;};</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">// CARTESIAN SPACE AND VELOCITY ------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">// --- Continuous dimensions</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno"><a class="line" href="structRDimX.html">  273</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structRDimX.html">RDimX</a></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;{</div>
+<div class="line"><a name="l00279"></a><span class="lineno"><a class="line" href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">  279</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;};</div>
+<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="structRDimY.html">  284</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimY.html">RDimY</a></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;{</div>
+<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">  290</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;};</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno"><a class="line" href="structRDimVx.html">  296</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimVx.html">RDimVx</a></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;{</div>
+<div class="line"><a name="l00302"></a><span class="lineno"><a class="line" href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">  302</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;};</div>
+<div class="line"><a name="l00307"></a><span class="lineno"><a class="line" href="structRDimVy.html">  307</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structRDimVy.html">RDimVy</a></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;{</div>
+<div class="line"><a name="l00313"></a><span class="lineno"><a class="line" href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">  313</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;};</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="keyword">using</span> CoordX = ddc::Coordinate&lt;RDimX&gt;;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="keyword">using</span> CoordY = ddc::Coordinate&lt;RDimY&gt;;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keyword">using</span> CoordXY = ddc::Coordinate&lt;RDimX, RDimY&gt;;</div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="keyword">using</span> CoordX = ddc::Coordinate&lt;RDimX&gt;;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="keyword">using</span> CoordY = ddc::Coordinate&lt;RDimY&gt;;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="keyword">using</span> CoordXY = ddc::Coordinate&lt;RDimX, RDimY&gt;;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="keyword">using</span> CoordVx = ddc::Coordinate&lt;RDimVx&gt;;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="keyword">using</span> CoordVy = ddc::Coordinate&lt;RDimVy&gt;;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keyword">using</span> CoordVx = ddc::Coordinate&lt;RDimVx&gt;;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="keyword">using</span> CoordVy = ddc::Coordinate&lt;RDimVy&gt;;</div>
 <div class="ttc" id="aclassPolarBSplines_html"><div class="ttname"><a href="classPolarBSplines.html">PolarBSplines</a></div><div class="ttdoc">A class containing all information describing polar bsplines.</div><div class="ttdef"><b>Definition:</b> polar_bsplines.hpp:28</div></div>
 <div class="ttc" id="aclassVectorFieldSpan_html"><div class="ttname"><a href="classVectorFieldSpan.html">VectorFieldSpan</a></div><div class="ttdoc">Pre-declaration of VectorFieldSpan.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:45</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">Pre-declaration of VectorField.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:34</div></div>
@@ -379,14 +378,14 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="ttc" id="astructRDimVp_html_ab8adf3e4980f2cf15945ad3602d41091"><div class="ttname"><a href="structRDimVp.html#ab8adf3e4980f2cf15945ad3602d41091">RDimVp::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:67</div></div>
 <div class="ttc" id="astructRDimVr_html"><div class="ttname"><a href="structRDimVr.html">RDimVr</a></div><div class="ttdoc">Define non periodic real R velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:51</div></div>
 <div class="ttc" id="astructRDimVr_html_a1e8890fa598572b69d07d3869c5f5e09"><div class="ttname"><a href="structRDimVr.html#a1e8890fa598572b69d07d3869c5f5e09">RDimVr::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:56</div></div>
-<div class="ttc" id="astructRDimVx_html"><div class="ttname"><a href="structRDimVx.html">RDimVx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:302</div></div>
-<div class="ttc" id="astructRDimVx_html_a11bf97b66f066f6e9b062e8742f6cc78"><div class="ttname"><a href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">RDimVx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:307</div></div>
-<div class="ttc" id="astructRDimVy_html"><div class="ttname"><a href="structRDimVy.html">RDimVy</a></div><div class="ttdoc">Define non periodic real Y velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:313</div></div>
-<div class="ttc" id="astructRDimVy_html_ac3acad5786a7c7b748997dba2c7dbcdd"><div class="ttname"><a href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">RDimVy::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:318</div></div>
-<div class="ttc" id="astructRDimX_html"><div class="ttname"><a href="structRDimX.html">RDimX</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:279</div></div>
-<div class="ttc" id="astructRDimX_html_a8cb720efb33235cee3371843279ea9ab"><div class="ttname"><a href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">RDimX::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:284</div></div>
-<div class="ttc" id="astructRDimY_html"><div class="ttname"><a href="structRDimY.html">RDimY</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:290</div></div>
-<div class="ttc" id="astructRDimY_html_a48a27c572829350ae0f5b47bf6e13f74"><div class="ttname"><a href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">RDimY::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:295</div></div>
+<div class="ttc" id="astructRDimVx_html"><div class="ttname"><a href="structRDimVx.html">RDimVx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:297</div></div>
+<div class="ttc" id="astructRDimVx_html_a11bf97b66f066f6e9b062e8742f6cc78"><div class="ttname"><a href="structRDimVx.html#a11bf97b66f066f6e9b062e8742f6cc78">RDimVx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:302</div></div>
+<div class="ttc" id="astructRDimVy_html"><div class="ttname"><a href="structRDimVy.html">RDimVy</a></div><div class="ttdoc">Define non periodic real Y velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:308</div></div>
+<div class="ttc" id="astructRDimVy_html_ac3acad5786a7c7b748997dba2c7dbcdd"><div class="ttname"><a href="structRDimVy.html#ac3acad5786a7c7b748997dba2c7dbcdd">RDimVy::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:313</div></div>
+<div class="ttc" id="astructRDimX_html"><div class="ttname"><a href="structRDimX.html">RDimX</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:274</div></div>
+<div class="ttc" id="astructRDimX_html_a8cb720efb33235cee3371843279ea9ab"><div class="ttname"><a href="structRDimX.html#a8cb720efb33235cee3371843279ea9ab">RDimX::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:279</div></div>
+<div class="ttc" id="astructRDimY_html"><div class="ttname"><a href="structRDimY.html">RDimY</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:285</div></div>
+<div class="ttc" id="astructRDimY_html_a48a27c572829350ae0f5b47bf6e13f74"><div class="ttname"><a href="structRDimY.html#a48a27c572829350ae0f5b47bf6e13f74">RDimY::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:290</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
