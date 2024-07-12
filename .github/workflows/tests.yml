@@ -18,7 +18,7 @@ jobs:
         hostname >build/hsotname.out
         pwd > build/pwd.out
         touch build/test.out
-        module av gcc
+        module av gcc >build/module_av.out
         echo "Working?"
 
   docker:
