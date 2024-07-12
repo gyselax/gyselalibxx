@@ -237,14 +237,9 @@ using Spline2DView = ddc::ChunkSpan<double const, BSDomainRP>;
 using SplinePolar = PolarSpline<PolarBSplinesRP>;
 
 /**
- * @brief Tag type of an element of a couple of a B-splines in the first
- * dimension and in the second dimension.
+ * @brief Type of the index of an element of polar B-splines.
  */
-using IDimBSpline2D = ddc::DiscreteElement<BSplinesR, BSplinesP>;
-/**
- * @brief Tag type of an element of polar B-splines.
- */
-using IDimPolarBspl = ddc::DiscreteElement<PolarBSplinesRP>;
+using IndexPolarBspl = ddc::DiscreteElement<PolarBSplinesRP>;
 
 
 // --- VectorField definitions

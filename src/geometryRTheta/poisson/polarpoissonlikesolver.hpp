@@ -395,8 +395,8 @@ public:
         std::vector<MatrixElement> matrix_elements(n_matrix_elements);
         int matrix_idx(0);
         // Calculate the matrix elements corresponding to the bsplines which cover the singular point
-        ddc::for_each(singular_domain, [&](IDimPolarBspl const idx_test) {
-            ddc::for_each(singular_domain, [&](IDimPolarBspl const idx_trial) {
+        ddc::for_each(singular_domain, [&](IndexPolarBspl const idx_test) {
+            ddc::for_each(singular_domain, [&](IndexPolarBspl const idx_trial) {
                 // Calculate the weak integral
                 matrix_elements[matrix_idx++] = MatrixElement(
                         idx_test.uid(),
@@ -429,11 +429,11 @@ public:
         BSDomainRP non_singular_domain_near_centre(central_radial_bspline_domain, polar_bsplines);
 
         // Calculate the matrix elements where bspline products overlap the bsplines which cover the singular point
-        ddc::for_each(singular_domain, [&](IDimPolarBspl const idx_test) {
+        ddc::for_each(singular_domain, [&](IndexPolarBspl const idx_test) {
             ddc::for_each(
                     non_singular_domain_near_centre,
                     [&](IDimBSpline2D_Polar const idx_trial) {
-                        const IDimPolarBspl polar_idx_trial(
+                        const IndexPolarBspl polar_idx_trial(
                                 PolarBSplinesRP::get_polar_index<PolarBSplinesRP>(idx_trial));
                         const ddc::DiscreteElement<BSplinesR_Polar> r_idx_trial(
                                 ddc::select<BSplinesR_Polar>(idx_trial));
@@ -509,7 +509,7 @@ public:
         assert(matrix_idx == n_elements_singular + n_elements_overlap);
 
         // Calculate the matrix elements following a stencil
-        ddc::for_each(fem_non_singular_domain, [&](IDimPolarBspl const polar_idx_test) {
+        ddc::for_each(fem_non_singular_domain, [&](IndexPolarBspl const polar_idx_test) {
             const IDimBSpline2D_Polar idx_test(PolarBSplinesRP::get_2d_index(polar_idx_test));
             const std::size_t r_idx_test(
                     ddc::select<PolarBSplinesRP::BSplinesR_tag>(idx_test).uid());
@@ -523,7 +523,7 @@ public:
             ddc::for_each(remaining_p, [&](auto const p_idx_trial) {
                 IDimBSpline2D_Polar
                         idx_trial(ddc::DiscreteElement<BSplinesR_Polar>(r_idx_test), p_idx_trial);
-                IDimPolarBspl polar_idx_trial(PolarBSplinesRP::get_polar_index<PolarBSplinesRP>(
+                IndexPolarBspl polar_idx_trial(PolarBSplinesRP::get_polar_index<PolarBSplinesRP>(
                         IDimBSpline2D_Polar(r_idx_test, pmod(p_idx_trial.uid()))));
                 double element = get_matrix_stencil_element(
                         idx_test,
@@ -559,7 +559,7 @@ public:
             ddc::for_each(trial_domain, [&](IDimBSpline2D_Polar const idx_trial) {
                 const int r_idx_trial(ddc::select<PolarBSplinesRP::BSplinesR_tag>(idx_trial).uid());
                 const int p_idx_trial(ddc::select<PolarBSplinesRP::BSplinesP_tag>(idx_trial).uid());
-                IDimPolarBspl polar_idx_trial(PolarBSplinesRP::get_polar_index<PolarBSplinesRP>(
+                IndexPolarBspl polar_idx_trial(PolarBSplinesRP::get_polar_index<PolarBSplinesRP>(
                         IDimBSpline2D_Polar(r_idx_trial, pmod(p_idx_trial))));
                 double element = get_matrix_stencil_element(
                         idx_test,
@@ -608,7 +608,7 @@ public:
         // Fill b
         ddc::for_each(
                 PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
-                [&](IDimPolarBspl const idx) {
+                [&](IndexPolarBspl const idx) {
                     b(idx.uid()) = ddc::transform_reduce(
                             quadrature_domain_singular,
                             0.0,
@@ -623,7 +623,7 @@ public:
                             });
                 });
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR_Polar>().ncells();
-        ddc::for_each(fem_non_singular_domain, [&](IDimPolarBspl const idx) {
+        ddc::for_each(fem_non_singular_domain, [&](IndexPolarBspl const idx) {
             const IDimBSpline2D_Polar idx_2d(PolarBSplinesRP::get_2d_index(idx));
             const std::size_t r_idx(ddc::select<PolarBSplinesRP::BSplinesR_tag>(idx_2d).uid());
             const std::size_t p_idx(ddc::select<PolarBSplinesRP::BSplinesP_tag>(idx_2d).uid());
@@ -687,8 +687,8 @@ public:
         // Fill the spline
         ddc::for_each(
                 PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
-                [&](IDimPolarBspl const idx) { spline.singular_spline_coef(idx) = x(idx.uid()); });
-        ddc::for_each(fem_non_singular_domain, [&](IDimPolarBspl const idx) {
+                [&](IndexPolarBspl const idx) { spline.singular_spline_coef(idx) = x(idx.uid()); });
+        ddc::for_each(fem_non_singular_domain, [&](IndexPolarBspl const idx) {
             const IDimBSpline2D_Polar idx_2d(PolarBSplinesRP::get_2d_index(idx));
             spline.spline_coef(idx_2d) = x(idx.uid());
         });
