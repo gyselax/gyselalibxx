@@ -43,11 +43,29 @@ metadata:
     size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]' ]
   collintra_nustar0 : double
   collinter_nustar0 : double
-  charge_exchange : double
-  ionization : double
-  recombination : double
   neutrals_temperature : double
   normalization_coeff_neutrals : double
+  norm_coeff_rate_neutrals : double
+  charge_exchange_coefficients:
+    type: array
+    subtype: double
+    size: [ 5 ]
+  ionization_slope_coefficients:
+    type: array
+    subtype: double
+    size: [ 6 ]
+  ionization_intercept_coefficients:
+    type: array
+    subtype: double
+    size: [ 6 ]
+  recombination_slope_coefficients:
+    type: array
+    subtype: double
+    size: [ 2 ]
+  recombination_intercept_coefficients:
+    type: array
+    subtype: double
+    size: [ 2 ]
 
   krook_sink_adaptive_extent : double
   krook_sink_adaptive_stiffness : double
@@ -128,8 +146,26 @@ plugins:
       - release: [iter_saved]
   decl_hdf5:
     - file: 'VOICEXX_initstate.h5'
-      on_event: [initial_state]
+      on_event: [cx_rate_coeff_pol_expose]
       collision_policy: replace_and_warn
+      write:
+        - charge_exchange_coefficients
+    - file: 'VOICEXX_initstate.h5'
+      on_event: [i_rate_coeff_pol_expose]
+      collision_policy: write_into
+      write:
+        - ionization_slope_coefficients
+        - ionization_intercept_coefficients
+    - file: 'VOICEXX_initstate.h5'
+      on_event: [r_rate_coeff_pol_expose]
+      collision_policy: write_into
+      write:
+        - recombination_slope_coefficients
+        - recombination_intercept_coefficients
+
+    - file: 'VOICEXX_initstate.h5'
+      on_event: [initial_state]
+      collision_policy: write_into
       write:
         - Nx_spline_cells
         - Nvx_spline_cells
@@ -139,11 +175,10 @@ plugins:
         - nbstep_diag
         - collintra_nustar0
         - collinter_nustar0
-        - charge_exchange
-        - ionization
-        - recombination
         - neutrals_temperature
         - normalization_coeff_neutrals
+        - norm_coeff_rate_neutrals
+
         - Nkinspecies
         - fdistribu_charges
         - fdistribu_masses
@@ -174,6 +209,7 @@ plugins:
         - kinetic_source_temperature
         - kinetic_source_velocity_shape
         - kinetic_source_spatial_extent
+
 
     - file: 'VOICEXX_${iter_saved:05}.h5'
       on_event: [iteration, last_iteration]

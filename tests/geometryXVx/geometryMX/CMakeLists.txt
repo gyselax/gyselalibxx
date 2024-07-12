@@ -11,6 +11,7 @@ add_executable(unit_tests_geometryMX_${GEOMETRY_VARIANT}
     moments.cpp
     predcorr_hybrid.cpp
     diffusiveneutrals.cpp
+    ratecoefficients.cpp
 )
 
 target_link_libraries(unit_tests_geometryMX_${GEOMETRY_VARIANT}

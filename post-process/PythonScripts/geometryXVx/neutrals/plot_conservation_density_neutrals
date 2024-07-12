@@ -15,7 +15,8 @@ import matplotlib.pyplot as plt
 from gysdata import DiskStore
 from plot_utils import plot_field1d, plot_field2d
 from math_utils import compute_moment, differentiate
-from geometryXVx.utils import compute_fluid_velocity
+from neutrals_utils import get_charge_exchange_rate, get_ionization_rate, get_recombination_rate
+from geometryXVx.utils import compute_fluid_velocity, compute_temperature
 
 if __name__ == '__main__':
     parser = ArgumentParser(
@@ -51,10 +52,7 @@ if __name__ == '__main__':
     current_nspecies = 'neutrals'
     m_n = neutrals_masses.sel(speciesn=current_nspecies)
 
-    # Ionization rates and temperature. Taken from neutrals.cpp as cte.
-    k_cx = ds['charge_exchange']
-    k_i = ds['ionization']
-    k_r = ds['recombination']
+    # Neutral temperature and normalization coefficients.
     T_n = ds['neutrals_temperature']
     alpha_0 = ds['normalization_coeff_neutrals']
 
@@ -66,10 +64,17 @@ if __name__ == '__main__':
     # electron-ion densities
     densities = compute_moment(fdistribu, 'v_x', moment_order=0)
     particle_flux = compute_moment(fdistribu, 'v_x', moment_order=1)
+    momentum_flux = compute_moment(fdistribu, 'v_x', moment_order=2)
     densities = densities.chunk({'time': len(densities['time'])})
     density_e = densities.sel(species='electrons')
     density_i = densities.sel(species='ions')
     fluid_velocity_i = compute_fluid_velocity(density_i, particle_flux.sel(species='ions'))
+
+    # Computation of the reaction rates using the same polynomials as in cpp or if not available using the constant rates.
+    plasma_temperature = compute_temperature(densities, particle_flux, momentum_flux)
+    k_cx = get_charge_exchange_rate(ds, plasma_temperature.sel(species='ions'))
+    k_i = get_ionization_rate(ds, plasma_temperature.sel(species='electrons'), density_e)
+    k_r = get_recombination_rate(ds, plasma_temperature.sel(species='electrons'), density_e)
 
     # First term
     dn_dt = differentiate(density_n, 'time')
