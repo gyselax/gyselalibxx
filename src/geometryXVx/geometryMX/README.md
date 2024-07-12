@@ -4,4 +4,4 @@ The `geometryMX` folder contains all the code describing methods which are speci
 
 - [fluidinitialization](./fluidinitialization/README.md) : Initialization methods for fluid species. 
 - [fluidsolver](./fluidsolver/README.md) : Solver for fluid models. 
-- [reactionrates](./reactionrates/README.md)
+- [reactionrates](./reactionrates/README.md) : Reaction rate calculations.

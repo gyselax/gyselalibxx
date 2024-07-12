@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <sll/view.hpp>
+
 #include <geometry.hpp>
 
 /**

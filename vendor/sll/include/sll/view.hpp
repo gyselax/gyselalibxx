@@ -6,6 +6,8 @@
 
 #include <experimental/mdspan>
 
+#include <Kokkos_Core.hpp>
+
 namespace detail {
 
 template <std::size_t N, class ElementType, bool CONTIGUOUS = true>
@@ -105,6 +107,12 @@ using View1D = ViewND<1, ElementType>;
 
 template <class ElementType>
 using View2D = ViewND<2, ElementType>;
+
+template <std::size_t N>
+using DKokkosView = Kokkos::View<double[N]>;
+
+template <std::size_t N>
+using DKokkosView_h = Kokkos::View<double[N], Kokkos::HostSpace>;
 
 template <class ElementType, std::size_t N>
 Span1D<ElementType> as_span(std::array<ElementType, N>& arr) noexcept
