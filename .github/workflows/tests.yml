@@ -1,123 +1,87 @@
-name: docker
+name: Acceptance tests
 
 on:
-  push:
-    branches:
-    - 'main'
-  pull_request: 
+  pull_request:
+    branch: [ 'main' ]
+
 jobs:
   docker:
-    runs-on: ubuntu-latest
-    steps:
-    -
-      name: Checkout
-      uses: actions/checkout@v3
-    -
-      name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
-    -
-      name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    -
-      name: Login to GitHub Container Registry
-      uses: docker/login-action@v2
-      with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    -
-      name: Build and push to tag
-      uses: docker/build-push-action@v3
-      with:
-        context: ./docker/gyselalibxx_env
-        cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
-        pull: true
-        push: true
-        tags: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
-    -
-      name: Build and push latest
-      if: github.event_name == 'push' && github.ref_name == 'main'
-      uses: docker/build-push-action@v3
-      with:
-        context: ./docker/gyselalibxx_env
-        cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
-        pull: true
-        push: true
-        tags: ghcr.io/gyselax/gyselalibxx_env:latest
+    if: github.repository == 'gyselax/gyselalibxx'
+    uses: .github/workflows/docker.yml
+    with:
+      SHA: ${{ github.sha }}
+      update_latest: true
+    secrets: inherit
 
-  tests:
+          - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            sll:
+              - 'vendor/sll/**'
+            poisson_2d:
+              - 'src/geometryRTheta/poisson/**'
+          base: ${{ inputs.filter_tests_base }}
+      - name: 'Setup'
+        run: |
+          if [ -z "${{ inputs.filter_tests_base }}" ]
+          then
+            echo "SLL_BUILD_TESTING=ON" >> $GITHUB_ENV
+            echo "POISSON_2D_TESTING=ON" >> $GITHUB_ENV
+          else
+            echo "SLL_BUILD_TESTING=${{ steps.changes.outputs.sll }}" >> $GITHUB_ENV
+            echo "POISSON_2D_TESTING=${{ steps.changes.outputs.poisson_2d }}" >> $GITHUB_ENV
+          fi
+        shell: bash
+
+
+  cpu_tests:
     runs-on: ubuntu-latest
     needs: docker
     container:
       image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
       options: --user root
+    strategy:
+      matrix:
+        toolchain: [tests_toolchain.cmake, tests_release_toolchain.cmake, tests_release_omp_toolchain.cmake]
     steps:
-    - 
-      name: Checkout gyselalibxx
-      uses: actions/checkout@v3
+    - name: Checkout gyselalibxx
+      uses: actions/checkout@v4
       with: { submodules: recursive }
-    - 
-      name: Run tests
+    - name: "Filter tests"
+      uses: ./github/actions/test_filter
+    - name: Run tests
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
-        make -j 2 VERBOSE=1
-        ctest --output-on-failure --timeout 5 -LE test_on_Release_only
+        cmake -DCMAKE_TOOLCHAIN=../toolchains/docker.gyselalibxx_env/${{ matrix.toolchain }} ..
+        cmake --build .
+        ctest -j 2 --timeout 5 --output-junit tests.xml
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v4
+      if: success() || failure() # always run even if the previous step fails
+      with:
+        report_paths: './build/test.xml'
 
-  tests_Release:
-    runs-on: ubuntu-latest
-    needs: docker
-    container:
-      image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
-      options: --user root
+  gpu_tests:
+    runs-on: self-hosted
+￼   environment: development
     steps:
-    - 
-      name: Checkout gyselalibxx
-      uses: actions/checkout@v3
+    - name: Checkout gyselalibxx
+      uses: actions/checkout@v4
       with: { submodules: recursive }
-    - 
-      name: Run tests
+    - name: "Filter tests"
+      uses: ./github/actions/test_filter
+    - name: Run tests
       run: |
+        . toolchains/v100.persee/environment.sh
         mkdir build
         cd build
-        cmake -DCMAKE_CXX_FLAGS=-Wall -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_3=OFF -DKokkos_ENABLE_DEPRECATION_WARNINGS=OFF ..
-        make -j 2 VERBOSE=1
-        ctest --output-on-failure --timeout 5
-
-  Docs:
-    if: github.event_name == 'push' && github.ref_name == 'main'
-    needs: docker
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          path: code_branch
-      - name: Checkout documentation
-        uses: actions/checkout@v3
-        with:
-          ref: documentation
-          path: doc_branch
-      - name: Install doxygen
-        run: |
-          sudo apt install doxygen
-        shell: bash
-      - name: Generate docs
-        run: |
-          cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DBUILD_DOCUMENTATION=1 -B build-docs code_branch
-          cmake --build build-docs
-        shell: bash
-      - name: Update documentation
-        run: |
-          cd doc_branch
-          git rm -r *
-          cp -r ../build-docs/docs/html/* .
-          git add .
-          git config --global user.name "GitHub CI Documentation builder"
-          git config --global user.email "username@users.noreply.github.com"
-          git commit -m "Update docs" || true
-          git push
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
+        cmake -DCMAKE_TOOLCHAIN=../toolchains/v100.persee/toolchain.cmake ..
+        cmake --build .
+        ctest -j 2 --timeout 5 --output-junit tests.xml
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v4
+      if: success() || failure() # always run even if the previous step fails
+      with:
+        report_paths: './build/test.xml'
