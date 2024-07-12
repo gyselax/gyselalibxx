@@ -20,10 +20,13 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
+#include "charge_exchange.hpp"
 #include "collisions_intra.hpp"
 #include "constantfluidinitialization.hpp"
 #include "constantrate.hpp"
 #include "diffusiveneutralsolver.hpp"
+#include "ionization.hpp"
+#include "recombination.hpp"
 #ifdef PERIODIC_RDIMX
 #include "femperiodicqnsolver.hpp"
 #else
@@ -252,15 +255,14 @@ int main(int argc, char** argv)
     FemNonPeriodicQNSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 #endif
 
-    double const charge_exchange_val(1.);
-    double const ionization_val(1.e-6);
-    double const recombination_val(1.e-7);
-    ConstantRate charge_exchange(charge_exchange_val);
-    ConstantRate ionization(ionization_val);
-    ConstantRate recombination(recombination_val);
-
     double const neutrals_temperature(1.);
     double const normalization_coeff(0.01);
+    double const norm_coeff_rate(1.e-3);
+
+    // The CX coefficient needs to be first constructed in order to write a correct initstate file. Check pdi_out_neutrals.yml.hpp for a closer look.
+    ChargeExchangeRate charge_exchange(norm_coeff_rate);
+    IonizationRate ionization(norm_coeff_rate);
+    RecombinationRate recombination(norm_coeff_rate);
 
     SplineXBuilder_1d const spline_x_builder_neutrals(mesh_x);
     SplineXEvaluator_1d const spline_x_evaluator_neutrals(bv_x_min, bv_x_max);
@@ -294,10 +296,8 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
     ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[dom_kinsp]);
     ddc::expose_to_pdi("neutrals_masses", ddc::discrete_space<IDimSp>().masses()[dom_fluidsp]);
-    ddc::expose_to_pdi("charge_exchange", charge_exchange_val);
-    ddc::expose_to_pdi("ionization", ionization_val);
-    ddc::expose_to_pdi("recombination", recombination_val);
     ddc::expose_to_pdi("normalization_coeff_neutrals", normalization_coeff);
+    ddc::expose_to_pdi("norm_coeff_rate_neutrals", norm_coeff_rate);
     ddc::expose_to_pdi("neutrals_temperature", neutrals_temperature);
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
 
