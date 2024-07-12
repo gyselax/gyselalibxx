@@ -6,6 +6,19 @@ on:
     - 'main'
   pull_request: 
 jobs:
+  persee:
+    runs-on: self-hosted
+    steps:
+    -
+      name: Env check
+      run: |
+        mkdir build
+        hostname
+        pwd
+        touch build/test.tx
+        module av gcc
+        echo "Working?"
+
   docker:
     runs-on: ubuntu-latest
     steps:
