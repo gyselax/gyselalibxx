@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+This script plots the distribution function for different species for initial and final times.
+"""
+
 # SPDX-License-Identifier: MIT
 
 import os
@@ -38,7 +42,7 @@ if __name__ == '__main__':
         for species in ['ions', 'electrons']:
             for time in [time_init, time_diag]:
                 output_filename = os.path.join(Path.cwd(), f'fdistribu_xv_{species}_t{time}_{scale}.png')
-                plot_field2d(data.sel(time=time_diag, species=species).T,
+                plot_field2d(data.sel(time=time, species=species).T,
                              f'fdistribu {species} t={time}',
                              output_filename,
                              cmap='viridis',
