@@ -8,6 +8,7 @@ on:
 jobs:
   persee:
     runs-on: self-hosted
+    environment: development
     steps:
     -
       name: Env check
@@ -18,7 +19,7 @@ jobs:
         hostname >build/hsotname.out
         pwd > build/pwd.out
         touch build/test.out
-        module av gcc >build/module_av.out
+        module av gcc 
         echo "Working?"
 
   docker:
