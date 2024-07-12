@@ -6,6 +6,22 @@ on:
     - 'main'
   pull_request: 
 jobs:
+  persee:
+    runs-on: self-hosted
+    environment: development
+    steps:
+    -
+      name: Env check
+      run: |
+        source ~/.bash_profile
+        rm -rf build
+        mkdir build
+        hostname >build/hsotname.out
+        pwd > build/pwd.out
+        touch build/test.out
+        module av gcc 
+        echo "Working?"
+
   docker:
     runs-on: ubuntu-latest
     steps:
