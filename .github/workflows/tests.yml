@@ -10,14 +10,14 @@ jobs:
       matrix:
         toolchain: [tests_toolchain.cmake, tests_release_toolchain.cmake, tests_release_omp_toolchain.cmake]
     name: CPU Test (${{ matrix.toolchain }})
-    uses: ./github/workflows/cpu_tests.yml
+    uses: ./.github/workflows/cpu_tests.yml
     with:
       toolchain: ${{ matrix.toolchain }}
       merge_target: ${{ github.event.pull_request.base.ref }}
 
   gpu_tests:
     name: GPU Test (${{ matrix.toolchain }})
-    uses: ./github/workflows/gpu_tests.yml
+    uses: ./.github/workflows/gpu_tests.yml
     with:
       toolchain: ./toolchains/v100.persee/toolchain.cmake
       merge_target: ${{ github.event.pull_request.base.ref }}
