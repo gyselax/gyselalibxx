@@ -27,7 +27,7 @@ on:
 jobs:
   gpu_tests:
     runs-on: self-hosted
-￼   environment: development
+    environment: development
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
