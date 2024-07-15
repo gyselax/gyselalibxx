@@ -8,11 +8,37 @@ push:
 jobs:
   docker:
     if: github.repository == 'gyselax/gyselalibxx'
-    uses: .github/workflows/docker.yml
-    with:
-      SHA: ${{ github.sha }}
-      update_latest: true
-    secrets: inherit
+    runs-on: ubuntu-latest
+    if: github.repository == 'gyselax/gyselalibxx'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push to tag
+        uses: docker/build-push-action@v3
+        with:
+          context: ./docker/gyselalibxx_env
+          cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
+          pull: true
+          push: true
+          tags: ghcr.io/gyselax/gyselalibxx_env:${{ inputs.SHA }}
+      - name: Build and push latest
+        uses: docker/build-push-action@v3
+        with:
+          context: ./docker/gyselalibxx_env
+          cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
+          pull: true
+          push: true
+          tags: ghcr.io/gyselax/gyselalibxx_env:latest
 
   Docs:
     needs: docker

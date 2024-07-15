@@ -29,22 +29,22 @@ jobs:
     runs-on: self-hosted
 ￼   environment: development
     steps:
-    - name: Checkout gyselalibxx
-      uses: actions/checkout@v4
-      with: { submodules: recursive }
-    - name: "Filter tests"
-      uses: ./github/actions/test_filter
-      with:
-        base: ${{ inputs.merge_target }}
-        trigger_type: ${{ github.event_name }}
-    - name: Setup environment
-      run: |
-        . toolchains/v100.persee/environment.sh
-    - name: Build code
-      uses: ./github/actions/build_code
-      with:
-        toolchain: toolchains/v100.persee/toolchain.cmake
-    - name: Run tests
-      uses: ./github/actions/run_tests
-    - name: Resource conservation
-
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v4
+        with: { submodules: recursive }
+      - name: "Filter tests"
+        uses: ./github/actions/test_filter
+        with:
+          base: ${{ inputs.merge_target }}
+          trigger_type: ${{ github.event_name }}
+      - name: Setup environment
+        run: |
+          . toolchains/v100.persee/environment.sh
+      - name: Build code
+        uses: ./github/actions/build_code
+        with:
+          toolchain: toolchains/v100.persee/toolchain.cmake
+      - name: Run tests
+        uses: ./github/actions/run_tests
+      - name: Resource conservation
+  

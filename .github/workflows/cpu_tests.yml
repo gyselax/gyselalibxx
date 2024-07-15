@@ -33,17 +33,17 @@ jobs:
       options: --user root
     name: CPU Test (${{ inputs.toolchain }})
     steps:
-    - name: Checkout gyselalibxx
-      uses: actions/checkout@v4
-      with: { submodules: recursive }
-    - name: "Filter tests"
-      uses: ./github/actions/test_filter
-      with:
-        base_sha: ${{ inputs.merge_target }}
-        trigger_type: ${{ github.event_name }}
-    - name: Build code
-      uses: ./github/actions/build_code
-      with:
-        toolchain: ${{ inputs.toolchain }}
-    - name: Run tests
-      uses: ./github/actions/run_tests
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v4
+        with: { submodules: recursive }
+      - name: "Filter tests"
+        uses: ./github/actions/test_filter
+        with:
+          base_sha: ${{ inputs.merge_target }}
+          trigger_type: ${{ github.event_name }}
+      - name: Build code
+        uses: ./github/actions/build_code
+        with:
+          toolchain: ${{ inputs.toolchain }}
+      - name: Run tests
+        uses: ./github/actions/run_tests
