@@ -1,0 +1,18 @@
+name: "Build code"
+
+inputs:
+  toolchain:
+    description: "The toolchain that describes the parameters for cmake"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Compile code
+      run: |
+        mkdir build
+        cd build
+        cmake -DCMAKE_TOOLCHAIN=../toolchains/docker.gyselalibxx_env/${{ matrix.toolchain }} ..
+        cmake --build .
+      shell: bash
+

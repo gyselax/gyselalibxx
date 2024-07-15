@@ -1,0 +1,49 @@
+name: CPU acceptance tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      toolchain:
+        description: "Tool chain to use for test"
+        required: true
+        type: choice
+        options:
+          - tests_toolchain.cmake
+          - tests_release_toolchain.cmake
+          - tests_release_omp_toolchain.cmake
+      merge_target:
+        description: "The branch to which this branch should be compared to filter out costly tests (default: main)"
+        required: false
+        default: main
+  workflow_call:
+    inputs:
+      toolchain:
+        description: "Tool chain to use for test"
+        required: true
+      merge_target:
+        description: "The branch to which this branch should be compared to filter out costly tests (default: main)"
+        required: true
+
+jobs:
+  cpu_tests:
+    runs-on: ubuntu-latest
+    needs: docker
+    container:
+      image: ghcr.io/gyselax/gyselalibxx_env:latest
+      options: --user root
+    name: CPU Test (${{ inputs.toolchain }})
+    steps:
+    - name: Checkout gyselalibxx
+      uses: actions/checkout@v4
+      with: { submodules: recursive }
+    - name: "Filter tests"
+      uses: ./github/actions/test_filter
+      with:
+        base_sha: ${{ inputs.merge_target }}
+        trigger_type: ${{ github.event_name }}
+    - name: Build code
+      uses: ./github/actions/build_code
+      with:
+        toolchain: ${{ inputs.toolchain }}
+    - name: Run tests
+      uses: ./github/actions/run_tests

@@ -1,0 +1,50 @@
+name: GPU acceptance tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      toolchain:
+        description: "Tool chain to use for test"
+        required: true
+        type: choice
+        options:
+          - tests_toolchain.cmake
+          - tests_release_toolchain.cmake
+          - tests_release_omp_toolchain.cmake
+      merge_target:
+        description: "The branch to which this branch should be compared to filter out costly tests (default: main)"
+        required: false
+        default: main
+  workflow_call:
+    inputs:
+      toolchain:
+        description: "Tool chain to use for test"
+        required: true
+      merge_target:
+        description: "The branch to which this branch should be compared to filter out costly tests (default: main)"
+        required: true
+
+jobs:
+  gpu_tests:
+    runs-on: self-hosted
+￼   environment: development
+    steps:
+    - name: Checkout gyselalibxx
+      uses: actions/checkout@v4
+      with: { submodules: recursive }
+    - name: "Filter tests"
+      uses: ./github/actions/test_filter
+      with:
+        base: ${{ inputs.merge_target }}
+        trigger_type: ${{ github.event_name }}
+    - name: Setup environment
+      run: |
+        . toolchains/v100.persee/environment.sh
+    - name: Build code
+      uses: ./github/actions/build_code
+      with:
+        toolchain: toolchains/v100.persee/toolchain.cmake
+    - name: Run tests
+      uses: ./github/actions/run_tests
+    - name: Resource conservation
+
