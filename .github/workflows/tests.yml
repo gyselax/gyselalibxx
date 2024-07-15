@@ -13,28 +13,6 @@ jobs:
       update_latest: true
     secrets: inherit
 
-          - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            sll:
-              - 'vendor/sll/**'
-            poisson_2d:
-              - 'src/geometryRTheta/poisson/**'
-          base: ${{ inputs.filter_tests_base }}
-      - name: 'Setup'
-        run: |
-          if [ -z "${{ inputs.filter_tests_base }}" ]
-          then
-            echo "SLL_BUILD_TESTING=ON" >> $GITHUB_ENV
-            echo "POISSON_2D_TESTING=ON" >> $GITHUB_ENV
-          else
-            echo "SLL_BUILD_TESTING=${{ steps.changes.outputs.sll }}" >> $GITHUB_ENV
-            echo "POISSON_2D_TESTING=${{ steps.changes.outputs.poisson_2d }}" >> $GITHUB_ENV
-          fi
-        shell: bash
-
-
   cpu_tests:
     runs-on: ubuntu-latest
     needs: docker
