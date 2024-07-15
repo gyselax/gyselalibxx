@@ -46,5 +46,3 @@ jobs:
           toolchain: toolchains/v100.persee/toolchain.cmake
       - name: Run tests
         uses: ./github/actions/run_tests
-      - name: Resource conservation
-  
