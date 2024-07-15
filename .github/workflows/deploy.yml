@@ -9,7 +9,6 @@ jobs:
   docker:
     if: github.repository == 'gyselax/gyselalibxx'
     runs-on: ubuntu-latest
-    if: github.repository == 'gyselax/gyselalibxx'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
