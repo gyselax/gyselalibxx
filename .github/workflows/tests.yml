@@ -40,6 +40,10 @@ jobs:
       if: success() || failure() # always run even if the previous step fails
       with:
         report_paths: './build/test.xml'
+    - name: Resource conservation
+      if: failure()
+      run: |
+        gh pr ready ${{ github.event.pull_request.number }} --undo
 
   gpu_tests:
     runs-on: self-hosted
@@ -63,3 +67,7 @@ jobs:
       if: success() || failure() # always run even if the previous step fails
       with:
         report_paths: './build/test.xml'
+    - name: Resource conservation
+      if: failure()
+      run: |
+        gh pr ready ${{ github.event.pull_request.number }} --undo
