@@ -23,6 +23,7 @@ jobs:
       merge_target: ${{ github.event.pull_request.base.ref }}
 
   resource_conservation:
+    runs-on: ubuntu-latest
     needs: [cpu_tests, gpu_tests]
     if: failure()
     steps:
