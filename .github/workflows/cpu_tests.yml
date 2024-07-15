@@ -35,7 +35,8 @@ jobs:
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
-        with: { submodules: recursive }
+        with:
+          submodules: recursive
       - name: "Filter tests"
         uses: ./github/actions/test_filter
         with:

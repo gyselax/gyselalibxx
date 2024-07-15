@@ -31,7 +31,8 @@ jobs:
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
-        with: { submodules: recursive }
+        with:
+          submodules: recursive
       - name: "Filter tests"
         uses: ./github/actions/test_filter
         with:
@@ -40,6 +41,7 @@ jobs:
       - name: Setup environment
         run: |
           . toolchains/v100.persee/environment.sh
+        shell: bash
       - name: Build code
         uses: ./github/actions/build_code
         with:
