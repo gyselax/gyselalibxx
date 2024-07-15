@@ -27,7 +27,6 @@ on:
 jobs:
   cpu_tests:
     runs-on: ubuntu-latest
-    needs: docker
     container:
       image: ghcr.io/gyselax/gyselalibxx_env:latest
       options: --user root
