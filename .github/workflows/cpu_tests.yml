@@ -15,14 +15,17 @@ on:
         description: "The branch to which this branch should be compared to filter out costly tests (default: main)"
         required: false
         default: main
+        type: string
   workflow_call:
     inputs:
       toolchain:
         description: "Tool chain to use for test"
         required: true
+        type: string
       merge_target:
         description: "The branch to which this branch should be compared to filter out costly tests (default: main)"
         required: true
+        type: string
 
 jobs:
   cpu_tests:
