@@ -10,7 +10,7 @@ jobs:
       matrix:
         toolchain: [tests_toolchain.cmake, tests_release_toolchain.cmake, tests_release_omp_toolchain.cmake]
     name: CPU Test (${{ matrix.toolchain }})
-    if: github.event.pull_request.draft == false
+    environment: manual_workflow
     uses: ./.github/workflows/cpu_tests.yml
     with:
       toolchain: ${{ matrix.toolchain }}
