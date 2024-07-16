@@ -1,9 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"geometry5D_2geometry_2geometry_8hpp_source.html":[12,0,3,0,0],
-"geometryRTheta_2geometry_2geometry_8hpp_source.html":[12,0,4,2,0],
-"geometryRTheta_2poisson_2iqnsolver_8hpp_source.html":[12,0,4,5,0],
-"geometryRTheta_2time__solver_2itimesolver_8hpp_source.html":[12,0,4,6,3],
 "geometryXVx_2boltzmann_2splitvlasovsolver_8hpp_source.html":[12,0,5,0,2],
 "geometryXVx_2geometry_2geometry_8hpp_source.html":[12,0,5,1,0],
 "geometryXVx_2initialization_2iequilibrium_8hpp_source.html":[12,0,5,3,1],
@@ -11,10 +7,10 @@ var NAVTREEINDEX5 =
 "geometryXVx_2initialization_2maxwellianequilibrium_8hpp_source.html":[12,0,5,3,3],
 "geometryXVx_2initialization_2singlemodeperturbinitialization_8hpp_source.html":[12,0,5,3,5],
 "geometryXVx_2poisson_2chargedensitycalculator_8hpp_source.html":[12,0,5,4,0],
-"geometryXVx_2poisson_2ichargedensitycalculator_8hpp_source.html":[12,0,5,4,3],
-"geometryXVx_2poisson_2iqnsolver_8hpp_source.html":[12,0,5,4,4],
-"geometryXVx_2poisson_2nullqnsolver_8hpp_source.html":[12,0,5,4,5],
-"geometryXVx_2poisson_2qnsolver_8hpp_source.html":[12,0,5,4,6],
+"geometryXVx_2poisson_2ichargedensitycalculator_8hpp_source.html":[12,0,5,4,1],
+"geometryXVx_2poisson_2iqnsolver_8hpp_source.html":[12,0,5,4,2],
+"geometryXVx_2poisson_2nullqnsolver_8hpp_source.html":[12,0,5,4,3],
+"geometryXVx_2poisson_2qnsolver_8hpp_source.html":[12,0,5,4,4],
 "geometryXVx_2time__integration_2itimesolver_8hpp_source.html":[12,0,5,6,0],
 "geometryXVx_2time__integration_2predcorr_8hpp_source.html":[12,0,5,6,1],
 "geometryXYVxVy_2geometry_2geometry_8hpp_source.html":[12,0,7,0,0],
@@ -49,7 +45,7 @@ var NAVTREEINDEX5 =
 "input_8hpp_source.html":[12,0,9,0],
 "interface_8hpp_source.html":[12,0,10,0,2],
 "ionization_8hpp_source.html":[12,0,5,2,2,2],
-"ipoisson__solver_8hpp_source.html":[12,0,12,1],
+"ipoisson__solver_8hpp_source.html":[12,0,12,2],
 "ireactionrate_8hpp_source.html":[12,0,5,2,2,3],
 "irighthandside_8hpp_source.html":[12,0,5,5,3],
 "itimesolver__hybrid_8hpp_source.html":[12,0,5,7,0],
@@ -249,5 +245,9 @@ var NAVTREEINDEX5 =
 "src_geometryXY_initialization.html":[8,6,1],
 "src_geometryXY_initialization.html#src_geometryXY_initialization__Kelvin-Helmholtz_instability_test_case":[8,6,1,0],
 "src_geometryXY_time_integration.html":[8,6,2],
-"src_geometryXY_time_integration.html#src_geometryXY_time_integration__Predictor-corrector_based_on_RK2":[8,6,2,0]
+"src_geometryXY_time_integration.html#src_geometryXY_time_integration__Predictor-corrector_based_on_RK2":[8,6,2,0],
+"src_interpolation.html":[8,8],
+"src_interpolation.html#src_interpolation__Memory_concerns":[8,8,1],
+"src_interpolation.html#src_interpolation__Spline_Interpolation":[8,8,0],
+"src_io.html":[8,9]
 };

@@ -72,8 +72,7 @@ var annotated =
     [ "Evaluator2D", "structEvaluator2D.html", [
       [ "Evaluator", "classEvaluator2D_1_1Evaluator.html", "classEvaluator2D_1_1Evaluator" ]
     ] ],
-    [ "FemNonPeriodicQNSolver", "classFemNonPeriodicQNSolver.html", "classFemNonPeriodicQNSolver" ],
-    [ "FemPeriodicQNSolver", "classFemPeriodicQNSolver.html", "classFemPeriodicQNSolver" ],
+    [ "FEM1DPoissonSolver", "classFEM1DPoissonSolver.html", "classFEM1DPoissonSolver" ],
     [ "FFTPoissonSolver", "classFFTPoissonSolver.html", null ],
     [ "FFTPoissonSolver< ddc::DiscreteDomain< DDims... >, FullDomain, ExecSpace, LayoutSpace >", "classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html", "classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4" ],
     [ "FluidMoments", "classFluidMoments.html", "classFluidMoments" ],
@@ -91,7 +90,6 @@ var annotated =
     [ "GridTor2", "structGridTor2.html", null ],
     [ "GridTor3", "structGridTor3.html", null ],
     [ "GridVpar", "structGridVpar.html", null ],
-    [ "HiddenNUBSplinesX", "structHiddenNUBSplinesX.html", null ],
     [ "IAdvectionRP", "classIAdvectionRP.html", "classIAdvectionRP" ],
     [ "IAdvectionSpatial", "classIAdvectionSpatial.html", "classIAdvectionSpatial" ],
     [ "IAdvectionVelocity", "classIAdvectionVelocity.html", "classIAdvectionVelocity" ],
