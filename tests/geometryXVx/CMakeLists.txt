@@ -78,13 +78,6 @@ gtest_discover_tests(unit_tests_advection
     DISCOVERY_MODE PRE_TEST)
 
 
-target_sources(unit_tests_xperiod_vx
-    PRIVATE
-        femperiodicpoissonsolver.cpp
-)
-
-target_sources(unit_tests_xnonperiod_vx PRIVATE femnonperiodicpoissonsolver.cpp)
-
 # Set variables for restart tests
 if (DEFINED ENV{RELATIVE_RESTART_TOLERANCE})
     set(RELATIVE_RESTART_TOLERANCE $ENV{RELATIVE_RESTART_TOLERANCE})

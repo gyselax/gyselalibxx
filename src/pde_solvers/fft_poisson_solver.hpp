@@ -19,7 +19,7 @@ template <
 class FFTPoissonSolver;
 
 /**
- * @brief A class solve the following equation:
+ * @brief A class to solve the following equation:
  * @f$ -\Delta \phi = \rho @f$
  * using a Fourier transform.
  *

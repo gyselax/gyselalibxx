@@ -2,7 +2,8 @@
 
 #include <ddc/ddc.hpp>
 
-#include <vector_field_span.hpp>
+#include "ddc_helper.hpp"
+#include "vector_field_span.hpp"
 
 template <class LaplacianDomain, class FullDomain, class LayoutSpace, class MemorySpace>
 class IPoissonSolver;

@@ -15,12 +15,8 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
-#ifdef PERIODIC_RDIMX
-#include "femperiodicqnsolver.hpp"
-#else
-#include "femnonperiodicqnsolver.hpp"
-#endif
 #include "chargedensitycalculator.hpp"
+#include "fem_1d_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
@@ -30,6 +26,7 @@
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
+#include "qnsolver.hpp"
 #include "restartinitialization.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
@@ -132,18 +129,14 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-#ifdef PERIODIC_RDIMX
-    using FemQNSolverX = FemPeriodicQNSolver;
-#else
-    using FemQNSolverX = FemNonPeriodicQNSolver;
-#endif
+    FEM1DPoissonSolver fem_solver(builder_x_poisson, spline_x_evaluator_poisson);
     host_t<DFieldVx> const quadrature_coeffs_host
             = neumann_spline_quadrature_coefficients(mesh_vx, builder_vx_poisson);
     auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
-    FemQNSolverX const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
+    QNSolver const poisson(fem_solver, rhs);
 
     PredCorr const predcorr(vlasov, poisson);
 

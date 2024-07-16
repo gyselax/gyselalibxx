@@ -115,13 +115,13 @@ template <std::size_t N>
 using DKokkosView_h = Kokkos::View<double[N], Kokkos::HostSpace>;
 
 template <class ElementType, std::size_t N>
-Span1D<ElementType> as_span(std::array<ElementType, N>& arr) noexcept
+KOKKOS_FUNCTION Span1D<ElementType> as_span(std::array<ElementType, N>& arr) noexcept
 {
     return Span1D<ElementType>(arr.data(), N);
 }
 
 template <class ElementType, std::size_t N>
-Span1D<const ElementType> as_span(std::array<ElementType, N> const& arr) noexcept
+KOKKOS_FUNCTION Span1D<const ElementType> as_span(std::array<ElementType, N> const& arr) noexcept
 {
     return Span1D<const ElementType>(arr.data(), N);
 }
