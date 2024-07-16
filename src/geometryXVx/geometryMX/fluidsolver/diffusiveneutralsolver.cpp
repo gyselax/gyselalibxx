@@ -11,7 +11,6 @@ DiffusiveNeutralSolver::DiffusiveNeutralSolver(
         IReactionRate const& charge_exchange,
         IReactionRate const& ionization,
         IReactionRate const& recombination,
-        double const temperature,
         double const normalization_coeff,
         SplineXBuilder_1d const& spline_x_builder,
         SplineXEvaluator_1d const& spline_x_evaluator,
@@ -19,7 +18,6 @@ DiffusiveNeutralSolver::DiffusiveNeutralSolver(
     : m_charge_exchange(charge_exchange)
     , m_ionization(ionization)
     , m_recombination(recombination)
-    , m_temperature(temperature)
     , m_normalization_coeff(normalization_coeff)
     , m_spline_x_builder(spline_x_builder)
     , m_spline_x_evaluator(spline_x_evaluator)
@@ -79,7 +77,6 @@ void DiffusiveNeutralSolver::get_derivative(
     IndexM const ineutral_density(0);
 
     double const normalization_coeff_alpha0(m_normalization_coeff);
-    double const temperature_neutrals(m_temperature);
     double const mass_ratio(mass(ielec()) / mass(iion));
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
@@ -98,7 +95,7 @@ void DiffusiveNeutralSolver::get_derivative(
                           * velocity(iion, ix) * Kokkos::sqrt(mass_ratio) / denom;
 
                 diffusion_temperature(ifspx)
-                        = normalization_coeff_alpha0 * temperature_neutrals / (mass(isp) * denom);
+                        = normalization_coeff_alpha0 * temperature(iion, ix) / (mass(isp) * denom);
 
                 density_source(ifspx)
                         = (density(ielec(), ix) * density(iion, ix) * recombination_rate(ifspx)
