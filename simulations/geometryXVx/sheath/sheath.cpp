@@ -18,16 +18,12 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "Lagrange_interpolator.hpp"
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
-#include "collisions_intra.hpp"
-#ifdef PERIODIC_RDIMX
-#include "femperiodicqnsolver.hpp"
-#else
-#include "femnonperiodicqnsolver.hpp"
-#endif
-#include "Lagrange_interpolator.hpp"
 #include "chargedensitycalculator.hpp"
+#include "collisions_intra.hpp"
+#include "fem_1d_poisson_solver.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
@@ -228,11 +224,11 @@ int main(int argc, char** argv)
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
 #ifdef PERIODIC_RDIMX
-    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(mesh_x);
-    QNSolver const poisson(fft_poisson_solver, rhs);
+    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> poisson_solver(mesh_x);
 #else
-    FemNonPeriodicQNSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
+    FEM1DPoissonSolver poisson_solver(builder_x_poisson, spline_x_evaluator_poisson);
 #endif
+    QNSolver const poisson(poisson_solver, rhs);
 
 
     PredCorr const predcorr(boltzmann, poisson);
