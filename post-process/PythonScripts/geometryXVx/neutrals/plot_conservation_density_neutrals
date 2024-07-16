@@ -72,6 +72,8 @@ if __name__ == '__main__':
 
     # Computation of the reaction rates using the same polynomials as in cpp or if not available using the constant rates.
     plasma_temperature = compute_temperature(densities, particle_flux, momentum_flux)
+    neutrals_temperature = plasma_temperature.sel(species='ions') # T_n = T_i
+
     k_cx = get_charge_exchange_rate(ds, plasma_temperature.sel(species='ions'))
     k_i = get_ionization_rate(ds, plasma_temperature.sel(species='electrons'), density_e)
     k_r = get_recombination_rate(ds, plasma_temperature.sel(species='electrons'), density_e)
@@ -86,7 +88,7 @@ if __name__ == '__main__':
 
     # Third term, diffusive
     D_p = 1 / (m_n * (density_i * k_cx + density_e * k_i))
-    diffusive_term = - alpha_0 * differentiate(D_p * T_n * differentiate(density_n, 'x'), 'x')
+    diffusive_term = - alpha_0 * differentiate(D_p * neutrals_temperature * differentiate(density_n, 'x'), 'x')
 
     # Fourth term, source
     S_n = density_i * density_e * k_r - density_n * density_e * k_i
