@@ -10,16 +10,12 @@
 
 #include <pdi.h>
 
+#include "Lagrange_interpolator.hpp"
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
 #include "constantfluidinitialization.hpp"
-#ifdef PERIODIC_RDIMX
-#include "femperiodicqnsolver.hpp"
-#else
-#include "femnonperiodicqnsolver.hpp"
-#endif
-#include "Lagrange_interpolator.hpp"
+#include "fem_1d_poisson_solver.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
@@ -220,11 +216,11 @@ TEST(GeometryXM, PredCorrHybrid)
             quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs);
 #ifdef PERIODIC_RDIMX
-    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(meshX);
-    QNSolver const poisson(fft_poisson_solver, rhs);
+    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> poisson_solver(meshX);
 #else
-    FemNonPeriodicQNSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
+    FEM1DPoissonSolver const poisson_solver(builder_x_poisson, spline_x_evaluator_poisson);
 #endif
+    QNSolver const poisson(poisson_solver, rhs);
 
     // construction of predcorr without fluid species
     PredCorr const predcorr(vlasov, poisson);
