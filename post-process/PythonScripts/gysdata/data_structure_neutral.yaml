@@ -44,10 +44,6 @@ normalization_coeff_neutrals:
   dimensions: [ ]
   path: { file: 'VOICEXX_initstate.h5', dataset: 'normalization_coeff_neutrals' }
 
-neutrals_temperature:
-  dimensions: [ ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'neutrals_temperature' }
-
 norm_coeff_rate_neutrals:
   dimensions: [ ]
   path: { file: 'VOICEXX_initstate.h5', dataset: 'norm_coeff_rate_neutrals' }

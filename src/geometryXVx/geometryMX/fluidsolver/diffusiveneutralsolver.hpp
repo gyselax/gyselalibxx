@@ -64,7 +64,6 @@ private:
     IReactionRate const& m_ionization;
     IReactionRate const& m_recombination;
 
-    double const m_temperature;
     double const m_normalization_coeff;
 
     SplineXBuilder_1d const& m_spline_x_builder;
@@ -80,7 +79,6 @@ public:
      * @param[in] charge_exchange An object that represents charge-exchange reaction rate.
      * @param[in] ionization An object that represents ionization reaction rate.
      * @param[in] recombination An object that represents recombination reaction rate.
-     * @param[in] temperature The constant temperature of neutrals.
      * @param[in] normalization_coeff A normalization coefficient for the diffusive neutral model.
      * @param[in] spline_x_builder A one-dimensional spline builder.
      * @param[in] spline_x_evaluator A one-dimensional spline evaluator.
@@ -90,7 +88,6 @@ public:
             IReactionRate const& charge_exchange,
             IReactionRate const& ionization,
             IReactionRate const& recombination,
-            double const temperature,
             double const normalization_coeff,
             SplineXBuilder_1d const& spline_x_builder,
             SplineXEvaluator_1d const& spline_x_evaluator,

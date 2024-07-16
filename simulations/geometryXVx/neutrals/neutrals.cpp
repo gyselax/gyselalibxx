@@ -255,7 +255,6 @@ int main(int argc, char** argv)
     FemNonPeriodicQNSolver const poisson(builder_x_poisson, spline_x_evaluator_poisson, rhs);
 #endif
 
-    double const neutrals_temperature(1.);
     double const normalization_coeff(0.01);
     double const norm_coeff_rate(1.e-3);
 
@@ -277,7 +276,6 @@ int main(int argc, char** argv)
             charge_exchange,
             ionization,
             recombination,
-            neutrals_temperature,
             normalization_coeff,
             spline_x_builder_neutrals,
             spline_x_evaluator_neutrals,
@@ -298,7 +296,6 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("neutrals_masses", ddc::discrete_space<IDimSp>().masses()[dom_fluidsp]);
     ddc::expose_to_pdi("normalization_coeff_neutrals", normalization_coeff);
     ddc::expose_to_pdi("norm_coeff_rate_neutrals", norm_coeff_rate);
-    ddc::expose_to_pdi("neutrals_temperature", neutrals_temperature);
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
 
     steady_clock::time_point const start = steady_clock::now();
