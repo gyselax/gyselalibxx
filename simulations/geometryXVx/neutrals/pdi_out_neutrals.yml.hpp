@@ -43,7 +43,6 @@ metadata:
     size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]' ]
   collintra_nustar0 : double
   collinter_nustar0 : double
-  neutrals_temperature : double
   normalization_coeff_neutrals : double
   norm_coeff_rate_neutrals : double
   charge_exchange_coefficients:
@@ -175,7 +174,6 @@ plugins:
         - nbstep_diag
         - collintra_nustar0
         - collinter_nustar0
-        - neutrals_temperature
         - normalization_coeff_neutrals
         - norm_coeff_rate_neutrals
 
