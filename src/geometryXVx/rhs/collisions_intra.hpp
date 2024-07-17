@@ -38,7 +38,7 @@
 class CollisionsIntra : public IRightHandSide
 {
 private:
-    static constexpr bool uniform_edge_v = ddc::is_uniform_sampling_v<IDimVx>;
+    static constexpr bool uniform_edge_v = ddc::is_uniform_point_sampling_v<IDimVx>;
 
 public:
     /**
@@ -100,12 +100,12 @@ private:
             ddc::DiscreteElement<IDimVx> const& index);
 
     template <class VDim>
-    std::enable_if_t<!ddc::is_uniform_sampling_v<VDim>> build_ghosted_staggered_vx_point_sampling(
-            ddc::DiscreteDomain<VDim> const& dom);
+    std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>>
+    build_ghosted_staggered_vx_point_sampling(ddc::DiscreteDomain<VDim> const& dom);
 
     template <class VDim>
-    std::enable_if_t<ddc::is_uniform_sampling_v<VDim>> build_ghosted_staggered_vx_point_sampling(
-            ddc::DiscreteDomain<VDim> const& dom);
+    std::enable_if_t<ddc::is_uniform_point_sampling_v<VDim>>
+    build_ghosted_staggered_vx_point_sampling(ddc::DiscreteDomain<VDim> const& dom);
 
     double m_nustar0;
     double m_fthresh;

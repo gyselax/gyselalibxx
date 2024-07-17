@@ -119,7 +119,6 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     double const charge_exchange_val(0.5);
     double const ionization_val(1.);
     double const recombination_val(2.);
-    double const temperature_neutrals(3.);
     double const normalization_coeff(1.);
 
 #ifdef PERIODIC_RDIMX
@@ -145,7 +144,6 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
             charge_exchange,
             ionization,
             recombination,
-            temperature_neutrals,
             normalization_coeff,
             spline_x_builder_neutrals,
             spline_x_evaluator_neutrals,
@@ -206,7 +204,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
                 std::sqrt(mass_ratio) * kinsp_velocity_eq * charge_exchange_val
                 / (charge_exchange_val + ionization_val));
         double const diffusive_term(
-                normalization_coeff * temperature_neutrals
+                normalization_coeff * kinsp_temperature_eq
                 / (neutral_mass * kinsp_density_eq * (charge_exchange_val + ionization_val)));
         double const source_term(
                 1 / normalization_coeff

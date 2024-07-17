@@ -31,14 +31,14 @@ NeutralSpeciesInfo:
 - mass: 400.
 
 Krook:
-  - name: 'adaptive' # 'constant' or adaptive': constant values or not for nu coeff.
-    type: 'sink'
-    solver: 'rk2' # possible values : 'rk2'
-    extent: 0.20
-    stiffness: 1
-    amplitude: 0.1
-    density: 1e-9
-    temperature: 0.5
+- name: 'adaptive' # 'constant' or adaptive': constant values or not for nu coeff.
+  type: 'sink'
+  solver: 'rk2' # possible values : 'rk2'
+  extent: 0.20
+  stiffness: 1
+  amplitude: 0.1
+  density: 1e-9
+  temperature: 0.5
 
 KineticSource:
   extent: 0.45

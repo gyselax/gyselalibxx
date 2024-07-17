@@ -407,20 +407,20 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
     // Spline representations
     // --- patch 1
     device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX1, IDimY1>>> function_1_coef_alloc(
-            builder_x1.spline_domain());
+            builder_x1.batched_spline_domain());
     ddc::ChunkSpan function_1_coef = function_1_coef_alloc.span_view();
 
     device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX1, IDimY1>>>
-            function_1_coef_expected_alloc(builder_x1.spline_domain());
+            function_1_coef_expected_alloc(builder_x1.batched_spline_domain());
     ddc::ChunkSpan function_1_coef_expected = function_1_coef_expected_alloc.span_view();
 
     // --- patch 2
     device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX2, IDimY2>>> function_2_coef_alloc(
-            builder_x2.spline_domain());
+            builder_x2.batched_spline_domain());
     ddc::ChunkSpan function_2_coef = function_2_coef_alloc.span_view();
 
     device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX2, IDimY2>>>
-            function_2_coef_expected_alloc(builder_x2.spline_domain());
+            function_2_coef_expected_alloc(builder_x2.batched_spline_domain());
     ddc::ChunkSpan function_2_coef_expected = function_2_coef_expected_alloc.span_view();
 
     // --- collection

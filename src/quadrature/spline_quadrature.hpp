@@ -60,11 +60,11 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> spline_quadrature_coeffi
         SplineBuilder const& builder)
 {
     static_assert(
-            SplineBuilder::s_nbe_xmin == 0,
+            SplineBuilder::s_nbc_xmin == 0,
             "The spline quadrature requires a builder which can construct the coefficients using "
             "only the values at the interpolation points.");
     static_assert(
-            SplineBuilder::s_nbe_xmax == 0,
+            SplineBuilder::s_nbc_xmax == 0,
             "The spline quadrature requires a builder which can construct the coefficients using "
             "only the values at the interpolation points.");
 

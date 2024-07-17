@@ -49,8 +49,8 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
         ddc::DiscreteDomain<IDim> const& domain,
         SplineBuilder const& builder)
 {
-    constexpr int nbe_xmin = SplineBuilder::s_nbe_xmin;
-    constexpr int nbe_xmax = SplineBuilder::s_nbe_xmax;
+    constexpr int nbc_xmin = SplineBuilder::s_nbc_xmin;
+    constexpr int nbc_xmax = SplineBuilder::s_nbc_xmax;
     static_assert(
             SplineBuilder::s_bc_xmin == ddc::BoundCond::HERMITE,
             "The neumann spline quadrature requires a builder which uses Hermite boundary "
@@ -60,17 +60,17 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
             "The neumann spline quadrature requires a builder which uses Hermite boundary "
             "conditions.");
     static_assert(
-            nbe_xmin == 1,
+            nbc_xmin == 1,
             "The neumann spline quadrature requires a builder which uses the value of the "
             "derivative.");
     static_assert(
-            nbe_xmax == 1,
+            nbc_xmax == 1,
             "The neumann spline quadrature requires a builder which uses the value of the "
             "derivative.");
 
     using bsplines_type = typename SplineBuilder::bsplines_type;
 
-    assert(domain.size() == ddc::discrete_space<bsplines_type>().nbasis() - nbe_xmin - nbe_xmax);
+    assert(domain.size() == ddc::discrete_space<bsplines_type>().nbasis() - nbc_xmin - nbc_xmax);
 
     // Vector of integrals of B-splines
     ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines_host(
@@ -89,9 +89,9 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
     // Coefficients of quadrature in integral_bsplines (values which would always be multiplied
     // by f'(x)=0 are removed
     ddc::DiscreteDomain<bsplines_type> slice
-            = builder.bsplines_domain()
-                      .remove(ddc::DiscreteVector<bsplines_type> {nbe_xmin},
-                              ddc::DiscreteVector<bsplines_type> {nbe_xmax});
+            = builder.spline_domain()
+                      .remove(ddc::DiscreteVector<bsplines_type> {nbc_xmin},
+                              ddc::DiscreteVector<bsplines_type> {nbc_xmax});
 
     Kokkos::deep_copy(
             coefficients.allocation_kokkos_view(),

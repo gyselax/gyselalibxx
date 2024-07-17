@@ -52,13 +52,21 @@ private:
 
     EvaluatorType const& m_evaluator;
 
-    mutable ddc::
-            Chunk<double, typename BuilderType::spline_domain_type, ddc::DeviceAllocator<double>>
-                    m_coefs;
+    mutable ddc::Chunk<
+            double,
+            typename BuilderType::batched_spline_domain_type,
+            ddc::DeviceAllocator<double>>
+            m_coefs;
 
-    ddc::Chunk<double, typename BuilderType::derivs_domain_type, ddc::DeviceAllocator<double>>
+    ddc::Chunk<
+            double,
+            typename BuilderType::batched_derivs_domain_type,
+            ddc::DeviceAllocator<double>>
             m_derivs_min_alloc;
-    ddc::Chunk<double, typename BuilderType::derivs_domain_type, ddc::DeviceAllocator<double>>
+    ddc::Chunk<
+            double,
+            typename BuilderType::batched_derivs_domain_type,
+            ddc::DeviceAllocator<double>>
             m_derivs_max_alloc;
 
 public:
@@ -70,9 +78,9 @@ public:
     SplineInterpolator(BuilderType const& builder, EvaluatorType const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)
-        , m_coefs(builder.spline_domain())
-        , m_derivs_min_alloc(builder.derivs_xmin_domain())
-        , m_derivs_max_alloc(builder.derivs_xmax_domain())
+        , m_coefs(builder.batched_spline_domain())
+        , m_derivs_min_alloc(builder.batched_derivs_xmin_domain())
+        , m_derivs_max_alloc(builder.batched_derivs_xmax_domain())
     {
         ddc::parallel_fill(m_derivs_min_alloc, 0.);
         ddc::parallel_fill(m_derivs_max_alloc, 0.);
