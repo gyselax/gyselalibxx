@@ -10,7 +10,7 @@ target_link_libraries(testcollisions
   gslx::io
   gslx::paraconfpp
   gslx::quadrature
-  gslx::collision
+  gslx::collisions
   gslx::speciesinfo
   PDI::pdi
   paraconf::paraconf

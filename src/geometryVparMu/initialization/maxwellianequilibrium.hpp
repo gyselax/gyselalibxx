@@ -9,31 +9,40 @@
 #include "iequilibrium.hpp"
 #include "paraconfpp.hpp"
 
-/**
- * @brief A class that initializes the distribution function as a Maxwellian.
- */
+/// Equilibrium operator as Maxwellian. This initializes all species.
 class MaxwellianEquilibrium : public IEquilibrium
 {
-    /**Equilibrium density of all kinetic species*/
+    // mass of all kinetic species
+    host_t<DFieldSp> m_mass;
+
+    // equilibrium density of all kinetic species
     host_t<DFieldSp> m_density_eq;
 
-    /**Equilibrium temperature of all kinetic species*/
+    // equilibrium temperature of all kinetic species
     host_t<DFieldSp> m_temperature_eq;
 
-    /**Equilibrium mean velocity of all kinetic species*/
+    // equilibrium mean velocity of all kinetic species
     host_t<DFieldSp> m_mean_velocity_eq;
+
+private:
+    // magnetic field
+    double m_magnetic_field;
 
 public:
     /**
      * @brief The constructor for the MaxwellianEquilibrium class.
+     * @param[in] mass The mass of the species
      * @param[in] density_eq The density of the Maxwellian
      * @param[in] temperature_eq The temperature of the Maxwellian
      * @param[in] mean_velocity_eq The mean velocity of the Maxwellian
+     * @param[in] magnetic_field The magnetic field
      */
     MaxwellianEquilibrium(
+            host_t<DFieldSp> mass,
             host_t<DFieldSp> density_eq,
             host_t<DFieldSp> temperature_eq,
-            host_t<DFieldSp> mean_velocity_eq);
+            host_t<DFieldSp> mean_velocity_eq,
+            double magnetic_field);
 
     ~MaxwellianEquilibrium() override = default;
 
@@ -52,24 +61,39 @@ public:
      * @param[out] allfequilibrium A Span containing a Maxwellian distribution function.
      * @return A Span containing a Maxwellian distribution function.
      */
-    DSpanSpVx operator()(DSpanSpVx allfequilibrium) const override;
+    DSpanSpVparMu operator()(DSpanSpVparMu allfequilibrium) const override;
+
 
     /**
      * @brief Compute a Maxwellian distribution function.
      * The Maxwellian distribution function is defined as 
-     * $f_M(v) = n/(sqrt(2*PI*T))*exp(-(v-u)**2/(2*T))$
-     * with $n$ the density, $T$ the temperature and
-     * $u$ is the mean velocity.
+     * Compute $fM(v,mu) = (2*PI*T)**1.5*n*exp(-E)$ with
+     *  - $n$ the density, $T$ the temperature and $u$ the mean velocity
+     *  - $B$ the magnetic field and
+     *  - $E$ the energy defined as $E = (0.5*(v-u)**2+mu*B)/T$.
      * @param[out] fMaxwellian A Maxwellian distribution function. 
+     * @param[in] mass Mass of the species.
      * @param[in] density A parameter that represents the density of Maxwellian. 
      * @param[in] temperature A parameter that represents the temperature of Maxwellian. 
      * @param[in] mean_velocity A parameter that represents the mean velocity of Maxwellian. 
+     * @param[in] magnetic_field Magnetic field.
      */
     static void compute_maxwellian(
-            DSpanVx const fMaxwellian,
+            DSpanVparMu const fMaxwellian,
+            double const mass,
             double const density,
             double const temperature,
-            double const mean_velocity);
+            double const mean_velocity,
+            double const magnetic_field);
+
+    /**
+     * @brief A method for accessing the m_mass member variable of the class.
+     * @return A view containing the m_mass value. 
+     */
+    host_t<DViewSp> mass() const
+    {
+        return m_mass;
+    }
 
     /**
      * @brief A method for accessing the m_density_eq member variable of the class.
