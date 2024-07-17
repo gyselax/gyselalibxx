@@ -19,7 +19,7 @@ void ChargeDensityCalculator::operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu
     IndexSp const last_species = ddc::discrete_space<IDimSp>().charges().domain().back();
     double chargedens_adiabspecies = 0.;
     if (last_kin_species != last_species) {
-        chargedens_adiabspecies = double(charge(last_species));
+        chargedens_adiabspecies = charge(last_species);
     }
 
     // reduction over species and velocity space
@@ -27,13 +27,13 @@ void ChargeDensityCalculator::operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu
             = allfdistribu.allocation_kokkos_view();
     Kokkos::View<double**, Kokkos::LayoutRight> const rho_view = rho.allocation_kokkos_view();
 
-    host_t<ViewSp<int>> const charges_host = ddc::host_discrete_space<IDimSp>().charges();
-    host_t<ViewSp<int>> const kinetic_charges_host = charges_host[allfdistribu.domain<IDimSp>()];
+    host_t<DViewSp> const charges_host = ddc::host_discrete_space<IDimSp>().charges();
+    host_t<DViewSp> const kinetic_charges_host = charges_host[allfdistribu.domain<IDimSp>()];
 
     auto charges_alloc
             = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), kinetic_charges_host);
 
-    Kokkos::View<const int*, Kokkos::LayoutRight> const charges
+    Kokkos::View<const double*, Kokkos::LayoutRight> const charges
             = charges_alloc.span_cview().allocation_kokkos_view();
 
     Kokkos::View<const double**, Kokkos::LayoutRight> const coef_view
@@ -57,7 +57,7 @@ void ChargeDensityCalculator::operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu
                 Kokkos::parallel_reduce(
                         Kokkos::TeamThreadMDRange<Kokkos::Rank<3>, TeamHandle>(team, nsp, nvx, nvy),
                         [&](int isp, int ivx, int ivy, double& sum) {
-                            sum += static_cast<double>(charges(isp)) * coef_view(ivx, ivy)
+                            sum += charges(isp) * coef_view(ivx, ivy)
                                    * allfdistribu_view(isp, ix, iy, ivx, ivy);
                         },
                         teamSum);

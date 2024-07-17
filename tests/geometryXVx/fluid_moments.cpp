@@ -51,9 +51,9 @@ TEST(Physics, FluidMoments)
     IDomainVx const gridvx = builder_vx.interpolation_domain();
     IDomainSpXVx const mesh(IDomainSp(my_iion, IVectSp(1)), gridx, gridvx);
 
-    host_t<FieldSp<int>> charges(dom_sp);
-    charges(my_ielec) = -1;
-    charges(my_iion) = 1;
+    host_t<DFieldSp> charges(dom_sp);
+    charges(my_ielec) = -1.;
+    charges(my_iion) = 1.;
     host_t<DFieldSp> masses(dom_sp);
     ddc::parallel_fill(masses, 1);
 

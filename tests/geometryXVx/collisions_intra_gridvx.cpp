@@ -55,12 +55,12 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     IDomainVx const gridvx = builder_vx.interpolation_domain();
     IDomainSpXVx const mesh(dom_sp, gridx, gridvx);
 
-    host_t<FieldSp<int>> charges(dom_sp);
-    charges(my_ielec) = -1;
-    charges(my_iion) = 1;
+    host_t<DFieldSp> charges(dom_sp);
+    charges(my_ielec) = -1.;
+    charges(my_iion) = 1.;
     host_t<DFieldSp> masses(dom_sp);
-    double const mass_ion(400);
-    double const mass_elec(1);
+    double const mass_ion(400.);
+    double const mass_elec(1.);
     masses(my_ielec) = mass_elec;
     masses(my_iion) = mass_ion;
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
