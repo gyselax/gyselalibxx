@@ -53,7 +53,6 @@ if __name__ == '__main__':
     m_n = neutrals_masses.sel(speciesn=current_nspecies)
 
     # Neutral temperature and normalization coefficients.
-    T_n = ds['neutrals_temperature']
     alpha_0 = ds['normalization_coeff_neutrals']
 
     moment_order = 'density'
