@@ -9,36 +9,6 @@
 #include "koliop_interface.hpp"
 
 /**
- * @brief Header Guard for collision operator
- */
-class CollisionsGuard
-{
-public:
-    /**
-      * @brief
-      * @param[in] a_host_thread_count When compiled for CPU, this represents
-      * the number of OpenMP thread the operator should use.
-      * @param[in] a_device_index The device the operator should use, you almost
-      * always want to use the first and only one visible.
-     */
-    CollisionsGuard(std::size_t a_host_thread_count, std::size_t a_device_index = 0)
-    {
-        if (::koliop_Initialize(false, a_host_thread_count, a_device_index, true)
-            != KOLIOP_STATUS_SUCCESS) {
-            GSLX_ASSERT(false);
-        }
-    }
-
-    ~CollisionsGuard()
-    {
-        if (::koliop_Deinitialize(false) != KOLIOP_STATUS_SUCCESS) {
-            GSLX_ASSERT(false);
-        }
-    }
-};
-
-
-/**
  * @brief A class which computes the collision operator in (vpar,mu)
  */
 template <class FDistribDomain, class GridVpar, class GridMu>
@@ -67,8 +37,13 @@ private:
     static_assert(
             ddc::type_seq_rank_v<GridVpar, fdistrib_domain_tags> == (FDistribDomain::rank() - 2),
             "Vpar should appear second to last in the distribution function domain");
+    // Ensure that uniform
+    // [TODO] Restore it as soon as the geometry5D is deleted
+    //static_assert(ddc::is_uniform_point_sampling_v<GridVpar>);
 
 public:
+    /// Type alias for a field on species domain
+    using DFieldSp = device_t<ddc::Chunk<double, IDomainSp>>;
     /// Type alias for the domain of the magnetic moment.
     using DDomMu = ddc::DiscreteDomain<GridMu>;
     /// Type alias for the domain of the velocity parallel to the magnetic field.
@@ -109,24 +84,91 @@ private:
         }
     }
 
-    // Get the size of the radial domain from nustar0_r
-    template <class NuStar0Type>
-    static std::size_t get_r_domain_size(NuStar0Type nustar0_r)
+    // Get the size of the radial domain from nustar
+    template <class DFieldR>
+    static std::size_t get_r_domain_size(DFieldR nustar)
     {
-        static_assert(
-                std::is_same_v<
-                        NuStar0Type,
-                        double> || (ddc::is_borrowed_chunk_v<NuStar0Type> && NuStar0Type::rank() == 1));
-        return get_chunk_size(nustar0_r);
+        static_assert(std::is_same_v<DFieldR, double> || ddc::is_borrowed_chunk_v<DFieldR>);
+        if constexpr (ddc::is_borrowed_chunk_v<DFieldR>) {
+            static_assert(DFieldR::rank() == 1);
+        }
+        return get_chunk_size(nustar);
     }
 
-    // Get the size of the poloidal domain from B_norm by excluding the size of nustar0_r
-    template <class NuStar0Type, class BNormType>
-    static std::size_t get_theta_domain_size(NuStar0Type nustar0_r, BNormType B_norm)
+    // Get the size of the poloidal domain from B_norm by excluding the size of nustar
+    template <class DFieldR, class DFieldRTheta>
+    static std::size_t get_theta_domain_size(DFieldR nustar, DFieldRTheta B_norm)
     {
-        std::size_t const r_size = get_chunk_size(nustar0_r);
+        std::size_t const r_size = get_chunk_size(nustar);
         std::size_t const r_theta_size = get_chunk_size(B_norm);
         return r_theta_size / r_size;
+    }
+
+    // Return a Kokkos view used in koliop from a DFieldR (used for the radial profile input)
+    template <class DFieldR>
+    koliop_interface::MDL<double*> radialprof_to_koliop(
+            DFieldR radial_field,
+            std::string const& string_radial_field)
+    {
+        koliop_interface::MDL<double*> kop_radial_field;
+
+        std::size_t const n_r = get_r_domain_size(radial_field);
+        if constexpr (std::is_same_v<DFieldR, double>) {
+            kop_radial_field = koliop_interface::MDL<double*>(
+                    Kokkos::view_alloc(Kokkos::WithoutInitializing, string_radial_field),
+                    n_r);
+            Kokkos::deep_copy(kop_radial_field, radial_field);
+        } else {
+            kop_radial_field = radial_field.allocation_kokkos_view();
+        }
+        return kop_radial_field;
+    }
+
+    // Return a Kokkos view from B_norm of type DFieldRtheta. Enable to treat the case when n_r or/and ntheta equal to 1.
+    template <class DFieldRTheta>
+    koliop_interface::MDL<double**> rthetaprof_to_koliop(
+            DFieldRTheta B_norm,
+            std::size_t const n_r,
+            std::size_t const n_theta)
+    {
+        koliop_interface::MDL<double**> kop_B_norm;
+
+        if constexpr (std::is_same_v<DFieldRTheta, double>) {
+            // If DFieldRTheta is a double create an array and copy the double to GPU
+            kop_B_norm = koliop_interface::MDL<double**>(
+                    Kokkos::view_alloc(Kokkos::WithoutInitializing, "B_norm"),
+                    n_r,
+                    n_theta);
+            Kokkos::deep_copy(kop_B_norm, B_norm);
+        } else {
+            // If DFieldRTheta is a chunk
+            static_assert(
+                    std::is_same_v<
+                            typename DFieldRTheta::memory_space,
+                            typename Kokkos::DefaultExecutionSpace::memory_space>,
+                    "The data should be provided on GPU");
+            auto B_norm_kokkos_view = B_norm.allocation_kokkos_view();
+            if constexpr (DFieldRTheta::rank() == 1) {
+                // If a 1D chunk then a reference to the data can be packed directly into a 2D chunk
+                kop_B_norm = koliop_interface::MDL<double**>(B_norm.data_handle(), n_r, n_theta);
+            } else if constexpr (
+                    std::is_same_v<
+                            typename decltype(B_norm_kokkos_view)::traits::array_layout,
+                            typename koliop_interface::MDL<const double**>::traits::array_layout>) {
+                // If a 2D chunk with the right layout we can use the kokkos view directly
+                kop_B_norm = B_norm_kokkos_view;
+            } else {
+                // If a 2D chunk with the wrong layout then a copy is required
+                static_assert(DFieldRTheta::rank() == 2);
+                kop_B_norm = koliop_interface::MDL<double**>(
+                        Kokkos::view_alloc(Kokkos::WithoutInitializing, "B_norm"),
+                        n_r,
+                        n_theta);
+                // A copy is required to change the layout
+                Kokkos::deep_copy(kop_B_norm, B_norm_kokkos_view);
+            }
+        }
+        return kop_B_norm;
     }
 
 public:
@@ -140,32 +182,36 @@ public:
      *      quadrature coefficient in mu direction
      * @param[in] coeff_intdvpar
      *      quadrature coefficient in vpar direction
-     * @param[in] nustar0_r
+     * @param[in] nustar
      *      radial profile of collisionality
+     * @param[in] rg
+     *      radial profile of the grid. If size(nustar)==1, forced to 1. because already included in nustar definition 
+     *      [TODO] See if this quantity cannot be included in nustar definition
+     * @param[in] safety_factor
+     *      radial profile of safety factor. If size(nustar)==1, forced to 1. because already included in nustar definition. 
      * @param[in] B_norm
      *      magnetic field norm in (r,theta)
      */
-    template <class NuStar0Type, class BNormType>
+    template <class DFieldR, class DFieldRTheta>
     CollisionSpVparMu(
             FDistribDomain fdistrib_domain,
             DViewMu coeff_intdmu,
             DViewVpar coeff_intdvpar,
-            NuStar0Type nustar0_r,
-            BNormType B_norm)
+            DFieldR nustar,
+            DFieldR rg, 
+            DFieldR safety_factor,
+            DFieldRTheta B_norm)
     : m_operator_handle {}
     , m_comb_mat {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_comb_mat")}
     , m_hat_As {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_hat_As"), ddc::select<Species>(fdistrib_domain).size()}   // m_hat_As{"m_hat_As",ddc::select<Species>(fdistrib_domain)}
     , m_hat_Zs {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_hat_Zs"), ddc::select<Species>(fdistrib_domain).size()}
-    , m_rg {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_rg"), get_r_domain_size(nustar0_r)}
-    , m_q_r {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_q_r"), get_r_domain_size(nustar0_r)}
-    , m_mask_buffer_r {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_mask_buffer_r"), get_r_domain_size(nustar0_r)}
-    , m_mask_LIM {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_mask_LIM"), get_r_domain_size(nustar0_r), get_theta_domain_size(nustar0_r, B_norm)}
-    , m_B_norm {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_B_norm"), get_r_domain_size(nustar0_r), get_theta_domain_size(nustar0_r, B_norm)}
+    , m_mask_buffer_r {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_mask_buffer_r"), get_r_domain_size(nustar)}
+    , m_mask_LIM {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_mask_LIM"), get_r_domain_size(nustar), get_theta_domain_size(nustar, B_norm)}
     , m_Bstar_s {
               Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_Bstar_s"),
               ddc::select<GridVpar>(fdistrib_domain).size(),
-              get_r_domain_size(nustar0_r),
-              get_theta_domain_size(nustar0_r, B_norm),
+              get_r_domain_size(nustar),
+              get_theta_domain_size(nustar, B_norm),
               ddc::select<Species>(fdistrib_domain).size()}
     , m_mug {
               Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_mug"),
@@ -175,11 +221,11 @@ public:
               ddc::select<GridVpar>(fdistrib_domain).size()}
     {
         // Check that the distribution function is correctly ordered
-        if constexpr (ddc::is_chunk_v<NuStar0Type>) {
-            using GridR = domain_element_t<0, NuStar0Type>;
-            if constexpr (ddc::is_chunk_v<BNormType>) {
-                static_assert(std::is_same_v<GridR, domain_element_t<1, BNormType>>);
-                using GridTheta = domain_element_t<0, BNormType>;
+        if constexpr (ddc::is_chunk_v<DFieldR>) {
+            using GridR = domain_element_t<0, DFieldR>;
+            if constexpr (ddc::is_chunk_v<DFieldRTheta>) {
+                static_assert(std::is_same_v<GridR, domain_element_t<1, DFieldRTheta>>);
+                using GridTheta = domain_element_t<0, DFieldRTheta>;
                 static_assert(
                         ddc::type_seq_rank_v<
                                 GridR,
@@ -197,25 +243,39 @@ public:
                                 fdistrib_domain_tags> == (FDistribDomain::rank() - 3),
                         "R should appear third to last in the distribution function domain");
             }
-        } else if constexpr (ddc::is_chunk_v<BNormType>) {
-            using GridTheta = domain_element_t<0, BNormType>;
+        } else if constexpr (ddc::is_chunk_v<DFieldRTheta>) {
+            using GridTheta = domain_element_t<0, DFieldRTheta>;
             static_assert(
                     ddc::type_seq_rank_v<
                             GridTheta,
                             fdistrib_domain_tags> == (FDistribDomain::rank() - 3),
                     "Theta should appear third to last in the distribution function domain");
         }
+
         koliop_interface::DoCombMatComputation(m_comb_mat);
 
-        Kokkos::deep_copy(m_hat_As, 1.0); //ddc::fill()
-        Kokkos::deep_copy(m_hat_Zs, 1.0);
-        Kokkos::deep_copy(m_rg, 1.0);
-        Kokkos::deep_copy(m_q_r, 1.0);
-        Kokkos::deep_copy(m_mask_buffer_r, 0.0); // Masked if >= 0.99
-        Kokkos::deep_copy(m_mask_LIM, 0.0); // Masked if >= 0.99
-        Kokkos::deep_copy(m_B_norm, 1.0); // To replace and use argument instead
+        IDomainSp idxrange_sp = ddc::select<Species>(fdistrib_domain);
+        // --> Initialize the mass species
+        ddc::ChunkSpan hat_As_host = ddc::discrete_space<IDimSp>().masses()[idxrange_sp];
+        Kokkos::deep_copy(m_hat_As, hat_As_host.allocation_kokkos_view());
+        // --> Initialize the charge species
+        // TODO: Must be simplified as soon as the charge will be considered as a float and no more as an integer
+        ddc::ChunkSpan hat_Zs_host = ddc::discrete_space<IDimSp>().charges()[idxrange_sp];
+        auto hat_Zs = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                hat_Zs_host.span_cview());
+        device_t<ddc::ChunkSpan<double, IDomainSp>> hat_Zs_proxy(m_hat_Zs.data(), idxrange_sp);
+        ddc::parallel_deepcopy(Kokkos::DefaultExecutionSpace(), hat_Zs_proxy, hat_Zs);
+
+        // --> Initialize the other quantities needed in koliop
+        // TODO: Put Bstar_s as an input variable of the constructor (something more specific than what is done for B_norm must be done)
         Kokkos::deep_copy(m_Bstar_s, 1.0);
 
+        // --> Initialization of the masks that have no sense here to 0.
+        Kokkos::deep_copy(m_mask_buffer_r, 0.0); // Masked if >= 0.99
+        Kokkos::deep_copy(m_mask_LIM, 0.0); // Masked if >= 0.99
+
+        // --> Initialization of vpar and mu grids
         koliop_interface::DumpCoordinates(m_mug, ddc::select<GridMu>(fdistrib_domain));
         koliop_interface::DumpCoordinates(m_vparg, ddc::select<GridVpar>(fdistrib_domain));
 
@@ -224,17 +284,15 @@ public:
 
         std::size_t const n_mu = ddc::select<GridMu>(fdistrib_domain).size();
         std::size_t const n_vpar = ddc::select<GridVpar>(fdistrib_domain).size();
-        std::size_t const n_r = get_r_domain_size(nustar0_r);
-        std::size_t const n_theta = get_theta_domain_size(nustar0_r, B_norm);
+        std::size_t const n_r = get_r_domain_size(nustar);
+        std::size_t const n_theta = get_theta_domain_size(nustar, B_norm);
         std::size_t const n_sp = ddc::select<Species>(fdistrib_domain).size();
         std::size_t const n_batch = fdistrib_domain.size() / (n_mu * n_vpar * n_r * n_theta * n_sp);
 
-        double* nustar0_r_ptr;
-        if constexpr (std::is_same_v<NuStar0Type, double>) {
-            nustar0_r_ptr = &nustar0_r;
-        } else {
-            nustar0_r_ptr = nustar0_r.data_handle();
-        }
+        m_nustar = radialprof_to_koliop(nustar, "nustar");
+        m_rg = radialprof_to_koliop(rg, "rg");
+        m_safety_factor = radialprof_to_koliop(safety_factor, "safety_factor");
+        m_B_norm = rthetaprof_to_koliop(B_norm, n_r, n_theta);
 
         m_operator_handle = koliop_interface::DoOperatorInitialization(
                 n_mu,
@@ -248,12 +306,12 @@ public:
                 m_vparg.data(),
                 coeff_intdmu.data_handle(),
                 coeff_intdvpar.data_handle(),
-                nustar0_r_ptr,
+                m_nustar.data(),
                 m_comb_mat.data(),
                 m_hat_As.data(), // m_hat_As.data_handle()   --> pointer
                 m_hat_Zs.data(),
                 m_rg.data(),
-                m_q_r.data(),
+                m_safety_factor.data(),
                 m_mask_buffer_r.data(),
                 m_mask_LIM.data(),
                 m_B_norm.data(),
@@ -306,21 +364,23 @@ protected:
     koliop_interface::MDL<double*> m_hat_As; // DFieldSp
     /// Normalized charges for all species
     koliop_interface::MDL<double*> m_hat_Zs;
+    /// Radial profile of nustar
+    koliop_interface::MDL<double*> m_nustar;
     /// Mesh points in the radial direction
-    // TODO: See if we need m_rg ?
+    // [TODO]: See if we need m_rg ?
     koliop_interface::MDL<double*> m_rg;
     /// Radial safety factor profile
-    koliop_interface::MDL<double*> m_q_r;
+    koliop_interface::MDL<double*> m_safety_factor;
     /// Mask used to avoid to apply collision in certain region
-    // TODO: Understand this mask
+    // [TODO]: This mask should maybe be deleted in C++ version
     koliop_interface::MDL<double*> m_mask_buffer_r;
     /// Limiter mask in (r,theta)
     koliop_interface::MDL<double**> m_mask_LIM;
     /// B norm in (r,theta)
-    // TODO: Attention this must be 3D --> transfer it in a 1D array ?
+    // [TODO] Attention this must be 3D for generalization to 3D geometry--> transfer it in a 1D array ?
     koliop_interface::MDL<double**> m_B_norm;
     /// Bstar(species,r,theta,vpar)
-    // TODO : Must be 5D for full 3D geometry
+    // [TODO] Must be 5D for full 3D geometry
     koliop_interface::MDL<double****> m_Bstar_s;
     /// grid in mu direction
     koliop_interface::MDL<double*> m_mug;
