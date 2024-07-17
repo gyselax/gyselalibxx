@@ -259,13 +259,8 @@ public:
         ddc::ChunkSpan hat_As_host = ddc::discrete_space<IDimSp>().masses()[idxrange_sp];
         Kokkos::deep_copy(m_hat_As, hat_As_host.allocation_kokkos_view());
         // --> Initialize the charge species
-        // TODO: Must be simplified as soon as the charge will be considered as a float and no more as an integer
         ddc::ChunkSpan hat_Zs_host = ddc::discrete_space<IDimSp>().charges()[idxrange_sp];
-        auto hat_Zs = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                hat_Zs_host.span_cview());
-        device_t<ddc::ChunkSpan<double, IDomainSp>> hat_Zs_proxy(m_hat_Zs.data(), idxrange_sp);
-        ddc::parallel_deepcopy(Kokkos::DefaultExecutionSpace(), hat_Zs_proxy, hat_Zs);
+        Kokkos::deep_copy(m_hat_Zs, hat_Zs_host.allocation_kokkos_view());
 
         // --> Initialize the other quantities needed in koliop
         // TODO: Put Bstar_s as an input variable of the constructor (something more specific than what is done for B_norm must be done)

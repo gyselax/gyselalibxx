@@ -32,13 +32,14 @@ public:
 
     private:
         // charge of the particles (kinetic + adiabatic)
-        ddc::Chunk<int, discrete_domain_type, ddc::KokkosAllocator<int, MemorySpace>> m_charge;
+        ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
+                m_charge;
 
         // mass of the particles of all kinetic species
         ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> m_mass;
 
         // workaround to access charges on the device
-        ddc::ChunkView<int, discrete_domain_type, std::experimental::layout_right, MemorySpace>
+        ddc::ChunkView<double, discrete_domain_type, std::experimental::layout_right, MemorySpace>
                 m_charge_view;
 
         // workaround to access masses on the device
@@ -72,7 +73,8 @@ public:
          * @param[in] charge array storing both kinetic and adiabatic charges
          * @param[in] mass array storing both kinetic and adiabatic masses
          */
-        Impl(ddc::Chunk<int, discrete_domain_type, ddc::KokkosAllocator<int, MemorySpace>> charge,
+        Impl(ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
+                     charge,
              ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
                      mass)
             : m_charge(std::move(charge))
@@ -83,7 +85,7 @@ public:
             assert(charge.size() >= 2);
             bool electron_found = false;
             for (discrete_element_type const isp : m_charge.domain()) {
-                if (m_charge(isp) == -1) {
+                if (m_charge(isp) == -1.) {
                     electron_found = true;
                     m_ielec = isp;
                 }
@@ -103,7 +105,7 @@ public:
          * @param[in] isp a discrete element of either a kinetic or adiabatic species
          * @return the charge associated to the discrete element
          */
-        KOKKOS_FUNCTION int charge(discrete_element_type const isp) const
+        KOKKOS_FUNCTION double charge(discrete_element_type const isp) const
         {
             return m_charge_view(isp);
         }
@@ -150,7 +152,7 @@ KOKKOS_INLINE_FUNCTION ddc::DiscreteElement<IDimSp> ielec()
  * @param[in] isp a discrete element of either a kinetic or adiabatic species
  * @return the charge associated to the discrete element
  */
-KOKKOS_INLINE_FUNCTION int charge(ddc::DiscreteElement<IDimSp> const isp)
+KOKKOS_INLINE_FUNCTION double charge(ddc::DiscreteElement<IDimSp> const isp)
 {
     return ddc::discrete_space<IDimSp>().charge(isp);
 }

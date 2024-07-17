@@ -24,7 +24,7 @@ metadata:
   fdistribu_charges_extents : { type: array, subtype: int64, size: 1 }
   fdistribu_charges:
     type: array
-    subtype: int
+    subtype: double
     size: [ '$fdistribu_charges_extents[0]' ]
   fdistribu_masses_extents : { type: array, subtype: int64, size: 1 }
   fdistribu_masses:

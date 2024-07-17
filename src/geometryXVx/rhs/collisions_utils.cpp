@@ -22,7 +22,7 @@ IndexSp find_ion(IDomainSp const dom_sp)
     assert(dom_sp.size() == 2);
     std::optional<IndexSp> iion_opt;
     for (IndexSp const isp : dom_sp) {
-        if (charge(isp) > 0) {
+        if (charge(isp) > 0.) {
             iion_opt = isp;
         }
     }

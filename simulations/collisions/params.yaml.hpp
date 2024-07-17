@@ -11,12 +11,12 @@ constexpr char const* const params_yaml = R"PDI_CFG(SplineMesh:
   mu_ncells: 63
 
 SpeciesInfo:
-- charge: 1
+- charge: 1.
   mass: 1.
   density_eq: 1.
   temperature_eq: 1.
   mean_velocity_eq: 0.
-- charge: -1
+- charge: -1.
   mass: 5.44e-4
   density_eq: 1.
   temperature_eq: 1.1

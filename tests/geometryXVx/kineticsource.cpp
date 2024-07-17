@@ -55,11 +55,11 @@ TEST(KineticSource, Moments)
     Quadrature<IDimX> const integrate_x(quadrature_coeffs_x);
     Quadrature<IDimVx> const integrate_v(quadrature_coeffs_vx);
 
-    host_t<FieldSp<int>> charges(dom_sp);
-    charges(my_ielec) = -1;
-    charges(my_iion) = 1;
+    host_t<DFieldSp> charges(dom_sp);
+    charges(my_ielec) = -1.;
+    charges(my_iion) = 1.;
     host_t<DFieldSp> masses(dom_sp);
-    ddc::parallel_fill(masses, 1);
+    ddc::parallel_fill(masses, 1.);
 
     // Initialization of the distribution function
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));

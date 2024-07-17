@@ -60,12 +60,12 @@ TEST(KrookSource, Adaptive)
     Quadrature<IDimX> const integrate_x(quadrature_coeffs_x);
     Quadrature<IDimVx> const integrate_v(quadrature_coeffs_vx);
 
-    host_t<FieldSp<int>> charges(dom_sp);
+    host_t<DFieldSp> charges(dom_sp);
     host_t<DFieldSp> masses(dom_sp);
     IndexSp my_iion(dom_sp.front());
     IndexSp my_ielec(dom_sp.back());
-    charges(my_iion) = 1;
-    charges(my_ielec) = -1;
+    charges(my_iion) = 1.;
+    charges(my_ielec) = -1.;
     ddc::for_each(dom_sp, [&](IndexSp const isp) { masses(isp) = 1.0; });
 
     // Initialization of the distribution function
@@ -195,10 +195,10 @@ TEST(KrookSource, Constant)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    host_t<FieldSp<int>> charges(dom_sp);
+    host_t<DFieldSp> charges(dom_sp);
     host_t<DFieldSp> masses(dom_sp);
-    charges(dom_sp.front()) = 1;
-    charges(dom_sp.back()) = -1;
+    charges(dom_sp.front()) = 1.;
+    charges(dom_sp.back()) = -1.;
     ddc::for_each(dom_sp, [&](IndexSp const isp) { masses(isp) = 1.0; });
 
     // Initialization of the distribution function
