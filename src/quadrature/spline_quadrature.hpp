@@ -117,7 +117,7 @@ ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> spline_quadrature_coefficients
 {
     assert((std::is_same_v<
                     typename DDims::continuous_dimension_type,
-                    typename SplineBuilders::bsplines_type::tag_type> and ...));
+                    typename SplineBuilders::continuous_dimension_type> and ...));
 
     // Get coefficients for each dimension
     std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs(

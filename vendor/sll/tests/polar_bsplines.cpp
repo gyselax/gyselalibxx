@@ -58,10 +58,10 @@ struct PolarBsplineFixture<std::tuple<
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC>;
 
-    struct IDimR : GrevillePointsR::interpolation_mesh_type
+    struct IDimR : GrevillePointsR::interpolation_discrete_dimension_type
     {
     };
-    struct IDimP : GrevillePointsP::interpolation_mesh_type
+    struct IDimP : GrevillePointsP::interpolation_discrete_dimension_type
     {
     };
     struct BSplines : PolarBSplines<BSplineR, BSplineP, continuity>

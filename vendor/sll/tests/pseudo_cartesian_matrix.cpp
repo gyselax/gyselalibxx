@@ -57,10 +57,10 @@ public:
             ddc::BoundCond::PERIODIC>;
 
 
-    struct IDimR : InterpPointsR::interpolation_mesh_type
+    struct IDimR : InterpPointsR::interpolation_discrete_dimension_type
     {
     };
-    struct IDimP : InterpPointsP::interpolation_mesh_type
+    struct IDimP : InterpPointsP::interpolation_discrete_dimension_type
     {
     };
 
