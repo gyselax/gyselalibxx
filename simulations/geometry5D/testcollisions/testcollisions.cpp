@@ -31,7 +31,6 @@ int main(int argc, char** argv)
 {
     Kokkos::ScopeGuard scope(argc, argv);
     ddc::ScopeGuard ddc_scope(argc, argv);
-    CollisionsGuard a_collision_guard {8, 0};
 
     long int iter_start;
     PC_tree_t conf_gyselax;
@@ -209,7 +208,9 @@ int main(int argc, char** argv)
 
     // Collision operator initialisation
     DFieldTor1 nustar0_r(dom_tor1);
-    ddc::parallel_fill(nustar0_r, 0.0); //ATTENTION: Must be changed
+    ddc::parallel_fill(nustar0_r, 1.0); //ATTENTION: Must be changed
+    DFieldTor1 safety_factor(dom_tor1);
+    ddc::parallel_fill(safety_factor, 1.0); //ATTENTION: Must be changed
     DDomTorCS dom_tor1_tor2(dom_tor2, dom_tor1);
     DFieldTorCS B_norm(dom_tor1_tor2);
     ddc::parallel_fill(B_norm, 1.0);
@@ -229,6 +230,8 @@ int main(int argc, char** argv)
             coeff_intdmu.span_cview(),
             coeff_intdvpar.span_cview(),
             nustar0_r.span_view(),
+            field_grid_tor1.span_view(),
+            safety_factor.span_view(),
             B_norm.span_view());
 
     steady_clock::time_point const start = steady_clock::now();

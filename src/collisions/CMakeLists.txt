@@ -1,19 +1,18 @@
 # SPDX-License-Identifier: MIT
 
-add_library("collision" STATIC
+add_library("collisions" STATIC
     koliop_interface.cpp
 )
 
-target_include_directories("collision"
+target_include_directories("collisions"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-target_link_libraries("collision"
+target_link_libraries("collisions"
     PUBLIC
         DDC::DDC
-        gslx::geometry5D
         gslx::utils
         koliop::koliop
 )
 
-add_library("gslx::collision" ALIAS "collision")
+add_library("gslx::collisions" ALIAS "collisions")
