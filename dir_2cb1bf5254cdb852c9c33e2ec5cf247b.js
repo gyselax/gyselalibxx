@@ -1,10 +1,11 @@
 var dir_2cb1bf5254cdb852c9c33e2ec5cf247b =
 [
     [ "advection", "dir_a0723bd535f2195612463753c5d9b125.html", "dir_a0723bd535f2195612463753c5d9b125" ],
-    [ "collision", "dir_a1598d657d8d955e7fc9dd5a691bdcaf.html", "dir_a1598d657d8d955e7fc9dd5a691bdcaf" ],
+    [ "collisions", "dir_5295c8ed08ee7c74c586359628021cf7.html", "dir_5295c8ed08ee7c74c586359628021cf7" ],
     [ "data_types", "dir_b275d1bfd448437cc7a148047f8d5592.html", "dir_b275d1bfd448437cc7a148047f8d5592" ],
     [ "geometry5D", "dir_d19a9aef731ec5e9b746a373b6509003.html", "dir_d19a9aef731ec5e9b746a373b6509003" ],
     [ "geometryRTheta", "dir_2daa31455a745d8a4b29bdb1d755058a.html", "dir_2daa31455a745d8a4b29bdb1d755058a" ],
+    [ "geometryVparMu", "dir_bed635a6e96132b7fe749c72b0b07a99.html", "dir_bed635a6e96132b7fe749c72b0b07a99" ],
     [ "geometryXVx", "dir_a2bb6054debc127821c0784e49f1530c.html", "dir_a2bb6054debc127821c0784e49f1530c" ],
     [ "geometryXY", "dir_708e2f07fae7cfcd9492f31176bb16a6.html", "dir_708e2f07fae7cfcd9492f31176bb16a6" ],
     [ "geometryXYVxVy", "dir_5f726612e6f7feddf1426504728ece79.html", "dir_5f726612e6f7feddf1426504728ece79" ],

@@ -5,7 +5,6 @@ var src =
       [ "Velocity advection", "src_advection.html#src_advection__Velocity_advection", null ],
       [ "1D advection with a given advection field", "src_advection.html#src_advection__1D_advection_with_a_given_advection_field", null ]
     ] ],
-    [ "Collisions", "src_collision.html", null ],
     [ "Data Storage Types", "src_data_types.html", [
       [ "VectorField", "src_data_types.html#src_data_types__VectorField", null ],
       [ "DerivField", "src_data_types.html#src_data_types__DerivField", null ]

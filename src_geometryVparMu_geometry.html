@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: CollisionsGuard Class Reference</title>
+<title>Gyselalib++: GeometryVparMu :</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classCollisionsGuard.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('src_geometryVparMu_geometry.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -98,78 +98,25 @@ $(document).ready(function(){initNavTree('classCollisionsGuard.html',''); initRe
 </iframe>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classCollisionsGuard-members.html">List of all members</a>  </div>
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">CollisionsGuard Class Reference</div>  </div>
+<div class="title">GeometryVparMu : </div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Header Guard for collision operator.  
- <a href="classCollisionsGuard.html#details">More...</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a319cfc2fd09a547ff55f1d3daf3261f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsGuard.html#a319cfc2fd09a547ff55f1d3daf3261f8">CollisionsGuard</a> (std::size_t a_host_thread_count, std::size_t a_device_index=0)</td></tr>
-<tr class="separator:a319cfc2fd09a547ff55f1d3daf3261f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header Guard for collision operator. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a319cfc2fd09a547ff55f1d3daf3261f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a319cfc2fd09a547ff55f1d3daf3261f8">&#9670;&nbsp;</a></span>CollisionsGuard()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">CollisionsGuard::CollisionsGuard </td>
-          <td>(</td>
-          <td class="paramtype">std::size_t&#160;</td>
-          <td class="paramname"><em>a_host_thread_count</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::size_t&#160;</td>
-          <td class="paramname"><em>a_device_index</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">a_host_thread_count</td><td>When compiled for CPU, this represents the number of OpenMP thread the operator should use. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">a_device_index</td><td>The device the operator should use, you almost always want to use the first and only one visible. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collision/<a class="el" href="CollisionSpVparMu_8hpp_source.html">CollisionSpVparMu.hpp</a></li>
+<div class="textblock"><p>The geometry folder contains a helper file <code>geometry.hpp</code> which provides shortcuts to the types needed to define the 2D velocity geometry (vpar,mu).</p><ul>
+<li>Concerning the 3D space, several coordinate systems are used:<ul>
+<li><a class="el" href="structVpar.html" title="Define non periodic parallel velocity .">Vpar</a> : the parallel velocity</li>
+<li><a class="el" href="structMu.html" title="Define non periodic magnetic momentum .">Mu</a> : the magnetic momentum (i.e \(\mu = \frac{v_{\perp}^2}{2B}\))</li>
+<li>V2D = (<a class="el" href="structVpar.html" title="Define non periodic parallel velocity .">Vpar</a>, <a class="el" href="structMu.html" title="Define non periodic magnetic momentum .">Mu</a>) </li>
 </ul>
-</div><!-- contents -->
+</li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classCollisionsGuard.html">CollisionsGuard</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

@@ -1,9 +1,16 @@
 var classMaxwellianEquilibrium =
 [
-    [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0", null ],
+    [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html#ad34aeb8e23d3f037160b1e3f56f81d64", null ],
     [ "~MaxwellianEquilibrium", "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0", null ],
     [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0", null ],
     [ "~MaxwellianEquilibrium", "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0", null ],
+    [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0", null ],
+    [ "~MaxwellianEquilibrium", "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0", null ],
+    [ "operator()", "classMaxwellianEquilibrium.html#a25be9ba7cc2b1fdbf195eae6201b578c", null ],
+    [ "mass", "classMaxwellianEquilibrium.html#a54322dbedd31c2e2e70a9737fb076790", null ],
+    [ "density_eq", "classMaxwellianEquilibrium.html#a0abd62a61de4d0946ed518dc76b7e6c0", null ],
+    [ "temperature_eq", "classMaxwellianEquilibrium.html#a4f4cfdcb7499198d67ab12ffb6b1c1b0", null ],
+    [ "mean_velocity_eq", "classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99", null ],
     [ "operator()", "classMaxwellianEquilibrium.html#a0f4e3335acb638b07bd95fa868842d64", null ],
     [ "density_eq", "classMaxwellianEquilibrium.html#a0abd62a61de4d0946ed518dc76b7e6c0", null ],
     [ "temperature_eq", "classMaxwellianEquilibrium.html#a4f4cfdcb7499198d67ab12ffb6b1c1b0", null ],

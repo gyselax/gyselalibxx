@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('classMaxwellianEquilibrium.html',''); 
 </div><!--header-->
 <div class="contents">
 
-<p>A class that initializes the distribution function as a Maxwellian.  
+<p>Equilibrium operator as Maxwellian. This initializes all species.  
  <a href="classMaxwellianEquilibrium.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for MaxwellianEquilibrium:</div>
@@ -116,15 +116,34 @@ Inheritance diagram for MaxwellianEquilibrium:</div>
  <div class="center">
   <img src="classMaxwellianEquilibrium.png" usemap="#MaxwellianEquilibrium_map" alt=""/>
   <map id="MaxwellianEquilibrium_map" name="MaxwellianEquilibrium_map">
-<area href="classIEquilibrium.html" title="An abstract class for initializing a distribution function that does not depend on space." alt="IEquilibrium" shape="rect" coords="0,0,136,24"/>
-<area href="classIEquilibrium.html" title="An abstract class for initializing a distribution function that does not depend on space." alt="IEquilibrium" shape="rect" coords="146,0,282,24"/>
+<area href="classIEquilibrium.html" title="An abstract class for initializing a distribution function in (species,vpar,mu)." alt="IEquilibrium" shape="rect" coords="0,0,136,24"/>
+<area href="classIEquilibrium.html" title="An abstract class for initializing a distribution function in (species,vpar,mu)." alt="IEquilibrium" shape="rect" coords="146,0,282,24"/>
+<area href="classIEquilibrium.html" title="An abstract class for initializing a distribution function in (species,vpar,mu)." alt="IEquilibrium" shape="rect" coords="292,0,428,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ad34aeb8e23d3f037160b1e3f56f81d64"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#ad34aeb8e23d3f037160b1e3f56f81d64">MaxwellianEquilibrium</a> (host_t&lt; DFieldSp &gt; <a class="el" href="classMaxwellianEquilibrium.html#a54322dbedd31c2e2e70a9737fb076790">mass</a>, host_t&lt; DFieldSp &gt; <a class="el" href="classMaxwellianEquilibrium.html#a0abd62a61de4d0946ed518dc76b7e6c0">density_eq</a>, host_t&lt; DFieldSp &gt; <a class="el" href="classMaxwellianEquilibrium.html#a4f4cfdcb7499198d67ab12ffb6b1c1b0">temperature_eq</a>, host_t&lt; DFieldSp &gt; <a class="el" href="classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99">mean_velocity_eq</a>, double magnetic_field)</td></tr>
+<tr class="memdesc:ad34aeb8e23d3f037160b1e3f56f81d64"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for the <a class="el" href="classMaxwellianEquilibrium.html" title="Equilibrium operator as Maxwellian. This initializes all species.">MaxwellianEquilibrium</a> class.  <a href="classMaxwellianEquilibrium.html#ad34aeb8e23d3f037160b1e3f56f81d64">More...</a><br /></td></tr>
+<tr class="separator:ad34aeb8e23d3f037160b1e3f56f81d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25be9ba7cc2b1fdbf195eae6201b578c"><td class="memItemLeft" align="right" valign="top">DSpanSpVparMu&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a25be9ba7cc2b1fdbf195eae6201b578c">operator()</a> (DSpanSpVparMu allfequilibrium) const override</td></tr>
+<tr class="memdesc:a25be9ba7cc2b1fdbf195eae6201b578c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes allfequilibrium as a Maxwellian.  <a href="classMaxwellianEquilibrium.html#a25be9ba7cc2b1fdbf195eae6201b578c">More...</a><br /></td></tr>
+<tr class="separator:a25be9ba7cc2b1fdbf195eae6201b578c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54322dbedd31c2e2e70a9737fb076790"><td class="memItemLeft" align="right" valign="top">host_t&lt; DViewSp &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a54322dbedd31c2e2e70a9737fb076790">mass</a> () const</td></tr>
+<tr class="memdesc:a54322dbedd31c2e2e70a9737fb076790"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the m_mass member variable of the class.  <a href="classMaxwellianEquilibrium.html#a54322dbedd31c2e2e70a9737fb076790">More...</a><br /></td></tr>
+<tr class="separator:a54322dbedd31c2e2e70a9737fb076790"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0abd62a61de4d0946ed518dc76b7e6c0"><td class="memItemLeft" align="right" valign="top">host_t&lt; DViewSp &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a0abd62a61de4d0946ed518dc76b7e6c0">density_eq</a> () const</td></tr>
+<tr class="memdesc:a0abd62a61de4d0946ed518dc76b7e6c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the m_density_eq member variable of the class.  <a href="classMaxwellianEquilibrium.html#a0abd62a61de4d0946ed518dc76b7e6c0">More...</a><br /></td></tr>
+<tr class="separator:a0abd62a61de4d0946ed518dc76b7e6c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f4cfdcb7499198d67ab12ffb6b1c1b0"><td class="memItemLeft" align="right" valign="top">host_t&lt; DViewSp &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a4f4cfdcb7499198d67ab12ffb6b1c1b0">temperature_eq</a> () const</td></tr>
+<tr class="memdesc:a4f4cfdcb7499198d67ab12ffb6b1c1b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the m_temperature_eq member variable of the class.  <a href="classMaxwellianEquilibrium.html#a4f4cfdcb7499198d67ab12ffb6b1c1b0">More...</a><br /></td></tr>
+<tr class="separator:a4f4cfdcb7499198d67ab12ffb6b1c1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7440e168a827388920b554888c65c99"><td class="memItemLeft" align="right" valign="top">host_t&lt; DViewSp &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99">mean_velocity_eq</a> () const</td></tr>
+<tr class="memdesc:aa7440e168a827388920b554888c65c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the m_mean_velocity_eq member variable of the class.  <a href="classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99">More...</a><br /></td></tr>
+<tr class="separator:aa7440e168a827388920b554888c65c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f657dcdbd3aa11ddeef82f44bb87eb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0">MaxwellianEquilibrium</a> (host_t&lt; DFieldSp &gt; <a class="el" href="classMaxwellianEquilibrium.html#a0abd62a61de4d0946ed518dc76b7e6c0">density_eq</a>, host_t&lt; DFieldSp &gt; <a class="el" href="classMaxwellianEquilibrium.html#a4f4cfdcb7499198d67ab12ffb6b1c1b0">temperature_eq</a>, host_t&lt; DFieldSp &gt; <a class="el" href="classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99">mean_velocity_eq</a>)</td></tr>
-<tr class="memdesc:a5f657dcdbd3aa11ddeef82f44bb87eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for the <a class="el" href="classMaxwellianEquilibrium.html" title="A class that initializes the distribution function as a Maxwellian.">MaxwellianEquilibrium</a> class.  <a href="classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0">More...</a><br /></td></tr>
+<tr class="memdesc:a5f657dcdbd3aa11ddeef82f44bb87eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for the <a class="el" href="classMaxwellianEquilibrium.html" title="Equilibrium operator as Maxwellian. This initializes all species.">MaxwellianEquilibrium</a> class.  <a href="classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0">More...</a><br /></td></tr>
 <tr class="separator:a5f657dcdbd3aa11ddeef82f44bb87eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f4e3335acb638b07bd95fa868842d64"><td class="memItemLeft" align="right" valign="top">DSpanSpVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a0f4e3335acb638b07bd95fa868842d64">operator()</a> (DSpanSpVx allfequilibrium) const override</td></tr>
 <tr class="memdesc:a0f4e3335acb638b07bd95fa868842d64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes allfequilibrium as a Maxwellian.  <a href="classMaxwellianEquilibrium.html#a0f4e3335acb638b07bd95fa868842d64">More...</a><br /></td></tr>
@@ -139,7 +158,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa7440e168a827388920b554888c65c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the m_mean_velocity_eq member variable of the class.  <a href="classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99">More...</a><br /></td></tr>
 <tr class="separator:aa7440e168a827388920b554888c65c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f657dcdbd3aa11ddeef82f44bb87eb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0">MaxwellianEquilibrium</a> (host_t&lt; DFieldSp &gt; <a class="el" href="classMaxwellianEquilibrium.html#a0abd62a61de4d0946ed518dc76b7e6c0">density_eq</a>, host_t&lt; DFieldSp &gt; <a class="el" href="classMaxwellianEquilibrium.html#a4f4cfdcb7499198d67ab12ffb6b1c1b0">temperature_eq</a>, host_t&lt; DFieldSp &gt; <a class="el" href="classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99">mean_velocity_eq</a>)</td></tr>
-<tr class="memdesc:a5f657dcdbd3aa11ddeef82f44bb87eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for the <a class="el" href="classMaxwellianEquilibrium.html" title="A class that initializes the distribution function as a Maxwellian.">MaxwellianEquilibrium</a> class.  <a href="classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0">More...</a><br /></td></tr>
+<tr class="memdesc:a5f657dcdbd3aa11ddeef82f44bb87eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for the <a class="el" href="classMaxwellianEquilibrium.html" title="Equilibrium operator as Maxwellian. This initializes all species.">MaxwellianEquilibrium</a> class.  <a href="classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0">More...</a><br /></td></tr>
 <tr class="separator:a5f657dcdbd3aa11ddeef82f44bb87eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7052573b3a3cb1a05f8e8bf3911bb293"><td class="memItemLeft" align="right" valign="top">DSpanSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a7052573b3a3cb1a05f8e8bf3911bb293">operator()</a> (DSpanSpVxVy allfequilibrium) const override</td></tr>
 <tr class="memdesc:a7052573b3a3cb1a05f8e8bf3911bb293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes allfequilibrium as a Maxwellian.  <a href="classMaxwellianEquilibrium.html#a7052573b3a3cb1a05f8e8bf3911bb293">More...</a><br /></td></tr>
@@ -159,6 +178,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a9a77fb0773e84dba996858d9c2ea33fd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a9a77fb0773e84dba996858d9c2ea33fd">init_from_input</a> (IDomainSp dom_kinsp, PC_tree_t const &amp;yaml_input_file)</td></tr>
 <tr class="memdesc:a9a77fb0773e84dba996858d9c2ea33fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the density, temperature and mean velocity required to initialize the Maxwellian in a YAML input file.  <a href="classMaxwellianEquilibrium.html#a9a77fb0773e84dba996858d9c2ea33fd">More...</a><br /></td></tr>
 <tr class="separator:a9a77fb0773e84dba996858d9c2ea33fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ec1c7564a645f3ad3d0d263737510e3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a1ec1c7564a645f3ad3d0d263737510e3">compute_maxwellian</a> (DSpanVparMu const fMaxwellian, double const <a class="el" href="classMaxwellianEquilibrium.html#a54322dbedd31c2e2e70a9737fb076790">mass</a>, double const density, double const temperature, double const mean_velocity, double const magnetic_field)</td></tr>
+<tr class="memdesc:a1ec1c7564a645f3ad3d0d263737510e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a Maxwellian distribution function.  <a href="classMaxwellianEquilibrium.html#a1ec1c7564a645f3ad3d0d263737510e3">More...</a><br /></td></tr>
+<tr class="separator:a1ec1c7564a645f3ad3d0d263737510e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a77fb0773e84dba996858d9c2ea33fd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a9a77fb0773e84dba996858d9c2ea33fd">init_from_input</a> (IDomainSp dom_kinsp, PC_tree_t const &amp;yaml_input_file)</td></tr>
+<tr class="memdesc:a9a77fb0773e84dba996858d9c2ea33fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the density, temperature and mean velocity required to initialize the Maxwellian in a YAML input file.  <a href="classMaxwellianEquilibrium.html#a9a77fb0773e84dba996858d9c2ea33fd">More...</a><br /></td></tr>
+<tr class="separator:a9a77fb0773e84dba996858d9c2ea33fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e23dd1e866fe57900314cca7f6c1ec9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaxwellianEquilibrium.html#a3e23dd1e866fe57900314cca7f6c1ec9">compute_maxwellian</a> (DSpanVx const fMaxwellian, double const density, double const temperature, double const mean_velocity)</td></tr>
 <tr class="memdesc:a3e23dd1e866fe57900314cca7f6c1ec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a Maxwellian distribution function.  <a href="classMaxwellianEquilibrium.html#a3e23dd1e866fe57900314cca7f6c1ec9">More...</a><br /></td></tr>
 <tr class="separator:a3e23dd1e866fe57900314cca7f6c1ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,11 +195,69 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a72f9f23f4753028c745d92b6512afd0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A class that initializes the distribution function as a Maxwellian. </p>
-<p>Equilibrium operator as Maxwellian. This initializes all species. </p>
+<div class="textblock"><p>Equilibrium operator as Maxwellian. This initializes all species. </p>
+<p>A class that initializes the distribution function as a Maxwellian. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad34aeb8e23d3f037160b1e3f56f81d64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad34aeb8e23d3f037160b1e3f56f81d64">&#9670;&nbsp;</a></span>MaxwellianEquilibrium() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MaxwellianEquilibrium::MaxwellianEquilibrium </td>
+          <td>(</td>
+          <td class="paramtype">host_t&lt; DFieldSp &gt;&#160;</td>
+          <td class="paramname"><em>mass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">host_t&lt; DFieldSp &gt;&#160;</td>
+          <td class="paramname"><em>density_eq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">host_t&lt; DFieldSp &gt;&#160;</td>
+          <td class="paramname"><em>temperature_eq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">host_t&lt; DFieldSp &gt;&#160;</td>
+          <td class="paramname"><em>mean_velocity_eq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>magnetic_field</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The constructor for the <a class="el" href="classMaxwellianEquilibrium.html" title="Equilibrium operator as Maxwellian. This initializes all species.">MaxwellianEquilibrium</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">mass</td><td>The mass of the species </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">density_eq</td><td>The density of the Maxwellian </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">temperature_eq</td><td>The temperature of the Maxwellian </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mean_velocity_eq</td><td>The mean velocity of the Maxwellian </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">magnetic_field</td><td>The magnetic field </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a5f657dcdbd3aa11ddeef82f44bb87eb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f657dcdbd3aa11ddeef82f44bb87eb0">&#9670;&nbsp;</a></span>MaxwellianEquilibrium() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f657dcdbd3aa11ddeef82f44bb87eb0">&#9670;&nbsp;</a></span>MaxwellianEquilibrium() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,7 +288,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The constructor for the <a class="el" href="classMaxwellianEquilibrium.html" title="A class that initializes the distribution function as a Maxwellian.">MaxwellianEquilibrium</a> class. </p>
+<p>The constructor for the <a class="el" href="classMaxwellianEquilibrium.html" title="Equilibrium operator as Maxwellian. This initializes all species.">MaxwellianEquilibrium</a> class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">density_eq</td><td>The density of the Maxwellian </td></tr>
@@ -218,7 +301,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a5f657dcdbd3aa11ddeef82f44bb87eb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f657dcdbd3aa11ddeef82f44bb87eb0">&#9670;&nbsp;</a></span>MaxwellianEquilibrium() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f657dcdbd3aa11ddeef82f44bb87eb0">&#9670;&nbsp;</a></span>MaxwellianEquilibrium() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,7 +332,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The constructor for the <a class="el" href="classMaxwellianEquilibrium.html" title="A class that initializes the distribution function as a Maxwellian.">MaxwellianEquilibrium</a> class. </p>
+<p>The constructor for the <a class="el" href="classMaxwellianEquilibrium.html" title="Equilibrium operator as Maxwellian. This initializes all species.">MaxwellianEquilibrium</a> class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">density_eq</td><td>The density of the Maxwellian </td></tr>
@@ -263,7 +346,280 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a9a77fb0773e84dba996858d9c2ea33fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a77fb0773e84dba996858d9c2ea33fd">&#9670;&nbsp;</a></span>init_from_input() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a77fb0773e84dba996858d9c2ea33fd">&#9670;&nbsp;</a></span>init_from_input() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classMaxwellianEquilibrium.html">MaxwellianEquilibrium</a> MaxwellianEquilibrium::init_from_input </td>
+          <td>(</td>
+          <td class="paramtype">IDomainSp&#160;</td>
+          <td class="paramname"><em>dom_kinsp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PC_tree_t const &amp;&#160;</td>
+          <td class="paramname"><em>yaml_input_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the density, temperature and mean velocity required to initialize the Maxwellian in a YAML input file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom_kinsp</td><td>Discrete Domain for the kinetic species </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">yaml_input_file</td><td>YAML input file </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an instance of Maxwellian distribution function. </dd></dl>
+
+</div>
+</div>
+<a id="a25be9ba7cc2b1fdbf195eae6201b578c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25be9ba7cc2b1fdbf195eae6201b578c">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DSpanSpVparMu MaxwellianEquilibrium::operator() </td>
+          <td>(</td>
+          <td class="paramtype">DSpanSpVparMu&#160;</td>
+          <td class="paramname"><em>allfequilibrium</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes allfequilibrium as a Maxwellian. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">allfequilibrium</td><td>A Span containing a Maxwellian distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A Span containing a Maxwellian distribution function. </dd></dl>
+
+<p>Implements <a class="el" href="classIEquilibrium.html#af90b39211d1e331b572c9dc349e7908f">IEquilibrium</a>.</p>
+
+</div>
+</div>
+<a id="a1ec1c7564a645f3ad3d0d263737510e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ec1c7564a645f3ad3d0d263737510e3">&#9670;&nbsp;</a></span>compute_maxwellian() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void MaxwellianEquilibrium::compute_maxwellian </td>
+          <td>(</td>
+          <td class="paramtype">DSpanVparMu const&#160;</td>
+          <td class="paramname"><em>fMaxwellian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const&#160;</td>
+          <td class="paramname"><em>mass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const&#160;</td>
+          <td class="paramname"><em>density</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const&#160;</td>
+          <td class="paramname"><em>temperature</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const&#160;</td>
+          <td class="paramname"><em>mean_velocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const&#160;</td>
+          <td class="paramname"><em>magnetic_field</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute a Maxwellian distribution function. </p>
+<p>The Maxwellian distribution function is defined as Compute $fM(v,mu) = (2*PI*T)**1.5*n*exp(-E)$ with</p><ul>
+<li>$n$ the density, $T$ the temperature and $u$ the mean velocity</li>
+<li>$B$ the magnetic field and</li>
+<li>$E$ the energy defined as $E = (0.5*(v-u)**2+mu*B)/T$. <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">fMaxwellian</td><td>A Maxwellian distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mass</td><td>Mass of the species. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">density</td><td>A parameter that represents the density of Maxwellian. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">temperature</td><td>A parameter that represents the temperature of Maxwellian. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mean_velocity</td><td>A parameter that represents the mean velocity of Maxwellian. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">magnetic_field</td><td>Magnetic field. </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
+</ul>
+
+</div>
+</div>
+<a id="a54322dbedd31c2e2e70a9737fb076790"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54322dbedd31c2e2e70a9737fb076790">&#9670;&nbsp;</a></span>mass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">host_t&lt;DViewSp&gt; MaxwellianEquilibrium::mass </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A method for accessing the m_mass member variable of the class. </p>
+<dl class="section return"><dt>Returns</dt><dd>A view containing the m_mass value. </dd></dl>
+
+</div>
+</div>
+<a id="a0abd62a61de4d0946ed518dc76b7e6c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0abd62a61de4d0946ed518dc76b7e6c0">&#9670;&nbsp;</a></span>density_eq() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">host_t&lt;DViewSp&gt; MaxwellianEquilibrium::density_eq </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A method for accessing the m_density_eq member variable of the class. </p>
+<dl class="section return"><dt>Returns</dt><dd>A view containing the m_density_eq value. </dd></dl>
+
+</div>
+</div>
+<a id="a4f4cfdcb7499198d67ab12ffb6b1c1b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f4cfdcb7499198d67ab12ffb6b1c1b0">&#9670;&nbsp;</a></span>temperature_eq() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">host_t&lt;DViewSp&gt; MaxwellianEquilibrium::temperature_eq </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A method for accessing the m_temperature_eq member variable of the class. </p>
+<dl class="section return"><dt>Returns</dt><dd>A view containing the m_temperature_eq value. </dd></dl>
+
+</div>
+</div>
+<a id="aa7440e168a827388920b554888c65c99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7440e168a827388920b554888c65c99">&#9670;&nbsp;</a></span>mean_velocity_eq() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">host_t&lt;DViewSp&gt; MaxwellianEquilibrium::mean_velocity_eq </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A method for accessing the m_mean_velocity_eq member variable of the class. </p>
+<dl class="section return"><dt>Returns</dt><dd>A view containing the m_velocity_eq value. </dd></dl>
+
+</div>
+</div>
+<a id="a9a77fb0773e84dba996858d9c2ea33fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a77fb0773e84dba996858d9c2ea33fd">&#9670;&nbsp;</a></span>init_from_input() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,7 +665,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a0f4e3335acb638b07bd95fa868842d64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f4e3335acb638b07bd95fa868842d64">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f4e3335acb638b07bd95fa868842d64">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -346,7 +702,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a3e23dd1e866fe57900314cca7f6c1ec9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e23dd1e866fe57900314cca7f6c1ec9">&#9670;&nbsp;</a></span>compute_maxwellian() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e23dd1e866fe57900314cca7f6c1ec9">&#9670;&nbsp;</a></span>compute_maxwellian() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -405,7 +761,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a0abd62a61de4d0946ed518dc76b7e6c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0abd62a61de4d0946ed518dc76b7e6c0">&#9670;&nbsp;</a></span>density_eq() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0abd62a61de4d0946ed518dc76b7e6c0">&#9670;&nbsp;</a></span>density_eq() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -433,7 +789,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a4f4cfdcb7499198d67ab12ffb6b1c1b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f4cfdcb7499198d67ab12ffb6b1c1b0">&#9670;&nbsp;</a></span>temperature_eq() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f4cfdcb7499198d67ab12ffb6b1c1b0">&#9670;&nbsp;</a></span>temperature_eq() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -461,7 +817,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="aa7440e168a827388920b554888c65c99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7440e168a827388920b554888c65c99">&#9670;&nbsp;</a></span>mean_velocity_eq() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7440e168a827388920b554888c65c99">&#9670;&nbsp;</a></span>mean_velocity_eq() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -489,7 +845,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a9a77fb0773e84dba996858d9c2ea33fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a77fb0773e84dba996858d9c2ea33fd">&#9670;&nbsp;</a></span>init_from_input() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a77fb0773e84dba996858d9c2ea33fd">&#9670;&nbsp;</a></span>init_from_input() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -535,7 +891,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a7052573b3a3cb1a05f8e8bf3911bb293"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7052573b3a3cb1a05f8e8bf3911bb293">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7052573b3a3cb1a05f8e8bf3911bb293">&#9670;&nbsp;</a></span>operator()() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -572,7 +928,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a72f9f23f4753028c745d92b6512afd0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72f9f23f4753028c745d92b6512afd0e">&#9670;&nbsp;</a></span>compute_maxwellian() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a72f9f23f4753028c745d92b6512afd0e">&#9670;&nbsp;</a></span>compute_maxwellian() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -631,7 +987,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a9d987a36ab8c0610b39397b5576da6e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d987a36ab8c0610b39397b5576da6e3">&#9670;&nbsp;</a></span>density_eq() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d987a36ab8c0610b39397b5576da6e3">&#9670;&nbsp;</a></span>density_eq() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -659,7 +1015,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="aa97a6ffa2d60eef457be47111d2c9a51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa97a6ffa2d60eef457be47111d2c9a51">&#9670;&nbsp;</a></span>temperature_eq() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa97a6ffa2d60eef457be47111d2c9a51">&#9670;&nbsp;</a></span>temperature_eq() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -687,7 +1043,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="aad0aaed893509562108c46bb204be3ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad0aaed893509562108c46bb204be3ea">&#9670;&nbsp;</a></span>mean_velocity_eq() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aad0aaed893509562108c46bb204be3ea">&#9670;&nbsp;</a></span>mean_velocity_eq() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -715,7 +1071,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialization/<a class="el" href="geometryXVx_2initialization_2maxwellianequilibrium_8hpp_source.html">maxwellianequilibrium.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialization/<a class="el" href="geometryVparMu_2initialization_2maxwellianequilibrium_8hpp_source.html">maxwellianequilibrium.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -119,9 +119,9 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3adc35b26c9a0da1499aaf1617be2f5c"><td class="memItemLeft" align="right" valign="top">::koliop_Operator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekoliop__interface.html#a3adc35b26c9a0da1499aaf1617be2f5c">DoOperatorInitialization</a> (std::size_t the_mu_extent, std::size_t the_vpar_extent, std::size_t the_r_extent, std::size_t the_theta_extent, std::size_t the_phi_extent, std::size_t the_species_extent, std::int64_t ir_SOL_separatrix, const double *mug, const double *vparg, const double *coeff_intdmu, const double *coeff_intdvpar, const double *nustar0_r, const double *comb_mat, const double *hat_As, const double *hat_Zs, const double *rg, const double *q_r, const double *mask_buffer_r, const double *mask_LIM, const double *B_norm, const double *Bstar_s)</td></tr>
-<tr class="memdesc:a3adc35b26c9a0da1499aaf1617be2f5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the collision operator defined in koliop.  <a href="namespacekoliop__interface.html#a3adc35b26c9a0da1499aaf1617be2f5c">More...</a><br /></td></tr>
-<tr class="separator:a3adc35b26c9a0da1499aaf1617be2f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37a50906b908eec98c31c438bf263ee5"><td class="memItemLeft" align="right" valign="top">::koliop_Operator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekoliop__interface.html#a37a50906b908eec98c31c438bf263ee5">DoOperatorInitialization</a> (std::size_t the_mu_extent, std::size_t the_vpar_extent, std::size_t the_r_extent, std::size_t the_theta_extent, std::size_t the_phi_extent, std::size_t the_species_extent, std::int64_t ir_SOL_separatrix, const double *mug, const double *vparg, const double *coeff_intdmu, const double *coeff_intdvpar, const double *nustar, const double *comb_mat, const double *hat_As, const double *hat_Zs, const double *rg, const double *safety_factor, const double *mask_buffer_r, const double *mask_LIM, const double *B_norm, const double *Bstar_s)</td></tr>
+<tr class="memdesc:a37a50906b908eec98c31c438bf263ee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the collision operator defined in koliop.  <a href="namespacekoliop__interface.html#a37a50906b908eec98c31c438bf263ee5">More...</a><br /></td></tr>
+<tr class="separator:a37a50906b908eec98c31c438bf263ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9d5eadac891589fa9c91fff85f3b4fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekoliop__interface.html#ac9d5eadac891589fa9c91fff85f3b4fc">DoCombMatComputation</a> (<a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">MDL</a>&lt; double[6][6]&gt; &amp;comb_mat)</td></tr>
 <tr class="memdesc:ac9d5eadac891589fa9c91fff85f3b4fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the combinatory (6x6) matrix.  <a href="namespacekoliop__interface.html#ac9d5eadac891589fa9c91fff85f3b4fc">More...</a><br /></td></tr>
 <tr class="separator:ac9d5eadac891589fa9c91fff85f3b4fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,8 +156,8 @@ template&lt;typename Extent &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a3adc35b26c9a0da1499aaf1617be2f5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3adc35b26c9a0da1499aaf1617be2f5c">&#9670;&nbsp;</a></span>DoOperatorInitialization()</h2>
+<a id="a37a50906b908eec98c31c438bf263ee5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37a50906b908eec98c31c438bf263ee5">&#9670;&nbsp;</a></span>DoOperatorInitialization()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -232,7 +232,7 @@ template&lt;typename Extent &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>nustar0_r</em>, </td>
+          <td class="paramname"><em>nustar</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -262,7 +262,7 @@ template&lt;typename Extent &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>q_r</em>, </td>
+          <td class="paramname"><em>safety_factor</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -310,12 +310,12 @@ template&lt;typename Extent &gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">vparg</td><td>The coordinates of the grid of parallel velocities. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">coeff_intdmu</td><td>The quadrature coefficients to integrate on the grid of magnetic moments. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">coeff_intdvpar</td><td>The quadrature coefficients to integrate on the grid of parallel velocities. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nustar0_r</td><td>The radial profile of the collisionality. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nustar</td><td>The radial profile of the collisionality. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">comb_mat</td><td>The combinatory (6x6) matrix. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">hat_As</td><td>The normalized masses for all species. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">hat_Zs</td><td>The normalized charges for all species. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">rg</td><td>The coordinates of the grid of radial points. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">q_r</td><td>The radial profile of the safety factor. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">safety_factor</td><td>The radial profile of the safety factor. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mask_buffer_r</td><td>The mask used to avoid applying collisions in certain radial region. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mask_LIM</td><td>The limiter mask defined over the polar slice. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">B_norm</td><td>The norm of the magnetic field defined over the polar slice. </td></tr>

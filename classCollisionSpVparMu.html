@@ -114,6 +114,10 @@ $(document).ready(function(){initNavTree('classCollisionSpVparMu.html',''); init
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr class="memitem:a704330227438f436864a935baa11376e"><td class="memItemLeft" align="right" valign="top"><a id="a704330227438f436864a935baa11376e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a704330227438f436864a935baa11376e">DFieldSp</a> = device_t&lt; ddc::Chunk&lt; double, IDomainSp &gt; &gt;</td></tr>
+<tr class="memdesc:a704330227438f436864a935baa11376e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on species domain. <br /></td></tr>
+<tr class="separator:a704330227438f436864a935baa11376e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82df1d190b382c0ada8f504826777ebf"><td class="memItemLeft" align="right" valign="top"><a id="a82df1d190b382c0ada8f504826777ebf"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a82df1d190b382c0ada8f504826777ebf">DDomMu</a> = ddc::DiscreteDomain&lt; <a class="el" href="structGridMu.html">GridMu</a> &gt;</td></tr>
 <tr class="memdesc:a82df1d190b382c0ada8f504826777ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the magnetic moment. <br /></td></tr>
@@ -137,10 +141,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a34e5b2105430692c4f4a01346ebf8f3c"><td class="memTemplParams" colspan="2">template&lt;class NuStar0Type , class BNormType &gt; </td></tr>
-<tr class="memitem:a34e5b2105430692c4f4a01346ebf8f3c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a34e5b2105430692c4f4a01346ebf8f3c">CollisionSpVparMu</a> (FDistribDomain fdistrib_domain, <a class="el" href="classCollisionSpVparMu.html#a160319409d1c61b2a1b8b5198e6bea7e">DViewMu</a> coeff_intdmu, <a class="el" href="classCollisionSpVparMu.html#adf7cf6d88a700035b264f16386f67175">DViewVpar</a> coeff_intdvpar, NuStar0Type nustar0_r, BNormType B_norm)</td></tr>
-<tr class="memdesc:a34e5b2105430692c4f4a01346ebf8f3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create instance of <a class="el" href="classCollisionSpVparMu.html" title="A class which computes the collision operator in (vpar,mu)">CollisionSpVparMu</a> class.  <a href="classCollisionSpVparMu.html#a34e5b2105430692c4f4a01346ebf8f3c">More...</a><br /></td></tr>
-<tr class="separator:a34e5b2105430692c4f4a01346ebf8f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03c0a79335bd417fcc8445743e33875f"><td class="memTemplParams" colspan="2">template&lt;class DFieldR , class DFieldRTheta &gt; </td></tr>
+<tr class="memitem:a03c0a79335bd417fcc8445743e33875f"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a03c0a79335bd417fcc8445743e33875f">CollisionSpVparMu</a> (FDistribDomain fdistrib_domain, <a class="el" href="classCollisionSpVparMu.html#a160319409d1c61b2a1b8b5198e6bea7e">DViewMu</a> coeff_intdmu, <a class="el" href="classCollisionSpVparMu.html#adf7cf6d88a700035b264f16386f67175">DViewVpar</a> coeff_intdvpar, DFieldR nustar, DFieldR rg, DFieldR safety_factor, DFieldRTheta B_norm)</td></tr>
+<tr class="memdesc:a03c0a79335bd417fcc8445743e33875f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create instance of <a class="el" href="classCollisionSpVparMu.html" title="A class which computes the collision operator in (vpar,mu)">CollisionSpVparMu</a> class.  <a href="classCollisionSpVparMu.html#a03c0a79335bd417fcc8445743e33875f">More...</a><br /></td></tr>
+<tr class="separator:a03c0a79335bd417fcc8445743e33875f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a035ad9f3907d65b9ff262c72342e3f3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a035ad9f3907d65b9ff262c72342e3f3a">operator()</a> (<a class="el" href="classCollisionSpVparMu.html#adecf046c9a624f444d3df7619805a3ba">FDistribSpan</a> all_f_distribution, double deltat_coll) const</td></tr>
 <tr class="memdesc:a035ad9f3907d65b9ff262c72342e3f3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the collision operator to the distribution functions of all species on all species.  <a href="classCollisionSpVparMu.html#a035ad9f3907d65b9ff262c72342e3f3a">More...</a><br /></td></tr>
 <tr class="separator:a035ad9f3907d65b9ff262c72342e3f3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,14 +167,18 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">koliop_interface::MDL</a>&lt; double * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a4ceca4267089a34c46f2d10ee4bb0632">m_hat_Zs</a></td></tr>
 <tr class="memdesc:a4ceca4267089a34c46f2d10ee4bb0632"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized charges for all species. <br /></td></tr>
 <tr class="separator:a4ceca4267089a34c46f2d10ee4bb0632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f9a22221393dd8c0d39c162eb4d50b9"><td class="memItemLeft" align="right" valign="top"><a id="a6f9a22221393dd8c0d39c162eb4d50b9"></a>
+<a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">koliop_interface::MDL</a>&lt; double * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a6f9a22221393dd8c0d39c162eb4d50b9">m_nustar</a></td></tr>
+<tr class="memdesc:a6f9a22221393dd8c0d39c162eb4d50b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radial profile of nustar. <br /></td></tr>
+<tr class="separator:a6f9a22221393dd8c0d39c162eb4d50b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae1aa1c7d86cc38ac537f44e9333d042"><td class="memItemLeft" align="right" valign="top"><a id="aae1aa1c7d86cc38ac537f44e9333d042"></a>
 <a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">koliop_interface::MDL</a>&lt; double * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#aae1aa1c7d86cc38ac537f44e9333d042">m_rg</a></td></tr>
 <tr class="memdesc:aae1aa1c7d86cc38ac537f44e9333d042"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh points in the radial direction. <br /></td></tr>
 <tr class="separator:aae1aa1c7d86cc38ac537f44e9333d042"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64b90d350939075792ca3d66cfe4270b"><td class="memItemLeft" align="right" valign="top"><a id="a64b90d350939075792ca3d66cfe4270b"></a>
-<a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">koliop_interface::MDL</a>&lt; double * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a64b90d350939075792ca3d66cfe4270b">m_q_r</a></td></tr>
-<tr class="memdesc:a64b90d350939075792ca3d66cfe4270b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radial safety factor profile. <br /></td></tr>
-<tr class="separator:a64b90d350939075792ca3d66cfe4270b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d991ac0909006bcb46b52543b7bb72b"><td class="memItemLeft" align="right" valign="top"><a id="a1d991ac0909006bcb46b52543b7bb72b"></a>
+<a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">koliop_interface::MDL</a>&lt; double * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a1d991ac0909006bcb46b52543b7bb72b">m_safety_factor</a></td></tr>
+<tr class="memdesc:a1d991ac0909006bcb46b52543b7bb72b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radial safety factor profile. <br /></td></tr>
+<tr class="separator:a1d991ac0909006bcb46b52543b7bb72b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7957712749022d429427cfd1009300c5"><td class="memItemLeft" align="right" valign="top"><a id="a7957712749022d429427cfd1009300c5"></a>
 <a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">koliop_interface::MDL</a>&lt; double * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a7957712749022d429427cfd1009300c5">m_mask_buffer_r</a></td></tr>
 <tr class="memdesc:a7957712749022d429427cfd1009300c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask used to avoid to apply collision in certain region. <br /></td></tr>
@@ -202,15 +210,15 @@ class CollisionSpVparMu&lt; FDistribDomain, GridVpar, GridMu &gt;</h3>
 
 <p>A class which computes the collision operator in (vpar,mu) </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a34e5b2105430692c4f4a01346ebf8f3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34e5b2105430692c4f4a01346ebf8f3c">&#9670;&nbsp;</a></span>CollisionSpVparMu()</h2>
+<a id="a03c0a79335bd417fcc8445743e33875f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03c0a79335bd417fcc8445743e33875f">&#9670;&nbsp;</a></span>CollisionSpVparMu()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FDistribDomain , class GridVpar , class GridMu &gt; </div>
 <div class="memtemplate">
-template&lt;class NuStar0Type , class BNormType &gt; </div>
+template&lt;class DFieldR , class DFieldRTheta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -236,13 +244,25 @@ template&lt;class NuStar0Type , class BNormType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">NuStar0Type&#160;</td>
-          <td class="paramname"><em>nustar0_r</em>, </td>
+          <td class="paramtype">DFieldR&#160;</td>
+          <td class="paramname"><em>nustar</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">BNormType&#160;</td>
+          <td class="paramtype">DFieldR&#160;</td>
+          <td class="paramname"><em>rg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DFieldR&#160;</td>
+          <td class="paramname"><em>safety_factor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DFieldRTheta&#160;</td>
           <td class="paramname"><em>B_norm</em>&#160;</td>
         </tr>
         <tr>
@@ -264,7 +284,9 @@ template&lt;class NuStar0Type , class BNormType &gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">fdistrib_domain</td><td>domain (species, 3D space, 2D velocity space) on which the collision operator acts ATTENTION it must contain the all domain in species and 2D velocity. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">coeff_intdmu</td><td>quadrature coefficient in mu direction </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">coeff_intdvpar</td><td>quadrature coefficient in vpar direction </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nustar0_r</td><td>radial profile of collisionality </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nustar</td><td>radial profile of collisionality </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rg</td><td>radial profile of the grid. If size(nustar)==1, forced to 1. because already included in nustar definition [TODO] See if this quantity cannot be included in nustar definition </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">safety_factor</td><td>radial profile of safety factor. If size(nustar)==1, forced to 1. because already included in nustar definition. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">B_norm</td><td>magnetic field norm in (r,theta) </td></tr>
   </table>
   </dd>
@@ -321,7 +343,7 @@ template&lt;class FDistribDomain , class GridVpar , class GridMu &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collision/<a class="el" href="CollisionSpVparMu_8hpp_source.html">CollisionSpVparMu.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/collisions/<a class="el" href="CollisionSpVparMu_8hpp_source.html">CollisionSpVparMu.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
