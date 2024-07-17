@@ -25,7 +25,7 @@ auto constexpr SplineXBoundary = ddc::BoundCond::HERMITE;
 using SplineInterpPointsX
         = ddc::KnotsAsInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
 
-struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
 
@@ -84,7 +84,7 @@ struct ComputeErrorTraits
     };
     using GrevillePointsY = ddc::
             KnotsAsInterpolationPoints<BSplinesY, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
-    struct IDimY : GrevillePointsY::interpolation_mesh_type
+    struct IDimY : GrevillePointsY::interpolation_discrete_dimension_type
     {
     };
 };

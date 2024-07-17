@@ -32,7 +32,7 @@ auto constexpr SplineXBoundary = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::B
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
 
-struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
 
@@ -92,7 +92,7 @@ struct ComputeErrorTraits
             BSplinesY,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE>;
-    struct IDimY : GrevillePointsY::interpolation_mesh_type
+    struct IDimY : GrevillePointsY::interpolation_discrete_dimension_type
     {
     };
 };

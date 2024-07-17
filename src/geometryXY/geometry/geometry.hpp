@@ -70,10 +70,10 @@ using SplineInterpPointsY
         = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
 
 // IDim definitions
-struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
-struct IDimY : SplineInterpPointsY::interpolation_mesh_type
+struct IDimY : SplineInterpPointsY::interpolation_discrete_dimension_type
 {
 };
 

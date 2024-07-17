@@ -26,6 +26,9 @@ cd spack.spack && git pull && cd ..
 # NOTE: We may be overriding some CINES modified recipes.
 cp -rf -- spack.spack/var/spack/repos/builtin/packages/ginkgo "${SPACK_USER_PREFIX}/config_user_spack/local-repo/packages"
 
+# FIXME: Add Ginkgo 1.8.0 to its package.py
+sed -i '/version("master", branch="master")/a\    version("1.8.0", commit="93432abadfd5be0ba8c931c220be9cd4797a5aca")  # v1.8.0' ${SPACK_USER_PREFIX}/config_user_spack/local-repo/packages/ginkgo/package.py
+
 echo "Preparing the Spack environment..."
 
 # # Either do not use the source mirrors or use --no-check-signature. There is an
@@ -44,7 +47,7 @@ for ((i = 0; i < 2; ++i)); do
         pdiplugin-decl-hdf5@1.6.0%gcc@12.1~benchs~fortran~ipo~mpi~tests build_system=cmake build_type=Release generator==ninja arch=linux-rhel8-zen3 \
         pdiplugin-set-value@1.6.0%gcc@12.1~ipo~tests build_system=cmake build_type=Release generator=ninja arch=linux-rhel8-zen3 \
         pdiplugin-trace@1.6.0%gcc@12.1~ipo~tests build_system=cmake build_type=Release generator=ninja arch=linux-rhel8-zen3 \
-        ginkgo@1.7.0%gcc@12.1~cuda~develtools~full_optimizations~hwloc~ipo~mpi+openmp+rocm~sde~shared~sycl amdgpu_target=gfx90a build_system=cmake build_type=Release generator==ninja arch=linux-rhel8-zen3 \
+        ginkgo@1.8.0%gcc@12.1~cuda~develtools~full_optimizations~hwloc~ipo~mpi+openmp+rocm~sde~shared~sycl amdgpu_target=gfx90a build_system=cmake build_type=Release generator==ninja arch=linux-rhel8-zen3 \
         eigen@3.4.0%gcc@12.1~ipo build_system=cmake build_type=Release generator==ninja arch=linux-rhel8-zen3 \
         cmake@3.27.7%gcc@12.1~doc+ncurses+ownlibs build_system=generic build_type=Release arch=linux-rhel8-zen3 \
         ninja@1.11.1%gcc@12.1+re2c build_system=generic arch=linux-rhel8-zen3

@@ -74,17 +74,17 @@ using SplineInterpPointsY2
 
 
 // Discrete dimension of patch 1
-struct IDimX1 : SplineInterpPointsX1::interpolation_mesh_type
+struct IDimX1 : SplineInterpPointsX1::interpolation_discrete_dimension_type
 {
 };
-struct IDimY1 : SplineInterpPointsY1::interpolation_mesh_type
+struct IDimY1 : SplineInterpPointsY1::interpolation_discrete_dimension_type
 {
 };
 // Discrete dimension of patch 2
-struct IDimX2 : SplineInterpPointsX2::interpolation_mesh_type
+struct IDimX2 : SplineInterpPointsX2::interpolation_discrete_dimension_type
 {
 };
-struct IDimY2 : SplineInterpPointsY2::interpolation_mesh_type
+struct IDimY2 : SplineInterpPointsY2::interpolation_discrete_dimension_type
 {
 };
 

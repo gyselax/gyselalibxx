@@ -29,8 +29,8 @@ class FEM1DPoissonSolver
                   typename SplineBuilder::batched_interpolation_domain_type,
                   typename SplineEvaluator::batched_evaluation_domain_type>);
     static_assert(std::is_same_v<
-                  typename SplineBuilder::interpolation_mesh_type,
-                  typename SplineEvaluator::evaluation_mesh_type>);
+                  typename SplineBuilder::interpolation_discrete_dimension_type,
+                  typename SplineEvaluator::evaluation_discrete_dimension_type>);
 
 private:
     using base_type = IPoissonSolver<
@@ -41,7 +41,7 @@ private:
 
 private:
     /// The interpolation mesh type
-    using DimI = typename SplineBuilder::interpolation_mesh_type;
+    using DimI = typename SplineBuilder::interpolation_discrete_dimension_type;
 
     using InputBSplines = typename SplineBuilder::bsplines_type;
 

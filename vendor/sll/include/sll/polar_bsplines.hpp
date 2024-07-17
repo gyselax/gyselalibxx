@@ -51,10 +51,10 @@ public:
 
 
     /// The tag for the radial direction of the bsplines.
-    using DimR = typename BSplinesR::tag_type;
+    using DimR = typename BSplinesR::continuous_dimension_type;
 
     /// The tag for the poloidal direction of the bsplines.
-    using DimP = typename BSplinesP::tag_type;
+    using DimP = typename BSplinesP::continuous_dimension_type;
 
 public:
     /// The continuity enforced by the bsplines at the singular point.

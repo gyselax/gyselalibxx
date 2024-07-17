@@ -85,10 +85,10 @@ using SplineInterpPointsX
 using SplineInterpPointsVx
         = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
 
-struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
-struct IDimVx : SplineInterpPointsVx::interpolation_mesh_type
+struct IDimVx : SplineInterpPointsVx::interpolation_discrete_dimension_type
 {
 };
 
