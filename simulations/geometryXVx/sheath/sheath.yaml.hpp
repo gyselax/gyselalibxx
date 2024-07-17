@@ -11,7 +11,7 @@ constexpr char const* const params_yaml = R"PARAMS_CFG(SplineMesh:
   vx_ncells: 256
 
 SpeciesInfo:
-- charge: -1
+- charge: -1.
   mass: 1.
   density_eq: 1.
   temperature_eq: 1.
@@ -19,7 +19,7 @@ SpeciesInfo:
   perturb_amplitude: 0.
   perturb_mode: 1
 
-- charge: 1
+- charge: 1.
   mass: 400.
   density_eq: 1.
   temperature_eq: 1.

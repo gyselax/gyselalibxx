@@ -19,14 +19,14 @@ void init_all_species(
 {
     // Define the domain for kinetic species
     dom_kinsp = IDomainSp(IndexSp(0), IVectSp(nb_kinspecies));
-    host_t<IFieldSp> kinetic_charges(dom_kinsp);
+    host_t<DFieldSp> kinetic_charges(dom_kinsp);
     host_t<DFieldSp> kinetic_masses(dom_kinsp);
 
     // Define the domain of kinetic species
     for (IndexSp const isp : dom_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(conf_voicexx, ".SpeciesInfo[%d]", isp.uid());
 
-        kinetic_charges(isp) = static_cast<int>(PCpp_int(conf_isp, ".charge"));
+        kinetic_charges(isp) = PCpp_double(conf_isp, ".charge");
         kinetic_masses(isp) = PCpp_double(conf_isp, ".mass");
     }
 
@@ -34,7 +34,7 @@ void init_all_species(
     int nb_elec_adiabspecies = 1;
     int nb_ion_adiabspecies = 1;
     for (IndexSp const isp : dom_kinsp) {
-        if (kinetic_charges(isp) == -1) {
+        if (kinetic_charges(isp) == -1.) {
             nb_elec_adiabspecies = 0;
         } else {
             nb_ion_adiabspecies = 0;
@@ -46,14 +46,14 @@ void init_all_species(
 
     // Define the domain of fluid species
     dom_fluidsp = IDomainSp(IndexSp(nb_kinspecies), IVectSp(nb_fluidspecies));
-    host_t<IFieldSp> fluid_charges(dom_fluidsp);
+    host_t<DFieldSp> fluid_charges(dom_fluidsp);
     host_t<DFieldSp> fluid_masses(dom_fluidsp);
     for (IndexSp const isp : dom_fluidsp) {
         PC_tree_t const conf_nisp = PCpp_get(
                 conf_voicexx,
                 ".NeutralSpeciesInfo[%d]",
                 isp.uid() - dom_fluidsp.front().uid());
-        fluid_charges(isp) = 0; // neutral charge is zero
+        fluid_charges(isp) = 0.; // neutral charge is zero
         fluid_masses(isp) = PCpp_double(conf_nisp, ".mass");
     }
 
@@ -62,7 +62,7 @@ void init_all_species(
     IDomainSp const dom_allsp(
             IndexSp(0),
             IVectSp(nb_kinspecies + nb_fluidspecies + nb_elec_adiabspecies + nb_ion_adiabspecies));
-    host_t<IFieldSp> charges(dom_allsp);
+    host_t<DFieldSp> charges(dom_allsp);
     for (IndexSp isp : dom_kinsp) {
         charges(isp) = kinetic_charges(isp);
     }

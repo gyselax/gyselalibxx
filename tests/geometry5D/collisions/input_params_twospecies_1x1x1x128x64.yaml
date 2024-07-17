@@ -24,12 +24,12 @@ Geometry:
 
 SpeciesInfo:
   - name: 'electron'
-    charge: -1
+    charge: -1.
     mass: 0.0005
     N_min : 0.2      # minimum density, assuming a parabolic decreasing profile
     T_min : 0.5      # minimum temperature, assuming a parabolic decreasing profile
   - name: 'ion'
-    charge: 1
+    charge: 1.
     mass: 1.
     N_min : 0.2      # minimum density, assuming a parabolic decreasing profile
     T_min : 0.5      # minimum temperature, assuming a parabolic decreasing profile

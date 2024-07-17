@@ -60,11 +60,11 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     IDomainVx const gridvx = builder_vx.interpolation_domain();
     IDomainSpXVx const mesh(dom_sp, gridx, gridvx);
 
-    host_t<FieldSp<int>> charges(dom_sp);
-    charges(my_ielec) = -1;
-    charges(my_iion) = 1;
+    host_t<DFieldSp> charges(dom_sp);
+    charges(my_ielec) = -1.;
+    charges(my_iion) = 1.;
     host_t<DFieldSp> masses(dom_sp);
-    double const mass_ion(400), mass_elec(1);
+    double const mass_ion(400.), mass_elec(1.);
     masses(my_ielec) = mass_elec;
     masses(my_iion) = mass_ion;
 
@@ -112,7 +112,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     CollisionsIntra collisions(mesh, nustar0);
 
     // test of the get_elec_index
-    EXPECT_EQ(charge(ielec()), -1);
+    EXPECT_EQ(charge(ielec()), -1.);
 
     // nustar profile
     DFieldSpX nustar_profile_alloc(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));

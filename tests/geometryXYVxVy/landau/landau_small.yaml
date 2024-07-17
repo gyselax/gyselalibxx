@@ -13,7 +13,7 @@ SplineMesh:
   vy_ncells: 31
 
 SpeciesInfo:
-- charge: -1
+- charge: -1.
   mass: 0.0005
   density_eq: 1.
   temperature_eq: 1.
