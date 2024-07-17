@@ -30,7 +30,7 @@ IndexSp DiffusiveNeutralSolver::find_ion(IDomainSp const dom_kinsp) const
     bool ion_found = false;
     IndexSp iion;
     for (IndexSp const isp : dom_kinsp) {
-        if (charge(isp) > 0) {
+        if (charge(isp) > 0.) {
             ion_found = true;
             iion = isp;
         }

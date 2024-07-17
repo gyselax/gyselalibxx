@@ -18,7 +18,7 @@ def get_simulation_parameters(path, filename):
         if len(data['SpeciesInfo']) != 2:
             raise ValueError('The number of species is not two')
 
-        if data['SpeciesInfo'][0]['charge'] * data['SpeciesInfo'][1]['charge'] > 0:
+        if data['SpeciesInfo'][0]['charge'] * data['SpeciesInfo'][1]['charge'] > 0.:
             raise ValueError('The two species do not have opposite charges')
 
     return data

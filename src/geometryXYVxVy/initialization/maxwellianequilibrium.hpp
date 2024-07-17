@@ -13,13 +13,13 @@
 class MaxwellianEquilibrium : public IEquilibrium
 {
     // equilibrium density of all kinetic species
-    host_t<FieldSp<double>> m_density_eq;
+    host_t<DFieldSp> m_density_eq;
 
     // equilibrium temperature of all kinetic species
-    host_t<FieldSp<double>> m_temperature_eq;
+    host_t<DFieldSp> m_temperature_eq;
 
     // equilibrium mean velocity of all kinetic species
-    host_t<FieldSp<double>> m_mean_velocity_eq;
+    host_t<DFieldSp> m_mean_velocity_eq;
 
 public:
     /**

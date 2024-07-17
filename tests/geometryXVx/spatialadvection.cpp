@@ -44,12 +44,12 @@ double SpatialAdvection(
     IDomainSpXVx const meshSpXVx(dom_allsp, x_dom, vx_dom);
     // Charge Initialization
     host_t<DFieldSp> masses_host(dom_allsp);
-    host_t<FieldSp<int>> charges_host(dom_allsp);
+    host_t<DFieldSp> charges_host(dom_allsp);
 
-    masses_host(i_elec) = 1;
-    masses_host(i_ion) = 1;
-    charges_host(i_elec) = -1;
-    charges_host(i_ion) = 1;
+    masses_host(i_elec) = 1.;
+    masses_host(i_ion) = 1.;
+    charges_host(i_elec) = -1.;
+    charges_host(i_ion) = 1.;
     // Initialization Species domain
     ddc::init_discrete_space<IDimSp>(std::move(charges_host), std::move(masses_host));
     // Initialization of the distribution function

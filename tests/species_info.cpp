@@ -13,10 +13,10 @@ TEST(SpeciesInfo, Ielec)
     IndexSp my_iion = dom_sp.front();
     IndexSp my_ielec = dom_sp.back();
 
-    FieldSp<int> charges(dom_sp);
-    FieldSp<double> masses(dom_sp);
-    charges(my_ielec) = -1;
-    charges(my_iion) = 1;
+    DFieldSp charges(dom_sp);
+    DFieldSp masses(dom_sp);
+    charges(my_ielec) = -1.;
+    charges(my_iion) = 1.;
     ddc::parallel_fill(masses, 1.);
 
     // Initialization of the distribution function

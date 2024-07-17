@@ -7,7 +7,7 @@ SplineMesh:
   vx_ncells: 511
 
 SpeciesInfo:
-- charge: -1
+- charge: -1.
   mass: 1.
   density_eq: 1.
   temperature_eq: 1.

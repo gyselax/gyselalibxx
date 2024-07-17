@@ -6,7 +6,7 @@ NullFluidSolver::NullFluidSolver(IDomainSp const& dom_fluidsp)
 {
     // charged fluid species is not allowed for now
     for (IndexSp const isp : dom_fluidsp) {
-        assert(charge(isp) == 0);
+        assert(charge(isp) == 0.);
     }
 }
 

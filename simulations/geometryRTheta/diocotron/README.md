@@ -183,7 +183,7 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
   * `final_T: 70.0`: final time of the simulation (end of the linear phase at $T = 50s$). (Tests in Edoardo Zoni's article.)
   
 * `Perturbation:`
-  * `charge_Q: 0` : charge carried by the inner conductor at $`r = W_1`$.
+  * `charge_Q: 0.` : charge carried by the inner conductor at $`r = W_1`$.
   * `l_mode: 9` : mode of the pertubation $\varepsilon \cos(lx)$. 
   * `eps: 0.0001` : amplitude of the pertubation $\varepsilon \cos(lx)$. 
   

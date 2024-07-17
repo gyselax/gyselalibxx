@@ -83,7 +83,7 @@ using IndexSpXVx = ddc::DiscreteElement<IDimSp, IDimX, IDimVx>;
 // Chunks, Spans and Views
 template <class ElementType>
 using FieldSp = device_t<ddc::Chunk<ElementType, IDomainSp>>;
-using DFieldSp = FieldSp<double>;
+using DFieldSp = DFieldSp;
 
 template <class ElementType>
 using FieldSpXVx = device_t<ddc::Chunk<ElementType, IDomainSpXVx>>;
@@ -184,17 +184,17 @@ public:
 
         // INITIALISATION ------------------------------------------------------------------------
         // Initialization of the charges
-        host_t<FieldSp<int>> charges_host(dom_allsp);
-        charges_host(i_elec) = -1;
-        charges_host(i_ion) = 1;
+        host_t<DFieldSp> charges_host(dom_allsp);
+        charges_host(i_elec) = -1.;
+        charges_host(i_ion) = 1.;
         auto charges_alloc = ddc::
                 create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), charges_host.span_view());
         ddc::ChunkSpan charges = charges_alloc.span_view();
 
         // Initialization of the masses
-        host_t<FieldSp<int>> masses_host(dom_allsp);
-        masses_host(i_elec) = 1;
-        masses_host(i_ion) = 1;
+        host_t<DFieldSp> masses_host(dom_allsp);
+        masses_host(i_elec) = 1.;
+        masses_host(i_ion) = 1.;
         auto masses_alloc = ddc::
                 create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), masses_host.span_view());
         ddc::ChunkSpan masses = masses_alloc.span_view();

@@ -44,16 +44,16 @@ double VelocityAdvection(
     IDomainVx const gridvx = ddc::select<IDimVx>(meshSpXVx);
     // Charge Initialization
     host_t<DFieldSp> masses_host(dom_allsp);
-    host_t<FieldSp<int>> charges_host(dom_allsp);
+    host_t<DFieldSp> charges_host(dom_allsp);
     host_t<DFieldSp> init_perturb_amplitude_host(dom_allsp);
     // Mass ratio is fixed to one
-    masses_host(i_elec) = 1;
+    masses_host(i_elec) = 1.;
     init_perturb_amplitude_host(i_elec) = 0.;
-    charges_host(i_elec) = -1;
+    charges_host(i_elec) = -1.;
 
-    masses_host(i_ion) = 1;
+    masses_host(i_ion) = 1.;
     init_perturb_amplitude_host(i_ion) = 0.;
-    charges_host(i_ion) = 1;
+    charges_host(i_ion) = 1.;
 
     // Initialization Species domain
     ddc::init_discrete_space<IDimSp>(std::move(charges_host), std::move(masses_host));

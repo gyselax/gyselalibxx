@@ -76,10 +76,10 @@ void KrookSourceAdaptive::get_amplitudes(DSpanSpX amplitudes, DViewSpXVx const a
 {
     IDomainSp const dom_sp(ddc::get_domain<IDimSp>(allfdistribu));
     assert(dom_sp.size() == 2);
-    assert(charge(dom_sp.front()) * charge(dom_sp.back()) < 0);
+    assert(charge(dom_sp.front()) * charge(dom_sp.back()) < 0.);
     std::optional<IndexSp> iion_opt;
     for (IndexSp const isp : dom_sp) {
-        if (charge(isp) > 0) {
+        if (charge(isp) > 0.) {
             iion_opt = isp;
         }
     }

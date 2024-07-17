@@ -80,7 +80,7 @@ using IndexSpXVx = ddc::DiscreteElement<IDimSp, IDimX, IDimVx>;
 // Chunks, Spans and Views
 template <class ElementType>
 using FieldSp = device_t<ddc::Chunk<ElementType, IDomainSp>>;
-using DFieldSp = FieldSp<double>;
+using DFieldSp = DFieldSp;
 
 template <class ElementType>
 using FieldSpXVx = device_t<ddc::Chunk<ElementType, IDomainSpXVx>>;

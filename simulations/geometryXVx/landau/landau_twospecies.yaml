@@ -7,7 +7,7 @@ SplineMesh:
   vx_ncells: 127
 
 SpeciesInfo:
-- charge: -1
+- charge: -1.
   mass: 0.0005
   density_eq: 1.
   temperature_eq: 1.
@@ -15,7 +15,7 @@ SpeciesInfo:
   perturb_amplitude: 0.01
   perturb_mode: 1
 
-- charge: 1
+- charge: 1.
   mass: 2.
   density_eq: 1.
   temperature_eq: 1.

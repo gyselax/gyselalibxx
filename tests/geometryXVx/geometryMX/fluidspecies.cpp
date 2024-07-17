@@ -40,12 +40,12 @@ TEST(GeometryXM, KineticFluidSpecies)
     IndexSp const my_iion = dom_kinsp.front();
     IndexSp const my_ielec = dom_kinsp.back();
 
-    host_t<FieldSp<int>> kinetic_charges(dom_kinsp);
-    kinetic_charges(my_ielec) = -1;
-    kinetic_charges(my_iion) = 1;
+    host_t<DFieldSp> kinetic_charges(dom_kinsp);
+    kinetic_charges(my_ielec) = -1.;
+    kinetic_charges(my_iion) = 1.;
 
     host_t<DFieldSp> kinetic_masses(dom_kinsp);
-    double const mass_ion(400), mass_elec(1);
+    double const mass_ion(400.), mass_elec(1.);
     kinetic_masses(my_ielec) = mass_elec;
     kinetic_masses(my_iion) = mass_ion;
 
@@ -53,7 +53,7 @@ TEST(GeometryXM, KineticFluidSpecies)
     IVectSp const nb_fluidspecies(2);
     IDomainSp const dom_fluidsp(IndexSp(dom_kinsp.back() + 1), nb_fluidspecies);
 
-    host_t<FieldSp<int>> fluid_charges(dom_fluidsp);
+    host_t<DFieldSp> fluid_charges(dom_fluidsp);
     fluid_charges(dom_fluidsp.front()) = 1.;
     fluid_charges(dom_fluidsp.back()) = -1.;
 
@@ -65,7 +65,7 @@ TEST(GeometryXM, KineticFluidSpecies)
     IDomainSp const dom_allsp(IndexSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains charges of all species
-    host_t<FieldSp<int>> charges(dom_allsp);
+    host_t<DFieldSp> charges(dom_allsp);
 
     // fill the Field with charges of kinetic species
     for (IndexSp isp : dom_kinsp) {
@@ -128,12 +128,12 @@ TEST(GeometryXM, KineticFluidAdiabaticSpecies)
     IndexSp const my_iion = dom_kinsp.front();
     IndexSp const my_ielec = dom_kinsp.back();
 
-    host_t<FieldSp<int>> kinetic_charges(dom_kinsp);
-    kinetic_charges(my_ielec) = -1;
-    kinetic_charges(my_iion) = 1;
+    host_t<DFieldSp> kinetic_charges(dom_kinsp);
+    kinetic_charges(my_ielec) = -1.;
+    kinetic_charges(my_iion) = 1.;
 
     host_t<DFieldSp> kinetic_masses(dom_kinsp);
-    double const mass_ion(400), mass_elec(1);
+    double const mass_ion(400.), mass_elec(1.);
     kinetic_masses(my_ielec) = mass_elec;
     kinetic_masses(my_iion) = mass_ion;
 
@@ -144,7 +144,7 @@ TEST(GeometryXM, KineticFluidAdiabaticSpecies)
     IVectSp const nb_fluidspecies(2);
     IDomainSp const dom_fluidsp(IndexSp(dom_kinsp.back() + 1), nb_fluidspecies);
 
-    host_t<FieldSp<int>> fluid_charges(dom_fluidsp);
+    host_t<DFieldSp> fluid_charges(dom_fluidsp);
     fluid_charges(dom_fluidsp.front()) = 1.;
     fluid_charges(dom_fluidsp.back()) = -1.;
 
@@ -157,7 +157,7 @@ TEST(GeometryXM, KineticFluidAdiabaticSpecies)
     IDomainSp const dom_allsp(IndexSp(0), nb_kinspecies + nb_fluidspecies + nb_ion_adiabspecies);
 
     // Create a Field that contains charges of all species
-    host_t<FieldSp<int>> charges(dom_allsp);
+    host_t<DFieldSp> charges(dom_allsp);
 
     // fill the Field with charges of kinetic species
     for (IndexSp isp : dom_kinsp) {

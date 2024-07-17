@@ -15,7 +15,7 @@ Time:
   final_T: 100.
   
 Perturbation:
-  charge_Q: 0
+  charge_Q: 0.
   l_mode: 9 
   eps: 0.0001
   r_min: 0.45
