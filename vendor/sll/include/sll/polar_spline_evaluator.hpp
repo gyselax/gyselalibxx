@@ -59,11 +59,11 @@ public:
     /**
      * @brief Tag the first dimension of the space.
      */
-    using DimR = typename BSplinesR::tag_type;
+    using DimR = typename BSplinesR::continuous_dimension_type;
     /**
      * @brief Tag the second dimension of the space.
      */
-    using DimP = typename BSplinesP::tag_type;
+    using DimP = typename BSplinesP::continuous_dimension_type;
 
 public:
     /**

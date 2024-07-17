@@ -72,10 +72,10 @@ using SplineInterpPointsVpar
 using SplineInterpPointsMu
         = ddc::GrevilleInterpolationPoints<BSplinesMu, SplineMuBoundary, SplineMuBoundary>;
 
-struct GridVpar : SplineInterpPointsVpar::interpolation_mesh_type
+struct GridVpar : SplineInterpPointsVpar::interpolation_discrete_dimension_type
 {
 };
-struct GridMu : SplineInterpPointsMu::interpolation_mesh_type
+struct GridMu : SplineInterpPointsMu::interpolation_discrete_dimension_type
 {
 };
 
