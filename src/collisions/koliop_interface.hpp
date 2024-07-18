@@ -82,23 +82,6 @@ using MDL = Kokkos::View<
  */
 void DoCombMatComputation(MDL<double[6][6]>& comb_mat);
 
-/**
- * @brief Dump the coordinates found on a domain into a span.
- *
- * @param[out] dump_coord The span which will contain the coordinates.
- * @param[in] sampler The domain indicating the coordinates.
- */
-template <typename Span1D, typename CoordinateSampler>
-inline void DumpCoordinates(Span1D& dump_coord, ddc::DiscreteDomain<CoordinateSampler> sampler)
-{
-    ddc::ChunkSpan ddc_dump_coord(dump_coord, sampler);
-    ddc::parallel_for_each(
-            typename Span1D::execution_space {},
-            sampler,
-            KOKKOS_LAMBDA(ddc::DiscreteElement<CoordinateSampler> i) {
-                ddc_dump_coord(i) = ddc::coordinate(i);
-            });
-}
 
 /**
  * @brief Destructor for koliop.
