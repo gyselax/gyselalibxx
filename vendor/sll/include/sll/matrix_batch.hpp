@@ -25,7 +25,7 @@ class MatrixBatch
 public:
     /**
      * @brief Alias for 2D double Kokkos views, LayoutRight is specified.
-    */
+     */
     using DKokkosView2D
             = Kokkos::View<double**, Kokkos::LayoutRight, typename ExecSpace::memory_space>;
 
@@ -33,27 +33,27 @@ public:
      * @brief The constructor for MatrixBatch class.
      * @param[in] batch_size Number of linear systems to solve.
      * @param[in] mat_size Common matrix size for all the systems.
-    */
+     */
     MatrixBatch(int batch_size, int mat_size) : m_batch_size(batch_size), m_matrix_size(mat_size) {}
 
     virtual ~MatrixBatch() = default;
     /**
      * @brief Generic function which could be used by children classes to execute
      * class specific implementation details.
-    */
+     */
     virtual void factorize() = 0;
 
     /**
-    * @brief A function which solves the collection of linear problems.
-    * @param[inout] b 2d Kokkos view which stores the right hand side, 
-    * @return  The computation result, stored in b.
-    */
+     * @brief A function which solves the collection of linear problems.
+     * @param[inout] b 2d Kokkos view which stores the right hand side, 
+     * @return  The computation result, stored in b.
+     */
     virtual DKokkosView2D solve_inplace(DKokkosView2D b) const = 0;
 
     /**
-    * @brief Getter function for matrix size.
-    * @return  Value of common matrix size.
-    */
+     * @brief Getter function for matrix size.
+     * @return  Value of common matrix size.
+     */
     int get_size() const
     {
         return m_matrix_size;
@@ -62,7 +62,7 @@ public:
     /**
      * @brief Getter function for batch size, ie the number of linear systems to solve.
      * @return Value of batch size.
-    */
+     */
     int get_batch_size() const
     {
         return m_batch_size;

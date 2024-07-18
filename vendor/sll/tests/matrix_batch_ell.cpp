@@ -1,6 +1,5 @@
 #include <ddc/ddc.hpp>
 
-#include <sll/math_tools.hpp>
 #include <sll/matrix_batch_ell.hpp>
 
 #include <gtest/gtest.h>

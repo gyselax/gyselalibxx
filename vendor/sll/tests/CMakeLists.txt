@@ -34,6 +34,7 @@ add_executable(matrix_tests_sll
   main.cpp
   matrix.cpp
   matrix_batch_ell.cpp
+  matrix_batch_csr.cpp
   matrix_batch_tridiag.cpp
 )
 target_compile_features(matrix_tests_sll PUBLIC cxx_std_17)

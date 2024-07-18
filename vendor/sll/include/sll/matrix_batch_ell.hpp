@@ -1,53 +1,13 @@
 #pragma once
 
 #include <sll/matrix_batch.hpp>
+#include <sll/matrix_utils.hpp>
 
 #include <ginkgo/ginkgo.hpp>
 
 #include <Kokkos_Core.hpp>
 
 #include "ddc/kernels/splines/ginkgo_executors.hpp"
-
-
-/**
- * @brief A function to convert a 2D Kokkos view into a ginkgo multivector structure.
- * @param gko_exec[in] A Ginkgo executor that has access to the Kokkos::View memory space
- * @param view[in] A 2-D Kokkos::View with unit stride in the second dimension
- * @return A Ginkgo Multivector view over the Kokkos::View data
- */
-
-template <class KokkosViewType>
-auto to_gko_multivector(
-        std::shared_ptr<const gko::Executor> const& gko_exec,
-        KokkosViewType const& view)
-{
-    static_assert((Kokkos::is_view_v<KokkosViewType> && KokkosViewType::rank == 2));
-    using value_type = typename KokkosViewType::traits::value_type;
-
-    assert(view.stride_1() == 1);
-    return gko::share(
-            gko::batch::MultiVector<value_type>::
-                    create(gko_exec,
-                           gko::batch_dim<2>(view.extent(0), gko::dim<2>(view.extent(1), 1)),
-                           gko::array<value_type>::view(gko_exec, view.span(), view.data())));
-}
-
-/**
- * @brief A function extracted from ginkgo to unbatch ginkgo objects.
- * @param[in] batch_object A batch of ginkgo objects ( eg. gko::batch::matrix::Dense
- *            converted to std::vector<gko::matrix::Dense> ), works also for multivectors, loggers.
- * @return a vector of ginkgo structures.
- */
-template <typename InputType>
-std::vector<std::unique_ptr<typename InputType::unbatch_type>> unbatch(
-        const InputType* batch_object)
-{
-    std::vector<std::unique_ptr<typename InputType::unbatch_type>> unbatched_mats;
-    for (int b = 0; b < batch_object->get_num_batch_items(); ++b) {
-        unbatched_mats.emplace_back(batch_object->create_const_view_for_item(b)->clone());
-    }
-    return unbatched_mats;
-}
 
 /**
  * @brief  Matrix class which is able to manage and solve a batch of sparse linear systems. Executes on either CPU or GPU.
@@ -247,10 +207,10 @@ public:
                         to_gko_multivector(gko_exec, x_view));
         m_solver->remove_logger(logger);
         //check convergence
-        check_conv(logger);
+        check_conv(get_batch_size(), m_tol, gko_exec, logger);
         // save logger data
         if (m_with_logger) {
-            save_logger(x_view, rhs_view, logger);
+            save_logger(m_batch_matrix_ell, x_view, rhs_view, logger, m_tol, "ell");
         }
 
         Kokkos::deep_copy(rhs_view, x_view);
@@ -293,91 +253,5 @@ public:
                 },
                 Kokkos::Max<double>(result));
         return result;
-    }
-
-private:
-    void save_logger(
-            DKokkosView2D const x_view,
-            DKokkosView2D const b_view,
-            std::shared_ptr<const gko::batch::log::BatchConvergence<double>> logger) const
-    {
-        std::shared_ptr const gko_exec = m_solver->get_executor();
-        // allocate the residual
-        auto res = gko::batch::MultiVector<double>::
-                create(gko_exec, gko::batch_dim<2>(get_batch_size(), gko::dim<2>(get_size(), 1)));
-        res->copy_from(to_gko_multivector(gko_exec, b_view));
-
-        auto norm_dim = gko::batch_dim<2>(get_batch_size(), gko::dim<2>(1, 1));
-        // allocate rhs norm on host.
-        auto b_norm_host
-                = gko::batch::MultiVector<double>::create(gko_exec->get_master(), norm_dim);
-        b_norm_host->fill(0.0);
-        // allocate the residual norm on host.
-        auto res_norm_host
-                = gko::batch::MultiVector<double>::create(gko_exec->get_master(), norm_dim);
-        res_norm_host->fill(0.0);
-        // compute rhs norm.
-        to_gko_multivector(gko_exec, b_view)->compute_norm2(b_norm_host);
-        // we need constants on the device
-        auto one = gko::batch::MultiVector<double>::create(gko_exec, norm_dim);
-        one->fill(1.0);
-        auto neg_one = gko::batch::MultiVector<double>::create(gko_exec, norm_dim);
-        neg_one->fill(-1.0);
-        //to estimate the "true" residual, the apply function below computes Ax-res, and stores the result in res.
-        m_batch_matrix_ell->apply(one, to_gko_multivector(gko_exec, x_view), neg_one, res);
-        //compute residual norm.
-        res->compute_norm2(res_norm_host);
-
-        auto log_resid_host
-                = gko::make_temporary_clone(gko_exec->get_master(), &logger->get_residual_norm());
-        auto log_iters_host
-                = gko::make_temporary_clone(gko_exec->get_master(), &logger->get_num_iterations());
-
-        std::fstream log_file("logger.txt", std::fstream::out);
-        // "unbatch" converts a batch object into a vector
-        // of objects of the corresponding single type.
-        auto unb_res_norm = unbatch(res_norm_host.get());
-        auto unb_bnorm = unbatch(b_norm_host.get());
-        for (int i = 0; i < get_batch_size(); ++i) {
-            // Logger  output
-            log_file << " System no. " << i
-                     << ": Ax-b residual norm = " << unb_res_norm[i]->at(0, 0)
-                     << ", implicit residual norm = " << log_resid_host->get_const_data()[i]
-                     << ", iterations = " << log_iters_host->get_const_data()[i] << std::endl;
-            log_file << " unbatched bnorm at(i,0)" << unb_bnorm[i]->at(0, 0) << std::endl;
-            log_file << " unbatched residual norm at(i,0)" << unb_res_norm[i]->at(0, 0)
-                     << std::endl;
-            if (!(unb_res_norm[i]->at(0, 0) <= m_tol)) {
-                log_file << "System " << i << " converged only to " << unb_res_norm[i]->at(0, 0)
-                         << " relative residual." << std::endl;
-            }
-        }
-        log_file.close();
-    }
-
-    /**
-    * @brief A function for checking convergence. It loops over the batch and checks 
-    *        the if residual is lower or equal to the prescribed tolerance.
-    * @param[in] logger Ginkgo logger which contains residual and numbers of iterations
-    *                   For the whole batch. 
-    */
-    void check_conv(std::shared_ptr<const gko::batch::log::BatchConvergence<double>> logger) const
-    {
-        std::shared_ptr const gko_exec = m_solver->get_executor();
-        auto logger_residual_host
-                = gko::make_temporary_clone(gko_exec->get_master(), &logger->get_residual_norm());
-        bool has_converged = false;
-        double const tol = m_tol;
-        Kokkos::parallel_reduce(
-                "convergence",
-                Kokkos::RangePolicy<Kokkos::DefaultHostExecutionSpace>(0, get_batch_size()),
-                [&](int batch_idx, bool& check_tol) {
-                    check_tol = check_tol
-                                && (logger_residual_host->get_const_data()[batch_idx] <= tol);
-                },
-                Kokkos::LAnd<bool>(has_converged));
-        if (!has_converged) {
-            throw ::std::runtime_error("Residual tolerance is not reached");
-        }
     }
 };
