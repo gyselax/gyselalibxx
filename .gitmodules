@@ -20,9 +20,9 @@
 [submodule "vendor/kokkos-tools"]
 	path = vendor/kokkos-tools
 	url = https://github.com/kokkos/kokkos-tools.git
-[submodule "vendor/kokkos-kernels"]
-	path = vendor/kokkos-kernels
-	url = https://github.com/kokkos/kokkos-kernels.git
 [submodule "vendor/ddc"]
 	path = vendor/ddc
 	url = https://github.com/CExA-project/ddc.git
+[submodule "vendor/kokkos-kernels"]
+	path = vendor/kokkos-kernels
+	url = https://github.com/yasahi-hpc/kokkos-kernels.git
