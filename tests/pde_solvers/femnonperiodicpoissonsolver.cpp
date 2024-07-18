@@ -31,7 +31,7 @@ struct BSplinesX : ddc::UniformBSplines<RDimX, 3>
 using SplineInterpPointsX = ddc::
         GrevilleInterpolationPoints<BSplinesX, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
 
-struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
 
