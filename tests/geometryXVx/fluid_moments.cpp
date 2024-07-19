@@ -59,14 +59,16 @@ TEST(Physics, FluidMoments)
 
     // Initialization of the distribution function as a maxwellian
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
-    host_t<DFieldSpXVx> allfdistribu(mesh);
+    host_t<DFieldSpXVx> allfdistribu_host(mesh);
+    DFieldSpXVx allfdistribu(mesh);
+
 
     // Initialization of the distribution function as a maxwellian with
     // moments depending on space
-    host_t<DFieldSpX> density_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    host_t<DFieldSpX> mean_velocity_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    host_t<DFieldSpX> temperature_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+    host_t<DFieldSpX> density_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    host_t<DFieldSpX> mean_velocity_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    host_t<DFieldSpX> temperature_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
         double const density = 1.;
         double const density_ampl = 0.1;
         double const mean_velocity = 0.;
@@ -93,18 +95,17 @@ TEST(Physics, FluidMoments)
                 mean_velocity_init(ispx));
 
         auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
-        ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
+        ddc::parallel_deepcopy(allfdistribu_host[ispx], finit_host);
     });
 
     // density and temperature
-    host_t<DFieldSpX> density_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    host_t<DFieldSpX> mean_velocity_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    host_t<DFieldSpX> temperature_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    host_t<DFieldVx> const quadrature_coeffs
-            = trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu));
+    DFieldSpX density_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    DFieldSpX mean_velocity_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    DFieldSpX temperature_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    host_t<DFieldVx> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
     Quadrature<IDimVx> integrate(quadrature_coeffs);
     FluidMoments moments(integrate);
-
+    ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
     moments(density_computed.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);
     moments(mean_velocity_computed.span_view(),
             allfdistribu.span_cview(),
@@ -115,10 +116,14 @@ TEST(Physics, FluidMoments)
             density_computed.span_cview(),
             mean_velocity_computed.span_cview(),
             FluidMoments::s_temperature);
-
-    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        EXPECT_LE(std::fabs(density_computed(ispx) - density_init(ispx)), 1e-12);
-        EXPECT_LE(std::fabs(mean_velocity_computed(ispx) - mean_velocity_init(ispx)), 1e-12);
-        EXPECT_LE(std::fabs(temperature_computed(ispx) - temperature_init(ispx)), 1e-12);
+    auto mean_velocity_computed_host
+            = ddc::create_mirror_view_and_copy(mean_velocity_computed.span_view());
+    auto temperature_computed_host
+            = ddc::create_mirror_view_and_copy(temperature_computed.span_view());
+    auto density_computed_host = ddc::create_mirror_view_and_copy(density_computed.span_view());
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
+        EXPECT_LE(std::fabs(density_computed_host(ispx) - density_init(ispx)), 1e-12);
+        EXPECT_LE(std::fabs(mean_velocity_computed_host(ispx) - mean_velocity_init(ispx)), 1e-12);
+        EXPECT_LE(std::fabs(temperature_computed_host(ispx) - temperature_init(ispx)), 1e-12);
     });
 }

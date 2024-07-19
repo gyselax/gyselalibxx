@@ -71,7 +71,7 @@ public:
      *                          at the given point.
      * @param[in] moment_density A tag to ensure that the correct operator is called.
      */
-    void operator()(double& density, host_t<DViewVx> fdistribu, MomentDensity moment_density);
+    void operator()(double& density, DViewVx fdistribu, MomentDensity moment_density);
 
     /**
      * Calculate the density of the distribution function.
@@ -80,10 +80,7 @@ public:
      * @param[in] allfdistribu The distribution function.
      * @param[in] moment_density A tag to ensure that the correct operator is called.
      */
-    void operator()(
-            host_t<DSpanSpX> density,
-            host_t<DViewSpXVx> allfdistribu,
-            MomentDensity moment_density);
+    void operator()(DSpanSpX density, DViewSpXVx allfdistribu, MomentDensity moment_density);
 
     /**
      * Calculate the mean velocity at a specific point of the distribution function.
@@ -96,7 +93,7 @@ public:
      */
     void operator()(
             double& mean_velocity,
-            host_t<DViewVx> fdistribu,
+            DViewVx fdistribu,
             double density,
             MomentVelocity moment_velocity);
 
@@ -109,9 +106,9 @@ public:
      * @param[in] moment_velocity A tag to ensure that the correct operator is called.
      */
     void operator()(
-            host_t<DSpanSpX> mean_velocity,
-            host_t<DViewSpXVx> allfdistribu,
-            host_t<DViewSpX> density,
+            DSpanSpX mean_velocity,
+            DViewSpXVx allfdistribu,
+            DViewSpX density,
             MomentVelocity moment_velocity);
 
     /**
@@ -126,7 +123,7 @@ public:
      */
     void operator()(
             double& temperature,
-            host_t<DViewVx> fdistribu,
+            DViewVx fdistribu,
             double density,
             double mean_velocity,
             MomentTemperature moment_temperature);
@@ -141,9 +138,9 @@ public:
      * @param[in] moment_temperature A tag to ensure that the correct operator is called.
      */
     void operator()(
-            host_t<DSpanSpX> temperature,
-            host_t<DViewSpXVx> allfdistribu,
-            host_t<DViewSpX> density,
-            host_t<DViewSpX> mean_velocity,
+            DSpanSpX temperature,
+            DViewSpXVx allfdistribu,
+            DViewSpX density,
+            DViewSpX mean_velocity,
             MomentTemperature moment_temperature);
 };

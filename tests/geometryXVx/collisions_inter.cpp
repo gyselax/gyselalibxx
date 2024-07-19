@@ -108,33 +108,29 @@ TEST(CollisionsInter, CollisionsInter)
         ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
         double error_L1(0);
+        DFieldSpX density(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+        DFieldSpX temperature(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
         host_t<DFieldSpX> density_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
         host_t<DFieldSpX> fluid_velocity_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
         host_t<DFieldSpX> temperature_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
 
         ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
-            moments(density_host(ispx), allfdistribu_host[ispx], FluidMoments::s_density);
+            moments(density_host(ispx), allfdistribu[ispx], FluidMoments::s_density);
             moments(fluid_velocity_host(ispx),
-                    allfdistribu_host[ispx],
+                    allfdistribu[ispx],
                     density_host(ispx),
                     FluidMoments::s_velocity);
             moments(temperature_host(ispx),
-                    allfdistribu_host[ispx],
+                    allfdistribu[ispx],
                     density_host(ispx),
                     fluid_velocity_host(ispx),
                     FluidMoments::s_temperature);
         });
+        ddc::parallel_deepcopy(temperature, temperature_host);
+        ddc::parallel_deepcopy(density, density_host);
 
         //Collision frequencies, momentum and energy exchange terms
         DFieldSpX collfreq_ab(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-        auto density_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                density_host.span_view());
-        auto density = density_alloc.span_view();
-        auto temperature_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                temperature_host.span_view());
-        auto temperature = temperature_alloc.span_view();
         compute_collfreq_ab(collfreq_ab.span_view(), nustar_profile, density, temperature);
         auto collfreq_ab_host = ddc::create_mirror_view_and_copy(collfreq_ab.span_view());
 
