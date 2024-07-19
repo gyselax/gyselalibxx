@@ -192,30 +192,33 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
     // collision operator should not change densiy, mean_velocity and temperature
-    host_t<DFieldSpX> density_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    host_t<DFieldSpX> mean_velocity_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    host_t<DFieldSpX> temperature_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    DFieldSpX density_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    DFieldSpX mean_velocity_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    DFieldSpX temperature_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
     host_t<DFieldVx> const quadrature_coeffs
             = trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu_host));
     Quadrature<IDimVx> integrate(quadrature_coeffs);
     FluidMoments moments(integrate);
 
-    moments(density_res.span_view(), allfdistribu_host.span_cview(), FluidMoments::s_density);
+    moments(density_res.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);
     moments(mean_velocity_res.span_view(),
-            allfdistribu_host.span_cview(),
+            allfdistribu.span_cview(),
             density_res.span_cview(),
             FluidMoments::s_velocity);
     moments(temperature_res.span_view(),
-            allfdistribu_host.span_cview(),
+            allfdistribu.span_cview(),
             density_res.span_cview(),
             mean_velocity_res.span_cview(),
             FluidMoments::s_temperature);
+    auto mean_velocity_res_host = ddc::create_mirror_view_and_copy(mean_velocity_res.span_view());
+    auto temperature_res_host = ddc::create_mirror_view_and_copy(temperature_res.span_view());
+    auto density_res_host = ddc::create_mirror_view_and_copy(density_res.span_view());
 
     double const tol = 1.e-6;
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
-        EXPECT_LE(std::fabs(density_res(ispx) - density_init_host(ispx)), tol);
-        EXPECT_LE(std::fabs(mean_velocity_res(ispx) - mean_velocity_init_host(ispx)), tol);
-        EXPECT_LE(std::fabs(temperature_res(ispx) - temperature_init_host(ispx)), tol);
+        EXPECT_LE(std::fabs(density_res_host(ispx) - density_init_host(ispx)), tol);
+        EXPECT_LE(std::fabs(mean_velocity_res_host(ispx) - mean_velocity_init_host(ispx)), tol);
+        EXPECT_LE(std::fabs(temperature_res_host(ispx) - temperature_init_host(ispx)), tol);
     });
 
     // * Intra species collisions applied on a perturbed distribution function
@@ -267,21 +270,22 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     // before the collisions the perturbed distribution should have T != Tcoll and V != Vcoll
     // this test is performed on electrons since the largest error is made for them
     // (lightest species constraining the timestep)
-    moments(density_res.span_view(), allfdistribu_host.span_cview(), FluidMoments::s_density);
+    moments(density_res.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);
     moments(mean_velocity_res.span_view(),
-            allfdistribu_host.span_cview(),
+            allfdistribu.span_cview(),
             density_res.span_cview(),
             FluidMoments::s_velocity);
     moments(temperature_res.span_view(),
-            allfdistribu_host.span_cview(),
+            allfdistribu.span_cview(),
             density_res.span_cview(),
             mean_velocity_res.span_cview(),
             FluidMoments::s_temperature);
-
+    ddc::parallel_deepcopy(mean_velocity_res_host, mean_velocity_res);
+    ddc::parallel_deepcopy(temperature_res_host, temperature_res);
 
     ddc::for_each(ddc::get_domain<IDimX>(allfdistribu_host), [&](IndexX const ix) {
-        EXPECT_GE(std::fabs(mean_velocity_res(ielec(), ix) - Vcoll_host(ielec(), ix)), 1.e-4);
-        EXPECT_GE(std::fabs(temperature_res(ielec(), ix) - Tcoll_host(ielec(), ix)), 1.e-4);
+        EXPECT_GE(std::fabs(mean_velocity_res_host(ielec(), ix) - Vcoll_host(ielec(), ix)), 1.e-4);
+        EXPECT_GE(std::fabs(temperature_res_host(ielec(), ix) - Tcoll_host(ielec(), ix)), 1.e-4);
     });
 
     int const nbsteps = 300;
@@ -299,23 +303,24 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
 
     compute_Vcoll_Tcoll<CollisionsIntra::GhostedVx>(Vcoll, Tcoll, allfdistribu, Dcoll, dvDcoll);
 
-    moments(density_res.span_view(), allfdistribu_host.span_cview(), FluidMoments::s_density);
+    moments(density_res.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);
     moments(mean_velocity_res.span_view(),
-            allfdistribu_host.span_cview(),
+            allfdistribu.span_cview(),
             density_res.span_cview(),
             FluidMoments::s_velocity);
     moments(temperature_res.span_view(),
-            allfdistribu_host.span_cview(),
+            allfdistribu.span_cview(),
             density_res.span_cview(),
             mean_velocity_res.span_cview(),
             FluidMoments::s_temperature);
 
     ddc::parallel_deepcopy(Vcoll_host, Vcoll);
     ddc::parallel_deepcopy(Tcoll_host, Tcoll);
-
+    ddc::parallel_deepcopy(mean_velocity_res_host, mean_velocity_res);
+    ddc::parallel_deepcopy(temperature_res_host, temperature_res);
     ddc::for_each(ddc::get_domain<IDimX>(allfdistribu_host), [&](IndexX const ix) {
-        EXPECT_LE(std::fabs(mean_velocity_res(ielec(), ix) - Vcoll_host(ielec(), ix)), 1.e-4);
-        EXPECT_LE(std::fabs(temperature_res(ielec(), ix) - Tcoll_host(ielec(), ix)), 1.e-4);
+        EXPECT_LE(std::fabs(mean_velocity_res_host(ielec(), ix) - Vcoll_host(ielec(), ix)), 1.e-4);
+        EXPECT_LE(std::fabs(temperature_res_host(ielec(), ix) - Tcoll_host(ielec(), ix)), 1.e-4);
     });
 
     PC_tree_destroy(&conf_pdi);
