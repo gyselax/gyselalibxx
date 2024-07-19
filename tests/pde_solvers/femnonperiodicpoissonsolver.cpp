@@ -5,9 +5,6 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <paraconf.h>
-#include <pdi.h>
-
 #include "ddc_helper.hpp"
 #include "fem_1d_poisson_solver.hpp"
 #include "neumann_spline_quadrature.hpp"
