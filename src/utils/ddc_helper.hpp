@@ -130,6 +130,75 @@ inline void dump_coordinates(
             KOKKOS_LAMBDA(ddc::DiscreteElement<Dim> i) { dump_coord(i) = ddc::coordinate(i); });
 }
 
+/**
+ * @brief If necessary transpose data into the requested dimension ordering.
+ *
+ * @param[in] execution_space The execution space (Host/Device) where the code will run.
+ * @param[in] src The object to be transposed.
+ *
+ * @returns If src is already in the correct dimension ordering, return a view on src.
+ *          Otherwise return a chunk with the correct dimension ordering in which the data
+ *          from src has been copied.
+ */
+template <
+        class TargetDomain,
+        class ElementType,
+        class Domain,
+        class ChunkLayoutType,
+        class ExecSpace,
+        class MemSpace>
+auto create_transpose_mirror_view_and_copy(
+        ExecSpace const& execution_space,
+        ddc::ChunkSpan<ElementType, Domain, ChunkLayoutType, MemSpace> src)
+{
+    static_assert(
+            ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
+    if constexpr (std::is_same_v<TargetDomain, Domain>) {
+        return src.span_view();
+    } else {
+        TargetDomain transposed_domain(src.domain());
+        using ElemType = std::remove_const_t<ElementType>;
+        ddc::Chunk<ElemType, TargetDomain, ddc::KokkosAllocator<ElemType, MemSpace>> chunk(
+                transposed_domain);
+        transpose_layout(execution_space, chunk.span_view(), src.span_cview());
+        return chunk;
+    }
+}
+
+/**
+ * @brief Create a data object in the requested dimension ordering using as allocations as possible.
+ * This function does not copy data.
+ *
+ * @param[in] execution_space The execution space (Host/Device) where the code will run.
+ * @param[in] src The object to be transposed.
+ *
+ * @returns If src is already in the correct dimension ordering, return a view on src.
+ *          Otherwise return a chunk with the correct dimension ordering.
+ */
+template <
+        class TargetDomain,
+        class ElementType,
+        class Domain,
+        class ChunkLayoutType,
+        class ExecSpace,
+        class MemSpace>
+auto create_transpose_mirror(
+        ExecSpace const& execution_space,
+        ddc::ChunkSpan<ElementType, Domain, ChunkLayoutType, MemSpace> src)
+{
+    static_assert(
+            ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
+    if constexpr (std::is_same_v<TargetDomain, Domain>) {
+        return src.span_view();
+    } else {
+        TargetDomain transposed_domain(src.domain());
+        using ElemType = std::remove_const_t<ElementType>;
+        ddc::Chunk<ElemType, TargetDomain, ddc::KokkosAllocator<ElemType, MemSpace>> chunk(
+                transposed_domain);
+        return chunk;
+    }
+}
+
 } // namespace ddcHelper
 
 //-----------------------------------------------------------------------------
@@ -221,7 +290,6 @@ struct OnMemorySpace<NewMemorySpace, ddc::ChunkSpan<ElementType, SupportType, La
     using type = typename ddc::ChunkSpan<ElementType, SupportType, Layout, NewMemorySpace>;
 };
 
-
 /**
  * @brief Set a `VectorField` on a given NewMemorySpace.
  * @tparam NewMemorySpace The new memory space. 
@@ -268,6 +336,17 @@ struct OnMemorySpace<
     using type = VectorFieldSpan<ElementType, SupportType, NDTag, Layout, NewMemorySpace>;
 };
 
+
+template <template <class Tag> class Templ, class TypeSeq>
+struct ApplyTemplateToTypeSeq;
+
+template <template <class Tag> class Templ, class... Tags>
+struct ApplyTemplateToTypeSeq<Templ, ddc::detail::TypeSeq<Tags...>>
+{
+    using type = ddc::detail::TypeSeq<Templ<Tags>...>;
+};
+/// \endcond
+
 } // namespace detail
 
 /**
@@ -300,4 +379,8 @@ constexpr std::size_t type_seq_length_v = std::numeric_limits<std::size_t>::max(
 
 template <class... Tags>
 constexpr std::size_t type_seq_length_v<ddc::detail::TypeSeq<Tags...>> = sizeof...(Tags);
+
+/// A helper to get a type sequence by applying a template to a sequence of type tags.
+template <template <class Tag> class Templ, class TypeSeq>
+using apply_template_to_type_seq_t = typename detail::ApplyTemplateToTypeSeq<Templ, TypeSeq>::type;
 } // namespace ddcHelper

@@ -59,6 +59,9 @@ include(CTest)
 ## Look for a pre-installed LAPACK
 find_package(LAPACK REQUIRED)
 
+## Look for a pre-installed MPI
+find_package(MPI REQUIRED)
+
 ## Look for a pre-installed paraconf
 find_package(paraconf REQUIRED COMPONENTS C)
 

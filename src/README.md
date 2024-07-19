@@ -14,6 +14,7 @@ The `src/` folder contains all the code necessary to build a gyrokinetic semi-La
 - [io](./io/README.md)
 - [multipatch](./multipatch/README.md) - Code describing multipatch geometry.
 <!-- - [paraconfpp](./paraconfpp/README.md) - Paraconf utility functions. -->
+- [mpi\_parallelisation](./mpi_parallelisation/README.md) - Code describing the MPI parallelisation.
 - [pde\_solvers](./pde_solvers/README.md) - Code describing different methods for solving PDEs (e.g. Poisson's equation).
 - [quadrature](./quadrature/README.md) - Code describing different quadrature methods.
 - [speciesinfo](./speciesinfo/README.md) - Code used to describe the different species.

@@ -19,15 +19,16 @@
  */
 template <
         class ExecSpace,
+        class ElementType,
         class StartDomain,
         class StartLayoutStridedPolicy,
         class MemorySpace,
         class EndDomain,
         class EndLayoutStridedPolicy>
-ddc::ChunkSpan<double, EndDomain, EndLayoutStridedPolicy, MemorySpace> transpose_layout(
+ddc::ChunkSpan<ElementType, EndDomain, EndLayoutStridedPolicy, MemorySpace> transpose_layout(
         ExecSpace const& execution_space,
-        ddc::ChunkSpan<double, EndDomain, EndLayoutStridedPolicy, MemorySpace> end_span,
-        ddc::ChunkView<double, StartDomain, StartLayoutStridedPolicy, MemorySpace> start_view)
+        ddc::ChunkSpan<ElementType, EndDomain, EndLayoutStridedPolicy, MemorySpace> end_span,
+        ddc::ChunkView<ElementType, StartDomain, StartLayoutStridedPolicy, MemorySpace> start_view)
 {
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible,
