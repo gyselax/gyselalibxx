@@ -19,7 +19,6 @@ export SPACK_USER_PREFIX="${SHAREDWORKDIR}/spack-install-MI250"
 module use "${SPACK_USER_PREFIX}/modules/tcl/linux-rhel8-zen3"
 
 module load \
-    cmake/3.27.7 \
     gcc/12.1/zen3/libyaml/0.2.5 \
     gcc/12.1/zen3/paraconf/1.0.0 \
     gcc/12.1/zen3/pdi/1.6.0 \
@@ -28,6 +27,7 @@ module load \
     gcc/12.1/zen3/pdiplugin-trace/1.6.0 \
     gcc/12.1/zen3/ginkgo/1.8.0 \
     gcc/12.1/zen3/eigen/3.4.0 \
+    gcc/12.1/zen3/cmake/3.27.7 \
     gcc/12.1/zen3/ninja/1.11.1
 
 module list

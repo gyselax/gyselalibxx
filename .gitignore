@@ -1,4 +1,3 @@
 /build*/
 *.pyc
 /log.build.*
-/log.prepare.*

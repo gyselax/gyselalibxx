@@ -43,13 +43,13 @@ int main(int argc, char** argv)
     setenv("KOKKOS_TOOLS_LIBS", KP_KERNEL_TIMER_PATH, false);
     setenv("KOKKOS_TOOLS_TIMER_JSON", "true", false);
 
-    Kokkos::ScopeGuard kokkos_scope(argc, argv);
-    ddc::ScopeGuard ddc_scope(argc, argv);
-
     PC_tree_t conf_voicexx = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
     PDI_init(conf_pdi);
+
+    Kokkos::ScopeGuard kokkos_scope(argc, argv);
+    ddc::ScopeGuard ddc_scope(argc, argv);
 
     // Reading config
     // --> Mesh info
