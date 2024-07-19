@@ -11,25 +11,26 @@ FluidMoments::FluidMoments(Quadrature<IDimVx> integrate_v) : m_integrate_v(integ
 /*
  * Computes the density of fdistribu
 */
-void FluidMoments::operator()(
-        double& density,
-        host_t<DViewVx> const fdistribu,
-        FluidMoments::MomentDensity)
+void FluidMoments::operator()(double& density, DViewVx const fdistribu, FluidMoments::MomentDensity)
 {
-    density = m_integrate_v(fdistribu);
+    auto fdistribu_host = ddc::create_mirror_view_and_copy(fdistribu);
+    density = m_integrate_v(fdistribu_host);
 }
 
 /*
  * Computes the density of allfdistribu
 */
 void FluidMoments::operator()(
-        host_t<DSpanSpX> const density,
-        host_t<DViewSpXVx> const allfdistribu,
+        DSpanSpX const density,
+        DViewSpXVx const allfdistribu,
         FluidMoments::MomentDensity)
 {
+    auto density_host = ddc::create_mirror_view_and_copy(density);
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu);
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        (*this)(density(ispx), allfdistribu[ispx], FluidMoments::s_density);
+        (*this)(density_host(ispx), allfdistribu[ispx], FluidMoments::s_density);
     });
+    ddc::parallel_deepcopy(density, density_host);
 }
 
 /*
@@ -37,14 +38,16 @@ void FluidMoments::operator()(
 */
 void FluidMoments::operator()(
         double& mean_velocity,
-        host_t<DViewVx> const fdistribu,
+        DViewVx const fdistribu,
         double density,
         FluidMoments::MomentVelocity)
 {
+    auto fdistribu_host = ddc::create_mirror_view_and_copy(fdistribu);
     host_t<DFieldVx> integrand(fdistribu.domain());
+
     ddc::for_each(fdistribu.domain(), [&](IndexVx const ivx) {
         CoordVx const coordv = ddc::coordinate(ivx);
-        integrand(ivx) = coordv * fdistribu(ivx);
+        integrand(ivx) = coordv * fdistribu_host(ivx);
     });
 
     mean_velocity = m_integrate_v(integrand) / density;
@@ -53,20 +56,25 @@ void FluidMoments::operator()(
  * Computes the mean_velocity of allfdistribu, using its density
 */
 void FluidMoments::operator()(
-        host_t<DSpanSpX> const mean_velocity,
-        host_t<DViewSpXVx> const allfdistribu,
-        host_t<DViewSpX> const density,
+        DSpanSpX const mean_velocity,
+        DViewSpXVx const allfdistribu,
+        DViewSpX const density,
         FluidMoments::MomentVelocity)
 {
+    auto mean_velocity_host = ddc::create_mirror_view_and_copy(mean_velocity);
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu);
+    auto density_host = ddc::create_mirror_view_and_copy(density);
+
     host_t<DFieldSpXVx> integrand(allfdistribu.domain());
     ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
         CoordVx const coordv = ddc::coordinate(ddc::select<IDimVx>(ispxvx));
-        integrand(ispxvx) = coordv * allfdistribu(ispxvx);
+        integrand(ispxvx) = coordv * allfdistribu_host(ispxvx);
     });
 
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        mean_velocity(ispx) = m_integrate_v(integrand[ispx]) / density(ispx);
+        mean_velocity_host(ispx) = m_integrate_v(integrand[ispx]) / density_host(ispx);
     });
+    ddc::parallel_deepcopy(mean_velocity, mean_velocity_host);
 }
 
 /*
@@ -74,15 +82,16 @@ void FluidMoments::operator()(
 */
 void FluidMoments::operator()(
         double& temperature,
-        host_t<DViewVx> const fdistribu,
+        DViewVx const fdistribu,
         double density,
         double mean_velocity,
         FluidMoments::MomentTemperature)
 {
+    auto fdistribu_host = ddc::create_mirror_view_and_copy(fdistribu);
     host_t<DFieldVx> integrand(fdistribu.domain());
     ddc::for_each(fdistribu.domain(), [&](IndexVx const ivx) {
         double const coeff = ddc::coordinate(ddc::select<IDimVx>(ivx)) - mean_velocity;
-        integrand(ivx) = coeff * coeff * fdistribu(ivx);
+        integrand(ivx) = coeff * coeff * fdistribu_host(ivx);
     });
 
     temperature = m_integrate_v(integrand) / density;
@@ -91,20 +100,26 @@ void FluidMoments::operator()(
  * Computes the temperature of allfdistribu, using its density and mean velocity
 */
 void FluidMoments::operator()(
-        host_t<DSpanSpX> const temperature,
-        host_t<DViewSpXVx> const allfdistribu,
-        host_t<DViewSpX> const density,
-        host_t<DViewSpX> const mean_velocity,
+        DSpanSpX const temperature,
+        DViewSpXVx const allfdistribu,
+        DViewSpX const density,
+        DViewSpX const mean_velocity,
         FluidMoments::MomentTemperature)
 {
+    auto temperature_host = ddc::create_mirror_view_and_copy(temperature);
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu);
+    auto density_host = ddc::create_mirror_view_and_copy(density);
+    auto mean_velocity_host = ddc::create_mirror_view_and_copy(mean_velocity);
+
     host_t<DFieldSpXVx> integrand(allfdistribu.domain());
     ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
         double const coeff = ddc::coordinate(ddc::select<IDimVx>(ispxvx))
-                             - mean_velocity(ddc::select<IDimSp, IDimX>(ispxvx));
-        integrand(ispxvx) = coeff * coeff * allfdistribu(ispxvx);
+                             - mean_velocity_host(ddc::select<IDimSp, IDimX>(ispxvx));
+        integrand(ispxvx) = coeff * coeff * allfdistribu_host(ispxvx);
     });
 
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        temperature(ispx) = m_integrate_v(integrand[ispx]) / density(ispx);
+        temperature_host(ispx) = m_integrate_v(integrand[ispx]) / density_host(ispx);
     });
+    ddc::parallel_deepcopy(temperature, temperature_host);
 }
