@@ -60,13 +60,13 @@ int main(int argc, char** argv)
     fs::create_directory("output");
 
     // Get the parameters of the grid from the grid_size.yaml. ----------------------------------------
-    ::Kokkos::ScopeGuard kokkos_scope(argc, argv);
-    ::ddc::ScopeGuard ddc_scope(argc, argv);
-
     PC_tree_t conf_gyselalibxx = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
     PDI_init(conf_pdi);
+
+    Kokkos::ScopeGuard kokkos_scope(argc, argv);
+    ddc::ScopeGuard ddc_scope(argc, argv);
 
     std::chrono::time_point<std::chrono::system_clock> start_simulation;
     std::chrono::time_point<std::chrono::system_clock> end_simulation;

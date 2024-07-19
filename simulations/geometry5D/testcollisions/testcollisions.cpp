@@ -29,15 +29,15 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
-    Kokkos::ScopeGuard scope(argc, argv);
-    ddc::ScopeGuard ddc_scope(argc, argv);
-
     long int iter_start;
     PC_tree_t conf_gyselax;
     parse_executable_arguments(conf_gyselax, iter_start, argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
     PDI_init(conf_pdi);
+
+    Kokkos::ScopeGuard scope(argc, argv);
+    ddc::ScopeGuard ddc_scope(argc, argv);
 
     ddc::expose_to_pdi("iter_start", iter_start);
 
