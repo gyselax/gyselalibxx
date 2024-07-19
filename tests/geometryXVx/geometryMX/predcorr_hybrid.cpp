@@ -240,9 +240,11 @@ TEST(GeometryXM, PredCorrHybrid)
     PredCorrHybrid const predcorr_hybrid(vlasov, fluidsolver, poisson);
     predcorr_hybrid(allfdistribu, fluid_moments, time_start, deltat, nb_iter);
 
-    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu);
+    auto allfdistribu_host
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), allfdistribu);
 
-    auto allfdistribu_predcorr_host = ddc::create_mirror_view_and_copy(allfdistribu_predcorr);
+    auto allfdistribu_predcorr_host = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), allfdistribu_predcorr);
 
     /**
      * Since the fluid model uses NullFluidSolver, 

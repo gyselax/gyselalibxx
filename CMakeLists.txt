@@ -131,9 +131,9 @@ endif()
 add_subdirectory("vendor/kokkos/" "kokkos") # SYSTEM)
 
 # NOTE: Do not forget to keep Kokkos and Kokkos-kernels in sync !
-set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
-set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON CACHE BOOL "")
-set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")
+set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF BOOL "")
+set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON BOOL "")
+set(KokkosKernels_ENABLE_COMPONENT_BLAS ON BOOL "")
 add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels") # SYSTEM)
 
 find_package (Eigen3 3.3 NO_MODULE)

@@ -9,111 +9,14 @@
 #include "koliop_interface.hpp"
 
 /**
- * @brief A namespace to collect classes which are necessary to create Chunks with the
- * correct number of dimensions to be compatible with Koliop.
- */
-namespace collisions_dimensions {
-/**
- * Create dimensions to act as the radial/poloidal/toroidal tag for Koliop even if these dims don't
- * exist in the simulation
- */
-
-/// Class from which fake dimensions inherit. These fake dimensions are inserted in order to match Koliop interface
-struct InternalSpoofGrid
-{
-};
-
-/// Fake radial dimension to be used if there is no radial dimension in the simulation
-struct InternalSpoofGridR : InternalSpoofGrid
-{
-};
-
-/// Fake poloidal dimension to be used if there is no poloidal dimension in the simulation
-struct InternalSpoofGridTheta : InternalSpoofGrid
-{
-};
-
-/// Check if a dimension is spoofed but is not present in the actual simulation
-template <class Grid>
-inline constexpr bool is_spoofed_dim_v = std::is_base_of_v<InternalSpoofGrid, Grid>;
-
-/**
- * Class to get the type of the radial dimension from a field containing a radial profile.
- * @tparam Field The type of the field containing the radial profile.
- */
-template <class Field>
-struct ExtractRDim
-{
-    static_assert(!std::is_same_v<Field, Field>, "Unrecognised radial profile type");
-};
-
-/**
- * Class to get the type of the poloidal dimension from a field containing a profile on the poloidal plane.
- * @tparam Field The type of the field containing the profile on the poloidal plane.
- * @tparam GridR The tag for the discrete radial dimension.
- */
-template <class Field, class GridR>
-struct ExtractThetaDim
-{
-    static_assert(!std::is_same_v<Field, Field>, "Unrecognised poloidal profile type");
-};
-
-/**
- * @brief Get the index range for a specific grid from a multi-D index range.
- * If the dimension is spoofed and does not appear in the multi-D index range then an index
- * range which only iterates over the index(0) is returned.
- *
- * @tparam Grid The tag for the specific grid.
- * @param idx_range The multi-D index range.
- * @returns The index range for the specific grid.
- */
-template <class Grid, class FDistribDomain>
-inline ddc::DiscreteDomain<Grid> get_1d_idx_range(FDistribDomain idx_range)
-{
-    if constexpr (is_spoofed_dim_v<Grid>) {
-        return ddc::DiscreteDomain<
-                Grid>(ddc::DiscreteElement<Grid> {0}, ddc::DiscreteVector<Grid> {1});
-    } else {
-        return ddc::select<Grid>(idx_range);
-    }
-}
-
-/**
- * @brief Get the index range for specific grid dimensions from a multi-D index range.
- *
- * @tparam Grid The tags for the specific grid dimensions.
- * @param idx_range The multi-D index range.
- * @returns The index range for the specific grid.
- */
-template <class... Grid, class FDistribDomain>
-inline ddc::DiscreteDomain<Grid...> get_idx_range(FDistribDomain idx_range)
-{
-    return ddc::DiscreteDomain<Grid...>(get_1d_idx_range<Grid>(idx_range)...);
-}
-
-} // namespace collisions_dimensions
-
-/**
  * @brief A class which computes the collision operator in (vpar,mu)
  */
-template <
-        class FDistribDomain,
-        class GridVpar,
-        class GridMu,
-        class InputDFieldR,
-        class InputDFieldRTheta>
+template <class FDistribDomain, class GridVpar, class GridMu>
 class CollisionSpVparMu /* : public IRightHandSide */
 {
 private:
     using Species = IDimSp;
     using fdistrib_domain_tags = ddc::to_type_seq_t<FDistribDomain>;
-    // Validate template types
-    static_assert(ddc::is_discrete_domain_v<FDistribDomain>);
-    static_assert(FDistribDomain::rank() >= 3 && FDistribDomain::rank() <= 6);
-    static_assert((std::is_same_v<InputDFieldR, double>) || ddc::is_borrowed_chunk_v<InputDFieldR>);
-    static_assert(
-            (std::is_same_v<InputDFieldRTheta, double>)
-            || (ddc::is_borrowed_chunk_v<InputDFieldRTheta>));
     // Ensure expected types appear in distribution domain
     static_assert(
             ddc::in_tags_v<Species, fdistrib_domain_tags>,
@@ -124,7 +27,6 @@ private:
     static_assert(
             ddc::in_tags_v<GridMu, fdistrib_domain_tags>,
             "Mu is missing from distribution function domain");
-
     // Ensure expected types appear in distribution domain at expected position
     static_assert(
             ddc::type_seq_rank_v<Species, fdistrib_domain_tags> == 0,
@@ -139,34 +41,13 @@ private:
     // [TODO] Restore it as soon as the geometry5D is deleted
     //static_assert(ddc::is_uniform_point_sampling_v<GridVpar>);
 
-private:
-    using GridR = typename collisions_dimensions::ExtractRDim<InputDFieldR>::type;
-    using GridTheta =
-            typename collisions_dimensions::ExtractThetaDim<InputDFieldRTheta, GridR>::type;
-
-    using DDomR = ddc::DiscreteDomain<GridR>;
-    using DDomRTheta = ddc::DiscreteDomain<GridR, GridTheta>;
-    using DDomSpRThetaVpar = ddc::DiscreteDomain<GridVpar, GridR, GridTheta, Species>;
-
 public:
+    /// Type alias for a field on species domain
+    using DFieldSp = device_t<ddc::Chunk<double, IDomainSp>>;
     /// Type alias for the domain of the magnetic moment.
     using DDomMu = ddc::DiscreteDomain<GridMu>;
     /// Type alias for the domain of the velocity parallel to the magnetic field.
     using DDomVpar = ddc::DiscreteDomain<GridVpar>;
-
-public:
-    /// Type alias for a field on a grid of species
-    using DFieldSp = device_t<ddc::Chunk<double, IDomainSp>>;
-    /// Type alias for a field on a grid of radial values
-    using DFieldR = device_t<ddc::Chunk<double, DDomR>>;
-    /// Type alias for a field on a grid of magnetic moments
-    using DFieldMu = device_t<ddc::Chunk<double, DDomMu>>;
-    /// Type alias for a field on a grid of parallel velocities
-    using DFieldVpar = device_t<ddc::Chunk<double, DDomVpar>>;
-    /// Type alias for a field on a grid on a poloidal plane
-    using DFieldRTheta = device_t<ddc::Chunk<double, DDomRTheta>>;
-    /// Type alias for a field on a grid of species, poloidal plane and parallel velocities
-    using DFieldSpRThetaVpar = device_t<ddc::Chunk<double, DDomSpRThetaVpar>>;
     /// Type alias for a constant reference to a Chunk on GPU defined on a grid of magnetic moments.
     using DViewMu = ddc::ChunkSpan<
             double const,
@@ -186,34 +67,108 @@ public:
     using FDistribSpan = device_t<ddc::ChunkSpan<double, FDistribDomain>>;
 
 private:
-    template <class GridR, class SrcType>
-    void deepcopy_1d(device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<GridR>>> dst, SrcType src)
+    // Shortcut to get the type at a specified index in the Chunk domain
+    template <std::size_t I, class ChunkType>
+    using domain_element_t
+            = ddc::type_seq_element_t<I, ddc::to_type_seq_t<typename ChunkType::mdomain_type>>;
+
+    // Get the size of a chunk. This function returns 1 if a double is passed.
+    template <class ChunkType>
+    static std::size_t get_chunk_size(ChunkType chunk_1d)
     {
-        if constexpr (collisions_dimensions::is_spoofed_dim_v<GridR>) {
-            ddc::parallel_fill(dst, src);
+        static_assert(std::is_same_v<ChunkType, double> || ddc::is_borrowed_chunk_v<ChunkType>);
+        if constexpr (ddc::is_chunk_v<ChunkType>) {
+            return chunk_1d.domain().size();
         } else {
-            ddc::parallel_deepcopy(dst, src);
+            return 1;
         }
     }
 
-    template <class GridR, class GridTheta, class SrcType>
-    void deepcopy_2d(
-            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<GridR, GridTheta>>> dst,
-            SrcType src)
+    // Get the size of the radial domain from nustar
+    template <class DFieldR>
+    static std::size_t get_r_domain_size(DFieldR nustar)
     {
-        if constexpr ((collisions_dimensions::is_spoofed_dim_v<GridR>)&&(
-                              collisions_dimensions::is_spoofed_dim_v<GridTheta>)) {
-            ddc::parallel_fill(dst, src);
-        } else if constexpr ((!collisions_dimensions::is_spoofed_dim_v<GridR>)&&(
-                                     !collisions_dimensions::is_spoofed_dim_v<GridTheta>)) {
-            ddc::parallel_deepcopy(dst, src);
-        } else {
-            using NonSpoofDim = std::
-                    conditional_t<collisions_dimensions::is_spoofed_dim_v<GridR>, GridTheta, GridR>;
-            ddc::parallel_for_each(dst.domain(), [&](ddc::DiscreteElement<GridR, GridTheta> idx) {
-                dst(idx) = src(ddc::select<NonSpoofDim>(idx));
-            });
+        static_assert(std::is_same_v<DFieldR, double> || ddc::is_borrowed_chunk_v<DFieldR>);
+        if constexpr (ddc::is_borrowed_chunk_v<DFieldR>) {
+            static_assert(DFieldR::rank() == 1);
         }
+        return get_chunk_size(nustar);
+    }
+
+    // Get the size of the poloidal domain from B_norm by excluding the size of nustar
+    template <class DFieldR, class DFieldRTheta>
+    static std::size_t get_theta_domain_size(DFieldR nustar, DFieldRTheta B_norm)
+    {
+        std::size_t const r_size = get_chunk_size(nustar);
+        std::size_t const r_theta_size = get_chunk_size(B_norm);
+        return r_theta_size / r_size;
+    }
+
+    // Return a Kokkos view used in koliop from a DFieldR (used for the radial profile input)
+    template <class DFieldR>
+    koliop_interface::MDL<double*> radialprof_to_koliop(
+            DFieldR radial_field,
+            std::string const& string_radial_field)
+    {
+        koliop_interface::MDL<double*> kop_radial_field;
+
+        std::size_t const n_r = get_r_domain_size(radial_field);
+        if constexpr (std::is_same_v<DFieldR, double>) {
+            kop_radial_field = koliop_interface::MDL<double*>(
+                    Kokkos::view_alloc(Kokkos::WithoutInitializing, string_radial_field),
+                    n_r);
+            Kokkos::deep_copy(kop_radial_field, radial_field);
+        } else {
+            kop_radial_field = radial_field.allocation_kokkos_view();
+        }
+        return kop_radial_field;
+    }
+
+    // Return a Kokkos view from B_norm of type DFieldRtheta. Enable to treat the case when n_r or/and ntheta equal to 1.
+    template <class DFieldRTheta>
+    koliop_interface::MDL<double**> rthetaprof_to_koliop(
+            DFieldRTheta B_norm,
+            std::size_t const n_r,
+            std::size_t const n_theta)
+    {
+        koliop_interface::MDL<double**> kop_B_norm;
+
+        if constexpr (std::is_same_v<DFieldRTheta, double>) {
+            // If DFieldRTheta is a double create an array and copy the double to GPU
+            kop_B_norm = koliop_interface::MDL<double**>(
+                    Kokkos::view_alloc(Kokkos::WithoutInitializing, "B_norm"),
+                    n_r,
+                    n_theta);
+            Kokkos::deep_copy(kop_B_norm, B_norm);
+        } else {
+            // If DFieldRTheta is a chunk
+            static_assert(
+                    std::is_same_v<
+                            typename DFieldRTheta::memory_space,
+                            typename Kokkos::DefaultExecutionSpace::memory_space>,
+                    "The data should be provided on GPU");
+            auto B_norm_kokkos_view = B_norm.allocation_kokkos_view();
+            if constexpr (DFieldRTheta::rank() == 1) {
+                // If a 1D chunk then a reference to the data can be packed directly into a 2D chunk
+                kop_B_norm = koliop_interface::MDL<double**>(B_norm.data_handle(), n_r, n_theta);
+            } else if constexpr (
+                    std::is_same_v<
+                            typename decltype(B_norm_kokkos_view)::traits::array_layout,
+                            typename koliop_interface::MDL<const double**>::traits::array_layout>) {
+                // If a 2D chunk with the right layout we can use the kokkos view directly
+                kop_B_norm = B_norm_kokkos_view;
+            } else {
+                // If a 2D chunk with the wrong layout then a copy is required
+                static_assert(DFieldRTheta::rank() == 2);
+                kop_B_norm = koliop_interface::MDL<double**>(
+                        Kokkos::view_alloc(Kokkos::WithoutInitializing, "B_norm"),
+                        n_r,
+                        n_theta);
+                // A copy is required to change the layout
+                Kokkos::deep_copy(kop_B_norm, B_norm_kokkos_view);
+            }
+        }
+        return kop_B_norm;
     }
 
 public:
@@ -237,32 +192,40 @@ public:
      * @param[in] B_norm
      *      magnetic field norm in (r,theta)
      */
+    template <class DFieldR, class DFieldRTheta>
     CollisionSpVparMu(
             FDistribDomain fdistrib_domain,
             DViewMu coeff_intdmu,
             DViewVpar coeff_intdvpar,
-            InputDFieldR nustar,
-            InputDFieldR rg,
-            InputDFieldR safety_factor,
-            InputDFieldRTheta B_norm)
-        : m_operator_handle {}
-        , m_comb_mat {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_comb_mat")}
-        , m_hat_As {"m_hat_As", collisions_dimensions::get_idx_range<Species>(fdistrib_domain)}
-        , m_hat_Zs {"m_hat_Zs", collisions_dimensions::get_idx_range<Species>(fdistrib_domain)}
-        , m_nustar {"m_nustar", collisions_dimensions::get_idx_range<GridR>(fdistrib_domain)}
-        , m_rg {"m_rg", collisions_dimensions::get_idx_range<GridR>(fdistrib_domain)}
-        , m_safety_factor {"m_safety_factor", collisions_dimensions::get_idx_range<GridR>(fdistrib_domain)}
-        , m_mask_buffer_r {"m_mask_buffer_r", collisions_dimensions::get_idx_range<GridR>(fdistrib_domain)}
-        , m_mask_LIM {"m_mask_LIM", DDomRTheta {collisions_dimensions::get_idx_range<GridR, GridTheta>(fdistrib_domain)}}
-        , m_B_norm {"m_B_norm", DDomRTheta {collisions_dimensions::get_idx_range<GridR, GridTheta>(fdistrib_domain)}}
-        , m_Bstar_s {"m_Bstar_s", DDomSpRThetaVpar {collisions_dimensions::get_idx_range<Species, GridR, GridTheta, GridVpar>(fdistrib_domain)}}
-        , m_mug {"m_mug", ddc::select<GridMu>(fdistrib_domain)}
-        , m_vparg {"m_vparg", ddc::select<GridVpar>(fdistrib_domain)}
+            DFieldR nustar,
+            DFieldR rg, 
+            DFieldR safety_factor,
+            DFieldRTheta B_norm)
+    : m_operator_handle {}
+    , m_comb_mat {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_comb_mat")}
+    , m_hat_As {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_hat_As"), ddc::select<Species>(fdistrib_domain).size()}   // m_hat_As{"m_hat_As",ddc::select<Species>(fdistrib_domain)}
+    , m_hat_Zs {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_hat_Zs"), ddc::select<Species>(fdistrib_domain).size()}
+    , m_mask_buffer_r {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_mask_buffer_r"), get_r_domain_size(nustar)}
+    , m_mask_LIM {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_mask_LIM"), get_r_domain_size(nustar), get_theta_domain_size(nustar, B_norm)}
+    , m_Bstar_s {
+              Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_Bstar_s"),
+              ddc::select<GridVpar>(fdistrib_domain).size(),
+              get_r_domain_size(nustar),
+              get_theta_domain_size(nustar, B_norm),
+              ddc::select<Species>(fdistrib_domain).size()}
+    , m_mug {
+              Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_mug"),
+              ddc::select<GridMu>(fdistrib_domain).size()}
+    , m_vparg {
+              Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_vparg"),
+              ddc::select<GridVpar>(fdistrib_domain).size()}
     {
-        using namespace collisions_dimensions;
         // Check that the distribution function is correctly ordered
-        if constexpr (!is_spoofed_dim_v<GridR>) {
-            if constexpr (!is_spoofed_dim_v<GridTheta>) {
+        if constexpr (ddc::is_chunk_v<DFieldR>) {
+            using GridR = domain_element_t<0, DFieldR>;
+            if constexpr (ddc::is_chunk_v<DFieldRTheta>) {
+                static_assert(std::is_same_v<GridR, domain_element_t<1, DFieldRTheta>>);
+                using GridTheta = domain_element_t<0, DFieldRTheta>;
                 static_assert(
                         ddc::type_seq_rank_v<
                                 GridR,
@@ -280,7 +243,8 @@ public:
                                 fdistrib_domain_tags> == (FDistribDomain::rank() - 3),
                         "R should appear third to last in the distribution function domain");
             }
-        } else if constexpr (!is_spoofed_dim_v<GridTheta>) {
+        } else if constexpr (ddc::is_chunk_v<DFieldRTheta>) {
+            using GridTheta = domain_element_t<0, DFieldRTheta>;
             static_assert(
                     ddc::type_seq_rank_v<
                             GridTheta,
@@ -293,37 +257,37 @@ public:
         IDomainSp idxrange_sp = ddc::select<Species>(fdistrib_domain);
         // --> Initialize the mass species
         ddc::ChunkSpan hat_As_host = ddc::discrete_space<IDimSp>().masses()[idxrange_sp];
-        ddc::parallel_deepcopy(m_hat_As.span_view(), hat_As_host);
+        Kokkos::deep_copy(m_hat_As, hat_As_host.allocation_kokkos_view());
         // --> Initialize the charge species
         ddc::ChunkSpan hat_Zs_host = ddc::discrete_space<IDimSp>().charges()[idxrange_sp];
-        ddc::parallel_deepcopy(m_hat_Zs.span_view(), hat_Zs_host);
+        Kokkos::deep_copy(m_hat_Zs, hat_Zs_host.allocation_kokkos_view());
 
         // --> Initialize the other quantities needed in koliop
         // TODO: Put Bstar_s as an input variable of the constructor (something more specific than what is done for B_norm must be done)
-        ddc::parallel_fill(m_Bstar_s.span_view(), 1.0);
+        Kokkos::deep_copy(m_Bstar_s, 1.0);
 
         // --> Initialization of the masks that have no sense here to 0.
-        ddc::parallel_fill(m_mask_buffer_r.span_view(), 0.0); // Masked if >= 0.99
-        ddc::parallel_fill(m_mask_LIM.span_view(), 0.0); // Masked if >= 0.99
+        Kokkos::deep_copy(m_mask_buffer_r, 0.0); // Masked if >= 0.99
+        Kokkos::deep_copy(m_mask_LIM, 0.0); // Masked if >= 0.99
 
         // --> Initialization of vpar and mu grids
-        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), m_mug.span_view());
-        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), m_vparg.span_view());
+        koliop_interface::DumpCoordinates(m_mug, ddc::select<GridMu>(fdistrib_domain));
+        koliop_interface::DumpCoordinates(m_vparg, ddc::select<GridVpar>(fdistrib_domain));
 
         // NOTE: We need to fence because DumpCoordinates is asynchronous on GPUs.
         Kokkos::fence();
 
         std::size_t const n_mu = ddc::select<GridMu>(fdistrib_domain).size();
         std::size_t const n_vpar = ddc::select<GridVpar>(fdistrib_domain).size();
-        std::size_t const n_r = get_idx_range<GridR>(fdistrib_domain).size();
-        std::size_t const n_theta = get_idx_range<GridTheta>(fdistrib_domain).size();
+        std::size_t const n_r = get_r_domain_size(nustar);
+        std::size_t const n_theta = get_theta_domain_size(nustar, B_norm);
         std::size_t const n_sp = ddc::select<Species>(fdistrib_domain).size();
         std::size_t const n_batch = fdistrib_domain.size() / (n_mu * n_vpar * n_r * n_theta * n_sp);
 
-        deepcopy_1d<GridR>(m_nustar.span_view(), nustar);
-        deepcopy_1d<GridR>(m_rg.span_view(), rg);
-        deepcopy_1d<GridR>(m_safety_factor.span_view(), safety_factor);
-        deepcopy_2d<GridR, GridTheta>(m_B_norm.span_view(), B_norm);
+        m_nustar = radialprof_to_koliop(nustar, "nustar");
+        m_rg = radialprof_to_koliop(rg, "rg");
+        m_safety_factor = radialprof_to_koliop(safety_factor, "safety_factor");
+        m_B_norm = rthetaprof_to_koliop(B_norm, n_r, n_theta);
 
         m_operator_handle = koliop_interface::DoOperatorInitialization(
                 n_mu,
@@ -333,20 +297,20 @@ public:
                 n_batch,
                 n_sp,
                 /* the_local_domain_r_offset */ 0 + n_r - 1,
-                m_mug.data_handle(),
-                m_vparg.data_handle(),
+                m_mug.data(),
+                m_vparg.data(),
                 coeff_intdmu.data_handle(),
                 coeff_intdvpar.data_handle(),
-                m_nustar.data_handle(),
+                m_nustar.data(),
                 m_comb_mat.data(),
-                m_hat_As.data_handle(),
-                m_hat_Zs.data_handle(),
-                m_rg.data_handle(),
-                m_safety_factor.data_handle(),
-                m_mask_buffer_r.data_handle(),
-                m_mask_LIM.data_handle(),
-                m_B_norm.data_handle(),
-                m_Bstar_s.data_handle());
+                m_hat_As.data(), // m_hat_As.data_handle()   --> pointer
+                m_hat_Zs.data(),
+                m_rg.data(),
+                m_safety_factor.data(),
+                m_mask_buffer_r.data(),
+                m_mask_LIM.data(),
+                m_B_norm.data(),
+                m_Bstar_s.data());
     }
 
     ~CollisionSpVparMu()
@@ -392,97 +356,29 @@ protected:
     /// Combinatory (6x6) matrix computed only one times at initialisation. Rk: 6 = 2*(Npolmax-1) + 1 + 1
     koliop_interface::MDL<double[6][6]> m_comb_mat;
     /// Normalized masses for all species
-    DFieldSp m_hat_As;
+    koliop_interface::MDL<double*> m_hat_As; // DFieldSp
     /// Normalized charges for all species
-    DFieldSp m_hat_Zs;
+    koliop_interface::MDL<double*> m_hat_Zs;
     /// Radial profile of nustar
-    DFieldR m_nustar;
+    koliop_interface::MDL<double*> m_nustar;
     /// Mesh points in the radial direction
     // [TODO]: See if we need m_rg ?
-    DFieldR m_rg;
+    koliop_interface::MDL<double*> m_rg;
     /// Radial safety factor profile
-    DFieldR m_safety_factor;
+    koliop_interface::MDL<double*> m_safety_factor;
     /// Mask used to avoid to apply collision in certain region
     // [TODO]: This mask should maybe be deleted in C++ version
-    DFieldR m_mask_buffer_r;
+    koliop_interface::MDL<double*> m_mask_buffer_r;
     /// Limiter mask in (r,theta)
-    DFieldRTheta m_mask_LIM;
+    koliop_interface::MDL<double**> m_mask_LIM;
     /// B norm in (r,theta)
     // [TODO] Attention this must be 3D for generalization to 3D geometry--> transfer it in a 1D array ?
-    DFieldRTheta m_B_norm;
+    koliop_interface::MDL<double**> m_B_norm;
     /// Bstar(species,r,theta,vpar)
     // [TODO] Must be 5D for full 3D geometry
-    DFieldSpRThetaVpar m_Bstar_s;
+    koliop_interface::MDL<double****> m_Bstar_s;
     /// grid in mu direction
-    DFieldMu m_mug;
+    koliop_interface::MDL<double*> m_mug;
     /// grid in vpar direction
-    DFieldVpar m_vparg;
+    koliop_interface::MDL<double*> m_vparg;
 };
-
-namespace collisions_dimensions {
-
-/// If radial profile is stored in a double then the grid tag must be spoofed.
-template <>
-struct ExtractRDim<double>
-{
-    using type = InternalSpoofGridR;
-};
-
-/// If radial profile is stored in a 1D chunk then the grid tag is extracted.
-template <class GridR, class Layout>
-struct ExtractRDim<ddc::ChunkSpan<
-        double,
-        ddc::DiscreteDomain<GridR>,
-        Layout,
-        Kokkos::DefaultExecutionSpace::memory_space>>
-{
-    using type = GridR;
-};
-
-/// If the profile on the poloidal plane is stored in a double then the grid tag must be spoofed.
-template <>
-struct ExtractThetaDim<double, InternalSpoofGridR>
-{
-    using type = InternalSpoofGridTheta;
-};
-
-/// If the profile on the poloidal plane is stored in a chunk on radial values then the grid tag must be spoofed.
-template <class GridR, class Layout>
-struct ExtractThetaDim<
-        ddc::ChunkSpan<
-                double,
-                ddc::DiscreteDomain<GridR>,
-                Layout,
-                Kokkos::DefaultExecutionSpace::memory_space>,
-        GridR>
-{
-    using type = InternalSpoofGridTheta;
-};
-
-/// If the profile on the poloidal plane is stored in a chunk on poloidal values then the grid tag is extracted.
-template <class GridR, class GridTheta, class Layout>
-struct ExtractThetaDim<
-        ddc::ChunkSpan<
-                double,
-                ddc::DiscreteDomain<GridTheta>,
-                Layout,
-                Kokkos::DefaultExecutionSpace::memory_space>,
-        GridR>
-{
-    using type = GridTheta;
-};
-
-/// If the profile on the poloidal plane is stored in a 2D chunk then the grid tag is extracted.
-template <class GridR, class GridTheta, class Layout>
-struct ExtractThetaDim<
-        ddc::ChunkSpan<
-                double,
-                ddc::DiscreteDomain<GridTheta, GridR>,
-                Layout,
-                Kokkos::DefaultExecutionSpace::memory_space>,
-        GridR>
-{
-    using type = GridTheta;
-};
-
-} // namespace collisions_dimensions
