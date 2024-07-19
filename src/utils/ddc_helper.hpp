@@ -112,24 +112,6 @@ restrict_to_domain(
         coord -= length;
     return coord;
 }
-
-/**
- * @brief Dump the coordinates found on a domain into a span.
- *
- * @param[out] dump_coord The span which will contain the coordinates.
- * @param[in] sampler The domain indicating the coordinates.
- */
-template <class ExecSpace, class Dim, class Layout, class MemorySpace>
-inline void dump_coordinates(
-        ExecSpace exec_space,
-        ddc::ChunkSpan<double, ddc::DiscreteDomain<Dim>, Layout, MemorySpace> dump_coord)
-{
-    ddc::parallel_for_each(
-            exec_space,
-            dump_coord.domain(),
-            KOKKOS_LAMBDA(ddc::DiscreteElement<Dim> i) { dump_coord(i) = ddc::coordinate(i); });
-}
-
 } // namespace ddcHelper
 
 //-----------------------------------------------------------------------------
