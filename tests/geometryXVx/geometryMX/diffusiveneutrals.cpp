@@ -186,8 +186,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
             kinsp_velocity.span_cview(),
             kinsp_temperature.span_cview());
 
-    auto derivative_host
-            = ddc::create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), derivative);
+    auto derivative_host = ddc::create_mirror_view_and_copy(derivative);
 
     double error_l1(0);
     double max_derivative(0);
