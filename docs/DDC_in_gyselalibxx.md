@@ -10,18 +10,6 @@ The DDC types are then parametrised by this structure. The "R" in the name of th
 
 The following sections describe some of the DDC types used in Gyselalibxx.
 
-## Contents
-
--  [Coordinate](#docs_DDC_in_gyselalibxx__Coordinate)
--  [Domain and associated concepts](#docs_DDC_in_gyselalibxx__Domain_and_associated_concepts)
-    -  [PointSampling](#docs_DDC_in_gyselalibxx__PointSampling)
-    -  [DiscreteElement](#docs_DDC_in_gyselalibxx__DiscreteElement)
-    -  [DiscreteVector](#docs_DDC_in_gyselalibxx__DiscreteVector)
-    -  [DiscreteDomain](#docs_DDC_in_gyselalibxx__DiscreteDomain)
--  [Data Storage](#docs_DDC_in_gyselalibxx__Data_Storage)
--  [Example](#docs_DDC_in_gyselalibxx__Example)
--  [Pitfalls](#docs_DDC_in_gyselalibxx__Pitfalls)
-
 ## Coordinate
 
 A `ddc::Coordinate` is one of the only DDC types which represents a continuous data type. This means that it can take any value that can be represented by a double. It represents the position of a coordinate in the vector space.
@@ -51,7 +39,7 @@ The `Coordinate` class also provides an addition operator, comparison operators,
 
 In Gyselalibxx the alias `CoordX` is usually defined in `geometry.hpp` to describe the type `ddc::Coordinate<RDimX>` more succinctly.
 
-## Domain and associated concepts
+## Domain
 
 The physical problems that our simulations describe are defined on a domain. The domain on which the problem is defined is continuous (e.g. a radial domain $[0,1)$). However a simulation evolves on a discrete domain. This means that the value of the function is only known at a discrete set of points. In the case of a function $f(x)\rightarrow y \in \mathbb{R}$ with $x \in [0,1)$, we would usually discretise the domain $[0,1)$ as follows:
 $$
@@ -60,7 +48,7 @@ $$
 
 DDC provides multiple types to represent the concepts required to interact with such a domain.
 
-## PointSampling
+### PointSampling
 
 The points $`\{x_0, ..., x_N\}`$ are a point sampling. This sampling can either be uniform or non-uniform. Accordingly DDC provides the 2 classes:
 - UniformPointSampling
@@ -70,7 +58,7 @@ A uniform point sampling is a collection of points which are equidistant, it is 
 
 In Gyselalibxx the alias `IDimX` is usually defined in `geometry.hpp` to describe a point sampling along the dimension X. The "I" in `IDimX` stands for "Interpolation". This is because the function is only stored at the interpolation points. The point sampling contains these interpolation points.
 
-## DiscreteElement
+### DiscreteElement
 
 The simplest type to understand is `ddc::DiscreteElement`. This corresponds to the index of the point in the point sampling. E.g. the point `x_i` in the point sampling can be indexed using the object `ddc::DiscreteElement<IDimX>(i)`.
 A `ddc::DiscreteElement` is therefore roughly equivalent to an integer. Compared to an integer, it additionally contains information about the physical direction being examined. This allows the compiler to raise errors if typos/copy-paste errors lead to the wrong dimension being used.
@@ -96,7 +84,7 @@ will output:
 (0.0)
 ```
 
-## DiscreteVector
+### DiscreteVector
 
 A `ddc::DiscreteVector` describes the number of grid points between points in a sampling. E.g. `x_3` and `x_6` are separated by `ddc::DiscreteVector<IDimX>(3)`.
 
@@ -116,7 +104,7 @@ In Gyselalibxx the alias `IVectX` is usually defined in `geometry.hpp` to descri
 
 As with `ddc::DiscreteElement`s, a `ddc::DiscreteVector` can be multi-dimensional and lower dimension `ddc::DiscreteVector` objects can be extracted using `ddc::select<IDimOfInterest>(my_nd_vector)`.
 
-## DiscreteDomain
+### DiscreteDomain
 
 The last concept necessary to define a discrete domain is the concept of sub-domains. The class `ddc::DiscreteDomain` is designed to describe a sub-domain (although it can of course hold the whole domain). It is templated over each of the discrete point samplings used to describe the discrete domain on which the simulation evolves.
 
@@ -322,13 +310,3 @@ double get_laplacian_at_position(DFieldXY function_values, IndexXY position)
 ```
 
 As you can see DDC takes care of combining elements and vectors to ensure that the resulting `IndexXY` is in the correct position. This makes it simpler to write such stencils and easier to spot errors, especially in cases involving lots of dimensions.
-
-## Pitfalls
-
-When using DDC there are some things that you should be careful about. These are listed here.
-
-### Synchronicity
-
-In DDC and Kokkos the code runs asynchronously when an execution space is provided. When no execution space is provided the code runs synchronously surrounded by fences. In order to ensure that there is no danger coming from the asynchronicity we need to follow certain rules. In Gysela the chosen conventions are:
--   Always provide an execution space to `ddc::parallel_for_each` or `ddc::parallel_transform_reduce` (or similar Kokkos functions).
--   Only provide an execution space to `create_mirror_view_and_copy` when this is unavoidable (i.e. when copying to the `DefaultExecutionSpace`). The `DefaultHostExecutionSpace` should never be passed to `create_mirror_view_and_copy`.

@@ -205,7 +205,8 @@ public:
         /*
             Simulation launched on GPU but error checking on CPU. 
         */
-        auto function_host = ddc::create_mirror_view_and_copy(function);
+        auto function_host
+                = ddc::create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), function);
         double max_relative_error = 0;
         ddc::for_each(xvx_dom, [&](IndexXVx const xv_idx) {
             double const relative_error = abs(function_host(xv_idx) - exact_function(xv_idx));
