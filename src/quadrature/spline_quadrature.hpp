@@ -70,28 +70,42 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
 
     using bsplines_type = typename SplineBuilder::bsplines_type;
 
-    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
-
     // Vector of integrals of B-splines
     ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines(
             builder.spline_domain());
     ddc::discrete_space<bsplines_type>().integrals(integral_bsplines.span_view());
 
-    // Coefficients of quadrature in integral_bsplines
-    ddc::DiscreteDomain<bsplines_type> slice = builder.spline_domain().take_first(
-            ddc::DiscreteVector<bsplines_type> {ddc::discrete_space<bsplines_type>().nbasis()});
+    // Solve matrix equation
+    ddc::ChunkSpan integral_bsplines_without_periodic_point
+            = integral_bsplines.span_view()[ddc::DiscreteDomain<bsplines_type>(
+                    ddc::DiscreteElement<bsplines_type>(0),
+                    ddc::DiscreteVector<bsplines_type>(builder.get_interpolation_matrix().size()))];
+    Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+            integral_bsplines_mirror_with_additional_allocation(
+                    "integral_bsplines_mirror_with_additional_allocation",
+                    builder.get_interpolation_matrix().required_number_of_rhs_rows(),
+                    1);
+    Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+            integral_bsplines_mirror = Kokkos::
+                    subview(integral_bsplines_mirror_with_additional_allocation,
+                            std::pair<std::size_t, std::size_t> {
+                                    0,
+                                    integral_bsplines_without_periodic_point.size()},
+                            0);
+    Kokkos::deep_copy(
+            integral_bsplines_mirror,
+            integral_bsplines_without_periodic_point.allocation_kokkos_view());
+    builder.get_interpolation_matrix()
+            .solve(integral_bsplines_mirror_with_additional_allocation, true);
+    Kokkos::deep_copy(
+            integral_bsplines_without_periodic_point.allocation_kokkos_view(),
+            integral_bsplines_mirror);
+
+    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
 
     Kokkos::deep_copy(
             coefficients.allocation_kokkos_view(),
-            integral_bsplines[slice].allocation_kokkos_view());
-
-    // Solve matrix equation
-    builder.get_interpolation_matrix()
-            .solve(Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>(
-                           coefficients.data_handle(),
-                           coefficients.size(),
-                           1),
-                   true);
+            integral_bsplines_without_periodic_point.allocation_kokkos_view());
 
     return coefficients;
 }

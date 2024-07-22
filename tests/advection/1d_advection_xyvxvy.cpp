@@ -128,7 +128,7 @@ using SplineXBuilder_2d = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY>;
 using SplineXEvaluator_2d = ddc::SplineEvaluator<
@@ -148,7 +148,7 @@ using SplineYBuilder_2d = ddc::SplineBuilder<
         IDimY,
         SplineYBoundary,
         SplineYBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY>;
 using SplineYEvaluator_2d = ddc::SplineEvaluator<
@@ -169,7 +169,7 @@ using SplineXBuilder_4d = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY,
         IDimVx,
@@ -193,7 +193,7 @@ using SplineYBuilder_4d = ddc::SplineBuilder<
         IDimY,
         SplineYBoundary,
         SplineYBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY,
         IDimVx,

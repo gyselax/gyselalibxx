@@ -54,7 +54,7 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
             IDimX,
             SplineXBoundary,
             SplineXBoundary,
-            ddc::SplineSolver::GINKGO,
+            ddc::SplineSolver::LAPACK,
             IDimX>;
 
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -112,7 +112,7 @@ double compute_error(int n_elems)
             IDimY,
             SplineYBoundary,
             SplineYBoundary,
-            ddc::SplineSolver::GINKGO,
+            ddc::SplineSolver::LAPACK,
             IDimY>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;

@@ -43,7 +43,7 @@ using SplineXBuilder_1d = ddc::SplineBuilder<
         IDimX,
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::GREVILLE,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX>;
 
 using SplineXEvaluator_1d = ddc::SplineEvaluator<

@@ -36,7 +36,7 @@ using SplineXBuilder_1d = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX>;
 
 using IVectX = ddc::DiscreteVector<IDimX>;
@@ -103,7 +103,7 @@ double compute_error(int n_elems)
             IDimY,
             ddc::BoundCond::HERMITE,
             ddc::BoundCond::HERMITE,
-            ddc::SplineSolver::GINKGO,
+            ddc::SplineSolver::LAPACK,
             IDimY>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;

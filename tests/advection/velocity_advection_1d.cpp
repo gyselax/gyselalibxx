@@ -119,7 +119,7 @@ using SplineVxBuilder = ddc::SplineBuilder<
         IDimVx,
         SplineVxBoundary,
         SplineVxBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimSp,
         IDimX,
         IDimVx>;

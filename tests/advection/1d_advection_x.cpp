@@ -64,7 +64,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX>;
 
 using SplineXEvaluator = ddc::SplineEvaluator<

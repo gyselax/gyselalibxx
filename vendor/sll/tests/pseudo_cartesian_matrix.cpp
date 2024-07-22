@@ -96,7 +96,7 @@ public:
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::GINKGO,
+            ddc::SplineSolver::LAPACK,
             IDimR,
             IDimP>;
 

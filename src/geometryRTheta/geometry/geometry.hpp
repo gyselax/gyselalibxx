@@ -128,7 +128,7 @@ using SplineRPBuilder = ddc::SplineBuilder2D<
         SplineRBoundary, // boundary at rmax
         SplinePBoundary,
         SplinePBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimR,
         IDimP>;
 

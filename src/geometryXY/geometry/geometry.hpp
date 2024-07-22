@@ -86,7 +86,7 @@ using SplineXBuilder_XY = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY>;
 using SplineXEvaluator_XY = ddc::SplineEvaluator<
@@ -107,7 +107,7 @@ using SplineYBuilder_XY = ddc::SplineBuilder<
         IDimY,
         SplineYBoundary,
         SplineYBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY>;
 using SplineYEvaluator_XY = ddc::SplineEvaluator<
