@@ -33,30 +33,40 @@ public:
 
     /**
      * @brief An operator for calculating the integral of a function defined on a discrete domain.
+     *
      * @param[in] exec_space
      *        The space on which the function is executed (CPU/GPU).
-     * @param[in] values
-     *        The values of the function on the points of the discrete domain.
+     * @param[in] integrated_function
+     *        A function taking an index of a position in the domain over which the quadrature is
+     *        calculated and returning the value of the function to be integrated at that point.
+     *        It should be noted that a ChunkSpan fulfils these criteria and can be passed as the function to be integrated.
+     *        If the exec_space is a GPU the function that is passed must be accessible from GPU.
      *
      * @returns The integral of the function over the domain.
      */
-    template <class ExecutionSpace>
-    double operator()(ExecutionSpace exec_space, QuadChunkView const values) const
+    template <class ExecutionSpace, class IntegratorFunction>
+    double operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function) const
     {
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
                 "Execution space is not compatible with memory space where coefficients are found");
+        static_assert(
+                std::is_invocable_v<IntegratorFunction, QuadratureIndex>,
+                "The object passed to Quadrature::operator() is not defined on the quadrature "
+                "domain.");
+
         ddc::ChunkSpan const coeff_proxy = m_coefficients;
 
-        assert(values.domain() == m_coefficients.domain());
         // This fence helps avoid a CPU seg fault. See #290 for more details
         exec_space.fence();
         return ddc::parallel_transform_reduce(
                 exec_space,
-                values.domain(),
+                coeff_proxy.domain(),
                 0.0,
                 ddc::reducer::sum<double>(),
-                KOKKOS_LAMBDA(QuadratureIndex const ix) { return coeff_proxy(ix) * values(ix); });
+                KOKKOS_LAMBDA(QuadratureIndex const ix) {
+                    return coeff_proxy(ix) * integrated_function(ix);
+                });
     }
 };
 

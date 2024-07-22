@@ -102,13 +102,15 @@ TEST(KineticSource, Moments)
     ddc::for_each(gridx, [&](IndexX const ix) {
         // density
         ddc::parallel_deepcopy(values_density, allfdistribu_host[dom_sp.front()][ix]);
-        density(ix) = integrate_v(Kokkos::DefaultHostExecutionSpace(), values_density);
+        density(ix) = integrate_v(Kokkos::DefaultHostExecutionSpace(), values_density.span_cview());
 
         // fluid velocity
         ddc::for_each(gridvx, [&](IndexVx const iv) {
             values_fluid_velocity(iv) = values_density(iv) * ddc::coordinate(iv);
         });
-        fluid_velocity(ix) = integrate_v(Kokkos::DefaultHostExecutionSpace(), values_fluid_velocity)
+        fluid_velocity(ix) = integrate_v(
+                                     Kokkos::DefaultHostExecutionSpace(),
+                                     values_fluid_velocity.span_cview())
                              / density(ix);
 
         // temperature
@@ -116,13 +118,15 @@ TEST(KineticSource, Moments)
             values_temperature(iv)
                     = values_density(iv) * std::pow(ddc::coordinate(iv) - fluid_velocity(ix), 2);
         });
-        temperature(ix) = integrate_v(Kokkos::DefaultHostExecutionSpace(), values_temperature)
-                          / density(ix);
+        temperature(ix)
+                = integrate_v(Kokkos::DefaultHostExecutionSpace(), values_temperature.span_cview())
+                  / density(ix);
     });
 
     // source amplitude
     double error_source_amplitude
-            = integrate_x(Kokkos::DefaultHostExecutionSpace(), density) - source_amplitude;
+            = integrate_x(Kokkos::DefaultHostExecutionSpace(), density.span_cview())
+              - source_amplitude;
 
     double error_fluid_velocity(0);
     double error_temperature(0);
