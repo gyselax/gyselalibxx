@@ -7,61 +7,39 @@
 
 #include "chargedensitycalculator.hpp"
 
-ChargeDensityCalculator::ChargeDensityCalculator(const ChunkViewType& coeffs)
-    : m_coefficients(coeffs)
-{
-}
+ChargeDensityCalculator::ChargeDensityCalculator(DViewVxVy coeffs) : m_quadrature(coeffs) {}
 
 void ChargeDensityCalculator::operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
-    IndexSp const last_kin_species = allfdistribu.domain<IDimSp>().back();
-    IndexSp const last_species = ddc::discrete_space<IDimSp>().charges().domain().back();
-    double chargedens_adiabspecies = 0.;
-    if (last_kin_species != last_species) {
-        chargedens_adiabspecies = charge(last_species);
-    }
 
-    // reduction over species and velocity space
-    Kokkos::View<const double*****, Kokkos::LayoutRight> const allfdistribu_view
-            = allfdistribu.allocation_kokkos_view();
-    Kokkos::View<double**, Kokkos::LayoutRight> const rho_view = rho.allocation_kokkos_view();
-
+    IDomainSp const kin_species_domain = allfdistribu.domain<IDimSp>();
     host_t<DViewSp> const charges_host = ddc::host_discrete_space<IDimSp>().charges();
     host_t<DViewSp> const kinetic_charges_host = charges_host[allfdistribu.domain<IDimSp>()];
 
-    auto charges_alloc
+    auto const kinetic_charges_alloc
             = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), kinetic_charges_host);
-
-    Kokkos::View<const double*, Kokkos::LayoutRight> const charges
-            = charges_alloc.span_cview().allocation_kokkos_view();
-
-    Kokkos::View<const double**, Kokkos::LayoutRight> const coef_view
-            = m_coefficients.allocation_kokkos_view();
-
-    std::size_t const nsp = allfdistribu_view.extent(0);
-    std::size_t const nx = allfdistribu_view.extent(1);
-    std::size_t const ny = allfdistribu_view.extent(2);
-    std::size_t const nvx = allfdistribu_view.extent(3);
-    std::size_t const nvy = allfdistribu_view.extent(4);
-
-    using TeamHandle = Kokkos::TeamPolicy<>::member_type;
-
-    Kokkos::parallel_for(
-            Kokkos::TeamPolicy<>(nx * ny, Kokkos::AUTO),
-            KOKKOS_LAMBDA(const TeamHandle& team) {
-                const int idx = team.league_rank();
-                const int ix = idx / ny;
-                const int iy = idx % ny;
-                double teamSum = 0;
-                Kokkos::parallel_reduce(
-                        Kokkos::TeamThreadMDRange<Kokkos::Rank<3>, TeamHandle>(team, nsp, nvx, nvy),
-                        [&](int isp, int ivx, int ivy, double& sum) {
-                            sum += charges(isp) * coef_view(ivx, ivy)
-                                   * allfdistribu_view(isp, ix, iy, ivx, ivy);
-                        },
-                        teamSum);
-                rho_view(ix, iy) = chargedens_adiabspecies + teamSum;
+    ddc::ChunkSpan kinetic_charges = kinetic_charges_alloc.span_view();
+    m_quadrature(
+            Kokkos::DefaultExecutionSpace(),
+            rho,
+            KOKKOS_LAMBDA(IndexXYVxVy idx) {
+                double sum = 0.0;
+                for (auto isp : kinetic_charges.domain()) {
+                    sum += kinetic_charges(isp) * allfdistribu(isp, idx);
+                }
+                return sum;
             });
+
+    IndexSp const last_kin_species = kin_species_domain.back();
+    IndexSp const last_species = charges_host.domain().back();
+    if (last_kin_species != last_species) {
+        double chargedens_adiabspecies = double(charge(last_species));
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                rho.domain(),
+                KOKKOS_LAMBDA(IndexXY ixy) { rho(ixy) += chargedens_adiabspecies; });
+    }
+
     Kokkos::Profiling::popRegion();
 }
