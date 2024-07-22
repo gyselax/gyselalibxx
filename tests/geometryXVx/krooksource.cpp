@@ -55,7 +55,6 @@ TEST(KrookSource, Adaptive)
     IDomainSp const gridsp = dom_sp;
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    host_t<DFieldX> const quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
     host_t<DFieldVx> const quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
     host_t<Quadrature<IDomainVx>> const integrate_v(quadrature_coeffs_vx);
 

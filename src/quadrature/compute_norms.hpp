@@ -27,12 +27,10 @@ double compute_L1_norm(
         host_t<Quadrature<IDomain>> quadrature,
         ddc::ChunkSpan<double, IDomain> function)
 {
-    IDomain grid(function.domain());
-    ddc::Chunk<double, IDomain> abs_function(grid);
     using Index = typename IDomain::discrete_element_type;
-    ddc::for_each(grid, [&](Index const idx) { abs_function(idx) = fabs(function(idx)); });
-
-    return quadrature(Kokkos::DefaultHostExecutionSpace(), abs_function);
+    return quadrature(
+            Kokkos::DefaultHostExecutionSpace(),
+            KOKKOS_LAMBDA(Index const idx) { return Kokkos::fabs(function(idx)); });
 }
 
 
@@ -54,14 +52,10 @@ double compute_L2_norm(
         host_t<Quadrature<IDomain>> quadrature,
         ddc::ChunkSpan<double, IDomain> function)
 {
-    IDomain grid(function.domain());
-    ddc::Chunk<double, IDomain> square_function(grid);
     using Index = typename IDomain::discrete_element_type;
-    ddc::for_each(grid, [&](Index const idx) {
-        square_function(idx) = function(idx) * function(idx);
-    });
-
-    return std::sqrt(quadrature(Kokkos::DefaultHostExecutionSpace(), square_function));
+    return std::sqrt(quadrature(
+            Kokkos::DefaultHostExecutionSpace(),
+            KOKKOS_LAMBDA(Index const idx) { return function(idx) * function(idx); }));
 }
 
 
