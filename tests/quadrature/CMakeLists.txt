@@ -4,6 +4,7 @@ add_executable(unit_tests_quadrature
     quadrature_1d.cpp
     quadrature_2d.cpp
 	neumann_quadrature_spline.cpp
+    batched_quadrature.cpp
     ../main.cpp
 )
 target_link_libraries(unit_tests_quadrature

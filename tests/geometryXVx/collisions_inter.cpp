@@ -92,12 +92,11 @@ TEST(CollisionsInter, CollisionsInter)
         double const nustar0(0.1);
         CollisionsInter collisions(mesh, nustar0);
 
-
         host_t<DFieldVx> const quadrature_coeffs_host = trapezoid_quadrature_coefficients(gridvx);
         auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 quadrature_coeffs_host.span_view());
-        Quadrature<IDomainVx> integrate(quadrature_coeffs.span_cview());
+        Quadrature<IDomainVx, IDomainSpXVx> integrate(quadrature_coeffs.span_cview());
         FluidMoments moments(integrate);
 
         auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
