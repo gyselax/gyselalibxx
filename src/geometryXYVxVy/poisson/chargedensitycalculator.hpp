@@ -6,7 +6,6 @@
 
 #include <ddc_helper.hpp>
 #include <geometry.hpp>
-#include <quadrature.hpp>
 
 #include "ichargedensitycalculator.hpp"
 
@@ -21,7 +20,8 @@
 class ChargeDensityCalculator : public IChargeDensityCalculator
 {
 private:
-    Quadrature<IDomainVxVy, IDomainXYVxVy> m_quadrature;
+    using ChunkViewType = device_t<DViewVxVy>;
+    ChunkViewType m_coefficients;
 
 public:
     /**
@@ -29,7 +29,7 @@ public:
      * @param[in] coeffs
      *            The coefficients of the quadrature.
      */
-    explicit ChargeDensityCalculator(DViewVxVy coeffs);
+    explicit ChargeDensityCalculator(const ChunkViewType& coeffs);
 
     /**
      * @brief Computes the charge density rho from the distribution function.

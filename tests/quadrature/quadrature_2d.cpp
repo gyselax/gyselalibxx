@@ -32,8 +32,6 @@ struct IDimY : ddc::UniformPointSampling<Y>
 {
 };
 
-using IdxXY = ddc::DiscreteElement<IDimX, IDimY>;
-
 using IVectX = ddc::DiscreteVector<IDimX>;
 using IVectY = ddc::DiscreteVector<IDimY>;
 
@@ -71,41 +69,6 @@ TEST(TrapezoidUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
     double integral = integrate(Kokkos::DefaultExecutionSpace(), values.span_cview());
     double expected_val = (x_max - x_min) * (y_max - y_min);
     EXPECT_LE(abs(integral - expected_val), 1e-9);
-}
-
-void integrated_function_operator()
-{
-    CoordX x_min(0.0);
-    CoordX x_max(3.0);
-    IVectX x_ncells(4);
-    CoordY y_min(4.0);
-    CoordY y_max(8.0);
-    IVectY y_ncells(16);
-
-    IDomainX gridx = ddc::init_discrete_space<IDimX>(IDimX::init<IDimX>(x_min, x_max, x_ncells));
-
-    IDomainY gridy = ddc::init_discrete_space<IDimY>(IDimY::init<IDimY>(y_min, y_max, y_ncells));
-    IDomainXY gridxy(gridx, gridy);
-
-    host_t<DFieldXY> quad_coeffs_host_second = trapezoid_quadrature_coefficients(gridxy);
-    auto quad_coeffs_second = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quad_coeffs_host_second.span_view());
-    Quadrature func_operator(quad_coeffs_second.span_cview());
-
-    double const integral = func_operator(
-            Kokkos::DefaultExecutionSpace(),
-            KOKKOS_LAMBDA(IdxXY ixy) {
-                double y = ddc::coordinate(ddc::select<IDimY>(ixy));
-                double x = ddc::coordinate(ddc::select<IDimX>(ixy));
-                return x * y + 2;
-            });
-    EXPECT_DOUBLE_EQ(integral, 132.);
-}
-
-TEST(TrapezoidUniformNonPeriodicQuadrature, ExactForLinearBatchSecond2D)
-{
-    integrated_function_operator();
 }
 
 template <std::size_t N>

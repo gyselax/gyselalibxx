@@ -16,7 +16,6 @@ target_link_libraries("poisson_xy"
         sll::SLL
         gslx::geometry_xyvxvy
         gslx::pde_solvers
-        gslx::quadrature
         gslx::speciesinfo
         gslx::utils
 )

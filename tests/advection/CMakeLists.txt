@@ -29,4 +29,5 @@ target_compile_definitions(1d_advection PUBLIC)
 
 gtest_discover_tests(1d_advection
     PROPERTIES TIMEOUT 10
+    DISCOVERY_MODE PRE_TEST
 )

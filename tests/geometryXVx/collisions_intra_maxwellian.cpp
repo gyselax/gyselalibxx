@@ -199,7 +199,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             quadrature_coeffs_host.span_view());
-    Quadrature<IDomainVx, IDomainSpXVx> integrate(quadrature_coeffs.span_cview());
+    Quadrature<IDomainVx> integrate(quadrature_coeffs.span_cview());
     FluidMoments moments(integrate);
 
     moments(density_res.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);
