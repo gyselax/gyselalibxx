@@ -222,7 +222,7 @@ double compute_difference_L2_norm(
         difference_function(irp) = exact_function(irp) - allfdistribu_advected(irp);
     });
 
-    DFieldRP quadrature_coeffs
+    DFieldRP const quadrature_coeffs
             = compute_coeffs_on_mapping(mapping, trapezoid_quadrature_coefficients(grid));
     host_t<Quadrature<IDomainRP>> quadrature(quadrature_coeffs.span_cview());
 
