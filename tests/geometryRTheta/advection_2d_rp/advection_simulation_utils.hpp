@@ -224,7 +224,7 @@ double compute_difference_L2_norm(
 
     DFieldRP quadrature_coeffs
             = compute_coeffs_on_mapping(mapping, trapezoid_quadrature_coefficients(grid));
-    Quadrature<IDimR, IDimP> quadrature(quadrature_coeffs);
+    host_t<Quadrature<IDomainRP>> quadrature(quadrature_coeffs.span_cview());
 
     double const normL2_exact_function = compute_L2_norm(quadrature, exact_function.span_view());
     double const normL2_difference_function

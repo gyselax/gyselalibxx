@@ -66,13 +66,16 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
 
     IDomainX const gridx = builder_x.interpolation_domain();
 
-    host_t<DFieldX> const quadrature_coeffs = spline_quadrature_coefficients(gridx, builder_x);
+    host_t<DFieldX> const quadrature_coeffs_host = spline_quadrature_coefficients(gridx, builder_x);
+    auto quadrature_coeffs = ddc::create_mirror_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs_host.span_view());
     Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    host_t<DFieldX> values(gridx);
+    DFieldX values(gridx);
 
-    ddc::for_each(gridx, [&](ddc::DiscreteElement<IDimX> const idx) { values(idx) = 1.0; });
-    double integral = integrate(values);
+    ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-15);
 }
@@ -116,6 +119,7 @@ double compute_error(int n_elems)
             IDimY>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
+    using DSpanY = device_t<ddc::ChunkSpan<double, IDomainY>>;
 
     ddc::Coordinate<Y> const y_min(0.0);
     ddc::Coordinate<Y> const y_max(M_PI);
@@ -127,15 +131,22 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    host_t<DFieldY> const quadrature_coeffs = spline_quadrature_coefficients(gridy, builder_y);
+    host_t<DFieldY> const quadrature_coeffs_host = spline_quadrature_coefficients(gridy, builder_y);
+    auto quadrature_coeffs = ddc::create_mirror_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs_host.span_view());
     Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    host_t<DFieldY> values(gridy);
+    DFieldY values_alloc(gridy);
+    DSpanY values = values_alloc.span_view();
 
-    ddc::for_each(gridy, [&](ddc::DiscreteElement<IDimY> const idx) {
-        values(idx) = sin(ddc::coordinate(idx));
-    });
-    double integral = integrate(values);
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            gridy,
+            KOKKOS_LAMBDA(ddc::DiscreteElement<IDimY> const idx) {
+                values(idx) = Kokkos::sin(ddc::coordinate(idx));
+            });
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     return std::abs(2 - integral);
 }
 
