@@ -57,8 +57,7 @@ TEST(KrookSource, Adaptive)
 
     host_t<DFieldX> const quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
     host_t<DFieldVx> const quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
-    Quadrature<IDimX> const integrate_x(quadrature_coeffs_x);
-    Quadrature<IDimVx> const integrate_v(quadrature_coeffs_vx);
+    host_t<Quadrature<IDomainVx>> const integrate_v(quadrature_coeffs_vx);
 
     host_t<DFieldSp> charges(dom_sp);
     host_t<DFieldSp> masses(dom_sp);
@@ -112,7 +111,7 @@ TEST(KrookSource, Adaptive)
 
     host_t<DFieldSpX> densities(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        densities(ispx) = integrate_v(allfdistribu_host[ispx]);
+        densities(ispx) = integrate_v(Kokkos::DefaultHostExecutionSpace(), allfdistribu_host[ispx]);
     });
 
     // the charge should be conserved by the operator
@@ -141,7 +140,7 @@ TEST(KrookSource, Adaptive)
     rhs_krook(allfdistribu, 0.01);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        densities(ispx) = integrate_v(allfdistribu_host[ispx]);
+        densities(ispx) = integrate_v(Kokkos::DefaultHostExecutionSpace(), allfdistribu_host[ispx]);
     });
 
     // the rk2 scheme used in the krook operator should be of order 2
