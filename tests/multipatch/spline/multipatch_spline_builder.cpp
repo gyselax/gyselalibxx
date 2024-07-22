@@ -131,7 +131,7 @@ using SplineX1Builder_1d = ddc::SplineBuilder<
         IDimX1,
         SplineX1Boundary,
         SplineX1Boundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX1>;
 
 using SplineX2Builder_1d = ddc::SplineBuilder<
@@ -141,7 +141,7 @@ using SplineX2Builder_1d = ddc::SplineBuilder<
         IDimX2,
         SplineX2Boundary,
         SplineX2Boundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX2>;
 
 
@@ -153,7 +153,7 @@ using SplineX1Builder_2d = ddc::SplineBuilder<
         IDimX1,
         SplineX1Boundary,
         SplineX1Boundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX1,
         IDimY1>;
 
@@ -164,7 +164,7 @@ using SplineX2Builder_2d = ddc::SplineBuilder<
         IDimX2,
         SplineX2Boundary,
         SplineX2Boundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX2,
         IDimY2>;
 
