@@ -68,7 +68,7 @@ TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFunc)
 
     device_t<DFieldX> values(gridx);
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
-    double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), values.span_cview());
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-15);
 }

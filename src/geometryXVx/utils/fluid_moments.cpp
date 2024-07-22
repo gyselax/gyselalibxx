@@ -63,21 +63,13 @@ void FluidMoments::operator()(
         FluidMoments::MomentVelocity)
 {
     auto mean_velocity_host = ddc::create_mirror_view(mean_velocity);
-
-    DFieldSpXVx integrand_alloc(allfdistribu.domain());
-    DSpanSpXVx integrand = integrand_alloc.span_view();
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            allfdistribu.domain(),
-            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
-                IndexSpX ispx(ispxvx);
-                IndexVx ivx(ispxvx);
-                CoordVx const coordv = ddc::coordinate(ivx);
-                integrand(ispxvx) = coordv * allfdistribu(ispxvx) / density(ispx);
-            });
-
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        mean_velocity_host(ispx) = m_integrate_v(Kokkos::DefaultExecutionSpace(), integrand[ispx]);
+        mean_velocity_host(ispx) = m_integrate_v(
+                Kokkos::DefaultExecutionSpace(),
+                KOKKOS_LAMBDA(IndexVx const ivx) {
+                    CoordVx const coordv = ddc::coordinate(ivx);
+                    return coordv * allfdistribu(ispx, ivx) / density(ispx);
+                });
     });
     ddc::parallel_deepcopy(mean_velocity, mean_velocity_host);
 }
@@ -92,17 +84,14 @@ void FluidMoments::operator()(
         double mean_velocity,
         FluidMoments::MomentTemperature)
 {
-    DFieldVx integrand_alloc(fdistribu.domain());
-    DSpanVx integrand = integrand_alloc.span_view();
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            fdistribu.domain(),
-            KOKKOS_LAMBDA(IndexVx const ivx) {
-                double const coeff = ddc::coordinate(ddc::select<IDimVx>(ivx)) - mean_velocity;
-                integrand(ivx) = coeff * coeff * fdistribu(ivx);
-            });
-
-    temperature = m_integrate_v(Kokkos::DefaultExecutionSpace(), integrand) / density;
+    temperature = m_integrate_v(
+                          Kokkos::DefaultExecutionSpace(),
+                          KOKKOS_LAMBDA(IndexVx const ivx) {
+                              double const coeff
+                                      = ddc::coordinate(ddc::select<IDimVx>(ivx)) - mean_velocity;
+                              return coeff * coeff * fdistribu(ivx);
+                          })
+                  / density;
 }
 /*
  * Computes the temperature of allfdistribu, using its density and mean velocity
@@ -115,21 +104,13 @@ void FluidMoments::operator()(
         FluidMoments::MomentTemperature)
 {
     auto temperature_host = ddc::create_mirror_view(temperature);
-
-    DFieldSpXVx integrand_alloc(allfdistribu.domain());
-    DSpanSpXVx integrand = integrand_alloc.span_view();
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            allfdistribu.domain(),
-            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
-                IndexSpX ispx(ispxvx);
-                IndexVx ivx(ispxvx);
-                double const coeff = ddc::coordinate(ivx) - mean_velocity(ispx);
-                integrand(ispxvx) = coeff * coeff * allfdistribu(ispxvx) / density(ispx);
-            });
-
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        temperature_host(ispx) = m_integrate_v(Kokkos::DefaultExecutionSpace(), integrand[ispx]);
+        temperature_host(ispx) = m_integrate_v(
+                Kokkos::DefaultExecutionSpace(),
+                KOKKOS_LAMBDA(IndexVx const ivx) {
+                    double const coeff = ddc::coordinate(ivx) - mean_velocity(ispx);
+                    return coeff * coeff * allfdistribu(ispx, ivx) / density(ispx);
+                });
     });
     ddc::parallel_deepcopy(temperature, temperature_host);
 }

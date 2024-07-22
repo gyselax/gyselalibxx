@@ -64,11 +64,12 @@ TEST(Masks, Ordering)
 
     host_t<DFieldX> mask_normalized = mask_tanh(gridx, extent, stiffness, MaskType::Normal, true);
     double const mask_integrated
-            = integrate_x(Kokkos::DefaultHostExecutionSpace(), mask_normalized);
+            = integrate_x(Kokkos::DefaultHostExecutionSpace(), mask_normalized.span_cview());
     EXPECT_LE(std::fabs(mask_integrated - 1.0), tolerance);
     host_t<DFieldX> mask_normalized_inverted
             = mask_tanh(gridx, extent, stiffness, MaskType::Inverted, true);
-    double const mask_inverted_integrated
-            = integrate_x(Kokkos::DefaultHostExecutionSpace(), mask_normalized_inverted);
+    double const mask_inverted_integrated = integrate_x(
+            Kokkos::DefaultHostExecutionSpace(),
+            mask_normalized_inverted.span_cview());
     EXPECT_LE(std::fabs(mask_inverted_integrated - 1.0), tolerance);
 }
