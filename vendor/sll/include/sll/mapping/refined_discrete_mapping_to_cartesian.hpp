@@ -178,7 +178,7 @@ public:
             SplineRBoundaryRefined_max,
             SplinePBoundaryRefined_min,
             SplinePBoundaryRefined_max,
-            ddc::SplineSolver::GINKGO,
+            ddc::SplineSolver::LAPACK,
             IDimRRefined,
             IDimPRefined>;
 

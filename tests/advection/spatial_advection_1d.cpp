@@ -111,7 +111,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimSp,
         IDimX,
         IDimVx>;

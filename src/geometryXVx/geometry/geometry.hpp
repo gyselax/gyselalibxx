@@ -99,7 +99,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimVx>;
 using SplineXEvaluator = ddc::SplineEvaluator<
@@ -123,7 +123,7 @@ using SplineVxBuilder = ddc::SplineBuilder<
         IDimVx,
         SplineVxBoundary,
         SplineVxBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimVx>;
 using SplineVxEvaluator = ddc::SplineEvaluator<
@@ -142,7 +142,7 @@ using SplineXBuilder_1d = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX>;
 using SplineXEvaluator_1d = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
@@ -164,7 +164,7 @@ using SplineVxBuilder_1d = ddc::SplineBuilder<
         IDimVx,
         SplineVxBoundary,
         SplineVxBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimVx>;
 using SplineVxEvaluator_1d = ddc::SplineEvaluator<
         Kokkos::DefaultHostExecutionSpace,
