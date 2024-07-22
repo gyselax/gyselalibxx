@@ -6,15 +6,14 @@
 #include <quadrature.hpp>
 #include <trapezoid_quadrature.hpp>
 
-FluidMoments::FluidMoments(Quadrature<IDimVx> integrate_v) : m_integrate_v(integrate_v) {}
+FluidMoments::FluidMoments(Quadrature<IDomainVx> integrate_v) : m_integrate_v(integrate_v) {}
 
 /*
  * Computes the density of fdistribu
 */
 void FluidMoments::operator()(double& density, DViewVx const fdistribu, FluidMoments::MomentDensity)
 {
-    auto fdistribu_host = ddc::create_mirror_view_and_copy(fdistribu);
-    density = m_integrate_v(fdistribu_host);
+    density = m_integrate_v(Kokkos::DefaultExecutionSpace(), fdistribu);
 }
 
 /*
@@ -25,8 +24,7 @@ void FluidMoments::operator()(
         DViewSpXVx const allfdistribu,
         FluidMoments::MomentDensity)
 {
-    auto density_host = ddc::create_mirror_view_and_copy(density);
-    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu);
+    auto density_host = ddc::create_mirror_view(density);
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
         (*this)(density_host(ispx), allfdistribu[ispx], FluidMoments::s_density);
     });
@@ -42,15 +40,18 @@ void FluidMoments::operator()(
         double density,
         FluidMoments::MomentVelocity)
 {
-    auto fdistribu_host = ddc::create_mirror_view_and_copy(fdistribu);
-    host_t<DFieldVx> integrand(fdistribu.domain());
+    DFieldVx integrand_alloc(fdistribu.domain());
+    DSpanVx integrand = integrand_alloc.span_view();
 
-    ddc::for_each(fdistribu.domain(), [&](IndexVx const ivx) {
-        CoordVx const coordv = ddc::coordinate(ivx);
-        integrand(ivx) = coordv * fdistribu_host(ivx);
-    });
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            fdistribu.domain(),
+            KOKKOS_LAMBDA(IndexVx const ivx) {
+                CoordVx const coordv = ddc::coordinate(ivx);
+                integrand(ivx) = coordv * fdistribu(ivx);
+            });
 
-    mean_velocity = m_integrate_v(integrand) / density;
+    mean_velocity = m_integrate_v(Kokkos::DefaultExecutionSpace(), integrand) / density;
 }
 /*
  * Computes the mean_velocity of allfdistribu, using its density
@@ -61,18 +62,22 @@ void FluidMoments::operator()(
         DViewSpX const density,
         FluidMoments::MomentVelocity)
 {
-    auto mean_velocity_host = ddc::create_mirror_view_and_copy(mean_velocity);
-    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu);
-    auto density_host = ddc::create_mirror_view_and_copy(density);
+    auto mean_velocity_host = ddc::create_mirror_view(mean_velocity);
 
-    host_t<DFieldSpXVx> integrand(allfdistribu.domain());
-    ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-        CoordVx const coordv = ddc::coordinate(ddc::select<IDimVx>(ispxvx));
-        integrand(ispxvx) = coordv * allfdistribu_host(ispxvx);
-    });
+    DFieldSpXVx integrand_alloc(allfdistribu.domain());
+    DSpanSpXVx integrand = integrand_alloc.span_view();
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            allfdistribu.domain(),
+            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+                IndexSpX ispx(ispxvx);
+                IndexVx ivx(ispxvx);
+                CoordVx const coordv = ddc::coordinate(ivx);
+                integrand(ispxvx) = coordv * allfdistribu(ispxvx) / density(ispx);
+            });
 
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        mean_velocity_host(ispx) = m_integrate_v(integrand[ispx]) / density_host(ispx);
+        mean_velocity_host(ispx) = m_integrate_v(Kokkos::DefaultExecutionSpace(), integrand[ispx]);
     });
     ddc::parallel_deepcopy(mean_velocity, mean_velocity_host);
 }
@@ -87,14 +92,17 @@ void FluidMoments::operator()(
         double mean_velocity,
         FluidMoments::MomentTemperature)
 {
-    auto fdistribu_host = ddc::create_mirror_view_and_copy(fdistribu);
-    host_t<DFieldVx> integrand(fdistribu.domain());
-    ddc::for_each(fdistribu.domain(), [&](IndexVx const ivx) {
-        double const coeff = ddc::coordinate(ddc::select<IDimVx>(ivx)) - mean_velocity;
-        integrand(ivx) = coeff * coeff * fdistribu_host(ivx);
-    });
+    DFieldVx integrand_alloc(fdistribu.domain());
+    DSpanVx integrand = integrand_alloc.span_view();
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            fdistribu.domain(),
+            KOKKOS_LAMBDA(IndexVx const ivx) {
+                double const coeff = ddc::coordinate(ddc::select<IDimVx>(ivx)) - mean_velocity;
+                integrand(ivx) = coeff * coeff * fdistribu(ivx);
+            });
 
-    temperature = m_integrate_v(integrand) / density;
+    temperature = m_integrate_v(Kokkos::DefaultExecutionSpace(), integrand) / density;
 }
 /*
  * Computes the temperature of allfdistribu, using its density and mean velocity
@@ -106,20 +114,22 @@ void FluidMoments::operator()(
         DViewSpX const mean_velocity,
         FluidMoments::MomentTemperature)
 {
-    auto temperature_host = ddc::create_mirror_view_and_copy(temperature);
-    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu);
-    auto density_host = ddc::create_mirror_view_and_copy(density);
-    auto mean_velocity_host = ddc::create_mirror_view_and_copy(mean_velocity);
+    auto temperature_host = ddc::create_mirror_view(temperature);
 
-    host_t<DFieldSpXVx> integrand(allfdistribu.domain());
-    ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-        double const coeff = ddc::coordinate(ddc::select<IDimVx>(ispxvx))
-                             - mean_velocity_host(ddc::select<IDimSp, IDimX>(ispxvx));
-        integrand(ispxvx) = coeff * coeff * allfdistribu_host(ispxvx);
-    });
+    DFieldSpXVx integrand_alloc(allfdistribu.domain());
+    DSpanSpXVx integrand = integrand_alloc.span_view();
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            allfdistribu.domain(),
+            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+                IndexSpX ispx(ispxvx);
+                IndexVx ivx(ispxvx);
+                double const coeff = ddc::coordinate(ivx) - mean_velocity(ispx);
+                integrand(ispxvx) = coeff * coeff * allfdistribu(ispxvx) / density(ispx);
+            });
 
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        temperature_host(ispx) = m_integrate_v(integrand[ispx]) / density_host(ispx);
+        temperature_host(ispx) = m_integrate_v(Kokkos::DefaultExecutionSpace(), integrand[ispx]);
     });
     ddc::parallel_deepcopy(temperature, temperature_host);
 }

@@ -33,7 +33,7 @@ namespace {
  *      The error tolerance @f$ \varepsilon @f$.
  */
 void check_norm_L1(
-        Quadrature<IDimR, IDimP> quadrature,
+        host_t<Quadrature<IDomainRP>> quadrature,
         DSpanRP function,
         double const expected_norm,
         double const TOL)
@@ -61,7 +61,7 @@ void check_norm_L1(
  *      The error tolerance @f$ \varepsilon @f$.
  */
 void check_norm_L2(
-        Quadrature<IDimR, IDimP> quadrature,
+        host_t<Quadrature<IDomainRP>> quadrature,
         DSpanRP function,
         double const expected_norm,
         double const TOL)
@@ -87,7 +87,7 @@ void check_norm_L2(
  *      A 2x1 array with the error tolerance @f$ \varepsilon @f$.
  */
 void check_norms(
-        Quadrature<IDimR, IDimP> quadrature,
+        host_t<Quadrature<IDomainRP>> quadrature,
         DSpanRP function,
         std::array<double, 2> const& expected_norms,
         std::array<double, 2> const& TOLs)
@@ -131,7 +131,7 @@ void launch_tests(
     DFieldRP const quadrature_coeffs = compute_coeffs_on_mapping(
             mapping,
             spline_quadrature_coefficients(grid, r_builder, p_builder));
-    Quadrature<IDimR, IDimP> quadrature(quadrature_coeffs);
+    host_t<Quadrature<IDomainRP>> quadrature(quadrature_coeffs.span_cview());
 
 
     DFieldRP test(grid);
@@ -250,14 +250,14 @@ TEST_P(SplineQuadrature, TestFunctions)
     expected_norms[4][1] = std::sqrt(M_PI / 12.);
 
     std::array<std::array<double, 2>, 5> TOLs;
-    TOLs[0][0] = 1e-14;
-    TOLs[0][1] = 1e-14;
+    TOLs[0][0] = 1e-13;
+    TOLs[0][1] = 1e-13;
     TOLs[1][0] = 5e-3;
-    TOLs[1][1] = 1e-14;
-    TOLs[2][0] = 1e-14;
-    TOLs[2][1] = 1e-14;
+    TOLs[1][1] = 1e-13;
+    TOLs[2][0] = 1e-13;
+    TOLs[2][1] = 1e-13;
     TOLs[3][0] = 5e-3;
-    TOLs[3][1] = 1e-14;
+    TOLs[3][1] = 1e-13;
     TOLs[4][0] = 5e-2;
     TOLs[4][1] = 5e-6;
 

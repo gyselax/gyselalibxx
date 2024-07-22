@@ -52,8 +52,8 @@ TEST(KineticSource, Moments)
 
     host_t<DFieldX> quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
     host_t<DFieldVx> quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
-    Quadrature<IDimX> const integrate_x(quadrature_coeffs_x);
-    Quadrature<IDimVx> const integrate_v(quadrature_coeffs_vx);
+    host_t<Quadrature<IDomainX>> const integrate_x(quadrature_coeffs_x.span_cview());
+    host_t<Quadrature<IDomainVx>> const integrate_v(quadrature_coeffs_vx.span_cview());
 
     host_t<DFieldSp> charges(dom_sp);
     charges(my_ielec) = -1.;
@@ -102,24 +102,27 @@ TEST(KineticSource, Moments)
     ddc::for_each(gridx, [&](IndexX const ix) {
         // density
         ddc::parallel_deepcopy(values_density, allfdistribu_host[dom_sp.front()][ix]);
-        density(ix) = integrate_v(values_density);
+        density(ix) = integrate_v(Kokkos::DefaultHostExecutionSpace(), values_density);
 
         // fluid velocity
         ddc::for_each(gridvx, [&](IndexVx const iv) {
             values_fluid_velocity(iv) = values_density(iv) * ddc::coordinate(iv);
         });
-        fluid_velocity(ix) = integrate_v(values_fluid_velocity) / density(ix);
+        fluid_velocity(ix) = integrate_v(Kokkos::DefaultHostExecutionSpace(), values_fluid_velocity)
+                             / density(ix);
 
         // temperature
         ddc::for_each(gridvx, [&](IndexVx const iv) {
             values_temperature(iv)
                     = values_density(iv) * std::pow(ddc::coordinate(iv) - fluid_velocity(ix), 2);
         });
-        temperature(ix) = integrate_v(values_temperature) / density(ix);
+        temperature(ix) = integrate_v(Kokkos::DefaultHostExecutionSpace(), values_temperature)
+                          / density(ix);
     });
 
     // source amplitude
-    double error_source_amplitude = integrate_x(density) - source_amplitude;
+    double error_source_amplitude
+            = integrate_x(Kokkos::DefaultHostExecutionSpace(), density) - source_amplitude;
 
     double error_fluid_velocity(0);
     double error_temperature(0);
