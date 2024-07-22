@@ -14,7 +14,7 @@
 class FluidMoments
 {
 private:
-    Quadrature<IDimVx> m_integrate_v;
+    Quadrature<IDomainVx> m_integrate_v;
 
 public:
     /**
@@ -59,7 +59,7 @@ public:
      *
      * @param[in] integrate_v A quadrature method which integrates over the velocity space.
      */
-    FluidMoments(Quadrature<IDimVx> integrate_v);
+    FluidMoments(Quadrature<IDomainVx> integrate_v);
 
     ~FluidMoments() = default;
 
