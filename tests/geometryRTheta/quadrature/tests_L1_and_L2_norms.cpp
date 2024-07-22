@@ -112,7 +112,7 @@ void launch_tests(
             IDimR,
             ddc::BoundCond::GREVILLE, // boundary at r=0
             ddc::BoundCond::GREVILLE, // boundary at rmax
-            ddc::SplineSolver::GINKGO,
+            ddc::SplineSolver::LAPACK,
             IDimR>;
     using SplinePBuilder = ddc::SplineBuilder<
             Kokkos::DefaultHostExecutionSpace,
@@ -121,7 +121,7 @@ void launch_tests(
             IDimP,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            ddc::SplineSolver::GINKGO,
+            ddc::SplineSolver::LAPACK,
             IDimP>;
 
     SplineRBuilder r_builder(ddc::select<IDimR>(builder.interpolation_domain()));
