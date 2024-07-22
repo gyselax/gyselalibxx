@@ -20,4 +20,4 @@ target_link_libraries(unit_tests_pde_solvers
         gslx::utils
 )
 
-gtest_discover_tests(unit_tests_pde_solvers)
+gtest_discover_tests(unit_tests_pde_solvers DISCOVERY_MODE PRE_TEST)
