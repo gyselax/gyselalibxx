@@ -60,7 +60,7 @@ using SplineXBuilder_1d = ddc::SplineBuilder<
         IDimX,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX>;
 
 using SplineXEvaluator_1d = ddc::SplineEvaluator<
@@ -79,7 +79,7 @@ using BatchedSplineXBuilder_1d = ddc::SplineBuilder<
         IDimX,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimBatch,
         IDimX>;
 

@@ -74,12 +74,20 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
     ddc::discrete_space<bsplines_type>().integrals(integral_bsplines.span_view());
 
     // Solve matrix equation
+    Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+            integral_bsplines_mirror_with_additional_allocation(
+                    "integral_bsplines_mirror_with_additional_allocation",
+                    builder.get_interpolation_matrix().required_number_of_rhs_rows(),
+                    1);
+    Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+            integral_bsplines_mirror = Kokkos::
+                    subview(integral_bsplines_mirror_with_additional_allocation,
+                            std::pair<std::size_t, std::size_t> {0, integral_bsplines.size()},
+                            0);
+    Kokkos::deep_copy(integral_bsplines_mirror, integral_bsplines.allocation_kokkos_view());
     builder.get_interpolation_matrix()
-            .solve(Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>(
-                           integral_bsplines.data_handle(),
-                           integral_bsplines.size(),
-                           1),
-                   true);
+            .solve(integral_bsplines_mirror_with_additional_allocation, true);
+    Kokkos::deep_copy(integral_bsplines.allocation_kokkos_view(), integral_bsplines_mirror);
 
     ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
 
