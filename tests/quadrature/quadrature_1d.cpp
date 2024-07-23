@@ -46,22 +46,22 @@ double constant_func_check_1d(Method quad_method)
     DFieldX quadrature_coeffs_alloc(gridx);
     if (quad_method == Method::TRAPEZ) {
         quadrature_coeffs_alloc
-                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimXPeriod>(
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
                         gridx);
     }
     if (quad_method == Method::SIMPSON) {
         quadrature_coeffs_alloc
-                = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimXPeriod>(
+                = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
                         gridx);
     }
 
-    Quadrature<Kokkos::DefaultExecutionSpace, IDimXPeriod> const integrate(
-            quadrature_coeffs_alloc.span_view());
+    Quadrature const integrate(
+            quadrature_coeffs_alloc.span_cview());
 
     DFieldX values_alloc(gridx);
     ddc::ChunkSpan values = values_alloc.span_view();
     Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
-    double integral = integrate(values);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(),values);
     double expected_val = x_max - x_min;
 
     return abs(integral - expected_val);
@@ -86,6 +86,7 @@ double compute_error(int n_elems, Method quad_method)
     using IDimY = typename ComputeErrorTraits<N>::IDimY;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
+    using DSpanY = device_t<ddc::ChunkSpan<double, IDomainY>>;
 
     ddc::Coordinate<DimY> const y_min(0.0);
     ddc::Coordinate<DimY> const y_max(M_PI);
@@ -112,8 +113,8 @@ double compute_error(int n_elems, Method quad_method)
                 = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimY>(gridy);
     }
 
-    Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(
-            quadrature_coeffs_alloc.span_view());
+    Quadrature const integrate(
+            quadrature_coeffs_alloc.span_cview());
     DFieldY values_alloc(gridy);
     ddc::ChunkSpan values = values_alloc.span_view();
 
@@ -124,7 +125,7 @@ double compute_error(int n_elems, Method quad_method)
                 values(idx) = sin(ddc::coordinate(idx));
             });
 
-    double integral = integrate(values);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(),values);
     return std::abs(2 - integral);
 }
 

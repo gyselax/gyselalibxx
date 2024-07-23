@@ -5,9 +5,6 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <paraconf.h>
-#include <pdi.h>
-
 #include "ddc_helper.hpp"
 #include "fem_1d_poisson_solver.hpp"
 #include "neumann_spline_quadrature.hpp"
@@ -31,7 +28,7 @@ struct BSplinesX : ddc::UniformBSplines<RDimX, 3>
 using SplineInterpPointsX = ddc::
         GrevilleInterpolationPoints<BSplinesX, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
 
-struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
 
@@ -46,7 +43,7 @@ using SplineXBuilder_1d = ddc::SplineBuilder<
         IDimX,
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::GREVILLE,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX>;
 
 using SplineXEvaluator_1d = ddc::SplineEvaluator<

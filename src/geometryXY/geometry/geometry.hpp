@@ -70,10 +70,10 @@ using SplineInterpPointsY
         = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
 
 // IDim definitions
-struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
-struct IDimY : SplineInterpPointsY::interpolation_mesh_type
+struct IDimY : SplineInterpPointsY::interpolation_discrete_dimension_type
 {
 };
 
@@ -86,7 +86,7 @@ using SplineXBuilder_XY = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY>;
 using SplineXEvaluator_XY = ddc::SplineEvaluator<
@@ -107,7 +107,7 @@ using SplineYBuilder_XY = ddc::SplineBuilder<
         IDimY,
         SplineYBoundary,
         SplineYBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY>;
 using SplineYEvaluator_XY = ddc::SplineEvaluator<

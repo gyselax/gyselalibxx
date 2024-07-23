@@ -109,10 +109,10 @@ using SplineInterpPointsP
         = ddc::GrevilleInterpolationPoints<BSplinesP, SplinePBoundary, SplinePBoundary>;
 
 // --- Discrete dimensions
-struct IDimR : SplineInterpPointsR::interpolation_mesh_type
+struct IDimR : SplineInterpPointsR::interpolation_discrete_dimension_type
 {
 };
-struct IDimP : SplineInterpPointsP::interpolation_mesh_type
+struct IDimP : SplineInterpPointsP::interpolation_discrete_dimension_type
 {
 };
 
@@ -128,7 +128,7 @@ using SplineRPBuilder = ddc::SplineBuilder2D<
         SplineRBoundary, // boundary at rmax
         SplinePBoundary,
         SplinePBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimR,
         IDimP>;
 

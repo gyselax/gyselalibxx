@@ -28,12 +28,13 @@ target_link_libraries(bsplines_tests_sll
         sll::SLL
 )
 
-gtest_discover_tests(bsplines_tests_sll)
+gtest_discover_tests(bsplines_tests_sll DISCOVERY_MODE PRE_TEST)
 
 add_executable(matrix_tests_sll
   main.cpp
   matrix.cpp
   matrix_batch_ell.cpp
+  matrix_batch_csr.cpp
   matrix_batch_tridiag.cpp
 )
 target_compile_features(matrix_tests_sll PUBLIC cxx_std_17)
@@ -42,7 +43,7 @@ target_link_libraries(matrix_tests_sll
         GTest::gtest
         sll::SLL
 )
-gtest_discover_tests(matrix_tests_sll)
+gtest_discover_tests(matrix_tests_sll DISCOVERY_MODE PRE_TEST)
 
 add_executable(bernstein_tests_sll
   main.cpp
@@ -54,7 +55,7 @@ target_link_libraries(bernstein_tests_sll
         GTest::gtest
         sll::SLL
 )
-gtest_discover_tests(bernstein_tests_sll)
+gtest_discover_tests(bernstein_tests_sll DISCOVERY_MODE PRE_TEST)
 
 add_executable(metric_tensor_tests_sll
   main.cpp
@@ -66,7 +67,7 @@ target_link_libraries(metric_tensor_tests_sll
         GTest::gtest
         sll::SLL
 )
-gtest_discover_tests(metric_tensor_tests_sll)
+gtest_discover_tests(metric_tensor_tests_sll DISCOVERY_MODE PRE_TEST)
 
 add_executable(jacobian_mapping_tests_sll
   main.cpp
@@ -78,7 +79,7 @@ target_link_libraries(jacobian_mapping_tests_sll
         GTest::gtest
         sll::SLL
 )
-gtest_discover_tests(jacobian_mapping_tests_sll)
+gtest_discover_tests(jacobian_mapping_tests_sll DISCOVERY_MODE PRE_TEST)
 
 add_executable(jacobian_mapping_matrix_coef_tests_sll
   main.cpp
@@ -90,7 +91,7 @@ target_link_libraries(jacobian_mapping_matrix_coef_tests_sll
         GTest::gtest
         sll::SLL
 )
-gtest_discover_tests(jacobian_mapping_matrix_coef_tests_sll)
+gtest_discover_tests(jacobian_mapping_matrix_coef_tests_sll DISCOVERY_MODE PRE_TEST)
 
 add_executable(pseudo_cartesian_tests_sll
   main.cpp
@@ -102,7 +103,7 @@ target_link_libraries(pseudo_cartesian_tests_sll
         GTest::gtest
         sll::SLL
 )
-gtest_discover_tests(pseudo_cartesian_tests_sll)
+gtest_discover_tests(pseudo_cartesian_tests_sll DISCOVERY_MODE PRE_TEST)
 
 add_executable(refined_discrete_mapping_test
   main.cpp
@@ -114,7 +115,7 @@ target_link_libraries(refined_discrete_mapping_test
         GTest::gtest
         sll::SLL
 )
-gtest_discover_tests(refined_discrete_mapping_test)
+gtest_discover_tests(refined_discrete_mapping_test DISCOVERY_MODE PRE_TEST)
 
 foreach(CONTINUITY RANGE -1 1)
   math(EXPR MIN_DEGREE "${CONTINUITY}+1")

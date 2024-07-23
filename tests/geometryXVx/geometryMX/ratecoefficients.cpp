@@ -66,23 +66,23 @@ static void TestDiffusiveNeutralsRateCoefficients()
     host_t<DSpanSp> kinetic_masses = masses[dom_kinsp];
     host_t<DSpanSp> fluid_masses = masses[dom_fluidsp];
 
-    host_t<FieldSp<int>> charges(dom_allsp);
-    host_t<SpanSp<int>> kinetic_charges = charges[dom_kinsp];
-    host_t<SpanSp<int>> fluid_charges = charges[dom_fluidsp];
+    host_t<DFieldSp> charges(dom_allsp);
+    host_t<DSpanSp> kinetic_charges = charges[dom_kinsp];
+    host_t<DSpanSp> fluid_charges = charges[dom_fluidsp];
 
     IndexSp const my_iion = dom_kinsp.front();
     IndexSp const my_ielec = dom_kinsp.back();
     IndexSp const my_ifluid = dom_fluidsp.front();
 
-    kinetic_charges(my_ielec) = -1;
-    kinetic_charges(my_iion) = 1;
+    kinetic_charges(my_ielec) = -1.;
+    kinetic_charges(my_iion) = 1.;
 
     double const mass_ion(400.), mass_elec(1.);
     kinetic_masses(my_ielec) = mass_elec;
     kinetic_masses(my_iion) = mass_ion;
 
     // neutrals charge is zero
-    fluid_charges(my_ifluid) = 0;
+    fluid_charges(my_ifluid) = 0.;
 
     double const neutral_mass(1.);
     fluid_masses(my_ifluid) = neutral_mass;

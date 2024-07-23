@@ -64,7 +64,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX>;
 
 using SplineXEvaluator = ddc::SplineEvaluator<
@@ -146,8 +146,7 @@ public:
         /*
             Simulation launched on GPU but error checking on CPU. 
         */
-        auto function_host
-                = ddc::create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), function);
+        auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
         ddc::for_each(interpolation_domain, [&](IndexX const idx) {
             double const relative_error = abs(function_host(idx) - exact_function(idx));

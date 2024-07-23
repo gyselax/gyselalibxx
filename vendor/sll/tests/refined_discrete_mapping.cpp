@@ -53,10 +53,10 @@ using SplineInterpPointsR = ddc::
 using SplineInterpPointsP = ddc::
         GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
-struct IDimR : SplineInterpPointsR::interpolation_mesh_type
+struct IDimR : SplineInterpPointsR::interpolation_discrete_dimension_type
 {
 };
-struct IDimP : SplineInterpPointsP::interpolation_mesh_type
+struct IDimP : SplineInterpPointsP::interpolation_discrete_dimension_type
 {
 };
 
@@ -71,7 +71,7 @@ using SplineRPBuilder = ddc::SplineBuilder2D<
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimR,
         IDimP>;
 

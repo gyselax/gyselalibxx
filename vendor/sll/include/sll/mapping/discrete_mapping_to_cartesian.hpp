@@ -25,8 +25,8 @@ class DiscreteToCartesian
     : public Curvilinear2DToCartesian<
               DimX,
               DimY,
-              typename SplineBuilder::bsplines_type1::tag_type,
-              typename SplineBuilder::bsplines_type2::tag_type>
+              typename SplineBuilder::continuous_dimension_type1,
+              typename SplineBuilder::continuous_dimension_type2>
 {
 public:
     /**
@@ -49,21 +49,21 @@ public:
     /**
      * @brief Indicate the first logical coordinate.
      */
-    using circular_tag_r = typename BSplineR::tag_type;
+    using circular_tag_r = typename BSplineR::continuous_dimension_type;
     /**
      * @brief Indicate the second logical coordinate.
      */
-    using circular_tag_p = typename BSplineP::tag_type;
+    using circular_tag_p = typename BSplineP::continuous_dimension_type;
 
     /**
      * @brief Indicate the first logical coordinate in the discrete space.
      */
-    using IDimR = typename SplineBuilder::interpolation_mesh_type1;
+    using IDimR = typename SplineBuilder::interpolation_discrete_dimension_type1;
 
     /**
      * @brief Indicate the second logical coordinate in the discrete space.
      */
-    using IDimP = typename SplineBuilder::interpolation_mesh_type2;
+    using IDimP = typename SplineBuilder::interpolation_discrete_dimension_type2;
 
     /**
      * @brief Define a 2x2 matrix with an 2D array of an 2D array.

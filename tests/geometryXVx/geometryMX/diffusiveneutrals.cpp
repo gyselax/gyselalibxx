@@ -57,12 +57,12 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     IndexSp const my_iion = dom_kinsp.front();
     IndexSp const my_ielec = dom_kinsp.back();
 
-    host_t<FieldSp<int>> kinetic_charges(dom_kinsp);
-    kinetic_charges(my_ielec) = -1;
-    kinetic_charges(my_iion) = 1;
+    host_t<DFieldSp> kinetic_charges(dom_kinsp);
+    kinetic_charges(my_ielec) = -1.;
+    kinetic_charges(my_iion) = 1.;
 
     host_t<DFieldSp> kinetic_masses(dom_kinsp);
-    double const mass_ion(400), mass_elec(1);
+    double const mass_ion(400.), mass_elec(1.);
     kinetic_masses(my_ielec) = mass_elec;
     kinetic_masses(my_iion) = mass_ion;
 
@@ -72,7 +72,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     IndexSp const my_ifluid = dom_fluidsp.front();
 
     // neutrals charge is zero
-    host_t<FieldSp<int>> fluid_charges(dom_fluidsp);
+    host_t<DFieldSp> fluid_charges(dom_fluidsp);
     ddc::parallel_fill(fluid_charges, 0.);
 
     host_t<DFieldSp> fluid_masses(dom_fluidsp);
@@ -83,7 +83,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     IDomainSp const dom_allsp(IndexSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains charges of all species
-    host_t<FieldSp<int>> charges(dom_allsp);
+    host_t<DFieldSp> charges(dom_allsp);
 
     // fill the Field with charges of kinetic species
     for (IndexSp isp : dom_kinsp) {
@@ -185,8 +185,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
             kinsp_velocity.span_cview(),
             kinsp_temperature.span_cview());
 
-    auto derivative_host
-            = ddc::create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), derivative);
+    auto derivative_host = ddc::create_mirror_view_and_copy(derivative);
 
     double error_l1(0);
     double max_derivative(0);

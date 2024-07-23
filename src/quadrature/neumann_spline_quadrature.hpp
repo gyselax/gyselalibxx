@@ -74,15 +74,27 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
 
     // Vector of integrals of B-splines
     ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines_host(
-            builder.bsplines_domain());
+            builder.spline_domain());
     ddc::discrete_space<bsplines_type>().integrals(integral_bsplines_host.span_view());
 
     auto integral_bsplines = ddc::create_mirror_and_copy(
             Kokkos::DefaultExecutionSpace(),
             integral_bsplines_host.span_view());
     // Solve matrix equation
-    builder.get_interpolation_matrix().solve_transpose_inplace(
-            integral_bsplines_host.allocation_mdspan());
+    Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
+            integral_bsplines_mirror_with_additional_allocation(
+                    "integral_bsplines_mirror_with_additional_allocation",
+                    builder.get_interpolation_matrix().required_number_of_rhs_rows(),
+                    1);
+    Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
+            integral_bsplines_mirror = Kokkos::
+                    subview(integral_bsplines_mirror_with_additional_allocation,
+                            std::pair<std::size_t, std::size_t> {0, integral_bsplines.size()},
+                            0);
+    Kokkos::deep_copy(integral_bsplines_mirror, integral_bsplines.allocation_kokkos_view());
+    builder.get_interpolation_matrix()
+            .solve(integral_bsplines_mirror_with_additional_allocation, true);
+    Kokkos::deep_copy(integral_bsplines.allocation_kokkos_view(), integral_bsplines_mirror);
 
     ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
 
@@ -123,7 +135,7 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> neumann_spline_quadr
 {
     assert((std::is_same_v<
                     typename DDims::continuous_dimension_type,
-                    typename SplineBuilders::bsplines_type::tag_type> and ...));
+                    typename SplineBuilders::continuous_dimension_type> and ...));
 
     // Get coefficients for each dimension
     std::tuple<CoefficientChunk1D_h<ExecSpace, DDims>...> current_dim_coeffs_alloc(

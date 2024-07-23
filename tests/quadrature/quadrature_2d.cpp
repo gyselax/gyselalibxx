@@ -36,6 +36,8 @@ struct IDimY : ddc::UniformPointSampling<Y>
 {
 };
 
+using IdxXY = ddc::DiscreteElement<IDimX, IDimY>;
+
 using IVectX = ddc::DiscreteVector<IDimX>;
 using IVectY = ddc::DiscreteVector<IDimY>;
 
@@ -69,15 +71,47 @@ double constant_func_check_2d(Method quad_method)
         quadrature_coeffs_alloc
                 = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
     }
-    Quadrature<Kokkos::DefaultExecutionSpace, IDimX, IDimY> const integrate(
+    Quadrature<IDomainXY> const integrate(
             quadrature_coeffs_alloc.span_view());
     DFieldXY values(gridxy);
 
-    Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
-    double integral = integrate(values);
+    ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), values.span_cview());
     double expected_val = (x_max - x_min) * (y_max - y_min);
 
     return abs(integral - expected_val);
+}
+
+void integrated_function_operator()
+{
+    CoordX x_min(0.0);
+    CoordX x_max(3.0);
+    IVectX x_ncells(4);
+    CoordY y_min(4.0);
+    CoordY y_max(8.0);
+    IVectY y_ncells(16);
+
+    IDomainX gridx = ddc::init_discrete_space<IDimX>(IDimX::init<IDimX>(x_min, x_max, x_ncells));
+
+    IDomainY gridy = ddc::init_discrete_space<IDimY>(IDimY::init<IDimY>(y_min, y_max, y_ncells));
+    IDomainXY gridxy(gridx, gridy);
+
+    DFieldXY quad_coeffs_second = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
+    Quadrature func_operator(quad_coeffs_second.span_cview());
+
+    double const integral = func_operator(
+            Kokkos::DefaultExecutionSpace(),
+            KOKKOS_LAMBDA(IdxXY ixy) {
+                double y = ddc::coordinate(ddc::select<IDimY>(ixy));
+                double x = ddc::coordinate(ddc::select<IDimX>(ixy));
+                return x * y + 2;
+            });
+    EXPECT_DOUBLE_EQ(integral, 132.);
+}
+
+TEST(TrapezoidUniformNonPeriodicQuadrature, ExactForLinearBatchSecond2D)
+{
+    integrated_function_operator();
 }
 
 template <std::size_t N>
@@ -112,6 +146,7 @@ double compute_error(int n_elems, Method quad_method)
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
     using DFieldXY = device_t<ddc::Chunk<double, IDomainXY>>;
+    using DSpanXY = device_t<ddc::ChunkSpan<double, IDomainXY>>;
 
     ddc::Coordinate<DimX> const x_min(0.0);
     ddc::Coordinate<DimX> const x_max(M_PI);
@@ -129,18 +164,19 @@ double compute_error(int n_elems, Method quad_method)
 
     DFieldXY quadrature_coeffs
             = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-    Quadrature<Kokkos::DefaultExecutionSpace, IDimX, IDimY> const integrate(
-            quadrature_coeffs.span_view());
+    Quadrature<IDomainXY> const integrate(quadrature_coeffs);
 
-    DFieldXY values(gridxy);
-    host_t<DFieldXY> values_host(gridxy);
+    DFieldXY values_alloc(gridxy);
+    DSpanXY values = values_alloc.span_view();
 
-    ddc::for_each(gridxy, [&](ddc::DiscreteElement<IDimX, IDimY> const idx) {
-        double const y_cos = cos(ddc::get<DimY>(ddc::coordinate(idx)));
-        values_host(idx) = sin(ddc::get<DimX>(ddc::coordinate(idx))) * y_cos * y_cos;
-    });
-    Kokkos::deep_copy(values.allocation_kokkos_view(), values_host.allocation_kokkos_view());
-    double integral = integrate(values);
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            gridxy,
+            KOKKOS_LAMBDA(ddc::DiscreteElement<IDimX, IDimY> const idx) {
+                double const y_cos = Kokkos::cos(ddc::get<DimY>(ddc::coordinate(idx)));
+                values(idx) = sin(ddc::get<DimX>(ddc::coordinate(idx))) * y_cos * y_cos;
+            });
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     return std::abs(integral - M_PI);
 }
 

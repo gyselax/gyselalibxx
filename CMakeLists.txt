@@ -20,6 +20,7 @@ option(BUILD_DOCUMENTATION "Build the documentation." OFF)
 option(GYSELALIBXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
 option(GYSELALIBXX_COMPILE_SOURCE "Enable compilation of the source code (this should be set to off to build documentation without the C++ dependencies)" ON)
 set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Voice++")
+option(ACTIVATE_RESTART_TESTS "Activate tests which check that a simulation gives the same results after restart." ON)
 
 set(GYSELALIBXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
 
@@ -57,6 +58,9 @@ include(CTest)
 
 ## Look for a pre-installed LAPACK
 find_package(LAPACK REQUIRED)
+
+## Look for a pre-installed MPI
+find_package(MPI REQUIRED)
 
 ## Look for a pre-installed paraconf
 find_package(paraconf REQUIRED COMPONENTS C)
@@ -130,9 +134,9 @@ endif()
 add_subdirectory("vendor/kokkos/" "kokkos") # SYSTEM)
 
 # NOTE: Do not forget to keep Kokkos and Kokkos-kernels in sync !
-set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF BOOL "")
-set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON BOOL "")
-set(KokkosKernels_ENABLE_COMPONENT_BLAS ON BOOL "")
+set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
+set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON CACHE BOOL "")
+set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")
 add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels") # SYSTEM)
 
 find_package (Eigen3 3.3 NO_MODULE)

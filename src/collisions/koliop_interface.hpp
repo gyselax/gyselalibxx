@@ -39,12 +39,12 @@ using MDL = Kokkos::View<
  * @param[in] vparg The coordinates of the grid of parallel velocities.
  * @param[in] coeff_intdmu The quadrature coefficients to integrate on the grid of magnetic moments.
  * @param[in] coeff_intdvpar The quadrature coefficients to integrate on the grid of parallel velocities.
- * @param[in] nustar0_r The radial profile of the collisionality.
+ * @param[in] nustar The radial profile of the collisionality.
  * @param[in] comb_mat The combinatory (6x6) matrix.
  * @param[in] hat_As The normalized masses for all species.
  * @param[in] hat_Zs The normalized charges for all species.
  * @param[in] rg The coordinates of the grid of radial points.
- * @param[in] q_r The radial profile of the safety factor.
+ * @param[in] safety_factor The radial profile of the safety factor.
  * @param[in] mask_buffer_r The mask used to avoid applying collisions in certain radial region.
  * @param[in] mask_LIM The limiter mask defined over the polar slice.
  * @param[in] B_norm The norm of the magnetic field defined over the polar slice.
@@ -64,12 +64,12 @@ using MDL = Kokkos::View<
         const double* vparg,
         const double* coeff_intdmu,
         const double* coeff_intdvpar,
-        const double* nustar0_r,
+        const double* nustar,
         const double* comb_mat,
         const double* hat_As,
         const double* hat_Zs,
         const double* rg,
-        const double* q_r,
+        const double* safety_factor,
         const double* mask_buffer_r,
         const double* mask_LIM,
         const double* B_norm,
@@ -82,23 +82,6 @@ using MDL = Kokkos::View<
  */
 void DoCombMatComputation(MDL<double[6][6]>& comb_mat);
 
-/**
- * @brief Dump the coordinates found on a domain into a span.
- *
- * @param[out] dump_coord The span which will contain the coordinates.
- * @param[in] sampler The domain indicating the coordinates.
- */
-template <typename Span1D, typename CoordinateSampler>
-inline void DumpCoordinates(Span1D& dump_coord, ddc::DiscreteDomain<CoordinateSampler> sampler)
-{
-    ddc::ChunkSpan ddc_dump_coord(dump_coord, sampler);
-    ddc::parallel_for_each(
-            typename Span1D::execution_space {},
-            sampler,
-            KOKKOS_LAMBDA(ddc::DiscreteElement<CoordinateSampler> i) {
-                ddc_dump_coord(i) = ddc::coordinate(i);
-            });
-}
 
 /**
  * @brief Destructor for koliop.

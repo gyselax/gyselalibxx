@@ -118,16 +118,16 @@ using SplineInterpPointsVy
         = ddc::GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
 
 // IDim definition
-struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
-struct IDimY : SplineInterpPointsY::interpolation_mesh_type
+struct IDimY : SplineInterpPointsY::interpolation_discrete_dimension_type
 {
 };
-struct IDimVx : SplineInterpPointsVx::interpolation_mesh_type
+struct IDimVx : SplineInterpPointsVx::interpolation_discrete_dimension_type
 {
 };
-struct IDimVy : SplineInterpPointsVy::interpolation_mesh_type
+struct IDimVy : SplineInterpPointsVy::interpolation_discrete_dimension_type
 {
 };
 
@@ -139,7 +139,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         IDimX,
         SplineXBoundary,
         SplineXBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY,
         IDimVx,
@@ -162,7 +162,7 @@ using SplineYBuilder = ddc::SplineBuilder<
         IDimY,
         SplineYBoundary,
         SplineYBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY,
         IDimVx,
@@ -185,7 +185,7 @@ using SplineVxBuilder = ddc::SplineBuilder<
         IDimVx,
         SplineVxBoundary,
         SplineVxBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY,
         IDimVx,
@@ -208,7 +208,7 @@ using SplineVyBuilder = ddc::SplineBuilder<
         IDimVy,
         SplineVyBoundary,
         SplineVyBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX,
         IDimY,
         IDimVx,
@@ -232,7 +232,7 @@ using SplineVxBuilder_1d = ddc::SplineBuilder<
         IDimVx,
         SplineVxBoundary,
         SplineVxBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimVx>;
 using SplineVyBuilder_1d = ddc::SplineBuilder<
         Kokkos::DefaultHostExecutionSpace,
@@ -241,7 +241,7 @@ using SplineVyBuilder_1d = ddc::SplineBuilder<
         IDimVy,
         SplineVyBoundary,
         SplineVyBoundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimVy>;
 
 using BSDomainX = ddc::DiscreteDomain<BSplinesX>;

@@ -18,7 +18,7 @@ PUBLIC
         gslx::multipatch_interface
 )
 target_compile_definitions("${test_name_gtest}" PUBLIC)
-gtest_discover_tests("${test_name_gtest}" )
+gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 
 
 

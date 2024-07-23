@@ -55,6 +55,7 @@ TEST(KrookSource, Adaptive)
     IDomainSp const gridsp = dom_sp;
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
+<<<<<<< HEAD
     host_t<DFieldX> quadrature_coeffs_x
             = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
     host_t<DFieldVx> quadrature_coeffs_vx
@@ -63,13 +64,17 @@ TEST(KrookSource, Adaptive)
             quadrature_coeffs_x.span_view());
     Quadrature<Kokkos::DefaultHostExecutionSpace, IDimVx> const integrate_v(
             quadrature_coeffs_vx.span_view());
+=======
+    host_t<DFieldVx> const quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
+    host_t<Quadrature<IDomainVx>> const integrate_v(quadrature_coeffs_vx);
+>>>>>>> origin/main
 
-    host_t<FieldSp<int>> charges(dom_sp);
+    host_t<DFieldSp> charges(dom_sp);
     host_t<DFieldSp> masses(dom_sp);
     IndexSp my_iion(dom_sp.front());
     IndexSp my_ielec(dom_sp.back());
-    charges(my_iion) = 1;
-    charges(my_ielec) = -1;
+    charges(my_iion) = 1.;
+    charges(my_ielec) = -1.;
     ddc::for_each(dom_sp, [&](IndexSp const isp) { masses(isp) = 1.0; });
 
     // Initialization of the distribution function
@@ -116,7 +121,7 @@ TEST(KrookSource, Adaptive)
 
     host_t<DFieldSpX> densities(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        densities(ispx) = integrate_v(allfdistribu_host[ispx]);
+        densities(ispx) = integrate_v(Kokkos::DefaultHostExecutionSpace(), allfdistribu_host[ispx]);
     });
 
     // the charge should be conserved by the operator
@@ -145,7 +150,7 @@ TEST(KrookSource, Adaptive)
     rhs_krook(allfdistribu, 0.01);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
-        densities(ispx) = integrate_v(allfdistribu_host[ispx]);
+        densities(ispx) = integrate_v(Kokkos::DefaultHostExecutionSpace(), allfdistribu_host[ispx]);
     });
 
     // the rk2 scheme used in the krook operator should be of order 2
@@ -199,10 +204,10 @@ TEST(KrookSource, Constant)
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    host_t<FieldSp<int>> charges(dom_sp);
+    host_t<DFieldSp> charges(dom_sp);
     host_t<DFieldSp> masses(dom_sp);
-    charges(dom_sp.front()) = 1;
-    charges(dom_sp.back()) = -1;
+    charges(dom_sp.front()) = 1.;
+    charges(dom_sp.back()) = -1.;
     ddc::for_each(dom_sp, [&](IndexSp const isp) { masses(isp) = 1.0; });
 
     // Initialization of the distribution function

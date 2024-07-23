@@ -55,7 +55,7 @@ using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
  * @return A chunk with the quadrature coefficients @f$ q @f$.
  */
 template <class IDim, class SplineBuilder>
-device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> spline_quadrature_coefficients_1d(
+ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
         ddc::DiscreteDomain<IDim> const& domain,
         SplineBuilder const& builder)
 {
@@ -70,26 +70,44 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> spline_quadrature_coeffi
 
     using bsplines_type = typename SplineBuilder::bsplines_type;
 
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> coefficients(domain);
-
     // Vector of integrals of B-splines
-    ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines_host(
+    ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines(
             builder.spline_domain());
-    ddc::discrete_space<bsplines_type>().integrals(integral_bsplines_host.span_view());
-
-    // Coefficients of quadrature in integral_bsplines
-    ddc::DiscreteDomain<bsplines_type> slice = builder.spline_domain().take_first(
-            ddc::DiscreteVector<bsplines_type> {ddc::discrete_space<bsplines_type>().nbasis()});
-    auto integral_bsplines = ddc::create_mirror_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            integral_bsplines_host.span_view());
+    ddc::discrete_space<bsplines_type>().integrals(integral_bsplines.span_view());
 
     // Solve matrix equation
-    builder.get_interpolation_matrix().solve_transpose_inplace(
-            integral_bsplines.allocation_mdspan());
+    ddc::ChunkSpan integral_bsplines_without_periodic_point
+            = integral_bsplines.span_view()[ddc::DiscreteDomain<bsplines_type>(
+                    ddc::DiscreteElement<bsplines_type>(0),
+                    ddc::DiscreteVector<bsplines_type>(builder.get_interpolation_matrix().size()))];
+    Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
+            integral_bsplines_mirror_with_additional_allocation(
+                    "integral_bsplines_mirror_with_additional_allocation",
+                    builder.get_interpolation_matrix().required_number_of_rhs_rows(),
+                    1);
+    Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
+            integral_bsplines_mirror = Kokkos::
+                    subview(integral_bsplines_mirror_with_additional_allocation,
+                            std::pair<std::size_t, std::size_t> {
+                                    0,
+                                    integral_bsplines_without_periodic_point.size()},
+                            0);
     Kokkos::deep_copy(
+            integral_bsplines_mirror,
+            integral_bsplines_without_periodic_point.allocation_kokkos_view());
+        
+    // Solve matrix equation
+    builder.get_interpolation_matrix()
+            .solve(integral_bsplines_mirror_with_additional_allocation, true);
+    Kokkos::deep_copy(
+            integral_bsplines_without_periodic_point.allocation_kokkos_view(),
+            integral_bsplines_mirror);
+
+    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
+        Kokkos::deep_copy(
             coefficients.allocation_kokkos_view(),
-            integral_bsplines[slice].allocation_kokkos_view());
+            integral_bsplines_without_periodic_point.allocation_kokkos_view());
+
     return coefficients;
 }
 
@@ -108,27 +126,28 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<IDim>>> spline_quadrature_coeffi
  * @return The coefficients which define the spline quadrature method in ND.
  */
 template <class... DDims, class... SplineBuilders>
-ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> spline_quadrature_coefficients(
+device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> spline_quadrature_coefficients(
         ddc::DiscreteDomain<DDims...> const& domain,
         SplineBuilders const&... builders)
 {
     assert((std::is_same_v<
                     typename DDims::continuous_dimension_type,
-                    typename SplineBuilders::bsplines_type::tag_type> and ...));
+                    typename SplineBuilders::continuous_dimension_type> and ...));
 
     // Get coefficients for each dimension
     std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs(
             spline_quadrature_coefficients_1d(ddc::select<DDims>(domain), builders)...);
 
     // Allocate ND coefficients
-    ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients(domain);
+    ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients_host(domain);
+    device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients(domain);
 
     ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
         // multiply the 1D coefficients by one another
-        coefficients(idim)
+        coefficients_host(idim)
                 = (std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs)(ddc::select<DDims>(idim))
                    * ... * 1);
     });
-
+    ddc::parallel_deepcopy(coefficients,coefficients_host);
     return coefficients;
 }

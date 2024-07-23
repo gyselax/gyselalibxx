@@ -7,7 +7,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
 #include "quadrature.hpp"
 
 
@@ -23,18 +22,15 @@
  *
  * @return A double containing the L1 norm of the function.
  */
-template <class... IDim>
+template <class IDomain>
 double compute_L1_norm(
-        Quadrature<Kokkos::DefaultHostExecutionSpace, IDim...> quadrature,
-        ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim...>> function)
+        host_t<Quadrature<IDomain>> quadrature,
+        ddc::ChunkSpan<double, IDomain> function)
 {
-    auto grid = ddc::get_domain<IDim...>(function);
-    ddc::Chunk<double, ddc::DiscreteDomain<IDim...>> abs_function(grid);
-    ddc::for_each(grid, [&](ddc::DiscreteElement<IDim...> const idx) {
-        abs_function(idx) = fabs(function(idx));
-    });
-
-    return quadrature(abs_function);
+    using Index = typename IDomain::discrete_element_type;
+    return quadrature(
+            Kokkos::DefaultHostExecutionSpace(),
+            KOKKOS_LAMBDA(Index const idx) { return Kokkos::fabs(function(idx)); });
 }
 
 
@@ -51,18 +47,15 @@ double compute_L1_norm(
  *
  * @return A double containing the L2 norm of the function.
  */
-template <class... IDim>
+template <class IDomain>
 double compute_L2_norm(
-        Quadrature<Kokkos::DefaultHostExecutionSpace, IDim...> quadrature,
-        ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim...>> function)
+        host_t<Quadrature<IDomain>> quadrature,
+        ddc::ChunkSpan<double, IDomain> function)
 {
-    auto grid = ddc::get_domain<IDim...>(function);
-    ddc::Chunk<double, ddc::DiscreteDomain<IDim...>> square_function(grid);
-    ddc::for_each(grid, [&](ddc::DiscreteElement<IDim...> const idx) {
-        square_function(idx) = function(idx) * function(idx);
-    });
-
-    return std::sqrt(quadrature(square_function));
+    using Index = typename IDomain::discrete_element_type;
+    return std::sqrt(quadrature(
+            Kokkos::DefaultHostExecutionSpace(),
+            KOKKOS_LAMBDA(Index const idx) { return function(idx) * function(idx); }));
 }
 
 

@@ -27,8 +27,8 @@ class RefinedDiscreteToCartesian
     : public Curvilinear2DToCartesian<
               RDimX,
               RDimY,
-              typename SplineRPBuilder::bsplines_type1::tag_type,
-              typename SplineRPBuilder::bsplines_type2::tag_type>
+              typename SplineRPBuilder::continuous_dimension_type1,
+              typename SplineRPBuilder::continuous_dimension_type2>
 {
 private:
     /**
@@ -42,21 +42,21 @@ private:
     /**
      * @brief Indicate the first logical coordinate.
      */
-    using RDimR = typename BSplineR::tag_type;
+    using RDimR = typename BSplineR::continuous_dimension_type;
     /**
      * @brief Indicate the second logical coordinate.
      */
-    using RDimP = typename BSplineP::tag_type;
+    using RDimP = typename BSplineP::continuous_dimension_type;
 
     /**
      * @brief Indicate the first logical coordinate in the discrete space.
      */
-    using IDimR = typename SplineRPBuilder::interpolation_mesh_type1;
+    using IDimR = typename SplineRPBuilder::interpolation_discrete_dimension_type1;
 
     /**
      * @brief Indicate the second logical coordinate in the discrete space.
      */
-    using IDimP = typename SplineRPBuilder::interpolation_mesh_type2;
+    using IDimP = typename SplineRPBuilder::interpolation_discrete_dimension_type2;
 
 
 
@@ -143,10 +143,10 @@ public:
     static auto constexpr SplinePBoundaryRefined_max = SplineRPBuilder::builder_type2::s_bc_xmax;
 
 
-    static bool constexpr UniformMeshR
-            = ddc::is_uniform_point_sampling_v<typename SplineRPBuilder::interpolation_mesh_type1>;
-    static bool constexpr UniformMeshP
-            = ddc::is_uniform_point_sampling_v<typename SplineRPBuilder::interpolation_mesh_type2>;
+    static bool constexpr UniformMeshR = ddc::is_uniform_point_sampling_v<
+            typename SplineRPBuilder::interpolation_discrete_dimension_type1>;
+    static bool constexpr UniformMeshP = ddc::is_uniform_point_sampling_v<
+            typename SplineRPBuilder::interpolation_discrete_dimension_type2>;
 
 
     struct IDimRRefined
@@ -178,7 +178,7 @@ public:
             SplineRBoundaryRefined_max,
             SplinePBoundaryRefined_min,
             SplinePBoundaryRefined_max,
-            ddc::SplineSolver::GINKGO,
+            ddc::SplineSolver::LAPACK,
             IDimRRefined,
             IDimPRefined>;
 

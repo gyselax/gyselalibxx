@@ -74,17 +74,17 @@ using SplineInterpPointsY2
 
 
 // Discrete dimension of patch 1
-struct IDimX1 : SplineInterpPointsX1::interpolation_mesh_type
+struct IDimX1 : SplineInterpPointsX1::interpolation_discrete_dimension_type
 {
 };
-struct IDimY1 : SplineInterpPointsY1::interpolation_mesh_type
+struct IDimY1 : SplineInterpPointsY1::interpolation_discrete_dimension_type
 {
 };
 // Discrete dimension of patch 2
-struct IDimX2 : SplineInterpPointsX2::interpolation_mesh_type
+struct IDimX2 : SplineInterpPointsX2::interpolation_discrete_dimension_type
 {
 };
-struct IDimY2 : SplineInterpPointsY2::interpolation_mesh_type
+struct IDimY2 : SplineInterpPointsY2::interpolation_discrete_dimension_type
 {
 };
 
@@ -131,7 +131,7 @@ using SplineX1Builder_1d = ddc::SplineBuilder<
         IDimX1,
         SplineX1Boundary,
         SplineX1Boundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX1>;
 
 using SplineX2Builder_1d = ddc::SplineBuilder<
@@ -141,7 +141,7 @@ using SplineX2Builder_1d = ddc::SplineBuilder<
         IDimX2,
         SplineX2Boundary,
         SplineX2Boundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX2>;
 
 
@@ -153,7 +153,7 @@ using SplineX1Builder_2d = ddc::SplineBuilder<
         IDimX1,
         SplineX1Boundary,
         SplineX1Boundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX1,
         IDimY1>;
 
@@ -164,7 +164,7 @@ using SplineX2Builder_2d = ddc::SplineBuilder<
         IDimX2,
         SplineX2Boundary,
         SplineX2Boundary,
-        ddc::SplineSolver::GINKGO,
+        ddc::SplineSolver::LAPACK,
         IDimX2,
         IDimY2>;
 

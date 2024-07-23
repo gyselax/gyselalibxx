@@ -32,7 +32,7 @@ auto constexpr SplineXBoundary = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::B
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
 
-struct IDimX : SplineInterpPointsX::interpolation_mesh_type
+struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
 
@@ -54,7 +54,7 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
             IDimX,
             SplineXBoundary,
             SplineXBoundary,
-            ddc::SplineSolver::GINKGO,
+            ddc::SplineSolver::LAPACK,
             IDimX>;
 
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -66,12 +66,13 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
 
     IDomainX const gridx = builder_x.interpolation_domain();
 
-    DFieldX quadrature_coeffs = spline_quadrature_coefficients_1d(gridx, builder_x);
-    Quadrature<Kokkos::DefaultExecutionSpace, IDimX> const integrate(quadrature_coeffs.span_view());
-    DFieldX values(gridx);
-    Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
+    DFieldX const quadrature_coeffs = spline_quadrature_coefficients(gridx, builder_x);
+    Quadrature const integrate(quadrature_coeffs.span_cview());
 
-    double integral = integrate(values);
+    DFieldX values(gridx);
+
+    ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), values.span_cview());
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-15);
 }
@@ -91,7 +92,7 @@ struct ComputeErrorTraits
             BSplinesY,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE>;
-    struct IDimY : GrevillePointsY::interpolation_mesh_type
+    struct IDimY : GrevillePointsY::interpolation_discrete_dimension_type
     {
     };
 };
@@ -111,10 +112,11 @@ double compute_error(int n_elems)
             IDimY,
             SplineYBoundary,
             SplineYBoundary,
-            ddc::SplineSolver::GINKGO,
+            ddc::SplineSolver::LAPACK,
             IDimY>;
     using IDomainY = ddc::DiscreteDomain<IDimY>;
     using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
+    using DSpanY = device_t<ddc::ChunkSpan<double, IDomainY>>;
 
     ddc::Coordinate<Y> const y_min(0.0);
     ddc::Coordinate<Y> const y_max(M_PI);
@@ -126,18 +128,18 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    DFieldY quadrature_coeffs = spline_quadrature_coefficients_1d(gridy, builder_y);
-    Quadrature<Kokkos::DefaultExecutionSpace, IDimY> const integrate(quadrature_coeffs.span_view());
+    DFieldY quadrature_coeffs = spline_quadrature_coefficients(gridy, builder_y);
+    Quadrature<IDomainY> const integrate(quadrature_coeffs.span_cview());
 
     DFieldY values_alloc(gridy);
     ddc::ChunkSpan values = values_alloc.span_view();
-
     ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
             gridy,
             KOKKOS_LAMBDA(ddc::DiscreteElement<IDimY> const idx) {
-                values(idx) = sin(ddc::coordinate(idx));
+                values(idx) = Kokkos::sin(ddc::coordinate(idx));
             });
-    double integral = integrate(values);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     return std::abs(2 - integral);
 }
 

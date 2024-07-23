@@ -50,18 +50,25 @@ TEST(KineticSource, Moments)
     IDomainVx const gridvx = builder_vx.interpolation_domain();
     IDomainSpXVx const mesh(IDomainSp(my_iion, IVectSp(1)), gridx, gridvx);
 
+<<<<<<< HEAD
     host_t<DFieldX> quadrature_coeffs_x
             = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
     host_t<DFieldVx> quadrature_coeffs_vx
             = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridvx);
     Quadrature<Kokkos::DefaultHostExecutionSpace, IDimX> const integrate_x(quadrature_coeffs_x);
     Quadrature<Kokkos::DefaultHostExecutionSpace, IDimVx> const integrate_v(quadrature_coeffs_vx);
+=======
+    host_t<DFieldX> quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
+    host_t<DFieldVx> quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
+    host_t<Quadrature<IDomainX>> const integrate_x(quadrature_coeffs_x.span_cview());
+    host_t<Quadrature<IDomainVx>> const integrate_v(quadrature_coeffs_vx.span_cview());
+>>>>>>> origin/main
 
-    host_t<FieldSp<int>> charges(dom_sp);
-    charges(my_ielec) = -1;
-    charges(my_iion) = 1;
+    host_t<DFieldSp> charges(dom_sp);
+    charges(my_ielec) = -1.;
+    charges(my_iion) = 1.;
     host_t<DFieldSp> masses(dom_sp);
-    ddc::parallel_fill(masses, 1);
+    ddc::parallel_fill(masses, 1.);
 
     // Initialization of the distribution function
     ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
@@ -104,24 +111,31 @@ TEST(KineticSource, Moments)
     ddc::for_each(gridx, [&](IndexX const ix) {
         // density
         ddc::parallel_deepcopy(values_density, allfdistribu_host[dom_sp.front()][ix]);
-        density(ix) = integrate_v(values_density);
+        density(ix) = integrate_v(Kokkos::DefaultHostExecutionSpace(), values_density.span_cview());
 
         // fluid velocity
         ddc::for_each(gridvx, [&](IndexVx const iv) {
             values_fluid_velocity(iv) = values_density(iv) * ddc::coordinate(iv);
         });
-        fluid_velocity(ix) = integrate_v(values_fluid_velocity) / density(ix);
+        fluid_velocity(ix) = integrate_v(
+                                     Kokkos::DefaultHostExecutionSpace(),
+                                     values_fluid_velocity.span_cview())
+                             / density(ix);
 
         // temperature
         ddc::for_each(gridvx, [&](IndexVx const iv) {
             values_temperature(iv)
                     = values_density(iv) * std::pow(ddc::coordinate(iv) - fluid_velocity(ix), 2);
         });
-        temperature(ix) = integrate_v(values_temperature) / density(ix);
+        temperature(ix)
+                = integrate_v(Kokkos::DefaultHostExecutionSpace(), values_temperature.span_cview())
+                  / density(ix);
     });
 
     // source amplitude
-    double error_source_amplitude = integrate_x(density) - source_amplitude;
+    double error_source_amplitude
+            = integrate_x(Kokkos::DefaultHostExecutionSpace(), density.span_cview())
+              - source_amplitude;
 
     double error_fluid_velocity(0);
     double error_temperature(0);

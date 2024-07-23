@@ -58,8 +58,7 @@ public:
         auto inout_data_tmp_alloc
                 = ddc::create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), inout_data);
         auto inout_data_tmp = inout_data_tmp_alloc.span_view();
-        auto batch_domain
-                = ddc::remove_dims_of(inout_data.domain(), inout_data.template domain<DDimI>());
+        auto batch_domain = ddc::remove_dims_of<DDimI>(inout_data.domain());
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 batch_domain,

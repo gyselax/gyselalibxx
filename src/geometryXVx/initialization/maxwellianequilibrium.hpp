@@ -2,10 +2,10 @@
 
 #pragma once
 
-#include <geometry.hpp>
 #include <paraconf.h>
 #include <species_info.hpp>
 
+#include "geometry.hpp"
 #include "iequilibrium.hpp"
 #include "paraconfpp.hpp"
 
