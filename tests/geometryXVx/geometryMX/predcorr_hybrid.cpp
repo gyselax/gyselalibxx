@@ -209,9 +209,11 @@ TEST(GeometryXM, PredCorrHybrid)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
     host_t<DFieldVx> const quadrature_coeffs_host(
-            neumann_spline_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(meshVx, builder_vx_poisson));
-    auto quadrature_coeffs=ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(),
-    quadrature_coeffs_host.span_view());
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultHostExecutionSpace>(meshVx, builder_vx_poisson));
+    auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs_host.span_view());
     ChargeDensityCalculator rhs(quadrature_coeffs.span_cview());
 #ifdef PERIODIC_RDIMX
     FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> poisson_solver(meshX);

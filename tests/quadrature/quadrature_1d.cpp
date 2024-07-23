@@ -46,22 +46,19 @@ double constant_func_check_1d(Method quad_method)
     DFieldX quadrature_coeffs_alloc(gridx);
     if (quad_method == Method::TRAPEZ) {
         quadrature_coeffs_alloc
-                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
-                        gridx);
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
     }
     if (quad_method == Method::SIMPSON) {
         quadrature_coeffs_alloc
-                = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
-                        gridx);
+                = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
     }
 
-    Quadrature const integrate(
-            quadrature_coeffs_alloc.span_cview());
+    Quadrature const integrate(quadrature_coeffs_alloc.span_cview());
 
     DFieldX values_alloc(gridx);
     ddc::ChunkSpan values = values_alloc.span_view();
     Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
-    double integral = integrate(Kokkos::DefaultExecutionSpace(),values);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     double expected_val = x_max - x_min;
 
     return abs(integral - expected_val);
@@ -113,8 +110,7 @@ double compute_error(int n_elems, Method quad_method)
                 = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimY>(gridy);
     }
 
-    Quadrature const integrate(
-            quadrature_coeffs_alloc.span_cview());
+    Quadrature const integrate(quadrature_coeffs_alloc.span_cview());
     DFieldY values_alloc(gridy);
     ddc::ChunkSpan values = values_alloc.span_view();
 
@@ -125,7 +121,7 @@ double compute_error(int n_elems, Method quad_method)
                 values(idx) = sin(ddc::coordinate(idx));
             });
 
-    double integral = integrate(Kokkos::DefaultExecutionSpace(),values);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     return std::abs(2 - integral);
 }
 

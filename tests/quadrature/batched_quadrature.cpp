@@ -97,7 +97,7 @@ void batched_operator_1d()
     IDomainX gridx = ddc::init_discrete_space<IDimX>(IDimX::init<IDimX>(x_min, x_max, x_ncells));
 
     DFieldX quad_coeffs = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
-    
+
     Quadrature<IDomainX, IDomainB1X> quad_batched_operator(quad_coeffs.span_view());
 
     DFieldBatch1 results(gridb);
@@ -148,7 +148,7 @@ void batched_operator_2d()
     IDomainXY gridxy(gridx, gridy);
 
     DFieldXY quad_coeffs = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-    
+
     Quadrature<IDomainXY, IDomainB1B2XY> quad_batched_operator(quad_coeffs.span_view());
 
     IDomainB1B2 gridb(gridb1, gridb2);
@@ -204,7 +204,7 @@ void batched_operator_1d_2d()
     IDomainXY gridxy(gridx, gridy);
 
     DFieldXY quad_coeffs = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-    
+
     Quadrature<IDomainXY, IDomainB1XY> quad_batched_operator(quad_coeffs.span_view());
 
     DFieldBatch1 results(gridb1);
@@ -253,7 +253,7 @@ void batched_operator_2d_1d()
     IDomainX gridx = ddc::init_discrete_space<IDimX>(IDimX::init<IDimX>(x_min, x_max, x_ncells));
 
     DFieldX quad_coeffs = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
-   
+
     Quadrature<IDomainX, IDomainB1B2X> quad_batched_operator(quad_coeffs.span_view());
 
     IDomainB1B2 gridb(gridb1, gridb2);
@@ -308,7 +308,7 @@ void batched_operator_2d_reordered()
     IDomainXY gridxy(gridx, gridy);
 
     DFieldXY quad_coeffs = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-    
+
     Quadrature<IDomainXY, IDomainXB1YB2> quad_batched_operator(quad_coeffs.span_view());
 
     IDomainB1B2 gridb(gridb1, gridb2);

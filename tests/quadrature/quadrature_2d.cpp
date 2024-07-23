@@ -71,8 +71,7 @@ double constant_func_check_2d(Method quad_method)
         quadrature_coeffs_alloc
                 = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
     }
-    Quadrature<IDomainXY> const integrate(
-            quadrature_coeffs_alloc.span_view());
+    Quadrature<IDomainXY> const integrate(quadrature_coeffs_alloc.span_view());
     DFieldXY values(gridxy);
 
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
@@ -96,7 +95,8 @@ void integrated_function_operator()
     IDomainY gridy = ddc::init_discrete_space<IDimY>(IDimY::init<IDimY>(y_min, y_max, y_ncells));
     IDomainXY gridxy(gridx, gridy);
 
-    DFieldXY quad_coeffs_second = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
+    DFieldXY quad_coeffs_second
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
     Quadrature func_operator(quad_coeffs_second.span_cview());
 
     double const integral = func_operator(
