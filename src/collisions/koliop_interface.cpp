@@ -11,12 +11,17 @@
 // them via the Collisions' constructor.
 static inline constexpr std::size_t Npolmax = 3;
 static inline constexpr std::size_t index_max = 2 * (Npolmax - 1);
+// pSpecies_id represents the species processed by a rank.
+//  It is fixed to 0 but is no longer used since the 2024/03/01 modification in the Fortran version.
+//  After this date and on both the C++ and Fortran versions, the value is meaningless as a rank contains all
+//  the species for a given global simulation space sub volume.
+// [TODO] Delete this input (both for Fortran and C++ versions)
 static inline constexpr std::int64_t pSpecies_id = 0;
-static inline constexpr std::int64_t mu_id = 0;
+static inline constexpr std::int64_t mu_id
+        = 0; // [TODO] Same than for pSpecies_id: must be deleted from the list of input
 static inline constexpr std::size_t the_local_domain_r_offset = 0;
 static inline constexpr std::size_t the_local_domain_theta_offset = 0;
-static inline constexpr double R0 = 1.0;
-static inline constexpr std::int8_t collision_interspecies = false;
+static inline constexpr double R0 = 1.0; //[TODO] Attention this should not be fixed.
 static inline constexpr std::int8_t SOL = false;
 static inline constexpr std::int8_t LIM = false;
 
@@ -29,6 +34,7 @@ namespace koliop_interface {
         std::size_t the_theta_extent,
         std::size_t the_phi_extent,
         std::size_t the_species_extent,
+        std::int8_t collision_interspecies,
         std::int64_t ir_SOL_separatrix,
         const double* mug,
         const double* vparg,
