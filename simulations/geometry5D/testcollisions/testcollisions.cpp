@@ -207,7 +207,6 @@ int main(int argc, char** argv)
     auto allfdistribu = allfdistribu_alloc.span_view();
 
     // Collision operator initialisation
-    std::int8_t const collisions_interspecies = true;
     DFieldTor1 nustar0_r(dom_tor1);
     ddc::parallel_fill(nustar0_r, 1.0); //ATTENTION: Must be changed
     DFieldTor1 safety_factor(dom_tor1);
@@ -231,7 +230,6 @@ int main(int argc, char** argv)
             coeff_intdmu.span_cview(),
             coeff_intdvpar.span_cview(),
             nustar0_r.span_view(),
-            collisions_interspecies,
             field_grid_tor1.span_view(),
             safety_factor.span_view(),
             B_norm.span_view());
