@@ -17,7 +17,7 @@
 
 namespace {
 template <class IDim>
-using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
+using CoefficientChunk1D_h = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
 }
 
 
@@ -95,7 +95,7 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
     Kokkos::deep_copy(
             integral_bsplines_mirror,
             integral_bsplines_without_periodic_point.allocation_kokkos_view());
-        
+
     // Solve matrix equation
     builder.get_interpolation_matrix()
             .solve(integral_bsplines_mirror_with_additional_allocation, true);
@@ -104,7 +104,7 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
             integral_bsplines_mirror);
 
     ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
-        Kokkos::deep_copy(
+    Kokkos::deep_copy(
             coefficients.allocation_kokkos_view(),
             integral_bsplines_without_periodic_point.allocation_kokkos_view());
 
@@ -135,7 +135,7 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> spline_quadrature_co
                     typename SplineBuilders::continuous_dimension_type> and ...));
 
     // Get coefficients for each dimension
-    std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs(
+    std::tuple<CoefficientChunk1D_h<DDims>...> current_dim_coeffs(
             spline_quadrature_coefficients_1d(ddc::select<DDims>(domain), builders)...);
 
     // Allocate ND coefficients
@@ -145,9 +145,10 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> spline_quadrature_co
     ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients_host(idim)
-                = (std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs)(ddc::select<DDims>(idim))
+                = (std::get<CoefficientChunk1D_h<DDims>>(current_dim_coeffs)(
+                           ddc::select<DDims>(idim))
                    * ... * 1);
     });
-    ddc::parallel_deepcopy(coefficients,coefficients_host);
+    ddc::parallel_deepcopy(coefficients, coefficients_host);
     return coefficients;
 }
