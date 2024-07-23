@@ -100,14 +100,15 @@ $(document).ready(function(){initNavTree('classQuadrature.html',''); initResizab
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Quadrature&lt; IDim &gt; Member List</div>  </div>
+<div class="title">Quadrature&lt; QuadratureDomain, TotalDomain, MemorySpace &gt; Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="classQuadrature.html">Quadrature&lt; IDim &gt;</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="classQuadrature.html">Quadrature&lt; QuadratureDomain, TotalDomain, MemorySpace &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classQuadrature.html#a533af2a43db87593d2a9863065eefde8">operator()</a>(ddc::ChunkSpan&lt; const double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; const values) const</td><td class="entry"><a class="el" href="classQuadrature.html">Quadrature&lt; IDim &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classQuadrature.html#a6b8f04ab1b97b80a55b478085a276755">Quadrature</a>(ddc::ChunkView&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; const &amp;coeffs)</td><td class="entry"><a class="el" href="classQuadrature.html">Quadrature&lt; IDim &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classQuadrature.html#a79c65b349c38db6179f269fc9e37371a">operator()</a>(ExecutionSpace exec_space, IntegratorFunction integrated_function) const</td><td class="entry"><a class="el" href="classQuadrature.html">Quadrature&lt; QuadratureDomain, TotalDomain, MemorySpace &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classQuadrature.html#a7919d9fe623cc438c21c426f061f8205">operator()</a>(ExecutionSpace exec_space, ddc::ChunkSpan&lt; double, BatchDomain, std::experimental::layout_right, MemorySpace &gt; const result, IntegratorFunction integrated_function) const</td><td class="entry"><a class="el" href="classQuadrature.html">Quadrature&lt; QuadratureDomain, TotalDomain, MemorySpace &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classQuadrature.html#a7914430fca202708cbb38adb9746f28b">Quadrature</a>(QuadChunkView coeffs)</td><td class="entry"><a class="el" href="classQuadrature.html">Quadrature&lt; QuadratureDomain, TotalDomain, MemorySpace &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

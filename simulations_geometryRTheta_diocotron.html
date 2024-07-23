@@ -105,13 +105,13 @@ $(document).ready(function(){initNavTree('simulations_geometryRTheta_diocotron.h
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="simulations_geometryRTheta_diocotron__Studied_problem"></a>
 Studied problem</h1>
-<h3><a class="anchor" id="autotoc_md20"></a>
+<h3><a class="anchor" id="autotoc_md17"></a>
 Field setup</h3>
 <p>We work with cylindrical coordinates \((r,\theta,z)\) on the corresponding orthonormal basis vectors \((e_r, e_\theta, e_z)\). We suppose that the particles (electrons) are trapped between two cylindrically conducting walls at the radii \(W_1\) and \(W_2\), (setup from Petri's articles [6], [7]). The plasma is confined between the radii \(R_1\) et \(R_2\) such that</p>
 <p class="formulaDsp">
 \[W_1 \leq R_1 \lt R_2 \leq W_2. \]
 </p>
-<h3><a class="anchor" id="autotoc_md21"></a>
+<h3><a class="anchor" id="autotoc_md18"></a>
 General case</h3>
 <p>Conservation of the density equation and Maxwell-Poisson equation:</p>
 <p class="formulaDsp">
@@ -123,7 +123,7 @@ General case</h3>
 <li>\(\phi\) is the usual electric potential associated withe the total electric field;</li>
 <li>\((E,B)\) the electromagnetic field such that \(B = B_z(r) e_z\) the external magnetic field</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md22"></a>
+<h3><a class="anchor" id="autotoc_md19"></a>
 Simplified case</h3>
 <p>We study a simplified case where</p><ul>
 <li>\(B = e_z\),</li>
@@ -182,7 +182,7 @@ Test case - diocotron instability</h1>
 \[ c_l \left( 1 - \frac{W_1^{2l}}{W_2^{2l}} \right) = l^2 \frac{\omega_q }{\omega_D} \left[1 - \frac{R_1^2}{R_2^2} + \frac{\omega_q }{\omega_D} \frac{R_1^2}{R_2^2}\right]\left( 1 - \frac{W_1^{2l}}{W_2^{2l}} \right) -l \frac{\omega_q }{\omega_D} \left( 1 - \frac{W_1^{2l}}{R_2^{2l}} \right)\left( 1 - \frac{R_2^{2l}}{W_2^{2l}} \right) \\ \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad + l \left[1 - \frac{R_1^2}{R_2^2} + \frac{\omega_q }{\omega_D} \frac{R_1^2}{R_2^2} \right]\left( 1 - \frac{R_1^{2l}}{W_2^{2l}} \right) \left( 1 - \frac{W_1^{2l}}{R_1^{2l}} \right) - \left( 1 - \frac{R_2^{2l}}{W_2^{2l}} \right) \left( 1 - \frac{W_1^{2l}}{R_1^{2l}} \right) \left( 1 - \frac{R_1^{2l}}{R_2^{2l}} \right) \]
 </p>
 <p> and \(\omega_q = - \frac{2Q}{R_1^2}\), \(\omega_D = \frac{1}{2}\) and \(Q\) the charge carried by unit of length at \(r = W_1\) (in our simulation, we put \(Q = 0\)).</p>
-<h3><a class="anchor" id="autotoc_md23"></a>
+<h3><a class="anchor" id="autotoc_md20"></a>
 Predictor-corrector</h3>
 <p>To solve the equations system, we use a predictor-corrector methods. Severals predictor-corrector methods are implemented in <a class="el" href="classITimeSolverRP.html" title="Base class for the time solvers.">ITimeSolverRP</a> and documented in <a class="el" href="src_geometryRTheta_time_solver.html">Predictor-corrector methods</a>.</p>
 <h1><a class="anchor" id="simulations_geometryRTheta_diocotron__References"></a>
@@ -206,7 +206,7 @@ Contents</h1>
 <li>display_L2_norms.py : plot the L2 norms of the perturbation of the density and electrical potential function in time.</li>
 <li>mass_conservation.py : plot the relative errors of the mass of the particles.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md24"></a>
+<h3><a class="anchor" id="autotoc_md21"></a>
 Recommended parameters:</h3>
 <ul>
 <li><code>Mesh:</code><ul>
@@ -224,7 +224,7 @@ Recommended parameters:</h3>
 </ul>
 </li>
 <li><code>Perturbation:</code><ul>
-<li><code>charge_Q: 0</code> : charge carried by the inner conductor at \(r = W_1\).</li>
+<li><code>charge_Q: 0.</code> : charge carried by the inner conductor at \(r = W_1\).</li>
 <li><code>l_mode: 9</code> : mode of the pertubation \(\varepsilon \cos(lx)\).</li>
 <li><code>eps: 0.0001</code> : amplitude of the pertubation \(\varepsilon \cos(lx)\).</li>
 </ul>
@@ -234,7 +234,7 @@ Recommended parameters:</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md25"></a>
+<h3><a class="anchor" id="autotoc_md22"></a>
 Executables:</h3>
 <ul>
 <li><code>diocotron_EXPLICIT_PREDCORRR_EULER_METHOD</code> : uses the predictor-corrector defined in <a class="el" href="classBslExplicitPredCorrRP.html" title="A second order explicit predictor-corrector for the Vlasov-Poisson equations.">BslExplicitPredCorrRP</a> (ill-defined for other time integration methods).</li>

@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('src_multipatch_interfaces.html',''); i
 Sticking of Two Edges</h1>
 <p>We follow the idea to represent the topology of a multipatch domain using the idea of <em>domain manifolds</em> (see [1]). This means that we have several independent tensor-product logical domains and define their sticking via coordinate transformations.</p>
 <p><b>Remark:</b> In the referenced paper, the authors use affine isometries of the entire patch instead of coordinate transformations of the faces. This is equivalent to our approach in the sense that, when the scaling of the domains is removed and we consider only unit squares as logical domains, the coordinate transformations of the faces and the information about which edges are identified determine the isometries used in the paper and vice versa. This is easy to show.</p>
-<h3><a class="anchor" id="autotoc_md62"></a>
+<h3><a class="anchor" id="autotoc_md60"></a>
 Multi-patch domain</h3>
 <p>For simplicity, we will constrain ourselves to the 2D case, but this approach could be generalized to arbitrary dimensions.</p>
 <p>Let \(\Omega\) be the domain of interest and assume that we have patches \(\Omega^{(i)}\), \(i=1,...,K\), which are disjoint, s.t. </p><p class="formulaDsp">
@@ -118,13 +118,13 @@ Multi-patch domain</h3>
 \[ F^{(i)}: [a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)} b_y^{(i)}] \rightarrow \Omega^{(i)}, \]
 </p>
 <p> where the rectangular domain \([a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)} b_y^{(i)}]\) defines the logical coordinates for the patch. We call this logical coordinate domain the <em>logical patch</em>.</p>
-<h3><a class="anchor" id="autotoc_md63"></a>
+<h3><a class="anchor" id="autotoc_md61"></a>
 Edges</h3>
 <p>So we obtain four logical edges </p><p class="formulaDsp">
 \[ [a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}, \quad [a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}, \quad \{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}], \quad \{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}] \]
 </p>
 <p>In the code, we define edges as follows. Every edge of a logical patch is identified via the patch it belongs to, the dimension and whether it is at the front or the back of the domain. So e.g. the edge \([a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}\) would be identified with patch \(i\), dimensions <code>RDimXi</code> and <code>FRONT</code>. \([a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}\) would be identified with patch \(i\), dimensions <code>RDimXi</code> and <code>BACK</code> and \(\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\) would be identified with patch \(i\), dimensions <code>RDimYi</code> and <code>BACK</code>.</p>
-<h3><a class="anchor" id="autotoc_md64"></a>
+<h3><a class="anchor" id="autotoc_md62"></a>
 Sticking and Coordinate Transformation</h3>
 <p>Any edge can then be identified with an edge on another patch. This corresponds to the 'sticking'. So for a different patch \(\Omega^{(j)}\), we have the logical coordinate domain \([a_x^{(j)}, b_x^{(j)}] \times [a_y^{(j)} b_y^{(j)}]\). If we want to stick patch \(i\) to patch \(j\), we have to determine the edges that are identified and how they are identified. The way that they are identified is mathematically determined via the coordinate transformation from one edge to the other. Since the transformations are supposed to be affine and bijective, there are only two options: The transformation can be order preserving or order reversing (this corresponds to the orientation of the phyiscal edge where two parametrizations coming from the two patches can have either the same or the opposite orientation respectively).</p>
 <p>So for example, we want to stick the edge \(\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\) on patch \(i\) to the edge \([a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}\) on patch \(j\). If the transformation is order-preserving (i.e. the orientations of the parametrizations of the physical edge agree), then the transformation from the first edge to the second is </p><p class="formulaDsp">

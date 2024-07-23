@@ -11,6 +11,7 @@ var dir_2cb1bf5254cdb852c9c33e2ec5cf247b =
     [ "geometryXYVxVy", "dir_5f726612e6f7feddf1426504728ece79.html", "dir_5f726612e6f7feddf1426504728ece79" ],
     [ "interpolation", "dir_ce24321f9c558a1bad9461427b2f6e52.html", "dir_ce24321f9c558a1bad9461427b2f6e52" ],
     [ "io", "dir_4877fc66b34f0bed3307622046ff6a0c.html", "dir_4877fc66b34f0bed3307622046ff6a0c" ],
+    [ "mpi_parallelisation", "dir_3edf76bff63ac0040676a04cfe70b091.html", "dir_3edf76bff63ac0040676a04cfe70b091" ],
     [ "multipatch", "dir_eb7da54727e91e3ad0949acc1ce0f18c.html", "dir_eb7da54727e91e3ad0949acc1ce0f18c" ],
     [ "paraconfpp", "dir_2c0ad391030bc4839817fbcc879b28f0.html", "dir_2c0ad391030bc4839817fbcc879b28f0" ],
     [ "pde_solvers", "dir_115e60596e2d00727777ec90d6d12217.html", "dir_115e60596e2d00727777ec90d6d12217" ],

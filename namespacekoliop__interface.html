@@ -119,16 +119,12 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a37a50906b908eec98c31c438bf263ee5"><td class="memItemLeft" align="right" valign="top">::koliop_Operator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekoliop__interface.html#a37a50906b908eec98c31c438bf263ee5">DoOperatorInitialization</a> (std::size_t the_mu_extent, std::size_t the_vpar_extent, std::size_t the_r_extent, std::size_t the_theta_extent, std::size_t the_phi_extent, std::size_t the_species_extent, std::int64_t ir_SOL_separatrix, const double *mug, const double *vparg, const double *coeff_intdmu, const double *coeff_intdvpar, const double *nustar, const double *comb_mat, const double *hat_As, const double *hat_Zs, const double *rg, const double *safety_factor, const double *mask_buffer_r, const double *mask_LIM, const double *B_norm, const double *Bstar_s)</td></tr>
-<tr class="memdesc:a37a50906b908eec98c31c438bf263ee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the collision operator defined in koliop.  <a href="namespacekoliop__interface.html#a37a50906b908eec98c31c438bf263ee5">More...</a><br /></td></tr>
-<tr class="separator:a37a50906b908eec98c31c438bf263ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e5ad69f1826702ec70ecd7760a4cff8"><td class="memItemLeft" align="right" valign="top">::koliop_Operator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekoliop__interface.html#a6e5ad69f1826702ec70ecd7760a4cff8">DoOperatorInitialization</a> (std::size_t the_mu_extent, std::size_t the_vpar_extent, std::size_t the_r_extent, std::size_t the_theta_extent, std::size_t the_phi_extent, std::size_t the_species_extent, std::int8_t collision_interspecies, std::int64_t ir_SOL_separatrix, const double *mug, const double *vparg, const double *coeff_intdmu, const double *coeff_intdvpar, const double *nustar, const double *comb_mat, const double *hat_As, const double *hat_Zs, const double *rg, const double *safety_factor, const double *mask_buffer_r, const double *mask_LIM, const double *B_norm, const double *Bstar_s)</td></tr>
+<tr class="memdesc:a6e5ad69f1826702ec70ecd7760a4cff8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the collision operator defined in koliop.  <a href="namespacekoliop__interface.html#a6e5ad69f1826702ec70ecd7760a4cff8">More...</a><br /></td></tr>
+<tr class="separator:a6e5ad69f1826702ec70ecd7760a4cff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9d5eadac891589fa9c91fff85f3b4fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekoliop__interface.html#ac9d5eadac891589fa9c91fff85f3b4fc">DoCombMatComputation</a> (<a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">MDL</a>&lt; double[6][6]&gt; &amp;comb_mat)</td></tr>
 <tr class="memdesc:ac9d5eadac891589fa9c91fff85f3b4fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the combinatory (6x6) matrix.  <a href="namespacekoliop__interface.html#ac9d5eadac891589fa9c91fff85f3b4fc">More...</a><br /></td></tr>
 <tr class="separator:ac9d5eadac891589fa9c91fff85f3b4fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a902444041d92c9b4a0278d2da83136de"><td class="memTemplParams" colspan="2">template&lt;typename Span1D , typename CoordinateSampler &gt; </td></tr>
-<tr class="memitem:a902444041d92c9b4a0278d2da83136de"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekoliop__interface.html#a902444041d92c9b4a0278d2da83136de">DumpCoordinates</a> (Span1D &amp;dump_coord, ddc::DiscreteDomain&lt; CoordinateSampler &gt; sampler)</td></tr>
-<tr class="memdesc:a902444041d92c9b4a0278d2da83136de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dump the coordinates found on a domain into a span.  <a href="namespacekoliop__interface.html#a902444041d92c9b4a0278d2da83136de">More...</a><br /></td></tr>
-<tr class="separator:a902444041d92c9b4a0278d2da83136de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7438f569d8681574fe1f1fa4192547a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekoliop__interface.html#ab7438f569d8681574fe1f1fa4192547a">DoOperatorDeinitialization</a> (::koliop_Operator the_operator_handle)</td></tr>
 <tr class="memdesc:ab7438f569d8681574fe1f1fa4192547a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for koliop.  <a href="namespacekoliop__interface.html#ab7438f569d8681574fe1f1fa4192547a">More...</a><br /></td></tr>
 <tr class="separator:ab7438f569d8681574fe1f1fa4192547a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,8 +152,8 @@ template&lt;typename Extent &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a37a50906b908eec98c31c438bf263ee5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37a50906b908eec98c31c438bf263ee5">&#9670;&nbsp;</a></span>DoOperatorInitialization()</h2>
+<a id="a6e5ad69f1826702ec70ecd7760a4cff8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e5ad69f1826702ec70ecd7760a4cff8">&#9670;&nbsp;</a></span>DoOperatorInitialization()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,6 +193,12 @@ template&lt;typename Extent &gt; </div>
           <td></td>
           <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>the_species_extent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::int8_t&#160;</td>
+          <td class="paramname"><em>collision_interspecies</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -305,6 +307,7 @@ template&lt;typename Extent &gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">the_theta_extent</td><td>The number of points in the poloidal dimension. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">the_phi_extent</td><td>The number of points in the toroidal dimension. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">the_species_extent</td><td>The number of species. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">collision_interspecies</td><td>Boolean that is equal to true if inter-species collisions are taken into account. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ir_SOL_separatrix</td><td>The index in the radial dimension where the SOL separatrix is found. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mug</td><td>The coordinates of the grid of magnetic moments. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">vparg</td><td>The coordinates of the grid of parallel velocities. </td></tr>
@@ -347,53 +350,6 @@ template&lt;typename Extent &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">comb_mat</td><td>The combinatory (6x6) matrix. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a902444041d92c9b4a0278d2da83136de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a902444041d92c9b4a0278d2da83136de">&#9670;&nbsp;</a></span>DumpCoordinates()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Span1D , typename CoordinateSampler &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void koliop_interface::DumpCoordinates </td>
-          <td>(</td>
-          <td class="paramtype">Span1D &amp;&#160;</td>
-          <td class="paramname"><em>dump_coord</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ddc::DiscreteDomain&lt; CoordinateSampler &gt;&#160;</td>
-          <td class="paramname"><em>sampler</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Dump the coordinates found on a domain into a span. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">dump_coord</td><td>The span which will contain the coordinates. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">sampler</td><td>The domain indicating the coordinates. </td></tr>
   </table>
   </dd>
 </dl>

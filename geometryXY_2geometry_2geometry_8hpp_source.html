@@ -163,10 +163,10 @@ $(document).ready(function(){initNavTree('geometryXY_2geometry_2geometry_8hpp_so
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesY, SplineYBoundary, SplineYBoundary&gt;;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">// IDim definitions</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimX.html">IDimX</a> : SplineInterpPointsX::interpolation_mesh_type</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimX.html">IDimX</a> : SplineInterpPointsX::interpolation_discrete_dimension_type</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="structIDimY.html">   76</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimY.html">IDimY</a> : SplineInterpPointsY::interpolation_mesh_type</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="structIDimY.html">   76</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structIDimY.html">IDimY</a> : SplineInterpPointsY::interpolation_discrete_dimension_type</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('geometryXY_2geometry_2geometry_8hpp_so
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <a class="code" href="structIDimX.html">IDimX</a>,</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        SplineXBoundary,</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        SplineXBoundary,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        ddc::SplineSolver::GINKGO,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        ddc::SplineSolver::LAPACK,</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="structIDimX.html">IDimX</a>,</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <a class="code" href="structIDimY.html">IDimY</a>&gt;;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">using</span> SplineXEvaluator_XY = ddc::SplineEvaluator&lt;</div>
@@ -200,7 +200,7 @@ $(document).ready(function(){initNavTree('geometryXY_2geometry_2geometry_8hpp_so
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <a class="code" href="structIDimY.html">IDimY</a>,</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        SplineYBoundary,</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        SplineYBoundary,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        ddc::SplineSolver::GINKGO,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        ddc::SplineSolver::LAPACK,</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <a class="code" href="structIDimX.html">IDimX</a>,</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <a class="code" href="structIDimY.html">IDimY</a>&gt;;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">using</span> SplineYEvaluator_XY = ddc::SplineEvaluator&lt;</div>

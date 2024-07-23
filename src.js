@@ -20,6 +20,11 @@ var src =
     ] ],
     [ "Functions used for input and output.", "src_io.html", null ],
     [ "Multipatch", "src_multipatch.html", "src_multipatch" ],
+    [ "Parallelisation", "src_mpi_parallelisation.html", [
+      [ "Layout", "src_mpi_parallelisation.html#src_mpi_parallelisation__Layout", null ],
+      [ "TransposeOperator", "src_mpi_parallelisation.html#src_mpi_parallelisation__TransposeOperator", null ],
+      [ "Alltoall Transpose Operator", "src_mpi_parallelisation.html#src_mpi_parallelisation__Alltoall_Transpose_Operator", null ]
+    ] ],
     [ "PDE Solvers", "src_pde_solvers.html", [
       [ "Poisson's equation", "src_pde_solvers.html#src_pde_solvers__Poisson_s_equation", null ]
     ] ],

@@ -109,41 +109,42 @@ $(document).ready(function(){initNavTree('transpose_8hpp_source.html',''); initR
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span> &lt;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keyword">class </span>ExecSpace,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">class </span>StartDomain,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">class </span>StartLayoutStridedPolicy,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">class </span>MemorySpace,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">class </span>EndDomain,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">class </span>EndLayoutStridedPolicy&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;ddc::ChunkSpan&lt;double, EndDomain, EndLayoutStridedPolicy, MemorySpace&gt; transpose_layout(</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        ddc::ChunkSpan&lt;double, EndDomain, EndLayoutStridedPolicy, MemorySpace&gt; end_span,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        ddc::ChunkView&lt;double, StartDomain, StartLayoutStridedPolicy, MemorySpace&gt; start_view)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            Kokkos::SpaceAccessibility&lt;ExecSpace, MemorySpace&gt;::accessible,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">// assert that ddc::DiscreteDomain&lt;Dims...&gt; is a transposed discrete domain by</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// checking that it is a subset of StartDomain and that StartDomain is a subset</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// of it.</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    static_assert(ddc::type_seq_contains_v&lt;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                  ddc::to_type_seq_t&lt;StartDomain&gt;,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                  ddc::to_type_seq_t&lt;EndDomain&gt;&gt;);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    static_assert(ddc::type_seq_contains_v&lt;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                  ddc::to_type_seq_t&lt;EndDomain&gt;,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                  ddc::to_type_seq_t&lt;StartDomain&gt;&gt;);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// Check that both views have the same domain (just reordered)</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    assert(start_view.domain() == end_span.domain());</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">using</span> StartIndex = <span class="keyword">typename</span> StartDomain::discrete_element_type;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">using</span> EndIndex = <span class="keyword">typename</span> EndDomain::discrete_element_type;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ddc::parallel_for_each(</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            execution_space,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            start_view.domain(),</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            KOKKOS_LAMBDA(StartIndex idx) { end_span(idx) = start_view(idx); });</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> end_span;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">class </span>ElementType,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">class </span>StartDomain,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">class </span>StartLayoutStridedPolicy,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">class </span>MemorySpace,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">class </span>EndDomain,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">class </span>EndLayoutStridedPolicy&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;ddc::ChunkSpan&lt;ElementType, EndDomain, EndLayoutStridedPolicy, MemorySpace&gt; transpose_layout(</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        ddc::ChunkSpan&lt;ElementType, EndDomain, EndLayoutStridedPolicy, MemorySpace&gt; end_span,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        ddc::ChunkView&lt;ElementType, StartDomain, StartLayoutStridedPolicy, MemorySpace&gt; start_view)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            Kokkos::SpaceAccessibility&lt;ExecSpace, MemorySpace&gt;::accessible,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// assert that ddc::DiscreteDomain&lt;Dims...&gt; is a transposed discrete domain by</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// checking that it is a subset of StartDomain and that StartDomain is a subset</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// of it.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    static_assert(ddc::type_seq_contains_v&lt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                  ddc::to_type_seq_t&lt;StartDomain&gt;,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                  ddc::to_type_seq_t&lt;EndDomain&gt;&gt;);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    static_assert(ddc::type_seq_contains_v&lt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                  ddc::to_type_seq_t&lt;EndDomain&gt;,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                  ddc::to_type_seq_t&lt;StartDomain&gt;&gt;);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// Check that both views have the same domain (just reordered)</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    assert(start_view.domain() == end_span.domain());</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">using</span> StartIndex = <span class="keyword">typename</span> StartDomain::discrete_element_type;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">using</span> EndIndex = <span class="keyword">typename</span> EndDomain::discrete_element_type;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ddc::parallel_for_each(</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            execution_space,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            start_view.domain(),</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            KOKKOS_LAMBDA(StartIndex idx) { end_span(idx) = start_view(idx); });</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> end_span;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

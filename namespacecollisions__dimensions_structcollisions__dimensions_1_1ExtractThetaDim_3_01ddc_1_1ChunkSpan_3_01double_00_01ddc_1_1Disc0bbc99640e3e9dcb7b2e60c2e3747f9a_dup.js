@@ -1,0 +1,4 @@
+var namespacecollisions__dimensions_structcollisions__dimensions_1_1ExtractThetaDim_3_01ddc_1_1ChunkSpan_3_01double_00_01ddc_1_1Disc0bbc99640e3e9dcb7b2e60c2e3747f9a_dup =
+[
+    [ "type", "namespacecollisions__dimensions.html#aff724f43a1f1c89e5e97074111be29ea", null ]
+];

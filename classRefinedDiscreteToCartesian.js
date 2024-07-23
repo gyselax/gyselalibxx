@@ -9,7 +9,7 @@ var classRefinedDiscreteToCartesian =
     [ "RDimXRefined", "structRefinedDiscreteToCartesian_1_1RDimXRefined.html", null ],
     [ "RDimYRefined", "structRefinedDiscreteToCartesian_1_1RDimYRefined.html", null ],
     [ "REvalBoundary", "classRefinedDiscreteToCartesian.html#a2515b9bf25196f2b7c0210d529311dc8", null ],
-    [ "SplineRPBuilderRefined", "classRefinedDiscreteToCartesian.html#a123cb39594ab2698a044675636893f2e", null ],
+    [ "SplineRPBuilderRefined", "classRefinedDiscreteToCartesian.html#a62e63de938ee81269bc971dbc2fe194d", null ],
     [ "SplineRPEvaluatorRefined", "classRefinedDiscreteToCartesian.html#aa9fbaa8c624a03ea843ac1b3a3039ea6", null ],
     [ "CoordRRefined", "classRefinedDiscreteToCartesian.html#a05fdfcca6e778f67bba48aa63ad3b5c8", null ],
     [ "CoordPRefined", "classRefinedDiscreteToCartesian.html#a4fcfa286cdc8ab15e18adf2ab4654221", null ],

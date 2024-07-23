@@ -44,10 +44,16 @@ var NAVTREE =
       [ "Code Organisation", "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Code_Organisation", null ]
     ] ],
     [ "Using DDC in Gyselalibxx", "docs_DDC_in_gyselalibxx.html", [
+      [ "Contents", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Contents", null ],
       [ "Coordinate", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Coordinate", null ],
-      [ "Domain", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Domain", null ],
+      [ "Domain and associated concepts", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Domain_and_associated_concepts", null ],
+      [ "PointSampling", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__PointSampling", null ],
+      [ "DiscreteElement", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__DiscreteElement", null ],
+      [ "DiscreteVector", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__DiscreteVector", null ],
+      [ "DiscreteDomain", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__DiscreteDomain", null ],
       [ "Data Storage", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Data_Storage", null ],
-      [ "Example", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Example", null ]
+      [ "Example", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Example", null ],
+      [ "Pitfalls", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Pitfalls", null ]
     ] ],
     [ "Using Git", "docs_Using_git.html", [
       [ "Branches", "docs_Using_git.html#docs_Using_git__Branches", null ],
@@ -67,12 +73,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classConstantRate.html",
-"classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html#a5bb5027143efcdf2205c158f85248c8a",
-"classMatrix__Corner__Block.html#a48fb0458b7bb4811406b6deda078de6e",
-"classRefinedDiscreteToCartesian.html#ac688e376939b25dae506045883181fb5",
-"docs_Using_git.html",
-"src_geometryXVx_geometryMX_fluidsolver.html"
+"classCollisionsIntra.html#aff0857de965458f4e769e289ee89b287",
+"classFEM1DPoissonSolver.html#acbb04914dd6fc38ed826399f5d561a34",
+"classMatrixBatchEll.html#ae9650712099062e59b91b328cddaffb2",
+"classRK4.html#a46286b1d28894b90593a2aee6dca725d",
+"dir_fff31245b39ef81c8e6b4b2456b9c284.html",
+"src_geometryRTheta_advection.html#autotoc_md42",
+"vector__field_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

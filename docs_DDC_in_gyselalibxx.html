@@ -107,6 +107,21 @@ $(document).ready(function(){initNavTree('docs_DDC_in_gyselalibxx.html',''); ini
 <p>The DDC library is based on templates. The template parameters are based on physical dimensions.</p>
 <p>When using DDC the first step is therefore to create structures representing each of the physical dimensions, e.g. <a class="el" href="structRDimX.html" title="Define non periodic real X dimension.">RDimX</a>. These objects should only contain one attribute, a static constexpr boolean called PERIODIC which indicates whether the dimension is periodic or not. The DDC types are then parametrised by this structure. The "R" in the name of the dimension stands for "real", it indicates that the dimension is in real space and is continuous.</p>
 <p>The following sections describe some of the DDC types used in Gyselalibxx.</p>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Contents"></a>
+Contents</h1>
+<ul>
+<li><a href="#docs_DDC_in_gyselalibxx__Coordinate">Coordinate</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__Domain_and_associated_concepts">Domain and associated concepts</a><ul>
+<li><a href="#docs_DDC_in_gyselalibxx__PointSampling">PointSampling</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__DiscreteElement">DiscreteElement</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__DiscreteVector">DiscreteVector</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__DiscreteDomain">DiscreteDomain</a></li>
+</ul>
+</li>
+<li><a href="#docs_DDC_in_gyselalibxx__Data_Storage">Data Storage</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__Example">Example</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__Pitfalls">Pitfalls</a></li>
+</ul>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Coordinate"></a>
 Coordinate</h1>
 <p>A <code>ddc::Coordinate</code> is one of the only DDC types which represents a continuous data type. This means that it can take any value that can be represented by a double. It represents the position of a coordinate in the vector space.</p>
@@ -121,22 +136,22 @@ Coordinate</h1>
 <div class="line">ddc::Coordinate&lt;RDimX, RDimY&gt; Q = R - P;</div>
 </div><!-- fragment --><p>The <code>Coordinate</code> class also provides an addition operator, comparison operators, and an output operator for easy printing using <code>cout</code>.</p>
 <p>In Gyselalibxx the alias <code>CoordX</code> is usually defined in <code>geometry.hpp</code> to describe the type <code>ddc::Coordinate&lt;<a class="el" href="structRDimX.html" title="Define non periodic real X dimension.">RDimX</a>&gt;</code> more succinctly.</p>
-<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Domain"></a>
-Domain</h1>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Domain_and_associated_concepts"></a>
+Domain and associated concepts</h1>
 <p>The physical problems that our simulations describe are defined on a domain. The domain on which the problem is defined is continuous (e.g. a radial domain \([0,1)\)). However a simulation evolves on a discrete domain. This means that the value of the function is only known at a discrete set of points. In the case of a function \(f(x)\rightarrow y \in \mathbb{R}\) with \(x \in [0,1)\), we would usually discretise the domain \([0,1)\) as follows: </p><p class="formulaDsp">
 \[ x_0, x_1, ..., x_i, ..., x_N \]
 </p>
 <p>DDC provides multiple types to represent the concepts required to interact with such a domain.</p>
-<h3><a class="anchor" id="autotoc_md12"></a>
-PointSampling</h3>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__PointSampling"></a>
+PointSampling</h1>
 <p>The points \(\{x_0, ..., x_N\}\) are a point sampling. This sampling can either be uniform or non-uniform. Accordingly DDC provides the 2 classes:</p><ul>
 <li>UniformPointSampling</li>
 <li>NonUniformPointSampling</li>
 </ul>
 <p>A uniform point sampling is a collection of points which are equidistant, it is therefore defined with an origin and a step. In contrast the points found in a non-uniform point sampling are arbitrary. This kind of sampling must therefore be initialised from a list of points.</p>
 <p>In Gyselalibxx the alias <code><a class="el" href="structIDimX.html">IDimX</a></code> is usually defined in <code>geometry.hpp</code> to describe a point sampling along the dimension X. The "I" in <code><a class="el" href="structIDimX.html">IDimX</a></code> stands for "Interpolation". This is because the function is only stored at the interpolation points. The point sampling contains these interpolation points.</p>
-<h3><a class="anchor" id="autotoc_md13"></a>
-DiscreteElement</h3>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__DiscreteElement"></a>
+DiscreteElement</h1>
 <p>The simplest type to understand is <code>ddc::DiscreteElement</code>. This corresponds to the index of the point in the point sampling. E.g. the point <code>x_i</code> in the point sampling can be indexed using the object <code>ddc::DiscreteElement&lt;<a class="el" href="structIDimX.html">IDimX</a>&gt;(i)</code>. A <code>ddc::DiscreteElement</code> is therefore roughly equivalent to an integer. Compared to an integer, it additionally contains information about the physical direction being examined. This allows the compiler to raise errors if typos/copy-paste errors lead to the wrong dimension being used.</p>
 <p>As a discrete concept this class does not take the continuous dimension as a template parameter, rather it takes the discrete point sampling instead.</p>
 <p>In Gyselalibxx the alias <code>IndexX</code> is usually defined in <code>geometry.hpp</code> to describe the index of a point sampling along the dimension X.</p>
@@ -147,8 +162,8 @@ DiscreteElement</h3>
 <div class="line">ddc::DiscreteElement&lt;IDimR&gt; i(0); <span class="comment">// The first point in the point sampling</span></div>
 <div class="line">std::cout &lt;&lt; ddc::coordinate(i) &lt;&lt; std::endl;</div>
 </div><!-- fragment --><p> will output: </p><div class="fragment"><div class="line">(0.0)</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md14"></a>
-DiscreteVector</h3>
+</div><!-- fragment --><h1><a class="anchor" id="docs_DDC_in_gyselalibxx__DiscreteVector"></a>
+DiscreteVector</h1>
 <p>A <code>ddc::DiscreteVector</code> describes the number of grid points between points in a sampling. E.g. <code>x_3</code> and <code>x_6</code> are separated by <code>ddc::DiscreteVector&lt;<a class="el" href="structIDimX.html">IDimX</a>&gt;(3)</code>.</p>
 <p>As a discrete concept this class does not take the continuous dimension as a template parameter, rather it takes the discrete point sampling instead.</p>
 <p>This type is useful when we have the index of a point and we need to get the next point. A <code>ddc::DiscreteVector</code> can be added or subtracted from a <code>ddc::DiscreteElement</code> as long as both objects are templated by the same dimension. Similarly a <code>ddc::DiscreteVector</code> is the result of subtracting 2 <code>ddc::DiscreteElement</code>s.</p>
@@ -158,8 +173,8 @@ DiscreteVector</h3>
 <div class="line">i += k;</div>
 </div><!-- fragment --><p>In Gyselalibxx the alias <code>IVectX</code> is usually defined in <code>geometry.hpp</code> to describe the vector from one element of a point sampling along the dimension X to another.</p>
 <p>As with <code>ddc::DiscreteElement</code>s, a <code>ddc::DiscreteVector</code> can be multi-dimensional and lower dimension <code>ddc::DiscreteVector</code> objects can be extracted using <code>ddc::select&lt;IDimOfInterest&gt;(my_nd_vector)</code>.</p>
-<h3><a class="anchor" id="autotoc_md15"></a>
-DiscreteDomain</h3>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__DiscreteDomain"></a>
+DiscreteDomain</h1>
 <p>The last concept necessary to define a discrete domain is the concept of sub-domains. The class <code>ddc::DiscreteDomain</code> is designed to describe a sub-domain (although it can of course hold the whole domain). It is templated over each of the discrete point samplings used to describe the discrete domain on which the simulation evolves.</p>
 <p>Each subdomain is described by:</p><ul>
 <li>An origin : This is the <code>ddc::DiscreteElement</code> which indicates the first point in the domain.</li>
@@ -264,10 +279,10 @@ Example</h1>
 <div class="line">});</div>
 </div><!-- fragment --><p><code>ddc::ChunkSpan</code> objects are required for function arguments. For example the prototype of the function which defines the electric potential would be: </p><div class="fragment"><div class="line">DSpanX operator()(DSpanX electric_potential, DViewSpXVx distribution_function);</div>
 </div><!-- fragment --><p> where <code>DSpanX</code> is a reference to the <code>DFieldX</code> object where the electric potential is stored, and <code>DViewSpXVx</code> is a constant reference to the <code>DFieldSpXVx</code> object where the distribution function is stored.</p>
-<h3><a class="anchor" id="autotoc_md16"></a>
+<h3><a class="anchor" id="autotoc_md12"></a>
 Continuous vs. discrete objects</h3>
 <p>The majority of the DDC types represent objects in or on a discrete vector space. It may not be immediately obvious why continous objects are also needed given that simulations are necessarily discrete. Backward semi-Lagrangian advection is a good example of where this is required. In backward semi-Lagrangian advection we work on a discrete grid (a <code>ddc::DiscreteDomain</code>), for each point of the grid we trace the characteristic to find where a particle positioned at this grid point would have been located at the previous time step. This location, known as the foot of the characteristic can be located anywhere in the vector space, unlike the grid points, the foot of the characteristic is not restricted to a subset of valid positions. It must therefore be represented with a continuous object. In this case a <code>ddc::Coordinate</code> perfectly describes the position of the foot of the characteristic while also providing all pertinent information about the dimensions.</p>
-<h3><a class="anchor" id="autotoc_md17"></a>
+<h3><a class="anchor" id="autotoc_md13"></a>
 Example use of DiscreteVector for Finite Differences</h3>
 <p>The class <code>ddc::DiscreteVector</code> is particularly useful in cases where we wish to express a stencil. Let us consider the case of a 2D finite differences scheme on uniform meshes expressed as follows: </p><p class="formulaDsp">
 \[ \nabla^2 f(x,y) = \frac{f(x-h_x, y) + f(x+h_x, y) + f(x, y-h_y) + f(x, y+h_y) - 4f(x,y)}{h_x h_y} \]
@@ -287,7 +302,16 @@ Example use of DiscreteVector for Finite Differences</h3>
 <div class="line">            - 4 * function_values(position))</div>
 <div class="line">           / (h_x * h_y);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>As you can see DDC takes care of combining elements and vectors to ensure that the resulting <code>IndexXY</code> is in the correct position. This makes it simpler to write such stencils and easier to spot errors, especially in cases involving lots of dimensions. </p>
+</div><!-- fragment --><p>As you can see DDC takes care of combining elements and vectors to ensure that the resulting <code>IndexXY</code> is in the correct position. This makes it simpler to write such stencils and easier to spot errors, especially in cases involving lots of dimensions.</p>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Pitfalls"></a>
+Pitfalls</h1>
+<p>When using DDC there are some things that you should be careful about. These are listed here.</p>
+<h3><a class="anchor" id="autotoc_md14"></a>
+Synchronicity</h3>
+<p>In DDC and Kokkos the code runs asynchronously when an execution space is provided. When no execution space is provided the code runs synchronously surrounded by fences. In order to ensure that there is no danger coming from the asynchronicity we need to follow certain rules. In Gysela the chosen conventions are:</p><ul>
+<li>Always provide an execution space to <code>ddc::parallel_for_each</code> or <code>ddc::parallel_transform_reduce</code> (or similar Kokkos functions).</li>
+<li>Only provide an execution space to <code>create_mirror_view_and_copy</code> when this is unavoidable (i.e. when copying to the <code>DefaultExecutionSpace</code>). The <code>DefaultHostExecutionSpace</code> should never be passed to <code>create_mirror_view_and_copy</code>. </li>
+</ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
