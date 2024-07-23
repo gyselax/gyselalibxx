@@ -1,5 +1,8 @@
 var NAVTREEINDEX2 =
 {
+"classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216":[13,70,2],
+"classFEM1DPoissonSolver.html#a548d0e63a09282ff72d1df448daee3e4":[13,70,5],
+"classFEM1DPoissonSolver.html#a6f12dec3c58acb9102551503029eb3a7":[13,70,3],
 "classFEM1DPoissonSolver.html#acbb04914dd6fc38ed826399f5d561a34":[13,70,4],
 "classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html":[13,72],
 "classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html#a027e8dbbbfe9348d000b687cb1948566":[13,72,16],
@@ -89,8 +92,8 @@ var NAVTREEINDEX2 =
 "classIInitialization.html":[13,105],
 "classIInitialization.html#a587c895cad1d3c22003cb62e70fa4c51":[13,105,3],
 "classIInitialization.html#a5c066d7173ca9686cda27a8bbc54667e":[13,105,4],
-"classIInitialization.html#a5d604e8e8cde8d05154434b6f0256558":[13,105,0],
 "classIInitialization.html#a5d604e8e8cde8d05154434b6f0256558":[13,105,1],
+"classIInitialization.html#a5d604e8e8cde8d05154434b6f0256558":[13,105,0],
 "classIInitialization.html#a5d604e8e8cde8d05154434b6f0256558":[13,105,2],
 "classIInitialization.html#a9f426856e221de98fd68e2a4ea757819":[13,105,5],
 "classIInterpolator.html":[13,106],
@@ -246,8 +249,5 @@ var NAVTREEINDEX2 =
 "classMatrixBatchEll.html#a2311f80607b4ed72e59c4bc94e8f75e7":[13,144,1],
 "classMatrixBatchEll.html#a4e9af3104dc41b66da9dd69f3ea4224d":[13,144,2],
 "classMatrixBatchEll.html#a972e124276cf81e393a6590d53986a41":[13,144,7],
-"classMatrixBatchEll.html#aa3d7d4b0603c631839070708ff574ba6":[13,144,4],
-"classMatrixBatchEll.html#aaef2264db89e99beb1a012d190e95ecc":[13,144,0],
-"classMatrixBatchEll.html#ad844ef96e8bc9033c931eb318d1f1e54":[13,144,3],
-"classMatrixBatchEll.html#ade9b19aa5be23b68a1f9d8df6a4244bb":[13,144,5]
+"classMatrixBatchEll.html#aa3d7d4b0603c631839070708ff574ba6":[13,144,4]
 };

@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"classMatrixBatchEll.html#aaef2264db89e99beb1a012d190e95ecc":[13,144,0],
+"classMatrixBatchEll.html#ad844ef96e8bc9033c931eb318d1f1e54":[13,144,3],
+"classMatrixBatchEll.html#ade9b19aa5be23b68a1f9d8df6a4244bb":[13,144,5],
 "classMatrixBatchEll.html#ae9650712099062e59b91b328cddaffb2":[13,144,6],
 "classMatrixBatchTridiag.html":[13,145],
 "classMatrixBatchTridiag.html#a5951ed8d2a582543b1962b6f0ecfe490":[13,145,1],
@@ -88,11 +91,11 @@ var NAVTREEINDEX3 =
 "classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0":[13,146,4],
 "classMaxwellianEquilibrium.html#a7052573b3a3cb1a05f8e8bf3911bb293":[13,146,15],
 "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[13,146,1],
-"classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[13,146,5],
 "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[13,146,3],
+"classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[13,146,5],
 "classMaxwellianEquilibrium.html#a9d987a36ab8c0610b39397b5576da6e3":[13,146,16],
-"classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99":[13,146,14],
 "classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99":[13,146,10],
+"classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99":[13,146,14],
 "classMaxwellianEquilibrium.html#aa97a6ffa2d60eef457be47111d2c9a51":[13,146,17],
 "classMaxwellianEquilibrium.html#aad0aaed893509562108c46bb204be3ea":[13,146,18],
 "classMaxwellianEquilibrium.html#ad34aeb8e23d3f037160b1e3f56f81d64":[13,146,0],
@@ -229,12 +232,12 @@ var NAVTREEINDEX3 =
 "classPredCorrRK2XY.html#ab656f1b731b4bfb0dc0898e5120f29b2":[13,172,1],
 "classPredCorrRK2XY.html#ac40ec89f2d6eecae4f54eaadea2e726d":[13,172,2],
 "classQNSolver.html":[13,173],
-"classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[13,173,2],
 "classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[13,173,0],
+"classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[13,173,2],
 "classQNSolver.html#aa468e237e8cb2c752e45171eddaf8d75":[13,173,5],
 "classQNSolver.html#aed8063537a8c1803a2fa92bac6e9c3fe":[13,173,4],
-"classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[13,173,1],
 "classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[13,173,3],
+"classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[13,173,1],
 "classQuadrature.html":[13,174],
 "classQuadrature.html#a7914430fca202708cbb38adb9746f28b":[13,174,0],
 "classQuadrature.html#a7919d9fe623cc438c21c426f061f8205":[13,174,2],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "classRK2.html#af634097606b3d5f2b54ca3311561ecc1":[13,187,3],
 "classRK3.html":[13,188],
 "classRK3.html#a41b039f09ee3dd37f2a21d9e4a6a518e":[13,188,2],
-"classRK3.html#a95b8128c3df2bf35ec9634e83c505aa9":[13,188,3],
-"classRK3.html#ab45cc74d736d44303fb755d77976bf14":[13,188,1],
-"classRK3.html#ab75113e8885dfdbc7c41494db8d2f269":[13,188,0],
-"classRK4.html":[13,189]
+"classRK3.html#a95b8128c3df2bf35ec9634e83c505aa9":[13,188,3]
 };

@@ -1,5 +1,8 @@
 var NAVTREEINDEX1 =
 {
+"classCollisionsIntra.html#ad611212032beab6cb9512adca7de596b":[13,38,12],
+"classCollisionsIntra.html#ad9a82972554f7618aafc2e0dbb70615c":[13,38,6],
+"classCollisionsIntra.html#aef98b800bcc7c91230459cf2c002171d":[13,38,4],
 "classCollisionsIntra.html#aff0857de965458f4e769e289ee89b287":[13,38,2],
 "classConstantFluidInitialization.html":[13,40],
 "classConstantFluidInitialization.html#a38bc3a0ed34be935a172d6177f9f7fc9":[13,40,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "classEuler.html#a5af55f31f2b26e3122ef42c6fce49b14":[13,68,3],
 "classEuler.html#a8019703dccd8358b9b221818fa51bdcb":[13,68,0],
 "classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8":[13,68,1],
-"classFEM1DPoissonSolver.html":[13,70],
-"classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216":[13,70,2],
-"classFEM1DPoissonSolver.html#a548d0e63a09282ff72d1df448daee3e4":[13,70,5],
-"classFEM1DPoissonSolver.html#a6f12dec3c58acb9102551503029eb3a7":[13,70,3]
+"classFEM1DPoissonSolver.html":[13,70]
 };

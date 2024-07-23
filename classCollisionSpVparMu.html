@@ -146,6 +146,14 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#af65cdb9c87f59d3249c940bb81d1821a">DFieldSpRThetaVpar</a> = device_t&lt; ddc::Chunk&lt; double, DDomSpRThetaVpar &gt; &gt;</td></tr>
 <tr class="memdesc:af65cdb9c87f59d3249c940bb81d1821a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of species, poloidal plane and parallel velocities. <br /></td></tr>
 <tr class="separator:af65cdb9c87f59d3249c940bb81d1821a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a985fdcf11d5e8b376d7bf48613c5f33e"><td class="memItemLeft" align="right" valign="top"><a id="a985fdcf11d5e8b376d7bf48613c5f33e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a985fdcf11d5e8b376d7bf48613c5f33e">DSpanR</a> = device_t&lt; ddc::ChunkSpan&lt; double, DDomR &gt; &gt;</td></tr>
+<tr class="memdesc:a985fdcf11d5e8b376d7bf48613c5f33e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a span of a field defined on a grid of radial values. <br /></td></tr>
+<tr class="separator:a985fdcf11d5e8b376d7bf48613c5f33e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf70fb321846f5f9542cd225e1e5034e"><td class="memItemLeft" align="right" valign="top"><a id="aaf70fb321846f5f9542cd225e1e5034e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#aaf70fb321846f5f9542cd225e1e5034e">DSpanRTheta</a> = device_t&lt; ddc::ChunkSpan&lt; double, DDomRTheta &gt; &gt;</td></tr>
+<tr class="memdesc:aaf70fb321846f5f9542cd225e1e5034e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a span of a field defined on a grid on a poloidal plane. <br /></td></tr>
+<tr class="separator:aaf70fb321846f5f9542cd225e1e5034e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4faf0d93aa9091b815145c0b2209187"><td class="memItemLeft" align="right" valign="top"><a id="ab4faf0d93aa9091b815145c0b2209187"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ab4faf0d93aa9091b815145c0b2209187">DViewMu</a> = ddc::ChunkSpan&lt; double const, <a class="el" href="classCollisionSpVparMu.html#a3bddfa9ca6e5da75e15de6dfa1650740">DDomMu</a>, std::experimental::layout_right, Kokkos::DefaultExecutionSpace::memory_space &gt;</td></tr>
 <tr class="memdesc:ab4faf0d93aa9091b815145c0b2209187"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a constant reference to a Chunk on GPU defined on a grid of magnetic moments. <br /></td></tr>
@@ -161,6 +169,9 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a18fd0b62e58ae075d17f43f2e9e77086"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a18fd0b62e58ae075d17f43f2e9e77086">deepcopy_poloidal_plane</a> (<a class="el" href="classCollisionSpVparMu.html#aaf70fb321846f5f9542cd225e1e5034e">DSpanRTheta</a> dst, InputDFieldRTheta src)</td></tr>
+<tr class="memdesc:a18fd0b62e58ae075d17f43f2e9e77086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the information in src (received as an input to the class) into a 2D field defined over (r, theta).  <a href="classCollisionSpVparMu.html#a18fd0b62e58ae075d17f43f2e9e77086">More...</a><br /></td></tr>
+<tr class="separator:a18fd0b62e58ae075d17f43f2e9e77086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a17bb6a7d441b90deae282a8a3af625"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a1a17bb6a7d441b90deae282a8a3af625">CollisionSpVparMu</a> (FDistribDomain fdistrib_domain, <a class="el" href="classCollisionSpVparMu.html#ab4faf0d93aa9091b815145c0b2209187">DViewMu</a> coeff_intdmu, <a class="el" href="classCollisionSpVparMu.html#acfcfcca283acbcb2c2545be4938b90a2">DViewVpar</a> coeff_intdvpar, InputDFieldR nustar, std::int8_t const collisions_interspecies, InputDFieldR rg, InputDFieldR safety_factor, InputDFieldRTheta B_norm)</td></tr>
 <tr class="memdesc:a1a17bb6a7d441b90deae282a8a3af625"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create instance of <a class="el" href="classCollisionSpVparMu.html" title="A class which computes the collision operator in (vpar,mu)">CollisionSpVparMu</a> class.  <a href="classCollisionSpVparMu.html#a1a17bb6a7d441b90deae282a8a3af625">More...</a><br /></td></tr>
 <tr class="separator:a1a17bb6a7d441b90deae282a8a3af625"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -319,6 +330,54 @@ template&lt;class FDistribDomain , class GridVpar , class GridMu , class InputDF
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a18fd0b62e58ae075d17f43f2e9e77086"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18fd0b62e58ae075d17f43f2e9e77086">&#9670;&nbsp;</a></span>deepcopy_poloidal_plane()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FDistribDomain , class GridVpar , class GridMu , class InputDFieldR , class InputDFieldRTheta &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCollisionSpVparMu.html">CollisionSpVparMu</a>&lt; FDistribDomain, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, InputDFieldR, InputDFieldRTheta &gt;::deepcopy_poloidal_plane </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCollisionSpVparMu.html#aaf70fb321846f5f9542cd225e1e5034e">DSpanRTheta</a>&#160;</td>
+          <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">InputDFieldRTheta&#160;</td>
+          <td class="paramname"><em>src</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy the information in src (received as an input to the class) into a 2D field defined over (r, theta). </p>
+<p>This function should be private but is public due to Kokkos restrictions.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">src</td><td>The source from which the data is copied. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">dst</td><td>The destination into which the data is copied. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a80886c8c7f6d07205e9e85d25a7f566b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a80886c8c7f6d07205e9e85d25a7f566b">&#9670;&nbsp;</a></span>operator()()</h2>
 
