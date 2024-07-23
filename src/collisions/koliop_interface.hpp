@@ -34,7 +34,6 @@ using MDL = Kokkos::View<
  * @param[in] the_theta_extent The number of points in the poloidal dimension.
  * @param[in] the_phi_extent The number of points in the toroidal dimension.
  * @param[in] the_species_extent The number of species.
- * @param[in] collision_interspecies Boolean that is equal to true if inter-species collisions are taken into account.
  * @param[in] ir_SOL_separatrix The index in the radial dimension where the SOL separatrix is found.
  * @param[in] mug The coordinates of the grid of magnetic moments.
  * @param[in] vparg The coordinates of the grid of parallel velocities.
@@ -60,7 +59,6 @@ using MDL = Kokkos::View<
         std::size_t the_theta_extent,
         std::size_t the_phi_extent,
         std::size_t the_species_extent,
-        std::int8_t collision_interspecies,
         std::int64_t ir_SOL_separatrix,
         const double* mug,
         const double* vparg,
