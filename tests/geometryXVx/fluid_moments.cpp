@@ -99,24 +99,14 @@ TEST(Physics, FluidMoments)
     });
 
     // density and temperature
-<<<<<<< HEAD
-    host_t<DFieldSpX> density_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    host_t<DFieldSpX> mean_velocity_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    host_t<DFieldSpX> temperature_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    host_t<DFieldVx> quadrature_coeffs
-            = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(
-                    ddc::get_domain<IDimVx>(allfdistribu));
-    Quadrature<Kokkos::DefaultHostExecutionSpace, IDimVx> integrate(quadrature_coeffs.span_view());
-=======
     DFieldSpX density_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
     DFieldSpX mean_velocity_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
     DFieldSpX temperature_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    host_t<DFieldVx> const quadrature_coeffs_host = trapezoid_quadrature_coefficients(gridvx);
-    auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
+
+    DFieldVx const quadrature_coeffs
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx);
     Quadrature<IDomainVx, IDomainSpXVx> integrate(quadrature_coeffs.span_cview());
->>>>>>> origin/main
+
     FluidMoments moments(integrate);
     ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
     moments(density_computed.span_view(), allfdistribu.span_cview(), FluidMoments::s_density);

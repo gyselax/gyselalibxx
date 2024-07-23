@@ -81,12 +81,12 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
             Kokkos::DefaultExecutionSpace(),
             integral_bsplines_host.span_view());
     // Solve matrix equation
-    Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
+    Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
             integral_bsplines_mirror_with_additional_allocation(
                     "integral_bsplines_mirror_with_additional_allocation",
                     builder.get_interpolation_matrix().required_number_of_rhs_rows(),
                     1);
-    Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
+    Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
             integral_bsplines_mirror = Kokkos::
                     subview(integral_bsplines_mirror_with_additional_allocation,
                             std::pair<std::size_t, std::size_t> {0, integral_bsplines.size()},
@@ -129,7 +129,10 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> neumann_spline_quadrature_coeffici
  * @return The coefficients which define the spline quadrature method in ND.
  */
 template <class ExecSpace, class... DDims, class... SplineBuilders>
-device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> neumann_spline_quadrature_coefficients(
+ddc::Chunk<
+        double,
+        ddc::DiscreteDomain<DDims...>,
+        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>> neumann_spline_quadrature_coefficients(
         ddc::DiscreteDomain<DDims...> const& domain,
         SplineBuilders const&... builders)
 {
@@ -144,7 +147,10 @@ device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> neumann_spline_quadr
             std::get<CoefficientChunk1D_h<ExecSpace, DDims>>(current_dim_coeffs_alloc)
                     .span_view()...);
     // Allocate ND coefficients
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<DDims...>>> coefficients_alloc(domain);
+    ddc::Chunk<
+        double,
+        ddc::DiscreteDomain<DDims...>,
+        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>> coefficients_alloc(domain);
     ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients_alloc_host(domain);
     ddc::ChunkSpan coefficients = coefficients_alloc_host.span_view();
 

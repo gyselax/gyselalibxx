@@ -46,7 +46,8 @@ host_t<DFieldX> mask_tanh(
     }
 
     if (normalized) {
-        host_t<DFieldX> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
+        host_t<DFieldX> const quadrature_coeffs
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
         host_t<Quadrature<IDomainX>> const integrate_x(quadrature_coeffs);
         double const coeff_norm
                 = integrate_x(Kokkos::DefaultHostExecutionSpace(), mask.span_cview());
