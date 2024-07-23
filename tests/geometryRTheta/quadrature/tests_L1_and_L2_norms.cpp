@@ -106,8 +106,8 @@ void launch_tests(
         std::array<std::array<double, 2>, 5> const& TOLs)
 {
     using SplineRBuilder = ddc::SplineBuilder<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesR,
             IDimR,
             ddc::BoundCond::GREVILLE, // boundary at r=0
@@ -115,8 +115,8 @@ void launch_tests(
             ddc::SplineSolver::LAPACK,
             IDimR>;
     using SplinePBuilder = ddc::SplineBuilder<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesP,
             IDimP,
             ddc::BoundCond::PERIODIC,
@@ -128,11 +128,13 @@ void launch_tests(
     SplinePBuilder p_builder(ddc::select<IDimP>(builder.interpolation_domain()));
     // Test spline quadrature: ------------------------------------------------------------------------
     // Instantiate a quadrature with coefficients where we added the Jacobian determinant.
-    DFieldRP const quadrature_coeffs = compute_coeffs_on_mapping(
-            mapping,
-            spline_quadrature_coefficients(grid, r_builder, p_builder));
-    host_t<Quadrature<IDomainRP>> quadrature(quadrature_coeffs.span_cview());
+    device_t<DFieldRP> spline_quad_coeff
+            = spline_quadrature_coefficients(grid, r_builder, p_builder);
+    DFieldRP spline_quad_coeffs_host = ddc::create_mirror_and_copy(spline_quad_coeff.span_view());
 
+    DFieldRP const quadrature_coeffs
+            = compute_coeffs_on_mapping(mapping, std::move(spline_quad_coeffs_host));
+    host_t<Quadrature<IDomainRP>> quadrature(quadrature_coeffs.span_cview());
 
     DFieldRP test(grid);
 

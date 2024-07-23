@@ -222,9 +222,14 @@ double compute_difference_L2_norm(
         difference_function(irp) = exact_function(irp) - allfdistribu_advected(irp);
     });
 
+    device_t<DFieldRP> trpz_quad_coeff
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(grid);
+    DFieldRP trpz_quad_coeffs_host = ddc::create_mirror_and_copy(trpz_quad_coeff.span_view());
+
     DFieldRP const quadrature_coeffs
-            = compute_coeffs_on_mapping(mapping, trapezoid_quadrature_coefficients(grid));
+            = compute_coeffs_on_mapping(mapping, std::move(trpz_quad_coeffs_host));
     host_t<Quadrature<IDomainRP>> quadrature(quadrature_coeffs.span_cview());
+
 
     double const normL2_exact_function = compute_L2_norm(quadrature, exact_function.span_view());
     double const normL2_difference_function
