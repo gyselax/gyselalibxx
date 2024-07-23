@@ -83,6 +83,8 @@ int main(int argc, char** argv)
 
 
     // --------- OPERATOR INITIALISATION ---------
+    std::int8_t const collisions_interspecies
+            = PCpp_bool(conf_collision, ".CollisionsInfo.collisions_interspecies");
     // ---> Initialisation of the Collision operator
     // nustar fixed to 1. => normalisation of time is equal to 1./nustar
     double const nustar = 1.0;
@@ -108,6 +110,7 @@ int main(int argc, char** argv)
             coeff_intdmu.span_cview(),
             coeff_intdvpar.span_cview(),
             nustar,
+            collisions_interspecies,
             rg,
             safety_factor,
             B_norm);

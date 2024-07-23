@@ -229,6 +229,8 @@ public:
      *      quadrature coefficient in vpar direction
      * @param[in] nustar
      *      radial profile of collisionality
+     * @param[in] collisions_interspecies
+     *      boolean that is equal to true if inter-species collisions are taken into account
      * @param[in] rg
      *      radial profile of the grid. If size(nustar)==1, forced to 1. because already included in nustar definition 
      *      [TODO] See if this quantity cannot be included in nustar definition
@@ -242,6 +244,7 @@ public:
             DViewMu coeff_intdmu,
             DViewVpar coeff_intdvpar,
             InputDFieldR nustar,
+            std::int8_t const collisions_interspecies,
             InputDFieldR rg,
             InputDFieldR safety_factor,
             InputDFieldRTheta B_norm)
@@ -332,6 +335,7 @@ public:
                 n_theta,
                 n_batch,
                 n_sp,
+                collisions_interspecies,
                 /* the_local_domain_r_offset */ 0 + n_r - 1,
                 m_mug.data_handle(),
                 m_vparg.data_handle(),
