@@ -18,6 +18,9 @@ SpeciesInfo:
   temperature_eq: 1.
   mean_velocity_eq: 0.1
 
+CollisionsInfo:
+  collisions_interspecies: true
+
 Algorithm:
   deltat: 0.0001    # Attention: must be < 1.e-2 because plays the role of nustar here
   nbiter: 10000     # Fixed such that final time = 1/nustar
