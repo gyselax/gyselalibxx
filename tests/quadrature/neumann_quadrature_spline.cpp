@@ -30,8 +30,8 @@ struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
 };
 
 using SplineXBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesX,
         IDimX,
         SplineXBoundary,
@@ -98,8 +98,8 @@ double compute_error(int n_elems)
     using GrevillePointsY = typename ComputeErrorTraits<N>::GrevillePointsY;
     using IDimY = typename ComputeErrorTraits<N>::IDimY;
     using SplineYBuilder = ddc::SplineBuilder<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesY,
             IDimY,
             ddc::BoundCond::HERMITE,
