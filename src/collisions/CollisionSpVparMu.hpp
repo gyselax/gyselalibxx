@@ -167,6 +167,10 @@ public:
     using DFieldRTheta = device_t<ddc::Chunk<double, DDomRTheta>>;
     /// Type alias for a field on a grid of species, poloidal plane and parallel velocities
     using DFieldSpRThetaVpar = device_t<ddc::Chunk<double, DDomSpRThetaVpar>>;
+    /// Type alias for a span of a field defined on a grid of radial values
+    using DSpanR = device_t<ddc::ChunkSpan<double, DDomR>>;
+    /// Type alias for a span of a field defined on a grid on a poloidal plane
+    using DSpanRTheta = device_t<ddc::ChunkSpan<double, DDomRTheta>>;
     /// Type alias for a constant reference to a Chunk on GPU defined on a grid of magnetic moments.
     using DViewMu = ddc::ChunkSpan<
             double const,
@@ -186,33 +190,47 @@ public:
     using FDistribSpan = device_t<ddc::ChunkSpan<double, FDistribDomain>>;
 
 private:
-    template <class GridR, class SrcType>
-    void deepcopy_1d(device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<GridR>>> dst, SrcType src)
+    /**
+     * @brief Copy the information in src (received as an input to the class) into a 1D radial profile.
+     *
+     * @param[in] src The source from which the data is copied.
+     * @param[out] dst The destination into which the data is copied.
+     */
+    void deepcopy_radial_profile(DSpanR dst, InputDFieldR src)
     {
         if constexpr (collisions_dimensions::is_spoofed_dim_v<GridR>) {
-            ddc::parallel_fill(dst, src);
+            ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), dst, src);
         } else {
             ddc::parallel_deepcopy(dst, src);
         }
     }
 
-    template <class GridR, class GridTheta, class SrcType>
-    void deepcopy_2d(
-            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<GridR, GridTheta>>> dst,
-            SrcType src)
+public:
+    /**
+     * @brief Copy the information in src (received as an input to the class) into a 2D field defined
+     * over (r, theta).
+     * This function should be private but is public due to Kokkos restrictions.
+     *
+     * @param[in] src The source from which the data is copied.
+     * @param[out] dst The destination into which the data is copied.
+     */
+    void deepcopy_poloidal_plane(DSpanRTheta dst, InputDFieldRTheta src)
     {
         if constexpr ((collisions_dimensions::is_spoofed_dim_v<GridR>)&&(
                               collisions_dimensions::is_spoofed_dim_v<GridTheta>)) {
-            ddc::parallel_fill(dst, src);
+            ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), dst, src);
         } else if constexpr ((!collisions_dimensions::is_spoofed_dim_v<GridR>)&&(
                                      !collisions_dimensions::is_spoofed_dim_v<GridTheta>)) {
             ddc::parallel_deepcopy(dst, src);
         } else {
             using NonSpoofDim = std::
                     conditional_t<collisions_dimensions::is_spoofed_dim_v<GridR>, GridTheta, GridR>;
-            ddc::parallel_for_each(dst.domain(), [&](ddc::DiscreteElement<GridR, GridTheta> idx) {
-                dst(idx) = src(ddc::select<NonSpoofDim>(idx));
-            });
+            ddc::parallel_for_each(
+                    Kokkos::DefaultExecutionSpace(),
+                    dst.domain(),
+                    KOKKOS_LAMBDA(ddc::DiscreteElement<GridR, GridTheta> idx) {
+                        dst(idx) = src(ddc::select<NonSpoofDim>(idx));
+                    });
         }
     }
 
@@ -229,6 +247,8 @@ public:
      *      quadrature coefficient in vpar direction
      * @param[in] nustar
      *      radial profile of collisionality
+     * @param[in] collisions_interspecies
+     *      boolean that is equal to true if inter-species collisions are taken into account
      * @param[in] rg
      *      radial profile of the grid. If size(nustar)==1, forced to 1. because already included in nustar definition 
      *      [TODO] See if this quantity cannot be included in nustar definition
@@ -242,6 +262,7 @@ public:
             DViewMu coeff_intdmu,
             DViewVpar coeff_intdvpar,
             InputDFieldR nustar,
+            std::int8_t const collisions_interspecies,
             InputDFieldR rg,
             InputDFieldR safety_factor,
             InputDFieldRTheta B_norm)
@@ -320,10 +341,10 @@ public:
         std::size_t const n_sp = ddc::select<Species>(fdistrib_domain).size();
         std::size_t const n_batch = fdistrib_domain.size() / (n_mu * n_vpar * n_r * n_theta * n_sp);
 
-        deepcopy_1d<GridR>(m_nustar.span_view(), nustar);
-        deepcopy_1d<GridR>(m_rg.span_view(), rg);
-        deepcopy_1d<GridR>(m_safety_factor.span_view(), safety_factor);
-        deepcopy_2d<GridR, GridTheta>(m_B_norm.span_view(), B_norm);
+        deepcopy_radial_profile(m_nustar.span_view(), nustar);
+        deepcopy_radial_profile(m_rg.span_view(), rg);
+        deepcopy_radial_profile(m_safety_factor.span_view(), safety_factor);
+        deepcopy_poloidal_plane(m_B_norm.span_view(), B_norm);
 
         m_operator_handle = koliop_interface::DoOperatorInitialization(
                 n_mu,
@@ -332,6 +353,7 @@ public:
                 n_theta,
                 n_batch,
                 n_sp,
+                collisions_interspecies,
                 /* the_local_domain_r_offset */ 0 + n_r - 1,
                 m_mug.data_handle(),
                 m_vparg.data_handle(),
