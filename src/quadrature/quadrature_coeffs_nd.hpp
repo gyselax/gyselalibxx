@@ -71,5 +71,5 @@ quadrature_coeffs_nd(
                                    ddc::select<DDims>(idim))
                            * ... * 1);
             });
-    return std::move(coefficients_alloc);
+    return coefficients_alloc;
 }

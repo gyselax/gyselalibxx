@@ -166,5 +166,5 @@ neumann_spline_quadrature_coefficients(
     Kokkos::deep_copy(
             coefficients_alloc.allocation_kokkos_view(),
             coefficients_alloc_host.allocation_kokkos_view());
-    return std::move(coefficients_alloc);
+    return coefficients_alloc;
 }

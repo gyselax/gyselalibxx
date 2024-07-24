@@ -57,7 +57,7 @@ trapezoid_quadrature_coefficients_1d(ddc::DiscreteDomain<IDim> const& domain)
                 }
             });
 
-    return std::move(coefficients_alloc);
+    return coefficients_alloc;
 }
 
 /**

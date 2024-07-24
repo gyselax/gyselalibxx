@@ -52,7 +52,7 @@ simpson_quadrature_coefficients_1d(ddc::DiscreteDomain<IDim> const& domain)
                     coefficients(domain.back()) += 2. / 3. * dx_r;
                 }
             });
-    return std::move(coefficients_alloc);
+    return coefficients_alloc;
 }
 
 /**
