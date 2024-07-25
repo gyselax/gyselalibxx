@@ -1,5 +1,9 @@
 var NAVTREEINDEX6 =
 {
+"src_geometryRTheta.html":[8,3],
+"src_geometryRTheta_advection.html":[8,3,0],
+"src_geometryRTheta_advection.html#autotoc_md37":[1,18],
+"src_geometryRTheta_advection.html#autotoc_md38":[1,19],
 "src_geometryRTheta_advection.html#autotoc_md39":[1,20],
 "src_geometryRTheta_advection.html#autotoc_md40":[1,21],
 "src_geometryRTheta_advection.html#autotoc_md41":[8,3,0,5],
@@ -245,9 +249,5 @@ var NAVTREEINDEX6 =
 "tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__Polar_Poisson_solver":[11,2,2,0],
 "tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__References":[11,2,2,1],
 "transpose_8hpp_source.html":[14,0,18,4],
-"trapezoid__quadrature_8hpp.html":[14,0,15,6],
-"trapezoid__quadrature_8hpp.html#a73588b65e152caa528b76e0906b82ccf":[14,0,15,6,0],
-"trapezoid__quadrature_8hpp.html#a9b37968b97363d75ad6401309016c8f9":[14,0,15,6,1],
-"trapezoid__quadrature_8hpp_source.html":[14,0,15,6],
-"utils__tools_8hpp.html":[14,0,18,5]
+"trapezoid__quadrature_8hpp.html":[14,0,15,6]
 };

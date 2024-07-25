@@ -1,5 +1,9 @@
 var NAVTREEINDEX5 =
 {
+"dir_d63f94c6fea620ecaa40680f440bf243.html":[14,0,8,4],
+"dir_da2f237b7bd857923650b6fc217c2993.html":[14,0,6,2],
+"dir_ddf03f4326ec75ccdd8992e1fdad5583.html":[14,1,0,0],
+"dir_e6145dbf25073ae9b52bad64393dd5e8.html":[14,0,12,0],
 "dir_eb1cd5727a7c74bc255fa4546c695614.html":[14,0,7,2],
 "dir_eb7da54727e91e3ad0949acc1ce0f18c.html":[14,0,12],
 "dir_f10735b06a3a00da032ce27e7b56a5aa.html":[14,0,6,2,1],
@@ -121,7 +125,7 @@ var NAVTREEINDEX5 =
 "itimestepper_8hpp_source.html":[14,0,17,2],
 "ivlasovsolver_8hpp_source.html":[14,0,8,4,0],
 "kinetic__source_8hpp_source.html":[14,0,6,5,4],
-"koliop__interface_8hpp_source.html":[14,0,1,1],
+"koliop__interface_8hpp_source.html":[14,0,1,2],
 "krook__source__adaptive_8hpp_source.html":[14,0,6,5,5],
 "krook__source__constant_8hpp_source.html":[14,0,6,5,6],
 "mask__tanh_8hpp_source.html":[14,0,6,5,7],
@@ -245,9 +249,5 @@ var NAVTREEINDEX5 =
 "src_data_types.html#src_data_types__DerivField":[8,1,1],
 "src_data_types.html#src_data_types__VectorField":[8,1,0],
 "src_geometry5D.html":[8,2],
-"src_geometry5D_geometry.html":[8,2,0],
-"src_geometryRTheta.html":[8,3],
-"src_geometryRTheta_advection.html":[8,3,0],
-"src_geometryRTheta_advection.html#autotoc_md37":[1,18],
-"src_geometryRTheta_advection.html#autotoc_md38":[1,19]
+"src_geometry5D_geometry.html":[8,2,0]
 };

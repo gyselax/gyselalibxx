@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"classMatrixBatchEll.html#a4e9af3104dc41b66da9dd69f3ea4224d":[13,144,2],
+"classMatrixBatchEll.html#a972e124276cf81e393a6590d53986a41":[13,144,7],
+"classMatrixBatchEll.html#aa3d7d4b0603c631839070708ff574ba6":[13,144,4],
 "classMatrixBatchEll.html#aaef2264db89e99beb1a012d190e95ecc":[13,144,0],
 "classMatrixBatchEll.html#ad844ef96e8bc9033c931eb318d1f1e54":[13,144,3],
 "classMatrixBatchEll.html#ade9b19aa5be23b68a1f9d8df6a4244bb":[13,144,5],
@@ -91,8 +94,8 @@ var NAVTREEINDEX3 =
 "classMaxwellianEquilibrium.html#a5f657dcdbd3aa11ddeef82f44bb87eb0":[13,146,4],
 "classMaxwellianEquilibrium.html#a7052573b3a3cb1a05f8e8bf3911bb293":[13,146,15],
 "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[13,146,1],
-"classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[13,146,3],
 "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[13,146,5],
+"classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[13,146,3],
 "classMaxwellianEquilibrium.html#a9d987a36ab8c0610b39397b5576da6e3":[13,146,16],
 "classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99":[13,146,10],
 "classMaxwellianEquilibrium.html#aa7440e168a827388920b554888c65c99":[13,146,14],
@@ -236,8 +239,8 @@ var NAVTREEINDEX3 =
 "classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[13,173,2],
 "classQNSolver.html#aa468e237e8cb2c752e45171eddaf8d75":[13,173,5],
 "classQNSolver.html#aed8063537a8c1803a2fa92bac6e9c3fe":[13,173,4],
-"classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[13,173,3],
 "classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[13,173,1],
+"classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[13,173,3],
 "classQuadrature.html":[13,174],
 "classQuadrature.html#a7914430fca202708cbb38adb9746f28b":[13,174,0],
 "classQuadrature.html#a7919d9fe623cc438c21c426f061f8205":[13,174,2],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "classRK2.html#a29590ce29977600f0a17c7cdfcbb3584":[13,187,0],
 "classRK2.html#a44c1f10dc1b14ad6dbad54cd596704f4":[13,187,2],
 "classRK2.html#aa215475ac2ff63e25d2451175cff5759":[13,187,1],
-"classRK2.html#af634097606b3d5f2b54ca3311561ecc1":[13,187,3],
-"classRK3.html":[13,188],
-"classRK3.html#a41b039f09ee3dd37f2a21d9e4a6a518e":[13,188,2],
-"classRK3.html#a95b8128c3df2bf35ec9634e83c505aa9":[13,188,3]
+"classRK2.html#af634097606b3d5f2b54ca3311561ecc1":[13,187,3]
 };

@@ -1,5 +1,8 @@
 var NAVTREEINDEX4 =
 {
+"classRK3.html":[13,188],
+"classRK3.html#a41b039f09ee3dd37f2a21d9e4a6a518e":[13,188,2],
+"classRK3.html#a95b8128c3df2bf35ec9634e83c505aa9":[13,188,3],
 "classRK3.html#ab45cc74d736d44303fb755d77976bf14":[13,188,1],
 "classRK3.html#ab75113e8885dfdbc7c41494db8d2f269":[13,188,0],
 "classRK4.html":[13,189],
@@ -100,8 +103,8 @@ var NAVTREEINDEX4 =
 "classSplitRightHandSideSolver.html#a2e6bd2d8daa2dc2d7883c1dd47cb9b4a":[13,197,1],
 "classSplitRightHandSideSolver.html#a83cc73ba72845154b30ac9fd8cc376e6":[13,197,2],
 "classSplitVlasovSolver.html":[13,198],
-"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[13,198,3],
 "classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[13,198,1],
+"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[13,198,3],
 "classSplitVlasovSolver.html#a3ae6624950e6d8126e848ee52eab8a22":[13,198,5],
 "classSplitVlasovSolver.html#a8a0d9e743da738c69f549c68e1696267":[13,198,2],
 "classSplitVlasovSolver.html#ad4843f29aef761e78933df55034e7aa3":[13,198,4],
@@ -168,6 +171,7 @@ var NAVTREEINDEX4 =
 "classVortexMergerEquilibria.html#a8761babf41d8e77ecf9159f142a10091":[13,214,2],
 "classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb":[13,214,1],
 "classVortexMergerEquilibria.html#aeb464be70e3ae3051b5563f94246b703":[13,214,0],
+"collisions__dimensions_8hpp_source.html":[14,0,1,0],
 "collisions__inter_8hpp_source.html":[14,0,6,5,0],
 "collisions__intra_8hpp_source.html":[14,0,6,5,1],
 "collisions__utils_8hpp_source.html":[14,0,6,5,2],
@@ -245,9 +249,5 @@ var NAVTREEINDEX4 =
 "dir_ce24321f9c558a1bad9461427b2f6e52.html":[14,0,9],
 "dir_ceabc4f5edb66a2267b7200c3d557d63.html":[14,0,6,3],
 "dir_d19a9aef731ec5e9b746a373b6509003.html":[14,0,3],
-"dir_d31be2e2b45780a4898e3e32ae637d26.html":[14,0,5,0],
-"dir_d63f94c6fea620ecaa40680f440bf243.html":[14,0,8,4],
-"dir_da2f237b7bd857923650b6fc217c2993.html":[14,0,6,2],
-"dir_ddf03f4326ec75ccdd8992e1fdad5583.html":[14,1,0,0],
-"dir_e6145dbf25073ae9b52bad64393dd5e8.html":[14,0,12,0]
+"dir_d31be2e2b45780a4898e3e32ae637d26.html":[14,0,5,0]
 };
