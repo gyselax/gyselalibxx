@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometryMX/fluidsolver/nullfluidsolver.hpp Source File</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometryMX/fluidtransportsolver/nullfluidsolver.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -109,9 +109,9 @@ $(document).ready(function(){initNavTree('nullfluidsolver_8hpp_source.html','');
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ifluidsolver.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ifluidtransportsolver.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classNullFluidSolver.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullFluidSolver.html">NullFluidSolver</a> : <span class="keyword">public</span> <a class="code" href="classIFluidSolver.html">IFluidSolver</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classNullFluidSolver.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullFluidSolver.html">NullFluidSolver</a> : <span class="keyword">public</span> <a class="code" href="classIFluidTransportSolver.html">IFluidTransportSolver</a></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classNullFluidSolver.html#ae0d835e311caf4c28ce0149100872122">   21</a></span>&#160;    <a class="code" href="classNullFluidSolver.html#ae0d835e311caf4c28ce0149100872122">NullFluidSolver</a>(IDomainSp <span class="keyword">const</span>&amp; dom_fluidsp);</div>
@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('nullfluidsolver_8hpp_source.html','');
 <div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classNullFluidSolver.html#a02b59c028368fca8f86367cad9609bbc">   35</a></span>&#160;    DSpanSpMX <a class="code" href="classNullFluidSolver.html#a02b59c028368fca8f86367cad9609bbc">operator()</a>(DSpanSpMX fluid_moments, DViewSpXVx allfdistribu, DViewX efield, <span class="keywordtype">double</span> dt)</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
-<div class="ttc" id="aclassIFluidSolver_html"><div class="ttname"><a href="classIFluidSolver.html">IFluidSolver</a></div><div class="ttdoc">An abstract class for solving a fluid model.</div><div class="ttdef"><b>Definition:</b> ifluidsolver.hpp:11</div></div>
+<div class="ttc" id="aclassIFluidTransportSolver_html"><div class="ttname"><a href="classIFluidTransportSolver.html">IFluidTransportSolver</a></div><div class="ttdoc">An abstract class for solving the transport of a fluid model.</div><div class="ttdef"><b>Definition:</b> ifluidtransportsolver.hpp:11</div></div>
 <div class="ttc" id="aclassNullFluidSolver_html"><div class="ttname"><a href="classNullFluidSolver.html">NullFluidSolver</a></div><div class="ttdoc">A dommy class that solves a fluid model.</div><div class="ttdef"><b>Definition:</b> nullfluidsolver.hpp:14</div></div>
 <div class="ttc" id="aclassNullFluidSolver_html_a02b59c028368fca8f86367cad9609bbc"><div class="ttname"><a href="classNullFluidSolver.html#a02b59c028368fca8f86367cad9609bbc">NullFluidSolver::operator()</a></div><div class="ttdeci">DSpanSpMX operator()(DSpanSpMX fluid_moments, DViewSpXVx allfdistribu, DViewX efield, double dt) const override</div><div class="ttdoc">Solves a dummy fluid model on a timestep dt.</div></div>
 <div class="ttc" id="aclassNullFluidSolver_html_ae0d835e311caf4c28ce0149100872122"><div class="ttname"><a href="classNullFluidSolver.html#ae0d835e311caf4c28ce0149100872122">NullFluidSolver::NullFluidSolver</a></div><div class="ttdeci">NullFluidSolver(IDomainSp const &amp;dom_fluidsp)</div><div class="ttdoc">The constructor for the class.</div></div>
@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('nullfluidsolver_8hpp_source.html','');
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_a2bb6054debc127821c0784e49f1530c.html">geometryXVx</a></li><li class="navelem"><a class="el" href="dir_da2f237b7bd857923650b6fc217c2993.html">geometryMX</a></li><li class="navelem"><a class="el" href="dir_f10735b06a3a00da032ce27e7b56a5aa.html">fluidsolver</a></li><li class="navelem"><b>nullfluidsolver.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_a2bb6054debc127821c0784e49f1530c.html">geometryXVx</a></li><li class="navelem"><a class="el" href="dir_da2f237b7bd857923650b6fc217c2993.html">geometryMX</a></li><li class="navelem"><a class="el" href="dir_11b58978920713630aec331a5d926557.html">fluidtransportsolver</a></li><li class="navelem"><b>nullfluidsolver.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

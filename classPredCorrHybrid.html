@@ -121,19 +121,19 @@ Inheritance diagram for PredCorrHybrid:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aae7782821ebc9c68e3f3c4bb26302c25"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorrHybrid.html#aae7782821ebc9c68e3f3c4bb26302c25">PredCorrHybrid</a> (<a class="el" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> const &amp;boltzmann_solver, <a class="el" href="classIFluidSolver.html">IFluidSolver</a> const &amp;fluid_solver, <a class="el" href="classIQNSolver.html">IQNSolver</a> const &amp;poisson_solver)</td></tr>
-<tr class="memdesc:aae7782821ebc9c68e3f3c4bb26302c25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the predictor-corrector class.  <a href="classPredCorrHybrid.html#aae7782821ebc9c68e3f3c4bb26302c25">More...</a><br /></td></tr>
-<tr class="separator:aae7782821ebc9c68e3f3c4bb26302c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01e466a8ca5ea62d40c888c566e99779"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorrHybrid.html#a01e466a8ca5ea62d40c888c566e99779">PredCorrHybrid</a> (<a class="el" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> const &amp;boltzmann_solver, <a class="el" href="classIFluidTransportSolver.html">IFluidTransportSolver</a> const &amp;fluid_solver, <a class="el" href="classIQNSolver.html">IQNSolver</a> const &amp;poisson_solver, <a class="el" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a> const &amp;kinetic_fluid_coupling)</td></tr>
+<tr class="memdesc:a01e466a8ca5ea62d40c888c566e99779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the predictor-corrector class.  <a href="classPredCorrHybrid.html#a01e466a8ca5ea62d40c888c566e99779">More...</a><br /></td></tr>
+<tr class="separator:a01e466a8ca5ea62d40c888c566e99779"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4247e382ebf03258bc1ad34171d297a9"><td class="memItemLeft" align="right" valign="top">DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorrHybrid.html#a4247e382ebf03258bc1ad34171d297a9">operator()</a> (DSpanSpXVx allfdistribu, DSpanSpMX fluid_moments, double time_start, double dt, int steps=1) const override</td></tr>
 <tr class="memdesc:a4247e382ebf03258bc1ad34171d297a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Boltzmann-Poisson-fluid system.  <a href="classPredCorrHybrid.html#a4247e382ebf03258bc1ad34171d297a9">More...</a><br /></td></tr>
 <tr class="separator:a4247e382ebf03258bc1ad34171d297a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that solves a Boltzmann-Poisson system of equations coupled to a fluid particles model using a predictor-corrector scheme. </p>
-<p>A class that solves a Boltzmann-Poisson system with a predictor corrector scheme. This scheme consists in estimating the electric potential after a time interval of a half-timestep. This potential is then used to compute the value of the distribution function at time t+dt, and the value of the fluid moments for the fluid species. dt is the timestep of the simulation. </p>
+<p>A class that solves a Boltzmann-Poisson system with a predictor corrector scheme. This scheme consists in estimating the electric potential after a time interval of a half-timestep. This potential is then used to compute the value of the distribution function at time t+dt, and the value of the fluid moments for the fluid species. The fluid moments value is computed first without the source term S_n,N(x) via the fluid_solver. Then, a coupling between the distribution function and the fluid moments is computed with the kinetic_fluid_coupling function. dt is the timestep of the simulation. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aae7782821ebc9c68e3f3c4bb26302c25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae7782821ebc9c68e3f3c4bb26302c25">&#9670;&nbsp;</a></span>PredCorrHybrid()</h2>
+<a id="a01e466a8ca5ea62d40c888c566e99779"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01e466a8ca5ea62d40c888c566e99779">&#9670;&nbsp;</a></span>PredCorrHybrid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,14 +147,20 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classIFluidSolver.html">IFluidSolver</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classIFluidTransportSolver.html">IFluidTransportSolver</a> const &amp;&#160;</td>
           <td class="paramname"><em>fluid_solver</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classIQNSolver.html">IQNSolver</a> const &amp;&#160;</td>
-          <td class="paramname"><em>poisson_solver</em>&#160;</td>
+          <td class="paramname"><em>poisson_solver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a> const &amp;&#160;</td>
+          <td class="paramname"><em>kinetic_fluid_coupling</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -170,6 +176,7 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">boltzmann_solver</td><td>A solver for a Boltzmann equation. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fluid_solver</td><td>A solver for a fluid model. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">poisson_solver</td><td>A solver for a Quasi-Neutrality equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">kinetic_fluid_coupling</td><td>A solver of the neutral source term in both the Boltzmann and fluid equations. </td></tr>
   </table>
   </dd>
 </dl>

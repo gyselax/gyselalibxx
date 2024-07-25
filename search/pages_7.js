@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['mappings_1455',['Mappings',['../vendor_sll_include_sll_mapping.html',1,'vendor_sll']]],
-  ['multipatch_1456',['Multipatch',['../src_multipatch.html',1,'src']]]
+  ['kinetic_20fluid_20coupling_20_28mx_29_1469',['Kinetic fluid coupling (MX)',['../src_geometryXVx_geometryMX_kineticfluidcoupling.html',1,'src_geometryXVx_geometryMX']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometryMX/fluidsolver Directory Reference</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometryMX/fluidtransportsolver/ifluidtransportsolver.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('dir_f10735b06a3a00da032ce27e7b56a5aa.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('ifluidtransportsolver_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,15 +100,34 @@ $(document).ready(function(){initNavTree('dir_f10735b06a3a00da032ce27e7b56a5aa.h
 
 <div class="header">
   <div class="headertitle">
-<div class="title">fluidsolver Directory Reference</div>  </div>
+<div class="title">ifluidtransportsolver.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classIFluidTransportSolver.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIFluidTransportSolver.html">IFluidTransportSolver</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIFluidTransportSolver.html">IFluidTransportSolver</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classIFluidTransportSolver.html#af645e949db74cd0e77c9b00abf3817de">   25</a></span>&#160;    <span class="keyword">virtual</span> DSpanSpMX <a class="code" href="classIFluidTransportSolver.html#af645e949db74cd0e77c9b00abf3817de">operator()</a>(</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            DSpanSpMX fluid_moments,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            DViewSpXVx allfdistribu,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            DViewX efield,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
+<div class="ttc" id="aclassIFluidTransportSolver_html"><div class="ttname"><a href="classIFluidTransportSolver.html">IFluidTransportSolver</a></div><div class="ttdoc">An abstract class for solving the transport of a fluid model.</div><div class="ttdef"><b>Definition:</b> ifluidtransportsolver.hpp:11</div></div>
+<div class="ttc" id="aclassIFluidTransportSolver_html_af645e949db74cd0e77c9b00abf3817de"><div class="ttname"><a href="classIFluidTransportSolver.html#af645e949db74cd0e77c9b00abf3817de">IFluidTransportSolver::operator()</a></div><div class="ttdeci">virtual DSpanSpMX operator()(DSpanSpMX fluid_moments, DViewSpXVx allfdistribu, DViewX efield, double dt) const =0</div><div class="ttdoc">Operator for solving the fluid model on one timestep.</div></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_a2bb6054debc127821c0784e49f1530c.html">geometryXVx</a></li><li class="navelem"><a class="el" href="dir_da2f237b7bd857923650b6fc217c2993.html">geometryMX</a></li><li class="navelem"><a class="el" href="dir_f10735b06a3a00da032ce27e7b56a5aa.html">fluidsolver</a></li>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_a2bb6054debc127821c0784e49f1530c.html">geometryXVx</a></li><li class="navelem"><a class="el" href="dir_da2f237b7bd857923650b6fc217c2993.html">geometryMX</a></li><li class="navelem"><a class="el" href="dir_11b58978920713630aec331a5d926557.html">fluidtransportsolver</a></li><li class="navelem"><b>ifluidtransportsolver.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

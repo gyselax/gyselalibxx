@@ -22,7 +22,7 @@ var NAVTREEINDEX0 =
 "bsl__predcorr__second__order__explicit_8hpp_source.html":[15,0,4,6,1],
 "bsl__predcorr__second__order__implicit_8hpp_source.html":[15,0,4,6,2],
 "bumpontailequilibrium_8hpp_source.html":[15,0,6,3,0],
-"charge__exchange_8hpp_source.html":[15,0,6,2,2,0],
+"charge__exchange_8hpp_source.html":[15,0,6,2,3,0],
 "circular__to__cartesian_8hpp_source.html":[15,2,0,0,0,0,2],
 "classAdvectionDomain.html":[14,1],
 "classAdvectionDomain.html#a8f912a4ebea56a3c2f5dc9426b1d62dd":[14,1,0],

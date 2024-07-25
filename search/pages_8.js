@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['neutral_20simulations_1457',['Neutral simulations',['../simulations_geometryXVx_neutrals.html',1,'simulations_geometryXVx']]]
+  ['mappings_1470',['Mappings',['../vendor_sll_include_sll_mapping.html',1,'vendor_sll']]],
+  ['multipatch_1471',['Multipatch',['../src_multipatch.html',1,'src']]]
 ];

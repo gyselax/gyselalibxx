@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['tests_20_3a_20geometry_20_28r_2c_20theta_29_1474',['Tests : Geometry (r, theta)',['../tests_geometryRTheta.html',1,'tests']]],
-  ['tests_20on_20spline_20interpolator_20in_20polar_20coordinates_1475',['Tests on spline interpolator in polar coordinates',['../tests_geometryRTheta_2d_spline_interpolator.html',1,'tests_geometryRTheta']]],
-  ['tests_20on_20the_202d_20polar_20advection_20operator_1476',['Tests on the 2D polar advection operator',['../tests_geometryRTheta_advection_2d_rp.html',1,'tests_geometryRTheta']]],
-  ['tests_20on_20the_202d_20polar_20poisson_20solver_1477',['Tests on the 2D polar poisson solver',['../tests_geometryRTheta_polar_poisson.html',1,'tests_geometryRTheta']]],
-  ['tests_20on_20the_20templated_20advection_20operators_1478',['Tests on the templated advection operators',['../tests_advection.html',1,'tests']]],
-  ['time_20integration_1479',['Time integration',['../src_geometryXVx_time_integration.html',1,'src_geometryXVx']]],
-  ['time_20integration_20hybrid_1480',['Time integration hybrid',['../src_geometryXVx_time_integration_hybrid.html',1,'src_geometryXVx']]],
-  ['time_20stepping_20methods_1481',['Time Stepping Methods',['../src_timestepper.html',1,'src']]]
+  ['selalib_2b_2b_1481',['Selalib++',['../vendor_sll.html',1,'']]],
+  ['sheath_20simulations_1482',['Sheath simulations',['../simulations_geometryXVx_sheath.html',1,'simulations_geometryXVx']]],
+  ['simulations_20in_20_28r_2c_20theta_29_20geometry_1483',['Simulations in (r, theta) geometry',['../simulations_geometryRTheta.html',1,'simulations']]],
+  ['simulations_20in_20_28x_2c_20vx_29_20geometry_1484',['Simulations in (x, vx) geometry',['../simulations_geometryXVx.html',1,'simulations']]],
+  ['simulations_20in_20_28x_2c_20y_29_20geometry_1485',['Simulations in (x, y) geometry',['../simulations_geometryXY.html',1,'simulations']]],
+  ['speciesinfo_20_28x_2c_20v_5fx_29_1486',['SpeciesInfo (x, v_x)',['../src_speciesinfo.html',1,'src']]],
+  ['spline_20interpolator_20in_20polar_20coordinates_1487',['Spline interpolator in polar coordinates',['../src_geometryRTheta_interpolation.html',1,'src_geometryRTheta']]],
+  ['spline_20on_20multipatch_20geometry_1488',['Spline on multipatch geometry',['../src_multipatch_spline.html',1,'src_multipatch']]]
 ];

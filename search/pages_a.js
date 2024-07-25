@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['quadrature_20methods_1462',['Quadrature Methods',['../src_quadrature.html',1,'src']]],
-  ['quasi_2dneutrality_20solver_1463',['Quasi-Neutrality Solver',['../src_geometryXVx_poisson.html',1,'src_geometryXVx'],['../src_geometryXYVxVy_poisson.html',1,'src_geometryXYVxVy']]]
+  ['parallelisation_1473',['Parallelisation',['../src_mpi_parallelisation.html',1,'src']]],
+  ['pde_20solvers_1474',['PDE Solvers',['../src_pde_solvers.html',1,'src']]],
+  ['polar_20poisson_20solver_1475',['Polar Poisson solver',['../src_geometryRTheta_poisson.html',1,'src_geometryRTheta']]],
+  ['predictor_2dcorrector_20methods_1476',['Predictor-corrector methods',['../src_geometryRTheta_time_solver.html',1,'src_geometryRTheta'],['../src_geometryXY_time_integration.html',1,'src_geometryXY']]]
 ];

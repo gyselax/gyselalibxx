@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: IFluidSolver Class Reference</title>
+<title>Gyselalib++: IKineticFluidCoupling Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classIFluidSolver.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classIKineticFluidCoupling.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -101,36 +101,35 @@ $(document).ready(function(){initNavTree('classIFluidSolver.html',''); initResiz
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classIFluidSolver-members.html">List of all members</a>  </div>
+<a href="classIKineticFluidCoupling-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">IFluidSolver Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">IKineticFluidCoupling Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>An abstract class for solving a fluid model.  
- <a href="classIFluidSolver.html#details">More...</a></p>
+<p>An abstract class representing a source for both the Boltzmann and neutral fluid equations.  
+ <a href="classIKineticFluidCoupling.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for IFluidSolver:</div>
+Inheritance diagram for IKineticFluidCoupling:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classIFluidSolver.png" usemap="#IFluidSolver_map" alt=""/>
-  <map id="IFluidSolver_map" name="IFluidSolver_map">
-<area href="classDiffusiveNeutralSolver.html" title="A class that solves a so-called &quot;pressure-diffusive&quot; fluid neutral model." alt="DiffusiveNeutralSolver" shape="rect" coords="0,56,140,80"/>
-<area href="classNullFluidSolver.html" title="A dommy class that solves a fluid model." alt="NullFluidSolver" shape="rect" coords="150,56,290,80"/>
+  <img src="classIKineticFluidCoupling.png" usemap="#IKineticFluidCoupling_map" alt=""/>
+  <map id="IKineticFluidCoupling_map" name="IKineticFluidCoupling_map">
+<area href="classKineticFluidCouplingSource.html" title="A class that describes a source of particles due to neutrals." alt="KineticFluidCouplingSource" shape="rect" coords="0,56,169,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae4388636639d82cb63f17c4abbdfc333"><td class="memItemLeft" align="right" valign="top">virtual DSpanSpMX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIFluidSolver.html#ae4388636639d82cb63f17c4abbdfc333">operator()</a> (DSpanSpMX fluid_moments, DViewSpXVx allfdistribu, DViewX efield, double dt) const =0</td></tr>
-<tr class="memdesc:ae4388636639d82cb63f17c4abbdfc333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for solving the fluid model on one timestep.  <a href="classIFluidSolver.html#ae4388636639d82cb63f17c4abbdfc333">More...</a><br /></td></tr>
-<tr class="separator:ae4388636639d82cb63f17c4abbdfc333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4c10051c1215e1e271edfb3587e4729"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIKineticFluidCoupling.html#aa4c10051c1215e1e271edfb3587e4729">operator()</a> (DSpanSpXVx const allfdistribu, DSpanSpMX neutrals, double const dt) const =0</td></tr>
+<tr class="memdesc:aa4c10051c1215e1e271edfb3587e4729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for applying the source term on the distribution function and neutral density.  <a href="classIKineticFluidCoupling.html#aa4c10051c1215e1e271edfb3587e4729">More...</a><br /></td></tr>
+<tr class="separator:aa4c10051c1215e1e271edfb3587e4729"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An abstract class for solving a fluid model. </p>
+<div class="textblock"><p>An abstract class representing a source for both the Boltzmann and neutral fluid equations. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae4388636639d82cb63f17c4abbdfc333"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4388636639d82cb63f17c4abbdfc333">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="aa4c10051c1215e1e271edfb3587e4729"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4c10051c1215e1e271edfb3587e4729">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -139,27 +138,21 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual DSpanSpMX IFluidSolver::operator() </td>
+          <td class="memname">virtual void IKineticFluidCoupling::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpMX&#160;</td>
-          <td class="paramname"><em>fluid_moments</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">DSpanSpXVx const&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewX&#160;</td>
-          <td class="paramname"><em>efield</em>, </td>
+          <td class="paramtype">DSpanSpMX&#160;</td>
+          <td class="paramname"><em>neutrals</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">double const&#160;</td>
           <td class="paramname"><em>dt</em>&#160;</td>
         </tr>
         <tr>
@@ -175,31 +168,31 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Operator for solving the fluid model on one timestep. </p>
+<p>Operator for applying the source term on the distribution function and neutral density. </p>
+<p>The source \(S\) acts on the distribution function following the evolution equation \(df/dt = S_{n,N}(x) * S_v(x,v)\) where \(S_{n,N}(x) = n_N(x) n_e(x) K_i(x) - n_i(x) n_e(x) K_r(x)\) \(S_v(x,v)\) is the sum of order 0 to 2 Hermite polynomials times a Maxwellian velocity distribution function.</p>
+<p>The source \(S\) acts on the neutral density following the evolution equation \(dn_N/dt = - S_n,N(x)\)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">fluid_moments</td><td>On input : a span referencing the fluid species. On output : a span referencing the fluid species updated after solving the fluid model on one timestep. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>A constant view referencing the distribution function. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">efield</td><td>A constant view referencing the electric field. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>On input: the initial value of the distribution function. On output: the value of the distribution function after solving the source evolution equation on one timestep. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">neutrals</td><td>On input: the initial value of the neutral density. On output: the value of the neutral density after solving the source evolution equation on one timestep. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The timestep. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a span referencing the fluid species after solving the fluid model on one timestep. </dd></dl>
 
-<p>Implemented in <a class="el" href="classDiffusiveNeutralSolver.html#abfa7ed6b9809fc0338cd689b7d8dd37e">DiffusiveNeutralSolver</a>, and <a class="el" href="classNullFluidSolver.html#a02b59c028368fca8f86367cad9609bbc">NullFluidSolver</a>.</p>
+<p>Implemented in <a class="el" href="classKineticFluidCouplingSource.html#a9d5052f324937fb7ae747d232be67999">KineticFluidCouplingSource</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometryMX/fluidsolver/<a class="el" href="ifluidsolver_8hpp_source.html">ifluidsolver.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometryMX/kineticfluidcoupling/<a class="el" href="ikineticfluidcoupling_8hpp_source.html">ikineticfluidcoupling.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classIFluidSolver.html">IFluidSolver</a></li>
+    <li class="navelem"><a class="el" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

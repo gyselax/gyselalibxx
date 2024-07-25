@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Fluid solvers (MX)</title>
+<title>Gyselalib++: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('src_geometryXVx_geometryMX_fluidsolver.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classKineticFluidCouplingSource.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -98,18 +98,23 @@ $(document).ready(function(){initNavTree('src_geometryXVx_geometryMX_fluidsolver
 </iframe>
 </div>
 
-<div class="PageDoc"><div class="header">
+<div class="header">
   <div class="headertitle">
-<div class="title">Fluid solvers (MX) </div>  </div>
+<div class="title">KineticFluidCouplingSource Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The <code>fluidsolver</code> folder contains code that allows solving for models that describe a species considered as fluid. Such a fluid species is described by moments of the distribution function (density, particle flux, energy...) rather than by a complete distribution function. Equations describing the time evolution of such a fluid moments are called <em>fluid equations</em>. Such fluid equations describe the conservation of fluid moments: conservation of density, particle flux, energy, etc.</p>
-<p>The currently implemented solvers are :</p><ul>
-<li><a class="el" href="classDiffusiveNeutralSolver.html" title="A class that solves a so-called &quot;pressure-diffusive&quot; fluid neutral model.">DiffusiveNeutralSolver</a></li>
-<li><a class="el" href="classNullFluidSolver.html" title="A dommy class that solves a fluid model.">NullFluidSolver</a> </li>
-</ul>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+
+<p>This is the complete list of members for <a class="el" href="classKineticFluidCouplingSource.html">KineticFluidCouplingSource</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html#a3e029b09d9cf27e28ca055eab21365bd">find_ion</a>(IDomainSp const dom_kinsp) const</td><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html">KineticFluidCouplingSource</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html#a16777fb8b2e74ebf6e986ade29fb0e65">get_derivative_allfdistribu</a>(DSpanSpXVx df, DViewSpXVx allfdistribu, DViewSpXVx velocity_shape_source) const</td><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html">KineticFluidCouplingSource</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html#a4ac5bff808c0dd03444c821a14c0fac9">get_derivative_neutrals</a>(DSpanSpMX dn, DViewSpMX neutrals, DViewX density_source_neutral) const</td><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html">KineticFluidCouplingSource</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html#a338658107a16732ecdbcdcc3ad7182e8">get_source_term</a>(DSpanX density_source_neutral, DViewSpX kinsp_density, DViewSpMX neutrals, DViewSpX ionization, DViewSpX recombination) const</td><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html">KineticFluidCouplingSource</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html#adf5be505b43635eefede1811ee25c4a8">KineticFluidCouplingSource</a>(double density_coupling_coeff, double momentum_coupling_coeff, double energy_coupling_coeff, IReactionRate const &amp;ionization, IReactionRate const &amp;recombination, double normalization_coeff, DViewVx const &amp;quadrature_coeffs)</td><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html">KineticFluidCouplingSource</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html#a9d5052f324937fb7ae747d232be67999">operator()</a>(DSpanSpXVx const allfdistribu, DSpanSpMX neutrals, double const dt) const override</td><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html">KineticFluidCouplingSource</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~IKineticFluidCoupling</b>()=default (defined in <a class="el" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a>)</td><td class="entry"><a class="el" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~KineticFluidCouplingSource</b>() override=default (defined in <a class="el" href="classKineticFluidCouplingSource.html">KineticFluidCouplingSource</a>)</td><td class="entry"><a class="el" href="classKineticFluidCouplingSource.html">KineticFluidCouplingSource</a></td><td class="entry"></td></tr>
+</table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

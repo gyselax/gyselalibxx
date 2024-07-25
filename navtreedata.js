@@ -83,11 +83,11 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCollisionSpVparMu.html#ae386a8b960be061d4898a812b37002ae",
 "classElectrostaticalPotentialSimulation.html#a150cdef92eaaa9333e84de31bcd69b86",
-"classMatrix.html#ab1bd5ff2b3826377f400a21d64c701fe",
-"classPredCorrHybrid.html#ac1f39a97a786b52bee7c942b4eebdb30",
-"dir_7702757503aa2c0657bebaab467f2eaa.html",
-"simulations_geometryXY_guiding_center.html#autotoc_md32",
-"structcartesian__product__impl_3_01std_1_1tuple_3_01std_1_1tuple_3_01HeadArgs_8_8_8_01_4_00_01Ta2e54ffdefaa524ceede7a120148cdbe5.html"
+"classManufacturedPoissonTest.html#a9b5c16b99b6b74af7f724451fecd1122",
+"classPreallocatableSplineInterpolatorRP.html#aedfcd0cff398fd0d6766aeac6b6bb366",
+"dir_4877fc66b34f0bed3307622046ff6a0c.html",
+"simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Test_case_-_vortex_merger",
+"structRDimVy.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
