@@ -4,13 +4,13 @@
 
 #include <geometry.hpp>
 
-#include "ifluidsolver.hpp"
+#include "ifluidtransportsolver.hpp"
 
 /**
  * @brief A dommy class that solves a fluid model.
  * The fluid model leaves the moments of the fluid species unchanged.
  */
-class NullFluidSolver : public IFluidSolver
+class NullFluidSolver : public IFluidTransportSolver
 {
 public:
     /**
