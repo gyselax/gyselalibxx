@@ -12,6 +12,7 @@ add_executable(unit_tests_geometryMX_${GEOMETRY_VARIANT}
     predcorr_hybrid.cpp
     diffusiveneutrals.cpp
     ratecoefficients.cpp
+    kineticfluidcoupling.cpp
 )
 
 target_link_libraries(unit_tests_geometryMX_${GEOMETRY_VARIANT}

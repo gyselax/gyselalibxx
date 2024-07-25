@@ -68,10 +68,8 @@ void DiffusiveNeutralSolver::get_derivative(
     // compute diffusive model equation terms
     DFieldSpX density_equilibrium_velocity_alloc(dom_fluidspx);
     DFieldSpX diffusion_temperature_alloc(dom_fluidspx);
-    DFieldSpX density_source_alloc(dom_fluidspx);
     ddc::ChunkSpan density_equilibrium_velocity = density_equilibrium_velocity_alloc.span_view();
     ddc::ChunkSpan diffusion_temperature = diffusion_temperature_alloc.span_view();
-    ddc::ChunkSpan density_source = density_source_alloc.span_view();
 
     IndexSp const iion(find_ion(ddc::get_domain<IDimSp>(density)));
     IndexM const ineutral_density(0);
@@ -97,11 +95,7 @@ void DiffusiveNeutralSolver::get_derivative(
                 diffusion_temperature(ifspx)
                         = normalization_coeff_alpha0 * temperature(iion, ix) / (mass(isp) * denom);
 
-                density_source(ifspx)
-                        = (density(ielec(), ix) * density(iion, ix) * recombination_rate(ifspx)
-                           - neutrals(ifspx, ineutral_density) * density(ielec(), ix)
-                                     * ionization_rate(ifspx))
-                          / normalization_coeff_alpha0;
+                // density source is not solved here, we only solve transport.
             });
 
     // compute coordinates at which spatial derivatives are evaluated
@@ -179,10 +173,10 @@ void DiffusiveNeutralSolver::get_derivative(
             dom_fluidspx,
             KOKKOS_LAMBDA(IndexSpX const ifspx) {
                 dn(ifspx, ineutral_density)
-                        = density_source(ifspx) - gradx_density_equilibrium_velocity(ifspx)
+                        = -gradx_density_equilibrium_velocity(ifspx)
                           + gradx_diffusion_temperature(ifspx) * gradx_neutrals_density(ifspx)
                           + diffusion_temperature(ifspx) * laplx_neutrals_density(ifspx);
-            });
+            }); // density source is not solved here, we only solve transport.
 }
 
 DSpanSpMX DiffusiveNeutralSolver::operator()(
