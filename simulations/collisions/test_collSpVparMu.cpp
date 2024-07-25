@@ -12,6 +12,7 @@
 #include <pdi.h>
 
 #include "CollisionSpVparMu.hpp"
+#include "collisioninfo.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
@@ -83,17 +84,9 @@ int main(int argc, char** argv)
 
 
     // --------- OPERATOR INITIALISATION ---------
-    std::int8_t const collisions_interspecies
-            = PCpp_bool(conf_collision, ".CollisionsInfo.collisions_interspecies");
     // ---> Initialisation of the Collision operator
-    // nustar fixed to 1. => normalisation of time is equal to 1./nustar
-    double const nustar = 1.0;
-    // rg fixed to 1. => because already included in nustar
-    double const rg = 1.0;
-    // safety factor fixed to 1. => because already included in nustar
-    double const safety_factor = 1.0;
-    // B_norm is fixed to 1. => normalisation at the localisation of collisions
     double const B_norm = 1.0;
+
     // TODO: Simplify the construction of coeff_intdmu and coeff_indmu as soon as the possibililty to define the quadrature coefficients directly on GPU is available
     host_t<DFieldVpar> const coeff_intdvpar_host
             = simpson_quadrature_coefficients_1d(allfdistribu.domain<GridVpar>());
@@ -105,16 +98,14 @@ int main(int argc, char** argv)
     auto coeff_intdmu = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             coeff_intdmu_host.span_cview());
-    CollisionSpVparMu collision_operator(
+
+    CollisionInfo const collision_info(conf_collision);
+    CollisionSpVparMu<CollisionInfo, IdxRangeSpVparMu, GridVpar, GridMu, double> collision_operator(
+            collision_info,
             idxrange_spvparmu,
             coeff_intdmu.span_cview(),
             coeff_intdvpar.span_cview(),
-            nustar,
-            collisions_interspecies,
-            rg,
-            safety_factor,
             B_norm);
-
 
     // --------- TIME ITERATION ---------
     // ---> Reading of algorithm info from input YAML file
@@ -137,21 +128,28 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const start = steady_clock::now();
 
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
+
     int iter = 0;
     for (; iter < nbiter; ++iter) {
         double const time_iter = time_start + iter * deltat;
         cout << "iter = " << iter << " ; time_iter = " << time_iter << endl;
-
-        // Apply collision operator
-        collision_operator(allfdistribu, deltat);
-        auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
 
         // Write distribution function
         ddc::PdiEvent("write_fdistribu")
                 .with("iter", iter)
                 .and_with("time_saved", time_iter)
                 .and_with("fdistribu", allfdistribu_host);
+
+        // Apply collision operator
+        collision_operator(allfdistribu, deltat);
+        ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     }
+    // Write distribution function
+    ddc::PdiEvent("write_fdistribu")
+            .with("iter", nbiter)
+            .and_with("time_saved", time_start + nbiter * deltat)
+            .and_with("fdistribu", allfdistribu_host);
 
     steady_clock::time_point const end = steady_clock::now();
     double const simulation_time = std::chrono::duration<double>(end - start).count();

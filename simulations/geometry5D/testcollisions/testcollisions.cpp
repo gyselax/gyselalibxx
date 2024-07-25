@@ -14,6 +14,7 @@
 #include <pdi.h>
 
 #include "CollisionSpVparMu.hpp"
+#include "collisioninfo_radial.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
 #include "paraconfpp.hpp"
@@ -207,9 +208,10 @@ int main(int argc, char** argv)
     auto allfdistribu = allfdistribu_alloc.span_view();
 
     // Collision operator initialisation
+    double const nustar0_rpeak = 1.;
     std::int8_t const collisions_interspecies = true;
-    DFieldTor1 nustar0_r(dom_tor1);
-    ddc::parallel_fill(nustar0_r, 1.0); //ATTENTION: Must be changed
+    double const rpeak = 1.;
+    double const q_rpeak = 1.;
     DFieldTor1 safety_factor(dom_tor1);
     ddc::parallel_fill(safety_factor, 1.0); //ATTENTION: Must be changed
     DDomTorCS dom_tor1_tor2(dom_tor2, dom_tor1);
@@ -226,15 +228,20 @@ int main(int argc, char** argv)
             Kokkos::DefaultExecutionSpace(),
             coeff_intdmu_host.span_cview());
 
-    CollisionSpVparMu collision_operator(
-            dom_sp_tor3D_v2D,
-            coeff_intdmu.span_cview(),
-            coeff_intdvpar.span_cview(),
-            nustar0_r.span_cview(),
+    CollisionInfoRadial<GridTor1> collision_info(
+            nustar0_rpeak,
             collisions_interspecies,
+            rpeak,
+            q_rpeak,
             field_grid_tor1.span_cview(),
-            safety_factor.span_cview(),
-            B_norm.span_cview());
+            safety_factor.span_cview());
+    CollisionSpVparMu<CollisionInfoRadial<GridTor1>, DDomSpTor3DV2D, GridVpar, GridMu, DViewTorCS>
+            collision_operator(
+                    collision_info,
+                    dom_sp_tor3D_v2D,
+                    coeff_intdmu.span_cview(),
+                    coeff_intdvpar.span_cview(),
+                    B_norm.span_cview());
 
     steady_clock::time_point const start = steady_clock::now();
 

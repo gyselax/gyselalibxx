@@ -13,15 +13,16 @@
  * @brief A class which computes the collision operator in (vpar,mu)
  */
 template <
+        class CollInfo,
         class FDistribDomain,
         class GridVpar,
         class GridMu,
-        class InputDFieldR,
         class InputDFieldThetaR>
 class CollisionSpVparMu /* : public IRightHandSide */
 {
 private:
     using Species = IDimSp;
+    using InputDFieldR = typename CollInfo::radial_chunk_type;
     using fdistrib_domain_tags = ddc::to_type_seq_t<FDistribDomain>;
     using GridR = typename collisions_dimensions::ExtractRDim<InputDFieldR>::type;
     using GridTheta =
@@ -152,6 +153,8 @@ public:
     /**
      * @brief Create instance of CollisionSpVparMu class
      *
+     * @param[in] collision_info
+     *      class containing rg, safety_factor and nustar0
      * @param[in] fdistrib_domain
      *      domain (species, 3D space, 2D velocity space) on which the collision operator acts
      *      ATTENTION it must contain the all domain in species and 2D velocity.
@@ -159,32 +162,20 @@ public:
      *      quadrature coefficient in mu direction
      * @param[in] coeff_intdvpar
      *      quadrature coefficient in vpar direction
-     * @param[in] nustar
-     *      radial profile of collisionality
-     * @param[in] collisions_interspecies
-     *      boolean that is equal to true if inter-species collisions are taken into account
-     * @param[in] rg
-     *      radial profile of the grid. If size(nustar)==1, forced to 1. because already included in nustar definition 
-     *      [TODO] See if this quantity cannot be included in nustar definition
-     * @param[in] safety_factor
-     *      radial profile of safety factor. If size(nustar)==1, forced to 1. because already included in nustar definition. 
      * @param[in] B_norm
      *      magnetic field norm in (r,theta)
      */
     CollisionSpVparMu(
+            CollInfo const& collision_info,
             FDistribDomain fdistrib_domain,
             DViewMu coeff_intdmu,
             DViewVpar coeff_intdvpar,
-            InputDFieldR nustar,
-            std::int8_t const collisions_interspecies,
-            InputDFieldR rg,
-            InputDFieldR safety_factor,
             InputDFieldThetaR B_norm)
         : m_operator_handle {}
         , m_comb_mat {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_comb_mat")}
         , m_hat_As {"m_hat_As", collisions_dimensions::get_idx_range<Species>(fdistrib_domain)}
         , m_hat_Zs {"m_hat_Zs", collisions_dimensions::get_idx_range<Species>(fdistrib_domain)}
-        , m_nustar {"m_nustar", collisions_dimensions::get_idx_range<GridR>(fdistrib_domain)}
+        , m_nustar0_r {"m_nustar0_r", collisions_dimensions::get_idx_range<GridR>(fdistrib_domain)}
         , m_rg {"m_rg", collisions_dimensions::get_idx_range<GridR>(fdistrib_domain)}
         , m_safety_factor {"m_safety_factor", collisions_dimensions::get_idx_range<GridR>(fdistrib_domain)}
         , m_mask_buffer_r {"m_mask_buffer_r", collisions_dimensions::get_idx_range<GridR>(fdistrib_domain)}
@@ -228,9 +219,9 @@ public:
         std::size_t const n_sp = ddc::select<Species>(fdistrib_domain).size();
         std::size_t const n_batch = fdistrib_domain.size() / (n_mu * n_vpar * n_r * n_theta * n_sp);
 
-        deepcopy_radial_profile(m_nustar.span_view(), nustar);
-        deepcopy_radial_profile(m_rg.span_view(), rg);
-        deepcopy_radial_profile(m_safety_factor.span_view(), safety_factor);
+        deepcopy_radial_profile(m_rg.span_view(), collision_info.rg());
+        deepcopy_radial_profile(m_safety_factor.span_view(), collision_info.safety_factor());
+        deepcopy_radial_profile(m_nustar0_r.span_view(), collision_info.nustar0());
         deepcopy_poloidal_plane(m_B_norm.span_view(), B_norm);
 
         m_operator_handle = koliop_interface::DoOperatorInitialization(
@@ -240,13 +231,13 @@ public:
                 n_theta,
                 n_batch,
                 n_sp,
-                collisions_interspecies,
+                collision_info.collisions_interspecies(),
                 /* the_local_domain_r_offset */ 0 + n_r - 1,
                 m_mug.data_handle(),
                 m_vparg.data_handle(),
                 coeff_intdmu.data_handle(),
                 coeff_intdvpar.data_handle(),
-                m_nustar.data_handle(),
+                m_nustar0_r.data_handle(),
                 m_comb_mat.data(),
                 m_hat_As.data_handle(),
                 m_hat_Zs.data_handle(),
@@ -295,7 +286,6 @@ protected:
      * Opaque type representing the operator (due to the C interface)
     */
     ::koliop_Operator m_operator_handle;
-
     // NOTE: Some of these arrays should come from a parent class or manager.
     // They resides in this class while we wait for their implementation.
     /// Combinatory (6x6) matrix computed only one times at initialisation. Rk: 6 = 2*(Npolmax-1) + 1 + 1
@@ -304,8 +294,8 @@ protected:
     DFieldSp m_hat_As;
     /// Normalized charges for all species
     DFieldSp m_hat_Zs;
-    /// Radial profile of nustar
-    DFieldR m_nustar;
+    /// Radial profile of nustar0_r
+    DFieldR m_nustar0_r;
     /// Mesh points in the radial direction
     // [TODO]: See if we need m_rg ?
     DFieldR m_rg;
