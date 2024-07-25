@@ -6,18 +6,20 @@
 #include <ddc/ddc.hpp>
 
 #include <iboltzmannsolver.hpp>
-#include <ifluidsolver.hpp>
+#include <ifluidtransportsolver.hpp>
 #include <iqnsolver.hpp>
 
 #include "predcorr_hybrid.hpp"
 
 PredCorrHybrid::PredCorrHybrid(
         IBoltzmannSolver const& boltzmann_solver,
-        IFluidSolver const& fluid_solver,
-        IQNSolver const& poisson_solver)
+        IFluidTransportSolver const& fluid_solver,
+        IQNSolver const& poisson_solver,
+        IKineticFluidCoupling const& kinetic_fluid_coupling)
     : m_boltzmann_solver(boltzmann_solver)
     , m_fluid_solver(fluid_solver)
     , m_poisson_solver(poisson_solver)
+    , m_kinetic_fluid_coupling(kinetic_fluid_coupling)
 {
 }
 
@@ -68,6 +70,7 @@ DSpanSpXVx PredCorrHybrid::operator()(
         // copy fdistribu
         ddc::parallel_deepcopy(allfdistribu_half_t, allfdistribu);
 
+
         // predictor
         m_boltzmann_solver(allfdistribu_half_t, electric_field, dt / 2);
 
@@ -77,6 +80,8 @@ DSpanSpXVx PredCorrHybrid::operator()(
         // correction on a dt
         m_boltzmann_solver(allfdistribu, electric_field, dt);
         m_fluid_solver(fluid_moments, allfdistribu, electric_field, dt);
+
+        m_kinetic_fluid_coupling(allfdistribu, fluid_moments, dt);
     }
 
     double const final_time = time_start + iter * dt;

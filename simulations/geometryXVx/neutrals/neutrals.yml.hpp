@@ -48,6 +48,11 @@ KineticSource:
   energy: 1.
   temperature: 1.
 
+KineticFluidCouplingSource:
+  density_coupling_coeff: 1.0
+  momentum_coupling_coeff: 0.0
+  energy_coupling_coeff: 0.0
+
 CollisionsInfo:
   enable_inter: true
   nustar0: 0.1
