@@ -164,45 +164,45 @@ using FieldSpTorCS = device_t<ddc::Chunk<ElementType, DDomSpTorCS>>;
 using DFieldSpTorCS = FieldSpTorCS<double>;
 
 template <class ElementType>
-using SpanTorCS = ddc::ChunkSpan<ElementType, DDomTorCS>;
+using SpanTorCS = device_t<ddc::ChunkSpan<ElementType, DDomTorCS>>;
 using DSpanTorCS = SpanTorCS<double>;
 
 template <class ElementType>
-using SpanTor3D = ddc::ChunkSpan<ElementType, DDomTor3D>;
+using SpanTor3D = device_t<ddc::ChunkSpan<ElementType, DDomTor3D>>;
 using DSpanTor3D = SpanTor3D<double>;
 
 template <class ElementType>
-using SpanSpTor3DV2D = ddc::ChunkSpan<ElementType, DDomSpTor3DV2D>;
+using SpanSpTor3DV2D = device_t<ddc::ChunkSpan<ElementType, DDomSpTor3DV2D>>;
 using DSpanSpTor3DV2D = SpanSpTor3DV2D<double>;
 
 template <class ElementType>
-using ViewTor1 = ddc::ChunkView<ElementType const, DDomTor1>;
+using ViewTor1 = device_t<ddc::ChunkView<ElementType const, DDomTor1>>;
 using DViewTor1 = ViewTor1<double>;
 
 template <class ElementType>
-using ViewTor2 = ddc::ChunkView<ElementType const, DDomTor2>;
+using ViewTor2 = device_t<ddc::ChunkView<ElementType const, DDomTor2>>;
 using DViewTor2 = ViewTor2<double>;
 
 template <class ElementType>
-using ViewTor3 = ddc::ChunkView<ElementType const, DDomTor3>;
+using ViewTor3 = device_t<ddc::ChunkView<ElementType const, DDomTor3>>;
 using DViewTor3 = ViewTor3<double>;
 
 template <class ElementType>
-using ViewVpar = ddc::ChunkView<ElementType const, DDomVpar>;
+using ViewVpar = device_t<ddc::ChunkView<ElementType const, DDomVpar>>;
 using DViewVpar = ViewVpar<double>;
 
 template <class ElementType>
-using ViewMu = ddc::ChunkView<ElementType const, DDomMu>;
+using ViewMu = device_t<ddc::ChunkView<ElementType const, DDomMu>>;
 using DViewMu = ViewMu<double>;
 
 template <class ElementType>
-using ViewTorCS = ddc::ChunkView<ElementType const, DDomTorCS>;
+using ViewTorCS = device_t<ddc::ChunkView<ElementType const, DDomTorCS>>;
 using DViewTorCS = ViewTorCS<double>;
 
 template <class ElementType>
-using ViewTor3D = ddc::ChunkView<ElementType const, DDomTor3D>;
+using ViewTor3D = device_t<ddc::ChunkView<ElementType const, DDomTor3D>>;
 using DViewTor3D = ViewTor3D<double>;
 
 template <class ElementType>
-using ViewSpTor3DV2D = ddc::ChunkView<ElementType const, DDomSpTor3DV2D>;
+using ViewSpTor3DV2D = device_t<ddc::ChunkView<ElementType const, DDomSpTor3DV2D>>;
 using DViewSpTor3DV2D = ViewSpTor3DV2D<double>;
