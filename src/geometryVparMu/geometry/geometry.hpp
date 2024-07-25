@@ -115,12 +115,28 @@ using FieldSpVparMu = device_t<ddc::Chunk<ElementType, IdxRangeSpVparMu>>;
 using DFieldSpVparMu = FieldSpVparMu<double>;
 
 template <class ElementType>
+using SpanVpar = device_t<ddc::ChunkSpan<ElementType, IdxRangeVpar>>;
+using DSpanVpar = SpanVpar<double>;
+
+template <class ElementType>
+using SpanMu = device_t<ddc::ChunkSpan<ElementType, IdxRangeMu>>;
+using DSpanMu = SpanMu<double>;
+
+template <class ElementType>
 using SpanVparMu = device_t<ddc::ChunkSpan<ElementType, IdxRangeVparMu>>;
 using DSpanVparMu = SpanVparMu<double>;
 
 template <class ElementType>
 using SpanSpVparMu = device_t<ddc::ChunkSpan<ElementType, IdxRangeSpVparMu>>;
 using DSpanSpVparMu = SpanSpVparMu<double>;
+
+template <class ElementType>
+using ViewVpar = device_t<ddc::ChunkView<ElementType, IdxRangeVpar>>;
+using DViewVpar = ViewVpar<double>;
+
+template <class ElementType>
+using ViewMu = device_t<ddc::ChunkView<ElementType, IdxRangeMu>>;
+using DViewMu = ViewMu<double>;
 
 template <class ElementType>
 using ViewVparMu = device_t<ddc::ChunkView<ElementType, IdxRangeVparMu>>;

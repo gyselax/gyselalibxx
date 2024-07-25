@@ -11,8 +11,11 @@ target_include_directories("collisions"
 target_link_libraries("collisions"
     PUBLIC
         DDC::DDC
+        gslx::paraconfpp
+        gslx::speciesinfo
         gslx::utils
         koliop::koliop
+        paraconf::paraconf
 )
 
 add_library("gslx::collisions" ALIAS "collisions")
