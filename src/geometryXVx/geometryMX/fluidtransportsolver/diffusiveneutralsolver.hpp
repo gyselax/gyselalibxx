@@ -4,9 +4,8 @@
 
 #include <geometry.hpp>
 
-#include "ifluidsolver.hpp"
+#include "ifluidtransportsolver.hpp"
 #include "ireactionrate.hpp"
-
 
 /**
  * @brief A class that solves a so-called "pressure-diffusive" fluid neutral model.
@@ -57,7 +56,7 @@
  * The pressure-diffusive model is solved using a RK2 time integrator.
  * Spatial derivatives are computed using splines polynomials. 
  */
-class DiffusiveNeutralSolver : public IFluidSolver
+class DiffusiveNeutralSolver : public IFluidTransportSolver
 {
 private:
     IReactionRate const& m_charge_exchange;

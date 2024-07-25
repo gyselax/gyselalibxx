@@ -9,25 +9,29 @@
 #include <gtest/gtest.h>
 
 #include <pdi.h>
+#include <quadrature.hpp>
+#include <trapezoid_quadrature.hpp>
 
 #include "Lagrange_interpolator.hpp"
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
+#include "charge_exchange.hpp"
 #include "chargedensitycalculator.hpp"
 #include "constantfluidinitialization.hpp"
-#include "constantrate.hpp"
+#include "diffusiveneutralsolver.hpp"
 #include "fem_1d_poisson_solver.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
-#include "ikineticfluidcoupling.hpp"
+#include "ionization.hpp"
+#include "irighthandside.hpp"
 #include "kinetic_fluid_coupling_source.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
-#include "nullfluidsolver.hpp"
 #include "predcorr.hpp"
 #include "predcorr_hybrid.hpp"
 #include "qnsolver.hpp"
 #include "quadrature.hpp"
+#include "recombination.hpp"
 #include "singlemodeperturbinitialization.hpp"
 #include "species_info.hpp"
 #include "spline_interpolator.hpp"
@@ -35,20 +39,18 @@
 #include "splitvlasovsolver.hpp"
 
 /**
- * This test creates one instance of the PredCorr class, and one instance of the 
- * PredCorrFluid class. With the NullFluidSolver class, 
- * this test verifies that the distribution function is the same after applying the 
- * predictor corrector scheme to it, with and without the fluid species.
+ * This test initializes the fluid species with constant reaction rates for ionization and recombination.
+ * Then, using the analytical solution for this scenario where T is cte. we compare it to the solver.
  */
-TEST(GeometryXM, PredCorrHybrid)
+static void TestKineticFluidCoupling()
 {
     CoordX const x_min(0.0);
     CoordX const x_max(1.0);
-    IVectX const x_ncells(50);
+    IVectX const x_ncells(10);
 
     CoordVx const vx_min(-8);
     CoordVx const vx_max(8);
-    IVectVx const vx_ncells(50);
+    IVectVx const vx_ncells(20);
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -79,12 +81,12 @@ TEST(GeometryXM, PredCorrHybrid)
     IndexSp const iion = dom_kinsp.front();
     IndexSp const ielec = dom_kinsp.back();
 
-    host_t<DFieldSp> kinetic_charges(dom_kinsp);
-    kinetic_charges(ielec) = -1.;
-    kinetic_charges(iion) = 1.;
+    host_t<FieldSp<int>> kinetic_charges(dom_kinsp);
+    kinetic_charges(ielec) = -1;
+    kinetic_charges(iion) = 1;
 
     host_t<DFieldSp> kinetic_masses(dom_kinsp);
-    double const mass_ion(400.), mass_elec(1.);
+    double const mass_ion(400), mass_elec(1);
     kinetic_masses(ielec) = mass_elec;
     kinetic_masses(iion) = mass_ion;
 
@@ -150,33 +152,26 @@ TEST(GeometryXM, PredCorrHybrid)
             std::move(kinsp_velocity_eq));
     init_fequilibrium(allfequilibrium);
 
-    host_t<FieldSp<int>> init_perturb_mode(dom_kinsp);
-    ddc::parallel_fill(init_perturb_mode, 2);
+    host_t<IFieldSp> init_perturb_mode(dom_kinsp);
     host_t<DFieldSp> init_perturb_amplitude(dom_kinsp);
-    ddc::parallel_fill(init_perturb_amplitude, 0.1);
+    ddc::parallel_fill(init_perturb_mode, 1);
+    ddc::parallel_fill(init_perturb_amplitude, 0.0);
 
     SingleModePerturbInitialization const
             init(allfequilibrium, std::move(init_perturb_mode), std::move(init_perturb_amplitude));
     init(allfdistribu);
 
     // Moments domain initialization
-    IVectM const nb_fluid_moments(3);
+    IVectM const nb_fluid_moments(1);
     IDomainM const meshM(IndexM(0), nb_fluid_moments);
     ddc::init_discrete_space<IDimM>();
-
-    IndexM idensity(0);
-    IndexM iflux(1);
-    IndexM istress(2);
 
     // Initialization of fluid species moments
     DFieldSpMX fluid_moments_alloc(IDomainSpMX(dom_fluidsp, meshM, meshX));
     auto fluid_moments = fluid_moments_alloc.span_view();
 
     host_t<DFieldSpM> moments_init(IDomainSpM(dom_fluidsp, meshM));
-    ddc::parallel_fill(moments_init[idensity], 1.);
-    ddc::parallel_fill(moments_init[iflux], 0.);
-    ddc::parallel_fill(moments_init[istress], 1.);
-
+    ddc::parallel_fill(moments_init, 0.);
     ConstantFluidInitialization fluid_init(moments_init);
     fluid_init(fluid_moments);
 
@@ -224,55 +219,96 @@ TEST(GeometryXM, PredCorrHybrid)
 #endif
     QNSolver const poisson(poisson_solver, rhs);
 
-    ConstantRate const charge_exchange(0.0);
-    ConstantRate const ionization(0.0);
-    ConstantRate const recombination(0.0);
-    double const normalization_coeff(1.0);
+    double const normalization_coeff(0.01);
+    double const k_0(1.e-3);
+
+    ChargeExchangeRate charge_exchange(k_0);
+    IonizationRate ionization(k_0);
+    RecombinationRate recombination(k_0);
+
+    SplineXBuilder_1d const spline_x_builder_neutrals(meshX);
+    SplineXEvaluator_1d const spline_x_evaluator_neutrals(bv_x_min, bv_x_max);
+
+    host_t<DFieldVx> const quadrature_coeffs_neutrals_host(
+            trapezoid_quadrature_coefficients(meshVx));
+    auto const quadrature_coeffs_neutrals = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            quadrature_coeffs_neutrals_host.span_view());
+
+    DiffusiveNeutralSolver const fluidsolver(
+            charge_exchange,
+            ionization,
+            recombination,
+            normalization_coeff,
+            spline_x_builder_neutrals,
+            spline_x_evaluator_neutrals,
+            quadrature_coeffs_neutrals.span_cview());
 
     // kinetic fluid coupling term
     KineticFluidCouplingSource const kineticfluidcoupling(
-            1.0,
-            0.0,
-            0.0,
+            1.,
+            0.,
+            0.,
             ionization,
             recombination,
             normalization_coeff,
             quadrature_coeffs);
 
-    // construction of predcorr without fluid species
-    PredCorr const predcorr(vlasov, poisson);
-
-    // distribution function to be evolved by predcorr without fluid species
-    DFieldSpXVx allfdistribu_predcorr_alloc(allfdistribu.domain());
-    auto allfdistribu_predcorr = allfdistribu_predcorr_alloc.span_view();
-    ddc::parallel_deepcopy(allfdistribu_predcorr, allfdistribu);
-
     double const time_start(0.);
-    int const nb_iter(10);
+    int const nb_iter(20);
     double const deltat(0.1);
-    predcorr(allfdistribu_predcorr, time_start, deltat, nb_iter);
 
-    // construction of predcorr with fluid species
-    NullFluidSolver const fluidsolver(dom_fluidsp);
     PredCorrHybrid const predcorr_hybrid(vlasov, fluidsolver, poisson, kineticfluidcoupling);
     predcorr_hybrid(allfdistribu, fluid_moments, time_start, deltat, nb_iter);
 
-    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu);
+    auto allfdistribu_host
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), allfdistribu);
+    auto fluid_moments_host
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), fluid_moments);
 
-    auto allfdistribu_predcorr_host = ddc::create_mirror_view_and_copy(allfdistribu_predcorr);
+    // analytical solution
+    // we know the rate values for the initial conditions, we assume T=cte. so rates independent of time.
+    double const ionization_rate = 1.130359390036803 * k_0;
+    double const recombination_rate = 7.638123065868132e-06 * k_0;
 
-    /**
-     * Since the fluid model uses NullFluidSolver, 
-     * the distribution function evolved with PredCorrFluid and PredCorr 
-     * should be equal
-     */
-    double const tolerance(1.e-12);
-    ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
-        EXPECT_LE(
-                std::fabs(allfdistribu_host(ispxvx) - allfdistribu_predcorr_host(ispxvx)),
-                tolerance);
+    double const N = 1.;
+    double const alpha = -(N * ionization_rate) / normalization_coeff;
+    double const beta = -(ionization_rate + recombination_rate) / (2 * normalization_coeff);
+    double const C = (recombination_rate + ionization_rate)
+                     / (2 * (0.0 * ionization_rate - 1.0 * recombination_rate));
+    double const X_1
+            = N * (recombination_rate - ionization_rate) / (recombination_rate + ionization_rate);
+
+    DFieldSpMX X_alloc(IDomainSpMX(dom_fluidsp, meshM, meshX));
+    auto X = X_alloc.span_view();
+    DFieldSpMX analytical_nN_alloc(IDomainSpMX(dom_fluidsp, meshM, meshX));
+    auto analytical_nN = analytical_nN_alloc.span_view();
+    double const t_diag = nb_iter * deltat;
+
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            X.domain(),
+            KOKKOS_LAMBDA(IndexSpMX const ispmx) {
+                X(ispmx) = Kokkos::exp(alpha * t_diag)
+                                   * Kokkos::
+                                           pow((beta / alpha) * (Kokkos::exp(alpha * t_diag) - 1)
+                                                       + C,
+                                               -1)
+                           + X_1;
+                analytical_nN(ispmx) = (X(ispmx) + N) / 2.;
+            });
+
+    auto analytical_nN_host = ddc::create_mirror_view_and_copy(analytical_nN);
+
+    ddc::for_each(fluid_moments_host.domain(), [&](IndexSpMX const ispmx) {
+        EXPECT_NEAR(analytical_nN_host(ispmx), fluid_moments_host(ispmx), 1.5e-8);
     });
 
     PC_tree_destroy(&conf_pdi);
     PDI_finalize();
+}
+
+TEST(GeometryMX, KineticFluidCoupling)
+{
+    TestKineticFluidCoupling();
 }

@@ -5,12 +5,12 @@
 #include <geometry.hpp>
 
 /**
- * @brief An abstract class for solving a fluid model.
+ * @brief An abstract class for solving the transport of a fluid model.
  */
-class IFluidSolver
+class IFluidTransportSolver
 {
 public:
-    virtual ~IFluidSolver() = default;
+    virtual ~IFluidTransportSolver() = default;
 
     /**
      * @brief Operator for solving the fluid model on one timestep.
