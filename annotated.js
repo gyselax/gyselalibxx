@@ -51,6 +51,8 @@ var annotated =
     [ "ChargeDensityCalculator", "classChargeDensityCalculator.html", "classChargeDensityCalculator" ],
     [ "ChargeExchangeRate", "classChargeExchangeRate.html", "classChargeExchangeRate" ],
     [ "CircularToCartesian", "classCircularToCartesian.html", "classCircularToCartesian" ],
+    [ "CollisionInfo", "classCollisionInfo.html", "classCollisionInfo" ],
+    [ "CollisionInfoRadial", "classCollisionInfoRadial.html", "classCollisionInfoRadial" ],
     [ "CollisionsInter", "classCollisionsInter.html", "classCollisionsInter" ],
     [ "CollisionsIntra", "classCollisionsIntra.html", "classCollisionsIntra" ],
     [ "CollisionSpVparMu", "classCollisionSpVparMu.html", "classCollisionSpVparMu" ],

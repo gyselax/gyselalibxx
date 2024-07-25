@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: CollisionSpVparMu&lt; FDistribDomain, GridVpar, GridMu, InputDFieldR, InputDFieldThetaR &gt; Class Template Reference</title>
+<title>Gyselalib++: CollisionSpVparMu&lt; CollInfo, FDistribDomain, GridVpar, GridMu, InputDFieldThetaR &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('classCollisionSpVparMu.html',''); init
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classCollisionSpVparMu-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">CollisionSpVparMu&lt; FDistribDomain, GridVpar, GridMu, InputDFieldR, InputDFieldThetaR &gt; Class Template Reference</div>  </div>
+<div class="title">CollisionSpVparMu&lt; CollInfo, FDistribDomain, GridVpar, GridMu, InputDFieldThetaR &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -114,196 +114,178 @@ $(document).ready(function(){initNavTree('classCollisionSpVparMu.html',''); init
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ac8763f44afe1208ef706dc840750ba8e"><td class="memItemLeft" align="right" valign="top"><a id="ac8763f44afe1208ef706dc840750ba8e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ac8763f44afe1208ef706dc840750ba8e">DDomR</a> = ddc::DiscreteDomain&lt; GridR &gt;</td></tr>
-<tr class="memdesc:ac8763f44afe1208ef706dc840750ba8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the radial points. <br /></td></tr>
-<tr class="separator:ac8763f44afe1208ef706dc840750ba8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83bf3252ed924216f5904abbbcda839a"><td class="memItemLeft" align="right" valign="top"><a id="a83bf3252ed924216f5904abbbcda839a"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a83bf3252ed924216f5904abbbcda839a">DDomThetaR</a> = ddc::DiscreteDomain&lt; GridTheta, GridR &gt;</td></tr>
-<tr class="memdesc:a83bf3252ed924216f5904abbbcda839a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the poloidal plane. <br /></td></tr>
-<tr class="separator:a83bf3252ed924216f5904abbbcda839a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4126ac7761f85f0d28789a64210b5518"><td class="memItemLeft" align="right" valign="top"><a id="a4126ac7761f85f0d28789a64210b5518"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a4126ac7761f85f0d28789a64210b5518">DDomSpThetaRVpar</a> = ddc::DiscreteDomain&lt; <a class="el" href="structIDimSp.html">Species</a>, GridTheta, GridR, <a class="el" href="structGridVpar.html">GridVpar</a> &gt;</td></tr>
-<tr class="memdesc:a4126ac7761f85f0d28789a64210b5518"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain containing (species, theta, r, vpar) <br /></td></tr>
-<tr class="separator:a4126ac7761f85f0d28789a64210b5518"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c2f4cb86cba51cb54fc068e34215c8a"><td class="memItemLeft" align="right" valign="top"><a id="a7c2f4cb86cba51cb54fc068e34215c8a"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a7c2f4cb86cba51cb54fc068e34215c8a">DDomMu</a> = ddc::DiscreteDomain&lt; <a class="el" href="structGridMu.html">GridMu</a> &gt;</td></tr>
-<tr class="memdesc:a7c2f4cb86cba51cb54fc068e34215c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the magnetic moment. <br /></td></tr>
-<tr class="separator:a7c2f4cb86cba51cb54fc068e34215c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d39e38d91ed0733f5d6b1955d73eb56"><td class="memItemLeft" align="right" valign="top"><a id="a4d39e38d91ed0733f5d6b1955d73eb56"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a4d39e38d91ed0733f5d6b1955d73eb56">DDomVpar</a> = ddc::DiscreteDomain&lt; <a class="el" href="structGridVpar.html">GridVpar</a> &gt;</td></tr>
-<tr class="memdesc:a4d39e38d91ed0733f5d6b1955d73eb56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the velocity parallel to the magnetic field. <br /></td></tr>
-<tr class="separator:a4d39e38d91ed0733f5d6b1955d73eb56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85f4beaa0bddf3e9211a9edcfecaa9b3"><td class="memItemLeft" align="right" valign="top"><a id="a85f4beaa0bddf3e9211a9edcfecaa9b3"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a85f4beaa0bddf3e9211a9edcfecaa9b3">DFieldSp</a> = device_t&lt; ddc::Chunk&lt; double, IDomainSp &gt; &gt;</td></tr>
-<tr class="memdesc:a85f4beaa0bddf3e9211a9edcfecaa9b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of species. <br /></td></tr>
-<tr class="separator:a85f4beaa0bddf3e9211a9edcfecaa9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad541ce32b6a800d2dcf53d5c3a7c17f0"><td class="memItemLeft" align="right" valign="top"><a id="ad541ce32b6a800d2dcf53d5c3a7c17f0"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ad541ce32b6a800d2dcf53d5c3a7c17f0">DFieldR</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#ac8763f44afe1208ef706dc840750ba8e">DDomR</a> &gt; &gt;</td></tr>
-<tr class="memdesc:ad541ce32b6a800d2dcf53d5c3a7c17f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of radial values. <br /></td></tr>
-<tr class="separator:ad541ce32b6a800d2dcf53d5c3a7c17f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a322e5a50e49576156fd9327f1fab462b"><td class="memItemLeft" align="right" valign="top"><a id="a322e5a50e49576156fd9327f1fab462b"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a322e5a50e49576156fd9327f1fab462b">DFieldMu</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#a7c2f4cb86cba51cb54fc068e34215c8a">DDomMu</a> &gt; &gt;</td></tr>
-<tr class="memdesc:a322e5a50e49576156fd9327f1fab462b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of magnetic moments. <br /></td></tr>
-<tr class="separator:a322e5a50e49576156fd9327f1fab462b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20001206a41f08eef16f5086bf737571"><td class="memItemLeft" align="right" valign="top"><a id="a20001206a41f08eef16f5086bf737571"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a20001206a41f08eef16f5086bf737571">DFieldVpar</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#a4d39e38d91ed0733f5d6b1955d73eb56">DDomVpar</a> &gt; &gt;</td></tr>
-<tr class="memdesc:a20001206a41f08eef16f5086bf737571"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of parallel velocities. <br /></td></tr>
-<tr class="separator:a20001206a41f08eef16f5086bf737571"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5063ba10eb6bdbeabfb6b78639d446f5"><td class="memItemLeft" align="right" valign="top"><a id="a5063ba10eb6bdbeabfb6b78639d446f5"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a5063ba10eb6bdbeabfb6b78639d446f5">DFieldThetaR</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#a83bf3252ed924216f5904abbbcda839a">DDomThetaR</a> &gt; &gt;</td></tr>
-<tr class="memdesc:a5063ba10eb6bdbeabfb6b78639d446f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid on a poloidal plane. <br /></td></tr>
-<tr class="separator:a5063ba10eb6bdbeabfb6b78639d446f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ffebf354e0b9810eb26cf9c6e23f363"><td class="memItemLeft" align="right" valign="top"><a id="a9ffebf354e0b9810eb26cf9c6e23f363"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a9ffebf354e0b9810eb26cf9c6e23f363">DFieldSpThetaRVpar</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#a4126ac7761f85f0d28789a64210b5518">DDomSpThetaRVpar</a> &gt; &gt;</td></tr>
-<tr class="memdesc:a9ffebf354e0b9810eb26cf9c6e23f363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of species, poloidal plane and parallel velocities. <br /></td></tr>
-<tr class="separator:a9ffebf354e0b9810eb26cf9c6e23f363"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84442f98fa3af4e699a006d1aa2ced30"><td class="memItemLeft" align="right" valign="top"><a id="a84442f98fa3af4e699a006d1aa2ced30"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a84442f98fa3af4e699a006d1aa2ced30">DSpanR</a> = device_t&lt; ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionSpVparMu.html#ac8763f44afe1208ef706dc840750ba8e">DDomR</a> &gt; &gt;</td></tr>
-<tr class="memdesc:a84442f98fa3af4e699a006d1aa2ced30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a span of a field defined on a grid of radial values. <br /></td></tr>
-<tr class="separator:a84442f98fa3af4e699a006d1aa2ced30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac94471e9faf1374d8200dc1647439bd1"><td class="memItemLeft" align="right" valign="top"><a id="ac94471e9faf1374d8200dc1647439bd1"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ac94471e9faf1374d8200dc1647439bd1">DSpanThetaR</a> = device_t&lt; ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionSpVparMu.html#a83bf3252ed924216f5904abbbcda839a">DDomThetaR</a> &gt; &gt;</td></tr>
-<tr class="memdesc:ac94471e9faf1374d8200dc1647439bd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a span of a field defined on a grid on a poloidal plane. <br /></td></tr>
-<tr class="separator:ac94471e9faf1374d8200dc1647439bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e836c655b518e23716471cfb90626dc"><td class="memItemLeft" align="right" valign="top"><a id="a3e836c655b518e23716471cfb90626dc"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a3e836c655b518e23716471cfb90626dc">DViewMu</a> = ddc::ChunkSpan&lt; double const, <a class="el" href="classCollisionSpVparMu.html#a7c2f4cb86cba51cb54fc068e34215c8a">DDomMu</a>, std::experimental::layout_right, Kokkos::DefaultExecutionSpace::memory_space &gt;</td></tr>
-<tr class="memdesc:a3e836c655b518e23716471cfb90626dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a constant reference to a Chunk on GPU defined on a grid of magnetic moments. <br /></td></tr>
-<tr class="separator:a3e836c655b518e23716471cfb90626dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abec9180639d1affa9c38fc8b67c188b4"><td class="memItemLeft" align="right" valign="top"><a id="abec9180639d1affa9c38fc8b67c188b4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#abec9180639d1affa9c38fc8b67c188b4">DViewVpar</a> = ddc::ChunkSpan&lt; double const, <a class="el" href="classCollisionSpVparMu.html#a4d39e38d91ed0733f5d6b1955d73eb56">DDomVpar</a>, std::experimental::layout_right, Kokkos::DefaultExecutionSpace::memory_space &gt;</td></tr>
-<tr class="memdesc:abec9180639d1affa9c38fc8b67c188b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a constant reference to a Chunk on GPU defined on a grid of parallel velocities. <br /></td></tr>
-<tr class="separator:abec9180639d1affa9c38fc8b67c188b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a393b7ad0ae156eaf94e712e17243d92c"><td class="memItemLeft" align="right" valign="top"><a id="a393b7ad0ae156eaf94e712e17243d92c"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a393b7ad0ae156eaf94e712e17243d92c">FDistribSpan</a> = device_t&lt; ddc::ChunkSpan&lt; double, FDistribDomain &gt; &gt;</td></tr>
-<tr class="memdesc:a393b7ad0ae156eaf94e712e17243d92c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a reference to the distribution function stored on GPU. <br /></td></tr>
-<tr class="separator:a393b7ad0ae156eaf94e712e17243d92c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a33929f5920809b0ee6431641b32e63"><td class="memItemLeft" align="right" valign="top"><a id="a6a33929f5920809b0ee6431641b32e63"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a6a33929f5920809b0ee6431641b32e63">DDomR</a> = ddc::DiscreteDomain&lt; GridR &gt;</td></tr>
+<tr class="memdesc:a6a33929f5920809b0ee6431641b32e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the radial points. <br /></td></tr>
+<tr class="separator:a6a33929f5920809b0ee6431641b32e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fda4f14505332f114c2d7f515de2283"><td class="memItemLeft" align="right" valign="top"><a id="a2fda4f14505332f114c2d7f515de2283"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a2fda4f14505332f114c2d7f515de2283">DDomThetaR</a> = ddc::DiscreteDomain&lt; GridTheta, GridR &gt;</td></tr>
+<tr class="memdesc:a2fda4f14505332f114c2d7f515de2283"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the poloidal plane. <br /></td></tr>
+<tr class="separator:a2fda4f14505332f114c2d7f515de2283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69d4c79437a44fb3fbe5b9fa5cb4a6ad"><td class="memItemLeft" align="right" valign="top"><a id="a69d4c79437a44fb3fbe5b9fa5cb4a6ad"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a69d4c79437a44fb3fbe5b9fa5cb4a6ad">DDomSpThetaRVpar</a> = ddc::DiscreteDomain&lt; <a class="el" href="structIDimSp.html">Species</a>, GridTheta, GridR, <a class="el" href="structGridVpar.html">GridVpar</a> &gt;</td></tr>
+<tr class="memdesc:a69d4c79437a44fb3fbe5b9fa5cb4a6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain containing (species, theta, r, vpar) <br /></td></tr>
+<tr class="separator:a69d4c79437a44fb3fbe5b9fa5cb4a6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6db78a60a9f0387b708308c8d4c822b5"><td class="memItemLeft" align="right" valign="top"><a id="a6db78a60a9f0387b708308c8d4c822b5"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a6db78a60a9f0387b708308c8d4c822b5">DDomMu</a> = ddc::DiscreteDomain&lt; <a class="el" href="structGridMu.html">GridMu</a> &gt;</td></tr>
+<tr class="memdesc:a6db78a60a9f0387b708308c8d4c822b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the magnetic moment. <br /></td></tr>
+<tr class="separator:a6db78a60a9f0387b708308c8d4c822b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e2bb148874679724f2632e9e7f00d93"><td class="memItemLeft" align="right" valign="top"><a id="a6e2bb148874679724f2632e9e7f00d93"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a6e2bb148874679724f2632e9e7f00d93">DDomVpar</a> = ddc::DiscreteDomain&lt; <a class="el" href="structGridVpar.html">GridVpar</a> &gt;</td></tr>
+<tr class="memdesc:a6e2bb148874679724f2632e9e7f00d93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the velocity parallel to the magnetic field. <br /></td></tr>
+<tr class="separator:a6e2bb148874679724f2632e9e7f00d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39895ea2344637deaffe1b9a01a96a1e"><td class="memItemLeft" align="right" valign="top"><a id="a39895ea2344637deaffe1b9a01a96a1e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a39895ea2344637deaffe1b9a01a96a1e">DFieldSp</a> = device_t&lt; ddc::Chunk&lt; double, IDomainSp &gt; &gt;</td></tr>
+<tr class="memdesc:a39895ea2344637deaffe1b9a01a96a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of species. <br /></td></tr>
+<tr class="separator:a39895ea2344637deaffe1b9a01a96a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af750aee3abc40af96d6c285fab28006e"><td class="memItemLeft" align="right" valign="top"><a id="af750aee3abc40af96d6c285fab28006e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#af750aee3abc40af96d6c285fab28006e">DFieldR</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#a6a33929f5920809b0ee6431641b32e63">DDomR</a> &gt; &gt;</td></tr>
+<tr class="memdesc:af750aee3abc40af96d6c285fab28006e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of radial values. <br /></td></tr>
+<tr class="separator:af750aee3abc40af96d6c285fab28006e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06a1cc7ba7e46d31ec01a6e6e22caeb0"><td class="memItemLeft" align="right" valign="top"><a id="a06a1cc7ba7e46d31ec01a6e6e22caeb0"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a06a1cc7ba7e46d31ec01a6e6e22caeb0">DFieldMu</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#a6db78a60a9f0387b708308c8d4c822b5">DDomMu</a> &gt; &gt;</td></tr>
+<tr class="memdesc:a06a1cc7ba7e46d31ec01a6e6e22caeb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of magnetic moments. <br /></td></tr>
+<tr class="separator:a06a1cc7ba7e46d31ec01a6e6e22caeb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a005535b434c584b416fc0e2dfa8bca72"><td class="memItemLeft" align="right" valign="top"><a id="a005535b434c584b416fc0e2dfa8bca72"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a005535b434c584b416fc0e2dfa8bca72">DFieldVpar</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#a6e2bb148874679724f2632e9e7f00d93">DDomVpar</a> &gt; &gt;</td></tr>
+<tr class="memdesc:a005535b434c584b416fc0e2dfa8bca72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of parallel velocities. <br /></td></tr>
+<tr class="separator:a005535b434c584b416fc0e2dfa8bca72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8add46cec515c50e6548ec75637b6d15"><td class="memItemLeft" align="right" valign="top"><a id="a8add46cec515c50e6548ec75637b6d15"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a8add46cec515c50e6548ec75637b6d15">DFieldThetaR</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#a2fda4f14505332f114c2d7f515de2283">DDomThetaR</a> &gt; &gt;</td></tr>
+<tr class="memdesc:a8add46cec515c50e6548ec75637b6d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid on a poloidal plane. <br /></td></tr>
+<tr class="separator:a8add46cec515c50e6548ec75637b6d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e77f2c809f8c71f2e47ae0a8f9acc33"><td class="memItemLeft" align="right" valign="top"><a id="a4e77f2c809f8c71f2e47ae0a8f9acc33"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a4e77f2c809f8c71f2e47ae0a8f9acc33">DFieldSpThetaRVpar</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#a69d4c79437a44fb3fbe5b9fa5cb4a6ad">DDomSpThetaRVpar</a> &gt; &gt;</td></tr>
+<tr class="memdesc:a4e77f2c809f8c71f2e47ae0a8f9acc33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of species, poloidal plane and parallel velocities. <br /></td></tr>
+<tr class="separator:a4e77f2c809f8c71f2e47ae0a8f9acc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afab3905ac0e702a4d57c431fd6f0cfbc"><td class="memItemLeft" align="right" valign="top"><a id="afab3905ac0e702a4d57c431fd6f0cfbc"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#afab3905ac0e702a4d57c431fd6f0cfbc">DSpanR</a> = device_t&lt; ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionSpVparMu.html#a6a33929f5920809b0ee6431641b32e63">DDomR</a> &gt; &gt;</td></tr>
+<tr class="memdesc:afab3905ac0e702a4d57c431fd6f0cfbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a span of a field defined on a grid of radial values. <br /></td></tr>
+<tr class="separator:afab3905ac0e702a4d57c431fd6f0cfbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa40182c23bd7a2e7bb7412cab7a0aa54"><td class="memItemLeft" align="right" valign="top"><a id="aa40182c23bd7a2e7bb7412cab7a0aa54"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#aa40182c23bd7a2e7bb7412cab7a0aa54">DSpanThetaR</a> = device_t&lt; ddc::ChunkSpan&lt; double, <a class="el" href="classCollisionSpVparMu.html#a2fda4f14505332f114c2d7f515de2283">DDomThetaR</a> &gt; &gt;</td></tr>
+<tr class="memdesc:aa40182c23bd7a2e7bb7412cab7a0aa54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a span of a field defined on a grid on a poloidal plane. <br /></td></tr>
+<tr class="separator:aa40182c23bd7a2e7bb7412cab7a0aa54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac74a55f1d32e574f5f9b4e1985ba2731"><td class="memItemLeft" align="right" valign="top"><a id="ac74a55f1d32e574f5f9b4e1985ba2731"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ac74a55f1d32e574f5f9b4e1985ba2731">DViewMu</a> = ddc::ChunkSpan&lt; double const, <a class="el" href="classCollisionSpVparMu.html#a6db78a60a9f0387b708308c8d4c822b5">DDomMu</a>, std::experimental::layout_right, Kokkos::DefaultExecutionSpace::memory_space &gt;</td></tr>
+<tr class="memdesc:ac74a55f1d32e574f5f9b4e1985ba2731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a constant reference to a Chunk on GPU defined on a grid of magnetic moments. <br /></td></tr>
+<tr class="separator:ac74a55f1d32e574f5f9b4e1985ba2731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54322cf713c27be52751cdd623a3ba84"><td class="memItemLeft" align="right" valign="top"><a id="a54322cf713c27be52751cdd623a3ba84"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a54322cf713c27be52751cdd623a3ba84">DViewVpar</a> = ddc::ChunkSpan&lt; double const, <a class="el" href="classCollisionSpVparMu.html#a6e2bb148874679724f2632e9e7f00d93">DDomVpar</a>, std::experimental::layout_right, Kokkos::DefaultExecutionSpace::memory_space &gt;</td></tr>
+<tr class="memdesc:a54322cf713c27be52751cdd623a3ba84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a constant reference to a Chunk on GPU defined on a grid of parallel velocities. <br /></td></tr>
+<tr class="separator:a54322cf713c27be52751cdd623a3ba84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a867a4e169941ddba02f41bbc143f33c1"><td class="memItemLeft" align="right" valign="top"><a id="a867a4e169941ddba02f41bbc143f33c1"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a867a4e169941ddba02f41bbc143f33c1">FDistribSpan</a> = device_t&lt; ddc::ChunkSpan&lt; double, FDistribDomain &gt; &gt;</td></tr>
+<tr class="memdesc:a867a4e169941ddba02f41bbc143f33c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a reference to the distribution function stored on GPU. <br /></td></tr>
+<tr class="separator:a867a4e169941ddba02f41bbc143f33c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af3cc0a6e4bc1a3093884d8ba9112181c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#af3cc0a6e4bc1a3093884d8ba9112181c">deepcopy_poloidal_plane</a> (<a class="el" href="classCollisionSpVparMu.html#ac94471e9faf1374d8200dc1647439bd1">DSpanThetaR</a> dst, InputDFieldThetaR src)</td></tr>
-<tr class="memdesc:af3cc0a6e4bc1a3093884d8ba9112181c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the information in src (received as an input to the class) into a 2D field defined over (r, theta).  <a href="classCollisionSpVparMu.html#af3cc0a6e4bc1a3093884d8ba9112181c">More...</a><br /></td></tr>
-<tr class="separator:af3cc0a6e4bc1a3093884d8ba9112181c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af68fb58a4a35c1ed4d935129510f5021"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#af68fb58a4a35c1ed4d935129510f5021">CollisionSpVparMu</a> (FDistribDomain fdistrib_domain, <a class="el" href="classCollisionSpVparMu.html#a3e836c655b518e23716471cfb90626dc">DViewMu</a> coeff_intdmu, <a class="el" href="classCollisionSpVparMu.html#abec9180639d1affa9c38fc8b67c188b4">DViewVpar</a> coeff_intdvpar, InputDFieldR nustar, std::int8_t const collisions_interspecies, InputDFieldR rg, InputDFieldR safety_factor, InputDFieldThetaR B_norm)</td></tr>
-<tr class="memdesc:af68fb58a4a35c1ed4d935129510f5021"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create instance of <a class="el" href="classCollisionSpVparMu.html" title="A class which computes the collision operator in (vpar,mu)">CollisionSpVparMu</a> class.  <a href="classCollisionSpVparMu.html#af68fb58a4a35c1ed4d935129510f5021">More...</a><br /></td></tr>
-<tr class="separator:af68fb58a4a35c1ed4d935129510f5021"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac08da0448df9025a34ca05fcd5432f4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ac08da0448df9025a34ca05fcd5432f4e">operator()</a> (<a class="el" href="classCollisionSpVparMu.html#a393b7ad0ae156eaf94e712e17243d92c">FDistribSpan</a> all_f_distribution, double deltat_coll) const</td></tr>
-<tr class="memdesc:ac08da0448df9025a34ca05fcd5432f4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the collision operator to the distribution functions of all species on all species.  <a href="classCollisionSpVparMu.html#ac08da0448df9025a34ca05fcd5432f4e">More...</a><br /></td></tr>
-<tr class="separator:ac08da0448df9025a34ca05fcd5432f4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0ce47a8dd6daff4695628e237d721de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ae0ce47a8dd6daff4695628e237d721de">deepcopy_poloidal_plane</a> (<a class="el" href="classCollisionSpVparMu.html#aa40182c23bd7a2e7bb7412cab7a0aa54">DSpanThetaR</a> dst, InputDFieldThetaR src)</td></tr>
+<tr class="memdesc:ae0ce47a8dd6daff4695628e237d721de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the information in src (received as an input to the class) into a 2D field defined over (r, theta).  <a href="classCollisionSpVparMu.html#ae0ce47a8dd6daff4695628e237d721de">More...</a><br /></td></tr>
+<tr class="separator:ae0ce47a8dd6daff4695628e237d721de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ee64509c7d1676754dc87e7775b60db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a6ee64509c7d1676754dc87e7775b60db">CollisionSpVparMu</a> (CollInfo const &amp;collision_info, FDistribDomain fdistrib_domain, <a class="el" href="classCollisionSpVparMu.html#ac74a55f1d32e574f5f9b4e1985ba2731">DViewMu</a> coeff_intdmu, <a class="el" href="classCollisionSpVparMu.html#a54322cf713c27be52751cdd623a3ba84">DViewVpar</a> coeff_intdvpar, InputDFieldThetaR B_norm)</td></tr>
+<tr class="memdesc:a6ee64509c7d1676754dc87e7775b60db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create instance of <a class="el" href="classCollisionSpVparMu.html" title="A class which computes the collision operator in (vpar,mu)">CollisionSpVparMu</a> class.  <a href="classCollisionSpVparMu.html#a6ee64509c7d1676754dc87e7775b60db">More...</a><br /></td></tr>
+<tr class="separator:a6ee64509c7d1676754dc87e7775b60db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addaf31ac3bf323d08769042238b15724"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#addaf31ac3bf323d08769042238b15724">operator()</a> (<a class="el" href="classCollisionSpVparMu.html#a867a4e169941ddba02f41bbc143f33c1">FDistribSpan</a> all_f_distribution, double deltat_coll) const</td></tr>
+<tr class="memdesc:addaf31ac3bf323d08769042238b15724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the collision operator to the distribution functions of all species on all species.  <a href="classCollisionSpVparMu.html#addaf31ac3bf323d08769042238b15724">More...</a><br /></td></tr>
+<tr class="separator:addaf31ac3bf323d08769042238b15724"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:af75a461488440dd5c7b0d3c2df5e4232"><td class="memItemLeft" align="right" valign="top"><a id="af75a461488440dd5c7b0d3c2df5e4232"></a>
-::koliop_Operator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#af75a461488440dd5c7b0d3c2df5e4232">m_operator_handle</a></td></tr>
-<tr class="memdesc:af75a461488440dd5c7b0d3c2df5e4232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque type representing the operator (due to the C interface) <br /></td></tr>
-<tr class="separator:af75a461488440dd5c7b0d3c2df5e4232"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a359705c17512ac526e28fb1c2cc48e3a"><td class="memItemLeft" align="right" valign="top"><a id="a359705c17512ac526e28fb1c2cc48e3a"></a>
-<a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">koliop_interface::MDL</a>&lt; double[6][6]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a359705c17512ac526e28fb1c2cc48e3a">m_comb_mat</a></td></tr>
-<tr class="memdesc:a359705c17512ac526e28fb1c2cc48e3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combinatory (6x6) matrix computed only one times at initialisation. Rk: 6 = 2*(Npolmax-1) + 1 + 1. <br /></td></tr>
-<tr class="separator:a359705c17512ac526e28fb1c2cc48e3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a833b98417c70586510224cd506b51075"><td class="memItemLeft" align="right" valign="top"><a id="a833b98417c70586510224cd506b51075"></a>
-<a class="el" href="classCollisionSpVparMu.html#a85f4beaa0bddf3e9211a9edcfecaa9b3">DFieldSp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a833b98417c70586510224cd506b51075">m_hat_As</a></td></tr>
-<tr class="memdesc:a833b98417c70586510224cd506b51075"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized masses for all species. <br /></td></tr>
-<tr class="separator:a833b98417c70586510224cd506b51075"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafc54f4b27f7b2ba0939d6ebadd96afe"><td class="memItemLeft" align="right" valign="top"><a id="aafc54f4b27f7b2ba0939d6ebadd96afe"></a>
-<a class="el" href="classCollisionSpVparMu.html#a85f4beaa0bddf3e9211a9edcfecaa9b3">DFieldSp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#aafc54f4b27f7b2ba0939d6ebadd96afe">m_hat_Zs</a></td></tr>
-<tr class="memdesc:aafc54f4b27f7b2ba0939d6ebadd96afe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized charges for all species. <br /></td></tr>
-<tr class="separator:aafc54f4b27f7b2ba0939d6ebadd96afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af35a29364af87b88c918b9ccd4d45d4f"><td class="memItemLeft" align="right" valign="top"><a id="af35a29364af87b88c918b9ccd4d45d4f"></a>
-<a class="el" href="classCollisionSpVparMu.html#ad541ce32b6a800d2dcf53d5c3a7c17f0">DFieldR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#af35a29364af87b88c918b9ccd4d45d4f">m_nustar</a></td></tr>
-<tr class="memdesc:af35a29364af87b88c918b9ccd4d45d4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radial profile of nustar. <br /></td></tr>
-<tr class="separator:af35a29364af87b88c918b9ccd4d45d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac63957b739b16b6003e49e3d397a39f9"><td class="memItemLeft" align="right" valign="top"><a id="ac63957b739b16b6003e49e3d397a39f9"></a>
-<a class="el" href="classCollisionSpVparMu.html#ad541ce32b6a800d2dcf53d5c3a7c17f0">DFieldR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ac63957b739b16b6003e49e3d397a39f9">m_rg</a></td></tr>
-<tr class="memdesc:ac63957b739b16b6003e49e3d397a39f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh points in the radial direction. <br /></td></tr>
-<tr class="separator:ac63957b739b16b6003e49e3d397a39f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9b9ec8bcc9accf8c3dca93948a7decd"><td class="memItemLeft" align="right" valign="top"><a id="af9b9ec8bcc9accf8c3dca93948a7decd"></a>
-<a class="el" href="classCollisionSpVparMu.html#ad541ce32b6a800d2dcf53d5c3a7c17f0">DFieldR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#af9b9ec8bcc9accf8c3dca93948a7decd">m_safety_factor</a></td></tr>
-<tr class="memdesc:af9b9ec8bcc9accf8c3dca93948a7decd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radial safety factor profile. <br /></td></tr>
-<tr class="separator:af9b9ec8bcc9accf8c3dca93948a7decd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1430560d8c5ca55324cde3168073b75"><td class="memItemLeft" align="right" valign="top"><a id="aa1430560d8c5ca55324cde3168073b75"></a>
-<a class="el" href="classCollisionSpVparMu.html#ad541ce32b6a800d2dcf53d5c3a7c17f0">DFieldR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#aa1430560d8c5ca55324cde3168073b75">m_mask_buffer_r</a></td></tr>
-<tr class="memdesc:aa1430560d8c5ca55324cde3168073b75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask used to avoid to apply collision in certain region. <br /></td></tr>
-<tr class="separator:aa1430560d8c5ca55324cde3168073b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2c74fb9462f6d54900b7cbd01dc377c"><td class="memItemLeft" align="right" valign="top"><a id="ad2c74fb9462f6d54900b7cbd01dc377c"></a>
-<a class="el" href="classCollisionSpVparMu.html#a5063ba10eb6bdbeabfb6b78639d446f5">DFieldThetaR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ad2c74fb9462f6d54900b7cbd01dc377c">m_mask_LIM</a></td></tr>
-<tr class="memdesc:ad2c74fb9462f6d54900b7cbd01dc377c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limiter mask in (r,theta) <br /></td></tr>
-<tr class="separator:ad2c74fb9462f6d54900b7cbd01dc377c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afefb94aff7abb74751779cda4f77441d"><td class="memItemLeft" align="right" valign="top"><a id="afefb94aff7abb74751779cda4f77441d"></a>
-<a class="el" href="classCollisionSpVparMu.html#a5063ba10eb6bdbeabfb6b78639d446f5">DFieldThetaR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#afefb94aff7abb74751779cda4f77441d">m_B_norm</a></td></tr>
-<tr class="memdesc:afefb94aff7abb74751779cda4f77441d"><td class="mdescLeft">&#160;</td><td class="mdescRight">B norm in (r,theta) <br /></td></tr>
-<tr class="separator:afefb94aff7abb74751779cda4f77441d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4f3017daef70701d11b84ae97ef15a0"><td class="memItemLeft" align="right" valign="top"><a id="ab4f3017daef70701d11b84ae97ef15a0"></a>
-<a class="el" href="classCollisionSpVparMu.html#a9ffebf354e0b9810eb26cf9c6e23f363">DFieldSpThetaRVpar</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ab4f3017daef70701d11b84ae97ef15a0">m_Bstar_s</a></td></tr>
-<tr class="memdesc:ab4f3017daef70701d11b84ae97ef15a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bstar(species,r,theta,vpar) <br /></td></tr>
-<tr class="separator:ab4f3017daef70701d11b84ae97ef15a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8964e384df4c17bb2df5de68a9f5e1a2"><td class="memItemLeft" align="right" valign="top"><a id="a8964e384df4c17bb2df5de68a9f5e1a2"></a>
-<a class="el" href="classCollisionSpVparMu.html#a322e5a50e49576156fd9327f1fab462b">DFieldMu</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a8964e384df4c17bb2df5de68a9f5e1a2">m_mug</a></td></tr>
-<tr class="memdesc:a8964e384df4c17bb2df5de68a9f5e1a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">grid in mu direction <br /></td></tr>
-<tr class="separator:a8964e384df4c17bb2df5de68a9f5e1a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8aacf7d85fcbfca277146f14b5998ab"><td class="memItemLeft" align="right" valign="top"><a id="ac8aacf7d85fcbfca277146f14b5998ab"></a>
-<a class="el" href="classCollisionSpVparMu.html#a20001206a41f08eef16f5086bf737571">DFieldVpar</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ac8aacf7d85fcbfca277146f14b5998ab">m_vparg</a></td></tr>
-<tr class="memdesc:ac8aacf7d85fcbfca277146f14b5998ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">grid in vpar direction <br /></td></tr>
-<tr class="separator:ac8aacf7d85fcbfca277146f14b5998ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae88025868164e770c89f5345de3e10af"><td class="memItemLeft" align="right" valign="top"><a id="ae88025868164e770c89f5345de3e10af"></a>
+::koliop_Operator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ae88025868164e770c89f5345de3e10af">m_operator_handle</a></td></tr>
+<tr class="memdesc:ae88025868164e770c89f5345de3e10af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque type representing the operator (due to the C interface) <br /></td></tr>
+<tr class="separator:ae88025868164e770c89f5345de3e10af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ce66102616e07426e94dec19a4b9fdd"><td class="memItemLeft" align="right" valign="top"><a id="a0ce66102616e07426e94dec19a4b9fdd"></a>
+<a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">koliop_interface::MDL</a>&lt; double[6][6]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a0ce66102616e07426e94dec19a4b9fdd">m_comb_mat</a></td></tr>
+<tr class="memdesc:a0ce66102616e07426e94dec19a4b9fdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combinatory (6x6) matrix computed only one times at initialisation. Rk: 6 = 2*(Npolmax-1) + 1 + 1. <br /></td></tr>
+<tr class="separator:a0ce66102616e07426e94dec19a4b9fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cffdabc988ad643f1b9427b278863f7"><td class="memItemLeft" align="right" valign="top"><a id="a9cffdabc988ad643f1b9427b278863f7"></a>
+<a class="el" href="classCollisionSpVparMu.html#a39895ea2344637deaffe1b9a01a96a1e">DFieldSp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a9cffdabc988ad643f1b9427b278863f7">m_hat_As</a></td></tr>
+<tr class="memdesc:a9cffdabc988ad643f1b9427b278863f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized masses for all species. <br /></td></tr>
+<tr class="separator:a9cffdabc988ad643f1b9427b278863f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeef532080d72c87356e6125b68854313"><td class="memItemLeft" align="right" valign="top"><a id="aeef532080d72c87356e6125b68854313"></a>
+<a class="el" href="classCollisionSpVparMu.html#a39895ea2344637deaffe1b9a01a96a1e">DFieldSp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#aeef532080d72c87356e6125b68854313">m_hat_Zs</a></td></tr>
+<tr class="memdesc:aeef532080d72c87356e6125b68854313"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized charges for all species. <br /></td></tr>
+<tr class="separator:aeef532080d72c87356e6125b68854313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae386a8b960be061d4898a812b37002ae"><td class="memItemLeft" align="right" valign="top"><a id="ae386a8b960be061d4898a812b37002ae"></a>
+<a class="el" href="classCollisionSpVparMu.html#af750aee3abc40af96d6c285fab28006e">DFieldR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ae386a8b960be061d4898a812b37002ae">m_nustar0_r</a></td></tr>
+<tr class="memdesc:ae386a8b960be061d4898a812b37002ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radial profile of nustar0_r. <br /></td></tr>
+<tr class="separator:ae386a8b960be061d4898a812b37002ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10407b7d9e508e978f8252637f061983"><td class="memItemLeft" align="right" valign="top"><a id="a10407b7d9e508e978f8252637f061983"></a>
+<a class="el" href="classCollisionSpVparMu.html#af750aee3abc40af96d6c285fab28006e">DFieldR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a10407b7d9e508e978f8252637f061983">m_rg</a></td></tr>
+<tr class="memdesc:a10407b7d9e508e978f8252637f061983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh points in the radial direction. <br /></td></tr>
+<tr class="separator:a10407b7d9e508e978f8252637f061983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61ab2c7c039e8dc6635f7069197f6023"><td class="memItemLeft" align="right" valign="top"><a id="a61ab2c7c039e8dc6635f7069197f6023"></a>
+<a class="el" href="classCollisionSpVparMu.html#af750aee3abc40af96d6c285fab28006e">DFieldR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a61ab2c7c039e8dc6635f7069197f6023">m_safety_factor</a></td></tr>
+<tr class="memdesc:a61ab2c7c039e8dc6635f7069197f6023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radial safety factor profile. <br /></td></tr>
+<tr class="separator:a61ab2c7c039e8dc6635f7069197f6023"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae059c9f7a315a4717eea6dab8334f263"><td class="memItemLeft" align="right" valign="top"><a id="ae059c9f7a315a4717eea6dab8334f263"></a>
+<a class="el" href="classCollisionSpVparMu.html#af750aee3abc40af96d6c285fab28006e">DFieldR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ae059c9f7a315a4717eea6dab8334f263">m_mask_buffer_r</a></td></tr>
+<tr class="memdesc:ae059c9f7a315a4717eea6dab8334f263"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask used to avoid to apply collision in certain region. <br /></td></tr>
+<tr class="separator:ae059c9f7a315a4717eea6dab8334f263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b17a413809c3e8475266e329b30be24"><td class="memItemLeft" align="right" valign="top"><a id="a8b17a413809c3e8475266e329b30be24"></a>
+<a class="el" href="classCollisionSpVparMu.html#a8add46cec515c50e6548ec75637b6d15">DFieldThetaR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a8b17a413809c3e8475266e329b30be24">m_mask_LIM</a></td></tr>
+<tr class="memdesc:a8b17a413809c3e8475266e329b30be24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limiter mask in (r,theta) <br /></td></tr>
+<tr class="separator:a8b17a413809c3e8475266e329b30be24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad99e04daf48e42a39c0ce3319769af3c"><td class="memItemLeft" align="right" valign="top"><a id="ad99e04daf48e42a39c0ce3319769af3c"></a>
+<a class="el" href="classCollisionSpVparMu.html#a8add46cec515c50e6548ec75637b6d15">DFieldThetaR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ad99e04daf48e42a39c0ce3319769af3c">m_B_norm</a></td></tr>
+<tr class="memdesc:ad99e04daf48e42a39c0ce3319769af3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">B norm in (r,theta) <br /></td></tr>
+<tr class="separator:ad99e04daf48e42a39c0ce3319769af3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa53051475c849836c4864b7142a7936"><td class="memItemLeft" align="right" valign="top"><a id="aaa53051475c849836c4864b7142a7936"></a>
+<a class="el" href="classCollisionSpVparMu.html#a4e77f2c809f8c71f2e47ae0a8f9acc33">DFieldSpThetaRVpar</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#aaa53051475c849836c4864b7142a7936">m_Bstar_s</a></td></tr>
+<tr class="memdesc:aaa53051475c849836c4864b7142a7936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bstar(species,r,theta,vpar) <br /></td></tr>
+<tr class="separator:aaa53051475c849836c4864b7142a7936"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a055ce856f96df5a8683e5e0314ce83e3"><td class="memItemLeft" align="right" valign="top"><a id="a055ce856f96df5a8683e5e0314ce83e3"></a>
+<a class="el" href="classCollisionSpVparMu.html#a06a1cc7ba7e46d31ec01a6e6e22caeb0">DFieldMu</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a055ce856f96df5a8683e5e0314ce83e3">m_mug</a></td></tr>
+<tr class="memdesc:a055ce856f96df5a8683e5e0314ce83e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">grid in mu direction <br /></td></tr>
+<tr class="separator:a055ce856f96df5a8683e5e0314ce83e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1a85533cab93b640ee918aeaa27e5eb"><td class="memItemLeft" align="right" valign="top"><a id="ad1a85533cab93b640ee918aeaa27e5eb"></a>
+<a class="el" href="classCollisionSpVparMu.html#a005535b434c584b416fc0e2dfa8bca72">DFieldVpar</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ad1a85533cab93b640ee918aeaa27e5eb">m_vparg</a></td></tr>
+<tr class="memdesc:ad1a85533cab93b640ee918aeaa27e5eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">grid in vpar direction <br /></td></tr>
+<tr class="separator:ad1a85533cab93b640ee918aeaa27e5eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class FDistribDomain, class GridVpar, class GridMu, class InputDFieldR, class InputDFieldThetaR&gt;<br />
-class CollisionSpVparMu&lt; FDistribDomain, GridVpar, GridMu, InputDFieldR, InputDFieldThetaR &gt;</h3>
+<div class="textblock"><h3>template&lt;class CollInfo, class FDistribDomain, class GridVpar, class GridMu, class InputDFieldThetaR&gt;<br />
+class CollisionSpVparMu&lt; CollInfo, FDistribDomain, GridVpar, GridMu, InputDFieldThetaR &gt;</h3>
 
 <p>A class which computes the collision operator in (vpar,mu) </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="af68fb58a4a35c1ed4d935129510f5021"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af68fb58a4a35c1ed4d935129510f5021">&#9670;&nbsp;</a></span>CollisionSpVparMu()</h2>
+<a id="a6ee64509c7d1676754dc87e7775b60db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ee64509c7d1676754dc87e7775b60db">&#9670;&nbsp;</a></span>CollisionSpVparMu()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class FDistribDomain , class GridVpar , class GridMu , class InputDFieldR , class InputDFieldThetaR &gt; </div>
+template&lt;class CollInfo , class FDistribDomain , class GridVpar , class GridMu , class InputDFieldThetaR &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCollisionSpVparMu.html">CollisionSpVparMu</a>&lt; FDistribDomain, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, InputDFieldR, InputDFieldThetaR &gt;::<a class="el" href="classCollisionSpVparMu.html">CollisionSpVparMu</a> </td>
+          <td class="memname"><a class="el" href="classCollisionSpVparMu.html">CollisionSpVparMu</a>&lt; CollInfo, FDistribDomain, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, InputDFieldThetaR &gt;::<a class="el" href="classCollisionSpVparMu.html">CollisionSpVparMu</a> </td>
           <td>(</td>
+          <td class="paramtype">CollInfo const &amp;&#160;</td>
+          <td class="paramname"><em>collision_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">FDistribDomain&#160;</td>
           <td class="paramname"><em>fdistrib_domain</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCollisionSpVparMu.html#a3e836c655b518e23716471cfb90626dc">DViewMu</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classCollisionSpVparMu.html#ac74a55f1d32e574f5f9b4e1985ba2731">DViewMu</a>&#160;</td>
           <td class="paramname"><em>coeff_intdmu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCollisionSpVparMu.html#abec9180639d1affa9c38fc8b67c188b4">DViewVpar</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classCollisionSpVparMu.html#a54322cf713c27be52751cdd623a3ba84">DViewVpar</a>&#160;</td>
           <td class="paramname"><em>coeff_intdvpar</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">InputDFieldR&#160;</td>
-          <td class="paramname"><em>nustar</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::int8_t const&#160;</td>
-          <td class="paramname"><em>collisions_interspecies</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">InputDFieldR&#160;</td>
-          <td class="paramname"><em>rg</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">InputDFieldR&#160;</td>
-          <td class="paramname"><em>safety_factor</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -327,13 +309,10 @@ template&lt;class FDistribDomain , class GridVpar , class GridMu , class InputDF
 <p>Create instance of <a class="el" href="classCollisionSpVparMu.html" title="A class which computes the collision operator in (vpar,mu)">CollisionSpVparMu</a> class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">collision_info</td><td>class containing rg, safety_factor and nustar0 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fdistrib_domain</td><td>domain (species, 3D space, 2D velocity space) on which the collision operator acts ATTENTION it must contain the all domain in species and 2D velocity. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">coeff_intdmu</td><td>quadrature coefficient in mu direction </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">coeff_intdvpar</td><td>quadrature coefficient in vpar direction </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nustar</td><td>radial profile of collisionality </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">collisions_interspecies</td><td>boolean that is equal to true if inter-species collisions are taken into account </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">rg</td><td>radial profile of the grid. If size(nustar)==1, forced to 1. because already included in nustar definition [TODO] See if this quantity cannot be included in nustar definition </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">safety_factor</td><td>radial profile of safety factor. If size(nustar)==1, forced to 1. because already included in nustar definition. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">B_norm</td><td>magnetic field norm in (r,theta) </td></tr>
   </table>
   </dd>
@@ -342,21 +321,21 @@ template&lt;class FDistribDomain , class GridVpar , class GridMu , class InputDF
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af3cc0a6e4bc1a3093884d8ba9112181c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3cc0a6e4bc1a3093884d8ba9112181c">&#9670;&nbsp;</a></span>deepcopy_poloidal_plane()</h2>
+<a id="ae0ce47a8dd6daff4695628e237d721de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0ce47a8dd6daff4695628e237d721de">&#9670;&nbsp;</a></span>deepcopy_poloidal_plane()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class FDistribDomain , class GridVpar , class GridMu , class InputDFieldR , class InputDFieldThetaR &gt; </div>
+template&lt;class CollInfo , class FDistribDomain , class GridVpar , class GridMu , class InputDFieldThetaR &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classCollisionSpVparMu.html">CollisionSpVparMu</a>&lt; FDistribDomain, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, InputDFieldR, InputDFieldThetaR &gt;::deepcopy_poloidal_plane </td>
+          <td class="memname">void <a class="el" href="classCollisionSpVparMu.html">CollisionSpVparMu</a>&lt; CollInfo, FDistribDomain, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, InputDFieldThetaR &gt;::deepcopy_poloidal_plane </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCollisionSpVparMu.html#ac94471e9faf1374d8200dc1647439bd1">DSpanThetaR</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classCollisionSpVparMu.html#aa40182c23bd7a2e7bb7412cab7a0aa54">DSpanThetaR</a>&#160;</td>
           <td class="paramname"><em>dst</em>, </td>
         </tr>
         <tr>
@@ -390,21 +369,21 @@ template&lt;class FDistribDomain , class GridVpar , class GridMu , class InputDF
 
 </div>
 </div>
-<a id="ac08da0448df9025a34ca05fcd5432f4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac08da0448df9025a34ca05fcd5432f4e">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="addaf31ac3bf323d08769042238b15724"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addaf31ac3bf323d08769042238b15724">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class FDistribDomain , class GridVpar , class GridMu , class InputDFieldR , class InputDFieldThetaR &gt; </div>
+template&lt;class CollInfo , class FDistribDomain , class GridVpar , class GridMu , class InputDFieldThetaR &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classCollisionSpVparMu.html">CollisionSpVparMu</a>&lt; FDistribDomain, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, InputDFieldR, InputDFieldThetaR &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classCollisionSpVparMu.html">CollisionSpVparMu</a>&lt; CollInfo, FDistribDomain, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, InputDFieldThetaR &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCollisionSpVparMu.html#a393b7ad0ae156eaf94e712e17243d92c">FDistribSpan</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classCollisionSpVparMu.html#a867a4e169941ddba02f41bbc143f33c1">FDistribSpan</a>&#160;</td>
           <td class="paramname"><em>all_f_distribution</em>, </td>
         </tr>
         <tr>
