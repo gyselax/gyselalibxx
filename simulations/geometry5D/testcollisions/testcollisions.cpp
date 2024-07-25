@@ -226,11 +226,11 @@ int main(int argc, char** argv)
             dom_sp_tor3D_v2D,
             coeff_intdmu.span_cview(),
             coeff_intdvpar.span_cview(),
-            nustar0_r.span_view(),
+            nustar0_r.span_cview(),
             collisions_interspecies,
-            field_grid_tor1.span_view(),
-            safety_factor.span_view(),
-            B_norm.span_view());
+            field_grid_tor1.span_cview(),
+            safety_factor.span_cview(),
+            B_norm.span_cview());
 
     steady_clock::time_point const start = steady_clock::now();
 
