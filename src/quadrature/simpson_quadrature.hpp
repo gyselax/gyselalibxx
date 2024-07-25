@@ -5,8 +5,6 @@
 
 #include <ddc_helper.hpp>
 
-#include "quadrature_coeffs_nd.hpp"
-
 
 /**
  * @brief Get the Simpson coefficients in 1D.
@@ -53,34 +51,4 @@ simpson_quadrature_coefficients_1d(ddc::DiscreteDomain<IDim> const& domain)
                 }
             });
     return coefficients_alloc;
-}
-
-/**
- * @brief Get the Simpson coefficients in ND.
- *
- * Calculate the quadrature coefficients for the Simpson method defined on the provided domain.
- *
- * @tparam ExecSpace Execution space, depends on Kokkos.
- *
- * @param[in] domain
- * 	The domain on which the quadrature will be carried out.
- *
- * @return The quadrature coefficients for the Simpson method defined on the provided domain.
- *         The allocation place (host or device ) will depend on the ExecSpace.
- */
-template <class ExecSpace, class... ODims>
-ddc::Chunk<
-        double,
-        ddc::DiscreteDomain<ODims...>,
-        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
-simpson_quadrature_coefficients(ddc::DiscreteDomain<ODims...> const& domain)
-{
-    return quadrature_coeffs_nd<ExecSpace, ODims...>(
-            domain,
-            (std::function<ddc::Chunk<
-                     double,
-                     ddc::DiscreteDomain<ODims>,
-                     ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>(
-                     ddc::DiscreteDomain<ODims>)>(
-                    simpson_quadrature_coefficients_1d<ExecSpace, ODims>))...);
 }

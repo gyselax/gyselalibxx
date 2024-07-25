@@ -7,7 +7,6 @@
 
 #include "ddc_helper.hpp"
 #include "quadrature.hpp"
-#include "simpson_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 
 
@@ -47,7 +46,7 @@ using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
 
 using DFieldXY = device_t<ddc::Chunk<double, IDomainXY>>;
 
-double constant_func_check_2d(Method quad_method)
+double constant_func_check_2d()
 {
     CoordX const x_min(0.0);
     CoordX const x_max(M_PI);
@@ -63,15 +62,10 @@ double constant_func_check_2d(Method quad_method)
 
     IDomainXY const gridxy(gridx, gridy);
 
-    DFieldXY quadrature_coeffs_alloc(gridxy);
-    if (quad_method == Method::TRAPEZ) {
-        quadrature_coeffs_alloc
-                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-    } else if (quad_method == Method::SIMPSON) {
-        quadrature_coeffs_alloc
-                = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-    }
-    Quadrature<IDomainXY> const integrate(quadrature_coeffs_alloc.span_view());
+    DFieldXY quadrature_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
+
+    Quadrature<IDomainXY> const integrate(quadrature_coeffs.span_cview());
     DFieldXY values(gridxy);
 
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
@@ -134,7 +128,7 @@ struct ComputeErrorTraits
 };
 
 template <std::size_t N>
-double compute_error(int n_elems, Method quad_method)
+double compute_error(int n_elems)
 {
     using DimX = typename ComputeErrorTraits<N>::X;
     using DimY = typename ComputeErrorTraits<N>::Y;
@@ -183,22 +177,12 @@ double compute_error(int n_elems, Method quad_method)
 template <std::size_t... Is>
 std::array<double, sizeof...(Is)> compute_trapez_errors(std::index_sequence<Is...>, int n_elems)
 {
-    return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2, Method::TRAPEZ)...};
-}
-template <std::size_t... Is>
-std::array<double, sizeof...(Is)> compute_simpson_errors(std::index_sequence<Is...>, int n_elems)
-{
-    return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2, Method::SIMPSON)...};
+    return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2)...};
 }
 
 TEST(TrapezoidUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
 {
-    EXPECT_LE(constant_func_check_2d(Method::TRAPEZ), 1e-9);
-}
-
-TEST(SimpsonUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
-{
-    EXPECT_LE(constant_func_check_2d(Method::SIMPSON), 1e-9);
+    EXPECT_LE(constant_func_check_2d(), 1e-9);
 }
 
 TEST(TrapezoidUniformNonPeriodicQuadrature2D, Convergence)
@@ -215,20 +199,4 @@ TEST(TrapezoidUniformNonPeriodicQuadrature2D, Convergence)
         EXPECT_LE(order_error, 1e-1);
     }
 }
-
-TEST(SimpsonUniformNonPeriodicQuadrature2D, Convergence)
-{
-    constexpr int NTESTS(4);
-
-    std::array<double, NTESTS> error
-            = compute_simpson_errors(std::make_index_sequence<NTESTS>(), 50);
-
-    for (int i(1); i < NTESTS; ++i) {
-        EXPECT_LE(error[i], error[i - 1]);
-        double order = log(error[i - 1] / error[i]) / log(2.0);
-        double order_error = abs(3 - order);
-        EXPECT_LE(order_error, 1e-1);
-    }
-}
-
 } // namespace

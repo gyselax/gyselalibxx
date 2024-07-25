@@ -50,7 +50,7 @@ double constant_func_check_1d(Method quad_method)
     }
     if (quad_method == Method::SIMPSON) {
         quadrature_coeffs_alloc
-                = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
+                = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridx);
     }
 
     Quadrature const integrate(quadrature_coeffs_alloc.span_cview());
@@ -107,7 +107,7 @@ double compute_error(int n_elems, Method quad_method)
     }
     if (quad_method == Method::SIMPSON) {
         quadrature_coeffs_alloc
-                = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimY>(gridy);
+                = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace, IDimY>(gridy);
     }
 
     Quadrature const integrate(quadrature_coeffs_alloc.span_cview());
