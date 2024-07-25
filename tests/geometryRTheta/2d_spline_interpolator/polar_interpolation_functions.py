@@ -50,7 +50,8 @@ def take_names_from_out(var_out):
     """
     out_lines = var_out.split('\n')
     out_words = [l.split(' ') for l in out_lines[:]]
-    degree = int(out_words[0][7])
+    out_words_flat = [w for l in out_words for w in l]
+    degree = int(out_words_flat[out_words_flat.index("degree") + 1])
     names = [l[7] for l in out_words[14+degree:] if len(l)>=7 and l[3] == "Test"]
     return degree, names
 
