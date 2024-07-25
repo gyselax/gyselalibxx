@@ -117,10 +117,10 @@ Branches</h1>
 <h1><a class="anchor" id="docs_Using_git__Submodules"></a>
 Submodules</h1>
 <p>Gyselalibxx depends on other external libraries to compile. These libraries are included in the repository via <a href="https://git-scm.com/docs/gitsubmodules">submodules</a>. In general you will not need to touch the code inside the folders associated with these repositories. However their presence sometimes causes unexpected behaviour. The following is a small FAQ of common issues concerning submodules:</p>
-<h4><a class="anchor" id="autotoc_md15"></a>
+<h4><a class="anchor" id="autotoc_md19"></a>
 Q: I cloned the repository but the submodules were not cloned</h4>
 <p><b>A:</b> If you accidentally cloned the repository without the <code>--recurse-submodules</code> option you can collect the submodules by running the following command: </p><div class="fragment"><div class="line">git submodule update --init</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md16"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md20"></a>
 Q: Git reports changes in the submodule but I didn't change this code</h4>
 <p><b>A:</b> It is likely that you previously checked out a branch where the submodule was pinned to a different version. When you changed to your current branch the submodule was not updated, hence the reported changes. You can revert the changes to return to the version in your branch using: </p><div class="fragment"><div class="line">git submodule update --init</div>
 </div><!-- fragment --> </div></div><!-- contents -->

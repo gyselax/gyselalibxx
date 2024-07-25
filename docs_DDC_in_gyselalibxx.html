@@ -279,10 +279,10 @@ Example</h1>
 <div class="line">});</div>
 </div><!-- fragment --><p><code>ddc::ChunkSpan</code> objects are required for function arguments. For example the prototype of the function which defines the electric potential would be: </p><div class="fragment"><div class="line">DSpanX operator()(DSpanX electric_potential, DViewSpXVx distribution_function);</div>
 </div><!-- fragment --><p> where <code>DSpanX</code> is a reference to the <code>DFieldX</code> object where the electric potential is stored, and <code>DViewSpXVx</code> is a constant reference to the <code>DFieldSpXVx</code> object where the distribution function is stored.</p>
-<h3><a class="anchor" id="autotoc_md12"></a>
+<h3><a class="anchor" id="autotoc_md16"></a>
 Continuous vs. discrete objects</h3>
 <p>The majority of the DDC types represent objects in or on a discrete vector space. It may not be immediately obvious why continous objects are also needed given that simulations are necessarily discrete. Backward semi-Lagrangian advection is a good example of where this is required. In backward semi-Lagrangian advection we work on a discrete grid (a <code>ddc::DiscreteDomain</code>), for each point of the grid we trace the characteristic to find where a particle positioned at this grid point would have been located at the previous time step. This location, known as the foot of the characteristic can be located anywhere in the vector space, unlike the grid points, the foot of the characteristic is not restricted to a subset of valid positions. It must therefore be represented with a continuous object. In this case a <code>ddc::Coordinate</code> perfectly describes the position of the foot of the characteristic while also providing all pertinent information about the dimensions.</p>
-<h3><a class="anchor" id="autotoc_md13"></a>
+<h3><a class="anchor" id="autotoc_md17"></a>
 Example use of DiscreteVector for Finite Differences</h3>
 <p>The class <code>ddc::DiscreteVector</code> is particularly useful in cases where we wish to express a stencil. Let us consider the case of a 2D finite differences scheme on uniform meshes expressed as follows: </p><p class="formulaDsp">
 \[ \nabla^2 f(x,y) = \frac{f(x-h_x, y) + f(x+h_x, y) + f(x, y-h_y) + f(x, y+h_y) - 4f(x,y)}{h_x h_y} \]
@@ -306,7 +306,7 @@ Example use of DiscreteVector for Finite Differences</h3>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Pitfalls"></a>
 Pitfalls</h1>
 <p>When using DDC there are some things that you should be careful about. These are listed here.</p>
-<h3><a class="anchor" id="autotoc_md14"></a>
+<h3><a class="anchor" id="autotoc_md18"></a>
 Synchronicity</h3>
 <p>In DDC and Kokkos the code runs asynchronously when an execution space is provided. When no execution space is provided the code runs synchronously surrounded by fences. In order to ensure that there is no danger coming from the asynchronicity we need to follow certain rules. In Gysela the chosen conventions are:</p><ul>
 <li>Always provide an execution space to <code>ddc::parallel_for_each</code> or <code>ddc::parallel_transform_reduce</code> (or similar Kokkos functions).</li>

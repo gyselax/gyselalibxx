@@ -43,6 +43,14 @@ var NAVTREE =
       [ "Operators", "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Operators", null ],
       [ "Code Organisation", "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Code_Organisation", null ]
     ] ],
+    [ "Common compilation problems", "docs_Common_compilation_problems.html", [
+      [ "The closure type for a lambda cannot be used in the template argument type of a '__global__' function", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__The_closure_type_for_a_lambda_cannot_be_used_in_the_template_argument_type_of_a____global____function", null ],
+      [ "Implicit capture of 'this' in extended lambda expression", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__Implicit_capture_of__this__in_extended_lambda_expression", null ],
+      [ "Accessing allocated data", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__Accessing_allocated_data", null ],
+      [ "The enclosing parent function for an extended '__host__' '__device__' lambda cannot have private or protected access within its class", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__The_enclosing_parent_function_for_an_extended____host_______device____lambda_cannot_have_private_or_protected_access_within_its_class", null ],
+      [ "A nonstatic member reference must be relative to a specific object", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__A_nonstatic_member_reference_must_be_relative_to_a_specific_object", null ],
+      [ "X is not defined", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__X_is_not_defined", null ]
+    ] ],
     [ "Using DDC in Gyselalibxx", "docs_DDC_in_gyselalibxx.html", [
       [ "Contents", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Contents", null ],
       [ "Coordinate", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Coordinate", null ],
@@ -78,8 +86,8 @@ var NAVTREEINDEX =
 "classMatrixBatchEll.html#a4e9af3104dc41b66da9dd69f3ea4224d",
 "classRK3.html",
 "dir_d63f94c6fea620ecaa40680f440bf243.html",
-"src_geometryRTheta.html",
-"trapezoid__quadrature_8hpp.html#a73588b65e152caa528b76e0906b82ccf"
+"src_advection.html#autotoc_md39",
+"tests_geometryRTheta_advection_2d_rp.html#autotoc_md76"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

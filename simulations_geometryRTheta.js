@@ -14,11 +14,15 @@ var simulations_geometryRTheta =
         [ "Data Storage", "docs_CODING_STANDARD.html#autotoc_md10", null ]
       ] ],
       [ "Template Strategy", "docs_CODING_STANDARD.html#autotoc_md11", null ],
-      [ "Continuous vs. discrete objects", "docs_DDC_in_gyselalibxx.html#autotoc_md12", null ],
-      [ "Example use of DiscreteVector for Finite Differences", "docs_DDC_in_gyselalibxx.html#autotoc_md13", null ],
-      [ "Synchronicity", "docs_DDC_in_gyselalibxx.html#autotoc_md14", [
-        [ "Q: I cloned the repository but the submodules were not cloned", "docs_Using_git.html#autotoc_md15", null ],
-        [ "Q: Git reports changes in the submodule but I didn't change this code", "docs_Using_git.html#autotoc_md16", null ]
+      [ "Error Message", "docs_Common_compilation_problems.html#autotoc_md12", null ],
+      [ "Error Message", "docs_Common_compilation_problems.html#autotoc_md13", null ],
+      [ "Error Message", "docs_Common_compilation_problems.html#autotoc_md14", null ],
+      [ "Error Message", "docs_Common_compilation_problems.html#autotoc_md15", null ],
+      [ "Continuous vs. discrete objects", "docs_DDC_in_gyselalibxx.html#autotoc_md16", null ],
+      [ "Example use of DiscreteVector for Finite Differences", "docs_DDC_in_gyselalibxx.html#autotoc_md17", null ],
+      [ "Synchronicity", "docs_DDC_in_gyselalibxx.html#autotoc_md18", [
+        [ "Q: I cloned the repository but the submodules were not cloned", "docs_Using_git.html#autotoc_md19", null ],
+        [ "Q: Git reports changes in the submodule but I didn't change this code", "docs_Using_git.html#autotoc_md20", null ]
       ] ],
       [ "Studied problem", "simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Studied_problem", null ],
       [ "Test case - diocotron instability", "simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Test_case_-_diocotron_instability", null ],
