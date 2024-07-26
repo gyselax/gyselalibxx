@@ -1,9 +1,9 @@
 var classMatrixBatchCsr =
 [
-    [ "MatrixBatchCsr", "classMatrixBatchCsr.html#ac309592c5f925881fe71bcb30ae56803", null ],
-    [ "MatrixBatchCsr", "classMatrixBatchCsr.html#a0dcf981da25e7d3bab4b3c9830401c01", null ],
-    [ "get_batch_csr", "classMatrixBatchCsr.html#a5d5109747b0bc95727ecccf8913fa3ad", null ],
-    [ "factorize", "classMatrixBatchCsr.html#a268fa87459b281635258fce80a9b1f72", null ],
-    [ "solve_inplace", "classMatrixBatchCsr.html#a5d800443a147a48a58a081b3de70c087", null ],
-    [ "norm", "classMatrixBatchCsr.html#af0ffc0866b850549f651512f30f90dbe", null ]
+    [ "MatrixBatchCsr", "classMatrixBatchCsr.html#a3b7820a5bd67452226c742f08cf37544", null ],
+    [ "MatrixBatchCsr", "classMatrixBatchCsr.html#aeb35ced3575736b99178638e1a21aa71", null ],
+    [ "get_batch_csr", "classMatrixBatchCsr.html#abd4f443cdafa27a91df836e05cbc6f64", null ],
+    [ "factorize", "classMatrixBatchCsr.html#a0d6ad746ade755c3bf5d677aed54005e", null ],
+    [ "solve_inplace", "classMatrixBatchCsr.html#a82891129e5baba2ab2e6af1ca7828d6d", null ],
+    [ "norm", "classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d", null ]
 ];

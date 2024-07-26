@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: MatrixBatchCsr&lt; ExecSpace &gt; Class Template Reference</title>
+<title>Gyselalib++: MatrixBatchCsr&lt; ExecSpace, Solver &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,42 +103,42 @@ $(document).ready(function(){initNavTree('classMatrixBatchCsr.html',''); initRes
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classMatrixBatchCsr-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">MatrixBatchCsr&lt; ExecSpace &gt; Class Template Reference</div>  </div>
+<div class="title">MatrixBatchCsr&lt; ExecSpace, Solver &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><a class="el" href="classMatrix.html">Matrix</a> class which is able to manage and solve a batch of sparse linear systems.  
  <a href="classMatrixBatchCsr.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for MatrixBatchCsr&lt; ExecSpace &gt;:</div>
+Inheritance diagram for MatrixBatchCsr&lt; ExecSpace, Solver &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classMatrixBatchCsr.png" usemap="#MatrixBatchCsr_3C_20ExecSpace_20_3E_map" alt=""/>
-  <map id="MatrixBatchCsr_3C_20ExecSpace_20_3E_map" name="MatrixBatchCsr_3C_20ExecSpace_20_3E_map">
-<area href="classMatrixBatch.html" title="MatrixBatch superclass for managing a collection of linear systems." alt="MatrixBatch&lt; ExecSpace &gt;" shape="rect" coords="0,0,187,24"/>
+  <img src="classMatrixBatchCsr.png" usemap="#MatrixBatchCsr_3C_20ExecSpace_2C_20Solver_20_3E_map" alt=""/>
+  <map id="MatrixBatchCsr_3C_20ExecSpace_2C_20Solver_20_3E_map" name="MatrixBatchCsr_3C_20ExecSpace_2C_20Solver_20_3E_map">
+<area href="classMatrixBatch.html" title="MatrixBatch superclass for managing a collection of linear systems." alt="MatrixBatch&lt; ExecSpace &gt;" shape="rect" coords="0,0,233,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac309592c5f925881fe71bcb30ae56803"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#ac309592c5f925881fe71bcb30ae56803">MatrixBatchCsr</a> (const int batch_size, const int mat_size, const int nnz_per_system, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditionner_max_block_size=1u)</td></tr>
-<tr class="memdesc:ac309592c5f925881fe71bcb30ae56803"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for <a class="el" href="classMatrixBatchCsr.html" title="Matrix class which is able to manage and solve a batch of sparse linear systems.">MatrixBatchCsr</a> class.  <a href="classMatrixBatchCsr.html#ac309592c5f925881fe71bcb30ae56803">More...</a><br /></td></tr>
-<tr class="separator:ac309592c5f925881fe71bcb30ae56803"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dcf981da25e7d3bab4b3c9830401c01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a0dcf981da25e7d3bab4b3c9830401c01">MatrixBatchCsr</a> (Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt; batch_values, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; cols_idx, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; nnz_per_row, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditionner_max_block_size=1u)</td></tr>
-<tr class="memdesc:a0dcf981da25e7d3bab4b3c9830401c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classMatrixBatchCsr.html" title="Matrix class which is able to manage and solve a batch of sparse linear systems.">MatrixBatchCsr</a> class.  <a href="classMatrixBatchCsr.html#a0dcf981da25e7d3bab4b3c9830401c01">More...</a><br /></td></tr>
-<tr class="separator:a0dcf981da25e7d3bab4b3c9830401c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d5109747b0bc95727ecccf8913fa3ad"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a5d5109747b0bc95727ecccf8913fa3ad">get_batch_csr</a> ()</td></tr>
-<tr class="memdesc:a5d5109747b0bc95727ecccf8913fa3ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to update information about values,indices and the number of non-zero per row for the whole batch.  <a href="classMatrixBatchCsr.html#a5d5109747b0bc95727ecccf8913fa3ad">More...</a><br /></td></tr>
-<tr class="separator:a5d5109747b0bc95727ecccf8913fa3ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a268fa87459b281635258fce80a9b1f72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a268fa87459b281635258fce80a9b1f72">factorize</a> () final</td></tr>
-<tr class="memdesc:a268fa87459b281635258fce80a9b1f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">function used to set-up the Ginkgo solver.  <a href="classMatrixBatchCsr.html#a268fa87459b281635258fce80a9b1f72">More...</a><br /></td></tr>
-<tr class="separator:a268fa87459b281635258fce80a9b1f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d800443a147a48a58a081b3de70c087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a5d800443a147a48a58a081b3de70c087">solve_inplace</a> (<a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> rhs_view) const final</td></tr>
-<tr class="memdesc:a5d800443a147a48a58a081b3de70c087"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function which solves the collection of linear problems.  <a href="classMatrixBatchCsr.html#a5d800443a147a48a58a081b3de70c087">More...</a><br /></td></tr>
-<tr class="separator:a5d800443a147a48a58a081b3de70c087"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0ffc0866b850549f651512f30f90dbe"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#af0ffc0866b850549f651512f30f90dbe">norm</a> (int batch_idx) const</td></tr>
-<tr class="memdesc:af0ffc0866b850549f651512f30f90dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function returning the norm of a matrix located at batch_idx.  <a href="classMatrixBatchCsr.html#af0ffc0866b850549f651512f30f90dbe">More...</a><br /></td></tr>
-<tr class="separator:af0ffc0866b850549f651512f30f90dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b7820a5bd67452226c742f08cf37544"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a3b7820a5bd67452226c742f08cf37544">MatrixBatchCsr</a> (const int batch_size, const int mat_size, const int nnz_per_system, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditionner_max_block_size=1u)</td></tr>
+<tr class="memdesc:a3b7820a5bd67452226c742f08cf37544"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for <a class="el" href="classMatrixBatchCsr.html" title="Matrix class which is able to manage and solve a batch of sparse linear systems.">MatrixBatchCsr</a> class.  <a href="classMatrixBatchCsr.html#a3b7820a5bd67452226c742f08cf37544">More...</a><br /></td></tr>
+<tr class="separator:a3b7820a5bd67452226c742f08cf37544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb35ced3575736b99178638e1a21aa71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#aeb35ced3575736b99178638e1a21aa71">MatrixBatchCsr</a> (Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt; batch_values, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; cols_idx, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; nnz_per_row, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditionner_max_block_size=1u)</td></tr>
+<tr class="memdesc:aeb35ced3575736b99178638e1a21aa71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classMatrixBatchCsr.html" title="Matrix class which is able to manage and solve a batch of sparse linear systems.">MatrixBatchCsr</a> class.  <a href="classMatrixBatchCsr.html#aeb35ced3575736b99178638e1a21aa71">More...</a><br /></td></tr>
+<tr class="separator:aeb35ced3575736b99178638e1a21aa71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd4f443cdafa27a91df836e05cbc6f64"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#abd4f443cdafa27a91df836e05cbc6f64">get_batch_csr</a> ()</td></tr>
+<tr class="memdesc:abd4f443cdafa27a91df836e05cbc6f64"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to update information about values,indices and the number of non-zero per row for the whole batch.  <a href="classMatrixBatchCsr.html#abd4f443cdafa27a91df836e05cbc6f64">More...</a><br /></td></tr>
+<tr class="separator:abd4f443cdafa27a91df836e05cbc6f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d6ad746ade755c3bf5d677aed54005e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a0d6ad746ade755c3bf5d677aed54005e">factorize</a> () final</td></tr>
+<tr class="memdesc:a0d6ad746ade755c3bf5d677aed54005e"><td class="mdescLeft">&#160;</td><td class="mdescRight">function used to set-up the Ginkgo solver.  <a href="classMatrixBatchCsr.html#a0d6ad746ade755c3bf5d677aed54005e">More...</a><br /></td></tr>
+<tr class="separator:a0d6ad746ade755c3bf5d677aed54005e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82891129e5baba2ab2e6af1ca7828d6d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a82891129e5baba2ab2e6af1ca7828d6d">solve_inplace</a> (<a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> rhs_view) const final</td></tr>
+<tr class="memdesc:a82891129e5baba2ab2e6af1ca7828d6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function which solves the collection of linear problems.  <a href="classMatrixBatchCsr.html#a82891129e5baba2ab2e6af1ca7828d6d">More...</a><br /></td></tr>
+<tr class="separator:a82891129e5baba2ab2e6af1ca7828d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eca63a806974a62a376ae271d6fb14d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d">norm</a> (int batch_idx) const</td></tr>
+<tr class="memdesc:a6eca63a806974a62a376ae271d6fb14d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function returning the norm of a matrix located at batch_idx.  <a href="classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d">More...</a><br /></td></tr>
+<tr class="separator:a6eca63a806974a62a376ae271d6fb14d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classMatrixBatch"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classMatrixBatch')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td></tr>
 <tr class="memitem:aa43133aab812e00cb47c1c36cf45c112 inherit pub_methods_classMatrixBatch"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">MatrixBatch</a> (int batch_size, int mat_size)</td></tr>
 <tr class="memdesc:aa43133aab812e00cb47c1c36cf45c112 inherit pub_methods_classMatrixBatch"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for <a class="el" href="classMatrixBatch.html" title="MatrixBatch superclass for managing a collection of linear systems.">MatrixBatch</a> class.  <a href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">More...</a><br /></td></tr>
@@ -159,30 +159,31 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="separator:a6475f75dadb9320f4fb6ef6235584a18 inherit pub_types_classMatrixBatch"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class ExecSpace&gt;<br />
-class MatrixBatchCsr&lt; ExecSpace &gt;</h3>
+<div class="textblock"><h3>template&lt;class ExecSpace, MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt;<br />
+class MatrixBatchCsr&lt; ExecSpace, Solver &gt;</h3>
 
 <p><a class="el" href="classMatrix.html">Matrix</a> class which is able to manage and solve a batch of sparse linear systems. </p>
 <p>Executes on either CPU or GPU. It takes advantage of the sparse structure, and the only batched solver available in Ginkgo : Stabilized Bicg. This class uses the CSR storage format which needs three arrays, one stores values, the other column indices. The third array contains the count of non-zero inside the matrix lines.(eg:for a given line index i nn_per_row[i]= sum of non-zeros until line i) The class returns these arrays (as Kokkos views) with the get_csr_views function, it is then possible to fill them outside the class. The sparsity pattern is the same for all matrices, hence column indices are stored only for one system. Tolerance and maximal number of iterations, which are parameters for the iterative solver, are set in the constructor. It is possibile to get convergence information by activating the logger at constructor call. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ExecSpace</td><td>Execution space,needed by Kokkos for allocations and parallelism. The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace </td></tr>
+    <tr><td class="paramname">Solver</td><td>Refers to the solver type, default value is the Bicgstab which is more general. The use of a CG solver is also possible, in this case, please make sure that matrices structure fulfils CG requirements. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac309592c5f925881fe71bcb30ae56803"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac309592c5f925881fe71bcb30ae56803">&#9670;&nbsp;</a></span>MatrixBatchCsr() <span class="overload">[1/2]</span></h2>
+<a id="a3b7820a5bd67452226c742f08cf37544"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b7820a5bd67452226c742f08cf37544">&#9670;&nbsp;</a></span>MatrixBatchCsr() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ExecSpace &gt; </div>
+template&lt;class ExecSpace , MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace &gt;::<a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a> </td>
+          <td class="memname"><a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace, Solver &gt;::<a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a> </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>batch_size</em>, </td>
@@ -252,19 +253,19 @@ template&lt;class ExecSpace &gt; </div>
 
 </div>
 </div>
-<a id="a0dcf981da25e7d3bab4b3c9830401c01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0dcf981da25e7d3bab4b3c9830401c01">&#9670;&nbsp;</a></span>MatrixBatchCsr() <span class="overload">[2/2]</span></h2>
+<a id="aeb35ced3575736b99178638e1a21aa71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb35ced3575736b99178638e1a21aa71">&#9670;&nbsp;</a></span>MatrixBatchCsr() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ExecSpace &gt; </div>
+template&lt;class ExecSpace , MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace &gt;::<a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a> </td>
+          <td class="memname"><a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace, Solver &gt;::<a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a> </td>
           <td>(</td>
           <td class="paramtype">Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt;&#160;</td>
           <td class="paramname"><em>batch_values</em>, </td>
@@ -335,19 +336,19 @@ template&lt;class ExecSpace &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5d5109747b0bc95727ecccf8913fa3ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d5109747b0bc95727ecccf8913fa3ad">&#9670;&nbsp;</a></span>get_batch_csr()</h2>
+<a id="abd4f443cdafa27a91df836e05cbc6f64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd4f443cdafa27a91df836e05cbc6f64">&#9670;&nbsp;</a></span>get_batch_csr()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ExecSpace &gt; </div>
+template&lt;class ExecSpace , MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::tuple&lt; Kokkos::View&lt;double**, Kokkos::LayoutRight, ExecSpace&gt;, Kokkos::View&lt;int*, Kokkos::LayoutRight, ExecSpace&gt;, Kokkos::View&lt;int*, Kokkos::LayoutRight, ExecSpace&gt; &gt; <a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace &gt;::get_batch_csr </td>
+          <td class="memname">std::tuple&lt; Kokkos::View&lt;double**, Kokkos::LayoutRight, ExecSpace&gt;, Kokkos::View&lt;int*, Kokkos::LayoutRight, ExecSpace&gt;, Kokkos::View&lt;int*, Kokkos::LayoutRight, ExecSpace&gt; &gt; <a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace, Solver &gt;::get_batch_csr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -369,19 +370,19 @@ nnz_per_row_view A 1D Kokkos view which stores the count of non-zero per line, i
 
 </div>
 </div>
-<a id="a268fa87459b281635258fce80a9b1f72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a268fa87459b281635258fce80a9b1f72">&#9670;&nbsp;</a></span>factorize()</h2>
+<a id="a0d6ad746ade755c3bf5d677aed54005e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d6ad746ade755c3bf5d677aed54005e">&#9670;&nbsp;</a></span>factorize()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ExecSpace &gt; </div>
+template&lt;class ExecSpace , MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace &gt;::factorize </td>
+          <td class="memname">void <a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace, Solver &gt;::factorize </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -401,19 +402,19 @@ template&lt;class ExecSpace &gt; </div>
 
 </div>
 </div>
-<a id="a5d800443a147a48a58a081b3de70c087"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d800443a147a48a58a081b3de70c087">&#9670;&nbsp;</a></span>solve_inplace()</h2>
+<a id="a82891129e5baba2ab2e6af1ca7828d6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82891129e5baba2ab2e6af1ca7828d6d">&#9670;&nbsp;</a></span>solve_inplace()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ExecSpace &gt; </div>
+template&lt;class ExecSpace , MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> <a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace &gt;::solve_inplace </td>
+          <td class="memname"><a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> <a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace, Solver &gt;::solve_inplace </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a>&#160;</td>
           <td class="paramname"><em>rhs_view</em></td><td>)</td>
@@ -440,19 +441,19 @@ template&lt;class ExecSpace &gt; </div>
 
 </div>
 </div>
-<a id="af0ffc0866b850549f651512f30f90dbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0ffc0866b850549f651512f30f90dbe">&#9670;&nbsp;</a></span>norm()</h2>
+<a id="a6eca63a806974a62a376ae271d6fb14d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eca63a806974a62a376ae271d6fb14d">&#9670;&nbsp;</a></span>norm()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ExecSpace &gt; </div>
+template&lt;class ExecSpace , MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace &gt;::norm </td>
+          <td class="memname">double <a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace, Solver &gt;::norm </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>batch_idx</em></td><td>)</td>

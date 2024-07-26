@@ -11,7 +11,7 @@ var searchData=
   ['neutral_20simulations_494',['Neutral simulations',['../simulations_geometryXVx_neutrals.html',1,'simulations_geometryXVx']]],
   ['non_5fsingular_5fsolution_495',['non_singular_solution',['../classManufacturedPoissonTest.html#af7bed860a32f8678d1128795b614d6de',1,'ManufacturedPoissonTest']]],
   ['noperturbinitialization_496',['NoPerturbInitialization',['../classNoPerturbInitialization.html#af83e17937b0d453308a2480f76b9c3b7',1,'NoPerturbInitialization::NoPerturbInitialization()'],['../classNoPerturbInitialization.html',1,'NoPerturbInitialization']]],
-  ['norm_497',['norm',['../classMatrixBatchCsr.html#af0ffc0866b850549f651512f30f90dbe',1,'MatrixBatchCsr::norm()'],['../classMatrixBatchEll.html#a972e124276cf81e393a6590d53986a41',1,'MatrixBatchEll::norm()']]],
+  ['norm_497',['norm',['../classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d',1,'MatrixBatchCsr::norm()'],['../classMatrixBatchEll.html#a972e124276cf81e393a6590d53986a41',1,'MatrixBatchEll::norm()']]],
   ['norm_5finf_498',['norm_inf',['../utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009',1,'norm_inf(ddc::Coordinate&lt; Tags... &gt; coord):&#160;utils_tools.hpp'],['../utils__tools_8hpp.html#a74cd2065291900b963fdc775ae5aec8d',1,'norm_inf(double const coord):&#160;utils_tools.hpp']]],
   ['nulladvectionvelocity_499',['NullAdvectionVelocity',['../classNullAdvectionVelocity.html',1,'']]],
   ['nullfluidsolver_500',['NullFluidSolver',['../classNullFluidSolver.html#ae0d835e311caf4c28ce0149100872122',1,'NullFluidSolver::NullFluidSolver()'],['../classNullFluidSolver.html',1,'NullFluidSolver']]],

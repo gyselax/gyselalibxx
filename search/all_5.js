@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['factorize_237',['factorize',['../classMatrixBatchTridiag.html#a7a53446a0a79c099986468f6a6cf4e7b',1,'MatrixBatchTridiag::factorize()'],['../classMatrixBatchEll.html#ade9b19aa5be23b68a1f9d8df6a4244bb',1,'MatrixBatchEll::factorize()'],['../classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c',1,'MatrixBatch::factorize()'],['../classMatrixBatchCsr.html#a268fa87459b281635258fce80a9b1f72',1,'MatrixBatchCsr::factorize()']]],
+  ['factorize_237',['factorize',['../classMatrixBatchTridiag.html#a7a53446a0a79c099986468f6a6cf4e7b',1,'MatrixBatchTridiag::factorize()'],['../classMatrixBatchEll.html#ade9b19aa5be23b68a1f9d8df6a4244bb',1,'MatrixBatchEll::factorize()'],['../classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c',1,'MatrixBatch::factorize()'],['../classMatrixBatchCsr.html#a0d6ad746ade755c3bf5d677aed54005e',1,'MatrixBatchCsr::factorize()']]],
   ['fdistribspan_238',['FDistribSpan',['../classCollisionSpVparMu.html#a867a4e169941ddba02f41bbc143f33c1',1,'CollisionSpVparMu']]],
   ['fdistribuddom_239',['FdistribuDDom',['../classGeometryXYVxVy.html#a78e6b9a2d43d06e94d551cc736801e90',1,'GeometryXYVxVy::FdistribuDDom()'],['../classGeometryXVx.html#a01dd11ecfb6414512e1f8cbaf204c5cd',1,'GeometryXVx::FdistribuDDom()']]],
   ['fem1dpoissonsolver_240',['FEM1DPoissonSolver',['../classFEM1DPoissonSolver.html',1,'FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator &gt;'],['../classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216',1,'FEM1DPoissonSolver::FEM1DPoissonSolver()']]],

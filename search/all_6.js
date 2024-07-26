@@ -22,7 +22,7 @@ var searchData=
   ['get_5fadvection_5ffield_280',['get_advection_field',['../classAdvectionFieldSimulation.html#a0bc3c0d1829fc8f286c5880848cf4883',1,'AdvectionFieldSimulation::get_advection_field()'],['../classAdvectionSimulation.html#a754d22f275182e9571c7d12414fd7f6f',1,'AdvectionSimulation::get_advection_field()']]],
   ['get_5famplitudes_281',['get_amplitudes',['../classKrookSourceAdaptive.html#a8a429dd473078201e0879422899414c0',1,'KrookSourceAdaptive']]],
   ['get_5farray_5findex_282',['get_array_index',['../classDerivFieldCommon_3_01ChunkType_00_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_01_4.html#a2493360feb08b40a7716a6bf6d646b9b',1,'DerivFieldCommon&lt; ChunkType, ddc::DiscreteDomain&lt; DDims... &gt; &gt;']]],
-  ['get_5fbatch_5fcsr_283',['get_batch_csr',['../classMatrixBatchCsr.html#a5d5109747b0bc95727ecccf8913fa3ad',1,'MatrixBatchCsr']]],
+  ['get_5fbatch_5fcsr_283',['get_batch_csr',['../classMatrixBatchCsr.html#abd4f443cdafa27a91df836e05cbc6f64',1,'MatrixBatchCsr']]],
   ['get_5fbatch_5fidx_5fand_5fvals_284',['get_batch_idx_and_vals',['../classMatrixBatchEll.html#a4e9af3104dc41b66da9dd69f3ea4224d',1,'MatrixBatchEll']]],
   ['get_5fbatch_5fsize_285',['get_batch_size',['../classMatrixBatch.html#a6794abdadab47bff32062668682e0fab',1,'MatrixBatch']]],
   ['get_5fderivative_286',['get_derivative',['../classKrookSourceAdaptive.html#a9b406e47034bbf02b16a3a0a43a7207e',1,'KrookSourceAdaptive::get_derivative()'],['../classCollisionsInter.html#a42683cdfbd5476e2d01c0b0b6c4d9fcc',1,'CollisionsInter::get_derivative()'],['../classDiffusiveNeutralSolver.html#ae5ebfe3292a4555f0c0df1cdd2a0fa6a',1,'DiffusiveNeutralSolver::get_derivative()']]],
