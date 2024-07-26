@@ -27,11 +27,9 @@ TEST(Maxwellian, Moments)
 
     ddc::init_discrete_space<IDimVx>(InterpPointsVx::get_sampling());
 
-    IDomainVx interpolation_domain_vx(InterpPointsVx::get_domain());
+    IDomainVx gridvx(InterpPointsVx::get_domain());
 
-    SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
-
-    IDomainVx const gridvx = builder_vx.interpolation_domain();
+    SplineVxBuilder_1d const builder_vx(gridvx);
 
     host_t<DFieldVx> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridvx);
     host_t<Quadrature<IDomainVx>> const integrate_v(quadrature_coeffs);
