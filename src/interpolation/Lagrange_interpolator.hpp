@@ -14,6 +14,9 @@ template <class DDimI, BCond BcMin, BCond BcMax, class... DDim>
 class LagrangeInterpolator : public IInterpolator<DDimI, DDim...>
 {
     using CDim = typename DDimI::continuous_dimension_type;
+    using deriv_type = typename IInterpolator<DDimI, DDim...>::deriv_type;
+    using batched_derivs_domain_type =
+            typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type;
 
 private:
     int m_degree;
@@ -33,6 +36,26 @@ public:
 
     ~LagrangeInterpolator() override = default;
 
+    batched_derivs_domain_type batched_derivs_domain_xmin(
+            ddc::DiscreteDomain<DDim...> dom) const override
+    {
+        return ddc::replace_dim_of<DDimI, deriv_type>(
+                dom,
+                ddc::DiscreteDomain<deriv_type>(
+                        ddc::DiscreteElement<deriv_type>(1),
+                        ddc::DiscreteVector<deriv_type>(0)));
+    }
+
+    batched_derivs_domain_type batched_derivs_domain_xmax(
+            ddc::DiscreteDomain<DDim...> dom) const override
+    {
+        return ddc::replace_dim_of<DDimI, deriv_type>(
+                dom,
+                ddc::DiscreteDomain<deriv_type>(
+                        ddc::DiscreteElement<deriv_type>(1),
+                        ddc::DiscreteVector<deriv_type>(0)));
+    }
+
     /**
      * @brief Approximate the value of a function at a set of coordinates using the
      * current values at a known set of interpolation points.
@@ -40,6 +63,8 @@ public:
      * @param[in, out] inout_data On input: an array containing the value of the function at the interpolation points.
      *                   On output: an array containing the value of the function at the coordinates.
      * @param[in] coordinates The coordinates where the function should be evaluated.
+     * @param[in] derivs_xmin The values of the derivatives at the lower boundary (unused in this class).
+     * @param[in] derivs_xmax The values of the derivatives at the upper boundary (unused in this class).
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
@@ -47,7 +72,17 @@ public:
             device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> inout_data,
             device_t<ddc::ChunkSpan<
                     const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
-                    ddc::DiscreteDomain<DDim...>>> coordinates) const override
+                    ddc::DiscreteDomain<DDim...>>> coordinates,
+            [[maybe_unused]] std::optional<device_t<ddc::ChunkSpan<
+                    double const,
+                    typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type>>>
+                    derivs_xmin
+            = std::nullopt,
+            [[maybe_unused]] std::optional<device_t<ddc::ChunkSpan<
+                    double const,
+                    typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type>>>
+                    derivs_xmax
+            = std::nullopt) const override
     {
         static_assert(
                 BcMin != BCond::PERIODIC,
