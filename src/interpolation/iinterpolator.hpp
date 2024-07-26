@@ -5,6 +5,7 @@
 #include <memory>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines/deriv.hpp>
 
 #include <ddc_helper.hpp>
 
@@ -51,6 +52,36 @@ class IInterpolator
 public:
     virtual ~IInterpolator() = default;
 
+    /// @brief The type of the dimension representing derivatives.
+    using deriv_type = ddc::Deriv<typename DDimI::continuous_dimension_type>;
+    /// @brief The type of the whole domain on which derivatives are defined.
+    using batched_derivs_domain_type
+            = ddc::replace_dim_of_t<ddc::DiscreteDomain<DDim...>, DDimI, deriv_type>;
+
+    /**
+     * @brief Get the batched derivs domain on lower boundaries.
+     *
+     * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
+     * This is the domain on which derivatives on lower boundaries are defined.
+     *
+     * @param[in] dom The domain of a single-species distribution function.
+     * @return dom The lower boundaries of this domain.
+     */
+    virtual batched_derivs_domain_type batched_derivs_domain_xmin(
+            ddc::DiscreteDomain<DDim...> dom) const = 0;
+
+    /**
+     * @brief Get the batched derivs domain on upper boundaries.
+     *
+     * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
+     * This is the domain on which derivatives on upper boundaries are defined.
+     *
+     * @param[in] dom The domain of a single-species distribution function.
+     * @return dom The upper boundaries of this domain.
+     */
+    virtual batched_derivs_domain_type batched_derivs_domain_xmax(
+            ddc::DiscreteDomain<DDim...> dom) const = 0;
+
     /**
      * @brief Approximate the value of a function at a set of coordinates using the
      * current values at a known set of interpolation points.
@@ -58,6 +89,10 @@ public:
      * @param[in, out] inout_data On input: an array containing the value of the function at the interpolation points.
      * 			 On output: an array containing the value of the function at the coordinates.
      * @param[in] coordinates The coordinates where the function should be evaluated.
+     * @param[in] derivs_xmin The values of the derivatives at the lower boundary
+     * (used only with splines and ddc::BoundCond::HERMITE lower boundary condition).
+     * @param[in] derivs_xmax The values of the derivatives at the upper boundary
+     * (used only with splines and ddc::BoundCond::HERMITE upper boundary condition).
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
@@ -65,7 +100,13 @@ public:
             device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> inout_data,
             device_t<ddc::ChunkSpan<
                     const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
-                    ddc::DiscreteDomain<DDim...>>> coordinates) const = 0;
+                    ddc::DiscreteDomain<DDim...>>> coordinates,
+            std::optional<device_t<ddc::ChunkSpan<double const, batched_derivs_domain_type>>>
+                    derivs_xmin
+            = std::nullopt,
+            std::optional<device_t<ddc::ChunkSpan<double const, batched_derivs_domain_type>>>
+                    derivs_xmax
+            = std::nullopt) const = 0;
 };
 
 /**
@@ -95,6 +136,12 @@ class IPreallocatableInterpolator : public IInterpolator<DDimI, DDim...>
 public:
     ~IPreallocatableInterpolator() override = default;
 
+    /// @brief The type of the dimension representing derivatives.
+    using deriv_type = typename IInterpolator<DDimI, DDim...>::deriv_type;
+    /// @brief The type of the whole domain on which derivatives are defined.
+    using batched_derivs_domain_type =
+            typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type;
+
     /**
      * @brief Allocate an instance of an InterpolatorProxy to use as an IInterpolator.
      *
@@ -108,12 +155,46 @@ public:
     virtual std::unique_ptr<IInterpolator<DDimI, DDim...>> preallocate() const = 0;
 
     /**
+     * @brief Get the batched derivs domain on lower boundaries.
+     *
+     * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
+     * This is the domain on which derivatives on lower boundaries are defined.
+     *
+     * @param[in] dom The domain of a single-species distribution function.
+     * @return dom The lower boundaries of this domain.
+     */
+    batched_derivs_domain_type batched_derivs_domain_xmin(
+            ddc::DiscreteDomain<DDim...> dom) const override
+    {
+        return (*preallocate()).batched_derivs_domain_xmin(dom);
+    }
+
+    /**
+     * @brief Get the batched derivs domain on upper boundaries.
+     *
+     * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
+     * This is the domain on which derivatives on upper boundaries are defined.
+     *
+     * @param[in] dom The domain of a single-species distribution function.
+     * @return dom The upper boundaries of this domain.
+     */
+    batched_derivs_domain_type batched_derivs_domain_xmax(
+            ddc::DiscreteDomain<DDim...> dom) const override
+    {
+        return (*preallocate()).batched_derivs_domain_xmax(dom);
+    }
+
+    /**
      * @brief Approximate the value of a function at a set of coordinates using the
      * current values at a known set of interpolation points by temporarily preallocating an IInterpolator.
      *
      * @param[in, out] inout_data On input: an array containing the value of the function at the interpolation points.
      * 			 On output: an array containing the value of the function at the coordinates.
      * @param[in] coordinates The coordinates where the function should be evaluated.
+     * @param[in] derivs_xmin The values of the derivatives at the lower boundary
+     * (used only with splines and ddc::BoundCond::HERMITE lower boundary condition).
+     * @param[in] derivs_xmax The values of the derivatives at the upper boundary
+     * (used only with splines and ddc::BoundCond::HERMITE upper boundary condition).
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
@@ -121,7 +202,13 @@ public:
             device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> const inout_data,
             device_t<ddc::ChunkSpan<
                     const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
-                    ddc::DiscreteDomain<DDim...>>> const coordinates) const override
+                    ddc::DiscreteDomain<DDim...>>> const coordinates,
+            std::optional<device_t<ddc::ChunkSpan<double const, batched_derivs_domain_type>>>
+                    derivs_xmin
+            = std::nullopt,
+            std::optional<device_t<ddc::ChunkSpan<double const, batched_derivs_domain_type>>>
+                    derivs_xmax
+            = std::nullopt) const override
     {
         return (*preallocate())(inout_data, coordinates);
     }

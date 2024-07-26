@@ -91,9 +91,7 @@ private:
     // Type for the derivatives of the advection field
     using DerivDim = ddc::Deriv<RDimInterest>;
     using DomainInterestDeriv = ddc::DiscreteDomain<DerivDim>;
-    using AdvecFieldDerivDomain = decltype(ddc::replace_dim_of<IDimInterest, DerivDim>(
-            std::declval<AdvectionDomain>(),
-            std::declval<DomainInterestDeriv>()));
+    using AdvecFieldDerivDomain = ddc::replace_dim_of_t<AdvectionDomain, IDimInterest, DerivDim>;
     using AdvecFieldDerivView = device_t<ddc::ChunkSpan<const double, AdvecFieldDerivDomain>>;
 
 
@@ -103,6 +101,9 @@ private:
     using FunctionInterpolatorType
             = interpolator_on_domain_t<IInterpolator, IDimInterest, FunctionDomain>;
 
+    // Type for the derivatives of the function
+    using FunctionDerivDomain = typename FunctionInterpolatorType::batched_derivs_domain_type;
+    using FunctionDerivChunk = device_t<ddc::Chunk<double, FunctionDerivDomain>>;
 
     FunctionPreallocatableInterpolatorType const& m_function_interpolator;
 
@@ -188,6 +189,13 @@ public:
                 advection_field_derivatives_min,
                 advection_field_derivatives_max);
 
+        // Build derivatives on boundaries and fill with zeros....................................
+        FunctionDerivChunk function_derivatives_min(
+                m_function_interpolator.batched_derivs_domain_xmin(function_dom));
+        FunctionDerivChunk function_derivatives_max(
+                m_function_interpolator.batched_derivs_domain_xmax(function_dom));
+        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);
+        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);
 
         // Initialise the characteristics on the mesh points .....................................
         /*
@@ -247,7 +255,11 @@ public:
 
 
         // Interpolate the function at the characteristic feet
-        function_interpolator(allfdistribu, feet);
+        function_interpolator(
+                allfdistribu,
+                feet,
+                function_derivatives_min,
+                function_derivatives_max);
 
 
         Kokkos::Profiling::popRegion();

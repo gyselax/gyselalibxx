@@ -62,6 +62,15 @@ public:
         ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
         ddc::DiscreteDomain<IDimSp> const sp_dom = ddc::select<IDimSp>(dom);
 
+        device_t<ddc::Chunk<double, typename InterpolatorType::batched_derivs_domain_type>>
+                derivs_min(m_interpolator_v.batched_derivs_domain_xmin(
+                        ddc::remove_dims_of<IDimSp>(dom)));
+        device_t<ddc::Chunk<double, typename InterpolatorType::batched_derivs_domain_type>>
+                derivs_max(m_interpolator_v.batched_derivs_domain_xmax(
+                        ddc::remove_dims_of<IDimSp>(dom)));
+        ddc::parallel_fill(derivs_min, 0.);
+        ddc::parallel_fill(derivs_max, 0.);
+
         // pre-allocate some memory to prevent allocation later in loop
         ddc::Chunk feet_coords_alloc(
                 ddc::remove_dims_of(dom, sp_dom),
@@ -94,7 +103,11 @@ public:
                             feet_coords(iv, ic) = ddc::Coordinate<CDimV>(ddc::coordinate(iv) - dvx);
                         }
                     });
-            interpolator_v(allfdistribu[isp], feet_coords.span_cview());
+            interpolator_v(
+                    allfdistribu[isp],
+                    feet_coords.span_cview(),
+                    derivs_min.span_cview(),
+                    derivs_max.span_cview());
         });
 
         Kokkos::Profiling::popRegion();
