@@ -1,5 +1,8 @@
 var src_multipatch =
 [
+    [ "Multipatch connectivity", "src_multipatch_connectivity.html", [
+      [ "Patch tag", "src_multipatch_connectivity.html#src_multipatch_connectivity__Patch_tag", null ]
+    ] ],
     [ "Interfaces", "src_multipatch_interfaces.html", [
       [ "Sticking of Two Edges", "src_multipatch_interfaces.html#src_multipatch_interfaces__Sticking_of_Two_Edges", null ],
       [ "References", "src_multipatch_interfaces.html#src_multipatch_interfaces__References", null ],

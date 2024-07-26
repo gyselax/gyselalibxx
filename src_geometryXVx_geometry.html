@@ -103,11 +103,11 @@ $(document).ready(function(){initNavTree('src_geometryXVx_geometry.html',''); in
 <div class="title">Geometry X-Vx </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The geometry folder contains a helper file <code>geometry.hpp</code> which provides shortcuts to the types needed to define the specific geometry. In this case the geometry is a simulation with 1 spatial dimension (denoted X) and 1 velocity dimension (denoted Vx).</p>
+<div class="textblock"><p>The geometry folder contains a helper file <code>geometry.hpp</code> which provides shortcuts to the types needed to define the specific geometry. In this case the geometry is a simulation with 1 spatial dimension (denoted <a class="el" href="structX.html" title="First continuous dimension of patch PatchIdx.">X</a>) and 1 velocity dimension (denoted Vx).</p>
 <p>The shortcuts defined in the geometry file represent:</p><ol type="1">
 <li>The spatial, velocity and time dimensions in real space (<a class="el" href="structRDimX.html" title="Define non periodic real X dimension.">RDimX</a>, <a class="el" href="structRDimVx.html" title="Define non periodic real X velocity dimension.">RDimVx</a>, and <a class="el" href="structRDimT.html" title="A class which describes the real space in the temporal direction.">RDimT</a>).</li>
 <li>The type of coordinates of objects represented on the dimensions (CoordT, CoordX, CoordVx, CoordXVx).</li>
-<li>The type of the B-Spline bases used on the spatial and velocity dimensions (<a class="el" href="structBSplinesX.html">BSplinesX</a>, <a class="el" href="structBSplinesVx.html">BSplinesVx</a>).</li>
+<li>The type of the B-Spline bases used on the spatial and velocity dimensions (<a class="el" href="structBSplinesX.html" title="First spline dimension of patch PatchIdx.">BSplinesX</a>, <a class="el" href="structBSplinesVx.html">BSplinesVx</a>).</li>
 <li>The type which will describe the grid points (representing space, velocity and species) on which the simulation will evolve (<a class="el" href="structIDimX.html">IDimX</a>, <a class="el" href="structIDimVx.html">IDimVx</a>, <a class="el" href="structIDimSp.html">IDimSp</a>).</li>
 <li>The type of the helper class which initialises grid points in space and velocity which are compatible with the defined splines (SplineInterpPointsX, SplineInterpPointsVx).</li>
 <li>The type of the objects used to build splines (SplineXBuilder, SplineVxBuilder).</li>

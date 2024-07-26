@@ -81,13 +81,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCollisionSpVparMu.html#ae386a8b960be061d4898a812b37002ae",
-"classElectrostaticalPotentialSimulation.html#a150cdef92eaaa9333e84de31bcd69b86",
-"classMPITransposeAllToAll.html#a79e53590f441ca58d5d54c4375c5e13d",
-"classPreallocatableLagrangeInterpolator.html#a34dd082893c1f3bcafb527c74214ca3f",
-"dir_21841c3627e393781c2c07b5dcb1ed74.html",
-"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__References",
-"structPolarSplineView.html#a48f3bbf282210df43e1c8f87cadbe8b8"
+"classCollisionSpVparMu.html#addaf31ac3bf323d08769042238b15724",
+"classEdgeCoordinatesTransformation.html#a236014183ec26a9cf930f96d906b1a78",
+"classMPITransposeAllToAll.html#a344e0857c0bbe773547de60a7c49f616",
+"classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RCellDim",
+"dir_1768338d22a236895abd99fb8317b81f.html",
+"simulations_geometryRTheta_diocotron.html#autotoc_md21",
+"structInterface.html#a3a4842da91c618bd2c2c0119cb4a30ab"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

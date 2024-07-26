@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_geometry.html','');
 <div class="contents">
 <div class="textblock"><p>The geometry folder contains a helper file <code>geometry.hpp</code> which provides shortcuts to the types needed to define the specific geometry. In this case the geometry is a simulation with</p><ul>
 <li>2 spatial dimensions (denoted <code>R</code> and <code>P</code>) in polar coordinates;</li>
-<li>2 spatial dimensions (denoted <code>X</code> adn <code>Y</code>) in Cartesian coordinates.</li>
+<li>2 spatial dimensions (denoted <code><a class="el" href="structX.html" title="First continuous dimension of patch PatchIdx.">X</a></code> adn <code><a class="el" href="structY.html" title="Second continuous dimension of patch PatchIdx.">Y</a></code>) in Cartesian coordinates.</li>
 </ul>
 <p>We suppose \(r\) positive non periodic, \(\theta\) periodic, \(x\) and \(y\) non periodic. We denote in the code <code>P</code> the polar coordinate \(\theta\). The polar coordinates represent a <b>logical domain</b>, and the Cartesian coordinates the <b>physical domain</b>. Some mappings from the logical domain to the physical domain \((r,\theta) \mapsto (x,y)\) are defined in <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a>.</p>
 <p>The splines applied are cubic and only defined on the logical domain.</p>
