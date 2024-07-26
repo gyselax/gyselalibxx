@@ -46,6 +46,9 @@ class SplineInterpolator : public IInterpolator<DDimI, DDim...>
             LeftExtrapolationRule,
             RightExtrapolationRule,
             DDim...>;
+    using deriv_type = typename IInterpolator<DDimI, DDim...>::deriv_type;
+    using batched_derivs_domain_type =
+            typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type;
 
 private:
     BuilderType const& m_builder;
@@ -58,16 +61,6 @@ private:
             ddc::DeviceAllocator<double>>
             m_coefs;
 
-    ddc::Chunk<
-            double,
-            typename BuilderType::batched_derivs_domain_type,
-            ddc::DeviceAllocator<double>>
-            m_derivs_min_alloc;
-    ddc::Chunk<
-            double,
-            typename BuilderType::batched_derivs_domain_type,
-            ddc::DeviceAllocator<double>>
-            m_derivs_max_alloc;
 
 public:
     /**
@@ -79,26 +72,60 @@ public:
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_coefs(builder.batched_spline_domain())
-        , m_derivs_min_alloc(builder.batched_derivs_xmin_domain())
-        , m_derivs_max_alloc(builder.batched_derivs_xmax_domain())
     {
-        ddc::parallel_fill(m_derivs_min_alloc, 0.);
-        ddc::parallel_fill(m_derivs_max_alloc, 0.);
     }
 
     ~SplineInterpolator() override = default;
 
+    batched_derivs_domain_type batched_derivs_domain_xmin(
+            ddc::DiscreteDomain<DDim...> dom) const override
+    {
+        return ddc::replace_dim_of<DDimI, deriv_type>(
+                dom,
+                ddc::DiscreteDomain<deriv_type>(
+                        ddc::DiscreteElement<deriv_type>(1),
+                        ddc::DiscreteVector<deriv_type>(BuilderType::s_nbc_xmin)));
+    }
+
+    batched_derivs_domain_type batched_derivs_domain_xmax(
+            ddc::DiscreteDomain<DDim...> dom) const override
+    {
+        return ddc::replace_dim_of<DDimI, deriv_type>(
+                dom,
+                ddc::DiscreteDomain<deriv_type>(
+                        ddc::DiscreteElement<deriv_type>(1),
+                        ddc::DiscreteVector<deriv_type>(BuilderType::s_nbc_xmax)));
+    }
+
+    /**
+     * @brief Approximate the value of a function at a set of coordinates using the
+     * current values at a known set of interpolation points.
+     *
+     * @param[in, out] inout_data On input: an array containing the value of the function at the interpolation points.
+     *           On output: an array containing the value of the function at the coordinates.
+     * @param[in] coordinates The coordinates where the function should be evaluated.
+     * @param[in] derivs_xmin The values of the derivatives at the lower boundary
+     * (used only with ddc::BoundCond::HERMITE lower boundary condition).
+     * @param[in] derivs_xmax The values of the derivatives at the upper boundary
+     * (used only with ddc::BoundCond::HERMITE upper boundary condition).
+     *
+     * @return A reference to the inout_data array containing the value of the function at the coordinates.
+     */
     device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> operator()(
             device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> const inout_data,
             device_t<ddc::ChunkSpan<
                     const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
-                    ddc::DiscreteDomain<DDim...>>> const coordinates) const override
+                    ddc::DiscreteDomain<DDim...>>> const coordinates,
+            std::optional<device_t<
+                    ddc::ChunkSpan<double const, typename BuilderType::batched_derivs_domain_type>>>
+                    derivs_xmin
+            = std::nullopt,
+            std::optional<device_t<
+                    ddc::ChunkSpan<double const, typename BuilderType::batched_derivs_domain_type>>>
+                    derivs_xmax
+            = std::nullopt) const override
     {
-        m_builder(
-                m_coefs.span_view(),
-                inout_data.span_cview(),
-                std::optional(m_derivs_min_alloc.span_cview()),
-                std::optional(m_derivs_max_alloc.span_cview()));
+        m_builder(m_coefs.span_view(), inout_data.span_cview(), derivs_xmin, derivs_xmax);
         m_evaluator(inout_data, coordinates, m_coefs.span_cview());
         return inout_data;
     }
