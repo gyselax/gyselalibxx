@@ -67,11 +67,9 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
     ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
-    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
+    ddc::DiscreteDomain<IDimX> gridx(SplineInterpPointsX::get_domain<IDimX>());
 
-    SplineXBuilder_1d const builder_x(interpolation_domain_x);
-
-    IDomainX const gridx = builder_x.interpolation_domain();
+    SplineXBuilder_1d const builder_x(gridx);
 
     ddc::NullExtrapolationRule x_extrapolation_rule_min;
     ddc::NullExtrapolationRule x_extrapolation_rule_max;
