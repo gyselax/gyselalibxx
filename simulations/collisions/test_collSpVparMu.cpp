@@ -36,14 +36,13 @@ int main(int argc, char** argv)
     setenv("KOKKOS_TOOLS_LIBS", KP_KERNEL_TIMER_PATH, false);
     setenv("KOKKOS_TOOLS_TIMER_JSON", "true", false);
 
-    Kokkos::ScopeGuard kokkos_scope(argc, argv);
-    ddc::ScopeGuard ddc_scope(argc, argv);
-
     PC_tree_t conf_collision = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
     PDI_init(conf_pdi);
 
+    Kokkos::ScopeGuard kokkos_scope(argc, argv);
+    ddc::ScopeGuard ddc_scope(argc, argv);
 
     // --------- INITIALISATION ---------
     // ---> Reading of the mesh configuration from input YAML file
@@ -118,7 +117,11 @@ int main(int argc, char** argv)
 
     // ---> Reading of output info from input YAML file
     double const time_diag = PCpp_double(conf_collision, ".Output.time_diag");
-    int const nbstep_diag = int(time_diag / deltat);
+    double deltat_diag = deltat;
+    if (deltat == 0.) {
+        deltat_diag = time_diag / nbiter;
+    }
+    int const nbstep_diag = int(time_diag / deltat_diag);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
 
     // ---> Algorithm time loop
@@ -131,7 +134,7 @@ int main(int argc, char** argv)
     auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
 
     int iter = 0;
-    for (; iter < nbiter; ++iter) {
+    for (; iter < nbiter + 1; ++iter) {
         double const time_iter = time_start + iter * deltat;
         cout << "iter = " << iter << " ; time_iter = " << time_iter << endl;
 
@@ -145,11 +148,6 @@ int main(int argc, char** argv)
         collision_operator(allfdistribu, deltat);
         ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     }
-    // Write distribution function
-    ddc::PdiEvent("write_fdistribu")
-            .with("iter", nbiter)
-            .and_with("time_saved", time_start + nbiter * deltat)
-            .and_with("fdistribu", allfdistribu_host);
 
     steady_clock::time_point const end = steady_clock::now();
     double const simulation_time = std::chrono::duration<double>(end - start).count();
