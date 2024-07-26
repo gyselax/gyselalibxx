@@ -100,6 +100,7 @@ $(document).ready(function(){initNavTree('classIInterpolator.html',''); initResi
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classIInterpolator-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -110,11 +111,28 @@ $(document).ready(function(){initNavTree('classIInterpolator.html',''); initResi
 <p>A class which provides an interpolating function.  
  <a href="classIInterpolator.html#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:abeebc5eb9ba7110ad1e419b49573c44d"><td class="memItemLeft" align="right" valign="top"><a id="abeebc5eb9ba7110ad1e419b49573c44d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#abeebc5eb9ba7110ad1e419b49573c44d">deriv_type</a> = ddc::Deriv&lt; typename DDimI::continuous_dimension_type &gt;</td></tr>
+<tr class="memdesc:abeebc5eb9ba7110ad1e419b49573c44d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the dimension representing derivatives. <br /></td></tr>
+<tr class="separator:abeebc5eb9ba7110ad1e419b49573c44d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bf706cde51455dd3e595dc6e0887f34"><td class="memItemLeft" align="right" valign="top"><a id="a3bf706cde51455dd3e595dc6e0887f34"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#a3bf706cde51455dd3e595dc6e0887f34">batched_derivs_domain_type</a> = ddc::replace_dim_of_t&lt; ddc::DiscreteDomain&lt; DDim... &gt;, DDimI, <a class="el" href="classIInterpolator.html#abeebc5eb9ba7110ad1e419b49573c44d">deriv_type</a> &gt;</td></tr>
+<tr class="memdesc:a3bf706cde51455dd3e595dc6e0887f34"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the whole domain on which derivatives are defined. <br /></td></tr>
+<tr class="separator:a3bf706cde51455dd3e595dc6e0887f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad1fb39b81dbf04b829b21470789585b5"><td class="memItemLeft" align="right" valign="top">virtual device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#ad1fb39b81dbf04b829b21470789585b5">operator()</a> (device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; coordinates) const =0</td></tr>
-<tr class="memdesc:ad1fb39b81dbf04b829b21470789585b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classIInterpolator.html#ad1fb39b81dbf04b829b21470789585b5">More...</a><br /></td></tr>
-<tr class="separator:ad1fb39b81dbf04b829b21470789585b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebe17d4e65d668db6bd3b79bbc8eb83a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classIInterpolator.html#a3bf706cde51455dd3e595dc6e0887f34">batched_derivs_domain_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#aebe17d4e65d668db6bd3b79bbc8eb83a">batched_derivs_domain_xmin</a> (ddc::DiscreteDomain&lt; DDim... &gt; dom) const =0</td></tr>
+<tr class="memdesc:aebe17d4e65d668db6bd3b79bbc8eb83a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batched derivs domain on lower boundaries.  <a href="classIInterpolator.html#aebe17d4e65d668db6bd3b79bbc8eb83a">More...</a><br /></td></tr>
+<tr class="separator:aebe17d4e65d668db6bd3b79bbc8eb83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e61a9846ad8b74444eda92fd62928ed"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classIInterpolator.html#a3bf706cde51455dd3e595dc6e0887f34">batched_derivs_domain_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#a2e61a9846ad8b74444eda92fd62928ed">batched_derivs_domain_xmax</a> (ddc::DiscreteDomain&lt; DDim... &gt; dom) const =0</td></tr>
+<tr class="memdesc:a2e61a9846ad8b74444eda92fd62928ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batched derivs domain on upper boundaries.  <a href="classIInterpolator.html#a2e61a9846ad8b74444eda92fd62928ed">More...</a><br /></td></tr>
+<tr class="separator:a2e61a9846ad8b74444eda92fd62928ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab926d5bd95da975f0cfd78770e153e09"><td class="memItemLeft" align="right" valign="top">virtual device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#ab926d5bd95da975f0cfd78770e153e09">operator()</a> (device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; coordinates, std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, <a class="el" href="classIInterpolator.html#a3bf706cde51455dd3e595dc6e0887f34">batched_derivs_domain_type</a> &gt;&gt;&gt; derivs_xmin=std::nullopt, std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, <a class="el" href="classIInterpolator.html#a3bf706cde51455dd3e595dc6e0887f34">batched_derivs_domain_type</a> &gt;&gt;&gt; derivs_xmax=std::nullopt) const =0</td></tr>
+<tr class="memdesc:ab926d5bd95da975f0cfd78770e153e09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classIInterpolator.html#ab926d5bd95da975f0cfd78770e153e09">More...</a><br /></td></tr>
+<tr class="separator:ab926d5bd95da975f0cfd78770e153e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class DDimI, class... DDim&gt;<br />
@@ -123,8 +141,88 @@ class IInterpolator&lt; DDimI, DDim &gt;</h3>
 <p>A class which provides an interpolating function. </p>
 <p>An abstract class which implements a function allowing the value of a function to be approximated at a set of coordinates from a set of known values of the function. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad1fb39b81dbf04b829b21470789585b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1fb39b81dbf04b829b21470789585b5">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="aebe17d4e65d668db6bd3b79bbc8eb83a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebe17d4e65d668db6bd3b79bbc8eb83a">&#9670;&nbsp;</a></span>batched_derivs_domain_xmin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DDimI , class... DDim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classIInterpolator.html#a3bf706cde51455dd3e595dc6e0887f34">batched_derivs_domain_type</a> <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; DDimI, DDim &gt;::batched_derivs_domain_xmin </td>
+          <td>(</td>
+          <td class="paramtype">ddc::DiscreteDomain&lt; DDim... &gt;&#160;</td>
+          <td class="paramname"><em>dom</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the batched derivs domain on lower boundaries. </p>
+<p>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the domain on which derivatives on lower boundaries are defined.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The domain of a single-species distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>dom The lower boundaries of this domain. </dd></dl>
+
+<p>Implemented in <a class="el" href="classSplineInterpolator.html#a3a340fd23a76a46093955f36c128e43a">SplineInterpolator&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a8d05ecab1f5295266c31bdcad9ee57f2">LagrangeInterpolator&lt; DDimI, BcMin, BcMax, DDim &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a8d05ecab1f5295266c31bdcad9ee57f2">LagrangeInterpolator&lt; DDimI, BcMin, BcMax, DDim... &gt;</a>, <a class="el" href="classIPreallocatableInterpolator.html#adb71fb59f80086a87063c792bc4916a9">IPreallocatableInterpolator&lt; DDimI, DDim &gt;</a>, and <a class="el" href="classIPreallocatableInterpolator.html#adb71fb59f80086a87063c792bc4916a9">IPreallocatableInterpolator&lt; DDimI, DDim... &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a2e61a9846ad8b74444eda92fd62928ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e61a9846ad8b74444eda92fd62928ed">&#9670;&nbsp;</a></span>batched_derivs_domain_xmax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DDimI , class... DDim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classIInterpolator.html#a3bf706cde51455dd3e595dc6e0887f34">batched_derivs_domain_type</a> <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; DDimI, DDim &gt;::batched_derivs_domain_xmax </td>
+          <td>(</td>
+          <td class="paramtype">ddc::DiscreteDomain&lt; DDim... &gt;&#160;</td>
+          <td class="paramname"><em>dom</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the batched derivs domain on upper boundaries. </p>
+<p>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the domain on which derivatives on upper boundaries are defined.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The domain of a single-species distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>dom The upper boundaries of this domain. </dd></dl>
+
+<p>Implemented in <a class="el" href="classSplineInterpolator.html#a4d12bf740abd4027d6d325766081bf25">SplineInterpolator&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a0032b1fce9a70db95d3852834adb5448">LagrangeInterpolator&lt; DDimI, BcMin, BcMax, DDim &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a0032b1fce9a70db95d3852834adb5448">LagrangeInterpolator&lt; DDimI, BcMin, BcMax, DDim... &gt;</a>, <a class="el" href="classIPreallocatableInterpolator.html#abf8317bf404a720f1120f53e015f41e4">IPreallocatableInterpolator&lt; DDimI, DDim &gt;</a>, and <a class="el" href="classIPreallocatableInterpolator.html#abf8317bf404a720f1120f53e015f41e4">IPreallocatableInterpolator&lt; DDimI, DDim... &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ab926d5bd95da975f0cfd78770e153e09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab926d5bd95da975f0cfd78770e153e09">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,7 +242,19 @@ template&lt;class DDimI , class... DDim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt;&#160;</td>
-          <td class="paramname"><em>coordinates</em>&#160;</td>
+          <td class="paramname"><em>coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, <a class="el" href="classIInterpolator.html#a3bf706cde51455dd3e595dc6e0887f34">batched_derivs_domain_type</a> &gt;&gt;&gt;&#160;</td>
+          <td class="paramname"><em>derivs_xmin</em> = <code>std::nullopt</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, <a class="el" href="classIInterpolator.html#a3bf706cde51455dd3e595dc6e0887f34">batched_derivs_domain_type</a> &gt;&gt;&gt;&#160;</td>
+          <td class="paramname"><em>derivs_xmax</em> = <code>std::nullopt</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -163,13 +273,15 @@ template&lt;class DDimI , class... DDim&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">inout_data</td><td>On input: an array containing the value of the function at the interpolation points. On output: an array containing the value of the function at the coordinates. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">coordinates</td><td>The coordinates where the function should be evaluated.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coordinates</td><td>The coordinates where the function should be evaluated. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_xmin</td><td>The values of the derivatives at the lower boundary (used only with splines and ddc::BoundCond::HERMITE lower boundary condition). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_xmax</td><td>The values of the derivatives at the upper boundary (used only with splines and ddc::BoundCond::HERMITE upper boundary condition).</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the inout_data array containing the value of the function at the coordinates. </dd></dl>
 
-<p>Implemented in <a class="el" href="classLagrangeInterpolator.html#a9415391fbca3749e2ebaeae6dc8aa9e5">LagrangeInterpolator&lt; DDimI, BcMin, BcMax, DDim &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a9415391fbca3749e2ebaeae6dc8aa9e5">LagrangeInterpolator&lt; DDimI, BcMin, BcMax, DDim... &gt;</a>, <a class="el" href="classSplineInterpolator.html#a947e1256b74d5ca6de169d4a0f2e9305">SplineInterpolator&lt; DDimI, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, DDim &gt;</a>, <a class="el" href="classIPreallocatableInterpolator.html#ab7f3b7fc5351a0fda87300ab5a792f06">IPreallocatableInterpolator&lt; DDimI, DDim &gt;</a>, and <a class="el" href="classIPreallocatableInterpolator.html#ab7f3b7fc5351a0fda87300ab5a792f06">IPreallocatableInterpolator&lt; DDimI, DDim... &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classIPreallocatableInterpolator.html#a7d6316c6c2ea36feb5f27d275d60c77c">IPreallocatableInterpolator&lt; DDimI, DDim... &gt;</a>.</p>
 
 </div>
 </div>

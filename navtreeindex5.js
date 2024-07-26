@@ -1,5 +1,17 @@
 var NAVTREEINDEX5 =
 {
+"dir_21841c3627e393781c2c07b5dcb1ed74.html":[15,2],
+"dir_2bbbd2b8376432461f1d83e1c0b26a30.html":[15,0,4,6],
+"dir_2c0ad391030bc4839817fbcc879b28f0.html":[15,0,13],
+"dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html":[15,0],
+"dir_2daa31455a745d8a4b29bdb1d755058a.html":[15,0,4],
+"dir_3644d234834b814823c1be22531f9f3a.html":[15,0,6,7],
+"dir_37669f848dd5fee6fcd048f7b9293c08.html":[15,0,6,2,2],
+"dir_37c8df5729473ef02021306da35712e0.html":[15,0,6,4],
+"dir_3edf76bff63ac0040676a04cfe70b091.html":[15,0,11],
+"dir_401f8b249764c6753d0f677d3a20782c.html":[15,2,0,0,0,0],
+"dir_42e0d6fcfa69cb3b4e97936052cc6ddf.html":[15,0,15],
+"dir_453a093deb6b5b00ee1afbd709dc191f.html":[15,0,7,1],
 "dir_4877fc66b34f0bed3307622046ff6a0c.html":[15,0,10],
 "dir_48bf4b14be63d973b7d484fc2a2a4feb.html":[15,0,8,3],
 "dir_4b412f50fae9276f0d15343d7ac6361c.html":[15,0,6,6],
@@ -237,17 +249,5 @@ var NAVTREEINDEX5 =
 "simulations_geometryRTheta_diocotron.html#autotoc_md24":[3],
 "simulations_geometryRTheta_diocotron.html#autotoc_md25":[4],
 "simulations_geometryRTheta_diocotron.html#autotoc_md26":[5],
-"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Contents":[8,0,0,20],
-"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__References":[8,0,0,19],
-"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Studied_problem":[8,0,0,17],
-"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Test_case_-_diocotron_instability":[8,0,0,18],
-"simulations_geometryRTheta_vortex_merger.html":[8,0,1],
-"simulations_geometryRTheta_vortex_merger.html#autotoc_md27":[6],
-"simulations_geometryRTheta_vortex_merger.html#autotoc_md28":[7],
-"simulations_geometryRTheta_vortex_merger.html#autotoc_md29":[8],
-"simulations_geometryRTheta_vortex_merger.html#autotoc_md30":[9],
-"simulations_geometryRTheta_vortex_merger.html#autotoc_md31":[10],
-"simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Contents":[8,0,1,4],
-"simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__References":[8,0,1,2],
-"simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Studied_problem":[8,0,1,0]
+"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Contents":[8,0,0,20]
 };

@@ -114,82 +114,117 @@ $(document).ready(function(){initNavTree('Lagrange__interpolator_8hpp_source.htm
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classLagrangeInterpolator.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classLagrangeInterpolator.html">LagrangeInterpolator</a> : <span class="keyword">public</span> <a class="code" href="classIInterpolator.html">IInterpolator</a>&lt;DDimI, DDim...&gt;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">using</span> CDim = <span class="keyword">typename</span> DDimI::continuous_dimension_type;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">int</span> m_degree;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    ddc::DiscreteVector&lt;DDimI&gt; m_ghost;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classLagrangeInterpolator.html#a6a8d1539af23c57f709d74a8456f1c07">   28</a></span>&#160;    <a class="code" href="classLagrangeInterpolator.html#a6a8d1539af23c57f709d74a8456f1c07">LagrangeInterpolator</a>(<span class="keywordtype">int</span> degree, ddc::DiscreteVector&lt;DDimI&gt; ghost)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        : m_degree(degree)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        , m_ghost(ghost)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    ~<a class="code" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classLagrangeInterpolator.html#a9415391fbca3749e2ebaeae6dc8aa9e5">   46</a></span>&#160;    device_t&lt;ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; <a class="code" href="classLagrangeInterpolator.html#a9415391fbca3749e2ebaeae6dc8aa9e5">operator()</a>(</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; inout_data,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    <span class="keyword">const</span> ddc::Coordinate&lt;typename DDimI::continuous_dimension_type&gt;,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; coordinates)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">using</span> deriv_type = <span class="keyword">typename</span> <a class="code" href="classIInterpolator.html">IInterpolator</a>&lt;DDimI, DDim...&gt;::deriv_type;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">using</span> batched_derivs_domain_type =</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="keyword">typename</span> <a class="code" href="classIInterpolator.html">IInterpolator</a>&lt;DDimI, DDim...&gt;::batched_derivs_domain_type;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">int</span> m_degree;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    ddc::DiscreteVector&lt;DDimI&gt; m_ghost;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classLagrangeInterpolator.html#a6a8d1539af23c57f709d74a8456f1c07">   31</a></span>&#160;    <a class="code" href="classLagrangeInterpolator.html#a6a8d1539af23c57f709d74a8456f1c07">LagrangeInterpolator</a>(<span class="keywordtype">int</span> degree, ddc::DiscreteVector&lt;DDimI&gt; ghost)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        : m_degree(degree)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        , m_ghost(ghost)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ~<a class="code" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classLagrangeInterpolator.html#a8d05ecab1f5295266c31bdcad9ee57f2">   39</a></span>&#160;    batched_derivs_domain_type <a class="code" href="classLagrangeInterpolator.html#a8d05ecab1f5295266c31bdcad9ee57f2">batched_derivs_domain_xmin</a>(</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            ddc::DiscreteDomain&lt;DDim...&gt; dom)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">return</span> ddc::replace_dim_of&lt;DDimI, deriv_type&gt;(</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                dom,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                ddc::DiscreteDomain&lt;deriv_type&gt;(</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                        ddc::DiscreteElement&lt;deriv_type&gt;(1),</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                        ddc::DiscreteVector&lt;deriv_type&gt;(0)));</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classLagrangeInterpolator.html#a0032b1fce9a70db95d3852834adb5448">   49</a></span>&#160;    batched_derivs_domain_type <a class="code" href="classLagrangeInterpolator.html#a0032b1fce9a70db95d3852834adb5448">batched_derivs_domain_xmax</a>(</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            ddc::DiscreteDomain&lt;DDim...&gt; dom)<span class="keyword"> const override</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        static_assert(</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                BcMin != BCond::PERIODIC,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="stringliteral">&quot;PERIODIC Boundary condition is not supported yet in LagrangeInterpolator.&quot;</span>);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> deg = m_degree;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> ghost = m_ghost;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">auto</span> inout_data_tmp_alloc</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                = ddc::create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), inout_data);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">auto</span> inout_data_tmp = inout_data_tmp_alloc.span_view();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">auto</span> batch_domain = ddc::remove_dims_of&lt;DDimI&gt;(inout_data.domain());</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        ddc::parallel_for_each(</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                batch_domain,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                KOKKOS_LAMBDA(<span class="keyword">typename</span> decltype(batch_domain)::discrete_element_type <span class="keyword">const</span> i) {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    <a class="code" href="classLagrange.html">Lagrange&lt;Kokkos::DefaultExecutionSpace, DDimI, BcMin, BcMax&gt;</a> evaluator(</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                            deg,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                            inout_data_tmp[i],</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                            inout_data.template domain&lt;DDimI&gt;(),</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                            ghost);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    <span class="keywordflow">for</span> (ddc::DiscreteElement&lt;DDimI&gt; j : inout_data.template domain&lt;DDimI&gt;()) {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                        inout_data(i, j) = evaluator.<a class="code" href="classLagrange.html#aaf78fd7159c8739f6d5441d2ac354aab">evaluate</a>(coordinates(i, j));</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                });</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">return</span> inout_data;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class </span>DDimI, BCond BcMin, BCond BcMax, <span class="keyword">class</span>... DDim&gt;</div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classPreallocatableLagrangeInterpolator.html">   86</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPreallocatableLagrangeInterpolator.html">PreallocatableLagrangeInterpolator</a> : <span class="keyword">public</span> <a class="code" href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a>&lt;DDimI, DDim...&gt;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt;DDimI, BcMin, BcMax, DDim...&gt; <span class="keyword">const</span>&amp; m_evaluator;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classPreallocatableLagrangeInterpolator.html#a34dd082893c1f3bcafb527c74214ca3f">   95</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classPreallocatableLagrangeInterpolator.html#a34dd082893c1f3bcafb527c74214ca3f">PreallocatableLagrangeInterpolator</a>(</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <a class="code" href="classLagrangeInterpolator.html">LagrangeInterpolator&lt;DDimI, BcMin, BcMax, DDim...&gt;</a> <span class="keyword">const</span>&amp; evaluator)</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        : m_evaluator(evaluator)</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    ~<a class="code" href="classPreallocatableLagrangeInterpolator.html">PreallocatableLagrangeInterpolator</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classPreallocatableLagrangeInterpolator.html#a0afbc6bd81cf0889945992f180c7837d">  108</a></span>&#160;    std::unique_ptr&lt;<a class="code" href="classIInterpolator.html">IInterpolator</a>&lt;DDimI, DDim...&gt;&gt; <a class="code" href="classPreallocatableLagrangeInterpolator.html#a0afbc6bd81cf0889945992f180c7837d">preallocate</a>()<span class="keyword"> const override</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;<a class="code" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt;DDimI, BcMin, BcMax, DDim...&gt;&gt;(m_evaluator);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">return</span> ddc::replace_dim_of&lt;DDimI, deriv_type&gt;(</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                dom,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                ddc::DiscreteDomain&lt;deriv_type&gt;(</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                        ddc::DiscreteElement&lt;deriv_type&gt;(1),</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        ddc::DiscreteVector&lt;deriv_type&gt;(0)));</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classLagrangeInterpolator.html#ac68103ae59930362ce4c1efa0b0f9858">   71</a></span>&#160;    device_t&lt;ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; <a class="code" href="classLagrangeInterpolator.html#ac68103ae59930362ce4c1efa0b0f9858">operator()</a>(</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; inout_data,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            device_t&lt;ddc::ChunkSpan&lt;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    <span class="keyword">const</span> ddc::Coordinate&lt;typename DDimI::continuous_dimension_type&gt;,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    ddc::DiscreteDomain&lt;DDim...&gt;&gt;&gt; coordinates,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            [[maybe_unused]] std::optional&lt;device_t&lt;ddc::ChunkSpan&lt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span>,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    <span class="keyword">typename</span> <a class="code" href="classIInterpolator.html">IInterpolator&lt;DDimI, DDim...&gt;::batched_derivs_domain_type</a>&gt;&gt;&gt;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    derivs_xmin</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            = std::nullopt,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            [[maybe_unused]] std::optional&lt;device_t&lt;ddc::ChunkSpan&lt;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span>,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keyword">typename</span> <a class="code" href="classIInterpolator.html">IInterpolator&lt;DDimI, DDim...&gt;::batched_derivs_domain_type</a>&gt;&gt;&gt;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    derivs_xmax</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            = std::nullopt)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        static_assert(</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                BcMin != BCond::PERIODIC,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="stringliteral">&quot;PERIODIC Boundary condition is not supported yet in LagrangeInterpolator.&quot;</span>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> deg = m_degree;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> ghost = m_ghost;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keyword">auto</span> inout_data_tmp_alloc</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                = ddc::create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), inout_data);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keyword">auto</span> inout_data_tmp = inout_data_tmp_alloc.span_view();</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keyword">auto</span> batch_domain = ddc::remove_dims_of&lt;DDimI&gt;(inout_data.domain());</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        ddc::parallel_for_each(</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                batch_domain,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                KOKKOS_LAMBDA(<span class="keyword">typename</span> decltype(batch_domain)::discrete_element_type <span class="keyword">const</span> i) {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                    <a class="code" href="classLagrange.html">Lagrange&lt;Kokkos::DefaultExecutionSpace, DDimI, BcMin, BcMax&gt;</a> evaluator(</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                            deg,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                            inout_data_tmp[i],</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                            inout_data.template domain&lt;DDimI&gt;(),</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                            ghost);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    <span class="keywordflow">for</span> (ddc::DiscreteElement&lt;DDimI&gt; j : inout_data.template domain&lt;DDimI&gt;()) {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                        inout_data(i, j) = evaluator.<a class="code" href="classLagrange.html#aaf78fd7159c8739f6d5441d2ac354aab">evaluate</a>(coordinates(i, j));</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                });</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">return</span> inout_data;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    }</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
-<div class="ttc" id="aclassIInterpolator_html"><div class="ttname"><a href="classIInterpolator.html">IInterpolator</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> iinterpolator.hpp:50</div></div>
-<div class="ttc" id="aclassIPreallocatableInterpolator_html"><div class="ttname"><a href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a></div><div class="ttdoc">A class which provides access to an interpolating function which can be preallocated where useful.</div><div class="ttdef"><b>Definition:</b> iinterpolator.hpp:94</div></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class </span>DDimI, BCond BcMin, BCond BcMax, <span class="keyword">class</span>... DDim&gt;</div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="classPreallocatableLagrangeInterpolator.html">  121</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPreallocatableLagrangeInterpolator.html">PreallocatableLagrangeInterpolator</a> : <span class="keyword">public</span> <a class="code" href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a>&lt;DDimI, DDim...&gt;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;{</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <a class="code" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt;DDimI, BcMin, BcMax, DDim...&gt; <span class="keyword">const</span>&amp; m_evaluator;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classPreallocatableLagrangeInterpolator.html#a34dd082893c1f3bcafb527c74214ca3f">  130</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classPreallocatableLagrangeInterpolator.html#a34dd082893c1f3bcafb527c74214ca3f">PreallocatableLagrangeInterpolator</a>(</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <a class="code" href="classLagrangeInterpolator.html">LagrangeInterpolator&lt;DDimI, BcMin, BcMax, DDim...&gt;</a> <span class="keyword">const</span>&amp; evaluator)</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        : m_evaluator(evaluator)</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    {</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    ~<a class="code" href="classPreallocatableLagrangeInterpolator.html">PreallocatableLagrangeInterpolator</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="classPreallocatableLagrangeInterpolator.html#a0afbc6bd81cf0889945992f180c7837d">  143</a></span>&#160;    std::unique_ptr&lt;<a class="code" href="classIInterpolator.html">IInterpolator</a>&lt;DDimI, DDim...&gt;&gt; <a class="code" href="classPreallocatableLagrangeInterpolator.html#a0afbc6bd81cf0889945992f180c7837d">preallocate</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;<a class="code" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt;DDimI, BcMin, BcMax, DDim...&gt;&gt;(m_evaluator);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;};</div>
+<div class="ttc" id="aclassIInterpolator_html"><div class="ttname"><a href="classIInterpolator.html">IInterpolator</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> iinterpolator.hpp:51</div></div>
+<div class="ttc" id="aclassIPreallocatableInterpolator_html"><div class="ttname"><a href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a></div><div class="ttdoc">A class which provides access to an interpolating function which can be preallocated where useful.</div><div class="ttdef"><b>Definition:</b> iinterpolator.hpp:135</div></div>
 <div class="ttc" id="aclassLagrangeInterpolator_html"><div class="ttname"><a href="classLagrangeInterpolator.html">LagrangeInterpolator</a></div><div class="ttdoc">A class for interpolating a function using Lagrange polynomials.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:15</div></div>
-<div class="ttc" id="aclassLagrangeInterpolator_html_a6a8d1539af23c57f709d74a8456f1c07"><div class="ttname"><a href="classLagrangeInterpolator.html#a6a8d1539af23c57f709d74a8456f1c07">LagrangeInterpolator::LagrangeInterpolator</a></div><div class="ttdeci">LagrangeInterpolator(int degree, ddc::DiscreteVector&lt; DDimI &gt; ghost)</div><div class="ttdoc">Create a Lagrange interpolator object.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:28</div></div>
-<div class="ttc" id="aclassLagrangeInterpolator_html_a9415391fbca3749e2ebaeae6dc8aa9e5"><div class="ttname"><a href="classLagrangeInterpolator.html#a9415391fbca3749e2ebaeae6dc8aa9e5">LagrangeInterpolator::operator()</a></div><div class="ttdeci">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt; operator()(device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; coordinates) const override</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:46</div></div>
+<div class="ttc" id="aclassLagrangeInterpolator_html_a0032b1fce9a70db95d3852834adb5448"><div class="ttname"><a href="classLagrangeInterpolator.html#a0032b1fce9a70db95d3852834adb5448">LagrangeInterpolator::batched_derivs_domain_xmax</a></div><div class="ttdeci">batched_derivs_domain_type batched_derivs_domain_xmax(ddc::DiscreteDomain&lt; DDim... &gt; dom) const override</div><div class="ttdoc">Get the batched derivs domain on upper boundaries.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:49</div></div>
+<div class="ttc" id="aclassLagrangeInterpolator_html_a6a8d1539af23c57f709d74a8456f1c07"><div class="ttname"><a href="classLagrangeInterpolator.html#a6a8d1539af23c57f709d74a8456f1c07">LagrangeInterpolator::LagrangeInterpolator</a></div><div class="ttdeci">LagrangeInterpolator(int degree, ddc::DiscreteVector&lt; DDimI &gt; ghost)</div><div class="ttdoc">Create a Lagrange interpolator object.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:31</div></div>
+<div class="ttc" id="aclassLagrangeInterpolator_html_a8d05ecab1f5295266c31bdcad9ee57f2"><div class="ttname"><a href="classLagrangeInterpolator.html#a8d05ecab1f5295266c31bdcad9ee57f2">LagrangeInterpolator::batched_derivs_domain_xmin</a></div><div class="ttdeci">batched_derivs_domain_type batched_derivs_domain_xmin(ddc::DiscreteDomain&lt; DDim... &gt; dom) const override</div><div class="ttdoc">Get the batched derivs domain on lower boundaries.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:39</div></div>
+<div class="ttc" id="aclassLagrangeInterpolator_html_ac68103ae59930362ce4c1efa0b0f9858"><div class="ttname"><a href="classLagrangeInterpolator.html#ac68103ae59930362ce4c1efa0b0f9858">LagrangeInterpolator::operator()</a></div><div class="ttdeci">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt; &gt; &gt; operator()(device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; DDim... &gt;&gt;&gt; coordinates, [[maybe_unused]] std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, typename IInterpolator&lt; DDimI, DDim... &gt;::batched_derivs_domain_type &gt;&gt;&gt; derivs_xmin=std::nullopt, [[maybe_unused]] std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, typename IInterpolator&lt; DDimI, DDim... &gt;::batched_derivs_domain_type &gt;&gt;&gt; derivs_xmax=std::nullopt) const override</div><div class="ttdoc">Approximate the value of a function at a set of coordinates using the current values at a known set o...</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:71</div></div>
 <div class="ttc" id="aclassLagrange_html"><div class="ttname"><a href="classLagrange.html">Lagrange</a></div><div class="ttdoc">A class which implements Lagrange polynomials.</div><div class="ttdef"><b>Definition:</b> Lagrange.hpp:20</div></div>
 <div class="ttc" id="aclassLagrange_html_aaf78fd7159c8739f6d5441d2ac354aab"><div class="ttname"><a href="classLagrange.html#aaf78fd7159c8739f6d5441d2ac354aab">Lagrange::evaluate</a></div><div class="ttdeci">KOKKOS_FUNCTION double evaluate(CoordDimI x_interp) const</div><div class="ttdoc">Evaluates the approximated value of a function on a point current values at a known set of interpolat...</div><div class="ttdef"><b>Definition:</b> Lagrange.hpp:168</div></div>
-<div class="ttc" id="aclassPreallocatableLagrangeInterpolator_html"><div class="ttname"><a href="classPreallocatableLagrangeInterpolator.html">PreallocatableLagrangeInterpolator</a></div><div class="ttdoc">A class which stores information necessary to create an instance of the LagrangeInterpolator class.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:87</div></div>
-<div class="ttc" id="aclassPreallocatableLagrangeInterpolator_html_a0afbc6bd81cf0889945992f180c7837d"><div class="ttname"><a href="classPreallocatableLagrangeInterpolator.html#a0afbc6bd81cf0889945992f180c7837d">PreallocatableLagrangeInterpolator::preallocate</a></div><div class="ttdeci">std::unique_ptr&lt; IInterpolator&lt; DDimI, DDim... &gt; &gt; preallocate() const override</div><div class="ttdoc">Create an instance of the LagrangeInterpolator class.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:108</div></div>
-<div class="ttc" id="aclassPreallocatableLagrangeInterpolator_html_a34dd082893c1f3bcafb527c74214ca3f"><div class="ttname"><a href="classPreallocatableLagrangeInterpolator.html#a34dd082893c1f3bcafb527c74214ca3f">PreallocatableLagrangeInterpolator::PreallocatableLagrangeInterpolator</a></div><div class="ttdeci">PreallocatableLagrangeInterpolator(LagrangeInterpolator&lt; DDimI, BcMin, BcMax, DDim... &gt; const &amp;evaluator)</div><div class="ttdoc">Create an object capable of creating LagrangeInterpolator objects.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:95</div></div>
+<div class="ttc" id="aclassPreallocatableLagrangeInterpolator_html"><div class="ttname"><a href="classPreallocatableLagrangeInterpolator.html">PreallocatableLagrangeInterpolator</a></div><div class="ttdoc">A class which stores information necessary to create an instance of the LagrangeInterpolator class.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:122</div></div>
+<div class="ttc" id="aclassPreallocatableLagrangeInterpolator_html_a0afbc6bd81cf0889945992f180c7837d"><div class="ttname"><a href="classPreallocatableLagrangeInterpolator.html#a0afbc6bd81cf0889945992f180c7837d">PreallocatableLagrangeInterpolator::preallocate</a></div><div class="ttdeci">std::unique_ptr&lt; IInterpolator&lt; DDimI, DDim... &gt; &gt; preallocate() const override</div><div class="ttdoc">Create an instance of the LagrangeInterpolator class.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:143</div></div>
+<div class="ttc" id="aclassPreallocatableLagrangeInterpolator_html_a34dd082893c1f3bcafb527c74214ca3f"><div class="ttname"><a href="classPreallocatableLagrangeInterpolator.html#a34dd082893c1f3bcafb527c74214ca3f">PreallocatableLagrangeInterpolator::PreallocatableLagrangeInterpolator</a></div><div class="ttdeci">PreallocatableLagrangeInterpolator(LagrangeInterpolator&lt; DDimI, BcMin, BcMax, DDim... &gt; const &amp;evaluator)</div><div class="ttdoc">Create an object capable of creating LagrangeInterpolator objects.</div><div class="ttdef"><b>Definition:</b> Lagrange_interpolator.hpp:130</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

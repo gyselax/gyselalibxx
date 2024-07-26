@@ -1,5 +1,17 @@
 var NAVTREEINDEX6 =
 {
+"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__References":[8,0,0,19],
+"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Studied_problem":[8,0,0,17],
+"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Test_case_-_diocotron_instability":[8,0,0,18],
+"simulations_geometryRTheta_vortex_merger.html":[8,0,1],
+"simulations_geometryRTheta_vortex_merger.html#autotoc_md27":[6],
+"simulations_geometryRTheta_vortex_merger.html#autotoc_md28":[7],
+"simulations_geometryRTheta_vortex_merger.html#autotoc_md29":[8],
+"simulations_geometryRTheta_vortex_merger.html#autotoc_md30":[9],
+"simulations_geometryRTheta_vortex_merger.html#autotoc_md31":[10],
+"simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Contents":[8,0,1,4],
+"simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__References":[8,0,1,2],
+"simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Studied_problem":[8,0,1,0],
 "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Test_case_-_vortex_merger":[8,0,1,1],
 "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Useful_references":[8,0,1,3],
 "simulations_geometryXVx.html":[8,1],
@@ -237,17 +249,5 @@ var NAVTREEINDEX6 =
 "structPolarSplineSpan.html#afb33d14b81a474947f471003644fcc49":[14,168,0],
 "structPolarSplineView.html":[14,169],
 "structPolarSplineView.html#a1bb22b7a2d02c40118e23b6239a8d456":[14,169,7],
-"structPolarSplineView.html#a3bd2580a82278b6ee520ce8ddd67c33d":[14,169,2],
-"structPolarSplineView.html#a48f3bbf282210df43e1c8f87cadbe8b8":[14,169,0],
-"structPolarSplineView.html#a6980452d50ebf203530137aa11a679d8":[14,169,5],
-"structPolarSplineView.html#a6e770098a5de395d0d7abaf7f338dcb6":[14,169,4],
-"structPolarSplineView.html#a773dd7a09763add9ac7ed3a1863ffd48":[14,169,1],
-"structPolarSplineView.html#ab933a819e8bfa5e4263970082c083890":[14,169,6],
-"structPolarSplineView.html#af01a912e50f5d8dc5dda51fc2d28f929":[14,169,3],
-"structRDimP.html":[14,179],
-"structRDimR.html":[14,180],
-"structRDimT.html":[14,181],
-"structRDimVp.html":[14,182],
-"structRDimVr.html":[14,183],
-"structRDimVx.html":[14,184]
+"structPolarSplineView.html#a3bd2580a82278b6ee520ce8ddd67c33d":[14,169,2]
 };
