@@ -6,10 +6,9 @@
 
 #include <sll/gauss_legendre_integration.hpp>
 #include <sll/math_tools.hpp>
+#include <sll/matrix_batch_csr.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
-
-#include <Eigen/Sparse>
 
 #include "geometry.hpp"
 
@@ -135,7 +134,6 @@ private:
     /**
      * @brief Tag type of matrix element.
      */
-    using MatrixElement = Eigen::Triplet<double>;
 
 private:
     static constexpr int n_gauss_legendre_r = BSplinesR_Polar::degree() + 1;
@@ -186,8 +184,8 @@ private:
     ddc::Chunk<double, QuadratureDomainRP> int_volume;
 
     PolarSplineEvaluator<PolarBSplinesRP, ddc::NullExtrapolationRule> m_polar_spline_evaluator;
-
-    Eigen::SimplicialLDLT<Eigen::SparseMatrix<double>> m_matrix;
+    std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
+            m_gko_matrix;
 
 public:
     /**
@@ -389,37 +387,44 @@ public:
         const int n_elements_stencil = n_stencil_r * n_stencil_p;
 
         // Matrix size is equal to the number Polar bspline
-        const int n_matrix_size = ddc::discrete_space<PolarBSplinesRP>().nbasis() - nbasis_p;
-        Eigen::SparseMatrix<double> matrix(n_matrix_size, n_matrix_size);
+        const int matrix_size = ddc::discrete_space<PolarBSplinesRP>().nbasis() - nbasis_p;
         const int n_matrix_elements = n_elements_singular + n_elements_overlap + n_elements_stencil;
-        std::vector<MatrixElement> matrix_elements(n_matrix_elements);
+
+        Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+                vals_coo_host("vals_coo_host", n_matrix_elements);
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+                row_coo_host("row_coo_host", n_matrix_elements);
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+                col_coo_host("col_coo_host", n_matrix_elements);
+
         int matrix_idx(0);
         // Calculate the matrix elements corresponding to the bsplines which cover the singular point
         ddc::for_each(singular_domain, [&](IndexPolarBspl const idx_test) {
             ddc::for_each(singular_domain, [&](IndexPolarBspl const idx_trial) {
                 // Calculate the weak integral
-                matrix_elements[matrix_idx++] = MatrixElement(
-                        idx_test.uid(),
-                        idx_trial.uid(),
-                        ddc::transform_reduce(
-                                quadrature_domain_singular,
-                                0.0,
-                                ddc::reducer::sum<double>(),
-                                [&](QuadratureIndexRP const quad_idx) {
-                                    QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
-                                    QuadratureIndexP const ip = ddc::select<QDimPMesh>(quad_idx);
-                                    return weak_integral_element(
-                                            ir,
-                                            ip,
-                                            singular_basis_vals_and_derivs(idx_test, ir, ip),
-                                            singular_basis_vals_and_derivs(idx_trial, ir, ip),
-                                            coeff_alpha,
-                                            coeff_beta,
-                                            spline_evaluator,
-                                            mapping);
-                                }));
+                row_coo_host(matrix_idx) = idx_test.uid();
+                col_coo_host(matrix_idx) = idx_trial.uid();
+                vals_coo_host(matrix_idx) = ddc::transform_reduce(
+                        quadrature_domain_singular,
+                        0.0,
+                        ddc::reducer::sum<double>(),
+                        [&](QuadratureIndexRP const quad_idx) {
+                            QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
+                            QuadratureIndexP const ip = ddc::select<QDimPMesh>(quad_idx);
+                            return weak_integral_element(
+                                    ir,
+                                    ip,
+                                    singular_basis_vals_and_derivs(idx_test, ir, ip),
+                                    singular_basis_vals_and_derivs(idx_trial, ir, ip),
+                                    coeff_alpha,
+                                    coeff_beta,
+                                    spline_evaluator,
+                                    mapping);
+                        });
+                matrix_idx++;
             });
         });
+
         assert(matrix_idx == n_elements_singular);
 
         // Create domains associated with the 2D splines
@@ -499,10 +504,16 @@ public:
                                                     mapping);
                                         });
                             });
-                            matrix_elements[matrix_idx++]
-                                    = MatrixElement(idx_test.uid(), polar_idx_trial.uid(), element);
-                            matrix_elements[matrix_idx++]
-                                    = MatrixElement(polar_idx_trial.uid(), idx_test.uid(), element);
+                            //----
+                            row_coo_host(matrix_idx) = idx_test.uid();
+                            col_coo_host(matrix_idx) = polar_idx_trial.uid();
+                            vals_coo_host(matrix_idx) = element;
+                            matrix_idx++;
+                            //-----
+                            row_coo_host(matrix_idx) = polar_idx_trial.uid();
+                            col_coo_host(matrix_idx) = idx_test.uid();
+                            vals_coo_host(matrix_idx) = element;
+                            matrix_idx++;
                         }
                     });
         });
@@ -534,13 +545,22 @@ public:
                         mapping);
 
                 if (polar_idx_test.uid() == polar_idx_trial.uid()) {
-                    matrix_elements[matrix_idx++]
-                            = MatrixElement(polar_idx_test.uid(), polar_idx_trial.uid(), element);
+                    //----
+                    row_coo_host(matrix_idx) = polar_idx_test.uid();
+                    col_coo_host(matrix_idx) = polar_idx_trial.uid();
+                    vals_coo_host(matrix_idx) = element;
+                    matrix_idx++;
                 } else {
-                    matrix_elements[matrix_idx++]
-                            = MatrixElement(polar_idx_test.uid(), polar_idx_trial.uid(), element);
-                    matrix_elements[matrix_idx++]
-                            = MatrixElement(polar_idx_trial.uid(), polar_idx_test.uid(), element);
+                    //------
+                    row_coo_host(matrix_idx) = polar_idx_test.uid();
+                    col_coo_host(matrix_idx) = polar_idx_trial.uid();
+                    vals_coo_host(matrix_idx) = element;
+                    matrix_idx++;
+                    //--------------
+                    row_coo_host(matrix_idx) = polar_idx_trial.uid();
+                    col_coo_host(matrix_idx) = polar_idx_test.uid();
+                    vals_coo_host(matrix_idx) = element;
+                    matrix_idx++;
                 }
             });
             BSDomainR remaining_r(
@@ -569,21 +589,32 @@ public:
                         spline_evaluator,
                         mapping);
                 if (polar_idx_test.uid() == polar_idx_trial.uid()) {
-                    matrix_elements[matrix_idx++]
-                            = MatrixElement(polar_idx_test.uid(), polar_idx_trial.uid(), element);
+                    row_coo_host(matrix_idx) = polar_idx_test.uid();
+                    col_coo_host(matrix_idx) = polar_idx_trial.uid();
+                    vals_coo_host(matrix_idx) = element;
+                    matrix_idx++;
                 } else {
-                    matrix_elements[matrix_idx++]
-                            = MatrixElement(polar_idx_test.uid(), polar_idx_trial.uid(), element);
-                    matrix_elements[matrix_idx++]
-                            = MatrixElement(polar_idx_trial.uid(), polar_idx_test.uid(), element);
+                    // -----
+                    row_coo_host(matrix_idx) = polar_idx_test.uid();
+                    col_coo_host(matrix_idx) = polar_idx_trial.uid();
+                    vals_coo_host(matrix_idx) = element;
+                    matrix_idx++;
+                    // ----
+                    row_coo_host(matrix_idx) = polar_idx_trial.uid();
+                    col_coo_host(matrix_idx) = polar_idx_test.uid();
+                    vals_coo_host(matrix_idx) = element;
+                    matrix_idx++;
                 }
             });
         });
-        matrix.setFromTriplets(matrix_elements.begin(), matrix_elements.end());
         assert(matrix_idx == n_elements_singular + n_elements_overlap + n_elements_stencil);
-        m_matrix.compute(matrix);
+        m_gko_matrix = std::make_unique<MatrixBatchCsr<
+                Kokkos::DefaultExecutionSpace,
+                MatrixBatchCsrSolver::CG>>(1, matrix_size, n_matrix_elements);
+        convert_coo_to_csr<
+                MatrixBatchCsrSolver::CG>(m_gko_matrix, vals_coo_host, row_coo_host, col_coo_host);
+        m_gko_matrix->factorize();
     }
-
 
     /**
      * @brief Solve the Poisson-like equation.
@@ -601,15 +632,17 @@ public:
     template <class RHSFunction>
     void operator()(RHSFunction const& rhs, SplinePolar& spline) const
     {
-        Eigen::VectorXd b(
-                ddc::discrete_space<PolarBSplinesRP>().nbasis()
-                - ddc::discrete_space<BSplinesP_Polar>().nbasis());
+        const int b_size = ddc::discrete_space<PolarBSplinesRP>().nbasis()
+                           - ddc::discrete_space<BSplinesP_Polar>().nbasis();
+        const int batch_size = 1;
+        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+                b_host("b_host", batch_size, b_size);
 
         // Fill b
         ddc::for_each(
                 PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
                 [&](IndexPolarBspl const idx) {
-                    b(idx.uid()) = ddc::transform_reduce(
+                    b_host(0, idx.uid()) = ddc::transform_reduce(
                             quadrature_domain_singular,
                             0.0,
                             ddc::reducer::sum<double>(),
@@ -672,12 +705,18 @@ public:
                             return rhs(coord) * rb * pb * int_volume(ir, ip);
                         });
             });
-            b(idx.uid()) = element;
+            b_host(0, idx.uid()) = element;
         });
 
         // Solve the matrix equation
-        Eigen::VectorXd x = m_matrix.solve(b);
+        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
+                b("b", batch_size, b_size);
+        Kokkos::deep_copy(b, b_host);
 
+        m_gko_matrix->solve_inplace(b);
+
+        Kokkos::deep_copy(b_host, b);
+        //-----------------
         BSDomainRP dirichlet_boundary_domain(
                 radial_bsplines.take_last(ddc::DiscreteVector<BSplinesR_Polar> {1}),
                 polar_bsplines);
@@ -687,10 +726,12 @@ public:
         // Fill the spline
         ddc::for_each(
                 PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
-                [&](IndexPolarBspl const idx) { spline.singular_spline_coef(idx) = x(idx.uid()); });
+                [&](IndexPolarBspl const idx) {
+                    spline.singular_spline_coef(idx) = b_host(0, idx.uid());
+                });
         ddc::for_each(fem_non_singular_domain, [&](IndexPolarBspl const idx) {
             const IDimBSpline2D_Polar idx_2d(PolarBSplinesRP::get_2d_index(idx));
-            spline.spline_coef(idx_2d) = x(idx.uid());
+            spline.spline_coef(idx_2d) = b_host(0, idx.uid());
         });
         ddc::for_each(dirichlet_boundary_domain, [&](IDimBSpline2D_Polar const idx) {
             spline.spline_coef(idx) = 0.0;

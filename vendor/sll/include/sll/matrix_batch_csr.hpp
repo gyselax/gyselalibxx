@@ -10,6 +10,15 @@
 #include "ddc/kernels/splines/ginkgo_executors.hpp"
 
 /**
+* @brief A tag to choose between the batched iterative solvers provided by Ginkgo.
+*
+* BICGSTAB BiConjugate Gradient Stabilize method. BICGSTAB is able to solve general sparse matrices problems.
+* CG Conjugate Gradient method (For symmetric positive definite matrices).
+* If the matrices structures verify CG requirements, we encourage the use of this method for its lower computation cost.
+*/
+enum class MatrixBatchCsrSolver { CG, BICGSTAB };
+
+/**
  * @brief  Matrix class which is able to manage and solve a batch of sparse linear systems. Executes on either CPU or GPU.
  * It takes advantage of the sparse structure, and the only batched solver available in Ginkgo : Stabilized Bicg.
  * This class uses the CSR storage format which needs three arrays, one stores values, the other column indices.
@@ -20,12 +29,19 @@
  * It is possibile to get convergence information by activating the logger at constructor call.
  * @tparam ExecSpace Execution space,needed by Kokkos for allocations and parallelism.
  * The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace
+ * @tparam Solver Refers to the solver type, default value is the Bicgstab which is more general.
+ * The use of a CG solver is also possible, in this case, please make sure that matrices structure fulfils CG requirements.
  */
-template <class ExecSpace>
+template <class ExecSpace, MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB>
 class MatrixBatchCsr : public MatrixBatch<ExecSpace>
 {
     using batch_sparse_type = gko::batch::matrix::Csr<double, int>;
-    using solver_type = gko::batch::solver::Bicgstab<double>;
+
+    using solver_type = std::conditional_t<
+            Solver == MatrixBatchCsrSolver::CG,
+            gko::batch::solver::Cg<double>,
+            gko::batch::solver::Bicgstab<double>>;
+
     using DKokkosView2D
             = Kokkos::View<double**, Kokkos::LayoutRight, typename ExecSpace::memory_space>;
 
@@ -37,7 +53,6 @@ private:
     bool m_with_logger;
     int const m_nnz_per_system;
     unsigned int m_preconditionner_max_block_size; // Maximum size of Jacobi-block preconditionner
-
 
 public:
     using MatrixBatch<ExecSpace>::get_size;
@@ -244,3 +259,55 @@ public:
         return result;
     }
 };
+
+/**
+     * @brief A function which converts COO data storage into CSR.
+     * The results of the conversion are directly stored inside MatrixBatchCsr instance and used for computations.
+     * @param[in] matrix A MatrixBatchCsr instance, provides Kokkos views to fill.
+     * All input data is stored in 1D host allocated Kokkos View.
+     * @param[in] vals_coo_host Values.
+     * @param[in] row_coo_host Rows indices.
+     * @param[in] col_coo_host Columns indices 
+     */
+template <MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB>
+void convert_coo_to_csr(
+        std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, Solver>>& matrix,
+        Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace> vals_coo_host,
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace> row_coo_host,
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace> col_coo_host)
+{
+    int const mat_size = matrix->get_size();
+    int const batch_size = matrix->get_batch_size();
+    int const non_zero_per_system = vals_coo_host.extent(0) / batch_size;
+
+    Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+            values_view_host("", batch_size, non_zero_per_system);
+    Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+            idx_view_host("", non_zero_per_system);
+    Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+            nnz_per_row_view_host("", mat_size + 1);
+    nnz_per_row_view_host(0) = 0;
+    nnz_per_row_view_host(mat_size) = non_zero_per_system;
+
+    for (int i = 0; i < mat_size; i++) {
+        int n_non_zero_in_row = 0;
+        for (int k = 0; k < non_zero_per_system; k++) {
+            if (row_coo_host(k) == i) {
+                int const idx = nnz_per_row_view_host(i) + n_non_zero_in_row;
+                idx_view_host(idx) = col_coo_host(k);
+                values_view_host(0, idx) = vals_coo_host(k);
+                n_non_zero_in_row++;
+            }
+        }
+        nnz_per_row_view_host(i + 1) = nnz_per_row_view_host(i) + n_non_zero_in_row;
+    }
+    for (int batch_idx = 1; batch_idx < batch_size; batch_idx++) {
+        for (int idx = 0; idx < non_zero_per_system; idx++) {
+            values_view_host(batch_idx, idx) = vals_coo_host(batch_idx * non_zero_per_system + idx);
+        }
+    }
+    auto [values, col_idx, nnz_per_row] = matrix->get_batch_csr();
+    Kokkos::deep_copy(values, values_view_host);
+    Kokkos::deep_copy(col_idx, idx_view_host);
+    Kokkos::deep_copy(nnz_per_row, nnz_per_row_view_host);
+}

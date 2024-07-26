@@ -51,9 +51,6 @@ plugins:
       iter:
         - set:
           - iter_saved: '${iter_start} + ${iter}/${nbstep_diag}'
-    on_finalize:
-      - release: [iter_saved]
-
   decl_hdf5:
     - file: 'coll_${iter_saved:05}.h5'
       on_event: [write_fdistribu]
