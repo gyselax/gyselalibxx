@@ -51,17 +51,17 @@ static IDomainXY constexpr dom_x_y(lbound_x_y, nelems_x_y);
 TEST(DerivFieldTest, Constructor1Deriv)
 {
     // Type for a x,y field with 1 derivative in x
-    using DField = DerivField<double, ddc::DiscreteDomain<dX, IDimX, IDimY>, 1>;
+    using DFieldXY_dX = DerivField<double, ddc::DiscreteDomain<dX, IDimX, IDimY>, 1>;
 
     // Domain where derivatives are defined
     DiscreteSubDomain<IDimX> deriv_dom_x(dom_x.front(), IVectX(2), dom_x.extents());
 
     // Define the field
-    DField dxField(dom_x_y, deriv_dom_x);
+    DFieldXY_dX dxField(dom_x_y, deriv_dom_x);
 
     // Ensure that the internal chunk has the expected type
     constexpr bool same = std::is_same_v<
-            typename DField::chunk_type,
+            typename DFieldXY_dX::chunk_type,
             ddc::Chunk<double, ddc::DiscreteDomain<dX, IDimX, IDimY>>>;
     EXPECT_TRUE(same);
 }
@@ -70,18 +70,18 @@ TEST(DerivFieldTest, Constructor1Deriv)
 TEST(DerivFieldTest, Constructor2Deriv)
 {
     // Type for a x,y field with 1 derivative in x and 1 derivative in y
-    using DField = DerivField<double, ddc::DiscreteDomain<dX, dY, IDimX, IDimY>, 1>;
+    using DFieldXY_dXdY = DerivField<double, ddc::DiscreteDomain<dX, dY, IDimX, IDimY>, 1>;
 
     // Domains where derivatives are defined
     DiscreteSubDomain<IDimX> deriv_dom_x(dom_x.front(), IVectX(2), dom_x.extents());
     DiscreteSubDomain<IDimY> deriv_dom_y(dom_y.front(), IVectY(2), dom_y.extents());
 
     // Define the field
-    DField dxdyField(dom_x_y, deriv_dom_x, deriv_dom_y);
+    DFieldXY_dXdY dxdyField(dom_x_y, deriv_dom_x, deriv_dom_y);
 
     // Ensure that the internal chunk has the expected type
     bool same = std::is_same_v<
-            typename DField::chunk_type,
+            typename DFieldXY_dXdY::chunk_type,
             ddc::Chunk<double, ddc::DiscreteDomain<dX, dY, IDimX, IDimY>>>;
     EXPECT_TRUE(same);
 }
@@ -90,7 +90,7 @@ TEST(DerivFieldTest, Constructor2Deriv)
 TEST(DerivFieldSpanTest, Constructor1Deriv)
 {
     // Type for a x,y field span with 1 derivative in x
-    using DSpan = DerivFieldSpan<double, ddc::DiscreteDomain<dX, IDimX, IDimY>>;
+    using DSpanXY_dX = DerivFieldSpan<double, ddc::DiscreteDomain<dX, IDimX, IDimY>>;
 
     // Domain where derivatives are defined
     DiscreteSubDomain<IDimX> deriv_dom_x(dom_x.front(), IVectX(2), dom_x.extents());
@@ -99,11 +99,11 @@ TEST(DerivFieldSpanTest, Constructor1Deriv)
     DerivField<double, ddc::DiscreteDomain<dX, IDimX, IDimY>, 1>
             dxField_alloc(dom_x_y, deriv_dom_x);
     // Define the span
-    DSpan dxField(dxField_alloc);
+    DSpanXY_dX dxField(dxField_alloc);
 
     // Ensure that the internal chunk span has the expected type
     bool same = std::is_same_v<
-            DSpan::chunk_type,
+            DSpanXY_dX::chunk_type,
             ddc::ChunkSpan<double, ddc::DiscreteDomain<dX, IDimX, IDimY>>>;
     EXPECT_TRUE(same);
 }
@@ -112,7 +112,7 @@ TEST(DerivFieldSpanTest, Constructor1Deriv)
 TEST(DerivFieldSpanTest, Constructor2Deriv)
 {
     // Type for a x,y field span with 1 derivative in x and 1 derivative in y
-    using DSpan = DerivFieldSpan<double, ddc::DiscreteDomain<dX, dY, IDimX, IDimY>>;
+    using DSpanXY_dXdY = DerivFieldSpan<double, ddc::DiscreteDomain<dX, dY, IDimX, IDimY>>;
 
     // Domains where derivatives are defined
     DiscreteSubDomain<IDimX> deriv_dom_x(dom_x.front(), IVectX(2), dom_x.extents());
@@ -122,11 +122,11 @@ TEST(DerivFieldSpanTest, Constructor2Deriv)
     DerivField<double, ddc::DiscreteDomain<dX, dY, IDimX, IDimY>, 1>
             dxdyField_alloc(dom_x_y, deriv_dom_x, deriv_dom_y);
     // Define the span
-    DSpan dxdyField(dxdyField_alloc);
+    DSpanXY_dXdY dxdyField(dxdyField_alloc);
 
     // Ensure that the internal chunk span has the expected type
     bool same = std::is_same_v<
-            DSpan::chunk_type,
+            DSpanXY_dXdY::chunk_type,
             ddc::ChunkSpan<double, ddc::DiscreteDomain<dX, dY, IDimX, IDimY>>>;
     EXPECT_TRUE(same);
 }
