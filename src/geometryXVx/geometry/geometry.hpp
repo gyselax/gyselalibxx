@@ -273,9 +273,6 @@ using FieldSpXVx = device_t<ddc::Chunk<ElementType, IDomainSpXVx>>;
 
 
 
-template <class DomainType>
-using DField = device_t<ddc::Chunk<double, DomainType>>;
-
 using DFieldVx = FieldVx<double>;
 
 using DFieldX = FieldX<double>;
@@ -316,9 +313,6 @@ using SpanSpX = device_t<ddc::ChunkSpan<ElementType, IDomainSpX>>;
 template <class ElementType>
 using SpanSpXVx = device_t<ddc::ChunkSpan<ElementType, IDomainSpXVx>>;
 
-
-template <class DomainType>
-using DSpan = device_t<ddc::ChunkSpan<double, DomainType>>;
 
 using DBSSpanX = BSSpanX<double>;
 
@@ -361,9 +355,6 @@ template <class ElementType>
 using ViewSpXVx = device_t<ddc::ChunkSpan<ElementType const, IDomainSpXVx>>;
 
 
-
-template <class DomainType>
-using DView = device_t<ddc::ChunkSpan<double const, DomainType>>;
 
 using DViewVx = ViewVx<double>;
 
