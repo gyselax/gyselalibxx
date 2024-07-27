@@ -15,8 +15,6 @@ PUBLIC
         GTest::gtest
         GTest::gmock
 
-        gslx::multipatch_connectivity
-        gslx::multipatch_geometries
         gslx::multipatch_interface
 )
 target_compile_definitions("${test_name_gtest}" PUBLIC)
@@ -24,6 +22,4 @@ gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 
 
 
-add_subdirectory(geometries)
 add_subdirectory(spline)
-
