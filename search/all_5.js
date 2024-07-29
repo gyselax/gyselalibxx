@@ -8,7 +8,7 @@ var searchData=
   ['fftpoissonsolver_3c_20ddc_3a_3adiscretedomain_3c_20ddims_2e_2e_2e_20_3e_2c_20fulldomain_2c_20execspace_2c_20layoutspace_20_3e_260',['FFTPoissonSolver&lt; ddc::DiscreteDomain&lt; DDims... &gt;, FullDomain, ExecSpace, LayoutSpace &gt;',['../classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html',1,'']]],
   ['fill_5fmatrix_5fwith_5fcoeff_261',['fill_matrix_with_coeff',['../classCollisionsIntra.html#ad0dc6d2a1b8acb82d9ec60592ef72e6c',1,'CollisionsIntra']]],
   ['find_5fequilibrium_262',['find_equilibrium',['../classVortexMergerEquilibria.html#a8761babf41d8e77ecf9159f142a10091',1,'VortexMergerEquilibria']]],
-  ['find_5fion_263',['find_ion',['../classKineticFluidCouplingSource.html#a3e029b09d9cf27e28ca055eab21365bd',1,'KineticFluidCouplingSource']]],
+  ['find_5fion_263',['find_ion',['../classKineticFluidCouplingSource.html#a3b0a180bb8863021aff31bd74fe158a7',1,'KineticFluidCouplingSource']]],
   ['fluid_20initialization_20methods_264',['Fluid Initialization methods',['../src_geometryXVx_geometryMX_fluidinitialization.html',1,'src_geometryXVx_geometryMX']]],
   ['fluid_20transport_20solvers_20_28mx_29_265',['Fluid transport solvers (MX)',['../src_geometryXVx_geometryMX_fluidtransportsolver.html',1,'src_geometryXVx_geometryMX']]],
   ['fluidmoments_266',['FluidMoments',['../classFluidMoments.html',1,'FluidMoments'],['../classFluidMoments.html#a6c85463b8bd9fec0e6c224043fe18d1f',1,'FluidMoments::FluidMoments()']]],

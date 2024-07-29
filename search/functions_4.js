@@ -7,7 +7,7 @@ var searchData=
   ['electrostaticalpotentialsimulation_5ftranslation_1173',['ElectrostaticalPotentialSimulation_translation',['../classElectrostaticalPotentialSimulation__translation.html#aed3279c83ba2704c2f5e52da4cc7bf64',1,'ElectrostaticalPotentialSimulation_translation']]],
   ['end_1174',['end',['../classDiscreteSubDomain.html#af29f43b7b2b574e8fd467a34200ed209',1,'DiscreteSubDomain']]],
   ['epsilon_1175',['epsilon',['../classCzarnyToCartesian.html#a9e4ad729fd290d47759637b69b9aa30a',1,'CzarnyToCartesian']]],
-  ['epsilon_5fbot_1176',['epsilon_bot',['../classBumpontailEquilibrium.html#a364f262c4b5d89461566bf23c6ec6e70',1,'BumpontailEquilibrium']]],
+  ['epsilon_5fbot_1176',['epsilon_bot',['../classBumpontailEquilibrium.html#a6fc7a8353d8975267668167983fb1bec',1,'BumpontailEquilibrium']]],
   ['equilibrium_1177',['equilibrium',['../classDiocotronDensitySolution.html#addb4e4b9e22583a0922b16b770841c47',1,'DiocotronDensitySolution']]],
   ['euler_1178',['Euler',['../classEuler.html#a8019703dccd8358b9b221818fa51bdcb',1,'Euler']]],
   ['eval_5fbasis_1179',['eval_basis',['../classPolarBSplines_1_1Impl.html#a19829dfac3af3875a55bb24f381dc7f3',1,'PolarBSplines::Impl']]],

@@ -213,20 +213,20 @@ $(document).ready(function(){initNavTree('quadrature_8hpp_source.html',''); init
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class </span>HeadDim, <span class="keyword">class</span>... DDim&gt;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    KOKKOS_FUNCTION <span class="keyword">static</span> ddc::DiscreteElement&lt;HeadDim, DDim...&gt; to_discrete_element(</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class </span>HeadDim, <span class="keyword">class</span>... Grid1D&gt;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    KOKKOS_FUNCTION <span class="keyword">static</span> ddc::DiscreteElement&lt;HeadDim, Grid1D...&gt; to_discrete_element(</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <span class="keywordtype">int</span> idx,</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            ddc::DiscreteDomain&lt;HeadDim, DDim...&gt; dom)</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            ddc::DiscreteDomain&lt;HeadDim, Grid1D...&gt; dom)</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    {</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        ddc::DiscreteDomain&lt;DDim...&gt; subdomain(dom);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        ddc::DiscreteDomain&lt;Grid1D...&gt; subdomain(dom);</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        ddc::DiscreteElement&lt;HeadDim&gt; head_idx(</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                ddc::select&lt;HeadDim&gt;(dom).front() + idx / subdomain.size());</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>...(DDim) == 0) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>...(Grid1D) == 0) {</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="keywordflow">return</span> head_idx;</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            ddc::DiscreteElement&lt;DDim...&gt; tail_idx</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            ddc::DiscreteElement&lt;Grid1D...&gt; tail_idx</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                    = to_discrete_element(idx % subdomain.size(), subdomain);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keywordflow">return</span> ddc::DiscreteElement&lt;HeadDim, DDim...&gt;(head_idx, tail_idx);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keywordflow">return</span> ddc::DiscreteElement&lt;HeadDim, Grid1D...&gt;(head_idx, tail_idx);</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        }</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    }</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;};</div>

@@ -1,10 +1,10 @@
 var searchData=
 [
   ['cartesiansolution_1114',['CartesianSolution',['../classCartesianSolution.html#ac149cdb56054369fe9539a2c2c0133e1',1,'CartesianSolution']]],
-  ['charge_1115',['charge',['../classSpeciesInformation_1_1Impl.html#abe1ab5c2181b8aa9073fe56bf34fee9c',1,'SpeciesInformation::Impl']]],
+  ['charge_1115',['charge',['../classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5',1,'SpeciesInformation::Impl']]],
   ['chargedensitycalculator_1116',['ChargeDensityCalculator',['../classChargeDensityCalculator.html#a2cd9037552a052b518f9bed505e13069',1,'ChargeDensityCalculator::ChargeDensityCalculator(DViewVx coeffs)'],['../classChargeDensityCalculator.html#a618bbd0826d1a1e6df49232f016ebdab',1,'ChargeDensityCalculator::ChargeDensityCalculator(DViewVxVy coeffs)']]],
   ['chargeexchangerate_1117',['ChargeExchangeRate',['../classChargeExchangeRate.html#a03a0f421dd456bff34cf2161d478d983',1,'ChargeExchangeRate']]],
-  ['charges_1118',['charges',['../classSpeciesInformation_1_1Impl.html#a35c7b67399475db7f2252b8f499ce1fd',1,'SpeciesInformation::Impl']]],
+  ['charges_1118',['charges',['../classSpeciesInformation_1_1Impl.html#a1b646bde625f303eb58abfd02bfa9b4d',1,'SpeciesInformation::Impl']]],
   ['check_5fdimension_5flocation_1119',['check_dimension_location',['../namespacecollisions__dimensions.html#a7870e36eeb352997a20c1b3ff2451e2f',1,'collisions_dimensions']]],
   ['check_5fstability_1120',['check_stability',['../classMatrixBatchTridiag.html#a5951ed8d2a582543b1962b6f0ecfe490',1,'MatrixBatchTridiag']]],
   ['circulartocartesian_1121',['CircularToCartesian',['../classCircularToCartesian.html#a3645bf526455fc943477bf9bdf3f26e4',1,'CircularToCartesian::CircularToCartesian(CircularToCartesian const &amp;other)=default'],['../classCircularToCartesian.html#aff3665268072fb79e9acf8503e9b38f0',1,'CircularToCartesian::CircularToCartesian(CircularToCartesian &amp;&amp;x)=default']]],

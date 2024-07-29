@@ -1,0 +1,4 @@
+var structinterpolator__on__domain_3_01Interp_00_01DDimI_00_01ddc_1_1DiscreteDomain_3_01Grid1D_8_8_8_01_4_01_4 =
+[
+    [ "type", "structinterpolator__on__domain_3_01Interp_00_01DDimI_00_01ddc_1_1DiscreteDomain_3_01Grid1D_8_8_8_01_4_01_4.html#a2d7b675d039c625cb2782ad800d229ad", null ]
+];

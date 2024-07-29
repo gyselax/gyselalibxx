@@ -123,7 +123,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="memdesc:a2fda4f14505332f114c2d7f515de2283"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the poloidal plane. <br /></td></tr>
 <tr class="separator:a2fda4f14505332f114c2d7f515de2283"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69d4c79437a44fb3fbe5b9fa5cb4a6ad"><td class="memItemLeft" align="right" valign="top"><a id="a69d4c79437a44fb3fbe5b9fa5cb4a6ad"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a69d4c79437a44fb3fbe5b9fa5cb4a6ad">DDomSpThetaRVpar</a> = ddc::DiscreteDomain&lt; <a class="el" href="structIDimSp.html">Species</a>, GridTheta, GridR, <a class="el" href="structGridVpar.html">GridVpar</a> &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a69d4c79437a44fb3fbe5b9fa5cb4a6ad">DDomSpThetaRVpar</a> = ddc::DiscreteDomain&lt; <a class="el" href="structSpecies.html">Species</a>, GridTheta, GridR, <a class="el" href="structGridVpar.html">GridVpar</a> &gt;</td></tr>
 <tr class="memdesc:a69d4c79437a44fb3fbe5b9fa5cb4a6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain containing (species, theta, r, vpar) <br /></td></tr>
 <tr class="separator:a69d4c79437a44fb3fbe5b9fa5cb4a6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6db78a60a9f0387b708308c8d4c822b5"><td class="memItemLeft" align="right" valign="top"><a id="a6db78a60a9f0387b708308c8d4c822b5"></a>
@@ -134,10 +134,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a6e2bb148874679724f2632e9e7f00d93">DDomVpar</a> = ddc::DiscreteDomain&lt; <a class="el" href="structGridVpar.html">GridVpar</a> &gt;</td></tr>
 <tr class="memdesc:a6e2bb148874679724f2632e9e7f00d93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for the domain of the velocity parallel to the magnetic field. <br /></td></tr>
 <tr class="separator:a6e2bb148874679724f2632e9e7f00d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39895ea2344637deaffe1b9a01a96a1e"><td class="memItemLeft" align="right" valign="top"><a id="a39895ea2344637deaffe1b9a01a96a1e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a39895ea2344637deaffe1b9a01a96a1e">DFieldSp</a> = device_t&lt; ddc::Chunk&lt; double, IDomainSp &gt; &gt;</td></tr>
-<tr class="memdesc:a39895ea2344637deaffe1b9a01a96a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of species. <br /></td></tr>
-<tr class="separator:a39895ea2344637deaffe1b9a01a96a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92306cfd6cb0b6f11ffde5f080c2d51a"><td class="memItemLeft" align="right" valign="top"><a id="a92306cfd6cb0b6f11ffde5f080c2d51a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a92306cfd6cb0b6f11ffde5f080c2d51a">DFieldMemSp</a> = device_t&lt; ddc::Chunk&lt; double, IdxRangeSp &gt; &gt;</td></tr>
+<tr class="memdesc:a92306cfd6cb0b6f11ffde5f080c2d51a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of species. <br /></td></tr>
+<tr class="separator:a92306cfd6cb0b6f11ffde5f080c2d51a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af750aee3abc40af96d6c285fab28006e"><td class="memItemLeft" align="right" valign="top"><a id="af750aee3abc40af96d6c285fab28006e"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#af750aee3abc40af96d6c285fab28006e">DFieldR</a> = device_t&lt; ddc::Chunk&lt; double, <a class="el" href="classCollisionSpVparMu.html#a6a33929f5920809b0ee6431641b32e63">DDomR</a> &gt; &gt;</td></tr>
 <tr class="memdesc:af750aee3abc40af96d6c285fab28006e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a field on a grid of radial values. <br /></td></tr>
@@ -201,14 +201,14 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="namespacekoliop__interface.html#add7925b19f475ceb836ca3b7db36cd2c">koliop_interface::MDL</a>&lt; double[6][6]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a0ce66102616e07426e94dec19a4b9fdd">m_comb_mat</a></td></tr>
 <tr class="memdesc:a0ce66102616e07426e94dec19a4b9fdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combinatory (6x6) matrix computed only one times at initialisation. Rk: 6 = 2*(Npolmax-1) + 1 + 1. <br /></td></tr>
 <tr class="separator:a0ce66102616e07426e94dec19a4b9fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cffdabc988ad643f1b9427b278863f7"><td class="memItemLeft" align="right" valign="top"><a id="a9cffdabc988ad643f1b9427b278863f7"></a>
-<a class="el" href="classCollisionSpVparMu.html#a39895ea2344637deaffe1b9a01a96a1e">DFieldSp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a9cffdabc988ad643f1b9427b278863f7">m_hat_As</a></td></tr>
-<tr class="memdesc:a9cffdabc988ad643f1b9427b278863f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized masses for all species. <br /></td></tr>
-<tr class="separator:a9cffdabc988ad643f1b9427b278863f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeef532080d72c87356e6125b68854313"><td class="memItemLeft" align="right" valign="top"><a id="aeef532080d72c87356e6125b68854313"></a>
-<a class="el" href="classCollisionSpVparMu.html#a39895ea2344637deaffe1b9a01a96a1e">DFieldSp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#aeef532080d72c87356e6125b68854313">m_hat_Zs</a></td></tr>
-<tr class="memdesc:aeef532080d72c87356e6125b68854313"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized charges for all species. <br /></td></tr>
-<tr class="separator:aeef532080d72c87356e6125b68854313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d24b147c867b69c550c4b9a5730ad48"><td class="memItemLeft" align="right" valign="top"><a id="a5d24b147c867b69c550c4b9a5730ad48"></a>
+<a class="el" href="classCollisionSpVparMu.html#a92306cfd6cb0b6f11ffde5f080c2d51a">DFieldMemSp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#a5d24b147c867b69c550c4b9a5730ad48">m_hat_As</a></td></tr>
+<tr class="memdesc:a5d24b147c867b69c550c4b9a5730ad48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized masses for all species. <br /></td></tr>
+<tr class="separator:a5d24b147c867b69c550c4b9a5730ad48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa390880348d0cf09270b657c422f8f85"><td class="memItemLeft" align="right" valign="top"><a id="aa390880348d0cf09270b657c422f8f85"></a>
+<a class="el" href="classCollisionSpVparMu.html#a92306cfd6cb0b6f11ffde5f080c2d51a">DFieldMemSp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#aa390880348d0cf09270b657c422f8f85">m_hat_Zs</a></td></tr>
+<tr class="memdesc:aa390880348d0cf09270b657c422f8f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized charges for all species. <br /></td></tr>
+<tr class="separator:aa390880348d0cf09270b657c422f8f85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae386a8b960be061d4898a812b37002ae"><td class="memItemLeft" align="right" valign="top"><a id="ae386a8b960be061d4898a812b37002ae"></a>
 <a class="el" href="classCollisionSpVparMu.html#af750aee3abc40af96d6c285fab28006e">DFieldR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionSpVparMu.html#ae386a8b960be061d4898a812b37002ae">m_nustar0_r</a></td></tr>
 <tr class="memdesc:ae386a8b960be061d4898a812b37002ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radial profile of nustar0_r. <br /></td></tr>

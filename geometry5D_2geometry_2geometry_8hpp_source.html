@@ -181,8 +181,8 @@ $(document).ready(function(){initNavTree('geometry5D_2geometry_2geometry_8hpp_so
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">using</span> DDomTorCS = ddc::DiscreteDomain&lt;GridTor2, GridTor1&gt;;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">using</span> DDomTor3D = ddc::DiscreteDomain&lt;GridTor3, GridTor2, GridTor1&gt;;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">using</span> DDomV2D = ddc::DiscreteDomain&lt;GridVpar, GridMu&gt;;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">using</span> DDomSpTor3DV2D = ddc::DiscreteDomain&lt;IDimSp, GridTor3, GridTor2, GridTor1, GridVpar, GridMu&gt;;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">using</span> DDomSpTorCS = ddc::DiscreteDomain&lt;IDimSp, GridTor2, GridTor1&gt;;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">using</span> DDomSpTor3DV2D = ddc::DiscreteDomain&lt;Species, GridTor3, GridTor2, GridTor1, GridVpar, GridMu&gt;;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">using</span> DDomSpTorCS = ddc::DiscreteDomain&lt;Species, GridTor2, GridTor1&gt;;</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">using</span> FieldTor1 = device_t&lt;ddc::Chunk&lt;ElementType, DDomTor1&gt;&gt;;</div>

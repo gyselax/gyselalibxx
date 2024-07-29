@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('bsl__advection__vx_8hpp_source.html','
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">using</span> FdistribuDDom = <span class="keyword">typename</span> Geometry::FdistribuDDom;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">using</span> SpatialDDom = <span class="keyword">typename</span> Geometry::SpatialDDom;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">using</span> DElemV = ddc::DiscreteElement&lt;DDimV&gt;;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">using</span> DElemSp = ddc::DiscreteElement&lt;IDimSp&gt;;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">using</span> DElemSp = ddc::DiscreteElement&lt;Species&gt;;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">using</span> CDimV = <span class="keyword">typename</span> DDimV::continuous_dimension_type;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">private</span>:</div>
@@ -151,14 +151,14 @@ $(document).ready(function(){initNavTree('bsl__advection__vx_8hpp_source.html','
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        Kokkos::Profiling::pushRegion(<span class="stringliteral">&quot;BslAdvectionVelocity&quot;</span>);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        FdistribuDDom <span class="keyword">const</span> dom = allfdistribu.domain();</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        ddc::DiscreteDomain&lt;DDimV&gt; <span class="keyword">const</span> v_dom = ddc::select&lt;DDimV&gt;(dom);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        ddc::DiscreteDomain&lt;IDimSp&gt; <span class="keyword">const</span> sp_dom = ddc::select&lt;IDimSp&gt;(dom);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        ddc::DiscreteDomain&lt;Species&gt; <span class="keyword">const</span> sp_dom = ddc::select&lt;Species&gt;(dom);</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        device_t&lt;ddc::Chunk&lt;double, typename InterpolatorType::batched_derivs_domain_type&gt;&gt;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                derivs_min(m_interpolator_v.batched_derivs_domain_xmin(</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        ddc::remove_dims_of&lt;IDimSp&gt;(dom)));</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        ddc::remove_dims_of&lt;Species&gt;(dom)));</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        device_t&lt;ddc::Chunk&lt;double, typename InterpolatorType::batched_derivs_domain_type&gt;&gt;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                derivs_max(m_interpolator_v.batched_derivs_domain_xmax(</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        ddc::remove_dims_of&lt;IDimSp&gt;(dom)));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        ddc::remove_dims_of&lt;Species&gt;(dom)));</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        ddc::parallel_fill(derivs_min, 0.);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        ddc::parallel_fill(derivs_max, 0.);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>

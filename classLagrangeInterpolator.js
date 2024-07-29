@@ -1,8 +1,8 @@
 var classLagrangeInterpolator =
 [
-    [ "LagrangeInterpolator", "classLagrangeInterpolator.html#a6a8d1539af23c57f709d74a8456f1c07", null ],
-    [ "~LagrangeInterpolator", "classLagrangeInterpolator.html#ad6237ae889559edd71a4b07d063f4a7b", null ],
-    [ "batched_derivs_domain_xmin", "classLagrangeInterpolator.html#a8d05ecab1f5295266c31bdcad9ee57f2", null ],
-    [ "batched_derivs_domain_xmax", "classLagrangeInterpolator.html#a0032b1fce9a70db95d3852834adb5448", null ],
-    [ "operator()", "classLagrangeInterpolator.html#ac68103ae59930362ce4c1efa0b0f9858", null ]
+    [ "LagrangeInterpolator", "classLagrangeInterpolator.html#a6898155a92033a7eeac64d72fb649fff", null ],
+    [ "~LagrangeInterpolator", "classLagrangeInterpolator.html#a46405b9e9788379313a2233bbdcd028d", null ],
+    [ "batched_derivs_domain_xmin", "classLagrangeInterpolator.html#a4197a4e655d6054f9e8fb3e9fcb16b18", null ],
+    [ "batched_derivs_domain_xmax", "classLagrangeInterpolator.html#ae076c21cae9c622ef31b49bce9e2e19c", null ],
+    [ "operator()", "classLagrangeInterpolator.html#ab92643a6e3588f9e078f1507561e0be6", null ]
 ];

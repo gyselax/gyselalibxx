@@ -1,7 +1,7 @@
 var classMoments_1_1Impl =
 [
-    [ "discrete_dimension_type", "classMoments_1_1Impl.html#af81fddc273f4a23999c61339d5642dfe", null ],
-    [ "Impl", "classMoments_1_1Impl.html#a0cfa1215dd563ea63337cc3af57abcd0", null ],
-    [ "Impl", "classMoments_1_1Impl.html#a857a30f1cd5c3b7c4973ef8d80ca7ace", null ],
+    [ "discrete_dimension_type", "classMoments_1_1Impl.html#a28d2f6c8233c4cd2221274bee80dc206", null ],
+    [ "Impl", "classMoments_1_1Impl.html#a1d0f28c92509bf1c21a8f930dca915ea", null ],
+    [ "Impl", "classMoments_1_1Impl.html#a53ef02b0e60b8aeafdaed641c660ba61", null ],
     [ "Impl", "classMoments_1_1Impl.html#adcaf2527acc2c7a0a18f741240082b56", null ]
 ];
