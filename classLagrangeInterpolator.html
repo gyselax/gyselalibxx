@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: LagrangeInterpolator&lt; DDimI, BcMin, BcMax, Grid1D &gt; Class Template Reference</title>
+<title>Gyselalib++: LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,73 +103,73 @@ $(document).ready(function(){initNavTree('classLagrangeInterpolator.html',''); i
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classLagrangeInterpolator-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">LagrangeInterpolator&lt; DDimI, BcMin, BcMax, Grid1D &gt; Class Template Reference</div>  </div>
+<div class="title">LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class for interpolating a function using <a class="el" href="classLagrange.html" title="A class which implements Lagrange polynomials.">Lagrange</a> polynomials.  
  <a href="classLagrangeInterpolator.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for LagrangeInterpolator&lt; DDimI, BcMin, BcMax, Grid1D &gt;:</div>
+Inheritance diagram for LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classLagrangeInterpolator.png" usemap="#LagrangeInterpolator_3C_20DDimI_2C_20BcMin_2C_20BcMax_2C_20Grid1D_20_3E_map" alt=""/>
-  <map id="LagrangeInterpolator_3C_20DDimI_2C_20BcMin_2C_20BcMax_2C_20Grid1D_20_3E_map" name="LagrangeInterpolator_3C_20DDimI_2C_20BcMin_2C_20BcMax_2C_20Grid1D_20_3E_map">
-<area href="classIInterpolator.html" alt="IInterpolator&lt; DDimI, Grid1D... &gt;" shape="rect" coords="0,0,329,24"/>
+  <img src="classLagrangeInterpolator.png" usemap="#LagrangeInterpolator_3C_20GridInterp_2C_20BcMin_2C_20BcMax_2C_20Grid1D_20_3E_map" alt=""/>
+  <map id="LagrangeInterpolator_3C_20GridInterp_2C_20BcMin_2C_20BcMax_2C_20Grid1D_20_3E_map" name="LagrangeInterpolator_3C_20GridInterp_2C_20BcMin_2C_20BcMax_2C_20Grid1D_20_3E_map">
+<area href="classIInterpolator.html" alt="IInterpolator&lt; GridInterp, Grid1D... &gt;" shape="rect" coords="0,0,352,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6898155a92033a7eeac64d72fb649fff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangeInterpolator.html#a6898155a92033a7eeac64d72fb649fff">LagrangeInterpolator</a> (int degree, ddc::DiscreteVector&lt; DDimI &gt; ghost)</td></tr>
-<tr class="memdesc:a6898155a92033a7eeac64d72fb649fff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classLagrange.html" title="A class which implements Lagrange polynomials.">Lagrange</a> interpolator object.  <a href="classLagrangeInterpolator.html#a6898155a92033a7eeac64d72fb649fff">More...</a><br /></td></tr>
-<tr class="separator:a6898155a92033a7eeac64d72fb649fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4197a4e655d6054f9e8fb3e9fcb16b18"><td class="memItemLeft" align="right" valign="top">batched_derivs_domain_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangeInterpolator.html#a4197a4e655d6054f9e8fb3e9fcb16b18">batched_derivs_domain_xmin</a> (ddc::DiscreteDomain&lt; Grid1D... &gt; dom) const override</td></tr>
-<tr class="memdesc:a4197a4e655d6054f9e8fb3e9fcb16b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batched derivs domain on lower boundaries.  <a href="classLagrangeInterpolator.html#a4197a4e655d6054f9e8fb3e9fcb16b18">More...</a><br /></td></tr>
-<tr class="separator:a4197a4e655d6054f9e8fb3e9fcb16b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae076c21cae9c622ef31b49bce9e2e19c"><td class="memItemLeft" align="right" valign="top">batched_derivs_domain_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangeInterpolator.html#ae076c21cae9c622ef31b49bce9e2e19c">batched_derivs_domain_xmax</a> (ddc::DiscreteDomain&lt; Grid1D... &gt; dom) const override</td></tr>
-<tr class="memdesc:ae076c21cae9c622ef31b49bce9e2e19c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batched derivs domain on upper boundaries.  <a href="classLagrangeInterpolator.html#ae076c21cae9c622ef31b49bce9e2e19c">More...</a><br /></td></tr>
-<tr class="separator:ae076c21cae9c622ef31b49bce9e2e19c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab92643a6e3588f9e078f1507561e0be6"><td class="memItemLeft" align="right" valign="top">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D... &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangeInterpolator.html#ab92643a6e3588f9e078f1507561e0be6">operator()</a> (device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D... &gt;&gt;&gt; inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; Grid1D... &gt;&gt;&gt; coordinates, [[maybe_unused]] std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, typename <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; DDimI, Grid1D... &gt;::batched_derivs_domain_type &gt;&gt;&gt; derivs_xmin=std::nullopt, [[maybe_unused]] std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, typename <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; DDimI, Grid1D... &gt;::batched_derivs_domain_type &gt;&gt;&gt; derivs_xmax=std::nullopt) const override</td></tr>
-<tr class="memdesc:ab92643a6e3588f9e078f1507561e0be6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classLagrangeInterpolator.html#ab92643a6e3588f9e078f1507561e0be6">More...</a><br /></td></tr>
-<tr class="separator:ab92643a6e3588f9e078f1507561e0be6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classIInterpolator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIInterpolator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIInterpolator.html">IInterpolator&lt; DDimI, Grid1D... &gt;</a></td></tr>
-<tr class="memitem:a35521154c58c0f6e65efd15a83aefca0 inherit pub_methods_classIInterpolator"><td class="memItemLeft" align="right" valign="top">virtual device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D... &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#a35521154c58c0f6e65efd15a83aefca0">operator()</a> (device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D... &gt;&gt;&gt; inout_data, device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; Grid1D... &gt;&gt;&gt; coordinates, std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, <a class="el" href="classIInterpolator.html#a59d004278ff9ecab5c2af751f6956c5c">batched_derivs_domain_type</a> &gt;&gt;&gt; derivs_xmin=std::nullopt, std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, <a class="el" href="classIInterpolator.html#a59d004278ff9ecab5c2af751f6956c5c">batched_derivs_domain_type</a> &gt;&gt;&gt; derivs_xmax=std::nullopt) const=0</td></tr>
-<tr class="memdesc:a35521154c58c0f6e65efd15a83aefca0 inherit pub_methods_classIInterpolator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classIInterpolator.html#a35521154c58c0f6e65efd15a83aefca0">More...</a><br /></td></tr>
-<tr class="separator:a35521154c58c0f6e65efd15a83aefca0 inherit pub_methods_classIInterpolator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60914d8391f7ea2e47c624a088ec5d92"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangeInterpolator.html#a60914d8391f7ea2e47c624a088ec5d92">LagrangeInterpolator</a> (int degree, IdxStep&lt; GridInterp &gt; ghost)</td></tr>
+<tr class="memdesc:a60914d8391f7ea2e47c624a088ec5d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classLagrange.html" title="A class which implements Lagrange polynomials.">Lagrange</a> interpolator object.  <a href="classLagrangeInterpolator.html#a60914d8391f7ea2e47c624a088ec5d92">More...</a><br /></td></tr>
+<tr class="separator:a60914d8391f7ea2e47c624a088ec5d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e5e7e2a5c3a13f4cc3b68b0798d98a9"><td class="memItemLeft" align="right" valign="top">batched_derivs_idx_range_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangeInterpolator.html#a9e5e7e2a5c3a13f4cc3b68b0798d98a9">batched_derivs_idx_range_xmin</a> (IdxRange&lt; Grid1D... &gt; dom) const override</td></tr>
+<tr class="memdesc:a9e5e7e2a5c3a13f4cc3b68b0798d98a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batched derivs index range on lower boundaries.  <a href="classLagrangeInterpolator.html#a9e5e7e2a5c3a13f4cc3b68b0798d98a9">More...</a><br /></td></tr>
+<tr class="separator:a9e5e7e2a5c3a13f4cc3b68b0798d98a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4bfb75dc167ecb321e94c330c14a912"><td class="memItemLeft" align="right" valign="top">batched_derivs_idx_range_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangeInterpolator.html#ae4bfb75dc167ecb321e94c330c14a912">batched_derivs_idx_range_xmax</a> (IdxRange&lt; Grid1D... &gt; dom) const override</td></tr>
+<tr class="memdesc:ae4bfb75dc167ecb321e94c330c14a912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batched derivs index range on upper boundaries.  <a href="classLagrangeInterpolator.html#ae4bfb75dc167ecb321e94c330c14a912">More...</a><br /></td></tr>
+<tr class="separator:ae4bfb75dc167ecb321e94c330c14a912"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac43d96b4a41419a6a1ff79a68c542be8"><td class="memItemLeft" align="right" valign="top">Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangeInterpolator.html#ac43d96b4a41419a6a1ff79a68c542be8">operator()</a> (Field&lt; double, IdxRange&lt; Grid1D... &gt;&gt; inout_data, Field&lt; const Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt;&gt; coordinates, [[maybe_unused]] std::optional&lt; Field&lt; double const, typename <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt;&gt; derivs_xmin=std::nullopt, [[maybe_unused]] std::optional&lt; Field&lt; double const, typename <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt;&gt; derivs_xmax=std::nullopt) const override</td></tr>
+<tr class="memdesc:ac43d96b4a41419a6a1ff79a68c542be8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classLagrangeInterpolator.html#ac43d96b4a41419a6a1ff79a68c542be8">More...</a><br /></td></tr>
+<tr class="separator:ac43d96b4a41419a6a1ff79a68c542be8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classIInterpolator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIInterpolator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIInterpolator.html">IInterpolator&lt; GridInterp, Grid1D... &gt;</a></td></tr>
+<tr class="memitem:aaa5c3e3e3114ea37952ebe02f7464a00 inherit pub_methods_classIInterpolator"><td class="memItemLeft" align="right" valign="top">virtual Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#aaa5c3e3e3114ea37952ebe02f7464a00">operator()</a> (Field&lt; double, IdxRange&lt; Grid1D... &gt;&gt; inout_data, Field&lt; const Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt;&gt; coordinates, std::optional&lt; Field&lt; double const, <a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a> &gt;&gt; derivs_xmin=std::nullopt, std::optional&lt; Field&lt; double const, <a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a> &gt;&gt; derivs_xmax=std::nullopt) const=0</td></tr>
+<tr class="memdesc:aaa5c3e3e3114ea37952ebe02f7464a00 inherit pub_methods_classIInterpolator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classIInterpolator.html#aaa5c3e3e3114ea37952ebe02f7464a00">More...</a><br /></td></tr>
+<tr class="separator:aaa5c3e3e3114ea37952ebe02f7464a00 inherit pub_methods_classIInterpolator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_classIInterpolator"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classIInterpolator')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classIInterpolator.html">IInterpolator&lt; DDimI, Grid1D... &gt;</a></td></tr>
-<tr class="memitem:a9cb14128924994dfe8e8351ea01180eb inherit pub_types_classIInterpolator"><td class="memItemLeft" align="right" valign="top"><a id="a9cb14128924994dfe8e8351ea01180eb"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#a9cb14128924994dfe8e8351ea01180eb">deriv_type</a> = ddc::Deriv&lt; typename DDimI::continuous_dimension_type &gt;</td></tr>
-<tr class="memdesc:a9cb14128924994dfe8e8351ea01180eb inherit pub_types_classIInterpolator"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the dimension representing derivatives. <br /></td></tr>
-<tr class="separator:a9cb14128924994dfe8e8351ea01180eb inherit pub_types_classIInterpolator"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59d004278ff9ecab5c2af751f6956c5c inherit pub_types_classIInterpolator"><td class="memItemLeft" align="right" valign="top"><a id="a59d004278ff9ecab5c2af751f6956c5c"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#a59d004278ff9ecab5c2af751f6956c5c">batched_derivs_domain_type</a> = ddc::replace_dim_of_t&lt; ddc::DiscreteDomain&lt; Grid1D... &gt;, DDimI, <a class="el" href="classIInterpolator.html#a9cb14128924994dfe8e8351ea01180eb">deriv_type</a> &gt;</td></tr>
-<tr class="memdesc:a59d004278ff9ecab5c2af751f6956c5c inherit pub_types_classIInterpolator"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the whole domain on which derivatives are defined. <br /></td></tr>
-<tr class="separator:a59d004278ff9ecab5c2af751f6956c5c inherit pub_types_classIInterpolator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classIInterpolator"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classIInterpolator')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classIInterpolator.html">IInterpolator&lt; GridInterp, Grid1D... &gt;</a></td></tr>
+<tr class="memitem:add959ac890d1a041cc399eb9a694e8f3 inherit pub_types_classIInterpolator"><td class="memItemLeft" align="right" valign="top"><a id="add959ac890d1a041cc399eb9a694e8f3"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#add959ac890d1a041cc399eb9a694e8f3">deriv_type</a> = ddc::Deriv&lt; typename GridInterp::continuous_dimension_type &gt;</td></tr>
+<tr class="memdesc:add959ac890d1a041cc399eb9a694e8f3 inherit pub_types_classIInterpolator"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the dimension representing derivatives. <br /></td></tr>
+<tr class="separator:add959ac890d1a041cc399eb9a694e8f3 inherit pub_types_classIInterpolator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34da0d56a4983e66979c56014fd5436c inherit pub_types_classIInterpolator"><td class="memItemLeft" align="right" valign="top"><a id="a34da0d56a4983e66979c56014fd5436c"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a> = ddc::replace_dim_of_t&lt; IdxRange&lt; Grid1D... &gt;, GridInterp, <a class="el" href="classIInterpolator.html#add959ac890d1a041cc399eb9a694e8f3">deriv_type</a> &gt;</td></tr>
+<tr class="memdesc:a34da0d56a4983e66979c56014fd5436c inherit pub_types_classIInterpolator"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the whole index range on which derivatives are defined. <br /></td></tr>
+<tr class="separator:a34da0d56a4983e66979c56014fd5436c inherit pub_types_classIInterpolator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class DDimI, BCond BcMin, BCond BcMax, class... Grid1D&gt;<br />
-class LagrangeInterpolator&lt; DDimI, BcMin, BcMax, Grid1D &gt;</h3>
+<div class="textblock"><h3>template&lt;class GridInterp, BCond BcMin, BCond BcMax, class... Grid1D&gt;<br />
+class LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;</h3>
 
 <p>A class for interpolating a function using <a class="el" href="classLagrange.html" title="A class which implements Lagrange polynomials.">Lagrange</a> polynomials. </p>
 <p>It is designed to work with both uniform and non-uniform mesh, and have the advantage to be local. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a6898155a92033a7eeac64d72fb649fff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6898155a92033a7eeac64d72fb649fff">&#9670;&nbsp;</a></span>LagrangeInterpolator()</h2>
+<a id="a60914d8391f7ea2e47c624a088ec5d92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60914d8391f7ea2e47c624a088ec5d92">&#9670;&nbsp;</a></span>LagrangeInterpolator()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DDimI , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
+template&lt;class GridInterp , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt; DDimI, BcMin, BcMax, Grid1D &gt;::<a class="el" href="classLagrangeInterpolator.html">LagrangeInterpolator</a> </td>
+          <td class="memname"><a class="el" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::<a class="el" href="classLagrangeInterpolator.html">LagrangeInterpolator</a> </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>degree</em>, </td>
@@ -177,7 +177,7 @@ template&lt;class DDimI , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::DiscreteVector&lt; DDimI &gt;&#160;</td>
+          <td class="paramtype">IdxStep&lt; GridInterp &gt;&#160;</td>
           <td class="paramname"><em>ghost</em>&#160;</td>
         </tr>
         <tr>
@@ -205,21 +205,21 @@ template&lt;class DDimI , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4197a4e655d6054f9e8fb3e9fcb16b18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4197a4e655d6054f9e8fb3e9fcb16b18">&#9670;&nbsp;</a></span>batched_derivs_domain_xmin()</h2>
+<a id="a9e5e7e2a5c3a13f4cc3b68b0798d98a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e5e7e2a5c3a13f4cc3b68b0798d98a9">&#9670;&nbsp;</a></span>batched_derivs_idx_range_xmin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DDimI , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
+template&lt;class GridInterp , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">batched_derivs_domain_type <a class="el" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt; DDimI, BcMin, BcMax, Grid1D &gt;::batched_derivs_domain_xmin </td>
+          <td class="memname">batched_derivs_idx_range_type <a class="el" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::batched_derivs_idx_range_xmin </td>
           <td>(</td>
-          <td class="paramtype">ddc::DiscreteDomain&lt; Grid1D... &gt;&#160;</td>
+          <td class="paramtype">IdxRange&lt; Grid1D... &gt;&#160;</td>
           <td class="paramname"><em>dom</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -231,35 +231,35 @@ template&lt;class DDimI , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get the batched derivs domain on lower boundaries. </p>
-<p>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the domain on which derivatives on lower boundaries are defined.</p>
+<p>Get the batched derivs index range on lower boundaries. </p>
+<p>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the index range on which derivatives on lower boundaries are defined.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The domain of a single-species distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The index range of a single-species distribution function. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>dom The lower boundaries of this domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>dom The lower boundaries of this index range. </dd></dl>
 
-<p>Implements <a class="el" href="classIInterpolator.html#a2c990286131846dacc07ffaf307214f8">IInterpolator&lt; DDimI, Grid1D... &gt;</a>.</p>
+<p>Implements <a class="el" href="classIInterpolator.html#a75df9c0b077d3114892c76fd7c44567b">IInterpolator&lt; GridInterp, Grid1D... &gt;</a>.</p>
 
 </div>
 </div>
-<a id="ae076c21cae9c622ef31b49bce9e2e19c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae076c21cae9c622ef31b49bce9e2e19c">&#9670;&nbsp;</a></span>batched_derivs_domain_xmax()</h2>
+<a id="ae4bfb75dc167ecb321e94c330c14a912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4bfb75dc167ecb321e94c330c14a912">&#9670;&nbsp;</a></span>batched_derivs_idx_range_xmax()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DDimI , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
+template&lt;class GridInterp , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">batched_derivs_domain_type <a class="el" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt; DDimI, BcMin, BcMax, Grid1D &gt;::batched_derivs_domain_xmax </td>
+          <td class="memname">batched_derivs_idx_range_type <a class="el" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::batched_derivs_idx_range_xmax </td>
           <td>(</td>
-          <td class="paramtype">ddc::DiscreteDomain&lt; Grid1D... &gt;&#160;</td>
+          <td class="paramtype">IdxRange&lt; Grid1D... &gt;&#160;</td>
           <td class="paramname"><em>dom</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -271,53 +271,53 @@ template&lt;class DDimI , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get the batched derivs domain on upper boundaries. </p>
-<p>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the domain on which derivatives on upper boundaries are defined.</p>
+<p>Get the batched derivs index range on upper boundaries. </p>
+<p>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the index range on which derivatives on upper boundaries are defined.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The domain of a single-species distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The index range of a single-species distribution function. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>dom The upper boundaries of this domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>dom The upper boundaries of this index range. </dd></dl>
 
-<p>Implements <a class="el" href="classIInterpolator.html#ab4d497b726bdb9b35b3630b5d99790af">IInterpolator&lt; DDimI, Grid1D... &gt;</a>.</p>
+<p>Implements <a class="el" href="classIInterpolator.html#a565cebe6edb7a4d2939c6faf1c05ba19">IInterpolator&lt; GridInterp, Grid1D... &gt;</a>.</p>
 
 </div>
 </div>
-<a id="ab92643a6e3588f9e078f1507561e0be6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab92643a6e3588f9e078f1507561e0be6">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="ac43d96b4a41419a6a1ff79a68c542be8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac43d96b4a41419a6a1ff79a68c542be8">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DDimI , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
+template&lt;class GridInterp , BCond BcMin, BCond BcMax, class... Grid1D&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">device_t&lt;ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;Grid1D...&gt; &gt; &gt; <a class="el" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt; DDimI, BcMin, BcMax, Grid1D &gt;::operator() </td>
+          <td class="memname">Field&lt;double, IdxRange&lt;Grid1D...&gt; &gt; <a class="el" href="classLagrangeInterpolator.html">LagrangeInterpolator</a>&lt; GridInterp, BcMin, BcMax, Grid1D &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">device_t&lt; ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D... &gt;&gt;&gt;&#160;</td>
+          <td class="paramtype">Field&lt; double, IdxRange&lt; Grid1D... &gt;&gt;&#160;</td>
           <td class="paramname"><em>inout_data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">device_t&lt; ddc::ChunkSpan&lt; const ddc::Coordinate&lt; typename DDimI::continuous_dimension_type &gt;, ddc::DiscreteDomain&lt; Grid1D... &gt;&gt;&gt;&#160;</td>
+          <td class="paramtype">Field&lt; const Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt;&gt;&#160;</td>
           <td class="paramname"><em>coordinates</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">[[maybe_unused] ] std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, typename <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; DDimI, Grid1D... &gt;::batched_derivs_domain_type &gt;&gt;&gt;&#160;</td>
+          <td class="paramtype">[[maybe_unused] ] std::optional&lt; Field&lt; double const, typename <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt;&gt;&#160;</td>
           <td class="paramname"><em>derivs_xmin</em> = <code>std::nullopt</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">[[maybe_unused] ] std::optional&lt; device_t&lt; ddc::ChunkSpan&lt; double const, typename <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; DDimI, Grid1D... &gt;::batched_derivs_domain_type &gt;&gt;&gt;&#160;</td>
+          <td class="paramtype">[[maybe_unused] ] std::optional&lt; Field&lt; double const, typename <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt;&gt;&#160;</td>
           <td class="paramname"><em>derivs_xmax</em> = <code>std::nullopt</code>&#160;</td>
         </tr>
         <tr>

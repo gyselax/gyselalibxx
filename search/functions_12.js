@@ -16,7 +16,7 @@ var searchData=
   ['spline_5fquadrature_5fcoefficients_1332',['spline_quadrature_coefficients',['../spline__quadrature_8hpp.html#aa63cfa594411128e9ed1036c914ab7e1',1,'spline_quadrature.hpp']]],
   ['spline_5fquadrature_5fcoefficients_5f1d_1333',['spline_quadrature_coefficients_1d',['../spline__quadrature_8hpp.html#a48a5e8ebe07cb828534e9c13fd9c3d0e',1,'spline_quadrature.hpp']]],
   ['splinefootfinder_1334',['SplineFootFinder',['../classSplineFootFinder.html#a3da5df4e45c0771002568987d24f922c',1,'SplineFootFinder']]],
-  ['splineinterpolator_1335',['SplineInterpolator',['../classSplineInterpolator.html#a108a53d1b87c2bc1a75929d11c8d9911',1,'SplineInterpolator']]],
+  ['splineinterpolator_1335',['SplineInterpolator',['../classSplineInterpolator.html#a59381462373a38935329febd6950bed0',1,'SplineInterpolator']]],
   ['splineinterpolatorrp_1336',['SplineInterpolatorRP',['../classSplineInterpolatorRP.html#a527491e617038baf55192cd315f08187',1,'SplineInterpolatorRP']]],
   ['splitrighthandsidesolver_1337',['SplitRightHandSideSolver',['../classSplitRightHandSideSolver.html#a0437ce68ef4e58edc866392b429bd1ac',1,'SplitRightHandSideSolver']]],
   ['splitvlasovsolver_1338',['SplitVlasovSolver',['../classSplitVlasovSolver.html#ae7bc383bc8b9884a4a04f27322c7dde5',1,'SplitVlasovSolver']]],

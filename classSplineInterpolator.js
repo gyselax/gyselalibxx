@@ -1,8 +1,8 @@
 var classSplineInterpolator =
 [
-    [ "SplineInterpolator", "classSplineInterpolator.html#a108a53d1b87c2bc1a75929d11c8d9911", null ],
-    [ "~SplineInterpolator", "classSplineInterpolator.html#acd040200ab3f537a98285f37ba7daf68", null ],
-    [ "batched_derivs_domain_xmin", "classSplineInterpolator.html#aed155841aca31acbe2432216285f9d61", null ],
-    [ "batched_derivs_domain_xmax", "classSplineInterpolator.html#a68e769c5fc24d5f6a831419b8ae42122", null ],
-    [ "operator()", "classSplineInterpolator.html#af19bf290b528c742462928d58d644e46", null ]
+    [ "SplineInterpolator", "classSplineInterpolator.html#a59381462373a38935329febd6950bed0", null ],
+    [ "~SplineInterpolator", "classSplineInterpolator.html#abe4759eae637affa7603da612bb9d5b7", null ],
+    [ "batched_derivs_idx_range_xmin", "classSplineInterpolator.html#a7bed9695df7fb688b544eb239f4823ca", null ],
+    [ "batched_derivs_idx_range_xmax", "classSplineInterpolator.html#ae3cc72aa446dc4fac474c34d629b7936", null ],
+    [ "operator()", "classSplineInterpolator.html#a9b9364a501a3bb3ea480b0d5617cd614", null ]
 ];

@@ -35,5 +35,5 @@ var searchData=
   ['trapezoid_5fquadrature_5fcoefficients_5f1d_719',['trapezoid_quadrature_coefficients_1d',['../trapezoid__quadrature_8hpp.html#a5be98c8bc2a5baddef8ffdc5c10dede3',1,'trapezoid_quadrature.hpp']]],
   ['tuple_5fto_5ftypes_720',['tuple_to_types',['../structtuple__to__types.html',1,'']]],
   ['tuple_5fto_5ftypes_3c_20std_3a_3atuple_3c_20args_2e_2e_2e_20_3e_20_3e_721',['tuple_to_types&lt; std::tuple&lt; Args... &gt; &gt;',['../structtuple__to__types_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html',1,'']]],
-  ['type_722',['type',['../structinterpolator__on__domain_3_01Interp_00_01DDimI_00_01ddc_1_1DiscreteDomain_3_01Grid1D_8_8_8_01_4_01_4.html#a2d7b675d039c625cb2782ad800d229ad',1,'interpolator_on_domain&lt; Interp, DDimI, ddc::DiscreteDomain&lt; Grid1D... &gt; &gt;']]]
+  ['type_722',['type',['../structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4.html#a3d7bd6ff70bbce6361c363dd77cc76bd',1,'interpolator_on_idx_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;']]]
 ];

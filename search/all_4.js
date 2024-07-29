@@ -21,7 +21,7 @@ var searchData=
   ['eval_5fderiv_5fp_234',['eval_deriv_p',['../classPolarBSplines_1_1Impl.html#a18d586476090a43876e9a60c570517df',1,'PolarBSplines::Impl']]],
   ['eval_5fderiv_5fr_235',['eval_deriv_r',['../classPolarBSplines_1_1Impl.html#a1c7b43c3dff18ca7a0b3280748873540',1,'PolarBSplines::Impl']]],
   ['eval_5fderiv_5fr_5fand_5fp_236',['eval_deriv_r_and_p',['../classPolarBSplines_1_1Impl.html#a995cd28a6f3fea33f2682500796ef701',1,'PolarBSplines::Impl']]],
-  ['evaluate_237',['evaluate',['../classLagrange.html#aaf78fd7159c8739f6d5441d2ac354aab',1,'Lagrange']]],
+  ['evaluate_237',['evaluate',['../classLagrange.html#a74b5dae43695245aaf9063c1dedc0523',1,'Lagrange']]],
   ['evaluator_238',['Evaluator',['../classCosineEvaluator_1_1Evaluator.html',1,'CosineEvaluator::Evaluator&lt; DDim &gt;'],['../classEvaluator2D_1_1Evaluator.html',1,'Evaluator2D::Evaluator&lt; Eval1, Eval2 &gt;'],['../classPolynomialEvaluator_1_1Evaluator.html',1,'PolynomialEvaluator::Evaluator&lt; DDim, Degree &gt;']]],
   ['evaluator2d_239',['Evaluator2D',['../structEvaluator2D.html',1,'']]],
   ['evaluator_5ftype_240',['evaluator_type',['../classSplineInterpolatorRP.html#abe963c4d63a8d95b2d5401699305787f',1,'SplineInterpolatorRP::evaluator_type()'],['../classPreallocatableSplineInterpolatorRP.html#abdf68fc355d1eb8329a511896febde4c',1,'PreallocatableSplineInterpolatorRP::evaluator_type()'],['../classPoissonLikeRHSFunction.html#a9bce7b121cc97440b89d661c6ba7b460',1,'PoissonLikeRHSFunction::evaluator_type()']]],
