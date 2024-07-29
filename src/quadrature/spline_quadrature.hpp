@@ -13,11 +13,13 @@
 
 #include <sll/matrix.hpp>
 
+#include "ddc_aliases.hpp"
+
 
 
 namespace {
-template <class IDim>
-using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
+template <class Grid>
+using CoefficientChunk1D = host_t<FieldMem<double, IdxRange<Grid>>>;
 }
 
 
@@ -46,17 +48,17 @@ using CoefficientChunk1D = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
  * in the 5D GYSELA Code". December 2022.
  *
  *
- * @param[in] domain
- *      The domain where the functions we want to integrate
+ * @param[in] idx_range
+ *      The index range where the functions we want to integrate
  *      are defined.
  * @param[in] builder
  *      The spline builder describing the way in which splines would be constructed.
  *
  * @return A chunk with the quadrature coefficients @f$ q @f$.
  */
-template <class IDim, class SplineBuilder>
-ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
-        ddc::DiscreteDomain<IDim> const& domain,
+template <class Grid, class SplineBuilder>
+host_t<FieldMem<double, IdxRange<Grid>>> spline_quadrature_coefficients_1d(
+        IdxRange<Grid> const& idx_range,
         SplineBuilder const& builder)
 {
     static_assert(
@@ -71,15 +73,15 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
     using bsplines_type = typename SplineBuilder::bsplines_type;
 
     // Vector of integrals of B-splines
-    ddc::Chunk<double, ddc::DiscreteDomain<bsplines_type>> integral_bsplines(
-            builder.spline_domain());
-    ddc::discrete_space<bsplines_type>().integrals(integral_bsplines.span_view());
+    host_t<FieldMem<double, IdxRange<bsplines_type>>> integral_bsplines(
+            get_spline_idx_range(builder));
+    ddc::discrete_space<bsplines_type>().integrals(get_field(integral_bsplines));
 
     // Solve matrix equation
     ddc::ChunkSpan integral_bsplines_without_periodic_point
-            = integral_bsplines.span_view()[ddc::DiscreteDomain<bsplines_type>(
-                    ddc::DiscreteElement<bsplines_type>(0),
-                    ddc::DiscreteVector<bsplines_type>(builder.get_interpolation_matrix().size()))];
+            = integral_bsplines[IdxRange<bsplines_type>(
+                    Idx<bsplines_type>(0),
+                    IdxStep<bsplines_type>(builder.get_interpolation_matrix().size()))];
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
             integral_bsplines_mirror_with_additional_allocation(
                     "integral_bsplines_mirror_with_additional_allocation",
@@ -101,7 +103,7 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
             integral_bsplines_without_periodic_point.allocation_kokkos_view(),
             integral_bsplines_mirror);
 
-    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
+    host_t<FieldMem<double, IdxRange<Grid>>> coefficients(idx_range);
 
     Kokkos::deep_copy(
             coefficients.allocation_kokkos_view(),
@@ -115,18 +117,18 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> spline_quadrature_coefficients_1d(
 /**
  * @brief Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.
  *
- * Calculate the quadrature coefficients for the spline quadrature method defined on the provided domain.
+ * Calculate the quadrature coefficients for the spline quadrature method defined on the provided index range.
  *
- * @param[in] domain
- *      The domain on which the coefficients will be defined.
+ * @param[in] idx_range
+ *      The index range on which the coefficients will be defined.
  * @param[in] builders
  *      The spline builder used for the quadrature coefficients in the different dimensions.
  *
  * @return The coefficients which define the spline quadrature method in ND.
  */
 template <class... DDims, class... SplineBuilders>
-ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> spline_quadrature_coefficients(
-        ddc::DiscreteDomain<DDims...> const& domain,
+host_t<FieldMem<double, IdxRange<DDims...>>> spline_quadrature_coefficients(
+        IdxRange<DDims...> const& idx_range,
         SplineBuilders const&... builders)
 {
     assert((std::is_same_v<
@@ -135,12 +137,12 @@ ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> spline_quadrature_coefficients
 
     // Get coefficients for each dimension
     std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs(
-            spline_quadrature_coefficients_1d(ddc::select<DDims>(domain), builders)...);
+            spline_quadrature_coefficients_1d(ddc::select<DDims>(idx_range), builders)...);
 
     // Allocate ND coefficients
-    ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients(domain);
+    host_t<FieldMem<double, IdxRange<DDims...>>> coefficients(idx_range);
 
-    ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
+    ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients(idim)
                 = (std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs)(ddc::select<DDims>(idim))
