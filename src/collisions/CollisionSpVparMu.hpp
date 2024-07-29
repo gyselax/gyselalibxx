@@ -184,7 +184,6 @@ public:
         , m_mug {"m_mug", ddc::select<GridMu>(fdistrib_domain)}
         , m_vparg {"m_vparg", ddc::select<GridVpar>(fdistrib_domain)}
     {
-        using namespace collisions_dimensions;
         // Check that the distribution function is correctly ordered
         koliop_interface::DoCombMatComputation(m_comb_mat);
 
@@ -213,8 +212,9 @@ public:
 
         std::size_t const n_mu = ddc::select<GridMu>(fdistrib_domain).size();
         std::size_t const n_vpar = ddc::select<GridVpar>(fdistrib_domain).size();
-        std::size_t const n_r = get_idx_range<GridR>(fdistrib_domain).size();
-        std::size_t const n_theta = get_idx_range<GridTheta>(fdistrib_domain).size();
+        std::size_t const n_r = collisions_dimensions::get_idx_range<GridR>(fdistrib_domain).size();
+        std::size_t const n_theta
+                = collisions_dimensions::get_idx_range<GridTheta>(fdistrib_domain).size();
         std::size_t const n_sp = ddc::select<Species>(fdistrib_domain).size();
         std::size_t const n_batch = fdistrib_domain.size() / (n_mu * n_vpar * n_r * n_theta * n_sp);
 
