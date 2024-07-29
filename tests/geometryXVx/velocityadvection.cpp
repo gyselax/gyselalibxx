@@ -34,18 +34,18 @@ double VelocityAdvection(
         ddc::DiscreteDomain<IDimVx> vx_dom)
 {
     //kinetic species
-    IVectSp const nb_species(2);
-    IDomainSp const dom_allsp(IndexSp(0), nb_species);
-    IndexSp const i_elec = dom_allsp.front();
-    IndexSp const i_ion = dom_allsp.back();
+    IdxStepSp const nb_species(2);
+    IdxRangeSp const dom_allsp(IdxSp(0), nb_species);
+    IdxSp const i_elec = dom_allsp.front();
+    IdxSp const i_ion = dom_allsp.back();
     //Mesh Initialization
     IDomainSpXVx const meshSpXVx(dom_allsp, x_dom, vx_dom);
     IDomainX const gridx = ddc::select<IDimX>(meshSpXVx);
     IDomainVx const gridvx = ddc::select<IDimVx>(meshSpXVx);
     // Charge Initialization
-    host_t<DFieldSp> masses_host(dom_allsp);
-    host_t<DFieldSp> charges_host(dom_allsp);
-    host_t<DFieldSp> init_perturb_amplitude_host(dom_allsp);
+    host_t<DFieldMemSp> masses_host(dom_allsp);
+    host_t<DFieldMemSp> charges_host(dom_allsp);
+    host_t<DFieldMemSp> init_perturb_amplitude_host(dom_allsp);
     // Mass ratio is fixed to one
     masses_host(i_elec) = 1.;
     init_perturb_amplitude_host(i_elec) = 0.;
@@ -56,7 +56,7 @@ double VelocityAdvection(
     charges_host(i_ion) = 1.;
 
     // Initialization Species domain
-    ddc::init_discrete_space<IDimSp>(std::move(charges_host), std::move(masses_host));
+    ddc::init_discrete_space<Species>(std::move(charges_host), std::move(masses_host));
 
     // Initialization of the distribution function
     host_t<DFieldSpXVx> allfdistribu_host(meshSpXVx);
@@ -84,7 +84,7 @@ double VelocityAdvection(
             0.0,
             ddc::reducer::max<double>(),
             [&](IndexSpXVx const ispxvx) {
-                IndexSp const isp = ddc::select<IDimSp>(ispxvx);
+                IdxSp const isp = ddc::select<Species>(ispxvx);
                 IndexX const ix = ddc::select<IDimX>(ispxvx);
                 IndexVx const ivx = ddc::select<IDimVx>(ispxvx);
                 return std::abs(
