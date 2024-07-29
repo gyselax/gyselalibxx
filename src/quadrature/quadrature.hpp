@@ -162,20 +162,20 @@ private:
      *
      * @return The vector displacement from the front of the domain
      */
-    template <class HeadDim, class... DDim>
-    KOKKOS_FUNCTION static ddc::DiscreteElement<HeadDim, DDim...> to_discrete_element(
+    template <class HeadDim, class... Grid1D>
+    KOKKOS_FUNCTION static ddc::DiscreteElement<HeadDim, Grid1D...> to_discrete_element(
             int idx,
-            ddc::DiscreteDomain<HeadDim, DDim...> dom)
+            ddc::DiscreteDomain<HeadDim, Grid1D...> dom)
     {
-        ddc::DiscreteDomain<DDim...> subdomain(dom);
+        ddc::DiscreteDomain<Grid1D...> subdomain(dom);
         ddc::DiscreteElement<HeadDim> head_idx(
                 ddc::select<HeadDim>(dom).front() + idx / subdomain.size());
-        if constexpr (sizeof...(DDim) == 0) {
+        if constexpr (sizeof...(Grid1D) == 0) {
             return head_idx;
         } else {
-            ddc::DiscreteElement<DDim...> tail_idx
+            ddc::DiscreteElement<Grid1D...> tail_idx
                     = to_discrete_element(idx % subdomain.size(), subdomain);
-            return ddc::DiscreteElement<HeadDim, DDim...>(head_idx, tail_idx);
+            return ddc::DiscreteElement<HeadDim, Grid1D...>(head_idx, tail_idx);
         }
     }
 };

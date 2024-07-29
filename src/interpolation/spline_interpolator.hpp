@@ -16,7 +16,7 @@
  * @tparam BSplines The BSplines along the dimension of interest.
  * @tparam BcMin The boundary condition at the lower boundary.
  * @tparam BcMax The boundary condition at the upper boundary.
- * @tparam DDim... All the dimensions of the interpolation problem (batched + interpolated).
+ * @tparam Grid1D... All the dimensions of the interpolation problem (batched + interpolated).
  */
 template <
         class DDimI,
@@ -26,8 +26,8 @@ template <
         class LeftExtrapolationRule,
         class RightExtrapolationRule,
         ddc::SplineSolver Solver,
-        class... DDim>
-class SplineInterpolator : public IInterpolator<DDimI, DDim...>
+        class... Grid1D>
+class SplineInterpolator : public IInterpolator<DDimI, Grid1D...>
 {
     using BuilderType = ddc::SplineBuilder<
             Kokkos::DefaultExecutionSpace,
@@ -37,7 +37,7 @@ class SplineInterpolator : public IInterpolator<DDimI, DDim...>
             BcMin,
             BcMax,
             Solver,
-            DDim...>;
+            Grid1D...>;
     using EvaluatorType = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
@@ -45,10 +45,10 @@ class SplineInterpolator : public IInterpolator<DDimI, DDim...>
             DDimI,
             LeftExtrapolationRule,
             RightExtrapolationRule,
-            DDim...>;
-    using deriv_type = typename IInterpolator<DDimI, DDim...>::deriv_type;
+            Grid1D...>;
+    using deriv_type = typename IInterpolator<DDimI, Grid1D...>::deriv_type;
     using batched_derivs_domain_type =
-            typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type;
+            typename IInterpolator<DDimI, Grid1D...>::batched_derivs_domain_type;
 
 private:
     BuilderType const& m_builder;
@@ -78,7 +78,7 @@ public:
     ~SplineInterpolator() override = default;
 
     batched_derivs_domain_type batched_derivs_domain_xmin(
-            ddc::DiscreteDomain<DDim...> dom) const override
+            ddc::DiscreteDomain<Grid1D...> dom) const override
     {
         return ddc::replace_dim_of<DDimI, deriv_type>(
                 dom,
@@ -88,7 +88,7 @@ public:
     }
 
     batched_derivs_domain_type batched_derivs_domain_xmax(
-            ddc::DiscreteDomain<DDim...> dom) const override
+            ddc::DiscreteDomain<Grid1D...> dom) const override
     {
         return ddc::replace_dim_of<DDimI, deriv_type>(
                 dom,
@@ -111,11 +111,11 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> operator()(
-            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> const inout_data,
+    device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<Grid1D...>>> operator()(
+            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<Grid1D...>>> const inout_data,
             device_t<ddc::ChunkSpan<
                     const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
-                    ddc::DiscreteDomain<DDim...>>> const coordinates,
+                    ddc::DiscreteDomain<Grid1D...>>> const coordinates,
             std::optional<device_t<
                     ddc::ChunkSpan<double const, typename BuilderType::batched_derivs_domain_type>>>
                     derivs_xmin
@@ -146,8 +146,8 @@ template <
         class LeftExtrapolationRule,
         class RightExtrapolationRule,
         ddc::SplineSolver Solver,
-        class... DDim>
-class PreallocatableSplineInterpolator : public IPreallocatableInterpolator<DDimI, DDim...>
+        class... Grid1D>
+class PreallocatableSplineInterpolator : public IPreallocatableInterpolator<DDimI, Grid1D...>
 {
     using BuilderType = ddc::SplineBuilder<
             Kokkos::DefaultExecutionSpace,
@@ -157,7 +157,7 @@ class PreallocatableSplineInterpolator : public IPreallocatableInterpolator<DDim
             BcMin,
             BcMax,
             Solver,
-            DDim...>;
+            Grid1D...>;
     using EvaluatorType = ddc::SplineEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
@@ -165,7 +165,7 @@ class PreallocatableSplineInterpolator : public IPreallocatableInterpolator<DDim
             DDimI,
             LeftExtrapolationRule,
             RightExtrapolationRule,
-            DDim...>;
+            Grid1D...>;
 
     BuilderType const& m_builder;
 
@@ -190,7 +190,7 @@ public:
      *
      * @return A unique pointer to an instance of the SplineInterpolator class.
      */
-    std::unique_ptr<IInterpolator<DDimI, DDim...>> preallocate() const override
+    std::unique_ptr<IInterpolator<DDimI, Grid1D...>> preallocate() const override
     {
         return std::make_unique<SplineInterpolator<
                 DDimI,
@@ -200,6 +200,6 @@ public:
                 LeftExtrapolationRule,
                 RightExtrapolationRule,
                 Solver,
-                DDim...>>(m_builder, m_evaluator);
+                Grid1D...>>(m_builder, m_evaluator);
     }
 };
