@@ -8,7 +8,7 @@
 template <class...>
 class DiscreteSubDomain;
 
-template <class DDim>
+template <class Grid1D>
 struct DiscreteSubDomainIterator;
 
 template <class T>
@@ -237,22 +237,22 @@ public:
 /**
  * @brief An iterator type for the DiscreteSubDomain.
  */
-template <class DDim>
+template <class Grid1D>
 struct DiscreteSubDomainIterator
 {
 private:
-    ddc::DiscreteElement<DDim> m_value;
-    ddc::DiscreteVector<DDim> m_stride;
+    ddc::DiscreteElement<Grid1D> m_value;
+    ddc::DiscreteVector<Grid1D> m_stride;
 
 public:
     /// The type of iterator
     using iterator_category = std::random_access_iterator_tag;
 
     /// The type of the values stored in the iterator
-    using value_type = ddc::DiscreteElement<DDim>;
+    using value_type = ddc::DiscreteElement<Grid1D>;
 
     /// The type of the stride between values
-    using stride_type = ddc::DiscreteVector<DDim>;
+    using stride_type = ddc::DiscreteVector<Grid1D>;
 
     /// The type that can be used to increment the iterator
     using difference_type = std::ptrdiff_t;
@@ -266,8 +266,8 @@ public:
      * @param stride The stride between consectuive sub-domain elements.
      */
     KOKKOS_FUNCTION constexpr explicit DiscreteSubDomainIterator(
-            ddc::DiscreteElement<DDim> value,
-            ddc::DiscreteVector<DDim> stride)
+            ddc::DiscreteElement<Grid1D> value,
+            ddc::DiscreteVector<Grid1D> stride)
         : m_value(value)
         , m_stride(stride)
     {
@@ -277,7 +277,7 @@ public:
      * @brief Get the value referred to by the iterator.
      * @return The value referred to by the iterator.
      */
-    KOKKOS_FUNCTION constexpr ddc::DiscreteElement<DDim> operator*() const noexcept
+    KOKKOS_FUNCTION constexpr ddc::DiscreteElement<Grid1D> operator*() const noexcept
     {
         return m_value;
     }
@@ -352,7 +352,7 @@ public:
      * @return The DiscreteElement n-th position in the sub-domain following the value
      *          indicated by this iterator.
      */
-    KOKKOS_FUNCTION constexpr ddc::DiscreteElement<DDim> operator[](difference_type n) const
+    KOKKOS_FUNCTION constexpr ddc::DiscreteElement<Grid1D> operator[](difference_type n) const
     {
         return m_value + n * m_stride;
     }
@@ -437,8 +437,8 @@ public:
         assert(xx.stride() == yy.stride());
         return (yy.m_value > xx.m_value)
                        ? ((-static_cast<difference_type>(yy.m_value - xx.m_value))
-                          / ddc::get<DDim>(xx.m_stride))
-                       : ((xx.m_value - yy.m_value) / ddc::get<DDim>(xx.m_stride));
+                          / ddc::get<Grid1D>(xx.m_stride))
+                       : ((xx.m_value - yy.m_value) / ddc::get<Grid1D>(xx.m_stride));
     }
 };
 

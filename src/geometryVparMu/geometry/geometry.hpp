@@ -11,9 +11,6 @@
  *
  */
 
-using IdxSp = IndexSp;
-using IdxRangeSp = IDomainSp;
-
 /**
  * @brief Define non periodic parallel velocity @f$v_\parallel@f$.
  */
@@ -83,19 +80,19 @@ struct GridMu : SplineInterpPointsMu::interpolation_discrete_dimension_type
 using IdxVpar = ddc::DiscreteElement<GridVpar>;
 using IdxMu = ddc::DiscreteElement<GridMu>;
 using IdxVparMu = ddc::DiscreteElement<GridVpar, GridMu>;
-using IdxSpVparMu = ddc::DiscreteElement<IDimSp, GridVpar, GridMu>;
+using IdxSpVparMu = ddc::DiscreteElement<Species, GridVpar, GridMu>;
 
 // ddc::DiscreteVector = number of grid points between points in a sampling
 using IdxStepVpar = ddc::DiscreteVector<GridVpar>;
 using IdxStepMu = ddc::DiscreteVector<GridMu>;
 using IdxStepVparMu = ddc::DiscreteVector<GridVpar, GridMu>;
-using IdxStepSpVparMu = ddc::DiscreteVector<IDimSp, GridVpar, GridMu>;
+using IdxStepSpVparMu = ddc::DiscreteVector<Species, GridVpar, GridMu>;
 
 // ddc::DiscreteDomain = to describe the wole domain (or a sub-domain)
 using IdxRangeVpar = ddc::DiscreteDomain<GridVpar>;
 using IdxRangeMu = ddc::DiscreteDomain<GridMu>;
 using IdxRangeVparMu = ddc::DiscreteDomain<GridVpar, GridMu>;
-using IdxRangeSpVparMu = ddc::DiscreteDomain<IDimSp, GridVpar, GridMu>;
+using IdxRangeSpVparMu = ddc::DiscreteDomain<Species, GridVpar, GridMu>;
 
 // template for the fields
 template <class ElementType>

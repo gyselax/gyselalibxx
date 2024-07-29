@@ -145,8 +145,8 @@ int main(int argc, char** argv)
     DDomVpar dom_vpar(IdxVpar(0), DVecVpar(grid_vpar.size()));
     ddc::init_discrete_space<GridMu>(grid_mu);
     DDomMu dom_mu(IdxMu(0), DVecMu(grid_mu.size()));
-    IVectSp const kinspecies(charges.size());
-    IDomainSp const dom_kinsp(IndexSp(0), kinspecies);
+    IdxStepSp const kinspecies(charges.size());
+    IdxRangeSp const dom_kinsp(IdxSp(0), kinspecies);
 
     DFieldTor1 field_grid_tor1(dom_tor1);
     ddc::parallel_deepcopy(field_grid_tor1, DViewTor1(grid_tor1.data(), dom_tor1));
@@ -163,14 +163,14 @@ int main(int argc, char** argv)
     DFieldMu field_grid_mu(dom_mu);
     ddc::parallel_deepcopy(field_grid_mu, DViewMu(grid_mu.data(), dom_mu));
     auto field_grid_mu_host = ddc::create_mirror_view_and_copy(field_grid_mu.span_view());
-    FieldSp<int> field_species(dom_kinsp);
-    ddc::parallel_deepcopy(field_species, ViewSp<int>(species.data(), dom_kinsp));
+    FieldMemSp<int> field_species(dom_kinsp);
+    ddc::parallel_deepcopy(field_species, ConstFieldSp<int>(species.data(), dom_kinsp));
     auto field_species_host = ddc::create_mirror_view_and_copy(field_species.span_view());
-    DFieldSp field_charges(dom_kinsp);
-    ddc::parallel_deepcopy(field_charges, DViewSp(charges.data(), dom_kinsp));
+    DFieldMemSp field_charges(dom_kinsp);
+    ddc::parallel_deepcopy(field_charges, DConstFieldSp(charges.data(), dom_kinsp));
     auto field_charges_host = ddc::create_mirror_view_and_copy(field_charges.span_view());
-    DFieldSp field_masses(dom_kinsp);
-    ddc::parallel_deepcopy(field_masses, DViewSp(masses.data(), dom_kinsp));
+    DFieldMemSp field_masses(dom_kinsp);
+    ddc::parallel_deepcopy(field_masses, DConstFieldSp(masses.data(), dom_kinsp));
     auto field_masses_host = ddc::create_mirror_view_and_copy(field_masses.span_view());
 
     // Algorithm Info

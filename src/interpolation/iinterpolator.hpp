@@ -20,13 +20,13 @@ struct interpolator_on_domain
  *
  * @tparam Interp The interpolator class being built.
  * @tparam DDimI The dimension along which the operator will interpolate.
- * @tparam DDim... The dimensions on which the data being interpolated are defined.
+ * @tparam Grid1D... The dimensions on which the data being interpolated are defined.
  */
-template <template <class...> class Interp, class DDimI, class... DDim>
-struct interpolator_on_domain<Interp, DDimI, ddc::DiscreteDomain<DDim...>>
+template <template <class...> class Interp, class DDimI, class... Grid1D>
+struct interpolator_on_domain<Interp, DDimI, ddc::DiscreteDomain<Grid1D...>>
 {
     /// The type of the interpolator
-    using type = Interp<DDimI, DDim...>;
+    using type = Interp<DDimI, Grid1D...>;
 };
 
 /**
@@ -46,7 +46,7 @@ using interpolator_on_domain_t = typename interpolator_on_domain<Interp, DDimI, 
  * the value of a function to be approximated at a set of
  * coordinates from a set of known values of the function.
  */
-template <class DDimI, class... DDim>
+template <class DDimI, class... Grid1D>
 class IInterpolator
 {
 public:
@@ -56,7 +56,7 @@ public:
     using deriv_type = ddc::Deriv<typename DDimI::continuous_dimension_type>;
     /// @brief The type of the whole domain on which derivatives are defined.
     using batched_derivs_domain_type
-            = ddc::replace_dim_of_t<ddc::DiscreteDomain<DDim...>, DDimI, deriv_type>;
+            = ddc::replace_dim_of_t<ddc::DiscreteDomain<Grid1D...>, DDimI, deriv_type>;
 
     /**
      * @brief Get the batched derivs domain on lower boundaries.
@@ -68,7 +68,7 @@ public:
      * @return dom The lower boundaries of this domain.
      */
     virtual batched_derivs_domain_type batched_derivs_domain_xmin(
-            ddc::DiscreteDomain<DDim...> dom) const = 0;
+            ddc::DiscreteDomain<Grid1D...> dom) const = 0;
 
     /**
      * @brief Get the batched derivs domain on upper boundaries.
@@ -80,7 +80,7 @@ public:
      * @return dom The upper boundaries of this domain.
      */
     virtual batched_derivs_domain_type batched_derivs_domain_xmax(
-            ddc::DiscreteDomain<DDim...> dom) const = 0;
+            ddc::DiscreteDomain<Grid1D...> dom) const = 0;
 
     /**
      * @brief Approximate the value of a function at a set of coordinates using the
@@ -96,11 +96,11 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    virtual device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> operator()(
-            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> inout_data,
+    virtual device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<Grid1D...>>> operator()(
+            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<Grid1D...>>> inout_data,
             device_t<ddc::ChunkSpan<
                     const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
-                    ddc::DiscreteDomain<DDim...>>> coordinates,
+                    ddc::DiscreteDomain<Grid1D...>>> coordinates,
             std::optional<device_t<ddc::ChunkSpan<double const, batched_derivs_domain_type>>>
                     derivs_xmin
             = std::nullopt,
@@ -130,17 +130,17 @@ public:
  * advection at the start of the BslAdvectionVelocity::operator() function. At the end of this function
  * the unique pointer goes out of scope and the buffers are deallocated.
  */
-template <class DDimI, class... DDim>
-class IPreallocatableInterpolator : public IInterpolator<DDimI, DDim...>
+template <class DDimI, class... Grid1D>
+class IPreallocatableInterpolator : public IInterpolator<DDimI, Grid1D...>
 {
 public:
     ~IPreallocatableInterpolator() override = default;
 
     /// @brief The type of the dimension representing derivatives.
-    using deriv_type = typename IInterpolator<DDimI, DDim...>::deriv_type;
+    using deriv_type = typename IInterpolator<DDimI, Grid1D...>::deriv_type;
     /// @brief The type of the whole domain on which derivatives are defined.
     using batched_derivs_domain_type =
-            typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type;
+            typename IInterpolator<DDimI, Grid1D...>::batched_derivs_domain_type;
 
     /**
      * @brief Allocate an instance of an InterpolatorProxy to use as an IInterpolator.
@@ -152,7 +152,7 @@ public:
      * @see InterpolatorProxy
      * @see IInterpolator
      */
-    virtual std::unique_ptr<IInterpolator<DDimI, DDim...>> preallocate() const = 0;
+    virtual std::unique_ptr<IInterpolator<DDimI, Grid1D...>> preallocate() const = 0;
 
     /**
      * @brief Get the batched derivs domain on lower boundaries.
@@ -164,7 +164,7 @@ public:
      * @return dom The lower boundaries of this domain.
      */
     batched_derivs_domain_type batched_derivs_domain_xmin(
-            ddc::DiscreteDomain<DDim...> dom) const override
+            ddc::DiscreteDomain<Grid1D...> dom) const override
     {
         return (*preallocate()).batched_derivs_domain_xmin(dom);
     }
@@ -179,7 +179,7 @@ public:
      * @return dom The upper boundaries of this domain.
      */
     batched_derivs_domain_type batched_derivs_domain_xmax(
-            ddc::DiscreteDomain<DDim...> dom) const override
+            ddc::DiscreteDomain<Grid1D...> dom) const override
     {
         return (*preallocate()).batched_derivs_domain_xmax(dom);
     }
@@ -198,11 +198,11 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> operator()(
-            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> const inout_data,
+    device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<Grid1D...>>> operator()(
+            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<Grid1D...>>> const inout_data,
             device_t<ddc::ChunkSpan<
                     const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
-                    ddc::DiscreteDomain<DDim...>>> const coordinates,
+                    ddc::DiscreteDomain<Grid1D...>>> const coordinates,
             std::optional<device_t<ddc::ChunkSpan<double const, batched_derivs_domain_type>>>
                     derivs_xmin
             = std::nullopt,

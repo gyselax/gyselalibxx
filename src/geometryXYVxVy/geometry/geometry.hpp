@@ -263,7 +263,7 @@ using IndexVx = ddc::DiscreteElement<IDimVx>;
 using IndexVy = ddc::DiscreteElement<IDimVy>;
 using IndexVxVy = ddc::DiscreteElement<IDimVx, IDimVy>;
 using IndexXYVxVy = ddc::DiscreteElement<IDimX, IDimY, IDimVx, IDimVy>;
-using IndexSpXYVxVy = ddc::DiscreteElement<IDimSp, IDimX, IDimY, IDimVx, IDimVy>;
+using IndexSpXYVxVy = ddc::DiscreteElement<Species, IDimX, IDimY, IDimVx, IDimVy>;
 
 // IVect definition
 using IVectX = ddc::DiscreteVector<IDimX>;
@@ -279,8 +279,8 @@ using IDomainVx = ddc::DiscreteDomain<IDimVx>;
 using IDomainVy = ddc::DiscreteDomain<IDimVy>;
 using IDomainXYVxVy = ddc::DiscreteDomain<IDimX, IDimY, IDimVx, IDimVy>;
 using IDomainVxVy = ddc::DiscreteDomain<IDimVx, IDimVy>;
-using IDomainSpVxVy = ddc::DiscreteDomain<IDimSp, IDimVx, IDimVy>;
-using IDomainSpXYVxVy = ddc::DiscreteDomain<IDimSp, IDimX, IDimY, IDimVx, IDimVy>;
+using IDomainSpVxVy = ddc::DiscreteDomain<Species, IDimVx, IDimVy>;
+using IDomainSpXYVxVy = ddc::DiscreteDomain<Species, IDimX, IDimY, IDimVx, IDimVy>;
 
 template <class ElementType>
 using FieldX = device_t<ddc::Chunk<ElementType, IDomainX>>;

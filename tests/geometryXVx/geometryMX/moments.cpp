@@ -34,63 +34,63 @@ TEST(GeometryXM, MomentsInitialization)
     SplineXBuilder_1d const builder_x(meshX);
 
     // Kinetic species domain initialization
-    IVectSp const nb_kinspecies(2);
-    IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
+    IdxStepSp const nb_kinspecies(2);
+    IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
 
-    IndexSp const iion = dom_kinsp.front();
-    IndexSp const ielec = dom_kinsp.back();
+    IdxSp const iion = dom_kinsp.front();
+    IdxSp const ielec = dom_kinsp.back();
 
-    host_t<DFieldSp> kinetic_charges(dom_kinsp);
+    host_t<DFieldMemSp> kinetic_charges(dom_kinsp);
     kinetic_charges(ielec) = -1.;
     kinetic_charges(iion) = 1.;
 
-    host_t<DFieldSp> kinetic_masses(dom_kinsp);
+    host_t<DFieldMemSp> kinetic_masses(dom_kinsp);
     double const mass_ion(400.), mass_elec(1.);
     kinetic_masses(ielec) = mass_elec;
     kinetic_masses(iion) = mass_ion;
 
     // Neutral species domain initialization
-    IVectSp const nb_fluidspecies(1);
-    IDomainSp const dom_fluidsp(IndexSp(dom_kinsp.back() + 1), nb_fluidspecies);
-    IndexSp const ifluid = dom_fluidsp.front();
+    IdxStepSp const nb_fluidspecies(1);
+    IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
+    IdxSp const ifluid = dom_fluidsp.front();
 
     // neutrals charge is zero
-    host_t<DFieldSp> fluid_charges(dom_fluidsp);
+    host_t<DFieldMemSp> fluid_charges(dom_fluidsp);
     ddc::parallel_fill(fluid_charges, 0.);
 
-    host_t<DFieldSp> fluid_masses(dom_fluidsp);
+    host_t<DFieldMemSp> fluid_masses(dom_fluidsp);
     fluid_masses(ifluid) = kinetic_masses(iion);
 
     // Create the domain of kinetic species + fluid species
-    IDomainSp const dom_allsp(IndexSp(0), nb_kinspecies + nb_fluidspecies);
+    IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains charges of all species
-    host_t<DFieldSp> charges(dom_allsp);
+    host_t<DFieldMemSp> charges(dom_allsp);
 
     // fill the Field with charges of kinetic species
-    for (IndexSp isp : dom_kinsp) {
+    for (IdxSp isp : dom_kinsp) {
         charges(isp) = kinetic_charges(isp);
     }
 
     // fill the Field with charges of fluid species
-    for (IndexSp isp : dom_fluidsp) {
+    for (IdxSp isp : dom_fluidsp) {
         charges(isp) = fluid_charges(isp);
     }
 
     // Create a Field that contains masses of kinetic and fluid species
-    host_t<DFieldSp> masses(dom_allsp);
+    host_t<DFieldMemSp> masses(dom_allsp);
 
     // fill the Field with masses of kinetic species
-    for (IndexSp isp : dom_kinsp) {
+    for (IdxSp isp : dom_kinsp) {
         masses(isp) = kinetic_masses(isp);
     }
 
     // fill the Field with masses of fluid species
-    for (IndexSp isp : dom_fluidsp) {
+    for (IdxSp isp : dom_fluidsp) {
         masses(isp) = fluid_masses(isp);
     }
 
-    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
+    ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
     // Moments domain initialization
     IVectM const nb_fluid_moments(3);
@@ -120,8 +120,8 @@ TEST(GeometryXM, MomentsInitialization)
     auto neutrals_host = ddc::create_mirror_view_and_copy(neutrals);
 
     double const tolerance(1.e-12);
-    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(neutrals), [&](IndexSpX const ispx) {
-        IndexSp const isp(ddc::select<IDimSp>(ispx));
+    ddc::for_each(ddc::get_domain<Species, IDimX>(neutrals), [&](IndexSpX const ispx) {
+        IdxSp const isp(ddc::select<Species>(ispx));
         IndexX const ix(ddc::select<IDimX>(ispx));
 
         // test for equality of density

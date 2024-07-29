@@ -25,11 +25,11 @@ DiffusiveNeutralSolver::DiffusiveNeutralSolver(
 {
 }
 
-IndexSp DiffusiveNeutralSolver::find_ion(IDomainSp const dom_kinsp) const
+IdxSp DiffusiveNeutralSolver::find_ion(IdxRangeSp const dom_kinsp) const
 {
     bool ion_found = false;
-    IndexSp iion;
-    for (IndexSp const isp : dom_kinsp) {
+    IdxSp iion;
+    for (IdxSp const isp : dom_kinsp) {
         if (charge(isp) > 0.) {
             ion_found = true;
             iion = isp;
@@ -50,7 +50,7 @@ void DiffusiveNeutralSolver::get_derivative(
         DViewSpX velocity,
         DViewSpX temperature) const
 {
-    IDomainSpX dom_fluidspx(ddc::get_domain<IDimSp, IDimX>(neutrals));
+    IDomainSpX dom_fluidspx(ddc::get_domain<Species, IDimX>(neutrals));
 
     // building reaction rates
     DFieldSpX charge_exchange_rate_alloc(dom_fluidspx);
@@ -71,7 +71,7 @@ void DiffusiveNeutralSolver::get_derivative(
     ddc::ChunkSpan density_equilibrium_velocity = density_equilibrium_velocity_alloc.span_view();
     ddc::ChunkSpan diffusion_temperature = diffusion_temperature_alloc.span_view();
 
-    IndexSp const iion(find_ion(ddc::get_domain<IDimSp>(density)));
+    IdxSp const iion(find_ion(ddc::get_domain<Species>(density)));
     IndexM const ineutral_density(0);
 
     double const normalization_coeff_alpha0(m_normalization_coeff);
@@ -80,7 +80,7 @@ void DiffusiveNeutralSolver::get_derivative(
             Kokkos::DefaultExecutionSpace(),
             dom_fluidspx,
             KOKKOS_LAMBDA(IndexSpX const ifspx) {
-                IndexSp const isp(ddc::select<IDimSp>(ifspx));
+                IdxSp const isp(ddc::select<Species>(ifspx));
                 IndexX const ix(ddc::select<IDimX>(ifspx));
 
                 double const denom = density(iion, ix) * charge_exchange_rate(ifspx)
@@ -118,7 +118,7 @@ void DiffusiveNeutralSolver::get_derivative(
     ddc::ChunkSpan gradx_neutrals_density = gradx_neutrals_density_alloc.span_view();
     ddc::ChunkSpan laplx_neutrals_density = laplx_neutrals_density_alloc.span_view();
 
-    ddc::for_each(neutrals.domain<IDimSp>(), [&](IndexSp const isp) {
+    ddc::for_each(neutrals.domain<Species>(), [&](IdxSp const isp) {
         // compute spline coefficients
         DBSFieldX density_equilibrium_velocity_spline_x_coeff(m_spline_x_builder.spline_domain());
 

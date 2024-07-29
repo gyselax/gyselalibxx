@@ -73,70 +73,70 @@ TEST(GeometryXM, PredCorrHybrid)
     SplineVxBuilder_1d const builder_vx_poisson(meshVx);
 
     // Kinetic species domain initialization
-    IVectSp const nb_kinspecies(2);
-    IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
+    IdxStepSp const nb_kinspecies(2);
+    IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
 
-    IndexSp const iion = dom_kinsp.front();
-    IndexSp const ielec = dom_kinsp.back();
+    IdxSp const iion = dom_kinsp.front();
+    IdxSp const ielec = dom_kinsp.back();
 
-    host_t<DFieldSp> kinetic_charges(dom_kinsp);
+    host_t<DFieldMemSp> kinetic_charges(dom_kinsp);
     kinetic_charges(ielec) = -1.;
     kinetic_charges(iion) = 1.;
 
-    host_t<DFieldSp> kinetic_masses(dom_kinsp);
+    host_t<DFieldMemSp> kinetic_masses(dom_kinsp);
     double const mass_ion(400.), mass_elec(1.);
     kinetic_masses(ielec) = mass_elec;
     kinetic_masses(iion) = mass_ion;
 
     // Fluid species domain initialization
-    IVectSp const nb_fluidspecies(1);
-    IDomainSp const dom_fluidsp(IndexSp(dom_kinsp.back() + 1), nb_fluidspecies);
+    IdxStepSp const nb_fluidspecies(1);
+    IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
 
     // Fluid charges
-    host_t<DFieldSp> fluid_charges(dom_fluidsp);
+    host_t<DFieldMemSp> fluid_charges(dom_fluidsp);
     ddc::parallel_fill(fluid_charges, 0.);
 
-    host_t<DFieldSp> fluid_masses(dom_fluidsp);
+    host_t<DFieldMemSp> fluid_masses(dom_fluidsp);
     ddc::parallel_fill(fluid_masses, mass_ion);
 
     // Create the domain of kinetic species + fluid species
-    IDomainSp const dom_allsp(IndexSp(0), nb_kinspecies + nb_fluidspecies);
+    IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains charges of all species
-    host_t<DFieldSp> charges(dom_allsp);
+    host_t<DFieldMemSp> charges(dom_allsp);
 
     // fill the Field with charges of kinetic species
-    for (IndexSp isp : dom_kinsp) {
+    for (IdxSp isp : dom_kinsp) {
         charges(isp) = kinetic_charges(isp);
     }
 
     // fill the Field with charges of fluid species
-    for (IndexSp isp : dom_fluidsp) {
+    for (IdxSp isp : dom_fluidsp) {
         charges(isp) = fluid_charges(isp);
     }
 
     // Create a Field that contains masses of kinetic and fluid species
-    host_t<DFieldSp> masses(dom_allsp);
+    host_t<DFieldMemSp> masses(dom_allsp);
 
     // fill the Field with masses of kinetic species
-    for (IndexSp isp : dom_kinsp) {
+    for (IdxSp isp : dom_kinsp) {
         masses(isp) = kinetic_masses(isp);
     }
 
     // fill the Field with masses of fluid species
-    for (IndexSp isp : dom_fluidsp) {
+    for (IdxSp isp : dom_fluidsp) {
         masses(isp) = fluid_masses(isp);
     }
 
-    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
+    ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
     // Initialization of kinetic species distribution function
     DFieldSpXVx allfdistribu_alloc(IDomainSpXVx(dom_kinsp, meshX, meshVx));
     auto allfdistribu = allfdistribu_alloc.span_view();
 
-    host_t<DFieldSp> kinsp_density_eq(dom_kinsp);
-    host_t<DFieldSp> kinsp_velocity_eq(dom_kinsp);
-    host_t<DFieldSp> kinsp_temperature_eq(dom_kinsp);
+    host_t<DFieldMemSp> kinsp_density_eq(dom_kinsp);
+    host_t<DFieldMemSp> kinsp_velocity_eq(dom_kinsp);
+    host_t<DFieldMemSp> kinsp_temperature_eq(dom_kinsp);
 
     ddc::parallel_fill(kinsp_density_eq, 1.);
     ddc::parallel_fill(kinsp_velocity_eq, 0.);
@@ -150,9 +150,9 @@ TEST(GeometryXM, PredCorrHybrid)
             std::move(kinsp_velocity_eq));
     init_fequilibrium(allfequilibrium);
 
-    host_t<FieldSp<int>> init_perturb_mode(dom_kinsp);
+    host_t<FieldMemSp<int>> init_perturb_mode(dom_kinsp);
     ddc::parallel_fill(init_perturb_mode, 2);
-    host_t<DFieldSp> init_perturb_amplitude(dom_kinsp);
+    host_t<DFieldMemSp> init_perturb_amplitude(dom_kinsp);
     ddc::parallel_fill(init_perturb_amplitude, 0.1);
 
     SingleModePerturbInitialization const

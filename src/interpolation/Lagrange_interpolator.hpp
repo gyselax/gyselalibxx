@@ -10,13 +10,13 @@
  * It is designed to work with both uniform and non-uniform mesh, and have the advantage to be local.
  *
  */
-template <class DDimI, BCond BcMin, BCond BcMax, class... DDim>
-class LagrangeInterpolator : public IInterpolator<DDimI, DDim...>
+template <class DDimI, BCond BcMin, BCond BcMax, class... Grid1D>
+class LagrangeInterpolator : public IInterpolator<DDimI, Grid1D...>
 {
     using CDim = typename DDimI::continuous_dimension_type;
-    using deriv_type = typename IInterpolator<DDimI, DDim...>::deriv_type;
+    using deriv_type = typename IInterpolator<DDimI, Grid1D...>::deriv_type;
     using batched_derivs_domain_type =
-            typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type;
+            typename IInterpolator<DDimI, Grid1D...>::batched_derivs_domain_type;
 
 private:
     int m_degree;
@@ -37,7 +37,7 @@ public:
     ~LagrangeInterpolator() override = default;
 
     batched_derivs_domain_type batched_derivs_domain_xmin(
-            ddc::DiscreteDomain<DDim...> dom) const override
+            ddc::DiscreteDomain<Grid1D...> dom) const override
     {
         return ddc::replace_dim_of<DDimI, deriv_type>(
                 dom,
@@ -47,7 +47,7 @@ public:
     }
 
     batched_derivs_domain_type batched_derivs_domain_xmax(
-            ddc::DiscreteDomain<DDim...> dom) const override
+            ddc::DiscreteDomain<Grid1D...> dom) const override
     {
         return ddc::replace_dim_of<DDimI, deriv_type>(
                 dom,
@@ -68,19 +68,19 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> operator()(
-            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> inout_data,
+    device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<Grid1D...>>> operator()(
+            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<Grid1D...>>> inout_data,
             device_t<ddc::ChunkSpan<
                     const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
-                    ddc::DiscreteDomain<DDim...>>> coordinates,
+                    ddc::DiscreteDomain<Grid1D...>>> coordinates,
             [[maybe_unused]] std::optional<device_t<ddc::ChunkSpan<
                     double const,
-                    typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type>>>
+                    typename IInterpolator<DDimI, Grid1D...>::batched_derivs_domain_type>>>
                     derivs_xmin
             = std::nullopt,
             [[maybe_unused]] std::optional<device_t<ddc::ChunkSpan<
                     double const,
-                    typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type>>>
+                    typename IInterpolator<DDimI, Grid1D...>::batched_derivs_domain_type>>>
                     derivs_xmax
             = std::nullopt) const override
     {
@@ -117,10 +117,10 @@ public:
  * This class allows an instance of the LagrangeInterpolator class where necessary. This allows the
  * memory allocated in the private members of the Interpolator to be freed when the object is not in use.
  */
-template <class DDimI, BCond BcMin, BCond BcMax, class... DDim>
-class PreallocatableLagrangeInterpolator : public IPreallocatableInterpolator<DDimI, DDim...>
+template <class DDimI, BCond BcMin, BCond BcMax, class... Grid1D>
+class PreallocatableLagrangeInterpolator : public IPreallocatableInterpolator<DDimI, Grid1D...>
 {
-    LagrangeInterpolator<DDimI, BcMin, BcMax, DDim...> const& m_evaluator;
+    LagrangeInterpolator<DDimI, BcMin, BcMax, Grid1D...> const& m_evaluator;
 
 public:
     /**
@@ -128,7 +128,7 @@ public:
      * @param[in] evaluator An operator which evaluates the value of the interpolation polynomial at requested coordinates.
      */
     explicit PreallocatableLagrangeInterpolator(
-            LagrangeInterpolator<DDimI, BcMin, BcMax, DDim...> const& evaluator)
+            LagrangeInterpolator<DDimI, BcMin, BcMax, Grid1D...> const& evaluator)
         : m_evaluator(evaluator)
     {
     }
@@ -140,8 +140,8 @@ public:
      *
      * @return A unique pointer to an instance of the LagrangeInterpolator class.
      */
-    std::unique_ptr<IInterpolator<DDimI, DDim...>> preallocate() const override
+    std::unique_ptr<IInterpolator<DDimI, Grid1D...>> preallocate() const override
     {
-        return std::make_unique<LagrangeInterpolator<DDimI, BcMin, BcMax, DDim...>>(m_evaluator);
+        return std::make_unique<LagrangeInterpolator<DDimI, BcMin, BcMax, Grid1D...>>(m_evaluator);
     }
 };
