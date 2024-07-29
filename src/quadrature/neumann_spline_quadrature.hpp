@@ -20,8 +20,7 @@ namespace {
 template <class IDim>
 using CoefficientChunk1D_h = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
 template <class IDim>
-using CoefficientChunkSpan1D_h
-        = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>, std::experimental::layout_right>;
+using CoefficientChunkSpan1D_h = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>>;
 
 } // namespace
 
