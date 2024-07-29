@@ -4,6 +4,7 @@
 
 #include <paraconf.h>
 
+#include "ddc_aliases.hpp"
 #include "paraconfpp.hpp"
 
 /**
@@ -34,9 +35,9 @@ void parse_executable_arguments(
 PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const params_yaml);
 
 /**
- * Initialise a domain which will serve as an interpolation domain for splines.
+ * Initialise an index range which will serve as an interpolation index range for splines.
  *
- * The domain is initialised using information from an input yaml file.
+ * The index range is initialised using information from an input yaml file.
  * If the bsplines are uniform then the information to be read is:
  * - .SplineMesh.<mesh_identifier>_min
  * - .SplineMesh.<mesh_identifier>_max
@@ -47,35 +48,34 @@ PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const pa
  *
  * This string indicates the name of a file which contains the knots of the bspline.
  *
- * This information is used to initialise the bsplines. The interpolation domain
+ * This information is used to initialise the bsplines. The interpolation index range
  * is then created using the specified method.
  */
-template <class IDim, class BSplines, class InterpPointInitMethod>
-inline ddc::DiscreteDomain<IDim> init_spline_dependent_domain(
+template <class Grid1D, class BSplines, class InterpPointInitMethod>
+inline IdxRange<Grid1D> init_spline_dependent_idx_range(
         PC_tree_t const& conf_voicexx,
         std::string mesh_identifier)
 {
     if constexpr (BSplines::is_uniform()) {
-        using RDim = typename IDim::continuous_dimension_type;
-        using Coord = ddc::Coordinate<RDim>;
-        Coord min(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_min"));
-        Coord max(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_max"));
-        ddc::DiscreteVector<IDim> ncells(
+        using Dim = typename Grid1D::continuous_dimension_type;
+        using Coord1D = Coord<Dim>;
+        Coord1D min(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_min"));
+        Coord1D max(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_max"));
+        IdxStep<Grid1D> ncells(
                 PCpp_int(conf_voicexx, ".SplineMesh." + mesh_identifier + "_ncells"));
         ddc::init_discrete_space<BSplines>(min, max, ncells);
     } else {
         throw "Non-uniform bspline initialisation is not yet handled";
     }
-    ddc::init_discrete_space<IDim>(InterpPointInitMethod::template get_sampling<IDim>());
-    ddc::DiscreteDomain<IDim> interpolation_domain(
-            InterpPointInitMethod::template get_domain<IDim>());
-    return interpolation_domain;
+    ddc::init_discrete_space<Grid1D>(InterpPointInitMethod::template get_sampling<Grid1D>());
+    IdxRange<Grid1D> interpolation_idx_range(InterpPointInitMethod::template get_domain<Grid1D>());
+    return interpolation_idx_range;
 }
 
 /**
- * Initialise a domain which will serve as an interpolation domain for splines.
+ * Initialise an index range which will serve as an interpolation index range for splines.
  *
- * The domain is initialised using information from an input yaml file.
+ * The index range is initialised using information from an input yaml file.
  * This function should be used for non-uniform bsplines, but it initialises
  * the break points uniformly. Such splines are referred to as pseudo-uniform
  * as the cells on which the polynomials are defined are uniform. However they
@@ -87,23 +87,22 @@ inline ddc::DiscreteDomain<IDim> init_spline_dependent_domain(
  * - .SplineMesh.<mesh_identifier>_max
  * - .SplineMesh.<mesh_identifier>_ncells
  *
- * The interpolation domain is then created using the specified method.
+ * The interpolation index range is then created using the specified method.
  */
-template <class IDim, class BSplines, class InterpPointInitMethod>
-inline ddc::DiscreteDomain<IDim> init_pseudo_uniform_spline_dependent_domain(
+template <class Grid1D, class BSplines, class InterpPointInitMethod>
+inline IdxRange<Grid1D> init_pseudo_uniform_spline_dependent_idx_range(
         PC_tree_t const& conf_voicexx,
         std::string mesh_identifier)
 {
     static_assert(!BSplines::is_uniform());
-    using RDim = typename IDim::continuous_dimension_type;
-    using Coord = ddc::Coordinate<RDim>;
+    using Dim = typename Grid1D::continuous_dimension_type;
+    using Coord1D = Coord<Dim>;
 
-    Coord min(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_min"));
-    Coord max(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_max"));
-    ddc::DiscreteVector<IDim> ncells(
-            PCpp_int(conf_voicexx, ".SplineMesh." + mesh_identifier + "_ncells"));
+    Coord1D min(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_min"));
+    Coord1D max(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_max"));
+    IdxStep<Grid1D> ncells(PCpp_int(conf_voicexx, ".SplineMesh." + mesh_identifier + "_ncells"));
 
-    std::vector<Coord> break_points(ncells + 1);
+    std::vector<Coord1D> break_points(ncells + 1);
 
     double const delta(double(max - min) / ncells);
 
@@ -114,8 +113,7 @@ inline ddc::DiscreteDomain<IDim> init_pseudo_uniform_spline_dependent_domain(
     break_points[ncells] = max;
 
     ddc::init_discrete_space<BSplines>(break_points);
-    ddc::init_discrete_space<IDim>(InterpPointInitMethod::template get_sampling<IDim>());
-    ddc::DiscreteDomain<IDim> interpolation_domain(
-            InterpPointInitMethod::template get_domain<IDim>());
-    return interpolation_domain;
+    ddc::init_discrete_space<Grid1D>(InterpPointInitMethod::template get_sampling<Grid1D>());
+    IdxRange<Grid1D> interpolation_idx_range(InterpPointInitMethod::template get_domain<Grid1D>());
+    return interpolation_idx_range;
 }
