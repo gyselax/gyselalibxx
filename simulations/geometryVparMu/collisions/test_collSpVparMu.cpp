@@ -47,11 +47,11 @@ int main(int argc, char** argv)
     // --------- INITIALISATION ---------
     // ---> Reading of the mesh configuration from input YAML file
     // -----> Reading of mesh info
-    IdxRangeVpar const idxrange_vpar = init_spline_dependent_domain<
+    IdxRangeVpar const idxrange_vpar = init_spline_dependent_idx_range<
             GridVpar,
             BSplinesVpar,
             SplineInterpPointsVpar>(conf_collision, "vpar");
-    IdxRangeMu const idxrange_mu = init_spline_dependent_domain<
+    IdxRangeMu const idxrange_mu = init_spline_dependent_idx_range<
             GridMu,
             BSplinesMu,
             SplineInterpPointsMu>(conf_collision, "mu");
