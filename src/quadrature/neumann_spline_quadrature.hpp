@@ -17,9 +17,9 @@
 
 
 namespace {
-template <class ExecSpace, class IDim>
+template <class IDim>
 using CoefficientChunk1D_h = ddc::Chunk<double, ddc::DiscreteDomain<IDim>>;
-template <class ExecSpace, class IDim>
+template <class IDim>
 using CoefficientChunkSpan1D_h
         = ddc::ChunkSpan<double, ddc::DiscreteDomain<IDim>, std::experimental::layout_right>;
 
@@ -142,29 +142,26 @@ neumann_spline_quadrature_coefficients(
                     typename SplineBuilders::continuous_dimension_type> and ...));
 
     // Get coefficients for each dimension
-    std::tuple<CoefficientChunk1D_h<ExecSpace, DDims>...> current_dim_coeffs_alloc(
+    std::tuple<CoefficientChunk1D_h<DDims>...> current_dim_coeffs_alloc(
             neumann_spline_quadrature_coefficients_1d(ddc::select<DDims>(domain), builders)...);
-    std::tuple<CoefficientChunkSpan1D_h<ExecSpace, DDims>...> current_dim_coeffs(
-            std::get<CoefficientChunk1D_h<ExecSpace, DDims>>(current_dim_coeffs_alloc)
-                    .span_view()...);
+    std::tuple<CoefficientChunkSpan1D_h<DDims>...> current_dim_coeffs(
+            std::get<CoefficientChunk1D_h<DDims>>(current_dim_coeffs_alloc).span_view()...);
     // Allocate ND coefficients
     ddc::Chunk<
             double,
             ddc::DiscreteDomain<DDims...>,
             ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
             coefficients_alloc(domain);
-    ddc::Chunk<double, ddc::DiscreteDomain<DDims...>> coefficients_alloc_host(domain);
+    auto coefficients_alloc_host = ddc::create_mirror_view(coefficients_alloc.span_view());
     ddc::ChunkSpan coefficients = coefficients_alloc_host.span_view();
 
     ddc::for_each(domain, [&](ddc::DiscreteElement<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients(idim)
-                = (std::get<CoefficientChunkSpan1D_h<ExecSpace, DDims>>(current_dim_coeffs)(
+                = (std::get<CoefficientChunkSpan1D_h<DDims>>(current_dim_coeffs)(
                            ddc::select<DDims>(idim))
                    * ... * 1);
     });
-    Kokkos::deep_copy(
-            coefficients_alloc.allocation_kokkos_view(),
-            coefficients_alloc_host.allocation_kokkos_view());
+    ddc::parallel_deepcopy(coefficients_alloc, coefficients_alloc_host);
     return coefficients_alloc;
 }
