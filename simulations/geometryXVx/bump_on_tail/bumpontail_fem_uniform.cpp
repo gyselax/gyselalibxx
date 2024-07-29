@@ -57,11 +57,11 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    IDomainX const mesh_x = init_spline_dependent_idx_range<
+    IDomainX const mesh_x = init_spline_dependent_domain<
             IDimX,
             BSplinesX,
             SplineInterpPointsX>(conf_voicexx, "x");
-    IDomainVx const mesh_vx = init_spline_dependent_idx_range<
+    IDomainVx const mesh_vx = init_spline_dependent_domain<
             IDimVx,
             BSplinesVx,
             SplineInterpPointsVx>(conf_voicexx, "vx");
