@@ -1,9 +1,10 @@
 #pragma once
-
 #include <ddc/ddc.hpp>
 
 #include <ddc_helper.hpp>
 #include <species_info.hpp>
+
+#include "ddc_aliases.hpp"
 
 /*
  * @file geometry.hpp
@@ -71,138 +72,138 @@ struct Mu
     static bool constexpr PERIODIC = false;
 };
 
-using CoordTor1 = ddc::Coordinate<Tor1>;
-using CoordTor2 = ddc::Coordinate<Tor2>;
-using CoordTor3 = ddc::Coordinate<Tor3>;
-using CoordTor3D = ddc::Coordinate<Tor3, Tor2, Tor1>;
+using CoordTor1 = Coord<Tor1>;
+using CoordTor2 = Coord<Tor2>;
+using CoordTor3 = Coord<Tor3>;
+using CoordTor3D = Coord<Tor3, Tor2, Tor1>;
 
-using CoordVpar = ddc::Coordinate<Vpar>;
-using CoordMu = ddc::Coordinate<Mu>;
-using CoordV2D = ddc::Coordinate<Mu, Vpar>;
+using CoordVpar = Coord<Vpar>;
+using CoordMu = Coord<Mu>;
+using CoordV2D = Coord<Mu, Vpar>;
 
-struct GridTor1 : ddc::NonUniformPointSampling<Tor1>
+struct GridTor1 : NonUniformGridBase<Tor1>
 {
 };
-struct GridTor2 : ddc::NonUniformPointSampling<Tor2>
+struct GridTor2 : NonUniformGridBase<Tor2>
 {
 };
-struct GridTor3 : ddc::NonUniformPointSampling<Tor3>
+struct GridTor3 : NonUniformGridBase<Tor3>
 {
 };
-struct GridVpar : ddc::NonUniformPointSampling<Vpar>
+struct GridVpar : NonUniformGridBase<Vpar>
 {
 };
-struct GridMu : ddc::NonUniformPointSampling<Mu>
+struct GridMu : NonUniformGridBase<Mu>
 {
 };
 
-using IdxTor1 = ddc::DiscreteElement<GridTor1>;
-using IdxTor2 = ddc::DiscreteElement<GridTor2>;
-using IdxTor3 = ddc::DiscreteElement<GridTor3>;
-using IdxVpar = ddc::DiscreteElement<GridVpar>;
-using IdxMu = ddc::DiscreteElement<GridMu>;
+using IdxTor1 = Idx<GridTor1>;
+using IdxTor2 = Idx<GridTor2>;
+using IdxTor3 = Idx<GridTor3>;
+using IdxVpar = Idx<GridVpar>;
+using IdxMu = Idx<GridMu>;
 
-using DVecTor1 = ddc::DiscreteVector<GridTor1>;
-using DVecTor2 = ddc::DiscreteVector<GridTor2>;
-using DVecTor3 = ddc::DiscreteVector<GridTor3>;
-using DVecVpar = ddc::DiscreteVector<GridVpar>;
-using DVecMu = ddc::DiscreteVector<GridMu>;
+using IdxStepTor1 = IdxStep<GridTor1>;
+using IdxStepTor2 = IdxStep<GridTor2>;
+using IdxStepTor3 = IdxStep<GridTor3>;
+using IdxStepVpar = IdxStep<GridVpar>;
+using IdxStepMu = IdxStep<GridMu>;
 
-using DDomTor1 = ddc::DiscreteDomain<GridTor1>;
-using DDomTor2 = ddc::DiscreteDomain<GridTor2>;
-using DDomTor3 = ddc::DiscreteDomain<GridTor3>;
-using DDomVpar = ddc::DiscreteDomain<GridVpar>;
-using DDomMu = ddc::DiscreteDomain<GridMu>;
-using DDomTorCS = ddc::DiscreteDomain<GridTor2, GridTor1>;
-using DDomTor3D = ddc::DiscreteDomain<GridTor3, GridTor2, GridTor1>;
-using DDomV2D = ddc::DiscreteDomain<GridVpar, GridMu>;
-using DDomSpTor3DV2D = ddc::DiscreteDomain<Species, GridTor3, GridTor2, GridTor1, GridVpar, GridMu>;
-using DDomSpTorCS = ddc::DiscreteDomain<Species, GridTor2, GridTor1>;
-
-template <class ElementType>
-using FieldTor1 = device_t<ddc::Chunk<ElementType, DDomTor1>>;
-using DFieldTor1 = FieldTor1<double>;
+using IdxRangeTor1 = IdxRange<GridTor1>;
+using IdxRangeTor2 = IdxRange<GridTor2>;
+using IdxRangeTor3 = IdxRange<GridTor3>;
+using IdxRangeVpar = IdxRange<GridVpar>;
+using IdxRangeMu = IdxRange<GridMu>;
+using IdxRangeTorCS = IdxRange<GridTor2, GridTor1>;
+using IdxRangeTor3D = IdxRange<GridTor3, GridTor2, GridTor1>;
+using IdxRangeV2D = IdxRange<GridVpar, GridMu>;
+using IdxRangeSpTor3DV2D = IdxRange<Species, GridTor3, GridTor2, GridTor1, GridVpar, GridMu>;
+using IdxRangeSpTorCS = IdxRange<Species, GridTor2, GridTor1>;
 
 template <class ElementType>
-using FieldTor2 = device_t<ddc::Chunk<ElementType, DDomTor2>>;
-using DFieldTor2 = FieldTor2<double>;
+using FieldMemTor1 = FieldMem<ElementType, IdxRangeTor1>;
+using DFieldMemTor1 = FieldMemTor1<double>;
 
 template <class ElementType>
-using FieldTor3 = device_t<ddc::Chunk<ElementType, DDomTor3>>;
-using DFieldTor3 = FieldTor3<double>;
+using FieldMemTor2 = FieldMem<ElementType, IdxRangeTor2>;
+using DFieldMemTor2 = FieldMemTor2<double>;
 
 template <class ElementType>
-using FieldVpar = device_t<ddc::Chunk<ElementType, DDomVpar>>;
-using DFieldVpar = FieldVpar<double>;
+using FieldMemTor3 = FieldMem<ElementType, IdxRangeTor3>;
+using DFieldMemTor3 = FieldMemTor3<double>;
 
 template <class ElementType>
-using FieldMu = device_t<ddc::Chunk<ElementType, DDomMu>>;
-using DFieldMu = FieldMu<double>;
+using FieldMemVpar = FieldMem<ElementType, IdxRangeVpar>;
+using DFieldMemVpar = FieldMemVpar<double>;
 
 template <class ElementType>
-using FieldTorCS = device_t<ddc::Chunk<ElementType, DDomTorCS>>;
-using DFieldTorCS = FieldTorCS<double>;
+using FieldMemMu = FieldMem<ElementType, IdxRangeMu>;
+using DFieldMemMu = FieldMemMu<double>;
 
 template <class ElementType>
-using FieldTor3D = device_t<ddc::Chunk<ElementType, DDomTor3D>>;
-using DFieldTor3D = FieldTor3D<double>;
+using FieldMemTorCS = FieldMem<ElementType, IdxRangeTorCS>;
+using DFieldMemTorCS = FieldMemTorCS<double>;
 
 template <class ElementType>
-using FieldSpTor3DV2D_host = host_t<ddc::Chunk<ElementType, DDomSpTor3DV2D>>;
+using FieldMemTor3D = FieldMem<ElementType, IdxRangeTor3D>;
+using DFieldMemTor3D = FieldMemTor3D<double>;
+
+template <class ElementType>
+using FieldSpTor3DV2D_host = host_t<FieldMem<ElementType, IdxRangeSpTor3DV2D>>;
 using DFieldSpTor3DV2D_host = FieldSpTor3DV2D_host<double>;
 
 template <class ElementType>
-using FieldSpTor3DV2D = device_t<ddc::Chunk<ElementType, DDomSpTor3DV2D>>;
-using DFieldSpTor3DV2D = FieldSpTor3DV2D<double>;
+using FieldMemSpTor3DV2D = FieldMem<ElementType, IdxRangeSpTor3DV2D>;
+using DFieldMemSpTor3DV2D = FieldMemSpTor3DV2D<double>;
 
 template <class ElementType>
-using FieldSpTorCS_host = host_t<ddc::Chunk<ElementType, DDomSpTorCS>>;
+using FieldSpTorCS_host = host_t<FieldMem<ElementType, IdxRangeSpTorCS>>;
 using DFieldSpTorCS_host = FieldSpTorCS_host<double>;
 
 template <class ElementType>
-using FieldSpTorCS = device_t<ddc::Chunk<ElementType, DDomSpTorCS>>;
-using DFieldSpTorCS = FieldSpTorCS<double>;
+using FieldMemSpTorCS = FieldMem<ElementType, IdxRangeSpTorCS>;
+using DFieldMemSpTorCS = FieldMemSpTorCS<double>;
 
 template <class ElementType>
-using SpanTorCS = device_t<ddc::ChunkSpan<ElementType, DDomTorCS>>;
-using DSpanTorCS = SpanTorCS<double>;
+using FieldTorCS = Field<ElementType, IdxRangeTorCS>;
+using DFieldTorCS = FieldTorCS<double>;
 
 template <class ElementType>
-using SpanTor3D = device_t<ddc::ChunkSpan<ElementType, DDomTor3D>>;
-using DSpanTor3D = SpanTor3D<double>;
+using FieldTor3D = Field<ElementType, IdxRangeTor3D>;
+using DFieldTor3D = FieldTor3D<double>;
 
 template <class ElementType>
-using SpanSpTor3DV2D = device_t<ddc::ChunkSpan<ElementType, DDomSpTor3DV2D>>;
-using DSpanSpTor3DV2D = SpanSpTor3DV2D<double>;
+using FieldSpTor3DV2D = Field<ElementType, IdxRangeSpTor3DV2D>;
+using DFieldSpTor3DV2D = FieldSpTor3DV2D<double>;
 
 template <class ElementType>
-using ViewTor1 = device_t<ddc::ChunkView<ElementType const, DDomTor1>>;
-using DViewTor1 = ViewTor1<double>;
+using ConstFieldTor1 = ConstField<ElementType const, IdxRangeTor1>;
+using DConstFieldTor1 = ConstFieldTor1<double>;
 
 template <class ElementType>
-using ViewTor2 = device_t<ddc::ChunkView<ElementType const, DDomTor2>>;
-using DViewTor2 = ViewTor2<double>;
+using ConstFieldTor2 = ConstField<ElementType const, IdxRangeTor2>;
+using DConstFieldTor2 = ConstFieldTor2<double>;
 
 template <class ElementType>
-using ViewTor3 = device_t<ddc::ChunkView<ElementType const, DDomTor3>>;
-using DViewTor3 = ViewTor3<double>;
+using ConstFieldTor3 = ConstField<ElementType const, IdxRangeTor3>;
+using DConstFieldTor3 = ConstFieldTor3<double>;
 
 template <class ElementType>
-using ViewVpar = device_t<ddc::ChunkView<ElementType const, DDomVpar>>;
-using DViewVpar = ViewVpar<double>;
+using ConstFieldVpar = ConstField<ElementType const, IdxRangeVpar>;
+using DConstFieldVpar = ConstFieldVpar<double>;
 
 template <class ElementType>
-using ViewMu = device_t<ddc::ChunkView<ElementType const, DDomMu>>;
-using DViewMu = ViewMu<double>;
+using ConstFieldMu = ConstField<ElementType const, IdxRangeMu>;
+using DConstFieldMu = ConstFieldMu<double>;
 
 template <class ElementType>
-using ViewTorCS = device_t<ddc::ChunkView<ElementType const, DDomTorCS>>;
-using DViewTorCS = ViewTorCS<double>;
+using ConstFieldTorCS = ConstField<ElementType const, IdxRangeTorCS>;
+using DConstFieldTorCS = ConstFieldTorCS<double>;
 
 template <class ElementType>
-using ViewTor3D = device_t<ddc::ChunkView<ElementType const, DDomTor3D>>;
-using DViewTor3D = ViewTor3D<double>;
+using ConstFieldTor3D = ConstField<ElementType const, IdxRangeTor3D>;
+using DConstFieldTor3D = ConstFieldTor3D<double>;
 
 template <class ElementType>
-using ViewSpTor3DV2D = device_t<ddc::ChunkView<ElementType const, DDomSpTor3DV2D>>;
-using DViewSpTor3DV2D = ViewSpTor3DV2D<double>;
+using ConstFieldSpTor3DV2D = ConstField<ElementType const, IdxRangeSpTor3DV2D>;
+using DConstFieldSpTor3DV2D = ConstFieldSpTor3DV2D<double>;
