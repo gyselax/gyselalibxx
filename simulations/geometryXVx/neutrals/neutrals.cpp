@@ -128,9 +128,16 @@ int main(int argc, char** argv)
     // Neutral species initialization
     DFieldSpMX neutrals_alloc(IDomainSpMX(dom_fluidsp, meshM, mesh_x));
     auto neutrals = neutrals_alloc.span_view();
-
     host_t<DFieldSpM> moments_init(IDomainSpM(dom_fluidsp, meshM));
-    ddc::parallel_fill(moments_init, 1.);
+
+    for (IndexSp const isp : dom_fluidsp) {
+        PC_tree_t const conf_nisp = PCpp_get(
+                conf_voicexx,
+                ".NeutralSpeciesInfo[%d]",
+                (isp - dom_fluidsp.front()).value());
+        ddc::parallel_fill(moments_init[isp], PCpp_double(conf_nisp, ".density_eq"));
+    }
+
     ConstantFluidInitialization fluid_init(moments_init);
     fluid_init(neutrals);
 
@@ -252,8 +259,10 @@ int main(int argc, char** argv)
 #endif
     QNSolver const poisson(poisson_solver, rhs);
 
-    double const normalization_coeff(0.01);
-    double const norm_coeff_rate(1.e-3);
+    double const normalization_coeff
+            = PCpp_double(conf_voicexx, ".DiffusiveNeutralSolver.normalization_coeff_neutrals");
+    double const norm_coeff_rate
+            = PCpp_double(conf_voicexx, ".DiffusiveNeutralSolver.norm_coeff_rate_neutrals");
 
     // The CX coefficient needs to be first constructed in order to write a correct initstate file. Check pdi_out_neutrals.yml.hpp for a closer look.
     ChargeExchangeRate charge_exchange(norm_coeff_rate);
