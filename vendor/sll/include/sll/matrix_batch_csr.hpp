@@ -48,10 +48,10 @@ class MatrixBatchCsr : public MatrixBatch<ExecSpace>
 private:
     std::shared_ptr<batch_sparse_type> m_batch_matrix_csr;
     std::shared_ptr<solver_type> m_solver;
+    int const m_nnz_per_system;
     int const m_max_iter;
     double const m_tol;
     bool m_with_logger;
-    int const m_nnz_per_system;
     unsigned int m_preconditionner_max_block_size; // Maximum size of Jacobi-block preconditionner
 
 public:
