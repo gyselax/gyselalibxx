@@ -16,7 +16,7 @@ class SingleModePerturbInitialization : public IInitialization
 
     host_t<IFieldSp> m_init_perturb_mode;
 
-    host_t<DFieldSp> m_init_perturb_amplitude;
+    host_t<DFieldMemSp> m_init_perturb_amplitude;
 
 public:
     /**
@@ -41,7 +41,7 @@ public:
     SingleModePerturbInitialization(
             DViewSpVxVy fequilibrium,
             host_t<IFieldSp> init_perturb_mode,
-            host_t<DFieldSp> init_perturb_amplitude);
+            host_t<DFieldMemSp> init_perturb_amplitude);
 
     ~SingleModePerturbInitialization() override = default;
 
@@ -62,6 +62,6 @@ public:
      */
     static SingleModePerturbInitialization init_from_input(
             DViewSpVxVy allfequilibrium,
-            IDomainSp dom_kinsp,
+            IdxRangeSp dom_kinsp,
             PC_tree_t const& yaml_input_file);
 };

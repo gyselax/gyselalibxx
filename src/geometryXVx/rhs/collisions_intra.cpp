@@ -85,22 +85,22 @@ std::enable_if_t<ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
 CollisionsIntra::CollisionsIntra(IDomainSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
     , m_fthresh(1.e-30)
-    , m_nustar_profile_alloc(ddc::select<IDimSp, IDimX>(mesh))
+    , m_nustar_profile_alloc(ddc::select<Species, IDimX>(mesh))
     , m_gridvx_ghosted(
               ddc::DiscreteElement<GhostedVx>(0),
               ddc::DiscreteVector<GhostedVx>(ddc::select<IDimVx>(mesh).size() + 2))
     , m_gridvx_ghosted_staggered(
               ddc::DiscreteElement<GhostedVxStaggered>(0),
               ddc::DiscreteVector<GhostedVxStaggered>(ddc::select<IDimVx>(mesh).size() + 1))
-    , m_mesh_ghosted(ddc::select<IDimSp>(mesh), ddc::select<IDimX>(mesh), m_gridvx_ghosted)
+    , m_mesh_ghosted(ddc::select<Species>(mesh), ddc::select<IDimX>(mesh), m_gridvx_ghosted)
     , m_mesh_ghosted_staggered(
-              ddc::select<IDimSp>(mesh),
+              ddc::select<Species>(mesh),
               ddc::select<IDimX>(mesh),
               m_gridvx_ghosted_staggered)
 
 {
     // validity checks
-    if (ddc::select<IDimSp>(mesh).size() != 2) {
+    if (ddc::select<Species>(mesh).size() != 2) {
         throw std::runtime_error("Intra species collisions requires two kinetic species.");
     }
     if (m_nustar0 == 0.) {
@@ -125,7 +125,7 @@ ddc::DiscreteDomain<CollisionsIntra::GhostedVxStaggered> const& CollisionsIntra:
     return m_gridvx_ghosted_staggered;
 }
 
-ddc::DiscreteDomain<IDimSp, IDimX, CollisionsIntra::GhostedVx> const& CollisionsIntra::
+ddc::DiscreteDomain<Species, IDimX, CollisionsIntra::GhostedVx> const& CollisionsIntra::
         get_mesh_ghosted() const
 {
     return m_mesh_ghosted;
@@ -144,7 +144,7 @@ void CollisionsIntra::compute_matrix_coeff(
             Kokkos::DefaultExecutionSpace(),
             AA.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
-                IndexSp const isp = ddc::select<IDimSp>(ispxvx);
+                IdxSp const isp = ddc::select<Species>(ispxvx);
                 IndexX const ix = ddc::select<IDimX>(ispxvx);
                 IndexVx const ivx = ddc::select<IDimVx>(ispxvx);
 
@@ -224,7 +224,7 @@ void CollisionsIntra::compute_rhs_vector(
             Kokkos::DefaultExecutionSpace(),
             RR.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
-                IndexSp const isp = ddc::select<IDimSp>(ispxvx);
+                IdxSp const isp = ddc::select<Species>(ispxvx);
                 IndexX const ix = ddc::select<IDimX>(ispxvx);
                 IndexVx const ivx = ddc::select<IDimVx>(ispxvx);
 
@@ -257,7 +257,7 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
     auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
     ddc::ChunkSpan allfdistribu_host = allfdistribu_alloc.span_view();
 
-    IDomainSpX grid_sp_x(allfdistribu.domain<IDimSp, IDimX>());
+    IDomainSpX grid_sp_x(allfdistribu.domain<Species, IDimX>());
     // density and temperature
     DFieldSpX density_alloc(grid_sp_x);
     DFieldSpX fluid_velocity_alloc(grid_sp_x);
@@ -341,7 +341,7 @@ DSpanSpXVx CollisionsIntra::operator()(DSpanSpXVx allfdistribu, double dt) const
     auto RR = RR_alloc.span_view();
     compute_rhs_vector(RR, AA, BB, CC, allfdistribu, m_fthresh);
 
-    int const batch_size = ddc::get_domain<IDimSp, IDimX>(allfdistribu).size();
+    int const batch_size = ddc::get_domain<Species, IDimX>(allfdistribu).size();
     int const mat_size = ddc::get_domain<IDimVx>(allfdistribu).size();
     /* Here we do not use allocation_kokkos_view() ddc function since we change the shape 
        from (Sp,X,Vx)-->(batch_dim,Vx)*/

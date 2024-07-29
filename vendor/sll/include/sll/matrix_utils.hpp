@@ -30,6 +30,23 @@ auto to_gko_multivector(
 }
 
 /**
+ * @brief A function extracted from ginkgo to unbatch ginkgo objects.
+ * @param[in] batch_object A batch of ginkgo objects ( eg. gko::batch::matrix::Dense
+ *            converted to std::vector<gko::matrix::Dense> ), works also for multivectors, loggers.
+ * @return a vector of ginkgo structures.
+ */
+template <typename InputType>
+std::vector<std::unique_ptr<typename InputType::unbatch_type>> unbatch(
+        const InputType* batch_object)
+{
+    std::vector<std::unique_ptr<typename InputType::unbatch_type>> unbatched_mats;
+    for (int b = 0; b < batch_object->get_num_batch_items(); ++b) {
+        unbatched_mats.emplace_back(batch_object->create_const_view_for_item(b)->clone());
+    }
+    return unbatched_mats;
+}
+
+/**
  * @brief A function for checking convergence. It loops over the batch and checks 
  *        the if residual is lower or equal to the prescribed tolerance.
  * @param[in] batch_size the size of the batch , ie number of linears problems.
@@ -57,37 +74,6 @@ inline void check_conv(
     if (!has_converged) {
         throw ::std::runtime_error("Residual tolerance is not reached");
     }
-}
-
-/**
- * @brief An helper to write the log corresponding to a single batch.
- * @param[in] log_file The stream of the log file.
- * @param[in] index The index of the batch.
- * @param[in] num_iterations The number of iterations the iterative solver performed for this batch.
- * @param[in] implicit_res_norm The implicit residual norm at the end of the solver call (evaluated by
- * the Ginkgo solver).
- * @param[in] true_res_norm The true residual norm at the end of the solver call (re-computed by hand).
- * @param[in] b_norm The norm of the right-hand side.
- * @param[in] tol The tolerancy on residual norm above which a non-convergency is reported.
- */
-inline void write_log(
-        std::fstream& log_file,
-        int const index,
-        int const num_iterations,
-        double const implicit_res_norm,
-        double const true_res_norm,
-        double const b_norm,
-        double const tol)
-{
-    log_file << " System no. " << index << ":" << std::endl;
-    log_file << " Number of iterations = " << num_iterations << std::endl;
-    log_file << " Implicit residual norm = " << implicit_res_norm << std::endl;
-    log_file << " True (Ax-b) residual norm = " << true_res_norm << std::endl;
-    log_file << " Right-hand side (b) norm = " << b_norm << std::endl;
-    if (!(true_res_norm <= tol)) {
-        log_file << " --- System " << index << " did not converge! ---" << std::endl;
-    }
-    log_file << "------------------------------------------------" << std::endl;
 }
 
 /**
@@ -142,15 +128,20 @@ void save_logger(
     std::fstream log_file(filename + "_logger.txt", std::ios::out | std::ios::app);
     // "unbatch" converts a batch object into a vector
     // of objects of the corresponding single type.
+    auto unb_res_norm = unbatch(res_norm_host.get());
+    auto unb_bnorm = unbatch(b_norm_host.get());
     for (int i = 0; i < batch_size; ++i) {
-        write_log(
-                log_file,
-                i,
-                log_iters_host->get_const_data()[i],
-                log_resid_host->get_const_data()[i],
-                res_norm_host->create_const_view_for_item(i)->at(0, 0),
-                b_norm_host->create_const_view_for_item(i)->at(0, 0),
-                tol);
+        // Logger  output
+        log_file << " System no. " << i << ": Ax-b residual norm = " << unb_res_norm[i]->at(0, 0)
+                 << ", implicit residual norm = " << log_resid_host->get_const_data()[i]
+                 << ", iterations = " << log_iters_host->get_const_data()[i] << std::endl;
+        log_file << " unbatched bnorm at(i,0)" << unb_bnorm[i]->at(0, 0) << std::endl;
+        log_file << " unbatched residual norm at(i,0)" << unb_res_norm[i]->at(0, 0) << std::endl;
+        if (!(unb_res_norm[i]->at(0, 0) <= tol)) {
+            log_file << "System " << i << " converged only to " << unb_res_norm[i]->at(0, 0)
+                     << " relative residual." << std::endl;
+        }
+        log_file << "------------------------------------------------" << std::endl;
     }
     log_file.close();
 }

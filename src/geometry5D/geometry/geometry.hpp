@@ -116,8 +116,8 @@ using DDomMu = ddc::DiscreteDomain<GridMu>;
 using DDomTorCS = ddc::DiscreteDomain<GridTor2, GridTor1>;
 using DDomTor3D = ddc::DiscreteDomain<GridTor3, GridTor2, GridTor1>;
 using DDomV2D = ddc::DiscreteDomain<GridVpar, GridMu>;
-using DDomSpTor3DV2D = ddc::DiscreteDomain<IDimSp, GridTor3, GridTor2, GridTor1, GridVpar, GridMu>;
-using DDomSpTorCS = ddc::DiscreteDomain<IDimSp, GridTor2, GridTor1>;
+using DDomSpTor3DV2D = ddc::DiscreteDomain<Species, GridTor3, GridTor2, GridTor1, GridVpar, GridMu>;
+using DDomSpTorCS = ddc::DiscreteDomain<Species, GridTor2, GridTor1>;
 
 template <class ElementType>
 using FieldTor1 = device_t<ddc::Chunk<ElementType, DDomTor1>>;

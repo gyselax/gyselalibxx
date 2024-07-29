@@ -7,10 +7,10 @@
 #include "maxwellianequilibrium.hpp"
 
 MaxwellianEquilibrium::MaxwellianEquilibrium(
-        host_t<DFieldSp> mass,
-        host_t<DFieldSp> density_eq,
-        host_t<DFieldSp> temperature_eq,
-        host_t<DFieldSp> mean_velocity_eq,
+        host_t<DFieldMemSp> mass,
+        host_t<DFieldMemSp> density_eq,
+        host_t<DFieldMemSp> temperature_eq,
+        host_t<DFieldMemSp> mean_velocity_eq,
         double magnetic_field = 1.0)
     : m_mass(std::move(mass))
     , m_density_eq(std::move(density_eq))
@@ -22,7 +22,7 @@ MaxwellianEquilibrium::MaxwellianEquilibrium(
 
 DSpanSpVparMu MaxwellianEquilibrium::operator()(DSpanSpVparMu const allfequilibrium) const
 {
-    IdxRangeSp const idxrange_sp = allfequilibrium.domain<IDimSp>();
+    IdxRangeSp const idxrange_sp = allfequilibrium.domain<Species>();
     IdxRangeVparMu const idxrange_vparmu = allfequilibrium.domain<GridVpar, GridMu>();
 
     // Initialization of the maxwellian
@@ -44,16 +44,16 @@ DSpanSpVparMu MaxwellianEquilibrium::operator()(DSpanSpVparMu const allfequilibr
 }
 
 MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
-        IDomainSp dom_kinsp,
+        IdxRangeSp dom_kinsp,
         PC_tree_t const& yaml_input_file)
 {
-    host_t<DFieldSp> mass(dom_kinsp);
-    host_t<DFieldSp> density_eq(dom_kinsp);
-    host_t<DFieldSp> temperature_eq(dom_kinsp);
-    host_t<DFieldSp> mean_velocity_eq(dom_kinsp);
+    host_t<DFieldMemSp> mass(dom_kinsp);
+    host_t<DFieldMemSp> density_eq(dom_kinsp);
+    host_t<DFieldMemSp> temperature_eq(dom_kinsp);
+    host_t<DFieldMemSp> mean_velocity_eq(dom_kinsp);
     double const magnetic_field = 1.0;
 
-    for (IndexSp const isp : dom_kinsp) {
+    for (IdxSp const isp : dom_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
 
         mass(isp) = PCpp_double(conf_isp, ".mass");

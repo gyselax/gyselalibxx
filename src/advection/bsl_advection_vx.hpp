@@ -19,7 +19,7 @@ class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, DDimV>
     using FdistribuDDom = typename Geometry::FdistribuDDom;
     using SpatialDDom = typename Geometry::SpatialDDom;
     using DElemV = ddc::DiscreteElement<DDimV>;
-    using DElemSp = ddc::DiscreteElement<IDimSp>;
+    using DElemSp = ddc::DiscreteElement<Species>;
     using CDimV = typename DDimV::continuous_dimension_type;
 
 private:
@@ -60,14 +60,14 @@ public:
         Kokkos::Profiling::pushRegion("BslAdvectionVelocity");
         FdistribuDDom const dom = allfdistribu.domain();
         ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
-        ddc::DiscreteDomain<IDimSp> const sp_dom = ddc::select<IDimSp>(dom);
+        ddc::DiscreteDomain<Species> const sp_dom = ddc::select<Species>(dom);
 
         device_t<ddc::Chunk<double, typename InterpolatorType::batched_derivs_domain_type>>
                 derivs_min(m_interpolator_v.batched_derivs_domain_xmin(
-                        ddc::remove_dims_of<IDimSp>(dom)));
+                        ddc::remove_dims_of<Species>(dom)));
         device_t<ddc::Chunk<double, typename InterpolatorType::batched_derivs_domain_type>>
                 derivs_max(m_interpolator_v.batched_derivs_domain_xmax(
-                        ddc::remove_dims_of<IDimSp>(dom)));
+                        ddc::remove_dims_of<Species>(dom)));
         ddc::parallel_fill(derivs_min, 0.);
         ddc::parallel_fill(derivs_max, 0.);
 

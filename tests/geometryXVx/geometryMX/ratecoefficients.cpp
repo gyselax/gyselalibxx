@@ -54,25 +54,25 @@ static void TestDiffusiveNeutralsRateCoefficients()
     IDomainXVx meshXVx(meshX, meshVx);
 
     // Kinetic and neutral species domain initialization
-    IVectSp const nb_kinspecies(2);
-    IDomainSp const dom_kinsp(IndexSp(0), nb_kinspecies);
+    IdxStepSp const nb_kinspecies(2);
+    IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
 
-    IVectSp const nb_fluidspecies(1);
-    IDomainSp const dom_fluidsp(IndexSp(dom_kinsp.back() + 1), nb_fluidspecies);
+    IdxStepSp const nb_fluidspecies(1);
+    IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
 
-    IDomainSp const dom_allsp(IndexSp(0), nb_kinspecies + nb_fluidspecies);
+    IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
-    host_t<DFieldSp> masses(dom_allsp);
-    host_t<DSpanSp> kinetic_masses = masses[dom_kinsp];
-    host_t<DSpanSp> fluid_masses = masses[dom_fluidsp];
+    host_t<DFieldMemSp> masses(dom_allsp);
+    host_t<DFieldSp> kinetic_masses = masses[dom_kinsp];
+    host_t<DFieldSp> fluid_masses = masses[dom_fluidsp];
 
-    host_t<DFieldSp> charges(dom_allsp);
-    host_t<DSpanSp> kinetic_charges = charges[dom_kinsp];
-    host_t<DSpanSp> fluid_charges = charges[dom_fluidsp];
+    host_t<DFieldMemSp> charges(dom_allsp);
+    host_t<DFieldSp> kinetic_charges = charges[dom_kinsp];
+    host_t<DFieldSp> fluid_charges = charges[dom_fluidsp];
 
-    IndexSp const my_iion = dom_kinsp.front();
-    IndexSp const my_ielec = dom_kinsp.back();
-    IndexSp const my_ifluid = dom_fluidsp.front();
+    IdxSp const my_iion = dom_kinsp.front();
+    IdxSp const my_ielec = dom_kinsp.back();
+    IdxSp const my_ifluid = dom_fluidsp.front();
 
     kinetic_charges(my_ielec) = -1.;
     kinetic_charges(my_iion) = 1.;
@@ -87,7 +87,7 @@ static void TestDiffusiveNeutralsRateCoefficients()
     double const neutral_mass(1.);
     fluid_masses(my_ifluid) = neutral_mass;
 
-    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
+    ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
     // Moments domain initialization
     IVectM const nb_fluid_moments(1);
