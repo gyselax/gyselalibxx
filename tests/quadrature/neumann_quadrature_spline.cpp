@@ -54,11 +54,9 @@ TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFunc)
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
     ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
-    ddc::DiscreteDomain<IDimX> interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
+    ddc::DiscreteDomain<IDimX> gridx(SplineInterpPointsX::get_domain<IDimX>());
 
-    SplineXBuilder_1d const builder_x(interpolation_domain_x);
-
-    IDomainX const gridx = builder_x.interpolation_domain();
+    SplineXBuilder_1d const builder_x(gridx);
 
     DFieldX quadrature_coeffs(neumann_spline_quadrature_coefficients<
                               Kokkos::DefaultExecutionSpace>(gridx, builder_x));

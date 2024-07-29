@@ -40,15 +40,12 @@ TEST(Physics, FluidMoments)
     ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
     ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
 
-    IDomainX interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>());
-    IDomainVx interpolation_domain_vx(SplineInterpPointsVx::get_domain<IDimVx>());
+    IDomainX gridx(SplineInterpPointsX::get_domain<IDimX>());
+    IDomainVx gridvx(SplineInterpPointsVx::get_domain<IDimVx>());
 
-    SplineXBuilder_1d const builder_x(interpolation_domain_x);
+    SplineXBuilder_1d const builder_x(gridx);
+    SplineVxBuilder_1d const builder_vx(gridvx);
 
-    SplineVxBuilder_1d const builder_vx(interpolation_domain_vx);
-
-    IDomainX const gridx = builder_x.interpolation_domain();
-    IDomainVx const gridvx = builder_vx.interpolation_domain();
     IDomainSpXVx const mesh(IDomainSp(my_iion, IVectSp(1)), gridx, gridvx);
 
     host_t<DFieldSp> charges(dom_sp);

@@ -33,6 +33,7 @@
 #include "input.hpp"
 #include "ionization.hpp"
 #include "irighthandside.hpp"
+#include "kinetic_fluid_coupling_source.hpp"
 #include "kinetic_source.hpp"
 #include "krook_source_adaptive.hpp"
 #include "krook_source_constant.hpp"
@@ -271,7 +272,16 @@ int main(int argc, char** argv)
             spline_x_evaluator_neutrals,
             quadrature_coeffs_neutrals.span_view());
 
-    PredCorrHybrid const predcorr(boltzmann, neutralsolver, poisson);
+    KineticFluidCouplingSource const kineticfluidcoupling(
+            PCpp_double(conf_voicexx, ".KineticFluidCouplingSource.density_coupling_coeff"),
+            PCpp_double(conf_voicexx, ".KineticFluidCouplingSource.momentum_coupling_coeff"),
+            PCpp_double(conf_voicexx, ".KineticFluidCouplingSource.energy_coupling_coeff"),
+            ionization,
+            recombination,
+            normalization_coeff,
+            quadrature_coeffs);
+
+    PredCorrHybrid const predcorr(boltzmann, neutralsolver, poisson, kineticfluidcoupling);
 
     // Starting the code
     ddc::expose_to_pdi("Nx_spline_cells", ddc::discrete_space<BSplinesX>().ncells());

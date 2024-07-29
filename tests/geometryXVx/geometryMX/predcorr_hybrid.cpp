@@ -15,10 +15,12 @@
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
 #include "constantfluidinitialization.hpp"
+#include "constantrate.hpp"
 #include "fem_1d_poisson_solver.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
-#include "irighthandside.hpp"
+#include "ikineticfluidcoupling.hpp"
+#include "kinetic_fluid_coupling_source.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "nullfluidsolver.hpp"
@@ -218,6 +220,21 @@ TEST(GeometryXM, PredCorrHybrid)
 #endif
     QNSolver const poisson(poisson_solver, rhs);
 
+    ConstantRate const charge_exchange(0.0);
+    ConstantRate const ionization(0.0);
+    ConstantRate const recombination(0.0);
+    double const normalization_coeff(1.0);
+
+    // kinetic fluid coupling term
+    KineticFluidCouplingSource const kineticfluidcoupling(
+            1.0,
+            0.0,
+            0.0,
+            ionization,
+            recombination,
+            normalization_coeff,
+            quadrature_coeffs);
+
     // construction of predcorr without fluid species
     PredCorr const predcorr(vlasov, poisson);
 
@@ -233,7 +250,7 @@ TEST(GeometryXM, PredCorrHybrid)
 
     // construction of predcorr with fluid species
     NullFluidSolver const fluidsolver(dom_fluidsp);
-    PredCorrHybrid const predcorr_hybrid(vlasov, fluidsolver, poisson);
+    PredCorrHybrid const predcorr_hybrid(vlasov, fluidsolver, poisson, kineticfluidcoupling);
     predcorr_hybrid(allfdistribu, fluid_moments, time_start, deltat, nb_iter);
 
     auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu);

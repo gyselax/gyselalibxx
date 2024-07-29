@@ -12,6 +12,7 @@
 #include <pdi.h>
 
 #include "CollisionSpVparMu.hpp"
+#include "collisioninfo.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
@@ -35,14 +36,13 @@ int main(int argc, char** argv)
     setenv("KOKKOS_TOOLS_LIBS", KP_KERNEL_TIMER_PATH, false);
     setenv("KOKKOS_TOOLS_TIMER_JSON", "true", false);
 
-    Kokkos::ScopeGuard kokkos_scope(argc, argv);
-    ddc::ScopeGuard ddc_scope(argc, argv);
-
     PC_tree_t conf_collision = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
     PDI_init(conf_pdi);
 
+    Kokkos::ScopeGuard kokkos_scope(argc, argv);
+    ddc::ScopeGuard ddc_scope(argc, argv);
 
     // --------- INITIALISATION ---------
     // ---> Reading of the mesh configuration from input YAML file
@@ -83,17 +83,9 @@ int main(int argc, char** argv)
 
 
     // --------- OPERATOR INITIALISATION ---------
-    std::int8_t const collisions_interspecies
-            = PCpp_bool(conf_collision, ".CollisionsInfo.collisions_interspecies");
     // ---> Initialisation of the Collision operator
-    // nustar fixed to 1. => normalisation of time is equal to 1./nustar
-    double const nustar = 1.0;
-    // rg fixed to 1. => because already included in nustar
-    double const rg = 1.0;
-    // safety factor fixed to 1. => because already included in nustar
-    double const safety_factor = 1.0;
-    // B_norm is fixed to 1. => normalisation at the localisation of collisions
     double const B_norm = 1.0;
+
     // TODO: Simplify the construction of coeff_intdmu and coeff_indmu as soon as the possibililty to define the quadrature coefficients directly on GPU is available
     DFieldVpar const coeff_intdvpar(
             simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
@@ -104,12 +96,7 @@ int main(int argc, char** argv)
             idxrange_spvparmu,
             coeff_intdmu.span_cview(),
             coeff_intdvpar.span_cview(),
-            nustar,
-            collisions_interspecies,
-            rg,
-            safety_factor,
             B_norm);
-
 
     // --------- TIME ITERATION ---------
     // ---> Reading of algorithm info from input YAML file
@@ -122,7 +109,11 @@ int main(int argc, char** argv)
 
     // ---> Reading of output info from input YAML file
     double const time_diag = PCpp_double(conf_collision, ".Output.time_diag");
-    int const nbstep_diag = int(time_diag / deltat);
+    double deltat_diag = deltat;
+    if (deltat == 0.) {
+        deltat_diag = time_diag / nbiter;
+    }
+    int const nbstep_diag = int(time_diag / deltat_diag);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
 
     // ---> Algorithm time loop
@@ -132,20 +123,22 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const start = steady_clock::now();
 
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
+
     int iter = 0;
-    for (; iter < nbiter; ++iter) {
+    for (; iter < nbiter + 1; ++iter) {
         double const time_iter = time_start + iter * deltat;
         cout << "iter = " << iter << " ; time_iter = " << time_iter << endl;
-
-        // Apply collision operator
-        collision_operator(allfdistribu, deltat);
-        auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
 
         // Write distribution function
         ddc::PdiEvent("write_fdistribu")
                 .with("iter", iter)
                 .and_with("time_saved", time_iter)
                 .and_with("fdistribu", allfdistribu_host);
+
+        // Apply collision operator
+        collision_operator(allfdistribu, deltat);
+        ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     }
 
     steady_clock::time_point const end = steady_clock::now();

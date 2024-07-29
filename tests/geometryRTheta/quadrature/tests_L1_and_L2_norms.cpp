@@ -124,8 +124,8 @@ void launch_tests(
             ddc::SplineSolver::LAPACK,
             IDimP>;
 
-    SplineRBuilder r_builder(ddc::select<IDimR>(builder.interpolation_domain()));
-    SplinePBuilder p_builder(ddc::select<IDimP>(builder.interpolation_domain()));
+    SplineRBuilder r_builder(ddc::select<IDimR>(grid));
+    SplinePBuilder p_builder(ddc::select<IDimP>(grid));
     // Test spline quadrature: ------------------------------------------------------------------------
     // Instantiate a quadrature with coefficients where we added the Jacobian determinant.
     device_t<DFieldRP> spline_quad_coeff

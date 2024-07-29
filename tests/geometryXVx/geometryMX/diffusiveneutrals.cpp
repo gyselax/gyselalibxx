@@ -205,13 +205,8 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
         double const diffusive_term(
                 normalization_coeff * kinsp_temperature_eq
                 / (neutral_mass * kinsp_density_eq * (charge_exchange_val + ionization_val)));
-        double const source_term(
-                1 / normalization_coeff
-                * (kinsp_density_eq * kinsp_density_eq * recombination_val
-                   - kinsp_density_eq * neutral_val * ionization_val));
         double const derivative_pred(
-                -advec_term * neutral_val_deriv + diffusive_term * neutral_val_deriv2
-                + source_term);
+                -advec_term * neutral_val_deriv + diffusive_term * neutral_val_deriv2);
 
         error_l1 += abs(derivative_pred - derivative_host(ispmx));
         max_derivative = abs(derivative_pred) > max_derivative ? derivative_pred : max_derivative;
