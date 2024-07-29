@@ -75,11 +75,11 @@ int main(int argc, char** argv)
     start_simulation = std::chrono::system_clock::now();
 
     // Build the mesh_rp for the space. ------------------------------------------------------------------
-    IDomainR const mesh_r = init_pseudo_uniform_spline_dependent_domain<
+    IDomainR const mesh_r = init_pseudo_uniform_spline_dependent_idx_range<
             IDimR,
             BSplinesR,
             SplineInterpPointsR>(conf_gyselalibxx, "r");
-    IDomainP const mesh_p = init_pseudo_uniform_spline_dependent_domain<
+    IDomainP const mesh_p = init_pseudo_uniform_spline_dependent_idx_range<
             IDimP,
             BSplinesP,
             SplineInterpPointsP>(conf_gyselalibxx, "p");
