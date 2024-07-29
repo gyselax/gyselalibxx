@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"dir_15ba7e3bcb16c7ed7b7b7c9810b42a25.html":[15,0,7,0],
 "dir_1768338d22a236895abd99fb8317b81f.html":[15,0,12,2],
 "dir_198f4eba1c2ed3c02ad3281d01a546ac.html":[15,0,16],
 "dir_1d94e9375779727dd62c0acfd18de170.html":[15,0,6,2,3],
@@ -61,7 +62,7 @@ var NAVTREEINDEX5 =
 "dir_eb7da54727e91e3ad0949acc1ce0f18c.html":[15,0,12],
 "dir_f9e4c94b0e65b435cbfb10d37b215fd7.html":[15,0,12,0],
 "dir_fff31245b39ef81c8e6b4b2456b9c284.html":[15,0,6,1],
-"directional__tag_8hpp_source.html":[15,0,18,2],
+"directional__tag_8hpp_source.html":[15,0,18,3],
 "discrete__mapping__to__cartesian_8hpp_source.html":[15,2,0,0,0,0,5],
 "discrete__subdomain_8hpp_source.html":[15,0,2,4],
 "docs_Adding_docs.html":[3],
@@ -234,7 +235,7 @@ var NAVTREEINDEX5 =
 "polynomial__evaluator_8hpp_source.html":[15,2,0,1,2],
 "predcorr__RK2_8hpp_source.html":[15,0,7,2,0],
 "predcorr__hybrid_8hpp_source.html":[15,0,6,7,1],
-"preprocessor_8hpp_source.html":[15,0,18,3],
+"preprocessor_8hpp_source.html":[15,0,18,4],
 "quadrature_8hpp_source.html":[15,0,15,2],
 "quadrature__coeffs__nd_8hpp.html":[15,0,15,3],
 "quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d":[15,0,15,3,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "rk4_8hpp_source.html":[15,0,17,5],
 "simpson__quadrature_8hpp_source.html":[15,0,15,4],
 "simulations.html":[8],
-"simulations_geometryRTheta.html":[8,0],
-"simulations_geometryRTheta_diocotron.html":[8,0,0]
+"simulations_geometryRTheta.html":[8,0]
 };

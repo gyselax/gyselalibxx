@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"simulations_geometryRTheta_diocotron.html":[8,0,0],
 "simulations_geometryRTheta_diocotron.html#autotoc_md21":[0],
 "simulations_geometryRTheta_diocotron.html#autotoc_md22":[1],
 "simulations_geometryRTheta_diocotron.html#autotoc_md23":[2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "structIDimY.html":[14,119],
 "structInterface.html":[14,130],
 "structInterface.html#a228de48739205ee30b047454ee3ca885":[14,130,0],
-"structInterface.html#a3372fd12bdacea5d50225f70da93bc17":[14,130,3],
-"structInterface.html#a3a4842da91c618bd2c2c0119cb4a30ab":[14,130,2]
+"structInterface.html#a3372fd12bdacea5d50225f70da93bc17":[14,130,3]
 };

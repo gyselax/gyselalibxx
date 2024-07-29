@@ -236,7 +236,8 @@ var NAVTREEINDEX4 =
 "crank__nicolson_8hpp_source.html":[15,0,17,0],
 "curvilinear2d__to__cartesian_8hpp_source.html":[15,2,0,0,0,0,3],
 "czarny__to__cartesian_8hpp_source.html":[15,2,0,0,0,0,4],
-"ddc__helper_8hpp_source.html":[15,0,18,1],
+"ddc__aliases_8hpp_source.html":[15,0,18,1],
+"ddc__helper_8hpp_source.html":[15,0,18,2],
 "deriv__details_8hpp_source.html":[15,0,2,0],
 "derivative__field_8hpp_source.html":[15,0,2,1],
 "derivative__field__common_8hpp_source.html":[15,0,2,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "dir_0b94a1bc260289a82ecb53162f2bb9d0.html":[15,0,4,1],
 "dir_115e60596e2d00727777ec90d6d12217.html":[15,0,14],
 "dir_11b58978920713630aec331a5d926557.html":[15,0,6,2,1],
-"dir_1565b715753ffeaa27b85f9d3e8ee903.html":[15,0,8,2],
-"dir_15ba7e3bcb16c7ed7b7b7c9810b42a25.html":[15,0,7,0]
+"dir_1565b715753ffeaa27b85f9d3e8ee903.html":[15,0,8,2]
 };

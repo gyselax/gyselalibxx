@@ -104,188 +104,189 @@ $(document).ready(function(){initNavTree('geometry5D_2geometry_2geometry_8hpp_so
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc_helper.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;species_info.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * @file geometry.hpp</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structTor1.html">   16</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structTor1.html">Tor1</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structTor1.html#a62028f8731a8a591e5b97e93bf0dffa0">   23</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structTor1.html#a62028f8731a8a591e5b97e93bf0dffa0">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structTor2.html">   28</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structTor2.html">Tor2</a></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structTor2.html#ace83f98401e5275f4164472205a202ba">   35</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structTor2.html#ace83f98401e5275f4164472205a202ba">PERIODIC</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structTor3.html">   40</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structTor3.html">Tor3</a></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="structTor3.html#a491f63f0705c1c71b52485fc172469f6">   47</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structTor3.html#a491f63f0705c1c71b52485fc172469f6">PERIODIC</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structVpar.html">   52</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structVpar.html">Vpar</a></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structVpar.html#a568128c66d38f66c0bf803d0580cd494">   59</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structVpar.html#a568128c66d38f66c0bf803d0580cd494">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="structMu.html">   64</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structMu.html">Mu</a></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="structMu.html#aafb51f3460f541dac823aabc632ee400">   71</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structMu.html#aafb51f3460f541dac823aabc632ee400">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">using</span> CoordTor1 = ddc::Coordinate&lt;Tor1&gt;;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">using</span> CoordTor2 = ddc::Coordinate&lt;Tor2&gt;;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">using</span> CoordTor3 = ddc::Coordinate&lt;Tor3&gt;;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">using</span> CoordTor3D = ddc::Coordinate&lt;Tor3, Tor2, Tor1&gt;;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">using</span> CoordVpar = ddc::Coordinate&lt;Vpar&gt;;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">using</span> CoordMu = ddc::Coordinate&lt;Mu&gt;;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">using</span> CoordV2D = ddc::Coordinate&lt;Mu, Vpar&gt;;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="structGridTor1.html">   83</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridTor1.html">GridTor1</a> : ddc::NonUniformPointSampling&lt;Tor1&gt;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="structGridTor2.html">   86</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridTor2.html">GridTor2</a> : ddc::NonUniformPointSampling&lt;Tor2&gt;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="structGridTor3.html">   89</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridTor3.html">GridTor3</a> : ddc::NonUniformPointSampling&lt;Tor3&gt;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;{</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;};</div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="structGridVpar.html">   92</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridVpar.html">GridVpar</a> : ddc::NonUniformPointSampling&lt;Vpar&gt;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;};</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="structGridMu.html">   95</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridMu.html">GridMu</a> : ddc::NonUniformPointSampling&lt;Mu&gt;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">using</span> IdxTor1 = ddc::DiscreteElement&lt;GridTor1&gt;;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">using</span> IdxTor2 = ddc::DiscreteElement&lt;GridTor2&gt;;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">using</span> IdxTor3 = ddc::DiscreteElement&lt;GridTor3&gt;;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">using</span> IdxVpar = ddc::DiscreteElement&lt;GridVpar&gt;;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">using</span> IdxMu = ddc::DiscreteElement&lt;GridMu&gt;;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">using</span> DVecTor1 = ddc::DiscreteVector&lt;GridTor1&gt;;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">using</span> DVecTor2 = ddc::DiscreteVector&lt;GridTor2&gt;;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">using</span> DVecTor3 = ddc::DiscreteVector&lt;GridTor3&gt;;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">using</span> DVecVpar = ddc::DiscreteVector&lt;GridVpar&gt;;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">using</span> DVecMu = ddc::DiscreteVector&lt;GridMu&gt;;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">using</span> DDomTor1 = ddc::DiscreteDomain&lt;GridTor1&gt;;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">using</span> DDomTor2 = ddc::DiscreteDomain&lt;GridTor2&gt;;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">using</span> DDomTor3 = ddc::DiscreteDomain&lt;GridTor3&gt;;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">using</span> DDomVpar = ddc::DiscreteDomain&lt;GridVpar&gt;;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">using</span> DDomMu = ddc::DiscreteDomain&lt;GridMu&gt;;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">using</span> DDomTorCS = ddc::DiscreteDomain&lt;GridTor2, GridTor1&gt;;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">using</span> DDomTor3D = ddc::DiscreteDomain&lt;GridTor3, GridTor2, GridTor1&gt;;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">using</span> DDomV2D = ddc::DiscreteDomain&lt;GridVpar, GridMu&gt;;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">using</span> DDomSpTor3DV2D = ddc::DiscreteDomain&lt;Species, GridTor3, GridTor2, GridTor1, GridVpar, GridMu&gt;;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">using</span> DDomSpTorCS = ddc::DiscreteDomain&lt;Species, GridTor2, GridTor1&gt;;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">using</span> FieldTor1 = device_t&lt;ddc::Chunk&lt;ElementType, DDomTor1&gt;&gt;;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">using</span> DFieldTor1 = FieldTor1&lt;double&gt;;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">using</span> FieldTor2 = device_t&lt;ddc::Chunk&lt;ElementType, DDomTor2&gt;&gt;;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keyword">using</span> DFieldTor2 = FieldTor2&lt;double&gt;;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keyword">using</span> FieldTor3 = device_t&lt;ddc::Chunk&lt;ElementType, DDomTor3&gt;&gt;;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">using</span> DFieldTor3 = FieldTor3&lt;double&gt;;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keyword">using</span> FieldVpar = device_t&lt;ddc::Chunk&lt;ElementType, DDomVpar&gt;&gt;;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keyword">using</span> DFieldVpar = FieldVpar&lt;double&gt;;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="keyword">using</span> FieldMu = device_t&lt;ddc::Chunk&lt;ElementType, DDomMu&gt;&gt;;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keyword">using</span> DFieldMu = FieldMu&lt;double&gt;;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keyword">using</span> FieldTorCS = device_t&lt;ddc::Chunk&lt;ElementType, DDomTorCS&gt;&gt;;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">using</span> DFieldTorCS = FieldTorCS&lt;double&gt;;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword">using</span> FieldTor3D = device_t&lt;ddc::Chunk&lt;ElementType, DDomTor3D&gt;&gt;;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keyword">using</span> DFieldTor3D = FieldTor3D&lt;double&gt;;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keyword">using</span> FieldSpTor3DV2D_host = host_t&lt;ddc::Chunk&lt;ElementType, DDomSpTor3DV2D&gt;&gt;;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="keyword">using</span> DFieldSpTor3DV2D_host = FieldSpTor3DV2D_host&lt;double&gt;;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">using</span> FieldSpTor3DV2D = device_t&lt;ddc::Chunk&lt;ElementType, DDomSpTor3DV2D&gt;&gt;;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keyword">using</span> DFieldSpTor3DV2D = FieldSpTor3DV2D&lt;double&gt;;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="keyword">using</span> FieldSpTorCS_host = host_t&lt;ddc::Chunk&lt;ElementType, DDomSpTorCS&gt;&gt;;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keyword">using</span> DFieldSpTorCS_host = FieldSpTorCS_host&lt;double&gt;;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="keyword">using</span> FieldSpTorCS = device_t&lt;ddc::Chunk&lt;ElementType, DDomSpTorCS&gt;&gt;;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="keyword">using</span> DFieldSpTorCS = FieldSpTorCS&lt;double&gt;;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keyword">using</span> SpanTorCS = device_t&lt;ddc::ChunkSpan&lt;ElementType, DDomTorCS&gt;&gt;;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="keyword">using</span> DSpanTorCS = SpanTorCS&lt;double&gt;;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keyword">using</span> SpanTor3D = device_t&lt;ddc::ChunkSpan&lt;ElementType, DDomTor3D&gt;&gt;;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keyword">using</span> DSpanTor3D = SpanTor3D&lt;double&gt;;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="keyword">using</span> SpanSpTor3DV2D = device_t&lt;ddc::ChunkSpan&lt;ElementType, DDomSpTor3DV2D&gt;&gt;;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keyword">using</span> DSpanSpTor3DV2D = SpanSpTor3DV2D&lt;double&gt;;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="keyword">using</span> ViewTor1 = device_t&lt;ddc::ChunkView&lt;ElementType const, DDomTor1&gt;&gt;;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keyword">using</span> DViewTor1 = ViewTor1&lt;double&gt;;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keyword">using</span> ViewTor2 = device_t&lt;ddc::ChunkView&lt;ElementType const, DDomTor2&gt;&gt;;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="keyword">using</span> DViewTor2 = ViewTor2&lt;double&gt;;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="keyword">using</span> ViewTor3 = device_t&lt;ddc::ChunkView&lt;ElementType const, DDomTor3&gt;&gt;;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="keyword">using</span> DViewTor3 = ViewTor3&lt;double&gt;;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="keyword">using</span> ViewVpar = device_t&lt;ddc::ChunkView&lt;ElementType const, DDomVpar&gt;&gt;;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="keyword">using</span> DViewVpar = ViewVpar&lt;double&gt;;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keyword">using</span> ViewMu = device_t&lt;ddc::ChunkView&lt;ElementType const, DDomMu&gt;&gt;;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">using</span> DViewMu = ViewMu&lt;double&gt;;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="keyword">using</span> ViewTorCS = device_t&lt;ddc::ChunkView&lt;ElementType const, DDomTorCS&gt;&gt;;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="keyword">using</span> DViewTorCS = ViewTorCS&lt;double&gt;;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">using</span> ViewTor3D = device_t&lt;ddc::ChunkView&lt;ElementType const, DDomTor3D&gt;&gt;;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="keyword">using</span> DViewTor3D = ViewTor3D&lt;double&gt;;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="keyword">using</span> ViewSpTor3DV2D = device_t&lt;ddc::ChunkView&lt;ElementType const, DDomSpTor3DV2D&gt;&gt;;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="keyword">using</span> DViewSpTor3DV2D = ViewSpTor3DV2D&lt;double&gt;;</div>
-<div class="ttc" id="astructGridMu_html"><div class="ttname"><a href="structGridMu.html">GridMu</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:96</div></div>
-<div class="ttc" id="astructGridTor1_html"><div class="ttname"><a href="structGridTor1.html">GridTor1</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:84</div></div>
-<div class="ttc" id="astructGridTor2_html"><div class="ttname"><a href="structGridTor2.html">GridTor2</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:87</div></div>
-<div class="ttc" id="astructGridTor3_html"><div class="ttname"><a href="structGridTor3.html">GridTor3</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:90</div></div>
-<div class="ttc" id="astructGridVpar_html"><div class="ttname"><a href="structGridVpar.html">GridVpar</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:93</div></div>
-<div class="ttc" id="astructMu_html"><div class="ttname"><a href="structMu.html">Mu</a></div><div class="ttdoc">Define non periodic magnetic momentum .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:65</div></div>
-<div class="ttc" id="astructMu_html_aafb51f3460f541dac823aabc632ee400"><div class="ttname"><a href="structMu.html#aafb51f3460f541dac823aabc632ee400">Mu::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the magnetic momentum.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:71</div></div>
-<div class="ttc" id="astructTor1_html"><div class="ttname"><a href="structTor1.html">Tor1</a></div><div class="ttdoc">Define non periodic radial dimension .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:17</div></div>
-<div class="ttc" id="astructTor1_html_a62028f8731a8a591e5b97e93bf0dffa0"><div class="ttname"><a href="structTor1.html#a62028f8731a8a591e5b97e93bf0dffa0">Tor1::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the radial dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:23</div></div>
-<div class="ttc" id="astructTor2_html"><div class="ttname"><a href="structTor2.html">Tor2</a></div><div class="ttdoc">Define periodic poloidal dimension .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:29</div></div>
-<div class="ttc" id="astructTor2_html_ace83f98401e5275f4164472205a202ba"><div class="ttname"><a href="structTor2.html#ace83f98401e5275f4164472205a202ba">Tor2::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the poloidal dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:35</div></div>
-<div class="ttc" id="astructTor3_html"><div class="ttname"><a href="structTor3.html">Tor3</a></div><div class="ttdoc">Define periodic toroidal dimension .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:41</div></div>
-<div class="ttc" id="astructTor3_html_a491f63f0705c1c71b52485fc172469f6"><div class="ttname"><a href="structTor3.html#a491f63f0705c1c71b52485fc172469f6">Tor3::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the toroidal dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:47</div></div>
-<div class="ttc" id="astructVpar_html"><div class="ttname"><a href="structVpar.html">Vpar</a></div><div class="ttdoc">Define non periodic parallel velocity .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:53</div></div>
-<div class="ttc" id="astructVpar_html_a568128c66d38f66c0bf803d0580cd494"><div class="ttname"><a href="structVpar.html#a568128c66d38f66c0bf803d0580cd494">Vpar::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the parallel velocity.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:59</div></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc_helper.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;species_info.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * @file geometry.hpp</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structTor1.html">   17</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structTor1.html">Tor1</a></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structTor1.html#a62028f8731a8a591e5b97e93bf0dffa0">   24</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structTor1.html#a62028f8731a8a591e5b97e93bf0dffa0">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structTor2.html">   29</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structTor2.html">Tor2</a></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structTor2.html#ace83f98401e5275f4164472205a202ba">   36</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structTor2.html#ace83f98401e5275f4164472205a202ba">PERIODIC</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structTor3.html">   41</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structTor3.html">Tor3</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="structTor3.html#a491f63f0705c1c71b52485fc172469f6">   48</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structTor3.html#a491f63f0705c1c71b52485fc172469f6">PERIODIC</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="structVpar.html">   53</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structVpar.html">Vpar</a></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="structVpar.html#a568128c66d38f66c0bf803d0580cd494">   60</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structVpar.html#a568128c66d38f66c0bf803d0580cd494">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="structMu.html">   65</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structMu.html">Mu</a></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="structMu.html#aafb51f3460f541dac823aabc632ee400">   72</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structMu.html#aafb51f3460f541dac823aabc632ee400">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">using</span> CoordTor1 = Coord&lt;Tor1&gt;;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">using</span> CoordTor2 = Coord&lt;Tor2&gt;;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">using</span> CoordTor3 = Coord&lt;Tor3&gt;;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">using</span> CoordTor3D = Coord&lt;Tor3, Tor2, Tor1&gt;;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">using</span> CoordVpar = Coord&lt;Vpar&gt;;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">using</span> CoordMu = Coord&lt;Mu&gt;;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">using</span> CoordV2D = Coord&lt;Mu, Vpar&gt;;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="structGridTor1.html">   84</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridTor1.html">GridTor1</a> : NonUniformGridBase&lt;Tor1&gt;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;{</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="structGridTor2.html">   87</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridTor2.html">GridTor2</a> : NonUniformGridBase&lt;Tor2&gt;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="structGridTor3.html">   90</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridTor3.html">GridTor3</a> : NonUniformGridBase&lt;Tor3&gt;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;{</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;};</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="structGridVpar.html">   93</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridVpar.html">GridVpar</a> : NonUniformGridBase&lt;Vpar&gt;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="structGridMu.html">   96</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridMu.html">GridMu</a> : NonUniformGridBase&lt;Mu&gt;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;};</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">using</span> IdxTor1 = Idx&lt;GridTor1&gt;;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">using</span> IdxTor2 = Idx&lt;GridTor2&gt;;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">using</span> IdxTor3 = Idx&lt;GridTor3&gt;;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">using</span> IdxVpar = Idx&lt;GridVpar&gt;;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">using</span> IdxMu = Idx&lt;GridMu&gt;;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">using</span> IdxStepTor1 = IdxStep&lt;GridTor1&gt;;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">using</span> IdxStepTor2 = IdxStep&lt;GridTor2&gt;;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">using</span> IdxStepTor3 = IdxStep&lt;GridTor3&gt;;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">using</span> IdxStepVpar = IdxStep&lt;GridVpar&gt;;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">using</span> IdxStepMu = IdxStep&lt;GridMu&gt;;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">using</span> IdxRangeTor1 = IdxRange&lt;GridTor1&gt;;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">using</span> IdxRangeTor2 = IdxRange&lt;GridTor2&gt;;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">using</span> IdxRangeTor3 = IdxRange&lt;GridTor3&gt;;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">using</span> IdxRangeVpar = IdxRange&lt;GridVpar&gt;;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">using</span> IdxRangeMu = IdxRange&lt;GridMu&gt;;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">using</span> IdxRangeTorCS = IdxRange&lt;GridTor2, GridTor1&gt;;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">using</span> IdxRangeTor3D = IdxRange&lt;GridTor3, GridTor2, GridTor1&gt;;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">using</span> IdxRangeV2D = IdxRange&lt;GridVpar, GridMu&gt;;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">using</span> IdxRangeSpTor3DV2D = IdxRange&lt;Species, GridTor3, GridTor2, GridTor1, GridVpar, GridMu&gt;;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">using</span> IdxRangeSpTorCS = IdxRange&lt;Species, GridTor2, GridTor1&gt;;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">using</span> FieldMemTor1 = FieldMem&lt;ElementType, IdxRangeTor1&gt;;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">using</span> DFieldMemTor1 = FieldMemTor1&lt;double&gt;;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keyword">using</span> FieldMemTor2 = FieldMem&lt;ElementType, IdxRangeTor2&gt;;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">using</span> DFieldMemTor2 = FieldMemTor2&lt;double&gt;;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">using</span> FieldMemTor3 = FieldMem&lt;ElementType, IdxRangeTor3&gt;;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keyword">using</span> DFieldMemTor3 = FieldMemTor3&lt;double&gt;;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keyword">using</span> FieldMemVpar = FieldMem&lt;ElementType, IdxRangeVpar&gt;;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keyword">using</span> DFieldMemVpar = FieldMemVpar&lt;double&gt;;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keyword">using</span> FieldMemMu = FieldMem&lt;ElementType, IdxRangeMu&gt;;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="keyword">using</span> DFieldMemMu = FieldMemMu&lt;double&gt;;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">using</span> FieldMemTorCS = FieldMem&lt;ElementType, IdxRangeTorCS&gt;;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keyword">using</span> DFieldMemTorCS = FieldMemTorCS&lt;double&gt;;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keyword">using</span> FieldMemTor3D = FieldMem&lt;ElementType, IdxRangeTor3D&gt;;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="keyword">using</span> DFieldMemTor3D = FieldMemTor3D&lt;double&gt;;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="keyword">using</span> FieldSpTor3DV2D_host = host_t&lt;FieldMem&lt;ElementType, IdxRangeSpTor3DV2D&gt;&gt;;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keyword">using</span> DFieldSpTor3DV2D_host = FieldSpTor3DV2D_host&lt;double&gt;;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keyword">using</span> FieldMemSpTor3DV2D = FieldMem&lt;ElementType, IdxRangeSpTor3DV2D&gt;;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keyword">using</span> DFieldMemSpTor3DV2D = FieldMemSpTor3DV2D&lt;double&gt;;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keyword">using</span> FieldSpTorCS_host = host_t&lt;FieldMem&lt;ElementType, IdxRangeSpTorCS&gt;&gt;;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keyword">using</span> DFieldSpTorCS_host = FieldSpTorCS_host&lt;double&gt;;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="keyword">using</span> FieldMemSpTorCS = FieldMem&lt;ElementType, IdxRangeSpTorCS&gt;;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keyword">using</span> DFieldMemSpTorCS = FieldMemSpTorCS&lt;double&gt;;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="keyword">using</span> FieldTorCS = Field&lt;ElementType, IdxRangeTorCS&gt;;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="keyword">using</span> DFieldTorCS = FieldTorCS&lt;double&gt;;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keyword">using</span> FieldTor3D = Field&lt;ElementType, IdxRangeTor3D&gt;;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="keyword">using</span> DFieldTor3D = FieldTor3D&lt;double&gt;;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keyword">using</span> FieldSpTor3DV2D = Field&lt;ElementType, IdxRangeSpTor3DV2D&gt;;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keyword">using</span> DFieldSpTor3DV2D = FieldSpTor3DV2D&lt;double&gt;;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keyword">using</span> ConstFieldTor1 = ConstField&lt;ElementType const, IdxRangeTor1&gt;;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="keyword">using</span> DConstFieldTor1 = ConstFieldTor1&lt;double&gt;;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="keyword">using</span> ConstFieldTor2 = ConstField&lt;ElementType const, IdxRangeTor2&gt;;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keyword">using</span> DConstFieldTor2 = ConstFieldTor2&lt;double&gt;;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="keyword">using</span> ConstFieldTor3 = ConstField&lt;ElementType const, IdxRangeTor3&gt;;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="keyword">using</span> DConstFieldTor3 = ConstFieldTor3&lt;double&gt;;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="keyword">using</span> ConstFieldVpar = ConstField&lt;ElementType const, IdxRangeVpar&gt;;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">using</span> DConstFieldVpar = ConstFieldVpar&lt;double&gt;;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">using</span> ConstFieldMu = ConstField&lt;ElementType const, IdxRangeMu&gt;;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keyword">using</span> DConstFieldMu = ConstFieldMu&lt;double&gt;;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="keyword">using</span> ConstFieldTorCS = ConstField&lt;ElementType const, IdxRangeTorCS&gt;;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="keyword">using</span> DConstFieldTorCS = ConstFieldTorCS&lt;double&gt;;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="keyword">using</span> ConstFieldTor3D = ConstField&lt;ElementType const, IdxRangeTor3D&gt;;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="keyword">using</span> DConstFieldTor3D = ConstFieldTor3D&lt;double&gt;;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="keyword">using</span> ConstFieldSpTor3DV2D = ConstField&lt;ElementType const, IdxRangeSpTor3DV2D&gt;;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="keyword">using</span> DConstFieldSpTor3DV2D = ConstFieldSpTor3DV2D&lt;double&gt;;</div>
+<div class="ttc" id="astructGridMu_html"><div class="ttname"><a href="structGridMu.html">GridMu</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:97</div></div>
+<div class="ttc" id="astructGridTor1_html"><div class="ttname"><a href="structGridTor1.html">GridTor1</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:85</div></div>
+<div class="ttc" id="astructGridTor2_html"><div class="ttname"><a href="structGridTor2.html">GridTor2</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:88</div></div>
+<div class="ttc" id="astructGridTor3_html"><div class="ttname"><a href="structGridTor3.html">GridTor3</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:91</div></div>
+<div class="ttc" id="astructGridVpar_html"><div class="ttname"><a href="structGridVpar.html">GridVpar</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:94</div></div>
+<div class="ttc" id="astructMu_html"><div class="ttname"><a href="structMu.html">Mu</a></div><div class="ttdoc">Define non periodic magnetic momentum .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:66</div></div>
+<div class="ttc" id="astructMu_html_aafb51f3460f541dac823aabc632ee400"><div class="ttname"><a href="structMu.html#aafb51f3460f541dac823aabc632ee400">Mu::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the magnetic momentum.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:72</div></div>
+<div class="ttc" id="astructTor1_html"><div class="ttname"><a href="structTor1.html">Tor1</a></div><div class="ttdoc">Define non periodic radial dimension .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:18</div></div>
+<div class="ttc" id="astructTor1_html_a62028f8731a8a591e5b97e93bf0dffa0"><div class="ttname"><a href="structTor1.html#a62028f8731a8a591e5b97e93bf0dffa0">Tor1::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the radial dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:24</div></div>
+<div class="ttc" id="astructTor2_html"><div class="ttname"><a href="structTor2.html">Tor2</a></div><div class="ttdoc">Define periodic poloidal dimension .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:30</div></div>
+<div class="ttc" id="astructTor2_html_ace83f98401e5275f4164472205a202ba"><div class="ttname"><a href="structTor2.html#ace83f98401e5275f4164472205a202ba">Tor2::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the poloidal dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:36</div></div>
+<div class="ttc" id="astructTor3_html"><div class="ttname"><a href="structTor3.html">Tor3</a></div><div class="ttdoc">Define periodic toroidal dimension .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:42</div></div>
+<div class="ttc" id="astructTor3_html_a491f63f0705c1c71b52485fc172469f6"><div class="ttname"><a href="structTor3.html#a491f63f0705c1c71b52485fc172469f6">Tor3::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the toroidal dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:48</div></div>
+<div class="ttc" id="astructVpar_html"><div class="ttname"><a href="structVpar.html">Vpar</a></div><div class="ttdoc">Define non periodic parallel velocity .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:54</div></div>
+<div class="ttc" id="astructVpar_html_a568128c66d38f66c0bf803d0580cd494"><div class="ttname"><a href="structVpar.html#a568128c66d38f66c0bf803d0580cd494">Vpar::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the parallel velocity.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:60</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
