@@ -96,13 +96,15 @@ private:
 
 
     // Interpolators:
-    using FunctionPreallocatableInterpolatorType
-            = interpolator_on_domain_t<IPreallocatableInterpolator, IDimInterest, FunctionDomain>;
+    using FunctionPreallocatableInterpolatorType = interpolator_on_idx_range_t<
+            IPreallocatableInterpolator,
+            IDimInterest,
+            FunctionDomain>;
     using FunctionInterpolatorType
-            = interpolator_on_domain_t<IInterpolator, IDimInterest, FunctionDomain>;
+            = interpolator_on_idx_range_t<IInterpolator, IDimInterest, FunctionDomain>;
 
     // Type for the derivatives of the function
-    using FunctionDerivDomain = typename FunctionInterpolatorType::batched_derivs_domain_type;
+    using FunctionDerivDomain = typename FunctionInterpolatorType::batched_derivs_idx_range_type;
     using FunctionDerivChunk = device_t<ddc::Chunk<double, FunctionDerivDomain>>;
 
     FunctionPreallocatableInterpolatorType const& m_function_interpolator;
@@ -191,9 +193,9 @@ public:
 
         // Build derivatives on boundaries and fill with zeros....................................
         FunctionDerivChunk function_derivatives_min(
-                m_function_interpolator.batched_derivs_domain_xmin(function_dom));
+                m_function_interpolator.batched_derivs_idx_range_xmin(function_dom));
         FunctionDerivChunk function_derivatives_max(
-                m_function_interpolator.batched_derivs_domain_xmax(function_dom));
+                m_function_interpolator.batched_derivs_idx_range_xmax(function_dom));
         ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);
         ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);
 

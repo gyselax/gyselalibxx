@@ -23,11 +23,11 @@ class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, DDimV>
     using CDimV = typename DDimV::continuous_dimension_type;
 
 private:
-    using PreallocatableInterpolatorType = interpolator_on_domain_t<
+    using PreallocatableInterpolatorType = interpolator_on_idx_range_t<
             IPreallocatableInterpolator,
             DDimV,
             ddc::cartesian_prod_t<typename Geometry::SpatialDDom, typename Geometry::VelocityDDom>>;
-    using InterpolatorType = interpolator_on_domain_t<
+    using InterpolatorType = interpolator_on_idx_range_t<
             IInterpolator,
             DDimV,
             ddc::cartesian_prod_t<typename Geometry::SpatialDDom, typename Geometry::VelocityDDom>>;
@@ -62,11 +62,11 @@ public:
         ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
         ddc::DiscreteDomain<Species> const sp_dom = ddc::select<Species>(dom);
 
-        device_t<ddc::Chunk<double, typename InterpolatorType::batched_derivs_domain_type>>
-                derivs_min(m_interpolator_v.batched_derivs_domain_xmin(
+        device_t<ddc::Chunk<double, typename InterpolatorType::batched_derivs_idx_range_type>>
+                derivs_min(m_interpolator_v.batched_derivs_idx_range_xmin(
                         ddc::remove_dims_of<Species>(dom)));
-        device_t<ddc::Chunk<double, typename InterpolatorType::batched_derivs_domain_type>>
-                derivs_max(m_interpolator_v.batched_derivs_domain_xmax(
+        device_t<ddc::Chunk<double, typename InterpolatorType::batched_derivs_idx_range_type>>
+                derivs_max(m_interpolator_v.batched_derivs_idx_range_xmax(
                         ddc::remove_dims_of<Species>(dom)));
         ddc::parallel_fill(derivs_min, 0.);
         ddc::parallel_fill(derivs_max, 0.);

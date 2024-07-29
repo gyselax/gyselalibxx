@@ -79,11 +79,11 @@ int main(int argc, char** argv)
     double const dt(PCpp_double(conf_gyselalibxx, ".Time.delta_t"));
     double const final_T(PCpp_double(conf_gyselalibxx, ".Time.final_T"));
 
-    IDomainR const mesh_r = init_pseudo_uniform_spline_dependent_idx_range<
+    IDomainR const mesh_r = init_pseudo_uniform_spline_dependent_domain<
             IDimR,
             BSplinesR,
             SplineInterpPointsR>(conf_gyselalibxx, "r");
-    IDomainP const mesh_p = init_pseudo_uniform_spline_dependent_idx_range<
+    IDomainP const mesh_p = init_pseudo_uniform_spline_dependent_domain<
             IDimP,
             BSplinesP,
             SplineInterpPointsP>(conf_gyselalibxx, "p");

@@ -25,11 +25,11 @@ class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, DDimX>
     using CDimV = typename DDimV::continuous_dimension_type;
 
 private:
-    using PreallocatableInterpolatorType = interpolator_on_domain_t<
+    using PreallocatableInterpolatorType = interpolator_on_idx_range_t<
             IPreallocatableInterpolator,
             DDimX,
             ddc::cartesian_prod_t<typename Geometry::SpatialDDom, typename Geometry::VelocityDDom>>;
-    using InterpolatorType = interpolator_on_domain_t<
+    using InterpolatorType = interpolator_on_idx_range_t<
             IInterpolator,
             DDimX,
             ddc::cartesian_prod_t<typename Geometry::SpatialDDom, typename Geometry::VelocityDDom>>;
