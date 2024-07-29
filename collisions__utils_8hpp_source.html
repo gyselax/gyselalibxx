@@ -224,7 +224,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; dvDcoll)</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;{</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    host_t&lt;DFieldVx&gt; <span class="keyword">const</span> quadrature_coeffs_host(</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <a class="code" href="trapezoid__quadrature_8hpp.html#a9b37968b97363d75ad6401309016c8f9">trapezoid_quadrature_coefficients</a>(ddc::get_domain&lt;IDimVx&gt;(allfdistribu)));</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <a class="code" href="trapezoid__quadrature_8hpp.html#a63e347081ac7ebf1c3542b42b25e44ad">trapezoid_quadrature_coefficients</a>(ddc::get_domain&lt;IDimVx&gt;(allfdistribu)));</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">auto</span> quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            quadrature_coeffs_host.span_view());</div>
@@ -342,7 +342,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:89</div></div>
 <div class="ttc" id="astructSpecies_html"><div class="ttname"><a href="structSpecies.html">Species</a></div><div class="ttdef"><b>Definition:</b> species_info.hpp:142</div></div>
 <div class="ttc" id="atrapezoid__quadrature_8hpp_html"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a></div><div class="ttdoc">File providing quadrature coefficients via the trapezoidal method.</div></div>
-<div class="ttc" id="atrapezoid__quadrature_8hpp_html_a9b37968b97363d75ad6401309016c8f9"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#a9b37968b97363d75ad6401309016c8f9">trapezoid_quadrature_coefficients</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; ODims... &gt; &gt; trapezoid_quadrature_coefficients(ddc::DiscreteDomain&lt; ODims... &gt; const &amp;domain)</div><div class="ttdoc">Get the trapezoid coefficients in ND.</div><div class="ttdef"><b>Definition:</b> trapezoid_quadrature.hpp:54</div></div>
+<div class="ttc" id="atrapezoid__quadrature_8hpp_html_a63e347081ac7ebf1c3542b42b25e44ad"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#a63e347081ac7ebf1c3542b42b25e44ad">trapezoid_quadrature_coefficients</a></div><div class="ttdeci">host_t&lt; FieldMem&lt; double, IdxRange&lt; ODims... &gt; &gt; &gt; trapezoid_quadrature_coefficients(IdxRange&lt; ODims... &gt; const &amp;idx_range)</div><div class="ttdoc">Get the trapezoid coefficients in ND.</div><div class="ttdef"><b>Definition:</b> trapezoid_quadrature.hpp:53</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

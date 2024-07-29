@@ -112,36 +112,37 @@ $(document).ready(function(){initNavTree('neumann__spline__quadrature_8hpp.html'
 <code>#include &lt;ddc/ddc.hpp&gt;</code><br />
 <code>#include &lt;ddc/kernels/splines.hpp&gt;</code><br />
 <code>#include &lt;sll/matrix.hpp&gt;</code><br />
+<code>#include &quot;ddc_aliases.hpp&quot;</code><br />
 </div>
 <p><a href="neumann__spline__quadrature_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa424bfd56a3d732e3e796e60125ca31d"><td class="memTemplParams" colspan="2">template&lt;class IDim , class SplineBuilder &gt; </td></tr>
-<tr class="memitem:aa424bfd56a3d732e3e796e60125ca31d"><td class="memTemplItemLeft" align="right" valign="top">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d">neumann_spline_quadrature_coefficients_1d</a> (ddc::DiscreteDomain&lt; IDim &gt; const &amp;domain, SplineBuilder const &amp;builder)</td></tr>
-<tr class="memdesc:aa424bfd56a3d732e3e796e60125ca31d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in 1D.  <a href="neumann__spline__quadrature_8hpp.html#aa424bfd56a3d732e3e796e60125ca31d">More...</a><br /></td></tr>
-<tr class="separator:aa424bfd56a3d732e3e796e60125ca31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a145fedb902adc371aa405919d8f4bdb4"><td class="memTemplParams" colspan="2">template&lt;class... DDims, class... SplineBuilders&gt; </td></tr>
-<tr class="memitem:a145fedb902adc371aa405919d8f4bdb4"><td class="memTemplItemLeft" align="right" valign="top">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims... &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="neumann__spline__quadrature_8hpp.html#a145fedb902adc371aa405919d8f4bdb4">neumann_spline_quadrature_coefficients</a> (ddc::DiscreteDomain&lt; DDims... &gt; const &amp;domain, SplineBuilders const &amp;... builders)</td></tr>
-<tr class="memdesc:a145fedb902adc371aa405919d8f4bdb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.  <a href="neumann__spline__quadrature_8hpp.html#a145fedb902adc371aa405919d8f4bdb4">More...</a><br /></td></tr>
-<tr class="separator:a145fedb902adc371aa405919d8f4bdb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76519191c7b9a4df9bbf3da7e0cb025f"><td class="memTemplParams" colspan="2">template&lt;class Grid , class SplineBuilder &gt; </td></tr>
+<tr class="memitem:a76519191c7b9a4df9bbf3da7e0cb025f"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; FieldMem&lt; double, IdxRange&lt; Grid &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="neumann__spline__quadrature_8hpp.html#a76519191c7b9a4df9bbf3da7e0cb025f">neumann_spline_quadrature_coefficients_1d</a> (IdxRange&lt; Grid &gt; const &amp;idx_range, SplineBuilder const &amp;builder)</td></tr>
+<tr class="memdesc:a76519191c7b9a4df9bbf3da7e0cb025f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in 1D.  <a href="neumann__spline__quadrature_8hpp.html#a76519191c7b9a4df9bbf3da7e0cb025f">More...</a><br /></td></tr>
+<tr class="separator:a76519191c7b9a4df9bbf3da7e0cb025f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2329a7e23fe06ca7089ac9748e3b4d0"><td class="memTemplParams" colspan="2">template&lt;class... DDims, class... SplineBuilders&gt; </td></tr>
+<tr class="memitem:ae2329a7e23fe06ca7089ac9748e3b4d0"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; FieldMem&lt; double, IdxRange&lt; DDims... &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="neumann__spline__quadrature_8hpp.html#ae2329a7e23fe06ca7089ac9748e3b4d0">neumann_spline_quadrature_coefficients</a> (IdxRange&lt; DDims... &gt; const &amp;idx_range, SplineBuilders const &amp;... builders)</td></tr>
+<tr class="memdesc:ae2329a7e23fe06ca7089ac9748e3b4d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.  <a href="neumann__spline__quadrature_8hpp.html#ae2329a7e23fe06ca7089ac9748e3b4d0">More...</a><br /></td></tr>
+<tr class="separator:ae2329a7e23fe06ca7089ac9748e3b4d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File providing quadrature coefficients via a spline quadrature. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aa424bfd56a3d732e3e796e60125ca31d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa424bfd56a3d732e3e796e60125ca31d">&#9670;&nbsp;</a></span>neumann_spline_quadrature_coefficients_1d()</h2>
+<a id="a76519191c7b9a4df9bbf3da7e0cb025f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76519191c7b9a4df9bbf3da7e0cb025f">&#9670;&nbsp;</a></span>neumann_spline_quadrature_coefficients_1d()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class IDim , class SplineBuilder &gt; </div>
+template&lt;class Grid , class SplineBuilder &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt; &gt; neumann_spline_quadrature_coefficients_1d </td>
+          <td class="memname">host_t&lt;FieldMem&lt;double, IdxRange&lt;Grid&gt; &gt; &gt; neumann_spline_quadrature_coefficients_1d </td>
           <td>(</td>
-          <td class="paramtype">ddc::DiscreteDomain&lt; IDim &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>domain</em>, </td>
+          <td class="paramtype">IdxRange&lt; Grid &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>idx_range</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -162,17 +163,17 @@ template&lt;class IDim , class SplineBuilder &gt; </div>
 <p>[1] Non-Uniform Numerical Schemes for the Modelling of Turbulence in the 5D GYSELA Code Emily Bourne, December 2022-</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">domain</td><td>The domain on which the splines quadrature will be carried out. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The index range on which the splines quadrature will be carried out. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">builder</td><td>The spline builder used for the quadrature coefficients.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The quadrature coefficients for the method defined on the provided domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The quadrature coefficients for the method defined on the provided index range. </dd></dl>
 
 </div>
 </div>
-<a id="a145fedb902adc371aa405919d8f4bdb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a145fedb902adc371aa405919d8f4bdb4">&#9670;&nbsp;</a></span>neumann_spline_quadrature_coefficients()</h2>
+<a id="ae2329a7e23fe06ca7089ac9748e3b4d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2329a7e23fe06ca7089ac9748e3b4d0">&#9670;&nbsp;</a></span>neumann_spline_quadrature_coefficients()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -180,10 +181,10 @@ template&lt;class IDim , class SplineBuilder &gt; </div>
 template&lt;class... DDims, class... SplineBuilders&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt; &gt; neumann_spline_quadrature_coefficients </td>
+          <td class="memname">host_t&lt;FieldMem&lt;double, IdxRange&lt;DDims...&gt; &gt; &gt; neumann_spline_quadrature_coefficients </td>
           <td>(</td>
-          <td class="paramtype">ddc::DiscreteDomain&lt; DDims... &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>domain</em>, </td>
+          <td class="paramtype">IdxRange&lt; DDims... &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>idx_range</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -203,7 +204,7 @@ template&lt;class... DDims, class... SplineBuilders&gt; </div>
 <p>This function calculates the quadrature coefficients which define a quadrature equivalent to calculating and integrating a spline approximation of a function. The spline approximation would be calculated with homogeneous Neumann boundary conditions.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">domain</td><td>The domain on which the coefficients will be defined. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The index range on which the coefficients will be defined. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">builders</td><td>The spline builder used for the quadrature coefficients in the different dimensions.</td></tr>
   </table>
   </dd>

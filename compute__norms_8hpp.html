@@ -248,7 +248,7 @@ template&lt;class Mapping , class... IDim&gt; </div>
 <p class="startli">\( \int_{\Omega_{\text{cart}}} f(x,y) dxdy = \int_{\Omega} f(r,\theta) |det(J(r,\theta))| drd\theta \simeq \sum_{i,j} [q_{i,j}| det(J(r_i,\theta_j))|] f_{ij}\)</p>
 </li>
 </ul>
-<p>This function uses rvalues. It means that coefficients is a temporary input parameter and it returns a temporary coefficient object. The <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete domain.">Quadrature</a> object can only be instantiate with rvalues.</p>
+<p>This function uses rvalues. It means that coefficients is a temporary input parameter and it returns a temporary coefficient object. The <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete index range.">Quadrature</a> object can only be instantiate with rvalues.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping function from the logical domain \( (r,\theta) \) to the physical domain \( (x, y) \). </td></tr>

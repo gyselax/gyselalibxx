@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Quadrature&lt; QuadratureDomain, TotalDomain, MemorySpace &gt; Class Template Reference</title>
+<title>Gyselalib++: Quadrature&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,56 +103,56 @@ $(document).ready(function(){initNavTree('classQuadrature.html',''); initResizab
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classQuadrature-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Quadrature&lt; QuadratureDomain, TotalDomain, MemorySpace &gt; Class Template Reference</div>  </div>
+<div class="title">Quadrature&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A class providing an operator for integrating functions defined on a discrete domain.  
+<p>A class providing an operator for integrating functions defined on a discrete index range.  
  <a href="classQuadrature.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7914430fca202708cbb38adb9746f28b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a7914430fca202708cbb38adb9746f28b">Quadrature</a> (QuadChunkView coeffs)</td></tr>
-<tr class="memdesc:a7914430fca202708cbb38adb9746f28b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete domain.">Quadrature</a> object.  <a href="classQuadrature.html#a7914430fca202708cbb38adb9746f28b">More...</a><br /></td></tr>
-<tr class="separator:a7914430fca202708cbb38adb9746f28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79c65b349c38db6179f269fc9e37371a"><td class="memTemplParams" colspan="2">template&lt;class ExecutionSpace , class IntegratorFunction &gt; </td></tr>
-<tr class="memitem:a79c65b349c38db6179f269fc9e37371a"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a79c65b349c38db6179f269fc9e37371a">operator()</a> (ExecutionSpace exec_space, IntegratorFunction integrated_function) const</td></tr>
-<tr class="memdesc:a79c65b349c38db6179f269fc9e37371a"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete domain.  <a href="classQuadrature.html#a79c65b349c38db6179f269fc9e37371a">More...</a><br /></td></tr>
-<tr class="separator:a79c65b349c38db6179f269fc9e37371a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7919d9fe623cc438c21c426f061f8205"><td class="memTemplParams" colspan="2">template&lt;class ExecutionSpace , class BatchDomain , class IntegratorFunction &gt; </td></tr>
-<tr class="memitem:a7919d9fe623cc438c21c426f061f8205"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a7919d9fe623cc438c21c426f061f8205">operator()</a> (ExecutionSpace exec_space, ddc::ChunkSpan&lt; double, BatchDomain, std::experimental::layout_right, MemorySpace &gt; const result, IntegratorFunction integrated_function) const</td></tr>
-<tr class="memdesc:a7919d9fe623cc438c21c426f061f8205"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions.  <a href="classQuadrature.html#a7919d9fe623cc438c21c426f061f8205">More...</a><br /></td></tr>
-<tr class="separator:a7919d9fe623cc438c21c426f061f8205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af25a40273479e6abb60f4a1ada034d38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQuadrature.html#af25a40273479e6abb60f4a1ada034d38">Quadrature</a> (QuadConstField coeffs)</td></tr>
+<tr class="memdesc:af25a40273479e6abb60f4a1ada034d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete index range.">Quadrature</a> object.  <a href="classQuadrature.html#af25a40273479e6abb60f4a1ada034d38">More...</a><br /></td></tr>
+<tr class="separator:af25a40273479e6abb60f4a1ada034d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a648c66e4caed6c0866269d59cbc5ef"><td class="memTemplParams" colspan="2">template&lt;class ExecutionSpace , class IntegratorFunction &gt; </td></tr>
+<tr class="memitem:a8a648c66e4caed6c0866269d59cbc5ef"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a8a648c66e4caed6c0866269d59cbc5ef">operator()</a> (ExecutionSpace exec_space, IntegratorFunction integrated_function) const</td></tr>
+<tr class="memdesc:a8a648c66e4caed6c0866269d59cbc5ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete index range.  <a href="classQuadrature.html#a8a648c66e4caed6c0866269d59cbc5ef">More...</a><br /></td></tr>
+<tr class="separator:a8a648c66e4caed6c0866269d59cbc5ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b67590831fc07948151ca0094a252c7"><td class="memTemplParams" colspan="2">template&lt;class ExecutionSpace , class BatchIdxRange , class IntegratorFunction &gt; </td></tr>
+<tr class="memitem:a2b67590831fc07948151ca0094a252c7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a2b67590831fc07948151ca0094a252c7">operator()</a> (ExecutionSpace exec_space, Field&lt; double, BatchIdxRange, std::experimental::layout_right, MemorySpace &gt; const result, IntegratorFunction integrated_function) const</td></tr>
+<tr class="memdesc:a2b67590831fc07948151ca0094a252c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions.  <a href="classQuadrature.html#a2b67590831fc07948151ca0094a252c7">More...</a><br /></td></tr>
+<tr class="separator:a2b67590831fc07948151ca0094a252c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class QuadratureDomain, class TotalDomain = QuadratureDomain, class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space&gt;<br />
-class Quadrature&lt; QuadratureDomain, TotalDomain, MemorySpace &gt;</h3>
+<div class="textblock"><h3>template&lt;class QuadratureIdxRange, class TotalIdxRange = QuadratureIdxRange, class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space&gt;<br />
+class Quadrature&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt;</h3>
 
-<p>A class providing an operator for integrating functions defined on a discrete domain. </p>
+<p>A class providing an operator for integrating functions defined on a discrete index range. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">QuadratureDomain</td><td>The domain over which the function is integrated. </td></tr>
-    <tr><td class="paramname">TotalDomain</td><td>The domain of the chunk which can be passed to the operator(). This is the QuadratureDomain combined with any batch dimensions. If there are no batch dimensions then this argument does not need to be provided as by default it is equal to the QuadratureDomain. </td></tr>
+    <tr><td class="paramname">QuadratureIdxRange</td><td>The index range over which the function is integrated. </td></tr>
+    <tr><td class="paramname">TotalIdxRange</td><td>The index range of the chunk which can be passed to the operator(). This is the QuadratureIdxRange combined with any batch dimensions. If there are no batch dimensions then this argument does not need to be provided as by default it is equal to the QuadratureIdxRange. </td></tr>
     <tr><td class="paramname">MemorySpace</td><td>The memory space (cpu/gpu) where the quadrature coefficients are saved. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7914430fca202708cbb38adb9746f28b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7914430fca202708cbb38adb9746f28b">&#9670;&nbsp;</a></span>Quadrature()</h2>
+<a id="af25a40273479e6abb60f4a1ada034d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af25a40273479e6abb60f4a1ada034d38">&#9670;&nbsp;</a></span>Quadrature()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class QuadratureDomain , class TotalDomain  = QuadratureDomain, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
+template&lt;class QuadratureIdxRange , class TotalIdxRange  = QuadratureIdxRange, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classQuadrature.html">Quadrature</a>&lt; QuadratureDomain, TotalDomain, MemorySpace &gt;::<a class="el" href="classQuadrature.html">Quadrature</a> </td>
+          <td class="memname"><a class="el" href="classQuadrature.html">Quadrature</a>&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt;::<a class="el" href="classQuadrature.html">Quadrature</a> </td>
           <td>(</td>
-          <td class="paramtype">QuadChunkView&#160;</td>
+          <td class="paramtype">QuadConstField&#160;</td>
           <td class="paramname"><em>coeffs</em></td><td>)</td>
           <td></td>
         </tr>
@@ -164,7 +164,7 @@ template&lt;class QuadratureDomain , class TotalDomain  = QuadratureDomain, clas
 </table>
 </div><div class="memdoc">
 
-<p>Create a <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete domain.">Quadrature</a> object. </p>
+<p>Create a <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete index range.">Quadrature</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">coeffs</td><td>The coefficients of the quadrature. </td></tr>
@@ -175,13 +175,13 @@ template&lt;class QuadratureDomain , class TotalDomain  = QuadratureDomain, clas
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a79c65b349c38db6179f269fc9e37371a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79c65b349c38db6179f269fc9e37371a">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="a8a648c66e4caed6c0866269d59cbc5ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a648c66e4caed6c0866269d59cbc5ef">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class QuadratureDomain , class TotalDomain  = QuadratureDomain, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
+template&lt;class QuadratureIdxRange , class TotalIdxRange  = QuadratureIdxRange, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
 <div class="memtemplate">
 template&lt;class ExecutionSpace , class IntegratorFunction &gt; </div>
 <table class="mlabels">
@@ -189,7 +189,7 @@ template&lt;class ExecutionSpace , class IntegratorFunction &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classQuadrature.html">Quadrature</a>&lt; QuadratureDomain, TotalDomain, MemorySpace &gt;::operator() </td>
+          <td class="memname">double <a class="el" href="classQuadrature.html">Quadrature</a>&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">ExecutionSpace&#160;</td>
           <td class="paramname"><em>exec_space</em>, </td>
@@ -213,33 +213,33 @@ template&lt;class ExecutionSpace , class IntegratorFunction &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>An operator for calculating the integral of a function defined on a discrete domain. </p>
+<p>An operator for calculating the integral of a function defined on a discrete index range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">exec_space</td><td>The space on which the function is executed (CPU/GPU). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">integrated_function</td><td>A function taking an index of a position in the domain over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a ChunkSpan fulfils these criteria and can be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">integrated_function</td><td>A function taking an index of a position in the index range over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a ChunkSpan fulfils these criteria and can be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The integral of the function over the domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The integral of the function over the index range. </dd></dl>
 
 </div>
 </div>
-<a id="a7919d9fe623cc438c21c426f061f8205"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7919d9fe623cc438c21c426f061f8205">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a2b67590831fc07948151ca0094a252c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b67590831fc07948151ca0094a252c7">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class QuadratureDomain , class TotalDomain  = QuadratureDomain, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
+template&lt;class QuadratureIdxRange , class TotalIdxRange  = QuadratureIdxRange, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
 <div class="memtemplate">
-template&lt;class ExecutionSpace , class BatchDomain , class IntegratorFunction &gt; </div>
+template&lt;class ExecutionSpace , class BatchIdxRange , class IntegratorFunction &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classQuadrature.html">Quadrature</a>&lt; QuadratureDomain, TotalDomain, MemorySpace &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classQuadrature.html">Quadrature</a>&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">ExecutionSpace&#160;</td>
           <td class="paramname"><em>exec_space</em>, </td>
@@ -247,7 +247,7 @@ template&lt;class ExecutionSpace , class BatchDomain , class IntegratorFunction 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, BatchDomain, std::experimental::layout_right, MemorySpace &gt; const&#160;</td>
+          <td class="paramtype">Field&lt; double, BatchIdxRange, std::experimental::layout_right, MemorySpace &gt; const&#160;</td>
           <td class="paramname"><em>result</em>, </td>
         </tr>
         <tr>
@@ -269,12 +269,12 @@ template&lt;class ExecutionSpace , class BatchDomain , class IntegratorFunction 
 </table>
 </div><div class="memdoc">
 
-<p>An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions. </p>
+<p>An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">exec_space</td><td>The space on which the function is executed (CPU/GPU). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">result</td><td>The result of the quadrature calculation. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">integrated_function</td><td>A function taking an index of a position in the domain over which the quadrature is calculated (including the batch domain) and returning the value of the function to be integrated at that point. Please note that a ChunkSpan fulfills the described criteria. If the exec_space is a GPU the function that is passed must be accessible from GPU. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">integrated_function</td><td>A function taking an index of a position in the index range over which the quadrature is calculated (including the batch index range) and returning the value of the function to be integrated at that point. Please note that a ChunkSpan fulfills the described criteria. If the exec_space is a GPU the function that is passed must be accessible from GPU. </td></tr>
   </table>
   </dd>
 </dl>

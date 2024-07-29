@@ -31,8 +31,8 @@ var searchData=
   ['translationsimulation_715',['TranslationSimulation',['../classTranslationSimulation.html#a93ef880e4bde7812610f07198d620be1',1,'TranslationSimulation::TranslationSimulation()'],['../classTranslationSimulation.html',1,'TranslationSimulation&lt; Mapping &gt;']]],
   ['transpose_5fto_716',['transpose_to',['../classMPITransposeAllToAll.html#af50b3849e61a7fec150afecbe776d174',1,'MPITransposeAllToAll']]],
   ['trapezoid_5fquadrature_2ehpp_717',['trapezoid_quadrature.hpp',['../trapezoid__quadrature_8hpp.html',1,'']]],
-  ['trapezoid_5fquadrature_5fcoefficients_718',['trapezoid_quadrature_coefficients',['../trapezoid__quadrature_8hpp.html#a9b37968b97363d75ad6401309016c8f9',1,'trapezoid_quadrature.hpp']]],
-  ['trapezoid_5fquadrature_5fcoefficients_5f1d_719',['trapezoid_quadrature_coefficients_1d',['../trapezoid__quadrature_8hpp.html#a73588b65e152caa528b76e0906b82ccf',1,'trapezoid_quadrature.hpp']]],
+  ['trapezoid_5fquadrature_5fcoefficients_718',['trapezoid_quadrature_coefficients',['../trapezoid__quadrature_8hpp.html#a63e347081ac7ebf1c3542b42b25e44ad',1,'trapezoid_quadrature.hpp']]],
+  ['trapezoid_5fquadrature_5fcoefficients_5f1d_719',['trapezoid_quadrature_coefficients_1d',['../trapezoid__quadrature_8hpp.html#a5be98c8bc2a5baddef8ffdc5c10dede3',1,'trapezoid_quadrature.hpp']]],
   ['tuple_5fto_5ftypes_720',['tuple_to_types',['../structtuple__to__types.html',1,'']]],
   ['tuple_5fto_5ftypes_3c_20std_3a_3atuple_3c_20args_2e_2e_2e_20_3e_20_3e_721',['tuple_to_types&lt; std::tuple&lt; Args... &gt; &gt;',['../structtuple__to__types_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html',1,'']]],
   ['type_722',['type',['../structinterpolator__on__domain_3_01Interp_00_01DDimI_00_01ddc_1_1DiscreteDomain_3_01Grid1D_8_8_8_01_4_01_4.html#a2d7b675d039c625cb2782ad800d229ad',1,'interpolator_on_domain&lt; Interp, DDimI, ddc::DiscreteDomain&lt; Grid1D... &gt; &gt;']]]

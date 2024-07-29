@@ -110,29 +110,31 @@ $(document).ready(function(){initNavTree('simpson__quadrature_8hpp_source.html',
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;ddc_helper.hpp&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim&gt;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt; simpson_quadrature_coefficients_1d(</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; domain)</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt; coefficients(domain);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    coefficients(domain.front()) = 1. / 3. * distance_at_right(domain.front());</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Gr<span class="keywordtype">id</span>&gt;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;host_t&lt;FieldMem&lt;double, IdxRange&lt;Grid&gt;&gt;&gt; simpson_quadrature_coefficients_1d(</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        IdxRange&lt;Grid&gt; <span class="keyword">const</span>&amp; idx_range)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    host_t&lt;FieldMem&lt;double, IdxRange&lt;Grid&gt;&gt;&gt; coefficients(idx_range);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = domain.begin() + 1; it &lt; domain.end() - 1; it += 2) {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        ddc::DiscreteElement&lt;IDim&gt; idx = *it;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        coefficients(idx) = 2. / 3. * (distance_at_left(idx) + distance_at_right(idx));</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        idx += ddc::DiscreteVector&lt;IDim&gt;(1);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        coefficients(idx) = 1. / 3. * (distance_at_left(idx) + distance_at_right(idx));</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    coefficients(domain.back()) = 1. / 3. * distance_at_left(domain.back());</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> constexpr (IDim::continuous_dimension_type::PERIODIC) {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        coefficients(domain.front()) += 2. / 3 * distance_at_left(domain.back());</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        coefficients(domain.back()) += 2. / 3 * distance_at_right(domain.front());</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    coefficients(idx_range.front()) = 1. / 3. * distance_at_right(idx_range.front());</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = idx_range.begin() + 1; it &lt; idx_range.end() - 1; it += 2) {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        Idx&lt;Grid&gt; idx = *it;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        coefficients(idx) = 2. / 3. * (distance_at_left(idx) + distance_at_right(idx));</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        idx += IdxStep&lt;Grid&gt;(1);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        coefficients(idx) = 1. / 3. * (distance_at_left(idx) + distance_at_right(idx));</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    coefficients(idx_range.back()) = 1. / 3. * distance_at_left(idx_range.back());</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">if</span> constexpr (Grid::continuous_dimension_type::PERIODIC) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        coefficients(idx_range.front()) += 2. / 3 * distance_at_left(idx_range.back());</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        coefficients(idx_range.back()) += 2. / 3 * distance_at_right(idx_range.front());</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

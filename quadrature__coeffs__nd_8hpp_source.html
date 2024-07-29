@@ -108,35 +108,36 @@ $(document).ready(function(){initNavTree('quadrature__coeffs__nd_8hpp_source.htm
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim&gt;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using</span> CoefficientChunk1D = ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim&gt;&gt;;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... DDims&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d">   27</a></span>&#160;ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt;&gt; <a class="code" href="quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d">quadrature_coeffs_nd</a>(</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        ddc::DiscreteDomain&lt;DDims...&gt; <span class="keyword">const</span>&amp; domain,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        std::function&lt;ddc::Chunk&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;DDims&gt;&gt;(</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                ddc::DiscreteDomain&lt;DDims&gt;)&gt;... funcs)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// Get coefficients for each dimension</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::tuple&lt;CoefficientChunk1D&lt;DDims&gt;...&gt; current_dim_coeffs(</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            funcs(ddc::select&lt;DDims&gt;(domain))...);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// Allocate ND coefficients</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;DDims...&gt;&gt; coefficients(domain);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    ddc::for_each(domain, [&amp;](ddc::DiscreteElement&lt;DDims...&gt; <span class="keyword">const</span> idim) {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="comment">// multiply the 1D coefficients by one another</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        coefficients(idim)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                = (std::get&lt;CoefficientChunk1D&lt;DDims&gt;&gt;(current_dim_coeffs)(ddc::select&lt;DDims&gt;(idim))</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                   * ... * 1);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    });</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-<div class="ttc" id="aquadrature__coeffs__nd_8hpp_html_aaef832627a2d4ddc3f8ca6c570f1a46d"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html#aaef832627a2d4ddc3f8ca6c570f1a46d">quadrature_coeffs_nd</a></div><div class="ttdeci">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims... &gt; &gt; quadrature_coeffs_nd(ddc::DiscreteDomain&lt; DDims... &gt; const &amp;domain, std::function&lt; ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; DDims &gt;&gt;(ddc::DiscreteDomain&lt; DDims &gt;)&gt;... funcs)</div><div class="ttdoc">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</div><div class="ttdef"><b>Definition:</b> quadrature_coeffs_nd.hpp:27</div></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Gr<span class="keywordtype">id</span>&gt;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using</span> CoefficientChunk1D = host_t&lt;FieldMem&lt;double, IdxRange&lt;Grid&gt;&gt;&gt;;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... DDims&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="quadrature__coeffs__nd_8hpp.html#abe2b323c35771531c1be8ad980031009">   29</a></span>&#160;host_t&lt;FieldMem&lt;double, IdxRange&lt;DDims...&gt;&gt;&gt; <a class="code" href="quadrature__coeffs__nd_8hpp.html#abe2b323c35771531c1be8ad980031009">quadrature_coeffs_nd</a>(</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        IdxRange&lt;DDims...&gt; <span class="keyword">const</span>&amp; idx_range,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        std::function&lt;host_t&lt;FieldMem&lt;<span class="keywordtype">double</span>, IdxRange&lt;DDims&gt;&gt;&gt;(IdxRange&lt;DDims&gt;)&gt;... funcs)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// Get coefficients for each dimension</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::tuple&lt;CoefficientChunk1D&lt;DDims&gt;...&gt; current_dim_coeffs(</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            funcs(ddc::select&lt;DDims&gt;(idx_range))...);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// Allocate ND coefficients</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    host_t&lt;FieldMem&lt;double, IdxRange&lt;DDims...&gt;&gt;&gt; coefficients(idx_range);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ddc::for_each(idx_range, [&amp;](Idx&lt;DDims...&gt; <span class="keyword">const</span> idim) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">// multiply the 1D coefficients by one another</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        coefficients(idim)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                = (std::get&lt;CoefficientChunk1D&lt;DDims&gt;&gt;(current_dim_coeffs)(ddc::select&lt;DDims&gt;(idim))</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                   * ... * 1);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    });</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">return</span> coefficients;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<div class="ttc" id="aquadrature__coeffs__nd_8hpp_html_abe2b323c35771531c1be8ad980031009"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html#abe2b323c35771531c1be8ad980031009">quadrature_coeffs_nd</a></div><div class="ttdeci">host_t&lt; FieldMem&lt; double, IdxRange&lt; DDims... &gt; &gt; &gt; quadrature_coeffs_nd(IdxRange&lt; DDims... &gt; const &amp;idx_range, std::function&lt; host_t&lt; FieldMem&lt; double, IdxRange&lt; DDims &gt;&gt;&gt;(IdxRange&lt; DDims &gt;)&gt;... funcs)</div><div class="ttdoc">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</div><div class="ttdef"><b>Definition:</b> quadrature_coeffs_nd.hpp:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

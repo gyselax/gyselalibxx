@@ -1,5 +1,5 @@
 var trapezoid__quadrature_8hpp =
 [
-    [ "trapezoid_quadrature_coefficients_1d", "trapezoid__quadrature_8hpp.html#a73588b65e152caa528b76e0906b82ccf", null ],
-    [ "trapezoid_quadrature_coefficients", "trapezoid__quadrature_8hpp.html#a9b37968b97363d75ad6401309016c8f9", null ]
+    [ "trapezoid_quadrature_coefficients_1d", "trapezoid__quadrature_8hpp.html#a5be98c8bc2a5baddef8ffdc5c10dede3", null ],
+    [ "trapezoid_quadrature_coefficients", "trapezoid__quadrature_8hpp.html#a63e347081ac7ebf1c3542b42b25e44ad", null ]
 ];
