@@ -5,35 +5,37 @@
 
 #include <ddc_helper.hpp>
 
+#include "ddc_aliases.hpp"
+
 /**
  * @brief Get the Simpson coefficients in 1D.
  *
- * Calculate the quadrature coefficients for the Simpson method defined on the provided domain.
+ * Calculate the quadrature coefficients for the Simpson method defined on the provided index range.
  *
- * @param[in] domain
- * 	The domain on which the quadrature will be carried out.
+ * @param[in] index range
+ * 	The index range on which the quadrature will be carried out.
  *
- * @return The quadrature coefficients for the Simpson method defined on the provided domain.
+ * @return The quadrature coefficients for the Simpson method defined on the provided index range.
  */
-template <class IDim>
-ddc::Chunk<double, ddc::DiscreteDomain<IDim>> simpson_quadrature_coefficients_1d(
-        ddc::DiscreteDomain<IDim> const& domain)
+template <class Grid>
+host_t<FieldMem<double, IdxRange<Grid>>> simpson_quadrature_coefficients_1d(
+        IdxRange<Grid> const& idx_range)
 {
-    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
+    host_t<FieldMem<double, IdxRange<Grid>>> coefficients(idx_range);
 
-    coefficients(domain.front()) = 1. / 3. * distance_at_right(domain.front());
+    coefficients(idx_range.front()) = 1. / 3. * distance_at_right(idx_range.front());
 
-    for (auto it = domain.begin() + 1; it < domain.end() - 1; it += 2) {
-        ddc::DiscreteElement<IDim> idx = *it;
+    for (auto it = idx_range.begin() + 1; it < idx_range.end() - 1; it += 2) {
+        Idx<Grid> idx = *it;
         coefficients(idx) = 2. / 3. * (distance_at_left(idx) + distance_at_right(idx));
-        idx += ddc::DiscreteVector<IDim>(1);
+        idx += IdxStep<Grid>(1);
         coefficients(idx) = 1. / 3. * (distance_at_left(idx) + distance_at_right(idx));
     }
-    coefficients(domain.back()) = 1. / 3. * distance_at_left(domain.back());
+    coefficients(idx_range.back()) = 1. / 3. * distance_at_left(idx_range.back());
 
-    if constexpr (IDim::continuous_dimension_type::PERIODIC) {
-        coefficients(domain.front()) += 2. / 3 * distance_at_left(domain.back());
-        coefficients(domain.back()) += 2. / 3 * distance_at_right(domain.front());
+    if constexpr (Grid::continuous_dimension_type::PERIODIC) {
+        coefficients(idx_range.front()) += 2. / 3 * distance_at_left(idx_range.back());
+        coefficients(idx_range.back()) += 2. / 3 * distance_at_right(idx_range.front());
     }
 
     return coefficients;
