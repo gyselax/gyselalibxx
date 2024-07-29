@@ -219,7 +219,7 @@ int main(int argc, char** argv)
     DFieldVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
                                      Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
 
-    ChargeDensityCalculator rhs(quadrature_coeffs.span_view());
+    ChargeDensityCalculator rhs(quadrature_coeffs.span_cview());
 #ifdef PERIODIC_RDIMX
     FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> poisson_solver(mesh_x);
 #else

@@ -143,7 +143,7 @@ int main(int argc, char** argv)
 
     FFTPoissonSolver<IDomainXY, IDomainXY, Kokkos::DefaultExecutionSpace> fft_poisson_solver(
             mesh_xy);
-    ChargeDensityCalculator const rhs(quadrature_coeffs.span_view());
+    ChargeDensityCalculator const rhs(quadrature_coeffs.span_cview());
     QNSolver const poisson(fft_poisson_solver, rhs);
 
     // Create predcorr operator

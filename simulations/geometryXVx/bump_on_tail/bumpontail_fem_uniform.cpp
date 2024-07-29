@@ -129,16 +129,9 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-#ifdef PERIODIC_RDIMX
-    using FemQNSolverX = FemPeriodicQNSolver;
-#else
-    using FemQNSolverX = FemNonPeriodicQNSolver;
-#endif
     DFieldVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
                                      Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
-    auto const quadrature_coeffs_host
-            = ddc::create_mirror_view_and_copy(quadrature_coeffs.span_view());
-    ChargeDensityCalculator rhs(quadrature_coeffs);
+    ChargeDensityCalculator rhs(quadrature_coeffs.span_cview());
     FEM1DPoissonSolver fem_solver(builder_x_poisson, spline_x_evaluator_poisson);
     QNSolver const poisson(fem_solver, rhs);
 

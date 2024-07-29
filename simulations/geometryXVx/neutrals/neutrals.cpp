@@ -270,7 +270,7 @@ int main(int argc, char** argv)
             normalization_coeff,
             spline_x_builder_neutrals,
             spline_x_evaluator_neutrals,
-            quadrature_coeffs_neutrals.span_view());
+            quadrature_coeffs_neutrals.span_cview());
 
     KineticFluidCouplingSource const kineticfluidcoupling(
             PCpp_double(conf_voicexx, ".KineticFluidCouplingSource.density_coupling_coeff"),
