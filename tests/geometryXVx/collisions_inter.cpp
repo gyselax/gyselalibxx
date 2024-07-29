@@ -27,11 +27,11 @@ TEST(CollisionsInter, CollisionsInter)
     CoordVx const vx_max(10);
     IVectVx const vx_size(600);
 
-    IVectSp const nb_kinspecies(2);
+    IdxStepSp const nb_kinspecies(2);
 
-    IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
-    IndexSp const my_iion = dom_sp.front();
-    IndexSp const my_ielec = dom_sp.back();
+    IdxRangeSp const dom_sp(IdxSp(0), nb_kinspecies);
+    IdxSp const my_iion = dom_sp.front();
+    IdxSp const my_ielec = dom_sp.back();
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -52,16 +52,16 @@ TEST(CollisionsInter, CollisionsInter)
 
     IDomainSpXVx const mesh(dom_sp, gridx, gridvx);
 
-    host_t<DFieldSp> charges(dom_sp);
+    host_t<DFieldMemSp> charges(dom_sp);
     charges(my_ielec) = -1.;
     charges(my_iion) = 1.;
-    host_t<DFieldSp> masses(dom_sp);
+    host_t<DFieldMemSp> masses(dom_sp);
     double const mass_ion(400.), mass_elec(1.);
     masses(my_ielec) = mass_elec;
     masses(my_iion) = mass_ion;
 
     // Initialization of the distribution function as a maxwellian
-    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
+    ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
     DFieldSpXVx allfdistribu(mesh);
 
     std::vector<double> deltat_list = {0.1, 0.01};
@@ -70,16 +70,16 @@ TEST(CollisionsInter, CollisionsInter)
         // Initialization of the distribution function as a maxwellian with a
         // different electron and ion temperatures
         double const density_init(1.);
-        host_t<DFieldSp> temperature_init(dom_sp);
+        host_t<DFieldMemSp> temperature_init(dom_sp);
         temperature_init(my_iion) = 1.;
         temperature_init(my_ielec) = 1.2;
         double const fluid_velocity_init(0.);
-        ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
+        ddc::for_each(ddc::select<Species, IDimX>(mesh), [&](IndexSpX const ispx) {
             DFieldVx finit(gridvx);
             MaxwellianEquilibrium::compute_maxwellian(
                     finit.span_view(),
                     density_init,
-                    temperature_init(ddc::select<IDimSp>(ispx)),
+                    temperature_init(ddc::select<Species>(ispx)),
                     fluid_velocity_init);
             auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
             ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
@@ -97,7 +97,7 @@ TEST(CollisionsInter, CollisionsInter)
         FluidMoments moments(integrate);
 
         auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
-        DFieldSpX nustar_profile_alloc(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+        DFieldSpX nustar_profile_alloc(ddc::get_domain<Species, IDimX>(allfdistribu_host));
         DSpanSpX nustar_profile = nustar_profile_alloc.span_view();
         compute_nustar_profile(nustar_profile, nustar0);
 
@@ -108,13 +108,13 @@ TEST(CollisionsInter, CollisionsInter)
         ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
         double error_L1(0);
-        DFieldSpX density(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-        DFieldSpX temperature(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-        host_t<DFieldSpX> density_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-        host_t<DFieldSpX> fluid_velocity_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-        host_t<DFieldSpX> temperature_host(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+        DFieldSpX density(ddc::get_domain<Species, IDimX>(allfdistribu_host));
+        DFieldSpX temperature(ddc::get_domain<Species, IDimX>(allfdistribu_host));
+        host_t<DFieldSpX> density_host(ddc::get_domain<Species, IDimX>(allfdistribu_host));
+        host_t<DFieldSpX> fluid_velocity_host(ddc::get_domain<Species, IDimX>(allfdistribu_host));
+        host_t<DFieldSpX> temperature_host(ddc::get_domain<Species, IDimX>(allfdistribu_host));
 
-        ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
+        ddc::for_each(ddc::get_domain<Species, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
             moments(density_host(ispx), allfdistribu[ispx], FluidMoments::s_density);
             moments(fluid_velocity_host(ispx),
                     allfdistribu[ispx],
@@ -130,7 +130,7 @@ TEST(CollisionsInter, CollisionsInter)
         ddc::parallel_deepcopy(density, density_host);
 
         //Collision frequencies, momentum and energy exchange terms
-        DFieldSpX collfreq_ab(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+        DFieldSpX collfreq_ab(ddc::get_domain<Species, IDimX>(allfdistribu_host));
         compute_collfreq_ab(collfreq_ab.span_view(), nustar_profile, density, temperature);
         auto collfreq_ab_host = ddc::create_mirror_view_and_copy(collfreq_ab.span_view());
 

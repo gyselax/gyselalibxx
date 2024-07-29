@@ -70,25 +70,25 @@ using IVectVx = ddc::DiscreteVector<IDimVx>;
 
 using IDomainXVx = ddc::DiscreteDomain<IDimX, IDimVx>;
 
-using IDomainSp = ddc::DiscreteDomain<IDimSp>;
-using IndexSp = ddc::DiscreteElement<IDimSp>;
-using IVectSp = ddc::DiscreteVector<IDimSp>;
+using IdxRangeSp = ddc::DiscreteDomain<Species>;
+using IdxSp = ddc::DiscreteElement<Species>;
+using IdxStepSp = ddc::DiscreteVector<Species>;
 
-using IDomainSpXVx = ddc::DiscreteDomain<IDimSp, IDimX, IDimVx>;
-using IndexSpXVx = ddc::DiscreteElement<IDimSp, IDimX, IDimVx>;
+using IDomainSpXVx = ddc::DiscreteDomain<Species, IDimX, IDimVx>;
+using IndexSpXVx = ddc::DiscreteElement<Species, IDimX, IDimVx>;
 
 // Chunks, Spans and Views
 template <class ElementType>
-using FieldSp = device_t<ddc::Chunk<ElementType, IDomainSp>>;
-using DFieldSp = DFieldSp;
+using FieldMemSp = device_t<ddc::Chunk<ElementType, IdxRangeSp>>;
+using DFieldMemSp = DFieldMemSp;
 
 template <class ElementType>
 using FieldSpXVx = device_t<ddc::Chunk<ElementType, IDomainSpXVx>>;
 using DFieldSpXVx = FieldSpXVx<double>;
 
 template <class ElementType>
-using SpanSp = device_t<ddc::ChunkSpan<ElementType, IDomainSp>>;
-using DSpanSp = SpanSp<double>;
+using FieldSp = device_t<ddc::ChunkSpan<ElementType, IdxRangeSp>>;
+using DFieldSp = FieldSp<double>;
 
 template <class ElementType>
 using SpanSpXVx = device_t<ddc::ChunkSpan<ElementType, IDomainSpXVx>>;
@@ -112,7 +112,7 @@ using SplineXBuilder = ddc::SplineBuilder<
         SplineXBoundary,
         SplineXBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimSp,
+        Species,
         IDimX,
         IDimVx>;
 using SplineXEvaluator = ddc::SplineEvaluator<
@@ -122,7 +122,7 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         IDimX,
         ddc::PeriodicExtrapolationRule<RDimX>,
         ddc::PeriodicExtrapolationRule<RDimX>,
-        IDimSp,
+        Species,
         IDimX,
         IDimVx>;
 
@@ -132,15 +132,15 @@ class Spatial1DAdvectionTest : public ::testing::Test
 protected:
     IDomainX const x_dom;
     IDomainVx const vx_dom;
-    IDomainSp const dom_allsp;
+    IdxRangeSp const dom_allsp;
 
-    static constexpr IVectSp nb_species = IVectSp(2);
+    static constexpr IdxStepSp nb_species = IdxStepSp(2);
 
 public:
     Spatial1DAdvectionTest()
         : x_dom(SplineInterpPointsX::get_domain<IDimX>())
         , vx_dom(SplineInterpPointsVx::get_domain<IDimVx>())
-        , dom_allsp(IndexSp(0), nb_species) {};
+        , dom_allsp(IdxSp(0), nb_species) {};
 
     ~Spatial1DAdvectionTest() = default;
 
@@ -167,13 +167,13 @@ public:
     {
         // Mesh ----------------------------------------------------------------------------------
         IDomainSpXVx const meshSpXVx(dom_allsp, x_dom, vx_dom);
-        IndexSp const i_elec = dom_allsp.front();
-        IndexSp const i_ion = dom_allsp.back();
+        IdxSp const i_elec = dom_allsp.front();
+        IdxSp const i_ion = dom_allsp.back();
 
 
         // INITIALISATION ------------------------------------------------------------------------
         // Initialization of the masses
-        host_t<FieldSp<int>> masses_host(dom_allsp);
+        host_t<FieldMemSp<int>> masses_host(dom_allsp);
         masses_host(i_elec) = 1;
         masses_host(i_ion) = 1;
         auto masses_alloc = ddc::
@@ -196,7 +196,7 @@ public:
                     allfdistribu(ispxvx) = Kokkos::cos(ddc::coordinate(ix));
 
                     IndexVx const ivx(ispxvx);
-                    IndexSp const isp(ispxvx);
+                    IdxSp const isp(ispxvx);
                     advection_field(ispxvx)
                             = -Kokkos::sqrt(masses(i_elec) / masses(isp)) * ddc::coordinate(ivx);
                 });

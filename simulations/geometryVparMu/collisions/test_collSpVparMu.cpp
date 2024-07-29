@@ -78,8 +78,8 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("Nkinspecies", idxrange_kinsp.size());
     ddc::expose_to_pdi(
             "fdistribu_charges",
-            ddc::discrete_space<IDimSp>().charges()[idxrange_kinsp]);
-    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[idxrange_kinsp]);
+            ddc::discrete_space<Species>().charges()[idxrange_kinsp]);
+    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<Species>().masses()[idxrange_kinsp]);
 
 
     // --------- OPERATOR INITIALISATION ---------
