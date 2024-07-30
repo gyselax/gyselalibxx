@@ -2,10 +2,7 @@
 
 #include "nullqnsolver.hpp"
 
-void NullQNSolver::operator()(
-        DFieldXY const,
-        DFieldXY const,
-        DFieldXY const,
-        DConstFieldSpXYVxVy const) const
+void NullQNSolver::operator()(DSpanXY const, DSpanXY const, DSpanXY const, DViewSpXYVxVy const)
+        const
 {
 }

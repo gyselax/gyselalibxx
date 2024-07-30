@@ -7,7 +7,7 @@
 
 
 SingleModePerturbInitialization::SingleModePerturbInitialization(
-        DConstFieldSpVxVy fequilibrium,
+        DViewSpVxVy fequilibrium,
         host_t<IFieldSp> init_perturb_mode,
         host_t<DFieldMemSp> init_perturb_amplitude)
     : m_fequilibrium(fequilibrium)
@@ -16,16 +16,16 @@ SingleModePerturbInitialization::SingleModePerturbInitialization(
 {
 }
 
-DFieldSpXYVxVy SingleModePerturbInitialization::operator()(DFieldSpXYVxVy const allfdistribu) const
+DSpanSpXYVxVy SingleModePerturbInitialization::operator()(DSpanSpXYVxVy const allfdistribu) const
 {
-    IdxRangeSp const gridsp = get_idx_range<Species>(allfdistribu);
-    IdxRangeXY const gridxy = get_idx_range<GridX, GridY>(allfdistribu);
-    IdxRangeXYVxVy const gridxyvxvy = get_idx_range<GridX, GridY, GridVx, GridVy>(allfdistribu);
+    IdxRangeSp const gridsp = allfdistribu.domain<Species>();
+    IDomainXY const gridxy = allfdistribu.domain<IDimX, IDimY>();
+    IDomainXYVxVy const gridxyvxvy = allfdistribu.domain<IDimX, IDimY, IDimVx, IDimVy>();
 
     // Initialization of the perturbation
-    DFieldMemXY perturbation_alloc(gridxy);
-    ddc::ChunkSpan fequilibrium_proxy = get_field(m_fequilibrium);
-    ddc::ChunkSpan perturbation_proxy = get_field(perturbation_alloc);
+    DFieldXY perturbation_alloc(gridxy);
+    ddc::ChunkSpan fequilibrium_proxy = m_fequilibrium.span_view();
+    ddc::ChunkSpan perturbation_proxy = perturbation_alloc.span_view();
     ddc::for_each(gridsp, [&](IdxSp const isp) {
         perturbation_initialization(
                 perturbation_proxy,
@@ -36,11 +36,11 @@ DFieldSpXYVxVy SingleModePerturbInitialization::operator()(DFieldSpXYVxVy const 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 gridxyvxvy,
-                KOKKOS_LAMBDA(IdxXYVxVy const ixyvxvy) {
-                    IdxX const ix = ddc::select<GridX>(ixyvxvy);
-                    IdxY const iy = ddc::select<GridY>(ixyvxvy);
-                    IdxVx const ivx = ddc::select<GridVx>(ixyvxvy);
-                    IdxVy const ivy = ddc::select<GridVy>(ixyvxvy);
+                KOKKOS_LAMBDA(IndexXYVxVy const ixyvxvy) {
+                    IndexX const ix = ddc::select<IDimX>(ixyvxvy);
+                    IndexY const iy = ddc::select<IDimY>(ixyvxvy);
+                    IndexVx const ivx = ddc::select<IDimVx>(ixyvxvy);
+                    IndexVy const ivy = ddc::select<IDimVy>(ixyvxvy);
                     double fdistribu_val
                             = fequilibrium_proxy(isp, ivx, ivy) * (1. + perturbation_proxy(ix, iy));
                     if (fdistribu_val < 1.e-60) {
@@ -54,7 +54,7 @@ DFieldSpXYVxVy SingleModePerturbInitialization::operator()(DFieldSpXYVxVy const 
 
 
 SingleModePerturbInitialization SingleModePerturbInitialization::init_from_input(
-        DConstFieldSpVxVy allfequilibrium,
+        DViewSpVxVy allfequilibrium,
         IdxRangeSp dom_kinsp,
         PC_tree_t const& yaml_input_file)
 {
@@ -76,23 +76,23 @@ SingleModePerturbInitialization SingleModePerturbInitialization::init_from_input
 
 
 void SingleModePerturbInitialization::perturbation_initialization(
-        DFieldXY const perturbation,
+        DSpanXY const perturbation,
         int const perturb_mode,
         double const perturb_amplitude) const
 {
-    IdxRangeXY const gridxy = get_idx_range<GridX, GridY>(perturbation);
+    IDomainXY const gridxy = perturbation.domain<IDimX, IDimY>();
     double const kx = perturb_mode * 2. * M_PI
-                      / ddcHelper::total_interval_length(ddc::select<GridX>(gridxy));
+                      / ddcHelper::total_interval_length(ddc::select<IDimX>(gridxy));
     double const ky = perturb_mode * 2. * M_PI
-                      / ddcHelper::total_interval_length(ddc::select<GridY>(gridxy));
+                      / ddcHelper::total_interval_length(ddc::select<IDimY>(gridxy));
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             gridxy,
-            KOKKOS_LAMBDA(IdxXY const ixy) {
-                IdxX const ix = ddc::select<GridX>(ixy);
+            KOKKOS_LAMBDA(IndexXY const ixy) {
+                IndexX const ix = ddc::select<IDimX>(ixy);
                 CoordX const x = ddc::coordinate(ix);
-                IdxY const iy = ddc::select<GridY>(ixy);
+                IndexY const iy = ddc::select<IDimY>(ixy);
                 CoordY const y = ddc::coordinate(iy);
                 perturbation(ix, iy)
                         = perturb_amplitude * (Kokkos::cos(kx * x) + Kokkos::cos(ky * y));

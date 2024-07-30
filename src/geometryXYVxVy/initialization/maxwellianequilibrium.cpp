@@ -14,14 +14,14 @@ MaxwellianEquilibrium::MaxwellianEquilibrium(
 {
 }
 
-DFieldSpVxVy MaxwellianEquilibrium::operator()(DFieldSpVxVy const allfequilibrium) const
+DSpanSpVxVy MaxwellianEquilibrium::operator()(DSpanSpVxVy const allfequilibrium) const
 {
-    IdxRangeSp const gridsp = get_idx_range<Species>(allfequilibrium);
-    IdxRangeVxVy const gridvxvy = get_idx_range<GridVx, GridVy>(allfequilibrium);
+    IdxRangeSp const gridsp = allfequilibrium.domain<Species>();
+    IDomainVxVy const gridvxvy = allfequilibrium.domain<IDimVx, IDimVy>();
 
     // Initialization of the maxwellian
-    DFieldMemVxVy maxwellian_alloc(gridvxvy);
-    DFieldVxVy maxwellian = get_field(maxwellian_alloc);
+    DFieldVxVy maxwellian_alloc(gridvxvy);
+    DSpanVxVy maxwellian = maxwellian_alloc.span_view();
     ddc::for_each(gridsp, [&](IdxSp const isp) {
         compute_maxwellian(
                 maxwellian,
@@ -32,7 +32,7 @@ DFieldSpVxVy MaxwellianEquilibrium::operator()(DFieldSpVxVy const allfequilibriu
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 gridvxvy,
-                KOKKOS_LAMBDA(IdxVxVy const ivxvy) {
+                KOKKOS_LAMBDA(IndexVxVy const ivxvy) {
                     allfequilibrium(isp, ivxvy) = maxwellian(ivxvy);
                 });
     });
@@ -69,20 +69,20 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
  with n the density and T the temperature and
 */
 void MaxwellianEquilibrium::compute_maxwellian(
-        DFieldVxVy const fMaxwellian,
+        DSpanVxVy const fMaxwellian,
         double const density,
         double const temperature,
         double const mean_velocity)
 {
     double const inv_2pi = 1. / (2. * M_PI * temperature);
-    IdxRangeVxVy const gridvxvy = get_idx_range<GridVx, GridVy>(fMaxwellian);
+    IDomainVxVy const gridvxvy = fMaxwellian.domain<IDimVx, IDimVy>();
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             gridvxvy,
-            KOKKOS_LAMBDA(IdxVxVy const ivxvy) {
-                double const vx = ddc::coordinate(ddc::select<GridVx>(ivxvy));
-                double const vy = ddc::coordinate(ddc::select<GridVy>(ivxvy));
+            KOKKOS_LAMBDA(IndexVxVy const ivxvy) {
+                double const vx = ddc::coordinate(ddc::select<IDimVx>(ivxvy));
+                double const vy = ddc::coordinate(ddc::select<IDimVy>(ivxvy));
                 fMaxwellian(ivxvy) = density * inv_2pi
                                      * Kokkos::exp(
                                              -((vx - mean_velocity) * (vx - mean_velocity)

@@ -12,7 +12,7 @@
 /// Initialization operator with a sinusoidal perturbation of a Maxwellian. This initializes all species.
 class SingleModePerturbInitialization : public IInitialization
 {
-    DConstFieldSpVxVy m_fequilibrium;
+    DViewSpVxVy m_fequilibrium;
 
     host_t<IFieldSp> m_init_perturb_mode;
 
@@ -28,7 +28,7 @@ public:
      * @param[in] perturb_amplitude The amplitude of the perturbation. 
      */
     void perturbation_initialization(
-            DFieldXY perturbation,
+            DSpanXY perturbation,
             int const perturb_mode,
             double const perturb_amplitude) const;
 
@@ -39,7 +39,7 @@ public:
      * @param[in] init_perturb_amplitude The perturbation amplitude. 
      */
     SingleModePerturbInitialization(
-            DConstFieldSpVxVy fequilibrium,
+            DViewSpVxVy fequilibrium,
             host_t<IFieldSp> init_perturb_mode,
             host_t<DFieldMemSp> init_perturb_amplitude);
 
@@ -50,7 +50,7 @@ public:
      * @param[in, out] allfdistribu The initialized distribution function.
      * @return The initialized distribution function.
      */
-    DFieldSpXYVxVy operator()(DFieldSpXYVxVy allfdistribu) const override;
+    DSpanSpXYVxVy operator()(DSpanSpXYVxVy allfdistribu) const override;
 
     /**
      * @brief Read init_perturb_mode and init_perturb amplitude in a YAML input file 
@@ -61,7 +61,7 @@ public:
      * @return an instance of SingleModePerturbInitialization class.
      */
     static SingleModePerturbInitialization init_from_input(
-            DConstFieldSpVxVy allfequilibrium,
+            DViewSpVxVy allfequilibrium,
             IdxRangeSp dom_kinsp,
             PC_tree_t const& yaml_input_file);
 };

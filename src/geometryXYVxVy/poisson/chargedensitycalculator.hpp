@@ -21,7 +21,7 @@
 class ChargeDensityCalculator : public IChargeDensityCalculator
 {
 private:
-    Quadrature<IdxRangeVxVy, IdxRangeXYVxVy> m_quadrature;
+    Quadrature<IDomainVxVy, IDomainXYVxVy> m_quadrature;
 
 public:
     /**
@@ -29,12 +29,12 @@ public:
      * @param[in] coeffs
      *            The coefficients of the quadrature.
      */
-    explicit ChargeDensityCalculator(DConstFieldVxVy coeffs);
+    explicit ChargeDensityCalculator(DViewVxVy coeffs);
 
     /**
      * @brief Computes the charge density rho from the distribution function.
      * @param[in, out] rho
      * @param[in] allfdistribu 
      */
-    void operator()(DFieldXY rho, DConstFieldSpXYVxVy allfdistribu) const final;
+    void operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu) const final;
 };

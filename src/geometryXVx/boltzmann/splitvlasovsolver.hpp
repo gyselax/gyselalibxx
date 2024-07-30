@@ -19,7 +19,7 @@ class IAdvectionVelocity;
  * The Vlasov equation is split between two advection equations 
  * along the X and Vx directions. The splitting involves solving 
  * the x-direction advection first on a time interval of length dt/2, 
- * then the vx-direction advection on a time dt, and then x-direction
+ * then the vx-direction advection on a tim dt, and then x-direction
  * again on dt/2.
  */
 class SplitVlasovSolver : public IBoltzmannSolver
