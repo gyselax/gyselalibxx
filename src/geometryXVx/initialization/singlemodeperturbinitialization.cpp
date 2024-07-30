@@ -8,7 +8,7 @@
 SingleModePerturbInitialization::SingleModePerturbInitialization(
         DViewSpVx fequilibrium,
         host_t<IFieldSp> init_perturb_mode,
-        host_t<DFieldSp> init_perturb_amplitude)
+        host_t<DFieldMemSp> init_perturb_amplitude)
     : m_fequilibrium(fequilibrium)
     , m_init_perturb_mode(std::move(init_perturb_mode))
     , m_init_perturb_amplitude(std::move(init_perturb_amplitude))
@@ -18,7 +18,7 @@ SingleModePerturbInitialization::SingleModePerturbInitialization(
 
 DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdistribu) const
 {
-    IDomainSp const gridsp = allfdistribu.domain<IDimSp>();
+    IdxRangeSp const gridsp = allfdistribu.domain<Species>();
     IDomainX const gridx = allfdistribu.domain<IDimX>();
     IDomainXVx const gridxvx = allfdistribu.domain<IDimX, IDimVx>();
 
@@ -26,7 +26,7 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
     DFieldX perturbation_alloc(gridx);
     ddc::ChunkSpan fequilibrium_proxy = m_fequilibrium.span_view();
     ddc::ChunkSpan perturbation_proxy = perturbation_alloc.span_view();
-    ddc::for_each(gridsp, [&](IndexSp const isp) {
+    ddc::for_each(gridsp, [&](IdxSp const isp) {
         perturbation_initialization(
                 perturbation_proxy,
                 m_init_perturb_mode(isp),
@@ -52,13 +52,13 @@ DSpanSpXVx SingleModePerturbInitialization::operator()(DSpanSpXVx const allfdist
 
 SingleModePerturbInitialization SingleModePerturbInitialization::init_from_input(
         DViewSpVx allfequilibrium,
-        IDomainSp dom_kinsp,
+        IdxRangeSp dom_kinsp,
         PC_tree_t const& yaml_input_file)
 {
     host_t<IFieldSp> init_perturb_mode(dom_kinsp);
-    host_t<DFieldSp> init_perturb_amplitude(dom_kinsp);
+    host_t<DFieldMemSp> init_perturb_amplitude(dom_kinsp);
 
-    for (IndexSp const isp : dom_kinsp) {
+    for (IdxSp const isp : dom_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
 
         init_perturb_amplitude(isp) = PCpp_double(conf_isp, ".perturb_amplitude");
