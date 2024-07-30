@@ -186,15 +186,15 @@ using IndexVx = ddc::DiscreteElement<IDimVx>;
 using IndexX = ddc::DiscreteElement<IDimX>;
 
 
-using IndexSpM = ddc::DiscreteElement<IDimSp, IDimM>;
+using IndexSpM = ddc::DiscreteElement<Species, IDimM>;
 
-using IndexSpMX = ddc::DiscreteElement<IDimSp, IDimM, IDimX>;
+using IndexSpMX = ddc::DiscreteElement<Species, IDimM, IDimX>;
 
-using IndexSpX = ddc::DiscreteElement<IDimSp, IDimX>;
+using IndexSpX = ddc::DiscreteElement<Species, IDimX>;
 
-using IndexSpVx = ddc::DiscreteElement<IDimSp, IDimVx>;
+using IndexSpVx = ddc::DiscreteElement<Species, IDimVx>;
 
-using IndexSpXVx = ddc::DiscreteElement<IDimSp, IDimX, IDimVx>;
+using IndexSpXVx = ddc::DiscreteElement<Species, IDimX, IDimVx>;
 
 using IndexXVx = ddc::DiscreteElement<IDimX, IDimVx>;
 
@@ -207,15 +207,15 @@ using IVectVx = ddc::DiscreteVector<IDimVx>;
 using IVectX = ddc::DiscreteVector<IDimX>;
 
 
-using IVectSpM = ddc::DiscreteVector<IDimSp, IDimM>;
+using IVectSpM = ddc::DiscreteVector<Species, IDimM>;
 
-using IVectSpMX = ddc::DiscreteVector<IDimSp, IDimM, IDimX>;
+using IVectSpMX = ddc::DiscreteVector<Species, IDimM, IDimX>;
 
-using IVectSpVx = ddc::DiscreteVector<IDimSp, IDimVx>;
+using IVectSpVx = ddc::DiscreteVector<Species, IDimVx>;
 
-using IVectSpX = ddc::DiscreteVector<IDimSp, IDimX>;
+using IVectSpX = ddc::DiscreteVector<Species, IDimX>;
 
-using IVectSpXVx = ddc::DiscreteVector<IDimSp, IDimX, IDimVx>;
+using IVectSpXVx = ddc::DiscreteVector<Species, IDimX, IDimVx>;
 
 using IVectXVx = ddc::DiscreteVector<IDimX, IDimVx>;
 
@@ -233,15 +233,15 @@ using IDomainVx = ddc::DiscreteDomain<IDimVx>;
 
 using IDomainX = ddc::DiscreteDomain<IDimX>;
 
-using IDomainSpM = ddc::DiscreteDomain<IDimSp, IDimM>;
+using IDomainSpM = ddc::DiscreteDomain<Species, IDimM>;
 
-using IDomainSpMX = ddc::DiscreteDomain<IDimSp, IDimM, IDimX>;
+using IDomainSpMX = ddc::DiscreteDomain<Species, IDimM, IDimX>;
 
-using IDomainSpVx = ddc::DiscreteDomain<IDimSp, IDimVx>;
+using IDomainSpVx = ddc::DiscreteDomain<Species, IDimVx>;
 
-using IDomainSpX = ddc::DiscreteDomain<IDimSp, IDimX>;
+using IDomainSpX = ddc::DiscreteDomain<Species, IDimX>;
 
-using IDomainSpXVx = ddc::DiscreteDomain<IDimSp, IDimX, IDimVx>;
+using IDomainSpXVx = ddc::DiscreteDomain<Species, IDimX, IDimVx>;
 
 using IDomainXVx = ddc::DiscreteDomain<IDimX, IDimVx>;
 
@@ -395,17 +395,17 @@ public:
     /**
      * @brief An alias for the spatial discrete domain type.
      */
-    using SpatialDDom = IDomainX;
+    using SpatialIdxRange = IDomainX;
 
     /**
      * @brief An alias for the velocity discrete domain type.
      */
-    using VelocityDDom = IDomainVx;
+    using VelocityIdxRange = IDomainVx;
 
 
     // using FdistribuDDom = DiscreteDomain<DimSp, typename decltype(SpatialDDom), typename decltype(VelocityDDom)>(ddc::DiscreteDomain());
     /**
      * @brief An alias for the whole distribution function discrete domain type.
      */
-    using FdistribuDDom = IDomainSpXVx;
+    using FdistribuIdxRange = IDomainSpXVx;
 };

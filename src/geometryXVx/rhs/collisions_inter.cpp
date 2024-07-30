@@ -10,10 +10,10 @@
 
 CollisionsInter::CollisionsInter(IDomainSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
-    , m_nustar_profile_alloc(ddc::select<IDimSp, IDimX>(mesh))
+    , m_nustar_profile_alloc(ddc::select<Species, IDimX>(mesh))
 {
     // validity checks
-    if (ddc::select<IDimSp>(mesh).size() != 2) {
+    if (ddc::select<Species>(mesh).size() != 2) {
         throw std::runtime_error("Inter species collisions requires two kinetic species.");
     }
     if (m_nustar0 == 0.) {
@@ -27,7 +27,7 @@ CollisionsInter::CollisionsInter(IDomainSpXVx const& mesh, double nustar0)
 
 void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfdistribu) const
 {
-    IDomainSpX grid_sp_x = allfdistribu.domain<IDimSp, IDimX>();
+    IDomainSpX grid_sp_x = allfdistribu.domain<Species, IDimX>();
     DFieldSpX density_f(grid_sp_x);
     DFieldSpX fluid_velocity_f(grid_sp_x);
     DFieldSpX temperature_f(grid_sp_x);
@@ -48,7 +48,7 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
             Kokkos::DefaultExecutionSpace(),
             grid_sp_x,
             KOKKOS_LAMBDA(IndexSpX const ispx) {
-                IndexSp isp(ddc::select<IDimSp>(ispx));
+                IdxSp isp(ddc::select<Species>(ispx));
                 IndexX ix(ddc::select<IDimX>(ispx));
                 double particle_flux(0);
                 double momentum_flux(0);
@@ -88,7 +88,7 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
             Kokkos::DefaultExecutionSpace(),
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
-                IndexSp isp(ddc::select<IDimSp>(ispxvx));
+                IdxSp isp(ddc::select<Species>(ispxvx));
                 IndexX ix(ddc::select<IDimX>(ispxvx));
                 IndexVx ivx(ddc::select<IDimVx>(ispxvx));
                 double const inv_sqrt_2piT = 1. / Kokkos::sqrt(2. * M_PI * temperature(isp, ix));
@@ -105,7 +105,7 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
             Kokkos::DefaultExecutionSpace(),
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
-                IndexSp isp(ddc::select<IDimSp>(ispxvx));
+                IdxSp isp(ddc::select<Species>(ispxvx));
                 IndexX ix(ddc::select<IDimX>(ispxvx));
                 IndexVx ivx(ddc::select<IDimVx>(ispxvx));
                 double const coordv = ddc::coordinate(ivx);

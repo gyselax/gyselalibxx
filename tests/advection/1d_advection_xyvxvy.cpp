@@ -17,42 +17,42 @@
 namespace {
 // Continuous dimensions
 /// @brief A class which describes the real space in the first spatial direction X.
-struct RDimX
+struct X
 {
     /// @brief A boolean indicating if the dimension is periodic.
     static bool constexpr PERIODIC = true;
 };
 
 /// @brief A class which describes the real space in the second spatial direction Y.
-struct RDimY
+struct Y
 {
     /// @brief A boolean indicating if the dimension is periodic.
     static bool constexpr PERIODIC = true;
 };
 
 /// @brief A class which describes the real space in the second velocity direction X.
-struct RDimVx
+struct Vx
 {
 };
 
 /// @brief A class which describes the real space in the second velocity direction Y.
-struct RDimVy
+struct Vy
 {
 };
 
 
-using CoordX = ddc::Coordinate<RDimX>;
-using CoordY = ddc::Coordinate<RDimY>;
-using CoordXY = ddc::Coordinate<RDimX, RDimY>;
+using CoordX = Coord<X>;
+using CoordY = Coord<Y>;
+using CoordXY = Coord<X, Y>;
 
-using CoordVx = ddc::Coordinate<RDimVx>;
-using CoordVy = ddc::Coordinate<RDimVy>;
+using CoordVx = Coord<Vx>;
+using CoordVy = Coord<Vy>;
 
 // Splines
-struct BSplinesX : ddc::UniformBSplines<RDimX, 3>
+struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
-struct BSplinesY : ddc::UniformBSplines<RDimY, 3>
+struct BSplinesY : ddc::UniformBSplines<Y, 3>
 {
 };
 
@@ -60,16 +60,16 @@ ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
 ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
 
 // Discrete dimensions
-struct IDimX : ddc::UniformPointSampling<RDimX>
+struct GridX : UniformGridBase<X>
 {
 };
-struct IDimY : ddc::UniformPointSampling<RDimY>
+struct GridY : UniformGridBase<Y>
 {
 };
-struct IDimVx : ddc::UniformPointSampling<RDimVx>
+struct GridVx : UniformGridBase<Vx>
 {
 };
-struct IDimVy : ddc::UniformPointSampling<RDimVy>
+struct GridVy : UniformGridBase<Vy>
 {
 };
 
@@ -80,44 +80,44 @@ using SplineInterpPointsY
         = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
 
 
-using IndexXY = ddc::DiscreteElement<IDimX, IDimY>;
-using IndexVx = ddc::DiscreteElement<IDimVx>;
-using IndexVy = ddc::DiscreteElement<IDimVy>;
-using IndexXYVxVy = ddc::DiscreteElement<IDimX, IDimY, IDimVx, IDimVy>;
+using IdxXY = Idx<GridX, GridY>;
+using IdxVx = Idx<GridVx>;
+using IdxVy = Idx<GridVy>;
+using IdxXYVxVy = Idx<GridX, GridY, GridVx, GridVy>;
 
 
-using IVectX = ddc::DiscreteVector<IDimX>;
-using IVectY = ddc::DiscreteVector<IDimY>;
-using IVectVx = ddc::DiscreteVector<IDimVx>;
-using IVectVy = ddc::DiscreteVector<IDimVy>;
+using IdxStepX = IdxStep<GridX>;
+using IdxStepY = IdxStep<GridY>;
+using IdxStepVx = IdxStep<GridVx>;
+using IdxStepVy = IdxStep<GridVy>;
 
 
-using IDomainX = ddc::DiscreteDomain<IDimX>;
-using IDomainY = ddc::DiscreteDomain<IDimY>;
-using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
-using IDomainVx = ddc::DiscreteDomain<IDimVx>;
-using IDomainVy = ddc::DiscreteDomain<IDimVy>;
-using IDomainXYVxVy = ddc::DiscreteDomain<IDimX, IDimY, IDimVx, IDimVy>;
+using IdxRangeX = IdxRange<GridX>;
+using IdxRangeY = IdxRange<GridY>;
+using IdxRangeXY = IdxRange<GridX, GridY>;
+using IdxRangeVx = IdxRange<GridVx>;
+using IdxRangeVy = IdxRange<GridVy>;
+using IdxRangeXYVxVy = IdxRange<GridX, GridY, GridVx, GridVy>;
 
 
 
 // Chunks, Spans and Views
 template <class ElementType>
-using FieldXY = device_t<ddc::Chunk<ElementType, IDomainXY>>;
+using FieldMemXY = FieldMem<ElementType, IdxRangeXY>;
+using DFieldMemXY = FieldMemXY<double>;
+
+template <class ElementType>
+using FieldMemXYVxVy = FieldMem<ElementType, IdxRangeXYVxVy>;
+using DFieldMemXYVxVy = FieldMemXYVxVy<double>;
+
+
+template <class ElementType>
+using FieldXY = Field<ElementType, IdxRangeXY>;
 using DFieldXY = FieldXY<double>;
 
 template <class ElementType>
-using FieldXYVxVy = device_t<ddc::Chunk<ElementType, IDomainXYVxVy>>;
+using FieldXYVxVy = Field<ElementType, IdxRangeXYVxVy>;
 using DFieldXYVxVy = FieldXYVxVy<double>;
-
-
-template <class ElementType>
-using SpanXY = device_t<ddc::ChunkSpan<ElementType, IDomainXY>>;
-using DSpanXY = SpanXY<double>;
-
-template <class ElementType>
-using SpanXYVxVy = device_t<ddc::ChunkSpan<ElementType, IDomainXYVxVy>>;
-using DSpanXYVxVy = SpanXYVxVy<double>;
 
 
 // Operators
@@ -125,90 +125,90 @@ using SplineXBuilder_2d = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        IDimX,
+        GridX,
         SplineXBoundary,
         SplineXBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimX,
-        IDimY>;
+        GridX,
+        GridY>;
 using SplineXEvaluator_2d = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        IDimX,
-        ddc::PeriodicExtrapolationRule<RDimX>,
-        ddc::PeriodicExtrapolationRule<RDimX>,
-        IDimX,
-        IDimY>;
+        GridX,
+        ddc::PeriodicExtrapolationRule<X>,
+        ddc::PeriodicExtrapolationRule<X>,
+        GridX,
+        GridY>;
 
 using SplineYBuilder_2d = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
-        IDimY,
+        GridY,
         SplineYBoundary,
         SplineYBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimX,
-        IDimY>;
+        GridX,
+        GridY>;
 using SplineYEvaluator_2d = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
-        IDimY,
-        ddc::PeriodicExtrapolationRule<RDimY>,
-        ddc::PeriodicExtrapolationRule<RDimY>,
-        IDimX,
-        IDimY>;
+        GridY,
+        ddc::PeriodicExtrapolationRule<Y>,
+        ddc::PeriodicExtrapolationRule<Y>,
+        GridX,
+        GridY>;
 
 
 using SplineXBuilder_4d = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        IDimX,
+        GridX,
         SplineXBoundary,
         SplineXBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimX,
-        IDimY,
-        IDimVx,
-        IDimVy>;
+        GridX,
+        GridY,
+        GridVx,
+        GridVy>;
 using SplineXEvaluator_4d = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        IDimX,
-        ddc::PeriodicExtrapolationRule<RDimX>,
-        ddc::PeriodicExtrapolationRule<RDimX>,
-        IDimX,
-        IDimY,
-        IDimVx,
-        IDimVy>;
+        GridX,
+        ddc::PeriodicExtrapolationRule<X>,
+        ddc::PeriodicExtrapolationRule<X>,
+        GridX,
+        GridY,
+        GridVx,
+        GridVy>;
 
 using SplineYBuilder_4d = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
-        IDimY,
+        GridY,
         SplineYBoundary,
         SplineYBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimX,
-        IDimY,
-        IDimVx,
-        IDimVy>;
+        GridX,
+        GridY,
+        GridVx,
+        GridVy>;
 using SplineYEvaluator_4d = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
-        IDimY,
-        ddc::PeriodicExtrapolationRule<RDimY>,
-        ddc::PeriodicExtrapolationRule<RDimY>,
-        IDimX,
-        IDimY,
-        IDimVx,
-        IDimVy>;
+        GridY,
+        ddc::PeriodicExtrapolationRule<Y>,
+        ddc::PeriodicExtrapolationRule<Y>,
+        GridX,
+        GridY,
+        GridVx,
+        GridVy>;
 
 
 
@@ -217,35 +217,39 @@ class XYVxVyAdvection1DTest : public ::testing::Test
 protected:
     static constexpr CoordX x_min = CoordX(-.5);
     static constexpr CoordX x_max = CoordX(.5);
-    static constexpr IVectX x_size = IVectX(60);
+    static constexpr IdxStepX x_size = IdxStepX(60);
 
     static constexpr CoordY y_min = CoordY(-.5);
     static constexpr CoordY y_max = CoordY(.5);
-    static constexpr IVectY y_size = IVectY(60);
+    static constexpr IdxStepY y_size = IdxStepY(60);
 
-    static constexpr IndexVx idx0_vx = IndexVx(0);
-    static constexpr IVectVx vx_size = IVectVx(2);
+    static constexpr IdxVx idx0_vx = IdxVx(0);
+    static constexpr IdxStepVx vx_size = IdxStepVx(2);
 
-    static constexpr IndexVy idx0_vy = IndexVy(0);
-    static constexpr IVectVy vy_size = IVectVy(2);
+    static constexpr IdxVy idx0_vy = IdxVy(0);
+    static constexpr IdxStepVy vy_size = IdxStepVy(2);
 
 
-    IDomainX const interpolation_domain_x;
-    IDomainY const interpolation_domain_y;
-    IDomainXY const xy_grid;
+    IdxRangeX const interpolation_idx_range_x;
+    IdxRangeY const interpolation_idx_range_y;
+    IdxRangeXY const xy_grid;
 
-    IDomainVx const domain_vx;
-    IDomainVy const domain_vy;
-    IDomainXYVxVy const xyvxvy_grid;
+    IdxRangeVx const idx_range_vx;
+    IdxRangeVy const idx_range_vy;
+    IdxRangeXYVxVy const xyvxvy_grid;
 
 public:
     XYVxVyAdvection1DTest()
-        : interpolation_domain_x(SplineInterpPointsX::get_domain<IDimX>())
-        , interpolation_domain_y(SplineInterpPointsY::get_domain<IDimY>())
-        , xy_grid(interpolation_domain_x, interpolation_domain_y)
-        , domain_vx(idx0_vx, vx_size)
-        , domain_vy(idx0_vy, vy_size)
-        , xyvxvy_grid(interpolation_domain_x, interpolation_domain_y, domain_vx, domain_vy) {};
+        : interpolation_idx_range_x(SplineInterpPointsX::get_domain<GridX>())
+        , interpolation_idx_range_y(SplineInterpPointsY::get_domain<GridY>())
+        , xy_grid(interpolation_idx_range_x, interpolation_idx_range_y)
+        , idx_range_vx(idx0_vx, vx_size)
+        , idx_range_vy(idx0_vy, vy_size)
+        , xyvxvy_grid(
+                  interpolation_idx_range_x,
+                  interpolation_idx_range_y,
+                  idx_range_vx,
+                  idx_range_vy) {};
 
     ~XYVxVyAdvection1DTest() = default;
 
@@ -255,8 +259,8 @@ public:
         ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
         ddc::init_discrete_space<BSplinesY>(y_min, y_max, y_size);
 
-        ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
-        ddc::init_discrete_space<IDimY>(SplineInterpPointsY::get_sampling<IDimY>());
+        ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+        ddc::init_discrete_space<GridY>(SplineInterpPointsY::get_sampling<GridY>());
     }
 
     template <class AdvectionOperatorX, class AdvectionOperatorY>
@@ -273,12 +277,12 @@ public:
         double const yc = 0.2;
         double const a = 0.5;
 
-        DFieldXYVxVy function_alloc(xyvxvy_grid);
-        DSpanXYVxVy function = function_alloc.span_view();
+        DFieldMemXYVxVy function_alloc(xyvxvy_grid);
+        DFieldXYVxVy function = get_field(function_alloc);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 xyvxvy_grid,
-                KOKKOS_LAMBDA(IndexXYVxVy const idx) {
+                KOKKOS_LAMBDA(IdxXYVxVy const idx) {
                     CoordXY coord_xy = CoordXY(ddc::coordinate(idx));
                     double const x = CoordX(coord_xy);
                     double const y = CoordY(coord_xy);
@@ -295,18 +299,18 @@ public:
         /*
             The advection field is a Chunk of double instead of a Chunk 
             of coordinates, because inside the advection operator
-            we use an interpolator which needs the DFieldXY format.
+            we use an interpolator which needs the DFieldMemXY format.
         */
-        DFieldXY advection_field_x_alloc(xy_grid);
-        DSpanXY advection_field_x = advection_field_x_alloc.span_view();
+        DFieldMemXY advection_field_x_alloc(xy_grid);
+        DFieldXY advection_field_x = get_field(advection_field_x_alloc);
 
-        DFieldXY advection_field_y_alloc(xy_grid);
-        DSpanXY advection_field_y = advection_field_y_alloc.span_view();
+        DFieldMemXY advection_field_y_alloc(xy_grid);
+        DFieldXY advection_field_y = get_field(advection_field_y_alloc);
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 xy_grid,
-                KOKKOS_LAMBDA(IndexXY const idx) {
+                KOKKOS_LAMBDA(IdxXY const idx) {
                     CoordXY coord_xy(ddc::coordinate(idx));
                     double const x = CoordX(coord_xy);
                     advection_field_x(idx) = Kokkos::sin(x * 2 * M_PI) / M_PI / 2.;
@@ -317,8 +321,8 @@ public:
 
 
         // EXACT ADVECTED FUNCTION -------------------------------------------------------------------
-        host_t<DFieldXYVxVy> exact_function(xyvxvy_grid);
-        ddc::for_each(xyvxvy_grid, [&](IndexXYVxVy const idx) {
+        host_t<DFieldMemXYVxVy> exact_function(xyvxvy_grid);
+        ddc::for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
             CoordXY coord_xy = CoordXY(ddc::coordinate(idx));
             double const x0 = CoordX(coord_xy);
             double const y0 = CoordY(coord_xy);
@@ -326,12 +330,12 @@ public:
             double x = 2 * std::atan(std::tan(x0 * M_PI) * std::exp(-final_t)) / M_PI / 2.;
             double y = 2 * std::atan(std::tan(y0 * M_PI) * std::exp(-final_t)) / M_PI / 2.;
 
-            // Replace inside the domain the feet if the dimension if periodic
-            if (RDimX::PERIODIC) {
+            // Replace inside the index range the feet if the dimension if periodic
+            if (X::PERIODIC) {
                 x = fmod(x - double(x_min), double(x_max - x_min)) + double(x_min);
                 x = x > double(x_min) ? x : x + double(x_max - x_min);
             }
-            if (RDimY::PERIODIC) {
+            if (Y::PERIODIC) {
                 y = fmod(y - double(y_min), double(y_max - y_min)) + double(y_min);
                 y = y > double(y_min) ? y : y + double(y_max - y_min);
             }
@@ -358,7 +362,7 @@ public:
         */
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
-        ddc::for_each(xyvxvy_grid, [&](IndexXYVxVy const idx) {
+        ddc::for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
             double const relative_error = abs(function_host(idx) - exact_function(idx));
             max_relative_error
                     = max_relative_error > relative_error ? max_relative_error : relative_error;
@@ -380,13 +384,13 @@ TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
     SplineYBuilder_4d const function_builder_y(xyvxvy_grid);
 
 
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_min;
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
+    ddc::PeriodicExtrapolationRule<X> bv_x_min;
+    ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator_2d const adv_field_spline_evaluator_x(bv_x_min, bv_x_max);
     SplineXEvaluator_4d const function_spline_evaluator_x(bv_x_min, bv_x_max);
 
-    ddc::PeriodicExtrapolationRule<RDimY> bv_y_min;
-    ddc::PeriodicExtrapolationRule<RDimY> bv_y_max;
+    ddc::PeriodicExtrapolationRule<Y> bv_y_min;
+    ddc::PeriodicExtrapolationRule<Y> bv_y_max;
     SplineYEvaluator_2d const adv_field_spline_evaluator_y(bv_y_min, bv_y_max);
     SplineYEvaluator_4d const function_spline_evaluator_y(bv_y_min, bv_y_max);
 
@@ -397,28 +401,28 @@ TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
             function_spline_y_interpolator(function_builder_y, function_spline_evaluator_y);
 
 
-    RK2<FieldXY<CoordX>, DFieldXY> time_stepper_x(xy_grid);
-    RK2<FieldXY<CoordY>, DFieldXY> time_stepper_y(xy_grid);
+    RK2<FieldMemXY<CoordX>, DFieldMemXY> time_stepper_x(xy_grid);
+    RK2<FieldMemXY<CoordY>, DFieldMemXY> time_stepper_y(xy_grid);
 
     BslAdvection1D<
-            IDimX,
-            IDomainXY,
-            IDomainXYVxVy,
+            GridX,
+            IdxRangeXY,
+            IdxRangeXYVxVy,
             SplineXBuilder_2d,
             SplineXEvaluator_2d,
-            RK2<FieldXY<CoordX>, DFieldXY>> const
+            RK2<FieldMemXY<CoordX>, DFieldMemXY>> const
             advection_x(
                     function_spline_x_interpolator,
                     adv_field_builder_x,
                     adv_field_spline_evaluator_x,
                     time_stepper_x);
     BslAdvection1D<
-            IDimY,
-            IDomainXY,
-            IDomainXYVxVy,
+            GridY,
+            IdxRangeXY,
+            IdxRangeXYVxVy,
             SplineYBuilder_2d,
             SplineYEvaluator_2d,
-            RK2<FieldXY<CoordY>, DFieldXY>> const
+            RK2<FieldMemXY<CoordY>, DFieldMemXY>> const
             advection_y(
                     function_spline_y_interpolator,
                     adv_field_builder_y,

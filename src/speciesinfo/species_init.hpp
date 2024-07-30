@@ -19,8 +19,8 @@
  * @param[in] nb_fluidspecies number of fluid species
  */
 void init_all_species(
-        ddc::DiscreteDomain<IDimSp>& dom_kinsp,
-        ddc::DiscreteDomain<IDimSp>& dom_fluidsp,
+        ddc::DiscreteDomain<Species>& dom_kinsp,
+        ddc::DiscreteDomain<Species>& dom_fluidsp,
         PC_tree_t conf_voicexx,
         int nb_kinspecies,
         int nb_fluidspecies);
@@ -30,7 +30,7 @@ void init_all_species(
  * @param[in] conf_voicexx is the YAML input file
  * @return the kinetic species domain 
  */
-ddc::DiscreteDomain<IDimSp> init_species(PC_tree_t conf_voicexx);
+ddc::DiscreteDomain<Species> init_species(PC_tree_t conf_voicexx);
 
 /**
  * @brief Initialise the species domain in the specific case of fluid species 
@@ -40,6 +40,6 @@ ddc::DiscreteDomain<IDimSp> init_species(PC_tree_t conf_voicexx);
  * @param[in] conf_voicexx is the YAML input file
  */
 void init_species_withfluid(
-        ddc::DiscreteDomain<IDimSp>& dom_kinsp,
-        ddc::DiscreteDomain<IDimSp>& dom_fluidsp,
+        ddc::DiscreteDomain<Species>& dom_kinsp,
+        ddc::DiscreteDomain<Species>& dom_fluidsp,
         PC_tree_t conf_voicexx);

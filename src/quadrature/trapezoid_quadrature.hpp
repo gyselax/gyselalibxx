@@ -3,38 +3,37 @@
  * File providing quadrature coefficients via the trapezoidal method.
  */
 #pragma once
-
 #include <ddc/ddc.hpp>
 
+#include "ddc_aliases.hpp"
 #include "quadrature_coeffs_nd.hpp"
 
 /**
  * @brief Get the trapezoid coefficients in 1D.
  *
- * Calculate the quadrature coefficients for the trapezoid method defined on the provided domain.
+ * Calculate the quadrature coefficients for the trapezoid method defined on the provided index range.
  *
- * @param[in] domain
- * 	The domain on which the quadrature will be carried out.
+ * @param[in] idx_range
+ * 	The index range on which the quadrature will be carried out.
  *
- * @return The quadrature coefficients for the trapezoid method defined on the provided domain.
+ * @return The quadrature coefficients for the trapezoid method defined on the provided index range.
  */
-template <class IDim>
-ddc::Chunk<double, ddc::DiscreteDomain<IDim>> trapezoid_quadrature_coefficients_1d(
-        ddc::DiscreteDomain<IDim> const& domain)
+template <class Grid>
+host_t<FieldMem<double, IdxRange<Grid>>> trapezoid_quadrature_coefficients_1d(
+        IdxRange<Grid> const& idx_range)
 {
-    ddc::Chunk<double, ddc::DiscreteDomain<IDim>> coefficients(domain);
-    ddc::DiscreteDomain<IDim> middle_domain
-            = domain.remove(ddc::DiscreteVector<IDim>(1), ddc::DiscreteVector<IDim>(1));
+    host_t<FieldMem<double, IdxRange<Grid>>> coefficients(idx_range);
+    IdxRange<Grid> middle_idx_range = idx_range.remove(IdxStep<Grid>(1), IdxStep<Grid>(1));
 
-    coefficients(domain.front()) = 0.5 * distance_at_right(domain.front());
-    ddc::for_each(middle_domain, [&](ddc::DiscreteElement<IDim> const idx) {
+    coefficients(idx_range.front()) = 0.5 * distance_at_right(idx_range.front());
+    ddc::for_each(middle_idx_range, [&](Idx<Grid> const idx) {
         coefficients(idx) = 0.5 * (distance_at_left(idx) + distance_at_right(idx));
     });
-    coefficients(domain.back()) = 0.5 * distance_at_left(domain.back());
+    coefficients(idx_range.back()) = 0.5 * distance_at_left(idx_range.back());
 
-    if constexpr (IDim::continuous_dimension_type::PERIODIC) {
-        coefficients(domain.front()) += 0.5 * distance_at_left(domain.back());
-        coefficients(domain.back()) += 0.5 * distance_at_right(domain.front());
+    if constexpr (Grid::continuous_dimension_type::PERIODIC) {
+        coefficients(idx_range.front()) += 0.5 * distance_at_left(idx_range.back());
+        coefficients(idx_range.back()) += 0.5 * distance_at_right(idx_range.front());
     }
 
     return coefficients;
@@ -43,19 +42,19 @@ ddc::Chunk<double, ddc::DiscreteDomain<IDim>> trapezoid_quadrature_coefficients_
 /**
  * @brief Get the trapezoid coefficients in ND.
  *
- * Calculate the quadrature coefficients for the trapezoid method defined on the provided domain.
+ * Calculate the quadrature coefficients for the trapezoid method defined on the provided index range.
  *
- * @param[in] domain
- * 	The domain on which the quadrature will be carried out.
+ * @param[in] idx_range
+ * 	The index range on which the quadrature will be carried out.
  *
- * @return The quadrature coefficients for the trapezoid method defined on the provided domain.
+ * @return The quadrature coefficients for the trapezoid method defined on the provided index range.
  */
 template <class... ODims>
-ddc::Chunk<double, ddc::DiscreteDomain<ODims...>> trapezoid_quadrature_coefficients(
-        ddc::DiscreteDomain<ODims...> const& domain)
+host_t<FieldMem<double, IdxRange<ODims...>>> trapezoid_quadrature_coefficients(
+        IdxRange<ODims...> const& idx_range)
 {
     return quadrature_coeffs_nd(
-            domain,
-            (std::function<ddc::Chunk<double, ddc::DiscreteDomain<ODims>>(
-                     ddc::DiscreteDomain<ODims>)>(trapezoid_quadrature_coefficients_1d<ODims>))...);
+            idx_range,
+            (std::function<host_t<FieldMem<double, IdxRange<ODims>>>(IdxRange<ODims>)>(
+                    trapezoid_quadrature_coefficients_1d<ODims>))...);
 }

@@ -70,7 +70,7 @@ private:
 
     DViewVx const m_quadrature_coeffs;
 
-    IndexSp find_ion(IDomainSp const dom_kinsp) const;
+    IdxSp find_ion(IdxRangeSp const dom_kinsp) const;
 
 public:
     /**

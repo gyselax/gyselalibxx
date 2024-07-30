@@ -21,7 +21,6 @@ template <
 class CollisionSpVparMu /* : public IRightHandSide */
 {
 private:
-    using Species = IDimSp;
     using InputDFieldR = typename CollInfo::radial_chunk_type;
     using fdistrib_domain_tags = ddc::to_type_seq_t<FDistribDomain>;
     using GridR = typename collisions_dimensions::ExtractRDim<InputDFieldR>::type;
@@ -71,7 +70,7 @@ public:
     /// Type alias for the domain of the velocity parallel to the magnetic field.
     using DDomVpar = ddc::DiscreteDomain<GridVpar>;
     /// Type alias for a field on a grid of species
-    using DFieldSp = device_t<ddc::Chunk<double, IDomainSp>>;
+    using DFieldMemSp = device_t<ddc::Chunk<double, IdxRangeSp>>;
     /// Type alias for a field on a grid of radial values
     using DFieldR = device_t<ddc::Chunk<double, DDomR>>;
     /// Type alias for a field on a grid of magnetic moments
@@ -185,16 +184,15 @@ public:
         , m_mug {"m_mug", ddc::select<GridMu>(fdistrib_domain)}
         , m_vparg {"m_vparg", ddc::select<GridVpar>(fdistrib_domain)}
     {
-        using namespace collisions_dimensions;
         // Check that the distribution function is correctly ordered
         koliop_interface::DoCombMatComputation(m_comb_mat);
 
-        IDomainSp idxrange_sp = ddc::select<Species>(fdistrib_domain);
+        IdxRangeSp idxrange_sp = ddc::select<Species>(fdistrib_domain);
         // --> Initialize the mass species
-        ddc::ChunkSpan hat_As_host = ddc::discrete_space<IDimSp>().masses()[idxrange_sp];
+        ddc::ChunkSpan hat_As_host = ddc::discrete_space<Species>().masses()[idxrange_sp];
         ddc::parallel_deepcopy(m_hat_As.span_view(), hat_As_host);
         // --> Initialize the charge species
-        ddc::ChunkSpan hat_Zs_host = ddc::discrete_space<IDimSp>().charges()[idxrange_sp];
+        ddc::ChunkSpan hat_Zs_host = ddc::discrete_space<Species>().charges()[idxrange_sp];
         ddc::parallel_deepcopy(m_hat_Zs.span_view(), hat_Zs_host);
 
         // --> Initialize the other quantities needed in koliop
@@ -214,8 +212,9 @@ public:
 
         std::size_t const n_mu = ddc::select<GridMu>(fdistrib_domain).size();
         std::size_t const n_vpar = ddc::select<GridVpar>(fdistrib_domain).size();
-        std::size_t const n_r = get_idx_range<GridR>(fdistrib_domain).size();
-        std::size_t const n_theta = get_idx_range<GridTheta>(fdistrib_domain).size();
+        std::size_t const n_r = collisions_dimensions::get_idx_range<GridR>(fdistrib_domain).size();
+        std::size_t const n_theta
+                = collisions_dimensions::get_idx_range<GridTheta>(fdistrib_domain).size();
         std::size_t const n_sp = ddc::select<Species>(fdistrib_domain).size();
         std::size_t const n_batch = fdistrib_domain.size() / (n_mu * n_vpar * n_r * n_theta * n_sp);
 
@@ -291,9 +290,9 @@ protected:
     /// Combinatory (6x6) matrix computed only one times at initialisation. Rk: 6 = 2*(Npolmax-1) + 1 + 1
     koliop_interface::MDL<double[6][6]> m_comb_mat;
     /// Normalized masses for all species
-    DFieldSp m_hat_As;
+    DFieldMemSp m_hat_As;
     /// Normalized charges for all species
-    DFieldSp m_hat_Zs;
+    DFieldMemSp m_hat_Zs;
     /// Radial profile of nustar0_r
     DFieldR m_nustar0_r;
     /// Mesh points in the radial direction

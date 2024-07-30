@@ -13,16 +13,16 @@
 class MaxwellianEquilibrium : public IEquilibrium
 {
     // mass of all kinetic species
-    host_t<DFieldSp> m_mass;
+    host_t<DFieldMemSp> m_mass;
 
     // equilibrium density of all kinetic species
-    host_t<DFieldSp> m_density_eq;
+    host_t<DFieldMemSp> m_density_eq;
 
     // equilibrium temperature of all kinetic species
-    host_t<DFieldSp> m_temperature_eq;
+    host_t<DFieldMemSp> m_temperature_eq;
 
     // equilibrium mean velocity of all kinetic species
-    host_t<DFieldSp> m_mean_velocity_eq;
+    host_t<DFieldMemSp> m_mean_velocity_eq;
 
 private:
     // magnetic field
@@ -38,10 +38,10 @@ public:
      * @param[in] magnetic_field The magnetic field
      */
     MaxwellianEquilibrium(
-            host_t<DFieldSp> mass,
-            host_t<DFieldSp> density_eq,
-            host_t<DFieldSp> temperature_eq,
-            host_t<DFieldSp> mean_velocity_eq,
+            host_t<DFieldMemSp> mass,
+            host_t<DFieldMemSp> density_eq,
+            host_t<DFieldMemSp> temperature_eq,
+            host_t<DFieldMemSp> mean_velocity_eq,
             double magnetic_field);
 
     ~MaxwellianEquilibrium() override = default;
@@ -53,7 +53,7 @@ public:
      * @return an instance of Maxwellian distribution function.
      */
     static MaxwellianEquilibrium init_from_input(
-            IDomainSp dom_kinsp,
+            IdxRangeSp dom_kinsp,
             PC_tree_t const& yaml_input_file);
 
     /**
@@ -90,7 +90,7 @@ public:
      * @brief A method for accessing the m_mass member variable of the class.
      * @return A view containing the m_mass value. 
      */
-    host_t<DViewSp> mass() const
+    host_t<DConstFieldSp> mass() const
     {
         return m_mass;
     }
@@ -99,7 +99,7 @@ public:
      * @brief A method for accessing the m_density_eq member variable of the class.
      * @return A view containing the m_density_eq value. 
      */
-    host_t<DViewSp> density_eq() const
+    host_t<DConstFieldSp> density_eq() const
     {
         return m_density_eq;
     }
@@ -108,7 +108,7 @@ public:
      * @brief A method for accessing the m_temperature_eq member variable of the class.
      * @return A view containing the m_temperature_eq value. 
      */
-    host_t<DViewSp> temperature_eq() const
+    host_t<DConstFieldSp> temperature_eq() const
     {
         return m_temperature_eq;
     }
@@ -117,7 +117,7 @@ public:
      * @brief A method for accessing the m_mean_velocity_eq member variable of the class.
      * @return A view containing the m_velocity_eq value. 
      */
-    host_t<DViewSp> mean_velocity_eq() const
+    host_t<DConstFieldSp> mean_velocity_eq() const
     {
         return m_mean_velocity_eq;
     }

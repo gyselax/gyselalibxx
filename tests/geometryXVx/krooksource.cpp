@@ -32,9 +32,9 @@ TEST(KrookSource, Adaptive)
     CoordVx const vx_max(6);
     IVectVx const vx_size(50);
 
-    IVectSp const nb_kinspecies(2);
+    IdxStepSp const nb_kinspecies(2);
 
-    IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
+    IdxRangeSp const dom_sp(IdxSp(0), nb_kinspecies);
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -52,22 +52,22 @@ TEST(KrookSource, Adaptive)
     SplineXBuilder_1d const builder_x(gridx);
     SplineVxBuilder_1d const builder_vx(gridvx);
 
-    IDomainSp const gridsp = dom_sp;
+    IdxRangeSp const gridsp = dom_sp;
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
     host_t<DFieldVx> const quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
     host_t<Quadrature<IDomainVx>> const integrate_v(quadrature_coeffs_vx);
 
-    host_t<DFieldSp> charges(dom_sp);
-    host_t<DFieldSp> masses(dom_sp);
-    IndexSp my_iion(dom_sp.front());
-    IndexSp my_ielec(dom_sp.back());
+    host_t<DFieldMemSp> charges(dom_sp);
+    host_t<DFieldMemSp> masses(dom_sp);
+    IdxSp my_iion(dom_sp.front());
+    IdxSp my_ielec(dom_sp.back());
     charges(my_iion) = 1.;
     charges(my_ielec) = -1.;
-    ddc::for_each(dom_sp, [&](IndexSp const isp) { masses(isp) = 1.0; });
+    ddc::for_each(dom_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
 
     // Initialization of the distribution function
-    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
+    ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
     double const extent = 0.5;
     double const stiffness = 0.01;
@@ -90,9 +90,9 @@ TEST(KrookSource, Adaptive)
     double const density_init_elec = 2.;
     double const temperature_init = 1.;
     DFieldSpXVx allfdistribu(mesh);
-    ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
+    ddc::for_each(ddc::select<Species, IDimX>(mesh), [&](IndexSpX const ispx) {
         DFieldVx finit(gridvx);
-        if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
+        if (charge(ddc::select<Species>(ispx)) >= 0.) {
             MaxwellianEquilibrium::
                     compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
         } else {
@@ -108,8 +108,8 @@ TEST(KrookSource, Adaptive)
     rhs_krook(allfdistribu, deltat);
     auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
 
-    host_t<DFieldSpX> densities(ddc::get_domain<IDimSp, IDimX>(allfdistribu));
-    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+    host_t<DFieldSpX> densities(ddc::get_domain<Species, IDimX>(allfdistribu));
+    ddc::for_each(ddc::get_domain<Species, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
         densities(ispx) = integrate_v(Kokkos::DefaultHostExecutionSpace(), allfdistribu_host[ispx]);
     });
 
@@ -122,9 +122,9 @@ TEST(KrookSource, Adaptive)
     });
 
     // reinitialization of the distribution function
-    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+    ddc::for_each(ddc::get_domain<Species, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
         DFieldVx finit(gridvx);
-        if (charge(ddc::select<IDimSp>(ispx)) >= 0.) {
+        if (charge(ddc::select<Species>(ispx)) >= 0.) {
             MaxwellianEquilibrium::
                     compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
         } else {
@@ -138,7 +138,7 @@ TEST(KrookSource, Adaptive)
     // error with a deltat 10 times smaller
     rhs_krook(allfdistribu, 0.01);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
-    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
+    ddc::for_each(ddc::get_domain<Species, IDimX>(allfdistribu), [&](IndexSpX const ispx) {
         densities(ispx) = integrate_v(Kokkos::DefaultHostExecutionSpace(), allfdistribu_host[ispx]);
     });
 
@@ -168,9 +168,9 @@ TEST(KrookSource, Constant)
     CoordVx const vx_max(6);
     IVectVx const vx_size(10);
 
-    IVectSp const nb_kinspecies(2);
+    IdxStepSp const nb_kinspecies(2);
 
-    IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
+    IdxRangeSp const dom_sp(IdxSp(0), nb_kinspecies);
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -189,18 +189,18 @@ TEST(KrookSource, Constant)
     SplineXBuilder_1d const builder_x(gridx);
     SplineVxBuilder_1d const builder_vx(gridvx);
 
-    IDomainSp const gridsp = dom_sp;
+    IdxRangeSp const gridsp = dom_sp;
 
     IDomainSpXVx const mesh(gridsp, gridx, gridvx);
 
-    host_t<DFieldSp> charges(dom_sp);
-    host_t<DFieldSp> masses(dom_sp);
+    host_t<DFieldMemSp> charges(dom_sp);
+    host_t<DFieldMemSp> masses(dom_sp);
     charges(dom_sp.front()) = 1.;
     charges(dom_sp.back()) = -1.;
-    ddc::for_each(dom_sp, [&](IndexSp const isp) { masses(isp) = 1.0; });
+    ddc::for_each(dom_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
 
     // Initialization of the distribution function
-    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
+    ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
     double const extent = 0.25;
     double const stiffness = 0.01;
@@ -231,7 +231,7 @@ TEST(KrookSource, Constant)
     MaxwellianEquilibrium::compute_maxwellian(finit, density_init, temperature_init, 0.);
     auto finit_host = ddc::create_mirror_view_and_copy(finit.span_view());
     DFieldSpXVx allfdistribu(mesh);
-    ddc::for_each(ddc::select<IDimSp, IDimX>(mesh), [&](IndexSpX const ispx) {
+    ddc::for_each(ddc::select<Species, IDimX>(mesh), [&](IndexSpX const ispx) {
         ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
     });
 
