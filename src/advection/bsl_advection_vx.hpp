@@ -1,45 +1,42 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
+
 #include <ddc/ddc.hpp>
 
 #include <ddc_helper.hpp>
 #include <iinterpolator.hpp>
 #include <species_info.hpp>
 
-#include "ddc_aliases.hpp"
 #include "iadvectionvx.hpp"
 
 /**
- * @brief A class which computes the velocity advection along the dimension of interest GridV. Working for every cartesian geometry.
+ * @brief A class which computes the velocity advection along the dimension of interest DDimV. Working for every cartesian geometry.
  */
-template <class Geometry, class GridV>
-class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV>
+template <class Geometry, class DDimV>
+class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, DDimV>
 {
-    using FdistribuIdxRange = typename Geometry::FdistribuIdxRange;
-    using SpatialIdxRange = typename Geometry::SpatialIdxRange;
-    using IdxV = Idx<GridV>;
-    using DimV = typename GridV::continuous_dimension_type;
+    using FdistribuDDom = typename Geometry::FdistribuDDom;
+    using SpatialDDom = typename Geometry::SpatialDDom;
+    using DElemV = ddc::DiscreteElement<DDimV>;
+    using DElemSp = ddc::DiscreteElement<IDimSp>;
+    using CDimV = typename DDimV::continuous_dimension_type;
 
 private:
-    using PreallocatableInterpolatorType = interpolator_on_idx_range_t<
+    using PreallocatableInterpolatorType = interpolator_on_domain_t<
             IPreallocatableInterpolator,
-            GridV,
-            ddc::cartesian_prod_t<
-                    typename Geometry::SpatialIdxRange,
-                    typename Geometry::VelocityIdxRange>>;
-    using InterpolatorType = interpolator_on_idx_range_t<
+            DDimV,
+            ddc::cartesian_prod_t<typename Geometry::SpatialDDom, typename Geometry::VelocityDDom>>;
+    using InterpolatorType = interpolator_on_domain_t<
             IInterpolator,
-            GridV,
-            ddc::cartesian_prod_t<
-                    typename Geometry::SpatialIdxRange,
-                    typename Geometry::VelocityIdxRange>>;
+            DDimV,
+            ddc::cartesian_prod_t<typename Geometry::SpatialDDom, typename Geometry::VelocityDDom>>;
     PreallocatableInterpolatorType const& m_interpolator_v;
 
 public:
     /**
      * @brief Constructor 
-     * @param[in] interpolator_v interpolator along the GridV direction which refers to the velocity space.  
+     * @param[in] interpolator_v interpolator along the DDimV direction which refers to the velocity space.  
      */
     explicit BslAdvectionVelocity(PreallocatableInterpolatorType const& interpolator_v)
         : m_interpolator_v(interpolator_v)
@@ -49,66 +46,68 @@ public:
     ~BslAdvectionVelocity() override = default;
 
     /**
-     * @brief Advects fdistribu along GridV for a duration dt.
+     * @brief Advects fdistribu along DDimV for a duration dt.
      * @param[in, out] allfdistribu Reference to the whole distribution function for one species, allocated on the device (ie it lets the choice of the location depend on the build configuration).
      * @param[in] electric_field Reference to the electric field which derives from electrostatic potential, allocated on the device.
      * @param[in] dt Time step
      * @return A reference to the allfdistribu array containing the value of the function at the coordinates.
      */
-    Field<double, FdistribuIdxRange> operator()(
-            Field<double, FdistribuIdxRange> const allfdistribu,
-            Field<const double, SpatialIdxRange> const electric_field,
+    device_t<ddc::ChunkSpan<double, FdistribuDDom>> operator()(
+            device_t<ddc::ChunkSpan<double, FdistribuDDom>> const allfdistribu,
+            device_t<ddc::ChunkSpan<const double, SpatialDDom>> const electric_field,
             double const dt) const override
     {
         Kokkos::Profiling::pushRegion("BslAdvectionVelocity");
-        FdistribuIdxRange const dom = get_idx_range(allfdistribu);
-        IdxRange<GridV> const v_dom = ddc::select<GridV>(dom);
-        IdxRange<Species> const sp_dom = ddc::select<Species>(dom);
+        FdistribuDDom const dom = allfdistribu.domain();
+        ddc::DiscreteDomain<DDimV> const v_dom = ddc::select<DDimV>(dom);
+        ddc::DiscreteDomain<IDimSp> const sp_dom = ddc::select<IDimSp>(dom);
 
-        FieldMem<double, typename InterpolatorType::batched_derivs_idx_range_type> derivs_min(
-                m_interpolator_v.batched_derivs_idx_range_xmin(ddc::remove_dims_of<Species>(dom)));
-        FieldMem<double, typename InterpolatorType::batched_derivs_idx_range_type> derivs_max(
-                m_interpolator_v.batched_derivs_idx_range_xmax(ddc::remove_dims_of<Species>(dom)));
+        device_t<ddc::Chunk<double, typename InterpolatorType::batched_derivs_domain_type>>
+                derivs_min(m_interpolator_v.batched_derivs_domain_xmin(
+                        ddc::remove_dims_of<IDimSp>(dom)));
+        device_t<ddc::Chunk<double, typename InterpolatorType::batched_derivs_domain_type>>
+                derivs_max(m_interpolator_v.batched_derivs_domain_xmax(
+                        ddc::remove_dims_of<IDimSp>(dom)));
         ddc::parallel_fill(derivs_min, 0.);
         ddc::parallel_fill(derivs_max, 0.);
 
         // pre-allocate some memory to prevent allocation later in loop
         ddc::Chunk feet_coords_alloc(
                 ddc::remove_dims_of(dom, sp_dom),
-                ddc::DeviceAllocator<Coord<DimV>>());
-        ddc::ChunkSpan feet_coords = get_field(feet_coords_alloc);
+                ddc::DeviceAllocator<ddc::Coordinate<CDimV>>());
+        ddc::ChunkSpan feet_coords = feet_coords_alloc.span_view();
         std::unique_ptr<InterpolatorType> const interpolator_v_ptr = m_interpolator_v.preallocate();
         InterpolatorType const& interpolator_v = *interpolator_v_ptr;
 
-        SpatialIdxRange const spatial_dom(get_idx_range(allfdistribu));
+        SpatialDDom const spatial_dom(allfdistribu.domain());
 
-        auto batch_idx_range = ddc::remove_dims_of(ddc::remove_dims_of(dom, sp_dom), v_dom);
-        using IdxB = typename decltype(batch_idx_range)::discrete_element_type;
-        using IdxSpatial = typename SpatialIdxRange::discrete_element_type;
+        auto c_dom = ddc::remove_dims_of(ddc::remove_dims_of(dom, sp_dom), v_dom);
+        using DElemC = typename decltype(c_dom)::discrete_element_type;
+        using DElemSpatial = typename SpatialDDom::discrete_element_type;
 
-        ddc::for_each(sp_dom, [&](IdxSp const isp) {
+        ddc::for_each(sp_dom, [&](DElemSp const isp) {
             double const charge_proxy
                     = charge(isp); // TODO: consider proper way to access charge from device
             double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
-                    batch_idx_range,
-                    KOKKOS_LAMBDA(IdxB const ib) {
-                        IdxSpatial const ix(ib);
+                    c_dom,
+                    KOKKOS_LAMBDA(DElemC const ic) {
+                        DElemSpatial const ix(ic);
                         // compute the displacement
                         double const dvx
                                 = charge_proxy * sqrt_me_on_mspecies * dt * electric_field(ix);
 
                         // compute the coordinates of the feet
-                        for (IdxV const iv : v_dom) {
-                            feet_coords(iv, ib) = Coord<DimV>(ddc::coordinate(iv) - dvx);
+                        for (DElemV const iv : v_dom) {
+                            feet_coords(iv, ic) = ddc::Coordinate<CDimV>(ddc::coordinate(iv) - dvx);
                         }
                     });
             interpolator_v(
                     allfdistribu[isp],
-                    get_const_field(feet_coords),
-                    get_const_field(derivs_min),
-                    get_const_field(derivs_max));
+                    feet_coords.span_cview(),
+                    derivs_min.span_cview(),
+                    derivs_max.span_cview());
         });
 
         Kokkos::Profiling::popRegion();

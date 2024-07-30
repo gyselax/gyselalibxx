@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
-
 #include <ddc/ddc.hpp>
 
 #include "Lagrange.hpp"
-#include "ddc_aliases.hpp"
 #include "iinterpolator.hpp"
 
 /**
@@ -12,17 +10,17 @@
  * It is designed to work with both uniform and non-uniform mesh, and have the advantage to be local.
  *
  */
-template <class GridInterp, BCond BcMin, BCond BcMax, class... Grid1D>
-class LagrangeInterpolator : public IInterpolator<GridInterp, Grid1D...>
+template <class DDimI, BCond BcMin, BCond BcMax, class... DDim>
+class LagrangeInterpolator : public IInterpolator<DDimI, DDim...>
 {
-    using InterpDim = typename GridInterp::continuous_dimension_type;
-    using deriv_type = typename IInterpolator<GridInterp, Grid1D...>::deriv_type;
-    using batched_derivs_idx_range_type =
-            typename IInterpolator<GridInterp, Grid1D...>::batched_derivs_idx_range_type;
+    using CDim = typename DDimI::continuous_dimension_type;
+    using deriv_type = typename IInterpolator<DDimI, DDim...>::deriv_type;
+    using batched_derivs_domain_type =
+            typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type;
 
 private:
     int m_degree;
-    IdxStep<GridInterp> m_ghost;
+    ddc::DiscreteVector<DDimI> m_ghost;
 
 public:
     /**
@@ -30,26 +28,32 @@ public:
      * @param[in] degree Degree of polynomials
      * @param[in] ghost  Discrete vector which gives the number of ghost points. By default choose 2.
     */
-    LagrangeInterpolator(int degree, IdxStep<GridInterp> ghost) : m_degree(degree), m_ghost(ghost)
+    LagrangeInterpolator(int degree, ddc::DiscreteVector<DDimI> ghost)
+        : m_degree(degree)
+        , m_ghost(ghost)
     {
     }
 
     ~LagrangeInterpolator() override = default;
 
-    batched_derivs_idx_range_type batched_derivs_idx_range_xmin(
-            IdxRange<Grid1D...> dom) const override
+    batched_derivs_domain_type batched_derivs_domain_xmin(
+            ddc::DiscreteDomain<DDim...> dom) const override
     {
-        return ddc::replace_dim_of<
-                GridInterp,
-                deriv_type>(dom, IdxRange<deriv_type>(Idx<deriv_type>(1), IdxStep<deriv_type>(0)));
+        return ddc::replace_dim_of<DDimI, deriv_type>(
+                dom,
+                ddc::DiscreteDomain<deriv_type>(
+                        ddc::DiscreteElement<deriv_type>(1),
+                        ddc::DiscreteVector<deriv_type>(0)));
     }
 
-    batched_derivs_idx_range_type batched_derivs_idx_range_xmax(
-            IdxRange<Grid1D...> dom) const override
+    batched_derivs_domain_type batched_derivs_domain_xmax(
+            ddc::DiscreteDomain<DDim...> dom) const override
     {
-        return ddc::replace_dim_of<
-                GridInterp,
-                deriv_type>(dom, IdxRange<deriv_type>(Idx<deriv_type>(1), IdxStep<deriv_type>(0)));
+        return ddc::replace_dim_of<DDimI, deriv_type>(
+                dom,
+                ddc::DiscreteDomain<deriv_type>(
+                        ddc::DiscreteElement<deriv_type>(1),
+                        ddc::DiscreteVector<deriv_type>(0)));
     }
 
     /**
@@ -64,18 +68,19 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    Field<double, IdxRange<Grid1D...>> operator()(
-            Field<double, IdxRange<Grid1D...>> inout_data,
-            Field<const Coord<typename GridInterp::continuous_dimension_type>, IdxRange<Grid1D...>>
-                    coordinates,
-            [[maybe_unused]] std::optional<Field<
+    device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> operator()(
+            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> inout_data,
+            device_t<ddc::ChunkSpan<
+                    const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
+                    ddc::DiscreteDomain<DDim...>>> coordinates,
+            [[maybe_unused]] std::optional<device_t<ddc::ChunkSpan<
                     double const,
-                    typename IInterpolator<GridInterp, Grid1D...>::batched_derivs_idx_range_type>>
+                    typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type>>>
                     derivs_xmin
             = std::nullopt,
-            [[maybe_unused]] std::optional<Field<
+            [[maybe_unused]] std::optional<device_t<ddc::ChunkSpan<
                     double const,
-                    typename IInterpolator<GridInterp, Grid1D...>::batched_derivs_idx_range_type>>
+                    typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type>>>
                     derivs_xmax
             = std::nullopt) const override
     {
@@ -87,18 +92,18 @@ public:
         auto const ghost = m_ghost;
         auto inout_data_tmp_alloc
                 = ddc::create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), inout_data);
-        auto inout_data_tmp = get_field(inout_data_tmp_alloc);
-        auto batch_idx_range = ddc::remove_dims_of<GridInterp>(get_idx_range(inout_data));
+        auto inout_data_tmp = inout_data_tmp_alloc.span_view();
+        auto batch_domain = ddc::remove_dims_of<DDimI>(inout_data.domain());
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                batch_idx_range,
-                KOKKOS_LAMBDA(typename decltype(batch_idx_range)::discrete_element_type const i) {
-                    Lagrange<Kokkos::DefaultExecutionSpace, GridInterp, BcMin, BcMax> evaluator(
+                batch_domain,
+                KOKKOS_LAMBDA(typename decltype(batch_domain)::discrete_element_type const i) {
+                    Lagrange<Kokkos::DefaultExecutionSpace, DDimI, BcMin, BcMax> evaluator(
                             deg,
                             inout_data_tmp[i],
-                            get_idx_range<GridInterp>(inout_data),
+                            inout_data.template domain<DDimI>(),
                             ghost);
-                    for (Idx<GridInterp> j : get_idx_range<GridInterp>(inout_data)) {
+                    for (ddc::DiscreteElement<DDimI> j : inout_data.template domain<DDimI>()) {
                         inout_data(i, j) = evaluator.evaluate(coordinates(i, j));
                     }
                 });
@@ -112,10 +117,10 @@ public:
  * This class allows an instance of the LagrangeInterpolator class where necessary. This allows the
  * memory allocated in the private members of the Interpolator to be freed when the object is not in use.
  */
-template <class GridInterp, BCond BcMin, BCond BcMax, class... Grid1D>
-class PreallocatableLagrangeInterpolator : public IPreallocatableInterpolator<GridInterp, Grid1D...>
+template <class DDimI, BCond BcMin, BCond BcMax, class... DDim>
+class PreallocatableLagrangeInterpolator : public IPreallocatableInterpolator<DDimI, DDim...>
 {
-    LagrangeInterpolator<GridInterp, BcMin, BcMax, Grid1D...> const& m_evaluator;
+    LagrangeInterpolator<DDimI, BcMin, BcMax, DDim...> const& m_evaluator;
 
 public:
     /**
@@ -123,7 +128,7 @@ public:
      * @param[in] evaluator An operator which evaluates the value of the interpolation polynomial at requested coordinates.
      */
     explicit PreallocatableLagrangeInterpolator(
-            LagrangeInterpolator<GridInterp, BcMin, BcMax, Grid1D...> const& evaluator)
+            LagrangeInterpolator<DDimI, BcMin, BcMax, DDim...> const& evaluator)
         : m_evaluator(evaluator)
     {
     }
@@ -135,9 +140,8 @@ public:
      *
      * @return A unique pointer to an instance of the LagrangeInterpolator class.
      */
-    std::unique_ptr<IInterpolator<GridInterp, Grid1D...>> preallocate() const override
+    std::unique_ptr<IInterpolator<DDimI, DDim...>> preallocate() const override
     {
-        return std::make_unique<LagrangeInterpolator<GridInterp, BcMin, BcMax, Grid1D...>>(
-                m_evaluator);
+        return std::make_unique<LagrangeInterpolator<DDimI, BcMin, BcMax, DDim...>>(m_evaluator);
     }
 };

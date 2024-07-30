@@ -18,7 +18,7 @@ public:
      *
      * @param[in] dom_fluidsp The moments domain on which the fluid species is defined.
      */
-    NullFluidSolver(IdxRangeSp const& dom_fluidsp);
+    NullFluidSolver(IDomainSp const& dom_fluidsp);
 
     ~NullFluidSolver() override = default;
 

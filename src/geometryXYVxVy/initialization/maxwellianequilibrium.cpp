@@ -5,9 +5,9 @@
 #include "maxwellianequilibrium.hpp"
 
 MaxwellianEquilibrium::MaxwellianEquilibrium(
-        host_t<DFieldMemSp> density_eq,
-        host_t<DFieldMemSp> temperature_eq,
-        host_t<DFieldMemSp> mean_velocity_eq)
+        host_t<DFieldSp> density_eq,
+        host_t<DFieldSp> temperature_eq,
+        host_t<DFieldSp> mean_velocity_eq)
     : m_density_eq(std::move(density_eq))
     , m_temperature_eq(std::move(temperature_eq))
     , m_mean_velocity_eq(std::move(mean_velocity_eq))
@@ -16,13 +16,13 @@ MaxwellianEquilibrium::MaxwellianEquilibrium(
 
 DSpanSpVxVy MaxwellianEquilibrium::operator()(DSpanSpVxVy const allfequilibrium) const
 {
-    IdxRangeSp const gridsp = allfequilibrium.domain<Species>();
+    IDomainSp const gridsp = allfequilibrium.domain<IDimSp>();
     IDomainVxVy const gridvxvy = allfequilibrium.domain<IDimVx, IDimVy>();
 
     // Initialization of the maxwellian
     DFieldVxVy maxwellian_alloc(gridvxvy);
     DSpanVxVy maxwellian = maxwellian_alloc.span_view();
-    ddc::for_each(gridsp, [&](IdxSp const isp) {
+    ddc::for_each(gridsp, [&](IndexSp const isp) {
         compute_maxwellian(
                 maxwellian,
                 m_density_eq(isp),
@@ -41,14 +41,14 @@ DSpanSpVxVy MaxwellianEquilibrium::operator()(DSpanSpVxVy const allfequilibrium)
 
 
 MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
-        IdxRangeSp dom_kinsp,
+        IDomainSp dom_kinsp,
         PC_tree_t const& yaml_input_file)
 {
-    host_t<DFieldMemSp> density_eq(dom_kinsp);
-    host_t<DFieldMemSp> temperature_eq(dom_kinsp);
-    host_t<DFieldMemSp> mean_velocity_eq(dom_kinsp);
+    host_t<DFieldSp> density_eq(dom_kinsp);
+    host_t<DFieldSp> temperature_eq(dom_kinsp);
+    host_t<DFieldSp> mean_velocity_eq(dom_kinsp);
 
-    for (IdxSp const isp : dom_kinsp) {
+    for (IndexSp const isp : dom_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
 
         density_eq(isp) = PCpp_double(conf_isp, ".density_eq");

@@ -11,7 +11,7 @@ public:
 
 public:
     /// @brief Impl object storing attributes in `MemorySpace`.
-    template <class Grid1D, class MemorySpace>
+    template <class DDim, class MemorySpace>
     class Impl
     {
         template <class ODDim, class OMemorySpace>
@@ -26,7 +26,7 @@ public:
          * @param[in] impl object from `OMemorySpace` that will be used to initialize this object on `MemorySpace`
          */
         template <class OMemorySpace>
-        explicit Impl(Impl<Grid1D, OMemorySpace> const& impl)
+        explicit Impl(Impl<DDim, OMemorySpace> const& impl)
         {
         }
 

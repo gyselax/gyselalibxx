@@ -76,7 +76,7 @@ int main(int argc, char** argv)
     IDomainVx mesh_vx(SplineInterpPointsVx::get_domain<IDimVx>());
     IDomainXVx meshXVx(mesh_x, mesh_vx);
 
-    IdxRangeSp const dom_kinsp = init_species(conf_voicexx);
+    IDomainSp const dom_kinsp = init_species(conf_voicexx);
 
     IDomainSpXVx const meshSpXVx(dom_kinsp, mesh_x, mesh_vx);
     IDomainSpVx const meshSpVx(dom_kinsp, mesh_vx);
@@ -154,8 +154,8 @@ int main(int argc, char** argv)
     expose_mesh_to_pdi("MeshVx", mesh_vx);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
     ddc::expose_to_pdi("Nkinspecies", dom_kinsp.size());
-    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<Species>().charges()[dom_kinsp]);
-    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<Species>().masses()[dom_kinsp]);
+    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
+    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[dom_kinsp]);
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
 
     steady_clock::time_point const start = steady_clock::now();

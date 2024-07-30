@@ -35,23 +35,23 @@ double SpatialAdvection(
         ddc::DiscreteDomain<IDimVx> vx_dom)
 {
     //kinetic species
-    IdxStepSp const nb_kinsp(1);
-    IdxStepSp const nb_species(2);
-    IdxRangeSp const dom_allsp(IdxSp(0), nb_species);
-    IdxSp const i_elec = dom_allsp.front();
-    IdxSp const i_ion = dom_allsp.back();
+    IVectSp const nb_kinsp(1);
+    IVectSp const nb_species(2);
+    IDomainSp const dom_allsp(IndexSp(0), nb_species);
+    IndexSp const i_elec = dom_allsp.front();
+    IndexSp const i_ion = dom_allsp.back();
     //Mesh Initialization
     IDomainSpXVx const meshSpXVx(dom_allsp, x_dom, vx_dom);
     // Charge Initialization
-    host_t<DFieldMemSp> masses_host(dom_allsp);
-    host_t<DFieldMemSp> charges_host(dom_allsp);
+    host_t<DFieldSp> masses_host(dom_allsp);
+    host_t<DFieldSp> charges_host(dom_allsp);
 
     masses_host(i_elec) = 1.;
     masses_host(i_ion) = 1.;
     charges_host(i_elec) = -1.;
     charges_host(i_ion) = 1.;
     // Initialization Species domain
-    ddc::init_discrete_space<Species>(std::move(charges_host), std::move(masses_host));
+    ddc::init_discrete_space<IDimSp>(std::move(charges_host), std::move(masses_host));
     // Initialization of the distribution function
     host_t<DFieldSpXVx> allfdistribu_host(meshSpXVx);
     ddc::for_each(meshSpXVx, [&](IndexSpXVx const ispxvx) {

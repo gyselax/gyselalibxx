@@ -15,7 +15,7 @@
 
 class MockAdvectionX : public IAdvectionSpatial<GeometryXVx, IDimX>
 {
-    using DDom = typename GeometryXVx::FdistribuIdxRange;
+    using DDom = typename GeometryXVx::FdistribuDDom;
 
 public:
     MockAdvectionX() = default;
@@ -36,8 +36,8 @@ public:
 
 class MockAdvectionVx : public IAdvectionVelocity<GeometryXVx, IDimVx>
 {
-    using DDom = typename GeometryXVx::FdistribuIdxRange;
-    using IDimX = typename GeometryXVx::SpatialIdxRange;
+    using DDom = typename GeometryXVx::FdistribuDDom;
+    using IDimX = typename GeometryXVx::SpatialDDom;
 
 public:
     MockAdvectionVx() = default;

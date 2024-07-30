@@ -15,20 +15,20 @@ public:
 
 public:
     /// @brief Impl object storing attributes in `MemorySpace`.
-    template <class Grid1D, class MemorySpace>
+    template <class DDim, class MemorySpace>
     class Impl
     {
         template <class ODDim, class OMemorySpace>
         friend class Impl;
 
         /// alias of the discrete element of this discrete dimension
-        using discrete_element_type = ddc::DiscreteElement<Grid1D>;
+        using discrete_element_type = ddc::DiscreteElement<DDim>;
 
         /// alias of the discrete domain of this discrete dimension
-        using discrete_domain_type = ddc::DiscreteDomain<Grid1D>;
+        using discrete_domain_type = ddc::DiscreteDomain<DDim>;
 
         /// alias of the discrete vector of this discrete dimension
-        using discrete_vector_type = ddc::DiscreteVector<Grid1D>;
+        using discrete_vector_type = ddc::DiscreteVector<DDim>;
 
     private:
         // charge of the particles (kinetic + adiabatic)
@@ -57,7 +57,7 @@ public:
          * @param[in] impl object from `OMemorySpace` that will be used to initialize this object on `MemorySpace`
          */
         template <class OMemorySpace>
-        explicit Impl(Impl<Grid1D, OMemorySpace> const& impl)
+        explicit Impl(Impl<DDim, OMemorySpace> const& impl)
             : m_charge(impl.m_charge.domain())
             , m_mass(impl.m_mass.domain())
             , m_ielec(impl.m_ielec)
@@ -133,52 +133,52 @@ public:
     };
 };
 
-template <class Grid1D>
+template <class DDim>
 inline constexpr bool is_species_information_v
-        = std::is_same_v<typename Grid1D::discrete_dimension_type, SpeciesInformation>;
+        = std::is_same_v<typename DDim::discrete_dimension_type, SpeciesInformation>;
 
 // Species dimension
-struct Species : SpeciesInformation
+struct IDimSp : SpeciesInformation
 {
 };
 
 /// @return the discrete element representing the electron species
-KOKKOS_INLINE_FUNCTION ddc::DiscreteElement<Species> ielec()
+KOKKOS_INLINE_FUNCTION ddc::DiscreteElement<IDimSp> ielec()
 {
-    return ddc::discrete_space<Species>().ielec();
+    return ddc::discrete_space<IDimSp>().ielec();
 }
 
 /**
  * @param[in] isp a discrete element of either a kinetic or adiabatic species
  * @return the charge associated to the discrete element
  */
-KOKKOS_INLINE_FUNCTION double charge(ddc::DiscreteElement<Species> const isp)
+KOKKOS_INLINE_FUNCTION double charge(ddc::DiscreteElement<IDimSp> const isp)
 {
-    return ddc::discrete_space<Species>().charge(isp);
+    return ddc::discrete_space<IDimSp>().charge(isp);
 }
 
 /**
  * @param[in] isp a discrete element of either a kinetic or adiabatic species
  * @return the mass associated to the discrete element
  */
-KOKKOS_INLINE_FUNCTION double mass(ddc::DiscreteElement<Species> const isp)
+KOKKOS_INLINE_FUNCTION double mass(ddc::DiscreteElement<IDimSp> const isp)
 {
-    return ddc::discrete_space<Species>().mass(isp);
+    return ddc::discrete_space<IDimSp>().mass(isp);
 }
 
-using IdxSp = ddc::DiscreteElement<Species>;
-using IdxRangeSp = ddc::DiscreteDomain<Species>; // --> Should be DomSp
-using IdxStepSp = ddc::DiscreteVector<Species>; // --> Should be VectSp or VecSp
+using IndexSp = ddc::DiscreteElement<IDimSp>;
+using IDomainSp = ddc::DiscreteDomain<IDimSp>; // --> Should be DomSp
+using IVectSp = ddc::DiscreteVector<IDimSp>; // --> Should be VectSp or VecSp
 
 template <class ElementType>
-using FieldMemSp = ddc::Chunk<ElementType, IdxRangeSp>;
-using DFieldMemSp = FieldMemSp<double>;
-using IFieldSp = device_t<ddc::Chunk<int, IdxRangeSp>>;
-
-template <class ElementType>
-using ConstFieldSp = ddc::ChunkView<ElementType const, IdxRangeSp>;
-using DConstFieldSp = ConstFieldSp<double>;
-
-template <class ElementType>
-using FieldSp = device_t<ddc::ChunkSpan<ElementType, IdxRangeSp>>;
+using FieldSp = ddc::Chunk<ElementType, IDomainSp>;
 using DFieldSp = FieldSp<double>;
+using IFieldSp = device_t<ddc::Chunk<int, IDomainSp>>;
+
+template <class ElementType>
+using ViewSp = ddc::ChunkView<ElementType const, IDomainSp>;
+using DViewSp = ViewSp<double>;
+
+template <class ElementType>
+using SpanSp = device_t<ddc::ChunkSpan<ElementType, IDomainSp>>;
+using DSpanSp = SpanSp<double>;

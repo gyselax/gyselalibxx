@@ -53,19 +53,19 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    IDomainX const mesh_x = init_spline_dependent_idx_range<
+    IDomainX const mesh_x = init_spline_dependent_domain<
             IDimX,
             BSplinesX,
             SplineInterpPointsX>(conf_voicexx, "x");
-    IDomainY const mesh_y = init_spline_dependent_idx_range<
+    IDomainY const mesh_y = init_spline_dependent_domain<
             IDimY,
             BSplinesY,
             SplineInterpPointsY>(conf_voicexx, "y");
-    IDomainVx const mesh_vx = init_spline_dependent_idx_range<
+    IDomainVx const mesh_vx = init_spline_dependent_domain<
             IDimVx,
             BSplinesVx,
             SplineInterpPointsVx>(conf_voicexx, "vx");
-    IDomainVy const mesh_vy = init_spline_dependent_idx_range<
+    IDomainVy const mesh_vy = init_spline_dependent_domain<
             IDimVy,
             BSplinesVy,
             SplineInterpPointsVy>(conf_voicexx, "vy");
@@ -73,7 +73,7 @@ int main(int argc, char** argv)
     IDomainVxVy mesh_vxvy(mesh_vx, mesh_vy);
     IDomainXYVxVy const meshXYVxVy(mesh_x, mesh_y, mesh_vx, mesh_vy);
 
-    IdxRangeSp const dom_kinsp = init_species(conf_voicexx);
+    IDomainSp const dom_kinsp = init_species(conf_voicexx);
 
     IDomainSpVxVy const meshSpVxVy(dom_kinsp, mesh_vx, mesh_vy);
     IDomainSpXYVxVy const meshSpXYVxVy(dom_kinsp, meshXYVxVy);
@@ -161,8 +161,8 @@ int main(int argc, char** argv)
     expose_mesh_to_pdi("MeshVy", mesh_vy);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
     ddc::expose_to_pdi("Nkinspecies", dom_kinsp.size());
-    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<Species>().charges()[dom_kinsp]);
-    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<Species>().masses()[dom_kinsp]);
+    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
+    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[dom_kinsp]);
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
 
     steady_clock::time_point const start = steady_clock::now();

@@ -21,13 +21,13 @@
 class BumpontailEquilibrium : public IEquilibrium
 {
     /**Density of the bump-on-tail part for all kinetic species*/
-    host_t<DFieldMemSp> m_epsilon_bot;
+    host_t<DFieldSp> m_epsilon_bot;
 
     /**Temperature of the bump-on-tail for all kinetic species*/
-    host_t<DFieldMemSp> m_temperature_bot;
+    host_t<DFieldSp> m_temperature_bot;
 
     /**Mean velocity of the bump-on-tail for all kinetic species*/
-    host_t<DFieldMemSp> m_mean_velocity_bot;
+    host_t<DFieldSp> m_mean_velocity_bot;
 
 public:
     /**
@@ -54,9 +54,9 @@ public:
      * @param[in] mean_velocity_bot A parameter that represents the mean velocity of the bump-on-tail Maxwellian for each species. 
      */
     BumpontailEquilibrium(
-            host_t<DFieldMemSp> epsilon_bot,
-            host_t<DFieldMemSp> temperature_bot,
-            host_t<DFieldMemSp> mean_velocity_bot);
+            host_t<DFieldSp> epsilon_bot,
+            host_t<DFieldSp> temperature_bot,
+            host_t<DFieldSp> mean_velocity_bot);
 
     ~BumpontailEquilibrium() override = default;
 
@@ -67,7 +67,7 @@ public:
      * @return an instance of Maxwellian distribution function.
      */
     static BumpontailEquilibrium init_from_input(
-            IdxRangeSp dom_kinsp,
+            IDomainSp dom_kinsp,
             PC_tree_t const& yaml_input_file);
 
     /**
@@ -81,7 +81,7 @@ public:
      * @brief A method for accessing the m_epsilon_bot member variable of the class.
      * @return a View containing the m_epsilon_bot variable.
      */
-    host_t<DConstFieldSp> epsilon_bot() const
+    host_t<DViewSp> epsilon_bot() const
     {
         return m_epsilon_bot;
     }
@@ -90,7 +90,7 @@ public:
      * @brief A method for accessing the m_temperature_bot member variable of the class.
      * @return a View containing the m_temperature_bot variable.
      */
-    host_t<DConstFieldSp> temperature_bot() const
+    host_t<DViewSp> temperature_bot() const
     {
         return m_temperature_bot;
     }
@@ -99,7 +99,7 @@ public:
      * @brief A method for accessing the m_mean_velocity_bot member variable of the class.
      * @return a View containing the m_velocity_bot variable.
      */
-    host_t<DConstFieldSp> mean_velocity_bot() const
+    host_t<DViewSp> mean_velocity_bot() const
     {
         return m_mean_velocity_bot;
     }

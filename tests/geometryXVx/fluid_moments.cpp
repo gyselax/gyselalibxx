@@ -28,10 +28,10 @@ TEST(Physics, FluidMoments)
     CoordVx const vx_max(9.);
     IVectVx const vx_size(400);
 
-    IdxStepSp const nb_species(2);
-    IdxRangeSp const dom_sp(IdxSp(0), nb_species);
-    IdxSp const my_ielec = dom_sp.front();
-    IdxSp const my_iion = dom_sp.back();
+    IVectSp const nb_species(2);
+    IDomainSp const dom_sp(IndexSp(0), nb_species);
+    IndexSp const my_ielec = dom_sp.front();
+    IndexSp const my_iion = dom_sp.back();
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -46,26 +46,26 @@ TEST(Physics, FluidMoments)
     SplineXBuilder_1d const builder_x(gridx);
     SplineVxBuilder_1d const builder_vx(gridvx);
 
-    IDomainSpXVx const mesh(IdxRangeSp(my_iion, IdxStepSp(1)), gridx, gridvx);
+    IDomainSpXVx const mesh(IDomainSp(my_iion, IVectSp(1)), gridx, gridvx);
 
-    host_t<DFieldMemSp> charges(dom_sp);
+    host_t<DFieldSp> charges(dom_sp);
     charges(my_ielec) = -1.;
     charges(my_iion) = 1.;
-    host_t<DFieldMemSp> masses(dom_sp);
+    host_t<DFieldSp> masses(dom_sp);
     ddc::parallel_fill(masses, 1);
 
     // Initialization of the distribution function as a maxwellian
-    ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
+    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
     host_t<DFieldSpXVx> allfdistribu_host(mesh);
     DFieldSpXVx allfdistribu(mesh);
 
 
     // Initialization of the distribution function as a maxwellian with
     // moments depending on space
-    host_t<DFieldSpX> density_init(ddc::get_domain<Species, IDimX>(allfdistribu_host));
-    host_t<DFieldSpX> mean_velocity_init(ddc::get_domain<Species, IDimX>(allfdistribu_host));
-    host_t<DFieldSpX> temperature_init(ddc::get_domain<Species, IDimX>(allfdistribu_host));
-    ddc::for_each(ddc::get_domain<Species, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
+    host_t<DFieldSpX> density_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    host_t<DFieldSpX> mean_velocity_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    host_t<DFieldSpX> temperature_init(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
         double const density = 1.;
         double const density_ampl = 0.1;
         double const mean_velocity = 0.;
@@ -96,9 +96,9 @@ TEST(Physics, FluidMoments)
     });
 
     // density and temperature
-    DFieldSpX density_computed(ddc::get_domain<Species, IDimX>(allfdistribu_host));
-    DFieldSpX mean_velocity_computed(ddc::get_domain<Species, IDimX>(allfdistribu_host));
-    DFieldSpX temperature_computed(ddc::get_domain<Species, IDimX>(allfdistribu_host));
+    DFieldSpX density_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    DFieldSpX mean_velocity_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
+    DFieldSpX temperature_computed(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
     host_t<DFieldVx> const quadrature_coeffs_host = trapezoid_quadrature_coefficients(gridvx);
     auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
@@ -121,7 +121,7 @@ TEST(Physics, FluidMoments)
     auto temperature_computed_host
             = ddc::create_mirror_view_and_copy(temperature_computed.span_view());
     auto density_computed_host = ddc::create_mirror_view_and_copy(density_computed.span_view());
-    ddc::for_each(ddc::get_domain<Species, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
+    ddc::for_each(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host), [&](IndexSpX const ispx) {
         EXPECT_LE(std::fabs(density_computed_host(ispx) - density_init(ispx)), 1e-12);
         EXPECT_LE(std::fabs(mean_velocity_computed_host(ispx) - mean_velocity_init(ispx)), 1e-12);
         EXPECT_LE(std::fabs(temperature_computed_host(ispx) - temperature_init(ispx)), 1e-12);

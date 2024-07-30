@@ -77,11 +77,11 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    IDomainX const mesh_x = init_spline_dependent_idx_range<
+    IDomainX const mesh_x = init_spline_dependent_domain<
             IDimX,
             BSplinesX,
             SplineInterpPointsX>(conf_voicexx, "x");
-    IDomainVx const mesh_vx = init_spline_dependent_idx_range<
+    IDomainVx const mesh_vx = init_spline_dependent_domain<
             IDimVx,
             BSplinesVx,
             SplineInterpPointsVx>(conf_voicexx, "vx");
@@ -94,8 +94,8 @@ int main(int argc, char** argv)
     SplineVxBuilder const builder_vx(meshXVx);
     SplineVxBuilder_1d const builder_vx_poisson(mesh_vx);
 
-    IdxRangeSp dom_kinsp;
-    IdxRangeSp dom_fluidsp;
+    IDomainSp dom_kinsp;
+    IDomainSp dom_fluidsp;
     init_species_withfluid(dom_kinsp, dom_fluidsp, conf_voicexx);
 
     // Initialization of kinetic species distribution function
@@ -130,7 +130,7 @@ int main(int argc, char** argv)
     auto neutrals = neutrals_alloc.span_view();
     host_t<DFieldSpM> moments_init(IDomainSpM(dom_fluidsp, meshM));
 
-    for (IdxSp const isp : dom_fluidsp) {
+    for (IndexSp const isp : dom_fluidsp) {
         PC_tree_t const conf_nisp = PCpp_get(
                 conf_voicexx,
                 ".NeutralSpeciesInfo[%d]",
@@ -306,9 +306,9 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("Lx", ddcHelper::total_interval_length(mesh_x));
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
     ddc::expose_to_pdi("Nkinspecies", dom_kinsp.size());
-    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<Species>().charges()[dom_kinsp]);
-    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<Species>().masses()[dom_kinsp]);
-    ddc::expose_to_pdi("neutrals_masses", ddc::discrete_space<Species>().masses()[dom_fluidsp]);
+    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
+    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[dom_kinsp]);
+    ddc::expose_to_pdi("neutrals_masses", ddc::discrete_space<IDimSp>().masses()[dom_fluidsp]);
     ddc::expose_to_pdi("normalization_coeff_neutrals", normalization_coeff);
     ddc::expose_to_pdi("norm_coeff_rate_neutrals", norm_coeff_rate);
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);

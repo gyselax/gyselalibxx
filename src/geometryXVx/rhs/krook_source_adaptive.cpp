@@ -74,16 +74,16 @@ KrookSourceAdaptive::KrookSourceAdaptive(
 
 void KrookSourceAdaptive::get_amplitudes(DSpanSpX amplitudes, DViewSpXVx const allfdistribu) const
 {
-    IdxRangeSp const dom_sp(ddc::get_domain<Species>(allfdistribu));
+    IDomainSp const dom_sp(ddc::get_domain<IDimSp>(allfdistribu));
     assert(dom_sp.size() == 2);
     assert(charge(dom_sp.front()) * charge(dom_sp.back()) < 0.);
-    std::optional<IdxSp> iion_opt;
-    for (IdxSp const isp : dom_sp) {
+    std::optional<IndexSp> iion_opt;
+    for (IndexSp const isp : dom_sp) {
         if (charge(isp) > 0.) {
             iion_opt = isp;
         }
     }
-    IdxSp iion(iion_opt.value());
+    IndexSp iion(iion_opt.value());
     IDomainVx const gridvx = allfdistribu.domain<IDimVx>();
     host_t<DFieldVx> const quadrature_coeffs_host(trapezoid_quadrature_coefficients(gridvx));
     auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
@@ -115,7 +115,7 @@ void KrookSourceAdaptive::get_derivative(
         DViewSpXVx allfdistribu,
         DViewSpXVx allfdistribu_start) const
 {
-    IDomainSpX grid_sp_x(allfdistribu.domain<Species, IDimX>());
+    IDomainSpX grid_sp_x(allfdistribu.domain<IDimSp, IDimX>());
 
     DFieldSpX amplitudes_alloc(grid_sp_x);
     auto amplitudes = amplitudes_alloc.span_view();
@@ -128,7 +128,7 @@ void KrookSourceAdaptive::get_derivative(
             Kokkos::DefaultExecutionSpace(),
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
-                IdxSp isp(ddc::select<Species>(ispxvx));
+                IndexSp isp(ddc::select<IDimSp>(ispxvx));
                 IndexX ix(ddc::select<IDimX>(ispxvx));
                 IndexVx ivx(ddc::select<IDimVx>(ispxvx));
                 df(ispxvx) = -mask(ix) * amplitudes(isp, ix)

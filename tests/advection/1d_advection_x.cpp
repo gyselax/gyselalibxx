@@ -17,16 +17,16 @@
 namespace {
 // Continuous dimension
 /// @brief A class which describes the real space in the first spatial direction X.
-struct X
+struct RDimX
 {
     /// @brief A boolean indicating if the dimension is periodic.
     static bool constexpr PERIODIC = true;
 };
 
-using CoordX = Coord<X>;
+using CoordX = ddc::Coordinate<RDimX>;
 
 // Spline
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<RDimX, 3>
 {
 };
 
@@ -34,26 +34,26 @@ ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
 
 
 // Discrete dimension
-struct GridX : UniformGridBase<X>
+struct IDimX : ddc::UniformPointSampling<RDimX>
 {
 };
 
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
 
-using IdxRangeX = IdxRange<GridX>;
-using IdxX = Idx<GridX>;
-using IdxStepX = IdxStep<GridX>;
+using IDomainX = ddc::DiscreteDomain<IDimX>;
+using IndexX = ddc::DiscreteElement<IDimX>;
+using IVectX = ddc::DiscreteVector<IDimX>;
 
 
 // Chunks, Spans and Views
 template <class ElementType>
-using FieldMemX = FieldMem<ElementType, IdxRangeX>;
-using DFieldMemX = FieldMemX<double>;
+using FieldX = device_t<ddc::Chunk<ElementType, IDomainX>>;
+using DFieldX = FieldX<double>;
 
 template <class ElementType>
-using FieldX = Field<ElementType, IdxRangeX>;
-using DFieldX = FieldX<double>;
+using SpanX = device_t<ddc::ChunkSpan<ElementType, IDomainX>>;
+using DSpanX = SpanX<double>;
 
 
 // Operators
@@ -61,20 +61,20 @@ using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        GridX,
+        IDimX,
         SplineXBoundary,
         SplineXBoundary,
         ddc::SplineSolver::LAPACK,
-        GridX>;
+        IDimX>;
 
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        GridX>;
+        IDimX,
+        ddc::PeriodicExtrapolationRule<RDimX>,
+        ddc::PeriodicExtrapolationRule<RDimX>,
+        IDimX>;
 
 
 class XAdvection1DTest : public ::testing::Test
@@ -82,12 +82,12 @@ class XAdvection1DTest : public ::testing::Test
 protected:
     static constexpr CoordX x_min = CoordX(-M_PI);
     static constexpr CoordX x_max = CoordX(M_PI);
-    static constexpr IdxStepX x_size = IdxStepX(32);
+    static constexpr IVectX x_size = IVectX(32);
 
-    IdxRangeX const interpolation_idx_range;
+    IDomainX const interpolation_domain;
 
 public:
-    XAdvection1DTest() : interpolation_idx_range(SplineInterpPointsX::get_domain<GridX>()) {};
+    XAdvection1DTest() : interpolation_domain(SplineInterpPointsX::get_domain<IDimX>()) {};
 
     ~XAdvection1DTest() = default;
 
@@ -95,7 +95,7 @@ public:
     static void SetUpTestSuite()
     {
         ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
-        ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+        ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
     }
 
     template <class AdvectionOperator>
@@ -107,16 +107,16 @@ public:
         int const time_iter = int(final_t / dt);
 
         // INITIALISATION ----------------------------------------------------------------------------
-        DFieldMemX function_alloc(interpolation_idx_range);
-        DFieldX function = get_field(function_alloc);
+        DFieldX function_alloc(interpolation_domain);
+        DSpanX function = function_alloc.span_view();
 
-        DFieldMemX advection_field_alloc(interpolation_idx_range);
-        DFieldX advection_field = get_field(advection_field_alloc);
+        DFieldX advection_field_alloc(interpolation_domain);
+        DSpanX advection_field = advection_field_alloc.span_view();
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                interpolation_idx_range,
-                KOKKOS_LAMBDA(IdxX const idx) {
+                interpolation_domain,
+                KOKKOS_LAMBDA(IndexX const idx) {
                     double const x = ddc::coordinate(idx);
                     function(idx) = Kokkos::sin(2 * x);
                     advection_field(idx) = Kokkos::sin(x);
@@ -124,12 +124,12 @@ public:
 
 
         // EXACT ADVECTED FUNCTION -------------------------------------------------------------------
-        host_t<DFieldMemX> exact_function(interpolation_idx_range);
-        ddc::for_each(interpolation_idx_range, [&](IdxX const idx) {
+        host_t<DFieldX> exact_function(interpolation_domain);
+        ddc::for_each(interpolation_domain, [&](IndexX const idx) {
             double const x0 = ddc::coordinate(idx);
             double x = 2 * std::atan(std::tan(x0 / 2.) * std::exp(-final_t));
-            // Replace inside the index range the feet if the dimension if periodic
-            if (X::PERIODIC) {
+            // Replace inside the domain the feet if the dimension if periodic
+            if (RDimX::PERIODIC) {
                 x = fmod(x - double(x_min), double(x_max - x_min)) + double(x_min);
                 x = x > double(x_min) ? x : x + double(x_max - x_min);
             }
@@ -148,7 +148,7 @@ public:
         */
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
-        ddc::for_each(interpolation_idx_range, [&](IdxX const idx) {
+        ddc::for_each(interpolation_domain, [&](IndexX const idx) {
             double const relative_error = abs(function_host(idx) - exact_function(idx));
             max_relative_error
                     = max_relative_error > relative_error ? max_relative_error : relative_error;
@@ -165,23 +165,23 @@ public:
 TEST_F(XAdvection1DTest, AdvectionX)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    SplineXBuilder const builder(interpolation_idx_range);
+    SplineXBuilder const builder(interpolation_domain);
 
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
+    ddc::PeriodicExtrapolationRule<RDimX> bv_x_min;
+    ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
     SplineXEvaluator const spline_evaluator(bv_x_min, bv_x_max);
 
     PreallocatableSplineInterpolator const spline_interpolator(builder, spline_evaluator);
 
 
-    RK2<FieldMemX<CoordX>, DFieldMemX> time_stepper(interpolation_idx_range);
+    RK2<FieldX<CoordX>, DFieldX> time_stepper(interpolation_domain);
     BslAdvection1D<
-            GridX,
-            IdxRangeX,
-            IdxRangeX,
+            IDimX,
+            IDomainX,
+            IDomainX,
             SplineXBuilder,
             SplineXEvaluator,
-            RK2<FieldMemX<CoordX>, DFieldMemX>> const
+            RK2<FieldX<CoordX>, DFieldX>> const
             advection(spline_interpolator, builder, spline_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);

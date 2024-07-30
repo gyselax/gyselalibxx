@@ -10,9 +10,9 @@ DSpanX ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const al
 {
     Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
 
-    host_t<ConstFieldSp<double>> const charges_host = ddc::host_discrete_space<Species>().charges();
-    IdxRangeSp const kin_species_domain = allfdistribu.domain<Species>();
-    host_t<ConstFieldSp<double>> const kinetic_charges_host = charges_host[kin_species_domain];
+    host_t<ViewSp<double>> const charges_host = ddc::host_discrete_space<IDimSp>().charges();
+    IDomainSp const kin_species_domain = allfdistribu.domain<IDimSp>();
+    host_t<ViewSp<double>> const kinetic_charges_host = charges_host[kin_species_domain];
 
     auto kinetic_charges_alloc
             = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), kinetic_charges_host);
@@ -29,8 +29,8 @@ DSpanX ChargeDensityCalculator::operator()(DSpanX const rho, DViewSpXVx const al
                 return sum;
             });
 
-    IdxSp const last_kin_species = kin_species_domain.back();
-    IdxSp const last_species = charges_host.domain().back();
+    IndexSp const last_kin_species = kin_species_domain.back();
+    IndexSp const last_species = charges_host.domain().back();
     if (last_kin_species != last_species) {
         double const chargedens_adiabspecies = charge(last_species);
 

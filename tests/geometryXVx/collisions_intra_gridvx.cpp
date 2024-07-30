@@ -27,11 +27,11 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     CoordVx const vx_max(7);
     IVectVx const vx_size(10);
 
-    IdxStepSp const nb_kinspecies(2);
+    IVectSp const nb_kinspecies(2);
 
-    IdxRangeSp const dom_sp(IdxSp(0), nb_kinspecies);
-    IdxSp const my_iion = dom_sp.front();
-    IdxSp const my_ielec = dom_sp.back();
+    IDomainSp const dom_sp(IndexSp(0), nb_kinspecies);
+    IndexSp const my_iion = dom_sp.front();
+    IndexSp const my_ielec = dom_sp.back();
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -52,15 +52,15 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
 
     IDomainSpXVx const mesh(dom_sp, gridx, gridvx);
 
-    host_t<DFieldMemSp> charges(dom_sp);
+    host_t<DFieldSp> charges(dom_sp);
     charges(my_ielec) = -1.;
     charges(my_iion) = 1.;
-    host_t<DFieldMemSp> masses(dom_sp);
+    host_t<DFieldSp> masses(dom_sp);
     double const mass_ion(400.);
     double const mass_elec(1.);
     masses(my_ielec) = mass_elec;
     masses(my_iion) = mass_ion;
-    ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
+    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
 
     // collision operator
     double const nustar0(1.);

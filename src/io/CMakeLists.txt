@@ -13,8 +13,6 @@ target_link_libraries("io"
     PUBLIC
         DDC::DDC
         gslx::paraconfpp
-        gslx::utils
-
 )
 
 add_library("gslx::io" ALIAS "io")
