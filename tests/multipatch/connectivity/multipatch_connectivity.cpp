@@ -3,10 +3,41 @@
 #include "9patches_2d_non_periodic_uniform.hpp"
 #include <gtest/gtest.h>
 
-TEST(MultipatchConnectivityTest, GetConnections)
+TEST(MultipatchConnectivityTest, InterfaceConnections)
 {
     EXPECT_TRUE(NorthInterface1::connected_to_patch<Patch1>());
     EXPECT_FALSE(NorthInterface1::connected_to_patch<Patch2>());
+    EXPECT_FALSE(NorthInterface1::connected_to_patch<Patch3>());
+    EXPECT_FALSE(NorthInterface1::connected_to_patch<Patch4>());
+    EXPECT_FALSE(NorthInterface1::connected_to_patch<Patch5>());
+    EXPECT_FALSE(NorthInterface1::connected_to_patch<Patch6>());
+    EXPECT_FALSE(NorthInterface1::connected_to_patch<Patch7>());
+    EXPECT_FALSE(NorthInterface1::connected_to_patch<Patch8>());
+    EXPECT_FALSE(NorthInterface1::connected_to_patch<Patch9>());
+
+    EXPECT_TRUE(Interface_1_2::connected_to_patch<Patch1>());
+    EXPECT_TRUE(Interface_1_2::connected_to_patch<Patch2>());
+    EXPECT_FALSE(Interface_1_2::connected_to_patch<Patch3>());
+    EXPECT_FALSE(Interface_1_2::connected_to_patch<Patch4>());
+    EXPECT_FALSE(Interface_1_2::connected_to_patch<Patch5>());
+    EXPECT_FALSE(Interface_1_2::connected_to_patch<Patch6>());
+    EXPECT_FALSE(Interface_1_2::connected_to_patch<Patch7>());
+    EXPECT_FALSE(Interface_1_2::connected_to_patch<Patch8>());
+    EXPECT_FALSE(Interface_1_2::connected_to_patch<Patch9>());
+
+    EXPECT_TRUE(EastInterface3::connected_to_patch<Patch3>());
+    EXPECT_FALSE(EastInterface3::connected_to_patch<Patch1>());
+    EXPECT_FALSE(EastInterface3::connected_to_patch<Patch2>());
+    EXPECT_FALSE(EastInterface3::connected_to_patch<Patch4>());
+    EXPECT_FALSE(EastInterface3::connected_to_patch<Patch5>());
+    EXPECT_FALSE(EastInterface3::connected_to_patch<Patch6>());
+    EXPECT_FALSE(EastInterface3::connected_to_patch<Patch7>());
+    EXPECT_FALSE(EastInterface3::connected_to_patch<Patch8>());
+    EXPECT_FALSE(EastInterface3::connected_to_patch<Patch9>());
+}
+
+TEST(MultipatchConnectivityTest, GetConnections)
+{
     EXPECT_EQ(std::tuple_size_v<Connectivity::template get_connections_t<Patch1>>, 4);
     EXPECT_EQ(std::tuple_size_v<Connectivity::template get_connections_t<Patch2>>, 4);
     EXPECT_EQ(std::tuple_size_v<Connectivity::template get_connections_t<Patch3>>, 4);

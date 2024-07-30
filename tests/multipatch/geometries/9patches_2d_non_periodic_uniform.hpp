@@ -189,9 +189,9 @@ using SouthInterface8 = Interface<SouthEdge8, OutsideEdge, true>;
 using SouthInterface9 = Interface<SouthEdge9, OutsideEdge, true>;
 
 
-using EastInterface3 = Interface<EastEdge3, OutsideEdge, true>;
-using EastInterface6 = Interface<EastEdge6, OutsideEdge, true>;
-using EastInterface9 = Interface<EastEdge9, OutsideEdge, true>;
+using EastInterface3 = Interface<OutsideEdge, EastEdge3, true>;
+using EastInterface6 = Interface<OutsideEdge, EastEdge6, true>;
+using EastInterface9 = Interface<OutsideEdge, EastEdge9, true>;
 
 using Interface_1_2 = Interface<EastEdge1, WestEdge2, true>;
 using Interface_4_5 = Interface<EastEdge4, WestEdge5, true>;
