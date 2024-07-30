@@ -50,7 +50,7 @@ public:
      * @param[out] allfequilibrium A Span containing a Maxwellian distribution function.
      * @return A Span containing a Maxwellian distribution function.
      */
-    DSpanSpVxVy operator()(DSpanSpVxVy allfequilibrium) const override;
+    DFieldSpVxVy operator()(DFieldSpVxVy allfequilibrium) const override;
 
 
     /**
@@ -65,7 +65,7 @@ public:
      * @param[in] mean_velocity A parameter that represents the mean velocity of Maxwellian. 
      */
     static void compute_maxwellian(
-            DSpanVxVy const fMaxwellian,
+            DFieldVxVy const fMaxwellian,
             double const density,
             double const temperature,
             double const mean_velocity);
