@@ -5,8 +5,8 @@
 #include <gtest/gtest.h>
 
 #include "2patches_2d_non_periodic_uniform.hpp"
-#include "coord_transformation.hpp"
 #include "edge.hpp"
+#include "edge_transformation.hpp"
 #include "interface.hpp"
 #include "patch.hpp"
 
@@ -66,15 +66,12 @@ public:
 
 TEST_F(CoordinateTransformationTest, InvertedOrientation)
 {
-    // --- TEST 1 ---
-    // Creating interfaces .......................................................................
-    Edge<GridX1> edge_1 = {1, idx_range_x1, BACK};
-    Edge<GridX2> edge_2 = {2, idx_range_x2, FRONT};
-
-    Interface<GridX1, GridX2> interface = {edge_1, edge_2, false};
+    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
+    using EgdeX2F = Edge<Patch2, GridX2, FRONT>;
+    using Interface12 = Interface<EgdeX1B, EgdeX2F, false>;
 
     // Coordinate transformation .................................................................
-    EdgeCoordinatesTransformation coord_transformation(interface);
+    EdgeTransformation<Interface12> coord_transformation(idx_range_x1, idx_range_x2);
 
     Patch1::Coord1 test_coord_x1(1.5);
     Patch2::Coord1 test_coord_x2(coord_transformation(test_coord_x1));
@@ -86,15 +83,12 @@ TEST_F(CoordinateTransformationTest, InvertedOrientation)
 
 TEST_F(CoordinateTransformationTest, StickingDifferentDimensions)
 {
-    // --- TEST 2 ---
-    // Creating interfaces .......................................................................
-    Edge<GridX1> edge_1 = {1, idx_range_x1, BACK};
-    Edge<GridY2> edge_2 = {2, idx_range_y2, FRONT};
-
-    Interface<GridX1, GridY2> interface = {edge_1, edge_2, true};
+    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
+    using EgdeY2F = Edge<Patch2, GridY2, FRONT>;
+    using Interface12 = Interface<EgdeX1B, EgdeY2F, true>;
 
     // Coordinate transformation .................................................................
-    EdgeCoordinatesTransformation coord_transformation(interface);
+    EdgeTransformation<Interface12> coord_transformation(idx_range_x1, idx_range_y2);
 
     Patch1::Coord1 test_coord_x1(0.7);
     Patch2::Coord2 test_coord_y2(coord_transformation(test_coord_x1));
@@ -106,15 +100,12 @@ TEST_F(CoordinateTransformationTest, StickingDifferentDimensions)
 
 TEST_F(CoordinateTransformationTest, ReverseTransformation)
 {
-    // --- TEST 3 ---
-    // Creating interfaces .......................................................................
-    Edge<GridX1> edge_1 = {1, idx_range_x1, BACK};
-    Edge<GridX2> edge_2 = {2, idx_range_x2, FRONT};
-
-    Interface<GridX1, GridX2> interface = {edge_1, edge_2, false};
+    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
+    using EgdeX2F = Edge<Patch2, GridX2, FRONT>;
+    using Interface12 = Interface<EgdeX1B, EgdeX2F, false>;
 
     // Coordinate transformation .................................................................
-    EdgeCoordinatesTransformation coord_transformation(interface);
+    EdgeTransformation<Interface12> coord_transformation(idx_range_x1, idx_range_x2);
 
     Patch2::Coord1 test_coord_x2(1.5);
     Patch1::Coord1 test_coord_x1 = coord_transformation(test_coord_x2);
