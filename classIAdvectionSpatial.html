@@ -121,9 +121,9 @@ Inheritance diagram for IAdvectionSpatial&lt; Geometry, GridX &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8b31e50d45a9d17ba01cf8dca26e982d"><td class="memItemLeft" align="right" valign="top">virtual Field&lt; double, typename Geometry::FdistribuDDom &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionSpatial.html#a8b31e50d45a9d17ba01cf8dca26e982d">operator()</a> (Field&lt; double, typename Geometry::FdistribuDDom &gt; allfdistribu, double dt) const =0</td></tr>
-<tr class="memdesc:a8b31e50d45a9d17ba01cf8dca26e982d"><td class="mdescLeft">&#160;</td><td class="mdescRight">operates a transport of the distribution function.  <a href="classIAdvectionSpatial.html#a8b31e50d45a9d17ba01cf8dca26e982d">More...</a><br /></td></tr>
-<tr class="separator:a8b31e50d45a9d17ba01cf8dca26e982d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04c66a5869bbf9842b746f435aa8a168"><td class="memItemLeft" align="right" valign="top">virtual Field&lt; double, typename Geometry::FdistribuIdxRange &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionSpatial.html#a04c66a5869bbf9842b746f435aa8a168">operator()</a> (Field&lt; double, typename Geometry::FdistribuIdxRange &gt; allfdistribu, double dt) const =0</td></tr>
+<tr class="memdesc:a04c66a5869bbf9842b746f435aa8a168"><td class="mdescLeft">&#160;</td><td class="mdescRight">operates a transport of the distribution function.  <a href="classIAdvectionSpatial.html#a04c66a5869bbf9842b746f435aa8a168">More...</a><br /></td></tr>
+<tr class="separator:a04c66a5869bbf9842b746f435aa8a168"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Geometry, class GridX&gt;<br />
@@ -133,8 +133,8 @@ class IAdvectionSpatial&lt; Geometry, GridX &gt;</h3>
 <p>A generic class for a spatial advection.</p>
 <p>An abstract class which implements a function that applies the transport along a physical space direction of the phase space. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8b31e50d45a9d17ba01cf8dca26e982d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b31e50d45a9d17ba01cf8dca26e982d">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a04c66a5869bbf9842b746f435aa8a168"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04c66a5869bbf9842b746f435aa8a168">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,9 +145,9 @@ template&lt;class Geometry , class GridX &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual Field&lt;double, typename Geometry::FdistribuDDom&gt; <a class="el" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>&lt; Geometry, <a class="el" href="structGridX.html">GridX</a> &gt;::operator() </td>
+          <td class="memname">virtual Field&lt;double, typename Geometry::FdistribuIdxRange&gt; <a class="el" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>&lt; Geometry, <a class="el" href="structGridX.html">GridX</a> &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">Field&lt; double, typename Geometry::FdistribuDDom &gt;&#160;</td>
+          <td class="paramtype">Field&lt; double, typename Geometry::FdistribuIdxRange &gt;&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
