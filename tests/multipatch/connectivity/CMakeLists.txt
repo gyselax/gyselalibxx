@@ -47,6 +47,7 @@ PUBLIC
 
         gslx::multipatch_connectivity
         gslx::multipatch_geometries
+        gslx::utils
 )
 target_compile_definitions("multipatch_connectivity_test" PUBLIC)
 gtest_discover_tests("multipatch_connectivity_test" DISCOVERY_MODE PRE_TEST)
