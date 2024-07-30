@@ -28,7 +28,7 @@ var searchData=
   ['coding_20standards_98',['Coding Standards',['../docs_CODING_STANDARD.html',1,'']]],
   ['collisioninfo_99',['CollisionInfo',['../classCollisionInfo.html',1,'CollisionInfo'],['../classCollisionInfo.html#ab7c9318537e4d896021e6098aee81674',1,'CollisionInfo::CollisionInfo()']]],
   ['collisioninforadial_100',['CollisionInfoRadial',['../classCollisionInfoRadial.html#a2012ef48c5ff858018d53149384071e3',1,'CollisionInfoRadial::CollisionInfoRadial(PC_tree_t const &amp;yaml_input_file, double const rpeak, double const q_rpeak, DViewR radial_profile, DViewR safety_factor)'],['../classCollisionInfoRadial.html#a30709c16643d80d9880fa0cd15cff484',1,'CollisionInfoRadial::CollisionInfoRadial(double const nustar0_rpeak, std::int8_t const collisions_interspecies, double const rpeak, double const q_rpeak, DViewR radial_profile, DViewR safety_factor)'],['../classCollisionInfoRadial.html',1,'CollisionInfoRadial&lt; GridR &gt;']]],
-  ['collisions_101',['Collisions',['../src_collisions.html',1,'']]],
+  ['collisions_101',['Collisions',['../src_collisions.html',1,'src']]],
   ['collisions_20test_102',['Collisions test',['../tests_geometry5D_collisions.html',1,'tests']]],
   ['collisions_5fdimensions_103',['collisions_dimensions',['../namespacecollisions__dimensions.html',1,'']]],
   ['collisions_5finterspecies_104',['collisions_interspecies',['../classCollisionInfoRadial.html#ac1ba453a905e26075bc28a11e9d87286',1,'CollisionInfoRadial::collisions_interspecies()'],['../classCollisionInfo.html#a1fd5a0ed1e680dd18934365252712ab3',1,'CollisionInfo::collisions_interspecies()']]],

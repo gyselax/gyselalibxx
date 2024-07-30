@@ -69,7 +69,6 @@ var NAVTREE =
     ] ],
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
     [ "Gyselalib++ contents", "src.html", "src" ],
-    [ "Collisions", "src_collisions.html", null ],
     [ "Geometry (vpar, mu)", "src_geometryVparMu.html", "src_geometryVparMu" ],
     [ "Gyselalib++ tests", "tests.html", "tests" ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
