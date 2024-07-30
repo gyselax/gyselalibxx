@@ -115,10 +115,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a11c84fec5577a58b0addfd13bd744117"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#a11c84fec5577a58b0addfd13bd744117">EdgeTransformation</a> (IdxRangeEdge1 const &amp;idx_range_patch_1, IdxRangeEdge2 const &amp;idx_range_patch_2)</td></tr>
 <tr class="memdesc:a11c84fec5577a58b0addfd13bd744117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an <a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a>.  <a href="classEdgeTransformation.html#a11c84fec5577a58b0addfd13bd744117">More...</a><br /></td></tr>
 <tr class="separator:a11c84fec5577a58b0addfd13bd744117"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54ff59771dc7ef0a1b9206a2ac37e7fc"><td class="memTemplParams" colspan="2">template&lt;class CurrentDim &gt; </td></tr>
-<tr class="memitem:a54ff59771dc7ef0a1b9206a2ac37e7fc"><td class="memTemplItemLeft" align="right" valign="top">ddc::Coordinate&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentDim, EdgeDim1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt; const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#a54ff59771dc7ef0a1b9206a2ac37e7fc">operator()</a> (ddc::Coordinate&lt; CurrentDim &gt; const &amp;current_coord) const</td></tr>
-<tr class="memdesc:a54ff59771dc7ef0a1b9206a2ac37e7fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch.  <a href="classEdgeTransformation.html#a54ff59771dc7ef0a1b9206a2ac37e7fc">More...</a><br /></td></tr>
-<tr class="separator:a54ff59771dc7ef0a1b9206a2ac37e7fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a338296619477cc3cdf79fb629f5f4211"><td class="memTemplParams" colspan="2">template&lt;class CurrentDim &gt; </td></tr>
+<tr class="memitem:a338296619477cc3cdf79fb629f5f4211"><td class="memTemplItemLeft" align="right" valign="top">Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentDim, EdgeDim1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt; const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#a338296619477cc3cdf79fb629f5f4211">operator()</a> (Coord&lt; CurrentDim &gt; const &amp;current_coord) const</td></tr>
+<tr class="memdesc:a338296619477cc3cdf79fb629f5f4211"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch.  <a href="classEdgeTransformation.html#a338296619477cc3cdf79fb629f5f4211">More...</a><br /></td></tr>
+<tr class="separator:a338296619477cc3cdf79fb629f5f4211"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Interface&gt;<br />
@@ -185,8 +185,8 @@ template&lt;class Interface &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a54ff59771dc7ef0a1b9206a2ac37e7fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54ff59771dc7ef0a1b9206a2ac37e7fc">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a338296619477cc3cdf79fb629f5f4211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a338296619477cc3cdf79fb629f5f4211">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,9 +199,9 @@ template&lt;class CurrentDim &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ddc::Coordinate&lt; std::conditional_t&lt;std::is_same_v&lt;CurrentDim, EdgeDim1&gt;, EdgeDim2, EdgeDim1&gt; &gt; const <a class="el" href="classEdgeTransformation.html">EdgeTransformation</a>&lt; <a class="el" href="structInterface.html">Interface</a> &gt;::operator() </td>
+          <td class="memname">Coord&lt;std::conditional_t&lt;std::is_same_v&lt;CurrentDim, EdgeDim1&gt;, EdgeDim2, EdgeDim1&gt; &gt; const <a class="el" href="classEdgeTransformation.html">EdgeTransformation</a>&lt; <a class="el" href="structInterface.html">Interface</a> &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; CurrentDim &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; CurrentDim &gt; const &amp;&#160;</td>
           <td class="paramname"><em>current_coord</em></td><td>)</td>
           <td> const</td>
         </tr>

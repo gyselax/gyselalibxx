@@ -106,30 +106,31 @@ $(document).ready(function(){initNavTree('edge_8hpp_source.html',''); initResiza
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">enum</span> Extremity { FRONT, BACK };</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">enum</span> Extremity { FRONT, BACK };</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Patch, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>, Extremity extremity_val&gt;</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structEdge.html">   26</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structEdge.html">Edge</a></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structEdge.html#a678ca5c6e26101fb30cd8725dc35c693">   29</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="structPatch.html">associated_patch</a> = <a class="code" href="structPatch.html">Patch</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structEdge.html#a9b6b386b8c648dfb8768c6a105d45ec6">   31</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="structEdge.html#a9b6b386b8c648dfb8768c6a105d45ec6">grid</a> = Grid;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structEdge.html#a65f21b037c4e94e4ff923e2f580a407c">   33</a></span>&#160;    <span class="keyword">static</span> constexpr Extremity <a class="code" href="structEdge.html#a65f21b037c4e94e4ff923e2f580a407c">extremity</a> = extremity_val;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Patch, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>, Extremity extremity_val&gt;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structEdge.html">   27</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structEdge.html">Edge</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structEdge.html#a678ca5c6e26101fb30cd8725dc35c693">   30</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="structPatch.html">associated_patch</a> = <a class="code" href="structPatch.html">Patch</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structEdge.html#a9b6b386b8c648dfb8768c6a105d45ec6">   32</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="structEdge.html#a9b6b386b8c648dfb8768c6a105d45ec6">grid</a> = Grid;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structEdge.html#a65f21b037c4e94e4ff923e2f580a407c">   34</a></span>&#160;    <span class="keyword">static</span> constexpr Extremity <a class="code" href="structEdge.html#a65f21b037c4e94e4ff923e2f580a407c">extremity</a> = extremity_val;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structOutsideEdge.html">   43</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structOutsideEdge.html">OutsideEdge</a></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
-<div class="ttc" id="astructEdge_html"><div class="ttname"><a href="structEdge.html">Edge</a></div><div class="ttdoc">Define an edge of a given patch.</div><div class="ttdef"><b>Definition:</b> edge.hpp:27</div></div>
-<div class="ttc" id="astructEdge_html_a65f21b037c4e94e4ff923e2f580a407c"><div class="ttname"><a href="structEdge.html#a65f21b037c4e94e4ff923e2f580a407c">Edge::extremity</a></div><div class="ttdeci">static constexpr Extremity extremity</div><div class="ttdoc">Design if the edge is on the BACK or the FRONT of the other dimension.</div><div class="ttdef"><b>Definition:</b> edge.hpp:33</div></div>
-<div class="ttc" id="astructEdge_html_a9b6b386b8c648dfb8768c6a105d45ec6"><div class="ttname"><a href="structEdge.html#a9b6b386b8c648dfb8768c6a105d45ec6">Edge::grid</a></div><div class="ttdeci">Grid grid</div><div class="ttdoc">Discrete dimension where the edge is defined.</div><div class="ttdef"><b>Definition:</b> edge.hpp:31</div></div>
-<div class="ttc" id="astructOutsideEdge_html"><div class="ttname"><a href="structOutsideEdge.html">OutsideEdge</a></div><div class="ttdoc">Define an edge for the outside domain.</div><div class="ttdef"><b>Definition:</b> edge.hpp:44</div></div>
-<div class="ttc" id="astructPatch_html"><div class="ttname"><a href="structPatch.html">Patch</a></div><div class="ttdoc">Base tag for a patch.</div><div class="ttdef"><b>Definition:</b> patch.hpp:13</div></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="structOutsideEdge.html">   44</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structOutsideEdge.html">OutsideEdge</a></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
+<div class="ttc" id="astructEdge_html"><div class="ttname"><a href="structEdge.html">Edge</a></div><div class="ttdoc">Define an edge of a given patch.</div><div class="ttdef"><b>Definition:</b> edge.hpp:28</div></div>
+<div class="ttc" id="astructEdge_html_a65f21b037c4e94e4ff923e2f580a407c"><div class="ttname"><a href="structEdge.html#a65f21b037c4e94e4ff923e2f580a407c">Edge::extremity</a></div><div class="ttdeci">static constexpr Extremity extremity</div><div class="ttdoc">Design if the edge is on the BACK or the FRONT of the other dimension.</div><div class="ttdef"><b>Definition:</b> edge.hpp:34</div></div>
+<div class="ttc" id="astructEdge_html_a9b6b386b8c648dfb8768c6a105d45ec6"><div class="ttname"><a href="structEdge.html#a9b6b386b8c648dfb8768c6a105d45ec6">Edge::grid</a></div><div class="ttdeci">Grid grid</div><div class="ttdoc">Discrete dimension where the edge is defined.</div><div class="ttdef"><b>Definition:</b> edge.hpp:32</div></div>
+<div class="ttc" id="astructOutsideEdge_html"><div class="ttname"><a href="structOutsideEdge.html">OutsideEdge</a></div><div class="ttdoc">Define an edge for the outside index range.</div><div class="ttdef"><b>Definition:</b> edge.hpp:45</div></div>
+<div class="ttc" id="astructPatch_html"><div class="ttname"><a href="structPatch.html">Patch</a></div><div class="ttdoc">Base tag for a patch.</div><div class="ttdef"><b>Definition:</b> patch.hpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

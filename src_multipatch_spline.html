@@ -108,20 +108,20 @@ Spline builder</h1>
 <p>The <a class="el" href="classMultipatchSplineBuilder.html" title="A class to call all the builders of all the patches once.">MultipatchSplineBuilder</a> allows all the given spline builders ot be called in one single line.</p>
 <h3><a class="anchor" id="autotoc_md68"></a>
 Example of use</h3>
-<p>We define all the builders for each patch, </p><div class="fragment"><div class="line">SplineBuilderType1 builder_1(domain_1); </div>
-<div class="line">SplineBuilderType2 builder_2(domain_2); </div>
-<div class="line">SplineBuilderType3 builder_3(domain_3); </div>
+<p>We define all the builders for each patch, </p><div class="fragment"><div class="line">SplineBuilderType1 builder_1(idx_range_1); </div>
+<div class="line">SplineBuilderType2 builder_2(idx_range_2); </div>
+<div class="line">SplineBuilderType3 builder_3(idx_range_3); </div>
 <div class="line">...</div>
 </div><!-- fragment --><p>We can instantiate a <a class="el" href="classMultipatchSplineBuilder.html" title="A class to call all the builders of all the patches once.">MultipatchSplineBuilder</a> from these builders, </p><div class="fragment"><div class="line"><a class="code" href="classMultipatchSplineBuilder.html">MultipatchSplineBuilder</a> builder (builder_1, builder_2, builder_3); </div>
-<div class="ttc" id="aclassMultipatchSplineBuilder_html"><div class="ttname"><a href="classMultipatchSplineBuilder.html">MultipatchSplineBuilder</a></div><div class="ttdoc">A class to call all the builders of all the patches once.</div><div class="ttdef"><b>Definition:</b> multipatch_spline_builder.hpp:29</div></div>
-</div><!-- fragment --><p>We allocate memory for the spline representations on each patch, </p><div class="fragment"><div class="line">SplineType1 spline_1(spline_domain_1); </div>
-<div class="line">SplineType2 spline_2(spline_domain_2); </div>
-<div class="line">SplineType3 spline_3(spline_domain_3); </div>
+<div class="ttc" id="aclassMultipatchSplineBuilder_html"><div class="ttname"><a href="classMultipatchSplineBuilder.html">MultipatchSplineBuilder</a></div><div class="ttdoc">A class to call all the builders of all the patches once.</div><div class="ttdef"><b>Definition:</b> multipatch_spline_builder.hpp:30</div></div>
+</div><!-- fragment --><p>We allocate memory for the spline representations on each patch, </p><div class="fragment"><div class="line">SplineType1 spline_1(spline_idx_range_1); </div>
+<div class="line">SplineType2 spline_2(spline_idx_range_2); </div>
+<div class="line">SplineType3 spline_3(spline_idx_range_3); </div>
 <div class="line">...</div>
 <div class="line">std::tuple splines_tuple = {spline_1, spline_2, spline_3}; </div>
-</div><!-- fragment --><p>We do the same with the values of the function, </p><div class="fragment"><div class="line">ValuesType1 values_1(domain_1); </div>
-<div class="line">ValuesType2 values_2(domain_2); </div>
-<div class="line">ValuesType3 values_3(domain_3); </div>
+</div><!-- fragment --><p>We do the same with the values of the function, </p><div class="fragment"><div class="line">ValuesType1 values_1(idx_range_1); </div>
+<div class="line">ValuesType2 values_2(idx_range_2); </div>
+<div class="line">ValuesType3 values_3(idx_range_3); </div>
 <div class="line">...</div>
 <div class="line"><span class="comment">// initialisation </span></div>
 <div class="line">...</div>

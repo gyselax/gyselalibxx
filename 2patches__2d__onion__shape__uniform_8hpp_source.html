@@ -144,16 +144,16 @@ $(document).ready(function(){initNavTree('2patches__2d__onion__shape__uniform_8h
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// DISCRETE DIMENSIONS ---------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structGridR1.html">   51</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structGridR1.html">GridR1</a> : ddc::UniformPointSampling&lt;R1&gt;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structGridR1.html">   51</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structGridR1.html">GridR1</a> : UniformGridBase&lt;R1&gt;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structGridP1.html">   55</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridP1.html">GridP1</a> : ddc::UniformPointSampling&lt;P1&gt;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structGridP1.html">   55</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridP1.html">GridP1</a> : UniformGridBase&lt;P1&gt;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structGridR2.html">   59</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridR2.html">GridR2</a> : ddc::UniformPointSampling&lt;R2&gt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structGridR2.html">   59</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridR2.html">GridR2</a> : UniformGridBase&lt;R2&gt;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="structGridP2.html">   63</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridP2.html">GridP2</a> : ddc::UniformPointSampling&lt;P2&gt;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="structGridP2.html">   63</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridP2.html">GridP2</a> : UniformGridBase&lt;P2&gt;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
@@ -192,7 +192,7 @@ $(document).ready(function(){initNavTree('2patches__2d__onion__shape__uniform_8h
 <div class="ttc" id="astructP1_html_acb20bca3592d140f5c6560f9968c3e12"><div class="ttname"><a href="structP1.html#acb20bca3592d140f5c6560f9968c3e12">P1::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_onion_shape_uniform.hpp:31</div></div>
 <div class="ttc" id="astructP2_html"><div class="ttname"><a href="structP2.html">P2</a></div><div class="ttdoc">Second continuous dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_onion_shape_uniform.hpp:43</div></div>
 <div class="ttc" id="astructP2_html_aa51556e78e8be79363388b547ce7997f"><div class="ttname"><a href="structP2.html#aa51556e78e8be79363388b547ce7997f">P2::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_onion_shape_uniform.hpp:45</div></div>
-<div class="ttc" id="astructPatch_html"><div class="ttname"><a href="structPatch.html">Patch</a></div><div class="ttdoc">Base tag for a patch.</div><div class="ttdef"><b>Definition:</b> patch.hpp:13</div></div>
+<div class="ttc" id="astructPatch_html"><div class="ttname"><a href="structPatch.html">Patch</a></div><div class="ttdoc">Base tag for a patch.</div><div class="ttdef"><b>Definition:</b> patch.hpp:14</div></div>
 <div class="ttc" id="astructR1_html"><div class="ttname"><a href="structR1.html">R1</a></div><div class="ttdoc">First continuous dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_onion_shape_uniform.hpp:22</div></div>
 <div class="ttc" id="astructR1_html_a4edf2b8e677710d893e2e8ce77d88bfc"><div class="ttname"><a href="structR1.html#a4edf2b8e677710d893e2e8ce77d88bfc">R1::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_onion_shape_uniform.hpp:24</div></div>
 <div class="ttc" id="astructR2_html"><div class="ttname"><a href="structR2.html">R2</a></div><div class="ttdoc">First continuous dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_onion_shape_uniform.hpp:36</div></div>
