@@ -60,7 +60,7 @@ def filter_messages(doxygen_output, diff):
     list of DoxygenMessage
         A list of all the messages raised by doxygen which are pertinent to this pull request.
     """
-    return [o for o in doxygen_output if o.file in diff]
+    return [o for o in doxygen_output if (o.file in diff or 'sll' not in o.file.parts)]
 
 parser = argparse.ArgumentParser(description='Check that all new code is documented')
 parser.add_argument('diff_file', metavar='diff_file', type=str,
