@@ -16,7 +16,7 @@ template <class Geometry, class GridX>
 class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, GridX>
 {
     using GridV = typename Geometry::template velocity_dim_for<GridX>;
-    using FdistribIdxRange = typename Geometry::FdistribuDDom;
+    using FdistribIdxRange = typename Geometry::FdistribuIdxRange;
     using IdxX = Idx<GridX>;
     using IdxV = Idx<GridV>;
     using DimX = typename GridX::continuous_dimension_type;
@@ -26,11 +26,15 @@ private:
     using PreallocatableInterpolatorType = interpolator_on_idx_range_t<
             IPreallocatableInterpolator,
             GridX,
-            ddc::cartesian_prod_t<typename Geometry::SpatialDDom, typename Geometry::VelocityDDom>>;
+            ddc::cartesian_prod_t<
+                    typename Geometry::SpatialIdxRange,
+                    typename Geometry::VelocityIdxRange>>;
     using InterpolatorType = interpolator_on_idx_range_t<
             IInterpolator,
             GridX,
-            ddc::cartesian_prod_t<typename Geometry::SpatialDDom, typename Geometry::VelocityDDom>>;
+            ddc::cartesian_prod_t<
+                    typename Geometry::SpatialIdxRange,
+                    typename Geometry::VelocityIdxRange>>;
     PreallocatableInterpolatorType const& m_interpolator_x;
 
 public:
