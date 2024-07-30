@@ -6,34 +6,34 @@
 
 #include "test_utils.hpp"
 
-struct DimX
+struct X
 {
     static bool constexpr PERIODIC = false;
 };
-struct DimY
+struct Y
 {
     static bool constexpr PERIODIC = false;
 };
-struct DimR
+struct R
 {
     static bool constexpr PERIODIC = false;
 };
 
-struct DimP
+struct P
 {
     static bool constexpr PERIODIC = true;
 };
 
-using CoordR = ddc::Coordinate<DimR>;
-using CoordP = ddc::Coordinate<DimP>;
-using CoordRP = ddc::Coordinate<DimR, DimP>;
+using CoordR = ddc::Coordinate<R>;
+using CoordP = ddc::Coordinate<P>;
+using CoordRP = ddc::Coordinate<R, P>;
 
 int constexpr BSDegree = 3;
 
-struct BSplinesR : ddc::NonUniformBSplines<DimR, BSDegree>
+struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
 {
 };
-struct BSplinesP : ddc::NonUniformBSplines<DimP, BSDegree>
+struct BSplinesP : ddc::NonUniformBSplines<P, BSDegree>
 {
 };
 struct PolarBSplinesRP : PolarBSplines<BSplinesR, BSplinesP, 1>
@@ -45,31 +45,31 @@ using InterpPointsR = ddc::
 using InterpPointsP = ddc::
         GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
-struct IDimR : InterpPointsR::interpolation_discrete_dimension_type
+struct GridR : InterpPointsR::interpolation_discrete_dimension_type
 {
 };
-struct IDimP : InterpPointsP::interpolation_discrete_dimension_type
+struct GridP : InterpPointsP::interpolation_discrete_dimension_type
 {
 };
 
-using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
-using BSDomainP = ddc::DiscreteDomain<BSplinesP>;
-using BSDomainRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
-using BSDomainPolar = ddc::DiscreteDomain<PolarBSplinesRP>;
+using BSIdxRangeR = ddc::DiscreteDomain<BSplinesR>;
+using BSIdxRangeP = ddc::DiscreteDomain<BSplinesP>;
+using BSIdxRangeRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
+using BSIdxRangePolar = ddc::DiscreteDomain<PolarBSplinesRP>;
 
-using IndexR = ddc::DiscreteElement<IDimR>;
-using IndexP = ddc::DiscreteElement<IDimP>;
-using IndexRP = ddc::DiscreteElement<IDimR, IDimP>;
+using IdxR = ddc::DiscreteElement<GridR>;
+using IdxP = ddc::DiscreteElement<GridP>;
+using IdxRP = ddc::DiscreteElement<GridR, GridP>;
 
-using IVectR = ddc::DiscreteVector<IDimR>;
-using IVectP = ddc::DiscreteVector<IDimP>;
-using IVectRP = ddc::DiscreteVector<IDimR, IDimP>;
+using IdxStepR = ddc::DiscreteVector<GridR>;
+using IdxStepP = ddc::DiscreteVector<GridP>;
+using IdxStepRP = ddc::DiscreteVector<GridR, GridP>;
 
-using IDomainRP = ddc::DiscreteDomain<IDimR, IDimP>;
+using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
 
 
 template <class ElementType>
-using FieldRP = ddc::Chunk<ElementType, IDomainRP>;
+using FieldMemRP = ddc::Chunk<ElementType, IdxRangeRP>;
 
 
 using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
@@ -102,35 +102,35 @@ class InverseMetricTensor : public testing::TestWithParam<std::tuple<std::size_t
 TEST_P(InverseMetricTensor, InverseMatrixCircMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CircularToCartesian<DimX, DimY, DimR, DimP> mapping;
+    const CircularToCartesian<X, Y, R, P> mapping;
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
-    IVectR const r_size(Nr);
+    IdxStepR const r_size(Nr);
 
     CoordP const p_min(0.0);
     CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(Nt);
+    IdxStepP const p_size(Nt);
 
-    IndexR const r_start(1); // avoid singular point.
-    IndexP const p_start(0);
+    IdxR const r_start(1); // avoid singular point.
+    IdxP const p_start(0);
 
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
 
-    ddc::DiscreteDomain<IDimR> domain_r(r_start, r_size);
-    ddc::DiscreteDomain<IDimP> domain_p(p_start, p_size);
-    ddc::DiscreteDomain<IDimR, IDimP> grid(domain_r, domain_p);
+    ddc::DiscreteDomain<GridR> idx_range_r(r_start, r_size);
+    ddc::DiscreteDomain<GridP> idx_range_p(p_start, p_size);
+    ddc::DiscreteDomain<GridR, GridP> grid(idx_range_r, idx_range_p);
 
-    FieldRP<CoordRP> coords(grid);
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    FieldMemRP<CoordRP> coords(grid);
+    ddc::for_each(grid, [&](IdxRP const irp) {
         coords(irp) = CoordRP(
-                r_min + dr * ddc::select<IDimR>(irp).uid(),
-                p_min + dp * ddc::select<IDimR>(irp).uid());
+                r_min + dr * ddc::select<GridR>(irp).uid(),
+                p_min + dp * ddc::select<GridR>(irp).uid());
     });
 
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IdxRP const irp) {
         Matrix_2x2 matrix;
         Matrix_2x2 inv_matrix;
 
@@ -146,35 +146,35 @@ TEST_P(InverseMetricTensor, InverseMatrixCircMap)
 TEST_P(InverseMetricTensor, InverseMatrixCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CzarnyToCartesian<DimX, DimY, DimR, DimP> mapping(0.3, 1.4);
+    const CzarnyToCartesian<X, Y, R, P> mapping(0.3, 1.4);
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
-    IVectR const r_size(Nr);
+    IdxStepR const r_size(Nr);
 
     CoordP const p_min(0.0);
     CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(Nt);
+    IdxStepP const p_size(Nt);
 
-    IndexR const r_start(1); // avoid singular point.
-    IndexP const p_start(0);
+    IdxR const r_start(1); // avoid singular point.
+    IdxP const p_start(0);
 
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
 
-    ddc::DiscreteDomain<IDimR> domain_r(r_start, r_size);
-    ddc::DiscreteDomain<IDimP> domain_p(p_start, p_size);
-    ddc::DiscreteDomain<IDimR, IDimP> grid(domain_r, domain_p);
+    ddc::DiscreteDomain<GridR> idx_range_r(r_start, r_size);
+    ddc::DiscreteDomain<GridP> idx_range_p(p_start, p_size);
+    ddc::DiscreteDomain<GridR, GridP> grid(idx_range_r, idx_range_p);
 
-    FieldRP<CoordRP> coords(grid);
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    FieldMemRP<CoordRP> coords(grid);
+    ddc::for_each(grid, [&](IdxRP const irp) {
         coords(irp) = CoordRP(
-                r_min + dr * ddc::select<IDimR>(irp).uid(),
-                p_min + dp * ddc::select<IDimR>(irp).uid());
+                r_min + dr * ddc::select<GridR>(irp).uid(),
+                p_min + dp * ddc::select<GridR>(irp).uid());
     });
 
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IdxRP const irp) {
         Matrix_2x2 matrix;
         Matrix_2x2 inv_matrix;
 

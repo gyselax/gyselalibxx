@@ -41,11 +41,11 @@ struct BernsteinFixture;
 template <std::size_t D>
 struct BernsteinFixture<std::tuple<std::integral_constant<std::size_t, D>>> : public testing::Test
 {
-    struct DimX
+    struct X
     {
         static constexpr bool PERIODIC = false;
     };
-    struct DimY
+    struct Y
     {
         static constexpr bool PERIODIC = false;
     };
@@ -59,7 +59,7 @@ struct BernsteinFixture<std::tuple<std::integral_constant<std::size_t, D>>> : pu
     {
     };
     static constexpr std::size_t poly_degree = D;
-    struct Bernstein : BernsteinPolynomialBasis<DimX, DimY, Corner1, Corner2, Corner3, poly_degree>
+    struct Bernstein : BernsteinPolynomialBasis<X, Y, Corner1, Corner2, Corner3, poly_degree>
     {
     };
 };
@@ -72,34 +72,34 @@ TYPED_TEST_SUITE(BernsteinFixture, Cases);
 
 TYPED_TEST(BernsteinFixture, PartitionOfUnity)
 {
-    using DimX = typename TestFixture::DimX;
-    using DimY = typename TestFixture::DimY;
+    using X = typename TestFixture::X;
+    using Y = typename TestFixture::Y;
     using Corner1 = typename TestFixture::Corner1;
     using Corner2 = typename TestFixture::Corner2;
     using Corner3 = typename TestFixture::Corner3;
     using Bernstein = typename TestFixture::Bernstein;
-    using CoordXY = ddc::Coordinate<DimX, DimY>;
+    using CoordXY = ddc::Coordinate<X, Y>;
 
     const CoordXY c1(-1.0, -1.0);
     const CoordXY c2(0.0, 1.0);
     const CoordXY c3(1.0, -1.0);
 
-    CartesianToBarycentricCoordinates<DimX, DimY, Corner1, Corner2, Corner3>
+    CartesianToBarycentricCoordinates<X, Y, Corner1, Corner2, Corner3>
             coordinate_converter(c1, c2, c3);
     ddc::init_discrete_space<Bernstein>(coordinate_converter);
 
-    ddc::DiscreteDomain<Bernstein>
-            domain(ddc::DiscreteElement<Bernstein>(0),
-                   ddc::DiscreteVector<Bernstein>(Bernstein::nbasis()));
+    ddc::DiscreteDomain<Bernstein> idx_range(
+            ddc::DiscreteElement<Bernstein>(0),
+            ddc::DiscreteVector<Bernstein>(Bernstein::nbasis()));
 
-    ddc::Chunk<double, ddc::DiscreteDomain<Bernstein>> values(domain);
+    ddc::Chunk<double, ddc::DiscreteDomain<Bernstein>> values(idx_range);
 
     std::size_t const n_test_points = 100;
     for (std::size_t i(0); i < n_test_points; ++i) {
         CoordXY const test_point = generate_random_point_in_triangle(c1, c2, c3);
         ddc::discrete_space<Bernstein>().eval_basis(values, test_point);
         double total = ddc::transform_reduce(
-                domain,
+                idx_range,
                 0.0,
                 ddc::reducer::sum<double>(),
                 [&](ddc::DiscreteElement<Bernstein> const ix) { return values(ix); });
