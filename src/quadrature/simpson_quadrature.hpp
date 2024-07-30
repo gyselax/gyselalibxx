@@ -24,7 +24,7 @@ simpson_quadrature_coefficients_1d(IdxRange<Grid> const& idx_range)
 {
     FieldMem<double, IdxRange<Grid>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
             coefficients_alloc(idx_range);
-    auto const coefficients = coefficients_alloc.span_view();
+    auto const coefficients = get_field(coefficients_alloc);
     double const dx_l = distance_at_left(idx_range.back());
     double const dx_r = distance_at_right(idx_range.front());
     Kokkos::parallel_for(

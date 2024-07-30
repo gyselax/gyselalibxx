@@ -79,7 +79,7 @@ host_t<FieldMem<double, IdxRange<Grid>>> spline_quadrature_coefficients_1d(
 
     // Solve matrix equation
     auto integral_bsplines_without_periodic_point
-            = integral_bsplines.span_view()[IdxRange<bsplines_type>(
+            = get_field(integral_bsplines)[IdxRange<bsplines_type>(
                     Idx<bsplines_type>(0),
                     IdxStep<bsplines_type>(builder.get_interpolation_matrix().size()))];
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>

@@ -49,13 +49,12 @@ quadrature_coeffs_nd(
             ddc::DiscreteDomain<DDims...>,
             ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
             coefficients_alloc(domain);
-    ddc::ChunkSpan coefficients = coefficients_alloc.span_view();
+    ddc::ChunkSpan coefficients = get_field(coefficients_alloc);
     // Get coefficients for each dimension
     std::tuple<CoefficientFieldMem1D<ExecSpace, DDims>...> current_dim_coeffs_alloc(
             funcs(ddc::select<DDims>(domain))...);
-    std::tuple<CoefficientField1D<ExecSpace, DDims>...> current_dim_coeffs(
-            std::get<CoefficientFieldMem1D<ExecSpace, DDims>>(current_dim_coeffs_alloc)
-                    .span_view()...);
+    std::tuple<CoefficientField1D<ExecSpace, DDims>...> current_dim_coeffs(get_field(
+            std::get<CoefficientFieldMem1D<ExecSpace, DDims>>(current_dim_coeffs_alloc))...);
 
     ddc::parallel_for_each(
             ExecSpace(),

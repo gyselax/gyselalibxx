@@ -81,7 +81,7 @@ host_t<FieldMem<double, IdxRange<Grid>>> neumann_spline_quadrature_coefficients_
 
     auto integral_bsplines = ddc::create_mirror_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            integral_bsplines_host.span_view());
+            get_field(integral_bsplines_host));
     // Solve matrix equation
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
             integral_bsplines_mirror_with_additional_allocation(
@@ -143,15 +143,15 @@ neumann_spline_quadrature_coefficients(
     std::tuple<CoefficientFieldMem1D_h<DDims>...> current_dim_coeffs_alloc(
             neumann_spline_quadrature_coefficients_1d(ddc::select<DDims>(idx_range), builders)...);
     std::tuple<CoefficientField1D_h<DDims>...> current_dim_coeffs(
-            std::get<CoefficientFieldMem1D_h<DDims>>(current_dim_coeffs_alloc).span_view()...);
+            get_field(std::get<CoefficientFieldMem1D_h<DDims>>(current_dim_coeffs_alloc))...);
     // Allocate ND coefficients
     FieldMem<
             double,
             IdxRange<DDims...>,
             ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
             coefficients_alloc(idx_range);
-    auto coefficients_alloc_host = ddc::create_mirror_view(coefficients_alloc.span_view());
-    auto coefficients = coefficients_alloc_host.span_view();
+    auto coefficients_alloc_host = ddc::create_mirror_view(get_field(coefficients_alloc));
+    auto coefficients = get_field(coefficients_alloc_host);
 
     ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
         // multiply the 1D coefficients by one another
