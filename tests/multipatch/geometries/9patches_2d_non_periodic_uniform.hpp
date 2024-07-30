@@ -6,12 +6,22 @@
             - non-periodic on X and Y;
             - uniform cubic splines;
             - uniform Grid1 and Grid2; 
+
+
+      1  |  2  |  3
+    -----------------
+      4  |  5  |  6
+    -----------------
+      7  |  8  |  9
 */
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
 #include "patch.hpp"
+#include "edge.hpp"
+#include "interface.hpp"
+#include "connectivity.hpp"
 
 namespace non_periodic_uniform_2d_9patches {
 
@@ -116,4 +126,108 @@ using Patch9 = Patch<GridX<9>, GridY<9>, BSplinesX<9>, BSplinesY<9>>;
 using PatchOrdering = ddc::detail::
         TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5, Patch6, Patch7, Patch8, Patch9>;
 
+using NorthEdge1 = Edge<Patch1, GridY<1>, BACK>;
+using SouthEdge1 = Edge<Patch1, GridY<1>, FRONT>;
+using EastEdge1 = Edge<Patch1, GridX<1>, BACK>;
+using WestEdge1 = Edge<Patch1, GridX<1>, FRONT>;
+
+using NorthEdge2 = Edge<Patch2, GridY<2>, BACK>;
+using SouthEdge2 = Edge<Patch2, GridY<2>, FRONT>;
+using EastEdge2 = Edge<Patch2, GridX<2>, BACK>;
+using WestEdge2 = Edge<Patch2, GridX<2>, FRONT>;
+
+using NorthEdge3 = Edge<Patch3, GridY<3>, BACK>;
+using SouthEdge3 = Edge<Patch3, GridY<3>, FRONT>;
+using EastEdge3 = Edge<Patch3, GridX<3>, BACK>;
+using WestEdge3 = Edge<Patch3, GridX<3>, FRONT>;
+
+using NorthEdge4 = Edge<Patch4, GridY<4>, BACK>;
+using SouthEdge4 = Edge<Patch4, GridY<4>, FRONT>;
+using EastEdge4 = Edge<Patch4, GridX<4>, BACK>;
+using WestEdge4 = Edge<Patch4, GridX<4>, FRONT>;
+
+using NorthEdge5 = Edge<Patch5, GridY<5>, BACK>;
+using SouthEdge5 = Edge<Patch5, GridY<5>, FRONT>;
+using EastEdge5 = Edge<Patch5, GridX<5>, BACK>;
+using WestEdge5 = Edge<Patch5, GridX<5>, FRONT>;
+
+using NorthEdge6 = Edge<Patch6, GridY<6>, BACK>;
+using SouthEdge6 = Edge<Patch6, GridY<6>, FRONT>;
+using EastEdge6 = Edge<Patch6, GridX<6>, BACK>;
+using WestEdge6 = Edge<Patch6, GridX<6>, FRONT>;
+
+using NorthEdge7 = Edge<Patch7, GridY<7>, BACK>;
+using SouthEdge7 = Edge<Patch7, GridY<7>, FRONT>;
+using EastEdge7 = Edge<Patch7, GridX<7>, BACK>;
+using WestEdge7 = Edge<Patch7, GridX<7>, FRONT>;
+
+using NorthEdge8 = Edge<Patch8, GridY<8>, BACK>;
+using SouthEdge8 = Edge<Patch8, GridY<8>, FRONT>;
+using EastEdge8 = Edge<Patch8, GridX<8>, BACK>;
+using WestEdge8 = Edge<Patch8, GridX<8>, FRONT>;
+
+using NorthEdge9 = Edge<Patch9, GridY<9>, BACK>;
+using SouthEdge9 = Edge<Patch9, GridY<9>, FRONT>;
+using EastEdge9 = Edge<Patch9, GridX<9>, BACK>;
+using WestEdge9 = Edge<Patch9, GridX<9>, FRONT>;
+
+
+using NorthInterface1 = Interface<NorthEdge1, OutsideEdge, true>;
+using NorthInterface2 = Interface<NorthEdge2, OutsideEdge, true>;
+using NorthInterface3 = Interface<NorthEdge3, OutsideEdge, true>;
+
+using Interface_1_4 = Interface<SouthEdge1, NorthEdge4, true>;
+using Interface_2_5 = Interface<SouthEdge2, NorthEdge5, true>;
+using Interface_3_6 = Interface<SouthEdge3, NorthEdge6, true>;
+
+using Interface_4_7 = Interface<SouthEdge4, NorthEdge7, true>;
+using Interface_5_8 = Interface<SouthEdge5, NorthEdge8, true>;
+using Interface_6_9 = Interface<SouthEdge6, NorthEdge9, true>;
+
+using SouthInterface7 = Interface<SouthEdge7, OutsideEdge, true>;
+using SouthInterface8 = Interface<SouthEdge8, OutsideEdge, true>;
+using SouthInterface9 = Interface<SouthEdge9, OutsideEdge, true>;
+
+
+using EastInterface3 = Interface<EastEdge3, OutsideEdge, true>;
+using EastInterface6 = Interface<EastEdge6, OutsideEdge, true>;
+using EastInterface9 = Interface<EastEdge9, OutsideEdge, true>;
+
+using Interface_1_2 = Interface<EastEdge1, WestEdge2, true>;
+using Interface_4_5 = Interface<EastEdge4, WestEdge5, true>;
+using Interface_7_8 = Interface<EastEdge7, WestEdge8, true>;
+
+using Interface_2_3 = Interface<EastEdge2, WestEdge3, true>;
+using Interface_5_6 = Interface<EastEdge5, WestEdge6, true>;
+using Interface_8_9 = Interface<EastEdge8, WestEdge9, true>;
+
+using WestInterface1 = Interface<WestEdge1, OutsideEdge, true>;
+using WestInterface4 = Interface<WestEdge4, OutsideEdge, true>;
+using WestInterface7 = Interface<WestEdge7, OutsideEdge, true>;
+
+using Connectivity = MultipatchConnectivity<
+        NorthInterface1,
+        NorthInterface2,
+        NorthInterface3,
+        Interface_1_4,
+        Interface_2_5,
+        Interface_3_6,
+        Interface_4_7,
+        Interface_5_8,
+        Interface_6_9,
+        SouthInterface7,
+        SouthInterface8,
+        SouthInterface9,
+        EastInterface3,
+        EastInterface6,
+        EastInterface9,
+        Interface_1_2,
+        Interface_4_5,
+        Interface_7_8,
+        Interface_2_3,
+        Interface_5_6,
+        Interface_8_9,
+        WestInterface1,
+        WestInterface4,
+        WestInterface7>;
 } // namespace non_periodic_uniform_2d_9patches
