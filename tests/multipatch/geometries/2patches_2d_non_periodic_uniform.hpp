@@ -48,19 +48,19 @@ struct Y2
 
 // GRID: points sequences ------------------------------------------------------------------------
 /// @brief Points sequence on the first logical dimension of patch 1.
-struct GridX1 : ddc::UniformPointSampling<X1>
+struct GridX1 : UniformGridBase<X1>
 {
 };
 /// @brief Points sequence on the second logical dimension of patch 1.
-struct GridY1 : ddc::UniformPointSampling<Y1>
+struct GridY1 : UniformGridBase<Y1>
 {
 };
 /// @brief Points sequence on the first logical dimension of patch 2.
-struct GridX2 : ddc::UniformPointSampling<X2>
+struct GridX2 : UniformGridBase<X2>
 {
 };
 /// @brief Points sequence on the second logical dimension of patch 2.
-struct GridY2 : ddc::UniformPointSampling<Y2>
+struct GridY2 : UniformGridBase<Y2>
 {
 };
 

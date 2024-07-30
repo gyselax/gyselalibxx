@@ -14,23 +14,23 @@
 
 namespace {
 // Continuous dimension of patch 1
-struct RDimX1
+struct X1
 {
     static bool constexpr PERIODIC = false;
 };
 
-struct RDimY1
+struct Y1
 {
     static bool constexpr PERIODIC = false;
 };
 
 // Continuous dimension of patch 2
-struct RDimX2
+struct X2
 {
     static bool constexpr PERIODIC = false;
 };
 
-struct RDimY2
+struct Y2
 {
     static bool constexpr PERIODIC = false;
 };
@@ -38,16 +38,16 @@ struct RDimY2
 
 
 // Splines
-struct BSplinesX1 : ddc::UniformBSplines<RDimX1, 3>
+struct BSplinesX1 : ddc::UniformBSplines<X1, 3>
 {
 };
-struct BSplinesY1 : ddc::UniformBSplines<RDimY1, 3>
+struct BSplinesY1 : ddc::UniformBSplines<Y1, 3>
 {
 };
-struct BSplinesX2 : ddc::UniformBSplines<RDimX2, 3>
+struct BSplinesX2 : ddc::UniformBSplines<X2, 3>
 {
 };
-struct BSplinesY2 : ddc::UniformBSplines<RDimY2, 3>
+struct BSplinesY2 : ddc::UniformBSplines<Y2, 3>
 {
 };
 
@@ -74,17 +74,17 @@ using SplineInterpPointsY2
 
 
 // Discrete dimension of patch 1
-struct IDimX1 : SplineInterpPointsX1::interpolation_discrete_dimension_type
+struct GridX1 : SplineInterpPointsX1::interpolation_discrete_dimension_type
 {
 };
-struct IDimY1 : SplineInterpPointsY1::interpolation_discrete_dimension_type
+struct GridY1 : SplineInterpPointsY1::interpolation_discrete_dimension_type
 {
 };
 // Discrete dimension of patch 2
-struct IDimX2 : SplineInterpPointsX2::interpolation_discrete_dimension_type
+struct GridX2 : SplineInterpPointsX2::interpolation_discrete_dimension_type
 {
 };
-struct IDimY2 : SplineInterpPointsY2::interpolation_discrete_dimension_type
+struct GridY2 : SplineInterpPointsY2::interpolation_discrete_dimension_type
 {
 };
 
@@ -93,34 +93,34 @@ struct IDimY2 : SplineInterpPointsY2::interpolation_discrete_dimension_type
 /*
     TODO: use Patch class once merged. 
 */
-using CoordX1 = ddc::Coordinate<RDimX1>;
-using CoordY1 = ddc::Coordinate<RDimY1>;
-using CoordX2 = ddc::Coordinate<RDimX2>;
-using CoordY2 = ddc::Coordinate<RDimY2>;
+using CoordX1 = Coord<X1>;
+using CoordY1 = Coord<Y1>;
+using CoordX2 = Coord<X2>;
+using CoordY2 = Coord<Y2>;
 
 
-using IndexX1 = ddc::DiscreteElement<IDimX1>;
-using IndexY1 = ddc::DiscreteElement<IDimY1>;
-using IndexX2 = ddc::DiscreteElement<IDimX2>;
-using IndexY2 = ddc::DiscreteElement<IDimY2>;
+using IdxX1 = Idx<GridX1>;
+using IdxY1 = Idx<GridY1>;
+using IdxX2 = Idx<GridX2>;
+using IdxY2 = Idx<GridY2>;
 
-using IndexXY1 = ddc::DiscreteElement<IDimX1, IDimY1>;
-using IndexXY2 = ddc::DiscreteElement<IDimX2, IDimY2>;
-
-
-using IVectX1 = ddc::DiscreteVector<IDimX1>;
-using IVectY1 = ddc::DiscreteVector<IDimY1>;
-using IVectX2 = ddc::DiscreteVector<IDimX2>;
-using IVectY2 = ddc::DiscreteVector<IDimY2>;
+using IdxXY1 = Idx<GridX1, GridY1>;
+using IdxXY2 = Idx<GridX2, GridY2>;
 
 
-using IDomainX1 = ddc::DiscreteDomain<IDimX1>;
-using IDomainY1 = ddc::DiscreteDomain<IDimY1>;
-using IDomainX2 = ddc::DiscreteDomain<IDimX2>;
-using IDomainY2 = ddc::DiscreteDomain<IDimY2>;
+using IdxStepX1 = IdxStep<GridX1>;
+using IdxStepY1 = IdxStep<GridY1>;
+using IdxStepX2 = IdxStep<GridX2>;
+using IdxStepY2 = IdxStep<GridY2>;
 
-using IDomainXY1 = ddc::DiscreteDomain<IDimX1, IDimY1>;
-using IDomainXY2 = ddc::DiscreteDomain<IDimX2, IDimY2>;
+
+using IdxRangeX1 = IdxRange<GridX1>;
+using IdxRangeY1 = IdxRange<GridY1>;
+using IdxRangeX2 = IdxRange<GridX2>;
+using IdxRangeY2 = IdxRange<GridY2>;
+
+using IdxRangeXY1 = IdxRange<GridX1, GridY1>;
+using IdxRangeXY2 = IdxRange<GridX2, GridY2>;
 
 
 // Operators
@@ -128,21 +128,21 @@ using SplineX1Builder_1d = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX1,
-        IDimX1,
+        GridX1,
         SplineX1Boundary,
         SplineX1Boundary,
         ddc::SplineSolver::LAPACK,
-        IDimX1>;
+        GridX1>;
 
 using SplineX2Builder_1d = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX2,
-        IDimX2,
+        GridX2,
         SplineX2Boundary,
         SplineX2Boundary,
         ddc::SplineSolver::LAPACK,
-        IDimX2>;
+        GridX2>;
 
 
 
@@ -150,48 +150,48 @@ using SplineX1Builder_2d = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX1,
-        IDimX1,
+        GridX1,
         SplineX1Boundary,
         SplineX1Boundary,
         ddc::SplineSolver::LAPACK,
-        IDimX1,
-        IDimY1>;
+        GridX1,
+        GridY1>;
 
 using SplineX2Builder_2d = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX2,
-        IDimX2,
+        GridX2,
         SplineX2Boundary,
         SplineX2Boundary,
         ddc::SplineSolver::LAPACK,
-        IDimX2,
-        IDimY2>;
+        GridX2,
+        GridY2>;
 
 
 
 class MultipatchSplineBuilderTest : public ::testing::Test
 {
 private:
-    static constexpr IVectX1 x1_size = IVectX1(10);
-    static constexpr IVectY1 y1_size = IVectY1(10);
+    static constexpr IdxStepX1 x1_size = IdxStepX1(10);
+    static constexpr IdxStepY1 y1_size = IdxStepY1(10);
 
-    static constexpr IVectX2 x2_size = IVectX2(10);
-    static constexpr IVectY2 y2_size = IVectY2(10);
+    static constexpr IdxStepX2 x2_size = IdxStepX2(10);
+    static constexpr IdxStepY2 y2_size = IdxStepY2(10);
 
 protected:
-    IDomainX1 const domain_x1;
-    IDomainY1 const domain_y1;
+    IdxRangeX1 const idx_range_x1;
+    IdxRangeY1 const idx_range_y1;
 
-    IDomainX2 const domain_x2;
-    IDomainY2 const domain_y2;
+    IdxRangeX2 const idx_range_x2;
+    IdxRangeY2 const idx_range_y2;
 
 public:
     MultipatchSplineBuilderTest()
-        : domain_x1(SplineInterpPointsX1::get_domain<IDimX1>())
-        , domain_y1(SplineInterpPointsY1::get_domain<IDimY1>())
-        , domain_x2(SplineInterpPointsX2::get_domain<IDimX2>())
-        , domain_y2(SplineInterpPointsY2::get_domain<IDimY2>()) {};
+        : idx_range_x1(SplineInterpPointsX1::get_domain<GridX1>())
+        , idx_range_y1(SplineInterpPointsY1::get_domain<GridY1>())
+        , idx_range_x2(SplineInterpPointsX2::get_domain<GridX2>())
+        , idx_range_y2(SplineInterpPointsY2::get_domain<GridY2>()) {};
 
     static void SetUpTestSuite()
     {
@@ -206,8 +206,8 @@ public:
         ddc::init_discrete_space<BSplinesX1>(x1_min, x1_max, x1_size);
         ddc::init_discrete_space<BSplinesY1>(y1_min, y1_max, y1_size);
 
-        ddc::init_discrete_space<IDimX1>(SplineInterpPointsX1::get_sampling<IDimX1>());
-        ddc::init_discrete_space<IDimY1>(SplineInterpPointsY1::get_sampling<IDimY1>());
+        ddc::init_discrete_space<GridX1>(SplineInterpPointsX1::get_sampling<GridX1>());
+        ddc::init_discrete_space<GridY1>(SplineInterpPointsY1::get_sampling<GridY1>());
 
         // Patch 2
         CoordX2 const x2_min(2 * M_PI);
@@ -219,28 +219,28 @@ public:
         ddc::init_discrete_space<BSplinesX2>(x2_min, x2_max, x2_size);
         ddc::init_discrete_space<BSplinesY2>(y2_min, y2_max, y2_size);
 
-        ddc::init_discrete_space<IDimX2>(SplineInterpPointsX2::get_sampling<IDimX2>());
-        ddc::init_discrete_space<IDimY2>(SplineInterpPointsY2::get_sampling<IDimY2>());
+        ddc::init_discrete_space<GridX2>(SplineInterpPointsX2::get_sampling<GridX2>());
+        ddc::init_discrete_space<GridY2>(SplineInterpPointsY2::get_sampling<GridY2>());
     }
 
 
     // Initialisation methods --------------------------------------------------------------------
     void initialize_1D_functions(
-            device_t<ddc::ChunkSpan<double, IDomainX1>> function_1,
-            device_t<ddc::ChunkSpan<double, IDomainX2>> function_2)
+            Field<double, IdxRangeX1> function_1,
+            Field<double, IdxRangeX2> function_2)
     {
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                domain_x1,
-                KOKKOS_LAMBDA(IndexX1 const idx) {
+                idx_range_x1,
+                KOKKOS_LAMBDA(IdxX1 const idx) {
                     double const x = ddc::coordinate(idx);
                     function_1(idx) = Kokkos::sin(x);
                 });
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                domain_x2,
-                KOKKOS_LAMBDA(IndexX2 const idx) {
+                idx_range_x2,
+                KOKKOS_LAMBDA(IdxX2 const idx) {
                     double const x = ddc::coordinate(idx);
                     function_2(idx) = Kokkos::sin(2 * x);
                 });
@@ -248,35 +248,35 @@ public:
 
 
     void initialize_2D_functions(
-            device_t<ddc::ChunkSpan<double, IDomainXY1>> function_1,
-            device_t<ddc::ChunkSpan<double, IDomainXY2>> function_2)
+            Field<double, IdxRangeXY1> function_1,
+            Field<double, IdxRangeXY2> function_2)
     {
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                function_1.domain(),
-                KOKKOS_LAMBDA(IndexXY1 const idx) {
-                    double const x = ddc::coordinate(IndexX1(idx));
-                    double const y = ddc::coordinate(IndexY1(idx));
+                get_idx_range(function_1),
+                KOKKOS_LAMBDA(IdxXY1 const idx) {
+                    double const x = ddc::coordinate(IdxX1(idx));
+                    double const y = ddc::coordinate(IdxY1(idx));
                     function_1(idx) = Kokkos::sin(x) + Kokkos::cos(y);
                 });
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                function_2.domain(),
-                KOKKOS_LAMBDA(IndexXY2 const idx) {
-                    double const x = ddc::coordinate(IndexX2(idx));
-                    double const y = ddc::coordinate(IndexY2(idx));
+                get_idx_range(function_2),
+                KOKKOS_LAMBDA(IdxXY2 const idx) {
+                    double const x = ddc::coordinate(IdxX2(idx));
+                    double const y = ddc::coordinate(IdxY2(idx));
                     function_2(idx) = Kokkos::sin(2 * x) + Kokkos::cos(y);
                 });
     }
 
 
     // Test method -------------------------------------------------------------------------------
-    template <class CoefTuple, class SplineSpan1, class SplineSpan2>
+    template <class CoefTuple, class SplineField1, class SplineField2>
     void check_if_equal_to_expected(
             CoefTuple const& function_coef,
-            SplineSpan1 const& function_1_coef_expected,
-            SplineSpan2 const& function_2_coef_expected)
+            SplineField1 const& function_1_coef_expected,
+            SplineField2 const& function_2_coef_expected)
     {
         // --- get the spline representation on CPU
         auto function_coef_1_host = ddc::create_mirror_and_copy(std::get<0>(function_coef));
@@ -288,11 +288,11 @@ public:
 
         // --- check error
         double max_abs_error = 0;
-        ddc::for_each(function_coef_1_expected_host.domain(), [&](auto const idx) {
+        ddc::for_each(get_idx_range(function_coef_1_expected_host), [&](auto const idx) {
             double err = abs(function_coef_1_expected_host(idx) - function_coef_1_host(idx));
             max_abs_error = std::max(max_abs_error, err);
         });
-        ddc::for_each(function_coef_2_expected_host.domain(), [&](auto const idx) {
+        ddc::for_each(get_idx_range(function_coef_2_expected_host), [&](auto const idx) {
             double err = abs(function_coef_2_expected_host(idx) - function_coef_2_host(idx));
             max_abs_error = std::max(max_abs_error, err);
         });
@@ -306,13 +306,13 @@ public:
 
 
 /*
-    The global domain is splitted into two 1D patches on RDimX1 and RDimX2.
+    The global index range is splitted into two 1D patches on X1 and X2.
  */
 TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 {
     // List of spline builders
-    SplineX1Builder_1d builder_x1(domain_x1);
-    SplineX2Builder_1d builder_x2(domain_x2);
+    SplineX1Builder_1d builder_x1(idx_range_x1);
+    SplineX2Builder_1d builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
     MultipatchSplineBuilder builder(builder_x1, builder_x2);
@@ -320,12 +320,12 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 
     // Function tests
     // --- patch 1
-    device_t<ddc::Chunk<double, IDomainX1>> function_1_alloc(domain_x1);
-    ddc::ChunkSpan function_1 = function_1_alloc.span_view();
+    FieldMem<double, IdxRangeX1> function_1_alloc(idx_range_x1);
+    ddc::ChunkSpan function_1 = get_field(function_1_alloc);
 
     // --- patch 2
-    device_t<ddc::Chunk<double, IDomainX2>> function_2_alloc(domain_x2);
-    ddc::ChunkSpan function_2 = function_2_alloc.span_view();
+    FieldMem<double, IdxRangeX2> function_2_alloc(idx_range_x2);
+    ddc::ChunkSpan function_2 = get_field(function_2_alloc);
 
     initialize_1D_functions(function_1, function_2);
 
@@ -336,22 +336,20 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 
     // Spline representations
     // --- patch 1
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX1>>> function_1_coef_alloc(
-            builder_x1.spline_domain());
-    ddc::ChunkSpan function_1_coef = function_1_coef_alloc.span_view();
+    FieldMem<double, IdxRange<BSplinesX1>> function_1_coef_alloc(get_spline_idx_range(builder_x1));
+    ddc::ChunkSpan function_1_coef = get_field(function_1_coef_alloc);
 
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX1>>> function_1_coef_expected_alloc(
-            builder_x1.spline_domain());
-    ddc::ChunkSpan function_1_coef_expected = function_1_coef_expected_alloc.span_view();
+    FieldMem<double, IdxRange<BSplinesX1>> function_1_coef_expected_alloc(
+            get_spline_idx_range(builder_x1));
+    ddc::ChunkSpan function_1_coef_expected = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX2>>> function_2_coef_alloc(
-            builder_x2.spline_domain());
-    ddc::ChunkSpan function_2_coef = function_2_coef_alloc.span_view();
+    FieldMem<double, IdxRange<BSplinesX2>> function_2_coef_alloc(get_spline_idx_range(builder_x2));
+    ddc::ChunkSpan function_2_coef = get_field(function_2_coef_alloc);
 
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX2>>> function_2_coef_expected_alloc(
-            builder_x2.spline_domain());
-    ddc::ChunkSpan function_2_coef_expected = function_2_coef_expected_alloc.span_view();
+    FieldMem<double, IdxRange<BSplinesX2>> function_2_coef_expected_alloc(
+            get_spline_idx_range(builder_x2));
+    ddc::ChunkSpan function_2_coef_expected = get_field(function_2_coef_expected_alloc);
 
     // --- collection
     std::tuple function_coef = {function_1_coef, function_2_coef};
@@ -363,26 +361,26 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 
 
     // Check the results are the same than with one by one spline building
-    builder_x1(function_1_coef_expected, function_1.span_cview());
-    builder_x2(function_2_coef_expected, function_2.span_cview());
+    builder_x1(function_1_coef_expected, get_const_field(function_1));
+    builder_x2(function_2_coef_expected, get_const_field(function_2));
     check_if_equal_to_expected(function_coef, function_1_coef_expected, function_2_coef_expected);
 }
 
 
 
 /*
-    The global domain is splitted into two 2D patches on (RDimX1, RDimY1) and (RDimX2, RDimY2).
+    The global index range is splitted into two 2D patches on (X1, Y1) and (X2, Y2).
  */
 TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 {
-    // List of domains
-    IDomainXY1 domain_xy1(domain_x1, domain_y1);
-    IDomainXY2 domain_xy2(domain_x2, domain_y2);
+    // List of index ranges
+    IdxRangeXY1 idx_range_xy1(idx_range_x1, idx_range_y1);
+    IdxRangeXY2 idx_range_xy2(idx_range_x2, idx_range_y2);
 
 
     // List of spline builders
-    SplineX1Builder_2d builder_x1(domain_xy1);
-    SplineX2Builder_2d builder_x2(domain_xy2);
+    SplineX1Builder_2d builder_x1(idx_range_xy1);
+    SplineX2Builder_2d builder_x2(idx_range_xy2);
 
     // Collection of builders for each patch
     MultipatchSplineBuilder builder(builder_x1, builder_x2);
@@ -390,12 +388,12 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 
     // Function tests
     // --- patch 1
-    device_t<ddc::Chunk<double, IDomainXY1>> function_1_alloc(domain_xy1);
-    ddc::ChunkSpan function_1 = function_1_alloc.span_view();
+    FieldMem<double, IdxRangeXY1> function_1_alloc(idx_range_xy1);
+    ddc::ChunkSpan function_1 = get_field(function_1_alloc);
 
     // --- patch 2
-    device_t<ddc::Chunk<double, IDomainXY2>> function_2_alloc(domain_xy2);
-    ddc::ChunkSpan function_2 = function_2_alloc.span_view();
+    FieldMem<double, IdxRangeXY2> function_2_alloc(idx_range_xy2);
+    ddc::ChunkSpan function_2 = get_field(function_2_alloc);
 
     initialize_2D_functions(function_1, function_2);
 
@@ -406,22 +404,22 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 
     // Spline representations
     // --- patch 1
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX1, IDimY1>>> function_1_coef_alloc(
+    FieldMem<double, IdxRange<BSplinesX1, GridY1>> function_1_coef_alloc(
             builder_x1.batched_spline_domain());
-    ddc::ChunkSpan function_1_coef = function_1_coef_alloc.span_view();
+    ddc::ChunkSpan function_1_coef = get_field(function_1_coef_alloc);
 
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX1, IDimY1>>>
-            function_1_coef_expected_alloc(builder_x1.batched_spline_domain());
-    ddc::ChunkSpan function_1_coef_expected = function_1_coef_expected_alloc.span_view();
+    FieldMem<double, IdxRange<BSplinesX1, GridY1>> function_1_coef_expected_alloc(
+            builder_x1.batched_spline_domain());
+    ddc::ChunkSpan function_1_coef_expected = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX2, IDimY2>>> function_2_coef_alloc(
+    FieldMem<double, IdxRange<BSplinesX2, GridY2>> function_2_coef_alloc(
             builder_x2.batched_spline_domain());
-    ddc::ChunkSpan function_2_coef = function_2_coef_alloc.span_view();
+    ddc::ChunkSpan function_2_coef = get_field(function_2_coef_alloc);
 
-    device_t<ddc::Chunk<double, ddc::DiscreteDomain<BSplinesX2, IDimY2>>>
-            function_2_coef_expected_alloc(builder_x2.batched_spline_domain());
-    ddc::ChunkSpan function_2_coef_expected = function_2_coef_expected_alloc.span_view();
+    FieldMem<double, IdxRange<BSplinesX2, GridY2>> function_2_coef_expected_alloc(
+            builder_x2.batched_spline_domain());
+    ddc::ChunkSpan function_2_coef_expected = get_field(function_2_coef_expected_alloc);
 
     // --- collection
     std::tuple function_coef = {function_1_coef, function_2_coef};
@@ -433,7 +431,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 
 
     // Check the results are the same than with one by one spline building
-    builder_x1(function_1_coef_expected, function_1.span_cview());
-    builder_x2(function_2_coef_expected, function_2.span_cview());
+    builder_x1(function_1_coef_expected, get_const_field(function_1));
+    builder_x2(function_2_coef_expected, get_const_field(function_2));
     check_if_equal_to_expected(function_coef, function_1_coef_expected, function_2_coef_expected);
 }
