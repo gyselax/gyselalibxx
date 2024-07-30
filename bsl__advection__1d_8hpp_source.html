@@ -106,74 +106,74 @@ $(document).ready(function(){initNavTree('bsl__advection__1d_8hpp_source.html','
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;ddc/kernels/splines/deriv.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/kernels/splines/deriv.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ddc_helper.hpp&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;euler.hpp&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;iinterpolator.hpp&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">template</span> &lt;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">class </span>IDimInterest,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">class </span><a class="code" href="classAdvectionDomain.html">AdvectionDomain</a>,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">class </span>FunctionDomain,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">class </span>GridInterest,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">class </span>AdvectionIdxRange,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">class </span>FunctionIdxRange,</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">class </span>AdvectionFieldBuilder,</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">class </span>AdvectionFieldEvaluator,</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">class </span>TimeStepper</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        = <a class="code" href="classEuler.html">Euler</a>&lt;device_t&lt;ddc::Chunk&lt;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        ddc::Coordinate&lt;typename IDimInterest::continuous_dimension_type&gt;,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                        <a class="code" href="classAdvectionDomain.html">AdvectionDomain</a>&gt;&gt;,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                device_t&lt;ddc::Chunk&lt;double, AdvectionDomain&gt;&gt;&gt;&gt;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        = <a class="code" href="classEuler.html">Euler</a>&lt;FieldMem&lt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        Coord&lt;typename GridInterest::continuous_dimension_type&gt;,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                        AdvectionIdxRange&gt;,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                FieldMem&lt;double, AdvectionIdxRange&gt;&gt;&gt;</div>
 <div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classBslAdvection1D.html">   61</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBslAdvection1D.html">BslAdvection1D</a></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// Advection domain element:</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">using</span> AdvectionIndex = <span class="keyword">typename</span> AdvectionDomain::discrete_element_type;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// Advection index range element:</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">using</span> AdvectionIdx = <span class="keyword">typename</span> AdvectionIdxRange::discrete_element_type;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// Full domain element:</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">using</span> FunctionIndex = <span class="keyword">typename</span> FunctionDomain::discrete_element_type;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// Full index range element:</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">using</span> FunctionIdx = <span class="keyword">typename</span> FunctionIdxRange::discrete_element_type;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// Advection dimension (or Interest dimension):</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">using</span> RDimInterest = <span class="keyword">typename</span> IDimInterest::continuous_dimension_type;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">using</span> CoordInterest = ddc::Coordinate&lt;RDimInterest&gt;;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">using</span> DomainInterest = ddc::DiscreteDomain&lt;IDimInterest&gt;;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">using</span> IndexInterest = <span class="keyword">typename</span> DomainInterest::discrete_element_type;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">using</span> DimInterest = <span class="keyword">typename</span> GridInterest::continuous_dimension_type;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">using</span> CoordInterest = Coord&lt;DimInterest&gt;;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">using</span> IdxRangeInterest = IdxRange&lt;GridInterest&gt;;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">using</span> IdxInterest = <span class="keyword">typename</span> IdxRangeInterest::discrete_element_type;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// Type for the feet and advection field:</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">using</span> FeetChunk = device_t&lt;ddc::Chunk&lt;CoordInterest, AdvectionDomain&gt;&gt;;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">using</span> FeetSpan = <span class="keyword">typename</span> FeetChunk::span_type;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">using</span> FeetView = <span class="keyword">typename</span> FeetChunk::view_type;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">using</span> FeetFieldMem = FieldMem&lt;CoordInterest, AdvectionIdxRange&gt;;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">using</span> FeetField = <span class="keyword">typename</span> FeetFieldMem::span_type;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">using</span> FeetConstField = <span class="keyword">typename</span> FeetFieldMem::view_type;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">using</span> AdvecFieldChunk = device_t&lt;ddc::Chunk&lt;double, AdvectionDomain&gt;&gt;;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">using</span> AdvecFieldSpan = <span class="keyword">typename</span> AdvecFieldChunk::span_type;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">using</span> AdvecFieldMem = FieldMem&lt;double, AdvectionIdxRange&gt;;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">using</span> AdvecField = <span class="keyword">typename</span> AdvecFieldMem::span_type;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">using</span> FunctionSpan = device_t&lt;ddc::ChunkSpan&lt;double, FunctionDomain&gt;&gt;;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">using</span> FunctionField = Field&lt;double, FunctionIdxRange&gt;;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="comment">// Type for spline representation of the advection field</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">using</span> BSAdvectionDomain = <span class="keyword">typename</span> AdvectionFieldBuilder::batched_spline_domain_type;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">using</span> AdvecFieldSplineChunk = device_t&lt;ddc::Chunk&lt;double, BSAdvectionDomain&gt;&gt;;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">using</span> AdvecFieldSplineSpan = device_t&lt;ddc::ChunkSpan&lt;double, BSAdvectionDomain&gt;&gt;;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">using</span> BSAdvectionIdxRange = <span class="keyword">typename</span> AdvectionFieldBuilder::batched_spline_domain_type;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">using</span> AdvecFieldSplineMem = FieldMem&lt;double, BSAdvectionIdxRange&gt;;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">using</span> AdvecFieldSplineCoeffs = Field&lt;double, BSAdvectionIdxRange&gt;;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">// Type for the derivatives of the advection field</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">using</span> DerivDim = ddc::Deriv&lt;RDimInterest&gt;;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">using</span> DomainInterestDeriv = ddc::DiscreteDomain&lt;DerivDim&gt;;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">using</span> AdvecFieldDerivDomain = ddc::replace_dim_of_t&lt;AdvectionDomain, IDimInterest, DerivDim&gt;;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">using</span> AdvecFieldDerivView = device_t&lt;ddc::ChunkSpan&lt;const double, AdvecFieldDerivDomain&gt;&gt;;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">using</span> DerivDim = ddc::Deriv&lt;DimInterest&gt;;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">using</span> AdvecFieldDerivIdxRange</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            = ddc::replace_dim_of_t&lt;AdvectionIdxRange, GridInterest, DerivDim&gt;;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">using</span> AdvecFieldDerivConstField = Field&lt;const double, AdvecFieldDerivIdxRange&gt;;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">// Interpolators:</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">using</span> FunctionPreallocatableInterpolatorType = interpolator_on_idx_range_t&lt;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <a class="code" href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a>,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            IDimInterest,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            FunctionDomain&gt;;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            GridInterest,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            FunctionIdxRange&gt;;</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">using</span> FunctionInterpolatorType</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            = interpolator_on_idx_range_t&lt;IInterpolator, IDimInterest, FunctionDomain&gt;;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            = interpolator_on_idx_range_t&lt;IInterpolator, GridInterest, FunctionIdxRange&gt;;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="comment">// Type for the derivatives of the function</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">using</span> FunctionDerivDomain = <span class="keyword">typename</span> FunctionInterpolatorType::batched_derivs_idx_range_type;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keyword">using</span> FunctionDerivChunk = device_t&lt;ddc::Chunk&lt;double, FunctionDerivDomain&gt;&gt;;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">using</span> FunctionDerivIdxRange = <span class="keyword">typename</span> FunctionInterpolatorType::batched_derivs_idx_range_type;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keyword">using</span> FunctionDerivFieldMem = FieldMem&lt;double, FunctionDerivIdxRange&gt;;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    FunctionPreallocatableInterpolatorType <span class="keyword">const</span>&amp; m_function_interpolator;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
@@ -183,7 +183,7 @@ $(document).ready(function(){initNavTree('bsl__advection__1d_8hpp_source.html','
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    TimeStepper <span class="keyword">const</span>&amp; m_time_stepper;</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="classBslAdvection1D.html#aff5c03a458a3a3cf78a7288feebfa047">  135</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classBslAdvection1D.html#aff5c03a458a3a3cf78a7288feebfa047">BslAdvection1D</a>(</div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="classBslAdvection1D.html#ad3b66a654778bd7870f847c3795107a0">  135</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classBslAdvection1D.html#ad3b66a654778bd7870f847c3795107a0">BslAdvection1D</a>(</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            FunctionPreallocatableInterpolatorType <span class="keyword">const</span>&amp; function_interpolator,</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            AdvectionFieldBuilder <span class="keyword">const</span>&amp; adv_field_builder,</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            AdvectionFieldEvaluator <span class="keyword">const</span>&amp; adv_field_evaluator,</div>
@@ -197,119 +197,119 @@ $(document).ready(function(){initNavTree('bsl__advection__1d_8hpp_source.html','
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    ~<a class="code" href="classBslAdvection1D.html">BslAdvection1D</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="classBslAdvection1D.html#ab1d8bc9d409c4fc5a140d502bf9f5015">  162</a></span>&#160;    FunctionSpan <a class="code" href="classBslAdvection1D.html#ab1d8bc9d409c4fc5a140d502bf9f5015">operator()</a>(</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            FunctionSpan <span class="keyword">const</span> allfdistribu,</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            AdvecFieldSpan <span class="keyword">const</span> advection_field,</div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="classBslAdvection1D.html#a3654254533d03fe10b65718efb902415">  162</a></span>&#160;    FunctionField <a class="code" href="classBslAdvection1D.html#a3654254533d03fe10b65718efb902415">operator()</a>(</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            FunctionField <span class="keyword">const</span> allfdistribu,</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            AdvecField <span class="keyword">const</span> advection_field,</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> dt,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            std::optional&lt;AdvecFieldDerivView&gt; <span class="keyword">const</span> advection_field_derivatives_min = std::nullopt,</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            std::optional&lt;AdvecFieldDerivView&gt; <span class="keyword">const</span> advection_field_derivatives_max</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            = std::nullopt)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        Kokkos::Profiling::pushRegion(<span class="stringliteral">&quot;BslAdvection1D&quot;</span>);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="comment">// Get domains and operators .............................................................</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        FunctionDomain <span class="keyword">const</span> function_dom = allfdistribu.domain();</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <a class="code" href="classAdvectionDomain.html">AdvectionDomain</a> <span class="keyword">const</span> advection_dom = advection_field.domain();</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> batch_dom = ddc::remove_dims_of(function_dom, advection_dom);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        DomainInterest <span class="keyword">const</span> interest_dom(advection_dom);</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        std::unique_ptr&lt;FunctionInterpolatorType&gt; <span class="keyword">const</span> function_interpolator_ptr</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                = m_function_interpolator.preallocate();</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        FunctionInterpolatorType <span class="keyword">const</span>&amp; function_interpolator = *function_interpolator_ptr;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            std::optional&lt;AdvecFieldDerivConstField&gt; <span class="keyword">const</span> advection_field_derivatives_min</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            = std::nullopt,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            std::optional&lt;AdvecFieldDerivConstField&gt; <span class="keyword">const</span> advection_field_derivatives_max</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            = std::nullopt)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        Kokkos::Profiling::pushRegion(<span class="stringliteral">&quot;BslAdvection1D&quot;</span>);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="comment">// Get index ranges and operators .............................................................</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        FunctionIdxRange <span class="keyword">const</span> function_dom = get_idx_range(allfdistribu);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        AdvectionIdxRange <span class="keyword">const</span> advection_dom = get_idx_range(advection_field);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> batch_dom = ddc::remove_dims_of(function_dom, advection_dom);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        IdxRangeInterest <span class="keyword">const</span> interest_dom(advection_dom);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        std::unique_ptr&lt;FunctionInterpolatorType&gt; <span class="keyword">const</span> function_interpolator_ptr</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                = m_function_interpolator.preallocate();</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        FunctionInterpolatorType <span class="keyword">const</span>&amp; function_interpolator = *function_interpolator_ptr;</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="comment">// Build spline representation of the advection field ....................................</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        AdvecFieldSplineChunk advection_field_coefs_alloc(</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                m_adv_field_builder.batched_spline_domain());</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        AdvecFieldSplineSpan advection_field_coefs = advection_field_coefs_alloc.span_view();</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        m_adv_field_builder(</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                advection_field_coefs,</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                advection_field.span_cview(),</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                advection_field_derivatives_min,</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                advection_field_derivatives_max);</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="comment">// Build derivatives on boundaries and fill with zeros....................................</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        FunctionDerivChunk function_derivatives_min(</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                m_function_interpolator.batched_derivs_idx_range_xmin(function_dom));</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        FunctionDerivChunk function_derivatives_max(</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                m_function_interpolator.batched_derivs_idx_range_xmax(function_dom));</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="comment">// Initialise the characteristics on the mesh points .....................................</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">            For the time integration solver, the function we advect (here the characteristics)</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">            need to be defined on the same domain as the advection field. We then work on space</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">            slices of the characteristic feet.  </span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">        */</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        FeetChunk slice_feet_alloc(advection_dom);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        FeetSpan slice_feet = slice_feet_alloc.span_view();</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        ddc::parallel_for_each(</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                advection_dom,</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                KOKKOS_LAMBDA(AdvectionIndex <span class="keyword">const</span> idx) {</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                    slice_feet(idx) = ddc::coordinate(IndexInterest(idx));</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                });</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="comment">// Build spline representation of the advection field ....................................</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        AdvecFieldSplineMem advection_field_coefs_alloc(</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                m_adv_field_builder.batched_spline_domain());</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        AdvecFieldSplineCoeffs advection_field_coefs = get_field(advection_field_coefs_alloc);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        m_adv_field_builder(</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                advection_field_coefs,</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                get_const_field(advection_field),</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                advection_field_derivatives_min,</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                advection_field_derivatives_max);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="comment">// Build derivatives on boundaries and fill with zeros....................................</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        FunctionDerivFieldMem function_derivatives_min(</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                m_function_interpolator.batched_derivs_idx_range_xmin(function_dom));</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        FunctionDerivFieldMem function_derivatives_max(</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                m_function_interpolator.batched_derivs_idx_range_xmax(function_dom));</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="comment">// Initialise the characteristics on the mesh points .....................................</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">            For the time integration solver, the function we advect (here the characteristics)</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">            need to be defined on the same index range as the advection field. We then work on space</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">            slices of the characteristic feet.  </span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">        */</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        FeetFieldMem slice_feet_alloc(advection_dom);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        FeetField slice_feet = get_field(slice_feet_alloc);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        ddc::parallel_for_each(</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                advection_dom,</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                KOKKOS_LAMBDA(AdvectionIdx <span class="keyword">const</span> idx) {</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                    slice_feet(idx) = ddc::coordinate(IdxInterest(idx));</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                });</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="comment">// Compute the characteristic feet .......................................................</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">            We use a time stepper method to solve the charateristic equation. </span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">            A TimeStepper needs a function to compute the updated advection field and a function to </span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">            compute the updated feet. </span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">                * update_adv_field: evaluate the advection field spline at the updated feet. </span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">        */</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="comment">// The function describing how the derivative of the evolve function is calculated.</span></div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        std::function&lt;void(AdvecFieldSpan, FeetView)&gt; update_adv_field</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                = [&amp;](AdvecFieldSpan updated_advection_field, FeetView slice_feet) {</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                      m_adv_field_evaluator(</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                              updated_advection_field,</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                              slice_feet,</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                              advection_field_coefs.span_cview());</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                  };</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <span class="comment">// Compute the characteristic feet .......................................................</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">            We use a time stepper method to solve the charateristic equation. </span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">            A TimeStepper needs a function to compute the updated advection field and a function to </span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">            compute the updated feet. </span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">                * update_adv_field: evaluate the advection field spline at the updated feet. </span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">        */</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="comment">// The function describing how the derivative of the evolve function is calculated.</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        std::function&lt;void(AdvecField, FeetConstField)&gt; update_adv_field</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                = [&amp;](AdvecField updated_advection_field, FeetConstField slice_feet) {</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                      m_adv_field_evaluator(</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                              updated_advection_field,</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                              slice_feet,</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                              get_const_field(advection_field_coefs));</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                  };</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <span class="comment">// Solve the characteristic equation with a time integration method</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        m_time_stepper</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                .update(Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                        slice_feet.span_view(),</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                        -dt,</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                        update_adv_field);</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="comment">// Solve the characteristic equation with a time integration method</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        m_time_stepper</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                .update(Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                        get_field(slice_feet),</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                        -dt,</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                        update_adv_field);</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <span class="comment">// Interpolate the function ..............................................................</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">            To interpolate the function we want to advect, we build for the feet a Chunk defined </span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">            on the domain where the function is defined. </span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">        */</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        device_t&lt;ddc::Chunk&lt;CoordInterest, FunctionDomain&gt;&gt; feet_alloc(function_dom);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        ddc::ChunkSpan feet = feet_alloc.span_view();</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        ddc::parallel_for_each(</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                function_dom,</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                KOKKOS_LAMBDA(FunctionIndex <span class="keyword">const</span> idx) {</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                    AdvectionIndex slice_foot_index(idx);</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                    feet(idx) = slice_feet(slice_foot_index);</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                });</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="comment">// Interpolate the function ..............................................................</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">            To interpolate the function we want to advect, we build for the feet a Chunk defined </span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">            on the index range where the function is defined. </span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">        */</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        FieldMem&lt;CoordInterest, FunctionIdxRange&gt; feet_alloc(function_dom);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        ddc::ChunkSpan feet = get_field(feet_alloc);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        ddc::parallel_for_each(</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                function_dom,</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                KOKKOS_LAMBDA(FunctionIdx <span class="keyword">const</span> idx) {</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                    AdvectionIdx slice_foot_index(idx);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                    feet(idx) = slice_feet(slice_foot_index);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                });</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="comment">// Interpolate the function at the characteristic feet</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        function_interpolator(</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                allfdistribu,</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                feet,</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                function_derivatives_min,</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                function_derivatives_max);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="comment">// Interpolate the function at the characteristic feet</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        function_interpolator(</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                allfdistribu,</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                feet,</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                function_derivatives_min,</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                function_derivatives_max);</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        Kokkos::Profiling::popRegion();</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    }</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;};</div>
-<div class="ttc" id="aclassAdvectionDomain_html"><div class="ttname"><a href="classAdvectionDomain.html">AdvectionDomain</a></div><div class="ttdoc">Define a domain for the advection.</div><div class="ttdef"><b>Definition:</b> advection_domain.hpp:41</div></div>
-<div class="ttc" id="aclassBslAdvection1D_html"><div class="ttname"><a href="classBslAdvection1D.html">BslAdvection1D</a></div><div class="ttdoc">A class which computes the advection along the dimension of interest IDimInterest.</div><div class="ttdef"><b>Definition:</b> bsl_advection_1d.hpp:62</div></div>
-<div class="ttc" id="aclassBslAdvection1D_html_ab1d8bc9d409c4fc5a140d502bf9f5015"><div class="ttname"><a href="classBslAdvection1D.html#ab1d8bc9d409c4fc5a140d502bf9f5015">BslAdvection1D::operator()</a></div><div class="ttdeci">FunctionSpan operator()(FunctionSpan const allfdistribu, AdvecFieldSpan const advection_field, double const dt, std::optional&lt; AdvecFieldDerivView &gt; const advection_field_derivatives_min=std::nullopt, std::optional&lt; AdvecFieldDerivView &gt; const advection_field_derivatives_max=std::nullopt) const</div><div class="ttdoc">Advects allfdistribu along the advection dimension IDimInterest for a duration dt.</div><div class="ttdef"><b>Definition:</b> bsl_advection_1d.hpp:162</div></div>
-<div class="ttc" id="aclassBslAdvection1D_html_aff5c03a458a3a3cf78a7288feebfa047"><div class="ttname"><a href="classBslAdvection1D.html#aff5c03a458a3a3cf78a7288feebfa047">BslAdvection1D::BslAdvection1D</a></div><div class="ttdeci">BslAdvection1D(FunctionPreallocatableInterpolatorType const &amp;function_interpolator, AdvectionFieldBuilder const &amp;adv_field_builder, AdvectionFieldEvaluator const &amp;adv_field_evaluator, TimeStepper const &amp;time_stepper)</div><div class="ttdoc">Constructor when the advection domain and the function domain are different.</div><div class="ttdef"><b>Definition:</b> bsl_advection_1d.hpp:135</div></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        Kokkos::Profiling::popRegion();</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    }</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;};</div>
+<div class="ttc" id="aclassBslAdvection1D_html"><div class="ttname"><a href="classBslAdvection1D.html">BslAdvection1D</a></div><div class="ttdoc">A class which computes the advection along the dimension of interest GridInterest.</div><div class="ttdef"><b>Definition:</b> bsl_advection_1d.hpp:62</div></div>
+<div class="ttc" id="aclassBslAdvection1D_html_a3654254533d03fe10b65718efb902415"><div class="ttname"><a href="classBslAdvection1D.html#a3654254533d03fe10b65718efb902415">BslAdvection1D::operator()</a></div><div class="ttdeci">FunctionField operator()(FunctionField const allfdistribu, AdvecField const advection_field, double const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_max=std::nullopt) const</div><div class="ttdoc">Advects allfdistribu along the advection dimension GridInterest for a duration dt.</div><div class="ttdef"><b>Definition:</b> bsl_advection_1d.hpp:162</div></div>
+<div class="ttc" id="aclassBslAdvection1D_html_ad3b66a654778bd7870f847c3795107a0"><div class="ttname"><a href="classBslAdvection1D.html#ad3b66a654778bd7870f847c3795107a0">BslAdvection1D::BslAdvection1D</a></div><div class="ttdeci">BslAdvection1D(FunctionPreallocatableInterpolatorType const &amp;function_interpolator, AdvectionFieldBuilder const &amp;adv_field_builder, AdvectionFieldEvaluator const &amp;adv_field_evaluator, TimeStepper const &amp;time_stepper)</div><div class="ttdoc">Constructor when the advection index range and the function index range are different.</div><div class="ttdef"><b>Definition:</b> bsl_advection_1d.hpp:135</div></div>
 <div class="ttc" id="aclassEuler_html"><div class="ttname"><a href="classEuler.html">Euler</a></div><div class="ttdoc">A class which provides an implementation of an explicit Euler method.</div><div class="ttdef"><b>Definition:</b> euler.hpp:28</div></div>
 <div class="ttc" id="aclassIPreallocatableInterpolator_html"><div class="ttname"><a href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a></div><div class="ttdoc">A class which provides access to an interpolating function which can be preallocated where useful.</div><div class="ttdef"><b>Definition:</b> iinterpolator.hpp:135</div></div>
 </div><!-- fragment --></div><!-- contents -->

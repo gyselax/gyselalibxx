@@ -119,7 +119,7 @@ Velocity advection</h1>
 </p>
 <h1><a class="anchor" id="src_advection__1D_advection_with_a_given_advection_field"></a>
 1D advection with a given advection field</h1>
-<p>The purpose of the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a> operator is an advection along a given direction of the phase space. The advection field is given as input. The dynamics of the motion are governed by the following equation. </p><p class="formulaDsp">
+<p>The purpose of the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator is an advection along a given direction of the phase space. The advection field is given as input. The dynamics of the motion are governed by the following equation. </p><p class="formulaDsp">
 \[ \partial_t f(t,x) + A\partial_{x_i}(x&#39;)f(t,x) = 0, \qquad x \in \Omega, x&#39; \in \Omega&#39;, \]
 </p>
 <p> with</p><ul>
@@ -130,7 +130,7 @@ Velocity advection</h1>
 </ul>
 <h3><a class="anchor" id="autotoc_md39"></a>
 Example of use</h3>
-<p>Here are some examples of equation types the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a> operator can solve:</p><ul>
+<p>Here are some examples of equation types the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator can solve:</p><ul>
 <li>Equation on a 1D domain (and time dimension): <p class="formulaDsp">
 \[ \partial_t f(t,x) + A_x(x)\partial_{x}f(t,x) = 0, \qquad x \in \Omega, \]
 </p>
@@ -180,7 +180,7 @@ Parameters</h3>
 <li>AdvectionFieldEvaluator: a spline evaluator type for the advection field.</li>
 <li>TimeStepper: a time integration method (see <a class="el" href="src_timestepper.html">Time Stepping Methods</a>) to solve the characteristic equation. It has to be defined on the advection field domain. The feet have to be a Chunk of coordinates of the dimension of interest defined on the advection field domain.</li>
 </ul>
-<p><b>Remark/Warning:</b> the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a> operator is built with builder and evaluator for the advection field and interpolator for the function we want to advect. Theses operators have to be defined on the same domain as the advection field and function. For instance, if the advection field and/or the function are defined on the species dimension, then the interpolators have to contain the species dimension in its batched dimensions (see tests in the <code>tests/advection/</code> folder).</p>
+<p><b>Remark/Warning:</b> the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator is built with builder and evaluator for the advection field and interpolator for the function we want to advect. Theses operators have to be defined on the same domain as the advection field and function. For instance, if the advection field and/or the function are defined on the species dimension, then the interpolators have to contain the species dimension in its batched dimensions (see tests in the <code>tests/advection/</code> folder).</p>
 <p><b>Remark/Warning:</b> The advection field need to use interpolation on B-splines. So we cannot use other type of interpolator for the advection field. However there is no constraint on the interpolator of the advected function. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

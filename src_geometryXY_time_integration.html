@@ -115,13 +115,13 @@ Predictor-corrector based on RK2</h1>
 <li>Advect on a half time step:<ol type="1">
 <li>From \(f^n\), we compute \(\phi^n\) with the Poisson-like equation (<a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a>);</li>
 <li>From \(\phi^n\), we compute \(E^n\) by deriving (<a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a>);</li>
-<li>From \(f^n \text{ and } E^n\), we compute \(f^{n+1/2}\) by advecting (<a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a>) on \(\frac{dt}{2}\);</li>
+<li>From \(f^n \text{ and } E^n\), we compute \(f^{n+1/2}\) by advecting (<a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a>) on \(\frac{dt}{2}\);</li>
 </ol>
 </li>
 <li>Advect on a full time step:<ol type="1">
 <li>From \(f^{n+1/2}\), we compute \(\phi^{n+1/2}\) with the Poisson-like equation (<a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a>);</li>
 <li>From \(\phi^{n+1/2}\), we compute \(E^{n+1/2}\) by deriving (<a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a>);</li>
-<li>From \(f^n \text{ and } E^{n+1/2}\), we compute \(f^{n+1}\) by advecting (<a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a>) on \(dt\). </li>
+<li>From \(f^n \text{ and } E^{n+1/2}\), we compute \(f^{n+1}\) by advecting (<a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a>) on \(dt\). </li>
 </ol>
 </li>
 </ul>

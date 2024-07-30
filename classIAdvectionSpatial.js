@@ -1,5 +1,5 @@
 var classIAdvectionSpatial =
 [
-    [ "~IAdvectionSpatial", "classIAdvectionSpatial.html#a70ff067842fcab1a97cc30acf9e596df", null ],
-    [ "operator()", "classIAdvectionSpatial.html#a2eefd7931b654b66a2cb13060819ef22", null ]
+    [ "~IAdvectionSpatial", "classIAdvectionSpatial.html#a4d3a4ee18ee609f0261a323062a58d7a", null ],
+    [ "operator()", "classIAdvectionSpatial.html#a8b31e50d45a9d17ba01cf8dca26e982d", null ]
 ];

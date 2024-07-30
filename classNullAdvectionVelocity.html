@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: NullAdvectionVelocity&lt; FdistribuDDom, SpatialDDom &gt; Class Template Reference</title>
+<title>Gyselalib++: NullAdvectionVelocity&lt; FdistribuIdxRange, SpatialIdxRange &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,11 +103,14 @@ $(document).ready(function(){initNavTree('classNullAdvectionVelocity.html',''); 
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classNullAdvectionVelocity-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">NullAdvectionVelocity&lt; FdistribuDDom, SpatialDDom &gt; Class Template Reference</div>  </div>
+<div class="title">NullAdvectionVelocity&lt; FdistribuIdxRange, SpatialIdxRange &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This is a class which imitates a velocity advection.  
+ <a href="classNullAdvectionVelocity.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for NullAdvectionVelocity&lt; FdistribuDDom, SpatialDDom &gt;:</div>
+Inheritance diagram for NullAdvectionVelocity&lt; FdistribuIdxRange, SpatialIdxRange &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classNullAdvectionVelocity.png" alt=""/>
@@ -115,10 +118,72 @@ Inheritance diagram for NullAdvectionVelocity&lt; FdistribuDDom, SpatialDDom &gt
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:add38196f822e4779006d1deab14814dc"><td class="memItemLeft" align="right" valign="top"><a id="add38196f822e4779006d1deab14814dc"></a>
-ddc::ChunkSpan&lt; double, FdistribuDDom &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (ddc::ChunkSpan&lt; double, FdistribuDDom &gt; allfdistribu, [[maybe_unused]] ddc::ChunkSpan&lt; const double, SpatialDDom &gt; electrostatic_potential, [[maybe_unused]] double dt) const override</td></tr>
-<tr class="separator:add38196f822e4779006d1deab14814dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af64018099401483d634b366858f3a76c"><td class="memItemLeft" align="right" valign="top">Field&lt; double, FdistribuIdxRange &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNullAdvectionVelocity.html#af64018099401483d634b366858f3a76c">operator()</a> (Field&lt; double, FdistribuIdxRange &gt; allfdistribu, [[maybe_unused]] Field&lt; const double, SpatialIdxRange &gt; electric_field, [[maybe_unused]] double dt) const override</td></tr>
+<tr class="memdesc:af64018099401483d634b366858f3a76c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do nothing instead of advecting fdistribu along GridV for a duration dt.  <a href="classNullAdvectionVelocity.html#af64018099401483d634b366858f3a76c">More...</a><br /></td></tr>
+<tr class="separator:af64018099401483d634b366858f3a76c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class FdistribuIdxRange, class SpatialIdxRange&gt;<br />
+class NullAdvectionVelocity&lt; FdistribuIdxRange, SpatialIdxRange &gt;</h3>
+
+<p>This is a class which imitates a velocity advection. </p>
+<p>It inherits from IAdvectionV and can be used as an advection operator but does not actually modify the distribution function. This can be useful for debugging purposes. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="af64018099401483d634b366858f3a76c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af64018099401483d634b366858f3a76c">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FdistribuIdxRange , class SpatialIdxRange &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Field&lt;double, FdistribuIdxRange&gt; <a class="el" href="classNullAdvectionVelocity.html">NullAdvectionVelocity</a>&lt; FdistribuIdxRange, SpatialIdxRange &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">Field&lt; double, FdistribuIdxRange &gt;&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[[maybe_unused] ] Field&lt; const double, SpatialIdxRange &gt;&#160;</td>
+          <td class="paramname"><em>electric_field</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[[maybe_unused] ] double&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Do nothing instead of advecting fdistribu along GridV for a duration dt. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>Reference to an array containing the value of the distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">electric_field</td><td>The electric field which derives from electrostatic potential and is the advection speed. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>Time step</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the allfdistribu array containing the value of the function at the coordinates. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/<a class="el" href="nulladvectionvx_8hpp_source.html">nulladvectionvx.hpp</a></li>
 </ul>

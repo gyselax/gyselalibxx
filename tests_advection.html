@@ -108,7 +108,7 @@ Contents</h1>
 <h3><a class="anchor" id="autotoc_md68"></a>
 Advection along x on (t, x)</h3>
 <ul>
-<li>1d_advection_x.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a> operator for a 1D case.</li>
+<li>1d_advection_x.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator for a 1D case.</li>
 </ul>
 <p>The test is the following: </p><p class="formulaDsp">
 \[ \partial_t f(t,x) + A(x) \partial_x f(t,x) = 0, \]
@@ -121,7 +121,7 @@ Advection along x on (t, x)</h3>
 <h3><a class="anchor" id="autotoc_md69"></a>
 Advection along x on (t, x, vx)</h3>
 <ul>
-<li>1d_advection_xvx.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a> operator for a 1Dx1V case.</li>
+<li>1d_advection_xvx.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator for a 1Dx1V case.</li>
 </ul>
 <p>The test is the following: </p><p class="formulaDsp">
 \[ \partial_t f(t,x, v_x) + v_x \partial_x f(t,x, v_x) = 0, \\ \]
@@ -134,7 +134,7 @@ Advection along x on (t, x, vx)</h3>
 <h3><a class="anchor" id="autotoc_md70"></a>
 Advection along x and y on (t, x, y, vx, vy)</h3>
 <ul>
-<li>1d_advection_xyvxvy.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a> operator for a 2Dx2V case with a Strang splitting for the resolution.</li>
+<li>1d_advection_xyvxvy.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator for a 2Dx2V case with a Strang splitting for the resolution.</li>
 </ul>
 <p>The test is the following: </p><p class="formulaDsp">
 \[ \partial_t f(t,x,y,v_x, v_y) + A(x,y) \cdot \nabla f(t,x,y, v_x, v_y) = 0, \]
@@ -151,8 +151,8 @@ Advection along x and y on (t, x, y, vx, vy)</h3>
 <h3><a class="anchor" id="autotoc_md71"></a>
 Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity</h3>
 <ul>
-<li>1d_spatial_advection.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a> operator for a 1Dx1V case. <br  />
- This test is similar to <code>tests/geometryXVx/spatialadvection.cpp</code> which tests the <a class="el" href="classBslAdvectionSpatial.html" title="A class which computes the spatial advection along the dimension of interest DDimX.">BslAdvectionSpatial</a> operator.</li>
+<li>1d_spatial_advection.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator for a 1Dx1V case. <br  />
+ This test is similar to <code>tests/geometryXVx/spatialadvection.cpp</code> which tests the <a class="el" href="classBslAdvectionSpatial.html" title="A class which computes the spatial advection along the dimension of interest GridX.">BslAdvectionSpatial</a> operator.</li>
 </ul>
 <p>The test is the following: </p><p class="formulaDsp">
 \[ \partial_t f_s(t,x, v_x) - \sqrt{\frac{m_e}{m_s}} v_x \partial_x f_s(t,x, v_x) = 0, \\ \]
@@ -163,8 +163,8 @@ Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity</h3>
 </p>
 <p> We test it on a grid \(N_x\times N_{v_x} = 100\times50\) with \(dt = 0.1\). The simulation runs on \(t\in[0,0.1]\) and the relative error is expected to be below \( 1*10^{-6}\).</p>
 <ul>
-<li>1d_velocity_advection.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a> operator for a 1Dx1V case. <br  />
- This test is similar to <code>tests/geometryXVx/velocityadvection.cpp</code> which tests the <a class="el" href="classBslAdvectionVelocity.html" title="A class which computes the velocity advection along the dimension of interest DDimV.">BslAdvectionVelocity</a> operator.</li>
+<li>1d_velocity_advection.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator for a 1Dx1V case. <br  />
+ This test is similar to <code>tests/geometryXVx/velocityadvection.cpp</code> which tests the <a class="el" href="classBslAdvectionVelocity.html" title="A class which computes the velocity advection along the dimension of interest GridV.">BslAdvectionVelocity</a> operator.</li>
 </ul>
 <p>The test is the following: </p><p class="formulaDsp">
 \[ \partial_t f_s(t,x, v_x) - q_s\sqrt{\frac{m_e}{m_s}} E \partial_{v_x} f_s(t,x, v_x) = 0, \\ \]

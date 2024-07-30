@@ -106,26 +106,27 @@ $(document).ready(function(){initNavTree('nulladvectionvx_8hpp_source.html','');
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;iadvectionvx.hpp&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> FdistribuDDom, <span class="keyword">class</span> SpatialDDom&gt;</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classNullAdvectionVelocity.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullAdvectionVelocity.html">NullAdvectionVelocity</a> : <span class="keyword">public</span> IAdvectionV&lt;FdistribuDDom, SpatialDDom&gt;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classNullAdvectionVelocity.html">NullAdvectionVelocity</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    ~<a class="code" href="classNullAdvectionVelocity.html">NullAdvectionVelocity</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    ddc::ChunkSpan&lt;double, FdistribuDDom&gt; operator()(</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            ddc::ChunkSpan&lt;double, FdistribuDDom&gt; allfdistribu,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            [[maybe_unused]] ddc::ChunkSpan&lt;const double, SpatialDDom&gt; electrostatic_potential,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            [[maybe_unused]] <span class="keywordtype">double</span> dt)<span class="keyword"> const override</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
-<div class="ttc" id="aclassNullAdvectionVelocity_html"><div class="ttname"><a href="classNullAdvectionVelocity.html">NullAdvectionVelocity</a></div><div class="ttdef"><b>Definition:</b> nulladvectionvx.hpp:9</div></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> FdistribuIdxRange, <span class="keyword">class</span> SpatialIdxRange&gt;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classNullAdvectionVelocity.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullAdvectionVelocity.html">NullAdvectionVelocity</a> : <span class="keyword">public</span> IAdvectionV&lt;FdistribuIdxRange, SpatialIdxRange&gt;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classNullAdvectionVelocity.html">NullAdvectionVelocity</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    ~<a class="code" href="classNullAdvectionVelocity.html">NullAdvectionVelocity</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classNullAdvectionVelocity.html#af64018099401483d634b366858f3a76c">   29</a></span>&#160;    Field&lt;double, FdistribuIdxRange&gt; <a class="code" href="classNullAdvectionVelocity.html#af64018099401483d634b366858f3a76c">operator()</a>(</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            Field&lt;double, FdistribuIdxRange&gt; allfdistribu,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            [[maybe_unused]] Field&lt;const double, SpatialIdxRange&gt; electric_field,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            [[maybe_unused]] <span class="keywordtype">double</span> dt)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="ttc" id="aclassNullAdvectionVelocity_html"><div class="ttname"><a href="classNullAdvectionVelocity.html">NullAdvectionVelocity</a></div><div class="ttdoc">This is a class which imitates a velocity advection.</div><div class="ttdef"><b>Definition:</b> nulladvectionvx.hpp:14</div></div>
+<div class="ttc" id="aclassNullAdvectionVelocity_html_af64018099401483d634b366858f3a76c"><div class="ttname"><a href="classNullAdvectionVelocity.html#af64018099401483d634b366858f3a76c">NullAdvectionVelocity::operator()</a></div><div class="ttdeci">Field&lt; double, FdistribuIdxRange &gt; operator()(Field&lt; double, FdistribuIdxRange &gt; allfdistribu, [[maybe_unused]] Field&lt; const double, SpatialIdxRange &gt; electric_field, [[maybe_unused]] double dt) const override</div><div class="ttdoc">Do nothing instead of advecting fdistribu along GridV for a duration dt.</div><div class="ttdef"><b>Definition:</b> nulladvectionvx.hpp:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

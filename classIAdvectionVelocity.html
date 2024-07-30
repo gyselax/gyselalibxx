@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: IAdvectionVelocity&lt; Geometry, DDimV &gt; Class Template Reference</title>
+<title>Gyselalib++: IAdvectionVelocity&lt; Geometry, GridV &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,58 +103,58 @@ $(document).ready(function(){initNavTree('classIAdvectionVelocity.html',''); ini
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classIAdvectionVelocity-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">IAdvectionVelocity&lt; Geometry, DDimV &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">IAdvectionVelocity&lt; Geometry, GridV &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class which provides an advection operator.  
  <a href="classIAdvectionVelocity.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for IAdvectionVelocity&lt; Geometry, DDimV &gt;:</div>
+Inheritance diagram for IAdvectionVelocity&lt; Geometry, GridV &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classIAdvectionVelocity.png" usemap="#IAdvectionVelocity_3C_20Geometry_2C_20DDimV_20_3E_map" alt=""/>
-  <map id="IAdvectionVelocity_3C_20Geometry_2C_20DDimV_20_3E_map" name="IAdvectionVelocity_3C_20Geometry_2C_20DDimV_20_3E_map">
-<area href="classBslAdvectionVelocity.html" title="A class which computes the velocity advection along the dimension of interest DDimV." alt="BslAdvectionVelocity&lt; Geometry, DDimV &gt;" shape="rect" coords="0,56,258,80"/>
+  <img src="classIAdvectionVelocity.png" usemap="#IAdvectionVelocity_3C_20Geometry_2C_20GridV_20_3E_map" alt=""/>
+  <map id="IAdvectionVelocity_3C_20Geometry_2C_20GridV_20_3E_map" name="IAdvectionVelocity_3C_20Geometry_2C_20GridV_20_3E_map">
+<area href="classBslAdvectionVelocity.html" title="A class which computes the velocity advection along the dimension of interest GridV." alt="BslAdvectionVelocity&lt; Geometry, GridV &gt;" shape="rect" coords="0,56,252,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1b1caa9543145f61490ac8dcd8253827"><td class="memItemLeft" align="right" valign="top">virtual device_t&lt; ddc::ChunkSpan&lt; double, typename Geometry::FdistribuDDom &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionVelocity.html#a1b1caa9543145f61490ac8dcd8253827">operator()</a> (device_t&lt; ddc::ChunkSpan&lt; double, typename Geometry::FdistribuDDom &gt;&gt; allfdistribu, device_t&lt; ddc::ChunkSpan&lt; const double, typename Geometry::SpatialDDom &gt;&gt; electrostatic_potential, double dt) const =0</td></tr>
-<tr class="memdesc:a1b1caa9543145f61490ac8dcd8253827"><td class="mdescLeft">&#160;</td><td class="mdescRight">operates a transport of the distribution function.  <a href="classIAdvectionVelocity.html#a1b1caa9543145f61490ac8dcd8253827">More...</a><br /></td></tr>
-<tr class="separator:a1b1caa9543145f61490ac8dcd8253827"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab56c4a9751c5ed41151b5c2b36e7d61e"><td class="memItemLeft" align="right" valign="top">virtual Field&lt; double, typename Geometry::FdistribuDDom &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionVelocity.html#ab56c4a9751c5ed41151b5c2b36e7d61e">operator()</a> (Field&lt; double, typename Geometry::FdistribuDDom &gt; allfdistribu, Field&lt; const double, typename Geometry::SpatialDDom &gt; electric_field, double dt) const =0</td></tr>
+<tr class="memdesc:ab56c4a9751c5ed41151b5c2b36e7d61e"><td class="mdescLeft">&#160;</td><td class="mdescRight">operates a transport of the distribution function.  <a href="classIAdvectionVelocity.html#ab56c4a9751c5ed41151b5c2b36e7d61e">More...</a><br /></td></tr>
+<tr class="separator:ab56c4a9751c5ed41151b5c2b36e7d61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class Geometry, class DDimV&gt;<br />
-class IAdvectionVelocity&lt; Geometry, DDimV &gt;</h3>
+<div class="textblock"><h3>template&lt;class Geometry, class GridV&gt;<br />
+class IAdvectionVelocity&lt; Geometry, GridV &gt;</h3>
 
 <p>A class which provides an advection operator. </p>
 <p>A generic class for a velocity advection.</p>
 <p>An abstract class which implements a function that applies the transport along a velocity direction of the phase space. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1b1caa9543145f61490ac8dcd8253827"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b1caa9543145f61490ac8dcd8253827">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="ab56c4a9751c5ed41151b5c2b36e7d61e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab56c4a9751c5ed41151b5c2b36e7d61e">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Geometry , class DDimV &gt; </div>
+template&lt;class Geometry , class GridV &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual device_t&lt;ddc::ChunkSpan&lt;double, typename Geometry::FdistribuDDom&gt; &gt; <a class="el" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>&lt; Geometry, DDimV &gt;::operator() </td>
+          <td class="memname">virtual Field&lt;double, typename Geometry::FdistribuDDom&gt; <a class="el" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>&lt; Geometry, GridV &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">device_t&lt; ddc::ChunkSpan&lt; double, typename Geometry::FdistribuDDom &gt;&gt;&#160;</td>
+          <td class="paramtype">Field&lt; double, typename Geometry::FdistribuDDom &gt;&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">device_t&lt; ddc::ChunkSpan&lt; const double, typename Geometry::SpatialDDom &gt;&gt;&#160;</td>
-          <td class="paramname"><em>electrostatic_potential</em>, </td>
+          <td class="paramtype">Field&lt; const double, typename Geometry::SpatialDDom &gt;&#160;</td>
+          <td class="paramname"><em>electric_field</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -179,7 +179,7 @@ template&lt;class Geometry , class DDimV &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>Reference to an array containing the value of the distribution function. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">electrostatic_potential</td><td>The electrostatic potential which is the advection speed. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">electric_field</td><td>The electric field which derives from electrostatic potential and is the advection speed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>Time step.</td></tr>
   </table>
   </dd>

@@ -134,7 +134,7 @@ class PredCorrRK2XY&lt; PoissonSolver, AdvectionX, AdvectionY &gt;</h3>
 <p>for \( n \geq 0 \),</p>
 <p>First, it advects on a half time step:</p><ul>
 <li>1./2. From \(f^n\), it computes \(E^n\) with a <a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a>;</li>
-<li>3. From \(f^n\) and \(E^n\), it computes \(f^{n+1/2}\) with a <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest IDimInterest.">BslAdvection1D</a> on \(\frac{dt}{2}\);</li>
+<li>3. From \(f^n\) and \(E^n\), it computes \(f^{n+1/2}\) with a <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> on \(\frac{dt}{2}\);</li>
 </ul>
 <p>Secondly, it advects on a full time step:</p><ul>
 <li>4./5. From \(f^{n+1/2}\), it computes \(E^{n+1/2}\) with a <a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a>;</li>

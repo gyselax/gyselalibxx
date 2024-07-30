@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: IAdvectionSpatial&lt; Geometry, DDimX &gt; Class Template Reference</title>
+<title>Gyselalib++: IAdvectionSpatial&lt; Geometry, GridX &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,51 +103,51 @@ $(document).ready(function(){initNavTree('classIAdvectionSpatial.html',''); init
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classIAdvectionSpatial-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">IAdvectionSpatial&lt; Geometry, DDimX &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">IAdvectionSpatial&lt; Geometry, GridX &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class which provides an advection operator.  
  <a href="classIAdvectionSpatial.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for IAdvectionSpatial&lt; Geometry, DDimX &gt;:</div>
+Inheritance diagram for IAdvectionSpatial&lt; Geometry, GridX &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classIAdvectionSpatial.png" usemap="#IAdvectionSpatial_3C_20Geometry_2C_20DDimX_20_3E_map" alt=""/>
-  <map id="IAdvectionSpatial_3C_20Geometry_2C_20DDimX_20_3E_map" name="IAdvectionSpatial_3C_20Geometry_2C_20DDimX_20_3E_map">
-<area href="classBslAdvectionSpatial.html" title="A class which computes the spatial advection along the dimension of interest DDimX." alt="BslAdvectionSpatial&lt; Geometry, DDimX &gt;" shape="rect" coords="0,56,250,80"/>
+  <img src="classIAdvectionSpatial.png" usemap="#IAdvectionSpatial_3C_20Geometry_2C_20GridX_20_3E_map" alt=""/>
+  <map id="IAdvectionSpatial_3C_20Geometry_2C_20GridX_20_3E_map" name="IAdvectionSpatial_3C_20Geometry_2C_20GridX_20_3E_map">
+<area href="classBslAdvectionSpatial.html" title="A class which computes the spatial advection along the dimension of interest GridX." alt="BslAdvectionSpatial&lt; Geometry, GridX &gt;" shape="rect" coords="0,56,244,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2eefd7931b654b66a2cb13060819ef22"><td class="memItemLeft" align="right" valign="top">virtual device_t&lt; ddc::ChunkSpan&lt; double, typename Geometry::FdistribuDDom &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionSpatial.html#a2eefd7931b654b66a2cb13060819ef22">operator()</a> (device_t&lt; ddc::ChunkSpan&lt; double, typename Geometry::FdistribuDDom &gt;&gt; allfdistribu, double dt) const =0</td></tr>
-<tr class="memdesc:a2eefd7931b654b66a2cb13060819ef22"><td class="mdescLeft">&#160;</td><td class="mdescRight">operates a transport of the distribution function.  <a href="classIAdvectionSpatial.html#a2eefd7931b654b66a2cb13060819ef22">More...</a><br /></td></tr>
-<tr class="separator:a2eefd7931b654b66a2cb13060819ef22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b31e50d45a9d17ba01cf8dca26e982d"><td class="memItemLeft" align="right" valign="top">virtual Field&lt; double, typename Geometry::FdistribuDDom &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionSpatial.html#a8b31e50d45a9d17ba01cf8dca26e982d">operator()</a> (Field&lt; double, typename Geometry::FdistribuDDom &gt; allfdistribu, double dt) const =0</td></tr>
+<tr class="memdesc:a8b31e50d45a9d17ba01cf8dca26e982d"><td class="mdescLeft">&#160;</td><td class="mdescRight">operates a transport of the distribution function.  <a href="classIAdvectionSpatial.html#a8b31e50d45a9d17ba01cf8dca26e982d">More...</a><br /></td></tr>
+<tr class="separator:a8b31e50d45a9d17ba01cf8dca26e982d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class Geometry, class DDimX&gt;<br />
-class IAdvectionSpatial&lt; Geometry, DDimX &gt;</h3>
+<div class="textblock"><h3>template&lt;class Geometry, class GridX&gt;<br />
+class IAdvectionSpatial&lt; Geometry, GridX &gt;</h3>
 
 <p>A class which provides an advection operator. </p>
 <p>A generic class for a spatial advection.</p>
 <p>An abstract class which implements a function that applies the transport along a physical space direction of the phase space. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2eefd7931b654b66a2cb13060819ef22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2eefd7931b654b66a2cb13060819ef22">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a8b31e50d45a9d17ba01cf8dca26e982d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b31e50d45a9d17ba01cf8dca26e982d">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Geometry , class DDimX &gt; </div>
+template&lt;class Geometry , class GridX &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual device_t&lt;ddc::ChunkSpan&lt;double, typename Geometry::FdistribuDDom&gt; &gt; <a class="el" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>&lt; Geometry, DDimX &gt;::operator() </td>
+          <td class="memname">virtual Field&lt;double, typename Geometry::FdistribuDDom&gt; <a class="el" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>&lt; Geometry, <a class="el" href="structGridX.html">GridX</a> &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">device_t&lt; ddc::ChunkSpan&lt; double, typename Geometry::FdistribuDDom &gt;&gt;&#160;</td>
+          <td class="paramtype">Field&lt; double, typename Geometry::FdistribuDDom &gt;&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
