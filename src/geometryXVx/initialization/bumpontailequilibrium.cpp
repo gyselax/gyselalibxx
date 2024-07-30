@@ -5,9 +5,9 @@
 #include "bumpontailequilibrium.hpp"
 
 BumpontailEquilibrium::BumpontailEquilibrium(
-        host_t<DFieldMemSp> epsilon_bot,
-        host_t<DFieldMemSp> temperature_bot,
-        host_t<DFieldMemSp> mean_velocity_bot)
+        host_t<DFieldSp> epsilon_bot,
+        host_t<DFieldSp> temperature_bot,
+        host_t<DFieldSp> mean_velocity_bot)
     : m_epsilon_bot(std::move(epsilon_bot))
     , m_temperature_bot(std::move(temperature_bot))
     , m_mean_velocity_bot(std::move(mean_velocity_bot))
@@ -17,12 +17,12 @@ BumpontailEquilibrium::BumpontailEquilibrium(
 DSpanSpVx BumpontailEquilibrium::operator()(DSpanSpVx const allfequilibrium) const
 {
     IDomainVx const gridvx = allfequilibrium.domain<IDimVx>();
-    IdxRangeSp const gridsp = allfequilibrium.domain<Species>();
+    IDomainSp const gridsp = allfequilibrium.domain<IDimSp>();
 
     // Initialization of the maxwellian
     DFieldVx maxwellian_alloc(gridvx);
     ddc::ChunkSpan maxwellian = maxwellian_alloc.span_view();
-    ddc::for_each(gridsp, [&](IdxSp const isp) {
+    ddc::for_each(gridsp, [&](IndexSp const isp) {
         compute_twomaxwellian(
                 maxwellian,
                 m_epsilon_bot(isp),
@@ -38,14 +38,14 @@ DSpanSpVx BumpontailEquilibrium::operator()(DSpanSpVx const allfequilibrium) con
 }
 
 BumpontailEquilibrium BumpontailEquilibrium::init_from_input(
-        IdxRangeSp dom_kinsp,
+        IDomainSp dom_kinsp,
         PC_tree_t const& yaml_input_file)
 {
-    host_t<DFieldMemSp> epsilon_bot(dom_kinsp);
-    host_t<DFieldMemSp> temperature_bot(dom_kinsp);
-    host_t<DFieldMemSp> mean_velocity_bot(dom_kinsp);
+    host_t<DFieldSp> epsilon_bot(dom_kinsp);
+    host_t<DFieldSp> temperature_bot(dom_kinsp);
+    host_t<DFieldSp> mean_velocity_bot(dom_kinsp);
 
-    for (IdxSp const isp : dom_kinsp) {
+    for (IndexSp const isp : dom_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
 
         epsilon_bot(isp) = PCpp_double(conf_isp, ".epsilon_bot");

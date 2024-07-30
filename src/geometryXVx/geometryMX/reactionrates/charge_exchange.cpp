@@ -27,11 +27,11 @@ ChargeExchangeRate::ChargeExchangeRate(double const norm_coeff_rate)
             NULL);
 }
 
-IdxSp find_ion(IdxRangeSp const dom_kinsp)
+IndexSp find_ion(IDomainSp const dom_kinsp)
 {
     bool ion_found = false;
-    IdxSp iion;
-    for (IdxSp const isp : dom_kinsp) {
+    IndexSp iion;
+    for (IndexSp const isp : dom_kinsp) {
         if (charge(isp) > 0.) {
             ion_found = true;
             iion = isp;

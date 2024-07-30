@@ -15,13 +15,13 @@
 class MaxwellianEquilibrium : public IEquilibrium
 {
     /**Equilibrium density of all kinetic species*/
-    host_t<DFieldMemSp> m_density_eq;
+    host_t<DFieldSp> m_density_eq;
 
     /**Equilibrium temperature of all kinetic species*/
-    host_t<DFieldMemSp> m_temperature_eq;
+    host_t<DFieldSp> m_temperature_eq;
 
     /**Equilibrium mean velocity of all kinetic species*/
-    host_t<DFieldMemSp> m_mean_velocity_eq;
+    host_t<DFieldSp> m_mean_velocity_eq;
 
 public:
     /**
@@ -31,9 +31,9 @@ public:
      * @param[in] mean_velocity_eq The mean velocity of the Maxwellian
      */
     MaxwellianEquilibrium(
-            host_t<DFieldMemSp> density_eq,
-            host_t<DFieldMemSp> temperature_eq,
-            host_t<DFieldMemSp> mean_velocity_eq);
+            host_t<DFieldSp> density_eq,
+            host_t<DFieldSp> temperature_eq,
+            host_t<DFieldSp> mean_velocity_eq);
 
     ~MaxwellianEquilibrium() override = default;
 
@@ -44,7 +44,7 @@ public:
      * @return an instance of Maxwellian distribution function.
      */
     static MaxwellianEquilibrium init_from_input(
-            IdxRangeSp dom_kinsp,
+            IDomainSp dom_kinsp,
             PC_tree_t const& yaml_input_file);
 
     /**
@@ -75,7 +75,7 @@ public:
      * @brief A method for accessing the m_density_eq member variable of the class.
      * @return A view containing the m_density_eq value. 
      */
-    host_t<DConstFieldSp> density_eq() const
+    host_t<DViewSp> density_eq() const
     {
         return m_density_eq;
     }
@@ -84,7 +84,7 @@ public:
      * @brief A method for accessing the m_temperature_eq member variable of the class.
      * @return A view containing the m_temperature_eq value. 
      */
-    host_t<DConstFieldSp> temperature_eq() const
+    host_t<DViewSp> temperature_eq() const
     {
         return m_temperature_eq;
     }
@@ -93,7 +93,7 @@ public:
      * @brief A method for accessing the m_mean_velocity_eq member variable of the class.
      * @return A view containing the m_velocity_eq value. 
      */
-    host_t<DConstFieldSp> mean_velocity_eq() const
+    host_t<DViewSp> mean_velocity_eq() const
     {
         return m_mean_velocity_eq;
     }

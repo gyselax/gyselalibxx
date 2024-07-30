@@ -64,7 +64,7 @@ public:
     using discrete_domain_type = ddc::DiscreteDomain<DDims...>;
 
     /// @brief The DiscreteElement which can be used to index this object.
-    using discrete_element_type = ddc::DiscreteElement<DDims...>;
+    using discrete_element_type = typename ddc::DiscreteElement<DDims...>;
 
 protected:
     /// @brief The type of the memory block stored in the array internal_chunks

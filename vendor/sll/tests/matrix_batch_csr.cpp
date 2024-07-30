@@ -38,7 +38,7 @@ void solve_system(
     Kokkos::deep_copy(res_view, 1.);
 
     MatrixBatchCsr<Kokkos::DefaultExecutionSpace, Solver>
-            test_instance(values_view, idx_view, nnz_per_row_view);
+            test_instance(values_view, idx_view, nnz_per_row_view, 1000, 1e-16, true);
 
     test_instance.factorize();
     test_instance.solve_inplace(res_view);

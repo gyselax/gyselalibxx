@@ -37,7 +37,7 @@ template <class IDimension>
 void compute_Dcoll(
         ddc::ChunkSpan<
                 double,
-                ddc::DiscreteDomain<Species, IDimX, IDimension>,
+                ddc::DiscreteDomain<IDimSp, IDimX, IDimension>,
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> Dcoll,
         DViewSpX collfreq,
@@ -47,29 +47,29 @@ void compute_Dcoll(
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             Dcoll.domain(),
-            KOKKOS_LAMBDA(ddc::DiscreteElement<Species, IDimX, IDimension> const ispxdimvx) {
+            KOKKOS_LAMBDA(ddc::DiscreteElement<IDimSp, IDimX, IDimension> const ispxdimx) {
                 double const vT(
-                        Kokkos::sqrt(2. * temperature(ddc::select<Species, IDimX>(ispxdimvx))));
+                        Kokkos::sqrt(2. * temperature(ddc::select<IDimSp, IDimX>(ispxdimx))));
                 double const v_norm(
-                        Kokkos::fabs(ddc::coordinate(ddc::select<IDimension>(ispxdimvx))) / vT);
+                        Kokkos::fabs(ddc::coordinate(ddc::select<IDimension>(ispxdimx))) / vT);
                 double const tol = 1.e-15;
                 if (v_norm > tol) {
                     double const coeff(2. / Kokkos::sqrt(M_PI));
                     double const AD(
                             3. * Kokkos::sqrt(2. * M_PI) / 4.
-                            * temperature(ddc::select<Species, IDimX>(ispxdimvx))
-                            * collfreq(ddc::select<Species, IDimX>(ispxdimvx)));
+                            * temperature(ddc::select<IDimSp, IDimX>(ispxdimx))
+                            * collfreq(ddc::select<IDimSp, IDimX>(ispxdimx)));
                     double const inv_v_norm(1. / v_norm);
                     double const phi(Kokkos::erf(v_norm));
                     double const phi_prime(coeff * Kokkos::exp(-v_norm * v_norm));
                     double const psi((phi - v_norm * phi_prime) * 0.5 * inv_v_norm * inv_v_norm);
 
-                    Dcoll(ispxdimvx) = AD * (phi - psi) * inv_v_norm;
+                    Dcoll(ispxdimx) = AD * (phi - psi) * inv_v_norm;
 
                 } else {
-                    Dcoll(ispxdimvx) = Kokkos::sqrt(2)
-                                       * temperature(ddc::select<Species, IDimX>(ispxdimvx))
-                                       * collfreq(ddc::select<Species, IDimX>(ispxdimvx));
+                    Dcoll(ispxdimx) = Kokkos::sqrt(2)
+                                      * temperature(ddc::select<IDimSp, IDimX>(ispxdimx))
+                                      * collfreq(ddc::select<IDimSp, IDimX>(ispxdimx));
                 }
             });
 }
@@ -85,7 +85,7 @@ template <class IDimension>
 void compute_dvDcoll(
         ddc::ChunkSpan<
                 double,
-                ddc::DiscreteDomain<Species, IDimX, IDimension>,
+                ddc::DiscreteDomain<IDimSp, IDimX, IDimension>,
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> dvDcoll,
         DViewSpX collfreq,
@@ -95,35 +95,34 @@ void compute_dvDcoll(
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             dvDcoll.domain(),
-            KOKKOS_LAMBDA(ddc::DiscreteElement<Species, IDimX, IDimension> const ispxdimvx) {
+            KOKKOS_LAMBDA(ddc::DiscreteElement<IDimSp, IDimX, IDimension> const ispxdimx) {
                 double const vT(
-                        Kokkos::sqrt(2. * temperature(ddc::select<Species, IDimX>(ispxdimvx))));
+                        Kokkos::sqrt(2. * temperature(ddc::select<IDimSp, IDimX>(ispxdimx))));
                 double const v_norm(
-                        Kokkos::fabs(ddc::coordinate(ddc::select<IDimension>(ispxdimvx))) / vT);
+                        Kokkos::fabs(ddc::coordinate(ddc::select<IDimension>(ispxdimx))) / vT);
                 double const tol = 1.e-15;
                 if (v_norm > tol) {
                     double const coeff(2. / Kokkos::sqrt(M_PI));
                     double const AD(
                             3. * Kokkos::sqrt(2. * M_PI) / 4.
-                            * temperature(ddc::select<Species, IDimX>(ispxdimvx))
-                            * collfreq(ddc::select<Species, IDimX>(ispxdimvx)));
+                            * temperature(ddc::select<IDimSp, IDimX>(ispxdimx))
+                            * collfreq(ddc::select<IDimSp, IDimX>(ispxdimx)));
                     double const inv_v_norm(1. / v_norm);
                     double const phi(Kokkos::erf(v_norm));
                     double const phi_prime(coeff * Kokkos::exp(-v_norm * v_norm));
                     double const psi((phi - v_norm * phi_prime) * 0.5 * inv_v_norm * inv_v_norm);
 
                     double const sign(
-                            ddc::coordinate(ddc::select<IDimension>(ispxdimvx))
-                            / Kokkos::fabs(ddc::coordinate(ddc::select<IDimension>(ispxdimvx))));
+                            ddc::coordinate(ddc::select<IDimension>(ispxdimx))
+                            / Kokkos::fabs(ddc::coordinate(ddc::select<IDimension>(ispxdimx))));
 
-                    dvDcoll(ispxdimvx)
+                    dvDcoll(ispxdimx)
                             = sign * AD
-                              / Kokkos::sqrt(
-                                      2 * temperature(ddc::select<Species, IDimX>(ispxdimvx)))
+                              / Kokkos::sqrt(2 * temperature(ddc::select<IDimSp, IDimX>(ispxdimx)))
                               * inv_v_norm * inv_v_norm * (3 * psi - phi);
 
                 } else {
-                    dvDcoll(ispxdimvx) = 0.;
+                    dvDcoll(ispxdimx) = 0.;
                 }
             });
 }
@@ -158,12 +157,12 @@ void compute_Vcoll_Tcoll(
         DViewSpXVx allfdistribu,
         ddc::ChunkSpan<
                 double,
-                ddc::DiscreteDomain<Species, IDimX, IDimension>,
+                ddc::DiscreteDomain<IDimSp, IDimX, IDimension>,
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> Dcoll,
         ddc::ChunkSpan<
                 double,
-                ddc::DiscreteDomain<Species, IDimX, IDimension>,
+                ddc::DiscreteDomain<IDimSp, IDimX, IDimension>,
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> dvDcoll)
 {
@@ -190,22 +189,21 @@ void compute_Vcoll_Tcoll(
             Kokkos::DefaultExecutionSpace(),
             allfdistribu.domain(),
             KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
-                ddc::DiscreteElement<IDimension> const idimvx(
-                        ddc::select<IDimVx>(ispxvx).uid() + 1);
-                ddc::DiscreteElement<Species, IDimX, IDimension>
-                        ispxdimvx(ddc::select<Species>(ispxvx), ddc::select<IDimX>(ispxvx), idimvx);
+                ddc::DiscreteElement<IDimension> const idimx(ddc::select<IDimVx>(ispxvx).uid() + 1);
+                ddc::DiscreteElement<IDimSp, IDimX, IDimension>
+                        ispxdimx(ddc::select<IDimSp>(ispxvx), ddc::select<IDimX>(ispxvx), idimx);
                 CoordVx const coordv = ddc::coordinate(ddc::select<IDimVx>(ispxvx));
-                I0mean_integrand(ispxvx) = Dcoll(ispxdimvx) * allfdistribu(ispxvx);
+                I0mean_integrand(ispxvx) = Dcoll(ispxdimx) * allfdistribu(ispxvx);
                 I1mean_integrand(ispxvx) = I0mean_integrand(ispxvx) * coordv;
                 I2mean_integrand(ispxvx) = I1mean_integrand(ispxvx) * coordv;
-                I3mean_integrand(ispxvx) = dvDcoll(ispxdimvx) * allfdistribu(ispxvx);
+                I3mean_integrand(ispxvx) = dvDcoll(ispxdimx) * allfdistribu(ispxvx);
                 I4mean_integrand(ispxvx)
                         = I0mean_integrand(ispxvx) + I3mean_integrand(ispxvx) * coordv;
             });
 
 
     // computation of the integrals over the Vx direction
-    IDomainSpX grid_sp_x(allfdistribu.domain<Species, IDimX>());
+    IDomainSpX grid_sp_x(allfdistribu.domain<IDimSp, IDimX>());
     DFieldSpX I0mean_alloc(grid_sp_x);
     DFieldSpX I1mean_alloc(grid_sp_x);
     DFieldSpX I2mean_alloc(grid_sp_x);
@@ -254,12 +252,12 @@ template <class IDimension>
 void compute_Nucoll(
         ddc::ChunkSpan<
                 double,
-                ddc::DiscreteDomain<Species, IDimX, IDimension>,
+                ddc::DiscreteDomain<IDimSp, IDimX, IDimension>,
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> Nucoll,
         ddc::ChunkSpan<
                 double,
-                ddc::DiscreteDomain<Species, IDimX, IDimension>,
+                ddc::DiscreteDomain<IDimSp, IDimX, IDimension>,
                 std::experimental::layout_right,
                 Kokkos::DefaultExecutionSpace::memory_space> Dcoll,
         DViewSpX Vcoll,
@@ -268,11 +266,11 @@ void compute_Nucoll(
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             Dcoll.domain(),
-            KOKKOS_LAMBDA(ddc::DiscreteElement<Species, IDimX, IDimension> const ispxdimvx) {
-                double const coordv(ddc::coordinate(ddc::select<IDimension>(ispxdimvx)));
-                Nucoll(ispxdimvx) = -Dcoll(ispxdimvx)
-                                    * (coordv - Vcoll(ddc::select<Species, IDimX>(ispxdimvx)))
-                                    / Tcoll(ddc::select<Species, IDimX>(ispxdimvx));
+            KOKKOS_LAMBDA(ddc::DiscreteElement<IDimSp, IDimX, IDimension> const ispxdimx) {
+                double const coordv(ddc::coordinate(ddc::select<IDimension>(ispxdimx)));
+                Nucoll(ispxdimx) = -Dcoll(ispxdimx)
+                                   * (coordv - Vcoll(ddc::select<IDimSp, IDimX>(ispxdimx)))
+                                   / Tcoll(ddc::select<IDimSp, IDimX>(ispxdimx));
             });
 }
 

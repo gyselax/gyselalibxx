@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-#include <ddc/ddc.hpp>
 
-#include "ddc_aliases.hpp"
+#include <ddc/ddc.hpp>
 
 /**
  * @brief A class which provides an advection operator.
@@ -11,7 +10,7 @@
  * An abstract class which implements a function that 
  * applies the transport along a physical space direction of the phase space.
  */
-template <class Geometry, class GridX>
+template <class Geometry, class DDimX>
 class IAdvectionSpatial
 {
 public:
@@ -24,7 +23,7 @@ public:
      *
      * @return A reference to an array containing the value of distribution the function at the updated time T+dt.
      */
-    virtual Field<double, typename Geometry::FdistribuIdxRange> operator()(
-            Field<double, typename Geometry::FdistribuIdxRange> allfdistribu,
+    virtual device_t<ddc::ChunkSpan<double, typename Geometry::FdistribuDDom>> operator()(
+            device_t<ddc::ChunkSpan<double, typename Geometry::FdistribuDDom>> allfdistribu,
             double dt) const = 0;
 };

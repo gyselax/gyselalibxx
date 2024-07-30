@@ -9,11 +9,9 @@
 
 #include <ddc_helper.hpp>
 
-#include "ddc_aliases.hpp"
-
 // TODO: Generalize (IDimI -> Tags...) and make it usable for all Gysela operators ?
-template <template <class...> class Interp, class GridInterp, class IdxRange>
-struct interpolator_on_idx_range
+template <template <class...> class Interp, class DDimI, class Domain>
+struct interpolator_on_domain
 {
 };
 
@@ -21,26 +19,25 @@ struct interpolator_on_idx_range
  * A structure which builds an interpolation type.
  *
  * @tparam Interp The interpolator class being built.
- * @tparam GridInterp The dimension along which the operator will interpolate.
- * @tparam Grid1D... The dimensions on which the data being interpolated are defined.
+ * @tparam DDimI The dimension along which the operator will interpolate.
+ * @tparam DDim... The dimensions on which the data being interpolated are defined.
  */
-template <template <class...> class Interp, class GridInterp, class... Grid1D>
-struct interpolator_on_idx_range<Interp, GridInterp, IdxRange<Grid1D...>>
+template <template <class...> class Interp, class DDimI, class... DDim>
+struct interpolator_on_domain<Interp, DDimI, ddc::DiscreteDomain<DDim...>>
 {
     /// The type of the interpolator
-    using type = Interp<GridInterp, Grid1D...>;
+    using type = Interp<DDimI, DDim...>;
 };
 
 /**
  * A template function which returns an interpolation type.
  *
  * @tparam Interp The interpolator class being built.
- * @tparam GridInterp The dimension along which the operator will interpolate.
- * @tparam IdxRange The index range on which the data being interpolated is defined.
+ * @tparam DDimI The dimension along which the operator will interpolate.
+ * @tparam Domain The domain on which the data being interpolated is defined.
  */
-template <template <class...> class Interp, class GridInterp, class IdxRange>
-using interpolator_on_idx_range_t =
-        typename interpolator_on_idx_range<Interp, GridInterp, IdxRange>::type;
+template <template <class...> class Interp, class DDimI, class Domain>
+using interpolator_on_domain_t = typename interpolator_on_domain<Interp, DDimI, Domain>::type;
 
 /**
  * @brief A class which provides an interpolating function.
@@ -49,41 +46,41 @@ using interpolator_on_idx_range_t =
  * the value of a function to be approximated at a set of
  * coordinates from a set of known values of the function.
  */
-template <class GridInterp, class... Grid1D>
+template <class DDimI, class... DDim>
 class IInterpolator
 {
 public:
     virtual ~IInterpolator() = default;
 
     /// @brief The type of the dimension representing derivatives.
-    using deriv_type = ddc::Deriv<typename GridInterp::continuous_dimension_type>;
-    /// @brief The type of the whole index range on which derivatives are defined.
-    using batched_derivs_idx_range_type
-            = ddc::replace_dim_of_t<IdxRange<Grid1D...>, GridInterp, deriv_type>;
+    using deriv_type = ddc::Deriv<typename DDimI::continuous_dimension_type>;
+    /// @brief The type of the whole domain on which derivatives are defined.
+    using batched_derivs_domain_type
+            = ddc::replace_dim_of_t<ddc::DiscreteDomain<DDim...>, DDimI, deriv_type>;
 
     /**
-     * @brief Get the batched derivs index range on lower boundaries.
+     * @brief Get the batched derivs domain on lower boundaries.
      *
      * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
-     * This is the index range on which derivatives on lower boundaries are defined.
+     * This is the domain on which derivatives on lower boundaries are defined.
      *
-     * @param[in] dom The index range of a single-species distribution function.
-     * @return dom The lower boundaries of this index range.
+     * @param[in] dom The domain of a single-species distribution function.
+     * @return dom The lower boundaries of this domain.
      */
-    virtual batched_derivs_idx_range_type batched_derivs_idx_range_xmin(
-            IdxRange<Grid1D...> dom) const = 0;
+    virtual batched_derivs_domain_type batched_derivs_domain_xmin(
+            ddc::DiscreteDomain<DDim...> dom) const = 0;
 
     /**
-     * @brief Get the batched derivs index range on upper boundaries.
+     * @brief Get the batched derivs domain on upper boundaries.
      *
      * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
-     * This is the index range on which derivatives on upper boundaries are defined.
+     * This is the domain on which derivatives on upper boundaries are defined.
      *
-     * @param[in] dom The index range of a single-species distribution function.
-     * @return dom The upper boundaries of this index range.
+     * @param[in] dom The domain of a single-species distribution function.
+     * @return dom The upper boundaries of this domain.
      */
-    virtual batched_derivs_idx_range_type batched_derivs_idx_range_xmax(
-            IdxRange<Grid1D...> dom) const = 0;
+    virtual batched_derivs_domain_type batched_derivs_domain_xmax(
+            ddc::DiscreteDomain<DDim...> dom) const = 0;
 
     /**
      * @brief Approximate the value of a function at a set of coordinates using the
@@ -99,13 +96,16 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    virtual Field<double, IdxRange<Grid1D...>> operator()(
-            Field<double, IdxRange<Grid1D...>> inout_data,
-            Field<const Coord<typename GridInterp::continuous_dimension_type>, IdxRange<Grid1D...>>
-                    coordinates,
-            std::optional<Field<double const, batched_derivs_idx_range_type>> derivs_xmin
+    virtual device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> operator()(
+            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> inout_data,
+            device_t<ddc::ChunkSpan<
+                    const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
+                    ddc::DiscreteDomain<DDim...>>> coordinates,
+            std::optional<device_t<ddc::ChunkSpan<double const, batched_derivs_domain_type>>>
+                    derivs_xmin
             = std::nullopt,
-            std::optional<Field<double const, batched_derivs_idx_range_type>> derivs_xmax
+            std::optional<device_t<ddc::ChunkSpan<double const, batched_derivs_domain_type>>>
+                    derivs_xmax
             = std::nullopt) const = 0;
 };
 
@@ -130,17 +130,17 @@ public:
  * advection at the start of the BslAdvectionVelocity::operator() function. At the end of this function
  * the unique pointer goes out of scope and the buffers are deallocated.
  */
-template <class GridInterp, class... Grid1D>
-class IPreallocatableInterpolator : public IInterpolator<GridInterp, Grid1D...>
+template <class DDimI, class... DDim>
+class IPreallocatableInterpolator : public IInterpolator<DDimI, DDim...>
 {
 public:
     ~IPreallocatableInterpolator() override = default;
 
     /// @brief The type of the dimension representing derivatives.
-    using deriv_type = typename IInterpolator<GridInterp, Grid1D...>::deriv_type;
-    /// @brief The type of the whole index range on which derivatives are defined.
-    using batched_derivs_idx_range_type =
-            typename IInterpolator<GridInterp, Grid1D...>::batched_derivs_idx_range_type;
+    using deriv_type = typename IInterpolator<DDimI, DDim...>::deriv_type;
+    /// @brief The type of the whole domain on which derivatives are defined.
+    using batched_derivs_domain_type =
+            typename IInterpolator<DDimI, DDim...>::batched_derivs_domain_type;
 
     /**
      * @brief Allocate an instance of an InterpolatorProxy to use as an IInterpolator.
@@ -152,36 +152,36 @@ public:
      * @see InterpolatorProxy
      * @see IInterpolator
      */
-    virtual std::unique_ptr<IInterpolator<GridInterp, Grid1D...>> preallocate() const = 0;
+    virtual std::unique_ptr<IInterpolator<DDimI, DDim...>> preallocate() const = 0;
 
     /**
-     * @brief Get the batched derivs index range on lower boundaries.
+     * @brief Get the batched derivs domain on lower boundaries.
      *
      * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
-     * This is the index range on which derivatives on lower boundaries are defined.
+     * This is the domain on which derivatives on lower boundaries are defined.
      *
-     * @param[in] dom The index range of a single-species distribution function.
-     * @return dom The lower boundaries of this index range.
+     * @param[in] dom The domain of a single-species distribution function.
+     * @return dom The lower boundaries of this domain.
      */
-    batched_derivs_idx_range_type batched_derivs_idx_range_xmin(
-            IdxRange<Grid1D...> dom) const override
+    batched_derivs_domain_type batched_derivs_domain_xmin(
+            ddc::DiscreteDomain<DDim...> dom) const override
     {
-        return (*preallocate()).batched_derivs_idx_range_xmin(dom);
+        return (*preallocate()).batched_derivs_domain_xmin(dom);
     }
 
     /**
-     * @brief Get the batched derivs index range on upper boundaries.
+     * @brief Get the batched derivs domain on upper boundaries.
      *
      * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
-     * This is the index range on which derivatives on upper boundaries are defined.
+     * This is the domain on which derivatives on upper boundaries are defined.
      *
-     * @param[in] dom The index range of a single-species distribution function.
-     * @return dom The upper boundaries of this index range.
+     * @param[in] dom The domain of a single-species distribution function.
+     * @return dom The upper boundaries of this domain.
      */
-    batched_derivs_idx_range_type batched_derivs_idx_range_xmax(
-            IdxRange<Grid1D...> dom) const override
+    batched_derivs_domain_type batched_derivs_domain_xmax(
+            ddc::DiscreteDomain<DDim...> dom) const override
     {
-        return (*preallocate()).batched_derivs_idx_range_xmax(dom);
+        return (*preallocate()).batched_derivs_domain_xmax(dom);
     }
 
     /**
@@ -198,13 +198,16 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    Field<double, IdxRange<Grid1D...>> operator()(
-            Field<double, IdxRange<Grid1D...>> const inout_data,
-            Field<const Coord<typename GridInterp::continuous_dimension_type>,
-                  IdxRange<Grid1D...>> const coordinates,
-            std::optional<Field<double const, batched_derivs_idx_range_type>> derivs_xmin
+    device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> operator()(
+            device_t<ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim...>>> const inout_data,
+            device_t<ddc::ChunkSpan<
+                    const ddc::Coordinate<typename DDimI::continuous_dimension_type>,
+                    ddc::DiscreteDomain<DDim...>>> const coordinates,
+            std::optional<device_t<ddc::ChunkSpan<double const, batched_derivs_domain_type>>>
+                    derivs_xmin
             = std::nullopt,
-            std::optional<Field<double const, batched_derivs_idx_range_type>> derivs_xmax
+            std::optional<device_t<ddc::ChunkSpan<double const, batched_derivs_domain_type>>>
+                    derivs_xmax
             = std::nullopt) const override
     {
         return (*preallocate())(inout_data, coordinates);

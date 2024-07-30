@@ -16,13 +16,13 @@
 namespace {
 // Continuous dimensions
 /// @brief A class which describes the real space in the first spatial direction X.
-struct X
+struct RDimX
 {
     /// @brief A boolean indicating if the dimension is periodic.
     static bool constexpr PERIODIC = true;
 };
 /// @brief A class which describes the real space in the first velocity direction Vx.
-struct Vx
+struct RDimVx
 {
     /// @brief A boolean indicating if the dimension is periodic.
     static bool constexpr PERIODIC = false;
@@ -30,14 +30,14 @@ struct Vx
 
 
 
-using CoordX = Coord<X>;
-using CoordVx = Coord<Vx>;
+using CoordX = ddc::Coordinate<RDimX>;
+using CoordVx = ddc::Coordinate<RDimVx>;
 
 // Splines
-struct BSplinesX : ddc::UniformBSplines<X, 3>
+struct BSplinesX : ddc::UniformBSplines<RDimX, 3>
 {
 };
-struct BSplinesVx : ddc::UniformBSplines<Vx, 3>
+struct BSplinesVx : ddc::UniformBSplines<RDimVx, 3>
 {
 };
 
@@ -46,10 +46,10 @@ ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
 
 
 // Discrete dimensions
-struct GridX : UniformGridBase<X>
+struct IDimX : ddc::UniformPointSampling<RDimX>
 {
 };
-struct GridVx : UniformGridBase<Vx>
+struct IDimVx : ddc::UniformPointSampling<RDimVx>
 {
 };
 
@@ -60,46 +60,46 @@ using SplineInterpPointsVx
         = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
 
 
-using IdxRangeX = IdxRange<GridX>;
-using IdxX = Idx<GridX>;
-using IdxStepX = IdxStep<GridX>;
+using IDomainX = ddc::DiscreteDomain<IDimX>;
+using IndexX = ddc::DiscreteElement<IDimX>;
+using IVectX = ddc::DiscreteVector<IDimX>;
 
-using IdxRangeVx = IdxRange<GridVx>;
-using IdxVx = Idx<GridVx>;
-using IdxStepVx = IdxStep<GridVx>;
+using IDomainVx = ddc::DiscreteDomain<IDimVx>;
+using IndexVx = ddc::DiscreteElement<IDimVx>;
+using IVectVx = ddc::DiscreteVector<IDimVx>;
 
-using IdxRangeXVx = IdxRange<GridX, GridVx>;
+using IDomainXVx = ddc::DiscreteDomain<IDimX, IDimVx>;
 
-using IdxRangeSp = IdxRange<Species>;
-using IdxSp = Idx<Species>;
-using IdxStepSp = IdxStep<Species>;
+using IDomainSp = ddc::DiscreteDomain<IDimSp>;
+using IndexSp = ddc::DiscreteElement<IDimSp>;
+using IVectSp = ddc::DiscreteVector<IDimSp>;
 
-using IdxRangeSpXVx = IdxRange<Species, GridX, GridVx>;
-using IdxSpXVx = Idx<Species, GridX, GridVx>;
+using IDomainSpXVx = ddc::DiscreteDomain<IDimSp, IDimX, IDimVx>;
+using IndexSpXVx = ddc::DiscreteElement<IDimSp, IDimX, IDimVx>;
 
 // Chunks, Spans and Views
 template <class ElementType>
-using FieldMemSp = FieldMem<ElementType, IdxRangeSp>;
-using DFieldMemSp = DFieldMemSp;
+using FieldSp = device_t<ddc::Chunk<ElementType, IDomainSp>>;
+using DFieldSp = DFieldSp;
 
 template <class ElementType>
-using FieldMemSpXVx = FieldMem<ElementType, IdxRangeSpXVx>;
-using DFieldMemSpXVx = FieldMemSpXVx<double>;
-
-template <class ElementType>
-using FieldSp = Field<ElementType, IdxRangeSp>;
-using DFieldSp = FieldSp<double>;
-
-template <class ElementType>
-using FieldSpXVx = Field<ElementType, IdxRangeSpXVx>;
+using FieldSpXVx = device_t<ddc::Chunk<ElementType, IDomainSpXVx>>;
 using DFieldSpXVx = FieldSpXVx<double>;
 
+template <class ElementType>
+using SpanSp = device_t<ddc::ChunkSpan<ElementType, IDomainSp>>;
+using DSpanSp = SpanSp<double>;
 
 template <class ElementType>
-using FieldMemXVx = FieldMem<ElementType, IdxRangeXVx>;
+using SpanSpXVx = device_t<ddc::ChunkSpan<ElementType, IDomainSpXVx>>;
+using DSpanSpXVx = SpanSpXVx<double>;
+
 
 template <class ElementType>
-using FieldXVx = Field<ElementType, IdxRangeXVx>;
+using FieldXVx = device_t<ddc::Chunk<ElementType, IDomainXVx>>;
+
+template <class ElementType>
+using SpanXVx = device_t<ddc::ChunkSpan<ElementType, IDomainXVx>>;
 
 
 
@@ -108,39 +108,39 @@ using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        GridX,
+        IDimX,
         SplineXBoundary,
         SplineXBoundary,
         ddc::SplineSolver::LAPACK,
-        Species,
-        GridX,
-        GridVx>;
+        IDimSp,
+        IDimX,
+        IDimVx>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>,
-        Species,
-        GridX,
-        GridVx>;
+        IDimX,
+        ddc::PeriodicExtrapolationRule<RDimX>,
+        ddc::PeriodicExtrapolationRule<RDimX>,
+        IDimSp,
+        IDimX,
+        IDimVx>;
 
 
 class Spatial1DAdvectionTest : public ::testing::Test
 {
 protected:
-    IdxRangeX const x_dom;
-    IdxRangeVx const vx_dom;
-    IdxRangeSp const dom_allsp;
+    IDomainX const x_dom;
+    IDomainVx const vx_dom;
+    IDomainSp const dom_allsp;
 
-    static constexpr IdxStepSp nb_species = IdxStepSp(2);
+    static constexpr IVectSp nb_species = IVectSp(2);
 
 public:
     Spatial1DAdvectionTest()
-        : x_dom(SplineInterpPointsX::get_domain<GridX>())
-        , vx_dom(SplineInterpPointsVx::get_domain<GridVx>())
-        , dom_allsp(IdxSp(0), nb_species) {};
+        : x_dom(SplineInterpPointsX::get_domain<IDimX>())
+        , vx_dom(SplineInterpPointsVx::get_domain<IDimVx>())
+        , dom_allsp(IndexSp(0), nb_species) {};
 
     ~Spatial1DAdvectionTest() = default;
 
@@ -149,54 +149,54 @@ public:
     {
         CoordX const x_min(-M_PI);
         CoordX const x_max(M_PI);
-        IdxStepX const x_size(100);
+        IVectX const x_size(100);
 
         CoordVx const vx_min(-6);
         CoordVx const vx_max(6);
-        IdxStepVx const vx_size(50);
+        IVectVx const vx_size(50);
 
         ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
         ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-        ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
-        ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
+        ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+        ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
     }
 
     template <class AdvectionOperator>
     double SpatialAdvection(AdvectionOperator const& advection_x)
     {
         // Mesh ----------------------------------------------------------------------------------
-        IdxRangeSpXVx const meshSpXVx(dom_allsp, x_dom, vx_dom);
-        IdxSp const i_elec = dom_allsp.front();
-        IdxSp const i_ion = dom_allsp.back();
+        IDomainSpXVx const meshSpXVx(dom_allsp, x_dom, vx_dom);
+        IndexSp const i_elec = dom_allsp.front();
+        IndexSp const i_ion = dom_allsp.back();
 
 
         // INITIALISATION ------------------------------------------------------------------------
         // Initialization of the masses
-        host_t<FieldMemSp<int>> masses_host(dom_allsp);
+        host_t<FieldSp<int>> masses_host(dom_allsp);
         masses_host(i_elec) = 1;
         masses_host(i_ion) = 1;
         auto masses_alloc = ddc::
-                create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), get_field(masses_host));
-        ddc::ChunkSpan masses = get_field(masses_alloc);
+                create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), masses_host.span_view());
+        ddc::ChunkSpan masses = masses_alloc.span_view();
 
 
         // Initialization of the distribution function and advection field
-        DFieldMemSpXVx allfdistribu_alloc(meshSpXVx);
-        DFieldSpXVx allfdistribu = get_field(allfdistribu_alloc);
+        DFieldSpXVx allfdistribu_alloc(meshSpXVx);
+        DSpanSpXVx allfdistribu = allfdistribu_alloc.span_view();
 
-        DFieldMemSpXVx advection_field_alloc(meshSpXVx);
-        DFieldSpXVx advection_field = get_field(advection_field_alloc);
+        DFieldSpXVx advection_field_alloc(meshSpXVx);
+        DSpanSpXVx advection_field = advection_field_alloc.span_view();
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 meshSpXVx,
-                KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
-                    IdxX const ix(ispxvx);
+                KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+                    IndexX const ix(ispxvx);
                     allfdistribu(ispxvx) = Kokkos::cos(ddc::coordinate(ix));
 
-                    IdxVx const ivx(ispxvx);
-                    IdxSp const isp(ispxvx);
+                    IndexVx const ivx(ispxvx);
+                    IndexSp const isp(ispxvx);
                     advection_field(ispxvx)
                             = -Kokkos::sqrt(masses(i_elec) / masses(isp)) * ddc::coordinate(ivx);
                 });
@@ -213,9 +213,9 @@ public:
                 meshSpXVx,
                 0.0,
                 ddc::reducer::max<double>(),
-                KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
-                    IdxX const ix(ispxvx);
-                    IdxVx const ivx(ispxvx);
+                KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+                    IndexX const ix(ispxvx);
+                    IndexVx const ivx(ispxvx);
                     return Kokkos::abs(
                             allfdistribu(ispxvx)
                             - Kokkos::cos(
@@ -230,24 +230,24 @@ public:
 
 TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
 {
-    IdxRangeSpXVx meshSpXVx(dom_allsp, x_dom, vx_dom);
+    IDomainSpXVx meshSpXVx(dom_allsp, x_dom, vx_dom);
 
     SplineXBuilder const builder_x(meshSpXVx);
 
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
+    ddc::PeriodicExtrapolationRule<RDimX> bv_x_min;
+    ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
 
     PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
 
-    Euler<FieldMemSpXVx<CoordX>, DFieldMemSpXVx> euler(meshSpXVx);
+    Euler<FieldSpXVx<CoordX>, DFieldSpXVx> euler(meshSpXVx);
     BslAdvection1D<
-            GridX,
-            IdxRangeSpXVx,
-            IdxRangeSpXVx,
+            IDimX,
+            IDomainSpXVx,
+            IDomainSpXVx,
             SplineXBuilder,
             SplineXEvaluator,
-            Euler<FieldMemSpXVx<CoordX>, DFieldMemSpXVx>> const
+            Euler<FieldSpXVx<CoordX>, DFieldSpXVx>> const
             spline_advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler);
 
     double const err = SpatialAdvection(spline_advection_x);

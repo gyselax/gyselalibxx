@@ -66,12 +66,12 @@ public:
     /**
      * A type representing a mesh for species, space and ghosted vx mesh. 
      */
-    using IDomainSpXVx_ghosted = ddc::DiscreteDomain<Species, IDimX, GhostedVx>;
+    using IDomainSpXVx_ghosted = ddc::DiscreteDomain<IDimSp, IDimX, GhostedVx>;
 
     /**
      * A type representing a mesh for species, space and ghosted staggered vx mesh. 
      */
-    using IDomainSpXVx_ghosted_staggered = ddc::DiscreteDomain<Species, IDimX, GhostedVxStaggered>;
+    using IDomainSpXVx_ghosted_staggered = ddc::DiscreteDomain<IDimSp, IDimX, GhostedVxStaggered>;
 
     /**
      * A type representing a ghosted vx index. 
@@ -86,12 +86,12 @@ public:
     /**
      * A type representing a species, space and ghosted vx index. 
      */
-    using IndexSpXVx_ghosted = ddc::DiscreteElement<Species, IDimX, GhostedVx>;
+    using IndexSpXVx_ghosted = ddc::DiscreteElement<IDimSp, IDimX, GhostedVx>;
 
     /**
      * A type representing a species, space and ghosted staggered vx index. 
      */
-    using IndexSpXVx_ghosted_staggered = ddc::DiscreteElement<Species, IDimX, GhostedVxStaggered>;
+    using IndexSpXVx_ghosted_staggered = ddc::DiscreteElement<IDimSp, IDimX, GhostedVxStaggered>;
 
 
 private:
@@ -170,7 +170,7 @@ public:
      *
      * @return The species, spatial, and ghosted vx mesh.
      */
-    ddc::DiscreteDomain<Species, IDimX, GhostedVx> const& get_mesh_ghosted() const;
+    ddc::DiscreteDomain<IDimSp, IDimX, GhostedVx> const& get_mesh_ghosted() const;
 
     /**
      * @brief Compute the right-hand-side of the collision operator linear system.

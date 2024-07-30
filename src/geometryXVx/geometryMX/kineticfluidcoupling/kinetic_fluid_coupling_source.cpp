@@ -33,11 +33,11 @@ KineticFluidCouplingSource::KineticFluidCouplingSource(
             m_energy_coupling_coeff);
 }
 
-IdxSp KineticFluidCouplingSource::find_ion(IdxRangeSp const dom_kinsp) const
+IndexSp KineticFluidCouplingSource::find_ion(IDomainSp const dom_kinsp) const
 {
     bool ion_found = false;
-    IdxSp iion;
-    for (IdxSp const isp : dom_kinsp) {
+    IndexSp iion;
+    for (IndexSp const isp : dom_kinsp) {
         if (charge(isp) > 0) {
             ion_found = true;
             iion = isp;
@@ -58,12 +58,12 @@ void KineticFluidCouplingSource::get_source_term(
         DViewSpX ionization,
         DViewSpX recombination) const
 {
-    IdxSp const iion(find_ion(ddc::get_domain<Species>(kinsp_density)));
+    IndexSp const iion(find_ion(ddc::get_domain<IDimSp>(kinsp_density)));
     // Neutrals density source computation
-    IDomainSpM const dom_msp(ddc::get_domain<Species, IDimM>(neutrals));
+    IDomainSpM const dom_msp(ddc::get_domain<IDimSp, IDimM>(neutrals));
     IndexSpM ineutral(dom_msp.front());
-    IdxRangeSp const dom_sp(ddc::get_domain<Species>(neutrals));
-    IdxSp ispneutral(dom_sp.front());
+    IDomainSp const dom_sp(ddc::get_domain<IDimSp>(neutrals));
+    IndexSp ispneutral(dom_sp.front());
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
@@ -82,7 +82,7 @@ void KineticFluidCouplingSource::get_derivative_neutrals(
         DViewX density_source_neutral) const
 {
     // neutrals dn computation
-    IDomainSpX dom_fluidspx(ddc::get_domain<Species, IDimX>(neutrals));
+    IDomainSpX dom_fluidspx(ddc::get_domain<IDimSp, IDimX>(neutrals));
 
     // compute diffusive model equation terms
     IndexM const ineutral_density(0);
@@ -123,7 +123,7 @@ void KineticFluidCouplingSource::operator()(
     RK2<DFieldSpXVx> timestepper_kinetic(allfdistribu.domain());
 
     // useful params and domains
-    IdxSp const iion(find_ion(ddc::get_domain<Species>(allfdistribu)));
+    IndexSp const iion(find_ion(ddc::get_domain<IDimSp>(allfdistribu)));
 
     // kinetic species fluid moments computation
     IDomainSpX dom_kspx(allfdistribu.domain());
@@ -157,7 +157,7 @@ void KineticFluidCouplingSource::operator()(
             });
 
     // building reaction rates
-    IDomainSpX dom_fluidspx(ddc::get_domain<Species, IDimX>(neutrals));
+    IDomainSpX dom_fluidspx(ddc::get_domain<IDimSp, IDimX>(neutrals));
 
     DFieldSpX ionization_rate_alloc(dom_fluidspx);
     DFieldSpX recombination_rate_alloc(dom_fluidspx);

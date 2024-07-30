@@ -77,7 +77,7 @@ public:
     * 
     * @return The index of the ion species in the domain.
     */
-    IdxSp find_ion(IdxRangeSp const dom_kinsp) const;
+    IndexSp find_ion(IDomainSp const dom_kinsp) const;
 
     /**
      * @brief Computes the source term density_source_neutral(x) of the KineticFluidCouplingSource operator.
