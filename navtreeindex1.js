@@ -248,6 +248,6 @@ var NAVTREEINDEX1 =
 "classDiscreteToCartesian.html#abbd7cd39470e965f0c6afa793d0896fa":[14,71,4],
 "classDiscreteToCartesian.html#acebb0c8ce43be04e7bd8a097f7415514":[14,71,8],
 "classDiscreteToCartesian.html#ae1bf31c827fc3abbf866d77068a93367":[14,71,20],
-"classEdgeCoordinatesTransformation.html":[14,73],
-"classEdgeCoordinatesTransformation.html#a1026c0d9f0bda270f270bf4ed44e6e2e":[14,73,0]
+"classEdgeTransformation.html":[14,73],
+"classEdgeTransformation.html#a11c84fec5577a58b0addfd13bd744117":[14,73,0]
 };

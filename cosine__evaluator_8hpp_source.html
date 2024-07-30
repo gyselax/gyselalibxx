@@ -104,82 +104,91 @@ $(document).ready(function(){initNavTree('cosine__evaluator_8hpp_source.html',''
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;sll/math_tools.hpp&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="structCosineEvaluator.html">    9</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structCosineEvaluator.html">CosineEvaluator</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim&gt;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classCosineEvaluator_1_1Evaluator.html">   12</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classCosineEvaluator_1_1Evaluator.html">Evaluator</a></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keyword">using</span> Dim = DDim;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> constexpr <span class="keywordtype">double</span> s_2_pi = 2. * M_PI;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">double</span> m_c0;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">double</span> m_c1;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;sll/math_tools.hpp&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structCosineEvaluator.html">   13</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structCosineEvaluator.html">CosineEvaluator</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Gr<span class="keywordtype">id</span>1D&gt;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classCosineEvaluator_1_1Evaluator.html">   19</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classCosineEvaluator_1_1Evaluator.html">Evaluator</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classCosineEvaluator_1_1Evaluator.html#a99d3dc08749dcc0f67a8413ce90f9b54">   23</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="classCosineEvaluator_1_1Evaluator.html#a99d3dc08749dcc0f67a8413ce90f9b54">Dim</a> = Grid1D;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> Domain&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="classCosineEvaluator_1_1Evaluator.html">Evaluator</a>(Domain domain) : m_c0(1.0)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                 , m_c1(0.0)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classCosineEvaluator_1_1Evaluator.html">Evaluator</a>(<span class="keywordtype">double</span> c0, <span class="keywordtype">double</span> c1) : m_c0(c0), m_c1(c1) {}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">double</span> operator()(<span class="keywordtype">double</span> <span class="keyword">const</span> x) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keywordflow">return</span> eval(x, 0);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> operator()(ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;DDim&gt;&gt; chunk)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span>&amp; domain = chunk.domain();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">for</span> (ddc::DiscreteElement&lt;DDim&gt; <span class="keyword">const</span> i : domain) {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                chunk(i) = eval(ddc::coordinate(i), 0);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">double</span> deriv(<span class="keywordtype">double</span> <span class="keyword">const</span> x, <span class="keywordtype">int</span> <span class="keyword">const</span> derivative) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">return</span> eval(x, derivative);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">void</span> deriv(ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;DDim&gt;&gt; chunk, <span class="keywordtype">int</span> <span class="keyword">const</span> derivative)<span class="keyword"></span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">                const</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span>&amp; domain = chunk.domain();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">for</span> (ddc::DiscreteElement&lt;DDim&gt; <span class="keyword">const</span> i : domain) {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                chunk(i) = eval(ddc::coordinate(i), derivative);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">double</span> max_norm(<span class="keywordtype">int</span> diff = 0)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">return</span> ipow(s_2_pi * m_c0, diff);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">double</span> eval(<span class="keywordtype">double</span> <span class="keyword">const</span> x, <span class="keywordtype">int</span> <span class="keyword">const</span> derivative) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">return</span> ipow(s_2_pi * m_c0, derivative)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                   * std::cos(M_PI_2 * derivative + s_2_pi * (m_c0 * x + m_c1));</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    };</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
-<div class="ttc" id="aclassCosineEvaluator_1_1Evaluator_html"><div class="ttname"><a href="classCosineEvaluator_1_1Evaluator.html">CosineEvaluator::Evaluator</a></div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:13</div></div>
-<div class="ttc" id="astructCosineEvaluator_html"><div class="ttname"><a href="structCosineEvaluator.html">CosineEvaluator</a></div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:10</div></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> constexpr <span class="keywordtype">double</span> s_2_pi = 2. * M_PI;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">double</span> m_c0;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">double</span> m_c1;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> IdxRange&gt;</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classCosineEvaluator_1_1Evaluator.html#a3202720034c25a744303ab9638ec2ff2">   42</a></span>&#160;        <a class="code" href="classCosineEvaluator_1_1Evaluator.html#a3202720034c25a744303ab9638ec2ff2">Evaluator</a>(IdxRange idx_range) : m_c0(1.0)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                      , m_c1(0.0)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classCosineEvaluator_1_1Evaluator.html#a85f33215f6210b1289813995ddc571a1">   55</a></span>&#160;        <a class="code" href="classCosineEvaluator_1_1Evaluator.html#a85f33215f6210b1289813995ddc571a1">Evaluator</a>(<span class="keywordtype">double</span> c0, <span class="keywordtype">double</span> c1) : m_c0(c0), m_c1(c1) {}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classCosineEvaluator_1_1Evaluator.html#aa66ae25f58a330dd6669a09d0e6dee6c">   62</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classCosineEvaluator_1_1Evaluator.html#aa66ae25f58a330dd6669a09d0e6dee6c">operator()</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> x) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">return</span> eval(x, 0);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classCosineEvaluator_1_1Evaluator.html#a9646ec811ec36ef5ea200ac2a1fc20ed">   71</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classCosineEvaluator_1_1Evaluator.html#a9646ec811ec36ef5ea200ac2a1fc20ed">operator()</a>(ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;Grid1D&gt;&gt; chunk)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span>&amp; idx_range = chunk.idx_range();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordflow">for</span> (ddc::DiscreteElement&lt;Grid1D&gt; <span class="keyword">const</span> i : idx_range) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                chunk(i) = eval(ddc::coordinate(i), 0);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classCosineEvaluator_1_1Evaluator.html#a0ae83a57432e7f9b1dad6841d3a9c725">   86</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classCosineEvaluator_1_1Evaluator.html#a0ae83a57432e7f9b1dad6841d3a9c725">deriv</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> x, <span class="keywordtype">int</span> <span class="keyword">const</span> derivative) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keywordflow">return</span> eval(x, derivative);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classCosineEvaluator_1_1Evaluator.html#a26e0e310db56cd1329a950f9dd622001">   96</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classCosineEvaluator_1_1Evaluator.html#a26e0e310db56cd1329a950f9dd622001">deriv</a>(ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;Grid1D&gt;&gt; chunk, <span class="keywordtype">int</span> <span class="keyword">const</span> derivative)<span class="keyword"></span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">                const</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span>&amp; idx_range = chunk.idx_range();</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordflow">for</span> (ddc::DiscreteElement&lt;Grid1D&gt; <span class="keyword">const</span> i : idx_range) {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                chunk(i) = eval(ddc::coordinate(i), derivative);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classCosineEvaluator_1_1Evaluator.html#a25ea86f78238293e7d7ed071d8874833">  111</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classCosineEvaluator_1_1Evaluator.html#a25ea86f78238293e7d7ed071d8874833">max_norm</a>(<span class="keywordtype">int</span> diff = 0)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordflow">return</span> ipow(s_2_pi * m_c0, diff);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordtype">double</span> eval(<span class="keywordtype">double</span> <span class="keyword">const</span> x, <span class="keywordtype">int</span> <span class="keyword">const</span> derivative) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            <span class="keywordflow">return</span> ipow(s_2_pi * m_c0, derivative)</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                   * std::cos(M_PI_2 * derivative + s_2_pi * (m_c0 * x + m_c1));</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    };</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;};</div>
+<div class="ttc" id="aclassCosineEvaluator_1_1Evaluator_html"><div class="ttname"><a href="classCosineEvaluator_1_1Evaluator.html">CosineEvaluator::Evaluator</a></div><div class="ttdoc">An analytical evaluator to be used for exact comparisons in tests.</div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:20</div></div>
+<div class="ttc" id="aclassCosineEvaluator_1_1Evaluator_html_a0ae83a57432e7f9b1dad6841d3a9c725"><div class="ttname"><a href="classCosineEvaluator_1_1Evaluator.html#a0ae83a57432e7f9b1dad6841d3a9c725">CosineEvaluator::Evaluator::deriv</a></div><div class="ttdeci">double deriv(double const x, int const derivative) const noexcept</div><div class="ttdoc">Evaluate the derivative of the equation at x.</div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:86</div></div>
+<div class="ttc" id="aclassCosineEvaluator_1_1Evaluator_html_a25ea86f78238293e7d7ed071d8874833"><div class="ttname"><a href="classCosineEvaluator_1_1Evaluator.html#a25ea86f78238293e7d7ed071d8874833">CosineEvaluator::Evaluator::max_norm</a></div><div class="ttdeci">double max_norm(int diff=0) const</div><div class="ttdoc">The maximum norm of this equation.</div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:111</div></div>
+<div class="ttc" id="aclassCosineEvaluator_1_1Evaluator_html_a26e0e310db56cd1329a950f9dd622001"><div class="ttname"><a href="classCosineEvaluator_1_1Evaluator.html#a26e0e310db56cd1329a950f9dd622001">CosineEvaluator::Evaluator::deriv</a></div><div class="ttdeci">void deriv(ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D &gt;&gt; chunk, int const derivative) const</div><div class="ttdoc">Evaluate the derivative of the equation at the positions on which chunk is defined.</div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:96</div></div>
+<div class="ttc" id="aclassCosineEvaluator_1_1Evaluator_html_a3202720034c25a744303ab9638ec2ff2"><div class="ttname"><a href="classCosineEvaluator_1_1Evaluator.html#a3202720034c25a744303ab9638ec2ff2">CosineEvaluator::Evaluator::Evaluator</a></div><div class="ttdeci">Evaluator(IdxRange idx_range)</div><div class="ttdoc">A constructor taking the range over which the evaluator will be applied.</div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:42</div></div>
+<div class="ttc" id="aclassCosineEvaluator_1_1Evaluator_html_a85f33215f6210b1289813995ddc571a1"><div class="ttname"><a href="classCosineEvaluator_1_1Evaluator.html#a85f33215f6210b1289813995ddc571a1">CosineEvaluator::Evaluator::Evaluator</a></div><div class="ttdeci">Evaluator(double c0, double c1)</div><div class="ttdoc">A constructor parametrising the equation.</div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:55</div></div>
+<div class="ttc" id="aclassCosineEvaluator_1_1Evaluator_html_a9646ec811ec36ef5ea200ac2a1fc20ed"><div class="ttname"><a href="classCosineEvaluator_1_1Evaluator.html#a9646ec811ec36ef5ea200ac2a1fc20ed">CosineEvaluator::Evaluator::operator()</a></div><div class="ttdeci">void operator()(ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D &gt;&gt; chunk) const</div><div class="ttdoc">Evaluate the equation at the positions on which chunk is defined.</div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:71</div></div>
+<div class="ttc" id="aclassCosineEvaluator_1_1Evaluator_html_a99d3dc08749dcc0f67a8413ce90f9b54"><div class="ttname"><a href="classCosineEvaluator_1_1Evaluator.html#a99d3dc08749dcc0f67a8413ce90f9b54">CosineEvaluator::Evaluator::Dim</a></div><div class="ttdeci">Grid1D Dim</div><div class="ttdoc">The grid dimension.</div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:23</div></div>
+<div class="ttc" id="aclassCosineEvaluator_1_1Evaluator_html_aa66ae25f58a330dd6669a09d0e6dee6c"><div class="ttname"><a href="classCosineEvaluator_1_1Evaluator.html#aa66ae25f58a330dd6669a09d0e6dee6c">CosineEvaluator::Evaluator::operator()</a></div><div class="ttdeci">double operator()(double const x) const noexcept</div><div class="ttdoc">Evaluate the equation at x.</div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:62</div></div>
+<div class="ttc" id="astructCosineEvaluator_html"><div class="ttname"><a href="structCosineEvaluator.html">CosineEvaluator</a></div><div class="ttdoc">A wrapper around a cosine Evaluator that can be used in tests.</div><div class="ttdef"><b>Definition:</b> cosine_evaluator.hpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

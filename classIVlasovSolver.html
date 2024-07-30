@@ -106,6 +106,9 @@ $(document).ready(function(){initNavTree('classIVlasovSolver.html',''); initResi
 <div class="title">IVlasovSolver Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An abstract class for solving a Vlasov equation.  
+ <a href="classIVlasovSolver.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for IVlasovSolver:</div>
 <div class="dyncontent">
@@ -118,10 +121,75 @@ Inheritance diagram for IVlasovSolver:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a45c170f305e21ec904c0ff8f6dd1d658"><td class="memItemLeft" align="right" valign="top"><a id="a45c170f305e21ec904c0ff8f6dd1d658"></a>
-virtual DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpXYVxVy allfdistribu, DViewXY efield_x, DViewXY efield_y, double dt) const =0</td></tr>
-<tr class="separator:a45c170f305e21ec904c0ff8f6dd1d658"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2c2b1a0762d06fe0beba20613003bff"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIVlasovSolver.html#ae2c2b1a0762d06fe0beba20613003bff">operator()</a> (DFieldSpXYVxVy allfdistribu, DConstFieldXY efield_x, DConstFieldXY efield_y, double dt) const =0</td></tr>
+<tr class="memdesc:ae2c2b1a0762d06fe0beba20613003bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves a Vlasov equation on a timestep dt.  <a href="classIVlasovSolver.html#ae2c2b1a0762d06fe0beba20613003bff">More...</a><br /></td></tr>
+<tr class="separator:ae2c2b1a0762d06fe0beba20613003bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An abstract class for solving a Vlasov equation. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae2c2b1a0762d06fe0beba20613003bff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2c2b1a0762d06fe0beba20613003bff">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual DFieldSpXYVxVy IVlasovSolver::operator() </td>
+          <td>(</td>
+          <td class="paramtype">DFieldSpXYVxVy&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DConstFieldXY&#160;</td>
+          <td class="paramname"><em>efield_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DConstFieldXY&#160;</td>
+          <td class="paramname"><em>efield_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solves a Vlasov equation on a timestep dt. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Vlasov equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">efield_x</td><td>The electric field in the x direction computed at all spatial positions. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">efield_y</td><td>The electric field in the y direction computed at all spatial positions. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The timestep.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the Vlasov equation. </dd></dl>
+
+<p>Implemented in <a class="el" href="classSplitVlasovSolver.html#ad980db982084e40e1777484ddc3312b0">SplitVlasovSolver</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/<a class="el" href="ivlasovsolver_8hpp_source.html">ivlasovsolver.hpp</a></li>
 </ul>

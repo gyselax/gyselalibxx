@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: EdgeCoordinatesTransformation&lt; IDim1, IDim2 &gt; Class Template Reference</title>
+<title>Gyselalib++: EdgeTransformation&lt; Interface &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classEdgeCoordinatesTransformation.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classEdgeTransformation.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -101,64 +101,69 @@ $(document).ready(function(){initNavTree('classEdgeCoordinatesTransformation.htm
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classEdgeCoordinatesTransformation-members.html">List of all members</a>  </div>
+<a href="classEdgeTransformation-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">EdgeCoordinatesTransformation&lt; IDim1, IDim2 &gt; Class Template Reference</div>  </div>
+<div class="title">EdgeTransformation&lt; Interface &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Transform a coordinate from one edge to a coordinate on the other edge.  
- <a href="classEdgeCoordinatesTransformation.html#details">More...</a></p>
+<p>Transform a coordinate or an index from one edge to the one on the other edge.  
+ <a href="classEdgeTransformation.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1026c0d9f0bda270f270bf4ed44e6e2e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEdgeCoordinatesTransformation.html#a1026c0d9f0bda270f270bf4ed44e6e2e">EdgeCoordinatesTransformation</a> (<a class="el" href="structInterface.html">Interface</a>&lt; IDim1, IDim2 &gt; const interface)</td></tr>
-<tr class="memdesc:a1026c0d9f0bda270f270bf4ed44e6e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an <a class="el" href="classEdgeCoordinatesTransformation.html" title="Transform a coordinate from one edge to a coordinate on the other edge.">EdgeCoordinatesTransformation</a>.  <a href="classEdgeCoordinatesTransformation.html#a1026c0d9f0bda270f270bf4ed44e6e2e">More...</a><br /></td></tr>
-<tr class="separator:a1026c0d9f0bda270f270bf4ed44e6e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a783427e895532b5493c6a9bc44ad9760"><td class="memTemplParams" colspan="2">template&lt;class CurrentRDim &gt; </td></tr>
-<tr class="memitem:a783427e895532b5493c6a9bc44ad9760"><td class="memTemplItemLeft" align="right" valign="top">ddc::Coordinate&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentRDim, RDim1 &gt;, RDim2, RDim1 &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEdgeCoordinatesTransformation.html#a783427e895532b5493c6a9bc44ad9760">operator()</a> (ddc::Coordinate&lt; CurrentRDim &gt; current_coord) const</td></tr>
-<tr class="memdesc:a783427e895532b5493c6a9bc44ad9760"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch.  <a href="classEdgeCoordinatesTransformation.html#a783427e895532b5493c6a9bc44ad9760">More...</a><br /></td></tr>
-<tr class="separator:a783427e895532b5493c6a9bc44ad9760"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11c84fec5577a58b0addfd13bd744117"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#a11c84fec5577a58b0addfd13bd744117">EdgeTransformation</a> (IdxRangeEdge1 const &amp;idx_range_patch_1, IdxRangeEdge2 const &amp;idx_range_patch_2)</td></tr>
+<tr class="memdesc:a11c84fec5577a58b0addfd13bd744117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an <a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a>.  <a href="classEdgeTransformation.html#a11c84fec5577a58b0addfd13bd744117">More...</a><br /></td></tr>
+<tr class="separator:a11c84fec5577a58b0addfd13bd744117"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54ff59771dc7ef0a1b9206a2ac37e7fc"><td class="memTemplParams" colspan="2">template&lt;class CurrentDim &gt; </td></tr>
+<tr class="memitem:a54ff59771dc7ef0a1b9206a2ac37e7fc"><td class="memTemplItemLeft" align="right" valign="top">ddc::Coordinate&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentDim, EdgeDim1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt; const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#a54ff59771dc7ef0a1b9206a2ac37e7fc">operator()</a> (ddc::Coordinate&lt; CurrentDim &gt; const &amp;current_coord) const</td></tr>
+<tr class="memdesc:a54ff59771dc7ef0a1b9206a2ac37e7fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch.  <a href="classEdgeTransformation.html#a54ff59771dc7ef0a1b9206a2ac37e7fc">More...</a><br /></td></tr>
+<tr class="separator:a54ff59771dc7ef0a1b9206a2ac37e7fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class IDim1, class IDim2&gt;<br />
-class EdgeCoordinatesTransformation&lt; IDim1, IDim2 &gt;</h3>
+<div class="textblock"><h3>template&lt;class Interface&gt;<br />
+class EdgeTransformation&lt; Interface &gt;</h3>
 
-<p>Transform a coordinate from one edge to a coordinate on the other edge. </p>
-<p>According to the orientation stored in the interface, we compute</p><ul>
-<li><p class="startli">if True,</p>
-<p class="startli">\( t \mapsto min_2 + \frac{t - min_1}{max_1 - min_1}(max_2 - min_2) \)</p>
-</li>
-<li><p class="startli">if False,</p>
-<p class="startli">\( t \mapsto max_2 - \frac{t - min_1}{max_1 - min_1}(max_2 - min_2) \)</p>
-</li>
+<p>Transform a coordinate or an index from one edge to the one on the other edge. </p>
+<p>According to the orientation of the interface, we compute</p><ul>
+<li>if True, \( \\ t \mapsto min_2 + \frac{t - min_1}{max_1 - min_1}(max_2 - min_2) \)</li>
+<li>if False, \( \\ t \mapsto max_2 - \frac{t - min_1}{max_1 - min_1}(max_2 - min_2) \)</li>
 </ul>
 <p>where \( min_i \) and \( max_i \) are the minimum and maximum coordinates of the edge \( i \).</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">IDim1</td><td>The discrete dimension of the first edge. </td></tr>
-    <tr><td class="paramname">IDim2</td><td>The discrete dimension of the second edge. </td></tr>
+    <tr><td class="paramname"><a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a></td><td>The <a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a> type where we want to compute the transformation. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1026c0d9f0bda270f270bf4ed44e6e2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1026c0d9f0bda270f270bf4ed44e6e2e">&#9670;&nbsp;</a></span>EdgeCoordinatesTransformation()</h2>
+<a id="a11c84fec5577a58b0addfd13bd744117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11c84fec5577a58b0addfd13bd744117">&#9670;&nbsp;</a></span>EdgeTransformation()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class IDim1 , class IDim2 &gt; </div>
+template&lt;class Interface &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classEdgeCoordinatesTransformation.html">EdgeCoordinatesTransformation</a>&lt; IDim1, IDim2 &gt;::<a class="el" href="classEdgeCoordinatesTransformation.html">EdgeCoordinatesTransformation</a> </td>
+          <td class="memname"><a class="el" href="classEdgeTransformation.html">EdgeTransformation</a>&lt; <a class="el" href="structInterface.html">Interface</a> &gt;::<a class="el" href="classEdgeTransformation.html">EdgeTransformation</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structInterface.html">Interface</a>&lt; IDim1, IDim2 &gt; const&#160;</td>
-          <td class="paramname"><em>interface</em></td><td>)</td>
+          <td class="paramtype">IdxRangeEdge1 const &amp;&#160;</td>
+          <td class="paramname"><em>idx_range_patch_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">IdxRangeEdge2 const &amp;&#160;</td>
+          <td class="paramname"><em>idx_range_patch_2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -168,10 +173,11 @@ template&lt;class IDim1 , class IDim2 &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Instantiate an <a class="el" href="classEdgeCoordinatesTransformation.html" title="Transform a coordinate from one edge to a coordinate on the other edge.">EdgeCoordinatesTransformation</a>. </p>
+<p>Instantiate an <a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">interface</td><td>An <a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a> object between the two patches. </td></tr>
+    <tr><td class="paramname">idx_range_patch_1</td><td>1D index range on the patch 1 of the interface. </td></tr>
+    <tr><td class="paramname">idx_range_patch_2</td><td>1D index range on the patch 2 of the interface. </td></tr>
   </table>
   </dd>
 </dl>
@@ -179,23 +185,23 @@ template&lt;class IDim1 , class IDim2 &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a783427e895532b5493c6a9bc44ad9760"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a783427e895532b5493c6a9bc44ad9760">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a54ff59771dc7ef0a1b9206a2ac37e7fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54ff59771dc7ef0a1b9206a2ac37e7fc">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class IDim1 , class IDim2 &gt; </div>
+template&lt;class Interface &gt; </div>
 <div class="memtemplate">
-template&lt;class CurrentRDim &gt; </div>
+template&lt;class CurrentDim &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ddc::Coordinate&lt;std::conditional_t&lt;std::is_same_v&lt;CurrentRDim, RDim1&gt;, RDim2, RDim1&gt; &gt; <a class="el" href="classEdgeCoordinatesTransformation.html">EdgeCoordinatesTransformation</a>&lt; IDim1, IDim2 &gt;::operator() </td>
+          <td class="memname">ddc::Coordinate&lt; std::conditional_t&lt;std::is_same_v&lt;CurrentDim, EdgeDim1&gt;, EdgeDim2, EdgeDim1&gt; &gt; const <a class="el" href="classEdgeTransformation.html">EdgeTransformation</a>&lt; <a class="el" href="structInterface.html">Interface</a> &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; CurrentRDim &gt;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; CurrentDim &gt; const &amp;&#160;</td>
           <td class="paramname"><em>current_coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -216,7 +222,7 @@ template&lt;class CurrentRDim &gt; </div>
 </dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">CurrentRDim</td><td>The current continuous dimension of the given coordinate coord.</td></tr>
+    <tr><td class="paramname">CurrentDim</td><td>The current continuous dimension of the given coordinate coord.</td></tr>
   </table>
   </dd>
 </dl>
@@ -225,14 +231,14 @@ template&lt;class CurrentRDim &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interfaces/<a class="el" href="coord__transformation_8hpp_source.html">coord_transformation.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/<a class="el" href="edge__transformation_8hpp_source.html">edge_transformation.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classEdgeCoordinatesTransformation.html">EdgeCoordinatesTransformation</a></li>
+    <li class="navelem"><a class="el" href="classEdgeTransformation.html">EdgeTransformation</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

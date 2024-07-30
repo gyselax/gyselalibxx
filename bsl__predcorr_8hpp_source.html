@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('bsl__predcorr_8hpp_source.html',''); i
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        BSDomainP polar_domain(ddc::discrete_space&lt;BSplinesP&gt;().full_domain());</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <a class="code" href="structPolarSpline.html">SplinePolar</a> electrostatic_potential_coef(</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                PolarBSplinesRP::singular_domain&lt;PolarBSplinesRP&gt;(),</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                PolarBSplinesRP::singular_idx_range&lt;PolarBSplinesRP&gt;(),</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                BSDomainRP(radial_bsplines, polar_domain));</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        ddc::NullExtrapolationRule extrapolation_rule;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <a class="code" href="classPolarSplineEvaluator.html">PolarSplineEvaluator&lt;PolarBSplinesRP, ddc::NullExtrapolationRule&gt;</a> polar_spline_evaluator(</div>

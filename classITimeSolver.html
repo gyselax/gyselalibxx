@@ -125,15 +125,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab62c963f741ff88c6167c798392d8d20"><td class="memItemLeft" align="right" valign="top">virtual DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimeSolver.html#ab62c963f741ff88c6167c798392d8d20">operator()</a> (DSpanSpXVx allfdistribu, double time_start, double dt, int steps=1) const =0</td></tr>
 <tr class="memdesc:ab62c963f741ff88c6167c798392d8d20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for solving the Boltzmann-Poisson system.  <a href="classITimeSolver.html#ab62c963f741ff88c6167c798392d8d20">More...</a><br /></td></tr>
 <tr class="separator:ab62c963f741ff88c6167c798392d8d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08927c53d2c33753c80fccfcb51e0047"><td class="memItemLeft" align="right" valign="top"><a id="a08927c53d2c33753c80fccfcb51e0047"></a>
-virtual DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpXYVxVy allfdistribu, double dt, int steps=1) const =0</td></tr>
-<tr class="separator:a08927c53d2c33753c80fccfcb51e0047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66cc73d3765db94df87fc17cc215c01b"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimeSolver.html#a66cc73d3765db94df87fc17cc215c01b">operator()</a> (DFieldSpXYVxVy allfdistribu, double dt, int steps=1) const =0</td></tr>
+<tr class="memdesc:a66cc73d3765db94df87fc17cc215c01b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Vlasov-Poisson system.  <a href="classITimeSolver.html#a66cc73d3765db94df87fc17cc215c01b">More...</a><br /></td></tr>
+<tr class="separator:a66cc73d3765db94df87fc17cc215c01b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract class for solving a Boltzmann-Poisson system of equations. </p>
+<p>An abstract class for solving a Vlasov-Poisson system of equations. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab62c963f741ff88c6167c798392d8d20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab62c963f741ff88c6167c798392d8d20">&#9670;&nbsp;</a></span>operator()()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab62c963f741ff88c6167c798392d8d20">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,6 +192,61 @@ virtual DSpanSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>oper
 <dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the system. </dd></dl>
 
 <p>Implemented in <a class="el" href="classPredCorr.html#a5916671433abd2af3ee5e0ed3b8eae60">PredCorr</a>.</p>
+
+</div>
+</div>
+<a id="a66cc73d3765db94df87fc17cc215c01b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66cc73d3765db94df87fc17cc215c01b">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual DFieldSpXYVxVy ITimeSolver::operator() </td>
+          <td>(</td>
+          <td class="paramtype">DFieldSpXYVxVy&#160;</td>
+          <td class="paramname"><em>allfdistribu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>steps</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solves the Vlasov-Poisson system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>On input : the initial value of the distribution function. On output : the value of the distribution function after solving the Vlasov-Poisson system a given number of iterations. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The timestep. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">steps</td><td>The number of iterations to be performed by the predictor-corrector. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the system. </dd></dl>
+
+<p>Implemented in <a class="el" href="classPredCorr.html#afbad5baf6bfcce5c48b0cd47ce1de29d">PredCorr</a>.</p>
 
 </div>
 </div>

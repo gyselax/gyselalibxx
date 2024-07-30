@@ -106,16 +106,16 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2qnsolver_8hpp
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;chargedensitycalculator.hpp&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;chargedensitycalculator.hpp&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ipoisson_solver.hpp&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;iqnsolver.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">class </span><a class="code" href="classQNSolver.html">QNSolver</a> : <span class="keyword">public</span> <a class="code" href="classIQNSolver.html">IQNSolver</a></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">using</span> PoissonSolver = <a class="code" href="classIPoissonSolver.html">IPoissonSolver</a>&lt;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            IDomainXY,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            IDomainXY,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            IdxRangeXY,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            IdxRangeXY,</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            std::experimental::layout_right,</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keyword">typename</span> Kokkos::DefaultExecutionSpace::memory_space&gt;;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    PoissonSolver <span class="keyword">const</span>&amp; m_solve_poisson;</div>
@@ -126,18 +126,18 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2qnsolver_8hpp
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ~<a class="code" href="classQNSolver.html">QNSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classQNSolver.html#aa468e237e8cb2c752e45171eddaf8d75">   50</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classQNSolver.html#aa468e237e8cb2c752e45171eddaf8d75">operator()</a>(</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            DSpanXY electrostatic_potential,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            DSpanXY electric_field_x,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            DSpanXY electric_field_y,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            DViewSpXYVxVy allfdistribu) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classQNSolver.html#a7a295c1742a016b2f154a35a315a608c">   50</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classQNSolver.html#a7a295c1742a016b2f154a35a315a608c">operator()</a>(</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            DFieldXY electrostatic_potential,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            DFieldXY electric_field_x,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            DFieldXY electric_field_y,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            DConstFieldSpXYVxVy allfdistribu) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
 <div class="ttc" id="aclassIChargeDensityCalculator_html"><div class="ttname"><a href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></div><div class="ttdoc">A class which calculates the charge density.</div><div class="ttdef"><b>Definition:</b> ichargedensitycalculator.hpp:16</div></div>
 <div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdef"><b>Definition:</b> ipoisson_solver.hpp:9</div></div>
 <div class="ttc" id="aclassIQNSolver_html"><div class="ttname"><a href="classIQNSolver.html">IQNSolver</a></div><div class="ttdoc">Base class for a Quasi-Neutrality solver.</div><div class="ttdef"><b>Definition:</b> iqnsolver.hpp:13</div></div>
 <div class="ttc" id="aclassQNSolver_html"><div class="ttname"><a href="classQNSolver.html">QNSolver</a></div><div class="ttdoc">An operator which solves the Quasi-Neutrality equation using a fast Fourier transform.</div><div class="ttdef"><b>Definition:</b> qnsolver.hpp:22</div></div>
+<div class="ttc" id="aclassQNSolver_html_a7a295c1742a016b2f154a35a315a608c"><div class="ttname"><a href="classQNSolver.html#a7a295c1742a016b2f154a35a315a608c">QNSolver::operator()</a></div><div class="ttdeci">void operator()(DFieldXY electrostatic_potential, DFieldXY electric_field_x, DFieldXY electric_field_y, DConstFieldSpXYVxVy allfdistribu) const override</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
 <div class="ttc" id="aclassQNSolver_html_a8e24e91f5ed1c4bb590e93eb4f1f81ba"><div class="ttname"><a href="classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba">QNSolver::QNSolver</a></div><div class="ttdeci">QNSolver(PoissonSolver const &amp;solve_poisson, IChargeDensityCalculator const &amp;compute_rho)</div><div class="ttdoc">Construct the QNSolver operator.</div></div>
-<div class="ttc" id="aclassQNSolver_html_aa468e237e8cb2c752e45171eddaf8d75"><div class="ttname"><a href="classQNSolver.html#aa468e237e8cb2c752e45171eddaf8d75">QNSolver::operator()</a></div><div class="ttdeci">void operator()(DSpanXY electrostatic_potential, DSpanXY electric_field_x, DSpanXY electric_field_y, DViewSpXYVxVy allfdistribu) const override</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -1,7 +1,6 @@
 var NAVTREEINDEX5 =
 {
-"dir_15ba7e3bcb16c7ed7b7b7c9810b42a25.html":[15,0,7,0],
-"dir_1768338d22a236895abd99fb8317b81f.html":[15,0,12,2],
+"dir_1768338d22a236895abd99fb8317b81f.html":[15,0,12,1],
 "dir_198f4eba1c2ed3c02ad3281d01a546ac.html":[15,0,16],
 "dir_1d94e9375779727dd62c0acfd18de170.html":[15,0,6,2,3],
 "dir_21841c3627e393781c2c07b5dcb1ed74.html":[15,2],
@@ -57,7 +56,6 @@ var NAVTREEINDEX5 =
 "dir_d63f94c6fea620ecaa40680f440bf243.html":[15,0,8,4],
 "dir_da2f237b7bd857923650b6fc217c2993.html":[15,0,6,2],
 "dir_ddf03f4326ec75ccdd8992e1fdad5583.html":[15,1,0,0],
-"dir_e6145dbf25073ae9b52bad64393dd5e8.html":[15,0,12,1],
 "dir_eb1cd5727a7c74bc255fa4546c695614.html":[15,0,7,2],
 "dir_eb7da54727e91e3ad0949acc1ce0f18c.html":[15,0,12],
 "dir_f9e4c94b0e65b435cbfb10d37b215fd7.html":[15,0,12,0],
@@ -120,7 +118,8 @@ var NAVTREEINDEX5 =
 "docs_Using_git.html#autotoc_md20":[16,1],
 "docs_Using_git.html#docs_Using_git__Branches":[7,0],
 "docs_Using_git.html#docs_Using_git__Submodules":[7,1],
-"edge_8hpp_source.html":[15,0,12,1,1],
+"edge_8hpp_source.html":[15,0,12,0,0],
+"edge__transformation_8hpp_source.html":[15,0,12,0,1],
 "euler_8hpp_source.html":[15,0,17,1],
 "evaluator__2d_8hpp_source.html":[15,2,0,1,1],
 "fem__1d__poisson__solver_8hpp_source.html":[15,0,14,0],
@@ -182,7 +181,7 @@ var NAVTREEINDEX5 =
 "index.html#__Execution":[1],
 "initialization__Kelvin__Helmholtz_8hpp_source.html":[15,0,7,1,0],
 "input_8hpp_source.html":[15,0,10,0],
-"interface_8hpp_source.html":[15,0,12,1,2],
+"interface_8hpp_source.html":[15,0,12,0,2],
 "ionization_8hpp_source.html":[15,0,6,2,3,2],
 "ipoisson__solver_8hpp_source.html":[15,0,14,2],
 "ireactionrate_8hpp_source.html":[15,0,6,2,3,3],
@@ -213,7 +212,7 @@ var NAVTREEINDEX5 =
 "mpilayout_8hpp_source.html":[15,0,11,2],
 "mpitools_8hpp_source.html":[15,0,11,3],
 "mpitransposealltoall_8hpp_source.html":[15,0,11,4],
-"multipatch__spline__builder_8hpp_source.html":[15,0,12,2,0],
+"multipatch__spline__builder_8hpp_source.html":[15,0,12,1,0],
 "neumann__spline__quadrature_8hpp.html":[15,0,15,1],
 "neumann__spline__quadrature_8hpp.html#a76519191c7b9a4df9bbf3da7e0cb025f":[15,0,15,1,0],
 "neumann__spline__quadrature_8hpp.html#ae2329a7e23fe06ca7089ac9748e3b4d0":[15,0,15,1,1],
@@ -224,7 +223,7 @@ var NAVTREEINDEX5 =
 "output_8hpp_source.html":[15,0,10,1],
 "pages.html":[],
 "paraconfpp_8hpp_source.html":[15,0,13,0],
-"patch_8hpp_source.html":[15,0,12,0,0],
+"patch_8hpp_source.html":[15,0,12,0,3],
 "poisson__like__rhs__function_8hpp_source.html":[15,0,4,5,1],
 "polar__bsplines_8hpp_source.html":[15,2,0,0,0,16],
 "polar__poisson_2params_8yaml_8hpp_source.html":[15,1,0,3,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX5 =
 "rk4_8hpp_source.html":[15,0,17,5],
 "simpson__quadrature_8hpp_source.html":[15,0,15,4],
 "simulations.html":[8],
-"simulations_geometryRTheta.html":[8,0]
+"simulations_geometryRTheta.html":[8,0],
+"simulations_geometryRTheta_diocotron.html":[8,0,0]
 };

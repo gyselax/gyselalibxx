@@ -149,12 +149,12 @@ PointSampling</h1>
 <li>NonUniformPointSampling</li>
 </ul>
 <p>A uniform point sampling is a collection of points which are equidistant, it is therefore defined with an origin and a step. In contrast the points found in a non-uniform point sampling are arbitrary. This kind of sampling must therefore be initialised from a list of points.</p>
-<p>In Gyselalibxx the alias <code><a class="el" href="structIDimX.html">IDimX</a></code> is usually defined in <code>geometry.hpp</code> to describe a point sampling along the dimension <a class="el" href="structX.html" title="First continuous dimension of patch PatchIdx.">X</a>. The "I" in <code><a class="el" href="structIDimX.html">IDimX</a></code> stands for "Interpolation". This is because the function is only stored at the interpolation points. The point sampling contains these interpolation points.</p>
+<p>In Gyselalibxx the alias <code><a class="el" href="structIDimX.html">IDimX</a></code> is usually defined in <code>geometry.hpp</code> to describe a point sampling along the dimension <a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a>. The "I" in <code><a class="el" href="structIDimX.html">IDimX</a></code> stands for "Interpolation". This is because the function is only stored at the interpolation points. The point sampling contains these interpolation points.</p>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__DiscreteElement"></a>
 DiscreteElement</h1>
 <p>The simplest type to understand is <code>ddc::DiscreteElement</code>. This corresponds to the index of the point in the point sampling. E.g. the point <code>x_i</code> in the point sampling can be indexed using the object <code>ddc::DiscreteElement&lt;<a class="el" href="structIDimX.html">IDimX</a>&gt;(i)</code>. A <code>ddc::DiscreteElement</code> is therefore roughly equivalent to an integer. Compared to an integer, it additionally contains information about the physical direction being examined. This allows the compiler to raise errors if typos/copy-paste errors lead to the wrong dimension being used.</p>
 <p>As a discrete concept this class does not take the continuous dimension as a template parameter, rather it takes the discrete point sampling instead.</p>
-<p>In Gyselalibxx the alias <code>IndexX</code> is usually defined in <code>geometry.hpp</code> to describe the index of a point sampling along the dimension <a class="el" href="structX.html" title="First continuous dimension of patch PatchIdx.">X</a>.</p>
+<p>In Gyselalibxx the alias <code>IndexX</code> is usually defined in <code>geometry.hpp</code> to describe the index of a point sampling along the dimension <a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a>.</p>
 <p>We can also create multi-dimensional indices. E.g. the point <code>(x_i, y_j)</code> can be indexed using the object <code>ddc::DiscreteElement&lt;<a class="el" href="structIDimX.html">IDimX</a>, <a class="el" href="structIDimY.html">IDimY</a>&gt;(i, j)</code></p>
 <p>It is also possible to extract an index on a subset of the original dimensions using <code>ddc::select&lt;IDimOfInterest&gt;(my_nd_index)</code>.</p>
 <p>If a point sampling has been initialised using the function <code>ddc::init_discrete_space</code>, a <code>ddc::DiscreteElement</code> defined on that sampling can be used to find the coordinates of the points in the point sampling. This is done using the function <code>ddc::coordinate</code>.</p>
@@ -171,7 +171,7 @@ DiscreteVector</h1>
 <div class="line">ddc::DiscreteElement&lt;IDimX&gt; j(6);</div>
 <div class="line">ddc::DiscreteVector&lt;IDimX&gt; k = j-i;</div>
 <div class="line">i += k;</div>
-</div><!-- fragment --><p>In Gyselalibxx the alias <code>IVectX</code> is usually defined in <code>geometry.hpp</code> to describe the vector from one element of a point sampling along the dimension <a class="el" href="structX.html" title="First continuous dimension of patch PatchIdx.">X</a> to another.</p>
+</div><!-- fragment --><p>In Gyselalibxx the alias <code>IVectX</code> is usually defined in <code>geometry.hpp</code> to describe the vector from one element of a point sampling along the dimension <a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a> to another.</p>
 <p>As with <code>ddc::DiscreteElement</code>s, a <code>ddc::DiscreteVector</code> can be multi-dimensional and lower dimension <code>ddc::DiscreteVector</code> objects can be extracted using <code>ddc::select&lt;IDimOfInterest&gt;(my_nd_vector)</code>.</p>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__DiscreteDomain"></a>
 DiscreteDomain</h1>

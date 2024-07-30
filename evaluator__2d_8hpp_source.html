@@ -104,86 +104,95 @@ $(document).ready(function(){initNavTree('evaluator__2d_8hpp_source.html',''); i
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="structEvaluator2D.html">    5</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structEvaluator2D.html">Evaluator2D</a></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Eval1, <span class="keyword">class</span> Eval2&gt;</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classEvaluator2D_1_1Evaluator.html">    8</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classEvaluator2D_1_1Evaluator.html">Evaluator</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        Eval1 eval_func1;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        Eval2 eval_func2;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> Domain&gt;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classEvaluator2D_1_1Evaluator.html">Evaluator</a>(Domain domain)</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            : eval_func1(ddc::select&lt;typename Eval1::Dim&gt;(domain))</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            , eval_func2(ddc::select&lt;typename Eval2::Dim&gt;(domain))</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        }</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">double</span> operator()(<span class="keywordtype">double</span> <span class="keyword">const</span> x, <span class="keywordtype">double</span> <span class="keyword">const</span> y) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keywordflow">return</span> eval_func1(x) * eval_func2(y);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        }</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim1, <span class="keyword">class</span> DDim2&gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">double</span> operator()(ddc::Coordinate&lt;DDim1, DDim2&gt; <span class="keyword">const</span> x) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">return</span> eval_func1(ddc::get&lt;DDim1&gt;(x)) * eval_func2(ddc::get&lt;DDim2&gt;(x));</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim1, <span class="keyword">class</span> DDim2&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">void</span> operator()(ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;DDim1, DDim2&gt;&gt; chunk)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span>&amp; domain = chunk.domain();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            ddc::for_each(domain, [=](ddc::DiscreteElement&lt;DDim1, DDim2&gt; <span class="keyword">const</span> i) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                chunk(i) = eval_func1(ddc::coordinate(ddc::select&lt;DDim1&gt;(i)))</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                           * eval_func2(ddc::coordinate(ddc::select&lt;DDim2&gt;(i)));</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            });</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">double</span> deriv(<span class="keywordtype">double</span> <span class="keyword">const</span> x, <span class="keywordtype">double</span> <span class="keyword">const</span> y, <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_x, <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_y)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">return</span> eval_func1.deriv(x, derivative_x) * eval_func2.deriv(y, derivative_y);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim1, <span class="keyword">class</span> DDim2&gt;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">double</span> deriv(</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                ddc::Coordinate&lt;DDim1, DDim2&gt; <span class="keyword">const</span> x,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_x,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_y) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordflow">return</span> eval_func1.deriv(ddc::get&lt;DDim1&gt;(x), derivative_x)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                   * eval_func2.deriv(ddc::get&lt;DDim2&gt;(x), derivative_y);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim1, <span class="keyword">class</span> DDim2&gt;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">void</span> deriv(</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;DDim1, DDim2&gt;&gt; chunk,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_x,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_y)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span>&amp; domain = chunk.domain();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            ddc::for_each(domain, [=](ddc::DiscreteElement&lt;DDim1, DDim2&gt; <span class="keyword">const</span> i) {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                chunk(i) = eval_func1.deriv(ddc::coordinate(ddc::select&lt;DDim1&gt;(i)), derivative_x)</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                           * eval_func2.deriv(ddc::coordinate(ddc::select&lt;DDim2&gt;(i)), derivative_y);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            });</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">double</span> max_norm(<span class="keywordtype">int</span> diff1 = 0, <span class="keywordtype">int</span> diff2 = 0)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordflow">return</span> eval_func1.max_norm(diff1) * eval_func2.max_norm(diff2);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    };</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
-<div class="ttc" id="aclassEvaluator2D_1_1Evaluator_html"><div class="ttname"><a href="classEvaluator2D_1_1Evaluator.html">Evaluator2D::Evaluator</a></div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:9</div></div>
-<div class="ttc" id="astructEvaluator2D_html"><div class="ttname"><a href="structEvaluator2D.html">Evaluator2D</a></div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:6</div></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="structEvaluator2D.html">    9</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structEvaluator2D.html">Evaluator2D</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Eval1, <span class="keyword">class</span> Eval2&gt;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classEvaluator2D_1_1Evaluator.html">   15</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classEvaluator2D_1_1Evaluator.html">Evaluator</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        Eval1 eval_func1;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        Eval2 eval_func2;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> IdxRange&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classEvaluator2D_1_1Evaluator.html#a29d57d93cf49676fd1f051a1fa11071f">   29</a></span>&#160;        <a class="code" href="classEvaluator2D_1_1Evaluator.html#a29d57d93cf49676fd1f051a1fa11071f">Evaluator</a>(IdxRange idx_range)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            : eval_func1(ddc::select&lt;typename Eval1::Dim&gt;(idx_range))</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            , eval_func2(ddc::select&lt;typename Eval2::Dim&gt;(idx_range))</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classEvaluator2D_1_1Evaluator.html#a2f34faff2f95045b3d0d0bda617b7ff4">   41</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classEvaluator2D_1_1Evaluator.html#a2f34faff2f95045b3d0d0bda617b7ff4">operator()</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> x, <span class="keywordtype">double</span> <span class="keyword">const</span> y) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">return</span> eval_func1(x) * eval_func2(y);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> Gr<span class="keywordtype">id</span>1, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>2&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classEvaluator2D_1_1Evaluator.html#a52c53285c56d8a940f5edd13c05eb040">   52</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classEvaluator2D_1_1Evaluator.html#a52c53285c56d8a940f5edd13c05eb040">operator()</a>(ddc::Coordinate&lt;Grid1, Grid2&gt; <span class="keyword">const</span> x) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">return</span> eval_func1(ddc::get&lt;Grid1&gt;(x)) * eval_func2(ddc::get&lt;Grid2&gt;(x));</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> Gr<span class="keywordtype">id</span>1, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>2&gt;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classEvaluator2D_1_1Evaluator.html#a4e55b2215bc57bea73fa93988f9d7784">   62</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classEvaluator2D_1_1Evaluator.html#a4e55b2215bc57bea73fa93988f9d7784">operator()</a>(ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;Grid1, Grid2&gt;&gt; chunk)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span>&amp; idx_range = chunk.idx_range();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            ddc::for_each(idx_range, [=](ddc::DiscreteElement&lt;Grid1, Grid2&gt; <span class="keyword">const</span> i) {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                chunk(i) = eval_func1(ddc::coordinate(ddc::select&lt;Grid1&gt;(i)))</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                           * eval_func2(ddc::coordinate(ddc::select&lt;Grid2&gt;(i)));</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            });</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classEvaluator2D_1_1Evaluator.html#ac77c359f264aa9ece31f01aed3b4c0cd">   80</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classEvaluator2D_1_1Evaluator.html#ac77c359f264aa9ece31f01aed3b4c0cd">deriv</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> x, <span class="keywordtype">double</span> <span class="keyword">const</span> y, <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_x, <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_y)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">return</span> eval_func1.deriv(x, derivative_x) * eval_func2.deriv(y, derivative_y);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> Gr<span class="keywordtype">id</span>1, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>2&gt;</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classEvaluator2D_1_1Evaluator.html#aa68cdebe64726953c9f8b5b7d6e69767">   94</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classEvaluator2D_1_1Evaluator.html#aa68cdebe64726953c9f8b5b7d6e69767">deriv</a>(</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                ddc::Coordinate&lt;Grid1, Grid2&gt; <span class="keyword">const</span> x,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_x,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_y) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">return</span> eval_func1.deriv(ddc::get&lt;Grid1&gt;(x), derivative_x)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                   * eval_func2.deriv(ddc::get&lt;Grid2&gt;(x), derivative_y);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> Gr<span class="keywordtype">id</span>1, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>2&gt;</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classEvaluator2D_1_1Evaluator.html#a476df5e2e052e9b5ea4b232e5c45a24f">  110</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classEvaluator2D_1_1Evaluator.html#a476df5e2e052e9b5ea4b232e5c45a24f">deriv</a>(</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                ddc::ChunkSpan&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;Grid1, Grid2&gt;&gt; chunk,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_x,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                <span class="keywordtype">int</span> <span class="keyword">const</span> derivative_y)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span>&amp; idx_range = chunk.idx_range();</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            ddc::for_each(idx_range, [=](ddc::DiscreteElement&lt;Grid1, Grid2&gt; <span class="keyword">const</span> i) {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                chunk(i) = eval_func1.deriv(ddc::coordinate(ddc::select&lt;Grid1&gt;(i)), derivative_x)</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                           * eval_func2.deriv(ddc::coordinate(ddc::select&lt;Grid2&gt;(i)), derivative_y);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            });</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classEvaluator2D_1_1Evaluator.html#a0afa5c6afaf7c68c199d1cc1d0e8eacf">  129</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classEvaluator2D_1_1Evaluator.html#a0afa5c6afaf7c68c199d1cc1d0e8eacf">max_norm</a>(<span class="keywordtype">int</span> diff1 = 0, <span class="keywordtype">int</span> diff2 = 0)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <span class="keywordflow">return</span> eval_func1.max_norm(diff1) * eval_func2.max_norm(diff2);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    };</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;};</div>
+<div class="ttc" id="aclassEvaluator2D_1_1Evaluator_html"><div class="ttname"><a href="classEvaluator2D_1_1Evaluator.html">Evaluator2D::Evaluator</a></div><div class="ttdoc">An analytical 2D evaluator combining 2 1D evaluators, to be used for exact comparisons in tests.</div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:16</div></div>
+<div class="ttc" id="aclassEvaluator2D_1_1Evaluator_html_a0afa5c6afaf7c68c199d1cc1d0e8eacf"><div class="ttname"><a href="classEvaluator2D_1_1Evaluator.html#a0afa5c6afaf7c68c199d1cc1d0e8eacf">Evaluator2D::Evaluator::max_norm</a></div><div class="ttdeci">double max_norm(int diff1=0, int diff2=0) const</div><div class="ttdoc">The maximum norm of this equation.</div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:129</div></div>
+<div class="ttc" id="aclassEvaluator2D_1_1Evaluator_html_a29d57d93cf49676fd1f051a1fa11071f"><div class="ttname"><a href="classEvaluator2D_1_1Evaluator.html#a29d57d93cf49676fd1f051a1fa11071f">Evaluator2D::Evaluator::Evaluator</a></div><div class="ttdeci">Evaluator(IdxRange idx_range)</div><div class="ttdoc">A constructor taking the range over which the evaluator will be applied.</div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:29</div></div>
+<div class="ttc" id="aclassEvaluator2D_1_1Evaluator_html_a2f34faff2f95045b3d0d0bda617b7ff4"><div class="ttname"><a href="classEvaluator2D_1_1Evaluator.html#a2f34faff2f95045b3d0d0bda617b7ff4">Evaluator2D::Evaluator::operator()</a></div><div class="ttdeci">double operator()(double const x, double const y) const noexcept</div><div class="ttdoc">Evaluate the equation at (x,y)</div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:41</div></div>
+<div class="ttc" id="aclassEvaluator2D_1_1Evaluator_html_a476df5e2e052e9b5ea4b232e5c45a24f"><div class="ttname"><a href="classEvaluator2D_1_1Evaluator.html#a476df5e2e052e9b5ea4b232e5c45a24f">Evaluator2D::Evaluator::deriv</a></div><div class="ttdeci">void deriv(ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1, Grid2 &gt;&gt; chunk, int const derivative_x, int const derivative_y) const</div><div class="ttdoc">Evaluate the derivative of the equation at the positions on which chunk is defined.</div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:110</div></div>
+<div class="ttc" id="aclassEvaluator2D_1_1Evaluator_html_a4e55b2215bc57bea73fa93988f9d7784"><div class="ttname"><a href="classEvaluator2D_1_1Evaluator.html#a4e55b2215bc57bea73fa93988f9d7784">Evaluator2D::Evaluator::operator()</a></div><div class="ttdeci">void operator()(ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1, Grid2 &gt;&gt; chunk) const</div><div class="ttdoc">Evaluate the equation at the positions on which chunk is defined.</div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:62</div></div>
+<div class="ttc" id="aclassEvaluator2D_1_1Evaluator_html_a52c53285c56d8a940f5edd13c05eb040"><div class="ttname"><a href="classEvaluator2D_1_1Evaluator.html#a52c53285c56d8a940f5edd13c05eb040">Evaluator2D::Evaluator::operator()</a></div><div class="ttdeci">double operator()(ddc::Coordinate&lt; Grid1, Grid2 &gt; const x) const noexcept</div><div class="ttdoc">Evaluate the equation at .</div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:52</div></div>
+<div class="ttc" id="aclassEvaluator2D_1_1Evaluator_html_aa68cdebe64726953c9f8b5b7d6e69767"><div class="ttname"><a href="classEvaluator2D_1_1Evaluator.html#aa68cdebe64726953c9f8b5b7d6e69767">Evaluator2D::Evaluator::deriv</a></div><div class="ttdeci">double deriv(ddc::Coordinate&lt; Grid1, Grid2 &gt; const x, int const derivative_x, int const derivative_y) const noexcept</div><div class="ttdoc">Evaluate the derivative of the equation at .</div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:94</div></div>
+<div class="ttc" id="aclassEvaluator2D_1_1Evaluator_html_ac77c359f264aa9ece31f01aed3b4c0cd"><div class="ttname"><a href="classEvaluator2D_1_1Evaluator.html#ac77c359f264aa9ece31f01aed3b4c0cd">Evaluator2D::Evaluator::deriv</a></div><div class="ttdeci">double deriv(double const x, double const y, int const derivative_x, int const derivative_y) const noexcept</div><div class="ttdoc">Evaluate the derivative of the equation at (x,y)</div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:80</div></div>
+<div class="ttc" id="astructEvaluator2D_html"><div class="ttname"><a href="structEvaluator2D.html">Evaluator2D</a></div><div class="ttdoc">A wrapper around a 2D Evaluator that can be used in tests.</div><div class="ttdef"><b>Definition:</b> evaluator_2d.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

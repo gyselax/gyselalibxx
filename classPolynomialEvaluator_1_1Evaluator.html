@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: PolynomialEvaluator::Evaluator&lt; DDim, Degree &gt; Class Template Reference</title>
+<title>Gyselalib++: PolynomialEvaluator::Evaluator&lt; Grid1D, Degree &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,38 +104,293 @@ $(document).ready(function(){initNavTree('classPolynomialEvaluator_1_1Evaluator.
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classPolynomialEvaluator_1_1Evaluator-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">PolynomialEvaluator::Evaluator&lt; DDim, Degree &gt; Class Template Reference</div>  </div>
+<div class="title">PolynomialEvaluator::Evaluator&lt; Grid1D, Degree &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An analytical evaluator to be used for exact comparisons in tests.  
+ <a href="classPolynomialEvaluator_1_1Evaluator.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a848f4c7787198710c80fb166da0c7836"><td class="memItemLeft" align="right" valign="top"><a id="a848f4c7787198710c80fb166da0c7836"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Dim</b> = DDim</td></tr>
-<tr class="separator:a848f4c7787198710c80fb166da0c7836"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4737bbc80764b64d948776e30447581e"><td class="memItemLeft" align="right" valign="top"><a id="a4737bbc80764b64d948776e30447581e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolynomialEvaluator_1_1Evaluator.html#a4737bbc80764b64d948776e30447581e">Dim</a> = Grid1D</td></tr>
+<tr class="memdesc:a4737bbc80764b64d948776e30447581e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The grid dimension. <br /></td></tr>
+<tr class="separator:a4737bbc80764b64d948776e30447581e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a822e2a54504f858a2ba1fb1384cc84a9"><td class="memTemplParams" colspan="2"><a id="a822e2a54504f858a2ba1fb1384cc84a9"></a>
-template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a822e2a54504f858a2ba1fb1384cc84a9"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Evaluator</b> (Domain domain)</td></tr>
-<tr class="separator:a822e2a54504f858a2ba1fb1384cc84a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa790a24edcc4c163138142bdefb76270"><td class="memItemLeft" align="right" valign="top"><a id="aa790a24edcc4c163138142bdefb76270"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (double const x) const noexcept</td></tr>
-<tr class="separator:aa790a24edcc4c163138142bdefb76270"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6cb3fb581c7354d29221b713d5a3ce2"><td class="memItemLeft" align="right" valign="top"><a id="ad6cb3fb581c7354d29221b713d5a3ce2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; chunk) const</td></tr>
-<tr class="separator:ad6cb3fb581c7354d29221b713d5a3ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d8527891053b09e37cd1de16626eedb"><td class="memItemLeft" align="right" valign="top"><a id="a2d8527891053b09e37cd1de16626eedb"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>deriv</b> (double const x, int const derivative) const noexcept</td></tr>
-<tr class="separator:a2d8527891053b09e37cd1de16626eedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae30bddc5dbd959f07ecbec265f806eec"><td class="memItemLeft" align="right" valign="top"><a id="ae30bddc5dbd959f07ecbec265f806eec"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>deriv</b> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; chunk, int const derivative) const</td></tr>
-<tr class="separator:ae30bddc5dbd959f07ecbec265f806eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56f0f40a4d3ff39b142a58df34956e39"><td class="memItemLeft" align="right" valign="top"><a id="a56f0f40a4d3ff39b142a58df34956e39"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>max_norm</b> (int diff=0) const</td></tr>
-<tr class="separator:a56f0f40a4d3ff39b142a58df34956e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac351d1196a4139ab5d5ffb892a11c772"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
+<tr class="memitem:ac351d1196a4139ab5d5ffb892a11c772"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolynomialEvaluator_1_1Evaluator.html#ac351d1196a4139ab5d5ffb892a11c772">Evaluator</a> (IdxRange idx_range)</td></tr>
+<tr class="memdesc:ac351d1196a4139ab5d5ffb892a11c772"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor taking the range over which the evaluator will be applied.  <a href="classPolynomialEvaluator_1_1Evaluator.html#ac351d1196a4139ab5d5ffb892a11c772">More...</a><br /></td></tr>
+<tr class="separator:ac351d1196a4139ab5d5ffb892a11c772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d682cf47c575b13250525acff8a1d97"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolynomialEvaluator_1_1Evaluator.html#a6d682cf47c575b13250525acff8a1d97">operator()</a> (double const x) const noexcept</td></tr>
+<tr class="memdesc:a6d682cf47c575b13250525acff8a1d97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the equation at x.  <a href="classPolynomialEvaluator_1_1Evaluator.html#a6d682cf47c575b13250525acff8a1d97">More...</a><br /></td></tr>
+<tr class="separator:a6d682cf47c575b13250525acff8a1d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0f1582d25f41381bc18b9c0fcb74f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolynomialEvaluator_1_1Evaluator.html#a7e0f1582d25f41381bc18b9c0fcb74f4">operator()</a> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D &gt;&gt; chunk) const</td></tr>
+<tr class="memdesc:a7e0f1582d25f41381bc18b9c0fcb74f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the equation at the positions on which chunk is defined.  <a href="classPolynomialEvaluator_1_1Evaluator.html#a7e0f1582d25f41381bc18b9c0fcb74f4">More...</a><br /></td></tr>
+<tr class="separator:a7e0f1582d25f41381bc18b9c0fcb74f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8922927763015c7b51028ea776d61e7f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolynomialEvaluator_1_1Evaluator.html#a8922927763015c7b51028ea776d61e7f">deriv</a> (double const x, int const derivative) const noexcept</td></tr>
+<tr class="memdesc:a8922927763015c7b51028ea776d61e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the derivative of the equation at x.  <a href="classPolynomialEvaluator_1_1Evaluator.html#a8922927763015c7b51028ea776d61e7f">More...</a><br /></td></tr>
+<tr class="separator:a8922927763015c7b51028ea776d61e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28fd26212bc26674d0702974bccf6244"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolynomialEvaluator_1_1Evaluator.html#a28fd26212bc26674d0702974bccf6244">deriv</a> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D &gt;&gt; chunk, int const derivative) const</td></tr>
+<tr class="memdesc:a28fd26212bc26674d0702974bccf6244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the derivative of the equation at the positions on which chunk is defined.  <a href="classPolynomialEvaluator_1_1Evaluator.html#a28fd26212bc26674d0702974bccf6244">More...</a><br /></td></tr>
+<tr class="separator:a28fd26212bc26674d0702974bccf6244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1e5c447b4e7ab6bf78f24df369deb26"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolynomialEvaluator_1_1Evaluator.html#ae1e5c447b4e7ab6bf78f24df369deb26">max_norm</a> (int diff=0) const</td></tr>
+<tr class="memdesc:ae1e5c447b4e7ab6bf78f24df369deb26"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum norm of this equation.  <a href="classPolynomialEvaluator_1_1Evaluator.html#ae1e5c447b4e7ab6bf78f24df369deb26">More...</a><br /></td></tr>
+<tr class="separator:ae1e5c447b4e7ab6bf78f24df369deb26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class Grid1D, std::size_t Degree&gt;<br />
+class PolynomialEvaluator::Evaluator&lt; Grid1D, Degree &gt;</h3>
+
+<p>An analytical evaluator to be used for exact comparisons in tests. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac351d1196a4139ab5d5ffb892a11c772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac351d1196a4139ab5d5ffb892a11c772">&#9670;&nbsp;</a></span>Evaluator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D , std::size_t Degree&gt; </div>
+<div class="memtemplate">
+template&lt;class IdxRange &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPolynomialEvaluator_1_1Evaluator.html">PolynomialEvaluator::Evaluator</a>&lt; Grid1D, Degree &gt;::<a class="el" href="classPolynomialEvaluator_1_1Evaluator.html">Evaluator</a> </td>
+          <td>(</td>
+          <td class="paramtype">IdxRange&#160;</td>
+          <td class="paramname"><em>idx_range</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A constructor taking the range over which the evaluator will be applied. </p>
+<p>The polynomial is initialised with random values between 0.0 and 1.0</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The range of the grid over which the evaluator will be applied. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6d682cf47c575b13250525acff8a1d97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d682cf47c575b13250525acff8a1d97">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D , std::size_t Degree&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classPolynomialEvaluator_1_1Evaluator.html">PolynomialEvaluator::Evaluator</a>&lt; Grid1D, Degree &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">double const&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluate the equation at x. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The position where the equation is evaluated. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The result of the equation. </dd></dl>
+
+</div>
+</div>
+<a id="a7e0f1582d25f41381bc18b9c0fcb74f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e0f1582d25f41381bc18b9c0fcb74f4">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D , std::size_t Degree&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPolynomialEvaluator_1_1Evaluator.html">PolynomialEvaluator::Evaluator</a>&lt; Grid1D, Degree &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D &gt;&gt;&#160;</td>
+          <td class="paramname"><em>chunk</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluate the equation at the positions on which chunk is defined. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">chunk</td><td>The result of the equation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8922927763015c7b51028ea776d61e7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8922927763015c7b51028ea776d61e7f">&#9670;&nbsp;</a></span>deriv() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D , std::size_t Degree&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classPolynomialEvaluator_1_1Evaluator.html">PolynomialEvaluator::Evaluator</a>&lt; Grid1D, Degree &gt;::deriv </td>
+          <td>(</td>
+          <td class="paramtype">double const&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const&#160;</td>
+          <td class="paramname"><em>derivative</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluate the derivative of the equation at x. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The position where the equation is evaluated. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivative</td><td>The order of the derivative. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The result of the equation. </dd></dl>
+
+</div>
+</div>
+<a id="a28fd26212bc26674d0702974bccf6244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28fd26212bc26674d0702974bccf6244">&#9670;&nbsp;</a></span>deriv() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D , std::size_t Degree&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPolynomialEvaluator_1_1Evaluator.html">PolynomialEvaluator::Evaluator</a>&lt; Grid1D, Degree &gt;::deriv </td>
+          <td>(</td>
+          <td class="paramtype">ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D &gt;&gt;&#160;</td>
+          <td class="paramname"><em>chunk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const&#160;</td>
+          <td class="paramname"><em>derivative</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluate the derivative of the equation at the positions on which chunk is defined. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">chunk</td><td>The result of the equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivative</td><td>The order of the derivative. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae1e5c447b4e7ab6bf78f24df369deb26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1e5c447b4e7ab6bf78f24df369deb26">&#9670;&nbsp;</a></span>max_norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D , std::size_t Degree&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classPolynomialEvaluator_1_1Evaluator.html">PolynomialEvaluator::Evaluator</a>&lt; Grid1D, Degree &gt;::max_norm </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>diff</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The maximum norm of this equation. </p>
+<p>Used for normalisation. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">diff</td><td>The derivative whose max norm should be returned. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The maximum value of the infinite norm. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/tests/<a class="el" href="polynomial__evaluator_8hpp_source.html">polynomial_evaluator.hpp</a></li>
 </ul>

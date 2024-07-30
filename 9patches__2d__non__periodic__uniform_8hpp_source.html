@@ -123,27 +123,27 @@ $(document).ready(function(){initNavTree('9patches__2d__non__periodic__uniform_8
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// CONTINUOUS DIMENSIONS -------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structX.html">   25</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structX.html">X</a></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">struct </span><a class="code" href="structX.html">X</a></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structX.html#a034232396ec4375ad6b44143e61ae3d2">   28</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structX.html#a034232396ec4375ad6b44143e61ae3d2">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structX.html#a90f5fa54f0de0cd20876a9d5f8036a0a">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structY.html">   36</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structY.html">Y</a></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">struct </span><a class="code" href="structY.html">Y</a></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structY.html#aa1002adca43dc4c336f518dba76a4169">   39</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structY.html#aa1002adca43dc4c336f518dba76a4169">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structY.html#a0f421b842561a692889a5ea3e426d44a">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// DISCRETE DIMENSIONS ---------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="structGridX.html">   50</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridX.html">GridX</a> : ddc::UniformPointSampling&lt;X&lt;PatchIdx&gt;&gt;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">struct </span><a class="code" href="structGridX.html">GridX</a> : ddc::UniformPointSampling&lt;X&lt;PatchIdx&gt;&gt;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structGridY.html">   59</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridY.html">GridY</a> : ddc::UniformPointSampling&lt;Y&lt;PatchIdx&gt;&gt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">struct </span><a class="code" href="structGridY.html">GridY</a> : ddc::UniformPointSampling&lt;Y&lt;PatchIdx&gt;&gt;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
@@ -185,13 +185,13 @@ $(document).ready(function(){initNavTree('9patches__2d__non__periodic__uniform_8
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        TypeSeq&lt;Patch1, Patch2, Patch3, Patch4, Patch5, Patch6, Patch7, Patch8, Patch9&gt;;</div>
 <div class="ttc" id="astructBSplinesX_html"><div class="ttname"><a href="structBSplinesX.html">BSplinesX</a></div><div class="ttdoc">First spline dimension of patch PatchIdx.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:69</div></div>
 <div class="ttc" id="astructBSplinesY_html"><div class="ttname"><a href="structBSplinesY.html">BSplinesY</a></div><div class="ttdoc">Second spline dimension of patch PatchIdx.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:60</div></div>
-<div class="ttc" id="astructGridX_html"><div class="ttname"><a href="structGridX.html">GridX</a></div><div class="ttdoc">Points sequence on the second logical dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 9patches_2d_non_periodic_uniform.hpp:51</div></div>
-<div class="ttc" id="astructGridY_html"><div class="ttname"><a href="structGridY.html">GridY</a></div><div class="ttdoc">Points sequence on the second logical dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 9patches_2d_non_periodic_uniform.hpp:60</div></div>
+<div class="ttc" id="astructGridX_html"><div class="ttname"><a href="structGridX.html">GridX</a></div><div class="ttdoc">Points sequence on the second logical dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:123</div></div>
+<div class="ttc" id="astructGridY_html"><div class="ttname"><a href="structGridY.html">GridY</a></div><div class="ttdoc">Points sequence on the second logical dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:126</div></div>
 <div class="ttc" id="astructPatch_html"><div class="ttname"><a href="structPatch.html">Patch</a></div><div class="ttdoc">Base tag for a patch.</div><div class="ttdef"><b>Definition:</b> patch.hpp:13</div></div>
-<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">First continuous dimension of patch PatchIdx.</div><div class="ttdef"><b>Definition:</b> 9patches_2d_non_periodic_uniform.hpp:26</div></div>
-<div class="ttc" id="astructX_html_a034232396ec4375ad6b44143e61ae3d2"><div class="ttname"><a href="structX.html#a034232396ec4375ad6b44143e61ae3d2">X::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 9patches_2d_non_periodic_uniform.hpp:28</div></div>
-<div class="ttc" id="astructY_html"><div class="ttname"><a href="structY.html">Y</a></div><div class="ttdoc">Second continuous dimension of patch PatchIdx.</div><div class="ttdef"><b>Definition:</b> 9patches_2d_non_periodic_uniform.hpp:37</div></div>
-<div class="ttc" id="astructY_html_aa1002adca43dc4c336f518dba76a4169"><div class="ttname"><a href="structY.html#aa1002adca43dc4c336f518dba76a4169">Y::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 9patches_2d_non_periodic_uniform.hpp:39</div></div>
+<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">A class which describes the real space in the first spatial direction X.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:17</div></div>
+<div class="ttc" id="astructX_html_a90f5fa54f0de0cd20876a9d5f8036a0a"><div class="ttname"><a href="structX.html#a90f5fa54f0de0cd20876a9d5f8036a0a">X::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">A boolean indicating if the dimension is periodic.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:21</div></div>
+<div class="ttc" id="astructY_html"><div class="ttname"><a href="structY.html">Y</a></div><div class="ttdoc">A class which describes the real space in the second spatial direction Y.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:28</div></div>
+<div class="ttc" id="astructY_html_a0f421b842561a692889a5ea3e426d44a"><div class="ttname"><a href="structY.html#a0f421b842561a692889a5ea3e426d44a">Y::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">A boolean indicating if the dimension is periodic.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

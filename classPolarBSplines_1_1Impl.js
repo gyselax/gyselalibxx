@@ -22,6 +22,6 @@ var classPolarBSplines_1_1Impl =
     [ "integrals", "classPolarBSplines_1_1Impl.html#a8f35ac954fcfde1c487211b1994fff6e", null ],
     [ "nbasis", "classPolarBSplines_1_1Impl.html#a643dbd16f0e27d86e46a2be64c2e03bc", null ],
     [ "full_domain", "classPolarBSplines_1_1Impl.html#a69daea6ba6a3e7bcb43879ac7b80beff", null ],
-    [ "tensor_bspline_domain", "classPolarBSplines_1_1Impl.html#a2e0b8794aae2b14ebe4dfdd0d829b2de", null ],
+    [ "tensor_bspline_idx_range", "classPolarBSplines_1_1Impl.html#a40c3d12d082fac6be41476e692fcd96d", null ],
     [ "Impl", "classPolarBSplines_1_1Impl.html#adcaf2527acc2c7a0a18f741240082b56", null ]
 ];

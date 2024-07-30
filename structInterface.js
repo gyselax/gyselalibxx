@@ -1,7 +1,7 @@
 var structInterface =
 [
-    [ "get_edge", "structInterface.html#a228de48739205ee30b047454ee3ca885", null ],
-    [ "edge_1", "structInterface.html#a6205bd2a9df344aaa3dd989ad15ae8bb", null ],
-    [ "edge_2", "structInterface.html#a3a4842da91c618bd2c2c0119cb4a30ab", null ],
-    [ "orientations_agree", "structInterface.html#a3372fd12bdacea5d50225f70da93bc17", null ]
+    [ "Edge1", "structInterface.html#a0eba2d684c513fce67db0f0f977d1315", null ],
+    [ "Edge2", "structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a", null ],
+    [ "Patch1", "structInterface.html#a2eabd9b5a702cf327f1db9aa89f75569", null ],
+    [ "Patch2", "structInterface.html#ad8c8f525826573dc1741ed5809228108", null ]
 ];

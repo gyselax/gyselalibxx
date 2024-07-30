@@ -125,9 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a94853ddecb41d04c60155fdc18f9fcf3"><td class="memItemLeft" align="right" valign="top">virtual DSpanX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIChargeDensityCalculator.html#a94853ddecb41d04c60155fdc18f9fcf3">operator()</a> (DSpanX rho, DViewSpXVx allfdistribu) const =0</td></tr>
 <tr class="memdesc:a94853ddecb41d04c60155fdc18f9fcf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the charge density rho from the distribution function.  <a href="classIChargeDensityCalculator.html#a94853ddecb41d04c60155fdc18f9fcf3">More...</a><br /></td></tr>
 <tr class="separator:a94853ddecb41d04c60155fdc18f9fcf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a720c2444f9f9f61cf70755b592f53c7b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIChargeDensityCalculator.html#a720c2444f9f9f61cf70755b592f53c7b">operator()</a> (DSpanXY rho, DViewSpXYVxVy allfdistribu) const =0</td></tr>
-<tr class="memdesc:a720c2444f9f9f61cf70755b592f53c7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the charge density rho from the distribution function.  <a href="classIChargeDensityCalculator.html#a720c2444f9f9f61cf70755b592f53c7b">More...</a><br /></td></tr>
-<tr class="separator:a720c2444f9f9f61cf70755b592f53c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14a845fbe0e835ff765a33611f09bd8b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIChargeDensityCalculator.html#a14a845fbe0e835ff765a33611f09bd8b">operator()</a> (DFieldXY rho, DConstFieldSpXYVxVy allfdistribu) const =0</td></tr>
+<tr class="memdesc:a14a845fbe0e835ff765a33611f09bd8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the charge density rho from the distribution function.  <a href="classIChargeDensityCalculator.html#a14a845fbe0e835ff765a33611f09bd8b">More...</a><br /></td></tr>
+<tr class="separator:a14a845fbe0e835ff765a33611f09bd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class which calculates the charge density. </p>
@@ -183,8 +183,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a720c2444f9f9f61cf70755b592f53c7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a720c2444f9f9f61cf70755b592f53c7b">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a14a845fbe0e835ff765a33611f09bd8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14a845fbe0e835ff765a33611f09bd8b">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,13 +195,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void IChargeDensityCalculator::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanXY&#160;</td>
+          <td class="paramtype">DFieldXY&#160;</td>
           <td class="paramname"><em>rho</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXYVxVy&#160;</td>
+          <td class="paramtype">DConstFieldSpXYVxVy&#160;</td>
           <td class="paramname"><em>allfdistribu</em>&#160;</td>
         </tr>
         <tr>
@@ -227,7 +227,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classChargeDensityCalculator.html#aa171397828c246922b136642e0295e26">ChargeDensityCalculator</a>.</p>
+<p>Implemented in <a class="el" href="classChargeDensityCalculator.html#a7ad6d91143f3e31e3ed8318a9970ef8e">ChargeDensityCalculator</a>.</p>
 
 </div>
 </div>

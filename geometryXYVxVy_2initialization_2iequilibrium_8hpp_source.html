@@ -109,15 +109,15 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2initialization_2iequil
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">class </span><a class="code" href="classIEquilibrium.html">IEquilibrium</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIEquilibrium.html">IEquilibrium</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">virtual</span> DSpanSpVxVy <a class="code" href="classIEquilibrium.html#af90b39211d1e331b572c9dc349e7908f">operator()</a>(DSpanSpVxVy allfequilibrium) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;};</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="classIEquilibrium.html">IEquilibrium</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIEquilibrium.html">IEquilibrium</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classIEquilibrium.html#ac3766d5ef01c1e949ec3dd6d55892a75">   24</a></span>&#160;    <span class="keyword">virtual</span> DFieldSpVxVy <a class="code" href="classIEquilibrium.html#ac3766d5ef01c1e949ec3dd6d55892a75">operator()</a>(DFieldSpVxVy allfequilibrium) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
 <div class="ttc" id="aclassIEquilibrium_html"><div class="ttname"><a href="classIEquilibrium.html">IEquilibrium</a></div><div class="ttdoc">An abstract class for initializing a distribution function in (species,vpar,mu).</div><div class="ttdef"><b>Definition:</b> iequilibrium.hpp:11</div></div>
-<div class="ttc" id="aclassIEquilibrium_html_af90b39211d1e331b572c9dc349e7908f"><div class="ttname"><a href="classIEquilibrium.html#af90b39211d1e331b572c9dc349e7908f">IEquilibrium::operator()</a></div><div class="ttdeci">virtual DSpanSpVparMu operator()(DSpanSpVparMu allfequilibrium) const =0</div><div class="ttdoc">Operator for initializing an equilibrium distribution function.</div></div>
+<div class="ttc" id="aclassIEquilibrium_html_ac3766d5ef01c1e949ec3dd6d55892a75"><div class="ttname"><a href="classIEquilibrium.html#ac3766d5ef01c1e949ec3dd6d55892a75">IEquilibrium::operator()</a></div><div class="ttdeci">virtual DFieldSpVxVy operator()(DFieldSpVxVy allfequilibrium) const =0</div><div class="ttdoc">Operator for initializing a distribution function that does not depend on space.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

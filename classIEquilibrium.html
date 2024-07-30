@@ -130,16 +130,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8299421036e8a33c363d6a3d9388eaa9"><td class="memItemLeft" align="right" valign="top">virtual DSpanSpVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEquilibrium.html#a8299421036e8a33c363d6a3d9388eaa9">operator()</a> (DSpanSpVx allfequilibrium) const =0</td></tr>
 <tr class="memdesc:a8299421036e8a33c363d6a3d9388eaa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for initializing a distribution function that does not depend on space.  <a href="classIEquilibrium.html#a8299421036e8a33c363d6a3d9388eaa9">More...</a><br /></td></tr>
 <tr class="separator:a8299421036e8a33c363d6a3d9388eaa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9cde57feac60ee82ae09fc61c86c807"><td class="memItemLeft" align="right" valign="top"><a id="aa9cde57feac60ee82ae09fc61c86c807"></a>
-virtual DSpanSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (DSpanSpVxVy allfequilibrium) const =0</td></tr>
-<tr class="separator:aa9cde57feac60ee82ae09fc61c86c807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3766d5ef01c1e949ec3dd6d55892a75"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEquilibrium.html#ac3766d5ef01c1e949ec3dd6d55892a75">operator()</a> (DFieldSpVxVy allfequilibrium) const =0</td></tr>
+<tr class="memdesc:ac3766d5ef01c1e949ec3dd6d55892a75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for initializing a distribution function that does not depend on space.  <a href="classIEquilibrium.html#ac3766d5ef01c1e949ec3dd6d55892a75">More...</a><br /></td></tr>
+<tr class="separator:ac3766d5ef01c1e949ec3dd6d55892a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract class for initializing a distribution function in (species,vpar,mu). </p>
-<p>An abstract class for initializing a distribution function that does not depend on space. </p>
+<p>An abstract class for initializing the equilibrium state of the distribution function.</p>
+<p>An abstract class for initializing a distribution function that does not depend on space.</p>
+<p>The equilibrium state does not depend on spatial dimensions. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af90b39211d1e331b572c9dc349e7908f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af90b39211d1e331b572c9dc349e7908f">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af90b39211d1e331b572c9dc349e7908f">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,7 +178,7 @@ virtual DSpanSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operat
 </div>
 </div>
 <a id="a8299421036e8a33c363d6a3d9388eaa9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8299421036e8a33c363d6a3d9388eaa9">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8299421036e8a33c363d6a3d9388eaa9">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -209,6 +211,43 @@ virtual DSpanSpVxVy&#160;</td><td class="memItemRight" valign="bottom"><b>operat
 <dl class="section return"><dt>Returns</dt><dd>The initialized distribution function. </dd></dl>
 
 <p>Implemented in <a class="el" href="classMaxwellianEquilibrium.html#a0f4e3335acb638b07bd95fa868842d64">MaxwellianEquilibrium</a>, and <a class="el" href="classBumpontailEquilibrium.html#a4cd4ddf29a44f068db013ed7dc2a0215">BumpontailEquilibrium</a>.</p>
+
+</div>
+</div>
+<a id="ac3766d5ef01c1e949ec3dd6d55892a75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3766d5ef01c1e949ec3dd6d55892a75">&#9670;&nbsp;</a></span>operator()() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual DFieldSpVxVy IEquilibrium::operator() </td>
+          <td>(</td>
+          <td class="paramtype">DFieldSpVxVy&#160;</td>
+          <td class="paramname"><em>allfequilibrium</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Operator for initializing a distribution function that does not depend on space. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfequilibrium</td><td>On input: the uninitialized distribution function. On output: the initialized distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The initialized distribution function. </dd></dl>
+
+<p>Implemented in <a class="el" href="classMaxwellianEquilibrium.html#a883dfc9d838b53deeb47e93f178c7655">MaxwellianEquilibrium</a>.</p>
 
 </div>
 </div>

@@ -1,11 +1,11 @@
 var classCosineEvaluator_1_1Evaluator =
 [
-    [ "Dim", "classCosineEvaluator_1_1Evaluator.html#aab8d2ec02f261cd03e5e32eb626ec59a", null ],
-    [ "Evaluator", "classCosineEvaluator_1_1Evaluator.html#a6ec3ace4073f9358435da9e1f8ff0867", null ],
-    [ "Evaluator", "classCosineEvaluator_1_1Evaluator.html#aee25cf15b317f844634622a3f3b9ae19", null ],
-    [ "operator()", "classCosineEvaluator_1_1Evaluator.html#a005a64f218649a2dc17eb6de96bb39af", null ],
-    [ "operator()", "classCosineEvaluator_1_1Evaluator.html#a813cf3c8469b386a170b5be110052cf0", null ],
-    [ "deriv", "classCosineEvaluator_1_1Evaluator.html#ad1092a408482978007bc9a7338561d3a", null ],
-    [ "deriv", "classCosineEvaluator_1_1Evaluator.html#abab08986e195b7c99f7e0bce5b7a23dd", null ],
-    [ "max_norm", "classCosineEvaluator_1_1Evaluator.html#aacf7f5551803ea9c4253030462626afe", null ]
+    [ "Dim", "classCosineEvaluator_1_1Evaluator.html#a99d3dc08749dcc0f67a8413ce90f9b54", null ],
+    [ "Evaluator", "classCosineEvaluator_1_1Evaluator.html#a3202720034c25a744303ab9638ec2ff2", null ],
+    [ "Evaluator", "classCosineEvaluator_1_1Evaluator.html#a85f33215f6210b1289813995ddc571a1", null ],
+    [ "operator()", "classCosineEvaluator_1_1Evaluator.html#aa66ae25f58a330dd6669a09d0e6dee6c", null ],
+    [ "operator()", "classCosineEvaluator_1_1Evaluator.html#a9646ec811ec36ef5ea200ac2a1fc20ed", null ],
+    [ "deriv", "classCosineEvaluator_1_1Evaluator.html#a0ae83a57432e7f9b1dad6841d3a9c725", null ],
+    [ "deriv", "classCosineEvaluator_1_1Evaluator.html#a26e0e310db56cd1329a950f9dd622001", null ],
+    [ "max_norm", "classCosineEvaluator_1_1Evaluator.html#a25ea86f78238293e7d7ed071d8874833", null ]
 ];

@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['grid1_1485',['Grid1',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#abad4a55c8bc66356aeb75b17e6169325',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
-  ['grid2_1486',['Grid2',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a10e13ba81718c97997111ded99c2276c',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]]
+  ['fdistribspan_1486',['FDistribSpan',['../classCollisionSpVparMu.html#a867a4e169941ddba02f41bbc143f33c1',1,'CollisionSpVparMu']]],
+  ['fdistribuidxrange_1487',['FdistribuIdxRange',['../classGeometryXVx.html#a54c9a65dfc0b8c40107d73ecc3289f38',1,'GeometryXVx::FdistribuIdxRange()'],['../classGeometryXYVxVy.html#a3fae88a8a11da17209ec4c1cda0c76f9',1,'GeometryXYVxVy::FdistribuIdxRange()']]],
+  ['fourier_5fchunk_5ftype_1488',['fourier_chunk_type',['../classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html#a963fc6f13bdbda8efc29a99b9cb0fd70',1,'FFTPoissonSolver&lt; ddc::DiscreteDomain&lt; DDims... &gt;, FullDomain, ExecSpace, LayoutSpace &gt;']]],
+  ['fourier_5fdomain_5ftype_1489',['fourier_domain_type',['../classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html#a6fa6a173150a033faf2e8cc05427a190',1,'FFTPoissonSolver&lt; ddc::DiscreteDomain&lt; DDims... &gt;, FullDomain, ExecSpace, LayoutSpace &gt;']]],
+  ['fourier_5felement_5ftype_1490',['fourier_element_type',['../classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html#af69011a59931576d6ff603cc69de313f',1,'FFTPoissonSolver&lt; ddc::DiscreteDomain&lt; DDims... &gt;, FullDomain, ExecSpace, LayoutSpace &gt;']]],
+  ['fourier_5fspan_5ftype_1491',['fourier_span_type',['../classFFTPoissonSolver_3_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_00_01FullDomain_00_01ExecSpace_00_01LayoutSpace_01_4.html#ac5c02753e25e525c238f3a28564612e0',1,'FFTPoissonSolver&lt; ddc::DiscreteDomain&lt; DDims... &gt;, FullDomain, ExecSpace, LayoutSpace &gt;']]]
 ];

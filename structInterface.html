@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Interface&lt; IDim1, IDim2 &gt; Struct Template Reference</title>
+<title>Gyselalib++: Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,112 +100,86 @@ $(document).ready(function(){initNavTree('structInterface.html',''); initResizab
 
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structInterface-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Interface&lt; IDim1, IDim2 &gt; Struct Template Reference</div>  </div>
+<div class="title">Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Represent a simple sticking of two edges.  
  <a href="structInterface.html#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a228de48739205ee30b047454ee3ca885"><td class="memTemplParams" colspan="2">template&lt;class IDim &gt; </td></tr>
-<tr class="memitem:a228de48739205ee30b047454ee3ca885"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="structEdge.html">Edge</a>&lt; IDim &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structInterface.html#a228de48739205ee30b047454ee3ca885">get_edge</a> () const</td></tr>
-<tr class="memdesc:a228de48739205ee30b047454ee3ca885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the edge on the given dimension.  <a href="structInterface.html#a228de48739205ee30b047454ee3ca885">More...</a><br /></td></tr>
-<tr class="separator:a228de48739205ee30b047454ee3ca885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a0eba2d684c513fce67db0f0f977d1315"><td class="memItemLeft" align="right" valign="top"><a id="a0eba2d684c513fce67db0f0f977d1315"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#a0eba2d684c513fce67db0f0f977d1315">Edge1</a> = Edge1Type</td></tr>
+<tr class="memdesc:a0eba2d684c513fce67db0f0f977d1315"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a> type of the first patch. <br /></td></tr>
+<tr class="separator:a0eba2d684c513fce67db0f0f977d1315"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f23b4f792c4cc36db73b8f7f49b4d7a"><td class="memItemLeft" align="right" valign="top"><a id="a8f23b4f792c4cc36db73b8f7f49b4d7a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a">Edge2</a> = Edge2Type</td></tr>
+<tr class="memdesc:a8f23b4f792c4cc36db73b8f7f49b4d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a> type of the second patch. <br /></td></tr>
+<tr class="separator:a8f23b4f792c4cc36db73b8f7f49b4d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eabd9b5a702cf327f1db9aa89f75569"><td class="memItemLeft" align="right" valign="top"><a id="a2eabd9b5a702cf327f1db9aa89f75569"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#a2eabd9b5a702cf327f1db9aa89f75569">Patch1</a> = typename Edge1::associated_patch</td></tr>
+<tr class="memdesc:a2eabd9b5a702cf327f1db9aa89f75569"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of first patch. <br /></td></tr>
+<tr class="separator:a2eabd9b5a702cf327f1db9aa89f75569"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8c8f525826573dc1741ed5809228108"><td class="memItemLeft" align="right" valign="top"><a id="ad8c8f525826573dc1741ed5809228108"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#ad8c8f525826573dc1741ed5809228108">Patch2</a> = typename Edge2::associated_patch</td></tr>
+<tr class="memdesc:ad8c8f525826573dc1741ed5809228108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of second patch. <br /></td></tr>
+<tr class="separator:ad8c8f525826573dc1741ed5809228108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a6205bd2a9df344aaa3dd989ad15ae8bb"><td class="memItemLeft" align="right" valign="top"><a id="a6205bd2a9df344aaa3dd989ad15ae8bb"></a>
-<a class="el" href="structEdge.html">Edge</a>&lt; IDim1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#a6205bd2a9df344aaa3dd989ad15ae8bb">edge_1</a></td></tr>
-<tr class="memdesc:a6205bd2a9df344aaa3dd989ad15ae8bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a> of the first patch. <br /></td></tr>
-<tr class="separator:a6205bd2a9df344aaa3dd989ad15ae8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a4842da91c618bd2c2c0119cb4a30ab"><td class="memItemLeft" align="right" valign="top"><a id="a3a4842da91c618bd2c2c0119cb4a30ab"></a>
-<a class="el" href="structEdge.html">Edge</a>&lt; IDim2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#a3a4842da91c618bd2c2c0119cb4a30ab">edge_2</a></td></tr>
-<tr class="memdesc:a3a4842da91c618bd2c2c0119cb4a30ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a> of the second patch. <br /></td></tr>
-<tr class="separator:a3a4842da91c618bd2c2c0119cb4a30ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3372fd12bdacea5d50225f70da93bc17"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#a3372fd12bdacea5d50225f70da93bc17">orientations_agree</a></td></tr>
-<tr class="memdesc:a3372fd12bdacea5d50225f70da93bc17"><td class="mdescLeft">&#160;</td><td class="mdescRight">If True, the parametrisations of the physical edge have the same orientation.  <a href="structInterface.html#a3372fd12bdacea5d50225f70da93bc17">More...</a><br /></td></tr>
-<tr class="separator:a3372fd12bdacea5d50225f70da93bc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:af2dbae0b5ea4505116a20eeb5179e72d"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#af2dbae0b5ea4505116a20eeb5179e72d">orientations_agree</a> = orientations_agree_bool</td></tr>
+<tr class="memdesc:af2dbae0b5ea4505116a20eeb5179e72d"><td class="mdescLeft">&#160;</td><td class="mdescRight">If True, the parametrisations of the physical edge have the same orientation.  <a href="structInterface.html#af2dbae0b5ea4505116a20eeb5179e72d">More...</a><br /></td></tr>
+<tr class="separator:af2dbae0b5ea4505116a20eeb5179e72d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class IDim1, class IDim2&gt;<br />
-struct Interface&lt; IDim1, IDim2 &gt;</h3>
+<div class="textblock"><h3>template&lt;class Edge1Type, class Edge2Type, bool orientations_agree_bool&gt;<br />
+struct Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;</h3>
 
 <p>Represent a simple sticking of two edges. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">IDim1</td><td>The discrete dimension of the first edge. </td></tr>
-    <tr><td class="paramname">IDim2</td><td>The discrete dimension of the second edge.</td></tr>
+    <tr><td class="paramname">Edge1Type</td><td><a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a> type defined on first patch. </td></tr>
+    <tr><td class="paramname">Edge2Type</td><td><a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a> type defined on second patch. </td></tr>
+    <tr><td class="paramname">orientations_agree_bool</td><td>Boolean, if true, the parametrisations of the physical edge have the same orientation; else, the parametrisations of the physical edge have the opposite orientation. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classEdgeCoordinatesTransformation.html" title="Transform a coordinate from one edge to a coordinate on the other edge.">EdgeCoordinatesTransformation</a> </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a228de48739205ee30b047454ee3ca885"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a228de48739205ee30b047454ee3ca885">&#9670;&nbsp;</a></span>get_edge()</h2>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a> </dd></dl>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="af2dbae0b5ea4505116a20eeb5179e72d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2dbae0b5ea4505116a20eeb5179e72d">&#9670;&nbsp;</a></span>orientations_agree</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class IDim1 , class IDim2 &gt; </div>
-<div class="memtemplate">
-template&lt;class IDim &gt; </div>
+template&lt;class Edge1Type , class Edge2Type , bool orientations_agree_bool&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="structEdge.html">Edge</a>&lt;IDim&gt; <a class="el" href="structInterface.html">Interface</a>&lt; IDim1, IDim2 &gt;::get_edge </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="memname">constexpr bool <a class="el" href="structInterface.html">Interface</a>&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::orientations_agree = orientations_agree_bool</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the edge on the given dimension. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">IDim</td><td>The discrete dimension of the edge.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The edge of the interface defined on the given dimension. </dd></dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a3372fd12bdacea5d50225f70da93bc17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3372fd12bdacea5d50225f70da93bc17">&#9670;&nbsp;</a></span>orientations_agree</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class IDim1 , class IDim2 &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="structInterface.html">Interface</a>&lt; IDim1, IDim2 &gt;::orientations_agree</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
 <p>If True, the parametrisations of the physical edge have the same orientation. </p>
-<p>If False, the parametrisations of the physical edge have the opposite orientation. (See <a class="el" href="classEdgeCoordinatesTransformation.html" title="Transform a coordinate from one edge to a coordinate on the other edge.">EdgeCoordinatesTransformation</a>). </p>
+<p>If False, the parametrisations of the physical edge have the opposite orientation. (See <a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a>). </p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interfaces/<a class="el" href="interface_8hpp_source.html">interface.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/<a class="el" href="interface_8hpp_source.html">interface.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

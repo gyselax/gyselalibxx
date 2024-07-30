@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interfaces/interface.hpp Source File</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -111,37 +111,29 @@ $(document).ready(function(){initNavTree('interface_8hpp_source.html',''); initR
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;edge.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim1, <span class="keyword">class</span> IDim2&gt;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Edge1Type, <span class="keyword">class</span> Edge2Type, <span class="keywordtype">bool</span> orientations_agree_<span class="keywordtype">bool</span>&gt;</div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structInterface.html">   20</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structInterface.html">Interface</a></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structInterface.html#a6205bd2a9df344aaa3dd989ad15ae8bb">   25</a></span>&#160;    <a class="code" href="structEdge.html">Edge&lt;IDim1&gt;</a> <a class="code" href="structInterface.html#a6205bd2a9df344aaa3dd989ad15ae8bb">edge_1</a>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structInterface.html#a3a4842da91c618bd2c2c0119cb4a30ab">   29</a></span>&#160;    <a class="code" href="structEdge.html">Edge&lt;IDim2&gt;</a> <a class="code" href="structInterface.html#a3a4842da91c618bd2c2c0119cb4a30ab">edge_2</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structInterface.html#a3372fd12bdacea5d50225f70da93bc17">   35</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structInterface.html#a3372fd12bdacea5d50225f70da93bc17">orientations_agree</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structInterface.html#a228de48739205ee30b047454ee3ca885">   46</a></span>&#160;    constexpr <a class="code" href="structEdge.html">Edge&lt;IDim&gt;</a> <a class="code" href="structInterface.html#a228de48739205ee30b047454ee3ca885">get_edge</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        static_assert(((std::is_same_v&lt;IDim, IDim1&gt;) || (std::is_same_v&lt;IDim, IDim2&gt;)));</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;IDim, IDim1&gt;) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="structInterface.html#a6205bd2a9df344aaa3dd989ad15ae8bb">edge_1</a>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="structInterface.html#a3a4842da91c618bd2c2c0119cb4a30ab">edge_2</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    };</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
-<div class="ttc" id="astructEdge_html"><div class="ttname"><a href="structEdge.html">Edge&lt; IDim1 &gt;</a></div></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structInterface.html#a0eba2d684c513fce67db0f0f977d1315">   23</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="structInterface.html#a0eba2d684c513fce67db0f0f977d1315">Edge1</a> = Edge1Type;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a">   25</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a">Edge2</a> = Edge2Type;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structInterface.html#af2dbae0b5ea4505116a20eeb5179e72d">   32</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> <a class="code" href="structInterface.html#af2dbae0b5ea4505116a20eeb5179e72d">orientations_agree</a> = orientations_agree_bool;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structInterface.html#a2eabd9b5a702cf327f1db9aa89f75569">   35</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="structInterface.html#a2eabd9b5a702cf327f1db9aa89f75569">Patch1</a> = <span class="keyword">typename</span> Edge1::associated_patch;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="structInterface.html#ad8c8f525826573dc1741ed5809228108">   37</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="structInterface.html#ad8c8f525826573dc1741ed5809228108">Patch2</a> = <span class="keyword">typename</span> Edge2::associated_patch;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
 <div class="ttc" id="astructInterface_html"><div class="ttname"><a href="structInterface.html">Interface</a></div><div class="ttdoc">Represent a simple sticking of two edges.</div><div class="ttdef"><b>Definition:</b> interface.hpp:21</div></div>
-<div class="ttc" id="astructInterface_html_a228de48739205ee30b047454ee3ca885"><div class="ttname"><a href="structInterface.html#a228de48739205ee30b047454ee3ca885">Interface::get_edge</a></div><div class="ttdeci">constexpr Edge&lt; IDim &gt; get_edge() const</div><div class="ttdoc">Get the edge on the given dimension.</div><div class="ttdef"><b>Definition:</b> interface.hpp:46</div></div>
-<div class="ttc" id="astructInterface_html_a3372fd12bdacea5d50225f70da93bc17"><div class="ttname"><a href="structInterface.html#a3372fd12bdacea5d50225f70da93bc17">Interface::orientations_agree</a></div><div class="ttdeci">bool orientations_agree</div><div class="ttdoc">If True, the parametrisations of the physical edge have the same orientation.</div><div class="ttdef"><b>Definition:</b> interface.hpp:35</div></div>
-<div class="ttc" id="astructInterface_html_a3a4842da91c618bd2c2c0119cb4a30ab"><div class="ttname"><a href="structInterface.html#a3a4842da91c618bd2c2c0119cb4a30ab">Interface::edge_2</a></div><div class="ttdeci">Edge&lt; IDim2 &gt; edge_2</div><div class="ttdoc">The Edge of the second patch.</div><div class="ttdef"><b>Definition:</b> interface.hpp:29</div></div>
-<div class="ttc" id="astructInterface_html_a6205bd2a9df344aaa3dd989ad15ae8bb"><div class="ttname"><a href="structInterface.html#a6205bd2a9df344aaa3dd989ad15ae8bb">Interface::edge_1</a></div><div class="ttdeci">Edge&lt; IDim1 &gt; edge_1</div><div class="ttdoc">The Edge of the first patch.</div><div class="ttdef"><b>Definition:</b> interface.hpp:25</div></div>
+<div class="ttc" id="astructInterface_html_a0eba2d684c513fce67db0f0f977d1315"><div class="ttname"><a href="structInterface.html#a0eba2d684c513fce67db0f0f977d1315">Interface::Edge1</a></div><div class="ttdeci">Edge1Type Edge1</div><div class="ttdoc">Edge type of the first patch.</div><div class="ttdef"><b>Definition:</b> interface.hpp:23</div></div>
+<div class="ttc" id="astructInterface_html_a2eabd9b5a702cf327f1db9aa89f75569"><div class="ttname"><a href="structInterface.html#a2eabd9b5a702cf327f1db9aa89f75569">Interface::Patch1</a></div><div class="ttdeci">typename Edge1::associated_patch Patch1</div><div class="ttdoc">Type of first patch.</div><div class="ttdef"><b>Definition:</b> interface.hpp:35</div></div>
+<div class="ttc" id="astructInterface_html_a8f23b4f792c4cc36db73b8f7f49b4d7a"><div class="ttname"><a href="structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a">Interface::Edge2</a></div><div class="ttdeci">Edge2Type Edge2</div><div class="ttdoc">Edge type of the second patch.</div><div class="ttdef"><b>Definition:</b> interface.hpp:25</div></div>
+<div class="ttc" id="astructInterface_html_ad8c8f525826573dc1741ed5809228108"><div class="ttname"><a href="structInterface.html#ad8c8f525826573dc1741ed5809228108">Interface::Patch2</a></div><div class="ttdeci">typename Edge2::associated_patch Patch2</div><div class="ttdoc">Type of second patch.</div><div class="ttdef"><b>Definition:</b> interface.hpp:37</div></div>
+<div class="ttc" id="astructInterface_html_af2dbae0b5ea4505116a20eeb5179e72d"><div class="ttname"><a href="structInterface.html#af2dbae0b5ea4505116a20eeb5179e72d">Interface::orientations_agree</a></div><div class="ttdeci">static constexpr bool orientations_agree</div><div class="ttdoc">If True, the parametrisations of the physical edge have the same orientation.</div><div class="ttdef"><b>Definition:</b> interface.hpp:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_eb7da54727e91e3ad0949acc1ce0f18c.html">multipatch</a></li><li class="navelem"><a class="el" href="dir_e6145dbf25073ae9b52bad64393dd5e8.html">interfaces</a></li><li class="navelem"><b>interface.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_eb7da54727e91e3ad0949acc1ce0f18c.html">multipatch</a></li><li class="navelem"><a class="el" href="dir_f9e4c94b0e65b435cbfb10d37b215fd7.html">connectivity</a></li><li class="navelem"><b>interface.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

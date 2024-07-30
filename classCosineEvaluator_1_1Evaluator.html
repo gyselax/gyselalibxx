@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: CosineEvaluator::Evaluator&lt; DDim &gt; Class Template Reference</title>
+<title>Gyselalib++: CosineEvaluator::Evaluator&lt; Grid1D &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,41 +104,344 @@ $(document).ready(function(){initNavTree('classCosineEvaluator_1_1Evaluator.html
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classCosineEvaluator_1_1Evaluator-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">CosineEvaluator::Evaluator&lt; DDim &gt; Class Template Reference</div>  </div>
+<div class="title">CosineEvaluator::Evaluator&lt; Grid1D &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An analytical evaluator to be used for exact comparisons in tests.  
+ <a href="classCosineEvaluator_1_1Evaluator.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aab8d2ec02f261cd03e5e32eb626ec59a"><td class="memItemLeft" align="right" valign="top"><a id="aab8d2ec02f261cd03e5e32eb626ec59a"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Dim</b> = DDim</td></tr>
-<tr class="separator:aab8d2ec02f261cd03e5e32eb626ec59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99d3dc08749dcc0f67a8413ce90f9b54"><td class="memItemLeft" align="right" valign="top"><a id="a99d3dc08749dcc0f67a8413ce90f9b54"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCosineEvaluator_1_1Evaluator.html#a99d3dc08749dcc0f67a8413ce90f9b54">Dim</a> = Grid1D</td></tr>
+<tr class="memdesc:a99d3dc08749dcc0f67a8413ce90f9b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">The grid dimension. <br /></td></tr>
+<tr class="separator:a99d3dc08749dcc0f67a8413ce90f9b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6ec3ace4073f9358435da9e1f8ff0867"><td class="memTemplParams" colspan="2"><a id="a6ec3ace4073f9358435da9e1f8ff0867"></a>
-template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a6ec3ace4073f9358435da9e1f8ff0867"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Evaluator</b> (Domain domain)</td></tr>
-<tr class="separator:a6ec3ace4073f9358435da9e1f8ff0867"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee25cf15b317f844634622a3f3b9ae19"><td class="memItemLeft" align="right" valign="top"><a id="aee25cf15b317f844634622a3f3b9ae19"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Evaluator</b> (double c0, double c1)</td></tr>
-<tr class="separator:aee25cf15b317f844634622a3f3b9ae19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a005a64f218649a2dc17eb6de96bb39af"><td class="memItemLeft" align="right" valign="top"><a id="a005a64f218649a2dc17eb6de96bb39af"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (double const x) const noexcept</td></tr>
-<tr class="separator:a005a64f218649a2dc17eb6de96bb39af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a813cf3c8469b386a170b5be110052cf0"><td class="memItemLeft" align="right" valign="top"><a id="a813cf3c8469b386a170b5be110052cf0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; chunk) const</td></tr>
-<tr class="separator:a813cf3c8469b386a170b5be110052cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1092a408482978007bc9a7338561d3a"><td class="memItemLeft" align="right" valign="top"><a id="ad1092a408482978007bc9a7338561d3a"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>deriv</b> (double const x, int const derivative) const noexcept</td></tr>
-<tr class="separator:ad1092a408482978007bc9a7338561d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abab08986e195b7c99f7e0bce5b7a23dd"><td class="memItemLeft" align="right" valign="top"><a id="abab08986e195b7c99f7e0bce5b7a23dd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>deriv</b> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt;&gt; chunk, int const derivative) const</td></tr>
-<tr class="separator:abab08986e195b7c99f7e0bce5b7a23dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacf7f5551803ea9c4253030462626afe"><td class="memItemLeft" align="right" valign="top"><a id="aacf7f5551803ea9c4253030462626afe"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>max_norm</b> (int diff=0) const</td></tr>
-<tr class="separator:aacf7f5551803ea9c4253030462626afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3202720034c25a744303ab9638ec2ff2"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
+<tr class="memitem:a3202720034c25a744303ab9638ec2ff2"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCosineEvaluator_1_1Evaluator.html#a3202720034c25a744303ab9638ec2ff2">Evaluator</a> (IdxRange idx_range)</td></tr>
+<tr class="memdesc:a3202720034c25a744303ab9638ec2ff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor taking the range over which the evaluator will be applied.  <a href="classCosineEvaluator_1_1Evaluator.html#a3202720034c25a744303ab9638ec2ff2">More...</a><br /></td></tr>
+<tr class="separator:a3202720034c25a744303ab9638ec2ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85f33215f6210b1289813995ddc571a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCosineEvaluator_1_1Evaluator.html#a85f33215f6210b1289813995ddc571a1">Evaluator</a> (double c0, double c1)</td></tr>
+<tr class="memdesc:a85f33215f6210b1289813995ddc571a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor parametrising the equation.  <a href="classCosineEvaluator_1_1Evaluator.html#a85f33215f6210b1289813995ddc571a1">More...</a><br /></td></tr>
+<tr class="separator:a85f33215f6210b1289813995ddc571a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa66ae25f58a330dd6669a09d0e6dee6c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCosineEvaluator_1_1Evaluator.html#aa66ae25f58a330dd6669a09d0e6dee6c">operator()</a> (double const x) const noexcept</td></tr>
+<tr class="memdesc:aa66ae25f58a330dd6669a09d0e6dee6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the equation at x.  <a href="classCosineEvaluator_1_1Evaluator.html#aa66ae25f58a330dd6669a09d0e6dee6c">More...</a><br /></td></tr>
+<tr class="separator:aa66ae25f58a330dd6669a09d0e6dee6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9646ec811ec36ef5ea200ac2a1fc20ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCosineEvaluator_1_1Evaluator.html#a9646ec811ec36ef5ea200ac2a1fc20ed">operator()</a> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D &gt;&gt; chunk) const</td></tr>
+<tr class="memdesc:a9646ec811ec36ef5ea200ac2a1fc20ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the equation at the positions on which chunk is defined.  <a href="classCosineEvaluator_1_1Evaluator.html#a9646ec811ec36ef5ea200ac2a1fc20ed">More...</a><br /></td></tr>
+<tr class="separator:a9646ec811ec36ef5ea200ac2a1fc20ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae83a57432e7f9b1dad6841d3a9c725"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCosineEvaluator_1_1Evaluator.html#a0ae83a57432e7f9b1dad6841d3a9c725">deriv</a> (double const x, int const derivative) const noexcept</td></tr>
+<tr class="memdesc:a0ae83a57432e7f9b1dad6841d3a9c725"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the derivative of the equation at x.  <a href="classCosineEvaluator_1_1Evaluator.html#a0ae83a57432e7f9b1dad6841d3a9c725">More...</a><br /></td></tr>
+<tr class="separator:a0ae83a57432e7f9b1dad6841d3a9c725"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e0e310db56cd1329a950f9dd622001"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCosineEvaluator_1_1Evaluator.html#a26e0e310db56cd1329a950f9dd622001">deriv</a> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D &gt;&gt; chunk, int const derivative) const</td></tr>
+<tr class="memdesc:a26e0e310db56cd1329a950f9dd622001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the derivative of the equation at the positions on which chunk is defined.  <a href="classCosineEvaluator_1_1Evaluator.html#a26e0e310db56cd1329a950f9dd622001">More...</a><br /></td></tr>
+<tr class="separator:a26e0e310db56cd1329a950f9dd622001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25ea86f78238293e7d7ed071d8874833"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCosineEvaluator_1_1Evaluator.html#a25ea86f78238293e7d7ed071d8874833">max_norm</a> (int diff=0) const</td></tr>
+<tr class="memdesc:a25ea86f78238293e7d7ed071d8874833"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum norm of this equation.  <a href="classCosineEvaluator_1_1Evaluator.html#a25ea86f78238293e7d7ed071d8874833">More...</a><br /></td></tr>
+<tr class="separator:a25ea86f78238293e7d7ed071d8874833"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class Grid1D&gt;<br />
+class CosineEvaluator::Evaluator&lt; Grid1D &gt;</h3>
+
+<p>An analytical evaluator to be used for exact comparisons in tests. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3202720034c25a744303ab9638ec2ff2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3202720034c25a744303ab9638ec2ff2">&#9670;&nbsp;</a></span>Evaluator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D &gt; </div>
+<div class="memtemplate">
+template&lt;class IdxRange &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCosineEvaluator_1_1Evaluator.html">CosineEvaluator::Evaluator</a>&lt; Grid1D &gt;::<a class="el" href="classCosineEvaluator_1_1Evaluator.html">Evaluator</a> </td>
+          <td>(</td>
+          <td class="paramtype">IdxRange&#160;</td>
+          <td class="paramname"><em>idx_range</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A constructor taking the range over which the evaluator will be applied. </p>
+<p>This sets the equation to: \( cos(2 \pi x) \)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The range of the grid over which the evaluator will be applied. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a85f33215f6210b1289813995ddc571a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85f33215f6210b1289813995ddc571a1">&#9670;&nbsp;</a></span>Evaluator() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCosineEvaluator_1_1Evaluator.html">CosineEvaluator::Evaluator</a>&lt; Grid1D &gt;::<a class="el" href="classCosineEvaluator_1_1Evaluator.html">Evaluator</a> </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>c0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>c1</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A constructor parametrising the equation. </p>
+<p>This sets the equation to: \( cos(2 \pi (c_0 x + c_1)) \)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">c0</td><td>The first parameter of the equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c1</td><td>The second parameter of the equation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa66ae25f58a330dd6669a09d0e6dee6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa66ae25f58a330dd6669a09d0e6dee6c">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classCosineEvaluator_1_1Evaluator.html">CosineEvaluator::Evaluator</a>&lt; Grid1D &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">double const&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluate the equation at x. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The position where the equation is evaluated. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The result of the equation. </dd></dl>
+
+</div>
+</div>
+<a id="a9646ec811ec36ef5ea200ac2a1fc20ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9646ec811ec36ef5ea200ac2a1fc20ed">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCosineEvaluator_1_1Evaluator.html">CosineEvaluator::Evaluator</a>&lt; Grid1D &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D &gt;&gt;&#160;</td>
+          <td class="paramname"><em>chunk</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluate the equation at the positions on which chunk is defined. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">chunk</td><td>The result of the equation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0ae83a57432e7f9b1dad6841d3a9c725"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ae83a57432e7f9b1dad6841d3a9c725">&#9670;&nbsp;</a></span>deriv() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classCosineEvaluator_1_1Evaluator.html">CosineEvaluator::Evaluator</a>&lt; Grid1D &gt;::deriv </td>
+          <td>(</td>
+          <td class="paramtype">double const&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const&#160;</td>
+          <td class="paramname"><em>derivative</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluate the derivative of the equation at x. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The position where the equation is evaluated. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivative</td><td>The order of the derivative. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The result of the equation. </dd></dl>
+
+</div>
+</div>
+<a id="a26e0e310db56cd1329a950f9dd622001"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26e0e310db56cd1329a950f9dd622001">&#9670;&nbsp;</a></span>deriv() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCosineEvaluator_1_1Evaluator.html">CosineEvaluator::Evaluator</a>&lt; Grid1D &gt;::deriv </td>
+          <td>(</td>
+          <td class="paramtype">ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; Grid1D &gt;&gt;&#160;</td>
+          <td class="paramname"><em>chunk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const&#160;</td>
+          <td class="paramname"><em>derivative</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluate the derivative of the equation at the positions on which chunk is defined. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">chunk</td><td>The result of the equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivative</td><td>The order of the derivative. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a25ea86f78238293e7d7ed071d8874833"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25ea86f78238293e7d7ed071d8874833">&#9670;&nbsp;</a></span>max_norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Grid1D &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classCosineEvaluator_1_1Evaluator.html">CosineEvaluator::Evaluator</a>&lt; Grid1D &gt;::max_norm </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>diff</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The maximum norm of this equation. </p>
+<p>Used for normalisation. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">diff</td><td>The derivative whose max norm should be returned. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The maximum value of the infinite norm. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/tests/<a class="el" href="cosine__evaluator_8hpp_source.html">cosine_evaluator.hpp</a></li>
 </ul>
