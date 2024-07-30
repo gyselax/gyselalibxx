@@ -24,52 +24,52 @@ struct Y
     static constexpr bool PERIODIC = false;
 };
 
-using CoordX = ddc::Coordinate<X>;
-using CoordY = ddc::Coordinate<Y>;
+using CoordX = Coord<X>;
+using CoordY = Coord<Y>;
 
-struct IDimX : ddc::UniformPointSampling<X>
+struct GridX : UniformGridBase<X>
 {
 };
 
-struct IDimY : ddc::UniformPointSampling<Y>
+struct GridY : UniformGridBase<Y>
 {
 };
 
-using IdxXY = ddc::DiscreteElement<IDimX, IDimY>;
+using IdxXY = Idx<GridX, GridY>;
 
-using IVectX = ddc::DiscreteVector<IDimX>;
-using IVectY = ddc::DiscreteVector<IDimY>;
+using IdxStepX = IdxStep<GridX>;
+using IdxStepY = IdxStep<GridY>;
 
-using IDomainX = ddc::DiscreteDomain<IDimX>;
-using IDomainY = ddc::DiscreteDomain<IDimY>;
-using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
+using IdxRangeX = IdxRange<GridX>;
+using IdxRangeY = IdxRange<GridY>;
+using IdxRangeXY = IdxRange<GridX, GridY>;
 
-using DFieldXY = device_t<ddc::Chunk<double, IDomainXY>>;
+using DFieldMemXY = FieldMem<double, IdxRangeXY>;
 
 double constant_func_check_2d()
 {
     CoordX const x_min(0.0);
     CoordX const x_max(M_PI);
-    IVectX const x_size(10);
+    IdxStepX const x_size(10);
 
     CoordY const y_min(0.0);
     CoordY const y_max(20.0);
-    IVectY const y_size(10);
+    IdxStepY const y_size(10);
 
     // Creating mesh & supports
-    IDomainX const gridx = ddc::init_discrete_space<IDimX>(IDimX::init(x_min, x_max, x_size));
-    IDomainY const gridy = ddc::init_discrete_space<IDimY>(IDimY::init(y_min, y_max, y_size));
+    IdxRangeX const gridx = ddc::init_discrete_space<GridX>(GridX::init(x_min, x_max, x_size));
+    IdxRangeY const gridy = ddc::init_discrete_space<GridY>(GridY::init(y_min, y_max, y_size));
 
-    IDomainXY const gridxy(gridx, gridy);
+    IdxRangeXY const gridxy(gridx, gridy);
 
-    DFieldXY quadrature_coeffs(
+    DFieldMemXY quadrature_coeffs(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
 
-    Quadrature<IDomainXY> const integrate(quadrature_coeffs.span_cview());
-    DFieldXY values(gridxy);
+    Quadrature<IdxRangeXY> const integrate(get_const_field(quadrature_coeffs));
+    DFieldMemXY values(gridxy);
 
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
-    double integral = integrate(Kokkos::DefaultExecutionSpace(), values.span_cview());
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), get_const_field(values));
     double expected_val = (x_max - x_min) * (y_max - y_min);
 
     return abs(integral - expected_val);
@@ -79,25 +79,25 @@ void integrated_function_operator()
 {
     CoordX x_min(0.0);
     CoordX x_max(3.0);
-    IVectX x_ncells(4);
+    IdxStepX x_ncells(4);
     CoordY y_min(4.0);
     CoordY y_max(8.0);
-    IVectY y_ncells(16);
+    IdxStepY y_ncells(16);
 
-    IDomainX gridx = ddc::init_discrete_space<IDimX>(IDimX::init<IDimX>(x_min, x_max, x_ncells));
+    IdxRangeX gridx = ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_ncells));
 
-    IDomainY gridy = ddc::init_discrete_space<IDimY>(IDimY::init<IDimY>(y_min, y_max, y_ncells));
-    IDomainXY gridxy(gridx, gridy);
+    IdxRangeY gridy = ddc::init_discrete_space<GridY>(GridY::init<GridY>(y_min, y_max, y_ncells));
+    IdxRangeXY gridxy(gridx, gridy);
 
-    DFieldXY quad_coeffs_second
-            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-    Quadrature func_operator(quad_coeffs_second.span_cview());
+    DFieldMemXY quad_coeffs_second(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
+    Quadrature func_operator(get_const_field(quad_coeffs_second));
 
     double const integral = func_operator(
             Kokkos::DefaultExecutionSpace(),
             KOKKOS_LAMBDA(IdxXY ixy) {
-                double y = ddc::coordinate(ddc::select<IDimY>(ixy));
-                double x = ddc::coordinate(ddc::select<IDimX>(ixy));
+                double y = ddc::coordinate(ddc::select<GridY>(ixy));
+                double x = ddc::coordinate(ddc::select<GridX>(ixy));
                 return x * y + 2;
             });
     EXPECT_DOUBLE_EQ(integral, 132.);
@@ -119,10 +119,10 @@ struct ComputeErrorTraits
     {
         static bool constexpr PERIODIC = false;
     };
-    struct IDimX : ddc::UniformPointSampling<X>
+    struct GridX : UniformGridBase<X>
     {
     };
-    struct IDimY : ddc::UniformPointSampling<Y>
+    struct GridY : UniformGridBase<Y>
     {
     };
 };
@@ -132,41 +132,41 @@ double compute_error(int n_elems)
 {
     using DimX = typename ComputeErrorTraits<N>::X;
     using DimY = typename ComputeErrorTraits<N>::Y;
-    using IDimX = typename ComputeErrorTraits<N>::IDimX;
-    using IDimY = typename ComputeErrorTraits<N>::IDimY;
-    using IVectX = ddc::DiscreteVector<IDimX>;
-    using IVectY = ddc::DiscreteVector<IDimY>;
-    using IDomainX = ddc::DiscreteDomain<IDimX>;
-    using IDomainY = ddc::DiscreteDomain<IDimY>;
-    using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
-    using DFieldXY = device_t<ddc::Chunk<double, IDomainXY>>;
-    using DSpanXY = device_t<ddc::ChunkSpan<double, IDomainXY>>;
+    using GridX = typename ComputeErrorTraits<N>::GridX;
+    using GridY = typename ComputeErrorTraits<N>::GridY;
+    using IdxStepX = IdxStep<GridX>;
+    using IdxStepY = IdxStep<GridY>;
+    using IdxRangeX = IdxRange<GridX>;
+    using IdxRangeY = IdxRange<GridY>;
+    using IdxRangeXY = IdxRange<GridX, GridY>;
+    using DFieldMemXY = FieldMem<double, IdxRangeXY>;
+    using DFieldXY = Field<double, IdxRangeXY>;
 
-    ddc::Coordinate<DimX> const x_min(0.0);
-    ddc::Coordinate<DimX> const x_max(M_PI);
-    IVectX x_size(n_elems);
+    Coord<DimX> const x_min(0.0);
+    Coord<DimX> const x_max(M_PI);
+    IdxStepX x_size(n_elems);
 
-    ddc::Coordinate<DimY> const y_min(0.0);
-    ddc::Coordinate<DimY> const y_max(M_PI);
-    IVectY y_size(n_elems);
+    Coord<DimY> const y_min(0.0);
+    Coord<DimY> const y_max(M_PI);
+    IdxStepY y_size(n_elems);
 
-    IDomainX const gridx
-            = ddc::init_discrete_space<IDimX>(IDimX::template init<IDimX>(x_min, x_max, x_size));
-    IDomainY const gridy
-            = ddc::init_discrete_space<IDimY>(IDimY::template init<IDimY>(y_min, y_max, y_size));
-    IDomainXY const gridxy(gridx, gridy);
+    IdxRangeX const gridx
+            = ddc::init_discrete_space<GridX>(GridX::template init<GridX>(x_min, x_max, x_size));
+    IdxRangeY const gridy
+            = ddc::init_discrete_space<GridY>(GridY::template init<GridY>(y_min, y_max, y_size));
+    IdxRangeXY const gridxy(gridx, gridy);
 
-    DFieldXY quadrature_coeffs
+    DFieldMemXY quadrature_coeffs
             = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-    Quadrature<IDomainXY> const integrate(quadrature_coeffs);
+    Quadrature<IdxRangeXY> const integrate(quadrature_coeffs);
 
-    DFieldXY values_alloc(gridxy);
-    DSpanXY values = values_alloc.span_view();
+    DFieldMemXY values_alloc(gridxy);
+    DFieldXY values = get_field(values_alloc);
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             gridxy,
-            KOKKOS_LAMBDA(ddc::DiscreteElement<IDimX, IDimY> const idx) {
+            KOKKOS_LAMBDA(Idx<GridX, GridY> const idx) {
                 double const y_cos = Kokkos::cos(ddc::get<DimY>(ddc::coordinate(idx)));
                 values(idx) = sin(ddc::get<DimX>(ddc::coordinate(idx))) * y_cos * y_cos;
             });

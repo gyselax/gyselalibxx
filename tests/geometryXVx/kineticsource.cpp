@@ -23,10 +23,10 @@ TEST(KineticSource, Moments)
     CoordVx const vx_max(6);
     IVectVx const vx_size(30);
 
-    IVectSp const nb_species(2);
-    IDomainSp const dom_sp(IndexSp(0), nb_species);
-    IndexSp const my_iion = dom_sp.front();
-    IndexSp const my_ielec = dom_sp.back();
+    IdxStepSp const nb_species(2);
+    IdxRangeSp const dom_sp(IdxSp(0), nb_species);
+    IdxSp const my_iion = dom_sp.front();
+    IdxSp const my_ielec = dom_sp.back();
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -45,7 +45,7 @@ TEST(KineticSource, Moments)
     SplineXBuilder_1d const builder_x(gridx);
     SplineVxBuilder_1d const builder_vx(gridvx);
 
-    IDomainSpXVx const mesh(IDomainSp(my_iion, IVectSp(1)), gridx, gridvx);
+    IDomainSpXVx const mesh(IdxRangeSp(my_iion, IdxStepSp(1)), gridx, gridvx);
 
     host_t<DFieldX> quadrature_coeffs_x
             = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
@@ -54,14 +54,14 @@ TEST(KineticSource, Moments)
     host_t<Quadrature<IDomainX>> const integrate_x(quadrature_coeffs_x.span_cview());
     host_t<Quadrature<IDomainVx>> const integrate_v(quadrature_coeffs_vx.span_cview());
 
-    host_t<DFieldSp> charges(dom_sp);
+    host_t<DFieldMemSp> charges(dom_sp);
     charges(my_ielec) = -1.;
     charges(my_iion) = 1.;
-    host_t<DFieldSp> masses(dom_sp);
+    host_t<DFieldMemSp> masses(dom_sp);
     ddc::parallel_fill(masses, 1.);
 
     // Initialization of the distribution function
-    ddc::init_discrete_space<IDimSp>(std::move(charges), std::move(masses));
+    ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
     DFieldSpXVx allfdistribu(mesh);
 
     // Initialization of the distribution function

@@ -70,17 +70,17 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    IDomainX const mesh_x = init_spline_dependent_domain<
+    IDomainX const mesh_x = init_spline_dependent_idx_range<
             IDimX,
             BSplinesX,
             SplineInterpPointsX>(conf_voicexx, "x");
-    IDomainVx const mesh_vx = init_spline_dependent_domain<
+    IDomainVx const mesh_vx = init_spline_dependent_idx_range<
             IDimVx,
             BSplinesVx,
             SplineInterpPointsVx>(conf_voicexx, "vx");
     IDomainXVx const meshXVx(mesh_x, mesh_vx);
 
-    IDomainSp const dom_kinsp = init_species(conf_voicexx);
+    IdxRangeSp const dom_kinsp = init_species(conf_voicexx);
 
     IDomainSpXVx const meshSpXVx(dom_kinsp, meshXVx);
     IDomainSpVx const meshSpVx(dom_kinsp, mesh_vx);
@@ -238,8 +238,8 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("Lx", ddcHelper::total_interval_length(mesh_x));
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
     ddc::expose_to_pdi("Nkinspecies", dom_kinsp.size());
-    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
-    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[dom_kinsp]);
+    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<Species>().charges()[dom_kinsp]);
+    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<Species>().masses()[dom_kinsp]);
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
 
     steady_clock::time_point const start = steady_clock::now();

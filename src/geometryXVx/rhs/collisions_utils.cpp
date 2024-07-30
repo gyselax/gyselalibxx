@@ -17,11 +17,11 @@ namespace {
  *  - kernel maxwellian moments
  * Warning: only meaningful for the collision operator!
  */
-IndexSp find_ion(IDomainSp const dom_sp)
+IdxSp find_ion(IdxRangeSp const dom_sp)
 {
     assert(dom_sp.size() == 2);
-    std::optional<IndexSp> iion_opt;
-    for (IndexSp const isp : dom_sp) {
+    std::optional<IdxSp> iion_opt;
+    for (IdxSp const isp : dom_sp) {
         if (charge(isp) > 0.) {
             iion_opt = isp;
         }
@@ -44,8 +44,8 @@ void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0)
             Kokkos::DefaultExecutionSpace(),
             nustar_profile.domain(),
             KOKKOS_LAMBDA(IndexSpX const ispx) {
-                double const coeff = Kokkos::sqrt(mass(ielec()) / mass(ddc::select<IDimSp>(ispx)))
-                                     * Kokkos::pow(charge(ddc::select<IDimSp>(ispx)), 4) / Lx;
+                double const coeff = Kokkos::sqrt(mass(ielec()) / mass(ddc::select<Species>(ispx)))
+                                     * Kokkos::pow(charge(ddc::select<Species>(ispx)), 4) / Lx;
                 nustar_profile(ispx) = coeff * nustar0;
             });
 }
@@ -77,7 +77,7 @@ void compute_collfreq_ab(
         DViewSpX density,
         DViewSpX temperature)
 {
-    IndexSp const iion = find_ion(density.domain<IDimSp>());
+    IdxSp const iion = find_ion(density.domain<Species>());
     double const charge_ratio(charge(iion) / charge(ielec()));
     double const me_on_mi(mass(ielec()) / mass(iion));
 
@@ -123,7 +123,7 @@ void compute_momentum_energy_exchange(
         DViewSpX mean_velocity,
         DViewSpX temperature)
 {
-    IndexSp const iion = find_ion(density.domain<IDimSp>());
+    IdxSp const iion = find_ion(density.domain<Species>());
     double const mass_ratio(mass(ielec()) / mass(iion));
     double const me_on_memi(mass(ielec()) / (mass(ielec()) + mass(iion)));
     ddc::parallel_for_each(

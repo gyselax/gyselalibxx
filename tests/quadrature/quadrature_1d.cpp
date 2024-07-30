@@ -12,23 +12,23 @@ namespace {
 
 enum Method { TRAPEZ, SIMPSON };
 
-struct RDimXPeriod
+struct DimXPeriod
 {
     static bool constexpr PERIODIC = true;
 };
 
-struct IDimXPeriod : ddc::NonUniformPointSampling<RDimXPeriod>
+struct GridXPeriod : NonUniformGridBase<DimXPeriod>
 {
 };
-using IDomXPeriod = ddc::DiscreteDomain<IDimXPeriod>;
-using CoordXPeriod = ddc::Coordinate<RDimXPeriod>;
-using DFieldX = device_t<ddc::Chunk<double, IDomXPeriod>>;
+using IDomXPeriod = IdxRange<GridXPeriod>;
+using CoordXPeriod = Coord<DimXPeriod>;
+using DFieldMemX = device_t<FieldMem<double, IDomXPeriod>>;
 
 double constant_func_check_1d(Method quad_method)
 {
     CoordXPeriod const x_min(0.0);
     CoordXPeriod const x_max(M_PI);
-    ddc::DiscreteVector<IDimXPeriod> const x_size(100);
+    IdxStep<GridXPeriod> const x_size(100);
 
     // Creating mesh & support
     std::vector<CoordXPeriod> point_sampling;
@@ -38,12 +38,12 @@ double constant_func_check_1d(Method quad_method)
         point_sampling.push_back(x_min + k * dx);
     }
 
-    ddc::init_discrete_space<IDimXPeriod>(point_sampling);
-    ddc::DiscreteElement<IDimXPeriod> lbound(0);
-    ddc::DiscreteVector<IDimXPeriod> npoints(x_size);
-    ddc::DiscreteDomain<IDimXPeriod> gridx(lbound, npoints);
+    ddc::init_discrete_space<GridXPeriod>(point_sampling);
+    Idx<GridXPeriod> lbound(0);
+    IdxStep<GridXPeriod> npoints(x_size);
+    IdxRange<GridXPeriod> gridx(lbound, npoints);
 
-    DFieldX quadrature_coeffs_alloc(gridx);
+    DFieldMemX quadrature_coeffs_alloc(gridx);
     if (quad_method == Method::TRAPEZ) {
         quadrature_coeffs_alloc
                 = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
@@ -53,10 +53,10 @@ double constant_func_check_1d(Method quad_method)
                 = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridx);
     }
 
-    Quadrature const integrate(quadrature_coeffs_alloc.span_cview());
+    Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
 
-    DFieldX values_alloc(gridx);
-    ddc::ChunkSpan values = values_alloc.span_view();
+    DFieldMemX values_alloc(gridx);
+    device_t<Field<double, IDomXPeriod>> values = values_alloc.span_view();
     Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
     double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     double expected_val = x_max - x_min;
@@ -71,7 +71,7 @@ struct ComputeErrorTraits
     {
         static bool constexpr PERIODIC = false;
     };
-    struct IDimY : ddc::NonUniformPointSampling<Y>
+    struct GridY : NonUniformGridBase<Y>
     {
     };
 };
@@ -80,14 +80,14 @@ template <std::size_t N>
 double compute_error(int n_elems, Method quad_method)
 {
     using DimY = typename ComputeErrorTraits<N>::Y;
-    using IDimY = typename ComputeErrorTraits<N>::IDimY;
-    using IDomainY = ddc::DiscreteDomain<IDimY>;
-    using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
-    using DSpanY = device_t<ddc::ChunkSpan<double, IDomainY>>;
+    using GridY = typename ComputeErrorTraits<N>::GridY;
+    using IdxRangeY = IdxRange<GridY>;
+    using DFieldMemY = FieldMem<double, IdxRangeY>;
+    using DFieldY = Field<double, IdxRangeY>;
 
-    ddc::Coordinate<DimY> const y_min(0.0);
-    ddc::Coordinate<DimY> const y_max(M_PI);
-    std::vector<ddc::Coordinate<DimY>> point_sampling;
+    Coord<DimY> const y_min(0.0);
+    Coord<DimY> const y_max(M_PI);
+    std::vector<Coord<DimY>> point_sampling;
     double dy = (y_max - y_min) / n_elems;
 
     // Create & intialize Uniform mesh
@@ -95,31 +95,29 @@ double compute_error(int n_elems, Method quad_method)
         point_sampling.push_back(y_min + k * dy);
     }
 
-    ddc::init_discrete_space<IDimY>(point_sampling);
-    ddc::DiscreteElement<IDimY> lbound(0);
-    ddc::DiscreteVector<IDimY> npoints(n_elems);
-    ddc::DiscreteDomain<IDimY> gridy(lbound, npoints);
+    ddc::init_discrete_space<GridY>(point_sampling);
+    Idx<GridY> lbound(0);
+    IdxStep<GridY> npoints(n_elems);
+    IdxRange<GridY> gridy(lbound, npoints);
 
-    DFieldY quadrature_coeffs_alloc(gridy);
+    DFieldMemY quadrature_coeffs_alloc(gridy);
     if (quad_method == Method::TRAPEZ) {
         quadrature_coeffs_alloc
-                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, IDimY>(gridy);
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, GridY>(gridy);
     }
     if (quad_method == Method::SIMPSON) {
         quadrature_coeffs_alloc
-                = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace, IDimY>(gridy);
+                = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace, GridY>(gridy);
     }
 
-    Quadrature const integrate(quadrature_coeffs_alloc.span_cview());
-    DFieldY values_alloc(gridy);
-    ddc::ChunkSpan values = values_alloc.span_view();
+    Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
+    DFieldMemY values_alloc(gridy);
+    auto values = get_field(values_alloc);
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             gridy,
-            KOKKOS_LAMBDA(ddc::DiscreteElement<IDimY> const idx) {
-                values(idx) = sin(ddc::coordinate(idx));
-            });
+            KOKKOS_LAMBDA(Idx<GridY> const idx) { values(idx) = sin(ddc::coordinate(idx)); });
 
     double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     return std::abs(2 - integral);

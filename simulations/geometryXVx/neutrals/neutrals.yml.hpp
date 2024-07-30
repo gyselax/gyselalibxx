@@ -29,6 +29,7 @@ SpeciesInfo:
 
 NeutralSpeciesInfo:
 - mass: 400.
+  density_eq: 1.
 
 Krook:
 - name: 'adaptive' # 'constant' or adaptive': constant values or not for nu coeff.
@@ -47,6 +48,10 @@ KineticSource:
   density: 1.
   energy: 1.
   temperature: 1.
+
+DiffusiveNeutralSolver:
+  normalization_coeff_neutrals: 1e-2
+  norm_coeff_rate_neutrals: 1e-3
 
 KineticFluidCouplingSource:
   density_coupling_coeff: 1.0

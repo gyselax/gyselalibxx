@@ -17,7 +17,7 @@ DSpanSpMX ConstantFluidInitialization::operator()(DSpanSpMX const fluid_moments)
             Kokkos::DefaultExecutionSpace(),
             fluid_moments.domain(),
             KOKKOS_LAMBDA(IndexSpMX const ispmx) {
-                IndexSpM ispm(ddc::select<IDimSp, IDimM>(ispmx));
+                IndexSpM ispm(ddc::select<Species, IDimM>(ispmx));
                 fluid_moments(ispmx) = moments(ispm);
             });
     return fluid_moments;

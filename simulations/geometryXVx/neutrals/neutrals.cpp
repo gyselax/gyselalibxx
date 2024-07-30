@@ -77,11 +77,11 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    IDomainX const mesh_x = init_spline_dependent_domain<
+    IDomainX const mesh_x = init_spline_dependent_idx_range<
             IDimX,
             BSplinesX,
             SplineInterpPointsX>(conf_voicexx, "x");
-    IDomainVx const mesh_vx = init_spline_dependent_domain<
+    IDomainVx const mesh_vx = init_spline_dependent_idx_range<
             IDimVx,
             BSplinesVx,
             SplineInterpPointsVx>(conf_voicexx, "vx");
@@ -94,8 +94,8 @@ int main(int argc, char** argv)
     SplineVxBuilder const builder_vx(meshXVx);
     SplineVxBuilder_1d const builder_vx_poisson(mesh_vx);
 
-    IDomainSp dom_kinsp;
-    IDomainSp dom_fluidsp;
+    IdxRangeSp dom_kinsp;
+    IdxRangeSp dom_fluidsp;
     init_species_withfluid(dom_kinsp, dom_fluidsp, conf_voicexx);
 
     // Initialization of kinetic species distribution function
@@ -128,9 +128,16 @@ int main(int argc, char** argv)
     // Neutral species initialization
     DFieldSpMX neutrals_alloc(IDomainSpMX(dom_fluidsp, meshM, mesh_x));
     auto neutrals = neutrals_alloc.span_view();
-
     host_t<DFieldSpM> moments_init(IDomainSpM(dom_fluidsp, meshM));
-    ddc::parallel_fill(moments_init, 1.);
+
+    for (IdxSp const isp : dom_fluidsp) {
+        PC_tree_t const conf_nisp = PCpp_get(
+                conf_voicexx,
+                ".NeutralSpeciesInfo[%d]",
+                (isp - dom_fluidsp.front()).value());
+        ddc::parallel_fill(moments_init[isp], PCpp_double(conf_nisp, ".density_eq"));
+    }
+
     ConstantFluidInitialization fluid_init(moments_init);
     fluid_init(neutrals);
 
@@ -249,8 +256,10 @@ int main(int argc, char** argv)
 #endif
     QNSolver const poisson(poisson_solver, rhs);
 
-    double const normalization_coeff(0.01);
-    double const norm_coeff_rate(1.e-3);
+    double const normalization_coeff
+            = PCpp_double(conf_voicexx, ".DiffusiveNeutralSolver.normalization_coeff_neutrals");
+    double const norm_coeff_rate
+            = PCpp_double(conf_voicexx, ".DiffusiveNeutralSolver.norm_coeff_rate_neutrals");
 
     // The CX coefficient needs to be first constructed in order to write a correct initstate file. Check pdi_out_neutrals.yml.hpp for a closer look.
     ChargeExchangeRate charge_exchange(norm_coeff_rate);
@@ -291,9 +300,9 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("Lx", ddcHelper::total_interval_length(mesh_x));
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
     ddc::expose_to_pdi("Nkinspecies", dom_kinsp.size());
-    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<IDimSp>().charges()[dom_kinsp]);
-    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<IDimSp>().masses()[dom_kinsp]);
-    ddc::expose_to_pdi("neutrals_masses", ddc::discrete_space<IDimSp>().masses()[dom_fluidsp]);
+    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<Species>().charges()[dom_kinsp]);
+    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<Species>().masses()[dom_kinsp]);
+    ddc::expose_to_pdi("neutrals_masses", ddc::discrete_space<Species>().masses()[dom_fluidsp]);
     ddc::expose_to_pdi("normalization_coeff_neutrals", normalization_coeff);
     ddc::expose_to_pdi("norm_coeff_rate_neutrals", norm_coeff_rate);
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);

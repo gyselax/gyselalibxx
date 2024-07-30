@@ -1,44 +1,44 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines/deriv.hpp>
 
+#include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "euler.hpp"
 #include "iinterpolator.hpp"
 
 
 /**
- * @brief A class which computes the advection along the dimension of interest IDimInterest. 
+ * @brief A class which computes the advection along the dimension of interest GridInterest. 
  * 
  * This operator solves the following equation type
  * 
  * @f$ \partial_t f_s(t,x) + A_{s, x_i} (x') \cdot \partial_{x_i} f_s (t, x) = 0, \qquad x\in \Omega, x'\in\Omega'@f$
  * 
  * with 
- *  * @f$ f @f$, a function defined on a domain @f$ \Omega @f$; 
- *  * @f$ A @f$, an advection field defined on subdomain @f$ \Omega'\subset \Omega @f$; 
+ *  * @f$ f @f$, a function defined on an index range @f$ \Omega @f$; 
+ *  * @f$ A @f$, an advection field defined on subindex range @f$ \Omega'\subset \Omega @f$; 
  *  * @f$ x_i @f$, an advection dimension.
  * 
  * 
- * The characteristic equation is solved on the advection domain @f$ \Omega'@f$. 
+ * The characteristic equation is solved on the advection index range @f$ \Omega'@f$. 
  * Then the feet on @f$ \Omega@f$ are computed from the characteristic feet on @f$ \Omega'@f$ and the function 
  * @f$ f @f$ is interpolated at the feet in @f$ \Omega @f$. 
  * 
  * The characteristic equation is solved using a time integration method (ITimeStepper). 
  * 
  * 
- * @tparam IDimInterest
+ * @tparam GridInterest
  *          The dimension along which the advection is computed. 
  *          It refers to the dimension of @f$ x_i @f$ in the equation. 
- * @tparam AdvectionDomain
- *          The domain @f$ \Omega' @f$ where the characteristic equation is solved. 
- *          It also refers to the domain of the advection field. 
- *          It had to also be defined on the IDimInterest for the time integration method. 
- * @tparam FunctionDomain
- *          The domain @f$ \Omega @f$ where allfdistribu is defined. 
+ * @tparam AdvectionIdxRange
+ *          The index range @f$ \Omega' @f$ where the characteristic equation is solved. 
+ *          It also refers to the index range of the advection field. 
+ *          It had to also be defined on the GridInterest for the time integration method. 
+ * @tparam FunctionIdxRange
+ *          The index range @f$ \Omega @f$ where allfdistribu is defined. 
  * @tparam AdvectionFieldBuilder
  *          The type of the spline builder for the advection field (see SplineBuilder). 
  * @tparam AdvectionFieldEvaluator
@@ -48,62 +48,64 @@
  *          The method is picked among the child classes of ITimeStepper. 
  */
 template <
-        class IDimInterest,
-        class AdvectionDomain,
-        class FunctionDomain,
+        class GridInterest,
+        class AdvectionIdxRange,
+        class FunctionIdxRange,
         class AdvectionFieldBuilder,
         class AdvectionFieldEvaluator,
         class TimeStepper
-        = Euler<device_t<ddc::Chunk<
-                        ddc::Coordinate<typename IDimInterest::continuous_dimension_type>,
-                        AdvectionDomain>>,
-                device_t<ddc::Chunk<double, AdvectionDomain>>>>
+        = Euler<FieldMem<
+                        Coord<typename GridInterest::continuous_dimension_type>,
+                        AdvectionIdxRange>,
+                FieldMem<double, AdvectionIdxRange>>>
 class BslAdvection1D
 {
 private:
-    // Advection domain element:
-    using AdvectionIndex = typename AdvectionDomain::discrete_element_type;
+    // Advection index range element:
+    using AdvectionIdx = typename AdvectionIdxRange::discrete_element_type;
 
-    // Full domain element:
-    using FunctionIndex = typename FunctionDomain::discrete_element_type;
+    // Full index range element:
+    using FunctionIdx = typename FunctionIdxRange::discrete_element_type;
 
     // Advection dimension (or Interest dimension):
-    using RDimInterest = typename IDimInterest::continuous_dimension_type;
-    using CoordInterest = ddc::Coordinate<RDimInterest>;
-    using DomainInterest = ddc::DiscreteDomain<IDimInterest>;
-    using IndexInterest = typename DomainInterest::discrete_element_type;
+    using DimInterest = typename GridInterest::continuous_dimension_type;
+    using CoordInterest = Coord<DimInterest>;
+    using IdxRangeInterest = IdxRange<GridInterest>;
+    using IdxInterest = typename IdxRangeInterest::discrete_element_type;
 
     // Type for the feet and advection field:
-    using FeetChunk = device_t<ddc::Chunk<CoordInterest, AdvectionDomain>>;
-    using FeetSpan = typename FeetChunk::span_type;
-    using FeetView = typename FeetChunk::view_type;
+    using FeetFieldMem = FieldMem<CoordInterest, AdvectionIdxRange>;
+    using FeetField = typename FeetFieldMem::span_type;
+    using FeetConstField = typename FeetFieldMem::view_type;
 
-    using AdvecFieldChunk = device_t<ddc::Chunk<double, AdvectionDomain>>;
-    using AdvecFieldSpan = typename AdvecFieldChunk::span_type;
+    using AdvecFieldMem = FieldMem<double, AdvectionIdxRange>;
+    using AdvecField = typename AdvecFieldMem::span_type;
 
-    using FunctionSpan = device_t<ddc::ChunkSpan<double, FunctionDomain>>;
+    using FunctionField = Field<double, FunctionIdxRange>;
 
     // Type for spline representation of the advection field
-    using BSAdvectionDomain = typename AdvectionFieldBuilder::batched_spline_domain_type;
-    using AdvecFieldSplineChunk = device_t<ddc::Chunk<double, BSAdvectionDomain>>;
-    using AdvecFieldSplineSpan = device_t<ddc::ChunkSpan<double, BSAdvectionDomain>>;
+    using BSAdvectionIdxRange = typename AdvectionFieldBuilder::batched_spline_domain_type;
+    using AdvecFieldSplineMem = FieldMem<double, BSAdvectionIdxRange>;
+    using AdvecFieldSplineCoeffs = Field<double, BSAdvectionIdxRange>;
 
     // Type for the derivatives of the advection field
-    using DerivDim = ddc::Deriv<RDimInterest>;
-    using DomainInterestDeriv = ddc::DiscreteDomain<DerivDim>;
-    using AdvecFieldDerivDomain = ddc::replace_dim_of_t<AdvectionDomain, IDimInterest, DerivDim>;
-    using AdvecFieldDerivView = device_t<ddc::ChunkSpan<const double, AdvecFieldDerivDomain>>;
+    using DerivDim = ddc::Deriv<DimInterest>;
+    using AdvecFieldDerivIdxRange
+            = ddc::replace_dim_of_t<AdvectionIdxRange, GridInterest, DerivDim>;
+    using AdvecFieldDerivConstField = Field<const double, AdvecFieldDerivIdxRange>;
 
 
     // Interpolators:
-    using FunctionPreallocatableInterpolatorType
-            = interpolator_on_domain_t<IPreallocatableInterpolator, IDimInterest, FunctionDomain>;
+    using FunctionPreallocatableInterpolatorType = interpolator_on_idx_range_t<
+            IPreallocatableInterpolator,
+            GridInterest,
+            FunctionIdxRange>;
     using FunctionInterpolatorType
-            = interpolator_on_domain_t<IInterpolator, IDimInterest, FunctionDomain>;
+            = interpolator_on_idx_range_t<IInterpolator, GridInterest, FunctionIdxRange>;
 
     // Type for the derivatives of the function
-    using FunctionDerivDomain = typename FunctionInterpolatorType::batched_derivs_domain_type;
-    using FunctionDerivChunk = device_t<ddc::Chunk<double, FunctionDerivDomain>>;
+    using FunctionDerivIdxRange = typename FunctionInterpolatorType::batched_derivs_idx_range_type;
+    using FunctionDerivFieldMem = FieldMem<double, FunctionDerivIdxRange>;
 
     FunctionPreallocatableInterpolatorType const& m_function_interpolator;
 
@@ -114,20 +116,20 @@ private:
 
 public:
     /**
-     * @brief Constructor when the advection domain and the function domain are different. 
+     * @brief Constructor when the advection index range and the function index range are different. 
      * 
-     * When AdvectionDomain and FunctionDomain are different, we need one interpolator for 
-     * each domain. 
+     * When AdvectionIdxRange and FunctionIdxRange are different, we need one interpolator for 
+     * each index range. 
      * 
      * We can also use it when we want two differents interpolators but defined on the same 
-     * domain (e.g. different boundary conditions for the evaluators).
+     * index range (e.g. different boundary conditions for the evaluators).
      * 
-     * @param[in] function_interpolator interpolator along the IDimInterest direction to interpolate 
-     *          the advected function (allfdistribu) on the domain of the function.
-     * @param[in] adv_field_builder builder along the IDimInterest direction to build a spline representation
-     *          of the advection field on the function domain. 
-     * @param[in] adv_field_evaluator evaluator along the IDimInterest direction to evaluate 
-     *          the advection field spline representation on the function domain.  
+     * @param[in] function_interpolator interpolator along the GridInterest direction to interpolate 
+     *          the advected function (allfdistribu) on the index range of the function.
+     * @param[in] adv_field_builder builder along the GridInterest direction to build a spline representation
+     *          of the advection field on the function index range. 
+     * @param[in] adv_field_evaluator evaluator along the GridInterest direction to evaluate 
+     *          the advection field spline representation on the function index range.  
      * @param[in] time_stepper time integration method for the characteristic equation. 
      */
     explicit BslAdvection1D(
@@ -145,7 +147,7 @@ public:
     ~BslAdvection1D() = default;
 
     /**
-     * @brief Advects allfdistribu along the advection dimension IDimInterest for a duration dt.
+     * @brief Advects allfdistribu along the advection dimension GridInterest for a duration dt.
      * 
      * @param[in, out] allfdistribu Reference to the advected function, allocated on the device 
      * @param[in] advection_field Reference to the advection field, allocated on the device.
@@ -157,21 +159,22 @@ public:
      * 
      * @return A reference to the allfdistribu array after advection on dt. 
      */
-    FunctionSpan operator()(
-            FunctionSpan const allfdistribu,
-            AdvecFieldSpan const advection_field,
+    FunctionField operator()(
+            FunctionField const allfdistribu,
+            AdvecField const advection_field,
             double const dt,
-            std::optional<AdvecFieldDerivView> const advection_field_derivatives_min = std::nullopt,
-            std::optional<AdvecFieldDerivView> const advection_field_derivatives_max
+            std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_min
+            = std::nullopt,
+            std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_max
             = std::nullopt) const
     {
         Kokkos::Profiling::pushRegion("BslAdvection1D");
 
-        // Get domains and operators .............................................................
-        FunctionDomain const function_dom = allfdistribu.domain();
-        AdvectionDomain const advection_dom = advection_field.domain();
+        // Get index ranges and operators .............................................................
+        FunctionIdxRange const function_dom = get_idx_range(allfdistribu);
+        AdvectionIdxRange const advection_dom = get_idx_range(advection_field);
         auto const batch_dom = ddc::remove_dims_of(function_dom, advection_dom);
-        DomainInterest const interest_dom(advection_dom);
+        IdxRangeInterest const interest_dom(advection_dom);
 
         std::unique_ptr<FunctionInterpolatorType> const function_interpolator_ptr
                 = m_function_interpolator.preallocate();
@@ -179,37 +182,37 @@ public:
 
 
         // Build spline representation of the advection field ....................................
-        AdvecFieldSplineChunk advection_field_coefs_alloc(
+        AdvecFieldSplineMem advection_field_coefs_alloc(
                 m_adv_field_builder.batched_spline_domain());
-        AdvecFieldSplineSpan advection_field_coefs = advection_field_coefs_alloc.span_view();
+        AdvecFieldSplineCoeffs advection_field_coefs = get_field(advection_field_coefs_alloc);
 
         m_adv_field_builder(
                 advection_field_coefs,
-                advection_field.span_cview(),
+                get_const_field(advection_field),
                 advection_field_derivatives_min,
                 advection_field_derivatives_max);
 
         // Build derivatives on boundaries and fill with zeros....................................
-        FunctionDerivChunk function_derivatives_min(
-                m_function_interpolator.batched_derivs_domain_xmin(function_dom));
-        FunctionDerivChunk function_derivatives_max(
-                m_function_interpolator.batched_derivs_domain_xmax(function_dom));
+        FunctionDerivFieldMem function_derivatives_min(
+                m_function_interpolator.batched_derivs_idx_range_xmin(function_dom));
+        FunctionDerivFieldMem function_derivatives_max(
+                m_function_interpolator.batched_derivs_idx_range_xmax(function_dom));
         ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);
         ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);
 
         // Initialise the characteristics on the mesh points .....................................
         /*
             For the time integration solver, the function we advect (here the characteristics)
-            need to be defined on the same domain as the advection field. We then work on space
+            need to be defined on the same index range as the advection field. We then work on space
             slices of the characteristic feet.  
         */
-        FeetChunk slice_feet_alloc(advection_dom);
-        FeetSpan slice_feet = slice_feet_alloc.span_view();
+        FeetFieldMem slice_feet_alloc(advection_dom);
+        FeetField slice_feet = get_field(slice_feet_alloc);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 advection_dom,
-                KOKKOS_LAMBDA(AdvectionIndex const idx) {
-                    slice_feet(idx) = ddc::coordinate(IndexInterest(idx));
+                KOKKOS_LAMBDA(AdvectionIdx const idx) {
+                    slice_feet(idx) = ddc::coordinate(IdxInterest(idx));
                 });
 
 
@@ -221,19 +224,19 @@ public:
                 * update_adv_field: evaluate the advection field spline at the updated feet. 
         */
         // The function describing how the derivative of the evolve function is calculated.
-        std::function<void(AdvecFieldSpan, FeetView)> update_adv_field
-                = [&](AdvecFieldSpan updated_advection_field, FeetView slice_feet) {
+        std::function<void(AdvecField, FeetConstField)> update_adv_field
+                = [&](AdvecField updated_advection_field, FeetConstField slice_feet) {
                       m_adv_field_evaluator(
                               updated_advection_field,
                               slice_feet,
-                              advection_field_coefs.span_cview());
+                              get_const_field(advection_field_coefs));
                   };
 
 
         // Solve the characteristic equation with a time integration method
         m_time_stepper
                 .update(Kokkos::DefaultExecutionSpace(),
-                        slice_feet.span_view(),
+                        get_field(slice_feet),
                         -dt,
                         update_adv_field);
 
@@ -241,15 +244,15 @@ public:
         // Interpolate the function ..............................................................
         /*
             To interpolate the function we want to advect, we build for the feet a Chunk defined 
-            on the domain where the function is defined. 
+            on the index range where the function is defined. 
         */
-        device_t<ddc::Chunk<CoordInterest, FunctionDomain>> feet_alloc(function_dom);
-        ddc::ChunkSpan feet = feet_alloc.span_view();
+        FieldMem<CoordInterest, FunctionIdxRange> feet_alloc(function_dom);
+        ddc::ChunkSpan feet = get_field(feet_alloc);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 function_dom,
-                KOKKOS_LAMBDA(FunctionIndex const idx) {
-                    AdvectionIndex slice_foot_index(idx);
+                KOKKOS_LAMBDA(FunctionIdx const idx) {
+                    AdvectionIdx slice_foot_index(idx);
                     feet(idx) = slice_feet(slice_foot_index);
                 });
 

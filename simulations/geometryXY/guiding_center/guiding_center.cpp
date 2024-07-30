@@ -54,12 +54,12 @@ int main(int argc, char** argv)
     ddc::ScopeGuard ddc_scope(argc, argv);
 
     // CREATING MESH AND SUPPORTS ----------------------------------------------------------------
-    IDomainX const interpolation_domain_x = init_spline_dependent_domain<
+    IDomainX const interpolation_domain_x = init_spline_dependent_idx_range<
             IDimX,
             BSplinesX,
             SplineInterpPointsX>(conf_gyselalibxx, "x");
 
-    IDomainY const interpolation_domain_y = init_spline_dependent_domain<
+    IDomainY const interpolation_domain_y = init_spline_dependent_idx_range<
             IDimY,
             BSplinesY,
             SplineInterpPointsY>(conf_gyselalibxx, "y");

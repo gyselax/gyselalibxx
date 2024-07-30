@@ -136,41 +136,41 @@ int main(int argc, char** argv)
             PDI_INOUT,
             NULL);
     ddc::init_discrete_space<GridTor1>(grid_tor1);
-    DDomTor1 dom_tor1(IdxTor1(0), DVecTor1(grid_tor1.size()));
+    IdxRangeTor1 dom_tor1(IdxTor1(0), IdxStepTor1(grid_tor1.size()));
     ddc::init_discrete_space<GridTor2>(grid_tor2);
-    DDomTor2 dom_tor2(IdxTor2(0), DVecTor2(grid_tor2.size()));
+    IdxRangeTor2 dom_tor2(IdxTor2(0), IdxStepTor2(grid_tor2.size()));
     ddc::init_discrete_space<GridTor3>(grid_tor3);
-    DDomTor3 dom_tor3(IdxTor3(0), DVecTor3(grid_tor3.size()));
+    IdxRangeTor3 dom_tor3(IdxTor3(0), IdxStepTor3(grid_tor3.size()));
     ddc::init_discrete_space<GridVpar>(grid_vpar);
-    DDomVpar dom_vpar(IdxVpar(0), DVecVpar(grid_vpar.size()));
+    IdxRangeVpar dom_vpar(IdxVpar(0), IdxStepVpar(grid_vpar.size()));
     ddc::init_discrete_space<GridMu>(grid_mu);
-    DDomMu dom_mu(IdxMu(0), DVecMu(grid_mu.size()));
-    IVectSp const kinspecies(charges.size());
-    IDomainSp const dom_kinsp(IndexSp(0), kinspecies);
+    IdxRangeMu dom_mu(IdxMu(0), IdxStepMu(grid_mu.size()));
+    IdxStepSp const kinspecies(charges.size());
+    IdxRangeSp const dom_kinsp(IdxSp(0), kinspecies);
 
-    DFieldTor1 field_grid_tor1(dom_tor1);
-    ddc::parallel_deepcopy(field_grid_tor1, DViewTor1(grid_tor1.data(), dom_tor1));
+    DFieldMemTor1 field_grid_tor1(dom_tor1);
+    ddc::parallel_deepcopy(field_grid_tor1, DConstFieldTor1(grid_tor1.data(), dom_tor1));
     auto field_grid_tor1_host = ddc::create_mirror_view_and_copy(field_grid_tor1.span_view());
-    DFieldTor2 field_grid_tor2(dom_tor2);
-    ddc::parallel_deepcopy(field_grid_tor2, DViewTor2(grid_tor2.data(), dom_tor2));
+    DFieldMemTor2 field_grid_tor2(dom_tor2);
+    ddc::parallel_deepcopy(field_grid_tor2, DConstFieldTor2(grid_tor2.data(), dom_tor2));
     auto field_grid_tor2_host = ddc::create_mirror_view_and_copy(field_grid_tor2.span_view());
-    DFieldTor3 field_grid_tor3(dom_tor3);
-    ddc::parallel_deepcopy(field_grid_tor3, DViewTor3(grid_tor3.data(), dom_tor3));
+    DFieldMemTor3 field_grid_tor3(dom_tor3);
+    ddc::parallel_deepcopy(field_grid_tor3, DConstFieldTor3(grid_tor3.data(), dom_tor3));
     auto field_grid_tor3_host = ddc::create_mirror_view_and_copy(field_grid_tor3.span_view());
-    DFieldVpar field_grid_vpar(dom_vpar);
-    ddc::parallel_deepcopy(field_grid_vpar, DViewVpar(grid_vpar.data(), dom_vpar));
+    DFieldMemVpar field_grid_vpar(dom_vpar);
+    ddc::parallel_deepcopy(field_grid_vpar, DConstFieldVpar(grid_vpar.data(), dom_vpar));
     auto field_grid_vpar_host = ddc::create_mirror_view_and_copy(field_grid_vpar.span_view());
-    DFieldMu field_grid_mu(dom_mu);
-    ddc::parallel_deepcopy(field_grid_mu, DViewMu(grid_mu.data(), dom_mu));
+    DFieldMemMu field_grid_mu(dom_mu);
+    ddc::parallel_deepcopy(field_grid_mu, DConstFieldMu(grid_mu.data(), dom_mu));
     auto field_grid_mu_host = ddc::create_mirror_view_and_copy(field_grid_mu.span_view());
-    FieldSp<int> field_species(dom_kinsp);
-    ddc::parallel_deepcopy(field_species, ViewSp<int>(species.data(), dom_kinsp));
+    FieldMemSp<int> field_species(dom_kinsp);
+    ddc::parallel_deepcopy(field_species, ConstFieldSp<int>(species.data(), dom_kinsp));
     auto field_species_host = ddc::create_mirror_view_and_copy(field_species.span_view());
-    DFieldSp field_charges(dom_kinsp);
-    ddc::parallel_deepcopy(field_charges, DViewSp(charges.data(), dom_kinsp));
+    DFieldMemSp field_charges(dom_kinsp);
+    ddc::parallel_deepcopy(field_charges, DConstFieldSp(charges.data(), dom_kinsp));
     auto field_charges_host = ddc::create_mirror_view_and_copy(field_charges.span_view());
-    DFieldSp field_masses(dom_kinsp);
-    ddc::parallel_deepcopy(field_masses, DViewSp(masses.data(), dom_kinsp));
+    DFieldMemSp field_masses(dom_kinsp);
+    ddc::parallel_deepcopy(field_masses, DConstFieldSp(masses.data(), dom_kinsp));
     auto field_masses_host = ddc::create_mirror_view_and_copy(field_masses.span_view());
 
     // Algorithm Info
@@ -184,7 +184,7 @@ int main(int argc, char** argv)
     cout << "nbiter = " << nbiter << " nbstep_diag = " << nbstep_diag << endl;
 
     // Poloidal cross-section of the 3 moments: density, temperature and Upar
-    DDomSpTorCS const dom_sp_torCS(dom_kinsp, dom_tor2, dom_tor1);
+    IdxRangeSpTorCS const dom_sp_torCS(dom_kinsp, dom_tor2, dom_tor1);
     DFieldSpTorCS_host density_torCS_host(dom_sp_torCS);
     DFieldSpTorCS_host temperature_torCS_host(dom_sp_torCS);
     DFieldSpTorCS_host Upar_torCS_host(dom_sp_torCS);
@@ -194,7 +194,7 @@ int main(int argc, char** argv)
             .with("UparTorCS", Upar_torCS_host);
 
     // fdistribu
-    DDomSpTor3DV2D const
+    IdxRangeSpTor3DV2D const
             dom_sp_tor3D_v2D(dom_kinsp, dom_tor3, dom_tor2, dom_tor1, dom_vpar, dom_mu);
     DFieldSpTor3DV2D_host allfdistribu_host(dom_sp_tor3D_v2D);
     double time_saved;
@@ -212,17 +212,30 @@ int main(int argc, char** argv)
     std::int8_t const collisions_interspecies = true;
     double const rpeak = 1.;
     double const q_rpeak = 1.;
-    DFieldTor1 safety_factor(dom_tor1);
+    DFieldMemTor1 safety_factor(dom_tor1);
     ddc::parallel_fill(safety_factor, 1.0); //ATTENTION: Must be changed
-    DDomTorCS dom_tor1_tor2(dom_tor2, dom_tor1);
-    DFieldTorCS B_norm(dom_tor1_tor2);
+    IdxRangeTorCS dom_tor1_tor2(dom_tor2, dom_tor1);
+    DFieldMemTorCS B_norm(dom_tor1_tor2);
     ddc::parallel_fill(B_norm, 1.0);
+<<<<<<< HEAD
 
     DFieldVpar const coeff_intdvpar
             = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
                     allfdistribu.domain<GridVpar>());
     DFieldMu const coeff_intdmu = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
             allfdistribu.domain<GridMu>());
+=======
+    host_t<DFieldMemVpar> const coeff_intdvpar_host
+            = simpson_quadrature_coefficients_1d(allfdistribu.domain<GridVpar>());
+    host_t<DFieldMemMu> const coeff_intdmu_host
+            = simpson_quadrature_coefficients_1d(allfdistribu.domain<GridMu>());
+    auto coeff_intdvpar = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            coeff_intdvpar_host.span_cview());
+    auto coeff_intdmu = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            coeff_intdmu_host.span_cview());
+>>>>>>> main
 
     CollisionInfoRadial<GridTor1> collision_info(
             nustar0_rpeak,
@@ -231,7 +244,12 @@ int main(int argc, char** argv)
             q_rpeak,
             field_grid_tor1.span_cview(),
             safety_factor.span_cview());
-    CollisionSpVparMu<CollisionInfoRadial<GridTor1>, DDomSpTor3DV2D, GridVpar, GridMu, DViewTorCS>
+    CollisionSpVparMu<
+            CollisionInfoRadial<GridTor1>,
+            IdxRangeSpTor3DV2D,
+            GridVpar,
+            GridMu,
+            DConstFieldTorCS>
             collision_operator(
                     collision_info,
                     dom_sp_tor3D_v2D,
