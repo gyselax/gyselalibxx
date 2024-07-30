@@ -45,5 +45,5 @@ public:
      * @param[in] steps The number of iterations to be performed by the predictor-corrector.
      * @return The distribution function after solving the system.
      */
-    DSpanSpXYVxVy operator()(DSpanSpXYVxVy allfdistribu, double dt, int steps = 1) const override;
+    DFieldSpXYVxVy operator()(DFieldSpXYVxVy allfdistribu, double dt, int steps = 1) const override;
 };

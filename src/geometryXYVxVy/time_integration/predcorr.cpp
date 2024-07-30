@@ -16,29 +16,29 @@ PredCorr::PredCorr(IVlasovSolver const& vlasov_solver, IQNSolver const& poisson_
 {
 }
 
-DSpanSpXYVxVy PredCorr::operator()(
-        DSpanSpXYVxVy const allfdistribu,
+DFieldSpXYVxVy PredCorr::operator()(
+        DFieldSpXYVxVy const allfdistribu,
         double const dt,
         int const steps) const
 {
     auto allfdistribu_host_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
-    ddc::ChunkSpan allfdistribu_host = allfdistribu_host_alloc.span_view();
+    ddc::ChunkSpan allfdistribu_host = get_field(allfdistribu_host_alloc);
 
     // electrostatic potential and electric field (depending only on x)
-    DFieldXY electrostatic_potential(allfdistribu.domain<IDimX, IDimY>());
-    DFieldXY electric_field_x(allfdistribu.domain<IDimX, IDimY>());
-    DFieldXY electric_field_y(allfdistribu.domain<IDimX, IDimY>());
+    DFieldMemXY electrostatic_potential(get_idx_range<GridX, GridY>(allfdistribu));
+    DFieldMemXY electric_field_x(get_idx_range<GridX, GridY>(allfdistribu));
+    DFieldMemXY electric_field_y(get_idx_range<GridX, GridY>(allfdistribu));
 
-    host_t<DFieldXY> electrostatic_potential_host(allfdistribu.domain<IDimX, IDimY>());
+    host_t<DFieldMemXY> electrostatic_potential_host(get_idx_range<GridX, GridY>(allfdistribu));
 
     // a 2D chunck of the same size as fdistribu
-    DFieldSpXYVxVy allfdistribu_half_t(allfdistribu.domain());
+    DFieldMemSpXYVxVy allfdistribu_half_t(get_idx_range(allfdistribu));
 
     m_poisson_solver(
             electrostatic_potential,
             electric_field_x,
             electric_field_y,
-            allfdistribu.span_cview());
+            get_const_field(allfdistribu));
 
     int iter = 0;
     for (; iter < steps; ++iter) {
@@ -50,7 +50,7 @@ DSpanSpXYVxVy PredCorr::operator()(
                 electrostatic_potential,
                 electric_field_x,
                 electric_field_y,
-                allfdistribu.span_cview());
+                get_const_field(allfdistribu));
         // copies necessary to PDI
         ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
         ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
