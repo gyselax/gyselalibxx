@@ -19,6 +19,10 @@
 template <class Edge1Type, class Edge2Type, bool orientations_agree_bool>
 struct Interface
 {
+    static_assert(
+            !std::is_same_v<Edge1Type, OutsideEdge> || !std::is_same_v<Edge2Type, OutsideEdge>,
+            "At least one edge should be inside the simulation.");
+
     /// @brief Edge type of the first patch.
     using Edge1 = Edge1Type;
     /// @brief Edge type of the second patch.
@@ -31,8 +35,16 @@ struct Interface
     */
     static constexpr bool orientations_agree = orientations_agree_bool;
 
-    /// @brief Type of first patch.
-    using Patch1 = typename Edge1::associated_patch;
-    /// @brief Type of second patch.
-    using Patch2 = typename Edge2::associated_patch;
+    template <class Patch>
+    static constexpr bool connected_to_patch()
+    {
+        if constexpr (std::is_same_v<Edge1, OutsideEdge>) {
+            return std::is_same_v<typename Edge2::associated_patch, Patch>;
+        } else if constexpr (std::is_same_v<Edge2, OutsideEdge>) {
+            return std::is_same_v<typename Edge1::associated_patch, Patch>;
+        } else {
+            return (std::is_same_v<typename Edge1::associated_patch, Patch>)
+                   || (std::is_same_v<typename Edge2::associated_patch, Patch>);
+        }
+    }
 };
