@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include "chargedensitycalculator.hpp"
+#include "ddc_aliases.hpp"
 #include "ipoisson_solver.hpp"
 #include "iqnsolver.hpp"
 
@@ -12,7 +12,7 @@
  *
  * An operator which solves the Quasi-Neutrality equation:
  * @f$ - \frac{d^2 \phi}{dx^2} = \rho @f$
- * using a fast Fourier transform on a periodic domain.
+ * using a fast Fourier transform on a periodic index range.
  * This operator only works for equidistant points.
  *
  * The electric field, @f$ \frac{d \phi}{dx} @f$ is calculated using
@@ -21,8 +21,8 @@
 class QNSolver : public IQNSolver
 {
     using PoissonSolver = IPoissonSolver<
-            IDomainXY,
-            IDomainXY,
+            IdxRangeXY,
+            IdxRangeXY,
             std::experimental::layout_right,
             typename Kokkos::DefaultExecutionSpace::memory_space>;
     PoissonSolver const& m_solve_poisson;
@@ -48,8 +48,8 @@ public:
      * @param[in] allfdistribu The distribution function.
      */
     void operator()(
-            DSpanXY electrostatic_potential,
-            DSpanXY electric_field_x,
-            DSpanXY electric_field_y,
-            DViewSpXYVxVy allfdistribu) const override;
+            DFieldXY electrostatic_potential,
+            DFieldXY electric_field_x,
+            DFieldXY electric_field_y,
+            DConstFieldSpXYVxVy allfdistribu) const override;
 };

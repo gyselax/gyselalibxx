@@ -159,7 +159,7 @@ private:
     const int nbasis_p;
 
     // Domains
-    BSDomainPolar fem_non_singular_domain;
+    BSDomainPolar fem_non_singular_idx_range;
     BSDomainR_Polar radial_bsplines;
     BSDomainP_Polar polar_bsplines;
 
@@ -216,8 +216,8 @@ public:
             Mapping const& mapping)
         : nbasis_r(ddc::discrete_space<BSplinesR_Polar>().nbasis() - n_overlap_cells - 1)
         , nbasis_p(ddc::discrete_space<BSplinesP_Polar>().nbasis())
-        , fem_non_singular_domain(
-                  ddc::discrete_space<PolarBSplinesRP>().tensor_bspline_domain().remove_last(
+        , fem_non_singular_idx_range(
+                  ddc::discrete_space<PolarBSplinesRP>().tensor_bspline_idx_range().remove_last(
                           ddc::DiscreteVector<PolarBSplinesRP> {nbasis_p}))
         , radial_bsplines(ddc::discrete_space<BSplinesR_Polar>().full_domain().remove_first(
                   ddc::DiscreteVector<BSplinesR_Polar> {n_overlap_cells}))
@@ -240,7 +240,7 @@ public:
         , weights_r(quadrature_domain_r)
         , weights_p(quadrature_domain_p)
         , singular_basis_vals_and_derivs(ddc::DiscreteDomain<PolarBSplinesRP, QDimRMesh, QDimPMesh>(
-                  PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
+                  PolarBSplinesRP::singular_idx_range<PolarBSplinesRP>(),
                   ddc::select<QDimRMesh>(quadrature_domain_singular),
                   ddc::select<QDimPMesh>(quadrature_domain_singular)))
         , r_basis_vals_and_derivs(ddc::DiscreteDomain<
@@ -316,7 +316,7 @@ public:
             }
         });
 
-        auto singular_domain = PolarBSplinesRP::singular_domain<PolarBSplinesRP>();
+        auto singular_idx_range = PolarBSplinesRP::singular_idx_range<PolarBSplinesRP>();
 
         // Find value and derivative of 2D bsplines covering the singular point
         ddc::for_each(quadrature_domain_singular, [&](QuadratureIndexRP const irp) {
@@ -335,20 +335,20 @@ public:
 
             // Calculate the value
             ddc::discrete_space<PolarBSplinesRP>().eval_basis(singular_vals, vals, coord);
-            for (auto ib : singular_domain) {
+            for (auto ib : singular_idx_range) {
                 singular_basis_vals_and_derivs(ib, ir, ip).value = singular_vals[ib.uid()];
             }
 
             // Calculate the radial derivative
             ddc::discrete_space<PolarBSplinesRP>().eval_deriv_r(singular_vals, vals, coord);
-            for (auto ib : singular_domain) {
+            for (auto ib : singular_idx_range) {
                 singular_basis_vals_and_derivs(ib, ir, ip).radial_derivative
                         = singular_vals[ib.uid()];
             }
 
             // Calculate the poloidal derivative
             ddc::discrete_space<PolarBSplinesRP>().eval_deriv_p(singular_vals, vals, coord);
-            for (auto ib : singular_domain) {
+            for (auto ib : singular_idx_range) {
                 singular_basis_vals_and_derivs(ib, ir, ip).poloidal_derivative
                         = singular_vals[ib.uid()];
             }
@@ -399,8 +399,8 @@ public:
 
         int matrix_idx(0);
         // Calculate the matrix elements corresponding to the bsplines which cover the singular point
-        ddc::for_each(singular_domain, [&](IndexPolarBspl const idx_test) {
-            ddc::for_each(singular_domain, [&](IndexPolarBspl const idx_trial) {
+        ddc::for_each(singular_idx_range, [&](IndexPolarBspl const idx_test) {
+            ddc::for_each(singular_idx_range, [&](IndexPolarBspl const idx_trial) {
                 // Calculate the weak integral
                 row_coo_host(matrix_idx) = idx_test.uid();
                 col_coo_host(matrix_idx) = idx_trial.uid();
@@ -431,12 +431,13 @@ public:
         BSDomainR central_radial_bspline_domain(radial_bsplines.take_first(
                 ddc::DiscreteVector<BSplinesR_Polar> {BSplinesR_Polar::degree()}));
 
-        BSDomainRP non_singular_domain_near_centre(central_radial_bspline_domain, polar_bsplines);
+        BSDomainRP
+                non_singular_idx_range_near_centre(central_radial_bspline_domain, polar_bsplines);
 
         // Calculate the matrix elements where bspline products overlap the bsplines which cover the singular point
-        ddc::for_each(singular_domain, [&](IndexPolarBspl const idx_test) {
+        ddc::for_each(singular_idx_range, [&](IndexPolarBspl const idx_test) {
             ddc::for_each(
-                    non_singular_domain_near_centre,
+                    non_singular_idx_range_near_centre,
                     [&](IDimBSpline2D_Polar const idx_trial) {
                         const IndexPolarBspl polar_idx_trial(
                                 PolarBSplinesRP::get_polar_index<PolarBSplinesRP>(idx_trial));
@@ -520,7 +521,7 @@ public:
         assert(matrix_idx == n_elements_singular + n_elements_overlap);
 
         // Calculate the matrix elements following a stencil
-        ddc::for_each(fem_non_singular_domain, [&](IndexPolarBspl const polar_idx_test) {
+        ddc::for_each(fem_non_singular_idx_range, [&](IndexPolarBspl const polar_idx_test) {
             const IDimBSpline2D_Polar idx_test(PolarBSplinesRP::get_2d_index(polar_idx_test));
             const std::size_t r_idx_test(
                     ddc::select<PolarBSplinesRP::BSplinesR_tag>(idx_test).uid());
@@ -640,7 +641,7 @@ public:
 
         // Fill b
         ddc::for_each(
-                PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
+                PolarBSplinesRP::singular_idx_range<PolarBSplinesRP>(),
                 [&](IndexPolarBspl const idx) {
                     b_host(0, idx.uid()) = ddc::transform_reduce(
                             quadrature_domain_singular,
@@ -656,7 +657,7 @@ public:
                             });
                 });
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR_Polar>().ncells();
-        ddc::for_each(fem_non_singular_domain, [&](IndexPolarBspl const idx) {
+        ddc::for_each(fem_non_singular_idx_range, [&](IndexPolarBspl const idx) {
             const IDimBSpline2D_Polar idx_2d(PolarBSplinesRP::get_2d_index(idx));
             const std::size_t r_idx(ddc::select<PolarBSplinesRP::BSplinesR_tag>(idx_2d).uid());
             const std::size_t p_idx(ddc::select<PolarBSplinesRP::BSplinesP_tag>(idx_2d).uid());
@@ -725,11 +726,11 @@ public:
 
         // Fill the spline
         ddc::for_each(
-                PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
+                PolarBSplinesRP::singular_idx_range<PolarBSplinesRP>(),
                 [&](IndexPolarBspl const idx) {
                     spline.singular_spline_coef(idx) = b_host(0, idx.uid());
                 });
-        ddc::for_each(fem_non_singular_domain, [&](IndexPolarBspl const idx) {
+        ddc::for_each(fem_non_singular_idx_range, [&](IndexPolarBspl const idx) {
             const IDimBSpline2D_Polar idx_2d(PolarBSplinesRP::get_2d_index(idx));
             spline.spline_coef(idx_2d) = b_host(0, idx.uid());
         });
@@ -774,7 +775,7 @@ public:
     {
         BSDomainP_Polar polar_domain(ddc::discrete_space<BSplinesP_Polar>().full_domain());
         SplinePolar
-                spline(PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
+                spline(PolarBSplinesRP::singular_idx_range<PolarBSplinesRP>(),
                        BSDomainRP(radial_bsplines, polar_domain));
 
         (*this)(rhs, spline);

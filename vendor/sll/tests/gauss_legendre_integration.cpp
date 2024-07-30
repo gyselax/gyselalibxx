@@ -26,7 +26,7 @@ private:
     std::size_t m_n;
 };
 
-struct DimX
+struct X
 {
 };
 
@@ -42,24 +42,24 @@ int test_integrate()
     std::stringstream oss;
     oss << std::scientific << std::hexfloat;
 
-    std::vector<std::pair<double, double>> domains
+    std::vector<std::pair<double, double>> idx_ranges
             = {{0.0, 1.0}, {1.0, 2.0}, {-0.2, 1.5}, {-1.5, -1.0}};
 
     bool test_passed = true;
 
-    for (std::size_t order = 1; order <= GaussLegendre<DimX>::max_order(); ++order) {
-        GaussLegendre<DimX> const gl(order);
+    for (std::size_t order = 1; order <= GaussLegendre<X>::max_order(); ++order) {
+        GaussLegendre<X> const gl(order);
 
         std::cout << "integration at order " << order;
         std::cout << std::endl;
 
         for (std::size_t p = 0; p < 2 * order; ++p) {
             fn const f(p);
-            for (std::size_t i = 0; i < domains.size(); ++i) {
+            for (std::size_t i = 0; i < idx_ranges.size(); ++i) {
                 double const sol_exact = 1.0 / (p + 1)
-                                         * (std::pow(domains[i].second, p + 1)
-                                            - std::pow(domains[i].first, p + 1));
-                double const sol_num = gl.integrate(f, domains[i].first, domains[i].second);
+                                         * (std::pow(idx_ranges[i].second, p + 1)
+                                            - std::pow(idx_ranges[i].first, p + 1));
+                double const sol_num = gl.integrate(f, idx_ranges[i].first, idx_ranges[i].second);
                 double const err = std::fabs((sol_num - sol_exact) / sol_exact);
 
                 bool ok = true;
@@ -73,8 +73,8 @@ int test_integrate()
                 oss << " of x^" << std::setw(2) << std::left << p;
                 oss << ' ';
                 oss << std::fixed << std::setprecision(1) << std::right;
-                oss << " on the domain [" << std::setw(4) << domains[i].first << ", "
-                    << std::setw(4) << domains[i].second << "]";
+                oss << " on the idx_range [" << std::setw(4) << idx_ranges[i].first << ", "
+                    << std::setw(4) << idx_ranges[i].second << "]";
                 oss << std::scientific << std::hexfloat;
                 oss << ' ';
                 oss << std::setw(25) << std::left << sol_num;
@@ -103,38 +103,38 @@ int test_compute_points_and_weights()
     std::stringstream oss;
     oss << std::scientific << std::hexfloat;
 
-    std::vector<std::pair<double, double>> domains
+    std::vector<std::pair<double, double>> idx_ranges
             = {{0.0, 1.0}, {1.0, 2.0}, {-0.2, 1.5}, {-1.5, -1.0}};
 
     bool test_passed = true;
 
-    struct IDimX
+    struct GridX
     {
     };
 
-    for (std::size_t order = 1; order <= GaussLegendre<DimX>::max_order(); ++order) {
-        ddc::DiscreteDomain<IDimX>
-                domain(ddc::DiscreteElement<IDimX> {0}, ddc::DiscreteVector<IDimX> {order});
-        ddc::Chunk<ddc::Coordinate<DimX>, ddc::DiscreteDomain<IDimX>> gl_points(domain);
-        ddc::Chunk<double, ddc::DiscreteDomain<IDimX>> gl_weights(domain);
-        GaussLegendre<DimX> const gl(order);
+    for (std::size_t order = 1; order <= GaussLegendre<X>::max_order(); ++order) {
+        ddc::DiscreteDomain<GridX>
+                idx_range(ddc::DiscreteElement<GridX> {0}, ddc::DiscreteVector<GridX> {order});
+        ddc::Chunk<ddc::Coordinate<X>, ddc::DiscreteDomain<GridX>> gl_points(idx_range);
+        ddc::Chunk<double, ddc::DiscreteDomain<GridX>> gl_weights(idx_range);
+        GaussLegendre<X> const gl(order);
 
         std::cout << "integration at order " << order;
         std::cout << std::endl;
 
         for (std::size_t p = 0; p < 2 * order; ++p) {
             fn const f(p);
-            for (std::size_t i = 0; i < domains.size(); ++i) {
+            for (std::size_t i = 0; i < idx_ranges.size(); ++i) {
                 gl.compute_points_and_weights(
                         gl_points.span_view(),
                         gl_weights.span_view(),
-                        ddc::Coordinate<DimX>(domains[i].first),
-                        ddc::Coordinate<DimX>(domains[i].second));
+                        ddc::Coordinate<X>(idx_ranges[i].first),
+                        ddc::Coordinate<X>(idx_ranges[i].second));
                 double const sol_exact = 1.0 / (p + 1)
-                                         * (std::pow(domains[i].second, p + 1)
-                                            - std::pow(domains[i].first, p + 1));
+                                         * (std::pow(idx_ranges[i].second, p + 1)
+                                            - std::pow(idx_ranges[i].first, p + 1));
                 double sol_num = 0.0;
-                for (auto xi : domain) {
+                for (auto xi : idx_range) {
                     sol_num += gl_weights(xi) * f(gl_points(xi));
                 }
                 double const err = std::fabs((sol_num - sol_exact) / sol_exact);
@@ -150,8 +150,8 @@ int test_compute_points_and_weights()
                 oss << " of x^" << std::setw(2) << std::left << p;
                 oss << ' ';
                 oss << std::fixed << std::setprecision(1) << std::right;
-                oss << " on the domain [" << std::setw(4) << domains[i].first << ", "
-                    << std::setw(4) << domains[i].second << "]";
+                oss << " on the idx_range [" << std::setw(4) << idx_ranges[i].first << ", "
+                    << std::setw(4) << idx_ranges[i].second << "]";
                 oss << std::scientific << std::hexfloat;
                 oss << ' ';
                 oss << std::setw(25) << std::left << sol_num;
