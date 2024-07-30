@@ -5,7 +5,7 @@ It is broken up into the following sub-folders:
 
  - [geometryRTheta](./geometryRTheta/README.md) - Simulations in the polar geometry.
 
- - geometryVparMu - Simulations in the 2D velocity space (vpar,mu).
+ - [geometryVparMu](./geometryVparMu/README.md) - Simulations in the 2D velocity space (vpar,mu).
  
  - [geometryXVx](./geometryXVx/README.md) - Simulations with 1 spatial dimension and 1 velocity dimension. 
 
