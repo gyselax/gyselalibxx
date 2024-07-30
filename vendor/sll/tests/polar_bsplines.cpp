@@ -20,32 +20,29 @@ struct PolarBsplineFixture<std::tuple<
         std::integral_constant<int, C>,
         std::integral_constant<bool, Uniform>>> : public testing::Test
 {
-    struct DimR
+    struct R
     {
         static constexpr bool PERIODIC = false;
     };
-    struct DimP
+    struct P
     {
         static constexpr bool PERIODIC = true;
     };
-    struct DimX
+    struct X
     {
         static constexpr bool PERIODIC = false;
     };
-    struct DimY
+    struct Y
     {
         static constexpr bool PERIODIC = false;
     };
     static constexpr std::size_t spline_degree = D;
     static constexpr int continuity = C;
-    struct BSplineR : ddc::NonUniformBSplines<DimR, D>
+    struct BSplineR : ddc::NonUniformBSplines<R, D>
     {
     };
     struct BSplineP
-        : std::conditional_t<
-                  Uniform,
-                  ddc::UniformBSplines<DimP, D>,
-                  ddc::NonUniformBSplines<DimP, D>>
+        : std::conditional_t<Uniform, ddc::UniformBSplines<P, D>, ddc::NonUniformBSplines<P, D>>
     {
     };
 
@@ -58,10 +55,10 @@ struct PolarBsplineFixture<std::tuple<
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC>;
 
-    struct IDimR : GrevillePointsR::interpolation_discrete_dimension_type
+    struct GridR : GrevillePointsR::interpolation_discrete_dimension_type
     {
     };
-    struct IDimP : GrevillePointsP::interpolation_discrete_dimension_type
+    struct GridP : GrevillePointsP::interpolation_discrete_dimension_type
     {
     };
     struct BSplines : PolarBSplines<BSplineR, BSplineP, continuity>
@@ -79,49 +76,49 @@ TYPED_TEST_SUITE(PolarBsplineFixture, Cases);
 
 TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
 {
-    using DimR = typename TestFixture::DimR;
-    using IDimR = typename TestFixture::IDimR;
-    using DVectR = ddc::DiscreteVector<IDimR>;
-    using DimP = typename TestFixture::DimP;
-    using IDimP = typename TestFixture::IDimP;
-    using DVectP = ddc::DiscreteVector<IDimP>;
-    using DimX = typename TestFixture::DimX;
-    using DimY = typename TestFixture::DimY;
-    using PolarCoord = ddc::Coordinate<DimR, DimP>;
+    using R = typename TestFixture::R;
+    using GridR = typename TestFixture::GridR;
+    using IdxStepR = ddc::DiscreteVector<GridR>;
+    using P = typename TestFixture::P;
+    using GridP = typename TestFixture::GridP;
+    using IdxStepP = ddc::DiscreteVector<GridP>;
+    using X = typename TestFixture::X;
+    using Y = typename TestFixture::Y;
+    using PolarCoord = ddc::Coordinate<R, P>;
     using BSplinesR = typename TestFixture::BSplineR;
     using BSplinesP = typename TestFixture::BSplineP;
-    using CircToCart = CircularToCartesian<DimX, DimY, DimR, DimP>;
+    using CircToCart = CircularToCartesian<X, Y, R, P>;
     using SplineRPBuilder = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
             BSplinesP,
-            IDimR,
-            IDimP,
+            GridR,
+            GridP,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
             ddc::SplineSolver::LAPACK,
-            IDimR,
-            IDimP>;
+            GridR,
+            GridP>;
     using SplineRPEvaluator = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
             BSplinesP,
-            IDimR,
-            IDimP,
+            GridR,
+            GridP,
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<DimP>,
-            ddc::PeriodicExtrapolationRule<DimP>,
-            IDimR,
-            IDimP>;
-    using DiscreteMapping = DiscreteToCartesian<DimX, DimY, SplineRPBuilder, SplineRPEvaluator>;
+            ddc::PeriodicExtrapolationRule<P>,
+            ddc::PeriodicExtrapolationRule<P>,
+            GridR,
+            GridP>;
+    using DiscreteMapping = DiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator>;
     using BSplines = typename TestFixture::BSplines;
-    using CoordR = ddc::Coordinate<DimR>;
-    using CoordP = ddc::Coordinate<DimP>;
+    using CoordR = ddc::Coordinate<R>;
+    using CoordP = ddc::Coordinate<P>;
     using GrevillePointsR = typename TestFixture::GrevillePointsR;
     using GrevillePointsP = typename TestFixture::GrevillePointsP;
 
@@ -133,7 +130,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
 
     // 1. Create BSplines
     {
-        DVectR constexpr npoints(ncells + 1);
+        IdxStepR constexpr npoints(ncells + 1);
         std::vector<CoordR> breaks(npoints);
         const double dr = (rN - r0) / ncells;
         for (int i(0); i < npoints; ++i) {
@@ -144,7 +141,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     if constexpr (BSplinesP::is_uniform()) {
         ddc::init_discrete_space<BSplinesP>(p0, pN, ncells);
     } else {
-        DVectP constexpr npoints(ncells + 1);
+        IdxStepP constexpr npoints(ncells + 1);
         std::vector<CoordP> breaks(npoints);
         const double dp = (pN - p0) / ncells;
         for (int i(0); i < npoints; ++i) {
@@ -153,19 +150,19 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
         ddc::init_discrete_space<BSplinesP>(breaks);
     }
 
-    ddc::init_discrete_space<IDimR>(GrevillePointsR::template get_sampling<IDimR>());
-    ddc::init_discrete_space<IDimP>(GrevillePointsP::template get_sampling<IDimP>());
-    ddc::DiscreteDomain<IDimR> interpolation_domain_R(
-            GrevillePointsR::template get_domain<IDimR>());
-    ddc::DiscreteDomain<IDimP> interpolation_domain_P(
-            GrevillePointsP::template get_domain<IDimP>());
-    ddc::DiscreteDomain<IDimR, IDimP>
-            interpolation_domain(interpolation_domain_R, interpolation_domain_P);
+    ddc::init_discrete_space<GridR>(GrevillePointsR::template get_sampling<GridR>());
+    ddc::init_discrete_space<GridP>(GrevillePointsP::template get_sampling<GridP>());
+    ddc::DiscreteDomain<GridR> interpolation_idx_range_R(
+            GrevillePointsR::template get_domain<GridR>());
+    ddc::DiscreteDomain<GridP> interpolation_idx_range_P(
+            GrevillePointsP::template get_domain<GridP>());
+    ddc::DiscreteDomain<GridR, GridP>
+            interpolation_idx_range(interpolation_idx_range_R, interpolation_idx_range_P);
 
-    SplineRPBuilder builder_rp(interpolation_domain);
+    SplineRPBuilder builder_rp(interpolation_idx_range);
 
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<DimP> p_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<P> p_extrapolation_rule;
     SplineRPEvaluator evaluator_rp(
             r_extrapolation_rule,
             r_extrapolation_rule,
