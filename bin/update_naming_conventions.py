@@ -271,11 +271,11 @@ def get_geometry_name_shortcuts(geometry_file):
         struct_name = s[2]
         if struct_name in species_names:
             continue
-        if struct_name == 'RDim':
+        if struct_name in ('RDim', 'CDim'):
             name_map[struct_name] = 'Dim'
         elif struct_name in ('DDim', 'IDim'):
             name_map[struct_name] = 'Grid1D'
-        elif struct_name.startswith('RDim'):
+        elif struct_name.startswith('RDim') or struct_name.startswith('CDim'):
             new_name = struct_name[4:]
             if not new_name[0].isalpha():
                 new_name = 'Dim' + new_name
