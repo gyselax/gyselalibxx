@@ -403,15 +403,15 @@ public:
     /**
      * @brief An alias for the spatial discrete domain type.
      */
-    using SpatialDDom = IDomainXY;
+    using SpatialIdxRange = IDomainXY;
 
     /**
      * @brief An alias for the velocity discrete domain type.
      */
-    using VelocityDDom = IDomainVxVy;
+    using VelocityIdxRange = IDomainVxVy;
 
     /**
      * @brief An alias for the whole distribution function discrete domain type.
      */
-    using FdistribuDDom = IDomainSpXYVxVy;
+    using FdistribuIdxRange = IDomainSpXYVxVy;
 };

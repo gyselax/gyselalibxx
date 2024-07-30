@@ -28,8 +28,8 @@ public:
      *
      * @return A reference to an array containing the value of distribution the function at the updated time t+dt.
      */
-    virtual Field<double, typename Geometry::FdistribuDDom> operator()(
-            Field<double, typename Geometry::FdistribuDDom> allfdistribu,
-            Field<const double, typename Geometry::SpatialDDom> electric_field,
+    virtual Field<double, typename Geometry::FdistribuIdxRange> operator()(
+            Field<double, typename Geometry::FdistribuIdxRange> allfdistribu,
+            Field<const double, typename Geometry::SpatialIdxRange> electric_field,
             double dt) const = 0;
 };
