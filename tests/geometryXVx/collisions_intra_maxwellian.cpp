@@ -189,22 +189,12 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
     // collision operator should not change densiy, mean_velocity and temperature
-<<<<<<< HEAD
-    DFieldSpX density_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    DFieldSpX mean_velocity_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-    DFieldSpX temperature_res(ddc::get_domain<IDimSp, IDimX>(allfdistribu_host));
-
-    DFieldVx const quadrature_coeffs
-            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx);
-=======
     DFieldSpX density_res(ddc::get_domain<Species, IDimX>(allfdistribu_host));
     DFieldSpX mean_velocity_res(ddc::get_domain<Species, IDimX>(allfdistribu_host));
     DFieldSpX temperature_res(ddc::get_domain<Species, IDimX>(allfdistribu_host));
-    host_t<DFieldVx> const quadrature_coeffs_host = trapezoid_quadrature_coefficients(gridvx);
-    auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
->>>>>>> main
+
+    DFieldVx const quadrature_coeffs
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx);
     Quadrature<IDomainVx, IDomainSpXVx> integrate(quadrature_coeffs.span_cview());
 
     FluidMoments moments(integrate);
