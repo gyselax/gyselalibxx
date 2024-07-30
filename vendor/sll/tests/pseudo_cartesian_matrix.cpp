@@ -17,32 +17,32 @@ template <int N>
 class PseudoCartesianJacobianMatrixTest
 {
 public:
-    struct DimX
+    struct X
     {
     };
-    struct DimY
+    struct Y
     {
     };
-    struct DimR
+    struct R
     {
         static bool constexpr PERIODIC = false;
     };
-    struct DimP
+    struct P
     {
         static bool constexpr PERIODIC = true;
     };
 
 
-    using CoordR = ddc::Coordinate<DimR>;
-    using CoordP = ddc::Coordinate<DimP>;
-    using CoordRP = ddc::Coordinate<DimR, DimP>;
+    using CoordR = ddc::Coordinate<R>;
+    using CoordP = ddc::Coordinate<P>;
+    using CoordRP = ddc::Coordinate<R, P>;
 
     static int constexpr BSDegree = 3;
 
-    struct BSplinesR : ddc::NonUniformBSplines<DimR, BSDegree>
+    struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
     {
     };
-    struct BSplinesP : ddc::NonUniformBSplines<DimP, BSDegree>
+    struct BSplinesP : ddc::NonUniformBSplines<P, BSDegree>
     {
     };
 
@@ -57,32 +57,32 @@ public:
             ddc::BoundCond::PERIODIC>;
 
 
-    struct IDimR : InterpPointsR::interpolation_discrete_dimension_type
+    struct GridR : InterpPointsR::interpolation_discrete_dimension_type
     {
     };
-    struct IDimP : InterpPointsP::interpolation_discrete_dimension_type
+    struct GridP : InterpPointsP::interpolation_discrete_dimension_type
     {
     };
 
 
-    using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
-    using BSDomainP = ddc::DiscreteDomain<BSplinesP>;
-    using BSDomainRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
+    using BSIdxRangeR = ddc::DiscreteDomain<BSplinesR>;
+    using BSIdxRangeP = ddc::DiscreteDomain<BSplinesP>;
+    using BSIdxRangeRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
 
 
-    using IndexR = ddc::DiscreteElement<IDimR>;
-    using IndexP = ddc::DiscreteElement<IDimP>;
-    using IndexRP = ddc::DiscreteElement<IDimR, IDimP>;
+    using IdxR = ddc::DiscreteElement<GridR>;
+    using IdxP = ddc::DiscreteElement<GridP>;
+    using IdxRP = ddc::DiscreteElement<GridR, GridP>;
 
 
-    using IVectR = ddc::DiscreteVector<IDimR>;
-    using IVectP = ddc::DiscreteVector<IDimP>;
-    using IVectRP = ddc::DiscreteVector<IDimR, IDimP>;
+    using IdxStepR = ddc::DiscreteVector<GridR>;
+    using IdxStepP = ddc::DiscreteVector<GridP>;
+    using IdxStepRP = ddc::DiscreteVector<GridR, GridP>;
 
 
-    using IDomainR = ddc::DiscreteDomain<IDimR>;
-    using IDomainP = ddc::DiscreteDomain<IDimP>;
-    using IDomainRP = ddc::DiscreteDomain<IDimR, IDimP>;
+    using IdxRangeR = ddc::DiscreteDomain<GridR>;
+    using IdxRangeP = ddc::DiscreteDomain<GridP>;
+    using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
 
 
     using SplineRPBuilder = ddc::SplineBuilder2D<
@@ -90,37 +90,37 @@ public:
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
             BSplinesP,
-            IDimR,
-            IDimP,
+            GridR,
+            GridP,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
             ddc::SplineSolver::LAPACK,
-            IDimR,
-            IDimP>;
+            GridR,
+            GridP>;
 
     using SplineRPEvaluator = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
             BSplinesP,
-            IDimR,
-            IDimP,
+            GridR,
+            GridP,
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<DimP>,
-            ddc::PeriodicExtrapolationRule<DimP>,
-            IDimR,
-            IDimP>;
+            ddc::PeriodicExtrapolationRule<P>,
+            ddc::PeriodicExtrapolationRule<P>,
+            GridR,
+            GridP>;
 
 
-    using DiscreteMapping = DiscreteToCartesian<DimX, DimY, SplineRPBuilder, SplineRPEvaluator>;
+    using DiscreteMapping = DiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator>;
 
-    using spline_domain = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
+    using spline_idx_range = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
 
     template <class ElementType>
-    using FieldRP = ddc::Chunk<ElementType, IDomainRP>;
+    using FieldMemRP = ddc::Chunk<ElementType, IdxRangeRP>;
 
     using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
@@ -139,7 +139,7 @@ public:
      * mapping of a circular mapping and a discrete mapping of a Czarny
      * mapping.
      *
-     * Create a Nr x Nt discrete domain with Nr = N, Nt = 2*N and N a
+     * Create a Nr x Nt discrete index range with Nr = N, Nt = 2*N and N a
      * templated parameter.
      * Then compute the infinity norm of the difference between the
      * the pseudo Cartesian Jacobian matrix of the analytical mapping
@@ -151,11 +151,11 @@ public:
         // --- Define the grid. ---------------------------------------------------------------------------
         CoordR const r_min(0.0);
         CoordR const r_max(1.0);
-        IVectR const r_size(Nr);
+        IdxStepR const r_size(Nr);
 
         CoordP const p_min(0.0);
         CoordP const p_max(2.0 * M_PI);
-        IVectP const p_size(Nt);
+        IdxStepP const p_size(Nt);
 
         double const dr((r_max - r_min) / r_size);
         double const dp((p_max - p_min) / p_size);
@@ -178,17 +178,17 @@ public:
         ddc::init_discrete_space<BSplinesR>(r_knots);
         ddc::init_discrete_space<BSplinesP>(p_knots);
 
-        ddc::init_discrete_space<IDimR>(InterpPointsR::template get_sampling<IDimR>());
-        ddc::init_discrete_space<IDimP>(InterpPointsP::template get_sampling<IDimP>());
+        ddc::init_discrete_space<GridR>(InterpPointsR::template get_sampling<GridR>());
+        ddc::init_discrete_space<GridP>(InterpPointsP::template get_sampling<GridP>());
 
-        IDomainR interpolation_domain_R(InterpPointsR::template get_domain<IDimR>());
-        IDomainP interpolation_domain_P(InterpPointsP::template get_domain<IDimP>());
-        IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
+        IdxRangeR interpolation_idx_range_R(InterpPointsR::template get_domain<GridR>());
+        IdxRangeP interpolation_idx_range_P(InterpPointsP::template get_domain<GridP>());
+        IdxRangeRP grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
         // --- Define the operators. ----------------------------------------------------------------------
         SplineRPBuilder const builder(grid);
         ddc::NullExtrapolationRule r_extrapolation_rule;
-        ddc::PeriodicExtrapolationRule<DimP> p_extrapolation_rule;
+        ddc::PeriodicExtrapolationRule<P> p_extrapolation_rule;
         SplineRPEvaluator spline_evaluator(
                 r_extrapolation_rule,
                 r_extrapolation_rule,
@@ -202,7 +202,7 @@ public:
         // --- CIRCULAR MAPPING ---------------------------------------------------------------------------
         std::cout << " - Nr x Nt  = " << Nr << " x " << Nt << std::endl
                   << "   - Circular mapping: ";
-        const CircularToCartesian<DimX, DimY, DimR, DimP> analytical_mapping_circ;
+        const CircularToCartesian<X, Y, R, P> analytical_mapping_circ;
         DiscreteMapping const discrete_mapping_circ = DiscreteMapping::
                 analytical_to_discrete(analytical_mapping_circ, builder, spline_evaluator);
 
@@ -216,7 +216,7 @@ public:
 
         // --- CZARNY MAPPING -----------------------------------------------------------------------------
         std::cout << "   - Czarny mapping:   ";
-        const CzarnyToCartesian<DimX, DimY, DimR, DimP> analytical_mapping_czar(0.3, 1.4);
+        const CzarnyToCartesian<X, Y, R, P> analytical_mapping_czar(0.3, 1.4);
         DiscreteMapping const discrete_mapping_czar = DiscreteMapping::
                 analytical_to_discrete(analytical_mapping_czar, builder, spline_evaluator);
 
