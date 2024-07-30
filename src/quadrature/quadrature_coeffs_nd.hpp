@@ -37,7 +37,7 @@ using CoefficientField1D
 template <class ExecSpace, class... DDims>
 FieldMem<double, IdxRange<DDims...>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
 quadrature_coeffs_nd(
-        IdxRange<DDims...> const& domain,
+        IdxRange<DDims...> const& idx_range,
         std::function<FieldMem<
                 double,
                 IdxRange<DDims>,
@@ -48,17 +48,17 @@ quadrature_coeffs_nd(
             double,
             ddc::DiscreteDomain<DDims...>,
             ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
-            coefficients_alloc(domain);
+            coefficients_alloc(idx_range);
     ddc::ChunkSpan coefficients = get_field(coefficients_alloc);
     // Get coefficients for each dimension
     std::tuple<CoefficientFieldMem1D<ExecSpace, DDims>...> current_dim_coeffs_alloc(
-            funcs(ddc::select<DDims>(domain))...);
+            funcs(ddc::select<DDims>(idx_range))...);
     std::tuple<CoefficientField1D<ExecSpace, DDims>...> current_dim_coeffs(get_field(
             std::get<CoefficientFieldMem1D<ExecSpace, DDims>>(current_dim_coeffs_alloc))...);
 
     ddc::parallel_for_each(
             ExecSpace(),
-            domain,
+            idx_range,
             KOKKOS_LAMBDA(ddc::DiscreteElement<DDims...> const idim) {
                 // multiply the 1D coefficients by one another
 
