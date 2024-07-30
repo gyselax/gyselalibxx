@@ -395,17 +395,17 @@ public:
     /**
      * @brief An alias for the spatial discrete domain type.
      */
-    using SpatialDDom = IDomainX;
+    using SpatialIdxRange = IDomainX;
 
     /**
      * @brief An alias for the velocity discrete domain type.
      */
-    using VelocityDDom = IDomainVx;
+    using VelocityIdxRange = IDomainVx;
 
 
     // using FdistribuDDom = DiscreteDomain<DimSp, typename decltype(SpatialDDom), typename decltype(VelocityDDom)>(ddc::DiscreteDomain());
     /**
      * @brief An alias for the whole distribution function discrete domain type.
      */
-    using FdistribuDDom = IDomainSpXVx;
+    using FdistribuIdxRange = IDomainSpXVx;
 };
