@@ -2,7 +2,7 @@
 
 #include "sll/matrix_batch_tridiag.hpp"
 
-using View2d = Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>;
+using ConstField2d = Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>;
 
 void solve_batched_tridiag_system(
         int const batch_size,
@@ -13,10 +13,10 @@ void solve_batched_tridiag_system(
         Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
                 Rhs_view_host)
 {
-    View2d A_view("A", batch_size, mat_size);
-    View2d B_view("B", batch_size, mat_size);
-    View2d C_view("C", batch_size, mat_size);
-    View2d Rhs_view("R", batch_size, mat_size);
+    ConstField2d A_view("A", batch_size, mat_size);
+    ConstField2d B_view("B", batch_size, mat_size);
+    ConstField2d C_view("C", batch_size, mat_size);
+    ConstField2d Rhs_view("R", batch_size, mat_size);
     Kokkos::deep_copy(A_view, sub_diag);
     Kokkos::deep_copy(B_view, diag);
     Kokkos::deep_copy(C_view, up_diag);
@@ -68,9 +68,9 @@ TEST(MatrixBatchTridiag, NotValidMatrix)
     int const batch_size = 2;
     int const mat_size = 4;
 
-    View2d A_view("A", batch_size, mat_size);
-    View2d B_view("B", batch_size, mat_size);
-    View2d C_view("C", batch_size, mat_size);
+    ConstField2d A_view("A", batch_size, mat_size);
+    ConstField2d B_view("B", batch_size, mat_size);
+    ConstField2d C_view("C", batch_size, mat_size);
     //neither positive definite symmetric nor diagonal dominant
     Kokkos::deep_copy(A_view, 0.93);
     Kokkos::deep_copy(B_view, -0.367);
@@ -102,10 +102,10 @@ TEST(MatrixBatchTridiag, GeneralValidMatrix)
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
             Rhs_view_host(r, batch_size, mat_size);
 
-    View2d A_view("A", batch_size, mat_size);
-    View2d B_view("B", batch_size, mat_size);
-    View2d C_view("C", batch_size, mat_size);
-    View2d Rhs_view("R", batch_size, mat_size);
+    ConstField2d A_view("A", batch_size, mat_size);
+    ConstField2d B_view("B", batch_size, mat_size);
+    ConstField2d C_view("C", batch_size, mat_size);
+    ConstField2d Rhs_view("R", batch_size, mat_size);
     Kokkos::deep_copy(A_view, A_view_host);
     Kokkos::deep_copy(B_view, B_view_host);
     Kokkos::deep_copy(C_view, C_view_host);

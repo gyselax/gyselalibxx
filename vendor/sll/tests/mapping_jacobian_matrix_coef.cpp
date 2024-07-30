@@ -14,32 +14,32 @@
 
 
 namespace {
-struct DimX
+struct X
 {
 };
-struct DimY
+struct Y
 {
 };
-struct DimR
+struct R
 {
     static bool constexpr PERIODIC = false;
 };
 
-struct DimP
+struct P
 {
     static bool constexpr PERIODIC = true;
 };
 
-using CoordR = ddc::Coordinate<DimR>;
-using CoordP = ddc::Coordinate<DimP>;
-using CoordRP = ddc::Coordinate<DimR, DimP>;
+using CoordR = ddc::Coordinate<R>;
+using CoordP = ddc::Coordinate<P>;
+using CoordRP = ddc::Coordinate<R, P>;
 
 int constexpr BSDegree = 3;
 
-struct BSplinesR : ddc::NonUniformBSplines<DimR, BSDegree>
+struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
 {
 };
-struct BSplinesP : ddc::NonUniformBSplines<DimP, BSDegree>
+struct BSplinesP : ddc::NonUniformBSplines<P, BSDegree>
 {
 };
 
@@ -48,10 +48,10 @@ using InterpPointsR = ddc::
 using InterpPointsP = ddc::
         GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
-struct IDimR : InterpPointsR::interpolation_discrete_dimension_type
+struct GridR : InterpPointsR::interpolation_discrete_dimension_type
 {
 };
-struct IDimP : InterpPointsP::interpolation_discrete_dimension_type
+struct GridP : InterpPointsP::interpolation_discrete_dimension_type
 {
 };
 
@@ -60,51 +60,51 @@ using SplineRPBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
         BSplinesP,
-        IDimR,
-        IDimP,
+        GridR,
+        GridP,
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
         ddc::SplineSolver::LAPACK,
-        IDimR,
-        IDimP>;
+        GridR,
+        GridP>;
 
 using SplineRPEvaluator = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
         BSplinesP,
-        IDimR,
-        IDimP,
+        GridR,
+        GridP,
         ddc::NullExtrapolationRule,
         ddc::NullExtrapolationRule,
-        ddc::PeriodicExtrapolationRule<DimP>,
-        ddc::PeriodicExtrapolationRule<DimP>,
-        IDimR,
-        IDimP>;
+        ddc::PeriodicExtrapolationRule<P>,
+        ddc::PeriodicExtrapolationRule<P>,
+        GridR,
+        GridP>;
 
-using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
-using BSDomainP = ddc::DiscreteDomain<BSplinesP>;
-using BSDomainRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
+using BSIdxRangeR = ddc::DiscreteDomain<BSplinesR>;
+using BSIdxRangeP = ddc::DiscreteDomain<BSplinesP>;
+using BSIdxRangeRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
 
-using IDomainR = ddc::DiscreteDomain<IDimR>;
-using IDomainP = ddc::DiscreteDomain<IDimP>;
-using IDomainRP = ddc::DiscreteDomain<IDimR, IDimP>;
+using IdxRangeR = ddc::DiscreteDomain<GridR>;
+using IdxRangeP = ddc::DiscreteDomain<GridP>;
+using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
 
-using IndexR = ddc::DiscreteElement<IDimR>;
-using IndexP = ddc::DiscreteElement<IDimP>;
-using IndexRP = ddc::DiscreteElement<IDimR, IDimP>;
+using IdxR = ddc::DiscreteElement<GridR>;
+using IdxP = ddc::DiscreteElement<GridP>;
+using IdxRP = ddc::DiscreteElement<GridR, GridP>;
 
-using IVectR = ddc::DiscreteVector<IDimR>;
-using IVectP = ddc::DiscreteVector<IDimP>;
-using IVectRP = ddc::DiscreteVector<IDimR, IDimP>;
+using IdxStepR = ddc::DiscreteVector<GridR>;
+using IdxStepP = ddc::DiscreteVector<GridP>;
+using IdxStepRP = ddc::DiscreteVector<GridR, GridP>;
 
-using IDomainRP = ddc::DiscreteDomain<IDimR, IDimP>;
+using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
 
 
 template <class ElementType>
-using FieldRP = ddc::Chunk<ElementType, IDomainRP>;
+using FieldMemRP = ddc::Chunk<ElementType, IdxRangeRP>;
 
 using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
@@ -147,37 +147,37 @@ class JacobianMatrixAndJacobianCoefficients
 TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CircularToCartesian<DimX, DimY, DimR, DimP> mapping;
+    const CircularToCartesian<X, Y, R, P> mapping;
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
-    IVectR const r_size(Nr);
+    IdxStepR const r_size(Nr);
 
     CoordP const p_min(0.0);
     CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(Nt);
+    IdxStepP const p_size(Nt);
 
-    IndexR const r_start(1); // avoid singular point at r = 0.
-    IndexP const p_start(0);
+    IdxR const r_start(1); // avoid singular point at r = 0.
+    IdxP const p_start(0);
 
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
 
-    ddc::DiscreteDomain<IDimR> domain_r(r_start, r_size);
-    ddc::DiscreteDomain<IDimP> domain_p(p_start, p_size);
-    ddc::DiscreteDomain<IDimR, IDimP> grid(domain_r, domain_p);
+    ddc::DiscreteDomain<GridR> idx_range_r(r_start, r_size);
+    ddc::DiscreteDomain<GridP> idx_range_p(p_start, p_size);
+    ddc::DiscreteDomain<GridR, GridP> grid(idx_range_r, idx_range_p);
 
-    FieldRP<CoordRP> coords(grid);
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    FieldMemRP<CoordRP> coords(grid);
+    ddc::for_each(grid, [&](IdxRP const irp) {
         coords(irp) = CoordRP(
-                r_min + dr * ddc::select<IDimR>(irp).uid(),
-                p_min + dp * ddc::select<IDimR>(irp).uid());
+                r_min + dr * ddc::select<GridR>(irp).uid(),
+                p_min + dp * ddc::select<GridR>(irp).uid());
     });
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
     // --- for the Jacobian matrix:
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IdxRP const irp) {
         Matrix_2x2 Jacobian_matrix;
         Matrix_2x2 Jacobian_matrix_coeff;
 
@@ -191,7 +191,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
     });
 
     // --- for the inverse Jacobian matrix:
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IdxRP const irp) {
         Matrix_2x2 inv_Jacobian_matrix;
         Matrix_2x2 inv_Jacobian_matrix_coeff;
 
@@ -211,37 +211,37 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
 TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CzarnyToCartesian<DimX, DimY, DimR, DimP> mapping(0.3, 1.4);
+    const CzarnyToCartesian<X, Y, R, P> mapping(0.3, 1.4);
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
-    IVectR const r_size(Nr);
+    IdxStepR const r_size(Nr);
 
     CoordP const p_min(0.0);
     CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(Nt);
+    IdxStepP const p_size(Nt);
 
-    IndexR const r_start(1); // avoid singular point at r = 0.
-    IndexP const p_start(0);
+    IdxR const r_start(1); // avoid singular point at r = 0.
+    IdxP const p_start(0);
 
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
 
-    ddc::DiscreteDomain<IDimR> domain_r(r_start, r_size);
-    ddc::DiscreteDomain<IDimP> domain_p(p_start, p_size);
-    ddc::DiscreteDomain<IDimR, IDimP> grid(domain_r, domain_p);
+    ddc::DiscreteDomain<GridR> idx_range_r(r_start, r_size);
+    ddc::DiscreteDomain<GridP> idx_range_p(p_start, p_size);
+    ddc::DiscreteDomain<GridR, GridP> grid(idx_range_r, idx_range_p);
 
-    FieldRP<CoordRP> coords(grid);
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    FieldMemRP<CoordRP> coords(grid);
+    ddc::for_each(grid, [&](IdxRP const irp) {
         coords(irp) = CoordRP(
-                r_min + dr * ddc::select<IDimR>(irp).uid(),
-                p_min + dp * ddc::select<IDimR>(irp).uid());
+                r_min + dr * ddc::select<GridR>(irp).uid(),
+                p_min + dp * ddc::select<GridR>(irp).uid());
     });
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
     // --- for the Jacobian matrix:
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IdxRP const irp) {
         Matrix_2x2 Jacobian_matrix;
         Matrix_2x2 Jacobian_matrix_coeff;
 
@@ -255,7 +255,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
     });
 
     // --- for the inverseJacobian matrix:
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IdxRP const irp) {
         Matrix_2x2 inv_Jacobian_matrix;
         Matrix_2x2 inv_Jacobian_matrix_coeff;
 
@@ -275,15 +275,15 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
 TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CzarnyToCartesian<DimX, DimY, DimR, DimP> analytical_mapping(0.3, 1.4);
+    const CzarnyToCartesian<X, Y, R, P> analytical_mapping(0.3, 1.4);
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
-    IVectR const r_size(Nr);
+    IdxStepR const r_size(Nr);
 
     CoordP const p_min(0.0);
     CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(Nt);
+    IdxStepP const p_size(Nt);
 
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
@@ -302,30 +302,29 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
     ddc::init_discrete_space<BSplinesR>(r_knots);
     ddc::init_discrete_space<BSplinesP>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(InterpPointsR::get_sampling<IDimR>());
-    ddc::init_discrete_space<IDimP>(InterpPointsP::get_sampling<IDimP>());
+    ddc::init_discrete_space<GridR>(InterpPointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridP>(InterpPointsP::get_sampling<GridP>());
 
-    IDomainR interpolation_domain_R(InterpPointsR::get_domain<IDimR>());
-    IDomainP interpolation_domain_P(InterpPointsP::get_domain<IDimP>());
-    IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
+    IdxRangeR interpolation_idx_range_R(InterpPointsR::get_domain<GridR>());
+    IdxRangeP interpolation_idx_range_P(InterpPointsP::get_domain<GridP>());
+    IdxRangeRP grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
     SplineRPBuilder builder(grid);
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<DimP> p_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<P> p_extrapolation_rule;
     SplineRPEvaluator evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
             p_extrapolation_rule);
-    DiscreteToCartesian mapping
-            = DiscreteToCartesian<DimX, DimY, SplineRPBuilder, SplineRPEvaluator>::
-                    analytical_to_discrete(analytical_mapping, builder, evaluator);
+    DiscreteToCartesian mapping = DiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator>::
+            analytical_to_discrete(analytical_mapping, builder, evaluator);
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IdxRP const irp) {
         const CoordRP coord_rp(ddc::coordinate(irp));
-        const double r = ddc::get<DimR>(coord_rp);
+        const double r = ddc::get<R>(coord_rp);
         if (fabs(r) > 1e-15) {
             // --- for the Jacobian matrix:
             Matrix_2x2 Jacobian_matrix;

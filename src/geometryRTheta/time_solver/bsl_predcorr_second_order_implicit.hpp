@@ -155,7 +155,7 @@ public:
         DFieldRP electrical_potential(grid);
 
         SplinePolar electrostatic_potential_coef(
-                PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
+                PolarBSplinesRP::singular_idx_range<PolarBSplinesRP>(),
                 BSDomainRP(radial_bsplines, polar_domain));
 
         ddc::NullExtrapolationRule extrapolation_rule;

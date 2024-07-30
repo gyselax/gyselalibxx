@@ -6,63 +6,31 @@
 
 #include "ivlasovsolver.hpp"
 
-template <class Geometry, class GridX>
+template <class Geometry, class DDimX>
 class IAdvectionSpatial;
-template <class Geometry, class GridV>
+template <class Geometry, class DDimV>
 class IAdvectionVelocity;
 
-/**
- * @brief A class that solves a Vlasov equation using Strang's splitting.
- *
- * The Vlasov equation is split between four advection equations 
- * along the X, Y, Vx and Vy directions. The splitting involves solving 
- * the advections in the X, Y, and Vx directions first on a time interval
- * of length dt/2, then the Vy-direction advection on a time dt, and
- * finally the X, Y, and Vx directions again in reverse order on dt/2.
- */
 class SplitVlasovSolver : public IVlasovSolver
 {
-    /// Advection operator in the x direction
-    IAdvectionSpatial<GeometryXYVxVy, GridX> const& m_advec_x;
-    /// Advection operator in the y direction
-    IAdvectionSpatial<GeometryXYVxVy, GridY> const& m_advec_y;
+    IAdvectionSpatial<GeometryXYVxVy, IDimX> const& m_advec_x;
+    IAdvectionSpatial<GeometryXYVxVy, IDimY> const& m_advec_y;
 
-    /// Advection operator in the vx direction
-    IAdvectionVelocity<GeometryXYVxVy, GridVx> const& m_advec_vx;
-    /// Advection operator in the vy direction
-    IAdvectionVelocity<GeometryXYVxVy, GridVy> const& m_advec_vy;
+    IAdvectionVelocity<GeometryXYVxVy, IDimVx> const& m_advec_vx;
+    IAdvectionVelocity<GeometryXYVxVy, IDimVy> const& m_advec_vy;
 
 public:
-    /**
-     * @brief Creates an instance of the split vlasov solver class.
-     * @param[in] advec_x An advection operator along the x direction.
-     * @param[in] advec_y An advection operator along the y direction.
-     * @param[in] advec_vx An advection operator along the vx direction.
-     * @param[in] advec_vy An advection operator along the vy direction.
-     */
     SplitVlasovSolver(
-            IAdvectionSpatial<GeometryXYVxVy, GridX> const& advec_x,
-            IAdvectionSpatial<GeometryXYVxVy, GridY> const& advec_y,
-            IAdvectionVelocity<GeometryXYVxVy, GridVx> const& advec_vx,
-            IAdvectionVelocity<GeometryXYVxVy, GridVy> const& advec_vy);
+            IAdvectionSpatial<GeometryXYVxVy, IDimX> const& advec_x,
+            IAdvectionSpatial<GeometryXYVxVy, IDimY> const& advec_y,
+            IAdvectionVelocity<GeometryXYVxVy, IDimVx> const& advec_vx,
+            IAdvectionVelocity<GeometryXYVxVy, IDimVy> const& advec_vy);
 
     ~SplitVlasovSolver() override = default;
 
-    /**
-     * @brief Solves a Vlasov equation on a timestep dt.
-     *
-     * @param[in, out] allfdistribu On input : the initial value of the distribution function.
-     *                              On output : the value of the distribution function after solving 
-     *                              the Vlasov equation.
-     * @param[in] electric_field_x The electric field in the x direction computed at all spatial positions. 
-     * @param[in] electric_field_y The electric field in the y direction computed at all spatial positions. 
-     * @param[in] dt The timestep. 
-     *
-     * @return The distribution function after solving the Vlasov equation.
-     */
-    DFieldSpXYVxVy operator()(
-            DFieldSpXYVxVy allfdistribu,
-            DConstFieldXY electric_field_x,
-            DConstFieldXY electric_field_y,
+    DSpanSpXYVxVy operator()(
+            DSpanSpXYVxVy allfdistribu,
+            DViewXY electric_field_x,
+            DViewXY electric_field_y,
             double dt) const override;
 };

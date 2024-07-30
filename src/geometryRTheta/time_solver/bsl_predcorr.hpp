@@ -122,7 +122,7 @@ public:
         BSDomainP polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
 
         SplinePolar electrostatic_potential_coef(
-                PolarBSplinesRP::singular_domain<PolarBSplinesRP>(),
+                PolarBSplinesRP::singular_idx_range<PolarBSplinesRP>(),
                 BSDomainRP(radial_bsplines, polar_domain));
         ddc::NullExtrapolationRule extrapolation_rule;
         PolarSplineEvaluator<PolarBSplinesRP, ddc::NullExtrapolationRule> polar_spline_evaluator(

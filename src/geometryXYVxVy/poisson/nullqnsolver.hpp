@@ -25,8 +25,8 @@ public:
      * @param[in] allfdistribu The distribution function.
      */
     void operator()(
-            DFieldXY electrostatic_potential,
-            DFieldXY electric_field_x,
-            DFieldXY electric_field_y,
-            DConstFieldSpXYVxVy allfdistribu) const override;
+            DSpanXY electrostatic_potential,
+            DSpanXY electric_field_x,
+            DSpanXY electric_field_y,
+            DViewSpXYVxVy allfdistribu) const override;
 };

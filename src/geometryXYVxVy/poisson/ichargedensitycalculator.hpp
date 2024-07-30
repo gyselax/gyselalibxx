@@ -28,5 +28,5 @@ public:
      * @param[out] rho The charge density.
      * @param[in] allfdistribu The distribution function.
      */
-    virtual void operator()(DFieldXY rho, DConstFieldSpXYVxVy allfdistribu) const = 0;
+    virtual void operator()(DSpanXY rho, DViewSpXYVxVy allfdistribu) const = 0;
 };

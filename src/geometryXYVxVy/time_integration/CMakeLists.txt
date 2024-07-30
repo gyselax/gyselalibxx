@@ -15,8 +15,6 @@ target_link_libraries("time_integration_xyvxvy"
         gslx::poisson_xy
         gslx::speciesinfo
         gslx::vlasov_xyvxvy
-        gslx::utils
-
 )
 
 add_library("gslx::time_integration_xyvxvy" ALIAS "time_integration_xyvxvy")
