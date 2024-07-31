@@ -6,16 +6,16 @@
 #include "noperturbinitialization.hpp"
 
 
-NoPerturbInitialization::NoPerturbInitialization(DViewSpVparMu fequilibrium)
+NoPerturbInitialization::NoPerturbInitialization(DConstFieldSpVparMu fequilibrium)
     : m_fequilibrium(fequilibrium)
 {
 }
 
-DSpanSpVparMu NoPerturbInitialization::operator()(DSpanSpVparMu const allfdistribu) const
+DFieldSpVparMu NoPerturbInitialization::operator()(DFieldSpVparMu const allfdistribu) const
 {
-    IdxRangeSpVparMu const idxrange_spvparmu = allfdistribu.domain();
+    IdxRangeSpVparMu const idxrange_spvparmu = get_idx_range(allfdistribu);
 
-    ddc::ChunkSpan fequilibrium_proxy = m_fequilibrium.span_view();
+    DConstFieldSpVparMu fequilibrium_proxy = get_field(m_fequilibrium);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             idxrange_spvparmu,
