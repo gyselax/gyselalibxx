@@ -218,10 +218,10 @@ int main(int argc, char** argv)
     DFieldMemTorCS B_norm(dom_tor1_tor2);
     ddc::parallel_fill(B_norm, 1.0);
 
-    DFieldVpar const coeff_intdvpar
+    DFieldMemVpar const coeff_intdvpar
             = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
                     allfdistribu.domain<GridVpar>());
-    DFieldMu const coeff_intdmu = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
+    DFieldMemMu const coeff_intdmu = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
             allfdistribu.domain<GridMu>());
 
     CollisionInfoRadial<GridTor1> collision_info(
