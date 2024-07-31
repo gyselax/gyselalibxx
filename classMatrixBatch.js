@@ -1,10 +1,10 @@
 var classMatrixBatch =
 [
-    [ "DKokkosView2D", "classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18", null ],
-    [ "MatrixBatch", "classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112", null ],
+    [ "BatchedRHS", "classMatrixBatch.html#aaefa005779305b357172ff993db97030", null ],
+    [ "MatrixBatch", "classMatrixBatch.html#aa36e5c69da8c424b977aae7ac390715c", null ],
     [ "~MatrixBatch", "classMatrixBatch.html#ad51f64ea5ba9ccd34f7bb1aa2993f547", null ],
-    [ "factorize", "classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c", null ],
-    [ "solve_inplace", "classMatrixBatch.html#a5d886a5d1ca27e0f158eacd9e90999b7", null ],
-    [ "get_size", "classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d", null ],
-    [ "get_batch_size", "classMatrixBatch.html#a6794abdadab47bff32062668682e0fab", null ]
+    [ "setup_solver", "classMatrixBatch.html#a9d2068033157c94e632788300a43c884", null ],
+    [ "solve", "classMatrixBatch.html#aed90bf340060a7bc8c24cf61771e212e", null ],
+    [ "size", "classMatrixBatch.html#a62a55966b021f64906841fb38764dbc0", null ],
+    [ "batch_size", "classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a", null ]
 ];

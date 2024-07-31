@@ -102,6 +102,7 @@ $(document).ready(function(){initNavTree('classMatrixBatch.html',''); initResiza
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classMatrixBatch-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">MatrixBatch&lt; ExecSpace &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -124,29 +125,35 @@ Inheritance diagram for MatrixBatch&lt; ExecSpace &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a6475f75dadb9320f4fb6ef6235584a18"><td class="memItemLeft" align="right" valign="top"><a id="a6475f75dadb9320f4fb6ef6235584a18"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> = Kokkos::View&lt; double **, Kokkos::LayoutRight, typename ExecSpace::memory_space &gt;</td></tr>
-<tr class="memdesc:a6475f75dadb9320f4fb6ef6235584a18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for 2D double Kokkos views, LayoutRight is specified. <br /></td></tr>
-<tr class="separator:a6475f75dadb9320f4fb6ef6235584a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaefa005779305b357172ff993db97030"><td class="memItemLeft" align="right" valign="top"><a id="aaefa005779305b357172ff993db97030"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> = Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt;</td></tr>
+<tr class="memdesc:aaefa005779305b357172ff993db97030"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a Kokkos::View storing batched right-hand sides. Second dimenion is batch dimension. <br /></td></tr>
+<tr class="separator:aaefa005779305b357172ff993db97030"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa43133aab812e00cb47c1c36cf45c112"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">MatrixBatch</a> (int batch_size, int mat_size)</td></tr>
-<tr class="memdesc:aa43133aab812e00cb47c1c36cf45c112"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for <a class="el" href="classMatrixBatch.html" title="MatrixBatch superclass for managing a collection of linear systems.">MatrixBatch</a> class.  <a href="classMatrixBatch.html#aa43133aab812e00cb47c1c36cf45c112">More...</a><br /></td></tr>
-<tr class="separator:aa43133aab812e00cb47c1c36cf45c112"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f9441c3e43c3af6e7d4c0485770a11c"><td class="memItemLeft" align="right" valign="top"><a id="a7f9441c3e43c3af6e7d4c0485770a11c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c">factorize</a> ()=0</td></tr>
-<tr class="memdesc:a7f9441c3e43c3af6e7d4c0485770a11c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic function which could be used by children classes to execute class specific implementation details. <br /></td></tr>
-<tr class="separator:a7f9441c3e43c3af6e7d4c0485770a11c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d886a5d1ca27e0f158eacd9e90999b7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a5d886a5d1ca27e0f158eacd9e90999b7">solve_inplace</a> (<a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> b) const =0</td></tr>
-<tr class="memdesc:a5d886a5d1ca27e0f158eacd9e90999b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function which solves the collection of linear problems.  <a href="classMatrixBatch.html#a5d886a5d1ca27e0f158eacd9e90999b7">More...</a><br /></td></tr>
-<tr class="separator:a5d886a5d1ca27e0f158eacd9e90999b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a889b3707cfafa8ec09ce5a25fc95614d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">get_size</a> () const</td></tr>
-<tr class="memdesc:a889b3707cfafa8ec09ce5a25fc95614d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for matrix size.  <a href="classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d">More...</a><br /></td></tr>
-<tr class="separator:a889b3707cfafa8ec09ce5a25fc95614d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6794abdadab47bff32062668682e0fab"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a6794abdadab47bff32062668682e0fab">get_batch_size</a> () const</td></tr>
-<tr class="memdesc:a6794abdadab47bff32062668682e0fab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for batch size, ie the number of linear systems to solve.  <a href="classMatrixBatch.html#a6794abdadab47bff32062668682e0fab">More...</a><br /></td></tr>
-<tr class="separator:a6794abdadab47bff32062668682e0fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad51f64ea5ba9ccd34f7bb1aa2993f547"><td class="memItemLeft" align="right" valign="top"><a id="ad51f64ea5ba9ccd34f7bb1aa2993f547"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#ad51f64ea5ba9ccd34f7bb1aa2993f547">~MatrixBatch</a> ()=default</td></tr>
+<tr class="memdesc:ad51f64ea5ba9ccd34f7bb1aa2993f547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destruct. <br /></td></tr>
+<tr class="separator:ad51f64ea5ba9ccd34f7bb1aa2993f547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d2068033157c94e632788300a43c884"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a9d2068033157c94e632788300a43c884">setup_solver</a> ()=0</td></tr>
+<tr class="memdesc:a9d2068033157c94e632788300a43c884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a pre-process operation on the solver.  <a href="classMatrixBatch.html#a9d2068033157c94e632788300a43c884">More...</a><br /></td></tr>
+<tr class="separator:a9d2068033157c94e632788300a43c884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed90bf340060a7bc8c24cf61771e212e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#aed90bf340060a7bc8c24cf61771e212e">solve</a> (<a class="el" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> b) const =0</td></tr>
+<tr class="memdesc:aed90bf340060a7bc8c24cf61771e212e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the multiple right-hand sides linear problem Ax=b inplace.  <a href="classMatrixBatch.html#aed90bf340060a7bc8c24cf61771e212e">More...</a><br /></td></tr>
+<tr class="separator:aed90bf340060a7bc8c24cf61771e212e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62a55966b021f64906841fb38764dbc0"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a62a55966b021f64906841fb38764dbc0">size</a> () const</td></tr>
+<tr class="memdesc:a62a55966b021f64906841fb38764dbc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of the square matrix corresponding to a single batch in one of its dimensions.  <a href="classMatrixBatch.html#a62a55966b021f64906841fb38764dbc0">More...</a><br /></td></tr>
+<tr class="separator:a62a55966b021f64906841fb38764dbc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ca6fc98c1b218c3aa0a534d04b2a06a"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a> () const</td></tr>
+<tr class="memdesc:a4ca6fc98c1b218c3aa0a534d04b2a06a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batch size of the linear problem.  <a href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">More...</a><br /></td></tr>
+<tr class="separator:a4ca6fc98c1b218c3aa0a534d04b2a06a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:aa36e5c69da8c424b977aae7ac390715c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#aa36e5c69da8c424b977aae7ac390715c">MatrixBatch</a> (const std::size_t <a class="el" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>, const std::size_t mat_size)</td></tr>
+<tr class="memdesc:aa36e5c69da8c424b977aae7ac390715c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for <a class="el" href="classMatrixBatch.html" title="MatrixBatch superclass for managing a collection of linear systems.">MatrixBatch</a> class.  <a href="classMatrixBatch.html#aa36e5c69da8c424b977aae7ac390715c">More...</a><br /></td></tr>
+<tr class="separator:aa36e5c69da8c424b977aae7ac390715c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename ExecSpace&gt;<br />
@@ -162,8 +169,8 @@ class MatrixBatch&lt; ExecSpace &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa43133aab812e00cb47c1c36cf45c112"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa43133aab812e00cb47c1c36cf45c112">&#9670;&nbsp;</a></span>MatrixBatch()</h2>
+<a id="aa36e5c69da8c424b977aae7ac390715c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa36e5c69da8c424b977aae7ac390715c">&#9670;&nbsp;</a></span>MatrixBatch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,13 +183,13 @@ template&lt;typename ExecSpace &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classMatrixBatch.html">MatrixBatch</a>&lt; ExecSpace &gt;::<a class="el" href="classMatrixBatch.html">MatrixBatch</a> </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const std::size_t&#160;</td>
           <td class="paramname"><em>batch_size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const std::size_t&#160;</td>
           <td class="paramname"><em>mat_size</em>&#160;</td>
         </tr>
         <tr>
@@ -193,7 +200,7 @@ template&lt;typename ExecSpace &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -210,8 +217,8 @@ template&lt;typename ExecSpace &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5d886a5d1ca27e0f158eacd9e90999b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d886a5d1ca27e0f158eacd9e90999b7">&#9670;&nbsp;</a></span>solve_inplace()</h2>
+<a id="a9d2068033157c94e632788300a43c884"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d2068033157c94e632788300a43c884">&#9670;&nbsp;</a></span>setup_solver()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -222,9 +229,41 @@ template&lt;typename ExecSpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a> <a class="el" href="classMatrixBatch.html">MatrixBatch</a>&lt; ExecSpace &gt;::solve_inplace </td>
+          <td class="memname">virtual void <a class="el" href="classMatrixBatch.html">MatrixBatch</a>&lt; ExecSpace &gt;::setup_solver </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMatrixBatch.html#a6475f75dadb9320f4fb6ef6235584a18">DKokkosView2D</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Perform a pre-process operation on the solver. </p>
+<p>Must be called after filling the matrix. </p>
+
+<p>Implemented in <a class="el" href="classMatrixBatchTridiag.html#a92c40d724831cfe30419dadbb6dfa4f1">MatrixBatchTridiag&lt; ExecSpace &gt;</a>, <a class="el" href="classMatrixBatchEll.html#a85a10595895f36e45701697a6b3d2c59">MatrixBatchEll&lt; ExecSpace &gt;</a>, and <a class="el" href="classMatrixBatchCsr.html#ad037e66bbdfdfa674e678f49d36f78df">MatrixBatchCsr&lt; ExecSpace, Solver &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aed90bf340060a7bc8c24cf61771e212e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed90bf340060a7bc8c24cf61771e212e">&#9670;&nbsp;</a></span>solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ExecSpace &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void <a class="el" href="classMatrixBatch.html">MatrixBatch</a>&lt; ExecSpace &gt;::solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a>&#160;</td>
           <td class="paramname"><em>b</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -236,21 +275,20 @@ template&lt;typename ExecSpace &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>A function which solves the collection of linear problems. </p>
+<p>Solve the multiple right-hand sides linear problem Ax=b inplace. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">b</td><td>2d Kokkos view which stores the right hand side, </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">b</td><td>A 2D Kokkos::View storing the batched right-hand sides of the problem and receiving the corresponding solution. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The computation result, stored in b. </dd></dl>
 
-<p>Implemented in <a class="el" href="classMatrixBatchEll.html#ae9650712099062e59b91b328cddaffb2">MatrixBatchEll&lt; ExecSpace &gt;</a>, <a class="el" href="classMatrixBatchCsr.html#a82891129e5baba2ab2e6af1ca7828d6d">MatrixBatchCsr&lt; ExecSpace, Solver &gt;</a>, and <a class="el" href="classMatrixBatchTridiag.html#aa306ac76a84be295b3bc4e0a12b2c20d">MatrixBatchTridiag&lt; ExecSpace &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classMatrixBatchTridiag.html#a47bb05714a68d7b8710b9c4f692bf5ec">MatrixBatchTridiag&lt; ExecSpace &gt;</a>, <a class="el" href="classMatrixBatchEll.html#a899ef38788cbc5cb077519b6f71d51dd">MatrixBatchEll&lt; ExecSpace &gt;</a>, and <a class="el" href="classMatrixBatchCsr.html#a5d7f76fc2c25fb4867b50181779b4c3c">MatrixBatchCsr&lt; ExecSpace, Solver &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a889b3707cfafa8ec09ce5a25fc95614d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a889b3707cfafa8ec09ce5a25fc95614d">&#9670;&nbsp;</a></span>get_size()</h2>
+<a id="a62a55966b021f64906841fb38764dbc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62a55966b021f64906841fb38764dbc0">&#9670;&nbsp;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -261,7 +299,7 @@ template&lt;typename ExecSpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classMatrixBatch.html">MatrixBatch</a>&lt; ExecSpace &gt;::get_size </td>
+          <td class="memname">std::size_t <a class="el" href="classMatrixBatch.html">MatrixBatch</a>&lt; ExecSpace &gt;::size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -274,13 +312,13 @@ template&lt;typename ExecSpace &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Getter function for matrix size. </p>
-<dl class="section return"><dt>Returns</dt><dd>Value of common matrix size. </dd></dl>
+<p>Get the size of the square matrix corresponding to a single batch in one of its dimensions. </p>
+<dl class="section return"><dt>Returns</dt><dd>The size of the matrix in one of its dimensions. </dd></dl>
 
 </div>
 </div>
-<a id="a6794abdadab47bff32062668682e0fab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6794abdadab47bff32062668682e0fab">&#9670;&nbsp;</a></span>get_batch_size()</h2>
+<a id="a4ca6fc98c1b218c3aa0a534d04b2a06a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ca6fc98c1b218c3aa0a534d04b2a06a">&#9670;&nbsp;</a></span>batch_size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,7 +329,7 @@ template&lt;typename ExecSpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classMatrixBatch.html">MatrixBatch</a>&lt; ExecSpace &gt;::get_batch_size </td>
+          <td class="memname">std::size_t <a class="el" href="classMatrixBatch.html">MatrixBatch</a>&lt; ExecSpace &gt;::batch_size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -304,8 +342,8 @@ template&lt;typename ExecSpace &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Getter function for batch size, ie the number of linear systems to solve. </p>
-<dl class="section return"><dt>Returns</dt><dd>Value of batch size. </dd></dl>
+<p>Get the batch size of the linear problem. </p>
+<dl class="section return"><dt>Returns</dt><dd>The batch size of the linear problem. </dd></dl>
 
 </div>
 </div>

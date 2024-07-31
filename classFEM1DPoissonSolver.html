@@ -122,10 +122,11 @@ Inheritance diagram for FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator &g
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFEM1DPoissonSolver_1_1HiddenFEMBasis.html">HiddenFEMBasis</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The internal type of the FEM basis.  <a href="structFEM1DPoissonSolver_1_1HiddenFEMBasis.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFEM1DPoissonSolver_1_1GridPDEDimQ.html">GridPDEDimQ</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The grid of quadrature points along the PDEDim direction.  <a href="structFEM1DPoissonSolver_1_1GridPDEDimQ.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFEM1DPoissonSolver_1_1QMeshI.html">QMeshI</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html">HiddenFEMBSplines</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The internal type of the FEM basis.  <a href="structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -133,15 +134,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a32cb0525a0c6b57cf325eef69dac5216"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216">FEM1DPoissonSolver</a> (SplineBuilder const &amp;spline_builder, SplineEvaluator const &amp;spline_evaluator)</td></tr>
 <tr class="memdesc:a32cb0525a0c6b57cf325eef69dac5216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the FemQNSolver operator.  <a href="classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216">More...</a><br /></td></tr>
 <tr class="separator:a32cb0525a0c6b57cf325eef69dac5216"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f12dec3c58acb9102551503029eb3a7"><td class="memItemLeft" align="right" valign="top">chunk_span_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFEM1DPoissonSolver.html#a6f12dec3c58acb9102551503029eb3a7">operator()</a> (chunk_span_type phi, chunk_span_type rho) const override</td></tr>
-<tr class="memdesc:a6f12dec3c58acb9102551503029eb3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator which calculates the solution \(\phi\) to Poisson's equation: \( -\Delta \phi = \rho \).  <a href="classFEM1DPoissonSolver.html#a6f12dec3c58acb9102551503029eb3a7">More...</a><br /></td></tr>
-<tr class="separator:a6f12dec3c58acb9102551503029eb3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbb04914dd6fc38ed826399f5d561a34"><td class="memItemLeft" align="right" valign="top">chunk_span_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFEM1DPoissonSolver.html#acbb04914dd6fc38ed826399f5d561a34">operator()</a> (chunk_span_type phi, vector_span_type E, chunk_span_type rho) const override</td></tr>
-<tr class="memdesc:acbb04914dd6fc38ed826399f5d561a34"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator which calculates the solution \(\phi\) to Poisson's equation and its derivative: \( - \Delta \phi = \rho \) \( E = - \nabla \phi \).  <a href="classFEM1DPoissonSolver.html#acbb04914dd6fc38ed826399f5d561a34">More...</a><br /></td></tr>
-<tr class="separator:acbb04914dd6fc38ed826399f5d561a34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a548d0e63a09282ff72d1df448daee3e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFEM1DPoissonSolver.html#a548d0e63a09282ff72d1df448daee3e4">solve_matrix_system</a> (FEMBasisCoeffSpan phi_spline_coef, chunk_span_type rho) const</td></tr>
-<tr class="memdesc:a548d0e63a09282ff72d1df448daee3e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">[SHOULD BE PRIVATE (Kokkos limitation)]  <a href="classFEM1DPoissonSolver.html#a548d0e63a09282ff72d1df448daee3e4">More...</a><br /></td></tr>
-<tr class="separator:a548d0e63a09282ff72d1df448daee3e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74360fade3d3986423b148334d88ea74"><td class="memItemLeft" align="right" valign="top">field_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFEM1DPoissonSolver.html#a74360fade3d3986423b148334d88ea74">operator()</a> (field_type phi, field_type rho) const override</td></tr>
+<tr class="memdesc:a74360fade3d3986423b148334d88ea74"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator which calculates the solution \(\phi\) to Poisson's equation: \( -\Delta \phi = \rho \).  <a href="classFEM1DPoissonSolver.html#a74360fade3d3986423b148334d88ea74">More...</a><br /></td></tr>
+<tr class="separator:a74360fade3d3986423b148334d88ea74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a066aa2568bdfd946f04c1d831debd663"><td class="memItemLeft" align="right" valign="top">field_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFEM1DPoissonSolver.html#a066aa2568bdfd946f04c1d831debd663">operator()</a> (field_type phi, vector_field_type E, field_type rho) const override</td></tr>
+<tr class="memdesc:a066aa2568bdfd946f04c1d831debd663"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator which calculates the solution \(\phi\) to Poisson's equation and its derivative: \( - \Delta \phi = \rho \) \( E = - \nabla \phi \).  <a href="classFEM1DPoissonSolver.html#a066aa2568bdfd946f04c1d831debd663">More...</a><br /></td></tr>
+<tr class="separator:a066aa2568bdfd946f04c1d831debd663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9092c2bf702042ebc4cbf1a6d48bbdbc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFEM1DPoissonSolver.html#a9092c2bf702042ebc4cbf1a6d48bbdbc">solve_matrix_system</a> (BatchedFEMBSplinesCoeff phi_spline_coef, field_type rho) const</td></tr>
+<tr class="memdesc:a9092c2bf702042ebc4cbf1a6d48bbdbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">[SHOULD BE PRIVATE (Kokkos limitation)]  <a href="classFEM1DPoissonSolver.html#a9092c2bf702042ebc4cbf1a6d48bbdbc">More...</a><br /></td></tr>
+<tr class="separator:a9092c2bf702042ebc4cbf1a6d48bbdbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SplineBuilder, class SplineEvaluator&gt;<br />
@@ -203,8 +204,8 @@ template&lt;class SplineBuilder , class SplineEvaluator &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6f12dec3c58acb9102551503029eb3a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f12dec3c58acb9102551503029eb3a7">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="a74360fade3d3986423b148334d88ea74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74360fade3d3986423b148334d88ea74">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -215,15 +216,15 @@ template&lt;class SplineBuilder , class SplineEvaluator &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">chunk_span_type <a class="el" href="classFEM1DPoissonSolver.html">FEM1DPoissonSolver</a>&lt; SplineBuilder, SplineEvaluator &gt;::operator() </td>
+          <td class="memname">field_type <a class="el" href="classFEM1DPoissonSolver.html">FEM1DPoissonSolver</a>&lt; SplineBuilder, SplineEvaluator &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">chunk_span_type&#160;</td>
+          <td class="paramtype">field_type&#160;</td>
           <td class="paramname"><em>phi</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">chunk_span_type&#160;</td>
+          <td class="paramtype">field_type&#160;</td>
           <td class="paramname"><em>rho</em>&#160;</td>
         </tr>
         <tr>
@@ -251,8 +252,8 @@ template&lt;class SplineBuilder , class SplineEvaluator &gt; </div>
 
 </div>
 </div>
-<a id="acbb04914dd6fc38ed826399f5d561a34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbb04914dd6fc38ed826399f5d561a34">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a066aa2568bdfd946f04c1d831debd663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a066aa2568bdfd946f04c1d831debd663">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -263,21 +264,21 @@ template&lt;class SplineBuilder , class SplineEvaluator &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">chunk_span_type <a class="el" href="classFEM1DPoissonSolver.html">FEM1DPoissonSolver</a>&lt; SplineBuilder, SplineEvaluator &gt;::operator() </td>
+          <td class="memname">field_type <a class="el" href="classFEM1DPoissonSolver.html">FEM1DPoissonSolver</a>&lt; SplineBuilder, SplineEvaluator &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">chunk_span_type&#160;</td>
+          <td class="paramtype">field_type&#160;</td>
           <td class="paramname"><em>phi</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">vector_span_type&#160;</td>
+          <td class="paramtype">vector_field_type&#160;</td>
           <td class="paramname"><em>E</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">chunk_span_type&#160;</td>
+          <td class="paramtype">field_type&#160;</td>
           <td class="paramname"><em>rho</em>&#160;</td>
         </tr>
         <tr>
@@ -306,8 +307,8 @@ template&lt;class SplineBuilder , class SplineEvaluator &gt; </div>
 
 </div>
 </div>
-<a id="a548d0e63a09282ff72d1df448daee3e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a548d0e63a09282ff72d1df448daee3e4">&#9670;&nbsp;</a></span>solve_matrix_system()</h2>
+<a id="a9092c2bf702042ebc4cbf1a6d48bbdbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9092c2bf702042ebc4cbf1a6d48bbdbc">&#9670;&nbsp;</a></span>solve_matrix_system()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,13 +321,13 @@ template&lt;class SplineBuilder , class SplineEvaluator &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classFEM1DPoissonSolver.html">FEM1DPoissonSolver</a>&lt; SplineBuilder, SplineEvaluator &gt;::solve_matrix_system </td>
           <td>(</td>
-          <td class="paramtype">FEMBasisCoeffSpan&#160;</td>
+          <td class="paramtype">BatchedFEMBSplinesCoeff&#160;</td>
           <td class="paramname"><em>phi_spline_coef</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">chunk_span_type&#160;</td>
+          <td class="paramtype">field_type&#160;</td>
           <td class="paramname"><em>rho</em>&#160;</td>
         </tr>
         <tr>

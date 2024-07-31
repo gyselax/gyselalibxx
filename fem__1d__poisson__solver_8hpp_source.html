@@ -105,13 +105,13 @@ $(document).ready(function(){initNavTree('fem__1d__poisson__solver_8hpp_source.h
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/kernels/splines.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;sll/gauss_legendre_integration.hpp&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;sll/matrix.hpp&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc/kernels/splines.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;sll/gauss_legendre_integration.hpp&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;sll/matrix.hpp&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;ipoisson_solver.hpp&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
@@ -138,469 +138,477 @@ $(document).ready(function(){initNavTree('fem__1d__poisson__solver_8hpp_source.h
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keyword">typename</span> SplineEvaluator::memory_space&gt;;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">using</span> DimI = <span class="keyword">typename</span> SplineBuilder::interpolation_discrete_dimension_type;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">using</span> GridPDEDim = <span class="keyword">typename</span> SplineBuilder::interpolation_discrete_dimension_type;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">using</span> InputBSplines = <span class="keyword">typename</span> SplineBuilder::bsplines_type;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">using</span> RDimI = <span class="keyword">typename</span> DimI::continuous_dimension_type;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">using</span> PDEDim = <span class="keyword">typename</span> GridPDEDim::continuous_dimension_type;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">using</span> CoordI = ddc::Coordinate&lt;RDimI&gt;;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">using</span> CoordPDEDim = Coord&lt;PDEDim&gt;;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">using</span> IndexI = ddc::DiscreteElement&lt;DimI&gt;;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">using</span> IdxPDEDim = Idx&lt;GridPDEDim&gt;;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">using</span> chunk_span_type = <span class="keyword">typename</span> base_type::chunk_span_type;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">using</span> field_type = <span class="keyword">typename</span> base_type::field_type;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">using</span> vector_span_type = <span class="keyword">typename</span> base_type::vector_span_type;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">using</span> vector_field_type = <span class="keyword">typename</span> base_type::vector_field_type;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">using</span> fem_domain_type = <span class="keyword">typename</span> base_type::laplacian_domain_type;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">using</span> fem_idx_range_type = <span class="keyword">typename</span> base_type::laplacian_idx_range_type;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">using</span> batch_domain_type = <span class="keyword">typename</span> base_type::batch_domain_type;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">using</span> batch_idx_range_type = <span class="keyword">typename</span> base_type::batch_idx_range_type;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">using</span> batch_element_type = <span class="keyword">typename</span> base_type::batch_element_type;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">using</span> batch_index_type = <span class="keyword">typename</span> base_type::batch_index_type;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">using</span> memory_space = <span class="keyword">typename</span> base_type::memory_space;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">using</span> exec_space = <span class="keyword">typename</span> SplineEvaluator::exec_space;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="structFEM1DPoissonSolver_1_1QMeshI.html">   70</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structFEM1DPoissonSolver_1_1QMeshI.html">QMeshI</a> : ddc::NonUniformPointSampling&lt;RDimI&gt;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">using</span> IndexQ = ddc::DiscreteElement&lt;QMeshI&gt;;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">using</span> VectQ = ddc::DiscreteVector&lt;QMeshI&gt;;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">using</span> DomainQ = ddc::DiscreteDomain&lt;QMeshI&gt;;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">using</span> DQField = ddc::Chunk&lt;double, DomainQ, ddc::KokkosAllocator&lt;double, memory_space&gt;&gt;;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">using</span> CoordQSpan</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            = ddc::ChunkSpan&lt;CoordI, DomainQ, std::experimental::layout_right, memory_space&gt;;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="structFEM1DPoissonSolver_1_1HiddenFEMBasis.html">  106</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structFEM1DPoissonSolver_1_1HiddenFEMBasis.html">HiddenFEMBasis</a> : ddc::NonUniformBSplines&lt;RDimI, InputBSplines::degree()&gt;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    };</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">using</span> FEMBasis = std::conditional_t&lt;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            ddc::is_uniform_bsplines_v&lt;InputBSplines&gt; &amp;&amp; !InputBSplines::is_periodic(),</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <a class="code" href="structFEM1DPoissonSolver_1_1HiddenFEMBasis.html">HiddenFEMBasis</a>,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            InputBSplines&gt;;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">using</span> FEMEvalExtrapolationRule = std::conditional_t&lt;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            FEMBasis::is_periodic(),</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            ddc::PeriodicExtrapolationRule&lt;RDimI&gt;,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            ddc::NullExtrapolationRule&gt;;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Domain&gt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keyword">struct </span>FEMSplineEvaluatorBuilder;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... DimX&gt;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">struct </span>FEMSplineEvaluatorBuilder&lt;ddc::DiscreteDomain&lt;DimX...&gt;&gt;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    {</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keyword">using</span> type = ddc::SplineEvaluator&lt;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                Kokkos::DefaultExecutionSpace,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                FEMBasis,</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                DimI,</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                FEMEvalExtrapolationRule,</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="structFEM1DPoissonSolver_1_1GridPDEDimQ.html">   71</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structFEM1DPoissonSolver_1_1GridPDEDimQ.html">GridPDEDimQ</a> : NonUniformGridBase&lt;PDEDim&gt;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    };</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">using</span> IdxQ = Idx&lt;GridPDEDimQ&gt;;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">using</span> IdxStepQ = IdxStep&lt;GridPDEDimQ&gt;;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">using</span> IdxRangeQ = IdxRange&lt;GridPDEDimQ&gt;;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">using</span> DQField = DFieldMem&lt;IdxRangeQ, ddc::KokkosAllocator&lt;double, memory_space&gt;&gt;;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">using</span> CoordQField</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            = Field&lt;CoordPDEDim, IdxRangeQ, std::experimental::layout_right, memory_space&gt;;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html">  107</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html">HiddenFEMBSplines</a> : ddc::NonUniformBSplines&lt;PDEDim, InputBSplines::degree()&gt;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    };</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">using</span> FEMBSplines = std::conditional_t&lt;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            ddc::is_uniform_bsplines_v&lt;InputBSplines&gt; &amp;&amp; !InputBSplines::is_periodic(),</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <a class="code" href="structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html">HiddenFEMBSplines</a>,</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            InputBSplines&gt;;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">using</span> FEMEvalExtrapolationRule = std::conditional_t&lt;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            FEMBSplines::is_periodic(),</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            ddc::PeriodicExtrapolationRule&lt;PDEDim&gt;,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            ddc::NullExtrapolationRule&gt;;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> IdxRange&gt;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keyword">struct </span>FEMSplineEvaluatorBuilder;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... DimX&gt;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keyword">struct </span>FEMSplineEvaluatorBuilder&lt;IdxRange&lt;DimX...&gt;&gt;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keyword">using</span> type = ddc::SplineEvaluator&lt;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                Kokkos::DefaultExecutionSpace,</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                FEMBSplines,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                GridPDEDim,</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                FEMEvalExtrapolationRule,</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                DimX...&gt;;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    };</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keyword">using</span> FEMSplineEvaluator = <span class="keyword">typename</span> FEMSplineEvaluatorBuilder&lt;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keyword">typename</span> SplineEvaluator::batched_evaluation_domain_type&gt;::type;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keyword">using</span> FEMBasisIndex = ddc::DiscreteElement&lt;FEMBasis&gt;;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keyword">using</span> FEMBSDomain = ddc::DiscreteDomain&lt;FEMBasis&gt;;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keyword">using</span> FEMBasisCoeffDomainType = <span class="keyword">typename</span> FEMSplineEvaluator::batched_spline_domain_type;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keyword">using</span> FEMBSField = ddc::Chunk&lt;double, FEMBSDomain, ddc::KokkosAllocator&lt;double, memory_space&gt;&gt;;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">using</span> FEMBasisCoeffType = ddc::</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            Chunk&lt;double, FEMBasisCoeffDomainType, ddc::KokkosAllocator&lt;double, memory_space&gt;&gt;;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">using</span> FEMBasisCoeffSpan = <span class="keyword">typename</span> FEMBasisCoeffType::span_type;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                FEMEvalExtrapolationRule,</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                DimX...&gt;;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    };</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">using</span> FEMSplineEvaluator = <span class="keyword">typename</span> FEMSplineEvaluatorBuilder&lt;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keyword">typename</span> SplineEvaluator::batched_evaluation_domain_type&gt;::type;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keyword">using</span> FEMBSplinesIdx = Idx&lt;FEMBSplines&gt;;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keyword">using</span> FEMBSplinesIdxRange = IdxRange&lt;FEMBSplines&gt;;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keyword">using</span> BatchedFEMBSplinesIdxRange = <span class="keyword">typename</span> FEMSplineEvaluator::batched_spline_domain_type;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keyword">using</span> FEMBSplinesCoeffMem</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            = DFieldMem&lt;FEMBSplinesIdxRange, ddc::KokkosAllocator&lt;double, memory_space&gt;&gt;;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keyword">using</span> BatchedFEMBSplinesCoeffMem</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            = DFieldMem&lt;BatchedFEMBSplinesIdxRange, ddc::KokkosAllocator&lt;double, memory_space&gt;&gt;;</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">using</span> BSDomain = ddc::DiscreteDomain&lt;InputBSplines&gt;;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keyword">using</span> BSIndex = ddc::DiscreteElement&lt;InputBSplines&gt;;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keyword">using</span> BSVect = ddc::DiscreteVector&lt;InputBSplines&gt;;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keyword">using</span> BSCoeffDomainType = <span class="keyword">typename</span> SplineEvaluator::batched_spline_domain_type;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keyword">using</span> full_index =</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <span class="keyword">typename</span> SplineEvaluator::batched_evaluation_domain_type::discrete_element_type;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keyword">using</span> CoordField = ddc::Chunk&lt;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            CoordI,</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="keyword">typename</span> FEMSplineEvaluator::batched_evaluation_domain_type,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            ddc::KokkosAllocator&lt;CoordI, memory_space&gt;&gt;;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keyword">using</span> RHSBsplines = InputBSplines;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keyword">using</span> RHSSplineType</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            = ddc::Chunk&lt;double, BSCoeffDomainType, ddc::KokkosAllocator&lt;double, memory_space&gt;&gt;;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keyword">using</span> RHSSplineSpan = <span class="keyword">typename</span> RHSSplineType::span_type;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keyword">using</span> RHSQuadTags</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            = ddc::type_seq_merge_t&lt;typename base_type::batch_tags, ddc::detail::TypeSeq&lt;QMeshI&gt;&gt;;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keyword">using</span> RHSQuadratureDomain = ddc::detail::convert_type_seq_to_discrete_domain&lt;RHSQuadTags&gt;;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keyword">using</span> RHSQuadratureIndex = <span class="keyword">typename</span> RHSQuadratureDomain::discrete_element_type;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="comment">// Spline degree in x direction</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr s_degree = InputBSplines::degree();</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="comment">// Gauss points used for integration computation</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr s_npts_gauss = InputBSplines::degree() + 1;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    SplineBuilder <span class="keyword">const</span>&amp; m_spline_builder;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    SplineEvaluator m_spline_evaluator;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    FEMSplineEvaluator m_spline_fem_evaluator;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordtype">int</span> m_matrix_size;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    DQField m_quad_coef;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    std::unique_ptr&lt;Matrix&gt; m_fem_matrix;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216">  209</a></span>&#160;    <a class="code" href="classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216">FEM1DPoissonSolver</a>(SplineBuilder <span class="keyword">const</span>&amp; spline_builder, SplineEvaluator <span class="keyword">const</span>&amp; spline_evaluator)</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        : m_spline_builder(spline_builder)</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        , m_spline_evaluator(spline_evaluator)</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_evaluator))</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        , m_quad_coef(</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                  DomainQ(IndexQ(0),</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                          VectQ(s_npts_gauss * ddc::discrete_space&lt;InputBSplines&gt;().ncells())))</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    {</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        ddc::DiscreteDomain break_point_domain</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                = ddc::discrete_space&lt;InputBSplines&gt;().break_point_domain();</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        ddc::Chunk break_points(break_point_domain, ddc::HostAllocator&lt;CoordI&gt;());</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keywordflow">for</span> (ddc::DiscreteElement <span class="keyword">const</span> idx : break_point_domain) {</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            break_points(idx) = ddc::coordinate(idx);</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        }</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="comment">// Calculate the integration coefficients</span></div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <a class="code" href="classGaussLegendre.html">GaussLegendre&lt;RDimI&gt;</a> <span class="keyword">const</span> gl(s_npts_gauss);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        std::vector&lt;CoordI&gt; eval_pts_data(m_quad_coef.domain().size());</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        host_t&lt;CoordQSpan&gt; <span class="keyword">const</span> eval_pts(eval_pts_data.data(), m_quad_coef.domain());</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="keyword">auto</span> quad_coef_host = ddc::create_mirror_and_copy(m_quad_coef.span_view());</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        gl.compute_points_and_weights_on_mesh(</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                eval_pts,</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                quad_coef_host.span_view(),</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                break_points.span_cview());</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        ddc::parallel_deepcopy(m_quad_coef, quad_coef_host);</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        ddc::init_discrete_space&lt;QMeshI&gt;(eval_pts_data);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="comment">// Build the finite elements matrix</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="keywordflow">if</span> constexpr (InputBSplines::is_periodic()) {</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            build_periodic_matrix();</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            build_non_periodic_matrix();</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        }</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    }</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno"><a class="line" href="classFEM1DPoissonSolver.html#a6f12dec3c58acb9102551503029eb3a7">  254</a></span>&#160;    chunk_span_type <a class="code" href="classFEM1DPoissonSolver.html#a6f12dec3c58acb9102551503029eb3a7">operator()</a>(chunk_span_type phi, chunk_span_type rho)<span class="keyword"> const override</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        batch_domain_type batch_dom(phi.domain());</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        FEMBasisCoeffDomainType</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                phi_coefs_domain(batch_dom, ddc::discrete_space&lt;FEMBasis&gt;().full_domain());</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        FEMBasisCoeffType phi_coefs_alloc(phi_coefs_domain);</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        FEMBasisCoeffSpan phi_coefs(phi_coefs_alloc);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <a class="code" href="classFEM1DPoissonSolver.html#a548d0e63a09282ff72d1df448daee3e4">solve_matrix_system</a>(phi_coefs, rho);</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        CoordField eval_pts_alloc(phi.domain());</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        ddc::ChunkSpan eval_pts = eval_pts_alloc.span_view();</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keyword">using</span> BatchedFEMBSplinesCoeff = <span class="keyword">typename</span> BatchedFEMBSplinesCoeffMem::span_type;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keyword">using</span> BSplinesIdxRange = IdxRange&lt;InputBSplines&gt;;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keyword">using</span> BSplinesIdx = Idx&lt;InputBSplines&gt;;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keyword">using</span> BatchedBSplinesIdxRange = <span class="keyword">typename</span> SplineEvaluator::batched_spline_domain_type;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keyword">using</span> full_index =</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            <span class="keyword">typename</span> SplineEvaluator::batched_evaluation_domain_type::discrete_element_type;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keyword">using</span> CoordField = FieldMem&lt;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            CoordPDEDim,</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="keyword">typename</span> FEMSplineEvaluator::batched_evaluation_domain_type,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            ddc::KokkosAllocator&lt;CoordPDEDim, memory_space&gt;&gt;;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keyword">using</span> RHSBSplines = InputBSplines;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">using</span> RHSSplineCoeffMem</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            = DFieldMem&lt;BatchedBSplinesIdxRange, ddc::KokkosAllocator&lt;double, memory_space&gt;&gt;;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keyword">using</span> RHSSplineCoeff = <span class="keyword">typename</span> RHSSplineCoeffMem::span_type;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keyword">using</span> RHSQuadTags = ddc::</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            type_seq_merge_t&lt;typename base_type::batch_tags, ddc::detail::TypeSeq&lt;GridPDEDimQ&gt;&gt;;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keyword">using</span> RHSQuadratureIdxRange = ddc::detail::convert_type_seq_to_discrete_domain&lt;RHSQuadTags&gt;;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keyword">using</span> RHSQuadratureIdx = <span class="keyword">typename</span> RHSQuadratureIdxRange::discrete_element_type;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="comment">// Spline degree in x direction</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr s_degree = InputBSplines::degree();</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="comment">// Gauss points used for integration computation</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr s_npts_gauss = InputBSplines::degree() + 1;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    SplineBuilder <span class="keyword">const</span>&amp; m_spline_builder;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    SplineEvaluator m_spline_evaluator;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    FEMSplineEvaluator m_spline_fem_evaluator;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordtype">int</span> m_matrix_size;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    DQField m_quad_coef;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    std::unique_ptr&lt;Matrix&gt; m_fem_matrix;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216">  210</a></span>&#160;    <a class="code" href="classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216">FEM1DPoissonSolver</a>(SplineBuilder <span class="keyword">const</span>&amp; spline_builder, SplineEvaluator <span class="keyword">const</span>&amp; spline_evaluator)</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        : m_spline_builder(spline_builder)</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        , m_spline_evaluator(spline_evaluator)</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_evaluator))</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        , m_quad_coef(IdxRangeQ(</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                  IdxQ(0),</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                  IdxStepQ(s_npts_gauss * ddc::discrete_space&lt;InputBSplines&gt;().ncells())))</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    {</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="keyword">using</span> break_point_grid = ddc::knot_discrete_dimension_t&lt;InputBSplines&gt;;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        IdxRange&lt;break_point_grid&gt; break_point_idx_range</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                = ddc::discrete_space&lt;InputBSplines&gt;().break_point_domain();</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        host_t&lt;FieldMem&lt;CoordPDEDim, IdxRange&lt;break_point_grid&gt;&gt;&gt; break_points(</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                break_point_idx_range);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        <span class="keywordflow">for</span> (Idx&lt;break_point_grid&gt; <span class="keyword">const</span> idx : break_point_idx_range) {</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            break_points(idx) = ddc::coordinate(idx);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        }</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="comment">// Calculate the integration coefficients</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <a class="code" href="classGaussLegendre.html">GaussLegendre&lt;PDEDim&gt;</a> <span class="keyword">const</span> gl(s_npts_gauss);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        std::vector&lt;CoordPDEDim&gt; eval_pts_data(get_idx_range(m_quad_coef).size());</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        host_t&lt;CoordQField&gt; <span class="keyword">const</span> eval_pts(eval_pts_data.data(), get_idx_range(m_quad_coef));</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <span class="keyword">auto</span> quad_coef_host = ddc::create_mirror_and_copy(get_field(m_quad_coef));</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        gl.compute_points_and_weights_on_mesh(</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                eval_pts,</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                get_field(quad_coef_host),</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                get_const_field(break_points));</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        ddc::parallel_deepcopy(m_quad_coef, quad_coef_host);</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        ddc::init_discrete_space&lt;GridPDEDimQ&gt;(eval_pts_data);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="comment">// Build the finite elements matrix</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordflow">if</span> constexpr (InputBSplines::is_periodic()) {</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            build_periodic_matrix();</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            build_non_periodic_matrix();</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        }</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    }</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno"><a class="line" href="classFEM1DPoissonSolver.html#a74360fade3d3986423b148334d88ea74">  257</a></span>&#160;    field_type <a class="code" href="classFEM1DPoissonSolver.html#a74360fade3d3986423b148334d88ea74">operator()</a>(field_type phi, field_type rho)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        batch_idx_range_type batch_dom(get_idx_range(phi));</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        BatchedFEMBSplinesIdxRange</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                phi_coefs_idx_range(batch_dom, ddc::discrete_space&lt;FEMBSplines&gt;().full_domain());</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <a class="code" href="classFEM1DPoissonSolver.html#a9092c2bf702042ebc4cbf1a6d48bbdbc">solve_matrix_system</a>(phi_coefs, rho);</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        ddc::parallel_for_each(</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                exec_space(),</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                eval_pts.domain(),</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                KOKKOS_LAMBDA(full_index <span class="keyword">const</span> idx) {</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                    eval_pts(idx) = ddc::coordinate(ddc::select&lt;DimI&gt;(idx));</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                });</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        FEMSplineEvaluator spline_nu_evaluator_proxy = m_spline_fem_evaluator;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        m_spline_fem_evaluator(phi, eval_pts.span_cview(), phi_coefs.span_cview());</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">return</span> phi;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    }</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        CoordField eval_pts_alloc(get_idx_range(phi));</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        ddc::ChunkSpan eval_pts = get_field(eval_pts_alloc);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        ddc::parallel_for_each(</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                exec_space(),</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                get_idx_range(eval_pts),</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                KOKKOS_LAMBDA(full_index <span class="keyword">const</span> idx) {</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                    eval_pts(idx) = ddc::coordinate(ddc::select&lt;GridPDEDim&gt;(idx));</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                });</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        FEMSplineEvaluator spline_nu_evaluator_proxy = m_spline_fem_evaluator;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
-<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="classFEM1DPoissonSolver.html#acbb04914dd6fc38ed826399f5d561a34">  292</a></span>&#160;    chunk_span_type <a class="code" href="classFEM1DPoissonSolver.html#acbb04914dd6fc38ed826399f5d561a34">operator()</a>(chunk_span_type phi, vector_span_type E, chunk_span_type rho)<span class="keyword"></span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="keyword">            const override</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        batch_domain_type batch_dom(phi.domain());</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        FEMBasisCoeffDomainType</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                phi_coefs_domain(batch_dom, ddc::discrete_space&lt;FEMBasis&gt;().full_domain());</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        FEMBasisCoeffType phi_coefs_alloc(phi_coefs_domain);</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        FEMBasisCoeffSpan phi_coefs(phi_coefs_alloc);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <a class="code" href="classFEM1DPoissonSolver.html#a548d0e63a09282ff72d1df448daee3e4">solve_matrix_system</a>(phi_coefs, rho);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        CoordField eval_pts_alloc(phi.domain());</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        ddc::ChunkSpan eval_pts = eval_pts_alloc.span_view();</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        ddc::parallel_for_each(</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                exec_space(),</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                eval_pts.domain(),</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                KOKKOS_LAMBDA(full_index <span class="keyword">const</span> idx) {</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                    eval_pts(idx) = ddc::coordinate(ddc::select&lt;DimI&gt;(idx));</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                });</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        FEMSplineEvaluator spline_nu_evaluator_proxy = m_spline_fem_evaluator;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keywordflow">return</span> phi;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    }</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00295"></a><span class="lineno"><a class="line" href="classFEM1DPoissonSolver.html#a066aa2568bdfd946f04c1d831debd663">  295</a></span>&#160;    field_type <a class="code" href="classFEM1DPoissonSolver.html#a066aa2568bdfd946f04c1d831debd663">operator()</a>(field_type phi, vector_field_type E, field_type rho)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        batch_idx_range_type batch_dom(get_idx_range(phi));</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        BatchedFEMBSplinesIdxRange</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                phi_coefs_idx_range(batch_dom, ddc::discrete_space&lt;FEMBSplines&gt;().full_domain());</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <a class="code" href="classFEM1DPoissonSolver.html#a9092c2bf702042ebc4cbf1a6d48bbdbc">solve_matrix_system</a>(phi_coefs, rho);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        CoordField eval_pts_alloc(get_idx_range(phi));</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        ddc::ChunkSpan eval_pts = get_field(eval_pts_alloc);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        ddc::parallel_for_each(</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                exec_space(),</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                get_idx_range(eval_pts),</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                KOKKOS_LAMBDA(full_index <span class="keyword">const</span> idx) {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                    eval_pts(idx) = ddc::coordinate(ddc::select&lt;GridPDEDim&gt;(idx));</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                });</div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        m_spline_fem_evaluator(phi, eval_pts.span_cview(), phi_coefs.span_cview());</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        m_spline_fem_evaluator.deriv(E, eval_pts.span_cview(), phi_coefs.span_cview());</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        ddc::parallel_for_each(</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                exec_space(),</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                phi.domain(),</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                KOKKOS_LAMBDA(full_index <span class="keyword">const</span> idx) { E(idx) = -E(idx); });</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordflow">return</span> phi;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    }</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordtype">void</span> build_periodic_matrix()</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    {</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keywordtype">int</span> constexpr n_lower_diags = s_degree + 1;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> nbasis = ddc::discrete_space&lt;FEMBasis&gt;().nbasis();</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        m_matrix_size = nbasis + 1;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        <span class="keywordtype">bool</span> <span class="keyword">const</span> positive_definite_symmetric = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="comment">// Matrix with block is used instead of periodic to contain the</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="comment">// Dirichlet boundary conditions</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        m_fem_matrix = Matrix::make_new_block_with_banded_region(</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                m_matrix_size,</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                n_lower_diags,</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                n_lower_diags,</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                positive_definite_symmetric,</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                n_lower_diags);</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="keyword">auto</span> quad_coef_host = ddc::create_mirror_and_copy(m_quad_coef.span_cview());</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        FEMSplineEvaluator spline_nu_evaluator_proxy = m_spline_fem_evaluator;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        m_spline_fem_evaluator.deriv(E, get_const_field(eval_pts), get_const_field(phi_coefs));</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        ddc::parallel_for_each(</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                exec_space(),</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                get_idx_range(phi),</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                KOKKOS_LAMBDA(full_index <span class="keyword">const</span> idx) { E(idx) = -E(idx); });</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="keywordflow">return</span> phi;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordtype">void</span> build_periodic_matrix()</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keywordtype">int</span> constexpr n_lower_diags = s_degree + 1;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> nbasis = ddc::discrete_space&lt;FEMBSplines&gt;().nbasis();</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        m_matrix_size = nbasis + 1;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="keywordtype">bool</span> <span class="keyword">const</span> positive_definite_symmetric = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="comment">// Matrix with block is used instead of periodic to contain the</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="comment">// Dirichlet boundary conditions</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        m_fem_matrix = Matrix::make_new_block_with_banded_region(</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                m_matrix_size,</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                n_lower_diags,</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                n_lower_diags,</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                positive_definite_symmetric,</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                n_lower_diags);</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="comment">// Fill the banded part of the matrix</span></div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        std::array&lt;double, s_degree + 1&gt; derivs_alloc;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        DSpan1D derivs = as_span(derivs_alloc);</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        ddc::for_each(m_quad_coef.domain(), [&amp;](IndexQ <span class="keyword">const</span> ix) {</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            CoordI const coord = ddc::coordinate(ix);</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            FEMBasisIndex const jmin = ddc::discrete_space&lt;FEMBasis&gt;().eval_deriv(derivs, coord);</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            for (int j = 0; j &lt; s_degree + 1; ++j) {</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                for (int k = 0; k &lt; s_degree + 1; ++k) {</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                    int const j_idx = (j + jmin.uid()) % nbasis;</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                    int const k_idx = (k + jmin.uid()) % nbasis;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                    double a_jk = m_fem_matrix-&gt;get_element(j_idx, k_idx);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                    <span class="comment">// Update element</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                    a_jk += derivs[j] * derivs[k] * quad_coef_host(ix);</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                    m_fem_matrix-&gt;set_element(j_idx, k_idx, a_jk);</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                }</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            }</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        });</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <span class="comment">// Impose the boundary conditions</span></div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        FEMBSDomain <span class="keyword">const</span> bspline_full_domain = ddc::discrete_space&lt;FEMBasis&gt;().full_domain();</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        FEMBSDomain <span class="keyword">const</span> bspline_dom</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                = bspline_full_domain.take_first(ddc::DiscreteVector&lt;FEMBasis&gt;(nbasis));</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        host_t&lt;FEMBSField&gt; int_vals(bspline_dom);</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        ddc::discrete_space&lt;InputBSplines&gt;().integrals(int_vals.span_view());</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keywordflow">for</span> (FEMBasisIndex <span class="keyword">const</span> ix : bspline_dom) {</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            <span class="keywordtype">int</span> <span class="keyword">const</span> i = ix.uid();</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            m_fem_matrix-&gt;set_element(nbasis, i, int_vals(ix));</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            m_fem_matrix-&gt;set_element(i, nbasis, int_vals(ix));</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        }</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        <span class="comment">// Factorize the matrix ready to call solve</span></div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        m_fem_matrix-&gt;factorize();</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    }</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keyword">auto</span> quad_coef_host = ddc::create_mirror_and_copy(get_const_field(m_quad_coef));</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="comment">// Fill the banded part of the matrix</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        std::array&lt;double, s_degree + 1&gt; derivs_alloc;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        DSpan1D derivs = as_span(derivs_alloc);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        ddc::for_each(get_idx_range(m_quad_coef), [&amp;](IdxQ <span class="keyword">const</span> ix) {</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            CoordPDEDim <span class="keyword">const</span> coord = ddc::coordinate(ix);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            FEMBSplinesIdx <span class="keyword">const</span> jmin</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                    = ddc::discrete_space&lt;FEMBSplines&gt;().eval_deriv(derivs, coord);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; s_degree + 1; ++j) {</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; s_degree + 1; ++k) {</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                    <span class="keywordtype">int</span> <span class="keyword">const</span> j_idx = (j + jmin.uid()) % nbasis;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                    <span class="keywordtype">int</span> <span class="keyword">const</span> k_idx = (k + jmin.uid()) % nbasis;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                    <span class="keywordtype">double</span> a_jk = m_fem_matrix-&gt;get_element(j_idx, k_idx);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                    <span class="comment">// Update element</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                    a_jk += derivs[j] * derivs[k] * quad_coef_host(ix);</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                    m_fem_matrix-&gt;set_element(j_idx, k_idx, a_jk);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                }</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            }</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        });</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        <span class="comment">// Impose the boundary conditions</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        FEMBSplinesIdxRange <span class="keyword">const</span> bspline_full_idx_range</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                = ddc::discrete_space&lt;FEMBSplines&gt;().full_domain();</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        FEMBSplinesIdxRange <span class="keyword">const</span> bspline_dom</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;                = bspline_full_idx_range.take_first(IdxStep&lt;FEMBSplines&gt;(nbasis));</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        host_t&lt;FEMBSplinesCoeffMem&gt; int_vals(bspline_dom);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        ddc::discrete_space&lt;InputBSplines&gt;().integrals(get_field(int_vals));</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        <span class="keywordflow">for</span> (FEMBSplinesIdx <span class="keyword">const</span> ix : bspline_dom) {</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            <span class="keywordtype">int</span> <span class="keyword">const</span> i = ix.uid();</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            m_fem_matrix-&gt;set_element(nbasis, i, int_vals(ix));</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            m_fem_matrix-&gt;set_element(i, nbasis, int_vals(ix));</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        }</div>
 <div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; </div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <span class="keywordtype">void</span> build_non_periodic_matrix()</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    {</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        <span class="comment">// Matrix contains all elements of the basis except the first</span></div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        <span class="comment">// and last in order to impose Dirichlet conditions</span></div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> nbasis = ddc::discrete_space&lt;FEMBasis&gt;().nbasis();</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        m_matrix_size = nbasis - 2;</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        <span class="keywordtype">int</span> constexpr n_lower_diags = s_degree;</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <span class="keywordtype">bool</span> <span class="keyword">const</span> positive_definite_symmetric = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <span class="comment">// Matrix with block is used instead of periodic to contain the</span></div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="comment">// Dirichlet boundary conditions</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        m_fem_matrix = Matrix::make_new_banded(</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;                m_matrix_size,</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;                n_lower_diags,</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;                n_lower_diags,</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;                positive_definite_symmetric);</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        <span class="keyword">auto</span> quad_coef_host = ddc::create_mirror_and_copy(m_quad_coef.span_cview());</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <span class="comment">// Fill the banded part of the matrix</span></div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        std::array&lt;double, s_degree + 1&gt; derivs_alloc;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        DSpan1D derivs = as_span(derivs_alloc);</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        ddc::for_each(m_quad_coef.domain(), [&amp;](IndexQ <span class="keyword">const</span> ix) {</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            CoordI const coord = ddc::coordinate(ix);</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            FEMBasisIndex const jmin = ddc::discrete_space&lt;FEMBasis&gt;().eval_deriv(derivs, coord);</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            for (int j = 0; j &lt; s_degree + 1; ++j) {</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;                for (int k = 0; k &lt; s_degree + 1; ++k) {</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                    int const j_idx = (j + jmin.uid()) % nbasis - 1;</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;                    int const k_idx = (k + jmin.uid()) % nbasis - 1;</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;                    if (j_idx != -1 &amp;&amp; j_idx != m_matrix_size &amp;&amp; k_idx != -1</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;                        &amp;&amp; k_idx != m_matrix_size) {</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;                        double a_jk = m_fem_matrix-&gt;get_element(j_idx, k_idx);</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;                        <span class="comment">// Update element</span></div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;                        a_jk += derivs[j] * derivs[k] * quad_coef_host(ix);</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; </div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;                        m_fem_matrix-&gt;set_element(j_idx, k_idx, a_jk);</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                    }</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                }</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;            }</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;        });</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; </div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;        <span class="comment">// Factorize the matrix ready to call solve</span></div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;        m_fem_matrix-&gt;factorize();</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    }</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        <span class="comment">// Factorize the matrix ready to call solve</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        m_fem_matrix-&gt;factorize();</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    }</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="keywordtype">void</span> build_non_periodic_matrix()</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    {</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        <span class="comment">// Matrix contains all elements of the basis except the first</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <span class="comment">// and last in order to impose Dirichlet conditions</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> nbasis = ddc::discrete_space&lt;FEMBSplines&gt;().nbasis();</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        m_matrix_size = nbasis - 2;</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="keywordtype">int</span> constexpr n_lower_diags = s_degree;</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <span class="keywordtype">bool</span> <span class="keyword">const</span> positive_definite_symmetric = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        <span class="comment">// Matrix with block is used instead of periodic to contain the</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        <span class="comment">// Dirichlet boundary conditions</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        m_fem_matrix = Matrix::make_new_banded(</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;                m_matrix_size,</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                n_lower_diags,</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                n_lower_diags,</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                positive_definite_symmetric);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <span class="keyword">auto</span> quad_coef_host = ddc::create_mirror_and_copy(get_const_field(m_quad_coef));</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        <span class="comment">// Fill the banded part of the matrix</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        std::array&lt;double, s_degree + 1&gt; derivs_alloc;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        DSpan1D derivs = as_span(derivs_alloc);</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        ddc::for_each(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(m_quad_coef), [&amp;](IdxQ <span class="keyword">const</span> ix) {</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;            CoordPDEDim <span class="keyword">const</span> coord = ddc::coordinate(ix);</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            FEMBSplinesIdx <span class="keyword">const</span> jmin</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                    = ddc::discrete_space&lt;FEMBSplines&gt;().eval_deriv(derivs, coord);</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; s_degree + 1; ++j) {</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; s_degree + 1; ++k) {</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;                    <span class="keywordtype">int</span> <span class="keyword">const</span> j_idx = (j + jmin.uid()) % nbasis - 1;</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;                    <span class="keywordtype">int</span> <span class="keyword">const</span> k_idx = (k + jmin.uid()) % nbasis - 1;</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;                    <span class="keywordflow">if</span> (j_idx != -1 &amp;&amp; j_idx != m_matrix_size &amp;&amp; k_idx != -1</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;                        &amp;&amp; k_idx != m_matrix_size) {</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                        <span class="keywordtype">double</span> a_jk = m_fem_matrix-&gt;get_element(j_idx, k_idx);</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                        <span class="comment">// Update element</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;                        a_jk += derivs[j] * derivs[k] * quad_coef_host(ix);</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; </div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                        m_fem_matrix-&gt;set_element(j_idx, k_idx, a_jk);</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                    }</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                }</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;            }</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        });</div>
 <div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160; </div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00434"></a><span class="lineno"><a class="line" href="classFEM1DPoissonSolver.html#a548d0e63a09282ff72d1df448daee3e4">  434</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFEM1DPoissonSolver.html#a548d0e63a09282ff72d1df448daee3e4">solve_matrix_system</a>(FEMBasisCoeffSpan phi_spline_coef, chunk_span_type rho)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        <span class="comment">// Calculate the spline representation of the RHS.</span></div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;        BSCoeffDomainType rho_spline_coef_domain(</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;                batch_domain_type(rho.domain()),</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;                m_spline_builder.spline_domain());</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        RHSSplineType rho_spline_coef_alloc(rho_spline_coef_domain);</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;        RHSSplineSpan rho_spline_coef(rho_spline_coef_alloc);</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        m_spline_builder(rho_spline_coef, rho.span_cview());</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        ddc::DiscreteDomain&lt;FEMBasis&gt; fem_domain = ddc::discrete_space&lt;FEMBasis&gt;().full_domain();</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> nbasis_proxy = ddc::discrete_space&lt;FEMBasis&gt;().nbasis();</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;        SplineEvaluator spline_evaluator_proxy = m_spline_evaluator;</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        ddc::ChunkSpan quad_coef_proxy = m_quad_coef.span_view();</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        <span class="comment">// Factorize the matrix ready to call solve</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;        m_fem_matrix-&gt;factorize();</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    }</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; </div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; </div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00439"></a><span class="lineno"><a class="line" href="classFEM1DPoissonSolver.html#a9092c2bf702042ebc4cbf1a6d48bbdbc">  439</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFEM1DPoissonSolver.html#a9092c2bf702042ebc4cbf1a6d48bbdbc">solve_matrix_system</a>(BatchedFEMBSplinesCoeff phi_spline_coef, field_type rho)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;        <span class="comment">// Calculate the spline representation of the RHS.</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        BatchedBSplinesIdxRange rho_spline_coef_idx_range(</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;                batch_idx_range_type(get_idx_range(rho)),</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;                get_spline_idx_range(m_spline_builder));</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        RHSSplineCoeffMem rho_spline_coef_alloc(rho_spline_coef_idx_range);</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;        RHSSplineCoeff rho_spline_coef(rho_spline_coef_alloc);</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        m_spline_builder(rho_spline_coef, get_const_field(rho));</div>
 <div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160; </div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;        FEMBasisIndex last_basis_element(nbasis_proxy - 1);</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;        ddc::parallel_fill(phi_spline_coef, 0.0);</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;        <span class="comment">// Create the rhs as an alias for phi_spline_coef as the matrix equation is solved in place.</span></div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        ddc::ChunkSpan rhs(phi_spline_coef);</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;        IdxRange&lt;FEMBSplines&gt; fem_idx_range = ddc::discrete_space&lt;FEMBSplines&gt;().full_domain();</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> nbasis_proxy = ddc::discrete_space&lt;FEMBSplines&gt;().nbasis();</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;        SplineEvaluator spline_evaluator_proxy = m_spline_evaluator;</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;        ddc::ChunkSpan quad_coef_proxy = get_field(m_quad_coef);</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; </div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        FEMBSplinesIdx last_basis_element(nbasis_proxy - 1);</div>
 <div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        batch_domain_type batch_domain(rho.domain());</div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;        RHSQuadratureDomain rhs_build_domain(batch_domain, m_quad_coef.domain());</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;        <span class="comment">// Fill phi_rhs(i) with \int rho(x) b_i(x) dx</span></div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;        <span class="comment">// Rk: phi_rhs no longer contains spline coefficients, but is the</span></div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        <span class="comment">//     RHS of the matrix equation</span></div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;        ddc::parallel_for_each(</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;                exec_space(),</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;                rhs_build_domain,</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;                KOKKOS_LAMBDA(RHSQuadratureIndex <span class="keyword">const</span> idx) {</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;                    batch_element_type ib(idx);</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                    IndexQ iq(idx);</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;                    CoordI <span class="keyword">const</span> coord = ddc::coordinate(iq);</div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;                    std::array&lt;double, s_degree + 1&gt; values_alloc;</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;                    DSpan1D values = as_span(values_alloc);</div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;                    FEMBasisIndex <span class="keyword">const</span> jmin</div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;                            = ddc::discrete_space&lt;FEMBasis&gt;().eval_basis(values, coord);</div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> rho_val</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;                            = spline_evaluator_proxy(coord, rho_spline_coef[ib].span_cview());</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; s_degree + 1; ++j) {</div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;                        FEMBasisIndex j_idx = jmin + j;</div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;                        <span class="keywordflow">while</span> (j_idx &gt; last_basis_element) {</div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;                            j_idx -= nbasis_proxy;</div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;                        }</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;                        Kokkos::atomic_fetch_add(</div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;                                &amp;rhs(ib, j_idx),</div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;                                rho_val * values[j] * quad_coef_proxy(iq));</div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;                    }</div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;                });</div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160; </div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;        <span class="keyword">auto</span> phi_spline_coef_host_alloc = ddc::create_mirror_and_copy(phi_spline_coef);</div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;        ddc::ChunkSpan phi_spline_coef_host = phi_spline_coef_host_alloc.span_view();</div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160; </div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;        <span class="keywordtype">int</span> constexpr n_implicit_min_bcs(!InputBSplines::is_periodic());</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        ddc::parallel_fill(phi_spline_coef, 0.0);</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; </div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;        <span class="comment">// Create the rhs as an alias for phi_spline_coef as the matrix equation is solved in place.</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;        ddc::ChunkSpan rhs(phi_spline_coef);</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; </div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        batch_idx_range_type batch_idx_range(get_idx_range(rho));</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;        RHSQuadratureIdxRange rhs_build_idx_range(batch_idx_range, get_idx_range(m_quad_coef));</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160; </div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;        <span class="comment">// Fill phi_rhs(i) with \int rho(x) b_i(x) dx</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;        <span class="comment">// Rk: phi_rhs no longer contains spline coefficients, but is the</span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        <span class="comment">//     RHS of the matrix equation</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;        ddc::parallel_for_each(</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;                exec_space(),</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;                rhs_build_idx_range,</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;                KOKKOS_LAMBDA(RHSQuadratureIdx <span class="keyword">const</span> idx) {</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;                    batch_index_type ib(idx);</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;                    IdxQ iq(idx);</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;                    CoordPDEDim <span class="keyword">const</span> coord = ddc::coordinate(iq);</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;                    std::array&lt;double, s_degree + 1&gt; values_alloc;</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;                    DSpan1D values = as_span(values_alloc);</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;                    FEMBSplinesIdx <span class="keyword">const</span> jmin</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;                            = ddc::discrete_space&lt;FEMBSplines&gt;().eval_basis(values, coord);</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> rho_val</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;                            = spline_evaluator_proxy(coord, rho_spline_coef[ib].span_cview());</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; s_degree + 1; ++j) {</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;                        FEMBSplinesIdx j_idx = jmin + j;</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;                        <span class="keywordflow">while</span> (j_idx &gt; last_basis_element) {</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;                            j_idx -= nbasis_proxy;</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;                        }</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;                        Kokkos::atomic_fetch_add(</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;                                &amp;rhs(ib, j_idx),</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;                                rho_val * values[j] * quad_coef_proxy(iq));</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;                    }</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;                });</div>
 <div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; </div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;        ddc::for_each(batch_domain, [&amp;](batch_element_type ib) {</div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;            FEMBSDomain solve_domain(</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;                    fem_domain.front() + n_implicit_min_bcs,</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;                    ddc::DiscreteVector&lt;FEMBasis&gt;(m_matrix_size));</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;            DSpan1D <span class="keyword">const</span> phi_rhs_host = phi_spline_coef_host[ib][solve_domain].allocation_mdspan();</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160; </div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;            <span class="comment">// Solve the matrix equation to find the spline coefficients of phi</span></div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;            m_fem_matrix-&gt;solve_inplace(phi_rhs_host);</div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;        });</div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160; </div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;        ddc::parallel_deepcopy(phi_spline_coef, phi_spline_coef_host);</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;        <span class="keyword">auto</span> phi_spline_coef_host_alloc = ddc::create_mirror_and_copy(phi_spline_coef);</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;        ddc::ChunkSpan phi_spline_coef_host = get_field(phi_spline_coef_host_alloc);</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160; </div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;        <span class="keywordtype">int</span> constexpr n_implicit_min_bcs(!InputBSplines::is_periodic());</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160; </div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;        ddc::for_each(batch_idx_range, [&amp;](batch_index_type ib) {</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;            FEMBSplinesIdxRange solve_idx_range(</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;                    fem_idx_range.front() + n_implicit_min_bcs,</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;                    IdxStep&lt;FEMBSplines&gt;(m_matrix_size));</div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;            DSpan1D <span class="keyword">const</span> phi_rhs_host</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;                    = phi_spline_coef_host[ib][solve_idx_range].allocation_mdspan();</div>
 <div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160; </div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;        <span class="keywordflow">if</span> constexpr (!InputBSplines::is_periodic()) {</div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;            <span class="comment">// Apply Dirichlet BCs</span></div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;            ddc::parallel_fill(phi_spline_coef[fem_domain.front()], 0.0);</div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;            ddc::parallel_fill(phi_spline_coef[fem_domain.back()], 0.0);</div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;            FEMBasisIndex first_repeat_bspline(ddc::discrete_space&lt;FEMBasis&gt;().nbasis());</div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;            <span class="comment">// Copy the first d coefficients into the last d coefficients</span></div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;            <span class="comment">// These coefficients refer to the same InputBSplines which cross the boundaries</span></div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;            ddc::parallel_for_each(</div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;                    exec_space(),</div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;                    batch_domain,</div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;                    KOKKOS_LAMBDA(batch_element_type ib) {</div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; s_degree; i++) {</div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;                            phi_spline_coef(ib, first_repeat_bspline + i)</div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;                                    = phi_spline_coef(ib, FEMBasisIndex(i));</div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;                        }</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;                    });</div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;        }</div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;    }</div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160; </div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;    <span class="comment">//===========================================================================</span></div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;    <span class="comment">// Create a non-uniform spline evaluator from the provided evaluator</span></div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;    <span class="comment">//===========================================================================</span></div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;    <span class="keyword">static</span> FEMSplineEvaluator jit_build_nubsplinesx(SplineEvaluator <span class="keyword">const</span>&amp; spline_evaluator)</div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;    {</div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;        <span class="keywordflow">if</span> constexpr (InputBSplines::is_periodic()) {</div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;            <span class="keywordflow">return</span> spline_evaluator;</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;            static_assert(</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;                    (ddc::is_uniform_bsplines_v&lt;typename SplineEvaluator::bsplines_type&gt;)</div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;                    || ddc::is_non_uniform_bsplines_v&lt;typename SplineEvaluator::bsplines_type&gt;);</div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;            <span class="keywordflow">if</span> constexpr (ddc::is_uniform_bsplines_v&lt;typename SplineEvaluator::bsplines_type&gt;) {</div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;                ddc::DiscreteDomain break_point_domain</div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;                        = ddc::discrete_space&lt;InputBSplines&gt;().break_point_domain();</div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;                std::vector&lt;CoordI&gt; break_points(break_point_domain.size());</div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160; </div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;                <span class="keywordflow">for</span> (ddc::DiscreteElement <span class="keyword">const</span> idx : break_point_domain) {</div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;                    break_points[(idx - break_point_domain.front()).value()] = ddc::coordinate(idx);</div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;                }</div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;                ddc::init_discrete_space&lt;FEMBasis&gt;(break_points);</div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;            }</div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;            <span class="comment">// Boundary values are never evaluated</span></div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;            <span class="keywordflow">return</span> FEMSplineEvaluator(ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule());</div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;        }</div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;    }</div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;};</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;            <span class="comment">// Solve the matrix equation to find the spline coefficients of phi</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;            m_fem_matrix-&gt;solve_inplace(phi_rhs_host);</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        });</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160; </div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;        ddc::parallel_deepcopy(phi_spline_coef, phi_spline_coef_host);</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160; </div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;        <span class="keywordflow">if</span> constexpr (!InputBSplines::is_periodic()) {</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;            <span class="comment">// Apply Dirichlet BCs</span></div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;            ddc::parallel_fill(phi_spline_coef[fem_idx_range.front()], 0.0);</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;            ddc::parallel_fill(phi_spline_coef[fem_idx_range.back()], 0.0);</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;            FEMBSplinesIdx first_repeat_bspline(ddc::discrete_space&lt;FEMBSplines&gt;().nbasis());</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;            <span class="comment">// Copy the first d coefficients into the last d coefficients</span></div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;            <span class="comment">// These coefficients refer to the same InputBSplines which cross the boundaries</span></div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;            ddc::parallel_for_each(</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;                    exec_space(),</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;                    batch_idx_range,</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;                    KOKKOS_LAMBDA(batch_index_type ib) {</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; s_degree; i++) {</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;                            phi_spline_coef(ib, first_repeat_bspline + i)</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;                                    = phi_spline_coef(ib, FEMBSplinesIdx(i));</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;                        }</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;                    });</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;        }</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;    }</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160; </div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    <span class="comment">//===========================================================================</span></div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;    <span class="comment">// Create a non-uniform spline evaluator from the provided evaluator</span></div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;    <span class="comment">//===========================================================================</span></div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    <span class="keyword">static</span> FEMSplineEvaluator jit_build_nubsplinesx(SplineEvaluator <span class="keyword">const</span>&amp; spline_evaluator)</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;    {</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        <span class="keywordflow">if</span> constexpr (InputBSplines::is_periodic()) {</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;            <span class="keywordflow">return</span> spline_evaluator;</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;            static_assert(</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;                    (ddc::is_uniform_bsplines_v&lt;typename SplineEvaluator::bsplines_type&gt;)</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;                    || ddc::is_non_uniform_bsplines_v&lt;typename SplineEvaluator::bsplines_type&gt;);</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;            <span class="keywordflow">if</span> constexpr (ddc::is_uniform_bsplines_v&lt;typename SplineEvaluator::bsplines_type&gt;) {</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;                <span class="keyword">using</span> break_point_grid = ddc::knot_discrete_dimension_t&lt;InputBSplines&gt;;</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;                IdxRange&lt;break_point_grid&gt; break_point_idx_range</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;                        = ddc::discrete_space&lt;InputBSplines&gt;().break_point_domain();</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;                std::vector&lt;CoordPDEDim&gt; break_points(break_point_idx_range.size());</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160; </div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;                <span class="keywordflow">for</span> (Idx&lt;break_point_grid&gt; <span class="keyword">const</span> idx : break_point_idx_range) {</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;                    break_points[(idx - break_point_idx_range.front()).value()]</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;                            = ddc::coordinate(idx);</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;                }</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;                ddc::init_discrete_space&lt;FEMBSplines&gt;(break_points);</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;            }</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;            <span class="comment">// Boundary values are never evaluated</span></div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;            <span class="keywordflow">return</span> FEMSplineEvaluator(ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule());</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;        }</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;    }</div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;};</div>
 <div class="ttc" id="aclassFEM1DPoissonSolver_html"><div class="ttname"><a href="classFEM1DPoissonSolver.html">FEM1DPoissonSolver</a></div><div class="ttdoc">A class to solve the following equation:  using a Finite Element Method.</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:27</div></div>
-<div class="ttc" id="aclassFEM1DPoissonSolver_html_a32cb0525a0c6b57cf325eef69dac5216"><div class="ttname"><a href="classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216">FEM1DPoissonSolver::FEM1DPoissonSolver</a></div><div class="ttdeci">FEM1DPoissonSolver(SplineBuilder const &amp;spline_builder, SplineEvaluator const &amp;spline_evaluator)</div><div class="ttdoc">Construct the FemQNSolver operator.</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:209</div></div>
-<div class="ttc" id="aclassFEM1DPoissonSolver_html_a548d0e63a09282ff72d1df448daee3e4"><div class="ttname"><a href="classFEM1DPoissonSolver.html#a548d0e63a09282ff72d1df448daee3e4">FEM1DPoissonSolver::solve_matrix_system</a></div><div class="ttdeci">void solve_matrix_system(FEMBasisCoeffSpan phi_spline_coef, chunk_span_type rho) const</div><div class="ttdoc">[SHOULD BE PRIVATE (Kokkos limitation)]</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:434</div></div>
-<div class="ttc" id="aclassFEM1DPoissonSolver_html_a6f12dec3c58acb9102551503029eb3a7"><div class="ttname"><a href="classFEM1DPoissonSolver.html#a6f12dec3c58acb9102551503029eb3a7">FEM1DPoissonSolver::operator()</a></div><div class="ttdeci">chunk_span_type operator()(chunk_span_type phi, chunk_span_type rho) const override</div><div class="ttdoc">An operator which calculates the solution  to Poisson's equation: .</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:254</div></div>
-<div class="ttc" id="aclassFEM1DPoissonSolver_html_acbb04914dd6fc38ed826399f5d561a34"><div class="ttname"><a href="classFEM1DPoissonSolver.html#acbb04914dd6fc38ed826399f5d561a34">FEM1DPoissonSolver::operator()</a></div><div class="ttdeci">chunk_span_type operator()(chunk_span_type phi, vector_span_type E, chunk_span_type rho) const override</div><div class="ttdoc">An operator which calculates the solution  to Poisson's equation and its derivative:  .</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:292</div></div>
+<div class="ttc" id="aclassFEM1DPoissonSolver_html_a066aa2568bdfd946f04c1d831debd663"><div class="ttname"><a href="classFEM1DPoissonSolver.html#a066aa2568bdfd946f04c1d831debd663">FEM1DPoissonSolver::operator()</a></div><div class="ttdeci">field_type operator()(field_type phi, vector_field_type E, field_type rho) const override</div><div class="ttdoc">An operator which calculates the solution  to Poisson's equation and its derivative:  .</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:295</div></div>
+<div class="ttc" id="aclassFEM1DPoissonSolver_html_a32cb0525a0c6b57cf325eef69dac5216"><div class="ttname"><a href="classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216">FEM1DPoissonSolver::FEM1DPoissonSolver</a></div><div class="ttdeci">FEM1DPoissonSolver(SplineBuilder const &amp;spline_builder, SplineEvaluator const &amp;spline_evaluator)</div><div class="ttdoc">Construct the FemQNSolver operator.</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:210</div></div>
+<div class="ttc" id="aclassFEM1DPoissonSolver_html_a74360fade3d3986423b148334d88ea74"><div class="ttname"><a href="classFEM1DPoissonSolver.html#a74360fade3d3986423b148334d88ea74">FEM1DPoissonSolver::operator()</a></div><div class="ttdeci">field_type operator()(field_type phi, field_type rho) const override</div><div class="ttdoc">An operator which calculates the solution  to Poisson's equation: .</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:257</div></div>
+<div class="ttc" id="aclassFEM1DPoissonSolver_html_a9092c2bf702042ebc4cbf1a6d48bbdbc"><div class="ttname"><a href="classFEM1DPoissonSolver.html#a9092c2bf702042ebc4cbf1a6d48bbdbc">FEM1DPoissonSolver::solve_matrix_system</a></div><div class="ttdeci">void solve_matrix_system(BatchedFEMBSplinesCoeff phi_spline_coef, field_type rho) const</div><div class="ttdoc">[SHOULD BE PRIVATE (Kokkos limitation)]</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:439</div></div>
 <div class="ttc" id="aclassGaussLegendre_html"><div class="ttname"><a href="classGaussLegendre.html">GaussLegendre</a></div><div class="ttdef"><b>Definition:</b> gauss_legendre_integration.hpp:27</div></div>
 <div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdef"><b>Definition:</b> ipoisson_solver.hpp:9</div></div>
-<div class="ttc" id="astructFEM1DPoissonSolver_1_1HiddenFEMBasis_html"><div class="ttname"><a href="structFEM1DPoissonSolver_1_1HiddenFEMBasis.html">FEM1DPoissonSolver::HiddenFEMBasis</a></div><div class="ttdoc">The internal type of the FEM basis.</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:107</div></div>
-<div class="ttc" id="astructFEM1DPoissonSolver_1_1QMeshI_html"><div class="ttname"><a href="structFEM1DPoissonSolver_1_1QMeshI.html">FEM1DPoissonSolver::QMeshI</a></div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:71</div></div>
+<div class="ttc" id="anamespacecollisions__dimensions_html_a4bb67dd29b9d3ef9f20d6246c3d2b155"><div class="ttname"><a href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid... &gt; get_idx_range(FDistribIdxRange idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:81</div></div>
+<div class="ttc" id="astructFEM1DPoissonSolver_1_1GridPDEDimQ_html"><div class="ttname"><a href="structFEM1DPoissonSolver_1_1GridPDEDimQ.html">FEM1DPoissonSolver::GridPDEDimQ</a></div><div class="ttdoc">The grid of quadrature points along the PDEDim direction.</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:72</div></div>
+<div class="ttc" id="astructFEM1DPoissonSolver_1_1HiddenFEMBSplines_html"><div class="ttname"><a href="structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html">FEM1DPoissonSolver::HiddenFEMBSplines</a></div><div class="ttdoc">The internal type of the FEM basis.</div><div class="ttdef"><b>Definition:</b> fem_1d_poisson_solver.hpp:108</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

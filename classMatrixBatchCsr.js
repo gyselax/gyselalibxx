@@ -3,7 +3,7 @@ var classMatrixBatchCsr =
     [ "MatrixBatchCsr", "classMatrixBatchCsr.html#a3b7820a5bd67452226c742f08cf37544", null ],
     [ "MatrixBatchCsr", "classMatrixBatchCsr.html#aeb35ced3575736b99178638e1a21aa71", null ],
     [ "get_batch_csr", "classMatrixBatchCsr.html#abd4f443cdafa27a91df836e05cbc6f64", null ],
-    [ "factorize", "classMatrixBatchCsr.html#a0d6ad746ade755c3bf5d677aed54005e", null ],
-    [ "solve_inplace", "classMatrixBatchCsr.html#a82891129e5baba2ab2e6af1ca7828d6d", null ],
+    [ "setup_solver", "classMatrixBatchCsr.html#ad037e66bbdfdfa674e678f49d36f78df", null ],
+    [ "solve", "classMatrixBatchCsr.html#a5d7f76fc2c25fb4867b50181779b4c3c", null ],
     [ "norm", "classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d", null ]
 ];
