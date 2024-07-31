@@ -16,24 +16,24 @@ PredCorr::PredCorr(IBoltzmannSolver const& boltzmann_solver, IQNSolver const& po
 {
 }
 
-DSpanSpXVx PredCorr::operator()(
-        DSpanSpXVx const allfdistribu,
+DFieldSpXVx PredCorr::operator()(
+        DFieldSpXVx const allfdistribu,
         double const time_start,
         double const dt,
         int const steps) const
 {
     auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
-    ddc::ChunkSpan allfdistribu_host = allfdistribu_alloc.span_view();
+    ddc::ChunkSpan allfdistribu_host = get_field(allfdistribu_alloc);
 
     // electrostatic potential and electric field (depending only on x)
-    host_t<DFieldX> electrostatic_potential_host(allfdistribu.domain<IDimX>());
-    DFieldX electrostatic_potential(allfdistribu.domain<IDimX>());
+    host_t<DFieldMemX> electrostatic_potential_host(get_idx_range<GridX>(allfdistribu));
+    DFieldMemX electrostatic_potential(get_idx_range<GridX>(allfdistribu));
 
-    DFieldX electric_field(allfdistribu.domain<IDimX>());
+    DFieldMemX electric_field(get_idx_range<GridX>(allfdistribu));
 
     // a 2D chunk of the same size as fdistribu
-    host_t<DFieldSpXVx> allfdistribu_half_t_host(allfdistribu.domain());
-    DFieldSpXVx allfdistribu_half_t(allfdistribu.domain());
+    host_t<DFieldMemSpXVx> allfdistribu_half_t_host(get_idx_range(allfdistribu));
+    DFieldMemSpXVx allfdistribu_half_t(get_idx_range(allfdistribu));
 
     m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
 

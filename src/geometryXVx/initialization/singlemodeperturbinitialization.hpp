@@ -18,7 +18,7 @@
  */
 class SingleModePerturbInitialization : public IInitialization
 {
-    DViewSpVx m_fequilibrium;
+    DConstFieldSpVx m_fequilibrium;
 
     host_t<IFieldSp> m_init_perturb_mode;
 
@@ -34,7 +34,7 @@ public:
      * @param[in] perturb_amplitude The amplitude of the perturbation. 
      */
     void perturbation_initialization(
-            DSpanX perturbation,
+            DFieldX perturbation,
             int const perturb_mode,
             double const perturb_amplitude) const;
 
@@ -45,7 +45,7 @@ public:
      * @param[in] init_perturb_amplitude The perturbation amplitude. 
      */
     SingleModePerturbInitialization(
-            DViewSpVx fequilibrium,
+            DConstFieldSpVx fequilibrium,
             host_t<IFieldSp> init_perturb_mode,
             host_t<DFieldMemSp> init_perturb_amplitude);
 
@@ -60,7 +60,7 @@ public:
      * @return an instance of SingleModePerturbInitialization class.
      */
     static SingleModePerturbInitialization init_from_input(
-            DViewSpVx allfequilibrium,
+            DConstFieldSpVx allfequilibrium,
             IdxRangeSp dom_kinsp,
             PC_tree_t const& yaml_input_file);
 
@@ -69,5 +69,5 @@ public:
      * @param[in, out] allfdistribu The initialized distribution function.
      * @return The initialized distribution function.
      */
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu) const override;
+    DFieldSpXVx operator()(DFieldSpXVx allfdistribu) const override;
 };

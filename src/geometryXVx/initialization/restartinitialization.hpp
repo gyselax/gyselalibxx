@@ -40,5 +40,5 @@ public:
      *                          read from an external file.
      * @return The initialized distribution function.
      */
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu) const override;
+    DFieldSpXVx operator()(DFieldSpXVx allfdistribu) const override;
 };

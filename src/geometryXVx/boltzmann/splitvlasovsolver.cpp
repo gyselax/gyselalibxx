@@ -5,16 +5,16 @@
 #include "splitvlasovsolver.hpp"
 
 SplitVlasovSolver::SplitVlasovSolver(
-        IAdvectionSpatial<GeometryXVx, IDimX> const& advec_x,
-        IAdvectionVelocity<GeometryXVx, IDimVx> const& advec_vx)
+        IAdvectionSpatial<GeometryXVx, GridX> const& advec_x,
+        IAdvectionVelocity<GeometryXVx, GridVx> const& advec_vx)
     : m_advec_x(advec_x)
     , m_advec_vx(advec_vx)
 {
 }
 
-DSpanSpXVx SplitVlasovSolver::operator()(
-        DSpanSpXVx const allfdistribu,
-        DViewX const electric_field,
+DFieldSpXVx SplitVlasovSolver::operator()(
+        DFieldSpXVx const allfdistribu,
+        DConstFieldX const electric_field,
         double const dt) const
 {
     m_advec_x(allfdistribu, dt / 2);

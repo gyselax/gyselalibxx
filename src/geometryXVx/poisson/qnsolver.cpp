@@ -18,15 +18,15 @@ QNSolver::QNSolver(PoissonSolver const& solve_poisson, IChargeDensityCalculator 
 }
 
 void QNSolver::operator()(
-        DSpanX const electrostatic_potential,
-        DSpanX const electric_field,
-        DViewSpXVx const allfdistribu) const
+        DFieldX const electrostatic_potential,
+        DFieldX const electric_field,
+        DConstFieldSpXVx const allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("QNSolver");
-    assert(electrostatic_potential.domain() == ddc::get_domain<IDimX>(allfdistribu));
-    IDomainX const x_dom = electrostatic_potential.domain();
+    assert(get_idx_range(electrostatic_potential) == get_idx_range<GridX>(allfdistribu));
+    IdxRangeX const x_dom = get_idx_range(electrostatic_potential);
     // Compute the RHS of the Quasi-Neutrality equation.
-    DFieldX rho(x_dom);
+    DFieldMemX rho(x_dom);
 
     m_compute_rho(rho, allfdistribu);
 
