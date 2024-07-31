@@ -74,43 +74,16 @@ host_t<FieldMem<double, IdxRange<Grid>>> neumann_spline_quadrature_coefficients_
 
     assert(idx_range.size() == ddc::discrete_space<bsplines_type>().nbasis() - nbc_xmin - nbc_xmax);
 
-    // Vector of integrals of B-splines
-    host_t<FieldMem<double, IdxRange<bsplines_type>>> integral_bsplines_host(
-            get_spline_idx_range(builder));
-    ddc::discrete_space<bsplines_type>().integrals(get_field(integral_bsplines_host));
-
-    auto integral_bsplines = ddc::create_mirror_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(integral_bsplines_host));
-    // Solve matrix equation
-    Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
-            integral_bsplines_mirror_with_additional_allocation(
-                    "integral_bsplines_mirror_with_additional_allocation",
-                    builder.get_interpolation_matrix().required_number_of_rhs_rows(),
-                    1);
-    Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
-            integral_bsplines_mirror = Kokkos::
-                    subview(integral_bsplines_mirror_with_additional_allocation,
-                            std::pair<std::size_t, std::size_t> {0, integral_bsplines.size()},
-                            0);
-    Kokkos::deep_copy(integral_bsplines_mirror, integral_bsplines.allocation_kokkos_view());
-    builder.get_interpolation_matrix()
-            .solve(integral_bsplines_mirror_with_additional_allocation, true);
-    Kokkos::deep_copy(integral_bsplines.allocation_kokkos_view(), integral_bsplines_mirror);
-
-    host_t<FieldMem<double, IdxRange<Grid>>> coefficients(idx_range);
-
-    // Coefficients of quadrature in integral_bsplines (values which would always be multiplied
-    // by f'(x)=0 are removed
-    IdxRange<bsplines_type> slice
-            = get_spline_idx_range(builder)
-                      .remove(IdxStep<bsplines_type> {nbc_xmin}, IdxStep<bsplines_type> {nbc_xmax});
-
-    Kokkos::deep_copy(
-            coefficients.allocation_kokkos_view(),
-            integral_bsplines[slice].allocation_kokkos_view());
-
-    return coefficients;
+    FieldMem<
+            double,
+            IdxRange<Grid>,
+            ddc::KokkosAllocator<double, typename SplineBuilder::memory_space>>
+            quadrature_coefficients(builder.interpolation_domain());
+    // Even if derivatives coefficients on boundaries are eventually non-zero,
+    // they are ignored for 0-flux Neumann boundary condition because
+    // they would always be multiplied by f'(x)=0
+    std::tie(std::ignore, quadrature_coefficients, std::ignore) = builder.quadrature_coefficients();
+    return ddc::create_mirror_and_copy(quadrature_coefficients[idx_range]);
 }
 
 

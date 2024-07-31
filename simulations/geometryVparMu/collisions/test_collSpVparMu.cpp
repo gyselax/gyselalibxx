@@ -60,13 +60,13 @@ int main(int argc, char** argv)
     IdxRangeSpVparMu const idxrange_spvparmu(idxrange_kinsp, idxrange_vpar, idxrange_mu);
 
     // ---> Initialisation of the Maxwellian equilibrium distribution
-    DFieldSpVparMu allfequilibrium(idxrange_spvparmu);
+    DFieldMemSpVparMu allfequilibrium(idxrange_spvparmu);
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(idxrange_kinsp, conf_collision);
     init_fequilibrium(allfequilibrium);
 
     // ---> Initialisation of the distribution function as a pertubed Maxwellian
-    DFieldSpVparMu allfdistribu(idxrange_spvparmu);
+    DFieldMemSpVparMu allfdistribu(idxrange_spvparmu);
     NoPerturbInitialization const init(allfequilibrium);
     init(allfdistribu);
 
@@ -87,15 +87,16 @@ int main(int argc, char** argv)
     double const B_norm = 1.0;
 
     // TODO: Simplify the construction of coeff_intdmu and coeff_indmu as soon as the possibililty to define the quadrature coefficients directly on GPU is available
-    DFieldVpar const coeff_intdvpar(
+    DFieldMemVpar const coeff_intdvpar(
             simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
                     allfdistribu.domain<GridVpar>()));
-    DFieldMu const coeff_intdmu(simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
-            allfdistribu.domain<GridMu>()));
+    DFieldMemMu const coeff_intdmu(
+            simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
+                    allfdistribu.domain<GridMu>()));
     CollisionSpVparMu collision_operator(
             idxrange_spvparmu,
-            coeff_intdmu.span_cview(),
-            coeff_intdvpar.span_cview(),
+            get_const_field(coeff_intdmu),
+            get_const_field(coeff_intdvpar),
             B_norm);
 
     // --------- TIME ITERATION ---------
@@ -123,7 +124,7 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const start = steady_clock::now();
 
-    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(get_field(allfdistribu));
 
     int iter = 0;
     for (; iter < nbiter + 1; ++iter) {
