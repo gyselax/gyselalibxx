@@ -8,5 +8,7 @@ target_include_directories("initialization_Kelvin_Helmholtz"
 target_link_libraries("initialization_Kelvin_Helmholtz" INTERFACE
     DDC::DDC
     gslx::geometry_XY
+    gslx::utils
+
 )
 add_library("gslx::initialization_Kelvin_Helmholtz" ALIAS "initialization_Kelvin_Helmholtz")
