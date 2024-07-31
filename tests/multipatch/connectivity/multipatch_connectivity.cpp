@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <gtest/gtest.h>
+
 #include "9patches_2d_non_periodic_uniform.hpp"
 #include "ddc_helper.hpp"
 
@@ -91,4 +92,46 @@ TEST(MultipatchConnectivityTest, GetConnections)
     EXPECT_TRUE(east_interface_present);
     EXPECT_TRUE(west_interface_present);
     EXPECT_TRUE(south_interface_present);
+}
+
+template <class Patch>
+typename Patch::IdxRange12 get_idx_range(int start1, int size1, int start2, int size2)
+{
+    using Grid1 = typename Patch::Grid1;
+    using Grid2 = typename Patch::Grid2;
+    Idx<Grid1> front1(start1);
+    IdxStep<Grid1> length1(size1);
+    Idx<Grid2> front2(start2);
+    IdxStep<Grid2> length2(size2);
+    IdxRange<Grid1> idx_range_1(front1, length1);
+    IdxRange<Grid2> idx_range_2(front2, length2);
+    return IdxRange<Grid1, Grid2>(idx_range_1, idx_range_2);
+}
+
+TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDim)
+{
+    Patch1::IdxRange12 idx_range_1 = get_idx_range<Patch1>(0, 5, 9, 10);
+    Patch2::IdxRange12 idx_range_2 = get_idx_range<Patch2>(1, 5, 8, 10);
+    Patch3::IdxRange12 idx_range_3 = get_idx_range<Patch3>(2, 5, 7, 10);
+    Patch4::IdxRange12 idx_range_4 = get_idx_range<Patch4>(3, 5, 6, 10);
+    Patch5::IdxRange12 idx_range_5 = get_idx_range<Patch5>(4, 5, 5, 10);
+    Patch6::IdxRange12 idx_range_6 = get_idx_range<Patch6>(5, 5, 4, 10);
+    Patch7::IdxRange12 idx_range_7 = get_idx_range<Patch7>(6, 5, 3, 10);
+    Patch8::IdxRange12 idx_range_8 = get_idx_range<Patch8>(7, 5, 2, 10);
+    Patch9::IdxRange12 idx_range_9 = get_idx_range<Patch9>(8, 5, 1, 10);
+    std::tuple all_domains
+            = {idx_range_1,
+               idx_range_2,
+               idx_range_3,
+               idx_range_4,
+               idx_range_5,
+               idx_range_6,
+               idx_range_7,
+               idx_range_8,
+               idx_range_9};
+
+    using StartGrid = typename Patch2::Grid2;
+
+    auto grids = Connectivity::template get_all_idx_ranges_along_direction<StartGrid>(all_domains);
+    (void)(grids);
 }
