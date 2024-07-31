@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "directional_tag.hpp"
 #include "vector_field.hpp"
@@ -15,7 +15,7 @@
 /**
  * @brief A class which describes the real space in the first spatial direction X.
  */
-struct RDimX
+struct X
 {
     /**
      * @brief A boolean indicating if the dimension is periodic.
@@ -26,7 +26,7 @@ struct RDimX
 /**
  * @brief A class which describes the real space in the second spatial direction Y.
  */
-struct RDimY
+struct Y
 {
     /**
      * @brief A boolean indicating if the dimension is periodic.
@@ -35,9 +35,9 @@ struct RDimY
 };
 
 
-using CoordX = ddc::Coordinate<RDimX>;
-using CoordY = ddc::Coordinate<RDimY>;
-using CoordXY = ddc::Coordinate<RDimX, RDimY>;
+using CoordX = Coord<X>;
+using CoordY = Coord<Y>;
+using CoordXY = Coord<X, Y>;
 
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeY = 3;
@@ -48,15 +48,15 @@ bool constexpr BsplineOnUniformCellsY = true;
 struct BSplinesX
     : std::conditional_t<
               BsplineOnUniformCellsX,
-              ddc::UniformBSplines<RDimX, BSDegreeX>,
-              ddc::NonUniformBSplines<RDimX, BSDegreeX>>
+              ddc::UniformBSplines<X, BSDegreeX>,
+              ddc::NonUniformBSplines<X, BSDegreeX>>
 {
 };
 struct BSplinesY
     : std::conditional_t<
               BsplineOnUniformCellsY,
-              ddc::UniformBSplines<RDimY, BSDegreeY>,
-              ddc::NonUniformBSplines<RDimY, BSDegreeY>>
+              ddc::UniformBSplines<Y, BSDegreeY>,
+              ddc::NonUniformBSplines<Y, BSDegreeY>>
 {
 };
 
@@ -70,10 +70,10 @@ using SplineInterpPointsY
         = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
 
 // IDim definitions
-struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
+struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
-struct IDimY : SplineInterpPointsY::interpolation_discrete_dimension_type
+struct GridY : SplineInterpPointsY::interpolation_discrete_dimension_type
 {
 };
 
@@ -83,112 +83,112 @@ using SplineXBuilder_XY = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        IDimX,
+        GridX,
         SplineXBoundary,
         SplineXBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimX,
-        IDimY>;
+        GridX,
+        GridY>;
 using SplineXEvaluator_XY = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        IDimX,
-        ddc::PeriodicExtrapolationRule<RDimX>,
-        ddc::PeriodicExtrapolationRule<RDimX>,
-        IDimX,
-        IDimY>;
+        GridX,
+        ddc::PeriodicExtrapolationRule<X>,
+        ddc::PeriodicExtrapolationRule<X>,
+        GridX,
+        GridY>;
 
 
 using SplineYBuilder_XY = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
-        IDimY,
+        GridY,
         SplineYBoundary,
         SplineYBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimX,
-        IDimY>;
+        GridX,
+        GridY>;
 using SplineYEvaluator_XY = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
-        IDimY,
-        ddc::PeriodicExtrapolationRule<RDimY>,
-        ddc::PeriodicExtrapolationRule<RDimY>,
-        IDimX,
-        IDimY>;
+        GridY,
+        ddc::PeriodicExtrapolationRule<Y>,
+        ddc::PeriodicExtrapolationRule<Y>,
+        GridX,
+        GridY>;
 
-// Spline domain
-using BSDomainX = ddc::DiscreteDomain<BSplinesX>;
-using BSDomainY = ddc::DiscreteDomain<BSplinesY>;
-using BSDomainXY = ddc::DiscreteDomain<BSplinesX, BSplinesY>;
+// Spline index range
+using BSIdxRangeX = IdxRange<BSplinesX>;
+using BSIdxRangeY = IdxRange<BSplinesY>;
+using BSIdxRangeXY = IdxRange<BSplinesX, BSplinesY>;
 
 template <class ElementType>
-using BSViewXY = device_t<ddc::ChunkSpan<ElementType const, BSDomainXY>>;
-using DBSViewXY = BSViewXY<double>;
+using BSConstFieldXY = Field<ElementType const, BSIdxRangeXY>;
+using DBSConstFieldXY = BSConstFieldXY<double>;
 
 // Index definitions
-using IndexX = ddc::DiscreteElement<IDimX>;
-using IndexY = ddc::DiscreteElement<IDimY>;
-using IndexXY = ddc::DiscreteElement<IDimX, IDimY>;
+using IdxX = Idx<GridX>;
+using IdxY = Idx<GridY>;
+using IdxXY = Idx<GridX, GridY>;
 
 // IVect definitions
-using IVectX = ddc::DiscreteVector<IDimX>;
-using IVectY = ddc::DiscreteVector<IDimY>;
+using IdxStepX = IdxStep<GridX>;
+using IdxStepY = IdxStep<GridY>;
 
 // IDomain definitions
-using IDomainX = ddc::DiscreteDomain<IDimX>;
-using IDomainY = ddc::DiscreteDomain<IDimY>;
-using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
+using IdxRangeX = IdxRange<GridX>;
+using IdxRangeY = IdxRange<GridY>;
+using IdxRangeXY = IdxRange<GridX, GridY>;
 
 
 // Field definitions
 template <class ElementType>
-using FieldX = device_t<ddc::Chunk<ElementType, IDomainX>>;
-using DFieldX = FieldX<double>;
+using FieldMemX = FieldMem<ElementType, IdxRangeX>;
+using DFieldMemX = FieldMemX<double>;
 
 template <class ElementType>
-using FieldY = device_t<ddc::Chunk<ElementType, IDomainY>>;
-using DFieldY = FieldY<double>;
+using FieldMemY = FieldMem<ElementType, IdxRangeY>;
+using DFieldMemY = FieldMemY<double>;
 
 template <class ElementType>
-using FieldXY = device_t<ddc::Chunk<ElementType, IDomainXY>>;
-using DFieldXY = FieldXY<double>;
+using FieldMemXY = FieldMem<ElementType, IdxRangeXY>;
+using DFieldMemXY = FieldMemXY<double>;
 
 
 //  Span definitions
 template <class ElementType>
-using SpanX = device_t<ddc::ChunkSpan<ElementType, IDomainX>>;
-using DSpanX = SpanX<double>;
+using FieldX = Field<ElementType, IdxRangeX>;
+using DFieldX = FieldX<double>;
 
 template <class ElementType>
-using SpanY = device_t<ddc::ChunkSpan<ElementType, IDomainY>>;
-using DSpanY = SpanY<double>;
+using FieldY = Field<ElementType, IdxRangeY>;
+using DFieldY = FieldY<double>;
 
 template <class ElementType>
-using SpanXY = device_t<ddc::ChunkSpan<ElementType, IDomainXY>>;
-using DSpanXY = SpanXY<double>;
+using FieldXY = Field<ElementType, IdxRangeXY>;
+using DFieldXY = FieldXY<double>;
 
 
 // View definitions
 template <class ElementType>
-using ViewX = device_t<ddc::ChunkSpan<ElementType const, IDomainX>>;
+using ConstFieldX = Field<ElementType const, IdxRangeX>;
 
 template <class ElementType>
-using ViewY = device_t<ddc::ChunkSpan<ElementType const, IDomainY>>;
+using ConstFieldY = Field<ElementType const, IdxRangeY>;
 
 template <class ElementType>
-using ViewXY = device_t<ddc::ChunkSpan<ElementType const, IDomainXY>>;
-using DViewXY = ViewXY<double>;
+using ConstFieldXY = Field<ElementType const, IdxRangeXY>;
+using DConstFieldXY = ConstFieldXY<double>;
 
 
 // VectorField aliases
 using VectorFieldXY_XY = VectorField<
         double,
-        IDomainXY,
-        NDTag<RDimX, RDimY>,
+        IdxRangeXY,
+        NDTag<X, Y>,
         ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>;
 using VectorSpanXY_XY = typename VectorFieldXY_XY::span_type;
 using VectorViewXY_XY = typename VectorFieldXY_XY::view_type;

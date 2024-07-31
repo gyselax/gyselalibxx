@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <geometry.hpp>
+
+#include "ddc_aliases.hpp"
 
 
 /**
@@ -16,7 +17,7 @@
  * 
  * with @f$ \varepsilon @f$ an amplitude of perturbation and 
  * @f$ k @f$ mode equal to @f$ 2\pi @f$ divided by the length of the 
- * domain on @f$ x @f$. 
+ * index range on @f$ x @f$. 
  */
 class KelvinHelmholtzInstabilityInitialization
 {
@@ -42,14 +43,14 @@ public:
      * @param allfdistribu ChunkSpan refering to the @f$ f @f$ function.
      * @param allfdistribu_equilibrium ChunkSpan refering to the @f$ f_{eq} @f$ function.
      */
-    void operator()(DSpanXY allfdistribu, DSpanXY allfdistribu_equilibrium)
+    void operator()(DFieldXY allfdistribu, DFieldXY allfdistribu_equilibrium)
     {
-        IDomainXY const domain = allfdistribu.domain();
+        IdxRangeXY const idx_range = get_idx_range(allfdistribu);
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                domain,
-                KOKKOS_LAMBDA(IndexXY const i_xy) {
+                idx_range,
+                KOKKOS_LAMBDA(IdxXY const i_xy) {
                     CoordXY const coord_xy(ddc::coordinate(i_xy));
                     double const x = CoordX(coord_xy);
                     double const y = CoordY(coord_xy);
