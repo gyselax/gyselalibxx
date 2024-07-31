@@ -12,7 +12,7 @@
  *
  * Calculate the quadrature coefficients for the Simpson method defined on the provided index range.
  *
- * @param[in] index range
+ * @param[in] idx_range
  * 	The index range on which the quadrature will be carried out.
  *
  * @return The quadrature coefficients for the Simpson method defined on the provided index range.
