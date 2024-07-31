@@ -4,7 +4,6 @@
 #include <ddc_helper.hpp>
 #include <vector_field_common.hpp>
 
-#include "ddc_aliases.hpp"
 #include "itimestepper.hpp"
 
 /**
@@ -13,7 +12,7 @@
  * A class which provides an implementation of an explicit Euler method in
  * order to evolve values over time. The values may be either scalars or vectors. In the
  * case of vectors the appropriate dimensions must be passed as template parameters.
- * The values which evolve are defined on an index range.
+ * The values which evolve are defined on a domain.
  *
  * For the following ODE :
  * @f$\partial_t y(t) = f(t, y(t)) @f$,
@@ -24,35 +23,34 @@
  * The method is order 1.
  *
  */
-template <class FieldMemType, class DerivFieldMemType = FieldMemType>
+template <class ValChunk, class DerivChunk = ValChunk>
 class Euler : public ITimeStepper
 {
 private:
-    static_assert(ddc::is_chunk_v<FieldMemType> or is_field_v<FieldMemType>);
-    static_assert(ddc::is_chunk_v<DerivFieldMemType> or is_field_v<DerivFieldMemType>);
+    static_assert(ddc::is_chunk_v<ValChunk> or is_field_v<ValChunk>);
+    static_assert(ddc::is_chunk_v<DerivChunk> or is_field_v<DerivChunk>);
 
-    static_assert(std::is_same_v<
-                  typename FieldMemType::mdomain_type,
-                  typename DerivFieldMemType::mdomain_type>);
+    static_assert(
+            std::is_same_v<typename ValChunk::mdomain_type, typename DerivChunk::mdomain_type>);
 
-    using IdxRange = typename FieldMemType::mdomain_type;
+    using Domain = typename ValChunk::mdomain_type;
 
-    using Idx = typename IdxRange::discrete_element_type;
+    using Index = typename Domain::discrete_element_type;
 
-    using ValField = typename FieldMemType::span_type;
-    using ValConstField = typename FieldMemType::view_type;
+    using ValSpan = typename ValChunk::span_type;
+    using ValView = typename ValChunk::view_type;
 
-    using DerivField = typename DerivFieldMemType::span_type;
-    using DerivConstField = typename DerivFieldMemType::view_type;
+    using DerivSpan = typename DerivChunk::span_type;
+    using DerivView = typename DerivChunk::view_type;
 
-    IdxRange const m_dom;
+    Domain const m_dom;
 
 public:
     /**
      * @brief Create a Euler object.
-     * @param[in] dom The index range on which the points which evolve over time are defined.
+     * @param[in] dom The domain on which the points which evolve over time are defined.
      */
-    Euler(IdxRange dom) : m_dom(dom) {}
+    Euler(Domain dom) : m_dom(dom) {}
 
     /**
      * @brief Carry out one step of the explicit Euler scheme.
@@ -64,15 +62,15 @@ public:
      *
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
-     *     of the index range.
+     *     of the domain.
      * @param[in] dt
      *     The time step over which the values should be evolved.
      * @param[in] dy
      *     The function describing how the derivative of the evolve function is calculated.
      */
-    void update(ValField y, double dt, std::function<void(DerivField, ValConstField)> dy) const
+    void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy) const
     {
-        using ExecSpace = typename FieldMemType::memory_space::execution_space;
+        using ExecSpace = typename ValChunk::memory_space::execution_space;
         update(ExecSpace(), y, dt, dy);
     }
 
@@ -88,7 +86,7 @@ public:
      *     The space on which the function is executed (CPU/GPU).
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
-     *     of the index range.
+     *     of the domain.
      * @param[in] dt
      *     The time step over which the values should be evolved.
      * @param[in] dy
@@ -97,24 +95,23 @@ public:
     template <class ExecSpace>
     void update(
             ExecSpace const& exec_space,
-            ValField y,
+            ValSpan y,
             double dt,
-            std::function<void(DerivField, ValConstField)> dy) const
+            std::function<void(DerivSpan, ValView)> dy) const
     {
-        static_assert(ddc::is_chunk_v<FieldMemType>);
+        static_assert(ddc::is_chunk_v<ValChunk>);
         static_assert(
-                Kokkos::SpaceAccessibility<ExecSpace, typename FieldMemType::memory_space>::
-                        accessible,
+                Kokkos::SpaceAccessibility<ExecSpace, typename ValChunk::memory_space>::accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
         static_assert(
-                Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMemType::memory_space>::
+                Kokkos::SpaceAccessibility<ExecSpace, typename DerivChunk::memory_space>::
                         accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
-        update(exec_space, y, dt, dy, [&](ValField y, DerivConstField dy, double dt) {
+        update(exec_space, y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
             ddc::parallel_for_each(
                     exec_space,
-                    get_idx_range(y),
-                    KOKKOS_LAMBDA(Idx const idx) { y(idx) = y(idx) + dy(idx) * dt; });
+                    y.domain(),
+                    KOKKOS_LAMBDA(Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
         });
     }
 
@@ -125,7 +122,7 @@ public:
      *     The space on which the function is executed (CPU/GPU).
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
-     *     of the index range.
+     *     of the domain.
      * @param[in] dt
      *     The time step over which the values should be evolved.
      * @param[in] dy
@@ -136,12 +133,12 @@ public:
     template <class ExecSpace>
     void update(
             ExecSpace const& exec_space,
-            ValField y,
+            ValSpan y,
             double dt,
-            std::function<void(DerivField, ValConstField)> dy,
-            std::function<void(ValField, DerivConstField, double)> y_update) const
+            std::function<void(DerivSpan, ValView)> dy,
+            std::function<void(ValSpan, DerivView, double)> y_update) const
     {
-        DerivFieldMemType m_k1(m_dom);
+        DerivChunk m_k1(m_dom);
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
