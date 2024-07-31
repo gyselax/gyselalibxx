@@ -18,57 +18,63 @@
  * @tparam ExecSpace Execution space,needed by Kokkos for allocations and parallelism.
  * The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace
  */
-
 template <typename ExecSpace>
 class MatrixBatch
 {
 public:
-    /**
-     * @brief Alias for 2D double Kokkos views, LayoutRight is specified.
-     */
-    using DKokkosView2D
-            = Kokkos::View<double**, Kokkos::LayoutRight, typename ExecSpace::memory_space>;
+    /// @brief The type of a Kokkos::View storing batched right-hand sides. Second dimenion is batch dimension.
+    using BatchedRHS = Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace>;
 
+
+private:
+    std::size_t m_size;
+    std::size_t m_batch_size;
+
+protected:
     /**
      * @brief The constructor for MatrixBatch class.
      * @param[in] batch_size Number of linear systems to solve.
      * @param[in] mat_size Common matrix size for all the systems.
      */
-    MatrixBatch(int batch_size, int mat_size) : m_batch_size(batch_size), m_matrix_size(mat_size) {}
-
-    virtual ~MatrixBatch() = default;
-    /**
-     * @brief Generic function which could be used by children classes to execute
-     * class specific implementation details.
-     */
-    virtual void factorize() = 0;
-
-    /**
-     * @brief A function which solves the collection of linear problems.
-     * @param[inout] b 2d Kokkos view which stores the right hand side, 
-     * @return  The computation result, stored in b.
-     */
-    virtual DKokkosView2D solve_inplace(DKokkosView2D b) const = 0;
-
-    /**
-     * @brief Getter function for matrix size.
-     * @return  Value of common matrix size.
-     */
-    int get_size() const
+    explicit MatrixBatch(const std::size_t batch_size, const std::size_t mat_size)
+        : m_size(mat_size)
+        , m_batch_size(batch_size)
     {
-        return m_matrix_size;
+    }
+
+public:
+    /// @brief Destruct
+    virtual ~MatrixBatch() = default;
+
+    /**
+     * @brief Perform a pre-process operation on the solver. Must be called after filling the matrix.
+     */
+    virtual void setup_solver() = 0;
+
+    /**
+     * @brief Solve the multiple right-hand sides linear problem Ax=b inplace.
+     *
+     * @param[in, out] b A 2D Kokkos::View storing the batched right-hand sides of the problem and receiving the corresponding solution.
+     */
+    virtual void solve(BatchedRHS b) const = 0;
+
+    /**
+     * @brief Get the size of the square matrix corresponding to a single batch in one of its dimensions.
+     *
+     * @return The size of the matrix in one of its dimensions.
+     */
+    std::size_t size() const
+    {
+        return m_size;
     }
 
     /**
-     * @brief Getter function for batch size, ie the number of linear systems to solve.
-     * @return Value of batch size.
+     * @brief Get the batch size of the linear problem.
+     *
+     * @return The batch size of the linear problem.
      */
-    int get_batch_size() const
+    std::size_t batch_size() const
     {
         return m_batch_size;
     }
-
-private:
-    int const m_batch_size;
-    int const m_matrix_size;
 };
