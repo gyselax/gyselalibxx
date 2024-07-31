@@ -115,15 +115,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a24ff959246cb56cf388f412cb0933c08"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKelvinHelmholtzInstabilityInitialization.html#a24ff959246cb56cf388f412cb0933c08">KelvinHelmholtzInstabilityInitialization</a> (double const epsilon, double const mode_k)</td></tr>
 <tr class="memdesc:a24ff959246cb56cf388f412cb0933c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate the initializer.  <a href="classKelvinHelmholtzInstabilityInitialization.html#a24ff959246cb56cf388f412cb0933c08">More...</a><br /></td></tr>
 <tr class="separator:a24ff959246cb56cf388f412cb0933c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae663a701d135be7eb5c7eb2ceb7e41fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKelvinHelmholtzInstabilityInitialization.html#ae663a701d135be7eb5c7eb2ceb7e41fd">operator()</a> (DSpanXY allfdistribu, DSpanXY allfdistribu_equilibrium)</td></tr>
-<tr class="memdesc:ae663a701d135be7eb5c7eb2ceb7e41fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise \( f_{eq}\) and \( f \).  <a href="classKelvinHelmholtzInstabilityInitialization.html#ae663a701d135be7eb5c7eb2ceb7e41fd">More...</a><br /></td></tr>
-<tr class="separator:ae663a701d135be7eb5c7eb2ceb7e41fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e681122586f70b241acc2c647cf2f67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKelvinHelmholtzInstabilityInitialization.html#a7e681122586f70b241acc2c647cf2f67">operator()</a> (DFieldXY allfdistribu, DFieldXY allfdistribu_equilibrium)</td></tr>
+<tr class="memdesc:a7e681122586f70b241acc2c647cf2f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise \( f_{eq}\) and \( f \).  <a href="classKelvinHelmholtzInstabilityInitialization.html#a7e681122586f70b241acc2c647cf2f67">More...</a><br /></td></tr>
+<tr class="separator:a7e681122586f70b241acc2c647cf2f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Initialize the allfdistribu function. </p>
 <p>Set the allfdistribu at \( f_{eq}(x, y) = \sin(y) \)</p>
 <p>and \( f_0(x, y) = f_{eq}(x, y) + \varepsilon \cos(kx) \),</p>
-<p>with \( \varepsilon \) an amplitude of perturbation and \( k \) mode equal to \( 2\pi \) divided by the length of the domain on \( x \). </p>
+<p>with \( \varepsilon \) an amplitude of perturbation and \( k \) mode equal to \( 2\pi \) divided by the length of the index range on \( x \). </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a24ff959246cb56cf388f412cb0933c08"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a24ff959246cb56cf388f412cb0933c08">&#9670;&nbsp;</a></span>KelvinHelmholtzInstabilityInitialization()</h2>
@@ -171,8 +171,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae663a701d135be7eb5c7eb2ceb7e41fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae663a701d135be7eb5c7eb2ceb7e41fd">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a7e681122586f70b241acc2c647cf2f67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e681122586f70b241acc2c647cf2f67">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -183,13 +183,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void KelvinHelmholtzInstabilityInitialization::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanXY&#160;</td>
+          <td class="paramtype">DFieldXY&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DSpanXY&#160;</td>
+          <td class="paramtype">DFieldXY&#160;</td>
           <td class="paramname"><em>allfdistribu_equilibrium</em>&#160;</td>
         </tr>
         <tr>

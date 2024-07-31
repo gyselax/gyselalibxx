@@ -291,7 +291,7 @@ class DerivFieldCommon&lt; ChunkType, ddc::DiscreteDomain&lt; DDims... &gt; &gt;
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ChunkType</td><td>The type of the object stored in the internal_chunks array. </td></tr>
-    <tr><td class="paramname">ddc::DiscreteDomain&lt;DDims...&gt;</td><td>The domain on which the internal chunks are defined. This domain is the physical domain on which the values are defined combined with the domain of the derivatives of interest (e.g. ddc::DiscreteDomain&lt;Deriv&lt;IDimX&gt;, <a class="el" href="structIDimX.html">IDimX</a>, <a class="el" href="structIDimY.html">IDimY</a>&gt;). </td></tr>
+    <tr><td class="paramname">ddc::DiscreteDomain&lt;DDims...&gt;</td><td>The domain on which the internal chunks are defined. This domain is the physical domain on which the values are defined combined with the domain of the derivatives of interest (e.g. ddc::DiscreteDomain&lt;Deriv&lt;IDimX&gt;, IDimX, IDimY&gt;). </td></tr>
   </table>
   </dd>
 </dl>
@@ -997,7 +997,7 @@ template&lt;class ChunkType , class... DDims&gt; </div>
 </div><div class="memdoc">
 
 <p>The internal chunks describing the values and derivatives. </p>
-<p>The chunks which contain the values have different domains to the chunks containing derivatives so a DDC object cannot be used directly. E.g. for a 2D field (<a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a>,<a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a>) with derivatives provided in both directions the elements of internal_chunks have the type : Chunk&lt;double, DiscreteDomain&lt;Deriv&lt;IDimX&gt;, Deriv&lt;IDimY&gt;, <a class="el" href="structIDimX.html">IDimX</a>, <a class="el" href="structIDimY.html">IDimY</a>&gt; The derivative domains are then defined such that the elements of internal_chunks represent: 0 : \(f(x,y)\) 1 : \(\partial_x^k f(x,y) \quad \forall 1 \leq k \leq NDerivs\) 2 : \(\partial_y^k f(x,y) \quad \forall 1 \leq k \leq NDerivs\) 3 : \(\partial_x^j \partial_y^k f(x,y) \quad \forall 1 \leq j \leq NDerivs, \forall 1 \leq k \leq NDerivs\) </p>
+<p>The chunks which contain the values have different domains to the chunks containing derivatives so a DDC object cannot be used directly. E.g. for a 2D field (<a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a>,<a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a>) with derivatives provided in both directions the elements of internal_chunks have the type : Chunk&lt;double, DiscreteDomain&lt;Deriv&lt;IDimX&gt;, Deriv&lt;IDimY&gt;, IDimX, IDimY&gt; The derivative domains are then defined such that the elements of internal_chunks represent: 0 : \(f(x,y)\) 1 : \(\partial_x^k f(x,y) \quad \forall 1 \leq k \leq NDerivs\) 2 : \(\partial_y^k f(x,y) \quad \forall 1 \leq k \leq NDerivs\) 3 : \(\partial_x^j \partial_y^k f(x,y) \quad \forall 1 \leq j \leq NDerivs, \forall 1 \leq k \leq NDerivs\) </p>
 
 </div>
 </div>

@@ -136,29 +136,28 @@ Example of use</h3>
 </p>
  Here \(\Omega&#39; = \Omega \in \mathbb{R}\). In the code, it would correspond to <div class="fragment"><div class="line">DFieldX f(x_dom); </div>
 <div class="line">DFieldX A(x_dom); </div>
-<div class="line"><span class="keyword">using</span> IDimInterest = <a class="code" href="structIDimX.html">IDimX</a>; </div>
-<div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:74</div></div>
+<div class="line"><span class="keyword">using</span> IDimInterest = IDimX; </div>
 </div><!-- fragment --></li>
 <li>Equation on a 2D domain (and time dimension): <p class="formulaDsp">
 \[ \partial_t f(t,x,y) + A_x(x,y)\partial_{x}f(t,x,y) = 0, \]
 </p>
  Here \(\Omega&#39; = \Omega \in \mathbb{R}^2\). In the code, it would correspond to <div class="fragment"><div class="line">DFieldXY f(xy_dom); </div>
 <div class="line">DFieldXY A(xy_dom); </div>
-<div class="line"><span class="keyword">using</span> IDimInterest = <a class="code" href="structIDimX.html">IDimX</a>; </div>
+<div class="line"><span class="keyword">using</span> IDimInterest = IDimX; </div>
 </div><!-- fragment --></li>
 <li>Equation on a 2Dx2V domain (and time dimension): <p class="formulaDsp">
 \[ \partial_t f(t,x,y,v_x,v_y) + A_x(x,y)\partial_{x}f(t,x,y,v_x,v_y) = 0, \]
 </p>
  Here \(\Omega&#39; \in \mathbb{R}^2\) and \(\Omega \in \mathbb{R}^4\). In the code, it would correspond to <div class="fragment"><div class="line">DFieldXYVxVy f(xyvxvy_dom); </div>
 <div class="line">DFieldXY A(xy_dom); </div>
-<div class="line"><span class="keyword">using</span> IDimInterest = <a class="code" href="structIDimX.html">IDimX</a>; </div>
+<div class="line"><span class="keyword">using</span> IDimInterest = IDimX; </div>
 </div><!-- fragment --></li>
 <li>Equation on a 1Dx1V domain (and time dimension): <p class="formulaDsp">
 \[\begin{aligned} &amp; \partial_t f(t,x,v_x) + A_x(x,v_x)\partial_{x}f(t,x,v_x) = 0, \qquad \text{ with for instance, } A_x(x,v_x) = v_x, \\ &amp; \text{or } \partial_t f(t,x,v_x) + A_{v_x}(x,v_x)\partial_{v_x}f(t,x,v_x) = 0, \qquad \text{ with for instance, } A_{v_x}(x,v_x) = E(x), \end{aligned} \]
 </p>
  Here \(\Omega&#39; = \Omega \in \mathbb{R}^2\). In the code, it would correspond to <div class="fragment"><div class="line">DFieldXVx f(xvx_dom); </div>
 <div class="line">DFieldXVx A(xvx_dom); </div>
-<div class="line"><span class="keyword">using</span> IDimInterest = <a class="code" href="structIDimX.html">IDimX</a>; </div>
+<div class="line"><span class="keyword">using</span> IDimInterest = IDimX; </div>
 </div><!-- fragment --> or <div class="fragment"><div class="line"><span class="keyword">using</span> IDimInterest = IDimVx; </div>
 </div><!-- fragment --></li>
 <li>Equation on a 1Dx1V domain with species dimension (and time dimension): <p class="formulaDsp">
@@ -166,7 +165,7 @@ Example of use</h3>
 </p>
  Here \(\Omega&#39; = \Omega \in \mathbb{R}^2\). In the code, it would correspond to <div class="fragment"><div class="line">DFieldSpXVx f(sp_xvx_dom); </div>
 <div class="line">DFieldSpX A(sp_x_dom); </div>
-<div class="line"><span class="keyword">using</span> IDimInterest = <a class="code" href="structIDimX.html">IDimX</a>; </div>
+<div class="line"><span class="keyword">using</span> IDimInterest = IDimX; </div>
 </div><!-- fragment --></li>
 </ul>
 <h3><a class="anchor" id="autotoc_md40"></a>

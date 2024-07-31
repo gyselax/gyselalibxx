@@ -247,7 +247,7 @@ var NAVTREEINDEX6 =
 "structGridY.html":[13,110],
 "structGridY1.html":[13,111],
 "structGridY2.html":[13,112],
-"structIDimX.html":[13,118],
-"structIDimY.html":[13,119],
-"structInterface.html":[13,130]
+"structInterface.html":[13,128],
+"structInterface.html#a0eba2d684c513fce67db0f0f977d1315":[13,128,0],
+"structInterface.html#a2eabd9b5a702cf327f1db9aa89f75569":[13,128,2]
 };

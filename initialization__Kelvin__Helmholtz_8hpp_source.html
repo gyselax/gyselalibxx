@@ -106,42 +106,43 @@ $(document).ready(function(){initNavTree('initialization__Kelvin__Helmholtz_8hpp
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classKelvinHelmholtzInstabilityInitialization.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classKelvinHelmholtzInstabilityInitialization.html">KelvinHelmholtzInstabilityInitialization</a></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> m_epsilon;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> m_mode_k;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classKelvinHelmholtzInstabilityInitialization.html#a24ff959246cb56cf388f412cb0933c08">   33</a></span>&#160;    <a class="code" href="classKelvinHelmholtzInstabilityInitialization.html#a24ff959246cb56cf388f412cb0933c08">KelvinHelmholtzInstabilityInitialization</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> epsilon, <span class="keywordtype">double</span> <span class="keyword">const</span> mode_k)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        : m_epsilon(epsilon)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        , m_mode_k(mode_k) {};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ~<a class="code" href="classKelvinHelmholtzInstabilityInitialization.html">KelvinHelmholtzInstabilityInitialization</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classKelvinHelmholtzInstabilityInitialization.html#ae663a701d135be7eb5c7eb2ceb7e41fd">   45</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classKelvinHelmholtzInstabilityInitialization.html#ae663a701d135be7eb5c7eb2ceb7e41fd">operator()</a>(DSpanXY allfdistribu, DSpanXY allfdistribu_equilibrium)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        IDomainXY <span class="keyword">const</span> domain = allfdistribu.domain();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        ddc::parallel_for_each(</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                domain,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                KOKKOS_LAMBDA(IndexXY <span class="keyword">const</span> i_xy) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    CoordXY <span class="keyword">const</span> coord_xy(ddc::coordinate(i_xy));</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> x = CoordX(coord_xy);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> y = CoordY(coord_xy);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    allfdistribu_equilibrium(i_xy) = Kokkos::sin(y);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    allfdistribu(i_xy) = allfdistribu_equilibrium(i_xy)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                         + m_epsilon * Kokkos::cos(m_mode_k * x);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                });</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    };</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="ttc" id="aclassKelvinHelmholtzInstabilityInitialization_html"><div class="ttname"><a href="classKelvinHelmholtzInstabilityInitialization.html">KelvinHelmholtzInstabilityInitialization</a></div><div class="ttdoc">Initialize the allfdistribu function.</div><div class="ttdef"><b>Definition:</b> initialization_Kelvin_Helmholtz.hpp:22</div></div>
-<div class="ttc" id="aclassKelvinHelmholtzInstabilityInitialization_html_a24ff959246cb56cf388f412cb0933c08"><div class="ttname"><a href="classKelvinHelmholtzInstabilityInitialization.html#a24ff959246cb56cf388f412cb0933c08">KelvinHelmholtzInstabilityInitialization::KelvinHelmholtzInstabilityInitialization</a></div><div class="ttdeci">KelvinHelmholtzInstabilityInitialization(double const epsilon, double const mode_k)</div><div class="ttdoc">Instantiate the initializer.</div><div class="ttdef"><b>Definition:</b> initialization_Kelvin_Helmholtz.hpp:33</div></div>
-<div class="ttc" id="aclassKelvinHelmholtzInstabilityInitialization_html_ae663a701d135be7eb5c7eb2ceb7e41fd"><div class="ttname"><a href="classKelvinHelmholtzInstabilityInitialization.html#ae663a701d135be7eb5c7eb2ceb7e41fd">KelvinHelmholtzInstabilityInitialization::operator()</a></div><div class="ttdeci">void operator()(DSpanXY allfdistribu, DSpanXY allfdistribu_equilibrium)</div><div class="ttdoc">Initialise  and .</div><div class="ttdef"><b>Definition:</b> initialization_Kelvin_Helmholtz.hpp:45</div></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classKelvinHelmholtzInstabilityInitialization.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classKelvinHelmholtzInstabilityInitialization.html">KelvinHelmholtzInstabilityInitialization</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> m_epsilon;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> m_mode_k;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classKelvinHelmholtzInstabilityInitialization.html#a24ff959246cb56cf388f412cb0933c08">   34</a></span>&#160;    <a class="code" href="classKelvinHelmholtzInstabilityInitialization.html#a24ff959246cb56cf388f412cb0933c08">KelvinHelmholtzInstabilityInitialization</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> epsilon, <span class="keywordtype">double</span> <span class="keyword">const</span> mode_k)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        : m_epsilon(epsilon)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        , m_mode_k(mode_k) {};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    ~<a class="code" href="classKelvinHelmholtzInstabilityInitialization.html">KelvinHelmholtzInstabilityInitialization</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classKelvinHelmholtzInstabilityInitialization.html#a7e681122586f70b241acc2c647cf2f67">   46</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classKelvinHelmholtzInstabilityInitialization.html#a7e681122586f70b241acc2c647cf2f67">operator()</a>(DFieldXY allfdistribu, DFieldXY allfdistribu_equilibrium)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        IdxRangeXY <span class="keyword">const</span> idx_range = get_idx_range(allfdistribu);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        ddc::parallel_for_each(</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                idx_range,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                KOKKOS_LAMBDA(IdxXY <span class="keyword">const</span> i_xy) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    CoordXY <span class="keyword">const</span> coord_xy(ddc::coordinate(i_xy));</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> x = CoordX(coord_xy);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> y = CoordY(coord_xy);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    allfdistribu_equilibrium(i_xy) = Kokkos::sin(y);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                    allfdistribu(i_xy) = allfdistribu_equilibrium(i_xy)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                         + m_epsilon * Kokkos::cos(m_mode_k * x);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                });</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    };</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="ttc" id="aclassKelvinHelmholtzInstabilityInitialization_html"><div class="ttname"><a href="classKelvinHelmholtzInstabilityInitialization.html">KelvinHelmholtzInstabilityInitialization</a></div><div class="ttdoc">Initialize the allfdistribu function.</div><div class="ttdef"><b>Definition:</b> initialization_Kelvin_Helmholtz.hpp:23</div></div>
+<div class="ttc" id="aclassKelvinHelmholtzInstabilityInitialization_html_a24ff959246cb56cf388f412cb0933c08"><div class="ttname"><a href="classKelvinHelmholtzInstabilityInitialization.html#a24ff959246cb56cf388f412cb0933c08">KelvinHelmholtzInstabilityInitialization::KelvinHelmholtzInstabilityInitialization</a></div><div class="ttdeci">KelvinHelmholtzInstabilityInitialization(double const epsilon, double const mode_k)</div><div class="ttdoc">Instantiate the initializer.</div><div class="ttdef"><b>Definition:</b> initialization_Kelvin_Helmholtz.hpp:34</div></div>
+<div class="ttc" id="aclassKelvinHelmholtzInstabilityInitialization_html_a7e681122586f70b241acc2c647cf2f67"><div class="ttname"><a href="classKelvinHelmholtzInstabilityInitialization.html#a7e681122586f70b241acc2c647cf2f67">KelvinHelmholtzInstabilityInitialization::operator()</a></div><div class="ttdeci">void operator()(DFieldXY allfdistribu, DFieldXY allfdistribu_equilibrium)</div><div class="ttdoc">Initialise  and .</div><div class="ttdef"><b>Definition:</b> initialization_Kelvin_Helmholtz.hpp:46</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
