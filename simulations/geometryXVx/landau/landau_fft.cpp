@@ -58,33 +58,33 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    IDomainX const mesh_x = init_spline_dependent_idx_range<
-            IDimX,
+    IdxRangeX const mesh_x = init_spline_dependent_idx_range<
+            GridX,
             BSplinesX,
             SplineInterpPointsX>(conf_voicexx, "x");
-    IDomainVx const mesh_vx = init_spline_dependent_idx_range<
-            IDimVx,
+    IdxRangeVx const mesh_vx = init_spline_dependent_idx_range<
+            GridVx,
             BSplinesVx,
             SplineInterpPointsVx>(conf_voicexx, "vx");
-    IDomainXVx const meshXVx(mesh_x, mesh_vx);
+    IdxRangeXVx const meshXVx(mesh_x, mesh_vx);
 
     IdxRangeSp const dom_kinsp = init_species(conf_voicexx);
-    IDomainSpXVx const meshSpXVx(dom_kinsp, meshXVx);
-    IDomainSpVx const meshSpVx(dom_kinsp, mesh_vx);
+    IdxRangeSpXVx const meshSpXVx(dom_kinsp, meshXVx);
+    IdxRangeSpVx const meshSpVx(dom_kinsp, mesh_vx);
 
     SplineXBuilder const builder_x(meshXVx);
     SplineVxBuilder const builder_vx(meshXVx);
     SplineVxBuilder_1d const builder_vx_poisson(mesh_vx);
 
     // Initialization of the distribution function
-    DFieldSpVx allfequilibrium(meshSpVx);
+    DFieldMemSpVx allfequilibrium(meshSpVx);
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(dom_kinsp, conf_voicexx);
     init_fequilibrium(allfequilibrium);
 
     ddc::expose_to_pdi("iter_start", iter_start);
 
-    DFieldSpXVx allfdistribu(meshSpXVx);
+    DFieldMemSpXVx allfdistribu(meshSpXVx);
     double time_start(0);
     if (iter_start == 0) {
         SingleModePerturbInitialization const init = SingleModePerturbInitialization::
@@ -94,7 +94,7 @@ int main(int argc, char** argv)
         RestartInitialization const restart(iter_start, time_start);
         restart(allfdistribu);
     }
-    auto allfequilibrium_host = ddc::create_mirror_view_and_copy(allfequilibrium.span_view());
+    auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
 
     // --> Algorithm info
     double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
@@ -105,36 +105,37 @@ int main(int argc, char** argv)
     int const nbstep_diag = int(time_diag / deltat);
 
 #ifdef PERIODIC_RDIMX
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_min;
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
+    ddc::PeriodicExtrapolationRule<X> bv_x_min;
+    ddc::PeriodicExtrapolationRule<X> bv_x_max;
 #else
-    ddc::ConstantExtrapolationRule<RDimX> bv_x_min(ddc::coordinate(mesh_x.front()));
-    ddc::ConstantExtrapolationRule<RDimX> bv_x_max(ddc::coordinate(mesh_x.back()));
+    ddc::ConstantExtrapolationRule<X> bv_x_min(ddc::coordinate(mesh_x.front()));
+    ddc::ConstantExtrapolationRule<X> bv_x_max(ddc::coordinate(mesh_x.back()));
 #endif
 
     // Creating operators
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
     PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
 
-    ddc::ConstantExtrapolationRule<RDimVx> bv_v_min(ddc::coordinate(mesh_vx.front()));
-    ddc::ConstantExtrapolationRule<RDimVx> bv_v_max(ddc::coordinate(mesh_vx.back()));
+    ddc::ConstantExtrapolationRule<Vx> bv_v_min(ddc::coordinate(mesh_vx.front()));
+    ddc::ConstantExtrapolationRule<Vx> bv_v_max(ddc::coordinate(mesh_vx.back()));
 
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
     PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
-    BslAdvectionSpatial<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
-    BslAdvectionVelocity<GeometryXVx, IDimVx> const advection_vx(spline_vx_interpolator);
+    BslAdvectionSpatial<GeometryXVx, GridX> const advection_x(spline_x_interpolator);
+    BslAdvectionVelocity<GeometryXVx, GridVx> const advection_vx(spline_vx_interpolator);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    host_t<DFieldVx> const quadrature_coeffs_host
+    host_t<DFieldMemVx> const quadrature_coeffs_host
             = neumann_spline_quadrature_coefficients(mesh_vx, builder_vx_poisson);
 
     auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
+            get_field(quadrature_coeffs_host));
     ChargeDensityCalculator rhs(quadrature_coeffs);
-    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(mesh_x);
+    FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(
+            mesh_x);
     QNSolver const poisson(fft_poisson_solver, rhs);
 
     PredCorr const predcorr(vlasov, poisson);

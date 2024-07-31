@@ -9,16 +9,16 @@
 
 #include "mask_tanh.hpp"
 
-host_t<DFieldX> mask_tanh(
-        IDomainX const& gridx,
+host_t<DFieldMemX> mask_tanh(
+        IdxRangeX const& gridx,
         double const extent,
         double const stiffness,
         MaskType const type,
         bool const normalized)
 {
-    host_t<DFieldX> mask(gridx);
+    host_t<DFieldMemX> mask(gridx);
 
-    IVectX const Nx(gridx.size());
+    IdxStepX const Nx(gridx.size());
     CoordX const x_min(ddc::coordinate(gridx.front()));
     double const Lx = ddcHelper::total_interval_length(gridx);
     CoordX const x_left(x_min + Lx * extent);
@@ -26,7 +26,7 @@ host_t<DFieldX> mask_tanh(
 
     switch (type) {
     case MaskType::Normal:
-        ddc::for_each(gridx, [&](IndexX const ix) {
+        ddc::for_each(gridx, [&](IdxX const ix) {
             CoordX const coordx = ddc::coordinate(ix);
             mask(ix) = 0.5
                        * (std::tanh((coordx - x_left) / stiffness)
@@ -35,7 +35,7 @@ host_t<DFieldX> mask_tanh(
         break;
 
     case MaskType::Inverted:
-        ddc::for_each(gridx, [&](IndexX const ix) {
+        ddc::for_each(gridx, [&](IdxX const ix) {
             CoordX const coordx = ddc::coordinate(ix);
             mask(ix) = 1
                        - 0.5
@@ -46,11 +46,11 @@ host_t<DFieldX> mask_tanh(
     }
 
     if (normalized) {
-        host_t<DFieldX> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
-        host_t<Quadrature<IDomainX>> const integrate_x(quadrature_coeffs);
+        host_t<DFieldMemX> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
+        host_t<Quadrature<IdxRangeX>> const integrate_x(quadrature_coeffs);
         double const coeff_norm
-                = integrate_x(Kokkos::DefaultHostExecutionSpace(), mask.span_cview());
-        ddc::for_each(gridx, [&](IndexX const ix) { mask(ix) = mask(ix) / coeff_norm; });
+                = integrate_x(Kokkos::DefaultHostExecutionSpace(), get_const_field(mask));
+        ddc::for_each(gridx, [&](IdxX const ix) { mask(ix) = mask(ix) / coeff_norm; });
     }
 
     return mask;

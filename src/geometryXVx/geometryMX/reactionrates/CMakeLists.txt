@@ -20,6 +20,8 @@ target_link_libraries("reactionrates_${GEOMETRY_VARIANT}"
         sll::SLL
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::speciesinfo
+        gslx::utils
+
 )
 
 add_library("gslx::reactionrates_${GEOMETRY_VARIANT}" ALIAS "reactionrates_${GEOMETRY_VARIANT}")

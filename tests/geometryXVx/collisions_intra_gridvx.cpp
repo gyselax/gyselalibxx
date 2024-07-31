@@ -21,11 +21,11 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(1.0);
-    IVectX const x_size(10);
+    IdxStepX const x_size(10);
 
     CoordVx const vx_min(-7);
     CoordVx const vx_max(7);
-    IVectVx const vx_size(10);
+    IdxStepVx const vx_size(10);
 
     IdxStepSp const nb_kinspecies(2);
 
@@ -41,16 +41,16 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+    ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
 
-    IDomainX gridx(SplineInterpPointsX::get_domain<IDimX>());
-    IDomainVx gridvx(SplineInterpPointsVx::get_domain<IDimVx>());
+    IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
+    IdxRangeVx gridvx(SplineInterpPointsVx::get_domain<GridVx>());
 
     SplineXBuilder_1d const builder_x(gridx);
     SplineVxBuilder_1d const builder_vx(gridvx);
 
-    IDomainSpXVx const mesh(dom_sp, gridx, gridvx);
+    IdxRangeSpXVx const mesh(dom_sp, gridx, gridvx);
 
     host_t<DFieldMemSp> charges(dom_sp);
     charges(my_ielec) = -1.;
@@ -65,9 +65,8 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     // collision operator
     double const nustar0(1.);
     CollisionsIntra collisions(mesh, nustar0);
-    ddc::DiscreteDomain<CollisionsIntra::GhostedVx> gridvx_ghosted
-            = collisions.get_gridvx_ghosted();
-    ddc::DiscreteDomain<CollisionsIntra::GhostedVxStaggered> gridvx_ghosted_staggered
+    IdxRange<CollisionsIntra::GhostedVx> gridvx_ghosted = collisions.get_gridvx_ghosted();
+    IdxRange<CollisionsIntra::GhostedVxStaggered> gridvx_ghosted_staggered
             = collisions.get_gridvx_ghosted_staggered();
 
     double const npoints(gridvx.size());

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <geometry.hpp>
 
+#include "ddc_aliases.hpp"
 #include "ifluidtransportsolver.hpp"
 
 /**
@@ -16,7 +16,7 @@ public:
     /**
      * @brief The constructor for the class.
      *
-     * @param[in] dom_fluidsp The moments domain on which the fluid species is defined.
+     * @param[in] dom_fluidsp The moments index range on which the fluid species is defined.
      */
     NullFluidSolver(IdxRangeSp const& dom_fluidsp);
 
@@ -32,6 +32,9 @@ public:
      * @param[in] dt The timestep. 
      * @return a span referencing the fluid species after solving the dummy fluid model on one timestep.
      */
-    DSpanSpMX operator()(DSpanSpMX fluid_moments, DViewSpXVx allfdistribu, DViewX efield, double dt)
-            const override;
+    DFieldSpMomX operator()(
+            DFieldSpMomX fluid_moments,
+            DConstFieldSpXVx allfdistribu,
+            DConstFieldX efield,
+            double dt) const override;
 };
