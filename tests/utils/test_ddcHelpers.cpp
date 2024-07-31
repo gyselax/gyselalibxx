@@ -60,7 +60,7 @@ TEST(DDCHelper, UniformPeriodicRestriction)
     for (int j(0); j < 4; ++j) {
         for (int i(0); i < ntest; ++i) {
             Coord test = test_cases[j] + i * dx;
-            Coord restricted = ddcHelper::restrict_to_domain(test, dom);
+            Coord restricted = ddcHelper::restrict_to_idx_range(test, dom);
             EXPECT_LE(ddc::get<Tag>(restricted), x_max);
             EXPECT_GE(ddc::get<Tag>(restricted), x_min);
             EXPECT_NEAR(ddc::get<Tag>(expected[i]), ddc::get<Tag>(restricted), 1e-8);
@@ -107,7 +107,7 @@ TEST(DDCHelper, NonUniformPeriodicRestriction)
     for (int j(0); j < 4; ++j) {
         for (int i(0); i < ntest; ++i) {
             Coord test = test_cases[j] + i * dx;
-            Coord restricted = ddcHelper::restrict_to_domain(test, dom);
+            Coord restricted = ddcHelper::restrict_to_idx_range(test, dom);
             EXPECT_LE(ddc::get<Tag>(restricted), x_max);
             EXPECT_GE(ddc::get<Tag>(restricted), x_min);
             EXPECT_NEAR(ddc::get<Tag>(expected[i]), ddc::get<Tag>(restricted), 1e-8);

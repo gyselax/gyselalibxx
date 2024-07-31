@@ -1,5 +1,4 @@
 #pragma once
-
 #include <ddc/ddc.hpp>
 
 #include <sll/gauss_legendre_integration.hpp>
@@ -10,6 +9,7 @@
 
 #include "../advection_2d_rp/test_cases.hpp"
 
+#include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 
@@ -26,7 +26,7 @@
  * @brief Base class for the advection field for the tests of the 2D polar advection
  * operator.
  *
- * @see BslAdvectionRP
+ * @see BslAdvectionRTheta
  * @see AdvectionSimulation
  */
 class ElectrostaticalPotentialSimulation
@@ -35,26 +35,26 @@ public:
     virtual ~ElectrostaticalPotentialSimulation() = default;
 
     /**
-     * @brief Get the advection field in the physical domain.
+     * @brief Get the advection field in the physical index range.
      *
      * @param[in] coord
-     *      The coordinate in the physical domain.
+     *      The coordinate in the physical index range.
      * @param[in] t
      *      Time component.
      *
-     * @return The advection field in the physical domain.
+     * @return The advection field in the physical index range.
      */
     virtual double operator()(CoordXY const coord, double const t = 0.) const = 0;
 
     /**
-     * @brief Get the characteristic feet in the physical domain.
+     * @brief Get the characteristic feet in the physical index range.
      *
      * @param[in] coord
-     *      The original coordinate in the physical domain.
+     *      The original coordinate in the physical index range.
      * @param[in] t
      *      Time component.
      *
-     * @return The characteristic feet in the physical domain.
+     * @return The characteristic feet in the physical index range.
      */
     virtual CoordXY exact_feet(CoordXY coord, double t) const = 0;
 };
@@ -99,15 +99,15 @@ public:
 
     double operator()(CoordXY const coord, double const t) const final
     {
-        double const x = ddc::get<RDimX>(coord);
-        double const y = ddc::get<RDimY>(coord);
+        double const x = ddc::get<X>(coord);
+        double const y = ddc::get<Y>(coord);
         return m_omega * (-0.5 * x * x + m_xc * x - 0.5 * y * y + m_yc * y);
     };
 
     CoordXY exact_feet(CoordXY coord, double const t) const final
     {
-        double const x = ddc::get<RDimX>(coord);
-        double const y = ddc::get<RDimY>(coord);
+        double const x = ddc::get<X>(coord);
+        double const y = ddc::get<Y>(coord);
         double const foot_x
                 = m_xc + (x - m_xc) * std::cos(m_omega * -t) - (y - m_yc) * std::sin(m_omega * -t);
         double const foot_y
@@ -122,7 +122,7 @@ public:
  * @brief Advection field for the tests of the 2D polar advection operator.
  *
  *
- * The test advection field for a translation in the physical domain is given by :
+ * The test advection field for a translation in the physical index range is given by :
  *
  * @f$ A(x,y) = [v_x, v_y]@f$.
  *
@@ -143,19 +143,19 @@ public:
      * @brief Instantiate an ElectrostaticalPotentialSimulation_translation advection field.
      *
      * @param[in] vx
-     *      The constant first component of the advection field in the physical domain.
+     *      The constant first component of the advection field in the physical index range.
      * @param[in] vy
-     *      The constant second component of the advection field in the physical domain.
+     *      The constant second component of the advection field in the physical index range.
      */
     ElectrostaticalPotentialSimulation_translation(CoordVx vx, CoordVy vy)
-        : m_velocity(ddc::get<RDimVx>(vx), ddc::get<RDimVy>(vy)) {};
+        : m_velocity(ddc::get<Vx>(vx), ddc::get<Vy>(vy)) {};
     ~ElectrostaticalPotentialSimulation_translation() {};
 
     double operator()(CoordXY const coord, double const t) const final
     {
-        double const vx = ddc::get<RDimX>(m_velocity);
-        double const vy = ddc::get<RDimY>(m_velocity);
-        return -vy * ddc::get<RDimX>(coord) + vx * ddc::get<RDimY>(coord);
+        double const vx = ddc::get<X>(m_velocity);
+        double const vy = ddc::get<Y>(m_velocity);
+        return -vy * ddc::get<X>(coord) + vx * ddc::get<Y>(coord);
     };
 
     CoordXY exact_feet(CoordXY coord, double const t) const final
@@ -170,7 +170,7 @@ public:
  * @brief Advection field for the tests of the 2D polar advection operator.
  *
  *
- * The test advection field for a rotation in the physical domain is given by :
+ * The test advection field for a rotation in the physical index range is given by :
  *
  * @f$ A(x,y) = J_{\mathcal{F}}[v_r, v_\theta]@f$.
  *
@@ -189,30 +189,33 @@ class ElectrostaticalPotentialSimulation_rotation : public ElectrostaticalPotent
 {
 private:
     double const m_vr;
-    double const m_vp;
-    CircularToCartesian<RDimX, RDimY, RDimR, RDimP> const m_mapping;
+    double const m_vtheta;
+    CircularToCartesian<X, Y, R, Theta> const m_mapping;
 
 public:
     /**
      * @brief Instantiate an ElectrostaticalPotentialSimulation_rotation advection field.
      *
-     * @param[in] vp
-     *      The constant second polar component of the advection field in the physical domain.
+     * @param[in] vtheta
+     *      The constant second polar component of the advection field in the physical index range.
      */
-    ElectrostaticalPotentialSimulation_rotation(CoordVp vp) : m_vr(0), m_vp(vp), m_mapping() {};
+    ElectrostaticalPotentialSimulation_rotation(CoordVtheta vtheta)
+        : m_vr(0)
+        , m_vtheta(vtheta)
+        , m_mapping() {};
     ~ElectrostaticalPotentialSimulation_rotation() {};
 
     double operator()(CoordXY const coord, double const t) const final
     {
-        CoordRP const coord_rp(m_mapping(coord));
-        double const r = ddc::get<RDimR>(coord_rp);
-        return -0.5 * r * r * m_vp;
+        CoordRTheta const coord_rp(m_mapping(coord));
+        double const r = ddc::get<R>(coord_rp);
+        return -0.5 * r * r * m_vtheta;
     };
 
     CoordXY exact_feet(CoordXY coord_xy, double const t) const final
     {
-        CoordRP const coord_rp(m_mapping(coord_xy));
-        CoordRP const velocity(m_vr, m_vp);
+        CoordRTheta const coord_rp(m_mapping(coord_xy));
+        CoordRTheta const velocity(m_vr, m_vtheta);
         return m_mapping(coord_rp - t * velocity);
     };
 };
@@ -228,7 +231,7 @@ public:
  * - RotationAdvectionFieldSimulation,
  * - DecentredRotationAdvectionFieldSimulation.
  *
- * @see BslAdvectionRP
+ * @see BslAdvectionRTheta
  * @see FunctionToBeAdvected
  * @see ElectrostaticalPotentialSimulation
  * @see AdvectionField
@@ -344,11 +347,11 @@ public:
      * @brief Instantiate a TranslationSimulation simulation.
      *
      * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain.
+     *      The mapping from the logical index range to the physical index range.
      * @param[in] rmin
-     *      The minimum value of @f$ r@f$ on the logical domain.
+     *      The minimum value of @f$ r@f$ on the logical index range.
      * @param[in] rmax
-     *      The maximum value of @f$ r@f$ on the logical domain.
+     *      The maximum value of @f$ r@f$ on the logical index range.
      */
     TranslationAdvectionFieldSimulation(
             Mapping const& mapping,
@@ -406,21 +409,21 @@ public:
      * @brief Instantiate a RotationSimulation simulation.
      *
      * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain.
+     *      The mapping from the logical index range to the physical index range.
      * @param[in] rmin
-     *      The minimum value of @f$ r@f$ on the logical domain.
+     *      The minimum value of @f$ r@f$ on the logical index range.
      * @param[in] rmax
-     *      The maximum value of @f$ r@f$ on the logical domain.
+     *      The maximum value of @f$ r@f$ on the logical index range.
      */
     RotationAdvectionFieldSimulation(Mapping const& mapping, double const rmin, double const rmax)
         : AdvectionFieldSimulation<
                 ElectrostaticalPotentialSimulation_rotation,
                 FunctionToBeAdvected_gaussian<Mapping>,
                 AdvectionField_rotation>(
-                ElectrostaticalPotentialSimulation_rotation(CoordVp(2 * M_PI)),
+                ElectrostaticalPotentialSimulation_rotation(CoordVtheta(2 * M_PI)),
                 FunctionToBeAdvected_gaussian<
                         Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax),
-                AdvectionField_rotation(CoordVr(0), CoordVp(2 * M_PI))) {};
+                AdvectionField_rotation(CoordVr(0), CoordVtheta(2 * M_PI))) {};
 };
 
 
@@ -462,7 +465,7 @@ public:
      * @brief Instantiate a DecentredRotationSimulation simulation.
      *
      * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain.
+     *      The mapping from the logical index range to the physical index range.
      */
     DecentredRotationAdvectionFieldSimulation(Mapping const& mapping)
         : AdvectionFieldSimulation<
