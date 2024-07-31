@@ -121,12 +121,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a59c17bab82ed59b39b68750be2f81b62"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiocotronDensitySolution.html#a59c17bab82ed59b39b68750be2f81b62">get_slope</a> () const</td></tr>
 <tr class="memdesc:a59c17bab82ed59b39b68750be2f81b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the slope of the perturbation.  <a href="classDiocotronDensitySolution.html#a59c17bab82ed59b39b68750be2f81b62">More...</a><br /></td></tr>
 <tr class="separator:a59c17bab82ed59b39b68750be2f81b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae93f847aaf4aaa2ec69889a8a197b9ed"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiocotronDensitySolution.html#ae93f847aaf4aaa2ec69889a8a197b9ed">initialisation</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:ae93f847aaf4aaa2ec69889a8a197b9ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the initial condition of the density.  <a href="classDiocotronDensitySolution.html#ae93f847aaf4aaa2ec69889a8a197b9ed">More...</a><br /></td></tr>
-<tr class="separator:ae93f847aaf4aaa2ec69889a8a197b9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addb4e4b9e22583a0922b16b770841c47"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiocotronDensitySolution.html#addb4e4b9e22583a0922b16b770841c47">equilibrium</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:addb4e4b9e22583a0922b16b770841c47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the equilibrium of the density.  <a href="classDiocotronDensitySolution.html#addb4e4b9e22583a0922b16b770841c47">More...</a><br /></td></tr>
-<tr class="separator:addb4e4b9e22583a0922b16b770841c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87def8e146e4c4104e3a3d3d7d54445d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiocotronDensitySolution.html#a87def8e146e4c4104e3a3d3d7d54445d">initialisation</a> (Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a87def8e146e4c4104e3a3d3d7d54445d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the initial condition of the density.  <a href="classDiocotronDensitySolution.html#a87def8e146e4c4104e3a3d3d7d54445d">More...</a><br /></td></tr>
+<tr class="separator:a87def8e146e4c4104e3a3d3d7d54445d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9615447cc5be0e3addf4f885660af89a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiocotronDensitySolution.html#a9615447cc5be0e3addf4f885660af89a">equilibrium</a> (Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a9615447cc5be0e3addf4f885660af89a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the equilibrium of the density.  <a href="classDiocotronDensitySolution.html#a9615447cc5be0e3addf4f885660af89a">More...</a><br /></td></tr>
+<tr class="separator:a9615447cc5be0e3addf4f885660af89a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The diocotron exact solution of the density \( \rho \). </p>
@@ -205,10 +205,10 @@ Public Member Functions</h2></td></tr>
 <p>Instantiate a <a class="el" href="classDiocotronDensitySolution.html" title="The diocotron exact solution of the density .">DiocotronDensitySolution</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">W1</td><td>The value of the r-coordinate where the domain starts. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="structR1.html" title="First continuous dimension of patch 1.">R1</a></td><td>The value of the r-coordinate where the domain of non null initial condition starts. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="structR2.html" title="First continuous dimension of patch 2.">R2</a></td><td>The value of the r-coordinate where the domain of non null initial condition ends. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">W2</td><td>The value of the r-coordinate where the domain ends. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">W1</td><td>The value of the r-coordinate where the index range starts. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="structR1.html" title="First continuous dimension of patch 1.">R1</a></td><td>The value of the r-coordinate where the index range of non null initial condition starts. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="structR2.html" title="First continuous dimension of patch 2.">R2</a></td><td>The value of the r-coordinate where the index range of non null initial condition ends. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">W2</td><td>The value of the r-coordinate where the index range ends. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">Q</td><td>The charge carried by the inner conductor at \( r = W_1 \). </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">l</td><td>The mode of the perturbation. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">eps</td><td>The amplitude of the perturbation. </td></tr>
@@ -261,8 +261,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae93f847aaf4aaa2ec69889a8a197b9ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae93f847aaf4aaa2ec69889a8a197b9ed">&#9670;&nbsp;</a></span>initialisation()</h2>
+<a id="a87def8e146e4c4104e3a3d3d7d54445d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87def8e146e4c4104e3a3d3d7d54445d">&#9670;&nbsp;</a></span>initialisation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -270,7 +270,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">double DiocotronDensitySolution::initialisation </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -294,8 +294,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="addb4e4b9e22583a0922b16b770841c47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addb4e4b9e22583a0922b16b770841c47">&#9670;&nbsp;</a></span>equilibrium()</h2>
+<a id="a9615447cc5be0e3addf4f885660af89a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9615447cc5be0e3addf4f885660af89a">&#9670;&nbsp;</a></span>equilibrium()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -303,7 +303,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">double DiocotronDensitySolution::equilibrium </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>

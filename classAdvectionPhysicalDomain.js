@@ -1,10 +1,10 @@
 var classAdvectionPhysicalDomain =
 [
-    [ "RDimX_adv", "classAdvectionPhysicalDomain.html#a77b189d95314b128a28c1cc16cb82812", null ],
-    [ "RDimY_adv", "classAdvectionPhysicalDomain.html#ade892d96a026786816cc72679b18e496", null ],
-    [ "CoordXY_adv", "classAdvectionPhysicalDomain.html#a968df0b266b2ba52b3bffd1982170161", null ],
+    [ "X_adv", "classAdvectionPhysicalDomain.html#a2937ef9b54930a6a3bb558c4d44cb532", null ],
+    [ "Y_adv", "classAdvectionPhysicalDomain.html#a0de84994faf88d68f7c2e2176e2dcd7c", null ],
+    [ "CoordXY_adv", "classAdvectionPhysicalDomain.html#a5d487c6c1ba59be95ba232cd5bb9ca7f", null ],
     [ "AdvectionPhysicalDomain", "classAdvectionPhysicalDomain.html#ad1382f8d20297da25bf969fc39937fbe", null ],
     [ "~AdvectionPhysicalDomain", "classAdvectionPhysicalDomain.html#a75b58a99fa7c346d722d592e2e463b5b", null ],
-    [ "advect_feet", "classAdvectionPhysicalDomain.html#ae142f47494fe70592b870147ab7faf26", null ],
-    [ "compute_advection_field", "classAdvectionPhysicalDomain.html#a333cc29b34d5cee8059baa19e2a4c351", null ]
+    [ "advect_feet", "classAdvectionPhysicalDomain.html#ac704b00e5cca632789850ce2bd3341b8", null ],
+    [ "compute_advection_field", "classAdvectionPhysicalDomain.html#af539c2451bd1c3e65c53170dd729d56d", null ]
 ];

@@ -121,19 +121,19 @@ Inheritance diagram for ElectrostaticalPotentialSimulation_rotation:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4c7399b2e5fcb348785d57a09c70d9fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElectrostaticalPotentialSimulation__rotation.html#a4c7399b2e5fcb348785d57a09c70d9fc">ElectrostaticalPotentialSimulation_rotation</a> (CoordVp vp)</td></tr>
-<tr class="memdesc:a4c7399b2e5fcb348785d57a09c70d9fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an <a class="el" href="classElectrostaticalPotentialSimulation__rotation.html" title="Advection field for the tests of the 2D polar advection operator.">ElectrostaticalPotentialSimulation_rotation</a> advection field.  <a href="classElectrostaticalPotentialSimulation__rotation.html#a4c7399b2e5fcb348785d57a09c70d9fc">More...</a><br /></td></tr>
-<tr class="separator:a4c7399b2e5fcb348785d57a09c70d9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c4dd29051c85c7365ff291f8f3f58fb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElectrostaticalPotentialSimulation__rotation.html#a8c4dd29051c85c7365ff291f8f3f58fb">ElectrostaticalPotentialSimulation_rotation</a> (CoordVtheta vtheta)</td></tr>
+<tr class="memdesc:a8c4dd29051c85c7365ff291f8f3f58fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an <a class="el" href="classElectrostaticalPotentialSimulation__rotation.html" title="Advection field for the tests of the 2D polar advection operator.">ElectrostaticalPotentialSimulation_rotation</a> advection field.  <a href="classElectrostaticalPotentialSimulation__rotation.html#a8c4dd29051c85c7365ff291f8f3f58fb">More...</a><br /></td></tr>
+<tr class="separator:a8c4dd29051c85c7365ff291f8f3f58fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3f3c3819cbc815aa2a272028ef24fcd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElectrostaticalPotentialSimulation__rotation.html#af3f3c3819cbc815aa2a272028ef24fcd">operator()</a> (CoordXY const coord, double const t) const final</td></tr>
-<tr class="memdesc:af3f3c3819cbc815aa2a272028ef24fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the advection field in the physical domain.  <a href="classElectrostaticalPotentialSimulation__rotation.html#af3f3c3819cbc815aa2a272028ef24fcd">More...</a><br /></td></tr>
+<tr class="memdesc:af3f3c3819cbc815aa2a272028ef24fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the advection field in the physical index range.  <a href="classElectrostaticalPotentialSimulation__rotation.html#af3f3c3819cbc815aa2a272028ef24fcd">More...</a><br /></td></tr>
 <tr class="separator:af3f3c3819cbc815aa2a272028ef24fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7a04b40f9ba3220367b6b1eebaf6533"><td class="memItemLeft" align="right" valign="top">CoordXY&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElectrostaticalPotentialSimulation__rotation.html#af7a04b40f9ba3220367b6b1eebaf6533">exact_feet</a> (CoordXY coord_xy, double const t) const final</td></tr>
-<tr class="memdesc:af7a04b40f9ba3220367b6b1eebaf6533"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the characteristic feet in the physical domain.  <a href="classElectrostaticalPotentialSimulation__rotation.html#af7a04b40f9ba3220367b6b1eebaf6533">More...</a><br /></td></tr>
+<tr class="memdesc:af7a04b40f9ba3220367b6b1eebaf6533"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the characteristic feet in the physical index range.  <a href="classElectrostaticalPotentialSimulation__rotation.html#af7a04b40f9ba3220367b6b1eebaf6533">More...</a><br /></td></tr>
 <tr class="separator:af7a04b40f9ba3220367b6b1eebaf6533"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Advection field for the tests of the 2D polar advection operator. </p>
-<p>The test advection field for a rotation in the physical domain is given by :</p>
+<p>The test advection field for a rotation in the physical index range is given by :</p>
 <p>\( A(x,y) = J_{\mathcal{F}}[v_r, v_\theta]\).</p>
 <p>with \( v_r \) and \( v_\theta \) constants and \( \mathcal{F}\) the circular mapping.</p>
 <p>The characteristic feet are then given by</p><ul>
@@ -146,8 +146,8 @@ Public Member Functions</h2></td></tr>
 </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a4c7399b2e5fcb348785d57a09c70d9fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c7399b2e5fcb348785d57a09c70d9fc">&#9670;&nbsp;</a></span>ElectrostaticalPotentialSimulation_rotation()</h2>
+<a id="a8c4dd29051c85c7365ff291f8f3f58fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c4dd29051c85c7365ff291f8f3f58fb">&#9670;&nbsp;</a></span>ElectrostaticalPotentialSimulation_rotation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -158,8 +158,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">ElectrostaticalPotentialSimulation_rotation::ElectrostaticalPotentialSimulation_rotation </td>
           <td>(</td>
-          <td class="paramtype">CoordVp&#160;</td>
-          <td class="paramname"><em>vp</em></td><td>)</td>
+          <td class="paramtype">CoordVtheta&#160;</td>
+          <td class="paramname"><em>vtheta</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -173,7 +173,7 @@ Public Member Functions</h2></td></tr>
 <p>Instantiate an <a class="el" href="classElectrostaticalPotentialSimulation__rotation.html" title="Advection field for the tests of the 2D polar advection operator.">ElectrostaticalPotentialSimulation_rotation</a> advection field. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">vp</td><td>The constant second polar component of the advection field in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">vtheta</td><td>The constant second polar component of the advection field in the physical index range. </td></tr>
   </table>
   </dd>
 </dl>
@@ -215,15 +215,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the advection field in the physical domain. </p>
+<p>Get the advection field in the physical index range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate in the physical index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Time component.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The advection field in the physical domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The advection field in the physical index range. </dd></dl>
 
 <p>Implements <a class="el" href="classElectrostaticalPotentialSimulation.html#a445037f02ef92015762871398e8fd471">ElectrostaticalPotentialSimulation</a>.</p>
 
@@ -263,15 +263,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the characteristic feet in the physical domain. </p>
+<p>Get the characteristic feet in the physical index range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The original coordinate in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The original coordinate in the physical index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Time component.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The characteristic feet in the physical domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The characteristic feet in the physical index range. </dd></dl>
 
 <p>Implements <a class="el" href="classElectrostaticalPotentialSimulation.html#acf93729d91941c8db9f9b73d761f4821">ElectrostaticalPotentialSimulation</a>.</p>
 

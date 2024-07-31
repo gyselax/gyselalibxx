@@ -1,7 +1,7 @@
 var searchData=
 [
   ['get_5f1d_5fidx_5frange_1207',['get_1d_idx_range',['../namespacecollisions__dimensions.html#acdf7b3b63a886e508215164bbbca538f',1,'collisions_dimensions']]],
-  ['get_5f2d_5findex_1208',['get_2d_index',['../classPolarBSplines.html#acdd45cba30c54de858759d765b5dd897',1,'PolarBSplines']]],
+  ['get_5f2d_5findex_1208',['get_2d_index',['../classPolarBSplines.html#ab56f0b5cebcd71f64d277cd1cf50ecdf',1,'PolarBSplines']]],
   ['get_5fadvection_5ffield_1209',['get_advection_field',['../classAdvectionSimulation.html#a754d22f275182e9571c7d12414fd7f6f',1,'AdvectionSimulation::get_advection_field()'],['../classAdvectionFieldSimulation.html#a0bc3c0d1829fc8f286c5880848cf4883',1,'AdvectionFieldSimulation::get_advection_field()']]],
   ['get_5famplitudes_1210',['get_amplitudes',['../classKrookSourceAdaptive.html#a8a429dd473078201e0879422899414c0',1,'KrookSourceAdaptive']]],
   ['get_5farray_5findex_1211',['get_array_index',['../classDerivFieldCommon_3_01ChunkType_00_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_01_4.html#a2493360feb08b40a7716a6bf6d646b9b',1,'DerivFieldCommon&lt; ChunkType, ddc::DiscreteDomain&lt; DDims... &gt; &gt;']]],
@@ -23,7 +23,7 @@ var searchData=
   ['get_5fmdspan_1227',['get_mdspan',['../classDerivFieldCommon_3_01ChunkType_00_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_01_4.html#a2d06d78a04be50cfde7b7e5e0f2970c8',1,'DerivFieldCommon&lt; ChunkType, ddc::DiscreteDomain&lt; DDims... &gt; &gt;::get_mdspan()'],['../classDerivFieldCommon_3_01ChunkType_00_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_01_4.html#a04d781b3b912221e2499e29224be7fd6',1,'DerivFieldCommon&lt; ChunkType, ddc::DiscreteDomain&lt; DDims... &gt; &gt;::get_mdspan(ddc::DiscreteDomain&lt; ODims... &gt; provided_deriv_domain)']]],
   ['get_5fmesh_5fghosted_1228',['get_mesh_ghosted',['../classCollisionsIntra.html#afff9bfc0a0512577ca13be5bcf9a83a6',1,'CollisionsIntra']]],
   ['get_5fnustar0_1229',['get_nustar0',['../classCollisionsInter.html#a0de983fd5f398b17fc7b5c6137f8e8ac',1,'CollisionsInter::get_nustar0()'],['../classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8',1,'CollisionsIntra::get_nustar0()']]],
-  ['get_5fpolar_5findex_1230',['get_polar_index',['../classPolarBSplines.html#a495a7bc7c8084b260140e4020298d397',1,'PolarBSplines']]],
+  ['get_5fpolar_5findex_1230',['get_polar_index',['../classPolarBSplines.html#a562457b6d0a18a96f8ecbacc5b601524',1,'PolarBSplines']]],
   ['get_5fsize_1231',['get_size',['../classMatrixBatch.html#a889b3707cfafa8ec09ce5a25fc95614d',1,'MatrixBatch']]],
   ['get_5fslicer_5ffor_1232',['get_slicer_for',['../classDerivFieldCommon_3_01ChunkType_00_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_01_4.html#a277c4120d247532f0df5e652c19ab919',1,'DerivFieldCommon&lt; ChunkType, ddc::DiscreteDomain&lt; DDims... &gt; &gt;::get_slicer_for(ddc::DiscreteElement&lt; ODDims... &gt; const &amp;slice_idx, int array_idx) const'],['../classDerivFieldCommon_3_01ChunkType_00_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_01_4.html#a974e20d6e215ad14b46504c51371d471',1,'DerivFieldCommon&lt; ChunkType, ddc::DiscreteDomain&lt; DDims... &gt; &gt;::get_slicer_for(ddc::DiscreteDomain&lt; ODDims... &gt; const &amp;slice_domain, int array_idx) const']]],
   ['get_5fslope_1233',['get_slope',['../classDiocotronDensitySolution.html#a59c17bab82ed59b39b68750be2f81b62',1,'DiocotronDensitySolution']]],

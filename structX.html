@@ -107,21 +107,22 @@ $(document).ready(function(){initNavTree('structX.html',''); initResizable(); })
 </div><!--header-->
 <div class="contents">
 
-<p>A class which describes the real space in the first spatial direction <a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a>.  
+<p>Define non periodic real <a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a> dimension.  
  <a href="structX.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a90f5fa54f0de0cd20876a9d5f8036a0a"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structX.html#a90f5fa54f0de0cd20876a9d5f8036a0a">PERIODIC</a> = true</td></tr>
-<tr class="memdesc:a90f5fa54f0de0cd20876a9d5f8036a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">A boolean indicating if the dimension is periodic.  <a href="structX.html#a90f5fa54f0de0cd20876a9d5f8036a0a">More...</a><br /></td></tr>
+<tr class="memitem:a90f5fa54f0de0cd20876a9d5f8036a0a"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structX.html#a90f5fa54f0de0cd20876a9d5f8036a0a">PERIODIC</a> = false</td></tr>
+<tr class="memdesc:a90f5fa54f0de0cd20876a9d5f8036a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define periodicity of the dimension.  <a href="structX.html#a90f5fa54f0de0cd20876a9d5f8036a0a">More...</a><br /></td></tr>
 <tr class="separator:a90f5fa54f0de0cd20876a9d5f8036a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;int PatchIdx&gt;<br />
 struct X&lt; PatchIdx &gt;</h3>
 
-<p>A class which describes the real space in the first spatial direction <a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a>. </p>
+<p>Define non periodic real <a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a> dimension. </p>
 <p>First continuous dimension of patch PatchIdx.</p>
+<p>A class which describes the real space in the first spatial direction <a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a>.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">PatchIdx</td><td>Index of the pach. </td></tr>
@@ -141,7 +142,7 @@ template&lt;int PatchIdx&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static constexpr bool <a class="el" href="structX.html">X</a>&lt; PatchIdx &gt;::PERIODIC = true</td>
+          <td class="memname">static constexpr bool <a class="el" href="structX.html">X</a>&lt; PatchIdx &gt;::PERIODIC = false</td>
         </tr>
       </table>
   </td>
@@ -151,13 +152,15 @@ template&lt;int PatchIdx&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>A boolean indicating if the dimension is periodic. </p>
-<p>Non periodic dimension. </p>
+<p>Define periodicity of the dimension. </p>
+<p>Non periodic dimension.</p>
+<p>A boolean indicating if the dimension is periodic.</p>
+<p>Here, not periodic. </p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/<a class="el" href="geometryXYVxVy_2geometry_2geometry_8hpp_source.html">geometry.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/<a class="el" href="geometryRTheta_2geometry_2geometry_8hpp_source.html">geometry.hpp</a></li>
 <li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/tests/multipatch/geometries/<a class="el" href="9patches__2d__non__periodic__uniform_8hpp_source.html">9patches_2d_non_periodic_uniform.hpp</a></li>
 </ul>
 </div><!-- contents -->

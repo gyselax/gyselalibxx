@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['advect_5ffeet_1098',['advect_feet',['../classAdvectionPhysicalDomain.html#ae142f47494fe70592b870147ab7faf26',1,'AdvectionPhysicalDomain::advect_feet()'],['../classAdvectionPseudoCartesianDomain.html#a7dc2ab61b47cc4362390dd1811bc9f0e',1,'AdvectionPseudoCartesianDomain::advect_feet()']]],
+  ['advect_5ffeet_1098',['advect_feet',['../classAdvectionPhysicalDomain.html#ac704b00e5cca632789850ce2bd3341b8',1,'AdvectionPhysicalDomain::advect_feet()'],['../classAdvectionPseudoCartesianDomain.html#a815b8e90be679dd57d263c13f7c6fcc2',1,'AdvectionPseudoCartesianDomain::advect_feet()']]],
   ['advectionfield_5fdecentred_5frotation_1099',['AdvectionField_decentred_rotation',['../classAdvectionField__decentred__rotation.html#aa438ce9f694bb80d1dc86a99bc59913c',1,'AdvectionField_decentred_rotation']]],
-  ['advectionfield_5frotation_1100',['AdvectionField_rotation',['../classAdvectionField__rotation.html#aff8b4a078b9e417ae46bb6571790c7ba',1,'AdvectionField_rotation']]],
+  ['advectionfield_5frotation_1100',['AdvectionField_rotation',['../classAdvectionField__rotation.html#a24804e9420cb6715fa9434df57e980f1',1,'AdvectionField_rotation']]],
   ['advectionfield_5ftranslation_1101',['AdvectionField_translation',['../classAdvectionField__translation.html#a77d512ab8cb0b4a4d8612228417bcdf3',1,'AdvectionField_translation']]],
   ['advectionfieldfinder_1102',['AdvectionFieldFinder',['../classAdvectionFieldFinder.html#a3086cce87c971e57d63e4ee31c0dadb6',1,'AdvectionFieldFinder']]],
   ['advectionfieldsimulation_1103',['AdvectionFieldSimulation',['../classAdvectionFieldSimulation.html#ac2a1446ee931ce85527fddebfeb5de25',1,'AdvectionFieldSimulation']]],

@@ -121,19 +121,19 @@ Inheritance diagram for AdvectionField_rotation:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aff8b4a078b9e417ae46bb6571790c7ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#aff8b4a078b9e417ae46bb6571790c7ba">AdvectionField_rotation</a> (CoordVr vr, CoordVp vp)</td></tr>
-<tr class="memdesc:aff8b4a078b9e417ae46bb6571790c7ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an <a class="el" href="classAdvectionField__rotation.html" title="Advection field for the tests of the 2D polar advection operator.">AdvectionField_rotation</a> advection field.  <a href="classAdvectionField__rotation.html#aff8b4a078b9e417ae46bb6571790c7ba">More...</a><br /></td></tr>
-<tr class="separator:aff8b4a078b9e417ae46bb6571790c7ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24804e9420cb6715fa9434df57e980f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#a24804e9420cb6715fa9434df57e980f1">AdvectionField_rotation</a> (CoordVr vr, CoordVtheta vtheta)</td></tr>
+<tr class="memdesc:a24804e9420cb6715fa9434df57e980f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an <a class="el" href="classAdvectionField__rotation.html" title="Advection field for the tests of the 2D polar advection operator.">AdvectionField_rotation</a> advection field.  <a href="classAdvectionField__rotation.html#a24804e9420cb6715fa9434df57e980f1">More...</a><br /></td></tr>
+<tr class="separator:a24804e9420cb6715fa9434df57e980f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4dc539810d2d10aa68104841574802cf"><td class="memItemLeft" align="right" valign="top">CoordXY&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#a4dc539810d2d10aa68104841574802cf">operator()</a> (CoordXY const coord, double const t) const final</td></tr>
-<tr class="memdesc:a4dc539810d2d10aa68104841574802cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the advection field in the physical domain.  <a href="classAdvectionField__rotation.html#a4dc539810d2d10aa68104841574802cf">More...</a><br /></td></tr>
+<tr class="memdesc:a4dc539810d2d10aa68104841574802cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the advection field in the physical index range.  <a href="classAdvectionField__rotation.html#a4dc539810d2d10aa68104841574802cf">More...</a><br /></td></tr>
 <tr class="separator:a4dc539810d2d10aa68104841574802cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c60e8cc5684b7c0394b42a5746bd23e"><td class="memItemLeft" align="right" valign="top">CoordXY&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__rotation.html#a3c60e8cc5684b7c0394b42a5746bd23e">exact_feet</a> (CoordXY coord_xy, double const t) const final</td></tr>
-<tr class="memdesc:a3c60e8cc5684b7c0394b42a5746bd23e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the characteristic feet in the physical domain.  <a href="classAdvectionField__rotation.html#a3c60e8cc5684b7c0394b42a5746bd23e">More...</a><br /></td></tr>
+<tr class="memdesc:a3c60e8cc5684b7c0394b42a5746bd23e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the characteristic feet in the physical index range.  <a href="classAdvectionField__rotation.html#a3c60e8cc5684b7c0394b42a5746bd23e">More...</a><br /></td></tr>
 <tr class="separator:a3c60e8cc5684b7c0394b42a5746bd23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Advection field for the tests of the 2D polar advection operator. </p>
-<p>The test advection field for a rotation in the physical domain is given by :</p>
+<p>The test advection field for a rotation in the physical index range is given by :</p>
 <p>\( A(x,y) = J_{\mathcal{F}}[v_r, v_\theta]\).</p>
 <p>with \( v_r \) and \( v_\theta \) constants and \( \mathcal{F}\) the circular mapping.</p>
 <p>The characteristic feet are then given by</p><ul>
@@ -146,8 +146,8 @@ Public Member Functions</h2></td></tr>
 </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aff8b4a078b9e417ae46bb6571790c7ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff8b4a078b9e417ae46bb6571790c7ba">&#9670;&nbsp;</a></span>AdvectionField_rotation()</h2>
+<a id="a24804e9420cb6715fa9434df57e980f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24804e9420cb6715fa9434df57e980f1">&#9670;&nbsp;</a></span>AdvectionField_rotation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -164,8 +164,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">CoordVp&#160;</td>
-          <td class="paramname"><em>vp</em>&#160;</td>
+          <td class="paramtype">CoordVtheta&#160;</td>
+          <td class="paramname"><em>vtheta</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -183,8 +183,8 @@ Public Member Functions</h2></td></tr>
 <p>Instantiate an <a class="el" href="classAdvectionField__rotation.html" title="Advection field for the tests of the 2D polar advection operator.">AdvectionField_rotation</a> advection field. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">vr</td><td>The constant first polar component of the advection field in the physical domain. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">vp</td><td>The constant second polar component of the advection field in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">vr</td><td>The constant first polar component of the advection field in the physical index range. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">vtheta</td><td>The constant second polar component of the advection field in the physical index range. </td></tr>
   </table>
   </dd>
 </dl>
@@ -226,15 +226,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the advection field in the physical domain. </p>
+<p>Get the advection field in the physical index range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate in the physical index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Time component.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The advection field in the physical domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The advection field in the physical index range. </dd></dl>
 
 <p>Implements <a class="el" href="classAdvectionField.html#ad83cd6e152724ab1c8e91be077eb5727">AdvectionField</a>.</p>
 
@@ -274,15 +274,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the characteristic feet in the physical domain. </p>
+<p>Get the characteristic feet in the physical index range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The original coordinate in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The original coordinate in the physical index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Time component.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The characteristic feet in the physical domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The characteristic feet in the physical index range. </dd></dl>
 
 <p>Implements <a class="el" href="classAdvectionField.html#ab0c285eac8fe3ebe600c740149dbdd8c">AdvectionField</a>.</p>
 

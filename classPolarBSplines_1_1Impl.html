@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: PolarBSplines&lt; BSplinesR, BSplinesP, C &gt;::Impl&lt; DDim, MemorySpace &gt; Class Template Reference</title>
+<title>Gyselalib++: PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::Impl&lt; DDim, MemorySpace &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('classPolarBSplines_1_1Impl.html',''); 
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classPolarBSplines_1_1Impl-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">PolarBSplines&lt; BSplinesR, BSplinesP, C &gt;::Impl&lt; DDim, MemorySpace &gt; Class Template Reference</div>  </div>
+<div class="title">PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::Impl&lt; DDim, MemorySpace &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -128,78 +128,78 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a84b97669bbc0dde83e957c2c5bf2526d"><td class="memItemLeft" align="right" valign="top"><a id="a84b97669bbc0dde83e957c2c5bf2526d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a84b97669bbc0dde83e957c2c5bf2526d">discrete_dimension_type</a> = <a class="el" href="classPolarBSplines.html">PolarBSplines</a></td></tr>
-<tr class="memdesc:a84b97669bbc0dde83e957c2c5bf2526d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The tag which should be used to create a Chunk whose contents are each associated with a PolarBSpline. <br /></td></tr>
-<tr class="separator:a84b97669bbc0dde83e957c2c5bf2526d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ea53929ebe431728f05dd47b066dc74"><td class="memItemLeft" align="right" valign="top"><a id="a3ea53929ebe431728f05dd47b066dc74"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a3ea53929ebe431728f05dd47b066dc74">discrete_element_type</a> = ddc::DiscreteElement&lt; DDim &gt;</td></tr>
-<tr class="memdesc:a3ea53929ebe431728f05dd47b066dc74"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an index associated with a PolarBSpline. <br /></td></tr>
-<tr class="separator:a3ea53929ebe431728f05dd47b066dc74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e32ed464f0d504472c05a788d96d757"><td class="memItemLeft" align="right" valign="top"><a id="a9e32ed464f0d504472c05a788d96d757"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a9e32ed464f0d504472c05a788d96d757">discrete_domain_type</a> = ddc::DiscreteDomain&lt; DDim &gt;</td></tr>
-<tr class="memdesc:a9e32ed464f0d504472c05a788d96d757"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a index range of <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>. <br /></td></tr>
-<tr class="separator:a9e32ed464f0d504472c05a788d96d757"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b405a8747a4c9c6ed770f6405117b86"><td class="memItemLeft" align="right" valign="top"><a id="a5b405a8747a4c9c6ed770f6405117b86"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a5b405a8747a4c9c6ed770f6405117b86">discrete_vector_type</a> = ddc::DiscreteVector&lt; DDim &gt;</td></tr>
-<tr class="memdesc:a5b405a8747a4c9c6ed770f6405117b86"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a vector associated with a PolarBSpline. <br /></td></tr>
-<tr class="separator:a5b405a8747a4c9c6ed770f6405117b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00a05a8522a019c5e4324e26ecc780d3"><td class="memItemLeft" align="right" valign="top"><a id="a00a05a8522a019c5e4324e26ecc780d3"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a00a05a8522a019c5e4324e26ecc780d3">discrete_dimension_type</a> = <a class="el" href="classPolarBSplines.html">PolarBSplines</a></td></tr>
+<tr class="memdesc:a00a05a8522a019c5e4324e26ecc780d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The tag which should be used to create a Chunk whose contents are each associated with a PolarBSpline. <br /></td></tr>
+<tr class="separator:a00a05a8522a019c5e4324e26ecc780d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add59024a42b0d801aa862d95fa044370"><td class="memItemLeft" align="right" valign="top"><a id="add59024a42b0d801aa862d95fa044370"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#add59024a42b0d801aa862d95fa044370">discrete_element_type</a> = ddc::DiscreteElement&lt; DDim &gt;</td></tr>
+<tr class="memdesc:add59024a42b0d801aa862d95fa044370"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an index associated with a PolarBSpline. <br /></td></tr>
+<tr class="separator:add59024a42b0d801aa862d95fa044370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a905027478db1a56e7ebe953b41f62d26"><td class="memItemLeft" align="right" valign="top"><a id="a905027478db1a56e7ebe953b41f62d26"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a905027478db1a56e7ebe953b41f62d26">discrete_domain_type</a> = ddc::DiscreteDomain&lt; DDim &gt;</td></tr>
+<tr class="memdesc:a905027478db1a56e7ebe953b41f62d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a index range of <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>. <br /></td></tr>
+<tr class="separator:a905027478db1a56e7ebe953b41f62d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd30c2e9003942c9d3c2bb69190df48e"><td class="memItemLeft" align="right" valign="top"><a id="abd30c2e9003942c9d3c2bb69190df48e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#abd30c2e9003942c9d3c2bb69190df48e">discrete_vector_type</a> = ddc::DiscreteVector&lt; DDim &gt;</td></tr>
+<tr class="memdesc:abd30c2e9003942c9d3c2bb69190df48e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a vector associated with a PolarBSpline. <br /></td></tr>
+<tr class="separator:abd30c2e9003942c9d3c2bb69190df48e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9aba9970c6086409d40c6965dab44ed5"><td class="memTemplParams" colspan="2">template&lt;class DiscreteMapping &gt; </td></tr>
-<tr class="memitem:a9aba9970c6086409d40c6965dab44ed5"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a9aba9970c6086409d40c6965dab44ed5">Impl</a> (const DiscreteMapping &amp;curvilinear_to_cartesian)</td></tr>
-<tr class="memdesc:a9aba9970c6086409d40c6965dab44ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#a9aba9970c6086409d40c6965dab44ed5">More...</a><br /></td></tr>
-<tr class="separator:a9aba9970c6086409d40c6965dab44ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05210c50be2a56f449265d9f722e4683"><td class="memTemplParams" colspan="2">template&lt;class OriginMemorySpace &gt; </td></tr>
-<tr class="memitem:a05210c50be2a56f449265d9f722e4683"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a05210c50be2a56f449265d9f722e4683">Impl</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, OriginMemorySpace &gt; const &amp;impl)</td></tr>
-<tr class="memdesc:a05210c50be2a56f449265d9f722e4683"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#a05210c50be2a56f449265d9f722e4683">More...</a><br /></td></tr>
-<tr class="separator:a05210c50be2a56f449265d9f722e4683"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5d6b372d51a810840a9bf969589ea79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#ae5d6b372d51a810840a9bf969589ea79">Impl</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> const &amp;x)=default</td></tr>
-<tr class="memdesc:ae5d6b372d51a810840a9bf969589ea79"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#ae5d6b372d51a810840a9bf969589ea79">More...</a><br /></td></tr>
-<tr class="separator:ae5d6b372d51a810840a9bf969589ea79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a481e11d102171bede2e5e64c2813d614"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a481e11d102171bede2e5e64c2813d614">Impl</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> &amp;&amp;x)=default</td></tr>
-<tr class="memdesc:a481e11d102171bede2e5e64c2813d614"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a> taking a temporary r-value.  <a href="classPolarBSplines_1_1Impl.html#a481e11d102171bede2e5e64c2813d614">More...</a><br /></td></tr>
-<tr class="separator:a481e11d102171bede2e5e64c2813d614"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a395be81d7f0263371f300d19cddaf576"><td class="memItemLeft" align="right" valign="top"><a id="a395be81d7f0263371f300d19cddaf576"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a395be81d7f0263371f300d19cddaf576">~Impl</a> ()=default</td></tr>
-<tr class="memdesc:a395be81d7f0263371f300d19cddaf576"><td class="mdescLeft">&#160;</td><td class="mdescRight">The destructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>. <br /></td></tr>
-<tr class="separator:a395be81d7f0263371f300d19cddaf576"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13ede08e3b4e9c7abb43c86f104f8dfa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a13ede08e3b4e9c7abb43c86f104f8dfa">operator=</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> const &amp;x)=default</td></tr>
-<tr class="memdesc:a13ede08e3b4e9c7abb43c86f104f8dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy operator for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#a13ede08e3b4e9c7abb43c86f104f8dfa">More...</a><br /></td></tr>
-<tr class="separator:a13ede08e3b4e9c7abb43c86f104f8dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f9b27e73714abf74148cf4e6bd63b06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a6f9b27e73714abf74148cf4e6bd63b06">operator=</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> &amp;&amp;x)=default</td></tr>
-<tr class="memdesc:a6f9b27e73714abf74148cf4e6bd63b06"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy operator for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a> taking a temporary r-value.  <a href="classPolarBSplines_1_1Impl.html#a6f9b27e73714abf74148cf4e6bd63b06">More...</a><br /></td></tr>
-<tr class="separator:a6f9b27e73714abf74148cf4e6bd63b06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19829dfac3af3875a55bb24f381dc7f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines.html#a80e259700c8e513766f957624073a327">tensor_product_index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a19829dfac3af3875a55bb24f381dc7f3">eval_basis</a> (DSpan1D singular_values, DSpan2D values, ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#ac02356ee06d6071c537ccb5f0bc2a4eb">DimR</a>, <a class="el" href="classPolarBSplines.html#adc760abd5426a5c3468d6a9a1f763c4c">DimP</a> &gt; p) const</td></tr>
-<tr class="memdesc:a19829dfac3af3875a55bb24f381dc7f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the polar basis splines at the coordinate p.  <a href="classPolarBSplines_1_1Impl.html#a19829dfac3af3875a55bb24f381dc7f3">More...</a><br /></td></tr>
-<tr class="separator:a19829dfac3af3875a55bb24f381dc7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c7b43c3dff18ca7a0b3280748873540"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines.html#a80e259700c8e513766f957624073a327">tensor_product_index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a1c7b43c3dff18ca7a0b3280748873540">eval_deriv_r</a> (DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#ac02356ee06d6071c537ccb5f0bc2a4eb">DimR</a>, <a class="el" href="classPolarBSplines.html#adc760abd5426a5c3468d6a9a1f763c4c">DimP</a> &gt; p) const</td></tr>
-<tr class="memdesc:a1c7b43c3dff18ca7a0b3280748873540"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the radial derivative of the polar basis splines at the coordinate p.  <a href="classPolarBSplines_1_1Impl.html#a1c7b43c3dff18ca7a0b3280748873540">More...</a><br /></td></tr>
-<tr class="separator:a1c7b43c3dff18ca7a0b3280748873540"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18d586476090a43876e9a60c570517df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines.html#a80e259700c8e513766f957624073a327">tensor_product_index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a18d586476090a43876e9a60c570517df">eval_deriv_p</a> (DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#ac02356ee06d6071c537ccb5f0bc2a4eb">DimR</a>, <a class="el" href="classPolarBSplines.html#adc760abd5426a5c3468d6a9a1f763c4c">DimP</a> &gt; p) const</td></tr>
-<tr class="memdesc:a18d586476090a43876e9a60c570517df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the poloidal derivative of the polar basis splines at the coordinate p.  <a href="classPolarBSplines_1_1Impl.html#a18d586476090a43876e9a60c570517df">More...</a><br /></td></tr>
-<tr class="separator:a18d586476090a43876e9a60c570517df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a995cd28a6f3fea33f2682500796ef701"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines.html#a80e259700c8e513766f957624073a327">tensor_product_index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a995cd28a6f3fea33f2682500796ef701">eval_deriv_r_and_p</a> (DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#ac02356ee06d6071c537ccb5f0bc2a4eb">DimR</a>, <a class="el" href="classPolarBSplines.html#adc760abd5426a5c3468d6a9a1f763c4c">DimP</a> &gt; p) const</td></tr>
-<tr class="memdesc:a995cd28a6f3fea33f2682500796ef701"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions, at the coordinate p.  <a href="classPolarBSplines_1_1Impl.html#a995cd28a6f3fea33f2682500796ef701">More...</a><br /></td></tr>
-<tr class="separator:a995cd28a6f3fea33f2682500796ef701"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f35ac954fcfde1c487211b1994fff6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a8f35ac954fcfde1c487211b1994fff6e">integrals</a> (<a class="el" href="structPolarSplineSpan.html">PolarSplineSpan</a>&lt; DDim &gt; int_vals) const</td></tr>
-<tr class="memdesc:a8f35ac954fcfde1c487211b1994fff6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the integrals of each of the basis splines.  <a href="classPolarBSplines_1_1Impl.html#a8f35ac954fcfde1c487211b1994fff6e">More...</a><br /></td></tr>
-<tr class="separator:a8f35ac954fcfde1c487211b1994fff6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a643dbd16f0e27d86e46a2be64c2e03bc"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a643dbd16f0e27d86e46a2be64c2e03bc">nbasis</a> () const noexcept</td></tr>
-<tr class="memdesc:a643dbd16f0e27d86e46a2be64c2e03bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the total number of basis functions.  <a href="classPolarBSplines_1_1Impl.html#a643dbd16f0e27d86e46a2be64c2e03bc">More...</a><br /></td></tr>
-<tr class="separator:a643dbd16f0e27d86e46a2be64c2e03bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69daea6ba6a3e7bcb43879ac7b80beff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines_1_1Impl.html#a9e32ed464f0d504472c05a788d96d757">discrete_domain_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a69daea6ba6a3e7bcb43879ac7b80beff">full_domain</a> () const noexcept</td></tr>
-<tr class="memdesc:a69daea6ba6a3e7bcb43879ac7b80beff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the index range containing the indices of all the polar b-splines.  <a href="classPolarBSplines_1_1Impl.html#a69daea6ba6a3e7bcb43879ac7b80beff">More...</a><br /></td></tr>
-<tr class="separator:a69daea6ba6a3e7bcb43879ac7b80beff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40c3d12d082fac6be41476e692fcd96d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines_1_1Impl.html#a9e32ed464f0d504472c05a788d96d757">discrete_domain_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a40c3d12d082fac6be41476e692fcd96d">tensor_bspline_idx_range</a> () const noexcept</td></tr>
-<tr class="memdesc:a40c3d12d082fac6be41476e692fcd96d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the ddc::DiscreteDomain containing the indices of the b-splines which don't traverse the singular point and can be expressed as a tensor-product of 1D b-splines.  <a href="classPolarBSplines_1_1Impl.html#a40c3d12d082fac6be41476e692fcd96d">More...</a><br /></td></tr>
-<tr class="separator:a40c3d12d082fac6be41476e692fcd96d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76ae9aee443a828ec5f62ddabbda37fb"><td class="memTemplParams" colspan="2">template&lt;class DiscreteMapping &gt; </td></tr>
+<tr class="memitem:a76ae9aee443a828ec5f62ddabbda37fb"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a76ae9aee443a828ec5f62ddabbda37fb">Impl</a> (const DiscreteMapping &amp;curvilinear_to_cartesian)</td></tr>
+<tr class="memdesc:a76ae9aee443a828ec5f62ddabbda37fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#a76ae9aee443a828ec5f62ddabbda37fb">More...</a><br /></td></tr>
+<tr class="separator:a76ae9aee443a828ec5f62ddabbda37fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad7f0ed019b40ca8bea9259f53d94a83"><td class="memTemplParams" colspan="2">template&lt;class OriginMemorySpace &gt; </td></tr>
+<tr class="memitem:aad7f0ed019b40ca8bea9259f53d94a83"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#aad7f0ed019b40ca8bea9259f53d94a83">Impl</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, OriginMemorySpace &gt; const &amp;impl)</td></tr>
+<tr class="memdesc:aad7f0ed019b40ca8bea9259f53d94a83"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#aad7f0ed019b40ca8bea9259f53d94a83">More...</a><br /></td></tr>
+<tr class="separator:aad7f0ed019b40ca8bea9259f53d94a83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af79c5cc9a060916b31c8a41e5f7cd7da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#af79c5cc9a060916b31c8a41e5f7cd7da">Impl</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> const &amp;x)=default</td></tr>
+<tr class="memdesc:af79c5cc9a060916b31c8a41e5f7cd7da"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#af79c5cc9a060916b31c8a41e5f7cd7da">More...</a><br /></td></tr>
+<tr class="separator:af79c5cc9a060916b31c8a41e5f7cd7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a386e9fe73ec0a24b3773353aa4ad1af2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a386e9fe73ec0a24b3773353aa4ad1af2">Impl</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:a386e9fe73ec0a24b3773353aa4ad1af2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy constructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a> taking a temporary r-value.  <a href="classPolarBSplines_1_1Impl.html#a386e9fe73ec0a24b3773353aa4ad1af2">More...</a><br /></td></tr>
+<tr class="separator:a386e9fe73ec0a24b3773353aa4ad1af2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4c6ff5c6a2e63283fc779ef1a6befd2"><td class="memItemLeft" align="right" valign="top"><a id="aa4c6ff5c6a2e63283fc779ef1a6befd2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#aa4c6ff5c6a2e63283fc779ef1a6befd2">~Impl</a> ()=default</td></tr>
+<tr class="memdesc:aa4c6ff5c6a2e63283fc779ef1a6befd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The destructor for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>. <br /></td></tr>
+<tr class="separator:aa4c6ff5c6a2e63283fc779ef1a6befd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04bf8e840ca2083b28cda49cc54a5bfe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a04bf8e840ca2083b28cda49cc54a5bfe">operator=</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> const &amp;x)=default</td></tr>
+<tr class="memdesc:a04bf8e840ca2083b28cda49cc54a5bfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy operator for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>.  <a href="classPolarBSplines_1_1Impl.html#a04bf8e840ca2083b28cda49cc54a5bfe">More...</a><br /></td></tr>
+<tr class="separator:a04bf8e840ca2083b28cda49cc54a5bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b4cbb05966d3952aea4203521fc05b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a7b4cbb05966d3952aea4203521fc05b5">operator=</a> (<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:a7b4cbb05966d3952aea4203521fc05b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy operator for the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a> taking a temporary r-value.  <a href="classPolarBSplines_1_1Impl.html#a7b4cbb05966d3952aea4203521fc05b5">More...</a><br /></td></tr>
+<tr class="separator:a7b4cbb05966d3952aea4203521fc05b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca84a982ed6da7a6167cd3832f23ec97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines.html#aafa27d2710cd09d6713d6dafcb2ae564">tensor_product_index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#aca84a982ed6da7a6167cd3832f23ec97">eval_basis</a> (DSpan1D singular_values, DSpan2D values, ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#acdb7056a76b2985ddced01f3ca5610f2">DimR</a>, <a class="el" href="classPolarBSplines.html#a963f3ab10c79d029e0908ee597bc41dd">DimTheta</a> &gt; p) const</td></tr>
+<tr class="memdesc:aca84a982ed6da7a6167cd3832f23ec97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the polar basis splines at the coordinate p.  <a href="classPolarBSplines_1_1Impl.html#aca84a982ed6da7a6167cd3832f23ec97">More...</a><br /></td></tr>
+<tr class="separator:aca84a982ed6da7a6167cd3832f23ec97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af01b6b63c807ba90698ab1458300c5ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines.html#aafa27d2710cd09d6713d6dafcb2ae564">tensor_product_index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#af01b6b63c807ba90698ab1458300c5ba">eval_deriv_r</a> (DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#acdb7056a76b2985ddced01f3ca5610f2">DimR</a>, <a class="el" href="classPolarBSplines.html#a963f3ab10c79d029e0908ee597bc41dd">DimTheta</a> &gt; p) const</td></tr>
+<tr class="memdesc:af01b6b63c807ba90698ab1458300c5ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the radial derivative of the polar basis splines at the coordinate p.  <a href="classPolarBSplines_1_1Impl.html#af01b6b63c807ba90698ab1458300c5ba">More...</a><br /></td></tr>
+<tr class="separator:af01b6b63c807ba90698ab1458300c5ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0a2a5a64a66fbf151bdb4cf90e41745"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines.html#aafa27d2710cd09d6713d6dafcb2ae564">tensor_product_index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#ae0a2a5a64a66fbf151bdb4cf90e41745">eval_deriv_theta</a> (DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#acdb7056a76b2985ddced01f3ca5610f2">DimR</a>, <a class="el" href="classPolarBSplines.html#a963f3ab10c79d029e0908ee597bc41dd">DimTheta</a> &gt; p) const</td></tr>
+<tr class="memdesc:ae0a2a5a64a66fbf151bdb4cf90e41745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the poloidal derivative of the polar basis splines at the coordinate p.  <a href="classPolarBSplines_1_1Impl.html#ae0a2a5a64a66fbf151bdb4cf90e41745">More...</a><br /></td></tr>
+<tr class="separator:ae0a2a5a64a66fbf151bdb4cf90e41745"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7216a3146fbf30c16899bd0f508a0352"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines.html#aafa27d2710cd09d6713d6dafcb2ae564">tensor_product_index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a7216a3146fbf30c16899bd0f508a0352">eval_deriv_r_and_theta</a> (DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#acdb7056a76b2985ddced01f3ca5610f2">DimR</a>, <a class="el" href="classPolarBSplines.html#a963f3ab10c79d029e0908ee597bc41dd">DimTheta</a> &gt; p) const</td></tr>
+<tr class="memdesc:a7216a3146fbf30c16899bd0f508a0352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions, at the coordinate p.  <a href="classPolarBSplines_1_1Impl.html#a7216a3146fbf30c16899bd0f508a0352">More...</a><br /></td></tr>
+<tr class="separator:a7216a3146fbf30c16899bd0f508a0352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a842b3b423e4b7fd7abf28ffa606380c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a842b3b423e4b7fd7abf28ffa606380c2">integrals</a> (<a class="el" href="structPolarSplineSpan.html">PolarSplineSpan</a>&lt; DDim &gt; int_vals) const</td></tr>
+<tr class="memdesc:a842b3b423e4b7fd7abf28ffa606380c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the integrals of each of the basis splines.  <a href="classPolarBSplines_1_1Impl.html#a842b3b423e4b7fd7abf28ffa606380c2">More...</a><br /></td></tr>
+<tr class="separator:a842b3b423e4b7fd7abf28ffa606380c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ca0df2d7f5defe89ecf42ef6bcfb9fa"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">nbasis</a> () const noexcept</td></tr>
+<tr class="memdesc:a1ca0df2d7f5defe89ecf42ef6bcfb9fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the total number of basis functions.  <a href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">More...</a><br /></td></tr>
+<tr class="separator:a1ca0df2d7f5defe89ecf42ef6bcfb9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a244d6ebb4a31d96e25c1844614979cc7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines_1_1Impl.html#a905027478db1a56e7ebe953b41f62d26">discrete_domain_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7">full_domain</a> () const noexcept</td></tr>
+<tr class="memdesc:a244d6ebb4a31d96e25c1844614979cc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the index range containing the indices of all the polar b-splines.  <a href="classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7">More...</a><br /></td></tr>
+<tr class="separator:a244d6ebb4a31d96e25c1844614979cc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3133a4ea7b7cc4796da428de9bba352"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines_1_1Impl.html#a905027478db1a56e7ebe953b41f62d26">discrete_domain_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#af3133a4ea7b7cc4796da428de9bba352">tensor_bspline_idx_range</a> () const noexcept</td></tr>
+<tr class="memdesc:af3133a4ea7b7cc4796da428de9bba352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the ddc::DiscreteDomain containing the indices of the b-splines which don't traverse the singular point and can be expressed as a tensor-product of 1D b-splines.  <a href="classPolarBSplines_1_1Impl.html#af3133a4ea7b7cc4796da428de9bba352">More...</a><br /></td></tr>
+<tr class="separator:af3133a4ea7b7cc4796da428de9bba352"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class BSplinesR, class BSplinesP, int C&gt;<br />
+<div class="textblock"><h3>template&lt;class BSplinesR, class BSplinesTheta, int C&gt;<br />
 template&lt;class DDim, class MemorySpace&gt;<br />
-class PolarBSplines&lt; BSplinesR, BSplinesP, C &gt;::Impl&lt; DDim, MemorySpace &gt;</h3>
+class PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::Impl&lt; DDim, MemorySpace &gt;</h3>
 
 <p>The <a class="el" href="classPolarBSplines_1_1Impl.html" title="The Impl class holds the implementation of the PolarBSplines.">Impl</a> class holds the implementation of the <a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a>. </p>
 <p>The implementation is specific to the memory space so that the Chunks can be defined with index ranges related to instances of this class.</p>
@@ -221,9 +221,9 @@ class PolarBSplines&lt; BSplinesR, BSplinesP, C &gt;::Impl&lt; DDim, MemorySpace
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><h3>template&lt;class BSplinesR, class BSplinesP, int C&gt;<br />
+<div class="textblock"><h3>template&lt;class BSplinesR, class BSplinesTheta, int C&gt;<br />
 template&lt;class DDim, class MemorySpace&gt;<br />
-struct PolarBSplines&lt; BSplinesR, BSplinesP, C &gt;::Impl&lt; DDim, MemorySpace &gt;::Corner1Tag</h3>
+struct PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::Impl&lt; DDim, MemorySpace &gt;::Corner1Tag</h3>
 
 <p>The tag for the first corner of the Barycentric coordinates. </p>
 </div>
@@ -240,9 +240,9 @@ struct PolarBSplines&lt; BSplinesR, BSplinesP, C &gt;::Impl&lt; DDim, MemorySpac
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><h3>template&lt;class BSplinesR, class BSplinesP, int C&gt;<br />
+<div class="textblock"><h3>template&lt;class BSplinesR, class BSplinesTheta, int C&gt;<br />
 template&lt;class DDim, class MemorySpace&gt;<br />
-struct PolarBSplines&lt; BSplinesR, BSplinesP, C &gt;::Impl&lt; DDim, MemorySpace &gt;::Corner2Tag</h3>
+struct PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::Impl&lt; DDim, MemorySpace &gt;::Corner2Tag</h3>
 
 <p>The tag for the second corner of the Barycentric coordinates. </p>
 </div>
@@ -259,22 +259,22 @@ struct PolarBSplines&lt; BSplinesR, BSplinesP, C &gt;::Impl&lt; DDim, MemorySpac
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><h3>template&lt;class BSplinesR, class BSplinesP, int C&gt;<br />
+<div class="textblock"><h3>template&lt;class BSplinesR, class BSplinesTheta, int C&gt;<br />
 template&lt;class DDim, class MemorySpace&gt;<br />
-struct PolarBSplines&lt; BSplinesR, BSplinesP, C &gt;::Impl&lt; DDim, MemorySpace &gt;::Corner3Tag</h3>
+struct PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::Impl&lt; DDim, MemorySpace &gt;::Corner3Tag</h3>
 
 <p>The tag for the third corner of the Barycentric coordinates. </p>
 </div>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a9aba9970c6086409d40c6965dab44ed5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9aba9970c6086409d40c6965dab44ed5">&#9670;&nbsp;</a></span>Impl() <span class="overload">[1/4]</span></h2>
+<a id="a76ae9aee443a828ec5f62ddabbda37fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76ae9aee443a828ec5f62ddabbda37fb">&#9670;&nbsp;</a></span>Impl() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
 <div class="memtemplate">
@@ -284,7 +284,7 @@ template&lt;class DiscreteMapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> </td>
+          <td class="memname"><a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> </td>
           <td>(</td>
           <td class="paramtype">const DiscreteMapping &amp;&#160;</td>
           <td class="paramname"><em>curvilinear_to_cartesian</em></td><td>)</td>
@@ -308,13 +308,13 @@ template&lt;class DiscreteMapping &gt; </div>
 
 </div>
 </div>
-<a id="a05210c50be2a56f449265d9f722e4683"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05210c50be2a56f449265d9f722e4683">&#9670;&nbsp;</a></span>Impl() <span class="overload">[2/4]</span></h2>
+<a id="aad7f0ed019b40ca8bea9259f53d94a83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad7f0ed019b40ca8bea9259f53d94a83">&#9670;&nbsp;</a></span>Impl() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
 <div class="memtemplate">
@@ -324,7 +324,7 @@ template&lt;class OriginMemorySpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> </td>
+          <td class="memname"><a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, OriginMemorySpace &gt; const &amp;&#160;</td>
           <td class="paramname"><em>impl</em></td><td>)</td>
@@ -348,13 +348,13 @@ template&lt;class OriginMemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="ae5d6b372d51a810840a9bf969589ea79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5d6b372d51a810840a9bf969589ea79">&#9670;&nbsp;</a></span>Impl() <span class="overload">[3/4]</span></h2>
+<a id="af79c5cc9a060916b31c8a41e5f7cd7da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af79c5cc9a060916b31c8a41e5f7cd7da">&#9670;&nbsp;</a></span>Impl() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
 <table class="mlabels">
@@ -362,7 +362,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> </td>
+          <td class="memname"><a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt; const &amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
@@ -386,13 +386,13 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a481e11d102171bede2e5e64c2813d614"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a481e11d102171bede2e5e64c2813d614">&#9670;&nbsp;</a></span>Impl() <span class="overload">[4/4]</span></h2>
+<a id="a386e9fe73ec0a24b3773353aa4ad1af2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a386e9fe73ec0a24b3773353aa4ad1af2">&#9670;&nbsp;</a></span>Impl() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
 <table class="mlabels">
@@ -400,7 +400,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> </td>
+          <td class="memname"><a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
@@ -425,13 +425,13 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a13ede08e3b4e9c7abb43c86f104f8dfa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13ede08e3b4e9c7abb43c86f104f8dfa">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a04bf8e840ca2083b28cda49cc54a5bfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04bf8e840ca2083b28cda49cc54a5bfe">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
 <table class="mlabels">
@@ -439,7 +439,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt; const &amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
@@ -464,13 +464,13 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a6f9b27e73714abf74148cf4e6bd63b06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f9b27e73714abf74148cf4e6bd63b06">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a7b4cbb05966d3952aea4203521fc05b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b4cbb05966d3952aea4203521fc05b5">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
 <table class="mlabels">
@@ -478,7 +478,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
@@ -503,18 +503,18 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a19829dfac3af3875a55bb24f381dc7f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19829dfac3af3875a55bb24f381dc7f3">&#9670;&nbsp;</a></span>eval_basis()</h2>
+<a id="aca84a982ed6da7a6167cd3832f23ec97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca84a982ed6da7a6167cd3832f23ec97">&#9670;&nbsp;</a></span>eval_basis()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">ddc::DiscreteElement&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a> &gt; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::eval_basis </td>
+          <td class="memname">ddc::DiscreteElement&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a> &gt; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::eval_basis </td>
           <td>(</td>
           <td class="paramtype">DSpan1D&#160;</td>
           <td class="paramname"><em>singular_values</em>, </td>
@@ -528,7 +528,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#ac02356ee06d6071c537ccb5f0bc2a4eb">DimR</a>, <a class="el" href="classPolarBSplines.html#adc760abd5426a5c3468d6a9a1f763c4c">DimP</a> &gt;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#acdb7056a76b2985ddced01f3ca5610f2">DimR</a>, <a class="el" href="classPolarBSplines.html#a963f3ab10c79d029e0908ee597bc41dd">DimTheta</a> &gt;&#160;</td>
           <td class="paramname"><em>p</em>&#160;</td>
         </tr>
         <tr>
@@ -553,18 +553,18 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a1c7b43c3dff18ca7a0b3280748873540"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c7b43c3dff18ca7a0b3280748873540">&#9670;&nbsp;</a></span>eval_deriv_r()</h2>
+<a id="af01b6b63c807ba90698ab1458300c5ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af01b6b63c807ba90698ab1458300c5ba">&#9670;&nbsp;</a></span>eval_deriv_r()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">ddc::DiscreteElement&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a> &gt; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::eval_deriv_r </td>
+          <td class="memname">ddc::DiscreteElement&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a> &gt; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::eval_deriv_r </td>
           <td>(</td>
           <td class="paramtype">DSpan1D&#160;</td>
           <td class="paramname"><em>singular_derivs</em>, </td>
@@ -578,7 +578,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#ac02356ee06d6071c537ccb5f0bc2a4eb">DimR</a>, <a class="el" href="classPolarBSplines.html#adc760abd5426a5c3468d6a9a1f763c4c">DimP</a> &gt;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#acdb7056a76b2985ddced01f3ca5610f2">DimR</a>, <a class="el" href="classPolarBSplines.html#a963f3ab10c79d029e0908ee597bc41dd">DimTheta</a> &gt;&#160;</td>
           <td class="paramname"><em>p</em>&#160;</td>
         </tr>
         <tr>
@@ -603,18 +603,18 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a18d586476090a43876e9a60c570517df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18d586476090a43876e9a60c570517df">&#9670;&nbsp;</a></span>eval_deriv_p()</h2>
+<a id="ae0a2a5a64a66fbf151bdb4cf90e41745"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0a2a5a64a66fbf151bdb4cf90e41745">&#9670;&nbsp;</a></span>eval_deriv_theta()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">ddc::DiscreteElement&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a> &gt; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::eval_deriv_p </td>
+          <td class="memname">ddc::DiscreteElement&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a> &gt; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::eval_deriv_theta </td>
           <td>(</td>
           <td class="paramtype">DSpan1D&#160;</td>
           <td class="paramname"><em>singular_derivs</em>, </td>
@@ -628,7 +628,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#ac02356ee06d6071c537ccb5f0bc2a4eb">DimR</a>, <a class="el" href="classPolarBSplines.html#adc760abd5426a5c3468d6a9a1f763c4c">DimP</a> &gt;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#acdb7056a76b2985ddced01f3ca5610f2">DimR</a>, <a class="el" href="classPolarBSplines.html#a963f3ab10c79d029e0908ee597bc41dd">DimTheta</a> &gt;&#160;</td>
           <td class="paramname"><em>p</em>&#160;</td>
         </tr>
         <tr>
@@ -653,18 +653,18 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a995cd28a6f3fea33f2682500796ef701"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a995cd28a6f3fea33f2682500796ef701">&#9670;&nbsp;</a></span>eval_deriv_r_and_p()</h2>
+<a id="a7216a3146fbf30c16899bd0f508a0352"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7216a3146fbf30c16899bd0f508a0352">&#9670;&nbsp;</a></span>eval_deriv_r_and_theta()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">ddc::DiscreteElement&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a> &gt; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::eval_deriv_r_and_p </td>
+          <td class="memname">ddc::DiscreteElement&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a> &gt; <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::eval_deriv_r_and_theta </td>
           <td>(</td>
           <td class="paramtype">DSpan1D&#160;</td>
           <td class="paramname"><em>singular_derivs</em>, </td>
@@ -678,7 +678,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#ac02356ee06d6071c537ccb5f0bc2a4eb">DimR</a>, <a class="el" href="classPolarBSplines.html#adc760abd5426a5c3468d6a9a1f763c4c">DimP</a> &gt;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#acdb7056a76b2985ddced01f3ca5610f2">DimR</a>, <a class="el" href="classPolarBSplines.html#a963f3ab10c79d029e0908ee597bc41dd">DimTheta</a> &gt;&#160;</td>
           <td class="paramname"><em>p</em>&#160;</td>
         </tr>
         <tr>
@@ -703,18 +703,18 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a8f35ac954fcfde1c487211b1994fff6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f35ac954fcfde1c487211b1994fff6e">&#9670;&nbsp;</a></span>integrals()</h2>
+<a id="a842b3b423e4b7fd7abf28ffa606380c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a842b3b423e4b7fd7abf28ffa606380c2">&#9670;&nbsp;</a></span>integrals()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::integrals </td>
+          <td class="memname">void <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::integrals </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structPolarSplineSpan.html">PolarSplineSpan</a>&lt; DDim &gt;&#160;</td>
           <td class="paramname"><em>int_vals</em></td><td>)</td>
@@ -733,13 +733,13 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a643dbd16f0e27d86e46a2be64c2e03bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a643dbd16f0e27d86e46a2be64c2e03bc">&#9670;&nbsp;</a></span>nbasis()</h2>
+<a id="a1ca0df2d7f5defe89ecf42ef6bcfb9fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">&#9670;&nbsp;</a></span>nbasis()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
 <table class="mlabels">
@@ -747,7 +747,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::size_t <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::nbasis </td>
+          <td class="memname">std::size_t <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::nbasis </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -765,13 +765,13 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a69daea6ba6a3e7bcb43879ac7b80beff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69daea6ba6a3e7bcb43879ac7b80beff">&#9670;&nbsp;</a></span>full_domain()</h2>
+<a id="a244d6ebb4a31d96e25c1844614979cc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a244d6ebb4a31d96e25c1844614979cc7">&#9670;&nbsp;</a></span>full_domain()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
 <table class="mlabels">
@@ -779,7 +779,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarBSplines_1_1Impl.html#a9e32ed464f0d504472c05a788d96d757">discrete_domain_type</a> <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::full_domain </td>
+          <td class="memname"><a class="el" href="classPolarBSplines_1_1Impl.html#a905027478db1a56e7ebe953b41f62d26">discrete_domain_type</a> <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::full_domain </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -797,13 +797,13 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a40c3d12d082fac6be41476e692fcd96d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40c3d12d082fac6be41476e692fcd96d">&#9670;&nbsp;</a></span>tensor_bspline_idx_range()</h2>
+<a id="af3133a4ea7b7cc4796da428de9bba352"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3133a4ea7b7cc4796da428de9bba352">&#9670;&nbsp;</a></span>tensor_bspline_idx_range()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BSplinesR , class BSplinesP , int C&gt; </div>
+template&lt;class BSplinesR , class BSplinesTheta , int C&gt; </div>
 <div class="memtemplate">
 template&lt;class DDim , class MemorySpace &gt; </div>
 <table class="mlabels">
@@ -811,7 +811,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarBSplines_1_1Impl.html#a9e32ed464f0d504472c05a788d96d757">discrete_domain_type</a> <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesP.html">BSplinesP</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::tensor_bspline_idx_range </td>
+          <td class="memname"><a class="el" href="classPolarBSplines_1_1Impl.html#a905027478db1a56e7ebe953b41f62d26">discrete_domain_type</a> <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::tensor_bspline_idx_range </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

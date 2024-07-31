@@ -1,14 +1,14 @@
 var searchData=
 [
   ['adding_20documentation_0',['Adding Documentation',['../docs_Adding_docs.html',1,'']]],
-  ['advect_5ffeet_1',['advect_feet',['../classAdvectionPseudoCartesianDomain.html#a7dc2ab61b47cc4362390dd1811bc9f0e',1,'AdvectionPseudoCartesianDomain::advect_feet()'],['../classAdvectionPhysicalDomain.html#ae142f47494fe70592b870147ab7faf26',1,'AdvectionPhysicalDomain::advect_feet()']]],
+  ['advect_5ffeet_1',['advect_feet',['../classAdvectionPseudoCartesianDomain.html#a815b8e90be679dd57d263c13f7c6fcc2',1,'AdvectionPseudoCartesianDomain::advect_feet()'],['../classAdvectionPhysicalDomain.html#ac704b00e5cca632789850ce2bd3341b8',1,'AdvectionPhysicalDomain::advect_feet()']]],
   ['advection_20field_20finder_2',['Advection Field finder',['../src_geometryRTheta_advection_field.html',1,'src_geometryRTheta']]],
   ['advection_20methods_3',['Advection methods',['../src_advection.html',1,'src']]],
   ['advection_20operator_4',['Advection operator',['../src_geometryRTheta_advection.html',1,'src_geometryRTheta']]],
   ['advectiondomain_5',['AdvectionDomain',['../classAdvectionDomain.html',1,'']]],
   ['advectionfield_6',['AdvectionField',['../classAdvectionField.html',1,'']]],
   ['advectionfield_5fdecentred_5frotation_7',['AdvectionField_decentred_rotation',['../classAdvectionField__decentred__rotation.html#aa438ce9f694bb80d1dc86a99bc59913c',1,'AdvectionField_decentred_rotation::AdvectionField_decentred_rotation()'],['../classAdvectionField__decentred__rotation.html',1,'AdvectionField_decentred_rotation']]],
-  ['advectionfield_5frotation_8',['AdvectionField_rotation',['../classAdvectionField__rotation.html#aff8b4a078b9e417ae46bb6571790c7ba',1,'AdvectionField_rotation::AdvectionField_rotation()'],['../classAdvectionField__rotation.html',1,'AdvectionField_rotation']]],
+  ['advectionfield_5frotation_8',['AdvectionField_rotation',['../classAdvectionField__rotation.html#a24804e9420cb6715fa9434df57e980f1',1,'AdvectionField_rotation::AdvectionField_rotation()'],['../classAdvectionField__rotation.html',1,'AdvectionField_rotation']]],
   ['advectionfield_5ftranslation_9',['AdvectionField_translation',['../classAdvectionField__translation.html#a77d512ab8cb0b4a4d8612228417bcdf3',1,'AdvectionField_translation::AdvectionField_translation()'],['../classAdvectionField__translation.html',1,'AdvectionField_translation']]],
   ['advectionfieldfinder_10',['AdvectionFieldFinder',['../classAdvectionFieldFinder.html#a3086cce87c971e57d63e4ee31c0dadb6',1,'AdvectionFieldFinder::AdvectionFieldFinder()'],['../classAdvectionFieldFinder.html',1,'AdvectionFieldFinder&lt; Mapping &gt;']]],
   ['advectionfieldsimulation_11',['AdvectionFieldSimulation',['../classAdvectionFieldSimulation.html',1,'AdvectionFieldSimulation&lt; ElectrostaticalPotentialSimulation, FunctionToBeAdvected, AdvectionField &gt;'],['../classAdvectionFieldSimulation.html#ac2a1446ee931ce85527fddebfeb5de25',1,'AdvectionFieldSimulation::AdvectionFieldSimulation()']]],

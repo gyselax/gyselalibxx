@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aef3eeccf31077b83bd59c4d83d5ab360"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFunctionToBeAdvected__gaussian.html#aef3eeccf31077b83bd59c4d83d5ab360">FunctionToBeAdvected_gaussian</a> (Mapping const &amp;mapping, double const constant, double const x0, double const y0, double const sig_x, double const sig_y, double const rmin, double const rmax)</td></tr>
 <tr class="memdesc:aef3eeccf31077b83bd59c4d83d5ab360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classFunctionToBeAdvected__gaussian.html" title="Test function for the 2D polar advection operator.">FunctionToBeAdvected_gaussian</a> function.  <a href="classFunctionToBeAdvected__gaussian.html#aef3eeccf31077b83bd59c4d83d5ab360">More...</a><br /></td></tr>
 <tr class="separator:aef3eeccf31077b83bd59c4d83d5ab360"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2335fa595256b93cfebca7b15195d518"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFunctionToBeAdvected__gaussian.html#a2335fa595256b93cfebca7b15195d518">operator()</a> (CoordRP coord_rp) final</td></tr>
-<tr class="memdesc:a2335fa595256b93cfebca7b15195d518"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function.  <a href="classFunctionToBeAdvected__gaussian.html#a2335fa595256b93cfebca7b15195d518">More...</a><br /></td></tr>
-<tr class="separator:a2335fa595256b93cfebca7b15195d518"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cefc067d3394e546900673571f6e612"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFunctionToBeAdvected__gaussian.html#a5cefc067d3394e546900673571f6e612">operator()</a> (CoordRTheta coord_rp) final</td></tr>
+<tr class="memdesc:a5cefc067d3394e546900673571f6e612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function.  <a href="classFunctionToBeAdvected__gaussian.html#a5cefc067d3394e546900673571f6e612">More...</a><br /></td></tr>
+<tr class="separator:a5cefc067d3394e546900673571f6e612"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Mapping&gt;<br />
@@ -211,7 +211,7 @@ template&lt;class Mapping &gt; </div>
 <p>Instantiate a <a class="el" href="classFunctionToBeAdvected__gaussian.html" title="Test function for the 2D polar advection operator.">FunctionToBeAdvected_gaussian</a> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping from the logical domain to the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping from the logical index range to the physical index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">constant</td><td>The constant \( C\) in front of the exponential. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x0</td><td>The first component \(x_0\) of the point where the Gaussian is centred. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">y0</td><td>The second component \(y_0\) of the point where the Gaussian is centred. </td></tr>
@@ -226,8 +226,8 @@ template&lt;class Mapping &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2335fa595256b93cfebca7b15195d518"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2335fa595256b93cfebca7b15195d518">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a5cefc067d3394e546900673571f6e612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cefc067d3394e546900673571f6e612">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,7 +240,7 @@ template&lt;class Mapping &gt; </div>
         <tr>
           <td class="memname">double <a class="el" href="classFunctionToBeAdvected__gaussian.html">FunctionToBeAdvected_gaussian</a>&lt; Mapping &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">CoordRP&#160;</td>
+          <td class="paramtype">CoordRTheta&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td></td>
         </tr>
@@ -261,7 +261,7 @@ template&lt;class Mapping &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The value of the function at the coordinate. </dd></dl>
 
-<p>Implements <a class="el" href="classFunctionToBeAdvected.html#a4e0e7566e363527e72d3c1100ecbcbac">FunctionToBeAdvected</a>.</p>
+<p>Implements <a class="el" href="classFunctionToBeAdvected.html#ac469846a7162037505e058f7d248dc4b">FunctionToBeAdvected</a>.</p>
 
 </div>
 </div>

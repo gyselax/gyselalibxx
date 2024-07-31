@@ -14,7 +14,7 @@ var searchData=
   ['coord12_1437',['Coord12',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a94c9cc839f7a8bc54781f92e57808474',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
   ['coord2_1438',['Coord2',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#aed38b340e11a628505083d8ccace02a2',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
   ['coordinate_5fconverter_5ftype_1439',['coordinate_converter_type',['../classPoissonSolution.html#a6451537e7ef15aa643718b9fec5c998c',1,'PoissonSolution']]],
-  ['coordxy_5fadv_1440',['CoordXY_adv',['../classAdvectionPhysicalDomain.html#a968df0b266b2ba52b3bffd1982170161',1,'AdvectionPhysicalDomain::CoordXY_adv()'],['../classAdvectionPseudoCartesianDomain.html#a6f41e47d28f2b78e657fafb7d45c4aa1',1,'AdvectionPseudoCartesianDomain::CoordXY_adv()']]],
+  ['coordxy_5fadv_1440',['CoordXY_adv',['../classAdvectionPhysicalDomain.html#a5d487c6c1ba59be95ba232cd5bb9ca7f',1,'AdvectionPhysicalDomain::CoordXY_adv()'],['../classAdvectionPseudoCartesianDomain.html#aff68ec2ff7d2ae95d6f482025a03a98e',1,'AdvectionPseudoCartesianDomain::CoordXY_adv()']]],
   ['curvilinear_5ftag_5fp_1441',['curvilinear_tag_p',['../classCurvilinear2DToCartesian.html#aac63520a80a234284330365afcf42c1e',1,'Curvilinear2DToCartesian']]],
   ['curvilinear_5ftag_5fr_1442',['curvilinear_tag_r',['../classCurvilinear2DToCartesian.html#aaf43cce0853afcd23bbd60a9563c50f4',1,'Curvilinear2DToCartesian']]],
   ['curvilineartocartesian_1443',['CurvilinearToCartesian',['../classManufacturedPoissonTest.html#a7349fe81c3343867df59d8e72a110736',1,'ManufacturedPoissonTest']]]

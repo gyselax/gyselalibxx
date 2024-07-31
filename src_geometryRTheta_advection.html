@@ -210,12 +210,12 @@ Advection Field</h1>
 <p>In the studied equation, the advection field is given along the physical domain axis: </p><p class="formulaDsp">
 \[\partial_t f + A_x \partial_x f + A_y \partial_y f = 0. \]
 </p>
-<p> The <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis, </p><p class="formulaDsp">
+<p> The BslAdvectionRP operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis, </p><p class="formulaDsp">
 \[A = (A_x, A_y) \quad \text{or} \quad A = (A_r, A_\theta). \]
 </p>
 <p> The advection field can be computed thanks to the <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see <a class="el" href="src_geometryRTheta_advection_field.html">Advection Field finder</a>).</p>
 <ul>
-<li>If the advection field is directly given along the physical domain axes, no treatment is needed in the <a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a> operator.</li>
+<li>If the advection field is directly given along the physical domain axes, no treatment is needed in the BslAdvectionRP operator.</li>
 <li>If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain.</li>
 </ul>
 <p><b>In the guiding-center case</b>, the advection field is computed from the electric field, </p><p class="formulaDsp">
@@ -286,9 +286,9 @@ disk-like domains with the method of characteristics and spline finite elements"
 <h1><a class="anchor" id="autotoc_md47"></a>
 Contents</h1>
 <p>This folder contains:</p><ul>
-<li><a class="el" href="advection__domain_8hpp_source.html">advection_domain.hpp</a> : define the different advection domains (<a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a>).</li>
-<li><a class="el" href="iadvectionrp_8hpp_source.html">iadvectionrp.hpp</a> : define the base class for advection operator (<a class="el" href="classIAdvectionRP.html" title="Define the base class of 2D advection operators in polar domain.">IAdvectionRP</a>):<ul>
-<li><a class="el" href="bsl__advection__rp_8hpp_source.html">bsl_advection_rp.hpp</a> : define the advection operator described just before (<a class="el" href="classBslAdvectionRP.html" title="Define an advection operator on 2D  domain.">BslAdvectionRP</a>);</li>
+<li><a class="el" href="advection__domain_8hpp_source.html">advection_domain.hpp</a> : define the different advection domains (<a class="el" href="classAdvectionDomain.html" title="Define an domain for the advection.">AdvectionDomain</a>).</li>
+<li><a class="el" href="iadvectionrp_8hpp_source.html">iadvectionrp.hpp</a> : define the base class for advection operator (IAdvectionRP):<ul>
+<li><a class="el" href="bsl__advection__rp_8hpp_source.html">bsl_advection_rp.hpp</a> : define the advection operator described just before (BslAdvectionRP);</li>
 </ul>
 </li>
 <li>foot_finder.hpp : solve the characteristic equation thanks to a given time integration method (<a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a>):</li>

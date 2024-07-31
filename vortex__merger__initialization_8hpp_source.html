@@ -104,11 +104,11 @@ $(document).ready(function(){initNavTree('vortex__merger__initialization_8hpp_so
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;vortex_merger_equilibrium.hpp&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
@@ -126,9 +126,9 @@ $(document).ready(function(){initNavTree('vortex__merger__initialization_8hpp_so
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    ~<a class="code" href="classVortexMergerDensitySolution.html">VortexMergerDensitySolution</a>() {};</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classVortexMergerDensitySolution.html#a3a24dd7ac0324005ca912ac05b54d0d6">   72</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classVortexMergerDensitySolution.html#a3a24dd7ac0324005ca912ac05b54d0d6">set_initialisation</a>(</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            DSpanRP rho_init,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            DViewRP rho_eq,</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755">   72</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755">set_initialisation</a>(</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            DFieldRTheta rho_init,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            DConstFieldRTheta rho_eq,</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> eps,</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> sigma,</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> x_star_1,</div>
@@ -136,14 +136,14 @@ $(document).ready(function(){initNavTree('vortex__merger__initialization_8hpp_so
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> x_star_2,</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> y_star_2)</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        IDomainRP grid = ddc::get_domain&lt;IDimR, IDimP&gt;(rho_init);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        IdxRangeRTheta grid = get_idx_range&lt;GridR, GridTheta&gt;(rho_init);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="comment">// Initialisation:</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        ddc::for_each(grid, [&amp;](IndexRP <span class="keyword">const</span> irp) {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keyword">const</span> CoordRP coord_rp(ddc::coordinate(irp));</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keyword">const</span> CoordRTheta coord_rp(ddc::coordinate(irp));</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keyword">const</span> CoordXY coord_xy(m_mapping(coord_rp));</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> x = ddc::get&lt;RDimX&gt;(coord_xy);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> y = ddc::get&lt;RDimY&gt;(coord_xy);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> x = ddc::get&lt;X&gt;(coord_xy);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> y = ddc::get&lt;Y&gt;(coord_xy);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            rho_init(irp) = rho_eq(irp)</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                            + eps</div>
@@ -159,8 +159,8 @@ $(document).ready(function(){initNavTree('vortex__merger__initialization_8hpp_so
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;};</div>
 <div class="ttc" id="aclassVortexMergerDensitySolution_html"><div class="ttname"><a href="classVortexMergerDensitySolution.html">VortexMergerDensitySolution</a></div><div class="ttdoc">Initial condition for the vortex merger simulation.</div><div class="ttdef"><b>Definition:</b> vortex_merger_initialization.hpp:20</div></div>
-<div class="ttc" id="aclassVortexMergerDensitySolution_html_a3a24dd7ac0324005ca912ac05b54d0d6"><div class="ttname"><a href="classVortexMergerDensitySolution.html#a3a24dd7ac0324005ca912ac05b54d0d6">VortexMergerDensitySolution::set_initialisation</a></div><div class="ttdeci">void set_initialisation(DSpanRP rho_init, DViewRP rho_eq, const double eps, const double sigma, const double x_star_1, const double y_star_1, const double x_star_2, const double y_star_2)</div><div class="ttdoc">Set an initial condition for the vortex merger simulation.</div><div class="ttdef"><b>Definition:</b> vortex_merger_initialization.hpp:72</div></div>
 <div class="ttc" id="aclassVortexMergerDensitySolution_html_a75f051a4a9d1ccfee6c1976e4a914c75"><div class="ttname"><a href="classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75">VortexMergerDensitySolution::VortexMergerDensitySolution</a></div><div class="ttdeci">VortexMergerDensitySolution(Mapping const &amp;mapping)</div><div class="ttdoc">Instantiate a VortexMergerDensitySolution.</div><div class="ttdef"><b>Definition:</b> vortex_merger_initialization.hpp:33</div></div>
+<div class="ttc" id="aclassVortexMergerDensitySolution_html_ade5c5e5fd1cbafef4ed6743e87b86755"><div class="ttname"><a href="classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755">VortexMergerDensitySolution::set_initialisation</a></div><div class="ttdeci">void set_initialisation(DFieldRTheta rho_init, DConstFieldRTheta rho_eq, const double eps, const double sigma, const double x_star_1, const double y_star_1, const double x_star_2, const double y_star_2)</div><div class="ttdoc">Set an initial condition for the vortex merger simulation.</div><div class="ttdef"><b>Definition:</b> vortex_merger_initialization.hpp:72</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -125,15 +125,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a77d512ab8cb0b4a4d8612228417bcdf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an <a class="el" href="classAdvectionField__translation.html" title="Advection field for the tests of the 2D polar advection operator.">AdvectionField_translation</a> advection field.  <a href="classAdvectionField__translation.html#a77d512ab8cb0b4a4d8612228417bcdf3">More...</a><br /></td></tr>
 <tr class="separator:a77d512ab8cb0b4a4d8612228417bcdf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd102ec3e9ce04fa1d0a38643525eb8d"><td class="memItemLeft" align="right" valign="top">CoordXY&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__translation.html#afd102ec3e9ce04fa1d0a38643525eb8d">operator()</a> (CoordXY const coord, double const t) const final</td></tr>
-<tr class="memdesc:afd102ec3e9ce04fa1d0a38643525eb8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the advection field in the physical domain.  <a href="classAdvectionField__translation.html#afd102ec3e9ce04fa1d0a38643525eb8d">More...</a><br /></td></tr>
+<tr class="memdesc:afd102ec3e9ce04fa1d0a38643525eb8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the advection field in the physical index range.  <a href="classAdvectionField__translation.html#afd102ec3e9ce04fa1d0a38643525eb8d">More...</a><br /></td></tr>
 <tr class="separator:afd102ec3e9ce04fa1d0a38643525eb8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07f7b172dc47150da0b7c865a52dc11e"><td class="memItemLeft" align="right" valign="top">CoordXY&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionField__translation.html#a07f7b172dc47150da0b7c865a52dc11e">exact_feet</a> (CoordXY coord, double const t) const final</td></tr>
-<tr class="memdesc:a07f7b172dc47150da0b7c865a52dc11e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the characteristic feet in the physical domain.  <a href="classAdvectionField__translation.html#a07f7b172dc47150da0b7c865a52dc11e">More...</a><br /></td></tr>
+<tr class="memdesc:a07f7b172dc47150da0b7c865a52dc11e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the characteristic feet in the physical index range.  <a href="classAdvectionField__translation.html#a07f7b172dc47150da0b7c865a52dc11e">More...</a><br /></td></tr>
 <tr class="separator:a07f7b172dc47150da0b7c865a52dc11e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Advection field for the tests of the 2D polar advection operator. </p>
-<p>The test advection field for a translation in the physical domain is given by :</p>
+<p>The test advection field for a translation in the physical index range is given by :</p>
 <p>\( A(x,y) = [v_x, v_y]\).</p>
 <p>with \( v_x \) and \( v_y \) constants.</p>
 <p>The characteristic feet are then given by</p><ul>
@@ -178,8 +178,8 @@ Public Member Functions</h2></td></tr>
 <p>Instantiate an <a class="el" href="classAdvectionField__translation.html" title="Advection field for the tests of the 2D polar advection operator.">AdvectionField_translation</a> advection field. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">vx</td><td>The constant first component of the advection field in the physical domain. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">vy</td><td>The constant second component of the advection field in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">vx</td><td>The constant first component of the advection field in the physical index range. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">vy</td><td>The constant second component of the advection field in the physical index range. </td></tr>
   </table>
   </dd>
 </dl>
@@ -221,15 +221,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the advection field in the physical domain. </p>
+<p>Get the advection field in the physical index range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate in the physical index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Time component.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The advection field in the physical domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The advection field in the physical index range. </dd></dl>
 
 <p>Implements <a class="el" href="classAdvectionField.html#ad83cd6e152724ab1c8e91be077eb5727">AdvectionField</a>.</p>
 
@@ -269,15 +269,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the characteristic feet in the physical domain. </p>
+<p>Get the characteristic feet in the physical index range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The original coordinate in the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The original coordinate in the physical index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Time component.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The characteristic feet in the physical domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The characteristic feet in the physical index range. </dd></dl>
 
 <p>Implements <a class="el" href="classAdvectionField.html#ab0c285eac8fe3ebe600c740149dbdd8c">AdvectionField</a>.</p>
 

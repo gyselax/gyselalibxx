@@ -134,9 +134,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab858595c50946f5077ed256c5b01f703"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonSolution.html#ab858595c50946f5077ed256c5b01f703">PoissonSolution</a> (CurvilinearToCartesian const &amp;coordinate_converter)</td></tr>
 <tr class="memdesc:ab858595c50946f5077ed256c5b01f703"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPoissonSolution.html" title="Base class for the exact solutions of the Poisson equation.">PoissonSolution</a>.  <a href="classPoissonSolution.html#ab858595c50946f5077ed256c5b01f703">More...</a><br /></td></tr>
 <tr class="separator:ab858595c50946f5077ed256c5b01f703"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6eafbb2783113ace8384d433608854b7"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonSolution.html#a6eafbb2783113ace8384d433608854b7">operator()</a> (ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;coord) const =0</td></tr>
-<tr class="memdesc:a6eafbb2783113ace8384d433608854b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function at a given coordinate.  <a href="classPoissonSolution.html#a6eafbb2783113ace8384d433608854b7">More...</a><br /></td></tr>
-<tr class="separator:a6eafbb2783113ace8384d433608854b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88e27ab5b89c3992369e44ca7ecb56de"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonSolution.html#a88e27ab5b89c3992369e44ca7ecb56de">operator()</a> (Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const =0</td></tr>
+<tr class="memdesc:a88e27ab5b89c3992369e44ca7ecb56de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function at a given coordinate.  <a href="classPoissonSolution.html#a88e27ab5b89c3992369e44ca7ecb56de">More...</a><br /></td></tr>
+<tr class="separator:a88e27ab5b89c3992369e44ca7ecb56de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -191,8 +191,8 @@ template&lt;class CurvilinearToCartesian &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6eafbb2783113ace8384d433608854b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6eafbb2783113ace8384d433608854b7">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a88e27ab5b89c3992369e44ca7ecb56de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88e27ab5b89c3992369e44ca7ecb56de">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,7 +205,7 @@ template&lt;class CurvilinearToCartesian &gt; </div>
         <tr>
           <td class="memname">virtual double <a class="el" href="classPoissonSolution.html">PoissonSolution</a>&lt; CurvilinearToCartesian &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structRDimR.html">RDimR</a>, <a class="el" href="structRDimP.html">RDimP</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -226,7 +226,7 @@ template&lt;class CurvilinearToCartesian &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The value of the function at a given coordinate. </dd></dl>
 
-<p>Implemented in <a class="el" href="classCartesianSolution.html#a7145c82766a1b52602342ab3e8eb87d1">CartesianSolution&lt; CurvilinearToCartesian &gt;</a>, and <a class="el" href="classCurvilinearSolution.html#ac393eea78d63352e2db92c6b116fe5f1">CurvilinearSolution&lt; CurvilinearToCartesian &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classCartesianSolution.html#a0153345ef0de946e25e0bad9a68cc8dd">CartesianSolution&lt; CurvilinearToCartesian &gt;</a>, and <a class="el" href="classCurvilinearSolution.html#a88ec8a5cb7ec05b1abb9e9347016ea42">CurvilinearSolution&lt; CurvilinearToCartesian &gt;</a>.</p>
 
 </div>
 </div>

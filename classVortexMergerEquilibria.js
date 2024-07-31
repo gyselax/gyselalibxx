@@ -1,7 +1,7 @@
 var classVortexMergerEquilibria =
 [
-    [ "VortexMergerEquilibria", "classVortexMergerEquilibria.html#aeb464be70e3ae3051b5563f94246b703", null ],
+    [ "VortexMergerEquilibria", "classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6", null ],
     [ "~VortexMergerEquilibria", "classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb", null ],
-    [ "find_equilibrium", "classVortexMergerEquilibria.html#a8761babf41d8e77ecf9159f142a10091", null ],
-    [ "set_equilibrium", "classVortexMergerEquilibria.html#a53ee133eae7bbe78998ff78e0988ab0a", null ]
+    [ "find_equilibrium", "classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f", null ],
+    [ "set_equilibrium", "classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212", null ]
 ];
