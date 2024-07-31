@@ -617,7 +617,7 @@ public:
                 MatrixBatchCsrSolver::CG>>(1, matrix_size, n_matrix_elements);
         convert_coo_to_csr<
                 MatrixBatchCsrSolver::CG>(m_gko_matrix, vals_coo_host, row_coo_host, col_coo_host);
-        m_gko_matrix->factorize();
+        m_gko_matrix->setup_solver();
     }
 
     /**
@@ -719,7 +719,7 @@ public:
                 b("b", batch_size, b_size);
         Kokkos::deep_copy(b, b_host);
 
-        m_gko_matrix->solve_inplace(b);
+        m_gko_matrix->solve(b);
 
         Kokkos::deep_copy(b_host, b);
         //-----------------
