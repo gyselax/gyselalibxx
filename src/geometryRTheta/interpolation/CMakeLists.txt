@@ -13,6 +13,8 @@ target_link_libraries("interpolation_2D_rp"
         DDC::DDC
         sll::SLL
         gslx::geometry_RTheta
+        gslx::utils
+
 )
 
 add_library("gslx::interpolation_2D_rp" ALIAS "interpolation_2D_rp")

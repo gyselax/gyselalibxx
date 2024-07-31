@@ -1,18 +1,18 @@
 #include "test_cases.hpp"
 
 template <>
-double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>>::
-        solution_at_pole(ddc::Coordinate<RDimR, RDimP> const& coord) const
+double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<X, Y, R, Theta>>>::
+        solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>>::
-        non_singular_solution(ddc::Coordinate<RDimR, RDimP> const& coord) const
+double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<X, Y, R, Theta>>>::
+        non_singular_solution(Coord<R, Theta> const& coord) const
 {
-    const double r = ddc::get<RDimR>(coord);
-    const double theta = ddc::get<RDimP>(coord);
+    const double r = ddc::get<R>(coord);
+    const double theta = ddc::get<Theta>(coord);
 
     const double sin_theta = std::sin(theta);
     const double cos_theta = std::cos(theta);
@@ -74,18 +74,18 @@ double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<RDimX, RDim
 //---------------------------------------------------------------------
 
 template <>
-double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>>::
-        solution_at_pole(ddc::Coordinate<RDimR, RDimP> const& coord) const
+double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<X, Y, R, Theta>>>::
+        solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>>::
-        non_singular_solution(ddc::Coordinate<RDimR, RDimP> const& coord) const
+double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<X, Y, R, Theta>>>::
+        non_singular_solution(Coord<R, Theta> const& coord) const
 {
-    const double r = ddc::get<RDimR>(coord);
-    const double theta = ddc::get<RDimP>(coord);
+    const double r = ddc::get<R>(coord);
+    const double theta = ddc::get<Theta>(coord);
     const double epsilon = m_coordinate_converter.epsilon();
     const double e = m_coordinate_converter.e();
 
@@ -1722,20 +1722,18 @@ double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<RDimX, RDimY,
 //---------------------------------------------------------------------
 
 template <>
-double ManufacturedPoissonTest<
-        CurvilinearSolution<CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>>::
-        solution_at_pole(ddc::Coordinate<RDimR, RDimP> const& coord) const
+double ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<X, Y, R, Theta>>>::
+        solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-double ManufacturedPoissonTest<
-        CurvilinearSolution<CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>>::
-        non_singular_solution(ddc::Coordinate<RDimR, RDimP> const& coord) const
+double ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<X, Y, R, Theta>>>::
+        non_singular_solution(Coord<R, Theta> const& coord) const
 {
-    const double r = ddc::get<RDimR>(coord);
-    const double theta = ddc::get<RDimP>(coord);
+    const double r = ddc::get<R>(coord);
+    const double theta = ddc::get<Theta>(coord);
 
     const double cos_11_theta = std::cos(11.0 * theta);
 
@@ -1764,18 +1762,18 @@ double ManufacturedPoissonTest<
 //---------------------------------------------------------------------
 
 template <>
-double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>>::
-        solution_at_pole(ddc::Coordinate<RDimR, RDimP> const& coord) const
+double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<X, Y, R, Theta>>>::
+        solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>>::
-        non_singular_solution(ddc::Coordinate<RDimR, RDimP> const& coord) const
+double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<X, Y, R, Theta>>>::
+        non_singular_solution(Coord<R, Theta> const& coord) const
 {
-    const double r = ddc::get<RDimR>(coord);
-    const double theta = ddc::get<RDimP>(coord);
+    const double r = ddc::get<R>(coord);
+    const double theta = ddc::get<Theta>(coord);
     const double epsilon = m_coordinate_converter.epsilon();
     const double e = m_coordinate_converter.e();
 
@@ -3316,11 +3314,7 @@ double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<RDimX, RDim
                                                        + 1.0)));
 }
 
-template class ManufacturedPoissonTest<
-        CurvilinearSolution<CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>>;
-template class ManufacturedPoissonTest<
-        CurvilinearSolution<CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>>;
-template class ManufacturedPoissonTest<
-        CartesianSolution<CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>>;
-template class ManufacturedPoissonTest<
-        CartesianSolution<CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>>;
+template class ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<X, Y, R, Theta>>>;
+template class ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<X, Y, R, Theta>>>;
+template class ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<X, Y, R, Theta>>>;
+template class ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<X, Y, R, Theta>>>;
